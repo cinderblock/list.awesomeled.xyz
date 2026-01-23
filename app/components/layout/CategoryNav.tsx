@@ -58,9 +58,14 @@ export function CategoryNav() {
       {/* Left scroll arrow */}
       <button
         onClick={() => scroll('left')}
-        className="absolute left-0 z-10 flex h-full items-center justify-center transition"
+        className="flex items-center justify-center transition"
         style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          bottom: 0,
           width: '2rem',
+          zIndex: 10,
           background: 'linear-gradient(to right, var(--background), transparent)',
           opacity: showLeftArrow ? 1 : 0,
           pointerEvents: showLeftArrow ? 'auto' : 'none',
@@ -103,9 +108,14 @@ export function CategoryNav() {
       {/* Right scroll arrow */}
       <button
         onClick={() => scroll('right')}
-        className="absolute right-0 z-10 flex h-full items-center justify-center transition"
+        className="flex items-center justify-center transition"
         style={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+          bottom: 0,
           width: '2rem',
+          zIndex: 10,
           background: 'linear-gradient(to left, var(--background), transparent)',
           opacity: showRightArrow ? 1 : 0,
           pointerEvents: showRightArrow ? 'auto' : 'none',
