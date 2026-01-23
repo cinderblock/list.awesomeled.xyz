@@ -5,11 +5,44 @@
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
 
+// Filter type definitions
+export type FilterType = 'numeric' | 'select' | 'boolean' | 'string';
+
+export interface NumericFilterConfig {
+  type: 'numeric';
+  unit?: string; // e.g., 'V', 'A', 'Hz'
+}
+
+export interface SelectFilterConfig {
+  type: 'select';
+  options?: string[]; // Static options, or auto-detected from data
+  multi?: boolean; // Allow multiple selections
+  exclude?: boolean; // If true, filter excludes selected values
+}
+
+export interface BooleanFilterConfig {
+  type: 'boolean';
+  trueLabel?: string;
+  falseLabel?: string;
+}
+
+export interface StringFilterConfig {
+  type: 'string';
+  fuzzy?: boolean; // Enable fuzzy/space-separated matching
+}
+
+export type FilterConfig =
+  | NumericFilterConfig
+  | SelectFilterConfig
+  | BooleanFilterConfig
+  | StringFilterConfig;
+
 export interface Column {
   key: string;
   label: string;
   sortable?: boolean;
   filterable?: boolean;
+  filterConfig?: FilterConfig;
   render?: (value: unknown, item: BaseEntry) => React.ReactNode;
   className?: string;
 }
@@ -199,13 +232,50 @@ export const controllerColumns: Column[] = [
     render: (_, item) => renderLinks(item, defaultLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'manufacturer', label: 'Manufacturer' },
-  { key: 'max_pixels', label: 'Max Pixels', render: formatNumericValue, className: 'text-right' },
-  { key: 'max_outputs', label: 'Outputs', render: formatNumericValue, className: 'text-right' },
-  { key: 'interfaces', label: 'Interfaces', render: renderBadgeArray },
-  { key: 'price', label: 'Price', render: formatPrice, className: 'text-right' },
-  { key: 'wled_compatible', label: 'WLED', render: renderBool },
-  { key: 'status', label: 'Status', render: renderStatus },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'max_pixels',
+    label: 'Max Pixels',
+    render: formatNumericValue,
+    className: 'text-right',
+    filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'max_outputs',
+    label: 'Outputs',
+    render: formatNumericValue,
+    className: 'text-right',
+    filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'interfaces',
+    label: 'Interfaces',
+    render: renderBadgeArray,
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'price',
+    label: 'Price',
+    render: formatPrice,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: '$' },
+  },
+  {
+    key: 'wled_compatible',
+    label: 'WLED',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    render: renderStatus,
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const pixelColumns: Column[] = [
@@ -217,13 +287,42 @@ export const pixelColumns: Column[] = [
     render: (_, item) => renderLinks(item, datasheetLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'manufacturer', label: 'Manufacturer' },
-  { key: 'color_order', label: 'Color Order' },
-  { key: 'led_voltage', label: 'LED Voltage', render: formatVoltage, className: 'text-right' },
-  { key: 'vcc_voltage', label: 'VCC', render: formatVoltage, className: 'text-right' },
-  { key: 'clocked', label: 'Clocked', render: renderBool },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'color_order',
+    label: 'Color Order',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'led_voltage',
+    label: 'LED Voltage',
+    render: formatVoltage,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: 'V' },
+  },
+  {
+    key: 'vcc_voltage',
+    label: 'VCC',
+    render: formatVoltage,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: 'V' },
+  },
+  {
+    key: 'clocked',
+    label: 'Clocked',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
   { key: 'data_bitrate', label: 'Data Rate', render: formatFrequency, className: 'text-right' },
-  { key: 'package_size', label: 'Package' },
+  {
+    key: 'package_size',
+    label: 'Package',
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const pixelICColumns: Column[] = [
@@ -235,11 +334,26 @@ export const pixelICColumns: Column[] = [
     render: (_, item) => renderLinks(item, datasheetLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'channels', label: 'Channels', render: formatNumericValue, className: 'text-right' },
-  { key: 'clocked', label: 'Clocked', render: renderBool },
+  {
+    key: 'channels',
+    label: 'Channels',
+    render: formatNumericValue,
+    className: 'text-right',
+    filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'clocked',
+    label: 'Clocked',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
   { key: 'pwm_frequency', label: 'PWM Freq', render: formatFrequency, className: 'text-right' },
   { key: 'data_bitrate', label: 'Data Rate', render: formatFrequency, className: 'text-right' },
-  { key: 'package_size', label: 'Package' },
+  {
+    key: 'package_size',
+    label: 'Package',
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const patternDriverColumns: Column[] = [
@@ -251,13 +365,48 @@ export const patternDriverColumns: Column[] = [
     render: (_, item) => renderLinks(item, defaultLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'developer', label: 'Developer' },
-  { key: 'price', label: 'Price', render: formatPrice, className: 'text-right' },
-  { key: 'platforms', label: 'Platforms', render: renderBadgeArray },
-  { key: 'live', label: 'Live', render: renderBool },
-  { key: 'designer', label: 'Designer', render: renderBool },
-  { key: 'visualizer', label: 'Visualizer', render: renderBool },
-  { key: 'status', label: 'Status', render: renderStatus },
+  {
+    key: 'developer',
+    label: 'Developer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'price',
+    label: 'Price',
+    render: formatPrice,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: '$' },
+  },
+  {
+    key: 'platforms',
+    label: 'Platforms',
+    render: renderBadgeArray,
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'live',
+    label: 'Live',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
+  {
+    key: 'designer',
+    label: 'Designer',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
+  {
+    key: 'visualizer',
+    label: 'Visualizer',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
+  {
+    key: 'status',
+    label: 'Status',
+    render: renderStatus,
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const connectorColumns: Column[] = [
@@ -269,12 +418,40 @@ export const connectorColumns: Column[] = [
     render: (_, item) => renderLinks(item, connectorLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'manufacturer', label: 'Manufacturer' },
-  { key: 'outline', label: 'Outline' },
-  { key: 'max_current', label: 'Max Current', render: formatCurrent, className: 'text-right' },
-  { key: 'max_voltage', label: 'Max Voltage', render: formatVoltage, className: 'text-right' },
-  { key: 'ip_rating', label: 'IP Rating' },
-  { key: 'locking', label: 'Locking' },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'outline',
+    label: 'Outline',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'max_current',
+    label: 'Max Current',
+    render: formatCurrent,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: 'A' },
+  },
+  {
+    key: 'max_voltage',
+    label: 'Max Voltage',
+    render: formatVoltage,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: 'V' },
+  },
+  {
+    key: 'ip_rating',
+    label: 'IP Rating',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'locking',
+    label: 'Locking',
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const microboardColumns: Column[] = [
@@ -286,15 +463,41 @@ export const microboardColumns: Column[] = [
     render: (_, item) => renderLinks(item, defaultLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'manufacturer', label: 'Manufacturer' },
-  { key: 'soc', label: 'SoC' },
-  { key: 'cpu', label: 'CPU' },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'soc',
+    label: 'SoC',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'cpu',
+    label: 'CPU',
+    filterConfig: { type: 'select' },
+  },
   { key: 'clock_speed', label: 'Clock', render: formatFrequency, className: 'text-right' },
   { key: 'flash', label: 'Flash', render: formatMemory, className: 'text-right' },
   { key: 'ram', label: 'RAM', render: formatMemory, className: 'text-right' },
-  { key: 'wifi', label: 'WiFi' },
-  { key: 'ethernet', label: 'Ethernet' },
-  { key: 'price', label: 'Price', render: formatPrice, className: 'text-right' },
+  {
+    key: 'wifi',
+    label: 'WiFi',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'ethernet',
+    label: 'Ethernet',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'price',
+    label: 'Price',
+    render: formatPrice,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: '$' },
+  },
 ];
 
 export const adapterColumns: Column[] = [
@@ -306,10 +509,30 @@ export const adapterColumns: Column[] = [
     render: (_, item) => renderLinks(item, defaultLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'manufacturer', label: 'Manufacturer' },
-  { key: 'max_channels', label: 'Channels', render: formatNumericValue, className: 'text-right' },
-  { key: 'pixel_types', label: 'Pixel Types' },
-  { key: 'price', label: 'Price', render: formatPrice, className: 'text-right' },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'max_channels',
+    label: 'Channels',
+    render: formatNumericValue,
+    className: 'text-right',
+    filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'pixel_types',
+    label: 'Pixel Types',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'price',
+    label: 'Price',
+    render: formatPrice,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: '$' },
+  },
 ];
 
 export const driveLibraryColumns: Column[] = [
@@ -321,9 +544,21 @@ export const driveLibraryColumns: Column[] = [
     render: (_, item) => renderLinks(item, libraryLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'developer', label: 'Developer' },
-  { key: 'hardware', label: 'Hardware' },
-  { key: 'features', label: 'Features' },
+  {
+    key: 'developer',
+    label: 'Developer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'hardware',
+    label: 'Hardware',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'features',
+    label: 'Features',
+    filterConfig: { type: 'string', fuzzy: true },
+  },
 ];
 
 export const diffusiveMaterialColumns: Column[] = [
@@ -335,11 +570,31 @@ export const diffusiveMaterialColumns: Column[] = [
     render: (_, item) => renderLinks(item, defaultLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'material_type', label: 'Type' },
-  { key: 'color_rendition', label: 'Color Rendition' },
-  { key: 'light_transmission', label: 'Transmission' },
-  { key: 'flexible', label: 'Flexible' },
-  { key: 'price_range', label: 'Price Range' },
+  {
+    key: 'material_type',
+    label: 'Type',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'color_rendition',
+    label: 'Color Rendition',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'light_transmission',
+    label: 'Transmission',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'flexible',
+    label: 'Flexible',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'price_range',
+    label: 'Price Range',
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const commercialSystemColumns: Column[] = [
@@ -351,15 +606,28 @@ export const commercialSystemColumns: Column[] = [
     render: (_, item) => renderLinks(item, defaultLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'manufacturer', label: 'Manufacturer' },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    filterConfig: { type: 'select' },
+  },
   {
     key: 'pixels_per_run',
     label: 'Pixels/Run',
     render: formatNumericValue,
     className: 'text-right',
+    filterConfig: { type: 'numeric' },
   },
-  { key: 'color_type', label: 'Color Type' },
-  { key: 'price_range', label: 'Price Range' },
+  {
+    key: 'color_type',
+    label: 'Color Type',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'price_range',
+    label: 'Price Range',
+    filterConfig: { type: 'select' },
+  },
 ];
 
 // Level converters and pixel decoders use generic columns
@@ -372,9 +640,25 @@ export const levelConverterColumns: Column[] = [
     render: (_, item) => renderLinks(item, defaultLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'manufacturer', label: 'Manufacturer' },
-  { key: 'max_channels', label: 'Channels', render: formatNumericValue, className: 'text-right' },
-  { key: 'price', label: 'Price', render: formatPrice, className: 'text-right' },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'max_channels',
+    label: 'Channels',
+    render: formatNumericValue,
+    className: 'text-right',
+    filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'price',
+    label: 'Price',
+    render: formatPrice,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: '$' },
+  },
 ];
 
 export const pixelDecoderColumns: Column[] = [
@@ -386,11 +670,37 @@ export const pixelDecoderColumns: Column[] = [
     render: (_, item) => renderLinks(item, defaultLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'manufacturer', label: 'Manufacturer' },
-  { key: 'max_channels', label: 'Channels', render: formatNumericValue, className: 'text-right' },
-  { key: 'pixel_types', label: 'Pixel Types' },
-  { key: 'outputs', label: 'Outputs', render: formatNumericValue, className: 'text-right' },
-  { key: 'price', label: 'Price', render: formatPrice, className: 'text-right' },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'max_channels',
+    label: 'Channels',
+    render: formatNumericValue,
+    className: 'text-right',
+    filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'pixel_types',
+    label: 'Pixel Types',
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'outputs',
+    label: 'Outputs',
+    render: formatNumericValue,
+    className: 'text-right',
+    filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'price',
+    label: 'Price',
+    render: formatPrice,
+    className: 'text-right',
+    filterConfig: { type: 'numeric', unit: '$' },
+  },
 ];
 
 // Map category IDs to their column configurations
