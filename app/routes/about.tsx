@@ -1,17 +1,17 @@
-import type { Route } from "./+types/about";
-import { Link } from "react-router";
-import { RainbowText } from "~/components/ui/RainbowText";
+import type { Route } from './+types/about';
+import { Link } from 'react-router';
+import { RainbowText } from '~/components/ui/RainbowText';
 
-export function meta({}: Route.MetaArgs) {
+export function meta(_args: Route.MetaArgs) {
   return [
-    { title: "About - Awesome LED List" },
-    { name: "description", content: "About the Awesome LED List project" },
+    { title: 'About - Awesome LED List' },
+    { name: 'description', content: 'About the Awesome LED List project' },
   ];
 }
 
 export default function About() {
   return (
-    <div className="container py-8" style={{ maxWidth: "48rem", marginInline: "auto" }}>
+    <div className="container py-8" style={{ maxWidth: '48rem', marginInline: 'auto' }}>
       <nav className="mb-2 flex items-center gap-2">
         <Link to="/" className="text-sm text-muted hover:text-foreground">
           Home
@@ -26,9 +26,9 @@ export default function About() {
 
       <div style={{ lineHeight: 1.7 }}>
         <p className="text-lg mb-6">
-          <RainbowText>Awesome LED List</RainbowText> is a community-maintained reference for the addressable LED ecosystem.
-          Our goal is to help makers, installers, and enthusiasts find the right products for their
-          projects.
+          <RainbowText>Awesome LED List</RainbowText> is a community-maintained reference for the
+          addressable LED ecosystem. Our goal is to help makers, installers, and enthusiasts find
+          the right products for their projects.
         </p>
 
         <h2 className="text-xl font-semibold mt-8 mb-4">History</h2>

@@ -1,33 +1,31 @@
-import { useMemo, useState, useCallback, useRef, useEffect } from "react";
-import { Link, useSearchParams } from "react-router";
-import { ChevronUp, ChevronDown, X, Download, Search } from "lucide-react";
-import type { Column } from "~/lib/columns";
-import type { BaseEntry } from "~/lib/types";
+import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import { Link, useSearchParams } from 'react-router';
+import { ChevronUp, ChevronDown, X, Download, Search } from 'lucide-react';
+import type { Column } from '~/lib/columns';
+import type { BaseEntry } from '~/lib/types';
 
 interface DataTableProps {
   data: BaseEntry[];
   columns: Column[];
   categoryPath: string;
   categoryId: string;
-  categoryName: string;
   searchKeys?: string[];
 }
 
-type SortDirection = "asc" | "desc";
+type SortDirection = 'asc' | 'desc';
 
 export function DataTable({
   data,
   columns,
   categoryPath,
   categoryId,
-  categoryName,
-  searchKeys = ["name"],
+  searchKeys = ['name'],
 }: DataTableProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const urlSearch = searchParams.get("q") || "";
-  const sortKey = searchParams.get("sort") || null;
-  const sortDir = (searchParams.get("dir") as SortDirection) || null;
+  const urlSearch = searchParams.get('q') || '';
+  const sortKey = searchParams.get('sort') || null;
+  const sortDir = (searchParams.get('dir') as SortDirection) || null;
 
   // Local search state for immediate input response
   const [search, setSearchLocal] = useState(urlSearch);
@@ -43,7 +41,7 @@ export function DataTable({
       setSearchParams((prev) => {
         const next = new URLSearchParams(prev);
         for (const [key, value] of Object.entries(updates)) {
-          if (value === null || value === "") {
+          if (value === null || value === '') {
             next.delete(key);
           } else {
             next.set(key, value);
@@ -103,69 +101,36 @@ export function DataTable({
       const bVal = (b as Record<string, unknown>)[sortKey];
 
       if (aVal == null && bVal == null) return 0;
-      if (aVal == null) return sortDir === "asc" ? 1 : -1;
-      if (bVal == null) return sortDir === "asc" ? -1 : 1;
+      if (aVal == null) return sortDir === 'asc' ? 1 : -1;
+      if (bVal == null) return sortDir === 'asc' ? -1 : 1;
 
-      if (typeof aVal === "number" && typeof bVal === "number") {
-        return sortDir === "asc" ? aVal - bVal : bVal - aVal;
+      if (typeof aVal === 'number' && typeof bVal === 'number') {
+        return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
       }
 
       const aStr = String(aVal).toLowerCase();
       const bStr = String(bVal).toLowerCase();
       const cmp = aStr.localeCompare(bStr);
-      return sortDir === "asc" ? cmp : -cmp;
+      return sortDir === 'asc' ? cmp : -cmp;
     });
   }, [filteredData, sortKey, sortDir]);
 
   const handleSort = (key: string) => {
     if (sortKey === key) {
-      if (sortDir === "asc") {
-        updateParams({ dir: "desc" });
+      if (sortDir === 'asc') {
+        updateParams({ dir: 'desc' });
       } else {
         updateParams({ sort: null, dir: null });
       }
     } else {
-      updateParams({ sort: key, dir: "asc" });
+      updateParams({ sort: key, dir: 'asc' });
     }
   };
 
   const hasFilters = search || sortKey;
 
-  // CSV export
-  const handleDownloadCSV = useCallback(() => {
-    const headers = columns
-      .filter((col) => col.key !== "links")
-      .map((col) => col.label);
-
-    const rows = sortedData.map((item) =>
-      columns
-        .filter((col) => col.key !== "links")
-        .map((col) => {
-          const value = getValue(item, col.key);
-          if (value == null) return "";
-          if (Array.isArray(value)) return value.join("; ");
-          return String(value);
-        })
-    );
-
-    const csv = [
-      headers.join(","),
-      ...rows.map((row) =>
-        row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
-      ),
-    ].join("\n");
-
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${categoryId}${search ? `-filtered` : ""}.csv`;
-    link.click();
-    URL.revokeObjectURL(url);
-  }, [sortedData, columns, categoryId, search]);
-
   const getValue = (item: BaseEntry, key: string): unknown => {
-    const parts = key.split(".");
+    const parts = key.split('.');
     let value: unknown = item;
     for (const part of parts) {
       if (value == null) return null;
@@ -173,6 +138,35 @@ export function DataTable({
     }
     return value;
   };
+
+  // CSV export
+  const handleDownloadCSV = useCallback(() => {
+    const headers = columns.filter((col) => col.key !== 'links').map((col) => col.label);
+
+    const rows = sortedData.map((item) =>
+      columns
+        .filter((col) => col.key !== 'links')
+        .map((col) => {
+          const value = getValue(item, col.key);
+          if (value == null) return '';
+          if (Array.isArray(value)) return value.join('; ');
+          return String(value);
+        })
+    );
+
+    const csv = [
+      headers.join(','),
+      ...rows.map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(',')),
+    ].join('\n');
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${categoryId}${search ? `-filtered` : ''}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }, [sortedData, columns, categoryId, search]);
 
   return (
     <div className="space-y-4">
@@ -212,24 +206,15 @@ export function DataTable({
             <tr>
               {columns.map((col) => {
                 const colKey = String(col.key);
-                const isRightAligned = col.className?.includes("text-right");
+                const isRightAligned = col.className?.includes('text-right');
                 return (
                   <th key={colKey} className={col.className}>
-                    <div
-                      className={`th-content ${isRightAligned ? "justify-end" : ""}`}
-                    >
-                      {col.sortable !== false && col.key !== "links" ? (
-                        <button
-                          className="sort-btn"
-                          onClick={() => handleSort(colKey)}
-                        >
+                    <div className={`th-content ${isRightAligned ? 'justify-end' : ''}`}>
+                      {col.sortable !== false && col.key !== 'links' ? (
+                        <button className="sort-btn" onClick={() => handleSort(colKey)}>
                           {col.label}
-                          {sortKey === colKey && sortDir === "asc" && (
-                            <ChevronUp size={16} />
-                          )}
-                          {sortKey === colKey && sortDir === "desc" && (
-                            <ChevronDown size={16} />
-                          )}
+                          {sortKey === colKey && sortDir === 'asc' && <ChevronUp size={16} />}
+                          {sortKey === colKey && sortDir === 'desc' && <ChevronDown size={16} />}
                         </button>
                       ) : (
                         <span>{col.label}</span>
@@ -256,12 +241,9 @@ export function DataTable({
                       <td key={col.key} className={col.className}>
                         {col.render ? (
                           col.render(value, item)
-                        ) : col.key === "name" ? (
-                          <Link
-                            to={`${categoryPath}/${item.id}`}
-                            className="entry-link"
-                          >
-                            {String(value ?? "")}
+                        ) : col.key === 'name' ? (
+                          <Link to={`${categoryPath}/${item.id}`} className="entry-link">
+                            {String(value ?? '')}
                           </Link>
                         ) : (
                           <CellValue value={value} />
@@ -284,7 +266,7 @@ function CellValue({ value }: { value: unknown }) {
     return <span className="text-muted">-</span>;
   }
 
-  if (typeof value === "boolean") {
+  if (typeof value === 'boolean') {
     return value ? (
       <span className="badge badge-success">Yes</span>
     ) : (
@@ -304,14 +286,9 @@ function CellValue({ value }: { value: unknown }) {
     );
   }
 
-  if (typeof value === "string" && value.startsWith("http")) {
+  if (typeof value === 'string' && value.startsWith('http')) {
     return (
-      <a
-        href={value}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="external-link"
-      >
+      <a href={value} target="_blank" rel="noopener noreferrer" className="external-link">
         Link
       </a>
     );

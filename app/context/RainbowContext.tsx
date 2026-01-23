@@ -2,10 +2,13 @@ import { createContext, useContext, useEffect, useRef, type ReactNode } from 're
 
 interface RainbowContextType {
   getHue: () => number;
-  isMouseOnPage: boolean;
+  getIsMouseOnPage: () => boolean;
 }
 
-const RainbowContext = createContext<RainbowContextType>({ getHue: () => 0, isMouseOnPage: false });
+const RainbowContext = createContext<RainbowContextType>({
+  getHue: () => 0,
+  getIsMouseOnPage: () => false,
+});
 
 export function RainbowProvider({ children }: { children: ReactNode }) {
   const animationRef = useRef<number | null>(null);
@@ -79,10 +82,10 @@ export function RainbowProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // Provide getter function instead of reactive value
+  // Provide getter functions instead of reactive values
   const contextValue = {
     getHue: () => hueRef.current,
-    isMouseOnPage: isMouseOnPageRef.current,
+    getIsMouseOnPage: () => isMouseOnPageRef.current,
   };
 
   return <RainbowContext.Provider value={contextValue}>{children}</RainbowContext.Provider>;

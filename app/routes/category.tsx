@@ -1,16 +1,16 @@
-import type { Route } from "./+types/category";
-import { Link, data } from "react-router";
-import { getCategoryById, loadCategoryData } from "~/lib/data";
-import { getColumnsForCategory, getSearchKeysForCategory } from "~/lib/columns";
-import { DataTable } from "~/components/data/DataTable";
+import type { Route } from './+types/category';
+import { Link, data } from 'react-router';
+import { getCategoryById, loadCategoryData } from '~/lib/data';
+import { getColumnsForCategory, getSearchKeysForCategory } from '~/lib/columns';
+import { DataTable } from '~/components/data/DataTable';
 
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) {
-    return [{ title: "Not Found - Awesome LED List" }];
+    return [{ title: 'Not Found - Awesome LED List' }];
   }
   return [
     { title: `${loaderData.category.name} - Awesome LED List` },
-    { name: "description", content: loaderData.category.description },
+    { name: 'description', content: loaderData.category.description },
   ];
 }
 
@@ -37,9 +37,9 @@ export default function CategoryPage({ loaderData }: Route.ComponentProps) {
       className="category-theme"
       style={
         {
-          "--category-hue": category.color.hue,
-          backgroundColor: "var(--category-bg-subtle)",
-          minHeight: "calc(100vh - 7rem)",
+          '--category-hue': category.color.hue,
+          backgroundColor: 'var(--category-bg-subtle)',
+          minHeight: 'calc(100vh - 7rem)',
         } as React.CSSProperties
       }
     >
@@ -49,16 +49,13 @@ export default function CategoryPage({ loaderData }: Route.ComponentProps) {
             Home
           </Link>
           <span className="text-muted">/</span>
-          <span className="text-sm" style={{ color: "var(--category-primary)" }}>
+          <span className="text-sm" style={{ color: 'var(--category-primary)' }}>
             {category.name}
           </span>
         </nav>
 
         <header className="mb-6">
-          <h1
-            className="text-3xl font-bold mb-2"
-            style={{ color: "var(--category-primary)" }}
-          >
+          <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--category-primary)' }}>
             {category.name}
           </h1>
           <p className="text-muted">{category.description}</p>
@@ -69,7 +66,6 @@ export default function CategoryPage({ loaderData }: Route.ComponentProps) {
           columns={columns}
           categoryPath={category.path}
           categoryId={category.id}
-          categoryName={category.name}
           searchKeys={searchKeys}
         />
       </div>
