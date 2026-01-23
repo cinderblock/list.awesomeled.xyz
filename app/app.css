@@ -737,11 +737,11 @@ img {
 }
 
 .data-table th:first-child {
-  border-top-left-radius: var(--radius-lg);
+  border-top-left-radius: calc(var(--radius-lg) - 1px);
 }
 
 .data-table th:last-child {
-  border-top-right-radius: var(--radius-lg);
+  border-top-right-radius: calc(var(--radius-lg) - 1px);
 }
 
 .data-table tbody tr:nth-child(odd) {
