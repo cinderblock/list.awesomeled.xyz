@@ -595,7 +595,7 @@ export function DataTable({
   }, [sortedData, columns, getFilteredFilename]);
 
   return (
-    <div className="space-y-4">
+    <div className="data-table-wrapper space-y-4">
       {/* Search and controls */}
       <div className="sticky-controls">
         <div className="flex flex-wrap items-center gap-4">

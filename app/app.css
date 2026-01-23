@@ -900,6 +900,10 @@ img {
    ========================================================================== */
 
 /* Sticky controls bar */
+.data-table-wrapper {
+  min-width: fit-content;
+}
+
 .sticky-controls {
   position: sticky;
   top: 6rem;
