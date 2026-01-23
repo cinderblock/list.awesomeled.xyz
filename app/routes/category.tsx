@@ -1,7 +1,8 @@
 import type { Route } from "./+types/category";
 import { Link, data } from "react-router";
 import { getCategoryById, loadCategoryData } from "~/lib/data";
-import type { BaseEntry } from "~/lib/types";
+import { getColumnsForCategory, getSearchKeysForCategory } from "~/lib/columns";
+import { DataTable } from "~/components/data/DataTable";
 
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) {
@@ -28,72 +29,50 @@ export async function loader({ params }: Route.LoaderArgs) {
 
 export default function CategoryPage({ loaderData }: Route.ComponentProps) {
   const { category, entries } = loaderData;
+  const columns = getColumnsForCategory(category.id);
+  const searchKeys = getSearchKeysForCategory(category.id);
 
   return (
-    <main
-      className="container py-8 category-theme"
-      style={{ "--category-hue": category.color.hue } as React.CSSProperties}
+    <div
+      className="category-theme"
+      style={
+        {
+          "--category-hue": category.color.hue,
+          backgroundColor: "var(--category-bg-subtle)",
+          minHeight: "calc(100vh - 7rem)",
+        } as React.CSSProperties
+      }
     >
-      <nav className="mb-2 flex items-center gap-2">
-        <Link to="/" className="text-sm text-muted hover:text-foreground">
-          Home
-        </Link>
-        <span className="text-muted">/</span>
-        <span className="text-sm">{category.name}</span>
-      </nav>
+      <div className="container py-8">
+        <nav className="mb-2 flex items-center gap-2">
+          <Link to="/" className="text-sm text-muted hover:text-foreground">
+            Home
+          </Link>
+          <span className="text-muted">/</span>
+          <span className="text-sm" style={{ color: "var(--category-primary)" }}>
+            {category.name}
+          </span>
+        </nav>
 
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">{category.name}</h1>
-        <p className="text-muted">{category.description}</p>
-        <p className="text-sm text-muted mt-2">{entries.length} entries</p>
-      </header>
+        <header className="mb-6">
+          <h1
+            className="text-3xl font-bold mb-2"
+            style={{ color: "var(--category-primary)" }}
+          >
+            {category.name}
+          </h1>
+          <p className="text-muted">{category.description}</p>
+        </header>
 
-      <div className="border rounded-lg overflow-hidden">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Manufacturer</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            {entries.map((entry: BaseEntry) => (
-              <tr key={entry.id}>
-                <td>
-                  <Link
-                    to={`${category.path}/${entry.id}`}
-                    className="font-medium"
-                    style={{ color: "var(--category-primary)" }}
-                  >
-                    {entry.name}
-                  </Link>
-                </td>
-                <td className="text-muted">
-                  {(entry.manufacturer as string) || (entry.developer as string) || "-"}
-                </td>
-                <td className="text-muted text-sm">
-                  {getEntryDetails(entry)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <DataTable
+          data={entries}
+          columns={columns}
+          categoryPath={category.path}
+          categoryId={category.id}
+          categoryName={category.name}
+          searchKeys={searchKeys}
+        />
       </div>
-    </main>
+    </div>
   );
-}
-
-function getEntryDetails(entry: BaseEntry): string {
-  const details: string[] = [];
-
-  if (entry.max_pixels) details.push(`${entry.max_pixels} pixels`);
-  if (entry.max_outputs) details.push(`${entry.max_outputs} outputs`);
-  if (entry.price) details.push(`$${entry.price}`);
-  if (entry.interfaces && Array.isArray(entry.interfaces)) {
-    details.push(entry.interfaces.join(", "));
-  }
-  if (entry.status && entry.status !== "unknown") details.push(entry.status as string);
-
-  return details.length > 0 ? details.join(" | ") : "-";
 }

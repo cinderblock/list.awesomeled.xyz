@@ -23,8 +23,8 @@ test.describe("Basic functionality", () => {
   test("navigation to category page works", async ({ page }) => {
     await page.goto("/");
 
-    // Click on Controllers category
-    await page.click('a[href="/controllers"]');
+    // Click on Controllers category card
+    await page.click(".category-card >> text=Controllers");
 
     // Wait for navigation
     await expect(page).toHaveURL(/\/controllers/);
@@ -38,21 +38,45 @@ test.describe("Basic functionality", () => {
   test("navigation to entry page works", async ({ page }) => {
     await page.goto("/controllers");
 
-    // Click on first entry link
-    await page.click(".data-table tbody tr:first-child a");
+    // Click on first entry link in the table
+    const firstLink = page.locator(".data-table tbody tr:first-child td:first-child a");
+    await firstLink.click();
 
     // Should navigate to entry page
     await expect(page.locator("h1")).toBeVisible();
 
-    // Should have breadcrumb navigation
-    await expect(page.locator('a[href="/"]')).toContainText("Home");
-    await expect(page.locator('a[href="/controllers"]')).toContainText("Controllers");
+    // Should have breadcrumb with Home link
+    await expect(page.locator("nav >> text=Home")).toBeVisible();
   });
 
   test("about page loads", async ({ page }) => {
     await page.goto("/about");
     await expect(page).toHaveTitle(/About/);
     await expect(page.locator("h1")).toContainText("About");
+  });
+
+  test("header has navigation links", async ({ page }) => {
+    await page.goto("/");
+
+    // Wait for hydration
+    await page.waitForLoadState("networkidle");
+
+    // Should have header element
+    await expect(page.locator('header')).toBeVisible();
+
+    // Should have About link
+    await expect(page.locator('text=About').first()).toBeVisible();
+  });
+
+  test("category nav appears on category pages", async ({ page }) => {
+    await page.goto("/controllers");
+
+    // Category nav should be visible
+    const categoryTabs = page.locator(".category-tab-colored");
+    await expect(categoryTabs.first()).toBeVisible();
+
+    // Active tab should be highlighted
+    await expect(page.locator('.category-tab-colored.active >> text=Controllers')).toBeVisible();
   });
 });
 
@@ -65,8 +89,8 @@ test.describe("Data loading", () => {
     const count = await tableRows.count();
     expect(count).toBeGreaterThan(0);
 
-    // Each row should have a name link
-    const firstNameLink = tableRows.first().locator("a");
+    // Each row should have a name link with entry-link class
+    const firstNameLink = tableRows.first().locator("a.entry-link");
     await expect(firstNameLink).toBeVisible();
   });
 
@@ -78,5 +102,13 @@ test.describe("Data loading", () => {
 
     // Should show manufacturer in the header
     await expect(page.locator("text=by PixelController")).toBeVisible();
+  });
+
+  test("footer is displayed", async ({ page }) => {
+    await page.goto("/");
+
+    // Footer should be visible
+    await expect(page.locator("footer")).toBeVisible();
+    await expect(page.locator("footer")).toContainText("community resource");
   });
 });

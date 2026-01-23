@@ -1,7 +1,7 @@
 import type { Route } from "./+types/entry";
 import { Link, data } from "react-router";
 import { getCategoryById, loadEntry } from "~/lib/data";
-import type { BaseEntry } from "~/lib/types";
+import { ExternalLink } from "lucide-react";
 
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) {
@@ -34,7 +34,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   const { category, entry } = loaderData;
 
   return (
-    <main
+    <div
       className="container py-8 category-theme"
       style={{ "--category-hue": category.color.hue } as React.CSSProperties}
     >
@@ -67,7 +67,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
                 <dt className="font-medium" style={{ textTransform: "capitalize" }}>
                   {key.replace(/_/g, " ")}
                 </dt>
-                <dd className="text-muted">{formatValue(value)}</dd>
+                <dd className="text-muted">{formatValue(key, value)}</dd>
               </div>
             ))}
         </dl>
@@ -80,19 +80,38 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary"
+            style={{ gap: "0.5rem" }}
           >
             Visit Website
+            <ExternalLink size={16} />
           </a>
         </div>
       )}
-    </main>
+    </div>
   );
 }
 
-function formatValue(value: unknown): string {
+function formatValue(key: string, value: unknown): React.ReactNode {
   if (value === null || value === undefined) return "-";
   if (typeof value === "boolean") return value ? "Yes" : "No";
   if (Array.isArray(value)) return value.join(", ");
   if (typeof value === "object") return JSON.stringify(value);
-  return String(value);
+
+  const strValue = String(value);
+
+  // Make URLs clickable
+  if (key.endsWith("_url") || key === "url") {
+    return (
+      <a
+        href={strValue}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ color: "var(--category-primary)", wordBreak: "break-all" }}
+      >
+        {strValue}
+      </a>
+    );
+  }
+
+  return strValue;
 }

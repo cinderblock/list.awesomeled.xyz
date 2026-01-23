@@ -1,5 +1,6 @@
 import type { Route } from "./+types/about";
 import { Link } from "react-router";
+import { RainbowText } from "~/components/ui/RainbowText";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,7 +11,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function About() {
   return (
-    <main className="container py-8" style={{ maxWidth: "48rem" }}>
+    <div className="container py-8" style={{ maxWidth: "48rem", marginInline: "auto" }}>
       <nav className="mb-2 flex items-center gap-2">
         <Link to="/" className="text-sm text-muted hover:text-foreground">
           Home
@@ -19,11 +20,13 @@ export default function About() {
         <span className="text-sm">About</span>
       </nav>
 
-      <h1 className="text-3xl font-bold mb-6">About Awesome LED List</h1>
+      <h1 className="text-3xl font-bold mb-6">
+        About <RainbowText>Awesome LED List</RainbowText>
+      </h1>
 
       <div style={{ lineHeight: 1.7 }}>
         <p className="text-lg mb-6">
-          Awesome LED List is a community-maintained reference for the addressable LED ecosystem.
+          <RainbowText>Awesome LED List</RainbowText> is a community-maintained reference for the addressable LED ecosystem.
           Our goal is to help makers, installers, and enthusiasts find the right products for their
           projects.
         </p>
@@ -49,6 +52,6 @@ export default function About() {
           decisions.
         </p>
       </div>
-    </main>
+    </div>
   );
 }

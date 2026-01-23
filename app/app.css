@@ -725,3 +725,194 @@ img {
     margin-bottom: 0.5rem;
   }
 }
+
+/* ==========================================================================
+   DataTable Component Styles
+   ========================================================================== */
+
+/* Sticky controls bar */
+.sticky-controls {
+  position: sticky;
+  top: 6rem;
+  z-index: 30;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--category-bg-subtle, var(--background));
+  border-bottom: 1px solid var(--border);
+}
+
+/* Search input wrapper */
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 20rem;
+  flex: 1;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3) var(--space-2) 2.25rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--category-primary, var(--ring));
+  box-shadow: 0 0 0 2px var(--category-primary, var(--ring));
+}
+
+.search-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* Table container */
+.table-container {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--background);
+}
+
+/* Category themed table header */
+.category-theme .data-table thead {
+  background-color: var(--category-bg);
+}
+
+.category-theme .data-table th {
+  background-color: var(--category-accent);
+}
+
+/* Table header content */
+.th-content {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Sort button */
+.sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin-left: -0.5rem;
+  font-size: inherit;
+  font-weight: 600;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.sort-btn:hover {
+  background-color: var(--accent);
+}
+
+.category-theme .sort-btn:hover {
+  background-color: var(--category-bg);
+}
+
+/* Entry link in table */
+.entry-link {
+  font-weight: 500;
+  color: var(--category-primary, var(--primary));
+  text-decoration: none;
+}
+
+.entry-link:hover {
+  text-decoration: underline;
+}
+
+/* External link icon buttons */
+.link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  color: var(--muted-foreground);
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.link-icon:hover {
+  color: var(--category-primary, var(--primary));
+  background-color: var(--accent);
+}
+
+/* External link in cell */
+.external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--category-primary, var(--primary));
+  text-decoration: none;
+}
+
+.external-link:hover {
+  text-decoration: underline;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem !important;
+  color: var(--muted-foreground);
+}
+
+/* Button small variant */
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+  height: 2rem;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--border);
+  color: var(--foreground);
+}
+
+.btn-outline:hover {
+  background-color: var(--accent);
+}
+
+/* Badge variants */
+.badge-outline {
+  background-color: transparent;
+}
+
+.badge-secondary {
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+}
+
+/* Tabular numbers for numeric columns */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Space-y utility */
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+/* Right-aligned table cells */
+.text-right {
+  text-align: right;
+}
