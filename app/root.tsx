@@ -25,12 +25,23 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+// Inline script to prevent flash of wrong theme on load
+const themeScript = `
+(function() {
+  var theme = localStorage.getItem('theme');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var isDark = theme === 'dark' || (theme === 'system' && prefersDark) || (!theme && prefersDark);
+  document.documentElement.classList.add(isDark ? 'dark' : 'light');
+})();
+`;
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <Meta />
         <Links />
       </head>
