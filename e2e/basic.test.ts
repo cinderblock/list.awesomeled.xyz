@@ -152,6 +152,81 @@ test.describe('Tab navigation performance', () => {
   });
 });
 
+test.describe('Console errors', () => {
+  test('home page should have no console errors', async ({ page }) => {
+    const consoleErrors: string[] = [];
+
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') {
+        consoleErrors.push(msg.text());
+      }
+    });
+
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test('category page should have no console errors', async ({ page }) => {
+    const consoleErrors: string[] = [];
+
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') {
+        consoleErrors.push(msg.text());
+      }
+    });
+
+    await page.goto('/controllers');
+    await page.waitForLoadState('networkidle');
+
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test('entry page should have no console errors', async ({ page }) => {
+    const consoleErrors: string[] = [];
+
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') {
+        consoleErrors.push(msg.text());
+      }
+    });
+
+    await page.goto('/controllers/falcon-f16v4');
+    await page.waitForLoadState('networkidle');
+
+    expect(consoleErrors).toEqual([]);
+  });
+
+  test('navigating between pages should produce no console errors', async ({ page }) => {
+    const consoleErrors: string[] = [];
+
+    page.on('console', (msg) => {
+      if (msg.type() === 'error') {
+        consoleErrors.push(msg.text());
+      }
+    });
+
+    // Navigate through multiple pages
+    await page.goto('/');
+    await page.waitForLoadState('networkidle');
+
+    await page.click('.category-card >> text=Controllers');
+    await expect(page).toHaveURL(/\/controllers/);
+    await page.waitForLoadState('networkidle');
+
+    await page.click('.category-tab-colored >> text=Pixels');
+    await expect(page).toHaveURL(/\/pixels/);
+    await page.waitForLoadState('networkidle');
+
+    const firstLink = page.locator('.data-table tbody tr:first-child td:first-child a');
+    await firstLink.click();
+    await page.waitForLoadState('networkidle');
+
+    expect(consoleErrors).toEqual([]);
+  });
+});
+
 test.describe('Data loading', () => {
   test('YAML data is loaded correctly', async ({ page }) => {
     await page.goto('/controllers');
