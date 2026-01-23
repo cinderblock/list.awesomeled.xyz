@@ -734,7 +734,7 @@ function CellValue({ value }: { value: unknown }) {
 
   if (Array.isArray(value)) {
     return (
-      <div className="flex flex-wrap gap-1">
+      <div className="flex gap-1">
         {value.map((v, i) => (
           <span key={i} className="badge badge-outline">
             {String(v)}

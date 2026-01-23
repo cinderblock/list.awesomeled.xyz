@@ -122,7 +122,7 @@ const libraryLinks: LinkConfig[] = [
 function renderBadgeArray(v: unknown) {
   if (!Array.isArray(v)) return null;
   return (
-    <div className="flex flex-wrap gap-1">
+    <div className="flex gap-1">
       {v.slice(0, 3).map((i, idx) => (
         <span key={idx} className="badge badge-outline">
           {String(i)}
