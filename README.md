@@ -4,6 +4,18 @@ A modern, production-ready template for building full-stack React applications u
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
 
+## Requirements
+
+| Tool    | Version        | Notes                    |
+| ------- | -------------- | ------------------------ |
+| Node.js | **20.x**       | Required - used in CI/CD |
+| npm     | 10.x+          | Bundled with Node 20     |
+| Bun     | 1.x (optional) | Alternative to npm/pnpm  |
+
+This project is tested and deployed using **Node.js 20**. The GitHub Actions CI pipeline runs on Node 20.
+
+**Alternative package managers:** You can use `npm`, `pnpm`, or `bun` to install dependencies and run scripts.
+
 ## Features
 
 - 🚀 Server-side rendering
@@ -43,28 +55,6 @@ npm run build
 ```
 
 ## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
 
 If you're familiar with deploying Node applications, the built-in app server is production-ready.
 
