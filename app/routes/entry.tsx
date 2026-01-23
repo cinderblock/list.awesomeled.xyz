@@ -1,15 +1,15 @@
-import type { Route } from "./+types/entry";
-import { Link, data } from "react-router";
-import { getCategoryById, loadEntry } from "~/lib/data";
-import { ExternalLink } from "lucide-react";
+import type { Route } from './+types/entry';
+import { Link, data } from 'react-router';
+import { getCategoryById, loadEntry } from '~/lib/data';
+import { ExternalLink } from 'lucide-react';
 
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) {
-    return [{ title: "Not Found - Awesome LED List" }];
+    return [{ title: 'Not Found - Awesome LED List' }];
   }
   return [
     { title: `${loaderData.entry.name} - ${loaderData.category.name} - Awesome LED List` },
-    { name: "description", content: `Details about ${loaderData.entry.name}` },
+    { name: 'description', content: `Details about ${loaderData.entry.name}` },
   ];
 }
 
@@ -36,7 +36,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   return (
     <div
       className="container py-8 category-theme"
-      style={{ "--category-hue": category.color.hue } as React.CSSProperties}
+      style={{ '--category-hue': category.color.hue } as React.CSSProperties}
     >
       <nav className="mb-2 flex items-center gap-2">
         <Link to="/" className="text-sm text-muted hover:text-foreground">
@@ -52,20 +52,18 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
 
       <header className="mb-6">
         <h1 className="text-3xl font-bold mb-2">{entry.name}</h1>
-        {entry.manufacturer && (
-          <p className="text-muted">by {entry.manufacturer as string}</p>
-        )}
+        {entry.manufacturer && <p className="text-muted">by {entry.manufacturer as string}</p>}
       </header>
 
       <div className="border rounded-lg p-4">
         <h2 className="text-xl font-semibold mb-4">Details</h2>
-        <dl style={{ display: "grid", gridTemplateColumns: "max-content 1fr", gap: "0.5rem 1rem" }}>
+        <dl style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', gap: '0.5rem 1rem' }}>
           {Object.entries(entry)
-            .filter(([key]) => !["id", "name"].includes(key))
+            .filter(([key]) => !['id', 'name'].includes(key))
             .map(([key, value]) => (
-              <div key={key} style={{ display: "contents" }}>
-                <dt className="font-medium" style={{ textTransform: "capitalize" }}>
-                  {key.replace(/_/g, " ")}
+              <div key={key} style={{ display: 'contents' }}>
+                <dt className="font-medium" style={{ textTransform: 'capitalize' }}>
+                  {key.replace(/_/g, ' ')}
                 </dt>
                 <dd className="text-muted">{formatValue(key, value)}</dd>
               </div>
@@ -80,7 +78,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary"
-            style={{ gap: "0.5rem" }}
+            style={{ gap: '0.5rem' }}
           >
             Visit Website
             <ExternalLink size={16} />
@@ -92,21 +90,21 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
 }
 
 function formatValue(key: string, value: unknown): React.ReactNode {
-  if (value === null || value === undefined) return "-";
-  if (typeof value === "boolean") return value ? "Yes" : "No";
-  if (Array.isArray(value)) return value.join(", ");
-  if (typeof value === "object") return JSON.stringify(value);
+  if (value === null || value === undefined) return '-';
+  if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+  if (Array.isArray(value)) return value.join(', ');
+  if (typeof value === 'object') return JSON.stringify(value);
 
   const strValue = String(value);
 
   // Make URLs clickable
-  if (key.endsWith("_url") || key === "url") {
+  if (key.endsWith('_url') || key === 'url') {
     return (
       <a
         href={strValue}
         target="_blank"
         rel="noopener noreferrer"
-        style={{ color: "var(--category-primary)", wordBreak: "break-all" }}
+        style={{ color: 'var(--category-primary)', wordBreak: 'break-all' }}
       >
         {strValue}
       </a>

@@ -11,7 +11,7 @@ pixel_data_size: 64 Bits/Pixel
 pixel_rate_max: 625.0 k Pixel / s
 gpio_min: 3.4V
 gpio_max: 5V
-wattage: "#VALUE!"
+wattage: '#VALUE!'
 channel_current: 17.0mA
 quiescent_current: 0.1mA
 package_size: 5050, 2020

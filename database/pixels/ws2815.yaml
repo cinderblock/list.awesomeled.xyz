@@ -21,8 +21,8 @@ channel_current: 10mA
 quiescent_current: 2.1mA
 quiescent_current_notes: At 12V supply
 package_sizes:
-  - "5050"
-package_size: "5050"
+  - '5050'
+package_size: '5050'
 pin_count: 6
 data_type: WS2811/12
 backup_data_line: true

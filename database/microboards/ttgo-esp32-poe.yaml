@@ -17,7 +17,7 @@ ttl_serial: null
 wifi: 2.4GHz
 poe: Y
 ethernet: 100BASE-TX
-bluetooth: "4.2"
+bluetooth: '4.2'
 storage: null
 bms: null
 imu: null

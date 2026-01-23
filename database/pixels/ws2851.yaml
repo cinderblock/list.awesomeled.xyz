@@ -14,7 +14,7 @@ gpio_max: 5V
 wattage: 92.5mW
 channel_current: 18.5mA
 quiescent_current: 2.1mA
-package_size: "5050"
+package_size: '5050'
 pin_count: 8
 data_type: WS2811/12
 backup_data_line: false

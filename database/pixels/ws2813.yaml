@@ -18,8 +18,8 @@ channel_current: 18mA
 channel_current_notes: Also has a 5mA version available
 quiescent_current: 0.7mA
 package_sizes:
-  - "5050"
-package_size: "5050"
+  - '5050'
+package_size: '5050'
 pin_count: 6
 data_type: WS2811/12
 backup_data_line: true

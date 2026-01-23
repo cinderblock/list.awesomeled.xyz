@@ -1,5 +1,5 @@
-import type { Config } from "@react-router/dev/config";
-import { getAllRoutes } from "./app/lib/data";
+import type { Config } from '@react-router/dev/config';
+import { getAllRoutes } from './app/lib/data';
 
 export default {
   // Enable SSR for pre-rendering

@@ -17,7 +17,7 @@ ttl_serial: true
 wifi: 2.4GHz
 poe: null
 ethernet: USB
-bluetooth: "4.1"
+bluetooth: '4.1'
 storage: microSD
 bms: false
 imu: false

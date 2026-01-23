@@ -7,7 +7,7 @@ platforms:
   - macOS
   - Linux
   - Android
-  - "& IOS"
+  - '& IOS'
 live: true
 designer: null
 visualizer: null

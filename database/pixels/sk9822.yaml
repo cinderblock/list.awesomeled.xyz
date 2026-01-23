@@ -19,9 +19,9 @@ channel_current: 20mA
 channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control current, not PWM
 quiescent_current: 1.0mA
 package_sizes:
-  - "5050"
-  - "2020"
-package_size: "5050"
+  - '5050'
+  - '2020'
+package_size: '5050'
 pin_count: 6
 data_type: APA102
 backup_data_line: false

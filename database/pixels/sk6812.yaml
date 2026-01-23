@@ -19,9 +19,9 @@ wattage: 104mW
 channel_current: 20mA
 quiescent_current: 1.0mA
 package_sizes:
-  - "5050"
-  - "3535"
-  - "2040"
+  - '5050'
+  - '3535'
+  - '2040'
 package_size: 5050,3535,2040
 pin_count: 4
 data_type: WS2811/12

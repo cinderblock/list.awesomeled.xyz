@@ -14,7 +14,7 @@ gpio_max: null
 wattage: .mW
 channel_current: null
 quiescent_current: null
-package_size: "5050"
+package_size: '5050'
 pin_count: 4
 data_type: null
 backup_data_line: false

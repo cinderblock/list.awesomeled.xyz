@@ -14,7 +14,7 @@ gpio_max: 5V
 wattage: 45.mW
 channel_current: 9.0mA
 quiescent_current: 2.0mA
-package_size: "5050"
+package_size: '5050'
 pin_count: 6
 data_type: UCS1903
 backup_data_line: true

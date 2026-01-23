@@ -11,10 +11,10 @@ pixel_data_size: null
 pixel_rate_max: null
 gpio_min: null
 gpio_max: null
-wattage: "#VALUE!"
+wattage: '#VALUE!'
 channel_current: 17.0mA
-quiescent_current: "?"
-package_size: "5050"
+quiescent_current: '?'
+package_size: '5050'
 pin_count: 6
 data_type: APA102
 backup_data_line: false

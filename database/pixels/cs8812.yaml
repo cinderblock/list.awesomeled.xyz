@@ -14,7 +14,7 @@ gpio_max: null
 wattage: 210.mW
 channel_current: 17.5mA
 quiescent_current: null
-package_size: "5050"
+package_size: '5050'
 pin_count: null
 data_type: WS2811/12
 backup_data_line: true

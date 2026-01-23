@@ -5,23 +5,23 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-} from "react-router";
+} from 'react-router';
 
-import type { Route } from "./+types/root";
-import "./app.css";
-import { RainbowProvider } from "~/context/RainbowContext";
-import { Layout as AppLayout } from "~/components/layout/Layout";
+import type { Route } from './+types/root';
+import './app.css';
+import { RainbowProvider } from '~/context/RainbowContext';
+import { Layout as AppLayout } from '~/components/layout/Layout';
 
 export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+    crossOrigin: 'anonymous',
   },
   {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
   },
 ];
 
@@ -65,34 +65,34 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
+  let message = 'Oops!';
+  let details = 'An unexpected error occurred.';
   let stack: string | undefined;
 
   if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
+    message = error.status === 404 ? '404' : 'Error';
     details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
+      error.status === 404 ? 'The requested page could not be found.' : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;
   }
 
   return (
-    <main style={{ paddingTop: "4rem", padding: "1rem", maxWidth: "80rem", marginInline: "auto" }}>
-      <h1 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "1rem" }}>{message}</h1>
-      <p style={{ marginBottom: "1rem" }}>{details}</p>
+    <main style={{ paddingTop: '4rem', padding: '1rem', maxWidth: '80rem', marginInline: 'auto' }}>
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{message}</h1>
+      <p style={{ marginBottom: '1rem' }}>{details}</p>
       {stack && (
-        <pre style={{
-          width: "100%",
-          padding: "1rem",
-          overflowX: "auto",
-          backgroundColor: "var(--muted)",
-          borderRadius: "var(--radius-md)"
-        }}>
-          <code style={{ fontFamily: "var(--font-mono)", fontSize: "0.875rem" }}>{stack}</code>
+        <pre
+          style={{
+            width: '100%',
+            padding: '1rem',
+            overflowX: 'auto',
+            backgroundColor: 'var(--muted)',
+            borderRadius: 'var(--radius-md)',
+          }}
+        >
+          <code style={{ fontFamily: 'var(--font-mono)', fontSize: '0.875rem' }}>{stack}</code>
         </pre>
       )}
     </main>

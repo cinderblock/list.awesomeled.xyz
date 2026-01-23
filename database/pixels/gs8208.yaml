@@ -20,8 +20,8 @@ channel_current: 10mA
 channel_current_notes: Measured current across 3 LEDs at 12V. Datasheet claims 15mA
 quiescent_current: 2.5mA
 package_sizes:
-  - "5050"
-package_size: "5050"
+  - '5050'
+package_size: '5050'
 pin_count: 6
 data_type: WS2811/12
 backup_data_line: true
