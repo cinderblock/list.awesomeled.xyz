@@ -1,0 +1,29 @@
+id: lightmobile
+name: LightMobile
+developer: RocketLife
+price: Free
+platforms:
+  - iOS
+  - Android
+live: true
+designer: false
+visualizer: null
+protocols:
+  artnet: null
+  sacn: null
+  dmx: null
+  kinet: null
+  ddp: null
+gpio: null
+serial: null
+video_input: null
+audio_input: null
+programmatic: null
+language: null
+other_inputs: GPIO pins
+other_outputs: Bluetooth/NFC to RocketLife hardware
+integrations: LightBox&LightBoard Mini
+notes: RocketLife controllers, serial/SPI pixels only
+demo_available: null
+status: dead see bekonix
+url: https://www.rocketlife.com/technology/

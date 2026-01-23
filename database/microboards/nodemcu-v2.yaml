@@ -1,0 +1,27 @@
+id: nodemcu-v2
+name: NodeMCU v2
+manufacturer: NodeMCU
+soc: ESP8266
+cpu: Diamond Standard 106Micro
+isa: Xtensa
+clock_speed: null
+flash: null
+ram: null
+linux: false
+max_outputs: null
+min_input_voltage: null
+max_input_voltage: null
+gpio_voltage: 3.3V
+usb: null
+ttl_serial: true
+wifi: 2.4GHz
+poe: null
+ethernet: null
+bluetooth: "4.1"
+storage: null
+bms: false
+imu: false
+price: null
+release_year: null
+url: https://components101.com/development-boards/nodemcu-esp8266-pinout-features-and-datasheet
+notes: null

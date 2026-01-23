@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/commercial-system.json",
+  "title": "Commercial Pixel System",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": ["string", "null"]
+    },
+    "pixels_per_run": {
+      "type": ["integer", "null"]
+    },
+    "dimming_resolution": {
+      "type": ["string", "null"]
+    },
+    "dedicated_psu": {
+      "type": ["boolean", "null"]
+    },
+    "color_type": {
+      "type": ["string", "null"],
+      "description": "RGB, RGBW, WW, etc."
+    },
+    "online_pricing": {
+      "type": ["string", "null"]
+    },
+    "price_range": {
+      "type": ["string", "null"],
+      "description": "$ to $$$$$$"
+    },
+    "core_tech": {
+      "type": ["string", "null"]
+    },
+    "since": {
+      "type": ["integer", "null"]
+    },
+    "target_market": {
+      "type": ["string", "null"]
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "url": {
+      "type": ["string", "null"]
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    }
+  }
+}

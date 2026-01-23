@@ -1,0 +1,25 @@
+id: apd-2-500-12v-art
+name: APD-2-500-12v-ART
+manufacturer: Abstract AVR
+max_pixels: 1000
+price: null
+max_outputs: 2
+interfaces:
+  - WiFi
+  - Ethernet
+storage: null
+standalone: false
+pixel_types: async
+max_voltage: 12V
+max_current: 5A
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Single
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: On board Sound To Light , 31 channel DMX Macro mode
+warranty: null
+release_year: null
+status: active
+url: https://www.digitaltape.co.uk/pixel-drivers

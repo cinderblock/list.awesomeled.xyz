@@ -1,0 +1,27 @@
+id: teensy-3-6
+name: Teensy 3.6
+manufacturer: PJRC
+soc: MK66FX1M0VMD18
+cpu: ARM Cortex-M4
+isa: ARMv7-M
+clock_speed: 180MHz
+flash: 1024kB
+ram: 256kB
+linux: false
+max_outputs: null
+min_input_voltage: null
+max_input_voltage: 5V
+gpio_voltage: 3.3V
+usb: OTG
+ttl_serial: true
+wifi: Shield
+poe: null
+ethernet: null
+bluetooth: null
+storage: microSD
+bms: false
+imu: false
+price: null
+release_year: null
+url: https://www.pjrc.com/store/teensy36.html
+notes: null

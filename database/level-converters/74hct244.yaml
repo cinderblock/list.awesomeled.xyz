@@ -1,0 +1,11 @@
+id: 74hct244
+name: 74HCT244
+manufacturer: Texas Instruments
+channels: 8
+interface: PDIP largest
+notes: null
+price: null
+max_voltage: 5.5V
+max_current: null
+buffered: true
+url: https://www.ti.com/product/SN74HCT244

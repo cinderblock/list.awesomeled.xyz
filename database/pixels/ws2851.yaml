@@ -1,0 +1,27 @@
+id: ws2851
+name: WS2851
+color_order: RGB
+led_voltage: 12V
+clocked: false
+vcc_voltage: 5V
+pwm_frequency: 2.0kHz
+brightness_bits: 8
+data_bitrate: 800kHz
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 33.3 k Pixel / s
+gpio_min: 3.0V
+gpio_max: 5V
+wattage: 92.5mW
+channel_current: 18.5mA
+quiescent_current: 2.1mA
+package_size: "5050"
+pin_count: 8
+data_type: WS2811/12
+backup_data_line: false
+max_pixels_per_string: null
+release_year: 2018
+notes: 12V WS2812 with RGB + external LEDs
+third_party_testing: null
+manufacturer: WorldSemi
+datasheet_url: http://www.world-semi.com/Certifications/details-121-4.html
+other_links: null

@@ -1,0 +1,24 @@
+id: k128d-b
+name: K128D-B
+manufacturer: KulpLights, LLC
+max_pixels: 80000
+price: 270
+max_outputs: 128
+interfaces:
+  - FPP
+storage: Yes
+standalone: true
+pixel_types: async
+max_voltage: 5V
+max_current: null
+buffered: null
+output_connectors: RJ45
+outputs: Single
+waterproof: null
+auxiliary_outputs: DMX x2
+wled_compatible: null
+notes: Onboard sound, FM transmitter optional.
+warranty: null
+release_year: null
+status: active
+url: https://kulplights.com/product/k128d-b/

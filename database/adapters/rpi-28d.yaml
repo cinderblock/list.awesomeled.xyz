@@ -1,0 +1,14 @@
+id: rpi-28d
+name: RPI-28D
+manufacturer: Hanson Electroncs
+max_channels: 3
+pixel_types: Single and Clocked
+max_voltage: 12V
+max_current: null
+parent: Raspberry Pi
+price: 22
+output_connectors: Phoenix Screw
+outputs: Both
+diy_or_ots: OTS
+notes: null
+url: http://www.hansonelectronics.com.au/product/rpi-28d/

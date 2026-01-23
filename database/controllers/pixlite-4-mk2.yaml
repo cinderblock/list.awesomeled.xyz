@@ -1,0 +1,30 @@
+id: pixlite-4-mk2
+name: PixLite 4 Mk2
+manufacturer: Advatek
+max_pixels: 4080
+price: 340
+max_outputs: 8
+interfaces:
+  - FPP
+  - Ethernet
+  - WiFi
+  - USB
+storage: null
+standalone: false
+pixel_types: both
+pixel_types_notes: Single or Clock means output pins can be configured as one or the other
+max_voltage: 24V
+max_current: 30A
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Single or Clock
+waterproof: null
+auxiliary_outputs: DMX
+wled_compatible: null
+notes: new firmware has a pixel counting test pattern, great for mapping
+technical_notes:
+  - Pixel counting test pattern in firmware is useful for mapping large installations
+warranty: null
+release_year: null
+status: active
+url: https://www.advateklights.com/pixlite-4-mk2-control-board

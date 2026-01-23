@@ -1,0 +1,27 @@
+id: apa106
+name: APA106
+color_order: RGB
+led_voltage: 5V
+clocked: null
+vcc_voltage: null
+pwm_frequency: null
+brightness_bits: null
+data_bitrate: null
+pixel_data_size: null
+pixel_rate_max: null
+gpio_min: null
+gpio_max: null
+wattage: .mW
+channel_current: null
+quiescent_current: null
+package_size: null
+pin_count: null
+data_type: null
+backup_data_line: null
+max_pixels_per_string: null
+release_year: null
+notes: 5V WS2811 clone in 5 and 8mm package
+third_party_testing: null
+manufacturer: null
+datasheet_url: https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107
+other_links: null

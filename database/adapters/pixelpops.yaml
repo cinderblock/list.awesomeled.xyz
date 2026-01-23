@@ -1,0 +1,14 @@
+id: pixelpops
+name: PixelPops
+manufacturer: diy/board design
+max_channels: 4
+pixel_types: Single
+max_voltage: 5V
+max_current: null
+parent: ESP-01 (ESP8266)
+price: null
+output_connectors: null
+outputs: null
+diy_or_ots: DIY
+notes: null
+url: https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops

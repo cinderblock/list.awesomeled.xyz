@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/pixel.json",
+  "title": "LED Pixel",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": ["string", "null"]
+    },
+    "color_order": {
+      "type": ["string", "null"],
+      "description": "Color channels in data transmission order (RGB, GRB, BGR, RGBW, etc.), irrespective of endianness (usually big endian, MSB first)"
+    },
+    "led_voltage": {
+      "type": ["string", "number", "null"],
+      "description": "Nominal LED Supply Voltage"
+    },
+    "led_voltage_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about voltage specifications from datasheets"
+    },
+    "clocked": {
+      "type": ["boolean", "null"],
+      "description": "True for protocols requiring a separate clock line (APA102-style), false for single-wire (WS2812-style)"
+    },
+    "vcc_voltage": {
+      "type": ["string", "number", "null"],
+      "description": "Nominal VCC pin voltage for pixel IC. Often hidden from end users on integrated packages"
+    },
+    "vcc_voltage_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about VCC specifications"
+    },
+    "pwm_frequency": {
+      "type": ["string", "number", "null"],
+      "description": "PWM Frequency of outputs - how often the LED flashes if captured on high speed camera"
+    },
+    "pwm_frequency_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about PWM behavior (e.g., MPWM multiplexing, measured vs datasheet values)"
+    },
+    "brightness_bits": {
+      "type": ["integer", "string", "null"],
+      "description": "Color depth per channel (e.g., 8, 8+5 for global brightness)"
+    },
+    "brightness_control_method": {
+      "type": ["string", "null"],
+      "description": "How extra brightness bits work: 'pwm' for overlaid PWM, 'current' for LED current control, 'global' for whole-chip brightness"
+    },
+    "data_bitrate": {
+      "type": ["string", "null"],
+      "description": "Maximum or fixed bit rate for data transmission"
+    },
+    "data_bitrate_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about data rate specifications"
+    },
+    "pixel_data_size": {
+      "type": ["string", "null"],
+      "description": "Bits per pixel (e.g., 24 for RGB, 32 for RGBW or with global brightness)"
+    },
+    "pixel_data_size_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about pixel data format"
+    },
+    "pixel_rate_max": {
+      "type": ["string", "null"],
+      "description": "Maximum pixel frames per second (ignoring reset overhead). Divide by string length for theoretical max FPS"
+    },
+    "gpio_min": {
+      "type": ["string", "number", "null"],
+      "description": "Lowest voltage that works as 'high' level input at nominal supply voltage"
+    },
+    "gpio_min_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about minimum GPIO threshold"
+    },
+    "gpio_max": {
+      "type": ["string", "number", "null"],
+      "description": "Maximum voltage allowed at data input pin at nominal supply voltage"
+    },
+    "wattage": {
+      "type": ["string", "number", "null"],
+      "description": "Power consumption per pixel"
+    },
+    "channel_current": {
+      "type": ["string", "number", "null"],
+      "description": "Default/maximum current per color channel with built-in LED"
+    },
+    "channel_current_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about current (e.g., different package sizes, programmable ranges)"
+    },
+    "quiescent_current": {
+      "type": ["string", "number", "null"],
+      "description": "Minimum current to controller when all LEDs off. Actual current above 5V depends on regulation method"
+    },
+    "package_sizes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Available package sizes (5050, 3535, 2020, etc.)"
+    },
+    "package_size": {
+      "type": ["string", "null"],
+      "description": "Package size(s) as string for backwards compatibility"
+    },
+    "pin_count": {
+      "type": ["integer", "null"]
+    },
+    "data_type": {
+      "type": ["string", "null"],
+      "description": "Protocol family (WS2811/12, APA102, etc.)"
+    },
+    "backup_data_line": {
+      "type": ["boolean", "null"],
+      "description": "Has failover/backup wire allowing data to continue if a pixel fails"
+    },
+    "max_pixels_per_string": {
+      "type": ["integer", "string", "null"],
+      "description": "Fundamental hardware limit on string length (not frame rate related). E.g., APA102 clock degradation limits to ~250"
+    },
+    "max_pixels_notes": {
+      "type": ["string", "null"],
+      "description": "Explanation of what limits max pixels (e.g., clock sensitivity, signal degradation)"
+    },
+    "release_year": {
+      "type": ["integer", "null"],
+      "description": "First date on datasheet or based on Google trends"
+    },
+    "spec_update_year": {
+      "type": ["integer", "null"],
+      "description": "Year specs were significantly updated (e.g., WS2812b PWM change in 2018)"
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "General notes about the pixel"
+    },
+    "technical_notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Detailed technical notes from community testing and datasheet analysis"
+    },
+    "datasheet_discrepancies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Known differences between datasheet claims and measured values"
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "suffix": { "type": "string" },
+          "differences": { "type": "string" }
+        }
+      },
+      "description": "Related variants (e.g., -B, -C, -E suffixes, different sizes)"
+    },
+    "third_party_testing": {
+      "type": ["string", "null"]
+    },
+    "datasheet_url": {
+      "type": ["string", "null"]
+    },
+    "other_links": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Additional reference links"
+    },
+    "status": {
+      "type": ["string", "null"],
+      "enum": ["active", "discontinued", "end-of-life", "limited", null]
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    }
+  }
+}

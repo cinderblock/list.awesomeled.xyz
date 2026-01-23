@@ -1,0 +1,32 @@
+id: powerpole-15-45
+name: PowerPole 15/45
+manufacturer: Anderson
+url: https://www.andersonpower.com/us/en/resources/PowerPoleResourcesPage.html
+outline: Rectangular
+max_current: 55 A
+max_voltage: 600 V
+ip_rating: IP65 Available
+locking: Friction
+panel_mount: true
+wire_to_wire: true
+pcb_mount: PTH
+smallest_gauge: 20 AWG
+largest_gauge: 6 AWG
+pitch: 15.9 mm
+contact_type: Blade
+solder: true
+screw_terminal: false
+crimp: true
+idc: false
+board_fingers: false
+gendered: false
+min_pins: 1
+max_pins: 16
+rows: N/A
+year_introduced: null
+pinout: null
+convention: When viewed from mating connector's perspective with tongues on the bottom, the red housing is on the left
+colors: Multi
+digikey_url: https://www.digikey.com/en/products/filter/blade-type-power-connectors-accessories/360?s=N4IgTCBcDaIIYDsAmBTATgZwPYIAQAcsB3dQgGxRAF0BfIA
+mouser_url: null
+notes: Anderson PowerPole, Genderless, Clip together shells in 11 colours, Radio HAM power standard,  panel mounting and waterproofing options.Extremely robust mixed signal and high current connector.

@@ -1,0 +1,27 @@
+id: p9813
+name: P9813
+manufacturer: WorldSemi
+pwm_frequency: 4.7kHz
+channels: 3
+channel_bits: 8
+aggregate_bits: 8
+clocked: true
+data_bitrate: 20MHz
+pixel_data_size: 32 Bits/Pixel
+pixel_rate_max: 625.0 k Pixel / s
+output_voltage: 12V
+supply_voltage: 5V
+gpio_min: 3.5V
+gpio_max: 5V
+max_current: 45mA
+quiescent_current: null
+package_size: SOP14/DIP14
+pin_count: 14
+data_type: P9813
+backup_data_line: false
+max_pixels_per_string: 1024
+release_year: 2010
+notes: old but fast, still used in strings such as TCL
+third_party_testing: null
+datasheet_url: null
+other_links: P9813 Pixel Protocol Overview | Advatek Lighting

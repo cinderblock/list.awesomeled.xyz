@@ -1,0 +1,24 @@
+id: lightkraken
+name: Lightkraken
+manufacturer: Obtainium Consulting
+max_pixels: 1020
+price: 69
+max_outputs: 1
+interfaces:
+  - Ethernet
+storage: null
+standalone: null
+pixel_types: async
+max_voltage: 24V
+max_current: 5A
+buffered: true
+output_connectors: Phoenix Screw
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: 70W PoE++ Powered via Cat5 from PoE Switch
+warranty: null
+release_year: null
+status: active
+url: https://www.tindie.com/products/tinicuro/lightkraken/      https://www.lightkraken.net/

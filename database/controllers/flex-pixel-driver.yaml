@@ -1,0 +1,24 @@
+id: flex-pixel-driver
+name: Flex Pixel Driver
+manufacturer: Elation discontinued
+max_pixels: 144
+price: 80
+max_outputs: 2
+interfaces:
+  - Ethernet
+storage: null
+standalone: false
+pixel_types: clocked
+max_voltage: 5V
+max_current: null
+buffered: true
+output_connectors: Phoenix Screw
+outputs: clocked
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: discontinued
+url: https://www.elationlighting.com/flex-pixel-driver-1

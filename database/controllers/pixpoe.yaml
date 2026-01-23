@@ -1,0 +1,25 @@
+id: pixpoe
+name: PIXPoE
+manufacturer: EMP Designs
+max_pixels: null
+price: $?
+max_outputs: 1
+interfaces:
+  - WiFi
+  - Ethernet
+storage: null
+standalone: false
+pixel_types: async
+max_voltage: null
+max_current: null
+buffered: null
+output_connectors: Phoenix Screw
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: 30W 5V PoE output
+warranty: null
+release_year: null
+status: active
+url: https://www.empdesigns.co.uk/portfolio-item/poe-pixel-controller//

@@ -1,0 +1,14 @@
+id: octows2811-adaptor
+name: OctoWS2811 Adaptor
+manufacturer: PJRC
+max_channels: 8
+pixel_types: Single
+max_voltage: 5V
+max_current: null
+parent: Teensy 3.2
+price: 10
+output_connectors: RJ-45
+outputs: Single
+diy_or_ots: OTS
+notes: null
+url: https://www.pjrc.com/store/octo28_adaptor.html

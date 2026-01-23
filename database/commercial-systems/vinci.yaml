@@ -1,0 +1,13 @@
+id: vinci
+name: Vinci
+manufacturer: https://www.lucenti.lighting/products
+pixels_per_run: 128
+dimming_resolution: null
+dedicated_psu: true
+color_type: RGBW
+online_pricing: RGB €120 per lamp
+price_range: $$$$$
+core_tech: null
+since: null
+target_market: null
+notes: RGB and flexi LED filament in one lamp

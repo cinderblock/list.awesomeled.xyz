@@ -1,0 +1,27 @@
+id: raspberry-pi-3-model-a
+name: Raspberry Pi 3 Model A+
+manufacturer: Raspberry Pi Foundation
+soc: BCM2837B0
+cpu: 4× ARM Cortex-A53
+isa: ARMv8
+clock_speed: 1.4GHz
+flash: microSD
+ram: 512MB
+linux: true
+max_outputs: 1
+min_input_voltage: 5V
+max_input_voltage: 5V
+gpio_voltage: 3.3V
+usb: OTG
+ttl_serial: true
+wifi: 2.4GHz & 5GHz
+poe: null
+ethernet: USB
+bluetooth: "4.2"
+storage: microSD
+bms: false
+imu: false
+price: 25
+release_year: 2018
+url: https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/
+notes: null

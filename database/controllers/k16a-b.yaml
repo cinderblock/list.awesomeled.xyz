@@ -1,0 +1,24 @@
+id: k16a-b
+name: K16A-B
+manufacturer: KulpLights, LLC
+max_pixels: 72000
+price: 160
+max_outputs: 48
+interfaces:
+  - Ethernet
+storage: Yes
+standalone: true
+pixel_types: async
+max_voltage: 12V
+max_current: 60A
+buffered: true
+output_connectors: Phoenix Screw/RJ45
+outputs: Single
+waterproof: null
+auxiliary_outputs: DMX x2
+wled_compatible: null
+notes: 16 channels require differential receivers. Onboard sound, FM transmitter optional, eFuse power distribution
+warranty: null
+release_year: null
+status: active
+url: https://kulplights.com/product/k16a-b/

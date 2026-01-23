@@ -1,0 +1,27 @@
+id: hd108
+name: HD108
+color_order: RGB
+led_voltage: 5V
+clocked: true
+vcc_voltage: 5V
+pwm_frequency: 27.0kHz
+brightness_bits: 15
+data_bitrate: 40MHz
+pixel_data_size: 64 Bits/Pixel
+pixel_rate_max: 625.0 k Pixel / s
+gpio_min: 3.4V
+gpio_max: 5V
+wattage: "#VALUE!"
+channel_current: 17.0mA
+quiescent_current: 0.1mA
+package_size: 5050, 2020
+pin_count: 6
+data_type: APA102
+backup_data_line: false
+max_pixels_per_string: null
+release_year: null
+notes: HD107s with 64bit color
+third_party_testing: null
+manufacturer: null
+datasheet_url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+other_links: View technical specs and advantages of the pixel protocol HD108. - Advatek

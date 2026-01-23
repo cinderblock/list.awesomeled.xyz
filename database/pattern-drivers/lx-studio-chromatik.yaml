@@ -1,0 +1,30 @@
+id: lx-studio-chromatik
+name: LX Studio / Chromatik
+developer: Mark Slee
+price: Free
+platforms:
+  - Windows
+  - macOS
+  - Linux
+live: true
+designer: true
+visualizer: 3D
+protocols:
+  artnet: Both
+  sacn: Both
+  dmx: Both
+  kinet: Both
+  ddp: null
+gpio: Both
+serial: Both
+video_input: Both
+audio_input: Input
+programmatic: Both
+language: Java
+other_inputs: Any
+other_outputs: DDP, OPC, Fadecandy
+integrations: null
+notes: Java. Next version (Chromatik) will no longer use the Processing graphics library.
+demo_available: Open source. Comercial applications require license
+status: active
+url: https://lx.studio/

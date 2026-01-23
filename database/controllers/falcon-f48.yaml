@@ -1,0 +1,25 @@
+id: falcon-f48
+name: Falcon F48
+manufacturer: PixelController, LLC
+max_pixels: 16384
+price: 200
+max_outputs: 48
+interfaces:
+  - Ethernet
+  - DMX
+storage: null
+standalone: null
+pixel_types: async
+max_voltage: null
+max_current: null
+buffered: true
+output_connectors: RJ-45
+outputs: Differential
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: active
+url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product

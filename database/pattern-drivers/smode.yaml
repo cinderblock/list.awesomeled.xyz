@@ -1,0 +1,28 @@
+id: smode
+name: Smode
+developer: null
+price: Expensive
+platforms:
+  - Windows
+live: true
+designer: true
+visualizer: null
+protocols:
+  artnet: Both
+  sacn: Both
+  dmx: Input
+  kinet: null
+  ddp: null
+gpio: null
+serial: Both
+video_input: Both
+audio_input: Both
+programmatic: Both
+language: null
+other_inputs: MIDI, OSC, UDP, SMPTE, Spout, Game Port
+other_outputs: OSC, MIDI, UDP, Spout, NDI
+integrations: null
+notes: This application is more of a game engine crossed with a volumetric mapping solution. 3D mapping
+demo_available: Free for SD card output
+status: active
+url: https://smode.fr/

@@ -1,0 +1,25 @@
+id: deskontrol-lite-16
+name: Deskontrol Lite 16
+manufacturer: Deskontrol
+max_pixels: 2720
+price: 363
+max_outputs: 16
+interfaces:
+  - sACN
+  - DDP
+storage: null
+standalone: false
+pixel_types: both
+max_voltage: null
+max_current: null
+buffered: true
+output_connectors: RJ-45
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: discontinued
+url: https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html

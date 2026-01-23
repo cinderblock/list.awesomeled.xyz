@@ -1,0 +1,26 @@
+id: spi-matrix
+name: SPI Matrix
+manufacturer: Led Strip studio
+max_pixels: 4096
+price: 299
+max_outputs: 4
+interfaces:
+  - FPP
+  - Ethernet
+  - Wifi
+storage: SD
+standalone: true
+pixel_types: both
+max_voltage: 24V
+max_current: 20A
+buffered: true
+output_connectors: Phoenix Plug
+outputs: Single & Clock & DMX
+waterproof: null
+auxiliary_outputs: DMX
+wled_compatible: null
+notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+warranty: 5 Years
+release_year: 2020
+status: active
+url: https://tlslighting.co.uk/product/spi-matrix-lite-led-strip-studio-art-net-to-spi-stand-alone-spi-controller/

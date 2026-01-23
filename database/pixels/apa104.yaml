@@ -1,0 +1,40 @@
+id: apa104
+name: APA104
+manufacturer: APA Electronics
+color_order: RGB
+led_voltage: 5V
+led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
+clocked: false
+vcc_voltage: 5V
+pwm_frequency: 1.2kHz
+brightness_bits: 8
+data_bitrate: 800kHz
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 33.3 k Pixel / s
+gpio_min: 3.5V
+gpio_max: 5V
+wattage: 100mW
+channel_current: 20mA
+channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA
+quiescent_current: 1.0mA
+package_sizes:
+  - "5050"
+  - "3535"
+  - "1212"
+package_size: 5050, 3535, 1212
+pin_count: 4
+data_type: WS2811/12
+backup_data_line: false
+max_pixels_per_string: null
+release_year: 2013
+notes: WS2812b clone like SK6812
+technical_notes:
+  - WS2812 protocol compatible clone from APA Electronics
+  - Available in very small 1212 package size
+datasheet_discrepancies:
+  - Datasheet claims max 49mA but actual is ~19-22mA per channel
+third_party_testing: null
+datasheet_url: http://neon-world.com/en/product_detail.php?cid=60&id=171
+other_links:
+  - APA104 Pixel Protocol Overview | Advatek Lighting
+status: active

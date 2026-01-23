@@ -1,0 +1,31 @@
+id: bento
+name: BenTo
+developer: Benjamin Kuperberg
+price: Free
+platforms:
+  - Windows
+  - macOS
+  - Linux
+  - Raspberry Pi
+live: true
+designer: true
+visualizer: true
+protocols:
+  artnet: Both
+  sacn: Both
+  dmx: null
+  kinet: null
+  ddp: null
+gpio: null
+serial: Both
+video_input: null
+audio_input: Output
+programmatic: Both
+language: Javascript
+other_inputs: OSC, OSCQuery
+other_outputs: OSC, OSCQuery
+integrations: null
+notes: null
+demo_available: null
+status: unknown
+url: http://github.com/benkuper/BenTo

@@ -1,0 +1,25 @@
+id: falcon-f4v3
+name: Falcon F4V3
+manufacturer: PixelController, LLC
+max_pixels: 16320
+price: 200
+max_outputs: 48
+interfaces:
+  - Ethernet
+  - Wifi
+storage: SD
+standalone: null
+pixel_types: both
+max_voltage: 36V
+max_current: 60A
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Single and Clock
+waterproof: null
+auxiliary_outputs: DMX
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: active
+url: https://pixelcontroller.com/store/products/48-f16v3.html

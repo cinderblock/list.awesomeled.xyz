@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/adapter.json",
+  "title": "Adapter",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": ["string", "null"]
+    },
+    "max_channels": {
+      "type": ["integer", "null"]
+    },
+    "pixel_types": {
+      "type": ["string", "null"]
+    },
+    "max_voltage": {
+      "type": ["string", "number", "null"]
+    },
+    "max_current": {
+      "type": ["string", "number", "null"]
+    },
+    "parent": {
+      "type": ["string", "null"],
+      "description": "Parent board/platform required"
+    },
+    "price": {
+      "type": ["string", "number", "null"]
+    },
+    "output_connectors": {
+      "type": ["string", "null"]
+    },
+    "outputs": {
+      "type": ["string", "null"]
+    },
+    "diy_or_ots": {
+      "type": ["string", "null"]
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "url": {
+      "type": ["string", "null"]
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related_microboards": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "IDs of compatible microboard entries"
+    },
+    "related_connectors": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "IDs of related connector entries"
+    }
+  }
+}

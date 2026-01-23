@@ -1,0 +1,24 @@
+id: led-player-l
+name: LED Player L
+manufacturer: Diamex
+max_pixels: 4096
+price: 99
+max_outputs: 8
+interfaces:
+  - Ethernet
+storage: Yes
+standalone: true
+pixel_types: both
+max_voltage: 5V
+max_current: null
+buffered: null
+output_connectors: Phoenix Screw
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs

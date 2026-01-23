@@ -1,0 +1,31 @@
+id: chataigne-wled-mod
+name: Chataigne Wled Mod
+developer: Zak-45
+price: Free
+platforms:
+  - Windows
+  - macOS
+  - Linux
+  - Raspberry Pi
+live: true
+designer: null
+visualizer: null
+protocols:
+  artnet: null
+  sacn: null
+  dmx: null
+  kinet: null
+  ddp: null
+gpio: null
+serial: null
+video_input: null
+audio_input: null
+programmatic: null
+language: null
+other_inputs: null
+other_outputs: null
+integrations: null
+notes: Plug on for vcontrol of WLED, other WLED plugins from same developer on Githhub
+demo_available: Free
+status: active
+url: https://github.com/zak-45

@@ -1,0 +1,32 @@
+id: mtsb-combicon
+name: MTSB CombiCon
+manufacturer: Phoenix Contact
+url: https://in.rsdelivers.com/product/phoenix-contact/1757035/phoenix-contact-classic-combicon-mstb-non-fused/1896032
+outline: Rectangular
+max_current: 10 A
+max_voltage: 300 V
+ip_rating: null
+locking: Friction
+panel_mount: false
+wire_to_wire: false
+pcb_mount: Both
+smallest_gauge: 20 AWG
+largest_gauge: 10 AWG
+pitch: 5.08 mm
+contact_type: Pins
+solder: true
+screw_terminal: null
+crimp: true
+idc: true
+board_fingers: true
+gendered: true
+min_pins: 2
+max_pins: 12
+rows: 1
+year_introduced: null
+pinout: null
+convention: null
+colors: Green
+digikey_url: https://www.digikey.com/en/products/detail/phoenix-contact/1757035/260381?s=N4IgTCBcDaIIwHYCsCAMBmJIC6BfIA
+mouser_url: null
+notes: Also in 2.54 mm pitch , and literally thousands of variations

@@ -1,0 +1,32 @@
+id: powercon
+name: PowerCon
+manufacturer: Neutrik
+url: https://www.neutrik.com/en/neutrik/products/powercon
+outline: Circular
+max_current: 16 A
+max_voltage: 250 V
+ip_rating: IP65
+locking: Latching
+panel_mount: true
+wire_to_wire: true
+pcb_mount: false
+smallest_gauge: 20 AWG
+largest_gauge: 12 AWG
+pitch: null
+contact_type: Blade
+solder: true
+screw_terminal: true
+crimp: true
+idc: false
+board_fingers: false
+gendered: true
+min_pins: 3
+max_pins: 3
+rows: N/A
+year_introduced: null
+pinout: null
+convention: null
+colors: Black, silver, white, blue, grey
+digikey_url: null
+mouser_url: null
+notes: Powercon is orginal blue , True 1 was IP rated version frequent latch failure, True1 TOP is current reccomended mains power connector Seetronic common Compatible/Clone. Grey is recommended (cheap) and not readily used elsewhere

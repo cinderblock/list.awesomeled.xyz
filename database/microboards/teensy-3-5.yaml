@@ -1,0 +1,27 @@
+id: teensy-3-5
+name: Teensy 3.5
+manufacturer: PJRC
+soc: MK64FX512VMD12
+cpu: ARM Cortex-M4
+isa: ARMv7-M
+clock_speed: 120MHz
+flash: 512kB
+ram: 256kB
+linux: false
+max_outputs: null
+min_input_voltage: null
+max_input_voltage: 5V
+gpio_voltage: 3.3V
+usb: OTG
+ttl_serial: true
+wifi: Shield
+poe: null
+ethernet: null
+bluetooth: null
+storage: microSD
+bms: false
+imu: false
+price: null
+release_year: null
+url: https://www.pjrc.com/store/teensy35.html
+notes: null

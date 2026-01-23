@@ -1,0 +1,24 @@
+id: www-orangepi-dmx-org
+name: www.orangepi-dmx.org
+manufacturer: Arjan VanVught /Open Source
+max_pixels: 5440
+price: 50
+max_outputs: 8
+interfaces:
+  - Ethernet
+storage: null
+standalone: true
+pixel_types: both
+max_voltage: null
+max_current: null
+buffered: true
+output_connectors: null
+outputs: Data, Clock, SPI
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: Unique central configuration with human readable UPD messages. No FPS limit. Except what is given for the pixel protocl
+warranty: null
+release_year: null
+status: active
+url: www.orangepi-dmx.org

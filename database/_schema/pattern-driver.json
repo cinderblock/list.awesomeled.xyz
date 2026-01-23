@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/pattern-driver.json",
+  "title": "Pattern Driver Software",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "developer": {
+      "type": ["string", "null"]
+    },
+    "price": {
+      "type": ["string", "number", "null"],
+      "description": "Price or price range. Use price_tiers for detailed pricing"
+    },
+    "price_tiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tier": { "type": "string" },
+          "price": { "type": ["string", "number"] },
+          "features": { "type": "string" },
+          "limitations": { "type": "string" }
+        }
+      },
+      "description": "Detailed pricing tiers (free, educational, commercial, pro, etc.)"
+    },
+    "license_type": {
+      "type": ["string", "null"],
+      "description": "License model: perpetual, subscription, monthly, yearly, donationware, etc."
+    },
+    "platforms": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Supported platforms (Windows, Mac, Linux, iOS, Android, Web, RaspberryPi)"
+    },
+    "live": {
+      "type": ["boolean", "null"],
+      "description": "Supports live output to actual lights"
+    },
+    "designer": {
+      "type": ["boolean", "string", "null"],
+      "description": "Can develop patterns offline/while disconnected from actual lights"
+    },
+    "visualizer": {
+      "type": ["string", "null"],
+      "description": "Can visualize patterns offline: '2D', '3D', 'both', or null"
+    },
+    "protocols": {
+      "type": "object",
+      "properties": {
+        "artnet": { "type": ["string", "boolean", "null"] },
+        "sacn": { "type": ["string", "boolean", "null"] },
+        "dmx": { "type": ["string", "boolean", "null"] },
+        "kinet": { "type": ["string", "boolean", "null"] },
+        "ddp": { "type": ["string", "boolean", "null"] },
+        "opc": { "type": ["string", "boolean", "null"], "description": "Open Pixel Control" },
+        "spi": { "type": ["string", "boolean", "null"] }
+      },
+      "description": "Supported output protocols"
+    },
+    "dmx_notes": {
+      "type": ["string", "null"],
+      "description": "Details about DMX support limitations (e.g., specific hardware required)"
+    },
+    "gpio": {
+      "type": ["string", "boolean", "null"],
+      "description": "Supports GPIO input/output"
+    },
+    "serial": {
+      "type": ["string", "boolean", "null"],
+      "description": "Supports serial port to microcontrollers (Arduino, etc.)"
+    },
+    "serial_notes": {
+      "type": ["string", "null"],
+      "description": "Details about serial support"
+    },
+    "video_input": {
+      "type": ["string", "boolean", "null"]
+    },
+    "audio_input": {
+      "type": ["string", "boolean", "null"]
+    },
+    "adc_input": {
+      "type": ["string", "boolean", "null"],
+      "description": "Analog to Digital Converter input (audio, accelerometer, light sensors)"
+    },
+    "programmatic": {
+      "type": ["string", "boolean", "null"],
+      "description": "Can write code (in any Turing complete language) to control inputs & outputs"
+    },
+    "language": {
+      "type": ["string", "null"],
+      "description": "Programming language if programmatic"
+    },
+    "other_inputs": {
+      "type": ["string", "null"]
+    },
+    "other_outputs": {
+      "type": ["string", "null"]
+    },
+    "integrations": {
+      "type": ["string", "null"],
+      "description": "What controllers this software is specifically designed to work with"
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "technical_notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Detailed technical notes"
+    },
+    "demo_available": {
+      "type": ["string", "boolean", "null"]
+    },
+    "demo_limitations": {
+      "type": ["string", "null"],
+      "description": "What limitations the demo version has"
+    },
+    "status": {
+      "type": ["string", "null"],
+      "enum": ["active", "discontinued", "end-of-life", "beta", "limited", null]
+    },
+    "url": {
+      "type": ["string", "null"]
+    },
+    "mirror_url": {
+      "type": ["string", "null"],
+      "description": "Alternative download URL if original is down"
+    }
+  }
+}

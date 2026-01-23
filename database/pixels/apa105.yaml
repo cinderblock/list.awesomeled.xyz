@@ -1,0 +1,27 @@
+id: apa105
+name: APA105
+color_order: GRB
+led_voltage: 5V
+clocked: false
+vcc_voltage: 5V
+pwm_frequency: 1.2kHz
+brightness_bits: 8
+data_bitrate: 800kHz
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 33.3 k Pixel / s
+gpio_min: 3.4V
+gpio_max: 6V
+wattage: 100.mW
+channel_current: 20.0mA
+quiescent_current: 1.0mA
+package_size: 5050, 3535, 2020
+pin_count: 4
+data_type: WS2811/12
+backup_data_line: false
+max_pixels_per_string: null
+release_year: 2015
+notes: ws2812b/sk6812 with built-in capacitors
+third_party_testing: null
+manufacturer: Newstar LED Co.
+datasheet_url: http://www.newstar-ledstrip.com/productshow819.html
+other_links: null

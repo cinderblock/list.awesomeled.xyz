@@ -1,0 +1,11 @@
+id: standard-differential-receiver
+name: Standard Differential Receiver
+manufacturer: Microcyb
+channels: 4
+interface: Differential Pairs
+notes: null
+price: 22
+max_voltage: 12V
+max_current: null
+buffered: true
+url: https://microcyb.com

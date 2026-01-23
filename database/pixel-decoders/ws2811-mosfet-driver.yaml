@@ -1,0 +1,11 @@
+id: ws2811-mosfet-driver
+name: WS2811 MosFET Driver
+manufacturer: NLed
+max_channels: 3
+pixel_types: WS2811 to High current Mosfet
+price: 18
+output_connectors: null
+outputs: null
+diy_or_ots: null
+notes: null
+url: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html

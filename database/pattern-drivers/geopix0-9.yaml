@@ -1,0 +1,28 @@
+id: geopix0-9
+name: GeoPix0.9
+developer: Enviral Design
+price: Free
+platforms:
+  - Windows (TouchDesigner)
+live: true
+designer: true
+visualizer: 3D
+protocols:
+  artnet: null
+  sacn: null
+  dmx: null
+  kinet: null
+  ddp: null
+gpio: null
+serial: null
+video_input: null
+audio_input: null
+programmatic: null
+language: null
+other_inputs: null
+other_outputs: null
+integrations: null
+notes: beta release, not supported
+demo_available: Limited
+status: unknown
+url: https://www.enviral-design.com/

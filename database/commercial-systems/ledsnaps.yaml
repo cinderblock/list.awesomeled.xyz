@@ -1,0 +1,13 @@
+id: ledsnaps
+name: Ledsnaps
+manufacturer: Ledsnaps
+pixels_per_run: 1200
+dimming_resolution: null
+dedicated_psu: null
+color_type: RGB
+online_pricing: null
+price_range: $$$$$
+core_tech: null
+since: null
+target_market: Gym/Fitness
+notes: LED strip Units aimed at gym studiomarket , closed architecture, presumed WS28XX

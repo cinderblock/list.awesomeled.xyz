@@ -1,0 +1,27 @@
+id: mbi6020
+name: MBI6020
+manufacturer: Macroblock
+pwm_frequency: 9.8kHz
+channels: 3
+channel_bits: 10
+aggregate_bits: null
+clocked: true
+data_bitrate: null
+pixel_data_size: null
+pixel_rate_max: null
+output_voltage: 12V
+supply_voltage: null
+gpio_min: null
+gpio_max: null
+max_current: null
+quiescent_current: null
+package_size: null
+pin_count: null
+data_type: null
+backup_data_line: null
+max_pixels_per_string: null
+release_year: null
+notes: null
+third_party_testing: null
+datasheet_url: null
+other_links: MBI6020 Pixel Protocol Overview | Advatek Lighting

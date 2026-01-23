@@ -1,0 +1,24 @@
+id: fp48f
+name: FP48F
+manufacturer: GO 3D France
+max_pixels: 65280
+price: 190
+max_outputs: 48
+interfaces:
+  - Ethernet ArtNet
+storage: SD
+standalone: true
+pixel_types: async
+max_voltage: 24V
+max_current: null
+buffered: true
+output_connectors: Phoenix Plug
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: Beagle Bone Based, 48 Outputs , On Board RTC, Full Linux OS runs FPP
+warranty: null
+release_year: 2022
+status: discontinued
+url: https://go3d.fr/produit/controleur-de-pixels-fp48f/

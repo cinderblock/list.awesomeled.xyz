@@ -1,0 +1,26 @@
+id: octo-mk2
+name: Octo Mk2
+manufacturer: ENTTEC
+max_pixels: 2720
+price: 330
+max_outputs: 2
+interfaces:
+  - FPP
+  - USB Ethernet
+  - Wifi
+storage: null
+standalone: true
+pixel_types: both
+max_voltage: 60V
+max_current: null
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Single or Clock
+waterproof: null
+auxiliary_outputs: Ethernet thru
+wled_compatible: null
+notes: Daisy-chainable thru ethernet up to 8 devices.
+warranty: null
+release_year: null
+status: active
+url: https://www.enttec.com/product/addressable-led-pixel-control/led-pixel-controller/

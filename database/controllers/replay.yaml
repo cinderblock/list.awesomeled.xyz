@@ -1,0 +1,24 @@
+id: replay
+name: Replay
+manufacturer: Smartshow
+max_pixels: 2720
+price: 80
+max_outputs: 4
+interfaces:
+  - Ethernet
+storage: SD
+standalone: null
+pixel_types: async
+max_voltage: 24V
+max_current: null
+buffered: true
+output_connectors: Phoenix Screw
+outputs: single
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: Replays Jinx and Xlights files on 4 seperate 680 Pixels outputs
+warranty: null
+release_year: null
+status: discontinued
+url: https://www.ebay.co.uk/itm/SmartShow-REPLAY-SDCard-Pixel-Player-2720-WS2812-SK6812-TMP2-FSEQ-PSEQ/274135104445?hash=item3fd3b9bbbd:g:sSAAAOSwAeBd7nOC

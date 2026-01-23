@@ -1,0 +1,10 @@
+id: wled
+name: WLED
+developer: Aircookie
+hardware: ESP8266/32
+features: Android/Apple App available, built-in patterns, sACN receiver
+url: https://github.com/Aircoookie/WLED
+youtube_url: https://www.youtube.com/watch?v=2wM067jRki8
+instructional_resources:
+  - https://install.wled.me/
+  - https://www.welcometothefuture.one/blog/wled-get-started

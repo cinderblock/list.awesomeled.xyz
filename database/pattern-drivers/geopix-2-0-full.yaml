@@ -1,0 +1,28 @@
+id: geopix-2-0-full
+name: GeoPix 2.0(full)
+developer: Enviral Design
+price: Free
+platforms:
+  - Windows (TouchDesigner)
+live: true
+designer: true
+visualizer: 3D
+protocols:
+  artnet: Both
+  sacn: Both
+  dmx: Output
+  kinet: null
+  ddp: null
+gpio: null
+serial: null
+video_input: Input
+audio_input: Both
+programmatic: null
+language: null
+other_inputs: MIDI, OSC, MQTT
+other_outputs: MIDI
+integrations: null
+notes: null
+demo_available: Open Source
+status: unknown
+url: https://www.geopix.io/

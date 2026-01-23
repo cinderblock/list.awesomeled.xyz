@@ -1,0 +1,11 @@
+id: tc4427
+name: TC4427
+manufacturer: Microchip
+channels: 2
+interface: null
+notes: https://electricfiredesign.com/2021/03/12/logic-level-shifters-for-driving-led-strips/
+price: null
+max_voltage: null
+max_current: 1.5A
+buffered: null
+url: https://www.microchip.com/en-us/product/TC4427

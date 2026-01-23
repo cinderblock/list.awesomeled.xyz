@@ -1,0 +1,27 @@
+id: ns108
+name: NS108
+color_order: BGR
+led_voltage: 5V
+clocked: true
+vcc_voltage: 5V
+pwm_frequency: 27.0kHz
+brightness_bits: 16+5
+data_bitrate: 30MHz
+pixel_data_size: 64 Bits/Pixel
+pixel_rate_max: 468.8 k Pixel / s
+gpio_min: 3.0V
+gpio_max: 6V
+wattage: 102.mW
+channel_current: 20.0mA
+quiescent_current: 1.0mA
+package_size: 5050, 3535, 2020
+pin_count: 6
+data_type: APA102
+backup_data_line: false
+max_pixels_per_string: null
+release_year: 2018
+notes: 16bit/color version of NS107S
+third_party_testing: null
+manufacturer: Newstar LED Co.
+datasheet_url: http://newstar-ledstrip.com/productshow848.html
+other_links: null

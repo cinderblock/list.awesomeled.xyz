@@ -1,0 +1,14 @@
+id: 6x-smd-led-shield
+name: 6x SMD LED Shield
+manufacturer: Evil Genius Labs
+max_channels: 6
+pixel_types: Single or Clocked
+max_voltage: 5V
+max_current: null
+parent: Wemos Dx Mini (ESP32/ESP8266)
+price: 16
+output_connectors: Solder
+outputs: null
+diy_or_ots: OTS
+notes: null
+url: https://www.tindie.com/products/19174/

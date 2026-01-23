@@ -1,0 +1,27 @@
+id: dmx512
+name: DMX512
+manufacturer: null
+pwm_frequency: 3.0kHz
+channels: 3
+channel_bits: 8
+aggregate_bits: null
+clocked: false
+data_bitrate: 650kHz
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 27.1 k Pixel / s
+output_voltage: 24V
+supply_voltage: 5V
+gpio_min: null
+gpio_max: null
+max_current: null
+quiescent_current: null
+package_size: SOP8
+pin_count: 8
+data_type: DMX512P
+backup_data_line: false
+max_pixels_per_string: null
+release_year: null
+notes: null
+third_party_testing: null
+datasheet_url: null
+other_links: DMX512 Pixel Protocol Overview | Advatek Lighting

@@ -1,0 +1,27 @@
+id: pocketbeagle
+name: PocketBeagle
+manufacturer: Beagleboard.org
+soc: am3358
+cpu: Cortex-A8, 2x PRUSS
+isa: ARMv7
+clock_speed: 1.0GHz
+flash: microSD
+ram: 512MB
+linux: true
+max_outputs: 40
+min_input_voltage: 5V
+max_input_voltage: 5V
+gpio_voltage: 3.3V
+usb: OTG
+ttl_serial: true
+wifi: USB
+poe: null
+ethernet: USB
+bluetooth: null
+storage: microSD
+bms: 1S
+imu: false
+price: 25
+release_year: 2017
+url: http://beagleboard.org/pocket
+notes: null

@@ -1,0 +1,27 @@
+id: apa107
+name: APA107
+color_order: BGR
+led_voltage: 5V
+clocked: true
+vcc_voltage: 5V
+pwm_frequency: 9.0kHz
+brightness_bits: 8+5
+data_bitrate: 30MHz
+pixel_data_size: 32 Bits/Pixel
+pixel_rate_max: 0.94 M Pixel / s
+gpio_min: 3.5V
+gpio_max: 5V
+wattage: 110.mW
+channel_current: 22.0mA
+quiescent_current: 1.0mA
+package_size: "5050"
+pin_count: 6
+data_type: APA102
+backup_data_line: false
+max_pixels_per_string: null
+release_year: 2017
+notes: Economic type of APA102, cheaper with lower PWM; produced by Newstar
+third_party_testing: null
+manufacturer: Newstar LED Co.
+datasheet_url: http://newstar-ledstrip.com/productshow816.html
+other_links: null

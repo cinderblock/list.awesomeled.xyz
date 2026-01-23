@@ -1,0 +1,29 @@
+id: wled
+name: WLED
+developer: Aircoookie, community
+price: FOSS
+platforms:
+  - ESP8266
+  - ESP32
+live: true
+designer: false
+visualizer: Limited 1D
+protocols:
+  artnet: Input
+  sacn: Input
+  dmx: Output
+  kinet: null
+  ddp: Input
+gpio: Possible
+serial: Input
+video_input: null
+audio_input: null
+programmatic: null
+language: C++
+other_inputs: UDP Sync
+other_outputs: ws281x protocol, APA102, etc.
+integrations: Home Assistant, WLED App.
+notes: "Great standalone pixel controller software for ESP8266 and ESP32 based boards. See also: WLED-SR, sound reactive fork"
+demo_available: Open source
+status: active
+url: "GitHub - Aircoookie/WLED: Control WS2812B and many more types of digital RGB LEDs with an ESP8266 or ESP32 over WiFi!"

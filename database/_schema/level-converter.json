@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/level-converter.json",
+  "title": "Level Converter",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": ["string", "null"]
+    },
+    "channels": {
+      "type": ["integer", "null"]
+    },
+    "interface": {
+      "type": ["string", "null"]
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "price": {
+      "type": ["string", "number", "null"]
+    },
+    "max_voltage": {
+      "type": ["string", "number", "null"]
+    },
+    "max_current": {
+      "type": ["string", "number", "null"]
+    },
+    "buffered": {
+      "type": ["boolean", "null"]
+    },
+    "url": {
+      "type": ["string", "null"]
+    }
+  }
+}

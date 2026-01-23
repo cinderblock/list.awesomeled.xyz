@@ -1,0 +1,42 @@
+id: gs8208
+name: GS8208
+manufacturer: Genesis Systec
+color_order: RGB
+led_voltage: 12V
+led_voltage_notes: Datasheet 10.8-13.2V
+clocked: false
+vcc_voltage: 12V
+pwm_frequency: 8.0kHz
+pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively multiply 2kHz PWM to 8kHz
+brightness_bits: 8
+brightness_control_notes: 36 bits interpolated 12 bits gamma correction per colour
+data_bitrate: 800kHz
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 33.3 k Pixel / s
+gpio_min: 3.5V
+gpio_max: 5V
+wattage: 120mW
+channel_current: 10mA
+channel_current_notes: Measured current across 3 LEDs at 12V. Datasheet claims 15mA
+quiescent_current: 2.5mA
+package_sizes:
+  - "5050"
+package_size: "5050"
+pin_count: 6
+data_type: WS2811/12
+backup_data_line: true
+max_pixels_per_string: null
+release_year: 2018
+notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version booted with onboard patterns - now eliminated
+technical_notes:
+  - Built-in 8-bit to 12-bit gamma correction for smoother fades
+  - Uses MPWM (multiplexed PWM) for effective 8kHz refresh rate
+  - Early versions had boot pattern bug - fixed in current production
+  - Internal 36-bit interpolation with 12-bit gamma per color channel
+datasheet_discrepancies:
+  - Datasheet claims 15mA but measured value is ~10mA
+third_party_testing: null
+datasheet_url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+other_links:
+  - GS8208 Pixel Protocol Overview | Advatek Lighting
+status: active

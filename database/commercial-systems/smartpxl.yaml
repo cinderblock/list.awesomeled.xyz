@@ -1,0 +1,13 @@
+id: smartpxl
+name: SmartPXL
+manufacturer: SmartPXL
+pixels_per_run: 1360
+dimming_resolution: 16bit or 8 bit
+dedicated_psu: true
+color_type: RGB/RGBW/CTA
+online_pricing: null
+price_range: $$$$
+core_tech: null
+since: null
+target_market: null
+notes: High dimming resolution pixel dots made in Australia

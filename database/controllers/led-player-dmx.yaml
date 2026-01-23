@@ -1,0 +1,24 @@
+id: led-player-dmx
+name: LED Player DMX
+manufacturer: Diamex
+max_pixels: 1024
+price: 99
+max_outputs: 2
+interfaces:
+  - Ethernet
+storage: Yes
+standalone: null
+pixel_types: async
+max_voltage: 5V
+max_current: null
+buffered: null
+output_connectors: Phoenix Screw
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen

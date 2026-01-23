@@ -1,0 +1,28 @@
+id: arkaos
+name: ArKaos
+developer: ArKaos S.A.
+price: 299
+platforms:
+  - Windows
+live: true
+designer: true
+visualizer: null
+protocols:
+  artnet: null
+  sacn: null
+  dmx: null
+  kinet: null
+  ddp: null
+gpio: null
+serial: null
+video_input: null
+audio_input: null
+programmatic: null
+language: null
+other_inputs: null
+other_outputs: Klingnet
+integrations: null
+notes: null
+demo_available: null
+status: active
+url: https://www.arkaos.com/

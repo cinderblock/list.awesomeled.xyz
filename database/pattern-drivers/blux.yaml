@@ -1,0 +1,31 @@
+id: blux
+name: Blux
+developer: Benjamin Kuperberg
+price: Free
+platforms:
+  - Windows
+  - macOS
+  - Linux
+  - Raspberry Pi
+live: true
+designer: true
+visualizer: true
+protocols:
+  artnet: Both
+  sacn: Both
+  dmx: Both
+  kinet: null
+  ddp: null
+gpio: null
+serial: Both
+video_input: null
+audio_input: Output
+programmatic: Both
+language: Javascript
+other_inputs: OSC, OSCQuery, MIDI
+other_outputs: OSC, OSCQuery, MIDI
+integrations: null
+notes: null
+demo_available: null
+status: unknown
+url: http://benjamin.kuperberg.fr/blux

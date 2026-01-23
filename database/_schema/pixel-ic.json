@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/pixel-ic.json",
+  "title": "Pixel IC",
+  "description": "Standalone pixel driver IC (not integrated with LEDs)",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": ["string", "null"]
+    },
+    "pwm_frequency": {
+      "type": ["string", "number", "null"],
+      "description": "PWM frequency of outputs"
+    },
+    "pwm_frequency_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about PWM behavior"
+    },
+    "channels": {
+      "type": ["integer", "null"],
+      "description": "Number of output channels"
+    },
+    "channel_bits": {
+      "type": ["integer", "string", "null"],
+      "description": "Bits per channel for color depth"
+    },
+    "aggregate_bits": {
+      "type": ["integer", "string", "null"],
+      "description": "Total bits for all channels"
+    },
+    "brightness_bits": {
+      "type": ["integer", "string", "null"],
+      "description": "Extra bits for global/per-channel brightness control"
+    },
+    "brightness_control_method": {
+      "type": ["string", "null"],
+      "description": "How brightness control works: pwm, current, global"
+    },
+    "clocked": {
+      "type": ["boolean", "null"],
+      "description": "Requires separate clock line"
+    },
+    "data_bitrate": {
+      "type": ["string", "null"],
+      "description": "Data communication speed"
+    },
+    "data_bitrate_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about data rate"
+    },
+    "pixel_data_size": {
+      "type": ["string", "null"],
+      "description": "Bits per pixel transmitted"
+    },
+    "pixel_rate_max": {
+      "type": ["string", "null"],
+      "description": "Maximum pixel update rate"
+    },
+    "output_voltage": {
+      "type": ["string", "number", "null"],
+      "description": "Output voltage to LEDs (Vds max for constant current)"
+    },
+    "output_voltage_notes": {
+      "type": ["string", "null"],
+      "description": "Additional voltage output details"
+    },
+    "supply_voltage": {
+      "type": ["string", "number", "null"],
+      "description": "IC supply voltage (VCC)"
+    },
+    "supply_voltage_notes": {
+      "type": ["string", "null"],
+      "description": "Additional supply voltage details"
+    },
+    "gpio_min": {
+      "type": ["string", "number", "null"],
+      "description": "Minimum high-level input voltage"
+    },
+    "gpio_max": {
+      "type": ["string", "number", "null"],
+      "description": "Maximum input voltage"
+    },
+    "gpio_notes": {
+      "type": ["string", "null"],
+      "description": "Additional GPIO threshold details"
+    },
+    "max_current": {
+      "type": ["string", "number", "null"],
+      "description": "Maximum current per channel"
+    },
+    "max_current_notes": {
+      "type": ["string", "null"],
+      "description": "Additional current details"
+    },
+    "current_programmable": {
+      "type": ["boolean", "null"],
+      "description": "Whether output current is programmable"
+    },
+    "current_range": {
+      "type": ["string", "null"],
+      "description": "Programmable current range if applicable"
+    },
+    "quiescent_current": {
+      "type": ["string", "number", "null"],
+      "description": "Current draw when outputs off"
+    },
+    "package_sizes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Available package options"
+    },
+    "package_size": {
+      "type": ["string", "null"],
+      "description": "Package size(s) as string"
+    },
+    "pin_count": {
+      "type": ["integer", "string", "null"]
+    },
+    "data_type": {
+      "type": ["string", "null"],
+      "description": "Protocol family (WS2811, APA102, DMX512, etc.)"
+    },
+    "backup_data_line": {
+      "type": ["boolean", "null"],
+      "description": "Has failover data line"
+    },
+    "max_pixels_per_string": {
+      "type": ["integer", "string", "null"],
+      "description": "Hardware limit on string length"
+    },
+    "max_pixels_notes": {
+      "type": ["string", "null"],
+      "description": "Details about string length limitations"
+    },
+    "release_year": {
+      "type": ["integer", "null"]
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "technical_notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Detailed technical notes"
+    },
+    "datasheet_discrepancies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Known differences between datasheet and measured values"
+    },
+    "third_party_testing": {
+      "type": ["string", "null"]
+    },
+    "datasheet_url": {
+      "type": ["string", "null"]
+    },
+    "other_links": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Additional reference links"
+    },
+    "status": {
+      "type": ["string", "null"],
+      "enum": ["active", "discontinued", "end-of-life", "limited", null]
+    }
+  }
+}

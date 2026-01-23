@@ -1,0 +1,14 @@
+id: pi-hat
+name: Pi Hat
+manufacturer: Microcyb
+max_channels: 3200
+pixel_types: 2
+max_voltage: null
+max_current: null
+parent: Yes
+price: 22
+output_connectors: Both
+outputs: null
+diy_or_ots: Yes
+notes: Phoenix Screw
+url: Multiple

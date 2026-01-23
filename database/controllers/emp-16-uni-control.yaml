@@ -1,0 +1,25 @@
+id: emp-16-uni-control
+name: EMP 16 Uni control
+manufacturer: EMP Designs
+max_pixels: 2728
+price: $?
+max_outputs: 4
+interfaces:
+  - WiFi
+  - Ethernet
+storage: null
+standalone: null
+pixel_types: both
+max_voltage: 24V
+max_current: null
+buffered: true
+output_connectors: Push Terminal
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: 19mm Slim Din Rail mount, Internal Ethernet Switch for daisychain
+warranty: null
+release_year: null
+status: active
+url: https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/

@@ -1,0 +1,13 @@
+id: festoon-2-rgb
+name: Festoon 2 RGB
+manufacturer: Chauvet
+pixels_per_run: 60
+dimming_resolution: null
+dedicated_psu: true
+color_type: RGB   W/WW
+online_pricing: null
+price_range: $$$
+core_tech: null
+since: null
+target_market: null
+notes: Seperate controller, 20 globes per string max 3 strings per control IP 54

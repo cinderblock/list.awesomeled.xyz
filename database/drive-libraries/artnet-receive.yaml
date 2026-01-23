@@ -1,0 +1,8 @@
+id: artnet-receive
+name: Artnet Receive
+developer: natcl
+hardware: Arduino/Teensie/ESP8266
+features: null
+url: https://github.com/natcl/Artnet
+youtube_url: null
+instructional_resources: []

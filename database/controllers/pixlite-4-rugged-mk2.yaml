@@ -1,0 +1,24 @@
+id: pixlite-4-rugged-mk2
+name: PixLite 4 Rugged Mk2
+manufacturer: Advatek
+max_pixels: 680
+price: 440
+max_outputs: 8
+interfaces:
+  - USB
+storage: null
+standalone: false
+pixel_types: both
+max_voltage: 12V
+max_current: 30A
+buffered: true
+output_connectors: 4 pin Advatek Male
+outputs: Single or Clock
+waterproof: IP65
+auxiliary_outputs: null
+wled_compatible: null
+notes: 5V or 12V available. Multiple power plug versions available.
+warranty: null
+release_year: null
+status: active
+url: https://www.advateklights.com/pixlite-4-mk2-rugged

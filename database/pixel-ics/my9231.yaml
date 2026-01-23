@@ -1,0 +1,27 @@
+id: my9231
+name: MY9231
+manufacturer: MY-Semi
+pwm_frequency: 2.0kHz
+channels: 3
+channel_bits: 8/12/14/16
+aggregate_bits: null
+clocked: true
+data_bitrate: 20MHz
+pixel_data_size: null
+pixel_rate_max: null
+output_voltage: 17V
+supply_voltage: 5V
+gpio_min: null
+gpio_max: 5V
+max_current: 350mA
+quiescent_current: null
+package_size: SOP16/SSOP16/QFN16
+pin_count: 16
+data_type: MY9231
+backup_data_line: false
+max_pixels_per_string: 2010
+release_year: 2010
+notes: null
+third_party_testing: null
+datasheet_url: http://www.my-semi.com/file/MY9231_BF_0.91.pdf
+other_links: MY9231 Pixel Protocol Overview | Advatek Lighting

@@ -1,0 +1,27 @@
+id: ns108e
+name: NS108E
+color_order: RGB
+led_voltage: 5V
+clocked: true
+vcc_voltage: 5V
+pwm_frequency: 4.0kHz
+brightness_bits: 16+5
+data_bitrate: 30MHz
+pixel_data_size: 64 Bits/Pixel
+pixel_rate_max: 468.8 k Pixel / s
+gpio_min: 3.0V
+gpio_max: 6V
+wattage: 91.8mW
+channel_current: 18.0mA
+quiescent_current: 3.6mA
+package_size: 5050, 3535, 2020
+pin_count: 6
+data_type: SK9826
+backup_data_line: false
+max_pixels_per_string: null
+release_year: 2019
+notes: 16bit/color version of APA102 copy SK9822, aka SK9826
+third_party_testing: null
+manufacturer: Newstar LED Co.
+datasheet_url: http://newstar-ledstrip.com/product/20191018160652775.pdf
+other_links: null

@@ -1,0 +1,27 @@
+id: sk6812-5050
+name: SK6812(5050)
+manufacturer: Opsco Optoelectronics
+pwm_frequency: 1.2kHz
+channels: 3
+channel_bits: 8
+aggregate_bits: null
+clocked: false
+data_bitrate: 800kHz
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 33.3 k Pixel / s
+output_voltage: null
+supply_voltage: 5V
+gpio_min: null
+gpio_max: null
+max_current: null
+quiescent_current: 1.0mA
+package_size: null
+pin_count: null
+data_type: null
+backup_data_line: null
+max_pixels_per_string: null
+release_year: null
+notes: null
+third_party_testing: null
+datasheet_url: https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
+other_links: SK6812 Pixel Protocol Overview | Advatek Lighting

@@ -1,0 +1,14 @@
+id: esp-pixnode
+name: ESP Pixnode
+manufacturer: null
+max_channels: 6
+pixel_types: Single
+max_voltage: 5V
+max_current: null
+parent: NodeMCU (ESP8266)
+price: 13
+output_connectors: null
+outputs: null
+diy_or_ots: null
+notes: null
+url: https://jboards.ecwid.com/ESPixNode-p127558674

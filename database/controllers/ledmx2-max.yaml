@@ -1,0 +1,25 @@
+id: ledmx2-max
+name: LeDMX2 MAX
+manufacturer: DMXking
+max_pixels: 2040
+price: 199
+max_outputs: 2
+interfaces:
+  - Ethernet
+  - DMX
+storage: SD
+standalone: true
+pixel_types: both
+max_voltage: 24V
+max_current: 16A
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Data and Clock
+waterproof: null
+auxiliary_outputs: DMX
+wled_compatible: null
+notes: Show record and playback trigger capability
+warranty: null
+release_year: 2022
+status: active
+url: https://dmxking.com/led-pixel-control/ledmx2-max

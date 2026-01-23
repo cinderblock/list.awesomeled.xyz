@@ -1,0 +1,16 @@
+id: light-shaping-diffusers
+name: Light Shaping Diffusers
+url: https://www.luminitco.com/
+color_rendition: 5
+light_transmission: 5
+flexible: F
+purpose_made: true
+properties: Transmissive
+fire_retardant: true
+tinted: C
+sample_thickness: null
+diffusivity: 2-5
+sizes_available: null
+material_type: PET
+price_range: $$$$$
+notes: Very efficient holographic repro gratings, only work with small point sources

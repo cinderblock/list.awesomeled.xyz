@@ -1,0 +1,23 @@
+id: qolorpix
+name: Qolorpix
+manufacturer: City Theatrical
+max_pixels: 1920
+price: 1500
+max_outputs: 8
+interfaces:
+  - WiFi
+storage: null
+standalone: true
+max_voltage: 5V
+max_current: 120A
+buffered: true
+output_connectors: XLR5
+outputs: Single
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: DMX controlled replay unit
+warranty: null
+release_year: null
+status: unknown
+url: http://www.citytheatrical.com/Products/qolorpix-tape-controller-eight-output#

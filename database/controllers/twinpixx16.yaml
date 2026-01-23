@@ -1,0 +1,24 @@
+id: twinpixx16
+name: TwinPixx16
+manufacturer: DMX4All
+max_pixels: 2720
+price: 399
+max_outputs: 2
+interfaces:
+  - Switch Trigger
+storage: null
+standalone: false
+pixel_types: both
+max_voltage: 5V
+max_current: null
+buffered: true
+output_connectors: Phoenix Plug
+outputs: single and clock
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html

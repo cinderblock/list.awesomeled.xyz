@@ -1,0 +1,39 @@
+id: hd107s
+name: HD107S
+manufacturer: Rose Lighting
+color_order: RGB
+led_voltage: 5V
+clocked: true
+vcc_voltage: 5V
+pwm_frequency: 27.0kHz
+brightness_bits: 8+5
+brightness_control_method: global
+brightness_control_notes: Global 5-bit brightness control
+data_bitrate: 40MHz
+pixel_data_size: 32 Bits/Pixel
+pixel_rate_max: 1.25 M Pixel / s
+gpio_min: 3.4V
+gpio_max: 5V
+wattage: null
+channel_current: 17mA
+quiescent_current: 0.1mA
+package_sizes:
+  - "5050"
+  - "2020"
+package_size: 5050, 2020
+pin_count: 6
+data_type: APA102
+backup_data_line: false
+max_pixels_per_string: null
+release_year: 2019
+notes: APA107 Competitor/clone
+technical_notes:
+  - High-speed 40MHz data rate - faster than APA102's 30MHz
+  - 27kHz PWM frequency for flicker-free video
+  - Very low 0.1mA quiescent current
+  - APA102 protocol compatible
+third_party_testing: null
+datasheet_url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+other_links:
+  - HD107S Pixel Protocol Overview | Advatek Lighting
+status: active

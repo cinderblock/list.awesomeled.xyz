@@ -1,0 +1,24 @@
+id: uli-led-control
+name: Uli LED control
+manufacturer: Ulrich Radig
+max_pixels: 1360
+price: 99
+max_outputs: 8
+interfaces:
+  - Ethernet
+storage: null
+standalone: null
+pixel_types: both
+max_voltage: 12V
+max_current: null
+buffered: null
+output_connectors: null
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://shop.ulrichradig.de/Module/Light-Control-DMX/4096-Kanal-LED-Strip-Controller.html

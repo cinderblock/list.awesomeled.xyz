@@ -1,0 +1,28 @@
+id: vixen-lights
+name: Vixen Lights
+developer: null
+price: Free
+platforms:
+  - Free
+live: false
+designer: true
+visualizer: null
+protocols:
+  artnet: Output
+  sacn: Output
+  dmx: Output
+  kinet: null
+  ddp: null
+gpio: null
+serial: null
+video_input: null
+audio_input: null
+programmatic: null
+language: null
+other_inputs: null
+other_outputs: Renard
+integrations: null
+notes: like xlights, initially developed for holiday light sequences
+demo_available: null
+status: unknown
+url: https://www.vixenlights.com/downloads/

@@ -1,0 +1,27 @@
+id: raspberry-pi-4-model-b
+name: Raspberry Pi 4 Model B
+manufacturer: Raspberry Pi Foundation
+soc: BCM2711
+cpu: 4× ARM Cortex-A72
+isa: ARMv8-A
+clock_speed: 1.5GHz
+flash: microSD
+ram: 1GB or 2GB or 4GB
+linux: true
+max_outputs: null
+min_input_voltage: 5V
+max_input_voltage: 5V
+gpio_voltage: 3.3V
+usb: OTG x2, 3.0 x2
+ttl_serial: true
+wifi: 2.4GHz & 5GHz
+poe: null
+ethernet: Gigabit
+bluetooth: "5.0"
+storage: microSD
+bms: false
+imu: false
+price: 35
+release_year: 2019
+url: https://www.raspberrypi.org/products/raspberry-pi-4-model-b/
+notes: null

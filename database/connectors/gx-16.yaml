@@ -1,0 +1,32 @@
+id: gx-16
+name: GX-16
+manufacturer: Generic
+url: https://www.renhotecpro.com/gx16-connector-data-sheet/
+outline: Circular
+max_current: 7 A
+max_voltage: 100 V
+ip_rating: IP30
+locking: Screw Lock
+panel_mount: true
+wire_to_wire: true
+pcb_mount: false
+smallest_gauge: 24 AWG
+largest_gauge: 20 AWG
+pitch: null
+contact_type: Pins
+solder: true
+screw_terminal: null
+crimp: false
+idc: false
+board_fingers: false
+gendered: true
+min_pins: 2
+max_pins: 10
+rows: N/A
+year_introduced: null
+pinout: null
+convention: null
+colors: Silver Metal Black Plastic
+digikey_url: null
+mouser_url: null
+notes: AKA Aviation Connector, CB Mic Connector, most common in 4 pin variant,Chrome metal Shell and IP65 Version in Black Plastic *Legacy Connector NOT For New Designs*

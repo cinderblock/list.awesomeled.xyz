@@ -1,0 +1,27 @@
+id: ucs512b
+name: UCS512B
+manufacturer: Normand Electronics
+pwm_frequency: 3.0kHz
+channels: 3
+channel_bits: 8
+aggregate_bits: null
+clocked: false
+data_bitrate: null
+pixel_data_size: null
+pixel_rate_max: null
+output_voltage: null
+supply_voltage: null
+gpio_min: null
+gpio_max: null
+max_current: null
+quiescent_current: null
+package_size: SOP8
+pin_count: 8
+data_type: null
+backup_data_line: null
+max_pixels_per_string: null
+release_year: null
+notes: null
+third_party_testing: null
+datasheet_url: null
+other_links: UCS512B Pixel Protocol Overview | Advatek Lighting

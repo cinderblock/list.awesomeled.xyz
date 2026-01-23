@@ -1,0 +1,27 @@
+id: sk6813-hv
+name: SK6813 HV
+color_order: null
+led_voltage: 12V
+clocked: false
+vcc_voltage: null
+pwm_frequency: 1.2kHz
+brightness_bits: 8
+data_bitrate: 800kHz
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: null
+gpio_min: null
+gpio_max: null
+wattage: .mW
+channel_current: null
+quiescent_current: null
+package_size: "5050"
+pin_count: null
+data_type: null
+backup_data_line: false
+max_pixels_per_string: null
+release_year: null
+notes: null
+third_party_testing: null
+manufacturer: null
+datasheet_url: null
+other_links: SK6813 Pixel Protocol Overview | Advatek Lighting

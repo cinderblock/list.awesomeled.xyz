@@ -1,0 +1,27 @@
+id: teensy-2-0
+name: Teensy++ 2.0
+manufacturer: PJRC
+soc: AT90USB1286
+cpu: AVR
+isa: AVR5
+clock_speed: 16MHz
+flash: 127kB
+ram: 8kB
+linux: false
+max_outputs: null
+min_input_voltage: null
+max_input_voltage: 5V
+gpio_voltage: 5.0V
+usb: OTG
+ttl_serial: true
+wifi: null
+poe: null
+ethernet: null
+bluetooth: null
+storage: Shield
+bms: false
+imu: false
+price: null
+release_year: null
+url: https://www.pjrc.com/store/teensypp.html
+notes: null

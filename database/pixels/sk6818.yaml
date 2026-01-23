@@ -1,0 +1,27 @@
+id: sk6818
+name: SK6818
+color_order: RGBW
+led_voltage: 5V
+clocked: false
+vcc_voltage: 5V
+pwm_frequency: 1.2kHz
+brightness_bits: 8
+data_bitrate: 800kHz
+pixel_data_size: null
+pixel_rate_max: null
+gpio_min: null
+gpio_max: null
+wattage: .mW
+channel_current: null
+quiescent_current: null
+package_size: "5050"
+pin_count: 4
+data_type: null
+backup_data_line: false
+max_pixels_per_string: null
+release_year: null
+notes: null
+third_party_testing: null
+manufacturer: null
+datasheet_url: https://asset.conrad.com/media10/add/160267/c1/-/en/001575814DS01/datasheet-1575814-thomsen-strip-5m-300-rgbw-ip68-led-pasik-entrieda-a-a-e-zastrcky-zasuvka-5-v-5-m-rgbw.pdf
+other_links: SK6818 Pixel Protocol Overview | Advatek Lighting

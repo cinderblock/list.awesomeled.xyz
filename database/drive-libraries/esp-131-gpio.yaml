@@ -1,0 +1,8 @@
+id: esp-131-gpio
+name: ESP-131 GPIO
+developer: Gary Mueller
+hardware: ESP8266
+features: ESP E1.31 sACN to 8 channel relay decoder/driver
+url: https://github.com/garymueller/ESP-131GPIO
+youtube_url: null
+instructional_resources: []

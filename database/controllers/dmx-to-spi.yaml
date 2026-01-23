@@ -1,0 +1,24 @@
+id: dmx-to-spi
+name: DMX to SPI
+manufacturer: Electron Design
+max_pixels: 170
+price: 18
+max_outputs: 1
+interfaces:
+  - Bluetooth
+storage: null
+standalone: false
+pixel_types: async
+max_voltage: 24V
+max_current: null
+buffered: true
+output_connectors: Phoenix Screw
+outputs: null
+waterproof: null
+auxiliary_outputs: Groupable in 1,2,4,5,10,100 as pixel
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://www.ebay.com/itm/321934091091

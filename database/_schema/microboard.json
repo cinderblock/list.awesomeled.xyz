@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/microboard.json",
+  "title": "DIY MicroBoard",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": ["string", "null"]
+    },
+    "soc": {
+      "type": ["string", "null"]
+    },
+    "cpu": {
+      "type": ["string", "null"]
+    },
+    "isa": {
+      "type": ["string", "null"]
+    },
+    "clock_speed": {
+      "type": ["string", "null"]
+    },
+    "flash": {
+      "type": ["string", "null"]
+    },
+    "ram": {
+      "type": ["string", "null"]
+    },
+    "linux": {
+      "type": ["boolean", "null"]
+    },
+    "max_outputs": {
+      "type": ["integer", "null"]
+    },
+    "min_input_voltage": {
+      "type": ["string", "number", "null"]
+    },
+    "max_input_voltage": {
+      "type": ["string", "number", "null"]
+    },
+    "gpio_voltage": {
+      "type": ["string", "null"]
+    },
+    "usb": {
+      "type": ["string", "null"]
+    },
+    "ttl_serial": {
+      "type": ["boolean", "string", "null"]
+    },
+    "wifi": {
+      "type": ["string", "boolean", "null"]
+    },
+    "poe": {
+      "type": ["boolean", "string", "null"]
+    },
+    "ethernet": {
+      "type": ["string", "boolean", "null"]
+    },
+    "bluetooth": {
+      "type": ["string", "boolean", "null"]
+    },
+    "storage": {
+      "type": ["string", "null"]
+    },
+    "bms": {
+      "type": ["string", "null"]
+    },
+    "imu": {
+      "type": ["boolean", "string", "null"]
+    },
+    "price": {
+      "type": ["string", "number", "null"]
+    },
+    "release_year": {
+      "type": ["integer", "null"]
+    },
+    "url": {
+      "type": ["string", "null"]
+    },
+    "notes": {
+      "type": ["string", "null"]
+    }
+  }
+}

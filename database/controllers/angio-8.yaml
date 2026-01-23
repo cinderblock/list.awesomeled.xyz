@@ -1,0 +1,25 @@
+id: angio-8
+name: Angio 8
+manufacturer: chroma.tech
+max_pixels: 8160
+price: 169
+max_outputs: 8
+interfaces:
+  - Ethernet  Artnet
+  - sACN
+storage: null
+standalone: false
+pixel_types: both
+max_voltage: 24V
+max_current: null
+buffered: true
+output_connectors: Phoenix Screw pluggable
+outputs: Single and Clock
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: Bulk fleet manager. ArtNet, sACN / E1.31, Open Pixel Control
+warranty: null
+release_year: 2022
+status: active
+url: https://shop.chroma.tech/products/angio-8

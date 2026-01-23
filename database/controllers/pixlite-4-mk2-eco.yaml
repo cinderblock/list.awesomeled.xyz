@@ -1,0 +1,24 @@
+id: pixlite-4-mk2-eco
+name: PixLite 4 Mk2 ECO
+manufacturer: Advatek
+max_pixels: 2720
+price: 115
+max_outputs: 8
+interfaces:
+  - Ethernet
+storage: null
+standalone: false
+pixel_types: both
+max_voltage: 24V
+max_current: 30A
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Single or Clock
+waterproof: null
+auxiliary_outputs: DMX
+wled_compatible: null
+notes: Limited stock left - no website listing - contact directly to order remaining stock
+warranty: null
+release_year: null
+status: discontinued
+url: sales@advateklights.com - ask for the ECO version. once the stock on shelves are gone no more will be manufactured

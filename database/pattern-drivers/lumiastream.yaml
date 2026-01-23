@@ -1,0 +1,28 @@
+id: lumiastream
+name: Lumiastream
+developer: Lumiastream
+price: Free- $30/month
+platforms:
+  - Windows macOS
+live: false
+designer: false
+visualizer: null
+protocols:
+  artnet: Output
+  sacn: null
+  dmx: null
+  kinet: null
+  ddp: null
+gpio: null
+serial: null
+video_input: null
+audio_input: Output
+programmatic: null
+language: null
+other_inputs: viewer controlled stream responsive control
+other_outputs: Tuya, Govee,Hue, Nano, etc home automation and ArtNet
+integrations: Home Assistant
+notes: Viewer control of IoT objects for streaming, aome integrated automation
+demo_available: Free  / premiumn Monthly
+status: active
+url: https://lumiastream.com/

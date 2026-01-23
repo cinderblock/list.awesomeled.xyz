@@ -1,0 +1,14 @@
+id: espartstick-wled
+name: EspArtStick WLED
+manufacturer: Microcyb
+max_channels: 6
+pixel_types: null
+max_voltage: 12V
+max_current: 15A
+parent: Wemos D1 Mini (ESP32/ESP8266)
+price: 24
+output_connectors: Phoenix Screw
+outputs: Single
+diy_or_ots: DIY
+notes: null
+url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller/p/170368862/category=0

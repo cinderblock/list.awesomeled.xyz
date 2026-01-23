@@ -1,0 +1,24 @@
+id: esp32-wled-controller-8chan
+name: ESP32 WLED Controller 8chan
+manufacturer: Giovanni's Domotica Store
+max_pixels: 4800
+price: 45
+max_outputs: 8
+interfaces:
+  - Ethernet
+storage: null
+standalone: null
+pixel_types: both
+max_voltage: 12V
+max_current: null
+buffered: null
+output_connectors: null
+outputs: single and clock
+waterproof: null
+auxiliary_outputs: GPIO /Relay
+wled_compatible: true
+notes: null
+warranty: null
+release_year: null
+status: active
+url: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/?pt=ac_prod_search

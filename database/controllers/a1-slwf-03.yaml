@@ -1,0 +1,24 @@
+id: a1-slwf-03
+name: A1-SLWF-03
+manufacturer: SMARTLIGHT.ME
+max_pixels: 2000
+price: 16
+max_outputs: 1
+interfaces:
+  - Bluetooth
+storage: null
+standalone: true
+pixel_types: both
+max_voltage: 24V
+max_current: null
+buffered: null
+output_connectors: Phoenix Screw
+outputs: Single
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: true
+notes: null
+warranty: null
+release_year: null
+status: active
+url: https://www.tindie.com/products/smartlightme/a1-slwf-03-wled-esp32-controller-home-assistant

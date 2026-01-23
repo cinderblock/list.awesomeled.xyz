@@ -1,0 +1,24 @@
+id: pixelbox
+name: Pixelbox
+manufacturer: Lumikit
+max_pixels: 2730
+price: 199
+max_outputs: null
+interfaces:
+  - Ethernet
+  - DMX
+storage: null
+standalone: null
+max_voltage: null
+max_current: null
+buffered: null
+output_connectors: null
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://www.lumikit.com.br/international

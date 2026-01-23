@@ -1,0 +1,14 @@
+id: 16x-led-shield
+name: 16x LED Shield
+manufacturer: Evil Genius Labs
+max_channels: 16
+pixel_types: Single or Clocked
+max_voltage: 5V
+max_current: null
+parent: NodeMCU ESP32
+price: 9
+output_connectors: Solder
+outputs: null
+diy_or_ots: DIY
+notes: null
+url: https://www.tindie.com/products/15247/

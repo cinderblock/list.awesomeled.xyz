@@ -1,0 +1,26 @@
+id: falcon-f16v4
+name: Falcon F16V4
+manufacturer: PixelController, LLC
+max_pixels: 16384
+price: 275
+max_outputs: 16
+interfaces:
+  - FPP
+  - Ethernet
+  - Wifi
+storage: SD (micro)
+standalone: null
+pixel_types: both
+max_voltage: null
+max_current: 60A
+buffered: null
+output_connectors: null
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://pixelcontroller.com/store/products/70-f16v4.html

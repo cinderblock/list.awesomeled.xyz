@@ -1,0 +1,40 @@
+id: spi-led-controller
+name: SPI LED Controller
+manufacturer: LED Strip Studio
+max_pixels: 1024
+price: 150
+price_tiers:
+  - pixels: 1024
+    price: 299
+    notes: 1 year software license included
+  - pixels: 2048
+    price: 449
+    notes: 1 year software license included
+  - pixels: 4096
+    price: 599
+    notes: 1 year software license included
+max_outputs: 1
+interfaces:
+  - Ethernet
+storage: SD
+standalone: true
+pixel_types: both
+max_voltage: 24V
+max_current: 10A
+max_current_per_output: 10A
+buffered: true
+output_connectors: RJ-45 DMX, Phoenix Plug SPI
+outputs: Data, Clock, SPI
+waterproof: null
+auxiliary_outputs: DMX
+wled_compatible: null
+notes: See tech specs PDF for full details
+technical_notes:
+  - Price varies by pixel count license
+  - 10A per output channel
+  - Includes LED Strip Studio software license
+datasheet_url: https://www.ledstripstudio.com/download/tech-specs/SPI_LED_Controller_tech_specs.pdf
+warranty: null
+release_year: null
+status: active
+url: https://ledstripstudio.com/spi-led-controller/

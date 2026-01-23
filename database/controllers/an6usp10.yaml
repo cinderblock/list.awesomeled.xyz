@@ -1,0 +1,24 @@
+id: an6usp10
+name: AN6USP10
+manufacturer: Electron Design
+max_pixels: 1020
+price: 97
+max_outputs: 6
+interfaces:
+  - Ethernet
+storage: null
+standalone: false
+pixel_types: both
+max_voltage: 24V
+max_current: null
+buffered: true
+output_connectors: Phoenix Screw
+outputs: null
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://www.ebay.co.uk/itm/ArtNet-to-pixel-sACN-ArtNet-SPI-WS2811-12-WS2801-SM16703-GS8208-WS2815/221181172896

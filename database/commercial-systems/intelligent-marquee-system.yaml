@@ -1,0 +1,13 @@
+id: intelligent-marquee-system
+name: Intelligent Marquee System
+manufacturer: TMB
+pixels_per_run: 128
+dimming_resolution: null
+dedicated_psu: true
+color_type: RGBW
+online_pricing: null
+price_range: $$$$$$
+core_tech: Proprietary
+since: null
+target_market: Festoon
+notes: 2 Wire addressable Festoon, Professional level pricing structure

@@ -1,0 +1,11 @@
+id: pixel-2-things-relay
+name: Pixel 2 Things Relay
+manufacturer: David Peace
+max_channels: 9
+pixel_types: Converts pixel data into relay drivers capable of switching 120VAC
+price: 99
+output_connectors: Screw Terminal
+outputs: Relay
+diy_or_ots: OTS
+notes: WSXX to 9 Relay ouput card
+url: https://www.pixel2things.com/

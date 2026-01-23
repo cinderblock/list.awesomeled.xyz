@@ -1,0 +1,24 @@
+id: luminaxa
+name: Luminaxa
+manufacturer: Luminaxa
+max_pixels: 600
+price: 50
+max_outputs: 1
+interfaces:
+  - Ethernet
+storage: null
+standalone: true
+pixel_types: async
+max_voltage: 5V
+max_current: 1A
+buffered: true
+output_connectors: JST
+outputs: Single
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: Internal 3500mAh battery Android app
+warranty: null
+release_year: 2020
+status: active
+url: https://luminxa.com/

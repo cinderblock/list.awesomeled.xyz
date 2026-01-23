@@ -1,0 +1,53 @@
+id: madrix-5
+name: MADRIX 5
+developer: Inoage
+price: 330+
+price_tiers:
+  - tier: Entry
+    price: 330
+    features: Basic LED control
+    limitations: Limited universe count
+  - tier: Start
+    price: 600
+    features: Increased universe count
+    limitations: null
+  - tier: Professional
+    price: 1650
+    features: Professional features
+    limitations: null
+  - tier: Maximum
+    price: 3300
+    features: All features, maximum universes
+    limitations: null
+license_type: perpetual
+platforms:
+  - Windows
+live: true
+designer: true
+visualizer: 3D
+protocols:
+  artnet: true
+  sacn: true
+  dmx: true
+  kinet: true
+  ddp: null
+gpio: false
+serial: null
+video_input: true
+audio_input: true
+adc_input: false
+programmatic: null
+language: null
+other_inputs: MIDI, HTTP, MA-net, CITP, SMPTE, Spout, GamePort
+other_outputs: DVI, Robe, Insta, Hue
+integrations: null
+notes: GPIO available with Madrix Orion external box
+technical_notes:
+  - Industry standard for professional LED installations
+  - GPIO requires separate Madrix Orion hardware
+  - Extensive fixture library
+  - MADRIX Nebula hardware can be used for standalone playback
+demo_available: true
+demo_limitations: Demo mode - no data output
+status: active
+url: https://www.madrix.com/products/software

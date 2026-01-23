@@ -1,0 +1,8 @@
+id: branchcontroller2
+name: branchController2
+developer: jspolsky
+hardware: Teensy
+features: Teensy 3.2 branch controller for up to 8 separate LED strips, based on instructions received over TCP-IP.
+url: https://github.com/jspolsky/branchController2
+youtube_url: null
+instructional_resources: []

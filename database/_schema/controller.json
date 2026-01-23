@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/controller.json",
+  "title": "LED Controller",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "URL-safe identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Product name"
+    },
+    "manufacturer": {
+      "type": ["string", "null"]
+    },
+    "max_pixels": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Maximum number of RGB pixels. If RGBW supported, this is RGB count"
+    },
+    "max_pixels_rgbw": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Maximum number of RGBW pixels (if different from RGB)"
+    },
+    "max_pixels_16bit": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Maximum pixels at 16-bit color depth"
+    },
+    "price": {
+      "type": ["string", "number", "null"],
+      "description": "Price of baseline version in USD"
+    },
+    "price_tiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "pixels": { "type": ["integer", "string"] },
+          "price": { "type": ["string", "number"] },
+          "notes": { "type": "string" }
+        }
+      },
+      "description": "Price tiers based on pixel count or features"
+    },
+    "max_outputs": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "WS281x 1-wire channels, if the controller has a hard or suggested limit"
+    },
+    "interfaces": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "How this product receives patterns (Ethernet, WiFi, USB, DMX, etc.)"
+    },
+    "storage": {
+      "type": ["string", "null"],
+      "description": "Onboard storage type (SD, Flash, No, etc.)"
+    },
+    "standalone": {
+      "type": ["boolean", "null"],
+      "description": "Can generate lighting outputs without external inputs"
+    },
+    "standalone_notes": {
+      "type": ["string", "null"],
+      "description": "Details about standalone capabilities (e.g., software name, features)"
+    },
+    "pixel_types": {
+      "type": ["string", "null"],
+      "description": "Async (WS2812-style single wire), Clocked (APA102-style double wire), or Both"
+    },
+    "pixel_types_notes": {
+      "type": ["string", "null"],
+      "description": "Additional details about pixel type support (e.g., clock output limitations)"
+    },
+    "max_voltage": {
+      "type": ["string", "number", "null"],
+      "description": "Maximum voltage if string shares power with controller"
+    },
+    "max_current": {
+      "type": ["string", "number", "null"],
+      "description": "Maximum allowable continuous current through all outputs"
+    },
+    "max_current_per_output": {
+      "type": ["string", "number", "null"],
+      "description": "Maximum current per individual output channel"
+    },
+    "buffered": {
+      "type": ["boolean", "null"],
+      "description": "Outputs from buffer driver (true) or direct from CPU (false)"
+    },
+    "buffered_notes": {
+      "type": ["string", "null"],
+      "description": "Details about output voltage levels (e.g., 5V outputs from microcontroller)"
+    },
+    "output_connectors": {
+      "type": ["string", "null"]
+    },
+    "outputs": {
+      "type": ["string", "null"],
+      "description": "Single or Clock (configurable) vs Single and Clock (dedicated clock outputs)"
+    },
+    "waterproof": {
+      "type": ["string", "null"],
+      "description": "IP rating if applicable"
+    },
+    "auxiliary_outputs": {
+      "type": ["string", "null"],
+      "description": "Additional outputs: DMX, GPIO, servo, DC outputs, etc."
+    },
+    "wled_compatible": {
+      "type": ["boolean", "null"],
+      "description": "WLED firmware based or capable of running WLED"
+    },
+    "requires_host": {
+      "type": ["string", "null"],
+      "description": "If controller requires additional hardware (e.g., Raspberry Pi)"
+    },
+    "differential_outputs": {
+      "type": ["integer", "null"],
+      "description": "Number of outputs requiring differential receivers to drive LEDs"
+    },
+    "power_features": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Power-related features (eFuse, current sensing, pixel counting, etc.)"
+    },
+    "poe_support": {
+      "type": ["string", "boolean", "null"],
+      "description": "Power over Ethernet support (e.g., PoE, PoE+, PoE++)"
+    },
+    "notes": {
+      "type": ["string", "null"],
+      "description": "High level notes (not for specific column details)"
+    },
+    "technical_notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Detailed technical notes from community and datasheets"
+    },
+    "warranty": {
+      "type": ["string", "null"]
+    },
+    "release_year": {
+      "type": ["integer", "null"],
+      "description": "Date/year of first market availability"
+    },
+    "status": {
+      "type": ["string", "null"],
+      "enum": ["active", "discontinued", "end-of-life", "limited", null]
+    },
+    "url": {
+      "type": ["string", "null"]
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related_connectors": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "IDs of related connector entries"
+    },
+    "related_pixel_ics": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "IDs of compatible pixel IC entries"
+    },
+    "related_microboards": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "IDs of related microboard entries"
+    }
+  }
+}

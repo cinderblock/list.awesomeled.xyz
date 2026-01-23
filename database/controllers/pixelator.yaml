@@ -1,0 +1,25 @@
+id: pixelator
+name: Pixelator
+manufacturer: ENTTEC
+max_pixels: 8192
+price: 1891
+max_outputs: null
+interfaces:
+  - WiFi
+  - Ethernet
+storage: Yes
+standalone: true
+pixel_types: async
+max_voltage: null
+max_current: null
+buffered: true
+output_connectors: RJ-45
+outputs: Proprietary
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/

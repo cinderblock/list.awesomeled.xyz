@@ -1,0 +1,24 @@
+id: standard-differential-receiver
+name: Standard Differential  Receiver
+manufacturer: Microcyb
+max_pixels: 6400
+price: 22
+max_outputs: 4
+interfaces:
+  - DMX
+storage: null
+standalone: true
+pixel_types: both
+max_voltage: 12V
+max_current: null
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Multiple
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://microcyb.com

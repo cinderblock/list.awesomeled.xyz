@@ -1,0 +1,30 @@
+id: arthet-led-mapper
+name: Arthet LED Mapper
+developer: cyberboy666
+price: Free
+platforms:
+  - ubuntu
+  - windows
+  - mac and arm64
+live: false
+designer: true
+visualizer: null
+protocols:
+  artnet: Output
+  sacn: null
+  dmx: null
+  kinet: null
+  ddp: null
+gpio: null
+serial: null
+video_input: null
+audio_input: null
+programmatic: null
+language: null
+other_inputs: null
+other_outputs: null
+integrations: null
+notes: input video from connected devices (webcams, capture cards etc) or over NDI,  output artnet across multiple universes
+demo_available: null
+status: unknown
+url: null

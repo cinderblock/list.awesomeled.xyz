@@ -1,0 +1,27 @@
+id: ucs8903
+name: UCS8903
+manufacturer: Normand Electronics
+pwm_frequency: 1.0kHz
+channels: 3
+channel_bits: 16
+aggregate_bits: null
+clocked: false
+data_bitrate: 800kHz
+pixel_data_size: 48 Bits/Pixel
+pixel_rate_max: 16.7 k Pixel / s
+output_voltage: 26V
+supply_voltage: 5V
+gpio_min: 3.0V
+gpio_max: 5V
+max_current: 17mA
+quiescent_current: 1.0mA
+package_size: SOP8
+pin_count: 8
+data_type: UCS8903
+backup_data_line: false
+max_pixels_per_string: null
+release_year: 2013
+notes: Early 16bit/color version of UCS1903 (WS2811 equiv)
+third_party_testing: null
+datasheet_url: https://www.dhgate.com/product/ucs8903-ic-3-channel-led-constant-current/421634760.html
+other_links: UCS8903 Pixel Protocol Overview | Advatek Lighting

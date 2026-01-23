@@ -1,0 +1,27 @@
+id: esp32-s3-eth
+name: ESP32-S3 ETH
+manufacturer: Waveshare
+soc: ESP32 S3
+cpu: null
+isa: Xtensa
+clock_speed: null
+flash: microSD
+ram: null
+linux: null
+max_outputs: null
+min_input_voltage: null
+max_input_voltage: null
+gpio_voltage: null
+usb: null
+ttl_serial: null
+wifi: 2.4GHz
+poe: Y
+ethernet: 100BASE-TX
+bluetooth: null
+storage: microSD
+bms: null
+imu: null
+price: 17
+release_year: 2024
+url: https://www.waveshare.com/product/arduino/boards-kits/esp32/esp32-s3-eth.htm?sku=28771
+notes: PoE sield available

@@ -1,0 +1,8 @@
+id: nightdriverstrip
+name: NightDriverStrip
+developer: PlummersSoftwareLLC
+hardware: ESP32
+features: 8 channels of WS2812B Python / C++ Pattern Creator
+url: https://github.com/PlummersSoftwareLLC/NightDriverStrip
+youtube_url: https://www.youtube.com/watch?v=UZxY_BLSsGg
+instructional_resources: []

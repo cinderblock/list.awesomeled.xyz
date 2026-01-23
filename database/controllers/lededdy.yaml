@@ -1,0 +1,24 @@
+id: lededdy
+name: LEDEddy
+manufacturer: Diamex
+max_pixels: null
+price: null
+max_outputs: 1
+interfaces:
+  - WiFi
+  - Ethernet
+storage: SD
+standalone: true
+max_voltage: 5V
+max_current: null
+buffered: false
+output_connectors: null
+outputs: Single
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: unknown
+url: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab

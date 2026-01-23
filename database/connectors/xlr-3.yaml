@@ -1,0 +1,32 @@
+id: xlr-3
+name: XLR 3
+manufacturer: Neutrik /Generic
+url: https://www.neutrik.com/en/neutrik/products/xlr-connectors/xlr-cable-connectors?c=audio
+outline: Circular
+max_current: 16 A
+max_voltage: 50 V
+ip_rating: IP40
+locking: Latching
+panel_mount: true
+wire_to_wire: true
+pcb_mount: Both
+smallest_gauge: 22 AWG
+largest_gauge: 14 AWG
+pitch: null
+contact_type: Pins
+solder: true
+screw_terminal: null
+crimp: true
+idc: true
+board_fingers: false
+gendered: true
+min_pins: 2
+max_pins: 7
+rows: N/A
+year_introduced: null
+pinout: null
+convention: Female output jack, male input jack
+colors: Black, silver, optional colored collars
+digikey_url: null
+mouser_url: null
+notes: AKA Cannon, original with side grub screw, Neutrik developed chuck cable grip. Metal bodied world standard audio and microphone connector, 5 pin  for DMX512

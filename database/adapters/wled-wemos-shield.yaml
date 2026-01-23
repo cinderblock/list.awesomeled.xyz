@@ -1,0 +1,14 @@
+id: wled-wemos-shield
+name: WLED wemos shield
+manufacturer: SerKo
+max_channels: 2
+pixel_types: Single+Clocked
+max_voltage: 12V
+max_current: 10A
+parent: Wemos D1 Mini (ESP32/ESP8266)
+price: null
+output_connectors: Screw Terminals
+outputs: Both
+diy_or_ots: DIY
+notes: Easy to assemble with TH parts
+url: https://github.com/srg74/WLED-wemos-shield

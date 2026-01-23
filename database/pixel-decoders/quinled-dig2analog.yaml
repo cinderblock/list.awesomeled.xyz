@@ -1,0 +1,11 @@
+id: quinled-dig2analog
+name: QuinLED Dig2Analog
+manufacturer: Quindor / Intermittent Technology
+max_channels: 4
+pixel_types: ws2814 to RGBW PWM Mosfet output
+price: 7.49
+output_connectors: Screw Terminals
+outputs: PWM
+diy_or_ots: OTS
+notes: 4x 2kHz PWM output, 3A fuse, Daisy chain ability
+url: https://quinled.info/quinled-dig2analog/

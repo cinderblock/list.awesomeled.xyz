@@ -1,0 +1,24 @@
+id: protopixel-1-channel-ethernet
+name: ProtoPixel 1 channel Ethernet
+manufacturer: ProtoPixel
+max_pixels: 600
+price: 191
+max_outputs: 1
+interfaces:
+  - Ethernet ArtNet
+storage: Yes
+standalone: true
+pixel_types: async
+max_voltage: 12V
+max_current: null
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Single
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: null
+notes: null
+warranty: null
+release_year: null
+status: active
+url: https://www.protopixel.io/pricing

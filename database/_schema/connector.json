@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/connector.json",
+  "title": "Connector",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "manufacturer": {
+      "type": ["string", "null"],
+      "description": "Originating manufacturer; does not imply off-brand incompatibility"
+    },
+    "outline": {
+      "type": ["string", "null"],
+      "description": "Shape: Rectangular, Circular, Triangular"
+    },
+    "max_current": {
+      "type": ["string", "number", "null"],
+      "description": "Per-contact current rating"
+    },
+    "max_current_notes": {
+      "type": ["string", "null"],
+      "description": "Additional current rating details"
+    },
+    "max_voltage": {
+      "type": ["string", "number", "null"]
+    },
+    "ip_rating": {
+      "type": ["string", "null"],
+      "description": "IP rating when mated (null if not rated)"
+    },
+    "ip_rating_notes": {
+      "type": ["string", "null"],
+      "description": "Details about IP rating conditions"
+    },
+    "locking": {
+      "type": ["string", "null"],
+      "description": "Mating mechanism: Friction, Latching, Screw Lock, etc."
+    },
+    "panel_mount": {
+      "type": ["boolean", "null"],
+      "description": "Has versions designed for panel mounting"
+    },
+    "wire_to_wire": {
+      "type": ["boolean", "null"],
+      "description": "Has versions designed for inline wire-to-wire use"
+    },
+    "pcb_mount": {
+      "type": ["string", "boolean", "null"],
+      "description": "Has versions designed for PCB mounting (through-hole or SMD)"
+    },
+    "smallest_gauge": {
+      "type": ["string", "null"],
+      "description": "Smallest supported wire gauge (AWG)"
+    },
+    "largest_gauge": {
+      "type": ["string", "null"],
+      "description": "Largest supported wire gauge (AWG)"
+    },
+    "pitch": {
+      "type": ["string", "null"],
+      "description": "Pin-to-pin spacing"
+    },
+    "contact_type": {
+      "type": ["string", "null"],
+      "description": "Pin, blade, socket, etc."
+    },
+    "solder": {
+      "type": ["boolean", "null"],
+      "description": "Accepts solder termination"
+    },
+    "screw_terminal": {
+      "type": ["boolean", "null"],
+      "description": "Has screw terminal versions"
+    },
+    "crimp": {
+      "type": ["boolean", "null"],
+      "description": "Requires crimp termination"
+    },
+    "crimp_tool": {
+      "type": ["string", "null"],
+      "description": "Required crimp tool information"
+    },
+    "crimp_tool_cost": {
+      "type": ["string", "null"],
+      "description": "Approximate cost of crimp tool"
+    },
+    "idc": {
+      "type": ["boolean", "null"],
+      "description": "Has insulation displacement connection (IDC) versions"
+    },
+    "board_fingers": {
+      "type": ["boolean", "null"],
+      "description": "Connects via board fingers/edge connector"
+    },
+    "gendered": {
+      "type": ["boolean", "null"],
+      "description": "True if connector has distinct male/female versions"
+    },
+    "min_pins": {
+      "type": ["integer", "null"],
+      "description": "Minimum available pin count"
+    },
+    "max_pins": {
+      "type": ["integer", "null"],
+      "description": "Maximum available pin count"
+    },
+    "rows": {
+      "type": ["integer", "string", "null"],
+      "description": "Number of rows of contacts"
+    },
+    "year_introduced": {
+      "type": ["integer", "null"],
+      "description": "Year first introduced (0 for antiquated/unknown)"
+    },
+    "pinout": {
+      "type": ["string", "null"],
+      "description": "Common pinout convention if standardized"
+    },
+    "convention": {
+      "type": ["string", "null"],
+      "description": "Industry or de-facto naming convention"
+    },
+    "colors": {
+      "type": ["string", "null"],
+      "description": "Available housing colors"
+    },
+    "aliases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other common names for this connector"
+    },
+    "common_applications": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Common uses in LED installations"
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "technical_notes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Detailed technical notes"
+    },
+    "digikey_url": {
+      "type": ["string", "null"]
+    },
+    "mouser_url": {
+      "type": ["string", "null"]
+    },
+    "url": {
+      "type": ["string", "null"]
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    }
+  }
+}

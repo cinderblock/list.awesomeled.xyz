@@ -1,0 +1,26 @@
+id: ledmx4-max
+name: LeDMX4 MAX
+manufacturer: DMXking
+max_pixels: 4080
+price: 299
+max_outputs: 4
+interfaces:
+  - FPP
+  - Ethernet
+  - Wifi
+storage: SD
+standalone: true
+pixel_types: both
+max_voltage: 24V
+max_current: 32A
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Data and Clock
+waterproof: null
+auxiliary_outputs: DMX
+wled_compatible: null
+notes: Show record and playback trigger capability
+warranty: null
+release_year: 2022
+status: active
+url: https://dmxking.com/led-pixel-control/ledmx4-max

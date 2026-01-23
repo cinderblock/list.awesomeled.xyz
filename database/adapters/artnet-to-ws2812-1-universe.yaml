@@ -1,0 +1,14 @@
+id: artnet-to-ws2812-1-universe
+name: Artnet to WS2812 1 Universe
+manufacturer: Krzysztof Korzeniowski
+max_channels: 1
+pixel_types: single
+max_voltage: 12V
+max_current: null
+parent: Arduino Uno
+price: null
+output_connectors: null
+outputs: null
+diy_or_ots: DIY
+notes: Artnet to 170 Pixels , single universe
+url: https://github.com/ArtGateOne/ArtGateOne-LED

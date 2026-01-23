@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://awesomeledlist.com/schema/diffusive-material.json",
+  "title": "Diffusive Material",
+  "type": "object",
+  "required": ["id", "name"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": ["string", "null"]
+    },
+    "color_rendition": {
+      "type": ["integer", "string", "null"],
+      "description": "Rating 1-5"
+    },
+    "light_transmission": {
+      "type": ["integer", "string", "null"],
+      "description": "Rating 1-5"
+    },
+    "flexible": {
+      "type": ["boolean", "string", "null"],
+      "description": "F for flexible, R for rigid"
+    },
+    "purpose_made": {
+      "type": ["boolean", "null"]
+    },
+    "properties": {
+      "type": ["string", "null"]
+    },
+    "fire_retardant": {
+      "type": ["boolean", "null"]
+    },
+    "tinted": {
+      "type": ["string", "null"],
+      "description": "T for tinted, C for clear, T&C for both"
+    },
+    "sample_thickness": {
+      "type": ["string", "null"]
+    },
+    "diffusivity": {
+      "type": ["integer", "string", "null"],
+      "description": "Rating 1-5"
+    },
+    "sizes_available": {
+      "type": ["string", "null"]
+    },
+    "material_type": {
+      "type": ["string", "null"]
+    },
+    "price_range": {
+      "type": ["string", "null"],
+      "description": "$ to $$$$$"
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    }
+  }
+}

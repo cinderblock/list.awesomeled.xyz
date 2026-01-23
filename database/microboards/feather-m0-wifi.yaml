@@ -1,0 +1,27 @@
+id: feather-m0-wifi
+name: Feather M0 WiFi
+manufacturer: Adafruit
+soc: ATSAMD21G18
+cpu: ARM Cortex-M0
+isa: ARMv6-M
+clock_speed: 48MHz
+flash: 256kB
+ram: 32kB
+linux: false
+max_outputs: null
+min_input_voltage: null
+max_input_voltage: null
+gpio_voltage: 3.3V
+usb: OTG
+ttl_serial: true
+wifi: 2.4GHz
+poe: null
+ethernet: null
+bluetooth: null
+storage: null
+bms: 1S
+imu: Wing
+price: null
+release_year: null
+url: https://www.adafruit.com/product/3010
+notes: null

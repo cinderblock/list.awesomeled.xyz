@@ -1,0 +1,31 @@
+id: chataigne
+name: Chataigne
+developer: Benjamin Kuperberg
+price: Free
+platforms:
+  - Windows
+  - macOS
+  - Linux
+  - Raspberry Pi
+live: true
+designer: null
+visualizer: null
+protocols:
+  artnet: Both
+  sacn: Both
+  dmx: Both
+  kinet: null
+  ddp: null
+gpio: null
+serial: Both
+video_input: null
+audio_input: Both
+programmatic: Both
+language: Javascript
+other_inputs: OSC, OSCQuery, Midi, Serial, TCP, UDP, HTTP, MQTT, GPIO, AbletonLive, Stream Deck...
+other_outputs: OSC, OSCQuery, Midi, Serial, TCP, UDP, HTTP, MQTT, GPIO, AbletonLive, Stream Deck...
+integrations: null
+notes: Software `conductor` for live and timecode, interface with a lot of protocols
+demo_available: Free
+status: active
+url: http://benjamin.kuperberg.fr/chataigne/en

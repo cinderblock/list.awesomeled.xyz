@@ -1,0 +1,14 @@
+id: quinled-dig-quad
+name: QuinLED-Dig-Quad
+manufacturer: Quindor / Intermittent Technology
+max_channels: 4
+pixel_types: Single or Clocked
+max_voltage: 24V
+max_current: 30A
+parent: ESP8266 or ESP32
+price: 38
+output_connectors: Screw Terminals
+outputs: Both
+diy_or_ots: Both
+notes: DIY or Pre-Assembled
+url: https://quinled.info/quinled-dig-uno/

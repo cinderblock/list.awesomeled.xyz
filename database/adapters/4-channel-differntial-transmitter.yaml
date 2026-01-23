@@ -1,0 +1,14 @@
+id: 4-channel-differntial-transmitter
+name: 4 Channel Differntial Transmitter
+manufacturer: Wizard of Wire
+max_channels: 4
+pixel_types: single
+max_voltage: 12V
+max_current: null
+parent: Pixel Data
+price: 15
+output_connectors: Phoenix Screw
+outputs: null
+diy_or_ots: OTS
+notes: 4 Channel differntial transmitter output to RJ45 fir connection with Cat5
+url: https://www.wizardofwire.com/product/data-to-differential-board/

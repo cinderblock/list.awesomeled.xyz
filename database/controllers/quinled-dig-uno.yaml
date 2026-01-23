@@ -1,0 +1,24 @@
+id: quinled-dig-uno
+name: QuinLED-Dig-Uno
+manufacturer: Quindor / Intermittent Technology
+max_pixels: 2048
+price: 25
+max_outputs: 2
+interfaces:
+  - DMX
+storage: null
+standalone: true
+pixel_types: both
+max_voltage: 24V
+max_current: 15A
+buffered: true
+output_connectors: 5mm screw terminal
+outputs: Single and Clock
+waterproof: null
+auxiliary_outputs: DIY or Pre-Assembled
+wled_compatible: true
+notes: ESP8266/ESP32 based, open to any software, often run with WLED
+warranty: null
+release_year: 2019
+status: active
+url: https://quinled.info/quinled-dig-uno/

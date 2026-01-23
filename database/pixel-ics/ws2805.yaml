@@ -1,0 +1,27 @@
+id: ws2805
+name: WS2805
+manufacturer: WorldSemi
+pwm_frequency: null
+channels: 5
+channel_bits: 8
+aggregate_bits: null
+clocked: false
+data_bitrate: null
+pixel_data_size: null
+pixel_rate_max: null
+output_voltage: null
+supply_voltage: null
+gpio_min: null
+gpio_max: null
+max_current: null
+quiescent_current: null
+package_size: null
+pin_count: null
+data_type: null
+backup_data_line: null
+max_pixels_per_string: null
+release_year: null
+notes: RGB+CCT with data backup line
+third_party_testing: null
+datasheet_url: null
+other_links: null

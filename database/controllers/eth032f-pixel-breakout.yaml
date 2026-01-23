@@ -1,0 +1,24 @@
+id: eth032f-pixel-breakout
+name: ETH032F Pixel Breakout
+manufacturer: GO 3D France
+max_pixels: 2040
+price: 55
+max_outputs: 4
+interfaces:
+  - Ethernet
+storage: null
+standalone: false
+pixel_types: async
+max_voltage: 24V
+max_current: 20A
+buffered: true
+output_connectors: Phoenix Screw
+outputs: Single and Clock
+waterproof: null
+auxiliary_outputs: null
+wled_compatible: true
+notes: Ethernet ESP32 board breakout with fuses runs Wled
+warranty: null
+release_year: 2022
+status: discontinued
+url: https://go3d.fr/produit/carte-de-controle-pour-led-pixels-eth032f/

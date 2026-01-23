@@ -1,0 +1,27 @@
+id: ws2815-rgbw
+name: WS2815 RGBW
+color_order: RGBW
+led_voltage: 12V
+clocked: false
+vcc_voltage: null
+pwm_frequency: null
+brightness_bits: null
+data_bitrate: null
+pixel_data_size: null
+pixel_rate_max: null
+gpio_min: null
+gpio_max: null
+wattage: .mW
+channel_current: null
+quiescent_current: null
+package_size: null
+pin_count: null
+data_type: null
+backup_data_line: null
+max_pixels_per_string: null
+release_year: null
+notes: null
+third_party_testing: null
+manufacturer: World Semi
+datasheet_url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
+other_links: null

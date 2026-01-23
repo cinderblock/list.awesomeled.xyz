@@ -1,0 +1,32 @@
+id: mate-n-lok
+name: Mate-N-Lok
+manufacturer: TE /AMP
+url: https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story
+outline: Rectangular
+max_current: 19 A
+max_voltage: 600 V
+ip_rating: null
+locking: Latching
+panel_mount: false
+wire_to_wire: true
+pcb_mount: PTH
+smallest_gauge: 30 AWG
+largest_gauge: 10 AWG
+pitch: 5.1 mm
+contact_type: Pins
+solder: false
+screw_terminal: false
+crimp: true
+idc: false
+board_fingers: false
+gendered: true
+min_pins: 2
+max_pins: 10
+rows: 2
+year_introduced: null
+pinout: null
+convention: null
+colors: Range of Colours
+digikey_url: null
+mouser_url: null
+notes: Popular automotive connector
