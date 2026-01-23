@@ -16,15 +16,18 @@ export function Header() {
           >
             <RainbowText className="text-xl">Awesome LED List</RainbowText>
           </Link>
-          <nav className="ml-auto flex items-center gap-4">
-            <Link to="/about" className="text-sm text-muted hover:text-foreground">
+          <nav className="ml-auto flex items-center gap-2">
+            <Link
+              to="/about"
+              className="btn btn-ghost btn-icon text-sm text-muted hover:text-foreground"
+            >
               About
             </Link>
             <a
               href="https://github.com/cinderblock/awesomeledlist"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted hover:text-foreground"
+              className="btn btn-ghost btn-icon text-muted hover:text-foreground"
               title="View on GitHub"
             >
               <Github size={20} />
