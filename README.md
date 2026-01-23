@@ -1,77 +1,70 @@
-# Welcome to React Router!
+# Awesome LED List
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A comprehensive database of addressable LEDs, controllers, and related products for makers and enthusiasts.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Categories
+
+- **Pattern Drivers** - High level software that sends data to controllers
+- **Controllers** - Devices that generate the specific timings and packet formats needed to drive many addressable LEDs; usually can hold and repeat at least one frame
+- **Pixels** - Addressable LEDs, the innovation that enabled this world of wonder
+- **Pixel ICs** - The main chip usually embedded into pixels as a standalone component (does not include LEDs)
+- **Pixel Decoders** - Devices not meant for driving pixels directly but capable of sharing the same standard communication standards that addressable pixels use
+- **Level Converters** - Memoryless devices that translate pixel data from another format
+- **Adapters** - Hardware that aids compatibility between commodity controller hardware and light strings/panels; likely cannot hold a frame on its own
+- **DIY MicroBoards** - Microprocessor boards that can usually be used directly with certain pixel types; pairing with an adapter is common
+- **Connectors** - Connectors commonly used in LED products
+- **Drive Libraries** - Software to turn off-the-shelf or commodity hardware into controllers
+- **Diffusive Materials** - Materials the community has tested as light diffusers
+- **Commercial Systems** - Complete systems usually only compatible with a closed ecosystem; often based on common technologies but "cleaned up", "easy to use", or provided as a service
 
 ## Requirements
 
-| Tool    | Version        | Notes                    |
-| ------- | -------------- | ------------------------ |
-| Node.js | **20.x**       | Required - used in CI/CD |
-| npm     | 10.x+          | Bundled with Node 20     |
-| Bun     | 1.x (optional) | Alternative to npm/pnpm  |
-
-This project is tested and deployed using **Node.js 20**. The GitHub Actions CI pipeline runs on Node 20.
-
-**Alternative package managers:** You can use `npm`, `pnpm`, or `bun` to install dependencies and run scripts.
-
-## Features
-
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+| Tool    | Version        |
+| ------- | -------------- |
+| Node.js | 20.x           |
+| Bun     | 1.x (optional) |
 
 ## Getting Started
 
-### Installation
-
-Install the dependencies:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+The app will be available at `http://localhost:5173`.
 
-## Building for Production
+## Contributing
 
-Create a production build:
+We hope you find these lists useful. If there is something that should be added, please do so!
 
-```bash
-npm run build
-```
+All product data is stored in YAML files in the `database/` directory. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or updating entries.
 
-## Deployment
+### Formatting Guidelines
 
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
+- Commas are list separators. Periods are decimal separators. Use the Oxford comma.
+- Numeric columns should only contain numbers (units are appended for display).
+- Remove all formatting when adding information.
 
-Make sure to deploy the output of `npm run build`
+## History
 
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
+This project started as a [Google Sheets document](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA) to organize information about LED controllers, pixels, and related products. As the community contributed more data, we built this website to make the information more accessible.
 
-## Styling
+Many thanks to Cameron Tacklind for starting this doc.
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+## Tech Stack
 
----
+- [React Router](https://reactrouter.com/) - Full-stack React framework
+- [TypeScript](https://www.typescriptlang.org/) - Type safety
+- [Tailwind CSS](https://tailwindcss.com/) - Styling
+- [Radix UI](https://www.radix-ui.com/) - Accessible UI components
 
-Built with ❤️ using React Router.
+## Legal
+
+Information is provided "as-is" with no guarantee of accuracy. Product specifications may change; verify details with manufacturers before making purchasing decisions.
