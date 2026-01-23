@@ -1,12 +1,27 @@
 import { Moon, Sun } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useTheme } from '~/hooks/useTheme';
 
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggle = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
+
+  // Render a placeholder with the same dimensions to avoid layout shift
+  if (!mounted) {
+    return (
+      <button className="btn btn-ghost btn-icon" aria-label="Toggle theme">
+        <span className="w-5 h-5" />
+      </button>
+    );
+  }
 
   return (
     <button
