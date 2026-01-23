@@ -1,27 +1,28 @@
-import { useRainbow } from "~/context/RainbowContext";
-
 interface RainbowTextProps {
   children: string;
   className?: string;
 }
 
-export function RainbowText({ children, className = "" }: RainbowTextProps) {
-  const { hue } = useRainbow();
-  const letters = children.split("");
+export function RainbowText({ children, className = '' }: RainbowTextProps) {
+  const letters = children.split('');
   const hueSpread = 360;
 
   return (
     <span className={className}>
       {letters.map((letter, index) => {
-        const letterHue = (hue + (index / letters.length) * hueSpread) % 360;
+        // Calculate offset for this letter (static, doesn't change)
+        const letterOffset = (index / letters.length) * hueSpread;
 
         return (
           <span
             key={index}
             className="rainbow-letter"
-            style={{
-              "--letter-hue": letterHue,
-            } as React.CSSProperties}
+            style={
+              {
+                // Use CSS calc to add offset to the animated --rainbow-hue
+                '--letter-hue': `calc(var(--rainbow-hue, 0) + ${letterOffset})`,
+              } as React.CSSProperties
+            }
           >
             {letter}
           </span>
