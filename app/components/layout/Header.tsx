@@ -2,7 +2,6 @@ import { Link } from 'react-router';
 import { Github } from 'lucide-react';
 import { ThemeToggle } from '~/components/ui/ThemeToggle';
 import { RainbowText } from '~/components/ui/RainbowText';
-import { CategoryNav } from './CategoryNav';
 
 export function Header() {
   return (
@@ -36,7 +35,6 @@ export function Header() {
           </nav>
         </div>
       </div>
-      <CategoryNav />
     </header>
   );
 }

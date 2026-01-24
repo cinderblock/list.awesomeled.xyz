@@ -448,11 +448,33 @@ img {
   display: none;
 }
 
-/* Category navigation animations */
+/* Layout wrapper for bottom bar sticky behavior */
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.layout-main {
+  flex: 1 1 0%;
+}
+
+/* Category navigation - sticky to bottom of viewport */
+.category-nav-hidden,
+.category-nav-visible {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+  border-top: 1px solid var(--border);
+  border-bottom: none;
+}
+
+/* Category navigation animations - pop up from bottom */
 .category-nav-hidden {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
+  pointer-events: none;
   transition:
     max-height 0.3s ease-out,
     opacity 0.2s ease-out;
@@ -466,16 +488,16 @@ img {
     opacity 0.3s ease-in 0.1s;
 }
 
-/* Staggered tab animation */
+/* Staggered tab animation - slide up from bottom */
 .category-nav-visible .category-tab {
-  animation: tabSlideIn 0.3s ease-out backwards;
+  animation: tabSlideUp 0.3s ease-out backwards;
   animation-delay: calc(var(--tab-index, 0) * 0.02s + 0.1s);
 }
 
-@keyframes tabSlideIn {
+@keyframes tabSlideUp {
   from {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
