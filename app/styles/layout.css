@@ -296,9 +296,13 @@
 /* ==========================================================================
    About Page / Prose Content
    ========================================================================== */
-.about-content {
+.about-page {
+  flex: 1 0 auto;
+  background-color: var(--background);
+}
+
+.about-page .container {
   max-width: 48rem;
-  margin-inline: auto;
 }
 
 .prose {

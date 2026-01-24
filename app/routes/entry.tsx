@@ -1,7 +1,9 @@
 import type { Route } from './+types/entry';
-import { Link, data } from 'react-router';
+import { data } from 'react-router';
 import { getCategoryById, loadEntry } from '~/lib/data';
 import { ExternalLink } from 'lucide-react';
+import { Breadcrumb } from '~/components/ui/Breadcrumb';
+import { PageWrapper } from '~/components/layout/PageWrapper';
 
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) {
@@ -34,25 +36,19 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   const { category, entry } = loaderData;
 
   return (
-    <div
-      className="container py-8 category-theme"
-      style={{ '--category-hue': category.color.hue } as React.CSSProperties}
-    >
-      <nav className="mb-2 flex items-center gap-2">
-        <Link to="/" className="text-sm text-muted hover:text-foreground">
-          Home
-        </Link>
-        <span className="text-muted">/</span>
-        <Link to={category.path} className="text-sm text-muted hover:text-foreground">
-          {category.name}
-        </Link>
-        <span className="text-muted">/</span>
-        <span className="text-sm">{entry.name}</span>
-      </nav>
+    <PageWrapper category={category}>
+      <Breadcrumb
+        items={[
+          { label: 'Home', path: '/' },
+          { label: category.name, path: category.path },
+          { label: entry.name },
+        ]}
+        categoryThemed
+      />
 
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold mb-2">{entry.name}</h1>
-        {entry.manufacturer && <p className="text-muted">by {entry.manufacturer as string}</p>}
+      <header className="page-header">
+        <h1 className="page-title category-page-title">{entry.name}</h1>
+        {entry.manufacturer && <p className="page-description">by {entry.manufacturer as string}</p>}
       </header>
 
       <div className="border rounded-lg p-4">
@@ -85,7 +81,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           </a>
         </div>
       )}
-    </div>
+    </PageWrapper>
   );
 }
 

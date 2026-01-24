@@ -1,8 +1,10 @@
 import type { Route } from './+types/category';
-import { Link, data } from 'react-router';
+import { data } from 'react-router';
 import { getCategoryById, loadCategoryData } from '~/lib/data';
 import { getColumnsForCategory, getSearchKeysForCategory } from '~/lib/columns';
 import { DataTable } from '~/components/data/DataTable';
+import { Breadcrumb } from '~/components/ui/Breadcrumb';
+import { PageWrapper } from '~/components/layout/PageWrapper';
 
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) {
@@ -33,37 +35,24 @@ export default function CategoryPage({ loaderData }: Route.ComponentProps) {
   const searchKeys = getSearchKeysForCategory(category.id);
 
   return (
-    <div
-      className="category-theme category-page"
-      style={
-        {
-          '--category-hue': category.color.hue,
-          backgroundColor: 'var(--category-bg-subtle)',
-        } as React.CSSProperties
-      }
-    >
-      <div className="container page-section">
-        <nav className="breadcrumb">
-          <Link to="/" className="breadcrumb-link">
-            Home
-          </Link>
-          <span className="breadcrumb-separator">/</span>
-          <span className="category-breadcrumb-current">{category.name}</span>
-        </nav>
+    <PageWrapper category={category}>
+      <Breadcrumb
+        items={[{ label: 'Home', path: '/' }, { label: category.name }]}
+        categoryThemed
+      />
 
-        <header className="page-header">
-          <h1 className="page-title category-page-title">{category.name}</h1>
-          <p className="page-description">{category.description}</p>
-        </header>
+      <header className="page-header">
+        <h1 className="page-title category-page-title">{category.name}</h1>
+        <p className="page-description">{category.description}</p>
+      </header>
 
-        <DataTable
-          data={entries}
-          columns={columns}
-          categoryPath={category.path}
-          categoryId={category.id}
-          searchKeys={searchKeys}
-        />
-      </div>
-    </div>
+      <DataTable
+        data={entries}
+        columns={columns}
+        categoryPath={category.path}
+        categoryId={category.id}
+        searchKeys={searchKeys}
+      />
+    </PageWrapper>
   );
 }
