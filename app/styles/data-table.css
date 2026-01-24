@@ -139,21 +139,34 @@
 /* Background mask to hide rows scrolling behind sticky header */
 .data-table-sticky-mask {
   background-color: var(--category-bg-subtle, var(--background));
+  /* Allow scroll events to pass through */
+  pointer-events: none;
 }
 
 /* Sticky header clone */
 .data-table-sticky-header {
   transform: translateX(0);
   will-change: transform;
+  /* Allow scroll wheel to pass through header area */
+  pointer-events: none;
+}
+
+/* Re-enable pointer events on interactive elements within sticky header */
+.data-table-sticky-header .data-table-sort-btn,
+.data-table-sticky-header button {
   pointer-events: auto;
 }
 
 .data-table-sticky-header-scroll {
+  overflow: hidden;
+}
+
+/* Style the table inside sticky header with border and rounded corners */
+.data-table-sticky-header-scroll .data-table {
   background-color: var(--category-accent, var(--muted));
   border: 1px solid var(--border);
   border-bottom: none;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  overflow: hidden;
 }
 
 .data-table-sticky-header .data-table {
@@ -164,12 +177,13 @@
   position: static;
 }
 
+/* Keep th corners within the table's rounded border */
 .data-table-sticky-header .data-table th:first-child {
-  border-top-left-radius: 0;
+  border-top-left-radius: calc(var(--radius-lg) - 1px);
 }
 
 .data-table-sticky-header .data-table th:last-child {
-  border-top-right-radius: 0;
+  border-top-right-radius: calc(var(--radius-lg) - 1px);
 }
 
 /* ==========================================================================

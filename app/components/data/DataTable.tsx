@@ -701,10 +701,11 @@ export function DataTable({
 
     const scrollContainer = scrollContainerRef.current;
 
-    // Horizontal scroll handler - just mirror scroll position directly
-    // This is very fast as scrollLeft assignment doesn't trigger layout
+    // Horizontal scroll handler - mirror scroll position and update sticky header position
     const handleHorizontalScroll = () => {
       syncHorizontalScroll();
+      // Also update sticky header position since the table container moves during horizontal scroll
+      updateStickyPosition();
     };
 
     // Vertical scroll handler - use RAF to batch visibility checks
@@ -893,7 +894,13 @@ export function DataTable({
             overflowY: 'hidden',
           }}
         >
-          <table className="data-table" style={{ tableLayout: 'fixed' }}>
+          <table
+            className="data-table"
+            style={{
+              tableLayout: 'fixed',
+              width: columnWidths.reduce((sum, w) => sum + w, 0),
+            }}
+          >
             <colgroup>
               {columnWidths.map((width, i) => (
                 <col key={i} style={{ width }} />
@@ -945,6 +952,8 @@ export function DataTable({
               </tbody>
             </table>
           </div>
+          {/* Spacer for pixel scrollbar - creates scrollable space on right */}
+          <div className="data-table-scrollbar-spacer" aria-hidden="true" />
         </div>
       </div>
     </div>

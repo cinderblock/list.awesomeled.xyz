@@ -1,0 +1,274 @@
+/* ==========================================================================
+   Pixel Scrollbar - Custom scrollbar with LED/pixel aesthetic
+   ========================================================================== */
+
+.pixel-scrollbar {
+  --pixel-spacing: 20px;
+  --pixel-size: 8px;
+  --pixel-cell-size: 12px;
+  --pixel-gap: 2px;
+  --pixel-color-dim: rgba(128, 128, 128, 0.2);
+  --pixel-color-lit: rgba(255, 255, 255, 0.95);
+  --pixel-glow-lit: 0 0 6px rgba(255, 255, 255, 0.6), 0 0 2px rgba(255, 255, 255, 0.8);
+  --pixel-cell-bg: rgba(0, 0, 0, 0.15);
+  --pixel-cell-border: rgba(128, 128, 128, 0.1);
+
+  z-index: 100;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease-out;
+}
+
+/* Hidden state - slide out when scrolling isn't needed */
+.pixel-scrollbar--hidden {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Vertical Orientation (default)
+   ========================================================================== */
+
+.pixel-scrollbar--vertical {
+  position: fixed;
+  /* Account for sticky header (56px) */
+  top: 3.5rem;
+  /* Default: no footer nav visible */
+  bottom: 0;
+  width: calc(var(--pixel-cell-size) + 8px);
+  padding: 8px 4px;
+  /* Animate bottom changes smoothly */
+  transition: bottom 0.3s ease-out;
+}
+
+/* When CategoryNav is visible, account for its height (~50px) */
+.layout-wrapper:has(.category-nav--visible) .pixel-scrollbar--vertical {
+  bottom: 50px;
+}
+
+.pixel-scrollbar--vertical.pixel-scrollbar--right {
+  right: 0;
+}
+
+/* Slide out to the right when hidden */
+.pixel-scrollbar--vertical.pixel-scrollbar--right.pixel-scrollbar--hidden {
+  transform: translateX(100%);
+}
+
+.pixel-scrollbar--vertical.pixel-scrollbar--left {
+  left: 0;
+}
+
+/* Slide out to the left when hidden */
+.pixel-scrollbar--vertical.pixel-scrollbar--left.pixel-scrollbar--hidden {
+  transform: translateX(-100%);
+}
+
+.pixel-scrollbar--vertical .pixel-scrollbar-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* ==========================================================================
+   Horizontal Orientation
+   ========================================================================== */
+
+.pixel-scrollbar--horizontal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(var(--pixel-cell-size) + 8px);
+  padding: 4px 8px;
+}
+
+.pixel-scrollbar--horizontal.pixel-scrollbar--bottom {
+  bottom: 0;
+}
+
+/* Slide out to the bottom when hidden */
+.pixel-scrollbar--horizontal.pixel-scrollbar--bottom.pixel-scrollbar--hidden {
+  transform: translateY(100%);
+}
+
+.pixel-scrollbar--horizontal.pixel-scrollbar--top {
+  top: 0;
+}
+
+/* Slide out to the top when hidden */
+.pixel-scrollbar--horizontal.pixel-scrollbar--top.pixel-scrollbar--hidden {
+  transform: translateY(-100%);
+}
+
+.pixel-scrollbar--horizontal .pixel-scrollbar-track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ==========================================================================
+   Pixel Cells (shared styles)
+   ========================================================================== */
+
+.pixel-scrollbar-pixel {
+  width: var(--pixel-cell-size);
+  height: var(--pixel-cell-size);
+  border-radius: 2px;
+  background-color: var(--pixel-cell-bg);
+  border: 1px solid var(--pixel-cell-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease;
+}
+
+/* The dot inside the cell */
+.pixel-scrollbar-pixel::after {
+  content: '';
+  width: var(--pixel-size);
+  height: var(--pixel-size);
+  border-radius: 50%;
+  background-color: var(--pixel-color-dim);
+  filter: blur(0.5px);
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+}
+
+/* Lit pixel state */
+.pixel-scrollbar-pixel--lit {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.pixel-scrollbar-pixel--lit::after {
+  background-color: var(--pixel-color-lit);
+  box-shadow: var(--pixel-glow-lit);
+  filter: blur(1px);
+}
+
+/* ==========================================================================
+   Theme Adjustments
+   ========================================================================== */
+
+/* Dark mode adjustments */
+.dark .pixel-scrollbar {
+  --pixel-color-dim: rgba(80, 80, 80, 0.3);
+  --pixel-color-lit: rgba(255, 255, 255, 0.95);
+  --pixel-glow-lit: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 3px rgba(255, 255, 255, 0.9);
+  --pixel-cell-bg: rgba(0, 0, 0, 0.3);
+  --pixel-cell-border: rgba(60, 60, 60, 0.4);
+}
+
+/* Light mode - darker dots for visibility */
+:root:not(.dark) .pixel-scrollbar {
+  --pixel-color-dim: rgba(180, 180, 180, 0.4);
+  --pixel-color-lit: rgba(60, 60, 60, 0.9);
+  --pixel-glow-lit: 0 0 4px rgba(0, 0, 0, 0.3), 0 0 1px rgba(0, 0, 0, 0.5);
+  --pixel-cell-bg: rgba(255, 255, 255, 0.5);
+  --pixel-cell-border: rgba(200, 200, 200, 0.5);
+}
+
+:root:not(.dark) .pixel-scrollbar-pixel--lit {
+  border-color: rgba(100, 100, 100, 0.3);
+}
+
+/* ==========================================================================
+   Hover Effects
+   ========================================================================== */
+
+.pixel-scrollbar:hover .pixel-scrollbar-pixel {
+  border-color: rgba(128, 128, 128, 0.2);
+}
+
+.pixel-scrollbar:hover .pixel-scrollbar-pixel--lit {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+:root:not(.dark) .pixel-scrollbar:hover .pixel-scrollbar-pixel--lit {
+  border-color: rgba(100, 100, 100, 0.4);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+/* Hide vertical scrollbar on very small screens */
+@media (max-width: 640px) {
+  .pixel-scrollbar--vertical {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Hide native scrollbars when pixel scrollbar is active
+   ========================================================================== */
+
+/* Hide main page scrollbar (keeps functionality) */
+.has-pixel-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.has-pixel-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For elements that should hide their scrollbar */
+.hide-native-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-native-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==========================================================================
+   Content Padding when scrollbar is visible
+   ========================================================================== */
+
+/* Width of the scrollbar: pixel-cell-size (12px) + 8px padding = 20px */
+:root {
+  --pixel-scrollbar-width: 20px;
+}
+
+/* Spacer element to create scrollable space on the right.
+   Hidden by default, only shown when pixel scrollbar is visible. */
+.data-table-scrollbar-spacer {
+  display: none;
+}
+
+/* When pixel scrollbar is visible on right, show the spacer.
+   Use flex to make the container size to fit both table + spacer while preserving centering. */
+.pixel-scrollbar-visible-right .data-table-scroll-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  /* Keep fit-content for intrinsic sizing with block-level flex (preserves margin: auto centering) */
+  width: fit-content;
+}
+
+.pixel-scrollbar-visible-right .data-table-scrollbar-spacer {
+  display: block;
+  width: var(--pixel-scrollbar-width);
+  min-width: var(--pixel-scrollbar-width);
+  flex-shrink: 0;
+  /* Match the table height so it's part of the scrollable area */
+  align-self: stretch;
+}
+
+/* Hide on mobile where scrollbar is hidden */
+@media (max-width: 640px) {
+  .pixel-scrollbar-visible-right .data-table-scrollbar-spacer {
+    display: none;
+  }
+  .pixel-scrollbar-visible-right .data-table-scroll-inner {
+    display: block;
+    width: fit-content;
+  }
+}

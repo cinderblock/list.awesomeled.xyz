@@ -13,6 +13,9 @@
 /* UI Components: Buttons, inputs, badges */
 @import './styles/components.css';
 
+/* Pixel Scrollbar: Custom LED-style scrollbar */
+@import './styles/pixel-scrollbar.css';
+
 /* Data Table: Table styles, sticky header, search */
 @import './styles/data-table.css';
 
