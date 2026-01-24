@@ -227,6 +227,86 @@ test.describe('Console errors', () => {
   });
 });
 
+test.describe('Responsive layout', () => {
+  // Classic scrollbar width on Windows/Linux
+  const SCROLLBAR_WIDTH = 17;
+
+  test('table should not have horizontal scrollbar at wide viewport', async ({ page }) => {
+    // Set a wide viewport width
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    await page.goto('/controllers');
+    await page.waitForLoadState('networkidle');
+
+    // Wait for table to be visible
+    const tableWrapper = page.locator('.table-scroll-wrapper');
+    await expect(tableWrapper).toBeVisible();
+
+    // The bug: CSS uses 100vw which includes scrollbar width, but clientWidth doesn't.
+    // On Windows/Linux with classic scrollbars (17px), this causes horizontal overflow.
+    // To detect this in headless mode (which uses overlay scrollbars), we check if
+    // any element using 100vw would overflow when a scrollbar is present.
+    const scrollInfo = await page.evaluate((scrollbarWidth) => {
+      const body = document.body;
+
+      // Check if content would overflow with a classic scrollbar
+      // scrollWidth shows actual content width, we compare against viewport minus scrollbar
+      const availableWidth = window.innerWidth - scrollbarWidth;
+      const wouldOverflow = body.scrollWidth > availableWidth;
+
+      return { wouldOverflow };
+    }, SCROLLBAR_WIDTH);
+
+    // Fail if there would be overflow with a classic scrollbar present
+    expect(scrollInfo.wouldOverflow).toBe(false);
+
+    // Scroll down to trigger sticky header
+    await page.evaluate(() => window.scrollBy(0, 300));
+    await page.waitForTimeout(100);
+
+    // Check again after scrolling (with sticky header visible)
+    const scrollInfoAfter = await page.evaluate((scrollbarWidth) => {
+      const body = document.body;
+      const availableWidth = window.innerWidth - scrollbarWidth;
+      return {
+        wouldOverflow: body.scrollWidth > availableWidth,
+      };
+    }, SCROLLBAR_WIDTH);
+
+    expect(scrollInfoAfter.wouldOverflow).toBe(false);
+  });
+
+  test('page should not have unnecessary vertical scrollbar at tall viewport', async ({ page }) => {
+    // Set a very tall viewport - taller than content should need
+    await page.setViewportSize({ width: 1920, height: 2000 });
+
+    // Use a category with fewer entries so content fits in viewport
+    await page.goto('/level-converters');
+    await page.waitForLoadState('networkidle');
+
+    // Wait for table to be visible
+    const tableWrapper = page.locator('.table-scroll-wrapper');
+    await expect(tableWrapper).toBeVisible();
+
+    // Check if content height exceeds viewport (would cause vertical scrollbar)
+    // If content fits, there should be no vertical scroll
+    const scrollInfo = await page.evaluate(() => {
+      const body = document.body;
+      const html = document.documentElement;
+
+      return {
+        scrollHeight: body.scrollHeight,
+        clientHeight: html.clientHeight,
+        hasVerticalScroll: body.scrollHeight > html.clientHeight,
+      };
+    });
+
+    // If content is shorter than viewport, there should be no vertical scrollbar
+    // This catches issues like min-height: 100vh + footer causing unnecessary scroll
+    expect(scrollInfo.hasVerticalScroll).toBe(false);
+  });
+});
+
 test.describe('Data loading', () => {
   test('YAML data is loaded correctly', async ({ page }) => {
     await page.goto('/controllers');

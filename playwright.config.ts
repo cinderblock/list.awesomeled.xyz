@@ -16,6 +16,17 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    // Visual mode for debugging - runs headed with slowMo
+    {
+      name: 'visual',
+      use: {
+        ...devices['Desktop Chrome'],
+        headless: false,
+        launchOptions: {
+          slowMo: 34,
+        },
+      },
+    },
   ],
   webServer: {
     command: 'bun run dev',
