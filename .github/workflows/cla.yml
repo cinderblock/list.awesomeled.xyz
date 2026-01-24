@@ -1,0 +1,96 @@
+name: CLA Assistant
+
+on:
+  issue_comment:
+    types:
+      - created
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+permissions:
+  actions: write
+  contents: read
+  pull-requests: write
+  statuses: write
+
+jobs:
+  check-paths:
+    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-latest
+    outputs:
+      has-code-changes: ${{ steps.changes.outputs.code }}
+      has-database-changes: ${{ steps.changes.outputs.database }}
+    steps:
+      - uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            code:
+              - '**'
+              - '!database/**'
+            database:
+              - 'database/**'
+
+  cla-code:
+    needs: check-paths
+    if: needs.check-paths.outputs.has-code-changes == 'true' || (github.event_name == 'issue_comment' && contains(github.event.comment.body, 'CLA'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: CLA Assistant (Code)
+        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
+        uses: contributor-assistant/github-action@v2.6.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_TOKEN }}
+        with:
+          path-to-signatures: '.github/cla-signatures-code.json'
+          path-to-document: 'CLA-CODE.md'
+          branch: 'master'
+          allowlist: bot*,dependabot*,renovate*
+          remote-organization-name: false
+          remote-repository-name: false
+          create-file-commit-message: 'chore: create code CLA signature file'
+          signed-commit-message: 'chore: $contributorName signed the code CLA'
+          custom-notsigned-prcomment: |
+            Thank you for your contribution! This PR includes **code changes**, so you need to sign the Code CLA.
+
+            Please read the [Code CLA](https://github.com/$owner/$repo/blob/master/CLA-CODE.md) and reply with:
+
+            ```
+            I have read the CLA Document and I hereby sign the CLA
+            ```
+          custom-pr-sign-comment: 'I have read the CLA Document and I hereby sign the CLA'
+
+  cla-database:
+    needs: check-paths
+    if: needs.check-paths.outputs.has-database-changes == 'true' || (github.event_name == 'issue_comment' && contains(github.event.comment.body, 'CLA'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: CLA Assistant (Database)
+        if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA') || github.event_name == 'pull_request_target'
+        uses: contributor-assistant/github-action@v2.6.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_TOKEN }}
+        with:
+          path-to-signatures: '.github/cla-signatures-database.json'
+          path-to-document: 'CLA-DATABASE.md'
+          branch: 'master'
+          allowlist: bot*,dependabot*,renovate*
+          remote-organization-name: false
+          remote-repository-name: false
+          create-file-commit-message: 'chore: create database CLA signature file'
+          signed-commit-message: 'chore: $contributorName signed the database CLA'
+          custom-notsigned-prcomment: |
+            Thank you for your contribution! This PR includes **database changes**, so you need to sign the Database CLA.
+
+            Please read the [Database CLA](https://github.com/$owner/$repo/blob/master/CLA-DATABASE.md) and reply with:
+
+            ```
+            I have read the CLA Document and I hereby sign the CLA
+            ```
+          custom-pr-sign-comment: 'I have read the CLA Document and I hereby sign the CLA'
