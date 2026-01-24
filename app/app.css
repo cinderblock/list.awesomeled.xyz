@@ -735,7 +735,7 @@ img {
    Table Component
    ========================================================================== */
 .data-table {
-  width: 100%;
+  /* Don't force full width - table sizes to content */
   border-collapse: collapse;
   font-size: 0.875rem;
 }
@@ -749,9 +749,7 @@ img {
 }
 
 .data-table th {
-  position: sticky;
-  top: 9.5rem;
-  z-index: 35;
+  /* Sticky behavior handled by StickyTableHeader component */
   font-weight: 600;
   white-space: nowrap;
   background-color: var(--muted);
@@ -921,19 +919,68 @@ img {
    DataTable Component Styles
    ========================================================================== */
 
-/* Sticky controls bar */
+/* Main wrapper - contains controls normally, table breaks out */
 .data-table-wrapper {
-  min-width: fit-content;
+  /* Stays within container bounds */
 }
 
+/* Sticky controls bar - sticks below site header, stays in container */
 .sticky-controls {
   position: sticky;
-  top: 6rem;
-  z-index: 30;
-  margin-left: -1rem;
-  margin-right: -1rem;
-  padding: 0.75rem 1rem;
+  top: 3.5rem; /* Height of header (h-14 = 3.5rem) */
+  z-index: 40; /* Above sticky header clone (25) */
+  padding: 0.75rem 0;
+  margin-bottom: 1rem;
   background-color: var(--category-bg-subtle, var(--background));
+}
+
+/* ==========================================================================
+   Responsive Table Layout - Centered when narrow, left-aligned when wide
+   ========================================================================== */
+
+/*
+ * The table scroll wrapper breaks out of container for full-width scrolling.
+ * When table fits: centered with auto margins
+ * When table overflows: left-aligned to use all available space
+ */
+.table-scroll-wrapper {
+  /* Break out of container to use full viewport width */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow-x: auto;
+  /* Padding provides minimum edge gap */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Inner container - shrinks to table content width, centers when it fits */
+.table-scroll-inner {
+  width: fit-content;
+  /* Don't force full width - let it shrink to content */
+  /* Centers the table when it's narrower than the container */
+  margin: 0 auto;
+}
+
+/* Background mask to hide table rows scrolling behind sticky header */
+.sticky-header-mask {
+  background-color: var(--category-bg-subtle, var(--background));
+}
+
+/* Sticky header clone styles */
+.sticky-header-clone {
+  background-color: var(--category-accent, var(--muted));
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.sticky-header-clone .data-table {
+  margin: 0;
+}
+
+.sticky-header-clone .data-table th {
+  /* Override sticky positioning for the clone - it's already fixed */
+  position: static;
 }
 
 /* Search input wrapper */

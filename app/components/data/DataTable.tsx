@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import { useMemo, useState, useCallback, useRef, useEffect, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { ChevronUp, ChevronDown, X, Download, Search } from 'lucide-react';
 import type { Column } from '~/lib/columns';
@@ -15,6 +15,11 @@ import {
   type BooleanFilterValue,
   type StringFilterValue,
 } from './ColumnFilter';
+
+// Height of site header (h-14 = 3.5rem = 56px)
+const HEADER_HEIGHT = 56;
+// Height of sticky controls bar
+const CONTROLS_HEIGHT = 52;
 
 interface DataTableProps {
   data: BaseEntry[];
@@ -594,10 +599,156 @@ export function DataTable({
     URL.revokeObjectURL(url);
   }, [sortedData, columns, getFilteredFilename]);
 
+  // Refs for sticky header sync - use refs for position to avoid re-renders on scroll
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const tableRef = useRef<HTMLTableElement>(null);
+  const controlsRef = useRef<HTMLDivElement>(null);
+  const stickyHeaderRef = useRef<HTMLDivElement>(null);
+  const stickyMaskRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+
+  // State only for things that need re-render
+  const [showStickyHeader, setShowStickyHeader] = useState(false);
+  const [columnWidths, setColumnWidths] = useState<number[]>([]);
+  const [controlsHeight, setControlsHeight] = useState(CONTROLS_HEIGHT);
+  const [headerHeight, setHeaderHeight] = useState(44);
+
+  // Measure column widths from the actual table header
+  const measureColumns = useCallback(() => {
+    if (!tableRef.current) return;
+    const thead = tableRef.current.querySelector('thead');
+    if (!thead) return;
+
+    const ths = thead.querySelectorAll('th');
+    const widths = Array.from(ths).map((th) => th.getBoundingClientRect().width);
+    setColumnWidths(widths);
+    setHeaderHeight(thead.getBoundingClientRect().height);
+  }, []);
+
+  // Measure controls bar height
+  const measureControlsHeight = useCallback(() => {
+    if (!controlsRef.current) return;
+    setControlsHeight(controlsRef.current.getBoundingClientRect().height);
+  }, []);
+
+  // Update header position directly via DOM (no state update) for smooth scrolling
+  const updateHeaderPositionDirect = useCallback(() => {
+    if (!tableRef.current || !stickyHeaderRef.current) return;
+    const tableRect = tableRef.current.getBoundingClientRect();
+    stickyHeaderRef.current.style.left = `${tableRect.left}px`;
+    stickyHeaderRef.current.style.width = `${tableRect.width}px`;
+  }, []);
+
+  // Check if we should show the sticky header
+  const checkStickyVisibility = useCallback(() => {
+    if (!tableRef.current || !controlsRef.current) return;
+    const thead = tableRef.current.querySelector('thead');
+    if (!thead) return;
+
+    const theadRect = thead.getBoundingClientRect();
+    const currentControlsHeight = controlsRef.current.getBoundingClientRect().height;
+    const stickyTop = HEADER_HEIGHT + currentControlsHeight;
+    const shouldShow = theadRect.top < stickyTop;
+
+    setShowStickyHeader(shouldShow);
+  }, []);
+
+  useEffect(() => {
+    measureColumns();
+    measureControlsHeight();
+    checkStickyVisibility();
+
+    const scrollContainer = scrollContainerRef.current;
+
+    // Use requestAnimationFrame for smooth scroll updates
+    const handleScroll = () => {
+      cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        updateHeaderPositionDirect();
+        checkStickyVisibility();
+      });
+    };
+
+    const handleResize = () => {
+      measureColumns();
+      measureControlsHeight();
+      updateHeaderPositionDirect();
+      checkStickyVisibility();
+    };
+
+    scrollContainer?.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    if (tableRef.current) {
+      resizeObserver.observe(tableRef.current);
+    }
+    if (controlsRef.current) {
+      resizeObserver.observe(controlsRef.current);
+    }
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      scrollContainer?.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      resizeObserver.disconnect();
+    };
+  }, [measureColumns, measureControlsHeight, updateHeaderPositionDirect, checkStickyVisibility]);
+
+  // Re-measure when data changes
+  useEffect(() => {
+    const timer = setTimeout(measureColumns, 50);
+    return () => clearTimeout(timer);
+  }, [sortedData, measureColumns]);
+
+  // Update position immediately when sticky header becomes visible
+  useEffect(() => {
+    if (showStickyHeader) {
+      updateHeaderPositionDirect();
+    }
+  }, [showStickyHeader, updateHeaderPositionDirect]);
+
+  // Render the header row content (shared between original and sticky clone)
+  const renderHeaderRow = () => (
+    <tr>
+      {columns.map((col) => {
+        const colKey = String(col.key);
+        const isRightAligned = col.className?.includes('text-right');
+        const hasFilter = col.filterConfig != null;
+        const filterValue = urlFilters[colKey];
+        return (
+          <th key={colKey} className={col.className}>
+            <div className={`th-content ${isRightAligned ? 'justify-end' : ''}`}>
+              {col.sortable !== false && col.key !== 'links' ? (
+                <button className="sort-btn" onClick={() => handleSort(colKey)}>
+                  {col.label}
+                  {sortKey === colKey && sortDir === 'asc' && <ChevronUp size={16} />}
+                  {sortKey === colKey && sortDir === 'desc' && <ChevronDown size={16} />}
+                </button>
+              ) : (
+                <span>{col.label}</span>
+              )}
+              {hasFilter && (
+                <ColumnFilter
+                  column={col}
+                  data={data}
+                  value={filterValue}
+                  onChange={(value) => setColumnFilter(colKey, value)}
+                />
+              )}
+            </div>
+          </th>
+        );
+      })}
+    </tr>
+  );
+
   return (
-    <div className="data-table-wrapper space-y-4">
-      {/* Search and controls */}
-      <div className="sticky-controls">
+    <div className="data-table-wrapper">
+      {/* Sticky controls bar - outside scroll wrapper, spans full width */}
+      <div ref={controlsRef} className="sticky-controls">
         <div className="flex flex-wrap items-center gap-4">
           <div className="search-input-wrapper">
             <Search size={16} className="search-icon" />
@@ -638,7 +789,10 @@ export function DataTable({
             {activeFilters.map(({ key, label, description }) => (
               <span key={key} className="active-filter-tag">
                 <strong>{label}:</strong> {description}
-                <button onClick={() => setColumnFilter(key, undefined)} title="Remove filter">
+                <button
+                  onClick={() => setColumnFilter(key, undefined)}
+                  title="Remove filter"
+                >
                   <X size={12} />
                 </button>
               </span>
@@ -647,73 +801,84 @@ export function DataTable({
         )}
       </div>
 
-      {/* Table */}
-      <div className="table-container">
-        <table className="data-table">
-          <thead>
-            <tr>
-              {columns.map((col) => {
-                const colKey = String(col.key);
-                const isRightAligned = col.className?.includes('text-right');
-                const hasFilter = col.filterConfig != null;
-                const filterValue = urlFilters[colKey];
-                return (
-                  <th key={colKey} className={col.className}>
-                    <div className={`th-content ${isRightAligned ? 'justify-end' : ''}`}>
-                      {col.sortable !== false && col.key !== 'links' ? (
-                        <button className="sort-btn" onClick={() => handleSort(colKey)}>
-                          {col.label}
-                          {sortKey === colKey && sortDir === 'asc' && <ChevronUp size={16} />}
-                          {sortKey === colKey && sortDir === 'desc' && <ChevronDown size={16} />}
-                        </button>
-                      ) : (
-                        <span>{col.label}</span>
-                      )}
-                      {hasFilter && (
-                        <ColumnFilter
-                          column={col}
-                          data={data}
-                          value={filterValue}
-                          onChange={(value) => setColumnFilter(colKey, value)}
-                        />
-                      )}
-                    </div>
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {sortedData.length === 0 ? (
-              <tr>
-                <td colSpan={columns.length} className="empty-state">
-                  No results found.
-                </td>
-              </tr>
-            ) : (
-              sortedData.map((item) => (
-                <tr key={item.id}>
-                  {columns.map((col) => {
-                    const value = getValue(item, col.key);
-                    return (
-                      <td key={col.key} className={col.className}>
-                        {col.render ? (
-                          col.render(value, item)
-                        ) : col.key === 'name' ? (
-                          <Link to={`${categoryPath}/${item.id}`} className="entry-link">
-                            {String(value ?? '')}
-                          </Link>
-                        ) : (
-                          <CellValue value={value} />
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              ))
-            )}
-          </tbody>
+      {/* Background mask to hide table rows scrolling behind sticky header and controls */}
+      <div
+        ref={stickyMaskRef}
+        className="sticky-header-mask"
+        style={{
+          position: 'fixed',
+          top: HEADER_HEIGHT,
+          left: 0,
+          right: 0,
+          height: controlsHeight + headerHeight,
+          zIndex: 24,
+          display: showStickyHeader ? 'block' : 'none',
+        }}
+      />
+
+      {/* Sticky header clone - fixed to viewport, below controls */}
+      <div
+        ref={stickyHeaderRef}
+        className="sticky-header-clone"
+        style={{
+          position: 'fixed',
+          top: HEADER_HEIGHT + controlsHeight,
+          zIndex: 25,
+          display: showStickyHeader && columnWidths.length > 0 ? 'block' : 'none',
+        }}
+      >
+        <table className="data-table" style={{ tableLayout: 'fixed' }}>
+          <colgroup>
+            {columnWidths.map((width, i) => (
+              <col key={i} style={{ width }} />
+            ))}
+          </colgroup>
+          <thead>{renderHeaderRow()}</thead>
         </table>
+      </div>
+
+      {/* Horizontal scroll wrapper */}
+      <div ref={scrollContainerRef} className="table-scroll-wrapper">
+        <div className="table-scroll-inner">
+          {/* Table */}
+          <div className="table-container">
+            <table ref={tableRef} className="data-table">
+              <thead style={{ visibility: showStickyHeader ? 'hidden' : 'visible' }}>
+                {renderHeaderRow()}
+              </thead>
+              <tbody>
+                {sortedData.length === 0 ? (
+                  <tr>
+                    <td colSpan={columns.length} className="empty-state">
+                      No results found.
+                    </td>
+                  </tr>
+                ) : (
+                  sortedData.map((item) => (
+                    <tr key={item.id}>
+                      {columns.map((col) => {
+                        const value = getValue(item, col.key);
+                        return (
+                          <td key={col.key} className={col.className}>
+                            {col.render ? (
+                              col.render(value, item)
+                            ) : col.key === 'name' ? (
+                              <Link to={`${categoryPath}/${item.id}`} className="entry-link">
+                                {String(value ?? '')}
+                              </Link>
+                            ) : (
+                              <CellValue value={value} />
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );
