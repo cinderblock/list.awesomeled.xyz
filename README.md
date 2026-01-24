@@ -19,23 +19,22 @@ A comprehensive database of addressable LEDs, controllers, and related products 
 
 ## Requirements
 
-| Tool    | Version        |
-| ------- | -------------- |
-| Node.js | 20.x           |
-| Bun     | 1.x (optional) |
+| Tool | Version |
+| ---- | ------- |
+| Bun  | 1.x     |
 
 ## Getting Started
 
 Install dependencies:
 
 ```bash
-npm install
+bun install
 ```
 
 Start the development server:
 
 ```bash
-npm run dev
+bun dev
 ```
 
 The app will be available at `http://localhost:5173`.
