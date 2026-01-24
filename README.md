@@ -65,6 +65,15 @@ Many thanks to Cameron Tacklind for starting this doc.
 - [Tailwind CSS](https://tailwindcss.com/) - Styling
 - [Radix UI](https://www.radix-ui.com/) - Accessible UI components
 
+## License
+
+This project uses dual licensing:
+
+- **Code** (everything except `database/`): [AGPL-3.0](LICENSE)
+- **Database** (`database/` directory): [ODbL-1.0](database/LICENSE)
+
+For commercial licensing inquiries, please open an issue.
+
 ## Legal
 
 Information is provided "as-is" with no guarantee of accuracy. Product specifications may change; verify details with manufacturers before making purchasing decisions.
