@@ -1,0 +1,333 @@
+/* ==========================================================================
+   DataTable Component - Table, sticky header, search, controls
+   ========================================================================== */
+
+/* Main wrapper */
+.data-table-wrapper {
+  /* Contains controls, table breaks out for scroll */
+}
+
+/* ==========================================================================
+   Sticky Controls Bar
+   ========================================================================== */
+.data-table-controls {
+  position: sticky;
+  top: 3.5rem; /* Height of site header */
+  z-index: 40;
+  padding: 0.75rem 0;
+  margin-bottom: 1rem;
+  background-color: var(--category-bg-subtle, var(--background));
+}
+
+.data-table-controls-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Search input with icon */
+.data-table-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 20rem;
+  flex: 1;
+}
+
+.data-table-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+
+.data-table-search-input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3) var(--space-2) 2.25rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  color: var(--foreground);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.data-table-search-input:focus {
+  outline: none;
+  border-color: var(--category-primary, var(--ring));
+  box-shadow: 0 0 0 2px var(--category-primary, var(--ring));
+}
+
+.data-table-search-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* Results count */
+.data-table-count {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+/* Active filters display */
+.data-table-active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.data-table-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--category-accent-foreground, var(--secondary-foreground));
+  background-color: var(--category-accent, var(--secondary));
+  border: 1px solid var(--category-border, var(--border));
+  border-radius: var(--radius-full);
+}
+
+.data-table-filter-tag button {
+  display: inline-flex;
+  padding: 0.125rem;
+  margin-left: 0.125rem;
+  color: inherit;
+  opacity: 0.7;
+  border-radius: var(--radius-full);
+  transition: opacity var(--transition-fast);
+}
+
+.data-table-filter-tag button:hover {
+  opacity: 1;
+  background-color: var(--accent);
+}
+
+/* ==========================================================================
+   Responsive Table Layout
+   ========================================================================== */
+.data-table-scroll {
+  overflow-x: auto;
+  /* Break out of container to use full viewport width */
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+/* Inner container - shrinks to content, centers when narrow */
+.data-table-scroll-inner {
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Table container with border */
+.data-table-container {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background-color: var(--background);
+}
+
+/* ==========================================================================
+   Sticky Header System
+   ========================================================================== */
+
+/* Background mask to hide rows scrolling behind sticky header */
+.data-table-sticky-mask {
+  background-color: var(--category-bg-subtle, var(--background));
+}
+
+/* Sticky header clone */
+.data-table-sticky-header {
+  transform: translateX(0);
+  will-change: transform;
+  pointer-events: auto;
+}
+
+.data-table-sticky-header-scroll {
+  background-color: var(--category-accent, var(--muted));
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+}
+
+.data-table-sticky-header .data-table {
+  margin: 0;
+}
+
+.data-table-sticky-header .data-table th {
+  position: static;
+}
+
+.data-table-sticky-header .data-table th:first-child {
+  border-top-left-radius: 0;
+}
+
+.data-table-sticky-header .data-table th:last-child {
+  border-top-right-radius: 0;
+}
+
+/* ==========================================================================
+   Table Styles
+   ========================================================================== */
+.data-table {
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table th {
+  font-weight: 600;
+  white-space: nowrap;
+  background-color: var(--muted);
+  color: var(--foreground);
+}
+
+.data-table th:first-child {
+  border-top-left-radius: calc(var(--radius-lg) - 1px);
+}
+
+.data-table th:last-child {
+  border-top-right-radius: calc(var(--radius-lg) - 1px);
+}
+
+/* Alternating row colors */
+.data-table tbody tr:nth-child(odd) {
+  background-color: var(--background);
+}
+
+.data-table tbody tr:nth-child(even) {
+  background-color: var(--muted);
+}
+
+.data-table tbody tr:hover {
+  background-color: var(--accent);
+}
+
+/* Last row border radius */
+.data-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+.data-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+/* Right-aligned cells */
+.data-table-cell--right {
+  text-align: right;
+}
+
+/* ==========================================================================
+   Table Header Content
+   ========================================================================== */
+.data-table-th-content {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.data-table-th-content--right {
+  justify-content: flex-end;
+}
+
+/* Sort button */
+.data-table-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin-left: -0.5rem;
+  font-size: inherit;
+  font-weight: 600;
+  color: inherit;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.data-table-sort-btn:hover {
+  background-color: var(--accent);
+}
+
+.category-theme .data-table-sort-btn:hover {
+  background-color: var(--category-bg);
+}
+
+/* ==========================================================================
+   Table Cell Content
+   ========================================================================== */
+
+/* Entry name link */
+.data-table-entry-link {
+  font-weight: 500;
+  color: var(--category-primary, var(--primary));
+  text-decoration: none;
+}
+
+.data-table-entry-link:hover {
+  text-decoration: underline;
+}
+
+/* External link icon button */
+.data-table-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  color: var(--muted-foreground);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.data-table-link-icon:hover {
+  color: var(--category-primary, var(--primary));
+  background-color: var(--accent);
+}
+
+/* External link in cell */
+.data-table-external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--category-primary, var(--primary));
+  text-decoration: none;
+}
+
+.data-table-external-link:hover {
+  text-decoration: underline;
+}
+
+/* Empty state */
+.data-table-empty {
+  text-align: center;
+  padding: 3rem 1rem !important;
+  color: var(--muted-foreground);
+}
+
+/* Muted placeholder for null values */
+.data-table-null {
+  color: var(--muted-foreground);
+}
+
+/* Array values displayed as badges */
+.data-table-array {
+  display: flex;
+  gap: var(--space-1);
+}

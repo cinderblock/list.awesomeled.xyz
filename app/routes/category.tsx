@@ -34,32 +34,26 @@ export default function CategoryPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <div
-      className="category-theme"
+      className="category-theme category-page"
       style={
         {
           '--category-hue': category.color.hue,
           backgroundColor: 'var(--category-bg-subtle)',
-          // Use flex-grow in layout instead of min-height to avoid unnecessary scrollbar
-          flex: '1 0 auto',
         } as React.CSSProperties
       }
     >
-      <div className="container py-8">
-        <nav className="mb-2 flex items-center gap-2">
-          <Link to="/" className="text-sm text-muted hover:text-foreground">
+      <div className="container page-section">
+        <nav className="breadcrumb">
+          <Link to="/" className="breadcrumb-link">
             Home
           </Link>
-          <span className="text-muted">/</span>
-          <span className="text-sm" style={{ color: 'var(--category-primary)' }}>
-            {category.name}
-          </span>
+          <span className="breadcrumb-separator">/</span>
+          <span className="category-breadcrumb-current">{category.name}</span>
         </nav>
 
-        <header className="mb-6">
-          <h1 className="text-3xl font-bold mb-2" style={{ color: 'var(--category-primary)' }}>
-            {category.name}
-          </h1>
-          <p className="text-muted">{category.description}</p>
+        <header className="page-header">
+          <h1 className="page-title category-page-title">{category.name}</h1>
+          <p className="page-description">{category.description}</p>
         </header>
 
         <DataTable

@@ -49,8 +49,8 @@ export function CategoryNav() {
   };
 
   const navClasses = [
-    'relative flex items-center border-b bg-background select-none',
-    isHome ? 'category-nav-hidden' : 'category-nav-visible',
+    'category-nav',
+    isHome ? 'category-nav--hidden' : 'category-nav--visible',
   ].join(' ');
 
   return (
@@ -58,15 +58,8 @@ export function CategoryNav() {
       {/* Left scroll arrow */}
       <button
         onClick={() => scroll('left')}
-        className="flex items-center justify-center transition"
+        className="category-nav-arrow category-nav-arrow--left"
         style={{
-          position: 'absolute',
-          left: 0,
-          top: 0,
-          bottom: 0,
-          width: '2rem',
-          zIndex: 10,
-          background: 'linear-gradient(to right, var(--background), transparent)',
           opacity: showLeftArrow ? 1 : 0,
           pointerEvents: showLeftArrow ? 'auto' : 'none',
         }}
@@ -76,12 +69,8 @@ export function CategoryNav() {
       </button>
 
       {/* Scrollable tabs container */}
-      <div
-        ref={scrollRef}
-        onScroll={updateScrollArrows}
-        className="scrollbar-hide flex overflow-x-auto px-4 mx-auto"
-      >
-        <div className="flex gap-1 py-1 mx-auto">
+      <div ref={scrollRef} onScroll={updateScrollArrows} className="category-nav-scroll">
+        <div className="category-nav-tabs">
           {CATEGORIES.map((category, index) => {
             const isActive = currentCategory?.id === category.id;
             return (
@@ -90,7 +79,7 @@ export function CategoryNav() {
                 to={category.path}
                 prefetch="intent"
                 data-category={category.id}
-                className={`category-tab category-tab-colored ${isActive ? 'active' : ''}`}
+                className={`category-tab ${isActive ? 'category-tab--active' : ''}`}
                 style={
                   {
                     '--tab-index': index,
@@ -108,15 +97,8 @@ export function CategoryNav() {
       {/* Right scroll arrow */}
       <button
         onClick={() => scroll('right')}
-        className="flex items-center justify-center transition"
+        className="category-nav-arrow category-nav-arrow--right"
         style={{
-          position: 'absolute',
-          right: 0,
-          top: 0,
-          bottom: 0,
-          width: '2rem',
-          zIndex: 10,
-          background: 'linear-gradient(to left, var(--background), transparent)',
           opacity: showRightArrow ? 1 : 0,
           pointerEvents: showRightArrow ? 'auto' : 'none',
         }}

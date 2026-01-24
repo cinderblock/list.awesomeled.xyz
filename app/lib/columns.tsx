@@ -76,14 +76,14 @@ function renderLinks(item: BaseEntry, linkConfigs: LinkConfig[]) {
   if (links.length === 0) return null;
 
   return (
-    <div className="flex items-center gap-1">
+    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
       {links.map((link) => (
         <a
           key={link.key}
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="link-icon"
+          className="data-table-link-icon"
           title={`${link.label}: ${getDomain(link.url)}`}
           onClick={(e) => e.stopPropagation()}
         >
@@ -122,13 +122,13 @@ const libraryLinks: LinkConfig[] = [
 function renderBadgeArray(v: unknown) {
   if (!Array.isArray(v)) return null;
   return (
-    <div className="flex gap-1">
+    <div className="data-table-array">
       {v.slice(0, 3).map((i, idx) => (
-        <span key={idx} className="badge badge-outline">
+        <span key={idx} className="badge badge--outline">
           {String(i)}
         </span>
       ))}
-      {v.length > 3 && <span className="badge badge-secondary">+{v.length - 3}</span>}
+      {v.length > 3 && <span className="badge badge--secondary">+{v.length - 3}</span>}
     </div>
   );
 }
@@ -139,10 +139,10 @@ function renderStatus(v: unknown) {
   const status = String(v).toLowerCase();
   const variant =
     status === 'active'
-      ? 'badge-success'
+      ? 'badge--success'
       : status === 'discontinued'
-        ? 'badge-secondary'
-        : 'badge-outline';
+        ? 'badge--secondary'
+        : 'badge--outline';
   return (
     <span className={`badge ${variant}`} style={{ textTransform: 'capitalize' }}>
       {status}
@@ -152,22 +152,22 @@ function renderStatus(v: unknown) {
 
 // Helper for boolean badges
 function renderBool(v: unknown) {
-  if (v === true) return <span className="badge badge-success">Yes</span>;
-  if (v === false) return <span className="badge badge-secondary">No</span>;
+  if (v === true) return <span className="badge badge--success">Yes</span>;
+  if (v === false) return <span className="badge badge--secondary">No</span>;
   return null;
 }
 
 // Helper for formatting price (right-aligned dollar amount)
 function formatPrice(v: unknown) {
-  if (v == null) return <span className="text-muted">-</span>;
+  if (v == null) return <span className="data-table-null">-</span>;
   const num = typeof v === 'number' ? v : parseFloat(String(v).replace(/[^0-9.]/g, ''));
-  if (isNaN(num)) return <span className="text-muted">-</span>;
+  if (isNaN(num)) return <span className="data-table-null">-</span>;
   return <span className="tabular-nums">${num.toLocaleString()}</span>;
 }
 
 // Helper for formatting numeric values with units
 function formatNumericWithUnit(v: unknown, unitWidth?: string) {
-  if (v == null) return <span className="text-muted">-</span>;
+  if (v == null) return <span className="data-table-null">-</span>;
 
   const str = String(v);
 
@@ -185,11 +185,18 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
   }
 
   return (
-    <span className="inline-flex items-baseline justify-end" style={{ width: '100%' }}>
+    <span
+      style={{
+        display: 'inline-flex',
+        alignItems: 'baseline',
+        justifyContent: 'flex-end',
+        width: '100%',
+      }}
+    >
       <span className="tabular-nums">{num.toLocaleString()}</span>
       {unit && (
         <span
-          className="text-muted"
+          className="data-table-null"
           style={{
             marginLeft: '0.25rem',
             width: unitWidth,
@@ -217,9 +224,9 @@ const formatMemory = createUnitFormatter('5ch');
 
 // Helper for formatting plain numeric values (right-aligned, no unit)
 function formatNumericValue(v: unknown) {
-  if (v == null) return <span className="text-muted">-</span>;
+  if (v == null) return <span className="data-table-null">-</span>;
   const num = typeof v === 'number' ? v : parseFloat(String(v).replace(/,/g, ''));
-  if (isNaN(num)) return <span className="text-muted">-</span>;
+  if (isNaN(num)) return <span className="data-table-null">-</span>;
   return <span className="tabular-nums">{num.toLocaleString()}</span>;
 }
 
@@ -241,14 +248,14 @@ export const controllerColumns: Column[] = [
     key: 'max_pixels',
     label: 'Max Pixels',
     render: formatNumericValue,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
     key: 'max_outputs',
     label: 'Outputs',
     render: formatNumericValue,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
@@ -261,7 +268,7 @@ export const controllerColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
   {
@@ -301,14 +308,14 @@ export const pixelColumns: Column[] = [
     key: 'led_voltage',
     label: 'LED Voltage',
     render: formatVoltage,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: 'V' },
   },
   {
     key: 'vcc_voltage',
     label: 'VCC',
     render: formatVoltage,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: 'V' },
   },
   {
@@ -317,7 +324,7 @@ export const pixelColumns: Column[] = [
     render: renderBool,
     filterConfig: { type: 'boolean' },
   },
-  { key: 'data_bitrate', label: 'Data Rate', render: formatFrequency, className: 'text-right' },
+  { key: 'data_bitrate', label: 'Data Rate', render: formatFrequency, className: 'data-table-cell--right' },
   {
     key: 'package_size',
     label: 'Package',
@@ -338,7 +345,7 @@ export const pixelICColumns: Column[] = [
     key: 'channels',
     label: 'Channels',
     render: formatNumericValue,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
@@ -347,8 +354,8 @@ export const pixelICColumns: Column[] = [
     render: renderBool,
     filterConfig: { type: 'boolean' },
   },
-  { key: 'pwm_frequency', label: 'PWM Freq', render: formatFrequency, className: 'text-right' },
-  { key: 'data_bitrate', label: 'Data Rate', render: formatFrequency, className: 'text-right' },
+  { key: 'pwm_frequency', label: 'PWM Freq', render: formatFrequency, className: 'data-table-cell--right' },
+  { key: 'data_bitrate', label: 'Data Rate', render: formatFrequency, className: 'data-table-cell--right' },
   {
     key: 'package_size',
     label: 'Package',
@@ -374,7 +381,7 @@ export const patternDriverColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
   {
@@ -432,14 +439,14 @@ export const connectorColumns: Column[] = [
     key: 'max_current',
     label: 'Max Current',
     render: formatCurrent,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: 'A' },
   },
   {
     key: 'max_voltage',
     label: 'Max Voltage',
     render: formatVoltage,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: 'V' },
   },
   {
@@ -478,9 +485,9 @@ export const microboardColumns: Column[] = [
     label: 'CPU',
     filterConfig: { type: 'select' },
   },
-  { key: 'clock_speed', label: 'Clock', render: formatFrequency, className: 'text-right' },
-  { key: 'flash', label: 'Flash', render: formatMemory, className: 'text-right' },
-  { key: 'ram', label: 'RAM', render: formatMemory, className: 'text-right' },
+  { key: 'clock_speed', label: 'Clock', render: formatFrequency, className: 'data-table-cell--right' },
+  { key: 'flash', label: 'Flash', render: formatMemory, className: 'data-table-cell--right' },
+  { key: 'ram', label: 'RAM', render: formatMemory, className: 'data-table-cell--right' },
   {
     key: 'wifi',
     label: 'WiFi',
@@ -495,7 +502,7 @@ export const microboardColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
 ];
@@ -518,7 +525,7 @@ export const adapterColumns: Column[] = [
     key: 'max_channels',
     label: 'Channels',
     render: formatNumericValue,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
@@ -530,7 +537,7 @@ export const adapterColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
 ];
@@ -615,7 +622,7 @@ export const commercialSystemColumns: Column[] = [
     key: 'pixels_per_run',
     label: 'Pixels/Run',
     render: formatNumericValue,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
@@ -649,14 +656,14 @@ export const levelConverterColumns: Column[] = [
     key: 'max_channels',
     label: 'Channels',
     render: formatNumericValue,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
     key: 'price',
     label: 'Price',
     render: formatPrice,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
 ];
@@ -679,7 +686,7 @@ export const pixelDecoderColumns: Column[] = [
     key: 'max_channels',
     label: 'Channels',
     render: formatNumericValue,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
@@ -691,14 +698,14 @@ export const pixelDecoderColumns: Column[] = [
     key: 'outputs',
     label: 'Outputs',
     render: formatNumericValue,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
     key: 'price',
     label: 'Price',
     render: formatPrice,
-    className: 'text-right',
+    className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
 ];

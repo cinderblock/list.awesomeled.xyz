@@ -1,0 +1,316 @@
+/* ==========================================================================
+   Column Filter Component - Filter popover and controls
+   ========================================================================== */
+
+/* Filter trigger button in column header */
+.filter-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  margin-left: 0.25rem;
+  color: var(--muted-foreground);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast);
+  opacity: 0.6;
+}
+
+.filter-trigger:hover {
+  color: var(--foreground);
+  background-color: var(--accent);
+  opacity: 1;
+}
+
+.filter-trigger--active {
+  color: var(--category-primary, var(--primary));
+  background-color: var(--category-accent, var(--accent));
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Filter Popover
+   ========================================================================== */
+.filter-popover {
+  min-width: 220px;
+  max-width: 320px;
+  background-color: var(--popover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  animation: filterSlideIn 0.15s ease-out;
+}
+
+@keyframes filterSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-arrow {
+  fill: var(--popover);
+}
+
+/* Popover header */
+.filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.filter-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--foreground);
+}
+
+.filter-clear-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.filter-clear-btn:hover {
+  color: var(--destructive);
+  background-color: var(--accent);
+}
+
+/* Popover content */
+.filter-content {
+  padding: var(--space-3);
+}
+
+.filter-hint {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-2);
+}
+
+/* ==========================================================================
+   Filter Inputs
+   ========================================================================== */
+.filter-input {
+  width: 100%;
+  padding: var(--space-2);
+  font-size: 0.875rem;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  color: var(--foreground);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: var(--category-primary, var(--ring));
+  box-shadow: 0 0 0 2px var(--category-primary, var(--ring));
+}
+
+.filter-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Numeric Filter
+   ========================================================================== */
+.filter-numeric-inputs {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.filter-input-group {
+  flex: 1;
+}
+
+.filter-input-group label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  margin-bottom: var(--space-1);
+}
+
+.filter-apply-btn {
+  width: 100%;
+  padding: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary-foreground);
+  background-color: var(--category-primary, var(--primary));
+  border-radius: var(--radius-md);
+  transition: opacity var(--transition-fast);
+}
+
+.filter-apply-btn:hover {
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   Select Filter
+   ========================================================================== */
+.filter-select-header {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.filter-search {
+  flex: 1;
+}
+
+.filter-exclude-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.filter-exclude-btn:hover {
+  background-color: var(--accent);
+}
+
+.filter-exclude-btn--active {
+  color: var(--destructive);
+  border-color: var(--destructive);
+  background-color: oklch(0.95 0.05 27);
+}
+
+.dark .filter-exclude-btn--active {
+  background-color: oklch(0.25 0.05 27);
+}
+
+/* Select actions */
+.filter-select-actions {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.filter-action-btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--category-primary, var(--primary));
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast);
+}
+
+.filter-action-btn:hover {
+  background-color: var(--accent);
+}
+
+/* Options list */
+.filter-options-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.filter-option:hover {
+  background-color: var(--accent);
+}
+
+.filter-option input[type='checkbox'] {
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  accent-color: var(--category-primary, var(--primary));
+}
+
+.filter-option-label {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--foreground);
+}
+
+.filter-check {
+  color: var(--category-primary, var(--primary));
+}
+
+.filter-no-options {
+  padding: var(--space-3);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Boolean Filter
+   ========================================================================== */
+.filter-boolean-options {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.filter-boolean-btn {
+  flex: 1;
+  padding: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  transition: all var(--transition-fast);
+}
+
+.filter-boolean-btn:hover {
+  background-color: var(--accent);
+  color: var(--foreground);
+}
+
+.filter-boolean-btn--active {
+  color: var(--category-primary-foreground, var(--primary-foreground));
+  background-color: var(--category-primary, var(--primary));
+  border-color: var(--category-primary, var(--primary));
+}
+
+/* ==========================================================================
+   String Filter
+   ========================================================================== */
+.filter-fuzzy-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+
+.filter-fuzzy-toggle input[type='checkbox'] {
+  width: 0.875rem;
+  height: 0.875rem;
+  accent-color: var(--category-primary, var(--primary));
+}

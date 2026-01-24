@@ -1,0 +1,190 @@
+/* ==========================================================================
+   Category Theme - Dynamic category colors using CSS custom properties
+   ========================================================================== */
+
+/* Base category theme variables */
+:root {
+  --category-hue: 0;
+  --category-chroma: 0.18;
+}
+
+/* ==========================================================================
+   Category Theme Colors
+   ========================================================================== */
+
+/* Light mode category colors */
+.category-theme {
+  --category-bg: oklch(0.97 0.02 var(--category-hue));
+  --category-bg-subtle: oklch(0.985 0.01 var(--category-hue));
+  --category-border: oklch(0.88 0.04 var(--category-hue));
+  --category-primary: oklch(0.55 var(--category-chroma) var(--category-hue));
+  --category-primary-hover: oklch(0.48 var(--category-chroma) var(--category-hue));
+  --category-primary-foreground: oklch(0.98 0.01 var(--category-hue));
+  --category-muted: oklch(0.65 0.08 var(--category-hue));
+  --category-accent: oklch(0.92 0.04 var(--category-hue));
+  --category-accent-foreground: oklch(0.35 0.1 var(--category-hue));
+}
+
+/* Dark mode category colors */
+.dark .category-theme {
+  --category-bg: oklch(0.22 0.02 var(--category-hue));
+  --category-bg-subtle: oklch(0.18 0.015 var(--category-hue));
+  --category-border: oklch(0.35 0.04 var(--category-hue));
+  --category-primary: oklch(0.7 var(--category-chroma) var(--category-hue));
+  --category-primary-hover: oklch(0.78 var(--category-chroma) var(--category-hue));
+  --category-primary-foreground: oklch(0.15 0.02 var(--category-hue));
+  --category-muted: oklch(0.6 0.1 var(--category-hue));
+  --category-accent: oklch(0.28 0.04 var(--category-hue));
+  --category-accent-foreground: oklch(0.85 0.08 var(--category-hue));
+}
+
+/* ==========================================================================
+   Category Navigation Tabs
+   ========================================================================== */
+.category-tab {
+  background-color: oklch(0.95 0.02 var(--tab-hue));
+  color: oklch(0.4 0.12 var(--tab-hue));
+  border-bottom: 2px solid transparent;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+}
+
+.category-tab:hover {
+  background-color: oklch(0.92 0.04 var(--tab-hue));
+  color: oklch(0.35 0.15 var(--tab-hue));
+  text-decoration: none;
+}
+
+.category-tab--active {
+  background-color: oklch(0.55 0.18 var(--tab-hue));
+  color: oklch(0.98 0.01 var(--tab-hue));
+  border-bottom-color: oklch(0.45 0.2 var(--tab-hue));
+  box-shadow: var(--shadow-sm);
+}
+
+/* Dark mode tabs */
+.dark .category-tab {
+  background-color: oklch(0.25 0.02 var(--tab-hue));
+  color: oklch(0.7 0.1 var(--tab-hue));
+}
+
+.dark .category-tab:hover {
+  background-color: oklch(0.3 0.04 var(--tab-hue));
+  color: oklch(0.8 0.12 var(--tab-hue));
+}
+
+.dark .category-tab--active {
+  background-color: oklch(0.55 0.16 var(--tab-hue));
+  color: oklch(0.98 0.01 var(--tab-hue));
+  border-bottom-color: oklch(0.65 0.18 var(--tab-hue));
+}
+
+/* ==========================================================================
+   Home Page Category Cards
+   ========================================================================== */
+.category-card {
+  background-color: oklch(0.97 0.015 var(--card-hue));
+  border: 1px solid oklch(0.88 0.04 var(--card-hue));
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  display: block;
+}
+
+.category-card:hover {
+  background-color: oklch(0.94 0.03 var(--card-hue));
+  border-color: oklch(0.7 0.12 var(--card-hue));
+  box-shadow: 0 4px 12px oklch(0.5 0.1 var(--card-hue) / 0.15);
+  text-decoration: none;
+}
+
+.category-card-title {
+  color: oklch(0.45 0.15 var(--card-hue));
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: var(--space-2);
+}
+
+.category-card-description {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.category-card-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: oklch(0.92 0.04 var(--card-hue));
+  color: oklch(0.4 0.12 var(--card-hue));
+  border: 1px solid oklch(0.85 0.06 var(--card-hue));
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: var(--space-3);
+}
+
+/* Dark mode cards */
+.dark .category-card {
+  background-color: oklch(0.22 0.015 var(--card-hue));
+  border-color: oklch(0.35 0.04 var(--card-hue));
+}
+
+.dark .category-card:hover {
+  background-color: oklch(0.28 0.03 var(--card-hue));
+  border-color: oklch(0.5 0.1 var(--card-hue));
+  box-shadow: 0 4px 12px oklch(0.3 0.08 var(--card-hue) / 0.3);
+}
+
+.dark .category-card-title {
+  color: oklch(0.75 0.14 var(--card-hue));
+}
+
+.dark .category-card-badge {
+  background-color: oklch(0.3 0.04 var(--card-hue));
+  color: oklch(0.75 0.1 var(--card-hue));
+  border-color: oklch(0.4 0.06 var(--card-hue));
+}
+
+/* ==========================================================================
+   Category-Themed Table Rows
+   ========================================================================== */
+.category-theme .data-table thead {
+  background-color: var(--category-bg);
+}
+
+.category-theme .data-table th {
+  background-color: var(--category-accent);
+}
+
+.category-theme .data-table tbody tr:nth-child(odd) {
+  background-color: var(--category-bg);
+}
+
+.category-theme .data-table tbody tr:nth-child(even) {
+  background-color: var(--category-bg-subtle);
+}
+
+.category-theme .data-table tbody tr:hover {
+  background-color: var(--category-accent);
+}
+
+/* ==========================================================================
+   Category Page Styles
+   ========================================================================== */
+.category-page {
+  flex: 1 0 auto;
+}
+
+.category-page-title {
+  color: var(--category-primary);
+}
+
+.category-breadcrumb-current {
+  color: var(--category-primary);
+}

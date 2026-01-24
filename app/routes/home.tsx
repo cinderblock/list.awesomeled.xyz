@@ -23,23 +23,18 @@ export default function Home({ loaderData }: Route.ComponentProps) {
   const { counts } = loaderData;
 
   return (
-    <div className="container py-8">
-      <div className="hero-section" style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <h1 className="text-3xl font-bold mb-4">
+    <div className="container page-section">
+      <div className="hero-section">
+        <h1 className="hero-title">
           <RainbowText>Awesome LED List</RainbowText>
         </h1>
-        <p className="text-muted" style={{ maxWidth: '40rem', marginInline: 'auto' }}>
+        <p className="hero-description">
           A comprehensive database of addressable LEDs, controllers, pixels, and related products
           for makers and enthusiasts.
         </p>
       </div>
 
-      <div
-        className="grid gap-4"
-        style={{
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-        }}
-      >
+      <div className="category-grid">
         {CATEGORIES.map((category) => (
           <Link
             key={category.id}
@@ -48,9 +43,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             className="category-card"
             style={{ '--card-hue': category.color.hue } as React.CSSProperties}
           >
-            <h2 className="card-title">{category.name}</h2>
-            <p className="card-description">{category.description}</p>
-            <span className="card-badge">{counts[category.id] || 0} entries</span>
+            <h2 className="category-card-title">{category.name}</h2>
+            <p className="category-card-description">{category.description}</p>
+            <span className="category-card-badge">{counts[category.id] || 0} entries</span>
           </Link>
         ))}
       </div>

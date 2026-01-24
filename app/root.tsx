@@ -79,22 +79,20 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main style={{ paddingTop: '4rem', padding: '1rem', maxWidth: '80rem', marginInline: 'auto' }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>{message}</h1>
-      <p style={{ marginBottom: '1rem' }}>{details}</p>
-      {stack && (
-        <pre
-          style={{
-            width: '100%',
-            padding: '1rem',
-            overflowX: 'auto',
-            backgroundColor: 'var(--muted)',
-            borderRadius: 'var(--radius-md)',
-          }}
-        >
-          <code style={{ fontFamily: 'var(--font-mono)', fontSize: '0.875rem' }}>{stack}</code>
-        </pre>
-      )}
-    </main>
+    <RainbowProvider>
+      <AppLayout>
+        <div className="container page-section">
+          <div className="error-page">
+            <h1 className="error-title">{message}</h1>
+            <p className="error-message">{details}</p>
+            {stack && (
+              <pre className="error-stack">
+                <code>{stack}</code>
+              </pre>
+            )}
+          </div>
+        </div>
+      </AppLayout>
+    </RainbowProvider>
   );
 }

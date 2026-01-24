@@ -17,8 +17,8 @@ export function ThemeToggle() {
   // Render a placeholder with the same dimensions to avoid layout shift
   if (!mounted) {
     return (
-      <button className="btn btn-ghost btn-icon" aria-label="Toggle theme">
-        <span className="w-5 h-5" />
+      <button className="btn btn--ghost btn--icon" aria-label="Toggle theme">
+        <span style={{ width: '1.25rem', height: '1.25rem' }} />
       </button>
     );
   }
@@ -26,7 +26,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggle}
-      className="btn btn-ghost btn-icon"
+      className="btn btn--ghost btn--icon"
       aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
       title={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
     >

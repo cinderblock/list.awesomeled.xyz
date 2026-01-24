@@ -5,28 +5,21 @@ import { RainbowText } from '~/components/ui/RainbowText';
 
 export function Header() {
   return (
-    <header className="bg-background sticky top-0 z-50 select-none">
-      <div className="border-b">
-        <div className="container flex items-center h-14 px-4">
-          <Link
-            to="/"
-            className="flex items-center gap-2 font-semibold"
-            style={{ textDecoration: 'none' }}
-          >
-            <RainbowText className="text-xl">Awesome LED List</RainbowText>
+    <header className="site-header">
+      <div className="site-header-inner">
+        <div className="container site-header-content">
+          <Link to="/" className="site-logo">
+            <RainbowText>Awesome LED List</RainbowText>
           </Link>
-          <nav className="ml-auto flex items-center gap-2">
-            <Link
-              to="/about"
-              className="btn btn-ghost btn-icon text-sm text-muted hover:text-foreground"
-            >
+          <nav className="site-nav">
+            <Link to="/about" className="btn btn--ghost btn--icon site-nav-link">
               About
             </Link>
             <a
               href="https://github.com/cinderblock/awesomeledlist"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-ghost btn-icon text-muted hover:text-foreground"
+              className="btn btn--ghost btn--icon site-nav-link"
               title="View on GitHub"
             >
               <Github size={20} />

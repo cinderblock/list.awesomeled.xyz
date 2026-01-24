@@ -606,6 +606,7 @@ export function DataTable({
   const stickyHeaderRef = useRef<HTMLDivElement>(null);
   const stickyHeaderScrollRef = useRef<HTMLDivElement>(null);
   const stickyMaskRef = useRef<HTMLDivElement>(null);
+  const tableContainerRef = useRef<Element | null>(null);
 
   // Cache for element measurements to avoid getBoundingClientRect on every scroll
   const measurementsRef = useRef({
@@ -615,6 +616,9 @@ export function DataTable({
     controlsHeight: CONTROLS_HEIGHT,
     headerHeight: 44,
   });
+
+  // RAF frame ID for batching scroll updates
+  const rafIdRef = useRef<number | null>(null);
 
   // State only for things that need re-render (column widths for colgroup)
   const [showStickyHeader, setShowStickyHeader] = useState(false);
@@ -628,11 +632,13 @@ export function DataTable({
     const thead = tableRef.current.querySelector('thead');
     if (!thead) return;
 
-    // Get the table-container (parent of table) to account for its border
-    const tableContainer = tableRef.current.closest('.table-container');
-    if (!tableContainer) return;
+    // Cache the table container reference (only query once)
+    if (!tableContainerRef.current) {
+      tableContainerRef.current = tableRef.current.closest('.data-table-container');
+    }
+    if (!tableContainerRef.current) return;
 
-    const containerRect = tableContainer.getBoundingClientRect();
+    const containerRect = tableContainerRef.current.getBoundingClientRect();
     const theadRect = thead.getBoundingClientRect();
     const controlsRect = controlsRef.current.getBoundingClientRect();
 
@@ -666,12 +672,10 @@ export function DataTable({
   }, []);
 
   // Update sticky header horizontal position using transform (GPU accelerated)
+  // Only called on resize/visibility change, NOT on every horizontal scroll
   const updateStickyPosition = useCallback(() => {
-    if (!tableRef.current || !stickyHeaderRef.current) return;
-    // Get the table-container (parent of table) to account for its border
-    const tableContainer = tableRef.current.closest('.table-container');
-    if (!tableContainer) return;
-    const containerRect = tableContainer.getBoundingClientRect();
+    if (!stickyHeaderRef.current || !tableContainerRef.current) return;
+    const containerRect = tableContainerRef.current.getBoundingClientRect();
     // Use transform instead of left for GPU acceleration
     stickyHeaderRef.current.style.transform = `translateX(${containerRect.left}px)`;
     stickyHeaderRef.current.style.width = `${containerRect.width}px`;
@@ -697,15 +701,22 @@ export function DataTable({
 
     const scrollContainer = scrollContainerRef.current;
 
-    // Horizontal scroll handler - just mirror scroll position, very fast
+    // Horizontal scroll handler - just mirror scroll position directly
+    // This is very fast as scrollLeft assignment doesn't trigger layout
     const handleHorizontalScroll = () => {
       syncHorizontalScroll();
-      updateStickyPosition();
     };
 
-    // Vertical scroll handler - check visibility
+    // Vertical scroll handler - use RAF to batch visibility checks
+    // This avoids layout thrashing from getBoundingClientRect during rapid scroll
     const handleVerticalScroll = () => {
-      checkStickyVisibility();
+      if (rafIdRef.current) return; // Already have a pending frame
+      rafIdRef.current = requestAnimationFrame(() => {
+        rafIdRef.current = null;
+        checkStickyVisibility();
+        // Only update position on vertical scroll (when container may have moved)
+        updateStickyPosition();
+      });
     };
 
     // Resize handler - re-measure everything
@@ -732,6 +743,9 @@ export function DataTable({
       window.removeEventListener('scroll', handleVerticalScroll);
       window.removeEventListener('resize', handleResize);
       resizeObserver.disconnect();
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
   }, [measureAll, syncHorizontalScroll, updateStickyPosition, checkStickyVisibility]);
 
@@ -754,14 +768,16 @@ export function DataTable({
     <tr>
       {columns.map((col) => {
         const colKey = String(col.key);
-        const isRightAligned = col.className?.includes('text-right');
+        const isRightAligned = col.className?.includes('data-table-cell--right');
         const hasFilter = col.filterConfig != null;
         const filterValue = urlFilters[colKey];
         return (
           <th key={colKey} className={col.className}>
-            <div className={`th-content ${isRightAligned ? 'justify-end' : ''}`}>
+            <div
+              className={`data-table-th-content${isRightAligned ? ' data-table-th-content--right' : ''}`}
+            >
               {col.sortable !== false && col.key !== 'links' ? (
-                <button className="sort-btn" onClick={() => handleSort(colKey)}>
+                <button className="data-table-sort-btn" onClick={() => handleSort(colKey)}>
                   {col.label}
                   {sortKey === colKey && sortDir === 'asc' && <ChevronUp size={16} />}
                   {sortKey === colKey && sortDir === 'desc' && <ChevronDown size={16} />}
@@ -787,36 +803,36 @@ export function DataTable({
   return (
     <div className="data-table-wrapper">
       {/* Sticky controls bar - outside scroll wrapper, spans full width */}
-      <div ref={controlsRef} className="sticky-controls">
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="search-input-wrapper">
-            <Search size={16} className="search-icon" />
+      <div ref={controlsRef} className="data-table-controls">
+        <div className="data-table-controls-inner">
+          <div className="data-table-search">
+            <Search size={16} className="data-table-search-icon" />
             <input
               type="text"
               placeholder="Search (space-separated)..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="search-input"
+              className="data-table-search-input"
             />
           </div>
-          <span className="text-muted text-sm">
+          <span className="data-table-count">
             {sortedData.length} of {data.length} entries
             {activeFilterCount > 0 &&
               ` (${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''})`}
           </span>
           {hasFilters && (
-            <button onClick={clearAllFilters} className="btn btn-ghost btn-sm">
+            <button onClick={clearAllFilters} className="btn btn--ghost btn--sm">
               <X size={16} />
               Clear all
             </button>
           )}
           {isFiltered ? (
-            <button onClick={handleDownloadCSV} className="btn btn-outline btn-sm">
+            <button onClick={handleDownloadCSV} className="btn btn--outline btn--sm">
               <Download size={16} />
               Download CSV
             </button>
           ) : (
-            <a href={`${categoryPath}.csv`} download className="btn btn-outline btn-sm">
+            <a href={`${categoryPath}.csv`} download className="btn btn--outline btn--sm">
               <Download size={16} />
               Download CSV
             </a>
@@ -824,9 +840,9 @@ export function DataTable({
         </div>
         {/* Active filters display */}
         {activeFilters.length > 0 && (
-          <div className="active-filters">
+          <div className="data-table-active-filters">
             {activeFilters.map(({ key, label, description }) => (
-              <span key={key} className="active-filter-tag">
+              <span key={key} className="data-table-filter-tag">
                 <strong>{label}:</strong> {description}
                 <button
                   onClick={() => setColumnFilter(key, undefined)}
@@ -843,7 +859,7 @@ export function DataTable({
       {/* Background mask to hide table rows scrolling behind sticky header and controls */}
       <div
         ref={stickyMaskRef}
-        className="sticky-header-mask"
+        className="data-table-sticky-mask"
         style={{
           position: 'fixed',
           top: HEADER_HEIGHT,
@@ -858,7 +874,7 @@ export function DataTable({
       {/* Sticky header clone - fixed to viewport, uses scroll mirroring */}
       <div
         ref={stickyHeaderRef}
-        className="sticky-header-clone"
+        className="data-table-sticky-header"
         style={{
           position: 'fixed',
           top: HEADER_HEIGHT + controlsHeight,
@@ -871,7 +887,7 @@ export function DataTable({
         {/* Inner scroll container - mirrors horizontal scroll of main table */}
         <div
           ref={stickyHeaderScrollRef}
-          className="sticky-header-scroll"
+          className="data-table-sticky-header-scroll"
           style={{
             overflowX: 'hidden',
             overflowY: 'hidden',
@@ -889,10 +905,10 @@ export function DataTable({
       </div>
 
       {/* Horizontal scroll wrapper */}
-      <div ref={scrollContainerRef} className="table-scroll-wrapper">
-        <div className="table-scroll-inner">
+      <div ref={scrollContainerRef} className="data-table-scroll">
+        <div className="data-table-scroll-inner">
           {/* Table */}
-          <div className="table-container">
+          <div className="data-table-container">
             <table ref={tableRef} className="data-table">
               <thead style={{ visibility: showStickyHeader ? 'hidden' : 'visible' }}>
                 {renderHeaderRow()}
@@ -900,7 +916,7 @@ export function DataTable({
               <tbody>
                 {sortedData.length === 0 ? (
                   <tr>
-                    <td colSpan={columns.length} className="empty-state">
+                    <td colSpan={columns.length} className="data-table-empty">
                       No results found.
                     </td>
                   </tr>
@@ -914,7 +930,7 @@ export function DataTable({
                             {col.render ? (
                               col.render(value, item)
                             ) : col.key === 'name' ? (
-                              <Link to={`${categoryPath}/${item.id}`} className="entry-link">
+                              <Link to={`${categoryPath}/${item.id}`} className="data-table-entry-link">
                                 {String(value ?? '')}
                               </Link>
                             ) : (
@@ -937,22 +953,22 @@ export function DataTable({
 
 function CellValue({ value }: { value: unknown }) {
   if (value == null) {
-    return <span className="text-muted">-</span>;
+    return <span className="data-table-null">-</span>;
   }
 
   if (typeof value === 'boolean') {
     return value ? (
-      <span className="badge badge-success">Yes</span>
+      <span className="badge badge--success">Yes</span>
     ) : (
-      <span className="badge badge-secondary">No</span>
+      <span className="badge badge--secondary">No</span>
     );
   }
 
   if (Array.isArray(value)) {
     return (
-      <div className="flex gap-1">
+      <div className="data-table-array">
         {value.map((v, i) => (
-          <span key={i} className="badge badge-outline">
+          <span key={i} className="badge badge--outline">
             {String(v)}
           </span>
         ))}
@@ -962,7 +978,7 @@ function CellValue({ value }: { value: unknown }) {
 
   if (typeof value === 'string' && value.startsWith('http')) {
     return (
-      <a href={value} target="_blank" rel="noopener noreferrer" className="external-link">
+      <a href={value} target="_blank" rel="noopener noreferrer" className="data-table-external-link">
         Link
       </a>
     );

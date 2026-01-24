@@ -175,7 +175,7 @@ export function ColumnFilter({ column, data, value, onChange }: ColumnFilterProp
     <Popover.Root>
       <Popover.Trigger asChild>
         <button
-          className={`filter-trigger ${isActive ? 'active' : ''}`}
+          className={`filter-trigger${isActive ? ' filter-trigger--active' : ''}`}
           title={`Filter ${column.label}`}
         >
           <Filter size={14} />
@@ -385,7 +385,7 @@ function SelectFilter({ column, data, value, onChange, config }: SelectFilterPro
           className="filter-input filter-search"
         />
         <button
-          className={`filter-exclude-btn ${exclude ? 'active' : ''}`}
+          className={`filter-exclude-btn${exclude ? ' filter-exclude-btn--active' : ''}`}
           onClick={toggleExclude}
           title={exclude ? 'Excluding selected values' : 'Including selected values'}
         >
@@ -444,19 +444,19 @@ function BooleanFilter({ value, onChange, config }: BooleanFilterProps) {
     <div className="filter-content">
       <div className="filter-boolean-options">
         <button
-          className={`filter-boolean-btn ${currentValue === null ? 'active' : ''}`}
+          className={`filter-boolean-btn${currentValue === null ? ' filter-boolean-btn--active' : ''}`}
           onClick={() => handleChange(null)}
         >
           Any
         </button>
         <button
-          className={`filter-boolean-btn ${currentValue === true ? 'active' : ''}`}
+          className={`filter-boolean-btn${currentValue === true ? ' filter-boolean-btn--active' : ''}`}
           onClick={() => handleChange(true)}
         >
           {trueLabel}
         </button>
         <button
-          className={`filter-boolean-btn ${currentValue === false ? 'active' : ''}`}
+          className={`filter-boolean-btn${currentValue === false ? ' filter-boolean-btn--active' : ''}`}
           onClick={() => handleChange(false)}
         >
           {falseLabel}
