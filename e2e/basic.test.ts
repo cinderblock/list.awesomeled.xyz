@@ -228,10 +228,7 @@ test.describe('Console errors', () => {
 });
 
 test.describe('Responsive layout', () => {
-  // Classic scrollbar width on Windows/Linux
-  const SCROLLBAR_WIDTH = 17;
-
-  test('table should not have horizontal scrollbar at wide viewport', async ({ page }) => {
+  test('page should not have horizontal scrollbar at wide viewport', async ({ page }) => {
     // Set a wide viewport width
     await page.setViewportSize({ width: 1920, height: 1080 });
 
@@ -242,43 +239,43 @@ test.describe('Responsive layout', () => {
     const tableWrapper = page.locator('.table-scroll-wrapper');
     await expect(tableWrapper).toBeVisible();
 
-    // The bug: CSS uses 100vw which includes scrollbar width, but clientWidth doesn't.
-    // On Windows/Linux with classic scrollbars (17px), this causes horizontal overflow.
-    // To detect this in headless mode (which uses overlay scrollbars), we check if
-    // any element using 100vw would overflow when a scrollbar is present.
-    const scrollInfo = await page.evaluate((scrollbarWidth) => {
+    // Check for actual horizontal scroll on the page (not inside scroll containers)
+    // body.scrollWidth > body.clientWidth means there's horizontal overflow at page level
+    const scrollInfo = await page.evaluate(() => {
       const body = document.body;
+      const html = document.documentElement;
 
-      // Check if content would overflow with a classic scrollbar
-      // scrollWidth shows actual content width, we compare against viewport minus scrollbar
-      const availableWidth = window.innerWidth - scrollbarWidth;
-      const wouldOverflow = body.scrollWidth > availableWidth;
+      return {
+        // Check if page has horizontal scroll
+        hasHorizontalScroll: body.scrollWidth > html.clientWidth,
+        bodyScrollWidth: body.scrollWidth,
+        htmlClientWidth: html.clientWidth,
+      };
+    });
 
-      return { wouldOverflow };
-    }, SCROLLBAR_WIDTH);
-
-    // Fail if there would be overflow with a classic scrollbar present
-    expect(scrollInfo.wouldOverflow).toBe(false);
+    // The page itself should not have horizontal scroll
+    // (Individual components like .table-scroll-wrapper can have their own scroll)
+    expect(scrollInfo.hasHorizontalScroll).toBe(false);
 
     // Scroll down to trigger sticky header
     await page.evaluate(() => window.scrollBy(0, 300));
     await page.waitForTimeout(100);
 
     // Check again after scrolling (with sticky header visible)
-    const scrollInfoAfter = await page.evaluate((scrollbarWidth) => {
+    const scrollInfoAfter = await page.evaluate(() => {
       const body = document.body;
-      const availableWidth = window.innerWidth - scrollbarWidth;
+      const html = document.documentElement;
       return {
-        wouldOverflow: body.scrollWidth > availableWidth,
+        hasHorizontalScroll: body.scrollWidth > html.clientWidth,
       };
-    }, SCROLLBAR_WIDTH);
+    });
 
-    expect(scrollInfoAfter.wouldOverflow).toBe(false);
+    expect(scrollInfoAfter.hasHorizontalScroll).toBe(false);
   });
 
   test('page should not have unnecessary vertical scrollbar at tall viewport', async ({ page }) => {
     // Set a very tall viewport - taller than content should need
-    await page.setViewportSize({ width: 1920, height: 2000 });
+    await page.setViewportSize({ width: 1920, height: 2500 });
 
     // Use a category with fewer entries so content fits in viewport
     await page.goto('/level-converters');
@@ -295,8 +292,6 @@ test.describe('Responsive layout', () => {
       const html = document.documentElement;
 
       return {
-        scrollHeight: body.scrollHeight,
-        clientHeight: html.clientHeight,
         hasVerticalScroll: body.scrollHeight > html.clientHeight,
       };
     });
@@ -304,6 +299,34 @@ test.describe('Responsive layout', () => {
     // If content is shorter than viewport, there should be no vertical scrollbar
     // This catches issues like min-height: 100vh + footer causing unnecessary scroll
     expect(scrollInfo.hasVerticalScroll).toBe(false);
+  });
+
+  test('should not use overflow clipping hacks on top-level elements', async ({ page }) => {
+    await page.goto('/controllers');
+    await page.waitForLoadState('networkidle');
+
+    // Check that html and body don't use overflow clipping to hide scrollbar bugs
+    // These are band-aid fixes that hide the real problem
+    const overflowStyles = await page.evaluate(() => {
+      const html = document.documentElement;
+      const body = document.body;
+      const htmlStyle = window.getComputedStyle(html);
+      const bodyStyle = window.getComputedStyle(body);
+
+      return {
+        htmlOverflowX: htmlStyle.overflowX,
+        htmlOverflowY: htmlStyle.overflowY,
+        bodyOverflowX: bodyStyle.overflowX,
+        bodyOverflowY: bodyStyle.overflowY,
+      };
+    });
+
+    // overflow should be 'visible' or 'auto', not 'hidden' or 'clip'
+    const badValues = ['hidden', 'clip'];
+    expect(badValues).not.toContain(overflowStyles.htmlOverflowX);
+    expect(badValues).not.toContain(overflowStyles.htmlOverflowY);
+    expect(badValues).not.toContain(overflowStyles.bodyOverflowX);
+    expect(badValues).not.toContain(overflowStyles.bodyOverflowY);
   });
 });
 

@@ -129,12 +129,13 @@ html {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  min-height: 100vh;
+  height: 100%;
 }
 
 /* Links */
@@ -374,7 +375,8 @@ img {
   height: 3.5rem;
 }
 .min-h-screen {
-  min-height: 100vh;
+  /* Use dvh to account for mobile browser chrome, fallback to 100% */
+  min-height: 100dvh;
 }
 .max-w-3xl {
   max-width: 48rem;
@@ -452,7 +454,8 @@ img {
 .layout-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  /* Use 100% instead of 100vh to avoid scrollbar on Windows/Linux */
+  min-height: 100%;
 }
 
 .layout-main {
@@ -939,18 +942,17 @@ img {
    ========================================================================== */
 
 /*
- * The table scroll wrapper breaks out of container for full-width scrolling.
+ * The table scroll wrapper contains the scrollable table.
  * When table fits: centered with auto margins
- * When table overflows: left-aligned to use all available space
+ * When table overflows: scrolls horizontally within container
  */
 .table-scroll-wrapper {
-  /* Break out of container to use full viewport width */
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
   overflow-x: auto;
-  /* Padding provides minimum edge gap */
-  padding-left: 1rem;
-  padding-right: 1rem;
+  /* Negative margin + padding extends scroll area to container edges */
+  margin-left: calc(-1 * var(--space-4));
+  margin-right: calc(-1 * var(--space-4));
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
 }
 
 /* Inner container - shrinks to table content width, centers when it fits */
@@ -968,10 +970,20 @@ img {
 
 /* Sticky header clone styles */
 .sticky-header-clone {
+  /* Use GPU acceleration for smooth transforms */
+  transform: translateX(0);
+  will-change: transform;
+  pointer-events: auto;
+}
+
+.sticky-header-clone .sticky-header-scroll {
   background-color: var(--category-accent, var(--muted));
+  /* Match the table-container border - top and sides only */
   border: 1px solid var(--border);
   border-bottom: none;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  /* Clip overflow for clean edges */
+  overflow: hidden;
 }
 
 .sticky-header-clone .data-table {
@@ -981,6 +993,16 @@ img {
 .sticky-header-clone .data-table th {
   /* Override sticky positioning for the clone - it's already fixed */
   position: static;
+}
+
+.sticky-header-clone .data-table th:first-child {
+  /* Remove the radius since it's on the scroll container now */
+  border-top-left-radius: 0;
+}
+
+.sticky-header-clone .data-table th:last-child {
+  /* Remove the radius since it's on the scroll container now */
+  border-top-right-radius: 0;
 }
 
 /* Search input wrapper */

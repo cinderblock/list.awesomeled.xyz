@@ -604,80 +604,119 @@ export function DataTable({
   const tableRef = useRef<HTMLTableElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
   const stickyHeaderRef = useRef<HTMLDivElement>(null);
+  const stickyHeaderScrollRef = useRef<HTMLDivElement>(null);
   const stickyMaskRef = useRef<HTMLDivElement>(null);
-  const rafRef = useRef<number>(0);
 
-  // State only for things that need re-render
+  // Cache for element measurements to avoid getBoundingClientRect on every scroll
+  const measurementsRef = useRef({
+    tableLeft: 0,
+    tableWidth: 0,
+    theadTop: 0,
+    controlsHeight: CONTROLS_HEIGHT,
+    headerHeight: 44,
+  });
+
+  // State only for things that need re-render (column widths for colgroup)
   const [showStickyHeader, setShowStickyHeader] = useState(false);
   const [columnWidths, setColumnWidths] = useState<number[]>([]);
   const [controlsHeight, setControlsHeight] = useState(CONTROLS_HEIGHT);
   const [headerHeight, setHeaderHeight] = useState(44);
 
-  // Measure column widths from the actual table header
-  const measureColumns = useCallback(() => {
-    if (!tableRef.current) return;
+  // Measure and cache all element dimensions
+  const measureAll = useCallback(() => {
+    if (!tableRef.current || !controlsRef.current) return;
     const thead = tableRef.current.querySelector('thead');
     if (!thead) return;
 
+    // Get the table-container (parent of table) to account for its border
+    const tableContainer = tableRef.current.closest('.table-container');
+    if (!tableContainer) return;
+
+    const containerRect = tableContainer.getBoundingClientRect();
+    const theadRect = thead.getBoundingClientRect();
+    const controlsRect = controlsRef.current.getBoundingClientRect();
+
+    // Cache measurements
+    measurementsRef.current = {
+      tableLeft: containerRect.left,
+      tableWidth: containerRect.width,
+      theadTop: theadRect.top,
+      controlsHeight: controlsRect.height,
+      headerHeight: theadRect.height,
+    };
+
+    // Update state for things that need re-render
     const ths = thead.querySelectorAll('th');
     const widths = Array.from(ths).map((th) => th.getBoundingClientRect().width);
     setColumnWidths(widths);
-    setHeaderHeight(thead.getBoundingClientRect().height);
+    setControlsHeight(controlsRect.height);
+    setHeaderHeight(theadRect.height);
+
+    // Update sticky header position using container dimensions
+    if (stickyHeaderRef.current) {
+      stickyHeaderRef.current.style.width = `${containerRect.width}px`;
+      stickyHeaderRef.current.style.transform = `translateX(${containerRect.left}px)`;
+    }
   }, []);
 
-  // Measure controls bar height
-  const measureControlsHeight = useCallback(() => {
-    if (!controlsRef.current) return;
-    setControlsHeight(controlsRef.current.getBoundingClientRect().height);
+  // Sync horizontal scroll - mirror scroll position directly (no RAF needed, very fast)
+  const syncHorizontalScroll = useCallback(() => {
+    if (!scrollContainerRef.current || !stickyHeaderScrollRef.current) return;
+    stickyHeaderScrollRef.current.scrollLeft = scrollContainerRef.current.scrollLeft;
   }, []);
 
-  // Update header position directly via DOM (no state update) for smooth scrolling
-  const updateHeaderPositionDirect = useCallback(() => {
+  // Update sticky header horizontal position using transform (GPU accelerated)
+  const updateStickyPosition = useCallback(() => {
     if (!tableRef.current || !stickyHeaderRef.current) return;
-    const tableRect = tableRef.current.getBoundingClientRect();
-    stickyHeaderRef.current.style.left = `${tableRect.left}px`;
-    stickyHeaderRef.current.style.width = `${tableRect.width}px`;
+    // Get the table-container (parent of table) to account for its border
+    const tableContainer = tableRef.current.closest('.table-container');
+    if (!tableContainer) return;
+    const containerRect = tableContainer.getBoundingClientRect();
+    // Use transform instead of left for GPU acceleration
+    stickyHeaderRef.current.style.transform = `translateX(${containerRect.left}px)`;
+    stickyHeaderRef.current.style.width = `${containerRect.width}px`;
   }, []);
 
-  // Check if we should show the sticky header
+  // Check visibility using cached measurements where possible
   const checkStickyVisibility = useCallback(() => {
     if (!tableRef.current || !controlsRef.current) return;
     const thead = tableRef.current.querySelector('thead');
     if (!thead) return;
 
     const theadRect = thead.getBoundingClientRect();
-    const currentControlsHeight = controlsRef.current.getBoundingClientRect().height;
-    const stickyTop = HEADER_HEIGHT + currentControlsHeight;
+    const stickyTop = HEADER_HEIGHT + measurementsRef.current.controlsHeight;
     const shouldShow = theadRect.top < stickyTop;
 
-    setShowStickyHeader(shouldShow);
-  }, []);
+    if (shouldShow !== showStickyHeader) {
+      setShowStickyHeader(shouldShow);
+    }
+  }, [showStickyHeader]);
 
   useEffect(() => {
-    measureColumns();
-    measureControlsHeight();
-    checkStickyVisibility();
+    measureAll();
 
     const scrollContainer = scrollContainerRef.current;
 
-    // Use requestAnimationFrame for smooth scroll updates
-    const handleScroll = () => {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = requestAnimationFrame(() => {
-        updateHeaderPositionDirect();
-        checkStickyVisibility();
-      });
+    // Horizontal scroll handler - just mirror scroll position, very fast
+    const handleHorizontalScroll = () => {
+      syncHorizontalScroll();
+      updateStickyPosition();
     };
 
-    const handleResize = () => {
-      measureColumns();
-      measureControlsHeight();
-      updateHeaderPositionDirect();
+    // Vertical scroll handler - check visibility
+    const handleVerticalScroll = () => {
       checkStickyVisibility();
     };
 
-    scrollContainer?.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Resize handler - re-measure everything
+    const handleResize = () => {
+      measureAll();
+    };
+
+    // Horizontal scroll on container
+    scrollContainer?.addEventListener('scroll', handleHorizontalScroll, { passive: true });
+    // Vertical scroll on window
+    window.addEventListener('scroll', handleVerticalScroll, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
 
     const resizeObserver = new ResizeObserver(handleResize);
@@ -689,26 +728,26 @@ export function DataTable({
     }
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
-      scrollContainer?.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('scroll', handleScroll);
+      scrollContainer?.removeEventListener('scroll', handleHorizontalScroll);
+      window.removeEventListener('scroll', handleVerticalScroll);
       window.removeEventListener('resize', handleResize);
       resizeObserver.disconnect();
     };
-  }, [measureColumns, measureControlsHeight, updateHeaderPositionDirect, checkStickyVisibility]);
+  }, [measureAll, syncHorizontalScroll, updateStickyPosition, checkStickyVisibility]);
 
   // Re-measure when data changes
   useEffect(() => {
-    const timer = setTimeout(measureColumns, 50);
+    const timer = setTimeout(measureAll, 50);
     return () => clearTimeout(timer);
-  }, [sortedData, measureColumns]);
+  }, [sortedData, measureAll]);
 
   // Update position immediately when sticky header becomes visible
   useEffect(() => {
     if (showStickyHeader) {
-      updateHeaderPositionDirect();
+      updateStickyPosition();
+      syncHorizontalScroll();
     }
-  }, [showStickyHeader, updateHeaderPositionDirect]);
+  }, [showStickyHeader, updateStickyPosition, syncHorizontalScroll]);
 
   // Render the header row content (shared between original and sticky clone)
   const renderHeaderRow = () => (
@@ -812,29 +851,41 @@ export function DataTable({
           right: 0,
           height: controlsHeight + headerHeight,
           zIndex: 24,
-          display: showStickyHeader ? 'block' : 'none',
+          visibility: showStickyHeader ? 'visible' : 'hidden',
         }}
       />
 
-      {/* Sticky header clone - fixed to viewport, below controls */}
+      {/* Sticky header clone - fixed to viewport, uses scroll mirroring */}
       <div
         ref={stickyHeaderRef}
         className="sticky-header-clone"
         style={{
           position: 'fixed',
           top: HEADER_HEIGHT + controlsHeight,
+          left: 0,
           zIndex: 25,
-          display: showStickyHeader && columnWidths.length > 0 ? 'block' : 'none',
+          visibility: showStickyHeader && columnWidths.length > 0 ? 'visible' : 'hidden',
+          willChange: 'transform',
         }}
       >
-        <table className="data-table" style={{ tableLayout: 'fixed' }}>
-          <colgroup>
-            {columnWidths.map((width, i) => (
-              <col key={i} style={{ width }} />
-            ))}
-          </colgroup>
-          <thead>{renderHeaderRow()}</thead>
-        </table>
+        {/* Inner scroll container - mirrors horizontal scroll of main table */}
+        <div
+          ref={stickyHeaderScrollRef}
+          className="sticky-header-scroll"
+          style={{
+            overflowX: 'hidden',
+            overflowY: 'hidden',
+          }}
+        >
+          <table className="data-table" style={{ tableLayout: 'fixed' }}>
+            <colgroup>
+              {columnWidths.map((width, i) => (
+                <col key={i} style={{ width }} />
+              ))}
+            </colgroup>
+            <thead>{renderHeaderRow()}</thead>
+          </table>
+        </div>
       </div>
 
       {/* Horizontal scroll wrapper */}

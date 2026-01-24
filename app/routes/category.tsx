@@ -39,7 +39,8 @@ export default function CategoryPage({ loaderData }: Route.ComponentProps) {
         {
           '--category-hue': category.color.hue,
           backgroundColor: 'var(--category-bg-subtle)',
-          minHeight: 'calc(100vh - 7rem)',
+          // Use flex-grow in layout instead of min-height to avoid unnecessary scrollbar
+          flex: '1 0 auto',
         } as React.CSSProperties
       }
     >
