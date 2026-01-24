@@ -53,9 +53,9 @@ All product data is stored in YAML files in the `database/` directory. See [CONT
 
 ## History
 
-This project started as a [Google Sheets document](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA) to organize information about LED controllers, pixels, and related products. As the community contributed more data, we built this website to make the information more accessible.
-
-Many thanks to Cameron Tacklind for starting this doc.
+This project started as a [Google Sheets document](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA) to organize information about LED controllers, pixels, and related products.
+As the frequency of complete changes decreased, the number of accidental, sloppy, or duplicate edits increased.
+To improve data integrity and allow for community contributions, the data was migrated to a GitHub repository with structured YAML files and a purpose built web interface.
 
 ## Tech Stack
 
