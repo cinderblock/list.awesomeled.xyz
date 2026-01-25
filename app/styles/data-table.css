@@ -345,3 +345,14 @@
   display: flex;
   gap: var(--space-1);
 }
+
+/* Clickable badges in table cells */
+.data-table tbody .badge {
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.data-table tbody .badge:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}

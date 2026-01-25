@@ -456,6 +456,70 @@ export function DataTable({
     });
   }, [setSearchParams, categoryId]);
 
+  // Handle clicks on badges to toggle filters
+  const handleBadgeClick = useCallback(
+    (e: React.MouseEvent<HTMLTableSectionElement>) => {
+      const target = e.target as HTMLElement;
+
+      // Check if clicked on a badge
+      if (!target.classList.contains('badge')) return;
+
+      // Find the column key from the closest td
+      const td = target.closest('td[data-col]') as HTMLElement | null;
+      if (!td) return;
+
+      const colKey = td.dataset.col;
+      if (!colKey) return;
+
+      // Check if this column has a select or boolean filter
+      const col = columns.find((c) => c.key === colKey);
+      if (!col?.filterConfig) return;
+
+      const filterType = col.filterConfig.type;
+      if (filterType !== 'select' && filterType !== 'boolean') return;
+
+      // Get the badge text content
+      const badgeText = target.textContent?.trim();
+      if (!badgeText) return;
+
+      // For boolean filters
+      if (filterType === 'boolean') {
+        const currentFilter = urlFilters[colKey] as BooleanFilterValue | undefined;
+        const clickedValue = badgeText.toLowerCase() === 'yes';
+
+        if (currentFilter?.value === clickedValue) {
+          // Already filtered to this value, remove filter
+          setColumnFilter(colKey, undefined);
+        } else {
+          // Set filter to this value
+          setColumnFilter(colKey, { value: clickedValue });
+        }
+        return;
+      }
+
+      // For select filters - toggle this value in the selection
+      const currentFilter = urlFilters[colKey] as SelectFilterValue | undefined;
+      const currentSelected = currentFilter?.selected || [];
+
+      if (currentSelected.includes(badgeText)) {
+        // Remove from selection
+        const newSelected = currentSelected.filter((v) => v !== badgeText);
+        if (newSelected.length === 0) {
+          setColumnFilter(colKey, undefined);
+        } else {
+          setColumnFilter(colKey, { selected: newSelected, exclude: currentFilter?.exclude || false });
+        }
+      } else {
+        // Add to selection
+        setColumnFilter(colKey, {
+          selected: [...currentSelected, badgeText],
+          exclude: currentFilter?.exclude || false,
+        });
+      }
+    },
+    [columns, urlFilters, setColumnFilter]
+  );
+
   // Get columns with filter configs
   const filterableColumns = useMemo(() => columns.filter((col) => col.filterConfig), [columns]);
 
@@ -922,7 +986,7 @@ export function DataTable({
               <thead style={{ visibility: showStickyHeader ? 'hidden' : 'visible' }}>
                 {renderHeaderRow()}
               </thead>
-              <tbody>
+              <tbody onClick={handleBadgeClick}>
                 {sortedData.length === 0 ? (
                   <tr>
                     <td colSpan={columns.length} className="data-table-empty">
@@ -935,7 +999,7 @@ export function DataTable({
                       {columns.map((col) => {
                         const value = getValue(item, col.key);
                         return (
-                          <td key={col.key} className={col.className}>
+                          <td key={col.key} className={col.className} data-col={col.key}>
                             {col.render ? (
                               col.render(value, item)
                             ) : col.key === 'name' ? (
