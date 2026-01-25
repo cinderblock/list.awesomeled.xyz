@@ -1,13 +1,18 @@
-import { parse } from 'yaml';
-import { readdirSync, readFileSync, existsSync } from 'fs';
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
+import { existsSync, readdirSync, readFileSync } from 'fs';
+import { dirname, resolve } from 'path';
+import { fileURLToPath } from 'url';
+import { parse } from 'yaml';
 import type { BaseEntry, Category } from './types';
 import { CATEGORIES } from './types';
 
 // Cache for git timestamps (file path -> Date)
 let gitTimestampCache: Map<string, Date> | null = null;
+
+// Commits to ignore when calculating timestamps (e.g., bulk metadata changes)
+const IGNORED_COMMITS = new Set([
+  'b867ec196ee1f68be4e92fa369aa2bdb96018754', // Remove redundant id field from database entries
+]);
 
 /**
  * Get git last-modified timestamps for all database YAML files in a single batch call.
@@ -23,7 +28,7 @@ function getGitTimestamps(): Map<string, Date> {
 
   try {
     const output = execSync(
-      `git log --format="%aI" --name-only --diff-filter=ACMR -- "database/**/*.yaml"`,
+      `git log --format="%H %aI" --name-only --diff-filter=ACMR -- "database/**/*.yaml"`,
       {
         encoding: 'utf-8',
         cwd: repoRoot,
@@ -32,17 +37,24 @@ function getGitTimestamps(): Map<string, Date> {
     );
 
     const lines = output.trim().split('\n');
+    let currentCommit: string | null = null;
     let currentTimestamp: string | null = null;
 
     for (const line of lines) {
       if (!line) continue;
 
-      // ISO timestamp pattern
-      if (/^\d{4}-\d{2}-\d{2}T/.test(line)) {
-        currentTimestamp = line;
+      // Commit hash + ISO timestamp pattern (e.g., "abc123 2024-01-15T...")
+      const commitMatch = line.match(/^([a-f0-9]{40}) (\d{4}-\d{2}-\d{2}T.+)$/);
+      if (commitMatch) {
+        currentCommit = commitMatch[1];
+        currentTimestamp = commitMatch[2];
       } else if (currentTimestamp && line.endsWith('.yaml')) {
+        // Skip files from ignored commits
+        if (currentCommit && IGNORED_COMMITS.has(currentCommit)) {
+          continue;
+        }
         const fullPath = resolve(repoRoot, line);
-        // Only set if not already set (we want most recent commit)
+        // Only set if not already set (we want most recent non-ignored commit)
         if (!gitTimestampCache.has(fullPath)) {
           gitTimestampCache.set(fullPath, new Date(currentTimestamp));
         }
@@ -81,9 +93,7 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
   }
 
   const entries: BaseEntry[] = [];
-  const files = readdirSync(categoryDir).filter(
-    (f) => f.endsWith('.yaml') && !f.startsWith('_')
-  );
+  const files = readdirSync(categoryDir).filter((f) => f.endsWith('.yaml') && !f.startsWith('_'));
 
   const timestamps = getGitTimestamps();
 
