@@ -1,4 +1,3 @@
-id: arduino-micro
 name: Arduino Micro
 manufacturer: Arduino
 soc: ATmega32u4

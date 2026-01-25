@@ -1,4 +1,3 @@
-id: flex
 name: Flex
 manufacturer: Color Kinetics
 pixels_per_run: null
@@ -10,4 +9,5 @@ price_range: $$$$$$
 core_tech: Proprietary
 since: null
 target_market: null
-notes: Icolor Flex and relatives. Philips Color Kinetics closed eco system of RGB lighting,
+notes: Icolor Flex and relatives. Philips Color Kinetics closed eco system of
+  RGB lighting,

@@ -1,4 +1,3 @@
-id: wieland-rst
 name: Wieland RST
 manufacturer: Wieland
 url: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
@@ -29,4 +28,5 @@ convention: null
 colors: null
 digikey_url: null
 mouser_url: null
-notes: IP 69 Fully Waterproof with sealing rings, Available in Micro to Power size series
+notes: IP 69 Fully Waterproof with sealing rings, Available in Micro to Power
+  size series

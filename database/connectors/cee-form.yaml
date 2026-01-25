@@ -1,4 +1,3 @@
-id: cee-form
 name: CEE Form
 manufacturer: Generic
 url: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/
@@ -29,4 +28,6 @@ convention: null
 colors: Yellow 110V Blue 240V Red 415V
 digikey_url: null
 mouser_url: null
-notes: Also known in building trade as Commando Connectors. 16A Blue 3 Pin single phase popular European connector for stage power distribution. Red Three Phase connector up to 125A  . Other colours used for low voltage
+notes: Also known in building trade as Commando Connectors. 16A Blue 3 Pin
+  single phase popular European connector for stage power distribution. Red
+  Three Phase connector up to 125A  . Other colours used for low voltage

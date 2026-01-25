@@ -1,4 +1,3 @@
-id: wago-221
 name: Wago 221
 manufacturer: Wago
 url: https://www.wago.com/global/electrical-interconnections/discover-installation-terminal-blocks-and-connectors/221
@@ -29,4 +28,6 @@ convention: null
 colors: Clear/Orange
 digikey_url: null
 mouser_url: null
-notes: Successor to Wago 222 Tool free, lever clamping wire to wire connectors, wide range of wire diameter acceptance in stranded or solid Ideal for thin taps of thick bus lines
+notes: Successor to Wago 222 Tool free, lever clamping wire to wire connectors,
+  wide range of wire diameter acceptance in stranded or solid Ideal for thin
+  taps of thick bus lines

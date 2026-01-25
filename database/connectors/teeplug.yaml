@@ -1,4 +1,3 @@
-id: teeplug
 name: TeePlug
 manufacturer: Hylec
 url: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html
@@ -29,4 +28,5 @@ convention: null
 colors: Green or Grey Collar
 digikey_url: null
 mouser_url: null
-notes: 4.0mm2 conductor aceptance   Screw Terminal! , no soldering or crimping     Also appear under Techno brand
+notes: 4.0mm2 conductor aceptance   Screw Terminal! , no soldering or
+  crimping     Also appear under Techno brand

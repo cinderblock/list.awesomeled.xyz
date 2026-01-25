@@ -1,4 +1,3 @@
-id: hd107s
 name: HD107S
 manufacturer: Rose Lighting
 color_order: RGB
@@ -18,8 +17,8 @@ wattage: null
 channel_current: 17mA
 quiescent_current: 0.1mA
 package_sizes:
-  - '5050'
-  - '2020'
+  - "5050"
+  - "2020"
 package_size: 5050, 2020
 pin_count: 6
 data_type: APA102

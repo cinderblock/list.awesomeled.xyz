@@ -1,6 +1,5 @@
-id: flex-pixel-driver
 name: Flex Pixel Driver
-manufacturer: Elation discontinued
+manufacturer: Elation
 max_pixels: 144
 price: 80
 max_outputs: 2

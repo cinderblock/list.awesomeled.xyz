@@ -1,4 +1,3 @@
-id: pixlite-4-mk2
 name: PixLite 4 Mk2
 manufacturer: Advatek
 max_pixels: 4080
@@ -23,7 +22,8 @@ auxiliary_outputs: DMX
 wled_compatible: null
 notes: new firmware has a pixel counting test pattern, great for mapping
 technical_notes:
-  - Pixel counting test pattern in firmware is useful for mapping large installations
+  - Pixel counting test pattern in firmware is useful for mapping large
+    installations
 warranty: null
 release_year: null
 status: active

@@ -1,13 +1,14 @@
-id: ws2812
 name: WS2812
 manufacturer: WorldSemi
 color_order: GRB
 led_voltage: 5V
-led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
+led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and
+  share power with 5V VDD
 clocked: false
 vcc_voltage: 5V
 pwm_frequency: 2.0kHz
-pwm_frequency_notes: 400Hz is an old PWM spec. Newer WS2812b (post 2018) use updated IC with 2.0kHz PWM rate same as WS2813
+pwm_frequency_notes: 400Hz is an old PWM spec. Newer WS2812b (post 2018) use
+  updated IC with 2.0kHz PWM rate same as WS2813
 brightness_bits: 8
 data_bitrate: 800kHz
 pixel_data_size: 24 Bits/Pixel
@@ -16,13 +17,14 @@ gpio_min: 3.0V
 gpio_max: 5V
 wattage: 92.5mW
 channel_current: 18.5mA
-channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA. 3535 package has lower current
+channel_current_notes: Datasheet states max 49mA current, but graph for 5050
+  package shows R=19mA, G,B=22mA. 3535 package has lower current
 quiescent_current: 0.7mA
 package_sizes:
-  - '5050'
-  - '3535'
-  - '2040'
-  - '2020'
+  - "5050"
+  - "3535"
+  - "2040"
+  - "2020"
 package_size: 5050/3535/2040/2020
 pin_count: 4
 data_type: WS2811/12

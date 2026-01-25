@@ -1,4 +1,3 @@
-id: sk9822
 name: SK9822
 manufacturer: Opsco/Newstar
 color_order: BGR
@@ -8,7 +7,8 @@ vcc_voltage: 5V
 pwm_frequency: 4.6kHz
 brightness_bits: 8+5
 brightness_control_method: current
-brightness_control_notes: Extra 5-bit brightness control by LED current, not PWM - superior to APA102's PWM-based brightness
+brightness_control_notes: Extra 5-bit brightness control by LED current, not PWM
+  - superior to APA102's PWM-based brightness
 data_bitrate: 30MHz
 pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 0.94 M Pixel / s
@@ -16,12 +16,13 @@ gpio_min: null
 gpio_max: 5V
 wattage: 100mW
 channel_current: 20mA
-channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control current, not PWM
+channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5
+  bits control current, not PWM
 quiescent_current: 1.0mA
 package_sizes:
-  - '5050'
-  - '2020'
-package_size: '5050'
+  - "5050"
+  - "2020"
+package_size: "5050"
 pin_count: 6
 data_type: APA102
 backup_data_line: false
@@ -30,7 +31,8 @@ release_year: 2016
 notes: APA102 Clone. Extra 5 bits uses constant current driver, no change in PWM.
 technical_notes:
   - APA102 protocol compatible clone with improved brightness control
-  - 5-bit brightness uses current control instead of APA102's PWM - no 400Hz flicker
+  - 5-bit brightness uses current control instead of APA102's PWM - no 400Hz
+    flicker
   - Better for video/photography applications due to no low-frequency PWM
 third_party_testing: https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-the-apa102/
 datasheet_url: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf

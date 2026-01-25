@@ -1,4 +1,3 @@
-id: mini-bucaneer
 name: Mini Bucaneer
 manufacturer: Bulgin
 url: https://www.bulgin.com/us/products/range/circular-power-connectors/mini-series.html
@@ -29,4 +28,5 @@ convention: null
 colors: Black Blue collar
 digikey_url: null
 mouser_url: null
-notes: Bulgin, long established UK connector maker, available with crimp or screw terminals. locking collar can be fragile with rough handling
+notes: Bulgin, long established UK connector maker, available with crimp or
+  screw terminals. locking collar can be fragile with rough handling

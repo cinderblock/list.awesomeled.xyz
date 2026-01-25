@@ -1,4 +1,3 @@
-id: pigtails
 name: Pigtails
 manufacturer: Generic
 url: https://www.wiredwatts.com/wire
@@ -29,4 +28,5 @@ convention: null
 colors: Black
 digikey_url: null
 mouser_url: null
-notes: Round moulded on connectors popuar with Holiday light community, several similar but incompatible styles
+notes: Round moulded on connectors popuar with Holiday light community, several
+  similar but incompatible styles

@@ -1,4 +1,3 @@
-id: ws2815
 name: WS2815
 manufacturer: WorldSemi/Newstar
 color_order: RGB
@@ -6,7 +5,8 @@ led_voltage: 12V
 led_voltage_notes: Datasheet 9.5-13.5V range
 clocked: false
 vcc_voltage: 5V
-vcc_voltage_notes: Internal regulator drops 12V to 5V for logic. Can use external resistor to supply 5V Vdd from higher system voltage
+vcc_voltage_notes: Internal regulator drops 12V to 5V for logic. Can use
+  external resistor to supply 5V Vdd from higher system voltage
 pwm_frequency: 2.0kHz
 pwm_frequency_notes: 2kHz according to datasheet
 brightness_bits: 8
@@ -14,15 +14,16 @@ data_bitrate: 800kHz
 pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
 gpio_min: 3.5V
-gpio_min_notes: Datasheet says 0.7*VDD which would be 8.4V at 12V - this appears to be a copy-paste error. Actual Vdd is internal 5V bus, so 3.5V threshold
+gpio_min_notes: Datasheet says 0.7*VDD which would be 8.4V at 12V - this appears
+  to be a copy-paste error. Actual Vdd is internal 5V bus, so 3.5V threshold
 gpio_max: 5V
 wattage: 120mW
 channel_current: 10mA
 quiescent_current: 2.1mA
 quiescent_current_notes: At 12V supply
 package_sizes:
-  - '5050'
-package_size: '5050'
+  - "5050"
+package_size: "5050"
 pin_count: 6
 data_type: WS2811/12
 backup_data_line: true
@@ -35,7 +36,8 @@ technical_notes:
   - Backup data line for fault tolerance like WS2813
   - 3 internal LEDs in series for 12V operation
 datasheet_discrepancies:
-  - GPIO min spec of 0.7*VDD (8.4V) is incorrect - actual threshold is 3.5V based on internal 5V Vdd
+  - GPIO min spec of 0.7*VDD (8.4V) is incorrect - actual threshold is 3.5V
+    based on internal 5V Vdd
 third_party_testing: null
 datasheet_url: http://newstar-ledstrip.com/product/20180125101420006.pdf
 other_links:

@@ -1,8 +1,8 @@
-id: led-strip-effects-generator
 name: LED Strip Effects Generator
 developer: Adriano
 hardware: Arduino
-features: Create your animation for the Neopixel LED Strip and press "Generate Arduino Code" to get it as code.
+features: Create your animation for the Neopixel LED Strip and press "Generate
+  Arduino Code" to get it as code.
 url: null
 youtube_url: null
 instructional_resources: []

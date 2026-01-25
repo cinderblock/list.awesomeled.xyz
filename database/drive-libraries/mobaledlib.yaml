@@ -1,8 +1,8 @@
-id: mobaledlib
 name: MobaLedLib
 developer: Hardi-St
 hardware: Arduino/ ESP32
-features: ESP32  49152 LEDs / DMX512 , signals, sound modules,servos or other actuators via one signal line ,originally model rail aimed useful beyond
+features: ESP32  49152 LEDs / DMX512 , signals, sound modules,servos or other
+  actuators via one signal line ,originally model rail aimed useful beyond
 url: https://github.com/Hardi-St/MobaLedLib
 youtube_url: null
 instructional_resources: []

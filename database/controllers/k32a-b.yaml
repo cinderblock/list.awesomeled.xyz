@@ -1,4 +1,3 @@
-id: k32a-b
 name: K32A-B
 manufacturer: KulpLights, LLC
 max_pixels: 72000
@@ -17,7 +16,8 @@ outputs: Single
 waterproof: null
 auxiliary_outputs: DMX x2
 wled_compatible: null
-notes: 16 channels require differential receivers. Onboard sound, FM transmitter optional.
+notes: 16 channels require differential receivers. Onboard sound, FM transmitter
+  optional.
 warranty: null
 release_year: null
 status: active

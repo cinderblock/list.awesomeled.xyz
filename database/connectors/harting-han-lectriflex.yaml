@@ -1,4 +1,3 @@
-id: harting-han-lectriflex
 name: Harting Han/ Lectriflex
 manufacturer: Harting
 url: https://www.harting.com/US/en/heavy-duty-electrical-connectors#Han%C2%AE-Rangee
@@ -29,4 +28,6 @@ convention: null
 colors: null
 digikey_url: null
 mouser_url: null
-notes: Harting Han rectangular AKA 16 pin Lectriflex as alternative to Socapex in stage lighting. Multi pin mains connector , modular able to have power , data and even hose lines on one connector.
+notes: Harting Han rectangular AKA 16 pin Lectriflex as alternative to Socapex
+  in stage lighting. Multi pin mains connector , modular able to have power ,
+  data and even hose lines on one connector.

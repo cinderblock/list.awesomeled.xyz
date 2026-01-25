@@ -1,4 +1,3 @@
-id: dylos
 name: Dylos
 developer: Obsidian
 price: Free 1 universe
@@ -22,7 +21,8 @@ language: null
 other_inputs: MIDI, OSC
 other_outputs: null
 integrations: Obsidian Onyx
-notes: Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Artnet https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
+notes: Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Artnet
+  https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
 demo_available: Limited Demo
 status: active
 url: https://obsidiancontrol.com/dylos

@@ -1,4 +1,3 @@
-id: rosco-opti-sculpt
 name: Rosco Opti Sculpt
 url: https://us.rosco.com/en/product/opti-sculpt
 color_rendition: 5
@@ -13,4 +12,5 @@ diffusivity: 4
 sizes_available: 24”x40”
 material_type: PC Polycarbonate
 price_range: $$$$
-notes: embossed DOE, 10°, 20°, 30°, 10°x20°, 10°x30°, 10°x40°, 10°x60°, 15°x35°, 15°x45°, 20°x40° and the unique 40°/60° Reversible
+notes: embossed DOE, 10°, 20°, 30°, 10°x20°, 10°x30°, 10°x40°, 10°x60°, 15°x35°,
+  15°x45°, 20°x40° and the unique 40°/60° Reversible

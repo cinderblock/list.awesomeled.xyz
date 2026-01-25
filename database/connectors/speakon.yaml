@@ -1,4 +1,3 @@
-id: speakon
 name: Speakon
 manufacturer: Neutrik
 url: https://www.neutrik.com/en/neutrik/products/speakon-loudspeaker-connectors/speakon-cable-connectors
@@ -29,4 +28,5 @@ convention: null
 colors: Multi
 digikey_url: null
 mouser_url: null
-notes: World Standard professional amplifier to speaker connector, compatibles offer low cost high current connector , if avoid mix up with audio....
+notes: World Standard professional amplifier to speaker connector, compatibles
+  offer low cost high current connector , if avoid mix up with audio....

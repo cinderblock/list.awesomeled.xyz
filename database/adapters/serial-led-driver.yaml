@@ -1,4 +1,3 @@
-id: serial-led-driver
 name: Serial LED Driver
 manufacturer: ElectroMage
 max_channels: 8

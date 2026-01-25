@@ -1,4 +1,3 @@
-id: deutsch-dt
 name: Deutsch DT
 manufacturer: TE Deutsch
 url: https://www.te.com/usa-en/products/connectors/automotive-connectors/intersection/deutsch-dt-series-connectors.html?tab=pgp-story
@@ -29,4 +28,5 @@ convention: null
 colors: null
 digikey_url: null
 mouser_url: null
-notes: Automotive and Marine connector series , compatible/knock offs common, specific crimp tool required
+notes: Automotive and Marine connector series , compatible/knock offs common,
+  specific crimp tool required

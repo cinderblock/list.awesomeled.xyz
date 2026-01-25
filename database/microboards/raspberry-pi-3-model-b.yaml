@@ -1,4 +1,3 @@
-id: raspberry-pi-3-model-b
 name: Raspberry Pi 3 Model B+
 manufacturer: Raspberry Pi Foundation
 soc: BCM2837B0
@@ -17,7 +16,7 @@ ttl_serial: true
 wifi: 2.4GHz & 5GHz
 poe: null
 ethernet: Gigabit
-bluetooth: '4.2'
+bluetooth: "4.2"
 storage: microSD
 bms: false
 imu: false

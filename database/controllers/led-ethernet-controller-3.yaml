@@ -1,4 +1,3 @@
-id: led-ethernet-controller-3
 name: LED Ethernet Controller 3
 manufacturer: LED Strip Studio
 max_pixels: 4096

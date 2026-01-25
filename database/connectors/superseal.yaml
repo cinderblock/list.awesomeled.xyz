@@ -1,4 +1,3 @@
-id: superseal
 name: Superseal
 manufacturer: TE /AMP
 url: https://www.te.com/content/dam/te-com/documents/automotive/global/1654292-2_AMP%20SUPERSEAL%201.5.pdf
@@ -29,4 +28,5 @@ convention: null
 colors: null
 digikey_url: null
 mouser_url: null
-notes: AMP Superseal original product ,automotive and marine series, much copied . Requires specific crimp tool for contacts.
+notes: AMP Superseal original product ,automotive and marine series, much copied
+  . Requires specific crimp tool for contacts.

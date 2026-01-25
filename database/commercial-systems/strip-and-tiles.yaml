@@ -1,4 +1,3 @@
-id: strip-and-tiles
 name: Strip and Tiles
 manufacturer: Schnick Schnack
 pixels_per_run: 3072
@@ -10,4 +9,5 @@ price_range: $$$$$$
 core_tech: null
 since: 2001
 target_market: null
-notes: Strip and Tiles with very high resolution dimming and video input compatible, very long established pioneers.
+notes: Strip and Tiles with very high resolution dimming and video input
+  compatible, very long established pioneers.

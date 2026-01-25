@@ -1,4 +1,3 @@
-id: lightwalls
 name: Lightwalls
 manufacturer: Lightwalls
 pixels_per_run: null
@@ -10,4 +9,5 @@ price_range: $$$$$
 core_tech: null
 since: null
 target_market: Architectural
-notes: Strip and panels assosciated with Protopixel.io, subscription based control systems, "dynamic lighting"
+notes: Strip and panels assosciated with Protopixel.io, subscription based
+  control systems, "dynamic lighting"

@@ -1,4 +1,3 @@
-id: lexan-dclw
 name: Lexan DCLW
 url: https://sfs.sabic.eu/product/lexan-solid-sheet/sign-sheet/
 color_rendition: 4
@@ -13,4 +12,5 @@ diffusivity: 4
 sizes_available: null
 material_type: PC
 price_range: $$$$$
-notes: Lexan DLCW (Diffused Light Cool White)special combination of high light diffusion and high transmission via an optimized surface texture
+notes: Lexan DLCW (Diffused Light Cool White)special combination of high light
+  diffusion and high transmission via an optimized surface texture

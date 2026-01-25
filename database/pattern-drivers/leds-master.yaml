@@ -1,4 +1,3 @@
-id: leds-master
 name: LEDs Master
 developer: Antoine Doussaud
 price: FOSS
@@ -7,7 +6,7 @@ platforms:
   - macOS
   - Linux
   - Android
-  - '& IOS'
+  - "& IOS"
 live: true
 designer: null
 visualizer: null
@@ -26,7 +25,8 @@ language: null
 other_inputs: null
 other_outputs: null
 integrations: null
-notes: You can load shaders, musics, microphone, videos and custom scripts to create live animation.
+notes: You can load shaders, musics, microphone, videos and custom scripts to
+  create live animation.
 demo_available: null
 status: unknown
 url: https://antoine.doussaud.org/leds_master

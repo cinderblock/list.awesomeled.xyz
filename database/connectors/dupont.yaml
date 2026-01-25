@@ -1,4 +1,3 @@
-id: dupont
 name: DuPont
 manufacturer: Harwin/ Generic
 url: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/
@@ -29,4 +28,5 @@ convention: null
 colors: Black shell
 digikey_url: null
 mouser_url: null
-notes: Arduino standard patch connector, Harwin clones, proper crimp tool 400USD+ , lesser crimp tools not up to job
+notes: Arduino standard patch connector, Harwin clones, proper crimp tool
+  400USD+ , lesser crimp tools not up to job

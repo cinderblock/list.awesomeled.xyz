@@ -1,4 +1,3 @@
-id: pixlite-16-mk2-eco
 name: PixLite 16 Mk2 ECO
 manufacturer: Advatek
 max_pixels: 5440
@@ -17,8 +16,10 @@ outputs: Single or Clock
 waterproof: null
 auxiliary_outputs: DMX x4
 wled_compatible: null
-notes: Limited stock left - no website listing - contact directly to order remaining stock
+notes: Limited stock left - no website listing - contact directly to order
+  remaining stock
 warranty: null
 release_year: null
 status: discontinued
-url: sales@advateklights.com - ask for the ECO version. once the stock on shelves are gone no more will be manufactured
+url: sales@advateklights.com - ask for the ECO version. once the stock on
+  shelves are gone no more will be manufactured

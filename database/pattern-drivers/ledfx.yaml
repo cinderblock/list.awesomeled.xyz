@@ -1,4 +1,3 @@
-id: ledfx
 name: LedFx
 developer: Yeon V, M Bowley, community
 price: FOSS
@@ -24,7 +23,8 @@ language: Python
 other_inputs: Audio
 other_outputs: UDP
 integrations: null
-notes: Python based. A programming environment to sync musical effects across a network of LED pixel controllers
+notes: Python based. A programming environment to sync musical effects across a
+  network of LED pixel controllers
 demo_available: Open Source
 status: active
 url: https://github.com/LedFx/LedFx

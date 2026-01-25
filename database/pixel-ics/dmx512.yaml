@@ -1,4 +1,3 @@
-id: dmx512
 name: DMX512
 manufacturer: null
 pwm_frequency: 3.0kHz

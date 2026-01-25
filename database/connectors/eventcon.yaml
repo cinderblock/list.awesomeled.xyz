@@ -1,4 +1,3 @@
-id: eventcon
 name: EventCon
 manufacturer: GLP
 url: https://ehrgeiz.glp.de/en/products/accessories/eventcon
@@ -29,4 +28,5 @@ convention: null
 colors: null
 digikey_url: null
 mouser_url: null
-notes: Combined power and DMX connector. push locking. No panel mount connetors currently (3/24)
+notes: Combined power and DMX connector. push locking. No panel mount connetors
+  currently (3/24)

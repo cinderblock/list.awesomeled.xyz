@@ -1,4 +1,3 @@
-id: esp32-thingplus-dmx-to-led
 name: ESP32 ThingPlus DMX to LED
 manufacturer: Sparkfun
 max_channels: null

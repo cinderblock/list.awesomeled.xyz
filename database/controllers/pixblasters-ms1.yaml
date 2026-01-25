@@ -1,4 +1,3 @@
-id: pixblasters-ms1
 name: PixBlasters MS1
 manufacturer: Pixblasters
 max_pixels: 16384
@@ -17,7 +16,11 @@ outputs: Single and Clock
 waterproof: null
 auxiliary_outputs: Ethernet to daisy chain mult controllers
 wled_compatible: null
-notes: Connects to PC or Mac (or other device) using HDMI and acts like a monitor. Outpus a selected section of the screen to a matrix of LED strips or to prefab LED panels at up to 60FPS. Can daisy chain up to 48 controllers to power up to 786,432 pixels. Power must be supplied to strips by external power sources. 5V and 12V both work. Others may as well.
+notes: Connects to PC or Mac (or other device) using HDMI and acts like a
+  monitor. Outpus a selected section of the screen to a matrix of LED strips or
+  to prefab LED panels at up to 60FPS. Can daisy chain up to 48 controllers to
+  power up to 786,432 pixels. Power must be supplied to strips by external power
+  sources. 5V and 12V both work. Others may as well.
 warranty: null
 release_year: null
 status: unknown

@@ -1,4 +1,3 @@
-id: rgbw-pixel-panel
 name: RGBW-Pixel-Panel
 manufacturer: SmartShow
 pixels_per_run: 169
@@ -10,4 +9,5 @@ price_range: null
 core_tech: SKC6812RGBW-NW
 since: null
 target_market: null
-notes: 169 Pixel Interlockable panel, arranged as 13x13 snakelined pixels on 1.6mm PCB, 10mm pitch
+notes: 169 Pixel Interlockable panel, arranged as 13x13 snakelined pixels on
+  1.6mm PCB, 10mm pitch

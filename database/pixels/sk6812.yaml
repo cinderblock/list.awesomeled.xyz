@@ -1,9 +1,9 @@
-id: sk6812
 name: SK6812
 manufacturer: Opsco/Newstar
 color_order: GRB & GRBW
 led_voltage: 5V
-led_voltage_notes: Datasheet claims "17V Vds, Max" but LEDs are built-in and share power with 5V VDD
+led_voltage_notes: Datasheet claims "17V Vds, Max" but LEDs are built-in and
+  share power with 5V VDD
 clocked: false
 vcc_voltage: 5V
 pwm_frequency: 4.7kHz
@@ -19,9 +19,9 @@ wattage: 104mW
 channel_current: 20mA
 quiescent_current: 1.0mA
 package_sizes:
-  - '5050'
-  - '3535'
-  - '2040'
+  - "5050"
+  - "3535"
+  - "2040"
 package_size: 5050,3535,2040
 pin_count: 4
 data_type: WS2811/12

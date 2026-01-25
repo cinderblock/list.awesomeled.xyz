@@ -1,4 +1,3 @@
-id: arduino-ethernet-nano-with-enc28j60
 name: Arduino Ethernet Nano with ENC28J60
 developer: Xaver2K
 hardware: Arduino Nano &Ethernet Shield

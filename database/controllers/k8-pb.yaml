@@ -1,4 +1,3 @@
-id: k8-pb
 name: K8-PB
 manufacturer: KulpLights, LLC
 max_pixels: 57600
@@ -18,7 +17,8 @@ waterproof: null
 auxiliary_outputs: DMX
 wled_compatible: null
 differential_outputs: 12
-notes: 12 channels require differential receivers. eFuses, Current Sensing, Pixel Counting
+notes: 12 channels require differential receivers. eFuses, Current Sensing,
+  Pixel Counting
 power_features:
   - eFuse protection
   - Current sensing

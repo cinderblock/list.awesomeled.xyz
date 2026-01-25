@@ -1,4 +1,3 @@
-id: dfs3000
 name: DFS3000
 manufacturer: Glasson Electronics
 pixels_per_run: 170
@@ -10,4 +9,5 @@ price_range: $$$$$$
 core_tech: null
 since: 2004
 target_market: null
-notes: Glasson, developer World first adressable incandescent festoon, range of LED and festoon products, professional products, professional pricing
+notes: Glasson, developer World first adressable incandescent festoon, range of
+  LED and festoon products, professional products, professional pricing

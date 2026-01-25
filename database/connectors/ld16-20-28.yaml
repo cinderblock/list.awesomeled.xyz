@@ -1,4 +1,3 @@
-id: ld16-20-28
 name: LD16  /20/28
 manufacturer: Generic
 url: https://www.aliexpress.com/item/1005003521328338.html
@@ -29,4 +28,5 @@ convention: null
 colors: Black Blue
 digikey_url: null
 mouser_url: null
-notes: Screw Terminal ,   No Soldering !,   version of SP16/17/20/21/28 LD13 is 2 termnal only, LD16 /20 /28 shell sizes
+notes: Screw Terminal ,   No Soldering !,   version of SP16/17/20/21/28 LD13 is
+  2 termnal only, LD16 /20 /28 shell sizes

@@ -1,4 +1,3 @@
-id: led-ethernet-controller-powered
 name: LED Ethernet Controller Powered
 manufacturer: LED Strip Studio
 max_pixels: 4096

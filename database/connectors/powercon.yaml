@@ -1,4 +1,3 @@
-id: powercon
 name: PowerCon
 manufacturer: Neutrik
 url: https://www.neutrik.com/en/neutrik/products/powercon
@@ -29,4 +28,7 @@ convention: null
 colors: Black, silver, white, blue, grey
 digikey_url: null
 mouser_url: null
-notes: Powercon is orginal blue , True 1 was IP rated version frequent latch failure, True1 TOP is current reccomended mains power connector Seetronic common Compatible/Clone. Grey is recommended (cheap) and not readily used elsewhere
+notes: Powercon is orginal blue , True 1 was IP rated version frequent latch
+  failure, True1 TOP is current reccomended mains power connector Seetronic
+  common Compatible/Clone. Grey is recommended (cheap) and not readily used
+  elsewhere

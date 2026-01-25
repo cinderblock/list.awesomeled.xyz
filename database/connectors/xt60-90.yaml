@@ -1,4 +1,3 @@
-id: xt60-90
 name: XT60/90
 manufacturer: Generic
 url: https://www.sparkfun.com/products/10474
@@ -29,4 +28,6 @@ convention: Female source, shrouded male load
 colors: Yello, black
 digikey_url: null
 mouser_url: null
-notes: Also XT30, 30A  & XT90 ,90A , Standard connector for LiPo batteries in RC, generic connector, some poor quality versions around dimensions http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf
+notes: Also XT30, 30A  & XT90 ,90A , Standard connector for LiPo batteries in
+  RC, generic connector, some poor quality versions around dimensions
+  http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf

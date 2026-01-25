@@ -1,4 +1,3 @@
-id: chogori-standard-size
 name: Chogori (Standard size)
 manufacturer: Chogori
 url: http://suomi.chogori.pro/produkciya.html
@@ -29,4 +28,5 @@ convention: null
 colors: null
 digikey_url: https://www.digikey.co.uk/en/products/filter/circular-connectors/circular-connector-assemblies/436?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRACZyBOABhogF0CAHAFyhAGVWAnASwB2AcxABfAgFp40EMkjps%2BIqQpgArDRANxICQBYEs1JlwFikMmoDsVgMzktop0A
 mouser_url: null
-notes: Push Lock IP 68 used on Rosco Lite Panels and some other LED products, Mini Standard and Large sizes
+notes: Push Lock IP 68 used on Rosco Lite Panels and some other LED products,
+  Mini Standard and Large sizes

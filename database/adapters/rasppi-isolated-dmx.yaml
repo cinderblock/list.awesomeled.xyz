@@ -1,4 +1,3 @@
-id: rasppi-isolated-dmx
 name: RaspPi Isolated DMX
 manufacturer: Arjan van Vught
 max_channels: 512

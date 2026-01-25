@@ -1,4 +1,3 @@
-id: en3
 name: EN3
 manufacturer: Switchcraft/Conxall
 url: https://www.conxall.com/Documents/en3.pdf
@@ -29,4 +28,5 @@ convention: null
 colors: null
 digikey_url: null
 mouser_url: null
-notes: Switchcraft/Conxall , long established USA connector maker, available with straight and right angle PCB mounting
+notes: Switchcraft/Conxall , long established USA connector maker, available
+  with straight and right angle PCB mounting

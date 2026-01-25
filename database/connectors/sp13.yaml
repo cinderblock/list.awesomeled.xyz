@@ -1,4 +1,3 @@
-id: sp13
 name: SP13
 manufacturer: Weipu
 url: https://www.weipuconnector.com/sp13-series/
@@ -29,4 +28,6 @@ convention: null
 colors: Black Blue collar
 digikey_url: null
 mouser_url: null
-notes: Glass filled nylon shell with gold plated brass solder  contacts.Weipu originator of format, cheaper clones around. SP 12/13/16/17/20/21/28 shelll sizes LD16/20/28 Screw Terminal clone
+notes: Glass filled nylon shell with gold plated brass solder  contacts.Weipu
+  originator of format, cheaper clones around. SP 12/13/16/17/20/21/28 shelll
+  sizes LD16/20/28 Screw Terminal clone

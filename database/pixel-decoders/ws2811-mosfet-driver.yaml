@@ -1,4 +1,3 @@
-id: ws2811-mosfet-driver
 name: WS2811 MosFET Driver
 manufacturer: NLed
 max_channels: 3

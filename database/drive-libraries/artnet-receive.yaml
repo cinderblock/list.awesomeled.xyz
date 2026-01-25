@@ -1,4 +1,3 @@
-id: artnet-receive
 name: Artnet Receive
 developer: natcl
 hardware: Arduino/Teensie/ESP8266

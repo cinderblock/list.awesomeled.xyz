@@ -1,4 +1,3 @@
-id: magicq
 name: MagicQ
 developer: Chamsys Systems
 price: Free 64 universes
@@ -24,7 +23,8 @@ language: null
 other_inputs: null
 other_outputs: null
 integrations: null
-notes: MagicQ Professional stage lighting console with Pixel Mapping ability, software version of hardware console
+notes: MagicQ Professional stage lighting console with Pixel Mapping ability,
+  software version of hardware console
 demo_available: Demo 64 Universes via ArtNet
 status: alive
 url: https://chamsyslighting.com/

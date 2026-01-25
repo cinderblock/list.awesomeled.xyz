@@ -1,4 +1,3 @@
-id: powerpole-15-45
 name: PowerPole 15/45
 manufacturer: Anderson
 url: https://www.andersonpower.com/us/en/resources/PowerPoleResourcesPage.html
@@ -25,8 +24,11 @@ max_pins: 16
 rows: N/A
 year_introduced: null
 pinout: null
-convention: When viewed from mating connector's perspective with tongues on the bottom, the red housing is on the left
+convention: When viewed from mating connector's perspective with tongues on the
+  bottom, the red housing is on the left
 colors: Multi
 digikey_url: https://www.digikey.com/en/products/filter/blade-type-power-connectors-accessories/360?s=N4IgTCBcDaIIYDsAmBTATgZwPYIAQAcsB3dQgGxRAF0BfIA
 mouser_url: null
-notes: Anderson PowerPole, Genderless, Clip together shells in 11 colours, Radio HAM power standard,  panel mounting and waterproofing options.Extremely robust mixed signal and high current connector.
+notes: Anderson PowerPole, Genderless, Clip together shells in 11 colours, Radio
+  HAM power standard,  panel mounting and waterproofing options.Extremely robust
+  mixed signal and high current connector.

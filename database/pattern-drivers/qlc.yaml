@@ -1,4 +1,3 @@
-id: qlc
 name: QLC+
 developer: Massimo Calegari
 price: FOSS
@@ -24,7 +23,8 @@ programmatic: Both
 language: C++
 other_inputs: OSC, MIDI, Web API
 other_outputs: USB, OSC
-integrations: 'Supported MIDI/DMX Hardware List: https://www.qlcplus.org/discover/compatibility'
+integrations: "Supported MIDI/DMX Hardware List:
+  https://www.qlcplus.org/discover/compatibility"
 notes: Includes sound responsive features. Large fixture compatablity list.
 demo_available: €15 Donation requested
 status: active

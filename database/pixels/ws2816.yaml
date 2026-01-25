@@ -1,4 +1,3 @@
-id: ws2816
 name: WS2816
 manufacturer: WorldSemi
 color_order: GRB
@@ -19,8 +18,8 @@ channel_current: 20mA
 channel_current_notes: WS2816C is 10mA, WS2816B is 20mA
 quiescent_current: 6.0mA
 package_sizes:
-  - '5050'
-package_size: '5050'
+  - "5050"
+package_size: "5050"
 pin_count: 6
 data_type: WS2816
 backup_data_line: true

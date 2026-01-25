@@ -1,4 +1,3 @@
-id: brightly
 name: Brightly
 manufacturer: Polytronic
 max_pixels: 8192
@@ -19,7 +18,8 @@ outputs: Single and Clock
 waterproof: null
 auxiliary_outputs: DMX
 wled_compatible: null
-notes: Modular breakouts allow for direct screw terminal plug or differential RJ45 outputs that can run over 1000ft to a receiver
+notes: Modular breakouts allow for direct screw terminal plug or differential
+  RJ45 outputs that can run over 1000ft to a receiver
 warranty: null
 release_year: 2021
 status: discontinued

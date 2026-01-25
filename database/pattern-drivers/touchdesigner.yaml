@@ -1,4 +1,3 @@
-id: touchdesigner
 name: TouchDesigner
 developer: Derivative
 price: Free-$2200
@@ -44,7 +43,8 @@ language: Python, GLSL
 other_inputs: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton, SMPTE/LTC
 other_outputs: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton
 integrations: Tons
-notes: Visual programming environment with lots of useful built-ins. Not specifically for LED patterns, but they're easy to make with a little extra.
+notes: Visual programming environment with lots of useful built-ins. Not
+  specifically for LED patterns, but they're easy to make with a little extra.
 technical_notes:
   - Node-based visual programming environment
   - Powerful 3D capabilities for spatial mapping

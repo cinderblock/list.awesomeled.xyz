@@ -1,4 +1,3 @@
-id: ws2815-rgbw
 name: WS2815 RGBW
 color_order: RGBW
 led_voltage: 12V

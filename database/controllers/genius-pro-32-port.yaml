@@ -1,4 +1,3 @@
-id: genius-pro-32-port
 name: Genius Pro 32 Port
 manufacturer: Experience Lights
 max_pixels: 20000
@@ -19,7 +18,8 @@ outputs: Single
 waterproof: null
 auxiliary_outputs: null
 wled_compatible: null
-notes: On board PSU mounting,Efuse protected power distribution, on board fault finding
+notes: On board PSU mounting,Efuse protected power distribution, on board fault
+  finding
 warranty: null
 release_year: 2023
 status: active

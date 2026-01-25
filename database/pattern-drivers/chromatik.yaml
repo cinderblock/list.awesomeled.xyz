@@ -1,4 +1,3 @@
-id: chromatik
 name: Chromatik
 developer: Mark C Slee
 price: Free - 399
@@ -22,7 +21,8 @@ language: null
 other_inputs: MIDI , OSC, DMX
 other_outputs: null
 integrations: null
-notes: VJ like live control, extensive support for 3D animation matrices Succesor to LX Studio
+notes: VJ like live control, extensive support for 3D animation matrices
+  Succesor to LX Studio
 demo_available: <1000 LEDs free, various paid options
 status: unknown
 url: null

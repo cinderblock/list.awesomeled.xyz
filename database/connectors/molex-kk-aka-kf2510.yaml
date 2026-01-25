@@ -1,4 +1,3 @@
-id: molex-kk-aka-kf2510
 name: Molex KK AKA KF2510
 manufacturer: Molex
 url: https://www.molex.com/molex/products/family/kk
@@ -29,4 +28,6 @@ convention: Male jack on board, female plug
 colors: null
 digikey_url: null
 mouser_url: null
-notes: Molex KK Pitch 2.54 ( 1/10") Arduino pitch also 3.96 and 5.08 . Industrial standard connector common in amusement machines. Larger contact area than XH. Clones KF2510 2.54 CH 3.96  and CH5.08
+notes: Molex KK Pitch 2.54 ( 1/10") Arduino pitch also 3.96 and 5.08 .
+  Industrial standard connector common in amusement machines. Larger contact
+  area than XH. Clones KF2510 2.54 CH 3.96  and CH5.08

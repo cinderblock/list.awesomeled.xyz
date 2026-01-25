@@ -1,4 +1,3 @@
-id: ic5-ec5
 name: IC5  EC5
 manufacturer: Spektrum
 url: https://blog.ampow.com/ic5-vs-ec5-connector/
@@ -29,4 +28,5 @@ convention: null
 colors: IC5 Orange EC5 Blue
 digikey_url: null
 mouser_url: null
-notes: IC5 LiPo battery connector with Third pin for charger commnunication. EC5 mates with IC5 BUT no third pin
+notes: IC5 LiPo battery connector with Third pin for charger commnunication. EC5
+  mates with IC5 BUT no third pin

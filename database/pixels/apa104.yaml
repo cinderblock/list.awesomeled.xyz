@@ -1,9 +1,9 @@
-id: apa104
 name: APA104
 manufacturer: APA Electronics
 color_order: RGB
 led_voltage: 5V
-led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
+led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and
+  share power with 5V VDD
 clocked: false
 vcc_voltage: 5V
 pwm_frequency: 1.2kHz
@@ -15,12 +15,13 @@ gpio_min: 3.5V
 gpio_max: 5V
 wattage: 100mW
 channel_current: 20mA
-channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA
+channel_current_notes: Datasheet states max 49mA current, but graph for 5050
+  package shows R=19mA, G,B=22mA
 quiescent_current: 1.0mA
 package_sizes:
-  - '5050'
-  - '3535'
-  - '1212'
+  - "5050"
+  - "3535"
+  - "1212"
 package_size: 5050, 3535, 1212
 pin_count: 4
 data_type: WS2811/12

@@ -1,4 +1,3 @@
-id: wemos-pwm-rgb-w-led-driver-board
 name: Wemos PWM RGB/W LED Driver Board
 manufacturer: Mottram Labs
 max_channels: 4

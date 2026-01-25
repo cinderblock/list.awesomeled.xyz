@@ -1,4 +1,3 @@
-id: twinkly
 name: Twinkly
 manufacturer: Twinkly
 pixels_per_run: 600
@@ -10,4 +9,5 @@ price_range: $$
 core_tech: null
 since: null
 target_market: null
-notes: Consumer Level App Controlled , now with "Pro" range. artnet2twinkly 3rd party project linked on Drive Libraries page
+notes: Consumer Level App Controlled , now with "Pro" range. artnet2twinkly 3rd
+  party project linked on Drive Libraries page

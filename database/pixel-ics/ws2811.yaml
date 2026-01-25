@@ -1,4 +1,3 @@
-id: ws2811
 name: WS2811
 manufacturer: WorldSemi
 pwm_frequency: 2.0kHz
@@ -31,7 +30,8 @@ data_type: WS2811/12
 backup_data_line: false
 max_pixels_per_string: null
 release_year: 2011
-notes: Addressable in groups (usually of 3 LEDs), common on 3 wire pixels, pucks, floods
+notes: Addressable in groups (usually of 3 LEDs), common on 3 wire pixels,
+  pucks, floods
 technical_notes:
   - Standalone IC, not integrated with LEDs like WS2812
   - Commonly used for 12V pixels with 3 LEDs in series

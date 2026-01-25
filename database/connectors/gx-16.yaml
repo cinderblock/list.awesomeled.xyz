@@ -1,4 +1,3 @@
-id: gx-16
 name: GX-16
 manufacturer: Generic
 url: https://www.renhotecpro.com/gx16-connector-data-sheet/
@@ -29,4 +28,6 @@ convention: null
 colors: Silver Metal Black Plastic
 digikey_url: null
 mouser_url: null
-notes: AKA Aviation Connector, CB Mic Connector, most common in 4 pin variant,Chrome metal Shell and IP65 Version in Black Plastic *Legacy Connector NOT For New Designs*
+notes: AKA Aviation Connector, CB Mic Connector, most common in 4 pin
+  variant,Chrome metal Shell and IP65 Version in Black Plastic *Legacy Connector
+  NOT For New Designs*

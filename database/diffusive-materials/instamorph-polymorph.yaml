@@ -1,4 +1,3 @@
-id: instamorph-polymorph
 name: Instamorph/ Polymorph
 url: https://www.instamorph.com/
 color_rendition: 3
@@ -13,4 +12,5 @@ diffusivity: 4
 sizes_available: null
 material_type: PCL Poly Capro Lactone
 price_range: $$
-notes: Hot water mouldable plastic, very rigid when set  and possible to mould round single LEDs into shapes
+notes: Hot water mouldable plastic, very rigid when set  and possible to mould
+  round single LEDs into shapes

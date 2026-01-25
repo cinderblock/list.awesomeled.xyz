@@ -1,4 +1,3 @@
-id: pixlite-e4-s-mk3
 name: PixLite E4-S Mk3
 manufacturer: Advatek
 max_pixels: 16320
@@ -17,7 +16,8 @@ outputs: Single or Clock
 waterproof: null
 auxiliary_outputs: DMX In/Out
 wled_compatible: null
-notes: Pixels cannot be powered through PixLite. Single 100Mbps Ethernet. All other features of Mk3 are available in the E Series
+notes: Pixels cannot be powered through PixLite. Single 100Mbps Ethernet. All
+  other features of Mk3 are available in the E Series
 warranty: null
 release_year: 2022
 status: active

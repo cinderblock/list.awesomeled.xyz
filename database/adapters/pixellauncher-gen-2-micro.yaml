@@ -1,4 +1,3 @@
-id: pixellauncher-gen-2-micro
 name: PixelLauncher Gen 2 Micro
 manufacturer: Digital Ambience
 max_channels: 1
@@ -10,5 +9,6 @@ price: null
 output_connectors: Solder
 outputs: Single
 diy_or_ots: OTS
-notes: LED data up to 250 ft right out of your controller No sender. It cleans up the signal.
+notes: LED data up to 250 ft right out of your controller No sender. It cleans
+  up the signal.
 url: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/

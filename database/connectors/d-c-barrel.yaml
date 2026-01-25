@@ -1,4 +1,3 @@
-id: d-c-barrel
 name: D.C. Barrel
 manufacturer: Generic
 url: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
@@ -29,4 +28,5 @@ convention: Female source
 colors: null
 digikey_url: null
 mouser_url: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
-notes: D.C Barrel Connector. 5.5mm barrell with a 2.1mm centre pin is most common; 2.5 mm pin looks similar but dosent fit.
+notes: D.C Barrel Connector. 5.5mm barrell with a 2.1mm centre pin is most
+  common; 2.5 mm pin looks similar but dosent fit.

@@ -23,7 +23,7 @@ function getGitTimestamps(): Map<string, Date> {
 
   try {
     const output = execSync(
-      `git log --format="%aI" --name-only --diff-filter=ACMR -- "database/**/*.yaml" "database/**/*.yml"`,
+      `git log --format="%aI" --name-only --diff-filter=ACMR -- "database/**/*.yaml"`,
       {
         encoding: 'utf-8',
         cwd: repoRoot,
@@ -40,7 +40,7 @@ function getGitTimestamps(): Map<string, Date> {
       // ISO timestamp pattern
       if (/^\d{4}-\d{2}-\d{2}T/.test(line)) {
         currentTimestamp = line;
-      } else if (currentTimestamp && (line.endsWith('.yaml') || line.endsWith('.yml'))) {
+      } else if (currentTimestamp && line.endsWith('.yaml')) {
         const fullPath = resolve(repoRoot, line);
         // Only set if not already set (we want most recent commit)
         if (!gitTimestampCache.has(fullPath)) {
@@ -82,7 +82,7 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
 
   const entries: BaseEntry[] = [];
   const files = readdirSync(categoryDir).filter(
-    (f) => (f.endsWith('.yaml') || f.endsWith('.yml')) && !f.startsWith('_')
+    (f) => f.endsWith('.yaml') && !f.startsWith('_')
   );
 
   const timestamps = getGitTimestamps();
@@ -92,7 +92,9 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
     try {
       const content = readFileSync(filePath, 'utf-8');
       const parsed = parse(content) as BaseEntry;
-      if (parsed && parsed.id) {
+      if (parsed) {
+        // Infer id from filename
+        parsed.id = file.replace(/\.yaml$/, '');
         const timestamp = timestamps.get(filePath);
         if (!timestamp) {
           throw new Error(`No git timestamp found for ${filePath}`);
@@ -117,19 +119,17 @@ export function loadEntry(categoryId: string, entryId: string): BaseEntry | null
   const databasePath = getDatabasePath();
   const categoryDir = resolve(databasePath, categoryId);
 
-  // Try both .yaml and .yml extensions
-  const yamlPath = resolve(categoryDir, `${entryId}.yaml`);
-  const ymlPath = resolve(categoryDir, `${entryId}.yml`);
+  const filePath = resolve(categoryDir, `${entryId}.yaml`);
 
-  const filePath = existsSync(yamlPath) ? yamlPath : existsSync(ymlPath) ? ymlPath : null;
-
-  if (!filePath) {
+  if (!existsSync(filePath)) {
     return null;
   }
 
   try {
     const content = readFileSync(filePath, 'utf-8');
     const parsed = parse(content) as BaseEntry;
+    // Infer id from the entryId parameter (which comes from the filename)
+    parsed.id = entryId;
     const timestamp = getGitTimestamps().get(filePath);
     if (!timestamp) {
       throw new Error(`No git timestamp found for ${filePath}`);

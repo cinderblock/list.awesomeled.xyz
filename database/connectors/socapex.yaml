@@ -1,4 +1,3 @@
-id: socapex
 name: Socapex
 manufacturer: Amphenol / Generic
 url: https://p3connectors.com/what-are-socapex-connectors/
@@ -29,4 +28,5 @@ convention: null
 colors: null
 digikey_url: null
 mouser_url: null
-notes: 19 Pin Socapex World standard 6 circuit mains multi core connector for production use, accepts up to 2.5mm per pin cable.
+notes: 19 Pin Socapex World standard 6 circuit mains multi core connector for
+  production use, accepts up to 2.5mm per pin cable.

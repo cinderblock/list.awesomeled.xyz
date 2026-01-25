@@ -1,4 +1,3 @@
-id: din-pixie
 name: DIN Pixie
 manufacturer: ENTTEC
 max_pixels: 340
@@ -20,12 +19,13 @@ outputs: Single
 waterproof: null
 auxiliary_outputs: null
 wled_compatible: null
-notes: Back powered from pixel strip - connect thru USB to record a show onto the device using live Art-net
+notes: Back powered from pixel strip - connect thru USB to record a show onto
+  the device using live Art-net
 technical_notes:
-  - 'RGB (8-bit): 340 pixels max'
-  - 'RGBW (8-bit): 256 pixels max'
-  - 'RGB (16-bit): 170 pixels max'
-  - 'RGBW (16-bit): 128 pixels max'
+  - "RGB (8-bit): 340 pixels max"
+  - "RGBW (8-bit): 256 pixels max"
+  - "RGB (16-bit): 170 pixels max"
+  - "RGBW (16-bit): 128 pixels max"
   - Storage is not removable
   - Can be powered from pixel strip (back-powered)
   - Record shows via USB using live Art-Net

@@ -1,4 +1,3 @@
-id: ws2801
 name: WS2801
 manufacturer: WorldSemi
 pwm_frequency: 2.5kHz

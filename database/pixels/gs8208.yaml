@@ -1,4 +1,3 @@
-id: gs8208
 name: GS8208
 manufacturer: Genesis Systec
 color_order: RGB
@@ -7,7 +6,8 @@ led_voltage_notes: Datasheet 10.8-13.2V
 clocked: false
 vcc_voltage: 12V
 pwm_frequency: 8.0kHz
-pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively multiply 2kHz PWM to 8kHz
+pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively
+  multiply 2kHz PWM to 8kHz
 brightness_bits: 8
 brightness_control_notes: 36 bits interpolated 12 bits gamma correction per colour
 data_bitrate: 800kHz
@@ -20,14 +20,15 @@ channel_current: 10mA
 channel_current_notes: Measured current across 3 LEDs at 12V. Datasheet claims 15mA
 quiescent_current: 2.5mA
 package_sizes:
-  - '5050'
-package_size: '5050'
+  - "5050"
+package_size: "5050"
 pin_count: 6
 data_type: WS2811/12
 backup_data_line: true
 max_pixels_per_string: null
 release_year: 2018
-notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version booted with onboard patterns - now eliminated
+notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version
+  booted with onboard patterns - now eliminated
 technical_notes:
   - Built-in 8-bit to 12-bit gamma correction for smoother fades
   - Uses MPWM (multiplexed PWM) for effective 8kHz refresh rate

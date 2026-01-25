@@ -1,4 +1,3 @@
-id: lx-studio-chromatik
 name: LX Studio / Chromatik
 developer: Mark Slee
 price: Free
@@ -24,7 +23,8 @@ language: Java
 other_inputs: Any
 other_outputs: DDP, OPC, Fadecandy
 integrations: null
-notes: Java. Next version (Chromatik) will no longer use the Processing graphics library.
+notes: Java. Next version (Chromatik) will no longer use the Processing graphics
+  library.
 demo_available: Open source. Comercial applications require license
 status: active
 url: https://lx.studio/
