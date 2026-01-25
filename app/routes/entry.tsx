@@ -1,6 +1,7 @@
 import type { Route } from './+types/entry';
 import { data } from 'react-router';
 import { getCategoryById, loadEntry } from '~/lib/data';
+import { formatDateYMD } from '~/lib/format';
 import { ExternalLink } from 'lucide-react';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
@@ -89,6 +90,7 @@ function formatValue(key: string, value: unknown): React.ReactNode {
   if (value === null || value === undefined) return '-';
   if (typeof value === 'boolean') return value ? 'Yes' : 'No';
   if (Array.isArray(value)) return value.join(', ');
+  if (value instanceof Date) return formatDateYMD(value);
   if (typeof value === 'object') return JSON.stringify(value);
 
   const strValue = String(value);

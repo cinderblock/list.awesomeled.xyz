@@ -586,9 +586,9 @@ export function DataTable({
     return `${parts.join('_')}.csv`;
   }, [categoryId, search, sortKey, sortDir, activeFilters]);
 
-  // CSV export - generate on-the-fly only when filtered
+  // CSV export - generate on-the-fly only when filtered (uses user's locale for dates)
   const handleDownloadCSV = useCallback(() => {
-    const csv = generateCSV(sortedData, columns);
+    const csv = generateCSV(sortedData, columns, { useLocale: true });
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);

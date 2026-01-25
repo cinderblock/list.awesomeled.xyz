@@ -17,10 +17,21 @@ function getValue(obj: BaseEntry, path: string): unknown {
   return value;
 }
 
+export interface GenerateCSVOptions {
+  /** Use user's locale for dates (browser), otherwise ISO UTC (server) */
+  useLocale?: boolean;
+}
+
 /**
  * Generate CSV content from data and column configuration
  */
-export function generateCSV(data: BaseEntry[], columns: Column[]): string {
+export function generateCSV(
+  data: BaseEntry[],
+  columns: Column[],
+  options: GenerateCSVOptions = {}
+): string {
+  const { useLocale = false } = options;
+
   // Filter out non-data columns (like 'links')
   const dataColumns = columns.filter((col) => col.key !== 'links');
 
@@ -31,6 +42,9 @@ export function generateCSV(data: BaseEntry[], columns: Column[]): string {
       const value = getValue(item, col.key);
       if (value == null) return '';
       if (Array.isArray(value)) return value.join('; ');
+      if (value instanceof Date) {
+        return useLocale ? value.toLocaleString() : value.toISOString();
+      }
       return String(value);
     })
   );

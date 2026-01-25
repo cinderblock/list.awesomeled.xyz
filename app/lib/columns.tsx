@@ -4,6 +4,7 @@
 
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
+import { formatDateYMD } from './format';
 
 // Filter type definitions
 export type FilterType = 'numeric' | 'select' | 'boolean' | 'string';
@@ -229,6 +230,23 @@ function formatNumericValue(v: unknown) {
   if (isNaN(num)) return <span className="data-table-null">-</span>;
   return <span className="tabular-nums">{num.toLocaleString()}</span>;
 }
+
+// Helper for formatting dates as YYYY-MM-DD in user's timezone
+function formatDate(v: unknown) {
+  if (v == null) return <span className="data-table-null">-</span>;
+  const date = v instanceof Date ? v : new Date(String(v));
+  if (isNaN(date.getTime())) return <span className="data-table-null">-</span>;
+  return <span>{formatDateYMD(date)}</span>;
+}
+
+// Shared updated column definition
+export const updatedColumn: Column = {
+  key: 'updated',
+  label: 'Updated',
+  sortable: true,
+  filterable: false,
+  render: formatDate,
+};
 
 export const controllerColumns: Column[] = [
   {
@@ -727,7 +745,8 @@ export function getColumnsForCategory(categoryId: string): Column[] {
     'commercial-systems': commercialSystemColumns,
   };
 
-  return columnMap[categoryId] || [{ key: 'name', label: 'Name' }];
+  const columns = columnMap[categoryId] || [{ key: 'name', label: 'Name' }];
+  return [...columns, updatedColumn];
 }
 
 // Search keys for each category

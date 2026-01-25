@@ -116,6 +116,7 @@ export const CATEGORIES: Category[] = [
 export interface BaseEntry {
   id: string;
   name: string;
+  updated: Date;
   [key: string]: unknown;
 }
 
