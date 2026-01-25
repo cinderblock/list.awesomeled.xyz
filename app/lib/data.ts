@@ -105,11 +105,8 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
       if (parsed) {
         // Infer id from filename
         parsed.id = file.replace(/\.yaml$/, '');
-        const timestamp = timestamps.get(filePath);
-        if (!timestamp) {
-          throw new Error(`No git timestamp found for ${filePath}`);
-        }
-        parsed.updated = timestamp;
+        // Use git timestamp if available, otherwise use current date (for new/uncommitted files)
+        parsed.updated = timestamps.get(filePath) ?? new Date();
         entries.push(parsed);
       }
     } catch (e) {
@@ -140,11 +137,8 @@ export function loadEntry(categoryId: string, entryId: string): BaseEntry | null
     const parsed = parse(content) as BaseEntry;
     // Infer id from the entryId parameter (which comes from the filename)
     parsed.id = entryId;
-    const timestamp = getGitTimestamps().get(filePath);
-    if (!timestamp) {
-      throw new Error(`No git timestamp found for ${filePath}`);
-    }
-    parsed.updated = timestamp;
+    // Use git timestamp if available, otherwise use current date (for new/uncommitted files)
+    parsed.updated = getGitTimestamps().get(filePath) ?? new Date();
     return parsed;
   } catch (e) {
     console.warn(`Failed to parse ${filePath}:`, e);
