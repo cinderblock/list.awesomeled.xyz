@@ -827,17 +827,19 @@ export function DataTable({
               Clear all
             </button>
           )}
-          {isFiltered ? (
-            <button onClick={handleDownloadCSV} className="btn btn--outline btn--sm">
-              <Download size={16} />
-              Download CSV
-            </button>
-          ) : (
-            <a href={`${categoryPath}.csv`} download className="btn btn--outline btn--sm">
-              <Download size={16} />
-              Download CSV
-            </a>
-          )}
+          <div style={{ marginLeft: 'auto' }}>
+            {isFiltered ? (
+              <button onClick={handleDownloadCSV} className="btn btn--outline btn--sm">
+                <Download size={16} />
+                Download CSV
+              </button>
+            ) : (
+              <a href={`${categoryPath}.csv`} download className="btn btn--outline btn--sm">
+                <Download size={16} />
+                Download CSV
+              </a>
+            )}
+          </div>
         </div>
         {/* Active filters display */}
         {activeFilters.length > 0 && (
