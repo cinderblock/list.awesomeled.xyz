@@ -1,11 +1,12 @@
-import { useMemo, useState, useCallback, useRef, useEffect, type ReactNode } from 'react';
+import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router';
-import { ChevronUp, ChevronDown, X, Download, Search } from 'lucide-react';
+import { X, Download, Search } from 'lucide-react';
 import type { Column } from '~/lib/columns';
 import type { BaseEntry } from '~/lib/types';
 import { generateCSV } from '~/lib/csv';
+import { getBadgeForValue, Badge, TextPill } from '~/components/ui/FeatureBadges';
 import {
-  ColumnFilter,
+  ColumnHeaderPopover,
   isFilterActive,
   applyFilter,
   type FilterState,
@@ -834,30 +835,23 @@ export function DataTable({
       {columns.map((col) => {
         const colKey = String(col.key);
         const isRightAligned = col.className?.includes('data-table-cell--right');
-        const hasFilter = col.filterConfig != null;
         const filterValue = urlFilters[colKey];
         return (
           <th key={colKey} className={col.className}>
             <div
               className={`data-table-th-content${isRightAligned ? ' data-table-th-content--right' : ''}`}
             >
-              {col.sortable !== false && col.key !== 'links' ? (
-                <button className="data-table-sort-btn" onClick={() => handleSort(colKey)}>
-                  {col.label}
-                  {sortKey === colKey && sortDir === 'asc' && <ChevronUp size={16} />}
-                  {sortKey === colKey && sortDir === 'desc' && <ChevronDown size={16} />}
-                </button>
-              ) : (
-                <span>{col.label}</span>
-              )}
-              {hasFilter && (
-                <ColumnFilter
-                  column={col}
-                  data={data}
-                  value={filterValue}
-                  onChange={(value) => setColumnFilter(colKey, value)}
-                />
-              )}
+              <ColumnHeaderPopover
+                column={col}
+                data={data}
+                filterValue={filterValue}
+                onFilterChange={(value) => setColumnFilter(colKey, value)}
+                sortKey={sortKey}
+                sortDir={sortDir}
+                onSort={handleSort}
+              >
+                {col.label}
+              </ColumnHeaderPopover>
             </div>
           </th>
         );
@@ -1042,21 +1036,31 @@ function CellValue({ value }: { value: unknown }) {
   if (Array.isArray(value)) {
     return (
       <div className="data-table-array">
-        {value.map((v, i) => (
-          <span key={i} className="badge badge--outline">
-            {String(v)}
-          </span>
-        ))}
+        {value.map((v, i) => {
+          const strVal = String(v);
+          const badge = getBadgeForValue(strVal);
+          if (badge) {
+            return <Badge key={i} badge={badge} />;
+          }
+          return <TextPill key={i} text={strVal} />;
+        })}
       </div>
     );
   }
 
-  if (typeof value === 'string' && value.startsWith('http')) {
-    return (
-      <a href={value} target="_blank" rel="noopener noreferrer" className="data-table-external-link">
-        Link
-      </a>
-    );
+  // Single string value - check for badge
+  if (typeof value === 'string') {
+    if (value.startsWith('http')) {
+      return (
+        <a href={value} target="_blank" rel="noopener noreferrer" className="data-table-external-link">
+          Link
+        </a>
+      );
+    }
+    const badge = getBadgeForValue(value);
+    if (badge) {
+      return <Badge badge={badge} />;
+    }
   }
 
   return <span>{String(value)}</span>;

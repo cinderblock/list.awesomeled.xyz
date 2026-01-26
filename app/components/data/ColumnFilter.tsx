@@ -1,8 +1,10 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import * as Popover from '@radix-ui/react-popover';
-import { Filter, X, Check } from 'lucide-react';
+import { X, Check, ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react';
 import type { Column, FilterConfig } from '~/lib/columns';
 import type { BaseEntry } from '~/lib/types';
+
+type SortDirection = 'asc' | 'desc';
 
 // Filter value types
 export interface NumericFilterValue {
@@ -165,39 +167,163 @@ export function applyFilter(
   }
 }
 
-export function ColumnFilter({ column, data, value, onChange }: ColumnFilterProps) {
-  const config = column.filterConfig;
-  if (!config) return null;
+interface ColumnHeaderPopoverProps {
+  column: Column;
+  data: BaseEntry[];
+  filterValue: FilterValue | undefined;
+  onFilterChange: (value: FilterValue | undefined) => void;
+  sortKey: string | null;
+  sortDir: SortDirection | null;
+  onSort: (key: string) => void;
+  children: React.ReactNode;
+}
 
-  const isActive = isFilterActive(value);
+export function ColumnHeaderPopover({
+  column,
+  data,
+  filterValue,
+  onFilterChange,
+  sortKey,
+  sortDir,
+  onSort,
+  children,
+}: ColumnHeaderPopoverProps) {
+  const [open, setOpen] = useState(false);
+  const hasFilter = column.filterConfig != null;
+  const isSortable = column.sortable !== false && column.key !== 'links';
+  const isFilterActive_ = isFilterActive(filterValue);
+  const isSorted = sortKey === column.key;
+
+  // Close popover on scroll to prevent it from detaching from sticky header
+  useEffect(() => {
+    if (!open) return;
+
+    const handleScroll = () => {
+      setOpen(false);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [open]);
+
+  // If column has no filter and is not sortable, just render children
+  if (!hasFilter && !isSortable) {
+    return <>{children}</>;
+  }
 
   return (
-    <Popover.Root>
+    <Popover.Root open={open} onOpenChange={setOpen}>
       <Popover.Trigger asChild>
         <button
-          className={`filter-trigger${isActive ? ' filter-trigger--active' : ''}`}
-          title={`Filter ${column.label}`}
+          className={`column-header-trigger${isFilterActive_ ? ' column-header-trigger--filtered' : ''}${isSorted ? ' column-header-trigger--sorted' : ''}`}
+          title={`${column.label} options`}
         >
-          <Filter size={14} />
+          {children}
+          {isSortable && (
+            <span className="column-header-sort-indicator">
+              {isSorted && sortDir === 'asc' && <ArrowUp size={14} />}
+              {isSorted && sortDir === 'desc' && <ArrowDown size={14} />}
+              {!isSorted && <ArrowUpDown size={14} className="column-header-sort-hint" />}
+            </span>
+          )}
         </button>
       </Popover.Trigger>
       <Popover.Portal>
-        <Popover.Content className="filter-popover" sideOffset={5} align="start">
-          <div className="filter-header">
-            <span className="filter-title">Filter: {column.label}</span>
-            {isActive && (
-              <button className="filter-clear-btn" onClick={() => onChange(undefined)}>
-                <X size={14} />
-                Clear
-              </button>
-            )}
-          </div>
-          <FilterContent column={column} data={data} value={value} onChange={onChange} />
+        <Popover.Content className="column-header-popover" sideOffset={5} align="start">
+          <div className="column-header-popover-title">{column.label}</div>
+
+          {/* Sort controls */}
+          {isSortable && (
+            <div className="column-header-sort-section">
+              <div className="column-header-section-label">Sort</div>
+              <div className="column-header-sort-buttons">
+                <button
+                  className={`column-header-sort-btn${isSorted && sortDir === 'asc' ? ' column-header-sort-btn--active' : ''}`}
+                  onClick={() => {
+                    if (isSorted && sortDir === 'asc') {
+                      onSort(column.key); // Will toggle to desc
+                    } else {
+                      onSort(column.key);
+                      if (sortDir === 'desc' || !isSorted) {
+                        // Need to set to asc - call twice if currently desc
+                        if (sortDir === 'desc') onSort(column.key);
+                      }
+                    }
+                  }}
+                >
+                  <ArrowUp size={14} />
+                  Ascending
+                </button>
+                <button
+                  className={`column-header-sort-btn${isSorted && sortDir === 'desc' ? ' column-header-sort-btn--active' : ''}`}
+                  onClick={() => {
+                    if (!isSorted) {
+                      onSort(column.key); // asc
+                      onSort(column.key); // desc
+                    } else if (sortDir === 'asc') {
+                      onSort(column.key); // toggle to desc
+                    }
+                    // if already desc, do nothing (already active)
+                  }}
+                >
+                  <ArrowDown size={14} />
+                  Descending
+                </button>
+                {isSorted && (
+                  <button
+                    className="column-header-sort-btn column-header-sort-btn--clear"
+                    onClick={() => {
+                      // Toggle through to clear
+                      if (sortDir === 'asc') {
+                        onSort(column.key); // desc
+                        onSort(column.key); // clear
+                      } else {
+                        onSort(column.key); // clear
+                      }
+                    }}
+                  >
+                    <X size={14} />
+                    Clear
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Filter controls */}
+          {hasFilter && (
+            <div className="column-header-filter-section">
+              <div className="column-header-section-header">
+                <span className="column-header-section-label">Filter</span>
+                {isFilterActive_ && (
+                  <button className="filter-clear-btn" onClick={() => onFilterChange(undefined)}>
+                    <X size={14} />
+                    Clear
+                  </button>
+                )}
+              </div>
+              <FilterContent
+                column={column}
+                data={data}
+                value={filterValue}
+                onChange={onFilterChange}
+              />
+            </div>
+          )}
+
           <Popover.Arrow className="filter-arrow" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
   );
+}
+
+// Legacy export for backwards compatibility - keeping the old function signature
+interface ColumnFilterProps {
+  column: Column;
+  data: BaseEntry[];
+  value: FilterValue | undefined;
+  onChange: (value: FilterValue | undefined) => void;
 }
 
 function FilterContent({ column, data, value, onChange }: ColumnFilterProps) {

@@ -1,32 +1,153 @@
 /* ==========================================================================
-   Column Filter Component - Filter popover and controls
+   Column Header Popover - Combined sort and filter controls
    ========================================================================== */
 
-/* Filter trigger button in column header */
-.filter-trigger {
+/* Column header trigger button */
+.column-header-trigger {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.25rem;
-  margin-left: 0.25rem;
-  color: var(--muted-foreground);
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin: -0.25rem -0.5rem;
+  color: var(--foreground);
+  font-weight: 600;
+  font-size: inherit;
   border-radius: var(--radius-sm);
   transition:
     color var(--transition-fast),
     background-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.column-header-trigger:hover {
+  background-color: var(--accent);
+}
+
+.column-header-trigger--filtered {
+  color: var(--category-primary, var(--primary));
+}
+
+.column-header-trigger--sorted {
+  color: var(--category-primary, var(--primary));
+}
+
+/* Sort indicator in header */
+.column-header-sort-indicator {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.125rem;
+}
+
+.column-header-sort-hint {
+  opacity: 0.3;
+  transition: opacity var(--transition-fast);
+}
+
+.column-header-trigger:hover .column-header-sort-hint {
   opacity: 0.6;
 }
 
-.filter-trigger:hover {
-  color: var(--foreground);
-  background-color: var(--accent);
-  opacity: 1;
+/* ==========================================================================
+   Column Header Popover Content
+   ========================================================================== */
+.column-header-popover {
+  min-width: 220px;
+  max-width: 320px;
+  background-color: var(--popover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  animation: filterSlideIn 0.15s ease-out;
 }
 
-.filter-trigger--active {
-  color: var(--category-primary, var(--primary));
-  background-color: var(--category-accent, var(--accent));
-  opacity: 1;
+.column-header-popover-title {
+  padding: var(--space-3);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--foreground);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Section styling */
+.column-header-sort-section {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.column-header-filter-section {
+  padding: var(--space-3);
+}
+
+.column-header-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+}
+
+.column-header-section-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.column-header-section-header .column-header-section-label {
+  margin-bottom: 0;
+}
+
+/* Sort buttons */
+.column-header-sort-buttons {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.column-header-sort-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background-color: var(--background);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.column-header-sort-btn:hover {
+  background-color: var(--accent);
+  color: var(--foreground);
+}
+
+.column-header-sort-btn--active {
+  color: var(--primary-foreground);
+  background-color: var(--category-primary, var(--primary));
+  border-color: var(--category-primary, var(--primary));
+}
+
+.column-header-sort-btn--active:hover {
+  background-color: var(--category-primary, var(--primary));
+  color: var(--primary-foreground);
+  opacity: 0.9;
+}
+
+.column-header-sort-btn--clear {
+  color: var(--muted-foreground);
+}
+
+.column-header-sort-btn--clear:hover {
+  color: var(--destructive);
+  border-color: var(--destructive);
+  background-color: oklch(0.95 0.05 27);
+}
+
+.dark .column-header-sort-btn--clear:hover {
+  background-color: oklch(0.25 0.05 27);
 }
 
 /* ==========================================================================
@@ -89,9 +210,9 @@
   background-color: var(--accent);
 }
 
-/* Popover content */
+/* Popover content - no padding since it's inside a section with padding */
 .filter-content {
-  padding: var(--space-3);
+  /* padding handled by parent section */
 }
 
 .filter-hint {
