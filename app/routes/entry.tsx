@@ -7,6 +7,7 @@ import { FileText, ShoppingCart, Youtube, Globe, X } from 'lucide-react';
 import { useState } from 'react';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
+import { FeatureBadges, ValueBadges } from '~/components/ui/FeatureBadges';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -133,9 +134,40 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
         </span>
       </div>
 
-      <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start' }}>
-        <header className="page-header" style={{ flex: '1 1 auto', minWidth: 0 }}>
+      {images.length > 0 && (
+        <div className="entry-images">
+          {images.map((filename, idx) => (
+            <button
+              key={idx}
+              onClick={() => setModalImage(`/database-images/${category.id}/${filename}`)}
+              style={{
+                display: 'block',
+                maxWidth: '500px',
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                borderRadius: '0.5rem',
+                overflow: 'hidden',
+              }}
+            >
+              <img
+                src={`/database-images/${category.id}/${filename}`}
+                alt={`${entry.name} - ${filename}`}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                }}
+              />
+            </button>
+          ))}
+        </div>
+      )}
+
+      <header className="page-header">
         <h1 className="page-title category-page-title">{entry.name}</h1>
+        <FeatureBadges entry={entry} />
         {entry.manufacturer && (
           <p className="page-description">
             by{' '}
@@ -171,38 +203,6 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           </div>
         )}
       </header>
-
-        {images.length > 0 && (
-          <div className="entry-images" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexShrink: 0, paddingRight: '1rem' }}>
-            {images.map((filename, idx) => (
-              <button
-                key={idx}
-                onClick={() => setModalImage(`/database-images/${category.id}/${filename}`)}
-                style={{
-                  display: 'block',
-                  maxWidth: '500px',
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  cursor: 'pointer',
-                  borderRadius: '0.5rem',
-                  overflow: 'hidden',
-                }}
-              >
-                <img
-                  src={`/database-images/${category.id}/${filename}`}
-                  alt={`${entry.name} - ${filename}`}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    display: 'block',
-                  }}
-                />
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
 
       {modalImage && (
         <div
@@ -247,9 +247,9 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
         </div>
       )}
 
-      <div className="border rounded-lg p-4">
+      <div className="border rounded-lg p-4" style={{ width: 'fit-content', minWidth: '300px' }}>
         <h2 className="text-xl font-semibold mb-4">Details</h2>
-        <dl style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', gap: '0.5rem 1rem' }}>
+        <dl style={{ display: 'grid', gridTemplateColumns: 'max-content auto', gap: '0.5rem 1rem' }}>
           {Object.entries(entry)
             .filter(([key]) => !['id', 'name', 'image', 'images', 'updated'].includes(key) && key !== 'url' && !key.endsWith('_url'))
             .map(([key, value]) => (
@@ -273,6 +273,10 @@ function formatValue(
   filterableFields: Set<string>
 ): React.ReactNode {
   if (value === null || value === undefined) return '-';
+
+  // Check if value can be rendered as badges
+  const badges = ValueBadges({ value, categoryPath, fieldKey: key });
+  if (badges) return badges;
 
   // Handle booleans - make clickable if filterable
   if (typeof value === 'boolean') {
