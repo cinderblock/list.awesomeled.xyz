@@ -130,3 +130,24 @@
 .badge--outline {
   background-color: transparent;
 }
+
+/* ==========================================================================
+   Entry Page - Responsive float behavior for images
+   ========================================================================== */
+.entry-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+
+@media (min-width: 768px) {
+  .entry-images {
+    float: right;
+    margin-top: 0;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    max-width: 500px;
+  }
+}
