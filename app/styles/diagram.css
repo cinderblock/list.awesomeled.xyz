@@ -47,20 +47,9 @@
 .connection-line {
   fill: none;
   stroke: var(--muted-foreground);
-  stroke-width: 2;
-  opacity: 0.6;
-  transition: all var(--transition-normal);
-}
-
-.connection-line--main {
   stroke-width: 3;
   opacity: 0.8;
-}
-
-.connection-line--optional {
-  stroke-dasharray: 8 4;
-  stroke-width: 2;
-  opacity: 0.4;
+  transition: all var(--transition-normal);
 }
 
 .connection-line--highlighted {
@@ -83,11 +72,6 @@
    ========================================================================== */
 .diagram-node {
   cursor: pointer;
-  transition: transform var(--transition-fast);
-}
-
-.diagram-node:hover {
-  transform: scale(1.02);
 }
 
 .diagram-node-bg {
@@ -184,6 +168,100 @@
 
 .dark .diagram-node-icon-fill {
   fill: oklch(0.4 0.06 var(--node-hue));
+}
+
+/* ==========================================================================
+   Special Nodes (Network, Plus, Future)
+   ========================================================================== */
+
+/* Network/Protocol Box */
+.diagram-network-box {
+  fill: var(--background);
+  stroke: var(--border);
+  stroke-width: 2;
+  stroke-dasharray: 4 2;
+}
+
+.diagram-network-label {
+  fill: var(--foreground);
+  font-size: 12px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.diagram-network-protocols {
+  fill: var(--muted-foreground);
+  font-size: 9px;
+  text-anchor: middle;
+}
+
+.dark .diagram-network-box {
+  fill: oklch(0.2 0.01 0);
+}
+
+/* Plus Circle */
+.diagram-plus-circle {
+  fill: var(--background);
+  stroke: var(--border);
+  stroke-width: 2;
+}
+
+.diagram-plus-path {
+  fill: none;
+  stroke: var(--muted-foreground);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.dark .diagram-plus-circle {
+  fill: oklch(0.2 0.01 0);
+}
+
+/* Becomes Arrow/Label */
+.connection-line--becomes {
+  stroke: var(--muted-foreground);
+  stroke-width: 2;
+  stroke-dasharray: 6 3;
+  opacity: 0.5;
+}
+
+.diagram-becomes-label {
+  fill: var(--muted-foreground);
+  font-size: 11px;
+  font-style: italic;
+  text-anchor: middle;
+}
+
+/* Future Category Node (LEDs) */
+.diagram-future-box {
+  fill: oklch(0.97 0.02 var(--node-hue));
+  stroke: oklch(0.75 0.1 var(--node-hue));
+  stroke-width: 2;
+  stroke-dasharray: 6 3;
+  opacity: 0.7;
+}
+
+.diagram-future-label {
+  fill: oklch(0.45 0.1 var(--node-hue));
+  font-size: 13px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.diagram-future-sublabel {
+  fill: var(--muted-foreground);
+  font-size: 10px;
+  font-style: italic;
+  text-anchor: middle;
+}
+
+.dark .diagram-future-box {
+  fill: oklch(0.22 0.02 var(--node-hue));
+  stroke: oklch(0.45 0.08 var(--node-hue));
+}
+
+.dark .diagram-future-label {
+  fill: oklch(0.7 0.08 var(--node-hue));
 }
 
 /* ==========================================================================

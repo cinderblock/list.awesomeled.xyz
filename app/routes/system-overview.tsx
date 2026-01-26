@@ -53,17 +53,6 @@ export default function SystemOverview({ loaderData }: Route.ComponentProps) {
       <div className="diagram-container">
         <LEDSystemDiagram counts={counts} onCategoryClick={handleCategoryClick} />
       </div>
-
-      <div className="diagram-legend">
-        <div className="legend-item">
-          <span className="legend-line"></span>
-          <span>Primary signal flow</span>
-        </div>
-        <div className="legend-item">
-          <span className="legend-line legend-line--optional"></span>
-          <span>Optional / supporting</span>
-        </div>
-      </div>
     </div>
   );
 }

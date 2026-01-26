@@ -121,13 +121,19 @@ function getCategoryIcon(categoryId: string, x: number, y: number) {
       );
 
     case 'diffusive-materials':
-      // Diffusion pattern
+      // Blanket draped over something
       return (
         <g className="diagram-node-icon" transform={`translate(${x}, ${iconY})`}>
-          <rect x="-16" y="-8" width="32" height="16" rx="2" opacity="0.5" />
-          <circle cx="-8" cy="0" r="6" opacity="0.3" className="diagram-node-icon-fill" />
-          <circle cx="0" cy="0" r="6" opacity="0.3" className="diagram-node-icon-fill" />
-          <circle cx="8" cy="0" r="6" opacity="0.3" className="diagram-node-icon-fill" />
+          {/* Draped blanket shape */}
+          <path
+            d="M-16,-6 Q-12,-10 -6,-6 Q0,-2 6,-6 Q12,-10 16,-6 L14,8 Q10,10 0,10 Q-10,10 -14,8 Z"
+            className="diagram-node-icon-fill"
+            opacity="0.5"
+          />
+          <path d="M-16,-6 Q-12,-10 -6,-6 Q0,-2 6,-6 Q12,-10 16,-6" />
+          {/* Fold lines */}
+          <path d="M-10,0 Q-6,2 -2,0" opacity="0.6" />
+          <path d="M2,2 Q6,4 10,2" opacity="0.6" />
         </g>
       );
 
@@ -144,11 +150,12 @@ function getCategoryIcon(categoryId: string, x: number, y: number) {
       );
 
     case 'pixel-ics':
-      // Chip package
+      // Chip package with driver triangle
       return (
         <g className="diagram-node-icon" transform={`translate(${x}, ${iconY})`}>
           <rect x="-10" y="-10" width="20" height="20" rx="2" />
-          <circle cx="0" cy="0" r="4" className="diagram-node-icon-fill" />
+          {/* Equilateral triangle pointing right (driver symbol) */}
+          <polygon points="-4,-5 6,0 -4,5" className="diagram-node-icon-fill" />
           <line x1="-14" y1="-6" x2="-10" y2="-6" />
           <line x1="-14" y1="0" x2="-10" y2="0" />
           <line x1="-14" y1="6" x2="-10" y2="6" />
