@@ -13,7 +13,8 @@
     "format:check": "prettier --check .",
     "test:e2e": "playwright test --project=chromium",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:visual": "playwright test --project=visual --workers=1"
+    "test:e2e:visual": "playwright test --project=visual --workers=1",
+    "review": "bun run scripts/review-entry.ts"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.16",
@@ -28,6 +29,7 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-router": "7.12.0",
+    "sharp": "^0.34.5",
     "yaml": "^2.8.2"
   },
   "devDependencies": {
