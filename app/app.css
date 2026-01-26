@@ -25,5 +25,8 @@
 /* Category Theme: Dynamic category colors */
 @import './styles/category-theme.css';
 
+/* LED System Diagram: Interactive system overview */
+@import './styles/diagram.css';
+
 /* Print: Print media styles */
 @import './styles/print.css';

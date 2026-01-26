@@ -32,6 +32,9 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           A comprehensive database of addressable LEDs, controllers, pixels, and related products
           for makers and enthusiasts.
         </p>
+        <Link to="/system-overview" className="view-toggle-link">
+          View as System Diagram
+        </Link>
       </div>
 
       <div className="category-grid">
