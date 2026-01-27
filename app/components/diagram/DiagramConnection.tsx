@@ -7,6 +7,7 @@ interface DiagramConnectionProps {
   startBias?: 'horizontal' | 'vertical';
   endBias?: 'horizontal' | 'vertical';
   isHighlighted?: boolean;
+  isDimmed?: boolean;
 }
 
 export function DiagramConnection({
@@ -18,6 +19,7 @@ export function DiagramConnection({
   startBias,
   endBias,
   isHighlighted = false,
+  isDimmed = false,
 }: DiagramConnectionProps) {
   const dx = toX - fromX;
   const dy = toY - fromY;
@@ -97,6 +99,7 @@ export function DiagramConnection({
   const className = [
     'connection-line',
     isHighlighted ? 'connection-line--highlighted' : '',
+    isDimmed ? 'connection-line--dimmed' : '',
   ]
     .filter(Boolean)
     .join(' ');

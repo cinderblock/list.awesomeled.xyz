@@ -5,6 +5,7 @@ import { getCategoryCounts } from '~/lib/data';
 import { Link } from 'react-router';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { LEDSystemDiagram } from '~/components/diagram/LEDSystemDiagram';
+import { DiagramModeToggle, useDiagramMode } from '~/components/diagram/DiagramModeToggle';
 
 export function meta(_args: Route.MetaArgs) {
   return [
@@ -25,6 +26,7 @@ export async function loader() {
 export default function SystemOverview({ loaderData }: Route.ComponentProps) {
   const { counts } = loaderData;
   const navigate = useNavigate();
+  const [simpleMode, setSimpleMode] = useDiagramMode();
 
   const handleCategoryClick = (categoryId: string) => {
     const category = CATEGORIES.find((c) => c.id === categoryId);
@@ -51,7 +53,8 @@ export default function SystemOverview({ loaderData }: Route.ComponentProps) {
       </div>
 
       <div className="diagram-container">
-        <LEDSystemDiagram counts={counts} onCategoryClick={handleCategoryClick} />
+        <DiagramModeToggle value={simpleMode} onChange={setSimpleMode} />
+        <LEDSystemDiagram counts={counts} onCategoryClick={handleCategoryClick} simpleMode={simpleMode} />
       </div>
     </div>
   );

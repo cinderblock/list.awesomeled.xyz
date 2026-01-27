@@ -88,9 +88,6 @@
   filter: drop-shadow(0 4px 12px oklch(0.5 0.12 var(--node-hue) / 0.3));
 }
 
-.diagram-node--main .diagram-node-bg {
-  stroke-width: 3;
-}
 
 .diagram-node-label {
   fill: oklch(0.35 0.12 var(--node-hue));
@@ -128,6 +125,201 @@
 .diagram-node-icon-fill {
   fill: oklch(0.7 0.08 var(--node-hue));
   stroke: none;
+}
+
+/* Arrow styling - line and head share same color */
+.diagram-arrow-line {
+  stroke: oklch(0.55 0.06 var(--node-hue));
+}
+
+.diagram-arrow-head {
+  fill: oklch(0.55 0.06 var(--node-hue));
+  stroke: none;
+}
+
+.diagram-node-icon-text {
+  fill: oklch(0.5 0.12 var(--node-hue));
+  font-family: monospace;
+}
+
+/* Rainbow scrolling binary text */
+.rainbow-binary-scroll {
+  font-family: monospace;
+  stroke: none;
+  /* fill: url(#rainbow-text-gradient); */
+  fill: oklch(0.65 0.15 var(--node-hue));
+}
+
+.rainbow-binary-scroll-left {
+  animation: binary-scroll-left 1.5s linear infinite;
+}
+
+.rainbow-binary-scroll-right {
+  animation: binary-scroll-right 1.5s linear infinite;
+}
+
+@keyframes binary-scroll-left {
+  0% {
+    transform: translateX(-32px);
+  }
+  100% {
+    transform: translateX(-52px);
+  }
+}
+
+@keyframes binary-scroll-right {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-20px);
+  }
+}
+
+/* Square wave scrolling animations */
+.square-wave-scroll {
+  animation: square-wave-scroll 1s linear infinite;
+}
+
+.square-wave-scroll-slow {
+  animation: square-wave-scroll 1.5s linear infinite;
+}
+
+@keyframes square-wave-scroll {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-8px);
+  }
+}
+
+/* Rainbow gradient stops - animated with title */
+.rainbow-gradient-stop-1 {
+  stop-color: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 0));
+}
+
+.rainbow-gradient-stop-2 {
+  stop-color: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 72));
+}
+
+.rainbow-gradient-stop-3 {
+  stop-color: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 144));
+}
+
+.rainbow-gradient-stop-4 {
+  stop-color: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 216));
+}
+
+.rainbow-gradient-stop-5 {
+  stop-color: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 288));
+}
+
+/* Rainbow stars for pattern-drivers - synced with title animation */
+.rainbow-star {
+  stroke: none;
+}
+
+.rainbow-star-1 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 0));
+}
+
+.rainbow-star-2 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 60));
+}
+
+.rainbow-star-3 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 120));
+}
+
+.rainbow-star-4 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 180));
+}
+
+.rainbow-star-5 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 240));
+}
+
+.rainbow-star-6 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 300));
+}
+
+/* Rainbow pixels for pixels icon - synced with title animation */
+.rainbow-pixel {
+  stroke: none;
+}
+
+.rainbow-pixel-1 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 0));
+}
+
+.rainbow-pixel-2 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 12));
+}
+
+.rainbow-pixel-3 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 24));
+}
+
+.rainbow-pixel-4 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 36));
+}
+
+.rainbow-pixel-5 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 48));
+}
+
+.rainbow-pixel-6 {
+  fill: oklch(0.65 0.25 calc(var(--rainbow-hue, 0) + 60));
+}
+
+/* RGB LED dots - color filtered, intensity varies with rainbow animation */
+.rgb-led {
+  stroke: none;
+}
+
+/* Each LED is its own color, intensity varies based on rainbow-hue proximity */
+/* Using cos() to calculate intensity: max when rainbow matches, min when opposite */
+.rgb-led-r {
+  /* Red at hue ~30, intensity based on distance from rainbow-hue */
+  --r-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 30) * 1deg)) / 2);
+  fill: oklch(calc(0.25 + 0.45 * var(--r-intensity)) calc(0.12 + 0.18 * var(--r-intensity)) 30);
+}
+
+.rgb-led-g {
+  /* Green at hue ~142, intensity based on distance from rainbow-hue */
+  --g-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 142) * 1deg)) / 2);
+  fill: oklch(calc(0.25 + 0.45 * var(--g-intensity)) calc(0.12 + 0.18 * var(--g-intensity)) 142);
+}
+
+.rgb-led-b {
+  /* Blue at hue ~264, intensity based on distance from rainbow-hue */
+  --b-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 264) * 1deg)) / 2);
+  fill: oklch(calc(0.25 + 0.45 * var(--b-intensity)) calc(0.12 + 0.18 * var(--b-intensity)) 264);
+}
+
+/* Monochromatic LEDs for Pixel ICs - intensity synced with corresponding RGB LED */
+.mono-led {
+  stroke: none;
+}
+
+/* Each mono LED matches the intensity of its corresponding RGB LED channel */
+.mono-led-1 {
+  /* Matches R intensity (hue 30) */
+  --m1-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 30) * 1deg)) / 2);
+  fill: oklch(calc(0.3 + 0.35 * var(--m1-intensity)) calc(0.08 + 0.1 * var(--m1-intensity)) var(--node-hue));
+}
+
+.mono-led-2 {
+  /* Matches G intensity (hue 142) */
+  --m2-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 142) * 1deg)) / 2);
+  fill: oklch(calc(0.3 + 0.35 * var(--m2-intensity)) calc(0.08 + 0.1 * var(--m2-intensity)) var(--node-hue));
+}
+
+.mono-led-3 {
+  /* Matches B intensity (hue 264) */
+  --m3-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 264) * 1deg)) / 2);
+  fill: oklch(calc(0.3 + 0.35 * var(--m3-intensity)) calc(0.08 + 0.1 * var(--m3-intensity)) var(--node-hue));
 }
 
 /* ==========================================================================
@@ -302,6 +494,144 @@
     transparent 6px,
     transparent 10px
   );
+}
+
+/* ==========================================================================
+   Diagram Mode Toggle
+   ========================================================================== */
+.diagram-mode-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+.diagram-mode-toggle-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-size: 0.875rem;
+}
+
+.diagram-mode-toggle-button:hover {
+  border-color: var(--muted-foreground);
+}
+
+.toggle-track {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  background: var(--muted);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-normal);
+}
+
+.diagram-mode-toggle-button.advanced .toggle-track {
+  background: var(--primary);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  transition: transform var(--transition-normal);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.diagram-mode-toggle-button.advanced .toggle-thumb {
+  transform: translateX(18px);
+}
+
+.toggle-labels {
+  position: relative;
+  width: 70px;
+  height: 1.25em;
+  overflow: hidden;
+}
+
+.toggle-label {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: all var(--transition-normal);
+}
+
+.toggle-label-simple {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toggle-label-advanced {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.diagram-mode-toggle-button.advanced .toggle-label-simple {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.diagram-mode-toggle-button.advanced .toggle-label-advanced {
+  transform: translateY(0);
+  opacity: 1;
+  color: var(--foreground);
+}
+
+/* ==========================================================================
+   Dimmed States (Simple Mode)
+   ========================================================================== */
+.diagram-node--dimmed,
+.diagram-special-node--dimmed,
+.diagram-future-node--dimmed,
+.diagram-becomes--dimmed,
+.diagram-zone--dimmed {
+  transition: opacity 0.4s ease;
+}
+
+.diagram-node--dimmed {
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.diagram-special-node--dimmed {
+  opacity: 0.12;
+}
+
+.diagram-future-node--dimmed {
+  opacity: 0.12;
+}
+
+.diagram-becomes--dimmed {
+  opacity: 0.12;
+}
+
+.diagram-zone--dimmed {
+  opacity: 0.25;
+}
+
+.connection-line--dimmed {
+  opacity: 0.1;
+  transition: opacity 0.4s ease;
+}
+
+/* Ensure non-dimmed elements have smooth transitions too */
+.diagram-node,
+.diagram-special-node,
+.diagram-future-node,
+.diagram-becomes,
+.connection-line {
+  transition: opacity 0.4s ease;
 }
 
 /* ==========================================================================

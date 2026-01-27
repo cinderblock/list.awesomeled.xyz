@@ -6,7 +6,18 @@ import { DiagramConnection } from './DiagramConnection';
 interface LEDSystemDiagramProps {
   counts: Record<string, number>;
   onCategoryClick: (categoryId: string) => void;
+  simpleMode?: boolean;
 }
+
+// Nodes visible in simple mode
+const SIMPLE_MODE_NODES = new Set([
+  'pattern-drivers',
+  'controllers',
+  'connectors',
+  'pixels',
+  'diffusive-materials',
+  'commercial-systems',
+]);
 
 // Node positions - reorganized layout
 interface NodePosition {
@@ -22,28 +33,26 @@ const NODE_POSITIONS: NodePosition[] = [
   { id: 'drive-libraries', x: 100, y: 350, isMain: false },
 
   // Hardware Zone (center) - includes microboards
-  { id: 'controllers', x: 400, y: 215, isMain: true },
-  { id: 'level-converters', x: 620, y: 140, isMain: true },
+  { id: 'controllers', x: 400, y: 230, isMain: true },
+  { id: 'level-converters', x: 620, y: 170, isMain: true },
   { id: 'connectors', x: 620, y: 290, isMain: true },
   // Adapters and microboards horizontally aligned
   { id: 'adapters', x: 300, y: 460, isMain: false },
   { id: 'microboards', x: 500, y: 460, isMain: false },
 
   // Output Zone (right side) - vertically aligned
-  { id: 'pixels', x: 880, y: 140, isMain: true },
+  { id: 'pixels', x: 880, y: 170, isMain: true },
   { id: 'pixel-decoders', x: 880, y: 290, isMain: false }, // aligned with connectors
   { id: 'pixel-ics', x: 880, y: 410, isMain: false },
+  { id: 'diffusive-materials', x: 1060, y: 170, isMain: false },
 
-  // Top right corner - standalone
-  { id: 'diffusive-materials', x: 1100, y: 100, isMain: false },
-
-  // Bottom standalone block - full width
+  // Bottom block - full width
   { id: 'commercial-systems', x: 600, y: 630, isMain: false },
 ];
 
 // Special nodes positions
 const COMBINE_NODE = { x: 400, y: 340, width: 100, height: 50 }; // Below controllers
-const NETWORK_NODE = { x: 270, y: 140, width: 100, height: 60 };
+const NETWORK_NODE = { x: 285, y: 140, width: 100, height: 60 };
 const LEDS_NODE = { x: 1060, y: 410, width: 100, height: 60 };
 const OTHER_OUTPUTS_NODE = { x: 1060, y: 290, width: 100, height: 60 };
 
@@ -69,8 +78,8 @@ const CONNECTIONS: Connection[] = [
 // Zone definitions - all same height
 const ZONES = [
   { x: 10, y: 50, width: 190, height: 470, label: 'Software', labelY: 75 },
-  { x: 210, y: 50, width: 500, height: 470, label: 'Infrastructure', labelY: 75 },
-  { x: 790, y: 50, width: 180, height: 470, label: 'Output', labelY: 75 },
+  { x: 210, y: 50, width: 540, height: 470, label: 'Infrastructure', labelY: 75 },
+  { x: 760, y: 50, width: 430, height: 470, label: 'Output', labelY: 75 },
 ];
 
 function getNodePosition(id: string): NodePosition | undefined {
@@ -130,18 +139,26 @@ function getConnectionPoints(
   };
 }
 
-// Placeholder category for future LEDs
+// Placeholder category for future Discrete LEDs
 const LEDS_CATEGORY: Category = {
-  id: 'leds',
-  name: 'LEDs',
+  id: 'discrete-leds',
+  name: 'Discrete LEDs',
   description: 'Individual LED components (coming soon)',
-  path: '/leds',
+  path: '/discrete-leds',
   viewType: 'table',
   color: { hue: 45, name: 'yellow' },
 };
 
-export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramProps) {
+export function LEDSystemDiagram({ counts, onCategoryClick, simpleMode = false }: LEDSystemDiagramProps) {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+
+  const isNodeDimmed = (nodeId: string) => {
+    if (simpleMode) {
+      return !SIMPLE_MODE_NODES.has(nodeId);
+    }
+    // Advanced mode: only dim commercial-systems
+    return nodeId === 'commercial-systems';
+  };
 
   const getHighlightedConnections = () => {
     if (!hoveredNode) return new Set<string>();
@@ -158,11 +175,11 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
 
   return (
     <svg
-      className="led-system-diagram"
+      className={`led-system-diagram ${simpleMode ? 'simple-mode' : ''}`}
       viewBox="0 0 1200 750"
       preserveAspectRatio="xMidYMid meet"
     >
-      {/* Arrow marker definition */}
+      {/* Arrow marker and gradient definitions */}
       <defs>
         <marker
           id="arrowhead"
@@ -174,6 +191,60 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
         >
           <polygon points="0 0, 6 2.5, 0 5" className="diagram-arrow" />
         </marker>
+        {/* Rainbow gradient for binary text - tiles every 20px to match scroll animation */}
+        <linearGradient
+          id="rainbow-text-gradient"
+          x1="0"
+          y1="0"
+          x2="20"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+          spreadMethod="repeat"
+        >
+          <stop offset="0%" className="rainbow-gradient-stop-1" />
+          <stop offset="25%" className="rainbow-gradient-stop-2" />
+          <stop offset="50%" className="rainbow-gradient-stop-3" />
+          <stop offset="75%" className="rainbow-gradient-stop-4" />
+          <stop offset="100%" className="rainbow-gradient-stop-1" />
+        </linearGradient>
+        {/* Fade mask for binary text edges */}
+        <linearGradient id="binary-fade-gradient-left" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="black" />
+          <stop offset="20%" stopColor="white" />
+          <stop offset="80%" stopColor="white" />
+          <stop offset="100%" stopColor="black" />
+        </linearGradient>
+        <linearGradient id="binary-fade-gradient-right" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="black" />
+          <stop offset="20%" stopColor="white" />
+          <stop offset="80%" stopColor="white" />
+          <stop offset="100%" stopColor="black" />
+        </linearGradient>
+        <mask id="binary-fade-mask-left">
+          <rect x="-32" y="-10" width="24" height="20" fill="url(#binary-fade-gradient-left)" />
+        </mask>
+        <mask id="binary-fade-mask-right">
+          <rect x="8" y="-10" width="22" height="20" fill="url(#binary-fade-gradient-right)" />
+        </mask>
+        {/* Fade masks for square wave edges */}
+        <linearGradient id="wave-fade-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="black" />
+          <stop offset="15%" stopColor="white" />
+          <stop offset="85%" stopColor="white" />
+          <stop offset="100%" stopColor="black" />
+        </linearGradient>
+        <mask id="square-wave-mask-right">
+          <rect x="12" y="-10" width="14" height="20" fill="url(#wave-fade-gradient)" />
+        </mask>
+        <mask id="square-wave-mask-left">
+          <rect x="-26" y="-10" width="16" height="20" fill="url(#wave-fade-gradient)" />
+        </mask>
+        <mask id="small-wave-mask">
+          <rect x="-26" y="-10" width="16" height="20" fill="url(#wave-fade-gradient)" />
+        </mask>
+        <mask id="large-wave-mask">
+          <rect x="10" y="-14" width="16" height="20" fill="url(#wave-fade-gradient)" />
+        </mask>
       </defs>
 
       {/* Zone backgrounds */}
@@ -198,23 +269,8 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           </g>
         ))}
 
-        {/* Diffusive Materials zone (top right) */}
-        <g>
-          <rect
-            className="diagram-zone"
-            x={1010}
-            y={50}
-            width={180}
-            height={100}
-            rx="8"
-          />
-          <text className="diagram-zone-label" x={1100} y={75}>
-            Finishing
-          </text>
-        </g>
-
         {/* Commercial Systems zone (bottom) - full width */}
-        <g>
+        <g className={isNodeDimmed('commercial-systems') ? 'diagram-zone--dimmed' : ''}>
           <rect
             className="diagram-zone"
             x={10}
@@ -251,7 +307,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
       </g>
 
       {/* Combine node for Drive Libraries + Microboards + Adapters */}
-      <g className="diagram-special-node">
+      <g className={`diagram-special-node ${simpleMode ? 'diagram-special-node--dimmed' : ''}`}>
         <rect
           className="diagram-network-box"
           x={COMBINE_NODE.x - COMBINE_NODE.width / 2}
@@ -269,17 +325,17 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
       </g>
 
       {/* Arrow from combine box to Controllers (upward) */}
-      <g className="diagram-becomes">
+      <g className={`diagram-becomes ${simpleMode ? 'diagram-becomes--dimmed' : ''}`}>
         <path
           className="connection-line"
-          d={`M ${COMBINE_NODE.x} ${COMBINE_NODE.y - COMBINE_NODE.height / 2 - 5}
-              L ${COMBINE_NODE.x} ${215 + NODE_HEIGHT / 2 + 5}`}
+          d={`M ${COMBINE_NODE.x} ${COMBINE_NODE.y - COMBINE_NODE.height / 2}
+              L ${COMBINE_NODE.x} ${230 + NODE_HEIGHT / 2 + 5}`}
           markerEnd="url(#arrowhead)"
         />
       </g>
 
       {/* Other Outputs box for pixel decoders */}
-      <g className="diagram-special-node">
+      <g className={`diagram-special-node ${simpleMode ? 'diagram-special-node--dimmed' : ''}`}>
         <rect
           className="diagram-network-box"
           x={OTHER_OUTPUTS_NODE.x - OTHER_OUTPUTS_NODE.width / 2}
@@ -301,7 +357,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
 
       {/* LEDs future category box */}
       <g
-        className="diagram-future-node"
+        className={`diagram-future-node ${simpleMode ? 'diagram-future-node--dimmed' : ''}`}
         style={{ '--node-hue': LEDS_CATEGORY.color.hue } as React.CSSProperties}
       >
         <rect
@@ -312,8 +368,12 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           height={LEDS_NODE.height}
           rx="8"
         />
-        <text className="diagram-future-label" x={LEDS_NODE.x} y={LEDS_NODE.y + 5}>
-          LEDs
+        {/* RGB LED dots - vertical arrangement, shifted up for label */}
+        <circle cx={LEDS_NODE.x} cy={LEDS_NODE.y - 22} r="5" className="rgb-led rgb-led-r" />
+        <circle cx={LEDS_NODE.x} cy={LEDS_NODE.y - 8} r="5" className="rgb-led rgb-led-g" />
+        <circle cx={LEDS_NODE.x} cy={LEDS_NODE.y + 6} r="5" className="rgb-led rgb-led-b" />
+        <text className="diagram-future-label" x={LEDS_NODE.x} y={LEDS_NODE.y + 24}>
+          Discrete LEDs
         </text>
       </g>
 
@@ -334,7 +394,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           fromX={NETWORK_NODE.x + NETWORK_NODE.width / 2}
           fromY={NETWORK_NODE.y}
           toX={400}
-          toY={215 - NODE_HEIGHT / 2}
+          toY={230 - NODE_HEIGHT / 2}
           startBias="horizontal"
           endBias="vertical"
           isHighlighted={hoveredNode === 'controllers'}
@@ -348,6 +408,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           toY={COMBINE_NODE.y}
           bias="horizontal"
           isHighlighted={hoveredNode === 'drive-libraries'}
+          isDimmed={isNodeDimmed('drive-libraries')}
         />
 
         {/* Adapters to Combine */}
@@ -358,6 +419,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           toY={COMBINE_NODE.y + COMBINE_NODE.height / 2}
           bias="vertical"
           isHighlighted={hoveredNode === 'adapters'}
+          isDimmed={isNodeDimmed('adapters')}
         />
 
         {/* Microboards to Combine */}
@@ -368,6 +430,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           toY={COMBINE_NODE.y + COMBINE_NODE.height / 2}
           bias="vertical"
           isHighlighted={hoveredNode === 'microboards'}
+          isDimmed={isNodeDimmed('microboards')}
         />
 
         {/* Pixel ICs to LEDs */}
@@ -378,6 +441,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           toY={LEDS_NODE.y}
           bias="horizontal"
           isHighlighted={hoveredNode === 'pixel-ics'}
+          isDimmed={isNodeDimmed('pixel-ics')}
         />
 
         {/* Pixel Decoders to Other Outputs */}
@@ -388,6 +452,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           toY={OTHER_OUTPUTS_NODE.y}
           bias="horizontal"
           isHighlighted={hoveredNode === 'pixel-decoders'}
+          isDimmed={isNodeDimmed('pixel-decoders')}
         />
 
         {/* Regular connections */}
@@ -395,6 +460,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
           const points = getConnectionPoints(conn.from, conn.to, conn.bias);
           if (!points) return null;
           const key = `${conn.from}-${conn.to}`;
+          const connDimmed = isNodeDimmed(conn.from) || isNodeDimmed(conn.to);
           return (
             <DiagramConnection
               key={key}
@@ -404,6 +470,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
               toY={points.to.y}
               bias={points.bias}
               isHighlighted={highlightedConnections.has(key)}
+              isDimmed={connDimmed}
             />
           );
         })}
@@ -423,6 +490,7 @@ export function LEDSystemDiagram({ counts, onCategoryClick }: LEDSystemDiagramPr
               count={counts[nodePos.id]}
               isMain={nodePos.isMain}
               isHighlighted={hoveredNode === nodePos.id}
+              isDimmed={isNodeDimmed(nodePos.id)}
               onMouseEnter={setHoveredNode}
               onMouseLeave={() => setHoveredNode(null)}
               onClick={onCategoryClick}
