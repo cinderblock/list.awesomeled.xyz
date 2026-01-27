@@ -1,5 +1,6 @@
 import mdx from '@mdx-js/rollup';
 import { reactRouter } from '@react-router/dev/vite';
+import rehypeExternalLinks from 'rehype-external-links';
 import { defineConfig, type Plugin } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
@@ -40,7 +41,14 @@ function relativeSourcemaps(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [mdx(), reactRouter(), tsconfigPaths(), relativeSourcemaps()],
+  plugins: [
+    mdx({
+      rehypePlugins: [[rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]],
+    }),
+    reactRouter(),
+    tsconfigPaths(),
+    relativeSourcemaps(),
+  ],
   resolve: {
     alias: {
       '~': path.resolve(__dirname, './app'),
