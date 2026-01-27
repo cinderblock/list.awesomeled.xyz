@@ -1,0 +1,25 @@
+name: Baldrick17
+manufacturer: ILIGHTTHAT
+max_pixels: 12750
+price: 189
+max_outputs: 17
+interfaces:
+  - DDP
+  - Artnet
+  - E1.31
+storage: null
+standalone: null
+pixel_types: async
+max_voltage: 48
+max_current: 63.75
+buffered: true
+output_connectors: Phoenix Plug
+outputs: Single
+waterproof: false
+auxiliary_outputs: false
+wled_compatible: null
+warranty: null
+release_year: 2025
+status: active
+url: https://www.baldrickboard.com/en/boards/baldrick17
+image: baldrick-17.png
