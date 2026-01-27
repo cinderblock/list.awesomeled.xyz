@@ -1,3 +1,4 @@
+import mdx from '@mdx-js/rollup';
 import { reactRouter } from '@react-router/dev/vite';
 import { defineConfig, type Plugin } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -39,7 +40,12 @@ function relativeSourcemaps(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [reactRouter(), tsconfigPaths(), relativeSourcemaps()],
+  plugins: [mdx(), reactRouter(), tsconfigPaths(), relativeSourcemaps()],
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, './app'),
+    },
+  },
   css: {
     devSourcemap: true,
   },
