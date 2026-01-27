@@ -218,7 +218,15 @@ function openInVSCode(filePath: string) {
 function generateImagePickerHtml(entry: Entry, serverPort: number): string {
   const bookmarkletCode = `
 (function() {
-  if (window.__imgPickerActive) return;
+  // Toggle: if already active, remove and exit
+  if (window.__imgPickerActive) {
+    document.querySelectorAll('.__imgPickerBtn, #__imgPickerOverlay, #__imgPickerCloseBtn').forEach(el => el.remove());
+    document.querySelectorAll('.__imgPickerHighlight').forEach(el => el.classList.remove('__imgPickerHighlight'));
+    const style = document.getElementById('__imgPickerStyle');
+    if (style) style.remove();
+    window.__imgPickerActive = false;
+    return;
+  }
   window.__imgPickerActive = true;
 
   const overlay = document.createElement('div');
@@ -227,6 +235,7 @@ function generateImagePickerHtml(entry: Entry, serverPort: number): string {
   document.body.appendChild(overlay);
 
   const style = document.createElement('style');
+  style.id = '__imgPickerStyle';
   style.textContent = \`
     .__imgPickerBtn {
       position: absolute;
@@ -289,6 +298,7 @@ function generateImagePickerHtml(entry: Entry, serverPort: number): string {
   });
 
   const closeBtn = document.createElement('button');
+  closeBtn.id = '__imgPickerCloseBtn';
   closeBtn.textContent = '✕ Close Image Picker';
   closeBtn.style.cssText = 'position:fixed;top:10px;right:10px;background:#ef4444;color:white;border:none;border-radius:4px;padding:8px 16px;font-size:14px;cursor:pointer;z-index:1000001;';
   closeBtn.onclick = () => {
