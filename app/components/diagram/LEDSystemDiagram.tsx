@@ -5,7 +5,6 @@ import { DiagramConnection } from './DiagramConnection';
 
 interface LEDSystemDiagramProps {
   counts: Record<string, number>;
-  onCategoryClick: (categoryId: string) => void;
   simpleMode?: boolean;
 }
 
@@ -149,7 +148,7 @@ const LEDS_CATEGORY: Category = {
   color: { hue: 45, name: 'yellow' },
 };
 
-export function LEDSystemDiagram({ counts, onCategoryClick, simpleMode = false }: LEDSystemDiagramProps) {
+export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagramProps) {
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
   const isNodeDimmed = (nodeId: string) => {
@@ -493,7 +492,6 @@ export function LEDSystemDiagram({ counts, onCategoryClick, simpleMode = false }
               isDimmed={isNodeDimmed(nodePos.id)}
               onMouseEnter={setHoveredNode}
               onMouseLeave={() => setHoveredNode(null)}
-              onClick={onCategoryClick}
             />
           );
         })}

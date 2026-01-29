@@ -1,6 +1,4 @@
 import type { Route } from './+types/system-overview';
-import { useNavigate } from 'react-router';
-import { CATEGORIES } from '~/lib/types';
 import { getCategoryCounts } from '~/lib/data';
 import { Link } from 'react-router';
 import { RainbowText } from '~/components/ui/RainbowText';
@@ -25,15 +23,7 @@ export async function loader() {
 
 export default function SystemOverview({ loaderData }: Route.ComponentProps) {
   const { counts } = loaderData;
-  const navigate = useNavigate();
   const [simpleMode, setSimpleMode] = useDiagramMode();
-
-  const handleCategoryClick = (categoryId: string) => {
-    const category = CATEGORIES.find((c) => c.id === categoryId);
-    if (category) {
-      navigate(category.path);
-    }
-  };
 
   return (
     <div className="container page-section system-overview-page">
@@ -54,7 +44,7 @@ export default function SystemOverview({ loaderData }: Route.ComponentProps) {
 
       <div className="diagram-container">
         <DiagramModeToggle value={simpleMode} onChange={setSimpleMode} />
-        <LEDSystemDiagram counts={counts} onCategoryClick={handleCategoryClick} simpleMode={simpleMode} />
+        <LEDSystemDiagram counts={counts} simpleMode={simpleMode} />
       </div>
     </div>
   );

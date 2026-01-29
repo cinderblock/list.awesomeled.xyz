@@ -10,7 +10,6 @@ interface DiagramNodeProps {
   isDimmed?: boolean;
   onMouseEnter?: (id: string) => void;
   onMouseLeave?: () => void;
-  onClick?: (id: string) => void;
 }
 
 const NODE_WIDTH = 140;
@@ -20,7 +19,7 @@ function getCategoryIcon(categoryId: string, x: number, y: number) {
   const iconY = y - 12;
 
   switch (categoryId) {
-    case 'pattern-drivers':
+    case 'pattern-drivers': {
       // Six rainbow stars arranged in an arc, each canted to follow the arc angle
       // Star points: 5-pointed star with R=5, r=2, centered at origin
       const starPoints = '0,-5 1.18,-1.62 4.76,-1.55 1.9,0.62 2.94,4.05 0,2 -2.94,4.05 -1.9,0.62 -4.76,-1.55 -1.18,-1.62';
@@ -64,6 +63,7 @@ function getCategoryIcon(categoryId: string, x: number, y: number) {
           />
         </g>
       );
+    }
 
     case 'controllers':
       // Binary data to square wave - showing signal transformation
@@ -310,18 +310,17 @@ export function DiagramNode({
   isDimmed = false,
   onMouseEnter,
   onMouseLeave,
-  onClick,
 }: DiagramNodeProps) {
   const halfWidth = NODE_WIDTH / 2;
   const halfHeight = NODE_HEIGHT / 2;
 
   return (
-    <g
+    <a
+      href={category.path}
       className={`diagram-node ${isMain ? 'diagram-node--main' : ''} ${isHighlighted ? 'diagram-node--highlighted' : ''} ${isDimmed ? 'diagram-node--dimmed' : ''}`}
       style={{ '--node-hue': category.color.hue } as React.CSSProperties}
       onMouseEnter={() => onMouseEnter?.(category.id)}
       onMouseLeave={() => onMouseLeave?.()}
-      onClick={() => onClick?.(category.id)}
     >
       <rect
         className="diagram-node-bg"
@@ -340,7 +339,7 @@ export function DiagramNode({
           {count} {count === 1 ? 'entry' : 'entries'}
         </text>
       )}
-    </g>
+    </a>
   );
 }
 
