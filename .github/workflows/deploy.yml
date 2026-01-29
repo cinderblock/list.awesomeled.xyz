@@ -2,9 +2,11 @@ name: Test, Build, and Deploy
 
 on:
   push:
-    branches: [master]
+    branches: 
+      - master
   pull_request:
-    branches: [master]
+    branches: 
+      - master
   workflow_dispatch:
 
 permissions:
@@ -42,6 +44,10 @@ jobs:
       - name: Spell check
         continue-on-error: true # ok to fail, for now. We will fix issues over time.
         run: bun run spell:check
+
+      - name: Link check
+        continue-on-error: true # ok to fail, links break over time
+        run: bun run lint:links
 
   test:
     name: Run Tests
