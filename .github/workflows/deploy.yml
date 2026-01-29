@@ -39,6 +39,10 @@ jobs:
       - name: Type check
         run: bun run typecheck
 
+      - name: Spell check
+        continue-on-error: true # ok to fail, for now. We will fix issues over time.
+        run: bun run spell:check
+
   test:
     name: Run Tests
     runs-on: ubuntu-latest

@@ -1,0 +1,38 @@
+# Network/Protocol libraries
+Artnet
+sacn
+fastled
+FastLED
+
+# React/Web libraries
+reactrouter
+tailwindcss
+Tanstack
+tanstack
+Xyflow
+xyflow
+reactflow
+reaflow
+rehype
+postcss
+autoprefixer
+vite
+Toastify
+clsx
+
+# Content processing
+mdast
+remark
+frontmatter
+
+# Testing/Browser
+isbot
+networkidle
+Consolas
+
+# HTML attributes
+noopener
+noreferrer
+
+# Build tools
+Rolldown

@@ -1,0 +1,123 @@
+# LED/Color terms
+RGB
+RGBW
+GRBW
+RGBWW
+RGBCW
+RGBA
+RGBAC
+CCT
+Neopixel
+clockless
+colours
+colour
+
+# Hardware terms
+datasheet
+datasheets
+microboard
+microboards
+microcontroller
+microcontrollers
+Mosfet
+hotswappable
+breakout
+gpio
+GPIO
+pinout
+pinouts
+busable
+daisychain
+
+# IC Packages
+SSOP
+SOIC
+QFN
+SOT
+TSSOP
+SOP
+PDIP
+Rext
+
+# Protocols
+kinet
+sACN
+sacn
+MQTT
+DDP
+CITP
+SMPTE
+OSC
+MIDI
+OPC
+GLSL
+UART
+CRMX
+timecode
+
+# Materials
+PMMA
+HDPE
+LDPE
+XLPE
+Lipo
+
+# Software/Technical
+FOSS
+Memoryless
+requestfinished
+scriptable
+PWM
+MPWM
+OKLCH
+donationware
+keyframing
+
+# Measurements
+Mbps
+Mbit
+
+# File types
+webp
+WSXX
+Fseq
+
+# UI/Code terms
+nums
+sublabel
+Stylesheet
+digikey
+Flexbox
+ACMR
+
+# British spellings (valid)
+utilisation
+utilise
+utilising
+organisation
+neighbouring
+recognised
+mouldable
+authorise
+authorised
+Capitalised
+waivable
+Waivable
+
+# Other technical
+OLED
+PRUSS
+ATSAMD
+MXRT
+Efuse
+microlenses
+snakelined
+Interlockable
+ledstrip
+orangepi
+flexi
+mousebite
+Mousebite
+Groupable
+Hardwire
+studiomarket

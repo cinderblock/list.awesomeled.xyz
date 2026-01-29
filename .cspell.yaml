@@ -1,0 +1,26 @@
+version: '0.2'
+language: en
+ignorePaths:
+  - '**/*.svg'
+  - .vscode/extensions.json
+  - .git
+  - '**/node_modules/**'
+  - build/**
+  - test-results/**
+  - playwright-report/**
+dictionaries:
+  - en_US
+  - filetypes
+
+  # Local dictionaries
+  - dependencies
+  - export
+  - names
+  - words
+dictionaryDefinitions:
+  - name: dependencies
+    path: .cSpell/dependencies.txt
+  - name: names
+    path: .cSpell/names.txt
+  - name: words
+    path: .cSpell/words.txt
