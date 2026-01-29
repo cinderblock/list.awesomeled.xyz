@@ -5,6 +5,7 @@ export default [
   route('system-overview', 'routes/system-overview.tsx'),
   route('about', 'routes/about.tsx'),
   route('database-images/:category/:filename', 'routes/database-image.$category.$filename.ts'),
+  route('datasheets/:filename', 'routes/datasheet.$filename.ts'),
   route(':category.csv', 'routes/csv.$category.ts'),
   route(':category', 'routes/category.tsx'),
   route(':category/:entry', 'routes/entry.tsx'),
