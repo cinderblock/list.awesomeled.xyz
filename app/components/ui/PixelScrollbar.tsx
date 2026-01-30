@@ -108,8 +108,8 @@ export function PixelScrollbar({
       window.addEventListener('scroll', handleScroll, { passive: true });
     }
 
-    // Initial update
-    updateLitPixels();
+    // Initial update - use RAF to avoid sync setState in effect
+    requestAnimationFrame(() => updateLitPixels());
 
     return () => {
       if (target) {
@@ -160,7 +160,9 @@ export function PixelScrollbar({
 
   // Update lit pixels when pixel count changes
   useEffect(() => {
-    updateLitPixels();
+    // Use RAF to avoid sync setState in effect
+    const raf = requestAnimationFrame(() => updateLitPixels());
+    return () => cancelAnimationFrame(raf);
   }, [pixelCount, updateLitPixels]);
 
   // Toggle class on html element for vertical scrollbar visibility (for content padding)
