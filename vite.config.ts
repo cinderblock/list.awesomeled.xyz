@@ -2,6 +2,7 @@ import mdx from '@mdx-js/rollup';
 import { reactRouter } from '@react-router/dev/vite';
 import rehypeExternalLinks from 'rehype-external-links';
 import { defineConfig, type Plugin } from 'vite';
+import devtoolsJson from 'vite-plugin-devtools-json';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
 
@@ -47,6 +48,7 @@ export default defineConfig({
     }),
     reactRouter(),
     tsconfigPaths(),
+    devtoolsJson(),
     relativeSourcemaps(),
   ],
   resolve: {
