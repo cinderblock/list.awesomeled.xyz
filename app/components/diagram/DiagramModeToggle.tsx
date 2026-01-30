@@ -1,6 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
 
 const STORAGE_KEY = 'diagram-mode';
+
+// Pub/sub for local state updates (storage events only fire in other tabs)
+const listeners = new Set<() => void>();
+
+function subscribe(callback: () => void) {
+  listeners.add(callback);
+
+  // Also listen for storage events from other tabs
+  const handleStorage = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY) callback();
+  };
+  window.addEventListener('storage', handleStorage);
+
+  return () => {
+    listeners.delete(callback);
+    window.removeEventListener('storage', handleStorage);
+  };
+}
+
+function getSnapshot() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored === null ? 'simple' : stored;
+}
+
+function getServerSnapshot() {
+  return 'simple';
+}
+
+function emitChange() {
+  listeners.forEach((listener) => listener());
+}
 
 interface DiagramModeToggleProps {
   value: boolean;
@@ -33,35 +64,12 @@ export function DiagramModeToggle({ value, onChange }: DiagramModeToggleProps) {
 }
 
 export function useDiagramMode(): [boolean, (simple: boolean) => void] {
-  const [isSimple, setIsSimple] = useState(true);
-  const [isHydrated, setIsHydrated] = useState(false);
+  const mode = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  // Load from localStorage on mount
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored !== null) {
-      setIsSimple(stored === 'simple');
-    }
-    setIsHydrated(true);
-  }, []);
-
-  // Listen for changes from other tabs
-  useEffect(() => {
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY && e.newValue !== null) {
-        setIsSimple(e.newValue === 'simple');
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
-
-  const setMode = (simple: boolean) => {
-    setIsSimple(simple);
+  const setMode = useCallback((simple: boolean) => {
     localStorage.setItem(STORAGE_KEY, simple ? 'simple' : 'advanced');
-  };
+    emitChange();
+  }, []);
 
-  // Return true (simple) as default before hydration to avoid flicker
-  return [isHydrated ? isSimple : true, setMode];
+  return [mode === 'simple', setMode];
 }
