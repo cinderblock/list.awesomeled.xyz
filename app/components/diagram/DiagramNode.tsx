@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import type { Category } from '~/lib/types';
 
 interface DiagramNodeProps {
@@ -311,12 +312,19 @@ export function DiagramNode({
   onMouseEnter,
   onMouseLeave,
 }: DiagramNodeProps) {
+  const navigate = useNavigate();
   const halfWidth = NODE_WIDTH / 2;
   const halfHeight = NODE_HEIGHT / 2;
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigate(category.path);
+  };
 
   return (
     <a
       href={category.path}
+      onClick={handleClick}
       className={`diagram-node ${isMain ? 'diagram-node--main' : ''} ${isHighlighted ? 'diagram-node--highlighted' : ''} ${isDimmed ? 'diagram-node--dimmed' : ''}`}
       style={{ '--node-hue': category.color.hue } as React.CSSProperties}
       onMouseEnter={() => onMouseEnter?.(category.id)}

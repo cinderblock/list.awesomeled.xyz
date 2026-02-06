@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect } from 'react';
 import * as Popover from '@radix-ui/react-popover';
-import { X, Check, ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react';
+import { X, Check, ArrowUp, ArrowDown, ArrowUpDown, EyeOff } from 'lucide-react';
 import type { Column, FilterConfig } from '~/lib/columns';
 import type { BaseEntry } from '~/lib/types';
 
@@ -175,6 +175,7 @@ interface ColumnHeaderPopoverProps {
   sortKey: string | null;
   sortDir: SortDirection | null;
   onSort: (key: string) => void;
+  onHide?: () => void;
   children: React.ReactNode;
 }
 
@@ -186,6 +187,7 @@ export function ColumnHeaderPopover({
   sortKey,
   sortDir,
   onSort,
+  onHide,
   children,
 }: ColumnHeaderPopoverProps) {
   const [open, setOpen] = useState(false);
@@ -230,7 +232,21 @@ export function ColumnHeaderPopover({
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content className="column-header-popover" sideOffset={5} align="start">
-          <div className="column-header-popover-title">{column.label}</div>
+          <div className="column-header-popover-header">
+            <span className="column-header-popover-title">{column.label || column.key}</span>
+            {onHide && (
+              <button
+                className="column-header-hide-btn"
+                onClick={() => {
+                  onHide();
+                  setOpen(false);
+                }}
+                title="Hide column"
+              >
+                <EyeOff size={14} />
+              </button>
+            )}
+          </div>
 
           {/* Sort controls */}
           {isSortable && (
