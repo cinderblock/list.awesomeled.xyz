@@ -12,11 +12,13 @@
    ========================================================================== */
 .data-table-controls {
   position: sticky;
-  top: 94px; /* Height of site header (56px) + category nav (38px) */
+  top: 95px; /* Height of site header (56px + 1px border) + category nav (38px) */
   z-index: 40;
-  padding: 0.75rem 0;
-  margin-bottom: 1rem;
+  padding: 0.75rem 0 calc(0.75rem + 1rem); /* Include margin as padding to prevent layout shift */
   background-color: var(--category-bg-subtle, var(--background));
+  /* Force GPU layer to prevent sub-pixel shifts */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .data-table-controls-inner {

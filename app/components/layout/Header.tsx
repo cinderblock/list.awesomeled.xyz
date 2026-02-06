@@ -12,7 +12,7 @@ export function Header() {
             <RainbowText>Awesome LED List</RainbowText>
           </Link>
           <nav className="site-nav">
-            <Link to="/about" className="btn btn--ghost btn--icon site-nav-link">
+            <Link to="/about" className="btn btn--ghost site-nav-link">
               About
             </Link>
             <a

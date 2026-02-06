@@ -18,9 +18,9 @@ import {
   type StringFilterValue,
 } from './ColumnFilter';
 
-// Height of site header (h-14 = 3.5rem = 56px)
-const HEADER_HEIGHT = 56;
-// Height of category nav bar when visible (~38px)
+// Height of site header (h-14 = 3.5rem = 56px + 1px border = 57px)
+const HEADER_HEIGHT = 57;
+// Height of category nav bar when visible (shadow doesn't add height)
 const NAV_HEIGHT = 38;
 // Combined height of fixed header elements
 const FIXED_HEADER_HEIGHT = HEADER_HEIGHT + NAV_HEIGHT;
@@ -803,13 +803,19 @@ export function DataTable({
   // Sync horizontal scroll - mirror scroll position directly (no RAF needed, very fast)
   const syncHorizontalScroll = useCallback(() => {
     if (!scrollContainerRef.current || !stickyHeaderScrollRef.current) return;
-    const scrollLeft = scrollContainerRef.current.scrollLeft;
+    const el = scrollContainerRef.current;
+    const scrollLeft = el.scrollLeft;
     stickyHeaderScrollRef.current.scrollLeft = scrollLeft;
 
     // Toggle scrolled class for sticky column fade effect (1px threshold for sub-pixel rounding)
     const isScrolled = scrollLeft > 1;
-    scrollContainerRef.current.classList.toggle('data-table-scroll--scrolled', isScrolled);
+    el.classList.toggle('data-table-scroll--scrolled', isScrolled);
     stickyHeaderScrollRef.current.classList.toggle('data-table-scroll--scrolled', isScrolled);
+
+    // Toggle at-end class to hide right fade when scrolled to the end
+    const isAtEnd = scrollLeft >= el.scrollWidth - el.clientWidth - 1;
+    el.classList.toggle('data-table-scroll--at-end', isAtEnd);
+    stickyHeaderScrollRef.current.classList.toggle('data-table-scroll--at-end', isAtEnd);
   }, []);
 
 
@@ -830,6 +836,8 @@ export function DataTable({
 
   useEffect(() => {
     measureAll();
+    // Set initial scroll classes (for fade effect)
+    syncHorizontalScroll();
 
     const scrollContainer = scrollContainerRef.current;
 

@@ -30,8 +30,8 @@
 
 .pixel-scrollbar--vertical {
   position: fixed;
-  /* Account for sticky header (56px) + category nav (38px) */
-  top: 94px;
+  /* Account for sticky header (56px + 1px border) + category nav (38px) */
+  top: 95px;
   bottom: 0;
   width: calc(var(--pixel-cell-size) + 8px);
   padding: 8px 4px;
@@ -243,10 +243,14 @@
   align-items: flex-start;
   /* Keep fit-content for intrinsic sizing with block-level flex (preserves margin: auto centering) */
   width: fit-content;
+  /* Override the max-width: 100% from data-table.css so the spacer can expand the container */
+  max-width: none;
 }
 
 .pixel-scrollbar-visible-right .data-table-scrollbar-spacer {
   display: block;
+  /* Creates gap between table edge and scrollbar.
+     Combined with scroll container's 16px right padding, this gives ~16px gap from scrollbar. */
   width: var(--pixel-scrollbar-width);
   min-width: var(--pixel-scrollbar-width);
   flex-shrink: 0;
@@ -258,7 +262,7 @@
    Content padding adjustments when scrollbar is visible
    ========================================================================== */
 
-/* Add right padding to controls bar so buttons don't overlap scrollbar */
+/* Add right padding to controls bar so CSV button aligns with table edge */
 .pixel-scrollbar-visible-right .data-table-controls {
   padding-right: var(--pixel-scrollbar-width);
 }
@@ -269,7 +273,8 @@
 
 /* Apply a gradient mask to fade content on the right edge when scrollbar is visible.
    The mask fades from fully opaque to transparent over the last 30px before the scrollbar. */
-.pixel-scrollbar-visible-right .data-table-scroll {
+.pixel-scrollbar-visible-right .data-table-scroll,
+.pixel-scrollbar-visible-right .data-table-sticky-header-scroll {
   --fade-width: 30px;
   -webkit-mask-image: linear-gradient(
     to right,
@@ -283,6 +288,14 @@
     black calc(100% - var(--pixel-scrollbar-width) - var(--fade-width)),
     transparent calc(100% - var(--pixel-scrollbar-width))
   );
+  transition: mask-image 0.15s ease, -webkit-mask-image 0.15s ease;
+}
+
+/* Remove fade when scrolled to the right edge */
+.pixel-scrollbar-visible-right .data-table-scroll--at-end,
+.pixel-scrollbar-visible-right .data-table-sticky-header-scroll.data-table-scroll--at-end {
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 /* Hide on mobile where scrollbar is hidden */
@@ -293,9 +306,11 @@
   .pixel-scrollbar-visible-right .data-table-scroll-inner {
     display: block;
     width: fit-content;
+    max-width: 100%;
   }
   /* Remove fade mask on mobile */
-  .pixel-scrollbar-visible-right .data-table-scroll {
+  .pixel-scrollbar-visible-right .data-table-scroll,
+  .pixel-scrollbar-visible-right .data-table-sticky-header-scroll {
     -webkit-mask-image: none;
     mask-image: none;
   }

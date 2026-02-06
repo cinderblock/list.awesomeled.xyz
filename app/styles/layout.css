@@ -115,13 +115,18 @@
    ========================================================================== */
 .category-nav {
   position: sticky;
-  top: 56px; /* Below the header (h-14 = 3.5rem = 56px) */
-  z-index: 40;
+  top: 57px; /* Below the header (56px content + 1px border) */
+  z-index: 41; /* Above controls bar to keep border visible */
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--border);
+  height: 38px; /* Explicit height to prevent layout shift */
+  /* Use box-shadow instead of border to avoid layout shift */
+  box-shadow: 0 1px 0 var(--border);
   background-color: var(--background);
   user-select: none;
+  /* Force GPU layer to prevent sub-pixel shifts during scroll */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Hidden state (on home page) */

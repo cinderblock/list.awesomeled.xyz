@@ -44,7 +44,6 @@
 .category-tab {
   background-color: oklch(0.95 0.02 var(--tab-hue));
   color: oklch(0.4 0.12 var(--tab-hue));
-  border-bottom: 2px solid transparent;
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-md);
   font-size: 0.875rem;
@@ -63,8 +62,13 @@
 .category-tab--active {
   background-color: oklch(0.55 0.18 var(--tab-hue));
   color: oklch(0.98 0.01 var(--tab-hue));
-  border-bottom-color: oklch(0.45 0.2 var(--tab-hue));
   box-shadow: var(--shadow-sm);
+}
+
+/* Subtle highlight on active tab hover - just slightly lighter */
+.category-tab--active:hover {
+  background-color: oklch(0.58 0.17 var(--tab-hue));
+  color: oklch(0.98 0.01 var(--tab-hue));
 }
 
 /* Dark mode tabs */
@@ -81,7 +85,12 @@
 .dark .category-tab--active {
   background-color: oklch(0.55 0.16 var(--tab-hue));
   color: oklch(0.98 0.01 var(--tab-hue));
-  border-bottom-color: oklch(0.65 0.18 var(--tab-hue));
+}
+
+/* Subtle highlight on active tab hover in dark mode */
+.dark .category-tab--active:hover {
+  background-color: oklch(0.58 0.15 var(--tab-hue));
+  color: oklch(0.98 0.01 var(--tab-hue));
 }
 
 /* ==========================================================================
@@ -171,6 +180,23 @@
 }
 
 .category-theme .data-table tbody tr:hover {
+  background-color: var(--category-accent);
+}
+
+/* Sticky name column backgrounds for category theme */
+.category-theme .data-table th[data-col='name'] {
+  background-color: var(--category-accent);
+}
+
+.category-theme .data-table tbody tr:nth-child(odd) td[data-col='name'] {
+  background-color: var(--category-bg);
+}
+
+.category-theme .data-table tbody tr:nth-child(even) td[data-col='name'] {
+  background-color: var(--category-bg-subtle);
+}
+
+.category-theme .data-table tbody tr:hover td[data-col='name'] {
   background-color: var(--category-accent);
 }
 
