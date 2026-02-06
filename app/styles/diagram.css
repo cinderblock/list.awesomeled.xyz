@@ -322,6 +322,19 @@
   fill: oklch(calc(0.3 + 0.35 * var(--m3-intensity)) calc(0.08 + 0.1 * var(--m3-intensity)) var(--node-hue));
 }
 
+/* Light mode: use higher chroma for glowing effect against light background */
+:root:not(.dark) .mono-led-1 {
+  fill: oklch(calc(0.55 + 0.15 * var(--m1-intensity)) calc(0.12 + 0.14 * var(--m1-intensity)) var(--node-hue));
+}
+
+:root:not(.dark) .mono-led-2 {
+  fill: oklch(calc(0.55 + 0.15 * var(--m2-intensity)) calc(0.12 + 0.14 * var(--m2-intensity)) var(--node-hue));
+}
+
+:root:not(.dark) .mono-led-3 {
+  fill: oklch(calc(0.55 + 0.15 * var(--m3-intensity)) calc(0.12 + 0.14 * var(--m3-intensity)) var(--node-hue));
+}
+
 /* ==========================================================================
    Dark Mode
    ========================================================================== */
