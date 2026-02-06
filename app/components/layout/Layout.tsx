@@ -20,8 +20,8 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="layout-wrapper">
       <Header />
-      <main className="layout-main">{children}</main>
       <CategoryNav />
+      <main className="layout-main">{children}</main>
       <Footer />
       <PixelScrollbar position="right" pixelSpacing={20} />
     </div>

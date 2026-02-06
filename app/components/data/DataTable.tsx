@@ -1,24 +1,29 @@
-import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import * as Popover from '@radix-ui/react-popover';
+import { Columns3, Download, Eye, Search, X } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
-import { X, Download, Search } from 'lucide-react';
+import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
 import type { Column } from '~/lib/columns';
-import type { BaseEntry } from '~/lib/types';
 import { generateCSV } from '~/lib/csv';
-import { getBadgeForValue, Badge, TextPill } from '~/components/ui/FeatureBadges';
+import type { BaseEntry } from '~/lib/types';
 import {
+  applyFilter,
   ColumnHeaderPopover,
   isFilterActive,
-  applyFilter,
+  type BooleanFilterValue,
   type FilterState,
   type FilterValue,
   type NumericFilterValue,
   type SelectFilterValue,
-  type BooleanFilterValue,
   type StringFilterValue,
 } from './ColumnFilter';
 
 // Height of site header (h-14 = 3.5rem = 56px)
 const HEADER_HEIGHT = 56;
+// Height of category nav bar when visible (~38px)
+const NAV_HEIGHT = 38;
+// Combined height of fixed header elements
+const FIXED_HEADER_HEIGHT = HEADER_HEIGHT + NAV_HEIGHT;
 // Height of sticky controls bar
 const CONTROLS_HEIGHT = 52;
 
@@ -260,6 +265,8 @@ function parseFilters(str: string): FilterState {
 
 // localStorage key prefix for saved filters
 const FILTER_STORAGE_KEY = 'awesomeledlist_filters_';
+// localStorage key prefix for hidden columns
+const HIDDEN_COLUMNS_STORAGE_KEY = 'awesomeledlist_hidden_columns_';
 
 // Storage format for localStorage (same clean format as URL)
 interface StoredFilters {
@@ -304,6 +311,36 @@ function loadFiltersFromStorage(categoryId: string): StoredFilters | null {
     // localStorage may not be available or data may be corrupted
   }
   return null;
+}
+
+// Save hidden columns to localStorage
+function saveHiddenColumnsToStorage(categoryId: string, hiddenColumns: Set<string>) {
+  try {
+    if (hiddenColumns.size > 0) {
+      localStorage.setItem(
+        HIDDEN_COLUMNS_STORAGE_KEY + categoryId,
+        JSON.stringify(Array.from(hiddenColumns))
+      );
+    } else {
+      localStorage.removeItem(HIDDEN_COLUMNS_STORAGE_KEY + categoryId);
+    }
+  } catch {
+    // localStorage may not be available
+  }
+}
+
+// Load hidden columns from localStorage
+function loadHiddenColumnsFromStorage(categoryId: string): Set<string> {
+  try {
+    const stored = localStorage.getItem(HIDDEN_COLUMNS_STORAGE_KEY + categoryId);
+    if (stored) {
+      const arr = JSON.parse(stored) as string[];
+      return new Set(arr);
+    }
+  } catch {
+    // localStorage may not be available or data may be corrupted
+  }
+  return new Set();
 }
 
 export function DataTable({
@@ -364,6 +401,41 @@ export function DataTable({
   // Local search state for immediate input response
   const [search, setSearchLocal] = useState(urlSearch);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Hidden columns state - initialized from localStorage
+  const [hiddenColumns, setHiddenColumns] = useState<Set<string>>(() =>
+    loadHiddenColumnsFromStorage(categoryId)
+  );
+
+  // Save hidden columns to localStorage whenever they change
+  useEffect(() => {
+    saveHiddenColumnsToStorage(categoryId, hiddenColumns);
+  }, [categoryId, hiddenColumns]);
+
+  // Hide a column
+  const hideColumn = useCallback((colKey: string) => {
+    setHiddenColumns((prev) => new Set([...prev, colKey]));
+  }, []);
+
+  // Show a column
+  const showColumn = useCallback((colKey: string) => {
+    setHiddenColumns((prev) => {
+      const next = new Set(prev);
+      next.delete(colKey);
+      return next;
+    });
+  }, []);
+
+  // Show all columns
+  const showAllColumns = useCallback(() => {
+    setHiddenColumns(new Set());
+  }, []);
+
+  // Visible columns (filtered by hidden state)
+  const visibleColumns = useMemo(
+    () => columns.filter((col) => !hiddenColumns.has(col.key)),
+    [columns, hiddenColumns]
+  );
 
   // Sync local state when URL changes externally
   useEffect(() => {
@@ -508,7 +580,10 @@ export function DataTable({
         if (newSelected.length === 0) {
           setColumnFilter(colKey, undefined);
         } else {
-          setColumnFilter(colKey, { selected: newSelected, exclude: currentFilter?.exclude || false });
+          setColumnFilter(colKey, {
+            selected: newSelected,
+            exclude: currentFilter?.exclude || false,
+          });
         }
       } else {
         // Add to selection
@@ -723,28 +798,20 @@ export function DataTable({
     setControlsHeight(controlsRect.height);
     setHeaderHeight(theadRect.height);
 
-    // Update sticky header position using container dimensions
-    if (stickyHeaderRef.current) {
-      stickyHeaderRef.current.style.width = `${containerRect.width}px`;
-      stickyHeaderRef.current.style.transform = `translateX(${containerRect.left}px)`;
-    }
   }, []);
 
   // Sync horizontal scroll - mirror scroll position directly (no RAF needed, very fast)
   const syncHorizontalScroll = useCallback(() => {
     if (!scrollContainerRef.current || !stickyHeaderScrollRef.current) return;
-    stickyHeaderScrollRef.current.scrollLeft = scrollContainerRef.current.scrollLeft;
+    const scrollLeft = scrollContainerRef.current.scrollLeft;
+    stickyHeaderScrollRef.current.scrollLeft = scrollLeft;
+
+    // Toggle scrolled class for sticky column fade effect (1px threshold for sub-pixel rounding)
+    const isScrolled = scrollLeft > 1;
+    scrollContainerRef.current.classList.toggle('data-table-scroll--scrolled', isScrolled);
+    stickyHeaderScrollRef.current.classList.toggle('data-table-scroll--scrolled', isScrolled);
   }, []);
 
-  // Update sticky header horizontal position using transform (GPU accelerated)
-  // Only called on resize/visibility change, NOT on every horizontal scroll
-  const updateStickyPosition = useCallback(() => {
-    if (!stickyHeaderRef.current || !tableContainerRef.current) return;
-    const containerRect = tableContainerRef.current.getBoundingClientRect();
-    // Use transform instead of left for GPU acceleration
-    stickyHeaderRef.current.style.transform = `translateX(${containerRect.left}px)`;
-    stickyHeaderRef.current.style.width = `${containerRect.width}px`;
-  }, []);
 
   // Check visibility using cached measurements where possible
   const checkStickyVisibility = useCallback(() => {
@@ -753,7 +820,7 @@ export function DataTable({
     if (!thead) return;
 
     const theadRect = thead.getBoundingClientRect();
-    const stickyTop = HEADER_HEIGHT + measurementsRef.current.controlsHeight;
+    const stickyTop = FIXED_HEADER_HEIGHT + measurementsRef.current.controlsHeight;
     const shouldShow = theadRect.top < stickyTop;
 
     if (shouldShow !== showStickyHeader) {
@@ -766,11 +833,9 @@ export function DataTable({
 
     const scrollContainer = scrollContainerRef.current;
 
-    // Horizontal scroll handler - mirror scroll position and update sticky header position
+    // Horizontal scroll handler - mirror scroll position
     const handleHorizontalScroll = () => {
       syncHorizontalScroll();
-      // Also update sticky header position since the table container moves during horizontal scroll
-      updateStickyPosition();
     };
 
     // Vertical scroll handler - use RAF to batch visibility checks
@@ -780,8 +845,6 @@ export function DataTable({
       rafIdRef.current = requestAnimationFrame(() => {
         rafIdRef.current = null;
         checkStickyVisibility();
-        // Only update position on vertical scroll (when container may have moved)
-        updateStickyPosition();
       });
     };
 
@@ -813,7 +876,7 @@ export function DataTable({
         cancelAnimationFrame(rafIdRef.current);
       }
     };
-  }, [measureAll, syncHorizontalScroll, updateStickyPosition, checkStickyVisibility]);
+  }, [measureAll, syncHorizontalScroll, checkStickyVisibility]);
 
   // Re-measure when data changes
   useEffect(() => {
@@ -821,23 +884,22 @@ export function DataTable({
     return () => clearTimeout(timer);
   }, [sortedData, measureAll]);
 
-  // Update position immediately when sticky header becomes visible
+  // Sync scroll immediately when sticky header becomes visible
   useEffect(() => {
     if (showStickyHeader) {
-      updateStickyPosition();
       syncHorizontalScroll();
     }
-  }, [showStickyHeader, updateStickyPosition, syncHorizontalScroll]);
+  }, [showStickyHeader, syncHorizontalScroll]);
 
   // Render the header row content (shared between original and sticky clone)
   const renderHeaderRow = () => (
     <tr>
-      {columns.map((col) => {
+      {visibleColumns.map((col) => {
         const colKey = String(col.key);
         const isRightAligned = col.className?.includes('data-table-cell--right');
         const filterValue = urlFilters[colKey];
         return (
-          <th key={colKey} className={col.className}>
+          <th key={colKey} className={col.className} data-col={colKey}>
             <div
               className={`data-table-th-content${isRightAligned ? ' data-table-th-content--right' : ''}`}
             >
@@ -849,6 +911,7 @@ export function DataTable({
                 sortKey={sortKey}
                 sortDir={sortDir}
                 onSort={handleSort}
+                onHide={col.key !== 'name' ? () => hideColumn(colKey) : undefined}
               >
                 {col.label}
               </ColumnHeaderPopover>
@@ -885,6 +948,54 @@ export function DataTable({
               Clear all
             </button>
           )}
+          {/* Column visibility dropdown */}
+          <Popover.Root>
+            <Popover.Trigger asChild>
+              <button
+                className={`btn btn--ghost btn--sm${hiddenColumns.size > 0 ? ' btn--badge' : ''}`}
+                title="Show/hide columns"
+              >
+                <Columns3 size={16} />
+                Columns
+                {hiddenColumns.size > 0 && <span className="btn-badge">{hiddenColumns.size}</span>}
+              </button>
+            </Popover.Trigger>
+            <Popover.Portal>
+              <Popover.Content className="column-visibility-popover" sideOffset={5} align="start">
+                <div className="column-visibility-header">
+                  <span className="column-visibility-title">Columns</span>
+                  {hiddenColumns.size > 0 && (
+                    <button className="filter-clear-btn" onClick={showAllColumns}>
+                      <Eye size={14} />
+                      Show all
+                    </button>
+                  )}
+                </div>
+                <div className="column-visibility-list">
+                  {columns.map((col) => {
+                    const isNameCol = col.key === 'name';
+                    return (
+                      <label
+                        key={col.key}
+                        className={`column-visibility-option${isNameCol ? ' column-visibility-option--disabled' : ''}`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={!hiddenColumns.has(col.key)}
+                          disabled={isNameCol}
+                          onChange={() =>
+                            hiddenColumns.has(col.key) ? showColumn(col.key) : hideColumn(col.key)
+                          }
+                        />
+                        <span className="column-visibility-label">{col.label || 'Links'}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+                <Popover.Arrow className="filter-arrow" />
+              </Popover.Content>
+            </Popover.Portal>
+          </Popover.Root>
           <div style={{ marginLeft: 'auto' }}>
             {isFiltered ? (
               <button onClick={handleDownloadCSV} className="btn btn--outline btn--sm">
@@ -905,10 +1016,7 @@ export function DataTable({
             {activeFilters.map(({ key, label, description }) => (
               <span key={key} className="data-table-filter-tag">
                 <strong>{label}:</strong> {description}
-                <button
-                  onClick={() => setColumnFilter(key, undefined)}
-                  title="Remove filter"
-                >
+                <button onClick={() => setColumnFilter(key, undefined)} title="Remove filter">
                   <X size={12} />
                 </button>
               </span>
@@ -923,7 +1031,7 @@ export function DataTable({
         className="data-table-sticky-mask"
         style={{
           position: 'fixed',
-          top: HEADER_HEIGHT,
+          top: FIXED_HEADER_HEIGHT,
           left: 0,
           right: 0,
           height: controlsHeight + headerHeight,
@@ -938,36 +1046,37 @@ export function DataTable({
         className="data-table-sticky-header"
         style={{
           position: 'fixed',
-          top: HEADER_HEIGHT + controlsHeight,
+          top: FIXED_HEADER_HEIGHT + controlsHeight,
           left: 0,
+          right: 0,
           zIndex: 25,
           visibility: showStickyHeader && columnWidths.length > 0 ? 'visible' : 'hidden',
-          willChange: 'transform',
         }}
       >
         {/* Inner scroll container - mirrors horizontal scroll of main table */}
         <div
           ref={stickyHeaderScrollRef}
           className="data-table-sticky-header-scroll"
-          style={{
-            overflowX: 'hidden',
-            overflowY: 'hidden',
-          }}
         >
-          <table
-            className="data-table"
-            style={{
-              tableLayout: 'fixed',
-              width: columnWidths.reduce((sum, w) => sum + w, 0),
-            }}
-          >
-            <colgroup>
-              {columnWidths.map((width, i) => (
-                <col key={i} style={{ width }} />
-              ))}
-            </colgroup>
-            <thead>{renderHeaderRow()}</thead>
-          </table>
+          {/* Inner wrapper to match main table's centering structure */}
+          <div className="data-table-scroll-inner">
+            <table
+              className="data-table"
+              style={{
+                tableLayout: 'fixed',
+                width: columnWidths.reduce((sum, w) => sum + w, 0),
+              }}
+            >
+              <colgroup>
+                {columnWidths.map((width, i) => (
+                  <col key={i} style={{ width }} />
+                ))}
+              </colgroup>
+              <thead>{renderHeaderRow()}</thead>
+            </table>
+            {/* Spacer to match main table's scrollbar spacer */}
+            <div className="data-table-scrollbar-spacer" aria-hidden="true" />
+          </div>
         </div>
       </div>
 
@@ -983,21 +1092,24 @@ export function DataTable({
               <tbody onClick={handleBadgeClick}>
                 {sortedData.length === 0 ? (
                   <tr>
-                    <td colSpan={columns.length} className="data-table-empty">
+                    <td colSpan={visibleColumns.length} className="data-table-empty">
                       No results found.
                     </td>
                   </tr>
                 ) : (
                   sortedData.map((item) => (
                     <tr key={item.id}>
-                      {columns.map((col) => {
+                      {visibleColumns.map((col) => {
                         const value = getValue(item, col.key);
                         return (
                           <td key={col.key} className={col.className} data-col={col.key}>
                             {col.render ? (
                               col.render(value, item)
                             ) : col.key === 'name' ? (
-                              <Link to={`${categoryPath}/${item.id}`} className="data-table-entry-link">
+                              <Link
+                                to={`${categoryPath}/${item.id}`}
+                                className="data-table-entry-link"
+                              >
                                 {String(value ?? '')}
                               </Link>
                             ) : (
@@ -1052,7 +1164,12 @@ function CellValue({ value }: { value: unknown }) {
   if (typeof value === 'string') {
     if (value.startsWith('http')) {
       return (
-        <a href={value} target="_blank" rel="noopener noreferrer" className="data-table-external-link">
+        <a
+          href={value}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="data-table-external-link"
+        >
           Link
         </a>
       );

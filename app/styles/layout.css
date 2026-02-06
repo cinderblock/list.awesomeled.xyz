@@ -115,11 +115,11 @@
    ========================================================================== */
 .category-nav {
   position: sticky;
-  bottom: 0;
+  top: 56px; /* Below the header (h-14 = 3.5rem = 56px) */
   z-index: 40;
   display: flex;
   align-items: center;
-  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   background-color: var(--background);
   user-select: none;
 }
@@ -194,14 +194,14 @@
 
 /* Staggered tab animation */
 .category-nav--visible .category-tab {
-  animation: tabSlideUp 0.3s ease-out backwards;
+  animation: tabSlideDown 0.3s ease-out backwards;
   animation-delay: calc(var(--tab-index, 0) * 0.02s + 0.1s);
 }
 
-@keyframes tabSlideUp {
+@keyframes tabSlideDown {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;
@@ -213,7 +213,7 @@
    Page Sections
    ========================================================================== */
 .page-section {
-  padding-top: var(--space-8);
+  padding-top: var(--space-4);
   padding-bottom: var(--space-8);
 }
 

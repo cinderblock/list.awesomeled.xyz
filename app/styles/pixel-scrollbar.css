@@ -30,19 +30,11 @@
 
 .pixel-scrollbar--vertical {
   position: fixed;
-  /* Account for sticky header (56px) */
-  top: 3.5rem;
-  /* Default: no footer nav visible */
+  /* Account for sticky header (56px) + category nav (38px) */
+  top: 94px;
   bottom: 0;
   width: calc(var(--pixel-cell-size) + 8px);
   padding: 8px 4px;
-  /* Animate bottom changes smoothly */
-  transition: bottom 0.3s ease-out;
-}
-
-/* When CategoryNav is visible, account for its height (~50px) */
-.layout-wrapper:has(.category-nav--visible) .pixel-scrollbar--vertical {
-  bottom: 50px;
 }
 
 .pixel-scrollbar--vertical.pixel-scrollbar--right {
@@ -262,6 +254,37 @@
   align-self: stretch;
 }
 
+/* ==========================================================================
+   Content padding adjustments when scrollbar is visible
+   ========================================================================== */
+
+/* Add right padding to controls bar so buttons don't overlap scrollbar */
+.pixel-scrollbar-visible-right .data-table-controls {
+  padding-right: var(--pixel-scrollbar-width);
+}
+
+/* ==========================================================================
+   Right-side fade effect when content extends under the scrollbar
+   ========================================================================== */
+
+/* Apply a gradient mask to fade content on the right edge when scrollbar is visible.
+   The mask fades from fully opaque to transparent over the last 30px before the scrollbar. */
+.pixel-scrollbar-visible-right .data-table-scroll {
+  --fade-width: 30px;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    black 0%,
+    black calc(100% - var(--pixel-scrollbar-width) - var(--fade-width)),
+    transparent calc(100% - var(--pixel-scrollbar-width))
+  );
+  mask-image: linear-gradient(
+    to right,
+    black 0%,
+    black calc(100% - var(--pixel-scrollbar-width) - var(--fade-width)),
+    transparent calc(100% - var(--pixel-scrollbar-width))
+  );
+}
+
 /* Hide on mobile where scrollbar is hidden */
 @media (max-width: 640px) {
   .pixel-scrollbar-visible-right .data-table-scrollbar-spacer {
@@ -270,5 +293,10 @@
   .pixel-scrollbar-visible-right .data-table-scroll-inner {
     display: block;
     width: fit-content;
+  }
+  /* Remove fade mask on mobile */
+  .pixel-scrollbar-visible-right .data-table-scroll {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }
