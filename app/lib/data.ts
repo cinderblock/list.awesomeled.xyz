@@ -177,6 +177,9 @@ export function getAllRoutes(): string[] {
     // Add category page
     routes.push(category.path);
 
+    // Add CSV export
+    routes.push(`/${category.id}.csv`);
+
     // Add individual entry pages
     const entries = loadCategoryData(category.id);
     for (const entry of entries) {
