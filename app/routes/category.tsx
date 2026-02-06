@@ -6,6 +6,11 @@ import { DataTable } from '~/components/data/DataTable';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
 
+type LoaderData = Awaited<ReturnType<typeof loader>>;
+
+// Client-side cache for category data to make return visits instant
+const categoryCache = new Map<string, LoaderData>();
+
 export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) {
     return [{ title: 'Not Found - Awesome LED List' }];
@@ -28,6 +33,24 @@ export async function loader({ params }: Route.LoaderArgs) {
 
   return { category, entries };
 }
+
+export async function clientLoader({ params, serverLoader }: Route.ClientLoaderArgs) {
+  const cacheKey = params.category!;
+
+  // Return cached data if available
+  const cached = categoryCache.get(cacheKey);
+  if (cached) {
+    return cached;
+  }
+
+  // Fetch from server and cache
+  const loaderData = await serverLoader();
+  categoryCache.set(cacheKey, loaderData);
+  return loaderData;
+}
+
+// Hydrate with server data on initial load
+clientLoader.hydrate = true;
 
 export default function CategoryPage({ loaderData }: Route.ComponentProps) {
   const { category, entries } = loaderData;

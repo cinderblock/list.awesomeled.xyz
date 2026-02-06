@@ -43,6 +43,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
             key={category.id}
             to={category.path}
             prefetch="intent"
+            viewTransition
             className="category-card"
             style={{ '--card-hue': category.color.hue } as React.CSSProperties}
           >

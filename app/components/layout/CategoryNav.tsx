@@ -77,7 +77,8 @@ export function CategoryNav() {
               <Link
                 key={category.id}
                 to={category.path}
-                prefetch="intent"
+                prefetch="render"
+                viewTransition
                 data-category={category.id}
                 className={`category-tab ${isActive ? 'category-tab--active' : ''}`}
                 style={
