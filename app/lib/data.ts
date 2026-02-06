@@ -173,6 +173,8 @@ export function getCategoryById(id: string): Category | undefined {
 export function getAllRoutes(): string[] {
   const routes: string[] = ['/', '/about'];
 
+  routes.push('/database.csv.zip', '/database.yaml.zip');
+
   for (const category of CATEGORIES) {
     // Add category page
     routes.push(category.path);
