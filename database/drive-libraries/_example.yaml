@@ -1,0 +1,51 @@
+# Example 1: Full-featured LED drive library with all fields
+name: Example LED Library
+creator: Open Source Developer
+developer: Open Source Developer
+features: WS2812, SK6812, APA102, multi-strip, DMA, parallel output, color correction, gamma
+hardware: ESP32, ESP8266, Arduino, Teensy, Raspberry Pi Pico
+instructional_resources:
+  - https://example.com/getting-started
+  - https://example.com/api-reference
+  - https://example.com/advanced-patterns
+
+url: https://github.com/example/led-library
+youtube_url: https://www.youtube.com/watch?v=example
+---
+# Example 2: Platform-specific optimized library
+name: Example FastPixel
+creator: Embedded Systems Corp
+features: Optimized DMA, 12-bit color, ultra-high refresh rates
+hardware: Teensy 4.x
+instructional_resources:
+  - https://example.com/teensy-setup
+
+url: https://github.com/example/fastpixel
+youtube_url: null
+---
+# Example 3: Arduino-focused library
+name: Example Arduino Pixels
+creator: null
+developer: Arduino Community
+features: WS2811, WS2812, basic patterns, easy API
+hardware: Arduino Uno, Nano, Mega
+instructional_resources:
+  - https://learn.example.com/first-leds
+
+url: https://github.com/example/arduino-pixels
+---
+# Example 4: Python library for Raspberry Pi
+name: Example PyPixels
+creator: Python LED Enthusiast
+features: WS2812, SK6812, APA102, numpy integration, asyncio support
+hardware: Raspberry Pi (all models)
+url: https://pypi.org/project/example-pypixels/
+youtube_url: https://youtube.com/example-pypixels-tutorial
+
+---
+# Example 5: Minimal library entry
+name: Example Simple Driver
+creator: null
+features: Basic WS2812 support
+hardware: Generic microcontrollers
+url: https://github.com/example/simple-driver

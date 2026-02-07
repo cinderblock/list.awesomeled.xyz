@@ -1,0 +1,85 @@
+# Example 1: Full-featured diffusive material with all fields
+name: Example Pro Diffuser Sheet
+notes: Professional-grade diffuser for permanent installations
+color_rendition: 5
+diffusivity: 5
+fire_retardant: true
+flexible: R
+image: pro-diffuser.jpg
+images:
+  - pro-diffuser.jpg
+  - pro-diffuser-lit.jpg
+
+light_transmission: 4
+material_type: Acrylic
+price_range: $$$
+properties: High CRI, UV stable, scratch resistant
+purpose_made: true
+sample_thickness: 3mm
+sizes_available: 4x8ft sheets, custom cut available
+tinted: C
+url: https://example.com/pro-diffuser
+---
+# Example 2: Flexible silicone diffuser
+name: Example Flex Tube
+notes: Flexible silicone tube for outdoor neon-style applications
+
+color_rendition: 4
+diffusivity: 4
+fire_retardant: false
+flexible: F
+light_transmission: 3
+material_type: Silicone
+price_range: $$
+properties: Waterproof, UV resistant
+purpose_made: true
+sample_thickness: 1mm wall
+sizes_available: 1m, 5m rolls
+tinted: C
+url: https://example.com/flex-tube
+---
+# Example 3: Budget DIY material
+name: Example Hobby Diffuser
+notes: Repurposed material suitable for hobbyist projects
+
+color_rendition: 3
+diffusivity: 3
+fire_retardant: false
+flexible: R
+light_transmission: 4
+material_type: PETG
+price_range: $
+properties: null
+purpose_made: false
+sample_thickness: 2mm
+sizes_available: Letter, A4 sheets
+tinted: T&C
+url: https://example.com/hobby-diffuser
+---
+# Example 4: Architectural diffuser panel
+name: Example Arch Panel
+notes: Architectural-grade panels for commercial installations
+
+color_rendition: 5
+diffusivity: 5
+fire_retardant: true
+flexible: R
+light_transmission: 3
+material_type: Polycarbonate
+price_range: $$$$$
+purpose_made: true
+sample_thickness: 6mm
+sizes_available: Custom sizes to 2x3m
+tinted: C
+url: https://example.com/arch-panel
+---
+# Example 5: Minimal diffuser entry
+name: Example Basic Diffuser
+notes: Basic diffuser material for general use
+color_rendition: 3
+diffusivity: 3
+flexible: R
+light_transmission: 3
+material_type: Acrylic
+price_range: $$
+url: null

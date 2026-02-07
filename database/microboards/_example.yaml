@@ -1,0 +1,147 @@
+# Example 1: Full-featured microboard with all fields
+name: Example DevBoard Pro
+creator: DevBoard Inc
+manufacturers:
+  - DevBoard Inc
+  - Licensed Manufacturer
+notes: Feature-rich development board for LED projects
+
+bluetooth: BLE 5.0
+bms: 1S LiPo
+clock_speed: 240MHz
+cpu: Xtensa LX7 Dual-Core
+ethernet: 100Mbps
+flash: 16MB
+gpio_voltage: 3.3V
+imu: 6-axis
+isa: Xtensa
+linux: false
+max_input_voltage: 12
+max_outputs: 16
+min_input_voltage: 4.5
+poe: false
+price: 24.99
+ram: 8MB PSRAM
+release_year: 2024
+soc: ExampleSoC-S3
+storage: microSD
+ttl_serial: true
+url: https://example.com/devboard-pro
+usb: USB-C OTG
+vendors:
+  - Adafruit
+  - SparkFun
+  - Amazon
+wifi: Wi-Fi 6
+---
+# Example 2: Linux-capable single board computer
+name: Example Pi Clone
+creator: SBC Company
+manufacturers:
+  - SBC Company
+notes: Linux SBC suitable for Falcon Player or similar
+
+bluetooth: BT 5.0
+bms: null
+clock_speed: 1.8GHz
+cpu: Cortex-A53 Quad-Core
+ethernet: Gigabit
+flash: null
+gpio_voltage: 3.3V
+imu: false
+isa: ARMv8-A
+linux: true
+max_input_voltage: 5
+max_outputs: 8
+min_input_voltage: 5
+poe: PoE HAT compatible
+price: 45
+ram: 2GB DDR4
+release_year: 2023
+soc: AllwinnerH6
+storage: eMMC 16GB + microSD
+ttl_serial: "/dev/ttyS0"
+url: https://example.com/pi-clone
+usb: USB 3.0 x2, USB 2.0 x2
+wifi: 802.11ac
+---
+# Example 3: Budget ESP-based board
+name: Example ESP Mini
+creator: null
+manufacturers:
+  - Generic ESP Factory
+notes: Budget-friendly WLED-compatible board
+
+bluetooth: false
+bms: null
+clock_speed: 240MHz
+cpu: Xtensa LX7
+ethernet: false
+flash: 4MB
+gpio_voltage: 3.3V
+imu: false
+isa: Xtensa
+linux: false
+max_input_voltage: 5
+max_outputs: 8
+min_input_voltage: 3.3
+poe: false
+price: 4.99
+ram: 320KB
+release_year: 2021
+soc: ESP32-S2
+storage: null
+ttl_serial: true
+url: https://example.com/esp-mini
+usb: USB-C
+vendors:
+  - AliExpress
+wifi: 802.11 b/g/n
+---
+# Example 4: PoE-powered Ethernet board
+name: Example PoE Controller Board
+creator: Industrial IoT Corp
+manufacturers:
+  - Industrial IoT Corp
+notes: PoE-powered for clean installations without separate power
+
+bluetooth: false
+bms: null
+clock_speed: 168MHz
+cpu: Cortex-M4
+ethernet: 100Mbps
+flash: 1MB
+gpio_voltage: 5V
+imu: false
+isa: ARMv7-M
+linux: false
+max_input_voltage: 57
+max_outputs: 4
+min_input_voltage: 48
+poe: "802.3at PoE+"
+price: 35
+ram: 256KB
+release_year: 2022
+soc: W5500 + STM32
+storage: null
+ttl_serial: true
+usb: Micro-USB (programming only)
+wifi: false
+---
+# Example 5: Minimal entry for simple board
+name: Example Nano
+creator: null
+notes: Arduino Nano compatible for simple LED projects
+clock_speed: 16MHz
+cpu: AVR
+flash: 32KB
+gpio_voltage: 5V
+isa: AVR
+linux: false
+max_outputs: 6
+price: 2.50
+ram: 2KB
+soc: ATmega328P
+usb: Mini-USB
+vendors:
+  - Various

@@ -1,0 +1,77 @@
+# Example 1: Full-featured pixel decoder with all fields
+name: Example Art-Net Decoder Pro
+creator: Decoder Corp
+manufacturers:
+  - Decoder Corp
+  - Licensed Manufacturer
+notes: Converts Art-Net/sACN to 16 pixel outputs
+diy_or_ots: OTS
+max_channels: 16
+output_connectors: RJ45
+outputs: Single and Clock
+pixel_types: Both
+price: 149.99
+url: https://example.com/artnet-decoder
+
+vendors:
+  - LED Supplier
+  - Amazon
+---
+# Example 2: Budget DMX to pixel decoder
+name: Example DMX Decoder Mini
+creator: null
+manufacturers:
+  - Generic Factory
+notes: Budget DMX512 to WS2812 decoder
+diy_or_ots: OTS
+max_channels: 4
+output_connectors: Screw Terminal
+outputs: Single
+pixel_types: Async
+price: 29.99
+url: https://example.com/dmx-mini
+
+vendors:
+  - AliExpress
+---
+# Example 3: DIY decoder project
+name: Example Open Decoder
+creator: Open Source Community
+manufacturers:
+  - JLCPCB
+  - PCBWay
+notes: Open source ESP32-based sACN decoder
+diy_or_ots: DIY
+max_channels: 8
+output_connectors: JST-XH
+outputs: Single or Clock
+pixel_types: Both
+price: 25
+url: https://github.com/example/open-decoder
+
+---
+# Example 4: High channel count commercial decoder
+name: Example Matrix Decoder
+creator: Commercial LED Corp
+manufacturers:
+  - Commercial LED Corp
+notes: Industrial decoder for large LED matrix installations
+diy_or_ots: OTS
+max_channels: 48
+output_connectors: Phoenix Contact
+outputs: Single
+pixel_types: Async
+price: 599
+url: https://example.com/matrix-decoder
+
+vendors:
+  - Authorized Distributor
+---
+# Example 5: Minimal decoder entry
+name: Example Simple Decoder
+creator: null
+notes: Basic 2-channel decoder
+diy_or_ots: OTS
+max_channels: 2
+pixel_types: Async
+price: 15

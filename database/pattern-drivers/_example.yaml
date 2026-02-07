@@ -1,0 +1,176 @@
+# Example 1: Full-featured professional pattern software with all fields
+name: Example LED Studio Pro
+status: active
+creator: LED Software Inc
+notes: Professional LED design and live performance software
+adc_input: Via serial microcontroller
+audio_input: System audio + microphone
+demo_available: true
+demo_limitations: 100 pixels max, sessions limited to 30 minutes
+designer: true
+dmx_notes: Supports Enttec Pro and compatible USB-DMX adapters
+gpio: Linux only
+integrations: WLED, Falcon Player, xLights
+language: JavaScript/TypeScript
+license_type: perpetual
+live: true
+mirror_url: null
+
+other_inputs: MIDI, OSC, Gamepad
+other_outputs: HTTP webhooks, OSC
+platforms:
+  - Windows
+  - Mac
+  - Linux
+price: 299
+price_tiers:
+  - tier: Free
+    price: 0
+    features: Basic patterns, 100 pixel limit
+    limitations: Watermark on export
+  - tier: Hobbyist
+    price: 49
+    features: No watermark, 1000 pixels
+    limitations: No commercial use
+  - tier: Professional
+    price: 299
+    features: Unlimited pixels, commercial license
+    limitations: Single seat
+  - tier: Enterprise
+    price: 999
+    features: Site license, priority support
+    limitations: null
+programmatic: true
+protocols:
+  artnet: true
+  sacn: true
+  dmx: Requires FTDI adapter
+  kinet: false
+  ddp: true
+  opc: Output only
+  spi: Via GPIO on Linux
+serial: true
+serial_notes: Arduino/Teensy serial protocol, custom baud rates supported
+technical_notes:
+  - GPU-accelerated rendering requires OpenGL 3.3+
+  - Network output supports up to 100 universes
+  - Pattern library includes 500+ built-in effects
+url: https://example.com/led-studio-pro
+video_input: Screen capture + webcam
+visualizer: both
+---
+# Example 2: Free open source pattern driver
+name: Example Open Patterns
+status: active
+creator: Open Source Community
+developer: null
+notes: Free and open source pattern generator
+audio_input: System audio
+demo_available: false
+designer: true
+gpio: RaspberryPi and BeagleBone
+language: Python
+license_type: donationware
+live: true
+platforms:
+  - Windows
+  - Mac
+  - Linux
+  - RaspberryPi
+price: free
+programmatic: true
+protocols:
+  artnet: true
+  sacn: true
+  ddp: true
+  opc: true
+serial: true
+serial_notes: FastLED serial protocol
+url: https://github.com/example/open-patterns
+
+video_input: false
+visualizer: "2D"
+---
+# Example 3: Mobile app for live control
+name: Example LED Remote
+status: active
+creator: Mobile Apps LLC
+notes: Mobile app for live LED control
+audio_input: Microphone only
+demo_available: "7-day trial"
+demo_limitations: All features available during trial
+designer: false
+integrations: WLED
+license_type: subscription
+live: true
+other_inputs: Accelerometer, touch gestures
+platforms:
+  - iOS
+  - Android
+price: 4.99
+programmatic: false
+protocols:
+  artnet: true
+  ddp: true
+serial: Bluetooth serial
+url: https://example.com/led-remote
+
+video_input: false
+visualizer: null
+---
+# Example 4: Discontinued legacy software
+name: Example Legacy Sequencer
+status: discontinued
+creator: Defunct Software Co
+developer: Defunct Software Co
+notes: No longer maintained, Windows 7/10 only
+audio_input: WAV file only
+demo_available: false
+designer: true
+license_type: perpetual
+live: true
+mirror_url: https://archive.org/example-legacy
+
+platforms:
+  - Windows
+price: 149
+programmatic: false
+protocols:
+  artnet: true
+  dmx: true
+serial: true
+url: null
+video_input: false
+visualizer: "2D"
+---
+# Example 5: Web-based pattern designer
+name: Example Web Designer
+status: beta
+creator: WebLED Inc
+notes: Browser-based pattern designer with optional cloud features
+audio_input: Web Audio API
+demo_available: true
+demo_limitations: Pattern export requires account
+designer: true
+language: JavaScript
+license_type: monthly
+live: WebUSB to serial
+platforms:
+  - Web
+price: free
+price_tiers:
+  - tier: Free
+    price: 0
+    features: Pattern design only
+    limitations: No live output
+  - tier: Pro
+    price: "9.99/month"
+    features: Live output via WebUSB
+    limitations: null
+programmatic: true
+protocols:
+  ddp: Via cloud relay
+serial: WebUSB
+url: https://webdesigner.example.com
+video_input: false
+visualizer: both

@@ -1,0 +1,182 @@
+# Example 1: Full-featured connector with all fields
+name: Example Connector Series
+creator: Connector Corp
+manufacturers:
+  - Connector Corp
+  - Licensed Manufacturer
+notes: Industry standard connector for LED applications
+aliases:
+  - EC Series
+  - Generic SM
+board_fingers: false
+colors: Black/White/Red/Blue
+common_applications:
+  - LED strip connections
+  - Pixel string terminations
+  - Controller output connections
+contact_type: Pin/Socket
+convention: JST-SM compatible
+crimp: true
+crimp_tool: HT-225D or equivalent
+crimp_tool_cost: $30-80
+digikey_url: https://www.digikey.com/example
+gendered: true
+idc: false
+image: example-connector.jpg
+images:
+  - example-connector.jpg
+  - example-connector-male.jpg
+  - example-connector-female.jpg
+
+ip_rating: IP67
+ip_rating_notes: When fully mated with proper cable gland
+largest_gauge: "18"
+locking: Latching
+max_current: 5A
+max_current_notes: Per contact rating at 20AWG
+max_pins: 12
+max_voltage: 250
+min_pins: 2
+mouser_url: https://www.mouser.com/example
+outline: Rectangular
+panel_mount: true
+pcb_mount: Both
+pinout: V+/D/V-
+pitch: 2.5mm
+rows: 1
+screw_terminal: true
+smallest_gauge: "24"
+solder: true
+technical_notes:
+  - Gold-plated contacts for corrosion resistance
+  - Rated for 1000 mating cycles
+  - Operating temperature -40C to +105C
+url: https://example.com/connector-series
+vendors:
+  - DigiKey
+  - Mouser
+  - Amazon
+wire_to_wire: true
+year_introduced: 2010
+---
+# Example 2: Waterproof circular connector
+name: Example Waterproof Connector
+creator: Outdoor Connector Inc
+manufacturers:
+  - Outdoor Connector Inc
+notes: Heavy-duty connector for outdoor and underwater use
+aliases:
+  - Waterproof LED Connector
+colors: Black
+common_applications:
+  - Outdoor LED installations
+  - Underwater lighting
+  - Marine applications
+contact_type: Pin/Socket
+crimp: true
+crimp_tool: Manufacturer specific
+crimp_tool_cost: $150+
+gendered: true
+ip_rating: IP68
+ip_rating_notes: Rated to 2m submersion
+largest_gauge: "14"
+locking: Screw Lock
+max_current: 10A
+max_pins: 8
+max_voltage: 300
+min_pins: 2
+outline: Circular
+panel_mount: true
+pcb_mount: false
+rows: 1
+smallest_gauge: "18"
+solder: true
+technical_notes:
+  - Requires thread sealant for IP68 rating
+  - Stainless steel locking ring
+url: https://example.com/waterproof
+
+wire_to_wire: true
+year_introduced: 2015
+---
+# Example 3: PCB edge connector
+name: Example Edge Connector
+creator: null
+manufacturers:
+  - Multiple generic sources
+notes: Standard PCB edge connector for LED matrices
+board_fingers: true
+common_applications:
+  - LED matrix panels
+  - Modular display systems
+contact_type: Blade
+crimp: false
+gendered: false
+idc: false
+ip_rating: null
+largest_gauge: null
+locking: Friction
+max_current: 3A
+max_pins: 40
+max_voltage: 50
+min_pins: 4
+outline: Rectangular
+panel_mount: false
+pcb_mount: SMD
+pinout: Application specific
+pitch: 2.54mm
+rows: 2
+screw_terminal: false
+smallest_gauge: null
+solder: false
+url: https://example.com/edge-connector
+
+wire_to_wire: false
+year_introduced: 0
+---
+# Example 4: Quick-connect terminal block
+name: Example Push-In Terminal
+creator: Terminal Block Corp
+manufacturers:
+  - Terminal Block Corp
+notes: Tool-less wire insertion for quick installation
+board_fingers: false
+common_applications:
+  - Controller power input
+  - Distribution boards
+contact_type: Spring cage
+crimp: false
+digikey_url: https://digikey.com/example-terminal
+
+gendered: false
+idc: false
+ip_rating: IP20
+largest_gauge: "14"
+locking: Push-in spring
+max_current: 8A
+max_pins: 24
+max_voltage: 300
+min_pins: 2
+outline: Rectangular
+panel_mount: true
+pcb_mount: Through-hole
+pitch: 5.08mm
+rows: 1
+screw_terminal: false
+smallest_gauge: "22"
+solder: false
+wire_to_wire: false
+year_introduced: 2000
+---
+# Example 5: Minimal data connector entry
+name: Example Data Connector
+creator: null
+notes: Generic 3-4 pin connector for data signals
+aliases:
+  - Pixel data connector
+  - LED signal connector
+locking: Friction
+max_current: 1A
+max_pins: 4
+max_voltage: 30
+min_pins: 3

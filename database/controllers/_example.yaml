@@ -1,0 +1,188 @@
+# Example 1: Full-featured Ethernet controller with all fields populated
+name: Example Controller Pro
+status: active
+creator: Example Company
+manufacturers:
+  - Example Manufacturing
+  - Alternative Manufacturer
+notes: Flagship controller with all premium features
+auxiliary_outputs:
+  - DMX 512
+  - 4x GPIO
+  - 2x Servo PWM
+buffered: true
+buffered_notes: 74AHCT125 buffer with 5V output levels
+differential_outputs: 4
+image: example-controller-pro.jpg
+images:
+  - example-controller-pro.jpg
+  - example-controller-pro-back.jpg
+  - example-controller-pro-wiring.jpg
+interfaces:
+  - Ethernet
+  - Wi-Fi
+  - USB
+  - Art-Net
+  - sACN
+max_current: 30
+max_current_per_output: 5
+max_outputs: 16
+max_pixels: 16384
+max_pixels_16bit: 8192
+max_pixels_rgbw: 12288
+max_voltage: 24
+output_connectors: RJ45
+outputs: Single and Clock
+pixel_types: Both
+pixel_types_notes: Clock outputs on ports 1-4 only, async on all ports
+poe_support: PoE+
+power_features:
+  - eFuse protection
+  - Per-port current sensing
+  - Automatic pixel counting
+  - Over-temperature shutdown
+price: 299.99
+price_tiers:
+  - pixels: 4096
+    price: 199.99
+    notes: Basic license
+  - pixels: 16384
+    price: 299.99
+    notes: Pro license
+  - pixels: 'unlimited'
+    price: 499.99
+    notes: Enterprise license
+related_connectors:
+  - rj45
+  - xconnect
+related_microboards:
+  - esp32
+
+related_pixel_ics:
+  - ws2812b
+  - sk6812
+release_year: 2024
+requires_host: null
+standalone: true
+standalone_notes: Built-in sequencer with web-based pattern editor
+storage: SD
+technical_notes:
+  - Maximum 1000 pixels per output at 60fps with RGBW
+  - PoE+ provides up to 25W for controller operation only
+  - Differential outputs require matching receivers (sold separately)
+url: https://example.com/controller-pro
+vendors:
+  - LED Supplier A
+  - LED Supplier B
+warranty: 2 years
+waterproof: IP65
+wled_compatible: false
+---
+# Example 2: Budget WLED-compatible controller with minimal fields
+name: Example WLED Mini
+status: active
+creator: null
+manufacturers:
+  - Generic Factory
+notes: Budget-friendly option for small installations
+buffered: false
+buffered_notes: Direct ESP32 GPIO output at 3.3V, may need level shifter
+interfaces:
+  - Wi-Fi
+max_current: null
+max_current_per_output: null
+max_outputs: 4
+max_pixels: 1024
+max_pixels_16bit: null
+max_pixels_rgbw: null
+max_voltage: 5
+output_connectors: JST-SM 3-pin
+outputs: Single
+pixel_types: Async
+pixel_types_notes: null
+price: 12.99
+standalone: true
+standalone_notes: WLED firmware pre-installed
+storage: Flash
+url: https://example.com/wled-mini
+
+vendors:
+  - AliExpress Seller
+waterproof: false
+wled_compatible: true
+---
+# Example 3: Raspberry Pi-based controller requiring host
+name: Example Pi HAT Controller
+status: active
+creator: Open Source Project
+manufacturers:
+  - Community PCB
+notes: Requires Falcon Player or similar software on host Pi
+buffered: true
+interfaces:
+  - USB
+  - Ethernet
+max_outputs: 8
+max_pixels: 8000
+output_connectors: Screw Terminal
+pixel_types: Async
+release_year: 2023
+
+requires_host: Raspberry Pi 3/4/5
+standalone: false
+storage: No
+waterproof: IP20
+---
+# Example 4: Discontinued legacy controller
+name: Example Legacy Controller
+status: discontinued
+creator: Defunct Company
+manufacturers:
+  - Defunct Company
+notes: No longer manufactured, limited firmware support
+buffered: true
+interfaces:
+  - USB
+  - DMX
+max_outputs: 8
+max_pixels: 2048
+output_connectors: RJ45
+pixel_types: Async
+release_year: 2018
+standalone: false
+storage: No
+warranty: null
+
+waterproof: false
+---
+# Example 5: Industrial controller with limited availability
+name: Example Industrial Controller
+status: limited
+creator: Industrial LED Corp
+manufacturers:
+  - Industrial LED Corp
+notes: Industrial-grade controller for permanent installations
+buffered: true
+differential_outputs: 48
+interfaces:
+  - Ethernet
+  - Art-Net
+  - sACN
+max_current: 100
+max_outputs: 48
+max_pixels: 50000
+max_voltage: 48
+output_connectors: Phoenix Contact
+pixel_types: Both
+poe_support: PoE++
+power_features:
+  - Industrial eFuse
+  - Current monitoring per port
+  - Remote diagnostics
+release_year: 2022
+standalone: true
+storage: SD
+vendors:
+  - Industrial Distributor
+warranty: 5 years
+waterproof: IP67

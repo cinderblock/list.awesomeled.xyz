@@ -1,0 +1,77 @@
+# Example 1: Full-featured level converter with all fields
+name: Example Quad Level Shifter
+creator: Logic Shifter Inc
+manufacturers:
+  - Logic Shifter Inc
+  - Authorized Partner
+notes: Converts 3.3V signals to 5V for pixel data lines
+buffered: false
+channels: 4
+interface: Bi-directional MOSFET
+max_current: 50mA
+max_voltage: 5.5
+price: 4.99
+url: https://example.com/quad-shifter
+
+vendors:
+  - SparkFun
+  - Adafruit
+  - DigiKey
+---
+# Example 2: Buffered high-current driver
+name: Example Buffered Driver
+creator: Buffer Corp
+manufacturers:
+  - Buffer Corp
+notes: Active buffer with high current drive capability for long runs
+buffered: true
+channels: 8
+interface: 74AHCT125
+max_current: 24mA
+max_voltage: 5.5
+price: 8.99
+url: https://example.com/buffered-driver
+
+vendors:
+  - LED Parts Store
+---
+# Example 3: Single channel inline converter
+name: Example Inline Shifter
+creator: null
+manufacturers:
+  - Generic
+notes: Simple inline level shifter, fits between controller and first pixel
+buffered: false
+
+channels: 1
+interface: Single transistor
+max_current: 20mA
+max_voltage: 5
+price: 0.50
+vendors:
+  - Amazon
+  - AliExpress
+---
+# Example 4: Industrial differential driver
+name: Example Differential Driver
+creator: Industrial LED Corp
+manufacturers:
+  - Industrial LED Corp
+notes: Converts pixel data to differential signaling for long cable runs
+buffered: true
+channels: 4
+interface: RS-485 differential
+max_current: 60mA
+max_voltage: 12
+price: 24.99
+url: https://example.com/differential-driver
+
+---
+# Example 5: Minimal entry
+name: Example Basic Shifter
+creator: null
+notes: Basic 2-channel 3.3V to 5V shifter
+buffered: false
+channels: 2
+interface: Level shift
+price: 1.99
