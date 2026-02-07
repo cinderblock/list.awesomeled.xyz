@@ -15,26 +15,14 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'http';
 import { basename, dirname, resolve } from 'path';
 import * as readline from 'readline';
 import sharp from 'sharp';
-import { fileURLToPath } from 'url';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// Import shared utilities from the app
+import { getDatabasePath, getGitTimestamps } from '../app/lib/data';
+import { CATEGORIES } from '../app/lib/types';
 
-const DATABASE_PATH = resolve(__dirname, '../database');
-const CATEGORIES = [
-  'controllers',
-  'pixels',
-  'pixel-ics',
-  'pattern-drivers',
-  'connectors',
-  'microboards',
-  'level-converters',
-  'adapters',
-  'drive-libraries',
-  'pixel-decoders',
-  'diffusive-materials',
-  'commercial-systems',
-];
+const DATABASE_PATH = getDatabasePath();
+const CATEGORY_IDS = CATEGORIES.map((c) => c.id);
 
 // ANSI colors
 const colors = {
@@ -62,53 +50,6 @@ interface Entry {
 
 function log(color: keyof typeof colors, ...args: unknown[]) {
   console.log(colors[color], ...args, colors.reset);
-}
-
-/**
- * Get git timestamps for all YAML files
- */
-function getGitTimestamps(): Map<string, Date> {
-  const timestamps = new Map<string, Date>();
-
-  // Commits to ignore (metadata-only changes)
-  const ignoredCommits = new Set([
-    'b867ec1', // Remove redundant id field
-  ]);
-
-  try {
-    const output = execSync(
-      // cSpell:ignore ACMR
-      `git log --format="%H %aI" --name-only --diff-filter=ACMR -- "database/**/*.yaml"`,
-      { cwd: DATABASE_PATH, encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 }
-    );
-
-    let currentCommit = '';
-    let currentDate = '';
-
-    for (const line of output.split('\n')) {
-      if (!line.trim()) continue;
-
-      // Check if this is a commit line (hash + date)
-      const commitMatch = line.match(/^([a-f0-9]{40})\s+(.+)$/);
-      if (commitMatch) {
-        currentCommit = commitMatch[1].substring(0, 7);
-        currentDate = commitMatch[2];
-        continue;
-      }
-
-      // Skip ignored commits
-      if (ignoredCommits.has(currentCommit)) continue;
-
-      // This is a file path
-      if (line.endsWith('.yaml') && !timestamps.has(line)) {
-        timestamps.set(line, new Date(currentDate));
-      }
-    }
-  } catch (error) {
-    console.error('Error getting git timestamps:', error);
-  }
-
-  return timestamps;
 }
 
 /**
@@ -141,15 +82,14 @@ function loadAllEntries(): Entry[] {
   const entries: Entry[] = [];
   const timestamps = getGitTimestamps();
 
-  for (const category of CATEGORIES) {
+  for (const category of CATEGORY_IDS) {
     const categoryPath = resolve(DATABASE_PATH, category);
     if (!existsSync(categoryPath)) continue;
 
-    const files = readdirSync(categoryPath).filter((f) => f.endsWith('.yaml'));
+    const files = readdirSync(categoryPath).filter((f) => f.endsWith('.yaml') && !f.startsWith('_'));
 
     for (const file of files) {
       const filePath = resolve(categoryPath, file);
-      const relativePath = `database/${category}/${file}`;
       const id = basename(file, '.yaml');
 
       try {
@@ -163,7 +103,8 @@ function loadAllEntries(): Entry[] {
           name: (data.name as string) || id,
           url: data.url as string | undefined,
           urls: extractUrls(data),
-          updated: timestamps.get(relativePath) || null,
+          // getGitTimestamps() returns full paths as keys
+          updated: timestamps.get(filePath) || null,
           data,
         });
       } catch (error) {
@@ -820,7 +761,7 @@ async function main() {
   // Load entries and sort by age
   log('cyan', '  Loading entries...');
   const entries = loadAllEntries();
-  log('green', `  ✓ Found ${entries.length} entries across ${CATEGORIES.length} categories`);
+  log('green', `  ✓ Found ${entries.length} entries across ${CATEGORY_IDS.length} categories`);
   console.log('');
 
   // Show oldest entries
