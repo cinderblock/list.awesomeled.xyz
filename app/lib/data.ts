@@ -19,7 +19,7 @@ const IGNORED_COMMITS = new Set([
  * Get git last-modified timestamps for all database YAML files in a single batch call.
  * Results are cached for the lifetime of the process.
  */
-function getGitTimestamps(): Map<string, Date> {
+export function getGitTimestamps(): Map<string, Date> {
   if (gitTimestampCache) {
     return gitTimestampCache;
   }
@@ -69,7 +69,7 @@ function getGitTimestamps(): Map<string, Date> {
 }
 
 // Get the database directory path
-function getDatabasePath(): string {
+export function getDatabasePath(): string {
   // In production, we need to handle both Node.js and bundled environments
   // The database is located at the project root
   const __filename = fileURLToPath(import.meta.url);
