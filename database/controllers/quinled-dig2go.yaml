@@ -1,24 +1,24 @@
 name: QuinLED Dig2go
-manufacturer: Quindor / Intermittent Technology
-max_pixels: 1024
-price: 25
-max_outputs: 1
+status: active
+creator: Quindor / Intermittent Technology
+notes: ESP32, open to any software, often run with WLED
+auxiliary_outputs: Pre-Assembled
+buffered: true
 interfaces:
   - DMX
   - Wireless DMX
-storage: null
-standalone: true
-pixel_types: async
-max_voltage: 5V
 max_current: 3A
-buffered: true
+max_outputs: 1
+max_pixels: 1024
+max_voltage: 5V
 output_connectors: Pigtail (included)
 outputs: Single
-waterproof: null
-auxiliary_outputs: Pre-Assembled
-wled_compatible: true
-notes: ESP32, open to any software, often run with WLED
-warranty: null
+pixel_types: async
+price: 25
 release_year: 2022
-status: active
+standalone: true
+storage: null
 url: https://dig2go.info/
+warranty: null
+waterproof: null
+wled_compatible: true

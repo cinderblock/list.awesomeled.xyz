@@ -1,32 +1,32 @@
 name: Superseal
-manufacturer: TE /AMP
-url: https://www.te.com/content/dam/te-com/documents/automotive/global/1654292-2_AMP%20SUPERSEAL%201.5.pdf
-outline: Rectangular
-max_current: 14 A
-max_voltage: 24 V
-ip_rating: IP68
-locking: Latching
-panel_mount: true
-wire_to_wire: true
-pcb_mount: false
-smallest_gauge: 22 AWG
-largest_gauge: 14 AWG
-pitch: 6.0 mm
-contact_type: Pins
-solder: false
-screw_terminal: null
-crimp: true
-idc: false
-board_fingers: false
-gendered: true
-min_pins: 1
-max_pins: 8
-rows: 2
-year_introduced: null
-pinout: null
-convention: null
-colors: null
-digikey_url: null
-mouser_url: null
+creator: TE /AMP
 notes: AMP Superseal original product ,automotive and marine series, much copied
   . Requires specific crimp tool for contacts.
+board_fingers: false
+colors: null
+contact_type: Pins
+convention: null
+crimp: true
+digikey_url: null
+gendered: true
+idc: false
+ip_rating: IP68
+largest_gauge: 14 AWG
+locking: Latching
+max_current: 14 A
+max_pins: 8
+max_voltage: 24 V
+min_pins: 1
+mouser_url: null
+outline: Rectangular
+panel_mount: true
+pcb_mount: false
+pinout: null
+pitch: 6.0 mm
+rows: 2
+screw_terminal: null
+smallest_gauge: 22 AWG
+solder: false
+url: https://www.te.com/content/dam/te-com/documents/automotive/global/1654292-2_AMP%20SUPERSEAL%201.5.pdf
+wire_to_wire: true
+year_introduced: null

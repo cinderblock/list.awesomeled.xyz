@@ -1,13 +1,13 @@
 name: Plasma 2040
-manufacturer: Pimoroni
+creator: Pimoroni
+notes: null
+diy_or_ots: OTS
 max_channels: null
-pixel_types: Single and Clocked
-max_voltage: null
 max_current: null
-parent: Rpi 2040
-price: 16
+max_voltage: null
 output_connectors: screw Terminals
 outputs: null
-diy_or_ots: OTS
-notes: null
+parent: Rpi 2040
+pixel_types: Single and Clocked
+price: 16
 url: https://shop.pimoroni.com/products/plasma-2040

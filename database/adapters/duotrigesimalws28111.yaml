@@ -1,14 +1,14 @@
 name: DuotrigesimalWS28111
-manufacturer: Brian Amos
-max_channels: 32
-pixel_types: Single
-max_voltage: null
-max_current: null
-parent: Teensy 4.1
-price: 10
-output_connectors: Solder
-outputs: null
-diy_or_ots: DIY
+creator: Brian Amos
 notes: A board similar to the octoWS2811 designed for the Teensy 4.1 with 32
   output ports
+diy_or_ots: DIY
+max_channels: 32
+max_current: null
+max_voltage: null
+output_connectors: Solder
+outputs: null
+parent: Teensy 4.1
+pixel_types: Single
+price: 10
 url: https://github.com/brianamos1/DuotrigesimalWS2811

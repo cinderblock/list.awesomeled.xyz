@@ -1,13 +1,13 @@
 name: Astera Nyx
-manufacturer: Astera
-pixels_per_run: 170
-dimming_resolution: null
-dedicated_psu: true
-color_type: RGBW
-online_pricing: null
-price_range: $$$$$$
-core_tech: CRMX DMX
-since: null
-target_market: Entertainment
+creator: Astera
 notes: Wireless DMX /Bluetooth controlled AC Line / Dc Battery Pack Powered,
   aimed at high end entertainment and film
+color_type: RGBW
+core_tech: CRMX DMX
+dedicated_psu: true
+dimming_resolution: null
+online_pricing: null
+pixels_per_run: 170
+price_range: $$$$$$
+since: null
+target_market: Entertainment

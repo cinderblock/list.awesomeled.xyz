@@ -1,13 +1,13 @@
 name: F32-B
-manufacturer: Kulp Lights
+creator: Kulp Lights
+notes: null
+diy_or_ots: null
 max_channels: 32
-pixel_types: Single
-max_voltage: 12V
 max_current: null
-parent: BeagleBone
-price: 95
+max_voltage: 12V
 output_connectors: Phoenix Screw
 outputs: Single
-diy_or_ots: null
-notes: null
+parent: BeagleBone
+pixel_types: Single
+price: 95
 url: https://kulplights.com/product/f32-b/

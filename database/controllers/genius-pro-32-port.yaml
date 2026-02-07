@@ -1,26 +1,26 @@
 name: Genius Pro 32 Port
-manufacturer: Experience Lights
-max_pixels: 20000
-price: 300
-max_outputs: 32
+status: active
+creator: Experience Lights
+notes: On board PSU mounting,Efuse protected power distribution, on board fault
+  finding
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - FPP
   - Ethernet
-  - Wifi
-storage: null
-standalone: false
-pixel_types: async
-max_voltage: 24V
+  - Wi-Fi
 max_current: null
-buffered: true
+max_outputs: 32
+max_pixels: 20000
+max_voltage: 24V
 output_connectors: Spring Terminal
 outputs: Single
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: On board PSU mounting,Efuse protected power distribution, on board fault
-  finding
-warranty: null
+pixel_types: async
+price: 300
 release_year: 2023
-status: active
+standalone: false
+storage: null
 url: https://experiencelights.com/genius-pro-32-port-controller/#/
+warranty: null
+waterproof: null
+wled_compatible: null

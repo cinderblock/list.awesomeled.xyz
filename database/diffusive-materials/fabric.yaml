@@ -1,15 +1,15 @@
 name: Fabric
-url: null
+notes: Not tested yet
 color_rendition: null
-light_transmission: null
-flexible: F
-purpose_made: false
-properties: Diffusive
-fire_retardant: false
-tinted: T
-sample_thickness: null
 diffusivity: null
-sizes_available: null
+fire_retardant: false
+flexible: F
+light_transmission: null
 material_type: null
 price_range: null
-notes: Not tested yet
+properties: Diffusive
+purpose_made: false
+sample_thickness: null
+sizes_available: null
+tinted: T
+url: null

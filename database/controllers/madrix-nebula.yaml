@@ -1,25 +1,25 @@
 name: Madrix Nebula
-manufacturer: Madrix
-max_pixels: 2048
-price: 350
-max_outputs: 2
+status: unknown
+creator: Madrix
+notes: null
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - RFRemote
-  - Bluettooth
+  - Bluetooth
   - audio
   - switch
-storage: null
-standalone: false
-max_voltage: 24V
 max_current: null
-buffered: null
+max_outputs: 2
+max_pixels: 2048
+max_voltage: 24V
 output_connectors: Screw
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: null
-warranty: null
+price: 350
 release_year: null
-status: unknown
+standalone: false
+storage: null
 url: https://www.madrix.com/products/nebula
+warranty: null
+waterproof: null
+wled_compatible: null

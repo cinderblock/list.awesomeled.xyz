@@ -1,13 +1,13 @@
 name: Flex
-manufacturer: Color Kinetics
-pixels_per_run: null
-dimming_resolution: null
-dedicated_psu: true
-color_type: RGB W/WW
-online_pricing: null
-price_range: $$$$$$
-core_tech: Proprietary
-since: null
-target_market: null
+creator: Color Kinetics
 notes: Icolor Flex and relatives. Philips Color Kinetics closed eco system of
   RGB lighting,
+color_type: RGB W/WW
+core_tech: Proprietary
+dedicated_psu: true
+dimming_resolution: null
+online_pricing: null
+pixels_per_run: null
+price_range: $$$$$$
+since: null
+target_market: null

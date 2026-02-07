@@ -1,12 +1,12 @@
 name: FestoonLight Q4
-manufacturer: Showtec
-pixels_per_run: 120
-dimming_resolution: null
-dedicated_psu: true
+creator: Showtec
+notes: Separate 20 globe strings, controller and booster components
 color_type: RGB
-online_pricing: null
-price_range: $$$
 core_tech: null
+dedicated_psu: true
+dimming_resolution: null
+online_pricing: null
+pixels_per_run: 120
+price_range: $$$
 since: null
 target_market: null
-notes: Seperate 20 globe strings, controller and booster components

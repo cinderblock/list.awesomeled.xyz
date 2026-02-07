@@ -122,7 +122,9 @@ export interface BaseEntry {
 
 // Specific entry types for each category
 export interface ControllerEntry extends BaseEntry {
-  manufacturer?: string;
+  creator?: string;
+  manufacturers?: string[];
+  vendors?: string[];
   max_pixels?: number;
   price?: number;
   max_outputs?: number;
@@ -146,7 +148,9 @@ export interface ControllerEntry extends BaseEntry {
 }
 
 export interface PixelEntry extends BaseEntry {
-  manufacturer?: string;
+  creator?: string;
+  manufacturers?: string[];
+  vendors?: string[];
   color_order?: string;
   led_voltage?: string;
   vcc_voltage?: string;
@@ -157,7 +161,9 @@ export interface PixelEntry extends BaseEntry {
 }
 
 export interface ConnectorEntry extends BaseEntry {
-  manufacturer?: string;
+  creator?: string;
+  manufacturers?: string[];
+  vendors?: string[];
   outline?: string;
   max_current?: string;
   max_voltage?: string;

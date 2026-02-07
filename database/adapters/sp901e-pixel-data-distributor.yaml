@@ -1,13 +1,13 @@
 name: SP901E Pixel Data Distributor
-manufacturer: Generic
+creator: Generic
+notes: Pixel data duplicated to 8 output channels
+diy_or_ots: OTS
 max_channels: 8
-pixel_types: single +clocked
-max_voltage: 24V
 max_current: null
-parent: 8 Ch Pixel data distribution
-price: 22
+max_voltage: 24V
 output_connectors: Phoenix Screw
 outputs: Both
-diy_or_ots: OTS
-notes: Pixel data duplicated to 8 output channels
+parent: 8 Ch Pixel data distribution
+pixel_types: single +clocked
+price: 22
 url: https://www.superlightingled.com/dc524v-4-channel-spi-signal-output-data-signal-sp901e-amplifier-for-programmable-dream-color-6803-1903-1809-1812-2811-ic-led-light-strips-p-3125.html

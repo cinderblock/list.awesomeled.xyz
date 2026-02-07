@@ -1,23 +1,23 @@
 name: Mini 8 Port Controller
-manufacturer: Wasatch Pixels
-max_pixels: 4800
-price: 45
-max_outputs: 8
+status: active
+creator: Wasatch Pixels
+notes: null
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - Ethernet
-storage: null
-standalone: false
-pixel_types: async
-max_voltage: 12V
 max_current: null
-buffered: null
+max_outputs: 8
+max_pixels: 4800
+max_voltage: 12V
 output_connectors: Phoenix Screw
 outputs: Single
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: async
+price: 45
 release_year: 2021
-status: active
+standalone: false
+storage: null
 url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+warranty: null
+waterproof: null
+wled_compatible: null

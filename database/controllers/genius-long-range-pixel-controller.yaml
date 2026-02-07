@@ -1,23 +1,23 @@
 name: Genius Long Range Pixel Controller
-manufacturer: Experience Lights
-max_pixels: 21760
-price: 189
-max_outputs: 40
+status: active
+creator: Experience Lights
+notes: null
+auxiliary_outputs: DMX
+buffered: true
 interfaces:
   - Ethernet +POE
-storage: SD
-standalone: true
-pixel_types: async
-max_voltage: 5V
 max_current: null
-buffered: true
+max_outputs: 40
+max_pixels: 21760
+max_voltage: 5V
 output_connectors: RJ-45
 outputs: Single
-waterproof: null
-auxiliary_outputs: DMX
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: async
+price: 189
 release_year: 2022
-status: active
+standalone: true
+storage: SD
 url: https://experiencelights.com/long-range-genius-pixel-controller/
+warranty: null
+waterproof: null
+wled_compatible: null

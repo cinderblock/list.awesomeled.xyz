@@ -3,17 +3,24 @@
   "$id": "https://awesomeledlist.com/schema/commercial-system.json",
   "title": "Commercial Pixel System",
   "type": "object",
-  "required": ["id", "name"],
+  "required": ["name"],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9-]+$"
-    },
     "name": {
       "type": "string"
     },
-    "manufacturer": {
-      "type": ["string", "null"]
+    "creator": {
+      "type": ["string", "null"],
+      "description": "Original designer/developer of this item"
+    },
+    "manufacturers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Manufacturers that produce this item"
+    },
+    "vendors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Vendors that sell/distribute this item"
     },
     "pixels_per_run": {
       "type": ["integer", "null"]

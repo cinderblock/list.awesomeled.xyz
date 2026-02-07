@@ -1,7 +1,7 @@
 name: ArtNet to TMP2 Convertor
-developer: ATCE
-hardware: null
+creator: ATCE
 features: Wireshark captured artnet stream convert to TMP2(Jinx native) file
+hardware: null
+instructional_resources: []
 url: http://www.tlhome.de/ATCE.htm
 youtube_url: null
-instructional_resources: []

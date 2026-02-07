@@ -1,24 +1,24 @@
 name: AlphaPix Classic 16 V3
-manufacturer: HolidayCoro
-max_pixels: 5440
-price: 175
-max_outputs: 16
+status: unknown
+creator: HolidayCoro
+notes: null
+auxiliary_outputs: DMX x3
+buffered: true
 interfaces:
   - Ethernet
-  - Wifi
-storage: null
-standalone: null
-pixel_types: both
-max_voltage: 24V
+  - Wi-Fi
 max_current: 60A
-buffered: true
+max_outputs: 16
+max_pixels: 5440
+max_voltage: 24V
 output_connectors: Phoenix Screw
 outputs: Single and Clock
-waterproof: null
-auxiliary_outputs: DMX x3
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: both
+price: 175
 release_year: null
-status: unknown
+standalone: null
+storage: null
 url: https://www.holidaycoro.com/AlphaPix-16-Pixel-Controller-V3-p/721-v3.htm
+warranty: null
+waterproof: null
+wled_compatible: null

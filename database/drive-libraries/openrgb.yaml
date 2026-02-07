@@ -1,7 +1,7 @@
 name: OpenRGB
-developer: Adam Honse
-hardware: PC RGB hardware
+creator: Adam Honse
 features: control all of your RGB devices from a single app, on both Windows and Linux,
+hardware: PC RGB hardware
+instructional_resources: []
 url: https://openrgb.org/index.html
 youtube_url: null
-instructional_resources: []

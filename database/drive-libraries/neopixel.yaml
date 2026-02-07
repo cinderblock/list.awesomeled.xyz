@@ -1,7 +1,7 @@
 name: NeoPixel
-developer: Adafruit
-hardware: many
+creator: Adafruit
 features: WS281x, SK6812
+hardware: many
+instructional_resources: []
 url: https://github.com/adafruit/Adafruit_NeoPixel
 youtube_url: https://www.youtube.com/watch?v=vCDfyxNFeEw
-instructional_resources: []

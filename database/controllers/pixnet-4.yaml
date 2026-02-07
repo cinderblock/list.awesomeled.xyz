@@ -1,23 +1,23 @@
 name: PixNet 4+
-manufacturer: PixNet Control
-max_pixels: 8160
-price: 450
-max_outputs: 8
+status: active
+creator: PixNet Control
+notes: Powered by POE or Screw Terminals 5-48 Volt
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - USB
-storage: null
-standalone: false
-pixel_types: both
-max_voltage: 48V
 max_current: 1.8A
-buffered: true
+max_outputs: 8
+max_pixels: 8160
+max_voltage: 48V
 output_connectors: Phoenix Screw
 outputs: Single and Clock &DMX
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Powerd POE or Screw Terminals 5- 48 Volt
-warranty: null
+pixel_types: both
+price: 450
 release_year: 2022
-status: active
+standalone: false
+storage: null
 url: https://pixnetcontrol.com/
+warranty: null
+waterproof: null
+wled_compatible: null

@@ -1,9 +1,9 @@
 name: XOD
-developer: XOD Inc/Open Source
-hardware: Arduino/ ESP 66/32
+creator: XOD Inc/Open Source
 features: Windows/Mac/Linux Graphical, no coding, Arduino Programming with
   limited native WS2812 support
-url: https://xod.io/
-youtube_url: null
+hardware: Arduino/ ESP 66/32
 instructional_resources:
   - https://www.youtube.com/watch?v=XU0u5OEra3o
+url: https://xod.io/
+youtube_url: null

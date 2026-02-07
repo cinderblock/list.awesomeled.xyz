@@ -1,8 +1,8 @@
 name: Orange PI DMX
-developer: Arjan van Vught
-hardware: Orange Pi
+creator: Arjan van Vught
 features: Tested and documented projects. Bare metal programming of low cost
   Orange Pi to Pixel, Artnet and DMX devices.
+hardware: Orange Pi
+instructional_resources: []
 url: https://www.orangepi-dmx.org/
 youtube_url: null
-instructional_resources: []

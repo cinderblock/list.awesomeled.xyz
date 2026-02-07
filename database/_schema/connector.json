@@ -3,18 +3,24 @@
   "$id": "https://awesomeledlist.com/schema/connector.json",
   "title": "Connector",
   "type": "object",
-  "required": ["id", "name"],
+  "required": ["name"],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9-]+$"
-    },
     "name": {
       "type": "string"
     },
-    "manufacturer": {
+    "creator": {
       "type": ["string", "null"],
       "description": "Originating manufacturer; does not imply off-brand incompatibility"
+    },
+    "manufacturers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Manufacturers that produce this item"
+    },
+    "vendors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Vendors that sell/distribute this item"
     },
     "outline": {
       "type": ["string", "null"],

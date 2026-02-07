@@ -1,13 +1,13 @@
 name: Pixel String Pihat Zero
-manufacturer: Jboards
+creator: Jboards
+notes: null
+diy_or_ots: null
 max_channels: 2
-pixel_types: null
-max_voltage: 12V
 max_current: null
-parent: Raspberry Pi
-price: 12
+max_voltage: 12V
 output_connectors: null
 outputs: null
-diy_or_ots: null
-notes: null
+parent: Raspberry Pi
+pixel_types: null
+price: 12
 url: https://jboards.ecwid.com/Pixel-String-Pihat-Zero-p133155360

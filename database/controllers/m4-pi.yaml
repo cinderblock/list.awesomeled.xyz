@@ -1,23 +1,23 @@
 name: M4- Pi
-manufacturer: Microcyb
-max_pixels: 6400
-price: 35
-max_outputs: 4
+status: active
+creator: Microcyb
+notes: Pi Hat ,requires Raspberry Pi
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - Ethernet
-storage: null
-standalone: true
-pixel_types: async
-max_voltage: null
 max_current: null
-buffered: null
+max_outputs: 4
+max_pixels: 6400
+max_voltage: null
 output_connectors: Phoenix Screw
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Pi Hat ,requires Raspberry Pi
-warranty: null
+pixel_types: async
+price: 35
 release_year: 2022
-status: active
+standalone: true
+storage: null
 url: https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
+warranty: null
+waterproof: null
+wled_compatible: null

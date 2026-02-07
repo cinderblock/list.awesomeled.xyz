@@ -1,12 +1,12 @@
 name: LB-100
-manufacturer: SGM
-pixels_per_run: 56
-dimming_resolution: null
-dedicated_psu: true
+creator: SGM
+notes: SGM established Danish stage lighting manufacturer, 2W balls
 color_type: RGB
-online_pricing: 7 Ball String  €125
-price_range: $$$$$
 core_tech: null
+dedicated_psu: true
+dimming_resolution: null
+online_pricing: 7 Ball String €125
+pixels_per_run: 56
+price_range: $$$$$
 since: null
 target_market: null
-notes: SGM established Danish stage lighting manufacturer, 2W balls

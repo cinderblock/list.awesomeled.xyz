@@ -1,8 +1,8 @@
 name: TeensyDMX
-developer: Shawn Silverman
-hardware: Teensy LC, 3, 4
+creator: Shawn Silverman
 features: Teensy DMX RX/TX with support for responding to specific start codes,
   plus many other features
+hardware: Teensy LC, 3, 4
+instructional_resources: []
 url: https://github.com/ssilverman/TeensyDMX
 youtube_url: null
-instructional_resources: []

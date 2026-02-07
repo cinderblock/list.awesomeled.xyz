@@ -1,31 +1,31 @@
 name: FastLED "FX" engine
-developer: Zach Vorhies
-price: Free
+status: unknown
+creator: Zach Vorhies
+notes: null
+audio_input: null
+demo_available: null
+designer: true
+gpio: null
+integrations: null
+language: null
+live: false
+other_inputs: null
+other_outputs: null
 platforms:
   - ESP
   - AVR
   - NRF
   - RP
   - Browser
-live: false
-designer: true
-visualizer: Browser wasm Preview
+price: Free
+programmatic: null
 protocols:
   artnet: null
   sacn: null
   dmx: null
   kinet: null
   ddp: null
-gpio: null
 serial: null
-video_input: null
-audio_input: null
-programmatic: null
-language: null
-other_inputs: null
-other_outputs: null
-integrations: null
-notes: null
-demo_available: null
-status: unknown
 url: null
+video_input: null
+visualizer: Browser Wasm Preview

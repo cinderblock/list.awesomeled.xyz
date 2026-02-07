@@ -1,27 +1,26 @@
 name: CS8812
-color_order: null
-led_voltage: 12V
-clocked: false
-vcc_voltage: 12V
-pwm_frequency: 8.0kHz
+creator: Witop
+notes: Built-in 8->12bit gamma correction. "B" version is "without original program". Similar to GS8208
+backup_data_line: true
 brightness_bits: 8
-data_bitrate: 800kHz
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-gpio_min: null
-gpio_max: null
-wattage: 210.mW
 channel_current: 17.5mA
-quiescent_current: null
+clocked: false
+color_order: null
+data_bitrate: 800kHz
+data_type: WS2811/12
+datasheet_url: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
+gpio_max: null
+gpio_min: null
+led_voltage: 12V
+max_pixels_per_string: null
+other_links: CS8812 Pixel Protocol Overview | Advatek Lighting
 package_size: "5050"
 pin_count: null
-data_type: WS2811/12
-backup_data_line: true
-max_pixels_per_string: null
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 33.3 k Pixel / s
+pwm_frequency: 8.0kHz
+quiescent_current: null
 release_year: null
-notes: Built-in 8->12bit gamma correction. "B" version is "without original
-  program".  Similar to GS8208
 third_party_testing: null
-manufacturer: Witop
-datasheet_url: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
-other_links: CS8812 Pixel Protocol Overview | Advatek Lighting
+vcc_voltage: 12V
+wattage: 210.mW

@@ -1,23 +1,23 @@
 name: ElectroMage Pro 8x Driver
-manufacturer: ElectroMage
-max_pixels: 6400
-price: 49
-max_outputs: 8
+status: active
+creator: ElectroMage
+notes: Stacks up to 8 on a bus
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - Ethernet
-storage: null
-standalone: false
-pixel_types: both
-max_voltage: 12V
 max_current: 15A
-buffered: true
+max_outputs: 8
+max_pixels: 6400
+max_voltage: 12V
 output_connectors: Phoenix Screw pluggable
 outputs: Configurable
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Stacks up to 8 on a bus
-warranty: null
+pixel_types: both
+price: 49
 release_year: 2020
-status: active
+standalone: false
+storage: null
 url: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
+warranty: null
+waterproof: null
+wled_compatible: null

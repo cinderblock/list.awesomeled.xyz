@@ -1,10 +1,10 @@
 name: Pixel 2 DMX
-manufacturer: Experience Lights
+creator: Experience Lights
+notes: null
+diy_or_ots: OTS
 max_channels: 512
-pixel_types: WS28XX data to DMX 512
-price: 40V
 output_connectors: X Connect /XLR3
 outputs: DMX
-diy_or_ots: OTS
-notes: null
+pixel_types: WS28XX data to DMX 512
+price: 40V
 url: https://experiencelights.com/pixel2dmx---realtime-dmx-bridge/

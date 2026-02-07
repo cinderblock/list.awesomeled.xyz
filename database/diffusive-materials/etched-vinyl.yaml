@@ -1,17 +1,17 @@
 name: Etched Vinyl
-url: https://www.mdpsupplies.co.uk/glass-lightbox-films/etched
-color_rendition: 5
-light_transmission: 5
-flexible: F
-purpose_made: true
-properties: Backlight
-fire_retardant: true
-tinted: C
-sample_thickness: null
-diffusivity: 3
-sizes_available: 600mm X 50m
-material_type: PVC
-price_range: $$$
 notes: Self Adhesive etch effect for glass and acrylic polycarbonate, sparkle
   effect is a good source hiding look, far more effective than sanding with
   sandpaper
+color_rendition: 5
+diffusivity: 3
+fire_retardant: true
+flexible: F
+light_transmission: 5
+material_type: PVC
+price_range: $$$
+properties: Backlight
+purpose_made: true
+sample_thickness: null
+sizes_available: 600mm X 50m
+tinted: C
+url: https://www.mdpsupplies.co.uk/glass-lightbox-films/etched

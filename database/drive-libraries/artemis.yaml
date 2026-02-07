@@ -1,8 +1,8 @@
 name: Artemis
-developer: Robert Beekman
-hardware: PC /  Video source
+creator: Robert Beekman
 features: Artemis is a lighting software for gamers that creates realistic
   lighting effects by using device location.
+hardware: PC / Video source
+instructional_resources: []
 url: https://artemis-rgb.com/
 youtube_url: null
-instructional_resources: []

@@ -1,23 +1,23 @@
 name: M4 Port Pixel
-manufacturer: Microcyb
-max_pixels: 6400
-price: 35
-max_outputs: 4
+status: active
+creator: Microcyb
+notes: Raspberry Pi 3B+ or Above with FPP
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - Ethernet
-storage: Yes
-standalone: true
-pixel_types: both
-max_voltage: 12V
 max_current: 30A
-buffered: true
+max_outputs: 4
+max_pixels: 6400
+max_voltage: 12V
 output_connectors: Phoenix Screw
 outputs: Single or Clock
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Raspberry Pi 3B+ or Above with FPP
-warranty: null
+pixel_types: both
+price: 35
 release_year: null
-status: active
+standalone: true
+storage: Yes
 url: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
+warranty: null
+waterproof: null
+wled_compatible: null

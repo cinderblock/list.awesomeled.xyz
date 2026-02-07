@@ -1,26 +1,26 @@
 name: Raspberry Pi 1 Model B+
-manufacturer: Raspberry Pi Foundation
-soc: BCM2835
-cpu: ARM11
-isa: ARMv6Z
+creator: Raspberry Pi Foundation
+notes: null
+bluetooth: USB
+bms: false
 clock_speed: 700MHz
+cpu: ARM11
+ethernet: 100BASE-TX
 flash: microSD
-ram: 512MB
+gpio_voltage: 3.3V
+imu: false
+isa: ARMv6Z
 linux: true
+max_input_voltage: 5V
 max_outputs: 1
 min_input_voltage: 5V
-max_input_voltage: 5V
-gpio_voltage: 3.3V
-usb: OTG x4
-ttl_serial: true
-wifi: USB
 poe: null
-ethernet: 100BASE-TX
-bluetooth: USB
-storage: microSD
-bms: false
-imu: false
 price: 25
+ram: 512MB
 release_year: 2014
+soc: BCM2835
+storage: microSD
+ttl_serial: true
 url: https://www.raspberrypi.org/products/raspberry-pi-1-model-b-plus/
-notes: null
+usb: OTG x4
+wifi: USB

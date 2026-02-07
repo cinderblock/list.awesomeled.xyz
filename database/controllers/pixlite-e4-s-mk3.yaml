@@ -1,24 +1,24 @@
 name: PixLite E4-S Mk3
-manufacturer: Advatek
-max_pixels: 16320
-price: 549
-max_outputs: 8
-interfaces:
-  - USB
-storage: SD
-standalone: true
-pixel_types: both
-max_voltage: 24V
-max_current: null
-buffered: true
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-waterproof: null
-auxiliary_outputs: DMX In/Out
-wled_compatible: null
+status: active
+creator: Advatek
 notes: Pixels cannot be powered through PixLite. Single 100Mbps Ethernet. All
   other features of Mk3 are available in the E Series
-warranty: null
+auxiliary_outputs: DMX In/Out
+buffered: true
+interfaces:
+  - USB
+max_current: null
+max_outputs: 8
+max_pixels: 16320
+max_voltage: 24V
+output_connectors: Phoenix Screw
+outputs: Single or Clock
+pixel_types: both
+price: 549
 release_year: 2022
-status: active
+standalone: true
+storage: SD
 url: https://www.advateklights.com/pixlite-e4-s-mk3
+warranty: null
+waterproof: null
+wled_compatible: null

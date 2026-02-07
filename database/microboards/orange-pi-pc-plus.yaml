@@ -1,26 +1,26 @@
 name: Orange Pi PC Plus
-manufacturer: Shenzhen Xunlong Software
-soc: Allwinner Quad Core H3
-cpu: 4× ARM Cortex-A7
-isa: ARMv7-A
+creator: Shenzhen Xunlong Software
+notes: null
+bluetooth: null
+bms: false
 clock_speed: 1.6GHz
+cpu: 4× ARM Cortex-A7
+ethernet: 100BASE-TX
 flash: microSD
-ram: 1GB
+gpio_voltage: null
+imu: false
+isa: ARMv7-A
 linux: true
+max_input_voltage: null
 max_outputs: null
 min_input_voltage: null
-max_input_voltage: null
-gpio_voltage: null
-usb: OTG x1, 2.0 x3
-ttl_serial: null
-wifi: 2.4GHz & 5GHz
 poe: null
-ethernet: 100BASE-TX
-bluetooth: null
-storage: microSD
-bms: false
-imu: false
 price: 24
+ram: 1GB
 release_year: null
+soc: Allwinner Quad Core H3
+storage: microSD
+ttl_serial: null
 url: http://www.orangepi.org/
-notes: null
+usb: OTG x1, 2.0 x3
+wifi: 2.4GHz & 5GHz

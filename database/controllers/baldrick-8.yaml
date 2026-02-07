@@ -1,26 +1,25 @@
 name: Baldrick8
-manufacturer: ILIGHTTHAT
-max_pixels: 6000
-price: 80
-max_outputs: 8
+status: active
+creator: ILIGHTTHAT
+notes: V1.1 supports 48V
+auxiliary_outputs: false
+buffered: true
+image: baldrick-8.png
+inputs: 3
 interfaces:
   - DDP
   - Artnet
   - E1.31
-storage: null
-standalone: null
-pixel_types: async
-max_voltage: 24
 max_current: 60
-buffered: true
+max_outputs: 8
+max_pixels: 6000
+max_voltage: 24
 output_connectors: Phoenix Plug
 outputs: Single
-waterproof: false
-auxiliary_outputs: false
-wled_compatible: null
-notes: V1.1 supports 48V
-warranty: null
+pixel_types: async
+price: 80
 release_year: 2025
-status: active
+standalone: null
+storage: null
 url: https://www.baldrickboard.com/en/boards/baldrick8
-image: baldrick-8.png
+warranty: null

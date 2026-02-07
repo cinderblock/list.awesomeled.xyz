@@ -1,27 +1,27 @@
 name: ArKaos
-developer: ArKaos S.A.
-price: 299
+status: active
+creator: ArKaos S.A.
+notes: null
+audio_input: null
+demo_available: null
+designer: true
+gpio: null
+integrations: null
+language: null
+live: true
+other_inputs: null
+other_outputs: Klingnet
 platforms:
   - Windows
-live: true
-designer: true
-visualizer: null
+price: 299
+programmatic: null
 protocols:
   artnet: null
   sacn: null
   dmx: null
   kinet: null
   ddp: null
-gpio: null
 serial: null
-video_input: null
-audio_input: null
-programmatic: null
-language: null
-other_inputs: null
-other_outputs: Klingnet
-integrations: null
-notes: null
-demo_available: null
-status: active
 url: https://www.arkaos.com/
+video_input: null
+visualizer: null

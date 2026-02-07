@@ -1,23 +1,23 @@
 name: Pixelator Mini PX1-8D
-manufacturer: ENTTEC
-max_pixels: 2730
-price: 700
-max_outputs: 24
-interfaces:
-  - WiFi
-storage: null
-standalone: null
-pixel_types: async
-max_voltage: null
-max_current: null
+status: unknown
+creator: ENTTEC
+notes: null
+auxiliary_outputs: null
 buffered: null
+interfaces:
+  - Wi-Fi
+max_current: null
+max_outputs: 24
+max_pixels: 2730
+max_voltage: null
 output_connectors: RJ-46
 outputs: Proprietary
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: async
+price: 700
 release_year: null
-status: unknown
+standalone: null
+storage: null
 url: https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
+warranty: null
+waterproof: null
+wled_compatible: null

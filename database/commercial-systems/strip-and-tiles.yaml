@@ -1,13 +1,13 @@
 name: Strip and Tiles
-manufacturer: Schnick Schnack
-pixels_per_run: 3072
-dimming_resolution: null
-dedicated_psu: true
-color_type: RGBW
-online_pricing: null
-price_range: $$$$$$
-core_tech: null
-since: 2001
-target_market: null
+creator: Schnick Schnack
 notes: Strip and Tiles with very high resolution dimming and video input
   compatible, very long established pioneers.
+color_type: RGBW
+core_tech: null
+dedicated_psu: true
+dimming_resolution: null
+online_pricing: null
+pixels_per_run: 3072
+price_range: $$$$$$
+since: 2001
+target_market: null

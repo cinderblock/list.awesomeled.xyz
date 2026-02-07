@@ -1,26 +1,26 @@
 name: SM16703
-manufacturer: Shenzhen Sunmoon Microelectronics
-pwm_frequency: 1.2kHz
-channels: 3
-channel_bits: 8
+creator: Shenzhen Sunmoon Microelectronics
+notes: null
 aggregate_bits: null
+backup_data_line: null
+channel_bits: 8
+channels: 3
 clocked: false
 data_bitrate: null
-pixel_data_size: null
-pixel_rate_max: null
-output_voltage: null
-supply_voltage: null
-gpio_min: null
+data_type: null
+datasheet_url: null
 gpio_max: null
+gpio_min: null
 max_current: null
-quiescent_current: null
+max_pixels_per_string: null
+other_links: SM16703 Pixel Protocol Overview | Advatek Lighting
+output_voltage: null
 package_size: SOP8
 pin_count: 8
-data_type: null
-backup_data_line: null
-max_pixels_per_string: null
+pixel_data_size: null
+pixel_rate_max: null
+pwm_frequency: 1.2kHz
+quiescent_current: null
 release_year: null
-notes: null
+supply_voltage: null
 third_party_testing: null
-datasheet_url: null
-other_links: SM16703 Pixel Protocol Overview | Advatek Lighting

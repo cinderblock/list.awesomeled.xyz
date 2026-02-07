@@ -1,36 +1,38 @@
 name: WS2816
-manufacturer: WorldSemi
-color_order: GRB
-led_voltage: 5V
-clocked: false
-vcc_voltage: 5V
-pwm_frequency: 10.0kHz
+status: active
+creator: WorldSemi
+notes: 16-bit per channel color depth with per-channel brightness control
+backup_data_line: true
 brightness_bits: 8+5
 brightness_control_method: per_channel
 brightness_control_notes: 5-bit brightness control for each color channel (R, G, and B independently)
-data_bitrate: 800kHz
-pixel_data_size: 48 Bits/Pixel
-pixel_rate_max: 16.7 k Pixel / s
-gpio_min: null
-gpio_max: null
-wattage: 100mW
 channel_current: 20mA
 channel_current_notes: WS2816C is 10mA, WS2816B is 20mA
-quiescent_current: 6.0mA
+clocked: false
+color_order: GRB
+data_bitrate: 800kHz
+data_type: WS2816
+datasheet_url: null
+gpio_max: null
+gpio_min: null
+led_voltage: 5V
+max_pixels_per_string: null
+other_links: []
+package_size: "5050"
 package_sizes:
   - "5050"
-package_size: "5050"
 pin_count: 6
-data_type: WS2816
-backup_data_line: true
-max_pixels_per_string: null
+pixel_data_size: 48 Bits/Pixel
+pixel_rate_max: 16.7 k Pixel / s
+pwm_frequency: 10.0kHz
+quiescent_current: 6.0mA
 release_year: 2021
-notes: 16-bit per channel color depth with per-channel brightness control
 technical_notes:
   - 48-bit pixel data for 16-bit per channel color depth
   - Independent 5-bit brightness control for each R, G, B channel
   - Backup data line for fault tolerance
   - WS2816B (20mA) and WS2816C (10mA) current variants available
+third_party_testing: null
 variants:
   - name: WS2816B
     suffix: B
@@ -38,7 +40,5 @@ variants:
   - name: WS2816C
     suffix: C
     differences: 10mA channel current
-third_party_testing: null
-datasheet_url: null
-other_links: []
-status: active
+vcc_voltage: 5V
+wattage: 100mW

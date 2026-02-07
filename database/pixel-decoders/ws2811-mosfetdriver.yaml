@@ -1,10 +1,10 @@
 name: WS2811 MosFetDriver
-manufacturer: Freetronics
+creator: Freetronics
+notes: null
+diy_or_ots: null
 max_channels: 3
-pixel_types: WS2811 to High current Mosfet
-price: 4
 output_connectors: null
 outputs: null
-diy_or_ots: null
-notes: null
+pixel_types: WS2811 to High current Mosfet
+price: 4
 url: https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module#.XiWsEDL7TIX

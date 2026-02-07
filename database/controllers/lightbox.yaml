@@ -1,23 +1,23 @@
 name: LightBox
-manufacturer: RocketLife
-max_pixels: null
-price: 99
-max_outputs: 1
+status: discontinued
+creator: RocketLife
+notes: Now Bekonix see Pattern Drivers
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - Ethernet
-storage: null
-standalone: null
-pixel_types: both
-max_voltage: 5V
 max_current: 6A
-buffered: true
+max_outputs: 1
+max_pixels: null
+max_voltage: 5V
 output_connectors: Proprietary
 outputs: Single and Clock
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Now Bekonix see Pattern Drivers
-warranty: null
+pixel_types: both
+price: 99
 release_year: null
-status: discontinued
-url: https://www.rocketlife.com/technology/ morphed to   https://www.bekonix.com/
+standalone: null
+storage: null
+url: https://www.rocketlife.com/technology/ morphed to https://www.bekonix.com/
+warranty: null
+waterproof: null
+wled_compatible: null

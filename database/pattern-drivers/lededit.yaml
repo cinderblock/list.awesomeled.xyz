@@ -1,27 +1,27 @@
 name: LEDEdit
-developer: null
-price: Free
+status: unknown
+creator: null
+notes: null
+audio_input: null
+demo_available: null
+designer: null
+gpio: null
+integrations: K1000 LED player editing program
+language: null
+live: null
+other_inputs: null
+other_outputs: T/K 1000 Player
 platforms:
   - Desktop
-live: null
-designer: null
-visualizer: null
+price: Free
+programmatic: null
 protocols:
   artnet: null
   sacn: null
   dmx: null
   kinet: null
   ddp: null
-gpio: null
 serial: null
-video_input: null
-audio_input: null
-programmatic: null
-language: null
-other_inputs: null
-other_outputs: T/K 1000 Player
-integrations: K1000 LED player editing program
-notes: null
-demo_available: null
-status: unknown
 url: https://learnitstepbystep.blogspot.com/2018/07/download-led-edit-2014-2016-2017-2018.html
+video_input: null
+visualizer: null

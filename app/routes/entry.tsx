@@ -168,14 +168,14 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
       <header className="page-header">
         <h1 className="page-title category-page-title">{entry.name}</h1>
         <FeatureBadges entry={entry} />
-        {entry.manufacturer && (
+        {entry.creator && (
           <p className="page-description">
             by{' '}
             <Link
-              to={`${category.path}?f=manufacturer:${escapeFilterValue(entry.manufacturer as string)}`}
+              to={`${category.path}?f=creator:${escapeFilterValue(entry.creator as string)}`}
               style={{ color: 'var(--category-primary)' }}
             >
-              {entry.manufacturer as string}
+              {entry.creator as string}
             </Link>
           </p>
         )}

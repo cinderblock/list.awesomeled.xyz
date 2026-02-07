@@ -1,30 +1,30 @@
 name: FalconPlayer
-developer: null
-price: FOSS
+status: unknown
+creator: null
+notes: FPP + RasPi/BBB = playback box
+audio_input: Output
+demo_available: null
+designer: false
+gpio: Both
+integrations: OSC, MIDI, Home Assistant, RemoteFalcon, plugins
+language: null
+live: true
+other_inputs: Pixelnet,Renard
+other_outputs: Pixelnet, Renard, UDP, HTTP, MQTT
 platforms:
   - Raspberry Pi
   - Beagle Bone
   - macOS
   - Linux
-live: true
-designer: false
-visualizer: null
+price: FOSS
+programmatic: Both
 protocols:
   artnet: Both
   sacn: Both
   dmx: Both
   kinet: Output
   ddp: null
-gpio: Both
 serial: Output
-video_input: Output
-audio_input: Output
-programmatic: Both
-language: null
-other_inputs: Pixelnet,Renard
-other_outputs: Pixelnet, Renard, UDP, HTTP, MQTT
-integrations: OSC, MIDI, Home Assistant, RemoteFalcon, plugins
-notes: FPP + RasPi/BBB = playback box
-demo_available: null
-status: unknown
 url: https://github.com/FalconChristmas/fpp
+video_input: Output
+visualizer: null

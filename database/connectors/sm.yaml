@@ -1,31 +1,31 @@
 name: SM
-manufacturer: JST
-url: http://www.jst-mfg.com/product/detail_e.php?series=238
-outline: Rectangular
-max_current: 3 A
-max_voltage: 250 V
-ip_rating: null
-locking: Latching
-panel_mount: true
-wire_to_wire: true
-pcb_mount: false
-smallest_gauge: null
-largest_gauge: null
-pitch: 2.54 mm
-contact_type: Pins
-solder: true
-screw_terminal: null
-crimp: true
-idc: false
-board_fingers: false
-gendered: true
-min_pins: 2
-max_pins: null
-rows: 1
-year_introduced: null
-pinout: G D [C] V
-convention: Female source (shrouded male on LEDs)
-colors: White, Black
-digikey_url: null
-mouser_url: null
+creator: JST
 notes: Most popular LED strip connector seen
+board_fingers: false
+colors: White, Black
+contact_type: Pins
+convention: Female source (shrouded male on LEDs)
+crimp: true
+digikey_url: null
+gendered: true
+idc: false
+ip_rating: null
+largest_gauge: null
+locking: Latching
+max_current: 3 A
+max_pins: null
+max_voltage: 250 V
+min_pins: 2
+mouser_url: null
+outline: Rectangular
+panel_mount: true
+pcb_mount: false
+pinout: G D [C] V
+pitch: 2.54 mm
+rows: 1
+screw_terminal: null
+smallest_gauge: null
+solder: true
+url: http://www.jst-mfg.com/product/detail_e.php?series=238
+wire_to_wire: true
+year_introduced: null

@@ -1,8 +1,8 @@
 name: Artnet2twinkly
-developer: John Lord
-hardware: Twinkly
-features: ArtNet to Twinkly consumer lights via wifi, allows control of Twinkly
+creator: John Lord
+features: ArtNet to Twinkly consumer lights via Wi-Fi, allows control of Twinkly
   via professional lighting controls
+hardware: Twinkly
+instructional_resources: []
 url: http://artnet2twinkly.com/
 youtube_url: https://youtube.com/channel/UCbd2w11mMNXC9Qekdho1bYw
-instructional_resources: []

@@ -1,32 +1,32 @@
 name: Wieland RST
-manufacturer: Wieland
-url: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
-outline: Circular
-max_current: 16 A
-max_voltage: 400 V
-ip_rating: IP69
-locking: Latching
-panel_mount: true
-wire_to_wire: true
-pcb_mount: false
-smallest_gauge: 22 AWG
-largest_gauge: 12 AWG
-pitch: null
-contact_type: Pins
-solder: false
-screw_terminal: true
-crimp: true
-idc: false
-board_fingers: false
-gendered: true
-min_pins: 2
-max_pins: 7
-rows: null
-year_introduced: null
-pinout: null
-convention: null
-colors: null
-digikey_url: null
-mouser_url: null
+creator: Wieland
 notes: IP 69 Fully Waterproof with sealing rings, Available in Micro to Power
   size series
+board_fingers: false
+colors: null
+contact_type: Pins
+convention: null
+crimp: true
+digikey_url: null
+gendered: true
+idc: false
+ip_rating: IP69
+largest_gauge: 12 AWG
+locking: Latching
+max_current: 16 A
+max_pins: 7
+max_voltage: 400 V
+min_pins: 2
+mouser_url: null
+outline: Circular
+panel_mount: true
+pcb_mount: false
+pinout: null
+pitch: null
+rows: null
+screw_terminal: true
+smallest_gauge: 22 AWG
+solder: false
+url: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
+wire_to_wire: true
+year_introduced: null

@@ -1,28 +1,28 @@
 name: Bekonix
-developer: Bekonix ex Rocketlife
-price: Free- $99
+status: active
+creator: Bekonix ex Rocketlife
+notes: Rocketlife reborn.
+audio_input: Input
+demo_available: Demo
+designer: true
+gpio: Both
+integrations: null
+language: null
+live: true
+other_inputs: null
+other_outputs: NRF52840 target board Adafruit or Ebyte board
 platforms:
   - Windows
   - macOS
-live: true
-designer: true
-visualizer: 2D
+price: Free- $99
+programmatic: Input
 protocols:
   artnet: null
   sacn: null
   dmx: null
   kinet: null
   ddp: null
-gpio: Both
 serial: null
-video_input: null
-audio_input: Input
-programmatic: Input
-language: null
-other_inputs: null
-other_outputs: NRF52840 target board Adafruit or Ebyte board
-integrations: null
-notes: Rocketlife reborn.
-demo_available: Demo
-status: active
 url: https://www.bekonix.com/platform/
+video_input: null
+visualizer: 2D

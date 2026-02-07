@@ -1,7 +1,7 @@
 name: TriantaduoWS2811
-developer: Ward Ramsdell
-hardware: Teensy4.0
+creator: Ward Ramsdell
 features: 32 channels of 1000 LEDs per channel at 33 frames per second
+hardware: Teensy4.0
+instructional_resources: []
 url: https://github.com/wramsdell/TriantaduoWS2811
 youtube_url: null
-instructional_resources: []

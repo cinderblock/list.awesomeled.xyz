@@ -9,35 +9,44 @@
  * 5. Handling commit and restart
  */
 
-import { resolve, dirname, basename } from "path";
-import { fileURLToPath } from "url";
+import { execSync, spawn } from 'child_process';
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
+import { createServer, type IncomingMessage, type ServerResponse } from 'http';
+import { basename, dirname, resolve } from 'path';
+import * as readline from 'readline';
+import sharp from 'sharp';
+import { fileURLToPath } from 'url';
+import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-import { readdirSync, readFileSync, existsSync, mkdirSync, writeFileSync } from "fs";
-import { execSync, spawn } from "child_process";
-import { createServer, type IncomingMessage, type ServerResponse } from "http";
-import { parse as parseYaml, stringify as stringifyYaml } from "yaml";
-import * as readline from "readline";
-import sharp from "sharp";
 
-const DATABASE_PATH = resolve(__dirname, "../database");
+const DATABASE_PATH = resolve(__dirname, '../database');
 const CATEGORIES = [
-  "controllers", "pixels", "pixel-ics", "pattern-drivers", "connectors",
-  "microboards", "level-converters", "adapters", "drive-libraries",
-  "pixel-decoders", "diffusive-materials", "commercial-systems"
+  'controllers',
+  'pixels',
+  'pixel-ics',
+  'pattern-drivers',
+  'connectors',
+  'microboards',
+  'level-converters',
+  'adapters',
+  'drive-libraries',
+  'pixel-decoders',
+  'diffusive-materials',
+  'commercial-systems',
 ];
 
 // ANSI colors
 const colors = {
-  reset: "\x1b[0m",
-  bright: "\x1b[1m",
-  dim: "\x1b[2m",
-  red: "\x1b[31m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  cyan: "\x1b[36m",
+  reset: '\x1b[0m',
+  bright: '\x1b[1m',
+  dim: '\x1b[2m',
+  red: '\x1b[31m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
 };
 
 interface Entry {
@@ -63,19 +72,20 @@ function getGitTimestamps(): Map<string, Date> {
 
   // Commits to ignore (metadata-only changes)
   const ignoredCommits = new Set([
-    "b867ec1", // Remove redundant id field
+    'b867ec1', // Remove redundant id field
   ]);
 
   try {
     const output = execSync(
+      // cSpell:ignore ACMR
       `git log --format="%H %aI" --name-only --diff-filter=ACMR -- "database/**/*.yaml"`,
-      { cwd: DATABASE_PATH, encoding: "utf-8", maxBuffer: 10 * 1024 * 1024 }
+      { cwd: DATABASE_PATH, encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 }
     );
 
-    let currentCommit = "";
-    let currentDate = "";
+    let currentCommit = '';
+    let currentDate = '';
 
-    for (const line of output.split("\n")) {
+    for (const line of output.split('\n')) {
       if (!line.trim()) continue;
 
       // Check if this is a commit line (hash + date)
@@ -90,12 +100,12 @@ function getGitTimestamps(): Map<string, Date> {
       if (ignoredCommits.has(currentCommit)) continue;
 
       // This is a file path
-      if (line.endsWith(".yaml") && !timestamps.has(line)) {
+      if (line.endsWith('.yaml') && !timestamps.has(line)) {
         timestamps.set(line, new Date(currentDate));
       }
     }
   } catch (error) {
-    console.error("Error getting git timestamps:", error);
+    console.error('Error getting git timestamps:', error);
   }
 
   return timestamps;
@@ -108,14 +118,14 @@ function extractUrls(data: Record<string, unknown>): string[] {
   const urls: string[] = [];
 
   function extract(obj: unknown) {
-    if (typeof obj === "string") {
+    if (typeof obj === 'string') {
       // Check if it looks like a URL
       if (obj.match(/^https?:\/\//)) {
         urls.push(obj);
       }
     } else if (Array.isArray(obj)) {
       obj.forEach(extract);
-    } else if (obj && typeof obj === "object") {
+    } else if (obj && typeof obj === 'object') {
       Object.values(obj).forEach(extract);
     }
   }
@@ -135,15 +145,15 @@ function loadAllEntries(): Entry[] {
     const categoryPath = resolve(DATABASE_PATH, category);
     if (!existsSync(categoryPath)) continue;
 
-    const files = readdirSync(categoryPath).filter(f => f.endsWith(".yaml"));
+    const files = readdirSync(categoryPath).filter((f) => f.endsWith('.yaml'));
 
     for (const file of files) {
       const filePath = resolve(categoryPath, file);
       const relativePath = `database/${category}/${file}`;
-      const id = basename(file, ".yaml");
+      const id = basename(file, '.yaml');
 
       try {
-        const content = readFileSync(filePath, "utf-8");
+        const content = readFileSync(filePath, 'utf-8');
         const data = parseYaml(content) as Record<string, unknown>;
 
         entries.push({
@@ -188,11 +198,11 @@ function pickRandomOldest(entries: Entry[], poolSize: number = 10): Entry {
  */
 function openBrowser(url: string) {
   const platform = process.platform;
-  const cmd = platform === "win32" ? "start" : platform === "darwin" ? "open" : "xdg-open";
+  const cmd = platform === 'win32' ? 'start' : platform === 'darwin' ? 'open' : 'xdg-open';
 
   try {
-    if (platform === "win32") {
-      execSync(`start "" "${url}"`, { shell: "cmd.exe" });
+    if (platform === 'win32') {
+      execSync(`start "" "${url}"`, { shell: 'cmd.exe' });
     } else {
       execSync(`${cmd} "${url}"`);
     }
@@ -310,7 +320,9 @@ function generateImagePickerHtml(entry: Entry, serverPort: number): string {
   };
   document.body.appendChild(closeBtn);
 })();
-  `.trim().replace(/\s+/g, ' ');
+  `
+    .trim()
+    .replace(/\s+/g, ' ');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -389,13 +401,17 @@ function generateImagePickerHtml(entry: Entry, serverPort: number): string {
           🏠 Entry on Dev Server
         </a>
       </li>
-      ${entry.urls.map(url => `
+      ${entry.urls
+        .map(
+          (url) => `
       <li>
         <a href="${url}" target="_blank">
           🌐 ${url.length > 60 ? url.substring(0, 60) + '...' : url}
         </a>
       </li>
-      `).join('')}
+      `
+        )
+        .join('')}
     </ul>
   </div>
 
@@ -455,7 +471,7 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
   const metadata = await image.metadata();
 
   // Skip SVGs and GIFs (animated)
-  if (metadata.format === "svg" || metadata.format === "gif") {
+  if (metadata.format === 'svg' || metadata.format === 'gif') {
     return inputBuffer;
   }
 
@@ -463,9 +479,7 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
   let processed = sharp(inputBuffer).png();
 
   // Get image data to analyze background color
-  const { data, info } = await processed
-    .raw()
-    .toBuffer({ resolveWithObject: true });
+  const { data, info } = await processed.raw().toBuffer({ resolveWithObject: true });
 
   // Sample corners to detect background color
   const getPixel = (x: number, y: number) => {
@@ -487,10 +501,8 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
   ];
 
   // Check if corners are similar (likely solid background)
-  const isWhitish = (p: { r: number; g: number; b: number }) =>
-    p.r > 240 && p.g > 240 && p.b > 240;
-  const isBlackish = (p: { r: number; g: number; b: number }) =>
-    p.r < 15 && p.g < 15 && p.b < 15;
+  const isWhitish = (p: { r: number; g: number; b: number }) => p.r > 240 && p.g > 240 && p.b > 240;
+  const isBlackish = (p: { r: number; g: number; b: number }) => p.r < 15 && p.g < 15 && p.b < 15;
 
   const whiteBg = corners.filter(isWhitish).length >= 3;
   const blackBg = corners.filter(isBlackish).length >= 3;
@@ -513,9 +525,7 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
 
       // Calculate color distance from background
       const dist = Math.sqrt(
-        Math.pow(r - bgColor.r, 2) +
-        Math.pow(g - bgColor.g, 2) +
-        Math.pow(b - bgColor.b, 2)
+        Math.pow(r - bgColor.r, 2) + Math.pow(g - bgColor.g, 2) + Math.pow(b - bgColor.b, 2)
       );
 
       // Create soft alpha based on distance
@@ -549,10 +559,13 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
 /**
  * Download an image from a URL
  */
-async function downloadImage(url: string, entry: Entry): Promise<{ success: boolean; filename?: string; error?: string }> {
+async function downloadImage(
+  url: string,
+  entry: Entry
+): Promise<{ success: boolean; filename?: string; error?: string }> {
   try {
     // Create images directory if it doesn't exist
-    const imagesDir = resolve(dirname(entry.filePath), "images");
+    const imagesDir = resolve(dirname(entry.filePath), 'images');
     if (!existsSync(imagesDir)) {
       mkdirSync(imagesDir, { recursive: true });
     }
@@ -563,9 +576,9 @@ async function downloadImage(url: string, entry: Entry): Promise<{ success: bool
       return { success: false, error: `HTTP ${response.status}` };
     }
 
-    const contentType = response.headers.get("content-type") || "";
-    const isSvg = contentType.includes("svg");
-    const isGif = contentType.includes("gif");
+    const contentType = response.headers.get('content-type') || '';
+    const isSvg = contentType.includes('svg');
+    const isGif = contentType.includes('gif');
 
     // Use entry ID as base filename
     const baseFilename = entry.id;
@@ -586,7 +599,7 @@ async function downloadImage(url: string, entry: Entry): Promise<{ success: bool
       filename = `${baseFilename}.gif`;
     } else {
       // Process raster images: remove background and crop
-      log("dim", `    Processing image (removing background, cropping)...`);
+      log('dim', `    Processing image (removing background, cropping)...`);
       finalBuffer = await processImage(buffer);
       filename = `${baseFilename}.png`; // Always output as PNG for transparency
     }
@@ -595,8 +608,8 @@ async function downloadImage(url: string, entry: Entry): Promise<{ success: bool
     let finalPath = resolve(imagesDir, filename);
     let counter = 1;
     while (existsSync(finalPath)) {
-      const ext = filename.split(".").pop();
-      const base = filename.replace(`.${ext}`, "");
+      const ext = filename.split('.').pop();
+      const base = filename.replace(`.${ext}`, '');
       filename = `${base}-${counter}.${ext}`;
       finalPath = resolve(imagesDir, filename);
       counter++;
@@ -618,7 +631,7 @@ async function downloadImage(url: string, entry: Entry): Promise<{ success: bool
  */
 function updateEntryImage(entry: Entry, filename: string) {
   try {
-    const content = readFileSync(entry.filePath, "utf-8");
+    const content = readFileSync(entry.filePath, 'utf-8');
     const data = parseYaml(content) as Record<string, unknown>;
 
     // Add to images array if it exists, otherwise set as primary image
@@ -635,9 +648,9 @@ function updateEntryImage(entry: Entry, filename: string) {
     }
 
     writeFileSync(entry.filePath, stringifyYaml(data, { lineWidth: 0 }));
-    log("green", `  ✓ Updated ${entry.id}.yaml with image: ${filename}`);
+    log('green', `  ✓ Updated ${entry.id}.yaml with image: ${filename}`);
   } catch (error) {
-    console.error("Error updating YAML:", error);
+    console.error('Error updating YAML:', error);
   }
 }
 
@@ -646,80 +659,84 @@ function updateEntryImage(entry: Entry, filename: string) {
  */
 function startServer(entry: Entry, port: number): Promise<ReturnType<typeof createServer>> {
   const downloadedImages: string[] = [];
-  const imagesDir = resolve(dirname(entry.filePath), "images");
+  const imagesDir = resolve(dirname(entry.filePath), 'images');
 
   return new Promise((resolvePromise) => {
     const server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
       // CORS headers
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-      if (req.method === "OPTIONS") {
+      if (req.method === 'OPTIONS') {
         res.writeHead(204);
         res.end();
         return;
       }
 
-      const url = req.url || "/";
+      const url = req.url || '/';
 
       // Serve the main page
-      if (url === "/" || url === "/index.html") {
-        res.writeHead(200, { "Content-Type": "text/html" });
+      if (url === '/' || url === '/index.html') {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(generateImagePickerHtml(entry, port));
         return;
       }
 
       // Serve downloaded images
-      if (url.startsWith("/images/")) {
+      if (url.startsWith('/images/')) {
         const filename = basename(url);
         const filePath = resolve(imagesDir, filename);
         if (existsSync(filePath)) {
-          const ext = filename.split(".").pop()?.toLowerCase();
-          const contentType = ext === "png" ? "image/png" :
-                             ext === "gif" ? "image/gif" :
-                             ext === "webp" ? "image/webp" :
-                             ext === "svg" ? "image/svg+xml" : "image/jpeg";
-          res.writeHead(200, { "Content-Type": contentType });
+          const ext = filename.split('.').pop()?.toLowerCase();
+          const contentType =
+            ext === 'png'
+              ? 'image/png'
+              : ext === 'gif'
+                ? 'image/gif'
+                : ext === 'webp'
+                  ? 'image/webp'
+                  : ext === 'svg'
+                    ? 'image/svg+xml'
+                    : 'image/jpeg';
+          res.writeHead(200, { 'Content-Type': contentType });
           res.end(readFileSync(filePath));
           return;
         }
         res.writeHead(404);
-        res.end("Not found");
+        res.end('Not found');
         return;
       }
 
       // List downloaded images
-      if (url === "/downloaded-images") {
+      if (url === '/downloaded-images') {
         let images: string[] = [];
         if (existsSync(imagesDir)) {
-          images = readdirSync(imagesDir).filter(f =>
-            /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f)
-          );
+          images = readdirSync(imagesDir).filter((f) => /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(f));
         }
-        res.writeHead(200, { "Content-Type": "application/json" });
+        res.writeHead(200, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ images }));
         return;
       }
 
       // Download image endpoint
-      if (url === "/download-image" && req.method === "POST") {
-        let body = "";
-        req.on("data", chunk => body += chunk);
-        req.on("end", async () => {
+      if (url === '/download-image' && req.method === 'POST') {
+        let body = '';
+        req.on('data', (chunk) => (body += chunk));
+        req.on('end', async () => {
           try {
             const { url: imageUrl } = JSON.parse(body);
-            log("cyan", `  📥 Downloading: ${imageUrl.substring(0, 60)}...`);
+            log('cyan', `  📥 Downloading: ${imageUrl.substring(0, 60)}...`);
             const result = await downloadImage(imageUrl, entry);
 
             if (result.success && result.filename) {
               downloadedImages.push(result.filename);
             }
 
-            res.writeHead(200, { "Content-Type": "application/json" });
+            res.writeHead(200, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify(result));
           } catch (error) {
-            res.writeHead(400, { "Content-Type": "application/json" });
+            res.writeHead(400, { 'Content-Type': 'application/json' });
             res.end(JSON.stringify({ success: false, error: String(error) }));
           }
         });
@@ -727,7 +744,7 @@ function startServer(entry: Entry, port: number): Promise<ReturnType<typeof crea
       }
 
       res.writeHead(404);
-      res.end("Not found");
+      res.end('Not found');
     });
 
     server.listen(port, () => {
@@ -746,28 +763,28 @@ async function promptAndCommit(entry: Entry): Promise<boolean> {
   });
 
   return new Promise((resolvePromise) => {
-    console.log("");
-    log("yellow", "═".repeat(60));
-    log("yellow", "  Ready to commit?");
-    log("yellow", "═".repeat(60));
-    console.log("");
-    console.log("  Type your commit message and press Enter to commit.");
+    console.log('');
+    log('yellow', '═'.repeat(60));
+    log('yellow', '  Ready to commit?');
+    log('yellow', '═'.repeat(60));
+    console.log('');
+    console.log('  Type your commit message and press Enter to commit.');
     console.log("  Or type 'skip' to skip this entry.");
-    console.log("  Or press Ctrl+C to exit completely.");
-    console.log("");
+    console.log('  Or press Ctrl+C to exit completely.');
+    console.log('');
 
-    rl.question("  Commit message: ", (message) => {
+    rl.question('  Commit message: ', (message) => {
       rl.close();
 
-      if (!message || message.toLowerCase() === "skip") {
-        log("yellow", "  Skipped.");
+      if (!message || message.toLowerCase() === 'skip') {
+        log('yellow', '  Skipped.');
         resolvePromise(false);
         return;
       }
 
       try {
         // Stage the entry file and any images
-        const imagesDir = resolve(dirname(entry.filePath), "images");
+        const imagesDir = resolve(dirname(entry.filePath), 'images');
         execSync(`git add "${entry.filePath}"`, { cwd: DATABASE_PATH });
         if (existsSync(imagesDir)) {
           execSync(`git add "${imagesDir}"`, { cwd: DATABASE_PATH });
@@ -776,13 +793,13 @@ async function promptAndCommit(entry: Entry): Promise<boolean> {
         // Commit
         execSync(`git commit -m "${message.replace(/"/g, '\\"')}"`, {
           cwd: DATABASE_PATH,
-          stdio: "inherit"
+          stdio: 'inherit',
         });
 
-        log("green", "  ✓ Committed successfully!");
+        log('green', '  ✓ Committed successfully!');
         resolvePromise(true);
       } catch (error) {
-        log("red", "  ✗ Commit failed:", error);
+        log('red', '  ✗ Commit failed:', error);
         resolvePromise(false);
       }
     });
@@ -794,17 +811,17 @@ async function promptAndCommit(entry: Entry): Promise<boolean> {
  */
 async function main() {
   console.clear();
-  log("bright", "");
-  log("bright", "  ╔════════════════════════════════════════════════════════╗");
-  log("bright", "  ║        📋 Database Entry Review Tool                   ║");
-  log("bright", "  ╚════════════════════════════════════════════════════════╝");
-  console.log("");
+  log('bright', '');
+  log('bright', '  ╔════════════════════════════════════════════════════════╗');
+  log('bright', '  ║        📋 Database Entry Review Tool                   ║');
+  log('bright', '  ╚════════════════════════════════════════════════════════╝');
+  console.log('');
 
   // Load entries and sort by age
-  log("cyan", "  Loading entries...");
+  log('cyan', '  Loading entries...');
   const entries = loadAllEntries();
-  log("green", `  ✓ Found ${entries.length} entries across ${CATEGORIES.length} categories`);
-  console.log("");
+  log('green', `  ✓ Found ${entries.length} entries across ${CATEGORIES.length} categories`);
+  console.log('');
 
   // Show oldest entries
   const sorted = [...entries].sort((a, b) => {
@@ -814,36 +831,36 @@ async function main() {
     return a.updated.getTime() - b.updated.getTime();
   });
 
-  log("yellow", "  📅 Oldest 10 entries:");
+  log('yellow', '  📅 Oldest 10 entries:');
   sorted.slice(0, 10).forEach((e, i) => {
-    const date = e.updated ? e.updated.toISOString().split("T")[0] : "Never";
+    const date = e.updated ? e.updated.toISOString().split('T')[0] : 'Never';
     console.log(`     ${i + 1}. [${date}] ${e.category}/${e.id}`);
   });
-  console.log("");
+  console.log('');
 
   // Pick random from oldest
   const entry = pickRandomOldest(entries);
-  log("magenta", `  🎲 Selected: ${entry.category}/${entry.id}`);
-  log("dim", `     Name: ${entry.name}`);
-  log("dim", `     URLs: ${entry.urls.length} found`);
-  console.log("");
+  log('magenta', `  🎲 Selected: ${entry.category}/${entry.id}`);
+  log('dim', `     Name: ${entry.name}`);
+  log('dim', `     URLs: ${entry.urls.length} found`);
+  console.log('');
 
   // Start local server
   const serverPort = 3456;
-  log("cyan", `  Starting image picker server on port ${serverPort}...`);
+  log('cyan', `  Starting image picker server on port ${serverPort}...`);
   const server = await startServer(entry, serverPort);
-  log("green", `  ✓ Server running at http://localhost:${serverPort}`);
-  console.log("");
+  log('green', `  ✓ Server running at http://localhost:${serverPort}`);
+  console.log('');
 
   // Open VS Code
-  log("cyan", "  Opening YAML file in VS Code...");
+  log('cyan', '  Opening YAML file in VS Code...');
   openInVSCode(entry.filePath);
 
   // Open browsers
-  log("cyan", "  Opening browser windows...");
+  log('cyan', '  Opening browser windows...');
 
   // Small delay between browser opens to avoid issues
-  const delay = (ms: number) => new Promise(r => setTimeout(r, ms));
+  const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
   // Open local review page first
   openBrowser(`http://localhost:${serverPort}`);
@@ -859,13 +876,13 @@ async function main() {
     await delay(300);
   }
 
-  log("green", `  ✓ Opened ${entry.urls.length + 2} browser tabs`);
-  console.log("");
+  log('green', `  ✓ Opened ${entry.urls.length + 2} browser tabs`);
+  console.log('');
 
-  log("bright", "  ════════════════════════════════════════════════════════");
-  log("bright", "  Review the entry and add images using the image picker.");
-  log("bright", "  When done, return here to commit your changes.");
-  log("bright", "  ════════════════════════════════════════════════════════");
+  log('bright', '  ════════════════════════════════════════════════════════');
+  log('bright', '  Review the entry and add images using the image picker.');
+  log('bright', '  When done, return here to commit your changes.');
+  log('bright', '  ════════════════════════════════════════════════════════');
 
   // Wait for commit
   const committed = await promptAndCommit(entry);
@@ -874,24 +891,24 @@ async function main() {
   server.close();
 
   if (committed) {
-    console.log("");
-    log("cyan", "  Restarting for next entry...");
-    console.log("");
+    console.log('');
+    log('cyan', '  Restarting for next entry...');
+    console.log('');
 
     // Restart this script
     const child = spawn(process.argv[0], [process.argv[1]], {
-      stdio: "inherit",
+      stdio: 'inherit',
       detached: false,
     });
 
-    child.on("error", (err) => {
-      log("red", "  Failed to restart:", err);
+    child.on('error', (err) => {
+      log('red', '  Failed to restart:', err);
       process.exit(1);
     });
   } else {
-    console.log("");
-    log("yellow", "  Done! Run 'bun run review' to continue later.");
-    console.log("");
+    console.log('');
+    log('yellow', "  Done! Run 'bun run review' to continue later.");
+    console.log('');
   }
 }
 

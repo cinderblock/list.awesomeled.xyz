@@ -1,26 +1,26 @@
 name: Ebyte NRF 52840
-manufacturer: Ebyte
-soc: NRF 52840
-cpu: ARM Cortex-M4
-isa: ARMv7-M
+creator: Ebyte
+notes: null
+bluetooth: BLE
+bms: null
 clock_speed: null
+cpu: ARM Cortex-M4
+ethernet: null
 flash: null
-ram: null
+gpio_voltage: null
+imu: null
+isa: ARMv7-M
 linux: null
+max_input_voltage: null
 max_outputs: null
 min_input_voltage: null
-max_input_voltage: null
-gpio_voltage: null
-usb: null
-ttl_serial: null
-wifi: null
 poe: null
-ethernet: null
-bluetooth: BLE
-storage: null
-bms: null
-imu: null
 price: 10
+ram: null
 release_year: 2021
+soc: NRF 52840
+storage: null
+ttl_serial: null
 url: https://www.ebyte.com/en/new-view-info.aspx?id=378
-notes: null
+usb: null
+wifi: null

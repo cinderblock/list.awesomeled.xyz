@@ -1,24 +1,24 @@
 name: PixLite T8-S Mk3
-manufacturer: Advatek
-max_pixels: 16320
-price: 1200
-max_outputs: 32
-interfaces:
-  - WiFi
-storage: SD
-standalone: true
-pixel_types: both
-max_voltage: 24V
-max_current: null
-buffered: true
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-waterproof: null
-auxiliary_outputs: DMX In/Out
-wled_compatible: null
+status: active
+creator: Advatek
 notes: 2 types of receivers available, dithering and gamma on 8-bit/color
   pixels, "hundreds of FPS"
-warranty: null
+auxiliary_outputs: DMX In/Out
+buffered: true
+interfaces:
+  - Wi-Fi
+max_current: null
+max_outputs: 32
+max_pixels: 16320
+max_voltage: 24V
+output_connectors: Phoenix Screw
+outputs: Single or Clock
+pixel_types: both
+price: 1200
 release_year: 2022
-status: active
+standalone: true
+storage: SD
 url: https://www.advateklights.com/pixlite-t8-s-mk3
+warranty: null
+waterproof: null
+wled_compatible: null

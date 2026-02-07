@@ -1,27 +1,27 @@
 name: ELM
-developer: ENTTEC
-price: 94
+status: unknown
+creator: ENTTEC
+notes: Triggering via RS232/GPIO/UDP available thru S-Play controller
+audio_input: Input
+demo_available: Nag for free one
+designer: true
+gpio: null
+integrations: Triggering via HTTP/OSC/Art-net/sACN/DMX
+language: null
+live: true
+other_inputs: OSC, Spout, NDI
+other_outputs: NDI, DVI
 platforms:
   - Windows
-live: true
-designer: true
-visualizer: 3D
+price: 94
+programmatic: null
 protocols:
   artnet: Both
   sacn: Both
   dmx: Both
   kinet: Output
   ddp: null
-gpio: null
 serial: null
-video_input: Input
-audio_input: Input
-programmatic: null
-language: null
-other_inputs: OSC, Spout, NDI
-other_outputs: NDI, DVI
-integrations: Triggering via HTTP/OSC/Art-net/sACN/DMX
-notes: Triggering via RS232/GPIO/UDP available thru S-Play controller
-demo_available: Nag for free one
-status: unknown
 url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/pixel-mapping-software/
+video_input: Input
+visualizer: 3D

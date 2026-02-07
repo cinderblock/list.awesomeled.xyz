@@ -1,10 +1,10 @@
 name: SN74AHCT125N
-manufacturer: Texas Instruments
+creator: Texas Instruments
+notes: null
+buffered: null
 channels: 4
 interface: Through-Hole DIP
-notes: null
-price: 0.75
-max_voltage: null
 max_current: null
-buffered: null
+max_voltage: null
+price: 0.75
 url: https://www.ti.com/product/SN74AHCT125

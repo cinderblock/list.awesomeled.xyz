@@ -1,22 +1,22 @@
 name: K2-Pi0
-manufacturer: KulpLights, LLC
-max_pixels: 1200
-price: 29
-max_outputs: 2
+status: unknown
+creator: KulpLights, LLC
+notes: Requires Raspberry Pi
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - Ethernet
-storage: Yes
-standalone: true
-max_voltage: 12V
 max_current: 6A
-buffered: null
+max_outputs: 2
+max_pixels: 1200
+max_voltage: 12V
 output_connectors: Phoenix
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Requires Raspberry Pi
-warranty: null
+price: 29
 release_year: null
-status: unknown
+standalone: true
+storage: Yes
 url: null
+warranty: null
+waterproof: null
+wled_compatible: null

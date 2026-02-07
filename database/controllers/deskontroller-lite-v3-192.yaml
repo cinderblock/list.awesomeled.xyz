@@ -1,23 +1,23 @@
 name: deskontroller LITE V3 192
-manufacturer: deskontrol electronics SL
-max_pixels: 32640
-price: 1490
-max_outputs: 32
-interfaces:
-  - WiFi
-storage: null
-standalone: false
-pixel_types: both
-max_voltage: null
-max_current: null
+status: active
+creator: deskontrol electronics SL
+notes: null
+auxiliary_outputs: null
 buffered: null
+interfaces:
+  - Wi-Fi
+max_current: null
+max_outputs: 32
+max_pixels: 32640
+max_voltage: null
 output_connectors: RJ45
 outputs: Single and Clock
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: both
+price: 1490
 release_year: 2023
-status: active
+standalone: false
+storage: null
 url: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
+warranty: null
+waterproof: null
+wled_compatible: null

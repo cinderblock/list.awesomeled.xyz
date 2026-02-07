@@ -1,13 +1,13 @@
 name: SPIxels Board
-manufacturer: null
+creator: null
+notes: null
+diy_or_ots: DIY
 max_channels: 16
-pixel_types: Clocked
-max_voltage: 5V
 max_current: null
-parent: Raspberry Pi
-price: null
+max_voltage: 5V
 output_connectors: JST
 outputs: Clocked
-diy_or_ots: DIY
-notes: null
+parent: Raspberry Pi
+pixel_types: Clocked
+price: null
 url: http://spixels.org/

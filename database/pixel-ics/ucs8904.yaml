@@ -1,26 +1,26 @@
 name: UCS8904
-manufacturer: Normand Electronics
-pwm_frequency: 1.0kHz
-channels: 4
-channel_bits: 16
+creator: Normand Electronics
+notes: null
 aggregate_bits: null
+backup_data_line: null
+channel_bits: 16
+channels: 4
 clocked: false
 data_bitrate: 800kHz
-pixel_data_size: 64 Bits/Pixel
-pixel_rate_max: 12.5 k Pixel / s
-output_voltage: 24V
-supply_voltage: null
-gpio_min: null
+data_type: null
+datasheet_url: null
 gpio_max: null
+gpio_min: null
 max_current: null
-quiescent_current: null
+max_pixels_per_string: null
+other_links: UCS8904 Pixel Protocol Overview | Advatek Lighting
+output_voltage: 24V
 package_size: SOP8
 pin_count: 8
-data_type: null
-backup_data_line: null
-max_pixels_per_string: null
+pixel_data_size: 64 Bits/Pixel
+pixel_rate_max: 12.5 k Pixel / s
+pwm_frequency: 1.0kHz
+quiescent_current: null
 release_year: null
-notes: null
+supply_voltage: null
 third_party_testing: null
-datasheet_url: null
-other_links: UCS8904 Pixel Protocol Overview | Advatek Lighting

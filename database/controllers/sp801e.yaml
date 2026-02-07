@@ -1,23 +1,23 @@
 name: SP801e
-manufacturer: Sperll
-max_pixels: 4800
-price: 30
-max_outputs: 8
+status: active
+creator: Sperll
+notes: 8 Outputs 600 Px per Out, 4 dry Trigger Inputs, built-in Mic for Audio
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - Ethernet
-storage: null
-standalone: true
-pixel_types: async
-max_voltage: 24V
 max_current: null
-buffered: null
+max_outputs: 8
+max_pixels: 4800
+max_voltage: 24V
 output_connectors: Screw
 outputs: Single
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: 8 Outputs 600 Px per Out, 4 dry Trigger Inputs, Built in Mic for Audio
-warranty: null
+pixel_types: async
+price: 30
 release_year: 2020
-status: active
+standalone: true
+storage: null
 url: https://www.superlightingled.com/sp608e-8-output-spi-channel-led-music-controller-work-with-bluetooth-app-rf-remote-4-adjustable-triggers-for-addressable-led-strips-p-3768.html
+warranty: null
+waterproof: null
+wled_compatible: null

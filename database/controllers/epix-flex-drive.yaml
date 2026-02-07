@@ -1,25 +1,25 @@
 name: Epix Flex Drive
-manufacturer: Chauvet Pro
-max_pixels: 1920
-price: 600
-max_outputs: 2
+status: unknown
+creator: Chauvet Pro
+notes: null
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - USB
   - Ethernet
-  - WiFi
-storage: null
-standalone: null
-pixel_types: async
-max_voltage: null
+  - Wi-Fi
 max_current: null
-buffered: true
+max_outputs: 2
+max_pixels: 1920
+max_voltage: null
 output_connectors: 3 pin IP65
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: async
+price: 600
 release_year: null
-status: unknown
+standalone: null
+storage: null
 url: https://www.chauvetprofessional.com/products/epix-flex-drive/
+warranty: null
+waterproof: null
+wled_compatible: null

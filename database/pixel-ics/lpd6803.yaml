@@ -1,26 +1,26 @@
 name: LPD6803
-manufacturer: Greeled Electronic
-pwm_frequency: 1.0kHz
-channels: 3
-channel_bits: 5
+creator: Greeled Electronic
+notes: obsolete; superseded by LPD8806
 aggregate_bits: 5
+backup_data_line: false
+channel_bits: 5
+channels: 3
 clocked: true
 data_bitrate: 15MHz
-pixel_data_size: 16 Bits/Pixel
-pixel_rate_max: 0.94 M Pixel / s
-output_voltage: 12V
-supply_voltage: 5V
-gpio_min: null
+data_type: LPD6803
+datasheet_url: https://cdn-shop.adafruit.com/datasheets/LPD6803.pdf
 gpio_max: 5V
+gpio_min: null
 max_current: 45mA
-quiescent_current: null
+max_pixels_per_string: null
+other_links: LPD6803 Pixel Protocol Overview | Advatek Lighting
+output_voltage: 12V
 package_size: SOP16/QFN16
 pin_count: 16
-data_type: LPD6803
-backup_data_line: false
-max_pixels_per_string: null
+pixel_data_size: 16 Bits/Pixel
+pixel_rate_max: 0.94 M Pixel / s
+pwm_frequency: 1.0kHz
+quiescent_current: null
 release_year: null
-notes: obsolete; superseded by LPD8806
+supply_voltage: 5V
 third_party_testing: null
-datasheet_url: https://cdn-shop.adafruit.com/datasheets/LPD6803.pdf
-other_links: LPD6803 Pixel Protocol Overview | Advatek Lighting

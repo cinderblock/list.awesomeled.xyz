@@ -1,23 +1,23 @@
 name: E6804
-manufacturer: SanDevices
-max_pixels: 2040
-price: 100
-max_outputs: 4
+status: unknown
+creator: SanDevices
+notes: null
+auxiliary_outputs: DMX x4
+buffered: false
 interfaces:
   - Ethernet
-storage: null
-standalone: false
-pixel_types: both
-max_voltage: 12V
 max_current: 25A
-buffered: false
+max_outputs: 4
+max_pixels: 2040
+max_voltage: 12V
 output_connectors: Phoenix Screw
 outputs: Single or Clock
-waterproof: null
-auxiliary_outputs: DMX x4
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: both
+price: 100
 release_year: null
-status: unknown
+standalone: false
+storage: null
 url: http://sandevices.com/product/e6804-assembled-tested/
+warranty: null
+waterproof: null
+wled_compatible: null

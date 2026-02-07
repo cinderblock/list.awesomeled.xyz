@@ -1,26 +1,26 @@
 name: NRF 52840 Feather
-manufacturer: Adafruit
-soc: NRF 52840
-cpu: ARM Cortex-M4
-isa: ARMv7-M
+creator: Adafruit
+notes: null
+bluetooth: BLE
+bms: 1S
 clock_speed: 64MHz
+cpu: ARM Cortex-M4
+ethernet: null
 flash: 1MB
-ram: 256kB
+gpio_voltage: null
+imu: Wing
+isa: ARMv7-M
 linux: null
+max_input_voltage: null
 max_outputs: 21
 min_input_voltage: null
-max_input_voltage: null
-gpio_voltage: null
-usb: Power + UART
-ttl_serial: null
-wifi: null
 poe: null
-ethernet: null
-bluetooth: BLE
-storage: null
-bms: 1S
-imu: Wing
 price: 25
+ram: 256kB
 release_year: 2021
+soc: NRF 52840
+storage: null
+ttl_serial: null
 url: https://www.adafruit.com/product/4062
-notes: null
+usb: Power + UART
+wifi: null

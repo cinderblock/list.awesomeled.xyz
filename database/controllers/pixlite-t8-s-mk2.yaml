@@ -1,21 +1,21 @@
 name: PixLite T8-S Mk2
-manufacturer: Advatek
-max_pixels: null
-price: null
-max_outputs: 32
-storage: null
-standalone: false
-pixel_types: both
-max_voltage: 24V
-max_current: 30A
+status: discontinued
+creator: Advatek
+notes: 2 types of receivers available
+auxiliary_outputs: null
 buffered: true
+max_current: 30A
+max_outputs: 32
+max_pixels: null
+max_voltage: 24V
 output_connectors: Phoenix Screw
 outputs: Single or Clock
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: 2 types of receivers available
-warranty: null
+pixel_types: both
+price: null
 release_year: null
-status: discontinued
+standalone: false
+storage: null
 url: https://www.advateklights.com/pixlite-t8-s-mk2
+warranty: null
+waterproof: null
+wled_compatible: null

@@ -1,26 +1,26 @@
 name: DIN Pixie
-manufacturer: ENTTEC
-max_pixels: 340
-max_pixels_rgbw: 256
-max_pixels_16bit: 170
-price: 100
-max_outputs: 2
+status: active
+creator: ENTTEC
+notes: Back powered from pixel strip - connect thru USB to record a show onto
+  the device using live Art-net
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - Ethernet
   - Art-Net
-storage: Yes
-standalone: true
-pixel_types: async
-max_voltage: 48V
 max_current: 10A
-buffered: true
+max_outputs: 2
+max_pixels: 340
+max_pixels_16bit: 170
+max_pixels_rgbw: 256
+max_voltage: 48V
 output_connectors: Phoenix Screw
 outputs: Single
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Back powered from pixel strip - connect thru USB to record a show onto
-  the device using live Art-net
+pixel_types: async
+price: 100
+release_year: null
+standalone: true
+storage: Yes
 technical_notes:
   - "RGB (8-bit): 340 pixels max"
   - "RGBW (8-bit): 256 pixels max"
@@ -29,7 +29,7 @@ technical_notes:
   - Storage is not removable
   - Can be powered from pixel strip (back-powered)
   - Record shows via USB using live Art-Net
-warranty: null
-release_year: null
-status: active
 url: https://www.enttec.com.au/product/lighting-show-controller/din-pixie-2-universe-dmx-to-led-pixel-converter-controller/
+warranty: null
+waterproof: null
+wled_compatible: null

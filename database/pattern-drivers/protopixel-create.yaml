@@ -1,27 +1,27 @@
 name: ProtoPixel Create
-developer: ProtoPixel
-price: 176
+status: unknown
+creator: ProtoPixel
+notes: null
+audio_input: Both
+demo_available: Trial + watermark
+designer: true
+gpio: null
+integrations: Python (scriptable)
+language: null
+live: true
+other_inputs: OSC, NDI, Syphon, UDP
+other_outputs: ProtoPixel proprietary protocol, OSC, UDP
 platforms:
   - macOS
-live: true
-designer: true
-visualizer: 2D
+price: 176
+programmatic: Input
 protocols:
   artnet: Both
   sacn: null
   dmx: null
   kinet: null
   ddp: null
-gpio: null
 serial: null
-video_input: Input
-audio_input: Both
-programmatic: Input
-language: null
-other_inputs: OSC, NDI, Syphon, UDP
-other_outputs: ProtoPixel proprietary protocol, OSC, UDP
-integrations: Python (scriptable)
-notes: null
-demo_available: Trial + watermark
-status: unknown
 url: https://www.protopixel.io/design
+video_input: Input
+visualizer: 2D

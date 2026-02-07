@@ -3,8 +3,28 @@
   "files.trimTrailingWhitespace": true,
 
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "always"
+    "source.organizeImports": "always",
+    "source.fixAll.eslint": "always",
+    "source.fixAll.prettier": "always"
   },
 
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Enable ESLint for YAML files
+  "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact", "yaml"],
+
+  "yaml.schemas": {
+    "./database/_schema/adapter.json": "database/adapters/*.yaml",
+    "./database/_schema/commercial-system.json": "database/commercial-systems/*.yaml",
+    "./database/_schema/connector.json": "database/connectors/*.yaml",
+    "./database/_schema/controller.json": "database/controllers/*.yaml",
+    "./database/_schema/diffusive-material.json": "database/diffusive-materials/*.yaml",
+    "./database/_schema/drive-library.json": "database/drive-libraries/*.yaml",
+    "./database/_schema/level-converter.json": "database/level-converters/*.yaml",
+    "./database/_schema/microboard.json": "database/microboards/*.yaml",
+    "./database/_schema/pattern-driver.json": "database/pattern-drivers/*.yaml",
+    "./database/_schema/pixel-decoder.json": "database/pixel-decoders/*.yaml",
+    "./database/_schema/pixel-ic.json": "database/pixel-ics/*.yaml",
+    "./database/_schema/pixel.json": "database/pixels/*.yaml"
+  }
 }

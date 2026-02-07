@@ -1,24 +1,24 @@
 name: T1000S
-manufacturer: null
-max_pixels: 2048
-price: 28
-max_outputs: 1
+status: unknown
+creator: null
+notes: null
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - DMX
   - USB
-storage: SD
-standalone: true
-pixel_types: both
-max_voltage: 24V
 max_current: null
-buffered: null
+max_outputs: 1
+max_pixels: 2048
+max_voltage: 24V
 output_connectors: Phoenix Screw
 outputs: Single and Clock
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: both
+price: 28
 release_year: null
-status: unknown
+standalone: true
+storage: SD
 url: Amazon
+warranty: null
+waterproof: null
+wled_compatible: null

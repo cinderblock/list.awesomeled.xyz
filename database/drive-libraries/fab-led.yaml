@@ -1,9 +1,9 @@
 name: FAB_LED
-developer: Sonyhome
-hardware: Arduino
+creator: Sonyhome
 features: Ws2812/Apa102/neopixel/dotstar etc. Compact code&data, Separates
   driver from pixel array, no assembly code, support palette and up to 8 strips
   in parallel.
+hardware: Arduino
+instructional_resources: []
 url: https://github.com/sonyhome/FAB_LED
 youtube_url: null
-instructional_resources: []

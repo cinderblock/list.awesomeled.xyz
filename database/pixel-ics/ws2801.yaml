@@ -1,26 +1,26 @@
 name: WS2801
-manufacturer: WorldSemi
-pwm_frequency: 2.5kHz
-channels: 3
-channel_bits: 8
+creator: WorldSemi
+notes: Early Addressable LED controller still common on 4 wire pixel and puck strings
 aggregate_bits: null
+backup_data_line: false
+channel_bits: 8
+channels: 3
 clocked: true
 data_bitrate: 25MHz
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 1.04 M Pixel / s
-output_voltage: 7V
-supply_voltage: 5V
-gpio_min: 4.0V
+data_type: WS2801
+datasheet_url: https://www.futurlec.com/Others/WS2801.shtml
 gpio_max: 5V
+gpio_min: 4.0V
 max_current: 50mA
-quiescent_current: 1.5mA
+max_pixels_per_string: 1024
+other_links: WS2801 Pixel Protocol Overview | Advatek Lighting
+output_voltage: 7V
 package_size: SO14/DIP14
 pin_count: 14
-data_type: WS2801
-backup_data_line: false
-max_pixels_per_string: 1024
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 1.04 M Pixel / s
+pwm_frequency: 2.5kHz
+quiescent_current: 1.5mA
 release_year: 2010
-notes: Early Addressable LED controller still common on 4 wire pixel and puck strings
+supply_voltage: 5V
 third_party_testing: null
-datasheet_url: https://www.futurlec.com/Others/WS2801.shtml
-other_links: WS2801 Pixel Protocol Overview | Advatek Lighting

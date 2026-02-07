@@ -1,28 +1,28 @@
 name: Chromatik
-developer: Mark C Slee
-price: Free - 399
-platforms:
-  - Windows MacOS
-live: true
+status: active
+creator: Mark C Slee
+notes: VJ like live control, extensive support for 3D animation matrices
+  Successor to LX Studio
+audio_input: Input
+demo_available: <1000 LEDs free, various paid options
 designer: true
-visualizer: 3D
+gpio: null
+integrations: null
+language: null
+live: true
+other_inputs: MIDI , OSC, DMX
+other_outputs: null
+platforms:
+  - Windows macOS
+price: Free - $399
+programmatic: true
 protocols:
   artnet: Output
   sacn: Output
   dmx: Possible
   kinet: Output
   ddp: Output
-gpio: null
 serial: null
-video_input: null
-audio_input: Input
-programmatic: Possible
-language: null
-other_inputs: MIDI , OSC, DMX
-other_outputs: null
-integrations: null
-notes: VJ like live control, extensive support for 3D animation matrices
-  Succesor to LX Studio
-demo_available: <1000 LEDs free, various paid options
-status: unknown
 url: null
+video_input: null
+visualizer: 3D

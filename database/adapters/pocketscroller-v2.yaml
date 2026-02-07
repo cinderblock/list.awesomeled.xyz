@@ -1,13 +1,13 @@
 name: PocketScroller V2
-manufacturer: Kulp Lights
+creator: Kulp Lights
+notes: null
+diy_or_ots: DIY
 max_channels: 6
-pixel_types: Panel
-max_voltage: 5V
 max_current: null
-parent: PocketBeagle
-price: 51
+max_voltage: 5V
 output_connectors: HUB75
 outputs: null
-diy_or_ots: DIY
-notes: null
+parent: PocketBeagle
+pixel_types: Panel
+price: 51
 url: https://kulplights.com/product/pocketscroller/

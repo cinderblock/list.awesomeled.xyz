@@ -1,5 +1,21 @@
 name: MADRIX 5
-developer: Inoage
+status: active
+creator: Inoage
+notes: GPIO available with Madrix Orion external box
+adc_input: false
+audio_input: true
+demo_available: true
+demo_limitations: Demo mode - no data output
+designer: true
+gpio: false
+integrations: null
+language: null
+license_type: perpetual
+live: true
+other_inputs: MIDI, HTTP, MA-net, CITP, SMPTE, Spout, GamePort
+other_outputs: DVI, Robe, Insta, Hue
+platforms:
+  - Windows
 price: 330+
 price_tiers:
   - tier: Entry
@@ -18,35 +34,19 @@ price_tiers:
     price: 3300
     features: All features, maximum universes
     limitations: null
-license_type: perpetual
-platforms:
-  - Windows
-live: true
-designer: true
-visualizer: 3D
+programmatic: null
 protocols:
   artnet: true
   sacn: true
   dmx: true
   kinet: true
   ddp: null
-gpio: false
 serial: null
-video_input: true
-audio_input: true
-adc_input: false
-programmatic: null
-language: null
-other_inputs: MIDI, HTTP, MA-net, CITP, SMPTE, Spout, GamePort
-other_outputs: DVI, Robe, Insta, Hue
-integrations: null
-notes: GPIO available with Madrix Orion external box
 technical_notes:
   - Industry standard for professional LED installations
   - GPIO requires separate Madrix Orion hardware
   - Extensive fixture library
   - MADRIX Nebula hardware can be used for standalone playback
-demo_available: true
-demo_limitations: Demo mode - no data output
-status: active
 url: https://www.madrix.com/products/software
+video_input: true
+visualizer: 3D

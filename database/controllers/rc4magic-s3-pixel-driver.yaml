@@ -1,23 +1,23 @@
 name: RC4Magic S3 Pixel Driver
-manufacturer: Theatre Wireless
-max_pixels: 1000
-price: 399
-max_outputs: 2
+status: active
+creator: Theatre Wireless
+notes: DMX pattern replay and keyframing onboard RC4 Wireless
+auxiliary_outputs: DMX Thru
+buffered: true
 interfaces:
   - TTL Serial
-storage: Yes
-standalone: true
-pixel_types: both
-max_voltage: 35V
 max_current: null
-buffered: true
+max_outputs: 2
+max_pixels: 1000
+max_voltage: 35V
 output_connectors: Phoenix Plug
 outputs: Single and Clock
-waterproof: null
-auxiliary_outputs: DMX Thru
-wled_compatible: null
-notes: DMX pattern replay and keyframing onboard RC4 Wireless
-warranty: null
+pixel_types: both
+price: 399
 release_year: null
-status: active
+standalone: true
+storage: Yes
 url: https://theatrewireless.com/shop/rc4magic-s3/dmxpix/
+warranty: null
+waterproof: null
+wled_compatible: null

@@ -1,7 +1,7 @@
 name: OctoWS2811
-developer: PJRC
-hardware: Teensy
+creator: PJRC
 features: null
+hardware: Teensy
+instructional_resources: []
 url: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
 youtube_url: null
-instructional_resources: []

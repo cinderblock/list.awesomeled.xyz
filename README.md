@@ -17,52 +17,120 @@ A comprehensive database of addressable LEDs, controllers, and related products 
 - **Diffusive Materials** - Materials the community has tested as light diffusers
 - **Commercial Systems** - Complete systems usually only compatible with a closed ecosystem; often based on common technologies but "cleaned up", "easy to use", or provided as a service
 
-## Requirements
+## Contributing
 
-| Tool | Version |
-| ---- | ------- |
-| Bun  | 1.x     |
+We hope you find these lists useful.
+If there is something that should be added, please do so!
 
-## Getting Started
+All product data is stored in YAML files in the `database/` directory.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or updating entries.
+
+### Formatting Guidelines
+
+Commas are list separators.
+Periods are decimal separators.
+Use the Oxford comma.
+
+## Local Development Server
+
+### Requirements
+
+One of the following tools is required to run the development server and build the project:
+
+| Tool    | Version       | Note      |
+| ------- | ------------- | --------- |
+| Bun     | 1.x           | Preferred |
+| Node.js | 18.x or later | with Npm  |
+
+### Getting Started
 
 Install dependencies:
 
 ```bash
 bun install
+# or
+npm install
 ```
 
 Start the development server:
 
 ```bash
 bun dev
+# or
+npm run dev
 ```
 
-The app will be available at `http://localhost:5173`.
+The app will print the local URL to the console, usually `http://localhost:5173`.
 
-## Contributing
+### Review Tool
 
-We hope you find these lists useful. If there is something that should be added, please do so!
+We've created a custom tool to help review and update database entries.
 
-All product data is stored in YAML files in the `database/` directory. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or updating entries.
+To start the review tool, run:
 
-### Formatting Guidelines
+```bash
+bun review
+```
 
-- Commas are list separators. Periods are decimal separators. Use the Oxford comma.
-- Numeric columns should only contain numbers (units are appended for display).
-- Remove all formatting when adding information.
+This tool will pick a random old entry from the database and display its details.
+It also has a little tool to help download product images.
+
+### Linting, Formatting, and Spell Checking
+
+We use code to enforce consistent formatting as much as possible.
+
+- [Prettier](https://prettier.io/) is used for code formatting.
+- [ESLint](https://eslint.org/) is used for code linting. Plugins:
+  - [eslint-plugin-yml](https://ota-meshi.github.io/eslint-plugin-yml/) enables linting for YAML files.
+    We enforce consistent key ordering in YAML files and other best practices.
+  - Custom rules, many derived from textlint rules, enforce consistent terminology in comments and documentation.
+- [textlint](https://textlint.org/) is used for checking for dead links.
+  We kept this check separate from ESLint for performance reasons.
+- [cSpell](https://github.com/streetsidesoftware/cspell) is used for spell checking.
+
+We recommend using an editor with built-in support for these tools, such as VSCode with the relevant extensions.
+VSCode should automatically prompt you to install the recommended extensions when you open the project.
+We enable format-on-save and auto-fixing on save to make it easier to keep files properly formatted.
+
+To manually run linting and formatting checks, use:
+
+```bash
+bun lint         # Show problems
+bun lint:fix     # Fix problems where possible
+bun lint:links   # Check for dead links. Takes 5+ minutes.
+bun format       # Format files with Prettier
+bun format:check # Check formatting
+bun spell        # Spell check
+```
+
+If you find these rules too strict or have suggestions, please open an issue or a pull request.
+
+### Tests
+
+Run the test suite with:
+
+```bash
+bun test
+```
 
 ## History
 
 This project started as a [Google Sheets document](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA) to organize information about LED controllers, pixels, and related products.
 As the frequency of complete changes decreased, the number of accidental, sloppy, or duplicate edits increased.
-To improve data integrity and allow for community contributions, the data was migrated to a GitHub repository with structured YAML files and a purpose built web interface.
+To improve data integrity and allow for community contributions, the data was copied to this GitHub repository with structured YAML files and a purpose built web interface with a lot of help from Claude.
 
 ## Tech Stack
 
 - [React Router](https://reactrouter.com/) - Full-stack React framework
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
-- [Tailwind CSS](https://tailwindcss.com/) - Styling
 - [Radix UI](https://www.radix-ui.com/) - Accessible UI components
+
+## Deployments
+
+CloudFlare Pages is used for hosting and continuous deployment.
+
+All branches are deployed automatically, to their own subdomains.
+See CloudFlare Pages' [documentation](https://developers.cloudflare.com/pages/configuration/preview-deployments/) for more information about preview deployments.
 
 ## License
 

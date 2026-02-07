@@ -3,17 +3,18 @@
   "$id": "https://awesomeledlist.com/schema/drive-library.json",
   "title": "Drive Library",
   "type": "object",
-  "required": ["id", "name"],
+  "required": ["name"],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9-]+$"
-    },
     "name": {
       "type": "string"
     },
+    "creator": {
+      "type": ["string", "null"],
+      "description": "Original designer/developer of this item (preferred over developer)"
+    },
     "developer": {
-      "type": ["string", "null"]
+      "type": ["string", "null"],
+      "description": "Alias for creator (deprecated, use creator instead)"
     },
     "hardware": {
       "type": ["string", "null"],

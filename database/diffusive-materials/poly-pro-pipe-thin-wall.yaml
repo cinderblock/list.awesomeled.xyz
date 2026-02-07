@@ -1,15 +1,15 @@
 name: Poly Pro Pipe Thin Wall
-url: https://www.omega.co.uk/pptst/TYPP.html
+notes: Semi Transparent in natural , also in tints, available from Hula Hoop suppliers
 color_rendition: 3
-light_transmission: 4
-flexible: F
-purpose_made: false
-properties: Diffusive
-fire_retardant: null
-tinted: null
-sample_thickness: 3.2
 diffusivity: 2
-sizes_available: null
+fire_retardant: null
+flexible: F
+light_transmission: 4
 material_type: PP Poly Propylene
 price_range: $$
-notes: Semi Transparent in natural , also in tints, available from Hula Hoop suppliers
+properties: Diffusive
+purpose_made: false
+sample_thickness: 3.2
+sizes_available: null
+tinted: null
+url: https://www.omega.co.uk/pptst/TYPP.html

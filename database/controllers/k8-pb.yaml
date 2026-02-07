@@ -1,35 +1,35 @@
 name: K8-PB
-manufacturer: KulpLights, LLC
-max_pixels: 57600
-price: 98
-max_outputs: 36
-interfaces:
-  - Ethernet
-storage: Yes
-standalone: true
-pixel_types: async
-max_voltage: 12V
-max_current: 30A
-buffered: true
-output_connectors: Phoenix Screw/RJ45
-outputs: Single
-waterproof: null
-auxiliary_outputs: DMX
-wled_compatible: null
-differential_outputs: 12
+status: active
+creator: KulpLights, LLC
 notes: 12 channels require differential receivers. eFuses, Current Sensing,
   Pixel Counting
+auxiliary_outputs: DMX
+buffered: true
+differential_outputs: 12
+interfaces:
+  - Ethernet
+max_current: 30A
+max_outputs: 36
+max_pixels: 57600
+max_voltage: 12V
+output_connectors: Phoenix Screw/RJ45
+outputs: Single
+pixel_types: async
 power_features:
   - eFuse protection
   - Current sensing
   - Pixel counting
+price: 98
+release_year: null
+standalone: true
+storage: Yes
 technical_notes:
   - 12 of 36 channels require differential receivers to drive LEDs
   - Runs FPP (Falcon Player)
   - eFuse protected power distribution
   - Built-in current sensing for fault detection
   - Pixel counting feature for setup verification
-warranty: null
-release_year: null
-status: active
 url: https://kulplights.com/product/k8-pb/
+warranty: null
+waterproof: null
+wled_compatible: null

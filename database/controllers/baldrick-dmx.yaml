@@ -1,11 +1,14 @@
 name: Baldrick DMX
-manufacturer: ILIGHTTHAT
-price: 75
+status: active
+creator: ILIGHTTHAT
 notes: 3 and 5 pin and RJ45 DMX outputs on board
-max_outputs: 1
+auxiliary_outputs: DMX
+image: baldrick-dmx.png
+interfaces:
+  - DDP
+  - Artnet
+  - E1.31
 links:
   - https://baldrickboard.com/docs/category/baldrickdmx
-interfaces:
-  - DMX512
-status: active
-image: baldrick-dmx.png
+max_outputs: 0
+price: 75

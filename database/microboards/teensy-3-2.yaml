@@ -1,26 +1,26 @@
 name: Teensy 3.2
-manufacturer: PJRC
-soc: MK20DX256VLH7
-cpu: ARM Cortex-M4
-isa: ARMv7-M
+creator: PJRC
+notes: null
+bluetooth: null
+bms: false
 clock_speed: 72MHz
+cpu: ARM Cortex-M4
+ethernet: null
 flash: 256kB
-ram: 64kB
+gpio_voltage: 3.3V
+imu: false
+isa: ARMv7-M
 linux: false
+max_input_voltage: 5V
 max_outputs: 8
 min_input_voltage: null
-max_input_voltage: 5V
-gpio_voltage: 3.3V
-usb: OTG
-ttl_serial: true
-wifi: Shield
 poe: null
-ethernet: null
-bluetooth: null
-storage: Shield
-bms: false
-imu: false
 price: 20
+ram: 64kB
 release_year: null
+soc: MK20DX256VLH7
+storage: Shield
+ttl_serial: true
 url: https://www.pjrc.com/store/teensy32.html
-notes: null
+usb: OTG
+wifi: Shield

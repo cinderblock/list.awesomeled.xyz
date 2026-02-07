@@ -1,13 +1,13 @@
 name: Serial LED Driver
-manufacturer: ElectroMage
+creator: ElectroMage
+notes: null
+diy_or_ots: OTS
 max_channels: 8
-pixel_types: Single or Clocked
-max_voltage: 5V
 max_current: 3A
-parent: Any UART / Serial
-price: 15
+max_voltage: 5V
 output_connectors: Solder
 outputs: Both
-diy_or_ots: OTS
-notes: null
+parent: Any UART / Serial
+pixel_types: Single or Clocked
+price: 15
 url: https://www.tindie.com/products/electromage/electromage-serial-to-8x-ws2812apa102-driver/

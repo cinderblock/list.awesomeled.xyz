@@ -1,24 +1,24 @@
 name: ThunderPack Wearable
-manufacturer: Jeremy Gillick Labs
-max_pixels: null
-price: 40
-max_outputs: 17
+status: active
+creator: Jeremy Gillick Labs
+notes: 1.4 - 2.3A output per PWM channel. RGB PWM and/or addressable LEDs.
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - USB
   - GPIO
-storage: Yes
-standalone: true
-pixel_types: both
-max_voltage: null
 max_current: 10A
-buffered: null
+max_outputs: 17
+max_pixels: null
+max_voltage: null
 output_connectors: Solder
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: 1.4 - 2.3A output per PWM channel. RGB PWM and/or addressable LEDs.
-warranty: null
+pixel_types: both
+price: 40
 release_year: 2020
-status: active
+standalone: true
+storage: Yes
 url: https://www.tindie.com/stores/jeremy/
+warranty: null
+waterproof: null
+wled_compatible: null

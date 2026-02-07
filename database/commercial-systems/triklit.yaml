@@ -1,12 +1,12 @@
 name: Triklit
-manufacturer: Minelon - Rainmin
-pixels_per_run: null
-dimming_resolution: 8 Bit
-dedicated_psu: true
+creator: Minelon - Rainmin
+notes: WS2811/12 based commercial quality LED products
 color_type: RGB
-online_pricing: Wiedamark
-price_range: $$$$
 core_tech: WS281x
+dedicated_psu: true
+dimming_resolution: 8 Bit
+online_pricing: Wiedamark
+pixels_per_run: null
+price_range: $$$$
 since: null
 target_market: null
-notes: WS2811/12 based commercial quality LED products

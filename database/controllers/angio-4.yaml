@@ -1,23 +1,23 @@
 name: Angio 4
-manufacturer: chroma.tech
-max_pixels: 4080
-price: 99
-max_outputs: 4
+status: active
+creator: chroma.tech
+notes: Bulk fleet manager. ArtNet, sACN / E1.31, Open Pixel Control
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - Ethernet
-storage: null
-standalone: false
-pixel_types: both
-max_voltage: 24V
 max_current: null
-buffered: true
+max_outputs: 4
+max_pixels: 4080
+max_voltage: 24V
 output_connectors: Phoenix Screw pluggable
 outputs: Single and Clock
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Bulk fleet manager. ArtNet, sACN / E1.31, Open Pixel Control
-warranty: null
+pixel_types: both
+price: 99
 release_year: 2022
-status: active
+standalone: false
+storage: null
 url: https://shop.chroma.tech/products/angio-4
+warranty: null
+waterproof: null
+wled_compatible: null

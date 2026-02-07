@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -48,6 +50,30 @@ jobs:
       - name: Link check
         continue-on-error: true # ok to fail, links break over time
         run: bun run lint:links
+
+      # PR-only checks: fail if changed files have issues
+      - name: Get changed files
+        id: changed-files
+        if: github.event_name == 'pull_request'
+        run: |
+          CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "all<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          YAML_FILES=$(echo "$CHANGED" | grep -E '\.ya?ml$' || true)
+          echo "yaml<<EOF" >> $GITHUB_OUTPUT
+          echo "$YAML_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Spell check changed files (PR)
+        if: github.event_name == 'pull_request' && steps.changed-files.outputs.all != ''
+        run: |
+          echo "${{ steps.changed-files.outputs.all }}" | xargs -r bunx cspell --no-progress
+
+      - name: Link check changed files (PR)
+        if: github.event_name == 'pull_request' && steps.changed-files.outputs.yaml != ''
+        run: |
+          echo "${{ steps.changed-files.outputs.yaml }}" | xargs -r bunx textlint
 
   test:
     name: Run Tests

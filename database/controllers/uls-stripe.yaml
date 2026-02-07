@@ -1,25 +1,25 @@
 name: ULS Stripe
-manufacturer: ULS Manufacturing
-max_pixels: 1000
-price: 330
-max_outputs: 4
+status: active
+creator: ULS Manufacturing
+notes: 7 DMX Modes fom Individual to grouped
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - FPP
   - USB Ethernet
-  - Wifi
-storage: null
-standalone: null
-pixel_types: async
-max_voltage: 12V
+  - Wi-Fi
 max_current: 18A
-buffered: true
+max_outputs: 4
+max_pixels: 1000
+max_voltage: 12V
 output_connectors: 5 Pin GX-16
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: 7 DMX Modes fom Individual to grouped
-warranty: null
+pixel_types: async
+price: 330
 release_year: null
-status: active
+standalone: null
+storage: null
 url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller
+warranty: null
+waterproof: null
+wled_compatible: null

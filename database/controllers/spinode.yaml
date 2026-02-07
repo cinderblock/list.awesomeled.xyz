@@ -1,23 +1,23 @@
 name: SpiNode
-manufacturer: Visual Productions
-max_pixels: 4096
-price: 349
-max_outputs: 4
+status: unknown
+creator: Visual Productions
+notes: Use max 2 SpiNodes per CueCore3, to open up 32 universes
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - Ethernet
-storage: null
-standalone: false
-pixel_types: both
-max_voltage: 24V
 max_current: 20A
-buffered: true
+max_outputs: 4
+max_pixels: 4096
+max_voltage: 24V
 output_connectors: Phoenix Screw
 outputs: Single and Clock
-waterproof: IP20
-auxiliary_outputs: null
-wled_compatible: null
-notes: Use max 2 SpiNodes per CueCore3, to open up 32 universes
-warranty: null
+pixel_types: both
+price: 349
 release_year: null
-status: unknown
+standalone: false
+storage: null
 url: null
+warranty: null
+waterproof: IP20
+wled_compatible: null

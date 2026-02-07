@@ -1,23 +1,23 @@
 name: MagWLED-1
-manufacturer: magwled
-max_pixels: null
-price: 30
-max_outputs: 1
+status: active
+creator: magwled
+notes: USB-C powered 5v or 12v capable
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - Ethernet
-storage: null
-standalone: true
-pixel_types: async
-max_voltage: 12V
 max_current: 3A
-buffered: null
+max_outputs: 1
+max_pixels: null
+max_voltage: 12V
 output_connectors: Wago connector
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: true
-notes: USB C powered 5v or 12v capable
-warranty: null
+pixel_types: async
+price: 30
 release_year: null
-status: active
+standalone: true
+storage: null
 url: null
+warranty: null
+waterproof: null
+wled_compatible: true

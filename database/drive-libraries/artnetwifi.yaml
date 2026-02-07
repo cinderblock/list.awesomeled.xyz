@@ -1,7 +1,7 @@
 name: ArtnetWiFi
-developer: RStephan
-hardware: ESP8266/32
+creator: RStephan
 features: null
+hardware: ESP8266/32
+instructional_resources: []
 url: https://github.com/rstephan/ArtnetWifi
 youtube_url: null
-instructional_resources: []

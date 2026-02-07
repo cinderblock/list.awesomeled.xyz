@@ -1,26 +1,26 @@
 name: TTGo ESP32 PoE
-manufacturer: Lilygo
-soc: ESP32
-cpu: Xtensa LX6
-isa: Xtensa
+creator: Lilygo
+notes: null
+bluetooth: "4.2"
+bms: null
 clock_speed: null
+cpu: Xtensa LX6
+ethernet: 100BASE-TX
 flash: null
-ram: null
+gpio_voltage: 3.3V
+imu: null
+isa: Xtensa
 linux: false
+max_input_voltage: null
 max_outputs: null
 min_input_voltage: null
-max_input_voltage: null
-gpio_voltage: 3.3V
-usb: Power + UART
-ttl_serial: null
-wifi: 2.4GHz
 poe: Y
-ethernet: 100BASE-TX
-bluetooth: "4.2"
-storage: null
-bms: null
-imu: null
 price: 16
+ram: null
 release_year: 2020
+soc: ESP32
+storage: null
+ttl_serial: null
 url: http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3
-notes: null
+usb: Power + UART
+wifi: 2.4GHz

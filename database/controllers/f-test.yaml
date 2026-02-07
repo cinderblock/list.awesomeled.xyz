@@ -1,20 +1,20 @@
 name: F-Test
-manufacturer: PixelController, LLC
-max_pixels: null
-price: null
-max_outputs: null
-storage: null
-standalone: null
-max_voltage: null
-max_current: null
+status: unknown
+creator: PixelController, LLC
+notes: null
+auxiliary_outputs: null
 buffered: null
+max_current: null
+max_outputs: null
+max_pixels: null
+max_voltage: null
 output_connectors: null
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: null
-warranty: null
+price: null
 release_year: null
-status: unknown
+standalone: null
+storage: null
 url: null
+warranty: null
+waterproof: null
+wled_compatible: null

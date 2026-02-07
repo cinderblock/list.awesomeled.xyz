@@ -1,37 +1,37 @@
 name: WS2813
-manufacturer: WorldSemi/Newstar
-color_order: RGB
-led_voltage: 5V
-clocked: false
-vcc_voltage: 5V
-pwm_frequency: 2.0kHz
-pwm_frequency_notes: 2kHz according to datasheet
+status: active
+creator: WorldSemi/Newstar
+notes: WS2812b update with Back Up Data Line
+backup_data_line: true
 brightness_bits: 8
-data_bitrate: 800kHz
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-gpio_min: 3.0V
-gpio_max: 5V
-wattage: 90mW
 channel_current: 18mA
 channel_current_notes: Also has a 5mA version available
-quiescent_current: 0.7mA
+clocked: false
+color_order: RGB
+data_bitrate: 800kHz
+data_type: WS2811/12
+datasheet_url: http://newstar-ledstrip.com/product/20171208112004735.pdf
+gpio_max: 5V
+gpio_min: 3.0V
+led_voltage: 5V
+max_pixels_per_string: null
+other_links:
+  - WS2813 Pixel Protocol Overview | Advatek Lighting
+package_size: "5050"
 package_sizes:
   - "5050"
-package_size: "5050"
 pin_count: 6
-data_type: WS2811/12
-backup_data_line: true
-max_pixels_per_string: null
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 33.3 k Pixel / s
+pwm_frequency: 2.0kHz
+pwm_frequency_notes: 2kHz according to datasheet
+quiescent_current: 0.7mA
 release_year: 2016
 spec_update_year: 2018
-notes: WS2812b update with Back Up Data Line
 technical_notes:
   - Backup/failover data line allows signal to continue if a pixel fails
   - 5mA version available for lower power applications
   - Same 2kHz PWM as updated WS2812B
 third_party_testing: null
-datasheet_url: http://newstar-ledstrip.com/product/20171208112004735.pdf
-other_links:
-  - WS2813 Pixel Protocol Overview | Advatek Lighting
-status: active
+vcc_voltage: 5V
+wattage: 90mW

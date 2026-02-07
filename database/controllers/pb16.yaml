@@ -1,23 +1,23 @@
 name: PB16
-manufacturer: null
-max_pixels: 22400
-price: 130
-max_outputs: 32
+status: unknown
+creator: null
+notes: null
+auxiliary_outputs: DMX x2
+buffered: true
 interfaces:
   - Ethernet
-storage: null
-standalone: null
-pixel_types: async
-max_voltage: 24V
 max_current: 40A
-buffered: true
+max_outputs: 32
+max_pixels: 22400
+max_voltage: 24V
 output_connectors: Phoenix Screw
 outputs: null
-waterproof: null
-auxiliary_outputs: DMX x2
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: async
+price: 130
 release_year: null
-status: unknown
+standalone: null
+storage: null
 url: http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controlleri
+warranty: null
+waterproof: null
+wled_compatible: null

@@ -1,7 +1,7 @@
 name: Arduino Ethernet Nano with ENC28J60
-developer: Xaver2K
-hardware: Arduino Nano &Ethernet Shield
+creator: Xaver2K
 features: WS2811/12 Ethernet Hardwire
+hardware: Arduino Nano &Ethernet Shield
+instructional_resources: []
 url: https://github.com/Xaver2k/ArduinoENC_Artnet-WS2811
 youtube_url: null
-instructional_resources: []

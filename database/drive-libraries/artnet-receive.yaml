@@ -1,7 +1,7 @@
 name: Artnet Receive
-developer: natcl
-hardware: Arduino/Teensie/ESP8266
+creator: natcl
 features: null
+hardware: Arduino/Teensie/ESP8266
+instructional_resources: []
 url: https://github.com/natcl/Artnet
 youtube_url: null
-instructional_resources: []

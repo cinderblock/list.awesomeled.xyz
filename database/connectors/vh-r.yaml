@@ -1,31 +1,31 @@
 name: VH /R
-manufacturer: JST
-url: https://www.jst.com/wp-content/uploads/2021/08/eVH.pdf
-outline: Rectangular
-max_current: 10 A
-max_voltage: 250 V
-ip_rating: null
-locking: Latching
-panel_mount: false
-wire_to_wire: true
-pcb_mount: PTH
-smallest_gauge: 22 AWG
-largest_gauge: 16 AWG
-pitch: 3.96mm
-contact_type: Pins
-solder: false
-screw_terminal: null
-crimp: true
-idc: false
-board_fingers: false
-gendered: true
-min_pins: 2
-max_pins: 11
-rows: 1
-year_introduced: null
-pinout: null
-convention: null
-colors: null
-digikey_url: null
-mouser_url: null
+creator: JST
 notes: Optikinetics wheel rotator connector , post 2000s
+board_fingers: false
+colors: null
+contact_type: Pins
+convention: null
+crimp: true
+digikey_url: null
+gendered: true
+idc: false
+ip_rating: null
+largest_gauge: 16 AWG
+locking: Latching
+max_current: 10 A
+max_pins: 11
+max_voltage: 250 V
+min_pins: 2
+mouser_url: null
+outline: Rectangular
+panel_mount: false
+pcb_mount: PTH
+pinout: null
+pitch: 3.96mm
+rows: 1
+screw_terminal: null
+smallest_gauge: 22 AWG
+solder: false
+url: https://www.jst.com/wp-content/uploads/2021/08/eVH.pdf
+wire_to_wire: true
+year_introduced: null

@@ -1,24 +1,24 @@
 name: DMX Core
-manufacturer: DMX Pro Sales
-max_pixels: 6800
-price: 799
-max_outputs: null
-interfaces:
-  - WiFi
-storage: SD
-standalone: null
-pixel_types: both
-max_voltage: 28V
-max_current: null
-buffered: null
-output_connectors: null
-outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
+status: active
+creator: DMX Pro Sales
 notes: Standalone wall-mounted controller with 4.3" touch interface for presets,
   playback. Up to 40 universes.
-warranty: null
+auxiliary_outputs: null
+buffered: null
+interfaces:
+  - Wi-Fi
+max_current: null
+max_outputs: null
+max_pixels: 6800
+max_voltage: 28V
+output_connectors: null
+outputs: null
+pixel_types: both
+price: 799
 release_year: null
-status: active
+standalone: null
+storage: SD
 url: https://dmxcore.com/
+warranty: null
+waterproof: null
+wled_compatible: null

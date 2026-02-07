@@ -1,10 +1,10 @@
 name: SN74LVC2T45
-manufacturer: Texas Instruments
+creator: Texas Instruments
+notes: null
+buffered: null
 channels: 2
 interface: null
-notes: null
-price: null
-max_voltage: null
 max_current: null
-buffered: null
+max_voltage: null
+price: null
 url: https://www.ti.com/product/SN74LVC2T455

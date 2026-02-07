@@ -1,26 +1,26 @@
 name: Raspberry Pi 2 Model B
-manufacturer: Raspberry Pi Foundation
-soc: BCM2836
-cpu: 4× ARM Cortex-A7
-isa: ARMv7-A
+creator: Raspberry Pi Foundation
+notes: null
+bluetooth: USB
+bms: false
 clock_speed: 900MHz
+cpu: 4× ARM Cortex-A7
+ethernet: 100BASE-TX
 flash: microSD
-ram: 1GB
+gpio_voltage: 3.3V
+imu: false
+isa: ARMv7-A
 linux: true
+max_input_voltage: 5V
 max_outputs: 1
 min_input_voltage: 5V
-max_input_voltage: 5V
-gpio_voltage: 3.3V
-usb: OTG x4
-ttl_serial: true
-wifi: USB
 poe: null
-ethernet: 100BASE-TX
-bluetooth: USB
-storage: microSD
-bms: false
-imu: false
 price: 35
+ram: 1GB
 release_year: 2015
+soc: BCM2836
+storage: microSD
+ttl_serial: true
 url: https://www.raspberrypi.org/products/raspberry-pi-2-model-b/
-notes: null
+usb: OTG x4
+wifi: USB

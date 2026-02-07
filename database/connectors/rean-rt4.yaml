@@ -1,31 +1,31 @@
 name: Rean RT4
-manufacturer: Rean / Neutrik
-url: https://www.rean-connectors.com/en/product/rt4fc-b-1
-outline: Circular
-max_current: 5 A
-max_voltage: 250 V
-ip_rating: IP40
-locking: Latching
-panel_mount: true
-wire_to_wire: true
-pcb_mount: false
-smallest_gauge: 28 AWG
-largest_gauge: 24 AWG
-pitch: null
-contact_type: Pins
-solder: true
-screw_terminal: null
-crimp: false
-idc: false
-board_fingers: false
-gendered: true
-min_pins: 3
-max_pins: 5
-rows: null
-year_introduced: null
-pinout: null
-convention: null
-colors: null
-digikey_url: null
-mouser_url: null
+creator: Rean / Neutrik
 notes: MIni XLR , 13mm Diameter, used on Shure and other microphones
+board_fingers: false
+colors: null
+contact_type: Pins
+convention: null
+crimp: false
+digikey_url: null
+gendered: true
+idc: false
+ip_rating: IP40
+largest_gauge: 24 AWG
+locking: Latching
+max_current: 5 A
+max_pins: 5
+max_voltage: 250 V
+min_pins: 3
+mouser_url: null
+outline: Circular
+panel_mount: true
+pcb_mount: false
+pinout: null
+pitch: null
+rows: null
+screw_terminal: null
+smallest_gauge: 28 AWG
+solder: true
+url: https://www.rean-connectors.com/en/product/rt4fc-b-1
+wire_to_wire: true
+year_introduced: null

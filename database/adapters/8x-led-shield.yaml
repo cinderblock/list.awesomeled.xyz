@@ -1,13 +1,13 @@
 name: 8x LED Shield
-manufacturer: Evil Genius Labs
+creator: Evil Genius Labs
+notes: null
+diy_or_ots: DIY
 max_channels: 8
-pixel_types: Single or Clocked
-max_voltage: 5V
 max_current: null
-parent: Adafruit Feather
-price: 7
+max_voltage: 5V
 output_connectors: Solder
 outputs: null
-diy_or_ots: DIY
-notes: null
+parent: Adafruit Feather
+pixel_types: Single or Clocked
+price: 7
 url: https://www.tindie.com/products/11579/

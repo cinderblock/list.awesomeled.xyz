@@ -5,6 +5,8 @@ import yml from 'eslint-plugin-yml';
 import tseslint from 'typescript-eslint';
 
 import { noDoubledSpaces } from './eslint-rules/no-doubled-spaces.js';
+import { noInvalidControlCharacter } from './eslint-rules/no-invalid-control-character.js';
+import { terminology } from './eslint-rules/terminology.js';
 
 export default tseslint.config(
   js.configs.recommended,
@@ -33,6 +35,8 @@ export default tseslint.config(
       custom: {
         rules: {
           'no-doubled-spaces': noDoubledSpaces,
+          'no-invalid-control-character': noInvalidControlCharacter,
+          'terminology': terminology,
         },
       },
     },
@@ -40,6 +44,10 @@ export default tseslint.config(
       // Easier for diffs and reading
       'yml/block-sequence': ['error', 'always'],
       'custom/no-doubled-spaces': 'error',
+      'custom/no-invalid-control-character': 'error',
+      'custom/terminology': ['error', {
+        skipValueKeys: ['run', 'script', 'command', 'cmd', 'shell', 'exec', 'working-directory', 'dictionaries'],
+      }],
     },
   },
   // Database YAML files: name must be first

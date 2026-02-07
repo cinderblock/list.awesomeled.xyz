@@ -1,29 +1,29 @@
 name: Jinx!
-developer: Solderlab.de
-price: Free
+status: no development
+creator: Solderlab.de
+notes: Basically a mapper/pattern generator for microcontrollers with pixels.
+  Development ceased
+audio_input: null
+demo_available: null
+designer: true
+gpio: Input
+integrations: Should be solderlab.de (which is down)
+language: null
+live: false
+other_inputs: null
+other_outputs: null
 platforms:
   - Windows
   - Linux
-live: false
-designer: true
-visualizer: null
+price: Free
+programmatic: null
 protocols:
   artnet: null
   sacn: null
   dmx: null
   kinet: null
   ddp: null
-gpio: Input
 serial: Output
-video_input: null
-audio_input: null
-programmatic: null
-language: null
-other_inputs: null
-other_outputs: null
-integrations: Should be solderlab.de (which is down)
-notes: Basically a mapper/pattern generator for microcontrollers with pixels.
-  Development ceased
-demo_available: null
-status: no development
 url: https://oneguyoneblog.com/download/glediator-v2-0-3/
+video_input: null
+visualizer: null

@@ -1,31 +1,31 @@
 name: M12
-manufacturer: Generic
-url: https://uk.rs-online.com/web/p/industrial-circular-connectors/2906584/
-outline: Circular
-max_current: 4 A
-max_voltage: 50 V
-ip_rating: IP67
-locking: Screw Lock
-panel_mount: true
-wire_to_wire: true
-pcb_mount: PTH
-smallest_gauge: 22 AWG
-largest_gauge: 14 AWG
-pitch: null
-contact_type: Pins
-solder: true
-screw_terminal: null
-crimp: true
-idc: false
-board_fingers: false
-gendered: true
-min_pins: 3
-max_pins: 8
-rows: N/A
-year_introduced: null
-pinout: null
-convention: null
-colors: Black
-digikey_url: null
-mouser_url: null
+creator: Generic
 notes: Originally sensor connectors for automation, low cost varieties available
+board_fingers: false
+colors: Black
+contact_type: Pins
+convention: null
+crimp: true
+digikey_url: null
+gendered: true
+idc: false
+ip_rating: IP67
+largest_gauge: 14 AWG
+locking: Screw Lock
+max_current: 4 A
+max_pins: 8
+max_voltage: 50 V
+min_pins: 3
+mouser_url: null
+outline: Circular
+panel_mount: true
+pcb_mount: PTH
+pinout: null
+pitch: null
+rows: N/A
+screw_terminal: null
+smallest_gauge: 22 AWG
+solder: true
+url: https://uk.rs-online.com/web/p/industrial-circular-connectors/2906584/
+wire_to_wire: true
+year_introduced: null

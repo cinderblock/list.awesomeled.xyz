@@ -3,12 +3,8 @@
   "$id": "https://awesomeledlist.com/schema/diffusive-material.json",
   "title": "Diffusive Material",
   "type": "object",
-  "required": ["id", "name"],
+  "required": ["name"],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9-]+$"
-    },
     "name": {
       "type": "string"
     },

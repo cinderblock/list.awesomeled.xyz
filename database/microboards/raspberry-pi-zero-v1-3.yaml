@@ -1,26 +1,26 @@
 name: Raspberry Pi Zero v1.3
-manufacturer: Raspberry Pi Foundation
-soc: BCM2835
-cpu: ARM11
-isa: ARMv6Z
+creator: Raspberry Pi Foundation
+notes: null
+bluetooth: null
+bms: false
 clock_speed: 1.0GHz
+cpu: ARM11
+ethernet: USB
 flash: microSD
-ram: 512MB
+gpio_voltage: 3.3V
+imu: false
+isa: ARMv6Z
 linux: true
+max_input_voltage: 5V
 max_outputs: 1
 min_input_voltage: 5V
-max_input_voltage: 5V
-gpio_voltage: 3.3V
-usb: OTG
-ttl_serial: true
-wifi: USB
 poe: null
-ethernet: USB
-bluetooth: null
-storage: microSD
-bms: false
-imu: false
 price: 5
+ram: 512MB
 release_year: null
+soc: BCM2835
+storage: microSD
+ttl_serial: true
 url: https://www.raspberrypi.org/products/raspberry-pi-zero/
-notes: null
+usb: OTG
+wifi: USB

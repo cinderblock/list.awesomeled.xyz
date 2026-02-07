@@ -1,25 +1,25 @@
 name: DMX to LED Strip
-manufacturer: Electroconcept
-max_pixels: 850
-price: 20
-max_outputs: 1
+status: active
+creator: Electroconcept
+notes: DMX modes and address selected via dip switch. Setting of pixel mode X1
+  X2 X3 or 11 channels program mode
+auxiliary_outputs: null
+buffered: null
 interfaces:
   - Bluetooth
   - Audio
-storage: null
-standalone: false
-pixel_types: async
-max_voltage: 24V
 max_current: null
-buffered: null
+max_outputs: 1
+max_pixels: 850
+max_voltage: 24V
 output_connectors: Plated Through Hole
 outputs: null
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: DMX modes and address selected via dip switch. Setting of pixel mode X1
-  X2 X3 or 11 channels program mode
-warranty: null
+pixel_types: async
+price: 20
 release_year: null
-status: active
+standalone: false
+storage: null
 url: https://www.boutique-electroconcept.com/dmx-signal-board-for-ledstrip-digital-ws2812-and-compatible-to-be-welded.html
+warranty: null
+waterproof: null
+wled_compatible: null

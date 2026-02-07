@@ -1,26 +1,26 @@
 name: NS8808
-color_order: RGB
-led_voltage: 12V
-clocked: false
-vcc_voltage: 5V
-pwm_frequency: 8.0kHz
+creator: Newstar LED Co.
+notes: Similar to ws2815, but UCS1903 protocol
+backup_data_line: true
 brightness_bits: 8
+channel_current: 9.0mA
+clocked: false
+color_order: RGB
 data_bitrate: 800kHz
+data_type: UCS1903
+datasheet_url: http://newstar-ledstrip.com/productshow855.html
+gpio_max: 5V
+gpio_min: 3.5V
+led_voltage: 12V
+max_pixels_per_string: null
+other_links: null
+package_size: '5050'
+pin_count: 6
 pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
-gpio_min: 3.5V
-gpio_max: 5V
-wattage: 45.mW
-channel_current: 9.0mA
+pwm_frequency: 8.0kHz
 quiescent_current: 2.0mA
-package_size: "5050"
-pin_count: 6
-data_type: UCS1903
-backup_data_line: true
-max_pixels_per_string: null
 release_year: 2018
-notes: silimar to ws2815, but UCS1903 protocol
 third_party_testing: null
-manufacturer: Newstar LED Co.
-datasheet_url: http://newstar-ledstrip.com/productshow855.html
-other_links: null
+vcc_voltage: 5V
+wattage: 45.mW

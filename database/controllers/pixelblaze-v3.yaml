@@ -1,23 +1,23 @@
 name: Pixelblaze V3
-manufacturer: ElectroMage
-max_pixels: 5000
-price: 35
-max_outputs: 1
+status: active
+creator: ElectroMage
+notes: $19 busable output expanders have 8ch ea (max 51K pixels).
+auxiliary_outputs: GPIO
+buffered: true
 interfaces:
   - Ethernet
-storage: Yes
-standalone: true
-pixel_types: both
-max_voltage: 5V
 max_current: 1.8A
-buffered: true
+max_outputs: 1
+max_pixels: 5000
+max_voltage: 5V
 output_connectors: Solder / Screw
 outputs: Single and Clock
-waterproof: null
-auxiliary_outputs: GPIO
-wled_compatible: null
-notes: $19 busable output expanders have 8ch ea (max 51K pixels).
-warranty: null
+pixel_types: both
+price: 35
 release_year: 2018
-status: active
+standalone: true
+storage: Yes
 url: https://electromage.com/pixelblaze
+warranty: null
+waterproof: null
+wled_compatible: null

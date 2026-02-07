@@ -1,10 +1,10 @@
 name: TXS0108e
-manufacturer: Texas Instruments
+creator: Texas Instruments
+notes: null
+buffered: null
 channels: 8
 interface: null
-notes: null
-price: null
-max_voltage: null
 max_current: null
-buffered: null
+max_voltage: null
+price: null
 url: null

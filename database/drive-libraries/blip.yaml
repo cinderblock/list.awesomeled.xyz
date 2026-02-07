@@ -1,8 +1,8 @@
 name: BLIP
-developer: Benjamin Kuperberg
-hardware: ESP32
+creator: Benjamin Kuperberg
 features: OSCQuery Enabled, ArtNet multi-ledstrip controller and multi purpose
   firmware (GPIO, motors, etc.) with a unified control system. ESPNow compatible
+hardware: ESP32
+instructional_resources: []
 url: https://github.com/Golden-Geek/BLIP/
 youtube_url: null
-instructional_resources: []

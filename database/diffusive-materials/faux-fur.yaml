@@ -1,15 +1,15 @@
 name: Faux Fur
-url: https://en.wikipedia.org/wiki/Fake_fur
+notes: White long pile faux fur
 color_rendition: null
-light_transmission: 4
-flexible: F
-purpose_made: false
-properties: Backlight
-fire_retardant: false
-tinted: T
-sample_thickness: null
 diffusivity: null
-sizes_available: 1200mm wide
+fire_retardant: false
+flexible: F
+light_transmission: 4
 material_type: Polyester,Acrylic
 price_range: $$$
-notes: White long pile faux fur
+properties: Backlight
+purpose_made: false
+sample_thickness: null
+sizes_available: 1200mm wide
+tinted: T
+url: https://en.wikipedia.org/wiki/Fake_fur

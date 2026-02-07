@@ -1,24 +1,24 @@
 name: LED Ethernet Controller 3
-manufacturer: LED Strip Studio
-max_pixels: 4096
-price: 625
-max_outputs: 4
+status: active
+creator: LED Strip Studio
+notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+auxiliary_outputs: DMX
+buffered: true
 interfaces:
   - USB
   - SD Card
-storage: SD
-standalone: true
-pixel_types: both
-max_voltage: 24V
 max_current: 20A
-buffered: true
+max_outputs: 4
+max_pixels: 4096
+max_voltage: 24V
 output_connectors: Phoenix Plug
 outputs: Single & Clock & DMX
-waterproof: null
-auxiliary_outputs: DMX
-wled_compatible: null
-notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
-warranty: 5 Years
+pixel_types: both
+price: 625
 release_year: null
-status: active
+standalone: true
+storage: SD
 url: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+warranty: 5 Years
+waterproof: null
+wled_compatible: null

@@ -1,23 +1,23 @@
 name: LightBoard Mini
-manufacturer: RocketLife
-max_pixels: 1000
-price: 40
-max_outputs: 1
+status: discontinued
+creator: RocketLife
+notes: Now Bekonix see Pattern Drivers
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - Ethernet
-storage: null
-standalone: null
-pixel_types: both
-max_voltage: 5V
 max_current: null
-buffered: true
+max_outputs: 1
+max_pixels: 1000
+max_voltage: 5V
 output_connectors: Headers
 outputs: Single and Clock
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: null
-notes: Now Bekonix see Pattern Drivers
-warranty: null
+pixel_types: both
+price: 40
 release_year: null
-status: discontinued
-url: https://www.rocketlife.com/technology/ morphed to   https://www.bekonix.com/
+standalone: null
+storage: null
+url: https://www.rocketlife.com/technology/ morphed to https://www.bekonix.com/
+warranty: null
+waterproof: null
+wled_compatible: null

@@ -1,33 +1,31 @@
 name: XLR 5
-manufacturer: Neutrik /Generic
-url: https://www.neutrik.com/en/products/lightning/xlr
-outline: Circular
-max_current: 10 A
-max_voltage: 50 V
-ip_rating: IP40
-locking: Latching
-panel_mount: true
-wire_to_wire: true
-pcb_mount: Both
-smallest_gauge: 22 AWG
-largest_gauge: 14 AWG
-pitch: null
-contact_type: Pins
-solder: true
-screw_terminal: null
-crimp: true
-idc: true
+creator: Neutrik /Generic
+notes: 5 Pin is USITT Standard for DMX 512, Pins 4 + 5 Not Used In Standard. Beware of power or second universe on non standard pinouts . XLR 4 scroller cable 2 data+2 power, XLR 6 comms & video gear.
 board_fingers: false
-gendered: true
-min_pins: 2
-max_pins: 7
-rows: N/A
-year_introduced: null
-pinout: null
-convention: Female output jack, male input jack
 colors: Black, Silver, optional colored collars
+contact_type: Pins
+convention: Female output jack, male input jack
+crimp: true
 digikey_url: null
+gendered: true
+idc: true
+ip_rating: IP40
+largest_gauge: 14 AWG
+locking: Latching
+max_current: 10 A
+max_pins: 7
+max_voltage: 50 V
+min_pins: 2
 mouser_url: null
-notes: 5 Pin is USITT Standard for DMX 512, Pins 4 + 5 Not Used In Standard.
-  Beware of power or second universe on non standard pinouts . XLR 4  scroller
-  cable 2 data+2 power, XLR 6 comms & video gear.
+outline: Circular
+panel_mount: true
+pcb_mount: Both
+pinout: null
+pitch: null
+rows: N/A
+screw_terminal: null
+smallest_gauge: 22 AWG
+solder: true
+url: https://www.neutrik.com/en/products/lightning/xlr
+wire_to_wire: true
+year_introduced: null

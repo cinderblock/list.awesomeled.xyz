@@ -24,6 +24,7 @@ clsx
 mdast
 remark
 frontmatter
+textlint
 
 # Testing/Browser
 isbot
@@ -36,3 +37,4 @@ noreferrer
 
 # Build tools
 Rolldown
+bunx

@@ -1,15 +1,15 @@
 name: 3M Envision Diffuser
-url: https://www.3m.co.uk/3M/en_GB/p/d/b00024897/
+notes: Backlight white self adhesive film for glass and plastics
 color_rendition: 4
-light_transmission: 3
-flexible: F
-purpose_made: true
-properties: Diffusive
-fire_retardant: true
-tinted: T
-sample_thickness: null
 diffusivity: 4
-sizes_available: 1219mm wide
+fire_retardant: true
+flexible: F
+light_transmission: 3
 material_type: polyester
 price_range: $$$$
-notes: Backlight white self adhesive film for glass and plastics
+properties: Diffusive
+purpose_made: true
+sample_thickness: null
+sizes_available: 1219mm wide
+tinted: T
+url: https://www.3m.co.uk/3M/en_GB/p/d/b00024897/

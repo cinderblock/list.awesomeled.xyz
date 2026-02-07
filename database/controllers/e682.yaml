@@ -1,23 +1,23 @@
 name: E682
-manufacturer: SanDevices
-max_pixels: 6120
-price: 180
-max_outputs: 16
+status: unknown
+creator: SanDevices
+notes: null
+auxiliary_outputs: DMX in groups of 4
+buffered: true
 interfaces:
   - Ethernet & DMX
-storage: null
-standalone: false
-pixel_types: both
-max_voltage: 24V
 max_current: 64A
-buffered: true
+max_outputs: 16
+max_pixels: 6120
+max_voltage: 24V
 output_connectors: Phoenix Screw
 outputs: Single or Clock
-waterproof: null
-auxiliary_outputs: DMX in groups of 4
-wled_compatible: null
-notes: null
-warranty: null
+pixel_types: both
+price: 180
 release_year: null
-status: unknown
+standalone: false
+storage: null
 url: http://sandevices.com/product/e682-assembled-tested/
+warranty: null
+waterproof: null
+wled_compatible: null

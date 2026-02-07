@@ -1,7 +1,7 @@
 name: FastLED
-developer: Zach Vorhies (current), Daniel Garcia, Mark Kriegsman
-hardware: many
+creator: Zach Vorhies (current), Daniel Garcia, Mark Kriegsman
 features: null
+hardware: many
+instructional_resources: []
 url: https://github.com/FastLED/FastLED
 youtube_url: https://www.youtube.com/watch?v=4Ut4UK7612M
-instructional_resources: []

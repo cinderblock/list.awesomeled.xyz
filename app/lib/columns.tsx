@@ -258,8 +258,8 @@ export const controllerColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'manufacturer',
-    label: 'Manufacturer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -313,8 +313,8 @@ export const pixelColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'manufacturer',
-    label: 'Manufacturer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -391,8 +391,8 @@ export const patternDriverColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'developer',
-    label: 'Developer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -444,8 +444,8 @@ export const connectorColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'manufacturer',
-    label: 'Manufacturer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -489,8 +489,8 @@ export const microboardColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'manufacturer',
-    label: 'Manufacturer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -535,8 +535,8 @@ export const adapterColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'manufacturer',
-    label: 'Manufacturer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -570,8 +570,8 @@ export const driveLibraryColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'developer',
-    label: 'Developer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -632,8 +632,8 @@ export const commercialSystemColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'manufacturer',
-    label: 'Manufacturer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -666,8 +666,8 @@ export const levelConverterColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'manufacturer',
-    label: 'Manufacturer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -696,8 +696,8 @@ export const pixelDecoderColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'manufacturer',
-    label: 'Manufacturer',
+    key: 'creator',
+    label: 'Creator',
     filterConfig: { type: 'select' },
   },
   {
@@ -752,18 +752,18 @@ export function getColumnsForCategory(categoryId: string): Column[] {
 // Search keys for each category
 export function getSearchKeysForCategory(categoryId: string): string[] {
   const searchKeyMap: Record<string, string[]> = {
-    controllers: ['name', 'manufacturer', 'notes'],
-    pixels: ['name', 'manufacturer', 'notes'],
+    controllers: ['name', 'creator', 'notes'],
+    pixels: ['name', 'creator', 'notes'],
     'pixel-ics': ['name', 'notes'],
-    'pattern-drivers': ['name', 'developer', 'notes'],
-    connectors: ['name', 'manufacturer', 'notes'],
-    microboards: ['name', 'manufacturer', 'soc'],
-    'level-converters': ['name', 'manufacturer', 'notes'],
-    adapters: ['name', 'manufacturer', 'notes'],
-    'drive-libraries': ['name', 'developer', 'hardware'],
-    'pixel-decoders': ['name', 'manufacturer', 'notes'],
+    'pattern-drivers': ['name', 'creator', 'notes'],
+    connectors: ['name', 'creator', 'notes'],
+    microboards: ['name', 'creator', 'soc'],
+    'level-converters': ['name', 'creator', 'notes'],
+    adapters: ['name', 'creator', 'notes'],
+    'drive-libraries': ['name', 'creator', 'hardware'],
+    'pixel-decoders': ['name', 'creator', 'notes'],
     'diffusive-materials': ['name', 'material_type', 'notes'],
-    'commercial-systems': ['name', 'manufacturer', 'notes'],
+    'commercial-systems': ['name', 'creator', 'notes'],
   };
 
   return searchKeyMap[categoryId] || ['name'];

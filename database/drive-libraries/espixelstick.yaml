@@ -1,7 +1,7 @@
 name: ESPixelstick
-developer: Shelby Merrick
-hardware: ESP8266/32
+creator: Shelby Merrick
 features: null
+hardware: ESP8266/32
+instructional_resources: []
 url: https://github.com/forkineye/ESPixelStick
 youtube_url: null
-instructional_resources: []

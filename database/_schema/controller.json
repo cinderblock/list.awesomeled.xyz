@@ -3,19 +3,25 @@
   "$id": "https://awesomeledlist.com/schema/controller.json",
   "title": "LED Controller",
   "type": "object",
-  "required": ["id", "name"],
+  "required": ["name"],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9-]+$",
-      "description": "URL-safe identifier"
-    },
     "name": {
       "type": "string",
       "description": "Product name"
     },
-    "manufacturer": {
-      "type": ["string", "null"]
+    "creator": {
+      "type": ["string", "null"],
+      "description": "Original designer/developer of this item"
+    },
+    "manufacturers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Manufacturers that produce this item"
+    },
+    "vendors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Vendors that sell/distribute this item"
     },
     "max_pixels": {
       "type": ["integer", "null"],
@@ -106,15 +112,16 @@
       "description": "Single or Clock (configurable) vs Single and Clock (dedicated clock outputs)"
     },
     "waterproof": {
-      "type": ["string", "null"],
-      "description": "IP rating if applicable"
+      "type": ["string", "boolean"],
+      "enum": [false, "IP20", "IP44", "IP54", "IP65", "IP67", "IP68"],
+      "description": "IP rating if applicable, or false if not waterproof"
     },
     "auxiliary_outputs": {
-      "type": ["string", "null"],
+      "type": ["array", "boolean"],
       "description": "Additional outputs: DMX, GPIO, servo, DC outputs, etc."
     },
     "wled_compatible": {
-      "type": ["boolean", "null"],
+      "type": ["boolean"],
       "description": "WLED firmware based or capable of running WLED"
     },
     "requires_host": {

@@ -1,30 +1,30 @@
 name: Fadecandy
-manufacturer: Adafruit
-max_pixels: 512
-price: 25
-max_outputs: 8
+status: end-of-life
+creator: Adafruit
+notes: Please see https://github.com/scanlime/fadecandy to confirm project status
+auxiliary_outputs: null
+buffered: true
 interfaces:
   - USB
-storage: null
-standalone: false
-pixel_types: async
-max_voltage: 5V
 max_current: null
-buffered: true
+max_outputs: 8
+max_pixels: 512
+max_voltage: 5V
 output_connectors: Solder
 outputs: Single
-waterproof: null
-auxiliary_outputs: null
-wled_compatible: false
-notes: Please see https://github.com/scanlime/fadecandy to confirm project status
+pixel_types: async
+price: 25
+release_year: 2013
+standalone: false
+storage: null
 technical_notes:
   - Very popular platform with excellent dithering and interpolation
-  - Project maintenance status uncertain - check GitHub README
+  - Project maintenance status uncertain - check GitHub readme
   - Designed by Micah Elizabeth Scott (scanlime)
   - "See commit history for maintenance status:
     https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa975\
     4635b197b7"
-warranty: null
-release_year: 2013
-status: end-of-life
 url: https://www.adafruit.com/product/1689
+warranty: null
+waterproof: null
+wled_compatible: false
