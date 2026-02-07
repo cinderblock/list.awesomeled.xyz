@@ -113,6 +113,15 @@ Run the test suite with:
 bun test
 ```
 
+## Bulk Database Updates
+
+When making large bulk changes to database entries (e.g., renaming fields, reformatting values, or mass metadata updates), the commit should be added to `IGNORED_COMMITS` in `app/lib/data.ts`. This prevents the bulk update from affecting the "last updated" timestamps shown for individual entries.
+
+1. Make the bulk update commit
+2. Get the commit hash: `git rev-parse HEAD`
+3. Add the hash to `IGNORED_COMMITS` in `app/lib/data.ts` with a comment describing the change
+4. Commit this update separately
+
 ## History
 
 This project started as a [Google Sheets document](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA) to organize information about LED controllers, pixels, and related products.
