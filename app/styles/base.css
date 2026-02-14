@@ -189,18 +189,18 @@ img {
   navigation: auto;
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
+::view-transition-old(main-content),
+::view-transition-new(main-content) {
   animation-duration: 150ms;
   animation-timing-function: ease-out;
 }
 
-/* Cross-fade transition */
-::view-transition-old(root) {
+/* Cross-fade transition - only applies to main content, not header/footer */
+::view-transition-old(main-content) {
   animation-name: fade-out;
 }
 
-::view-transition-new(root) {
+::view-transition-new(main-content) {
   animation-name: fade-in;
 }
 
