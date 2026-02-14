@@ -36,8 +36,8 @@ const NODE_POSITIONS: NodePosition[] = [
   { id: 'level-converters', x: 620, y: 170, isMain: true },
   { id: 'connectors', x: 620, y: 290, isMain: true },
   // Adapters and microboards horizontally aligned
-  { id: 'adapters', x: 300, y: 460, isMain: false },
-  { id: 'microboards', x: 500, y: 460, isMain: false },
+  { id: 'microboards', x: 300, y: 460, isMain: false },
+  { id: 'adapters', x: 500, y: 460, isMain: false },
 
   // Output Zone (right side) - vertically aligned
   { id: 'pixels', x: 880, y: 170, isMain: true },
@@ -410,26 +410,26 @@ export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagra
           isDimmed={isNodeDimmed('drive-libraries')}
         />
 
-        {/* Adapters to Combine */}
+        {/* Microboards to Combine */}
         <DiagramConnection
           fromX={300}
           fromY={460 - NODE_HEIGHT / 2}
           toX={COMBINE_NODE.x - 20}
           toY={COMBINE_NODE.y + COMBINE_NODE.height / 2}
           bias="vertical"
-          isHighlighted={hoveredNode === 'adapters'}
-          isDimmed={isNodeDimmed('adapters')}
+          isHighlighted={hoveredNode === 'microboards'}
+          isDimmed={isNodeDimmed('microboards')}
         />
 
-        {/* Microboards to Combine */}
+        {/* Adapters to Combine */}
         <DiagramConnection
           fromX={500}
           fromY={460 - NODE_HEIGHT / 2}
           toX={COMBINE_NODE.x + 20}
           toY={COMBINE_NODE.y + COMBINE_NODE.height / 2}
           bias="vertical"
-          isHighlighted={hoveredNode === 'microboards'}
-          isDimmed={isNodeDimmed('microboards')}
+          isHighlighted={hoveredNode === 'adapters'}
+          isDimmed={isNodeDimmed('adapters')}
         />
 
         {/* Pixel ICs to LEDs */}
