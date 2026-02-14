@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CATEGORIES, type Category } from '~/lib/types';
-import { DiagramNode, NODE_WIDTH, NODE_HEIGHT } from './DiagramNode';
 import { DiagramConnection } from './DiagramConnection';
+import { DiagramNode, NODE_HEIGHT, NODE_WIDTH } from './DiagramNode';
 
 interface LEDSystemDiagramProps {
   counts: Record<string, number>;
@@ -107,11 +107,7 @@ function getConnectionPoint(
   }
 }
 
-function getConnectionPoints(
-  fromId: string,
-  toId: string,
-  bias?: 'horizontal' | 'vertical'
-) {
+function getConnectionPoints(fromId: string, toId: string, bias?: 'horizontal' | 'vertical') {
   const from = getNodePosition(fromId);
   const to = getNodePosition(toId);
   if (!from || !to) return null;
@@ -180,14 +176,7 @@ export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagra
     >
       {/* Arrow marker and gradient definitions */}
       <defs>
-        <marker
-          id="arrowhead"
-          markerWidth="6"
-          markerHeight="5"
-          refX="5"
-          refY="2.5"
-          orient="auto"
-        >
+        <marker id="arrowhead" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
           <polygon points="0 0, 6 2.5, 0 5" className="diagram-arrow" />
         </marker>
         {/* Rainbow gradient for binary text - tiles every 20px to match scroll animation */}
@@ -258,11 +247,7 @@ export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagra
               height={zone.height}
               rx="8"
             />
-            <text
-              className="diagram-zone-label"
-              x={zone.x + zone.width / 2}
-              y={zone.labelY}
-            >
+            <text className="diagram-zone-label" x={zone.x + zone.width / 2} y={zone.labelY}>
               {zone.label}
             </text>
           </g>
@@ -270,14 +255,7 @@ export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagra
 
         {/* Commercial Systems zone (bottom) - full width */}
         <g className={isNodeDimmed('commercial-systems') ? 'diagram-zone--dimmed' : ''}>
-          <rect
-            className="diagram-zone"
-            x={10}
-            y={545}
-            width={1180}
-            height={165}
-            rx="8"
-          />
+          <rect className="diagram-zone" x={10} y={545} width={1180} height={165} rx="8" />
           <text className="diagram-zone-label" x={600} y={568}>
             Complete Solutions
           </text>
@@ -316,10 +294,10 @@ export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagra
           rx="6"
         />
         <text className="diagram-network-label" x={COMBINE_NODE.x} y={COMBINE_NODE.y - 6}>
-          combine to
+          DIY
         </text>
         <text className="diagram-network-label" x={COMBINE_NODE.x} y={COMBINE_NODE.y + 10}>
-          become
+          controller
         </text>
       </g>
 
@@ -343,13 +321,25 @@ export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagra
           height={OTHER_OUTPUTS_NODE.height}
           rx="6"
         />
-        <text className="diagram-network-label" x={OTHER_OUTPUTS_NODE.x} y={OTHER_OUTPUTS_NODE.y - 12}>
+        <text
+          className="diagram-network-label"
+          x={OTHER_OUTPUTS_NODE.x}
+          y={OTHER_OUTPUTS_NODE.y - 12}
+        >
           Other
         </text>
-        <text className="diagram-network-protocols" x={OTHER_OUTPUTS_NODE.x} y={OTHER_OUTPUTS_NODE.y + 4}>
+        <text
+          className="diagram-network-protocols"
+          x={OTHER_OUTPUTS_NODE.x}
+          y={OTHER_OUTPUTS_NODE.y + 4}
+        >
           Relay / Lasers
         </text>
-        <text className="diagram-network-protocols" x={OTHER_OUTPUTS_NODE.x} y={OTHER_OUTPUTS_NODE.y + 18}>
+        <text
+          className="diagram-network-protocols"
+          x={OTHER_OUTPUTS_NODE.x}
+          y={OTHER_OUTPUTS_NODE.y + 18}
+        >
           Motors / DMX
         </text>
       </g>
