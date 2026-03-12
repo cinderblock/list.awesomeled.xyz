@@ -2,8 +2,7 @@ import type { Config } from '@react-router/dev/config';
 import { getAllRoutes } from './app/lib/data';
 
 export default {
-  // Enable SSR for pre-rendering
-  ssr: true,
+  ssr: false,
   // Pre-render routes for static site generation
   // This generates static HTML files for each route
   async prerender() {
