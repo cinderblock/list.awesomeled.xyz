@@ -17,9 +17,9 @@ led_voltage: 5V
 max_pixels_per_string: null
 other_links:
   - WS2813 Pixel Protocol Overview | Advatek Lighting
-package_size: "5050"
+package_size: '5050'
 package_sizes:
-  - "5050"
+  - '5050'
 pin_count: 6
 pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s

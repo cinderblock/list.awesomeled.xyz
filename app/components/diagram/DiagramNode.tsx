@@ -23,7 +23,8 @@ function getCategoryIcon(categoryId: string, x: number, y: number) {
     case 'pattern-drivers': {
       // Six rainbow stars arranged in an arc, each canted to follow the arc angle
       // Star points: 5-pointed star with R=5, r=2, centered at origin
-      const starPoints = '0,-5 1.18,-1.62 4.76,-1.55 1.9,0.62 2.94,4.05 0,2 -2.94,4.05 -1.9,0.62 -4.76,-1.55 -1.18,-1.62';
+      const starPoints =
+        '0,-5 1.18,-1.62 4.76,-1.55 1.9,0.62 2.94,4.05 0,2 -2.94,4.05 -1.9,0.62 -4.76,-1.55 -1.18,-1.62';
       return (
         <g className="diagram-node-icon" transform={`translate(${x}, ${iconY})`}>
           {/* Far left star */}
@@ -233,7 +234,9 @@ function getCategoryIcon(categoryId: string, x: number, y: number) {
           {/* Scrolling binary stream on right */}
           <g clipPath="url(#binary-clip-right)" mask="url(#binary-fade-mask-right)">
             <text fontSize="9" className="rainbow-binary-scroll rainbow-binary-scroll-right">
-              <tspan x="8" y="4">0101010101010101</tspan>
+              <tspan x="8" y="4">
+                0101010101010101
+              </tspan>
             </text>
           </g>
         </g>

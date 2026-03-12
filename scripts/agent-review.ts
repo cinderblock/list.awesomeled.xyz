@@ -231,8 +231,12 @@ function analyzeNeighbors(entry: Entry, allEntries: Entry[]): NeighborAnalysis {
   }
 
   // Extract unique values for key fields
-  const statusValues = [...new Set(categoryEntries.map((e) => e.data.status as string).filter(Boolean))];
-  const creatorValues = [...new Set(categoryEntries.map((e) => e.data.creator as string).filter(Boolean))];
+  const statusValues = [
+    ...new Set(categoryEntries.map((e) => e.data.status as string).filter(Boolean)),
+  ];
+  const creatorValues = [
+    ...new Set(categoryEntries.map((e) => e.data.creator as string).filter(Boolean)),
+  ];
 
   // Find fields this entry is missing that are common (>50%) in the category
   const entryFields = new Set(Object.keys(entry.data));
@@ -332,7 +336,9 @@ function generateReport(context: ReviewContext): string {
   lines.push(`Category: ${entry.category}`);
   lines.push(`Entry ID: ${entry.id}`);
   lines.push(`File: ${entry.filePath}`);
-  lines.push(`Last Updated: ${entry.updated ? entry.updated.toISOString().split('T')[0] : 'Never'}`);
+  lines.push(
+    `Last Updated: ${entry.updated ? entry.updated.toISOString().split('T')[0] : 'Never'}`
+  );
   lines.push(`Review Date: ${new Date().toISOString().split('T')[0]}`);
   lines.push('');
 
@@ -484,7 +490,10 @@ async function main() {
 
   log('magenta', `  Selected: ${entry.category}/${entry.id}`);
   log('dim', `  Name: ${entry.name}`);
-  log('dim', `  Last updated: ${entry.updated ? entry.updated.toISOString().split('T')[0] : 'Never'}`);
+  log(
+    'dim',
+    `  Last updated: ${entry.updated ? entry.updated.toISOString().split('T')[0] : 'Never'}`
+  );
   log('dim', `  URLs: ${entry.urls.length} found`);
   log('dim', '');
 
@@ -510,7 +519,9 @@ async function main() {
           : status.status === 'redirect'
             ? colors.yellow + '[REDIRECT]'
             : colors.red + '[' + status.status.toUpperCase() + ']';
-      console.log(`  ${icon}${colors.reset} ${url.substring(0, 50)}${url.length > 50 ? '...' : ''}`);
+      console.log(
+        `  ${icon}${colors.reset} ${url.substring(0, 50)}${url.length > 50 ? '...' : ''}`
+      );
     }
     log('dim', '');
   }

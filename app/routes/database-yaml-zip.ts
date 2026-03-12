@@ -8,7 +8,7 @@ export async function loader() {
 
   for (const category of CATEGORIES) {
     const dir = join(process.cwd(), 'database', category.id);
-    const files = readdirSync(dir).filter(f => f.endsWith('.yaml'));
+    const files = readdirSync(dir).filter((f) => f.endsWith('.yaml'));
     for (const file of files) {
       zip.file(`${category.id}/${file}`, readFileSync(join(dir, file)));
     }

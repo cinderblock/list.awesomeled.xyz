@@ -88,7 +88,6 @@
   filter: drop-shadow(0 4px 12px oklch(0.5 0.12 var(--node-hue) / 0.3));
 }
 
-
 .diagram-node-label {
   fill: oklch(0.35 0.12 var(--node-hue));
   font-size: 13px;
@@ -307,32 +306,44 @@
 .mono-led-1 {
   /* Matches R intensity (hue 30) */
   --m1-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 30) * 1deg)) / 2);
-  fill: oklch(calc(0.3 + 0.35 * var(--m1-intensity)) calc(0.08 + 0.1 * var(--m1-intensity)) var(--node-hue));
+  fill: oklch(
+    calc(0.3 + 0.35 * var(--m1-intensity)) calc(0.08 + 0.1 * var(--m1-intensity)) var(--node-hue)
+  );
 }
 
 .mono-led-2 {
   /* Matches G intensity (hue 142) */
   --m2-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 142) * 1deg)) / 2);
-  fill: oklch(calc(0.3 + 0.35 * var(--m2-intensity)) calc(0.08 + 0.1 * var(--m2-intensity)) var(--node-hue));
+  fill: oklch(
+    calc(0.3 + 0.35 * var(--m2-intensity)) calc(0.08 + 0.1 * var(--m2-intensity)) var(--node-hue)
+  );
 }
 
 .mono-led-3 {
   /* Matches B intensity (hue 264) */
   --m3-intensity: calc((1 + cos((var(--rainbow-hue, 0) - 264) * 1deg)) / 2);
-  fill: oklch(calc(0.3 + 0.35 * var(--m3-intensity)) calc(0.08 + 0.1 * var(--m3-intensity)) var(--node-hue));
+  fill: oklch(
+    calc(0.3 + 0.35 * var(--m3-intensity)) calc(0.08 + 0.1 * var(--m3-intensity)) var(--node-hue)
+  );
 }
 
 /* Light mode: use higher chroma for glowing effect against light background */
 :root:not(.dark) .mono-led-1 {
-  fill: oklch(calc(0.55 + 0.15 * var(--m1-intensity)) calc(0.12 + 0.14 * var(--m1-intensity)) var(--node-hue));
+  fill: oklch(
+    calc(0.55 + 0.15 * var(--m1-intensity)) calc(0.12 + 0.14 * var(--m1-intensity)) var(--node-hue)
+  );
 }
 
 :root:not(.dark) .mono-led-2 {
-  fill: oklch(calc(0.55 + 0.15 * var(--m2-intensity)) calc(0.12 + 0.14 * var(--m2-intensity)) var(--node-hue));
+  fill: oklch(
+    calc(0.55 + 0.15 * var(--m2-intensity)) calc(0.12 + 0.14 * var(--m2-intensity)) var(--node-hue)
+  );
 }
 
 :root:not(.dark) .mono-led-3 {
-  fill: oklch(calc(0.55 + 0.15 * var(--m3-intensity)) calc(0.12 + 0.14 * var(--m3-intensity)) var(--node-hue));
+  fill: oklch(
+    calc(0.55 + 0.15 * var(--m3-intensity)) calc(0.12 + 0.14 * var(--m3-intensity)) var(--node-hue)
+  );
 }
 
 /* ==========================================================================

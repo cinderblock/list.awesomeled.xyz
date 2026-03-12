@@ -288,7 +288,9 @@
     black calc(100% - var(--pixel-scrollbar-width) - var(--fade-width)),
     transparent calc(100% - var(--pixel-scrollbar-width))
   );
-  transition: mask-image 0.15s ease, -webkit-mask-image 0.15s ease;
+  transition:
+    mask-image 0.15s ease,
+    -webkit-mask-image 0.15s ease;
 }
 
 /* Remove fade when scrolled to the right edge */

@@ -439,7 +439,9 @@
 /* Clickable badges in table cells */
 .data-table tbody .badge {
   cursor: pointer;
-  transition: opacity 0.15s, transform 0.15s;
+  transition:
+    opacity 0.15s,
+    transform 0.15s;
 }
 
 .data-table tbody .badge:hover {

@@ -20,8 +20,8 @@ other_links:
   - HD107S Pixel Protocol Overview | Advatek Lighting
 package_size: 5050, 2020
 package_sizes:
-  - "5050"
-  - "2020"
+  - '5050'
+  - '2020'
 pin_count: 6
 pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 1.25 M Pixel / s

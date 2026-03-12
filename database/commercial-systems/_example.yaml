@@ -15,7 +15,7 @@ images:
   - pro-system-controller.jpg
   - pro-system-installation.jpg
 
-online_pricing: "Contact for quote"
+online_pricing: 'Contact for quote'
 pixels_per_run: 500
 price_range: $$$$$
 since: 2015

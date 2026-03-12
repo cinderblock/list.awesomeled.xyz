@@ -6,8 +6,8 @@ audio_input: Input
 demo_available: €15 Donation requested
 designer: true
 gpio: Output
-integrations: "Supported MIDI/DMX Hardware List:
-  https://www.qlcplus.org/discover/compatibility"
+integrations: 'Supported MIDI/DMX Hardware List:
+  https://www.qlcplus.org/discover/compatibility'
 language: C++
 live: true
 other_inputs: OSC, MIDI, Web API

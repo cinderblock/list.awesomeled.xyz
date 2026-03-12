@@ -30,7 +30,7 @@ images:
 
 ip_rating: IP67
 ip_rating_notes: When fully mated with proper cable gland
-largest_gauge: "18"
+largest_gauge: '18'
 locking: Latching
 max_current: 5A
 max_current_notes: Per contact rating at 20AWG
@@ -45,7 +45,7 @@ pinout: V+/D/V-
 pitch: 2.5mm
 rows: 1
 screw_terminal: true
-smallest_gauge: "24"
+smallest_gauge: '24'
 solder: true
 technical_notes:
   - Gold-plated contacts for corrosion resistance
@@ -79,7 +79,7 @@ crimp_tool_cost: $150+
 gendered: true
 ip_rating: IP68
 ip_rating_notes: Rated to 2m submersion
-largest_gauge: "14"
+largest_gauge: '14'
 locking: Screw Lock
 max_current: 10A
 max_pins: 8
@@ -89,7 +89,7 @@ outline: Circular
 panel_mount: true
 pcb_mount: false
 rows: 1
-smallest_gauge: "18"
+smallest_gauge: '18'
 solder: true
 technical_notes:
   - Requires thread sealant for IP68 rating
@@ -151,7 +151,7 @@ digikey_url: https://digikey.com/example-terminal
 gendered: false
 idc: false
 ip_rating: IP20
-largest_gauge: "14"
+largest_gauge: '14'
 locking: Push-in spring
 max_current: 8A
 max_pins: 24
@@ -163,7 +163,7 @@ pcb_mount: Through-hole
 pitch: 5.08mm
 rows: 1
 screw_terminal: false
-smallest_gauge: "22"
+smallest_gauge: '22'
 solder: false
 wire_to_wire: false
 year_introduced: 2000

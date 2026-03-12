@@ -102,7 +102,7 @@ function getBadgesForEntry(entry: Record<string, unknown>): BadgeConfig[] {
     findBadgesInValue(value, found);
   }
 
-  return Array.from(found).map(term => BADGES[term]);
+  return Array.from(found).map((term) => BADGES[term]);
 }
 
 // Pill styling shared across badge variants
@@ -211,14 +211,16 @@ export function ValueBadges({ value, categoryPath, fieldKey }: ValueBadgesProps)
   if (Array.isArray(value)) {
     // Check if any items have badges
     const hasBadges = value.some(
-      item => typeof item === 'string' && getBadgeForValue(item) !== null
+      (item) => typeof item === 'string' && getBadgeForValue(item) !== null
     );
 
     if (!hasBadges) return null;
 
     // Render each item as a pill - badge if available, text pill otherwise
     return (
-      <span style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}>
+      <span
+        style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.375rem', alignItems: 'center' }}
+      >
         {value.map((item, idx) => {
           const strItem = String(item);
           const badge = typeof item === 'string' ? getBadgeForValue(item) : null;

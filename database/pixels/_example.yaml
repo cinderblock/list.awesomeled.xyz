@@ -38,11 +38,11 @@ other_links:
   - https://example.com/timing-diagram
 package_size: 5050/3535/2020
 package_sizes:
-  - "5050"
-  - "3535"
-  - "2020"
+  - '5050'
+  - '3535'
+  - '2020'
 pin_count: 4
-pixel_data_size: "24"
+pixel_data_size: '24'
 pixel_data_size_notes: 8 bits per channel, RGB only
 pixel_rate_max: 33.3k pixels/sec
 pwm_frequency: 1.2kHz
@@ -78,7 +78,7 @@ manufacturers:
   - Example Semiconductor
 notes: RGBW version with dedicated white channel for better CRI
 backup_data_line: false
-brightness_bits: "8+5"
+brightness_bits: '8+5'
 brightness_control_method: global
 channel_current: 12mA
 channel_current_notes: 12mA per channel including white
@@ -90,9 +90,9 @@ gpio_max: 5.5
 gpio_min: 2.7
 led_voltage: 5
 package_sizes:
-  - "5050"
+  - '5050'
 pin_count: 6
-pixel_data_size: "32"
+pixel_data_size: '32'
 pixel_data_size_notes: 8 bits per channel, 4 channels
 pwm_frequency: 1.1kHz
 release_year: 2019
@@ -105,7 +105,7 @@ manufacturers:
   - HD LED Corp
 notes: High speed clocked pixel ideal for POV and video applications
 backup_data_line: false
-brightness_bits: "8+5"
+brightness_bits: '8+5'
 brightness_control_method: current
 channel_current: 20mA
 clocked: true
@@ -121,17 +121,17 @@ led_voltage: 5
 max_pixels_notes: Clock line degrades after ~250 pixels, SK9822 compatible timing
 max_pixels_per_string: 250
 package_sizes:
-  - "5050"
-  - "2020"
+  - '5050'
+  - '2020'
 pin_count: 6
-pixel_data_size: "32"
+pixel_data_size: '32'
 pixel_rate_max: 750k pixels/sec
 pwm_frequency: 19.2kHz
 pwm_frequency_notes: True constant current PWM, excellent for video
 release_year: 2014
 technical_notes:
   - 5-bit global brightness uses current control for true dimming
-  - "Start frame: 32 zero bits, End frame: (n/2) one bits"
+  - 'Start frame: 32 zero bits, End frame: (n/2) one bits'
 vcc_voltage: 5
 ---
 # Example 4: 12V pixel with integrated voltage regulator
@@ -155,8 +155,8 @@ gpio_min_notes: Higher threshold due to integrated regulator noise
 led_voltage: 12
 led_voltage_notes: Internal buck regulator, 9-14V input range
 package_sizes:
-  - "5050"
-pixel_data_size: "24"
+  - '5050'
+pixel_data_size: '24'
 pwm_frequency: 2kHz
 quiescent_current: 2mA
 vcc_voltage: 5
@@ -176,7 +176,7 @@ color_order: RGB
 data_bitrate: 400kbps
 data_type: WS2811
 led_voltage: 5
-pixel_data_size: "24"
+pixel_data_size: '24'
 pwm_frequency: 400Hz
 pwm_frequency_notes: Low frequency causes visible flicker in video
 release_year: 2010

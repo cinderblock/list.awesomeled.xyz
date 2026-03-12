@@ -59,10 +59,7 @@ export default function CategoryPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <PageWrapper category={category}>
-      <Breadcrumb
-        items={[{ label: 'Home', path: '/' }, { label: category.name }]}
-        categoryThemed
-      />
+      <Breadcrumb items={[{ label: 'Home', path: '/' }, { label: category.name }]} categoryThemed />
 
       <header className="page-header">
         <h1 className="page-title category-page-title">{category.name}</h1>

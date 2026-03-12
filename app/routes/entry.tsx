@@ -88,8 +88,20 @@ function stripSchemaAndWww(url: string): string {
 }
 
 // Collect all URL fields from entry
-function getEntryUrls(entry: Record<string, unknown>): Array<{ key: string; url: string; label: string; icon: React.ComponentType<{ size?: number }> }> {
-  const urls: Array<{ key: string; url: string; label: string; icon: React.ComponentType<{ size?: number }> }> = [];
+function getEntryUrls(
+  entry: Record<string, unknown>
+): Array<{
+  key: string;
+  url: string;
+  label: string;
+  icon: React.ComponentType<{ size?: number }>;
+}> {
+  const urls: Array<{
+    key: string;
+    url: string;
+    label: string;
+    icon: React.ComponentType<{ size?: number }>;
+  }> = [];
   for (const [key, value] of Object.entries(entry)) {
     if ((key === 'url' || key.endsWith('_url')) && typeof value === 'string' && value) {
       const config = URL_CONFIGS[key];
@@ -113,7 +125,15 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
 
   return (
     <PageWrapper category={category}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', paddingRight: '1rem' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1rem',
+          paddingRight: '1rem',
+        }}
+      >
         <Breadcrumb
           items={[
             { label: 'Home', path: '/' },
@@ -180,7 +200,10 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           </p>
         )}
         {urls.length > 0 && (
-          <div className="entry-urls" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '0.75rem' }}>
+          <div
+            className="entry-urls"
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '0.75rem' }}
+          >
             {urls.map(({ key, url, label, icon: Icon }) => (
               <a
                 key={key}
@@ -249,15 +272,24 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
 
       <div className="border rounded-lg p-4" style={{ width: 'fit-content', minWidth: '300px' }}>
         <h2 className="text-xl font-semibold mb-4">Details</h2>
-        <dl style={{ display: 'grid', gridTemplateColumns: 'max-content auto', gap: '0.5rem 1rem' }}>
+        <dl
+          style={{ display: 'grid', gridTemplateColumns: 'max-content auto', gap: '0.5rem 1rem' }}
+        >
           {Object.entries(entry)
-            .filter(([key]) => !['id', 'name', 'image', 'images', 'updated'].includes(key) && key !== 'url' && !key.endsWith('_url'))
+            .filter(
+              ([key]) =>
+                !['id', 'name', 'image', 'images', 'updated'].includes(key) &&
+                key !== 'url' &&
+                !key.endsWith('_url')
+            )
             .map(([key, value]) => (
               <div key={key} style={{ display: 'contents' }}>
                 <dt className="font-medium" style={{ textTransform: 'capitalize' }}>
                   {key.replace(/_/g, ' ')}
                 </dt>
-                <dd className="text-muted">{formatValue(key, value, category.path, filterableFields)}</dd>
+                <dd className="text-muted">
+                  {formatValue(key, value, category.path, filterableFields)}
+                </dd>
               </div>
             ))}
         </dl>

@@ -23,4 +23,4 @@ quiescent_current: 0.1mA
 release_year: null
 third_party_testing: null
 vcc_voltage: 5V
-wattage: "#VALUE!"
+wattage: '#VALUE!'

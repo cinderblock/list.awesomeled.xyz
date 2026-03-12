@@ -15,6 +15,7 @@ AI-powered database entry reviewer that researches and updates YAML entries.
 When this skill is invoked:
 
 1. **Run the selection script** to pick an entry and generate context:
+
    ```bash
    bun run agent-review $ARGUMENTS
    ```
@@ -52,6 +53,7 @@ When this skill is invoked:
 ## Categories
 
 Available categories:
+
 - controllers
 - pixels
 - pixel-ics

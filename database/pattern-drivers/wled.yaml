@@ -1,8 +1,8 @@
 name: WLED
 status: active
 creator: Aircoookie, community
-notes: "Great standalone pixel controller software for ESP8266 and ESP32 based
-  boards. See also: WLED-SR, sound reactive fork"
+notes: 'Great standalone pixel controller software for ESP8266 and ESP32 based
+  boards. See also: WLED-SR, sound reactive fork'
 audio_input: null
 demo_available: Open source
 designer: false
@@ -24,7 +24,7 @@ protocols:
   kinet: null
   ddp: Input
 serial: Input
-url: "GitHub - Aircoookie/WLED: Control WS2812B and many more types of digital
-  RGB LEDs with an ESP8266 or ESP32 over Wi-Fi!"
+url: 'GitHub - Aircoookie/WLED: Control WS2812B and many more types of digital
+  RGB LEDs with an ESP8266 or ESP32 over Wi-Fi!'
 video_input: null
 visualizer: Limited 1D

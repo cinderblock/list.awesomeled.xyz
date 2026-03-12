@@ -18,7 +18,9 @@ export const noDoubledSpaces = {
         const match = value.match(/(?<=\S)  +/);
         if (match) {
           const canAutoFix =
-            node.style === 'plain' || node.style === 'double-quoted' || node.style === 'single-quoted';
+            node.style === 'plain' ||
+            node.style === 'double-quoted' ||
+            node.style === 'single-quoted';
 
           context.report({
             node,

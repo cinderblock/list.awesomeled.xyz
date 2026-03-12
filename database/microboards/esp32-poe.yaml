@@ -1,7 +1,7 @@
 name: ESP32-PoE
 creator: Olimex
 notes: null
-bluetooth: "4.2"
+bluetooth: '4.2'
 bms: 1S
 clock_speed: null
 cpu: Xtensa LX6

@@ -14,7 +14,7 @@ gpio_min: 3.5V
 led_voltage: 5V
 max_pixels_per_string: null
 other_links: null
-package_size: "5050"
+package_size: '5050'
 pin_count: 6
 pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 0.94 M Pixel / s

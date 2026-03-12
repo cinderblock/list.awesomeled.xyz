@@ -104,11 +104,5 @@ export function DiagramConnection({
     .filter(Boolean)
     .join(' ');
 
-  return (
-    <path
-      className={className}
-      d={path}
-      markerEnd="url(#arrowhead)"
-    />
-  );
+  return <path className={className} d={path} markerEnd="url(#arrowhead)" />;
 }

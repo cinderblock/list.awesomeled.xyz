@@ -1,7 +1,7 @@
 name: TTGo ESP32 PoE
 creator: Lilygo
 notes: null
-bluetooth: "4.2"
+bluetooth: '4.2'
 bms: null
 clock_speed: null
 cpu: Xtensa LX6

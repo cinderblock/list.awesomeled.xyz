@@ -14,7 +14,7 @@ gpio_min: null
 led_voltage: 12V
 max_pixels_per_string: null
 other_links: CS8812 Pixel Protocol Overview | Advatek Lighting
-package_size: "5050"
+package_size: '5050'
 pin_count: null
 pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s

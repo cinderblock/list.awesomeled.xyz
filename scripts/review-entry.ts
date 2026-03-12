@@ -86,7 +86,9 @@ function loadAllEntries(): Entry[] {
     const categoryPath = resolve(DATABASE_PATH, category);
     if (!existsSync(categoryPath)) continue;
 
-    const files = readdirSync(categoryPath).filter((f) => f.endsWith('.yaml') && !f.startsWith('_'));
+    const files = readdirSync(categoryPath).filter(
+      (f) => f.endsWith('.yaml') && !f.startsWith('_')
+    );
 
     for (const file of files) {
       const filePath = resolve(categoryPath, file);

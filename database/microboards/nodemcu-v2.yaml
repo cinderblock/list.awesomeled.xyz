@@ -1,7 +1,7 @@
 name: NodeMCU v2
 creator: NodeMCU
 notes: null
-bluetooth: "4.1"
+bluetooth: '4.1'
 bms: false
 clock_speed: null
 cpu: Diamond Standard 106Micro

@@ -1,7 +1,7 @@
 name: Raspberry Pi 4 Model B
 creator: Raspberry Pi Foundation
 notes: null
-bluetooth: "5.0"
+bluetooth: '5.0'
 bms: false
 clock_speed: 1.5GHz
 cpu: 4× ARM Cortex-A72

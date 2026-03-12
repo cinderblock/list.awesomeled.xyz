@@ -342,7 +342,12 @@ export const pixelColumns: Column[] = [
     render: renderBool,
     filterConfig: { type: 'boolean' },
   },
-  { key: 'data_bitrate', label: 'Data Rate', render: formatFrequency, className: 'data-table-cell--right' },
+  {
+    key: 'data_bitrate',
+    label: 'Data Rate',
+    render: formatFrequency,
+    className: 'data-table-cell--right',
+  },
   {
     key: 'package_size',
     label: 'Package',
@@ -372,8 +377,18 @@ export const pixelICColumns: Column[] = [
     render: renderBool,
     filterConfig: { type: 'boolean' },
   },
-  { key: 'pwm_frequency', label: 'PWM Freq', render: formatFrequency, className: 'data-table-cell--right' },
-  { key: 'data_bitrate', label: 'Data Rate', render: formatFrequency, className: 'data-table-cell--right' },
+  {
+    key: 'pwm_frequency',
+    label: 'PWM Freq',
+    render: formatFrequency,
+    className: 'data-table-cell--right',
+  },
+  {
+    key: 'data_bitrate',
+    label: 'Data Rate',
+    render: formatFrequency,
+    className: 'data-table-cell--right',
+  },
   {
     key: 'package_size',
     label: 'Package',
@@ -503,7 +518,12 @@ export const microboardColumns: Column[] = [
     label: 'CPU',
     filterConfig: { type: 'select' },
   },
-  { key: 'clock_speed', label: 'Clock', render: formatFrequency, className: 'data-table-cell--right' },
+  {
+    key: 'clock_speed',
+    label: 'Clock',
+    render: formatFrequency,
+    className: 'data-table-cell--right',
+  },
   { key: 'flash', label: 'Flash', render: formatMemory, className: 'data-table-cell--right' },
   { key: 'ram', label: 'RAM', render: formatMemory, className: 'data-table-cell--right' },
   {

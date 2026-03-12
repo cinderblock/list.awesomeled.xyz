@@ -31,9 +31,7 @@ export function PixelScrollbar({
   // Calculate pixel count based on track size
   const updatePixelCount = useCallback(() => {
     if (!trackRef.current) return;
-    const trackSize = isHorizontal
-      ? trackRef.current.clientWidth
-      : trackRef.current.clientHeight;
+    const trackSize = isHorizontal ? trackRef.current.clientWidth : trackRef.current.clientHeight;
     const count = Math.max(1, Math.floor(trackSize / pixelSpacing));
     setPixelCount(count);
   }, [pixelSpacing, isHorizontal]);
@@ -187,9 +185,7 @@ export function PixelScrollbar({
       if (!trackRef.current || pixelCount === 0) return;
 
       const rect = trackRef.current.getBoundingClientRect();
-      const clickPos = isHorizontal
-        ? e.clientX - rect.left
-        : e.clientY - rect.top;
+      const clickPos = isHorizontal ? e.clientX - rect.left : e.clientY - rect.top;
       const trackSize = isHorizontal ? rect.width : rect.height;
       const ratio = clickPos / trackSize;
 

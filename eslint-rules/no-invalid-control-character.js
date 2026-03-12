@@ -17,15 +17,10 @@ export const noInvalidControlCharacter = {
   },
   create(context) {
     // Build a regex that matches any invalid control character
-    const pattern = new RegExp(
-      `[${INVALID_CONTROL_CHARACTERS.map((c) => c.code).join('')}]`,
-      'g'
-    );
+    const pattern = new RegExp(`[${INVALID_CONTROL_CHARACTERS.map((c) => c.code).join('')}]`, 'g');
 
     // Map code points to names for error messages
-    const codeToName = new Map(
-      INVALID_CONTROL_CHARACTERS.map((c) => [c.code, c.name])
-    );
+    const codeToName = new Map(INVALID_CONTROL_CHARACTERS.map((c) => [c.code, c.name]));
 
     return {
       YAMLScalar(node) {

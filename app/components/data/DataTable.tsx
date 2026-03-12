@@ -797,7 +797,6 @@ export function DataTable({
     setColumnWidths(widths);
     setControlsHeight(controlsRect.height);
     setHeaderHeight(theadRect.height);
-
   }, []);
 
   // Sync horizontal scroll - mirror scroll position directly (no RAF needed, very fast)
@@ -817,7 +816,6 @@ export function DataTable({
     el.classList.toggle('data-table-scroll--at-end', isAtEnd);
     stickyHeaderScrollRef.current.classList.toggle('data-table-scroll--at-end', isAtEnd);
   }, []);
-
 
   // Check visibility using cached measurements where possible
   const checkStickyVisibility = useCallback(() => {
@@ -1062,10 +1060,7 @@ export function DataTable({
         }}
       >
         {/* Inner scroll container - mirrors horizontal scroll of main table */}
-        <div
-          ref={stickyHeaderScrollRef}
-          className="data-table-sticky-header-scroll"
-        >
+        <div ref={stickyHeaderScrollRef} className="data-table-sticky-header-scroll">
           {/* Inner wrapper to match main table's centering structure */}
           <div className="data-table-scroll-inner">
             <table

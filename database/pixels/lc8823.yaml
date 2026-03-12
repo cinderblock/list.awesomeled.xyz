@@ -14,13 +14,13 @@ gpio_min: null
 led_voltage: 3-7.5V
 max_pixels_per_string: null
 other_links: null
-package_size: "5050"
+package_size: '5050'
 pin_count: 6
 pixel_data_size: null
 pixel_rate_max: null
 pwm_frequency: 27kHz
-quiescent_current: "?"
+quiescent_current: '?'
 release_year: null
 third_party_testing: null
 vcc_voltage: 5V
-wattage: "#VALUE!"
+wattage: '#VALUE!'

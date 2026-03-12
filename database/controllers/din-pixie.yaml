@@ -22,10 +22,10 @@ release_year: null
 standalone: true
 storage: Yes
 technical_notes:
-  - "RGB (8-bit): 340 pixels max"
-  - "RGBW (8-bit): 256 pixels max"
-  - "RGB (16-bit): 170 pixels max"
-  - "RGBW (16-bit): 128 pixels max"
+  - 'RGB (8-bit): 340 pixels max'
+  - 'RGBW (8-bit): 256 pixels max'
+  - 'RGB (16-bit): 170 pixels max'
+  - 'RGBW (16-bit): 128 pixels max'
   - Storage is not removable
   - Can be powered from pixel strip (back-powered)
   - Record shows via USB using live Art-Net

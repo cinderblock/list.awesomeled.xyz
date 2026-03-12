@@ -1,7 +1,7 @@
 name: WT32-ETH01
 creator: Shenzhen Qiming Cloud Co., Ltd
 notes: null
-bluetooth: "4.2"
+bluetooth: '4.2'
 bms: null
 clock_speed: null
 cpu: Xtensa LX6

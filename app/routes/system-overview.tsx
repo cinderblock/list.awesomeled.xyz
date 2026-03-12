@@ -33,8 +33,8 @@ export default function SystemOverview({ loaderData }: Route.ComponentProps) {
         </h1>
         <div className="diagram-intro">
           <p>
-            See how different components connect to create a complete addressable LED system.
-            Click any component to explore that category.
+            See how different components connect to create a complete addressable LED system. Click
+            any component to explore that category.
           </p>
           <Link to="/" className="view-toggle-link">
             View as Category Grid

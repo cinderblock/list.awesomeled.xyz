@@ -33,7 +33,10 @@ function relativeSourcemaps(): Plugin {
           });
         }
         const newSourcemap = Buffer.from(JSON.stringify(sourcemap)).toString('base64');
-        return code.replace(match[0], `//# sourceMappingURL=data:application/json;base64,${newSourcemap}`);
+        return code.replace(
+          match[0],
+          `//# sourceMappingURL=data:application/json;base64,${newSourcemap}`
+        );
       } catch {
         return null;
       }

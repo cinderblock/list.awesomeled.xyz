@@ -4,9 +4,9 @@
  * Removes background using flood-fill from edges, then trims
  */
 
-import { resolve } from "path";
-import { readFileSync, writeFileSync, existsSync } from "fs";
-import sharp from "sharp";
+import { resolve } from 'path';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
+import sharp from 'sharp';
 
 /**
  * Process image: remove solid background from edges (if not already transparent), then trim
@@ -16,7 +16,7 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
   const metadata = await image.metadata();
 
   // Skip SVGs and GIFs (animated)
-  if (metadata.format === "svg" || metadata.format === "gif") {
+  if (metadata.format === 'svg' || metadata.format === 'gif') {
     return inputBuffer;
   }
 
@@ -52,36 +52,28 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
 
   if (transparentCorners >= 3) {
     // Already has transparent background, just trim
-    console.log("  Corners already transparent, just trimming...");
-    const result = await sharp(inputBuffer)
-      .trim({ threshold: 10 })
-      .png()
-      .toBuffer();
+    console.log('  Corners already transparent, just trimming...');
+    const result = await sharp(inputBuffer).trim({ threshold: 10 }).png().toBuffer();
     return result;
   }
 
   // Check if corners have solid white/black background
-  const isWhitish = (p: { r: number; g: number; b: number }) =>
-    p.r > 240 && p.g > 240 && p.b > 240;
-  const isBlackish = (p: { r: number; g: number; b: number }) =>
-    p.r < 15 && p.g < 15 && p.b < 15;
+  const isWhitish = (p: { r: number; g: number; b: number }) => p.r > 240 && p.g > 240 && p.b > 240;
+  const isBlackish = (p: { r: number; g: number; b: number }) => p.r < 15 && p.g < 15 && p.b < 15;
 
   const whiteBg = corners.filter(isWhitish).length >= 3;
   const blackBg = corners.filter(isBlackish).length >= 3;
 
   if (!whiteBg && !blackBg) {
     // No solid background detected, just trim
-    console.log("  No solid background detected, just trimming...");
-    const result = await sharp(inputBuffer)
-      .trim({ threshold: 10 })
-      .png()
-      .toBuffer();
+    console.log('  No solid background detected, just trimming...');
+    const result = await sharp(inputBuffer).trim({ threshold: 10 }).png().toBuffer();
     return result;
   }
 
   const bgColor = whiteBg ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 };
   const tolerance = 30;
-  console.log(`  Detected ${whiteBg ? "white" : "black"} background, flood-filling from edges...`);
+  console.log(`  Detected ${whiteBg ? 'white' : 'black'} background, flood-filling from edges...`);
 
   // Create output buffer with alpha
   const newData = Buffer.from(data);
@@ -92,11 +84,11 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
   // Check if pixel matches background color
   const matchesBg = (x: number, y: number): boolean => {
     const idx = (y * width + x) * channels;
-    const r = data[idx], g = data[idx + 1], b = data[idx + 2];
+    const r = data[idx],
+      g = data[idx + 1],
+      b = data[idx + 2];
     const dist = Math.sqrt(
-      Math.pow(r - bgColor.r, 2) +
-      Math.pow(g - bgColor.g, 2) +
-      Math.pow(b - bgColor.b, 2)
+      Math.pow(r - bgColor.r, 2) + Math.pow(g - bgColor.g, 2) + Math.pow(b - bgColor.b, 2)
     );
     return dist < tolerance;
   };
@@ -171,17 +163,17 @@ async function main() {
   const args = process.argv.slice(2);
 
   if (args.length === 0) {
-    console.log("Usage: bun scripts/crop-image.ts <image1> [image2] ...");
-    console.log("Example: bun scripts/crop-image.ts database/controllers/images/baldrick-17.png");
+    console.log('Usage: bun scripts/crop-image.ts <image1> [image2] ...');
+    console.log('Example: bun scripts/crop-image.ts database/controllers/images/baldrick-17.png');
     process.exit(1);
   }
 
   for (const imagePath of args) {
     await cropImage(imagePath);
-    console.log("");
+    console.log('');
   }
 
-  console.log("Done!");
+  console.log('Done!');
 }
 
 main().catch(console.error);

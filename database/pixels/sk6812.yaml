@@ -24,9 +24,9 @@ other_links:
   - SK6812 Pixel Protocol Overview | Advatek Lighting
 package_size: 5050,3535,2040
 package_sizes:
-  - "5050"
-  - "3535"
-  - "2040"
+  - '5050'
+  - '3535'
+  - '2040'
 pin_count: 4
 pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s

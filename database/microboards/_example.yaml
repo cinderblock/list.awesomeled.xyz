@@ -60,7 +60,7 @@ ram: 2GB DDR4
 release_year: 2023
 soc: AllwinnerH6
 storage: eMMC 16GB + microSD
-ttl_serial: "/dev/ttyS0"
+ttl_serial: '/dev/ttyS0'
 url: https://example.com/pi-clone
 usb: USB 3.0 x2, USB 2.0 x2
 wifi: 802.11ac
@@ -118,7 +118,7 @@ linux: false
 max_input_voltage: 57
 max_outputs: 4
 min_input_voltage: 48
-poe: "802.3at PoE+"
+poe: '802.3at PoE+'
 price: 35
 ram: 256KB
 release_year: 2022

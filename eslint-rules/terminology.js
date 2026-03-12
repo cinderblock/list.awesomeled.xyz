@@ -17,7 +17,15 @@ const defaultTerms = getTerms(true, [], []);
 const sentenceStartRegExp = /\w+[!.?]\)? $/;
 
 // Default keys whose values contain code, not prose
-const defaultSkipValueKeys = ['run', 'script', 'command', 'cmd', 'shell', 'exec', 'working-directory'];
+const defaultSkipValueKeys = [
+  'run',
+  'script',
+  'command',
+  'cmd',
+  'shell',
+  'exec',
+  'working-directory',
+];
 
 function upperFirst(text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
@@ -90,9 +98,11 @@ export const terminology = {
           }
         }
         // Check grandparent (for sequence items: key: [item1, item2])
-        if (node.parent?.type === 'YAMLSequence' &&
-            node.parent.parent?.type === 'YAMLPair' &&
-            node.parent.parent.key?.value) {
+        if (
+          node.parent?.type === 'YAMLSequence' &&
+          node.parent.parent?.type === 'YAMLPair' &&
+          node.parent.parent.key?.value
+        ) {
           const keyName = node.parent.parent.key.value;
           if (skipValueKeys.includes(keyName)) {
             return;
@@ -138,7 +148,8 @@ export const terminology = {
               message: `Incorrect term: "${matched.trim()}", use "${replacement.trim()}" instead`,
               fix: canAutoFix
                 ? (fixer) => {
-                    const fixedValue = text.slice(0, index) + replacement + text.slice(index + matched.length);
+                    const fixedValue =
+                      text.slice(0, index) + replacement + text.slice(index + matched.length);
                     let newText;
                     if (node.style === 'double-quoted') {
                       newText = `"${fixedValue}"`;
