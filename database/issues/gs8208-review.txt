@@ -1,0 +1,108 @@
+============================================================
+AGENT REVIEW: GS8208
+============================================================
+
+Category: pixels
+Entry ID: gs8208
+File: C:\Users\camer\git\awesomeledlist-reactrouter\database\pixels\gs8208.yaml
+Last Updated: Never
+Review Date: 2026-02-07
+
+----------------------------------------
+CURRENT ENTRY DATA
+----------------------------------------
+name: GS8208
+status: active
+creator: Genesis Systec
+notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version booted with onboard patterns - now eliminated
+backup_data_line: true
+brightness_bits: 8
+brightness_control_notes: 36 bits interpolated 12 bits gamma correction per colour
+channel_current: 10mA
+channel_current_notes: Measured current across 3 LEDs at 12V. Datasheet claims 15mA
+clocked: false
+color_order: RGB
+data_bitrate: 800kHz
+data_type: WS2811/12
+datasheet_discrepancies: ["Datasheet claims 15mA but measured value is ~10mA"]
+datasheet_url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+gpio_max: 5V
+gpio_min: 3.5V
+led_voltage: 12V
+led_voltage_notes: Datasheet 10.8-13.2V
+max_pixels_per_string: null
+other_links: ["GS8208 Pixel Protocol Overview | Advatek Lighting"]
+package_size: 5050
+package_sizes: ["5050"]
+pin_count: 6
+pixel_data_size: 24 Bits/Pixel
+pixel_rate_max: 33.3 k Pixel / s
+pwm_frequency: 8.0kHz
+pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively multiply 2kHz PWM to 8kHz
+quiescent_current: 2.5mA
+release_year: 2018
+technical_notes: ["Built-in 8-bit to 12-bit gamma correction for smoother fades","Uses MPWM (multiplexed PWM) for effective 8kHz refresh rate","Early versions had boot pattern bug - fixed in current production","Internal 36-bit interpolation with 12-bit gamma per color channel"]
+third_party_testing: null
+vcc_voltage: 12V
+wattage: 120mW
+
+----------------------------------------
+URL STATUS
+----------------------------------------
+[REDIRECT] http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+     -> https://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+
+----------------------------------------
+CATEGORY PATTERNS
+----------------------------------------
+Total entries in pixels: 34
+
+Common fields in this category:
+  [x] name: 100%
+  [x] creator: 100%
+  [x] notes: 100%
+  [x] backup_data_line: 100%
+  [x] brightness_bits: 100%
+  [x] channel_current: 100%
+  [x] clocked: 100%
+  [x] color_order: 100%
+  [x] data_bitrate: 100%
+  [x] data_type: 100%
+  [x] datasheet_url: 100%
+  [x] gpio_max: 100%
+  [x] gpio_min: 100%
+  [x] led_voltage: 100%
+  [x] max_pixels_per_string: 100%
+
+Status values used: active
+
+Similar entries for reference:
+  - WS2812 [active]
+  - WS2815 [active]
+  - APA102 [active]
+  - APA102C [active]
+  - SK6812 [active]
+
+----------------------------------------
+RESEARCH QUERIES
+----------------------------------------
+Use these queries to research this product:
+  - "GS8208" Genesis Systec
+  - "GS8208" buy price 2026
+  - "GS8208" discontinued OR "end of life" OR "no longer available"
+  - "GS8208" datasheet specifications
+
+----------------------------------------
+REVIEW INSTRUCTIONS
+----------------------------------------
+Please research this entry and:
+1. Verify URLs are current (update if redirected, remove if dead)
+2. Check if product is still available or discontinued
+3. Update pricing if significantly changed
+4. Add missing common fields if information is available
+5. Correct any factual errors found
+
+Confidence levels for auto-commit:
+  HIGH: Dead URL removal, confirmed discontinuation
+  MEDIUM: Price updates, new field additions
+  LOW: Major content changes, unverified info

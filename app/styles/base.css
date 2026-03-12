@@ -193,9 +193,10 @@ img {
 ::view-transition-new(main-content) {
   animation-duration: 150ms;
   animation-timing-function: ease-out;
+  animation-fill-mode: both;
 }
 
-/* Cross-fade transition - only applies to main content, not header/footer */
+/* Default: simple crossfade for browser back/forward */
 ::view-transition-old(main-content) {
   animation-name: fade-out;
 }
@@ -204,10 +205,25 @@ img {
   animation-name: fade-in;
 }
 
+/* Slide left: navigating to a category further right in the menu */
+:root[data-nav-direction='left']::view-transition-old(main-content) {
+  animation-name: slide-out-left;
+}
+
+:root[data-nav-direction='left']::view-transition-new(main-content) {
+  animation-name: slide-in-from-right;
+}
+
+/* Slide right: navigating to a category further left in the menu */
+:root[data-nav-direction='right']::view-transition-old(main-content) {
+  animation-name: slide-out-right;
+}
+
+:root[data-nav-direction='right']::view-transition-new(main-content) {
+  animation-name: slide-in-from-left;
+}
+
 @keyframes fade-out {
-  from {
-    opacity: 1;
-  }
   to {
     opacity: 0;
   }
@@ -217,7 +233,29 @@ img {
   from {
     opacity: 0;
   }
+}
+
+/* Slide animations - transform only, no opacity to avoid flashing */
+@keyframes slide-out-left {
   to {
-    opacity: 1;
+    transform: translateX(-40px);
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(40px);
+  }
+}
+
+@keyframes slide-out-right {
+  to {
+    transform: translateX(40px);
+  }
+}
+
+@keyframes slide-in-from-left {
+  from {
+    transform: translateX(-40px);
   }
 }

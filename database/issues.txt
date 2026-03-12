@@ -1,0 +1,14 @@
+controllers/f-test should be in pixel-decoders/
+
+controllers/flex-pixel-driver
+- update name "Flex Pixel Driver 1"
+- mfg is "Elation Lighting"
+- Wrong interfaces
+
+Diffusive Materials
+- inconsistent materials type names
+- type needs to be list?
+- flexible should be boolean
+
+Some controllers have "inputs"
+

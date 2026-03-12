@@ -15,6 +15,13 @@ export function CategoryNav() {
   const currentCategory = CATEGORIES.find(
     (cat) => location.pathname === cat.path || location.pathname.startsWith(cat.path + '/')
   );
+  const currentIndex = currentCategory ? CATEGORIES.indexOf(currentCategory) : -1;
+
+  // Set navigation direction class before view transition starts
+  const handleNavClick = (targetIndex: number) => {
+    const direction = targetIndex > currentIndex ? 'left' : 'right';
+    document.documentElement.dataset.navDirection = direction;
+  };
 
   const updateScrollArrows = () => {
     const el = scrollRef.current;
@@ -37,6 +44,14 @@ export function CategoryNav() {
       }
     }
   }, [currentCategory]);
+
+  // Clear nav direction after view transition completes (delay must exceed animation duration)
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      delete document.documentElement.dataset.navDirection;
+    }, 200);
+    return () => clearTimeout(timeout);
+  }, [location.pathname]);
 
   const scroll = (direction: 'left' | 'right') => {
     const el = scrollRef.current;
@@ -79,6 +94,7 @@ export function CategoryNav() {
                 to={category.path}
                 prefetch="render"
                 viewTransition
+                onClick={() => handleNavClick(index)}
                 data-category={category.id}
                 className={`category-tab ${isActive ? 'category-tab--active' : ''}`}
                 style={

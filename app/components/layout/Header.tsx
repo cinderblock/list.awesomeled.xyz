@@ -1,7 +1,7 @@
-import { Link } from 'react-router';
 import { Github } from 'lucide-react';
-import { ThemeToggle } from '~/components/ui/ThemeToggle';
+import { Link } from 'react-router';
 import { RainbowText } from '~/components/ui/RainbowText';
+import { ThemeToggle } from '~/components/ui/ThemeToggle';
 
 export function Header() {
   return (
@@ -15,6 +15,16 @@ export function Header() {
             <Link to="/about" className="btn btn--ghost site-nav-link">
               About
             </Link>
+            {/*
+            <a
+              href="https://forum.awesomeled.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--ghost site-nav-link"
+            >
+              Forums
+            </a>
+            */}
             <a
               href="https://github.com/cinderblock/awesomeledlist"
               target="_blank"

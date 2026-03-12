@@ -172,7 +172,7 @@ export function getCategoryById(id: string): Category | undefined {
  * Get all routes that should be pre-rendered
  */
 export function getAllRoutes(): string[] {
-  const routes: string[] = ['/', '/about'];
+  const routes: string[] = ['/', '/about', '/system-overview'];
 
   routes.push('/database.csv.zip', '/database.yaml.zip');
 

@@ -36,7 +36,7 @@ export default tseslint.config(
         rules: {
           'no-doubled-spaces': noDoubledSpaces,
           'no-invalid-control-character': noInvalidControlCharacter,
-          'terminology': terminology,
+          terminology: terminology,
         },
       },
     },
@@ -45,9 +45,21 @@ export default tseslint.config(
       'yml/block-sequence': ['error', 'always'],
       'custom/no-doubled-spaces': 'error',
       'custom/no-invalid-control-character': 'error',
-      'custom/terminology': ['error', {
-        skipValueKeys: ['run', 'script', 'command', 'cmd', 'shell', 'exec', 'working-directory', 'dictionaries'],
-      }],
+      'custom/terminology': [
+        'error',
+        {
+          skipValueKeys: [
+            'run',
+            'script',
+            'command',
+            'cmd',
+            'shell',
+            'exec',
+            'working-directory',
+            'dictionaries',
+          ],
+        },
+      ],
     },
   },
   // Database YAML files: name must be first
@@ -61,10 +73,15 @@ export default tseslint.config(
           order: [
             'name',
             'status',
+            'release_year',
             'creator',
             'developer',
             'manufacturers',
+            'vendors',
             'notes',
+            'inputs',
+            'outputs',
+            'power',
             { keyPattern: '.*' }, // All other keys alphabetically
           ],
         },
