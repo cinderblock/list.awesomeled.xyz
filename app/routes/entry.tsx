@@ -88,9 +88,7 @@ function stripSchemaAndWww(url: string): string {
 }
 
 // Collect all URL fields from entry
-function getEntryUrls(
-  entry: Record<string, unknown>
-): Array<{
+function getEntryUrls(entry: Record<string, unknown>): Array<{
   key: string;
   url: string;
   label: string;
@@ -188,17 +186,9 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
       <header className="page-header">
         <h1 className="page-title category-page-title">{entry.name}</h1>
         <FeatureBadges entry={entry} />
-        {entry.creator && (
-          <p className="page-description">
-            by{' '}
-            <Link
-              to={`${category.path}?f=creator:${escapeFilterValue(entry.creator as string)}`}
-              style={{ color: 'var(--category-primary)' }}
-            >
-              {entry.creator as string}
-            </Link>
-          </p>
-        )}
+        {entry.creator ? (
+          <CreatorLine creator={entry.creator} categoryPath={category.path} />
+        ) : null}
         {urls.length > 0 && (
           <div
             className="entry-urls"
@@ -298,6 +288,49 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   );
 }
 
+// Render the "by <creator>" line, supporting both a plain string and the
+// rich { name, url, page } object form.
+function CreatorLine({
+  creator,
+  categoryPath,
+}: {
+  creator: unknown;
+  categoryPath: string;
+}): React.ReactNode {
+  if (creator && typeof creator === 'object') {
+    const c = creator as { name?: string; url?: string; page?: string };
+    const href = c.page || c.url;
+    return (
+      <p className="page-description">
+        by{' '}
+        {href ? (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'var(--category-primary)' }}
+          >
+            {c.name}
+          </a>
+        ) : (
+          c.name
+        )}
+      </p>
+    );
+  }
+  return (
+    <p className="page-description">
+      by{' '}
+      <Link
+        to={`${categoryPath}?f=creator:${escapeFilterValue(creator as string)}`}
+        style={{ color: 'var(--category-primary)' }}
+      >
+        {creator as string}
+      </Link>
+    </p>
+  );
+}
+
 function formatValue(
   key: string,
   value: unknown,
@@ -306,27 +339,20 @@ function formatValue(
 ): React.ReactNode {
   if (value === null || value === undefined) return '-';
 
-  // Check if value can be rendered as badges
-  const badges = ValueBadges({ value, categoryPath, fieldKey: key });
-  if (badges) return badges;
-
-  // Handle booleans - make clickable if filterable
-  if (typeof value === 'boolean') {
-    if (filterableFields.has(key)) {
+  // Arrays: recurse for arrays of objects; badges/links/join for scalar arrays
+  if (Array.isArray(value)) {
+    const hasObjects = value.some((v) => v && typeof v === 'object' && !(v instanceof Date));
+    if (hasObjects) {
       return (
-        <Link
-          to={`${categoryPath}?f=${key}:${value ? 'yes' : 'no'}`}
-          style={{ color: 'var(--category-primary)' }}
-        >
-          {value ? 'Yes' : 'No'}
-        </Link>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          {value.map((item, idx) => (
+            <div key={idx}>{formatValue(key, item, categoryPath, filterableFields)}</div>
+          ))}
+        </div>
       );
     }
-    return value ? 'Yes' : 'No';
-  }
-
-  // Handle arrays - make each item clickable if filterable
-  if (Array.isArray(value)) {
+    const arrBadges = ValueBadges({ value, categoryPath, fieldKey: key });
+    if (arrBadges) return arrBadges;
     if (filterableFields.has(key)) {
       return (
         <span>
@@ -347,8 +373,52 @@ function formatValue(
     return value.join(', ');
   }
 
+  // Nested objects: render as an indented sub key/value list (rich schema)
+  if (typeof value === 'object' && !(value instanceof Date)) {
+    const obj = value as Record<string, unknown>;
+    const keys = Object.keys(obj);
+    if (keys.length === 0) return '-';
+    return (
+      <dl
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'max-content auto',
+          gap: '0.25rem 0.75rem',
+          margin: 0,
+        }}
+      >
+        {keys.map((k) => (
+          <div key={k} style={{ display: 'contents' }}>
+            <dt style={{ textTransform: 'capitalize', color: 'var(--text-muted)' }}>
+              {k.replace(/_/g, ' ')}
+            </dt>
+            <dd>{formatValue(k, obj[k], categoryPath, filterableFields)}</dd>
+          </div>
+        ))}
+      </dl>
+    );
+  }
+
+  // Check if value can be rendered as badges
+  const badges = ValueBadges({ value, categoryPath, fieldKey: key });
+  if (badges) return badges;
+
+  // Handle booleans - make clickable if filterable
+  if (typeof value === 'boolean') {
+    if (filterableFields.has(key)) {
+      return (
+        <Link
+          to={`${categoryPath}?f=${key}:${value ? 'yes' : 'no'}`}
+          style={{ color: 'var(--category-primary)' }}
+        >
+          {value ? 'Yes' : 'No'}
+        </Link>
+      );
+    }
+    return value ? 'Yes' : 'No';
+  }
+
   if (value instanceof Date) return formatDateYMD(value);
-  if (typeof value === 'object') return JSON.stringify(value);
 
   const strValue = String(value);
 
