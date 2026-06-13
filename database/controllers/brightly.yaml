@@ -1,26 +1,32 @@
 name: Brightly
 status: discontinued
-creator: Polytronic
-notes: Modular breakouts allow for direct screw terminal plug or differential
-  RJ45 outputs that can run over 1000ft to a receiver
-auxiliary_outputs: DMX
-buffered: true
-interfaces:
-  - Ethernet
-  - DMX
-  - SD Card
-max_current: 40A
-max_outputs: 8
-max_pixels: 8192
-max_voltage: 12V
-output_connectors: Screw Terminal & RJ45
-outputs: Single and Clock
-pixel_types: both
-price: 200
 release_year: 2021
-standalone: true
-storage: SD
-url: https://glowbrightly.io/
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: Polytronic
+  page: https://glowbrightly.io/
+notes: Modular breakouts allow for direct screw terminal plug or differential RJ45 outputs that can run over 1000ft to a receiver
+inputs:
+  physical:
+    Ethernet: true
+    SD Card: true
+  standalone: true
+outputs:
+  connector: Screw Terminal & RJ45
+  count: 8
+  differential: true # RJ45 breakouts run differential over 1000ft to a receiver
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 1024 # 8192 total across 8 outputs
+  clocked: selectable # single and clocked pixel types
+  auxiliary:
+    DMX512: 1
+power:
+  voltage:
+    max: 12
+  current:
+    max: 40
+data:
+  storage:
+    - type: SD
+price: 200

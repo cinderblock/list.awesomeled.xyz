@@ -1,23 +1,25 @@
 name: AlphaPix Flex with Expansion
 status: active
-creator: HolidayCoro
-notes: null
-auxiliary_outputs: DMX x2
-buffered: null
-interfaces:
-  - Ethernet ArtNet
-max_current: 80A
-max_outputs: 48
-max_pixels: 16320
-max_voltage: 24V
-output_connectors: Phoenix Plug
-outputs: Single and Clock
-pixel_types: both
+creator:
+  name: HolidayCoro
+  url: https://www.holidaycoro.com
+inputs:
+  physical:
+    Ethernet: true
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  connector: Phoenix Plug
+  count: 48
+  pixels:
+    max_per_output: 340 # 16320 total across 48 outputs
+  clocked: selectable # single and clocked pixel support
+  auxiliary:
+    DMX512: 2
+power:
+  voltage:
+    max: 24
+  current:
+    max: 80
 price: 190
-release_year: null
-standalone: false
-storage: null
-url: null
-warranty: null
-waterproof: null
-wled_compatible: null

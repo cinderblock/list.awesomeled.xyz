@@ -1,25 +1,35 @@
 name: Baldrick8
 status: active
-creator: ILIGHTTHAT
-notes: V1.1 supports 48V
-auxiliary_outputs: false
-buffered: true
-image: baldrick-8.png
-inputs: 3
-interfaces:
-  - DDP
-  - Artnet
-  - E1.31
-max_current: 60
-max_outputs: 8
-max_pixels: 6000
-max_voltage: 24
-output_connectors: Phoenix Plug
-outputs: Single
-pixel_types: async
-price: 80
 release_year: 2025
-standalone: null
-storage: null
-url: https://www.baldrickboard.com/en/boards/baldrick8
-warranty: null
+creator:
+  name: ILIGHTTHAT
+  url: https://www.ilightthat.com
+  page: https://www.baldrickboard.com/en/boards/baldrick8
+notes: V1.1 supports 48V
+inputs:
+  physical:
+    Ethernet: true
+  protocols:
+    - DDP
+    - Art-Net
+    - sACN # E1.31
+  standalone: false
+outputs:
+  connector: Phoenix Plug
+  count: 8
+  fuse: 7.5A # resettable, per output
+  driver:
+    buffered: true
+  differential: false # single-ended outputs
+  pixels:
+    max_per_output: 750 # ~2250 channels per port at 40fps
+  clocked: false # async pixels
+power:
+  voltage:
+    min: 5
+    max: 24 # up to 48V on V1.1
+  current:
+    max: 60
+price: 80
+images:
+  - baldrick-8.png

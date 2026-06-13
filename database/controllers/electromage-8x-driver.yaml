@@ -1,23 +1,26 @@
 name: ElectroMage 8x Driver
 status: active
-creator: ElectroMage
-notes: Stacks up to 8 on a bus
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - ArtNet Ethernet internal switch
-max_current: 3A
-max_outputs: 8
-max_pixels: 6400
-max_voltage: 12V
-output_connectors: Solder/3 pin servo
-outputs: Configurable
-pixel_types: both
-price: 15
 release_year: 2019
-standalone: false
-storage: null
-url: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: ElectroMage
+  url: https://electromage.com
+  page: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
+notes: Stacks up to 8 on a bus via internal Ethernet switch
+inputs:
+  physical:
+    Ethernet: true # internal switch
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  count: 8
+  connector: Solder/3 pin servo
+  driver:
+    buffered: true
+  current:
+    max: 3
+  clocked: selectable # supports WS2812 (async) and APA102 (clocked)
+power:
+  voltage:
+    max: 12
+price: 15

@@ -1,23 +1,32 @@
 name: deskontroller LITE V3 32
 status: active
-creator: deskontrol electronics SL
-notes: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Wi-Fi
-max_current: null
-max_outputs: 32
-max_pixels: 5440
-max_voltage: null
-output_connectors: RJ45
-outputs: Single and Clock
-pixel_types: both
-price: 630
 release_year: 2023
-standalone: false
-storage: null
-url: https://www.deskontrol.net/en/art-net-led-controllers/384-deskontroller-lite-v3-32-artnet-universes.html
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: deskontrol electronics SL
+  url: https://www.deskontrol.net
+  page: https://www.deskontrol.net/en/art-net-led-controllers/384-deskontroller-lite-v3-32-artnet-universes.html
+vendors:
+  - name: deskontrol electronics SL
+    url: https://www.deskontrol.net
+    page: https://www.deskontrol.net/en/art-net-led-controllers/384-deskontroller-lite-v3-32-artnet-universes.html
+    warranty: 5 years
+inputs:
+  physical:
+    Ethernet: true # Art-Net input via RJ45
+    Wi-Fi: true
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  count: 32
+  connector: RJ45
+  pixels:
+    max_per_output: 170 # 5440 total across 32 outputs
+  clocked: selectable # single (clockless) and clocked pixels
+features:
+  - Web-based (browser) configuration UI
+  - Supports over 100 pixel IC families (RGB and RGBW)
+price: 630
+technical_notes:
+  - 32 Art-Net universes (16,384 DMX channels); ~5,440 RGB / 4,096 RGBW pixels
+  - ~102 FPS in normal mode; 1 universe per output (2 universes per output in clock mode)

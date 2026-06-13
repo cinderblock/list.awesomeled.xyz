@@ -1,23 +1,25 @@
 name: DMX to SPI
 status: unknown
 creator: Electron Design
-notes: null
-auxiliary_outputs: Groupable in 1,2,4,5,10,100 as pixel
-buffered: true
-interfaces:
-  - Bluetooth
-max_current: null
-max_outputs: 1
-max_pixels: 170
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: null
-pixel_types: async
+vendors:
+  - name: eBay
+    page: https://www.ebay.com/itm/321934091091
+inputs:
+  physical:
+    DMX512: true
+    Bluetooth: true
+  standalone: false
+outputs:
+  count: 1
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  clocked: false # async pixels only
+  pixels:
+    max_per_output: 170
+power:
+  voltage:
+    max: 24
 price: 18
-release_year: null
-standalone: false
-storage: null
-url: https://www.ebay.com/itm/321934091091
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - Pixels groupable in 1, 2, 4, 5, 10, 100 as a single pixel

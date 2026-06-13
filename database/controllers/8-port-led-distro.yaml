@@ -1,23 +1,28 @@
 name: 8 Port LED Distro
 status: active
-creator: Bong69
-notes: null
-auxiliary_outputs: I.O. Pins broken out
-buffered: null
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 8
-max_pixels: 4800
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single
-pixel_types: async
+creator:
+  name: Bong69
+  page: https://www.tindie.com/products/bong69/8-port-led-distro
+core:
+  family: ESP32
+inputs:
+  physical:
+    Ethernet: true # RJ45 onboard
+  protocols:
+    - sACN # E1.31
+    - DDP
+  standalone: true # WLED firmware can play effects without a host
+outputs:
+  count: 8
+  connector: Phoenix Screw
+  clocked: false # single-wire / async pixels
+  auxiliary:
+    GPIO: 7 # GPIO17, 32, 33, 34, 35, 36, 39 broken out for buttons/mics/sensors
+power:
+  voltage:
+    max: 24
+features:
+  - Runs WLED (pre-installed) or ESPixelStick firmware
+  - Pluggable Phoenix connectors for outputs
 price: 55
-release_year: null
-standalone: null
-storage: null
-url: https://www.tindie.com/products/bong69/8-port-led-distro
-warranty: null
-waterproof: null
 wled_compatible: true
