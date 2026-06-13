@@ -1,24 +1,37 @@
 name: Falcon F48
 status: active
-creator: PixelController, LLC
-notes: null
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-  - DMX
-max_current: null
-max_outputs: 48
-max_pixels: 16384
-max_voltage: null
-output_connectors: RJ-45
-outputs: Differential
-pixel_types: async
+creator:
+  name: PixelController, LLC
+  url: https://pixelcontroller.com
+  page: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
+notes: 48 differential pixel outputs via remote receiver boards (4 outputs each).
+inputs:
+  physical:
+    Ethernet: Dual # 2-port switch for daisy-chaining
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+  standalone: true # Falcon Player (FPP) remote mode plays FSEQ from SD card
+outputs:
+  count: 48
+  connector: RJ45 # to differential SmartReceiver boards
+  differential: true
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 1022 # 1022 @ 20fps, 680 @ 40fps
+  clocked: false
+  auxiliary:
+    DMX512: 3
+power:
+  voltage:
+    min: 5
+    max: 5
+data:
+  storage:
+    - type: uSD
+features:
+  - OLED status display
+  - 2-port Ethernet switch for daisy-chaining
+  - Reverse-polarity protected 5V input
 price: 200
-release_year: null
-standalone: null
-storage: null
-url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
-warranty: null
-waterproof: null
-wled_compatible: null

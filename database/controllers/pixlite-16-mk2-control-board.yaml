@@ -1,23 +1,25 @@
 name: PixLite 16 Mk2 Control Board
 status: active
-creator: Advatek
+creator:
+  name: Advatek
+  url: https://www.advateklights.com
+  page: https://www.advateklights.com/pixlite-16-mk2-control-board
 notes: new firmware has a pixel counting test pattern, great for mapping
-auxiliary_outputs: DMX x4
-buffered: true
-interfaces:
-  - USB
-max_current: 64A
-max_outputs: 32
-max_pixels: 16320
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-pixel_types: both
+inputs:
+  physical:
+    USB: true
+  standalone: false
+outputs:
+  count: 32
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  clocked: selectable
+  auxiliary:
+    DMX512: 4
+power:
+  voltage:
+    max: 24
+  current:
+    max: 64
 price: 450
-release_year: null
-standalone: false
-storage: null
-url: https://www.advateklights.com/pixlite-16-mk2-control-board
-warranty: null
-waterproof: null
-wled_compatible: null

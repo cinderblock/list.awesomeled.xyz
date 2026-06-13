@@ -1,35 +1,45 @@
 name: DIN Pixie
 status: active
-creator: ENTTEC
-notes: Back powered from pixel strip - connect thru USB to record a show onto
-  the device using live Art-net
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-  - Art-Net
-max_current: 10A
-max_outputs: 2
-max_pixels: 340
-max_pixels_16bit: 170
-max_pixels_rgbw: 256
-max_voltage: 48V
-output_connectors: Phoenix Screw
-outputs: Single
-pixel_types: async
+creator:
+  name: ENTTEC
+  url: https://www.enttec.com.au
+  page: https://www.enttec.com.au/product/lighting-show-controller/din-pixie-2-universe-dmx-to-led-pixel-converter-controller/
+notes: Back powered from pixel strip - connect thru USB to record a show onto the device using live Art-Net
+inputs:
+  physical:
+    Ethernet: true
+    USB: true # used to record shows
+  protocols:
+    - Art-Net
+  standalone: true
+outputs:
+  connector: Phoenix Screw
+  count: 2
+  driver:
+    buffered: true
+  clocked: false # async / single-wire pixel outputs
+power:
+  voltage:
+    max: 48
+  current:
+    max: 10
+data:
+  formats:
+    - RGB
+    - RGBW
+  bit_depths:
+    - 8
+    - 16
+  storage:
+    - type: Flash
+      features:
+        - non-removable
 price: 100
-release_year: null
-standalone: true
-storage: Yes
 technical_notes:
-  - 'RGB (8-bit): 340 pixels max'
-  - 'RGBW (8-bit): 256 pixels max'
-  - 'RGB (16-bit): 170 pixels max'
-  - 'RGBW (16-bit): 128 pixels max'
+  - "RGB (8-bit): 340 pixels max"
+  - "RGBW (8-bit): 256 pixels max"
+  - "RGB (16-bit): 170 pixels max"
+  - "RGBW (16-bit): 128 pixels max"
   - Storage is not removable
   - Can be powered from pixel strip (back-powered)
   - Record shows via USB using live Art-Net
-url: https://www.enttec.com.au/product/lighting-show-controller/din-pixie-2-universe-dmx-to-led-pixel-converter-controller/
-warranty: null
-waterproof: null
-wled_compatible: null

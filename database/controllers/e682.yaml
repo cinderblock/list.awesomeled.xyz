@@ -1,23 +1,27 @@
 name: E682
 status: unknown
-creator: SanDevices
-notes: null
-auxiliary_outputs: DMX in groups of 4
-buffered: true
-interfaces:
-  - Ethernet & DMX
-max_current: 64A
-max_outputs: 16
-max_pixels: 6120
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-pixel_types: both
+creator:
+  name: SanDevices
+  url: https://sandevices.com
+  page: http://sandevices.com/product/e682-assembled-tested/
+inputs:
+  physical:
+    Ethernet: true # 100mb Ethernet, DMX-over-Ethernet bridge
+  protocols:
+    - sACN # E1.31, multicast up to 7 universes / unicast up to 12
+    - Art-Net
+  standalone: false
+outputs:
+  count: 16
+  connector: Phoenix Screw # individually-fused pluggable screw terminals
+  driver:
+    buffered: true
+  clocked: selectable # single (async) or clocked pixels per output
+  auxiliary:
+    DMX512: 4 # outputs configurable as DMX512 in groups of 4
+power:
+  voltage:
+    max: 24
+  current:
+    max: 64
 price: 180
-release_year: null
-standalone: false
-storage: null
-url: http://sandevices.com/product/e682-assembled-tested/
-warranty: null
-waterproof: null
-wled_compatible: null

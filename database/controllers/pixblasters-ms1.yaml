@@ -1,27 +1,22 @@
 name: PixBlasters MS1
 status: unknown
 creator: Pixblasters
-notes: Connects to PC or Mac (or other device) using HDMI and acts like a
-  monitor. Outputs a selected section of the screen to a matrix of LED strips or
-  to prefab LED panels at up to 60FPS. Can daisy chain up to 48 controllers to
-  power up to 786,432 pixels. Power must be supplied to strips by external power
-  sources. 5V and 12V both work. Others may as well.
-auxiliary_outputs: Ethernet to daisy chain multiple controllers
-buffered: false
-interfaces:
-  - SD Card
-max_current: null
-max_outputs: 32
-max_pixels: 16384
-max_voltage: 5V
-output_connectors: Header strip
-outputs: Single and Clock
-pixel_types: both
+notes: Connects to a PC or Mac (or other device) over HDMI and acts like a monitor. Outputs a selected section of the screen to a matrix of LED strips or to prefab LED panels at up to 60 FPS. Up to 48 controllers can be daisy-chained via Ethernet to drive up to 786,432 pixels. Strip power must be supplied by external power sources; 5V and 12V both work.
+inputs:
+  physical:
+    HDMI: true
+    SD Card: true
+    Ethernet: Daisy-chain # cascade multiple controllers, not a control-protocol input
+  standalone: false
+outputs:
+  count: 32
+  connector: Header strip
+  clocked: selectable
+  pixels:
+    max_per_output: 512
+  driver:
+    buffered: false
+power:
+  voltage:
+    max: 5
 price: 375
-release_year: null
-standalone: false
-storage: null
-url: null
-warranty: null
-waterproof: null
-wled_compatible: null

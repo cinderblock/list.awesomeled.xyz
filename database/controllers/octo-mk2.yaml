@@ -1,25 +1,25 @@
 name: Octo Mk2
 status: active
-creator: ENTTEC
-notes: Daisy-chainable thru ethernet up to 8 devices.
-auxiliary_outputs: Ethernet thru
-buffered: true
-interfaces:
-  - FPP
-  - USB Ethernet
-  - Wi-Fi
-max_current: null
-max_outputs: 2
-max_pixels: 2720
-max_voltage: 60V
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-pixel_types: both
+creator:
+  name: ENTTEC
+  url: https://www.enttec.com
+  page: https://www.enttec.com/product/addressable-led-pixel-control/led-pixel-controller/
+notes: Daisy-chainable through Ethernet up to 8 devices.
+inputs:
+  physical:
+    Ethernet: true
+    USB: true
+    Wi-Fi: true
+  standalone: true # Falcon Player (FPP)
+outputs:
+  count: 2
+  pixels:
+    max_per_output: 1360 # 2720 total across 2 outputs
+  clocked: selectable # single or clock
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+power:
+  voltage:
+    max: 60
 price: 330
-release_year: null
-standalone: true
-storage: null
-url: https://www.enttec.com/product/addressable-led-pixel-control/led-pixel-controller/
-warranty: null
-waterproof: null
-wled_compatible: null
