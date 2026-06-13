@@ -1,23 +1,36 @@
 name: K128D-B
 status: active
-creator: KulpLights, LLC
-notes: Onboard sound, FM transmitter optional.
-auxiliary_outputs: DMX x2
-buffered: null
-interfaces:
-  - FPP
-max_current: null
-max_outputs: 128
-max_pixels: 80000
-max_voltage: 5V
-output_connectors: RJ45
-outputs: Single
-pixel_types: async
+creator:
+  name: KulpLights, LLC
+  url: https://kulplights.com
+  page: https://kulplights.com/product/k128d-b/
+notes:
+  BeagleBone Black cape running FPP. 32 RJ45 differential ports driving 128
+  strings via standard or v1/v2 Smart receivers. Onboard sound, FM transmitter
+  optional.
+inputs:
+  protocols: [] # Ethernet/data via the host BeagleBone Black running FPP
+  standalone: true # Falcon Player (FPP) plays from the BBB's microSD
+  requires_host: BeagleBone Black
+outputs:
+  connector: RJ45
+  count: 128
+  differential: true # 32 RJ45 differential ports drive 128 strings
+  clocked: false # async pixels
+  pixels:
+    max_per_output: 625 # ~80k practical limit across 128 outputs
+  auxiliary:
+    DMX512: 2 # two UART differential outputs for DMX/Renard/LOR/PixelNet
+power:
+  voltage:
+    max: 5
+data:
+  storage:
+    - type: uSD # via the host BeagleBone Black
+features:
+  - Onboard sound
+  - Optional FM transmitter
 price: 270
-release_year: null
-standalone: true
-storage: Yes
-url: https://kulplights.com/product/k128d-b/
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - ~80k pixel practical limit from the single-core AM3358 in the BeagleBone Black
+  - Two UART differential outputs for DMX/Renard/LOR/PixelNet

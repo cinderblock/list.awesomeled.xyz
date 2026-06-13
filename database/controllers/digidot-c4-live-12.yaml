@@ -1,25 +1,33 @@
 name: DiGidot C4 Live 12
 status: active
-creator: DiGidot
-notes: Long range data transmission extenders available
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - FPP
-  - USB Ethernet
-  - Wi-Fi
-max_current: 0A
-max_outputs: 4
-max_pixels: 8192
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single and Clock
-pixel_types: both
+creator:
+  name: DiGidot Technologies BV
+  url: https://digidot.eu
+  page: https://digidot.eu/compact-controllers/1254-digidot-c4-live.html
+notes: Long range data transmission extenders available.
+inputs:
+  physical:
+    Ethernet: true # 2x RJ45 with onboard 100Mbit switch
+    Wi-Fi: true
+    USB: true
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+  standalone: false
+outputs:
+  count: 4
+  connector: Phoenix Screw
+  clocked: selectable # Single (Data) and Clock+Data SPI protocols
+  driver:
+    buffered: true
+  auxiliary:
+    DMX512: 2 # I/O ports configurable as up to two DMX in/out
+power:
+  voltage:
+    max: 24
+features:
+  - Supports 60+ Data and Clock+Data SPI pixel protocols
+  - DIN-rail mountable
 price: 330
-release_year: null
-standalone: false
-storage: null
-url: https://digidot.eu/c4/digidot-c4-live
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - Up to 16 universes (8192 channels) depending on license

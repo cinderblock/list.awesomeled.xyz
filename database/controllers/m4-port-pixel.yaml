@@ -1,23 +1,29 @@
 name: M4 Port Pixel
 status: active
-creator: Microcyb
-notes: Raspberry Pi 3B+ or Above with FPP
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 30A
-max_outputs: 4
-max_pixels: 6400
-max_voltage: 12V
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-pixel_types: both
+creator:
+  name: Microcyb
+  url: https://www.microcyb.com
+  page: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
+notes: Raspberry Pi 3B+ or above cape running FPP (Falcon Player).
+inputs:
+  physical:
+    Ethernet: true # via host Raspberry Pi
+  standalone: true # plays from host running FPP
+  requires_host: Raspberry Pi
+outputs:
+  count: 4
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 1600
+  clocked: selectable # single or clocked pixels
+power:
+  voltage:
+    max: 12
+  current:
+    max: 30
+data:
+  storage:
+    - type: uSD # microSD on host Raspberry Pi
 price: 35
-release_year: null
-standalone: true
-storage: Yes
-url: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
-warranty: null
-waterproof: null
-wled_compatible: null

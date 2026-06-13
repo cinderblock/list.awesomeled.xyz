@@ -1,23 +1,19 @@
 name: NetPixel Mini
 status: discontinued
 creator: SmartShow
-notes: null
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: null
-max_pixels: 680
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single
-pixel_types: async
+inputs:
+  physical:
+    Ethernet: true
+  standalone: false
+outputs:
+  count: 1
+  connector: Phoenix Screw
+  clocked: false
+  pixels:
+    max_per_output: 680
+  driver:
+    buffered: true
+power:
+  voltage:
+    max: 24
 price: 100
-release_year: null
-standalone: false
-storage: null
-url: null
-warranty: null
-waterproof: null
-wled_compatible: null

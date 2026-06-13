@@ -1,23 +1,34 @@
 name: K40D-PB
 status: active
-creator: KulpLights, LLC
-notes: null
-auxiliary_outputs: DMX
-buffered: null
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 40
-max_pixels: 64000
-max_voltage: 5V
-output_connectors: RJ45
-outputs: Single
-pixel_types: async
-price: 108
-release_year: null
-standalone: true
-storage: Yes
-url: https://kulplights.com/product/k40d-pb/
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: KulpLights, LLC
+  url: https://kulplights.com
+  page: https://kulplights.com/product/k40d-pb/
+notes:
+  PocketBeagle/PocketBeagle2 cape running FPP from an SD card; networking via
+  a USB Ethernet (preferred) or WiFi adapter on the host - do not use USB
+  tethering. 10 RJ45 differential ports drive 40 pixel strings; two ports can
+  instead output four DMX universes, plus a UART differential output for
+  DMX/Renard/LOR/PixelNet. Powered by external 5V via screw terminals.
+inputs:
+  physical:
+    Ethernet: true # via USB Ethernet adapter on host (preferred)
+    Wi-Fi: true # via USB WiFi adapter on host
+  standalone: true # runs FPP (Falcon Player) from SD card
+  requires_host: PocketBeagle # cape for PocketBeagle / PocketBeagle2
+outputs:
+  connector: RJ45
+  count: 40 # 10 RJ45 ports drive 40 pixel strings
+  differential: true
+  pixels:
+    max_per_output: 1600 # 64000 total / 40 outputs
+  clocked: false # async pixels
+  auxiliary:
+    DMX512: 4 # two RJ45 ports can output four DMX universes
+power:
+  voltage:
+    max: 5
+data:
+  storage:
+    - type: SD
+price: 115

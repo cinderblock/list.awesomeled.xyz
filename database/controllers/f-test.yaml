@@ -1,20 +1,5 @@
 name: F-Test
 status: unknown
-creator: PixelController, LLC
-notes: null
-auxiliary_outputs: null
-buffered: null
-max_current: null
-max_outputs: null
-max_pixels: null
-max_voltage: null
-output_connectors: null
-outputs: null
-price: null
-release_year: null
-standalone: null
-storage: null
-url: null
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: PixelController, LLC
+  url: https://pixelcontroller.com

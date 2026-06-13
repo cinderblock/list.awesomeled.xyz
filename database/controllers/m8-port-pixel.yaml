@@ -1,23 +1,26 @@
 name: M8 Port Pixel
 status: active
-creator: Microcyb
-notes: Raspberry Pi 3B+ or Above with FPP
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 30A
-max_outputs: 8
-max_pixels: 12800
-max_voltage: 12V
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-pixel_types: both
+creator:
+  name: Microcyb
+  url: https://www.microcyb.com
+  page: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
+notes: Raspberry Pi 3B+ or above HAT running FPP (Falcon Player).
+inputs:
+  physical:
+    Ethernet: true
+  standalone: true # FPP plays sequences from the Raspberry Pi
+  requires_host: Raspberry Pi # 3B+ or above
+outputs:
+  count: 8
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  clocked: selectable # single (async) or clocked pixels
+  pixels:
+    max_per_output: 1600 # 12800 total / 8 outputs
+power:
+  voltage:
+    max: 12
+  current:
+    max: 30
 price: 45
-release_year: null
-standalone: true
-storage: Yes
-url: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
-warranty: null
-waterproof: null
-wled_compatible: null

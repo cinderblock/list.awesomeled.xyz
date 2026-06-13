@@ -1,24 +1,29 @@
 name: Falcon F4V3
 status: active
-creator: PixelController, LLC
-notes: null
-auxiliary_outputs: DMX
-buffered: true
-interfaces:
-  - Ethernet
-  - Wi-Fi
-max_current: 60A
-max_outputs: 48
-max_pixels: 16320
-max_voltage: 36V
-output_connectors: Phoenix Screw
-outputs: Single and Clock
-pixel_types: both
+creator:
+  name: PixelController, LLC
+  url: https://pixelcontroller.com
+inputs:
+  physical:
+    Ethernet: true
+    Wi-Fi: true
+  standalone: true # Falcon Player (FPP) remote mode plays from SD
+outputs:
+  count: 48
+  connector: Phoenix Screw
+  clocked: selectable # supports Single and Clock pixel types
+  pixels:
+    max_per_output: 340 # 16320 total across 48 outputs
+  driver:
+    buffered: true
+  auxiliary:
+    DMX512: 1
+power:
+  voltage:
+    max: 36
+  current:
+    max: 60
+data:
+  storage:
+    - type: SD
 price: 200
-release_year: null
-standalone: null
-storage: SD
-url: https://pixelcontroller.com/store/products/48-f16v3.html
-warranty: null
-waterproof: null
-wled_compatible: null

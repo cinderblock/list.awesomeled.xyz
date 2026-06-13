@@ -1,24 +1,41 @@
 name: EspArtStick
 status: active
-creator: Microcyb
-notes: 2.4 GHz Wi-Fi Pixel Controller, SD card, RF receiver
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - DMX
-  - WirelessDMX
-max_current: 30A
-max_outputs: 2
-max_pixels: 1024
-max_voltage: 12V
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-pixel_types: both
+creator:
+  name: Microcyb
+  url: https://www.microcyb.com
+  page: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-Wi-Fi-EspArtStick-pixel-controller/p/170368862/category=0
+notes: 2.4 GHz Wi-Fi pixel controller with SD card playback and IR/RF remote receiver.
+core:
+  family: ESP8266
+inputs:
+  physical:
+    Wi-Fi: 2.4GHz
+    USB: true # micro USB for programming
+    Wireless DMX: true
+    IR: true # infrared remote receiver
+  protocols:
+    - DMX # wireless DMX
+  standalone: true # SD card standalone sequence playback
+outputs:
+  count: 2
+  connector: Phoenix Screw
+  clocked: selectable # Single or Clock per output
+  pixels:
+    max_per_output: 512
+  driver:
+    buffered: true # data level shifter
+power:
+  voltage:
+    min: 5
+    max: 12
+  current:
+    max: 30
+data:
+  storage:
+    - type: SD
+      max_size: 32
+features:
+  - IR remote receiver
+  - Data level shifter
 price: 28
-release_year: null
-standalone: true
-storage: Yes
-url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-Wi-Fi-EspArtStick-pixel-controller/p/170368862/category=0
-warranty: null
-waterproof: null
-wled_compatible: null
+wled_compatible: true

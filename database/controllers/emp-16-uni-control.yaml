@@ -1,24 +1,25 @@
 name: EMP 16 Uni control
 status: active
-creator: EMP Designs
-notes: 19mm Slim Din Rail mount, Internal Ethernet Switch for daisychain
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Wi-Fi
-  - Ethernet
-max_current: null
-max_outputs: 4
-max_pixels: 2728
-max_voltage: 24V
-output_connectors: Push Terminal
-outputs: null
-pixel_types: both
-price: $?
-release_year: null
-standalone: null
-storage: null
-url: https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: EMP Designs
+  url: https://www.empdesigns.co.uk
+  page: https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/
+notes: 19mm slim DIN rail mount, internal Ethernet switch for daisy-chain.
+inputs:
+  physical:
+    Ethernet: true # internal Ethernet switch for daisy-chaining
+    Wi-Fi: true
+outputs:
+  count: 4
+  connector: Push Terminal
+  clocked: selectable
+  driver:
+    buffered: true
+power:
+  voltage:
+    max: 24
+features:
+  - Internal Ethernet switch for daisy-chaining
+  - 19mm slim DIN rail mountable
+technical_notes:
+  - 16 universes total (up to 2728 pixels)

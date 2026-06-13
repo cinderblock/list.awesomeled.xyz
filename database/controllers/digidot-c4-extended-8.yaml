@@ -1,23 +1,39 @@
 name: DiGidot C4 Extended 8
 status: active
-creator: DiGidot
+creator:
+  name: DiGidot
+  url: https://digidot.eu
+  page: https://digidot.eu/digidot-controllers/1406-digidot-c4-extended.html
 notes: Packed with features
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - SD Card
-max_current: 0A
-max_outputs: 4
-max_pixels: 4096
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single and Clock
-pixel_types: both
+inputs:
+  physical:
+    Ethernet: true # onboard ethernet switch
+    Wi-Fi: true # built-in WiFi with DHCP server
+  protocols:
+    - Art-Net
+    - sACN
+  standalone: true # records Art-Net/DMX to microSD for standalone playback
+outputs:
+  count: 4 # four multi-functional I/O ports
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 1024 # 4096 total channels across 4 ports
+  clocked: selectable # single and clock (SPI) protocols
+  auxiliary:
+    DMX512: 2 # DMX in and out
+power:
+  voltage:
+    max: 24
+data:
+  storage:
+    - type: uSD
+      max_size: 8
+features:
+  - Converts Art-Net/DMX to 50+ SPI pixel protocols
+  - Art-Net and DMX recording, playback, and triggering
+  - HTP input signal merger
+  - Gamma correction and output limiters
+  - Calendar, dry-contact, and analog (0-10V) triggers
 price: 385
-release_year: null
-standalone: true
-storage: SD
-url: https://digidot.eu/c4/digidot-c4-extended
-warranty: null
-waterproof: null
-wled_compatible: null

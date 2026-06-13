@@ -1,23 +1,24 @@
 name: LEDEddy
 status: unknown
-creator: Diamex
-notes: null
-auxiliary_outputs: null
-buffered: false
-interfaces:
-  - Wi-Fi
-  - Ethernet
-max_current: null
-max_outputs: 1
-max_pixels: null
-max_voltage: 5V
-output_connectors: null
-outputs: Single
-price: null
-release_year: null
-standalone: true
-storage: SD
-url: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: Diamex
+  url: https://www.diamex.de
+vendors:
+  - name: LED-Genial
+    url: https://www.led-genial.de
+    page: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+inputs:
+  physical:
+    Wi-Fi: true
+    Ethernet: true
+  standalone: true # plays LED effects from SD card
+outputs:
+  count: 1
+  driver:
+    buffered: false
+power:
+  voltage:
+    max: 5
+data:
+  storage:
+    - type: SD

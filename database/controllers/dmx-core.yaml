@@ -1,24 +1,24 @@
 name: DMX Core
 status: active
-creator: DMX Pro Sales
-notes: Standalone wall-mounted controller with 4.3" touch interface for presets,
+creator:
+  name: DMX Pro Sales
+  page: https://dmxcore.com/
+notes: Standalone wall-mounted controller with 4.3" touch interface for presets and
   playback. Up to 40 universes.
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Wi-Fi
-max_current: null
-max_outputs: null
-max_pixels: 6800
-max_voltage: 28V
-output_connectors: null
-outputs: null
-pixel_types: both
+inputs:
+  physical:
+    Wi-Fi: true
+  standalone: true
+outputs:
+  clocked: selectable
+power:
+  voltage:
+    max: 28
+data:
+  storage:
+    - type: SD
+features:
+  - 4.3" touchscreen for presets and playback
 price: 799
-release_year: null
-standalone: null
-storage: SD
-url: https://dmxcore.com/
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - Up to 40 universes (~6800 pixels)
