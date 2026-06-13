@@ -11,8 +11,8 @@
       "description": "Product name"
     },
     "status": {
-      "type": ["string", "null"],
-      "enum": ["active", "discontinued", "end-of-life", "limited", null]
+      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }],
+      "description": "active, discontinued, end-of-life, limited, unknown, or null if unfilled"
     },
     "release_year": {
       "type": ["integer", "null"],
