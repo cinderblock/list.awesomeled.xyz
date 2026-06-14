@@ -1,26 +1,16 @@
 name: ESP-01
-creator: null
-notes: null
-bluetooth: '4.1'
-bms: "No"
-clock_speed: null
-cpu: Diamond Standard 106Micro
-ethernet: null
-flash: null
-gpio_voltage: 3.3V
-imu: false
-isa: Xtensa
-linux: false
-max_input_voltage: null
-max_outputs: null
-min_input_voltage: null
-poe: null
-price: null
-ram: null
 release_year: 2014
-soc: ESP8266
-storage: null
-ttl_serial: true
-url: https://www.electroschematics.com/the-mighty-esp-01-adapter/
-usb: null
-wifi: 2.4GHz
+compute:
+  soc: ESP8266
+  cpu: Diamond Standard 106Micro
+  isa: Xtensa
+  linux: false
+connectivity:
+  wifi: 2.4GHz
+  bluetooth: '4.1'
+  serial: true
+power:
+  gpio_voltage: 3.3V
+io:
+  bms: "No"
+  imu: false

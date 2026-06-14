@@ -1,26 +1,30 @@
 name: Raspberry Pi 1 Model A+
-creator: Raspberry Pi Foundation
-notes: null
-bluetooth: USB
-bms: "No"
-clock_speed: 700MHz
-cpu: ARM11
-ethernet: USB
-flash: microSD
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv6Z
-linux: true
-max_input_voltage: 5V
-max_outputs: 1
-min_input_voltage: 5V
-poe: null
-price: 20
-ram: 512MB
 release_year: 2014
-soc: BCM2835
-storage: microSD
-ttl_serial: true
-url: https://www.raspberrypi.org/products/raspberry-pi-1-model-a-plus/
-usb: OTG
-wifi: USB
+creator:
+  name: Raspberry Pi Foundation
+  page: https://www.raspberrypi.org/products/raspberry-pi-1-model-a-plus/
+price: 20
+compute:
+  soc: BCM2835
+  cpu: ARM11
+  isa: ARMv6Z
+  clock_speed: 700MHz
+  flash: microSD
+  ram: 512MB
+  linux: true
+connectivity:
+  wifi: USB
+  ethernet: USB
+  bluetooth: USB
+  usb: OTG
+  serial: true
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+io:
+  max_outputs: 1
+  storage: microSD
+  bms: "No"
+  imu: false

@@ -1,26 +1,25 @@
 name: Teensy-LC
-creator: PJRC
-notes: null
-bluetooth: null
-bms: "No"
-clock_speed: 48MHz
-cpu: ARM Cortex-M0+
-ethernet: null
-flash: 62kB
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv6-M
-linux: false
-max_input_voltage: 5V
-max_outputs: null
-min_input_voltage: null
-poe: null
+creator:
+  name: PJRC
+  page: https://www.pjrc.com/teensy/teensyLC.html
 price: 12
-ram: 8kB
-release_year: null
-soc: MKL26Z64VFT4
-storage: Shield
-ttl_serial: true
-url: https://www.pjrc.com/teensy/teensyLC.html
-usb: OTG
-wifi: false
+compute:
+  soc: MKL26Z64VFT4
+  cpu: ARM Cortex-M0+
+  isa: ARMv6-M
+  clock_speed: 48MHz
+  flash: 62kB
+  ram: 8kB
+  linux: false
+connectivity:
+  usb: OTG
+  serial: true
+  wifi: false
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 3.3V
+io:
+  storage: Shield
+  bms: "No"
+  imu: false

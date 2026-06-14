@@ -1,26 +1,23 @@
 name: ATtiny85
-creator: Atmel
-notes: null
-bluetooth: null
-bms: "No"
-clock_speed: 16MHz
-cpu: AVR
-ethernet: null
-flash: 8kB
-gpio_voltage: 5.0V
-imu: false
-isa: AVR2.5
-linux: false
-max_input_voltage: 5V
-max_outputs: 6
-min_input_voltage: null
-poe: null
+creator:
+  name: Atmel
+  page: https://www.microchip.com/wwwproducts/en/ATtiny85
 price: 1
-ram: 512B
-release_year: null
-soc: ATtiny85
-storage: null
-ttl_serial: true
-url: https://www.microchip.com/wwwproducts/en/ATtiny85
-usb: null
-wifi: null
+compute:
+  soc: ATtiny85
+  cpu: AVR
+  isa: AVR2.5
+  clock_speed: 16MHz
+  flash: 8kB
+  ram: 512B
+  linux: false
+connectivity:
+  serial: true
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 5.0V
+io:
+  max_outputs: 6
+  bms: "No"
+  imu: false

@@ -1,26 +1,19 @@
 name: Orange Pi LTS
 creator: Shenzhen Xunlong Software
-notes: null
-bluetooth: null
-bms: null
-clock_speed: 1.2GHz
-cpu: 4× ARM Cortex-A7
-ethernet: 100BASE-TX
-flash: microSD
-gpio_voltage: null
-imu: null
-isa: ARMv7-A
-linux: true
-max_input_voltage: null
-max_outputs: null
-min_input_voltage: null
-poe: null
 price: 9
-ram: 256MB+
-release_year: null
-soc: Allwinner H2+
-storage: microSD
-ttl_serial: null
-url: https://www.aliexpress.com/item/4000049660873.html
-usb: OTG x1, 2.0 x1
-wifi: 2.4GHz & 5GHz
+vendors:
+  - url: https://www.aliexpress.com/item/4000049660873.html
+compute:
+  soc: Allwinner H2+
+  cpu: 4× ARM Cortex-A7
+  isa: ARMv7-A
+  clock_speed: 1.2GHz
+  flash: microSD
+  ram: 256MB+
+  linux: true
+connectivity:
+  wifi: 2.4GHz & 5GHz
+  ethernet: 100BASE-TX
+  usb: OTG x1, 2.0 x1
+io:
+  storage: microSD

@@ -1,26 +1,29 @@
 name: Raspberry Pi 3 Model B+
-creator: Raspberry Pi Foundation
-notes: null
-bluetooth: '4.2'
-bms: "No"
-clock_speed: 1.4GHz
-cpu: 4× ARM Cortex-A53
-ethernet: Gigabit
-flash: microSD
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv8-A
-linux: true
-max_input_voltage: 5V
-max_outputs: 1
-min_input_voltage: 5V
-poe: null
-price: null
-ram: 1GB
 release_year: 2018
-soc: BCM2837B0
-storage: microSD
-ttl_serial: true
-url: https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/
-usb: OTG x4
-wifi: 2.4GHz & 5GHz
+creator:
+  name: Raspberry Pi Foundation
+  page: https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/
+compute:
+  soc: BCM2837B0
+  cpu: 4× ARM Cortex-A53
+  isa: ARMv8-A
+  clock_speed: 1.4GHz
+  flash: microSD
+  ram: 1GB
+  linux: true
+connectivity:
+  wifi: 2.4GHz & 5GHz
+  ethernet: Gigabit
+  bluetooth: '4.2'
+  usb: OTG x4
+  serial: true
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+io:
+  max_outputs: 1
+  storage: microSD
+  bms: "No"
+  imu: false
