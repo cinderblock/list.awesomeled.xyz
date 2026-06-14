@@ -13,6 +13,36 @@ let gitTimestampCache: Map<string, Date> | null = null;
 const IGNORED_COMMITS = new Set([
   'b867ec196ee1f68be4e92fa369aa2bdb96018754', // Remove redundant id field from database entries
   'e2eb1e6261e16e3524b9988bedc9d2365bbb3b39', // Standardize database attribution fields and add ESLint terminology rules
+  // Flat -> nested rich-schema migration (structural reshaping, not content updates)
+  'dcfe5b523301ce0dd5ae6d73cff46c8728eb60b4', // controllers: F16V4 migrate, F16V5 add
+  'cc4384cfd3b83fd6f191cc6166168d2268aef712', // controllers pilot (11)
+  'c627399fecd8d1b01dd2fd3f51b1f68898a327f8', // controllers batch (21)
+  'd28091c0d90f848c48aed902df395cdf822696f6', // controllers batch 3
+  '8818fe7be0646cfa04888da614da3b237bfbf1d9', // controllers batch 4
+  'ec1e8222cf281ae1f0d333663dc581acb2342954', // controllers final 5
+  '7d8116e0341d4115207e035c64d94723a5cb89ed', // controllers: drop stray id
+  '450dd2f6a1e9c4171bd46d2c1e0af20866013530', // pixels other_links->array
+  '7531fcb45e895c39cbbc021f14be2c5d9b56ed68', // systematic fixes (pixel-ics/microboards/pattern-drivers/diffusive/adapters)
+  'ad1c07b4e27e09cb30c25295cddf230c54d07563', // pixels schema + apa102
+  '8ca1f9c030cfeccc8ae85726439edd80740f0268', // pixels (33)
+  '6a3ad4520215849ea13cb34a1b6669e977dbce2e', // pixel-ics schema + ws2811
+  '9608eccbb18f915c3641416be45fb236c08f9e6e', // pixel-ics (39)
+  'b495c871a62a9860ea045604c589bfd6e01de2bf', // microboards schema + esp-32s
+  'a575e0cda5f06804874df4515ea40c683626c6ca', // microboards (35)
+  'a8a4e50ef8dfcb0e0487fe483548e1f9f4368fad', // connectors schema + xt60-90
+  '7cd11ce8d1848d5e9b995f50c5ce45f0923fd332', // connectors (43)
+  '2de760fd879f144cd471cfe633cf7becc4a7ff2e', // adapters schema + 16x-led-shield
+  '046f4517968c50af0cb9f19ecadf371fcb38dc08', // adapters (45)
+  'daf292b9e9fff20735085a6c5912dbd80a93a921', // level-converters schema + data
+  'e7240e9ff9f851fca7798264704e1fb6d5acc644', // pixel-decoders schema + data
+  '4775c6a5d05fe590c737c1e91d45e9fa39d96bbb', // drive-libraries schema + fastled
+  '388c2cfa56be96ba1a3c52a3b248288decec4494', // drive-libraries (28)
+  '18559cb1ec017c577adf3d2c8564ec3a0a9b1991', // commercial-systems schema + active-rgb
+  'f471d3d1c3637da2b2c97bfc240f2a60bba45f1e', // commercial-systems (17)
+  '402b855b5db40fda4647cf4a905e86d5b3f71ef2', // diffusive-materials schema + 3m-envision
+  'f330d9ded8a62c1b3d7dc35d24d9d9b9e34fb2d9', // diffusive-materials (44)
+  '495b5e52d0994f7d36cf4f81df58b0ce01ee69b8', // pattern-drivers schema + wled
+  'eb1e06b7d0a3800c6a5b4357ae98f6d453a3d526', // pattern-drivers (39)
 ]);
 
 /**
