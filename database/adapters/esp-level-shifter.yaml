@@ -1,13 +1,10 @@
 name: ESP Level Shifter
-creator: null
-notes: null
-diy_or_ots: null
-max_channels: 1
-max_current: null
-max_voltage: 5V
-output_connectors: null
-outputs: null
 parent: ESP-01 (ESP8266)
-pixel_types: Single
 price: 9
-url: https://www.amazon.com/ACROBOTIC-ESP8266-Adapter-WS2812B-Raspberry/dp/B07JFCGH8C
+outputs:
+  max_channels: 1
+  pixel_types: Single
+power:
+  voltage: 5V
+links:
+  product: https://www.amazon.com/ACROBOTIC-ESP8266-Adapter-WS2812B-Raspberry/dp/B07JFCGH8C

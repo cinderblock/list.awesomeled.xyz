@@ -1,13 +1,15 @@
 name: Pro Serial LED Driver
 creator: ElectroMage
-notes: null
 diy_or_ots: OTS
-max_channels: 8
-max_current: 15A
-max_voltage: 12V
-output_connectors: Phoenix Screw
-outputs: Both
 parent: Any UART / Serial
-pixel_types: Single (8) or Clocked (6)
 price: 49
-url: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/
+outputs:
+  max_channels: 8
+  pixel_types: Single (8) or Clocked (6)
+  connectors: Phoenix Screw
+  description: Both
+power:
+  voltage: 12V
+  current: 15A
+links:
+  product: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/

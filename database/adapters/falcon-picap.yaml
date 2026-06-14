@@ -1,13 +1,12 @@
 name: Falcon PiCap
 creator: PixelController, LLC
-notes: null
 diy_or_ots: OTS
-max_channels: 2
-max_current: null
-max_voltage: 24V
-output_connectors: null
-outputs: Both
 parent: Raspberry Pi
-pixel_types: null
 price: 35
-url: https://www.pixelcontroller.com/store/index.php?id_product=47
+outputs:
+  max_channels: 2
+  description: Both
+power:
+  voltage: 24V
+links:
+  product: https://www.pixelcontroller.com/store/index.php?id_product=47

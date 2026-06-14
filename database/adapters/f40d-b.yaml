@@ -1,13 +1,13 @@
 name: F40D-B
+status: null
 creator: Kulp Lights
-notes: null
-diy_or_ots: null
-max_channels: 40
-max_current: null
-max_voltage: 5V
-output_connectors: RJ-45
-outputs: Single
 parent: BeagleBone
-pixel_types: Single
-price: null
-url: https://kulplights.com/product/f40d-pb/
+outputs:
+  max_channels: 40
+  pixel_types: Single
+  connectors: RJ-45
+  description: Single
+power:
+  voltage: 5V
+links:
+  product: https://kulplights.com/product/f40d-pb/

@@ -2,12 +2,6 @@ name: ESP PixNode SDCard Adapter
 creator: Jboards
 notes: SD Card Adapter for ESPixelstick allows replay of Xlights Fseq files
 diy_or_ots: OTS
-max_channels: null
-max_current: null
-max_voltage: null
-output_connectors: null
-outputs: null
-parent: null
-pixel_types: null
 price: 7
-url: https://jboards.ecwid.com/ESPixNode-microSD-adapter-p428060492
+links:
+  product: https://jboards.ecwid.com/ESPixNode-microSD-adapter-p428060492

@@ -1,13 +1,14 @@
 name: M8 Port Pixel
 creator: Microcyb
-notes: null
 diy_or_ots: DIY
-max_channels: 75
-max_current: 30A
-max_voltage: 12V
-output_connectors: Phoenix Screw
-outputs: null
 parent: Raspberry Pi 3B+ or above
-pixel_types: Single
 price: 45
-url: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
+outputs:
+  max_channels: 75
+  pixel_types: Single
+  connectors: Phoenix Screw
+power:
+  voltage: 12V
+  current: 30A
+links:
+  product: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
