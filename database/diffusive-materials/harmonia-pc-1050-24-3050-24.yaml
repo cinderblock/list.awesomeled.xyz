@@ -1,15 +1,18 @@
 name: Harmonia PC (1050-24)-(3050-24)
-notes: reflective (unknown) dopant several polymer options
-color_rendition: 5
-diffusivity: 3-4
-fire_retardant: true
-flexible: R
-light_transmission: 3-4
 material_type: PMMA, PC,
-price_range: $$$$$
-properties: Diffusive
 purpose_made: true
-sample_thickness: 0.087
-sizes_available: null
-tinted: T
-url: https://www.plastix-world.com/better-with-a-diffusing-polymers/
+notes: reflective (unknown) dopant several polymer options
+optical:
+  color_rendition: 5
+  light_transmission: 3-4
+  diffusivity: 3-4
+  tinted: T
+physical:
+  flexible: R
+  fire_retardant: true
+  sample_thickness: 0.087
+  properties: Diffusive
+pricing:
+  price_range: $$$$$
+links:
+  product: https://www.plastix-world.com/better-with-a-diffusing-polymers/

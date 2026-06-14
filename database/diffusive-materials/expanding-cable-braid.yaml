@@ -1,15 +1,15 @@
 name: Expanding Cable Braid
-notes: White , Black and colours, patterns, Diffuser for tape and strings
-color_rendition: 3
-diffusivity: 4
-fire_retardant: null
-flexible: F
-light_transmission: 2
 material_type: PET
-price_range: $$
-properties: Diffusive
 purpose_made: false
-sample_thickness: null
-sizes_available: null
-tinted: null
-url: https://www.newegg.com/p/38Y-00AA-00037
+notes: White , Black and colours, patterns, Diffuser for tape and strings
+optical:
+  color_rendition: 3
+  light_transmission: 2
+  diffusivity: 4
+physical:
+  flexible: F
+  properties: Diffusive
+pricing:
+  price_range: $$
+links:
+  product: https://www.newegg.com/p/38Y-00AA-00037

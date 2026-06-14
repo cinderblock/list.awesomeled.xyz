@@ -1,15 +1,16 @@
 name: Polyester Film
-notes: Good backlit diffusion option
-color_rendition: 4
-diffusivity: null
-fire_retardant: true
-flexible: F
-light_transmission: 4
 material_type: PET
-price_range: $$$
-properties: Diffusive
 purpose_made: true
-sample_thickness: null
-sizes_available: null
-tinted: T
-url: https://www.lexjet.com/hp-backlit-polyester-film-60in-x-100ft?CAWELAID=320012560000042473&CAGPSPN=pla&CAAGID=61396511513&CATCI=pla-862634440483&CATARGETID=320012560000750478&CADevice=c&gclid=Cj0KCQjwpNr4BRDYARIsAADIx9xwg2gMLqN09JDo8E9ehIjSRdLMUWf4aRfGx4EIg2X-TDfUrlzeVXsaAjF2EALw_wcB
+notes: Good backlit diffusion option
+optical:
+  color_rendition: 4
+  light_transmission: 4
+  tinted: T
+physical:
+  flexible: F
+  fire_retardant: true
+  properties: Diffusive
+pricing:
+  price_range: $$$
+links:
+  product: https://www.lexjet.com/hp-backlit-polyester-film-60in-x-100ft?CAWELAID=320012560000042473&CAGPSPN=pla&CAAGID=61396511513&CATCI=pla-862634440483&CATARGETID=320012560000750478&CADevice=c&gclid=Cj0KCQjwpNr4BRDYARIsAADIx9xwg2gMLqN09JDo8E9ehIjSRdLMUWf4aRfGx4EIg2X-TDfUrlzeVXsaAjF2EALw_wcB

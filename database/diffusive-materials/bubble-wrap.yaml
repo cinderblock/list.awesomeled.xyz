@@ -1,15 +1,15 @@
 name: Bubble Wrap
-notes: Used as stuffing in wider pipes to space LED strip
-color_rendition: 4
-diffusivity: 3
-fire_retardant: null
-flexible: F
-light_transmission: 4
 material_type: Air Filled PE
-price_range: $
-properties: Diffusive
 purpose_made: false
-sample_thickness: null
-sizes_available: null
-tinted: null
-url: Bubble wrap - Wikipedia
+notes: Used as stuffing in wider pipes to space LED strip
+optical:
+  color_rendition: 4
+  light_transmission: 4
+  diffusivity: 3
+physical:
+  flexible: F
+  properties: Diffusive
+pricing:
+  price_range: $
+links:
+  product: Bubble wrap - Wikipedia

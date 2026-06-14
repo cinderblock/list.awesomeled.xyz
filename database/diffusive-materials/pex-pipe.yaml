@@ -1,15 +1,16 @@
 name: PEX Pipe
-notes: Christmas light leaping arches, linear 360 diffusion
-color_rendition: 2
-diffusivity: 4
-fire_retardant: null
-flexible: F
-light_transmission: 2
 material_type: Ethylene Copolymer
-price_range: $$
-properties: Diffusive
 purpose_made: false
-sample_thickness: 3.2
-sizes_available: null
-tinted: null
-url: https://www.homedepot.com/b/Plumbing-Pipe-Fittings-Pipe-PEX-Pipe/N-5yc1vZ1z18i33
+notes: Christmas light leaping arches, linear 360 diffusion
+optical:
+  color_rendition: 2
+  light_transmission: 2
+  diffusivity: 4
+physical:
+  flexible: F
+  sample_thickness: 3.2
+  properties: Diffusive
+pricing:
+  price_range: $$
+links:
+  product: https://www.homedepot.com/b/Plumbing-Pipe-Fittings-Pipe-PEX-Pipe/N-5yc1vZ1z18i33

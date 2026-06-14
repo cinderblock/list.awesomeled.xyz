@@ -1,15 +1,16 @@
 name: Plexiglas LED Edge Lit was EndlightenT
-notes: null
-color_rendition: 4
-diffusivity: null
-fire_retardant: true
-flexible: R
-light_transmission: 2 - 5
 material_type: PMMA
-price_range: $$$$$
-properties: Edge Lit front diffuser
 purpose_made: true
-sample_thickness: null
-sizes_available: up to 1220x2440
-tinted: T&C
-url: https://www.plexiglas-shop.com/en-de/products/plexiglas-led/
+optical:
+  color_rendition: 4
+  light_transmission: 2 - 5
+  tinted: T&C
+physical:
+  flexible: R
+  fire_retardant: true
+  sizes_available: up to 1220x2440
+  properties: Edge Lit front diffuser
+pricing:
+  price_range: $$$$$
+links:
+  product: https://www.plexiglas-shop.com/en-de/products/plexiglas-led/

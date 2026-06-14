@@ -1,15 +1,14 @@
 name: Foam Backer Rod
-notes: Pool noodle material , slit and re seal with tape or adhesive
-color_rendition: 4
-diffusivity: 4
-fire_retardant: null
-flexible: F
-light_transmission: 3
 material_type: Closed cell PE foam
-price_range: $$
-properties: Diffusive
-purpose_made: null
-sample_thickness: null
-sizes_available: null
-tinted: null
-url: https://www.dortechdirect.co.uk/polyethylene-foam-backer-rod-25mm.html
+notes: Pool noodle material , slit and re seal with tape or adhesive
+optical:
+  color_rendition: 4
+  light_transmission: 3
+  diffusivity: 4
+physical:
+  flexible: F
+  properties: Diffusive
+pricing:
+  price_range: $$
+links:
+  product: https://www.dortechdirect.co.uk/polyethylene-foam-backer-rod-25mm.html

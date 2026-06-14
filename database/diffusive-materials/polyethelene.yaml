@@ -1,15 +1,18 @@
 name: Polyethylene
-notes: Regular high density polyethylene sheet
-color_rendition: 3
-diffusivity: 2
-fire_retardant: true
-flexible: F
-light_transmission: 4
 material_type: HDPE
-price_range: $$
-properties: Diffusive
 purpose_made: false
-sample_thickness: 0.04
-sizes_available: null
-tinted: T
-url: https://www.mcmaster.com/polyethylene-sheets/moisture-resistant-polyethylene-hdpe-sheets-bars-and-strips/thickness~0-04inches/
+notes: Regular high density polyethylene sheet
+optical:
+  color_rendition: 3
+  light_transmission: 4
+  diffusivity: 2
+  tinted: T
+physical:
+  flexible: F
+  fire_retardant: true
+  sample_thickness: 0.04
+  properties: Diffusive
+pricing:
+  price_range: $$
+links:
+  product: https://www.mcmaster.com/polyethylene-sheets/moisture-resistant-polyethylene-hdpe-sheets-bars-and-strips/thickness~0-04inches/

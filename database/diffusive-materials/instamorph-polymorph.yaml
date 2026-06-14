@@ -1,15 +1,16 @@
 name: Instamorph/ Polymorph
-notes: Hot water mouldable plastic, very rigid when set and possible to mould round single LEDs into shapes
-color_rendition: 3
-diffusivity: 4
-fire_retardant: false
-flexible: R
-light_transmission: null
 material_type: PCL Poly Capro Lactone
-price_range: $$
-properties: Diffusive
 purpose_made: false
-sample_thickness: null
-sizes_available: null
-tinted: T
-url: https://www.instamorph.com/
+notes: Hot water mouldable plastic, very rigid when set and possible to mould round single LEDs into shapes
+optical:
+  color_rendition: 3
+  diffusivity: 4
+  tinted: T
+physical:
+  flexible: R
+  fire_retardant: false
+  properties: Diffusive
+pricing:
+  price_range: $$
+links:
+  product: https://www.instamorph.com/

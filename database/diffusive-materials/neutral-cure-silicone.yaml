@@ -1,16 +1,18 @@
 name: Neutral Cure Silicone
+material_type: RTV Silicone rubber
+purpose_made: false
 notes: Clear and white silicone sealant, clear good for things like candle
   flames, sculpt with plastic fork. Neutral cure preferred near solder and copper
-color_rendition: 2-5
-diffusivity: 3-4
-fire_retardant: false
-flexible: F
-light_transmission: 2-4
-material_type: RTV Silicone rubber
-price_range: $$
-properties: Diffusive
-purpose_made: false
-sample_thickness: null
-sizes_available: null
-tinted: T&C
-url: https://www.idealsealants.com/acetoxy-vs-neutral-cure-silicone-i30#:~:text=An%20acetoxy%20silicone%20is%20a,non%2Dacidic%20substance%20whilst%20curing.
+optical:
+  color_rendition: 2-5
+  light_transmission: 2-4
+  diffusivity: 3-4
+  tinted: T&C
+physical:
+  flexible: F
+  fire_retardant: false
+  properties: Diffusive
+pricing:
+  price_range: $$
+links:
+  product: https://www.idealsealants.com/acetoxy-vs-neutral-cure-silicone-i30#:~:text=An%20acetoxy%20silicone%20is%20a,non%2Dacidic%20substance%20whilst%20curing.
