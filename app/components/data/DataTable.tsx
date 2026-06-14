@@ -37,6 +37,14 @@ interface DataTableProps {
 
 type SortDirection = 'asc' | 'desc';
 
+// Resolve a possibly-dotted key (e.g. "outputs.count") against an object
+function resolveKey(item: unknown, key: string): unknown {
+  return key.split('.').reduce<unknown>((v, k) => {
+    if (v == null) return null;
+    return (v as Record<string, unknown>)[k];
+  }, item);
+}
+
 // Parse numeric value from string for sorting (handles "16 A", "50 V", etc.)
 function parseNumericForSort(val: unknown): number | null {
   if (val == null) return null;
@@ -607,7 +615,7 @@ export function DataTable({
     return data.filter((item) =>
       terms.every((term) =>
         searchKeys.some((key) => {
-          const value = (item as Record<string, unknown>)[key];
+          const value = resolveKey(item, key);
           if (value == null) return false;
           return String(value).toLowerCase().includes(term);
         })
@@ -636,8 +644,8 @@ export function DataTable({
     if (!sortKey || !sortDir) return filteredData;
 
     return [...filteredData].sort((a, b) => {
-      const aVal = (a as Record<string, unknown>)[sortKey];
-      const bVal = (b as Record<string, unknown>)[sortKey];
+      const aVal = resolveKey(a, sortKey);
+      const bVal = resolveKey(b, sortKey);
 
       if (aVal == null && bVal == null) return 0;
       if (aVal == null) return sortDir === 'asc' ? 1 : -1;

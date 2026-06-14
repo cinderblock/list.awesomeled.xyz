@@ -41,6 +41,14 @@ interface ColumnFilterProps {
   onChange: (value: FilterValue | undefined) => void;
 }
 
+// Resolve a possibly-dotted key (e.g. "outputs.count") against an object
+function resolveKey(item: unknown, key: string): unknown {
+  return key.split('.').reduce<unknown>((v, k) => {
+    if (v == null) return null;
+    return (v as Record<string, unknown>)[k];
+  }, item);
+}
+
 // Parse numeric value from string (handles units like "16 A", "50 V")
 function parseNumericValue(val: unknown): number | null {
   if (val == null) return null;
@@ -56,7 +64,7 @@ function parseNumericValue(val: unknown): number | null {
 function getUniqueValues(data: BaseEntry[], key: string): string[] {
   const values = new Set<string>();
   for (const item of data) {
-    const val = (item as Record<string, unknown>)[key];
+    const val = resolveKey(item, key);
     if (val == null) continue;
     if (Array.isArray(val)) {
       val.forEach((v) => values.add(String(v)));
@@ -74,7 +82,7 @@ function getNumericRange(data: BaseEntry[], key: string): { min: number; max: nu
   let hasValues = false;
 
   for (const item of data) {
-    const val = parseNumericValue((item as Record<string, unknown>)[key]);
+    const val = parseNumericValue(resolveKey(item, key));
     if (val !== null) {
       hasValues = true;
       min = Math.min(min, val);
@@ -111,7 +119,7 @@ export function applyFilter(
   config: FilterConfig,
   value: FilterValue
 ): boolean {
-  const itemValue = (item as Record<string, unknown>)[key];
+  const itemValue = resolveKey(item, key);
 
   switch (config.type) {
     case 'numeric': {
