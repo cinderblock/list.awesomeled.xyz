@@ -1,7 +1,53 @@
 name: FastLED
+status: active
 creator: Zach Vorhies (current), Daniel Garcia, Mark Kriegsman
-features: null
+language: C++
+license: MIT
+platforms:
+  - Arduino
+  - ESP32
+  - ESP8266
+  - Teensy
+  - STM32
+  - nRF52
+  - Raspberry Pi Pico
+  - Linux
+  - Web
 hardware: many
-instructional_resources: []
-url: https://github.com/FastLED/FastLED
-youtube_url: https://www.youtube.com/watch?v=4Ut4UK7612M
+supported_ics:
+  - WS2811
+  - WS2812
+  - WS2813
+  - WS2815
+  - SK6812
+  - APA102
+  - SK9822
+  - HD107S
+  - HD108
+  - LPD8806
+  - LPD1886
+  - WS2801
+  - P9813
+  - SM16716
+  - TM1803
+  - TM1804
+  - TM1809
+  - UCS1903
+  - UCS1904
+  - UCS2903
+  - DMX
+related_pixel_ics:
+  - dmx512
+  - lpd8806
+  - p9813
+  - sk6812-5050
+  - sm16716
+  - tm1803
+  - tm1804
+  - tm1809
+  - ucs1903
+  - ucs1904
+  - ws2801
+links:
+  repo: https://github.com/FastLED/FastLED
+  youtube: https://www.youtube.com/watch?v=4Ut4UK7612M

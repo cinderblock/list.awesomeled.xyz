@@ -4,34 +4,59 @@
   "title": "Drive Library",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
-    "name": {
-      "type": "string"
+    "name": { "type": "string" },
+    "status": {
+      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }],
+      "description": "active = maintained; end-of-life = archived/unmaintained"
     },
     "creator": {
-      "type": ["string", "null"],
-      "description": "Original designer/developer of this item (preferred over developer)"
+      "anyOf": [
+        { "type": ["string", "null"] },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string" },
+            "page": { "type": "string" }
+          }
+        }
+      ]
     },
-    "developer": {
-      "type": ["string", "null"],
-      "description": "Alias for creator (deprecated, use creator instead)"
+    "notes": { "type": ["string", "null"] },
+    "language": { "type": ["string", "null"], "description": "Primary implementation language (C++, Python, ...)" },
+    "license": { "type": ["string", "null"], "description": "SPDX-style id (MIT, GPL-3.0, ...)" },
+    "platforms": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Supported platforms (Arduino, ESP32, Teensy, Raspberry Pi, Linux, ...)"
     },
-    "hardware": {
-      "type": ["string", "null"],
-      "description": "Supported hardware platforms"
+    "hardware": { "type": ["string", "null"], "description": "Freeform supported-hardware summary" },
+    "features": { "type": ["string", "null"] },
+    "supported_ics": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Pixel IC / protocol names the library can drive"
     },
-    "features": {
-      "type": ["string", "null"]
+    "related_pixel_ics": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "IDs of pixel-ics entries this library supports"
     },
-    "url": {
-      "type": ["string", "null"]
+
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "repo": { "type": ["string", "null"] },
+        "youtube": { "type": ["string", "null"] }
+      }
     },
-    "youtube_url": {
-      "type": ["string", "null"]
-    },
-    "instructional_resources": {
-      "type": "array",
-      "items": { "type": "string" }
-    }
+    "instructional_resources": { "type": ["array", "null"], "items": { "type": "string" } },
+
+    "image": { "$ref": "common.json#/definitions/image" },
+    "images": { "$ref": "common.json#/definitions/images" }
   }
 }
