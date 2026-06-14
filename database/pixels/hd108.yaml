@@ -13,7 +13,8 @@ gpio_max: 5V
 gpio_min: 3.4V
 led_voltage: 5V
 max_pixels_per_string: null
-other_links: View technical specs and advantages of the pixel protocol HD108. - Advatek
+other_links:
+  - View technical specs and advantages of the pixel protocol HD108. - Advatek
 package_size: 5050, 2020
 pin_count: 6
 pixel_data_size: 64 Bits/Pixel

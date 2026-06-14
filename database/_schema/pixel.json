@@ -179,7 +179,7 @@
       "type": ["string", "null"]
     },
     "other_links": {
-      "type": "array",
+      "type": ["array", "null"],
       "items": { "type": "string" },
       "description": "Additional reference links"
     },
