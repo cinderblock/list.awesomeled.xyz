@@ -72,7 +72,10 @@ const BADGES: Record<string, BadgeConfig> = {
   wifi: { icon: Wifi, label: 'WiFi', color: C.net, match: ['wi-fi'] },
   ethernet: { icon: Network, label: 'Ethernet', color: C.net },
   bluetooth: { icon: Bluetooth, label: 'Bluetooth', color: C.net, match: ['ble'] },
-  '2.4ghz': { icon: Radio, label: '2.4 GHz', color: C.rf, match: ['2.4 ghz', '2.4g'] },
+  // Note: "2.4 GHz" deliberately has no badge — in this database it only ever
+  // appears as a WiFi band qualifier (`Wi-Fi: 2.4GHz`), so a separate pill just
+  // doubles up the WiFi pill. Reintroduce only if a non-WiFi 2.4 GHz radio
+  // (nRF24, ESP-NOW, proprietary wireless DMX) shows up as its own field.
   lora: { icon: Radio, label: 'LoRa', color: C.rf },
   zigbee: { icon: Radio, label: 'Zigbee', color: C.rf },
 
