@@ -1,13 +1,13 @@
 name: RGB-Pixel-Panel
 creator: SmartShow
+since: 2024
 notes: 169 Pixel Interlockable panel, arranged as 13x13 snakelined pixels on
   1.6mm PCB, 10mm pitch
-color_type: RGB
 core_tech: WS2812b
-dedicated_psu: true
-dimming_resolution: 8 Bit
-online_pricing: £20
-pixels_per_run: 169
-price_range: null
-since: 2024
-target_market: null
+specs:
+  pixels_per_run: 169
+  dimming_resolution: 8 Bit
+  color_type: RGB
+  dedicated_psu: true
+pricing:
+  online_pricing: £20

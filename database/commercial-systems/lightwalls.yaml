@@ -2,12 +2,10 @@ name: Lightwalls
 creator: Lightwalls
 notes: Strip and panels associated with Protopixel.io, subscription based
   control systems, "dynamic lighting"
-color_type: RGB/W
-core_tech: null
-dedicated_psu: true
-dimming_resolution: null
-online_pricing: Learning kit £550+VAT
-pixels_per_run: null
-price_range: $$$$$
-since: null
 target_market: Architectural
+specs:
+  color_type: RGB/W
+  dedicated_psu: true
+pricing:
+  price_range: $$$$$
+  online_pricing: Learning kit £550+VAT
