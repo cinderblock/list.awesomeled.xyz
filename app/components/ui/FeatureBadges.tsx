@@ -1,4 +1,22 @@
-import { CheckCircle, AlertTriangle, Wifi, Cpu, Network } from 'lucide-react';
+import {
+  CheckCircle,
+  AlertTriangle,
+  Wifi,
+  Cpu,
+  Network,
+  Bluetooth,
+  Usb,
+  Radio,
+  Monitor,
+  PlugZap,
+  Clock,
+  Cable,
+  Lightbulb,
+  MemoryStick,
+  SlidersHorizontal,
+  AppWindow,
+  CircuitBoard,
+} from 'lucide-react';
 import { Link } from 'react-router';
 
 // Expandable icon badge system for common terms/technologies
@@ -8,101 +26,144 @@ interface BadgeConfig {
   icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
   label: string;
   color: string;
+  // Lowercase terms that map to this badge. The canonical id (map key) is
+  // always matched too. Matching is whole-word, so short ids like "spi" or
+  // "arm" won't fire inside unrelated words ("firmware", "inspiration").
+  match?: string[];
 }
 
-// Map of terms to badge configurations
-// Keys should be lowercase for matching
+// Shared colors so related badges read as a family
+const C = {
+  green: '#22c55e',
+  amber: '#f59e0b',
+  control: '#8b5cf6', // pixel-control protocols (Art-Net, sACN, DDP, ...)
+  net: '#3b82f6', // wired/wireless connectivity
+  rf: '#0ea5e9', // radio links
+  bus: '#14b8a6', // low-level buses (I2C, SPI, UART, ...)
+  port: '#64748b', // physical ports (USB, HDMI, ...)
+  chip: '#ef4444', // SoC / MCU families
+  pixel: '#ec4899', // pixel data / IC families
+  power: '#eab308', // power features
+  software: '#06b6d4', // software ecosystems
+} as const;
+
+// Map of canonical id -> badge configuration.
+// Keys and `match` terms must be lowercase.
 const BADGES: Record<string, BadgeConfig> = {
   // Status
-  active: {
-    icon: CheckCircle,
-    label: 'Active',
-    color: '#22c55e', // green
-  },
+  active: { icon: CheckCircle, label: 'Active', color: C.green },
   deprecated: {
     icon: AlertTriangle,
     label: 'Deprecated',
-    color: '#f59e0b', // amber
+    color: C.amber,
+    match: ['discontinued', 'end-of-life', 'eol'],
   },
-  // Protocols
-  artnet: {
-    icon: Network,
-    label: 'Art-Net',
-    color: '#8b5cf6', // purple
-  },
-  'e1.31': {
-    icon: Network,
-    label: 'E1.31 (sACN)',
-    color: '#8b5cf6',
-  },
-  sacn: {
-    icon: Network,
-    label: 'sACN',
-    color: '#8b5cf6',
-  },
+
+  // Pixel-control protocols
+  artnet: { icon: Network, label: 'Art-Net', color: C.control, match: ['art-net', 'art net'] },
+  sacn: { icon: Network, label: 'sACN', color: C.control, match: ['e1.31', 'e1.31 (sacn)'] },
+  ddp: { icon: Network, label: 'DDP', color: C.control },
+  kinet: { icon: Network, label: 'KiNET', color: C.control },
+  opc: { icon: Network, label: 'OPC', color: C.control, match: ['open pixel control'] },
+  tpm2: { icon: Network, label: 'TPM2', color: C.control, match: ['tpm2.net'] },
+  dmx: { icon: SlidersHorizontal, label: 'DMX', color: C.control, match: ['dmx512'] },
+
   // Connectivity
-  wifi: {
-    icon: Wifi,
-    label: 'WiFi',
-    color: '#3b82f6', // blue
+  wifi: { icon: Wifi, label: 'WiFi', color: C.net, match: ['wi-fi'] },
+  ethernet: { icon: Network, label: 'Ethernet', color: C.net },
+  bluetooth: { icon: Bluetooth, label: 'Bluetooth', color: C.net, match: ['ble'] },
+  '2.4ghz': { icon: Radio, label: '2.4 GHz', color: C.rf, match: ['2.4 ghz', '2.4g'] },
+  lora: { icon: Radio, label: 'LoRa', color: C.rf },
+  zigbee: { icon: Radio, label: 'Zigbee', color: C.rf },
+
+  // Physical ports
+  usb: { icon: Usb, label: 'USB', color: C.port, match: ['usb-c', 'usb-a', 'micro usb', 'mini usb'] },
+  hdmi: { icon: Monitor, label: 'HDMI', color: C.port },
+
+  // Low-level buses
+  i2c: { icon: Cable, label: 'I²C', color: C.bus },
+  spi: { icon: Cable, label: 'SPI', color: C.bus },
+  uart: { icon: Cable, label: 'UART', color: C.bus },
+  'can-bus': { icon: Cable, label: 'CAN bus', color: C.bus, match: ['canbus', 'can bus'] },
+
+  // Storage
+  microsd: {
+    icon: MemoryStick,
+    label: 'microSD',
+    color: C.port,
+    match: ['micro sd', 'micro-sd', 'sd card', 'sdcard', 'tf card'],
   },
-  ethernet: {
-    icon: Network,
-    label: 'Ethernet',
-    color: '#3b82f6',
-  },
-  // Chips/Platforms
-  esp32: {
+
+  // Pixel data line
+  clocked: { icon: Clock, label: 'Clocked', color: C.pixel },
+
+  // SoC / MCU families
+  esp32: { icon: Cpu, label: 'ESP32', color: C.chip },
+  esp8266: { icon: Cpu, label: 'ESP8266', color: C.chip },
+  rp2040: { icon: Cpu, label: 'RP2040', color: C.chip },
+  teensy: { icon: Cpu, label: 'Teensy', color: C.chip },
+  'raspberry-pi': {
     icon: Cpu,
-    label: 'ESP32',
-    color: '#ef4444', // red
+    label: 'Raspberry Pi',
+    color: C.chip,
+    match: ['raspberry pi', 'rpi'],
   },
-  esp8266: {
-    icon: Cpu,
-    label: 'ESP8266',
-    color: '#ef4444',
-  },
-  arm: {
-    icon: Cpu,
-    label: 'ARM',
-    color: '#06b6d4', // cyan
-  },
-  rp2040: {
-    icon: Cpu,
-    label: 'RP2040',
-    color: '#ec4899', // pink
-  },
+  arm: { icon: Cpu, label: 'ARM', color: C.chip },
+  stm32: { icon: Cpu, label: 'STM32', color: C.chip },
+  fpga: { icon: CircuitBoard, label: 'FPGA', color: C.chip },
+
+  // Power
+  poe: { icon: PlugZap, label: 'PoE', color: C.power, match: ['power over ethernet'] },
+
+  // Software ecosystems
+  wled: { icon: Lightbulb, label: 'WLED', color: C.software },
+  fpp: { icon: AppWindow, label: 'FPP', color: C.software, match: ['falcon player', 'falconplayer'] },
+  xlights: { icon: AppWindow, label: 'xLights', color: C.software },
 };
+
+// Escape a term for use inside a RegExp literal
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Precompute: every matchable term -> canonical id, plus whole-word matchers.
+// `\b` boundaries keep short ids ("spi", "arm", "opc") from matching inside
+// longer words, which the old substring scan got wrong.
+const TERM_TO_ID: Record<string, string> = {};
+const MATCHERS: { id: string; re: RegExp }[] = [];
+for (const [id, cfg] of Object.entries(BADGES)) {
+  for (const term of [id, ...(cfg.match ?? [])]) {
+    TERM_TO_ID[term] = id;
+    MATCHERS.push({ id, re: new RegExp(`(?:^|[^a-z0-9])${escapeRegExp(term)}(?![a-z0-9])`, 'i') });
+  }
+}
 
 interface FeatureBadgesProps {
   entry: Record<string, unknown>;
 }
 
-// Check if a value contains a badge term
+// Scan a value (recursing into arrays/objects) for whole-word badge matches,
+// collecting canonical ids into `found`.
 function findBadgesInValue(value: unknown, found: Set<string>): void {
   if (typeof value === 'string') {
-    const lower = value.toLowerCase();
-    for (const term of Object.keys(BADGES)) {
-      if (lower.includes(term) && !found.has(term)) {
-        found.add(term);
-      }
+    for (const { id, re } of MATCHERS) {
+      if (!found.has(id) && re.test(value)) found.add(id);
     }
   } else if (Array.isArray(value)) {
-    for (const item of value) {
-      findBadgesInValue(item, found);
-    }
+    for (const item of value) findBadgesInValue(item, found);
+  } else if (value && typeof value === 'object') {
+    for (const item of Object.values(value)) findBadgesInValue(item, found);
   }
 }
 
-// Get all applicable badges for an entry by scanning all fields
+// Get all applicable badges for an entry by scanning all (nested) fields.
+// Insertion order of BADGES drives display order so related pills stay grouped.
 function getBadgesForEntry(entry: Record<string, unknown>): BadgeConfig[] {
   const found = new Set<string>();
-
-  for (const value of Object.values(entry)) {
-    findBadgesInValue(value, found);
-  }
-
-  return Array.from(found).map((term) => BADGES[term]);
+  findBadgesInValue(entry, found);
+  return Object.keys(BADGES)
+    .filter((id) => found.has(id))
+    .map((id) => BADGES[id]);
 }
 
 // Pill styling shared across badge variants
@@ -178,10 +239,10 @@ export function TextPill({ text, to }: { text: string; to?: string }) {
   return <span style={style}>{text}</span>;
 }
 
-// Get badge for a single string value (exact match)
+// Get badge for a single string value (exact match against a term or alias)
 export function getBadgeForValue(value: string): BadgeConfig | null {
-  const lower = value.toLowerCase();
-  return BADGES[lower] || null;
+  const id = TERM_TO_ID[value.trim().toLowerCase()];
+  return id ? BADGES[id] : null;
 }
 
 interface ValueBadgesProps {
