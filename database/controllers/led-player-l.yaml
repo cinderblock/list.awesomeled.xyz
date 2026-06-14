@@ -1,23 +1,21 @@
 name: LED Player L
 status: unknown
 creator: Diamex
-notes: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 8
-max_pixels: 4096
-max_voltage: 5V
-output_connectors: Phoenix Screw
-outputs: null
-pixel_types: both
+vendors:
+  - name: LED-Genial
+    url: https://www.led-genial.de
+    page: https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
+inputs:
+  physical:
+    Ethernet: true
+  standalone: true
+outputs:
+  count: 8
+  connector: Phoenix Screw
+  clocked: selectable # supports both clocked and clockless pixel types
+  pixels:
+    max_per_output: 512 # 4096 total across 8 outputs
+power:
+  voltage:
+    max: 5
 price: 99
-release_year: null
-standalone: true
-storage: Yes
-url: https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
-warranty: null
-waterproof: null
-wled_compatible: null

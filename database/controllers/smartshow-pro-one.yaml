@@ -1,25 +1,26 @@
 name: SmartShow Pro One
 status: active
-creator: SmartShow
-notes: Inbuilt Ethernet Switch, allows daisy chaining units
-auxiliary_outputs: DMX x4
-buffered: true
-interfaces:
-  - FPP
-  - Ethernet
-  - Wi-Fi
-max_current: null
-max_outputs: 8
-max_pixels: 5440
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Signal and Clock
-pixel_types: both
-price: 300
 release_year: 2023
-standalone: false
-storage: null
-url: https://smartshow.lighting/
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: SmartShow
+  url: https://smartshow.lighting/
+notes: Inbuilt Ethernet Switch, allows daisy chaining units
+inputs:
+  physical:
+    Ethernet: true
+    Wi-Fi: true
+  standalone: false
+outputs:
+  count: 8
+  connector: Phoenix Screw
+  pixels:
+    max_per_output: 680 # 5440 total / 8 outputs
+  clocked: selectable
+  driver:
+    buffered: true
+  auxiliary:
+    DMX512: 4
+power:
+  voltage:
+    max: 24
+price: 300

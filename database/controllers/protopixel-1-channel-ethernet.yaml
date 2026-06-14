@@ -1,23 +1,27 @@
 name: ProtoPixel 1 channel Ethernet
 status: active
-creator: ProtoPixel
-notes: null
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet ArtNet
-max_current: null
-max_outputs: 1
-max_pixels: 600
-max_voltage: 12V
-output_connectors: Phoenix Screw
-outputs: Single
-pixel_types: async
+creator:
+  name: ProtoPixel
+  url: https://www.protopixel.io
+  page: https://www.protopixel.io/pricing
+inputs:
+  physical:
+    Ethernet: true
+  protocols:
+    - Art-Net
+  standalone: true
+outputs:
+  count: 1
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 600
+  clocked: false
+power:
+  voltage:
+    max: 12
+data:
+  storage:
+    - type: Flash
 price: 191
-release_year: null
-standalone: true
-storage: Yes
-url: https://www.protopixel.io/pricing
-warranty: null
-waterproof: null
-wled_compatible: null

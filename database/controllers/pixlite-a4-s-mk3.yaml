@@ -1,32 +1,35 @@
 name: PixLite A4-S Mk3
 status: active
-creator: Advatek
+release_year: 2021
+creator:
+  name: Advatek
+  url: https://www.advateklights.com
+  page: https://www.advateklights.com/pixlite-a4-s-mk3
 notes: Electronic fusing; dithering and gamma on 8-bit/color pixels, "hundreds of FPS"
-auxiliary_outputs: DMX In/Out
-buffered: true
-interfaces:
-  - SD Card
-max_current: 28A
-max_outputs: 8
-max_pixels: 4080
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-pixel_types: both
-power_features:
+inputs:
+  standalone: true # SHOWTime software plays from SD card
+outputs:
+  count: 8
+  connector: Phoenix Screw
+  clocked: selectable # Single or Clock
+  driver:
+    buffered: true
+  auxiliary:
+    DMX512: 2 # DMX In/Out
+power:
+  voltage:
+    max: 24
+  current:
+    max: 28
+data:
+  storage:
+    - type: SD
+features:
   - Electronic fusing
   - Dithering
   - Gamma correction on 8-bit/color pixels
 price: 399
-release_year: 2021
-standalone: true
-standalone_notes: SHOWTime - https://www.advateklights.com/advatek-showtime-2022
-storage: SD
 technical_notes:
   - Standalone playback via SHOWTime software
   - High frame rate capability - 'hundreds of FPS'
   - Built-in dithering improves color transitions on 8-bit pixels
-url: https://www.advateklights.com/pixlite-a4-s-mk3
-warranty: null
-waterproof: null
-wled_compatible: null

@@ -1,25 +1,33 @@
 name: Reactivo 2
 status: active
-creator: LED Strip Studio
-notes: https://reactivo.lighting/first-touch/ Screen grabber, WEB interface,
-  APP, Software, Sensors, Triggers management
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-  - Wi-Fi
-max_current: 5A
-max_outputs: 1
-max_pixels: 1024
-max_voltage: 24V
-output_connectors: Phoenix Plug
-outputs: Data, Clock, SPI
-pixel_types: both
-price: 225
 release_year: 2020
-standalone: true
-storage: SD
-url: https://ledstripstudio.com/gaming/
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: LED Strip Studio
+  url: https://ledstripstudio.com
+  page: https://reactivo.lighting/first-touch/
+inputs:
+  physical:
+    Ethernet: true
+    Wi-Fi: true
+  standalone: true
+outputs:
+  count: 1
+  connector: Phoenix Plug
+  pixels:
+    max_per_output: 1024
+  clocked: selectable # supports both clocked (Data + Clock / SPI) and clockless pixels
+  driver:
+    buffered: true
+power:
+  voltage:
+    max: 24
+  current:
+    max: 5
+data:
+  storage:
+    - type: SD
+features:
+  - Screen grabber (screen capture to pixels)
+  - Web interface
+  - Mobile app
+  - Sensors and triggers management

@@ -1,25 +1,33 @@
 name: Madrix Nebula
 status: unknown
-creator: Madrix
-notes: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - RFRemote
-  - Bluetooth
-  - audio
-  - switch
-max_current: null
-max_outputs: 2
-max_pixels: 2048
-max_voltage: 24V
-output_connectors: Screw
-outputs: null
+creator:
+  name: Madrix
+  url: https://www.madrix.com
+  page: https://www.madrix.com/products/nebula
+inputs:
+  physical:
+    Ethernet: Dual # 2x RJ45, 10/100, Auto MDI-X, daisy-chain
+    USB: true # USB type-B
+    RF Remote: true
+    Bluetooth: true
+    Audio: true
+    Switch: true
+  protocols:
+    - Art-Net # incl. ArtSync (Art-Net I/II/3/4)
+    - sACN # ANSI E1.31
+  standalone: false
+outputs:
+  count: 2
+  connector: Screw # 2x 4-pin pluggable screw terminals
+  current:
+    max: 6 # per port when supplying LED power through
+  pixels:
+    max_per_output: 1020 # 1020 RGB / 768 RGBW per port (firmware 6.0+)
+power:
+  voltage:
+    min: 5
+    max: 24
+features:
+  - SPI TTL output (12x 512 channels across two ports)
+  - Powers LEDs directly through screw terminals (6A max per port)
 price: 350
-release_year: null
-standalone: false
-storage: null
-url: https://www.madrix.com/products/nebula
-warranty: null
-waterproof: null
-wled_compatible: null

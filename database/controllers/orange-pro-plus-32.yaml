@@ -1,23 +1,33 @@
 name: Orange Pro Plus 32
 status: active
-creator: Winterlights India
-notes: null
-auxiliary_outputs: 16 x long range data
-buffered: true
-interfaces:
-  - FPP
-max_current: null
-max_outputs: 32
-max_pixels: 48000
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single and Clock
-pixel_types: async
+creator:
+  name: Winterlights India
+  url: https://www.winterlights.in
+  page: https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+notes: >-
+  Vendor lists 16 direct pixel ports plus 16 long-range ports on 4 RJ45 jacks
+  (32 total in the name), so output count reflects direct ports only. Data-only
+  outputs with no V+ pass-through; plays FPP sequences from microSD.
+inputs:
+  physical:
+    Ethernet: true
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+    - DDP
+  standalone: true # plays FPP sequences from microSD
+outputs:
+  count: 16
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  clocked: false # async (Single and Clock pixel types, data-only)
+  auxiliary:
+    long-range: 16 # 16 long-range data ports on 4 RJ45 jacks
+power:
+  voltage:
+    max: 24
+data:
+  storage:
+    - type: uSD
 price: 275
-release_year: null
-standalone: true
-storage: SD
-url: https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
-warranty: null
-waterproof: null
-wled_compatible: null

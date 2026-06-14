@@ -1,25 +1,30 @@
 name: PixLite 16 Mk2 ECO
 status: discontinued
-creator: Advatek
-notes: Limited stock left - no site listing - contact directly to order
-  remaining stock
-auxiliary_outputs: DMX x4
-buffered: true
-interfaces:
-  - Ethernet ArtNet
-max_current: 64A
-max_outputs: 32
-max_pixels: 5440
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single or Clock
-pixel_types: both
+creator:
+  name: Advatek
+  url: https://www.advateklights.com
+notes: Limited stock left - no website listing. Contact sales@advateklights.com
+  directly and ask for the ECO version; once shelf stock is gone no more will be
+  manufactured.
+inputs:
+  physical:
+    Ethernet: true
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  count: 32
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 170 # 5440 total across 32 outputs
+  clocked: selectable
+  auxiliary:
+    DMX512: 4
+power:
+  voltage:
+    max: 24
+  current:
+    max: 64
 price: 190
-release_year: null
-standalone: false
-storage: null
-url: sales@advateklights.com - ask for the ECO version. once the stock on
-  shelves are gone no more will be manufactured
-warranty: null
-waterproof: null
-wled_compatible: null

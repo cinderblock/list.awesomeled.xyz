@@ -1,23 +1,24 @@
 name: WB1616
 status: active
-creator: Wally's Lights
-notes: null
-auxiliary_outputs: DMX x 2
-buffered: null
-interfaces:
-  - Ethernet & USB
-max_current: null
-max_outputs: 32
-max_pixels: 40000
-max_voltage: 12V
-output_connectors: Phoenix Screw
-outputs: Single and long range
-pixel_types: async
-price: 189
 release_year: 2022
-standalone: true
-storage: SD
-url: https://wallyslights.com/products/wallys-lights-wb1616-controller?_pos=3&_psq=wb1616&_ss=e&_v=1.0
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: Wally's Lights
+  page: https://wallyslights.com/products/wallys-lights-wb1616-controller
+inputs:
+  physical:
+    Ethernet: true
+    USB: true
+  standalone: true # plays from SD card
+outputs:
+  count: 32
+  connector: Phoenix Screw
+  clocked: false # async pixel types
+  auxiliary:
+    DMX512: 2
+power:
+  voltage:
+    max: 12
+data:
+  storage:
+    - type: SD
+price: 189

@@ -1,22 +1,28 @@
 name: NetPixel-One
 status: discontinued
 creator: SmartShow
-notes: null
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - FPP
-max_current: null
-max_outputs: 8
-max_pixels: 5440
-max_voltage: 24V
-output_connectors: JST
-outputs: Single
+vendors:
+  - name: eBay (SmartShow)
+    page: https://www.ebay.co.uk/itm/SmartShow-NetPixel-ONE-32-Universe-Ethernet-Pixel-Driver-ArtNet-sACN/274037107730
+inputs:
+  physical:
+    Ethernet: true # isolated RJ45
+  protocols:
+    - Art-Net # decodes up to 32 universes
+    - sACN # E1.31, up to 28 universes
+  standalone: false
+outputs:
+  count: 8
+  connector: 10-way plug-in harness # 8 data + ground + 5-24V power
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 680 # 5440 total RGB pixels across 8 outputs
+  clocked: false # single-wire WS281x style only
+power:
+  voltage:
+    max: 24
 price: 269
-release_year: null
-standalone: false
-storage: null
-url: https://www.ebay.co.uk/itm/SmartShow-NetPixel-ONE-32-Universe-Ethernet-Pixel-Driver-ArtNet-sACN/274037107730
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - Decodes up to 32 Art-Net universes (5440 RGB pixels) or 28 sACN/E1.31 universes via isolated RJ45 Ethernet
+  - Drives WS281x, SK6812, UCS19xx, UCS2903, TM180x, INK1003

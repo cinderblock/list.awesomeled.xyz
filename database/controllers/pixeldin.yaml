@@ -1,23 +1,25 @@
 name: PixelDIN
 status: active
-creator: YariloPro
-notes: Up to 4 independent outputs in 1-Wire SPI Mode. Total 5440 pixels.
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 8A
-max_outputs: 4
-max_pixels: 5440
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single and Clock
-pixel_types: both
-price: 142
 release_year: 2021
-standalone: null
-storage: null
-url: https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: YariloPro
+  url: https://yarilo.pro
+  page: https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
+notes: Up to 4 independent outputs in 1-Wire SPI Mode. Total 5440 pixels.
+inputs:
+  physical:
+    Ethernet: true
+outputs:
+  count: 4
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  clocked: selectable
+  pixels:
+    max_per_output: 1360
+power:
+  voltage:
+    max: 24
+  current:
+    max: 8
+price: 142

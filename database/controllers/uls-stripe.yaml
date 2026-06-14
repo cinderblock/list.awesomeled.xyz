@@ -1,25 +1,24 @@
 name: ULS Stripe
 status: active
-creator: ULS Manufacturing
-notes: 7 DMX Modes fom Individual to grouped
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - FPP
-  - USB Ethernet
-  - Wi-Fi
-max_current: 18A
-max_outputs: 4
-max_pixels: 1000
-max_voltage: 12V
-output_connectors: 5 Pin GX-16
-outputs: null
-pixel_types: async
+creator:
+  name: ULS Manufacturing
+  page: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller
+notes: 7 DMX Modes from Individual to grouped
+inputs:
+  physical:
+    Ethernet: true
+    USB: true
+    Wi-Fi: true
+  standalone: true # Falcon Player (FPP) remote mode
+outputs:
+  count: 4
+  connector: 5 Pin GX-16
+  clocked: false # async pixel types
+  driver:
+    buffered: true
+power:
+  voltage:
+    max: 12
+  current:
+    max: 18
 price: 330
-release_year: null
-standalone: null
-storage: null
-url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller
-warranty: null
-waterproof: null
-wled_compatible: null

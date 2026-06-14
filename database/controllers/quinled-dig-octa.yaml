@@ -1,23 +1,29 @@
 name: QuinLED-Dig-Octa
 status: active
-creator: Quindor / Intermittent Technology
-notes: ESP32, open to any software, often run with WLED
-auxiliary_outputs: Pre-Assembled
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 100A
-max_outputs: 8
-max_pixels: 4096
-max_voltage: 24V
-output_connectors: 5mm or 7.62mm screw terminal
-outputs: Single and Clock
-pixel_types: both
-price: 65
 release_year: 2022
-standalone: true
-storage: Micro-SD
-url: https://quinled.info/quinled-dig-octa/
-warranty: null
-waterproof: null
+creator:
+  name: Quindor / Intermittent Technology
+  page: https://quinled.info/quinled-dig-octa/
+notes: ESP32, open to any software, often run with WLED
+core:
+  family: ESP32
+inputs:
+  physical:
+    Ethernet: true
+  standalone: true
+outputs:
+  count: 8
+  connector: 5mm or 7.62mm screw terminal
+  driver:
+    buffered: true
+  clocked: selectable
+power:
+  voltage:
+    max: 24
+  current:
+    max: 100
+data:
+  storage:
+    - type: uSD
+price: 65
 wled_compatible: true

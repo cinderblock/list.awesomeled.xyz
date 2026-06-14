@@ -1,23 +1,34 @@
 name: MagWLED-1
 status: active
-creator: magwled
-notes: USB-C powered 5v or 12v capable
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Ethernet
-max_current: 3A
-max_outputs: 1
-max_pixels: null
-max_voltage: 12V
-output_connectors: Wago connector
-outputs: null
-pixel_types: async
+creator:
+  name: MagWLED Electronics
+  url: https://magwled.com
+  page: https://magwled.com/pages/magwled-1
+notes: USB-C powered, 5V or 12V capable (USB-C Power Delivery up to 36W).
+core:
+  family: ESP32-C3
+inputs:
+  physical:
+    Wi-Fi: true # ESP32-C3 onboard
+    USB: USB-C # power + firmware flashing
+  standalone: true # runs WLED
+outputs:
+  count: 1
+  connector: Wago 2060 terminal block
+  clocked: false # async pixel output
+  current:
+    max: 3
+power:
+  voltage:
+    min: 5
+    max: 12
+  current:
+    max: 3
+case:
+  dimensions: 48x32mm
+features:
+  - 3A resettable fuse
+  - ESD protection
+  - USB-C Power Delivery (5V/12V, up to 36W)
 price: 30
-release_year: null
-standalone: true
-storage: null
-url: null
-warranty: null
-waterproof: null
 wled_compatible: true

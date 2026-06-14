@@ -1,23 +1,46 @@
 name: Lightkraken
 status: active
-creator: Obtainium Consulting
-notes: 70W PoE++ Powered via Cat5 from PoE Switch
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 5A
-max_outputs: 1
-max_pixels: 1020
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: null
-pixel_types: async
+creator:
+  name: Obtainium Consulting
+  url: https://www.lightkraken.net
+notes: 70W PoE++ powered via Cat5 from a PoE switch (single cable for power and data).
+manufacturers:
+  - Obtainium Consulting
+vendors:
+  - name: Tindie
+    url: https://www.tindie.com
+    page: https://www.tindie.com/products/tinicuro/lightkraken/
+core:
+  IC: GD32F107RCT6
+  family: GD32
+inputs:
+  physical:
+    Ethernet: true
+    PoE: true # 802.3bt Type 4 (PoE++), up to 70W
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+outputs:
+  count: 1
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  current:
+    max: 5
+  clocked: selectable # async (e.g. WS2812) and clocked (e.g. APA102) types supported
+  pixels:
+    max_per_output: 1020
+power:
+  voltage:
+    min: 5.4 # selectable 5.4V / 12V / 24V
+    max: 24
+  current:
+    max: 5
+features:
+  - PoE++ (802.3bt Type 4) powered, up to 70W over Cat5
+  - Selectable output voltage (5.4V / 12V / 24V)
+  - Built-in web configurator
 price: 69
-release_year: null
-standalone: null
-storage: null
-url: https://www.tindie.com/products/tinicuro/lightkraken/ https://www.lightkraken.net/
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - GigaDevice GD32F107RCT6 Cortex-M3 microcontroller
+  - Supports WS2812, SK6812, TM1804, UCS1904, GS8208, APA102, APA107, P9813, SK9822 and analog RGB(W) via 14-bit PWM

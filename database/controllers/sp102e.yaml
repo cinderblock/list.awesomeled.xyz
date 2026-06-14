@@ -1,20 +1,19 @@
 name: SP102E
 status: active
 creator: Sperll
-notes: null
-auxiliary_outputs: null
-buffered: null
-max_current: null
-max_outputs: 1
-max_pixels: 1024
-max_voltage: 12V
-output_connectors: Screw
-outputs: Signal and Clock
+vendors:
+  - Amazon
+inputs:
+  physical:
+    buttons: true # onboard buttons + display for standalone pattern control
+  standalone: true # built-in patterns selectable via onboard buttons/display
+outputs:
+  count: 1
+  connector: Screw
+  clocked: selectable # supports single-wire (WS2812) and clocked (APA102/SPI) ICs
+  pixels:
+    max_per_output: 1024
+power:
+  voltage:
+    max: 12
 price: 13
-release_year: null
-standalone: null
-storage: null
-url: Amazon
-warranty: null
-waterproof: null
-wled_compatible: null

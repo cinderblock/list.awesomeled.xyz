@@ -1,22 +1,25 @@
 name: Pixie
 status: discontinued
-creator: SmartShow
-notes: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 1
-max_pixels: 170
-max_voltage: 5V
-output_connectors: JST
-outputs: null
+creator:
+  name: SmartShow
+  page: https://www.ebay.co.uk/itm/SmartShow-PIXIE-Wi-Fi-1-Universe-WS2812-Pixel-Controller-ArtNet-SPI/273946916411
+manufacturers:
+  - SmartShow
+inputs:
+  physical:
+    Ethernet: true
+    Wi-Fi: true
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  count: 1
+  connector: JST
+  pixels:
+    max_per_output: 170
+  protocols:
+    - WS2812
+power:
+  voltage:
+    max: 5
 price: 47
-release_year: null
-standalone: false
-storage: null
-url: https://www.ebay.co.uk/itm/SmartShow-PIXIE-Wi-Fi-1-Universe-WS2812-Pixel-Controller-ArtNet-SPI/273946916411
-warranty: null
-waterproof: null
-wled_compatible: null

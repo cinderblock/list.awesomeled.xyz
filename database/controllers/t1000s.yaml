@@ -1,24 +1,24 @@
 name: T1000S
 status: unknown
-creator: null
-notes: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - DMX
-  - USB
-max_current: null
-max_outputs: 1
-max_pixels: 2048
-max_voltage: 24V
-output_connectors: Phoenix Screw
-outputs: Single and Clock
-pixel_types: both
+vendors:
+  - name: Amazon
+    url: https://www.amazon.com
+inputs:
+  physical:
+    USB: true # for SD card programming via LedEdit
+  protocols:
+    - DMX # DMX512 input mode
+  standalone: true # plays effects from SD card
+outputs:
+  count: 1
+  connector: Phoenix Screw
+  pixels:
+    max_per_output: 2048
+  clocked: selectable # supports both single-wire and clocked pixels
+power:
+  voltage:
+    max: 24
+data:
+  storage:
+    - type: SD
 price: 28
-release_year: null
-standalone: true
-storage: SD
-url: Amazon
-warranty: null
-waterproof: null
-wled_compatible: null
