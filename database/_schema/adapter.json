@@ -4,73 +4,81 @@
   "title": "Adapter",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
-    "name": {
-      "type": "string"
+    "name": { "type": "string" },
+    "status": {
+      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }]
     },
     "creator": {
-      "type": ["string", "null"],
-      "description": "Original designer/developer of this item"
+      "anyOf": [
+        { "type": ["string", "null"] },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string" },
+            "page": { "type": "string" }
+          }
+        }
+      ]
     },
-    "manufacturers": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Manufacturers that produce this item"
-    },
+    "manufacturers": { "type": ["array", "null"], "items": { "type": "string" } },
     "vendors": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Vendors that sell/distribute this item"
+      "type": ["array", "null"],
+      "items": {
+        "anyOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "url": { "type": "string" },
+              "page": { "type": "string" }
+            }
+          }
+        ]
+      }
     },
-    "max_channels": {
-      "type": ["integer", "null"]
-    },
-    "pixel_types": {
-      "type": ["string", "null"]
-    },
-    "max_voltage": {
-      "type": ["string", "number", "null"]
-    },
-    "max_current": {
-      "type": ["string", "number", "null"]
-    },
-    "parent": {
-      "type": ["string", "null"],
-      "description": "Parent board/platform required"
-    },
-    "price": {
-      "type": ["string", "number", "null"]
-    },
-    "output_connectors": {
-      "type": ["string", "null"]
-    },
+    "notes": { "type": ["string", "null"] },
+    "price": { "type": ["string", "number", "null"] },
+    "diy_or_ots": { "type": ["string", "null"], "description": "DIY, OTS (off-the-shelf), or both" },
+    "parent": { "type": ["string", "null"], "description": "Parent board/platform required" },
+
     "outputs": {
-      "type": ["string", "null"]
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "max_channels": { "type": ["integer", "null"] },
+        "pixel_types": { "type": ["string", "null"], "description": "async, clocked, both, ..." },
+        "connectors": { "type": ["string", "null"] },
+        "description": { "type": ["string", "null"] }
+      }
     },
-    "diy_or_ots": {
-      "type": ["string", "null"]
+
+    "power": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "voltage": { "type": ["string", "number", "null"] },
+        "current": { "type": ["string", "number", "null"] }
+      }
     },
-    "notes": {
-      "type": ["string", "null"]
+
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "product": { "type": ["string", "null"] }
+      }
     },
-    "url": {
-      "type": ["string", "null"]
-    },
-    "image": {
-      "$ref": "common.json#/definitions/image"
-    },
-    "images": {
-      "$ref": "common.json#/definitions/images"
-    },
-    "related_microboards": {
-      "type": ["array", "null"],
-      "items": { "type": "string" },
-      "description": "IDs of compatible microboard entries"
-    },
-    "related_connectors": {
-      "type": ["array", "null"],
-      "items": { "type": "string" },
-      "description": "IDs of related connector entries"
-    }
+
+    "related_microboards": { "type": ["array", "null"], "items": { "type": "string" } },
+    "related_connectors": { "type": ["array", "null"], "items": { "type": "string" } },
+
+    "image": { "$ref": "common.json#/definitions/image" },
+    "images": { "$ref": "common.json#/definitions/images" }
   }
 }
