@@ -1,27 +1,12 @@
 name: MY9221
 creator: MY-Semi
-notes: null
-aggregate_bits: null
-backup_data_line: null
-channel_bits: 16
-channels: 3
-clocked: true
-data_bitrate: null
-data_type: null
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-max_current: null
-max_pixels_per_string: null
+data:
+  clocked: true
+  channels: 3
+color:
+  channel_bits: 16
+  pwm_frequency: 1.0kHz
+electrical:
+  output_voltage: 24V
 other_links:
   - MY9221 Pixel Protocol Overview | Advatek Lighting
-output_voltage: 24V
-package_size: null
-pin_count: null
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: 1.0kHz
-quiescent_current: null
-release_year: null
-supply_voltage: null
-third_party_testing: null

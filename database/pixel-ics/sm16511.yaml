@@ -1,27 +1,13 @@
 name: SM16511
 creator: Shenzhen Sunmoon Microelectronics
-notes: null
-aggregate_bits: null
-backup_data_line: null
-channel_bits: 8
-channels: 4
-clocked: false
-data_bitrate: null
-data_type: null
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-max_current: null
-max_pixels_per_string: null
+data:
+  clocked: false
+  channels: 4
+color:
+  channel_bits: 8
+  pwm_frequency: 3.3kHz
+physical:
+  package_size: SOP10/SOP16
+  pin_count: 10/16
 other_links:
   - SM16511 Pixel Protocol Overview | Advatek Lighting
-output_voltage: null
-package_size: SOP10/SOP16
-pin_count: 10/16
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: 3.3kHz
-quiescent_current: null
-release_year: null
-supply_voltage: null
-third_party_testing: null

@@ -1,27 +1,13 @@
 name: QED3001
 creator: Unknown
-notes: null
-aggregate_bits: null
-backup_data_line: null
-channel_bits: 12
-channels: 3
-clocked: false
-data_bitrate: null
-data_type: null
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-max_current: null
-max_pixels_per_string: null
+data:
+  clocked: false
+  channels: 3
+color:
+  channel_bits: 12
+  pwm_frequency: 1.0kHz
+physical:
+  package_size: SOP8/10/14
+  pin_count: 8/10/14
 other_links:
   - QED3001 Pixel Protocol Overview | Advatek Lighting
-output_voltage: null
-package_size: SOP8/10/14
-pin_count: 8/10/14
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: 1.0kHz
-quiescent_current: null
-release_year: null
-supply_voltage: null
-third_party_testing: null
