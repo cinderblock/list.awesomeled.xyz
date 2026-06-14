@@ -1,8 +1,11 @@
 name: Artnet2twinkly
+status: end-of-life
 creator: John Lord
+platforms:
+  - Windows
+hardware: Twinkly
 features: ArtNet to Twinkly consumer lights via Wi-Fi, allows control of Twinkly
   via professional lighting controls
-hardware: Twinkly
-instructional_resources: []
-url: http://artnet2twinkly.com/
-youtube_url: https://youtube.com/channel/UCbd2w11mMNXC9Qekdho1bYw
+links:
+  repo: http://artnet2twinkly.com/
+  youtube: https://youtube.com/channel/UCbd2w11mMNXC9Qekdho1bYw

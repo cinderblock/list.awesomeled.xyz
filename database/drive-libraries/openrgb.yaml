@@ -1,7 +1,14 @@
 name: OpenRGB
+status: active
 creator: Adam Honse
-features: control all of your RGB devices from a single app, on both Windows and Linux,
+language: C++
+license: GPL-2.0-or-later
+platforms:
+  - Windows
+  - Linux
+  - macOS
+  - Raspberry Pi
 hardware: PC RGB hardware
-instructional_resources: []
-url: https://openrgb.org/index.html
-youtube_url: null
+features: control all of your RGB devices from a single app, on both Windows and Linux,
+links:
+  repo: https://openrgb.org/index.html

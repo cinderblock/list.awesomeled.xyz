@@ -1,7 +1,15 @@
 name: TriantaduoWS2811
+status: unknown
 creator: Ward Ramsdell
-features: 32 channels of 1000 LEDs per channel at 33 frames per second
+language: C++
+license: MIT
+platforms:
+  - Teensy
 hardware: Teensy4.0
-instructional_resources: []
-url: https://github.com/wramsdell/TriantaduoWS2811
-youtube_url: null
+features: 32 channels of 1000 LEDs per channel at 33 frames per second
+supported_ics:
+  - WS2811
+related_pixel_ics:
+  - ws2811
+links:
+  repo: https://github.com/wramsdell/TriantaduoWS2811

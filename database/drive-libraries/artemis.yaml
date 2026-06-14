@@ -1,8 +1,15 @@
 name: Artemis
+status: active
 creator: Robert Beekman
-features: Artemis is a lighting software for gamers that creates realistic
-  lighting effects by using device location.
+language: C#
+license: PolyForm-Noncommercial-1.0.0
+platforms:
+  - Windows
+  - Linux
+  - macOS
 hardware: PC / Video source
-instructional_resources: []
-url: https://artemis-rgb.com/
-youtube_url: null
+features: Artemis is a lighting software for gamers that creates realistic lighting effects by using device location.
+supported_ics:
+  - WS281X
+links:
+  repo: https://artemis-rgb.com/

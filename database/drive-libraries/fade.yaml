@@ -1,7 +1,14 @@
 name: Fade
-creator: Eric Arcana
-features: Programming language based WS2812 and PWM LED ESP 32 with Windows based programming interface
+status: unknown
+creator: Eric Gunnerson
+language: C++
+platforms:
+  - ESP32
+  - Windows
 hardware: ESP32
-instructional_resources: []
-url: http://www.riderx.info/fade-an-esp32-animation-system/
-youtube_url: https://www.youtube.com/watch?v=-CXQz1x2k9o
+features: Programming language based WS2812 and PWM LED ESP 32 with Windows based programming interface
+supported_ics:
+  - WS2812
+links:
+  repo: http://www.riderx.info/fade-an-esp32-animation-system/
+  youtube: https://www.youtube.com/watch?v=-CXQz1x2k9o

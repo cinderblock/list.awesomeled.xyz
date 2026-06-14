@@ -1,7 +1,20 @@
 name: Artnet Receive
+status: active
 creator: natcl
-features: null
+language: C++
+license: MIT
+platforms:
+  - Arduino
+  - Teensy
+  - ESP8266
+  - ESP32
 hardware: Arduino/Teensie/ESP8266
-instructional_resources: []
-url: https://github.com/natcl/Artnet
-youtube_url: null
+supported_ics:
+  - WS2811
+  - WS2812
+  - DMX
+related_pixel_ics:
+  - ws2811
+  - dmx512
+links:
+  repo: https://github.com/natcl/Artnet

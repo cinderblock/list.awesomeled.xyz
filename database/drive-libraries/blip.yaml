@@ -1,8 +1,16 @@
 name: BLIP
+status: active
 creator: Benjamin Kuperberg
-features: OSCQuery Enabled, ArtNet multi-ledstrip controller and multi purpose
-  firmware (GPIO, motors, etc.) with a unified control system. ESPNow compatible
+language: C++
+license: GPL-3.0
+platforms:
+  - ESP32
 hardware: ESP32
-instructional_resources: []
-url: https://github.com/Golden-Geek/BLIP/
-youtube_url: null
+features: OSCQuery Enabled, ArtNet multi-ledstrip controller and multi purpose firmware (GPIO, motors, etc.) with a unified control system. ESPNow compatible
+supported_ics:
+  - WS2812B
+  - WS2816
+  - SK9822
+  - HD108
+links:
+  repo: https://github.com/Golden-Geek/BLIP/
