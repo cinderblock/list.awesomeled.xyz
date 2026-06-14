@@ -1,24 +1,32 @@
 name: ThunderPack Wearable
 status: active
-creator: Jeremy Gillick Labs
-notes: 1.4 - 2.3A output per PWM channel. RGB PWM and/or addressable LEDs.
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - USB
-  - GPIO
-max_current: 10A
-max_outputs: 17
-max_pixels: null
-max_voltage: null
-output_connectors: Solder
-outputs: null
-pixel_types: both
-price: 40
 release_year: 2020
-standalone: true
-storage: Yes
-url: https://www.tindie.com/stores/jeremy/
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: Jeremy Gillick Labs
+  page: https://www.tindie.com/stores/jeremy/
+vendors:
+  - name: Tindie
+    page: https://www.tindie.com/stores/jeremy/
+notes: 1.4 - 2.3A output per PWM channel. RGB PWM and/or addressable LEDs.
+core:
+  family: STM32
+inputs:
+  physical:
+    USB: true # USB bootloader for programming
+    GPIO: 12
+    buttons: true
+  standalone: true # battery-powered, runs Arduino/CircuitPython firmware
+outputs:
+  count: 4 # high-power PWM MOSFET channels
+  connector: Solder
+  current:
+    max: 2.3 # per high-power PWM channel
+power:
+  current:
+    max: 10
+features:
+  - Integrated 18650 lithium battery and charger
+  - 4 high-power PWM MOSFET outputs (1.4-2.3A each)
+  - Status LEDs
+  - Runs Arduino or CircuitPython
+price: 40

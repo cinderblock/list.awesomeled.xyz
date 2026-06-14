@@ -1,23 +1,27 @@
 name: TwinPixx16
 status: unknown
-creator: DMX4All
-notes: null
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Switch Trigger
-max_current: null
-max_outputs: 2
-max_pixels: 2720
-max_voltage: 5V
-output_connectors: Phoenix Plug
-outputs: single and clock
-pixel_types: both
+creator:
+  name: DMX4All
+  url: https://www.dmx4all.de
+  page: https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
+manufacturers:
+  - DMX4All
+inputs:
+  physical:
+    Ethernet: true # Art-Net over Ethernet (product is "ArtNet TwinPixx 16")
+    Switch Trigger: true
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  count: 2 # "TwinPixx" = two pixel outputs
+  connector: Phoenix Plug
+  driver:
+    buffered: true
+  clocked: selectable # supports both single-wire and clocked pixels
+  pixels:
+    max_per_output: 1360 # 2720 total across 2 outputs
+power:
+  voltage:
+    max: 5
 price: 399
-release_year: null
-standalone: false
-storage: null
-url: https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
-warranty: null
-waterproof: null
-wled_compatible: null

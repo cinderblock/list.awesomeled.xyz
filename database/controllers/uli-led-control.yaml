@@ -1,23 +1,18 @@
 name: Uli LED control
 status: unknown
-creator: Ulrich Radig
-notes: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 8
-max_pixels: 1360
-max_voltage: 12V
-output_connectors: null
-outputs: null
-pixel_types: both
+creator:
+  name: Ulrich Radig
+  url: https://www.ulrichradig.de
+  page: https://shop.ulrichradig.de/Module/Light-Control-DMX/4096-Kanal-LED-Strip-Controller.html
+inputs:
+  physical:
+    Ethernet: true
+outputs:
+  count: 8
+  pixels:
+    max_per_output: 170 # 1360 total pixels / 8 outputs
+  clocked: selectable # supports both clocked and non-clocked pixel types
+power:
+  voltage:
+    max: 12
 price: 99
-release_year: null
-standalone: null
-storage: null
-url: https://shop.ulrichradig.de/Module/Light-Control-DMX/4096-Kanal-LED-Strip-Controller.html
-warranty: null
-waterproof: null
-wled_compatible: null
