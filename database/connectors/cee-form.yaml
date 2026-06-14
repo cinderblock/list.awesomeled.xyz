@@ -1,31 +1,29 @@
 name: CEE Form
 creator: Generic
 notes: Also known in building trade as Commando Connectors. 16A Blue 3 Pin single phase popular European connector for stage power distribution. Red Three Phase connector up to 125A . Other colours used for low voltage
-board_fingers: false
-colors: Yellow 110V Blue 240V Red 415V
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP65
-largest_gauge: 12 AWG
-locking: Latching
-max_current: 16 A
-max_pins: 7
-max_voltage: 415 V
-min_pins: 3
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: null
-screw_terminal: true
-smallest_gauge: 22 AWG
-solder: false
-url: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/
-wire_to_wire: true
-year_introduced: null
+ratings:
+  max_current: 16 A
+  max_voltage: 415 V
+  ip_rating: IP65
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 3
+  max_pins: 7
+  gendered: true
+  locking: Latching
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+termination:
+  solder: false
+  screw_terminal: true
+  crimp: true
+  idc: false
+  smallest_gauge: 22 AWG
+  largest_gauge: 12 AWG
+wiring:
+  colors: Yellow 110V Blue 240V Red 415V
+links:
+  product: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/

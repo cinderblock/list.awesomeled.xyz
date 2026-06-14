@@ -1,32 +1,33 @@
 name: PowerPole 15/45
 creator: Anderson
 notes: Anderson PowerPole, Genderless, Clip together shells in 11 colours, Radio HAM power standard, panel mounting and waterproofing options.Extremely robust mixed signal and high current connector.
-board_fingers: false
-colors: Multi
-contact_type: Blade
-convention: When viewed from mating connector's perspective with tongues on the
-  bottom, the red housing is on the left
-crimp: true
-digikey_url: https://www.digikey.com/en/products/filter/blade-type-power-connectors-accessories/360?s=N4IgTCBcDaIIYDsAmBTATgZwPYIAQAcsB3dQgGxRAF0BfIA
-gendered: false
-idc: false
-ip_rating: IP65 Available
-largest_gauge: 6 AWG
-locking: Friction
-max_current: 55 A
-max_pins: 16
-max_voltage: 600 V
-min_pins: 1
-mouser_url: null
-outline: Rectangular
-panel_mount: true
-pcb_mount: PTH
-pinout: null
-pitch: 15.9 mm
-rows: N/A
-screw_terminal: false
-smallest_gauge: 20 AWG
-solder: true
-url: https://www.andersonpower.com/us/en/resources/PowerPoleResourcesPage.html
-wire_to_wire: true
-year_introduced: null
+ratings:
+  max_current: 55 A
+  max_voltage: 600 V
+  ip_rating: IP65 Available
+mechanical:
+  outline: Rectangular
+  contact_type: Blade
+  pitch: 15.9 mm
+  min_pins: 1
+  max_pins: 16
+  rows: N/A
+  gendered: false
+  locking: Friction
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: PTH
+  board_fingers: false
+termination:
+  solder: true
+  screw_terminal: false
+  crimp: true
+  idc: false
+  smallest_gauge: 20 AWG
+  largest_gauge: 6 AWG
+wiring:
+  convention: When viewed from mating connector's perspective with tongues on the bottom, the red housing is on the left
+  colors: Multi
+links:
+  product: https://www.andersonpower.com/us/en/resources/PowerPoleResourcesPage.html
+  digikey: https://www.digikey.com/en/products/filter/blade-type-power-connectors-accessories/360?s=N4IgTCBcDaIIYDsAmBTATgZwPYIAQAcsB3dQgGxRAF0BfIA

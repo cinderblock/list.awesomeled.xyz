@@ -2,31 +2,28 @@ name: Mini Bucaneer
 creator: Bulgin
 notes: Bulgin, long established UK connector maker, available with crimp or
   screw terminals. locking collar can be fragile with rough handling
-board_fingers: false
-colors: Black Blue collar
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP68
-largest_gauge: 18 AWG
-locking: Screw Lock
-max_current: 10 A
-max_pins: 8
-max_voltage: 250 V
-min_pins: 1
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: null
-screw_terminal: null
-smallest_gauge: 24 AWG
-solder: true
-url: https://www.bulgin.com/us/products/range/circular-power-connectors/mini-series.html
-wire_to_wire: true
-year_introduced: null
+ratings:
+  max_current: 10 A
+  max_voltage: 250 V
+  ip_rating: IP68
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 1
+  max_pins: 8
+  gendered: true
+  locking: Screw Lock
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+termination:
+  solder: true
+  crimp: true
+  idc: false
+  smallest_gauge: 24 AWG
+  largest_gauge: 18 AWG
+wiring:
+  colors: Black Blue collar
+links:
+  product: https://www.bulgin.com/us/products/range/circular-power-connectors/mini-series.html

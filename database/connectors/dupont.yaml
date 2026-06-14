@@ -2,31 +2,29 @@ name: DuPont
 creator: Harwin/ Generic
 notes: Arduino standard patch connector, Harwin clones, proper crimp tool
   400USD+ , lesser crimp tools not up to job
-board_fingers: false
-colors: Black shell
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 24 AWG
-locking: Friction
-max_current: 1 A
-max_pins: 12
-max_voltage: 50 V
-min_pins: 1
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: PTH
-pinout: null
-pitch: 2.54mm
-rows: 1
-screw_terminal: null
-smallest_gauge: 28 AWG
-solder: true
-url: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/
-wire_to_wire: true
-year_introduced: null
+ratings:
+  max_current: 1 A
+  max_voltage: 50 V
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 2.54mm
+  min_pins: 1
+  max_pins: 12
+  rows: 1
+  gendered: true
+  locking: Friction
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: PTH
+  board_fingers: false
+termination:
+  solder: true
+  crimp: true
+  idc: false
+  smallest_gauge: 28 AWG
+  largest_gauge: 24 AWG
+wiring:
+  colors: Black shell
+links:
+  product: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/

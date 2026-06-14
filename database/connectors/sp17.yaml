@@ -1,31 +1,29 @@
 name: SP17
 creator: Weipu
 notes: Also available is SP21 and SP29 , clones in SP16 and SP28
-board_fingers: false
-colors: Black Blue Collar
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP68
-largest_gauge: 14 AWG
-locking: Screw Lock
-max_current: 10 A
-max_pins: 10
-max_voltage: 500 V
-min_pins: 2
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: N/A
-screw_terminal: null
-smallest_gauge: 22 AWG
-solder: true
-url: https://weipuconnector.com/product/38
-wire_to_wire: true
-year_introduced: null
+ratings:
+  max_current: 10 A
+  max_voltage: 500 V
+  ip_rating: IP68
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 2
+  max_pins: 10
+  rows: N/A
+  gendered: true
+  locking: Screw Lock
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+termination:
+  solder: true
+  crimp: true
+  idc: false
+  smallest_gauge: 22 AWG
+  largest_gauge: 14 AWG
+wiring:
+  colors: Black Blue Collar
+links:
+  product: https://weipuconnector.com/product/38

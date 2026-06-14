@@ -2,31 +2,30 @@ name: D.C. Barrel
 creator: Generic
 notes: D.C Barrel Connector. 5.5mm barrel with a 2.1mm centre pin is most
   common; 2.5 mm pin looks similar but doesn't fit.
-board_fingers: false
-colors: null
-contact_type: Pins
-convention: Female source
-crimp: true
-digikey_url: null
-gendered: true
-idc: true
-ip_rating: IP20-IP65
-largest_gauge: 18 AWG
-locking: Friction
-max_current: 2 A
-max_pins: 2
-max_voltage: 30 V
-min_pins: 2
-mouser_url: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
-outline: Circular
-panel_mount: true
-pcb_mount: PTH
-pinout: +pin -sleeve
-pitch: null
-rows: null
-screw_terminal: null
-smallest_gauge: 24 AWG
-solder: true
-url: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
-wire_to_wire: true
-year_introduced: null
+ratings:
+  max_current: 2 A
+  max_voltage: 30 V
+  ip_rating: IP20-IP65
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 2
+  max_pins: 2
+  gendered: true
+  locking: Friction
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: PTH
+  board_fingers: false
+termination:
+  solder: true
+  crimp: true
+  idc: true
+  smallest_gauge: 24 AWG
+  largest_gauge: 18 AWG
+wiring:
+  pinout: +pin -sleeve
+  convention: Female source
+links:
+  product: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
+  mouser: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack

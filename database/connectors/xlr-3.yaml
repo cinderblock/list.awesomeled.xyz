@@ -1,31 +1,30 @@
 name: XLR 3
 creator: Neutrik /Generic
 notes: AKA Cannon, original with side grub screw, Neutrik developed chuck cable grip. Metal bodied world standard audio and microphone connector, 5 pin for DMX512
-board_fingers: false
-colors: Black, silver, optional colored collars
-contact_type: Pins
-convention: Female output jack, male input jack
-crimp: true
-digikey_url: null
-gendered: true
-idc: true
-ip_rating: IP40
-largest_gauge: 14 AWG
-locking: Latching
-max_current: 16 A
-max_pins: 7
-max_voltage: 50 V
-min_pins: 2
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: Both
-pinout: null
-pitch: null
-rows: N/A
-screw_terminal: null
-smallest_gauge: 22 AWG
-solder: true
-url: https://www.neutrik.com/en/neutrik/products/xlr-connectors/xlr-cable-connectors?c=audio
-wire_to_wire: true
-year_introduced: null
+ratings:
+  max_current: 16 A
+  max_voltage: 50 V
+  ip_rating: IP40
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 2
+  max_pins: 7
+  rows: N/A
+  gendered: true
+  locking: Latching
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: Both
+  board_fingers: false
+termination:
+  solder: true
+  crimp: true
+  idc: true
+  smallest_gauge: 22 AWG
+  largest_gauge: 14 AWG
+wiring:
+  convention: Female output jack, male input jack
+  colors: Black, silver, optional colored collars
+links:
+  product: https://www.neutrik.com/en/neutrik/products/xlr-connectors/xlr-cable-connectors?c=audio

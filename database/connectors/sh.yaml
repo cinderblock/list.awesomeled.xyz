@@ -1,31 +1,26 @@
 name: SH
 creator: JST
-notes: null
-board_fingers: false
-colors: null
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 28 AWG
-locking: Latching
-max_current: 1 A
-max_pins: 25
-max_voltage: 50 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: Both
-pinout: null
-pitch: 1.0 mm
-rows: 2
-screw_terminal: null
-smallest_gauge: 30 AWG
-solder: true
-url: https://www.jst-mfg.com/product/detail_e.php?series=231
-wire_to_wire: true
-year_introduced: null
+ratings:
+  max_current: 1 A
+  max_voltage: 50 V
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 1.0 mm
+  min_pins: 2
+  max_pins: 25
+  rows: 2
+  gendered: true
+  locking: Latching
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: Both
+  board_fingers: false
+termination:
+  solder: true
+  crimp: true
+  idc: false
+  smallest_gauge: 30 AWG
+  largest_gauge: 28 AWG
+links:
+  product: https://www.jst-mfg.com/product/detail_e.php?series=231

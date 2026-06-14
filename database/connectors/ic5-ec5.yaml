@@ -1,32 +1,31 @@
 name: IC5 EC5
 creator: Spektrum
+year_introduced: 2018
 notes: IC5 LiPo battery connector with Third pin for charger communication. EC5
   mates with IC5 BUT no third pin
-board_fingers: false
-colors: IC5 Orange EC5 Blue
-contact_type: Pins
-convention: null
-crimp: false
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 10 AWG
-locking: Friction
-max_current: 60 A
-max_pins: 3
-max_voltage: 24 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: false
-pinout: null
-pitch: 12.0 mm
-rows: 1
-screw_terminal: null
-smallest_gauge: 20 AWG
-solder: true
-url: https://blog.ampow.com/ic5-vs-ec5-connector/
-wire_to_wire: true
-year_introduced: 2018
+ratings:
+  max_current: 60 A
+  max_voltage: 24 V
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 12.0 mm
+  min_pins: 2
+  max_pins: 3
+  rows: 1
+  gendered: true
+  locking: Friction
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+termination:
+  solder: true
+  crimp: false
+  idc: false
+  smallest_gauge: 20 AWG
+  largest_gauge: 10 AWG
+wiring:
+  colors: IC5 Orange EC5 Blue
+links:
+  product: https://blog.ampow.com/ic5-vs-ec5-connector/
