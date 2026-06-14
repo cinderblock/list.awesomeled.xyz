@@ -1,10 +1,9 @@
 name: SN74LV1T34DBVRG4
 creator: Texas Instruments
-notes: null
-buffered: null
-channels: 1
-interface: SOT 23
-max_current: null
-max_voltage: 7V
-price: null
-url: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4
+io:
+  channels: 1
+  interface: SOT 23
+electrical:
+  max_voltage: 7V
+links:
+  product: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4

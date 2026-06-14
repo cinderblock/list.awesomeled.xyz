@@ -1,10 +1,9 @@
 name: 74HC245
 creator: Texas Instruments
-notes: null
-buffered: null
-channels: 8
-interface: null
-max_current: 8mA
-max_voltage: 6
-price: null
-url: https://www.ti.com/product/SN74HC245
+io:
+  channels: 8
+electrical:
+  max_voltage: 6
+  max_current: 8mA
+links:
+  product: https://www.ti.com/product/SN74HC245
