@@ -2,51 +2,49 @@ name: MADRIX 5
 status: active
 creator: Inoage
 notes: GPIO available with Madrix Orion external box
-adc_input: false
-audio_input: true
-demo_available: true
-demo_limitations: Demo mode - no data output
-designer: true
-gpio: false
-integrations: null
-language: null
-license_type: perpetual
-live: true
-other_inputs: MIDI, HTTP, MA-net, CITP, SMPTE, Spout, GamePort
-other_outputs: DVI, Robe, Insta, Hue
 platforms:
   - Windows
-price: 330+
-price_tiers:
-  - tier: Entry
-    price: 330
-    features: Basic LED control
-    limitations: Limited universe count
-  - tier: Start
-    price: 600
-    features: Increased universe count
-    limitations: null
-  - tier: Professional
-    price: 1650
-    features: Professional features
-    limitations: null
-  - tier: Maximum
-    price: 3300
-    features: All features, maximum universes
-    limitations: null
-programmatic: null
-protocols:
-  artnet: true
-  sacn: true
-  dmx: true
-  kinet: true
-  ddp: null
-serial: null
+pricing:
+  price: 330+
+  license_type: perpetual
+  tiers:
+    - tier: Entry
+      price: 330
+      features: Basic LED control
+      limitations: Limited universe count
+    - tier: Start
+      price: 600
+      features: Increased universe count
+    - tier: Professional
+      price: 1650
+      features: Professional features
+    - tier: Maximum
+      price: 3300
+      features: All features, maximum universes
+  demo:
+    available: true
+    limitations: Demo mode - no data output
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+inputs:
+  video: true
+  audio: true
+  adc: false
+  other: MIDI, HTTP, MA-net, CITP, SMPTE, Spout, GamePort
+outputs:
+  protocols:
+    artnet: true
+    sacn: true
+    dmx: true
+    kinet: true
+  gpio: false
+  other: DVI, Robe, Insta, Hue
 technical_notes:
   - Industry standard for professional LED installations
   - GPIO requires separate Madrix Orion hardware
   - Extensive fixture library
   - MADRIX Nebula hardware can be used for standalone playback
-url: https://www.madrix.com/products/software
-video_input: true
-visualizer: 3D
+links:
+  url: https://www.madrix.com/products/software

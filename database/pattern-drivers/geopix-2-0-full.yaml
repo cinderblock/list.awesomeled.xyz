@@ -1,27 +1,25 @@
 name: GeoPix 2.0(full)
 status: unknown
 creator: Enviral Design
-notes: null
-audio_input: Both
-demo_available: Open Source
-designer: true
-gpio: null
-integrations: null
-language: null
-live: true
-other_inputs: MIDI, OSC, MQTT
-other_outputs: MIDI
+pricing:
+  price: Free
+  demo:
+    available: Open Source
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+inputs:
+  video: Input
+  audio: Both
+  other: MIDI, OSC, MQTT
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Both
+    dmx: Output
+  other: MIDI
 platforms:
   - Windows (TouchDesigner)
-price: Free
-programmatic: null
-protocols:
-  artnet: Both
-  sacn: Both
-  dmx: Output
-  kinet: null
-  ddp: null
-serial: null
-url: https://www.geopix.io/
-video_input: Input
-visualizer: 3D
+links:
+  url: https://www.geopix.io/

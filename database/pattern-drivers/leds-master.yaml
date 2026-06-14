@@ -3,30 +3,18 @@ status: unknown
 creator: Antoine Doussaud
 notes: You can load shaders, musics, microphone, videos and custom scripts to
   create live animation.
-audio_input: null
-demo_available: null
-designer: null
-gpio: null
-integrations: null
-language: null
-live: true
-other_inputs: null
-other_outputs: null
 platforms:
   - Windows
   - macOS
   - Linux
   - Android
   - '& iOS'
-price: FOSS
-programmatic: null
-protocols:
-  artnet: Output
-  sacn: null
-  dmx: null
-  kinet: null
-  ddp: null
-serial: null
-url: https://antoine.doussaud.org/leds_master
-video_input: null
-visualizer: null
+pricing:
+  price: FOSS
+capabilities:
+  live: true
+outputs:
+  protocols:
+    artnet: Output
+links:
+  url: https://antoine.doussaud.org/leds_master

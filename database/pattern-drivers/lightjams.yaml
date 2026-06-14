@@ -2,26 +2,24 @@ name: Lightjams
 status: active
 creator: Lightjams Inc
 notes: ELM developed by same developer
-audio_input: Both
-demo_available: Demo available
-designer: true
-gpio: null
-integrations: null
-language: null
-live: true
-other_inputs: MIDI,OSC,Spout,Syphon, Ambilight
-other_outputs: null
 platforms:
   - Windows
-price: 125 - 450
-programmatic: Both
-protocols:
-  artnet: Both
-  sacn: Both
-  dmx: Both
-  kinet: null
-  ddp: null
-serial: null
-url: https://www.lightjams.com/
-video_input: Both
-visualizer: null
+pricing:
+  price: 125 - 450
+  demo:
+    available: Demo available
+capabilities:
+  live: true
+  designer: true
+  programmatic: Both
+inputs:
+  video: Both
+  audio: Both
+  other: MIDI,OSC,Spout,Syphon, Ambilight
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Both
+    dmx: Both
+links:
+  url: https://www.lightjams.com/

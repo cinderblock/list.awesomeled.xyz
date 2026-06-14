@@ -1,28 +1,21 @@
 name: MadMapper
 status: active
 creator: Smode Tech
-notes: null
-audio_input: null
-demo_available: null
-designer: true
-gpio: null
-integrations: null
-language: null
-live: null
-other_inputs: MIDI,OSC,Spout,Syphon,NDI
-other_outputs: MIDI, OSC, EtherDream, Arduino
 platforms:
   - Windows
   - macOS
-price: 420
-programmatic: null
-protocols:
-  artnet: Both
-  sacn: Both
-  dmx: Both
-  kinet: null
-  ddp: null
-serial: null
-url: https://madmapper.com/madmapper/
-video_input: Input
-visualizer: null
+pricing:
+  price: 420
+capabilities:
+  designer: true
+inputs:
+  video: Input
+  other: MIDI,OSC,Spout,Syphon,NDI
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Both
+    dmx: Both
+  other: MIDI, OSC, EtherDream, Arduino
+links:
+  url: https://madmapper.com/madmapper/

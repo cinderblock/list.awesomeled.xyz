@@ -2,26 +2,18 @@ name: Faith Chapel
 status: unknown
 creator: Faith Chapel
 notes: Developed for Houses of Worship originally
-audio_input: null
-demo_available: null
-designer: null
-gpio: null
-integrations: LED Media server from console
 language: null
-live: true
-other_inputs: NDI, SDI, Midi
-other_outputs: null
 platforms:
   - Windows
-price: Free
-programmatic: null
-protocols:
-  artnet: Both
-  sacn: null
-  dmx: null
-  kinet: null
-  ddp: null
-serial: null
-url: https://resources.faithchapel.cc/blogs/pixel_mapping_software?fbclid=IwAR0I3imz0gy7R6-_x8hWD8CO6qJEM2o2P_KXTdmkpRUYbOaWYssicnD2IIE
-video_input: null
-visualizer: null
+pricing:
+  price: Free
+capabilities:
+  live: true
+inputs:
+  other: NDI, SDI, Midi
+outputs:
+  protocols:
+    artnet: Both
+integrations: LED Media server from console
+links:
+  url: https://resources.faithchapel.cc/blogs/pixel_mapping_software?fbclid=IwAR0I3imz0gy7R6-_x8hWD8CO6qJEM2o2P_KXTdmkpRUYbOaWYssicnD2IIE
