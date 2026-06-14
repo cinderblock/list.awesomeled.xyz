@@ -1,10 +1,11 @@
 name: Controller Changeover
 creator: Wasatch Pixels
-notes: null
 diy_or_ots: OTS
-max_channels: 2
-output_connectors: Phoenix
-outputs: Data
-pixel_types: WLed override from other pixel control to single output
 price: 12
-url: https://www.tindie.com/products/k7bbr/led-controller-multiplexer/
+outputs:
+  max_channels: 2
+  pixel_types: WLed override from other pixel control to single output
+  connectors: Phoenix
+  description: Data
+links:
+  product: https://www.tindie.com/products/k7bbr/led-controller-multiplexer/

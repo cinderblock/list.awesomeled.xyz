@@ -1,11 +1,11 @@
 name: Pixel Data Isolator
 creator: Essence Engineering
-notes: null
 diy_or_ots: OTS
-max_channels: 1
-output_connectors: solder
-outputs: Data
-pixel_types: provides a 5kV isolated data connection from controller to LED when
-  each are powered separately.
 price: 16.99
-url: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/
+outputs:
+  max_channels: 1
+  pixel_types: provides a 5kV isolated data connection from controller to LED when each are powered separately.
+  connectors: solder
+  description: Data
+links:
+  product: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/
