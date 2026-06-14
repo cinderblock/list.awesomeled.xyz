@@ -4,64 +4,76 @@
   "title": "Commercial Pixel System",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
-    "name": {
-      "type": "string"
+    "name": { "type": "string" },
+    "status": {
+      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }]
     },
+    "since": { "type": ["integer", "null"], "description": "Year the system was introduced" },
     "creator": {
-      "type": ["string", "null"],
-      "description": "Original designer/developer of this item"
+      "anyOf": [
+        { "type": ["string", "null"] },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string" },
+            "page": { "type": "string" }
+          }
+        }
+      ]
     },
-    "manufacturers": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Manufacturers that produce this item"
-    },
+    "manufacturers": { "type": ["array", "null"], "items": { "type": "string" } },
     "vendors": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Vendors that sell/distribute this item"
+      "type": ["array", "null"],
+      "items": {
+        "anyOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "url": { "type": "string" },
+              "page": { "type": "string" }
+            }
+          }
+        ]
+      }
     },
-    "pixels_per_run": {
-      "type": ["integer", "null"]
+    "notes": { "type": ["string", "null"] },
+    "target_market": { "type": ["string", "null"] },
+    "core_tech": { "type": ["string", "null"] },
+
+    "specs": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "pixels_per_run": { "type": ["integer", "null"] },
+        "dimming_resolution": { "type": ["string", "null"] },
+        "color_type": { "type": ["string", "null"], "description": "RGB, RGBW, WW, ..." },
+        "dedicated_psu": { "type": ["boolean", "null"] }
+      }
     },
-    "dimming_resolution": {
-      "type": ["string", "null"]
+    "pricing": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "price_range": { "type": ["string", "null"], "description": "$ to $$$$$$" },
+        "online_pricing": { "type": ["string", "null"] }
+      }
     },
-    "dedicated_psu": {
-      "type": ["boolean", "null"]
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "product": { "type": ["string", "null"] }
+      }
     },
-    "color_type": {
-      "type": ["string", "null"],
-      "description": "RGB, RGBW, WW, etc."
-    },
-    "online_pricing": {
-      "type": ["string", "null"]
-    },
-    "price_range": {
-      "type": ["string", "null"],
-      "description": "$ to $$$$$$"
-    },
-    "core_tech": {
-      "type": ["string", "null"]
-    },
-    "since": {
-      "type": ["integer", "null"]
-    },
-    "target_market": {
-      "type": ["string", "null"]
-    },
-    "notes": {
-      "type": ["string", "null"]
-    },
-    "url": {
-      "type": ["string", "null"]
-    },
-    "image": {
-      "$ref": "common.json#/definitions/image"
-    },
-    "images": {
-      "$ref": "common.json#/definitions/images"
-    }
+
+    "image": { "$ref": "common.json#/definitions/image" },
+    "images": { "$ref": "common.json#/definitions/images" }
   }
 }
