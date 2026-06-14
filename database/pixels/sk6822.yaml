@@ -1,27 +1,18 @@
 name: SK6822
-creator: null
-notes: null
-backup_data_line: true
-brightness_bits: 8
-channel_current: null
-clocked: false
-color_order: RGB
-data_bitrate: 800kHz
-data_type: null
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-led_voltage: 5V
-max_pixels_per_string: null
+data:
+  clocked: false
+  bitrate: 800kHz
+  backup_line: true
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 1.2kHz
+electrical:
+  led_voltage: 5V
+  vcc_voltage: 5V
+  wattage: .mW
+physical:
+  package_size: '5050'
+  pin_count: 6
 other_links:
   - SK6822 Pixel Protocol Overview | Advatek Lighting
-package_size: '5050'
-pin_count: 6
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: 1.2kHz
-quiescent_current: null
-release_year: null
-third_party_testing: null
-vcc_voltage: 5V
-wattage: .mW

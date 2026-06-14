@@ -1,26 +1,17 @@
 name: SK9822-A
 creator: Newstar LED Co.
 notes: Higher PWM version of SK9822
-backup_data_line: false
-brightness_bits: null
-channel_current: null
-clocked: true
-color_order: null
-data_bitrate: 30MHz
-data_type: APA102
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-led_voltage: 5V
-max_pixels_per_string: null
-other_links: null
-package_size: '5050'
-pin_count: 6
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: 27.0kHz
-quiescent_current: 1.0mA
-release_year: null
-third_party_testing: null
-vcc_voltage: 5V
-wattage: .mW
+data:
+  type: APA102
+  clocked: true
+  bitrate: 30MHz
+  backup_line: false
+color:
+  pwm_frequency: 27.0kHz
+electrical:
+  led_voltage: 5V
+  vcc_voltage: 5V
+  quiescent_current: 1.0mA
+physical:
+  package_size: '5050'
+  pin_count: 6

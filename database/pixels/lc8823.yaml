@@ -1,26 +1,15 @@
 name: LC8823
-creator: null
-notes: null
-backup_data_line: false
-brightness_bits: 8+5
-channel_current: 17.0mA
-clocked: true
-color_order: null
-data_bitrate: null
-data_type: APA102
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-led_voltage: 3-7.5V
-max_pixels_per_string: null
-other_links: null
-package_size: '5050'
-pin_count: 6
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: 27kHz
-quiescent_current: '?'
-release_year: null
-third_party_testing: null
-vcc_voltage: 5V
-wattage: '#VALUE!'
+data:
+  type: APA102
+  clocked: true
+  backup_line: false
+color:
+  brightness_bits: 8+5
+  pwm_frequency: 27kHz
+electrical:
+  led_voltage: 3-7.5V
+  vcc_voltage: 5V
+  channel_current: 17.0mA
+physical:
+  package_size: '5050'
+  pin_count: 6

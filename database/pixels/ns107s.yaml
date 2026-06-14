@@ -1,26 +1,35 @@
 name: NS107S
-creator: Newstar LED Co.
-notes: upgrade of APA107, same protocol with APA102, higher PWM 27khz, more stable
-backup_data_line: false
-brightness_bits: 8+5
-channel_current: 20.0mA
-clocked: true
-color_order: BGR
-data_bitrate: 30MHz
-data_type: APA102
-datasheet_url: http://www.newstar-ledstrip.com/product/20190710114547839.pdf
-gpio_max: 5V
-gpio_min: 3.5V
-led_voltage: 5V
-max_pixels_per_string: null
-other_links: null
-package_size: 5050, 3535, 2020
-pin_count: 6
-pixel_data_size: 32 Bits/Pixel
-pixel_rate_max: 0.94 M Pixel / s
-pwm_frequency: 27.0kHz
-quiescent_current: 0.1mA
 release_year: 2017
-third_party_testing: null
-vcc_voltage: 5V
-wattage: 100.mW
+creator: Newstar LED Co.
+manufacturers:
+  - Newstar LED Co.
+notes: upgrade of APA107, same protocol with APA102, higher PWM 27khz, more stable
+data:
+  type: APA102
+  clocked: true
+  bitrate: 30MHz
+  pixel_size_bits: 32
+  pixel_rate_max: 0.94 M Pixel / s
+  backup_line: false
+color:
+  order: BGR
+  brightness_bits: 8+5
+  pwm_frequency: 27.0kHz
+electrical:
+  led_voltage: 5V
+  vcc_voltage: 5V
+  gpio:
+    min: 3.5V
+    max: 5V
+  channel_current: 20.0mA
+  quiescent_current: 0.1mA
+  wattage: 100.mW
+physical:
+  package_sizes:
+    - '5050'
+    - '3535'
+    - '2020'
+  package_size: 5050, 3535, 2020
+  pin_count: 6
+datasheet:
+  url: http://www.newstar-ledstrip.com/product/20190710114547839.pdf

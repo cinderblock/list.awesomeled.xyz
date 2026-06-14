@@ -1,48 +1,40 @@
 name: WS2812
 status: active
-creator: WorldSemi
-notes: Individually addressable RGB pixel; cheap and everywhere
-backup_data_line: false
-brightness_bits: 8
-channel_current: 18.5mA
-channel_current_notes: Datasheet states max 49mA current, but graph for 5050
-  package shows R=19mA, G,B=22mA. 3535 package has lower current
-clocked: false
-color_order: GRB
-data_bitrate: 800kHz
-data_type: WS2811/12
-datasheet_discrepancies:
-  - Datasheet claims max 49mA but actual is ~18-22mA per channel
-  - Vds max of 26V is misleading - LEDs are integrated at 5V
-datasheet_url: https://cdn-shop.adafruit.com/datasheets/WS2812.pdf
-gpio_max: 5V
-gpio_min: 3.0V
-led_voltage: 5V
-led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and
-  share power with 5V VDD
-max_pixels_per_string: null
-other_links:
-  - WS2812 Pixel Protocol Overview | Advatek Lighting
-package_size: 5050/3535/2040/2020
-package_sizes:
-  - '5050'
-  - '3535'
-  - '2040'
-  - '2020'
-pin_count: 4
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-pwm_frequency: 2.0kHz
-pwm_frequency_notes: 400Hz is an old PWM spec. Newer WS2812b (post 2018) use
-  updated IC with 2.0kHz PWM rate same as WS2813
-quiescent_current: 0.7mA
 release_year: 2012
 spec_update_year: 2018
-technical_notes:
-  - PWM frequency updated from 400Hz to 2.0kHz in 2018 silicon revision
-  - Datasheet max current (49mA) differs from actual measured values (19-22mA)
-  - Available in many package sizes with varying current specs
-third_party_testing: null
+creator: WorldSemi
+notes: Individually addressable RGB pixel; cheap and everywhere
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  pixel_rate_max: 33.3 k Pixel / s
+  backup_line: false
+color:
+  order: GRB
+  brightness_bits: 8
+  pwm_frequency: 2.0kHz
+  pwm_frequency_notes: 400Hz is an old PWM spec. Newer WS2812b (post 2018) use updated IC with 2.0kHz PWM rate same as WS2813
+electrical:
+  led_voltage: 5V
+  led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
+  vcc_voltage: 5V
+  gpio:
+    min: 3.0V
+    max: 5V
+  channel_current: 18.5mA
+  channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA. 3535 package has lower current
+  quiescent_current: 0.7mA
+  wattage: 92.5mW
+physical:
+  package_sizes:
+    - '5050'
+    - '3535'
+    - '2040'
+    - '2020'
+  package_size: 5050/3535/2040/2020
+  pin_count: 4
 variants:
   - name: WS2812B
     suffix: B
@@ -53,5 +45,14 @@ variants:
   - name: WS2812E
     suffix: E
     differences: Extended temperature range
-vcc_voltage: 5V
-wattage: 92.5mW
+datasheet:
+  url: https://cdn-shop.adafruit.com/datasheets/WS2812.pdf
+  discrepancies:
+    - Datasheet claims max 49mA but actual is ~18-22mA per channel
+    - Vds max of 26V is misleading - LEDs are integrated at 5V
+other_links:
+  - WS2812 Pixel Protocol Overview | Advatek Lighting
+technical_notes:
+  - PWM frequency updated from 400Hz to 2.0kHz in 2018 silicon revision
+  - Datasheet max current (49mA) differs from actual measured values (19-22mA)
+  - Available in many package sizes with varying current specs
