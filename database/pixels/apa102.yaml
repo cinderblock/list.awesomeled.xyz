@@ -1,44 +1,46 @@
 name: APA102
 status: active
+release_year: 2014
 creator: APA Electronics
 notes: Fast refresh, fast PWM, except extra 5 bits PWM at 400Hz
-backup_data_line: false
-brightness_bits: 8+5
-brightness_control_method: pwm
-brightness_control_notes: Extra 5-bit brightness control by overlaying 400Hz PWM on LEDs
-channel_current: 22mA
-channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5
-  bits control PWM, not current
-clocked: true
-color_order: BGR
-data_bitrate: 30MHz
-data_type: APA102
-datasheet_url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
-gpio_max: 5V
-gpio_min: 3.5V
-led_voltage: 5V
-led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and
-  share power with 5V VDD
-max_pixels_notes: Clock pulse gets shorter by a few ns every pixel. After ~250
-  pixels, the clock signal can no longer be reliably retrieved.
-max_pixels_per_string: 250
+data:
+  type: APA102
+  clocked: true
+  bitrate: 30MHz
+  pixel_size_bits: 32
+  pixel_rate_max: 0.94 M Pixel / s
+  backup_line: false
+  max_per_string: 250
+  max_per_string_notes: Clock pulse gets shorter by a few ns every pixel. After ~250 pixels, the clock signal can no longer be reliably retrieved.
+color:
+  order: BGR
+  brightness_bits: 8+5
+  brightness_method: pwm
+  brightness_method_notes: Extra 5-bit brightness control by overlaying 400Hz PWM on LEDs
+  pwm_frequency: 19.2kHz
+electrical:
+  led_voltage: 5V
+  led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
+  vcc_voltage: 5V
+  gpio:
+    min: 3.5V
+    max: 5V
+  channel_current: 22mA
+  channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control PWM, not current
+  quiescent_current: 1.0mA
+  wattage: 110mW
+physical:
+  package_sizes:
+    - '5050'
+    - '2020'
+  package_size: 5050 & 2020
+  pin_count: 6
+datasheet:
+  url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+  third_party_testing: http://neon-world.com/en/product_detail.php?cid=59&id=167
 other_links:
   - APA102 Pixel Protocol Overview | Advatek Lighting
-package_size: 5050 & 2020
-package_sizes:
-  - '5050'
-  - '2020'
-pin_count: 6
-pixel_data_size: 32 Bits/Pixel
-pixel_rate_max: 0.94 M Pixel / s
-pwm_frequency: 19.2kHz
-quiescent_current: 1.0mA
-release_year: 2014
 technical_notes:
-  - Clock signal degrades with each pixel - see
-    https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/
+  - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/
   - Extra 5-bit brightness control is PWM-based, not current control
   - 19-22mA per channel in 5050 package, 10mA for 2020 package
-third_party_testing: http://neon-world.com/en/product_detail.php?cid=59&id=167
-vcc_voltage: 5V
-wattage: 110mW
