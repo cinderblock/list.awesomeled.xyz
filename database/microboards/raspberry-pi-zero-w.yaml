@@ -2,7 +2,7 @@ name: Raspberry Pi Zero W
 creator: Raspberry Pi Foundation
 notes: null
 bluetooth: '4.1'
-bms: false
+bms: "No"
 clock_speed: 1.0GHz
 cpu: ARM11
 ethernet: USB

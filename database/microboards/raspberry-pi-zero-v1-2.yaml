@@ -2,7 +2,7 @@ name: Raspberry Pi Zero v1.2
 creator: Raspberry Pi Foundation
 notes: null
 bluetooth: null
-bms: false
+bms: "No"
 clock_speed: 1.0GHz
 cpu: ARM11
 ethernet: USB

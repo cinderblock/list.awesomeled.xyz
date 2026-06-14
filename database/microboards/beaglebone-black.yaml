@@ -2,7 +2,7 @@ name: Beaglebone Black
 creator: Beagleboard.org
 notes: null
 bluetooth: null
-bms: false
+bms: "No"
 clock_speed: 1.0GHz
 cpu: Cortex-A8, 2x PRUSS
 ethernet: 100BASE-TX

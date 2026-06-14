@@ -13,7 +13,8 @@ gpio_max: 5V
 gpio_min: null
 max_current: 45mA
 max_pixels_per_string: null
-other_links: LPD6803 Pixel Protocol Overview | Advatek Lighting
+other_links:
+  - LPD6803 Pixel Protocol Overview | Advatek Lighting
 output_voltage: 12V
 package_size: SOP16/QFN16
 pin_count: 16

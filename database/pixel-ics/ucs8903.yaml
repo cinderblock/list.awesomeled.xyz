@@ -13,7 +13,8 @@ gpio_max: 5V
 gpio_min: 3.0V
 max_current: 17mA
 max_pixels_per_string: null
-other_links: UCS8903 Pixel Protocol Overview | Advatek Lighting
+other_links:
+  - UCS8903 Pixel Protocol Overview | Advatek Lighting
 output_voltage: 26V
 package_size: SOP8
 pin_count: 8

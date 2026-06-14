@@ -27,4 +27,4 @@ protocols:
 serial: Both
 url: http://github.com/benkuper/BenTo
 video_input: null
-visualizer: true
+visualizer: "Yes"

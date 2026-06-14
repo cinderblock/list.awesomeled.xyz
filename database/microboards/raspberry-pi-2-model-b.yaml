@@ -2,7 +2,7 @@ name: Raspberry Pi 2 Model B
 creator: Raspberry Pi Foundation
 notes: null
 bluetooth: USB
-bms: false
+bms: "No"
 clock_speed: 900MHz
 cpu: 4× ARM Cortex-A7
 ethernet: 100BASE-TX

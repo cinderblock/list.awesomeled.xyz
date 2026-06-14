@@ -2,7 +2,7 @@ name: Raspberry Pi 1 Model B+
 creator: Raspberry Pi Foundation
 notes: null
 bluetooth: USB
-bms: false
+bms: "No"
 clock_speed: 700MHz
 cpu: ARM11
 ethernet: 100BASE-TX

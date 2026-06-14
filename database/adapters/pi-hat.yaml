@@ -8,6 +8,6 @@ max_voltage: null
 output_connectors: Both
 outputs: null
 parent: Yes
-pixel_types: 2
+pixel_types: "2"
 price: 22
 url: Multiple

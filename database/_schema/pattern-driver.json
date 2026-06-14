@@ -28,7 +28,7 @@
           "tier": { "type": "string" },
           "price": { "type": ["string", "number"] },
           "features": { "type": "string" },
-          "limitations": { "type": "string" }
+          "limitations": { "type": ["string", "null"] }
         }
       },
       "description": "Detailed pricing tiers (free, educational, commercial, pro, etc.)"
@@ -128,7 +128,7 @@
     },
     "status": {
       "type": ["string", "null"],
-      "enum": ["active", "discontinued", "end-of-life", "beta", "limited", null]
+      "enum": ["active", "discontinued", "end-of-life", "beta", "limited", "unknown", null]
     },
     "url": {
       "type": ["string", "null"]

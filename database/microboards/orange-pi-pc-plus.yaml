@@ -2,7 +2,7 @@ name: Orange Pi PC Plus
 creator: Shenzhen Xunlong Software
 notes: null
 bluetooth: null
-bms: false
+bms: "No"
 clock_speed: 1.6GHz
 cpu: 4× ARM Cortex-A7
 ethernet: 100BASE-TX

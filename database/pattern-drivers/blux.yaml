@@ -27,4 +27,4 @@ protocols:
 serial: Both
 url: http://benjamin.kuperberg.fr/blux
 video_input: null
-visualizer: true
+visualizer: "Yes"

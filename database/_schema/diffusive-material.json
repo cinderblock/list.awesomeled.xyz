@@ -37,7 +37,7 @@
       "description": "T for tinted, C for clear, T&C for both"
     },
     "sample_thickness": {
-      "type": ["string", "null"]
+      "type": ["number", "string", "null"]
     },
     "diffusivity": {
       "type": ["integer", "string", "null"],

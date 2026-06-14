@@ -13,7 +13,8 @@ gpio_max: null
 gpio_min: null
 max_current: null
 max_pixels_per_string: null
-other_links: UCS512B Pixel Protocol Overview | Advatek Lighting
+other_links:
+  - UCS512B Pixel Protocol Overview | Advatek Lighting
 output_voltage: null
 package_size: SOP8
 pin_count: 8

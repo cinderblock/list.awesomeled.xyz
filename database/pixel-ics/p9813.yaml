@@ -13,7 +13,8 @@ gpio_max: 5V
 gpio_min: 3.5V
 max_current: 45mA
 max_pixels_per_string: 1024
-other_links: P9813 Pixel Protocol Overview | Advatek Lighting
+other_links:
+  - P9813 Pixel Protocol Overview | Advatek Lighting
 output_voltage: 12V
 package_size: SOP14/DIP14
 pin_count: 14

@@ -2,7 +2,7 @@ name: Teensy++ 2.0
 creator: PJRC
 notes: null
 bluetooth: null
-bms: false
+bms: "No"
 clock_speed: 16MHz
 cpu: AVR
 ethernet: null

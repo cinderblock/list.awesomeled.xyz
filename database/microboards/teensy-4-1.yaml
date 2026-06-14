@@ -2,7 +2,7 @@ name: Teensy 4.1
 creator: PJRC
 notes: null
 bluetooth: null
-bms: false
+bms: "No"
 clock_speed: 600MHz
 cpu: ARM Cortex-M7
 ethernet: null

@@ -13,7 +13,8 @@ gpio_max: null
 gpio_min: null
 max_current: 17mA
 max_pixels_per_string: null
-other_links: SM16704 Pixel Protocol Overview | Advatek Lighting
+other_links:
+  - SM16704 Pixel Protocol Overview | Advatek Lighting
 output_voltage: 30V
 package_size: SOP8
 pin_count: 8

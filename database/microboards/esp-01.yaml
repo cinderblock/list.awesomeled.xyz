@@ -2,7 +2,7 @@ name: ESP-01
 creator: null
 notes: null
 bluetooth: '4.1'
-bms: false
+bms: "No"
 clock_speed: null
 cpu: Diamond Standard 106Micro
 ethernet: null

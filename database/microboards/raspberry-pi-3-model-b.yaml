@@ -2,7 +2,7 @@ name: Raspberry Pi 3 Model B+
 creator: Raspberry Pi Foundation
 notes: null
 bluetooth: '4.2'
-bms: false
+bms: "No"
 clock_speed: 1.4GHz
 cpu: 4× ARM Cortex-A53
 ethernet: Gigabit

@@ -2,7 +2,7 @@ name: ESP-32S
 creator: NodeMCU
 notes: null
 bluetooth: '4.1'
-bms: false
+bms: "No"
 clock_speed: null
 cpu: Xtensa LX6
 ethernet: null

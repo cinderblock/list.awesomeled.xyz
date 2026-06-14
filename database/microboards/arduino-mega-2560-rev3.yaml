@@ -2,7 +2,7 @@ name: Arduino Mega 2560 Rev3
 creator: Arduino
 notes: null
 bluetooth: null
-bms: false
+bms: "No"
 clock_speed: 16MHz
 cpu: AVR
 ethernet: null

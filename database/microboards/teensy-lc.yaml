@@ -2,7 +2,7 @@ name: Teensy-LC
 creator: PJRC
 notes: null
 bluetooth: null
-bms: false
+bms: "No"
 clock_speed: 48MHz
 cpu: ARM Cortex-M0+
 ethernet: null
