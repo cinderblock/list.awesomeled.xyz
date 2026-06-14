@@ -3,7 +3,7 @@ import { data, Link } from 'react-router';
 import { getCategoryById, loadEntry } from '~/lib/data';
 import { formatDateYMD } from '~/lib/format';
 import { getColumnsForCategory } from '~/lib/columns';
-import { FileText, ShoppingCart, Youtube, Globe, X } from 'lucide-react';
+import { FileText, ShoppingCart, Youtube, Globe, Github, X } from 'lucide-react';
 import { useState } from 'react';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
@@ -20,7 +20,9 @@ function getFilterableFields(categoryId: string): Set<string> {
   const filterable = new Set<string>();
   for (const col of columns) {
     if (col.filterConfig?.type === 'select' || col.filterConfig?.type === 'boolean') {
+      // Both the full dotted key and its leaf are useful for matching
       filterable.add(col.key);
+      filterable.add(col.key.split('.').pop()!);
     }
   }
   return filterable;
@@ -37,101 +39,207 @@ export function meta({ data: loaderData }: Route.MetaArgs) {
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const categoryId = params.category;
-  const entryId = params.entry;
-
-  const category = getCategoryById(categoryId);
-  if (!category) {
-    throw data(null, { status: 404 });
-  }
-
-  const entry = loadEntry(categoryId, entryId);
-  if (!entry) {
-    throw data(null, { status: 404 });
-  }
-
+  const category = getCategoryById(params.category);
+  if (!category) throw data(null, { status: 404 });
+  const entry = loadEntry(params.category, params.entry);
+  if (!entry) throw data(null, { status: 404 });
   return { category, entry };
 }
 
-// Collect all images from entry (handles both 'image' and 'images' fields)
 function getEntryImages(entry: Record<string, unknown>): string[] {
   const images: string[] = [];
-  if (typeof entry.image === 'string') {
-    images.push(entry.image);
-  }
+  if (typeof entry.image === 'string') images.push(entry.image);
   if (Array.isArray(entry.images)) {
-    for (const img of entry.images) {
-      if (typeof img === 'string') {
-        images.push(img);
-      }
-    }
+    for (const img of entry.images) if (typeof img === 'string') images.push(img);
   }
   return images;
 }
 
-// URL type configuration with icons and labels
-interface UrlConfig {
-  icon: React.ComponentType<{ size?: number }>;
-  label: string;
-}
-
-const URL_CONFIGS: Record<string, UrlConfig> = {
-  datasheet_url: { icon: FileText, label: 'Datasheet' },
-  digikey_url: { icon: ShoppingCart, label: 'DigiKey' },
-  mouser_url: { icon: ShoppingCart, label: 'Mouser' },
-  youtube_url: { icon: Youtube, label: 'YouTube' },
-};
-
-// Strip schema (http:// or https://) and www. prefix from URL for display
 function stripSchemaAndWww(url: string): string {
   return url.replace(/^https?:\/\//, '').replace(/^www\./, '');
 }
 
-// Collect all URL fields from entry
-function getEntryUrls(entry: Record<string, unknown>): Array<{
-  key: string;
+interface EntryLink {
   url: string;
   label: string;
   icon: React.ComponentType<{ size?: number }>;
-}> {
-  const urls: Array<{
-    key: string;
-    url: string;
-    label: string;
-    icon: React.ComponentType<{ size?: number }>;
-  }> = [];
-  for (const [key, value] of Object.entries(entry)) {
-    if ((key === 'url' || key.endsWith('_url')) && typeof value === 'string' && value) {
-      const config = URL_CONFIGS[key];
-      if (config) {
-        urls.push({ key, url: value, label: config.label, icon: config.icon });
-      } else {
-        // For main url or unknown URL types, show the full URL without schema
-        urls.push({ key, url: value, label: stripSchemaAndWww(value), icon: Globe });
-      }
-    }
+}
+
+// Collect external links from the rich nested schema (links.*, creator.page,
+// datasheet.url) plus any legacy top-level url / *_url fields.
+function getEntryLinks(entry: Record<string, unknown>): EntryLink[] {
+  const out: EntryLink[] = [];
+  const seen = new Set<string>();
+  const add = (url: unknown, label: string, icon: EntryLink['icon']) => {
+    if (typeof url !== 'string' || !url.startsWith('http') || seen.has(url)) return;
+    seen.add(url);
+    out.push({ url, label, icon });
+  };
+
+  const creator = entry.creator as { page?: string; url?: string } | undefined;
+  if (creator && typeof creator === 'object') {
+    add(creator.page, 'Product page', Globe);
+    add(creator.url, stripSchemaAndWww(creator.url ?? ''), Globe);
   }
-  return urls;
+  const links = entry.links as Record<string, string> | undefined;
+  if (links && typeof links === 'object') {
+    add(links.product, 'Product page', Globe);
+    add(links.url, 'Website', Globe);
+    add(links.repo, 'Repository', Github);
+    add(links.youtube, 'YouTube', Youtube);
+    add(links.digikey, 'DigiKey', ShoppingCart);
+    add(links.mouser, 'Mouser', ShoppingCart);
+    add(links.mirror, 'Mirror', Globe);
+  }
+  const datasheet = entry.datasheet as { url?: string } | undefined;
+  if (datasheet && typeof datasheet === 'object') add(datasheet.url, 'Datasheet', FileText);
+
+  // Legacy / flat fallbacks
+  add(entry.url, 'Website', Globe);
+  add(entry.datasheet_url, 'Datasheet', FileText);
+  add(entry.youtube_url, 'YouTube', Youtube);
+  return out;
+}
+
+// Nicer section titles for known nested groups (fallback: humanize the key)
+const SECTION_LABELS: Record<string, string> = {
+  data: 'Data & Protocol',
+  color: 'Color & Brightness',
+  electrical: 'Electrical',
+  physical: 'Physical',
+  inputs: 'Inputs',
+  outputs: 'Outputs',
+  power: 'Power',
+  compute: 'Compute',
+  connectivity: 'Connectivity',
+  io: 'I/O',
+  ratings: 'Ratings',
+  mechanical: 'Mechanical',
+  termination: 'Termination',
+  wiring: 'Wiring',
+  pricing: 'Pricing',
+  capabilities: 'Capabilities',
+  specs: 'Specifications',
+  optical: 'Optical',
+  datasheet: 'Datasheet',
+  technical_notes: 'Technical Notes',
+  datasheet_discrepancies: 'Datasheet Discrepancies',
+  related_pixel_ics: 'Related Pixel ICs',
+  related_connectors: 'Related Connectors',
+  related_microboards: 'Related Microboards',
+  related_adapters: 'Related Adapters',
+};
+
+// Preferred section order; unknown groups are appended after.
+const SECTION_ORDER = [
+  'inputs',
+  'outputs',
+  'power',
+  'data',
+  'color',
+  'electrical',
+  'compute',
+  'connectivity',
+  'io',
+  'ratings',
+  'mechanical',
+  'termination',
+  'wiring',
+  'optical',
+  'capabilities',
+  'specs',
+  'pricing',
+  'datasheet',
+];
+
+// related_<x> field -> target category id
+const RELATED_MAP: Record<string, string> = {
+  related_pixel_ics: 'pixel-ics',
+  related_connectors: 'connectors',
+  related_microboards: 'microboards',
+  related_adapters: 'adapters',
+};
+
+// Keys handled specially (not rendered as Overview rows or group cards)
+const SKIP_KEYS = new Set([
+  'id',
+  'name',
+  'image',
+  'images',
+  'updated',
+  'creator',
+  'status',
+  'links',
+]);
+
+function humanize(key: string): string {
+  return SECTION_LABELS[key] ?? key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function isGroup(v: unknown): v is Record<string, unknown> {
+  return (
+    v != null &&
+    typeof v === 'object' &&
+    !Array.isArray(v) &&
+    !(v instanceof Date) &&
+    Object.keys(v).length > 0
+  );
 }
 
 export default function EntryPage({ loaderData }: Route.ComponentProps) {
   const { category, entry } = loaderData;
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
-  const urls = getEntryUrls(entry);
+  const links = getEntryLinks(entry);
   const [modalImage, setModalImage] = useState<string | null>(null);
+
+  const status = typeof entry.status === 'string' ? entry.status : null;
+
+  // Partition the entry into overview scalars, group cards, notes, and related links
+  const overview: [string, unknown][] = [];
+  const groups: [string, Record<string, unknown>][] = [];
+  const related: [string, string[]][] = [];
+  let notes: string | null = null;
+  const lists: [string, string[]][] = []; // technical_notes, datasheet_discrepancies
+  let variants: Record<string, unknown>[] | null = null;
+
+  for (const [key, value] of Object.entries(entry)) {
+    if (SKIP_KEYS.has(key)) continue;
+    if (key.endsWith('_url') || key === 'url') continue; // handled in links
+    if (value == null) continue;
+
+    if (key === 'notes' && typeof value === 'string') {
+      notes = value;
+      continue;
+    }
+    if (key === 'variants' && Array.isArray(value)) {
+      variants = value as Record<string, unknown>[];
+      continue;
+    }
+    if (key in RELATED_MAP && Array.isArray(value)) {
+      related.push([key, value.map(String)]);
+      continue;
+    }
+    if ((key === 'technical_notes' || key === 'datasheet_discrepancies') && Array.isArray(value)) {
+      lists.push([humanize(key), value.map(String)]);
+      continue;
+    }
+    if (isGroup(value)) {
+      groups.push([key, value]);
+      continue;
+    }
+    overview.push([key, value]);
+  }
+
+  groups.sort((a, b) => {
+    const ai = SECTION_ORDER.indexOf(a[0]);
+    const bi = SECTION_ORDER.indexOf(b[0]);
+    return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
+  });
 
   return (
     <PageWrapper category={category}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '1rem',
-          paddingRight: '1rem',
-        }}
-      >
+      <div className="entry-topbar">
         <Breadcrumb
           items={[
             { label: 'Home', path: '/' },
@@ -140,163 +248,187 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           ]}
           categoryThemed
         />
-        <span
-          style={{
-            color: 'var(--text-muted)',
-            fontSize: '0.875rem',
-            flexShrink: 0,
-          }}
-          title="Last updated"
-        >
+        <span className="entry-updated" title="Last updated">
           {formatDateYMD(entry.updated as Date)}
         </span>
       </div>
 
-      {images.length > 0 && (
-        <div className="entry-images">
-          {images.map((filename, idx) => (
-            <button
-              key={idx}
-              onClick={() => setModalImage(`/database-images/${category.id}/${filename}`)}
-              style={{
-                display: 'block',
-                maxWidth: '500px',
-                background: 'none',
-                border: 'none',
-                padding: 0,
-                cursor: 'pointer',
-                borderRadius: '0.5rem',
-                overflow: 'hidden',
-              }}
-            >
-              <img
-                src={`/database-images/${category.id}/${filename}`}
-                alt={`${entry.name} - ${filename}`}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                }}
-              />
-            </button>
-          ))}
-        </div>
-      )}
-
-      <header className="page-header">
-        <h1 className="page-title category-page-title">{entry.name}</h1>
-        <FeatureBadges entry={entry} />
-        {entry.creator ? (
-          <CreatorLine creator={entry.creator} categoryPath={category.path} />
-        ) : null}
-        {urls.length > 0 && (
-          <div
-            className="entry-urls"
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '0.75rem' }}
+      <header className="entry-hero">
+        {images.length > 0 && (
+          <button
+            className="entry-hero-image"
+            onClick={() => setModalImage(`/database-images/${category.id}/${images[0]}`)}
           >
-            {urls.map(({ key, url, label, icon: Icon }) => (
-              <a
-                key={key}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.375rem',
-                  color: 'var(--category-primary)',
-                  fontSize: '0.875rem',
-                }}
-                title={url}
-              >
-                <Icon size={16} />
-                {label}
-              </a>
-            ))}
-          </div>
+            <img src={`/database-images/${category.id}/${images[0]}`} alt={entry.name} />
+          </button>
         )}
+        <div className="entry-hero-main">
+          <div className="entry-title-row">
+            <h1 className="page-title category-page-title">{entry.name}</h1>
+            {status && <StatusBadge status={status} />}
+          </div>
+          {entry.creator ? (
+            <CreatorLine creator={entry.creator} categoryPath={category.path} />
+          ) : null}
+          <FeatureBadges entry={entry} />
+          {links.length > 0 && (
+            <div className="entry-links">
+              {links.map(({ url, label, icon: Icon }) => (
+                <a
+                  key={url}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="entry-link"
+                  title={url}
+                >
+                  <Icon size={15} />
+                  {label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
       </header>
 
+      <div className="entry-sections">
+        {overview.length > 0 && (
+          <Section title="Overview">
+            <KeyValueGrid
+              entries={overview}
+              categoryPath={category.path}
+              filterableFields={filterableFields}
+            />
+          </Section>
+        )}
+
+        {groups.map(([key, group]) => (
+          <Section key={key} title={humanize(key)}>
+            <KeyValueGrid
+              entries={Object.entries(group).filter(([, v]) => v != null)}
+              categoryPath={category.path}
+              filterableFields={filterableFields}
+            />
+          </Section>
+        ))}
+
+        {variants && variants.length > 0 && (
+          <Section title="Variants" wide>
+            <div className="entry-variants">
+              {variants.map((v, i) => (
+                <div key={i} className="entry-variant">
+                  <strong>
+                    {String(v.name ?? '')}
+                    {v.suffix ? ` (${v.suffix})` : ''}
+                  </strong>
+                  {v.differences ? <span>{String(v.differences)}</span> : null}
+                </div>
+              ))}
+            </div>
+          </Section>
+        )}
+
+        {related.map(([key, ids]) => (
+          <Section key={key} title={humanize(key)}>
+            <div className="entry-related">
+              {ids.map((id) => (
+                <Link key={id} className="entry-related-link" to={`/${RELATED_MAP[key]}/${id}`}>
+                  {id}
+                </Link>
+              ))}
+            </div>
+          </Section>
+        ))}
+
+        {notes && (
+          <Section title="Notes" wide>
+            <p className="entry-notes">{notes}</p>
+          </Section>
+        )}
+
+        {lists.map(([title, items]) => (
+          <Section key={title} title={title} wide>
+            <ul className="entry-tech-list">
+              {items.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
+          </Section>
+        ))}
+      </div>
+
       {modalImage && (
-        <div
-          className="image-modal"
-          style={{
-            position: 'fixed',
-            inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.9)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 1000,
-            cursor: 'pointer',
-          }}
-          onClick={() => setModalImage(null)}
-        >
+        <div className="image-modal" onClick={() => setModalImage(null)}>
           <button
+            className="image-modal-close"
             onClick={() => setModalImage(null)}
-            style={{
-              position: 'absolute',
-              top: '1rem',
-              right: '1rem',
-              background: 'none',
-              border: 'none',
-              color: 'white',
-              cursor: 'pointer',
-              padding: '0.5rem',
-            }}
             aria-label="Close"
           >
             <X size={32} />
           </button>
-          <img
-            src={modalImage}
-            alt={entry.name}
-            style={{
-              maxWidth: 'min(90vw, 100%)',
-              maxHeight: '90vh',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          />
+          <img src={modalImage} alt={entry.name} onClick={(e) => e.stopPropagation()} />
         </div>
       )}
-
-      <div className="border rounded-lg p-4" style={{ width: 'fit-content', minWidth: '300px' }}>
-        <h2 className="text-xl font-semibold mb-4">Details</h2>
-        <dl
-          style={{ display: 'grid', gridTemplateColumns: 'max-content auto', gap: '0.5rem 1rem' }}
-        >
-          {Object.entries(entry)
-            .filter(
-              ([key]) =>
-                !['id', 'name', 'image', 'images', 'updated'].includes(key) &&
-                key !== 'url' &&
-                !key.endsWith('_url')
-            )
-            .map(([key, value]) => (
-              <div key={key} style={{ display: 'contents' }}>
-                <dt className="font-medium" style={{ textTransform: 'capitalize' }}>
-                  {key.replace(/_/g, ' ')}
-                </dt>
-                <dd className="text-muted">
-                  {formatValue(key, value, category.path, filterableFields)}
-                </dd>
-              </div>
-            ))}
-        </dl>
-      </div>
     </PageWrapper>
   );
 }
 
-// Render the "by <creator>" line, supporting both a plain string and the
-// rich { name, url, page } object form.
-function CreatorLine({
-  creator,
-  categoryPath,
+function Section({
+  title,
+  wide,
+  children,
 }: {
-  creator: unknown;
+  title: string;
+  wide?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <section className={`detail-section${wide ? ' detail-section--wide' : ''}`}>
+      <h2 className="detail-section-title">{title}</h2>
+      {children}
+    </section>
+  );
+}
+
+function KeyValueGrid({
+  entries,
+  categoryPath,
+  filterableFields,
+}: {
+  entries: [string, unknown][];
   categoryPath: string;
-}): React.ReactNode {
+  filterableFields: Set<string>;
+}) {
+  return (
+    <dl className="detail-grid">
+      {entries.map(([key, value]) => (
+        <div key={key} className="detail-row">
+          <dt className="detail-key">{key.replace(/_/g, ' ')}</dt>
+          <dd className="detail-value">
+            {formatValue(key, value, categoryPath, filterableFields)}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function StatusBadge({ status }: { status: string }) {
+  const s = status.toLowerCase();
+  const variant =
+    s === 'active'
+      ? 'badge--success'
+      : s === 'discontinued' || s === 'end-of-life'
+        ? 'badge--secondary'
+        : 'badge--outline';
+  return (
+    <span className={`badge ${variant}`} style={{ textTransform: 'capitalize' }}>
+      {status}
+    </span>
+  );
+}
+
+function CreatorLine({ creator, categoryPath }: { creator: unknown; categoryPath: string }) {
   if (creator && typeof creator === 'object') {
     const c = creator as { name?: string; url?: string; page?: string };
     const href = c.page || c.url;
@@ -304,12 +436,7 @@ function CreatorLine({
       <p className="page-description">
         by{' '}
         {href ? (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: 'var(--category-primary)' }}
-          >
+          <a href={href} target="_blank" rel="noopener noreferrer" className="entry-creator-link">
             {c.name}
           </a>
         ) : (
@@ -322,8 +449,8 @@ function CreatorLine({
     <p className="page-description">
       by{' '}
       <Link
+        className="entry-creator-link"
         to={`${categoryPath}?f=creator:${escapeFilterValue(creator as string)}`}
-        style={{ color: 'var(--category-primary)' }}
       >
         {creator as string}
       </Link>
@@ -337,9 +464,8 @@ function formatValue(
   categoryPath: string,
   filterableFields: Set<string>
 ): React.ReactNode {
-  if (value === null || value === undefined) return '-';
+  if (value === null || value === undefined) return <span className="data-table-null">-</span>;
 
-  // Arrays: recurse for arrays of objects; badges/links/join for scalar arrays
   if (Array.isArray(value)) {
     const hasObjects = value.some((v) => v && typeof v === 'object' && !(v instanceof Date));
     if (hasObjects) {
@@ -360,8 +486,8 @@ function formatValue(
             <span key={idx}>
               {idx > 0 && ', '}
               <Link
+                className="entry-value-link"
                 to={`${categoryPath}?f=${key}:${escapeFilterValue(String(item))}`}
-                style={{ color: 'var(--category-primary)' }}
               >
                 {String(item)}
               </Link>
@@ -373,25 +499,16 @@ function formatValue(
     return value.join(', ');
   }
 
-  // Nested objects: render as an indented sub key/value list (rich schema)
+  // Nested sub-object (e.g. power.voltage {min,max}, protocols {...})
   if (typeof value === 'object' && !(value instanceof Date)) {
     const obj = value as Record<string, unknown>;
-    const keys = Object.keys(obj);
-    if (keys.length === 0) return '-';
+    const keys = Object.keys(obj).filter((k) => obj[k] != null);
+    if (keys.length === 0) return <span className="data-table-null">-</span>;
     return (
-      <dl
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'max-content auto',
-          gap: '0.25rem 0.75rem',
-          margin: 0,
-        }}
-      >
+      <dl className="detail-subgrid">
         {keys.map((k) => (
-          <div key={k} style={{ display: 'contents' }}>
-            <dt style={{ textTransform: 'capitalize', color: 'var(--text-muted)' }}>
-              {k.replace(/_/g, ' ')}
-            </dt>
+          <div key={k} className="detail-row">
+            <dt className="detail-key">{k.replace(/_/g, ' ')}</dt>
             <dd>{formatValue(k, obj[k], categoryPath, filterableFields)}</dd>
           </div>
         ))}
@@ -399,18 +516,13 @@ function formatValue(
     );
   }
 
-  // Check if value can be rendered as badges
   const badges = ValueBadges({ value, categoryPath, fieldKey: key });
   if (badges) return badges;
 
-  // Handle booleans - make clickable if filterable
   if (typeof value === 'boolean') {
     if (filterableFields.has(key)) {
       return (
-        <Link
-          to={`${categoryPath}?f=${key}:${value ? 'yes' : 'no'}`}
-          style={{ color: 'var(--category-primary)' }}
-        >
+        <Link className="entry-value-link" to={`${categoryPath}?f=${key}:${value ? 'yes' : 'no'}`}>
           {value ? 'Yes' : 'No'}
         </Link>
       );
@@ -422,29 +534,28 @@ function formatValue(
 
   const strValue = String(value);
 
-  // Make filterable string fields clickable
-  if (filterableFields.has(key)) {
-    return (
-      <Link
-        to={`${categoryPath}?f=${key}:${escapeFilterValue(strValue)}`}
-        style={{ color: 'var(--category-primary)' }}
-      >
-        {strValue}
-      </Link>
-    );
-  }
-
-  // Make URLs clickable
-  if (key.endsWith('_url') || key === 'url') {
+  if (strValue.startsWith('http')) {
     return (
       <a
         href={strValue}
         target="_blank"
         rel="noopener noreferrer"
-        style={{ color: 'var(--category-primary)', wordBreak: 'break-all' }}
+        className="entry-value-link"
+        style={{ wordBreak: 'break-all' }}
+      >
+        {stripSchemaAndWww(strValue)}
+      </a>
+    );
+  }
+
+  if (filterableFields.has(key)) {
+    return (
+      <Link
+        className="entry-value-link"
+        to={`${categoryPath}?f=${key}:${escapeFilterValue(strValue)}`}
       >
         {strValue}
-      </a>
+      </Link>
     );
   }
 
