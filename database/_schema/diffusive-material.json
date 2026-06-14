@@ -4,63 +4,82 @@
   "title": "Diffusive Material",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
-    "name": {
-      "type": "string"
+    "name": { "type": "string" },
+    "creator": {
+      "anyOf": [
+        { "type": ["string", "null"] },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string" },
+            "page": { "type": "string" }
+          }
+        }
+      ]
     },
-    "url": {
-      "type": ["string", "null"]
+    "manufacturers": { "type": ["array", "null"], "items": { "type": "string" } },
+    "vendors": {
+      "type": ["array", "null"],
+      "items": {
+        "anyOf": [
+          { "type": "string" },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "url": { "type": "string" },
+              "page": { "type": "string" }
+            }
+          }
+        ]
+      }
     },
-    "color_rendition": {
-      "type": ["integer", "string", "null"],
-      "description": "Rating 1-5"
+    "material_type": { "type": ["string", "null"] },
+    "purpose_made": { "type": ["boolean", "null"], "description": "Designed specifically for LED diffusion" },
+    "notes": { "type": ["string", "null"] },
+
+    "optical": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "color_rendition": { "type": ["integer", "string", "null"], "description": "Rating 1-5" },
+        "light_transmission": { "type": ["integer", "string", "null"], "description": "Rating 1-5" },
+        "diffusivity": { "type": ["integer", "string", "null"], "description": "Rating 1-5" },
+        "tinted": { "type": ["string", "null"], "description": "T tinted, C clear, T&C both" }
+      }
     },
-    "light_transmission": {
-      "type": ["integer", "string", "null"],
-      "description": "Rating 1-5"
+    "physical": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "flexible": { "type": ["boolean", "string", "null"], "description": "F flexible, R rigid" },
+        "fire_retardant": { "type": ["boolean", "null"] },
+        "sample_thickness": { "type": ["number", "string", "null"], "description": "Thickness in mm" },
+        "sizes_available": { "type": ["string", "null"] },
+        "properties": { "type": ["string", "null"] }
+      }
     },
-    "flexible": {
-      "type": ["boolean", "string", "null"],
-      "description": "F for flexible, R for rigid"
+    "pricing": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "price_range": { "type": ["string", "null"], "description": "$ to $$$$$" }
+      }
     },
-    "purpose_made": {
-      "type": ["boolean", "null"]
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "product": { "type": ["string", "null"] }
+      }
     },
-    "properties": {
-      "type": ["string", "null"]
-    },
-    "fire_retardant": {
-      "type": ["boolean", "null"]
-    },
-    "tinted": {
-      "type": ["string", "null"],
-      "description": "T for tinted, C for clear, T&C for both"
-    },
-    "sample_thickness": {
-      "type": ["number", "string", "null"]
-    },
-    "diffusivity": {
-      "type": ["integer", "string", "null"],
-      "description": "Rating 1-5"
-    },
-    "sizes_available": {
-      "type": ["string", "null"]
-    },
-    "material_type": {
-      "type": ["string", "null"]
-    },
-    "price_range": {
-      "type": ["string", "null"],
-      "description": "$ to $$$$$"
-    },
-    "notes": {
-      "type": ["string", "null"]
-    },
-    "image": {
-      "$ref": "common.json#/definitions/image"
-    },
-    "images": {
-      "$ref": "common.json#/definitions/images"
-    }
+
+    "image": { "$ref": "common.json#/definitions/image" },
+    "images": { "$ref": "common.json#/definitions/images" }
   }
 }
