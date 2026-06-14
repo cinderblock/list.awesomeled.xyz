@@ -37,6 +37,22 @@
     },
     "year": {
       "oneOf": [{ "type": "integer", "minimum": 1990, "maximum": 2030 }, { "type": "null" }]
+    },
+    "datasheet_mirror": {
+      "type": ["object", "null"],
+      "description": "Repo-managed copy of the datasheet PDF on Cloudflare R2. Written by CI (scripts/mirror-datasheets.ts) - do not edit by hand. The original author/source URL stays in datasheet.url.",
+      "additionalProperties": false,
+      "required": ["url", "sha256", "retrieved", "source"],
+      "properties": {
+        "url": { "type": "string", "format": "uri", "description": "Public R2 URL of the mirrored PDF" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "retrieved": { "type": "string", "format": "date" },
+        "source": {
+          "type": "string",
+          "format": "uri",
+          "description": "datasheet.url at fetch time; a changed source triggers re-mirroring"
+        }
+      }
     }
   }
 }

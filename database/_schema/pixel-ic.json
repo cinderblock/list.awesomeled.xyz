@@ -116,7 +116,8 @@
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "url": { "type": ["string", "null"] },
+        "url": { "type": ["string", "null"], "description": "Original/manufacturer datasheet URL (attribution)" },
+        "mirror": { "$ref": "common.json#/definitions/datasheet_mirror" },
         "discrepancies": { "type": ["array", "null"], "items": { "type": "string" } },
         "third_party_testing": { "type": ["string", "null"] }
       }

@@ -19,7 +19,8 @@
     "test:e2e:visual": "playwright test --project=visual --workers=1",
     "agent-review": "bun run scripts/agent-review.ts",
     "review": "bun run scripts/review-entry.ts",
-    "validate": "bun run scripts/validate.ts"
+    "validate": "bun run scripts/validate.ts",
+    "mirror-datasheets": "bun run scripts/mirror-datasheets.ts"
   },
   "dependencies": {
     "@mdx-js/rollup": "^3.1.1",
