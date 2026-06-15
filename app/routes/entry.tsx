@@ -1,6 +1,6 @@
 import type { Route } from './+types/entry';
 import { data, Link } from 'react-router';
-import { getCategoryById, loadEntry } from '~/lib/data';
+import { getCategoryById, loadEntry, getReverseLinks } from '~/lib/data';
 import { formatDateYMD } from '~/lib/format';
 import { getColumnsForCategory } from '~/lib/columns';
 import { FileText, ShoppingCart, Youtube, Globe, Github, X } from 'lucide-react';
@@ -43,7 +43,8 @@ export async function loader({ params }: Route.LoaderArgs) {
   if (!category) throw data(null, { status: 404 });
   const entry = loadEntry(params.category, params.entry);
   if (!entry) throw data(null, { status: 404 });
-  return { category, entry };
+  const reverseLinks = getReverseLinks(params.category, params.entry);
+  return { category, entry, reverseLinks };
 }
 
 function getEntryImages(entry: Record<string, unknown>): string[] {
@@ -187,7 +188,7 @@ function isGroup(v: unknown): v is Record<string, unknown> {
 }
 
 export default function EntryPage({ loaderData }: Route.ComponentProps) {
-  const { category, entry } = loaderData;
+  const { category, entry, reverseLinks } = loaderData;
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
   const links = getEntryLinks(entry);
@@ -334,6 +335,22 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               {ids.map((id) => (
                 <Link key={id} className="entry-related-link" to={`/${RELATED_MAP[key]}/${id}`}>
                   {id}
+                </Link>
+              ))}
+            </div>
+          </Section>
+        ))}
+
+        {reverseLinks.map((group) => (
+          <Section key={group.category} title={`Used by ${group.categoryName}`}>
+            <div className="entry-related">
+              {group.items.map((item) => (
+                <Link
+                  key={item.id}
+                  className="entry-related-link"
+                  to={`/${group.category}/${item.id}`}
+                >
+                  {item.name}
                 </Link>
               ))}
             </div>

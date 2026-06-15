@@ -178,6 +178,55 @@ export function loadEntry(categoryId: string, entryId: string): BaseEntry | null
 }
 
 /**
+ * Forward cross-reference relationships declared in the data: a `field` on
+ * entries in the `source` category holds ids of entries in the `target`
+ * category. These are the single source of truth — the reverse ("used by")
+ * direction is derived at render time so links stay bidirectional without
+ * duplicating data on both ends.
+ */
+const CROSS_REF_RELATIONSHIPS: { source: string; field: string; target: string }[] = [
+  { source: 'drive-libraries', field: 'related_pixel_ics', target: 'pixel-ics' },
+  { source: 'adapters', field: 'related_connectors', target: 'connectors' },
+  { source: 'adapters', field: 'related_microboards', target: 'microboards' },
+  { source: 'pixel-decoders', field: 'related_connectors', target: 'connectors' },
+];
+
+export interface ReverseLinkGroup {
+  /** Source category id (e.g. "drive-libraries") */
+  category: string;
+  /** Source category display name (e.g. "Drive Libraries") */
+  categoryName: string;
+  /** Source entries that reference this entry, by id + name */
+  items: { id: string; name: string }[];
+}
+
+/**
+ * Entries in other categories that reference this entry through a related_*
+ * field. Powers the "Used by …" sections on detail pages.
+ */
+export function getReverseLinks(categoryId: string, entryId: string): ReverseLinkGroup[] {
+  const groups: ReverseLinkGroup[] = [];
+  for (const rel of CROSS_REF_RELATIONSHIPS) {
+    if (rel.target !== categoryId) continue;
+    const items = loadCategoryData(rel.source)
+      .filter((e) => {
+        const v = (e as Record<string, unknown>)[rel.field];
+        return Array.isArray(v) && v.map(String).includes(entryId);
+      })
+      .map((e) => ({ id: String(e.id), name: e.name }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    if (items.length) {
+      groups.push({
+        category: rel.source,
+        categoryName: getCategoryById(rel.source)?.name ?? rel.source,
+        items,
+      });
+    }
+  }
+  return groups;
+}
+
+/**
  * Get the count of entries for each category
  */
 export function getCategoryCounts(): Record<string, number> {
