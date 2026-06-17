@@ -1,7 +1,7 @@
 import type { Route } from './+types/entry';
 import { data, Link } from 'react-router';
 import { getCategoryById, loadEntry, getReverseLinks } from '~/lib/data';
-import { formatDateYMD } from '~/lib/format';
+import { LocalDate } from '~/components/ui/LocalDate';
 import { getColumnsForCategory } from '~/lib/columns';
 import { FileText, ShoppingCart, Youtube, Globe, Github, X } from 'lucide-react';
 import { useState } from 'react';
@@ -249,9 +249,11 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           ]}
           categoryThemed
         />
-        <span className="entry-updated" title="Last updated">
-          {formatDateYMD(entry.updated as Date)}
-        </span>
+        <LocalDate
+          className="entry-updated"
+          title="Last updated"
+          date={entry.updated as Date}
+        />
       </div>
 
       <header className="entry-hero">
@@ -547,7 +549,7 @@ function formatValue(
     return value ? 'Yes' : 'No';
   }
 
-  if (value instanceof Date) return formatDateYMD(value);
+  if (value instanceof Date) return <LocalDate date={value} />;
 
   const strValue = String(value);
 

@@ -4,7 +4,7 @@
 
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
-import { formatDateYMD } from './format';
+import { LocalDate } from '~/components/ui/LocalDate';
 
 // Filter type definitions
 export type FilterType = 'numeric' | 'select' | 'boolean' | 'string';
@@ -256,12 +256,12 @@ function formatNumericValue(v: unknown) {
   return <span className="tabular-nums">{num.toLocaleString('en-US')}</span>;
 }
 
-// Helper for formatting dates as YYYY-MM-DD in user's timezone
+// Helper for formatting dates as YYYY-MM-DD in the viewer's local timezone
 function formatDate(v: unknown) {
   if (v == null) return <span className="data-table-null">-</span>;
   const date = v instanceof Date ? v : new Date(String(v));
   if (isNaN(date.getTime())) return <span className="data-table-null">-</span>;
-  return <span>{formatDateYMD(date)}</span>;
+  return <LocalDate date={date} />;
 }
 
 // Shared updated column definition
