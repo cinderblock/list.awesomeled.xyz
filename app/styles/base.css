@@ -189,6 +189,15 @@ img {
   navigation: auto;
 }
 
+/* The root group (everything outside main-content, e.g. the header/nav) would
+   otherwise run the browser's default ~250ms cross-fade. That fades the header
+   and, by outlasting the 150ms slide, keeps the transition alive long enough for
+   a mid-flight rule change to restart main-content as a fade. Disable it. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
 ::view-transition-old(main-content),
 ::view-transition-new(main-content) {
   animation-duration: 150ms;
