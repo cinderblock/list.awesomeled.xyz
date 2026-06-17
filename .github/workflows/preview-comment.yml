@@ -42,8 +42,8 @@ jobs:
 
             | Environment | URL |
             |-------------|-----|
-            | **Branch Preview** | https://${{ steps.branch.outputs.name }}.awesomeledlist.pages.dev |
-            | **Commit Preview** | https://${{ github.event.pull_request.head.sha }}.awesomeledlist.pages.dev |
+            | **Branch Preview** | https://${{ steps.branch.outputs.name }}.list-awesomeled-xyz.pages.dev |
+            | **Commit Preview** | https://${{ github.event.pull_request.head.sha }}.list-awesomeled-xyz.pages.dev |
 
             > **Note:** Preview may take a few minutes to deploy after the commit is pushed.
             > Check the [Cloudflare Pages dashboard](https://dash.cloudflare.com) for deployment status.
