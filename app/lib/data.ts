@@ -43,6 +43,9 @@ const IGNORED_COMMITS = new Set([
   'f330d9ded8a62c1b3d7dc35d24d9d9b9e34fb2d9', // diffusive-materials (44)
   '495b5e52d0994f7d36cf4f81df58b0ce01ee69b8', // pattern-drivers schema + wled
   'eb1e06b7d0a3800c6a5b4357ae98f6d453a3d526', // pattern-drivers (39)
+  // Pure formatting passes (prettier/lint only, no content change)
+  '35c9c5310c8b6c0624a86b69ce52e67785ad2dba', // Prettier and lint free (42)
+  'd9edd7574e197624c721c543e49d418ee3225f06', // Fix prettier formatting (39)
 ]);
 
 /**
