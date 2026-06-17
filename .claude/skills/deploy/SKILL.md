@@ -15,8 +15,8 @@ integration (it is *not* in `.github/workflows`). On every push it builds:
 
 - **Production** (`master`) → the live public site.
 - **Branch preview** for any branch → `https://<sanitized-branch>.pages.dev`
-  (project: `awesomeledlist`, so `https://<branch>.awesomeledlist.pages.dev`).
-- **Commit preview** → `https://<commit-sha>.awesomeledlist.pages.dev`.
+  (project: `list-awesomeled-xyz`, so `https://<branch>.list-awesomeled-xyz.pages.dev`).
+- **Commit preview** → `https://<commit-sha>.list-awesomeled-xyz.pages.dev`.
 
 Branch names are sanitized by Cloudflare: lowercased, non-alphanumerics → `-`,
 truncated to 28 chars. `.github/workflows/preview-comment.yml` posts these URLs
@@ -49,7 +49,7 @@ You need:
 - **CLOUDFLARE_API_TOKEN** — token with `Account -> Cloudflare Pages -> Read`
   permission. Create at https://dash.cloudflare.com/profile/api-tokens
 - **CLOUDFLARE_ACCOUNT_ID** — from the dashboard URL or Workers & Pages → Overview
-- **CLOUDFLARE_PAGES_PROJECT** — optional, defaults to `awesomeledlist`
+- **CLOUDFLARE_PAGES_PROJECT** — optional, defaults to `list-awesomeled-xyz`
 
 `.env.local` / `.env` are gitignored; only `.env.example` is committed. If the
 token is missing the script prints exactly which var is missing and how to fix it.
@@ -79,4 +79,4 @@ Status icons: ✅ success · ❌ failure · 🔵 active · 🔨 building · 🚀
 2. Watch Cloudflare (the public path):
    `bun .claude/skills/deploy/check-deploy.ts <branch> --watch`
 3. Optionally confirm the GitHub CI/backup passed: `gh run watch`
-4. Preview URL: `https://<sanitized-branch>.awesomeledlist.pages.dev`
+4. Preview URL: `https://<sanitized-branch>.list-awesomeled-xyz.pages.dev`

@@ -67,7 +67,7 @@ const env = loadEnv();
 
 const token = env.CLOUDFLARE_API_TOKEN;
 const accountId = env.CLOUDFLARE_ACCOUNT_ID;
-const project = env.CLOUDFLARE_PAGES_PROJECT || 'awesomeledlist';
+const project = env.CLOUDFLARE_PAGES_PROJECT || 'list-awesomeled-xyz';
 
 if (!token || !accountId) {
   const missing = [
