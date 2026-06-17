@@ -1,15 +1,15 @@
 name: Meanwell PDU with Differential Receiver
 creator: Wizard of Wire
-notes: 4 Channel differential receiver and fused power distribution bolts
-  straight on to PSU
-diy_or_ots: OTS
-parent: Meanwell 350w PSU
-price: 18
+notes: 4 Channel differential receiver and fused power distribution bolts straight on to PSU
 outputs:
   max_channels: 4
   pixel_types: single
   connectors: Phoenix Screw
 power:
-  voltage: 12V
+  voltage: 5V / 12-24V (jumper-selectable)
+diy_or_ots: OTS
+image: meanwell-pdu-with-differential-receiver.webp
 links:
-  product: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection//
+  product: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection/
+parent: Meanwell 350w PSU
+price: 21
