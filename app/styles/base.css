@@ -244,10 +244,15 @@ img {
   }
 }
 
-/* Slide animations - transform only, no opacity to avoid flashing */
+/* Outgoing snapshots also fade to transparent: a -40px slide never moves the
+   old page off screen, so if it's taller than the (shorter) incoming page its
+   bottom edge peeks out below the new content for the duration of the
+   transition. Fading it out clears that. The incoming page stays fully opaque
+   (slide only) so there's no flash. */
 @keyframes slide-out-left {
   to {
     transform: translateX(-40px);
+    opacity: 0;
   }
 }
 
@@ -260,6 +265,7 @@ img {
 @keyframes slide-out-right {
   to {
     transform: translateX(40px);
+    opacity: 0;
   }
 }
 
