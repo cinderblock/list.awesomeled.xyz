@@ -45,13 +45,16 @@ export function CategoryNav() {
     }
   }, [currentCategory]);
 
-  // Clear nav direction after view transition completes (delay must exceed animation duration)
+  // Back/forward navigations have no click, so clear the direction to fall back
+  // to the default transition. Clearing on a timer instead would race the live
+  // view transition and restart its animation (slide -> fade) mid-flight.
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    const onPop = () => {
       delete document.documentElement.dataset.navDirection;
-    }, 200);
-    return () => clearTimeout(timeout);
-  }, [location.pathname]);
+    };
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     const el = scrollRef.current;
