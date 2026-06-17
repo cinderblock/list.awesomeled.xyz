@@ -30,6 +30,6 @@ power:
     max: 24 # up to 48V on V1.1
   current:
     max: 60
-price: 80
 images:
-  - baldrick-8.png
+  - baldrick-8.webp
+price: 80

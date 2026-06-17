@@ -32,5 +32,6 @@ power:
   connector: 2-pin Phoenix Screw 5.08mm
 case:
   waterproof: false
+image: angio-8.webp
 price: 169
 wled_compatible: false
