@@ -163,7 +163,7 @@ function formatPrice(v: unknown) {
   if (v == null) return <span className="data-table-null">-</span>;
   const num = typeof v === 'number' ? v : parseFloat(String(v).replace(/[^0-9.]/g, ''));
   if (isNaN(num)) return <span className="data-table-null">-</span>;
-  return <span className="tabular-nums">${num.toLocaleString()}</span>;
+  return <span className="tabular-nums">${num.toLocaleString('en-US')}</span>;
 }
 
 // Helper for formatting numeric values with units
@@ -194,7 +194,7 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
         width: '100%',
       }}
     >
-      <span className="tabular-nums">{num.toLocaleString()}</span>
+      <span className="tabular-nums">{num.toLocaleString('en-US')}</span>
       {unit && (
         <span
           className="data-table-null"
@@ -228,7 +228,7 @@ function formatNumericValue(v: unknown) {
   if (v == null) return <span className="data-table-null">-</span>;
   const num = typeof v === 'number' ? v : parseFloat(String(v).replace(/,/g, ''));
   if (isNaN(num)) return <span className="data-table-null">-</span>;
-  return <span className="tabular-nums">{num.toLocaleString()}</span>;
+  return <span className="tabular-nums">{num.toLocaleString('en-US')}</span>;
 }
 
 // Helper for formatting dates as YYYY-MM-DD in user's timezone
