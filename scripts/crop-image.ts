@@ -1,17 +1,29 @@
 #!/usr/bin/env bun
 /**
- * Simple image cropping script
- * Removes background using flood-fill from edges, then trims
+ * Image processing for the database.
+ *
+ * Removes a solid background using flood-fill from the edges, trims to content,
+ * then resizes and encodes as WebP — the project's standard image format
+ * (optimized WebP committed under public/database-images/; see
+ * docs/datasheet-mirroring.md and CONTRIBUTING.md).
+ *
+ * Used as a CLI (`bun scripts/crop-image.ts <file...>`) and imported as the
+ * single source of truth for image processing by scripts/review-entry-agent.ts.
  */
 
-import { resolve } from 'path';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { basename, dirname, extname, resolve } from 'path';
+import { existsSync, readFileSync, rmSync, writeFileSync } from 'fs';
 import sharp from 'sharp';
 
+// Web-optimization targets (see CONTRIBUTING.md "Image Guidelines")
+export const MAX_EDGE = 1200; // px on the longest edge
+export const MAX_BYTES = 200 * 1024; // 200KB
+
 /**
- * Process image: remove solid background from edges (if not already transparent), then trim
+ * Process image: remove solid background from edges (if not already transparent), then trim.
+ * Returns an encoded PNG (with alpha). SVG/GIF are returned unchanged.
  */
-async function processImage(inputBuffer: Buffer): Promise<Buffer> {
+export async function processImage(inputBuffer: Buffer): Promise<Buffer> {
   const image = sharp(inputBuffer);
   const metadata = await image.metadata();
 
@@ -136,6 +148,36 @@ async function processImage(inputBuffer: Buffer): Promise<Buffer> {
   return result;
 }
 
+/**
+ * Resize to <= MAX_EDGE and encode as WebP under MAX_BYTES, preserving the
+ * alpha channel produced by background removal (WebP keeps transparency, unlike
+ * JPEG, and compresses far better than PNG).
+ */
+export async function optimizeToWebp(inputBuffer: Buffer): Promise<Buffer> {
+  const resized = sharp(inputBuffer).resize(MAX_EDGE, MAX_EDGE, {
+    fit: 'inside',
+    withoutEnlargement: true,
+  });
+
+  // Start high-quality; step down only as needed to fit the budget.
+  let best = await resized.clone().webp({ quality: 90, alphaQuality: 100, effort: 6 }).toBuffer();
+  for (const quality of [80, 70, 60]) {
+    if (best.length <= MAX_BYTES) break;
+    const candidate = await resized
+      .clone()
+      .webp({ quality, alphaQuality: 100, effort: 6 })
+      .toBuffer();
+    if (candidate.length < best.length) best = candidate;
+  }
+
+  if (best.length > MAX_BYTES) {
+    console.log(
+      `  ⚠ Still ${Math.round(best.length / 1024)}KB after optimization (target <${MAX_BYTES / 1024}KB)`
+    );
+  }
+  return best;
+}
+
 async function cropImage(imagePath: string): Promise<void> {
   const fullPath = resolve(imagePath);
 
@@ -148,15 +190,30 @@ async function cropImage(imagePath: string): Promise<void> {
 
   const inputBuffer = readFileSync(fullPath);
   const inputMetadata = await sharp(inputBuffer).metadata();
-  console.log(`  Original size: ${inputMetadata.width}x${inputMetadata.height}`);
+  console.log(`  Original: ${inputMetadata.width}x${inputMetadata.height} (${inputMetadata.format})`);
 
-  const outputBuffer = await processImage(inputBuffer);
+  // Leave vector / animated formats untouched.
+  if (inputMetadata.format === 'svg' || inputMetadata.format === 'gif') {
+    console.log('  Skipping (vector/animated) — left as-is');
+    return;
+  }
+
+  const cropped = await processImage(inputBuffer);
+  const outputBuffer = await optimizeToWebp(cropped);
   const outputMetadata = await sharp(outputBuffer).metadata();
-  console.log(`  New size: ${outputMetadata.width}x${outputMetadata.height}`);
+  console.log(
+    `  Result: ${outputMetadata.width}x${outputMetadata.height} webp, ${Math.round(outputBuffer.length / 1024)}KB`
+  );
 
-  // Overwrite the original file
-  writeFileSync(fullPath, outputBuffer);
-  console.log(`  ✓ Saved`);
+  // Always write WebP; remove the original if it had a different extension.
+  const webpPath = resolve(dirname(fullPath), `${basename(fullPath, extname(fullPath))}.webp`);
+  writeFileSync(webpPath, outputBuffer);
+  if (webpPath !== fullPath) {
+    rmSync(fullPath);
+    console.log(`  ✓ Saved ${basename(webpPath)} (removed ${basename(fullPath)})`);
+  } else {
+    console.log(`  ✓ Saved ${basename(webpPath)}`);
+  }
 }
 
 async function main() {
@@ -164,7 +221,8 @@ async function main() {
 
   if (args.length === 0) {
     console.log('Usage: bun scripts/crop-image.ts <image1> [image2] ...');
-    console.log('Example: bun scripts/crop-image.ts database/controllers/images/baldrick-17.png');
+    console.log('Example: bun scripts/crop-image.ts public/database-images/controllers/baldrick-17.png');
+    console.log('Output is always WebP; a differently-named original is removed.');
     process.exit(1);
   }
 
@@ -176,4 +234,7 @@ async function main() {
   console.log('Done!');
 }
 
-main().catch(console.error);
+// Only run the CLI when executed directly, so this module can be imported.
+if (import.meta.main) {
+  main().catch(console.error);
+}

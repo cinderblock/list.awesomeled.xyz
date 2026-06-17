@@ -19,6 +19,7 @@
     "test:e2e:visual": "playwright test --project=visual --workers=1",
     "agent-review": "bun run scripts/agent-review.ts",
     "review": "bun run scripts/review-entry.ts",
+    "review:agent": "bun run scripts/review-entry-agent.ts",
     "validate": "bun run scripts/validate.ts",
     "mirror-datasheets": "bun run scripts/mirror-datasheets.ts"
   },
