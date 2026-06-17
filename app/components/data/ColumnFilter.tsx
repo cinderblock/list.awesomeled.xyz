@@ -437,7 +437,7 @@ function NumericFilter({ column, data, value, onChange, config }: NumericFilterP
     <div className="filter-content">
       {range && (
         <div className="filter-hint">
-          Range: {range.min.toLocaleString()} - {range.max.toLocaleString()}
+          Range: {range.min.toLocaleString('en-US')} - {range.max.toLocaleString('en-US')}
           {config.unit && ` ${config.unit}`}
         </div>
       )}
