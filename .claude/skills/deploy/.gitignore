@@ -1,0 +1,6 @@
+# Local secrets — never commit real API keys.
+# Ignore every .env variant...
+.env
+.env.*
+# ...except the committed example.
+!.env.example
