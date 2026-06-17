@@ -49,7 +49,14 @@
   font-size: 0.875rem;
   font-weight: 500;
   white-space: nowrap;
-  transition: all var(--transition-normal);
+  /* Only transition the colour properties that actually change between
+     active/hover states. `transition: all` also re-fires on the entrance
+     transform, scroll and view-transition capture, restarting the colour
+     fade several times during a tab switch (visible flicker). */
+  transition:
+    color var(--transition-normal),
+    background-color var(--transition-normal),
+    box-shadow var(--transition-normal);
   text-decoration: none;
 }
 
