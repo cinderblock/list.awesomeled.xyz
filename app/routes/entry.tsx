@@ -88,9 +88,7 @@ function stripSchemaAndWww(url: string): string {
 }
 
 // Collect all URL fields from entry
-function getEntryUrls(
-  entry: Record<string, unknown>
-): Array<{
+function getEntryUrls(entry: Record<string, unknown>): Array<{
   key: string;
   url: string;
   label: string;
