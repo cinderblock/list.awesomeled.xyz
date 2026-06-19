@@ -121,3 +121,13 @@ Mousebite
 Groupable
 Hardwire
 studiomarket
+
+# Technical terms / units
+kbps
+PSRAM
+PETG
+IREF
+Prosumer
+crossfade
+devkit
+navigations

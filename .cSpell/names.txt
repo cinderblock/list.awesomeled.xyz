@@ -282,3 +282,9 @@ Xking
 Xtensa
 Xunlong
 Yarilo
+FTDI
+JLCPCB
+LCSC
+VESA
+alphapix
+smartlightme

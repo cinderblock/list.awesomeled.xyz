@@ -38,3 +38,8 @@ noreferrer
 # Build tools
 Rolldown
 bunx
+
+# Python libraries / tooling
+asyncio
+numpy
+npmx
