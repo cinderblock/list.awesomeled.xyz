@@ -1,7 +1,9 @@
 name: DiGidot C4 Live 12
 status: active
+release_year: null
 creator: DiGidot
 notes: Long range data transmission extenders available
+outputs: Single and Clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -13,10 +15,8 @@ max_outputs: 4
 max_pixels: 8192
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Single and Clock
 pixel_types: both
 price: 330
-release_year: null
 standalone: false
 storage: null
 url: https://digidot.eu/c4/digidot-c4-live

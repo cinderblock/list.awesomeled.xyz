@@ -1,7 +1,9 @@
 name: Pixelator
 status: unknown
+release_year: null
 creator: ENTTEC
 notes: null
+outputs: Proprietary
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: null
 max_pixels: 8192
 max_voltage: null
 output_connectors: RJ-45
-outputs: Proprietary
 pixel_types: async
 price: 1891
-release_year: null
 standalone: true
 storage: Yes
 url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/

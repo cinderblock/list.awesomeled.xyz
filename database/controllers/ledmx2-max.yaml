@@ -1,7 +1,9 @@
 name: LeDMX2 MAX
 status: active
+release_year: 2022
 creator: DMXking
 notes: Show record and playback trigger capability
+outputs: Data and Clock
 auxiliary_outputs: DMX
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 2
 max_pixels: 2040
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Data and Clock
 pixel_types: both
 price: 199
-release_year: 2022
 standalone: true
 storage: SD
 url: https://dmxking.com/led-pixel-control/ledmx2-max

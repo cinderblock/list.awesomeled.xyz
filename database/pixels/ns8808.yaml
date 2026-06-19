@@ -1,4 +1,5 @@
 name: NS8808
+release_year: 2018
 creator: Newstar LED Co.
 notes: Similar to ws2815, but UCS1903 protocol
 backup_data_line: true
@@ -20,7 +21,6 @@ pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 8.0kHz
 quiescent_current: 2.0mA
-release_year: 2018
 third_party_testing: null
 vcc_voltage: 5V
 wattage: 45.mW

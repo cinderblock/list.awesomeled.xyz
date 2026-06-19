@@ -1,4 +1,5 @@
 name: Teensy-LC
+release_year: null
 creator: PJRC
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: 12
 ram: 8kB
-release_year: null
 soc: MKL26Z64VFT4
 storage: Shield
 ttl_serial: true

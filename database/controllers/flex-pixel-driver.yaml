@@ -1,7 +1,9 @@
 name: Flex Pixel Driver
 status: discontinued
+release_year: null
 creator: Elation
 notes: null
+outputs: clocked
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 2
 max_pixels: 144
 max_voltage: 5V
 output_connectors: Phoenix Screw
-outputs: clocked
 pixel_types: clocked
 price: 80
-release_year: null
 standalone: false
 storage: null
 url: https://www.elationlighting.com/flex-pixel-driver-1

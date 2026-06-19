@@ -1,7 +1,9 @@
 name: Luminaxa
 status: active
+release_year: 2020
 creator: Luminaxa
 notes: Internal 3500mAh battery Android app
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 1
 max_pixels: 600
 max_voltage: 5V
 output_connectors: JST
-outputs: Single
 pixel_types: async
 price: 50
-release_year: 2020
 standalone: true
 storage: null
 url: https://luminxa.com/

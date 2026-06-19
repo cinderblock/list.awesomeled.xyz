@@ -1,4 +1,5 @@
 name: CS8812
+release_year: null
 creator: Witop
 notes: Built-in 8->12bit gamma correction. "B" version is "without original program". Similar to GS8208
 backup_data_line: true
@@ -20,7 +21,6 @@ pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 8.0kHz
 quiescent_current: null
-release_year: null
 third_party_testing: null
 vcc_voltage: 12V
 wattage: 210.mW

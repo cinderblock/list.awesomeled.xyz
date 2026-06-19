@@ -1,12 +1,12 @@
 name: ArtgateOne
 creator: Krzysztof Korzeniowski
 notes: Artnet to DMX single Universe with OLED display, maintained ,modern project
+outputs: null
 diy_or_ots: DIY
 max_channels: null
 max_current: null
 max_voltage: 12V
 output_connectors: null
-outputs: null
 parent: Arduino Uno
 pixel_types: 1 Universe Artnet to DMX Node
 price: null

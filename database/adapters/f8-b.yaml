@@ -1,12 +1,12 @@
 name: F8-B
 creator: Kulp Lights
 notes: null
+outputs: Single
 diy_or_ots: null
 max_channels: 8
 max_current: null
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Single
 parent: BeagleBone
 pixel_types: Single
 price: 51

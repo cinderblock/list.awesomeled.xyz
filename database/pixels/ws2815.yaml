@@ -1,5 +1,6 @@
 name: WS2815
 status: active
+release_year: 2018
 creator: WorldSemi/Newstar
 notes: 12V WS2813
 backup_data_line: true
@@ -32,7 +33,6 @@ pwm_frequency: 2.0kHz
 pwm_frequency_notes: 2kHz according to datasheet
 quiescent_current: 2.1mA
 quiescent_current_notes: At 12V supply
-release_year: 2018
 technical_notes:
   - 12V version allows longer cable runs with less voltage drop
   - Internal regulator provides 5V logic from 12V supply

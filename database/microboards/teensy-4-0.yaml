@@ -1,4 +1,5 @@
 name: Teensy 4.0
+release_year: 2019
 creator: PJRC
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: 20
 ram: 1024kB
-release_year: 2019
 soc: iMXRT1062
 storage: null
 ttl_serial: true

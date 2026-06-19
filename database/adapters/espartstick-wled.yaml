@@ -1,12 +1,12 @@
 name: EspArtStick WLED
 creator: Microcyb
 notes: null
+outputs: Single
 diy_or_ots: DIY
 max_channels: 6
 max_current: 15A
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Single
 parent: Wemos D1 Mini (ESP32/ESP8266)
 pixel_types: null
 price: 24

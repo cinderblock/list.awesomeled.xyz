@@ -1,4 +1,5 @@
 name: Feather M0 Wi-Fi
+release_year: null
 creator: Adafruit
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: null
 ram: 32kB
-release_year: null
 soc: ATSAMD21G18
 storage: null
 ttl_serial: true

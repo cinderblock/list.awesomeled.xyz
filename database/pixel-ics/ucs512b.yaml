@@ -1,4 +1,5 @@
 name: UCS512B
+release_year: null
 creator: Normand Electronics
 notes: null
 aggregate_bits: null
@@ -21,6 +22,5 @@ pixel_data_size: null
 pixel_rate_max: null
 pwm_frequency: 3.0kHz
 quiescent_current: null
-release_year: null
 supply_voltage: null
 third_party_testing: null

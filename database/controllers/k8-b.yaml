@@ -1,7 +1,9 @@
 name: K8-B
 status: active
+release_year: null
 creator: KulpLights, LLC
 notes: 12 channels require differential receivers.
+outputs: Single
 auxiliary_outputs: DMX x2
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 36
 max_pixels: 57600
 max_voltage: 12V
 output_connectors: Phoenix Screw/RJ45
-outputs: Single
 pixel_types: async
 price: 123
-release_year: null
 standalone: true
 storage: Yes
 url: https://kulplights.com/product/k8-b/

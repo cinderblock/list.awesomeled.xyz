@@ -1,4 +1,5 @@
 name: Raspberry Pi 2 Model B
+release_year: 2015
 creator: Raspberry Pi Foundation
 notes: null
 bluetooth: USB
@@ -17,7 +18,6 @@ min_input_voltage: 5V
 poe: null
 price: 35
 ram: 1GB
-release_year: 2015
 soc: BCM2836
 storage: microSD
 ttl_serial: true

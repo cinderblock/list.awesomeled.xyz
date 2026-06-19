@@ -1,8 +1,10 @@
 name: Reactivo 2
 status: active
+release_year: 2020
 creator: LED Strip Studio
 notes: https://reactivo.lighting/first-touch/ Screen grabber, WEB interface,
   APP, Software, Sensors, Triggers management
+outputs: Data, Clock, SPI
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -13,10 +15,8 @@ max_outputs: 1
 max_pixels: 1024
 max_voltage: 24V
 output_connectors: Phoenix Plug
-outputs: Data, Clock, SPI
 pixel_types: both
 price: 225
-release_year: 2020
 standalone: true
 storage: SD
 url: https://ledstripstudio.com/gaming/

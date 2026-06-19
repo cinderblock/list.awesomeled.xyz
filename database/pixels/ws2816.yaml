@@ -1,5 +1,6 @@
 name: WS2816
 status: active
+release_year: 2021
 creator: WorldSemi
 notes: 16-bit per channel color depth with per-channel brightness control
 backup_data_line: true
@@ -26,7 +27,6 @@ pixel_data_size: 48 Bits/Pixel
 pixel_rate_max: 16.7 k Pixel / s
 pwm_frequency: 10.0kHz
 quiescent_current: 6.0mA
-release_year: 2021
 technical_notes:
   - 48-bit pixel data for 16-bit per channel color depth
   - Independent 5-bit brightness control for each R, G, B channel

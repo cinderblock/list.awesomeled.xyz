@@ -1,4 +1,5 @@
 name: ESP-32S
+release_year: 2016
 creator: NodeMCU
 notes: null
 bluetooth: '4.1'
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: null
 ram: null
-release_year: 2016
 soc: ESP32
 storage: null
 ttl_serial: true

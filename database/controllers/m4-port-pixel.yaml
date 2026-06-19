@@ -1,7 +1,9 @@
 name: M4 Port Pixel
 status: active
+release_year: null
 creator: Microcyb
 notes: Raspberry Pi 3B+ or Above with FPP
+outputs: Single or Clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 6400
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Single or Clock
 pixel_types: both
 price: 35
-release_year: null
 standalone: true
 storage: Yes
 url: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0

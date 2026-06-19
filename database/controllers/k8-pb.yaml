@@ -1,8 +1,10 @@
 name: K8-PB
 status: active
+release_year: null
 creator: KulpLights, LLC
 notes: 12 channels require differential receivers. eFuses, Current Sensing,
   Pixel Counting
+outputs: Single
 auxiliary_outputs: DMX
 buffered: true
 differential_outputs: 12
@@ -13,14 +15,12 @@ max_outputs: 36
 max_pixels: 57600
 max_voltage: 12V
 output_connectors: Phoenix Screw/RJ45
-outputs: Single
 pixel_types: async
 power_features:
   - eFuse protection
   - Current sensing
   - Pixel counting
 price: 98
-release_year: null
 standalone: true
 storage: Yes
 technical_notes:

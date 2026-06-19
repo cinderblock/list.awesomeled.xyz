@@ -1,7 +1,9 @@
 name: SmartShow Pro One
 status: active
+release_year: 2023
 creator: SmartShow
 notes: Inbuilt Ethernet Switch, allows daisy chaining units
+outputs: Signal and Clock
 auxiliary_outputs: DMX x4
 buffered: true
 interfaces:
@@ -13,10 +15,8 @@ max_outputs: 8
 max_pixels: 5440
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Signal and Clock
 pixel_types: both
 price: 300
-release_year: 2023
 standalone: false
 storage: null
 url: https://smartshow.lighting/

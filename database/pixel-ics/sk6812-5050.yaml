@@ -1,4 +1,5 @@
 name: SK6812(5050)
+release_year: null
 creator: Opsco Optoelectronics
 notes: null
 aggregate_bits: null
@@ -21,6 +22,5 @@ pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 1.2kHz
 quiescent_current: 1.0mA
-release_year: null
 supply_voltage: 5V
 third_party_testing: null

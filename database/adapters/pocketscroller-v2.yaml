@@ -1,12 +1,12 @@
 name: PocketScroller V2
 creator: Kulp Lights
 notes: null
+outputs: null
 diy_or_ots: DIY
 max_channels: 6
 max_current: null
 max_voltage: 5V
 output_connectors: HUB75
-outputs: null
 parent: PocketBeagle
 pixel_types: Panel
 price: 51

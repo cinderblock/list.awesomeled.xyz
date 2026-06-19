@@ -1,7 +1,9 @@
 name: MagWLED-1
 status: active
+release_year: null
 creator: magwled
 notes: USB-C powered 5v or 12v capable
+outputs: null
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 1
 max_pixels: null
 max_voltage: 12V
 output_connectors: Wago connector
-outputs: null
 pixel_types: async
 price: 30
-release_year: null
 standalone: true
 storage: null
 url: null

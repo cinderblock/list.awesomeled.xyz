@@ -1,7 +1,9 @@
 name: Replay
 status: discontinued
+release_year: null
 creator: Smartshow
 notes: Replays Jinx and xLights files on 4 separate 680 Pixel outputs
+outputs: single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 2720
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: single
 pixel_types: async
 price: 80
-release_year: null
 standalone: null
 storage: SD
 url: https://www.ebay.co.uk/itm/SmartShow-REPLAY-SDCard-Pixel-Player-2720-WS2812-SK6812-TMP2-FSEQ-PSEQ/274135104445?hash=item3fd3b9bbbd:g:sSAAAOSwAeBd7nOC

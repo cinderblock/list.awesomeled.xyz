@@ -1,4 +1,5 @@
 name: LPD8806
+release_year: 2011
 creator: Greeled Electronic
 notes: Fast refresh, fast PWM, 2 RGB pixels per IC, refresh any time
 aggregate_bits: 7
@@ -21,6 +22,5 @@ pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 625.0 k Pixel / s
 pwm_frequency: 9.4kHz
 quiescent_current: null
-release_year: 2011
 supply_voltage: 5V
 third_party_testing: https://web.archive.org/web/20180725021448/https://www.texonix.com/LPD8806.html

@@ -1,12 +1,12 @@
 name: Artnet to WS2812 1 Universe
 creator: Krzysztof Korzeniowski
 notes: Artnet to 170 Pixels , single universe
+outputs: null
 diy_or_ots: DIY
 max_channels: 1
 max_current: null
 max_voltage: 12V
 output_connectors: null
-outputs: null
 parent: Arduino Uno
 pixel_types: single
 price: null

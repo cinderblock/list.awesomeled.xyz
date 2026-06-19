@@ -1,7 +1,9 @@
 name: EspArtStick
 status: active
+release_year: null
 creator: Microcyb
 notes: 2.4 GHz Wi-Fi Pixel Controller, SD card, RF receiver
+outputs: Single or Clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 2
 max_pixels: 1024
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Single or Clock
 pixel_types: both
 price: 28
-release_year: null
 standalone: true
 storage: Yes
 url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-Wi-Fi-EspArtStick-pixel-controller/p/170368862/category=0

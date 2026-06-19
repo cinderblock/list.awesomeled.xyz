@@ -20,6 +20,10 @@ export function CategoryNav() {
   // Set navigation direction class before view transition starts
   const handleNavClick = (targetIndex: number) => {
     const direction = targetIndex > currentIndex ? 'left' : 'right';
+    // Must run synchronously on click, before React Router captures the
+    // view-transition snapshot — an effect would fire too late, so the
+    // immutability rule's "use an effect" suggestion doesn't apply here.
+    // eslint-disable-next-line react-hooks/immutability
     document.documentElement.dataset.navDirection = direction;
   };
 

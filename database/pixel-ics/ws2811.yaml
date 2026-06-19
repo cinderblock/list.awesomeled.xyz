@@ -1,5 +1,6 @@
 name: WS2811
 status: active
+release_year: 2011
 creator: WorldSemi
 notes: Addressable in groups (usually of 3 LEDs), common on 3 wire pixels,
   pucks, floods
@@ -33,7 +34,6 @@ pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 2.0kHz
 pwm_frequency_notes: 400Hz was old spec. Newer WS2811 chips have 2kHz PWM like WS2812B post-2018
 quiescent_current: 0.7mA
-release_year: 2011
 supply_voltage: 5V
 supply_voltage_notes: VCC range 4.5-5.5V
 technical_notes:

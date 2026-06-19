@@ -1,4 +1,5 @@
 name: LC2823-2020
+release_year: null
 creator: null
 notes: null
 backup_data_line: false
@@ -20,7 +21,6 @@ pixel_data_size: null
 pixel_rate_max: null
 pwm_frequency: 27kHz
 quiescent_current: '?'
-release_year: null
 third_party_testing: null
 vcc_voltage: 5V
 wattage: '#VALUE!'

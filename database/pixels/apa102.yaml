@@ -1,5 +1,6 @@
 name: APA102
 status: active
+release_year: 2014
 creator: APA Electronics
 notes: Fast refresh, fast PWM, except extra 5 bits PWM at 400Hz
 backup_data_line: false
@@ -33,7 +34,6 @@ pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 0.94 M Pixel / s
 pwm_frequency: 19.2kHz
 quiescent_current: 1.0mA
-release_year: 2014
 technical_notes:
   - Clock signal degrades with each pixel - see
     https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/

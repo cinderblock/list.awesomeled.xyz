@@ -1,8 +1,10 @@
 name: Brightly
 status: discontinued
+release_year: 2021
 creator: Polytronic
 notes: Modular breakouts allow for direct screw terminal plug or differential
   RJ45 outputs that can run over 1000ft to a receiver
+outputs: Single and Clock
 auxiliary_outputs: DMX
 buffered: true
 interfaces:
@@ -14,10 +16,8 @@ max_outputs: 8
 max_pixels: 8192
 max_voltage: 12V
 output_connectors: Screw Terminal & RJ45
-outputs: Single and Clock
 pixel_types: both
 price: 200
-release_year: 2021
 standalone: true
 storage: SD
 url: https://glowbrightly.io/

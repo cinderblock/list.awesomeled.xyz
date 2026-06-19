@@ -1,5 +1,6 @@
 name: SK9822
 status: active
+release_year: 2016
 creator: Opsco/Newstar
 notes: APA102 Clone. Extra 5 bits uses constant current driver, no change in PWM.
 backup_data_line: false
@@ -30,7 +31,6 @@ pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 0.94 M Pixel / s
 pwm_frequency: 4.6kHz
 quiescent_current: 1.0mA
-release_year: 2016
 technical_notes:
   - APA102 protocol compatible clone with improved brightness control
   - 5-bit brightness uses current control instead of APA102's PWM - no 400Hz

@@ -1,7 +1,9 @@
 name: F-Test
 status: unknown
+release_year: null
 creator: PixelController, LLC
 notes: null
+outputs: null
 auxiliary_outputs: null
 buffered: null
 max_current: null
@@ -9,9 +11,7 @@ max_outputs: null
 max_pixels: null
 max_voltage: null
 output_connectors: null
-outputs: null
 price: null
-release_year: null
 standalone: null
 storage: null
 url: null

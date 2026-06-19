@@ -1,7 +1,9 @@
 name: NetPixel-One
 status: discontinued
+release_year: null
 creator: SmartShow
 notes: null
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,9 +13,7 @@ max_outputs: 8
 max_pixels: 5440
 max_voltage: 24V
 output_connectors: JST
-outputs: Single
 price: 269
-release_year: null
 standalone: false
 storage: null
 url: https://www.ebay.co.uk/itm/SmartShow-NetPixel-ONE-32-Universe-Ethernet-Pixel-Driver-ArtNet-sACN/274037107730

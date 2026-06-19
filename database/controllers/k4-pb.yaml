@@ -1,7 +1,9 @@
 name: K4-PB
 status: active
+release_year: null
 creator: KulpLights, LLC
 notes: eFuse power distribution
+outputs: Single
 auxiliary_outputs: DMX
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 6400
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Single
 pixel_types: async
 price: 70
-release_year: null
 standalone: true
 storage: Yes
 url: https://kulplights.com/product/k4-pb/

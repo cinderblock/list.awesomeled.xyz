@@ -1,7 +1,9 @@
 name: PixLite 16 Long Range Mk2
 status: active
+release_year: null
 creator: Advatek
 notes: null
+outputs: Single or Clock
 auxiliary_outputs: DMX x4
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 32
 max_pixels: 16320
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Single or Clock
 pixel_types: both
 price: 450
-release_year: null
 standalone: false
 storage: null
 url: https://www.advateklights.com/pixlite-16-mk2-long-range-control-board

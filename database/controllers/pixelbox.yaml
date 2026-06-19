@@ -1,7 +1,9 @@
 name: Pixelbox
 status: unknown
+release_year: null
 creator: Lumikit
 notes: null
+outputs: null
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -12,9 +14,7 @@ max_outputs: null
 max_pixels: 2730
 max_voltage: null
 output_connectors: null
-outputs: null
 price: 199
-release_year: null
 standalone: null
 storage: null
 url: https://www.lumikit.com.br/international

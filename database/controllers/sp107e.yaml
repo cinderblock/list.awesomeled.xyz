@@ -1,7 +1,9 @@
 name: SP107E
 status: active
+release_year: null
 creator: Sperll
 notes: null
+outputs: Single and Clock
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 1
 max_pixels: 960
 max_voltage: 24V
 output_connectors: Screw
-outputs: Single and Clock
 pixel_types: both
 price: 25
-release_year: null
 standalone: null
 storage: null
 url: Amazon

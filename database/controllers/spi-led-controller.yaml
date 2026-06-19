@@ -1,7 +1,9 @@
 name: SPI LED Controller
 status: active
+release_year: null
 creator: LED Strip Studio
 notes: See tech specs PDF for full details
+outputs: Data, Clock, SPI
 auxiliary_outputs: DMX
 buffered: true
 datasheet_url: https://www.ledstripstudio.com/download/tech-specs/SPI_LED_Controller_tech_specs.pdf
@@ -13,7 +15,6 @@ max_outputs: 1
 max_pixels: 1024
 max_voltage: 24V
 output_connectors: RJ-45 DMX, Phoenix Plug SPI
-outputs: Data, Clock, SPI
 pixel_types: both
 price: 150
 price_tiers:
@@ -26,7 +27,6 @@ price_tiers:
   - pixels: 4096
     price: 599
     notes: 1 year software license included
-release_year: null
 standalone: true
 storage: SD
 technical_notes:

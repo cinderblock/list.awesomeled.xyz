@@ -1,8 +1,10 @@
 name: K32A-B
 status: active
+release_year: null
 creator: KulpLights, LLC
 notes: 16 channels require differential receivers. Onboard sound, FM transmitter
   optional.
+outputs: Single
 auxiliary_outputs: DMX x2
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 48
 max_pixels: 72000
 max_voltage: 12V
 output_connectors: Phoenix Screw/RJ45
-outputs: Single
 pixel_types: async
 price: 195
-release_year: null
 standalone: true
 storage: Yes
 url: https://kulplights.com/product/k32a-b/

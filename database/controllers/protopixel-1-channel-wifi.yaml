@@ -1,7 +1,9 @@
 name: ProtoPixel 1 channel Wi-Fi
 status: active
+release_year: null
 creator: ProtoPixel
 notes: null
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 1
 max_pixels: 600
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Single
 pixel_types: async
 price: 221
-release_year: null
 standalone: true
 storage: Yes
 url: https://www.protopixel.io/pricing

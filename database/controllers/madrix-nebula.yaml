@@ -1,7 +1,9 @@
 name: Madrix Nebula
 status: unknown
+release_year: null
 creator: Madrix
 notes: null
+outputs: null
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -14,9 +16,7 @@ max_outputs: 2
 max_pixels: 2048
 max_voltage: 24V
 output_connectors: Screw
-outputs: null
 price: 350
-release_year: null
 standalone: false
 storage: null
 url: https://www.madrix.com/products/nebula

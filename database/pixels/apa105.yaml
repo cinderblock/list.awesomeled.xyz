@@ -1,4 +1,5 @@
 name: APA105
+release_year: 2015
 creator: Newstar LED Co.
 notes: ws2812b/sk6812 with built-in capacitors
 backup_data_line: false
@@ -20,7 +21,6 @@ pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 1.2kHz
 quiescent_current: 1.0mA
-release_year: 2015
 third_party_testing: null
 vcc_voltage: 5V
 wattage: 100.mW

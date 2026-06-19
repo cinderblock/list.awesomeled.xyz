@@ -1,12 +1,12 @@
 name: Plasma 2040
 creator: Pimoroni
 notes: null
+outputs: null
 diy_or_ots: OTS
 max_channels: null
 max_current: null
 max_voltage: null
 output_connectors: screw Terminals
-outputs: null
 parent: Rpi 2040
 pixel_types: Single and Clocked
 price: 16

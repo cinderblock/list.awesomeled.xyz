@@ -1,5 +1,6 @@
 name: APA102C
 status: active
+release_year: null
 creator: APA Electronics
 notes: Very similar to its previous version, APA102, APA102C provides a larger
   metallic area for better heat dissipation.
@@ -34,7 +35,6 @@ pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 0.94 M Pixel / s
 pwm_frequency: 19.2kHz
 quiescent_current: 1.0mA
-release_year: null
 technical_notes:
   - Improved thermal design over APA102
   - Clock signal degrades with each pixel - see

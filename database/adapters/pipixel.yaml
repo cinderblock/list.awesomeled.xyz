@@ -1,12 +1,12 @@
 name: PiPixel
 creator: Tindie
 notes: null
+outputs: Both
 diy_or_ots: OTS
 max_channels: 1
 max_current: 5A
 max_voltage: 24V
 output_connectors: Screw
-outputs: Both
 parent: Raspberry Pi
 pixel_types: Single or Clocked
 price: 9

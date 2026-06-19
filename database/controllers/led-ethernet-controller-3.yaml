@@ -1,7 +1,9 @@
 name: LED Ethernet Controller 3
 status: active
+release_year: null
 creator: LED Strip Studio
 notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+outputs: Single & Clock & DMX
 auxiliary_outputs: DMX
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 4
 max_pixels: 4096
 max_voltage: 24V
 output_connectors: Phoenix Plug
-outputs: Single & Clock & DMX
 pixel_types: both
 price: 625
-release_year: null
 standalone: true
 storage: SD
 url: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/

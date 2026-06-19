@@ -1,4 +1,5 @@
 name: Arduino Mega 2560 Rev3
+release_year: null
 creator: Arduino
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: 6V
 poe: null
 price: 40
 ram: 8kB
-release_year: null
 soc: ATmega2560
 storage: null
 ttl_serial: null

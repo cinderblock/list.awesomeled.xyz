@@ -1,4 +1,5 @@
 name: NodeMCU v2
+release_year: null
 creator: NodeMCU
 notes: null
 bluetooth: '4.1'
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: null
 ram: null
-release_year: null
 soc: ESP8266
 storage: null
 ttl_serial: true

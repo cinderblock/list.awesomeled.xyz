@@ -1,7 +1,9 @@
 name: K2-Pi0
 status: unknown
+release_year: null
 creator: KulpLights, LLC
 notes: Requires Raspberry Pi
+outputs: null
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -11,9 +13,7 @@ max_outputs: 2
 max_pixels: 1200
 max_voltage: 12V
 output_connectors: Phoenix
-outputs: null
 price: 29
-release_year: null
 standalone: true
 storage: Yes
 url: null

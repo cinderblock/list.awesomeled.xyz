@@ -1,7 +1,9 @@
 name: AlphaPix Classic 16 V3
 status: unknown
+release_year: null
 creator: HolidayCoro
 notes: null
+outputs: Single and Clock
 auxiliary_outputs: DMX x3
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 16
 max_pixels: 5440
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Single and Clock
 pixel_types: both
 price: 175
-release_year: null
 standalone: null
 storage: null
 url: https://www.holidaycoro.com/AlphaPix-16-Pixel-Controller-V3-p/721-v3.htm

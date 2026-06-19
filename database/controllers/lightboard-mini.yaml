@@ -1,7 +1,9 @@
 name: LightBoard Mini
 status: discontinued
+release_year: null
 creator: RocketLife
 notes: Now Bekonix see Pattern Drivers
+outputs: Single and Clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 1
 max_pixels: 1000
 max_voltage: 5V
 output_connectors: Headers
-outputs: Single and Clock
 pixel_types: both
 price: 40
-release_year: null
 standalone: null
 storage: null
 url: https://www.rocketlife.com/technology/ morphed to https://www.bekonix.com/

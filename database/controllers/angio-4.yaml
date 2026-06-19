@@ -1,7 +1,9 @@
 name: Angio 4
 status: active
+release_year: 2022
 creator: chroma.tech
 notes: Bulk fleet manager. ArtNet, sACN / E1.31, Open Pixel Control
+outputs: Single and Clock
 auxiliary_outputs: false
 buffered: true
 image: angio-4.png
@@ -17,11 +19,9 @@ max_outputs: 4
 max_pixels: 4080
 max_voltage: 24
 output_connectors: 4-pin Phoenix Plug 3.81mm
-outputs: Single and Clock
 pixel_types: both
 power_connectors: 2-pin Phoenix Screw 5.08mm
 price: 99
-release_year: 2022
 standalone: false
 storage: null
 url: https://shop.chroma.tech/products/angio-4

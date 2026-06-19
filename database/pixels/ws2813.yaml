@@ -1,5 +1,6 @@
 name: WS2813
 status: active
+release_year: 2016
 creator: WorldSemi/Newstar
 notes: WS2812b update with Back Up Data Line
 backup_data_line: true
@@ -26,7 +27,6 @@ pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 2.0kHz
 pwm_frequency_notes: 2kHz according to datasheet
 quiescent_current: 0.7mA
-release_year: 2016
 spec_update_year: 2018
 technical_notes:
   - Backup/failover data line allows signal to continue if a pixel fails

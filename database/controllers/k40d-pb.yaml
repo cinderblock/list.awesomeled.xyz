@@ -1,7 +1,9 @@
 name: K40D-PB
 status: active
+release_year: null
 creator: KulpLights, LLC
 notes: null
+outputs: Single
 auxiliary_outputs: DMX
 buffered: null
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 40
 max_pixels: 64000
 max_voltage: 5V
 output_connectors: RJ45
-outputs: Single
 pixel_types: async
 price: 108
-release_year: null
 standalone: true
 storage: Yes
 url: https://kulplights.com/product/k40d-pb/

@@ -1,12 +1,12 @@
 name: M8 Port Pixel
 creator: Microcyb
 notes: null
+outputs: null
 diy_or_ots: DIY
 max_channels: 75
 max_current: 30A
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: null
 parent: Raspberry Pi 3B+ or above
 pixel_types: Single
 price: 45

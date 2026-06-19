@@ -1,7 +1,9 @@
 name: E6804
 status: unknown
+release_year: null
 creator: SanDevices
 notes: null
+outputs: Single or Clock
 auxiliary_outputs: DMX x4
 buffered: false
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 2040
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Single or Clock
 pixel_types: both
 price: 100
-release_year: null
 standalone: false
 storage: null
 url: http://sandevices.com/product/e6804-assembled-tested/

@@ -1,7 +1,9 @@
 name: SP102E
 status: active
+release_year: null
 creator: Sperll
 notes: null
+outputs: Signal and Clock
 auxiliary_outputs: null
 buffered: null
 max_current: null
@@ -9,9 +11,7 @@ max_outputs: 1
 max_pixels: 1024
 max_voltage: 12V
 output_connectors: Screw
-outputs: Signal and Clock
 price: 13
-release_year: null
 standalone: null
 storage: null
 url: Amazon

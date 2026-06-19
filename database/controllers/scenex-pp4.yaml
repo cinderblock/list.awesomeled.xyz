@@ -1,7 +1,9 @@
 name: SceneX PP4
 status: active
+release_year: null
 creator: German Light Products
 notes: Internal PSU
+outputs: null
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 4
 max_pixels: 2040
 max_voltage: 5V
 output_connectors: 4 Pin XLR
-outputs: null
 pixel_types: both
 price: null
-release_year: null
 standalone: false
 storage: null
 url: https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/

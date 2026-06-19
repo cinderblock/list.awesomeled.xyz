@@ -1,7 +1,9 @@
 name: Falcon F48
 status: active
+release_year: null
 creator: PixelController, LLC
 notes: null
+outputs: Differential
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 48
 max_pixels: 16384
 max_voltage: null
 output_connectors: RJ-45
-outputs: Differential
 pixel_types: async
 price: 200
-release_year: null
 standalone: null
 storage: null
 url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product

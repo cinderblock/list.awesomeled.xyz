@@ -1,11 +1,13 @@
 name: Baldrick8
 status: active
+release_year: 2025
 creator: ILIGHTTHAT
 notes: V1.1 supports 48V
+inputs: 3
+outputs: Single
 auxiliary_outputs: false
 buffered: true
 image: baldrick-8.png
-inputs: 3
 interfaces:
   - DDP
   - Artnet
@@ -15,10 +17,8 @@ max_outputs: 8
 max_pixels: 6000
 max_voltage: 24
 output_connectors: Phoenix Plug
-outputs: Single
 pixel_types: async
 price: 80
-release_year: 2025
 standalone: null
 storage: null
 url: https://www.baldrickboard.com/en/boards/baldrick8

@@ -1,7 +1,9 @@
 name: LeDMX4 Pro
 status: discontinued
+release_year: null
 creator: DMXKing
 notes: Show record and playback trigger capability through RJ-12 port
+outputs: Data and Clock
 auxiliary_outputs: DMX
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 2720
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Data and Clock
 pixel_types: both
 price: 134
-release_year: null
 standalone: true
 storage: SD
 url: https://dmxking.com/led-pixel-control/ledmx4-pro

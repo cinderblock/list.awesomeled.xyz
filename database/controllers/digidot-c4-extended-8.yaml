@@ -1,7 +1,9 @@
 name: DiGidot C4 Extended 8
 status: active
+release_year: null
 creator: DiGidot
 notes: Packed with features
+outputs: Single and Clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 4096
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Single and Clock
 pixel_types: both
 price: 385
-release_year: null
 standalone: true
 storage: SD
 url: https://digidot.eu/c4/digidot-c4-extended

@@ -1,4 +1,5 @@
 name: WS2818B
+release_year: 2018
 creator: WorldSemi
 notes: 12V WS2813 as separate IC
 aggregate_bits: null
@@ -21,6 +22,5 @@ pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 2.0kHz
 quiescent_current: 2.1mA
-release_year: 2018
 supply_voltage: 5V
 third_party_testing: null

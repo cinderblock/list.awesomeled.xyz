@@ -1,8 +1,10 @@
 name: PB Complete Controller
 status: unknown
+release_year: null
 creator: Kurt Controllers
 notes: 16 WS281x pixel ports, 16 4A DC solid-state outputs, 16 servo motor
   outputs, 8 trigger inputs, and a female USB type-A 2.0 OTG
+outputs: null
 auxiliary_outputs: 16 x4A D.C. / 16 xServo/ 8 switch inputs
 buffered: true
 interfaces:
@@ -13,10 +15,8 @@ max_outputs: 16
 max_pixels: 22400
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: null
 pixel_types: async
 price: 199
-release_year: null
 standalone: true
 storage: SD
 url: https://kurtcontrollers.com/?product=pb-complete-controller

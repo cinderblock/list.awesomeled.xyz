@@ -1,12 +1,12 @@
 name: Pixel String Pihat Zero
 creator: Jboards
 notes: null
+outputs: null
 diy_or_ots: null
 max_channels: 2
 max_current: null
 max_voltage: 12V
 output_connectors: null
-outputs: null
 parent: Raspberry Pi
 pixel_types: null
 price: 12

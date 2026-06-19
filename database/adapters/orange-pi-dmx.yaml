@@ -1,12 +1,12 @@
 name: Orange Pi DMX
 creator: Arjan van Vught
 notes: null
+outputs: null
 diy_or_ots: DIY
 max_channels: 4
 max_current: null
 max_voltage: 5V
 output_connectors: null
-outputs: null
 parent: Orange Pi
 pixel_types: single +clocked
 price: 12

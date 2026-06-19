@@ -1,4 +1,5 @@
 name: ESP32-PoE
+release_year: 2020
 creator: Olimex
 notes: null
 bluetooth: '4.2'
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: Y
 price: 25
 ram: null
-release_year: 2020
 soc: ESP32
 storage: null
 ttl_serial: null

@@ -1,7 +1,9 @@
 name: NLed Pixel Controller Electron
 status: active
+release_year: null
 creator: Northern Lights Electronic Design
 notes: On board 3 Axis Accelerometer, programmable for wearables and standalone
+outputs: Single and Clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 1
 max_pixels: 170
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Single and Clock
 pixel_types: both
 price: 27
-release_year: null
 standalone: true
 storage: null
 url: https://store.nledshop.com/index.php/nled-pixel-controller-electron-flow-toys-wearables.html

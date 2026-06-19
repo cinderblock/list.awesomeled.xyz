@@ -1,4 +1,5 @@
 name: ATtiny85
+release_year: null
 creator: Atmel
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: 1
 ram: 512B
-release_year: null
 soc: ATtiny85
 storage: null
 ttl_serial: true

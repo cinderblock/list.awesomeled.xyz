@@ -1,10 +1,14 @@
 # Example 1: Full-featured RGB pixel IC with all fields
 name: Example RGB Pixel
 status: active
+release_year: 2020
 creator: Example Semiconductor
 manufacturers:
   - Example Semiconductor
   - Secondary Fab
+vendors:
+  - LED Parts Supplier
+  - Component Distributor
 notes: Industry standard RGB pixel, widely compatible
 backup_data_line: false
 brightness_bits: 8
@@ -48,7 +52,6 @@ pixel_rate_max: 33.3k pixels/sec
 pwm_frequency: 1.2kHz
 pwm_frequency_notes: Measured 1.18kHz typical, uses MPWM for flicker reduction
 quiescent_current: 0.3mA
-release_year: 2020
 spec_update_year: 2022
 technical_notes:
   - Reset time increased to 280us in 2022 revision
@@ -64,15 +67,13 @@ variants:
     differences: Extended temperature range -40C to +85C
 vcc_voltage: 5
 vcc_voltage_notes: Internal 3.3V regulator for logic
-vendors:
-  - LED Parts Supplier
-  - Component Distributor
 wattage: 0.3
 ---
 # Example 2: RGBW pixel with global brightness control
 name: Example RGBW Pixel
 status: active
 
+release_year: 2019
 creator: Example Semiconductor
 manufacturers:
   - Example Semiconductor
@@ -95,11 +96,11 @@ pin_count: 6
 pixel_data_size: '32'
 pixel_data_size_notes: 8 bits per channel, 4 channels
 pwm_frequency: 1.1kHz
-release_year: 2019
 ---
 # Example 3: Clocked APA102-style pixel with high data rate
 name: Example HD Pixel
 status: active
+release_year: 2014
 creator: HD LED Corp
 manufacturers:
   - HD LED Corp
@@ -128,7 +129,6 @@ pixel_data_size: '32'
 pixel_rate_max: 750k pixels/sec
 pwm_frequency: 19.2kHz
 pwm_frequency_notes: True constant current PWM, excellent for video
-release_year: 2014
 technical_notes:
   - 5-bit global brightness uses current control for true dimming
   - 'Start frame: 32 zero bits, End frame: (n/2) one bits'
@@ -166,6 +166,7 @@ wattage: 0.3
 # Example 5: Discontinued pixel IC
 name: Example Legacy Pixel
 status: discontinued
+release_year: 2010
 creator: Defunct Semiconductor
 manufacturers:
   - Defunct Semiconductor
@@ -179,4 +180,3 @@ led_voltage: 5
 pixel_data_size: '24'
 pwm_frequency: 400Hz
 pwm_frequency_notes: Low frequency causes visible flicker in video
-release_year: 2010

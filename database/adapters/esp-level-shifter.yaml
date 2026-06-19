@@ -1,12 +1,12 @@
 name: ESP Level Shifter
 creator: null
 notes: null
+outputs: null
 diy_or_ots: null
 max_channels: 1
 max_current: null
 max_voltage: 5V
 output_connectors: null
-outputs: null
 parent: ESP-01 (ESP8266)
 pixel_types: Single
 price: 9

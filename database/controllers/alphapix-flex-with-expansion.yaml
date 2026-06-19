@@ -1,7 +1,9 @@
 name: AlphaPix Flex with Expansion
 status: active
+release_year: null
 creator: HolidayCoro
 notes: null
+outputs: Single and Clock
 auxiliary_outputs: DMX x2
 buffered: null
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 48
 max_pixels: 16320
 max_voltage: 24V
 output_connectors: Phoenix Plug
-outputs: Single and Clock
 pixel_types: both
 price: 190
-release_year: null
 standalone: false
 storage: null
 url: null

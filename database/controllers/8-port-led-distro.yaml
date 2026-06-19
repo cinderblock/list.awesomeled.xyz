@@ -1,7 +1,9 @@
 name: 8 Port LED Distro
 status: active
+release_year: null
 creator: Bong69
 notes: null
+outputs: Single
 auxiliary_outputs: I.O. Pins broken out
 buffered: null
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 8
 max_pixels: 4800
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Single
 pixel_types: async
 price: 55
-release_year: null
 standalone: null
 storage: null
 url: https://www.tindie.com/products/bong69/8-port-led-distro

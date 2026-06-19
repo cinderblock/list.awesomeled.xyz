@@ -1,7 +1,9 @@
 name: Lightkraken
 status: active
+release_year: null
 creator: Obtainium Consulting
 notes: 70W PoE++ Powered via Cat5 from PoE Switch
+outputs: null
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 1
 max_pixels: 1020
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: null
 pixel_types: async
 price: 69
-release_year: null
 standalone: null
 storage: null
 url: https://www.tindie.com/products/tinicuro/lightkraken/ https://www.lightkraken.net/

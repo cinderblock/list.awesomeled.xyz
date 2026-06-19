@@ -1,4 +1,5 @@
 name: Trinket M0
+release_year: null
 creator: Adafruit
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: 9
 ram: 32kB
-release_year: null
 soc: ATSAMD21E18
 storage: null
 ttl_serial: true

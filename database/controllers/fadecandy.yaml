@@ -1,7 +1,9 @@
 name: Fadecandy
 status: end-of-life
+release_year: 2013
 creator: Adafruit
 notes: Please see https://github.com/scanlime/fadecandy to confirm project status
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 8
 max_pixels: 512
 max_voltage: 5V
 output_connectors: Solder
-outputs: Single
 pixel_types: async
 price: 25
-release_year: 2013
 standalone: false
 storage: null
 technical_notes:

@@ -1,10 +1,10 @@
 name: Pixel Data Isolator
 creator: Essence Engineering
 notes: null
+outputs: Data
 diy_or_ots: OTS
 max_channels: 1
 output_connectors: solder
-outputs: Data
 pixel_types: provides a 5kV isolated data connection from controller to LED when
   each are powered separately.
 price: 16.99

@@ -1,4 +1,5 @@
 name: Raspberry Pi 1 Model A+
+release_year: 2014
 creator: Raspberry Pi Foundation
 notes: null
 bluetooth: USB
@@ -17,7 +18,6 @@ min_input_voltage: 5V
 poe: null
 price: 20
 ram: 512MB
-release_year: 2014
 soc: BCM2835
 storage: microSD
 ttl_serial: true

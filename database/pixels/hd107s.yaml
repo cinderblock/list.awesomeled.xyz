@@ -1,5 +1,6 @@
 name: HD107S
 status: active
+release_year: 2019
 creator: Rose Lighting
 notes: APA107 Competitor/clone
 backup_data_line: false
@@ -27,7 +28,6 @@ pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 1.25 M Pixel / s
 pwm_frequency: 27.0kHz
 quiescent_current: 0.1mA
-release_year: 2019
 technical_notes:
   - High-speed 40MHz data rate - faster than APA102's 30MHz
   - 27kHz PWM frequency for flicker-free video

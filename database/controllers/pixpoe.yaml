@@ -1,7 +1,9 @@
 name: PIXPoE
 status: active
+release_year: null
 creator: EMP Designs
 notes: 30W 5V PoE output
+outputs: null
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 1
 max_pixels: null
 max_voltage: null
 output_connectors: Phoenix Screw
-outputs: null
 pixel_types: async
 price: $?
-release_year: null
 standalone: false
 storage: null
 url: https://www.empdesigns.co.uk/portfolio-item/poe-pixel-controller//

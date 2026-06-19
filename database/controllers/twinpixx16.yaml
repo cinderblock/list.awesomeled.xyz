@@ -1,7 +1,9 @@
 name: TwinPixx16
 status: unknown
+release_year: null
 creator: DMX4All
 notes: null
+outputs: single and clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 2
 max_pixels: 2720
 max_voltage: 5V
 output_connectors: Phoenix Plug
-outputs: single and clock
 pixel_types: both
 price: 399
-release_year: null
 standalone: false
 storage: null
 url: https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html

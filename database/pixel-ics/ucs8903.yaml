@@ -1,4 +1,5 @@
 name: UCS8903
+release_year: 2013
 creator: Normand Electronics
 notes: Early 16bit/color version of UCS1903 (WS2811 equiv)
 aggregate_bits: null
@@ -21,6 +22,5 @@ pixel_data_size: 48 Bits/Pixel
 pixel_rate_max: 16.7 k Pixel / s
 pwm_frequency: 1.0kHz
 quiescent_current: 1.0mA
-release_year: 2013
 supply_voltage: 5V
 third_party_testing: null

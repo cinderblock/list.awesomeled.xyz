@@ -1,5 +1,6 @@
 name: APA104
 status: active
+release_year: 2013
 creator: APA Electronics
 notes: WS2812b clone like SK6812
 backup_data_line: false
@@ -32,7 +33,6 @@ pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 1.2kHz
 quiescent_current: 1.0mA
-release_year: 2013
 technical_notes:
   - WS2812 protocol compatible clone from APA Electronics
   - Available in very small 1212 package size

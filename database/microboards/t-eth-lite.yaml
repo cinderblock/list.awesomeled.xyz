@@ -1,4 +1,5 @@
 name: t-eth-lite
+release_year: 2024
 creator: Lilygo
 notes: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
 bluetooth: '4.1'
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: Y
 price: 15
 ram: null
-release_year: 2024
 soc: ESP32 S3
 storage: null
 ttl_serial: null

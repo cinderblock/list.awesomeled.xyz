@@ -1,7 +1,9 @@
 name: Deskontrol Lite 16
 status: discontinued
+release_year: null
 creator: Deskontrol
 notes: null
+outputs: null
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 16
 max_pixels: 2720
 max_voltage: null
 output_connectors: RJ-45
-outputs: null
 pixel_types: both
 price: 363
-release_year: null
 standalone: false
 storage: null
 url: https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html

@@ -1,8 +1,10 @@
 name: DIN Pixie
 status: active
+release_year: null
 creator: ENTTEC
 notes: Back powered from pixel strip - connect thru USB to record a show onto
   the device using live Art-net
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -15,10 +17,8 @@ max_pixels_16bit: 170
 max_pixels_rgbw: 256
 max_voltage: 48V
 output_connectors: Phoenix Screw
-outputs: Single
 pixel_types: async
 price: 100
-release_year: null
 standalone: true
 storage: Yes
 technical_notes:

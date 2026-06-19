@@ -1,4 +1,5 @@
 name: Beaglebone Black
+release_year: 2012
 creator: Beagleboard.org
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: 5V
 poe: null
 price: 50
 ram: 512MB
-release_year: 2012
 soc: am3358
 storage: microSD
 ttl_serial: true

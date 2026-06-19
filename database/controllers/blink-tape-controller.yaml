@@ -1,7 +1,9 @@
 name: Blink tape Controller
 status: unknown
+release_year: null
 creator: Blinkinlabs
 notes: null
+outputs: Single
 auxiliary_outputs: GPIO
 buffered: false
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 1
 max_pixels: 512
 max_voltage: 5V
 output_connectors: Solder, JST
-outputs: Single
 pixel_types: async
 price: 16
-release_year: null
 standalone: true
 storage: Flash
 url: https://shop.blinkinlabs.com/products/blinkytape-control-board

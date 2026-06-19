@@ -1,7 +1,9 @@
 name: SPI Matrix
 status: active
+release_year: 2020
 creator: Led Strip studio
 notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+outputs: Single & Clock & DMX
 auxiliary_outputs: DMX
 buffered: true
 interfaces:
@@ -13,10 +15,8 @@ max_outputs: 4
 max_pixels: 4096
 max_voltage: 24V
 output_connectors: Phoenix Plug
-outputs: Single & Clock & DMX
 pixel_types: both
 price: 299
-release_year: 2020
 standalone: true
 storage: SD
 url: https://tlslighting.co.uk/product/spi-matrix-lite-led-strip-studio-art-net-to-spi-stand-alone-spi-controller/

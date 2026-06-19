@@ -1,4 +1,5 @@
 name: SM16712
+release_year: null
 creator: Shenzhen Sunmoon Microelectronics
 notes: null
 aggregate_bits: null
@@ -21,6 +22,5 @@ pixel_data_size: null
 pixel_rate_max: null
 pwm_frequency: 1.2kHz
 quiescent_current: null
-release_year: null
 supply_voltage: null
 third_party_testing: null

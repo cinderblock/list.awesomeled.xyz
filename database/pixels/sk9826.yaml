@@ -1,4 +1,5 @@
 name: SK9826
+release_year: 2016
 creator: Newstar LED Co.
 notes: 16bit/color version of APA102 copy SK9822
 backup_data_line: false
@@ -20,7 +21,6 @@ pixel_data_size: 64 Bits/Pixel
 pixel_rate_max: 468.8 k Pixel / s
 pwm_frequency: 4.0kHz
 quiescent_current: 3.6mA
-release_year: 2016
 third_party_testing: null
 vcc_voltage: 5V
 wattage: 90.mW

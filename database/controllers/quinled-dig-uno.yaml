@@ -1,7 +1,9 @@
 name: QuinLED-Dig-Uno
 status: active
+release_year: 2019
 creator: Quindor / Intermittent Technology
 notes: ESP8266/ESP32 based, open to any software, often run with WLED
+outputs: Single and Clock
 auxiliary_outputs: DIY or Pre-Assembled
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 2
 max_pixels: 2048
 max_voltage: 24V
 output_connectors: 5mm screw terminal
-outputs: Single and Clock
 pixel_types: both
 price: 25
-release_year: 2019
 standalone: true
 storage: null
 url: https://quinled.info/quinled-dig-uno/

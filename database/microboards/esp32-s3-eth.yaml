@@ -1,4 +1,5 @@
 name: ESP32-S3 ETH
+release_year: 2024
 creator: Waveshare
 notes: PoE shield available
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: Y
 price: 17
 ram: null
-release_year: 2024
 soc: ESP32 S3
 storage: microSD
 ttl_serial: null

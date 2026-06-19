@@ -1,7 +1,9 @@
 name: PixOut Server
 status: active
+release_year: null
 creator: PixOut
 notes: Pi based artnet recorderUp to 255 Universes iOS/Android App
+outputs: null
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -13,10 +15,8 @@ max_outputs: 8
 max_pixels: 8192
 max_voltage: 24V
 output_connectors: null
-outputs: null
 pixel_types: both
 price: 300
-release_year: null
 standalone: true
 storage: Yes
 url: http://pixout.lighting/

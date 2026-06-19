@@ -1,12 +1,12 @@
 name: Serial LED Driver
 creator: ElectroMage
 notes: null
+outputs: Both
 diy_or_ots: OTS
 max_channels: 8
 max_current: 3A
 max_voltage: 5V
 output_connectors: Solder
-outputs: Both
 parent: Any UART / Serial
 pixel_types: Single or Clocked
 price: 15

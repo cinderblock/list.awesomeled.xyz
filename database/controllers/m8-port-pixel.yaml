@@ -1,7 +1,9 @@
 name: M8 Port Pixel
 status: active
+release_year: null
 creator: Microcyb
 notes: Raspberry Pi 3B+ or Above with FPP
+outputs: Single or Clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 8
 max_pixels: 12800
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Single or Clock
 pixel_types: both
 price: 45
-release_year: null
 standalone: true
 storage: Yes
 url: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0

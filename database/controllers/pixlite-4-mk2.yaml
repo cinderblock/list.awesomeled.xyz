@@ -1,7 +1,9 @@
 name: PixLite 4 Mk2
 status: active
+release_year: null
 creator: Advatek
 notes: new firmware has a pixel counting test pattern, great for mapping
+outputs: Single or Clock
 auxiliary_outputs: DMX
 buffered: true
 interfaces:
@@ -14,11 +16,9 @@ max_outputs: 8
 max_pixels: 4080
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Single or Clock
 pixel_types: both
 pixel_types_notes: Single or Clock means output pins can be configured as one or the other
 price: 340
-release_year: null
 standalone: false
 storage: null
 technical_notes:

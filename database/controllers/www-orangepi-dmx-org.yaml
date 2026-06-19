@@ -1,8 +1,10 @@
 name: www.orangepi-dmx.org
 status: active
+release_year: null
 creator: Arjan VanVught /Open Source
 notes: Unique central configuration with human readable UPD messages. No FPS
   limit. Except what is given for the pixel protocol
+outputs: Data, Clock, SPI
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 8
 max_pixels: 5440
 max_voltage: null
 output_connectors: null
-outputs: Data, Clock, SPI
 pixel_types: both
 price: 50
-release_year: null
 standalone: true
 storage: null
 url: www.orangepi-dmx.org

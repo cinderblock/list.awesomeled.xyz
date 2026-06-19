@@ -1,4 +1,5 @@
 name: HD108
+release_year: null
 creator: null
 notes: HD107s with 64bit color
 backup_data_line: false
@@ -20,7 +21,6 @@ pixel_data_size: 64 Bits/Pixel
 pixel_rate_max: 625.0 k Pixel / s
 pwm_frequency: 27.0kHz
 quiescent_current: 0.1mA
-release_year: null
 third_party_testing: null
 vcc_voltage: 5V
 wattage: '#VALUE!'

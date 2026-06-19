@@ -1,7 +1,9 @@
 name: K128D-B
 status: active
+release_year: null
 creator: KulpLights, LLC
 notes: Onboard sound, FM transmitter optional.
+outputs: Single
 auxiliary_outputs: DMX x2
 buffered: null
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 128
 max_pixels: 80000
 max_voltage: 5V
 output_connectors: RJ45
-outputs: Single
 pixel_types: async
 price: 270
-release_year: null
 standalone: true
 storage: Yes
 url: https://kulplights.com/product/k128d-b/

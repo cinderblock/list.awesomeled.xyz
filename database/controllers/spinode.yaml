@@ -1,7 +1,9 @@
 name: SpiNode
 status: unknown
+release_year: null
 creator: Visual Productions
 notes: Use max 2 SpiNodes per CueCore3, to open up 32 universes
+outputs: Single and Clock
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 4096
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: Single and Clock
 pixel_types: both
 price: 349
-release_year: null
 standalone: false
 storage: null
 url: null

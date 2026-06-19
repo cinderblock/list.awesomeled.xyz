@@ -4,6 +4,9 @@ creator: Commercial Lighting Corp
 manufacturers:
   - Commercial Lighting Corp
   - Authorized Manufacturer
+vendors:
+  - Commercial Lighting Distributor
+  - Regional Dealer Network
 notes: Enterprise-grade system with full project support and warranty
 color_type: RGBW
 core_tech: Proprietary protocol over Cat6
@@ -21,15 +24,15 @@ price_range: $$$$$
 since: 2015
 target_market: Architectural, commercial installations
 url: https://example.com/pro-system
-vendors:
-  - Commercial Lighting Distributor
-  - Regional Dealer Network
 ---
 # Example 2: Prosumer addressable LED system
 name: Example Home LED System
 creator: Smart Home Corp
 manufacturers:
   - Smart Home Corp
+vendors:
+  - Amazon
+  - Best Buy
 notes: Consumer-friendly addressable LED system with app control
 color_type: RGB
 core_tech: Wi-Fi + proprietary app
@@ -42,15 +45,14 @@ since: 2020
 target_market: Residential, DIY-friendly
 url: https://example.com/home-system
 
-vendors:
-  - Amazon
-  - Best Buy
 ---
 # Example 3: Entertainment industry system
 name: Example Stage Pixel
 creator: Stage Tech Inc
 manufacturers:
   - Stage Tech Inc
+vendors:
+  - Professional Lighting Dealers
 notes: Designed for rental and touring applications
 color_type: RGBW
 core_tech: Art-Net, sACN
@@ -63,14 +65,14 @@ since: 2018
 target_market: Live events, touring
 url: https://example.com/stage-pixel
 
-vendors:
-  - Professional Lighting Dealers
 ---
 # Example 4: Budget commercial system
 name: Example Budget Commercial
 creator: null
 manufacturers:
   - OEM Factory
+vendors:
+  - Alibaba
 notes: Budget option for basic commercial signage
 
 color_type: RGB
@@ -82,8 +84,6 @@ pixels_per_run: 200
 price_range: $
 since: 2019
 target_market: Budget commercial, signage
-vendors:
-  - Alibaba
 ---
 # Example 5: Minimal system entry
 name: Example Basic System

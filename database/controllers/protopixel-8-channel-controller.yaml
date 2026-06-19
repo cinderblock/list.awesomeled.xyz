@@ -1,7 +1,9 @@
 name: ProtoPixel 8 channel controller
 status: active
+release_year: null
 creator: ProtoPixel
 notes: Design software $149 per Month Deployment from $79 per Month
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 8
 max_pixels: 4800
 max_voltage: null
 output_connectors: Phoenix Screw
-outputs: Single
 pixel_types: async
 price: 573
-release_year: null
 standalone: false
 storage: null
 url: https://www.protopixel.io/pricing

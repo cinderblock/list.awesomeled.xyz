@@ -1,4 +1,5 @@
 name: NRF 52840 Feather
+release_year: 2021
 creator: Adafruit
 notes: null
 bluetooth: BLE
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: 25
 ram: 256kB
-release_year: 2021
 soc: NRF 52840
 storage: null
 ttl_serial: null

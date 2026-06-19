@@ -1,12 +1,12 @@
 name: Wemos ESP32 Driver Board
 creator: Mottram Labs
 notes: On board fuse , 5V regulator, 74 HCT Buffer
+outputs: Both
 diy_or_ots: OTS
 max_channels: 1
 max_current: null
 max_voltage: 12V
 output_connectors: Screw Terminals
-outputs: Both
 parent: WeMos Mini
 pixel_types: Single and Clocked
 price: 9

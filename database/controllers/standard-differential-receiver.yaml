@@ -1,7 +1,9 @@
 name: Standard Differential Receiver
 status: unknown
+release_year: null
 creator: Microcyb
 notes: null
+outputs: Multiple
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 6400
 max_voltage: 12V
 output_connectors: Phoenix Screw
-outputs: Multiple
 pixel_types: both
 price: 22
-release_year: null
 standalone: true
 storage: null
 url: https://microcyb.com

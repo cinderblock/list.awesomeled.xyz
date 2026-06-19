@@ -1,4 +1,5 @@
 name: Raspberry Pi 3 Model A+
+release_year: 2018
 creator: Raspberry Pi Foundation
 notes: null
 bluetooth: '4.2'
@@ -17,7 +18,6 @@ min_input_voltage: 5V
 poe: null
 price: 25
 ram: 512MB
-release_year: 2018
 soc: BCM2837B0
 storage: microSD
 ttl_serial: true

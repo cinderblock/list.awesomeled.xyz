@@ -1,7 +1,9 @@
 name: ESP32 WLED Controller 8chan
 status: active
+release_year: null
 creator: Giovanni's Domotica Store
 notes: null
+outputs: single and clock
 auxiliary_outputs: GPIO /Relay
 buffered: null
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 8
 max_pixels: 4800
 max_voltage: 12V
 output_connectors: null
-outputs: single and clock
 pixel_types: both
 price: 45
-release_year: null
 standalone: null
 storage: null
 url: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/?pt=ac_prod_search

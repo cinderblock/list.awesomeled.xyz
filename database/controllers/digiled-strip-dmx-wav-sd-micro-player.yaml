@@ -1,8 +1,10 @@
 name: Digiled Strip/DMX/WAV SD Micro Player
 status: active
+release_year: null
 creator: Electroconcept
 notes: 6 switch input trigger SPI, DMX or Wav sound scenesProgrammed using
   Artrender https://www.boutique-electroconcept.com/information/downloads.html
+outputs: SPI/ DMX/WAV
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 1
 max_pixels: 850
 max_voltage: 5V
 output_connectors: Plated Through Hole
-outputs: SPI/ DMX/WAV
 pixel_types: async
 price: 30
-release_year: null
 standalone: true
 storage: SD
 url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html

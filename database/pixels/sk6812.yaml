@@ -1,5 +1,6 @@
 name: SK6812
 status: active
+release_year: 2013
 creator: Opsco/Newstar
 notes: WS2812 copy also available in 4 channel RGBW variant
 backup_data_line: false
@@ -33,7 +34,6 @@ pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 4.7kHz
 pwm_frequency_notes: Datasheet claims 1.2kHz but testing shows 4.7kHz
 quiescent_current: 1.0mA
-release_year: 2013
 technical_notes:
   - PWM frequency tested at 4.7kHz despite 1.2kHz datasheet claim
   - Available in RGB and RGBW variants

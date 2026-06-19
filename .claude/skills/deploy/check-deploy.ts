@@ -231,7 +231,6 @@ async function main() {
   }
 
   // Poll until the matched branch's latest deployment is terminal.
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     const d = await snapshot();
     const status = d?.latest_stage?.status;

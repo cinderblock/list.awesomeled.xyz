@@ -1,7 +1,9 @@
 name: Netpixel Quad
 status: discontinued
+release_year: null
 creator: SmartShow
 notes: null
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 4
 max_pixels: 2720
 max_voltage: 5V
 output_connectors: JST
-outputs: Single
 pixel_types: async
 price: 140
-release_year: null
 standalone: false
 storage: null
 url: https://www.ebay.co.uk/itm/SmartShow-NetPixel-Quad-16-Universe-Pixel-Driver-4-output-ArtNet-SPI/273982361910

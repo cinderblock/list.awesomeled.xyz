@@ -1,7 +1,9 @@
 name: ULS Stripe
 status: active
+release_year: null
 creator: ULS Manufacturing
 notes: 7 DMX Modes fom Individual to grouped
+outputs: null
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -13,10 +15,8 @@ max_outputs: 4
 max_pixels: 1000
 max_voltage: 12V
 output_connectors: 5 Pin GX-16
-outputs: null
 pixel_types: async
 price: 330
-release_year: null
 standalone: null
 storage: null
 url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller

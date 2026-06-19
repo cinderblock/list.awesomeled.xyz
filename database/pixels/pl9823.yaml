@@ -1,4 +1,5 @@
 name: PL9823
+release_year: 2014
 creator: /
 notes: 5mm & 8mm epoxy leaded copy of WS2811/12
 backup_data_line: false
@@ -20,7 +21,6 @@ pixel_data_size: 24 Bits/Pixel
 pixel_rate_max: 33.3 k Pixel / s
 pwm_frequency: 800Hz
 quiescent_current: null
-release_year: 2014
 third_party_testing: https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-clones-pd9823/
 vcc_voltage: 5V
 wattage: .mW

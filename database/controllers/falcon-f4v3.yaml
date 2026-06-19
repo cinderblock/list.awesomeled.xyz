@@ -1,7 +1,9 @@
 name: Falcon F4V3
 status: active
+release_year: null
 creator: PixelController, LLC
 notes: null
+outputs: Single and Clock
 auxiliary_outputs: DMX
 buffered: true
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 48
 max_pixels: 16320
 max_voltage: 36V
 output_connectors: Phoenix Screw
-outputs: Single and Clock
 pixel_types: both
 price: 200
-release_year: null
 standalone: null
 storage: SD
 url: https://pixelcontroller.com/store/products/48-f16v3.html

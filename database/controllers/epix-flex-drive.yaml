@@ -1,7 +1,9 @@
 name: Epix Flex Drive
 status: unknown
+release_year: null
 creator: Chauvet Pro
 notes: null
+outputs: null
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -13,10 +15,8 @@ max_outputs: 2
 max_pixels: 1920
 max_voltage: null
 output_connectors: 3 pin IP65
-outputs: null
 pixel_types: async
 price: 600
-release_year: null
 standalone: null
 storage: null
 url: https://www.chauvetprofessional.com/products/epix-flex-drive/

@@ -1,4 +1,5 @@
 name: TTGo ESP32 PoE
+release_year: 2020
 creator: Lilygo
 notes: null
 bluetooth: '4.2'
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: Y
 price: 16
 ram: null
-release_year: 2020
 soc: ESP32
 storage: null
 ttl_serial: null

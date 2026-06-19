@@ -1,7 +1,9 @@
 name: Qolorpix
 status: unknown
+release_year: null
 creator: City Theatrical
 notes: DMX controlled replay unit
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,9 +13,7 @@ max_outputs: 8
 max_pixels: 1920
 max_voltage: 5V
 output_connectors: XLR5
-outputs: Single
 price: 1500
-release_year: null
 standalone: true
 storage: null
 url: http://www.citytheatrical.com/Products/qolorpix-tape-controller-eight-output#

@@ -1,8 +1,10 @@
 name: Genius Pro 32 Port
 status: active
+release_year: 2023
 creator: Experience Lights
 notes: On board PSU mounting,Efuse protected power distribution, on board fault
   finding
+outputs: Single
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -14,10 +16,8 @@ max_outputs: 32
 max_pixels: 20000
 max_voltage: 24V
 output_connectors: Spring Terminal
-outputs: Single
 pixel_types: async
 price: 300
-release_year: 2023
 standalone: false
 storage: null
 url: https://experiencelights.com/genius-pro-32-port-controller/#/

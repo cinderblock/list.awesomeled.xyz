@@ -1,4 +1,5 @@
 name: Orange Pi PC Plus
+release_year: null
 creator: Shenzhen Xunlong Software
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: 24
 ram: 1GB
-release_year: null
 soc: Allwinner Quad Core H3
 storage: microSD
 ttl_serial: null

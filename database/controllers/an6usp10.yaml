@@ -1,7 +1,9 @@
 name: AN6USP10
 status: unknown
+release_year: null
 creator: Electron Design
 notes: null
+outputs: null
 auxiliary_outputs: null
 buffered: true
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 6
 max_pixels: 1020
 max_voltage: 24V
 output_connectors: Phoenix Screw
-outputs: null
 pixel_types: both
 price: 97
-release_year: null
 standalone: false
 storage: null
 url: https://www.ebay.co.uk/itm/ArtNet-to-pixel-sACN-ArtNet-SPI-WS2811-12-WS2801-SM16703-GS8208-WS2815/221181172896

@@ -1,4 +1,5 @@
 name: Orange Pi LTS
+release_year: null
 creator: Shenzhen Xunlong Software
 notes: null
 bluetooth: null
@@ -17,7 +18,6 @@ min_input_voltage: null
 poe: null
 price: 9
 ram: 256MB+
-release_year: null
 soc: Allwinner H2+
 storage: microSD
 ttl_serial: null

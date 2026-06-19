@@ -1,12 +1,12 @@
 name: QuinLED-Dig-Quad
 creator: Quindor / Intermittent Technology
 notes: DIY or Pre-Assembled
+outputs: Both
 diy_or_ots: Both
 max_channels: 4
 max_current: 30A
 max_voltage: 24V
 output_connectors: Screw Terminals
-outputs: Both
 parent: ESP8266 or ESP32
 pixel_types: Single or Clocked
 price: 38

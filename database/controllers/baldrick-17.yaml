@@ -1,10 +1,12 @@
 name: Baldrick17
 status: active
+release_year: 2025
 creator: ILIGHTTHAT
+inputs: 3
+outputs: Single
 auxiliary_outputs: false
 buffered: true
 image: baldrick-17.png
-inputs: 3
 interfaces:
   - DDP
   - Artnet
@@ -14,10 +16,8 @@ max_outputs: 17
 max_pixels: 12750
 max_voltage: 48
 output_connectors: Phoenix Plug
-outputs: Single
 pixel_types: async
 price: 189
-release_year: 2025
 standalone: null
 storage: null
 url: https://www.baldrickboard.com/en/boards/baldrick17

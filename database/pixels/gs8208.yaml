@@ -1,5 +1,6 @@
 name: GS8208
 status: active
+release_year: 2018
 creator: Genesis Systec
 notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version
   booted with onboard patterns - now eliminated
@@ -32,7 +33,6 @@ pwm_frequency: 8.0kHz
 pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively
   multiply 2kHz PWM to 8kHz
 quiescent_current: 2.5mA
-release_year: 2018
 technical_notes:
   - Built-in 8-bit to 12-bit gamma correction for smoother fades
   - Uses MPWM (multiplexed PWM) for effective 8kHz refresh rate

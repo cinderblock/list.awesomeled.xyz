@@ -1,4 +1,5 @@
 name: APA107
+release_year: 2017
 creator: Newstar LED Co.
 notes: Economic type of APA102, cheaper with lower PWM; produced by Newstar
 backup_data_line: false
@@ -20,7 +21,6 @@ pixel_data_size: 32 Bits/Pixel
 pixel_rate_max: 0.94 M Pixel / s
 pwm_frequency: 9.0kHz
 quiescent_current: 1.0mA
-release_year: 2017
 third_party_testing: null
 vcc_voltage: 5V
 wattage: 110.mW

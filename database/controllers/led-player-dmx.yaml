@@ -1,7 +1,9 @@
 name: LED Player DMX
 status: unknown
+release_year: null
 creator: Diamex
 notes: null
+outputs: null
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -11,10 +13,8 @@ max_outputs: 2
 max_pixels: 1024
 max_voltage: 5V
 output_connectors: Phoenix Screw
-outputs: null
 pixel_types: async
 price: 99
-release_year: null
 standalone: null
 storage: Yes
 url: https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen

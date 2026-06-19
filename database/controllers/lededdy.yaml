@@ -1,7 +1,9 @@
 name: LEDEddy
 status: unknown
+release_year: null
 creator: Diamex
 notes: null
+outputs: Single
 auxiliary_outputs: null
 buffered: false
 interfaces:
@@ -12,9 +14,7 @@ max_outputs: 1
 max_pixels: null
 max_voltage: 5V
 output_connectors: null
-outputs: Single
 price: null
-release_year: null
 standalone: true
 storage: SD
 url: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab

@@ -1,7 +1,9 @@
 name: K16000S
 status: active
+release_year: null
 creator: KulpLights, LLC
 notes: null
+outputs: Data, Ground
 auxiliary_outputs: null
 buffered: null
 interfaces:
@@ -12,10 +14,8 @@ max_outputs: 16
 max_pixels: 16384
 max_voltage: null
 output_connectors: Screw Terminal
-outputs: Data, Ground
 pixel_types: async
 price: 229
-release_year: null
 standalone: null
 storage: SD
 url: https://www.amazon.com/dp/B09XB4QTGT
