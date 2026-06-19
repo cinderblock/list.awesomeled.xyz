@@ -14,7 +14,7 @@ export async function loader() {
     zip.file(`${category.id}.csv`, csv);
   }
 
-  const content = await zip.generateAsync({ type: 'nodebuffer' });
+  const content = await zip.generateAsync({ type: 'arraybuffer' });
 
   return new Response(content, {
     headers: {
