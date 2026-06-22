@@ -6,151 +6,281 @@
   "required": ["name"],
   "additionalProperties": false,
   "properties": {
-    "name": { "type": "string" },
-    "status": {
-      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }]
+    "name": {
+      "type": "string"
     },
-    "release_year": { "type": ["integer", "null"], "description": "First date on datasheet or based on trends" },
+    "status": {
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "release_year": {
+      "type": ["integer", "null"],
+      "description": "First date on datasheet or based on trends"
+    },
     "spec_update_year": {
       "type": ["integer", "null"],
       "description": "Year specs were significantly updated (e.g., WS2812B PWM change in 2018)"
     },
     "creator": {
       "anyOf": [
-        { "type": ["string", "null"] },
+        {
+          "type": ["string", "null"]
+        },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "name": { "type": "string" },
-            "url": { "type": "string" },
-            "page": { "type": "string" }
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
           }
         }
       ],
       "description": "Original designer of the IC"
     },
-    "manufacturers": { "type": ["array", "null"], "items": { "type": "string" } },
+    "manufacturers": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
     "vendors": {
       "type": ["array", "null"],
       "items": {
         "anyOf": [
-          { "type": "string" },
+          {
+            "type": "string"
+          },
           {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "name": { "type": "string" },
-              "url": { "type": "string" },
-              "page": { "type": "string" }
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "page": {
+                "type": "string"
+              }
             }
           }
         ]
       }
     },
-    "notes": { "type": ["string", "null"] },
-
+    "notes": {
+      "type": ["string", "null"]
+    },
     "data": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "description": "Signalling / protocol characteristics",
       "properties": {
-        "type": { "type": ["string", "null"], "description": "Protocol family (WS2812, APA102, ...)" },
+        "type": {
+          "type": ["string", "null"],
+          "description": "Protocol family (WS2812, APA102, ...)"
+        },
         "clocked": {
           "type": ["boolean", "null"],
           "description": "True for protocols with a separate clock line (APA102-style)"
         },
-        "bitrate": { "type": ["string", "number", "null"], "description": "Max/fixed data bit rate" },
-        "bitrate_notes": { "type": ["string", "null"] },
-        "pixel_size_bits": { "type": ["string", "integer", "null"], "description": "Bits per pixel (24 RGB, 32 RGBW)" },
-        "pixel_size_notes": { "type": ["string", "null"] },
-        "pixel_rate_max": { "type": ["string", "null"], "description": "Max pixel frames/sec ignoring reset overhead" },
-        "backup_line": { "type": ["boolean", "null"], "description": "Has a failover/backup data wire" },
+        "bitrate": {
+          "type": ["string", "number", "null"],
+          "description": "Max/fixed data bit rate"
+        },
+        "bitrate_notes": {
+          "type": ["string", "null"]
+        },
+        "pixel_size_bits": {
+          "type": ["string", "integer", "null"],
+          "description": "Bits per pixel (24 RGB, 32 RGBW)"
+        },
+        "pixel_size_notes": {
+          "type": ["string", "null"]
+        },
+        "pixel_rate_max": {
+          "type": ["string", "null"],
+          "description": "Max pixel frames/sec ignoring reset overhead"
+        },
+        "backup_line": {
+          "type": ["boolean", "null"],
+          "description": "Has a failover/backup data wire"
+        },
         "max_per_string": {
           "type": ["integer", "string", "null"],
           "description": "Hardware limit on string length (not FPS related)"
         },
-        "max_per_string_notes": { "type": ["string", "null"] }
+        "max_per_string_notes": {
+          "type": ["string", "null"]
+        }
       }
     },
-
     "color": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "order": { "type": ["string", "null"], "description": "Channel order (RGB, GRB, RGBW, ...)" },
-        "brightness_bits": { "type": ["integer", "string", "null"], "description": "Depth per channel (8, 8+5, ...)" },
+        "order": {
+          "type": ["string", "null"],
+          "description": "Channel order (RGB, GRB, RGBW, ...)"
+        },
+        "brightness_bits": {
+          "type": ["integer", "string", "null"],
+          "description": "Depth per channel (8, 8+5, ...)"
+        },
         "brightness_method": {
           "type": ["string", "null"],
           "description": "pwm | current | global — how extra brightness bits work"
         },
-        "brightness_method_notes": { "type": ["string", "null"] },
-        "pwm_frequency": { "type": ["string", "number", "null"] },
-        "pwm_frequency_notes": { "type": ["string", "null"] }
+        "brightness_method_notes": {
+          "type": ["string", "null"]
+        },
+        "pwm_frequency": {
+          "type": ["string", "number", "null"]
+        },
+        "pwm_frequency_notes": {
+          "type": ["string", "null"]
+        }
       }
     },
-
     "electrical": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "led_voltage": { "type": ["string", "number", "null"] },
-        "led_voltage_notes": { "type": ["string", "null"] },
-        "vcc_voltage": { "type": ["string", "number", "null"] },
-        "vcc_voltage_notes": { "type": ["string", "null"] },
+        "led_voltage": {
+          "type": ["string", "number", "null"]
+        },
+        "led_voltage_notes": {
+          "type": ["string", "null"]
+        },
+        "vcc_voltage": {
+          "type": ["string", "number", "null"]
+        },
+        "vcc_voltage_notes": {
+          "type": ["string", "null"]
+        },
         "gpio": {
           "type": ["object", "null"],
           "additionalProperties": false,
           "properties": {
-            "min": { "type": ["string", "number", "null"], "description": "Lowest valid logic-high input" },
-            "min_notes": { "type": ["string", "null"] },
-            "max": { "type": ["string", "number", "null"], "description": "Max voltage at data pin" }
+            "min": {
+              "type": ["string", "number", "null"],
+              "description": "Lowest valid logic-high input"
+            },
+            "min_notes": {
+              "type": ["string", "null"]
+            },
+            "max": {
+              "type": ["string", "number", "null"],
+              "description": "Max voltage at data pin"
+            }
           }
         },
-        "channel_current": { "type": ["string", "number", "null"] },
-        "channel_current_notes": { "type": ["string", "null"] },
-        "quiescent_current": { "type": ["string", "number", "null"] },
-        "wattage": { "type": ["string", "number", "null"], "description": "Power per pixel" }
+        "channel_current": {
+          "type": ["string", "number", "null"]
+        },
+        "channel_current_notes": {
+          "type": ["string", "null"]
+        },
+        "quiescent_current": {
+          "type": ["string", "number", "null"]
+        },
+        "wattage": {
+          "type": ["string", "number", "null"],
+          "description": "Power per pixel"
+        }
       }
     },
-
     "physical": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "package_sizes": { "type": ["array", "null"], "items": { "type": "string" } },
-        "package_size": { "type": ["string", "null"] },
-        "pin_count": { "type": ["integer", "null"] }
+        "package_sizes": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "package_size": {
+          "type": ["string", "null"]
+        },
+        "pin_count": {
+          "type": ["integer", "null"]
+        }
       }
     },
-
     "variants": {
       "type": ["array", "null"],
       "items": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "name": { "type": "string" },
-          "suffix": { "type": "string" },
-          "differences": { "type": "string" }
+          "name": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          },
+          "differences": {
+            "type": "string"
+          }
         }
       }
     },
-
     "datasheet": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "url": { "type": ["string", "null"], "description": "Original/manufacturer datasheet URL (attribution)" },
-        "mirror": { "$ref": "common.json#/definitions/datasheet_mirror" },
-        "discrepancies": { "type": ["array", "null"], "items": { "type": "string" } },
-        "third_party_testing": { "type": ["string", "null"] }
+        "url": {
+          "type": ["string", "null"],
+          "description": "Original/manufacturer datasheet URL (attribution)"
+        },
+        "mirror": {
+          "$ref": "common.json#/definitions/datasheet_mirror"
+        },
+        "discrepancies": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "third_party_testing": {
+          "type": ["string", "null"]
+        }
       }
     },
-    "other_links": { "type": ["array", "null"], "items": { "type": "string" } },
-    "technical_notes": { "type": ["array", "null"], "items": { "type": "string" } },
-
-    "image": { "$ref": "common.json#/definitions/image" },
-    "images": { "$ref": "common.json#/definitions/images" }
+    "other_links": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "technical_notes": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    }
   }
 }

@@ -6,44 +6,86 @@
   "required": ["name"],
   "additionalProperties": false,
   "properties": {
-    "name": { "type": "string" },
+    "name": {
+      "type": "string"
+    },
     "status": {
-      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }, { "const": "beta" }]
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "const": "beta"
+        }
+      ]
     },
     "creator": {
       "anyOf": [
-        { "type": ["string", "null"] },
+        {
+          "type": ["string", "null"]
+        },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "name": { "type": "string" },
-            "url": { "type": "string" },
-            "page": { "type": "string" }
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
           }
         }
       ]
     },
-    "notes": { "type": ["string", "null"] },
-    "language": { "type": ["string", "null"], "description": "Programming language if programmatic" },
-    "platforms": { "type": ["array", "null"], "items": { "type": "string" } },
-
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "language": {
+      "type": ["string", "null"],
+      "description": "Programming language if programmatic"
+    },
+    "platforms": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
     "pricing": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "price": { "type": ["string", "number", "null"] },
-        "license_type": { "type": ["string", "null"], "description": "perpetual, subscription, donationware, ..." },
+        "price": {
+          "type": ["string", "number", "null"]
+        },
+        "license_type": {
+          "type": ["string", "null"],
+          "description": "perpetual, subscription, donationware, ..."
+        },
         "tiers": {
           "type": ["array", "null"],
           "items": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "tier": { "type": "string" },
-              "price": { "type": ["string", "number"] },
-              "features": { "type": "string" },
-              "limitations": { "type": ["string", "null"] }
+              "tier": {
+                "type": "string"
+              },
+              "price": {
+                "type": ["string", "number"]
+              },
+              "features": {
+                "type": "string"
+              },
+              "limitations": {
+                "type": ["string", "null"]
+              }
             }
           }
         },
@@ -51,35 +93,57 @@
           "type": ["object", "null"],
           "additionalProperties": false,
           "properties": {
-            "available": { "type": ["string", "boolean", "null"] },
-            "limitations": { "type": ["string", "null"] }
+            "available": {
+              "type": ["string", "boolean", "null"]
+            },
+            "limitations": {
+              "type": ["string", "null"]
+            }
           }
         }
       }
     },
-
     "capabilities": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "live": { "type": ["boolean", "null"], "description": "Live output to actual lights" },
-        "designer": { "type": ["boolean", "string", "null"], "description": "Design patterns offline" },
-        "visualizer": { "type": ["string", "null"], "description": "2D, 3D, both, or null" },
-        "programmatic": { "type": ["string", "boolean", "null"], "description": "User can write code to control I/O" }
+        "live": {
+          "type": ["boolean", "null"],
+          "description": "Live output to actual lights"
+        },
+        "designer": {
+          "type": ["boolean", "string", "null"],
+          "description": "Design patterns offline"
+        },
+        "visualizer": {
+          "type": ["string", "null"],
+          "description": "2D, 3D, both, or null"
+        },
+        "programmatic": {
+          "type": ["string", "boolean", "null"],
+          "description": "User can write code to control I/O"
+        }
       }
     },
-
     "inputs": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "video": { "type": ["string", "boolean", "null"] },
-        "audio": { "type": ["string", "boolean", "null"] },
-        "adc": { "type": ["string", "boolean", "null"], "description": "ADC input (audio, sensors)" },
-        "other": { "type": ["string", "null"] }
+        "video": {
+          "type": ["string", "boolean", "null"]
+        },
+        "audio": {
+          "type": ["string", "boolean", "null"]
+        },
+        "adc": {
+          "type": ["string", "boolean", "null"],
+          "description": "ADC input (audio, sensors)"
+        },
+        "other": {
+          "type": ["string", "null"]
+        }
       }
     },
-
     "outputs": {
       "type": ["object", "null"],
       "additionalProperties": false,
@@ -88,36 +152,77 @@
           "type": ["object", "null"],
           "additionalProperties": false,
           "properties": {
-            "artnet": { "type": ["string", "boolean", "null"] },
-            "sacn": { "type": ["string", "boolean", "null"] },
-            "dmx": { "type": ["string", "boolean", "null"] },
-            "kinet": { "type": ["string", "boolean", "null"] },
-            "ddp": { "type": ["string", "boolean", "null"] },
-            "opc": { "type": ["string", "boolean", "null"], "description": "Open Pixel Control" },
-            "spi": { "type": ["string", "boolean", "null"] }
+            "artnet": {
+              "type": ["string", "boolean", "null"]
+            },
+            "sacn": {
+              "type": ["string", "boolean", "null"]
+            },
+            "dmx": {
+              "type": ["string", "boolean", "null"]
+            },
+            "kinet": {
+              "type": ["string", "boolean", "null"]
+            },
+            "ddp": {
+              "type": ["string", "boolean", "null"]
+            },
+            "opc": {
+              "type": ["string", "boolean", "null"],
+              "description": "Open Pixel Control"
+            },
+            "spi": {
+              "type": ["string", "boolean", "null"]
+            }
           }
         },
-        "dmx_notes": { "type": ["string", "null"] },
-        "gpio": { "type": ["string", "boolean", "null"] },
-        "serial": { "type": ["string", "boolean", "null"] },
-        "serial_notes": { "type": ["string", "null"] },
-        "other": { "type": ["string", "null"] }
+        "dmx_notes": {
+          "type": ["string", "null"]
+        },
+        "gpio": {
+          "type": ["string", "boolean", "null"]
+        },
+        "serial": {
+          "type": ["string", "boolean", "null"]
+        },
+        "serial_notes": {
+          "type": ["string", "null"]
+        },
+        "other": {
+          "type": ["string", "null"]
+        }
       }
     },
-
-    "integrations": { "type": ["string", "null"], "description": "Controllers this software targets" },
-    "technical_notes": { "type": ["array", "null"], "items": { "type": "string" } },
-
+    "integrations": {
+      "type": ["string", "null"],
+      "description": "Controllers this software targets"
+    },
+    "technical_notes": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
     "links": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "url": { "type": ["string", "null"] },
-        "mirror": { "type": ["string", "null"] }
+        "url": {
+          "type": ["string", "null"]
+        },
+        "mirror": {
+          "type": ["string", "null"]
+        }
       }
     },
-
-    "image": { "$ref": "common.json#/definitions/image" },
-    "images": { "$ref": "common.json#/definitions/images" }
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    }
   }
 }

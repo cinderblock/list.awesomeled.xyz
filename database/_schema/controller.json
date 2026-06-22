@@ -11,7 +11,14 @@
       "description": "Product name"
     },
     "status": {
-      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }],
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ],
       "description": "active, discontinued, end-of-life, limited, unknown, or null if unfilled"
     },
     "release_year": {
@@ -20,15 +27,27 @@
     },
     "creator": {
       "oneOf": [
-        { "type": "string" },
-        { "type": "null" },
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "name": { "type": "string" },
-            "url": { "type": "string", "format": "uri" },
-            "page": { "type": "string", "format": "uri" }
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "page": {
+              "type": "string",
+              "format": "uri"
+            }
           },
           "required": ["name"]
         }
@@ -37,22 +56,36 @@
     },
     "manufacturers": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Manufacturers that produce this item"
     },
     "vendors": {
       "type": "array",
       "items": {
         "oneOf": [
-          { "type": "string" },
+          {
+            "type": "string"
+          },
           {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "name": { "type": "string" },
-              "url": { "type": "string", "format": "uri" },
-              "page": { "type": "string", "format": "uri" },
-              "warranty": { "type": "string" }
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "page": {
+                "type": "string",
+                "format": "uri"
+              },
+              "warranty": {
+                "type": "string"
+              }
             },
             "required": ["name"]
           }
@@ -68,10 +101,22 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "IC": { "type": "string", "description": "Microcontroller part number" },
-        "family": { "type": "string", "description": "Processor family (STM32, ESP32, etc.)" },
-        "clock": { "type": "number", "description": "Clock speed in Hz" },
-        "flash": { "type": "integer", "description": "Flash memory in bytes" }
+        "IC": {
+          "type": "string",
+          "description": "Microcontroller part number"
+        },
+        "family": {
+          "type": "string",
+          "description": "Processor family (STM32, ESP32, etc.)"
+        },
+        "clock": {
+          "type": "number",
+          "description": "Clock speed in Hz"
+        },
+        "flash": {
+          "type": "integer",
+          "description": "Flash memory in bytes"
+        }
       },
       "description": "Microcontroller/processor details"
     },
@@ -83,17 +128,30 @@
           "type": "object",
           "additionalProperties": {
             "oneOf": [
-              { "type": "string" },
-              { "type": "boolean" },
-              { "type": "integer" },
-              { "type": "array", "items": { "type": "string" } }
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
             ]
           },
           "description": "Physical interfaces (Ethernet, Wi-Fi, USB, Bluetooth, buttons, etc.)"
         },
         "protocols": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Data protocols (Art-Net, sACN, etc.)"
         },
         "standalone": {
@@ -112,7 +170,9 @@
       "properties": {
         "connector": {
           "oneOf": [
-            { "type": "string" },
+            {
+              "type": "string"
+            },
             {
               "type": "object",
               "additionalProperties": false,
@@ -121,7 +181,9 @@
                   "type": "string",
                   "description": "Reference to connector in connectors database"
                 },
-                "pins": { "type": "integer" }
+                "pins": {
+                  "type": "integer"
+                }
               }
             }
           ],
@@ -140,14 +202,23 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "IC": { "type": ["string", "null"], "description": "Buffer/driver IC" },
-            "replaceable": { "type": "boolean" },
-            "impedance": { "type": "number" },
+            "IC": {
+              "type": ["string", "null"],
+              "description": "Buffer/driver IC"
+            },
+            "replaceable": {
+              "type": "boolean"
+            },
+            "impedance": {
+              "type": "number"
+            },
             "buffered": {
               "type": "boolean",
               "description": "Outputs from buffer driver (true) or direct from CPU (false)"
             },
-            "notes": { "type": "string" }
+            "notes": {
+              "type": "string"
+            }
           },
           "description": "Data line driver details"
         },
@@ -155,7 +226,10 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "max": { "type": "number", "description": "Maximum current per output in amps" }
+            "max": {
+              "type": "number",
+              "description": "Maximum current per output in amps"
+            }
           }
         },
         "differential": {
@@ -166,12 +240,17 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "max_per_output": { "type": "integer", "description": "Maximum pixels per output" }
+            "max_per_output": {
+              "type": "integer",
+              "description": "Maximum pixels per output"
+            }
           }
         },
         "protocols": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Supported pixel protocols (WS2812B, SK6812, APA102, etc.)"
         },
         "clocked": {
@@ -181,7 +260,9 @@
         },
         "auxiliary": {
           "type": "object",
-          "additionalProperties": { "type": "integer" },
+          "additionalProperties": {
+            "type": "integer"
+          },
           "description": "Additional outputs (DMX512, TTL, Servo, etc.) with counts"
         }
       }
@@ -192,16 +273,28 @@
       "properties": {
         "connector": {
           "oneOf": [
-            { "type": "string" },
+            {
+              "type": "string"
+            },
             {
               "type": "object",
               "additionalProperties": false,
               "properties": {
-                "oem": { "type": "string" },
-                "type": { "type": "string" },
-                "pitch": { "type": "number" },
-                "pins": { "type": "integer" },
-                "count": { "type": "integer" }
+                "oem": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "pitch": {
+                  "type": "number"
+                },
+                "pins": {
+                  "type": "integer"
+                },
+                "count": {
+                  "type": "integer"
+                }
               }
             }
           ],
@@ -211,15 +304,22 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "max": { "type": "number", "description": "Maximum current in amps" }
+            "max": {
+              "type": "number",
+              "description": "Maximum current in amps"
+            }
           }
         },
         "voltage": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "max": { "type": "number" },
-            "min": { "type": "number" }
+            "max": {
+              "type": "number"
+            },
+            "min": {
+              "type": "number"
+            }
           }
         }
       }
@@ -228,12 +328,28 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "material": { "type": "string" },
-        "color": { "type": "string" },
-        "dimensions": { "type": "string" },
-        "mounting": { "type": "string" },
+        "material": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "string"
+        },
+        "mounting": {
+          "type": "string"
+        },
         "waterproof": {
-          "oneOf": [{ "type": "boolean" }, { "type": "string", "pattern": "^IP[0-9]{2}$" }],
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "pattern": "^IP[0-9]{2}$"
+            }
+          ],
           "description": "IP rating or false if not waterproof"
         }
       }
@@ -242,21 +358,33 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "fps": { "type": "integer", "description": "Maximum refresh rate" },
-        "size": { "type": "integer", "description": "Maximum data size in bytes" },
+        "fps": {
+          "type": "integer",
+          "description": "Maximum refresh rate"
+        },
+        "size": {
+          "type": "integer",
+          "description": "Maximum data size in bytes"
+        },
         "formats": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Supported color formats (RGB, RGBW, etc.)"
         },
         "bit_depths": {
           "type": "array",
-          "items": { "type": "integer" },
+          "items": {
+            "type": "integer"
+          },
           "description": "Supported bit depths"
         },
         "storage": {
           "oneOf": [
-            { "type": "null" },
+            {
+              "type": "null"
+            },
             {
               "type": "array",
               "items": {
@@ -267,10 +395,15 @@
                     "type": "string",
                     "description": "Storage type (SD, uSD, Flash, etc.)"
                   },
-                  "max_size": { "type": "integer", "description": "Maximum size in GB" },
+                  "max_size": {
+                    "type": "integer",
+                    "description": "Maximum size in GB"
+                  },
                   "features": {
                     "type": "array",
-                    "items": { "type": "string" }
+                    "items": {
+                      "type": "string"
+                    }
                   }
                 },
                 "required": ["type"]
@@ -282,25 +415,40 @@
     },
     "features": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Notable features"
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
     },
     "images": {
       "$ref": "common.json#/definitions/images"
     },
     "price": {
       "oneOf": [
-        { "type": "number" },
-        { "type": "string" },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
         {
           "type": "array",
           "items": {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "name": { "type": "string" },
-              "price": { "type": "number" },
-              "pixels": { "type": "integer" }
+              "name": {
+                "type": "string"
+              },
+              "price": {
+                "type": "number"
+              },
+              "pixels": {
+                "type": "integer"
+              }
             },
             "required": ["name", "price"]
           }
@@ -310,12 +458,17 @@
     },
     "technical_notes": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Detailed technical notes"
     },
     "wled_compatible": {
       "type": "boolean",
       "description": "WLED firmware based or capable of running WLED"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
     }
   }
 }

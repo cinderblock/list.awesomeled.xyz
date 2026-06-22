@@ -6,74 +6,134 @@
   "required": ["name"],
   "additionalProperties": false,
   "properties": {
-    "name": { "type": "string" },
-    "status": {
-      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }]
+    "name": {
+      "type": "string"
     },
-    "since": { "type": ["integer", "null"], "description": "Year the system was introduced" },
+    "status": {
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "since": {
+      "type": ["integer", "null"],
+      "description": "Year the system was introduced"
+    },
     "creator": {
       "anyOf": [
-        { "type": ["string", "null"] },
+        {
+          "type": ["string", "null"]
+        },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "name": { "type": "string" },
-            "url": { "type": "string" },
-            "page": { "type": "string" }
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
           }
         }
       ]
     },
-    "manufacturers": { "type": ["array", "null"], "items": { "type": "string" } },
+    "manufacturers": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
     "vendors": {
       "type": ["array", "null"],
       "items": {
         "anyOf": [
-          { "type": "string" },
+          {
+            "type": "string"
+          },
           {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "name": { "type": "string" },
-              "url": { "type": "string" },
-              "page": { "type": "string" }
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "page": {
+                "type": "string"
+              }
             }
           }
         ]
       }
     },
-    "notes": { "type": ["string", "null"] },
-    "target_market": { "type": ["string", "null"] },
-    "core_tech": { "type": ["string", "null"] },
-
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "target_market": {
+      "type": ["string", "null"]
+    },
+    "core_tech": {
+      "type": ["string", "null"]
+    },
     "specs": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "pixels_per_run": { "type": ["integer", "null"] },
-        "dimming_resolution": { "type": ["string", "null"] },
-        "color_type": { "type": ["string", "null"], "description": "RGB, RGBW, WW, ..." },
-        "dedicated_psu": { "type": ["boolean", "null"] }
+        "pixels_per_run": {
+          "type": ["integer", "null"]
+        },
+        "dimming_resolution": {
+          "type": ["string", "null"]
+        },
+        "color_type": {
+          "type": ["string", "null"],
+          "description": "RGB, RGBW, WW, ..."
+        },
+        "dedicated_psu": {
+          "type": ["boolean", "null"]
+        }
       }
     },
     "pricing": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "price_range": { "type": ["string", "null"], "description": "$ to $$$$$$" },
-        "online_pricing": { "type": ["string", "null"] }
+        "price_range": {
+          "type": ["string", "null"],
+          "description": "$ to $$$$$$"
+        },
+        "online_pricing": {
+          "type": ["string", "null"]
+        }
       }
     },
     "links": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "product": { "type": ["string", "null"] }
+        "product": {
+          "type": ["string", "null"]
+        }
       }
     },
-
-    "image": { "$ref": "common.json#/definitions/image" },
-    "images": { "$ref": "common.json#/definitions/images" }
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    }
   }
 }

@@ -6,66 +6,122 @@
   "required": ["name"],
   "additionalProperties": false,
   "properties": {
-    "name": { "type": "string" },
+    "name": {
+      "type": "string"
+    },
     "status": {
-      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }]
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "creator": {
       "anyOf": [
-        { "type": ["string", "null"] },
+        {
+          "type": ["string", "null"]
+        },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "name": { "type": "string" },
-            "url": { "type": "string" },
-            "page": { "type": "string" }
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
           }
         }
       ]
     },
-    "manufacturers": { "type": ["array", "null"], "items": { "type": "string" } },
+    "manufacturers": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
     "vendors": {
       "type": ["array", "null"],
       "items": {
         "anyOf": [
-          { "type": "string" },
+          {
+            "type": "string"
+          },
           {
             "type": "object",
             "additionalProperties": false,
             "properties": {
-              "name": { "type": "string" },
-              "url": { "type": "string" },
-              "page": { "type": "string" }
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "page": {
+                "type": "string"
+              }
             }
           }
         ]
       }
     },
-    "notes": { "type": ["string", "null"] },
-    "price": { "type": ["string", "number", "null"] },
-    "diy_or_ots": { "type": ["string", "null"] },
-
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "price": {
+      "type": ["string", "number", "null"]
+    },
+    "diy_or_ots": {
+      "type": ["string", "null"]
+    },
     "outputs": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "max_channels": { "type": ["integer", "null"] },
-        "pixel_types": { "type": ["string", "null"] },
-        "connectors": { "type": ["string", "null"] },
-        "description": { "type": ["string", "null"] }
+        "max_channels": {
+          "type": ["integer", "null"]
+        },
+        "pixel_types": {
+          "type": ["string", "null"]
+        },
+        "connectors": {
+          "type": ["string", "null"]
+        },
+        "description": {
+          "type": ["string", "null"]
+        }
       }
     },
     "links": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "product": { "type": ["string", "null"] }
+        "product": {
+          "type": ["string", "null"]
+        }
       }
     },
-    "related_connectors": { "type": ["array", "null"], "items": { "type": "string" } },
-
-    "image": { "$ref": "common.json#/definitions/image" },
-    "images": { "$ref": "common.json#/definitions/images" }
+    "related_connectors": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    }
   }
 }

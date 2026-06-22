@@ -6,57 +6,107 @@
   "required": ["name"],
   "additionalProperties": false,
   "properties": {
-    "name": { "type": "string" },
+    "name": {
+      "type": "string"
+    },
     "status": {
-      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }],
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ],
       "description": "active = maintained; end-of-life = archived/unmaintained"
     },
     "creator": {
       "anyOf": [
-        { "type": ["string", "null"] },
+        {
+          "type": ["string", "null"]
+        },
         {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "name": { "type": "string" },
-            "url": { "type": "string" },
-            "page": { "type": "string" }
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
           }
         }
       ]
     },
-    "notes": { "type": ["string", "null"] },
-    "language": { "type": ["string", "null"], "description": "Primary implementation language (C++, Python, ...)" },
-    "license": { "type": ["string", "null"], "description": "SPDX-style id (MIT, GPL-3.0, ...)" },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "language": {
+      "type": ["string", "null"],
+      "description": "Primary implementation language (C++, Python, ...)"
+    },
+    "license": {
+      "type": ["string", "null"],
+      "description": "SPDX-style id (MIT, GPL-3.0, ...)"
+    },
     "platforms": {
       "type": ["array", "null"],
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Supported platforms (Arduino, ESP32, Teensy, Raspberry Pi, Linux, ...)"
     },
-    "hardware": { "type": ["string", "null"], "description": "Freeform supported-hardware summary" },
-    "features": { "type": ["string", "null"] },
+    "hardware": {
+      "type": ["string", "null"],
+      "description": "Freeform supported-hardware summary"
+    },
+    "features": {
+      "type": ["string", "null"]
+    },
     "supported_ics": {
       "type": ["array", "null"],
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Pixel IC / protocol names the library can drive"
     },
     "related_pixel_ics": {
       "type": ["array", "null"],
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "IDs of pixel-ics entries this library supports"
     },
-
     "links": {
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "repo": { "type": ["string", "null"] },
-        "youtube": { "type": ["string", "null"] }
+        "repo": {
+          "type": ["string", "null"]
+        },
+        "youtube": {
+          "type": ["string", "null"]
+        }
       }
     },
-    "instructional_resources": { "type": ["array", "null"], "items": { "type": "string" } },
-
-    "image": { "$ref": "common.json#/definitions/image" },
-    "images": { "$ref": "common.json#/definitions/images" }
+    "instructional_resources": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    }
   }
 }

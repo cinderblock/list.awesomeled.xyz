@@ -44,13 +44,34 @@
       "additionalProperties": false,
       "required": ["url", "sha256", "retrieved", "source"],
       "properties": {
-        "url": { "type": "string", "format": "uri", "description": "Public R2 URL of the mirrored PDF" },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Public R2 URL of the mirrored PDF"
+        },
         "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
         "retrieved": { "type": "string", "format": "date" },
         "source": {
           "type": "string",
           "format": "uri",
           "description": "datasheet.url at fetch time; a changed source triggers re-mirroring"
+        }
+      }
+    },
+    "related": {
+      "type": ["array", "null"],
+      "description": "Related products (replacement, predecessor, variant, accessory, etc.). For a discontinued product, a `replacement` item points at its successor.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "name"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["replacement", "predecessor", "variant", "accessory", "related"]
+          },
+          "name": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
         }
       }
     }
