@@ -3,8 +3,8 @@ status: active
 creator:
   name: Bong69
   page: https://www.tindie.com/products/bong69/8-port-led-distro
-core:
-  family: ESP32
+vendors:
+  - name: Wasatch Lights
 inputs:
   physical:
     Ethernet: true # RJ45 onboard
@@ -20,9 +20,15 @@ outputs:
     GPIO: 7 # GPIO17, 32, 33, 34, 35, 36, 39 broken out for buttons/mics/sensors
 power:
   voltage:
-    max: 24
+    min: 12 # V4 (current production); V3 (discontinued) was 5-24V
+    max: 48
+core:
+  family: ESP32
 features:
   - Runs WLED (pre-installed) or ESPixelStick firmware
   - Pluggable Phoenix connectors for outputs
-price: 55
+price: 65
+technical_notes:
+  - Open hardware; design files and WLED/ESP32 firmware at https://github.com/bobko69/8PortLEDDistro
+  - 'Versions: V4 (current) accepts 12-48V; V3 (discontinued) accepted 5-24V'
 wled_compatible: true

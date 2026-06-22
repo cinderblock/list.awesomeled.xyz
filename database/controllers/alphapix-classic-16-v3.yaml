@@ -1,5 +1,5 @@
 name: AlphaPix Classic 16 V3
-status: unknown
+status: active
 creator:
   name: HolidayCoro
   url: https://www.holidaycoro.com
@@ -27,4 +27,7 @@ power:
     max: 24
   current:
     max: 60
-price: 175
+features:
+  - Onboard LCD display for status and configuration
+image: alphapix-classic-16-v3.webp
+price: 204.99

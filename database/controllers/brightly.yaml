@@ -9,6 +9,11 @@ inputs:
   physical:
     Ethernet: true
     SD Card: true
+  protocols:
+    - Art-Net
+    - sACN
+    - OPC
+    - MadLED
   standalone: true
 outputs:
   connector: Screw Terminal & RJ45
@@ -23,6 +28,7 @@ outputs:
     DMX512: 1
 power:
   voltage:
+    min: 5 # compatible with 5V & 12V LEDs
     max: 12
   current:
     max: 40
