@@ -92,6 +92,33 @@
         }
       }
     },
+    "dead_links": {
+      "type": ["array", "null"],
+      "description": "URLs elsewhere in this entry that no longer work. Detail pages keep the original for attribution but link to `archive` instead — or to the newest Wayback Machine capture when `archive` is omitted. Set `archive` explicitly when the domain changed hands and the latest capture shows the wrong site.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url"],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The dead URL, exactly as it appears elsewhere in this entry"
+          },
+          "archive": {
+            "type": "string",
+            "format": "uri",
+            "description": "Curated archived copy (e.g. a Wayback capture from before the domain changed hands)"
+          },
+          "checked": {
+            "type": "string",
+            "format": "date",
+            "description": "When the link was last confirmed dead"
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    },
     "related": {
       "type": ["array", "null"],
       "description": "Related products (replacement, predecessor, variant, accessory, etc.). For a discontinued product, a `replacement` item points at its successor. Declare each relationship on one side only; detail pages derive the reverse direction automatically.",

@@ -9,7 +9,16 @@ import {
 } from '~/lib/data';
 import { LocalDate } from '~/components/ui/LocalDate';
 import { getColumnsForCategory } from '~/lib/columns';
-import { FileText, ShoppingCart, Youtube, Globe, Github, X } from 'lucide-react';
+import {
+  FileText,
+  ShoppingCart,
+  Youtube,
+  Globe,
+  Github,
+  X,
+  Archive,
+  AlertTriangle,
+} from 'lucide-react';
 import { useState } from 'react';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
@@ -86,17 +95,57 @@ interface EntryLink {
   url: string;
   label: string;
   icon: React.ComponentType<{ size?: number }>;
+  /** Set when the original URL is dead and `url` points at an archived copy */
+  deadOriginal?: string;
+}
+
+// One item of an entry's `dead_links` array (common.json#/definitions/dead_links)
+interface DeadLink {
+  url: string;
+  archive?: string;
+  notes?: string;
+}
+
+// Newest Wayback Machine capture (their server redirects to it)
+function waybackUrl(url: string): string {
+  return `https://web.archive.org/web/${url}`;
+}
+
+function getDeadLinks(entry: Record<string, unknown>): Map<string, DeadLink> {
+  const map = new Map<string, DeadLink>();
+  if (Array.isArray(entry.dead_links)) {
+    for (const item of entry.dead_links) {
+      if (item && typeof item === 'object' && typeof (item as DeadLink).url === 'string') {
+        map.set((item as DeadLink).url, item as DeadLink);
+      }
+    }
+  }
+  return map;
 }
 
 // Collect external links from the rich nested schema (links.*, creator.page,
-// datasheet.url) plus any legacy top-level url / *_url fields.
-function getEntryLinks(entry: Record<string, unknown>): EntryLink[] {
+// datasheet.url) plus any legacy top-level url / *_url fields. Links listed in
+// `dead_links` are swapped for their archived copies.
+function getEntryLinks(
+  entry: Record<string, unknown>,
+  deadLinks: Map<string, DeadLink>
+): EntryLink[] {
   const out: EntryLink[] = [];
   const seen = new Set<string>();
   const add = (url: unknown, label: string, icon: EntryLink['icon']) => {
     if (typeof url !== 'string' || !url.startsWith('http') || seen.has(url)) return;
     seen.add(url);
-    out.push({ url, label, icon });
+    const dead = deadLinks.get(url);
+    if (dead) {
+      out.push({
+        url: dead.archive ?? waybackUrl(url),
+        label: `${label} (archived)`,
+        icon: Archive,
+        deadOriginal: url,
+      });
+    } else {
+      out.push({ url, label, icon });
+    }
   };
 
   const creator = entry.creator as { page?: string; url?: string } | undefined;
@@ -218,6 +267,7 @@ const SKIP_KEYS = new Set([
   'status',
   'links',
   'related', // rendered as the Related Products section
+  'dead_links', // applied to the links they describe, plus a hero callout
 ]);
 
 function humanize(key: string): string {
@@ -238,7 +288,8 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   const { category, entry, reverseLinks, relatedProducts, relatedBacklinks } = loaderData;
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
-  const links = getEntryLinks(entry);
+  const deadLinks = getDeadLinks(entry);
+  const links = getEntryLinks(entry, deadLinks);
   const [modalImage, setModalImage] = useState<string | null>(null);
 
   const status = typeof entry.status === 'string' ? entry.status : null;
@@ -339,25 +390,42 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
             {status && <StatusBadge status={status} />}
           </div>
           {entry.creator ? (
-            <CreatorLine creator={entry.creator} categoryPath={category.path} />
+            <CreatorLine
+              creator={entry.creator}
+              categoryPath={category.path}
+              deadLinks={deadLinks}
+            />
           ) : null}
           <FeatureBadges entry={entry} />
           {links.length > 0 && (
             <div className="entry-links">
-              {links.map(({ url, label, icon: Icon }) => (
+              {links.map(({ url, label, icon: Icon, deadOriginal }) => (
                 <a
                   key={url}
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="entry-link"
-                  title={url}
+                  title={
+                    deadOriginal
+                      ? `Original link no longer works (${deadOriginal}) — showing an archived copy`
+                      : url
+                  }
                 >
                   <Icon size={15} />
                   {label}
                 </a>
               ))}
             </div>
+          )}
+          {deadLinks.size > 0 && (
+            <p className="entry-dead-note">
+              <AlertTriangle size={13} />
+              {deadLinks.size === 1
+                ? 'An original link for this entry no longer works'
+                : 'Some original links for this entry no longer work'}
+              {' — archived copies from the Wayback Machine are linked instead.'}
+            </p>
           )}
         </div>
       </header>
@@ -577,15 +645,35 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-function CreatorLine({ creator, categoryPath }: { creator: unknown; categoryPath: string }) {
+function CreatorLine({
+  creator,
+  categoryPath,
+  deadLinks,
+}: {
+  creator: unknown;
+  categoryPath: string;
+  deadLinks: Map<string, DeadLink>;
+}) {
   if (creator && typeof creator === 'object') {
     const c = creator as { name?: string; url?: string; page?: string };
-    const href = c.page || c.url;
+    let href = c.page || c.url;
+    let title: string | undefined;
+    if (href && deadLinks.has(href)) {
+      const dead = deadLinks.get(href)!;
+      title = `Original link no longer works (${href}) — showing an archived copy`;
+      href = dead.archive ?? waybackUrl(href);
+    }
     return (
       <p className="page-description">
         by{' '}
         {href ? (
-          <a href={href} target="_blank" rel="noopener noreferrer" className="entry-creator-link">
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="entry-creator-link"
+            title={title}
+          >
             {c.name}
           </a>
         ) : (

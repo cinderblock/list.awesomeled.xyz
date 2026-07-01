@@ -339,6 +339,18 @@ a.entry-image-credit:hover {
   font-size: 0.875rem;
 }
 
+.entry-dead-note {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  color: #d97706;
+}
+.entry-dead-note svg {
+  flex-shrink: 0;
+}
+
 .entry-related {
   display: flex;
   flex-wrap: wrap;

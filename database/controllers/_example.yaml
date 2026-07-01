@@ -200,7 +200,9 @@ data:
 name: Example Legacy Controller
 status: discontinued
 release_year: 2018
-creator: Defunct Company
+creator:
+  name: Defunct Company
+  page: https://defunct-company.example/legacy-controller # dead; see dead_links
 manufacturers:
   - Defunct Company
 notes: No longer manufactured, limited firmware support
@@ -226,6 +228,14 @@ case:
 
 data:
   storage: null
+
+dead_links:
+  # URLs elsewhere in this entry that no longer work. Pages keep the original
+  # for attribution but link to `archive` — or, when omitted, to the newest
+  # Wayback Machine capture. Curate `archive` when the domain changed hands.
+  - url: https://defunct-company.example/legacy-controller
+    archive: https://web.archive.org/web/2019/https://defunct-company.example/legacy-controller
+    checked: 2026-07-01
 
 related:
   # Declare relationships on one side only; the other entry's page derives the
