@@ -26,6 +26,9 @@ physical:
     - '2427'
   package_size: 1515,2427
   pin_count: 4
+related:
+  - type: variant
+    ref: pixels/sk6812
 technical_notes:
   - 24-bit color (8 bits per channel) over a single-wire unipolar RZ protocol
   - NeoPixel-compatible; sold by Adafruit as nano (2427) and other micro packages

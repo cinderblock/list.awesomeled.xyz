@@ -13,3 +13,6 @@ other_links:
   - SK6813 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: '5050'
+related:
+  - type: variant
+    ref: pixels/sk6813

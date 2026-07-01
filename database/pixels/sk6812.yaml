@@ -40,6 +40,9 @@ physical:
     - '2040'
   package_size: 5050,3535,2040
   pin_count: 4
+related:
+  - type: related
+    ref: pixels/ws2812
 technical_notes:
   - PWM frequency tested at 4.7kHz despite 1.2kHz datasheet claim
   - Available in RGB and RGBW variants
