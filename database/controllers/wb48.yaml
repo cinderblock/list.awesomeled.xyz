@@ -29,6 +29,10 @@ features:
   - Test button
   - Reverse polarity protection
   - Voltage sensors
+images:
+  - file: wb48.webp
+    source: https://wallyslights.com/products/wallys-lights-wb48-controller
+    credit: Wally's Lights
 price: 159
 technical_notes:
   - Up to 800 pixels per port at 40 fps, 1400 per port at 20 fps
