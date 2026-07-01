@@ -96,7 +96,7 @@
           "description": "Number of output channels"
         },
         "bitrate": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/frequency"
         },
         "bitrate_notes": {
           "type": ["string", "null"]
@@ -139,7 +139,7 @@
           "description": "pwm | current | global"
         },
         "pwm_frequency": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/frequency"
         },
         "pwm_frequency_notes": {
           "type": ["string", "null"]
@@ -151,15 +151,15 @@
       "additionalProperties": false,
       "properties": {
         "output_voltage": {
-          "type": ["string", "number", "null"],
-          "description": "Output voltage to LEDs (Vds max)"
+          "description": "Output voltage to LEDs (Vds max)",
+          "$ref": "common.json#/definitions/voltage"
         },
         "output_voltage_notes": {
           "type": ["string", "null"]
         },
         "supply_voltage": {
-          "type": ["string", "number", "null"],
-          "description": "IC supply voltage (VCC)"
+          "description": "IC supply voltage (VCC)",
+          "$ref": "common.json#/definitions/voltage"
         },
         "supply_voltage_notes": {
           "type": ["string", "null"]
@@ -169,10 +169,10 @@
           "additionalProperties": false,
           "properties": {
             "min": {
-              "type": ["string", "number", "null"]
+              "$ref": "common.json#/definitions/voltage"
             },
             "max": {
-              "type": ["string", "number", "null"]
+              "$ref": "common.json#/definitions/voltage"
             },
             "notes": {
               "type": ["string", "null"]
@@ -180,8 +180,8 @@
           }
         },
         "max_current": {
-          "type": ["string", "number", "null"],
-          "description": "Max current per channel"
+          "description": "Max current per channel",
+          "$ref": "common.json#/definitions/current"
         },
         "max_current_notes": {
           "type": ["string", "null"]
@@ -193,7 +193,7 @@
           "type": ["string", "null"]
         },
         "quiescent_current": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/current"
         }
       }
     },

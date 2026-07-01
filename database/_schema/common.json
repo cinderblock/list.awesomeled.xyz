@@ -61,12 +61,36 @@
       ]
     },
     "voltage": {
-      "oneOf": [{ "type": "number" }, { "type": "string", "pattern": "^[0-9]+\\.?[0-9]*\\s*V?$" }]
+      "description": "Bare number = volts; or a strict unit string ('5V', '3.3 V', '~5V') or range ('3-7.5V'). Parsed by app/lib/quantity.ts.",
+      "oneOf": [
+        { "type": "null" },
+        { "type": "number" },
+        { "type": "string", "pattern": "^~?\\d+(\\.\\d+)?\\s?(mV|V)$" },
+        { "type": "string", "pattern": "^\\d+(\\.\\d+)?-\\d+(\\.\\d+)?\\s?V$" }
+      ]
     },
     "current": {
+      "description": "Bare number = amps; or a strict unit string ('22mA', '500uA', '~5mA'). Parsed by app/lib/quantity.ts.",
       "oneOf": [
+        { "type": "null" },
         { "type": "number" },
-        { "type": "string", "pattern": "^[0-9]+\\.?[0-9]*\\s*(m?A)?$" }
+        { "type": "string", "pattern": "^~?\\d+(\\.\\d+)?\\s?([µu]A|mA|A)$" }
+      ]
+    },
+    "frequency": {
+      "description": "Bare number = hertz; or a strict unit string ('800kHz', '30MHz', '286Hz'). Parsed by app/lib/quantity.ts.",
+      "oneOf": [
+        { "type": "null" },
+        { "type": "number" },
+        { "type": "string", "pattern": "^~?\\d+(\\.\\d+)?\\s?(Hz|kHz|MHz|GHz)$" }
+      ]
+    },
+    "power": {
+      "description": "Bare number = watts; or a strict unit string ('110mW', '5W'). Parsed by app/lib/quantity.ts.",
+      "oneOf": [
+        { "type": "null" },
+        { "type": "number" },
+        { "type": "string", "pattern": "^~?\\d+(\\.\\d+)?\\s?(mW|W)$" }
       ]
     },
     "year": {

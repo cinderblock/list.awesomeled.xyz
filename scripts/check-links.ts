@@ -140,7 +140,9 @@ async function main() {
 
       const known = new Set<string>(
         Array.isArray(data.dead_links)
-          ? data.dead_links.map((d: { url?: string }) => d?.url).filter(Boolean)
+          ? data.dead_links
+              .map((d: { url?: string }) => d?.url)
+              .filter((u: string | undefined): u is string => typeof u === 'string')
           : []
       );
       const { dead_links: _dead, ...rest } = data;

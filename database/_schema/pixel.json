@@ -98,8 +98,8 @@
           "description": "True for protocols with a separate clock line (APA102-style)"
         },
         "bitrate": {
-          "type": ["string", "number", "null"],
-          "description": "Max/fixed data bit rate"
+          "description": "Max/fixed data bit rate",
+          "$ref": "common.json#/definitions/frequency"
         },
         "bitrate_notes": {
           "type": ["string", "null"]
@@ -148,7 +148,7 @@
           "type": ["string", "null"]
         },
         "pwm_frequency": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/frequency"
         },
         "pwm_frequency_notes": {
           "type": ["string", "null"]
@@ -160,13 +160,13 @@
       "additionalProperties": false,
       "properties": {
         "led_voltage": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/voltage"
         },
         "led_voltage_notes": {
           "type": ["string", "null"]
         },
         "vcc_voltage": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/voltage"
         },
         "vcc_voltage_notes": {
           "type": ["string", "null"]
@@ -176,30 +176,30 @@
           "additionalProperties": false,
           "properties": {
             "min": {
-              "type": ["string", "number", "null"],
-              "description": "Lowest valid logic-high input"
+              "description": "Lowest valid logic-high input",
+              "$ref": "common.json#/definitions/voltage"
             },
             "min_notes": {
               "type": ["string", "null"]
             },
             "max": {
-              "type": ["string", "number", "null"],
-              "description": "Max voltage at data pin"
+              "description": "Max voltage at data pin",
+              "$ref": "common.json#/definitions/voltage"
             }
           }
         },
         "channel_current": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/current"
         },
         "channel_current_notes": {
           "type": ["string", "null"]
         },
         "quiescent_current": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/current"
         },
         "wattage": {
-          "type": ["string", "number", "null"],
-          "description": "Power per pixel"
+          "description": "Power per pixel",
+          "$ref": "common.json#/definitions/power"
         }
       }
     },

@@ -631,7 +631,7 @@ export function DataTable({
       const filterValue = urlFilters[col.key];
       if (filterValue && isFilterActive(filterValue) && col.filterConfig) {
         result = result.filter((item) =>
-          applyFilter(item, col.key, col.filterConfig!, filterValue)
+          applyFilter(item, col.key, col.filterConfig!, filterValue, col.sortValue)
         );
       }
     }

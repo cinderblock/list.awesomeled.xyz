@@ -6,6 +6,11 @@ import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
 import { LocalDate } from '~/components/ui/LocalDate';
 import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
+import { quantitySortValue } from './quantity';
+
+const sortVoltage = quantitySortValue('voltage');
+const sortCurrent = quantitySortValue('current');
+const sortFrequency = quantitySortValue('frequency');
 
 // Filter type definitions
 export type FilterType = 'numeric' | 'select' | 'boolean' | 'string';
@@ -363,12 +368,14 @@ export const pixelColumns: Column[] = [
     key: 'electrical.led_voltage',
     label: 'LED Voltage',
     render: formatVoltage,
+    sortValue: sortVoltage,
     className: 'data-table-cell--right',
   },
   {
     key: 'electrical.vcc_voltage',
     label: 'VCC',
     render: formatVoltage,
+    sortValue: sortVoltage,
     className: 'data-table-cell--right',
   },
   { key: 'data.clocked', label: 'Clocked', render: renderBool, filterConfig: { type: 'boolean' } },
@@ -376,6 +383,7 @@ export const pixelColumns: Column[] = [
     key: 'data.bitrate',
     label: 'Data Rate',
     render: formatFrequency,
+    sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
   { key: 'physical.package_size', label: 'Package', filterConfig: { type: 'select' } },
@@ -402,12 +410,14 @@ export const pixelICColumns: Column[] = [
     key: 'color.pwm_frequency',
     label: 'PWM Freq',
     render: formatFrequency,
+    sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
   {
     key: 'data.bitrate',
     label: 'Data Rate',
     render: formatFrequency,
+    sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
   { key: 'physical.package_size', label: 'Package', filterConfig: { type: 'select' } },
@@ -461,12 +471,14 @@ export const connectorColumns: Column[] = [
     key: 'ratings.max_current',
     label: 'Max Current',
     render: formatCurrent,
+    sortValue: sortCurrent,
     className: 'data-table-cell--right',
   },
   {
     key: 'ratings.max_voltage',
     label: 'Max Voltage',
     render: formatVoltage,
+    sortValue: sortVoltage,
     className: 'data-table-cell--right',
   },
   { key: 'ratings.ip_rating', label: 'IP Rating', filterConfig: { type: 'select' } },

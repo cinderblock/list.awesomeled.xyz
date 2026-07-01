@@ -80,14 +80,22 @@ function getUniqueValues(data: BaseEntry[], key: string): string[] {
   return Array.from(values).sort((a, b) => a.localeCompare(b));
 }
 
-// Get min/max values from data for a numeric column
-function getNumericRange(data: BaseEntry[], key: string): { min: number; max: number } | null {
+// Get min/max values from data for a numeric column. A column's sortValue
+// normalizer (prices → USD, quantities → base units) takes precedence so the
+// slider bounds match how the filter compares.
+function getNumericRange(
+  data: BaseEntry[],
+  key: string,
+  sortValue?: Column['sortValue']
+): { min: number; max: number } | null {
   let min = Infinity;
   let max = -Infinity;
   let hasValues = false;
 
   for (const item of data) {
-    const val = parseNumericValue(resolveKey(item, key));
+    const raw = resolveKey(item, key);
+    const normalized = sortValue ? sortValue(raw, item) : parseNumericValue(raw);
+    const val = typeof normalized === 'number' ? normalized : null;
     if (val !== null) {
       hasValues = true;
       min = Math.min(min, val);
@@ -117,18 +125,21 @@ export function isFilterActive(value: FilterValue | undefined): boolean {
   return false;
 }
 
-// Apply filter to a single item
+// Apply filter to a single item. `sortValue` (from the column) normalizes
+// values before numeric comparison so filters agree with sorting.
 export function applyFilter(
   item: BaseEntry,
   key: string,
   config: FilterConfig,
-  value: FilterValue
+  value: FilterValue,
+  sortValue?: Column['sortValue']
 ): boolean {
   const itemValue = resolveKey(item, key);
 
   switch (config.type) {
     case 'numeric': {
-      const numValue = parseNumericValue(itemValue);
+      const normalized = sortValue ? sortValue(itemValue, item) : parseNumericValue(itemValue);
+      const numValue = typeof normalized === 'number' ? normalized : null;
       if (numValue === null) return true; // Don't filter out items with no value
       const filterVal = value as NumericFilterValue;
       if (filterVal.min !== undefined && numValue < filterVal.min) return false;
@@ -409,7 +420,10 @@ interface NumericFilterProps {
 }
 
 function NumericFilter({ column, data, value, onChange, config }: NumericFilterProps) {
-  const range = useMemo(() => getNumericRange(data, column.key), [data, column.key]);
+  const range = useMemo(
+    () => getNumericRange(data, column.key, column.sortValue),
+    [data, column.key, column.sortValue]
+  );
 
   // Initialize local state from value, will be reset when popover opens
   const [localMin, setLocalMin] = useState(value?.min?.toString() ?? '');
