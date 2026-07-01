@@ -26,3 +26,7 @@ power:
 case:
   waterproof: IP65
 price: 440
+related:
+  - type: variant
+    ref: controllers/pixlite-4-mk2
+    notes: Enclosed rugged version

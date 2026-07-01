@@ -28,3 +28,7 @@ data:
   storage:
     - type: SD
 price: 549
+related:
+  - type: variant
+    ref: controllers/pixlite-a4-s-mk3
+    notes: 'E-series: pixels are powered externally, not through the PixLite'

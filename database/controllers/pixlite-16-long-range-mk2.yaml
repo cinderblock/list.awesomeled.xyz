@@ -25,3 +25,7 @@ power:
   voltage:
     max: 24
 price: 450
+related:
+  - type: variant
+    ref: controllers/pixlite-16-mk2-control-board
+    notes: Long-range (differential receiver) version

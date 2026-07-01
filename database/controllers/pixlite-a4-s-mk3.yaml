@@ -29,6 +29,10 @@ features:
   - Dithering
   - Gamma correction on 8-bit/color pixels
 price: 399
+related:
+  - type: related
+    ref: controllers/pixlite-4-mk2
+    notes: Mk3 counterpart of the PixLite 4 Mk2
 technical_notes:
   - Standalone playback via SHOWTime software
   - High frame rate capability - 'hundreds of FPS'

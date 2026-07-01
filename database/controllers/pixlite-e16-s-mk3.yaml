@@ -29,3 +29,7 @@ data:
   storage:
     - type: SD
 price: 950
+related:
+  - type: related
+    ref: controllers/pixlite-16-mk2-control-board
+    notes: Mk3 counterpart of the PixLite 16 Mk2

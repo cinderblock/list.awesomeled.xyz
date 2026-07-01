@@ -29,3 +29,7 @@ power:
   current:
     max: 30
 price: 115
+related:
+  - type: variant
+    ref: controllers/pixlite-4-mk2
+    notes: Cost-reduced Eco version

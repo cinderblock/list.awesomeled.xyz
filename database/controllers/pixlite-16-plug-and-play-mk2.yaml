@@ -19,3 +19,7 @@ power:
   voltage:
     max: 12
 price: 500
+related:
+  - type: variant
+    ref: controllers/pixlite-16-mk2-control-board
+    notes: Assembled plug-and-play version of the control board

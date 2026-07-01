@@ -26,3 +26,7 @@ power:
   current:
     max: 64
 price: 190
+related:
+  - type: variant
+    ref: controllers/pixlite-16-mk2-control-board
+    notes: Cost-reduced Eco version

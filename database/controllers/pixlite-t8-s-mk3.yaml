@@ -25,3 +25,6 @@ data:
   storage:
     - type: SD
 price: 1200
+related:
+  - type: predecessor
+    ref: controllers/pixlite-t8-s-mk2
