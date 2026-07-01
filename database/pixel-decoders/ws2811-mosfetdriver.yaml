@@ -1,4 +1,5 @@
 name: WS2811 MosFetDriver
+status: discontinued
 creator: Freetronics
 outputs:
   max_channels: 3
