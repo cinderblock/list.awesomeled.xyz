@@ -23,6 +23,14 @@ YAML data files use these key fields for attribution:
 
 Database YAML files enforce key ordering: `name`, `creator`, `developer`, then alphabetical.
 
+## Batch commits and "Updated" timestamps
+
+Entry pages show "Updated" from each YAML file's last git commit. Any
+schema-level / database-wide / mechanical commit (migrations, key reordering,
+prettier passes) MUST have its hash added to `IGNORED_COMMITS` in
+`app/lib/data.ts` in a follow-up commit, so batch touches don't masquerade as
+real data updates. Keep structural commits and per-entry data commits separate.
+
 ## Simple mistakes
 
 The "Simple Browser" in VS Code doesn't support URL editing features.

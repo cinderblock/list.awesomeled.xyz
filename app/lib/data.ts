@@ -52,6 +52,7 @@ const IGNORED_COMMITS = new Set([
   // Pure formatting passes (prettier/lint only, no content change)
   '35c9c5310c8b6c0624a86b69ce52e67785ad2dba', // Prettier and lint free (42)
   'd9edd7574e197624c721c543e49d418ee3225f06', // Fix prettier formatting (39)
+  '6f10b8f005514c02411b80e5b8d4c20a4f463260', // YAML key-order normalization (376)
 ]);
 
 /**
