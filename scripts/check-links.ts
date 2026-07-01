@@ -84,7 +84,9 @@ async function probe(url: string): Promise<{ verdict: Verdict; detail: string }>
     const msg =
       e instanceof Error ? (e.cause instanceof Error ? e.cause.message : e.message) : String(e);
     // DNS failure / refused connection = the site is gone, not just grumpy.
-    if (/ENOTFOUND|EAI_AGAIN|ECONNREFUSED|CERT_HAS_EXPIRED|unable to verify/i.test(msg)) {
+    // TLS problems are deliberately NOT dead: browsers tolerate incomplete
+    // cert chains (AIA fetching) that strict clients reject.
+    if (/ENOTFOUND|EAI_AGAIN|ECONNREFUSED/i.test(msg)) {
       return { verdict: 'dead', detail: msg };
     }
     return { verdict: 'check', detail: msg };
