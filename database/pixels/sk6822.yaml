@@ -10,7 +10,6 @@ data:
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
-  wattage: .mW
 other_links:
   - SK6822 Pixel Protocol Overview | Advatek Lighting
 physical:

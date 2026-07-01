@@ -20,7 +20,7 @@ electrical:
   vcc_voltage: 5V
   channel_current: 18.0mA
   quiescent_current: 3.6mA
-  wattage: 90.mW
+  wattage: 90mW
 physical:
   package_size: 5050, 3535
   pin_count: 6

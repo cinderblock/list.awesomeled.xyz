@@ -22,7 +22,6 @@ electrical:
   gpio:
     min: 3.5V
     max: 5V
-  wattage: .mW
 physical:
   package_size: 5/8mm T style
   pin_count: 4

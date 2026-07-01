@@ -23,7 +23,7 @@ electrical:
     max: 5V
   channel_current: 22.0mA
   quiescent_current: 1.0mA
-  wattage: 110.mW
+  wattage: 110mW
 physical:
   package_size: '5050'
   pin_count: 6

@@ -19,7 +19,7 @@ electrical:
   led_voltage: 12V
   vcc_voltage: 12V
   channel_current: 17.5mA
-  wattage: 210.mW
+  wattage: 210mW
 other_links:
   - CS8812 Pixel Protocol Overview | Advatek Lighting
 physical:

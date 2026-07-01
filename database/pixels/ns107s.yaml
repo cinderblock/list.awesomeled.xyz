@@ -25,7 +25,7 @@ electrical:
     max: 5V
   channel_current: 20.0mA
   quiescent_current: 0.1mA
-  wattage: 100.mW
+  wattage: 100mW
 physical:
   package_sizes:
     - '5050'
