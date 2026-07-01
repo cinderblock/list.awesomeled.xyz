@@ -20,4 +20,4 @@ power:
     max: 5
 features:
   - PoE powered (30W 5V output to LEDs)
-price: $?
+price: unknown
