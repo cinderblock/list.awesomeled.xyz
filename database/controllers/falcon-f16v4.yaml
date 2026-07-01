@@ -24,4 +24,8 @@ power:
 data:
   storage:
     - type: uSD
+images:
+  - file: falcon-f16v4.webp
+    source: https://pixelcontroller.com/store/products/70-f16v4.html
+    credit: PixelController, LLC
 price: 275
