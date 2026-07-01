@@ -1,6 +1,10 @@
 name: SM
 creator: JST
 notes: Most popular LED strip connector seen
+images:
+  - file: sm.webp
+    source: https://www.adafruit.com/product/2880
+    credit: Adafruit Industries
 links:
   product: http://www.jst-mfg.com/product/detail_e.php?series=238
 mechanical:
