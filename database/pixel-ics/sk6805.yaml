@@ -24,3 +24,6 @@ related:
   - type: variant
     ref: pixel-ics/sk6812-5050
     notes: Higher-current (12 mA/channel) sibling
+  - type: related
+    ref: pixels/sk6805
+    notes: The same part as an integrated LED pixel
