@@ -9,3 +9,6 @@ data:
   channels: 3
 datasheet:
   third_party_testing: GS8208 Pixel Protocol Overview | Advatek Lighting
+related:
+  - type: related
+    ref: pixels/gs8208

@@ -15,3 +15,6 @@ electrical:
   quiescent_current: 1.0mA
 other_links:
   - SK6812 Pixel Protocol Overview | Advatek Lighting
+related:
+  - type: related
+    ref: pixels/sk6812
