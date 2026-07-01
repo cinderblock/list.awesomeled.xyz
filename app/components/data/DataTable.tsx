@@ -643,9 +643,12 @@ export function DataTable({
   const sortedData = useMemo(() => {
     if (!sortKey || !sortDir) return filteredData;
 
+    // Columns can normalize values for comparison (e.g. prices → USD)
+    const sortValue = columns.find((c) => c.key === sortKey)?.sortValue;
+
     return [...filteredData].sort((a, b) => {
-      const aVal = resolveKey(a, sortKey);
-      const bVal = resolveKey(b, sortKey);
+      const aVal = sortValue ? sortValue(resolveKey(a, sortKey), a) : resolveKey(a, sortKey);
+      const bVal = sortValue ? sortValue(resolveKey(b, sortKey), b) : resolveKey(b, sortKey);
 
       if (aVal == null && bVal == null) return 0;
       if (aVal == null) return sortDir === 'asc' ? 1 : -1;
@@ -667,7 +670,7 @@ export function DataTable({
       const cmp = aStr.localeCompare(bStr);
       return sortDir === 'asc' ? cmp : -cmp;
     });
-  }, [filteredData, sortKey, sortDir]);
+  }, [filteredData, sortKey, sortDir, columns]);
 
   const handleSort = (key: string) => {
     if (sortKey === key) {

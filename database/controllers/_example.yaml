@@ -290,5 +290,10 @@ features:
   - Current monitoring per port
   - Remote diagnostics
 
+price:
+  # Non-USD price: keep the original currency; tables sort by USD equivalent
+  amount: 1500
+  currency: EUR
+
 # disable URL checks on this file
 # textlint-disable

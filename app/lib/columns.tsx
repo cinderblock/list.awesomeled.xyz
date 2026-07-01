@@ -5,6 +5,7 @@
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
 import { LocalDate } from '~/components/ui/LocalDate';
+import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
 
 // Filter type definitions
 export type FilterType = 'numeric' | 'select' | 'boolean' | 'string';
@@ -45,6 +46,9 @@ export interface Column {
   filterable?: boolean;
   filterConfig?: FilterConfig;
   render?: (value: unknown, item: BaseEntry) => React.ReactNode;
+  // Normalize the resolved value for sorting (e.g. prices → USD equivalent).
+  // Nulls sort last; without this, raw values compare numerically/lexically.
+  sortValue?: (value: unknown, item: BaseEntry) => number | string | null;
   className?: string;
 }
 
@@ -183,12 +187,41 @@ function renderBool(v: unknown) {
   return null;
 }
 
-// Helper for formatting price (right-aligned dollar amount)
+// Helper for formatting price (right-aligned, original currency; non-USD gets
+// a "≈ $X" tooltip). Arrays of price tiers show "from <cheapest>".
 function formatPrice(v: unknown) {
   if (v == null) return <span className="data-table-null">-</span>;
-  const num = typeof v === 'number' ? v : parseFloat(String(v).replace(/[^0-9.]/g, ''));
-  if (isNaN(num)) return <span className="data-table-null">-</span>;
-  return <span className="tabular-nums">${num.toLocaleString('en-US')}</span>;
+
+  if (typeof v === 'string' && /^(free|varies|contact|unknown)$/i.test(v.trim())) {
+    const label = v.trim().toLowerCase();
+    if (label === 'free') return <span>Free</span>;
+    return <span className="data-table-null">{label}</span>;
+  }
+
+  let prefix = '';
+  let parsed = parsePrice(v);
+  if (Array.isArray(v)) {
+    const tiers = v.map(parsePrice).filter((p): p is NonNullable<typeof p> => p != null);
+    if (tiers.length > 0) {
+      parsed = tiers.reduce((min, p) =>
+        (toUSD(p) ?? Infinity) < (toUSD(min) ?? Infinity) ? p : min
+      );
+      if (tiers.length > 1) prefix = 'from ';
+    }
+  }
+  if (!parsed) return <span className="data-table-null">-</span>;
+
+  const usd = toUSD(parsed);
+  const title =
+    parsed.currency !== 'USD' && usd != null
+      ? `≈ $${Math.round(usd).toLocaleString('en-US')} USD (rates as of ${RATES_AS_OF})`
+      : undefined;
+  return (
+    <span className="tabular-nums" title={title}>
+      {prefix}
+      {formatPriceText(parsed)}
+    </span>
+  );
 }
 
 // Helper for formatting numeric values with units
@@ -307,6 +340,7 @@ export const controllerColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
@@ -393,6 +427,7 @@ export const patternDriverColumns: Column[] = [
     key: 'pricing.price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
   },
   {
@@ -469,6 +504,7 @@ export const microboardColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
@@ -496,6 +532,7 @@ export const adapterColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
@@ -580,6 +617,7 @@ export const levelConverterColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
@@ -608,6 +646,7 @@ export const pixelDecoderColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },

@@ -3,6 +3,7 @@ import * as Popover from '@radix-ui/react-popover';
 import { X, Check, ArrowUp, ArrowDown, ArrowUpDown, EyeOff } from 'lucide-react';
 import type { Column, FilterConfig } from '~/lib/columns';
 import type { BaseEntry } from '~/lib/types';
+import { priceUSD } from '~/lib/currency';
 
 type SortDirection = 'asc' | 'desc';
 
@@ -55,9 +56,13 @@ function parseNumericValue(val: unknown): number | null {
   if (typeof val === 'number') return val;
   const str = String(val);
   const match = str.match(/^([\d.,]+)/);
-  if (!match) return null;
-  const num = parseFloat(match[1].replace(/,/g, ''));
-  return isNaN(num) ? null : num;
+  if (match) {
+    const num = parseFloat(match[1].replace(/,/g, ''));
+    if (!isNaN(num)) return num;
+  }
+  // Currency-shaped values ("$25", {amount, currency}, price-tier arrays)
+  // compare in normalized USD, matching how price columns sort.
+  return priceUSD(val);
 }
 
 // Get unique values from data for a column

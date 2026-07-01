@@ -429,10 +429,7 @@
     "price": {
       "oneOf": [
         {
-          "type": "number"
-        },
-        {
-          "type": "string"
+          "$ref": "common.json#/definitions/price"
         },
         {
           "type": "array",
@@ -444,7 +441,7 @@
                 "type": "string"
               },
               "price": {
-                "type": "number"
+                "$ref": "common.json#/definitions/price"
               },
               "pixels": {
                 "type": "integer"
@@ -454,7 +451,7 @@
           }
         }
       ],
-      "description": "Price in USD or array of price tiers"
+      "description": "Price (bare number = USD, {amount, currency} for non-USD) or an array of price tiers"
     },
     "technical_notes": {
       "type": "array",
