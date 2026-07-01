@@ -112,11 +112,36 @@ export const CATEGORIES: Category[] = [
   },
 ];
 
+// One item of an entry's `related` array (schema: common.json#/definitions/related).
+// `ref` is an internal "<category>/<slug>" reference; entries without one are
+// external products identified by `name` (+ optional `url`).
+export interface RelatedItem {
+  type: 'replacement' | 'predecessor' | 'variant' | 'accessory' | 'related';
+  ref?: string;
+  name?: string;
+  url?: string;
+  notes?: string;
+}
+
+// A RelatedItem after resolving `ref` against the database (display name filled
+// in from the target entry), ready for rendering.
+export interface ResolvedRelatedItem {
+  type: RelatedItem['type'];
+  name: string;
+  /** Set for internal refs: link target is /<category>/<id> */
+  category?: string;
+  id?: string;
+  /** Set for external products */
+  url?: string;
+  notes?: string;
+}
+
 // Base entry interface that all category entries extend
 export interface BaseEntry {
   id: string;
   name: string;
   updated: Date;
+  related?: RelatedItem[] | null;
   [key: string]: unknown;
 }
 

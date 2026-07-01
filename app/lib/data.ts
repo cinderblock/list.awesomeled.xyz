@@ -3,11 +3,17 @@ import { existsSync, readdirSync, readFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { parse } from 'yaml';
-import type { BaseEntry, Category } from './types';
+import type { BaseEntry, Category, RelatedItem, ResolvedRelatedItem } from './types';
 import { CATEGORIES } from './types';
 
 // Cache for git timestamps (file path -> Date)
 let gitTimestampCache: Map<string, Date> | null = null;
+
+// Parsed category data, cached only during production builds: prerendering
+// scans every category per entry page for reverse links, which would otherwise
+// re-read all YAML hundreds of times. Skipped in dev so YAML edits show up on
+// refresh (the review-entry.ts workflow depends on that).
+const categoryDataCache = new Map<string, BaseEntry[]>();
 
 // Commits to ignore when calculating timestamps (e.g., bulk metadata changes)
 const IGNORED_COMMITS = new Set([
@@ -118,6 +124,11 @@ export function getDatabasePath(): string {
  * Load all entries for a given category from YAML files
  */
 export function loadCategoryData(categoryId: string): BaseEntry[] {
+  if (process.env.NODE_ENV === 'production') {
+    const cached = categoryDataCache.get(categoryId);
+    if (cached) return cached;
+  }
+
   const databasePath = getDatabasePath();
   const categoryDir = resolve(databasePath, categoryId);
 
@@ -150,6 +161,9 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
 
   // Sort by name
   entries.sort((a, b) => a.name.localeCompare(b.name));
+  if (process.env.NODE_ENV === 'production') {
+    categoryDataCache.set(categoryId, entries);
+  }
   return entries;
 }
 
@@ -227,6 +241,70 @@ export function getReverseLinks(categoryId: string, entryId: string): ReverseLin
     }
   }
   return groups;
+}
+
+/**
+ * Resolve an entry's `related` array for display: internal `ref` items get
+ * their display name from the target entry; external items pass through.
+ * Items that satisfy neither shape (no ref, no name) are dropped.
+ */
+export function resolveRelated(entry: BaseEntry): ResolvedRelatedItem[] {
+  if (!Array.isArray(entry.related)) return [];
+  const out: ResolvedRelatedItem[] = [];
+  for (const item of entry.related) {
+    if (!item || typeof item !== 'object' || !item.type) continue;
+    if (item.ref) {
+      const [category, id] = item.ref.split('/');
+      const target = category && id ? loadEntry(category, id) : null;
+      out.push({
+        type: item.type,
+        category,
+        id,
+        name: item.name ?? target?.name ?? id ?? item.ref,
+        notes: item.notes,
+      });
+    } else if (item.name) {
+      out.push({ type: item.type, name: item.name, url: item.url, notes: item.notes });
+    }
+  }
+  return out;
+}
+
+export interface RelatedBacklink {
+  /** Relationship type as declared on the source entry (the forward direction) */
+  type: RelatedItem['type'];
+  category: string;
+  id: string;
+  name: string;
+  notes?: string;
+}
+
+/**
+ * Entries anywhere in the database whose `related` array points at this entry.
+ * Relationships are declared on one side only (see common.json#/definitions/related);
+ * this derives the reverse direction so detail pages stay bidirectional.
+ */
+export function getRelatedBacklinks(categoryId: string, entryId: string): RelatedBacklink[] {
+  const ref = `${categoryId}/${entryId}`;
+  const out: RelatedBacklink[] = [];
+  for (const category of CATEGORIES) {
+    for (const entry of loadCategoryData(category.id)) {
+      if (!Array.isArray(entry.related)) continue;
+      for (const item of entry.related) {
+        if (item && typeof item === 'object' && item.ref === ref) {
+          out.push({
+            type: item.type,
+            category: category.id,
+            id: String(entry.id),
+            name: entry.name,
+            notes: item.notes,
+          });
+        }
+      }
+    }
+  }
+  out.sort((a, b) => a.name.localeCompare(b.name));
+  return out;
 }
 
 /**

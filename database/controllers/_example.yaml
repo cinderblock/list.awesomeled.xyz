@@ -222,6 +222,16 @@ case:
 
 data:
   storage: null
+
+related:
+  # Declare relationships on one side only; the other entry's page derives the
+  # reverse direction ("Replaces", "Succeeded by", ...) automatically.
+  - type: replacement
+    ref: controllers/example-controller-pro # in-database: <category>/<filename minus .yaml>
+  - type: variant
+    name: Example Legacy Controller XL # not in the database: name (+ optional url)
+    url: https://example.com/legacy-xl
+    notes: Same board with 16 outputs
 ---
 # Example 5: Industrial controller with limited availability
 name: Example Industrial Controller

@@ -1,6 +1,12 @@
 import type { Route } from './+types/entry';
 import { data, Link } from 'react-router';
-import { getCategoryById, loadEntry, getReverseLinks } from '~/lib/data';
+import {
+  getCategoryById,
+  loadEntry,
+  getReverseLinks,
+  resolveRelated,
+  getRelatedBacklinks,
+} from '~/lib/data';
 import { LocalDate } from '~/components/ui/LocalDate';
 import { getColumnsForCategory } from '~/lib/columns';
 import { FileText, ShoppingCart, Youtube, Globe, Github, X } from 'lucide-react';
@@ -44,7 +50,9 @@ export async function loader({ params }: Route.LoaderArgs) {
   const entry = loadEntry(params.category, params.entry);
   if (!entry) throw data(null, { status: 404 });
   const reverseLinks = getReverseLinks(params.category, params.entry);
-  return { category, entry, reverseLinks };
+  const relatedProducts = resolveRelated(entry);
+  const relatedBacklinks = getRelatedBacklinks(params.category, params.entry);
+  return { category, entry, reverseLinks, relatedProducts, relatedBacklinks };
 }
 
 function getEntryImages(entry: Record<string, unknown>): string[] {
@@ -161,6 +169,30 @@ const RELATED_MAP: Record<string, string> = {
   related_adapters: 'adapters',
 };
 
+// `related[].type` -> row label, from the declaring entry's point of view…
+const RELATED_FORWARD_LABELS: Record<string, string> = {
+  replacement: 'Replaced by',
+  predecessor: 'Preceded by',
+  variant: 'Variants',
+  accessory: 'Accessories',
+  related: 'Related',
+};
+// …and from the pointed-at entry's point of view (derived reverse direction).
+const RELATED_REVERSE_LABELS: Record<string, string> = {
+  replacement: 'Replaces',
+  predecessor: 'Succeeded by',
+  variant: 'Variants',
+  accessory: 'Accessory for',
+  related: 'Related',
+};
+
+interface RelatedRow {
+  name: string;
+  to?: string;
+  url?: string;
+  notes?: string;
+}
+
 // Keys handled specially (not rendered as Overview rows or group cards)
 const SKIP_KEYS = new Set([
   'id',
@@ -171,6 +203,7 @@ const SKIP_KEYS = new Set([
   'creator',
   'status',
   'links',
+  'related', // rendered as the Related Products section
 ]);
 
 function humanize(key: string): string {
@@ -188,7 +221,7 @@ function isGroup(v: unknown): v is Record<string, unknown> {
 }
 
 export default function EntryPage({ loaderData }: Route.ComponentProps) {
-  const { category, entry, reverseLinks } = loaderData;
+  const { category, entry, reverseLinks, relatedProducts, relatedBacklinks } = loaderData;
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
   const links = getEntryLinks(entry);
@@ -238,6 +271,28 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
     return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
   });
 
+  // Group forward `related` items and derived backlinks into labeled rows
+  const relatedRows = new Map<string, RelatedRow[]>();
+  const addRelatedRow = (label: string, row: RelatedRow) => {
+    if (!relatedRows.has(label)) relatedRows.set(label, []);
+    relatedRows.get(label)!.push(row);
+  };
+  for (const item of relatedProducts) {
+    addRelatedRow(RELATED_FORWARD_LABELS[item.type] ?? item.type, {
+      name: item.name,
+      to: item.category && item.id ? `/${item.category}/${item.id}` : undefined,
+      url: item.url,
+      notes: item.notes,
+    });
+  }
+  for (const item of relatedBacklinks) {
+    addRelatedRow(RELATED_REVERSE_LABELS[item.type] ?? item.type, {
+      name: item.name,
+      to: `/${item.category}/${item.id}`,
+      notes: item.notes,
+    });
+  }
+
   return (
     <PageWrapper category={category}>
       <div className="entry-topbar">
@@ -249,11 +304,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           ]}
           categoryThemed
         />
-        <LocalDate
-          className="entry-updated"
-          title="Last updated"
-          date={entry.updated as Date}
-        />
+        <LocalDate className="entry-updated" title="Last updated" date={entry.updated as Date} />
       </div>
 
       <header className="entry-hero">
@@ -328,6 +379,49 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
                 </div>
               ))}
             </div>
+          </Section>
+        )}
+
+        {relatedRows.size > 0 && (
+          <Section title="Related Products">
+            <dl className="detail-grid">
+              {[...relatedRows.entries()].map(([label, rows]) => (
+                <div key={label} className="detail-row">
+                  <dt className="detail-key">{label}</dt>
+                  <dd className="detail-value">
+                    <div className="entry-related">
+                      {rows.map((row, i) =>
+                        row.to ? (
+                          <Link
+                            key={i}
+                            className="entry-related-link"
+                            to={row.to}
+                            title={row.notes}
+                          >
+                            {row.name}
+                          </Link>
+                        ) : row.url ? (
+                          <a
+                            key={i}
+                            className="entry-related-link"
+                            href={row.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title={row.notes}
+                          >
+                            {row.name}
+                          </a>
+                        ) : (
+                          <span key={i} className="entry-related-link" title={row.notes}>
+                            {row.name}
+                          </span>
+                        )
+                      )}
+                    </div>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </Section>
         )}
 

@@ -34,6 +34,52 @@ const FOLDER_SCHEMAS: Record<string, string> = {
   'commercial-systems': 'commercial-system.json',
 };
 
+/**
+ * Cross-reference checks (beyond what JSON Schema can express):
+ *  - `related[].ref` items ("<category>/<slug>") must point at an existing entry.
+ *  - Legacy `related_<category>` arrays (e.g. related_pixel_ics) hold slugs in
+ *    the category derived from the field name; each slug must exist there.
+ * Returns human-readable problem strings (empty array = ok).
+ */
+function checkCrossRefs(data: Record<string, unknown>, slugs: Map<string, Set<string>>): string[] {
+  const problems: string[] = [];
+
+  if (Array.isArray(data.related)) {
+    for (const item of data.related) {
+      const ref = item?.ref;
+      if (typeof ref !== 'string') continue;
+      const [category, slug] = ref.split('/');
+      if (!category || !slug || !slugs.has(category)) {
+        problems.push(`related ref "${ref}": unknown category`);
+      } else if (!slugs.get(category)!.has(slug)) {
+        problems.push(`related ref "${ref}": no such entry`);
+      }
+    }
+  }
+
+  for (const [field, value] of Object.entries(data)) {
+    if (!field.startsWith('related_') || !Array.isArray(value)) continue;
+    const category = field.slice('related_'.length).replace(/_/g, '-');
+    if (!slugs.has(category)) continue; // not a category-shaped field
+    for (const slug of value) {
+      if (typeof slug !== 'string') continue;
+      if (!slugs.get(category)!.has(slug)) {
+        problems.push(`${field} "${slug}": no such entry in ${category}`);
+      }
+    }
+  }
+
+  return problems;
+}
+
+function listEntrySlugs(folder: string): Set<string> {
+  return new Set(
+    readdirSync(join(DB_DIR, folder))
+      .filter((f) => f.endsWith('.yaml') && !f.startsWith('_'))
+      .map((f) => f.replace(/\.yaml$/, ''))
+  );
+}
+
 async function main() {
   const only = process.argv[2]; // optional category filter
   // strict:false makes AJV ignore `format` keywords (uri/date) as no-ops,
@@ -51,6 +97,10 @@ async function main() {
     (f) => !f.startsWith('_') && existsSync(join(DB_DIR, f, '.')) && FOLDER_SCHEMAS[f]
   );
 
+  // Slugs across ALL categories (even with a category filter) so cross-category
+  // refs can always be resolved.
+  const slugs = new Map<string, Set<string>>(folders.map((f) => [f, listEntrySlugs(f)]));
+
   for (const folder of folders) {
     if (only && folder !== only) continue;
     const schemaPath = join(SCHEMA_DIR, FOLDER_SCHEMAS[folder]!);
@@ -67,7 +117,8 @@ async function main() {
       const path = join(DB_DIR, folder, file);
       try {
         const data = parse(readFileSync(path, 'utf-8'));
-        if (validate(data)) {
+        const refProblems = data ? checkCrossRefs(data, slugs) : [];
+        if (validate(data) && refProblems.length === 0) {
           valid++;
           folderValid++;
         } else {
@@ -75,6 +126,9 @@ async function main() {
           console.log(`  ✗ ${folder}/${file}`);
           for (const err of validate.errors ?? []) {
             console.log(`      ${err.instancePath || '/'}: ${err.message}`);
+          }
+          for (const problem of refProblems) {
+            console.log(`      ${problem}`);
           }
         }
       } catch (e) {

@@ -60,18 +60,32 @@
     },
     "related": {
       "type": ["array", "null"],
-      "description": "Related products (replacement, predecessor, variant, accessory, etc.). For a discontinued product, a `replacement` item points at its successor.",
+      "description": "Related products (replacement, predecessor, variant, accessory, etc.). For a discontinued product, a `replacement` item points at its successor. Declare each relationship on one side only; detail pages derive the reverse direction automatically.",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["type", "name"],
+        "required": ["type"],
+        "anyOf": [{ "required": ["ref"] }, { "required": ["name"] }],
         "properties": {
           "type": {
             "type": "string",
             "enum": ["replacement", "predecessor", "variant", "accessory", "related"]
           },
-          "name": { "type": "string" },
-          "url": { "type": "string", "format": "uri" }
+          "ref": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+/[a-z0-9][a-z0-9._-]*$",
+            "description": "Internal reference `<category>/<entry-slug>` (the YAML filename without extension). Preferred whenever the product is in this database; scripts/validate.ts checks that it resolves."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name. Required when the product is not in the database (no `ref`); otherwise an optional label override."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "External link for products not in the database"
+          },
+          "notes": { "type": "string" }
         }
       }
     }
