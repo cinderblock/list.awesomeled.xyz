@@ -31,6 +31,11 @@ prettier passes) MUST have its hash added to `IGNORED_COMMITS` in
 `app/lib/data.ts` in a follow-up commit, so batch touches don't masquerade as
 real data updates. Keep structural commits and per-entry data commits separate.
 
+The test is information, not batch size: a commit that records newly verified
+facts about entries (dead-link annotations, confirmed statuses, corrected
+values) is a genuine update and must NOT be ignored, even when it touches many
+files at once. Ignore only reshaping that adds no new information.
+
 ## Simple mistakes
 
 The "Simple Browser" in VS Code doesn't support URL editing features.
