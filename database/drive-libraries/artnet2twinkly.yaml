@@ -1,6 +1,9 @@
 name: Artnet2twinkly
 status: end-of-life
 creator: John Lord
+dead_links:
+  - url: http://artnet2twinkly.com/
+    checked: '2026-07-01'
 features: ArtNet to Twinkly consumer lights via Wi-Fi, allows control of Twinkly
   via professional lighting controls
 hardware: Twinkly

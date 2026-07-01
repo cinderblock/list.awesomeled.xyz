@@ -1,6 +1,9 @@
 name: Lexan DCLW
 notes: Lexan DLCW (Diffused Light Cool White)special combination of high light
   diffusion and high transmission via an optimized surface texture
+dead_links:
+  - url: https://sfs.sabic.eu/product/lexan-solid-sheet/sign-sheet/
+    checked: '2026-07-01'
 links:
   product: https://sfs.sabic.eu/product/lexan-solid-sheet/sign-sheet/
 material_type: PC

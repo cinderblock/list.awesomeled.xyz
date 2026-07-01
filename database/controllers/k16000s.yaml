@@ -27,4 +27,8 @@ outputs:
 data:
   storage:
     - type: SD
+dead_links:
+  - url: https://www.autuneertech.com/products/k16000s-madrix-artnet-addressable-led-controller/
+    archive: https://web.archive.org/web/20230604162206/https://autuneertech.com/products/k16000s-madrix-artnet-addressable-led-controller/
+    checked: '2026-07-01'
 price: 229

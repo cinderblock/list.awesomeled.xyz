@@ -20,6 +20,10 @@ data:
 datasheet:
   url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
   third_party_testing: http://neon-world.com/en/product_detail.php?cid=59&id=167
+dead_links:
+  - url: http://neon-world.com/en/product_detail.php?cid=59&id=167
+    archive: https://web.archive.org/web/20250113200646/https://neon-world.com/en/product_detail.php?cid=59&id=167
+    checked: '2026-07-01'
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD

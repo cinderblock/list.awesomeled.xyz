@@ -18,6 +18,10 @@ datasheet:
   url: http://newstar-ledstrip.com/product/20180125101420006.pdf
   discrepancies:
     - GPIO min spec of 0.7*VDD (8.4V) is incorrect - actual threshold is 3.5V based on internal 5V Vdd
+dead_links:
+  - url: http://newstar-ledstrip.com/product/20180125101420006.pdf
+    archive: https://web.archive.org/web/20210226215913/http://www.newstar-ledstrip.com/product/20180125101420006.pdf
+    checked: '2026-07-01'
 electrical:
   led_voltage: 12V
   led_voltage_notes: Datasheet 9.5-13.5V range

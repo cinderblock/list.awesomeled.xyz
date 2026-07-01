@@ -14,6 +14,10 @@ data:
   backup_line: false
 datasheet:
   url: http://neon-world.com/en/product_detail.php?cid=59&id=167
+dead_links:
+  - url: http://neon-world.com/en/product_detail.php?cid=59&id=167
+    archive: https://web.archive.org/web/20250113200646/https://neon-world.com/en/product_detail.php?cid=59&id=167
+    checked: '2026-07-01'
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V

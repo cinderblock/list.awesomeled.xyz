@@ -17,6 +17,10 @@ datasheet:
   url: http://neon-world.com/en/product_detail.php?cid=60&id=171
   discrepancies:
     - Datasheet claims max 49mA but actual is ~19-22mA per channel
+dead_links:
+  - url: http://neon-world.com/en/product_detail.php?cid=60&id=171
+    archive: https://web.archive.org/web/20260520135812/https://neon-world.com/en/product_detail.php?cid=60&id=171
+    checked: '2026-07-01'
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD

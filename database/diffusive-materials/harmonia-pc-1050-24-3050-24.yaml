@@ -1,5 +1,9 @@
 name: Harmonia PC (1050-24)-(3050-24)
 notes: reflective (unknown) dopant several polymer options
+dead_links:
+  - url: https://www.plastix-world.com/better-with-a-diffusing-polymers/
+    archive: https://web.archive.org/web/20230923145646/https://www.plastix-world.com/better-with-a-diffusing-polymers/
+    checked: '2026-07-01'
 links:
   product: https://www.plastix-world.com/better-with-a-diffusing-polymers/
 material_type: PMMA, PC,

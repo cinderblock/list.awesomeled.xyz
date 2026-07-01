@@ -16,6 +16,10 @@ data:
   backup_line: false
 datasheet:
   url: http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+dead_links:
+  - url: http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+    archive: https://web.archive.org/web/20220216171258/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+    checked: '2026-07-01'
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V

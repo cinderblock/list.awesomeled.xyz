@@ -35,4 +35,8 @@ power:
 data:
   storage:
     - type: SD
+dead_links:
+  - url: https://glowbrightly.io/
+    archive: https://web.archive.org/web/20250416032520/https://glowbrightly.io/
+    checked: '2026-07-01'
 price: 200
