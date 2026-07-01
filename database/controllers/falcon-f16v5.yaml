@@ -33,6 +33,10 @@ features:
   - Per-output resettable e-fuses with current/voltage/fuse status in web UI
   - OLED status display
   - Two-way SmartReceiver communication (reports current, voltage, fuse status)
+images:
+  - file: falcon-f16v5.webp
+    source: https://pixelcontroller.com/store/featured/88-f16v5.html
+    credit: PixelController, LLC
 price: 280
 related:
   - type: predecessor
