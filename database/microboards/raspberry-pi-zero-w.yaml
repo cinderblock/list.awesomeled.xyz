@@ -22,6 +22,10 @@ connectivity:
   bluetooth: '4.1'
   usb: OTG
   serial: true
+images:
+  - file: raspberry-pi-zero-w.webp
+    source: https://www.raspberrypi.com/products/raspberry-pi-zero-w/
+    credit: Raspberry Pi
 io:
   max_outputs: 1
   storage: microSD
