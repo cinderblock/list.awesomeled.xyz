@@ -34,6 +34,10 @@ features:
   - 8 fused local outputs
   - Differential receiver outputs
   - F16v3-compatible expansion board support
+images:
+  - file: k8-b.webp
+    source: https://kulplights.com/product/k8-b/
+    credit: KulpLights, LLC
 price: 80 # board-only; vendor lists $80-$165 depending on BeagleBone/SD options
 technical_notes:
   - 8 local ports drive 800 pixels each at 40FPS (1500 at 20FPS)
