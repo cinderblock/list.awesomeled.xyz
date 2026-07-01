@@ -41,11 +41,14 @@ whole database validates with `bun run validate`.
 
 1. **Goal 4 — assets**: wire the datasheet-mirror R2 secrets and run it; add images
    (with the structured `{file, source, credit}` attribution form).
-2. **Canonical datatypes**: numeric value types in `common.json` (frequency,
-   current, voltage, power…) to replace strings-with-units ("30MHz", "22mA");
-   prerequisite for wizard compatibility/power math. Migrate one category at a
-   time: structural commit per category, data commits per entry; add migration
-   commits to `IGNORED_COMMITS` so "Updated" stays honest.
+2. **Canonical datatypes**: ✅ mostly done. `common.json` has strict
+   frequency/current/power/voltage grammars ("800kHz", "22mA", "~5mA",
+   "3.7-5.5V" ranges; bare numbers = SI base unit), applied to pixels,
+   pixel-ics, connectors, controllers, and microboards; `app/lib/quantity.ts`
+   parses them so those columns sort/filter by normalized value. Remaining:
+   decide whether derived fields (`pixel_rate_max` = bitrate ÷ bits) should be
+   computed at render time instead of stored; extend grammar to stragglers as
+   they surface.
 3. **Goal 3 — cross-links**: research-driven population of `related` +
    `related_*` (validator now catches dangling refs).
 4. **Stretch 2 — wizard** onto the existing `system-overview` diagram; compute
