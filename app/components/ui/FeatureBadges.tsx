@@ -16,6 +16,9 @@ import {
   SlidersHorizontal,
   AppWindow,
   CircuitBoard,
+  Smartphone,
+  Globe,
+  Code,
 } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -30,6 +33,10 @@ interface BadgeConfig {
   // always matched too. Matching is whole-word, so short ids like "spi" or
   // "arm" won't fire inside unrelated words ("firmware", "inspiration").
   match?: string[];
+  // Terms only used for exact whole-value matches (ValueBadges), never for the
+  // free-text hero scan — for terms too generic or ambiguous to scan ("web",
+  // "sd", "usd" the storage type).
+  valueOnlyMatch?: string[];
 }
 
 // Shared colors so related badges read as a family
@@ -45,6 +52,7 @@ const C = {
   pixel: '#ec4899', // pixel data / IC families
   power: '#eab308', // power features
   software: '#06b6d4', // software ecosystems
+  platform: '#f97316', // OS / runtime platforms
 } as const;
 
 // Map of canonical id -> badge configuration.
@@ -70,7 +78,12 @@ const BADGES: Record<string, BadgeConfig> = {
 
   // Connectivity
   wifi: { icon: Wifi, label: 'WiFi', color: C.net, match: ['wi-fi'] },
-  ethernet: { icon: Network, label: 'Ethernet', color: C.net },
+  ethernet: {
+    icon: Network,
+    label: 'Ethernet',
+    color: C.net,
+    match: ['100base-tx', '100base-t', '1000base-t', 'gigabit ethernet'],
+  },
   bluetooth: { icon: Bluetooth, label: 'Bluetooth', color: C.net, match: ['ble'] },
   // Note: "2.4 GHz" deliberately has no badge — in this database it only ever
   // appears as a WiFi band qualifier (`Wi-Fi: 2.4GHz`), so a separate pill just
@@ -80,7 +93,12 @@ const BADGES: Record<string, BadgeConfig> = {
   zigbee: { icon: Radio, label: 'Zigbee', color: C.rf },
 
   // Physical ports
-  usb: { icon: Usb, label: 'USB', color: C.port, match: ['usb-c', 'usb-a', 'micro usb', 'mini usb'] },
+  usb: {
+    icon: Usb,
+    label: 'USB',
+    color: C.port,
+    match: ['usb-c', 'usb-a', 'micro usb', 'mini usb'],
+  },
   hdmi: { icon: Monitor, label: 'HDMI', color: C.port },
 
   // Low-level buses
@@ -94,7 +112,15 @@ const BADGES: Record<string, BadgeConfig> = {
     icon: MemoryStick,
     label: 'microSD',
     color: C.port,
-    match: ['micro sd', 'micro-sd', 'sd card', 'sdcard', 'tf card'],
+    match: ['micro sd', 'micro-sd', 'tf card'],
+    valueOnlyMatch: ['usd'], // storage.type: uSD ("usd" is unscannable: currency)
+  },
+  'sd-card': {
+    icon: MemoryStick,
+    label: 'SD card',
+    color: C.port,
+    match: ['sd card', 'sdcard'],
+    valueOnlyMatch: ['sd'], // storage.type: SD
   },
 
   // Pixel data line
@@ -114,14 +140,40 @@ const BADGES: Record<string, BadgeConfig> = {
   arm: { icon: Cpu, label: 'ARM', color: C.chip },
   stm32: { icon: Cpu, label: 'STM32', color: C.chip },
   fpga: { icon: CircuitBoard, label: 'FPGA', color: C.chip },
+  arduino: { icon: Cpu, label: 'Arduino', color: C.chip },
 
   // Power
   poe: { icon: PlugZap, label: 'PoE', color: C.power, match: ['power over ethernet'] },
 
   // Software ecosystems
   wled: { icon: Lightbulb, label: 'WLED', color: C.software },
-  fpp: { icon: AppWindow, label: 'FPP', color: C.software, match: ['falcon player', 'falconplayer'] },
+  fpp: {
+    icon: AppWindow,
+    label: 'FPP',
+    color: C.software,
+    match: ['falcon player', 'falconplayer'],
+  },
   xlights: { icon: AppWindow, label: 'xLights', color: C.software },
+
+  // Languages (drive libraries)
+  cpp: { icon: Code, label: 'C++', color: C.software, match: ['c++'] },
+  javascript: { icon: Code, label: 'JavaScript', color: C.software },
+  python: { icon: Code, label: 'Python', color: C.software },
+
+  // OS / runtime platforms (pattern drivers, drive libraries)
+  windows: { icon: Monitor, label: 'Windows', color: C.platform },
+  macos: { icon: Monitor, label: 'macOS', color: C.platform, match: ['mac os', 'os x'] },
+  linux: { icon: Monitor, label: 'Linux', color: C.platform, match: ['ubuntu', 'raspbian'] },
+  android: { icon: Smartphone, label: 'Android', color: C.platform },
+  ios: { icon: Smartphone, label: 'iOS', color: C.platform },
+  // "web" is far too generic to free-text scan (web UI, web-based config, …):
+  // only badge exact platform values.
+  'web-app': {
+    icon: Globe,
+    label: 'Web',
+    color: C.platform,
+    valueOnlyMatch: ['web', 'browser'],
+  },
 };
 
 // Escape a term for use inside a RegExp literal
@@ -139,23 +191,42 @@ for (const [id, cfg] of Object.entries(BADGES)) {
     TERM_TO_ID[term] = id;
     MATCHERS.push({ id, re: new RegExp(`(?:^|[^a-z0-9])${escapeRegExp(term)}(?![a-z0-9])`, 'i') });
   }
+  for (const term of cfg.valueOnlyMatch ?? []) {
+    TERM_TO_ID[term] = id;
+  }
 }
 
 interface FeatureBadgesProps {
   entry: Record<string, unknown>;
 }
 
+// A value that negates the capability its key names (`clocked: never`,
+// `bms: No`, `wled_compatible: false`) — the key must not produce a badge.
+function isNegatedValue(v: unknown): boolean {
+  if (v === false || v == null) return true;
+  return typeof v === 'string' && ['no', 'none', 'never', 'false', 'n/a'].includes(v.toLowerCase());
+}
+
+function scanString(s: string, found: Set<string>): void {
+  for (const { id, re } of MATCHERS) {
+    if (!found.has(id) && re.test(s)) found.add(id);
+  }
+}
+
 // Scan a value (recursing into arrays/objects) for whole-word badge matches,
-// collecting canonical ids into `found`.
+// collecting canonical ids into `found`. Object KEYS carry meaning too
+// (`protocols: {artnet: Both}`, `inputs.physical: {Ethernet: true}`), so they
+// are scanned as well — unless their value negates the capability.
 function findBadgesInValue(value: unknown, found: Set<string>): void {
   if (typeof value === 'string') {
-    for (const { id, re } of MATCHERS) {
-      if (!found.has(id) && re.test(value)) found.add(id);
-    }
+    scanString(value, found);
   } else if (Array.isArray(value)) {
     for (const item of value) findBadgesInValue(item, found);
   } else if (value && typeof value === 'object') {
-    for (const item of Object.values(value)) findBadgesInValue(item, found);
+    for (const [key, item] of Object.entries(value)) {
+      if (!isNegatedValue(item)) scanString(key, found);
+      findBadgesInValue(item, found);
+    }
   }
 }
 
