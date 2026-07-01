@@ -55,6 +55,7 @@ const IGNORED_COMMITS = new Set([
   'd9edd7574e197624c721c543e49d418ee3225f06', // Fix prettier formatting (39)
   '6f10b8f005514c02411b80e5b8d4c20a4f463260', // YAML key-order normalization (376)
   '52a377dd6218701696e55330b6d121efa368f134', // dead_links batch annotation from link sweep (30)
+  'a1cd65f60bc252584b158bfaaa744255d7180cca', // strip derived pixel_rate_max, integer pixel_size_bits (41)
 ]);
 
 /**
