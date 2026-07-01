@@ -1,7 +1,7 @@
 name: Raspberry Pi Zero v1.3
 creator:
   name: Raspberry Pi Foundation
-  page: https://www.raspberrypi.org/products/raspberry-pi-zero/
+  page: https://www.raspberrypi.com/products/raspberry-pi-zero/
 power:
   voltage:
     min: 5V

@@ -2,7 +2,7 @@ name: Raspberry Pi 2 Model B
 release_year: 2015
 creator:
   name: Raspberry Pi Foundation
-  page: https://www.raspberrypi.org/products/raspberry-pi-2-model-b/
+  page: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
 power:
   voltage:
     min: 5V

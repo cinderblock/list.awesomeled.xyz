@@ -2,7 +2,7 @@ name: Raspberry Pi 1 Model A+
 release_year: 2014
 creator:
   name: Raspberry Pi Foundation
-  page: https://www.raspberrypi.org/products/raspberry-pi-1-model-a-plus/
+  page: https://www.raspberrypi.com/products/raspberry-pi-1-model-a-plus/
 power:
   voltage:
     min: 5V

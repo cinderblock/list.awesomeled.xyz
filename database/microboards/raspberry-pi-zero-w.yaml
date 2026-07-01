@@ -2,7 +2,7 @@ name: Raspberry Pi Zero W
 release_year: 2017
 creator:
   name: Raspberry Pi Foundation
-  page: https://www.raspberrypi.org/products/raspberry-pi-zero-w/
+  page: https://www.raspberrypi.com/products/raspberry-pi-zero-w/
 power:
   voltage:
     min: 5V
