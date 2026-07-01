@@ -105,15 +105,11 @@
           "type": ["string", "null"]
         },
         "pixel_size_bits": {
-          "type": ["string", "integer", "null"],
-          "description": "Bits per pixel (24 RGB, 32 RGBW)"
+          "type": ["integer", "null"],
+          "description": "Total bits per pixel on the data line (e.g. 24 for 3x8-bit RGB, 32 for APA102 frames). pixel_rate_max is DERIVED from bitrate / pixel_size_bits at build time - do not store it."
         },
         "pixel_size_notes": {
           "type": ["string", "null"]
-        },
-        "pixel_rate_max": {
-          "type": ["string", "null"],
-          "description": "Max pixel frames/sec ignoring reset overhead"
         },
         "backup_line": {
           "type": ["boolean", "null"],

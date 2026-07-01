@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import { parse } from 'yaml';
 import type { BaseEntry, Category, RelatedItem, ResolvedRelatedItem } from './types';
 import { CATEGORIES } from './types';
+import { parseQuantity } from './quantity';
 
 // Cache for git timestamps (file path -> Date)
 let gitTimestampCache: Map<string, Date> | null = null;
@@ -123,6 +124,24 @@ export function getDatabasePath(): string {
 }
 
 /**
+ * Fields computed from stored data at load time. The schema rejects stored
+ * copies (data.pixel_rate_max is an additionalProperties error), so the
+ * database can never drift out of sync with the inputs.
+ */
+function deriveFields(categoryId: string, entry: BaseEntry): void {
+  if (categoryId !== 'pixels' && categoryId !== 'pixel-ics') return;
+  const data = entry.data as Record<string, unknown> | undefined;
+  if (!data || typeof data !== 'object') return;
+  const bits = data.pixel_size_bits;
+  const freq = parseQuantity(data.bitrate, 'frequency');
+  if (typeof bits === 'number' && bits > 0 && freq) {
+    const rate = freq.value / bits;
+    data.pixel_rate_max =
+      rate >= 1e6 ? `${(rate / 1e6).toFixed(2)} Mpx/s` : `${(rate / 1e3).toFixed(1)} kpx/s`;
+  }
+}
+
+/**
  * Load all entries for a given category from YAML files
  */
 export function loadCategoryData(categoryId: string): BaseEntry[] {
@@ -154,6 +173,7 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
         parsed.id = file.replace(/\.yaml$/, '');
         // Use git timestamp if available, otherwise use current date (for new/uncommitted files)
         parsed.updated = timestamps.get(filePath) ?? new Date();
+        deriveFields(categoryId, parsed);
         entries.push(parsed);
       }
     } catch (e) {
@@ -189,6 +209,7 @@ export function loadEntry(categoryId: string, entryId: string): BaseEntry | null
     parsed.id = entryId;
     // Use git timestamp if available, otherwise use current date (for new/uncommitted files)
     parsed.updated = getGitTimestamps().get(filePath) ?? new Date();
+    deriveFields(categoryId, parsed);
     return parsed;
   } catch (e) {
     console.warn(`Failed to parse ${filePath}:`, e);
