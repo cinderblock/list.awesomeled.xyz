@@ -7,8 +7,7 @@ data:
   clocked: false
   channels: 4
   bitrate: 800kHz
-  pixel_size_bits: 64 Bits/Pixel
-  pixel_rate_max: 12.5 k Pixel / s
+  pixel_size_bits: 64
 electrical:
   output_voltage: 24V
 other_links:

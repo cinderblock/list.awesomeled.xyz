@@ -9,7 +9,6 @@ data:
   clocked: false
   bitrate: 800kHz
   pixel_size_bits: 24
-  pixel_rate_max: 33.3 k Pixel / s
   backup_line: true
 datasheet:
   url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf

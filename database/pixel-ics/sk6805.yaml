@@ -9,8 +9,7 @@ data:
   clocked: false
   channels: 3
   bitrate: 800kHz
-  pixel_size_bits: 24 Bits/Pixel
-  pixel_rate_max: 33.3 k Pixel / s
+  pixel_size_bits: 24
 datasheet:
   url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
 electrical:

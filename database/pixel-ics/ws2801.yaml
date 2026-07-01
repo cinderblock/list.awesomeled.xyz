@@ -10,8 +10,7 @@ data:
   clocked: true
   channels: 3
   bitrate: 25MHz
-  pixel_size_bits: 24 Bits/Pixel
-  pixel_rate_max: 1.04 M Pixel / s
+  pixel_size_bits: 24
   backup_line: false
   max_per_string: 1024
 datasheet:

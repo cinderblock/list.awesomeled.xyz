@@ -14,7 +14,6 @@ data:
   clocked: false
   bitrate: 800kHz
   pixel_size_bits: 48
-  pixel_rate_max: 16.7 k Pixel / s
   backup_line: true
 electrical:
   led_voltage: 5V

@@ -9,7 +9,6 @@ data:
   clocked: true
   bitrate: 40MHz
   pixel_size_bits: 64
-  pixel_rate_max: 625.0 k Pixel / s
   backup_line: false
 datasheet:
   url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf

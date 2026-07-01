@@ -11,7 +11,6 @@ data:
   channels: 3
   bitrate: 800kHz
   pixel_size_bits: 24
-  pixel_rate_max: 33.3 k Pixel / s
   backup_line: true
 datasheet:
   url: http://www.world-semi.com/technology/details-104-4.html

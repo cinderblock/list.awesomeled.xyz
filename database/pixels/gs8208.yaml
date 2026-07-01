@@ -15,8 +15,7 @@ data:
   type: WS2811/12
   clocked: false
   bitrate: 800kHz
-  pixel_size_bits: 24 Bits/Pixel
-  pixel_rate_max: 33.3 k Pixel / s
+  pixel_size_bits: 24
   backup_line: true
 datasheet:
   url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf

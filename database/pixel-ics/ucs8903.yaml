@@ -10,8 +10,7 @@ data:
   clocked: false
   channels: 3
   bitrate: 800kHz
-  pixel_size_bits: 48 Bits/Pixel
-  pixel_rate_max: 16.7 k Pixel / s
+  pixel_size_bits: 48
   backup_line: false
 datasheet:
   url: https://www.dhgate.com/product/ucs8903-ic-3-channel-led-constant-current/421634760.html

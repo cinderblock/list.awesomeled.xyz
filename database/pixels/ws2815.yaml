@@ -13,7 +13,6 @@ data:
   clocked: false
   bitrate: 800kHz
   pixel_size_bits: 24
-  pixel_rate_max: 33.3 k Pixel / s
   backup_line: true
 datasheet:
   url: http://newstar-ledstrip.com/product/20180125101420006.pdf

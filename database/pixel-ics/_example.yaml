@@ -45,7 +45,6 @@ package_sizes:
   - DFN-8
 pin_count: 8
 pixel_data_size: '24'
-pixel_rate_max: 33.3k pixels/sec
 pwm_frequency: 2kHz
 pwm_frequency_notes: Fixed frequency, not adjustable
 quiescent_current: 0.3mA

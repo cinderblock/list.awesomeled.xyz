@@ -10,8 +10,7 @@ data:
   clocked: true
   channels: 3
   bitrate: 15MHz
-  pixel_size_bits: 16 Bits/Pixel
-  pixel_rate_max: 0.94 M Pixel / s
+  pixel_size_bits: 16
   backup_line: false
 datasheet:
   url: https://cdn-shop.adafruit.com/datasheets/LPD6803.pdf

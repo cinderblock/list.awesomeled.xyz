@@ -14,7 +14,6 @@ data:
   clocked: true
   bitrate: 40MHz
   pixel_size_bits: 32
-  pixel_rate_max: 1.25 M Pixel / s
   backup_line: false
 datasheet:
   url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf

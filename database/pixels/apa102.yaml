@@ -14,7 +14,6 @@ data:
   clocked: true
   bitrate: 30MHz
   pixel_size_bits: 32
-  pixel_rate_max: 0.94 M Pixel / s
   backup_line: false
   max_per_string: 250
   max_per_string_notes: Clock pulse gets shorter by a few ns every pixel. After ~250 pixels, the clock signal can no longer be reliably retrieved.
