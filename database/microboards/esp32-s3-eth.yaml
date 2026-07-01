@@ -2,7 +2,7 @@ name: ESP32-S3 ETH
 release_year: 2024
 creator:
   name: Waveshare
-  page: https://www.waveshare.com/product/arduino/boards-kits/esp32/esp32-s3-eth.htm?sku=28771
+  page: https://www.waveshare.com/esp32-s3-eth.htm
 notes: PoE shield available
 compute:
   soc: ESP32 S3

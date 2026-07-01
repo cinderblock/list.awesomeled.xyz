@@ -13,7 +13,7 @@ outputs:
 capabilities:
   designer: true
 links:
-  url: https://madmapper.com/madmapper/
+  url: https://madmapper.com/
 platforms:
   - Windows
   - macOS

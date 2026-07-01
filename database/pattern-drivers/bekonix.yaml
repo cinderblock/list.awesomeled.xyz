@@ -13,7 +13,7 @@ capabilities:
   visualizer: 2D
   programmatic: Input
 links:
-  url: https://www.bekonix.com/platform/
+  url: https://www.bekonix.com/
 platforms:
   - Windows
   - macOS
