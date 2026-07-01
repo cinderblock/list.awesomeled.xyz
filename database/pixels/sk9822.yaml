@@ -27,6 +27,10 @@ electrical:
   channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control current, not PWM
   quiescent_current: 1.0mA
   wattage: 100mW
+images:
+  - file: sk9822.webp
+    source: https://www.adafruit.com/product/2343
+    credit: Adafruit Industries
 other_links:
   - SK9822 Pixel Protocol Overview | Advatek Lighting
 physical:
