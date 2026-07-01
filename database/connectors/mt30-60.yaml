@@ -15,7 +15,7 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 30/60
+  max_current: 60 A # MT60; the smaller MT30 variant is rated 30 A
   max_voltage: 60 V
   ip_rating: IP20-IP65
 termination:
