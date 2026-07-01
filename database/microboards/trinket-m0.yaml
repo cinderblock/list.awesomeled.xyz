@@ -17,6 +17,10 @@ compute:
 connectivity:
   usb: OTG
   serial: true
+images:
+  - file: trinket-m0.webp
+    source: https://www.adafruit.com/product/3500
+    credit: Adafruit Industries
 io:
   max_outputs: 4
   bms: Diode
