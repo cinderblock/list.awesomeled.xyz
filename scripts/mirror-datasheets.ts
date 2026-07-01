@@ -126,14 +126,14 @@ function writeMirrorBlock(
   let urlIdx = -1;
   let mirrorIdx = -1;
   for (let i = dsIdx + 1; i < end; i++) {
-    if (/^  url:/.test(lines[i]!)) urlIdx = i;
-    if (/^  mirror:/.test(lines[i]!)) mirrorIdx = i;
+    if (/^ {2}url:/.test(lines[i]!)) urlIdx = i;
+    if (/^ {2}mirror:/.test(lines[i]!)) mirrorIdx = i;
   }
 
   if (mirrorIdx >= 0) {
     // Replace existing mirror block (key line + its indented children)
     let mEnd = mirrorIdx + 1;
-    while (mEnd < end && /^    /.test(lines[mEnd]!)) mEnd++;
+    while (mEnd < end && /^ {4}/.test(lines[mEnd]!)) mEnd++;
     lines.splice(mirrorIdx, mEnd - mirrorIdx, block);
   } else {
     const at = urlIdx >= 0 ? urlIdx + 1 : dsIdx + 1;
@@ -177,7 +177,9 @@ async function main() {
     };
     writeMirrorBlock(c.file, mirror);
     console.log(`  -> ${mirror.url}`);
-    summary.push(`- \`${c.category}/${c.id}\` (${(bytes.byteLength / 1024).toFixed(0)} KB) <- ${c.url}`);
+    summary.push(
+      `- \`${c.category}/${c.id}\` (${(bytes.byteLength / 1024).toFixed(0)} KB) <- ${c.url}`
+    );
   }
 
   if (process.env.MIRROR_SUMMARY_FILE && summary.length) {

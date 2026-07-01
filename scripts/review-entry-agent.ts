@@ -359,9 +359,7 @@ async function addImage(
 
 function findEntry(entries: Entry[], ref: string): Entry | null {
   const [category, id] = ref.includes('/') ? ref.split('/') : [undefined, ref];
-  return (
-    entries.find((e) => (category ? e.category === category : true) && e.id === id) || null
-  );
+  return entries.find((e) => (category ? e.category === category : true) && e.id === id) || null;
 }
 
 async function main() {

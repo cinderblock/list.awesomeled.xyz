@@ -401,7 +401,12 @@ export const patternDriverColumns: Column[] = [
     render: renderBadgeArray,
     filterConfig: { type: 'select' },
   },
-  { key: 'capabilities.live', label: 'Live', render: renderBool, filterConfig: { type: 'boolean' } },
+  {
+    key: 'capabilities.live',
+    label: 'Live',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
   { key: 'capabilities.visualizer', label: 'Visualizer', filterConfig: { type: 'select' } },
   { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];
@@ -451,7 +456,12 @@ export const microboardColumns: Column[] = [
     render: formatFrequency,
     className: 'data-table-cell--right',
   },
-  { key: 'compute.flash', label: 'Flash', render: formatMemory, className: 'data-table-cell--right' },
+  {
+    key: 'compute.flash',
+    label: 'Flash',
+    render: formatMemory,
+    className: 'data-table-cell--right',
+  },
   { key: 'compute.ram', label: 'RAM', render: formatMemory, className: 'data-table-cell--right' },
   { key: 'connectivity.wifi', label: 'WiFi', filterConfig: { type: 'select' } },
   { key: 'connectivity.ethernet', label: 'Ethernet', filterConfig: { type: 'select' } },
@@ -502,7 +512,12 @@ export const driveLibraryColumns: Column[] = [
   { key: 'name', label: 'Name' },
   { key: 'creator', label: 'Creator', render: renderCreator },
   { key: 'language', label: 'Language', filterConfig: { type: 'select' } },
-  { key: 'platforms', label: 'Platforms', render: renderBadgeArray, filterConfig: { type: 'select' } },
+  {
+    key: 'platforms',
+    label: 'Platforms',
+    render: renderBadgeArray,
+    filterConfig: { type: 'select' },
+  },
   { key: 'license', label: 'License', filterConfig: { type: 'select' } },
   { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];

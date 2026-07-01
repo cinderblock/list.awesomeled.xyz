@@ -37,20 +37,20 @@ overwritten; stale objects can be cleaned up in R2 at leisure.
 
 Repository **secrets**:
 
-| Secret | Value |
-| --- | --- |
-| `R2_ACCOUNT_ID` | Cloudflare account ID |
+| Secret                                      | Value                                            |
+| ------------------------------------------- | ------------------------------------------------ |
+| `R2_ACCOUNT_ID`                             | Cloudflare account ID                            |
 | `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` | R2 API token (Object Read & Write on the bucket) |
-| `R2_BUCKET` | bucket name |
+| `R2_BUCKET`                                 | bucket name                                      |
 
 Repository **variable**:
 
-| Variable | Value |
-| --- | --- |
+| Variable             | Value                                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------- |
 | `R2_PUBLIC_BASE_URL` | public base of the bucket, e.g. `https://assets.awesomeledlist.com` (custom domain) or the `r2.dev` URL |
 
-Also enable *Settings → Actions → General → Allow GitHub Actions to create and
-approve pull requests*, or the bot PR step fails. Until the secrets exist the
+Also enable _Settings → Actions → General → Allow GitHub Actions to create and
+approve pull requests_, or the bot PR step fails. Until the secrets exist the
 workflow no-ops cleanly (no red CI).
 
 ## Local use

@@ -190,7 +190,9 @@ async function cropImage(imagePath: string): Promise<void> {
 
   const inputBuffer = readFileSync(fullPath);
   const inputMetadata = await sharp(inputBuffer).metadata();
-  console.log(`  Original: ${inputMetadata.width}x${inputMetadata.height} (${inputMetadata.format})`);
+  console.log(
+    `  Original: ${inputMetadata.width}x${inputMetadata.height} (${inputMetadata.format})`
+  );
 
   // Leave vector / animated formats untouched.
   if (inputMetadata.format === 'svg' || inputMetadata.format === 'gif') {
@@ -221,7 +223,9 @@ async function main() {
 
   if (args.length === 0) {
     console.log('Usage: bun scripts/crop-image.ts <image1> [image2] ...');
-    console.log('Example: bun scripts/crop-image.ts public/database-images/controllers/baldrick-17.png');
+    console.log(
+      'Example: bun scripts/crop-image.ts public/database-images/controllers/baldrick-17.png'
+    );
     console.log('Output is always WebP; a differently-named original is removed.');
     process.exit(1);
   }

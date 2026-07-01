@@ -7,7 +7,8 @@ name: Mirror datasheets to R2
 
 on:
   push:
-    branches: [master]
+    branches:
+      - master
     paths:
       - 'database/**.yaml'
   workflow_dispatch:
@@ -84,7 +85,7 @@ jobs:
             Automated by .github/workflows/mirror-datasheets.yml
           body: |
             Mirrored the following datasheets to R2 and recorded
-            `datasheet.mirror` (url, sha256, retrieved, source) in the YAML:
+            `datasheet.mirror` (URL, sha256, retrieved, source) in the YAML:
 
             ${{ steps.summary.outputs.body }}
 

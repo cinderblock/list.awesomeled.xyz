@@ -33,10 +33,7 @@ function parseEnv(text: string): Record<string, string> {
     const m = line.match(/^(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/);
     if (!m) continue;
     let val = m[2].trim();
-    if (
-      (val.startsWith('"') && val.endsWith('"')) ||
-      (val.startsWith("'") && val.endsWith("'"))
-    ) {
+    if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
       val = val.slice(1, -1);
     }
     out[m[1]] = val;
@@ -70,10 +67,9 @@ const accountId = env.CLOUDFLARE_ACCOUNT_ID;
 const project = env.CLOUDFLARE_PAGES_PROJECT || 'list-awesomeled-xyz';
 
 if (!token || !accountId) {
-  const missing = [
-    !token && 'CLOUDFLARE_API_TOKEN',
-    !accountId && 'CLOUDFLARE_ACCOUNT_ID',
-  ].filter(Boolean);
+  const missing = [!token && 'CLOUDFLARE_API_TOKEN', !accountId && 'CLOUDFLARE_ACCOUNT_ID'].filter(
+    Boolean
+  );
   fail(
     `Missing required env var(s): ${missing.join(', ')}\n\n` +
       `Fix this by creating a local env file:\n` +
@@ -84,7 +80,7 @@ if (!token || !accountId) {
       `                                create at https://dash.cloudflare.com/profile/api-tokens\n` +
       `       - CLOUDFLARE_ACCOUNT_ID: from the dashboard URL or Workers & Pages -> Overview\n\n` +
       `If you don't have a token yet, ask the repo owner to generate one with the\n` +
-      `"Cloudflare Pages: Read" permission for the "${project}" project.`,
+      `"Cloudflare Pages: Read" permission for the "${project}" project.`
   );
 }
 
@@ -125,9 +121,11 @@ async function fetchDeployments(): Promise<Deployment[]> {
     fail(`Network error reaching the Cloudflare API: ${(e as Error).message}`);
   }
 
-  const body = (await res.json().catch(() => null)) as
-    | { success: boolean; result?: Deployment[]; errors?: { code: number; message: string }[] }
-    | null;
+  const body = (await res.json().catch(() => null)) as {
+    success: boolean;
+    result?: Deployment[];
+    errors?: { code: number; message: string }[];
+  } | null;
 
   if (!res.ok || !body?.success) {
     const apiErrors = body?.errors?.map((e) => `[${e.code}] ${e.message}`).join('; ');
@@ -136,14 +134,14 @@ async function fetchDeployments(): Promise<Deployment[]> {
         `Cloudflare rejected the token (HTTP ${res.status}).\n` +
           `${apiErrors ? `API says: ${apiErrors}\n` : ''}` +
           `Make sure CLOUDFLARE_API_TOKEN has the "Account -> Cloudflare Pages -> Read"\n` +
-          `permission and that CLOUDFLARE_ACCOUNT_ID matches the account that owns it.`,
+          `permission and that CLOUDFLARE_ACCOUNT_ID matches the account that owns it.`
       );
     }
     if (res.status === 404) {
       fail(
         `Project "${project}" not found in account ${accountId} (HTTP 404).\n` +
           `${apiErrors ? `API says: ${apiErrors}\n` : ''}` +
-          `Check CLOUDFLARE_PAGES_PROJECT and CLOUDFLARE_ACCOUNT_ID.`,
+          `Check CLOUDFLARE_PAGES_PROJECT and CLOUDFLARE_ACCOUNT_ID.`
       );
     }
     fail(`Cloudflare API error (HTTP ${res.status}): ${apiErrors || 'unknown error'}`);
@@ -202,9 +200,7 @@ async function snapshot(): Promise<Deployment | undefined> {
   let deployments = await fetchDeployments();
 
   if (branchArg) {
-    deployments = deployments.filter(
-      (d) => d.deployment_trigger?.metadata?.branch === branchArg,
-    );
+    deployments = deployments.filter((d) => d.deployment_trigger?.metadata?.branch === branchArg);
     if (deployments.length === 0) {
       console.log(`No deployments found for branch "${branchArg}" (showing latest 25).`);
       return undefined;
@@ -235,7 +231,7 @@ async function main() {
   }
 
   // Poll until the matched branch's latest deployment is terminal.
-  // eslint-disable-next-line no-constant-condition
+
   while (true) {
     const d = await snapshot();
     const status = d?.latest_stage?.status;
