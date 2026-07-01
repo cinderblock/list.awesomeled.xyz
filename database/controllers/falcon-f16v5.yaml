@@ -34,6 +34,9 @@ features:
   - OLED status display
   - Two-way SmartReceiver communication (reports current, voltage, fuse status)
 price: 280
+related:
+  - type: predecessor
+    ref: controllers/falcon-f16v4
 technical_notes:
   - 192 universes of E1.31 / Art-Net plus DDP
   - 1024 pixels per output; supports 70+ pixel IC types
