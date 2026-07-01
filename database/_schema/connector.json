@@ -97,14 +97,14 @@
       "additionalProperties": false,
       "properties": {
         "max_current": {
-          "type": ["string", "number", "null"],
-          "description": "Per-contact current rating"
+          "description": "Per-contact current rating",
+          "$ref": "common.json#/definitions/current"
         },
         "max_current_notes": {
           "type": ["string", "null"]
         },
         "max_voltage": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/voltage"
         },
         "ip_rating": {
           "type": ["string", "null"],

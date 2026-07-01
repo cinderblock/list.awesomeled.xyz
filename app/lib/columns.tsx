@@ -501,6 +501,7 @@ export const microboardColumns: Column[] = [
     key: 'compute.clock_speed',
     label: 'Clock',
     render: formatFrequency,
+    sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
   {

@@ -227,8 +227,8 @@
           "additionalProperties": false,
           "properties": {
             "max": {
-              "type": "number",
-              "description": "Maximum current per output in amps"
+              "description": "Maximum current per output in amps",
+              "$ref": "common.json#/definitions/current"
             }
           }
         },
@@ -305,8 +305,8 @@
           "additionalProperties": false,
           "properties": {
             "max": {
-              "type": "number",
-              "description": "Maximum current in amps"
+              "description": "Maximum current in amps",
+              "$ref": "common.json#/definitions/current"
             }
           }
         },
@@ -315,10 +315,10 @@
           "additionalProperties": false,
           "properties": {
             "max": {
-              "type": "number"
+              "$ref": "common.json#/definitions/voltage"
             },
             "min": {
-              "type": "number"
+              "$ref": "common.json#/definitions/voltage"
             }
           }
         }

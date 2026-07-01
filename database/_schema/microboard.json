@@ -96,7 +96,7 @@
           "description": "Instruction set (Xtensa, ARM, RISC-V, AVR, ...)"
         },
         "clock_speed": {
-          "type": ["string", "null"]
+          "$ref": "common.json#/definitions/frequency"
         },
         "flash": {
           "type": ["string", "null"]
@@ -152,7 +152,7 @@
           }
         },
         "gpio_voltage": {
-          "type": ["string", "number", "null"]
+          "$ref": "common.json#/definitions/voltage"
         }
       }
     },
