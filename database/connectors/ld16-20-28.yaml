@@ -1,11 +1,8 @@
 name: LD16 /20/28
 creator: Generic
-notes: "Screw Terminal , No Soldering !, version of SP16/17/20/21/28 LD13 is 2 terminal only, LD16 /20 /28 shell sizes"
-year_introduced: 2022
-ratings:
-  max_current: 10 A
-  max_voltage: 250 V
-  ip_rating: IP68
+notes: 'Screw Terminal , No Soldering !, version of SP16/17/20/21/28 LD13 is 2 terminal only, LD16 /20 /28 shell sizes'
+links:
+  product: https://www.aliexpress.com/item/1005003521328338.html
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -17,6 +14,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 10 A
+  max_voltage: 250 V
+  ip_rating: IP68
 termination:
   solder: false
   screw_terminal: true
@@ -26,5 +27,4 @@ termination:
   largest_gauge: 14 AWG
 wiring:
   colors: Black Blue
-links:
-  product: https://www.aliexpress.com/item/1005003521328338.html
+year_introduced: 2022

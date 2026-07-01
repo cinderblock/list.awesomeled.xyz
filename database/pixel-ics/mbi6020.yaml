@@ -1,11 +1,11 @@
 name: MBI6020
 creator: Macroblock
-data:
-  clocked: true
-  channels: 3
 color:
   channel_bits: 10
   pwm_frequency: 9.8kHz
+data:
+  clocked: true
+  channels: 3
 electrical:
   output_voltage: 12V
 other_links:

@@ -2,6 +2,10 @@ name: APA107
 release_year: 2017
 creator: Newstar LED Co.
 notes: Economic type of APA102, cheaper with lower PWM; produced by Newstar
+color:
+  order: BGR
+  brightness_bits: 8+5
+  pwm_frequency: 9.0kHz
 data:
   type: APA102
   clocked: true
@@ -9,10 +13,8 @@ data:
   pixel_size_bits: 32
   pixel_rate_max: 0.94 M Pixel / s
   backup_line: false
-color:
-  order: BGR
-  brightness_bits: 8+5
-  pwm_frequency: 9.0kHz
+datasheet:
+  url: http://newstar-ledstrip.com/productshow816.html
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -25,5 +27,3 @@ electrical:
 physical:
   package_size: '5050'
   pin_count: 6
-datasheet:
-  url: http://newstar-ledstrip.com/productshow816.html

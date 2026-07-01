@@ -2,17 +2,17 @@ name: LightDesigner
 status: discontinued
 creator: RocketLife
 notes: RocketLife controllers, serial/SPI pixels only
+inputs:
+  other: GPIO pins
+outputs:
+  other: Bluetooth/NFC to RocketLife hardware
+capabilities:
+  designer: true
+integrations: LightBox&LightBoard Mini
+links:
+  url: https://www.rocketlife.com/technology/
 platforms:
   - Windows
   - macOS
 pricing:
   price: Free
-capabilities:
-  designer: true
-inputs:
-  other: GPIO pins
-outputs:
-  other: Bluetooth/NFC to RocketLife hardware
-integrations: LightBox&LightBoard Mini
-links:
-  url: https://www.rocketlife.com/technology/

@@ -2,10 +2,15 @@
 name: Example Driver IC
 status: active
 
+release_year: 2018
 creator: Example Semiconductor
 manufacturers:
   - Example Semiconductor
   - Secondary Source Inc
+vendors:
+  - DigiKey
+  - Mouser
+  - LCSC
 notes: Standalone driver IC for custom LED designs
 aggregate_bits: 24
 backup_data_line: false
@@ -44,7 +49,6 @@ pixel_rate_max: 33.3k pixels/sec
 pwm_frequency: 2kHz
 pwm_frequency_notes: Fixed frequency, not adjustable
 quiescent_current: 0.3mA
-release_year: 2018
 supply_voltage: '3.5-5.5'
 supply_voltage_notes: Typical 5V operation
 technical_notes:
@@ -52,14 +56,11 @@ technical_notes:
   - Thermal shutdown at 150C junction temperature
   - ESD protection to 4kV HBM
 third_party_testing: https://example.com/ic-testing
-vendors:
-  - DigiKey
-  - Mouser
-  - LCSC
 ---
 # Example 2: Multi-channel constant current driver
 name: Example 16-Channel Driver
 status: active
+release_year: 2015
 creator: LED Driver Corp
 manufacturers:
   - LED Driver Corp
@@ -88,7 +89,6 @@ package_sizes:
 pin_count: 24
 pixel_data_size: '256'
 quiescent_current: 5mA
-release_year: 2015
 supply_voltage: 5
 technical_notes:
   - 16 channels of 16-bit PWM
@@ -99,6 +99,7 @@ technical_notes:
 name: Example Redundant IC
 status: active
 
+release_year: 2021
 creator: Reliable LED Corp
 manufacturers:
   - Reliable LED Corp
@@ -116,7 +117,6 @@ package_sizes:
   - SOP-14
 pin_count: 14
 pixel_data_size: '24'
-release_year: 2021
 supply_voltage: 5
 technical_notes:
   - BIN pin connects to previous IC for failover
@@ -126,6 +126,7 @@ technical_notes:
 name: Example Legacy Driver
 status: discontinued
 
+release_year: 2008
 creator: Old Chip Co
 manufacturers:
   - Old Chip Co
@@ -140,15 +141,17 @@ package_sizes:
   - DIP-8
 pin_count: 8
 pwm_frequency: 400Hz
-release_year: 2008
 supply_voltage: 5
 ---
 # Example 5: Limited availability specialty IC
 name: Example Specialty Driver
 status: limited
+release_year: 2022
 creator: Niche Semiconductor
 manufacturers:
   - Niche Semiconductor
+vendors:
+  - Specialty Distributor
 notes: Specialty IC for high-power RGBW applications
 brightness_bits: 8
 brightness_control_method: pwm
@@ -165,7 +168,4 @@ output_voltage: 30
 package_sizes:
   - QFN-16
 pin_count: 16
-release_year: 2022
 supply_voltage: '3.3-5.5'
-vendors:
-  - Specialty Distributor

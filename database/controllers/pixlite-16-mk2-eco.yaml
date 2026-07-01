@@ -3,9 +3,7 @@ status: discontinued
 creator:
   name: Advatek
   url: https://www.advateklights.com
-notes: Limited stock left - no website listing. Contact sales@advateklights.com
-  directly and ask for the ECO version; once shelf stock is gone no more will be
-  manufactured.
+notes: Limited stock left - no site listing. Contact sales@advateklights.com directly and ask for the ECO version; once shelf stock is gone no more will be manufactured.
 inputs:
   physical:
     Ethernet: true

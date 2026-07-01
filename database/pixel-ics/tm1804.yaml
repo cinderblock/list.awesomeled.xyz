@@ -1,5 +1,8 @@
 name: TM1804
 creator: Titan Micro Electronics
+color:
+  channel_bits: 8
+  pwm_frequency: 286Hz
 data:
   type: WS2811/12
   clocked: false
@@ -8,9 +11,8 @@ data:
   pixel_size_bits: 24 Bits/Pixel
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: false
-color:
-  channel_bits: 8
-  pwm_frequency: 286Hz
+datasheet:
+  url: http://www.ledlightmake.com/ledlightmake_serv/TM1804%20Datasheet.pdf
 electrical:
   output_voltage: 24V
   supply_voltage: 5V
@@ -19,10 +21,8 @@ electrical:
     max: 5V
   max_current: 60mA
   quiescent_current: 3.0mA
+other_links:
+  - TM1804 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP8
   pin_count: 8
-datasheet:
-  url: http://www.ledlightmake.com/ledlightmake_serv/TM1804%20Datasheet.pdf
-other_links:
-  - TM1804 Pixel Protocol Overview | Advatek Lighting

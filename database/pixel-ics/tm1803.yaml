@@ -1,13 +1,13 @@
 name: TM1803
 creator: Titan Micro Electronics
-data:
-  clocked: false
-  channels: 3
 color:
   channel_bits: 8
   pwm_frequency: 400Hz
+data:
+  clocked: false
+  channels: 3
+other_links:
+  - TM1803 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP8
   pin_count: 8
-other_links:
-  - TM1803 Pixel Protocol Overview | Advatek Lighting

@@ -3,7 +3,11 @@ release_year: 2018
 creator:
   name: Raspberry Pi Foundation
   page: https://www.raspberrypi.org/products/raspberry-pi-3-model-a-plus/
-price: 25
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: BCM2837B0
   cpu: 4× ARM Cortex-A53
@@ -18,13 +22,9 @@ connectivity:
   bluetooth: '4.2'
   usb: OTG
   serial: true
-power:
-  voltage:
-    min: 5V
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   max_outputs: 1
   storage: microSD
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 25

@@ -1,19 +1,6 @@
 name: BenTo
 status: unknown
 creator: Benjamin Kuperberg
-language: JavaScript
-platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Raspberry Pi
-pricing:
-  price: Free
-capabilities:
-  live: true
-  designer: true
-  visualizer: "Yes"
-  programmatic: Both
 inputs:
   audio: Output
   other: OSC, OSCQuery
@@ -23,5 +10,18 @@ outputs:
     sacn: Both
   serial: Both
   other: OSC, OSCQuery
+capabilities:
+  live: true
+  designer: true
+  visualizer: 'Yes'
+  programmatic: Both
+language: JavaScript
 links:
   url: http://github.com/benkuper/BenTo
+platforms:
+  - Windows
+  - macOS
+  - Linux
+  - Raspberry Pi
+pricing:
+  price: Free

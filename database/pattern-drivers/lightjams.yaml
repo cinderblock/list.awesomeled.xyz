@@ -2,16 +2,6 @@ name: Lightjams
 status: active
 creator: Lightjams Inc
 notes: ELM developed by same developer
-platforms:
-  - Windows
-pricing:
-  price: 125 - 450
-  demo:
-    available: Demo available
-capabilities:
-  live: true
-  designer: true
-  programmatic: Both
 inputs:
   video: Both
   audio: Both
@@ -21,5 +11,15 @@ outputs:
     artnet: Both
     sacn: Both
     dmx: Both
+capabilities:
+  live: true
+  designer: true
+  programmatic: Both
 links:
   url: https://www.lightjams.com/
+platforms:
+  - Windows
+pricing:
+  price: 125 - 450
+  demo:
+    available: Demo available

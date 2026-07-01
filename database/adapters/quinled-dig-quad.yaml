@@ -1,9 +1,6 @@
 name: QuinLED-Dig-Quad
 creator: Quindor / Intermittent Technology
 notes: DIY or Pre-Assembled
-price: 38
-diy_or_ots: Both
-parent: ESP8266 or ESP32
 outputs:
   max_channels: 4
   pixel_types: Single or Clocked
@@ -12,5 +9,8 @@ outputs:
 power:
   voltage: 24V
   current: 30A
+diy_or_ots: Both
 links:
   product: https://quinled.info/quinled-dig-uno/
+parent: ESP8266 or ESP32
+price: 38

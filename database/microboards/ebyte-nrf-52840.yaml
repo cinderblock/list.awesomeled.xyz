@@ -3,10 +3,10 @@ release_year: 2021
 creator:
   name: Ebyte
   page: https://www.ebyte.com/en/new-view-info.aspx?id=378
-price: 10
 compute:
   soc: NRF 52840
   cpu: ARM Cortex-M4
   isa: ARMv7-M
 connectivity:
   bluetooth: BLE
+price: 10

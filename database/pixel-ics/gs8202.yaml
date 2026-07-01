@@ -1,11 +1,11 @@
 name: GS8202
 creator: Shenzhen Greesit Technology
-data:
-  clocked: false
-  channels: 3
 color:
   channel_bits: 8
   aggregate_bits: 12
   pwm_frequency: 8.0kHz
+data:
+  clocked: false
+  channels: 3
 other_links:
   - GS8202 Pixel Protocol Overview | Advatek Lighting

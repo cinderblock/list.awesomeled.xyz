@@ -1,13 +1,13 @@
 name: UCS9812
 creator: Normand Electronics
-data:
-  clocked: false
-  channels: 3
 color:
   channel_bits: 16
   pwm_frequency: 1.0kHz
+data:
+  clocked: false
+  channels: 3
+other_links:
+  - UCS9812 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP16
   pin_count: 16
-other_links:
-  - UCS9812 Pixel Protocol Overview | Advatek Lighting

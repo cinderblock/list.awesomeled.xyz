@@ -3,6 +3,15 @@ status: active
 creator: Chamsys Systems
 notes: MagicQ Professional stage lighting console with Pixel Mapping ability,
   software version of hardware console
+outputs:
+  protocols:
+    artnet: Both
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+links:
+  url: https://chamsyslighting.com/
 platforms:
   - Windows
   - macOS
@@ -11,12 +20,3 @@ pricing:
   price: Free 64 universes
   demo:
     available: Demo 64 Universes via ArtNet
-capabilities:
-  live: true
-  designer: true
-  visualizer: 3D
-outputs:
-  protocols:
-    artnet: Both
-links:
-  url: https://chamsyslighting.com/

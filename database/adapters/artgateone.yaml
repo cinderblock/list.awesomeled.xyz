@@ -1,11 +1,11 @@
 name: ArtgateOne
 creator: Krzysztof Korzeniowski
-diy_or_ots: DIY
-parent: Arduino Uno
 notes: Artnet to DMX single Universe with OLED display, maintained ,modern project
 outputs:
   pixel_types: 1 Universe Artnet to DMX Node
 power:
   voltage: 12V
+diy_or_ots: DIY
 links:
   product: https://github.com/ArtGateOne/ArtGateOne-DMX?
+parent: Arduino Uno

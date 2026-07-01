@@ -1,8 +1,5 @@
 name: M4 Port Pixel
 creator: Microcyb
-diy_or_ots: DIY
-parent: Raspberry Pi 3B+ or above
-price: 35
 outputs:
   max_channels: 37
   pixel_types: Single
@@ -10,5 +7,8 @@ outputs:
 power:
   voltage: 12V
   current: 30A
+diy_or_ots: DIY
 links:
   product: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
+parent: Raspberry Pi 3B+ or above
+price: 35

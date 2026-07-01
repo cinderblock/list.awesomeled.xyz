@@ -3,6 +3,9 @@ creator: Witop
 manufacturers:
   - Witop
 notes: Built-in 8->12bit gamma correction. "B" version is "without original program". Similar to GS8208
+color:
+  brightness_bits: 8
+  pwm_frequency: 8.0kHz
 data:
   type: WS2811/12
   clocked: false
@@ -10,17 +13,14 @@ data:
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: true
-color:
-  brightness_bits: 8
-  pwm_frequency: 8.0kHz
+datasheet:
+  url: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
 electrical:
   led_voltage: 12V
   vcc_voltage: 12V
   channel_current: 17.5mA
   wattage: 210.mW
-physical:
-  package_size: '5050'
-datasheet:
-  url: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
 other_links:
   - CS8812 Pixel Protocol Overview | Advatek Lighting
+physical:
+  package_size: '5050'

@@ -4,7 +4,11 @@ creator: Expansion Board Co
 manufacturers:
   - Expansion Board Co
   - Community PCB
+vendors:
+  - LED Parts Store
+  - Direct from manufacturer
 notes: Adds 16 differential outputs to Raspberry Pi
+outputs: Single and Clock
 diy_or_ots: OTS
 image: 16-port-expander.jpg
 images:
@@ -14,7 +18,6 @@ max_channels: 16
 max_current: 40
 max_voltage: 24
 output_connectors: RJ45
-outputs: Single and Clock
 parent: Raspberry Pi GPIO
 pixel_types: Both
 price: 45.99
@@ -26,9 +29,6 @@ related_microboards:
   - raspberry-pi-4
   - raspberry-pi-5
 url: https://example.com/16-port-expander
-vendors:
-  - LED Parts Store
-  - Direct from manufacturer
 ---
 # Example 2: ESP32 expansion shield
 name: Example ESP Output Shield
@@ -37,12 +37,12 @@ manufacturers:
   - JLCPCB
   - PCBWay
 notes: Open source level shifter and output expansion for ESP32
+outputs: Single
 diy_or_ots: DIY
 max_channels: 8
 max_current: 10
 max_voltage: 5
 output_connectors: JST-SM
-outputs: Single
 parent: ESP32 DevKit
 pixel_types: Async
 price: 15
@@ -56,31 +56,31 @@ name: Example Controller Expansion Board
 creator: Controller Company
 manufacturers:
   - Controller Company
+vendors:
+  - Authorized Dealer
 notes: Official expansion for Example Controller Pro
+outputs: Single and Clock
 diy_or_ots: OTS
 max_channels: 16
 max_current: 20
 max_voltage: 12
 output_connectors: Screw Terminal
-outputs: Single and Clock
 parent: Example Controller Pro
 pixel_types: Both
 price: 89
 url: https://example.com/expansion
 
-vendors:
-  - Authorized Dealer
 ---
 # Example 4: DIY level shifter board
 name: Example Level Shift Board
 creator: null
 notes: Simple 74AHCT125 level shifter breakout
+outputs: Single
 diy_or_ots: DIY
 max_channels: 4
 max_current: null
 max_voltage: 5
 output_connectors: Pin Header
-outputs: Single
 parent: Any 3.3V microcontroller
 pixel_types: Async
 price: 3.50

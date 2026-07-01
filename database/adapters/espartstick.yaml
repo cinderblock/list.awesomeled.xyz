@@ -1,6 +1,4 @@
 name: ESPArtstick
-parent: Wemos Dx Mini (ESP32/ESP8266)
-price: 25
 outputs:
   max_channels: 6
   pixel_types: Single
@@ -8,3 +6,5 @@ power:
   voltage: 5V
 links:
   product: https://espartstick.ecwid.com/
+parent: Wemos Dx Mini (ESP32/ESP8266)
+price: 25

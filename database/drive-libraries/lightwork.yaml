@@ -1,17 +1,17 @@
 name: Lightwork
 creator: PWRFLcreative
+features: Webcam LED mapping
 language: Processing
 license: GPL-3.0
+links:
+  repo: https://github.com/PWRFLcreative/Lightwork
 platforms:
   - macOS
   - Windows
-features: Webcam LED mapping
+related_pixel_ics:
+  - dmx512
 supported_ics:
   - Art-Net
   - sACN
   - PixelPusher
   - Fadecandy
-related_pixel_ics:
-  - dmx512
-links:
-  repo: https://github.com/PWRFLcreative/Lightwork

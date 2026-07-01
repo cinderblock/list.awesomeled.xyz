@@ -1,9 +1,8 @@
 name: VH /R
 creator: JST
 notes: Optikinetics wheel rotator connector , post 2000s
-ratings:
-  max_current: 10 A
-  max_voltage: 250 V
+links:
+  product: https://www.jst.com/wp-content/uploads/2021/08/eVH.pdf
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -17,11 +16,12 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+ratings:
+  max_current: 10 A
+  max_voltage: 250 V
 termination:
   solder: false
   crimp: true
   idc: false
   smallest_gauge: 22 AWG
   largest_gauge: 16 AWG
-links:
-  product: https://www.jst.com/wp-content/uploads/2021/08/eVH.pdf

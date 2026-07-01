@@ -1,13 +1,13 @@
 name: ArtNet to TMP2 Convertor
 status: unknown
 creator: ATCE
-language: Visual Basic
-platforms:
-  - Windows
 features: Wireshark captured artnet stream convert to TMP2(Jinx native) file
-supported_ics:
-  - DMX
-related_pixel_ics:
-  - dmx512
+language: Visual Basic
 links:
   repo: http://www.tlhome.de/ATCE.htm
+platforms:
+  - Windows
+related_pixel_ics:
+  - dmx512
+supported_ics:
+  - DMX

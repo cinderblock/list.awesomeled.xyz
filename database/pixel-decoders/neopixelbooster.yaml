@@ -1,8 +1,8 @@
 name: NeopixelBooster
 creator: Jan "yaqwsx" Mrázek
-price: 3.5
 outputs:
   pixel_types: Inline 5V buck convertor
   connectors: solder
 links:
   product: https://www.tindie.com/products/yaqwsx/rb0004-neopixelbooster/
+price: 3.5

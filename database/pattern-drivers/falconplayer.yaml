@@ -1,17 +1,6 @@
 name: FalconPlayer
 status: unknown
 notes: FPP + RasPi/BBB = playback box
-platforms:
-  - Raspberry Pi
-  - Beagle Bone
-  - macOS
-  - Linux
-pricing:
-  price: FOSS
-capabilities:
-  live: true
-  designer: false
-  programmatic: Both
 inputs:
   video: Output
   audio: Output
@@ -25,6 +14,17 @@ outputs:
   gpio: Both
   serial: Output
   other: Pixelnet, Renard, UDP, HTTP, MQTT
+capabilities:
+  live: true
+  designer: false
+  programmatic: Both
 integrations: OSC, MIDI, Home Assistant, RemoteFalcon, plugins
 links:
   url: https://github.com/FalconChristmas/fpp
+platforms:
+  - Raspberry Pi
+  - Beagle Bone
+  - macOS
+  - Linux
+pricing:
+  price: FOSS

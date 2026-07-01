@@ -3,7 +3,11 @@ release_year: 2012
 creator:
   name: Beagleboard.org
   page: http://beagleboard.org/black
-price: 50
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: am3358
   cpu: Cortex-A8, 2x PRUSS
@@ -17,13 +21,9 @@ connectivity:
   ethernet: 100BASE-TX
   usb: USB 2.0
   serial: true
-power:
-  voltage:
-    min: 5V
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   max_outputs: 48
   storage: microSD
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 50

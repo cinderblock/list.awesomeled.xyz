@@ -17,12 +17,12 @@ outputs:
   clocked: selectable # supports clockless and clocked signal types
   pixels:
     max_per_output: 510 # 16320 total / 32 outputs
-price: 1060
 data:
   fps: 60
   formats:
     - RGB
     - RGBW
+price: 1060
 technical_notes:
   - 96 Art-Net universes (49,152 DMX channels)
   - ~16,320 RGB pixels or ~12,288 RGBW pixels total

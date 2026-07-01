@@ -3,7 +3,11 @@ release_year: 2017
 creator:
   name: Raspberry Pi Foundation
   page: https://www.raspberrypi.org/products/raspberry-pi-zero-w/
-price: 10
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: BCM2835
   cpu: ARM11
@@ -18,13 +22,9 @@ connectivity:
   bluetooth: '4.1'
   usb: OTG
   serial: true
-power:
-  voltage:
-    min: 5V
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   max_outputs: 1
   storage: microSD
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 10

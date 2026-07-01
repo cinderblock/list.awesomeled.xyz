@@ -1,10 +1,8 @@
 name: M12
 creator: Generic
 notes: Originally sensor connectors for automation, low cost varieties available
-ratings:
-  max_current: 4 A
-  max_voltage: 50 V
-  ip_rating: IP67
+links:
+  product: https://uk.rs-online.com/web/p/industrial-circular-connectors/2906584/
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -17,6 +15,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+ratings:
+  max_current: 4 A
+  max_voltage: 50 V
+  ip_rating: IP67
 termination:
   solder: true
   crimp: true
@@ -25,5 +27,3 @@ termination:
   largest_gauge: 14 AWG
 wiring:
   colors: Black
-links:
-  product: https://uk.rs-online.com/web/p/industrial-circular-connectors/2906584/

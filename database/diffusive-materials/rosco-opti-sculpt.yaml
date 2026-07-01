@@ -1,8 +1,9 @@
 name: Rosco Opti Sculpt
-material_type: PC Polycarbonate
-purpose_made: true
 notes: embossed DOE, 10°, 20°, 30°, 10°x20°, 10°x30°, 10°x40°, 10°x60°, 15°x35°,
   15°x45°, 20°x40° and the unique 40°/60° Reversible
+links:
+  product: https://us.rosco.com/en/product/opti-sculpt
+material_type: PC Polycarbonate
 optical:
   color_rendition: 5
   light_transmission: 5
@@ -13,5 +14,4 @@ physical:
   properties: Transmissive
 pricing:
   price_range: $$$$
-links:
-  product: https://us.rosco.com/en/product/opti-sculpt
+purpose_made: true

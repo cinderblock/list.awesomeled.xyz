@@ -1,17 +1,6 @@
 name: ProtoPixel Create
 status: unknown
 creator: ProtoPixel
-platforms:
-  - macOS
-pricing:
-  price: 176
-  demo:
-    available: Trial + watermark
-capabilities:
-  live: true
-  designer: true
-  visualizer: 2D
-  programmatic: Input
 inputs:
   video: Input
   audio: Both
@@ -20,6 +9,17 @@ outputs:
   protocols:
     artnet: Both
   other: ProtoPixel proprietary protocol, OSC, UDP
+capabilities:
+  live: true
+  designer: true
+  visualizer: 2D
+  programmatic: Input
 integrations: Python (scriptable)
 links:
   url: https://www.protopixel.io/design
+platforms:
+  - macOS
+pricing:
+  price: 176
+  demo:
+    available: Trial + watermark

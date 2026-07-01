@@ -2,7 +2,10 @@ name: Arduino Mega 2560 Rev3
 creator:
   name: Arduino
   page: https://store-usa.arduino.cc/collections/boards/products/arduino-mega-2560-rev3
-price: 40
+power:
+  voltage:
+    min: 6V
+    max: 20V
 compute:
   soc: ATmega2560
   cpu: AVR
@@ -14,11 +17,8 @@ compute:
 connectivity:
   wifi: false
   usb: Power + UART
-power:
-  voltage:
-    min: 6V
-    max: 20V
 io:
   max_outputs: 54
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 40

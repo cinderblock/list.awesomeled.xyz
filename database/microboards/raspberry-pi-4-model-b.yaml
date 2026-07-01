@@ -3,7 +3,11 @@ release_year: 2019
 creator:
   name: Raspberry Pi Foundation
   page: https://www.raspberrypi.org/products/raspberry-pi-4-model-b/
-price: 35
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: BCM2711
   cpu: 4× ARM Cortex-A72
@@ -18,12 +22,8 @@ connectivity:
   bluetooth: '5.0'
   usb: OTG x2, 3.0 x2
   serial: true
-power:
-  voltage:
-    min: 5V
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   storage: microSD
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 35

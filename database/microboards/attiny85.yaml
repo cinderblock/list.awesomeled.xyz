@@ -2,7 +2,10 @@ name: ATtiny85
 creator:
   name: Atmel
   page: https://www.microchip.com/wwwproducts/en/ATtiny85
-price: 1
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 5.0V
 compute:
   soc: ATtiny85
   cpu: AVR
@@ -13,11 +16,8 @@ compute:
   linux: false
 connectivity:
   serial: true
-power:
-  voltage:
-    max: 5V
-  gpio_voltage: 5.0V
 io:
   max_outputs: 6
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 1

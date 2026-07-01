@@ -1,6 +1,4 @@
 name: SPIxels Board
-diy_or_ots: DIY
-parent: Raspberry Pi
 outputs:
   max_channels: 16
   pixel_types: Clocked
@@ -8,5 +6,7 @@ outputs:
   description: Clocked
 power:
   voltage: 5V
+diy_or_ots: DIY
 links:
   product: http://spixels.org/
+parent: Raspberry Pi

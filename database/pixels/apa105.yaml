@@ -4,6 +4,10 @@ creator: Newstar LED Co.
 manufacturers:
   - Newstar LED Co.
 notes: ws2812b/sk6812 with built-in capacitors
+color:
+  order: GRB
+  brightness_bits: 8
+  pwm_frequency: 1.2kHz
 data:
   type: WS2811/12
   clocked: false
@@ -11,10 +15,8 @@ data:
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: false
-color:
-  order: GRB
-  brightness_bits: 8
-  pwm_frequency: 1.2kHz
+datasheet:
+  url: http://www.newstar-ledstrip.com/productshow819.html
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -31,5 +33,3 @@ physical:
     - '2020'
   package_size: 5050, 3535, 2020
   pin_count: 4
-datasheet:
-  url: http://www.newstar-ledstrip.com/productshow819.html

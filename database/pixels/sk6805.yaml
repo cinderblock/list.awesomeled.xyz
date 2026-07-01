@@ -2,15 +2,17 @@ name: SK6805
 status: active
 creator: Opsco/Newstar
 notes: Integrated-IC addressable RGB LED in nano/micro packages; single-wire WS2812/NeoPixel-compatible. Smaller sibling of the SK6812.
+color:
+  order: GRB
+  brightness_bits: 8
 data:
   type: WS2811/12
   clocked: false
   bitrate: 800kHz
   pixel_size_bits: 24
   backup_line: false
-color:
-  order: GRB
-  brightness_bits: 8
+datasheet:
+  url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
 electrical:
   led_voltage: 5V
   vcc_voltage: 3.7-5.5V
@@ -24,8 +26,6 @@ physical:
     - '2427'
   package_size: 1515,2427
   pin_count: 4
-datasheet:
-  url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
 technical_notes:
   - 24-bit color (8 bits per channel) over a single-wire unipolar RZ protocol
   - NeoPixel-compatible; sold by Adafruit as nano (2427) and other micro packages

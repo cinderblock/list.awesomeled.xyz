@@ -3,6 +3,8 @@ release_year: 2016
 creator:
   name: NodeMCU
   page: https://www.espressif.com/en/products/socs/esp32
+power:
+  gpio_voltage: 3.3V
 compute:
   soc: ESP32
   cpu: Xtensa LX6
@@ -13,8 +15,6 @@ connectivity:
   bluetooth: '4.1'
   usb: Power + UART
   serial: true
-power:
-  gpio_voltage: 3.3V
 io:
-  bms: "No"
+  bms: 'No'
   imu: false

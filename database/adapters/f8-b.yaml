@@ -1,7 +1,5 @@
 name: F8-B
 creator: Kulp Lights
-parent: BeagleBone
-price: 51
 outputs:
   max_channels: 8
   pixel_types: Single
@@ -11,3 +9,5 @@ power:
   voltage: 12V
 links:
   product: https://kulplights.com/product/f8-b/
+parent: BeagleBone
+price: 51

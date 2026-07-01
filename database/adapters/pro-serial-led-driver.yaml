@@ -1,8 +1,5 @@
 name: Pro Serial LED Driver
 creator: ElectroMage
-diy_or_ots: OTS
-parent: Any UART / Serial
-price: 49
 outputs:
   max_channels: 8
   pixel_types: Single (8) or Clocked (6)
@@ -11,5 +8,8 @@ outputs:
 power:
   voltage: 12V
   current: 15A
+diy_or_ots: OTS
 links:
   product: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/
+parent: Any UART / Serial
+price: 49

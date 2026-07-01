@@ -1,13 +1,6 @@
 name: MadMapper
 status: active
 creator: Smode Tech
-platforms:
-  - Windows
-  - macOS
-pricing:
-  price: 420
-capabilities:
-  designer: true
 inputs:
   video: Input
   other: MIDI,OSC,Spout,Syphon,NDI
@@ -17,5 +10,12 @@ outputs:
     sacn: Both
     dmx: Both
   other: MIDI, OSC, EtherDream, Arduino
+capabilities:
+  designer: true
 links:
   url: https://madmapper.com/madmapper/
+platforms:
+  - Windows
+  - macOS
+pricing:
+  price: 420

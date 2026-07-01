@@ -1,7 +1,8 @@
 name: Polyester Pillow Fill
-material_type: Polyester fibre
-purpose_made: false
 notes: Clouds and rocket plumes
+links:
+  product: https://www.amazon.com/Fairfield-Poly-Premium-Fiber-32-Ounce/dp/B004ALQ0M2
+material_type: Polyester fibre
 optical:
   color_rendition: 2
   light_transmission: 3
@@ -13,5 +14,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$
-links:
-  product: https://www.amazon.com/Fairfield-Poly-Premium-Fiber-32-Ounce/dp/B004ALQ0M2
+purpose_made: false

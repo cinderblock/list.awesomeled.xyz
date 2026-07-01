@@ -1,7 +1,5 @@
 name: F32-B
 creator: Kulp Lights
-price: 95
-parent: BeagleBone
 outputs:
   max_channels: 32
   pixel_types: Single
@@ -11,3 +9,5 @@ power:
   voltage: 12V
 links:
   product: https://kulplights.com/product/f32-b/
+parent: BeagleBone
+price: 95

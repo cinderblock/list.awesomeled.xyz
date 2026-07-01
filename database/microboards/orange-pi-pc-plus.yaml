@@ -2,7 +2,6 @@ name: Orange Pi PC Plus
 creator:
   name: Shenzhen Xunlong Software
   page: http://www.orangepi.org/
-price: 24
 compute:
   soc: Allwinner Quad Core H3
   cpu: 4× ARM Cortex-A7
@@ -17,5 +16,6 @@ connectivity:
   usb: OTG x1, 2.0 x3
 io:
   storage: microSD
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 24

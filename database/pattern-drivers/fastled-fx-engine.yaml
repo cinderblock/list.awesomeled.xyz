@@ -1,6 +1,10 @@
 name: FastLED "FX" engine
 status: unknown
 creator: Zach Vorhies
+capabilities:
+  live: false
+  designer: true
+  visualizer: Browser Wasm Preview
 platforms:
   - ESP
   - AVR
@@ -9,7 +13,3 @@ platforms:
   - Browser
 pricing:
   price: Free
-capabilities:
-  live: false
-  designer: true
-  visualizer: Browser Wasm Preview

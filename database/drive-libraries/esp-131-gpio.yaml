@@ -1,14 +1,14 @@
 name: ESP-131 GPIO
 status: active
 creator: Gary Mueller
+features: ESP E1.31 sACN to 8 channel relay decoder/driver
+hardware: ESP8266
 language: C++
+links:
+  repo: https://github.com/garymueller/ESP-131GPIO
 platforms:
   - Arduino
   - ESP8266
-hardware: ESP8266
-features: ESP E1.31 sACN to 8 channel relay decoder/driver
 supported_ics:
   - E1.31
   - sACN
-links:
-  repo: https://github.com/garymueller/ESP-131GPIO

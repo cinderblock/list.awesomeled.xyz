@@ -1,8 +1,9 @@
 name: Corrugated Split Loom Conduit/Tubing/Sleeving
-material_type: PP/ PE
-purpose_made: false
 notes: Split corrugated loom tubing covers and organizes wire and cable and has
   flexible walls with a lengthwise slit.
+links:
+  product: https://www.cabletiesandmore.ca/images/gallery/white-wire-loom-perfoot.jpg
+material_type: PP/ PE
 optical:
   color_rendition: 4
   light_transmission: 3-4
@@ -12,5 +13,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$
-links:
-  product: https://www.cabletiesandmore.ca/images/gallery/white-wire-loom-perfoot.jpg
+purpose_made: false

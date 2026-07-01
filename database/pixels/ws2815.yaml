@@ -3,6 +3,11 @@ status: active
 release_year: 2018
 creator: WorldSemi/Newstar
 notes: 12V WS2813
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 2.0kHz
+  pwm_frequency_notes: 2kHz according to datasheet
 data:
   type: WS2811/12
   clocked: false
@@ -10,11 +15,10 @@ data:
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: true
-color:
-  order: RGB
-  brightness_bits: 8
-  pwm_frequency: 2.0kHz
-  pwm_frequency_notes: 2kHz according to datasheet
+datasheet:
+  url: http://newstar-ledstrip.com/product/20180125101420006.pdf
+  discrepancies:
+    - GPIO min spec of 0.7*VDD (8.4V) is incorrect - actual threshold is 3.5V based on internal 5V Vdd
 electrical:
   led_voltage: 12V
   led_voltage_notes: Datasheet 9.5-13.5V range
@@ -27,17 +31,13 @@ electrical:
   channel_current: 10mA
   quiescent_current: 2.1mA
   wattage: 120mW
+other_links:
+  - WS2815 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_sizes:
     - '5050'
   package_size: '5050'
   pin_count: 6
-datasheet:
-  url: http://newstar-ledstrip.com/product/20180125101420006.pdf
-  discrepancies:
-    - GPIO min spec of 0.7*VDD (8.4V) is incorrect - actual threshold is 3.5V based on internal 5V Vdd
-other_links:
-  - WS2815 Pixel Protocol Overview | Advatek Lighting
 technical_notes:
   - 12V version allows longer cable runs with less voltage drop
   - Internal regulator provides 5V logic from 12V supply

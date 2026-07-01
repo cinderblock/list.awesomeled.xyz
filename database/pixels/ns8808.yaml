@@ -2,6 +2,10 @@ name: NS8808
 release_year: 2018
 creator: Newstar LED Co.
 notes: Similar to ws2815, but UCS1903 protocol
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 8.0kHz
 data:
   type: UCS1903
   clocked: false
@@ -9,10 +13,8 @@ data:
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: true
-color:
-  order: RGB
-  brightness_bits: 8
-  pwm_frequency: 8.0kHz
+datasheet:
+  url: http://newstar-ledstrip.com/productshow855.html
 electrical:
   led_voltage: 12V
   vcc_voltage: 5V
@@ -25,5 +27,3 @@ electrical:
 physical:
   package_size: '5050'
   pin_count: 6
-datasheet:
-  url: http://newstar-ledstrip.com/productshow855.html

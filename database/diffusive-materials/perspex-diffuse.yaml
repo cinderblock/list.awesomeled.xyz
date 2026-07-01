@@ -1,6 +1,7 @@
 name: Perspex Diffuse
+links:
+  product: https://perspex.com/news/pom-diffuse/
 material_type: PMMA
-purpose_made: true
 optical:
   light_transmission: 2 - 5
   tinted: T&C
@@ -11,5 +12,4 @@ physical:
   properties: Backlight
 pricing:
   price_range: $$$$$
-links:
-  product: https://perspex.com/news/pom-diffuse/
+purpose_made: true

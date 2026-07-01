@@ -1,9 +1,9 @@
 name: PixFog Pixel Based Fog Controller
 creator: Innotronix
-diy_or_ots: OTS
-price: 33
 outputs:
   max_channels: 1
   pixel_types: single
   connectors: Phoenix Screw
   description: Pixel Data
+diy_or_ots: OTS
+price: 33

@@ -1,12 +1,12 @@
 name: Pixel 2 Things Servo
 creator: David Peace
 notes: WS to 9DC and 6 Servo Outputs
-diy_or_ots: OTS
-price: 99.99
 outputs:
   max_channels: 15
   pixel_types: Converts pixel data into hobby servo outputs
   connectors: Phoenix Screw
   description: PWM
+diy_or_ots: OTS
 links:
   product: https://www.pixel2things.com/
+price: 99.99

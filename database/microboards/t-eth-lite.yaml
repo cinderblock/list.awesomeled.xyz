@@ -4,7 +4,6 @@ creator:
   name: Lilygo
   page: https://www.lilygo.cc/products/t-eth-lite
 notes: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
-price: 15
 compute:
   soc: ESP32 S3
   cpu: Xtensa LX6
@@ -15,3 +14,4 @@ connectivity:
   ethernet: 100BASE-TX
   bluetooth: '4.1'
   poe: 'Y'
+price: 15

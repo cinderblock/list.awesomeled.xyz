@@ -1,8 +1,12 @@
 name: FastLED
 status: active
 creator: Zach Vorhies (current), Daniel Garcia, Mark Kriegsman
+hardware: many
 language: C++
 license: MIT
+links:
+  repo: https://github.com/FastLED/FastLED
+  youtube: https://www.youtube.com/watch?v=4Ut4UK7612M
 platforms:
   - Arduino
   - ESP32
@@ -13,7 +17,18 @@ platforms:
   - Raspberry Pi Pico
   - Linux
   - Web
-hardware: many
+related_pixel_ics:
+  - dmx512
+  - lpd8806
+  - p9813
+  - sk6812-5050
+  - sm16716
+  - tm1803
+  - tm1804
+  - tm1809
+  - ucs1903
+  - ucs1904
+  - ws2801
 supported_ics:
   - WS2811
   - WS2812
@@ -36,18 +51,3 @@ supported_ics:
   - UCS1904
   - UCS2903
   - DMX
-related_pixel_ics:
-  - dmx512
-  - lpd8806
-  - p9813
-  - sk6812-5050
-  - sm16716
-  - tm1803
-  - tm1804
-  - tm1809
-  - ucs1903
-  - ucs1904
-  - ws2801
-links:
-  repo: https://github.com/FastLED/FastLED
-  youtube: https://www.youtube.com/watch?v=4Ut4UK7612M

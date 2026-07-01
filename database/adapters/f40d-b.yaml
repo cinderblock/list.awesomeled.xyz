@@ -1,7 +1,6 @@
 name: F40D-B
 status: null
 creator: Kulp Lights
-parent: BeagleBone
 outputs:
   max_channels: 40
   pixel_types: Single
@@ -11,3 +10,4 @@ power:
   voltage: 5V
 links:
   product: https://kulplights.com/product/f40d-pb/
+parent: BeagleBone

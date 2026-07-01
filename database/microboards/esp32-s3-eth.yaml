@@ -4,7 +4,6 @@ creator:
   name: Waveshare
   page: https://www.waveshare.com/product/arduino/boards-kits/esp32/esp32-s3-eth.htm?sku=28771
 notes: PoE shield available
-price: 17
 compute:
   soc: ESP32 S3
   isa: Xtensa
@@ -14,3 +13,4 @@ connectivity:
   poe: Y
 io:
   storage: microSD
+price: 17

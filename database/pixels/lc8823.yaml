@@ -1,11 +1,11 @@
 name: LC8823
+color:
+  brightness_bits: 8+5
+  pwm_frequency: 27kHz
 data:
   type: APA102
   clocked: true
   backup_line: false
-color:
-  brightness_bits: 8+5
-  pwm_frequency: 27kHz
 electrical:
   led_voltage: 3-7.5V
   vcc_voltage: 5V

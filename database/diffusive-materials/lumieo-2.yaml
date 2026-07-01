@@ -1,8 +1,9 @@
 name: Lumieo 2
-material_type: PMMA
-purpose_made: true
 notes: premium white acrylic sheet which provides both high transmission and
   excellent lamp hiding capabilities
+links:
+  product: https://alpadvantage.com/products/lumieo-ii/
+material_type: PMMA
 optical:
   color_rendition: 3
   light_transmission: 4
@@ -15,5 +16,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$$$
-links:
-  product: https://alpadvantage.com/products/lumieo-ii/
+purpose_made: true

@@ -1,11 +1,11 @@
 name: Standard Differential Receiver
 creator: Microcyb
-price: 22
+electrical:
+  max_voltage: 12V
 io:
   channels: 4
   interface: Differential Pairs
   buffered: true
-electrical:
-  max_voltage: 12V
 links:
   product: https://microcyb.com
+price: 22

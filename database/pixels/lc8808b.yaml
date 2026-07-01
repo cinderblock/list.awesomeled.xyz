@@ -1,16 +1,18 @@
 name: LC8808B
 creator: Color
 notes: Very similar to the GS8208, the spec sheets are almost identical
+color:
+  order: BGR
+  brightness_bits: 8
+  pwm_frequency: 8.0kHz
 data:
   clocked: false
   bitrate: 800kHz
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: true
-color:
-  order: BGR
-  brightness_bits: 8
-  pwm_frequency: 8.0kHz
+datasheet:
+  url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
 electrical:
   led_voltage: 12V
   vcc_voltage: 5V
@@ -23,5 +25,3 @@ electrical:
 physical:
   package_size: '5050'
   pin_count: 6
-datasheet:
-  url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf

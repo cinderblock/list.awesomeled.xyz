@@ -1,10 +1,10 @@
 name: Plasma 2040
 creator: Pimoroni
-diy_or_ots: OTS
-parent: Rpi 2040
-price: 16
 outputs:
   pixel_types: Single and Clocked
   connectors: screw Terminals
+diy_or_ots: OTS
 links:
   product: https://shop.pimoroni.com/products/plasma-2040
+parent: Rpi 2040
+price: 16

@@ -1,10 +1,8 @@
 name: XLR 5
 creator: Neutrik /Generic
 notes: 5 Pin is USITT Standard for DMX 512, Pins 4 + 5 Not Used In Standard. Beware of power or second universe on non standard pinouts . XLR 4 scroller cable 2 data+2 power, XLR 6 comms & video gear.
-ratings:
-  max_current: 10 A
-  max_voltage: 50 V
-  ip_rating: IP40
+links:
+  product: https://www.neutrik.com/en/products/lightning/xlr
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -17,6 +15,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: Both
   board_fingers: false
+ratings:
+  max_current: 10 A
+  max_voltage: 50 V
+  ip_rating: IP40
 termination:
   solder: true
   crimp: true
@@ -26,5 +28,3 @@ termination:
 wiring:
   convention: Female output jack, male input jack
   colors: Black, Silver, optional colored collars
-links:
-  product: https://www.neutrik.com/en/products/lightning/xlr

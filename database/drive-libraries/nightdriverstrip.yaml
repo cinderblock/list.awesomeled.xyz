@@ -1,15 +1,15 @@
 name: NightDriverStrip
 status: active
 creator: PlummersSoftwareLLC
+features: 8 channels of WS2812B Python / C++ Pattern Creator
+hardware: ESP32
 language: C++
 license: GPL-3.0
-platforms:
-  - ESP32
-hardware: ESP32
-features: 8 channels of WS2812B Python / C++ Pattern Creator
-supported_ics:
-  - WS2812B
-  - HUB75
 links:
   repo: https://github.com/PlummersSoftwareLLC/NightDriverStrip
   youtube: https://www.youtube.com/watch?v=UZxY_BLSsGg
+platforms:
+  - ESP32
+supported_ics:
+  - WS2812B
+  - HUB75

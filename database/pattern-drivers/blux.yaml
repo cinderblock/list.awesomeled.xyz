@@ -1,19 +1,6 @@
 name: Blux
 status: unknown
 creator: Benjamin Kuperberg
-language: JavaScript
-platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Raspberry Pi
-pricing:
-  price: Free
-capabilities:
-  live: true
-  designer: true
-  visualizer: "Yes"
-  programmatic: Both
 inputs:
   audio: Output
   other: OSC, OSCQuery, MIDI
@@ -24,5 +11,18 @@ outputs:
     dmx: Both
   serial: Both
   other: OSC, OSCQuery, MIDI
+capabilities:
+  live: true
+  designer: true
+  visualizer: 'Yes'
+  programmatic: Both
+language: JavaScript
 links:
   url: http://benjamin.kuperberg.fr/blux
+platforms:
+  - Windows
+  - macOS
+  - Linux
+  - Raspberry Pi
+pricing:
+  price: Free

@@ -1,4 +1,7 @@
 name: DMX512
+color:
+  channel_bits: 8
+  pwm_frequency: 3.0kHz
 data:
   type: DMX512P
   clocked: false
@@ -7,14 +10,11 @@ data:
   pixel_size_bits: 24 Bits/Pixel
   pixel_rate_max: 27.1 k Pixel / s
   backup_line: false
-color:
-  channel_bits: 8
-  pwm_frequency: 3.0kHz
 electrical:
   output_voltage: 24V
   supply_voltage: 5V
+other_links:
+  - DMX512 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP8
   pin_count: 8
-other_links:
-  - DMX512 Pixel Protocol Overview | Advatek Lighting

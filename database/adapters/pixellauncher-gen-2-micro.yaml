@@ -2,7 +2,6 @@ name: PixelLauncher Gen 2 Micro
 creator: Digital Ambience
 notes: LED data up to 250 ft right out of your controller No sender. It cleans
   up the signal.
-diy_or_ots: OTS
 outputs:
   max_channels: 1
   pixel_types: Single
@@ -10,5 +9,6 @@ outputs:
   description: Single
 power:
   voltage: 24V
+diy_or_ots: OTS
 links:
   product: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/

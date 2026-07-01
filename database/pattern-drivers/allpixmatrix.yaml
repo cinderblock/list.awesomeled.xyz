@@ -1,18 +1,18 @@
 name: Allpixmatrix
 status: unknown
 creator: NLED
-platforms:
-  - Windows
-pricing:
-  price: Free
-capabilities:
-  live: false
-  designer: true
 inputs:
   video: Input
 outputs:
   protocols:
     artnet: Input
   other: glediator files, pixel data
+capabilities:
+  live: false
+  designer: true
 links:
   url: https://github.com/NLED/allpixmatrix
+platforms:
+  - Windows
+pricing:
+  price: Free

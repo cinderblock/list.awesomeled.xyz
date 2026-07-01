@@ -3,20 +3,6 @@ status: active
 creator: Mark Slee
 notes: Java. Next version (Chromatik) will no longer use the Processing graphics
   library.
-language: Java
-platforms:
-  - Windows
-  - macOS
-  - Linux
-pricing:
-  price: Free
-  demo:
-    available: Open source. Commercial applications require license
-capabilities:
-  live: true
-  designer: true
-  visualizer: 3D
-  programmatic: Both
 inputs:
   video: Both
   audio: Input
@@ -30,5 +16,19 @@ outputs:
   gpio: Both
   serial: Both
   other: DDP, OPC, Fadecandy
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+  programmatic: Both
+language: Java
 links:
   url: https://lx.studio/
+platforms:
+  - Windows
+  - macOS
+  - Linux
+pricing:
+  price: Free
+  demo:
+    available: Open source. Commercial applications require license

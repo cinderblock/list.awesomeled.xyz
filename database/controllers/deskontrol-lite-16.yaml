@@ -3,7 +3,7 @@ status: discontinued
 creator:
   name: Deskontrol
   page: https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
-notes: "Art-Net pixel controller configured via web browser over Ethernet; 8x RJ45 jacks each carry two data outputs (A-B), data-only (LEDs powered separately). Vendor product page now redirects to the LITE V3 line."
+notes: 'Art-Net pixel controller configured via web browser over Ethernet; 8x RJ45 jacks each carry two data outputs (A-B), data-only (LEDs powered separately). Vendor product page now redirects to the LITE V3 line.'
 inputs:
   physical:
     Ethernet: true

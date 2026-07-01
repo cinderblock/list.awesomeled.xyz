@@ -1,13 +1,13 @@
 name: SM16511
 creator: Shenzhen Sunmoon Microelectronics
-data:
-  clocked: false
-  channels: 4
 color:
   channel_bits: 8
   pwm_frequency: 3.3kHz
+data:
+  clocked: false
+  channels: 4
+other_links:
+  - SM16511 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP10/SOP16
   pin_count: 10/16
-other_links:
-  - SM16511 Pixel Protocol Overview | Advatek Lighting

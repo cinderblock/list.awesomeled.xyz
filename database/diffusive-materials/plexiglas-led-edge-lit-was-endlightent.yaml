@@ -1,6 +1,7 @@
 name: Plexiglas LED Edge Lit was EndlightenT
+links:
+  product: https://www.plexiglas-shop.com/en-de/products/plexiglas-led/
 material_type: PMMA
-purpose_made: true
 optical:
   color_rendition: 4
   light_transmission: 2 - 5
@@ -12,5 +13,4 @@ physical:
   properties: Edge Lit front diffuser
 pricing:
   price_range: $$$$$
-links:
-  product: https://www.plexiglas-shop.com/en-de/products/plexiglas-led/
+purpose_made: true

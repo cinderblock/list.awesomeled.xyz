@@ -5,8 +5,6 @@ creator:
   name: Quindor / Intermittent Technology
   page: https://quinled.info/quinled-dig-octa/
 notes: ESP32, open to any software, often run with WLED
-core:
-  family: ESP32
 inputs:
   physical:
     Ethernet: true
@@ -22,6 +20,8 @@ power:
     max: 24
   current:
     max: 100
+core:
+  family: ESP32
 data:
   storage:
     - type: uSD

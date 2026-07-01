@@ -1,13 +1,13 @@
 name: 6x LED Shield
 creator: Evil Genius Labs
-diy_or_ots: DIY
-parent: Wemos Dx Mini (ESP32/ESP8266)
-price: 8
 outputs:
   max_channels: 6
   pixel_types: Single or Clocked
   connectors: Solder
 power:
   voltage: 5V
+diy_or_ots: DIY
 links:
   product: https://www.tindie.com/products/16255/
+parent: Wemos Dx Mini (ESP32/ESP8266)
+price: 8

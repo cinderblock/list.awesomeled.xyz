@@ -5,8 +5,6 @@ creator:
   name: Quindor / Intermittent Technology
   page: https://dig2go.info/
 notes: ESP32, open to any software, often run with WLED
-core:
-  family: ESP32
 inputs:
   physical:
     Wi-Fi: 2.4GHz
@@ -26,5 +24,7 @@ power:
     max: 5
   current:
     max: 3
+core:
+  family: ESP32
 price: 25
 wled_compatible: true

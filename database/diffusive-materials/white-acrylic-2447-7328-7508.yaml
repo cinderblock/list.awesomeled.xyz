@@ -1,7 +1,8 @@
 name: White Acrylic 2447,7328,7508
-material_type: PMMA
-purpose_made: true
 notes: white acrylic, various shades
+links:
+  product: https://www.eplastics.com/SAMPLE-ACRYWHITE
+material_type: PMMA
 optical:
   color_rendition: 2-3
   light_transmission: 3
@@ -14,5 +15,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$$
-links:
-  product: https://www.eplastics.com/SAMPLE-ACRYWHITE
+purpose_made: true

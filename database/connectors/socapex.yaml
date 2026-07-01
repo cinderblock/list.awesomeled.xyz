@@ -2,10 +2,8 @@ name: Socapex
 creator: Amphenol / Generic
 notes: 19 Pin Socapex World standard 6 circuit mains multi core connector for
   production use, accepts up to 2.5mm per pin cable.
-ratings:
-  max_current: 23 A
-  max_voltage: 600 V
-  ip_rating: IP67
+links:
+  product: https://p3connectors.com/what-are-socapex-connectors/
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -17,11 +15,13 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+ratings:
+  max_current: 23 A
+  max_voltage: 600 V
+  ip_rating: IP67
 termination:
   solder: true
   crimp: true
   idc: false
   smallest_gauge: 20 AWG
   largest_gauge: 12 AWG
-links:
-  product: https://p3connectors.com/what-are-socapex-connectors/

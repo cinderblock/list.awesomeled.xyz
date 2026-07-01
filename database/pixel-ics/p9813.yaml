@@ -2,6 +2,10 @@ name: P9813
 release_year: 2010
 creator: WorldSemi
 notes: old but fast, still used in strings such as TCL
+color:
+  channel_bits: 8
+  aggregate_bits: 8
+  pwm_frequency: 4.7kHz
 data:
   type: P9813
   clocked: true
@@ -11,10 +15,6 @@ data:
   pixel_rate_max: 625.0 k Pixel / s
   backup_line: false
   max_per_string: 1024
-color:
-  channel_bits: 8
-  aggregate_bits: 8
-  pwm_frequency: 4.7kHz
 electrical:
   output_voltage: 12V
   supply_voltage: 5V
@@ -22,8 +22,8 @@ electrical:
     min: 3.5V
     max: 5V
   max_current: 45mA
+other_links:
+  - P9813 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP14/DIP14
   pin_count: 14
-other_links:
-  - P9813 Pixel Protocol Overview | Advatek Lighting

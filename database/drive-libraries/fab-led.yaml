@@ -1,20 +1,20 @@
 name: FAB_LED
 creator: Dan Truong (sonyhome)
-language: C++
-license: GPL-2.0
-platforms:
-  - Arduino
-hardware: Arduino
 features: Ws2812/Apa102/neopixel/dotstar etc. Compact code&data, Separates
   driver from pixel array, no assembly code, support palette and up to 8 strips
   in parallel.
+hardware: Arduino
+language: C++
+license: GPL-2.0
+links:
+  repo: https://github.com/sonyhome/FAB_LED
+platforms:
+  - Arduino
+related_pixel_ics:
+  - sk6812-5050
 supported_ics:
   - WS2812
   - WS2812B
   - APA104
   - APA106
   - SK6812
-related_pixel_ics:
-  - sk6812-5050
-links:
-  repo: https://github.com/sonyhome/FAB_LED

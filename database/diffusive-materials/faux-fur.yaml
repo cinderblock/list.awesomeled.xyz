@@ -1,7 +1,8 @@
 name: Faux Fur
-material_type: Polyester,Acrylic
-purpose_made: false
 notes: White long pile faux fur
+links:
+  product: https://en.wikipedia.org/wiki/Fake_fur
+material_type: Polyester,Acrylic
 optical:
   light_transmission: 4
   tinted: T
@@ -12,5 +13,4 @@ physical:
   properties: Backlight
 pricing:
   price_range: $$$
-links:
-  product: https://en.wikipedia.org/wiki/Fake_fur
+purpose_made: false

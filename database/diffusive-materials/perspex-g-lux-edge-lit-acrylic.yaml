@@ -1,7 +1,8 @@
 name: Perspex G-Lux Edge Lit Acrylic
-material_type: doped PMMA
-purpose_made: true
 notes: Appears clear , lit from edge diffuses light front
+links:
+  product: https://www.perspex.co.uk/materials/perspex-cast-acrylic/s-lux-and-g-lux/
+material_type: doped PMMA
 optical:
   color_rendition: 5
   diffusivity: 3
@@ -11,5 +12,4 @@ physical:
   properties: Edge Lit front diffuser
 pricing:
   price_range: $$$$
-links:
-  product: https://www.perspex.co.uk/materials/perspex-cast-acrylic/s-lux-and-g-lux/
+purpose_made: true

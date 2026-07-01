@@ -1,8 +1,8 @@
 name: WS2805
 creator: WorldSemi
 notes: RGB+CCT with data backup line
+color:
+  channel_bits: 8
 data:
   clocked: false
   channels: 5
-color:
-  channel_bits: 8

@@ -1,8 +1,7 @@
 name: SH
 creator: JST
-ratings:
-  max_current: 1 A
-  max_voltage: 50 V
+links:
+  product: https://www.jst-mfg.com/product/detail_e.php?series=231
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -16,11 +15,12 @@ mechanical:
   wire_to_wire: true
   pcb_mount: Both
   board_fingers: false
+ratings:
+  max_current: 1 A
+  max_voltage: 50 V
 termination:
   solder: true
   crimp: true
   idc: false
   smallest_gauge: 30 AWG
   largest_gauge: 28 AWG
-links:
-  product: https://www.jst-mfg.com/product/detail_e.php?series=231

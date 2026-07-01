@@ -1,14 +1,6 @@
 name: GeoPix 2.0(full)
 status: unknown
 creator: Enviral Design
-pricing:
-  price: Free
-  demo:
-    available: Open Source
-capabilities:
-  live: true
-  designer: true
-  visualizer: 3D
 inputs:
   video: Input
   audio: Both
@@ -19,7 +11,15 @@ outputs:
     sacn: Both
     dmx: Output
   other: MIDI
-platforms:
-  - Windows (TouchDesigner)
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
 links:
   url: https://www.geopix.io/
+platforms:
+  - Windows (TouchDesigner)
+pricing:
+  price: Free
+  demo:
+    available: Open Source

@@ -3,17 +3,17 @@ status: end-of-life
 creator: Solderlab.de
 notes: Basically a mapper/pattern generator for microcontrollers with pixels.
   Development ceased
+outputs:
+  gpio: Input
+  serial: Output
+capabilities:
+  live: false
+  designer: true
+integrations: Should be solderlab.de (which is down)
+links:
+  url: https://oneguyoneblog.com/download/glediator-v2-0-3/
 platforms:
   - Windows
   - Linux
 pricing:
   price: Free
-capabilities:
-  live: false
-  designer: true
-outputs:
-  gpio: Input
-  serial: Output
-integrations: Should be solderlab.de (which is down)
-links:
-  url: https://oneguyoneblog.com/download/glediator-v2-0-3/

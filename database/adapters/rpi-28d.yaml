@@ -1,8 +1,5 @@
 name: RPI-28D
 creator: Hanson Electronics
-diy_or_ots: OTS
-parent: Raspberry Pi
-price: 22
 outputs:
   max_channels: 3
   pixel_types: Single and Clocked
@@ -10,5 +7,8 @@ outputs:
   description: Both
 power:
   voltage: 12V
+diy_or_ots: OTS
 links:
   product: http://www.hansonelectronics.com.au/product/rpi-28d/
+parent: Raspberry Pi
+price: 22

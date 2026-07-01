@@ -2,6 +2,10 @@ name: WS2851
 release_year: 2018
 creator: WorldSemi
 notes: 12V WS2812 with RGB + external LEDs
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 2.0kHz
 data:
   type: WS2811/12
   clocked: false
@@ -9,10 +13,8 @@ data:
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: false
-color:
-  order: RGB
-  brightness_bits: 8
-  pwm_frequency: 2.0kHz
+datasheet:
+  url: http://www.world-semi.com/Certifications/details-121-4.html
 electrical:
   led_voltage: 12V
   vcc_voltage: 5V
@@ -25,5 +27,3 @@ electrical:
 physical:
   package_size: '5050'
   pin_count: 8
-datasheet:
-  url: http://www.world-semi.com/Certifications/details-121-4.html

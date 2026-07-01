@@ -1,12 +1,9 @@
 name: EventCon
-year_introduced: 2023
 creator: GLP
 notes: Combined power and DMX connector. push locking. No panel mount connectors
   currently (3/24)
-ratings:
-  max_current: 16 A
-  max_voltage: 250 V
-  ip_rating: IP67
+links:
+  product: https://ehrgeiz.glp.de/en/products/accessories/eventcon
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -19,11 +16,14 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 16 A
+  max_voltage: 250 V
+  ip_rating: IP67
 termination:
   screw_terminal: false
   crimp: false
   idc: false
   smallest_gauge: 20 AWG
   largest_gauge: 12 AWG
-links:
-  product: https://ehrgeiz.glp.de/en/products/accessories/eventcon
+year_introduced: 2023

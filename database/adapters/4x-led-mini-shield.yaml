@@ -1,13 +1,13 @@
 name: 4x LED Mini Shield
 creator: Evil Genius Labs
-diy_or_ots: DIY
-parent: Wemos Dx Mini (ESP32/ESP8266)
-price: 5
 outputs:
   max_channels: 4
   pixel_types: Single or Clocked
   connectors: Solder
 power:
   voltage: 5V
+diy_or_ots: DIY
 links:
   product: https://www.tindie.com/products/9723/
+parent: Wemos Dx Mini (ESP32/ESP8266)
+price: 5

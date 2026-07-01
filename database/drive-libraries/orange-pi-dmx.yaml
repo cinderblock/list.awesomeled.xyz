@@ -1,13 +1,23 @@
 name: Orange PI DMX
 status: active
 creator: Arjan van Vught
-language: C++
-license: MIT
-platforms:
-  - Orange Pi
-hardware: Orange Pi
 features: Tested and documented projects. Bare metal programming of low cost
   Orange Pi to Pixel, Artnet and DMX devices.
+hardware: Orange Pi
+language: C++
+license: MIT
+links:
+  repo: https://www.orangepi-dmx.org/
+platforms:
+  - Orange Pi
+related_pixel_ics:
+  - dmx512
+  - ws2801
+  - ws2811
+  - sk6812-5050
+  - ucs1903
+  - ucs2903
+  - p9813
 supported_ics:
   - DMX512
   - WS2801
@@ -25,13 +35,3 @@ supported_ics:
   - SK9822
   - P9813
   - TLC59711
-related_pixel_ics:
-  - dmx512
-  - ws2801
-  - ws2811
-  - sk6812-5050
-  - ucs1903
-  - ucs2903
-  - p9813
-links:
-  repo: https://www.orangepi-dmx.org/

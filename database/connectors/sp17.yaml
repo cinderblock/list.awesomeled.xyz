@@ -1,10 +1,8 @@
 name: SP17
 creator: Weipu
 notes: Also available is SP21 and SP29 , clones in SP16 and SP28
-ratings:
-  max_current: 10 A
-  max_voltage: 500 V
-  ip_rating: IP68
+links:
+  product: https://weipuconnector.com/product/38
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -17,6 +15,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 10 A
+  max_voltage: 500 V
+  ip_rating: IP68
 termination:
   solder: true
   crimp: true
@@ -25,5 +27,3 @@ termination:
   largest_gauge: 14 AWG
 wiring:
   colors: Black Blue Collar
-links:
-  product: https://weipuconnector.com/product/38

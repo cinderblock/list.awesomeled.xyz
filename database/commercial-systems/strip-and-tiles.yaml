@@ -1,11 +1,11 @@
 name: Strip and Tiles
 creator: Schnick Schnack
-since: 2001
 notes: Strip and Tiles with very high resolution dimming and video input
   compatible, very long established pioneers.
+pricing:
+  price_range: $$$$$$
+since: 2001
 specs:
   pixels_per_run: 3072
   color_type: RGBW
   dedicated_psu: true
-pricing:
-  price_range: $$$$$$

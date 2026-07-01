@@ -15,12 +15,6 @@ common_applications:
   - Differential pixel data to long-range / Smart receivers over Cat5/Cat6
   - DMX512 over RJ45 (e.g. Falcon, Renard)
   - Daisy-chaining controllers via built-in network switches
-ratings:
-  max_current: 1.5 A
-  max_current_notes: Per contact, typical for 8P8C
-  max_voltage: 125 V
-  ip_rating: null
-  ip_rating_notes: Standard jacks are unsealed; ruggedized IP67/IP68 variants exist
 mechanical:
   outline: Rectangular
   contact_type: Spring blade
@@ -34,6 +28,12 @@ mechanical:
   wire_to_wire: false
   pcb_mount: PTH
   board_fingers: false
+ratings:
+  max_current: 1.5 A
+  max_current_notes: Per contact, typical for 8P8C
+  max_voltage: 125 V
+  ip_rating: null
+  ip_rating_notes: Standard jacks are unsealed; ruggedized IP67/IP68 variants exist
 termination:
   solder: true
   crimp: true

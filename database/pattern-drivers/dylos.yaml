@@ -3,16 +3,6 @@ status: active
 creator: Obsidian
 notes: Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Artnet
   https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
-platforms:
-  - Windows
-pricing:
-  price: Free 1 universe
-  demo:
-    available: Limited Demo
-capabilities:
-  live: true
-  designer: true
-  visualizer: Yes Basic 2D
 inputs:
   video: Input
   audio: Input
@@ -22,6 +12,16 @@ outputs:
     artnet: Both
     sacn: Both
     dmx: Both
+capabilities:
+  live: true
+  designer: true
+  visualizer: Yes Basic 2D
 integrations: Obsidian Onyx
 links:
   url: https://obsidiancontrol.com/dylos
+platforms:
+  - Windows
+pricing:
+  price: Free 1 universe
+  demo:
+    available: Limited Demo

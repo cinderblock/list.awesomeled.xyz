@@ -1,8 +1,8 @@
 name: XH
 creator: JST
-ratings:
-  max_current: 3 A
-  max_voltage: 250 V
+links:
+  product: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
+  digikey: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -15,6 +15,9 @@ mechanical:
   wire_to_wire: true
   pcb_mount: Both
   board_fingers: false
+ratings:
+  max_current: 3 A
+  max_voltage: 250 V
 termination:
   solder: true
   idc: false
@@ -22,6 +25,3 @@ termination:
   largest_gauge: 22 AWG
 wiring:
   colors: White
-links:
-  product: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
-  digikey: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors

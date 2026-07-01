@@ -2,15 +2,15 @@ name: Arthet LED Mapper
 status: unknown
 creator: cyberboy666
 notes: input video from connected devices (webcams, capture cards etc) or over NDI, output artnet across multiple universes
+outputs:
+  protocols:
+    artnet: Output
+capabilities:
+  live: false
+  designer: true
 platforms:
   - Ubuntu
   - Windows
   - mac and arm64
 pricing:
   price: Free
-capabilities:
-  live: false
-  designer: true
-outputs:
-  protocols:
-    artnet: Output

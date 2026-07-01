@@ -3,8 +3,6 @@ status: active
 creator:
   name: Giovanni's Domotica Store
   page: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
-core:
-  family: ESP32
 inputs:
   physical:
     Ethernet: true
@@ -17,6 +15,8 @@ outputs:
 power:
   voltage:
     max: 12
+core:
+  family: ESP32
 features:
   - GPIO / Relay outputs
 price: 45

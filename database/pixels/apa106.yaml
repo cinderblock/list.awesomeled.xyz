@@ -2,7 +2,7 @@ name: APA106
 notes: 5V WS2811 clone in 5 and 8mm package
 color:
   order: RGB
-electrical:
-  led_voltage: 5V
 datasheet:
   url: https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107
+electrical:
+  led_voltage: 5V

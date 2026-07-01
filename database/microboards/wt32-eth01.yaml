@@ -3,7 +3,8 @@ release_year: 2019
 creator:
   name: Shenzhen Qiming Cloud Co., Ltd
   page: http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
-price: 7
+power:
+  gpio_voltage: 3.3V
 compute:
   soc: ESP32
   cpu: Xtensa LX6
@@ -14,5 +15,4 @@ connectivity:
   ethernet: 100BASE-TX
   bluetooth: '4.2'
   poe: N
-power:
-  gpio_voltage: 3.3V
+price: 7

@@ -4,10 +4,8 @@ notes: Powercon is original blue, True 1 was IP rated version frequent latch
   failure, True1 TOP is current recommended mains power connector Seetronic
   common Compatible/Clone. Grey is recommended (cheap) and not readily used
   elsewhere
-ratings:
-  max_current: 16 A
-  max_voltage: 250 V
-  ip_rating: IP65
+links:
+  product: https://www.neutrik.com/en/neutrik/products/powercon
 mechanical:
   outline: Circular
   contact_type: Blade
@@ -20,6 +18,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 16 A
+  max_voltage: 250 V
+  ip_rating: IP65
 termination:
   solder: true
   screw_terminal: true
@@ -29,5 +31,3 @@ termination:
   largest_gauge: 12 AWG
 wiring:
   colors: Black, silver, white, blue, grey
-links:
-  product: https://www.neutrik.com/en/neutrik/products/powercon

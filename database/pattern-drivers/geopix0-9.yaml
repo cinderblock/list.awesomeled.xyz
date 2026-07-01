@@ -2,15 +2,15 @@ name: GeoPix0.9
 status: unknown
 creator: Enviral Design
 notes: beta release, not supported
-platforms:
-  - Windows (TouchDesigner)
-pricing:
-  price: Free
-  demo:
-    available: Limited
 capabilities:
   live: true
   designer: true
   visualizer: 3D
 links:
   url: https://www.enviral-design.com/
+platforms:
+  - Windows (TouchDesigner)
+pricing:
+  price: Free
+  demo:
+    available: Limited

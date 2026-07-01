@@ -1,7 +1,8 @@
 name: Textured Acrylic, various
-material_type: PMMA Poly Methyl Meth Acrylate
-purpose_made: true
 notes: I think "frost" was best
+links:
+  product: https://www.eplastics.com/SAMPLE-ACRYPATTERN
+material_type: PMMA Poly Methyl Meth Acrylate
 optical:
   color_rendition: 4
   light_transmission: 5
@@ -14,5 +15,4 @@ physical:
   properties: Transparent
 pricing:
   price_range: $$$
-links:
-  product: https://www.eplastics.com/SAMPLE-ACRYPATTERN
+purpose_made: true

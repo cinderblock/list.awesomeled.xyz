@@ -2,10 +2,10 @@ name: Twinkly
 creator: Twinkly
 notes: Consumer Level App Controlled , now with "Pro" range. artnet2twinkly third-party
   project linked on Drive Libraries page
+pricing:
+  price_range: $$
+  online_pricing: 250 string $105
 specs:
   pixels_per_run: 600
   color_type: RGB
   dedicated_psu: true
-pricing:
-  price_range: $$
-  online_pricing: 250 string $105

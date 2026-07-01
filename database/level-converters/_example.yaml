@@ -4,6 +4,10 @@ creator: Logic Shifter Inc
 manufacturers:
   - Logic Shifter Inc
   - Authorized Partner
+vendors:
+  - SparkFun
+  - Adafruit
+  - DigiKey
 notes: Converts 3.3V signals to 5V for pixel data lines
 buffered: false
 channels: 4
@@ -13,16 +17,14 @@ max_voltage: 5.5
 price: 4.99
 url: https://example.com/quad-shifter
 
-vendors:
-  - SparkFun
-  - Adafruit
-  - DigiKey
 ---
 # Example 2: Buffered high-current driver
 name: Example Buffered Driver
 creator: Buffer Corp
 manufacturers:
   - Buffer Corp
+vendors:
+  - LED Parts Store
 notes: Active buffer with high current drive capability for long runs
 buffered: true
 channels: 8
@@ -32,14 +34,15 @@ max_voltage: 5.5
 price: 8.99
 url: https://example.com/buffered-driver
 
-vendors:
-  - LED Parts Store
 ---
 # Example 3: Single channel inline converter
 name: Example Inline Shifter
 creator: null
 manufacturers:
   - Generic
+vendors:
+  - Amazon
+  - AliExpress
 notes: Simple inline level shifter, fits between controller and first pixel
 buffered: false
 
@@ -48,9 +51,6 @@ interface: Single transistor
 max_current: 20mA
 max_voltage: 5
 price: 0.50
-vendors:
-  - Amazon
-  - AliExpress
 ---
 # Example 4: Industrial differential driver
 name: Example Differential Driver

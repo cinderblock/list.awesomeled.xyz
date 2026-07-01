@@ -1,10 +1,10 @@
 name: Vinci
 creator: https://www.lucenti.lighting/products
 notes: RGB and flexi LED filament in one lamp
+pricing:
+  price_range: $$$$$
+  online_pricing: RGB €120 per lamp
 specs:
   pixels_per_run: 128
   color_type: RGBW
   dedicated_psu: true
-pricing:
-  price_range: $$$$$
-  online_pricing: RGB €120 per lamp

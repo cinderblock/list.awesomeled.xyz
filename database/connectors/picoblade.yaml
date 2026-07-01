@@ -1,9 +1,8 @@
 name: PicoBlade
 creator: Molex
 notes: Molex massive US connector maker
-ratings:
-  max_current: 3 A
-  max_voltage: 125 V
+links:
+  product: https://www.molex.com/molex/products/family/picoblade
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -17,11 +16,12 @@ mechanical:
   wire_to_wire: true
   pcb_mount: Both
   board_fingers: false
+ratings:
+  max_current: 3 A
+  max_voltage: 125 V
 termination:
   solder: true
   crimp: true
   idc: false
   smallest_gauge: 28 AWG
   largest_gauge: 26 AWG
-links:
-  product: https://www.molex.com/molex/products/family/picoblade

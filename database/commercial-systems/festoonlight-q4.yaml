@@ -1,9 +1,9 @@
 name: FestoonLight Q4
 creator: Showtec
 notes: Separate 20 globe strings, controller and booster components
+pricing:
+  price_range: $$$
 specs:
   pixels_per_run: 120
   color_type: RGB
   dedicated_psu: true
-pricing:
-  price_range: $$$

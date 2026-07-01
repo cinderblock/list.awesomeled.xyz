@@ -5,8 +5,6 @@ creator:
   url: https://magwled.com
   page: https://magwled.com/pages/magwled-1
 notes: USB-C powered, 5V or 12V capable (USB-C Power Delivery up to 36W).
-core:
-  family: ESP32-C3
 inputs:
   physical:
     Wi-Fi: true # ESP32-C3 onboard
@@ -26,6 +24,8 @@ power:
     max: 3
 case:
   dimensions: 48x32mm
+core:
+  family: ESP32-C3
 features:
   - 3A resettable fuse
   - ESD protection

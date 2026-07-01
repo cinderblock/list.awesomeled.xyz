@@ -4,12 +4,7 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k4-pb/
-notes:
-  PocketBeagle/PocketBeagle2 cape running FPP (networking via USB adapter on
-  the host - Ethernet preferred, WiFi works; FPP image on the host microSD).
-  4 eFused ports with current monitoring, pixel counting, and fuse alerts;
-  each port drives 800+ pixels at 40FPS with power injection. 5V/12V
-  selectable via jumpers.
+notes: PocketBeagle/PocketBeagle2 cape running FPP (networking via USB adapter on the host - Ethernet preferred, Wi-Fi works; FPP image on the host microSD). 4 eFused ports with current monitoring, pixel counting, and fuse alerts; each port drives 800+ pixels at 40FPS with power injection. 5V/12V selectable via jumpers.
 inputs:
   physical:
     Ethernet: true # via USB-to-Ethernet adapter on the host

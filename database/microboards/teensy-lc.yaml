@@ -2,7 +2,10 @@ name: Teensy-LC
 creator:
   name: PJRC
   page: https://www.pjrc.com/teensy/teensyLC.html
-price: 12
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: MKL26Z64VFT4
   cpu: ARM Cortex-M0+
@@ -15,11 +18,8 @@ connectivity:
   usb: OTG
   serial: true
   wifi: false
-power:
-  voltage:
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   storage: Shield
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 12

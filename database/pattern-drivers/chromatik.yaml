@@ -3,17 +3,6 @@ status: active
 creator: Mark C Slee
 notes: VJ like live control, extensive support for 3D animation matrices
   Successor to LX Studio
-platforms:
-  - Windows macOS
-pricing:
-  price: Free - $399
-  demo:
-    available: <1000 LEDs free, various paid options
-capabilities:
-  live: true
-  designer: true
-  visualizer: 3D
-  programmatic: true
 inputs:
   audio: Input
   other: MIDI , OSC, DMX
@@ -24,3 +13,14 @@ outputs:
     dmx: Possible
     kinet: Output
     ddp: Output
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+  programmatic: true
+platforms:
+  - Windows macOS
+pricing:
+  price: Free - $399
+  demo:
+    available: <1000 LEDs free, various paid options

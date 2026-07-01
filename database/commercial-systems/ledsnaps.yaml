@@ -2,9 +2,9 @@ name: Ledsnaps
 creator: Ledsnaps
 notes: LED strip Units aimed at gym studiomarket , closed architecture, presumed
   WS28XX
-target_market: Gym/Fitness
+pricing:
+  price_range: $$$$$
 specs:
   pixels_per_run: 1200
   color_type: RGB
-pricing:
-  price_range: $$$$$
+target_market: Gym/Fitness

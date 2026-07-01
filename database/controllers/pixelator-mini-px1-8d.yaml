@@ -21,7 +21,7 @@ power:
     max: 24
 case:
   waterproof: IP20
+price: 700
 technical_notes:
   - 16 universes (8192 channels), up to 2730 RGB pixels across 8 outputs
   - Outputs synchronize up to 300m away when paired with ENTTEC PLink or PSAT
-price: 700

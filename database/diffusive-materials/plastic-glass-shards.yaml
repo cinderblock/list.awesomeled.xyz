@@ -1,7 +1,8 @@
 name: Plastic ` glass` Shards
-material_type: Acrylic PMMA
-purpose_made: false
 notes: Packing in larger clear or diffuse pipe or vase
+links:
+  product: https://tjlighting.co.uk/product/fake-clear-plastic-iceglass-shards/
+material_type: Acrylic PMMA
 optical:
   color_rendition: 5
   light_transmission: 4
@@ -11,5 +12,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$$
-links:
-  product: https://tjlighting.co.uk/product/fake-clear-plastic-iceglass-shards/
+purpose_made: false

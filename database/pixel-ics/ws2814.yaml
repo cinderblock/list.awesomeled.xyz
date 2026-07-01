@@ -1,13 +1,13 @@
 name: WS2814
 creator: WorldSemi
-data:
-  clocked: false
-  channels: 4
 color:
   channel_bits: 8
   pwm_frequency: 2.0kHz
+data:
+  clocked: false
+  channels: 4
+other_links:
+  - WS2814 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP12
   pin_count: 12
-other_links:
-  - WS2814 Pixel Protocol Overview | Advatek Lighting

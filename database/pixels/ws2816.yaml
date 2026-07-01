@@ -3,6 +3,12 @@ status: active
 release_year: 2021
 creator: WorldSemi
 notes: 16-bit per channel color depth with per-channel brightness control
+color:
+  order: GRB
+  brightness_bits: 8+5
+  brightness_method: per_channel
+  brightness_method_notes: 5-bit brightness control for each color channel (R, G, and B independently)
+  pwm_frequency: 10.0kHz
 data:
   type: WS2816
   clocked: false
@@ -10,12 +16,6 @@ data:
   pixel_size_bits: 48
   pixel_rate_max: 16.7 k Pixel / s
   backup_line: true
-color:
-  order: GRB
-  brightness_bits: 8+5
-  brightness_method: per_channel
-  brightness_method_notes: 5-bit brightness control for each color channel (R, G, and B independently)
-  pwm_frequency: 10.0kHz
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -28,6 +28,11 @@ physical:
     - '5050'
   package_size: '5050'
   pin_count: 6
+technical_notes:
+  - 48-bit pixel data for 16-bit per channel color depth
+  - Independent 5-bit brightness control for each R, G, B channel
+  - Backup data line for fault tolerance
+  - WS2816B (20mA) and WS2816C (10mA) current variants available
 variants:
   - name: WS2816B
     suffix: B
@@ -35,8 +40,3 @@ variants:
   - name: WS2816C
     suffix: C
     differences: 10mA channel current
-technical_notes:
-  - 48-bit pixel data for 16-bit per channel color depth
-  - Independent 5-bit brightness control for each R, G, B channel
-  - Backup data line for fault tolerance
-  - WS2816B (20mA) and WS2816C (10mA) current variants available

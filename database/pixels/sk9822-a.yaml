@@ -1,13 +1,13 @@
 name: SK9822-A
 creator: Newstar LED Co.
 notes: Higher PWM version of SK9822
+color:
+  pwm_frequency: 27.0kHz
 data:
   type: APA102
   clocked: true
   bitrate: 30MHz
   backup_line: false
-color:
-  pwm_frequency: 27.0kHz
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V

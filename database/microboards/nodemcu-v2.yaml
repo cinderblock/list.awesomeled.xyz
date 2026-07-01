@@ -2,6 +2,8 @@ name: NodeMCU v2
 creator:
   name: NodeMCU
   page: https://components101.com/development-boards/nodemcu-esp8266-pinout-features-and-datasheet
+power:
+  gpio_voltage: 3.3V
 compute:
   soc: ESP8266
   cpu: Diamond Standard 106Micro
@@ -11,8 +13,6 @@ connectivity:
   wifi: 2.4GHz
   bluetooth: '4.1'
   serial: true
-power:
-  gpio_voltage: 3.3V
 io:
-  bms: "No"
+  bms: 'No'
   imu: false

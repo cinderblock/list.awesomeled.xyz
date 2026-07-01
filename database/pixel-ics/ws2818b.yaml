@@ -2,6 +2,9 @@ name: WS2818B
 release_year: 2018
 creator: WorldSemi
 notes: 12V WS2813 as separate IC
+color:
+  channel_bits: 8
+  pwm_frequency: 2.0kHz
 data:
   type: WS2811/12
   clocked: false
@@ -10,9 +13,8 @@ data:
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: true
-color:
-  channel_bits: 8
-  pwm_frequency: 2.0kHz
+datasheet:
+  url: http://www.world-semi.com/technology/details-104-4.html
 electrical:
   output_voltage: 12V
   supply_voltage: 5V
@@ -21,10 +23,8 @@ electrical:
     max: 5V
   max_current: 16mA
   quiescent_current: 2.1mA
+other_links:
+  - WS2818 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP8,CPC8
   pin_count: 8
-datasheet:
-  url: http://www.world-semi.com/technology/details-104-4.html
-other_links:
-  - WS2818 Pixel Protocol Overview | Advatek Lighting

@@ -1,8 +1,8 @@
 name: SN74AHCT125N
 creator: Texas Instruments
-price: 0.75
 io:
   channels: 4
   interface: Through-Hole DIP
 links:
   product: https://www.ti.com/product/SN74AHCT125
+price: 0.75

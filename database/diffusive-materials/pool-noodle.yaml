@@ -1,7 +1,8 @@
 name: Pool Noodle
-material_type: PE Closed cell foam
-purpose_made: false
 notes: See slo Plastazote and Foam Backer Rod
+links:
+  product: https://www.amazon.com/Oodles-Noodles-Deluxe-Foam-Pool/dp/B01LZ8FAHO?th=1
+material_type: PE Closed cell foam
 optical:
   color_rendition: 3
   light_transmission: 3
@@ -11,5 +12,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$
-links:
-  product: https://www.amazon.com/Oodles-Noodles-Deluxe-Foam-Pool/dp/B01LZ8FAHO?th=1
+purpose_made: false

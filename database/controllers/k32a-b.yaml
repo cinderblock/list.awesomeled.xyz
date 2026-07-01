@@ -4,8 +4,7 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k32a-b/
-notes:
-  BeagleBone Black cape running FPP (Ethernet via the BBB). 32 fused local
+notes: BeagleBone Black cape running FPP (Ethernet via the BBB). 32 fused local
   string ports plus 4 RJ45 differential ports adding up to 16 strings via
   standard or 48 via smart receivers (80 strings max). Two RS485 outputs for
   DMX/PixelNet/Renard/LOR. OLED display, RTC, onboard sound DAC; FM transmitter

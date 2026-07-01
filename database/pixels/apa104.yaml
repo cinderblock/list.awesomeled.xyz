@@ -3,6 +3,10 @@ status: active
 release_year: 2013
 creator: APA Electronics
 notes: WS2812b clone like SK6812
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 1.2kHz
 data:
   type: WS2811/12
   clocked: false
@@ -10,10 +14,10 @@ data:
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: false
-color:
-  order: RGB
-  brightness_bits: 8
-  pwm_frequency: 1.2kHz
+datasheet:
+  url: http://neon-world.com/en/product_detail.php?cid=60&id=171
+  discrepancies:
+    - Datasheet claims max 49mA but actual is ~19-22mA per channel
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
@@ -25,6 +29,8 @@ electrical:
   channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA
   quiescent_current: 1.0mA
   wattage: 100mW
+other_links:
+  - APA104 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_sizes:
     - '5050'
@@ -32,12 +38,6 @@ physical:
     - '1212'
   package_size: 5050, 3535, 1212
   pin_count: 4
-datasheet:
-  url: http://neon-world.com/en/product_detail.php?cid=60&id=171
-  discrepancies:
-    - Datasheet claims max 49mA but actual is ~19-22mA per channel
-other_links:
-  - APA104 Pixel Protocol Overview | Advatek Lighting
 technical_notes:
   - WS2812 protocol compatible clone from APA Electronics
   - Available in very small 1212 package size

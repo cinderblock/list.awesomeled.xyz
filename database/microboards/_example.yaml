@@ -1,9 +1,14 @@
 # Example 1: Full-featured microboard with all fields
 name: Example DevBoard Pro
+release_year: 2024
 creator: DevBoard Inc
 manufacturers:
   - DevBoard Inc
   - Licensed Manufacturer
+vendors:
+  - Adafruit
+  - SparkFun
+  - Amazon
 notes: Feature-rich development board for LED projects
 
 bluetooth: BLE 5.0
@@ -22,20 +27,16 @@ min_input_voltage: 4.5
 poe: false
 price: 24.99
 ram: 8MB PSRAM
-release_year: 2024
 soc: ExampleSoC-S3
 storage: microSD
 ttl_serial: true
 url: https://example.com/devboard-pro
 usb: USB-C OTG
-vendors:
-  - Adafruit
-  - SparkFun
-  - Amazon
 wifi: Wi-Fi 6
 ---
 # Example 2: Linux-capable single board computer
 name: Example Pi Clone
+release_year: 2023
 creator: SBC Company
 manufacturers:
   - SBC Company
@@ -57,7 +58,6 @@ min_input_voltage: 5
 poe: PoE HAT compatible
 price: 45
 ram: 2GB DDR4
-release_year: 2023
 soc: AllwinnerH6
 storage: eMMC 16GB + microSD
 ttl_serial: '/dev/ttyS0'
@@ -67,9 +67,12 @@ wifi: 802.11ac
 ---
 # Example 3: Budget ESP-based board
 name: Example ESP Mini
+release_year: 2021
 creator: null
 manufacturers:
   - Generic ESP Factory
+vendors:
+  - AliExpress
 notes: Budget-friendly WLED-compatible board
 
 bluetooth: false
@@ -88,18 +91,16 @@ min_input_voltage: 3.3
 poe: false
 price: 4.99
 ram: 320KB
-release_year: 2021
 soc: ESP32-S2
 storage: null
 ttl_serial: true
 url: https://example.com/esp-mini
 usb: USB-C
-vendors:
-  - AliExpress
 wifi: 802.11 b/g/n
 ---
 # Example 4: PoE-powered Ethernet board
 name: Example PoE Controller Board
+release_year: 2022
 creator: Industrial IoT Corp
 manufacturers:
   - Industrial IoT Corp
@@ -121,7 +122,6 @@ min_input_voltage: 48
 poe: '802.3at PoE+'
 price: 35
 ram: 256KB
-release_year: 2022
 soc: W5500 + STM32
 storage: null
 ttl_serial: true
@@ -131,6 +131,8 @@ wifi: false
 # Example 5: Minimal entry for simple board
 name: Example Nano
 creator: null
+vendors:
+  - Various
 notes: Arduino Nano compatible for simple LED projects
 clock_speed: 16MHz
 cpu: AVR
@@ -143,5 +145,3 @@ price: 2.50
 ram: 2KB
 soc: ATmega328P
 usb: Mini-USB
-vendors:
-  - Various

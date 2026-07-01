@@ -3,6 +3,12 @@ status: active
 release_year: 2016
 creator: Opsco/Newstar
 notes: APA102 Clone. Extra 5 bits uses constant current driver, no change in PWM.
+color:
+  order: BGR
+  brightness_bits: 8+5
+  brightness_method: current
+  brightness_method_notes: Extra 5-bit brightness control by LED current, not PWM - superior to APA102's PWM-based brightness
+  pwm_frequency: 4.6kHz
 data:
   type: APA102
   clocked: true
@@ -10,12 +16,9 @@ data:
   pixel_size_bits: 32
   pixel_rate_max: 0.94 M Pixel / s
   backup_line: false
-color:
-  order: BGR
-  brightness_bits: 8+5
-  brightness_method: current
-  brightness_method_notes: Extra 5-bit brightness control by LED current, not PWM - superior to APA102's PWM-based brightness
-  pwm_frequency: 4.6kHz
+datasheet:
+  url: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf
+  third_party_testing: https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-the-apa102/
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -25,17 +28,14 @@ electrical:
   channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control current, not PWM
   quiescent_current: 1.0mA
   wattage: 100mW
+other_links:
+  - SK9822 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_sizes:
     - '5050'
     - '2020'
   package_size: '5050'
   pin_count: 6
-datasheet:
-  url: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf
-  third_party_testing: https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-the-apa102/
-other_links:
-  - SK9822 Pixel Protocol Overview | Advatek Lighting
 technical_notes:
   - APA102 protocol compatible clone with improved brightness control
   - 5-bit brightness uses current control instead of APA102's PWM - no 400Hz flicker

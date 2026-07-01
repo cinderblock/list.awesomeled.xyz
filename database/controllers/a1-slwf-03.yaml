@@ -3,8 +3,6 @@ status: active
 creator:
   name: SMARTLIGHT.ME
   page: https://www.tindie.com/products/smartlightme/a1-slwf-03-wled-esp32-controller-home-assistant
-core:
-  family: ESP32
 inputs:
   physical:
     Wi-Fi: true
@@ -19,5 +17,7 @@ outputs:
 power:
   voltage:
     max: 24
+core:
+  family: ESP32
 price: 16
 wled_compatible: true

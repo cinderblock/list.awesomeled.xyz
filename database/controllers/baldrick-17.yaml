@@ -21,7 +21,7 @@ outputs:
   pixels:
     max_per_output: 750 # up to 750 RGB pixels per port at 40fps
   clocked: false # async / single-wire pixels
-  fuse: "7.5A" # 17 fused connectors with included 7.5 amp fuses
+  fuse: '7.5A' # 17 fused connectors with included 7.5 amp fuses
 power:
   voltage:
     min: 5

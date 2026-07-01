@@ -3,10 +3,10 @@ creator: SmartShow
 notes: 169 Pixel Interlockable panel, arranged as 13x13 snakelined pixels on
   1.6mm PCB, 10mm pitch
 core_tech: SKC6812RGBW-NW
+pricing:
+  online_pricing: £30
 specs:
   pixels_per_run: 169
   dimming_resolution: 8 Bit
   color_type: RGBW
   dedicated_psu: true
-pricing:
-  online_pricing: £30

@@ -3,7 +3,8 @@ release_year: 2020
 creator:
   name: Lilygo
   page: http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3
-price: 16
+power:
+  gpio_voltage: 3.3V
 compute:
   soc: ESP32
   cpu: Xtensa LX6
@@ -15,5 +16,4 @@ connectivity:
   bluetooth: '4.2'
   usb: Power + UART
   poe: Y
-power:
-  gpio_voltage: 3.3V
+price: 16

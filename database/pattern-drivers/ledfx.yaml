@@ -3,7 +3,19 @@ status: active
 creator: Yeon V, M Bowley, community
 notes: Python based. A programming environment to sync musical effects across a
   network of LED pixel controllers
+inputs:
+  other: Audio
+outputs:
+  protocols:
+    sacn: Output
+    ddp: Output
+  other: UDP
+capabilities:
+  live: true
+  designer: false
 language: Python
+links:
+  url: https://github.com/LedFx/LedFx
 platforms:
   - Windows
   - Linux
@@ -12,15 +24,3 @@ pricing:
   price: FOSS
   demo:
     available: Open Source
-capabilities:
-  live: true
-  designer: false
-inputs:
-  other: Audio
-outputs:
-  protocols:
-    sacn: Output
-    ddp: Output
-  other: UDP
-links:
-  url: https://github.com/LedFx/LedFx

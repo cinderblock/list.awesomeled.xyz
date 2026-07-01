@@ -4,8 +4,7 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k128d-b/
-notes:
-  BeagleBone Black cape running FPP. 32 RJ45 differential ports driving 128
+notes: BeagleBone Black cape running FPP. 32 RJ45 differential ports driving 128
   strings via standard or v1/v2 Smart receivers. Onboard sound, FM transmitter
   optional.
 inputs:

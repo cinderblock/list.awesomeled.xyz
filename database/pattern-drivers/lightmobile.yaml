@@ -2,18 +2,18 @@ name: LightMobile
 status: discontinued
 creator: RocketLife
 notes: RocketLife controllers, serial/SPI pixels only
+inputs:
+  other: GPIO pins
+outputs:
+  other: Bluetooth/NFC to RocketLife hardware
+capabilities:
+  live: true
+  designer: false
+integrations: LightBox&LightBoard Mini
+links:
+  url: https://www.rocketlife.com/technology/
 platforms:
   - iOS
   - Android
 pricing:
   price: Free
-capabilities:
-  live: true
-  designer: false
-inputs:
-  other: GPIO pins
-outputs:
-  other: Bluetooth/NFC to RocketLife hardware
-integrations: LightBox&LightBoard Mini
-links:
-  url: https://www.rocketlife.com/technology/

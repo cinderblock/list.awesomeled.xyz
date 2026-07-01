@@ -1,10 +1,10 @@
 name: SK6818
 creator: Opsco Optoelectronics
-data:
-  clocked: false
-  channels: 4
 color:
   channel_bits: 8
   pwm_frequency: 1.2kHz
+data:
+  clocked: false
+  channels: 4
 other_links:
   - SK6818 Pixel Protocol Overview | Advatek Lighting

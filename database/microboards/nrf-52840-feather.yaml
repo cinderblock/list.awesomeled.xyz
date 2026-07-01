@@ -3,7 +3,6 @@ release_year: 2021
 creator:
   name: Adafruit
   page: https://www.adafruit.com/product/4062
-price: 25
 compute:
   soc: NRF 52840
   cpu: ARM Cortex-M4
@@ -18,3 +17,4 @@ io:
   max_outputs: 21
   bms: 1S
   imu: Wing
+price: 25

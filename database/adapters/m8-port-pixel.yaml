@@ -1,8 +1,5 @@
 name: M8 Port Pixel
 creator: Microcyb
-diy_or_ots: DIY
-parent: Raspberry Pi 3B+ or above
-price: 45
 outputs:
   max_channels: 75
   pixel_types: Single
@@ -10,5 +7,8 @@ outputs:
 power:
   voltage: 12V
   current: 30A
+diy_or_ots: DIY
 links:
   product: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
+parent: Raspberry Pi 3B+ or above
+price: 45

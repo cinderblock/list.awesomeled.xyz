@@ -3,16 +3,13 @@ status: active
 creator:
   name: Obtainium Consulting
   url: https://www.lightkraken.net
-notes: 70W PoE++ powered via Cat5 from a PoE switch (single cable for power and data).
 manufacturers:
   - Obtainium Consulting
 vendors:
   - name: Tindie
     url: https://www.tindie.com
     page: https://www.tindie.com/products/tinicuro/lightkraken/
-core:
-  IC: GD32F107RCT6
-  family: GD32
+notes: 70W PoE++ powered via Cat5 from a PoE switch (single cable for power and data).
 inputs:
   physical:
     Ethernet: true
@@ -36,6 +33,9 @@ power:
     max: 24
   current:
     max: 5
+core:
+  IC: GD32F107RCT6
+  family: GD32
 features:
   - PoE++ (802.3bt Type 4) powered, up to 70W over Cat5
   - Selectable output voltage (5.4V / 12V / 24V)

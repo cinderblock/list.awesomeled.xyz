@@ -2,7 +2,10 @@ name: Trinket M0
 creator:
   name: Adafruit
   page: https://www.adafruit.com/product/3500
-price: 9
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: ATSAMD21E18
   cpu: ARM Cortex-M0
@@ -14,11 +17,8 @@ compute:
 connectivity:
   usb: OTG
   serial: true
-power:
-  voltage:
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   max_outputs: 4
   bms: Diode
   imu: false
+price: 9

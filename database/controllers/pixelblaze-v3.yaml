@@ -6,8 +6,6 @@ creator:
   url: https://electromage.com
   page: https://electromage.com/pixelblaze
 notes: $19 busable output expanders have 8ch ea (max 51K pixels).
-core:
-  family: ESP32
 inputs:
   physical:
     Wi-Fi: 2.4GHz # ESP32 onboard
@@ -27,6 +25,8 @@ power:
     max: 5
   current:
     max: 1.8
+core:
+  family: ESP32
 data:
   storage:
     - type: Flash # ESP32 onboard flash for pattern storage

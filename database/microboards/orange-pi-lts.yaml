@@ -1,6 +1,5 @@
 name: Orange Pi LTS
 creator: Shenzhen Xunlong Software
-price: 9
 vendors:
   - url: https://www.aliexpress.com/item/4000049660873.html
 compute:
@@ -17,3 +16,4 @@ connectivity:
   usb: OTG x1, 2.0 x1
 io:
   storage: microSD
+price: 9

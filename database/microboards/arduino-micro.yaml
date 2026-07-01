@@ -2,6 +2,10 @@ name: Arduino Micro
 creator:
   name: Arduino
   page: https://store.arduino.cc/usa/arduino-micro
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 5.0V
 compute:
   soc: ATmega32u4
   cpu: AVR
@@ -13,10 +17,6 @@ compute:
 connectivity:
   usb: OTG
   serial: true
-power:
-  voltage:
-    max: 5V
-  gpio_voltage: 5.0V
 io:
-  bms: "No"
+  bms: 'No'
   imu: false

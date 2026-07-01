@@ -1,7 +1,6 @@
 name: Printer Paper
-material_type: Wood Pulp
-purpose_made: false
 notes: Pretty good diffusion for thickness, organic texture
+material_type: Wood Pulp
 optical:
   color_rendition: 2
   light_transmission: 2
@@ -13,3 +12,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $
+purpose_made: false

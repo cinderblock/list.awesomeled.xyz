@@ -2,6 +2,22 @@ name: Resolume
 status: active
 creator: Resolume
 notes: Heavily integrated with VJ features
+inputs:
+  video: true
+  audio: true
+  other: MIDI, OSC, Spout, Syphon
+outputs:
+  protocols:
+    artnet: true
+    sacn: true
+    dmx: true
+  other: MIDI
+capabilities:
+  live: true
+  designer: true
+  visualizer: 2D
+links:
+  url: https://resolume.com/software
 platforms:
   - Windows
   - macOS
@@ -19,23 +35,7 @@ pricing:
   demo:
     available: true
     limitations: Watermark on output
-capabilities:
-  live: true
-  designer: true
-  visualizer: 2D
-inputs:
-  video: true
-  audio: true
-  other: MIDI, OSC, Spout, Syphon
-outputs:
-  protocols:
-    artnet: true
-    sacn: true
-    dmx: true
-  other: MIDI
 technical_notes:
   - Primary use is VJ software with LED control as additional feature
   - Arena version includes advanced mapping for LED installations
   - Prices in EUR (299 for Avenue, 799 for Arena)
-links:
-  url: https://resolume.com/software

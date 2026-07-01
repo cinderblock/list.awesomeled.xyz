@@ -1,11 +1,11 @@
 name: RaspPi Isolated DMX
 creator: Arjan van Vught
 notes: Isolated DMX-512 interface for Raspberry Pi - no pixel outputs
-diy_or_ots: OTS
-parent: Raspberry Pi
 outputs:
   max_channels: 512
   connectors: XLR3/5
   description: DMX - allows easy control of DMX-512 devices from Pi
+diy_or_ots: OTS
 links:
   product: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+parent: Raspberry Pi

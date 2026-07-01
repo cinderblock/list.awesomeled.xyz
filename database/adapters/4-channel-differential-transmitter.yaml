@@ -1,14 +1,14 @@
 name: 4 Channel Differential Transmitter
 creator: Wizard of Wire
 notes: 4 Channel differential transmitter output to RJ45 for connection with Cat5
-diy_or_ots: OTS
-parent: Pixel Data
-price: 15
 outputs:
   max_channels: 4
   pixel_types: single
   connectors: Phoenix Screw
 power:
   voltage: 12V
+diy_or_ots: OTS
 links:
   product: https://www.wizardofwire.com/product/data-to-differential-board/
+parent: Pixel Data
+price: 15

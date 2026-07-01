@@ -2,11 +2,11 @@ name: WS2815 RGBW
 creator: World Semi
 manufacturers:
   - World Semi
-data:
-  clocked: false
 color:
   order: RGBW
-electrical:
-  led_voltage: 12V
+data:
+  clocked: false
 datasheet:
   url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
+electrical:
+  led_voltage: 12V

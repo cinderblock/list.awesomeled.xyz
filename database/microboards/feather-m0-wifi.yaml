@@ -2,6 +2,8 @@ name: Feather M0 Wi-Fi
 creator:
   name: Adafruit
   page: https://www.adafruit.com/product/3010
+power:
+  gpio_voltage: 3.3V
 compute:
   soc: ATSAMD21G18
   cpu: ARM Cortex-M0
@@ -14,8 +16,6 @@ connectivity:
   wifi: 2.4GHz
   usb: OTG
   serial: true
-power:
-  gpio_voltage: 3.3V
 io:
   bms: 1S
   imu: Wing

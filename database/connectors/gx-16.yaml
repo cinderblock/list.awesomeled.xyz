@@ -3,10 +3,8 @@ creator: Generic
 notes: AKA Aviation Connector, CB Mic Connector, most common in 4 pin
   variant,Chrome metal Shell and IP65 Version in Black Plastic *Legacy Connector
   NOT For New Designs*
-ratings:
-  max_current: 7 A
-  max_voltage: 100 V
-  ip_rating: IP30
+links:
+  product: https://www.renhotecpro.com/gx16-connector-data-sheet/
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -19,6 +17,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 7 A
+  max_voltage: 100 V
+  ip_rating: IP30
 termination:
   solder: true
   crimp: false
@@ -27,5 +29,3 @@ termination:
   largest_gauge: 20 AWG
 wiring:
   colors: Silver Metal Black Plastic
-links:
-  product: https://www.renhotecpro.com/gx16-connector-data-sheet/

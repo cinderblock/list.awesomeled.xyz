@@ -1,14 +1,14 @@
 name: Wemos PWM RGB/W LED Driver Board
 creator: Mottram Labs
 notes: RGBW MosFet driver fro strips compatible with Wled
-diy_or_ots: OTS
-parent: WeMos D1 Mini (ESP32/ESP8266)
-price: 12
 outputs:
   max_channels: 4
   pixel_types: Fet power output
   connectors: Screw Terminals
 power:
   voltage: 24V
+diy_or_ots: OTS
 links:
   product: https://www.ebay.co.uk/itm/133875147448?hash=item1f2b94a2b8:g:4rAAAOSwRG1hPezJ
+parent: WeMos D1 Mini (ESP32/ESP8266)
+price: 12

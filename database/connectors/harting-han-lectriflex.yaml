@@ -3,10 +3,8 @@ creator: Harting
 notes: Harting Han rectangular AKA 16 pin Lectriflex as alternative to Socapex
   in stage lighting. Multi pin mains connector , modular able to have power ,
   data and even hose lines on one connector.
-ratings:
-  max_current: 25 A
-  max_voltage: 450 V
-  ip_rating: IP40
+links:
+  product: https://www.harting.com/US/en/heavy-duty-electrical-connectors#Han%C2%AE-Rangee
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -18,6 +16,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 25 A
+  max_voltage: 450 V
+  ip_rating: IP40
 termination:
   solder: true
   screw_terminal: true
@@ -25,5 +27,3 @@ termination:
   idc: true
   smallest_gauge: 28 AWG
   largest_gauge: 10 AWG
-links:
-  product: https://www.harting.com/US/en/heavy-duty-electrical-connectors#Han%C2%AE-Rangee

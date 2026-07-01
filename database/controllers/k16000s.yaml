@@ -7,8 +7,7 @@ manufacturers:
   - AUTUNEER
   - CANRIA
   - CLAUTOP
-notes:
-  Not a Kulp product despite the K-name; generic Madrix/Art-Net pixel controller
+notes: Not a Kulp product despite the K-name; generic Madrix/Art-Net pixel controller
   sold under AUTUNEER, CANRIA, and CLAUTOP brands. Online control via
   Art-Net/Madrix over Ethernet or a DMX512 console; offline standalone playback
   from SD card (16 ports x 1024 pixels).

@@ -1,8 +1,5 @@
 name: PiPixel
 creator: Tindie
-diy_or_ots: OTS
-parent: Raspberry Pi
-price: 9
 outputs:
   max_channels: 1
   pixel_types: Single or Clocked
@@ -11,5 +8,8 @@ outputs:
 power:
   voltage: 24V
   current: 5A
+diy_or_ots: OTS
 links:
   product: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
+parent: Raspberry Pi
+price: 9

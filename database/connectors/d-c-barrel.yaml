@@ -2,10 +2,9 @@ name: D.C. Barrel
 creator: Generic
 notes: D.C Barrel Connector. 5.5mm barrel with a 2.1mm centre pin is most
   common; 2.5 mm pin looks similar but doesn't fit.
-ratings:
-  max_current: 2 A
-  max_voltage: 30 V
-  ip_rating: IP20-IP65
+links:
+  product: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
+  mouser: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -17,6 +16,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+ratings:
+  max_current: 2 A
+  max_voltage: 30 V
+  ip_rating: IP20-IP65
 termination:
   solder: true
   crimp: true
@@ -26,6 +29,3 @@ termination:
 wiring:
   pinout: +pin -sleeve
   convention: Female source
-links:
-  product: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
-  mouser: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack

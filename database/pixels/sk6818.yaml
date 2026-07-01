@@ -1,19 +1,19 @@
 name: SK6818
-data:
-  clocked: false
-  bitrate: 800kHz
-  backup_line: false
 color:
   order: RGBW
   brightness_bits: 8
   pwm_frequency: 1.2kHz
+data:
+  clocked: false
+  bitrate: 800kHz
+  backup_line: false
+datasheet:
+  url: https://asset.conrad.com/media10/add/160267/c1/-/en/001575814DS01/datasheet-1575814-thomsen-strip-5m-300-rgbw-ip68-led-pasik-entrieda-a-a-e-zastrcky-zasuvka-5-v-5-m-rgbw.pdf
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
+other_links:
+  - SK6818 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: '5050'
   pin_count: 4
-datasheet:
-  url: https://asset.conrad.com/media10/add/160267/c1/-/en/001575814DS01/datasheet-1575814-thomsen-strip-5m-300-rgbw-ip68-led-pasik-entrieda-a-a-e-zastrcky-zasuvka-5-v-5-m-rgbw.pdf
-other_links:
-  - SK6818 Pixel Protocol Overview | Advatek Lighting

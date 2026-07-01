@@ -1,15 +1,6 @@
 name: xLights
 status: active
 notes: originally Nutcracker, developed for holiday light shows as a sequencer, spread beyond , continually developed.
-platforms:
-  - Windows
-  - macOS
-  - Linux
-pricing:
-  price: Free
-capabilities:
-  live: false
-  designer: true
 inputs:
   audio: Both
   other: Audacity plug-in,MIDI,video files
@@ -19,5 +10,14 @@ outputs:
     sacn: Output
     dmx: Output
   other: LOR, DDP
+capabilities:
+  live: false
+  designer: true
 links:
   url: https://www.xlights.org
+platforms:
+  - Windows
+  - macOS
+  - Linux
+pricing:
+  price: Free

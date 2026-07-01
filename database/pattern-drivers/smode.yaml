@@ -2,16 +2,6 @@ name: Smode
 status: active
 notes: This application is more of a game engine crossed with a volumetric
   mapping solution. 3D mapping
-platforms:
-  - Windows
-pricing:
-  price: Expensive
-  demo:
-    available: Free for SD card output
-capabilities:
-  live: true
-  designer: true
-  programmatic: Both
 inputs:
   video: Both
   audio: Both
@@ -23,5 +13,15 @@ outputs:
     dmx: Input
   serial: Both
   other: OSC, MIDI, UDP, Spout, NDI
+capabilities:
+  live: true
+  designer: true
+  programmatic: Both
 links:
   url: https://smode.fr/
+platforms:
+  - Windows
+pricing:
+  price: Expensive
+  demo:
+    available: Free for SD card output

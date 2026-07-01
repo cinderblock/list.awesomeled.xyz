@@ -1,7 +1,11 @@
 name: NS108E
-creator: Newstar LED Co.
 release_year: 2019
+creator: Newstar LED Co.
 notes: 16bit/color version of APA102 copy SK9822, aka SK9826
+color:
+  order: RGB
+  brightness_bits: 16+5
+  pwm_frequency: 4.0kHz
 data:
   type: SK9826
   clocked: true
@@ -9,10 +13,8 @@ data:
   pixel_size_bits: 64
   pixel_rate_max: 468.8 k Pixel / s
   backup_line: false
-color:
-  order: RGB
-  brightness_bits: 16+5
-  pwm_frequency: 4.0kHz
+datasheet:
+  url: http://newstar-ledstrip.com/product/20191018160652775.pdf
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -29,5 +31,3 @@ physical:
     - '2020'
   package_size: 5050, 3535, 2020
   pin_count: 6
-datasheet:
-  url: http://newstar-ledstrip.com/product/20191018160652775.pdf

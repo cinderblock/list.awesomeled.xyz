@@ -2,18 +2,6 @@ name: WLED
 status: active
 creator: Aircoookie, community
 notes: 'Great standalone pixel controller software for ESP8266 and ESP32 based boards. See also: WLED-SR, sound reactive fork'
-language: C++
-platforms:
-  - ESP8266
-  - ESP32
-pricing:
-  price: FOSS
-  demo:
-    available: Open source
-capabilities:
-  live: true
-  designer: false
-  visualizer: Limited 1D
 inputs:
   other: UDP Sync
 outputs:
@@ -25,6 +13,18 @@ outputs:
   gpio: Possible
   serial: Input
   other: ws281x protocol, APA102, etc.
+capabilities:
+  live: true
+  designer: false
+  visualizer: Limited 1D
 integrations: Home Assistant, WLED App.
+language: C++
 links:
   url: https://github.com/Aircoookie/WLED
+platforms:
+  - ESP8266
+  - ESP32
+pricing:
+  price: FOSS
+  demo:
+    available: Open source

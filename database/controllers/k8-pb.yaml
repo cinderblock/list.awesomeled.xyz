@@ -4,12 +4,7 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k8-pb/
-notes:
-  PocketBeagle 2 cape running FPP (network via USB Ethernet/WiFi adapter on
-  the host; not compatible with PocketBeagle 1). 8 local fused ports, 3 RJ45
-  differential ports adding 12 strings, and a 16-string expansion header.
-  Accepts 5-18V input automatically. eFuses with current monitoring, pixel
-  counting, RTC, OLED.
+notes: PocketBeagle 2 cape running FPP (network via USB Ethernet/Wi-Fi adapter on the host; not compatible with PocketBeagle 1). 8 local fused ports, 3 RJ45 differential ports adding 12 strings, and a 16-string expansion header. Accepts 5-18V input automatically. eFuses with current monitoring, pixel counting, RTC, OLED.
 inputs:
   physical:
     Ethernet: true # via USB Ethernet adapter on host

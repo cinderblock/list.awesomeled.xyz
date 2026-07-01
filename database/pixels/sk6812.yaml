@@ -3,6 +3,11 @@ status: active
 release_year: 2013
 creator: Opsco/Newstar
 notes: WS2812 copy also available in 4 channel RGBW variant
+color:
+  order: GRB & GRBW
+  brightness_bits: 8
+  pwm_frequency: 4.7kHz
+  pwm_frequency_notes: Datasheet claims 1.2kHz but testing shows 4.7kHz
 data:
   type: WS2811/12
   clocked: false
@@ -11,11 +16,11 @@ data:
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: false
   max_per_string: null
-color:
-  order: GRB & GRBW
-  brightness_bits: 8
-  pwm_frequency: 4.7kHz
-  pwm_frequency_notes: Datasheet claims 1.2kHz but testing shows 4.7kHz
+datasheet:
+  url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+  discrepancies:
+    - Datasheet PWM frequency (1.2kHz) differs from tested value (4.7kHz)
+    - GPIO min threshold not documented in datasheet
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "17V Vds, Max" but LEDs are built-in and share power with 5V VDD
@@ -27,6 +32,8 @@ electrical:
   channel_current: 20mA
   quiescent_current: 1.0mA
   wattage: 104mW
+other_links:
+  - SK6812 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_sizes:
     - '5050'
@@ -34,13 +41,6 @@ physical:
     - '2040'
   package_size: 5050,3535,2040
   pin_count: 4
-datasheet:
-  url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
-  discrepancies:
-    - Datasheet PWM frequency (1.2kHz) differs from tested value (4.7kHz)
-    - GPIO min threshold not documented in datasheet
-other_links:
-  - SK6812 Pixel Protocol Overview | Advatek Lighting
 technical_notes:
   - PWM frequency tested at 4.7kHz despite 1.2kHz datasheet claim
   - Available in RGB and RGBW variants

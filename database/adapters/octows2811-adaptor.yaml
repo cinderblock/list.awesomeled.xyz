@@ -1,8 +1,5 @@
 name: OctoWS2811 Adaptor
 creator: PJRC
-diy_or_ots: OTS
-parent: Teensy 3.2
-price: 10
 outputs:
   max_channels: 8
   pixel_types: Single
@@ -10,5 +7,8 @@ outputs:
   description: Single
 power:
   voltage: 5V
+diy_or_ots: OTS
 links:
   product: https://www.pjrc.com/store/octo28_adaptor.html
+parent: Teensy 3.2
+price: 10

@@ -1,12 +1,12 @@
 name: Pi Hat
 creator: Microcyb
 notes: Phoenix Screw
-diy_or_ots: Yes
-parent: Yes
-price: 22
 outputs:
   max_channels: 3200
-  pixel_types: "2"
+  pixel_types: '2'
   connectors: Both
+diy_or_ots: Yes
 links:
   product: Multiple
+parent: Yes
+price: 22

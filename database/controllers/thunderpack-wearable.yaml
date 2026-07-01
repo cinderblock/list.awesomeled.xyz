@@ -8,8 +8,6 @@ vendors:
   - name: Tindie
     page: https://www.tindie.com/stores/jeremy/
 notes: 1.4 - 2.3A output per PWM channel. RGB PWM and/or addressable LEDs.
-core:
-  family: STM32
 inputs:
   physical:
     USB: true # USB bootloader for programming
@@ -24,6 +22,8 @@ outputs:
 power:
   current:
     max: 10
+core:
+  family: STM32
 features:
   - Integrated 18650 lithium battery and charger
   - 4 high-power PWM MOSFET outputs (1.4-2.3A each)

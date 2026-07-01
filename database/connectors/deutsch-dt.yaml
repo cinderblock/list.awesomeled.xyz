@@ -2,10 +2,8 @@ name: Deutsch DT
 creator: TE Deutsch
 notes: Automotive and Marine connector series , compatible/knock offs common,
   specific crimp tool required
-ratings:
-  max_current: 13 A
-  max_voltage: 230 V
-  ip_rating: IP68
+links:
+  product: https://www.te.com/usa-en/products/connectors/automotive-connectors/intersection/deutsch-dt-series-connectors.html?tab=pgp-story
 mechanical:
   outline: Rectangular/Triangular
   contact_type: Pins
@@ -18,11 +16,13 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+ratings:
+  max_current: 13 A
+  max_voltage: 230 V
+  ip_rating: IP68
 termination:
   solder: false
   crimp: true
   idc: false
   smallest_gauge: 20 AWG
   largest_gauge: 14 AWG
-links:
-  product: https://www.te.com/usa-en/products/connectors/automotive-connectors/intersection/deutsch-dt-series-connectors.html?tab=pgp-story

@@ -2,6 +2,10 @@ name: Teensy 3.5
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensy35.html
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: MK64FX512VMD12
   cpu: ARM Cortex-M4
@@ -14,11 +18,7 @@ connectivity:
   wifi: Shield
   usb: OTG
   serial: true
-power:
-  voltage:
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   storage: microSD
-  bms: "No"
+  bms: 'No'
   imu: false

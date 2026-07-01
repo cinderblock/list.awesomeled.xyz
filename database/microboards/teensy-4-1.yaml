@@ -9,5 +9,5 @@ compute:
   ram: 1024kB
   linux: false
 io:
-  bms: "No"
+  bms: 'No'
   imu: false

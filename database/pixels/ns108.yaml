@@ -1,7 +1,11 @@
 name: NS108
-creator: Newstar LED Co.
 release_year: 2018
+creator: Newstar LED Co.
 notes: 16bit/color version of NS107S
+color:
+  order: BGR
+  brightness_bits: 16+5
+  pwm_frequency: 27.0kHz
 data:
   type: APA102
   clocked: true
@@ -9,10 +13,8 @@ data:
   pixel_size_bits: 64
   pixel_rate_max: 468.8 k Pixel / s
   backup_line: false
-color:
-  order: BGR
-  brightness_bits: 16+5
-  pwm_frequency: 27.0kHz
+datasheet:
+  url: http://newstar-ledstrip.com/productshow848.html
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -29,5 +31,3 @@ physical:
     - '2020'
   package_size: 5050, 3535, 2020
   pin_count: 6
-datasheet:
-  url: http://newstar-ledstrip.com/productshow848.html

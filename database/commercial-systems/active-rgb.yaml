@@ -1,9 +1,9 @@
 name: Active RGB
 creator: Lumisphere
 notes: Time proven Clear bubble festoon lamp
+pricing:
+  price_range: $$$$$
 specs:
   pixels_per_run: 170
   color_type: RGB
   dedicated_psu: true
-pricing:
-  price_range: $$$$$

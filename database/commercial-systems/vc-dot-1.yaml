@@ -1,9 +1,9 @@
 name: VC-Dot 1
 creator: Martin
 notes: Martin, stage lighting part of Harmon Kardon group
+pricing:
+  price_range: $$$$$$
 specs:
   pixels_per_run: 100
   color_type: RGB
   dedicated_psu: true
-pricing:
-  price_range: $$$$$$

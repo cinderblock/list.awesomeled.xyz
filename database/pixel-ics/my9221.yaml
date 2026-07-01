@@ -1,11 +1,11 @@
 name: MY9221
 creator: MY-Semi
-data:
-  clocked: true
-  channels: 3
 color:
   channel_bits: 16
   pwm_frequency: 1.0kHz
+data:
+  clocked: true
+  channels: 3
 electrical:
   output_voltage: 24V
 other_links:

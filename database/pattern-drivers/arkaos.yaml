@@ -1,14 +1,14 @@
 name: ArKaos
 status: active
 creator: ArKaos S.A.
+outputs:
+  other: Klingnet
+capabilities:
+  live: true
+  designer: true
+links:
+  url: https://www.arkaos.com/
 platforms:
   - Windows
 pricing:
   price: 299
-capabilities:
-  live: true
-  designer: true
-outputs:
-  other: Klingnet
-links:
-  url: https://www.arkaos.com/

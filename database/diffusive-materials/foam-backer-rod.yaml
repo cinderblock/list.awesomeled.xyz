@@ -1,6 +1,8 @@
 name: Foam Backer Rod
-material_type: Closed cell PE foam
 notes: Pool noodle material , slit and re seal with tape or adhesive
+links:
+  product: https://www.dortechdirect.co.uk/polyethylene-foam-backer-rod-25mm.html
+material_type: Closed cell PE foam
 optical:
   color_rendition: 4
   light_transmission: 3
@@ -10,5 +12,3 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$
-links:
-  product: https://www.dortechdirect.co.uk/polyethylene-foam-backer-rod-25mm.html

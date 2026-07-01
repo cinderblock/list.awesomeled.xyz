@@ -1,5 +1,4 @@
 name: Fabric
-purpose_made: false
 notes: Not tested yet
 optical:
   tinted: T
@@ -7,3 +6,4 @@ physical:
   flexible: F
   fire_retardant: false
   properties: Diffusive
+purpose_made: false

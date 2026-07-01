@@ -1,8 +1,6 @@
 name: IP67 Controller for WLED
 creator: SerKo
 notes: Easy to assemble with TH parts
-diy_or_ots: DIY
-parent: ESP-07S module
 outputs:
   max_channels: 2
   pixel_types: Single+Clocked
@@ -11,5 +9,7 @@ outputs:
 power:
   voltage: 12V
   current: 10A
+diy_or_ots: DIY
 links:
   product: https://github.com/srg74/Controller-for-WLED-firmware
+parent: ESP-07S module

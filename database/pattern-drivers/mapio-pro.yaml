@@ -2,13 +2,6 @@ name: Mapio Pro
 status: active
 creator: Vistitution
 notes: Mapio Pro has support for addressable LEDs
-pricing:
-  price: 234
-  demo:
-    available: Watermarked demo
-capabilities:
-  live: true
-  designer: true
 inputs:
   video: Both
   audio: Output
@@ -17,5 +10,12 @@ outputs:
   protocols:
     artnet: Output
   serial: Output
+capabilities:
+  live: true
+  designer: true
 links:
   url: https://visution.com/
+pricing:
+  price: 234
+  demo:
+    available: Watermarked demo

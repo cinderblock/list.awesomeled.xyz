@@ -4,6 +4,10 @@ creator: Connector Corp
 manufacturers:
   - Connector Corp
   - Licensed Manufacturer
+vendors:
+  - DigiKey
+  - Mouser
+  - Amazon
 notes: Industry standard connector for LED applications
 aliases:
   - EC Series
@@ -52,10 +56,6 @@ technical_notes:
   - Rated for 1000 mating cycles
   - Operating temperature -40C to +105C
 url: https://example.com/connector-series
-vendors:
-  - DigiKey
-  - Mouser
-  - Amazon
 wire_to_wire: true
 year_introduced: 2010
 ---

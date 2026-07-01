@@ -2,6 +2,10 @@ name: Teensy++ 2.0
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensypp.html
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 5.0V
 compute:
   soc: AT90USB1286
   cpu: AVR
@@ -13,11 +17,7 @@ compute:
 connectivity:
   usb: OTG
   serial: true
-power:
-  voltage:
-    max: 5V
-  gpio_voltage: 5.0V
 io:
   storage: Shield
-  bms: "No"
+  bms: 'No'
   imu: false

@@ -1,7 +1,8 @@
 name: Suction Hose
-material_type: PVC Wire reinforcement
-purpose_made: false
 notes: Multiple diameters, clear and colours, heavier duty and more expensive than dryer hose
+links:
+  product: http://hose-products.com/suction-hose.html
+material_type: PVC Wire reinforcement
 optical:
   color_rendition: 4
   light_transmission: 4
@@ -11,5 +12,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$$
-links:
-  product: http://hose-products.com/suction-hose.html
+purpose_made: false

@@ -1,10 +1,8 @@
 name: TeePlug
 creator: Hylec
 notes: 4.0mm2 conductor acceptance. Screw Terminal! No soldering or crimping Also appear under Techno brand
-ratings:
-  max_current: 18 A
-  max_voltage: 450 V
-  ip_rating: IP68
+links:
+  product: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -16,6 +14,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 18 A
+  max_voltage: 450 V
+  ip_rating: IP68
 termination:
   solder: false
   screw_terminal: true
@@ -25,5 +27,3 @@ termination:
   largest_gauge: 16 AWG
 wiring:
   colors: Green or Grey Collar
-links:
-  product: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html

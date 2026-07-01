@@ -2,21 +2,6 @@ name: QLC+
 status: active
 creator: Massimo Calegari
 notes: Includes sound responsive features. Large fixture compatibility list.
-language: C++
-platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Raspberry Pi
-pricing:
-  price: FOSS
-  demo:
-    available: €15 Donation requested
-capabilities:
-  live: true
-  designer: true
-  visualizer: 3D view available in V5
-  programmatic: Both
 inputs:
   audio: Input
   other: OSC, MIDI, Web API
@@ -28,6 +13,21 @@ outputs:
   gpio: Output
   serial: Output
   other: USB, OSC
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D view available in V5
+  programmatic: Both
 integrations: 'Supported MIDI/DMX Hardware List: https://www.qlcplus.org/discover/compatibility'
+language: C++
 links:
   url: https://www.qlcplus.org/
+platforms:
+  - Windows
+  - macOS
+  - Linux
+  - Raspberry Pi
+pricing:
+  price: FOSS
+  demo:
+    available: €15 Donation requested

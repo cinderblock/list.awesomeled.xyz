@@ -1,9 +1,8 @@
 name: Mate-N-Lok
 creator: TE /AMP
 notes: Popular automotive connector
-ratings:
-  max_current: 19 A
-  max_voltage: 600 V
+links:
+  product: https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -17,6 +16,9 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+ratings:
+  max_current: 19 A
+  max_voltage: 600 V
 termination:
   solder: false
   screw_terminal: false
@@ -26,5 +28,3 @@ termination:
   largest_gauge: 10 AWG
 wiring:
   colors: Range of Colours
-links:
-  product: https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story

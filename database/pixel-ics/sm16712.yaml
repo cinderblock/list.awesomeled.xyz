@@ -1,13 +1,13 @@
 name: SM16712
 creator: Shenzhen Sunmoon Microelectronics
-data:
-  clocked: false
-  channels: 3
 color:
   channel_bits: 8
   pwm_frequency: 1.2kHz
+data:
+  clocked: false
+  channels: 3
+other_links:
+  - SM16712 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP16
   pin_count: 16
-other_links:
-  - SM16712 Pixel Protocol Overview | Advatek Lighting

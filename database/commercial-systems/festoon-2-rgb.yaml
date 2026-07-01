@@ -1,9 +1,9 @@
 name: Festoon 2 RGB
 creator: Chauvet
 notes: Separate controller, 20 globes per string max 3 strings per control IP 54
+pricing:
+  price_range: $$$
 specs:
   pixels_per_run: 60
   color_type: RGB W/WW
   dedicated_psu: true
-pricing:
-  price_range: $$$

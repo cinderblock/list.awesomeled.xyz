@@ -2,6 +2,10 @@ name: Chataigne Wled Mod
 status: active
 creator: Zak-45
 notes: Plug-in for control of WLED, other WLED plugins from same developer on GitHub
+capabilities:
+  live: true
+links:
+  url: https://github.com/zak-45
 platforms:
   - Windows
   - macOS
@@ -11,7 +15,3 @@ pricing:
   price: Free
   demo:
     available: Free
-capabilities:
-  live: true
-links:
-  url: https://github.com/zak-45

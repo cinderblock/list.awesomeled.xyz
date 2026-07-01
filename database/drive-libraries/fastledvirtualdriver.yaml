@@ -3,9 +3,9 @@ status: unknown
 creator: Yves Bazin (hpwit)
 language: C++
 license: MIT
+links:
+  repo: https://github.com/hpwit/FASTLEDVIRTUALDRIVER
 platforms:
   - ESP32
 supported_ics:
   - WS2812
-links:
-  repo: https://github.com/hpwit/FASTLEDVIRTUALDRIVER

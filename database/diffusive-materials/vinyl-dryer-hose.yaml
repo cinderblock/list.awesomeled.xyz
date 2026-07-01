@@ -1,7 +1,8 @@
 name: Vinyl Dryer Hose
-material_type: PVC Wire reinforcement
-purpose_made: false
 notes: Typically 4" diameter, use bubble wrap or spacers to keep LED string centred
+links:
+  product: https://www.walmart.com/ip/4-x-5-Vinyl-Dryer-Vent-Hose-PartNo-D04051-JonesStephens/994124574
+material_type: PVC Wire reinforcement
 optical:
   color_rendition: 3
   light_transmission: 3
@@ -11,5 +12,4 @@ physical:
   properties: Diffusive
 pricing:
   price_range: $$
-links:
-  product: https://www.walmart.com/ip/4-x-5-Vinyl-Dryer-Vent-Hose-PartNo-D04051-JonesStephens/994124574
+purpose_made: false

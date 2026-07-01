@@ -5,8 +5,7 @@ creator:
   name: Quindor / Intermittent Technology
   url: https://quinled.info
   page: https://quinled.info/quinled-dig-uno/
-notes:
-  ESP32 based (custom QuinLED-ESP32 top board, USB-C), ships with WLED
+notes: ESP32 based (custom QuinLED-ESP32 top board, USB-C), ships with WLED
   pre-installed; board/external antenna options, Ethernet on select variants.
 inputs:
   physical:

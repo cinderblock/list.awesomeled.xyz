@@ -29,6 +29,6 @@ power:
 price: 25
 technical_notes:
   - Very popular platform with excellent dithering and interpolation
-  - Project maintenance status uncertain - check GitHub README
-  - "See commit history for maintenance status: https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7"
+  - Project maintenance status uncertain - check GitHub readme
+  - 'See commit history for maintenance status: https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7'
 wled_compatible: false

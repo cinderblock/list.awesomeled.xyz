@@ -3,7 +3,9 @@ release_year: 2019
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensy40.html
-price: 20
+power:
+  voltage:
+    max: 5V
 compute:
   soc: iMXRT1062
   cpu: ARM Cortex-M7
@@ -15,9 +17,7 @@ compute:
 connectivity:
   usb: OTG
   serial: true
-power:
-  voltage:
-    max: 5V
 io:
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 20

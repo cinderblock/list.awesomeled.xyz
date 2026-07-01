@@ -2,10 +2,8 @@ name: Superseal
 creator: TE /AMP
 notes: AMP Superseal original product ,automotive and marine series, much copied
   . Requires specific crimp tool for contacts.
-ratings:
-  max_current: 14 A
-  max_voltage: 24 V
-  ip_rating: IP68
+links:
+  product: https://www.te.com/content/dam/te-com/documents/automotive/global/1654292-2_AMP%20SUPERSEAL%201.5.pdf
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -19,11 +17,13 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 14 A
+  max_voltage: 24 V
+  ip_rating: IP68
 termination:
   solder: false
   crimp: true
   idc: false
   smallest_gauge: 22 AWG
   largest_gauge: 14 AWG
-links:
-  product: https://www.te.com/content/dam/te-com/documents/automotive/global/1654292-2_AMP%20SUPERSEAL%201.5.pdf

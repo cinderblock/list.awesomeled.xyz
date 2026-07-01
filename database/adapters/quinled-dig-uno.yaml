@@ -1,11 +1,11 @@
 name: QuinLED-Dig-Uno
-diy_or_ots: DIY
-parent: Wemos Dx Mini (ESP32/ESP8266)
 outputs:
   max_channels: 6
   pixel_types: Single
   connectors: Phoenix Screw
 power:
   voltage: 5V
+diy_or_ots: DIY
 links:
   product: https://quinled.info/2018/10/12/quinled-dig-uno-hardware-guide/#quinled-quad-pcb-boards
+parent: Wemos Dx Mini (ESP32/ESP8266)

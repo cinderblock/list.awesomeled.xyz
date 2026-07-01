@@ -3,6 +3,11 @@ status: active
 release_year: 2011
 creator: WorldSemi
 notes: Addressable in groups (usually of 3 LEDs), common on 3 wire pixels, pucks, floods
+color:
+  channel_bits: 8
+  aggregate_bits: 24
+  pwm_frequency: 2.0kHz
+  pwm_frequency_notes: 400Hz was old spec. Newer WS2811 chips have 2kHz PWM like WS2812B post-2018
 data:
   type: WS2811/12
   clocked: false
@@ -11,11 +16,8 @@ data:
   pixel_size_bits: 24
   pixel_rate_max: 33.3 k Pixel / s
   backup_line: false
-color:
-  channel_bits: 8
-  aggregate_bits: 24
-  pwm_frequency: 2.0kHz
-  pwm_frequency_notes: 400Hz was old spec. Newer WS2811 chips have 2kHz PWM like WS2812B post-2018
+datasheet:
+  url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
 electrical:
   output_voltage: 12V
   output_voltage_notes: Vds max - can drive LEDs at various voltages up to 12V via constant current
@@ -30,16 +32,14 @@ electrical:
   current_programmable: true
   current_range: 3-60mA typical depending on Rext
   quiescent_current: 0.7mA
+other_links:
+  - WS2811 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_sizes:
     - SOIC8
     - DIP8
   package_size: SOIC8/DIP8
   pin_count: 8
-datasheet:
-  url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
-other_links:
-  - WS2811 Pixel Protocol Overview | Advatek Lighting
 technical_notes:
   - Standalone IC, not integrated with LEDs like WS2812
   - Commonly used for 12V pixels with 3 LEDs in series

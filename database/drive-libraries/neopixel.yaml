@@ -1,23 +1,23 @@
 name: NeoPixel
 status: active
 creator: Adafruit
+features: WS281x, SK6812
+hardware: many
 language: C++
 license: LGPL-3.0
+links:
+  repo: https://github.com/adafruit/Adafruit_NeoPixel
+  youtube: https://www.youtube.com/watch?v=vCDfyxNFeEw
 platforms:
   - Arduino
   - ESP32
   - ESP8266
   - Teensy
-hardware: many
-features: WS281x, SK6812
+related_pixel_ics:
+  - ws2811
+  - sk6812-5050
 supported_ics:
   - WS2811
   - WS2812
   - WS2812B
   - SK6812
-related_pixel_ics:
-  - ws2811
-  - sk6812-5050
-links:
-  repo: https://github.com/adafruit/Adafruit_NeoPixel
-  youtube: https://www.youtube.com/watch?v=vCDfyxNFeEw

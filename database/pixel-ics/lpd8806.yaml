@@ -2,6 +2,10 @@ name: LPD8806
 release_year: 2011
 creator: Greeled Electronic
 notes: Fast refresh, fast PWM, 2 RGB pixels per IC, refresh any time
+color:
+  channel_bits: 8
+  aggregate_bits: 7
+  pwm_frequency: 9.4kHz
 data:
   type: LPD8806
   clocked: true
@@ -11,21 +15,17 @@ data:
   pixel_rate_max: 625.0 k Pixel / s
   backup_line: false
   max_per_string: 2000
-color:
-  channel_bits: 8
-  aggregate_bits: 7
-  pwm_frequency: 9.4kHz
+datasheet:
+  url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+  third_party_testing: https://web.archive.org/web/20180725021448/https://www.texonix.com/LPD8806.html
 electrical:
   output_voltage: 12V
   supply_voltage: 5V
   gpio:
     max: 5V
   max_current: 20mA
+other_links:
+  - LPD8806 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP16/QFN16
   pin_count: 16
-datasheet:
-  url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
-  third_party_testing: https://web.archive.org/web/20180725021448/https://www.texonix.com/LPD8806.html
-other_links:
-  - LPD8806 Pixel Protocol Overview | Advatek Lighting

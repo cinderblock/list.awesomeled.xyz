@@ -1,8 +1,8 @@
 name: '9159'
 creator: AVX
-ratings:
-  max_current: 5 A
-  max_voltage: 125 V
+links:
+  product: https://www.avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/
+  digikey: https://www.digikey.com/short/zvwmnz
 mechanical:
   outline: Rectangular
   contact_type: Spring
@@ -16,6 +16,9 @@ mechanical:
   wire_to_wire: true
   pcb_mount: SMT
   board_fingers: true
+ratings:
+  max_current: 5 A
+  max_voltage: 125 V
 termination:
   solder: true
   crimp: true
@@ -24,6 +27,3 @@ termination:
   largest_gauge: 22 AWG
 wiring:
   colors: White
-links:
-  product: https://www.avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/
-  digikey: https://www.digikey.com/short/zvwmnz

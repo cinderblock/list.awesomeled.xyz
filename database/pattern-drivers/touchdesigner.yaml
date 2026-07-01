@@ -3,7 +3,31 @@ status: active
 creator: Derivative
 notes: Visual programming environment with lots of useful built-ins. Not
   specifically for LED patterns, but they're easy to make with a little extra.
+inputs:
+  video: true
+  audio: true
+  adc: true
+  other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton, SMPTE/LTC
+outputs:
+  protocols:
+    artnet: true
+    sacn: true
+    dmx: true
+    kinet: true
+  dmx_notes: Requires DMX USB adapter for direct DMX output
+  gpio: true
+  serial: true
+  serial_notes: Serial support for Arduino and microcontroller communication
+  other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+  programmatic: true
+integrations: Tons
 language: Python, GLSL
+links:
+  url: https://derivative.ca/
 platforms:
   - Windows
   - macOS
@@ -28,32 +52,8 @@ pricing:
   demo:
     available: true
     limitations: Non-commercial license is free with full features
-capabilities:
-  live: true
-  designer: true
-  visualizer: 3D
-  programmatic: true
-inputs:
-  video: true
-  audio: true
-  adc: true
-  other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton, SMPTE/LTC
-outputs:
-  protocols:
-    artnet: true
-    sacn: true
-    dmx: true
-    kinet: true
-  dmx_notes: Requires DMX USB adapter for direct DMX output
-  gpio: true
-  serial: true
-  serial_notes: Serial support for Arduino and microcontroller communication
-  other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton
-integrations: Tons
 technical_notes:
   - Node-based visual programming environment
   - Powerful 3D capabilities for spatial mapping
   - Can be combined with PixelMap for LED-specific features
   - Excellent for interactive installations
-links:
-  url: https://derivative.ca/

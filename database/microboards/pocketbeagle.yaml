@@ -3,7 +3,11 @@ release_year: 2017
 creator:
   name: Beagleboard.org
   page: http://beagleboard.org/pocket
-price: 25
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: am3358
   cpu: Cortex-A8, 2x PRUSS
@@ -17,13 +21,9 @@ connectivity:
   ethernet: USB
   usb: OTG
   serial: true
-power:
-  voltage:
-    min: 5V
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   max_outputs: 40
   storage: microSD
   bms: 1S
   imu: false
+price: 25

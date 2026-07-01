@@ -1,19 +1,19 @@
 name: UCS2904
 creator: Normand Electronics
+color:
+  channel_bits: 8
+  pwm_frequency: 1.2kHz
 data:
   clocked: false
   channels: 4
   bitrate: 800kHz
   backup_line: false
-color:
-  channel_bits: 8
-  pwm_frequency: 1.2kHz
 electrical:
   output_voltage: 30V
   supply_voltage: 5V
   max_current: 17mA
+other_links:
+  - SM16704 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: SOP8
   pin_count: 8
-other_links:
-  - SM16704 Pixel Protocol Overview | Advatek Lighting

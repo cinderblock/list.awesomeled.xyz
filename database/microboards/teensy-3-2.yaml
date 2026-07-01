@@ -2,7 +2,10 @@ name: Teensy 3.2
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensy32.html
-price: 20
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: MK20DX256VLH7
   cpu: ARM Cortex-M4
@@ -15,12 +18,9 @@ connectivity:
   wifi: Shield
   usb: OTG
   serial: true
-power:
-  voltage:
-    max: 5V
-  gpio_voltage: 3.3V
 io:
   max_outputs: 8
   storage: Shield
-  bms: "No"
+  bms: 'No'
   imu: false
+price: 20

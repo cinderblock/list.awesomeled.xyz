@@ -4,13 +4,6 @@ release_year: 2018
 creator: Genesis Systec
 notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version
   booted with onboard patterns - now eliminated
-data:
-  type: WS2811/12
-  clocked: false
-  bitrate: 800kHz
-  pixel_size_bits: 24 Bits/Pixel
-  pixel_rate_max: 33.3 k Pixel / s
-  backup_line: true
 color:
   order: RGB
   brightness_bits: 8
@@ -18,6 +11,17 @@ color:
   pwm_frequency: 8.0kHz
   pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively
     multiply 2kHz PWM to 8kHz
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24 Bits/Pixel
+  pixel_rate_max: 33.3 k Pixel / s
+  backup_line: true
+datasheet:
+  url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+  discrepancies:
+    - Datasheet claims 15mA but measured value is ~10mA
 electrical:
   led_voltage: 12V
   led_voltage_notes: Datasheet 10.8-13.2V
@@ -29,17 +33,13 @@ electrical:
   channel_current_notes: Measured current across 3 LEDs at 12V. Datasheet claims 15mA
   quiescent_current: 2.5mA
   wattage: 120mW
+other_links:
+  - GS8208 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_sizes:
     - '5050'
   package_size: '5050'
   pin_count: 6
-datasheet:
-  url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
-  discrepancies:
-    - Datasheet claims 15mA but measured value is ~10mA
-other_links:
-  - GS8208 Pixel Protocol Overview | Advatek Lighting
 technical_notes:
   - Built-in 8-bit to 12-bit gamma correction for smoother fades
   - Uses MPWM (multiplexed PWM) for effective 8kHz refresh rate

@@ -3,8 +3,8 @@ creator: Color Kinetics
 notes: Icolor Flex and relatives. Philips Color Kinetics closed eco system of
   RGB lighting,
 core_tech: Proprietary
+pricing:
+  price_range: $$$$$$
 specs:
   color_type: RGB W/WW
   dedicated_psu: true
-pricing:
-  price_range: $$$$$$

@@ -1,9 +1,7 @@
 name: Binder 720
 creator: Binder
-ratings:
-  max_current: 5 A
-  max_voltage: 250 V
-  ip_rating: IP67
+links:
+  product: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?brand=binder&product-range=720-series
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -15,6 +13,10 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+ratings:
+  max_current: 5 A
+  max_voltage: 250 V
+  ip_rating: IP67
 termination:
   solder: true
   screw_terminal: false
@@ -24,5 +26,3 @@ termination:
   largest_gauge: 22 AWG
 wiring:
   colors: Colour Coded Collar
-links:
-  product: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?brand=binder&product-range=720-series

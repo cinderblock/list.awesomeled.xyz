@@ -4,8 +4,7 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k8-b/
-notes:
-  BeagleBone Black cape running FPP (Ethernet/storage via the BBB). 8 fused
+notes: BeagleBone Black cape running FPP (Ethernet/storage via the BBB). 8 fused
   local ports drive 800 pixels each at 40FPS (1500 at 20FPS); 3 RJ45 ports
   add 12 strings via differential receivers, plus 16 more via
   F16v3-compatible expansion boards. Two UARTs drive DMX/Renard/LOR.

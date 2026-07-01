@@ -5,8 +5,6 @@ creator:
   url: https://www.microcyb.com
   page: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-Wi-Fi-EspArtStick-pixel-controller/p/170368862/category=0
 notes: 2.4 GHz Wi-Fi pixel controller with SD card playback and IR/RF remote receiver.
-core:
-  family: ESP8266
 inputs:
   physical:
     Wi-Fi: 2.4GHz
@@ -30,6 +28,8 @@ power:
     max: 12
   current:
     max: 30
+core:
+  family: ESP8266
 data:
   storage:
     - type: SD
