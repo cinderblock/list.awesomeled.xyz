@@ -25,3 +25,7 @@ dead_links:
   - url: https://wallyslights.com/products/wallys-lights-wb1616-controller
     checked: '2026-07-01'
 price: 189
+related:
+  - type: replacement
+    ref: controllers/wb48
+    notes: Wally's current controller offering (mounts for the WB1616 are still sold)
