@@ -55,12 +55,26 @@ export async function loader({ params }: Route.LoaderArgs) {
   return { category, entry, reverseLinks, relatedProducts, relatedBacklinks };
 }
 
-function getEntryImages(entry: Record<string, unknown>): string[] {
-  const images: string[] = [];
-  if (typeof entry.image === 'string') images.push(entry.image);
-  if (Array.isArray(entry.images)) {
-    for (const img of entry.images) if (typeof img === 'string') images.push(img);
-  }
+interface EntryImage {
+  file: string;
+  source?: string;
+  credit?: string;
+}
+
+// Images are bare filename strings or {file, source?, credit?, license?}
+// objects (see common.json#/definitions/image).
+function getEntryImages(entry: Record<string, unknown>): EntryImage[] {
+  const images: EntryImage[] = [];
+  const push = (v: unknown) => {
+    if (typeof v === 'string') {
+      images.push({ file: v });
+    } else if (v && typeof v === 'object' && typeof (v as EntryImage).file === 'string') {
+      const { file, source, credit } = v as EntryImage;
+      images.push({ file, source, credit });
+    }
+  };
+  push(entry.image);
+  if (Array.isArray(entry.images)) for (const img of entry.images) push(img);
   return images;
 }
 
@@ -309,12 +323,15 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
 
       <header className="entry-hero">
         {images.length > 0 && (
-          <button
-            className="entry-hero-image"
-            onClick={() => setModalImage(`/database-images/${category.id}/${images[0]}`)}
-          >
-            <img src={`/database-images/${category.id}/${images[0]}`} alt={entry.name} />
-          </button>
+          <figure className="entry-hero-figure">
+            <button
+              className="entry-hero-image"
+              onClick={() => setModalImage(`/database-images/${category.id}/${images[0].file}`)}
+            >
+              <img src={`/database-images/${category.id}/${images[0].file}`} alt={entry.name} />
+            </button>
+            <ImageCredit image={images[0]} />
+          </figure>
         )}
         <div className="entry-hero-main">
           <div className="entry-title-row">
@@ -524,6 +541,25 @@ function KeyValueGrid({
       ))}
     </dl>
   );
+}
+
+// Attribution line under the hero image: links to the original source when known
+function ImageCredit({ image }: { image: EntryImage }) {
+  if (!image.source && !image.credit) return null;
+  const text = `Image: ${image.credit ?? stripSchemaAndWww(image.source ?? '').split('/')[0]}`;
+  if (image.source) {
+    return (
+      <a
+        className="entry-image-credit"
+        href={image.source}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {text}
+      </a>
+    );
+  }
+  return <span className="entry-image-credit">{text}</span>;
 }
 
 function StatusBadge({ status }: { status: string }) {

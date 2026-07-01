@@ -10,14 +10,34 @@
       "type": "string",
       "format": "uri"
     },
+    "image_object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file"],
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "Filename in public/database-images/<category>/"
+        },
+        "source": {
+          "type": "string",
+          "format": "uri",
+          "description": "Page the image came from — original author/source attribution"
+        },
+        "credit": { "type": "string", "description": "Author/owner to credit" },
+        "license": { "type": "string" }
+      }
+    },
     "image": {
-      "description": "Filename of image in the images/ subdirectory",
-      "type": ["string", "null"]
+      "description": "Primary image: a bare filename, or an object carrying source/credit attribution (preferred for new images)",
+      "oneOf": [{ "type": "string" }, { "type": "null" }, { "$ref": "#/definitions/image_object" }]
     },
     "images": {
-      "description": "Array of image filenames in the images/ subdirectory",
+      "description": "Array of images: bare filenames, or objects carrying source/credit attribution (preferred for new images)",
       "type": ["array", "null"],
-      "items": { "type": "string" }
+      "items": {
+        "oneOf": [{ "type": "string" }, { "$ref": "#/definitions/image_object" }]
+      }
     },
     "price": {
       "oneOf": [

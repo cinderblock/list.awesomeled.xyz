@@ -97,7 +97,11 @@ features:
   - Built-in sequencer with pattern editor
 
 images:
-  - example-controller-pro.jpg
+  # Preferred form: object with source/credit so attribution travels with the file
+  - file: example-controller-pro.jpg
+    source: https://example.com/controller-pro
+    credit: Example Company
+  # Bare filenames stay valid (legacy / self-made photos)
   - example-controller-pro-back.jpg
   - example-controller-pro-wiring.jpg
 
