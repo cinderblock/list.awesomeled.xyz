@@ -20,6 +20,10 @@ electrical:
   channel_current: ~5mA
   channel_current_notes: Approximate for the 2427 nano package; well below the 20mA of a 5050 SK6812
   wattage: 100mW
+images:
+  - file: sk6805.webp
+    source: https://www.adafruit.com/product/3484
+    credit: Adafruit Industries
 physical:
   package_sizes:
     - '1515'
