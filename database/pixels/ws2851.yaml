@@ -15,6 +15,10 @@ data:
   backup_line: false
 datasheet:
   url: http://www.world-semi.com/Certifications/details-121-4.html
+dead_links:
+  - url: http://www.world-semi.com/Certifications/details-121-4.html
+    archive: https://web.archive.org/web/20200920151054/http://www.world-semi.com/Certifications/details-121-4.html
+    checked: '2026-07-01'
 electrical:
   led_voltage: 12V
   vcc_voltage: 5V

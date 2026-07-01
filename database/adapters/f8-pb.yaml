@@ -7,6 +7,9 @@ outputs:
   description: Single
 power:
   voltage: 12V
+dead_links:
+  - url: https://kulplights.com/product/f8-pb/
+    checked: '2026-07-01'
 links:
   product: https://kulplights.com/product/f8-pb/
 parent: BeagleBone

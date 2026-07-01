@@ -23,4 +23,7 @@ outputs:
 power:
   voltage:
     max: 24
+dead_links:
+  - url: https://www.boutique-electroconcept.com/dmx-signal-board-for-ledstrip-digital-ws2812-and-compatible-to-be-welded.html
+    checked: '2026-07-01'
 price: 20

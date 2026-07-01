@@ -32,6 +32,9 @@ power:
 data:
   storage:
     - type: uSD # via BeagleBone Black
+dead_links:
+  - url: https://kulplights.com/product/k32a-b/
+    checked: '2026-07-01'
 features:
   - OLED display
   - Real-time clock (RTC)

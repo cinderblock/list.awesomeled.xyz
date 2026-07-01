@@ -22,4 +22,7 @@ power:
     max: 24
   current:
     max: 8
+dead_links:
+  - url: https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
+    checked: '2026-07-01'
 price: 142

@@ -1,6 +1,9 @@
 name: WLED
 status: active
 creator: Aircookie
+dead_links:
+  - url: https://www.welcometothefuture.one/blog/wled-get-started
+    checked: '2026-07-01'
 features: Android/Apple App available, built-in patterns, sACN receiver
 hardware: ESP8266/32
 instructional_resources:

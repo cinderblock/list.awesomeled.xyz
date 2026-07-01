@@ -9,6 +9,10 @@ outputs:
   description: Single
 power:
   voltage: 24V
+dead_links:
+  - url: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
+    archive: https://web.archive.org/web/20250427203401/https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
+    checked: '2026-07-01'
 diy_or_ots: OTS
 links:
   product: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/

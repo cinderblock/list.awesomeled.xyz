@@ -5,6 +5,10 @@ outputs:
   max_channels: 1
   pixel_types: allows driving 3-wire clockless leds with 4-wire clocked protocol. Experimental
   connectors: solder, breakout
+dead_links:
+  - url: https://sites.google.com/site/wayneholder/besting-ben-heck
+    archive: https://web.archive.org/web/20230305072712/https://sites.google.com/site/wayneholder/besting-ben-heck
+    checked: '2026-07-01'
 diy_or_ots: DIY
 links:
   product: https://sites.google.com/site/wayneholder/besting-ben-heck

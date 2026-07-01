@@ -2,6 +2,10 @@ name: EN3
 creator: Switchcraft/Conxall
 notes: Switchcraft/Conxall , long established USA connector maker, available
   with straight and right angle PCB mounting
+dead_links:
+  - url: https://www.conxall.com/Documents/en3.pdf
+    archive: https://web.archive.org/web/20220216170121/https://www.conxall.com/Documents/en3.pdf
+    checked: '2026-07-01'
 links:
   product: https://www.conxall.com/Documents/en3.pdf
 mechanical:

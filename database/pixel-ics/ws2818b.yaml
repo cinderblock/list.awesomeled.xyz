@@ -15,6 +15,10 @@ data:
   backup_line: true
 datasheet:
   url: http://www.world-semi.com/technology/details-104-4.html
+dead_links:
+  - url: http://www.world-semi.com/technology/details-104-4.html
+    archive: https://web.archive.org/web/20200720001510/http://www.world-semi.com:80/technology/details-104-4.html
+    checked: '2026-07-01'
 electrical:
   output_voltage: 12V
   supply_voltage: 5V

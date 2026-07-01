@@ -7,6 +7,10 @@ outputs:
 power:
   voltage: 12V
   current: 30A
+dead_links:
+  - url: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
+    archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html
+    checked: '2026-07-01'
 diy_or_ots: DIY
 links:
   product: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0

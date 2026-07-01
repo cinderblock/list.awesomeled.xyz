@@ -23,3 +23,7 @@ power:
     max: 5
   current:
     max: 40
+dead_links:
+  - url: https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
+    archive: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
+    checked: '2026-07-01'

@@ -24,6 +24,11 @@ power:
     max: 20
 core:
   family: ESP32
+dead_links:
+  - url: https://go3d.fr/produit/carte-de-controle-pour-led-pixels-eth032f/
+    archive: https://web.archive.org/web/20221208030737/https://go3d.fr/
+    checked: '2026-07-01'
+    notes: Vendor site is gone; go3d.fr was re-registered by an unrelated company
 features:
   - Per-output fuses
 price: 55

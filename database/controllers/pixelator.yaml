@@ -18,6 +18,9 @@ outputs:
   driver:
     buffered: true
   clocked: false # async pixel support
+dead_links:
+  - url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
+    checked: '2026-07-01'
 features:
   - Proprietary PLINK protocol over Cat5e/Cat6 up to 300m to PLINK injectors
   - Onboard storage / standalone playback

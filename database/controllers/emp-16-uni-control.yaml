@@ -18,6 +18,10 @@ outputs:
 power:
   voltage:
     max: 24
+dead_links:
+  - url: https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/
+    archive: https://web.archive.org/web/20250418032547/https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/
+    checked: '2026-07-01'
 features:
   - Internal Ethernet switch for daisy-chaining
   - 19mm slim DIN rail mountable

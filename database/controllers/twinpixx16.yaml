@@ -24,4 +24,8 @@ outputs:
 power:
   voltage:
     max: 5
+dead_links:
+  - url: https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
+    archive: https://web.archive.org/web/20210120183833/https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
+    checked: '2026-07-01'
 price: 399

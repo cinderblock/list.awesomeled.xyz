@@ -34,6 +34,10 @@ data:
   storage:
     - type: SD
       max_size: 32
+dead_links:
+  - url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-Wi-Fi-EspArtStick-pixel-controller/p/170368862/category=0
+    archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html
+    checked: '2026-07-01'
 features:
   - IR remote receiver
   - Data level shifter

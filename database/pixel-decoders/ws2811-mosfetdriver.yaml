@@ -3,6 +3,10 @@ creator: Freetronics
 outputs:
   max_channels: 3
   pixel_types: WS2811 to High current Mosfet
+dead_links:
+  - url: https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
+    archive: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
+    checked: '2026-07-01'
 links:
   product: https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
 price: 4
