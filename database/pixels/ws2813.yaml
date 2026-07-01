@@ -33,6 +33,9 @@ physical:
     - '5050'
   package_size: '5050'
   pin_count: 6
+related:
+  - type: predecessor
+    ref: pixels/ws2812
 spec_update_year: 2018
 technical_notes:
   - Backup/failover data line allows signal to continue if a pixel fails

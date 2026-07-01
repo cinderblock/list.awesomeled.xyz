@@ -30,3 +30,6 @@ electrical:
 physical:
   package_size: '5050'
   pin_count: 8
+related:
+  - type: variant
+    ref: pixels/ws2812

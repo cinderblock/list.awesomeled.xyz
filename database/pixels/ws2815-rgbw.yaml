@@ -10,3 +10,6 @@ datasheet:
   url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
 electrical:
   led_voltage: 12V
+related:
+  - type: variant
+    ref: pixels/ws2815

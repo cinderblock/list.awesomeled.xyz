@@ -11,3 +11,6 @@ other_links:
 physical:
   package_size: SOP8
   pin_count: 8
+related:
+  - type: variant
+    ref: pixel-ics/ws2811

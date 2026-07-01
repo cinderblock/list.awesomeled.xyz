@@ -31,3 +31,6 @@ other_links:
 physical:
   package_size: SOP8,CPC8
   pin_count: 8
+related:
+  - type: related
+    ref: pixels/ws2813
