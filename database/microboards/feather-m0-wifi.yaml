@@ -16,6 +16,10 @@ connectivity:
   wifi: 2.4GHz
   usb: OTG
   serial: true
+images:
+  - file: feather-m0-wifi.webp
+    source: https://www.adafruit.com/product/3010
+    credit: Adafruit Industries
 io:
   bms: 1S
   imu: Wing
