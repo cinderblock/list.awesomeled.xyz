@@ -27,3 +27,7 @@ data:
   storage:
     - type: SD
 price: 200
+related:
+  - type: related
+    ref: controllers/falcon-f16v4
+    notes: Falcon family sibling; 4 local outputs

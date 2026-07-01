@@ -37,6 +37,10 @@ features:
   - RTC
   - OLED status display
 price: 90
+related:
+  - type: variant
+    ref: controllers/k8-b
+    notes: PocketBeagle 2 carrier version of the K8
 technical_notes:
   - 12 of 36 channels require differential receivers to drive LEDs
   - Runs FPP (Falcon Player)
