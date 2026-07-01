@@ -26,3 +26,6 @@ electrical:
 physical:
   package_size: '5050'
   pin_count: 6
+related:
+  - type: variant
+    ref: pixels/apa102

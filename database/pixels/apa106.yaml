@@ -6,3 +6,6 @@ datasheet:
   url: https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107
 electrical:
   led_voltage: 5V
+related:
+  - type: related
+    ref: pixel-ics/ws2811

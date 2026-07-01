@@ -32,3 +32,6 @@ physical:
     - '2020'
   package_size: 5050, 3535, 2020
   pin_count: 4
+related:
+  - type: related
+    ref: pixels/ws2812

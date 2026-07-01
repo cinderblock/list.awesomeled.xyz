@@ -25,3 +25,6 @@ other_links:
 physical:
   package_size: '5050'
   pin_count: 4
+related:
+  - type: related
+    ref: pixels/ws2812

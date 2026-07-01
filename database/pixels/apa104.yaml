@@ -37,6 +37,9 @@ physical:
     - '1212'
   package_size: 5050, 3535, 1212
   pin_count: 4
+related:
+  - type: related
+    ref: pixels/ws2812
 technical_notes:
   - WS2812 protocol compatible clone from APA Electronics
   - Available in very small 1212 package size

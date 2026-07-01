@@ -35,6 +35,9 @@ physical:
     - '2020'
   package_size: '5050'
   pin_count: 6
+related:
+  - type: related
+    ref: pixels/apa102
 technical_notes:
   - APA102 protocol compatible clone with improved brightness control
   - 5-bit brightness uses current control instead of APA102's PWM - no 400Hz flicker

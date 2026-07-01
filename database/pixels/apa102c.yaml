@@ -37,6 +37,9 @@ physical:
     - '2020'
   package_size: 5050 & 2020
   pin_count: 6
+related:
+  - type: predecessor
+    ref: pixels/apa102
 technical_notes:
   - Improved thermal design over APA102
   - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/

@@ -33,6 +33,9 @@ physical:
     - '2020'
   package_size: 5050, 2020
   pin_count: 6
+related:
+  - type: related
+    ref: pixels/apa107
 technical_notes:
   - High-speed 40MHz data rate - faster than APA102's 30MHz
   - 27kHz PWM frequency for flicker-free video

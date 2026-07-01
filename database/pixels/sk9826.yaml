@@ -23,3 +23,6 @@ electrical:
 physical:
   package_size: 5050, 3535
   pin_count: 6
+related:
+  - type: variant
+    ref: pixels/sk9822

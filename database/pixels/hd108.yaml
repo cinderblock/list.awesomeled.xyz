@@ -25,3 +25,6 @@ other_links:
 physical:
   package_size: 5050, 2020
   pin_count: 6
+related:
+  - type: variant
+    ref: pixels/hd107s
