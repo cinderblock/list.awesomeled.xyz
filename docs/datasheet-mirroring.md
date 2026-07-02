@@ -45,8 +45,8 @@ Repository **secrets**:
 
 Repository **variable**:
 
-| Variable             | Value                                                                                                   |
-| -------------------- | ------------------------------------------------------------------------------------------------------- |
+| Variable             | Value                                                                                               |
+| -------------------- | --------------------------------------------------------------------------------------------------- |
 | `R2_PUBLIC_BASE_URL` | public base of the bucket, e.g. `https://assets.awesomeled.xyz` (custom domain) or the `r2.dev` URL |
 
 Also enable _Settings → Actions → General → Allow GitHub Actions to create and
