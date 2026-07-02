@@ -96,6 +96,23 @@
     "year": {
       "oneOf": [{ "type": "integer", "minimum": 1990, "maximum": 2030 }, { "type": "null" }]
     },
+    "datasheet_sources": {
+      "type": ["array", "null"],
+      "description": "Alternate hosts for the datasheet beyond datasheet.url, categorized by who hosts it. Manufacturer links are canonical but rot when sites restructure; distributor copies (LCSC, Pololu, Adafruit) are often more stable but may lag revisions — note the revision when known.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "host"],
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "host": {
+            "type": "string",
+            "enum": ["manufacturer", "distributor", "community"]
+          },
+          "notes": { "type": "string", "description": "e.g. revision, distributor part number" }
+        }
+      }
+    },
     "datasheet_mirror": {
       "type": ["object", "null"],
       "description": "Repo-managed copy of the datasheet PDF on Cloudflare R2. Written by CI (scripts/mirror-datasheets.ts) - do not edit by hand. The original author/source URL stays in datasheet.url.",

@@ -254,6 +254,9 @@
         },
         "third_party_testing": {
           "type": ["string", "null"]
+        },
+        "sources": {
+          "$ref": "common.json#/definitions/datasheet_sources"
         }
       }
     },

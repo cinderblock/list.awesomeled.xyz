@@ -167,8 +167,19 @@ function getEntryLinks(
     add(links.mouser, 'Mouser', ShoppingCart);
     add(links.mirror, 'Mirror', Globe);
   }
-  const datasheet = entry.datasheet as { url?: string } | undefined;
-  if (datasheet && typeof datasheet === 'object') add(datasheet.url, 'Datasheet', FileText);
+  const datasheet = entry.datasheet as
+    | { url?: string; sources?: { url?: string; host?: string; notes?: string }[] }
+    | undefined;
+  if (datasheet && typeof datasheet === 'object') {
+    add(datasheet.url, 'Datasheet', FileText);
+    if (Array.isArray(datasheet.sources)) {
+      for (const s of datasheet.sources) {
+        if (s && typeof s === 'object') {
+          add(s.url, `Datasheet (${s.host ?? 'alt'})`, FileText);
+        }
+      }
+    }
+  }
 
   // Legacy / flat fallbacks
   add(entry.url, 'Website', Globe);
