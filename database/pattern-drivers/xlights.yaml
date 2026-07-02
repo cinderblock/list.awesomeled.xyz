@@ -13,6 +13,7 @@ outputs:
 capabilities:
   live: false
   designer: true
+license: GPL-3.0
 links:
   url: https://www.xlights.org
 platforms:

@@ -4,6 +4,7 @@ creator: Zak-45
 notes: Plug-in for control of WLED, other WLED plugins from same developer on GitHub
 capabilities:
   live: true
+license: GPL-3.0
 links:
   url: https://github.com/zak-45
 platforms:

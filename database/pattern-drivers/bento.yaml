@@ -16,6 +16,7 @@ capabilities:
   visualizer: 'Yes'
   programmatic: Both
 language: JavaScript
+license: GPL-3.0
 links:
   url: http://github.com/benkuper/BenTo
 platforms:

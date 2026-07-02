@@ -20,6 +20,7 @@ capabilities:
   programmatic: Both
 integrations: 'Supported MIDI/DMX Hardware List: https://www.qlcplus.org/discover/compatibility'
 language: C++
+license: Apache-2.0
 links:
   url: https://www.qlcplus.org/
 platforms:

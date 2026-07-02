@@ -19,6 +19,7 @@ capabilities:
   visualizer: Limited 1D
 integrations: Home Assistant, WLED App.
 language: C++
+license: EUPL-1.2
 links:
   url: https://github.com/Aircoookie/WLED
 platforms:

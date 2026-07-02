@@ -16,6 +16,7 @@ capabilities:
   live: true
   programmatic: Both
 language: JavaScript
+license: GPL-3.0
 links:
   url: http://benjamin.kuperberg.fr/chataigne/en
 platforms:

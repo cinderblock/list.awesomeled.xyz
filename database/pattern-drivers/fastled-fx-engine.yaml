@@ -5,6 +5,7 @@ capabilities:
   live: false
   designer: true
   visualizer: Browser Wasm Preview
+license: MIT
 platforms:
   web: true
   hardware:
