@@ -496,3 +496,28 @@
   color: var(--muted-foreground);
   text-align: center;
 }
+
+/* ==========================================================================
+   Mobile: tighter table so more columns fit beside the sticky name column
+   ========================================================================== */
+@media (max-width: 640px) {
+  .data-table {
+    font-size: 0.75rem;
+  }
+  .data-table th,
+  .data-table td {
+    padding: var(--space-2) var(--space-3);
+  }
+  .data-table .badge {
+    font-size: 0.6875rem;
+    padding: 0.1rem 0.4rem;
+  }
+  /* Long names wrap instead of stretching the sticky column across the
+     whole viewport */
+  .data-table th[data-col='name'],
+  .data-table td[data-col='name'] {
+    max-width: 38vw;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
