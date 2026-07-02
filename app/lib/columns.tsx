@@ -460,6 +460,12 @@ export const patternDriverColumns: Column[] = [
     filterConfig: { type: 'select' },
   },
   {
+    key: 'foss',
+    label: 'FOSS',
+    render: renderBool,
+    filterConfig: { type: 'boolean', trueLabel: 'Open source', falseLabel: 'Proprietary' },
+  },
+  {
     key: 'capabilities.live',
     label: 'Live',
     render: renderBool,
@@ -582,6 +588,12 @@ export const driveLibraryColumns: Column[] = [
     filterConfig: { type: 'select' },
   },
   { key: 'license', label: 'License', filterConfig: { type: 'select' } },
+  {
+    key: 'foss',
+    label: 'FOSS',
+    render: renderBool,
+    filterConfig: { type: 'boolean', trueLabel: 'Open source', falseLabel: 'Proprietary' },
+  },
   { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];
 

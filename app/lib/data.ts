@@ -126,12 +126,38 @@ export function getDatabasePath(): string {
   return resolve(__dirname, '../../database');
 }
 
+// SPDX ids that make an entry FOSS (drives the derived `foss` flag)
+const FOSS_LICENSES = new Set([
+  'MIT',
+  'Apache-2.0',
+  'GPL-2.0',
+  'GPL-2.0-or-later',
+  'GPL-3.0',
+  'AGPL-3.0',
+  'LGPL-2.1',
+  'LGPL-3.0',
+  'BSD-2-Clause',
+  'BSD-3-Clause',
+  'BSD-3-Clause-Clear',
+  'EUPL-1.2',
+  'MPL-2.0',
+  'Unlicense',
+  'Zlib',
+]);
+
 /**
  * Fields computed from stored data at load time. The schema rejects stored
- * copies (data.pixel_rate_max is an additionalProperties error), so the
+ * copies (e.g. data.pixel_rate_max is an additionalProperties error), so the
  * database can never drift out of sync with the inputs.
  */
 function deriveFields(categoryId: string, entry: BaseEntry): void {
+  if (categoryId === 'pattern-drivers' || categoryId === 'drive-libraries') {
+    if (typeof entry.license === 'string') {
+      entry.foss = FOSS_LICENSES.has(entry.license);
+    }
+    return;
+  }
+
   if (categoryId !== 'pixels' && categoryId !== 'pixel-ics') return;
   const data = entry.data as Record<string, unknown> | undefined;
   if (!data || typeof data !== 'object') return;

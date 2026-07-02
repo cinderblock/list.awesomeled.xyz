@@ -68,6 +68,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [showIncompatible, setShowIncompatible] = useState(false);
   const [includeDiscontinued, setIncludeDiscontinued] = useState(false);
+  const [fossOnly, setFossOnly] = useState(false);
   const [activeRaw, setActive] = useState(0);
 
   // One chain (pixel group) per repeated p/x/n/c param, aligned by position.
@@ -161,6 +162,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
     selectedControllers.length > 0 && selectedControllers.every((c) => c.standalone);
   const evaluatedSources = sources
     .filter((s) => s.status !== 'discontinued' && s.status !== 'end-of-life')
+    .filter((s) => !fossOnly || s.foss === true)
     .map((s) => {
       const compats = selectedControllers.map((c) => ({ c, compat: checkSourceCompat(s, c) }));
       const ok = compats.every((e) => e.compat.ok);
@@ -388,7 +390,15 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                         : ' (protocols unrecorded)'}
                     </span>
                   ))}
-                  .
+                  {' · '}
+                  <label className="designer-toggle">
+                    <input
+                      type="checkbox"
+                      checked={fossOnly}
+                      onChange={(e) => setFossOnly(e.target.checked)}
+                    />
+                    FOSS only
+                  </label>
                 </p>
                 <ul className="designer-controller-list designer-source-list">
                   {allStandalone && (
@@ -450,6 +460,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                             {s.platforms.length > 0 ? s.platforms.join(' / ') : 'platforms?'}
                             {' · outputs '}
                             {s.outputProtocols.map((p) => PROTOCOL_LABELS[p] ?? p).join(', ')}
+                            {s.license ? ` · ${s.license}` : ''}
                           </span>
                         </span>
                         <span className="designer-controller-price">{s.priceText ?? ''}</span>

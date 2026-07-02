@@ -255,6 +255,10 @@
     },
     "dead_links": {
       "$ref": "common.json#/definitions/dead_links"
+    },
+    "license": {
+      "type": ["string", "null"],
+      "description": "SPDX license id (GPL-3.0, MIT, ...) for open-source software"
     }
   }
 }

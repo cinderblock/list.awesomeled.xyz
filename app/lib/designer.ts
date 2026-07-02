@@ -177,6 +177,10 @@ export interface PatternSourceOption {
   /** Normalized protocol tokens this software can OUTPUT (artnet, sacn, …) */
   outputProtocols: string[];
   priceText: string | null;
+  /** SPDX license id when recorded */
+  license: string | null;
+  /** Derived from license: true FOSS, false proprietary, null unknown */
+  foss: boolean | null;
 }
 
 export function buildPatternSourceOption(entry: BaseEntry): PatternSourceOption {
@@ -203,6 +207,8 @@ export function buildPatternSourceOption(entry: BaseEntry): PatternSourceOption 
       typeof pricing.price === 'string' || typeof pricing.price === 'number'
         ? String(pricing.price)
         : null,
+    license: typeof entry.license === 'string' ? entry.license : null,
+    foss: typeof entry.foss === 'boolean' ? entry.foss : null,
   };
 }
 
