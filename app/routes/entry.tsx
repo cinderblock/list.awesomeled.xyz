@@ -1,8 +1,9 @@
 import type { Route } from './+types/entry';
-import { data, Link } from 'react-router';
+import { data, Link, useNavigate } from 'react-router';
 import {
   getCategoryById,
   loadEntry,
+  loadCategoryData,
   getReverseLinks,
   resolveRelated,
   getRelatedBacklinks,
@@ -19,10 +20,11 @@ import {
   Archive,
   AlertTriangle,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
 import { FeatureBadges, ValueBadges } from '~/components/ui/FeatureBadges';
+import { Tooltip } from '~/components/ui/Tooltip';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -61,7 +63,9 @@ export async function loader({ params }: Route.LoaderArgs) {
   const reverseLinks = getReverseLinks(params.category, params.entry);
   const relatedProducts = resolveRelated(entry);
   const relatedBacklinks = getRelatedBacklinks(params.category, params.entry);
-  return { category, entry, reverseLinks, relatedProducts, relatedBacklinks };
+  // Sibling ids (name order) for j/k prev/next navigation
+  const siblingIds = loadCategoryData(params.category).map((e) => String(e.id));
+  return { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblingIds };
 }
 
 interface EntryImage {
@@ -285,12 +289,48 @@ function isGroup(v: unknown): v is Record<string, unknown> {
 }
 
 export default function EntryPage({ loaderData }: Route.ComponentProps) {
-  const { category, entry, reverseLinks, relatedProducts, relatedBacklinks } = loaderData;
+  const { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblingIds } =
+    loaderData;
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
   const deadLinks = getDeadLinks(entry);
   const links = getEntryLinks(entry, deadLinks);
   const [modalImage, setModalImage] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  // j/k: previous/next entry without going back up to the table. Uses the
+  // order the category table last showed (sessionStorage handoff, i.e. the
+  // user's active filters + sort); falls back to name order for deep links.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.key !== 'j' && e.key !== 'k') return;
+      const t = e.target as HTMLElement;
+      if (
+        t instanceof HTMLInputElement ||
+        t instanceof HTMLTextAreaElement ||
+        t instanceof HTMLSelectElement ||
+        t.isContentEditable
+      ) {
+        return;
+      }
+      let order: string[] = siblingIds;
+      try {
+        const stored = JSON.parse(sessionStorage.getItem(`entry-order:${category.id}`) ?? 'null');
+        if (Array.isArray(stored) && stored.includes(entry.id)) order = stored.map(String);
+      } catch {
+        // fall back to name order
+      }
+      const i = order.indexOf(String(entry.id));
+      const next = order[i + (e.key === 'j' ? 1 : -1)];
+      if (next) {
+        e.preventDefault();
+        navigate(`${category.path}/${next}`);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [siblingIds, category.id, category.path, entry.id, navigate]);
 
   const status = typeof entry.status === 'string' ? entry.status : null;
 
@@ -369,7 +409,11 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           ]}
           categoryThemed
         />
-        <LocalDate className="entry-updated" title="Last updated" date={entry.updated as Date} />
+        <Tooltip content="Last updated">
+          <span className="entry-updated">
+            <LocalDate date={entry.updated as Date} />
+          </span>
+        </Tooltip>
       </div>
 
       <header className="entry-hero">
@@ -400,21 +444,19 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           {links.length > 0 && (
             <div className="entry-links">
               {links.map(({ url, label, icon: Icon, deadOriginal }) => (
-                <a
+                <Tooltip
                   key={url}
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="entry-link"
-                  title={
+                  content={
                     deadOriginal
                       ? `Original link no longer works (${deadOriginal}) — showing an archived copy`
-                      : url
+                      : stripSchemaAndWww(url)
                   }
                 >
-                  <Icon size={15} />
-                  {label}
-                </a>
+                  <a href={url} target="_blank" rel="noopener noreferrer" className="entry-link">
+                    <Icon size={15} />
+                    {label}
+                  </a>
+                </Tooltip>
               ))}
             </div>
           )}
@@ -475,33 +517,26 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
                   <dt className="detail-key">{label}</dt>
                   <dd className="detail-value">
                     <div className="entry-related">
-                      {rows.map((row, i) =>
-                        row.to ? (
-                          <Link
-                            key={i}
-                            className="entry-related-link"
-                            to={row.to}
-                            title={row.notes}
-                          >
-                            {row.name}
-                          </Link>
-                        ) : row.url ? (
-                          <a
-                            key={i}
-                            className="entry-related-link"
-                            href={row.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title={row.notes}
-                          >
-                            {row.name}
-                          </a>
-                        ) : (
-                          <span key={i} className="entry-related-link" title={row.notes}>
-                            {row.name}
-                          </span>
-                        )
-                      )}
+                      {rows.map((row, i) => (
+                        <Tooltip key={i} content={row.notes}>
+                          {row.to ? (
+                            <Link className="entry-related-link" to={row.to}>
+                              {row.name}
+                            </Link>
+                          ) : row.url ? (
+                            <a
+                              className="entry-related-link"
+                              href={row.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {row.name}
+                            </a>
+                          ) : (
+                            <span className="entry-related-link">{row.name}</span>
+                          )}
+                        </Tooltip>
+                      ))}
                     </div>
                   </dd>
                 </div>
@@ -657,25 +692,21 @@ function CreatorLine({
   if (creator && typeof creator === 'object') {
     const c = creator as { name?: string; url?: string; page?: string };
     let href = c.page || c.url;
-    let title: string | undefined;
+    let deadNote: string | undefined;
     if (href && deadLinks.has(href)) {
       const dead = deadLinks.get(href)!;
-      title = `Original link no longer works (${href}) — showing an archived copy`;
+      deadNote = `Original link no longer works (${href}) — showing an archived copy`;
       href = dead.archive ?? waybackUrl(href);
     }
     return (
       <p className="page-description">
         by{' '}
         {href ? (
-          <a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="entry-creator-link"
-            title={title}
-          >
-            {c.name}
-          </a>
+          <Tooltip content={deadNote}>
+            <a href={href} target="_blank" rel="noopener noreferrer" className="entry-creator-link">
+              {c.name}
+            </a>
+          </Tooltip>
         ) : (
           c.name
         )}
