@@ -14,12 +14,15 @@ interface RainbowContextType {
   getHue: () => number;
   getIsMouseOnPage: () => boolean;
   registerScope: (el: RainbowScopeElement) => () => void;
+  /** Ask iOS for motion access (must be called from a user gesture); no-op elsewhere */
+  requestTilt: () => void;
 }
 
 const RainbowContext = createContext<RainbowContextType>({
   getHue: () => 0,
   getIsMouseOnPage: () => false,
   registerScope: () => () => {},
+  requestTilt: () => {},
 });
 
 export function RainbowProvider({ children }: { children: ReactNode }) {
@@ -124,6 +127,21 @@ export function RainbowProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  // iOS gates deviceorientation behind a permission prompt that can only be
+  // triggered from a user gesture (see the tilt listener above). Tapping any
+  // rainbow text calls this; after 'granted', the already-registered listener
+  // starts receiving events. One attempt per page load; silently ignored on
+  // platforms without requestPermission (they never needed it) or on denial.
+  const tiltRequestedRef = useRef(false);
+  const requestTilt = useCallback(() => {
+    if (tiltRequestedRef.current) return;
+    tiltRequestedRef.current = true;
+    const doe = window.DeviceOrientationEvent as unknown as
+      | { requestPermission?: () => Promise<string> }
+      | undefined;
+    doe?.requestPermission?.().catch(() => {});
+  }, []);
+
   const contextValue = useMemo(
     () => ({
       getHue: () => hueRef.current,
@@ -135,8 +153,9 @@ export function RainbowProvider({ children }: { children: ReactNode }) {
           scopesRef.current.delete(el);
         };
       },
+      requestTilt,
     }),
-    []
+    [requestTilt]
   );
 
   return <RainbowContext.Provider value={contextValue}>{children}</RainbowContext.Provider>;

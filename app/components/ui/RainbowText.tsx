@@ -1,4 +1,4 @@
-import { useRainbowScope } from '~/context/RainbowContext';
+import { useRainbow, useRainbowScope } from '~/context/RainbowContext';
 
 interface RainbowTextProps {
   children: string;
@@ -7,11 +7,14 @@ interface RainbowTextProps {
 
 export function RainbowText({ children, className = '' }: RainbowTextProps) {
   const scopeRef = useRainbowScope();
+  // First tap on any rainbow text doubles as the user gesture iOS needs
+  // before it will deliver tilt events (no-op everywhere else)
+  const { requestTilt } = useRainbow();
   const letters = children.split('');
   const hueSpread = 360;
 
   return (
-    <span ref={scopeRef} className={className}>
+    <span ref={scopeRef} className={className} onClick={requestTilt}>
       {letters.map((letter, index) => {
         // Calculate offset for this letter (static, doesn't change)
         const letterOffset = (index / letters.length) * hueSpread;
