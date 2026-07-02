@@ -11,15 +11,7 @@ const emptySubscribe = () => () => {};
  * trigger React hydration error #418. To stay deterministic, this renders the
  * UTC day on the server / first paint, then swaps to the local day after mount.
  */
-export function LocalDate({
-  date,
-  className,
-  title,
-}: {
-  date: Date;
-  className?: string;
-  title?: string;
-}) {
+export function LocalDate({ date, className }: { date: Date; className?: string }) {
   // false on the server and during hydration, true after mount — matches the
   // ThemeToggle pattern, so the hydration render agrees with the server HTML.
   const mounted = useSyncExternalStore(
@@ -29,7 +21,7 @@ export function LocalDate({
   );
 
   return (
-    <time className={className} dateTime={date.toISOString()} title={title}>
+    <time className={className} dateTime={date.toISOString()}>
       {mounted ? formatDateYMDLocal(date) : formatDateYMD(date)}
     </time>
   );

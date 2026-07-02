@@ -5,6 +5,7 @@
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
 import { LocalDate } from '~/components/ui/LocalDate';
+import { Tooltip } from '~/components/ui/Tooltip';
 import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
 import { quantitySortValue } from './quantity';
 import { flattenPlatforms } from './platforms';
@@ -12,6 +13,8 @@ import { flattenPlatforms } from './platforms';
 const sortVoltage = quantitySortValue('voltage');
 const sortCurrent = quantitySortValue('current');
 const sortFrequency = quantitySortValue('frequency');
+// lenient: "8MB PSRAM" sorts as 8 MB; "microSD" (not a size) sorts last
+const sortMemory = quantitySortValue('memory', true);
 
 // Filter type definitions
 export type FilterType = 'numeric' | 'select' | 'boolean' | 'string';
@@ -55,6 +58,9 @@ export interface Column {
   // Normalize the resolved value for sorting (e.g. prices → USD equivalent).
   // Nulls sort last; without this, raw values compare numerically/lexically.
   sortValue?: (value: unknown, item: BaseEntry) => number | string | null;
+  // First-click sort direction (default 'asc'). Use 'desc' where bigger-first
+  // reads naturally (e.g. wire gauge, capacities).
+  defaultSortDir?: 'asc' | 'desc';
   className?: string;
 }
 
@@ -97,17 +103,17 @@ function renderLinks(item: BaseEntry, linkConfigs: LinkConfig[]) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
       {links.map((link) => (
-        <a
-          key={link.key}
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="data-table-link-icon"
-          title={`${link.label}: ${getDomain(link.url)}`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {link.icon}
-        </a>
+        <Tooltip key={link.key} content={`${link.label}: ${getDomain(link.url)}`}>
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="data-table-link-icon"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {link.icon}
+          </a>
+        </Tooltip>
       ))}
     </div>
   );
@@ -218,16 +224,26 @@ function formatPrice(v: unknown) {
   if (!parsed) return <span className="data-table-null">-</span>;
 
   const usd = toUSD(parsed);
-  const title =
-    parsed.currency !== 'USD' && usd != null
-      ? `≈ $${Math.round(usd).toLocaleString('en-US')} USD (rates as of ${RATES_AS_OF})`
-      : undefined;
-  return (
-    <span className="tabular-nums" title={title}>
+  // Decimal-align: whole-dollar prices get invisible cents so the ones digits
+  // line up with prices that show cents (column is right-aligned).
+  const hasCents = parsed.amount % 1 !== 0;
+  const rendered = (
+    <span className="tabular-nums">
       {prefix}
-      {formatPriceText(parsed)}
+      {formatPriceText(parsed, hasCents)}
+      {!hasCents && <span style={{ visibility: 'hidden' }}>.00</span>}
     </span>
   );
+  if (parsed.currency !== 'USD' && usd != null) {
+    return (
+      <Tooltip
+        content={`≈ $${Math.round(usd).toLocaleString('en-US')} USD (rates as of ${RATES_AS_OF})`}
+      >
+        {rendered}
+      </Tooltip>
+    );
+  }
+  return rendered;
 }
 
 // Helper for formatting numeric values with units
@@ -527,10 +543,17 @@ export const microboardColumns: Column[] = [
     key: 'compute.flash',
     label: 'Flash',
     render: formatMemory,
+    sortValue: sortMemory,
     className: 'data-table-cell--right',
   },
-  { key: 'compute.ram', label: 'RAM', render: formatMemory, className: 'data-table-cell--right' },
-  { key: 'connectivity.wifi', label: 'WiFi', filterConfig: { type: 'select' } },
+  {
+    key: 'compute.ram',
+    label: 'RAM',
+    render: formatMemory,
+    sortValue: sortMemory,
+    className: 'data-table-cell--right',
+  },
+  { key: 'connectivity.wifi', label: 'Wi-Fi', filterConfig: { type: 'select' } },
   { key: 'connectivity.ethernet', label: 'Ethernet', filterConfig: { type: 'select' } },
   {
     key: 'price',
@@ -580,7 +603,14 @@ export const driveLibraryColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   { key: 'creator', label: 'Creator', render: renderCreator },
-  { key: 'language', label: 'Language', filterConfig: { type: 'select' } },
+  {
+    // Plain text: badge icons only cover some languages, and a mixed
+    // pill/plain column reads worse than a uniform one
+    key: 'language',
+    label: 'Language',
+    render: (v) => (v == null ? null : <span>{String(v)}</span>),
+    filterConfig: { type: 'select' },
+  },
   {
     key: 'platforms',
     label: 'Platforms',

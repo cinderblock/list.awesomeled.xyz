@@ -80,7 +80,11 @@ const BADGES: Record<string, BadgeConfig> = {
   dmx: { icon: SlidersHorizontal, label: 'DMX', color: C.control, match: ['dmx512'] },
 
   // Connectivity
-  wifi: { icon: Wifi, label: 'WiFi', color: C.net, match: ['wi-fi'] },
+  wifi: { icon: Wifi, label: 'Wi-Fi', color: C.net, match: ['wi-fi'] },
+  // Band pills for Wi-Fi columns; exact-value only so they don't double up
+  // with the Wi-Fi pill in hero scans (see note below).
+  'wifi-2-4': { icon: Wifi, label: '2.4 GHz', color: C.net, valueOnlyMatch: ['2.4ghz', '2.4 ghz'] },
+  'wifi-5': { icon: Wifi, label: '5 GHz', color: C.net, valueOnlyMatch: ['5ghz', '5 ghz'] },
   ethernet: {
     icon: Network,
     label: 'Ethernet',
@@ -309,17 +313,13 @@ export function Badge({ badge, to }: BadgeProps) {
 
   if (to) {
     return (
-      <Link to={to} title={badge.label} style={style}>
+      <Link to={to} style={style}>
         {content}
       </Link>
     );
   }
 
-  return (
-    <span title={badge.label} style={style}>
-      {content}
-    </span>
-  );
+  return <span style={style}>{content}</span>;
 }
 
 // Render a plain text pill (for non-badge values in mixed arrays)
@@ -333,7 +333,7 @@ export function TextPill({ text, to }: { text: string; to?: string }) {
 
   if (to) {
     return (
-      <Link to={to} title={text} style={{ ...style, color: 'var(--category-primary)' }}>
+      <Link to={to} style={{ ...style, color: 'var(--category-primary)' }}>
         {text}
       </Link>
     );

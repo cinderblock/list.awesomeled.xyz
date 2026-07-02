@@ -17,6 +17,7 @@ import {
   type ControllerOption,
 } from '~/lib/designer';
 import { RainbowText } from '~/components/ui/RainbowText';
+import { Tooltip } from '~/components/ui/Tooltip';
 import { DesignDiagram } from '~/components/designer/DesignDiagram';
 
 export function meta(_args: Route.MetaArgs) {
@@ -204,14 +205,15 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                     {ch.controller ? ` → ${ch.controller.name}` : ''}
                   </button>
                   {multi && (
-                    <button
-                      type="button"
-                      className="designer-chain-remove"
-                      title="Remove group"
-                      onClick={() => removeChain(i)}
-                    >
-                      <X size={14} />
-                    </button>
+                    <Tooltip content="Remove group">
+                      <button
+                        type="button"
+                        className="designer-chain-remove"
+                        onClick={() => removeChain(i)}
+                      >
+                        <X size={14} />
+                      </button>
+                    </Tooltip>
                   )}
                 </li>
               ))}
@@ -448,12 +450,11 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                               </span>
                             )}
                             {caveats.length > 0 && (
-                              <span
-                                className="designer-badge designer-badge--warn"
-                                title={caveats.join('; ')}
-                              >
-                                <HelpCircle size={12} /> verify
-                              </span>
+                              <Tooltip content={caveats.join('; ')}>
+                                <span className="designer-badge designer-badge--warn">
+                                  <HelpCircle size={12} /> verify
+                                </span>
+                              </Tooltip>
                             )}
                           </span>
                           <span className="designer-controller-meta">
@@ -564,17 +565,18 @@ function ControllerRow({
           <span className="designer-controller-name">
             {c.name}
             {explicit && (
-              <span
-                className="designer-badge designer-badge--good"
-                title="Vendor explicitly lists this pixel type"
-              >
-                <CheckCircle size={12} /> listed support
-              </span>
+              <Tooltip content="The vendor explicitly lists this pixel type as supported">
+                <span className="designer-badge designer-badge--good">
+                  <CheckCircle size={12} /> listed support
+                </span>
+              </Tooltip>
             )}
             {caveats.length > 0 && (
-              <span className="designer-badge designer-badge--warn" title={caveats.join('; ')}>
-                <HelpCircle size={12} /> check specs
-              </span>
+              <Tooltip content={caveats.join('; ')}>
+                <span className="designer-badge designer-badge--warn">
+                  <HelpCircle size={12} /> check specs
+                </span>
+              </Tooltip>
             )}
           </span>
           <span className="designer-controller-meta">

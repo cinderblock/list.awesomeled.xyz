@@ -2,6 +2,7 @@ import { Github } from 'lucide-react';
 import { Link } from 'react-router';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { ThemeToggle } from '~/components/ui/ThemeToggle';
+import { Tooltip } from '~/components/ui/Tooltip';
 
 export function Header() {
   return (
@@ -28,15 +29,17 @@ export function Header() {
               Forums
             </a>
             */}
-            <a
-              href="https://github.com/cinderblock/awesomeledlist"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn--ghost btn--icon site-nav-link"
-              title="View on GitHub"
-            >
-              <Github size={20} />
-            </a>
+            <Tooltip content="View on GitHub">
+              <a
+                href="https://github.com/cinderblock/awesomeledlist"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--ghost btn--icon site-nav-link"
+                aria-label="View on GitHub"
+              >
+                <Github size={20} />
+              </a>
+            </Tooltip>
             <ThemeToggle />
           </nav>
         </div>

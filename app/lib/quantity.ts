@@ -11,14 +11,15 @@
  * Voltage additionally allows a `min-max` range ("3-7.5V").
  */
 
-export type QuantityKind = 'frequency' | 'current' | 'power' | 'voltage';
+export type QuantityKind = 'frequency' | 'current' | 'power' | 'voltage' | 'memory';
 
-// Multipliers to the SI base unit (Hz, A, W, V)
+// Multipliers to the SI base unit (Hz, A, W, V, B)
 const UNITS: Record<QuantityKind, Record<string, number>> = {
   frequency: { Hz: 1, kHz: 1e3, MHz: 1e6, GHz: 1e9 },
   current: { µA: 1e-6, uA: 1e-6, mA: 1e-3, A: 1 },
   power: { mW: 1e-3, W: 1 },
   voltage: { mV: 1e-3, V: 1 },
+  memory: { B: 1, kB: 1e3, KB: 1e3, kb: 1e3, MB: 1e6, GB: 1e9, TB: 1e12 },
 };
 
 export interface Quantity {
@@ -61,7 +62,12 @@ export function parseQuantity(v: unknown, kind: QuantityKind): Quantity | null {
 /**
  * Column sortValue factory: normalized base-unit number, or null (sorts last)
  * for unparseable values. Fixes e.g. "30MHz" sorting below "800kHz".
+ * `lenient` keeps only the leading token first, so "8MB PSRAM" sorts as 8 MB
+ * while "microSD" still falls to the end.
  */
-export function quantitySortValue(kind: QuantityKind) {
-  return (v: unknown): number | null => parseQuantity(v, kind)?.value ?? null;
+export function quantitySortValue(kind: QuantityKind, lenient = false) {
+  return (v: unknown): number | null => {
+    const value = lenient && typeof v === 'string' ? v.trim().split(/\s+/)[0] : v;
+    return parseQuantity(value, kind)?.value ?? null;
+  };
 }

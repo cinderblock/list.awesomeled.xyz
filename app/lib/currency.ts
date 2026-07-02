@@ -76,9 +76,15 @@ export function priceUSD(v: unknown): number | null {
   return p ? toUSD(p) : null;
 }
 
-/** "€1,500", "$25", "1,500 SEK" — original currency, never converted. */
-export function formatPriceText(p: ParsedPrice): string {
+/**
+ * "€1,500", "$25", "1,500 SEK" — original currency, never converted.
+ * `forceCents` renders exactly two decimals (for decimal-aligned columns).
+ */
+export function formatPriceText(p: ParsedPrice, forceCents = false): string {
   const symbol = CODE_TO_SYMBOL[p.currency];
-  const n = p.amount.toLocaleString('en-US');
+  const n = p.amount.toLocaleString(
+    'en-US',
+    forceCents ? { minimumFractionDigits: 2, maximumFractionDigits: 2 } : undefined
+  );
   return symbol ? `${symbol}${n}` : `${n} ${p.currency}`;
 }
