@@ -19,6 +19,8 @@ import {
   Smartphone,
   Globe,
   Code,
+  Droplets,
+  Package,
 } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -53,6 +55,7 @@ const C = {
   power: '#eab308', // power features
   software: '#06b6d4', // software ecosystems
   platform: '#f97316', // OS / runtime platforms
+  rating: '#0284c7', // ingress-protection ratings
 } as const;
 
 // Map of canonical id -> badge configuration.
@@ -125,6 +128,32 @@ const BADGES: Record<string, BadgeConfig> = {
 
   // Pixel data line
   clocked: { icon: Clock, label: 'Clocked', color: C.pixel },
+  'backup-line': {
+    icon: Cable,
+    label: 'Backup Line',
+    color: C.pixel,
+    match: ['backup data line', 'backup line', 'backup_line', 'back up data line'],
+  },
+
+  // Ingress protection (dust/water) ratings
+  ip20: { icon: Droplets, label: 'IP20', color: C.rating },
+  ip30: { icon: Droplets, label: 'IP30', color: C.rating },
+  ip40: { icon: Droplets, label: 'IP40', color: C.rating },
+  ip65: { icon: Droplets, label: 'IP65', color: C.rating },
+  ip66: { icon: Droplets, label: 'IP66', color: C.rating },
+  ip67: { icon: Droplets, label: 'IP67', color: C.rating },
+  ip68: { icon: Droplets, label: 'IP68', color: C.rating },
+
+  // Pixel/IC package sizes. The numeric ones are valueOnly — "2020" or "5050"
+  // in free text is more likely a year or a quantity than a package.
+  'pkg-5050': { icon: Package, label: '5050', color: C.pixel, valueOnlyMatch: ['5050'] },
+  'pkg-3535': { icon: Package, label: '3535', color: C.pixel, valueOnlyMatch: ['3535'] },
+  'pkg-2020': { icon: Package, label: '2020', color: C.pixel, valueOnlyMatch: ['2020'] },
+  'pkg-1515': { icon: Package, label: '1515', color: C.pixel, valueOnlyMatch: ['1515'] },
+  'pkg-2427': { icon: Package, label: '2427', color: C.pixel, valueOnlyMatch: ['2427'] },
+  sop8: { icon: Package, label: 'SOP8', color: C.pixel, match: ['sop-8'] },
+  sop16: { icon: Package, label: 'SOP16', color: C.pixel, match: ['sop-16'] },
+  dip8: { icon: Package, label: 'DIP8', color: C.pixel, match: ['dip-8'] },
 
   // SoC / MCU families
   esp32: { icon: Cpu, label: 'ESP32', color: C.chip },

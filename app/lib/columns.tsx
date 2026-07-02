@@ -380,6 +380,12 @@ export const pixelColumns: Column[] = [
   },
   { key: 'data.clocked', label: 'Clocked', render: renderBool, filterConfig: { type: 'boolean' } },
   {
+    key: 'data.backup_line',
+    label: 'Backup Line',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
+  {
     key: 'data.bitrate',
     label: 'Data Rate',
     render: formatFrequency,
@@ -406,6 +412,12 @@ export const pixelICColumns: Column[] = [
     filterConfig: { type: 'numeric' },
   },
   { key: 'data.clocked', label: 'Clocked', render: renderBool, filterConfig: { type: 'boolean' } },
+  {
+    key: 'data.backup_line',
+    label: 'Backup Line',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+  },
   {
     key: 'color.pwm_frequency',
     label: 'PWM Freq',
