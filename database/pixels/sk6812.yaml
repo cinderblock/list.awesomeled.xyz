@@ -16,9 +16,9 @@ data:
   backup_line: false
   max_per_string: null
 datasheet:
-  url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+  url: https://www.lcsc.com/datasheet/C5378720.pdf # newer OPSCO revision via LCSC
   discrepancies:
-    - Datasheet PWM frequency (1.2kHz) differs from tested value (4.7kHz)
+    - Older datasheet PWM frequency (1.2kHz) differs from tested value (4.7kHz)
     - GPIO min threshold not documented in datasheet
 electrical:
   led_voltage: 5V
@@ -33,6 +33,7 @@ electrical:
   wattage: 104mW
 other_links:
   - SK6812 Pixel Protocol Overview | Advatek Lighting
+  - 'Older datasheet rev 02: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf'
 physical:
   package_sizes:
     - '5050'
