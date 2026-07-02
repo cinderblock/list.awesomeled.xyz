@@ -1,5 +1,9 @@
 name: Standard Differential Receiver
 creator: Microcyb
+dead_links:
+  - url: https://microcyb.com
+    archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html
+    checked: 2026-07-01
 electrical:
   max_voltage: 12V
 io:
