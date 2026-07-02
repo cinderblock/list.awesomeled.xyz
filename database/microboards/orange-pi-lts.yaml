@@ -11,7 +11,9 @@ compute:
   ram: 256MB+
   linux: true
 connectivity:
-  wifi: 2.4GHz & 5GHz
+  wifi:
+    - 2.4GHz
+    - 5GHz
   ethernet: 100BASE-TX
   usb: OTG x1, 2.0 x1
 io:

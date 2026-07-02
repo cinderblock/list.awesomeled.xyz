@@ -17,7 +17,9 @@ compute:
   ram: 1GB or 2GB or 4GB
   linux: true
 connectivity:
-  wifi: 2.4GHz & 5GHz
+  wifi:
+    - 2.4GHz
+    - 5GHz
   ethernet: Gigabit
   bluetooth: '5.0'
   usb: OTG x2, 3.0 x2
