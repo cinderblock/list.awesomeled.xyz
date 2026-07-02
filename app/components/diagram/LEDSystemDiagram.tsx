@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRainbowScope } from '~/context/RainbowContext';
 import { CATEGORIES, type Category } from '~/lib/types';
 import { DiagramConnection } from './DiagramConnection';
 import { DiagramNode, NODE_HEIGHT, NODE_WIDTH } from './DiagramNode';
@@ -145,6 +146,7 @@ const LEDS_CATEGORY: Category = {
 };
 
 export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagramProps) {
+  const scopeRef = useRainbowScope();
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
   const isNodeDimmed = (nodeId: string) => {
@@ -170,6 +172,7 @@ export function LEDSystemDiagram({ counts, simpleMode = false }: LEDSystemDiagra
 
   return (
     <svg
+      ref={scopeRef}
       className={`led-system-diagram ${simpleMode ? 'simple-mode' : ''}`}
       viewBox="0 0 1200 750"
       preserveAspectRatio="xMidYMid meet"
