@@ -1,13 +1,25 @@
-import { createContext, useContext, useEffect, useRef, type ReactNode } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  type ReactNode,
+} from 'react';
+
+type RainbowScopeElement = HTMLElement | SVGElement;
 
 interface RainbowContextType {
   getHue: () => number;
   getIsMouseOnPage: () => boolean;
+  registerScope: (el: RainbowScopeElement) => () => void;
 }
 
 const RainbowContext = createContext<RainbowContextType>({
   getHue: () => 0,
   getIsMouseOnPage: () => false,
+  registerScope: () => () => {},
 });
 
 export function RainbowProvider({ children }: { children: ReactNode }) {
@@ -16,10 +28,16 @@ export function RainbowProvider({ children }: { children: ReactNode }) {
   const lastMouseX = useRef<number | null>(null);
   const hueRef = useRef(0);
   const isMouseOnPageRef = useRef(false);
+  // Per-frame writes go only to registered consumer elements. Setting the
+  // variable on :root instead would invalidate inherited styles for the whole
+  // document every frame, which crawls on large pages.
+  const scopesRef = useRef(new Set<RainbowScopeElement>());
 
-  // Update CSS variable directly without React state
   const updateCssHue = () => {
-    document.documentElement.style.setProperty('--rainbow-hue', String(hueRef.current));
+    const hue = String(hueRef.current);
+    for (const el of scopesRef.current) {
+      el.style.setProperty('--rainbow-hue', hue);
+    }
   };
 
   useEffect(() => {
@@ -82,15 +100,39 @@ export function RainbowProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
-  // Provide getter functions instead of reactive values
-  const contextValue = {
-    getHue: () => hueRef.current,
-    getIsMouseOnPage: () => isMouseOnPageRef.current,
-  };
+  const contextValue = useMemo(
+    () => ({
+      getHue: () => hueRef.current,
+      getIsMouseOnPage: () => isMouseOnPageRef.current,
+      registerScope: (el: RainbowScopeElement) => {
+        scopesRef.current.add(el);
+        el.style.setProperty('--rainbow-hue', String(hueRef.current));
+        return () => {
+          scopesRef.current.delete(el);
+        };
+      },
+    }),
+    []
+  );
 
   return <RainbowContext.Provider value={contextValue}>{children}</RainbowContext.Provider>;
 }
 
 export function useRainbow() {
   return useContext(RainbowContext);
+}
+
+// Ref callback that marks an element as a rainbow scope: the animated
+// --rainbow-hue is written to it each frame.
+export function useRainbowScope() {
+  const { registerScope } = useRainbow();
+  const cleanupRef = useRef<(() => void) | null>(null);
+
+  return useCallback(
+    (el: RainbowScopeElement | null) => {
+      cleanupRef.current?.();
+      cleanupRef.current = el ? registerScope(el) : null;
+    },
+    [registerScope]
+  );
 }

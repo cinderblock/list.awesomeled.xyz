@@ -1,14 +1,17 @@
+import { useRainbowScope } from '~/context/RainbowContext';
+
 interface RainbowTextProps {
   children: string;
   className?: string;
 }
 
 export function RainbowText({ children, className = '' }: RainbowTextProps) {
+  const scopeRef = useRainbowScope();
   const letters = children.split('');
   const hueSpread = 360;
 
   return (
-    <span className={className}>
+    <span ref={scopeRef} className={className}>
       {letters.map((letter, index) => {
         // Calculate offset for this letter (static, doesn't change)
         const letterOffset = (index / letters.length) * hueSpread;
