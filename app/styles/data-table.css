@@ -512,12 +512,17 @@
     font-size: 0.6875rem;
     padding: 0.1rem 0.4rem;
   }
-  /* Long names wrap instead of stretching the sticky column across the
-     whole viewport */
+  /* Long names clip with a fading right edge instead of stretching the
+     sticky column across the whole viewport (no wrapping: rows stay short) */
   .data-table th[data-col='name'],
   .data-table td[data-col='name'] {
     max-width: 38vw;
-    white-space: normal;
-    overflow-wrap: anywhere;
+    overflow: hidden;
+  }
+  .data-table td[data-col='name'] .data-table-entry-link {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    mask-image: linear-gradient(to right, black calc(100% - 1.25rem), transparent);
   }
 }
