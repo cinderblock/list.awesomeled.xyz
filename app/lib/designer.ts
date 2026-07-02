@@ -9,6 +9,7 @@ import type { BaseEntry } from './types';
 import { parseQuantity } from './quantity';
 import { priceUSD, parsePrice, formatPriceText } from './currency';
 import { flattenPlatforms } from './platforms';
+import { firstImageFile } from './images';
 
 // Classic per-pixel budget when the database has no electrical data:
 // 60 mA at 5 V for a 5050 RGB pixel at full white.
@@ -95,25 +96,6 @@ function protocolToken(name: string): string | null {
   );
 }
 
-function firstImage(entry: BaseEntry): string | undefined {
-  const pick = (v: unknown): string | undefined => {
-    if (typeof v === 'string') return v;
-    if (v && typeof v === 'object' && typeof (v as { file?: string }).file === 'string') {
-      return (v as { file: string }).file;
-    }
-    return undefined;
-  };
-  const single = pick(entry.image);
-  if (single) return single;
-  if (Array.isArray(entry.images)) {
-    for (const img of entry.images) {
-      const f = pick(img);
-      if (f) return f;
-    }
-  }
-  return undefined;
-}
-
 export function buildPixelOption(entry: BaseEntry): PixelOption {
   const data = (entry.data ?? {}) as Record<string, unknown>;
   const el = (entry.electrical ?? {}) as Record<string, unknown>;
@@ -140,7 +122,7 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
   return {
     id: String(entry.id),
     name: entry.name,
-    image: firstImage(entry),
+    image: firstImageFile(entry),
     status: typeof entry.status === 'string' ? entry.status : undefined,
     clocked,
     voltage,
@@ -172,7 +154,7 @@ export function buildControllerOption(entry: BaseEntry): ControllerOption {
   return {
     id: String(entry.id),
     name: entry.name,
-    image: firstImage(entry),
+    image: firstImageFile(entry),
     status: typeof entry.status === 'string' ? entry.status : undefined,
     outputs: count,
     maxPerOutput,

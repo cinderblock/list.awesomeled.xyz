@@ -1,10 +1,11 @@
 import * as Popover from '@radix-ui/react-popover';
 import { Columns3, Download, Eye, Search, X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useSearchParams } from 'react-router';
+import { Link, useNavigate, useSearchParams } from 'react-router';
 import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
 import type { Column } from '~/lib/columns';
 import { generateCSV } from '~/lib/csv';
+import { firstImageFile } from '~/lib/images';
 import type { BaseEntry } from '~/lib/types';
 import {
   applyFilter,
@@ -672,6 +673,66 @@ export function DataTable({
     });
   }, [filteredData, sortKey, sortDir, columns]);
 
+  // Keyboard navigation: / focuses search, j/k walk the (filtered, sorted)
+  // rows, Enter opens the active row, Esc clears.
+  const navigate = useNavigate();
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [activeRow, setActiveRow] = useState(-1);
+  const clampedActive = Math.min(activeRow, sortedData.length - 1);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement;
+      const typing =
+        t instanceof HTMLInputElement ||
+        t instanceof HTMLTextAreaElement ||
+        t instanceof HTMLSelectElement ||
+        t.isContentEditable;
+      if (typing) {
+        if (e.key === 'Escape') t.blur();
+        return;
+      }
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+      if (e.key === '/') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+        searchInputRef.current?.select();
+      } else if (e.key === 'j' || e.key === 'k') {
+        e.preventDefault();
+        const delta = e.key === 'j' ? 1 : -1;
+        const base = clampedActive < 0 ? (delta > 0 ? -1 : 0) : clampedActive;
+        const next = Math.max(0, Math.min(sortedData.length - 1, base + delta));
+        setActiveRow(next);
+        document
+          .querySelector(`tr[data-row-index="${next}"]`)
+          ?.scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'Enter' && clampedActive >= 0 && sortedData[clampedActive]) {
+        navigate(`${categoryPath}/${sortedData[clampedActive].id}`);
+      } else if (e.key === 'Escape') {
+        setActiveRow(-1);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [sortedData, clampedActive, categoryPath, navigate]);
+
+  // Hover image preview, with the neighbors' images preloaded so scanning up
+  // and down a column of rows feels instant (files are statically served and
+  // cached hard by the CDN/browser).
+  const [preview, setPreview] = useState<{ index: number; top: number } | null>(null);
+  const previewEntry = preview ? sortedData[preview.index] : null;
+  const previewFile = previewEntry ? firstImageFile(previewEntry) : null;
+
+  useEffect(() => {
+    if (!preview) return;
+    for (let d = -2; d <= 2; d++) {
+      const neighbor = sortedData[preview.index + d];
+      const file = neighbor && firstImageFile(neighbor);
+      if (file) new Image().src = `/database-images/${categoryId}/${file}`;
+    }
+  }, [preview, sortedData, categoryId]);
+
   const handleSort = (key: string) => {
     if (sortKey === key) {
       if (sortDir === 'asc') {
@@ -947,8 +1008,10 @@ export function DataTable({
           <div className="data-table-search">
             <Search size={16} className="data-table-search-icon" />
             <input
+              ref={searchInputRef}
               type="text"
-              placeholder="Search (space-separated)..."
+              placeholder="Search... ( / )"
+              title="Press / to search, j/k to move, Enter to open"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="data-table-search-input"
@@ -1111,8 +1174,19 @@ export function DataTable({
                     </td>
                   </tr>
                 ) : (
-                  sortedData.map((item) => (
-                    <tr key={item.id}>
+                  sortedData.map((item, rowIndex) => (
+                    <tr
+                      key={item.id}
+                      data-row-index={rowIndex}
+                      className={rowIndex === clampedActive ? 'data-table-row--active' : undefined}
+                      onMouseEnter={(e) =>
+                        setPreview({
+                          index: rowIndex,
+                          top: e.currentTarget.getBoundingClientRect().top,
+                        })
+                      }
+                      onMouseLeave={() => setPreview((p) => (p?.index === rowIndex ? null : p))}
+                    >
                       {visibleColumns.map((col) => {
                         const value = getValue(item, col.key);
                         return (
@@ -1142,6 +1216,25 @@ export function DataTable({
           <div className="data-table-scrollbar-spacer" aria-hidden="true" />
         </div>
       </div>
+
+      {/* Floating image preview for the hovered row */}
+      {preview && previewFile && previewEntry && (
+        <div
+          className="data-table-img-preview"
+          style={{
+            top: Math.max(70, Math.min(preview.top - 40, window.innerHeight - 280)),
+          }}
+          aria-hidden="true"
+        >
+          <img
+            src={`/database-images/${categoryId}/${previewFile}`}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+          <span>{String(previewEntry.name)}</span>
+        </div>
+      )}
     </div>
   );
 }
