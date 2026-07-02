@@ -12,6 +12,9 @@ export function Header() {
             <RainbowText>Awesome LED List</RainbowText>
           </Link>
           <nav className="site-nav">
+            <Link to="/designer" className="btn btn--ghost site-nav-link">
+              Designer
+            </Link>
             <Link to="/about" className="btn btn--ghost site-nav-link">
               About
             </Link>
