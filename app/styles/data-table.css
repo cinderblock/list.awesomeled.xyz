@@ -266,7 +266,10 @@
   border-bottom-right-radius: var(--radius-lg);
 }
 
-/* Right-aligned cells */
+/* Right-aligned cells — element+class selectors so this outranks the
+   `.data-table th, .data-table td { text-align: left }` base rule */
+.data-table th.data-table-cell--right,
+.data-table td.data-table-cell--right,
 .data-table-cell--right {
   text-align: right;
 }
