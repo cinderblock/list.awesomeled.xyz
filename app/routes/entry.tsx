@@ -501,7 +501,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
             <kbd>j</kbd>
           </span>
         )}
-        <Tooltip content="Last updated">
+        <Tooltip content="Last reviewed for accuracy">
           <span className="entry-updated">
             <LocalDate date={entry.updated as Date} />
           </span>

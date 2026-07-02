@@ -399,10 +399,11 @@ function formatRelativeDate(v: unknown) {
   return <RelativeDate date={date} />;
 }
 
-// Shared updated column definition
+// Shared reviewed column: when the row was last specifically checked for
+// accuracy (git history, minus the IGNORED_COMMITS batches in data.ts)
 export const updatedColumn: Column = {
   key: 'updated',
-  label: 'Updated',
+  label: 'Reviewed',
   sortable: true,
   render: formatRelativeDate,
   // Dates previously fell through to string comparison, which mis-orders

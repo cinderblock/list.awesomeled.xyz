@@ -55,9 +55,21 @@ const IGNORED_COMMITS = new Set([
   'd9edd7574e197624c721c543e49d418ee3225f06', // Fix prettier formatting (39)
   '6f10b8f005514c02411b80e5b8d4c20a4f463260', // YAML key-order normalization (376)
   'a1cd65f60bc252584b158bfaaa744255d7180cca', // strip derived pixel_rate_max, integer pixel_size_bits (41)
-  // NOT listed (genuine updates despite being batched): dead_links annotations
-  // 52a377d / aa2e5cf — verifying a link dead and attaching an archive is real,
-  // dated information about the entry.
+  // The column means "last REVIEWED for accuracy". These batches touched rows
+  // without reviewing their data (link checks, restructures, note-derived
+  // enrichment), so they don't count:
+  '52a377dd6218701696e55330b6d121efa368f134', // dead_links batch annotation, first sweep (30)
+  'aa2e5cf13526f4e200edfcf45b58ae1eb53bacae', // dead_links batch annotation, CHECK-list triage (18)
+  'aa7bf76ae139b6922ddd7e6746570cc108a9a832', // pattern-driver platforms restructure (39)
+  '5218cd812e5ef10cb48c601dcc4ab71063b2d6a6', // dual-band Wi-Fi strings -> arrays (5)
+  '5a1dd7a4cd6d2045e0c70bb04a3fec801fe4b569', // wattage export-artifact cleanup (10)
+  'efdf32cc85642852066153fd38725dac60975674', // combined-connector max_current canonicalization (2)
+  'b9ce0139132af8d24deab4126a92823981c3936d', // WS281x family cross-links (6)
+  '3feb8e0cd763d812f100522eccad4ef1b0b640e8', // SK68xx family cross-links (3)
+  'ef8ce927247f0cc8ad299f031d034565b89d8159', // APA/HD/SK98xx family cross-links (11)
+  'fea0bcd468e4c9bfe3865bcd87ccdfd4d8422879', // same-part links across pixel-ics <-> pixels (3)
+  'cf992c8026008958e62656dd09ab1367e8cb3fa2', // PixLite family cross-links (9)
+  'c0c03c3fbf8bd2cec12c9a13a72edbecf0d64f18', // Falcon/K8 family cross-links (3)
 ]);
 
 /**

@@ -25,16 +25,17 @@ Database YAML files enforce key ordering: `name`, `creator`, `developer`, then a
 
 ## Batch commits and "Updated" timestamps
 
-Entry pages show "Updated" from each YAML file's last git commit. Any
-schema-level / database-wide / mechanical commit (migrations, key reordering,
-prettier passes) MUST have its hash added to `IGNORED_COMMITS` in
-`app/lib/data.ts` in a follow-up commit, so batch touches don't masquerade as
-real data updates. Keep structural commits and per-entry data commits separate.
+Entry pages and tables show "Reviewed" from each YAML file's last git commit —
+it means "when this row was last specifically checked for accuracy". Any commit
+that touches rows WITHOUT reviewing their data MUST have its hash added to
+`IGNORED_COMMITS` in `app/lib/data.ts` in a follow-up commit. Keep structural
+commits and per-entry data commits separate.
 
-The test is information, not batch size: a commit that records newly verified
-facts about entries (dead-link annotations, confirmed statuses, corrected
-values) is a genuine update and must NOT be ignored, even when it touches many
-files at once. Ignore only reshaping that adds no new information.
+The test: did someone verify this row's facts? Ignore migrations, key
+reordering, prettier passes, restructures, link-liveness sweeps, and batch
+enrichment derived from the entries' own notes (e.g. family cross-links). Do
+NOT ignore externally verified facts (vendor-confirmed statuses, published
+prices, corrected values) or per-entry research commits.
 
 ## Simple mistakes
 
