@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/connector.json",
+  "$id": "https://awesomeled.xyz/schema/connector.json",
   "title": "Connector",
   "type": "object",
   "required": ["name"],

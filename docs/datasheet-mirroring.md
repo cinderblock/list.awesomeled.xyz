@@ -10,7 +10,7 @@ Datasheet PDFs are **not** stored in git. Each entry records:
 datasheet:
   url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
   mirror:
-    url: https://assets.awesomeledlist.com/datasheets/pixel-ics/apa102-3f9c1a2b.pdf
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/apa102-3f9c1a2b.pdf
     sha256: 3f9c1a2b... # full 64-char hash
     retrieved: '2026-06-13'
     source: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
@@ -47,7 +47,7 @@ Repository **variable**:
 
 | Variable             | Value                                                                                                   |
 | -------------------- | ------------------------------------------------------------------------------------------------------- |
-| `R2_PUBLIC_BASE_URL` | public base of the bucket, e.g. `https://assets.awesomeledlist.com` (custom domain) or the `r2.dev` URL |
+| `R2_PUBLIC_BASE_URL` | public base of the bucket, e.g. `https://assets.awesomeled.xyz` (custom domain) or the `r2.dev` URL |
 
 Also enable _Settings → Actions → General → Allow GitHub Actions to create and
 approve pull requests_, or the bot PR step fails. Until the secrets exist the

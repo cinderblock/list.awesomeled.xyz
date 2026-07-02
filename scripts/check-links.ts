@@ -28,7 +28,7 @@ const CONCURRENCY = 8;
 const TIMEOUT_MS = 15000;
 // Some sites 403/close on unknown agents; a browser-ish UA reduces false alarms.
 const USER_AGENT =
-  'Mozilla/5.0 (compatible; awesomeledlist-linkcheck/1.0; +https://awesomeledlist.com)';
+  'Mozilla/5.0 (compatible; awesomeledlist-linkcheck/1.0; +https://awesomeled.xyz)';
 
 interface Target {
   entry: string; // "<category>/<file>"

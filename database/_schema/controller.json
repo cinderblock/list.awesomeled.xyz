@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/controller.json",
+  "$id": "https://awesomeled.xyz/schema/controller.json",
   "title": "LED Controller",
   "type": "object",
   "required": ["name"],

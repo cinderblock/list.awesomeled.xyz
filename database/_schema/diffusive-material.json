@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/diffusive-material.json",
+  "$id": "https://awesomeled.xyz/schema/diffusive-material.json",
   "title": "Diffusive Material",
   "type": "object",
   "required": ["name"],

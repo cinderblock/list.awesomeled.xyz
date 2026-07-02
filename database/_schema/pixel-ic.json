@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/pixel-ic.json",
+  "$id": "https://awesomeled.xyz/schema/pixel-ic.json",
   "title": "Pixel IC",
   "description": "Standalone pixel driver IC (not integrated with LEDs)",
   "type": "object",

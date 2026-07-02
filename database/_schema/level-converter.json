@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/level-converter.json",
+  "$id": "https://awesomeled.xyz/schema/level-converter.json",
   "title": "Level Converter",
   "type": "object",
   "required": ["name"],

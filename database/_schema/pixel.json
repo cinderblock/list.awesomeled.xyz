@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/pixel.json",
+  "$id": "https://awesomeled.xyz/schema/pixel.json",
   "title": "LED Pixel",
   "type": "object",
   "required": ["name"],

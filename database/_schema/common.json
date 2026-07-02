@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/common.json",
+  "$id": "https://awesomeled.xyz/schema/common.json",
   "definitions": {
     "status": {
       "type": "string",

@@ -36,7 +36,7 @@ export function DesignDiagram({ chains, source, standalone, power }: DesignDiagr
   const sourceCenterY = TOP + (rows.length * ROW_H) / 2 - 10;
 
   const design = {
-    generator: 'awesomeledlist.com/designer',
+    generator: 'awesomeled.xyz/designer',
     source: standalone ? 'standalone' : (source?.id ?? null),
     chains: chains.map((c) => ({
       pixel: c.pixel?.id ?? null,

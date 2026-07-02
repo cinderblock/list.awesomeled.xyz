@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/microboard.json",
+  "$id": "https://awesomeled.xyz/schema/microboard.json",
   "title": "DIY MicroBoard",
   "type": "object",
   "required": ["name"],

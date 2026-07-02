@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/adapter.json",
+  "$id": "https://awesomeled.xyz/schema/adapter.json",
   "title": "Adapter",
   "type": "object",
   "required": ["name"],

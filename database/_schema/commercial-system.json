@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://awesomeledlist.com/schema/commercial-system.json",
+  "$id": "https://awesomeled.xyz/schema/commercial-system.json",
   "title": "Commercial Pixel System",
   "type": "object",
   "required": ["name"],
