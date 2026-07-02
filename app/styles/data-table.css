@@ -456,6 +456,16 @@
 .data-table tbody tr.data-table-row--active > td {
   background: color-mix(in oklab, var(--category-primary, #2563eb) 10%, transparent);
 }
+/* The sticky name cell has opaque zebra backgrounds at higher specificity
+   (tr:nth-child(...) td[data-col='name']); outrank them and keep the
+   highlight opaque (so scrolled content stays covered), mixed over the
+   matching stripe color so the row reads uniformly */
+.data-table tbody tr.data-table-row--active:nth-child(odd) td[data-col='name'] {
+  background-color: color-mix(in oklab, var(--category-primary, #2563eb) 10%, var(--background));
+}
+.data-table tbody tr.data-table-row--active:nth-child(even) td[data-col='name'] {
+  background-color: color-mix(in oklab, var(--category-primary, #2563eb) 10%, var(--muted));
+}
 .data-table tbody tr.data-table-row--active > td:first-child {
   box-shadow: inset 2px 0 0 var(--category-primary, #2563eb);
 }
