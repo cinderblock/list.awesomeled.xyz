@@ -52,9 +52,38 @@
       "description": "Programming language if programmatic"
     },
     "platforms": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "description": "Where this software runs, split by kind. UIs collapse a full desktop set to 'All OS'.",
+      "properties": {
+        "os": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["Windows", "macOS", "Linux"]
+          }
+        },
+        "mobile": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["Android", "iOS"]
+          }
+        },
+        "web": {
+          "type": ["boolean", "null"],
+          "description": "Runs in a browser"
+        },
+        "hardware": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          },
+          "description": "Embedded/SBC targets the software itself runs on (ESP32, Raspberry Pi, ...)"
+        },
+        "notes": {
+          "type": ["string", "null"]
+        }
       }
     },
     "pricing": {

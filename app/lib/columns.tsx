@@ -7,6 +7,7 @@ import type { BaseEntry } from './types';
 import { LocalDate } from '~/components/ui/LocalDate';
 import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
 import { quantitySortValue } from './quantity';
+import { flattenPlatforms } from './platforms';
 
 const sortVoltage = quantitySortValue('voltage');
 const sortCurrent = quantitySortValue('current');
@@ -453,9 +454,9 @@ export const patternDriverColumns: Column[] = [
     className: 'data-table-cell--right',
   },
   {
-    key: 'platforms',
+    key: 'platforms.os',
     label: 'Platforms',
-    render: renderBadgeArray,
+    render: (_, item) => renderBadgeArray(flattenPlatforms(item.platforms)),
     filterConfig: { type: 'select' },
   },
   {

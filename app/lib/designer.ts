@@ -8,6 +8,7 @@
 import type { BaseEntry } from './types';
 import { parseQuantity } from './quantity';
 import { priceUSD, parsePrice, formatPriceText } from './currency';
+import { flattenPlatforms } from './platforms';
 
 // Classic per-pixel budget when the database has no electrical data:
 // 60 mA at 5 V for a 5050 RGB pixel at full white.
@@ -214,7 +215,7 @@ export function buildPatternSourceOption(entry: BaseEntry): PatternSourceOption 
     id: String(entry.id),
     name: entry.name,
     status: typeof entry.status === 'string' ? entry.status : undefined,
-    platforms: Array.isArray(entry.platforms) ? entry.platforms.map(String) : [],
+    platforms: flattenPlatforms(entry.platforms),
     outputProtocols,
     priceText:
       typeof pricing.price === 'string' || typeof pricing.price === 'number'
