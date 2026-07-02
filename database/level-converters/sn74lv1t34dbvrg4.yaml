@@ -7,3 +7,10 @@ io:
   interface: SOT 23
 links:
   product: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4
+price: # TI list price, ti.com 2026-07
+  - qty: 1
+    price: 0.827
+    sku: SN74LV1T34DBVRG4
+  - qty: 1000
+    price: 0.288
+    sku: SN74LV1T34DBVRG4

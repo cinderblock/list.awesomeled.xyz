@@ -5,4 +5,10 @@ io:
   interface: Through-Hole DIP
 links:
   product: https://www.ti.com/product/SN74AHCT125
-price: 0.75
+price: # TI list price, ti.com 2026-07
+  - qty: 1
+    price: 0.895
+    sku: SN74AHCT125N
+  - qty: 1000
+    price: 0.312
+    sku: SN74AHCT125N

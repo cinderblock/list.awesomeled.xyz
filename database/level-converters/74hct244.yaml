@@ -8,3 +8,10 @@ io:
   buffered: true
 links:
   product: https://www.ti.com/product/SN74HCT244
+price: # TI list price, ti.com 2026-07
+  - qty: 1
+    price: 1.547
+    sku: SN74HCT244N
+  - qty: 1000
+    price: 0.539
+    sku: SN74HCT244N

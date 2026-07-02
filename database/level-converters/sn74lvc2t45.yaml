@@ -4,3 +4,10 @@ io:
   channels: 2
 links:
   product: https://www.ti.com/product/SN74LVC2T45
+price: # TI list price, ti.com 2026-07
+  - qty: 1
+    price: 0.494
+    sku: SN74LVC2T45DCTR
+  - qty: 1000
+    price: 0.2
+    sku: SN74LVC2T45DCTR

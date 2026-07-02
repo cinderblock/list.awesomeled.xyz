@@ -2,3 +2,10 @@ name: TXU0104
 creator: Texas Instruments
 io:
   channels: 4
+price: # TI list price, ti.com 2026-07
+  - qty: 1
+    price: 0.818
+    sku: TXU0104PWR
+  - qty: 1000
+    price: 0.331
+    sku: TXU0104PWR

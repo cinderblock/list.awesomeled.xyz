@@ -7,3 +7,10 @@ io:
   channels: 8
 links:
   product: https://www.ti.com/product/SN74HC245
+price: # TI list price, ti.com 2026-07
+  - qty: 1
+    price: 0.872
+    sku: SN74HC245N
+  - qty: 1000
+    price: 0.304
+    sku: SN74HC245N
