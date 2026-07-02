@@ -4,6 +4,7 @@ import { X, Check, ArrowUp, ArrowDown, ArrowUpDown, EyeOff } from 'lucide-react'
 import type { Column, FilterConfig } from '~/lib/columns';
 import type { BaseEntry } from '~/lib/types';
 import { priceUSD } from '~/lib/currency';
+import { Tooltip } from '~/components/ui/Tooltip';
 
 type SortDirection = 'asc' | 'desc';
 
@@ -196,9 +197,11 @@ interface ColumnHeaderPopoverProps {
   data: BaseEntry[];
   filterValue: FilterValue | undefined;
   onFilterChange: (value: FilterValue | undefined) => void;
-  sortKey: string | null;
-  sortDir: SortDirection | null;
-  onSort: (key: string) => void;
+  /** This column's place in the sort layers, if any */
+  sortState: { dir: SortDirection; index: number; count: number } | null;
+  /** True when other columns are already sorted (enables "add level") */
+  hasOtherSort: boolean;
+  onSortChange: (dir: SortDirection | null, additive?: boolean) => void;
   onHide?: () => void;
   children: React.ReactNode;
 }
@@ -208,9 +211,9 @@ export function ColumnHeaderPopover({
   data,
   filterValue,
   onFilterChange,
-  sortKey,
-  sortDir,
-  onSort,
+  sortState,
+  hasOtherSort,
+  onSortChange,
   onHide,
   children,
 }: ColumnHeaderPopoverProps) {
@@ -218,7 +221,8 @@ export function ColumnHeaderPopover({
   const hasFilter = column.filterConfig != null;
   const isSortable = column.sortable !== false && column.key !== 'links';
   const isFilterActive_ = isFilterActive(filterValue);
-  const isSorted = sortKey === column.key;
+  const isSorted = sortState != null;
+  const sortDir = sortState?.dir ?? null;
 
   // Close popover on scroll to prevent it from detaching from sticky header
   useEffect(() => {
@@ -242,13 +246,15 @@ export function ColumnHeaderPopover({
       <Popover.Trigger asChild>
         <button
           className={`column-header-trigger${isFilterActive_ ? ' column-header-trigger--filtered' : ''}${isSorted ? ' column-header-trigger--sorted' : ''}`}
-          title={`${column.label} options`}
         >
           {children}
           {isSortable && (
             <span className="column-header-sort-indicator">
               {isSorted && sortDir === 'asc' && <ArrowUp size={14} />}
               {isSorted && sortDir === 'desc' && <ArrowDown size={14} />}
+              {sortState && sortState.count > 1 && (
+                <sup className="column-header-sort-layer">{sortState.index}</sup>
+              )}
               {!isSorted && <ArrowUpDown size={14} className="column-header-sort-hint" />}
             </span>
           )}
@@ -259,52 +265,38 @@ export function ColumnHeaderPopover({
           <div className="column-header-popover-header">
             <span className="column-header-popover-title">{column.label || column.key}</span>
             {onHide && (
-              <button
-                className="column-header-hide-btn"
-                onClick={() => {
-                  onHide();
-                  setOpen(false);
-                }}
-                title="Hide column"
-              >
-                <EyeOff size={14} />
-              </button>
+              <Tooltip content="Hide column">
+                <button
+                  className="column-header-hide-btn"
+                  onClick={() => {
+                    onHide();
+                    setOpen(false);
+                  }}
+                >
+                  <EyeOff size={14} />
+                </button>
+              </Tooltip>
             )}
           </div>
 
           {/* Sort controls */}
           {isSortable && (
             <div className="column-header-sort-section">
-              <div className="column-header-section-label">Sort</div>
+              <div className="column-header-section-label">
+                Sort
+                {sortState && sortState.count > 1 ? ` (level ${sortState.index})` : ''}
+              </div>
               <div className="column-header-sort-buttons">
                 <button
-                  className={`column-header-sort-btn${isSorted && sortDir === 'asc' ? ' column-header-sort-btn--active' : ''}`}
-                  onClick={() => {
-                    if (isSorted && sortDir === 'asc') {
-                      onSort(column.key); // Will toggle to desc
-                    } else {
-                      onSort(column.key);
-                      if (sortDir === 'desc' || !isSorted) {
-                        // Need to set to asc - call twice if currently desc
-                        if (sortDir === 'desc') onSort(column.key);
-                      }
-                    }
-                  }}
+                  className={`column-header-sort-btn${sortDir === 'asc' ? ' column-header-sort-btn--active' : ''}`}
+                  onClick={() => onSortChange('asc')}
                 >
                   <ArrowUp size={14} />
                   Ascending
                 </button>
                 <button
-                  className={`column-header-sort-btn${isSorted && sortDir === 'desc' ? ' column-header-sort-btn--active' : ''}`}
-                  onClick={() => {
-                    if (!isSorted) {
-                      onSort(column.key); // asc
-                      onSort(column.key); // desc
-                    } else if (sortDir === 'asc') {
-                      onSort(column.key); // toggle to desc
-                    }
-                    // if already desc, do nothing (already active)
-                  }}
+                  className={`column-header-sort-btn${sortDir === 'desc' ? ' column-header-sort-btn--active' : ''}`}
+                  onClick={() => onSortChange('desc')}
                 >
                   <ArrowDown size={14} />
                   Descending
@@ -312,21 +304,26 @@ export function ColumnHeaderPopover({
                 {isSorted && (
                   <button
                     className="column-header-sort-btn column-header-sort-btn--clear"
-                    onClick={() => {
-                      // Toggle through to clear
-                      if (sortDir === 'asc') {
-                        onSort(column.key); // desc
-                        onSort(column.key); // clear
-                      } else {
-                        onSort(column.key); // clear
-                      }
-                    }}
+                    onClick={() => onSortChange(null)}
                   >
                     <X size={14} />
                     Clear
                   </button>
                 )}
               </div>
+              {hasOtherSort && !isSorted && (
+                <div className="column-header-sort-buttons">
+                  <Tooltip content="Keep the current sort and use this column to break ties">
+                    <button
+                      className="column-header-sort-btn"
+                      onClick={() => onSortChange(column.defaultSortDir ?? 'asc', true)}
+                    >
+                      <ArrowUpDown size={14} />
+                      Add as tie-break level
+                    </button>
+                  </Tooltip>
+                </div>
+              )}
             </div>
           )}
 
@@ -553,13 +550,20 @@ function SelectFilter({ column, data, value, onChange, config }: SelectFilterPro
           placeholder="Search options..."
           className="filter-input filter-search"
         />
-        <button
-          className={`filter-exclude-btn${exclude ? ' filter-exclude-btn--active' : ''}`}
-          onClick={toggleExclude}
-          title={exclude ? 'Excluding selected values' : 'Including selected values'}
+        <Tooltip
+          content={
+            exclude
+              ? 'Matching entries are hidden; click to include instead'
+              : 'Matching entries are shown; click to exclude instead'
+          }
         >
-          {exclude ? 'Exclude' : 'Include'}
-        </button>
+          <button
+            className={`filter-exclude-btn${exclude ? ' filter-exclude-btn--active' : ''}`}
+            onClick={toggleExclude}
+          >
+            {exclude ? 'Exclude' : 'Include'}
+          </button>
+        </Tooltip>
       </div>
       <div className="filter-select-actions">
         <button className="filter-action-btn" onClick={selectAll}>

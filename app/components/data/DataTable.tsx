@@ -6,6 +6,7 @@ import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges
 import type { Column } from '~/lib/columns';
 import { generateCSV } from '~/lib/csv';
 import { firstImageFile } from '~/lib/images';
+import { Tooltip } from '~/components/ui/Tooltip';
 import type { BaseEntry } from '~/lib/types';
 import {
   applyFilter,
@@ -362,8 +363,43 @@ export function DataTable({
   const [searchParams, setSearchParams] = useSearchParams();
 
   const urlSearch = searchParams.get('q') || '';
-  const sortKey = searchParams.get('sort') || null;
-  const sortDir = (searchParams.get('dir') as SortDirection) || null;
+  // Layered sorting lives entirely in the `sort` param: layers separated by
+  // `*`, a trailing `.` reverses that column's default direction — both
+  // characters survive URL encoding. `sort=price*name.` = by price (its
+  // default, asc), then by name descending. Legacy `&dir=desc` links are
+  // honored for the first layer.
+  const defaultDirFor = useCallback(
+    (key: string): SortDirection => columns.find((c) => c.key === key)?.defaultSortDir ?? 'asc',
+    [columns]
+  );
+  const sortLayers = useMemo((): { key: string; dir: SortDirection }[] => {
+    const raw = searchParams.get('sort');
+    if (!raw) return [];
+    const legacyDir = searchParams.get('dir') as SortDirection | null;
+    return raw
+      .split('*')
+      .filter(Boolean)
+      .map((token, i) => {
+        const reversed = token.endsWith('.');
+        const key = reversed ? token.slice(0, -1) : token;
+        const def = defaultDirFor(key);
+        let dir: SortDirection = reversed ? (def === 'asc' ? 'desc' : 'asc') : def;
+        if (i === 0 && !reversed && legacyDir) dir = legacyDir;
+        return { key, dir };
+      });
+  }, [searchParams, defaultDirFor]);
+
+  const serializeSort = useCallback(
+    (layers: { key: string; dir: SortDirection }[]): string | null =>
+      layers.length === 0
+        ? null
+        : layers.map((l) => l.key + (l.dir === defaultDirFor(l.key) ? '' : '.')).join('*'),
+    [defaultDirFor]
+  );
+
+  // First layer, for places that only care about the primary sort
+  const sortKey = sortLayers[0]?.key ?? null;
+  const sortDir = sortLayers[0]?.dir ?? null;
 
   // Track if we've already restored from localStorage
   const hasRestoredRef = useRef(false);
@@ -528,9 +564,9 @@ export function DataTable({
     }
     setSearchParams((prev) => {
       const next = new URLSearchParams();
-      // Only keep non-filter params
+      // Only clear filters + search; sorting has its own reset button
       for (const [key, value] of prev.entries()) {
-        if (key !== 'f' && key !== 'q' && key !== 'sort' && key !== 'dir') {
+        if (key !== 'f' && key !== 'q') {
           next.set(key, value);
         }
       }
@@ -640,38 +676,42 @@ export function DataTable({
     return result;
   }, [searchFilteredData, filterableColumns, urlFilters]);
 
-  // Sort data
+  // Sort data through every layer; ties fall through to the next layer.
+  // Missing values always sort last, regardless of direction.
   const sortedData = useMemo(() => {
-    if (!sortKey || !sortDir) return filteredData;
+    if (sortLayers.length === 0) return filteredData;
 
-    // Columns can normalize values for comparison (e.g. prices → USD)
-    const sortValue = columns.find((c) => c.key === sortKey)?.sortValue;
+    const comparators = sortLayers.map(({ key, dir }) => {
+      // Columns can normalize values for comparison (e.g. prices → USD)
+      const sortValue = columns.find((c) => c.key === key)?.sortValue;
+      const sign = dir === 'desc' ? -1 : 1;
+      return (a: BaseEntry, b: BaseEntry): number => {
+        const aVal = sortValue ? sortValue(resolveKey(a, key), a) : resolveKey(a, key);
+        const bVal = sortValue ? sortValue(resolveKey(b, key), b) : resolveKey(b, key);
+
+        if (aVal == null && bVal == null) return 0;
+        if (aVal == null) return 1;
+        if (bVal == null) return -1;
+
+        // Handle numeric values with units (e.g., "16 A", "50 V")
+        const aNum = parseNumericForSort(aVal);
+        const bNum = parseNumericForSort(bVal);
+        if (aNum !== null && bNum !== null) return sign * (aNum - bNum);
+
+        if (typeof aVal === 'number' && typeof bVal === 'number') return sign * (aVal - bVal);
+
+        return sign * String(aVal).toLowerCase().localeCompare(String(bVal).toLowerCase());
+      };
+    });
 
     return [...filteredData].sort((a, b) => {
-      const aVal = sortValue ? sortValue(resolveKey(a, sortKey), a) : resolveKey(a, sortKey);
-      const bVal = sortValue ? sortValue(resolveKey(b, sortKey), b) : resolveKey(b, sortKey);
-
-      if (aVal == null && bVal == null) return 0;
-      if (aVal == null) return sortDir === 'asc' ? 1 : -1;
-      if (bVal == null) return sortDir === 'asc' ? -1 : 1;
-
-      // Handle numeric values with units (e.g., "16 A", "50 V")
-      const aNum = parseNumericForSort(aVal);
-      const bNum = parseNumericForSort(bVal);
-      if (aNum !== null && bNum !== null) {
-        return sortDir === 'asc' ? aNum - bNum : bNum - aNum;
+      for (const cmp of comparators) {
+        const r = cmp(a, b);
+        if (r !== 0) return r;
       }
-
-      if (typeof aVal === 'number' && typeof bVal === 'number') {
-        return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
-      }
-
-      const aStr = String(aVal).toLowerCase();
-      const bStr = String(bVal).toLowerCase();
-      const cmp = aStr.localeCompare(bStr);
-      return sortDir === 'asc' ? cmp : -cmp;
+      return 0;
     });
-  }, [filteredData, sortKey, sortDir, columns]);
+  }, [filteredData, sortLayers, columns]);
 
   // Keyboard navigation: / focuses search, j/k walk the (filtered, sorted)
   // rows, Enter opens the active row, Esc clears.
@@ -717,6 +757,19 @@ export function DataTable({
     return () => window.removeEventListener('keydown', onKey);
   }, [sortedData, clampedActive, categoryPath, navigate]);
 
+  // Hand the currently visible order to entry pages, so j/k there walks the
+  // same filtered + sorted list the user was just looking at.
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(
+        `entry-order:${categoryId}`,
+        JSON.stringify(sortedData.map((d) => d.id))
+      );
+    } catch {
+      // best effort only
+    }
+  }, [sortedData, categoryId]);
+
   // Hover image preview, with the neighbors' images preloaded so scanning up
   // and down a column of rows feels instant (files are statically served and
   // cached hard by the CDN/browser).
@@ -733,21 +786,42 @@ export function DataTable({
     }
   }, [preview, sortedData, categoryId]);
 
-  const handleSort = (key: string) => {
-    if (sortKey === key) {
-      if (sortDir === 'asc') {
-        updateParams({ dir: 'desc' });
+  // Set a column's sort. Non-additive replaces all layers ("sort by this");
+  // additive appends/updates it as an extra tie-break level. dir=null removes.
+  const setSort = (key: string, dir: SortDirection | null, additive = false) => {
+    let next = sortLayers.filter((l) => l.key !== key);
+    if (dir) {
+      if (additive) {
+        const existingIndex = sortLayers.findIndex((l) => l.key === key);
+        if (existingIndex >= 0) {
+          next = sortLayers.map((l) => (l.key === key ? { key, dir } : l));
+        } else {
+          next = [...next, { key, dir }];
+        }
       } else {
-        updateParams({ sort: null, dir: null });
+        next = [{ key, dir }];
       }
-    } else {
-      updateParams({ sort: key, dir: 'asc' });
     }
+    updateParams({ sort: serializeSort(next), dir: null });
   };
 
   // Count active filters
   const activeFilterCount = Object.values(urlFilters).filter(isFilterActive).length;
-  const hasFilters = search || sortKey || activeFilterCount > 0;
+  const hasFilters = search || activeFilterCount > 0;
+
+  // Quick toggle: hide discontinued / end-of-life entries (only offered when
+  // the category has a status column)
+  const hasStatusColumn = columns.some((c) => c.key === 'status');
+  const INACTIVE_STATUSES = ['discontinued', 'end-of-life'];
+  const statusFilter = urlFilters['status'] as SelectFilterValue | undefined;
+  const hidingInactive =
+    !!statusFilter?.exclude && INACTIVE_STATUSES.every((s) => statusFilter.selected.includes(s));
+  const toggleHideInactive = () => {
+    setColumnFilter(
+      'status',
+      hidingInactive ? undefined : { selected: INACTIVE_STATUSES, exclude: true }
+    );
+  };
 
   // Get active filter descriptions for display
   const activeFilters = useMemo(() => {
@@ -986,9 +1060,14 @@ export function DataTable({
                 data={data}
                 filterValue={filterValue}
                 onFilterChange={(value) => setColumnFilter(colKey, value)}
-                sortKey={sortKey}
-                sortDir={sortDir}
-                onSort={handleSort}
+                sortState={(() => {
+                  const i = sortLayers.findIndex((l) => l.key === colKey);
+                  return i >= 0
+                    ? { dir: sortLayers[i].dir, index: i + 1, count: sortLayers.length }
+                    : null;
+                })()}
+                hasOtherSort={sortLayers.some((l) => l.key !== colKey)}
+                onSortChange={(dir, additive) => setSort(colKey, dir, additive)}
                 onHide={col.key !== 'name' ? () => hideColumn(colKey) : undefined}
               >
                 {col.label}
@@ -1011,7 +1090,6 @@ export function DataTable({
               ref={searchInputRef}
               type="text"
               placeholder="Search... ( / )"
-              title="Press / to search, j/k to move, Enter to open"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="data-table-search-input"
@@ -1022,10 +1100,28 @@ export function DataTable({
             {activeFilterCount > 0 &&
               ` (${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''})`}
           </span>
+          {hasStatusColumn && (
+            <Tooltip content="Toggle discontinued and end-of-life entries">
+              <button
+                onClick={toggleHideInactive}
+                className={`btn btn--ghost btn--sm${hidingInactive ? ' btn--badge' : ''}`}
+              >
+                {hidingInactive ? 'Show inactive' : 'Hide inactive'}
+              </button>
+            </Tooltip>
+          )}
           {hasFilters && (
             <button onClick={clearAllFilters} className="btn btn--ghost btn--sm">
               <X size={16} />
-              Clear all
+              Clear filters
+            </button>
+          )}
+          {sortKey && (
+            <button
+              onClick={() => updateParams({ sort: null, dir: null })}
+              className="btn btn--ghost btn--sm"
+            >
+              Reset sort
             </button>
           )}
           {/* Column visibility dropdown */}
@@ -1033,7 +1129,6 @@ export function DataTable({
             <Popover.Trigger asChild>
               <button
                 className={`btn btn--ghost btn--sm${hiddenColumns.size > 0 ? ' btn--badge' : ''}`}
-                title="Show/hide columns"
               >
                 <Columns3 size={16} />
                 Columns
@@ -1096,9 +1191,11 @@ export function DataTable({
             {activeFilters.map(({ key, label, description }) => (
               <span key={key} className="data-table-filter-tag">
                 <strong>{label}:</strong> {description}
-                <button onClick={() => setColumnFilter(key, undefined)} title="Remove filter">
-                  <X size={12} />
-                </button>
+                <Tooltip content="Remove filter">
+                  <button onClick={() => setColumnFilter(key, undefined)}>
+                    <X size={12} />
+                  </button>
+                </Tooltip>
               </span>
             ))}
           </div>

@@ -553,3 +553,10 @@
   background-color: var(--category-primary, var(--primary));
   border-radius: var(--radius-full);
 }
+
+/* Sort layer number shown when multiple sort levels are active */
+.column-header-sort-layer {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--category-primary, #2563eb);
+}
