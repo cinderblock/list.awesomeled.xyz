@@ -2,9 +2,9 @@ name: SK6812
 status: active
 release_year: 2013
 creator: Opsco/Newstar
-notes: WS2812 copy also available in 4 channel RGBW variant
+notes: WS2812 copy. The 4-channel RGBW version is a separate part (SK6812RGBW).
 color:
-  order: GRB & GRBW
+  order: GRB
   brightness_bits: 8
   pwm_frequency: 4.7kHz
   pwm_frequency_notes: Datasheet claims 1.2kHz but testing shows 4.7kHz
@@ -45,5 +45,3 @@ related:
     ref: pixels/ws2812
 technical_notes:
   - PWM frequency tested at 4.7kHz despite 1.2kHz datasheet claim
-  - Available in RGB and RGBW variants
-  - RGBW variant popular for better white color rendering
