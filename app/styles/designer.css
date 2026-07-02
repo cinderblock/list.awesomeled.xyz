@@ -73,6 +73,71 @@
   cursor: pointer;
 }
 
+.designer-chain-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.designer-chain {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.designer-chain > button:first-child {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.designer-chain--active > button:first-child {
+  border-color: var(--category-primary, #2563eb);
+  background: color-mix(in oklab, var(--category-primary, #2563eb) 8%, var(--background));
+}
+.designer-chain-remove {
+  border: none;
+  background: none;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  padding: 0.25rem;
+}
+.designer-chain-remove:hover {
+  color: #dc2626;
+}
+.designer-add-chain {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.designer-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+.designer-total {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.designer-standalone-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+}
+
 .designer-count-row {
   display: flex;
   flex-wrap: wrap;

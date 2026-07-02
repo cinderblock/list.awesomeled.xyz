@@ -41,9 +41,57 @@ export interface ControllerOption {
   clockedSupport: 'clocked' | 'async' | 'both' | 'unknown';
   /** outputs.protocols — pixel IC names the vendor explicitly lists */
   protocols: string[];
+  /** Normalized control-protocol tokens the controller accepts (artnet, sacn, …) */
+  inputProtocols: string[];
+  /** Can play patterns without a live source (FPP/WLED/SD playback) */
+  standalone: boolean;
   priceUSD: number | null;
   priceText: string | null;
   differential: boolean;
+}
+
+/** A pixel layout: N strings of M pixels (a matrix is just its strings). */
+export interface Layout {
+  strings: number;
+  perString: number;
+}
+
+export function layoutTotal(layout: Layout): number {
+  return layout.strings * layout.perString;
+}
+
+// Control-protocol names -> canonical tokens, shared by controllers (arrays
+// of names) and pattern drivers (map keys).
+const PROTOCOL_TOKENS: Record<string, string> = {
+  'art-net': 'artnet',
+  artnet: 'artnet',
+  sacn: 'sacn',
+  'e1.31': 'sacn',
+  ddp: 'ddp',
+  kinet: 'kinet',
+  dmx: 'dmx',
+  dmx512: 'dmx',
+  opc: 'opc',
+};
+
+export const PROTOCOL_LABELS: Record<string, string> = {
+  artnet: 'Art-Net',
+  sacn: 'sACN',
+  ddp: 'DDP',
+  kinet: 'KiNET',
+  dmx: 'DMX',
+  opc: 'OPC',
+};
+
+function protocolToken(name: string): string | null {
+  return (
+    PROTOCOL_TOKENS[
+      name
+        .trim()
+        .toLowerCase()
+        .replace(/\s*\(.*\)$/, '')
+    ] ?? null
+  );
 }
 
 function firstImage(entry: BaseEntry): string | undefined {
@@ -115,6 +163,10 @@ export function buildControllerOption(entry: BaseEntry): ControllerOption {
   else if (rawClocked === 'selectable' || rawClocked === 'both') clockedSupport = 'both';
 
   const parsedPrice = Array.isArray(entry.price) ? null : parsePrice(entry.price);
+  const inputs = (entry.inputs ?? {}) as Record<string, unknown>;
+  const inputProtocols = Array.isArray(inputs.protocols)
+    ? [...new Set(inputs.protocols.map((p) => protocolToken(String(p))).filter(Boolean))]
+    : [];
 
   return {
     id: String(entry.id),
@@ -126,10 +178,72 @@ export function buildControllerOption(entry: BaseEntry): ControllerOption {
     capacity: count != null && maxPerOutput != null ? count * maxPerOutput : null,
     clockedSupport,
     protocols: Array.isArray(outputs.protocols) ? outputs.protocols.map(String) : [],
+    inputProtocols: inputProtocols as string[],
+    standalone: inputs.standalone === true,
     priceUSD: priceUSD(entry.price),
     priceText: parsedPrice ? formatPriceText(parsedPrice) : null,
     differential: outputs.differential === true,
   };
+}
+
+export interface PatternSourceOption {
+  id: string;
+  name: string;
+  status?: string;
+  platforms: string[];
+  /** Normalized protocol tokens this software can OUTPUT (artnet, sacn, …) */
+  outputProtocols: string[];
+  priceText: string | null;
+}
+
+export function buildPatternSourceOption(entry: BaseEntry): PatternSourceOption {
+  const outputs = (entry.outputs ?? {}) as Record<string, unknown>;
+  const protocols = outputs.protocols;
+  const outputProtocols: string[] = [];
+  if (protocols && typeof protocols === 'object' && !Array.isArray(protocols)) {
+    for (const [key, value] of Object.entries(protocols)) {
+      // Values mark direction: Output/Both/true can drive controllers;
+      // Input-only entries consume the protocol instead.
+      if (value === 'Input' || value === false || value == null) continue;
+      const token = protocolToken(key);
+      if (token && !outputProtocols.includes(token)) outputProtocols.push(token);
+    }
+  }
+  const pricing = (entry.pricing ?? {}) as Record<string, unknown>;
+  return {
+    id: String(entry.id),
+    name: entry.name,
+    status: typeof entry.status === 'string' ? entry.status : undefined,
+    platforms: Array.isArray(entry.platforms) ? entry.platforms.map(String) : [],
+    outputProtocols,
+    priceText:
+      typeof pricing.price === 'string' || typeof pricing.price === 'number'
+        ? String(pricing.price)
+        : null,
+  };
+}
+
+export interface SourceCompat {
+  ok: boolean;
+  /** Protocol tokens both sides speak */
+  shared: string[];
+  caveats: string[];
+}
+
+/** Can this pattern source drive this controller over a shared protocol? */
+export function checkSourceCompat(
+  source: PatternSourceOption,
+  controller: ControllerOption
+): SourceCompat {
+  if (controller.inputProtocols.length === 0) {
+    return {
+      ok: true,
+      shared: [],
+      caveats: ['controller input protocols not recorded — verify pairing'],
+    };
+  }
+  const shared = source.outputProtocols.filter((p) => controller.inputProtocols.includes(p));
+  return { ok: shared.length > 0, shared, caveats: [] };
 }
 
 export interface Compat {
@@ -161,10 +275,11 @@ function pixelTokens(pixel: PixelOption): string[] {
 export function checkCompat(
   controller: ControllerOption,
   pixel: PixelOption,
-  count: number
+  layout: Layout
 ): Compat {
   const reasons: string[] = [];
   const caveats: string[] = [];
+  const total = layoutTotal(layout);
 
   if (pixel.clocked === true && controller.clockedSupport === 'async') {
     reasons.push('outputs are data-only; this pixel needs a clock line');
@@ -176,13 +291,25 @@ export function checkCompat(
     caveats.push('clocked/data-only support not recorded');
   }
 
-  if (controller.capacity != null && count > controller.capacity) {
+  if (controller.outputs != null && layout.strings > controller.outputs) {
+    reasons.push(`${controller.outputs} outputs (need ${layout.strings} strings)`);
+  }
+  if (controller.maxPerOutput != null && layout.perString > controller.maxPerOutput) {
     reasons.push(
-      `capacity is ${controller.capacity.toLocaleString('en-US')} pixels (need ${count.toLocaleString('en-US')})`
+      `max ${controller.maxPerOutput.toLocaleString('en-US')} pixels per output (strings are ${layout.perString.toLocaleString('en-US')})`
     );
   }
-  if (controller.capacity == null) {
-    caveats.push('pixel capacity not recorded');
+  if (
+    controller.maxPerOutput == null &&
+    controller.capacity != null &&
+    total > controller.capacity
+  ) {
+    reasons.push(
+      `capacity is ${controller.capacity.toLocaleString('en-US')} pixels (need ${total.toLocaleString('en-US')})`
+    );
+  }
+  if (controller.outputs == null || controller.maxPerOutput == null) {
+    caveats.push('output/capacity specs incomplete');
   }
 
   const tokens = pixelTokens(pixel);
@@ -204,18 +331,99 @@ export interface PowerEstimate {
   basis: PixelOption['wattsBasis'];
 }
 
+/** One pixel group: a pixel type, its strings, and the controller driving it. */
+export interface Chain {
+  pixel: PixelOption | null;
+  layout: Layout;
+  controller: ControllerOption | null;
+}
+
+export interface RailTotal {
+  voltage: number;
+  watts: number;
+  amps: number;
+  recommendedWatts: number;
+}
+
+export interface SystemPower {
+  totalWatts: number;
+  totalPixels: number;
+  /** One supply rail per distinct pixel voltage */
+  rails: RailTotal[];
+  warning: 'none' | 'advisory' | 'strong';
+}
+
+const SUPPLY_STEPS = [10, 20, 30, 60, 100, 150, 200, 320, 350, 480, 600, 800, 1000, 1500, 2000];
+
+function recommendSupply(watts: number): number {
+  const headroom = watts * 1.25;
+  return SUPPLY_STEPS.find((s) => s >= headroom) ?? Math.ceil(headroom / 500) * 500;
+}
+
+/** Aggregate power across chains, grouped into per-voltage supply rails. */
+export function systemPower(chains: Chain[]): SystemPower {
+  const byVoltage = new Map<number, number>();
+  let totalWatts = 0;
+  let totalPixels = 0;
+  for (const chain of chains) {
+    if (!chain.pixel) continue;
+    const total = layoutTotal(chain.layout);
+    const watts = chain.pixel.wattsPerPixel * total;
+    const voltage = chain.pixel.voltage ?? 5;
+    totalWatts += watts;
+    totalPixels += total;
+    byVoltage.set(voltage, (byVoltage.get(voltage) ?? 0) + watts);
+  }
+  const rails = [...byVoltage.entries()]
+    .sort((a, b) => a[0] - b[0])
+    .map(([voltage, watts]) => ({
+      voltage,
+      watts,
+      amps: watts / voltage,
+      recommendedWatts: recommendSupply(watts),
+    }));
+  return {
+    totalWatts,
+    totalPixels,
+    rails,
+    warning: totalWatts > 200 ? 'strong' : totalWatts > 20 ? 'advisory' : 'none',
+  };
+}
+
+/**
+ * Output-count check that accounts for several chains sharing one controller
+ * (e.g. 5 V and 12 V groups on separate outputs of the same board): the sum of
+ * their strings must fit the controller's outputs.
+ */
+export function sharedOutputOverflow(chains: Chain[]): string[] {
+  const used = new Map<string, { name: string; outputs: number | null; strings: number }>();
+  for (const chain of chains) {
+    if (!chain.controller) continue;
+    const cur = used.get(chain.controller.id) ?? {
+      name: chain.controller.name,
+      outputs: chain.controller.outputs,
+      strings: 0,
+    };
+    cur.strings += chain.layout.strings;
+    used.set(chain.controller.id, cur);
+  }
+  const problems: string[] = [];
+  for (const { name, outputs, strings } of used.values()) {
+    if (outputs != null && strings > outputs) {
+      problems.push(`${name}: ${strings} strings across groups, but only ${outputs} outputs`);
+    }
+  }
+  return problems;
+}
+
 export function estimatePower(pixel: PixelOption, count: number): PowerEstimate {
   const watts = pixel.wattsPerPixel * count;
   const voltage = pixel.voltage ?? 5;
-  const amps = watts / voltage;
-  const headroom = watts * 1.25;
-  const steps = [10, 20, 30, 60, 100, 150, 200, 320, 350, 480, 600, 800, 1000, 1500, 2000];
-  const recommendedWatts = steps.find((s) => s >= headroom) ?? Math.ceil(headroom / 500) * 500;
   return {
     watts,
     voltage,
-    amps,
-    recommendedWatts,
+    amps: watts / voltage,
+    recommendedWatts: recommendSupply(watts),
     warning: watts > 200 ? 'strong' : watts > 20 ? 'advisory' : 'none',
     basis: pixel.wattsBasis,
   };
