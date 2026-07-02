@@ -270,6 +270,8 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
     return <span>{str}</span>;
   }
 
+  const formatted = num.toLocaleString('en-US');
+
   return (
     <span
       style={{
@@ -279,7 +281,14 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
         width: '100%',
       }}
     >
-      <span className="tabular-nums">{num.toLocaleString('en-US')}</span>
+      <span className="tabular-nums">{formatted}</span>
+      {/* Decimal-align: whole numbers get invisible tenths so "1 GHz" lines
+          up with "1.2 GHz" */}
+      {!formatted.includes('.') && (
+        <span className="tabular-nums" style={{ visibility: 'hidden' }}>
+          .0
+        </span>
+      )}
       {unit && (
         <span
           className="data-table-null"
