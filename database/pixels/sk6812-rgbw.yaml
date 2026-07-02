@@ -1,0 +1,30 @@
+name: SK6812RGBW
+status: active
+creator: Opsco/Newstar
+notes: 4-channel (RGB + dedicated white) version of the SK6812; a distinct part
+  number, popular for better white color rendering.
+color:
+  order: GRBW
+  brightness_bits: 8
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://cdn-shop.adafruit.com/product-files/2757/p2757_SK6812RGBW_REV01.pdf
+electrical:
+  led_voltage: 5V
+  vcc_voltage: 5V
+physical:
+  package_sizes:
+    - '5050'
+  pin_count: 4
+related:
+  - type: variant
+    ref: pixels/sk6812
+    notes: 3-channel RGB base part
+technical_notes:
+  - 32 bits per pixel (8 per channel including white), so runs update ~25% slower
+    than RGB SK6812 strings of the same length
