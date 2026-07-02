@@ -66,10 +66,34 @@ export function RainbowProvider({ children }: { children: ReactNode }) {
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
 
+    // Touch devices have no cursor: device tilt (gamma = left/right roll)
+    // plays the mouse-X role instead. Delta-based like the mouse, so only
+    // CHANGES in tilt move the hue. Note: iOS requires a permission prompt
+    // (DeviceOrientationEvent.requestPermission) before events flow, and we
+    // don't show one for a decorative effect — Android and other platforms
+    // deliver events without asking.
+    const TILT_SENSITIVITY = 3; // degrees of hue per degree of roll
+    let lastGamma: number | null = null;
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      if (e.gamma == null) return;
+      if (lastGamma !== null) {
+        const delta = e.gamma - lastGamma;
+        // Ignore wild jumps (crossing the ±90° flip point)
+        if (Math.abs(delta) < 30) {
+          hueRef.current = (hueRef.current + delta * TILT_SENSITIVITY + 360) % 360;
+        }
+      }
+      lastGamma = e.gamma;
+    };
+    if (typeof window.DeviceOrientationEvent !== 'undefined') {
+      window.addEventListener('deviceorientation', handleOrientation);
+    }
+
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('deviceorientation', handleOrientation);
     };
   }, []);
 
