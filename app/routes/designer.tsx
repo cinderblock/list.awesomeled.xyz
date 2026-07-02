@@ -1,5 +1,5 @@
 import type { Route } from './+types/designer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { AlertTriangle, CheckCircle, HelpCircle, MonitorPlay, Plus, X, Zap } from 'lucide-react';
 import { loadCategoryData } from '~/lib/data';
@@ -60,6 +60,8 @@ interface RawChain {
   c: string;
 }
 
+const DRAFT_KEY = 'awesomeledlist_designer_draft';
+
 function fmt(n: number, digits = 1): string {
   return n.toLocaleString('en-US', { maximumFractionDigits: digits });
 }
@@ -96,6 +98,23 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
   const source =
     sourceId === 'standalone' ? null : (sources.find((s) => s.id === sourceId) ?? null);
   const standalone = sourceId === 'standalone';
+
+  // Drafts survive accidental navigation: every change mirrors the URL params
+  // into localStorage, and a fresh /designer visit (no params) restores the
+  // last draft. The URL stays the shareable source of truth.
+  useEffect(() => {
+    const s = searchParams.toString();
+    try {
+      if (s) {
+        localStorage.setItem(DRAFT_KEY, s);
+      } else {
+        const saved = localStorage.getItem(DRAFT_KEY);
+        if (saved) setSearchParams(new URLSearchParams(saved), { replace: true });
+      }
+    } catch {
+      // storage unavailable; URL-only
+    }
+  }, [searchParams, setSearchParams]);
 
   const write = (nextRaw: RawChain[], patch: { g?: string | null } = {}) => {
     setSearchParams(
@@ -181,8 +200,8 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
         </h1>
         <p className="designer-intro">
           Mix pixel groups (different types, voltages, string lengths), pair each with a controller,
-          and pick a pattern source. Power estimates come out per voltage rail, and your whole
-          design lives in this page&apos;s URL.
+          and pick a pattern source. Power estimates come out per voltage rail; your design lives in
+          this page&apos;s URL and is auto-saved in this browser.
         </p>
       </div>
 
