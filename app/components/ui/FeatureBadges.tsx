@@ -162,11 +162,18 @@ const BADGES: Record<string, BadgeConfig> = {
   'pkg-5050': { icon: Package, label: '5050', color: C.pixel, valueOnlyMatch: ['5050'] },
   'pkg-3535': { icon: Package, label: '3535', color: C.pixel, valueOnlyMatch: ['3535'] },
   'pkg-2020': { icon: Package, label: '2020', color: C.pixel, valueOnlyMatch: ['2020'] },
+  'pkg-2040': { icon: Package, label: '2040', color: C.pixel, valueOnlyMatch: ['2040'] },
   'pkg-1515': { icon: Package, label: '1515', color: C.pixel, valueOnlyMatch: ['1515'] },
+  'pkg-1212': { icon: Package, label: '1212', color: C.pixel, valueOnlyMatch: ['1212'] },
   'pkg-2427': { icon: Package, label: '2427', color: C.pixel, valueOnlyMatch: ['2427'] },
   sop8: { icon: Package, label: 'SOP8', color: C.pixel, match: ['sop-8'] },
+  sop10: { icon: Package, label: 'SOP10', color: C.pixel, match: ['sop-10'] },
+  sop12: { icon: Package, label: 'SOP12', color: C.pixel, match: ['sop-12'] },
+  sop14: { icon: Package, label: 'SOP14', color: C.pixel, match: ['sop-14', 'so14'] },
   sop16: { icon: Package, label: 'SOP16', color: C.pixel, match: ['sop-16'] },
+  soic8: { icon: Package, label: 'SOIC8', color: C.pixel, match: ['soic-8'] },
   dip8: { icon: Package, label: 'DIP8', color: C.pixel, match: ['dip-8'] },
+  dip14: { icon: Package, label: 'DIP14', color: C.pixel, match: ['dip-14'] },
 
   // SoC / MCU families
   esp32: { icon: Cpu, label: 'ESP32', color: C.chip },

@@ -4,6 +4,7 @@
 
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
+import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
 import { RelativeDate } from '~/components/ui/RelativeDate';
 import { Tooltip } from '~/components/ui/Tooltip';
 import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
@@ -251,11 +252,76 @@ function formatPrice(v: unknown) {
   return rendered;
 }
 
+// Package column: prefer the physical.package_sizes array, else split joined
+// strings ("5050, 3535, 2020", "5050 & 2020") into individual pills. Slash
+// groups only split when every fragment stands alone (so "SOP8/10/14" stays
+// whole instead of producing bare "10" pills).
+function renderPackages(v: unknown, item: BaseEntry) {
+  const physical = item.physical as { package_sizes?: unknown[] } | undefined;
+  let list: string[];
+  if (Array.isArray(physical?.package_sizes)) {
+    list = physical.package_sizes.map(String);
+  } else if (typeof v === 'string') {
+    list = v
+      .split(/[,&]/)
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .flatMap((part) => {
+        const subs = part.split('/').map((s) => s.trim());
+        return subs.length > 1 && subs.every((s) => s.length >= 3) ? subs : [part];
+      });
+  } else if (v != null) {
+    list = [String(v)];
+  } else {
+    return <span className="data-table-null">-</span>;
+  }
+  return (
+    <div className="data-table-array">
+      {list.map((p, i) => {
+        const badge = getBadgeForValue(p);
+        return badge ? <Badge key={i} badge={badge} /> : <TextPill key={i} text={p} />;
+      })}
+    </div>
+  );
+}
+
 // Helper for formatting numeric values with units
 function formatNumericWithUnit(v: unknown, unitWidth?: string) {
   if (v == null) return <span className="data-table-null">-</span>;
 
   const str = String(v);
+
+  // Ranges like "3.7-5.5V" render as "3.7–5.5" + unit
+  const range = str.match(/^([\d.]+)-([\d.]+)\s*(.*)$/);
+  if (range) {
+    return (
+      <span
+        style={{
+          display: 'inline-flex',
+          alignItems: 'baseline',
+          justifyContent: 'flex-end',
+          width: '100%',
+        }}
+      >
+        <span className="tabular-nums">
+          {range[1]}–{range[2]}
+        </span>
+        {range[3] && (
+          <span
+            className="data-table-null"
+            style={{
+              marginLeft: '0.25rem',
+              width: unitWidth,
+              textAlign: 'left',
+              display: 'inline-block',
+            }}
+          >
+            {range[3]}
+          </span>
+        )}
+      </span>
+    );
+  }
 
   // Parse number and unit from string like "30 A", "5V", "800kHz", "2.0kHz"
   const match = str.match(/^([\d.,]+)\s*(.*)$/);
@@ -427,7 +493,12 @@ export const pixelColumns: Column[] = [
     sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
-  { key: 'physical.package_size', label: 'Package', filterConfig: { type: 'select' } },
+  {
+    key: 'physical.package_size',
+    label: 'Package',
+    render: renderPackages,
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const pixelICColumns: Column[] = [
@@ -467,7 +538,12 @@ export const pixelICColumns: Column[] = [
     sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
-  { key: 'physical.package_size', label: 'Package', filterConfig: { type: 'select' } },
+  {
+    key: 'physical.package_size',
+    label: 'Package',
+    render: renderPackages,
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const patternDriverColumns: Column[] = [
