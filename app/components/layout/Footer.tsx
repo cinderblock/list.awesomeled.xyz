@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container site-footer-content">
         <p className="site-footer-text">
           <RainbowText>Awesome LED List</RainbowText> is a community resource. Data is provided
-          as-is with no guarantee of accuracy. ·{' '}
+          as-is with no guarantee of accuracy.{' '}
           <a
             href="https://github.com/cinderblock/awesomeledlist"
             target="_blank"
