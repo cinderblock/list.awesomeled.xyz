@@ -13,6 +13,7 @@ import {
   ColumnHeaderPopover,
   isFilterActive,
   type BooleanFilterValue,
+  type DateFilterValue,
   type FilterState,
   type FilterValue,
   type NumericFilterValue,
@@ -60,6 +61,9 @@ function parseNumericForSort(val: unknown): number | null {
 
 // Get human-readable description of a filter value
 function getFilterDescription(value: FilterValue): string {
+  if ('since' in value) {
+    return `since ${value.since}`;
+  }
   if ('min' in value || 'max' in value) {
     const v = value as NumericFilterValue;
     if (v.min !== undefined && v.max !== undefined) {
@@ -115,6 +119,10 @@ function unescapeFilterValue(val: string): string {
 
 // Serialize a single filter value to compact string
 function serializeOneFilter(key: string, value: FilterValue): string {
+  if ('since' in value) {
+    // "updated:2026-01-01.." = on/after that day ('.' needs no URL encoding)
+    return `${key}:${value.since}..`;
+  }
   if ('min' in value || 'max' in value) {
     const v = value as NumericFilterValue;
     const min = v.min !== undefined ? v.min : '';
@@ -154,6 +162,12 @@ function parseOneFilter(str: string): { key: string; value: FilterValue } | null
   }
   if (rawValue === 'no') {
     return { key, value: { value: false } as BooleanFilterValue };
+  }
+
+  // Date "since": YYYY-MM-DD..
+  const sinceMatch = rawValue.match(/^(\d{4}-\d{2}-\d{2})\.\.$/);
+  if (sinceMatch) {
+    return { key, value: { since: sinceMatch[1] } as DateFilterValue };
   }
 
   // Numeric range: check for pattern like "100-500", "100-", "-500"

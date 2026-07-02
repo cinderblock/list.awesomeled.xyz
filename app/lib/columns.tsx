@@ -4,7 +4,7 @@
 
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
-import { LocalDate } from '~/components/ui/LocalDate';
+import { RelativeDate } from '~/components/ui/RelativeDate';
 import { Tooltip } from '~/components/ui/Tooltip';
 import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
 import { quantitySortValue } from './quantity';
@@ -17,11 +17,15 @@ const sortFrequency = quantitySortValue('frequency');
 const sortMemory = quantitySortValue('memory', true);
 
 // Filter type definitions
-export type FilterType = 'numeric' | 'select' | 'boolean' | 'string';
+export type FilterType = 'numeric' | 'select' | 'boolean' | 'string' | 'date';
 
 export interface NumericFilterConfig {
   type: 'numeric';
   unit?: string; // e.g., 'V', 'A', 'Hz'
+}
+
+export interface DateFilterConfig {
+  type: 'date';
 }
 
 export interface SelectFilterConfig {
@@ -46,7 +50,8 @@ export type FilterConfig =
   | NumericFilterConfig
   | SelectFilterConfig
   | BooleanFilterConfig
-  | StringFilterConfig;
+  | StringFilterConfig
+  | DateFilterConfig;
 
 export interface Column {
   key: string;
@@ -311,12 +316,12 @@ function formatNumericValue(v: unknown) {
   return <span className="tabular-nums">{num.toLocaleString('en-US')}</span>;
 }
 
-// Helper for formatting dates as YYYY-MM-DD in the viewer's local timezone
-function formatDate(v: unknown) {
+// Helper for formatting dates as relative time ("3 days ago", date on hover)
+function formatRelativeDate(v: unknown) {
   if (v == null) return <span className="data-table-null">-</span>;
   const date = v instanceof Date ? v : new Date(String(v));
   if (isNaN(date.getTime())) return <span className="data-table-null">-</span>;
-  return <LocalDate date={date} />;
+  return <RelativeDate date={date} />;
 }
 
 // Shared updated column definition
@@ -324,8 +329,12 @@ export const updatedColumn: Column = {
   key: 'updated',
   label: 'Updated',
   sortable: true,
-  filterable: false,
-  render: formatDate,
+  render: formatRelativeDate,
+  // Dates previously fell through to string comparison, which mis-orders
+  // across months; compare epoch millis instead.
+  sortValue: (v) => (v instanceof Date ? v.getTime() : null),
+  defaultSortDir: 'desc',
+  filterConfig: { type: 'date' },
 };
 
 export const controllerColumns: Column[] = [

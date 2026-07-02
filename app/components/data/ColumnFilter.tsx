@@ -5,6 +5,7 @@ import type { Column, FilterConfig } from '~/lib/columns';
 import type { BaseEntry } from '~/lib/types';
 import { priceUSD } from '~/lib/currency';
 import { Tooltip } from '~/components/ui/Tooltip';
+import { useNow } from '~/hooks/useNow';
 
 type SortDirection = 'asc' | 'desc';
 
@@ -28,11 +29,35 @@ export interface StringFilterValue {
   fuzzy: boolean;
 }
 
+export interface DateFilterValue {
+  /** ISO day (YYYY-MM-DD): keep entries updated on/after this date */
+  since: string;
+}
+
 export type FilterValue =
   | NumericFilterValue
   | SelectFilterValue
   | BooleanFilterValue
-  | StringFilterValue;
+  | StringFilterValue
+  | DateFilterValue;
+
+/**
+ * Loose "since" text: a year (2024), year-month (2024-06), or a full date.
+ * Returns a normalized ISO day, or null when it isn't date-ish.
+ */
+export function parseSinceInput(raw: string): string | null {
+  const s = raw.trim();
+  if (/^\d{4}$/.test(s)) return `${s}-01-01`;
+  if (/^\d{4}-\d{1,2}$/.test(s)) {
+    const [y, m] = s.split('-');
+    return `${y}-${m.padStart(2, '0')}-01`;
+  }
+  if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(s)) {
+    const [y, m, d] = s.split('-');
+    return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+  }
+  return null;
+}
 
 export type FilterState = Record<string, FilterValue>;
 
@@ -111,6 +136,9 @@ function getNumericRange(
 export function isFilterActive(value: FilterValue | undefined): boolean {
   if (!value) return false;
 
+  if ('since' in value) {
+    return !!value.since;
+  }
   if ('min' in value || 'max' in value) {
     return value.min !== undefined || value.max !== undefined;
   }
@@ -138,6 +166,15 @@ export function applyFilter(
   const itemValue = resolveKey(item, key);
 
   switch (config.type) {
+    case 'date': {
+      const filterVal = value as DateFilterValue;
+      if (!filterVal.since) return true;
+      const date =
+        itemValue instanceof Date ? itemValue : itemValue ? new Date(String(itemValue)) : null;
+      if (!date || isNaN(date.getTime())) return true; // don't drop unknown dates
+      return date.getTime() >= new Date(`${filterVal.since}T00:00:00`).getTime();
+    }
+
     case 'numeric': {
       const normalized = sortValue ? sortValue(itemValue, item) : parseNumericValue(itemValue);
       const numValue = typeof normalized === 'number' ? normalized : null;
@@ -405,7 +442,94 @@ function FilterContent({ column, data, value, onChange }: ColumnFilterProps) {
           config={config}
         />
       );
+    case 'date':
+      return <DateFilter value={value as DateFilterValue | undefined} onChange={onChange} />;
   }
+}
+
+// "Since" filter: big obvious presets first, a forgiving text field second,
+// and a native date picker only for those who go looking for it.
+function DateFilter({
+  value,
+  onChange,
+}: {
+  value: DateFilterValue | undefined;
+  onChange: (value: FilterValue | undefined) => void;
+}) {
+  const [text, setText] = useState(value?.since ?? '');
+  const [showPicker, setShowPicker] = useState(false);
+  // Client clock (0 during SSR/hydration); the popover only opens
+  // client-side, so this is always set before the presets are visible.
+  const now = useNow();
+
+  const setSince = (since: string | null) => {
+    setText(since ?? '');
+    onChange(since ? { since } : undefined);
+  };
+  const daysAgo = (n: number) => new Date(now - n * 86_400_000).toISOString().slice(0, 10);
+  const presets: [string, string][] =
+    now === 0
+      ? []
+      : [
+          ['Last 90 days', daysAgo(90)],
+          ['Last 365 days', daysAgo(365)],
+          ['This year', `${new Date(now).getFullYear()}-01-01`],
+        ];
+
+  const commitText = () => {
+    if (text.trim() === '') {
+      setSince(null);
+      return;
+    }
+    const parsed = parseSinceInput(text);
+    if (parsed) setSince(parsed);
+  };
+
+  return (
+    <div className="filter-date">
+      <div className="filter-date-presets">
+        {presets.map(([label, since]) => (
+          <button
+            key={label}
+            className={`filter-action-btn${value?.since === since ? ' filter-action-btn--active' : ''}`}
+            onClick={() => setSince(value?.since === since ? null : since)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      <div className="filter-date-since">
+        <input
+          type="text"
+          className="filter-input"
+          placeholder="since… (2024, 2024-06, or 2024-06-15)"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onBlur={commitText}
+          onKeyDown={(e) => e.key === 'Enter' && commitText()}
+        />
+        <Tooltip content="Pick from a calendar instead">
+          <button className="filter-action-btn" onClick={() => setShowPicker((v) => !v)}>
+            📅
+          </button>
+        </Tooltip>
+      </div>
+      {showPicker && (
+        <input
+          type="date"
+          className="filter-input"
+          value={value?.since ?? ''}
+          onChange={(e) => setSince(e.target.value || null)}
+        />
+      )}
+      {value?.since && (
+        <button className="filter-clear-btn" onClick={() => setSince(null)}>
+          <X size={14} />
+          Clear
+        </button>
+      )}
+    </div>
+  );
 }
 
 interface NumericFilterProps {
