@@ -76,7 +76,34 @@
       "type": ["string", "null"]
     },
     "price": {
-      "type": ["string", "number", "null"]
+      "description": "Single price (USD unless {amount, currency}) or manufacturer-published quantity tiers",
+      "oneOf": [
+        {
+          "$ref": "common.json#/definitions/price"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["qty", "price"],
+            "properties": {
+              "qty": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Quantity this unit price applies at"
+              },
+              "price": {
+                "$ref": "common.json#/definitions/price"
+              },
+              "sku": {
+                "type": "string",
+                "description": "Exact orderable part number the price is for"
+              }
+            }
+          }
+        }
+      ]
     },
     "io": {
       "type": ["object", "null"],
