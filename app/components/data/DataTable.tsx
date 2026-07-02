@@ -60,7 +60,7 @@ function parseNumericForSort(val: unknown): number | null {
 }
 
 // Get human-readable description of a filter value
-function getFilterDescription(value: FilterValue): string {
+export function getFilterDescription(value: FilterValue): string {
   if ('since' in value) {
     return `since ${value.since}`;
   }
@@ -252,7 +252,7 @@ function serializeFilters(filters: FilterState): string {
 }
 
 // Parse all filters from URL param value
-function parseFilters(str: string): FilterState {
+export function parseFilters(str: string): FilterState {
   const filters: FilterState = {};
   if (!str) return filters;
 
@@ -288,7 +288,7 @@ function parseFilters(str: string): FilterState {
 }
 
 // localStorage key prefix for saved filters
-const FILTER_STORAGE_KEY = 'awesomeledlist_filters_';
+export const FILTER_STORAGE_KEY = 'awesomeledlist_filters_';
 // localStorage key prefix for hidden columns
 const HIDDEN_COLUMNS_STORAGE_KEY = 'awesomeledlist_hidden_columns_';
 

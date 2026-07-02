@@ -20,7 +20,12 @@ import {
   Archive,
   AlertTriangle,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
+import {
+  parseFilters,
+  getFilterDescription,
+  FILTER_STORAGE_KEY,
+} from '~/components/data/DataTable';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
 import { FeatureBadges, ValueBadges } from '~/components/ui/FeatureBadges';
@@ -63,9 +68,12 @@ export async function loader({ params }: Route.LoaderArgs) {
   const reverseLinks = getReverseLinks(params.category, params.entry);
   const relatedProducts = resolveRelated(entry);
   const relatedBacklinks = getRelatedBacklinks(params.category, params.entry);
-  // Sibling ids (name order) for j/k prev/next navigation
-  const siblingIds = loadCategoryData(params.category).map((e) => String(e.id));
-  return { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblingIds };
+  // Siblings (name order) for j/k prev/next navigation and its hint
+  const siblings = loadCategoryData(params.category).map((e) => ({
+    id: String(e.id),
+    name: e.name,
+  }));
+  return { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblings };
 }
 
 interface EntryImage {
@@ -299,9 +307,10 @@ function isGroup(v: unknown): v is Record<string, unknown> {
   );
 }
 
+const emptySubscribe = () => () => {};
+
 export default function EntryPage({ loaderData }: Route.ComponentProps) {
-  const { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblingIds } =
-    loaderData;
+  const { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblings } = loaderData;
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
   const deadLinks = getDeadLinks(entry);
@@ -309,9 +318,60 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   const [modalImage, setModalImage] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  // j/k: previous/next entry without going back up to the table. Uses the
-  // order the category table last showed (sessionStorage handoff, i.e. the
-  // user's active filters + sort); falls back to name order for deep links.
+  // The order the category table last showed (sessionStorage handoff — the
+  // user's active filters + sort); '' on the server / for deep links, which
+  // falls back to name order below.
+  const storedOrderRaw = useSyncExternalStore(
+    emptySubscribe,
+    () => {
+      try {
+        return sessionStorage.getItem(`entry-order:${category.id}`) ?? '';
+      } catch {
+        return '';
+      }
+    },
+    () => ''
+  );
+  let order: string[] = siblings.map((s) => s.id);
+  try {
+    const stored = JSON.parse(storedOrderRaw || 'null');
+    if (Array.isArray(stored) && stored.includes(entry.id)) order = stored.map(String);
+  } catch {
+    // fall back to name order
+  }
+  const orderIndex = order.indexOf(String(entry.id));
+  const nameOf = (id: string | undefined) => siblings.find((s) => s.id === id)?.name;
+  const prevEntry = orderIndex > 0 ? { id: order[orderIndex - 1] } : null;
+  const nextEntry = orderIndex >= 0 ? { id: order[orderIndex + 1] } : null;
+
+  // The category's saved filters (what the table restores when you go back)
+  const savedFiltersRaw = useSyncExternalStore(
+    emptySubscribe,
+    () => {
+      try {
+        return localStorage.getItem(FILTER_STORAGE_KEY + category.id) ?? '';
+      } catch {
+        return '';
+      }
+    },
+    () => ''
+  );
+  const filterChips: { key: string; text: string }[] = [];
+  try {
+    const saved = JSON.parse(savedFiltersRaw || 'null') as { f?: string; q?: string } | null;
+    if (saved?.q) filterChips.push({ key: 'q', text: `search: "${saved.q}"` });
+    if (saved?.f) {
+      const columns = getColumnsForCategory(category.id);
+      for (const [key, value] of Object.entries(parseFilters(saved.f))) {
+        const label = columns.find((c) => c.key === key)?.label ?? key;
+        filterChips.push({ key, text: `${label}: ${getFilterDescription(value)}` });
+      }
+    }
+  } catch {
+    // no saved filters
+  }
+
+  // j/k: previous/next entry without going back up to the table.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -325,23 +385,15 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
       ) {
         return;
       }
-      let order: string[] = siblingIds;
-      try {
-        const stored = JSON.parse(sessionStorage.getItem(`entry-order:${category.id}`) ?? 'null');
-        if (Array.isArray(stored) && stored.includes(entry.id)) order = stored.map(String);
-      } catch {
-        // fall back to name order
-      }
-      const i = order.indexOf(String(entry.id));
-      const next = order[i + (e.key === 'j' ? 1 : -1)];
-      if (next) {
+      const target = e.key === 'j' ? nextEntry?.id : prevEntry?.id;
+      if (target) {
         e.preventDefault();
-        navigate(`${category.path}/${next}`);
+        navigate(`${category.path}/${target}`);
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [siblingIds, category.id, category.path, entry.id, navigate]);
+  }, [prevEntry?.id, nextEntry?.id, category.path, navigate]);
 
   const status = typeof entry.status === 'string' ? entry.status : null;
 
@@ -420,6 +472,35 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           ]}
           categoryThemed
         />
+        {filterChips.length > 0 && (
+          <Tooltip content="Filters active on the category table — click to go back to the filtered list">
+            <Link to={category.path} className="entry-filter-chips">
+              {filterChips.map((chip) => (
+                <span key={chip.key} className="entry-filter-chip">
+                  {chip.text}
+                </span>
+              ))}
+            </Link>
+          </Tooltip>
+        )}
+        <span className="entry-topbar-spacer" />
+        {(prevEntry || nextEntry) && (
+          <span className="entry-nav-hint" aria-label="Previous / next entry (k / j)">
+            <kbd>k</kbd>
+            {prevEntry ? (
+              <Link to={`${category.path}/${prevEntry.id}`}>‹ {nameOf(prevEntry.id)}</Link>
+            ) : (
+              <span className="entry-nav-hint-end">‹</span>
+            )}
+            <span className="entry-nav-hint-sep">·</span>
+            {nextEntry ? (
+              <Link to={`${category.path}/${nextEntry.id}`}>{nameOf(nextEntry.id)} ›</Link>
+            ) : (
+              <span className="entry-nav-hint-end">›</span>
+            )}
+            <kbd>j</kbd>
+          </span>
+        )}
         <Tooltip content="Last updated">
           <span className="entry-updated">
             <LocalDate date={entry.updated as Date} />
