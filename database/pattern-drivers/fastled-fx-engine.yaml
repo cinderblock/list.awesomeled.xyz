@@ -6,10 +6,12 @@ capabilities:
   designer: true
   visualizer: Browser Wasm Preview
 platforms:
-  - ESP
-  - AVR
-  - NRF
-  - RP
-  - Browser
+  web: true
+  hardware:
+    - ESP32
+    - ESP8266
+    - AVR
+    - nRF52
+    - RP2040
 pricing:
   price: Free

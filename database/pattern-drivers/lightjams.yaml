@@ -18,7 +18,8 @@ capabilities:
 links:
   url: https://www.lightjams.com/
 platforms:
-  - Windows
+  os:
+    - Windows
 pricing:
   price: 125 - 450
   demo:

@@ -9,8 +9,9 @@ capabilities:
   live: false
   designer: true
 platforms:
-  - Ubuntu
-  - Windows
-  - mac and arm64
+  os:
+    - Windows
+    - macOS
+    - Linux
 pricing:
   price: Free

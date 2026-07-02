@@ -13,6 +13,7 @@ capabilities:
 links:
   url: https://github.com/NLED/allpixmatrix
 platforms:
-  - Windows
+  os:
+    - Windows
 pricing:
   price: Free

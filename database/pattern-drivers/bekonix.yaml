@@ -15,8 +15,9 @@ capabilities:
 links:
   url: https://www.bekonix.com/
 platforms:
-  - Windows
-  - macOS
+  os:
+    - Windows
+    - macOS
 pricing:
   price: Free- $99
   demo:

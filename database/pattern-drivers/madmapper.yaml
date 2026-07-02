@@ -15,7 +15,8 @@ capabilities:
 links:
   url: https://madmapper.com/
 platforms:
-  - Windows
-  - macOS
+  os:
+    - Windows
+    - macOS
 pricing:
   price: 420

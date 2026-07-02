@@ -13,9 +13,10 @@ capabilities:
 links:
   url: https://chamsyslighting.com/
 platforms:
-  - Windows
-  - macOS
-  - Linux
+  os:
+    - Windows
+    - macOS
+    - Linux
 pricing:
   price: Free 64 universes
   demo:

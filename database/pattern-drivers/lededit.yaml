@@ -6,6 +6,7 @@ integrations: K1000 LED player editing program
 links:
   url: https://learnitstepbystep.blogspot.com/2018/07/download-led-edit-2014-2016-2017-2018.html
 platforms:
-  - Desktop
+  os:
+    - Windows
 pricing:
   price: Free

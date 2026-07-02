@@ -19,7 +19,9 @@ capabilities:
   visualizer: 3D
   programmatic: true
 platforms:
-  - Windows macOS
+  os:
+    - Windows
+    - macOS
 pricing:
   price: Free - $399
   demo:

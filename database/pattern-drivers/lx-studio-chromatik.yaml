@@ -25,9 +25,10 @@ language: Java
 links:
   url: https://lx.studio/
 platforms:
-  - Windows
-  - macOS
-  - Linux
+  os:
+    - Windows
+    - macOS
+    - Linux
 pricing:
   price: Free
   demo:

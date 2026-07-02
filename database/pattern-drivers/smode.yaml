@@ -20,7 +20,8 @@ capabilities:
 links:
   url: https://smode.fr/
 platforms:
-  - Windows
+  os:
+    - Windows
 pricing:
   price: Expensive
   demo:

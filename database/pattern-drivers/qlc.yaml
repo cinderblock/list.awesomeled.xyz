@@ -23,10 +23,12 @@ language: C++
 links:
   url: https://www.qlcplus.org/
 platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Raspberry Pi
+  os:
+    - Windows
+    - macOS
+    - Linux
+  hardware:
+    - Raspberry Pi
 pricing:
   price: FOSS
   demo:

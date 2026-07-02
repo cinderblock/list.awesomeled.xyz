@@ -13,7 +13,8 @@ integrations: Should be solderlab.de (which is down)
 links:
   url: https://oneguyoneblog.com/download/glediator-v2-0-3/
 platforms:
-  - Windows
-  - Linux
+  os:
+    - Windows
+    - Linux
 pricing:
   price: Free

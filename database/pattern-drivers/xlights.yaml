@@ -16,8 +16,9 @@ capabilities:
 links:
   url: https://www.xlights.org
 platforms:
-  - Windows
-  - macOS
-  - Linux
+  os:
+    - Windows
+    - macOS
+    - Linux
 pricing:
   price: Free

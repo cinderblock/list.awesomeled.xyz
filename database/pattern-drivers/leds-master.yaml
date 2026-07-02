@@ -11,10 +11,12 @@ capabilities:
 links:
   url: https://antoine.doussaud.org/leds_master
 platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Android
-  - '& iOS'
+  os:
+    - Windows
+    - macOS
+    - Linux
+  mobile:
+    - Android
+    - iOS
 pricing:
   price: FOSS

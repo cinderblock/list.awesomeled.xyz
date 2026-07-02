@@ -22,7 +22,8 @@ capabilities:
 links:
   url: https://www.madrix.com/products/software
 platforms:
-  - Windows
+  os:
+    - Windows
 pricing:
   price: 330+
   license_type: perpetual

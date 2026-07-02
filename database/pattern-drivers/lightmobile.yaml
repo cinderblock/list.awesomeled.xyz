@@ -13,7 +13,8 @@ integrations: LightBox&LightBoard Mini
 links:
   url: https://www.rocketlife.com/technology/
 platforms:
-  - iOS
-  - Android
+  mobile:
+    - iOS
+    - Android
 pricing:
   price: Free

@@ -13,6 +13,7 @@ capabilities:
 links:
   url: https://www.vixenlights.com/downloads/
 platforms:
-  - Free
+  os:
+    - Windows
 pricing:
   price: Free

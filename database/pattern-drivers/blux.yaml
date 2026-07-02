@@ -20,9 +20,11 @@ language: JavaScript
 links:
   url: http://benjamin.kuperberg.fr/blux
 platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Raspberry Pi
+  os:
+    - Windows
+    - macOS
+    - Linux
+  hardware:
+    - Raspberry Pi
 pricing:
   price: Free

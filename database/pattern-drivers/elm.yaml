@@ -22,7 +22,8 @@ language: null
 links:
   url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/pixel-mapping-software/
 platforms:
-  - Windows
+  os:
+    - Windows
 pricing:
   price: 94
   demo:

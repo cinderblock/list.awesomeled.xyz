@@ -20,7 +20,8 @@ integrations: Obsidian Onyx
 links:
   url: https://obsidiancontrol.com/dylos
 platforms:
-  - Windows
+  os:
+    - Windows
 pricing:
   price: Free 1 universe
   demo:

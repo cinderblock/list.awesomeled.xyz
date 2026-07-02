@@ -17,7 +17,8 @@ capabilities:
 links:
   url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
 platforms:
-  - Windows
+  os:
+    - Windows
 pricing:
   demo:
     available: Free demo - No output

@@ -19,8 +19,9 @@ capabilities:
 links:
   url: https://resolume.com/software
 platforms:
-  - Windows
-  - macOS
+  os:
+    - Windows
+    - macOS
 pricing:
   price: 299-799
   license_type: perpetual

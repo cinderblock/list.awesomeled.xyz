@@ -18,7 +18,10 @@ language: JS subset
 links:
   url: https://electromage.com/pixelblaze/
 platforms:
-  - Pixelblaze (in-browser)
+  web: true
+  hardware:
+    - Pixelblaze
+  notes: Editor is served in the browser by the Pixelblaze itself
 pricing:
   price: 39
   demo:

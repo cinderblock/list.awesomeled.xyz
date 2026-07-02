@@ -19,9 +19,11 @@ language: JavaScript
 links:
   url: http://github.com/benkuper/BenTo
 platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Raspberry Pi
+  os:
+    - Windows
+    - macOS
+    - Linux
+  hardware:
+    - Raspberry Pi
 pricing:
   price: Free

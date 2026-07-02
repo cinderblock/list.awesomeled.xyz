@@ -16,7 +16,9 @@ integrations: Home Assistant
 links:
   url: https://lumiastream.com/
 platforms:
-  - Windows macOS
+  os:
+    - Windows
+    - macOS
 pricing:
   price: Free- $30/month
   demo:

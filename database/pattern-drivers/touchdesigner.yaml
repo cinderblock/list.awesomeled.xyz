@@ -29,8 +29,9 @@ language: Python, GLSL
 links:
   url: https://derivative.ca/
 platforms:
-  - Windows
-  - macOS
+  os:
+    - Windows
+    - macOS
 pricing:
   price: Free-$2200
   license_type: perpetual

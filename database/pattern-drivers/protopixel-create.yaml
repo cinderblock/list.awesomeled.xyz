@@ -18,7 +18,8 @@ integrations: Python (scriptable)
 links:
   url: https://www.protopixel.io/design
 platforms:
-  - macOS
+  os:
+    - macOS
 pricing:
   price: 176
   demo:

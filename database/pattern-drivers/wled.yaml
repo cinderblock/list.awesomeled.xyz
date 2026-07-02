@@ -22,8 +22,9 @@ language: C++
 links:
   url: https://github.com/Aircoookie/WLED
 platforms:
-  - ESP8266
-  - ESP32
+  hardware:
+    - ESP32
+    - ESP8266
 pricing:
   price: FOSS
   demo:

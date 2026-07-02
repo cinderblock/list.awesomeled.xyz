@@ -9,6 +9,7 @@ capabilities:
 links:
   url: https://www.arkaos.com/
 platforms:
-  - Windows
+  os:
+    - Windows
 pricing:
   price: 299

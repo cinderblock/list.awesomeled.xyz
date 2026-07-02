@@ -9,7 +9,9 @@ capabilities:
 links:
   url: https://www.enviral-design.com/
 platforms:
-  - Windows (TouchDesigner)
+  os:
+    - Windows
+  notes: Runs inside TouchDesigner
 pricing:
   price: Free
   demo:

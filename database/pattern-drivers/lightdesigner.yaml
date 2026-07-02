@@ -12,7 +12,8 @@ integrations: LightBox&LightBoard Mini
 links:
   url: https://www.rocketlife.com/technology/
 platforms:
-  - Windows
-  - macOS
+  os:
+    - Windows
+    - macOS
 pricing:
   price: Free

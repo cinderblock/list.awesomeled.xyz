@@ -22,9 +22,11 @@ integrations: OSC, MIDI, Home Assistant, RemoteFalcon, plugins
 links:
   url: https://github.com/FalconChristmas/fpp
 platforms:
-  - Raspberry Pi
-  - Beagle Bone
-  - macOS
-  - Linux
+  os:
+    - macOS
+    - Linux
+  hardware:
+    - Raspberry Pi
+    - BeagleBone
 pricing:
   price: FOSS

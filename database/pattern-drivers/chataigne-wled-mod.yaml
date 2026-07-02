@@ -7,10 +7,12 @@ capabilities:
 links:
   url: https://github.com/zak-45
 platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Raspberry Pi
+  os:
+    - Windows
+    - macOS
+    - Linux
+  hardware:
+    - Raspberry Pi
 pricing:
   price: Free
   demo:

@@ -19,10 +19,12 @@ language: JavaScript
 links:
   url: http://benjamin.kuperberg.fr/chataigne/en
 platforms:
-  - Windows
-  - macOS
-  - Linux
-  - Raspberry Pi
+  os:
+    - Windows
+    - macOS
+    - Linux
+  hardware:
+    - Raspberry Pi
 pricing:
   price: Free
   demo:

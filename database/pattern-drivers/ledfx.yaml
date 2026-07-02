@@ -17,9 +17,10 @@ language: Python
 links:
   url: https://github.com/LedFx/LedFx
 platforms:
-  - Windows
-  - Linux
-  - macOS
+  os:
+    - Windows
+    - Linux
+    - macOS
 pricing:
   price: FOSS
   demo:
