@@ -1,31 +1,27 @@
 name: XH
 creator: JST
-notes: null
-board_fingers: false
-colors: White
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 22 AWG
-locking: Latching
-max_current: 3 A
-max_pins: 20
-max_voltage: 250 V
-min_pins: 1
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: Both
-pinout: null
-pitch: 2.5 mm
-rows: null
-screw_terminal: null
-smallest_gauge: 30 AWG
-solder: true
-url: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
+  digikey: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 2.5 mm
+  min_pins: 1
+  max_pins: 20
+  gendered: true
+  locking: Latching
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: Both
+  board_fingers: false
+ratings:
+  max_current: 3 A
+  max_voltage: 250 V
+termination:
+  solder: true
+  idc: false
+  smallest_gauge: 30 AWG
+  largest_gauge: 22 AWG
+wiring:
+  colors: White

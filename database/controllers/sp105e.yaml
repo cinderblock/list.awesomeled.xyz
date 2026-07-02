@@ -1,23 +1,19 @@
 name: SP105E
 status: active
-release_year: null
 creator: Sperll
-notes: null
-outputs: Single and Clock
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Bluetooth
-max_current: null
-max_outputs: 1
-max_pixels: 2048
-max_voltage: 24V
-output_connectors: Screw
-pixel_types: both
+vendors:
+  - Amazon
+inputs:
+  physical:
+    Bluetooth: true # configured via smartphone app
+  standalone: true # plays patterns from onboard memory, controlled over Bluetooth
+outputs:
+  count: 1
+  connector: Screw
+  pixels:
+    max_per_output: 2048
+  clocked: selectable # supports single-wire and clocked pixel types
+power:
+  voltage:
+    max: 24
 price: 18
-standalone: null
-storage: null
-url: Amazon
-warranty: null
-waterproof: null
-wled_compatible: null

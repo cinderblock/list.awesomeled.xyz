@@ -1,23 +1,29 @@
 name: deskontroller LITE V3 96
 status: active
 release_year: 2023
-creator: deskontrol electronics SL
-notes: null
-outputs: Single and Clock
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Wi-Fi
-max_current: null
-max_outputs: 32
-max_pixels: 16320
-max_voltage: null
-output_connectors: RJ45
-pixel_types: both
+creator:
+  name: deskontrol electronics SL
+  url: https://www.deskontrol.net
+  page: https://www.deskontrol.net/en/art-net-led-controllers/381-deskontroller-lite-v3-96-artnet-universes.html
+inputs:
+  physical:
+    Ethernet: true # Art-Net input via RJ45
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  count: 32 # 32 data lines across 8 RJ45 connectors (4 per RJ45 in normal mode)
+  connector: RJ45 # with included terminal adapters, CAT6 UTP cabling
+  clocked: selectable # supports clockless and clocked signal types
+  pixels:
+    max_per_output: 510 # 16320 total / 32 outputs
+data:
+  fps: 60
+  formats:
+    - RGB
+    - RGBW
 price: 1060
-standalone: false
-storage: null
-url: https://www.deskontrol.net/en/art-net-led-controllers/381-deskontroller-lite-v3-96-artnet-universes.html
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - 96 Art-Net universes (49,152 DMX channels)
+  - ~16,320 RGB pixels or ~12,288 RGBW pixels total
+  - Compatible with over 100 pixel IC families

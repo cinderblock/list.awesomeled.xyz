@@ -1,23 +1,30 @@
 name: QuinLED-Dig-Quad
 status: active
 release_year: 2020
-creator: Quindor / Intermittent Technology
+creator:
+  name: Quindor / Intermittent Technology
+  page: https://quinled.info/quinled-dig-quad/
 notes: ESP8266/ESP32 based, open to any software, often run with WLED
-outputs: Single and Clock
-auxiliary_outputs: DIY or Pre-Assembled
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 30A
-max_outputs: 4
-max_pixels: 4096
-max_voltage: 24V
-output_connectors: 5mm screw terminal
-pixel_types: both
+inputs:
+  physical:
+    Wi-Fi: 2.4GHz # via plug-in QuinLED-ESP32 module; wired Ethernet ESP32 variant optional
+  standalone: true # commonly runs WLED firmware
+outputs:
+  count: 4
+  connector: 5mm screw terminal
+  clocked: selectable # supports single-wire and clocked (e.g. SK9822/APA102) strips
+  driver:
+    buffered: true # level-shifted output per channel
+power:
+  voltage:
+    max: 24
+  current:
+    max: 30
+core:
+  family: ESP32
+features:
+  - Per-output level shifters
+  - Onboard fuses with power distribution terminals
+  - Reverse polarity protection
 price: 38
-standalone: true
-storage: null
-url: https://quinled.info/quinled-dig-quad/
-warranty: null
-waterproof: null
 wled_compatible: true

@@ -1,23 +1,31 @@
 name: Luminaxa
 status: active
 release_year: 2020
-creator: Luminaxa
-notes: Internal 3500mAh battery Android app
-outputs: Single
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 1A
-max_outputs: 1
-max_pixels: 600
-max_voltage: 5V
-output_connectors: JST
-pixel_types: async
+creator:
+  name: Luminxa
+  url: https://luminxa.com/
+  page: https://luminxa.com/
+notes: Internal 3500mAh battery; controlled via Android app.
+inputs:
+  physical:
+    Ethernet: true
+  standalone: true
+outputs:
+  count: 1
+  connector: JST
+  driver:
+    buffered: true
+  current:
+    max: 1
+  pixels:
+    max_per_output: 600
+  clocked: false
+power:
+  voltage:
+    max: 5
+  current:
+    max: 1
+features:
+  - Internal 3500mAh rechargeable battery
+  - Android app control
 price: 50
-standalone: true
-storage: null
-url: https://luminxa.com/
-warranty: null
-waterproof: null
-wled_compatible: null

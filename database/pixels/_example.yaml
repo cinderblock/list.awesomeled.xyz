@@ -48,7 +48,6 @@ package_sizes:
 pin_count: 4
 pixel_data_size: '24'
 pixel_data_size_notes: 8 bits per channel, RGB only
-pixel_rate_max: 33.3k pixels/sec
 pwm_frequency: 1.2kHz
 pwm_frequency_notes: Measured 1.18kHz typical, uses MPWM for flicker reduction
 quiescent_current: 0.3mA
@@ -126,7 +125,6 @@ package_sizes:
   - '2020'
 pin_count: 6
 pixel_data_size: '32'
-pixel_rate_max: 750k pixels/sec
 pwm_frequency: 19.2kHz
 pwm_frequency_notes: True constant current PWM, excellent for video
 technical_notes:

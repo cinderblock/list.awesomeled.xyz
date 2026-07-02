@@ -2,25 +2,25 @@ name: PL9823
 release_year: 2014
 creator: /
 notes: 5mm & 8mm epoxy leaded copy of WS2811/12
-backup_data_line: false
-brightness_bits: 8
-channel_current: null
-clocked: false
-color_order: RGB
-data_bitrate: 800kHz
-data_type: WS2811/12
-datasheet_url: https://cdn.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf
-gpio_max: 5V
-gpio_min: 3.5V
-led_voltage: 6V
-max_pixels_per_string: null
-other_links: null
-package_size: 5/8mm T style
-pin_count: 4
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-pwm_frequency: 800Hz
-quiescent_current: null
-third_party_testing: https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-clones-pd9823/
-vcc_voltage: 5V
-wattage: .mW
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 800Hz
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://content.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf
+  third_party_testing: https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-clones-pd9823/
+electrical:
+  led_voltage: 6V
+  vcc_voltage: 5V
+  gpio:
+    min: 3.5V
+    max: 5V
+physical:
+  package_size: 5/8mm T style
+  pin_count: 4

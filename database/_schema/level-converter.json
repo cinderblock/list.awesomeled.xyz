@@ -4,47 +4,154 @@
   "title": "Level Converter",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
     "name": {
       "type": "string"
     },
+    "status": {
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
     "creator": {
-      "type": ["string", "null"],
-      "description": "Original designer/developer of this item"
+      "anyOf": [
+        {
+          "type": ["string", "null"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "manufacturers": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Manufacturers that produce this item"
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
     },
     "vendors": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Vendors that sell/distribute this item"
-    },
-    "channels": {
-      "type": ["integer", "null"]
-    },
-    "interface": {
-      "type": ["string", "null"]
+      "type": ["array", "null"],
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "page": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
     },
     "notes": {
       "type": ["string", "null"]
     },
     "price": {
-      "type": ["string", "number", "null"]
+      "description": "Single price (USD unless {amount, currency}) or manufacturer-published quantity tiers",
+      "oneOf": [
+        {
+          "$ref": "common.json#/definitions/price"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["qty", "price"],
+            "properties": {
+              "qty": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Quantity this unit price applies at"
+              },
+              "price": {
+                "$ref": "common.json#/definitions/price"
+              },
+              "sku": {
+                "type": "string",
+                "description": "Exact orderable part number the price is for"
+              }
+            }
+          }
+        }
+      ]
     },
-    "max_voltage": {
-      "type": ["string", "number", "null"]
+    "io": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "channels": {
+          "type": ["integer", "null"]
+        },
+        "interface": {
+          "type": ["string", "null"]
+        },
+        "buffered": {
+          "type": ["boolean", "null"]
+        }
+      }
     },
-    "max_current": {
-      "type": ["string", "number", "null"]
+    "electrical": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "max_voltage": {
+          "type": ["string", "number", "null"]
+        },
+        "max_current": {
+          "type": ["string", "number", "null"]
+        }
+      }
     },
-    "buffered": {
-      "type": ["boolean", "null"]
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "product": {
+          "type": ["string", "null"]
+        }
+      }
     },
-    "url": {
-      "type": ["string", "null"]
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    },
+    "dead_links": {
+      "$ref": "common.json#/definitions/dead_links"
     }
   }
 }

@@ -1,29 +1,25 @@
 name: xLights
 status: active
-creator: null
 notes: originally Nutcracker, developed for holiday light shows as a sequencer, spread beyond , continually developed.
-audio_input: Both
-demo_available: null
-designer: true
-gpio: null
-integrations: null
-language: null
-live: false
-other_inputs: Audacity plug-in,MIDI,video files
-other_outputs: LOR, DDP
+inputs:
+  audio: Both
+  other: Audacity plug-in,MIDI,video files
+outputs:
+  protocols:
+    artnet: Output
+    sacn: Output
+    dmx: Output
+  other: LOR, DDP
+capabilities:
+  live: false
+  designer: true
+license: GPL-3.0
+links:
+  url: https://www.xlights.org
 platforms:
-  - Windows
-  - macOS
-  - Linux
-price: Free
-programmatic: null
-protocols:
-  artnet: Output
-  sacn: Output
-  dmx: Output
-  kinet: null
-  ddp: null
-serial: null
-url: https://www.xlights.org
-video_input: null
-visualizer: null
+  os:
+    - Windows
+    - macOS
+    - Linux
+pricing:
+  price: Free

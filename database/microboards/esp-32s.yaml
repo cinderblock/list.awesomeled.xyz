@@ -1,26 +1,20 @@
 name: ESP-32S
 release_year: 2016
-creator: NodeMCU
-notes: null
-bluetooth: '4.1'
-bms: false
-clock_speed: null
-cpu: Xtensa LX6
-ethernet: null
-flash: null
-gpio_voltage: 3.3V
-imu: false
-isa: Xtensa
-linux: false
-max_input_voltage: null
-max_outputs: null
-min_input_voltage: null
-poe: null
-price: null
-ram: null
-soc: ESP32
-storage: null
-ttl_serial: true
-url: https://www.espressif.com/en/products/socs/esp32
-usb: Power + UART
-wifi: 2.4GHz
+creator:
+  name: NodeMCU
+  page: https://www.espressif.com/en/products/socs/esp32
+power:
+  gpio_voltage: 3.3V
+compute:
+  soc: ESP32
+  cpu: Xtensa LX6
+  isa: Xtensa
+  linux: false
+connectivity:
+  wifi: 2.4GHz
+  bluetooth: '4.1'
+  usb: Power + UART
+  serial: true
+io:
+  bms: 'No'
+  imu: false

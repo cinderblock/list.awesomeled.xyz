@@ -1,26 +1,29 @@
 name: Beaglebone Black
 release_year: 2012
-creator: Beagleboard.org
-notes: null
-bluetooth: null
-bms: false
-clock_speed: 1.0GHz
-cpu: Cortex-A8, 2x PRUSS
-ethernet: 100BASE-TX
-flash: 4GBeMMC/microSD
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv7
-linux: true
-max_input_voltage: 5V
-max_outputs: 48
-min_input_voltage: 5V
-poe: null
+creator:
+  name: Beagleboard.org
+  page: http://beagleboard.org/black
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+compute:
+  soc: am3358
+  cpu: Cortex-A8, 2x PRUSS
+  isa: ARMv7
+  clock_speed: 1.0GHz
+  flash: 4GBeMMC/microSD
+  ram: 512MB
+  linux: true
+connectivity:
+  wifi: USB
+  ethernet: 100BASE-TX
+  usb: USB 2.0
+  serial: true
+io:
+  max_outputs: 48
+  storage: microSD
+  bms: 'No'
+  imu: false
 price: 50
-ram: 512MB
-soc: am3358
-storage: microSD
-ttl_serial: true
-url: http://beagleboard.org/black
-usb: USB 2.0
-wifi: USB

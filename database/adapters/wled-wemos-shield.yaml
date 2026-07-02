@@ -1,13 +1,15 @@
 name: WLED wemos shield
 creator: SerKo
 notes: Easy to assemble with TH parts
-outputs: Both
+outputs:
+  max_channels: 2
+  pixel_types: Single+Clocked
+  connectors: Screw Terminals
+  description: Both
+power:
+  voltage: 12V
+  current: 10A
 diy_or_ots: DIY
-max_channels: 2
-max_current: 10A
-max_voltage: 12V
-output_connectors: Screw Terminals
+links:
+  product: https://github.com/srg74/WLED-wemos-shield
 parent: Wemos D1 Mini (ESP32/ESP8266)
-pixel_types: Single+Clocked
-price: null
-url: https://github.com/srg74/WLED-wemos-shield

@@ -1,15 +1,9 @@
 name: Fabric
 notes: Not tested yet
-color_rendition: null
-diffusivity: null
-fire_retardant: false
-flexible: F
-light_transmission: null
-material_type: null
-price_range: null
-properties: Diffusive
+optical:
+  tinted: T
+physical:
+  flexible: F
+  fire_retardant: false
+  properties: Diffusive
 purpose_made: false
-sample_thickness: null
-sizes_available: null
-tinted: T
-url: null

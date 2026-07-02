@@ -2,26 +2,24 @@ name: Lumiastream
 status: active
 creator: Lumiastream
 notes: Viewer control of IoT objects for streaming, some integrated automation
-audio_input: Output
-demo_available: Free / premium Monthly
-designer: false
-gpio: null
+inputs:
+  audio: Output
+  other: viewer controlled stream responsive control
+outputs:
+  protocols:
+    artnet: Output
+  other: Tuya, Govee,Hue, Nano, etc home automation and ArtNet
+capabilities:
+  live: false
+  designer: false
 integrations: Home Assistant
-language: null
-live: false
-other_inputs: viewer controlled stream responsive control
-other_outputs: Tuya, Govee,Hue, Nano, etc home automation and ArtNet
+links:
+  url: https://lumiastream.com/
 platforms:
-  - Windows macOS
-price: Free- $30/month
-programmatic: null
-protocols:
-  artnet: Output
-  sacn: null
-  dmx: null
-  kinet: null
-  ddp: null
-serial: null
-url: https://lumiastream.com/
-video_input: null
-visualizer: null
+  os:
+    - Windows
+    - macOS
+pricing:
+  price: Free- $30/month
+  demo:
+    available: Free / premium Monthly

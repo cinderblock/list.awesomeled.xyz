@@ -1,15 +1,17 @@
 name: Silicone Sealant
 notes: Great for costumes - search Etsy
-color_rendition: 3
-diffusivity: 4
-fire_retardant: null
-flexible: F
-light_transmission: 2-4
+links:
+  product: https://www.zotefoams.com/product/azote/plastazote/
 material_type: XLPE
-price_range: $$
-properties: Diffusive
+optical:
+  color_rendition: 3
+  light_transmission: 2-4
+  diffusivity: 4
+physical:
+  flexible: F
+  sample_thickness: variable
+  sizes_available: 4-8mm, 40x80"
+  properties: Diffusive
+pricing:
+  price_range: $$
 purpose_made: false
-sample_thickness: variable
-sizes_available: 4-8mm, 40x80"
-tinted: null
-url: https://www.zotefoams.com/product/azote/plastazote/

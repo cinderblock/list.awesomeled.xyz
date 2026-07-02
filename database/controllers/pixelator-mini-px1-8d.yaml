@@ -1,23 +1,31 @@
 name: Pixelator Mini PX1-8D
-status: unknown
-release_year: null
-creator: ENTTEC
-notes: null
-outputs: Proprietary
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Wi-Fi
-max_current: null
-max_outputs: 24
-max_pixels: 2730
-max_voltage: null
-output_connectors: RJ-46
-pixel_types: async
+status: discontinued
+creator:
+  name: ENTTEC
+  url: https://www.enttec.com
+  page: https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
+notes: DIN-rail Ethernet-to-SPI pixel converter; 8 outputs, 16 universes, up to 2730 RGB pixels.
+inputs:
+  physical:
+    Ethernet: true # RJ45 Ethercon input
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+outputs:
+  count: 8
+  connector: RJ45 PLink
+  clocked: false
+power:
+  voltage:
+    min: 7
+    max: 24
+case:
+  waterproof: IP20
+dead_links:
+  - url: https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
+    archive: https://web.archive.org/web/20260217143850/https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
+    checked: '2026-07-01'
 price: 700
-standalone: null
-storage: null
-url: https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - 16 universes (8192 channels), up to 2730 RGB pixels across 8 outputs
+  - Outputs synchronize up to 300m away when paired with ENTTEC PLink or PSAT

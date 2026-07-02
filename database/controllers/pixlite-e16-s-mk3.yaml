@@ -1,24 +1,35 @@
 name: PixLite E16-S Mk3
 status: active
 release_year: 2022
-creator: Advatek
-notes: Pixels cannot be powered through PixLite. Single 100Mbps Ethernet. All
-  other features of Mk3 are available in the E Series
-outputs: Single or Clock
-auxiliary_outputs: DMX In/Out
-buffered: true
-interfaces:
-  - Wi-Fi
-max_current: null
-max_outputs: 32
-max_pixels: 16320
-max_voltage: 24V
-output_connectors: Phoenix Screw
-pixel_types: both
+creator:
+  name: Advatek
+  url: https://www.advateklights.com
+  page: https://www.advateklights.com/pixlite-e16-s-mk3
+notes: Pixels cannot be powered through PixLite. All other features of Mk3 are available in the E Series.
+inputs:
+  physical:
+    Ethernet: true # single 100Mbps Ethernet
+    Wi-Fi: true
+  standalone: true
+outputs:
+  count: 32
+  connector: Phoenix Screw
+  clocked: selectable # single or clocked per output
+  differential: true
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 510 # 16320 total across 32 outputs
+  auxiliary:
+    DMX512: 2 # DMX In/Out
+power:
+  voltage:
+    max: 24
+data:
+  storage:
+    - type: SD
 price: 950
-standalone: true
-storage: SD
-url: https://www.advateklights.com/pixlite-e16-s-mk3
-warranty: null
-waterproof: null
-wled_compatible: null
+related:
+  - type: related
+    ref: controllers/pixlite-16-mk2-control-board
+    notes: Mk3 counterpart of the PixLite 16 Mk2

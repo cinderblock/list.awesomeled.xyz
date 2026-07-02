@@ -1,23 +1,32 @@
 name: NLed Pixel Controller Electron
 status: active
-release_year: null
-creator: Northern Lights Electronic Design
-notes: On board 3 Axis Accelerometer, programmable for wearables and standalone
-outputs: Single and Clock
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - DMX 512
-max_current: null
-max_outputs: 1
-max_pixels: 170
-max_voltage: 24V
-output_connectors: Phoenix Screw
-pixel_types: both
-price: 27
-standalone: true
-storage: null
-url: https://store.nledshop.com/index.php/nled-pixel-controller-electron-flow-toys-wearables.html
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: Northern Lights Electronic Design
+  url: https://store.nledshop.com
+  page: https://store.nledshop.com/index.php/nled-pixel-controller-electron-flow-toys-wearables.html
+notes: On board 3 Axis Accelerometer, programmable for wearables and standalone. 512 channels (170 RGB pixels) via 16MB onboard flash; optional WiFi/Bluetooth add-on modules available. Output connector is user-selectable at order time.
+inputs:
+  physical:
+    USB: true
+    Serial: true
+  protocols:
+    - DMX
+  standalone: true
+outputs:
+  count: 1
+  connector: Solder Pads / Pin Header / Screw Terminal
+  clocked: selectable
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 170
+power:
+  voltage:
+    max: 24
+data:
+  storage:
+    - type: Flash
+features:
+  - 3-axis accelerometer
+  - Optional WiFi/Bluetooth add-on modules
+price: 30

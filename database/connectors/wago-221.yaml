@@ -3,31 +3,30 @@ creator: Wago
 notes: Successor to Wago 222 Tool free, lever clamping wire to wire connectors,
   wide range of wire diameter acceptance in stranded or solid Ideal for thin
   taps of thick bus lines
-board_fingers: false
-colors: Clear/Orange
-contact_type: Spring
-convention: null
-crimp: false
-digikey_url: null
-gendered: false
-idc: false
-ip_rating: null
-largest_gauge: 10 AWG
-locking: Latching
-max_current: 32 A
-max_pins: 5
-max_voltage: 450 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: false
-pinout: null
-pitch: 10.0 mm
-rows: 1
-screw_terminal: false
-smallest_gauge: 28 AWG
-solder: false
-url: https://www.wago.com/global/electrical-interconnections/discover-installation-terminal-blocks-and-connectors/221
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://www.wago.com/global/electrical-interconnections/discover-installation-terminal-blocks-and-connectors/221
+mechanical:
+  outline: Rectangular
+  contact_type: Spring
+  pitch: 10.0 mm
+  min_pins: 2
+  max_pins: 5
+  rows: 1
+  gendered: false
+  locking: Latching
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 32 A
+  max_voltage: 450 V
+termination:
+  solder: false
+  screw_terminal: false
+  crimp: false
+  idc: false
+  smallest_gauge: 28 AWG
+  largest_gauge: 10 AWG
+wiring:
+  colors: Clear/Orange

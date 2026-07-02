@@ -18,7 +18,11 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:visual": "playwright test --project=visual --workers=1",
     "agent-review": "bun run scripts/agent-review.ts",
-    "review": "bun run scripts/review-entry.ts"
+    "review": "bun run scripts/review-entry.ts",
+    "review:agent": "bun run scripts/review-entry-agent.ts",
+    "validate": "bun run scripts/validate.ts",
+    "mirror-datasheets": "bun run scripts/mirror-datasheets.ts",
+    "check-links": "bun run scripts/check-links.ts"
   },
   "dependencies": {
     "@mdx-js/rollup": "^3.1.1",
@@ -48,6 +52,7 @@
     "@types/node": "^25.2.0",
     "@types/react": "^19.2.11",
     "@types/react-dom": "^19.2.3",
+    "ajv": "^8.20.0",
     "cspell": "^9.6.4",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",

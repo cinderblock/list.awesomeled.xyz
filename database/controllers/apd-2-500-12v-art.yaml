@@ -1,24 +1,30 @@
 name: APD-2-500-12v-ART
 status: active
-release_year: null
 creator: Abstract AVR
-notes: On board Sound To Light , 31 channel DMX Macro mode
-outputs: Single
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Wi-Fi
-  - Ethernet
-max_current: 5A
-max_outputs: 2
-max_pixels: 1000
-max_voltage: 12V
-output_connectors: Phoenix Screw
-pixel_types: async
-price: null
-standalone: false
-storage: null
-url: https://www.digitaltape.co.uk/pixel-drivers
-warranty: null
-waterproof: null
-wled_compatible: null
+vendors:
+  - name: Digital Tape
+    page: https://www.digitaltape.co.uk/pixel-drivers
+notes: On board Sound To Light, 31 channel DMX Macro mode.
+inputs:
+  physical:
+    Wi-Fi: true
+    Ethernet: true
+  protocols:
+    - Art-Net # "ART" in product name
+  standalone: false
+outputs:
+  count: 2
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  clocked: false # async pixels
+  pixels:
+    max_per_output: 500 # 1000 total across 2 outputs
+power:
+  voltage:
+    max: 12
+  current:
+    max: 5
+features:
+  - Onboard Sound To Light
+  - 31 channel DMX Macro mode

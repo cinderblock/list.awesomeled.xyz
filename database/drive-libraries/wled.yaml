@@ -1,9 +1,53 @@
 name: WLED
+status: active
 creator: Aircookie
+dead_links:
+  - url: https://www.welcometothefuture.one/blog/wled-get-started
+    checked: '2026-07-01'
 features: Android/Apple App available, built-in patterns, sACN receiver
 hardware: ESP8266/32
 instructional_resources:
   - https://install.wled.me/
   - https://www.welcometothefuture.one/blog/wled-get-started
-url: https://github.com/Aircoookie/WLED
-youtube_url: https://www.youtube.com/watch?v=2wM067jRki8
+language: C++
+license: EUPL-1.2
+links:
+  repo: https://github.com/Aircoookie/WLED
+  youtube: https://www.youtube.com/watch?v=2wM067jRki8
+platforms:
+  - ESP32
+  - ESP8266
+related_pixel_ics:
+  - gs8208
+  - lpd6803
+  - lpd8806
+  - p9813
+  - sk6812-5050
+  - tm1814
+  - tm1829
+  - ucs8903
+  - ucs8904
+  - ws2801
+  - ws2805
+  - ws2811
+  - ws2814
+supported_ics:
+  - WS2812B
+  - WS2811
+  - SK6812
+  - WS2813
+  - WS2815
+  - APA102
+  - SK9822
+  - WS2801
+  - LPD8806
+  - LPD6803
+  - P9813
+  - TM1814
+  - TM1829
+  - GS8208
+  - UCS8903
+  - UCS8904
+  - WS2805
+  - WS2814
+  - FW1906

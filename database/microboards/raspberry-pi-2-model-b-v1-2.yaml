@@ -1,26 +1,29 @@
 name: Raspberry Pi 2 Model B v1.2
-release_year: null
-creator: Raspberry Pi Foundation
-notes: null
-bluetooth: USB
-bms: false
-clock_speed: 900MHz
-cpu: 4× ARM Cortex-A53
-ethernet: 100BASE-TX
-flash: microSD
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv8-A
-linux: true
-max_input_voltage: 5V
-max_outputs: 1
-min_input_voltage: 5V
-poe: null
+creator:
+  name: Raspberry Pi Foundation
+  page: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+compute:
+  soc: BCM2837
+  cpu: 4× ARM Cortex-A53
+  isa: ARMv8-A
+  clock_speed: 900MHz
+  flash: microSD
+  ram: 1GB
+  linux: true
+connectivity:
+  wifi: USB
+  ethernet: 100BASE-TX
+  bluetooth: USB
+  usb: OTG x4
+  serial: true
+io:
+  max_outputs: 1
+  storage: microSD
+  bms: 'No'
+  imu: false
 price: 35
-ram: 1GB
-soc: BCM2837
-storage: microSD
-ttl_serial: true
-url: https://www.raspberrypi.org/products/raspberry-pi-2-model-b/
-usb: OTG x4
-wifi: USB

@@ -2,25 +2,34 @@ name: WS2851
 release_year: 2018
 creator: WorldSemi
 notes: 12V WS2812 with RGB + external LEDs
-backup_data_line: false
-brightness_bits: 8
-channel_current: 18.5mA
-clocked: false
-color_order: RGB
-data_bitrate: 800kHz
-data_type: WS2811/12
-datasheet_url: http://www.world-semi.com/Certifications/details-121-4.html
-gpio_max: 5V
-gpio_min: 3.0V
-led_voltage: 12V
-max_pixels_per_string: null
-other_links: null
-package_size: '5050'
-pin_count: 8
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-pwm_frequency: 2.0kHz
-quiescent_current: 2.1mA
-third_party_testing: null
-vcc_voltage: 5V
-wattage: 92.5mW
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 2.0kHz
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: http://www.world-semi.com/Certifications/details-121-4.html
+dead_links:
+  - url: http://www.world-semi.com/Certifications/details-121-4.html
+    archive: https://web.archive.org/web/20200920151054/http://www.world-semi.com/Certifications/details-121-4.html
+    checked: '2026-07-01'
+electrical:
+  led_voltage: 12V
+  vcc_voltage: 5V
+  gpio:
+    min: 3.0V
+    max: 5V
+  channel_current: 18.5mA
+  quiescent_current: 2.1mA
+  wattage: 92.5mW
+physical:
+  package_size: '5050'
+  pin_count: 8
+related:
+  - type: variant
+    ref: pixels/ws2812

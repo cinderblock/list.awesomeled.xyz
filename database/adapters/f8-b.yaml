@@ -1,13 +1,18 @@
 name: F8-B
+status: discontinued
 creator: Kulp Lights
-notes: null
-outputs: Single
-diy_or_ots: null
-max_channels: 8
-max_current: null
-max_voltage: 12V
-output_connectors: Phoenix Screw
+outputs:
+  max_channels: 8
+  pixel_types: Single
+  connectors: Phoenix Screw
+  description: Single
+power:
+  voltage: 12V
+dead_links:
+  - url: https://kulplights.com/product/f8-b/
+    archive: https://web.archive.org/web/20211025190910/https://kulplights.com/product/f8-b/
+    checked: '2026-07-01'
+links:
+  product: https://kulplights.com/product/f8-b/
 parent: BeagleBone
-pixel_types: Single
 price: 51
-url: https://kulplights.com/product/f8-b/

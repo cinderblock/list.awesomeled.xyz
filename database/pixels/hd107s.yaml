@@ -3,36 +3,41 @@ status: active
 release_year: 2019
 creator: Rose Lighting
 notes: APA107 Competitor/clone
-backup_data_line: false
-brightness_bits: 8+5
-brightness_control_method: global
-brightness_control_notes: Global 5-bit brightness control
-channel_current: 17mA
-clocked: true
-color_order: RGB
-data_bitrate: 40MHz
-data_type: APA102
-datasheet_url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
-gpio_max: 5V
-gpio_min: 3.4V
-led_voltage: 5V
-max_pixels_per_string: null
+color:
+  order: RGB
+  brightness_bits: 8+5
+  brightness_method: global
+  brightness_method_notes: Global 5-bit brightness control
+  pwm_frequency: 27.0kHz
+data:
+  type: APA102
+  clocked: true
+  bitrate: 40MHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+electrical:
+  led_voltage: 5V
+  vcc_voltage: 5V
+  gpio:
+    min: 3.4V
+    max: 5V
+  channel_current: 17mA
+  quiescent_current: 0.1mA
 other_links:
   - HD107S Pixel Protocol Overview | Advatek Lighting
-package_size: 5050, 2020
-package_sizes:
-  - '5050'
-  - '2020'
-pin_count: 6
-pixel_data_size: 32 Bits/Pixel
-pixel_rate_max: 1.25 M Pixel / s
-pwm_frequency: 27.0kHz
-quiescent_current: 0.1mA
+physical:
+  package_sizes:
+    - '5050'
+    - '2020'
+  package_size: 5050, 2020
+  pin_count: 6
+related:
+  - type: related
+    ref: pixels/apa107
 technical_notes:
   - High-speed 40MHz data rate - faster than APA102's 30MHz
   - 27kHz PWM frequency for flicker-free video
   - Very low 0.1mA quiescent current
   - APA102 protocol compatible
-third_party_testing: null
-vcc_voltage: 5V
-wattage: null

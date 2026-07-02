@@ -1,9 +1,16 @@
 name: XOD
+status: unknown
 creator: XOD Inc/Open Source
-features: Windows/Mac/Linux Graphical, no coding, Arduino Programming with
-  limited native WS2812 support
+features: Windows/Mac/Linux Graphical, no coding, Arduino Programming with limited native WS2812 support
 hardware: Arduino/ ESP 66/32
 instructional_resources:
   - https://www.youtube.com/watch?v=XU0u5OEra3o
-url: https://xod.io/
-youtube_url: null
+language: JavaScript
+license: AGPL-3.0
+links:
+  repo: https://xod.io/
+platforms:
+  - Arduino
+  - ESP8266
+supported_ics:
+  - WS2812

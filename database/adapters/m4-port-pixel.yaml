@@ -1,13 +1,19 @@
 name: M4 Port Pixel
+status: discontinued
 creator: Microcyb
-notes: null
-outputs: null
+outputs:
+  max_channels: 37
+  pixel_types: Single
+  connectors: Phoenix Screw
+power:
+  voltage: 12V
+  current: 30A
+dead_links:
+  - url: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
+    archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html
+    checked: '2026-07-01'
 diy_or_ots: DIY
-max_channels: 37
-max_current: 30A
-max_voltage: 12V
-output_connectors: Phoenix Screw
+links:
+  product: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
 parent: Raspberry Pi 3B+ or above
-pixel_types: Single
 price: 35
-url: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0

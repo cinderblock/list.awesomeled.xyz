@@ -4,138 +4,261 @@
   "title": "Pattern Driver Software",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
     "name": {
       "type": "string"
     },
-    "creator": {
-      "type": ["string", "null"],
-      "description": "Original designer/developer of this item (preferred over developer)"
-    },
-    "developer": {
-      "type": ["string", "null"],
-      "description": "Alias for creator (deprecated, use creator instead)"
-    },
-    "price": {
-      "type": ["string", "number", "null"],
-      "description": "Price or price range. Use price_tiers for detailed pricing"
-    },
-    "price_tiers": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "tier": { "type": "string" },
-          "price": { "type": ["string", "number"] },
-          "features": { "type": "string" },
-          "limitations": { "type": "string" }
+    "status": {
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "const": "beta"
         }
-      },
-      "description": "Detailed pricing tiers (free, educational, commercial, pro, etc.)"
+      ]
     },
-    "license_type": {
-      "type": ["string", "null"],
-      "description": "License model: perpetual, subscription, monthly, yearly, donationware, etc."
+    "creator": {
+      "anyOf": [
+        {
+          "type": ["string", "null"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
-    "platforms": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Supported platforms (Windows, Mac, Linux, iOS, Android, Web, RaspberryPi)"
-    },
-    "live": {
-      "type": ["boolean", "null"],
-      "description": "Supports live output to actual lights"
-    },
-    "designer": {
-      "type": ["boolean", "string", "null"],
-      "description": "Can develop patterns offline/while disconnected from actual lights"
-    },
-    "visualizer": {
-      "type": ["string", "null"],
-      "description": "Can visualize patterns offline: '2D', '3D', 'both', or null"
-    },
-    "protocols": {
-      "type": "object",
-      "properties": {
-        "artnet": { "type": ["string", "boolean", "null"] },
-        "sacn": { "type": ["string", "boolean", "null"] },
-        "dmx": { "type": ["string", "boolean", "null"] },
-        "kinet": { "type": ["string", "boolean", "null"] },
-        "ddp": { "type": ["string", "boolean", "null"] },
-        "opc": { "type": ["string", "boolean", "null"], "description": "Open Pixel Control" },
-        "spi": { "type": ["string", "boolean", "null"] }
-      },
-      "description": "Supported output protocols"
-    },
-    "dmx_notes": {
-      "type": ["string", "null"],
-      "description": "Details about DMX support limitations (e.g., specific hardware required)"
-    },
-    "gpio": {
-      "type": ["string", "boolean", "null"],
-      "description": "Supports GPIO input/output"
-    },
-    "serial": {
-      "type": ["string", "boolean", "null"],
-      "description": "Supports serial port to microcontrollers (Arduino, etc.)"
-    },
-    "serial_notes": {
-      "type": ["string", "null"],
-      "description": "Details about serial support"
-    },
-    "video_input": {
-      "type": ["string", "boolean", "null"]
-    },
-    "audio_input": {
-      "type": ["string", "boolean", "null"]
-    },
-    "adc_input": {
-      "type": ["string", "boolean", "null"],
-      "description": "Analog to Digital Converter input (audio, accelerometer, light sensors)"
-    },
-    "programmatic": {
-      "type": ["string", "boolean", "null"],
-      "description": "Can write code (in any Turing complete language) to control inputs & outputs"
+    "notes": {
+      "type": ["string", "null"]
     },
     "language": {
       "type": ["string", "null"],
       "description": "Programming language if programmatic"
     },
-    "other_inputs": {
-      "type": ["string", "null"]
+    "platforms": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "description": "Where this software runs, split by kind. UIs collapse a full desktop set to 'All OS'.",
+      "properties": {
+        "os": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["Windows", "macOS", "Linux"]
+          }
+        },
+        "mobile": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string",
+            "enum": ["Android", "iOS"]
+          }
+        },
+        "web": {
+          "type": ["boolean", "null"],
+          "description": "Runs in a browser"
+        },
+        "hardware": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          },
+          "description": "Embedded/SBC targets the software itself runs on (ESP32, Raspberry Pi, ...)"
+        },
+        "notes": {
+          "type": ["string", "null"]
+        }
+      }
     },
-    "other_outputs": {
-      "type": ["string", "null"]
+    "pricing": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "price": {
+          "type": ["string", "number", "null"]
+        },
+        "license_type": {
+          "type": ["string", "null"],
+          "description": "perpetual, subscription, donationware, ..."
+        },
+        "tiers": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "tier": {
+                "type": "string"
+              },
+              "price": {
+                "type": ["string", "number"]
+              },
+              "features": {
+                "type": "string"
+              },
+              "limitations": {
+                "type": ["string", "null"]
+              }
+            }
+          }
+        },
+        "demo": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "available": {
+              "type": ["string", "boolean", "null"]
+            },
+            "limitations": {
+              "type": ["string", "null"]
+            }
+          }
+        }
+      }
+    },
+    "capabilities": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "live": {
+          "type": ["boolean", "null"],
+          "description": "Live output to actual lights"
+        },
+        "designer": {
+          "type": ["boolean", "string", "null"],
+          "description": "Design patterns offline"
+        },
+        "visualizer": {
+          "type": ["string", "null"],
+          "description": "2D, 3D, both, or null"
+        },
+        "programmatic": {
+          "type": ["string", "boolean", "null"],
+          "description": "User can write code to control I/O"
+        }
+      }
+    },
+    "inputs": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "video": {
+          "type": ["string", "boolean", "null"]
+        },
+        "audio": {
+          "type": ["string", "boolean", "null"]
+        },
+        "adc": {
+          "type": ["string", "boolean", "null"],
+          "description": "ADC input (audio, sensors)"
+        },
+        "other": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "outputs": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "protocols": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "artnet": {
+              "type": ["string", "boolean", "null"]
+            },
+            "sacn": {
+              "type": ["string", "boolean", "null"]
+            },
+            "dmx": {
+              "type": ["string", "boolean", "null"]
+            },
+            "kinet": {
+              "type": ["string", "boolean", "null"]
+            },
+            "ddp": {
+              "type": ["string", "boolean", "null"]
+            },
+            "opc": {
+              "type": ["string", "boolean", "null"],
+              "description": "Open Pixel Control"
+            },
+            "spi": {
+              "type": ["string", "boolean", "null"]
+            }
+          }
+        },
+        "dmx_notes": {
+          "type": ["string", "null"]
+        },
+        "gpio": {
+          "type": ["string", "boolean", "null"]
+        },
+        "serial": {
+          "type": ["string", "boolean", "null"]
+        },
+        "serial_notes": {
+          "type": ["string", "null"]
+        },
+        "other": {
+          "type": ["string", "null"]
+        }
+      }
     },
     "integrations": {
       "type": ["string", "null"],
-      "description": "What controllers this software is specifically designed to work with"
-    },
-    "notes": {
-      "type": ["string", "null"]
+      "description": "Controllers this software targets"
     },
     "technical_notes": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Detailed technical notes"
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
     },
-    "demo_available": {
-      "type": ["string", "boolean", "null"]
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": ["string", "null"]
+        },
+        "mirror": {
+          "type": ["string", "null"]
+        }
+      }
     },
-    "demo_limitations": {
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    },
+    "dead_links": {
+      "$ref": "common.json#/definitions/dead_links"
+    },
+    "license": {
       "type": ["string", "null"],
-      "description": "What limitations the demo version has"
-    },
-    "status": {
-      "type": ["string", "null"],
-      "enum": ["active", "discontinued", "end-of-life", "beta", "limited", null]
-    },
-    "url": {
-      "type": ["string", "null"]
-    },
-    "mirror_url": {
-      "type": ["string", "null"],
-      "description": "Alternative download URL if original is down"
+      "description": "SPDX license id (GPL-3.0, MIT, ...) for open-source software"
     }
   }
 }

@@ -2,31 +2,28 @@ name: Pigtails
 creator: Generic
 notes: Round moulded on connectors popular with Holiday light community, several
   similar but incompatible styles
-board_fingers: false
-colors: Black
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP55
-largest_gauge: 18 AWG
-locking: Friction
-max_current: 5 A
-max_pins: 4
-max_voltage: 50 V
-min_pins: 2
-mouser_url: null
-outline: Circular
-panel_mount: false
-pcb_mount: false
-pinout: null
-pitch: null
-rows: null
-screw_terminal: null
-smallest_gauge: 20 AWG
-solder: true
-url: https://www.wiredwatts.com/wire
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://www.wiredwatts.com/wire
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 2
+  max_pins: 4
+  gendered: true
+  locking: Friction
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 5 A
+  max_voltage: 50 V
+  ip_rating: IP55
+termination:
+  solder: true
+  crimp: true
+  idc: false
+  smallest_gauge: 20 AWG
+  largest_gauge: 18 AWG
+wiring:
+  colors: Black

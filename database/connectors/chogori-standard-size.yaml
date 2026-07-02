@@ -2,31 +2,25 @@ name: Chogori (Standard size)
 creator: Chogori
 notes: Push Lock IP 68 used on Rosco Lite Panels and some other LED products,
   Mini Standard and Large sizes
-board_fingers: false
-colors: null
-contact_type: Pins
-convention: null
-crimp: false
-digikey_url: https://www.digikey.co.uk/en/products/filter/circular-connectors/circular-connector-assemblies/436?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRACZyBOABhogF0CAHAFyhAGVWAnASwB2AcxABfAgFp40EMkjps%2BIqQpgArDRANxICQBYEs1JlwFikMmoDsVgMzktop0A
-gendered: true
-idc: false
-ip_rating: IP68
-largest_gauge: null
-locking: Latching
-max_current: 10 A
-max_pins: 12
-max_voltage: 60 V
-min_pins: 2
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: null
-screw_terminal: null
-smallest_gauge: null
-solder: true
-url: http://suomi.chogori.pro/produkciya.html
-wire_to_wire: true
-year_introduced: null
+links:
+  product: http://suomi.chogori.pro/produkciya.html
+  digikey: https://www.digikey.co.uk/en/products/filter/circular-connectors/circular-connector-assemblies/436?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRACZyBOABhogF0CAHAFyhAGVWAnASwB2AcxABfAgFp40EMkjps%2BIqQpgArDRANxICQBYEs1JlwFikMmoDsVgMzktop0A
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 2
+  max_pins: 12
+  gendered: true
+  locking: Latching
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 10 A
+  max_voltage: 60 V
+  ip_rating: IP68
+termination:
+  solder: true
+  crimp: false
+  idc: false

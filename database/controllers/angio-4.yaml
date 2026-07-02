@@ -1,30 +1,37 @@
 name: Angio 4
 status: active
 release_year: 2022
-creator: chroma.tech
-notes: Bulk fleet manager. ArtNet, sACN / E1.31, Open Pixel Control
-outputs: Single and Clock
-auxiliary_outputs: false
-buffered: true
-image: angio-4.png
-interfaces:
-  - Ethernet 100Mbps
-  - Wi-Fi
-  - Bluetooth 5 LE (future)
-  - ArtNet
-  - sACN / E1.31
-max_current: 24
-# max_current_per_output:
-max_outputs: 4
-max_pixels: 4080
-max_voltage: 24
-output_connectors: 4-pin Phoenix Plug 3.81mm
-pixel_types: both
-power_connectors: 2-pin Phoenix Screw 5.08mm
+creator:
+  name: chroma.tech
+  url: https://chroma.tech
+  page: https://shop.chroma.tech/products/angio-4
+notes: Bulk fleet manager.
+inputs:
+  physical:
+    Ethernet: 100Mbps
+    Wi-Fi: true
+    Bluetooth: 5 LE (future)
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+    - OPC # Open Pixel Control
+  standalone: false
+outputs:
+  count: 4
+  connector: 4-pin Phoenix Plug 3.81mm
+  driver:
+    buffered: true
+  clocked: selectable
+  pixels:
+    max_per_output: 1020 # 4080 total across 4 outputs
+power:
+  voltage:
+    max: 24
+  current:
+    max: 24
+  connector: 2-pin Phoenix Screw 5.08mm
+case:
+  waterproof: false
+image: angio-4.webp
 price: 99
-standalone: false
-storage: null
-url: https://shop.chroma.tech/products/angio-4
-warranty: null
-waterproof: false
 wled_compatible: false

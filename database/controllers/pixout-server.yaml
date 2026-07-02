@@ -1,25 +1,31 @@
 name: PixOut Server
 status: active
-release_year: null
-creator: PixOut
-notes: Pi based artnet recorderUp to 255 Universes iOS/Android App
-outputs: null
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - FPP
-  - Ethernet
-  - Wi-Fi
-max_current: null
-max_outputs: 8
-max_pixels: 8192
-max_voltage: 24V
-output_connectors: null
-pixel_types: both
+creator:
+  name: PixOut
+  url: http://pixout.lighting/
+notes: Raspberry Pi based Art-Net DMX recorder/player; up to 255 universes; iOS/Android app.
+inputs:
+  physical:
+    Ethernet: true
+    Wi-Fi: true
+  protocols:
+    - Art-Net
+  standalone: true # plays recorded cues from SD without external input
+  requires_host: Raspberry Pi # runs on Raspberry Pi 3B/3B+/4 or CM4
+outputs:
+  count: 8
+  pixels:
+    max_per_output: 1024 # 8192 total across 8 outputs
+  clocked: selectable
+  driver:
+    buffered: true
+power:
+  voltage:
+    max: 24
+data:
+  storage:
+    - type: uSD # SD card with Pixout firmware
+features:
+  - ArtNet DMX cue recording and playback
+  - Web control panels and iOS/Android remote app
 price: 300
-standalone: true
-storage: Yes
-url: http://pixout.lighting/
-warranty: null
-waterproof: null
-wled_compatible: null

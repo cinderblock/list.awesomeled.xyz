@@ -1,26 +1,13 @@
 name: TM1829
-release_year: null
 creator: Titan Micro Electronics
-notes: null
-aggregate_bits: null
-backup_data_line: null
-channel_bits: 8
-channels: 3
-clocked: false
-data_bitrate: null
-data_type: null
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-max_current: null
-max_pixels_per_string: null
-other_links: TM1829 Pixel Protocol Overview | Advatek Lighting
-output_voltage: null
-package_size: SOP8
-pin_count: 8
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: 7.0kHz
-quiescent_current: null
-supply_voltage: null
-third_party_testing: null
+color:
+  channel_bits: 8
+  pwm_frequency: 7.0kHz
+data:
+  clocked: false
+  channels: 3
+other_links:
+  - TM1829 Pixel Protocol Overview | Advatek Lighting
+physical:
+  package_size: SOP8
+  pin_count: 8

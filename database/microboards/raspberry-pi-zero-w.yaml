@@ -1,26 +1,34 @@
 name: Raspberry Pi Zero W
 release_year: 2017
-creator: Raspberry Pi Foundation
-notes: null
-bluetooth: '4.1'
-bms: false
-clock_speed: 1.0GHz
-cpu: ARM11
-ethernet: USB
-flash: microSD
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv6Z
-linux: true
-max_input_voltage: 5V
-max_outputs: 1
-min_input_voltage: 5V
-poe: null
+creator:
+  name: Raspberry Pi Foundation
+  page: https://www.raspberrypi.com/products/raspberry-pi-zero-w/
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+compute:
+  soc: BCM2835
+  cpu: ARM11
+  isa: ARMv6Z
+  clock_speed: 1.0GHz
+  flash: microSD
+  ram: 512MB
+  linux: true
+connectivity:
+  wifi: 2.4GHz
+  ethernet: USB
+  bluetooth: '4.1'
+  usb: OTG
+  serial: true
+images:
+  - file: raspberry-pi-zero-w.webp
+    source: https://www.raspberrypi.com/products/raspberry-pi-zero-w/
+    credit: Raspberry Pi
+io:
+  max_outputs: 1
+  storage: microSD
+  bms: 'No'
+  imu: false
 price: 10
-ram: 512MB
-soc: BCM2835
-storage: microSD
-ttl_serial: true
-url: https://www.raspberrypi.org/products/raspberry-pi-zero-w/
-usb: OTG
-wifi: 2.4GHz

@@ -1,13 +1,14 @@
 name: ESP32 ThingPlus DMX to LED
 creator: Sparkfun
 notes: Isolated DMX , Artnet compatible
-outputs: Both
+outputs:
+  pixel_types: Single+Clocked
+  connectors: Poke Home
+  description: Both
+power:
+  voltage: 12V
 diy_or_ots: OTS
-max_channels: null
-max_current: null
-max_voltage: 12V
-output_connectors: Poke Home
+links:
+  product: https://www.sparkfun.com/products/15110
 parent: ESP32
-pixel_types: Single+Clocked
 price: 20
-url: https://www.sparkfun.com/products/15110

@@ -1,31 +1,30 @@
 name: MT30/60
 creator: Generic
 notes: 3 Pin XT 60
-board_fingers: false
-colors: Yellow or Black
-contact_type: Pins
-convention: null
-crimp: false
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP20-IP65
-largest_gauge: 16 AWG
-locking: Friction
-max_current: 30/60
-max_pins: 3
-max_voltage: 60 V
-min_pins: 3
-mouser_url: null
-outline: Triangular
-panel_mount: false
-pcb_mount: false
-pinout: null
-pitch: null
-rows: null
-screw_terminal: false
-smallest_gauge: 20 AWG
-solder: true
-url: https://www.flyingtech.co.uk/cables-connectors/amass-nylon-mt60-3-pole-motor-esc-35mm-connector
-wire_to_wire: true
+links:
+  product: https://www.flyingtech.co.uk/cables-connectors/amass-nylon-mt60-3-pole-motor-esc-35mm-connector
+mechanical:
+  outline: Triangular
+  contact_type: Pins
+  min_pins: 3
+  max_pins: 3
+  gendered: true
+  locking: Friction
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 60 A # MT60; the smaller MT30 variant is rated 30 A
+  max_voltage: 60 V
+  ip_rating: IP20-IP65
+termination:
+  solder: true
+  screw_terminal: false
+  crimp: false
+  idc: false
+  smallest_gauge: 20 AWG
+  largest_gauge: 16 AWG
+wiring:
+  colors: Yellow or Black
 year_introduced: 2018

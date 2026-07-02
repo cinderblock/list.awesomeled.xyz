@@ -2,25 +2,35 @@ name: WS2818B
 release_year: 2018
 creator: WorldSemi
 notes: 12V WS2813 as separate IC
-aggregate_bits: null
-backup_data_line: true
-channel_bits: 8
-channels: 3
-clocked: false
-data_bitrate: 800kHz
-data_type: WS2811/12
-datasheet_url: http://www.world-semi.com/technology/details-104-4.html
-gpio_max: 5V
-gpio_min: 3.0V
-max_current: 16mA
-max_pixels_per_string: null
-other_links: WS2818 Pixel Protocol Overview | Advatek Lighting
-output_voltage: 12V
-package_size: SOP8,CPC8
-pin_count: 8
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-pwm_frequency: 2.0kHz
-quiescent_current: 2.1mA
-supply_voltage: 5V
-third_party_testing: null
+color:
+  channel_bits: 8
+  pwm_frequency: 2.0kHz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: http://www.world-semi.com/technology/details-104-4.html
+dead_links:
+  - url: http://www.world-semi.com/technology/details-104-4.html
+    archive: https://web.archive.org/web/20200720001510/http://www.world-semi.com:80/technology/details-104-4.html
+    checked: '2026-07-01'
+electrical:
+  output_voltage: 12V
+  supply_voltage: 5V
+  gpio:
+    min: 3.0V
+    max: 5V
+  max_current: 16mA
+  quiescent_current: 2.1mA
+other_links:
+  - WS2818 Pixel Protocol Overview | Advatek Lighting
+physical:
+  package_size: SOP8,CPC8
+  pin_count: 8
+related:
+  - type: related
+    ref: pixels/ws2813

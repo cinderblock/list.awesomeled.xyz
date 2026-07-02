@@ -1,26 +1,28 @@
 name: Trinket M0
-release_year: null
-creator: Adafruit
-notes: null
-bluetooth: null
-bms: Diode
-clock_speed: 48MHz
-cpu: ARM Cortex-M0
-ethernet: null
-flash: 256kB
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv6-M
-linux: false
-max_input_voltage: 5V
-max_outputs: 4
-min_input_voltage: null
-poe: null
+creator:
+  name: Adafruit
+  page: https://www.adafruit.com/product/3500
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 3.3V
+compute:
+  soc: ATSAMD21E18
+  cpu: ARM Cortex-M0
+  isa: ARMv6-M
+  clock_speed: 48MHz
+  flash: 256kB
+  ram: 32kB
+  linux: false
+connectivity:
+  usb: OTG
+  serial: true
+images:
+  - file: trinket-m0.webp
+    source: https://www.adafruit.com/product/3500
+    credit: Adafruit Industries
+io:
+  max_outputs: 4
+  bms: Diode
+  imu: false
 price: 9
-ram: 32kB
-soc: ATSAMD21E18
-storage: null
-ttl_serial: true
-url: https://www.adafruit.com/product/3500
-usb: OTG
-wifi: null

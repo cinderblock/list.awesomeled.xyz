@@ -1,6 +1,7 @@
 import { Moon, Sun } from 'lucide-react';
 import { useSyncExternalStore } from 'react';
 import { useTheme } from '~/hooks/useTheme';
+import { Tooltip } from '~/components/ui/Tooltip';
 
 const emptySubscribe = () => () => {};
 
@@ -27,13 +28,14 @@ export function ThemeToggle() {
   }
 
   return (
-    <button
-      onClick={toggle}
-      className="btn btn--ghost btn--icon"
-      aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
-      title={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
-    >
-      {resolvedTheme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-    </button>
+    <Tooltip content={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}>
+      <button
+        onClick={toggle}
+        className="btn btn--ghost btn--icon"
+        aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
+      >
+        {resolvedTheme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+      </button>
+    </Tooltip>
   );
 }

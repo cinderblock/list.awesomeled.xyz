@@ -1,24 +1,34 @@
 name: K64D-B
 status: active
-release_year: null
-creator: KulpLights, LLC
-notes: Onboard sound, FM transmitter optional.
-outputs: Single
-auxiliary_outputs: DMX x2
-buffered: null
-interfaces:
-  - Ethernet
-  - Wi-Fi
-max_current: null
-max_outputs: 64
-max_pixels: 80000
-max_voltage: 5V
-output_connectors: RJ45
-pixel_types: async
-price: 230
-standalone: true
-storage: Yes
-url: https://kulplights.com/product/k64d-b/
-warranty: null
-waterproof: null
-wled_compatible: null
+creator:
+  name: KulpLights, LLC
+  url: https://kulplights.com
+  page: https://kulplights.com/product/k64d-b/
+notes: BeagleBone Black cape running FPP (Ethernet/storage via the BBB; Wi-Fi only
+  if paired with a BBB Wireless host). 16 RJ45 differential ports driving 64
+  strings via standard or v1/v2 Smart receivers. Two UART differential outputs
+  for DMX/Renard/LOR/PixelNet. Onboard sound, FM transmitter optional.
+inputs:
+  physical:
+    Ethernet: true # provided by the BeagleBone Black host
+  standalone: true # Falcon Player (FPP)
+  requires_host: BeagleBone Black
+outputs:
+  connector: RJ45
+  count: 64 # 16 RJ45 differential ports, 4 strings each via Smart receivers
+  differential: true
+  clocked: false # async pixels only
+  auxiliary:
+    DMX512: 2 # two UART differential outputs (DMX/Renard/LOR/PixelNet)
+power:
+  voltage:
+    max: 5
+data:
+  storage:
+    - type: uSD # via the BeagleBone Black host
+features:
+  - Onboard sound
+  - Optional FM transmitter
+price: 130 # board-only per kulplights.com
+technical_notes:
+  - Up to 80000 pixels total across all outputs

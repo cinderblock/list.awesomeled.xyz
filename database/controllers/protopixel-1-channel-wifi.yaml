@@ -1,24 +1,30 @@
 name: ProtoPixel 1 channel Wi-Fi
 status: active
-release_year: null
-creator: ProtoPixel
-notes: null
-outputs: Single
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-  - DMX
-max_current: null
-max_outputs: 1
-max_pixels: 600
-max_voltage: 12V
-output_connectors: Phoenix Screw
-pixel_types: async
+creator:
+  name: ProtoPixel
+  url: https://www.protopixel.io
+  page: https://www.protopixel.io/pricing
+inputs:
+  physical:
+    Wi-Fi: 2.4GHz # IEEE 802.11 b/g/n
+  protocols:
+    - Art-Net
+    - sACN # up to 4 universes
+  standalone: true # plays autonomous content from microSD
+outputs:
+  count: 1
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 600
+  clocked: false # WS2811/WS2812b/WS2813/WS2815/SK6812 families
+power:
+  voltage:
+    min: 5
+    max: 12 # powered directly from the LED fixture (5V or 12V)
+data:
+  fps: 30 # 30fps in streaming
+  storage:
+    - type: uSD
 price: 221
-standalone: true
-storage: Yes
-url: https://www.protopixel.io/pricing
-warranty: null
-waterproof: null
-wled_compatible: null

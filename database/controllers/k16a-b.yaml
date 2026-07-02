@@ -1,24 +1,37 @@
 name: K16A-B
-status: active
-release_year: null
-creator: KulpLights, LLC
-notes: 16 channels require differential receivers. Onboard sound, FM transmitter
-  optional, eFuse power distribution
-outputs: Single
-auxiliary_outputs: DMX x2
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 60A
-max_outputs: 48
-max_pixels: 72000
-max_voltage: 12V
-output_connectors: Phoenix Screw/RJ45
-pixel_types: async
-price: 160
-standalone: true
-storage: Yes
-url: https://kulplights.com/product/k16a-b/
-warranty: null
-waterproof: null
-wled_compatible: null
+status: discontinued
+creator:
+  name: KulpLights, LLC
+  page: https://www.wiredwatts.com/products/klk16a-bv3
+notes: BeagleBone Black cape running FPP. 16 fused local ports plus 4 RJ45
+  differential ports (not Ethernet) expanding to 48 strings via Smart Receivers.
+  Onboard sound, FM transmitter optional.
+inputs:
+  physical:
+    Ethernet: true # via the BeagleBone Black
+  standalone: true # Falcon Player (FPP)
+  requires_host: BeagleBone Black
+outputs:
+  count: 16 # local ports; expands to 48 strings via Smart Receivers
+  connector: Phoenix Screw/RJ45
+  driver:
+    buffered: true
+  differential: true # 4 RJ45 differential ports for Smart Receivers
+  clocked: false # async pixels only
+  auxiliary:
+    DMX512: 2 # two RS485 outputs (DMX/PixelNet/Renard/LOR)
+power:
+  voltage:
+    max: 12
+  current:
+    max: 60
+data:
+  storage:
+    - type: uSD # via the BeagleBone Black
+features:
+  - Replaceable fuses with indicator LEDs
+  - Onboard sound output
+  - Optional FM transmitter
+price: 130
+technical_notes:
+  - Two RS485 outputs support DMX / PixelNet / Renard / LOR

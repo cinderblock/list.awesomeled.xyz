@@ -1,26 +1,17 @@
 name: t-eth-lite
 release_year: 2024
-creator: Lilygo
+creator:
+  name: Lilygo
+  page: https://www.lilygo.cc/products/t-eth-lite
 notes: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
-bluetooth: '4.1'
-bms: null
-clock_speed: null
-cpu: Xtensa LX6
-ethernet: 100BASE-TX
-flash: microSD
-gpio_voltage: null
-imu: null
-isa: Xtensa
-linux: null
-max_input_voltage: null
-max_outputs: null
-min_input_voltage: null
-poe: Y
+compute:
+  soc: ESP32 S3
+  cpu: Xtensa LX6
+  isa: Xtensa
+  flash: microSD
+connectivity:
+  wifi: 2.4GHz
+  ethernet: 100BASE-TX
+  bluetooth: '4.1'
+  poe: 'Y'
 price: 15
-ram: null
-soc: ESP32 S3
-storage: null
-ttl_serial: null
-url: https://www.lilygo.cc/products/t-eth-lite
-usb: null
-wifi: 2.4GHz

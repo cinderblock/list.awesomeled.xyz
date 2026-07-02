@@ -1,23 +1,32 @@
 name: SP108E
 status: active
-release_year: null
 creator: Sperll
-notes: null
-outputs: Single and Clock
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - DMX
-max_current: null
-max_outputs: 1
-max_pixels: 2048
-max_voltage: 24V
-output_connectors: Screw
-pixel_types: both
+vendors:
+  - name: LED Lighting Hut
+    page: https://www.ledlightinghut.com/sp108e-wifi-spi-led-controller.html
+notes: Wi-Fi SPI pixel controller configured via the 'LED Shop' phone app. The source
+  sheet's 'DMX' interface referred to supported DMX-type pixel ICs, not a DMX input.
+inputs:
+  physical:
+    Wi-Fi: 2.4GHz
+  standalone: true
+outputs:
+  count: 1
+  connector: Screw
+  clocked: selectable
+  pixels:
+    max_per_output: 2048
+  protocols:
+    - WS281x
+    - SK6812
+    - APA102
+    - SK9822
+    - LPD6803
+    - LPD8806
+    - UCS1903
+    - SM16703
+power:
+  voltage:
+    min: 5
+    max: 24
 price: 25
-standalone: null
-storage: null
-url: Amazon
-warranty: null
-waterproof: null
-wled_compatible: null

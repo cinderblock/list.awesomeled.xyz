@@ -1,26 +1,5 @@
 name: TC2811
-release_year: null
 creator: Unknown
 notes: WS2811 Clone
-aggregate_bits: null
-backup_data_line: null
-channel_bits: null
-channels: 3
-clocked: null
-data_bitrate: null
-data_type: null
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-max_current: null
-max_pixels_per_string: null
-other_links: null
-output_voltage: null
-package_size: null
-pin_count: null
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: null
-quiescent_current: null
-supply_voltage: null
-third_party_testing: null
+data:
+  channels: 3

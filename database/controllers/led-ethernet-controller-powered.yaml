@@ -1,23 +1,35 @@
 name: LED Ethernet Controller Powered
 status: active
-release_year: null
-creator: LED Strip Studio
-notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
-outputs: Single & Clock & DMX
-auxiliary_outputs: DMX
-buffered: true
-interfaces:
-  - Wi-Fi
-max_current: 20A
-max_outputs: 4
-max_pixels: 4096
-max_voltage: 24V
-output_connectors: Phoenix Plug
-pixel_types: both
+creator:
+  name: LED Strip Studio
+  url: https://www.ledstripstudio.com
+  page: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+vendors:
+  - name: LED Strip Studio
+    url: https://www.ledstripstudio.com
+    warranty: 5 Years
+inputs:
+  physical:
+    Wi-Fi: true
+  standalone: true
+outputs:
+  count: 4
+  connector: Phoenix Plug
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 1024
+  clocked: selectable
+  auxiliary:
+    DMX512: 1
+power:
+  voltage:
+    max: 24
+  current:
+    max: 20
+data:
+  storage:
+    - type: SD
 price: 850
-standalone: true
-storage: SD
-url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
-warranty: 5 Years
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - Hardware manual https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf

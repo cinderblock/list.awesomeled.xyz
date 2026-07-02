@@ -1,10 +1,11 @@
 name: TXS0108e
 creator: Texas Instruments
-notes: null
-buffered: null
-channels: 8
-interface: null
-max_current: null
-max_voltage: null
-price: null
-url: null
+io:
+  channels: 8
+price: # TI list price, ti.com 2026-07
+  - qty: 1
+    price: 1.387
+    sku: TXS0108EPWR
+  - qty: 1000
+    price: 0.619
+    sku: TXS0108EPWR

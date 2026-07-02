@@ -14,7 +14,9 @@ export async function loader() {
     zip.file(`${category.id}.csv`, csv);
   }
 
-  const content = await zip.generateAsync({ type: 'arraybuffer' });
+  // Copy into a fresh Uint8Array<ArrayBuffer>: JSZip's Uint8Array<ArrayBufferLike>
+  // isn't assignable to BodyInit under TS 5.7 lib.dom types.
+  const content = new Uint8Array(await zip.generateAsync({ type: 'uint8array' }));
 
   return new Response(content, {
     headers: {

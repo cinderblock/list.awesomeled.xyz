@@ -4,63 +4,149 @@
   "title": "Diffusive Material",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
     "name": {
       "type": "string"
     },
-    "url": {
-      "type": ["string", "null"]
+    "creator": {
+      "anyOf": [
+        {
+          "type": ["string", "null"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
-    "color_rendition": {
-      "type": ["integer", "string", "null"],
-      "description": "Rating 1-5"
+    "manufacturers": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
     },
-    "light_transmission": {
-      "type": ["integer", "string", "null"],
-      "description": "Rating 1-5"
-    },
-    "flexible": {
-      "type": ["boolean", "string", "null"],
-      "description": "F for flexible, R for rigid"
-    },
-    "purpose_made": {
-      "type": ["boolean", "null"]
-    },
-    "properties": {
-      "type": ["string", "null"]
-    },
-    "fire_retardant": {
-      "type": ["boolean", "null"]
-    },
-    "tinted": {
-      "type": ["string", "null"],
-      "description": "T for tinted, C for clear, T&C for both"
-    },
-    "sample_thickness": {
-      "type": ["string", "null"]
-    },
-    "diffusivity": {
-      "type": ["integer", "string", "null"],
-      "description": "Rating 1-5"
-    },
-    "sizes_available": {
-      "type": ["string", "null"]
+    "vendors": {
+      "type": ["array", "null"],
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "page": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
     },
     "material_type": {
       "type": ["string", "null"]
     },
-    "price_range": {
-      "type": ["string", "null"],
-      "description": "$ to $$$$$"
+    "purpose_made": {
+      "type": ["boolean", "null"],
+      "description": "Designed specifically for LED diffusion"
     },
     "notes": {
       "type": ["string", "null"]
+    },
+    "optical": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "color_rendition": {
+          "type": ["integer", "string", "null"],
+          "description": "Rating 1-5"
+        },
+        "light_transmission": {
+          "type": ["integer", "string", "null"],
+          "description": "Rating 1-5"
+        },
+        "diffusivity": {
+          "type": ["integer", "string", "null"],
+          "description": "Rating 1-5"
+        },
+        "tinted": {
+          "type": ["string", "null"],
+          "description": "T tinted, C clear, T&C both"
+        }
+      }
+    },
+    "physical": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "flexible": {
+          "type": ["boolean", "string", "null"],
+          "description": "F flexible, R rigid"
+        },
+        "fire_retardant": {
+          "type": ["boolean", "null"]
+        },
+        "sample_thickness": {
+          "type": ["number", "string", "null"],
+          "description": "Thickness in mm"
+        },
+        "sizes_available": {
+          "type": ["string", "null"]
+        },
+        "properties": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "pricing": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "price_range": {
+          "type": ["string", "null"],
+          "description": "$ to $$$$$"
+        }
+      }
+    },
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "product": {
+          "type": ["string", "null"]
+        }
+      }
     },
     "image": {
       "$ref": "common.json#/definitions/image"
     },
     "images": {
       "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    },
+    "dead_links": {
+      "$ref": "common.json#/definitions/dead_links"
     }
   }
 }

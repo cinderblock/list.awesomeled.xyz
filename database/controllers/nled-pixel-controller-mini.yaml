@@ -1,23 +1,23 @@
 name: NLed Pixel Controller Mini
 status: active
-release_year: null
-creator: Northern Lights Electronic Design
-notes: null
-outputs: null
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - ArtNet Ethernet
-max_current: null
-max_outputs: 1
-max_pixels: 170
-max_voltage: 25V
-output_connectors: Phoenix Screw
-pixel_types: both
+creator:
+  name: Northern Lights Electronic Design
+  page: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
+inputs:
+  physical:
+    Ethernet: true
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  count: 1
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 170
+  clocked: selectable
+power:
+  voltage:
+    max: 25
 price: 14
-standalone: false
-storage: null
-url: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
-warranty: null
-waterproof: null
-wled_compatible: null

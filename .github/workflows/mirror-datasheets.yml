@@ -1,0 +1,94 @@
+name: Mirror datasheets to R2
+
+# Contributors add `datasheet.url` to an entry in a normal PR (no secrets,
+# fork-safe). After that merges, this workflow finds datasheets that aren't
+# mirrored yet, downloads them, uploads to R2, and opens a bot PR adding the
+# `datasheet.mirror` references for the maintainer to approve.
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'database/**.yaml'
+  workflow_dispatch:
+
+concurrency:
+  group: mirror-datasheets
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # No-op until the R2 secrets are configured (docs/datasheet-mirroring.md)
+      - name: Check R2 configuration
+        id: r2
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+        run: |
+          if [ -n "$R2_ACCOUNT_ID" ]; then
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::R2 secrets not configured yet - skipping datasheet mirroring."
+          fi
+
+      - uses: oven-sh/setup-bun@v2
+        if: steps.r2.outputs.configured == 'true'
+        with:
+          bun-version: latest
+
+      - if: steps.r2.outputs.configured == 'true'
+        run: bun install --frozen-lockfile
+
+      - name: Mirror new datasheets
+        if: steps.r2.outputs.configured == 'true'
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          MIRROR_SUMMARY_FILE: ${{ runner.temp }}/mirror-summary.md
+        run: bun run mirror-datasheets
+
+      - name: Validate database after rewrite
+        if: steps.r2.outputs.configured == 'true'
+        run: bun run validate
+
+      - name: Read summary
+        if: steps.r2.outputs.configured == 'true'
+        id: summary
+        run: |
+          if [ -f "$RUNNER_TEMP/mirror-summary.md" ]; then
+            { echo "body<<EOF"; cat "$RUNNER_TEMP/mirror-summary.md"; echo "EOF"; } >> "$GITHUB_OUTPUT"
+          else
+            echo "body=No changes." >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open PR with mirror references
+        if: steps.r2.outputs.configured == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: ci/mirror-datasheets
+          title: 'data: mirror new datasheets to R2'
+          commit-message: |
+            data: mirror new datasheets to R2
+
+            Automated by .github/workflows/mirror-datasheets.yml
+          body: |
+            Mirrored the following datasheets to R2 and recorded
+            `datasheet.mirror` (URL, sha256, retrieved, source) in the YAML:
+
+            ${{ steps.summary.outputs.body }}
+
+            Original `datasheet.url` values are untouched (attribution).
+          add-paths: database/**
+          delete-branch: true

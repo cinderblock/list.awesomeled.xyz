@@ -1,23 +1,17 @@
 name: LED Player M
 status: unknown
-release_year: null
 creator: Diamex
-notes: null
-outputs: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 1
-max_pixels: 512
-max_voltage: 5V
-output_connectors: Phoenix Screw
-pixel_types: both
+inputs:
+  physical:
+    Ethernet: true
+  standalone: true
+outputs:
+  count: 1
+  connector: Phoenix Screw
+  pixels:
+    max_per_output: 512
+  clocked: selectable
+power:
+  voltage:
+    max: 5
 price: 40
-standalone: true
-storage: null
-url: https://www.led-genial.de/LED-Controller-L-Rev2-fuer-WS2812-Effekte-abspielen-und-TPM2-ueber-USB
-warranty: null
-waterproof: null
-wled_compatible: null

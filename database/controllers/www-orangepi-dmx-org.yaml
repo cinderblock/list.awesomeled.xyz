@@ -1,24 +1,20 @@
 name: www.orangepi-dmx.org
 status: active
-release_year: null
-creator: Arjan VanVught /Open Source
-notes: Unique central configuration with human readable UPD messages. No FPS
-  limit. Except what is given for the pixel protocol
-outputs: Data, Clock, SPI
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 8
-max_pixels: 5440
-max_voltage: null
-output_connectors: null
-pixel_types: both
+creator:
+  name: Arjan van Vught (Open Source)
+  url: http://www.orangepi-dmx.org
+  page: http://www.orangepi-dmx.org
+notes: Unique central configuration with human readable UDP messages. No FPS limit except what is given for the pixel protocol.
+inputs:
+  physical:
+    Ethernet: true
+  standalone: true
+outputs:
+  count: 8
+  pixels:
+    max_per_output: 680 # 5440 total / 8 outputs
+  driver:
+    buffered: true
+  clocked: selectable # supports both clocked and clockless pixels
 price: 50
-standalone: true
-storage: null
-url: www.orangepi-dmx.org
-warranty: null
-waterproof: null
-wled_compatible: null
+wled_compatible: false

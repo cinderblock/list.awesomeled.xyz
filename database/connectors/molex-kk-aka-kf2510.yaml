@@ -1,31 +1,28 @@
 name: Molex KK AKA KF2510
 creator: Molex
 notes: Molex KK Pitch 2.54 ( 1/10") Arduino pitch also 3.96 and 5.08 . Industrial standard connector common in amusement machines. Larger contact area than XH. Clones KF2510 2.54 CH 3.96 and CH5.08
-board_fingers: true
-colors: null
-contact_type: Pins
-convention: Male jack on board, female plug
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 22 AWG
-locking: Latching
-max_current: 4 A
-max_pins: 36
-max_voltage: 250 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: PTH
-pinout: null
-pitch: 2.54mm
-rows: null
-screw_terminal: null
-smallest_gauge: 30 AWG
-solder: true
-url: https://www.molex.com/molex/products/family/kk
-wire_to_wire: false
-year_introduced: null
+links:
+  product: https://www.molex.com/molex/products/family/kk
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 2.54mm
+  min_pins: 2
+  max_pins: 36
+  gendered: true
+  locking: Latching
+  panel_mount: false
+  wire_to_wire: false
+  pcb_mount: PTH
+  board_fingers: true
+ratings:
+  max_current: 4 A
+  max_voltage: 250 V
+termination:
+  solder: true
+  crimp: true
+  idc: false
+  smallest_gauge: 30 AWG
+  largest_gauge: 22 AWG
+wiring:
+  convention: Male jack on board, female plug

@@ -1,15 +1,18 @@
 name: Textured Acrylic, various
 notes: I think "frost" was best
-color_rendition: 4
-diffusivity: 1-2
-fire_retardant: true
-flexible: R
-light_transmission: 5
+links:
+  product: https://www.eplastics.com/SAMPLE-ACRYPATTERN
 material_type: PMMA Poly Methyl Meth Acrylate
-price_range: $$$
-properties: Transparent
+optical:
+  color_rendition: 4
+  light_transmission: 5
+  diffusivity: 1-2
+  tinted: C
+physical:
+  flexible: R
+  fire_retardant: true
+  sample_thickness: .125-.220
+  properties: Transparent
+pricing:
+  price_range: $$$
 purpose_made: true
-sample_thickness: .125-.220
-sizes_available: null
-tinted: C
-url: https://www.eplastics.com/SAMPLE-ACRYPATTERN

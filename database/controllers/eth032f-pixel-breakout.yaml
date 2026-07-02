@@ -1,23 +1,35 @@
 name: ETH032F Pixel Breakout
 status: discontinued
 release_year: 2022
-creator: GO 3D France
-notes: Ethernet ESP32 board breakout with fuses runs Wled
-outputs: Single and Clock
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 20A
-max_outputs: 4
-max_pixels: 2040
-max_voltage: 24V
-output_connectors: Phoenix Screw
-pixel_types: async
+creator:
+  name: GO 3D France
+  page: https://go3d.fr/produit/carte-de-controle-pour-led-pixels-eth032f/
+notes: Ethernet ESP32 board breakout with fuses runs WLED
+inputs:
+  physical:
+    Ethernet: true
+  standalone: false
+outputs:
+  count: 4
+  connector: Phoenix Screw
+  pixels:
+    max_per_output: 510 # 2040 total / 4 outputs
+  clocked: selectable # supports single-wire and clocked pixels
+  driver:
+    buffered: true
+power:
+  voltage:
+    max: 24
+  current:
+    max: 20
+core:
+  family: ESP32
+dead_links:
+  - url: https://go3d.fr/produit/carte-de-controle-pour-led-pixels-eth032f/
+    archive: https://web.archive.org/web/20221208030737/https://go3d.fr/
+    checked: '2026-07-01'
+    notes: Vendor site is gone; go3d.fr was re-registered by an unrelated company
+features:
+  - Per-output fuses
 price: 55
-standalone: false
-storage: null
-url: https://go3d.fr/produit/carte-de-controle-pour-led-pixels-eth032f/
-warranty: null
-waterproof: null
 wled_compatible: true

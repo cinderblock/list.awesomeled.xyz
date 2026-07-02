@@ -1,31 +1,29 @@
 name: '9159'
 creator: AVX
-notes: null
-board_fingers: true
-colors: White
-contact_type: Spring
-convention: null
-crimp: true
-digikey_url: https://www.digikey.com/short/zvwmnz
-gendered: true
-idc: true
-ip_rating: null
-largest_gauge: 22 AWG
-locking: Latching
-max_current: 5 A
-max_pins: 6
-max_voltage: 125 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: SMT
-pinout: null
-pitch: 3.0 mm
-rows: 1
-screw_terminal: null
-smallest_gauge: 24 AWG
-solder: true
-url: https://www.avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://www.avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/
+  digikey: https://www.digikey.com/short/zvwmnz
+mechanical:
+  outline: Rectangular
+  contact_type: Spring
+  pitch: 3.0 mm
+  min_pins: 2
+  max_pins: 6
+  rows: 1
+  gendered: true
+  locking: Latching
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: SMT
+  board_fingers: true
+ratings:
+  max_current: 5 A
+  max_voltage: 125 V
+termination:
+  solder: true
+  crimp: true
+  idc: true
+  smallest_gauge: 24 AWG
+  largest_gauge: 22 AWG
+wiring:
+  colors: White

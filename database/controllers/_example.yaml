@@ -97,7 +97,11 @@ features:
   - Built-in sequencer with pattern editor
 
 images:
-  - example-controller-pro.jpg
+  # Preferred form: object with source/credit so attribution travels with the file
+  - file: example-controller-pro.jpg
+    source: https://example.com/controller-pro
+    credit: Example Company
+  # Bare filenames stay valid (legacy / self-made photos)
   - example-controller-pro-back.jpg
   - example-controller-pro-wiring.jpg
 
@@ -196,7 +200,9 @@ data:
 name: Example Legacy Controller
 status: discontinued
 release_year: 2018
-creator: Defunct Company
+creator:
+  name: Defunct Company
+  page: https://defunct-company.example/legacy-controller # dead; see dead_links
 manufacturers:
   - Defunct Company
 notes: No longer manufactured, limited firmware support
@@ -222,6 +228,24 @@ case:
 
 data:
   storage: null
+
+dead_links:
+  # URLs elsewhere in this entry that no longer work. Pages keep the original
+  # for attribution but link to `archive` — or, when omitted, to the newest
+  # Wayback Machine capture. Curate `archive` when the domain changed hands.
+  - url: https://defunct-company.example/legacy-controller
+    archive: https://web.archive.org/web/2019/https://defunct-company.example/legacy-controller
+    checked: 2026-07-01
+
+related:
+  # Declare relationships on one side only; the other entry's page derives the
+  # reverse direction ("Replaces", "Succeeded by", ...) automatically.
+  - type: replacement
+    ref: controllers/example-controller-pro # in-database: <category>/<filename minus .yaml>
+  - type: variant
+    name: Example Legacy Controller XL # not in the database: name (+ optional url)
+    url: https://example.com/legacy-xl
+    notes: Same board with 16 outputs
 ---
 # Example 5: Industrial controller with limited availability
 name: Example Industrial Controller
@@ -275,6 +299,11 @@ features:
   - Industrial eFuse
   - Current monitoring per port
   - Remote diagnostics
+
+price:
+  # Non-USD price: keep the original currency; tables sort by USD equivalent
+  amount: 1500
+  currency: EUR
 
 # disable URL checks on this file
 # textlint-disable

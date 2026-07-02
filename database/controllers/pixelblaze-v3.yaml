@@ -1,23 +1,37 @@
 name: Pixelblaze V3
 status: active
 release_year: 2018
-creator: ElectroMage
+creator:
+  name: ElectroMage
+  url: https://electromage.com
+  page: https://electromage.com/pixelblaze
 notes: $19 busable output expanders have 8ch ea (max 51K pixels).
-outputs: Single and Clock
-auxiliary_outputs: GPIO
-buffered: true
-interfaces:
-  - Ethernet
-max_current: 1.8A
-max_outputs: 1
-max_pixels: 5000
-max_voltage: 5V
-output_connectors: Solder / Screw
-pixel_types: both
+inputs:
+  physical:
+    Wi-Fi: 2.4GHz # ESP32 onboard
+  standalone: true # runs patterns from onboard flash without external input
+outputs:
+  count: 1
+  connector: Solder / Screw
+  driver:
+    buffered: true
+  current:
+    max: 1.8
+  pixels:
+    max_per_output: 5000 # 5000 APA102 / 2500 WS2812
+  clocked: selectable # single and clock-based pixels both supported
+power:
+  voltage:
+    max: 5
+  current:
+    max: 1.8
+core:
+  family: ESP32
+data:
+  storage:
+    - type: Flash # ESP32 onboard flash for pattern storage
+features:
+  - GPIO pins (analog and touch inputs on Standard)
+  - Web-based live pattern editor
+  - Output Expander Boards (8 channels each, up to 51K pixels total)
 price: 35
-standalone: true
-storage: Yes
-url: https://electromage.com/pixelblaze
-warranty: null
-waterproof: null
-wled_compatible: null

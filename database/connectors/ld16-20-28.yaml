@@ -1,31 +1,30 @@
 name: LD16 /20/28
 creator: Generic
-notes: Screw Terminal , No Soldering !, version of SP16/17/20/21/28 LD13 is 2 terminal only, LD16 /20 /28 shell sizes
-board_fingers: false
-colors: Black Blue
-contact_type: Pins
-convention: null
-crimp: false
-digikey_url: null
-gendered: false
-idc: false
-ip_rating: IP68
-largest_gauge: 14 AWG
-locking: Screw Lock
-max_current: 10 A
-max_pins: 7
-max_voltage: 250 V
-min_pins: 2
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: null
-screw_terminal: true
-smallest_gauge: 28 AWG
-solder: false
-url: https://www.aliexpress.com/item/1005003521328338.html
-wire_to_wire: true
+notes: 'Screw Terminal , No Soldering !, version of SP16/17/20/21/28 LD13 is 2 terminal only, LD16 /20 /28 shell sizes'
+links:
+  product: https://www.aliexpress.com/item/1005003521328338.html
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 2
+  max_pins: 7
+  gendered: false
+  locking: Screw Lock
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 10 A
+  max_voltage: 250 V
+  ip_rating: IP68
+termination:
+  solder: false
+  screw_terminal: true
+  crimp: false
+  idc: false
+  smallest_gauge: 28 AWG
+  largest_gauge: 14 AWG
+wiring:
+  colors: Black Blue
 year_introduced: 2022

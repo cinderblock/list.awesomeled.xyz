@@ -1,22 +1,43 @@
 name: Qolorpix
 status: unknown
-release_year: null
-creator: City Theatrical
-notes: DMX controlled replay unit
-outputs: Single
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Wi-Fi
-max_current: 120A
-max_outputs: 8
-max_pixels: 1920
-max_voltage: 5V
-output_connectors: XLR5
+creator:
+  name: City Theatrical
+  url: https://www.citytheatrical.com
+  page: http://www.citytheatrical.com/Products/qolorpix-tape-controller-eight-output
+notes: DMX-controlled LED tape replay unit (model 5850, "QolorPIX Tape Controller, Eight Output")
+inputs:
+  physical:
+    DMX: true # 5-pin XLR wired DMX512-A in/thru, with RDM
+    Multiverse: true # built-in Multiverse wireless DMX receiver
+  protocols:
+    - DMX512 # DMX512-A only; no Art-Net or sACN
+  standalone: true # 24 base effects + 4 recordable presets, runs without external controller
+outputs:
+  connector: XLR4 # 4-pin XLRF per output
+  count: 8
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 320
+power:
+  voltage:
+    min: 85 # 85-264 VAC mains input via PowerCON
+    max: 264
+case:
+  dimensions: 34.6cm L x 20.3cm W x 8.9cm H
+  mounting: 19" rack, 2U
+  waterproof: IP20
+data:
+  storage:
+    - type: uSD # firmware updates via micro-SD card
+features:
+  - Integrated power supply (no external PSU)
+  - Multiverse wireless DMX receiver
+  - Full RDM support (wired DMX and Multiverse)
+  - 24 base effects with recordable presets
+  - Test function and flicker finder
 price: 1500
-standalone: true
-storage: null
-url: http://www.citytheatrical.com/Products/qolorpix-tape-controller-eight-output#
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - 600W total output; 85-264 VAC input via PowerCON
+  - Max 10 m cable run to LED tape; up to 320 pixels per output
+  - Indoor use only (NEMA 1 / IP20 steel enclosure)

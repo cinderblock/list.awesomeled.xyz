@@ -1,25 +1,37 @@
 name: Baldrick17
 status: active
 release_year: 2025
-creator: ILIGHTTHAT
-inputs: 3
-outputs: Single
-auxiliary_outputs: false
-buffered: true
-image: baldrick-17.png
-interfaces:
-  - DDP
-  - Artnet
-  - E1.31
-max_current: 63.75
-max_outputs: 17
-max_pixels: 12750
-max_voltage: 48
-output_connectors: Phoenix Plug
-pixel_types: async
+creator:
+  name: ILIGHTTHAT
+  page: https://www.baldrickboard.com/en/boards/baldrick17
+inputs:
+  physical:
+    Ethernet: true # network input for DDP/Art-Net/sACN
+    buttons: 3 # three physical buttons for testing
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+    - DDP
+  standalone: true # no Pi or FPP licence required; FPP API control built in
+outputs:
+  count: 17
+  connector: Phoenix Plug
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 750 # up to 750 RGB pixels per port at 40fps
+  clocked: false # async / single-wire pixels
+  fuse: '7.5A' # 17 fused connectors with included 7.5 amp fuses
+power:
+  voltage:
+    min: 5
+    max: 48
+  current:
+    max: 63.75
+features:
+  - Per-output fused connectors
+  - Push from xLights integration
+  - FPP API control to start/stop sequences and full lamp control
+images:
+  - baldrick-17.webp
 price: 189
-standalone: null
-storage: null
-url: https://www.baldrickboard.com/en/boards/baldrick17
-warranty: null
-waterproof: false

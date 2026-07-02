@@ -1,12 +1,11 @@
 name: Intelligent Marquee System
 creator: TMB
 notes: 2 Wire addressable Festoon, Professional level pricing structure
-color_type: RGBW
 core_tech: Proprietary
-dedicated_psu: true
-dimming_resolution: null
-online_pricing: null
-pixels_per_run: 128
-price_range: $$$$$$
-since: null
+pricing:
+  price_range: $$$$$$
+specs:
+  pixels_per_run: 128
+  color_type: RGBW
+  dedicated_psu: true
 target_market: Festoon

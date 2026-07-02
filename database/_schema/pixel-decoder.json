@@ -4,47 +4,127 @@
   "title": "Pixel Decoder",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
     "name": {
       "type": "string"
     },
+    "status": {
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
     "creator": {
-      "type": ["string", "null"],
-      "description": "Original designer/developer of this item"
+      "anyOf": [
+        {
+          "type": ["string", "null"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "manufacturers": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Manufacturers that produce this item"
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
     },
     "vendors": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Vendors that sell/distribute this item"
+      "type": ["array", "null"],
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "page": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
     },
-    "max_channels": {
-      "type": ["integer", "null"]
-    },
-    "pixel_types": {
+    "notes": {
       "type": ["string", "null"]
     },
     "price": {
       "type": ["string", "number", "null"]
     },
-    "output_connectors": {
-      "type": ["string", "null"]
-    },
-    "outputs": {
-      "type": ["string", "null"]
-    },
     "diy_or_ots": {
       "type": ["string", "null"]
     },
-    "notes": {
-      "type": ["string", "null"]
+    "outputs": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "max_channels": {
+          "type": ["integer", "null"]
+        },
+        "pixel_types": {
+          "type": ["string", "null"]
+        },
+        "connectors": {
+          "type": ["string", "null"]
+        },
+        "description": {
+          "type": ["string", "null"]
+        }
+      }
     },
-    "url": {
-      "type": ["string", "null"]
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "product": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "related_connectors": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    },
+    "dead_links": {
+      "$ref": "common.json#/definitions/dead_links"
     }
   }
 }

@@ -1,24 +1,29 @@
 name: Pixelator
-status: unknown
-release_year: null
-creator: ENTTEC
-notes: null
-outputs: Proprietary
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Wi-Fi
-  - Ethernet
-max_current: null
-max_outputs: null
-max_pixels: 8192
-max_voltage: null
-output_connectors: RJ-45
-pixel_types: async
+status: discontinued
+creator:
+  name: ENTTEC
+  url: https://www.enttec.com
+  page: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
+inputs:
+  physical:
+    Ethernet: true # 10/100 Mbps RJ45 input
+    Wi-Fi: true
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+  standalone: true
+outputs:
+  count: 24 # RJ45 ports carrying proprietary PLINK protocol to PLINK injectors
+  connector: RJ-45
+  driver:
+    buffered: true
+  clocked: false # async pixel support
+dead_links:
+  - url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
+    checked: '2026-07-01'
+features:
+  - Proprietary PLINK protocol over Cat5e/Cat6 up to 300m to PLINK injectors
+  - Onboard storage / standalone playback
 price: 1891
-standalone: true
-storage: Yes
-url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - Controls up to 8192 RGB pixels (24,576 channels) across 24 PLINK ports

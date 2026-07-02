@@ -1,31 +1,30 @@
 name: MTSB CombiCon
 creator: Phoenix Contact
 notes: Also in 2.54 mm pitch , and literally thousands of variations
-board_fingers: true
-colors: Green
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: https://www.digikey.com/en/products/detail/phoenix-contact/1757035/260381?s=N4IgTCBcDaIIwHYCsCAMBmJIC6BfIA
-gendered: true
-idc: true
-ip_rating: null
-largest_gauge: 10 AWG
-locking: Friction
-max_current: 10 A
-max_pins: 12
-max_voltage: 300 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: Both
-pinout: null
-pitch: 5.08 mm
-rows: 1
-screw_terminal: null
-smallest_gauge: 20 AWG
-solder: true
-url: https://in.rsdelivers.com/product/phoenix-contact/1757035/phoenix-contact-classic-combicon-mstb-non-fused/1896032
-wire_to_wire: false
-year_introduced: null
+links:
+  product: https://in.rsdelivers.com/product/phoenix-contact/1757035/phoenix-contact-classic-combicon-mstb-non-fused/1896032
+  digikey: https://www.digikey.com/en/products/detail/phoenix-contact/1757035/260381?s=N4IgTCBcDaIIwHYCsCAMBmJIC6BfIA
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 5.08 mm
+  min_pins: 2
+  max_pins: 12
+  rows: 1
+  gendered: true
+  locking: Friction
+  panel_mount: false
+  wire_to_wire: false
+  pcb_mount: Both
+  board_fingers: true
+ratings:
+  max_current: 10 A
+  max_voltage: 300 V
+termination:
+  solder: true
+  crimp: true
+  idc: true
+  smallest_gauge: 20 AWG
+  largest_gauge: 10 AWG
+wiring:
+  colors: Green

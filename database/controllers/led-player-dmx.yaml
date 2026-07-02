@@ -1,23 +1,29 @@
 name: LED Player DMX
 status: unknown
-release_year: null
 creator: Diamex
-notes: null
-outputs: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 2
-max_pixels: 1024
-max_voltage: 5V
-output_connectors: Phoenix Screw
-pixel_types: async
+vendors:
+  - name: led-genial.de
+    url: https://www.led-genial.de
+    page: https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
+notes: Plays TPM2 animation files from a microSD card, triggered and addressed over DMX512.
+inputs:
+  physical:
+    DMX512: 3-pin XLR in + pass-through # 4 DMX channels, adjustable start address
+  standalone: true # plays TPM2 files from microSD without a host
+outputs:
+  count: 2
+  connector: Phoenix Screw
+  pixels:
+    max_per_output: 512 # 1024 total across 2 ports
+  clocked: false
+  protocols:
+    - WS2812 # RGB
+    - SK6812 # RGBW
+power:
+  voltage:
+    max: 5
+data:
+  storage:
+    - type: uSD
+      max_size: 32 # FAT32
 price: 99
-standalone: null
-storage: Yes
-url: https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
-warranty: null
-waterproof: null
-wled_compatible: null

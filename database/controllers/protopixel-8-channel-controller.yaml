@@ -1,23 +1,27 @@
 name: ProtoPixel 8 channel controller
 status: active
-release_year: null
-creator: ProtoPixel
-notes: Design software $149 per Month Deployment from $79 per Month
-outputs: Single
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - USB
-max_current: null
-max_outputs: 8
-max_pixels: 4800
-max_voltage: null
-output_connectors: Phoenix Screw
-pixel_types: async
+creator:
+  name: ProtoPixel
+  url: https://www.protopixel.io
+  page: https://www.protopixel.io/pricing
+notes: Driven by the ProtoPixel software running on a connected host over USB. Up to 4800 RGB LEDs across two 4-output satellites (600 per output).
+inputs:
+  physical:
+    USB: true
+  standalone: false
+  requires_host: Computer running ProtoPixel software
+outputs:
+  count: 8
+  connector: Phoenix Screw
+  pixels:
+    max_per_output: 600
+  clocked: false
+  driver:
+    buffered: true
+features:
+  - Two 4-output satellites connected to the controller via Ethernet
 price: 573
-standalone: false
-storage: null
-url: https://www.protopixel.io/pricing
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - Up to 4800 RGB LEDs total across 8 outputs (600 per output)
+  - Supports WS2811, WS2812, WS2813, WS2815, SK6812 and similar pixel ICs
+  - Subscription model - design software from $149/month, deployment from $79/month

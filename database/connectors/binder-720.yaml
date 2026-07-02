@@ -1,31 +1,28 @@
 name: Binder 720
 creator: Binder
-notes: null
-board_fingers: false
-colors: Colour Coded Collar
-contact_type: Pins
-convention: null
-crimp: false
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP67
-largest_gauge: 22 AWG
-locking: Detent
-max_current: 5 A
-max_pins: 12
-max_voltage: 250 V
-min_pins: 3
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: null
-screw_terminal: false
-smallest_gauge: 28 AWG
-solder: true
-url: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?brand=binder&product-range=720-series
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?brand=binder&product-range=720-series
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 3
+  max_pins: 12
+  gendered: true
+  locking: Detent
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 5 A
+  max_voltage: 250 V
+  ip_rating: IP67
+termination:
+  solder: true
+  screw_terminal: false
+  crimp: false
+  idc: false
+  smallest_gauge: 28 AWG
+  largest_gauge: 22 AWG
+wiring:
+  colors: Colour Coded Collar

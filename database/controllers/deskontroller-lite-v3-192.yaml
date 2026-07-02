@@ -1,23 +1,24 @@
 name: deskontroller LITE V3 192
 status: active
 release_year: 2023
-creator: deskontrol electronics SL
-notes: null
-outputs: Single and Clock
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Wi-Fi
-max_current: null
-max_outputs: 32
-max_pixels: 32640
-max_voltage: null
-output_connectors: RJ45
-pixel_types: both
+creator:
+  name: deskontrol electronics SL
+  url: https://www.deskontrol.net
+  page: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
+inputs:
+  physical:
+    Wi-Fi: true
+  protocols:
+    - Art-Net
+  standalone: false
+outputs:
+  count: 32
+  connector: RJ45
+  pixels:
+    max_per_output: 1020 # 32640 total RGB pixels across 32 data lines
+  clocked: selectable # supports clockless and clocked signal types
 price: 1490
-standalone: false
-storage: null
-url: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - 192 Art-Net universes; up to 32,640 RGB pixels (~24,576 RGBW)
+  - 32 data lines via 8 RJ45 output connectors with terminal adapters
+  - Compatible with over 100 IC families; RGB and RGBW

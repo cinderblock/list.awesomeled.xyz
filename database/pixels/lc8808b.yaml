@@ -1,26 +1,26 @@
 name: LC8808B
-release_year: null
 creator: Color
 notes: Very similar to the GS8208, the spec sheets are almost identical
-backup_data_line: true
-brightness_bits: 8
-channel_current: 13.0mA
-clocked: false
-color_order: BGR
-data_bitrate: 800kHz
-data_type: null
-datasheet_url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
-gpio_max: 13V
-gpio_min: 4.0V
-led_voltage: 12V
-max_pixels_per_string: null
-other_links: null
-package_size: '5050'
-pin_count: 6
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-pwm_frequency: 8.0kHz
-quiescent_current: 2.5mA
-third_party_testing: null
-vcc_voltage: 5V
-wattage: 65.mW
+color:
+  order: BGR
+  brightness_bits: 8
+  pwm_frequency: 8.0kHz
+data:
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
+electrical:
+  led_voltage: 12V
+  vcc_voltage: 5V
+  gpio:
+    min: 4.0V
+    max: 13V
+  channel_current: 13.0mA
+  quiescent_current: 2.5mA
+  wattage: 65mW
+physical:
+  package_size: '5050'
+  pin_count: 6

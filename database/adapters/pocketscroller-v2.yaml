@@ -1,13 +1,14 @@
 name: PocketScroller V2
 creator: Kulp Lights
-notes: null
-outputs: null
+notes: Drives LED panel matrices (P10/P5) via FPP, not pixel strings
+outputs:
+  max_channels: 6
+  pixel_types: Panel
+  connectors: HUB75
+power:
+  voltage: 5V
 diy_or_ots: DIY
-max_channels: 6
-max_current: null
-max_voltage: 5V
-output_connectors: HUB75
+links:
+  product: https://kulplights.com/product/pocketscroller/
 parent: PocketBeagle
-pixel_types: Panel
 price: 51
-url: https://kulplights.com/product/pocketscroller/

@@ -2,42 +2,50 @@ name: SK6812
 status: active
 release_year: 2013
 creator: Opsco/Newstar
-notes: WS2812 copy also available in 4 channel RGBW variant
-backup_data_line: false
-brightness_bits: 8
-channel_current: 20mA
-clocked: false
-color_order: GRB & GRBW
-data_bitrate: 800kHz
-data_type: WS2811/12
-datasheet_discrepancies:
-  - Datasheet PWM frequency (1.2kHz) differs from tested value (4.7kHz)
-  - GPIO min threshold not documented in datasheet
-datasheet_url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
-gpio_max: 5V
-gpio_min: 3.4V
-gpio_min_notes: Not in datasheet
-led_voltage: 5V
-led_voltage_notes: Datasheet claims "17V Vds, Max" but LEDs are built-in and
-  share power with 5V VDD
-max_pixels_per_string: null
+notes: WS2812 copy. The 4-channel RGBW version is a separate part (SK6812RGBW).
+color:
+  order: GRB
+  brightness_bits: 8
+  pwm_frequency: 4.7kHz
+  pwm_frequency_notes: Datasheet claims 1.2kHz but testing shows 4.7kHz
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+  max_per_string: null
+datasheet:
+  url: https://www.lcsc.com/datasheet/C5378720.pdf # newer OPSCO revision via LCSC
+  sources:
+    - url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+      host: distributor
+      notes: rev 02 (older)
+  discrepancies:
+    - Older datasheet PWM frequency (1.2kHz) differs from tested value (4.7kHz)
+    - GPIO min threshold not documented in datasheet
+electrical:
+  led_voltage: 5V
+  led_voltage_notes: Datasheet claims "17V Vds, Max" but LEDs are built-in and share power with 5V VDD
+  vcc_voltage: 5V
+  gpio:
+    min: 3.4V
+    min_notes: Not in datasheet
+    max: 5V
+  channel_current: 20mA
+  quiescent_current: 1.0mA
+  wattage: 104mW
 other_links:
   - SK6812 Pixel Protocol Overview | Advatek Lighting
-package_size: 5050,3535,2040
-package_sizes:
-  - '5050'
-  - '3535'
-  - '2040'
-pin_count: 4
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-pwm_frequency: 4.7kHz
-pwm_frequency_notes: Datasheet claims 1.2kHz but testing shows 4.7kHz
-quiescent_current: 1.0mA
+physical:
+  package_sizes:
+    - '5050'
+    - '3535'
+    - '2040'
+  package_size: 5050,3535,2040
+  pin_count: 4
+related:
+  - type: related
+    ref: pixels/ws2812
 technical_notes:
   - PWM frequency tested at 4.7kHz despite 1.2kHz datasheet claim
-  - Available in RGB and RGBW variants
-  - RGBW variant popular for better white color rendering
-third_party_testing: null
-vcc_voltage: 5V
-wattage: 104mW

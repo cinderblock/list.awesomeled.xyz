@@ -1,23 +1,25 @@
 name: PixLite 16 Plug and Play Mk2
 status: active
-release_year: null
-creator: Advatek
+creator:
+  name: Advatek
+  url: https://www.advateklighting.com
+  page: https://www.advateklights.com/pixlite-16-mk2-plug-and-play
 notes: 5V or 12V available. Multiple power plug versions available.
-outputs: Single or Clock
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - USB
-max_current: null
-max_outputs: 32
-max_pixels: 5440
-max_voltage: 12V
-output_connectors: 4 pin Advatek Male
-pixel_types: both
+inputs:
+  physical:
+    USB: true
+  standalone: false
+outputs:
+  count: 16
+  connector: 4 pin Advatek Male
+  clocked: selectable # supports Single (async) or Clock pixel types
+  driver:
+    buffered: true
+power:
+  voltage:
+    max: 12
 price: 500
-standalone: false
-storage: null
-url: https://www.advateklights.com/pixlite-16-mk2-plug-and-play
-warranty: null
-waterproof: null
-wled_compatible: null
+related:
+  - type: variant
+    ref: controllers/pixlite-16-mk2-control-board
+    notes: Assembled plug-and-play version of the control board

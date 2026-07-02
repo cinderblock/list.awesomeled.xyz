@@ -1,0 +1,38 @@
+name: WB48
+status: active
+creator:
+  name: Wally's Lights
+  url: https://wallyslights.com
+  page: https://wallyslights.com/products/wallys-lights-wb48-controller
+notes: BeagleBone Black (Rev C) based FPP controller; designed with Scott
+  Hanson. 12 differential RJ45 ports drive up to 48 remote ports via Universal
+  Differential Receivers (5 V or 12 V pixels at the receiver).
+inputs:
+  physical:
+    Ethernet: true
+  standalone: true # FPP 5.5 preloaded on the included 16 GB microSD
+outputs:
+  count: 12
+  connector: RJ45
+  differential: true # up to 48 remote ports via Universal Differential Receivers
+  pixels:
+    max_per_output: 1400 # at 20 fps; 800 per port at 40 fps
+power:
+  voltage:
+    min: 5
+    max: 5 # 5 V 3 A supply
+data:
+  storage:
+    - type: uSD # 16 GB card included
+features:
+  - OLED display
+  - Test button
+  - Reverse polarity protection
+  - Voltage sensors
+images:
+  - file: wb48.webp
+    source: https://wallyslights.com/products/wallys-lights-wb48-controller
+    credit: Wally's Lights
+price: 159
+technical_notes:
+  - Up to 800 pixels per port at 40 fps, 1400 per port at 20 fps

@@ -2,25 +2,33 @@ name: APA109
 release_year: 2018
 creator: APA Electronics
 notes: WS2812b clone like SK6812 RGBW variant
-backup_data_line: false
-brightness_bits: 8
-channel_current: null
-clocked: false
-color_order: GRBW
-data_bitrate: 800kHz
-data_type: 4chWS2811/12
-datasheet_url: http://neon-world.com/en/product_detail.php?cid=59&id=167
-gpio_max: 5V
-gpio_min: 3.5V
-led_voltage: 5V
-max_pixels_per_string: null
-other_links: APA109 Pixel Protocol Overview | Advatek Lighting
-package_size: '5050'
-pin_count: 4
-pixel_data_size: 32 Bits/Pixel
-pixel_rate_max: 25.0 k Pixel / s
-pwm_frequency: 1.1kHz
-quiescent_current: null
-third_party_testing: null
-vcc_voltage: 5V
-wattage: .mW
+color:
+  order: GRBW
+  brightness_bits: 8
+  pwm_frequency: 1.1kHz
+data:
+  type: 4chWS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: http://neon-world.com/en/product_detail.php?cid=59&id=167
+dead_links:
+  - url: http://neon-world.com/en/product_detail.php?cid=59&id=167
+    archive: https://web.archive.org/web/20250113200646/https://neon-world.com/en/product_detail.php?cid=59&id=167
+    checked: '2026-07-01'
+electrical:
+  led_voltage: 5V
+  vcc_voltage: 5V
+  gpio:
+    min: 3.5V
+    max: 5V
+other_links:
+  - APA109 Pixel Protocol Overview | Advatek Lighting
+physical:
+  package_size: '5050'
+  pin_count: 4
+related:
+  - type: related
+    ref: pixels/ws2812

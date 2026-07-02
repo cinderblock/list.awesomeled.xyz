@@ -1,24 +1,23 @@
 name: Deskontrol Lite 16
 status: discontinued
-release_year: null
-creator: Deskontrol
-notes: null
-outputs: null
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - sACN
-  - DDP
-max_current: null
-max_outputs: 16
-max_pixels: 2720
-max_voltage: null
-output_connectors: RJ-45
-pixel_types: both
+creator:
+  name: Deskontrol
+  page: https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
+notes: 'Art-Net pixel controller configured via web browser over Ethernet; 8x RJ45 jacks each carry two data outputs (A-B), data-only (LEDs powered separately). Vendor product page now redirects to the LITE V3 line.'
+inputs:
+  physical:
+    Ethernet: true
+  protocols:
+    - Art-Net
+    - sACN
+    - DDP
+  standalone: false
+outputs:
+  count: 16
+  connector: RJ-45
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 170
+  clocked: selectable
 price: 363
-standalone: false
-storage: null
-url: https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
-warranty: null
-waterproof: null
-wled_compatible: null

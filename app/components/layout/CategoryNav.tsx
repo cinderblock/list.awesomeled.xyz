@@ -17,7 +17,9 @@ export function CategoryNav() {
   );
   const currentIndex = currentCategory ? CATEGORIES.indexOf(currentCategory) : -1;
 
-  // Set navigation direction class before view transition starts
+  // Set navigation direction class before view transition starts. This is an
+  // intentional imperative handoff to CSS (read via [data-nav-direction]); it
+  // must land before React re-renders, so an effect would be too late.
   const handleNavClick = (targetIndex: number) => {
     const direction = targetIndex > currentIndex ? 'left' : 'right';
     // Must run synchronously on click, before React Router captures the

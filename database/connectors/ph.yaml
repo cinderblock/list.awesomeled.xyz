@@ -2,31 +2,29 @@ name: PH
 creator: JST
 notes: R.C, Lipo Balance connector , Internal connector in some controllers
   2.5mm not 2.54 (1/10") pitch runs off on boards drilled for 2.54
-board_fingers: false
-colors: White
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 24 AWG
-locking: Detent
-max_current: 2 A
-max_pins: null
-max_voltage: 100 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: Both
-pinout: G D V
-pitch: 2.0 mm
-rows: 1
-screw_terminal: null
-smallest_gauge: 24 AWG
-solder: true
-url: http://www.jst-mfg.com/product/detail_e.php?series=199
-wire_to_wire: false
-year_introduced: null
+links:
+  product: http://www.jst-mfg.com/product/detail_e.php?series=199
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 2.0 mm
+  min_pins: 2
+  rows: 1
+  gendered: true
+  locking: Detent
+  panel_mount: false
+  wire_to_wire: false
+  pcb_mount: Both
+  board_fingers: false
+ratings:
+  max_current: 2 A
+  max_voltage: 100 V
+termination:
+  solder: true
+  crimp: true
+  idc: false
+  smallest_gauge: 24 AWG
+  largest_gauge: 24 AWG
+wiring:
+  pinout: G D V
+  colors: White

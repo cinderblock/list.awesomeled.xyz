@@ -1,15 +1,17 @@
 name: Rosco Diffusion
 notes: Rosco theatrical diffusion
-color_rendition: 5
-diffusivity: 4
-fire_retardant: true
-flexible: F
-light_transmission: 3
+links:
+  product: https://emea.rosco.com/en/products/catalog/filters-diffusions
 material_type: Polyester
-price_range: $$$
-properties: Diffusive
+optical:
+  color_rendition: 5
+  light_transmission: 3
+  diffusivity: 4
+  tinted: T&C
+physical:
+  flexible: F
+  fire_retardant: true
+  properties: Diffusive
+pricing:
+  price_range: $$$
 purpose_made: true
-sample_thickness: null
-sizes_available: null
-tinted: T&C
-url: https://emea.rosco.com/en/products/catalog/filters-diffusions

@@ -1,26 +1,29 @@
 name: PocketBeagle
 release_year: 2017
-creator: Beagleboard.org
-notes: null
-bluetooth: null
-bms: 1S
-clock_speed: 1.0GHz
-cpu: Cortex-A8, 2x PRUSS
-ethernet: USB
-flash: microSD
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv7
-linux: true
-max_input_voltage: 5V
-max_outputs: 40
-min_input_voltage: 5V
-poe: null
+creator:
+  name: Beagleboard.org
+  page: http://beagleboard.org/pocket
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+compute:
+  soc: am3358
+  cpu: Cortex-A8, 2x PRUSS
+  isa: ARMv7
+  clock_speed: 1.0GHz
+  flash: microSD
+  ram: 512MB
+  linux: true
+connectivity:
+  wifi: USB
+  ethernet: USB
+  usb: OTG
+  serial: true
+io:
+  max_outputs: 40
+  storage: microSD
+  bms: 1S
+  imu: false
 price: 25
-ram: 512MB
-soc: am3358
-storage: microSD
-ttl_serial: true
-url: http://beagleboard.org/pocket
-usb: OTG
-wifi: USB

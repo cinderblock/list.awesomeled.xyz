@@ -1,26 +1,22 @@
 name: ESP32-PoE
 release_year: 2020
-creator: Olimex
-notes: null
-bluetooth: '4.2'
-bms: 1S
-clock_speed: null
-cpu: Xtensa LX6
-ethernet: 100BASE-TX
-flash: null
-gpio_voltage: 3.3V
-imu: false
-isa: Xtensa
-linux: false
-max_input_voltage: null
-max_outputs: null
-min_input_voltage: null
-poe: Y
+creator:
+  name: Olimex
+  page: https://www.olimex.com/Products/IoT/ESP32/ESP32-POE/open-source-hardware
+power:
+  gpio_voltage: 3.3V
+compute:
+  soc: ESP32
+  cpu: Xtensa LX6
+  isa: Xtensa
+  linux: false
+connectivity:
+  wifi: 2.4GHz
+  ethernet: 100BASE-TX
+  bluetooth: '4.2'
+  usb: Power + UART
+  poe: Y
+io:
+  bms: 1S
+  imu: false
 price: 25
-ram: null
-soc: ESP32
-storage: null
-ttl_serial: null
-url: https://www.olimex.com/Products/IoT/ESP32/ESP32-POE/open-source-hardware
-usb: Power + UART
-wifi: 2.4GHz

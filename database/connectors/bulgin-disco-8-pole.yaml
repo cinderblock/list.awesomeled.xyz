@@ -3,31 +3,29 @@ creator: Bulgin
 notes: Bulgin, long established UK connector maker, 8 pole connector popular with
   mobile discos. Used to be panel mount Sockets and male to male leads, now
   follow outlets on Sockets only.
-board_fingers: false
-colors: Black
-contact_type: Pins
-convention: null
-crimp: false
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 18 AWG
-locking: Friction
-max_current: 6 A
-max_pins: 8
-max_voltage: 250 V
-min_pins: 8
-mouser_url: https://www.mouser.co.uk/datasheet/2/57/bulgs00368_1-2263014.pdf
-outline: Circular
-panel_mount: true
-pcb_mount: PTH
-pinout: null
-pitch: null
-rows: null
-screw_terminal: true
-smallest_gauge: 28 AWG
-solder: true
-url: https://uk.farnell.com/bulgin/px0551/plug-8way-6a-free/dp/151740
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://uk.farnell.com/bulgin/px0551/plug-8way-6a-free/dp/151740
+  mouser: https://www.mouser.co.uk/datasheet/2/57/bulgs00368_1-2263014.pdf
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 8
+  max_pins: 8
+  gendered: true
+  locking: Friction
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: PTH
+  board_fingers: false
+ratings:
+  max_current: 6 A
+  max_voltage: 250 V
+termination:
+  solder: true
+  screw_terminal: true
+  crimp: false
+  idc: false
+  smallest_gauge: 28 AWG
+  largest_gauge: 18 AWG
+wiring:
+  colors: Black

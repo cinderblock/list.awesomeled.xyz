@@ -2,26 +2,27 @@ name: Pixelblaze
 status: active
 creator: ElectroMage
 notes: Includes 2D/3D mapping, sound reactive, and scriptable pattern UI controls
-audio_input: Input
-demo_available: w/PixelBlaze purchase
-designer: true
-gpio: Both
+inputs:
+  audio: Input
+  other: Websockets, ADC
+outputs:
+  gpio: Both
+  other: Direct or expansion board 8-64 channels
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+  programmatic: Both
 integrations: Home Assistant, Hubitat, Pixelblaze
 language: JS subset
-live: true
-other_inputs: Websockets, ADC
-other_outputs: Direct or expansion board 8-64 channels
+links:
+  url: https://electromage.com/pixelblaze/
 platforms:
-  - Pixelblaze (in-browser)
-price: 39
-programmatic: Both
-protocols:
-  artnet: null
-  sacn: null
-  dmx: null
-  kinet: null
-  ddp: null
-serial: null
-url: https://electromage.com/pixelblaze/
-video_input: null
-visualizer: 3D
+  web: true
+  hardware:
+    - Pixelblaze
+  notes: Editor is served in the browser by the Pixelblaze itself
+pricing:
+  price: 39
+  demo:
+    available: w/PixelBlaze purchase

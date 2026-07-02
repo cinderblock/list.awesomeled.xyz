@@ -1,7 +1,11 @@
 name: fastLEDVirtualDriver
-creator: hpwit
-features: null
-hardware: null
-instructional_resources: []
-url: https://github.com/hpwit/FASTLEDVIRTUALDRIVER
-youtube_url: null
+status: unknown
+creator: Yves Bazin (hpwit)
+language: C++
+license: MIT
+links:
+  repo: https://github.com/hpwit/FASTLEDVIRTUALDRIVER
+platforms:
+  - ESP32
+supported_ics:
+  - WS2812

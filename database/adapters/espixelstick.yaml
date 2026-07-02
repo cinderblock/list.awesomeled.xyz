@@ -1,13 +1,10 @@
 name: ESPixelstick
-creator: null
-notes: null
-outputs: null
-diy_or_ots: null
-max_channels: 4
-max_current: null
-max_voltage: 5V
-output_connectors: null
+outputs:
+  max_channels: 4
+  pixel_types: Single
+power:
+  voltage: 5V
+links:
+  product: https://www.amazon.com/ESPixelStick-Wireless-DMX-Pixel-Controller/dp/B072XT1V77/
 parent: ESP8266
-pixel_types: Single
 price: 30
-url: https://www.amazon.com/ESPixelStick-Wireless-DMX-Pixel-Controller/dp/B072XT1V77/

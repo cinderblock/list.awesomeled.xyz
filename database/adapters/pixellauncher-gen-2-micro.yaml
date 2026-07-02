@@ -1,14 +1,19 @@
 name: PixelLauncher Gen 2 Micro
+status: discontinued
 creator: Digital Ambience
 notes: LED data up to 250 ft right out of your controller No sender. It cleans
   up the signal.
-outputs: Single
+outputs:
+  max_channels: 1
+  pixel_types: Single
+  connectors: Solder
+  description: Single
+power:
+  voltage: 24V
+dead_links:
+  - url: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
+    archive: https://web.archive.org/web/20250427203401/https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
+    checked: '2026-07-01'
 diy_or_ots: OTS
-max_channels: 1
-max_current: null
-max_voltage: 24V
-output_connectors: Solder
-parent: null
-pixel_types: Single
-price: null
-url: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
+links:
+  product: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/

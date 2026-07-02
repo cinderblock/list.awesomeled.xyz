@@ -1,26 +1,22 @@
 name: WT32-ETH01
 release_year: 2019
-creator: Shenzhen Qiming Cloud Co., Ltd
-notes: null
-bluetooth: '4.2'
-bms: null
-clock_speed: null
-cpu: Xtensa LX6
-ethernet: 100BASE-TX
-flash: 32Mbit
-gpio_voltage: 3.3V
-imu: null
-isa: Xtensa
-linux: null
-max_input_voltage: null
-max_outputs: null
-min_input_voltage: null
-poe: N
+creator:
+  name: Shenzhen Qiming Cloud Co., Ltd
+  page: http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
+power:
+  gpio_voltage: 3.3V
+compute:
+  soc: ESP32
+  cpu: Xtensa LX6
+  isa: Xtensa
+  flash: 32Mbit
+connectivity:
+  wifi: 2.4GHz
+  ethernet: 100BASE-TX
+  bluetooth: '4.2'
+  poe: N
+dead_links:
+  - url: http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
+    archive: https://web.archive.org/web/20211019172238/http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
+    checked: '2026-07-01'
 price: 7
-ram: null
-soc: ESP32
-storage: null
-ttl_serial: null
-url: http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
-usb: null
-wifi: 2.4GHz

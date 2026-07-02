@@ -1,8 +1,16 @@
 name: ArtNet_DMX_SD_Card
+status: end-of-life
 creator: tangophi
-features: store DMX frames received through Artnet on a nodemcu or a
-  ESP8266/ESP12 module to a SD card
+features: store DMX frames received through Artnet on a nodemcu or a ESP8266/ESP12 module to a SD card
 hardware: NodeMcu /ESP8266/32
-instructional_resources: []
-url: https://github.com/tangophi/Artnet_DMX_SD_Card
-youtube_url: null
+language: C++
+links:
+  repo: https://github.com/tangophi/Artnet_DMX_SD_Card
+platforms:
+  - Arduino
+  - ESP8266
+related_pixel_ics:
+  - dmx512
+supported_ics:
+  - WS2812B
+  - DMX

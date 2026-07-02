@@ -1,24 +1,43 @@
 name: LED Ethernet Controller 3
 status: active
-release_year: null
-creator: LED Strip Studio
+creator:
+  name: LED Strip Studio
+  url: https://ledstripstudio.com
+  page: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+vendors:
+  - name: LED Strip Studio
+    page: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+    warranty: 5 Years
 notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
-outputs: Single & Clock & DMX
-auxiliary_outputs: DMX
-buffered: true
-interfaces:
-  - USB
-  - SD Card
-max_current: 20A
-max_outputs: 4
-max_pixels: 4096
-max_voltage: 24V
-output_connectors: Phoenix Plug
-pixel_types: both
+inputs:
+  physical:
+    Ethernet: Dual # 2x RJ-45 100 Mbit/sec with internal switch
+    USB: true
+    DMX: XLR 3-pin # DMX in (optional 5-pin)
+  protocols:
+    - Art-Net # up to 24 universes
+  standalone: true # microSD playlist/autoplay mode
+outputs:
+  count: 4
+  connector: Phoenix Plug # pluggable terminal block, 5 mm spacing
+  pixels:
+    max_per_output: 1024
+  clocked: selectable
+  auxiliary:
+    DMX512: 1
+  driver:
+    buffered: true
+power:
+  voltage:
+    min: 5
+    max: 24
+  current:
+    max: 20
+data:
+  storage:
+    - type: uSD
+      max_size: 32 # FAT32
 price: 625
-standalone: true
-storage: SD
-url: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
-warranty: 5 Years
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - 4096 digital RGB LEDs or 3072 RGBW LEDs total; available in 1024/2048/4096 pixel versions
+  - Art-Net up to 24 universes; LED Strip Studio software lifetime license included

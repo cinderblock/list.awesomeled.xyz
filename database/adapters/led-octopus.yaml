@@ -1,13 +1,14 @@
 name: LED Octopus
 creator: Tindie
-notes: null
-outputs: Single
+outputs:
+  max_channels: 8
+  pixel_types: Single
+  connectors: Phoenix Screw
+  description: Single
+power:
+  voltage: 5V
 diy_or_ots: OTS
-max_channels: 8
-max_current: null
-max_voltage: 5V
-output_connectors: Phoenix Screw
+links:
+  product: https://www.tindie.com/products/EssenceEng/led-octopus/?pt=ac_prod_search&fbclid=IwAR0w77lL9NKRWRN5rjs89GbIYH6X89oUKeTyQUXs0GWmvsbt0Y-RF29wdO8
 parent: Teensy 3.2
-pixel_types: Single
 price: 34
-url: https://www.tindie.com/products/EssenceEng/led-octopus/?pt=ac_prod_search&fbclid=IwAR0w77lL9NKRWRN5rjs89GbIYH6X89oUKeTyQUXs0GWmvsbt0Y-RF29wdO8

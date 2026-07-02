@@ -3,6 +3,7 @@ import { type RouteConfig, index, route } from '@react-router/dev/routes';
 export default [
   index('routes/home.tsx'),
   route('system-overview', 'routes/system-overview.tsx'),
+  route('designer', 'routes/designer.tsx'),
   route('about', 'routes/about.tsx'),
   route(':category.csv', 'routes/csv.$category.ts'),
   route('database.csv.zip', 'routes/database-csv-zip.ts'),

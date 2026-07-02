@@ -4,14 +4,29 @@
 
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
-import { formatDateYMD } from './format';
+import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
+import { RelativeDate } from '~/components/ui/RelativeDate';
+import { Tooltip } from '~/components/ui/Tooltip';
+import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
+import { quantitySortValue } from './quantity';
+import { flattenPlatforms } from './platforms';
+
+const sortVoltage = quantitySortValue('voltage');
+const sortCurrent = quantitySortValue('current');
+const sortFrequency = quantitySortValue('frequency');
+// lenient: "8MB PSRAM" sorts as 8 MB; "microSD" (not a size) sorts last
+const sortMemory = quantitySortValue('memory', true);
 
 // Filter type definitions
-export type FilterType = 'numeric' | 'select' | 'boolean' | 'string';
+export type FilterType = 'numeric' | 'select' | 'boolean' | 'string' | 'date';
 
 export interface NumericFilterConfig {
   type: 'numeric';
   unit?: string; // e.g., 'V', 'A', 'Hz'
+}
+
+export interface DateFilterConfig {
+  type: 'date';
 }
 
 export interface SelectFilterConfig {
@@ -36,7 +51,8 @@ export type FilterConfig =
   | NumericFilterConfig
   | SelectFilterConfig
   | BooleanFilterConfig
-  | StringFilterConfig;
+  | StringFilterConfig
+  | DateFilterConfig;
 
 export interface Column {
   key: string;
@@ -45,6 +61,12 @@ export interface Column {
   filterable?: boolean;
   filterConfig?: FilterConfig;
   render?: (value: unknown, item: BaseEntry) => React.ReactNode;
+  // Normalize the resolved value for sorting (e.g. prices → USD equivalent).
+  // Nulls sort last; without this, raw values compare numerically/lexically.
+  sortValue?: (value: unknown, item: BaseEntry) => number | string | null;
+  // First-click sort direction (default 'asc'). Use 'desc' where bigger-first
+  // reads naturally (e.g. wire gauge, capacities).
+  defaultSortDir?: 'asc' | 'desc';
   className?: string;
 }
 
@@ -64,11 +86,19 @@ function getDomain(url: string): string {
   }
 }
 
+// Resolve a possibly-dotted key (e.g. "links.product") against an object
+function resolveKey(item: unknown, key: string): unknown {
+  return key.split('.').reduce<unknown>((v, k) => {
+    if (v == null) return null;
+    return (v as Record<string, unknown>)[k];
+  }, item);
+}
+
 // Helper to render link icons for an entry
 function renderLinks(item: BaseEntry, linkConfigs: LinkConfig[]) {
   const links = linkConfigs
     .map((config) => {
-      const value = (item as Record<string, unknown>)[config.key];
+      const value = resolveKey(item, config.key);
       if (typeof value !== 'string' || !value.startsWith('http')) return null;
       return { ...config, url: value };
     })
@@ -79,45 +109,62 @@ function renderLinks(item: BaseEntry, linkConfigs: LinkConfig[]) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
       {links.map((link) => (
-        <a
-          key={link.key}
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="data-table-link-icon"
-          title={`${link.label}: ${getDomain(link.url)}`}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {link.icon}
-        </a>
+        <Tooltip key={link.key} content={`${link.label}: ${getDomain(link.url)}`}>
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="data-table-link-icon"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {link.icon}
+          </a>
+        </Tooltip>
       ))}
     </div>
   );
 }
 
-// Default links (url field)
-const defaultLinks: LinkConfig[] = [
-  { key: 'url', label: 'Product page', icon: <ExternalLink size={16} /> },
+// Link locations vary by category in the nested schema.
+// Product page lives in creator.page for hardware with a creator, else links.product.
+const productLinks: LinkConfig[] = [
+  { key: 'creator.page', label: 'Product page', icon: <ExternalLink size={16} /> },
+  { key: 'links.product', label: 'Product page', icon: <ExternalLink size={16} /> },
 ];
 
-// Links with datasheet
+// Pixels / pixel-ics: datasheet
 const datasheetLinks: LinkConfig[] = [
-  { key: 'url', label: 'Product page', icon: <ExternalLink size={16} /> },
-  { key: 'datasheet_url', label: 'Datasheet', icon: <FileText size={16} /> },
+  { key: 'datasheet.url', label: 'Datasheet', icon: <FileText size={16} /> },
+  { key: 'creator.page', label: 'Product page', icon: <ExternalLink size={16} /> },
 ];
 
-// Links for connectors (with suppliers)
+// Connectors (with suppliers)
 const connectorLinks: LinkConfig[] = [
-  { key: 'url', label: 'Product page', icon: <ExternalLink size={16} /> },
-  { key: 'digikey_url', label: 'DigiKey', icon: <ShoppingCart size={16} /> },
-  { key: 'mouser_url', label: 'Mouser', icon: <ShoppingCart size={16} /> },
+  { key: 'links.product', label: 'Product page', icon: <ExternalLink size={16} /> },
+  { key: 'links.digikey', label: 'DigiKey', icon: <ShoppingCart size={16} /> },
+  { key: 'links.mouser', label: 'Mouser', icon: <ShoppingCart size={16} /> },
 ];
 
-// Links for drive libraries (with YouTube)
-const libraryLinks: LinkConfig[] = [
-  { key: 'url', label: 'Project page', icon: <ExternalLink size={16} /> },
-  { key: 'youtube_url', label: 'YouTube', icon: <Youtube size={16} /> },
+// Pattern drivers
+const patternDriverLinks: LinkConfig[] = [
+  { key: 'links.url', label: 'Project page', icon: <ExternalLink size={16} /> },
 ];
+
+// Drive libraries (repo + YouTube)
+const libraryLinks: LinkConfig[] = [
+  { key: 'links.repo', label: 'Repository', icon: <ExternalLink size={16} /> },
+  { key: 'links.youtube', label: 'YouTube', icon: <Youtube size={16} /> },
+];
+
+// Render a creator that may be a string or { name, url, page } object
+function renderCreator(v: unknown): React.ReactNode {
+  if (v == null) return <span className="data-table-null">-</span>;
+  if (typeof v === 'object') {
+    const name = (v as { name?: string }).name;
+    return name ? <span>{name}</span> : <span className="data-table-null">-</span>;
+  }
+  return <span>{String(v)}</span>;
+}
 
 // Helper for rendering arrays as badges (limited to 3)
 function renderBadgeArray(v: unknown) {
@@ -158,12 +205,84 @@ function renderBool(v: unknown) {
   return null;
 }
 
-// Helper for formatting price (right-aligned dollar amount)
+// Helper for formatting price (right-aligned, original currency; non-USD gets
+// a "≈ $X" tooltip). Arrays of price tiers show "from <cheapest>".
 function formatPrice(v: unknown) {
   if (v == null) return <span className="data-table-null">-</span>;
-  const num = typeof v === 'number' ? v : parseFloat(String(v).replace(/[^0-9.]/g, ''));
-  if (isNaN(num)) return <span className="data-table-null">-</span>;
-  return <span className="tabular-nums">${num.toLocaleString('en-US')}</span>;
+
+  if (typeof v === 'string' && /^(free|varies|contact|unknown)$/i.test(v.trim())) {
+    const label = v.trim().toLowerCase();
+    if (label === 'free') return <span>Free</span>;
+    return <span className="data-table-null">{label}</span>;
+  }
+
+  let prefix = '';
+  let parsed = parsePrice(v);
+  if (Array.isArray(v)) {
+    const tiers = v.map(parsePrice).filter((p): p is NonNullable<typeof p> => p != null);
+    if (tiers.length > 0) {
+      parsed = tiers.reduce((min, p) =>
+        (toUSD(p) ?? Infinity) < (toUSD(min) ?? Infinity) ? p : min
+      );
+      if (tiers.length > 1) prefix = 'from ';
+    }
+  }
+  if (!parsed) return <span className="data-table-null">-</span>;
+
+  const usd = toUSD(parsed);
+  // Decimal-align: whole-dollar prices get invisible cents so the ones digits
+  // line up with prices that show cents (column is right-aligned).
+  const hasCents = parsed.amount % 1 !== 0;
+  const rendered = (
+    <span className="tabular-nums">
+      {prefix}
+      {formatPriceText(parsed, hasCents)}
+      {!hasCents && <span style={{ visibility: 'hidden' }}>.00</span>}
+    </span>
+  );
+  if (parsed.currency !== 'USD' && usd != null) {
+    return (
+      <Tooltip
+        content={`≈ $${Math.round(usd).toLocaleString('en-US')} USD (rates as of ${RATES_AS_OF})`}
+      >
+        {rendered}
+      </Tooltip>
+    );
+  }
+  return rendered;
+}
+
+// Package column: prefer the physical.package_sizes array, else split joined
+// strings ("5050, 3535, 2020", "5050 & 2020") into individual pills. Slash
+// groups only split when every fragment stands alone (so "SOP8/10/14" stays
+// whole instead of producing bare "10" pills).
+function renderPackages(v: unknown, item: BaseEntry) {
+  const physical = item.physical as { package_sizes?: unknown[] } | undefined;
+  let list: string[];
+  if (Array.isArray(physical?.package_sizes)) {
+    list = physical.package_sizes.map(String);
+  } else if (typeof v === 'string') {
+    list = v
+      .split(/[,&]/)
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .flatMap((part) => {
+        const subs = part.split('/').map((s) => s.trim());
+        return subs.length > 1 && subs.every((s) => s.length >= 3) ? subs : [part];
+      });
+  } else if (v != null) {
+    list = [String(v)];
+  } else {
+    return <span className="data-table-null">-</span>;
+  }
+  return (
+    <div className="data-table-array">
+      {list.map((p, i) => {
+        const badge = getBadgeForValue(p);
+        return badge ? <Badge key={i} badge={badge} /> : <TextPill key={i} text={p} />;
+      })}
+    </div>
+  );
 }
 
 // Helper for formatting numeric values with units
@@ -171,6 +290,38 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
   if (v == null) return <span className="data-table-null">-</span>;
 
   const str = String(v);
+
+  // Ranges like "3.7-5.5V" render as "3.7–5.5" + unit
+  const range = str.match(/^([\d.]+)-([\d.]+)\s*(.*)$/);
+  if (range) {
+    return (
+      <span
+        style={{
+          display: 'inline-flex',
+          alignItems: 'baseline',
+          justifyContent: 'flex-end',
+          width: '100%',
+        }}
+      >
+        <span className="tabular-nums">
+          {range[1]}–{range[2]}
+        </span>
+        {range[3] && (
+          <span
+            className="data-table-null"
+            style={{
+              marginLeft: '0.25rem',
+              width: unitWidth,
+              textAlign: 'left',
+              display: 'inline-block',
+            }}
+          >
+            {range[3]}
+          </span>
+        )}
+      </span>
+    );
+  }
 
   // Parse number and unit from string like "30 A", "5V", "800kHz", "2.0kHz"
   const match = str.match(/^([\d.,]+)\s*(.*)$/);
@@ -185,6 +336,8 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
     return <span>{str}</span>;
   }
 
+  const formatted = num.toLocaleString('en-US');
+
   return (
     <span
       style={{
@@ -194,7 +347,14 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
         width: '100%',
       }}
     >
-      <span className="tabular-nums">{num.toLocaleString('en-US')}</span>
+      <span className="tabular-nums">{formatted}</span>
+      {/* Decimal-align: whole numbers get invisible tenths so "1 GHz" lines
+          up with "1.2 GHz" */}
+      {!formatted.includes('.') && (
+        <span className="tabular-nums" style={{ visibility: 'hidden' }}>
+          .0
+        </span>
+      )}
       {unit && (
         <span
           className="data-table-null"
@@ -231,21 +391,26 @@ function formatNumericValue(v: unknown) {
   return <span className="tabular-nums">{num.toLocaleString('en-US')}</span>;
 }
 
-// Helper for formatting dates as YYYY-MM-DD in user's timezone
-function formatDate(v: unknown) {
+// Helper for formatting dates as relative time ("3 days ago", date on hover)
+function formatRelativeDate(v: unknown) {
   if (v == null) return <span className="data-table-null">-</span>;
   const date = v instanceof Date ? v : new Date(String(v));
   if (isNaN(date.getTime())) return <span className="data-table-null">-</span>;
-  return <span>{formatDateYMD(date)}</span>;
+  return <RelativeDate date={date} />;
 }
 
-// Shared updated column definition
+// Shared reviewed column: when the row was last specifically checked for
+// accuracy (git history, minus the IGNORED_COMMITS batches in data.ts)
 export const updatedColumn: Column = {
   key: 'updated',
-  label: 'Updated',
+  label: 'Reviewed',
   sortable: true,
-  filterable: false,
-  render: formatDate,
+  render: formatRelativeDate,
+  // Dates previously fell through to string comparison, which mis-orders
+  // across months; compare epoch millis instead.
+  sortValue: (v) => (v instanceof Date ? v.getTime() : null),
+  defaultSortDir: 'desc',
+  filterConfig: { type: 'date' },
 };
 
 export const controllerColumns: Column[] = [
@@ -254,31 +419,27 @@ export const controllerColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, defaultLinks),
+    render: (_, item) => renderLinks(item, productLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'max_pixels',
-    label: 'Max Pixels',
-    render: formatNumericValue,
-    className: 'data-table-cell--right',
-    filterConfig: { type: 'numeric' },
-  },
-  {
-    key: 'max_outputs',
+    key: 'outputs.count',
     label: 'Outputs',
     render: formatNumericValue,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
   {
-    key: 'interfaces',
-    label: 'Interfaces',
+    key: 'outputs.pixels.max_per_output',
+    label: 'Max px/out',
+    render: formatNumericValue,
+    className: 'data-table-cell--right',
+    filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'inputs.protocols',
+    label: 'Protocols',
     render: renderBadgeArray,
     filterConfig: { type: 'select' },
   },
@@ -286,21 +447,12 @@ export const controllerColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
-  {
-    key: 'wled_compatible',
-    label: 'WLED',
-    render: renderBool,
-    filterConfig: { type: 'boolean' },
-  },
-  {
-    key: 'status',
-    label: 'Status',
-    render: renderStatus,
-    filterConfig: { type: 'select' },
-  },
+  { key: 'wled_compatible', label: 'WLED', render: renderBool, filterConfig: { type: 'boolean' } },
+  { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];
 
 export const pixelColumns: Column[] = [
@@ -312,45 +464,40 @@ export const pixelColumns: Column[] = [
     render: (_, item) => renderLinks(item, datasheetLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
+  { key: 'color.order', label: 'Color Order', filterConfig: { type: 'select' } },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'color_order',
-    label: 'Color Order',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'led_voltage',
+    key: 'electrical.led_voltage',
     label: 'LED Voltage',
     render: formatVoltage,
+    sortValue: sortVoltage,
     className: 'data-table-cell--right',
-    filterConfig: { type: 'numeric', unit: 'V' },
   },
   {
-    key: 'vcc_voltage',
+    key: 'electrical.vcc_voltage',
     label: 'VCC',
     render: formatVoltage,
+    sortValue: sortVoltage,
     className: 'data-table-cell--right',
-    filterConfig: { type: 'numeric', unit: 'V' },
   },
+  { key: 'data.clocked', label: 'Clocked', render: renderBool, filterConfig: { type: 'boolean' } },
   {
-    key: 'clocked',
-    label: 'Clocked',
+    key: 'data.backup_line',
+    label: 'Backup Line',
     render: renderBool,
     filterConfig: { type: 'boolean' },
   },
   {
-    key: 'data_bitrate',
+    key: 'data.bitrate',
     label: 'Data Rate',
     render: formatFrequency,
+    sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
   {
-    key: 'package_size',
+    key: 'physical.package_size',
     label: 'Package',
+    render: renderPackages,
     filterConfig: { type: 'select' },
   },
 ];
@@ -365,33 +512,37 @@ export const pixelICColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   {
-    key: 'channels',
+    key: 'data.channels',
     label: 'Channels',
     render: formatNumericValue,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
+  { key: 'data.clocked', label: 'Clocked', render: renderBool, filterConfig: { type: 'boolean' } },
   {
-    key: 'clocked',
-    label: 'Clocked',
+    key: 'data.backup_line',
+    label: 'Backup Line',
     render: renderBool,
     filterConfig: { type: 'boolean' },
   },
   {
-    key: 'pwm_frequency',
+    key: 'color.pwm_frequency',
     label: 'PWM Freq',
     render: formatFrequency,
+    sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
   {
-    key: 'data_bitrate',
+    key: 'data.bitrate',
     label: 'Data Rate',
     render: formatFrequency,
+    sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
   {
-    key: 'package_size',
+    key: 'physical.package_size',
     label: 'Package',
+    render: renderPackages,
     filterConfig: { type: 'select' },
   },
 ];
@@ -402,51 +553,37 @@ export const patternDriverColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, defaultLinks),
+    render: (_, item) => renderLinks(item, patternDriverLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'price',
+    key: 'pricing.price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
-    filterConfig: { type: 'numeric', unit: '$' },
   },
   {
-    key: 'platforms',
+    key: 'platforms.os',
     label: 'Platforms',
-    render: renderBadgeArray,
+    render: (_, item) => renderBadgeArray(flattenPlatforms(item.platforms)),
     filterConfig: { type: 'select' },
   },
   {
-    key: 'live',
+    key: 'foss',
+    label: 'FOSS',
+    render: renderBool,
+    filterConfig: { type: 'boolean', trueLabel: 'Open source', falseLabel: 'Proprietary' },
+  },
+  {
+    key: 'capabilities.live',
     label: 'Live',
     render: renderBool,
     filterConfig: { type: 'boolean' },
   },
-  {
-    key: 'designer',
-    label: 'Designer',
-    render: renderBool,
-    filterConfig: { type: 'boolean' },
-  },
-  {
-    key: 'visualizer',
-    label: 'Visualizer',
-    render: renderBool,
-    filterConfig: { type: 'boolean' },
-  },
-  {
-    key: 'status',
-    label: 'Status',
-    render: renderStatus,
-    filterConfig: { type: 'select' },
-  },
+  { key: 'capabilities.visualizer', label: 'Visualizer', filterConfig: { type: 'select' } },
+  { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];
 
 export const connectorColumns: Column[] = [
@@ -458,40 +595,24 @@ export const connectorColumns: Column[] = [
     render: (_, item) => renderLinks(item, connectorLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
+  { key: 'mechanical.outline', label: 'Outline', filterConfig: { type: 'select' } },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'outline',
-    label: 'Outline',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'max_current',
+    key: 'ratings.max_current',
     label: 'Max Current',
     render: formatCurrent,
+    sortValue: sortCurrent,
     className: 'data-table-cell--right',
-    filterConfig: { type: 'numeric', unit: 'A' },
   },
   {
-    key: 'max_voltage',
+    key: 'ratings.max_voltage',
     label: 'Max Voltage',
     render: formatVoltage,
+    sortValue: sortVoltage,
     className: 'data-table-cell--right',
-    filterConfig: { type: 'numeric', unit: 'V' },
   },
-  {
-    key: 'ip_rating',
-    label: 'IP Rating',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'locking',
-    label: 'Locking',
-    filterConfig: { type: 'select' },
-  },
+  { key: 'ratings.ip_rating', label: 'IP Rating', filterConfig: { type: 'select' } },
+  { key: 'mechanical.locking', label: 'Locking', filterConfig: { type: 'select' } },
 ];
 
 export const microboardColumns: Column[] = [
@@ -500,46 +621,40 @@ export const microboardColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, defaultLinks),
+    render: (_, item) => renderLinks(item, productLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
+  { key: 'compute.soc', label: 'SoC', filterConfig: { type: 'select' } },
+  { key: 'compute.cpu', label: 'CPU', filterConfig: { type: 'select' } },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'soc',
-    label: 'SoC',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'cpu',
-    label: 'CPU',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'clock_speed',
+    key: 'compute.clock_speed',
     label: 'Clock',
     render: formatFrequency,
+    sortValue: sortFrequency,
     className: 'data-table-cell--right',
   },
-  { key: 'flash', label: 'Flash', render: formatMemory, className: 'data-table-cell--right' },
-  { key: 'ram', label: 'RAM', render: formatMemory, className: 'data-table-cell--right' },
   {
-    key: 'wifi',
-    label: 'WiFi',
-    filterConfig: { type: 'select' },
+    key: 'compute.flash',
+    label: 'Flash',
+    render: formatMemory,
+    sortValue: sortMemory,
+    className: 'data-table-cell--right',
   },
   {
-    key: 'ethernet',
-    label: 'Ethernet',
-    filterConfig: { type: 'select' },
+    key: 'compute.ram',
+    label: 'RAM',
+    render: formatMemory,
+    sortValue: sortMemory,
+    className: 'data-table-cell--right',
   },
+  { key: 'connectivity.wifi', label: 'Wi-Fi', filterConfig: { type: 'select' } },
+  { key: 'connectivity.ethernet', label: 'Ethernet', filterConfig: { type: 'select' } },
   {
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
@@ -551,30 +666,23 @@ export const adapterColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, defaultLinks),
+    render: (_, item) => renderLinks(item, productLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'max_channels',
+    key: 'outputs.max_channels',
     label: 'Channels',
     render: formatNumericValue,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
-  {
-    key: 'pixel_types',
-    label: 'Pixel Types',
-    filterConfig: { type: 'select' },
-  },
+  { key: 'outputs.pixel_types', label: 'Pixel Types', filterConfig: { type: 'select' } },
   {
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
@@ -589,21 +697,29 @@ export const driveLibraryColumns: Column[] = [
     render: (_, item) => renderLinks(item, libraryLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'creator',
-    label: 'Creator',
+    // Plain text: badge icons only cover some languages, and a mixed
+    // pill/plain column reads worse than a uniform one
+    key: 'language',
+    label: 'Language',
+    render: (v) => (v == null ? null : <span>{String(v)}</span>),
     filterConfig: { type: 'select' },
   },
   {
-    key: 'hardware',
-    label: 'Hardware',
+    key: 'platforms',
+    label: 'Platforms',
+    render: renderBadgeArray,
     filterConfig: { type: 'select' },
   },
+  { key: 'license', label: 'License', filterConfig: { type: 'select' } },
   {
-    key: 'features',
-    label: 'Features',
-    filterConfig: { type: 'string', fuzzy: true },
+    key: 'foss',
+    label: 'FOSS',
+    render: renderBool,
+    filterConfig: { type: 'boolean', trueLabel: 'Open source', falseLabel: 'Proprietary' },
   },
+  { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];
 
 export const diffusiveMaterialColumns: Column[] = [
@@ -612,34 +728,14 @@ export const diffusiveMaterialColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, defaultLinks),
+    render: (_, item) => renderLinks(item, productLinks),
   },
   { key: 'name', label: 'Name' },
-  {
-    key: 'material_type',
-    label: 'Type',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'color_rendition',
-    label: 'Color Rendition',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'light_transmission',
-    label: 'Transmission',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'flexible',
-    label: 'Flexible',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'price_range',
-    label: 'Price Range',
-    filterConfig: { type: 'select' },
-  },
+  { key: 'material_type', label: 'Type', filterConfig: { type: 'select' } },
+  { key: 'optical.color_rendition', label: 'Color Rendition', filterConfig: { type: 'select' } },
+  { key: 'optical.light_transmission', label: 'Transmission', filterConfig: { type: 'select' } },
+  { key: 'physical.flexible', label: 'Flexible', filterConfig: { type: 'select' } },
+  { key: 'pricing.price_range', label: 'Price Range', filterConfig: { type: 'select' } },
 ];
 
 export const commercialSystemColumns: Column[] = [
@@ -648,50 +744,33 @@ export const commercialSystemColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, defaultLinks),
+    render: (_, item) => renderLinks(item, productLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'pixels_per_run',
+    key: 'specs.pixels_per_run',
     label: 'Pixels/Run',
     render: formatNumericValue,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
-  {
-    key: 'color_type',
-    label: 'Color Type',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'price_range',
-    label: 'Price Range',
-    filterConfig: { type: 'select' },
-  },
+  { key: 'specs.color_type', label: 'Color Type', filterConfig: { type: 'select' } },
+  { key: 'pricing.price_range', label: 'Price Range', filterConfig: { type: 'select' } },
 ];
 
-// Level converters and pixel decoders use generic columns
 export const levelConverterColumns: Column[] = [
   {
     key: 'links',
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, defaultLinks),
+    render: (_, item) => renderLinks(item, productLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'max_channels',
+    key: 'io.channels',
     label: 'Channels',
     render: formatNumericValue,
     className: 'data-table-cell--right',
@@ -701,6 +780,7 @@ export const levelConverterColumns: Column[] = [
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
@@ -712,37 +792,24 @@ export const pixelDecoderColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, defaultLinks),
+    render: (_, item) => renderLinks(item, productLinks),
   },
   { key: 'name', label: 'Name' },
+  { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'creator',
-    label: 'Creator',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'max_channels',
+    key: 'outputs.max_channels',
     label: 'Channels',
     render: formatNumericValue,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
-  {
-    key: 'pixel_types',
-    label: 'Pixel Types',
-    filterConfig: { type: 'select' },
-  },
-  {
-    key: 'outputs',
-    label: 'Outputs',
-    render: formatNumericValue,
-    className: 'data-table-cell--right',
-    filterConfig: { type: 'numeric' },
-  },
+  { key: 'outputs.pixel_types', label: 'Pixel Types', filterConfig: { type: 'select' } },
+  { key: 'outputs.description', label: 'Outputs' },
   {
     key: 'price',
     label: 'Price',
     render: formatPrice,
+    sortValue: priceUSD,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric', unit: '$' },
   },
@@ -777,7 +844,7 @@ export function getSearchKeysForCategory(categoryId: string): string[] {
     'pixel-ics': ['name', 'notes'],
     'pattern-drivers': ['name', 'creator', 'notes'],
     connectors: ['name', 'creator', 'notes'],
-    microboards: ['name', 'creator', 'soc'],
+    microboards: ['name', 'creator', 'compute.soc'],
     'level-converters': ['name', 'creator', 'notes'],
     adapters: ['name', 'creator', 'notes'],
     'drive-libraries': ['name', 'creator', 'hardware'],

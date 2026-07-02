@@ -1,26 +1,24 @@
 name: Arduino Mega 2560 Rev3
-release_year: null
-creator: Arduino
-notes: null
-bluetooth: null
-bms: false
-clock_speed: 16MHz
-cpu: AVR
-ethernet: null
-flash: 256kB
-gpio_voltage: null
-imu: false
-isa: null
-linux: false
-max_input_voltage: 20V
-max_outputs: 54
-min_input_voltage: 6V
-poe: null
+creator:
+  name: Arduino
+  page: https://store-usa.arduino.cc/collections/boards/products/arduino-mega-2560-rev3
+power:
+  voltage:
+    min: 6V
+    max: 20V
+compute:
+  soc: ATmega2560
+  cpu: AVR
+  isa: AVR
+  clock_speed: 16MHz
+  flash: 256kB
+  ram: 8kB
+  linux: false
+connectivity:
+  wifi: false
+  usb: Power + UART
+io:
+  max_outputs: 54
+  bms: 'No'
+  imu: false
 price: 40
-ram: 8kB
-soc: ATmega2560
-storage: null
-ttl_serial: null
-url: https://store-usa.arduino.cc/collections/boards/products/arduino-mega-2560-rev3
-usb: Power + UART
-wifi: false

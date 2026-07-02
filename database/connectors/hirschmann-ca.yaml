@@ -1,31 +1,28 @@
 name: Hirschmann CA
 creator: Lumberg /Belden
 notes: panel mount ones fit in a D-size/XLR cutout
-board_fingers: false
-colors: null
-contact_type: Pins
-convention: null
-crimp: false
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP67
-largest_gauge: 12 AWG
-locking: Screw Lock
-max_current: 16 A
-max_pins: 7
-max_voltage: 400 V
-min_pins: 3
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: N/A
-screw_terminal: true
-smallest_gauge: 22 AWG
-solder: true
-url: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?product-range=ca-series
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?product-range=ca-series
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 3
+  max_pins: 7
+  rows: N/A
+  gendered: true
+  locking: Screw Lock
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 16 A
+  max_voltage: 400 V
+  ip_rating: IP67
+termination:
+  solder: true
+  screw_terminal: true
+  crimp: false
+  idc: false
+  smallest_gauge: 22 AWG
+  largest_gauge: 12 AWG

@@ -2,26 +2,23 @@ name: LED Strip Studio Software
 status: active
 creator: LED Strip Studio
 notes: Use any video as animation, Picture grabber, BlackMagic grabber,
-audio_input: null
-demo_available: Free demo - No output
-designer: true
-gpio: null
-integrations: null
-language: null
-live: true
-other_inputs: MIDI, OSC, CMD Line, DMX
-other_outputs: Proprietary compressed LSS protocol for LSS controllers
+inputs:
+  other: MIDI, OSC, CMD Line, DMX
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Input
+    dmx: Both
+  other: Proprietary compressed LSS protocol for LSS controllers
+capabilities:
+  live: true
+  designer: true
+  visualizer: 2D
+links:
+  url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
 platforms:
-  - Windows
-price: LED Strip Studio Software
-programmatic: null
-protocols:
-  artnet: Both
-  sacn: Input
-  dmx: Both
-  kinet: null
-  ddp: null
-serial: null
-url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
-video_input: null
-visualizer: 2D
+  os:
+    - Windows
+pricing:
+  demo:
+    available: Free demo - No output

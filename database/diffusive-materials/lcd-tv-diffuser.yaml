@@ -1,15 +1,16 @@
 name: LCD TV diffuser
 notes: Flat screen backlight repurposed as large even light plate, artificial skylight
-color_rendition: 5
-diffusivity: 5
-fire_retardant: null
-flexible: R
-light_transmission: 5
+links:
+  product: https://nofilmschool.com/diy-light-panel-busted-lcd-tv
 material_type: PMMA PET
-price_range: $
-properties: Backlight
+optical:
+  color_rendition: 5
+  light_transmission: 5
+  diffusivity: 5
+  tinted: T
+physical:
+  flexible: R
+  properties: Backlight
+pricing:
+  price_range: $
 purpose_made: true
-sample_thickness: null
-sizes_available: null
-tinted: T
-url: https://nofilmschool.com/diy-light-panel-busted-lcd-tv

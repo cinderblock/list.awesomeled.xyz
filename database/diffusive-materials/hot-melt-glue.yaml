@@ -1,15 +1,17 @@
 name: Hot Melt Glue
 notes: Shorter working time than silicone similar applications
-color_rendition: 3
-diffusivity: 4
-fire_retardant: false
-flexible: R
-light_transmission: 3
+links:
+  product: https://www.gluegunsdirect.com/service-and-advice/hot-melt-adhesive/
 material_type: EVA
-price_range: $$
-properties: Diffusive
+optical:
+  color_rendition: 3
+  light_transmission: 3
+  diffusivity: 4
+  tinted: T
+physical:
+  flexible: R
+  fire_retardant: false
+  properties: Diffusive
+pricing:
+  price_range: $$
 purpose_made: false
-sample_thickness: null
-sizes_available: null
-tinted: T
-url: https://www.gluegunsdirect.com/service-and-advice/hot-melt-adhesive/

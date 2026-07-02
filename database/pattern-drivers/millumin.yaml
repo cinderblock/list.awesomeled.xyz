@@ -1,27 +1,21 @@
 name: Millumin
 status: active
 creator: Anomes SARL
-notes: null
-audio_input: null
-demo_available: 30 day trial
-designer: null
-gpio: null
-integrations: null
-language: null
-live: true
-other_inputs: null
-other_outputs: null
+inputs:
+  video: Possible
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Both
+    dmx: Output
+capabilities:
+  live: true
+links:
+  url: https://www.millumin.com//
 platforms:
-  - macOS
-price: 39/week +
-programmatic: null
-protocols:
-  artnet: Both
-  sacn: Both
-  dmx: Output
-  kinet: null
-  ddp: null
-serial: null
-url: https://www.millumin.com//
-video_input: Possible
-visualizer: null
+  os:
+    - macOS
+pricing:
+  price: 39/week +
+  demo:
+    available: 30 day trial

@@ -4,64 +4,139 @@
   "title": "Commercial Pixel System",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
     "name": {
       "type": "string"
     },
-    "creator": {
-      "type": ["string", "null"],
-      "description": "Original designer/developer of this item"
-    },
-    "manufacturers": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Manufacturers that produce this item"
-    },
-    "vendors": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Vendors that sell/distribute this item"
-    },
-    "pixels_per_run": {
-      "type": ["integer", "null"]
-    },
-    "dimming_resolution": {
-      "type": ["string", "null"]
-    },
-    "dedicated_psu": {
-      "type": ["boolean", "null"]
-    },
-    "color_type": {
-      "type": ["string", "null"],
-      "description": "RGB, RGBW, WW, etc."
-    },
-    "online_pricing": {
-      "type": ["string", "null"]
-    },
-    "price_range": {
-      "type": ["string", "null"],
-      "description": "$ to $$$$$$"
-    },
-    "core_tech": {
-      "type": ["string", "null"]
+    "status": {
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "since": {
-      "type": ["integer", "null"]
+      "type": ["integer", "null"],
+      "description": "Year the system was introduced"
     },
-    "target_market": {
-      "type": ["string", "null"]
+    "creator": {
+      "anyOf": [
+        {
+          "type": ["string", "null"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "manufacturers": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "vendors": {
+      "type": ["array", "null"],
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "page": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
     },
     "notes": {
       "type": ["string", "null"]
     },
-    "url": {
+    "target_market": {
       "type": ["string", "null"]
+    },
+    "core_tech": {
+      "type": ["string", "null"]
+    },
+    "specs": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "pixels_per_run": {
+          "type": ["integer", "null"]
+        },
+        "dimming_resolution": {
+          "type": ["string", "null"]
+        },
+        "color_type": {
+          "type": ["string", "null"],
+          "description": "RGB, RGBW, WW, ..."
+        },
+        "dedicated_psu": {
+          "type": ["boolean", "null"]
+        }
+      }
+    },
+    "pricing": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "price_range": {
+          "type": ["string", "null"],
+          "description": "$ to $$$$$$"
+        },
+        "online_pricing": {
+          "type": ["string", "null"]
+        }
+      }
+    },
+    "links": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "product": {
+          "type": ["string", "null"]
+        }
+      }
     },
     "image": {
       "$ref": "common.json#/definitions/image"
     },
     "images": {
       "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    },
+    "dead_links": {
+      "$ref": "common.json#/definitions/dead_links"
     }
   }
 }

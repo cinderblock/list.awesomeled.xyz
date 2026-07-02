@@ -1,0 +1,25 @@
+name: HinksPix PRO V3
+status: active
+creator:
+  name: HolidayCoro
+  url: https://www.holidaycoro.com
+  page: https://www.holidaycoro.com/HinksPix-Pro-CPU-for-Flex-Expansion-Boards-V3-p/930.htm
+notes: Modular "Flex" pixel controller CPU; onboard pixel ports plus long-range differential receivers add on through stackable expansion boards.
+inputs:
+  physical:
+    Ethernet: Dual # built-in 2-port network switch for daisy-chaining
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+    - DDP
+outputs:
+  count: 48 # configurable Flex local ports: 0, 16, 32, or 48
+  differential: true # long-range receivers carry differential pixel data over Cat5/RJ45
+features:
+  - Built-in 2-port Ethernet switch for daisy-chaining without extra hardware
+  - Long-range differential receivers extend pixel ports over Cat5/RJ45 (4 ports each)
+  - Per-port resettable fusing
+technical_notes:
+  - Flex CPU supports 0/16/32/48 onboard pixel ports and 0/4/8/12 long-range receiver outputs
+  - Up to roughly 16,320 pixels per CPU; larger assembled systems reach ~32,640
+  - Pixel ports can be reconfigured for DMX/serial output

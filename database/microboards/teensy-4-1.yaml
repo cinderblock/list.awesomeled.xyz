@@ -1,26 +1,13 @@
 name: Teensy 4.1
-release_year: null
 creator: PJRC
-notes: null
-bluetooth: null
-bms: false
-clock_speed: 600MHz
-cpu: ARM Cortex-M7
-ethernet: null
-flash: 7936kB
-gpio_voltage: null
-imu: false
-isa: ARMv7-M
-linux: false
-max_input_voltage: null
-max_outputs: null
-min_input_voltage: null
-poe: null
-price: null
-ram: 1024kB
-soc: iMXRT1062
-storage: null
-ttl_serial: null
-url: null
-usb: null
-wifi: null
+compute:
+  soc: iMXRT1062
+  cpu: ARM Cortex-M7
+  isa: ARMv7-M
+  clock_speed: 600MHz
+  flash: 7936kB
+  ram: 1024kB
+  linux: false
+io:
+  bms: 'No'
+  imu: false

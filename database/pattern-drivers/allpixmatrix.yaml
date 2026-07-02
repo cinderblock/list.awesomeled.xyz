@@ -1,27 +1,19 @@
 name: Allpixmatrix
 status: unknown
 creator: NLED
-notes: null
-audio_input: null
-demo_available: null
-designer: true
-gpio: null
-integrations: null
-language: null
-live: false
-other_inputs: null
-other_outputs: glediator files, pixel data
+inputs:
+  video: Input
+outputs:
+  protocols:
+    artnet: Input
+  other: glediator files, pixel data
+capabilities:
+  live: false
+  designer: true
+links:
+  url: https://github.com/NLED/allpixmatrix
 platforms:
-  - Windows
-price: Free
-programmatic: null
-protocols:
-  artnet: Input
-  sacn: null
-  dmx: null
-  kinet: null
-  ddp: null
-serial: null
-url: https://github.com/NLED/allpixmatrix
-video_input: Input
-visualizer: null
+  os:
+    - Windows
+pricing:
+  price: Free

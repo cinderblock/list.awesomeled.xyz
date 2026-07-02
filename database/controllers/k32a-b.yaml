@@ -1,24 +1,43 @@
 name: K32A-B
-status: active
-release_year: null
-creator: KulpLights, LLC
-notes: 16 channels require differential receivers. Onboard sound, FM transmitter
-  optional.
-outputs: Single
-auxiliary_outputs: DMX x2
-buffered: true
-interfaces:
-  - Ethernet PoE++
-max_current: 160A
-max_outputs: 48
-max_pixels: 72000
-max_voltage: 12V
-output_connectors: Phoenix Screw/RJ45
-pixel_types: async
-price: 195
-standalone: true
-storage: Yes
-url: https://kulplights.com/product/k32a-b/
-warranty: null
-waterproof: null
-wled_compatible: null
+status: discontinued
+creator:
+  name: KulpLights, LLC
+  url: https://kulplights.com
+  page: https://kulplights.com/product/k32a-b/
+notes: BeagleBone Black cape running FPP (Ethernet via the BBB). 32 fused local
+  string ports plus 4 RJ45 differential ports adding up to 16 strings via
+  standard or 48 via smart receivers (80 strings max). Two RS485 outputs for
+  DMX/PixelNet/Renard/LOR. OLED display, RTC, onboard sound DAC; FM transmitter
+  optional. Discontinued per Wired Watts; no longer in the kulplights.com shop.
+inputs:
+  physical:
+    Ethernet: true # via the BeagleBone Black host
+    PoE: PoE++
+  standalone: true # runs FPP (Falcon Player)
+  requires_host: BeagleBone Black
+outputs:
+  count: 80 # 32 fused local + up to 48 via smart receivers
+  connector: Phoenix Screw/RJ45
+  driver:
+    buffered: true
+  differential: true # 4 RJ45 differential receiver ports
+  clocked: false # async pixel types
+  auxiliary:
+    DMX512: 2 # two RS485 outputs (DMX/PixelNet/Renard/LOR)
+power:
+  voltage:
+    max: 12
+  current:
+    max: 160
+data:
+  storage:
+    - type: uSD # via BeagleBone Black
+dead_links:
+  - url: https://kulplights.com/product/k32a-b/
+    checked: '2026-07-01'
+features:
+  - OLED display
+  - Real-time clock (RTC)
+  - Onboard sound DAC
+  - Optional FM transmitter
+price: 150 # board-only; was $195

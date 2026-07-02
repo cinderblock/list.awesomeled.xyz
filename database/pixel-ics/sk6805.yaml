@@ -1,0 +1,28 @@
+name: SK6805
+creator: Opsco Optoelectronics
+notes: Low-current SK6812 sibling (5 mA/channel vs 12 mA) in miniature packages,
+  used for dense strips and tiny pixels (e.g. NeoPixel Nano 2427).
+color:
+  channel_bits: 8
+  pwm_frequency: 1.2kHz
+data:
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  pixel_size_bits: 24
+datasheet:
+  url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
+electrical:
+  supply_voltage: 5V
+  max_current: 5mA
+physical:
+  package_sizes:
+    - '2427'
+    - '1515'
+related:
+  - type: variant
+    ref: pixel-ics/sk6812-5050
+    notes: Higher-current (12 mA/channel) sibling
+  - type: related
+    ref: pixels/sk6805
+    notes: The same part as an integrated LED pixel

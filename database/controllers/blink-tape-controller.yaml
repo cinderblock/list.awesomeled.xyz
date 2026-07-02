@@ -1,23 +1,28 @@
 name: Blink tape Controller
 status: unknown
-release_year: null
-creator: Blinkinlabs
-notes: null
-outputs: Single
-auxiliary_outputs: GPIO
-buffered: false
-interfaces:
-  - Bluetooth
-max_current: 1A
-max_outputs: 1
-max_pixels: 512
-max_voltage: 5V
-output_connectors: Solder, JST
-pixel_types: async
+creator:
+  name: Blinkinlabs
+  page: https://shop.blinkinlabs.com/products/blinkytape-control-board
+inputs:
+  physical:
+    Bluetooth: true
+  standalone: true
+outputs:
+  count: 1
+  connector: Solder, JST
+  driver:
+    buffered: false
+  clocked: false
+  pixels:
+    max_per_output: 512
+power:
+  current:
+    max: 1
+  voltage:
+    max: 5
+data:
+  storage:
+    - type: Flash
+features:
+  - GPIO breakout
 price: 16
-standalone: true
-storage: Flash
-url: https://shop.blinkinlabs.com/products/blinkytape-control-board
-warranty: null
-waterproof: null
-wled_compatible: null

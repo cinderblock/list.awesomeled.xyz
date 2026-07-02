@@ -553,3 +553,35 @@
   background-color: var(--category-primary, var(--primary));
   border-radius: var(--radius-full);
 }
+
+/* Sort layer number shown when multiple sort levels are active */
+.column-header-sort-layer {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--category-primary, #2563eb);
+}
+
+/* Date "since" filter */
+.filter-date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.filter-date-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+.filter-date-since {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+.filter-date-since .filter-input {
+  flex: 1;
+  min-width: 0;
+}
+.filter-action-btn--active {
+  color: var(--category-primary, #2563eb);
+  border-color: var(--category-primary, #2563eb);
+}

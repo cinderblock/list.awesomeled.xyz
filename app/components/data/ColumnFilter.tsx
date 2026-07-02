@@ -3,6 +3,9 @@ import * as Popover from '@radix-ui/react-popover';
 import { X, Check, ArrowUp, ArrowDown, ArrowUpDown, EyeOff } from 'lucide-react';
 import type { Column, FilterConfig } from '~/lib/columns';
 import type { BaseEntry } from '~/lib/types';
+import { priceUSD } from '~/lib/currency';
+import { Tooltip } from '~/components/ui/Tooltip';
+import { useNow } from '~/hooks/useNow';
 
 type SortDirection = 'asc' | 'desc';
 
@@ -26,11 +29,35 @@ export interface StringFilterValue {
   fuzzy: boolean;
 }
 
+export interface DateFilterValue {
+  /** ISO day (YYYY-MM-DD): keep entries updated on/after this date */
+  since: string;
+}
+
 export type FilterValue =
   | NumericFilterValue
   | SelectFilterValue
   | BooleanFilterValue
-  | StringFilterValue;
+  | StringFilterValue
+  | DateFilterValue;
+
+/**
+ * Loose "since" text: a year (2024), year-month (2024-06), or a full date.
+ * Returns a normalized ISO day, or null when it isn't date-ish.
+ */
+export function parseSinceInput(raw: string): string | null {
+  const s = raw.trim();
+  if (/^\d{4}$/.test(s)) return `${s}-01-01`;
+  if (/^\d{4}-\d{1,2}$/.test(s)) {
+    const [y, m] = s.split('-');
+    return `${y}-${m.padStart(2, '0')}-01`;
+  }
+  if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(s)) {
+    const [y, m, d] = s.split('-');
+    return `${y}-${m.padStart(2, '0')}-${d.padStart(2, '0')}`;
+  }
+  return null;
+}
 
 export type FilterState = Record<string, FilterValue>;
 
@@ -41,22 +68,34 @@ interface ColumnFilterProps {
   onChange: (value: FilterValue | undefined) => void;
 }
 
+// Resolve a possibly-dotted key (e.g. "outputs.count") against an object
+function resolveKey(item: unknown, key: string): unknown {
+  return key.split('.').reduce<unknown>((v, k) => {
+    if (v == null) return null;
+    return (v as Record<string, unknown>)[k];
+  }, item);
+}
+
 // Parse numeric value from string (handles units like "16 A", "50 V")
 function parseNumericValue(val: unknown): number | null {
   if (val == null) return null;
   if (typeof val === 'number') return val;
   const str = String(val);
   const match = str.match(/^([\d.,]+)/);
-  if (!match) return null;
-  const num = parseFloat(match[1].replace(/,/g, ''));
-  return isNaN(num) ? null : num;
+  if (match) {
+    const num = parseFloat(match[1].replace(/,/g, ''));
+    if (!isNaN(num)) return num;
+  }
+  // Currency-shaped values ("$25", {amount, currency}, price-tier arrays)
+  // compare in normalized USD, matching how price columns sort.
+  return priceUSD(val);
 }
 
 // Get unique values from data for a column
 function getUniqueValues(data: BaseEntry[], key: string): string[] {
   const values = new Set<string>();
   for (const item of data) {
-    const val = (item as Record<string, unknown>)[key];
+    const val = resolveKey(item, key);
     if (val == null) continue;
     if (Array.isArray(val)) {
       val.forEach((v) => values.add(String(v)));
@@ -67,14 +106,22 @@ function getUniqueValues(data: BaseEntry[], key: string): string[] {
   return Array.from(values).sort((a, b) => a.localeCompare(b));
 }
 
-// Get min/max values from data for a numeric column
-function getNumericRange(data: BaseEntry[], key: string): { min: number; max: number } | null {
+// Get min/max values from data for a numeric column. A column's sortValue
+// normalizer (prices → USD, quantities → base units) takes precedence so the
+// slider bounds match how the filter compares.
+function getNumericRange(
+  data: BaseEntry[],
+  key: string,
+  sortValue?: Column['sortValue']
+): { min: number; max: number } | null {
   let min = Infinity;
   let max = -Infinity;
   let hasValues = false;
 
   for (const item of data) {
-    const val = parseNumericValue((item as Record<string, unknown>)[key]);
+    const raw = resolveKey(item, key);
+    const normalized = sortValue ? sortValue(raw, item) : parseNumericValue(raw);
+    const val = typeof normalized === 'number' ? normalized : null;
     if (val !== null) {
       hasValues = true;
       min = Math.min(min, val);
@@ -89,6 +136,9 @@ function getNumericRange(data: BaseEntry[], key: string): { min: number; max: nu
 export function isFilterActive(value: FilterValue | undefined): boolean {
   if (!value) return false;
 
+  if ('since' in value) {
+    return !!value.since;
+  }
   if ('min' in value || 'max' in value) {
     return value.min !== undefined || value.max !== undefined;
   }
@@ -104,18 +154,30 @@ export function isFilterActive(value: FilterValue | undefined): boolean {
   return false;
 }
 
-// Apply filter to a single item
+// Apply filter to a single item. `sortValue` (from the column) normalizes
+// values before numeric comparison so filters agree with sorting.
 export function applyFilter(
   item: BaseEntry,
   key: string,
   config: FilterConfig,
-  value: FilterValue
+  value: FilterValue,
+  sortValue?: Column['sortValue']
 ): boolean {
-  const itemValue = (item as Record<string, unknown>)[key];
+  const itemValue = resolveKey(item, key);
 
   switch (config.type) {
+    case 'date': {
+      const filterVal = value as DateFilterValue;
+      if (!filterVal.since) return true;
+      const date =
+        itemValue instanceof Date ? itemValue : itemValue ? new Date(String(itemValue)) : null;
+      if (!date || isNaN(date.getTime())) return true; // don't drop unknown dates
+      return date.getTime() >= new Date(`${filterVal.since}T00:00:00`).getTime();
+    }
+
     case 'numeric': {
-      const numValue = parseNumericValue(itemValue);
+      const normalized = sortValue ? sortValue(itemValue, item) : parseNumericValue(itemValue);
+      const numValue = typeof normalized === 'number' ? normalized : null;
       if (numValue === null) return true; // Don't filter out items with no value
       const filterVal = value as NumericFilterValue;
       if (filterVal.min !== undefined && numValue < filterVal.min) return false;
@@ -172,9 +234,11 @@ interface ColumnHeaderPopoverProps {
   data: BaseEntry[];
   filterValue: FilterValue | undefined;
   onFilterChange: (value: FilterValue | undefined) => void;
-  sortKey: string | null;
-  sortDir: SortDirection | null;
-  onSort: (key: string) => void;
+  /** This column's place in the sort layers, if any */
+  sortState: { dir: SortDirection; index: number; count: number } | null;
+  /** True when other columns are already sorted (enables "add level") */
+  hasOtherSort: boolean;
+  onSortChange: (dir: SortDirection | null, additive?: boolean) => void;
   onHide?: () => void;
   children: React.ReactNode;
 }
@@ -184,9 +248,9 @@ export function ColumnHeaderPopover({
   data,
   filterValue,
   onFilterChange,
-  sortKey,
-  sortDir,
-  onSort,
+  sortState,
+  hasOtherSort,
+  onSortChange,
   onHide,
   children,
 }: ColumnHeaderPopoverProps) {
@@ -194,7 +258,8 @@ export function ColumnHeaderPopover({
   const hasFilter = column.filterConfig != null;
   const isSortable = column.sortable !== false && column.key !== 'links';
   const isFilterActive_ = isFilterActive(filterValue);
-  const isSorted = sortKey === column.key;
+  const isSorted = sortState != null;
+  const sortDir = sortState?.dir ?? null;
 
   // Close popover on scroll to prevent it from detaching from sticky header
   useEffect(() => {
@@ -218,13 +283,15 @@ export function ColumnHeaderPopover({
       <Popover.Trigger asChild>
         <button
           className={`column-header-trigger${isFilterActive_ ? ' column-header-trigger--filtered' : ''}${isSorted ? ' column-header-trigger--sorted' : ''}`}
-          title={`${column.label} options`}
         >
           {children}
           {isSortable && (
             <span className="column-header-sort-indicator">
               {isSorted && sortDir === 'asc' && <ArrowUp size={14} />}
               {isSorted && sortDir === 'desc' && <ArrowDown size={14} />}
+              {sortState && sortState.count > 1 && (
+                <sup className="column-header-sort-layer">{sortState.index}</sup>
+              )}
               {!isSorted && <ArrowUpDown size={14} className="column-header-sort-hint" />}
             </span>
           )}
@@ -235,52 +302,38 @@ export function ColumnHeaderPopover({
           <div className="column-header-popover-header">
             <span className="column-header-popover-title">{column.label || column.key}</span>
             {onHide && (
-              <button
-                className="column-header-hide-btn"
-                onClick={() => {
-                  onHide();
-                  setOpen(false);
-                }}
-                title="Hide column"
-              >
-                <EyeOff size={14} />
-              </button>
+              <Tooltip content="Hide column">
+                <button
+                  className="column-header-hide-btn"
+                  onClick={() => {
+                    onHide();
+                    setOpen(false);
+                  }}
+                >
+                  <EyeOff size={14} />
+                </button>
+              </Tooltip>
             )}
           </div>
 
           {/* Sort controls */}
           {isSortable && (
             <div className="column-header-sort-section">
-              <div className="column-header-section-label">Sort</div>
+              <div className="column-header-section-label">
+                Sort
+                {sortState && sortState.count > 1 ? ` (level ${sortState.index})` : ''}
+              </div>
               <div className="column-header-sort-buttons">
                 <button
-                  className={`column-header-sort-btn${isSorted && sortDir === 'asc' ? ' column-header-sort-btn--active' : ''}`}
-                  onClick={() => {
-                    if (isSorted && sortDir === 'asc') {
-                      onSort(column.key); // Will toggle to desc
-                    } else {
-                      onSort(column.key);
-                      if (sortDir === 'desc' || !isSorted) {
-                        // Need to set to asc - call twice if currently desc
-                        if (sortDir === 'desc') onSort(column.key);
-                      }
-                    }
-                  }}
+                  className={`column-header-sort-btn${sortDir === 'asc' ? ' column-header-sort-btn--active' : ''}`}
+                  onClick={() => onSortChange('asc')}
                 >
                   <ArrowUp size={14} />
                   Ascending
                 </button>
                 <button
-                  className={`column-header-sort-btn${isSorted && sortDir === 'desc' ? ' column-header-sort-btn--active' : ''}`}
-                  onClick={() => {
-                    if (!isSorted) {
-                      onSort(column.key); // asc
-                      onSort(column.key); // desc
-                    } else if (sortDir === 'asc') {
-                      onSort(column.key); // toggle to desc
-                    }
-                    // if already desc, do nothing (already active)
-                  }}
+                  className={`column-header-sort-btn${sortDir === 'desc' ? ' column-header-sort-btn--active' : ''}`}
+                  onClick={() => onSortChange('desc')}
                 >
                   <ArrowDown size={14} />
                   Descending
@@ -288,21 +341,26 @@ export function ColumnHeaderPopover({
                 {isSorted && (
                   <button
                     className="column-header-sort-btn column-header-sort-btn--clear"
-                    onClick={() => {
-                      // Toggle through to clear
-                      if (sortDir === 'asc') {
-                        onSort(column.key); // desc
-                        onSort(column.key); // clear
-                      } else {
-                        onSort(column.key); // clear
-                      }
-                    }}
+                    onClick={() => onSortChange(null)}
                   >
                     <X size={14} />
                     Clear
                   </button>
                 )}
               </div>
+              {hasOtherSort && !isSorted && (
+                <div className="column-header-sort-buttons">
+                  <Tooltip content="Keep the current sort and use this column to break ties">
+                    <button
+                      className="column-header-sort-btn"
+                      onClick={() => onSortChange(column.defaultSortDir ?? 'asc', true)}
+                    >
+                      <ArrowUpDown size={14} />
+                      Add as tie-break level
+                    </button>
+                  </Tooltip>
+                </div>
+              )}
             </div>
           )}
 
@@ -384,7 +442,94 @@ function FilterContent({ column, data, value, onChange }: ColumnFilterProps) {
           config={config}
         />
       );
+    case 'date':
+      return <DateFilter value={value as DateFilterValue | undefined} onChange={onChange} />;
   }
+}
+
+// "Since" filter: big obvious presets first, a forgiving text field second,
+// and a native date picker only for those who go looking for it.
+function DateFilter({
+  value,
+  onChange,
+}: {
+  value: DateFilterValue | undefined;
+  onChange: (value: FilterValue | undefined) => void;
+}) {
+  const [text, setText] = useState(value?.since ?? '');
+  const [showPicker, setShowPicker] = useState(false);
+  // Client clock (0 during SSR/hydration); the popover only opens
+  // client-side, so this is always set before the presets are visible.
+  const now = useNow();
+
+  const setSince = (since: string | null) => {
+    setText(since ?? '');
+    onChange(since ? { since } : undefined);
+  };
+  const daysAgo = (n: number) => new Date(now - n * 86_400_000).toISOString().slice(0, 10);
+  const presets: [string, string][] =
+    now === 0
+      ? []
+      : [
+          ['Last 90 days', daysAgo(90)],
+          ['Last 365 days', daysAgo(365)],
+          ['This year', `${new Date(now).getFullYear()}-01-01`],
+        ];
+
+  const commitText = () => {
+    if (text.trim() === '') {
+      setSince(null);
+      return;
+    }
+    const parsed = parseSinceInput(text);
+    if (parsed) setSince(parsed);
+  };
+
+  return (
+    <div className="filter-date">
+      <div className="filter-date-presets">
+        {presets.map(([label, since]) => (
+          <button
+            key={label}
+            className={`filter-action-btn${value?.since === since ? ' filter-action-btn--active' : ''}`}
+            onClick={() => setSince(value?.since === since ? null : since)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      <div className="filter-date-since">
+        <input
+          type="text"
+          className="filter-input"
+          placeholder="since… (2024, 2024-06, or 2024-06-15)"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          onBlur={commitText}
+          onKeyDown={(e) => e.key === 'Enter' && commitText()}
+        />
+        <Tooltip content="Pick from a calendar instead">
+          <button className="filter-action-btn" onClick={() => setShowPicker((v) => !v)}>
+            📅
+          </button>
+        </Tooltip>
+      </div>
+      {showPicker && (
+        <input
+          type="date"
+          className="filter-input"
+          value={value?.since ?? ''}
+          onChange={(e) => setSince(e.target.value || null)}
+        />
+      )}
+      {value?.since && (
+        <button className="filter-clear-btn" onClick={() => setSince(null)}>
+          <X size={14} />
+          Clear
+        </button>
+      )}
+    </div>
+  );
 }
 
 interface NumericFilterProps {
@@ -396,7 +541,10 @@ interface NumericFilterProps {
 }
 
 function NumericFilter({ column, data, value, onChange, config }: NumericFilterProps) {
-  const range = useMemo(() => getNumericRange(data, column.key), [data, column.key]);
+  const range = useMemo(
+    () => getNumericRange(data, column.key, column.sortValue),
+    [data, column.key, column.sortValue]
+  );
 
   // Initialize local state from value, will be reset when popover opens
   const [localMin, setLocalMin] = useState(value?.min?.toString() ?? '');
@@ -526,13 +674,20 @@ function SelectFilter({ column, data, value, onChange, config }: SelectFilterPro
           placeholder="Search options..."
           className="filter-input filter-search"
         />
-        <button
-          className={`filter-exclude-btn${exclude ? ' filter-exclude-btn--active' : ''}`}
-          onClick={toggleExclude}
-          title={exclude ? 'Excluding selected values' : 'Including selected values'}
+        <Tooltip
+          content={
+            exclude
+              ? 'Matching entries are hidden; click to include instead'
+              : 'Matching entries are shown; click to exclude instead'
+          }
         >
-          {exclude ? 'Exclude' : 'Include'}
-        </button>
+          <button
+            className={`filter-exclude-btn${exclude ? ' filter-exclude-btn--active' : ''}`}
+            onClick={toggleExclude}
+          >
+            {exclude ? 'Exclude' : 'Include'}
+          </button>
+        </Tooltip>
       </div>
       <div className="filter-select-actions">
         <button className="filter-action-btn" onClick={selectAll}>

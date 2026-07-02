@@ -1,15 +1,16 @@
 name: PP Push Fit Waste Pipe Thick Wall
 notes: Polypropylene Push Fit Waste Pipe, UK source Screwfix,plain white no markings on it, *Not ABS , Barrier PEX or PVC *. Bendable after filling with hot sand.
-color_rendition: 4
-diffusivity: 4
-fire_retardant: null
-flexible: R
-light_transmission: 3
+links:
+  product: https://www.screwfix.com/p/floplast-push-fit-pipe-white-40mm-x-3m/65426
 material_type: Polypropylene
-price_range: $$
-properties: Diffusive
+optical:
+  color_rendition: 4
+  light_transmission: 3
+  diffusivity: 4
+physical:
+  flexible: R
+  sizes_available: 40 /32 mm O.D
+  properties: Diffusive
+pricing:
+  price_range: $$
 purpose_made: false
-sample_thickness: null
-sizes_available: 40 /32 mm O.D
-tinted: null
-url: https://www.screwfix.com/p/floplast-push-fit-pipe-white-40mm-x-3m/65426

@@ -1,28 +1,21 @@
 name: Mapio Pro
-status: alive
+status: active
 creator: Vistitution
 notes: Mapio Pro has support for addressable LEDs
-audio_input: Output
-demo_available: Watermarked demo
-designer: true
-gpio: null
-integrations: null
-language: null
-live: true
-other_inputs: Native support for PixelPusher devices
-other_outputs: null
-platforms:
-  - Windows
-  - macOS
-price: 234
-programmatic: null
-protocols:
-  artnet: Output
-  sacn: null
-  dmx: null
-  kinet: null
-  ddp: null
-serial: Output
-url: https://visution.com/
-video_input: Both
-visualizer: null
+inputs:
+  video: Both
+  audio: Output
+  other: Native support for PixelPusher devices
+outputs:
+  protocols:
+    artnet: Output
+  serial: Output
+capabilities:
+  live: true
+  designer: true
+links:
+  url: https://visution.com/
+pricing:
+  price: 234
+  demo:
+    available: Watermarked demo

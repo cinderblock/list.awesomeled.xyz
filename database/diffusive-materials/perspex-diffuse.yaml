@@ -1,15 +1,15 @@
 name: Perspex Diffuse
-notes: null
-color_rendition: null
-diffusivity: null
-fire_retardant: true
-flexible: R
-light_transmission: 2 - 5
+links:
+  product: https://perspex.com/news/pom-diffuse/
 material_type: PMMA
-price_range: $$$$$
-properties: Backlight
+optical:
+  light_transmission: 2 - 5
+  tinted: T&C
+physical:
+  flexible: R
+  fire_retardant: true
+  sizes_available: up to 1220x2440
+  properties: Backlight
+pricing:
+  price_range: $$$$$
 purpose_made: true
-sample_thickness: null
-sizes_available: up to 1220x2440
-tinted: T&C
-url: https://perspex.com/news/pom-diffuse/

@@ -1,28 +1,19 @@
 name: LightDesigner
-status: dead see bekonix
+status: discontinued
 creator: RocketLife
 notes: RocketLife controllers, serial/SPI pixels only
-audio_input: null
-demo_available: null
-designer: true
-gpio: null
+inputs:
+  other: GPIO pins
+outputs:
+  other: Bluetooth/NFC to RocketLife hardware
+capabilities:
+  designer: true
 integrations: LightBox&LightBoard Mini
-language: null
-live: null
-other_inputs: GPIO pins
-other_outputs: Bluetooth/NFC to RocketLife hardware
+links:
+  url: https://www.rocketlife.com/technology/
 platforms:
-  - Windows
-  - macOS
-price: Free
-programmatic: null
-protocols:
-  artnet: null
-  sacn: null
-  dmx: null
-  kinet: null
-  ddp: null
-serial: null
-url: https://www.rocketlife.com/technology/
-video_input: null
-visualizer: null
+  os:
+    - Windows
+    - macOS
+pricing:
+  price: Free

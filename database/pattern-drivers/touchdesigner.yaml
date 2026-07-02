@@ -3,54 +3,58 @@ status: active
 creator: Derivative
 notes: Visual programming environment with lots of useful built-ins. Not
   specifically for LED patterns, but they're easy to make with a little extra.
-adc_input: true
-audio_input: true
-demo_available: true
-demo_limitations: Non-commercial license is free with full features
-designer: true
-dmx_notes: Requires DMX USB adapter for direct DMX output
-gpio: true
+inputs:
+  video: true
+  audio: true
+  adc: true
+  other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton, SMPTE/LTC
+outputs:
+  protocols:
+    artnet: true
+    sacn: true
+    dmx: true
+    kinet: true
+  dmx_notes: Requires DMX USB adapter for direct DMX output
+  gpio: true
+  serial: true
+  serial_notes: Serial support for Arduino and microcontroller communication
+  other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+  programmatic: true
 integrations: Tons
 language: Python, GLSL
-license_type: perpetual
-live: true
-other_inputs: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton, SMPTE/LTC
-other_outputs: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton
+links:
+  url: https://derivative.ca/
 platforms:
-  - Windows
-  - macOS
-price: Free-$2200
-price_tiers:
-  - tier: Non-Commercial
-    price: Free
-    features: Full features for non-commercial use
-    limitations: Non-commercial use only, watermark on export
-  - tier: Educational
-    price: 300
-    features: For students and educators
-    limitations: Educational use only
-  - tier: Commercial
-    price: 600
-    features: Commercial use, 1 seat
-    limitations: null
-  - tier: Pro
-    price: 2200
-    features: Commercial use, priority support
-    limitations: null
-programmatic: true
-protocols:
-  artnet: true
-  sacn: true
-  dmx: true
-  kinet: true
-  ddp: null
-serial: true
-serial_notes: Serial support for Arduino and microcontroller communication
+  os:
+    - Windows
+    - macOS
+pricing:
+  price: Free-$2200
+  license_type: perpetual
+  tiers:
+    - tier: Non-Commercial
+      price: Free
+      features: Full features for non-commercial use
+      limitations: Non-commercial use only, watermark on export
+    - tier: Educational
+      price: 300
+      features: For students and educators
+      limitations: Educational use only
+    - tier: Commercial
+      price: 600
+      features: Commercial use, 1 seat
+    - tier: Pro
+      price: 2200
+      features: Commercial use, priority support
+  demo:
+    available: true
+    limitations: Non-commercial license is free with full features
 technical_notes:
   - Node-based visual programming environment
   - Powerful 3D capabilities for spatial mapping
   - Can be combined with PixelMap for LED-specific features
   - Excellent for interactive installations
-url: https://derivative.ca/
-video_input: true
-visualizer: 3D

@@ -1,26 +1,22 @@
 name: Arduino Micro
-release_year: null
-creator: Arduino
-notes: null
-bluetooth: null
-bms: false
-clock_speed: 16MHz
-cpu: AVR
-ethernet: null
-flash: 32kB
-gpio_voltage: 5.0V
-imu: false
-isa: AVR5
-linux: false
-max_input_voltage: 5V
-max_outputs: null
-min_input_voltage: null
-poe: null
-price: null
-ram: 2.5kB
-soc: ATmega32u4
-storage: null
-ttl_serial: true
-url: https://store.arduino.cc/usa/arduino-micro
-usb: OTG
-wifi: null
+creator:
+  name: Arduino
+  page: https://store.arduino.cc/usa/arduino-micro
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 5.0V
+compute:
+  soc: ATmega32u4
+  cpu: AVR
+  isa: AVR5
+  clock_speed: 16MHz
+  flash: 32kB
+  ram: 2.5kB
+  linux: false
+connectivity:
+  usb: OTG
+  serial: true
+io:
+  bms: 'No'
+  imu: false

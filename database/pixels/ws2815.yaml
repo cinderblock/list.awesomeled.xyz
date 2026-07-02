@@ -3,43 +3,49 @@ status: active
 release_year: 2018
 creator: WorldSemi/Newstar
 notes: 12V WS2813
-backup_data_line: true
-brightness_bits: 8
-channel_current: 10mA
-clocked: false
-color_order: RGB
-data_bitrate: 800kHz
-data_type: WS2811/12
-datasheet_discrepancies:
-  - GPIO min spec of 0.7*VDD (8.4V) is incorrect - actual threshold is 3.5V
-    based on internal 5V Vdd
-datasheet_url: http://newstar-ledstrip.com/product/20180125101420006.pdf
-gpio_max: 5V
-gpio_min: 3.5V
-gpio_min_notes: Datasheet says 0.7*VDD which would be 8.4V at 12V - this appears
-  to be a copypaste error. Actual Vdd is internal 5V bus, so 3.5V threshold
-led_voltage: 12V
-led_voltage_notes: Datasheet 9.5-13.5V range
-max_pixels_per_string: null
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 2.0kHz
+  pwm_frequency_notes: 2kHz according to datasheet
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: http://newstar-ledstrip.com/product/20180125101420006.pdf
+  discrepancies:
+    - GPIO min spec of 0.7*VDD (8.4V) is incorrect - actual threshold is 3.5V based on internal 5V Vdd
+dead_links:
+  - url: http://newstar-ledstrip.com/product/20180125101420006.pdf
+    archive: https://web.archive.org/web/20210226215913/http://www.newstar-ledstrip.com/product/20180125101420006.pdf
+    checked: '2026-07-01'
+electrical:
+  led_voltage: 12V
+  led_voltage_notes: Datasheet 9.5-13.5V range
+  vcc_voltage: 5V
+  vcc_voltage_notes: Internal regulator drops 12V to 5V for logic. Can use external resistor to supply 5V Vdd from higher system voltage
+  gpio:
+    min: 3.5V
+    min_notes: Datasheet says 0.7*VDD which would be 8.4V at 12V - this appears to be a copypaste error. Actual Vdd is internal 5V bus, so 3.5V threshold
+    max: 5V
+  channel_current: 10mA
+  quiescent_current: 2.1mA
+  wattage: 120mW
 other_links:
   - WS2815 Pixel Protocol Overview | Advatek Lighting
-package_size: '5050'
-package_sizes:
-  - '5050'
-pin_count: 6
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-pwm_frequency: 2.0kHz
-pwm_frequency_notes: 2kHz according to datasheet
-quiescent_current: 2.1mA
-quiescent_current_notes: At 12V supply
+physical:
+  package_sizes:
+    - '5050'
+  package_size: '5050'
+  pin_count: 6
+related:
+  - type: variant
+    ref: pixels/ws2813
 technical_notes:
   - 12V version allows longer cable runs with less voltage drop
   - Internal regulator provides 5V logic from 12V supply
   - Backup data line for fault tolerance like WS2813
   - 3 internal LEDs in series for 12V operation
-third_party_testing: null
-vcc_voltage: 5V
-vcc_voltage_notes: Internal regulator drops 12V to 5V for logic. Can use
-  external resistor to supply 5V Vdd from higher system voltage
-wattage: 120mW

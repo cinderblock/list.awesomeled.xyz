@@ -1,23 +1,26 @@
 name: Replay
 status: discontinued
-release_year: null
 creator: Smartshow
-notes: Replays Jinx and xLights files on 4 separate 680 Pixel outputs
-outputs: single
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - Ethernet
-max_current: null
-max_outputs: 4
-max_pixels: 2720
-max_voltage: 24V
-output_connectors: Phoenix Screw
-pixel_types: async
+notes: Replays Jinx and xLights files on 4 separate 680 pixel outputs
+inputs:
+  physical:
+    Ethernet: true
+  standalone: true # plays FSEQ/PSEQ sequence files from SD card
+outputs:
+  count: 4
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 680
+  clocked: false # async (clockless) pixels only
+  protocols:
+    - WS2812
+    - SK6812
+power:
+  voltage:
+    max: 24
+data:
+  storage:
+    - type: SD
 price: 80
-standalone: null
-storage: SD
-url: https://www.ebay.co.uk/itm/SmartShow-REPLAY-SDCard-Pixel-Player-2720-WS2812-SK6812-TMP2-FSEQ-PSEQ/274135104445?hash=item3fd3b9bbbd:g:sSAAAOSwAeBd7nOC
-warranty: null
-waterproof: null
-wled_compatible: null

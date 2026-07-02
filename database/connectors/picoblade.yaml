@@ -1,31 +1,27 @@
 name: PicoBlade
 creator: Molex
 notes: Molex massive US connector maker
-board_fingers: false
-colors: null
-contact_type: Pins
-convention: null
-crimp: true
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 26 AWG
-locking: Latching
-max_current: 3 A
-max_pins: 15
-max_voltage: 125 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: Both
-pinout: null
-pitch: 1.25 mm
-rows: 1
-screw_terminal: null
-smallest_gauge: 28 AWG
-solder: true
-url: https://www.molex.com/molex/products/family/picoblade
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://www.molex.com/molex/products/family/picoblade
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 1.25 mm
+  min_pins: 2
+  max_pins: 15
+  rows: 1
+  gendered: true
+  locking: Latching
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: Both
+  board_fingers: false
+ratings:
+  max_current: 3 A
+  max_voltage: 125 V
+termination:
+  solder: true
+  crimp: true
+  idc: false
+  smallest_gauge: 28 AWG
+  largest_gauge: 26 AWG

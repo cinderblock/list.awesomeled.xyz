@@ -2,31 +2,29 @@ name: Speakon
 creator: Neutrik
 notes: World Standard professional amplifier to speaker connector, compatibles
   offer low cost high current connector , if avoid mix up with audio....
-board_fingers: false
-colors: Multi
-contact_type: Blade
-convention: null
-crimp: false
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP30
-largest_gauge: 10 AWG
-locking: Latching
-max_current: 30 A
-max_pins: 8
-max_voltage: 250 V
-min_pins: 2
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: N/A
-screw_terminal: null
-smallest_gauge: 18 AWG
-solder: true
-url: https://www.neutrik.com/en/neutrik/products/speakon-loudspeaker-connectors/speakon-cable-connectors
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://www.neutrik.com/en/neutrik/products/speakon-loudspeaker-connectors/speakon-cable-connectors
+mechanical:
+  outline: Circular
+  contact_type: Blade
+  min_pins: 2
+  max_pins: 8
+  rows: N/A
+  gendered: true
+  locking: Latching
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 30 A
+  max_voltage: 250 V
+  ip_rating: IP30
+termination:
+  solder: true
+  crimp: false
+  idc: false
+  smallest_gauge: 18 AWG
+  largest_gauge: 10 AWG
+wiring:
+  colors: Multi

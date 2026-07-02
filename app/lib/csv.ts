@@ -45,6 +45,11 @@ export function generateCSV(
       if (value instanceof Date) {
         return useLocale ? value.toLocaleString() : value.toISOString();
       }
+      // Object values (e.g. creator { name, url, page }) -> use the name
+      if (typeof value === 'object') {
+        const name = (value as { name?: unknown }).name;
+        return name != null ? String(name) : '';
+      }
       return String(value);
     })
   );

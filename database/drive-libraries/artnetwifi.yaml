@@ -1,7 +1,20 @@
 name: ArtnetWiFi
+status: active
 creator: RStephan
-features: null
 hardware: ESP8266/32
-instructional_resources: []
-url: https://github.com/rstephan/ArtnetWifi
-youtube_url: null
+language: C++
+license: MIT
+links:
+  repo: https://github.com/rstephan/ArtnetWifi
+platforms:
+  - Arduino
+  - ESP8266
+  - ESP32
+  - Raspberry Pi Pico
+related_pixel_ics:
+  - dmx512
+  - ws2811
+supported_ics:
+  - DMX
+  - WS2811
+  - WS2812

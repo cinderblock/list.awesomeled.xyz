@@ -1,26 +1,23 @@
 name: Teensy++ 2.0
-release_year: null
-creator: PJRC
-notes: null
-bluetooth: null
-bms: false
-clock_speed: 16MHz
-cpu: AVR
-ethernet: null
-flash: 127kB
-gpio_voltage: 5.0V
-imu: false
-isa: AVR5
-linux: false
-max_input_voltage: 5V
-max_outputs: null
-min_input_voltage: null
-poe: null
-price: null
-ram: 8kB
-soc: AT90USB1286
-storage: Shield
-ttl_serial: true
-url: https://www.pjrc.com/store/teensypp.html
-usb: OTG
-wifi: null
+creator:
+  name: PJRC
+  page: https://www.pjrc.com/store/teensypp.html
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 5.0V
+compute:
+  soc: AT90USB1286
+  cpu: AVR
+  isa: AVR5
+  clock_speed: 16MHz
+  flash: 127kB
+  ram: 8kB
+  linux: false
+connectivity:
+  usb: OTG
+  serial: true
+io:
+  storage: Shield
+  bms: 'No'
+  imu: false

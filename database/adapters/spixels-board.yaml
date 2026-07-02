@@ -1,13 +1,12 @@
 name: SPIxels Board
-creator: null
-notes: null
-outputs: Clocked
+outputs:
+  max_channels: 16
+  pixel_types: Clocked
+  connectors: JST
+  description: Clocked
+power:
+  voltage: 5V
 diy_or_ots: DIY
-max_channels: 16
-max_current: null
-max_voltage: 5V
-output_connectors: JST
+links:
+  product: http://spixels.org/
 parent: Raspberry Pi
-pixel_types: Clocked
-price: null
-url: http://spixels.org/

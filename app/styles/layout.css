@@ -83,8 +83,8 @@
    ========================================================================== */
 .site-footer {
   border-top: 1px solid var(--border);
-  padding-top: var(--space-6);
-  padding-bottom: var(--space-6);
+  padding-top: var(--space-3);
+  padding-bottom: var(--space-3);
   user-select: none;
   background-color: var(--muted);
 }

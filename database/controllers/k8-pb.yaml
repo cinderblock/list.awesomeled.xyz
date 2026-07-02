@@ -1,35 +1,49 @@
 name: K8-PB
 status: active
-release_year: null
-creator: KulpLights, LLC
-notes: 12 channels require differential receivers. eFuses, Current Sensing,
-  Pixel Counting
-outputs: Single
-auxiliary_outputs: DMX
-buffered: true
-differential_outputs: 12
-interfaces:
-  - Ethernet
-max_current: 30A
-max_outputs: 36
-max_pixels: 57600
-max_voltage: 12V
-output_connectors: Phoenix Screw/RJ45
-pixel_types: async
-power_features:
-  - eFuse protection
-  - Current sensing
-  - Pixel counting
-price: 98
-standalone: true
-storage: Yes
+creator:
+  name: KulpLights, LLC
+  url: https://kulplights.com
+  page: https://kulplights.com/product/k8-pb/
+notes: PocketBeagle 2 cape running FPP (network via USB Ethernet/Wi-Fi adapter on the host; not compatible with PocketBeagle 1). 8 local fused ports, 3 RJ45 differential ports adding 12 strings, and a 16-string expansion header. Accepts 5-18V input automatically. eFuses with current monitoring, pixel counting, RTC, OLED.
+inputs:
+  physical:
+    Ethernet: true # via USB Ethernet adapter on host
+    Wi-Fi: true # via USB Wi-Fi adapter on host
+    USB: true
+  standalone: true # runs FPP (Falcon Player)
+  requires_host: PocketBeagle 2
+outputs:
+  count: 36
+  connector: Phoenix Screw/RJ45
+  differential: true # 12 of 36 channels require differential receivers
+  clocked: false
+  driver:
+    buffered: true
+  auxiliary:
+    DMX512: 1
+power:
+  voltage:
+    min: 5
+    max: 18
+  current:
+    max: 30
+data:
+  storage:
+    - type: uSD
+features:
+  - eFuse protected power distribution
+  - Current sensing for fault detection
+  - Pixel counting for setup verification
+  - RTC
+  - OLED status display
+price: 90
+related:
+  - type: variant
+    ref: controllers/k8-b
+    notes: PocketBeagle 2 carrier version of the K8
 technical_notes:
   - 12 of 36 channels require differential receivers to drive LEDs
   - Runs FPP (Falcon Player)
   - eFuse protected power distribution
   - Built-in current sensing for fault detection
   - Pixel counting feature for setup verification
-url: https://kulplights.com/product/k8-pb/
-warranty: null
-waterproof: null
-wled_compatible: null

@@ -1,4 +1,27 @@
-import { CheckCircle, AlertTriangle, Wifi, Cpu, Network } from 'lucide-react';
+import {
+  CheckCircle,
+  AlertTriangle,
+  Wifi,
+  Cpu,
+  Network,
+  Bluetooth,
+  Usb,
+  Radio,
+  Monitor,
+  PlugZap,
+  Clock,
+  Cable,
+  Lightbulb,
+  MemoryStick,
+  SlidersHorizontal,
+  AppWindow,
+  CircuitBoard,
+  Smartphone,
+  Globe,
+  Code,
+  Droplets,
+  Package,
+} from 'lucide-react';
 import { Link } from 'react-router';
 
 // Expandable icon badge system for common terms/technologies
@@ -8,101 +31,262 @@ interface BadgeConfig {
   icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
   label: string;
   color: string;
+  // Lowercase terms that map to this badge. The canonical id (map key) is
+  // always matched too. Matching is whole-word, so short ids like "spi" or
+  // "arm" won't fire inside unrelated words ("firmware", "inspiration").
+  match?: string[];
+  // Terms only used for exact whole-value matches (ValueBadges), never for the
+  // free-text hero scan — for terms too generic or ambiguous to scan ("web",
+  // "sd", "usd" the storage type).
+  valueOnlyMatch?: string[];
 }
 
-// Map of terms to badge configurations
-// Keys should be lowercase for matching
+// Shared colors so related badges read as a family
+const C = {
+  green: '#22c55e',
+  amber: '#f59e0b',
+  control: '#8b5cf6', // pixel-control protocols (Art-Net, sACN, DDP, ...)
+  net: '#3b82f6', // wired/wireless connectivity
+  rf: '#0ea5e9', // radio links
+  bus: '#14b8a6', // low-level buses (I2C, SPI, UART, ...)
+  port: '#64748b', // physical ports (USB, HDMI, ...)
+  chip: '#ef4444', // SoC / MCU families
+  pixel: '#ec4899', // pixel data / IC families
+  power: '#eab308', // power features
+  software: '#06b6d4', // software ecosystems
+  platform: '#f97316', // OS / runtime platforms
+  rating: '#0284c7', // ingress-protection ratings
+} as const;
+
+// Map of canonical id -> badge configuration.
+// Keys and `match` terms must be lowercase.
 const BADGES: Record<string, BadgeConfig> = {
   // Status
-  active: {
-    icon: CheckCircle,
-    label: 'Active',
-    color: '#22c55e', // green
-  },
+  active: { icon: CheckCircle, label: 'Active', color: C.green },
   deprecated: {
     icon: AlertTriangle,
     label: 'Deprecated',
-    color: '#f59e0b', // amber
+    color: C.amber,
+    match: ['discontinued', 'end-of-life', 'eol'],
   },
-  // Protocols
-  artnet: {
-    icon: Network,
-    label: 'Art-Net',
-    color: '#8b5cf6', // purple
-  },
-  'e1.31': {
-    icon: Network,
-    label: 'E1.31 (sACN)',
-    color: '#8b5cf6',
-  },
-  sacn: {
-    icon: Network,
-    label: 'sACN',
-    color: '#8b5cf6',
-  },
+
+  // Pixel-control protocols
+  artnet: { icon: Network, label: 'Art-Net', color: C.control, match: ['art-net', 'art net'] },
+  sacn: { icon: Network, label: 'sACN', color: C.control, match: ['e1.31', 'e1.31 (sacn)'] },
+  ddp: { icon: Network, label: 'DDP', color: C.control },
+  kinet: { icon: Network, label: 'KiNET', color: C.control },
+  opc: { icon: Network, label: 'OPC', color: C.control, match: ['open pixel control'] },
+  tpm2: { icon: Network, label: 'TPM2', color: C.control, match: ['tpm2.net'] },
+  dmx: { icon: SlidersHorizontal, label: 'DMX', color: C.control, match: ['dmx512'] },
+
   // Connectivity
-  wifi: {
-    icon: Wifi,
-    label: 'WiFi',
-    color: '#3b82f6', // blue
-  },
-  ethernet: {
+  wifi: { icon: Wifi, label: 'Wi-Fi', color: C.net, match: ['wi-fi'] },
+  // Band pills for Wi-Fi columns; exact-value only so they don't double up
+  // with the Wi-Fi pill in hero scans (see note below).
+  'wifi-2-4': { icon: Wifi, label: '2.4 GHz', color: C.net, valueOnlyMatch: ['2.4ghz', '2.4 ghz'] },
+  'wifi-5': { icon: Wifi, label: '5 GHz', color: C.net, valueOnlyMatch: ['5ghz', '5 ghz'] },
+  ethernet: { icon: Network, label: 'Ethernet', color: C.net },
+  // Speed pills for Ethernet columns (exact values only; the hero already
+  // shows plain Ethernet via the field key)
+  'ethernet-100': {
     icon: Network,
-    label: 'Ethernet',
-    color: '#3b82f6',
+    label: '100 Mbps',
+    color: C.net,
+    valueOnlyMatch: ['100base-tx', '100base-t', '100mbps', '10/100'],
   },
-  // Chips/Platforms
-  esp32: {
-    icon: Cpu,
-    label: 'ESP32',
-    color: '#ef4444', // red
+  'ethernet-1g': {
+    icon: Network,
+    label: 'Gigabit',
+    color: C.net,
+    valueOnlyMatch: ['gigabit', '1000base-t', 'gigabit ethernet'],
   },
-  esp8266: {
-    icon: Cpu,
-    label: 'ESP8266',
-    color: '#ef4444',
+  bluetooth: { icon: Bluetooth, label: 'Bluetooth', color: C.net, match: ['ble'] },
+  // Note: "2.4 GHz" deliberately has no badge — in this database it only ever
+  // appears as a WiFi band qualifier (`Wi-Fi: 2.4GHz`), so a separate pill just
+  // doubles up the WiFi pill. Reintroduce only if a non-WiFi 2.4 GHz radio
+  // (nRF24, ESP-NOW, proprietary wireless DMX) shows up as its own field.
+  lora: { icon: Radio, label: 'LoRa', color: C.rf },
+  zigbee: { icon: Radio, label: 'Zigbee', color: C.rf },
+
+  // Physical ports
+  usb: {
+    icon: Usb,
+    label: 'USB',
+    color: C.port,
+    match: ['usb-c', 'usb-a', 'micro usb', 'mini usb'],
   },
-  arm: {
-    icon: Cpu,
-    label: 'ARM',
-    color: '#06b6d4', // cyan
+  hdmi: { icon: Monitor, label: 'HDMI', color: C.port },
+
+  // Low-level buses
+  i2c: { icon: Cable, label: 'I²C', color: C.bus },
+  spi: { icon: Cable, label: 'SPI', color: C.bus },
+  uart: { icon: Cable, label: 'UART', color: C.bus },
+  'can-bus': { icon: Cable, label: 'CAN bus', color: C.bus, match: ['canbus', 'can bus'] },
+
+  // Storage
+  microsd: {
+    icon: MemoryStick,
+    label: 'microSD',
+    color: C.port,
+    match: ['micro sd', 'micro-sd', 'tf card'],
+    valueOnlyMatch: ['usd'], // storage.type: uSD ("usd" is unscannable: currency)
   },
-  rp2040: {
+  'sd-card': {
+    icon: MemoryStick,
+    label: 'SD card',
+    color: C.port,
+    match: ['sd card', 'sdcard'],
+    valueOnlyMatch: ['sd'], // storage.type: SD
+  },
+
+  // Pixel data line
+  clocked: { icon: Clock, label: 'Clocked', color: C.pixel },
+  'backup-line': {
+    icon: Cable,
+    label: 'Backup Line',
+    color: C.pixel,
+    match: ['backup data line', 'backup line', 'backup_line', 'back up data line'],
+  },
+
+  // Ingress protection (dust/water) ratings
+  ip20: { icon: Droplets, label: 'IP20', color: C.rating },
+  ip30: { icon: Droplets, label: 'IP30', color: C.rating },
+  ip40: { icon: Droplets, label: 'IP40', color: C.rating },
+  ip65: { icon: Droplets, label: 'IP65', color: C.rating },
+  ip66: { icon: Droplets, label: 'IP66', color: C.rating },
+  ip67: { icon: Droplets, label: 'IP67', color: C.rating },
+  ip68: { icon: Droplets, label: 'IP68', color: C.rating },
+
+  // Pixel/IC package sizes. The numeric ones are valueOnly — "2020" or "5050"
+  // in free text is more likely a year or a quantity than a package.
+  'pkg-5050': { icon: Package, label: '5050', color: C.pixel, valueOnlyMatch: ['5050'] },
+  'pkg-3535': { icon: Package, label: '3535', color: C.pixel, valueOnlyMatch: ['3535'] },
+  'pkg-2020': { icon: Package, label: '2020', color: C.pixel, valueOnlyMatch: ['2020'] },
+  'pkg-2040': { icon: Package, label: '2040', color: C.pixel, valueOnlyMatch: ['2040'] },
+  'pkg-1515': { icon: Package, label: '1515', color: C.pixel, valueOnlyMatch: ['1515'] },
+  'pkg-1212': { icon: Package, label: '1212', color: C.pixel, valueOnlyMatch: ['1212'] },
+  'pkg-2427': { icon: Package, label: '2427', color: C.pixel, valueOnlyMatch: ['2427'] },
+  sop8: { icon: Package, label: 'SOP8', color: C.pixel, match: ['sop-8'] },
+  sop10: { icon: Package, label: 'SOP10', color: C.pixel, match: ['sop-10'] },
+  sop12: { icon: Package, label: 'SOP12', color: C.pixel, match: ['sop-12'] },
+  sop14: { icon: Package, label: 'SOP14', color: C.pixel, match: ['sop-14', 'so14'] },
+  sop16: { icon: Package, label: 'SOP16', color: C.pixel, match: ['sop-16'] },
+  soic8: { icon: Package, label: 'SOIC8', color: C.pixel, match: ['soic-8'] },
+  dip8: { icon: Package, label: 'DIP8', color: C.pixel, match: ['dip-8'] },
+  dip14: { icon: Package, label: 'DIP14', color: C.pixel, match: ['dip-14'] },
+
+  // SoC / MCU families
+  esp32: { icon: Cpu, label: 'ESP32', color: C.chip },
+  esp8266: { icon: Cpu, label: 'ESP8266', color: C.chip },
+  rp2040: { icon: Cpu, label: 'RP2040', color: C.chip },
+  teensy: { icon: Cpu, label: 'Teensy', color: C.chip },
+  'raspberry-pi': {
     icon: Cpu,
-    label: 'RP2040',
-    color: '#ec4899', // pink
+    label: 'Raspberry Pi',
+    color: C.chip,
+    match: ['raspberry pi', 'rpi'],
+  },
+  arm: { icon: Cpu, label: 'ARM', color: C.chip },
+  stm32: { icon: Cpu, label: 'STM32', color: C.chip },
+  fpga: { icon: CircuitBoard, label: 'FPGA', color: C.chip },
+  arduino: { icon: Cpu, label: 'Arduino', color: C.chip },
+
+  // Power
+  poe: { icon: PlugZap, label: 'PoE', color: C.power, match: ['power over ethernet'] },
+
+  // Software ecosystems
+  wled: { icon: Lightbulb, label: 'WLED', color: C.software },
+  fpp: {
+    icon: AppWindow,
+    label: 'FPP',
+    color: C.software,
+    match: ['falcon player', 'falconplayer'],
+  },
+  xlights: { icon: AppWindow, label: 'xLights', color: C.software },
+
+  // Languages (drive libraries)
+  cpp: { icon: Code, label: 'C++', color: C.software, match: ['c++'] },
+  javascript: { icon: Code, label: 'JavaScript', color: C.software },
+  python: { icon: Code, label: 'Python', color: C.software },
+
+  // OS / runtime platforms (pattern drivers, drive libraries)
+  windows: { icon: Monitor, label: 'Windows', color: C.platform },
+  macos: { icon: Monitor, label: 'macOS', color: C.platform, match: ['mac os', 'os x'] },
+  linux: { icon: Monitor, label: 'Linux', color: C.platform, match: ['ubuntu', 'raspbian'] },
+  android: { icon: Smartphone, label: 'Android', color: C.platform },
+  ios: { icon: Smartphone, label: 'iOS', color: C.platform },
+  // "web" is far too generic to free-text scan (web UI, web-based config, …):
+  // only badge exact platform values.
+  'web-app': {
+    icon: Globe,
+    label: 'Web',
+    color: C.platform,
+    valueOnlyMatch: ['web', 'browser'],
   },
 };
+
+// Escape a term for use inside a RegExp literal
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Precompute: every matchable term -> canonical id, plus whole-word matchers.
+// `\b` boundaries keep short ids ("spi", "arm", "opc") from matching inside
+// longer words, which the old substring scan got wrong.
+const TERM_TO_ID: Record<string, string> = {};
+const MATCHERS: { id: string; re: RegExp }[] = [];
+for (const [id, cfg] of Object.entries(BADGES)) {
+  for (const term of [id, ...(cfg.match ?? [])]) {
+    TERM_TO_ID[term] = id;
+    MATCHERS.push({ id, re: new RegExp(`(?:^|[^a-z0-9])${escapeRegExp(term)}(?![a-z0-9])`, 'i') });
+  }
+  for (const term of cfg.valueOnlyMatch ?? []) {
+    TERM_TO_ID[term] = id;
+  }
+}
 
 interface FeatureBadgesProps {
   entry: Record<string, unknown>;
 }
 
-// Check if a value contains a badge term
+// A value that negates the capability its key names (`clocked: never`,
+// `bms: No`, `wled_compatible: false`) — the key must not produce a badge.
+function isNegatedValue(v: unknown): boolean {
+  if (v === false || v == null) return true;
+  return typeof v === 'string' && ['no', 'none', 'never', 'false', 'n/a'].includes(v.toLowerCase());
+}
+
+function scanString(s: string, found: Set<string>): void {
+  for (const { id, re } of MATCHERS) {
+    if (!found.has(id) && re.test(s)) found.add(id);
+  }
+}
+
+// Scan a value (recursing into arrays/objects) for whole-word badge matches,
+// collecting canonical ids into `found`. Object KEYS carry meaning too
+// (`protocols: {artnet: Both}`, `inputs.physical: {Ethernet: true}`), so they
+// are scanned as well — unless their value negates the capability.
 function findBadgesInValue(value: unknown, found: Set<string>): void {
   if (typeof value === 'string') {
-    const lower = value.toLowerCase();
-    for (const term of Object.keys(BADGES)) {
-      if (lower.includes(term) && !found.has(term)) {
-        found.add(term);
-      }
-    }
+    scanString(value, found);
   } else if (Array.isArray(value)) {
-    for (const item of value) {
+    for (const item of value) findBadgesInValue(item, found);
+  } else if (value && typeof value === 'object') {
+    for (const [key, item] of Object.entries(value)) {
+      if (!isNegatedValue(item)) scanString(key, found);
       findBadgesInValue(item, found);
     }
   }
 }
 
-// Get all applicable badges for an entry by scanning all fields
+// Get all applicable badges for an entry by scanning all (nested) fields.
+// Insertion order of BADGES drives display order so related pills stay grouped.
 function getBadgesForEntry(entry: Record<string, unknown>): BadgeConfig[] {
   const found = new Set<string>();
-
-  for (const value of Object.values(entry)) {
-    findBadgesInValue(value, found);
-  }
-
-  return Array.from(found).map((term) => BADGES[term]);
+  findBadgesInValue(entry, found);
+  return Object.keys(BADGES)
+    .filter((id) => found.has(id))
+    .map((id) => BADGES[id]);
 }
 
 // Pill styling shared across badge variants
@@ -145,17 +329,13 @@ export function Badge({ badge, to }: BadgeProps) {
 
   if (to) {
     return (
-      <Link to={to} title={badge.label} style={style}>
+      <Link to={to} style={style}>
         {content}
       </Link>
     );
   }
 
-  return (
-    <span title={badge.label} style={style}>
-      {content}
-    </span>
-  );
+  return <span style={style}>{content}</span>;
 }
 
 // Render a plain text pill (for non-badge values in mixed arrays)
@@ -169,7 +349,7 @@ export function TextPill({ text, to }: { text: string; to?: string }) {
 
   if (to) {
     return (
-      <Link to={to} title={text} style={{ ...style, color: 'var(--category-primary)' }}>
+      <Link to={to} style={{ ...style, color: 'var(--category-primary)' }}>
         {text}
       </Link>
     );
@@ -178,10 +358,10 @@ export function TextPill({ text, to }: { text: string; to?: string }) {
   return <span style={style}>{text}</span>;
 }
 
-// Get badge for a single string value (exact match)
+// Get badge for a single string value (exact match against a term or alias)
 export function getBadgeForValue(value: string): BadgeConfig | null {
-  const lower = value.toLowerCase();
-  return BADGES[lower] || null;
+  const id = TERM_TO_ID[value.trim().toLowerCase()];
+  return id ? BADGES[id] : null;
 }
 
 interface ValueBadgesProps {

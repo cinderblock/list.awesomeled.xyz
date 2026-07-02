@@ -1,23 +1,26 @@
 name: Pixelbox
-status: unknown
-release_year: null
-creator: Lumikit
-notes: null
-outputs: null
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Ethernet
-  - DMX
-max_current: null
-max_outputs: null
-max_pixels: 2730
-max_voltage: null
-output_connectors: null
+status: discontinued # replaced by PixelBOX 8 AMP
+creator:
+  name: Lumikit
+  url: https://www.lumikit.com.br
+  page: https://lumikit.com.br/pixelbox
+inputs:
+  physical:
+    Ethernet: true # 10/100 Mbps, selectable
+    USB: true # firmware updates via USB pen drive
+  protocols:
+    - Art-Net
+outputs:
+  count: 2 # two signal output lines
+  connector: Quick data connectors
+  pixels:
+    max_per_output: 1365 # 2730 total single-wire / 2 outputs
+  auxiliary:
+    DMX512: 1 # on DMX variant models
+data:
+  fps: 30 # 15-30 FPS depending on pixel chip
 price: 199
-standalone: null
-storage: null
-url: https://www.lumikit.com.br/international
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - Up to 2730 single-wire pixels (1365 dual-wire) split across 2 output lines
+  - Controls WS2801, WS2811, WS2812, WS2813, UCS1903, APA102 and others
+  - 16 DMX universes single-wire (8 universes dual-wire) over Art-Net

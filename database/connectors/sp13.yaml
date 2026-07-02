@@ -1,31 +1,29 @@
 name: SP13
 creator: Weipu
 notes: Glass filled nylon shell with gold plated brass solder contacts.Weipu originator of format, cheaper clones around. SP 12/13/16/17/20/21/28 shell sizes. LD16/20/28 Screw Terminal clone
-board_fingers: false
-colors: Black Blue collar
-contact_type: Pins
-convention: null
-crimp: false
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: IP68
-largest_gauge: 20 AWG
-locking: Screw Lock
-max_current: 5 A
-max_pins: 9
-max_voltage: 250 V
-min_pins: 2
-mouser_url: null
-outline: Circular
-panel_mount: true
-pcb_mount: false
-pinout: null
-pitch: null
-rows: N/A
-screw_terminal: null
-smallest_gauge: 24 AWG
-solder: true
-url: https://www.weipuconnector.com/sp13-series/
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://www.weipuconnector.com/sp13-series/
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 2
+  max_pins: 9
+  rows: N/A
+  gendered: true
+  locking: Screw Lock
+  panel_mount: true
+  wire_to_wire: true
+  pcb_mount: false
+  board_fingers: false
+ratings:
+  max_current: 5 A
+  max_voltage: 250 V
+  ip_rating: IP68
+termination:
+  solder: true
+  crimp: false
+  idc: false
+  smallest_gauge: 24 AWG
+  largest_gauge: 20 AWG
+wiring:
+  colors: Black Blue collar

@@ -1,31 +1,31 @@
 name: XT60/90
 creator: Generic
 notes: Also XT30, 30A & XT90 ,90A , Standard connector for LiPo batteries in RC, generic connector, some poor quality versions around dimensions http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf
-board_fingers: false
-colors: Yellow, black
-contact_type: Pins
-convention: Female source, shrouded male load
-crimp: false
-digikey_url: null
-gendered: true
-idc: false
-ip_rating: null
-largest_gauge: 10 AWG
-locking: Friction
-max_current: 60/90
-max_pins: 2
-max_voltage: 42 V
-min_pins: 2
-mouser_url: null
-outline: Rectangular
-panel_mount: false
-pcb_mount: PTH
-pinout: null
-pitch: 10.0 mm
-rows: 1
-screw_terminal: false
-smallest_gauge: 22 AWG
-solder: true
-url: https://www.sparkfun.com/products/10474
-wire_to_wire: true
-year_introduced: null
+links:
+  product: https://www.sparkfun.com/products/10474
+mechanical:
+  outline: Rectangular
+  contact_type: Pins
+  pitch: 10.0 mm
+  min_pins: 2
+  max_pins: 2
+  rows: 1
+  gendered: true
+  locking: Friction
+  panel_mount: false
+  wire_to_wire: true
+  pcb_mount: PTH
+  board_fingers: false
+ratings:
+  max_current: 90 A # XT90; the smaller XT60 variant is rated 60 A
+  max_voltage: 42 V
+termination:
+  solder: true
+  screw_terminal: false
+  crimp: false
+  idc: false
+  smallest_gauge: 22 AWG
+  largest_gauge: 10 AWG
+wiring:
+  convention: Female source, shrouded male load
+  colors: Yellow, black

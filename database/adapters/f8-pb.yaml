@@ -1,13 +1,17 @@
 name: F8-PB
+status: discontinued
 creator: Kulp Lights
-notes: null
-outputs: Single
-diy_or_ots: null
-max_channels: 8
-max_current: null
-max_voltage: 12V
-output_connectors: Phoenix Screw
+outputs:
+  max_channels: 8
+  pixel_types: Single
+  connectors: Phoenix Screw
+  description: Single
+power:
+  voltage: 12V
+dead_links:
+  - url: https://kulplights.com/product/f8-pb/
+    checked: '2026-07-01'
+links:
+  product: https://kulplights.com/product/f8-pb/
 parent: BeagleBone
-pixel_types: Single
 price: 81
-url: https://kulplights.com/product/f8-pb/

@@ -3,39 +3,47 @@ status: active
 release_year: 2013
 creator: APA Electronics
 notes: WS2812b clone like SK6812
-backup_data_line: false
-brightness_bits: 8
-channel_current: 20mA
-channel_current_notes: Datasheet states max 49mA current, but graph for 5050
-  package shows R=19mA, G,B=22mA
-clocked: false
-color_order: RGB
-data_bitrate: 800kHz
-data_type: WS2811/12
-datasheet_discrepancies:
-  - Datasheet claims max 49mA but actual is ~19-22mA per channel
-datasheet_url: http://neon-world.com/en/product_detail.php?cid=60&id=171
-gpio_max: 5V
-gpio_min: 3.5V
-led_voltage: 5V
-led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and
-  share power with 5V VDD
-max_pixels_per_string: null
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 1.2kHz
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: http://neon-world.com/en/product_detail.php?cid=60&id=171
+  discrepancies:
+    - Datasheet claims max 49mA but actual is ~19-22mA per channel
+dead_links:
+  - url: http://neon-world.com/en/product_detail.php?cid=60&id=171
+    archive: https://web.archive.org/web/20260520135812/https://neon-world.com/en/product_detail.php?cid=60&id=171
+    checked: '2026-07-01'
+electrical:
+  led_voltage: 5V
+  led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
+  vcc_voltage: 5V
+  gpio:
+    min: 3.5V
+    max: 5V
+  channel_current: 20mA
+  channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA
+  quiescent_current: 1.0mA
+  wattage: 100mW
 other_links:
   - APA104 Pixel Protocol Overview | Advatek Lighting
-package_size: 5050, 3535, 1212
-package_sizes:
-  - '5050'
-  - '3535'
-  - '1212'
-pin_count: 4
-pixel_data_size: 24 Bits/Pixel
-pixel_rate_max: 33.3 k Pixel / s
-pwm_frequency: 1.2kHz
-quiescent_current: 1.0mA
+physical:
+  package_sizes:
+    - '5050'
+    - '3535'
+    - '1212'
+  package_size: 5050, 3535, 1212
+  pin_count: 4
+related:
+  - type: related
+    ref: pixels/ws2812
 technical_notes:
   - WS2812 protocol compatible clone from APA Electronics
   - Available in very small 1212 package size
-third_party_testing: null
-vcc_voltage: 5V
-wattage: 100mW

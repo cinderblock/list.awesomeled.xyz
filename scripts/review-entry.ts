@@ -14,12 +14,13 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { createServer, type IncomingMessage, type ServerResponse } from 'http';
 import { basename, dirname, resolve } from 'path';
 import * as readline from 'readline';
-import sharp from 'sharp';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 
 // Import shared utilities from the app
 import { getDatabasePath, getGitTimestamps } from '../app/lib/data';
 import { CATEGORIES } from '../app/lib/types';
+// Shared image processing (single source of truth; fixes the raw-buffer bug).
+import { processImage } from './crop-image';
 
 const DATABASE_PATH = getDatabasePath();
 const CATEGORY_IDS = CATEGORIES.map((c) => c.id);
@@ -404,99 +405,6 @@ function generateImagePickerHtml(entry: Entry, serverPort: number): string {
   </script>
 </body>
 </html>`;
-}
-
-/**
- * Process image: remove background and crop to content
- */
-async function processImage(inputBuffer: Buffer): Promise<Buffer> {
-  const image = sharp(inputBuffer);
-  const metadata = await image.metadata();
-
-  // Skip SVGs and GIFs (animated)
-  if (metadata.format === 'svg' || metadata.format === 'gif') {
-    return inputBuffer;
-  }
-
-  // Convert to PNG with alpha channel for processing
-  let processed = sharp(inputBuffer).png();
-
-  // Get image data to analyze background color
-  const { data, info } = await processed.raw().toBuffer({ resolveWithObject: true });
-
-  // Sample corners to detect background color
-  const getPixel = (x: number, y: number) => {
-    const idx = (y * info.width + x) * info.channels;
-    return {
-      r: data[idx],
-      g: data[idx + 1],
-      b: data[idx + 2],
-      a: info.channels === 4 ? data[idx + 3] : 255,
-    };
-  };
-
-  // Sample corners
-  const corners = [
-    getPixel(0, 0),
-    getPixel(info.width - 1, 0),
-    getPixel(0, info.height - 1),
-    getPixel(info.width - 1, info.height - 1),
-  ];
-
-  // Check if corners are similar (likely solid background)
-  const isWhitish = (p: { r: number; g: number; b: number }) => p.r > 240 && p.g > 240 && p.b > 240;
-  const isBlackish = (p: { r: number; g: number; b: number }) => p.r < 15 && p.g < 15 && p.b < 15;
-
-  const whiteBg = corners.filter(isWhitish).length >= 3;
-  const blackBg = corners.filter(isBlackish).length >= 3;
-
-  // Create a new buffer with transparency for solid backgrounds
-  if (whiteBg || blackBg) {
-    const tolerance = 30;
-    const bgColor = whiteBg ? { r: 255, g: 255, b: 255 } : { r: 0, g: 0, b: 0 };
-
-    // Create alpha channel based on color distance from background
-    const newData = Buffer.alloc(info.width * info.height * 4);
-
-    for (let i = 0; i < info.width * info.height; i++) {
-      const srcIdx = i * info.channels;
-      const dstIdx = i * 4;
-
-      const r = data[srcIdx];
-      const g = data[srcIdx + 1];
-      const b = data[srcIdx + 2];
-
-      // Calculate color distance from background
-      const dist = Math.sqrt(
-        Math.pow(r - bgColor.r, 2) + Math.pow(g - bgColor.g, 2) + Math.pow(b - bgColor.b, 2)
-      );
-
-      // Create soft alpha based on distance
-      let alpha = 255;
-      if (dist < tolerance) {
-        alpha = Math.round((dist / tolerance) * 255);
-      }
-
-      newData[dstIdx] = r;
-      newData[dstIdx + 1] = g;
-      newData[dstIdx + 2] = b;
-      newData[dstIdx + 3] = alpha;
-    }
-
-    processed = sharp(newData, {
-      raw: { width: info.width, height: info.height, channels: 4 },
-    }).png();
-  }
-
-  // Trim transparent/near-transparent edges
-  const result = await processed
-    .trim({
-      threshold: 10,
-      lineArt: false,
-    })
-    .toBuffer();
-
-  return result;
 }
 
 /**

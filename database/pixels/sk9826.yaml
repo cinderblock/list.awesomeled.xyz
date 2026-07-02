@@ -2,25 +2,30 @@ name: SK9826
 release_year: 2016
 creator: Newstar LED Co.
 notes: 16bit/color version of APA102 copy SK9822
-backup_data_line: false
-brightness_bits: 16+5
-channel_current: 18.0mA
-clocked: true
-color_order: RGB
-data_bitrate: 30MHz
-data_type: SK9826
-datasheet_url: http://newstar-ledstrip.com/product/20190927165451294.pdf
-gpio_max: null
-gpio_min: null
-led_voltage: 5V
-max_pixels_per_string: null
-other_links: null
-package_size: 5050, 3535
-pin_count: 6
-pixel_data_size: 64 Bits/Pixel
-pixel_rate_max: 468.8 k Pixel / s
-pwm_frequency: 4.0kHz
-quiescent_current: 3.6mA
-third_party_testing: null
-vcc_voltage: 5V
-wattage: 90.mW
+color:
+  order: RGB
+  brightness_bits: 16+5
+  pwm_frequency: 4.0kHz
+data:
+  type: SK9826
+  clocked: true
+  bitrate: 30MHz
+  pixel_size_bits: 64
+  backup_line: false
+datasheet:
+  url: http://newstar-ledstrip.com/product/20190927165451294.pdf
+dead_links:
+  - url: http://newstar-ledstrip.com/product/20190927165451294.pdf
+    checked: '2026-07-01'
+electrical:
+  led_voltage: 5V
+  vcc_voltage: 5V
+  channel_current: 18.0mA
+  quiescent_current: 3.6mA
+  wattage: 90mW
+physical:
+  package_size: 5050, 3535
+  pin_count: 6
+related:
+  - type: variant
+    ref: pixels/sk9822

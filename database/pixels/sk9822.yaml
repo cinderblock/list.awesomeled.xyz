@@ -3,39 +3,46 @@ status: active
 release_year: 2016
 creator: Opsco/Newstar
 notes: APA102 Clone. Extra 5 bits uses constant current driver, no change in PWM.
-backup_data_line: false
-brightness_bits: 8+5
-brightness_control_method: current
-brightness_control_notes: Extra 5-bit brightness control by LED current, not PWM
-  - superior to APA102's PWM-based brightness
-channel_current: 20mA
-channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5
-  bits control current, not PWM
-clocked: true
-color_order: BGR
-data_bitrate: 30MHz
-data_type: APA102
-datasheet_url: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf
-gpio_max: 5V
-gpio_min: null
-led_voltage: 5V
-max_pixels_per_string: null
+color:
+  order: BGR
+  brightness_bits: 8+5
+  brightness_method: current
+  brightness_method_notes: Extra 5-bit brightness control by LED current, not PWM - superior to APA102's PWM-based brightness
+  pwm_frequency: 4.6kHz
+data:
+  type: APA102
+  clocked: true
+  bitrate: 30MHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf
+  third_party_testing: https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-the-apa102/
+electrical:
+  led_voltage: 5V
+  vcc_voltage: 5V
+  gpio:
+    max: 5V
+  channel_current: 20mA
+  channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control current, not PWM
+  quiescent_current: 1.0mA
+  wattage: 100mW
+images:
+  - file: sk9822.webp
+    source: https://www.adafruit.com/product/2343
+    credit: Adafruit Industries
 other_links:
   - SK9822 Pixel Protocol Overview | Advatek Lighting
-package_size: '5050'
-package_sizes:
-  - '5050'
-  - '2020'
-pin_count: 6
-pixel_data_size: 32 Bits/Pixel
-pixel_rate_max: 0.94 M Pixel / s
-pwm_frequency: 4.6kHz
-quiescent_current: 1.0mA
+physical:
+  package_sizes:
+    - '5050'
+    - '2020'
+  package_size: '5050'
+  pin_count: 6
+related:
+  - type: related
+    ref: pixels/apa102
 technical_notes:
   - APA102 protocol compatible clone with improved brightness control
-  - 5-bit brightness uses current control instead of APA102's PWM - no 400Hz
-    flicker
+  - 5-bit brightness uses current control instead of APA102's PWM - no 400Hz flicker
   - Better for video/photography applications due to no low-frequency PWM
-third_party_testing: https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-the-apa102/
-vcc_voltage: 5V
-wattage: 100mW

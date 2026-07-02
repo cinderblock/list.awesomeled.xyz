@@ -1,14 +1,24 @@
 name: Baldrick DMX
 status: active
-creator: ILIGHTTHAT
-notes: 3 and 5 pin and RJ45 DMX outputs on board
-auxiliary_outputs: DMX
-image: baldrick-dmx.png
-interfaces:
-  - DDP
-  - Artnet
-  - E1.31
-links:
-  - https://baldrickboard.com/docs/category/baldrickdmx
-max_outputs: 0
+creator:
+  name: ILIGHTTHAT
+  url: https://www.ilightthat.com
+  page: https://baldrickboard.com/docs/category/baldrickdmx
+notes: Single DMX output available on 3 ports (RJ45, 3-pin Neutrik XLR, 5-pin Neutrik XLR).
+inputs:
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+    - DDP
+outputs:
+  auxiliary:
+    DMX512: 1
+power:
+  voltage:
+    min: 5
+    max: 24 # up to 48V on version 1.1
+features:
+  - Button / Turnip activated presets
+  - Push from xLights integration
+image: baldrick-dmx.webp
 price: 75

@@ -1,23 +1,31 @@
 name: Standard Differential Receiver
 status: unknown
-release_year: null
-creator: Microcyb
-notes: null
-outputs: Multiple
-auxiliary_outputs: null
-buffered: true
-interfaces:
-  - DMX
-max_current: null
-max_outputs: 4
-max_pixels: 6400
-max_voltage: 12V
-output_connectors: Phoenix Screw
-pixel_types: both
+creator:
+  name: Microcyb
+  url: https://microcyb.com
+  page: https://microcyb.com
+notes: 'Not a standalone controller: receives differential pixel data over an RJ45 cable (150+ ft) from a host pixel controller (Kulp/Falcon K16, K32, W16, etc.). 4 ports, up to 1600 pixels per port at 20 FPS (800 at 40 FPS), 5/12V selectable.'
+inputs:
+  physical:
+    Serial: true # differential pixel data in over RJ45
+  protocols:
+    - DMX
+  standalone: false
+outputs:
+  count: 4
+  connector: Phoenix Screw
+  differential: true
+  driver:
+    buffered: true
+  pixels:
+    max_per_output: 1600
+  clocked: selectable
+power:
+  voltage:
+    max: 12
+    min: 5
 price: 22
-standalone: true
-storage: null
-url: https://microcyb.com
-warranty: null
-waterproof: null
-wled_compatible: null
+technical_notes:
+  - 1600 pixels per port at 20 FPS (800 at 40 FPS)
+  - 5/12V selectable output voltage
+  - Receives differential signal over RJ45 from a host controller, usable 150+ ft away

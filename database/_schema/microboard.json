@@ -4,95 +4,200 @@
   "title": "DIY MicroBoard",
   "type": "object",
   "required": ["name"],
+  "additionalProperties": false,
   "properties": {
     "name": {
       "type": "string"
     },
-    "creator": {
-      "type": ["string", "null"],
-      "description": "Original designer/developer of this item"
-    },
-    "manufacturers": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Manufacturers that produce this item"
-    },
-    "vendors": {
-      "type": "array",
-      "items": { "type": "string" },
-      "description": "Vendors that sell/distribute this item"
-    },
-    "soc": {
-      "type": ["string", "null"]
-    },
-    "cpu": {
-      "type": ["string", "null"]
-    },
-    "isa": {
-      "type": ["string", "null"]
-    },
-    "clock_speed": {
-      "type": ["string", "null"]
-    },
-    "flash": {
-      "type": ["string", "null"]
-    },
-    "ram": {
-      "type": ["string", "null"]
-    },
-    "linux": {
-      "type": ["boolean", "null"]
-    },
-    "max_outputs": {
-      "type": ["integer", "null"]
-    },
-    "min_input_voltage": {
-      "type": ["string", "number", "null"]
-    },
-    "max_input_voltage": {
-      "type": ["string", "number", "null"]
-    },
-    "gpio_voltage": {
-      "type": ["string", "null"]
-    },
-    "usb": {
-      "type": ["string", "null"]
-    },
-    "ttl_serial": {
-      "type": ["boolean", "string", "null"]
-    },
-    "wifi": {
-      "type": ["string", "boolean", "null"]
-    },
-    "poe": {
-      "type": ["boolean", "string", "null"]
-    },
-    "ethernet": {
-      "type": ["string", "boolean", "null"]
-    },
-    "bluetooth": {
-      "type": ["string", "boolean", "null"]
-    },
-    "storage": {
-      "type": ["string", "null"]
-    },
-    "bms": {
-      "type": ["string", "null"]
-    },
-    "imu": {
-      "type": ["boolean", "string", "null"]
-    },
-    "price": {
-      "type": ["string", "number", "null"]
+    "status": {
+      "anyOf": [
+        {
+          "$ref": "common.json#/definitions/status"
+        },
+        {
+          "type": "null"
+        }
+      ]
     },
     "release_year": {
       "type": ["integer", "null"]
     },
-    "url": {
-      "type": ["string", "null"]
+    "creator": {
+      "anyOf": [
+        {
+          "type": ["string", "null"]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "page": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "manufacturers": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
+    "vendors": {
+      "type": ["array", "null"],
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "page": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
     },
     "notes": {
       "type": ["string", "null"]
+    },
+    "price": {
+      "type": ["string", "number", "null"]
+    },
+    "compute": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "soc": {
+          "type": ["string", "null"]
+        },
+        "cpu": {
+          "type": ["string", "null"]
+        },
+        "isa": {
+          "type": ["string", "null"],
+          "description": "Instruction set (Xtensa, ARM, RISC-V, AVR, ...)"
+        },
+        "clock_speed": {
+          "$ref": "common.json#/definitions/frequency"
+        },
+        "flash": {
+          "type": ["string", "null"]
+        },
+        "ram": {
+          "type": ["string", "null"]
+        },
+        "linux": {
+          "type": ["boolean", "null"],
+          "description": "Runs a Linux OS (vs bare-metal MCU)"
+        }
+      }
+    },
+    "connectivity": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "wifi": {
+          "description": "Wi-Fi support: band(s) as an array (2.4GHz, 5GHz), a single band string, or boolean",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": ["string", "boolean", "null"]
+            }
+          ]
+        },
+        "ethernet": {
+          "type": ["string", "boolean", "null"]
+        },
+        "bluetooth": {
+          "type": ["string", "boolean", "null"]
+        },
+        "usb": {
+          "type": ["string", "boolean", "null"]
+        },
+        "serial": {
+          "type": ["boolean", "string", "null"],
+          "description": "TTL serial / UART"
+        },
+        "poe": {
+          "type": ["boolean", "string", "null"]
+        }
+      }
+    },
+    "power": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "voltage": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "min": {
+              "type": ["string", "number", "null"]
+            },
+            "max": {
+              "type": ["string", "number", "null"]
+            }
+          }
+        },
+        "gpio_voltage": {
+          "$ref": "common.json#/definitions/voltage"
+        }
+      }
+    },
+    "io": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "max_outputs": {
+          "type": ["integer", "null"],
+          "description": "Usable data outputs for pixels"
+        },
+        "storage": {
+          "type": ["string", "null"]
+        },
+        "bms": {
+          "type": ["string", "null"],
+          "description": "Battery management (1S, Diode, No, ...)"
+        },
+        "imu": {
+          "type": ["boolean", "string", "null"]
+        }
+      }
+    },
+    "image": {
+      "$ref": "common.json#/definitions/image"
+    },
+    "images": {
+      "$ref": "common.json#/definitions/images"
+    },
+    "related": {
+      "$ref": "common.json#/definitions/related"
+    },
+    "dead_links": {
+      "$ref": "common.json#/definitions/dead_links"
     }
   }
 }

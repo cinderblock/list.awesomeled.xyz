@@ -1,24 +1,34 @@
 name: LeDMX2 MAX
 status: active
 release_year: 2022
-creator: DMXking
+creator:
+  name: DMXking
+  url: https://dmxking.com
+  page: https://dmxking.com/led-pixel-control/ledmx2-max
 notes: Show record and playback trigger capability
-outputs: Data and Clock
-auxiliary_outputs: DMX
-buffered: true
-interfaces:
-  - Ethernet
-  - DMX
-max_current: 16A
-max_outputs: 2
-max_pixels: 2040
-max_voltage: 24V
-output_connectors: Phoenix Screw
-pixel_types: both
+inputs:
+  physical:
+    Ethernet: true
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+  standalone: true
+outputs:
+  count: 2
+  connector: Phoenix Screw
+  driver:
+    buffered: true
+  clocked: selectable # supports both clocked and async pixels
+  pixels:
+    max_per_output: 1020 # 2040 total across 2 outputs
+  auxiliary:
+    DMX512: 1
+power:
+  voltage:
+    max: 24
+  current:
+    max: 16
+data:
+  storage:
+    - type: SD
 price: 199
-standalone: true
-storage: SD
-url: https://dmxking.com/led-pixel-control/ledmx2-max
-warranty: null
-waterproof: null
-wled_compatible: null

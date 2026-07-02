@@ -1,7 +1,17 @@
 name: OctoWS2811
+status: active
 creator: PJRC
-features: null
 hardware: Teensy
-instructional_resources: []
-url: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
-youtube_url: null
+language: C++
+license: MIT
+links:
+  repo: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
+platforms:
+  - Teensy
+related_pixel_ics:
+  - ws2811
+supported_ics:
+  - WS2811
+  - WS2812
+  - WS2812B
+  - WS2813

@@ -1,10 +1,17 @@
 name: 74HCT244
 creator: Texas Instruments
-notes: null
-buffered: true
-channels: 8
-interface: PDIP largest
-max_current: null
-max_voltage: 5.5V
-price: null
-url: https://www.ti.com/product/SN74HCT244
+electrical:
+  max_voltage: 5.5V
+io:
+  channels: 8
+  interface: PDIP largest
+  buffered: true
+links:
+  product: https://www.ti.com/product/SN74HCT244
+price: # TI list price, ti.com 2026-07
+  - qty: 1
+    price: 1.547
+    sku: SN74HCT244N
+  - qty: 1000
+    price: 0.539
+    sku: SN74HCT244N

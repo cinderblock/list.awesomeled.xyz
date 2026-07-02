@@ -1,26 +1,11 @@
 name: GS8206
-release_year: null
 creator: Shenzhen Greesit Technology
-notes: null
-aggregate_bits: 12
-backup_data_line: null
-channel_bits: 8
-channels: 3
-clocked: false
-data_bitrate: null
-data_type: null
-datasheet_url: null
-gpio_max: null
-gpio_min: null
-max_current: null
-max_pixels_per_string: null
-other_links: GS8206 Pixel Protocol Overview | Advatek Lighting
-output_voltage: null
-package_size: null
-pin_count: null
-pixel_data_size: null
-pixel_rate_max: null
-pwm_frequency: 8.0kHz
-quiescent_current: null
-supply_voltage: null
-third_party_testing: null
+color:
+  channel_bits: 8
+  aggregate_bits: 12
+  pwm_frequency: 8.0kHz
+data:
+  clocked: false
+  channels: 3
+other_links:
+  - GS8206 Pixel Protocol Overview | Advatek Lighting

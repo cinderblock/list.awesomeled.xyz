@@ -28,5 +28,8 @@
 /* LED System Diagram: Interactive system overview */
 @import './styles/diagram.css';
 
+/* System Designer: the /designer wizard */
+@import './styles/designer.css';
+
 /* Print: Print media styles */
 @import './styles/print.css';

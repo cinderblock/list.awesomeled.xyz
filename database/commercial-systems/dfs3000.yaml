@@ -2,12 +2,11 @@ name: DFS3000
 creator: Glasson Electronics
 notes: Glasson, developer of the world's first addressable incandescent festoon, range of
   LED and festoon products, professional products, professional pricing
-color_type: RGB/RGBW/WW
-core_tech: null
-dedicated_psu: true
-dimming_resolution: 13 Bit
-online_pricing: null
-pixels_per_run: 170
-price_range: $$$$$$
+pricing:
+  price_range: $$$$$$
 since: 2004
-target_market: null
+specs:
+  pixels_per_run: 170
+  dimming_resolution: 13 Bit
+  color_type: RGB/RGBW/WW
+  dedicated_psu: true

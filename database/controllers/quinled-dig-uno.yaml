@@ -1,23 +1,35 @@
 name: QuinLED-Dig-Uno
 status: active
 release_year: 2019
-creator: Quindor / Intermittent Technology
-notes: ESP8266/ESP32 based, open to any software, often run with WLED
-outputs: Single and Clock
-auxiliary_outputs: DIY or Pre-Assembled
-buffered: true
-interfaces:
-  - DMX
-max_current: 15A
-max_outputs: 2
-max_pixels: 2048
-max_voltage: 24V
-output_connectors: 5mm screw terminal
-pixel_types: both
-price: 25
-standalone: true
-storage: null
-url: https://quinled.info/quinled-dig-uno/
-warranty: null
-waterproof: null
+creator:
+  name: Quindor / Intermittent Technology
+  url: https://quinled.info
+  page: https://quinled.info/quinled-dig-uno/
+notes: ESP32 based (custom QuinLED-ESP32 top board, USB-C), ships with WLED
+  pre-installed; board/external antenna options, Ethernet on select variants.
+inputs:
+  physical:
+    Wi-Fi: 2.4GHz # ESP32, board/external antenna options
+    USB: true # USB-C on QuinLED-ESP32 top board
+  protocols:
+    - DMX512
+  standalone: true # commonly runs WLED
+outputs:
+  count: 2
+  connector: 5mm screw terminal
+  fuse: 10A # 10A fuse included; 15A continuous / 25A max copper rating
+  driver:
+    buffered: true
+  clocked: selectable # Single and Clock (both)
+  pixels:
+    max_per_output: 1024 # 2048 total across 2 outputs
+power:
+  voltage:
+    max: 24
+  current:
+    max: 15
+features:
+  - Available as DIY kit or pre-assembled
+  - Ships with WLED pre-installed
+price: 27.5
 wled_compatible: true

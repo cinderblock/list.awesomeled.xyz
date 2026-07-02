@@ -1,24 +1,34 @@
 name: K16000S
 status: active
-release_year: null
-creator: KulpLights, LLC
-notes: null
-outputs: Data, Ground
-auxiliary_outputs: null
-buffered: null
-interfaces:
-  - Ethernet
-  - Wi-Fi
-max_current: null
-max_outputs: 16
-max_pixels: 16384
-max_voltage: null
-output_connectors: Screw Terminal
-pixel_types: async
+creator:
+  name: AUTUNEER
+  page: https://www.autuneertech.com/products/k16000s-madrix-artnet-addressable-led-controller/
+manufacturers:
+  - AUTUNEER
+  - CANRIA
+  - CLAUTOP
+notes: Not a Kulp product despite the K-name; generic Madrix/Art-Net pixel controller
+  sold under AUTUNEER, CANRIA, and CLAUTOP brands. Online control via
+  Art-Net/Madrix over Ethernet or a DMX512 console; offline standalone playback
+  from SD card (16 ports x 1024 pixels).
+inputs:
+  physical:
+    Ethernet: true
+    DMX512: true # DMX512 console input
+  protocols:
+    - Art-Net
+  standalone: true # offline SD-card playback
+outputs:
+  count: 16
+  connector: Screw Terminal
+  pixels:
+    max_per_output: 1024
+  clocked: false
+data:
+  storage:
+    - type: SD
+dead_links:
+  - url: https://www.autuneertech.com/products/k16000s-madrix-artnet-addressable-led-controller/
+    archive: https://web.archive.org/web/20230604162206/https://autuneertech.com/products/k16000s-madrix-artnet-addressable-led-controller/
+    checked: '2026-07-01'
 price: 229
-standalone: null
-storage: SD
-url: https://www.amazon.com/dp/B09XB4QTGT
-warranty: null
-waterproof: null
-wled_compatible: null
