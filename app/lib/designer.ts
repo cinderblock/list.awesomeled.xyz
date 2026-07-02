@@ -29,6 +29,10 @@ export interface PixelOption {
   wattsBasis: 'measured wattage' | 'channel current' | 'typical 5050 estimate';
   /** Protocol family, e.g. "WS2811/12" — used to spot explicit controller support */
   type?: string;
+  /** Data rate in Hz (null = unknown) */
+  bitrateHz: number | null;
+  /** Bits per pixel on the data line (null = unknown) */
+  bitsPerPixel: number | null;
 }
 
 export interface ControllerOption {
@@ -129,7 +133,20 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
     wattsPerPixel,
     wattsBasis,
     type: typeof data.type === 'string' ? data.type : undefined,
+    bitrateHz: parseQuantity(data.bitrate, 'frequency')?.value ?? null,
+    bitsPerPixel: typeof data.pixel_size_bits === 'number' ? data.pixel_size_bits : null,
   };
+}
+
+/**
+ * Theoretical max refresh rate for one string: each output shifts its pixels
+ * serially at the data rate, so fps = bitrate / (bits-per-pixel × pixels per
+ * string). Strings on separate outputs update in parallel. Ignores protocol
+ * reset/latch time, so real rates run a little lower.
+ */
+export function chainMaxFps(pixel: PixelOption, layout: Layout): number | null {
+  if (!pixel.bitrateHz || !pixel.bitsPerPixel || layout.perString <= 0) return null;
+  return pixel.bitrateHz / (pixel.bitsPerPixel * layout.perString);
 }
 
 export function buildControllerOption(entry: BaseEntry): ControllerOption {

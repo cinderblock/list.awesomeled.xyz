@@ -8,9 +8,10 @@ history. This is what's next.
 ## In flight
 
 - **Designer v2**
-  - Part thumbnails: card-grid pixel picker, images in the diagram
-  - Frame-rate math: bitrate ÷ (pixels-per-string × bits/pixel) → achievable
-    fps per group, with can't-hit-30fps callouts
+  - ✅ Part thumbnails: card-grid pixel picker (with filter box), images in
+    the diagram
+  - ✅ Frame-rate math: bitrate ÷ (pixels-per-string × bits/pixel) → refresh
+    ceiling per group, sub-30fps callouts, fpsMax in the embedded design JSON
   - Later: level-shifter / DIY-microboard path, per-string lengths within a
     group, SVG re-import (design JSON is already embedded in downloads)
 

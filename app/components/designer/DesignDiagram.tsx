@@ -1,11 +1,15 @@
 import { useRef } from 'react';
 import { Download, Printer } from 'lucide-react';
 import {
+  chainMaxFps,
   layoutTotal,
   type Chain,
   type PatternSourceOption,
   type SystemPower,
 } from '~/lib/designer';
+
+// Absolute so downloaded SVGs still resolve their thumbnails offline-shared
+const IMG_BASE = 'https://list.awesomeled.xyz/database-images/';
 
 interface DesignDiagramProps {
   chains: Chain[];
@@ -38,12 +42,16 @@ export function DesignDiagram({ chains, source, standalone, power }: DesignDiagr
   const design = {
     generator: 'awesomeled.xyz/designer',
     source: standalone ? 'standalone' : (source?.id ?? null),
-    chains: chains.map((c) => ({
-      pixel: c.pixel?.id ?? null,
-      strings: c.layout.strings,
-      perString: c.layout.perString,
-      controller: c.controller?.id ?? null,
-    })),
+    chains: chains.map((c) => {
+      const fps = c.pixel ? chainMaxFps(c.pixel, c.layout) : null;
+      return {
+        pixel: c.pixel?.id ?? null,
+        strings: c.layout.strings,
+        perString: c.layout.perString,
+        controller: c.controller?.id ?? null,
+        fpsMax: fps != null ? Math.round(fps) : null,
+      };
+    }),
     totalWatts: Math.round(power.totalWatts * 10) / 10,
     rails: power.rails.map((r) => ({ voltage: r.voltage, watts: Math.round(r.watts) })),
   };
@@ -136,17 +144,33 @@ export function DesignDiagram({ chains, source, standalone, power }: DesignDiagr
                 stroke="#2563eb"
                 strokeDasharray={ctrl ? undefined : '6 4'}
               />
+              {ctrl?.image && (
+                <image
+                  href={`${IMG_BASE}controllers/${ctrl.image}`}
+                  x="268"
+                  y={y + 18}
+                  width="52"
+                  height="54"
+                  preserveAspectRatio="xMidYMid meet"
+                />
+              )}
               <text
-                x="362"
+                x={ctrl?.image ? 390 : 362}
                 y={y + 38}
                 textAnchor="middle"
                 fontSize="13"
                 fontWeight="700"
                 fill="#1e40af"
               >
-                {(ctrl?.name ?? 'Controller?').slice(0, 24)}
+                {(ctrl?.name ?? 'Controller?').slice(0, ctrl?.image ? 20 : 24)}
               </text>
-              <text x="362" y={y + 58} textAnchor="middle" fontSize="10" fill="#3b82f6">
+              <text
+                x={ctrl?.image ? 390 : 362}
+                y={y + 58}
+                textAnchor="middle"
+                fontSize="10"
+                fill="#3b82f6"
+              >
                 {ctrl
                   ? `${chain.layout.strings} of ${ctrl.outputs ?? '?'} outputs used`
                   : `needs ${chain.layout.strings} outputs`}
@@ -171,6 +195,16 @@ export function DesignDiagram({ chains, source, standalone, power }: DesignDiagr
               {[0, 1, 2, 3, 4, 5, 6, 7].map((d) => (
                 <circle key={d} cx={565 + d * 25} cy={y + 32} r={6} fill="#db2777" opacity={0.7} />
               ))}
+              {chain.pixel!.image && (
+                <image
+                  href={`${IMG_BASE}pixels/${chain.pixel!.image}`}
+                  x="784"
+                  y={y + 14}
+                  width="48"
+                  height="40"
+                  preserveAspectRatio="xMidYMid meet"
+                />
+              )}
               <text
                 x="690"
                 y={y + 60}

@@ -7,6 +7,7 @@ import {
   buildPixelOption,
   buildControllerOption,
   buildPatternSourceOption,
+  chainMaxFps,
   checkCompat,
   checkSourceCompat,
   layoutTotal,
@@ -66,10 +67,15 @@ function fmt(n: number, digits = 1): string {
   return n.toLocaleString('en-US', { maximumFractionDigits: digits });
 }
 
+function fmtHz(hz: number): string {
+  return hz >= 1e6 ? `${fmt(hz / 1e6)} MHz` : `${fmt(hz / 1e3, 0)} kHz`;
+}
+
 export default function DesignerPage({ loaderData }: Route.ComponentProps) {
   const { pixels, controllers, sources } = loaderData;
   const [searchParams, setSearchParams] = useSearchParams();
   const [showIncompatible, setShowIncompatible] = useState(false);
+  const [pixelQuery, setPixelQuery] = useState('');
   const [includeDiscontinued, setIncludeDiscontinued] = useState(false);
   const [fossOnly, setFossOnly] = useState(false);
   const [activeRaw, setActive] = useState(0);
@@ -151,6 +157,25 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
   const power = systemPower(chains);
   const overflow = sharedOutputOverflow(chains);
   const multi = chains.length > 1;
+
+  const visiblePixels = pixels.filter(
+    (p) =>
+      p.id === chain.pixel?.id ||
+      p.name.toLowerCase().includes(pixelQuery.trim().toLowerCase()) ||
+      (p.type ?? '').toLowerCase().includes(pixelQuery.trim().toLowerCase())
+  );
+
+  // Refresh ceiling per group; strings on separate outputs clock out in parallel
+  const activeFps = chain.pixel ? chainMaxFps(chain.pixel, chain.layout) : null;
+  const fpsNotes = chains.flatMap((ch, i) => {
+    if (!ch.pixel) return [];
+    const fps = chainMaxFps(ch.pixel, ch.layout);
+    if (fps == null || fps >= 30) return [];
+    const label = multi ? `Group ${i + 1}` : 'This layout';
+    return [
+      `${label} tops out at ~${fmt(fps, 0)} fps: ${ch.pixel.name}'s ${fmtHz(ch.pixel.bitrateHz!)} data rate across ${ch.layout.perString.toLocaleString('en-US')} pixels per string. Shorter strings on more outputs refresh faster.`,
+    ];
+  });
 
   // Compatibility of every controller with the ACTIVE chain
   const evaluated = !chain.pixel
@@ -247,29 +272,42 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
             <h2 className="designer-step-title">
               1 · Pixels{multi ? ` (group ${active + 1})` : ''}
             </h2>
-            <div className="designer-pixel-row">
-              <select
-                className="designer-select"
-                value={chain.pixel?.id ?? ''}
-                onChange={(e) => updateActive({ p: e.target.value, c: '' })}
-              >
-                <option value="">Choose a pixel type…</option>
-                {pixels.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name}
-                    {p.clocked == null ? '' : p.clocked ? ' (clocked)' : ''}
-                    {p.voltage ? ` — ${fmt(p.voltage, 0)} V` : ''}
-                  </option>
-                ))}
-              </select>
-              {chain.pixel?.image && (
-                <img
-                  className="designer-pixel-thumb"
-                  src={`/database-images/pixels/${chain.pixel.image}`}
-                  alt={chain.pixel.name}
-                />
-              )}
+            <input
+              type="search"
+              className="designer-pixel-search"
+              placeholder="Filter pixel types…"
+              value={pixelQuery}
+              onChange={(e) => setPixelQuery(e.target.value)}
+            />
+            <div className="designer-pixel-grid">
+              {visiblePixels.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  className={`designer-pixel-card${p.id === chain.pixel?.id ? ' designer-pixel-card--selected' : ''}`}
+                  onClick={() => updateActive({ p: p.id === chain.pixel?.id ? '' : p.id, c: '' })}
+                >
+                  {p.image ? (
+                    <img src={`/database-images/pixels/${p.image}`} alt="" loading="lazy" />
+                  ) : (
+                    <span className="designer-pixel-card-noimg" aria-hidden="true">
+                      <Zap size={18} />
+                    </span>
+                  )}
+                  <span className="designer-pixel-card-name">{p.name}</span>
+                  <span className="designer-pixel-card-meta">
+                    {p.voltage ? `${fmt(p.voltage, 0)} V` : 'V?'}
+                    {p.clocked == null ? '' : p.clocked ? ' · clocked' : ' · 1-wire'}
+                    {p.status === 'discontinued' || p.status === 'end-of-life'
+                      ? ' · discontinued'
+                      : ''}
+                  </span>
+                </button>
+              ))}
             </div>
+            {visiblePixels.length === 0 && (
+              <p className="designer-hint">No pixel types match “{pixelQuery}”.</p>
+            )}
             {chain.pixel && (
               <p className="designer-hint">
                 <Link to={`/pixels/${chain.pixel.id}`}>{chain.pixel.name}</Link>
@@ -280,6 +318,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                     : ' · data-only (single wire)'}
                 {' · ~'}
                 {fmt(chain.pixel.wattsPerPixel * 1000, 0)} mW/pixel ({chain.pixel.wattsBasis})
+                {chain.pixel.bitrateHz ? ` · ${fmtHz(chain.pixel.bitrateHz)} data` : ''}
               </p>
             )}
           </section>
@@ -326,6 +365,14 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                 </button>
               ))}
             </div>
+            {activeFps != null && chain.pixel && (
+              <p className="designer-hint">
+                Refresh ceiling ~<strong>{fmt(activeFps, 0)} fps</strong> —{' '}
+                {fmtHz(chain.pixel.bitrateHz!)} ÷ ({chain.pixel.bitsPerPixel} bits ×{' '}
+                {chain.layout.perString.toLocaleString('en-US')} px/string). Strings on separate
+                outputs update in parallel, so only string length matters.
+              </p>
+            )}
             <p className="designer-hint">
               Strings don&apos;t all have to match: use your longest run here, or add separate
               groups for runs of different lengths, types, or voltages.
@@ -499,7 +546,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
         {/* Summary */}
         <aside className="designer-summary">
           <h2 className="designer-step-title">
-            <Zap size={16} /> Power estimate
+            <Zap size={16} /> Power &amp; refresh
           </h2>
           {power.totalPixels === 0 ? (
             <p className="designer-hint">Pick pixels to see the numbers.</p>
@@ -523,6 +570,16 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                     </dd>
                   </div>
                 ))}
+                {chains.map((ch, i) => {
+                  const fps = ch.pixel ? chainMaxFps(ch.pixel, ch.layout) : null;
+                  if (fps == null) return null;
+                  return (
+                    <div key={`fps-${i}`}>
+                      <dt>{multi ? `Group ${i + 1} refresh` : 'Refresh ceiling'}</dt>
+                      <dd>~{fmt(fps, 0)} fps</dd>
+                    </div>
+                  );
+                })}
               </dl>
 
               {power.warning !== 'none' && (
@@ -533,6 +590,13 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                     : `Above ~20 W, wire gauge, fusing, and power injection start to matter. Worth reading up or asking experienced builders before you order parts.`}
                 </p>
               )}
+
+              {fpsNotes.map((note) => (
+                <p key={note} className="designer-warning designer-warning--advisory">
+                  <AlertTriangle size={15} />
+                  {note}
+                </p>
+              ))}
 
               {[...chainProblems, ...overflow].map((problem) => (
                 <p key={problem} className="designer-warning designer-warning--strong" role="alert">
