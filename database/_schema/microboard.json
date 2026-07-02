@@ -115,7 +115,18 @@
       "additionalProperties": false,
       "properties": {
         "wifi": {
-          "type": ["string", "boolean", "null"]
+          "description": "Wi-Fi support: band(s) as an array (2.4GHz, 5GHz), a single band string, or boolean",
+          "oneOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": ["string", "boolean", "null"]
+            }
+          ]
         },
         "ethernet": {
           "type": ["string", "boolean", "null"]

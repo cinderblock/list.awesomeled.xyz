@@ -85,11 +85,20 @@ const BADGES: Record<string, BadgeConfig> = {
   // with the Wi-Fi pill in hero scans (see note below).
   'wifi-2-4': { icon: Wifi, label: '2.4 GHz', color: C.net, valueOnlyMatch: ['2.4ghz', '2.4 ghz'] },
   'wifi-5': { icon: Wifi, label: '5 GHz', color: C.net, valueOnlyMatch: ['5ghz', '5 ghz'] },
-  ethernet: {
+  ethernet: { icon: Network, label: 'Ethernet', color: C.net },
+  // Speed pills for Ethernet columns (exact values only; the hero already
+  // shows plain Ethernet via the field key)
+  'ethernet-100': {
     icon: Network,
-    label: 'Ethernet',
+    label: '100 Mbps',
     color: C.net,
-    match: ['100base-tx', '100base-t', '1000base-t', 'gigabit ethernet'],
+    valueOnlyMatch: ['100base-tx', '100base-t', '100mbps', '10/100'],
+  },
+  'ethernet-1g': {
+    icon: Network,
+    label: 'Gigabit',
+    color: C.net,
+    valueOnlyMatch: ['gigabit', '1000base-t', 'gigabit ethernet'],
   },
   bluetooth: { icon: Bluetooth, label: 'Bluetooth', color: C.net, match: ['ble'] },
   // Note: "2.4 GHz" deliberately has no badge — in this database it only ever
