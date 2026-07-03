@@ -16,7 +16,7 @@ outputs:
     ref: mtsb-combicon
   pixels:
     max_per_output: 1024
-  clocked: selectable # supports both clocked (Data + Clock / SPI) and clockless pixels
+  clocked: selectable # supports clocked and single-wire pixels
   driver:
     buffered: true
 power:

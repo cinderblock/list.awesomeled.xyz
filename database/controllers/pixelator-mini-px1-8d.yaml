@@ -4,7 +4,7 @@ creator:
   name: ENTTEC
   url: https://www.enttec.com
   page: https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
-notes: DIN-rail Ethernet-to-SPI pixel converter; 8 outputs, 16 universes, up to 2730 RGB pixels.
+notes: DIN-rail Ethernet-to-pixel converter; 8 outputs, 16 universes, up to 2730 RGB pixels.
 inputs:
   physical:
     Ethernet: true # RJ45 Ethercon input

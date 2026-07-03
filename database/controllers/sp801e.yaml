@@ -13,7 +13,7 @@ inputs:
 outputs:
   count: 8
   connector: Screw
-  clocked: false # async SPI pixels
+  clocked: false # async (single-wire) pixels
   pixels:
     max_per_output: 600
 power:

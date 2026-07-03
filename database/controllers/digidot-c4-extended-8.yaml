@@ -21,7 +21,7 @@ outputs:
     buffered: true
   pixels:
     max_per_output: 1024 # 4096 total channels across 4 ports
-  clocked: selectable # single and clock (SPI) protocols
+  clocked: selectable # single-wire and clocked protocols
   auxiliary:
     DMX512: 2 # DMX in and out
 power:
@@ -32,7 +32,7 @@ data:
     - type: uSD
       max_size: 8
 features:
-  - Converts Art-Net/DMX to 50+ SPI pixel protocols
+  - Converts Art-Net/DMX to 50+ pixel protocols (single-wire and clocked)
   - Art-Net and DMX recording, playback, and triggering
   - HTP input signal merger
   - Gamma correction and output limiters

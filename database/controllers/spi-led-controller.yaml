@@ -11,8 +11,8 @@ inputs:
   standalone: true
 outputs:
   count: 1
-  connector: RJ45 DMX, Phoenix Plug SPI
-  clocked: selectable # supports both clocked (SPI Data+Clock) and async pixels
+  connector: RJ45 DMX, Phoenix Plug pixel data
+  clocked: selectable # supports clocked and async pixels
   driver:
     buffered: true
   current:

@@ -18,7 +18,7 @@ outputs:
   count: 4
   connector:
     ref: mtsb-combicon
-  clocked: selectable # Single (Data) and Clock+Data SPI protocols
+  clocked: selectable # single-wire and clocked protocols
   driver:
     buffered: true
   auxiliary:
@@ -27,7 +27,7 @@ power:
   voltage:
     max: 24
 features:
-  - Supports 60+ Data and Clock+Data SPI pixel protocols
+  - Supports 60+ single-wire and clocked pixel protocols
   - DIN-rail mountable
 price: 330
 technical_notes:

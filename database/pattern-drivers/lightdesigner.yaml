@@ -1,7 +1,7 @@
 name: LightDesigner
 status: discontinued
 creator: RocketLife
-notes: RocketLife controllers, serial/SPI pixels only
+notes: RocketLife controllers, clocked ('SPI') pixels only
 inputs:
   other: GPIO pins
 outputs:

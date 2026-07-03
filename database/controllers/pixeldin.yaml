@@ -5,7 +5,7 @@ creator:
   name: YariloPro
   url: https://yarilo.pro
   page: https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
-notes: Up to 4 independent outputs in 1-Wire SPI Mode. Total 5440 pixels.
+notes: Up to 4 independent outputs in single-wire pixel mode. Total 5440 pixels.
 inputs:
   physical:
     Ethernet: true

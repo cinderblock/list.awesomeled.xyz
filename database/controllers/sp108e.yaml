@@ -4,7 +4,7 @@ creator: Sperll
 vendors:
   - name: LED Lighting Hut
     page: https://www.ledlightinghut.com/sp108e-wifi-spi-led-controller.html
-notes: Wi-Fi SPI pixel controller configured via the 'LED Shop' phone app. The source
+notes: Wi-Fi pixel controller configured via the 'LED Shop' phone app. The source
   sheet's 'DMX' interface referred to supported DMX-type pixel ICs, not a DMX input.
 inputs:
   physical:

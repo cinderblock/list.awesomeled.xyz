@@ -10,7 +10,7 @@ inputs:
 outputs:
   count: 1
   connector: Screw
-  clocked: selectable # supports single-wire (WS2812) and clocked (APA102/SPI) ICs
+  clocked: selectable # supports single-wire (WS2812) and clocked (APA102) ICs
   pixels:
     max_per_output: 1024
 power:

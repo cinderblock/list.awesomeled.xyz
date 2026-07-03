@@ -28,6 +28,6 @@ power:
     min: 5
     max: 24
 features:
-  - SPI TTL output (12x 512 channels across two ports)
+  - TTL pixel-data output (12x 512 channels across two ports)
   - Powers LEDs directly through screw terminals (6A max per port)
 price: 350

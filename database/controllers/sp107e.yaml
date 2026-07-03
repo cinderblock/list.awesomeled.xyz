@@ -16,7 +16,7 @@ inputs:
 outputs:
   count: 1
   connector: Screw
-  clocked: selectable # supports single-wire and clocked (SPI) pixel ICs
+  clocked: selectable # supports single-wire and clocked pixel ICs
   pixels:
     max_per_output: 960
 power:
