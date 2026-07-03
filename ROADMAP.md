@@ -22,18 +22,25 @@ history. This is what's next.
   (they produced wrong badges: IP68 from a strip datasheet on a bare LED,
   Bluetooth from a different product's URL). Remaining: notes-prose badges
   still exist by design; migrate to fields opportunistically as data firms up
-- Scheduled monthly `check-links` run in CI (report as an issue)
 - Warranty / support-level column — blocked on a data pass (only ~5 entries
   record warranty today)
 
 ## Data backlog
 
-- Price fill + freshness audit (proven extractors: TI structured data,
-  Shopify products.json, WooCommerce JSON-LD)
-- Commercial-systems free-text `online_pricing` → structured {amount, currency}
+- Suspect entries found during audits (sp801e-style identity checks):
+  - `adapters/f40d-b` links to Kulp's K40D-PB product page — probably the old
+    F-series name for `controllers/k40d-pb`; merge or cross-link
+  - `controllers/lededdy` — vendor page is the discontinued LED Player S and
+    calls "LedEddy" editing software; entry may be conflated
+- Price gaps that need different treatment: pixels / pixel-ICs / connectors
+  (qty-tier pricing like the TI level converters), TC4427 (Microchip blocks
+  bots — manual), APD-2-500 (JS-only storefront), generic ESP/NodeMCU boards
+  (street price varies)
+- Commercial-systems `price_range` → verify against pricing.examples
 - More images: remaining pixels (Adafruit), XT60/Phoenix-class connectors
-  (manufacturer sources); TC4427 price (Microchip blocks bots — manual)
-- The 65-entry bot-blocked/timeout link list (human or per-site review)
+  (manufacturer sources)
+- The bot-blocked/timeout CHECK list (59 urls, tracked in the rolling
+  link-rot issue #2; EMP 16 and SceneX PP4 product pages now 404)
 - Vendor-catalog discontinued audits beyond link-driven evidence
 
 ## Decisions parked (owner: Cameron)
