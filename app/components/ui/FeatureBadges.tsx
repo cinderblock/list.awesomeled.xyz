@@ -21,6 +21,8 @@ import {
   Code,
   Droplets,
   Package,
+  Play,
+  Unlock,
 } from 'lucide-react';
 import { Link } from 'react-router';
 
@@ -39,6 +41,10 @@ interface BadgeConfig {
   // free-text hero scan — for terms too generic or ambiguous to scan ("web",
   // "sd", "usd" the storage type).
   valueOnlyMatch?: string[];
+  // Fires only off object KEYS (negation-aware: `standalone: true`), never
+  // free text — prose can negate ("not a standalone controller") and the
+  // word scan can't see that.
+  keyOnly?: boolean;
 }
 
 // Shared colors so related badges read as a family
@@ -147,6 +153,9 @@ const BADGES: Record<string, BadgeConfig> = {
     color: C.pixel,
     match: ['backup data line', 'backup line', 'backup_line', 'back up data line'],
   },
+  // Fires off outputs.differential: true (key scan); prose mentions of
+  // differential ports are the same capability
+  differential: { icon: Cable, label: 'Differential', color: C.pixel },
 
   // Ingress protection (dust/water) ratings
   ip20: { icon: Droplets, label: 'IP20', color: C.rating },
@@ -194,6 +203,10 @@ const BADGES: Record<string, BadgeConfig> = {
   // Power
   poe: { icon: PlugZap, label: 'PoE', color: C.power, match: ['power over ethernet'] },
 
+  // Capabilities from structured booleans (inputs.standalone, derived foss)
+  standalone: { icon: Play, label: 'Standalone', color: C.software, keyOnly: true },
+  foss: { icon: Unlock, label: 'FOSS', color: C.software, keyOnly: true },
+
   // Software ecosystems
   wled: { icon: Lightbulb, label: 'WLED', color: C.software },
   fpp: {
@@ -232,13 +245,20 @@ function escapeRegExp(s: string): string {
 
 // Precompute: every matchable term -> canonical id, plus whole-word matchers.
 // `\b` boundaries keep short ids ("spi", "arm", "opc") from matching inside
-// longer words, which the old substring scan got wrong.
+// longer words, which the old substring scan got wrong. keyOnly badges get a
+// key matcher but no free-text matcher.
 const TERM_TO_ID: Record<string, string> = {};
-const MATCHERS: { id: string; re: RegExp }[] = [];
+const TEXT_MATCHERS: { id: string; re: RegExp }[] = [];
+const KEY_MATCHERS: { id: string; re: RegExp }[] = [];
 for (const [id, cfg] of Object.entries(BADGES)) {
   for (const term of [id, ...(cfg.match ?? [])]) {
     TERM_TO_ID[term] = id;
-    MATCHERS.push({ id, re: new RegExp(`(?:^|[^a-z0-9])${escapeRegExp(term)}(?![a-z0-9])`, 'i') });
+    const matcher = {
+      id,
+      re: new RegExp(`(?:^|[^a-z0-9])${escapeRegExp(term)}(?![a-z0-9])`, 'i'),
+    };
+    KEY_MATCHERS.push(matcher);
+    if (!cfg.keyOnly) TEXT_MATCHERS.push(matcher);
   }
   for (const term of cfg.valueOnlyMatch ?? []) {
     TERM_TO_ID[term] = id;
@@ -256,8 +276,12 @@ function isNegatedValue(v: unknown): boolean {
   return typeof v === 'string' && ['no', 'none', 'never', 'false', 'n/a'].includes(v.toLowerCase());
 }
 
-function scanString(s: string, found: Set<string>): void {
-  for (const { id, re } of MATCHERS) {
+function scanString(
+  s: string,
+  found: Set<string>,
+  matchers: { id: string; re: RegExp }[] = TEXT_MATCHERS
+): void {
+  for (const { id, re } of matchers) {
     if (!found.has(id) && re.test(s)) found.add(id);
   }
 }
@@ -273,7 +297,7 @@ function findBadgesInValue(value: unknown, found: Set<string>): void {
     for (const item of value) findBadgesInValue(item, found);
   } else if (value && typeof value === 'object') {
     for (const [key, item] of Object.entries(value)) {
-      if (!isNegatedValue(item)) scanString(key, found);
+      if (!isNegatedValue(item)) scanString(key, found, KEY_MATCHERS);
       findBadgesInValue(item, found);
     }
   }

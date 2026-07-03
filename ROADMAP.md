@@ -16,7 +16,11 @@ history. This is what's next.
 
 ## Feature backlog
 
-- Field-derived badges (from schema fields instead of text scanning)
+- Field-derived badges: keyOnly badges shipped (Standalone / FOSS fire only
+  from structured fields, negation-aware; Differential added). Narrowing the
+  free-text scan is blocked on a data pass — ~14 entries' badges (SPI, DMX,
+  microSD…) currently come only from product-URL slugs or notes prose and
+  need those facts recorded as fields first
 - Scheduled monthly `check-links` run in CI (report as an issue)
 - Warranty / support-level column — blocked on a data pass (only ~5 entries
   record warranty today)
