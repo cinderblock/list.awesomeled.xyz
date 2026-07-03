@@ -1,16 +1,29 @@
 import type { Route } from './+types/designer';
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
-import { AlertTriangle, CheckCircle, HelpCircle, MonitorPlay, Plus, X, Zap } from 'lucide-react';
+import {
+  AlertTriangle,
+  CheckCircle,
+  HelpCircle,
+  MonitorPlay,
+  Plus,
+  Upload,
+  X,
+  Zap,
+} from 'lucide-react';
 import { loadCategoryData } from '~/lib/data';
 import {
   buildPixelOption,
   buildControllerOption,
+  buildLevelShifterOption,
   buildPatternSourceOption,
   chainMaxFps,
   checkCompat,
   checkSourceCompat,
+  describeLayout,
   layoutTotal,
+  needsLevelShifter,
+  stringLengths,
   systemPower,
   sharedOutputOverflow,
   PROTOCOL_LABELS,
@@ -43,7 +56,11 @@ export async function loader() {
     .map(buildPatternSourceOption)
     .filter((s) => s.outputProtocols.length > 0)
     .sort((a, b) => a.name.localeCompare(b.name));
-  return { pixels, controllers, sources };
+  const shifters = loadCategoryData('level-converters')
+    .filter((e) => e.status !== 'discontinued' && e.status !== 'end-of-life')
+    .map(buildLevelShifterOption)
+    .sort((a, b) => (a.priceUSD ?? Infinity) - (b.priceUSD ?? Infinity));
+  return { pixels, controllers, sources, shifters };
 }
 
 // [strings, pixels per string]
@@ -72,10 +89,11 @@ function fmtHz(hz: number): string {
 }
 
 export default function DesignerPage({ loaderData }: Route.ComponentProps) {
-  const { pixels, controllers, sources } = loaderData;
+  const { pixels, controllers, sources, shifters } = loaderData;
   const [searchParams, setSearchParams] = useSearchParams();
   const [showIncompatible, setShowIncompatible] = useState(false);
   const [pixelQuery, setPixelQuery] = useState('');
+  const [importError, setImportError] = useState<string | null>(null);
   const [includeDiscontinued, setIncludeDiscontinued] = useState(false);
   const [fossOnly, setFossOnly] = useState(false);
   const [activeRaw, setActive] = useState(0);
@@ -91,14 +109,24 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
   }));
   const active = Math.min(activeRaw, raw.length - 1);
 
-  const chains: Chain[] = raw.map((r) => ({
-    pixel: pixels.find((p) => p.id === r.p) ?? null,
-    layout: {
-      strings: Math.max(1, parseInt(r.x, 10) || 1),
-      perString: Math.max(1, parseInt(r.n, 10) || 150),
-    },
-    controller: controllers.find((c) => c.id === r.c) ?? null,
-  }));
+  // n is "800" (uniform) or "150.200.80" (per-string lengths, dot-separated)
+  const chains: Chain[] = raw.map((r) => {
+    const lengths = r.n
+      .split('.')
+      .map((s) => parseInt(s, 10))
+      .filter((v) => v > 0);
+    return {
+      pixel: pixels.find((p) => p.id === r.p) ?? null,
+      layout:
+        lengths.length > 1
+          ? { strings: lengths.length, perString: Math.max(...lengths), lengths }
+          : {
+              strings: Math.max(1, parseInt(r.x, 10) || 1),
+              perString: lengths[0] ?? 150,
+            },
+      controller: controllers.find((c) => c.id === r.c) ?? null,
+    };
+  });
   const chain = chains[active];
   const sourceId = searchParams.get('g');
   const source =
@@ -154,6 +182,45 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
     setActive(Math.max(0, active - (i <= active ? 1 : 0)));
   };
 
+  // Downloaded diagrams carry their design in <metadata id="awesomeled-design">
+  const importSvg = (file: File) => {
+    file.text().then((text) => {
+      try {
+        const dom = new DOMParser().parseFromString(text, 'image/svg+xml');
+        const json = dom.getElementById('awesomeled-design')?.textContent;
+        if (!json) throw new Error('no design metadata');
+        const design = JSON.parse(json) as {
+          source?: unknown;
+          chains?: {
+            pixel?: unknown;
+            strings?: unknown;
+            perString?: unknown;
+            lengths?: unknown;
+            controller?: unknown;
+          }[];
+        };
+        if (!Array.isArray(design.chains) || design.chains.length === 0) {
+          throw new Error('no chains');
+        }
+        const nextRaw: RawChain[] = design.chains.map((c) => ({
+          p: typeof c.pixel === 'string' ? c.pixel : '',
+          x: String(typeof c.strings === 'number' ? c.strings : 1),
+          n: Array.isArray(c.lengths)
+            ? c.lengths.join('.')
+            : String(typeof c.perString === 'number' ? c.perString : 150),
+          c: typeof c.controller === 'string' ? c.controller : '',
+        }));
+        write(nextRaw, { g: typeof design.source === 'string' ? design.source : null });
+        setActive(0);
+        setImportError(null);
+      } catch {
+        setImportError(
+          "Couldn't find a design in that SVG — import only works with diagrams downloaded from this designer."
+        );
+      }
+    });
+  };
+
   const power = systemPower(chains);
   const overflow = sharedOutputOverflow(chains);
   const multi = chains.length > 1;
@@ -174,6 +241,15 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
     const label = multi ? `Group ${i + 1}` : 'This layout';
     return [
       `${label} tops out at ~${fmt(fps, 0)} fps: ${ch.pixel.name}'s ${fmtHz(ch.pixel.bitrateHz!)} data rate across ${ch.layout.perString.toLocaleString('en-US')} pixels per string. Shorter strings on more outputs refresh faster.`,
+    ];
+  });
+
+  // Unbuffered (CPU-direct, usually 3.3 V) outputs into 5 V+ pixels
+  const shiftNotes = chains.flatMap((ch, i) => {
+    if (!ch.pixel || !ch.controller || !needsLevelShifter(ch.controller, ch.pixel)) return [];
+    const label = multi ? `Group ${i + 1}: ` : '';
+    return [
+      `${label}${ch.controller.name} drives data straight from its CPU pins (typically 3.3 V); ${ch.pixel.name} runs at ${fmt(ch.pixel.voltage ?? 5, 0)} V and may not register 3.3 V data reliably. Plan a level shifter on each data line.`,
     ];
   });
 
@@ -243,9 +319,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                 >
                   <button type="button" onClick={() => setActive(i)}>
                     <strong>Group {i + 1}:</strong>{' '}
-                    {ch.pixel
-                      ? `${ch.layout.strings} × ${ch.layout.perString.toLocaleString('en-US')} ${ch.pixel.name}`
-                      : 'empty'}
+                    {ch.pixel ? `${describeLayout(ch.layout)} ${ch.pixel.name}` : 'empty'}
                     {ch.controller ? ` → ${ch.controller.name}` : ''}
                   </button>
                   {multi && (
@@ -265,6 +339,25 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
             <button type="button" className="btn btn--ghost designer-add-chain" onClick={addChain}>
               <Plus size={14} /> Add a pixel group (different type, voltage, or run length)
             </button>
+            <label className="btn btn--ghost designer-add-chain designer-import">
+              <Upload size={14} /> Import a downloaded design SVG
+              <input
+                type="file"
+                accept=".svg,image/svg+xml"
+                style={{ display: 'none' }}
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) importSvg(file);
+                  e.target.value = '';
+                }}
+              />
+            </label>
+            {importError && (
+              <p className="designer-warning designer-warning--advisory" role="alert">
+                <AlertTriangle size={15} />
+                {importError}
+              </p>
+            )}
           </section>
 
           {/* Step 1: pixels */}
@@ -328,48 +421,91 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
             <h2 className="designer-step-title">
               2 · Layout{multi ? ` (group ${active + 1})` : ''}
             </h2>
-            <div className="designer-count-row">
-              <label className="designer-field">
-                <input
-                  type="number"
-                  className="designer-count"
-                  min={1}
-                  value={chain.layout.strings}
-                  onChange={(e) => updateActive({ x: e.target.value })}
-                />
-                <span>strings of</span>
-              </label>
-              <label className="designer-field">
-                <input
-                  type="number"
-                  className="designer-count"
-                  min={1}
-                  value={chain.layout.perString}
-                  onChange={(e) => updateActive({ n: e.target.value })}
-                />
-                <span>pixels</span>
-              </label>
-              <span className="designer-total">
-                = {layoutTotal(chain.layout).toLocaleString('en-US')} pixels
-              </span>
-            </div>
+            {!chain.layout.lengths ? (
+              <div className="designer-count-row">
+                <label className="designer-field">
+                  <input
+                    type="number"
+                    className="designer-count"
+                    min={1}
+                    value={chain.layout.strings}
+                    onChange={(e) => updateActive({ x: e.target.value })}
+                  />
+                  <span>strings of</span>
+                </label>
+                <label className="designer-field">
+                  <input
+                    type="number"
+                    className="designer-count"
+                    min={1}
+                    value={chain.layout.perString}
+                    onChange={(e) => updateActive({ n: e.target.value })}
+                  />
+                  <span>pixels</span>
+                </label>
+                <span className="designer-total">
+                  = {layoutTotal(chain.layout).toLocaleString('en-US')} pixels
+                </span>
+              </div>
+            ) : (
+              <div className="designer-count-row">
+                <label className="designer-field designer-field--grow">
+                  <input
+                    key={`lengths-${active}`}
+                    type="text"
+                    className="designer-count designer-lengths"
+                    defaultValue={chain.layout.lengths.join(', ')}
+                    placeholder="150, 200, 80"
+                    onChange={(e) => {
+                      const lengths = e.target.value
+                        .split(/[\s,;+]+/)
+                        .map((s) => parseInt(s, 10))
+                        .filter((v) => v > 0);
+                      if (lengths.length > 0) {
+                        updateActive({ n: lengths.join('.'), x: String(lengths.length) });
+                      }
+                    }}
+                  />
+                  <span>pixels per string</span>
+                </label>
+                <span className="designer-total">
+                  = {layoutTotal(chain.layout).toLocaleString('en-US')} pixels /{' '}
+                  {chain.layout.strings} strings
+                </span>
+              </div>
+            )}
             <div className="designer-count-row">
               {LAYOUT_PRESETS.map(([x, n]) => (
                 <button
                   key={`${x}x${n}`}
                   type="button"
-                  className={`btn btn--ghost designer-preset${x === chain.layout.strings && n === chain.layout.perString ? ' designer-preset--active' : ''}`}
+                  className={`btn btn--ghost designer-preset${!chain.layout.lengths && x === chain.layout.strings && n === chain.layout.perString ? ' designer-preset--active' : ''}`}
                   onClick={() => updateActive({ x: String(x), n: String(n) })}
                 >
                   {x} × {n}
                 </button>
               ))}
+              <button
+                type="button"
+                className={`btn btn--ghost designer-preset${chain.layout.lengths ? ' designer-preset--active' : ''}`}
+                onClick={() =>
+                  chain.layout.lengths
+                    ? updateActive({
+                        n: String(chain.layout.perString),
+                        x: String(chain.layout.strings),
+                      })
+                    : updateActive({ n: stringLengths(chain.layout).join('.') })
+                }
+              >
+                {chain.layout.lengths ? 'uniform strings' : 'vary string lengths'}
+              </button>
             </div>
             {activeFps != null && chain.pixel && (
               <p className="designer-hint">
                 Refresh ceiling ~<strong>{fmt(activeFps, 0)} fps</strong> —{' '}
                 {fmtHz(chain.pixel.bitrateHz!)} ÷ ({chain.pixel.bitsPerPixel} bits ×{' '}
-                {chain.layout.perString.toLocaleString('en-US')} px/string). Strings on separate
+                {chain.layout.perString.toLocaleString('en-US')} px
+                {chain.layout.lengths ? ' on the longest string' : '/string'}). Strings on separate
                 outputs update in parallel, so only string length matters.
               </p>
             )}
@@ -390,9 +526,8 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
               <>
                 <p className="designer-hint">
                   {compatible.length.toLocaleString('en-US')} compatible controller
-                  {compatible.length === 1 ? '' : 's'} for {chain.layout.strings} ×{' '}
-                  {chain.layout.perString.toLocaleString('en-US')} {chain.pixel.name} (cheapest
-                  first) ·{' '}
+                  {compatible.length === 1 ? '' : 's'} for {describeLayout(chain.layout)}{' '}
+                  {chain.pixel.name} (cheapest first) ·{' '}
                   <label className="designer-toggle">
                     <input
                       type="checkbox"
@@ -432,6 +567,28 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                       <ControllerRow key={c.id} c={c} reasons={compat.reasons} />
                     ))}
                   </ul>
+                )}
+                {chain.controller && needsLevelShifter(chain.controller, chain.pixel) && (
+                  <p className="designer-warning designer-warning--advisory" role="alert">
+                    <AlertTriangle size={15} />
+                    <span>
+                      {chain.controller.name} drives data straight from its CPU pins (typically 3.3
+                      V), and {chain.pixel.name} may not register that reliably. Add a level shifter
+                      on each data line — e.g.{' '}
+                      {shifters.slice(0, 4).map((s, i) => (
+                        <span key={s.id}>
+                          {i > 0 && ', '}
+                          <Link to={`/level-converters/${s.id}`}>{s.name}</Link>
+                          {s.channels != null || s.priceText
+                            ? ` (${[s.channels != null ? `${s.channels} ch` : null, s.priceText]
+                                .filter(Boolean)
+                                .join(', ')})`
+                            : ''}
+                        </span>
+                      ))}
+                      .
+                    </span>
+                  </p>
                 )}
               </>
             )}
@@ -591,7 +748,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                 </p>
               )}
 
-              {fpsNotes.map((note) => (
+              {[...fpsNotes, ...shiftNotes].map((note) => (
                 <p key={note} className="designer-warning designer-warning--advisory">
                   <AlertTriangle size={15} />
                   {note}

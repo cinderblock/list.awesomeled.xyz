@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Download, Printer } from 'lucide-react';
 import {
   chainMaxFps,
+  describeLayout,
   layoutTotal,
   type Chain,
   type PatternSourceOption,
@@ -48,6 +49,7 @@ export function DesignDiagram({ chains, source, standalone, power }: DesignDiagr
         pixel: c.pixel?.id ?? null,
         strings: c.layout.strings,
         perString: c.layout.perString,
+        ...(c.layout.lengths ? { lengths: c.layout.lengths } : {}),
         controller: c.controller?.id ?? null,
         fpsMax: fps != null ? Math.round(fps) : null,
       };
@@ -213,8 +215,8 @@ export function DesignDiagram({ chains, source, standalone, power }: DesignDiagr
                 fontWeight="700"
                 fill="#9d174d"
               >
-                {chain.layout.strings} × {fmt(chain.layout.perString, 0)} {chain.pixel!.name} (
-                {fmt(total, 0)} px, {fmt(chain.pixel!.voltage ?? 5, 0)} V)
+                {describeLayout(chain.layout)} {chain.pixel!.name} ({fmt(total, 0)} px,{' '}
+                {fmt(chain.pixel!.voltage ?? 5, 0)} V)
               </text>
             </g>
           );

@@ -7,18 +7,15 @@ history. This is what's next.
 
 ## In flight
 
-- **Designer v2**
-  - ✅ Part thumbnails: card-grid pixel picker (with filter box), images in
-    the diagram
-  - ✅ Frame-rate math: bitrate ÷ (pixels-per-string × bits/pixel) → refresh
-    ceiling per group, sub-30fps callouts, fpsMax in the embedded design JSON
-  - Later: level-shifter / DIY-microboard path, per-string lengths within a
-    group, SVG re-import (design JSON is already embedded in downloads)
+- **Designer v2** — shipped: card-grid pixel picker, diagram thumbnails,
+  refresh-ceiling math (+ sub-30fps callouts), per-string lengths within a
+  group (`n=150.200.80`), SVG re-import, and level-shifter advisories
+  (driver.buffered=false + 5 V pixels → level-converter suggestions)
+  - Later: DIY-microboard path — needs data first (usable GPIO/output counts
+    on microboards) before they can appear as controller options
 
 ## Feature backlog
 
-- `outputs.connector.ref`: render as links (controllers ↔ connectors) and
-  populate — the last cross-link mechanism with no UI
 - Field-derived badges (from schema fields instead of text scanning)
 - Scheduled monthly `check-links` run in CI (report as an issue)
 - Warranty / support-level column — blocked on a data pass (only ~5 entries

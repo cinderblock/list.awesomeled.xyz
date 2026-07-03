@@ -155,6 +155,18 @@
   align-items: center;
   gap: 0.3rem;
 }
+.designer-import {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+.designer-field--grow {
+  flex: 1 1 auto;
+}
+.designer-lengths {
+  flex: 1;
+  min-width: 10rem;
+  width: auto;
+}
 
 .designer-field {
   display: inline-flex;

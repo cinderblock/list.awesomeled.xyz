@@ -54,16 +54,37 @@ export interface ControllerOption {
   priceUSD: number | null;
   priceText: string | null;
   differential: boolean;
+  /** outputs.driver.buffered — false = data straight from CPU pins (usually 3.3 V) */
+  buffered: boolean | null;
 }
 
-/** A pixel layout: N strings of M pixels (a matrix is just its strings). */
+/**
+ * A pixel layout: N strings of M pixels (a matrix is just its strings).
+ * When string lengths differ, `lengths` holds each one; `strings`/`perString`
+ * stay derived (count / longest) so every check keeps working unchanged.
+ */
 export interface Layout {
   strings: number;
+  /** Pixels per string — the LONGEST string when lengths vary */
   perString: number;
+  lengths?: number[];
 }
 
 export function layoutTotal(layout: Layout): number {
-  return layout.strings * layout.perString;
+  return layout.lengths
+    ? layout.lengths.reduce((a, b) => a + b, 0)
+    : layout.strings * layout.perString;
+}
+
+/** Every string's pixel count, expanding uniform layouts. */
+export function stringLengths(layout: Layout): number[] {
+  return layout.lengths ?? Array.from({ length: layout.strings }, () => layout.perString);
+}
+
+export function describeLayout(layout: Layout): string {
+  return layout.lengths
+    ? `${layout.strings} strings (${layout.lengths.join('+')})`
+    : `${layout.strings} × ${layout.perString.toLocaleString('en-US')}`;
 }
 
 // Control-protocol names -> canonical tokens, shared by controllers (arrays
@@ -152,6 +173,7 @@ export function chainMaxFps(pixel: PixelOption, layout: Layout): number | null {
 export function buildControllerOption(entry: BaseEntry): ControllerOption {
   const outputs = (entry.outputs ?? {}) as Record<string, unknown>;
   const pixels = (outputs.pixels ?? {}) as Record<string, unknown>;
+  const driver = (outputs.driver ?? {}) as Record<string, unknown>;
 
   const count = typeof outputs.count === 'number' ? outputs.count : null;
   const maxPerOutput = typeof pixels.max_per_output === 'number' ? pixels.max_per_output : null;
@@ -183,7 +205,46 @@ export function buildControllerOption(entry: BaseEntry): ControllerOption {
     priceUSD: priceUSD(entry.price),
     priceText: parsedPrice ? formatPriceText(parsedPrice) : null,
     differential: outputs.differential === true,
+    buffered: typeof driver.buffered === 'boolean' ? driver.buffered : null,
   };
+}
+
+export interface LevelShifterOption {
+  id: string;
+  name: string;
+  channels: number | null;
+  priceText: string | null;
+  priceUSD: number | null;
+}
+
+export function buildLevelShifterOption(entry: BaseEntry): LevelShifterOption {
+  const io = (entry.io ?? {}) as Record<string, unknown>;
+  const channels = io.channels ?? entry.channels;
+  // price is a plain value or TI-style qty tiers; quote the single-unit tier
+  let price: unknown = entry.price;
+  if (Array.isArray(price)) {
+    const unit = price.find(
+      (t) => t && typeof t === 'object' && (t as { qty?: unknown }).qty === 1
+    ) as { price?: unknown } | undefined;
+    price = unit?.price;
+  }
+  const parsed = parsePrice(price);
+  return {
+    id: String(entry.id),
+    name: entry.name,
+    channels: typeof channels === 'number' ? channels : null,
+    priceText: parsed ? formatPriceText(parsed) : null,
+    priceUSD: priceUSD(price),
+  };
+}
+
+/**
+ * Pixels running at 5 V+ want data highs near 0.7×VDD, which unbuffered
+ * 3.3 V CPU pins can't reliably hit. Buffered outputs re-drive the data at
+ * 5 V, so only buffered:false (recorded) trips this.
+ */
+export function needsLevelShifter(controller: ControllerOption, pixel: PixelOption): boolean {
+  return controller.buffered === false && (pixel.voltage ?? 5) >= 5;
 }
 
 export interface PatternSourceOption {
