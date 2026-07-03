@@ -12,7 +12,8 @@ inputs:
   standalone: true # plays TPM2 files from microSD without a host
 outputs:
   count: 2
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   pixels:
     max_per_output: 512 # 1024 total across 2 ports
   clocked: false

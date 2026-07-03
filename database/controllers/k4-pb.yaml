@@ -17,7 +17,8 @@ outputs:
   pixels:
     max_per_output: 1600
   clocked: false
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   auxiliary:

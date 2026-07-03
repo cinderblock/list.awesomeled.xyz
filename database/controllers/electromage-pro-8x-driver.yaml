@@ -11,7 +11,8 @@ inputs:
   standalone: false
 outputs:
   count: 8
-  connector: Phoenix Screw pluggable
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: selectable # supports WS2812 (clockless) and APA102 (clocked)

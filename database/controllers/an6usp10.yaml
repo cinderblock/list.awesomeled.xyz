@@ -13,7 +13,8 @@ inputs:
   standalone: false
 outputs:
   count: 6
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   pixels:

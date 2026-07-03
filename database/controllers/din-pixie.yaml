@@ -13,7 +13,8 @@ inputs:
     - Art-Net
   standalone: true
 outputs:
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   count: 2
   driver:
     buffered: true

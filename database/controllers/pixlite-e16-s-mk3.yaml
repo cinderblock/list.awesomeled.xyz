@@ -13,7 +13,8 @@ inputs:
   standalone: true
 outputs:
   count: 32
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: selectable # single or clocked per output
   differential: true
   driver:

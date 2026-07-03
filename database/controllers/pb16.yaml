@@ -12,7 +12,8 @@ inputs:
   requires_host: BeagleBone Black
 outputs:
   count: 32 # 16 onboard plus 16 via expansion header
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: false # async WS2811-style pixels

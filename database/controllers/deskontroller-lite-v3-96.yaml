@@ -13,7 +13,9 @@ inputs:
   standalone: false
 outputs:
   count: 32 # 32 data lines across 8 RJ45 connectors (4 per RJ45 in normal mode)
-  connector: RJ45 # with included terminal adapters, CAT6 UTP cabling
+  connector:
+    notes: with included terminal adapters, CAT6 UTP cabling
+    ref: rj45
   clocked: selectable # supports clockless and clocked signal types
   pixels:
     max_per_output: 510 # 16320 total / 32 outputs

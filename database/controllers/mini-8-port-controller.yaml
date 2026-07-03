@@ -12,7 +12,8 @@ inputs:
   standalone: false
 outputs:
   count: 8
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   pixels:
     max_per_output: 600 # 4800 total across 8 outputs
   clocked: false # async pixel types only

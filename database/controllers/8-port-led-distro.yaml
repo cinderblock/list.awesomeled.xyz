@@ -14,7 +14,8 @@ inputs:
   standalone: true # WLED firmware can play effects without a host
 outputs:
   count: 8
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: false # single-wire / async pixels
   auxiliary:
     GPIO: 7 # GPIO17, 32, 33, 34, 35, 36, 39 broken out for buttons/mics/sensors

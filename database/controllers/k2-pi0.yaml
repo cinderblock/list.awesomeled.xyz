@@ -3,10 +3,7 @@ status: active
 creator:
   name: KulpLights, LLC
   page: https://kulplights.com/product/k2-pi0/
-notes: Raspberry Pi Zero cape running FPP (Pi Zero W/2W recommended; Wi-Fi via the
-  Pi - the Zero has no Ethernet port). 2 eFuse-protected ports, up to 800
-  pixels each (with power injection) at 40FPS, 6A per port, 5-24V input powers
-  both cape and Pi. Small GPIO/i2c header; no OLED, buttons, or RTC.
+notes: Raspberry Pi Zero cape running FPP (Pi Zero W/2W recommended; Wi-Fi via the Pi - the Zero has no Ethernet port). 2 eFuse-protected ports, up to 800 pixels each (with power injection) at 40FPS, 6A per port, 5-24V input powers both cape and Pi. Small GPIO/i2c header; no OLED, buttons, or RTC.
 inputs:
   physical:
     Wi-Fi: 2.4GHz # via the host Raspberry Pi Zero W/2W
@@ -14,7 +11,8 @@ inputs:
   requires_host: Raspberry Pi Zero
 outputs:
   count: 2
-  connector: Phoenix
+  connector:
+    ref: mtsb-combicon
   pixels:
     max_per_output: 800
   current:

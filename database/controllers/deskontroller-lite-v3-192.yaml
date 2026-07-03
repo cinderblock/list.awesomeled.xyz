@@ -13,7 +13,8 @@ inputs:
   standalone: false
 outputs:
   count: 32
-  connector: RJ45
+  connector:
+    ref: rj45
   pixels:
     max_per_output: 1020 # 32640 total RGB pixels across 32 data lines
   clocked: selectable # supports clockless and clocked signal types

@@ -14,7 +14,8 @@ inputs:
   standalone: false
 outputs:
   count: 32
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: selectable # Single or Clock per output
   driver:
     buffered: true

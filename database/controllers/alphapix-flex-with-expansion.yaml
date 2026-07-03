@@ -10,7 +10,8 @@ inputs:
     - Art-Net
   standalone: false
 outputs:
-  connector: Phoenix Plug
+  connector:
+    ref: mtsb-combicon
   count: 48
   pixels:
     max_per_output: 340 # 16320 total across 48 outputs

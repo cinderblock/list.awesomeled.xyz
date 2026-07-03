@@ -12,7 +12,9 @@ inputs:
   standalone: true # Falcon Player (FPP) remote mode
 outputs:
   count: 4
-  connector: 5 Pin GX-16
+  connector:
+    pins: 5
+    ref: gx-16
   clocked: false # async pixel types
   driver:
     buffered: true

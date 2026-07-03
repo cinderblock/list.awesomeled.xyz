@@ -5,9 +5,7 @@ creator:
   url: https://www.winterlights.in
   page: https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
 notes: >-
-  Vendor lists 16 direct pixel ports plus 16 long-range ports on 4 RJ45 jacks
-  (32 total in the name), so output count reflects direct ports only. Data-only
-  outputs with no V+ pass-through; plays FPP sequences from microSD.
+  Vendor lists 16 direct pixel ports plus 16 long-range ports on 4 RJ45 jacks (32 total in the name), so output count reflects direct ports only. Data-only outputs with no V+ pass-through; plays FPP sequences from microSD.
 inputs:
   physical:
     Ethernet: true
@@ -18,7 +16,8 @@ inputs:
   standalone: true # plays FPP sequences from microSD
 outputs:
   count: 16
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: false # async (Single and Clock pixel types, data-only)

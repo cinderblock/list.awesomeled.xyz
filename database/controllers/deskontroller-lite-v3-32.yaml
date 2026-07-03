@@ -19,7 +19,8 @@ inputs:
   standalone: false
 outputs:
   count: 32
-  connector: RJ45
+  connector:
+    ref: rj45
   pixels:
     max_per_output: 170 # 5440 total across 32 outputs
   clocked: selectable # single (clockless) and clocked pixels

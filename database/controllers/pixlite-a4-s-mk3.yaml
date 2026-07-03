@@ -10,7 +10,8 @@ inputs:
   standalone: true # SHOWTime software plays from SD card
 outputs:
   count: 8
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: selectable # Single or Clock
   driver:
     buffered: true

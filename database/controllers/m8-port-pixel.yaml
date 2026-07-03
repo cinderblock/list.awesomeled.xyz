@@ -12,7 +12,8 @@ inputs:
   requires_host: Raspberry Pi # 3B+ or above
 outputs:
   count: 8
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: selectable # single (async) or clocked pixels

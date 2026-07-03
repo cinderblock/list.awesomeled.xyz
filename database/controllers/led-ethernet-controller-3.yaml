@@ -19,7 +19,9 @@ inputs:
   standalone: true # microSD playlist/autoplay mode
 outputs:
   count: 4
-  connector: Phoenix Plug # pluggable terminal block, 5 mm spacing
+  connector:
+    notes: pluggable terminal block, 5 mm spacing
+    ref: mtsb-combicon
   pixels:
     max_per_output: 1024
   clocked: selectable

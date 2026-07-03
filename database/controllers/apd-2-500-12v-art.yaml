@@ -14,7 +14,8 @@ inputs:
   standalone: false
 outputs:
   count: 2
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: false # async pixels

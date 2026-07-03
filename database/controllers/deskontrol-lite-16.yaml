@@ -14,7 +14,8 @@ inputs:
   standalone: false
 outputs:
   count: 16
-  connector: RJ-45
+  connector:
+    ref: rj45
   driver:
     buffered: true
   pixels:

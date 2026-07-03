@@ -12,7 +12,8 @@ inputs:
   standalone: true
 outputs:
   count: 1
-  connector: Phoenix Plug
+  connector:
+    ref: mtsb-combicon
   pixels:
     max_per_output: 1024
   clocked: selectable # supports both clocked (Data + Clock / SPI) and clockless pixels

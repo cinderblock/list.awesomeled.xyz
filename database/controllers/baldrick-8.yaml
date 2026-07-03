@@ -15,7 +15,8 @@ inputs:
     - sACN # E1.31
   standalone: false
 outputs:
-  connector: Phoenix Plug
+  connector:
+    ref: mtsb-combicon
   count: 8
   fuse: 7.5A # resettable, per output
   driver:

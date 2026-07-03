@@ -7,7 +7,8 @@ inputs:
   standalone: true
 outputs:
   count: 1
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   pixels:
     max_per_output: 512
   clocked: selectable

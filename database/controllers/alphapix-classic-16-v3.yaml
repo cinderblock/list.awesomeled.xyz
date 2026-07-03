@@ -14,7 +14,8 @@ inputs:
   standalone: true # Falcon Player (FPP) compatible
 outputs:
   count: 16
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   pixels:

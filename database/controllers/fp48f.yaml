@@ -14,7 +14,8 @@ inputs:
   requires_host: BeagleBone Black
 outputs:
   count: 48
-  connector: Phoenix Plug
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   pixels:

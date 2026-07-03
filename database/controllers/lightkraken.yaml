@@ -19,7 +19,8 @@ inputs:
     - sACN # E1.31
 outputs:
   count: 1
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   current:

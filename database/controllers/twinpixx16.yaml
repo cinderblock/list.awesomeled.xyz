@@ -15,7 +15,8 @@ inputs:
   standalone: false
 outputs:
   count: 2 # "TwinPixx" = two pixel outputs
-  connector: Phoenix Plug
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: selectable # supports both single-wire and clocked pixels

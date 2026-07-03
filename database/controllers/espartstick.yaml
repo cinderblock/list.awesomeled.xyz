@@ -16,7 +16,8 @@ inputs:
   standalone: true # SD card standalone sequence playback
 outputs:
   count: 2
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: selectable # Single or Clock per output
   pixels:
     max_per_output: 512

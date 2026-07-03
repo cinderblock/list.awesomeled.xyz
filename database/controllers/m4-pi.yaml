@@ -13,7 +13,8 @@ inputs:
   requires_host: Raspberry Pi
 outputs:
   count: 4
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: false # async (single-wire) pixels
   pixels:
     max_per_output: 1600 # 6400 total across 4 outputs

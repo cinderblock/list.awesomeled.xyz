@@ -11,7 +11,8 @@ inputs:
   standalone: true
 outputs:
   count: 4
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: selectable # supports both clocked and clockless pixels
   pixels:
     max_per_output: 680 # 2720 total across 4 outputs

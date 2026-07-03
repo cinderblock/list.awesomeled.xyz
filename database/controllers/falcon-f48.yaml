@@ -14,7 +14,9 @@ inputs:
   standalone: true # Falcon Player (FPP) remote mode plays FSEQ from SD card
 outputs:
   count: 48
-  connector: RJ45 # to differential SmartReceiver boards
+  connector:
+    notes: to differential SmartReceiver boards
+    ref: rj45
   differential: true
   driver:
     buffered: true

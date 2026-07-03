@@ -16,7 +16,8 @@ inputs:
   standalone: false
 outputs:
   count: 4
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: selectable # Single (Data) and Clock+Data SPI protocols
   driver:
     buffered: true

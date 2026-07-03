@@ -10,7 +10,8 @@ inputs:
     PoE: true
   standalone: true
 outputs:
-  connector: RJ-45
+  connector:
+    ref: rj45
   count: 40
   driver:
     buffered: true

@@ -15,7 +15,8 @@ inputs:
   standalone: true # no Pi or FPP licence required; FPP API control built in
 outputs:
   count: 17
-  connector: Phoenix Plug
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   pixels:

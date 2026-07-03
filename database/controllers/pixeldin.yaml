@@ -11,7 +11,8 @@ inputs:
     Ethernet: true
 outputs:
   count: 4
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: selectable

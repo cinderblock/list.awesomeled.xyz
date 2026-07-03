@@ -4,17 +4,15 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k64d-b/
-notes: BeagleBone Black cape running FPP (Ethernet/storage via the BBB; Wi-Fi only
-  if paired with a BBB Wireless host). 16 RJ45 differential ports driving 64
-  strings via standard or v1/v2 Smart receivers. Two UART differential outputs
-  for DMX/Renard/LOR/PixelNet. Onboard sound, FM transmitter optional.
+notes: BeagleBone Black cape running FPP (Ethernet/storage via the BBB; Wi-Fi only if paired with a BBB Wireless host). 16 RJ45 differential ports driving 64 strings via standard or v1/v2 Smart receivers. Two UART differential outputs for DMX/Renard/LOR/PixelNet. Onboard sound, FM transmitter optional.
 inputs:
   physical:
     Ethernet: true # provided by the BeagleBone Black host
   standalone: true # Falcon Player (FPP)
   requires_host: BeagleBone Black
 outputs:
-  connector: RJ45
+  connector:
+    ref: rj45
   count: 64 # 16 RJ45 differential ports, 4 strings each via Smart receivers
   differential: true
   clocked: false # async pixels only

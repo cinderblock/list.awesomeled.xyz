@@ -12,7 +12,8 @@ inputs:
   requires_host: Raspberry Pi
 outputs:
   count: 4
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   pixels:

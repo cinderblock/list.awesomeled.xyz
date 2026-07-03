@@ -13,7 +13,8 @@ inputs:
   standalone: false
 outputs:
   count: 4
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   differential: true
   driver:
     buffered: true

@@ -15,7 +15,8 @@ inputs:
   standalone: false # listed FPP support implies Falcon Player remote mode, but flat data marked standalone false
 outputs:
   count: 8
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   pixels:
     max_per_output: 510 # 4080 total across 8 outputs
   clocked: selectable # output pins configurable as single or clock

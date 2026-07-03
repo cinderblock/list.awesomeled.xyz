@@ -18,7 +18,10 @@ inputs:
   standalone: false
 outputs:
   count: 4
-  connector: 4-pin Phoenix Plug 3.81mm
+  connector:
+    notes: 3.81 mm pitch
+    pins: 4
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: selectable

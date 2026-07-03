@@ -12,7 +12,8 @@ inputs:
   standalone: true # runs FPP (Falcon Player) from SD card
   requires_host: PocketBeagle # cape for PocketBeagle / PocketBeagle2
 outputs:
-  connector: RJ45
+  connector:
+    ref: rj45
   count: 40 # 10 RJ45 ports drive 40 pixel strings
   differential: true
   pixels:

@@ -15,7 +15,8 @@ inputs:
   standalone: true # records Art-Net/DMX to microSD for standalone playback
 outputs:
   count: 4 # four multi-functional I/O ports
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   pixels:

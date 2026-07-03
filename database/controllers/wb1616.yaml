@@ -11,7 +11,8 @@ inputs:
   standalone: true # plays from SD card
 outputs:
   count: 32
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: false # async pixel types
   auxiliary:
     DMX512: 2

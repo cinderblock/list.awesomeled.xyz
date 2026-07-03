@@ -14,7 +14,8 @@ inputs:
   standalone: true
 outputs:
   count: 24 # RJ45 ports carrying proprietary PLINK protocol to PLINK injectors
-  connector: RJ-45
+  connector:
+    ref: rj45
   driver:
     buffered: true
   clocked: false # async pixel support

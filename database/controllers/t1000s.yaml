@@ -11,7 +11,8 @@ inputs:
   standalone: true # plays effects from SD card
 outputs:
   count: 1
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   pixels:
     max_per_output: 2048
   clocked: selectable # supports both single-wire and clocked pixels

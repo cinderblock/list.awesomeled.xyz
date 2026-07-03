@@ -10,7 +10,8 @@ inputs:
   standalone: true # Falcon Player (FPP) remote mode plays from SD
 outputs:
   count: 48
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   clocked: selectable # supports Single and Clock pixel types
   pixels:
     max_per_output: 340 # 16320 total across 48 outputs

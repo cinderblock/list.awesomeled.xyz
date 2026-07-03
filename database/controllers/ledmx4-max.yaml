@@ -13,7 +13,8 @@ inputs:
   standalone: true # plays from SD card without external controller
 outputs:
   count: 4
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
   pixels:

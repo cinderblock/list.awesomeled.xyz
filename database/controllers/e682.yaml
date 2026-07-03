@@ -13,7 +13,9 @@ inputs:
   standalone: false
 outputs:
   count: 16
-  connector: Phoenix Screw # individually-fused pluggable screw terminals
+  connector:
+    notes: individually-fused pluggable screw terminals
+    ref: mtsb-combicon
   driver:
     buffered: true
   clocked: selectable # single (async) or clocked pixels per output

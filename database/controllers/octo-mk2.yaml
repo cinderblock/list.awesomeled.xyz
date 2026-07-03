@@ -16,7 +16,8 @@ outputs:
   pixels:
     max_per_output: 1360 # 2720 total across 2 outputs
   clocked: selectable # single or clock
-  connector: Phoenix Screw
+  connector:
+    ref: mtsb-combicon
   driver:
     buffered: true
 power:
