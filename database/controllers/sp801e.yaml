@@ -1,24 +1,36 @@
-name: SP801e
+name: SP801E
 status: active
-release_year: 2020
 creator:
   name: Sperll
-  page: https://www.superlightingled.com/sp608e-8-output-spi-channel-led-music-controller-work-with-bluetooth-app-rf-remote-4-adjustable-triggers-for-addressable-led-strips-p-3768.html
-notes: 8 outputs, 600 px per output, 4 dry trigger inputs, built-in mic for audio.
+  page: https://www.superlightingled.com/sp801e-4-spi-channel-max-output-4096pixels-wifi-artnet-app-control-digital-addressable-led-controller-p-4453.html
+notes: Wi-Fi Art-Net pixel controller configured via the BanlanX app; records app
+  scenes to onboard flash for standalone playback. This entry previously carried
+  SP608E specs (8 outputs, mic, triggers) — those now live on the SP608E entry.
 inputs:
   physical:
-    Ethernet: true
-    triggers: 4 # dry-contact trigger inputs
-  standalone: true
+    Wi-Fi: 2.4GHz # AP or STA mode; 5 GHz unsupported. Bluetooth is only used for BluFi provisioning
+  protocols:
+    - Art-Net
+  standalone: true # built-in effect layers; records scenes to onboard flash
 outputs:
-  count: 8
-  connector: Screw
-  clocked: false # async (single-wire) pixels
+  count: 4
+  clocked: false # one-wire RZ-code ICs only (per spec sheet)
   pixels:
-    max_per_output: 600
+    max_per_output: 1024
 power:
   voltage:
+    min: 5
     max: 24
 features:
-  - Built-in microphone for sound-reactive modes
-price: 30
+  - Two overlay effect layers (text, music, ...) with custom parameters
+  - Matrix layout by rectangle or DXF import
+  - OTA firmware updates
+price: 23 # BTF-Lighting sale price 2026-07 (regular $45)
+related:
+  - type: related
+    ref: controllers/sp608e
+    notes: Same SPxxxE family; Bluetooth/RF music-controller sibling
+technical_notes:
+  - AP and STA Wi-Fi modes; BluFi provisioning over Bluetooth
+  - 'Flash capacity: 128M (per spec sheet); working current 25-130 mA'
+  - 80 x 41 x 20 mm; -20 to 60 C

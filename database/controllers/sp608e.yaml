@@ -1,0 +1,34 @@
+name: SP608E
+status: active
+creator:
+  name: Sperll
+  page: https://www.superlightingled.com/sp608e-spi-led-music-controller-8-output-compatible-bluetooth-app-rf-remote-p-3768.html
+notes: Bluetooth app + RF remote music controller with a built-in microphone and
+  4 adjustable dry-contact triggers. 36+ built-in effects with grouping across
+  the 8 outputs; settings survive power-down.
+inputs:
+  physical:
+    Bluetooth: true # iOS/Android app control
+    RF remote: 15 m range
+    Microphone: true # built-in mic for music-reactive modes
+    triggers: 4 # adjustable dry-contact trigger inputs
+  standalone: true # built-in effects, no host needed
+outputs:
+  count: 8
+  connector: Screw
+  clocked: selectable # one-wire (WS281x) and clocked (WS2801, LPD6803/8806, SM16716) ICs
+  pixels:
+    max_per_output: 600 # 4800 total across 8 outputs
+power:
+  voltage:
+    min: 5
+    max: 24
+features:
+  - Built-in microphone for sound-reactive modes
+  - Channel grouping (any combination of the 8 outputs)
+  - Reverse-polarity protection
+price: 30
+related:
+  - type: related
+    ref: controllers/sp801e
+    notes: Same SPxxxE family; Wi-Fi Art-Net sibling
