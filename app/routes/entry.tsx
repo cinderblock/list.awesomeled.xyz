@@ -73,7 +73,36 @@ export async function loader({ params }: Route.LoaderArgs) {
     id: String(e.id),
     name: e.name,
   }));
-  return { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblings };
+  // Bare-slug connector refs (outputs.connector.ref) resolve to display names
+  // at build time so the page can render them as links
+  const refSlugs = new Set<string>();
+  collectConnectorRefs(entry, refSlugs);
+  const connectorNames: Record<string, string> = {};
+  if (refSlugs.size > 0) {
+    for (const c of loadCategoryData('connectors')) {
+      if (refSlugs.has(String(c.id))) connectorNames[String(c.id)] = c.name;
+    }
+  }
+  return {
+    category,
+    entry,
+    reverseLinks,
+    relatedProducts,
+    relatedBacklinks,
+    siblings,
+    connectorNames,
+  };
+}
+
+function collectConnectorRefs(value: unknown, out: Set<string>): void {
+  if (!value || typeof value !== 'object') return;
+  for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+    if (k === 'connector' && v && typeof v === 'object') {
+      const ref = (v as Record<string, unknown>).ref;
+      if (typeof ref === 'string') out.add(ref);
+    }
+    collectConnectorRefs(v, out);
+  }
 }
 
 interface EntryImage {
@@ -311,6 +340,7 @@ const emptySubscribe = () => () => {};
 
 export default function EntryPage({ loaderData }: Route.ComponentProps) {
   const { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblings } = loaderData;
+  const connectorNames = loaderData.connectorNames ?? {};
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
   const deadLinks = getDeadLinks(entry);
@@ -571,6 +601,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               entries={overview}
               categoryPath={category.path}
               filterableFields={filterableFields}
+              connectorNames={connectorNames}
             />
           </Section>
         )}
@@ -581,6 +612,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               entries={Object.entries(group).filter(([, v]) => v != null)}
               categoryPath={category.path}
               filterableFields={filterableFields}
+              connectorNames={connectorNames}
             />
           </Section>
         ))}
@@ -719,10 +751,12 @@ function KeyValueGrid({
   entries,
   categoryPath,
   filterableFields,
+  connectorNames = {},
 }: {
   entries: [string, unknown][];
   categoryPath: string;
   filterableFields: Set<string>;
+  connectorNames?: Record<string, string>;
 }) {
   return (
     <dl className="detail-grid">
@@ -730,7 +764,7 @@ function KeyValueGrid({
         <div key={key} className="detail-row">
           <dt className="detail-key">{key.replace(/_/g, ' ')}</dt>
           <dd className="detail-value">
-            {formatValue(key, value, categoryPath, filterableFields)}
+            {formatValue(key, value, categoryPath, filterableFields, connectorNames)}
           </dd>
         </div>
       ))}
@@ -822,7 +856,8 @@ function formatValue(
   key: string,
   value: unknown,
   categoryPath: string,
-  filterableFields: Set<string>
+  filterableFields: Set<string>,
+  connectorNames: Record<string, string> = {}
 ): React.ReactNode {
   if (value === null || value === undefined) return <span className="data-table-null">-</span>;
 
@@ -832,7 +867,9 @@ function formatValue(
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {value.map((item, idx) => (
-            <div key={idx}>{formatValue(key, item, categoryPath, filterableFields)}</div>
+            <div key={idx}>
+              {formatValue(key, item, categoryPath, filterableFields, connectorNames)}
+            </div>
           ))}
         </div>
       );
@@ -859,6 +896,22 @@ function formatValue(
     return value.join(', ');
   }
 
+  // Connector reference ({ref: <slug>, pins?, notes?}) → link into /connectors
+  if (key === 'connector' && typeof value === 'object' && !(value instanceof Date)) {
+    const { ref, pins, notes } = value as { ref?: unknown; pins?: unknown; notes?: unknown };
+    if (typeof ref === 'string' && connectorNames[ref]) {
+      return (
+        <span>
+          <Link className="entry-value-link" to={`/connectors/${ref}`}>
+            {connectorNames[ref]}
+          </Link>
+          {typeof pins === 'number' ? `, ${pins}-pin` : ''}
+          {typeof notes === 'string' ? ` (${notes})` : ''}
+        </span>
+      );
+    }
+  }
+
   // Nested sub-object (e.g. power.voltage {min,max}, protocols {...})
   if (typeof value === 'object' && !(value instanceof Date)) {
     const obj = value as Record<string, unknown>;
@@ -869,7 +922,7 @@ function formatValue(
         {keys.map((k) => (
           <div key={k} className="detail-row">
             <dt className="detail-key">{k.replace(/_/g, ' ')}</dt>
-            <dd>{formatValue(k, obj[k], categoryPath, filterableFields)}</dd>
+            <dd>{formatValue(k, obj[k], categoryPath, filterableFields, connectorNames)}</dd>
           </div>
         ))}
       </dl>

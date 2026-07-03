@@ -39,10 +39,19 @@ const FOLDER_SCHEMAS: Record<string, string> = {
  *  - `related[].ref` items ("<category>/<slug>") must point at an existing entry.
  *  - Legacy `related_<category>` arrays (e.g. related_pixel_ics) hold slugs in
  *    the category derived from the field name; each slug must exist there.
+ *  - `outputs.connector.ref` (controllers) holds a bare slug into connectors.
  * Returns human-readable problem strings (empty array = ok).
  */
 function checkCrossRefs(data: Record<string, unknown>, slugs: Map<string, Set<string>>): string[] {
   const problems: string[] = [];
+
+  const connector = (data.outputs as Record<string, unknown> | undefined)?.connector;
+  if (connector && typeof connector === 'object') {
+    const ref = (connector as Record<string, unknown>).ref;
+    if (typeof ref === 'string' && !slugs.get('connectors')?.has(ref)) {
+      problems.push(`outputs.connector.ref "${ref}": no such entry in connectors`);
+    }
+  }
 
   if (Array.isArray(data.related)) {
     for (const item of data.related) {

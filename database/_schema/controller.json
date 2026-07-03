@@ -183,6 +183,10 @@
                 },
                 "pins": {
                   "type": "integer"
+                },
+                "notes": {
+                  "type": "string",
+                  "description": "Detail the ref can't carry (pitch, variant, fusing)"
                 }
               }
             }
