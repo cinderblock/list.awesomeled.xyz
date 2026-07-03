@@ -286,13 +286,21 @@ function scanString(
   }
 }
 
+// URLs are not facts about the product: a vendor slug like
+// ".../sp107e-spi-music-controller..." must not produce an SPI badge (and has
+// produced outright-wrong ones, e.g. IP68 from a datasheet hosted for a
+// different product). Strip them before scanning prose.
+function stripUrls(s: string): string {
+  return s.replace(/https?:\/\/\S+/g, ' ');
+}
+
 // Scan a value (recursing into arrays/objects) for whole-word badge matches,
 // collecting canonical ids into `found`. Object KEYS carry meaning too
 // (`protocols: {artnet: Both}`, `inputs.physical: {Ethernet: true}`), so they
 // are scanned as well — unless their value negates the capability.
 function findBadgesInValue(value: unknown, found: Set<string>): void {
   if (typeof value === 'string') {
-    scanString(value, found);
+    scanString(stripUrls(value), found);
   } else if (Array.isArray(value)) {
     for (const item of value) findBadgesInValue(item, found);
   } else if (value && typeof value === 'object') {
