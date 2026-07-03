@@ -1,7 +1,7 @@
 name: Arduino Ethernet Nano with ENC28J60
 status: unknown
 creator: Xaver2k
-features: WS2811/12 Ethernet Hardwire
+features: WS2811/12 over Art-Net via ENC28J60 wired Ethernet
 hardware: Arduino Nano &Ethernet Shield
 language: C++
 license: MIT

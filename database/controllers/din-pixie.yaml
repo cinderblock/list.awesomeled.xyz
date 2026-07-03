@@ -11,6 +11,7 @@ inputs:
     USB: true # used to record shows
   protocols:
     - Art-Net
+    - DMX512 # 2-universe DMX-to-pixel converter (per ENTTEC product name)
   standalone: true
 outputs:
   connector:

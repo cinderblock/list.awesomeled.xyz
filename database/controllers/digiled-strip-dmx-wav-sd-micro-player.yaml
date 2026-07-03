@@ -22,7 +22,7 @@ power:
     max: 5
 data:
   storage:
-    - type: SD
+    - type: uSD # "Micro SD player" per Electroconcept product page
 price: 30
 technical_notes:
   - SPI, DMX512, or WAV sound scene playback from SD card
