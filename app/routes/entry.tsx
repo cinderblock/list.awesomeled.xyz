@@ -10,6 +10,7 @@ import {
 } from '~/lib/data';
 import { LocalDate } from '~/components/ui/LocalDate';
 import { getColumnsForCategory } from '~/lib/columns';
+import { parsePrice, formatPriceText } from '~/lib/currency';
 import {
   FileText,
   ShoppingCart,
@@ -894,6 +895,13 @@ function formatValue(
       );
     }
     return value.join(', ');
+  }
+
+  // Non-USD prices are {amount, currency} objects — render them as money,
+  // not as a nested key/value grid
+  if (key === 'price' && typeof value === 'object' && !Array.isArray(value)) {
+    const parsed = parsePrice(value);
+    if (parsed) return formatPriceText(parsed);
   }
 
   // Connector reference ({ref: <slug>, pins?, notes?}) → link into /connectors

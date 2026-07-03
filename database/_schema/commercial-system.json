@@ -113,7 +113,25 @@
           "description": "$ to $$$$$$"
         },
         "online_pricing": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "description": "Deprecated free text — use examples for published price points"
+        },
+        "examples": {
+          "type": "array",
+          "description": "Published price points (a specific kit, string, or panel)",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["price"],
+            "properties": {
+              "item": {
+                "type": "string",
+                "description": "What the price buys, e.g. \"7 Ball String\""
+              },
+              "price": { "$ref": "common.json#/definitions/price" },
+              "notes": { "type": "string" }
+            }
+          }
         }
       }
     },
