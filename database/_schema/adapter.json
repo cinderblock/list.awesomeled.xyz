@@ -86,6 +86,38 @@
       "type": ["string", "null"],
       "description": "Parent board/platform required"
     },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "physical": {
+          "type": "object",
+          "additionalProperties": {},
+          "description": "Physical inputs (Wi-Fi, Ethernet, SD card, ...) as key: value/true"
+        },
+        "protocols": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Control protocols accepted (Art-Net, E1.31, DMX512, ...)"
+        }
+      }
+    },
+    "software": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "firmware": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Firmware the adapter runs or is built for (FPP, WLED, ESPixelStick)"
+        },
+        "works_with": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Software commonly paired with it (xLights, WLED)"
+        }
+      }
+    },
     "outputs": {
       "type": ["object", "null"],
       "additionalProperties": false,

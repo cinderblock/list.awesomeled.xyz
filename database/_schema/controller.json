@@ -265,9 +265,9 @@
         "auxiliary": {
           "type": "object",
           "additionalProperties": {
-            "type": "integer"
+            "type": ["integer", "boolean"]
           },
-          "description": "Additional outputs (DMX512, TTL, Servo, etc.) with counts"
+          "description": "Additional outputs (DMX512, TTL, Servo, etc.) with counts; true = supported, count unrecorded"
         }
       }
     },
@@ -456,6 +456,23 @@
         }
       ],
       "description": "Price (bare number = USD, {amount, currency} for non-USD) or an array of price tiers"
+    },
+    "software": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "firmware": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Firmware/OS the board ships with or runs (FPP, WLED, ESPixelStick)"
+        },
+        "works_with": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Software commonly paired with it (xLights, Jinx, Android/iOS apps)"
+        }
+      },
+      "description": "Software ecosystem as structured facts (badges derive from these)"
     },
     "technical_notes": {
       "type": "array",

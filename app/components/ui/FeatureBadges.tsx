@@ -289,22 +289,43 @@ function scanString(
 // URLs are not facts about the product: a vendor slug like
 // ".../sp107e-spi-music-controller..." must not produce an SPI badge (and has
 // produced outright-wrong ones, e.g. IP68 from a datasheet hosted for a
-// different product). Strip them before scanning prose.
+// different product). Strip them before scanning.
 function stripUrls(s: string): string {
   return s.replace(/https?:\/\/\S+/g, ' ');
 }
 
-// Scan a value (recursing into arrays/objects) for whole-word badge matches,
-// collecting canonical ids into `found`. Object KEYS carry meaning too
-// (`protocols: {artnet: Both}`, `inputs.physical: {Ethernet: true}`), so they
-// are scanned as well — unless their value negates the capability.
+// Prose fields are source material for converting facts INTO structured
+// fields — never direct badge input. Free text can negate ("not a standalone
+// controller"), qualify ("optional Wi-Fi add-on"), or mention other products
+// ("V3 (discontinued)"), and a word scan can't see any of that.
+const PROSE_FIELDS = new Set([
+  'notes',
+  'technical_notes',
+  'features',
+  'credit',
+  'source',
+  'sku',
+  'dead_links',
+]);
+
+// Scan a value (recursing into arrays/objects) for badge matches, collecting
+// canonical ids into `found`. Three structured signals only:
+//  - object KEYS (`protocols: {artnet: Both}`, `inputs.physical: {Ethernet:
+//    true}`), unless their value negates the capability;
+//  - whole-word matches in short structured leaf values (names, protocol
+//    lists, common_applications) — never in PROSE_FIELDS;
+//  - exact whole-value matches (storage `type: uSD`, `package_size: '5050'`,
+//    Wi-Fi band values) via the valueOnly term table.
 function findBadgesInValue(value: unknown, found: Set<string>): void {
   if (typeof value === 'string') {
     scanString(stripUrls(value), found);
+    const exact = TERM_TO_ID[value.trim().toLowerCase()];
+    if (exact) found.add(exact);
   } else if (Array.isArray(value)) {
     for (const item of value) findBadgesInValue(item, found);
   } else if (value && typeof value === 'object') {
     for (const [key, item] of Object.entries(value)) {
+      if (PROSE_FIELDS.has(key)) continue;
       if (!isNegatedValue(item)) scanString(key, found, KEY_MATCHERS);
       findBadgesInValue(item, found);
     }

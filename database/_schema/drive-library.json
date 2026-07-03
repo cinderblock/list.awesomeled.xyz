@@ -60,6 +60,13 @@
       },
       "description": "Supported platforms (Arduino, ESP32, Teensy, Raspberry Pi, Linux, ...)"
     },
+    "protocols": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      },
+      "description": "Control protocols implemented (Art-Net, sACN, DDP, DMX512, ...)"
+    },
     "hardware": {
       "type": ["string", "null"],
       "description": "Freeform supported-hardware summary"
