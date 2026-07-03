@@ -1,5 +1,10 @@
 name: ESPixelstick
 notes: Wi-Fi (E1.31) pixel adapter; firmware also outputs serial DMX / Renard
+inputs:
+  physical:
+    Wi-Fi: true
+  protocols:
+    - E1.31
 outputs:
   max_channels: 4
   pixel_types: Single

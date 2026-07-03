@@ -1,7 +1,8 @@
 name: DuPont
 creator: Harwin/ Generic
-notes: Arduino standard patch connector, Harwin clones, proper crimp tool
-  400USD+ , lesser crimp tools not up to job
+notes: Arduino standard patch connector, Harwin clones, proper crimp tool 400USD+ , lesser crimp tools not up to job
+common_applications:
+  - Arduino / breadboard prototyping jumpers
 links:
   product: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/
 mechanical:

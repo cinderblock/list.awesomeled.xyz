@@ -9,6 +9,8 @@ links:
   repo: https://github.com/Golden-Geek/BLIP/
 platforms:
   - ESP32
+protocols:
+  - Art-Net
 supported_ics:
   - WS2812B
   - WS2816

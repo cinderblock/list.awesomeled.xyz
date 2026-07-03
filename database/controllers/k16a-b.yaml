@@ -3,9 +3,7 @@ status: discontinued
 creator:
   name: KulpLights, LLC
   page: https://www.wiredwatts.com/products/klk16a-bv3
-notes: BeagleBone Black cape running FPP. 16 fused local ports plus 4 RJ45
-  differential ports (not Ethernet) expanding to 48 strings via Smart Receivers.
-  Onboard sound, FM transmitter optional.
+notes: BeagleBone Black cape running FPP. 16 fused local ports plus 4 RJ45 differential ports (not Ethernet) expanding to 48 strings via Smart Receivers. Onboard sound, FM transmitter optional.
 inputs:
   physical:
     Ethernet: true # via the BeagleBone Black
@@ -33,5 +31,8 @@ features:
   - Onboard sound output
   - Optional FM transmitter
 price: 130
+software:
+  firmware:
+    - FPP
 technical_notes:
   - Two RS485 outputs support DMX / PixelNet / Renard / LOR

@@ -5,3 +5,6 @@ diy_or_ots: OTS
 links:
   product: https://jboards.ecwid.com/ESPixNode-microSD-adapter-p428060492
 price: 7
+software:
+  works_with:
+    - xLights

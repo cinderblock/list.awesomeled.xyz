@@ -17,6 +17,8 @@ outputs:
     max_per_output: 800
   current:
     max: 6
+  auxiliary:
+    I2C: true # small GPIO/i2c header
 power:
   voltage:
     min: 5
@@ -27,3 +29,6 @@ data:
 features:
   - Per-output eFuse protection
 price: 28
+software:
+  firmware:
+    - FPP

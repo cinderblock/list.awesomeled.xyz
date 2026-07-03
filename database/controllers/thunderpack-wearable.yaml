@@ -30,3 +30,7 @@ features:
   - Status LEDs
   - Runs Arduino or CircuitPython
 price: 40
+software:
+  firmware:
+    - Arduino
+    - CircuitPython

@@ -4,11 +4,12 @@ creator: John Lord
 dead_links:
   - url: http://artnet2twinkly.com/
     checked: '2026-07-01'
-features: ArtNet to Twinkly consumer lights via Wi-Fi, allows control of Twinkly
-  via professional lighting controls
+features: ArtNet to Twinkly consumer lights via Wi-Fi, allows control of Twinkly via professional lighting controls
 hardware: Twinkly
 links:
   repo: http://artnet2twinkly.com/
   youtube: https://youtube.com/channel/UCbd2w11mMNXC9Qekdho1bYw
 platforms:
   - Windows
+protocols:
+  - Art-Net

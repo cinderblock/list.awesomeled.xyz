@@ -29,3 +29,6 @@ features:
   - Internal 3500mAh rechargeable battery
   - Android app control
 price: 50
+software:
+  works_with:
+    - Android

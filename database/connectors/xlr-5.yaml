@@ -1,6 +1,8 @@
 name: XLR 5
 creator: Neutrik /Generic
 notes: 5 Pin is USITT Standard for DMX 512, Pins 4 + 5 Not Used In Standard. Beware of power or second universe on non standard pinouts . XLR 4 scroller cable 2 data+2 power, XLR 6 comms & video gear.
+common_applications:
+  - DMX512 lighting control (USITT-standard connector)
 links:
   product: https://www.neutrik.com/en/products/lightning/xlr
 mechanical:

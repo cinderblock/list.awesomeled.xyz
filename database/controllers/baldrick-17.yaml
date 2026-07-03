@@ -36,3 +36,7 @@ features:
 images:
   - baldrick-17.webp
 price: 189
+software:
+  works_with:
+    - xLights
+    - FPP

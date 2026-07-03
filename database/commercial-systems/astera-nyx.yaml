@@ -1,8 +1,7 @@
 name: Astera Nyx
 creator: Astera
-notes: Wireless DMX /Bluetooth controlled AC Line / Dc Battery Pack Powered,
-  aimed at high end entertainment and film
-core_tech: CRMX DMX
+notes: Wireless DMX /Bluetooth controlled AC Line / Dc Battery Pack Powered, aimed at high end entertainment and film
+core_tech: CRMX DMX / Bluetooth
 pricing:
   price_range: $$$$$$
 specs:

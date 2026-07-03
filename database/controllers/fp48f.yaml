@@ -38,3 +38,6 @@ dead_links:
 features:
   - On-board RTC
 price: 190
+software:
+  firmware:
+    - FPP

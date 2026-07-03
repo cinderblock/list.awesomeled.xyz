@@ -1,8 +1,11 @@
 name: EspArtStick WLED
 status: discontinued
 creator: Microcyb
-notes: Wemos D1 Mini-based WLED pixel controller with Wi-Fi and an SD card
-  slot (per product title)
+notes: Wemos D1 Mini-based WLED pixel controller with Wi-Fi and an SD card slot (per product title)
+inputs:
+  physical:
+    Wi-Fi: true
+    SD card: true
 outputs:
   max_channels: 6
   connectors: Phoenix Screw

@@ -12,3 +12,6 @@ links:
   product: https://www.ebay.co.uk/itm/133875147448?hash=item1f2b94a2b8:g:4rAAAOSwRG1hPezJ
 parent: WeMos D1 Mini (ESP32/ESP8266)
 price: 12
+software:
+  works_with:
+    - WLED

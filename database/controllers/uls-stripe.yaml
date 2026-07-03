@@ -24,3 +24,6 @@ power:
   current:
     max: 18
 price: 330
+software:
+  firmware:
+    - FPP

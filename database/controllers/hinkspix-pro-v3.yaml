@@ -15,6 +15,8 @@ inputs:
 outputs:
   count: 48 # configurable Flex local ports: 0, 16, 32, or 48
   differential: true # long-range receivers carry differential pixel data over Cat5/RJ45
+  auxiliary:
+    DMX512: true # pixel ports reconfigurable for DMX/serial
 features:
   - Built-in 2-port Ethernet switch for daisy-chaining without extra hardware
   - Long-range differential receivers extend pixel ports over Cat5/RJ45 (4 ports each)

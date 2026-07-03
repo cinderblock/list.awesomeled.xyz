@@ -21,10 +21,13 @@ power:
   current:
     max: 30
 core:
-  family: ESP32
+  family: ESP8266/ESP32 # either module fits the socket
 features:
   - Per-output level shifters
   - Onboard fuses with power distribution terminals
   - Reverse polarity protection
 price: 38
+software:
+  firmware:
+    - WLED
 wled_compatible: true

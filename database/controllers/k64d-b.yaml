@@ -28,5 +28,8 @@ features:
   - Onboard sound
   - Optional FM transmitter
 price: 130 # board-only per kulplights.com
+software:
+  firmware:
+    - FPP
 technical_notes:
   - Up to 80000 pixels total across all outputs

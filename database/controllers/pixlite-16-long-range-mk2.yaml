@@ -22,6 +22,7 @@ outputs:
   clocked: selectable # Single or Clock
   auxiliary:
     DMX512: 4
+  differential: true # long-range receivers take differential data over Cat5
 power:
   voltage:
     max: 24

@@ -28,3 +28,6 @@ data:
   storage:
     - type: SD
 price: 115
+software:
+  firmware:
+    - FPP

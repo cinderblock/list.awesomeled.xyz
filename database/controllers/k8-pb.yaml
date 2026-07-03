@@ -41,6 +41,9 @@ related:
   - type: variant
     ref: controllers/k8-b
     notes: PocketBeagle 2 carrier version of the K8
+software:
+  firmware:
+    - FPP
 technical_notes:
   - 12 of 36 channels require differential receivers to drive LEDs
   - Runs FPP (Falcon Player)

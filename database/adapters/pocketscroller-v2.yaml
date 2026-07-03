@@ -12,3 +12,6 @@ links:
   product: https://kulplights.com/product/pocketscroller/
 parent: PocketBeagle
 price: 51
+software:
+  firmware:
+    - FPP

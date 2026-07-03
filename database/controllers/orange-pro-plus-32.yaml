@@ -30,3 +30,6 @@ data:
   storage:
     - type: uSD
 price: 275
+software:
+  firmware:
+    - FPP

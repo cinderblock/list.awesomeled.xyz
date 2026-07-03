@@ -5,8 +5,7 @@ creator:
   name: Quindor / Intermittent Technology
   url: https://quinled.info
   page: https://quinled.info/quinled-dig-uno/
-notes: ESP32 based (custom QuinLED-ESP32 top board, USB-C), ships with WLED
-  pre-installed; board/external antenna options, Ethernet on select variants.
+notes: ESP32 based (custom QuinLED-ESP32 top board, USB-C), ships with WLED pre-installed; board/external antenna options, Ethernet on select variants.
 inputs:
   physical:
     Wi-Fi: 2.4GHz # ESP32, board/external antenna options
@@ -28,8 +27,13 @@ power:
     max: 24
   current:
     max: 15
+core:
+  family: ESP32
 features:
   - Available as DIY kit or pre-assembled
   - Ships with WLED pre-installed
 price: 27.5
+software:
+  firmware:
+    - WLED
 wled_compatible: true

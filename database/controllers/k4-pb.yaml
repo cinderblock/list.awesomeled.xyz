@@ -36,6 +36,9 @@ features:
   - Pixel counting test pattern
   - Power injection per port
 price: 70
+software:
+  firmware:
+    - FPP
 technical_notes:
   - 4 eFused ports, each driving 800+ pixels at 40FPS
   - 3-pin UART header for one DMX universe or PixelNet/Renard/LOR

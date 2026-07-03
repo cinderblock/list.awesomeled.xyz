@@ -17,6 +17,10 @@ links:
 platforms:
   - ESP32
   - ESP8266
+protocols:
+  - sACN
+  - Art-Net
+  - DDP
 related_pixel_ics:
   - gs8208
   - lpd6803

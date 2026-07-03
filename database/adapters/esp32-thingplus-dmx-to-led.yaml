@@ -1,6 +1,10 @@
 name: ESP32 ThingPlus DMX to LED
 creator: Sparkfun
 notes: Isolated DMX , Artnet compatible
+inputs:
+  protocols:
+    - DMX512
+    - Art-Net
 outputs:
   pixel_types: Single+Clocked
   connectors: Poke Home

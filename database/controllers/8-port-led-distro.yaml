@@ -29,6 +29,10 @@ features:
   - Runs WLED (pre-installed) or ESPixelStick firmware
   - Pluggable Phoenix connectors for outputs
 price: 65
+software:
+  firmware:
+    - WLED
+    - ESPixelStick
 technical_notes:
   - Open hardware; design files and WLED/ESP32 firmware at https://github.com/bobko69/8PortLEDDistro
   - 'Versions: V4 (current) accepts 12-48V; V3 (discontinued) accepted 5-24V'

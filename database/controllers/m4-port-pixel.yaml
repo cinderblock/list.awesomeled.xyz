@@ -32,3 +32,6 @@ dead_links:
     archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html
     checked: '2026-07-01'
 price: 35
+software:
+  firmware:
+    - FPP

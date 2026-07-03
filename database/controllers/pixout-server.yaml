@@ -29,3 +29,7 @@ features:
   - ArtNet DMX cue recording and playback
   - Web control panels and iOS/Android remote app
 price: 300
+software:
+  works_with:
+    - Android
+    - iOS

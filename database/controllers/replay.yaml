@@ -25,3 +25,7 @@ data:
   storage:
     - type: SD
 price: 80
+software:
+  works_with:
+    - xLights
+    - Jinx

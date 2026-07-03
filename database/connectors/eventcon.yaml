@@ -1,7 +1,8 @@
 name: EventCon
 creator: GLP
-notes: Combined power and DMX connector. push locking. No panel mount connectors
-  currently (3/24)
+notes: Combined power and DMX connector. push locking. No panel mount connectors currently (3/24)
+common_applications:
+  - Combined power + DMX512 for event fixtures
 dead_links:
   - url: https://ehrgeiz.glp.de/en/products/accessories/eventcon
     archive: https://web.archive.org/web/20250908124909/https://ehrgeiz.glp.de/en/products/accessories/eventcon
