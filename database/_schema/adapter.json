@@ -76,7 +76,7 @@
       "type": ["string", "null"]
     },
     "price": {
-      "type": ["string", "number", "null"]
+      "oneOf": [{ "$ref": "common.json#/definitions/price" }, { "type": "null" }]
     },
     "diy_or_ots": {
       "type": ["string", "null"],
