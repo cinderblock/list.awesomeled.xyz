@@ -71,6 +71,7 @@ const IGNORED_COMMITS = new Set([
   'cf992c8026008958e62656dd09ab1367e8cb3fa2', // PixLite family cross-links (9)
   'c0c03c3fbf8bd2cec12c9a13a72edbecf0d64f18', // Falcon/K8 family cross-links (3)
   'bd300fda7dd59fd0eb082fa6d3919bcbd76f68b8', // outputs.connector string -> ref migration (81)
+  '481e6aad540b7ef19170a6aa5f58d5479ee7fd13', // online_pricing -> pricing.examples restructure (6)
 ]);
 
 /**
