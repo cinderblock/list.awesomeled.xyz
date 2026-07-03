@@ -73,6 +73,7 @@ const IGNORED_COMMITS = new Set([
   'bd300fda7dd59fd0eb082fa6d3919bcbd76f68b8', // outputs.connector string -> ref migration (81)
   '481e6aad540b7ef19170a6aa5f58d5479ee7fd13', // online_pricing -> pricing.examples restructure (6)
   '2c7bf1195c2740fa2b7a76aa73e1d13a51702572', // prose-only facts -> structured fields (46)
+  '937d73473061d5c8503d68da7d67fe1abd3b4979', // SPI -> clocked/single-wire wording normalization (15)
 ]);
 
 /**
