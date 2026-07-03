@@ -1084,7 +1084,13 @@ export function DataTable({
                 onSortChange={(dir, additive) => setSort(colKey, dir, additive)}
                 onHide={col.key !== 'name' ? () => hideColumn(colKey) : undefined}
               >
-                {col.label}
+                {col.headerTip ? (
+                  <Tooltip content={col.headerTip}>
+                    <span>{col.label}</span>
+                  </Tooltip>
+                ) : (
+                  col.label
+                )}
               </ColumnHeaderPopover>
             </div>
           </th>

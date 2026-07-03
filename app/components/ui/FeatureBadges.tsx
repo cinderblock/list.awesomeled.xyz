@@ -25,6 +25,7 @@ import {
   Unlock,
 } from 'lucide-react';
 import { Link } from 'react-router';
+import { Tooltip } from '~/components/ui/Tooltip';
 
 // Expandable icon badge system for common terms/technologies
 // Each badge shows an icon with a tooltip for the full meaning
@@ -45,6 +46,9 @@ interface BadgeConfig {
   // free text — prose can negate ("not a standalone controller") and the
   // word scan can't see that.
   keyOnly?: boolean;
+  // Tooltip with EXTRA information (jargon translation, what the capability
+  // means) — never a restatement of the label.
+  tip?: string;
 }
 
 // Shared colors so related badges read as a family
@@ -123,9 +127,10 @@ const BADGES: Record<string, BadgeConfig> = {
   },
   hdmi: { icon: Monitor, label: 'HDMI', color: C.port },
 
-  // Low-level buses
+  // Low-level buses. No "SPI" badge: in this database SPI is always vendor
+  // jargon for clocked pixels (the `clocked` badge covers it) — no entry
+  // records an actual SPI bus.
   i2c: { icon: Cable, label: 'I²C', color: C.bus },
-  spi: { icon: Cable, label: 'SPI', color: C.bus },
   uart: { icon: Cable, label: 'UART', color: C.bus },
   'can-bus': { icon: Cable, label: 'CAN bus', color: C.bus, match: ['canbus', 'can bus'] },
 
@@ -146,16 +151,27 @@ const BADGES: Record<string, BadgeConfig> = {
   },
 
   // Pixel data line
-  clocked: { icon: Clock, label: 'Clocked', color: C.pixel },
+  clocked: {
+    icon: Clock,
+    label: 'Clocked',
+    color: C.pixel,
+    tip: "Data + clock lines — often sold as 'SPI' pixels. The clock relaxes signal timing, and any SPI peripheral can drive them.",
+  },
   'backup-line': {
     icon: Cable,
     label: 'Backup Line',
     color: C.pixel,
     match: ['backup data line', 'backup line', 'backup_line', 'back up data line'],
+    tip: 'Second data input that keeps the rest of the string running past a dead pixel.',
   },
   // Fires off outputs.differential: true (key scan); prose mentions of
   // differential ports are the same capability
-  differential: { icon: Cable, label: 'Differential', color: C.pixel },
+  differential: {
+    icon: Cable,
+    label: 'Differential',
+    color: C.pixel,
+    tip: 'Pixel data as a differential pair (RS-485 style) for long cable runs to remote receivers.',
+  },
 
   // Ingress protection (dust/water) ratings
   ip20: { icon: Droplets, label: 'IP20', color: C.rating },
@@ -204,8 +220,20 @@ const BADGES: Record<string, BadgeConfig> = {
   poe: { icon: PlugZap, label: 'PoE', color: C.power, match: ['power over ethernet'] },
 
   // Capabilities from structured booleans (inputs.standalone, derived foss)
-  standalone: { icon: Play, label: 'Standalone', color: C.software, keyOnly: true },
-  foss: { icon: Unlock, label: 'FOSS', color: C.software, keyOnly: true },
+  standalone: {
+    icon: Play,
+    label: 'Standalone',
+    color: C.software,
+    keyOnly: true,
+    tip: 'Plays sequences on its own — no computer needed (SD card or onboard player).',
+  },
+  foss: {
+    icon: Unlock,
+    label: 'FOSS',
+    color: C.software,
+    keyOnly: true,
+    tip: 'Free and open-source software (recognized SPDX license on record).',
+  },
 
   // Software ecosystems
   wled: { icon: Lightbulb, label: 'WLED', color: C.software },
@@ -380,15 +408,15 @@ export function Badge({ badge, to }: BadgeProps) {
     </>
   );
 
-  if (to) {
-    return (
-      <Link to={to} style={style}>
-        {content}
-      </Link>
-    );
-  }
+  const pill = to ? (
+    <Link to={to} style={style}>
+      {content}
+    </Link>
+  ) : (
+    <span style={style}>{content}</span>
+  );
 
-  return <span style={style}>{content}</span>;
+  return badge.tip ? <Tooltip content={badge.tip}>{pill}</Tooltip> : pill;
 }
 
 // Render a plain text pill (for non-badge values in mixed arrays)

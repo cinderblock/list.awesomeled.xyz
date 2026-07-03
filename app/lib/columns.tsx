@@ -68,6 +68,9 @@ export interface Column {
   // reads naturally (e.g. wire gauge, capacities).
   defaultSortDir?: 'asc' | 'desc';
   className?: string;
+  // Header tooltip with EXTRA information (jargon translation, units) —
+  // never a restatement of the label.
+  headerTip?: string;
 }
 
 // Link configuration for external URLs
@@ -480,7 +483,13 @@ export const pixelColumns: Column[] = [
     sortValue: sortVoltage,
     className: 'data-table-cell--right',
   },
-  { key: 'data.clocked', label: 'Clocked', render: renderBool, filterConfig: { type: 'boolean' } },
+  {
+    key: 'data.clocked',
+    label: 'Clocked',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+    headerTip: "Data + clock lines — often sold as 'SPI' pixels",
+  },
   {
     key: 'data.backup_line',
     label: 'Backup Line',
@@ -518,7 +527,13 @@ export const pixelICColumns: Column[] = [
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
-  { key: 'data.clocked', label: 'Clocked', render: renderBool, filterConfig: { type: 'boolean' } },
+  {
+    key: 'data.clocked',
+    label: 'Clocked',
+    render: renderBool,
+    filterConfig: { type: 'boolean' },
+    headerTip: "Data + clock lines — often sold as 'SPI' pixels",
+  },
   {
     key: 'data.backup_line',
     label: 'Backup Line',
