@@ -3,8 +3,13 @@ creator: Lightwalls
 notes: Strip and panels associated with Protopixel.io, subscription based
   control systems, "dynamic lighting"
 pricing:
+  examples:
+    - item: Learning kit
+      notes: +VAT
+      price:
+        amount: 550
+        currency: GBP
   price_range: $$$$$
-  online_pricing: Learning kit £550+VAT
 specs:
   color_type: RGB/W
   dedicated_psu: true
