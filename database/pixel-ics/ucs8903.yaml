@@ -14,6 +14,10 @@ data:
   backup_line: false
 datasheet:
   url: https://www.dhgate.com/product/ucs8903-ic-3-channel-led-constant-current/421634760.html
+dead_links:
+  - url: https://www.dhgate.com/product/ucs8903-ic-3-channel-led-constant-current/421634760.html
+    checked: '2026-07-03'
+    notes: DHgate listing removed (HTTP 410); no Wayback capture
 electrical:
   output_voltage: 26V
   supply_voltage: 5V
