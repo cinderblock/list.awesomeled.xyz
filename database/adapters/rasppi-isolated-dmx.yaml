@@ -9,3 +9,6 @@ diy_or_ots: OTS
 links:
   product: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
 parent: Raspberry Pi
+price:
+  amount: 29.95 # BitWizard shop 2026-07
+  currency: EUR

@@ -32,3 +32,6 @@ features:
   - Web interface
   - Mobile app
   - Sensors and triggers management
+price:
+  amount: 150 # OEM board, ex VAT; full kit EUR 230 (ledstripstudio.com 2026-07)
+  currency: EUR

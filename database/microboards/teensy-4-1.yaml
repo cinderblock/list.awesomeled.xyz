@@ -11,3 +11,4 @@ compute:
 io:
   bms: 'No'
   imu: false
+price: 31.5 # SparkFun 2026-07

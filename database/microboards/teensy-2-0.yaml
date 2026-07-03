@@ -1,4 +1,5 @@
 name: Teensy++ 2.0
+status: discontinued # PJRC: no plans to manufacture more
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensypp.html
@@ -21,3 +22,4 @@ io:
   storage: Shield
   bms: 'No'
   imu: false
+price: 24 # PJRC final list price

@@ -21,6 +21,7 @@ features:
   - Built-in 2-port Ethernet switch for daisy-chaining without extra hardware
   - Long-range differential receivers extend pixel ports over Cat5/RJ45 (4 ports each)
   - Per-port resettable fusing
+price: 300 # HolidayCoro's eBay listing 2026-07 (main site blocks bots)
 technical_notes:
   - Flex CPU supports 0/16/32/48 onboard pixel ports and 0/4/8/12 long-range receiver outputs
   - Up to roughly 16,320 pixels per CPU; larger assembled systems reach ~32,640

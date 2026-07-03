@@ -23,3 +23,4 @@ images:
 io:
   bms: 1S
   imu: Wing
+price: 34.95 # Adafruit 2026-07, uFL-antenna variant (PCB antenna $39.95)
