@@ -260,6 +260,20 @@
     },
     "dead_links": {
       "$ref": "common.json#/definitions/dead_links"
+    },
+    "price": {
+      "description": "Single price (USD unless {amount, currency}) or published quantity tiers",
+      "oneOf": [
+        {
+          "$ref": "common.json#/definitions/price"
+        },
+        {
+          "$ref": "common.json#/definitions/price_tiers"
+        },
+        {
+          "type": "null"
+        }
+      ]
     }
   }
 }

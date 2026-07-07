@@ -60,6 +60,27 @@
         }
       ]
     },
+    "price_tiers": {
+      "description": "Published quantity-tier unit prices (distributor or manufacturer)",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["qty", "price"],
+        "properties": {
+          "qty": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Quantity this unit price applies at"
+          },
+          "price": { "$ref": "#/definitions/price" },
+          "sku": {
+            "type": "string",
+            "description": "Exact orderable part number the price is for"
+          }
+        }
+      }
+    },
     "voltage": {
       "description": "Bare number = volts; or a strict unit string ('5V', '3.3 V', '~5V') or range ('3-7.5V'). Parsed by app/lib/quantity.ts.",
       "oneOf": [
