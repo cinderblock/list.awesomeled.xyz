@@ -44,6 +44,16 @@ physical:
     - '2020'
   package_size: 5050/3535/2040/2020
   pin_count: 4
+price: # LCSC C2761795, 2026-07
+  - qty: 5
+    price: 0.1072
+    sku: WS2812B-B/T
+  - qty: 1000
+    price: 0.0664
+    sku: WS2812B-B/T
+  - qty: 5000
+    price: 0.0613
+    sku: WS2812B-B/T
 spec_update_year: 2018
 technical_notes:
   - PWM frequency updated from 400Hz to 2.0kHz in 2018 silicon revision

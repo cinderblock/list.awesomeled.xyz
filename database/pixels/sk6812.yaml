@@ -44,6 +44,16 @@ physical:
     - '2040'
   package_size: 5050,3535,2040
   pin_count: 4
+price: # LCSC C5378720, 2026-07
+  - qty: 5
+    price: 0.0892
+    sku: SK6812
+  - qty: 1000
+    price: 0.0518
+    sku: SK6812
+  - qty: 5000
+    price: 0.0438
+    sku: SK6812
 related:
   - type: related
     ref: pixels/ws2812
