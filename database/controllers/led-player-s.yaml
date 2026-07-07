@@ -1,0 +1,31 @@
+name: LED Player S
+status: discontinued # led-genial product archive - "Artikel ist nicht mehr lieferbar"
+creator: Diamex
+vendors:
+  - name: LED-Genial
+    url: https://www.led-genial.de
+    page: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+notes: Plays TPM2 effect files from microSD on WS2812-compatible LEDs, or streams
+  TPM2 over the USB 2.0 virtual COM port (Jinx!, GLEDIATOR). Config files can be
+  edited with Diamex's LedEddy desktop tool — which a previous entry here
+  mistook for a controller.
+inputs:
+  physical:
+    USB: true # USB 2.0 virtual COM port for TPM2 streaming
+  standalone: true # plays TPM2 files from microSD
+outputs:
+  count: 1
+  clocked: false # one-wire WS2812-compatible LEDs
+  pixels:
+    max_per_output: 512 # 256 before BIOS 1.2
+  protocols:
+    - WS2812
+    - PL9823
+    - APA-106
+data:
+  storage:
+    - type: uSD # micro-SD up to 32 GB (SDHC)
+related:
+  - type: related
+    ref: controllers/led-player-m
+    notes: Diamex LED Player family sibling

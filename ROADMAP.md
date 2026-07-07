@@ -28,10 +28,9 @@ history. This is what's next.
 ## Data backlog
 
 - Suspect entries found during audits (sp801e-style identity checks):
-  - `adapters/f40d-b` links to Kulp's K40D-PB product page — probably the old
-    F-series name for `controllers/k40d-pb`; merge or cross-link
-  - `controllers/lededdy` — vendor page is the discontinued LED Player S and
-    calls "LedEddy" editing software; entry may be conflated
+  - `controllers/led-player-m` and `led-player-l` claim `Ethernet: true` —
+    the Diamex LED Player family is SD/USB/DMX; likely the same sheet-era
+    fabrication the LEDEddy entry had (manual PDF is image-only, needs a look)
 - Price gaps that need different treatment: pixels / pixel-ICs / connectors
   (qty-tier pricing like the TI level converters), TC4427 (Microchip blocks
   bots — manual), APD-2-500 (JS-only storefront), generic ESP/NodeMCU boards

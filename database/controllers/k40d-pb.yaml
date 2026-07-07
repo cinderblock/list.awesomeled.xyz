@@ -4,7 +4,7 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k40d-pb/
-notes: PocketBeagle/PocketBeagle2 cape running FPP from an SD card; networking via a USB Ethernet (preferred) or Wi-Fi adapter on the host - do not use USB tethering. 10 RJ45 differential ports drive 40 pixel strings; two ports can instead output four DMX universes, plus a UART differential output for DMX/Renard/LOR/PixelNet. Powered by external 5V via screw terminals.
+notes: PocketBeagle/PocketBeagle2 cape running FPP from an SD card; networking via a USB Ethernet (preferred) or Wi-Fi adapter on the host - do not use USB tethering. 10 RJ45 differential ports drive 40 pixel strings; two ports can instead output four DMX universes, plus a UART differential output for DMX/Renard/LOR/PixelNet. Powered by external 5V via screw terminals. Formerly sold as the F40D-PB before Kulp's K-series renaming.
 inputs:
   physical:
     Ethernet: true # via USB Ethernet adapter on host (preferred)
