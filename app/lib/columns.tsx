@@ -169,16 +169,19 @@ function renderCreator(v: unknown): React.ReactNode {
   return <span>{String(v)}</span>;
 }
 
-// Helper for rendering arrays as badges (limited to 3)
+// Helper for rendering arrays as badges (limited to 3). Known protocols /
+// platforms / features (Art-Net, Wi-Fi, WLED, Linux, …) render with their icon
+// badge; unmatched values fall back to a plain pill — same pattern as the
+// Package column and CellValue arrays.
 function renderBadgeArray(v: unknown) {
   if (!Array.isArray(v)) return null;
   return (
     <div className="data-table-array">
-      {v.slice(0, 3).map((i, idx) => (
-        <span key={idx} className="badge badge--outline">
-          {String(i)}
-        </span>
-      ))}
+      {v.slice(0, 3).map((i, idx) => {
+        const str = String(i);
+        const badge = getBadgeForValue(str);
+        return badge ? <Badge key={idx} badge={badge} /> : <TextPill key={idx} text={str} />;
+      })}
       {v.length > 3 && <span className="badge badge--secondary">+{v.length - 3}</span>}
     </div>
   );
