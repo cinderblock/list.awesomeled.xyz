@@ -47,10 +47,18 @@ export function encodePNG(width: number, height: number, rgba: Uint8Array): Uint
   ihdr[8] = 8; // bit depth
   ihdr[9] = 6; // color type RGBA
   const sig = new Uint8Array([137, 80, 78, 71, 13, 10, 26, 10]);
-  const parts = [sig, chunk('IHDR', ihdr), chunk('IDAT', compressed), chunk('IEND', new Uint8Array(0))];
+  const parts = [
+    sig,
+    chunk('IHDR', ihdr),
+    chunk('IDAT', compressed),
+    chunk('IEND', new Uint8Array(0)),
+  ];
   const total = parts.reduce((n, p) => n + p.length, 0);
   const out = new Uint8Array(total);
   let off = 0;
-  for (const p of parts) { out.set(p, off); off += p.length; }
+  for (const p of parts) {
+    out.set(p, off);
+    off += p.length;
+  }
   return out;
 }

@@ -24,10 +24,15 @@ const RED_PATH: [number, number][] = [
 ];
 
 function bbox() {
-  let minx = Infinity, miny = Infinity, maxx = -Infinity, maxy = -Infinity;
+  let minx = Infinity,
+    miny = Infinity,
+    maxx = -Infinity,
+    maxy = -Infinity;
   for (const [x, y] of [...NODES, ...RED_PATH]) {
-    minx = Math.min(minx, x - R); miny = Math.min(miny, y - R);
-    maxx = Math.max(maxx, x + R); maxy = Math.max(maxy, y + R);
+    minx = Math.min(minx, x - R);
+    miny = Math.min(miny, y - R);
+    maxx = Math.max(maxx, x + R);
+    maxy = Math.max(maxy, y + R);
   }
   return { minx, miny, maxx, maxy, w: maxx - minx, h: maxy - miny };
 }
@@ -49,7 +54,8 @@ export function svg(size = 48, pad = 0.06): string {
   const m = ([x, y]: [number, number]) => `${(tx + x * s).toFixed(2)} ${(ty + y * s).toFixed(2)}`;
   const r = (R * s).toFixed(2);
   const circles = NODES.map(
-    (n) => `<circle cx="${(tx + n[0] * s).toFixed(2)}" cy="${(ty + n[1] * s).toFixed(2)}" r="${r}" fill="${BLACK}"/>`
+    (n) =>
+      `<circle cx="${(tx + n[0] * s).toFixed(2)}" cy="${(ty + n[1] * s).toFixed(2)}" r="${r}" fill="${BLACK}"/>`
   ).join('');
   const d = `M ${m(RED_PATH[0])} L ${m(RED_PATH[1])} L ${m(RED_PATH[2])}`;
   const stroke = `<path d="${d}" fill="none" stroke="${RED}" stroke-width="${(R * 2 * s).toFixed(2)}" stroke-linecap="round" stroke-linejoin="round"/>`;
@@ -57,12 +63,15 @@ export function svg(size = 48, pad = 0.06): string {
 }
 
 function distToSeg(px: number, py: number, a: [number, number], b: [number, number]): number {
-  const vx = b[0] - a[0], vy = b[1] - a[1];
-  const wx = px - a[0], wy = py - a[1];
+  const vx = b[0] - a[0],
+    vy = b[1] - a[1];
+  const wx = px - a[0],
+    wy = py - a[1];
   const len2 = vx * vx + vy * vy;
   let t = len2 ? (wx * vx + wy * vy) / len2 : 0;
   t = Math.max(0, Math.min(1, t));
-  const dx = px - (a[0] + t * vx), dy = py - (a[1] + t * vy);
+  const dx = px - (a[0] + t * vx),
+    dy = py - (a[1] + t * vy);
   return Math.hypot(dx, dy);
 }
 
@@ -79,7 +88,10 @@ export function raster(
   const out = new Uint8Array(size * size * 4);
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
-      let rr = 0, gg = 0, bb = 0, aa = 0;
+      let rr = 0,
+        gg = 0,
+        bb = 0,
+        aa = 0;
       for (let sy = 0; sy < SS; sy++) {
         for (let sx = 0; sx < SS; sx++) {
           // sub-pixel centre → art space
@@ -95,22 +107,27 @@ export function raster(
           } else if (NODES.some(([nx, ny]) => Math.hypot(ax - nx, ay - ny) <= R)) {
             col = [0, 0, 0];
           }
-          if (col) { rr += col[0]; gg += col[1]; bb += col[2]; aa += 255; }
+          if (col) {
+            rr += col[0];
+            gg += col[1];
+            bb += col[2];
+            aa += 255;
+          }
         }
       }
       const n = SS * SS;
       const cov = aa / (n * 255);
       const di = (y * size + x) * 4;
       if (bg) {
-        out[di] = Math.round((rr / n) + bg[0] * (1 - cov));
-        out[di + 1] = Math.round((gg / n) + bg[1] * (1 - cov));
-        out[di + 2] = Math.round((bb / n) + bg[2] * (1 - cov));
+        out[di] = Math.round(rr / n + bg[0] * (1 - cov));
+        out[di + 1] = Math.round(gg / n + bg[1] * (1 - cov));
+        out[di + 2] = Math.round(bb / n + bg[2] * (1 - cov));
         out[di + 3] = 255;
       } else {
         // straight (un-premultiplied) alpha
-        out[di] = cov ? Math.round(rr / aa * 255) : 0;
-        out[di + 1] = cov ? Math.round(gg / aa * 255) : 0;
-        out[di + 2] = cov ? Math.round(bb / aa * 255) : 0;
+        out[di] = cov ? Math.round((rr / aa) * 255) : 0;
+        out[di + 1] = cov ? Math.round((gg / aa) * 255) : 0;
+        out[di + 2] = cov ? Math.round((bb / aa) * 255) : 0;
         out[di + 3] = Math.round(cov * 255);
       }
     }
