@@ -1,16 +1,19 @@
 name: LED Player M
 status: unknown
 creator: Diamex
+notes: Standalone TPM2 player (microSD) for up to 2048 LEDs; USB virtual COM
+  takes live data from JINX/GLEDIATOR. No network input.
 inputs:
   physical:
-    Ethernet: true
+    USB: true # Mini-USB - virtual COM (live JINX/GLEDIATOR), config, bootloader
+    microSD: true # TPM2 file playback
   standalone: true
 outputs:
   count: 1
   connector:
     ref: mtsb-combicon
   pixels:
-    max_per_output: 512
+    max_per_output: 2048 # per the LED-Player-M manual (was recorded as 512)
   clocked: selectable
 power:
   voltage:
