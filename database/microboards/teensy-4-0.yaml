@@ -20,4 +20,5 @@ connectivity:
 io:
   bms: 'No'
   imu: false
+  max_outputs: 8 # OctoWS2811; 4.x any-pin support allows more
 price: 20

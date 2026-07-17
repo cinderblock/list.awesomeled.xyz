@@ -19,4 +19,5 @@ connectivity:
 io:
   bms: 1S
   imu: false
+  max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
 price: 25

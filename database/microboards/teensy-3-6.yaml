@@ -23,4 +23,5 @@ io:
   storage: microSD
   bms: 'No'
   imu: false
+  max_outputs: 8 # OctoWS2811 DMA port
 price: 38.65 # PJRC last list price

@@ -20,4 +20,5 @@ connectivity:
 io:
   bms: 'No'
   imu: false
+  max_outputs: 1 # AVR bit-bang (FastLED)
 price: 22.8 # Arduino Store USA 2026-07

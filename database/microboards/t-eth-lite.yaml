@@ -14,4 +14,6 @@ connectivity:
   ethernet: 100BASE-TX
   bluetooth: '4.1'
   poe: 'Y'
+io:
+  max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
 price: 15

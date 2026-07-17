@@ -11,4 +11,5 @@ compute:
 io:
   bms: 'No'
   imu: false
+  max_outputs: 32 # OctoWS2811 any-pin on 4.1 (8 with the classic adaptor)
 price: 31.5 # SparkFun 2026-07

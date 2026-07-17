@@ -22,4 +22,5 @@ io:
   storage: Shield
   bms: 'No'
   imu: false
+  max_outputs: 1 # AVR bit-bang
 price: 24 # PJRC final list price

@@ -22,4 +22,5 @@ io:
   storage: Shield
   bms: 'No'
   imu: false
+  max_outputs: 1 # WS2812Serial
 price: 12

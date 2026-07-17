@@ -16,4 +16,6 @@ connectivity:
   bluetooth: '4.2'
   usb: Power + UART
   poe: Y
+io:
+  max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
 price: 16

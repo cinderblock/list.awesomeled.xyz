@@ -16,3 +16,4 @@ connectivity:
 io:
   bms: 'No'
   imu: false
+  max_outputs: 2 # WLED on ESP8266: UART1/DMA + bit-bang

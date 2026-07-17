@@ -18,3 +18,4 @@ connectivity:
 io:
   bms: 'No'
   imu: false
+  max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32

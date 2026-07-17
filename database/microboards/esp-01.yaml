@@ -14,3 +14,4 @@ connectivity:
 io:
   bms: 'No'
   imu: false
+  max_outputs: 1 # two exposed GPIO; one pixel line practical

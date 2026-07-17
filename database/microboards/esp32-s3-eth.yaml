@@ -13,4 +13,5 @@ connectivity:
   poe: Y
 io:
   storage: microSD
+  max_outputs: 4 # ESP32-S3: 4 RMT TX channels
 price: 17
