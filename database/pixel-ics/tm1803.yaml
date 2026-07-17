@@ -11,3 +11,13 @@ other_links:
 physical:
   package_size: SOP8
   pin_count: 8
+price: # LCSC C5159541, 2026-07
+  - qty: 5
+    price: 0.144
+    sku: TM1803
+  - qty: 500
+    price: 0.0828
+    sku: TM1803
+  - qty: 4000
+    price: 0.0681
+    sku: TM1803

@@ -11,3 +11,13 @@ other_links:
 physical:
   package_size: SOP12
   pin_count: 12
+price: # LCSC C5446694, 2026-07
+  - qty: 5
+    price: 0.0962
+    sku: WS2814F
+  - qty: 500
+    price: 0.0625
+    sku: WS2814F
+  - qty: 6000
+    price: 0.0544
+    sku: WS2814F

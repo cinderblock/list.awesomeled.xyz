@@ -25,3 +25,13 @@ other_links:
 physical:
   package_size: SOP8
   pin_count: 8
+price: # LCSC C20622206, 2026-07
+  - qty: 5
+    price: 0.1283
+    sku: TM1804 (TA1610B SOP8)
+  - qty: 500
+    price: 0.0738
+    sku: TM1804 (TA1610B SOP8)
+  - qty: 4000
+    price: 0.0607
+    sku: TM1804 (TA1610B SOP8)

@@ -41,6 +41,16 @@ physical:
     - '5050'
   package_size: '5050'
   pin_count: 6
+price: # LCSC C5446699, 2026-07
+  - qty: 5
+    price: 0.1076
+    sku: WS2815B-V1
+  - qty: 1000
+    price: 0.0686
+    sku: WS2815B-V1
+  - qty: 5000
+    price: 0.0592
+    sku: WS2815B-V1
 related:
   - type: variant
     ref: pixels/ws2813

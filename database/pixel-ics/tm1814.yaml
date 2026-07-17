@@ -11,3 +11,13 @@ other_links:
 physical:
   package_size: SOP8
   pin_count: 8
+price: # LCSC C20622183, 2026-07 (TA2105B re-issue; original TM1814 C62614 discontinued)
+  - qty: 5
+    price: 0.1099
+    sku: TM1814 (TA2105B)
+  - qty: 500
+    price: 0.0632
+    sku: TM1814 (TA2105B)
+  - qty: 4000
+    price: 0.052
+    sku: TM1814 (TA2105B)

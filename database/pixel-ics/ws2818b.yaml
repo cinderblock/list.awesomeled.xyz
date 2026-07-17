@@ -31,6 +31,16 @@ other_links:
 physical:
   package_size: SOP8,CPC8
   pin_count: 8
+price: # LCSC C114582, 2026-07
+  - qty: 10
+    price: 0.0728
+    sku: WS2818B
+  - qty: 1000
+    price: 0.0472
+    sku: WS2818B
+  - qty: 8000
+    price: 0.037
+    sku: WS2818B
 related:
   - type: related
     ref: pixels/ws2813

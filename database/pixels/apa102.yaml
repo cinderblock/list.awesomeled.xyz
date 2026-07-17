@@ -43,6 +43,16 @@ physical:
     - '2020'
   package_size: 5050 & 2020
   pin_count: 6
+price: # LCSC C22439302, 2026-07 (2020 package; out of stock at check, price still listed)
+  - qty: 1
+    price: 0.0583
+    sku: APA102-2020
+  - qty: 500
+    price: 0.0225
+    sku: APA102-2020
+  - qty: 1000
+    price: 0.0221
+    sku: APA102-2020
 technical_notes:
   - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/
   - Extra 5-bit brightness control is PWM-based, not current control

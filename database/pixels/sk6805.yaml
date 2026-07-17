@@ -30,6 +30,16 @@ physical:
     - '2427'
   package_size: 1515,2427
   pin_count: 4
+price: # LCSC C2890035, 2026-07
+  - qty: 5
+    price: 0.0942
+    sku: SK6805-EC15
+  - qty: 500
+    price: 0.0593
+    sku: SK6805-EC15
+  - qty: 4500
+    price: 0.0511
+    sku: SK6805-EC15
 related:
   - type: variant
     ref: pixels/sk6812

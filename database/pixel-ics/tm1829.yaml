@@ -11,3 +11,13 @@ other_links:
 physical:
   package_size: SOP8
   pin_count: 8
+price: # LCSC C52109855, 2026-07
+  - qty: 10
+    price: 0.0704
+    sku: TM1829B-SOP8-TA2105B
+  - qty: 1000
+    price: 0.0442
+    sku: TM1829B-SOP8-TA2105B
+  - qty: 8000
+    price: 0.0379
+    sku: TM1829B-SOP8-TA2105B

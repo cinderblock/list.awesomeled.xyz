@@ -1,8 +1,7 @@
 name: SK6812RGBW
 status: active
 creator: Opsco/Newstar
-notes: 4-channel (RGB + dedicated white) version of the SK6812; a distinct part
-  number, popular for better white color rendering.
+notes: 4-channel (RGB + dedicated white) version of the SK6812; a distinct part number, popular for better white color rendering.
 color:
   order: GRBW
   brightness_bits: 8
@@ -21,10 +20,19 @@ physical:
   package_sizes:
     - '5050'
   pin_count: 4
+price: # LCSC C5348912, 2026-07 (OPSCO 5x4.9mm variant; the plain 5050 listing has no price)
+  - qty: 1
+    price: 0.1305
+    sku: SKC6812RGBW-NW
+  - qty: 500
+    price: 0.071
+    sku: SKC6812RGBW-NW
+  - qty: 1000
+    price: 0.07
+    sku: SKC6812RGBW-NW
 related:
   - type: variant
     ref: pixels/sk6812
     notes: 3-channel RGB base part
 technical_notes:
-  - 32 bits per pixel (8 per channel including white), so runs update ~25% slower
-    than RGB SK6812 strings of the same length
+  - 32 bits per pixel (8 per channel including white), so runs update ~25% slower than RGB SK6812 strings of the same length

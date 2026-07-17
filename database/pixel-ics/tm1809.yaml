@@ -11,3 +11,13 @@ other_links:
 physical:
   package_size: SOP14
   pin_count: 14
+price: # LCSC C20622180, 2026-07
+  - qty: 5
+    price: 0.2131
+    sku: TM1809 (TA1515)
+  - qty: 500
+    price: 0.1165
+    sku: TM1809 (TA1515)
+  - qty: 4000
+    price: 0.0977
+    sku: TM1809 (TA1515)
