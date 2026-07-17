@@ -4,6 +4,7 @@ import { Link, useSearchParams } from 'react-router';
 import {
   AlertTriangle,
   CheckCircle,
+  Cpu,
   HelpCircle,
   MonitorPlay,
   Plus,
@@ -16,6 +17,7 @@ import {
   buildPixelOption,
   buildControllerOption,
   buildLevelShifterOption,
+  buildMicroboardControllerOption,
   buildPatternSourceOption,
   chainMaxFps,
   checkCompat,
@@ -49,9 +51,15 @@ export async function loader() {
   const pixels = loadCategoryData('pixels')
     .map(buildPixelOption)
     .sort((a, b) => a.name.localeCompare(b.name));
-  const controllers = loadCategoryData('controllers')
-    .map(buildControllerOption)
-    .sort((a, b) => (a.priceUSD ?? Infinity) - (b.priceUSD ?? Infinity));
+  // Bare dev boards with recorded pixel-output capability join the controller
+  // list as DIY options (hidden behind a toggle in step 3)
+  const diyBoards = loadCategoryData('microboards')
+    .map(buildMicroboardControllerOption)
+    .filter((c) => c !== null);
+  const controllers = [
+    ...loadCategoryData('controllers').map(buildControllerOption),
+    ...diyBoards,
+  ].sort((a, b) => (a.priceUSD ?? Infinity) - (b.priceUSD ?? Infinity));
   const sources = loadCategoryData('pattern-drivers')
     .map(buildPatternSourceOption)
     .filter((s) => s.outputProtocols.length > 0)
@@ -95,6 +103,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
   const [pixelQuery, setPixelQuery] = useState('');
   const [importError, setImportError] = useState<string | null>(null);
   const [includeDiscontinued, setIncludeDiscontinued] = useState(false);
+  const [includeDiy, setIncludeDiy] = useState(false);
   const [fossOnly, setFossOnly] = useState(false);
   const [activeRaw, setActive] = useState(0);
 
@@ -253,13 +262,15 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
     ];
   });
 
-  // Compatibility of every controller with the ACTIVE chain
+  // Compatibility of every controller with the ACTIVE chain. DIY boards stay
+  // hidden unless toggled on — but a board already selected keeps showing.
   const evaluated = !chain.pixel
     ? []
     : controllers
         .filter(
           (c) => includeDiscontinued || (c.status !== 'discontinued' && c.status !== 'end-of-life')
         )
+        .filter((c) => includeDiy || !c.diy || c.id === chain.controller?.id)
         .map((c) => ({ controller: c, compat: checkCompat(c, chain.pixel!, chain.layout) }));
   const compatible = evaluated.filter((e) => e.compat.ok);
   const incompatible = evaluated.filter((e) => !e.compat.ok);
@@ -536,6 +547,17 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                     />
                     include discontinued
                   </label>
+                  {' · '}
+                  <Tooltip content="Bare dev boards (ESP32, Teensy, Pi …) — bring your own firmware (WLED/FPP) and usually a level shifter">
+                    <label className="designer-toggle">
+                      <input
+                        type="checkbox"
+                        checked={includeDiy}
+                        onChange={(e) => setIncludeDiy(e.target.checked)}
+                      />
+                      include DIY dev boards
+                    </label>
+                  </Tooltip>
                   {multi && ' · groups can share a controller — pick the same one in each group.'}
                 </p>
                 <ul className="designer-controller-list">
@@ -797,13 +819,24 @@ function ControllerRow({
     >
       <button type="button" onClick={onSelect} disabled={!onSelect}>
         {c.image ? (
-          <img src={`/database-images/controllers/${c.image}`} alt="" loading="lazy" />
+          <img
+            src={`/database-images/${c.diy ? 'microboards' : 'controllers'}/${c.image}`}
+            alt=""
+            loading="lazy"
+          />
         ) : (
           <span className="designer-controller-noimg" aria-hidden="true" />
         )}
         <span className="designer-controller-main">
           <span className="designer-controller-name">
             {c.name}
+            {c.diy && (
+              <Tooltip content="Bare dev board — flash WLED/FPP (or your own firmware) and plan a level shifter for 5 V pixels">
+                <span className="designer-badge designer-badge--warn">
+                  <Cpu size={12} /> DIY board
+                </span>
+              </Tooltip>
+            )}
             {explicit && (
               <Tooltip content="The vendor explicitly lists this pixel type as supported">
                 <span className="designer-badge designer-badge--good">
@@ -824,12 +857,13 @@ function ControllerRow({
             {c.maxPerOutput != null ? ` · ${c.maxPerOutput.toLocaleString('en-US')} px/output` : ''}
             {c.differential ? ' · differential' : ''}
             {c.standalone ? ' · standalone' : ''}
+            {c.diy && c.dataVoltage != null ? ` · ${fmt(c.dataVoltage, 1)} V data pins` : ''}
             {reasons.length > 0 ? ` — ${reasons.join('; ')}` : ''}
           </span>
         </span>
         <span className="designer-controller-price">{c.priceText ?? '—'}</span>
       </button>
-      <Link className="designer-controller-link" to={`/controllers/${c.id}`}>
+      <Link className="designer-controller-link" to={c.path ?? `/controllers/${c.id}`}>
         details
       </Link>
     </li>

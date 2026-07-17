@@ -56,6 +56,12 @@ export interface ControllerOption {
   differential: boolean;
   /** outputs.driver.buffered — false = data straight from CPU pins (usually 3.3 V) */
   buffered: boolean | null;
+  /** Bare dev board (microboard): bring your own firmware and level shifting */
+  diy?: boolean;
+  /** Details link when the option lives outside /controllers */
+  path?: string;
+  /** Data-pin logic level in volts, when recorded (microboard gpio_voltage) */
+  dataVoltage?: number | null;
 }
 
 /**
@@ -240,11 +246,47 @@ export function buildLevelShifterOption(entry: BaseEntry): LevelShifterOption {
 
 /**
  * Pixels running at 5 V+ want data highs near 0.7×VDD, which unbuffered
- * 3.3 V CPU pins can't reliably hit. Buffered outputs re-drive the data at
- * 5 V, so only buffered:false (recorded) trips this.
+ * 3.3 V CPU pins can't reliably hit. Trips on recorded buffered:false, or on
+ * a recorded sub-4 V data logic level (DIY boards).
  */
 export function needsLevelShifter(controller: ControllerOption, pixel: PixelOption): boolean {
-  return controller.buffered === false && (pixel.voltage ?? 5) >= 5;
+  if ((pixel.voltage ?? 5) < 5) return false;
+  if (controller.buffered === false) return true;
+  return controller.dataVoltage != null && controller.dataVoltage < 4;
+}
+
+/**
+ * A bare microboard as a controller candidate: usable pixel outputs come from
+ * io.max_outputs (firmware-documented), everything else is honestly unknown —
+ * the caveats machinery surfaces that. Returns null when the board has no
+ * recorded pixel-output capability.
+ */
+export function buildMicroboardControllerOption(entry: BaseEntry): ControllerOption | null {
+  const io = (entry.io ?? {}) as Record<string, unknown>;
+  const count = io.max_outputs;
+  if (typeof count !== 'number' || count < 1) return null;
+  const power = (entry.power ?? {}) as Record<string, unknown>;
+  const parsedPrice = Array.isArray(entry.price) ? null : parsePrice(entry.price);
+  return {
+    id: `mb-${entry.id}`,
+    name: entry.name,
+    image: firstImageFile(entry),
+    status: typeof entry.status === 'string' ? entry.status : undefined,
+    outputs: count,
+    maxPerOutput: null,
+    capacity: null,
+    clockedSupport: 'unknown',
+    protocols: [],
+    inputProtocols: [],
+    standalone: false,
+    priceUSD: priceUSD(entry.price),
+    priceText: parsedPrice ? formatPriceText(parsedPrice) : null,
+    differential: false,
+    buffered: null,
+    diy: true,
+    path: `/microboards/${entry.id}`,
+    dataVoltage: parseQuantity(power.gpio_voltage, 'voltage')?.value ?? null,
+  };
 }
 
 export interface PatternSourceOption {
