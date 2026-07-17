@@ -9,10 +9,10 @@ history. This is what's next.
 
 - **Designer v2** — shipped: card-grid pixel picker, diagram thumbnails,
   refresh-ceiling math (+ sub-30fps callouts), per-string lengths within a
-  group (`n=150.200.80`), SVG re-import, and level-shifter advisories
-  (driver.buffered=false + 5 V pixels → level-converter suggestions)
-  - Later: DIY-microboard path — needs data first (usable GPIO/output counts
-    on microboards) before they can appear as controller options
+  group (`n=150.200.80`), SVG re-import, level-shifter advisories
+  (driver.buffered=false or sub-4 V gpio_voltage + 5 V pixels →
+  level-converter suggestions), and the DIY-microboard path (boards with
+  io.max_outputs join the controller list behind a toggle)
 
 ## Feature backlog
 
@@ -27,12 +27,11 @@ history. This is what's next.
 
 ## Data backlog
 
-- Suspect entries found during audits (sp801e-style identity checks):
-  - `controllers/led-player-m` and `led-player-l` claim `Ethernet: true` —
-    the Diamex LED Player family is SD/USB/DMX; likely the same sheet-era
-    fabrication the LEDEddy entry had (manual PDF is image-only, needs a look)
-- Price gaps that need different treatment: pixels / pixel-ICs / connectors
-  (qty-tier pricing like the TI level converters), TC4427 (Microchip blocks
+- Price gaps that need different treatment: connectors (qty-tier pricing —
+  pixels/pixel-ICs are done where LCSC stocks them; NOT on LCSC 2026-07:
+  UCS1903/2903/2904/512B/8903/8904, GS8202/06/08, LPD6803/8806, HD107S/108,
+  APA104/107, SK6822, PL9823, P9813, MY9231, SM16716/16511, TLS3001,
+  MBI6020; NS107S listed but price anomalous), TC4427 (Microchip blocks
   bots — manual), APD-2-500 (JS-only storefront), generic ESP/NodeMCU boards
   (street price varies)
 - Commercial-systems `price_range` → verify against pricing.examples
