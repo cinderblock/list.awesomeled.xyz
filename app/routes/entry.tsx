@@ -11,6 +11,8 @@ import {
 import { LocalDate } from '~/components/ui/LocalDate';
 import { getColumnsForCategory } from '~/lib/columns';
 import { parsePrice, formatPriceText } from '~/lib/currency';
+import { getPriceSource, isPriceSource } from '~/lib/price-source';
+import { PriceAsOf, PriceDetail } from '~/components/data/PriceSource';
 import {
   FileText,
   ShoppingCart,
@@ -321,6 +323,7 @@ const SKIP_KEYS = new Set([
   'links',
   'related', // rendered as the Related Products section
   'dead_links', // applied to the links they describe, plus a hero callout
+  'price_source', // shown as the "as of" line under the price
 ]);
 
 function humanize(key: string): string {
@@ -443,6 +446,12 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
 
     if (key === 'notes' && typeof value === 'string') {
       notes = value;
+      continue;
+    }
+    // Price in any shape (number, {amount, currency}, tiers) is one Overview
+    // row with its provenance line, never a group card
+    if (key === 'price') {
+      overview.push([key, value]);
       continue;
     }
     if (key === 'variants' && Array.isArray(value)) {
@@ -603,6 +612,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               categoryPath={category.path}
               filterableFields={filterableFields}
               connectorNames={connectorNames}
+              priceSource={getPriceSource(entry)}
             />
           </Section>
         )}
@@ -753,11 +763,14 @@ function KeyValueGrid({
   categoryPath,
   filterableFields,
   connectorNames = {},
+  priceSource,
 }: {
   entries: [string, unknown][];
   categoryPath: string;
   filterableFields: Set<string>;
   connectorNames?: Record<string, string>;
+  /** Provenance for a top-level `price` row (undefined = not a price grid) */
+  priceSource?: ReturnType<typeof getPriceSource>;
 }) {
   return (
     <dl className="detail-grid">
@@ -765,7 +778,11 @@ function KeyValueGrid({
         <div key={key} className="detail-row">
           <dt className="detail-key">{key.replace(/_/g, ' ')}</dt>
           <dd className="detail-value">
-            {formatValue(key, value, categoryPath, filterableFields, connectorNames)}
+            {key === 'price' && priceSource !== undefined ? (
+              <PriceDetail value={value} source={priceSource} />
+            ) : (
+              formatValue(key, value, categoryPath, filterableFields, connectorNames)
+            )}
           </dd>
         </div>
       ))}
@@ -902,6 +919,11 @@ function formatValue(
   if (key === 'price' && typeof value === 'object' && !Array.isArray(value)) {
     const parsed = parsePrice(value);
     if (parsed) return formatPriceText(parsed);
+  }
+
+  // Nested price provenance (pricing.source, pricing.examples[].source)
+  if (key === 'source' && isPriceSource(value)) {
+    return <PriceAsOf source={value} />;
   }
 
   // Connector reference ({ref: <slug>, pins?, notes?}) → link into /connectors

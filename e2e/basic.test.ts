@@ -354,6 +354,24 @@ test.describe('Data loading', () => {
     await expect(page.locator('text=by PixelController')).toBeVisible();
   });
 
+  test('entry price shows when and where it was read', async ({ page }) => {
+    // LCSC-priced IC: quantity tiers + a price_source
+    await page.goto('/pixel-ics/sm16703');
+    const asOf = page.locator('.price-detail .price-as-of');
+    await expect(asOf).toHaveText(/as of \d{4}-\d{2}(-\d{2})? · LCSC C\d+/);
+    await expect(page.locator('.price-list li')).not.toHaveCount(0);
+  });
+
+  test('prices older than a year are flagged as possibly stale', async ({ page }) => {
+    await page.clock.install({ time: new Date('2099-01-01T00:00:00Z') });
+    await page.goto('/pixel-ics/sm16703');
+    await expect(page.locator('.price-as-of--stale')).toContainText('may have changed');
+
+    // …and get the clock mark in the table's price column
+    await page.goto('/pixel-ics');
+    await expect(page.locator('.data-table .price-stale-mark').first()).toBeVisible();
+  });
+
   test('footer is displayed', async ({ page }) => {
     await page.goto('/');
 

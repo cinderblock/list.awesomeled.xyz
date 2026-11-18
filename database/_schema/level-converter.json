@@ -75,6 +75,7 @@
     "notes": {
       "type": ["string", "null"]
     },
+    "price_source": { "$ref": "common.json#/definitions/price_source" },
     "price": {
       "description": "Single price (USD unless {amount, currency}) or published quantity tiers",
       "oneOf": [

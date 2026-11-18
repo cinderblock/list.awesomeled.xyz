@@ -129,7 +129,8 @@
                 "description": "What the price buys, e.g. \"7 Ball String\""
               },
               "price": { "$ref": "common.json#/definitions/price" },
-              "notes": { "type": "string" }
+              "notes": { "type": "string" },
+              "source": { "$ref": "common.json#/definitions/price_source" }
             }
           }
         }

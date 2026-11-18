@@ -25,6 +25,8 @@ const SYMBOL_TO_CODE: Record<string, string> = { $: 'USD', '€': 'EUR', '£': '
 
 export interface ParsedPrice {
   amount: number;
+  /** High end of a street-price range ({amount, max}); `amount` is the low end */
+  max?: number;
   currency: string;
 }
 
@@ -48,9 +50,12 @@ export function parsePrice(v: unknown): ParsedPrice | null {
     return { amount, currency: m[3] ?? SYMBOL_TO_CODE[m[1]] ?? 'USD' };
   }
   if (v && typeof v === 'object' && !Array.isArray(v)) {
-    const o = v as { amount?: unknown; currency?: unknown; price?: unknown };
+    const o = v as { amount?: unknown; max?: unknown; currency?: unknown; price?: unknown };
     if (typeof o.amount === 'number') {
-      return { amount: o.amount, currency: typeof o.currency === 'string' ? o.currency : 'USD' };
+      const currency = typeof o.currency === 'string' ? o.currency : 'USD';
+      return typeof o.max === 'number' && o.max > o.amount
+        ? { amount: o.amount, max: o.max, currency }
+        : { amount: o.amount, currency };
     }
     if (o.price != null) return parsePrice(o.price); // price tier {name, price, …}
   }
@@ -77,14 +82,22 @@ export function priceUSD(v: unknown): number | null {
 }
 
 /**
- * "€1,500", "$25", "1,500 SEK" — original currency, never converted.
- * `forceCents` renders exactly two decimals (for decimal-aligned columns).
+ * "€1,500", "$25", "1,500 SEK", "$3–8" (street-price range) — original
+ * currency, never converted. `forceCents` renders exactly two decimals (for
+ * decimal-aligned columns).
  */
 export function formatPriceText(p: ParsedPrice, forceCents = false): string {
   const symbol = CODE_TO_SYMBOL[p.currency];
-  const n = p.amount.toLocaleString(
-    'en-US',
-    forceCents ? { minimumFractionDigits: 2, maximumFractionDigits: 2 } : undefined
-  );
+  // Sub-dollar parts (pixel ICs at volume) need four places: $0.0213, not $0.02
+  const fmt = (x: number) =>
+    x.toLocaleString(
+      'en-US',
+      x < 1 && x > 0
+        ? { minimumFractionDigits: 2, maximumFractionDigits: 4 }
+        : forceCents
+          ? { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+          : undefined
+    );
+  const n = p.max != null ? `${fmt(p.amount)}–${fmt(p.max)}` : fmt(p.amount);
   return symbol ? `${symbol}${n}` : `${n} ${p.currency}`;
 }

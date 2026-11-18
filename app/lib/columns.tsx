@@ -8,6 +8,8 @@ import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges
 import { RelativeDate } from '~/components/ui/RelativeDate';
 import { Tooltip } from '~/components/ui/Tooltip';
 import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
+import { getPriceSource } from './price-source';
+import { PriceStaleMark } from '~/components/data/PriceSource';
 import { quantitySortValue } from './quantity';
 import { flattenPlatforms } from './platforms';
 
@@ -212,8 +214,9 @@ function renderBool(v: unknown) {
 }
 
 // Helper for formatting price (right-aligned, original currency; non-USD gets
-// a "≈ $X" tooltip). Arrays of price tiers show "from <cheapest>".
-function formatPrice(v: unknown) {
+// a "≈ $X" tooltip). Arrays of price tiers show "from <cheapest>". Prices
+// older than PRICE_STALE_MONTHS get a small clock mark (entry page has the date).
+function formatPrice(v: unknown, item?: Record<string, unknown>) {
   if (v == null) return <span className="data-table-null">-</span>;
 
   if (typeof v === 'string' && /^(free|varies|contact|unknown)$/i.test(v.trim())) {
@@ -241,6 +244,7 @@ function formatPrice(v: unknown) {
   const hasCents = parsed.amount % 1 !== 0;
   const rendered = (
     <span className="tabular-nums">
+      {item && <PriceStaleMark source={getPriceSource(item)} />}
       {prefix}
       {formatPriceText(parsed, hasCents)}
       {!hasCents && <span style={{ visibility: 'hidden' }}>.00</span>}
@@ -419,6 +423,17 @@ export const updatedColumn: Column = {
   filterConfig: { type: 'date' },
 };
 
+// Price column for part-level tables (pixels, pixel ICs, connectors): quantity
+// tiers show "from <cheapest tier>", stale prices get the clock mark
+const partPriceColumn: Column = {
+  key: 'price',
+  label: 'Price',
+  render: formatPrice,
+  sortValue: priceUSD,
+  className: 'data-table-cell--right',
+  filterConfig: { type: 'numeric', unit: '$' },
+};
+
 export const controllerColumns: Column[] = [
   {
     key: 'links',
@@ -512,6 +527,7 @@ export const pixelColumns: Column[] = [
     render: renderPackages,
     filterConfig: { type: 'select' },
   },
+  partPriceColumn,
 ];
 
 export const pixelICColumns: Column[] = [
@@ -563,6 +579,7 @@ export const pixelICColumns: Column[] = [
     render: renderPackages,
     filterConfig: { type: 'select' },
   },
+  partPriceColumn,
 ];
 
 export const patternDriverColumns: Column[] = [
@@ -631,6 +648,7 @@ export const connectorColumns: Column[] = [
   },
   { key: 'ratings.ip_rating', label: 'IP Rating', filterConfig: { type: 'select' } },
   { key: 'mechanical.locking', label: 'Locking', filterConfig: { type: 'select' } },
+  partPriceColumn,
 ];
 
 export const microboardColumns: Column[] = [

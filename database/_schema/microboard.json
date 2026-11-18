@@ -78,8 +78,9 @@
     "notes": {
       "type": ["string", "null"]
     },
+    "price_source": { "$ref": "common.json#/definitions/price_source" },
     "price": {
-      "type": ["string", "number", "null"]
+      "oneOf": [{ "$ref": "common.json#/definitions/price" }, { "type": "null" }]
     },
     "compute": {
       "type": ["object", "null"],

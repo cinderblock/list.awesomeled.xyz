@@ -468,3 +468,56 @@ a.entry-image-credit:hover {
     display: none;
   }
 }
+
+/* Price + provenance ("as of 2026-11-18 · LCSC C155753") on entry pages */
+.price-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.price-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: max-content max-content 1fr;
+  gap: 0.1rem 0.75rem;
+}
+.price-list li {
+  display: contents;
+}
+.price-list-label {
+  color: var(--muted-foreground);
+  text-align: right;
+}
+.price-list-extra {
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+}
+.price-as-of {
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+}
+.price-as-of a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+}
+.price-as-of--stale,
+.price-stale-mark {
+  color: oklch(0.55 0.13 70);
+}
+.dark .price-as-of--stale,
+.dark .price-stale-mark {
+  color: oklch(0.8 0.12 80);
+}
+.price-as-of-icon {
+  display: inline;
+  vertical-align: -1px;
+  margin-right: 0.25rem;
+}
+.price-stale-mark {
+  display: inline-flex;
+  vertical-align: -1px;
+  margin-right: 0.3rem;
+}

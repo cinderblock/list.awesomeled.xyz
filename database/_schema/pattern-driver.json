@@ -93,6 +93,7 @@
         "price": {
           "type": ["string", "number", "null"]
         },
+        "source": { "$ref": "common.json#/definitions/price_source" },
         "license_type": {
           "type": ["string", "null"],
           "description": "perpetual, subscription, donationware, ..."

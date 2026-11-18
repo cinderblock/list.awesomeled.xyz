@@ -140,10 +140,30 @@ notes: Popular Arduino library with extensive pixel support
 | `manufacturer` | string        | No       | Manufacturer or vendor name                        |
 | `url`          | string        | No       | Primary URL (product page)                         |
 | `price`        | number/string | No       | Price (`25`, `"$50"`, `"varies"`, `"free"`)        |
+| `price_source` | object        | No       | Where/when the price was read (see below)          |
 | `notes`        | string        | No       | Additional information                             |
 | `status`       | string        | No       | `active`, `discontinued`, `end-of-life`, `unknown` |
 | `image`        | string        | No       | Filename in `images/` subdirectory                 |
 | `images`       | array         | No       | Multiple image filenames                           |
+
+### Prices
+
+Every price you add or re-check should say where and when it was read, so the
+site can show "as of" and flag prices older than a year:
+
+```yaml
+price: 24.95 # or {amount: 150, currency: EUR}, or quantity tiers
+price_source:
+  retrieved: '2026-11-18' # YYYY-MM-DD; update it when you re-confirm the price
+  vendor: Adafruit # distributor, manufacturer store, or marketplace
+  part: '1234' # vendor part number, when it pins the exact SKU (e.g. LCSC C155753)
+  url: https://www.adafruit.com/product/1234
+```
+
+Generic parts sold by many sellers at varying prices take a street-price
+range: `price: {amount: 3, max: 8}` with the marketplace as `vendor`.
+Commercial-system `pricing.examples[]` and pattern-driver `pricing` take the
+same object as `source`.
 
 ### Controllers
 

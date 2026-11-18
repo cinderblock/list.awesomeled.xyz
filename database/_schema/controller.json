@@ -430,6 +430,7 @@
     "images": {
       "$ref": "common.json#/definitions/images"
     },
+    "price_source": { "$ref": "common.json#/definitions/price_source" },
     "price": {
       "oneOf": [
         {
