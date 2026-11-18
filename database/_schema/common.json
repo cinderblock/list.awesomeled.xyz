@@ -187,6 +187,11 @@
           "type": "string",
           "format": "uri",
           "description": "datasheet.url at fetch time; a changed source triggers re-mirroring"
+        },
+        "fetched_from": {
+          "type": "string",
+          "format": "uri",
+          "description": "Alternate host (datasheet.sources) the PDF was actually downloaded from, when datasheet.url itself failed"
         }
       }
     },

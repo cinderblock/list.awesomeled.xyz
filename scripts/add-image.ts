@@ -6,6 +6,11 @@
  *       --source <page-url> --credit "<owner>" [--license "CC BY 2.0"] \
  *       [--file <name.webp>] [--keep-bg] [--primary] [--preview-dir <dir>]
  *
+ *   bun run add-image <category>/<id> --attribute-only --source <url> --credit "<owner>" \
+ *       [--license …] [--file <name.webp>]
+ *     Attach attribution to an image file that's already committed (legacy bare
+ *     `image: foo.webp`) without re-processing it.
+ *
  * - A page URL (HTML) is resolved to its og:image / twitter:image, and becomes
  *   the default --source.
  * - The image goes through scripts/crop-image.ts (edge-flood background removal
@@ -64,6 +69,7 @@ interface Args {
   license?: string;
   file?: string;
   keepBg: boolean;
+  attributeOnly: boolean;
   primary: boolean;
   previewDir: string;
 }
@@ -75,11 +81,12 @@ function parseArgs(argv: string[]): Args {
     const a = argv[i]!;
     if (a.startsWith('--')) {
       const key = a.slice(2);
-      if (key === 'keep-bg' || key === 'primary') flags[key] = true;
+      if (key === 'keep-bg' || key === 'primary' || key === 'attribute-only') flags[key] = true;
       else flags[key] = argv[++i] ?? '';
     } else positional.push(a);
   }
-  if (positional.length !== 2) {
+  const attributeOnly = !!flags['attribute-only'];
+  if (positional.length !== (attributeOnly ? 1 : 2)) {
     console.error(
       'Usage: bun run add-image <category>/<id> <image-url|page-url|file> --source <url> --credit <owner> [--license <spdx-ish>] [--file <name.webp>] [--keep-bg] [--primary]'
     );
@@ -87,12 +94,13 @@ function parseArgs(argv: string[]): Args {
   }
   return {
     target: positional[0]!,
-    input: positional[1]!,
+    input: positional[1] ?? '',
     source: flags.source as string | undefined,
     credit: flags.credit as string | undefined,
     license: flags.license as string | undefined,
     file: flags.file as string | undefined,
     keepBg: !!flags['keep-bg'],
+    attributeOnly,
     primary: !!flags.primary,
     previewDir: (flags['preview-dir'] as string) || join(tmpdir(), 'awesomeled-image-previews'),
   };
@@ -242,32 +250,36 @@ async function main() {
   const yamlPath = join('database', category, `${id}.yaml`);
   if (!existsSync(yamlPath)) throw new Error(`No such entry: ${yamlPath}`);
 
-  const { bytes, page, from } = await loadInput(args.input);
-  const source = args.source ?? page;
-  if (!source) throw new Error('--source <page url> is required (attribution)');
-  if (!args.credit) throw new Error('--credit "<owner>" is required (attribution)');
-
-  const meta = await sharp(bytes).metadata();
-  console.log(`Fetched ${from}\n  ${meta.width}x${meta.height} ${meta.format}`);
-  const processed = args.keepBg
-    ? await sharp(bytes).trim({ threshold: 10 }).png().toBuffer()
-    : await processImage(bytes);
-  const webp = await optimizeToWebp(processed);
-  const outMeta = await sharp(webp).metadata();
-
   const file = args.file ?? `${id}.webp`;
   if (!file.endsWith('.webp')) throw new Error('--file must end in .webp');
   const outDir = join('public', 'database-images', category);
-  mkdirSync(outDir, { recursive: true });
-  writeFileSync(join(outDir, file), webp);
-  console.log(
-    `  -> ${join(outDir, file)} ${outMeta.width}x${outMeta.height}, ${Math.round(webp.length / 1024)} KB`
-  );
+  let source = args.source;
 
-  mkdirSync(args.previewDir, { recursive: true });
-  const previewPath = join(args.previewDir, `${category}--${file.replace(/\.webp$/, '')}.png`);
-  await writePreview(webp, previewPath);
-  console.log(`  preview: ${previewPath}`);
+  if (args.attributeOnly) {
+    if (!existsSync(join(outDir, file))) throw new Error(`No existing ${join(outDir, file)}`);
+  } else {
+    const { bytes, page, from } = await loadInput(args.input);
+    source ??= page;
+    const meta = await sharp(bytes).metadata();
+    console.log(`Fetched ${from}
+  ${meta.width}x${meta.height} ${meta.format}`);
+    const processed = args.keepBg
+      ? await sharp(bytes).rotate().trim({ threshold: 10 }).png().toBuffer()
+      : await processImage(bytes);
+    const webp = await optimizeToWebp(processed);
+    const outMeta = await sharp(webp).metadata();
+    mkdirSync(outDir, { recursive: true });
+    writeFileSync(join(outDir, file), webp);
+    console.log(
+      `  -> ${join(outDir, file)} ${outMeta.width}x${outMeta.height}, ${Math.round(webp.length / 1024)} KB`
+    );
+    mkdirSync(args.previewDir, { recursive: true });
+    const previewPath = join(args.previewDir, `${category}--${file.replace(/\.webp$/, '')}.png`);
+    await writePreview(webp, previewPath);
+    console.log(`  preview: ${previewPath}`);
+  }
+  if (!source) throw new Error('--source <page url> is required (attribution)');
+  if (!args.credit) throw new Error('--credit "<owner>" is required (attribution)');
 
   const text = readFileSync(yamlPath, 'utf-8');
   const data = (parse(text) ?? {}) as Record<string, unknown>;
