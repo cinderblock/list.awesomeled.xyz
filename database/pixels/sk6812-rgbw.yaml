@@ -20,7 +20,7 @@ physical:
   package_sizes:
     - '5050'
   pin_count: 4
-price: # LCSC C5348912, 2026-07 (OPSCO 5x4.9mm variant; the plain 5050 listing has no price)
+price:
   - qty: 1
     price: 0.1305
     sku: SKC6812RGBW-NW
@@ -30,6 +30,12 @@ price: # LCSC C5348912, 2026-07 (OPSCO 5x4.9mm variant; the plain 5050 listing h
   - qty: 1000
     price: 0.07
     sku: SKC6812RGBW-NW
+price_source:
+  notes: OPSCO 5x4.9mm variant; the plain 5050 listing has no price
+  part: C5348912
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C5348912.html
+  vendor: LCSC
 related:
   - type: variant
     ref: pixels/sk6812

@@ -24,4 +24,8 @@ io:
   bms: 'No'
   imu: false
   max_outputs: 8 # OctoWS2811 DMA port
-price: 32.45 # PJRC last list price
+price: 32.45
+price_source:
+  notes: last list price
+  retrieved: '2026-07-03'
+  vendor: PJRC

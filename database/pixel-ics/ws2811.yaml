@@ -39,7 +39,7 @@ physical:
     - DIP8
   package_size: SOIC8/DIP8
   pin_count: 8
-price: # LCSC C114581 (SOP-8), 2026-07
+price:
   - qty: 20
     price: 0.0417
     sku: WS2811
@@ -49,6 +49,12 @@ price: # LCSC C114581 (SOP-8), 2026-07
   - qty: 4000
     price: 0.0211
     sku: WS2811
+price_source:
+  notes: SOP-8
+  part: C114581
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C114581.html
+  vendor: LCSC
 technical_notes:
   - Standalone IC, not integrated with LEDs like WS2812
   - Commonly used for 12V pixels with 3 LEDs in series

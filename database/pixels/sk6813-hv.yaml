@@ -13,7 +13,7 @@ other_links:
   - SK6813 Pixel Protocol Overview | Advatek Lighting
 physical:
   package_size: '5050'
-price: # LCSC C5378733, 2026-07 (out of stock at check, price still listed)
+price:
   - qty: 5
     price: 0.1985
     sku: SK6813HV-09-6P
@@ -23,6 +23,12 @@ price: # LCSC C5378733, 2026-07 (out of stock at check, price still listed)
   - qty: 5000
     price: 0.0996
     sku: SK6813HV-09-6P
+price_source:
+  notes: out of stock at check, price still listed
+  part: C5378733
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C5378733.html
+  vendor: LCSC
 related:
   - type: variant
     ref: pixels/sk6813

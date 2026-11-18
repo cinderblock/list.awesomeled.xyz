@@ -11,7 +11,7 @@ other_links:
 physical:
   package_size: SOP10
   pin_count: 10
-price: # LCSC C5174521, 2026-07 (in-stock TM1914A; original TM1914 C5174535 out of stock at same tiers)
+price:
   - qty: 5
     price: 0.0985
     sku: TM1914A
@@ -21,3 +21,9 @@ price: # LCSC C5174521, 2026-07 (in-stock TM1914A; original TM1914 C5174535 out 
   - qty: 5000
     price: 0.0466
     sku: TM1914A
+price_source:
+  notes: in-stock TM1914A; original TM1914 C5174535 out of stock at same tiers
+  part: C5174521
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C5174521.html
+  vendor: LCSC

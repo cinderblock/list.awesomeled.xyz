@@ -33,5 +33,9 @@ features:
   - Mobile app
   - Sensors and triggers management
 price:
-  amount: 150 # OEM board, ex VAT; full kit EUR 230 (ledstripstudio.com 2026-07)
+  amount: 150
   currency: EUR
+price_source:
+  notes: OEM board, ex VAT; full kit EUR 230
+  retrieved: '2026-07-03'
+  vendor: ledstripstudio.com

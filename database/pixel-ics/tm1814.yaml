@@ -11,7 +11,7 @@ other_links:
 physical:
   package_size: SOP8
   pin_count: 8
-price: # LCSC C20622183, 2026-07 (TA2105B re-issue; original TM1814 C62614 discontinued)
+price:
   - qty: 5
     price: 0.1099
     sku: TM1814 (TA2105B)
@@ -21,3 +21,9 @@ price: # LCSC C20622183, 2026-07 (TA2105B re-issue; original TM1814 C62614 disco
   - qty: 4000
     price: 0.052
     sku: TM1814 (TA2105B)
+price_source:
+  notes: TA2105B re-issue; original TM1814 C62614 discontinued
+  part: C20622183
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C20622183.html
+  vendor: LCSC

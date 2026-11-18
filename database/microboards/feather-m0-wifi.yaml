@@ -24,4 +24,8 @@ io:
   bms: 1S
   imu: Wing
   max_outputs: 1 # SAMD21 NeoPixel bit-bang
-price: 34.95 # Adafruit 2026-07, uFL-antenna variant (PCB antenna $39.95)
+price: 34.95
+price_source:
+  notes: uFL-antenna variant (PCB antenna $39.95)
+  retrieved: '2026-07-03'
+  vendor: Adafruit

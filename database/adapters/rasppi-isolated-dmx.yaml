@@ -10,5 +10,8 @@ links:
   product: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
 parent: Raspberry Pi
 price:
-  amount: 29.95 # BitWizard shop 2026-07
+  amount: 29.95
   currency: EUR
+price_source:
+  retrieved: '2026-07-03'
+  vendor: BitWizard shop

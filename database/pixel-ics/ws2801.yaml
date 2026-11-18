@@ -28,7 +28,7 @@ other_links:
 physical:
   package_size: SO14/DIP14
   pin_count: 14
-price: # LCSC C114580, 2026-07
+price:
   - qty: 5
     price: 0.2715
     sku: WS2801S
@@ -38,3 +38,8 @@ price: # LCSC C114580, 2026-07
   - qty: 6000
     price: 0.1374
     sku: WS2801S
+price_source:
+  part: C114580
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C114580.html
+  vendor: LCSC

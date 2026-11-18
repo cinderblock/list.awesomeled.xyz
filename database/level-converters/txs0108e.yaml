@@ -2,10 +2,14 @@ name: TXS0108e
 creator: Texas Instruments
 io:
   channels: 8
-price: # TI list price, ti.com 2026-07
+price:
   - qty: 1
     price: 1.387
     sku: TXS0108EPWR
   - qty: 1000
     price: 0.619
     sku: TXS0108EPWR
+price_source:
+  notes: list price
+  retrieved: '2026-07-01'
+  vendor: TI

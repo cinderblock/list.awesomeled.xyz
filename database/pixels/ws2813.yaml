@@ -37,7 +37,7 @@ physical:
     - '5050'
   package_size: '5050'
   pin_count: 6
-price: # LCSC C114592, 2026-07
+price:
   - qty: 5
     price: 0.1071
     sku: WS2813B-B
@@ -47,6 +47,11 @@ price: # LCSC C114592, 2026-07
   - qty: 5000
     price: 0.0484
     sku: WS2813B-B
+price_source:
+  part: C114592
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C114592.html
+  vendor: LCSC
 related:
   - type: predecessor
     ref: pixels/ws2812

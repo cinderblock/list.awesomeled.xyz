@@ -25,7 +25,11 @@ features:
   - Two overlay effect layers (text, music, ...) with custom parameters
   - Matrix layout by rectangle or DXF import
   - OTA firmware updates
-price: 23 # BTF-Lighting sale price 2026-07 (regular $45)
+price: 23
+price_source:
+  notes: sale price; regular $45
+  retrieved: '2026-07-02'
+  vendor: BTF-Lighting
 related:
   - type: related
     ref: controllers/sp608e

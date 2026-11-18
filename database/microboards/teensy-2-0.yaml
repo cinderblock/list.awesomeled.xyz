@@ -23,4 +23,8 @@ io:
   bms: 'No'
   imu: false
   max_outputs: 1 # AVR bit-bang
-price: 24 # PJRC final list price
+price: 24
+price_source:
+  notes: final list price
+  retrieved: '2026-07-03'
+  vendor: PJRC

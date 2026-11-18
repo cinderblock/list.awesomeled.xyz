@@ -39,7 +39,7 @@ physical:
     - '2020'
   package_size: '5050'
   pin_count: 6
-price: # LCSC C2829089, 2026-07
+price:
   - qty: 10
     price: 0.1107
     sku: SK9822
@@ -49,6 +49,11 @@ price: # LCSC C2829089, 2026-07
   - qty: 10000
     price: 0.0571
     sku: SK9822
+price_source:
+  part: C2829089
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C2829089.html
+  vendor: LCSC
 related:
   - type: related
     ref: pixels/apa102

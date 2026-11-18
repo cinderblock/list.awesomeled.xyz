@@ -29,4 +29,8 @@ io:
   storage: microSD
   bms: 'No'
   imu: false
-price: 35 # official list price; in production until at least Jan 2028
+price: 35
+price_source:
+  notes: official list price; in production until at least Jan 2028
+  retrieved: '2026-07-03'
+  vendor: Raspberry Pi

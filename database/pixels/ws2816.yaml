@@ -27,7 +27,7 @@ physical:
     - '5050'
   package_size: '5050'
   pin_count: 6
-price: # LCSC C4154877, 2026-07 (2020 package; 2121 listing has no price)
+price:
   - qty: 5
     price: 0.1018
     sku: WS2816B-2020
@@ -37,6 +37,12 @@ price: # LCSC C4154877, 2026-07 (2020 package; 2121 listing has no price)
   - qty: 4500
     price: 0.0525
     sku: WS2816B-2020
+price_source:
+  notes: '2020 package; 2121 listing has no price'
+  part: C4154877
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C4154877.html
+  vendor: LCSC
 technical_notes:
   - 48-bit pixel data for 16-bit per channel color depth
   - Independent 5-bit brightness control for each R, G, B channel

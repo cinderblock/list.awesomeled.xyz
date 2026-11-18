@@ -7,7 +7,7 @@ data:
   clocked: false
   channels: 5
   backup_line: true
-price: # LCSC C5446697, 2026-07
+price:
   - qty: 5
     price: 0.1346
     sku: WS2805
@@ -17,3 +17,8 @@ price: # LCSC C5446697, 2026-07
   - qty: 4000
     price: 0.0712
     sku: WS2805
+price_source:
+  part: C5446697
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C5446697.html
+  vendor: LCSC

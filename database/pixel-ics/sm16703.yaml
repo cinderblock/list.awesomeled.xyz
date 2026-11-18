@@ -11,7 +11,7 @@ other_links:
 physical:
   package_size: SOP8
   pin_count: 8
-price: # LCSC C155753, 2026-07
+price:
   - qty: 10
     price: 0.0446
     sku: SM16703P
@@ -21,3 +21,8 @@ price: # LCSC C155753, 2026-07
   - qty: 40000
     price: 0.0213
     sku: SM16703P
+price_source:
+  part: C155753
+  retrieved: '2026-07-03'
+  url: https://www.lcsc.com/product-detail/C155753.html
+  vendor: LCSC
