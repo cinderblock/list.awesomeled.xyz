@@ -137,14 +137,24 @@ const productLinks: LinkConfig[] = [
   { key: 'links.product', label: 'Product page', icon: <ExternalLink size={16} /> },
 ];
 
+const datasheetLink: LinkConfig = {
+  key: 'datasheet.url',
+  label: 'Datasheet',
+  icon: <FileText size={16} />,
+};
+
 // Pixels / pixel-ics: datasheet
 const datasheetLinks: LinkConfig[] = [
-  { key: 'datasheet.url', label: 'Datasheet', icon: <FileText size={16} /> },
+  datasheetLink,
   { key: 'creator.page', label: 'Product page', icon: <ExternalLink size={16} /> },
 ];
 
+// Other parts with datasheets (microboards, level converters, pixel decoders)
+const partLinks: LinkConfig[] = [datasheetLink, ...productLinks];
+
 // Connectors (with suppliers)
 const connectorLinks: LinkConfig[] = [
+  datasheetLink,
   { key: 'links.product', label: 'Product page', icon: <ExternalLink size={16} /> },
   { key: 'links.digikey', label: 'DigiKey', icon: <ShoppingCart size={16} /> },
   { key: 'links.mouser', label: 'Mouser', icon: <ShoppingCart size={16} /> },
@@ -657,7 +667,7 @@ export const microboardColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, productLinks),
+    render: (_, item) => renderLinks(item, partLinks),
   },
   { key: 'name', label: 'Name' },
   { key: 'creator', label: 'Creator', render: renderCreator },
@@ -801,7 +811,7 @@ export const levelConverterColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, productLinks),
+    render: (_, item) => renderLinks(item, partLinks),
   },
   { key: 'name', label: 'Name' },
   { key: 'creator', label: 'Creator', render: renderCreator },
@@ -828,7 +838,7 @@ export const pixelDecoderColumns: Column[] = [
     label: '',
     sortable: false,
     filterable: false,
-    render: (_, item) => renderLinks(item, productLinks),
+    render: (_, item) => renderLinks(item, partLinks),
   },
   { key: 'name', label: 'Name' },
   { key: 'creator', label: 'Creator', render: renderCreator },

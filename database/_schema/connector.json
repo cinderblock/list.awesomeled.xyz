@@ -232,6 +232,7 @@
         "type": "string"
       }
     },
+    "datasheet": { "$ref": "common.json#/definitions/datasheet" },
     "image": {
       "$ref": "common.json#/definitions/image"
     },

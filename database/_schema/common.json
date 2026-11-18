@@ -190,6 +190,32 @@
         }
       }
     },
+    "datasheet": {
+      "type": ["object", "null"],
+      "description": "Datasheet for a part: the original/manufacturer URL (attribution), alternate hosts, and the CI-managed R2 mirror (docs/datasheet-mirroring.md).",
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": ["string", "null"],
+          "description": "Original/manufacturer datasheet URL (attribution)"
+        },
+        "mirror": {
+          "$ref": "common.json#/definitions/datasheet_mirror"
+        },
+        "discrepancies": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          }
+        },
+        "third_party_testing": {
+          "type": ["string", "null"]
+        },
+        "sources": {
+          "$ref": "common.json#/definitions/datasheet_sources"
+        }
+      }
+    },
     "dead_links": {
       "type": ["array", "null"],
       "description": "URLs elsewhere in this entry that no longer work. Detail pages keep the original for attribution but link to `archive` instead — or to the newest Wayback Machine capture when `archive` is omitted. Set `archive` explicitly when the domain changed hands and the latest capture shows the wrong site.",
