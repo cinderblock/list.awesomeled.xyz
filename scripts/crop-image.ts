@@ -23,14 +23,21 @@ export const MAX_BYTES = 200 * 1024; // 200KB
  * Process image: remove solid background from edges (if not already transparent), then trim.
  * Returns an encoded PNG (with alpha). SVG/GIF are returned unchanged.
  */
-export async function processImage(inputBuffer: Buffer): Promise<Buffer> {
-  const image = sharp(inputBuffer);
-  const metadata = await image.metadata();
+export async function processImage(original: Buffer): Promise<Buffer> {
+  const metadata = await sharp(original).metadata();
 
   // Skip SVGs and GIFs (animated)
   if (metadata.format === 'svg' || metadata.format === 'gif') {
-    return inputBuffer;
+    return original;
   }
+
+  // Huge sources gain nothing past 2x the final edge; shrink first so the
+  // per-pixel flood fill stays fast. EXIF orientation is applied here too.
+  const inputBuffer = await sharp(original)
+    .rotate()
+    .resize(MAX_EDGE * 2, MAX_EDGE * 2, { fit: 'inside', withoutEnlargement: true })
+    .png()
+    .toBuffer();
 
   // Get raw pixel data with alpha
   const { data, info } = await sharp(inputBuffer)
@@ -105,36 +112,37 @@ export async function processImage(inputBuffer: Buffer): Promise<Buffer> {
     return dist < tolerance;
   };
 
-  // Flood fill from edges using a queue (BFS)
-  const queue: [number, number][] = [];
+  // Flood fill from edges (BFS). A flat index queue with a read cursor keeps
+  // this linear — Array.shift() made multi-megapixel photos take minutes.
+  const queue = new Int32Array(width * height);
+  let head = 0;
+  let tail = 0;
+  const enqueue = (x: number, y: number) => {
+    if (x < 0 || x >= width || y < 0 || y >= height) return;
+    const p = y * width + x;
+    if (visited[p] || !matchesBg(x, y)) return;
+    visited[p] = 1;
+    queue[tail++] = p;
+  };
 
-  // Add all edge pixels that match background to queue
   for (let x = 0; x < width; x++) {
-    if (matchesBg(x, 0)) queue.push([x, 0]);
-    if (matchesBg(x, height - 1)) queue.push([x, height - 1]);
+    enqueue(x, 0);
+    enqueue(x, height - 1);
   }
   for (let y = 1; y < height - 1; y++) {
-    if (matchesBg(0, y)) queue.push([0, y]);
-    if (matchesBg(width - 1, y)) queue.push([width - 1, y]);
+    enqueue(0, y);
+    enqueue(width - 1, y);
   }
 
-  // Process queue
-  while (queue.length > 0) {
-    const [x, y] = queue.shift()!;
-    const pixelIdx = y * width + x;
-
-    if (visited[pixelIdx]) continue;
-    if (x < 0 || x >= width || y < 0 || y >= height) continue;
-    if (!matchesBg(x, y)) continue;
-
-    visited[pixelIdx] = 1;
-
-    // Make this pixel transparent
-    const idx = pixelIdx * channels;
-    newData[idx + 3] = 0; // Set alpha to 0
-
-    // Add neighbors
-    queue.push([x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]);
+  while (head < tail) {
+    const p = queue[head++]!;
+    newData[p * channels + 3] = 0; // background -> transparent
+    const x = p % width;
+    const y = (p - x) / width;
+    enqueue(x + 1, y);
+    enqueue(x - 1, y);
+    enqueue(x, y + 1);
+    enqueue(x, y - 1);
   }
 
   // Create image from modified data and trim

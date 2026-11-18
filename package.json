@@ -22,6 +22,8 @@
     "review:agent": "bun run scripts/review-entry-agent.ts",
     "validate": "bun run scripts/validate.ts",
     "mirror-datasheets": "bun run scripts/mirror-datasheets.ts",
+    "add-image": "bun run scripts/add-image.ts",
+    "coverage:assets": "bun run scripts/asset-coverage.ts",
     "check-links": "bun run scripts/check-links.ts"
   },
   "dependencies": {
