@@ -2,9 +2,11 @@
 /**
  * Validate all database YAML files against their JSON schemas.
  *
- * The schemas in database/_schema are the rich, nested target schema. During
- * the flat -> nested migration this doubles as a progress meter: un-migrated
- * (still-flat) entries fail with `additionalProperties` errors until converted.
+ * Every entry must match its category schema in database/_schema (formats
+ * included: `uri` and `date` are enforced via ajv-formats) and every
+ * cross-reference must resolve. Each category's `_example.yaml` (multi-document
+ * contributor documentation) is validated too, so the examples can't drift
+ * from the schema; their refs are illustrative, so cross-refs aren't checked.
  *
  *   bun run validate                 # validate everything
  *   bun run validate controllers     # only one category folder
@@ -12,8 +14,9 @@
 
 import { readFileSync, readdirSync, existsSync } from 'fs';
 import { join } from 'path';
-import { parse } from 'yaml';
+import { parse, parseAllDocuments } from 'yaml';
 import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
 
 const DB_DIR = 'database';
 const SCHEMA_DIR = 'database/_schema';
@@ -33,6 +36,23 @@ const FOLDER_SCHEMAS: Record<string, string> = {
   'diffusive-materials': 'diffusive-material.json',
   'commercial-systems': 'commercial-system.json',
 };
+
+// Categories whose _example.yaml still shows the pre-migration flat schema.
+// Each is rewritten when its category's schema review lands (see
+// plans/database-review.md); remove it from this list in the same commit.
+const STALE_EXAMPLES = new Set([
+  'adapters',
+  'commercial-systems',
+  'connectors',
+  'diffusive-materials',
+  'drive-libraries',
+  'level-converters',
+  'microboards',
+  'pattern-drivers',
+  'pixel-decoders',
+  'pixel-ics',
+  'pixels',
+]);
 
 /**
  * Cross-reference checks (beyond what JSON Schema can express):
@@ -91,9 +111,10 @@ function listEntrySlugs(folder: string): Set<string> {
 
 async function main() {
   const only = process.argv[2]; // optional category filter
-  // strict:false makes AJV ignore `format` keywords (uri/date) as no-ops,
-  // which is fine for migration validation and avoids an ajv-formats dep.
+  // strict:false tolerates non-validation keywords in the schemas; formats
+  // (uri, date) are real checks via ajv-formats.
   const ajv = new Ajv({ allErrors: true, strict: false });
+  addFormats(ajv);
 
   // Register shared definitions so cross-schema $refs (common.json#/...) resolve
   ajv.addSchema(JSON.parse(readFileSync(join(SCHEMA_DIR, 'common.json'), 'utf-8')));
@@ -146,6 +167,28 @@ async function main() {
       }
     }
     console.log(`${folder}: ${folderValid}/${files.length} valid`);
+
+    const examplePath = join(DB_DIR, folder, '_example.yaml');
+    if (existsSync(examplePath) && !STALE_EXAMPLES.has(folder)) {
+      const docs = parseAllDocuments(readFileSync(examplePath, 'utf-8'));
+      const list = Array.isArray(docs) ? docs : [docs];
+      list.forEach((doc, i) => {
+        total++;
+        const label = `${folder}/_example.yaml (document ${i + 1})`;
+        if (doc.errors.length > 0) {
+          errored++;
+          console.log(`  ✗ ${label}: ${doc.errors[0].message}`);
+        } else if (validate(doc.toJS())) {
+          valid++;
+        } else {
+          errored++;
+          console.log(`  ✗ ${label}`);
+          for (const err of validate.errors ?? []) {
+            console.log(`      ${err.instancePath || '/'}: ${err.message}`);
+          }
+        }
+      });
+    }
   }
 
   console.log(`\n${'='.repeat(40)}\nTotal ${total} | valid ${valid} | errors ${errored}`);

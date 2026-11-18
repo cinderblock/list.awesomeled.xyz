@@ -55,6 +55,7 @@
     "@types/react": "^19.2.11",
     "@types/react-dom": "^19.2.3",
     "ajv": "^8.20.0",
+    "ajv-formats": "3.0.1",
     "cspell": "^9.6.4",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
