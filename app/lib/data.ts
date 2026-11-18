@@ -74,6 +74,7 @@ const IGNORED_COMMITS = new Set([
   '481e6aad540b7ef19170a6aa5f58d5479ee7fd13', // online_pricing -> pricing.examples restructure (6)
   '2c7bf1195c2740fa2b7a76aa73e1d13a51702572', // prose-only facts -> structured fields (46)
   '937d73473061d5c8503d68da7d67fe1abd3b4979', // SPI -> clocked/single-wire wording normalization (15)
+  'd5f86cd5f5e66092311965397ae2384c8dfd3be5', // price comments -> price_source (40)
 ]);
 
 /**
