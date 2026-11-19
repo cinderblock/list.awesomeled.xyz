@@ -9,6 +9,7 @@ inputs:
     Ethernet: true
   protocols:
     - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 32
@@ -79,3 +80,7 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'
     notes: "Rows ticked in the 'PixLite Mk2' column of Advatek's glossary table (97 rows"
+  inputs.protocols:
+    url: https://cdn.sanity.io/files/3y31615s/production/3e65b12987f43b2b7cd69792a2617efa4433cc42.pdf
+    retrieved: '2026-11-18'
+    notes: "'16 Mk2 ECO controllers convert E1.31 (sACN) or Art-Net protocols'"

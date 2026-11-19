@@ -19,7 +19,7 @@ outputs:
   driver:
     buffered: true
   pixels:
-    max_per_output: 2040 # 16320 total across 8 outputs
+    max_per_output: 510 # 4080 total across 8 outputs (expanded mode; 1020 each on 4 outputs without it)
   auxiliary:
     DMX512: 2 # DMX In/Out
   protocols:
@@ -157,5 +157,9 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'
     notes: "Every row of Advatek's glossary table is ticked in the 'PixLite Mk3' column (97 rows)"
+  outputs.pixels.max_per_output:
+    url: https://www.advateklighting.com/products/e4-s-mk3
+    retrieved: '2026-11-18'
+    notes: "'With expanded mode enabled, control up to 8 pixel outputs': 510 RGB / 384 RGBW per output"
 technical_notes:
   - Standalone playback via Advatek's SHOWTime
