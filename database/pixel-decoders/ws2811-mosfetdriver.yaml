@@ -6,7 +6,7 @@ inputs:
   protocols:
     - WS2811
 outputs:
-  count: 3
+  count: 1 # single N-MOSFET; the 3-channel version is a separate module
   types:
     - pwm
 dead_links:
@@ -41,3 +41,6 @@ sources:
     url: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
     retrieved: '2026-11-18'
     notes: Freetronics product page (entry's own dead_links archive, 2025-11-07); 'fully compatible with the software that you already use to control addressable LEDs' (FastLED / NeoPixel)
+  outputs.count:
+    url: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-module
+    retrieved: '2026-11-18'

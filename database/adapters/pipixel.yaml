@@ -1,6 +1,6 @@
 name: PiPixel
 status: discontinued
-creator: Tindie
+creator: Maniacal Labs
 notes: Does not provide power to the Pi
 outputs:
   count: 1
@@ -44,3 +44,6 @@ sources:
     url: https://github.com/ManiacalLabs/PiPixel/blob/master/Usage.md
     retrieved: '2026-11-18'
     notes: Maker's usage doc; BiblioPixel is also the Tindie listing's 'Source Code' link
+  creator:
+    url: https://github.com/ManiacalLabs/PiPixel
+    retrieved: '2026-11-18'

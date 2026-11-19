@@ -1,5 +1,6 @@
 name: ESPixelstick
 status: active
+creator: Forkineye (Shelby Merrick)
 notes: Wi-Fi (E1.31) pixel adapter; firmware also outputs serial DMX / Renard
 inputs:
   physical:
@@ -7,7 +8,7 @@ inputs:
   protocols:
     - E1.31
 outputs:
-  count: 4
+  count: 1
   clocked: false
 power:
   voltage:
@@ -18,7 +19,7 @@ images:
     credit: Forkineye (Shelby Merrick)
 links:
   product: https://www.amazon.com/ESPixelStick-Wireless-DMX-Pixel-Controller/dp/B072XT1V77/
-parent: ESP8266
+parent: ESP-01 (ESP8266) module
 price: 28
 price_source:
   notes: ESPixelStick V3, the current version, from the creator's store. The Amazon kit listing in links shows "Currently unavailable"
@@ -60,3 +61,14 @@ sources:
     - url: http://forkineye.com/wp-content/uploads/2016/09/ESPixelStick-V2-Assembly-and-Usage.pdf
       retrieved: '2026-11-18'
       notes: ESPixelStick V2 Assembly and Usage manual (v2016.09.22), 'A note on 802.11 wireless networks'; the V1 page also recommends 'Vixen 3 and xLights'
+  outputs.count:
+    url: https://forkineye.com/espixelstick-v1/
+    retrieved: '2026-11-18'
+    notes: "'driving a universe of pixels via E1.31 over Wi-Fi'"
+  parent:
+    url: http://forkineye.com/wp-content/uploads/2016/09/ESPixelStick-V2-Assembly-and-Usage.pdf
+    retrieved: '2026-11-18'
+    notes: "'Insert the ESP-01 Module into the 2x8 Header'"
+  creator:
+    url: https://forkineye.com/espixelstick-v3/
+    retrieved: '2026-11-18'

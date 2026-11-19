@@ -1,8 +1,7 @@
 name: PixelLauncher Gen 2 Micro
 status: discontinued
-creator: Digital Ambience
-notes: LED data up to 250 ft right out of your controller No sender. It cleans
-  up the signal.
+creator: Digital Ambiance
+notes: LED data up to 250 ft right out of your controller No sender. It cleans up the signal.
 outputs:
   count: 1
   clocked: false
@@ -22,3 +21,6 @@ sources:
     url: https://digitalambiance.com/?s=pixellauncher&post_type=product
     retrieved: '2026-11-18'
     notes: 'shop search: "No products were found matching your selection."; product page 404'
+  creator:
+    url: https://web.archive.org/web/20250427203401/https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
+    retrieved: '2026-11-18'

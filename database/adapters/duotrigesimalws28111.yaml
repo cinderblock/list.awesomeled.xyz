@@ -1,4 +1,4 @@
-name: DuotrigesimalWS28111
+name: DuotrigesimalWS2811
 status: discontinued
 creator: Brian Amos
 vendors:
@@ -54,3 +54,6 @@ sources:
     url: https://github.com/brianamos1/DuotrigesimalWS2811
     retrieved: '2026-11-18'
     notes: Readme
+  name:
+    url: https://github.com/brianamos1/DuotrigesimalWS2811
+    retrieved: '2026-11-18'

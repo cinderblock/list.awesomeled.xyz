@@ -20,7 +20,7 @@ images:
     license: CC BY-NC-SA 3.0
 links:
   product: https://www.sparkfun.com/sparkfun-esp32-thing-plus-dmx-to-led-shield.html
-parent: ESP32
+parent: SparkFun Thing Plus - ESP32 WROOM (or any Feather-footprint board)
 price: 18.5
 price_source:
   part: DEV-15110
@@ -50,3 +50,6 @@ sources:
     url: https://learn.sparkfun.com/tutorials/sparkfun-esp32-dmx-to-led-shield/all
     retrieved: '2026-11-18'
     notes: "Hookup guide 'Software Setup'; the product page lists 'Arduino Libraries: SparkFun DMX Arduino Library, ArtnetWifi Arduino Library, ESP32 Servo Library'."
+  parent:
+    url: https://www.sparkfun.com/products/15110
+    retrieved: '2026-11-18'

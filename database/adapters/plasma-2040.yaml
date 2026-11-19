@@ -11,7 +11,6 @@ images:
     credit: Pimoroni
 links:
   product: https://shop.pimoroni.com/products/plasma-2040
-parent: Rpi 2040
 price: 16
 price_source:
   notes: Last list price shown on the retired product page (US store; GBP 11.75 on the UK store)

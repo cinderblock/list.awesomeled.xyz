@@ -1,11 +1,11 @@
 name: PixelPops
-creator: diy/board design
+creator: Pops Electronics
 outputs:
-  count: 4
+  count: 1 # the 4 was DMX universes, not outputs
   clocked: false
 power:
   voltage:
-    max: 5
+    max: 12 # 5 V or 12 V pixels
 dead_links:
   - url: https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
     archive: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
@@ -36,3 +36,15 @@ sources:
     url: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
     retrieved: '2026-11-18'
     notes: "DIYC wiki 'ESPixel Stick & ESPixel Pops' (live URL now 404; Wayback 2025-06-27). Same page: 'there is one common firmware thread that works on all of the ESP-01 based DIYC pixel sticks.'"
+  outputs.count:
+    url: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+    retrieved: '2026-11-18'
+    notes: "'Supports up to 680 WS2811 or WS2812 Pixels - 4 Universes'"
+  power.voltage.max:
+    url: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+    retrieved: '2026-11-18'
+    notes: "'It supports both 5v and 12v pixels'"
+  creator:
+    url: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+    retrieved: '2026-11-18'
+    notes: ukewarrior's variation of Bill Porter's ESPixel design

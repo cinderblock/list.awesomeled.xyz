@@ -7,7 +7,7 @@ inputs:
     Wi-Fi: true
     SD card: true
 outputs:
-  count: 6
+  count: 1 # data + clock on one 5-pin terminal
   clocked: false
   connector: Phoenix Screw
 power:
@@ -59,3 +59,6 @@ sources:
     url: https://web.archive.org/web/20210803015116/https://espartstick.ecwid.com/5v-12V-SD-Card-WiFi-Enhanced-Edition-WLED-pre-Installed-p170368862
     retrieved: '2026-11-18'
     notes: WLED USAGE section; the maker names the tool by its URL (ledfx.app = LedFx)
+  outputs.count:
+    url: https://web.archive.org/web/20231130033100/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+    retrieved: '2026-11-18'

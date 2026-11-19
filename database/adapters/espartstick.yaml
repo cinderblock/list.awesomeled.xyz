@@ -1,11 +1,12 @@
 name: ESPArtstick
 status: discontinued
+creator: Microcyb
 outputs:
-  count: 6
+  count: 1
   clocked: false
 power:
   voltage:
-    max: 5
+    max: 12 # 5 V or 12 V pixels
 dead_links:
   - url: https://espartstick.ecwid.com/
     archive: https://web.archive.org/web/20191021235104/https://espartstick.ecwid.com/
@@ -36,3 +37,15 @@ sources:
     url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
     retrieved: '2026-11-18'
     notes: Microcyb store product page (SKU 00010), Wayback capture 2021-08-03; same sentence on the 2019 capture
+  outputs.count:
+    url: https://web.archive.org/web/20191021235104/https://espartstick.ecwid.com/
+    retrieved: '2026-11-18'
+    notes: one pixel output
+  power.voltage.max:
+    url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
+    retrieved: '2026-11-18'
+    notes: "'ESP Art Stick 5v/12v Wi-Fi pixel Controller'"
+  creator:
+    url: https://web.archive.org/web/20191021235104/https://espartstick.ecwid.com/
+    retrieved: '2026-11-18'
+    notes: "'About Us Microcyb'"

@@ -15,7 +15,7 @@ images:
     credit: PJRC
 links:
   product: https://www.pjrc.com/store/octo28_adaptor.html
-parent: Teensy 3.2
+parent: Teensy 3.2 - Teensy 4.1
 price: 10
 price_source:
   notes: PJRC's product page now says SparkFun manufactures Teensy products and links here
@@ -72,3 +72,7 @@ sources:
     url: https://www.pjrc.com/store/octo28_adaptor.html
     retrieved: '2026-11-18'
     notes: PJRC product page; resolves to drive-libraries/octows2811. The page also says 'It may be possible to use this board with FastLED to drive a long strip of APA102 LEDs' (hedged, not added)
+  parent:
+    url: https://www.pjrc.com/store/octo28_adaptor.html
+    retrieved: '2026-11-18'
+    notes: "'connects Teensy 3.2 - Teensy 4.1 to thousands of LEDs'"

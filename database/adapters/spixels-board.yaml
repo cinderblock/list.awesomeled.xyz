@@ -1,5 +1,6 @@
 name: SPIxels Board
 status: active
+creator: Henner Zeller
 outputs:
   count: 16
   clocked: always
@@ -59,3 +60,6 @@ sources:
     url: https://github.com/hzeller/spixels
     retrieved: '2026-11-18'
     notes: the repository readme's first line links http://spixels.org/ (the entry's product link, which failed TLS when fetched); the board and its C++ library (MultiSPI class) live in this repository
+  creator:
+    url: https://github.com/hzeller/spixels
+    retrieved: '2026-11-18'

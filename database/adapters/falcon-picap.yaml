@@ -6,7 +6,9 @@ outputs:
   clocked: selectable
 power:
   voltage:
+    min: 5
     max: 24
+    # 5 V, or 7-24 V (jumper-selectable)
 dead_links:
   - url: https://www.pixelcontroller.com/store/index.php?id_product=47
     archive: https://web.archive.org/web/20210415104512/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
@@ -98,3 +100,7 @@ sources:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
     retrieved: '2026-11-18'
     notes: xLights controller definition (config upload supported) — xLights model is 'PiCap V2' (FPP-hosted)
+  power.voltage:
+    url: https://web.archive.org/web/20180908183659/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+    retrieved: '2026-11-18'
+    notes: "'Input voltage 5, or 7-24V selectable'"

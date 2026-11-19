@@ -8,7 +8,9 @@ outputs:
   connector: Phoenix Screw
 power:
   voltage:
+    min: 5
     max: 12
+    # 5 V or 12 V, jumper-selectable
 diy_or_ots: OTS
 images:
   - file: '4-channel-differential-transmitter.webp'
@@ -43,3 +45,8 @@ related:
     source:
       url: https://www.wizardofwire.com/wp-content/uploads/2020/10/Data-to-Diff-2-pdf.jpg
       retrieved: '2026-11-18'
+sources:
+  power.voltage:
+    url: https://www.wizardofwire.com/wp-content/uploads/2020/10/Data-to-Diff-pdf.jpg
+    retrieved: '2026-11-18'
+    notes: "'5V or 12V selectable with jumper'"

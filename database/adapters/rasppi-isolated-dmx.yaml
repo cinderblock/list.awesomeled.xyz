@@ -1,6 +1,6 @@
 name: RaspPi Isolated DMX
 status: active
-creator: Arjan van Vught
+creator: BitWizard
 notes: Isolated DMX-512 interface for Raspberry Pi - no pixel outputs
 outputs:
   auxiliary:
@@ -96,3 +96,7 @@ sources:
     url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
     retrieved: '2026-11-18'
     notes: "BitWizard product page; OLA: 'This normally allows you to use this with the OLA software on the raspberry pi to work with DMX hardware.' (RX not implemented in OLA)"
+  creator:
+    url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+    retrieved: '2026-11-18'
+    notes: "'Designed and developed in cooperation with Arjan van Vught'"

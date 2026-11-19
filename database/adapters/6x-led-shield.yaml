@@ -15,7 +15,7 @@ images:
     credit: Evil Genius Labs
 links:
   product: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
-parent: Wemos Dx Mini (ESP32/ESP8266)
+parent: Wemos D1 Mini / D1 Mini Pro (ESP8266)
 price: 13.95
 price_source:
   notes: OSH Park shared project by the creator (v1.4); 3 bare PCBs (OSH Park's minimum order), parts not included. The Tindie listing is retired, sold out since 2021-04-03
@@ -46,4 +46,7 @@ sources:
     notes: maker's own open-source example firmware ('parallel' branch); also the Tindie 'Source Code' link
   software.works_with:
     url: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
+    retrieved: '2026-11-18'
+  parent:
+    url: https://www.tindie.com/products/16255/
     retrieved: '2026-11-18'

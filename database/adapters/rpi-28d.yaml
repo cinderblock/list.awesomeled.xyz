@@ -69,9 +69,9 @@ software:
     - xLights
 sources:
   status:
-    url: https://www.hansonelectronics.com.au/product/rpi-28d/
+    url: http://www.hansonelectronics.com.au/product/rpi-28d/
     retrieved: '2026-11-18'
-    notes: '"This product has been superseded by" the rPI-28D+; category Obsolete, out of stock'
+    notes: "'superseded by RPi-28D+'"
   software.firmware:
     - url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
       retrieved: '2026-11-18'

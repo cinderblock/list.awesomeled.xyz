@@ -15,7 +15,7 @@ images:
     credit: Evil Genius Labs
 links:
   product: https://www.tindie.com/products/19174/
-parent: Wemos Dx Mini (ESP32/ESP8266)
+parent: Wemos D1 Mini / D1 Mini Pro (ESP8266)
 price: 16
 price_source:
   notes: Last list price on the retired listing (sold out since 2021-07-25), partially assembled (PCB + SMD parts, no Wemos). The bare PCB is still an OSH Park shared project (dNnNjJRk)
@@ -50,5 +50,8 @@ sources:
     retrieved: '2026-11-18'
     notes: "'Specs and Docs' > Source Code link (maker's own example firmware, 'parallel' branch)"
   software.works_with:
+    url: https://www.tindie.com/products/19174/
+    retrieved: '2026-11-18'
+  parent:
     url: https://www.tindie.com/products/19174/
     retrieved: '2026-11-18'

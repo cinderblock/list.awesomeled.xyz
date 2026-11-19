@@ -18,7 +18,7 @@ images:
     credit: Kulp Lights
 links:
   product: https://kulplights.com/product/f8-pb/
-parent: BeagleBone
+parent: PocketBeagle
 price: 86
 price_source:
   notes: Last list price (archived capture; out of stock then)
@@ -59,3 +59,7 @@ sources:
     - url: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
       retrieved: '2026-11-18'
       notes: Kulp product page, last Wayback capture 2022-01-23
+  parent:
+    url: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
+    retrieved: '2026-11-18'
+    notes: "'The F8-PB is a cape for the PocketBeagle'"

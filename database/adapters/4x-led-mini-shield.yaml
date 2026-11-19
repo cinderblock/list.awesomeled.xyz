@@ -15,7 +15,7 @@ images:
     credit: Evil Genius Labs
 links:
   product: https://www.evilgeniuslabs.org/mini-wifi-led-controller
-parent: Wemos Dx Mini (ESP32/ESP8266)
+parent: Wemos D1 Mini / D1 Mini Pro (ESP8266)
 price: 5.55
 price_source:
   notes: OSH Park shared project by the creator; 3 bare PCBs (OSH Park's minimum order), parts not included. The Tindie listing is retired, sold out since 2021-04-16
@@ -42,3 +42,7 @@ sources:
     url: https://www.tindie.com/products/9723/
     retrieved: '2026-11-18'
     notes: Tindie description (same sentence on the maker docs page https://www.evilgeniuslabs.org/mini-wifi-led-controller)
+  parent:
+    url: https://www.evilgeniuslabs.org/mini-wifi-led-controller
+    retrieved: '2026-11-18'
+    notes: "'shield/breakout for the Wemos D1 Mini (and D1 Mini Pro) ESP8266 board'"

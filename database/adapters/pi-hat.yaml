@@ -4,6 +4,8 @@ creator:
   name: Microcyb
   url: http://microcyb.com/
 notes: Phoenix Screw
+outputs:
+  count: 2
 dead_links:
   - url: https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
     archive: https://web.archive.org/web/20250716105223/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
@@ -13,7 +15,7 @@ images:
     source: https://web.archive.org/web/20220717054556/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
     credit: Microcyb
 links: {}
-parent: Yes
+parent: Raspberry Pi Zero / Zero W (also Pi 3, Pi 4)
 price: 28.99
 price_source:
   notes: Last list price of Microcyb's "Raspberry Pi Pixel HAT Controller Dual Output 5v - 12v" (archived capture, out of stock then; $19.99 in 2022-2023)
@@ -62,3 +64,11 @@ sources:
   software.works_with:
     url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
     retrieved: '2026-11-18'
+  parent:
+    url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
+    retrieved: '2026-11-18'
+    notes: "'Compatible with RPI 3, RPI Zero, and RPI 4 models'"
+  outputs.count:
+    url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
+    retrieved: '2026-11-18'
+    notes: dual pixel outputs

@@ -1,7 +1,7 @@
 name: ESP Pixnode
 status: discontinued
 outputs:
-  count: 6
+  count: 1
   clocked: false
 power:
   voltage:
@@ -44,3 +44,7 @@ sources:
     url: https://www.dropbox.com/s/t0p88c1wb4f22u8/espixnode.pdf?dl=0
     retrieved: '2026-11-18'
     notes: ESPixNode Version 1.0 User Setup Guide (PDF linked as 'Quick setup guide' from the maker's product page), Overview section
+  outputs.count:
+    url: https://web.archive.org/web/20210123104718/https://jboards.ecwid.com/ESPixNode-p127558674
+    retrieved: '2026-11-18'
+    notes: one '5A fused output'

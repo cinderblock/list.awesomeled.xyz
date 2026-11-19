@@ -3,7 +3,7 @@ status: active
 creator: Generic
 notes: Pixel data duplicated to 8 output channels
 outputs:
-  count: 8
+  count: 4
   clocked: selectable
   connector: Phoenix Screw
 power:
@@ -12,7 +12,6 @@ power:
 diy_or_ots: OTS
 links:
   product: https://www.superlightingled.com/4ch-spi-signal-amplifier-sp901e-for-programmable-led-light-strips-p-3125.html
-parent: 8 Ch Pixel data distribution
 price: 21.98
 price_source:
   notes: Qty 1-4; $21.32 at 5+, $18.68 at 20+
@@ -25,3 +24,7 @@ sources:
     url: https://www.superlightingled.com/4ch-spi-signal-amplifier-sp901e-for-programmable-led-light-strips-p-3125.html
     retrieved: '2026-11-18'
     notes: 'in stock, $21.98'
+  outputs.count:
+    url: https://www.superlightingled.com/dc524v-4-channel-spi-signal-output-data-signal-sp901e-amplifier-for-programmable-dream-color-6803-1903-1809-1812-2811-ic-led-light-strips-p-3125.html
+    retrieved: '2026-11-18'
+    notes: "'Output: 4 SPI signal'"
