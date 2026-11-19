@@ -117,6 +117,21 @@ It also has a little tool to help download product images; for adding one
 with its attribution, use `bun run add-image` (see
 [CONTRIBUTING.md](CONTRIBUTING.md#adding-images)).
 
+### Spreadsheet Parity Check
+
+The database started as a copy of the original Google Sheet.
+To check that nothing in the sheet is missing here, run:
+
+```bash
+bun run sheet-parity
+```
+
+It downloads the sheet's public export (read-only; no login needed) and compares every cell, hyperlink, cell note and highlight with the YAML entries.
+The result goes to [plans/spreadsheet-parity/report.md](plans/spreadsheet-parity/report.md), with each tab's column mapping and every open difference.
+Differences that were reviewed and deliberately not migrated are listed, with the reason, in `scripts/sheet-parity/acks.yaml`; the audit itself is described in [plans/spreadsheet-parity.md](plans/spreadsheet-parity.md).
+
+<!-- cspell:ignore acks -->
+
 ### Linting, Formatting, and Spell Checking
 
 We use code to enforce consistent formatting as much as possible.
