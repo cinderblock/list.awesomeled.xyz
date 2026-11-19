@@ -111,6 +111,7 @@ export const IGNORED_COMMITS = new Set([
   '2547ac35f618d4ddd7eae8166945047748cec2b8', // data-freshness: EspArtStick/Lightwalls links (2)
   '193f50df5a792fef720824377dae122ef9a073f8', // data-freshness: K16000S Amazon link (1)
   '0c6abd22bfcb554bf555f021fc5e832d806637c1', // data-freshness: PiCap/SceneX evidence pages archived (2)
+  '5f4241dce8033437c6b06b7ca9fb82faacffccf9', // data-freshness: NS108E ref re-pointed for the NS108 merge (1)
 ]);
 
 /**
