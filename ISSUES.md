@@ -158,9 +158,5 @@ Seen while verifying links (not changed; prices are stream 6's):
 - `controllers/spi-led-controller`: one 1024-pixel model at EUR 170 ex VAT,
   not the 1024/2048/4096 tiers.
   <https://www.ledstripstudio.com/shop/product/spi-led-controller/>
-- `controllers/blink-tape-controller`: $17.99 (YAML 16).
-  <https://shop.blinkinlabs.com/products/blinkytape-control-board>
-- `controllers/dmx-core`: $999 for the 4.3-inch unit (YAML 799).
-  <https://dmxcore.com/dmx-core-100>
 - `pattern-drivers/protopixel-create`: EUR 149 per month subscription
   (YAML 176). <http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing>
