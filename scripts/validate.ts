@@ -17,6 +17,8 @@ import { join } from 'path';
 import { parse, parseAllDocuments } from 'yaml';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import type { BaseEntry } from '../app/lib/types';
+import { buildRelationGraph, type DanglingRef } from '../app/lib/relations';
 
 const DB_DIR = 'database';
 const SCHEMA_DIR = 'database/_schema';
@@ -55,58 +57,25 @@ const STALE_EXAMPLES = new Set([
 ]);
 
 /**
- * Cross-reference checks (beyond what JSON Schema can express):
- *  - `related[].ref` items ("<category>/<slug>") must point at an existing entry.
- *  - Legacy `related_<category>` arrays (e.g. related_pixel_ics) hold slugs in
- *    the category derived from the field name; each slug must exist there.
- *  - `outputs.connector.ref` (controllers) holds a bare slug into connectors.
- * Returns human-readable problem strings (empty array = ok).
+ * Parse every entry in every category up front: cross-references are checked
+ * against the whole database even when validating a single category.
+ * Unparseable files map to their error message instead of an entry.
  */
-function checkCrossRefs(data: Record<string, unknown>, slugs: Map<string, Set<string>>): string[] {
-  const problems: string[] = [];
-
-  const connector = (data.outputs as Record<string, unknown> | undefined)?.connector;
-  if (connector && typeof connector === 'object') {
-    const ref = (connector as Record<string, unknown>).ref;
-    if (typeof ref === 'string' && !slugs.get('connectors')?.has(ref)) {
-      problems.push(`outputs.connector.ref "${ref}": no such entry in connectors`);
-    }
-  }
-
-  if (Array.isArray(data.related)) {
-    for (const item of data.related) {
-      const ref = item?.ref;
-      if (typeof ref !== 'string') continue;
-      const [category, slug] = ref.split('/');
-      if (!category || !slug || !slugs.has(category)) {
-        problems.push(`related ref "${ref}": unknown category`);
-      } else if (!slugs.get(category)!.has(slug)) {
-        problems.push(`related ref "${ref}": no such entry`);
+function loadAll(folders: string[]): Map<string, Map<string, BaseEntry | Error>> {
+  const all = new Map<string, Map<string, BaseEntry | Error>>();
+  for (const folder of folders) {
+    const files = new Map<string, BaseEntry | Error>();
+    for (const file of readdirSync(join(DB_DIR, folder))) {
+      if (!file.endsWith('.yaml') || file.startsWith('_')) continue;
+      try {
+        files.set(file, parse(readFileSync(join(DB_DIR, folder, file), 'utf-8')));
+      } catch (e) {
+        files.set(file, e instanceof Error ? e : new Error('parse error'));
       }
     }
+    all.set(folder, files);
   }
-
-  for (const [field, value] of Object.entries(data)) {
-    if (!field.startsWith('related_') || !Array.isArray(value)) continue;
-    const category = field.slice('related_'.length).replace(/_/g, '-');
-    if (!slugs.has(category)) continue; // not a category-shaped field
-    for (const slug of value) {
-      if (typeof slug !== 'string') continue;
-      if (!slugs.get(category)!.has(slug)) {
-        problems.push(`${field} "${slug}": no such entry in ${category}`);
-      }
-    }
-  }
-
-  return problems;
-}
-
-function listEntrySlugs(folder: string): Set<string> {
-  return new Set(
-    readdirSync(join(DB_DIR, folder))
-      .filter((f) => f.endsWith('.yaml') && !f.startsWith('_'))
-      .map((f) => f.replace(/\.yaml$/, ''))
-  );
+  return all;
 }
 
 async function main() {
@@ -126,10 +95,28 @@ async function main() {
   const folders = readdirSync(DB_DIR).filter(
     (f) => !f.startsWith('_') && existsSync(join(DB_DIR, f, '.')) && FOLDER_SCHEMAS[f]
   );
+  const all = loadAll(folders);
 
-  // Slugs across ALL categories (even with a category filter) so cross-category
-  // refs can always be resolved.
-  const slugs = new Map<string, Set<string>>(folders.map((f) => [f, listEntrySlugs(f)]));
+  // Cross-reference checks beyond what JSON Schema can express, using the same
+  // relationship graph the site renders (app/lib/relations.ts): every
+  // `related[].ref`, legacy `related_<category>` slug and
+  // `outputs.connector.ref` must point at an existing entry.
+  const db = new Map<string, BaseEntry[]>();
+  for (const [folder, files] of all) {
+    const entries: BaseEntry[] = [];
+    for (const [file, data] of files) {
+      if (data && !(data instanceof Error) && typeof data === 'object') {
+        entries.push({ ...data, id: file.replace(/\.yaml$/, '') });
+      }
+    }
+    db.set(folder, entries);
+  }
+  const graph = buildRelationGraph(db);
+  const danglingByEntry = new Map<string, DanglingRef[]>();
+  for (const d of graph.dangling) {
+    if (!danglingByEntry.has(d.from)) danglingByEntry.set(d.from, []);
+    danglingByEntry.get(d.from)!.push(d);
+  }
 
   for (const folder of folders) {
     if (only && folder !== only) continue;
@@ -137,36 +124,32 @@ async function main() {
     if (!existsSync(schemaPath)) continue;
 
     const validate = ajv.compile(JSON.parse(readFileSync(schemaPath, 'utf-8')));
-    const files = readdirSync(join(DB_DIR, folder)).filter(
-      (f) => f.endsWith('.yaml') && !f.startsWith('_')
-    );
+    const files = all.get(folder)!;
 
     let folderValid = 0;
-    for (const file of files) {
+    for (const [file, data] of files) {
       total++;
-      const path = join(DB_DIR, folder, file);
-      try {
-        const data = parse(readFileSync(path, 'utf-8'));
-        const refProblems = data ? checkCrossRefs(data, slugs) : [];
-        if (validate(data) && refProblems.length === 0) {
-          valid++;
-          folderValid++;
-        } else {
-          errored++;
-          console.log(`  ✗ ${folder}/${file}`);
-          for (const err of validate.errors ?? []) {
-            console.log(`      ${err.instancePath || '/'}: ${err.message}`);
-          }
-          for (const problem of refProblems) {
-            console.log(`      ${problem}`);
-          }
-        }
-      } catch (e) {
+      if (data instanceof Error) {
         errored++;
-        console.log(`  ✗ ${folder}/${file}: ${e instanceof Error ? e.message : 'parse error'}`);
+        console.log(`  ✗ ${folder}/${file}: ${data.message}`);
+        continue;
+      }
+      const refProblems = danglingByEntry.get(`${folder}/${file.replace(/\.yaml$/, '')}`) ?? [];
+      if (validate(data) && refProblems.length === 0) {
+        valid++;
+        folderValid++;
+      } else {
+        errored++;
+        console.log(`  ✗ ${folder}/${file}`);
+        for (const err of validate.errors ?? []) {
+          console.log(`      ${err.instancePath || '/'}: ${err.message}`);
+        }
+        for (const p of refProblems) {
+          console.log(`      ${p.field} "${p.ref}": ${p.problem}`);
+        }
       }
     }
-    console.log(`${folder}: ${folderValid}/${files.length} valid`);
+    console.log(`${folder}: ${folderValid}/${files.size} valid`);
 
     const examplePath = join(DB_DIR, folder, '_example.yaml');
     if (existsSync(examplePath) && !STALE_EXAMPLES.has(folder)) {
@@ -188,6 +171,27 @@ async function main() {
           }
         }
       });
+    }
+  }
+
+  // Names in link lists (outputs.protocols, software.firmware, …) that match no
+  // entry. Not an error — vendors list parts this database doesn't have yet —
+  // but each one is a spelling to normalize, an `aliases` entry to add, or a
+  // missing entry. scripts/cross-link-stats.ts has the full picture.
+  const unresolved = graph.unresolved.filter((u) => !only || u.from.startsWith(`${only}/`));
+  if (unresolved.length) {
+    const byField = new Map<string, Map<string, number>>();
+    for (const u of unresolved) {
+      if (!byField.has(u.field)) byField.set(u.field, new Map());
+      const names = byField.get(u.field)!;
+      names.set(u.name, (names.get(u.name) ?? 0) + 1);
+    }
+    console.log('\nUnresolved link names (warnings; add an alias or entry to link them):');
+    for (const [field, names] of byField) {
+      const list = [...names]
+        .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .map(([n, c]) => (c > 1 ? `${n} ×${c}` : n));
+      console.log(`  ${field}: ${list.join(', ')}`);
     }
   }
 

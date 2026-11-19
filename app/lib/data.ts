@@ -3,9 +3,10 @@ import { existsSync, readdirSync, readFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { parse } from 'yaml';
-import type { BaseEntry, Category, RelatedItem, ResolvedRelatedItem } from './types';
+import type { BaseEntry, Category } from './types';
 import { CATEGORIES } from './types';
 import { parseQuantity } from './quantity';
+import { buildRelationGraph, type RelationGraph } from './relations';
 
 // Cache for git timestamps (file path -> Date)
 let gitTimestampCache: Map<string, Date> | null = null;
@@ -263,117 +264,17 @@ export function loadEntry(categoryId: string, entryId: string): BaseEntry | null
   }
 }
 
-/**
- * Forward cross-reference relationships declared in the data: a `field` on
- * entries in the `source` category holds ids of entries in the `target`
- * category. These are the single source of truth — the reverse ("used by")
- * direction is derived at render time so links stay bidirectional without
- * duplicating data on both ends.
- */
-const CROSS_REF_RELATIONSHIPS: { source: string; field: string; target: string }[] = [
-  { source: 'drive-libraries', field: 'related_pixel_ics', target: 'pixel-ics' },
-  { source: 'adapters', field: 'related_connectors', target: 'connectors' },
-  { source: 'adapters', field: 'related_microboards', target: 'microboards' },
-  { source: 'pixel-decoders', field: 'related_connectors', target: 'connectors' },
-];
+// The cross-category relationship graph (relations.ts), built from every
+// category at once. Cached for production builds like the category data; in
+// dev it's rebuilt per request so YAML edits show up on refresh.
+let relationGraphCache: RelationGraph | null = null;
 
-export interface ReverseLinkGroup {
-  /** Source category id (e.g. "drive-libraries") */
-  category: string;
-  /** Source category display name (e.g. "Drive Libraries") */
-  categoryName: string;
-  /** Source entries that reference this entry, by id + name */
-  items: { id: string; name: string }[];
-}
-
-/**
- * Entries in other categories that reference this entry through a related_*
- * field. Powers the "Used by …" sections on detail pages.
- */
-export function getReverseLinks(categoryId: string, entryId: string): ReverseLinkGroup[] {
-  const groups: ReverseLinkGroup[] = [];
-  for (const rel of CROSS_REF_RELATIONSHIPS) {
-    if (rel.target !== categoryId) continue;
-    const items = loadCategoryData(rel.source)
-      .filter((e) => {
-        const v = (e as Record<string, unknown>)[rel.field];
-        return Array.isArray(v) && v.map(String).includes(entryId);
-      })
-      .map((e) => ({ id: String(e.id), name: e.name }))
-      .sort((a, b) => a.name.localeCompare(b.name));
-    if (items.length) {
-      groups.push({
-        category: rel.source,
-        categoryName: getCategoryById(rel.source)?.name ?? rel.source,
-        items,
-      });
-    }
-  }
-  return groups;
-}
-
-/**
- * Resolve an entry's `related` array for display: internal `ref` items get
- * their display name from the target entry; external items pass through.
- * Items that satisfy neither shape (no ref, no name) are dropped.
- */
-export function resolveRelated(entry: BaseEntry): ResolvedRelatedItem[] {
-  if (!Array.isArray(entry.related)) return [];
-  const out: ResolvedRelatedItem[] = [];
-  for (const item of entry.related) {
-    if (!item || typeof item !== 'object' || !item.type) continue;
-    if (item.ref) {
-      const [category, id] = item.ref.split('/');
-      const target = category && id ? loadEntry(category, id) : null;
-      out.push({
-        type: item.type,
-        category,
-        id,
-        name: item.name ?? target?.name ?? id ?? item.ref,
-        notes: item.notes,
-      });
-    } else if (item.name) {
-      out.push({ type: item.type, name: item.name, url: item.url, notes: item.notes });
-    }
-  }
-  return out;
-}
-
-export interface RelatedBacklink {
-  /** Relationship type as declared on the source entry (the forward direction) */
-  type: RelatedItem['type'];
-  category: string;
-  id: string;
-  name: string;
-  notes?: string;
-}
-
-/**
- * Entries anywhere in the database whose `related` array points at this entry.
- * Relationships are declared on one side only (see common.json#/definitions/related);
- * this derives the reverse direction so detail pages stay bidirectional.
- */
-export function getRelatedBacklinks(categoryId: string, entryId: string): RelatedBacklink[] {
-  const ref = `${categoryId}/${entryId}`;
-  const out: RelatedBacklink[] = [];
-  for (const category of CATEGORIES) {
-    for (const entry of loadCategoryData(category.id)) {
-      if (!Array.isArray(entry.related)) continue;
-      for (const item of entry.related) {
-        if (item && typeof item === 'object' && item.ref === ref) {
-          out.push({
-            type: item.type,
-            category: category.id,
-            id: String(entry.id),
-            name: entry.name,
-            notes: item.notes,
-          });
-        }
-      }
-    }
-  }
-  out.sort((a, b) => a.name.localeCompare(b.name));
-  return out;
+export function getRelationGraph(): RelationGraph {
+  if (relationGraphCache && process.env.NODE_ENV === 'production') return relationGraphCache;
+  const db = new Map<string, BaseEntry[]>();
+  for (const category of CATEGORIES) db.set(category.id, loadCategoryData(category.id));
+  relationGraphCache = buildRelationGraph(db);
+  return relationGraphCache;
 }
 
 /**

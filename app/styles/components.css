@@ -376,6 +376,69 @@ a.entry-image-credit:hover {
 .entry-related-link:hover {
   background: var(--category-bg);
 }
+/* Names break only between words, never mid-name (.detail-value allows
+   breaking anywhere for long URLs) */
+.entry-related-link {
+  overflow-wrap: normal;
+}
+/* Link rows stack label-over-pills on narrow screens */
+@media (max-width: 640px) {
+  .detail-grid--links {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .detail-grid--links .detail-value {
+    margin-bottom: 0.5rem;
+  }
+}
+/* A name the database has no entry for (yet): plain text, not a link */
+.entry-related-link--plain {
+  border-style: dashed;
+  background: transparent;
+  color: var(--muted-foreground);
+}
+.entry-related-link--plain:hover {
+  background: transparent;
+}
+/* A link plus visible context ("as WS2812B", curated notes) */
+.entry-related-item {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.4rem;
+  max-width: 100%;
+}
+.entry-related-note {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+.entry-related-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.entry-related-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.entry-related-group-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+}
+.entry-related-more {
+  flex-basis: 100%;
+}
+.entry-related-more > summary {
+  cursor: pointer;
+  width: fit-content;
+  font-size: 0.8125rem;
+  color: var(--category-primary);
+  margin-bottom: 0.4rem;
+}
 
 .image-modal {
   position: fixed;

@@ -1,13 +1,7 @@
 import type { Route } from './+types/entry';
 import { data, Link, useNavigate } from 'react-router';
-import {
-  getCategoryById,
-  loadEntry,
-  loadCategoryData,
-  getReverseLinks,
-  resolveRelated,
-  getRelatedBacklinks,
-} from '~/lib/data';
+import { getCategoryById, loadEntry, loadCategoryData, getRelationGraph } from '~/lib/data';
+import { linksForEntry, inlineNameLinks, type InlineNameLinks } from '~/lib/relations';
 import { LocalDate } from '~/components/ui/LocalDate';
 import { getColumnsForCategory } from '~/lib/columns';
 import { parsePrice, formatPriceText } from '~/lib/currency';
@@ -33,6 +27,7 @@ import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
 import { FeatureBadges, ValueBadges } from '~/components/ui/FeatureBadges';
 import { Tooltip } from '~/components/ui/Tooltip';
+import { EntryLinkRows, NameLinkList } from '~/components/ui/EntryLinks';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -68,9 +63,12 @@ export async function loader({ params }: Route.LoaderArgs) {
   if (!category) throw data(null, { status: 404 });
   const entry = loadEntry(params.category, params.entry);
   if (!entry) throw data(null, { status: 404 });
-  const reverseLinks = getReverseLinks(params.category, params.entry);
-  const relatedProducts = resolveRelated(entry);
-  const relatedBacklinks = getRelatedBacklinks(params.category, params.entry);
+  // Cross-category links (relations.ts): everything that points here or that
+  // this entry's `related` declares, plus its own name-list fields resolved to
+  // entries so they render as links in place.
+  const graph = getRelationGraph();
+  const links = linksForEntry(graph, `${params.category}/${params.entry}`, entry);
+  const nameLinks = inlineNameLinks(graph, params.category, entry);
   // Siblings (name order) for j/k prev/next navigation and its hint
   const siblings = loadCategoryData(params.category).map((e) => ({
     id: String(e.id),
@@ -81,17 +79,15 @@ export async function loader({ params }: Route.LoaderArgs) {
   const refSlugs = new Set<string>();
   collectConnectorRefs(entry, refSlugs);
   const connectorNames: Record<string, string> = {};
-  if (refSlugs.size > 0) {
-    for (const c of loadCategoryData('connectors')) {
-      if (refSlugs.has(String(c.id))) connectorNames[String(c.id)] = c.name;
-    }
+  for (const slug of refSlugs) {
+    const name = graph.names.get(`connectors/${slug}`);
+    if (name) connectorNames[slug] = name;
   }
   return {
     category,
     entry,
-    reverseLinks,
-    relatedProducts,
-    relatedBacklinks,
+    links,
+    nameLinks,
     siblings,
     connectorNames,
   };
@@ -251,10 +247,6 @@ const SECTION_LABELS: Record<string, string> = {
   datasheet: 'Datasheet',
   technical_notes: 'Technical Notes',
   datasheet_discrepancies: 'Datasheet Discrepancies',
-  related_pixel_ics: 'Related Pixel ICs',
-  related_connectors: 'Related Connectors',
-  related_microboards: 'Related Microboards',
-  related_adapters: 'Related Adapters',
 };
 
 // Preferred section order; unknown groups are appended after.
@@ -279,38 +271,6 @@ const SECTION_ORDER = [
   'datasheet',
 ];
 
-// related_<x> field -> target category id
-const RELATED_MAP: Record<string, string> = {
-  related_pixel_ics: 'pixel-ics',
-  related_connectors: 'connectors',
-  related_microboards: 'microboards',
-  related_adapters: 'adapters',
-};
-
-// `related[].type` -> row label, from the declaring entry's point of view…
-const RELATED_FORWARD_LABELS: Record<string, string> = {
-  replacement: 'Replaced by',
-  predecessor: 'Preceded by',
-  variant: 'Variants',
-  accessory: 'Accessories',
-  related: 'Related',
-};
-// …and from the pointed-at entry's point of view (derived reverse direction).
-const RELATED_REVERSE_LABELS: Record<string, string> = {
-  replacement: 'Replaces',
-  predecessor: 'Succeeded by',
-  variant: 'Variants',
-  accessory: 'Accessory for',
-  related: 'Related',
-};
-
-interface RelatedRow {
-  name: string;
-  to?: string;
-  url?: string;
-  notes?: string;
-}
-
 // Keys handled specially (not rendered as Overview rows or group cards)
 const SKIP_KEYS = new Set([
   'id',
@@ -321,7 +281,7 @@ const SKIP_KEYS = new Set([
   'creator',
   'status',
   'links',
-  'related', // rendered as the Related Products section
+  'related', // rendered as the Works with / Related products sections
   'dead_links', // applied to the links they describe, plus a hero callout
   'price_source', // shown as the "as of" line under the price
 ]);
@@ -343,8 +303,9 @@ function isGroup(v: unknown): v is Record<string, unknown> {
 const emptySubscribe = () => () => {};
 
 export default function EntryPage({ loaderData }: Route.ComponentProps) {
-  const { category, entry, reverseLinks, relatedProducts, relatedBacklinks, siblings } = loaderData;
+  const { category, entry, links: entryLinks, siblings } = loaderData;
   const connectorNames = loaderData.connectorNames ?? {};
+  const nameLinks = loaderData.nameLinks ?? {};
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
   const deadLinks = getDeadLinks(entry);
@@ -434,7 +395,6 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   // Partition the entry into overview scalars, group cards, notes, and related links
   const overview: [string, unknown][] = [];
   const groups: [string, Record<string, unknown>][] = [];
-  const related: [string, string[]][] = [];
   let notes: string | null = null;
   const lists: [string, string[]][] = []; // technical_notes, datasheet_discrepancies
   let variants: Record<string, unknown>[] | null = null;
@@ -458,10 +418,8 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
       variants = value as Record<string, unknown>[];
       continue;
     }
-    if (key in RELATED_MAP && Array.isArray(value)) {
-      related.push([key, value.map(String)]);
-      continue;
-    }
+    // Legacy related_<category> slug arrays render via the relationship graph
+    if (key.startsWith('related_')) continue;
     if ((key === 'technical_notes' || key === 'datasheet_discrepancies') && Array.isArray(value)) {
       lists.push([humanize(key), value.map(String)]);
       continue;
@@ -478,28 +436,6 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
     const bi = SECTION_ORDER.indexOf(b[0]);
     return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
   });
-
-  // Group forward `related` items and derived backlinks into labeled rows
-  const relatedRows = new Map<string, RelatedRow[]>();
-  const addRelatedRow = (label: string, row: RelatedRow) => {
-    if (!relatedRows.has(label)) relatedRows.set(label, []);
-    relatedRows.get(label)!.push(row);
-  };
-  for (const item of relatedProducts) {
-    addRelatedRow(RELATED_FORWARD_LABELS[item.type] ?? item.type, {
-      name: item.name,
-      to: item.category && item.id ? `/${item.category}/${item.id}` : undefined,
-      url: item.url,
-      notes: item.notes,
-    });
-  }
-  for (const item of relatedBacklinks) {
-    addRelatedRow(RELATED_REVERSE_LABELS[item.type] ?? item.type, {
-      name: item.name,
-      to: `/${item.category}/${item.id}`,
-      notes: item.notes,
-    });
-  }
 
   return (
     <PageWrapper category={category}>
@@ -618,6 +554,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               filterableFields={filterableFields}
               connectorNames={connectorNames}
               priceSource={getPriceSource(entry)}
+              nameLinks={nameLinks}
             />
           </Section>
         )}
@@ -629,6 +566,8 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               categoryPath={category.path}
               filterableFields={filterableFields}
               connectorNames={connectorNames}
+              nameLinks={nameLinks}
+              pathPrefix={key}
             />
           </Section>
         ))}
@@ -649,69 +588,17 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           </Section>
         )}
 
-        {relatedRows.size > 0 && (
-          <Section title="Related Products">
-            <dl className="detail-grid">
-              {[...relatedRows.entries()].map(([label, rows]) => (
-                <div key={label} className="detail-row">
-                  <dt className="detail-key">{label}</dt>
-                  <dd className="detail-value">
-                    <div className="entry-related">
-                      {rows.map((row, i) => (
-                        <Tooltip key={i} content={row.notes}>
-                          {row.to ? (
-                            <Link className="entry-related-link" to={row.to}>
-                              {row.name}
-                            </Link>
-                          ) : row.url ? (
-                            <a
-                              className="entry-related-link"
-                              href={row.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {row.name}
-                            </a>
-                          ) : (
-                            <span className="entry-related-link">{row.name}</span>
-                          )}
-                        </Tooltip>
-                      ))}
-                    </div>
-                  </dd>
-                </div>
-              ))}
-            </dl>
+        {entryLinks.worksWith.length > 0 && (
+          <Section title="Works with" wide>
+            <EntryLinkRows rows={entryLinks.worksWith} />
           </Section>
         )}
 
-        {related.map(([key, ids]) => (
-          <Section key={key} title={humanize(key)}>
-            <div className="entry-related">
-              {ids.map((id) => (
-                <Link key={id} className="entry-related-link" to={`/${RELATED_MAP[key]}/${id}`}>
-                  {id}
-                </Link>
-              ))}
-            </div>
+        {entryLinks.family.length > 0 && (
+          <Section title="Related products" wide>
+            <EntryLinkRows rows={entryLinks.family} />
           </Section>
-        ))}
-
-        {reverseLinks.map((group) => (
-          <Section key={group.category} title={`Used by ${group.categoryName}`}>
-            <div className="entry-related">
-              {group.items.map((item) => (
-                <Link
-                  key={item.id}
-                  className="entry-related-link"
-                  to={`/${group.category}/${item.id}`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </Section>
-        ))}
+        )}
 
         {notes && (
           <Section title="Notes" wide>
@@ -769,6 +656,8 @@ function KeyValueGrid({
   filterableFields,
   connectorNames = {},
   priceSource,
+  nameLinks = {},
+  pathPrefix,
 }: {
   entries: [string, unknown][];
   categoryPath: string;
@@ -776,7 +665,11 @@ function KeyValueGrid({
   connectorNames?: Record<string, string>;
   /** Provenance for a top-level `price` row (undefined = not a price grid) */
   priceSource?: ReturnType<typeof getPriceSource>;
+  nameLinks?: InlineNameLinks;
+  /** Dotted path of the group these entries sit in ("outputs"), for nameLinks lookup */
+  pathPrefix?: string;
 }) {
+  const ctx: FormatContext = { categoryPath, filterableFields, connectorNames, nameLinks };
   return (
     <dl className="detail-grid">
       {entries.map(([key, value]) => (
@@ -786,7 +679,7 @@ function KeyValueGrid({
             {key === 'price' && priceSource !== undefined ? (
               <PriceDetail value={value} source={priceSource} />
             ) : (
-              formatValue(key, value, categoryPath, filterableFields, connectorNames)
+              formatValue(key, value, ctx, pathPrefix ? `${pathPrefix}.${key}` : key)
             )}
           </dd>
         </div>
@@ -875,14 +768,31 @@ function CreatorLine({
   );
 }
 
+interface FormatContext {
+  categoryPath: string;
+  filterableFields: Set<string>;
+  connectorNames: Record<string, string>;
+  nameLinks: InlineNameLinks;
+}
+
 function formatValue(
   key: string,
   value: unknown,
-  categoryPath: string,
-  filterableFields: Set<string>,
-  connectorNames: Record<string, string> = {}
+  ctx: FormatContext,
+  path: string = key
 ): React.ReactNode {
+  const { categoryPath, filterableFields, connectorNames } = ctx;
   if (value === null || value === undefined) return <span className="data-table-null">-</span>;
+
+  // Name-list link fields (outputs.protocols, software.firmware, …): names
+  // that match an entry become links to it, in place
+  const linked = ctx.nameLinks[path];
+  if (linked && (typeof value === 'string' || Array.isArray(value))) {
+    const names = (Array.isArray(value) ? value : [value]).filter(
+      (v): v is string => typeof v === 'string'
+    );
+    if (names.length) return <NameLinkList names={names} links={linked} />;
+  }
 
   if (Array.isArray(value)) {
     const hasObjects = value.some((v) => v && typeof v === 'object' && !(v instanceof Date));
@@ -890,9 +800,7 @@ function formatValue(
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {value.map((item, idx) => (
-            <div key={idx}>
-              {formatValue(key, item, categoryPath, filterableFields, connectorNames)}
-            </div>
+            <div key={idx}>{formatValue(key, item, ctx, path)}</div>
           ))}
         </div>
       );
@@ -957,7 +865,7 @@ function formatValue(
         {keys.map((k) => (
           <div key={k} className="detail-row">
             <dt className="detail-key">{k.replace(/_/g, ' ')}</dt>
-            <dd>{formatValue(k, obj[k], categoryPath, filterableFields, connectorNames)}</dd>
+            <dd>{formatValue(k, obj[k], ctx, `${path}.${k}`)}</dd>
           </div>
         ))}
       </dl>
