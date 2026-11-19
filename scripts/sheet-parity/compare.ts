@@ -1,3 +1,4 @@
+// cspell:ignore googlefinance advateklighting advateklights curpageloguid fbclid gatewayadapt microsd polyethelene raspberrypi sdcard segs srsltid utparam wlan
 /**
  * Cell-level comparison between a sheet cell and a YAML entry.
  *

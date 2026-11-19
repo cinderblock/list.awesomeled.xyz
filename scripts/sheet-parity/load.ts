@@ -1,3 +1,4 @@
+// cspell:ignore awesomeled
 /**
  * Loading for the sheet-parity audit: the sheet (public XLSX export, or a
  * local copy) and the YAML database, plus sheet-row <-> YAML-entry matching.

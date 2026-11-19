@@ -8,6 +8,9 @@ ignorePaths:
   - build/**
   - test-results/**
   - playwright-report/**
+  # Verbatim sheet text (typos and all) and the generated parity report
+  - plans/spreadsheet-parity/**
+  - scripts/sheet-parity/acks.yaml
 dictionaries:
   - en_US
   - filetypes

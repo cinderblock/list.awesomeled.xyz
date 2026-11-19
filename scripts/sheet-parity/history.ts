@@ -1,3 +1,4 @@
+// cspell:ignore cinderblock
 /**
  * Three-way context for the audit.
  *

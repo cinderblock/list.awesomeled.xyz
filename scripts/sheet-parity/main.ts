@@ -1,4 +1,5 @@
 #!/usr/bin/env bun
+// cspell:ignore acks
 /**
  * Spreadsheet parity audit: diff the original Google Sheet against the YAML
  * database, cell by cell, including cell notes, hyperlinks, and the sheet's

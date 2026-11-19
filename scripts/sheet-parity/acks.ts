@@ -1,3 +1,4 @@
+// cspell:ignore acks
 /**
  * Acknowledged differences: sheet values the audit looked at and decided not
  * to migrate (vandalism, values the YAML corrected by research, rows that

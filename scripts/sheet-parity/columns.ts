@@ -1,3 +1,4 @@
+// cspell:ignore auxilary guage intoduced panelmount retardent milliamps milliwatts singnal
 /**
  * Sheet column -> YAML field mapping, one list per tab, in sheet column order.
  *

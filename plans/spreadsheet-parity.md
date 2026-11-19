@@ -358,3 +358,5 @@ Cameron's side, in this order (the sheet is his; this stream never edits it):
   the git-excluded scratch scripts parked so the checks match CI.
 - Don't compare or restore controllers' interfaces from the sheet's
   Interface column (scrambled; see Findings).
+
+<!-- cspell:ignore EXMU googlefinance gledopto gunnerson hida repointing schardt acks autostash awesomeled buildout cinderblock commenters dispositioned heredocs untick workstream workstreams worktree worktrees xxzzzzzzz -->

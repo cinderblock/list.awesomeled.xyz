@@ -1,3 +1,4 @@
+// cspell:ignore cand cands milli
 /**
  * Sheet row <-> YAML entry pairing.
  *

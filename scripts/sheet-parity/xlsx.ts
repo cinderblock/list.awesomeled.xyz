@@ -1,3 +1,4 @@
+// cspell:ignore fmts rrggbb rels apos cxml
 /**
  * Minimal XLSX reader for the Google Sheets export of the original sheet.
  *

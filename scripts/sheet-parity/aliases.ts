@@ -1,3 +1,4 @@
+// cspell:ignore differntial polyethelene reciever endlightent
 /**
  * Sheet rows that can't be paired with their YAML entry automatically.
  *

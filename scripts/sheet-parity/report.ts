@@ -1,3 +1,4 @@
+// cspell:ignore acked
 /**
  * Markdown rendering of the parity results (plans/spreadsheet-parity/report.md).
  */
