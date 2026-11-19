@@ -1,4 +1,5 @@
 name: LC8823
+status: active
 color:
   brightness_bits: 8+5
   pwm_frequency: 27kHz
@@ -19,3 +20,8 @@ physical:
   packages:
     - '5050'
   pin_count: 6
+sources:
+  status:
+    url: https://www.addressable-led.com/Products/Fast-LED-Chip-LC8823.html
+    retrieved: '2026-11-18'
+    notes: 'Led-Color lists the LC8823 Fast LED Chip (inquiry, no price)'

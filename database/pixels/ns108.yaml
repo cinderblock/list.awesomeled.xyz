@@ -1,4 +1,5 @@
 name: NS108
+status: active
 release_year: 2018
 creator:
   name: Newstar LED Co.
@@ -17,11 +18,7 @@ data:
   pixel_size_bits: 64
   backup_line: false
 datasheet:
-  url: http://newstar-ledstrip.com/productshow848.html
-dead_links:
-  - url: http://newstar-ledstrip.com/productshow848.html
-    archive: https://web.archive.org/web/20220128020039/http://newstar-ledstrip.com/productshow848.html
-    checked: '2026-07-01'
+  url: http://newstar-ledstrip.com/productshow847.html
 electrical:
   led_voltage: 5V
   vcc_voltage: 5.1V
@@ -37,3 +34,8 @@ physical:
     - '3535'
     - '2020'
   pin_count: 6
+sources:
+  status:
+    url: http://newstar-ledstrip.com/productshow847.html
+    retrieved: '2026-11-18'
+    notes: "NS108 HD108 5050 RGB Pixel LED Chip listed in Newstar's Pixel LED Chip catalog (inquiry, no price)"

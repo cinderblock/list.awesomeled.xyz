@@ -1,4 +1,5 @@
 name: LC8808B
+status: active
 creator: Color
 notes: Very similar to the GS8208, the spec sheets are almost identical
 color:
@@ -25,3 +26,8 @@ physical:
   packages:
     - '5050'
   pin_count: 6
+sources:
+  status:
+    url: https://www.addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
+    retrieved: '2026-11-18'
+    notes: 'Led-Color lists the DC12V Pixel LED LC8808 (inquiry, no price); the LC8808B datasheet is on the same site'

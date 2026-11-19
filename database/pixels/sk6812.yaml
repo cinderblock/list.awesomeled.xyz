@@ -46,21 +46,26 @@ physical:
   pin_count: 4
 price:
   - qty: 5
-    price: 0.0892
+    price: 0.0908
     sku: SK6812
   - qty: 1000
-    price: 0.0518
+    price: 0.0528
     sku: SK6812
   - qty: 5000
-    price: 0.0438
+    price: 0.0446
     sku: SK6812
 price_source:
   part: C5378720
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C5378720.html
   vendor: LCSC
 related:
   - type: related
     ref: pixels/ws2812
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5378720.html
+    retrieved: '2026-11-18'
+    notes: 'OPSCO SK6812 listed, 15300 in stock'
 technical_notes:
   - PWM frequency tested at 4.7kHz despite 1.2kHz datasheet claim

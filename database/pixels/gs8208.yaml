@@ -36,6 +36,11 @@ physical:
   packages:
     - '5050'
   pin_count: 6
+sources:
+  status:
+    url: https://www.normandled.com/Product/view/id/827.html
+    retrieved: '2026-11-18'
+    notes: "GS8208 LED listed in Normand's LED chip catalog (inquiry, no price)"
 technical_notes:
   - Built-in 8-bit to 12-bit gamma correction for smoother fades
   - Uses MPWM (multiplexed PWM) for effective 8kHz refresh rate

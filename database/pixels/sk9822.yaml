@@ -18,7 +18,7 @@ data:
   backup_line: false
 datasheet:
   url: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf
-  third_party_testing: https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-the-apa102/
+  third_party_testing: https://cpldcpu.com/2016/12/13/sk9822-a-clone-of-the-apa102/
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -42,22 +42,27 @@ physical:
   pin_count: 6
 price:
   - qty: 10
-    price: 0.1107
+    price: 0.1125
     sku: SK9822
   - qty: 1000
-    price: 0.0677
+    price: 0.0687
     sku: SK9822
   - qty: 10000
-    price: 0.0571
+    price: 0.058
     sku: SK9822
 price_source:
   part: C2829089
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C2829089.html
   vendor: LCSC
 related:
   - type: related
     ref: pixels/apa102
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C2829089.html
+    retrieved: '2026-11-18'
+    notes: 'OPSCO SK9822 listed, 83520 in stock'
 technical_notes:
   - APA102 protocol compatible clone with improved brightness control
   - 5-bit brightness uses current control instead of APA102's PWM - no 400Hz flicker

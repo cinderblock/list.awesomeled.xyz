@@ -1,4 +1,5 @@
 name: APA106
+status: active
 notes: 5V WS2811 clone in 5 and 8mm package
 color:
   order: RGB
@@ -6,6 +7,27 @@ datasheet:
   url: https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107
 electrical:
   led_voltage: 5V
+price:
+  - qty: 5
+    price: 0.95
+    sku: COM-12986
+  - qty: 125
+    price: 0.902
+    sku: COM-12986
+  - qty: 500
+    price: 0.856
+    sku: COM-12986
+price_source:
+  notes: "Per LED, from the 5 mm diffused 5-pack: $4.75/pack, $4.51 at 25+ packs, $4.28 at 100+ packs. SparkFun's datasheet for this pack is the APA-106-F5/F8 sheet."
+  part: COM-12986
+  retrieved: '2026-11-18'
+  url: https://www.sparkfun.com/led-rgb-addressable-pth-5mm-diffused-5-pack.html
+  vendor: SparkFun
 related:
   - type: related
     ref: pixel-ics/ws2811
+sources:
+  status:
+    url: https://www.sparkfun.com/led-rgb-addressable-pth-5mm-diffused-5-pack.html
+    retrieved: '2026-11-18'
+    notes: 'COM-12986 in stock at $4.75 per 5-pack; its datasheet is the APA-106-F5/F8 sheet'

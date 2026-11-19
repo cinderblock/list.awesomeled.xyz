@@ -36,9 +36,22 @@ physical:
     - '5050'
     - '2020'
   pin_count: 6
+price:
+  amount: 0.139
+  max: 0.232
+price_source:
+  notes: 'Per LED (5050), regular lot prices without shipping: JIUFENG LIGHTING 1000 pcs $138.52 (item 3256811831981153), HUANUOMEI 100 pcs $15.27 (item 3256807987888775), HUANUOMEI 1000 pcs $232.47 (item 3256808560424329)'
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-APA102C.html
+  vendor: AliExpress (street)
 related:
   - type: predecessor
     ref: pixels/apa102
+sources:
+  status:
+    url: https://neon-world.com/en/product_detail.php?cid=59&id=115
+    retrieved: '2026-11-18'
+    notes: "APA-102C-NEW listed in APA Electronic's 5050 LED series catalog"
 technical_notes:
   - Improved thermal design over APA102
   - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/

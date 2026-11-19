@@ -1,4 +1,5 @@
 name: SK9822-A
+status: active
 creator:
   name: Newstar LED Co.
   page: http://www.newstar-ledstrip.com/productshow851.html
@@ -22,6 +23,27 @@ physical:
   packages:
     - '5050'
   pin_count: 6
+price:
+  - qty: 5
+    price: 0.1145
+    sku: SK9822-A
+  - qty: 1000
+    price: 0.0687
+    sku: SK9822-A
+  - qty: 5000
+    price: 0.058
+    sku: SK9822-A
+price_source:
+  notes: OPSCO SK9822-A, SMD-6P 5x5mm
+  part: C5378730
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C5378730.html
+  vendor: LCSC
 related:
   - type: variant
     ref: pixels/sk9822
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5378730.html
+    retrieved: '2026-11-18'
+    notes: 'OPSCO SK9822-A listed, 9095 in stock'

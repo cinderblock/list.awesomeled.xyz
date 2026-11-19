@@ -1,4 +1,5 @@
 name: APA109
+status: active
 release_year: 2018
 creator: APA Electronics
 notes: WS2812b clone like SK6812 RGBW variant
@@ -14,10 +15,6 @@ data:
   backup_line: false
 datasheet:
   url: http://neon-world.com/en/product_detail.php?cid=59&id=167
-dead_links:
-  - url: http://neon-world.com/en/product_detail.php?cid=59&id=167
-    archive: https://web.archive.org/web/20250113200646/https://neon-world.com/en/product_detail.php?cid=59&id=167
-    checked: '2026-07-01'
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -33,3 +30,8 @@ physical:
 related:
   - type: related
     ref: pixels/ws2812
+sources:
+  status:
+    url: http://neon-world.com/en/product_detail.php?cid=59&id=167
+    retrieved: '2026-11-18'
+    notes: "APA-109-RGBW listed in APA Electronic's 5050 LED series catalog"

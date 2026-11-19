@@ -34,9 +34,22 @@ physical:
     - '5050'
     - '2020'
   pin_count: 6
+price:
+  amount: 0.136
+  max: 0.232
+price_source:
+  notes: 'Per LED (5050), regular 100-pc lot prices without shipping: Shop1102728385 $13.59 (item 3256808655385584), nicmet $22.10 (item 2261799828543945, on sale $17.90), JIUFENG LIGHTING $23.23 (item 2255799864109419, on sale $19.05). 1000-pc bags run $0.173-0.187 per LED.'
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-HD107S.html
+  vendor: AliExpress (street)
 related:
   - type: related
     ref: pixels/apa107
+sources:
+  status:
+    url: https://www.rose-lighting.com/products/fastest-digital-addressable-rgb-5050led-chip-hd107s/
+    retrieved: '2026-11-18'
+    notes: 'Rose Lighting lists the HD107S 5050 chip, marked in stock (no price shown)'
 technical_notes:
   - High-speed 40MHz data rate - faster than APA102's 30MHz
   - 27kHz PWM frequency for flicker-free video

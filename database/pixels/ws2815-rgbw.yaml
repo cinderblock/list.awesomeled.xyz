@@ -1,4 +1,5 @@
 name: WS2815 RGBW
+status: active
 creator: World Semi
 manufacturers:
   - World Semi
@@ -13,3 +14,8 @@ electrical:
 related:
   - type: variant
     ref: pixels/ws2815
+sources:
+  status:
+    url: https://www.world-semi.com/products-rgbic-led.html
+    retrieved: '2026-11-18'
+    notes: 'WorldSemi catalog lists the WS2815 series as its 12 V RGB and RGBW family; WS2815B-RGBW is in its model list'

@@ -1,4 +1,5 @@
 name: HD108
+status: active
 notes: HD107s with 64bit color
 color:
   order: RGB
@@ -31,6 +32,19 @@ physical:
     - '5050'
     - '2020'
   pin_count: 6
+price:
+  amount: 0.273
+  max: 0.312
+price_source:
+  notes: 'Per LED, regular 100-pc lot prices without shipping: Shop1102728385 2020 $27.29 (item 3256808657160908), JIUFENG LIGHTING 2020 $29.43 (item 3256808171214274, on sale $21.48), Shop1102728385 5050 $31.19 (item 3256810358521188). Only 3 chip listings found, 2 from the same store.'
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-HD108-chip.html
+  vendor: AliExpress (street)
 related:
   - type: variant
     ref: pixels/hd107s
+sources:
+  status:
+    url: https://www.rose-lighting.com/products/hd108-rgb-5050-pixel-led-chip-with-gray-lever-65536/
+    retrieved: '2026-11-18'
+    notes: 'Rose Lighting lists the HD108 5050 chip, marked in stock (no price shown)'

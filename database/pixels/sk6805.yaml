@@ -32,22 +32,27 @@ physical:
   pin_count: 4
 price:
   - qty: 5
-    price: 0.0942
+    price: 0.0964
     sku: SK6805-EC15
   - qty: 500
-    price: 0.0593
+    price: 0.0607
     sku: SK6805-EC15
   - qty: 4500
-    price: 0.0511
+    price: 0.0523
     sku: SK6805-EC15
 price_source:
   part: C2890035
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C2890035.html
   vendor: LCSC
 related:
   - type: variant
     ref: pixels/sk6812
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C2890035.html
+    retrieved: '2026-11-18'
+    notes: 'SK6805-EC15 listed, 37210 in stock'
 technical_notes:
   - 24-bit color (8 bits per channel) over a single-wire unipolar RZ protocol
   - NeoPixel-compatible; sold by Adafruit as nano (2427) and other micro packages

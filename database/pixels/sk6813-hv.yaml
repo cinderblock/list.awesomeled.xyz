@@ -18,18 +18,18 @@ physical:
     - '5050'
 price:
   - qty: 5
-    price: 0.1985
+    price: 0.2006
     sku: SK6813HV-09-6P
   - qty: 1000
-    price: 0.116
+    price: 0.1173
     sku: SK6813HV-09-6P
   - qty: 5000
-    price: 0.0996
+    price: 0.1007
     sku: SK6813HV-09-6P
 price_source:
-  notes: out of stock at check, price still listed
+  notes: out of stock at check, price still listed (as reference only)
   part: C5378733
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C5378733.html
   vendor: LCSC
 related:

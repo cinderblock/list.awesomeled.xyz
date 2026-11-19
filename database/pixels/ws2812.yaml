@@ -45,19 +45,25 @@ physical:
   pin_count: 4
 price:
   - qty: 5
-    price: 0.1072
-    sku: WS2812B-B/T
+    price: 0.1048
+    sku: WS2812B-B/W
   - qty: 1000
-    price: 0.0664
-    sku: WS2812B-B/T
+    price: 0.0617
+    sku: WS2812B-B/W
   - qty: 5000
-    price: 0.0613
-    sku: WS2812B-B/T
+    price: 0.0567
+    sku: WS2812B-B/W
 price_source:
-  part: C2761795
-  retrieved: '2026-07-03'
-  url: https://www.lcsc.com/product-detail/C2761795.html
+  notes: WS2812B-B/W; the WS2812B-B/T listing used before (C2761795) is now discontinued at LCSC ("Not available now", no price shown)
+  part: C114586
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C114586.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C114586.html
+    retrieved: '2026-11-18'
+    notes: 'Worldsemi WS2812B-B/W listed, 195250 in stock'
 spec_update_year: 2018
 technical_notes:
   - PWM frequency updated from 400Hz to 2.0kHz in 2018 silicon revision

@@ -22,23 +22,28 @@ physical:
   pin_count: 4
 price:
   - qty: 1
-    price: 0.1305
+    price: 0.1357
     sku: SKC6812RGBW-NW
   - qty: 500
-    price: 0.071
+    price: 0.0753
     sku: SKC6812RGBW-NW
   - qty: 1000
-    price: 0.07
+    price: 0.0711
     sku: SKC6812RGBW-NW
 price_source:
   notes: OPSCO 5x4.9mm variant; the plain 5050 listing has no price
   part: C5348912
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C5348912.html
   vendor: LCSC
 related:
   - type: variant
     ref: pixels/sk6812
     notes: 3-channel RGB base part
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5348912.html
+    retrieved: '2026-11-18'
+    notes: 'SKC6812RGBW-NW listed, 37000 in stock'
 technical_notes:
   - 32 bits per pixel (8 per channel including white), so runs update ~25% slower than RGB SK6812 strings of the same length

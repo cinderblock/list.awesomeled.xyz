@@ -20,10 +20,6 @@ data:
 datasheet:
   url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
   third_party_testing: http://neon-world.com/en/product_detail.php?cid=59&id=167
-dead_links:
-  - url: http://neon-world.com/en/product_detail.php?cid=59&id=167
-    archive: https://web.archive.org/web/20250113200646/https://neon-world.com/en/product_detail.php?cid=59&id=167
-    checked: '2026-07-01'
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
@@ -57,11 +53,16 @@ price:
     price: 0.0221
     sku: APA102-2020
 price_source:
-  notes: '2020 package; out of stock at check, price still listed'
+  notes: '2020 package; out of stock at check, price still listed (as reference only)'
   part: C22439302
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C22439302.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.adafruit.com/product/3341
+    retrieved: '2026-11-18'
+    notes: 'DotStar Micro LEDs (APA102-2020) 10-pack in stock at $5.95'
 technical_notes:
   - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/
   - Extra 5-bit brightness control is PWM-based, not current control

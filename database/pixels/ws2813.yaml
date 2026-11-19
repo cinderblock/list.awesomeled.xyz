@@ -19,7 +19,7 @@ datasheet:
 dead_links:
   - url: http://newstar-ledstrip.com/product/20171208112004735.pdf
     archive: https://web.archive.org/web/20220216172054/http://newstar-ledstrip.com/product/20171208112004735.pdf
-    checked: '2026-07-01'
+    checked: '2026-11-18'
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -39,22 +39,27 @@ physical:
   pin_count: 6
 price:
   - qty: 5
-    price: 0.1071
+    price: 0.1356
     sku: WS2813B-B
   - qty: 1000
-    price: 0.0582
+    price: 0.0737
     sku: WS2813B-B
   - qty: 5000
-    price: 0.0484
+    price: 0.0612
     sku: WS2813B-B
 price_source:
   part: C114592
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C114592.html
   vendor: LCSC
 related:
   - type: predecessor
     ref: pixels/ws2812
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C114592.html
+    retrieved: '2026-11-18'
+    notes: 'Worldsemi WS2813B-B listed, 79420 in stock'
 spec_update_year: 2018
 technical_notes:
   - Backup/failover data line allows signal to continue if a pixel fails
