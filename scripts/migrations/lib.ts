@@ -9,7 +9,16 @@
 
 import { readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join } from 'path';
-import { isMap, isScalar, isSeq, parseDocument, type Document, type Node } from 'yaml';
+import {
+  isMap,
+  isScalar,
+  isSeq,
+  parseDocument,
+  Scalar,
+  visit,
+  type Document,
+  type Node,
+} from 'yaml';
 
 export const DB_DIR = 'database';
 
@@ -170,6 +179,14 @@ function insertRootKey(doc: Document, key: string, node: Node): void {
 export function setJS(doc: Document, path: (string | number)[], value: unknown): void {
   const old = doc.getIn(path, true) as Node | undefined;
   const node = doc.createNode(value) as Node;
+  // Dates stay quoted ('2026-11-18'), as in the hand-written entries, so a
+  // YAML 1.1 reader can't turn them into timestamps
+  visit(node, {
+    Scalar(_, s) {
+      if (typeof s.value === 'string' && /^\d{4}-\d{2}(-\d{2})?$/.test(s.value))
+        s.type = Scalar.QUOTE_SINGLE;
+    },
+  });
   if (old && 'comment' in old && old.comment)
     (node as { comment?: string | null }).comment = old.comment;
   if (old && 'commentBefore' in old && old.commentBefore) {
