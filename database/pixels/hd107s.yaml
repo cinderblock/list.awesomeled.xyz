@@ -15,7 +15,7 @@ color:
   brightness_bits: 8+5
   brightness_method: global
   brightness_method_notes: Global 5-bit brightness control
-  pwm_frequency: 27.0kHz
+  pwm_frequency: 27kHz
 data:
   type: APA102
   clocked: true

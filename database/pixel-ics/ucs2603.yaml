@@ -3,7 +3,7 @@ creator: Lianxinke Microelectronics
 notes: RGB driver with a backup data line, 4-bit current setting per color and 8kHz PWM
 color:
   channel_bits: 8
-  pwm_frequency: 8.0kHz
+  pwm_frequency: 8kHz
 data:
   clocked: false
   channels: 3

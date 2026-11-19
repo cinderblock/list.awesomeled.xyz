@@ -6,7 +6,7 @@ notes: WS2812b update with Back Up Data Line
 color:
   order: RGB
   brightness_bits: 8
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
   pwm_frequency_notes: 2kHz according to datasheet
 data:
   type: WS2811/12
@@ -27,7 +27,7 @@ electrical:
   led_voltage: 5V
   vcc_voltage: 5V
   gpio:
-    min: 3.0V
+    min: 3V
     max: 5V
   channel_current: 18mA
   channel_current_notes: Also has a 5mA version available

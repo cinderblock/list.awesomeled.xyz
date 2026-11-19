@@ -5,7 +5,7 @@ creator: WorldSemi
 notes: 12V single-wire RGB driver with a backup data input, WS2811-style 800 kbps protocol
 color:
   channel_bits: 8
-  pwm_frequency: 4.0kHz
+  pwm_frequency: 4kHz
 data:
   type: WS2811/12
   clocked: false

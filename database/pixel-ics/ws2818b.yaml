@@ -5,7 +5,7 @@ creator: WorldSemi
 notes: 12V WS2813 as separate IC
 color:
   channel_bits: 8
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
 data:
   type: WS2811/12
   clocked: false
@@ -23,7 +23,7 @@ electrical:
   output_voltage: 12V
   supply_voltage: 5V
   gpio:
-    min: 3.0V
+    min: 3V
     max: 5V
   max_current: 16mA
   quiescent_current: 2.1mA

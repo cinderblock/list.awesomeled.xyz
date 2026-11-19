@@ -4,7 +4,7 @@ aliases:
   - DMX512P
 color:
   channel_bits: 8
-  pwm_frequency: 3.0kHz
+  pwm_frequency: 3kHz
 data:
   type: DMX512P
   clocked: false

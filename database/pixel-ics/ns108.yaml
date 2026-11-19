@@ -10,7 +10,7 @@ color:
   aggregate_bits: 48
   brightness_bits: 5
   brightness_method: current
-  pwm_frequency: 27.0kHz
+  pwm_frequency: 27kHz
 data:
   type: SK9826
   clocked: true
@@ -32,7 +32,7 @@ electrical:
   supply_voltage: 5.1V
   supply_voltage_notes: 'NS108 spec Rev. 04: VDD 5.1 V typical, 5.5 V max'
   gpio:
-    min: 3.0V
+    min: 3V
   max_current: 18mA
   max_current_notes: Default with REXT floating; an external REXT resistor sets up to 60 mA
   current_programmable: true

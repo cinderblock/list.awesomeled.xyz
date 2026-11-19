@@ -30,7 +30,7 @@ electrical:
   max_current_notes: Output current is set by the data; default 18.8 mA (R) and 18.0 mA (G, B)
   current_programmable: true
   current_range: 10-33mA
-  quiescent_current: 3.0mA
+  quiescent_current: 3mA
 physical:
   packages:
     - SOP-8

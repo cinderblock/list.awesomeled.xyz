@@ -2,7 +2,7 @@ name: LB1908
 notes: 12V single-wire RGB driver with a backup data input (FDIN), WS2811-style 800 kHz protocol and 8 kHz PWM
 color:
   channel_bits: 8
-  pwm_frequency: 8.0kHz
+  pwm_frequency: 8kHz
 data:
   type: WS2811/12
   clocked: false

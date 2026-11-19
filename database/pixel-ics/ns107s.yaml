@@ -10,7 +10,7 @@ color:
   aggregate_bits: 24
   brightness_bits: 5
   brightness_method: global
-  pwm_frequency: 27.0kHz
+  pwm_frequency: 27kHz
   pwm_frequency_notes: Newstar's NS107S page says ">27kHz"
 data:
   type: APA102

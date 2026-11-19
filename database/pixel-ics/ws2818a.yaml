@@ -5,7 +5,7 @@ creator: WorldSemi
 notes: 5V version of the dual-signal WS2818
 color:
   channel_bits: 8
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
 data:
   type: WS2811/12
   clocked: false

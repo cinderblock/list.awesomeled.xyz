@@ -7,7 +7,7 @@ aliases:
 color:
   order: BGR
   brightness_bits: 8
-  pwm_frequency: 8.0kHz
+  pwm_frequency: 8kHz
 data:
   clocked: false
   bitrate: 800kHz
@@ -20,9 +20,9 @@ electrical:
   led_voltage: 12V
   vcc_voltage: 5V
   gpio:
-    min: 4.0V
+    min: 4V
     max: 12.5V
-  channel_current: 13.0mA
+  channel_current: 13mA
   quiescent_current: 2.5mA
   wattage: 65mW
 images:

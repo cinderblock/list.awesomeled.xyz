@@ -7,7 +7,7 @@ manufacturers:
 notes: Built-in 8->12bit gamma correction. "B" version is "without original program". Similar to GS8208
 color:
   brightness_bits: 8
-  pwm_frequency: 8.0kHz
+  pwm_frequency: 8kHz
 data:
   type: WS2811/12
   clocked: false

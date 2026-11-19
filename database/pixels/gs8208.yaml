@@ -7,7 +7,7 @@ color:
   order: RGB
   brightness_bits: 8
   brightness_method_notes: 36 bits interpolated 12 bits gamma correction per colour
-  pwm_frequency: 8.0kHz
+  pwm_frequency: 8kHz
   pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively multiply 2kHz PWM to 8kHz
 data:
   type: WS2811/12

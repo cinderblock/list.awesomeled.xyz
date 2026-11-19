@@ -4,7 +4,7 @@ release_year: 2010
 creator: MY-Semi
 color:
   channel_bits: 8/12/14/16
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
   pwm_frequency_notes: 'Uses "adaptive pulse density modulation": 2kHz is the maximum at 16 bits, 512kHz at 8 bits'
 data:
   type: MY9231

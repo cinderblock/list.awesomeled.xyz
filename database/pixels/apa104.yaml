@@ -33,7 +33,7 @@ electrical:
     max: 5V
   channel_current: 20mA
   channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA
-  quiescent_current: 1.0mA
+  quiescent_current: 1mA
   wattage: 100mW
 other_links:
   - https://www.advateklighting.com/pixel-protocols/apa104

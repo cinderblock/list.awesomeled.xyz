@@ -6,7 +6,7 @@ aliases:
   - SM16714P
 color:
   channel_bits: 8
-  pwm_frequency: 1.0kHz
+  pwm_frequency: 1kHz
 data:
   type: SM16714
   clocked: false

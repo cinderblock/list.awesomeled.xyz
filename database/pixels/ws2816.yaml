@@ -8,7 +8,7 @@ color:
   brightness_bits: 16
   brightness_method: per_channel
   brightness_method_notes: 5-bit brightness control for each color channel (R, G, and B independently)
-  pwm_frequency: 10.0kHz
+  pwm_frequency: 10kHz
 data:
   type: WS2816
   clocked: false
@@ -26,7 +26,7 @@ electrical:
   vcc_voltage: 5V
   channel_current: 20mA
   channel_current_notes: WS2816C is 10mA, WS2816B is 20mA
-  quiescent_current: 6.0mA
+  quiescent_current: 6mA
   wattage: 100mW
 images:
   - file: ws2816.webp

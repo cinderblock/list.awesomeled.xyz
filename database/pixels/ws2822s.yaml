@@ -5,7 +5,7 @@ aliases:
   - WS2822
 color:
   brightness_bits: 8
-  pwm_frequency: 3.0kHz
+  pwm_frequency: 3kHz
 data:
   type: DMX512P
   clocked: false

@@ -7,7 +7,7 @@ notes: TCWIN 12V RGB LEDs with a built-in single-wire driver; the six-pin 5050 v
 color:
   order: RGB
   brightness_bits: 8
-  pwm_frequency: 8.0kHz
+  pwm_frequency: 8kHz
 data:
   type: WS2811/12
   clocked: false

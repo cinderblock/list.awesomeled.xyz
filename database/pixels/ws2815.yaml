@@ -8,7 +8,7 @@ aliases:
 color:
   order: RGB
   brightness_bits: 8
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
   pwm_frequency_notes: 2kHz according to datasheet
 data:
   type: WS2811/12

@@ -14,7 +14,7 @@ datasheet:
   url: https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
 electrical:
   supply_voltage: 5V
-  quiescent_current: 1.0mA
+  quiescent_current: 1mA
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6812
 price:

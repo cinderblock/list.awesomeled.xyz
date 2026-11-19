@@ -4,7 +4,7 @@ creator: WorldSemi
 notes: Original 12V/24V dual-signal WS2818, superseded by WS2818B
 color:
   channel_bits: 8
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
 data:
   type: WS2811/12
   clocked: false

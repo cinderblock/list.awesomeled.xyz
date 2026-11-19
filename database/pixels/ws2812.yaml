@@ -9,7 +9,7 @@ aliases:
 color:
   order: GRB
   brightness_bits: 8
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
   pwm_frequency_notes: 400Hz is an old PWM spec. Newer WS2812b (post 2018) use updated IC with 2.0kHz PWM rate same as WS2813
 data:
   type: WS2811/12
@@ -27,7 +27,7 @@ electrical:
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
   vcc_voltage: 5V
   gpio:
-    min: 3.0V
+    min: 3V
     max: 5V
   channel_current: 18.5mA
   channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA. 3535 package has lower current

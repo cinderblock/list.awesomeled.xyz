@@ -5,7 +5,7 @@ notes: 12V WS2812 with RGB + external LEDs
 color:
   order: RGB
   brightness_bits: 8
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
 data:
   type: WS2811/12
   clocked: false
@@ -20,7 +20,7 @@ electrical:
   led_voltage: 12V
   vcc_voltage: 5V
   gpio:
-    min: 3.0V
+    min: 3V
     max: 5V
   channel_current: 18.5mA
   quiescent_current: 2.1mA

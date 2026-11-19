@@ -13,7 +13,7 @@ notes: 5050 RGB LED built around Newstar's NS108 IC. The 16-bit upgrade of the H
 color:
   order: RGB
   brightness_bits: 16+5
-  pwm_frequency: 27.0kHz
+  pwm_frequency: 27kHz
   brightness_method: current
   brightness_method_notes: 5-bit current gain per color (R, G and B set separately), on top of 16-bit PWM
 data:
@@ -42,7 +42,7 @@ electrical:
   gpio:
     min: 3.4V
     max: 5V
-  channel_current: 17.0mA
+  channel_current: 17mA
   quiescent_current: 0.1mA
   wattage: 85mW
 other_links:

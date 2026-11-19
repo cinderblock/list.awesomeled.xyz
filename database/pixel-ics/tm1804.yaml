@@ -30,7 +30,7 @@ electrical:
     min: 3.8V
     max: 5V
   max_current: 60mA
-  quiescent_current: 3.0mA
+  quiescent_current: 3mA
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1804
 physical:

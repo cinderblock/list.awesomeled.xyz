@@ -6,7 +6,7 @@ vendors:
     page: http://www.newstar-ledstrip.com/productshow851.html
 notes: Higher PWM version of SK9822
 color:
-  pwm_frequency: 27.0kHz
+  pwm_frequency: 27kHz
 data:
   type: APA102
   clocked: true
@@ -21,7 +21,7 @@ dead_links:
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
-  quiescent_current: 1.0mA
+  quiescent_current: 1mA
 images:
   - file: sk9822-a.webp
     source: https://www.normandled.com/Product/view/id/876.html

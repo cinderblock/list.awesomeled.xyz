@@ -3,7 +3,7 @@ status: active
 creator: MY-Semi
 color:
   channel_bits: 16
-  pwm_frequency: 1.0kHz
+  pwm_frequency: 1kHz
 data:
   clocked: true
   channels: 12

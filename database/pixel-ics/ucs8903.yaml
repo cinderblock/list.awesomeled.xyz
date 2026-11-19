@@ -4,7 +4,7 @@ creator: Lianxinke Microelectronics
 notes: Early 16bit/color version of UCS1903 (WS2811 equiv)
 color:
   channel_bits: 16
-  pwm_frequency: 1.0kHz
+  pwm_frequency: 1kHz
 data:
   type: UCS8903
   clocked: false
@@ -26,10 +26,10 @@ electrical:
   output_voltage: 26V
   supply_voltage: 5V
   gpio:
-    min: 3.0V
+    min: 3V
     max: 5V
   max_current: 17mA
-  quiescent_current: 1.0mA
+  quiescent_current: 1mA
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs8903
 physical:

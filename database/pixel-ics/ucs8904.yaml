@@ -2,7 +2,7 @@ name: UCS8904
 creator: Lianxinke Microelectronics
 color:
   channel_bits: 16
-  pwm_frequency: 1.0kHz
+  pwm_frequency: 1kHz
 data:
   clocked: false
   channels: 4

@@ -3,7 +3,7 @@ creator: Greeled Electronic
 notes: 3-channel sibling of the LPD8806, pin-compatible with the LPD6803
 color:
   channel_bits: 7
-  pwm_frequency: 4.0kHz
+  pwm_frequency: 4kHz
   pwm_frequency_notes: "Datasheet: built-in 1.2MHz oscillator, 'refresh rate greater than 4000Hz'"
 data:
   type: LPD8806

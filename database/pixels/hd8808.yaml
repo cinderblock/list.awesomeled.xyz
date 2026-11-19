@@ -6,7 +6,7 @@ notes: 12 V 5050 RGB LED built around Newstar's NS8808 IC. Same protocol as WS28
 color:
   order: RGB
   brightness_bits: 8
-  pwm_frequency: 8.0kHz
+  pwm_frequency: 8kHz
   pwm_frequency_notes: 8kHz per the datasheet
 data:
   type: WS2811/12
@@ -21,7 +21,7 @@ electrical:
     min: 3.5V
     max: 5V
   channel_current: 17.5mA
-  quiescent_current: 2.0mA
+  quiescent_current: 2mA
   wattage: 200mW
   led_voltage_notes: Datasheet range 10.8-13.2V
 images:

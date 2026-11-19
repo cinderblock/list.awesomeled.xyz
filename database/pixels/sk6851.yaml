@@ -7,7 +7,7 @@ aliases:
 color:
   order: GRB
   brightness_bits: 8
-  pwm_frequency: 4.0kHz
+  pwm_frequency: 4kHz
 data:
   type: WS2811/12
   clocked: false

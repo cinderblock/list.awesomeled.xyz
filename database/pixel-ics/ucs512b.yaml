@@ -2,7 +2,7 @@ name: UCS512B
 creator: Lianxinke Microelectronics
 color:
   channel_bits: 8
-  pwm_frequency: 3.0kHz
+  pwm_frequency: 3kHz
 data:
   clocked: false
   channels: 3

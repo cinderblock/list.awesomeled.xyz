@@ -8,7 +8,7 @@ aliases:
 color:
   channel_bits: 8
   aggregate_bits: 24
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
   pwm_frequency_notes: 400Hz was old spec. Newer WS2811 chips have 2kHz PWM like WS2812B post-2018
 data:
   type: WS2811/12
@@ -25,7 +25,7 @@ electrical:
   supply_voltage: 5V
   supply_voltage_notes: VCC range 4.5-5.5V. Can use an external resistor to supply 5V Vdd from a higher system voltage
   gpio:
-    min: 3.0V
+    min: 3V
     max: 5V
     notes: 0.6*VDD at 5V supply
   max_current: 18.5mA

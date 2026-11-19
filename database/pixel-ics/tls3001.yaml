@@ -2,7 +2,7 @@ name: TLS3001
 creator: Teralane Semiconductor
 color:
   channel_bits: 12
-  pwm_frequency: 1.0kHz
+  pwm_frequency: 1kHz
 data:
   clocked: false
   channels: 3

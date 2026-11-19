@@ -14,7 +14,7 @@ datasheet:
 electrical:
   led_voltage: 3-7.5V
   vcc_voltage: 5V
-  channel_current: 17.0mA
+  channel_current: 17mA
   wattage: 85mW
 images:
   - file: lc8823.webp

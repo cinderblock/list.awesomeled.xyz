@@ -3,7 +3,7 @@ creator: Shenzhen Greesit Technology
 color:
   channel_bits: 8
   aggregate_bits: 12
-  pwm_frequency: 8.0kHz
+  pwm_frequency: 8kHz
 data:
   clocked: false
   channels: 3

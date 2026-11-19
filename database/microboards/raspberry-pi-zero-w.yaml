@@ -15,7 +15,7 @@ compute:
   soc: BCM2835
   cpu: ARM11
   isa: ARMv6Z
-  clock_speed: 1.0GHz
+  clock_speed: 1GHz
   ram: 512MB
   linux: true
 connectivity:

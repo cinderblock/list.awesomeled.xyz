@@ -4,7 +4,7 @@ creator: Shenzhen Sunmoon Microelectronics
 notes: 8-bit input gamma-corrected to 65,536 output levels, 4-bit current gain, 4kHz PWM
 color:
   channel_bits: 8
-  pwm_frequency: 4.0kHz
+  pwm_frequency: 4kHz
   pwm_frequency_notes: "Patented SM-PWM, 'refresh rate is up to 4KHz'; the 8-bit input is gamma-corrected to 65,536 output levels"
 data:
   type: SM16803

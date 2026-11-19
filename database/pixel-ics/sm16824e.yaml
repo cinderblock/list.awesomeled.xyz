@@ -6,7 +6,7 @@ aliases:
   - SM16824
 color:
   channel_bits: 8
-  pwm_frequency: 4.0kHz
+  pwm_frequency: 4kHz
   pwm_frequency_notes: "Patented SM-PWM, 'refresh rate is up to 4KHz'; output gray level 65,536 (gamma correction)"
 data:
   type: 4chSM16803

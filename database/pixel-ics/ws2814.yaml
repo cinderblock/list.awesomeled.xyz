@@ -3,7 +3,7 @@ status: active
 creator: WorldSemi
 color:
   channel_bits: 8
-  pwm_frequency: 2.0kHz
+  pwm_frequency: 2kHz
 data:
   clocked: false
   channels: 4
