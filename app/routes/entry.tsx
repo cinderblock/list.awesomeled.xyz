@@ -34,6 +34,7 @@ import {
   FieldSources,
   type FieldSource,
 } from '~/components/ui/EntryLinks';
+import { entryImages, imageUrl, licenseUrl, type EntryImage } from '~/lib/images';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -108,29 +109,6 @@ function collectConnectorRefs(value: unknown, out: Set<string>): void {
     }
     collectConnectorRefs(v, out);
   }
-}
-
-interface EntryImage {
-  file: string;
-  source?: string;
-  credit?: string;
-}
-
-// Images are bare filename strings or {file, source?, credit?, license?}
-// objects (see common.json#/definitions/image).
-function getEntryImages(entry: Record<string, unknown>): EntryImage[] {
-  const images: EntryImage[] = [];
-  const push = (v: unknown) => {
-    if (typeof v === 'string') {
-      images.push({ file: v });
-    } else if (v && typeof v === 'object' && typeof (v as EntryImage).file === 'string') {
-      const { file, source, credit } = v as EntryImage;
-      images.push({ file, source, credit });
-    }
-  };
-  push(entry.image);
-  if (Array.isArray(entry.images)) for (const img of entry.images) push(img);
-  return images;
 }
 
 function stripSchemaAndWww(url: string): string {
@@ -328,7 +306,9 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
     entry.sources && typeof entry.sources === 'object' ? entry.sources : {}
   ) as Record<string, FieldSource | FieldSource[]>;
   const filterableFields = getFilterableFields(category.id);
-  const images = getEntryImages(entry);
+  const images = entryImages(entry);
+  const [activeImage, setActiveImage] = useState(0);
+  const hero = images[Math.min(activeImage, images.length - 1)];
   const deadLinks = getDeadLinks(entry);
   const links = getEntryLinks(entry, deadLinks);
   const [modalImage, setModalImage] = useState<string | null>(null);
@@ -511,15 +491,31 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
       </div>
 
       <header className="entry-hero">
-        {images.length > 0 && (
+        {hero && (
           <figure className="entry-hero-figure">
             <button
               className="entry-hero-image"
-              onClick={() => setModalImage(`/database-images/${category.id}/${images[0].file}`)}
+              onClick={() => setModalImage(imageUrl(category.id, hero.file))}
+              aria-label={`Enlarge image of ${entry.name}`}
             >
-              <img src={`/database-images/${category.id}/${images[0].file}`} alt={entry.name} />
+              <img src={imageUrl(category.id, hero.file, 'md')} alt={entry.name} />
             </button>
-            <ImageCredit image={images[0]} />
+            {images.length > 1 && (
+              <div className="entry-hero-thumbs">
+                {images.map((img, i) => (
+                  <button
+                    key={img.file}
+                    type="button"
+                    className={img === hero ? 'entry-hero-thumb--active' : undefined}
+                    onClick={() => setActiveImage(i)}
+                    aria-label={`Show image ${i + 1} of ${images.length}`}
+                  >
+                    <img src={imageUrl(category.id, img.file, 'sm')} alt="" loading="lazy" />
+                  </button>
+                ))}
+              </div>
+            )}
+            <ImageCredit image={hero} />
           </figure>
         )}
         <div className="entry-hero-main">
@@ -722,22 +718,41 @@ function KeyValueGrid({
 }
 
 // Attribution line under the hero image: links to the original source when known
+/**
+ * Attribution under the hero image: credit (linked to the source page), plus
+ * the license and a "modified" note for openly licensed images — CC licenses
+ * require naming the license and saying the image was changed (all images are
+ * background-removed / cropped / resized by scripts/crop-image.ts).
+ */
 function ImageCredit({ image }: { image: EntryImage }) {
   if (!image.source && !image.credit) return null;
-  const text = `Image: ${image.credit ?? stripSchemaAndWww(image.source ?? '').split('/')[0]}`;
-  if (image.source) {
-    return (
-      <a
-        className="entry-image-credit"
-        href={image.source}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {text}
-      </a>
-    );
-  }
-  return <span className="entry-image-credit">{text}</span>;
+  const who = image.credit ?? stripSchemaAndWww(image.source ?? '').split('/')[0];
+  const licHref = image.license ? licenseUrl(image.license) : undefined;
+  return (
+    <figcaption className="entry-image-credit">
+      Image:{' '}
+      {image.source ? (
+        <a href={image.source} target="_blank" rel="noopener noreferrer">
+          {who}
+        </a>
+      ) : (
+        who
+      )}
+      {image.license && (
+        <>
+          {' · '}
+          {licHref ? (
+            <a href={licHref} target="_blank" rel="noopener noreferrer license">
+              {image.license}
+            </a>
+          ) : (
+            image.license
+          )}
+          {' · cropped'}
+        </>
+      )}
+    </figcaption>
+  );
 }
 
 function StatusBadge({ status }: { status: string }) {

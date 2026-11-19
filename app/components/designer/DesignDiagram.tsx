@@ -8,9 +8,10 @@ import {
   type PatternSourceOption,
   type SystemPower,
 } from '~/lib/designer';
+import { imageUrl } from '~/lib/images';
 
 // Absolute so downloaded SVGs still resolve their thumbnails offline-shared
-const IMG_BASE = 'https://list.awesomeled.xyz/database-images/';
+const SITE = 'https://list.awesomeled.xyz';
 
 interface DesignDiagramProps {
   chains: Chain[];
@@ -148,7 +149,7 @@ export function DesignDiagram({ chains, source, standalone, power }: DesignDiagr
               />
               {ctrl?.image && (
                 <image
-                  href={`${IMG_BASE}controllers/${ctrl.image}`}
+                  href={SITE + imageUrl(ctrl.diy ? 'microboards' : 'controllers', ctrl.image, 'sm')}
                   x="268"
                   y={y + 18}
                   width="52"
@@ -199,7 +200,7 @@ export function DesignDiagram({ chains, source, standalone, power }: DesignDiagr
               ))}
               {chain.pixel!.image && (
                 <image
-                  href={`${IMG_BASE}pixels/${chain.pixel!.image}`}
+                  href={SITE + imageUrl('pixels', chain.pixel!.image, 'sm')}
                   x="784"
                   y={y + 14}
                   width="48"

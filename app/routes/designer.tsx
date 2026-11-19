@@ -32,6 +32,7 @@ import {
   type Chain,
   type ControllerOption,
 } from '~/lib/designer';
+import { imageUrl } from '~/lib/images';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { Tooltip } from '~/components/ui/Tooltip';
 import { DesignDiagram } from '~/components/designer/DesignDiagram';
@@ -399,7 +400,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                   onClick={() => updateActive({ p: p.id === chain.pixel?.id ? '' : p.id, c: '' })}
                 >
                   {p.image ? (
-                    <img src={`/database-images/pixels/${p.image}`} alt="" loading="lazy" />
+                    <img src={imageUrl('pixels', p.image, 'sm')} alt="" loading="lazy" />
                   ) : (
                     <span className="designer-pixel-card-noimg" aria-hidden="true">
                       <Zap size={18} />
@@ -828,7 +829,7 @@ function ControllerRow({
       <button type="button" onClick={onSelect} disabled={!onSelect}>
         {c.image ? (
           <img
-            src={`/database-images/${c.diy ? 'microboards' : 'controllers'}/${c.image}`}
+            src={imageUrl(c.diy ? 'microboards' : 'controllers', c.image, 'sm')}
             alt=""
             loading="lazy"
           />

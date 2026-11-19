@@ -391,6 +391,24 @@
   text-decoration: underline;
 }
 
+/* Product thumbnail before the name (derived 240px WebP, see app/lib/images.ts) */
+.data-table-thumb {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 28px;
+  margin: -4px 0.5rem -4px 0;
+  vertical-align: middle;
+}
+.data-table-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
 /* External link icon button */
 .data-table-link-icon {
   display: inline-flex;
@@ -518,6 +536,11 @@
   .data-table td[data-col='name'] {
     max-width: 38vw;
     overflow: hidden;
+  }
+  .data-table-thumb {
+    width: 26px;
+    height: 20px;
+    margin-right: 0.375rem;
   }
   .data-table td[data-col='name'] .data-table-entry-link {
     display: block;

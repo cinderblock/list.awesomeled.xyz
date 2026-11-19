@@ -5,7 +5,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router';
 import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
 import type { Column } from '~/lib/columns';
 import { generateCSV } from '~/lib/csv';
-import { firstImageFile } from '~/lib/images';
+import { firstImageFile, imageUrl } from '~/lib/images';
 import { Tooltip } from '~/components/ui/Tooltip';
 import type { BaseEntry } from '~/lib/types';
 import {
@@ -790,13 +790,16 @@ export function DataTable({
   const [preview, setPreview] = useState<{ index: number; top: number } | null>(null);
   const previewEntry = preview ? sortedData[preview.index] : null;
   const previewFile = previewEntry ? firstImageFile(previewEntry) : null;
+  // Thumbnails in the name column, only for categories that have images at all
+  // (keeps names aligned without a blank gutter on software tables).
+  const showThumbs = useMemo(() => data.some((d) => firstImageFile(d)), [data]);
 
   useEffect(() => {
     if (!preview) return;
     for (let d = -2; d <= 2; d++) {
       const neighbor = sortedData[preview.index + d];
       const file = neighbor && firstImageFile(neighbor);
-      if (file) new Image().src = `/database-images/${categoryId}/${file}`;
+      if (file) new Image().src = imageUrl(categoryId, file, 'md');
     }
   }, [preview, sortedData, categoryId]);
 
@@ -1315,6 +1318,7 @@ export function DataTable({
                                 to={`${categoryPath}/${item.id}`}
                                 className="data-table-entry-link"
                               >
+                                {showThumbs && <NameThumb category={categoryId} entry={item} />}
                                 {String(value ?? '')}
                               </Link>
                             ) : (
@@ -1344,7 +1348,7 @@ export function DataTable({
           aria-hidden="true"
         >
           <img
-            src={`/database-images/${categoryId}/${previewFile}`}
+            src={imageUrl(categoryId, previewFile, 'md')}
             alt=""
             loading="lazy"
             decoding="async"
@@ -1353,6 +1357,25 @@ export function DataTable({
         </div>
       )}
     </div>
+  );
+}
+
+// Small product thumbnail before the entry name (blank placeholder keeps names aligned)
+function NameThumb({ category, entry }: { category: string; entry: BaseEntry }) {
+  const file = firstImageFile(entry);
+  return (
+    <span className="data-table-thumb" aria-hidden="true">
+      {file && (
+        <img
+          src={imageUrl(category, file, 'sm')}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          width={40}
+          height={30}
+        />
+      )}
+    </span>
   );
 }
 

@@ -5,6 +5,7 @@ import { defineConfig, type Plugin } from 'vite';
 import devtoolsJson from 'vite-plugin-devtools-json';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
+import { databaseThumbs } from './scripts/thumbs';
 
 function relativeSourcemaps(): Plugin {
   const root = process.cwd();
@@ -53,6 +54,7 @@ export default defineConfig({
     tsconfigPaths(),
     devtoolsJson(),
     relativeSourcemaps(),
+    databaseThumbs(),
   ],
   resolve: {
     alias: {
