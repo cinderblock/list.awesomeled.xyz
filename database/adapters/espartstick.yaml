@@ -1,11 +1,27 @@
 name: ESPArtstick
+status: discontinued
 outputs:
   count: 6
   clocked: false
 power:
   voltage:
     max: 5
+dead_links:
+  - url: https://espartstick.ecwid.com/
+    archive: https://web.archive.org/web/20191021235104/https://espartstick.ecwid.com/
+    checked: '2026-11-18'
+    notes: now redirects to espartstick.company.site, which says "The site is not available"
 links:
   product: https://espartstick.ecwid.com/
 parent: Wemos Dx Mini (ESP32/ESP8266)
-price: 25
+price: 21
+price_source:
+  notes: Last list price of "ESP Art Stick 5v/12v Wi-Fi pixel Controller" (archived capture; same product was $25 in 2019 as "12v enhanced complete")
+  retrieved: '2021-08-03'
+  url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
+  vendor: Microcyb (ESPArtStick)
+sources:
+  status:
+    url: https://microcyb.com/shop.php?category=LED+pixel+Controller
+    retrieved: '2026-11-18'
+    notes: 'Microcyb now lists only ShowSpark controllers; the old Ecwid store (espartstick.company.site) says "The site is not available"'

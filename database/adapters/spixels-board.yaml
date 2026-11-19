@@ -1,4 +1,5 @@
 name: SPIxels Board
+status: active
 outputs:
   count: 16
   clocked: always
@@ -8,12 +9,23 @@ power:
     max: 5
 diy_or_ots: DIY
 links:
-  product: http://spixels.org/
+  product: https://github.com/hzeller/spixels
 parent: Raspberry Pi
+price: 27.85
+price_source:
+  notes: OSH Park shared project by the creator (the repository says "not affiliated"); 3 bare PCBs (OSH Park's minimum order), parts not included
+  part: BTdhLFc3
+  retrieved: '2026-11-18'
+  url: https://oshpark.com/shared_projects/BTdhLFc3
+  vendor: OSH Park
 software:
   firmware:
     - FPP
 sources:
+  status:
+    url: https://oshpark.com/shared_projects/BTdhLFc3
+    retrieved: '2026-11-18'
+    notes: "creator's OSH Park shared project (linked from the repository), $27.85 for 3 PCBs"
   software.firmware:
     url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
     retrieved: '2026-11-18'

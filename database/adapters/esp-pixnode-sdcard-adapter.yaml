@@ -1,6 +1,11 @@
 name: ESP PixNode SDCard Adapter
+status: discontinued
 creator: Jboards
 notes: microSD card adapter for ESPixelstick — allows replay of xLights FSEQ files
+dead_links:
+  - url: https://jboards.ecwid.com/ESPixNode-microSD-adapter-p428060492
+    checked: '2026-11-18'
+    notes: JBoards store gone (404); no Wayback capture of this product exists
 diy_or_ots: OTS
 links:
   product: https://jboards.ecwid.com/ESPixNode-microSD-adapter-p428060492
@@ -8,3 +13,8 @@ price: 7
 software:
   works_with:
     - xLights
+sources:
+  status:
+    url: https://web.archive.org/web/20250215152729/https://jboards.ecwid.com/Boards-c61246060
+    retrieved: '2026-11-18'
+    notes: 'gone from the JBoards Boards and Accessories categories by 2025-02-15; the store (jboards.ecwid.com, jboards.company.site) now returns 404'

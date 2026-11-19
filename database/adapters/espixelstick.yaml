@@ -1,4 +1,5 @@
 name: ESPixelstick
+status: active
 notes: Wi-Fi (E1.31) pixel adapter; firmware also outputs serial DMX / Renard
 inputs:
   physical:
@@ -14,13 +15,23 @@ power:
 links:
   product: https://www.amazon.com/ESPixelStick-Wireless-DMX-Pixel-Controller/dp/B072XT1V77/
 parent: ESP8266
-price: 30
+price: 28
+price_source:
+  notes: ESPixelStick V3, the current version, from the creator's store. The Amazon kit listing in links shows "Currently unavailable"
+  part: ESPSV3
+  retrieved: '2026-11-18'
+  url: https://forkineye.com/product/espixelstick-v3/
+  vendor: Forkineye
 software:
   firmware:
     - WLED
   works_with:
     - xLights
 sources:
+  status:
+    url: https://forkineye.com/product/espixelstick-v3/
+    retrieved: '2026-11-18'
+    notes: "ESPixelStick V3 in stock, $28 at the creator's store"
   software.firmware:
     url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
     retrieved: '2026-11-18'

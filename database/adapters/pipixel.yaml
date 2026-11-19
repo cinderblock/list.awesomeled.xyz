@@ -1,4 +1,5 @@
 name: PiPixel
+status: discontinued
 creator: Tindie
 notes: Does not provide power to the Pi
 outputs:
@@ -15,3 +16,13 @@ links:
   product: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
 parent: Raspberry Pi
 price: 8.5
+price_source:
+  notes: Last list price on the retired Tindie listing
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
+  vendor: Maniacal Labs (Tindie)
+sources:
+  status:
+    url: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
+    retrieved: '2026-11-18'
+    notes: 'Tindie "Product Retired"'

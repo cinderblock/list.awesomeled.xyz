@@ -1,11 +1,21 @@
 name: ESP Level Shifter
+status: discontinued
 outputs:
   count: 1
   clocked: false
 power:
   voltage:
     max: 5
+dead_links:
+  - url: https://www.amazon.com/ACROBOTIC-ESP8266-Adapter-WS2812B-Raspberry/dp/B07JFCGH8C
+    checked: '2026-11-18'
+    notes: Amazon 404; no Wayback capture exists
 links:
   product: https://www.amazon.com/ACROBOTIC-ESP8266-Adapter-WS2812B-Raspberry/dp/B07JFCGH8C
 parent: ESP-01 (ESP8266)
 price: 8.99
+sources:
+  status:
+    url: https://acrobotic.com/
+    retrieved: '2026-11-18'
+    notes: '"Archived edition: this site no longer processes orders"; the ACROBOTIC Amazon listing returns 404'

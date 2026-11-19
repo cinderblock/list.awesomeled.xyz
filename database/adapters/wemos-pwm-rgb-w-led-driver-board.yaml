@@ -14,7 +14,15 @@ diy_or_ots: OTS
 links:
   product: https://www.ebay.co.uk/itm/133875147448?hash=item1f2b94a2b8:g:4rAAAOSwRG1hPezJ
 parent: WeMos D1 Mini (ESP32/ESP8266)
-price: 12
+price:
+  amount: 6.95
+  currency: GBP
+price_source:
+  notes: eBay blocks scripted reads (403), so read from the latest Wayback capture; private seller (no VAT), more than 10 available, 243 sold. Postage extra
+  part: MLP201141
+  retrieved: '2026-02-08'
+  url: https://web.archive.org/web/20260208103400/https://www.ebay.co.uk/itm/133875147448
+  vendor: Mottramlabs (eBay UK)
 software:
   works_with:
     - WLED

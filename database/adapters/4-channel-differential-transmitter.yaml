@@ -13,4 +13,10 @@ diy_or_ots: OTS
 links:
   product: https://www.wizardofwire.com/product/data-to-differential-board/
 parent: Pixel Data
-price: 15
+price: 11
+price_source:
+  notes: Listed as "Data To Differential Transmitter"; out of stock at retrieval
+  part: DD100
+  retrieved: '2026-11-18'
+  url: https://www.wizardofwire.com/product/data-to-differential-board/
+  vendor: Wizard of Wire

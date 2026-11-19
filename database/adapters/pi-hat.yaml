@@ -1,8 +1,23 @@
 name: Pi Hat
+status: discontinued
 creator:
   name: Microcyb
   url: http://microcyb.com/
 notes: Phoenix Screw
+dead_links:
+  - url: https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
+    archive: https://web.archive.org/web/20250716105223/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
+    checked: '2026-11-18'
 links: {}
 parent: Yes
-price: 22
+price: 28.99
+price_source:
+  notes: Last list price of Microcyb's "Raspberry Pi Pixel HAT Controller Dual Output 5v - 12v" (archived capture, out of stock then; $19.99 in 2022-2023)
+  retrieved: '2025-07-16'
+  url: https://web.archive.org/web/20250716105223/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
+  vendor: Microcyb
+sources:
+  status:
+    url: https://microcyb.com/shop.php?category=LED+pixel+Controller
+    retrieved: '2026-11-18'
+    notes: 'Microcyb now lists only ShowSpark controllers; the old Ecwid store (espartstick.company.site) says "The site is not available"'

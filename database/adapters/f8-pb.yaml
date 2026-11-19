@@ -10,15 +10,25 @@ power:
     max: 12
 dead_links:
   - url: https://kulplights.com/product/f8-pb/
-    checked: '2026-07-01'
+    archive: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
+    checked: '2026-11-18'
 links:
   product: https://kulplights.com/product/f8-pb/
 parent: BeagleBone
-price: 81
+price: 86
+price_source:
+  notes: Last list price (archived capture; out of stock then)
+  retrieved: '2022-01-23'
+  url: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
+  vendor: Kulp Lights
 software:
   firmware:
     - FPP
 sources:
+  status:
+    url: https://wiredwatts.com/klf8pb
+    retrieved: '2026-11-18'
+    notes: 'Wired Watts: "This product has been discontinued."; kulplights.com product page 404'
   software.firmware:
     url: https://github.com/FalconChristmas/fpp/tree/master/capes/pb
     retrieved: '2026-11-18'

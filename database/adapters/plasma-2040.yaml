@@ -1,4 +1,5 @@
 name: Plasma 2040
+status: discontinued
 creator: Pimoroni
 outputs:
   clocked: selectable
@@ -8,3 +9,22 @@ links:
   product: https://shop.pimoroni.com/products/plasma-2040
 parent: Rpi 2040
 price: 16
+price_source:
+  notes: Last list price shown on the retired product page (US store; GBP 11.75 on the UK store)
+  part: PIM582
+  retrieved: '2026-11-18'
+  url: https://shop.pimoroni.com/en-us/products/plasma-2040
+  vendor: Pimoroni
+related:
+  - type: replacement
+    source:
+      url: https://shop.pimoroni.com/en-us/products/plasma-2040
+      retrieved: '2026-11-18'
+      notes: 'Pimoroni: "Meet its successor Plasma 2350"'
+    name: Plasma 2350
+    url: https://shop.pimoroni.com/en-us/products/plasma-2350
+sources:
+  status:
+    url: https://shop.pimoroni.com/en-us/products/plasma-2040
+    retrieved: '2026-11-18'
+    notes: '"We no longer stock this product" ... "Meet its successor Plasma 2350"'

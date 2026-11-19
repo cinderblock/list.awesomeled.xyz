@@ -1,11 +1,26 @@
 name: ESP Pixnode
+status: discontinued
 outputs:
   count: 6
   clocked: false
 power:
   voltage:
     max: 5
+dead_links:
+  - url: https://jboards.ecwid.com/ESPixNode-p127558674
+    archive: https://web.archive.org/web/20210123104718/https://jboards.ecwid.com/ESPixNode-p127558674
+    checked: '2026-11-18'
 links:
   product: https://jboards.ecwid.com/ESPixNode-p127558674
 parent: NodeMCU (ESP8266)
-price: 13
+price: 14
+price_source:
+  notes: Last list price (archived capture; out of stock at the time)
+  retrieved: '2021-01-23'
+  url: https://web.archive.org/web/20210123104718/https://jboards.ecwid.com/ESPixNode-p127558674
+  vendor: JBoards
+sources:
+  status:
+    url: https://web.archive.org/web/20250822194830/https://jboards.ecwid.com/ESPixNode-p127558674
+    retrieved: '2026-11-18'
+    notes: '"Sorry, the requested product is not available" (2025-08-22 capture); the JBoards store now returns 404'

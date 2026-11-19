@@ -1,4 +1,5 @@
 name: ESP32 ThingPlus DMX to LED
+status: active
 creator: Sparkfun
 notes: Isolated DMX , Artnet compatible
 inputs:
@@ -13,6 +14,16 @@ power:
     max: 12
 diy_or_ots: OTS
 links:
-  product: https://www.sparkfun.com/products/15110
+  product: https://www.sparkfun.com/sparkfun-esp32-thing-plus-dmx-to-led-shield.html
 parent: ESP32
-price: 20
+price: 18.5
+price_source:
+  part: DEV-15110
+  retrieved: '2026-11-18'
+  url: https://www.sparkfun.com/sparkfun-esp32-thing-plus-dmx-to-led-shield.html
+  vendor: SparkFun
+sources:
+  status:
+    url: https://www.sparkfun.com/sparkfun-esp32-thing-plus-dmx-to-led-shield.html
+    retrieved: '2026-11-18'
+    notes: 'in stock, $18.50'

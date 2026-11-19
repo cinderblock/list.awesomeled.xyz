@@ -13,7 +13,12 @@ power:
 dead_links:
   - url: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
     archive: https://web.archive.org/web/20250427203401/https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
-    checked: '2026-07-01'
+    checked: '2026-11-18'
 diy_or_ots: OTS
 links:
   product: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
+sources:
+  status:
+    url: https://digitalambiance.com/?s=pixellauncher&post_type=product
+    retrieved: '2026-11-18'
+    notes: 'shop search: "No products were found matching your selection."; product page 404'

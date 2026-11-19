@@ -14,6 +14,12 @@ diy_or_ots: DIY
 links:
   product: https://github.com/srg74/WLED-wemos-shield
 parent: Wemos D1 Mini (ESP32/ESP8266)
+price: 18.99
+price_source:
+  notes: Assembled shield from the creator's Tindie store (serg74), out of stock since 2024-11-10. MoonModules also lists it at $22.32, seller on a break until 2026-12-08
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/serg74/wled-shield-board-for-addressable-leds/
+  vendor: serg74 (Tindie)
 software:
   firmware:
     - WLED

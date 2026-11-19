@@ -1,4 +1,5 @@
 name: RaspPi Isolated DMX
+status: active
 creator: Arjan van Vught
 notes: Isolated DMX-512 interface for Raspberry Pi - no pixel outputs
 outputs:
@@ -13,5 +14,12 @@ price:
   amount: 29.95
   currency: EUR
 price_source:
-  retrieved: '2026-07-03'
+  notes: With the 3-pin connector; 5-pin +EUR 9.95. The page doesn't say whether VAT is included
+  retrieved: '2026-11-18'
+  url: https://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
   vendor: BitWizard shop
+sources:
+  status:
+    url: https://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+    retrieved: '2026-11-18'
+    notes: '"Availability: In Stock", EUR 29.95'

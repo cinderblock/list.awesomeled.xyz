@@ -1,4 +1,5 @@
 name: 6x SMD LED Shield
+status: discontinued
 creator: Evil Genius Labs
 outputs:
   count: 6
@@ -12,3 +13,13 @@ links:
   product: https://www.tindie.com/products/19174/
 parent: Wemos Dx Mini (ESP32/ESP8266)
 price: 16
+price_source:
+  notes: Last list price on the retired listing (sold out since 2021-07-25), partially assembled (PCB + SMD parts, no Wemos). The bare PCB is still an OSH Park shared project (dNnNjJRk)
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/jasoncoon/smd-6-output-wemos-d1-mini-wi-fi-led-controller/
+  vendor: Evil Genius Labs (Tindie)
+sources:
+  status:
+    url: https://www.tindie.com/products/jasoncoon/smd-6-output-wemos-d1-mini-wi-fi-led-controller/
+    retrieved: '2026-11-18'
+    notes: 'Tindie "Product Retired", sold out since 2021-07-25; the creator now only offers the bare PCB via OSH Park'

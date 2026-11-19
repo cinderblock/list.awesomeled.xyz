@@ -1,4 +1,5 @@
 name: RPI-28D
+status: discontinued
 creator: Hanson Electronics
 outputs:
   count: 3
@@ -11,13 +12,32 @@ diy_or_ots: OTS
 links:
   product: http://www.hansonelectronics.com.au/product/rpi-28d/
 parent: Raspberry Pi
-price: 21.85
+price:
+  amount: 35
+  currency: AUD
+price_source:
+  notes: Last list price on the obsolete listing, inc. tax (GST); out of stock
+  retrieved: '2026-11-18'
+  url: https://www.hansonelectronics.com.au/product/rpi-28d/
+  vendor: Hanson Electronics
+related:
+  - type: replacement
+    source:
+      url: https://www.hansonelectronics.com.au/product/rpi-28d/
+      retrieved: '2026-11-18'
+      notes: '"This product has been superseded by" the rPI-28D+ (in stock, AU$40)'
+    name: rPI-28D+
+    url: https://www.hansonelectronics.com.au/product/rpi-28dplus/
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.hansonelectronics.com.au/product/rpi-28d/
+    retrieved: '2026-11-18'
+    notes: '"This product has been superseded by" the rPI-28D+; category Obsolete, out of stock'
   software.firmware:
     url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
     retrieved: '2026-11-18'

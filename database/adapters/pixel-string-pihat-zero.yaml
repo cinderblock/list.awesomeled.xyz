@@ -1,11 +1,21 @@
 name: Pixel String Pihat Zero
+status: discontinued
 creator: Jboards
 outputs:
   count: 2
 power:
   voltage:
     max: 12
+dead_links:
+  - url: https://jboards.ecwid.com/Pixel-String-Pihat-Zero-p133155360
+    checked: '2026-11-18'
+    notes: JBoards store gone (404); the only Wayback capture (2025-06-03) already shows "product is not available"
 links:
   product: https://jboards.ecwid.com/Pixel-String-Pihat-Zero-p133155360
 parent: Raspberry Pi
 price: 12
+sources:
+  status:
+    url: https://web.archive.org/web/20250603173027/https://jboards.ecwid.com/Pixel-String-Pihat-Zero-p133155360
+    retrieved: '2026-11-18'
+    notes: '"Sorry, the requested product is not available" (2025-06-03 capture); the JBoards store now returns 404'

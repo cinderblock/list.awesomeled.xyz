@@ -15,7 +15,12 @@ links:
 other_links:
   - https://electromage.com/docs/output-expander
 parent: Any UART / Serial
-price: 15
+price: 19
+price_source:
+  notes: Pixelblaze Output Expander, sold out at retrieval ("Sold out - check distributors"). Tindie also lists $19, seller on a break until 2027-05-29
+  retrieved: '2026-11-18'
+  url: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
+  vendor: ElectroMage
 software:
   works_with:
     - Pixelblaze

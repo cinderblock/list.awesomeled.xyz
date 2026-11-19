@@ -1,4 +1,5 @@
 name: PocketScroller V2
+status: active
 creator: Kulp Lights
 notes: Drives LED panel matrices (P10/P5) via FPP, not pixel strings
 outputs:
@@ -13,13 +14,23 @@ diy_or_ots: DIY
 links:
   product: https://kulplights.com/product/pocketscroller/
 parent: PocketBeagle
-price: 51
+price: 28
+price_source:
+  notes: Cape only (no PocketBeagle 2, no SD card). With a 32 GB FPP card $45; with a PocketBeagle 2 premounted $68-$105
+  part: POCKETSCROLLER-N-None
+  retrieved: '2026-11-18'
+  url: https://kulplights.com/product/pocketscroller/
+  vendor: Kulp Lights
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://kulplights.com/product/pocketscroller/
+    retrieved: '2026-11-18'
+    notes: 'all variants in stock, $28-$105'
   software.firmware:
     url: https://github.com/FalconChristmas/fpp/blob/master/capes/pb/panels/PocketScroller.json
     retrieved: '2026-11-18'

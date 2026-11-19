@@ -1,4 +1,5 @@
 name: 6x LED Shield
+status: active
 creator: Evil Genius Labs
 outputs:
   count: 6
@@ -9,6 +10,17 @@ power:
     max: 5
 diy_or_ots: DIY
 links:
-  product: https://www.tindie.com/products/16255/
+  product: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
 parent: Wemos Dx Mini (ESP32/ESP8266)
-price: 8
+price: 13.95
+price_source:
+  notes: OSH Park shared project by the creator (v1.4); 3 bare PCBs (OSH Park's minimum order), parts not included. The Tindie listing is retired, sold out since 2021-04-03
+  part: xeBcFP0G
+  retrieved: '2026-11-18'
+  url: https://oshpark.com/shared_projects/xeBcFP0G
+  vendor: OSH Park
+sources:
+  status:
+    url: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
+    retrieved: '2026-11-18'
+    notes: "creator's Buy section: order the PCB directly from OSH Park (Tindie listing retired)"

@@ -1,4 +1,5 @@
 name: 16x LED Shield
+status: active
 creator: Evil Genius Labs
 outputs:
   count: 16
@@ -9,6 +10,17 @@ power:
     max: 5
 diy_or_ots: DIY
 links:
-  product: https://www.tindie.com/products/15247/
+  product: https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller
 parent: NodeMCU ESP32
-price: 9
+price: 15.95
+price_source:
+  notes: OSH Park shared project by the creator; 3 bare PCBs (OSH Park's minimum order, $5.32 each), parts not included. The Tindie listing ($9 PCB in 2020) is retired, sold out since 2021-05-12
+  part: dDX67jyf
+  retrieved: '2026-11-18'
+  url: https://oshpark.com/shared_projects/dDX67jyf
+  vendor: OSH Park
+sources:
+  status:
+    url: https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller
+    retrieved: '2026-11-18'
+    notes: "creator's Buy section: order the PCB directly from OSH Park (Tindie kit listing retired)"

@@ -1,4 +1,5 @@
 name: OctoWS2811 Adaptor
+status: active
 creator: PJRC
 outputs:
   count: 8
@@ -12,3 +13,14 @@ links:
   product: https://www.pjrc.com/store/octo28_adaptor.html
 parent: Teensy 3.2
 price: 10
+price_source:
+  notes: PJRC's product page now says SparkFun manufactures Teensy products and links here
+  part: PRT-28372
+  retrieved: '2026-11-18'
+  url: https://www.sparkfun.com/octows2811-adaptor-for-teensy-3-x-4-x.html
+  vendor: SparkFun
+sources:
+  status:
+    url: https://www.sparkfun.com/octows2811-adaptor-for-teensy-3-x-4-x.html
+    retrieved: '2026-11-18'
+    notes: 'in stock, $10.00; PJRC now sends buyers to SparkFun'

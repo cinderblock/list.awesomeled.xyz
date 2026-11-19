@@ -1,4 +1,5 @@
 name: Meanwell PDU with Differential Receiver
+status: active
 creator: Wizard of Wire
 notes: 4 Channel differential receiver and fused power distribution bolts straight on to PSU
 outputs:
@@ -15,3 +16,14 @@ links:
   product: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection/
 parent: Meanwell 350w PSU
 price: 21
+price_source:
+  notes: Listed as "Original PSU Differential Receiver"
+  part: MWD100
+  retrieved: '2026-11-18'
+  url: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection/
+  vendor: Wizard of Wire
+sources:
+  status:
+    url: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection/
+    retrieved: '2026-11-18'
+    notes: 'in stock (47), $21'

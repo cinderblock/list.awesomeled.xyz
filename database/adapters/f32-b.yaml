@@ -11,17 +11,26 @@ power:
 dead_links:
   - url: https://kulplights.com/product/f32-b/
     archive: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/
-    checked: '2026-07-01'
+    checked: '2026-11-18'
 links:
   product: https://kulplights.com/product/f32-b/
 parent: BeagleBone
-price: 95
+price: 110
+price_source:
+  notes: Last list price (archived capture; out of stock then)
+  retrieved: '2022-01-23'
+  url: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/
+  vendor: Kulp Lights
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://wiredwatts.com/klf32b
+    retrieved: '2026-11-18'
+    notes: 'Wired Watts: "This product has been discontinued."; kulplights.com product page 404'
   software.firmware:
     url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
     retrieved: '2026-11-18'

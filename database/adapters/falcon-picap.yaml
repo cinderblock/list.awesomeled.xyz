@@ -1,4 +1,5 @@
 name: Falcon PiCap
+status: discontinued
 creator: PixelController, LLC
 outputs:
   count: 2
@@ -6,17 +7,39 @@ outputs:
 power:
   voltage:
     max: 24
+dead_links:
+  - url: https://www.pixelcontroller.com/store/index.php?id_product=47
+    archive: https://web.archive.org/web/20210415104512/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+    checked: '2026-11-18'
+    notes: redirects to the store home page
 diy_or_ots: OTS
 links:
   product: https://www.pixelcontroller.com/store/index.php?id_product=47
 parent: Raspberry Pi
 price: 35
+price_source:
+  notes: Last list price (archived capture)
+  retrieved: '2021-04-15'
+  url: https://web.archive.org/web/20210415104512/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+  vendor: PixelController
+related:
+  - type: replacement
+    source:
+      url: https://pixelcontroller.com/store/featured/99-falcon-picap-v2.html
+      retrieved: '2026-11-18'
+      notes: "PixelController's current PiCap, 4 outputs, In Stock at USD $52.00"
+    name: Falcon PiCap V2
+    url: https://pixelcontroller.com/store/featured/99-falcon-picap-v2.html
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://pixelcontroller.com/store/pixel-controllers/47-falcon-picap.html
+    retrieved: '2026-11-18'
+    notes: '"This product is no longer available."; the store now sells the Falcon PiCap V2'
   software.firmware:
     url: https://github.com/FalconChristmas/fpp/blob/master/www/help/warning-helpers/warning-13.md
     retrieved: '2026-11-18'

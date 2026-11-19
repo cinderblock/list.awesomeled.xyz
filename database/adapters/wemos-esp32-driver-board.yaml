@@ -14,4 +14,12 @@ diy_or_ots: OTS
 links:
   product: https://www.ebay.co.uk/itm/133705567939?hash=item1f21790ec3:g:IAUAAOSwo5VgXL05
 parent: WeMos Mini
-price: 9
+price:
+  amount: 7.3
+  currency: GBP
+price_source:
+  notes: eBay blocks scripted reads (403), so read from the latest Wayback capture; private seller (no VAT), more than 10 available, 548 sold. Postage extra
+  part: MLP201123
+  retrieved: '2025-12-23'
+  url: https://web.archive.org/web/20251223085343/https://www.ebay.co.uk/itm/133705567939
+  vendor: Mottramlabs (eBay UK)

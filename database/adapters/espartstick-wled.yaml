@@ -16,11 +16,21 @@ power:
   current:
     max: 15
 dead_links:
-  - url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller/p/170368862/category=0
-    archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html
-    checked: '2026-07-01'
+  - url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-Wi-Fi-EspArtStick-pixel-controller/p/170368862/category=0
+    archive: https://web.archive.org/web/20250621071152/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+    checked: '2026-11-18'
 diy_or_ots: DIY
 links:
   product: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller/p/170368862/category=0
 parent: Wemos D1 Mini (ESP32/ESP8266)
-price: 24
+price: 24.99
+price_source:
+  notes: Last list price (archived capture of Microcyb's Ecwid store, in stock then)
+  retrieved: '2025-06-21'
+  url: https://web.archive.org/web/20250621071152/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+  vendor: Microcyb
+sources:
+  status:
+    url: https://microcyb.com/shop.php?category=LED+pixel+Controller
+    retrieved: '2026-11-18'
+    notes: 'Microcyb now lists only ShowSpark controllers; the old Ecwid store (espartstick.company.site) says "The site is not available"'
