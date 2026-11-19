@@ -19,6 +19,7 @@ export const USD_PER: Record<string, number> = {
   AUD: 0.673,
   JPY: 0.00627,
   CNY: 0.15,
+  INR: 0.0107,
 };
 
 const CODE_TO_SYMBOL: Record<string, string> = { USD: '$', EUR: '€', GBP: '£', JPY: '¥' };
