@@ -84,7 +84,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**Current step: 5 (global search).** Steps 1–4 shipped in `d406c2c`.
+**Current step: 7 (mobile card list).** Steps 1–6 are live (`d406c2c`, `60cd310`, `4681573`, `632ddde`).
 
 ## Findings / gotchas
 
@@ -109,6 +109,13 @@ Each step ships on its own (rebase, checks, push).
 - **Stale nested dependency after a rebase.** When upstream added `ajv-formats`, `bun install` reported no changes but left `node_modules/ajv-formats/node_modules/ajv@8.17.1` behind, and `tsc` failed on mismatched types. Deleting that folder and reinstalling fixed it.
 - **Shell quirks here.** `curl` fails on https (`(43) A libcurl function was given a bad argument`): use `node` `fetch`. Backslashes in an inline `python - <<EOF` are halved: write the script to a file, or use the Edit tool. Git Bash rewrites arguments that start with `/` into Windows paths.
 - **The Windows clipboard turns line feeds into CRLF**; clipboard assertions split on either.
+- **A query string breaks hydration on a prerendered site.** Each path is prerendered once, without a query, so `/controllers?f=…`, `/compare?e=…` and `/search?q=…` made the first client render differ from the HTML: React logged error #418 and rebuilt the page. It only shows on a production build served statically (the dev server renders each request with its query). Fix: `useTableParams` and the search page ignore the query for the hydration render and apply it in the next one; an inline script marks `<html data-url-state="pending">` so CSS holds the affected content back instead of flashing the unfiltered version; effects that read the URL (restore from / save to storage) wait for `urlReady`.
+- **`data-hydrated` must mean "URL applied".** It is set in the render after hydration (`useHydrated()` true), the same one that applies the query string; setting it in a plain mount effect let tests read the pre-URL table.
+- **Unknown entry URLs in production** need three things: a root `404.html` (the SPA shell, copied by `buildEnd` in `react-router.config.ts`) so the host answers with a real 404; a `clientLoader` on the entry route (without one the failure is "No result found for routeId", not a 404); and a catch-all `*` route whose client loader throws 404, so unmatched paths hydrate the shell the normal way. In dev the same URLs log a hydration mismatch because the dev server renders the error itself: harmless, dev only.
+- **Route order matters for `:category.<ext>`.** A segment like `:category.json` ranks as static, so `search-index.json` must be declared before it or the category route swallows it.
+- **A loader route missing from the prerender list kills the dev server** ("Invalid route exports found when prerendering with ssr:false"). Add the path to `getAllRoutes()` in `data.ts` before registering the route in `routes.ts`.
+- **Background tasks stop after two hours.** The dev server and the static preview were both killed by the limit; the dev server was restarted, the preview was not (it had the maximum already). Production checks now start a short-lived preview inside one command.
+- **Tests must not assume the data.** Other streams change rows all day: a price in INR (no exchange rate on file) broke "missing values sort last"; a newly filled `outputs.protocols` made `/^Outputs/` match two compare rows. Assert on structure and on values read back from the page, not on specific numbers.
 - New unit kinds appear upstream (`length` arrived mid-rebase). `units.ts` needs a display-unit list per kind; `fields.ts` treats any shared schema definition named after a unit kind as a quantity.
 - Build after this increment (`d406c2c`): category chunk 158 kB (47 gz, was 84 / 27 for table + route), `columns` chunk 40 kB (13 gz) is all an entry page loads from the table code (was 83 / 27), CSS 77 kB (13 gz), `controllers/index.html` 455 kB (52 gz). The table chunk grew; lazy-loading the drawer, picker and export menu is a candidate for step 12.
 
@@ -120,9 +127,10 @@ Each step ships on its own (rebase, checks, push).
 - [x] Step 3 faster table — one-click sort, facet counts, filters panel, dense rows, search over all fields, pill click-to-filter, `_notes` footnotes, has-a-value filters.
 - [x] Step 4 copy & export — share & export menu; static CSV with every field; `/<category>.json`.
 - [x] 2026-11-18 5:49 PM PST (01:49Z): steps 1–4 pushed as `d406c2c` and live. 48 e2e tests (20 new in `e2e/table.test.ts`) and 61 unit tests pass; production smoke test clean.
-- [ ] Step 5 global search + 404
-- [ ] Step 6 compare
-- [ ] Step 7 mobile
+- [x] Step 5 global search + 404 — `60cd310`: `/search-index.json` (490 entries, 41 kB gz), Ctrl/⌘+K palette, `/search?q=`, not-found page with suggestions, `404.html` written by `buildEnd`, catch-all route.
+- [x] Step 6 compare — `4681573`: row checkboxes + tray, `/compare?e=…` with differences-only, add / reorder / remove, copy link and Markdown, entry-page button.
+- [x] 2026-11-18 7:15 PM PST (03:15Z): hydration fix for URLs with a query string and the phone-width header fix pushed (`4681573`, `632ddde`). 77 e2e tests, 286 unit tests pass.
+- [ ] Step 7 mobile — header done (`632ddde`); card list for tables is next.
 - [ ] Step 8 home page
 - [ ] Step 9 entry page polish
 - [ ] Step 10 SEO / OpenGraph
