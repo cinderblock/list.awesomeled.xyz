@@ -179,6 +179,19 @@ function asStrings(v: unknown): string[] {
   return [];
 }
 
+/**
+ * The names in a name-list field: a list's strings, or a single string's
+ * comma-separated parts ("PocketBeagle, PocketBeagle 2" names two hosts
+ * either of which works; a leading "or" is dropped).
+ */
+export function fieldNames(v: unknown): string[] {
+  if (typeof v !== 'string') return asStrings(v);
+  return v
+    .split(',')
+    .map((part) => part.trim().replace(/^(or|and)\s+/i, ''))
+    .filter(Boolean);
+}
+
 /** Names an entry answers to: name, aliases, variant names */
 export function entryNames(entry: BaseEntry): string[] {
   const names = [entry.name, ...asStrings(entry.aliases)];
@@ -390,7 +403,7 @@ function computeLinked(
   for (const category of PIXEL_HARDWARE) {
     for (const entry of db.get(category) ?? []) {
       const ref = `${category}/${entry.id}`;
-      const listed = asStrings(get(entry, 'outputs.protocols'));
+      const listed = fieldNames(get(entry, 'outputs.protocols'));
       let base = targets(ref, 'drives');
       const via: string[] = [];
       if (listed.length === 0) {
@@ -497,7 +510,7 @@ export function buildRelationGraph(db: Database): RelationGraph {
 
       for (const nf of NAME_FIELDS) {
         if (nf.category !== category) continue;
-        for (const name of asStrings(get(entry, nf.path))) {
+        for (const name of fieldNames(get(entry, nf.path))) {
           const refs = resolveName(indexes[nf.index], name);
           if (refs.length === 0) unresolved.push({ from, field: nf.path, name });
           for (const to of refs) addEdge({ from, to, kind: nf.kind, field: nf.path, via: name });
@@ -835,7 +848,7 @@ export function inlineNameLinks(
   const out: InlineNameLinks = {};
   for (const nf of NAME_FIELDS) {
     if (nf.category !== category) continue;
-    const values = asStrings(get(entry, nf.path));
+    const values = fieldNames(get(entry, nf.path));
     if (!values.length) continue;
     out[nf.path] = {};
     for (const name of values) {

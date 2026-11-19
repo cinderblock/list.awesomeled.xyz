@@ -17,6 +17,7 @@ import { parse } from 'yaml';
 import type { BaseEntry } from '../app/lib/types';
 import {
   buildRelationGraph,
+  fieldNames,
   NAME_FIELDS,
   EDGE_KINDS,
   INDEX_CATEGORIES,
@@ -102,7 +103,7 @@ const perField: FieldStats[] = NAME_FIELDS.map((nf) => {
   let names = 0;
   for (const e of entries) {
     const v = get(e, nf.path);
-    const list = Array.isArray(v) ? v : typeof v === 'string' ? [v] : [];
+    const list = fieldNames(v);
     if (list.length) filled++;
     names += list.length;
   }

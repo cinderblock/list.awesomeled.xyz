@@ -2,6 +2,7 @@ import { describe, expect, test } from 'bun:test';
 import {
   buildRelationGraph,
   escapeFilterValue,
+  fieldNames,
   inlineNameLinks,
   linksForEntry,
   makersOf,
@@ -74,7 +75,7 @@ const db: Database = new Map<string, BaseEntry[]>([
       entry('fw-only', { name: 'FW Only', software: { firmware: ['wled'] } }),
       entry('cape', {
         name: 'Cape',
-        inputs: { requires_host: 'BeagleBone Black' },
+        inputs: { requires_host: 'BeagleBone Black, or PocketBeagle' },
         outputs: { connector: { ref: 'no-such-connector' } },
       }),
     ],
@@ -112,6 +113,13 @@ describe('names', () => {
     expect(normalizeName('APA-102')).toBe('apa102');
     expect(normalizeName('WS2812 B')).toBe('ws2812b');
     expect(normalizeName('QLC+')).toBe('qlc+');
+  });
+
+  test('a single-string field lists names separated by commas', () => {
+    expect(fieldNames('PocketBeagle, PocketBeagle 2')).toEqual(['PocketBeagle', 'PocketBeagle 2']);
+    expect(fieldNames('a Mac, or a Node')).toEqual(['a Mac', 'a Node']);
+    expect(fieldNames(['WS2811, 400kHz', 7])).toEqual(['WS2811, 400kHz']);
+    expect(fieldNames(undefined)).toEqual([]);
   });
 
   test('resolve through variant names and aliases', () => {
@@ -259,8 +267,11 @@ describe('entry page rows', () => {
     expect(solo.family.map((r) => r.label)).toEqual(['Related']);
   });
 
-  test('a host board lists what it hosts', () => {
+  test('a host board lists what it hosts, whichever of several hosts it is', () => {
     expect(namesIn(rowOf(links('microboards/bbb').worksWith, 'Host for'))).toEqual(['Cape']);
+    expect(namesIn(rowOf(links('microboards/pocketbeagle').worksWith, 'Host for'))).toEqual([
+      'Cape',
+    ]);
   });
 });
 

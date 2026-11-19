@@ -1,7 +1,7 @@
 import type { Route } from './+types/entry';
 import { data, Link, useNavigate } from 'react-router';
 import { getCategoryById, loadEntry, loadCategoryData, getRelationGraph } from '~/lib/data';
-import { linksForEntry, inlineNameLinks, type InlineNameLinks } from '~/lib/relations';
+import { fieldNames, linksForEntry, inlineNameLinks, type InlineNameLinks } from '~/lib/relations';
 import { LocalDate } from '~/components/ui/LocalDate';
 import { getColumnsForCategory } from '~/lib/columns';
 import { parsePrice, formatPriceText } from '~/lib/currency';
@@ -844,9 +844,7 @@ function formatValue(
   // that match an entry become links to it, in place
   const linked = ctx.nameLinks[path];
   if (linked && (typeof value === 'string' || Array.isArray(value))) {
-    const names = (Array.isArray(value) ? value : [value]).filter(
-      (v): v is string => typeof v === 'string'
-    );
+    const names = fieldNames(value);
     if (names.length) return <NameLinkList names={names} links={linked} />;
   }
 
