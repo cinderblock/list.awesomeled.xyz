@@ -365,3 +365,27 @@ alternate links read as noise. Showing each link as its host name (the way
 `sources` provenance does: "docs.beagleboard.org", "github.com") would fix
 both; the datasheet card's design is stream 5's, the generic value rendering
 stream 7's.
+
+## Spec contradictions found while writing new entries (stream 2)
+
+Found by cross-links (stream 4) research for the new pixel-IC and board
+entries; not applied because they're existing spec values, not links:
+
+- `pixel-ics/ws2818b`: `release_year` 2018, but the datasheet's revision
+  log starts "V1.0 ... New ... 20170523"; `electrical.output_voltage` 12V,
+  but V1.3 (2019-09-06) "Modify the RGB port withstand voltage and add 24V
+  applications" <https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf>
+- `pixel-ics/lpd8806`: `color.channel_bits` 8, but the LPD8803/LPD8806
+  datasheet says "LPD8803 provides 7 bits of data" and "Color Resolution 7
+  Bits" <https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf>
+- `microboards/nodemcu-v2`: `io.max_outputs` 2, but WLED's ESP8266
+  multi-strip docs say "There is a maximum of 3 strips supported"
+  <https://github.com/wled/WLED-Docs/blob/main/docs/features/multi-strip.md>
+- `microboards/orange-pi-lts`: `compute.soc` H2+, but orangepi.org's
+  Zero LTS page says "AllWinner H3"
+  <http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html>
+  (CNX Software's 2019 article calls it H2+; needs a look at the board)
+- Makers: `pixel-ics/p9883` says "Power MOS Microelectronics", formerly
+  DMS Microelectronics, the creator on `pixel-ics/p9813`. If that's one
+  company, one spelling (or a maker alias in `app/lib/relations.ts`) puts
+  both under one "More from" row.
