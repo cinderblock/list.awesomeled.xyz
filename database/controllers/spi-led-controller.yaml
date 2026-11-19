@@ -7,7 +7,7 @@ creator:
 notes: See tech specs PDF for full details
 inputs:
   physical:
-    Ethernet: true
+    DMX: RJ-45 in/out
   standalone: true
 outputs:
   count: 1
@@ -101,6 +101,10 @@ sources:
     url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI_LED_Controller_user_manual.pdf
     retrieved: '2026-11-18'
     notes: Section 5 'Creating and exporting animations in LED Strip Studio software'.
+  inputs.physical:
+    url: https://www.ledstripstudio.com/shop/product/spi-led-controller/
+    retrieved: '2026-11-18'
+    notes: "'One Controller, No Network, No Laptop … DMX arrives and leaves over RJ-45 connectors'"
 technical_notes:
   - Price varies by pixel count software license (1 year included)
   - 10A per output channel

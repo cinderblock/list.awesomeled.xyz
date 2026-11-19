@@ -68,7 +68,7 @@ power:
     min: 5
     max: 24
   current:
-    max: 20
+    max: 10 # 10 A total, 5 A per output (polyfuse protected)
 data:
   storage:
     - type: uSD
@@ -104,6 +104,10 @@ sources:
     url: https://www.ledstripstudio.com/user_manual/lss_supported-IC-types_clients.pdf
     retrieved: '2026-11-18'
     notes: Maker's 'Supported ICs' PDF (dated 2026-04-28), linked from https://www.ledstripstudio.com/products/lec3/ .
+  power.current.max:
+    url: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+    retrieved: '2026-11-18'
+    notes: "'Max Current 10 A total, 5 A per output, polyfuse protected'"
 technical_notes:
   - 4096 digital RGB LEDs or 3072 RGBW LEDs total; available in 1024/2048/4096 pixel versions
   - Art-Net up to 24 universes; LED Strip Studio software lifetime license included

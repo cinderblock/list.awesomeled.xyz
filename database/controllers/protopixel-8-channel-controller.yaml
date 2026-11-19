@@ -4,9 +4,10 @@ creator:
   name: ProtoPixel
   url: https://www.protopixel.io
   page: https://www.protopixel.io/pricing
-notes: Driven by the ProtoPixel software running on a connected host over USB. Up to 4800 RGB LEDs across two 4-output satellites (600 per output).
+notes: Driven over Ethernet (direct or through a switch) by ProtoPixel Create on a Mac, or by a ProtoPixel Node or Player. Up to 4800 RGB LEDs across two 4-output satellites (600 per output).
 inputs:
   physical:
+    Ethernet: true
     USB: true
   standalone: false
   requires_host: Mac (MacBook or iMac) running ProtoPixel Create, or a ProtoPixel Node / ProtoPixel Player
@@ -50,6 +51,10 @@ sources:
     url: https://protopixel.net/doc/controller/pages/protopixel_hw_ecosystem.html
     retrieved: '2026-11-18'
     notes: "Ecosystem diagram: Router/Switch -> 'MacBook or iMac' over 'Ethernet cable or Wi-Fi'"
+  inputs.physical:
+    url: https://protopixel.net/doc/controller/pages/first_steps.html
+    retrieved: '2026-11-18'
+    notes: "'Plug the 10/100 ethernet connector to the controller's ethernet port'"
 technical_notes:
   - Up to 4800 RGB LEDs total across 8 outputs (600 per output)
   - Supports WS2811, WS2812, WS2813, WS2815, SK6812 and similar pixel ICs

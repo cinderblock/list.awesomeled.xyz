@@ -31,7 +31,7 @@ power:
     max: 12
 data:
   storage:
-    - type: Flash
+    - type: uSD
 price: 191
 related:
   - type: variant
@@ -55,3 +55,7 @@ sources:
     url: https://protopixel.net/doc/1ch_controller/pages/technical_features.html
     retrieved: '2026-11-18'
     notes: Maker's Sphinx docs (© 2020), 'Technical Features'. WS2812d is not a listed variant of pixels/ws2812 (B/C/E) and will stay unresolved.
+  data.storage:
+    url: https://protopixel.net/doc/1ch_controller/pages/technical_features.html
+    retrieved: '2026-11-18'
+    notes: "'Micro SD card slot for autonomous content playing'"

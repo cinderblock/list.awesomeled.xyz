@@ -11,8 +11,8 @@ vendors:
     warranty: 5 Years
 inputs:
   physical:
-    Ethernet: true
-    Wi-Fi: true
+    Ethernet: Dual
+    DMX: XLR 3-pin
   protocols:
     - Art-Net
   standalone: true
@@ -64,7 +64,7 @@ power:
   voltage:
     max: 24
   current:
-    max: 20
+    max: 10 # 10 A total, 5 A per output
 data:
   storage:
     - type: SD
@@ -111,5 +111,13 @@ sources:
     url: https://www.ledstripstudio.com/user_manual/lss_supported-IC-types_clients.pdf
     retrieved: '2026-11-18'
     notes: Linked as 'Supported ICs' from https://www.ledstripstudio.com/products/spi_matrix/ .
+  inputs.physical:
+    url: https://www.ledstripstudio.com/products/spi_matrix/
+    retrieved: '2026-11-18'
+    notes: 'comparison table: 2 Ethernet ports, no Wi-Fi'
+  power.current.max:
+    url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI-MATRIX_tech.specs_.pdf
+    retrieved: '2026-11-18'
+    notes: "'Maximal Current 10A'"
 technical_notes:
   - One year of LED Strip Studio software license included

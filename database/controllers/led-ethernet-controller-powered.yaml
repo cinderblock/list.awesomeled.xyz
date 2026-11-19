@@ -10,7 +10,8 @@ vendors:
     warranty: 5 Years
 inputs:
   physical:
-    Wi-Fi: true
+    Ethernet: Dual
+    DMX: XLR 3-pin
   standalone: true
 outputs:
   count: 4
@@ -27,9 +28,10 @@ outputs:
     max: 10
 power:
   voltage:
-    max: 24
-  current:
-    max: 20
+    min: 88
+    max: 264
+    # AC mains into the built-in 360 W supply (5 V, 10 A per SPI output)
+  connector: PowerCON
 data:
   storage:
     - type: SD
@@ -67,5 +69,13 @@ sources:
     url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
     retrieved: '2026-11-18'
     notes: "'Controls over' panel, page 1. Also any Art-Net hardware/software (the spec text copy-pastes 'SPI Matrix' there)."
+  inputs.physical:
+    url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+    retrieved: '2026-11-18'
+    notes: "'2x RJ-45 connector, internal switch, 100 Mbit/sec … XLR 3-pin connector (optional 5 pin)'; no Wi-Fi listed"
+  power.voltage:
+    url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+    retrieved: '2026-11-18'
+    notes: "'Required Input 88 ~ 264 VAC/47 ~ 63Hz (360W, without the LED strips)'"
 technical_notes:
   - Lifetime LED Strip Studio software license included

@@ -6,7 +6,9 @@ creator:
 notes: Now Bekonix (see Pattern Drivers).
 inputs:
   physical:
-    Ethernet: true
+    Bluetooth: BLE
+    NFC: true
+    USB: micro-USB (charging)
 outputs:
   count: 1
   connector: Proprietary
@@ -40,3 +42,7 @@ sources:
     url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
     retrieved: '2026-11-18'
     notes: Wayback snapshot (2019-10-14); 'Hardware Comparison' row 'LED Protocol Support', LightBox column.
+  inputs.physical:
+    url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
+    retrieved: '2026-11-18'
+    notes: "'include NFC and Bluetooth BLE … Micro USB Charging Port'"

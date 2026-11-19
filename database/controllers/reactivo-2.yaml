@@ -57,7 +57,7 @@ power:
   voltage:
     max: 24
   current:
-    max: 5
+    max: 7 # max total pass-through current
 data:
   storage:
     - type: SD
@@ -103,3 +103,7 @@ sources:
     url: https://www.ledstripstudio.com/user_manual/lss_supported-IC-types_clients.pdf
     retrieved: '2026-11-18'
     notes: "Linked as 'Supported ICs' from https://www.ledstripstudio.com/products/reactivo2/ "
+  power.current.max:
+    url: https://www.ledstripstudio.com/shop/product/reactivo-2-art-net-standalone-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: "'MAX. Total Pass Thru Current: 7A'"

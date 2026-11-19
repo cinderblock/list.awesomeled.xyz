@@ -18,7 +18,7 @@ outputs:
   driver:
     buffered: true
   pixels:
-    max_per_output: 600
+    max_per_output: 680 # maker docs; a 2020 pricing page said 600
   clocked: false # WS2811/WS2812b/WS2813/WS2815/SK6812 families
   protocols:
     - WS2811
@@ -58,3 +58,7 @@ sources:
     url: https://protopixel.net/doc/1ch_wifi/pages/10-technical_features.html
     retrieved: '2026-11-18'
     notes: Maker docs, 'Technical Features'.
+  outputs.pixels.max_per_output:
+    url: https://protopixel.net/doc/1ch_wifi/pages/10-technical_features.html
+    retrieved: '2026-11-18'
+    notes: "'Maximum capacity: Record and stream up to 680 RGB LEDs'"

@@ -7,7 +7,8 @@ creator:
 notes: Now Bekonix; see Pattern Drivers.
 inputs:
   physical:
-    Ethernet: true
+    Bluetooth: BLE
+    NFC: true
 outputs:
   count: 1
   connector: Headers
@@ -48,3 +49,7 @@ sources:
     url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
     retrieved: '2026-11-18'
     notes: Wayback snapshot (2019-10-14) of the maker page
+  inputs.physical:
+    url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
+    retrieved: '2026-11-18'
+    notes: "'the compact LightBoard Mini include NFC and Bluetooth BLE'"
