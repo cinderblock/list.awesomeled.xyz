@@ -17,6 +17,10 @@ outputs:
     ref: rj45
     notes: DMX; pixel data and Smart Remote on xConnect
 diy_or_ots: OTS
+images:
+  - file: f-test.webp
+    source: https://pixelcontroller.com/store/diy-controllers/85-F-Test.html
+    credit: PixelController, LLC
 links:
   product: https://pixelcontroller.com/store/diy-controllers/85-F-Test.html
 price: 90
