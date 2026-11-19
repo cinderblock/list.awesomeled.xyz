@@ -36,15 +36,23 @@ export default function SystemOverview({ loaderData }: Route.ComponentProps) {
             See how different components connect to create a complete addressable LED system. Click
             any component to explore that category.
           </p>
-          <Link to="/" className="view-toggle-link">
-            View as Category Grid
-          </Link>
+          <div className="diagram-intro-actions">
+            <Link to="/designer" className="btn btn--primary">
+              Design your own system
+            </Link>
+            <Link to="/" className="view-toggle-link">
+              View as Category Grid
+            </Link>
+          </div>
         </div>
       </div>
 
       <div className="diagram-container">
         <DiagramModeToggle value={simpleMode} onChange={setSimpleMode} />
-        <LEDSystemDiagram counts={counts} simpleMode={simpleMode} />
+        {/* On a phone the diagram keeps a readable size and scrolls sideways */}
+        <div className="diagram-scroll">
+          <LEDSystemDiagram counts={counts} simpleMode={simpleMode} />
+        </div>
       </div>
     </div>
   );

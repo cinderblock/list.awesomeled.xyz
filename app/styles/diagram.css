@@ -676,6 +676,18 @@
   margin-bottom: var(--space-4);
 }
 
+.diagram-intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3) var(--space-6);
+}
+
+.diagram-intro-actions .btn:hover {
+  text-decoration: none;
+}
+
 .view-toggle-link {
   display: inline-flex;
   align-items: center;
@@ -704,13 +716,22 @@
   }
 }
 
-@media (max-width: 600px) {
-  .diagram-container {
-    padding: var(--space-2);
+/* Scaled to a phone's width the labels are a few pixels tall. Below this
+   width the diagram stops shrinking and its box scrolls sideways instead. */
+@media (max-width: 760px) {
+  .diagram-scroll {
+    overflow-x: auto;
   }
 
   .led-system-diagram {
-    min-height: 300px;
+    width: 760px;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .diagram-container {
+    padding: var(--space-2);
   }
 
   .diagram-legend {
