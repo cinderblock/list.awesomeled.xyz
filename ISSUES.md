@@ -113,3 +113,25 @@ the column popover (tap) could show the same text. Separately,
 `handleBadgeClick` toggles a filter on any `.badge` in a cell, and the
 overflow pill from `renderBadgeArray` ("+3", class `badge`) is one: clicking
 it filters the column on the literal "+3", which matches nothing.
+
+## Sheet's Controllers "Interface" column is scrambled — don't restore from it
+
+**in progress — database review (stream 2, `ws/database-review`)**: verifying
+every controller's `inputs` against vendor docs.
+
+In the Google Sheet's Controllers tab the Interface column was sorted on its
+own: its values run alphabetically down the sheet (" ", "ArtNet Ethernet",
+"Bluetooth" ×4, … "DMX" …, "Ethernet" …, "FPP" …, "SD Card" ×3, "Switch
+Trigger", "TTL Serial" ×2, "USB" …, "WiFi" …) while every other column follows
+the rows, which are sorted by price. Rows added after the sort (GLEDOPTO,
+SpiNode, deskontroller V3, …) are fine. So for most original rows the sheet's
+Interface value belongs to some other controller: Fadecandy "DMX", PixLite 4
+Rugged "USB", Qolorpix "WiFi", Flex Pixel Driver "Ethernet" (the issues.txt
+"wrong interfaces"). The nested migration researched some entries but kept
+the sheet's value on others (e.g. `controllers/pixlite-4-rugged-mk2` inputs
+are USB only; `octo-mk2` lists USB and Wi-Fi).
+
+Why it matters: `inputs.physical` / `inputs.protocols` drive the Protocols
+column, badges and the designer's controller facts. **Parity (stream 1):
+please don't restore or compare controllers' interfaces from that column**;
+treat it as unknown. Other Controllers columns follow their rows.
