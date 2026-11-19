@@ -27,6 +27,7 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+  max_pins: 18
 price:
   - qty: 10
     price: 0.0632
@@ -56,6 +57,10 @@ sources:
     url: https://www.jst-mfg.com/product/detail_e.php?series=238
     retrieved: '2026-11-18'
     notes: "'The SM series are 2.5 mm pitch, wire-to-wire connectors'"
+  mechanical.max_pins:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=238
+    retrieved: '2026-11-18'
+    notes: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18
 termination:
   solder: true
   crimp: true

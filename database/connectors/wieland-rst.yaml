@@ -23,14 +23,23 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 16A
+  max_current: 32A
   max_voltage: 400V
   ip_rating: IP69
+  max_current_notes: RST CLASSIC 20A, 25A and 32A versions
 sources:
   aliases:
     url: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
     retrieved: '2026-11-18'
     notes: Product line on the entry's own linked page.
+  ratings.max_current:
+    url: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
+    retrieved: '2026-11-18'
+    notes: 20 A, 25 A, 32 A
+  ratings.max_current_notes:
+    url: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
+    retrieved: '2026-11-18'
+    notes: 20 A, 25 A, 32 A
 termination:
   solder: false
   screw_terminal: true

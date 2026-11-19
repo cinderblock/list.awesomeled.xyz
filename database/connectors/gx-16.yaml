@@ -38,13 +38,23 @@ price_source:
   vendor: LCSC
 ratings:
   max_current: 7A
-  max_voltage: 100V
+  max_current_notes: 7A for 2-3 pin, 5A for 4-5 pin, 4A for 6-10 pin (Wosen); some makers quote up to 10A
+  max_voltage: 400V
+  max_voltage_notes: 'Varies by maker and pin count: 400 V AC for 2-4 pins and 250 V AC for 5-8 (Wosen), 125 V in some tables'
   ip_rating: IP30
 sources:
   aliases:
     url: https://www.renhotecpro.com/gx16-connector-data-sheet/
     retrieved: '2026-11-18'
     notes: "Entry's own linked datasheet page. Caution: 'aviation plug' is the trade nickname for the whole GX family (GX12/GX16/GX20), so a reviewer may prefer to leave it out."
+  ratings.max_current_notes:
+    url: https://www.mantech.co.za/datasheets/products/GX16-XXX_WOSEN.pdf
+    retrieved: '2026-11-18'
+    notes: CURRENT MAX (A) 7 7 5 5 4 4 4 4 4
+  ratings.max_voltage:
+    url: https://renhotecpro.com/gx16-connector-data-sheet/
+    retrieved: '2026-11-18'
+    notes: '"400V / 7A-10A"; Wosen''s datasheet text gives 400 VAC (2-4 pin) and 250 VAC (5-8 pin)'
 termination:
   solder: true
   crimp: false

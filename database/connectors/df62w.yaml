@@ -55,9 +55,17 @@ sources:
     url: https://www.digikey.ca/en/product-highlight/h/hirose/df62w-series-connectors
     retrieved: '2026-11-18'
     notes: DigiKey (authorized distributor) product highlight; hirose.com returned 403.
+  termination.smallest_gauge:
+    url: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
+    retrieved: '2026-11-18'
+    notes: 'Applicable Wire 2022 : 20 - 22 AWG / 2226 : 22 - 26 AWG'
+  termination.largest_gauge:
+    url: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
+    retrieved: '2026-11-18'
+    notes: 'Applicable Wire 2022 : 20 - 22 AWG / 2226 : 22 - 26 AWG'
 termination:
   solder: false
   crimp: true
   idc: false
-  smallest_gauge: 20
-  largest_gauge: 26
+  smallest_gauge: 26
+  largest_gauge: 20

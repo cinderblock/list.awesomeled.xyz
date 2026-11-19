@@ -1,0 +1,934 @@
+# Fix list: connectors, plus 1 commercial system and 4 diffusive materials.
+# Brief: scratchpad/fixes/BRIEF.md. Verified 2026-11-18 with WebFetch / WebSearch only; repo untouched.
+#
+# Order:
+#   1. plans/data-freshness/findings/connectors.md, "(d) Wrong facts for other workstreams".
+#   2. ISSUES.md, "## Connector and diffuser spec corrections (stream 2 or 6)": every bullet,
+#      in order; bullets already covered by section 1 are a comment pointing up.
+# Records whose notes start "Unreported:" were in neither report: they are wrong (or missing)
+# values stated by the same maker source while verifying a reported item.
+# `value` is always what the field should hold now. For already-fixed / reject / unverifiable
+# records it equals `current` (no change), and the notes say what the report proposed.
+#
+# Grammar used (database/_schema/connector.json + common.json, after commit 795a04f):
+#   - ratings.max_current: one value ('3A'), no ranges. A family gets its maximum, and the
+#     variants go in ratings.max_current_notes (a separate record when that field changes).
+#   - ratings.max_voltage: one value ('300V') or a 'min-max' range ('80-150V'); no AC/DC suffix
+#     and no max_voltage_notes field. app/lib/designer/catalog.ts nominalVoltage() uses a
+#     range's max, so a range of variant ratings still works there.
+#   - mechanical.pitch: length grammar ('2mm', or a range '4.14-6.35mm').
+#   - termination gauges: integer AWG; smallest_gauge = thinnest (larger number). null = remove key.
+#   - mechanical.rows: a single integer >= 1 (no ranges, no lists).
+# Two entries carry YAML comments on max_current (mt30-60, xt60-90) that state the old
+# ratings; the records below say to drop them.
+# PDFs fetched for this list: scratchpad/fixes/dl/connectors/ and dl/diffusers/ (text
+# extracted with pdftotext; image-only catalogs rendered to PNG and read).
+
+# ---------------------------------------------------------------------------
+# 1. findings/connectors.md (d)
+# ---------------------------------------------------------------------------
+
+- entry: connectors/9159
+  field: creator
+  current: AVX
+  value: KYOCERA AVX
+  status: apply
+  owner: stream2
+  source: https://www.kyocera-avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/
+  quote: '©2026 KYOCERA AVX Components Corporation. All Rights Reserved'
+  retrieved: '2026-11-18'
+  notes: The company is KYOCERA AVX now. The entry's own image credit already says "KYOCERA AVX".
+
+- entry: connectors/9159
+  field: mechanical.pitch
+  current: 3mm
+  value: 2mm
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: 'These connectors are available in 2 to 5 positions and are centered on a 2.0mm pitch'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md. Datasheet TDS-BTB-0018 Rev 3. The product page agrees ("on 2.0mm pitch centers").
+
+- entry: connectors/9159
+  field: mechanical.max_pins
+  current: 6
+  value: 5
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: 'These connectors are available in 2 to 5 positions'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md. Ordering code "Number of Ways 002 = 2 ... 005 = 5". min_pins 2 is right.
+
+- entry: connectors/9159
+  field: ratings.max_current
+  current: 5A
+  value: 3A
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: 'Current Rating: 3 Amps / Contact'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md.
+
+- entry: connectors/9159
+  field: ratings.max_voltage
+  current: 125V
+  value: 300V
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: 'Voltage Rating: 300 VAC (RMS) or DC equivalent'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md, which proposed "300 V AC". The grammar has no AC suffix, and the sheet allows the DC equivalent, so plain 300V.
+
+- entry: connectors/9159
+  field: mechanical.wire_to_wire
+  current: true
+  value: false
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: 'The 9159 Series Board-to-Board Interconnect System allows two PCBs to be mated end-to-end to create LED lighting strips.'
+  retrieved: '2026-11-18'
+  notes: A one-piece card-edge strip connector joining two PCBs ("Mates with standard 1.6 ± 0.15mm PCB on 2.0mm pad pitch"). Nothing in the family takes wire.
+
+- entry: connectors/9159
+  field: termination.crimp
+  current: true
+  value: false
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: "The 1-Piece Card Edge Connector is designed to provide a reliable, cost effective and simple means of connecting multiple PCB's together."
+  retrieved: '2026-11-18'
+  notes: Board-to-board only, so no crimp termination. Leave termination.solder and pcb_mount SMT (tape-and-reel packaging option); not reported.
+
+- entry: connectors/9159
+  field: termination.idc
+  current: true
+  value: false
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: "The 1-Piece Card Edge Connector is designed to provide a reliable, cost effective and simple means of connecting multiple PCB's together."
+  retrieved: '2026-11-18'
+  notes: Board-to-board only, so no IDC termination.
+
+- entry: connectors/9159
+  field: termination.smallest_gauge
+  current: 24
+  value: null
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: 'Mates with standard 1.6 ± 0.15mm PCB on 2.0mm pad pitch'
+  retrieved: '2026-11-18'
+  notes: Unreported, but it follows from the reported wire-to-wire/crimp/IDC error. The connector takes no wire, so the gauge keys should go.
+
+- entry: connectors/9159
+  field: termination.largest_gauge
+  current: 22
+  value: null
+  status: apply
+  owner: stream2
+  source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  quote: 'Mates with standard 1.6 ± 0.15mm PCB on 2.0mm pad pitch'
+  retrieved: '2026-11-18'
+  notes: Unreported, same reason as smallest_gauge.
+
+- entry: connectors/sm
+  field: mechanical.pitch
+  current: 2.5mm
+  value: 2.5mm
+  status: already-fixed
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=238
+  quote: 'The SM series are 2.5 mm pitch, wire-to-wire connectors'
+  retrieved: '2026-11-18'
+  notes: Already 2.5mm, with a sources.mechanical.pitch entry quoting JST.
+
+- entry: connectors/ph
+  field: notes
+  current: 'R.C, Lipo Balance connector , Internal connector in some controllers 2.5mm not 2.54 (1/10") pitch runs off on boards drilled for 2.54'
+  value: 'Internal connector in some controllers. 2.0 mm pitch, so it doesn''t fit boards drilled for 2.54 mm (1/10").'
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=199
+  quote: 'this low-profile wire-to board connector features a pitch of 2.0 mm'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md. The 2.5 mm pitch and LiPo-balance description belong to JST XH (2.5 mm, jst.com XH page), so both are dropped. mechanical.pitch is already 2mm.
+
+- entry: connectors/mate-n-lok
+  field: mechanical.pitch
+  current: 5.08mm
+  value: 4.14-6.35mm
+  status: apply
+  owner: stream2
+  source: https://www.te.com/en/products/brands/mate-n-lok.html?tab=pgp-story
+  quote: 'Universal MATE-N-LOK | (.250) 6.35 ... Mini-Universal MATE-N-LOK | (.163) 4.14 ... Commercial MATE-N-LOK | (.200) 5.08'
+  retrieved: '2026-11-18'
+  notes: >-
+    Also in ISSUES.md, which proposed 6.35mm. TE's family table "Centerline (in) mm":
+    Universal / Universal II 6.35, Commercial 5.08, Mini-Universal / Mini-Universal 2 4.14.
+    The entry's aliases cover all three sub-families, so the range is right. If the entry is
+    narrowed to Universal MATE-N-LOK only (its price and image are Universal), use 6.35mm
+    and max_pins 15 instead. Quote cells are joined from TE's table.
+
+- entry: connectors/sh
+  field: mechanical.rows
+  current: 2
+  value: 1
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=231
+  quote: 'Single-row'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md. JST "Array (Insertion part)" is "Single-row".
+
+- entry: connectors/sh
+  field: mechanical.wire_to_wire
+  current: true
+  value: false
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=231
+  quote: 'It features a compact, low profile design in a wire-to-board configuration.'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md.
+
+- entry: connectors/mtsb-combicon
+  field: name
+  current: MSTB COMBICON
+  value: MSTB COMBICON
+  status: already-fixed
+  owner: stream2
+  source: https://static.chipdip.ru/lib/776/DOC031776428.pdf
+  quote: 'product range: MSTB 2,5/..-ST, pitch: 5.08 mm'
+  retrieved: '2026-11-18'
+  notes: Name is fixed. The slug is still "mtsb-combicon" and "MTSB CombiCon" stays as an alias. A slug rename is structural and needs its refs updated; leave it unless the slug is wanted fixed. Source is Phoenix's catalog PDF for 1757035 (the entry's datasheet.sources copy).
+
+- entry: connectors/df62w
+  field: termination.smallest_gauge
+  current: 20
+  value: 26
+  status: apply
+  owner: stream2
+  source: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
+  quote: 'Applicable Wire 2022 : 20 - 22 AWG / 2226 : 22 - 26 AWG'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md. Swapped values. Hirose series catalog, Nov 2023 revision (the entry's datasheet.sources copy; hirose.com returns 403). Digi-Key's highlight agrees ("22-26AWG" sockets, "20-22AWG" pins).
+
+- entry: connectors/df62w
+  field: termination.largest_gauge
+  current: 26
+  value: 20
+  status: apply
+  owner: stream2
+  source: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
+  quote: 'Applicable Wire 2022 : 20 - 22 AWG / 2226 : 22 - 26 AWG'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md. Swapped values, as above.
+
+- entry: connectors/teeplug
+  field: termination.largest_gauge
+  current: 16
+  value: 12
+  status: apply
+  owner: stream2
+  source: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html
+  quote: 'Max Conductor Size (Sq mm): 4'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md, which proposed "4 mm² (about 12 AWG)"; the field is integer AWG. 12 AWG (3.31 mm²) is the thickest AWG within 4 mm² (11 AWG is 4.17 mm²). Matches the entry notes' "4.0mm2 conductor acceptance".
+
+- entry: connectors/teeplug
+  field: termination.smallest_gauge
+  current: 6
+  value: null
+  status: apply
+  owner: stream2
+  source: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html
+  quote: 'Max Conductor Size (Sq mm): 4'
+  retrieved: '2026-11-18'
+  notes: Also in ISSUES.md. Hylec publishes only a maximum conductor size, and 6 AWG is thicker than the 4 mm² maximum, so remove the key.
+
+- entry: connectors/teeplug
+  field: termination.idc
+  current: true
+  value: false
+  status: apply
+  owner: stream2
+  source: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html
+  quote: 'Terminal Type: Screw'
+  retrieved: '2026-11-18'
+  notes: Unreported. Hylec lists screw terminals, and the entry's own notes say "Screw Terminal! No soldering or crimping". No IDC TeePlug was found.
+
+- entry: connectors/hirschmann-ca
+  field: creator
+  current: Lumberg / Belden
+  value: Hirschmann / Belden
+  status: apply
+  owner: stream2
+  source: https://catalog.belden.com/techdata/EN/CA3LD_techdata.pdf
+  quote: 'Brand: Hirschmann'
+  retrieved: '2026-11-18'
+  notes: The Belden datasheet for CA 3 LD (the entry's datasheet) gives "Brand Hirschmann", "Connector Sub Type CA Power Series". Lumberg is a different brand. "Brand / parent" matches existing creators such as "Rean / Neutrik".
+
+- entry: connectors/powercon
+  field: notes
+  current: 'Powercon is original blue, True 1 was IP rated version frequent latch failure, True1 TOP is current recommended mains power connector Seetronic common Compatible/Clone. Grey is recommended (cheap) and not readily used elsewhere'
+  value: 'Powercon is original blue, True 1 was IP rated version frequent latch failure, True1 TOP is current recommended mains power connector Seetronic common Compatible/Clone. Grey is recommended (cheap) and not readily used elsewhere'
+  status: already-fixed
+  owner: stream2
+  source: https://www.neutrik.com/en/product/nac3fxxa-w-s
+  quote: 'Locking AC mains cable connector, keyed and color coded (blue) for power-in, screw terminal assembly,'
+  retrieved: '2026-11-18'
+  notes: Not a wrong fact. No field names the old NAC3FCA. datasheet.url (nac3fxxa-w-s.pdf) and the price SKU are the current part, which Neutrik's site still lists. Adding the part number to notes is optional.
+
+- entry: connectors/speakon
+  field: notes
+  current: 'World Standard professional amplifier to speaker connector, compatibles offer low cost high current connector , if avoid mix up with audio....'
+  value: 'World Standard professional amplifier to speaker connector, compatibles offer low cost high current connector , if avoid mix up with audio....'
+  status: already-fixed
+  owner: stream2
+  source: https://www.neutrik.com/en/product/nl4fxx-w-s
+  quote: '4 pole speakON cable connector, screw terminal assembly, chuck type strain relief for cable diameters 6 to 12 mm'
+  retrieved: '2026-11-18'
+  notes: Not a wrong fact. No field names the old NL4FX. datasheet.url (nl4fxx-w-s.pdf) is a part Neutrik still lists, and the price SKU NL4FXX-W-L is its 10-16 mm sibling. Adding part numbers to notes is optional.
+
+# ---------------------------------------------------------------------------
+# 2. ISSUES.md "Connector and diffuser spec corrections (stream 2 or 6)"
+# ---------------------------------------------------------------------------
+# 9159 mechanical.pitch / mechanical.max_pins / ratings.max_current / ratings.max_voltage:
+#   see section 1.
+
+- entry: connectors/cee-form
+  field: ratings.max_current
+  current: 16A
+  value: 125A
+  status: apply
+  owner: stream2
+  source: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/
+  quote: 'For the current, there are widely used 16A, 32A, 63A, 125A'
+  retrieved: '2026-11-18'
+  notes: >-
+    The entry is the whole family (3-7 pins, notes already say "Red Three Phase connector up to
+    125A"), so it takes the family maximum. The page also mentions rarer higher-current products
+    ("400A, 630A, even 800A"); the common sizes it lists stop at 125 A. Variants go in
+    max_current_notes (next record). Source is the entry's own linked article.
+
+- entry: connectors/cee-form
+  field: ratings.max_current_notes
+  value: 16A, 32A, 63A or 125A per size; the blue 3-pin stage-power plug is 16A
+  status: apply
+  owner: stream2
+  source: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/
+  quote: 'For the current, there are widely used 16A, 32A, 63A, 125A'
+  retrieved: '2026-11-18'
+  notes: New field value, which carries the variants for the max_current change above.
+
+# df62w termination.smallest_gauge / termination.largest_gauge: see section 1.
+
+- entry: connectors/dupont
+  field: termination.largest_gauge
+  current: 24
+  value: 22
+  status: apply
+  owner: stream2
+  source: https://www.harwin.com/products/M20-1180042
+  quote: '22 AWG,24 AWG,26 AWG,28 AWG,30 AWG'
+  retrieved: '2026-11-18'
+  notes: >-
+    The report's source (mattmillman.com) fails with a certificate error, and WebFetch can't reach
+    the Wayback Machine. Harwin's M20 crimp contact page (Harwin is the entry's creator) lists those
+    wire sizes and "3A per contact". Distributors (Farnell, RS) agree: 22 AWG max, 30 AWG min.
+
+- entry: connectors/dupont
+  field: termination.smallest_gauge
+  current: 28
+  value: 30
+  status: apply
+  owner: stream2
+  source: https://www.harwin.com/products/M20-1180042
+  quote: '22 AWG,24 AWG,26 AWG,28 AWG,30 AWG'
+  retrieved: '2026-11-18'
+  notes: >-
+    Unreported. The Harwin M20 contact takes 30 AWG. Generic clone contacts are often sold for 22-28
+    AWG; the family's thinnest is Harwin's 30. Not changed: ratings.max_current 1A vs Harwin's "3A
+    per contact", because the clones' rating is unknown.
+
+- entry: connectors/gx-16
+  field: ratings.max_voltage
+  current: 100V
+  value: 125-400V
+  status: apply
+  owner: stream2
+  source: https://www.mantech.co.za/datasheets/products/GX16-XXX_WOSEN.pdf
+  quote: 'Rated Voltage: 2, 3, 4, =400VAC / 5, 6, 7, 8, =250VAC'
+  retrieved: '2026-11-18'
+  notes: >-
+    ISSUES.md proposed 400V from https://renhotecpro.com/gx16-connector-data-sheet/ ("400V /
+    7A-10A"). GX16 is generic and ratings vary by maker and pin count. Wosen's datasheet gives
+    400 VAC (2-4 pin) and 250 VAC (5-8 pin) in its text, but "VOLTAGE MAX (V) 125" for every pin
+    count in its table. Nothing supports 100V. The range follows the brief's family rule. If the
+    family-maximum convention is preferred (as in mt30-60), use 400V and put the split in notes.
+
+- entry: connectors/gx-16
+  field: ratings.max_current
+  current: 7A
+  value: 7A
+  status: unverifiable
+  owner: stream2
+  source: https://renhotecpro.com/gx16-connector-data-sheet/
+  quote: '| GX16 Connector | 12mm | 2-10 Pins | 400V / 7A-10A |'
+  retrieved: '2026-11-18'
+  notes: >-
+    ISSUES.md proposed 10A. Renhotec's comparison table says "7A-10A" without saying which variant
+    reaches 10 A. Wosen's per-pin table ("CURRENT MAX (A)": 7 7 5 5 4 4 4 4 4 for 2-10 pins,
+    mantech.co.za PDF, read from the rendered page) tops out at 7 A, the current value. Keep 7A
+    unless a maker datasheet shows a 10 A GX16 part.
+
+- entry: connectors/gx-16
+  field: ratings.max_current_notes
+  value: 7A for 2-3 pin, 5A for 4-5 pin, 4A for 6-10 pin (Wosen); some makers quote up to 10A
+  status: apply
+  owner: stream2
+  source: https://www.mantech.co.za/datasheets/products/GX16-XXX_WOSEN.pdf
+  quote: 'CURRENT MAX (A) 7 7 5 5 4 4 4 4 4'
+  retrieved: '2026-11-18'
+  notes: >-
+    New field value; it records the per-pin variants behind the max_current decision. The quote is
+    a table row read from the rendered PDF page; the same row appears in the pdftotext output.
+
+- entry: connectors/ic5-ec5
+  field: creator
+  current: Spektrum
+  value: Spektrum / E-flite
+  status: apply
+  owner: stream2
+  source: https://www.horizonhobby.com/product/connector-ec5-battery-2/EFLAEC502.html
+  quote: "E-flite's high-quality EC5 connectors should be a staple for every workbench."
+  retrieved: '2026-11-18'
+  notes: >-
+    The ISSUES.md wording ("Spektrum (IC5) / E-flite (EC5), both Horizon Hobby brands") is prose, not
+    a name. IC5 is Spektrum's: https://www.horizonhobby.com/product/spektrum-connector-ic5-device-and-ic5-battery-set/SPMXCA502.html
+    is titled "Spektrum Connector: IC5 Device and IC5 Battery Set". The order follows the entry name
+    "IC5 EC5". Both are Horizon Hobby brands; say so in notes if wanted.
+
+# mate-n-lok mechanical.pitch: see section 1.
+
+- entry: connectors/mate-n-lok
+  field: mechanical.max_pins
+  current: 10
+  value: 24
+  status: apply
+  owner: stream2
+  source: https://www.te.com/en/products/brands/mate-n-lok.html?tab=pgp-story
+  quote: 'Universal MATE-N-LOK ... 1-15 ... Mini-Universal MATE-N-LOK ... 1-24 ... Commercial MATE-N-LOK ... 1-16'
+  retrieved: '2026-11-18'
+  notes: >-
+    ISSUES.md proposed 15, which is Universal MATE-N-LOK only. TE "Positions": Universal 1-15,
+    Universal II 2-15, Commercial 1-16, Mini-Universal 1-24, Mini-Universal 2 2-24. The aliases cover
+    all three sub-families, so 24. If the entry is narrowed to Universal, use 15 (see the pitch record).
+
+- entry: connectors/mate-n-lok
+  field: mechanical.min_pins
+  current: 2
+  value: 1
+  status: apply
+  owner: stream2
+  source: https://www.te.com/en/products/brands/mate-n-lok.html?tab=pgp-story
+  quote: 'Universal MATE-N-LOK ... 1-15 ... Mini-Universal MATE-N-LOK ... 1-24 ... Commercial MATE-N-LOK ... 1-16'
+  retrieved: '2026-11-18'
+  notes: Unreported, from the same TE table. Leave max_current 19A, max_voltage 600V and gauges 30-10 (the family maxima match TE). rows 2 is doubtful (housings come in several row layouts) but TE's table doesn't state it.
+
+- entry: connectors/mini-fit-jr
+  field: mechanical.max_pins
+  current: 16
+  value: 24
+  status: apply
+  owner: stream2
+  source: https://static.chipdip.ru/lib/054/DOC034054920.pdf
+  quote: 'Ckt.Size 4-6 7 - 10 12 - 24'
+  retrieved: '2026-11-18'
+  notes: >-
+    Molex PS-5556-001 Rev G2 (2020-11-12; the entry's datasheet.sources copy; molex.com timed out),
+    Table 3 circuit sizes. Digi-Key's Mini-Fit Jr highlight lists parts up to 24 positions, and a
+    search shows Molex 39299247 as "Mini-Fit Jr. Vertical Header, 4.20mm Pitch, Dual Row, 24
+    Circuits" (molex.com itself timed out). Not changed, flag only: max_current 13A vs Table 3's
+    9 A maximum (16-18 AWG, 2-3 circuits). 13 A may be a high-current terminal option; not checked.
+
+- entry: connectors/mt30-60
+  field: ratings.max_current
+  current: 60A
+  value: 35A
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/mt60-m-product/
+  quote: '35A (12AWG△≤85K)'
+  retrieved: '2026-11-18'
+  notes: >-
+    ISSUES.md proposed "35 A (MT60, 12 AWG); MT30 20 A (16 AWG)", which is two values. The field takes
+    the family maximum (MT60), and the variants go in max_current_notes (next record). Drop the YAML
+    comment "# MT60; the smaller MT30 variant is rated 30 A"; Amass rates MT30 at 20 A. The MT60-F
+    spec sheet (the entry's datasheet, 2025V0) also gives "Current rating" 35A at 12AWG.
+
+- entry: connectors/mt30-60
+  field: ratings.max_current_notes
+  value: MT60 35A (12 AWG), MT30 20A (16 AWG), at ≤85 K temperature rise
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/mt30-m-product/
+  quote: '20A (16AWG△≤85K)'
+  retrieved: '2026-11-18'
+  notes: New field value; the MT60 half is from https://www.china-amass.net/mt60-m-product/ ("35A (12AWG△≤85K)").
+
+- entry: connectors/mt30-60
+  field: ratings.max_voltage
+  current: 60V
+  value: 80V
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/mt60-m-product/
+  quote: '80V DC'
+  retrieved: '2026-11-18'
+  notes: ISSUES.md proposed "80 V DC"; the grammar has no DC suffix. MT30-M and the MT60-F spec sheet also say 80V DC, so one value covers the family.
+
+- entry: connectors/mt30-60
+  field: termination.largest_gauge
+  current: 16
+  value: 12
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/mt60-m-product/
+  quote: '35A (12AWG△≤85K)'
+  retrieved: '2026-11-18'
+  notes: Unreported. Amass rates the MT60 on 12 AWG wire, so it takes at least 12 AWG; 16 AWG is the MT30's rating wire. smallest_gauge 20 left alone.
+
+- entry: connectors/mtsb-combicon
+  field: termination.smallest_gauge
+  current: 20
+  value: 24
+  status: apply
+  owner: stream2
+  source: https://static.chipdip.ru/lib/776/DOC031776428.pdf
+  quote: 'Conductor cross section AWG / kcmil 24 ... 12'
+  retrieved: '2026-11-18'
+  notes: >-
+    Phoenix Contact catalog PDF for 1757035 (MSTB 2,5/4-ST-5,08; the entry's datasheet, via its
+    datasheet.sources copy). The ISSUES.md source (novapart.co, reproducing Phoenix's data for 1757022)
+    agrees: "Conductor cross-section AWG 24 ... 12".
+
+- entry: connectors/mtsb-combicon
+  field: termination.largest_gauge
+  current: 10
+  value: 12
+  status: apply
+  owner: stream2
+  source: https://static.chipdip.ru/lib/776/DOC031776428.pdf
+  quote: 'Conductor cross section AWG / kcmil 24 ... 12'
+  retrieved: '2026-11-18'
+  notes: Same source. Phoenix "Conductor cross section solid 0.2 mm² ... 2.5 mm²".
+
+# ph notes: see section 1.
+
+- entry: connectors/ph
+  field: termination.smallest_gauge
+  current: 24
+  value: 32
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=199
+  quote: 'AWG # 32 , # 30 , # 28 , # 26 , # 24'
+  retrieved: '2026-11-18'
+  notes: largest_gauge 24 is right.
+
+- entry: connectors/ph
+  field: mechanical.locking
+  current: Detent
+  value: Friction
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=199
+  quote: 'Friction lock'
+  retrieved: '2026-11-18'
+  notes: JST lock type for PH.
+
+- entry: connectors/ph
+  field: mechanical.max_pins
+  value: 16
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=199
+  quote: '2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16'
+  retrieved: '2026-11-18'
+  notes: Unreported; the field is missing (min_pins 2 is there). JST circuits list.
+
+- entry: connectors/powerpole-15-45
+  field: termination.largest_gauge
+  current: 6
+  value: 10
+  status: apply
+  owner: stream2
+  source: https://www.andersonpower.com/?p=301
+  quote: '20 to 10 AWG (0.75 to 6mm2)'
+  retrieved: '2026-11-18'
+  notes: The old 6 is probably the "6mm2" read as AWG. smallest_gauge 20 and max_current 55A ("up to 55 amps per pole") match.
+
+# sh mechanical.rows: see section 1.
+
+- entry: connectors/sh
+  field: mechanical.max_pins
+  current: 25
+  value: 20
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=231
+  quote: '2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20'
+  retrieved: '2026-11-18'
+
+- entry: connectors/sh
+  field: termination.smallest_gauge
+  current: 30
+  value: 32
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=231
+  quote: 'AWG # 32 , # 30 , # 28'
+  retrieved: '2026-11-18'
+  notes: largest_gauge 28 is right.
+
+- entry: connectors/sh
+  field: mechanical.locking
+  current: Latching
+  value: Friction
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=231
+  quote: 'Friction lock'
+  retrieved: '2026-11-18'
+
+# sh mechanical.wire_to_wire: see section 1.
+
+- entry: connectors/sm
+  field: mechanical.rows
+  current: 1
+  value: 1
+  status: reject
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=238
+  quote: 'Single-row, Dual-row'
+  retrieved: '2026-11-18'
+  notes: >-
+    The fact is right (JST lists both arrays), but the proposed "1-2" can't be written: rows is a
+    single integer (minimum 1). Structural options: let rows take a list like mechanical.outline, or
+    record the maximum (2) as mini-fit-jr does for its single- and dual-row housings. Until then,
+    keeping 1 (the LED-strip SM housings are single-row) and saying "single- and dual-row versions"
+    in notes is the least misleading.
+
+- entry: connectors/sm
+  field: mechanical.max_pins
+  value: 18
+  status: apply
+  owner: stream2
+  source: https://www.jst-mfg.com/product/detail_e.php?series=238
+  quote: '2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18'
+  retrieved: '2026-11-18'
+  notes: Unreported; the field is missing (min_pins 2 is there). JST circuits list.
+
+- entry: connectors/sp13
+  field: ratings.max_current
+  current: 5A
+  value: 13A
+  status: apply
+  owner: stream2
+  source: https://www.weipuconnector.com/products/sp13/
+  quote: 'Supports 3-13A, suitable for both low and medium-power applications.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Weipu's SP13 catalog (the entry's datasheet, image-only PDF, read from the rendered page
+    P07-04) confirms the split: "Rated current (A)" 13 13 5 5 5 5 3 for 2, 3, 4, 5, 6, 7 and 9
+    contacts; screw versions are 13 13 5 for 2-4 contacts. Variants go in max_current_notes (next
+    record). max_voltage 250V matches the 2-3 pin rating (4-9 pin: 200/180/125 V).
+
+- entry: connectors/sp13
+  field: ratings.max_current_notes
+  value: 13A for 2-3 contacts, 5A for 4-7, 3A for 9
+  status: apply
+  owner: stream2
+  source: https://www.weipuconnector.com/wp-content/uploads/2023/11/SP13-Series-WEIPU-Connector-1.pdf
+  quote: 'Rated current (A) 13 13 5 5 5 5 3'
+  retrieved: '2026-11-18'
+  notes: New field value. Image-only PDF; the row was read from the rendered catalog page (P07-04, solder contact spec). The product page's "Supports 3-13A" corroborates the range.
+
+- entry: connectors/sp13
+  field: termination.largest_gauge
+  current: 20
+  value: 14
+  status: apply
+  owner: stream2
+  source: https://www.weipuconnector.com/wp-content/uploads/2023/11/SP13-Series-WEIPU-Connector-1.pdf
+  quote: 'Wire size (mm²/AWG) ≤2/14'
+  retrieved: '2026-11-18'
+  notes: >-
+    Unreported. Read from the rendered catalog page (P07-04): the 2- and 3-contact solder versions
+    take ≤2 mm² / 14 AWG; 4-7 take ≤0.75/18, 9 takes ≤0.5/20. The screw versions (P07-05) say Max
+    1.5/16, Min 0.75/18 (4-contact: Min 0.4/21). smallest_gauge 24 left alone. A second source
+    wasn't checked, so downgrade this to unverifiable if a reading of the scan isn't enough.
+
+- entry: connectors/sp17
+  field: links.product
+  current: https://www.weipuconnector.com/products/sp17/
+  value: https://www.weipuconnector.com/products/sp17/
+  status: already-fixed
+  owner: stream6
+  source: https://www.weipuconnector.com/products/sp17/
+  quote: 'Available with 1-10 contacts, providing flexibility for various connection configurations.'
+  retrieved: '2026-11-18'
+  notes: The proposed /sp17-series/ URL redirects to this current series page, which the entry already uses.
+
+- entry: connectors/sp17
+  field: ratings.max_current
+  current: 10A
+  value: 10A
+  status: unverifiable
+  owner: stream2
+  source: https://www.weipuconnector.com/products/sp17/
+  quote: 'Rated Current: Supports 5-50A, suitable for both low and medium-power applications.'
+  retrieved: '2026-11-18'
+  notes: >-
+    ISSUES.md proposed 50A from that page summary. Weipu's SP17 catalog (Digi-Key copy
+    https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8456/WEIPU%20SP17%20Series%20catalog.pdf,
+    image-only, read from rendered pages) lists 2/3 contacts 10 A, 2B/3B/4B 15 A, 4-10 contacts 5 A,
+    and nothing at 50 A. The entry's own 2023 catalog URL is over WebFetch's 10 MB limit, and no
+    distributor lists a 50 A or one-contact SP17. If the 2023 catalog is checked by hand: with a 50 A
+    part, set 50A and list variants in max_current_notes; if not, consider 15A (the 2B/3B/4B rating)
+    with the existing notes "15A for lower pin counts" reworded.
+
+- entry: connectors/sp17
+  field: mechanical.min_pins
+  current: 2
+  value: 2
+  status: unverifiable
+  owner: stream2
+  source: https://www.weipuconnector.com/products/sp17/
+  quote: 'Contact Range: Available with 1-10 contacts, providing flexibility for various connection configurations.'
+  retrieved: '2026-11-18'
+  notes: ISSUES.md proposed 1. Same conflict as max_current. The catalog copy that could be read starts at 2 contacts, and no one-contact SP17 part was found.
+
+- entry: connectors/superseal
+  field: mechanical.max_pins
+  current: 8
+  value: 6
+  status: apply
+  owner: stream2
+  source: https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html
+  quote: '1-6 positions'
+  retrieved: '2026-11-18'
+  notes: min_pins 1 is right.
+
+- entry: connectors/superseal
+  field: ratings.ip_rating
+  current: IP68
+  value: IP67
+  status: apply
+  owner: stream2
+  source: https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html
+  quote: 'Engineered to exceed IP67 standards in accordance with IEC 60529 and DIN 40050-9.'
+  retrieved: '2026-11-18'
+  notes: TE claims IP67, not IP68. max_current 14A and gauges 22-14 match the same page ("up to 14A at 80 °C", "0.35 to 2.5 mm²").
+
+- entry: connectors/superseal
+  field: ratings.max_voltage
+  current: 24V
+  value: 24V
+  status: unverifiable
+  owner: stream2
+  source: https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html
+  quote: '48V Ready'
+  retrieved: '2026-11-18'
+  notes: Unreported. TE's housing benefits say "48V Ready", which suggests 24V is low, but the page gives no number. Check TE spec 108-20090 (the entry's datasheet; te.com blocks scripts) before changing.
+
+# teeplug termination.largest_gauge / termination.smallest_gauge: see section 1.
+
+- entry: connectors/wago-221
+  field: termination.smallest_gauge
+  current: 28
+  value: 24
+  status: apply
+  owner: stream2
+  source: https://www.wago.com/us/products/electrical-interconnect/discover-wire-and-splicing-connectors/221-series-levernuts
+  quote: 'all conductor types ranging from 24-10 AWG'
+  retrieved: '2026-11-18'
+  notes: The same page gives the two sizes as "12-24AWG and 10-20AWG". largest_gauge 10 is right.
+
+- entry: connectors/wieland-rst
+  field: ratings.max_current
+  current: 16A
+  value: 32A
+  status: apply
+  owner: stream2
+  source: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
+  quote: '20 A, 25 A, 32 A'
+  retrieved: '2026-11-18'
+  notes: RST CLASSIC rated currents (the entry's own product page; alias "RST CLASSIC"). Same page "250/400 V, UL 600 V", "2-7" poles, "IP66/68 (3m; 2h)/69"; the existing values fit.
+
+- entry: connectors/wieland-rst
+  field: ratings.max_current_notes
+  value: RST CLASSIC 20A, 25A and 32A versions
+  status: apply
+  owner: stream2
+  source: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
+  quote: '20 A, 25 A, 32 A'
+  retrieved: '2026-11-18'
+  notes: New field value, which carries the variants for the max_current change above.
+
+- entry: connectors/xh
+  field: mechanical.locking
+  current: Latching
+  value: Friction
+  status: apply
+  owner: stream2
+  source: https://www.jst.com/products/crimp-style-connectors-wire-to-board-type/xh-connector/
+  quote: 'Friction lock'
+  retrieved: '2026-11-18'
+  notes: The same page lists "Single-row" and "3 A AC/DC (AWG #22)", "250 V AC/DC"; the existing ratings match.
+
+- entry: connectors/xt60-90
+  field: creator
+  current: Generic
+  value: Amass
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/about-us/
+  quote: 'The first self-developed high current connector XT60 came out, with a sales volume of more than 1million pairs that year.'
+  retrieved: '2026-11-18'
+  notes: Company history, 2009 entry. Full name "Changzhou Amass Electronics Co., Ltd." "Amass" matches connectors/mt30-60's creator. Clones exist, but the originator is Amass.
+
+- entry: connectors/xt60-90
+  field: ratings.max_current
+  current: 90A
+  value: 45A
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/uploads/XT90PW-M-SPEC.pdf
+  quote: 'Rated Current 45A (85K)'
+  retrieved: '2026-11-18'
+  notes: >-
+    ISSUES.md proposed "45 A (XT90PW-M); XT60-F 35 A at 12 AWG", which is two values. The family
+    maximum is the XT90; https://www.china-amass.net/xt90h-m-product/ agrees ("45A (10AWG△≤85K)").
+    Variants go in max_current_notes (next record). Drop the YAML comment "# XT90; the smaller XT60
+    variant is rated 60 A"; Amass rates XT60 at 35 A.
+
+- entry: connectors/xt60-90
+  field: ratings.max_current_notes
+  value: XT90 45A (10 AWG), XT60 35A (12 AWG), XT30 20A (16 AWG), at ≤85 K temperature rise
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/xt60h-m-product/
+  quote: '35A (12AWG△≤85K)'
+  retrieved: '2026-11-18'
+  notes: New field value. XT30 from https://www.china-amass.net/xt30u-m-product/ ("20A (16AWG△≤85K)"); XT90 from https://www.china-amass.net/xt90h-m-product/ ("45A (10AWG△≤85K)").
+
+- entry: connectors/xt60-90
+  field: ratings.max_voltage
+  current: 42V
+  value: 80-150V
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/uploads/XT90PW-M-SPEC.pdf
+  quote: 'Rated Voltage 150V DC'
+  retrieved: '2026-11-18'
+  notes: >-
+    ISSUES.md proposed "150 V DC (XT90PW-M); XT60-F 80 V DC". XT30U-M, XT60H-M and XT60-F all say
+    "80V DC", and XT90 says 150V DC (spec sheet Ver. 2026V0E), so the range follows the brief's family
+    rule. The XT90H-M web page says "1500V DC", evidently a typo for 150. For the family-maximum
+    convention, use 150V instead.
+
+- entry: connectors/xt60-90
+  field: notes
+  current: 'Also XT30, 30A & XT90 ,90A , Standard connector for LiPo batteries in RC, generic connector, some poor quality versions around dimensions http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf'
+  value: 'Also XT30 and XT90 sizes (Amass rates XT30 20A, XT60 35A, XT90 45A). Standard connector for LiPo batteries in RC; widely cloned, some poor quality versions around. Dimensions: http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf'
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/xt30u-m-product/
+  quote: '20A (16AWG△≤85K)'
+  retrieved: '2026-11-18'
+  notes: Unreported. The notes state the hobby ratings (XT30 30 A, XT90 90 A) and call it "generic connector", both contradicted by the Amass records above. The wording is a suggestion; keep the SparkFun link (prose, per the findings report).
+
+- entry: connectors/xt60-90
+  field: year_introduced
+  value: 2009
+  status: apply
+  owner: stream2
+  source: https://www.china-amass.net/about-us/
+  quote: 'The first self-developed high current connector XT60 came out, with a sales volume of more than 1million pairs that year.'
+  retrieved: '2026-11-18'
+  notes: Unreported; the field is missing. That sentence is the 2009 entry of Amass's Company History. Skip if year_introduced should only be set from a dated product document.
+
+- entry: commercial-systems/smartpxl
+  field: creator
+  current: SmartPXL
+  value: ENTTEC
+  status: apply
+  owner: stream2
+  source: https://www.enttec.com/product/uncategorized/hi-res-smart-pxl-100x25-rgb-rgbw-led-pixel-dot-strings/
+  quote: 'each string is made to order at our factory and shipped globally.'
+  retrieved: '2026-11-18'
+  notes: The page is ENTTEC-branded ("Copyright 2026 ENTTEC Americas LLC.") and calls the line "SMART PXL series". "ENTTEC" matches other entries' spelling. The status source in the entry is an ENTTEC page too.
+
+- entry: diffusive-materials/3m-envision-diffuser
+  field: materials
+  current:
+    - PVC
+  value:
+    - PVC
+  status: already-fixed
+  owner: stream2
+  source: https://www.sirvisual.com/Attachment/100/Product%20Bulletin%203735-50-60.pdf
+  quote: 'Material cast vinyl'
+  retrieved: '2026-11-18'
+  notes: >-
+    The reported field material_type ("polyester") no longer exists; materials is [PVC] and the notes
+    say "cast PVC". This 3M Europe bulletin (effective March 2013) says "cast vinyl", and searches show
+    3M's Oct 2016 bulletin also calls it cast PVC film. ISSUES.md's "vinyl (cast, PVC-free)" came from
+    the 3M UK page, which returns 403 to scripts. A German distributor (IGEPA) also says "PVC-free".
+    Keep PVC unless a current 3M TDS says PVC-free; a human check of
+    https://www.3m.co.uk/3M/en_GB/p/d/b00024897/ would settle it.
+
+- entry: diffusive-materials/ld45-plaztazote
+  field: name
+  current: Plastazote LD45
+  value: Plastazote LD45
+  status: already-fixed
+  owner: stream2
+  source: https://www.zotefoams.com/product/azote/plastazote/
+  quote: 'Plastazote LD45'
+  retrieved: '2026-11-18'
+  notes: The spelling is fixed, but the slug is still "ld45-plaztazote". A rename is structural (refs, image filename ld45-plaztazote.webp).
+
+- entry: diffusive-materials/lexan-dclw
+  field: name
+  current: Lexan DLCW
+  value: Lexan DLCW
+  status: already-fixed
+  owner: stream2
+  source: https://led-professional.com/products/led-optics/sabic-to-introduce-pioneering-lexantm-dlcw-light-diffusing-technology
+  quote: 'LEXAN™ DLCW'
+  retrieved: '2026-11-18'
+  notes: DCLW is corrected to DLCW ("Diffused Light Cool White"). All-caps LEXAN is SABIC's trademark styling; title case is fine. The slug is still "lexan-dclw" (structural).
+
+- entry: diffusive-materials/perspex-diffuse
+  field: physical.sizes_available
+  current: up to 1220x2440
+  value: 3050x2030mm
+  status: apply
+  owner: stream2
+  source: https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/
+  quote: '3050 x 2030'
+  retrieved: '2026-11-18'
+  notes: >-
+    Every grade listed (D2 DF60, DF70, DF80, DF90, all "Opal") is 3050 x 2030; no 2440 x 1220 size
+    is listed. Thickness is 2.5 mm (DF80 also 2 mm), which could go in physical.sample_thickness
+    (absent) with the grade. Value written without spaces, like the other sizes_available strings.

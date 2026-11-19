@@ -52,11 +52,19 @@ sources:
     url: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/
     retrieved: '2026-11-18'
     notes: Entry's own linked page. The original 'DuPont' connector is Amphenol Mini-PV, which is NOT interchangeable with the clones, so it isn't added as an alias.
+  termination.largest_gauge:
+    url: https://www.harwin.com/products/M20-1180042
+    retrieved: '2026-11-18'
+    notes: 22 AWG,24 AWG,26 AWG,28 AWG,30 AWG
+  termination.smallest_gauge:
+    url: https://www.harwin.com/products/M20-1180042
+    retrieved: '2026-11-18'
+    notes: 22 AWG,24 AWG,26 AWG,28 AWG,30 AWG
 termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 28
-  largest_gauge: 24
+  smallest_gauge: 30
+  largest_gauge: 22
 wiring:
   colors: Black shell

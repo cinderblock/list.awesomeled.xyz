@@ -1,5 +1,5 @@
 name: IC5 EC5
-creator: Spektrum
+creator: Spektrum / E-flite
 notes: IC5 LiPo battery connector with Third pin for charger communication. EC5 mates with IC5 BUT no third pin
 aliases:
   - IC5
@@ -44,6 +44,10 @@ sources:
     url: https://www.horizonhobby.com/product/connector-ec5-battery-2/EFLAEC502.html
     retrieved: '2026-11-18'
     notes: "IC5: Spektrum Smart battery page https://assets.horizonhobby.com/product/14.8v-5000mah-4s-30c-smart-lipo-battery-ic5/SPMX50004S30.html ('The IC connector series is entirely backward compatible with existing connectors')."
+  creator:
+    url: https://www.horizonhobby.com/product/connector-ec5-battery-2/EFLAEC502.html
+    retrieved: '2026-11-18'
+    notes: E-flite's high-quality EC5 connectors should be a staple for every workbench.
 termination:
   solder: true
   crimp: false

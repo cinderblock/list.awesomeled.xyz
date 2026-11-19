@@ -1,6 +1,6 @@
 name: XT60/90
-creator: Generic
-notes: Also XT30, 30A & XT90 ,90A , Standard connector for LiPo batteries in RC, generic connector, some poor quality versions around dimensions http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf
+creator: Amass
+notes: 'Also XT30 and XT90 sizes (Amass rates XT30 20A, XT60 35A, XT90 45A). Standard connector for LiPo batteries in RC; widely cloned, some poor quality versions around. Dimensions: http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf'
 aliases:
   - XT30
   - XT60
@@ -43,14 +43,40 @@ price_source:
   url: https://www.lcsc.com/product-detail/C5334533.html
   vendor: LCSC
 ratings:
-  max_current: 90A # XT90; the smaller XT60 variant is rated 60 A
-  max_voltage: 42V
+  max_current: 45A # XT90
+  max_current_notes: XT90 45A (10 AWG), XT60 35A (12 AWG), XT30 20A (16 AWG), at ≤85 K temperature rise
+  max_voltage: 150V
+  max_voltage_notes: XT90 150V DC; XT30 and XT60 80V DC
   ip_rating: false
 sources:
   aliases:
     url: https://connectorsupplier.com/meet-the-connector-xt-connectors/
     retrieved: '2026-11-18'
     notes: XT30 is already mentioned in the entry's notes; XT150 left out (not mentioned by the entry).
+  creator:
+    url: https://www.china-amass.net/about-us/
+    retrieved: '2026-11-18'
+    notes: The first self-developed high current connector XT60 came out, with a sales volume of more than 1million pairs that year.
+  ratings.max_current:
+    url: https://www.china-amass.net/uploads/XT90PW-M-SPEC.pdf
+    retrieved: '2026-11-18'
+    notes: Rated Current 45A (85K)
+  ratings.max_current_notes:
+    url: https://www.china-amass.net/xt60h-m-product/
+    retrieved: '2026-11-18'
+    notes: 35A (12AWG△≤85K)
+  notes:
+    url: https://www.china-amass.net/xt30u-m-product/
+    retrieved: '2026-11-18'
+    notes: 20A (16AWG△≤85K)
+  year_introduced:
+    url: https://www.china-amass.net/about-us/
+    retrieved: '2026-11-18'
+    notes: The first self-developed high current connector XT60 came out, with a sales volume of more than 1million pairs that year.
+  ratings.max_voltage:
+    url: https://www.china-amass.net/mt60-m-product/
+    retrieved: '2026-11-18'
+    notes: 'Amass spec sheets: XT30U-M, XT60H-M and XT60-F "80V DC"; XT90 "150V DC" (spec sheet Ver. 2026V0E)'
 termination:
   solder: true
   screw_terminal: false
@@ -61,3 +87,4 @@ termination:
 wiring:
   convention: Female source, shrouded male load
   colors: Yellow, black
+year_introduced: 2009

@@ -18,7 +18,7 @@ mechanical:
   min_pins: 1
   max_pins: 20
   gendered: true
-  locking: Latching
+  locking: Friction
   panel_mount: false
   wire_to_wire: true
   pcb_mount: both
@@ -48,6 +48,10 @@ sources:
     url: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
     retrieved: '2026-11-18'
     notes: Entry's own linked DigiKey page; 'XH series connectors are available with one to twenty positions.'
+  mechanical.locking:
+    url: https://www.jst.com/products/crimp-style-connectors-wire-to-board-type/xh-connector/
+    retrieved: '2026-11-18'
+    notes: Friction lock
 termination:
   solder: true
   idc: false

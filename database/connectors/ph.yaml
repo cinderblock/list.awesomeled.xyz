@@ -1,6 +1,6 @@
 name: PH
 creator: JST
-notes: R.C, Lipo Balance connector , Internal connector in some controllers 2.5mm not 2.54 (1/10") pitch runs off on boards drilled for 2.54
+notes: Internal connector in some controllers. 2.0 mm pitch, so it doesn't fit boards drilled for 2.54 mm (1/10").
 aliases:
   - JST PH
   - STEMMA
@@ -24,11 +24,12 @@ mechanical:
   min_pins: 2
   rows: 1
   gendered: true
-  locking: Detent
+  locking: Friction
   panel_mount: false
   wire_to_wire: false
   pcb_mount: both
   board_fingers: false
+  max_pins: 16
 price:
   - qty: 50
     price: 0.0164
@@ -54,11 +55,27 @@ sources:
     url: https://learn.adafruit.com/introducing-adafruit-stemma-qt?view=all
     retrieved: '2026-11-18'
     notes: Adafruit names 3- and 4-pin JST PH 'STEMMA' connectors.
+  notes:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=199
+    retrieved: '2026-11-18'
+    notes: this low-profile wire-to board connector features a pitch of 2.0 mm
+  termination.smallest_gauge:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=199
+    retrieved: '2026-11-18'
+    notes: 'AWG # 32 , # 30 , # 28 , # 26 , # 24'
+  mechanical.locking:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=199
+    retrieved: '2026-11-18'
+    notes: Friction lock
+  mechanical.max_pins:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=199
+    retrieved: '2026-11-18'
+    notes: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
 termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 24
+  smallest_gauge: 32
   largest_gauge: 24
 wiring:
   pinout: G D V

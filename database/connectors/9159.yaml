@@ -1,5 +1,5 @@
 name: '9159'
-creator: AVX
+creator: KYOCERA AVX
 aliases:
   - 9159-000
 datasheet:
@@ -14,14 +14,14 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Spring
-  pitch: 3mm
+  pitch: 2mm
   min_pins: 2
-  max_pins: 6
+  max_pins: 5
   rows: 1
   gendered: true
   locking: Latching
   panel_mount: false
-  wire_to_wire: true
+  wire_to_wire: false
   pcb_mount: SMT
   board_fingers: true
 price:
@@ -41,19 +41,49 @@ price_source:
   url: https://www.lcsc.com/product-detail/C21287753.html
   vendor: LCSC
 ratings:
-  max_current: 5A
-  max_voltage: 125V
+  max_current: 3A
+  max_voltage: 300V
   ip_rating: false
 sources:
   aliases:
     url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
     retrieved: '2026-11-18'
     notes: Datasheet title; ordering code prefix is '00 9159 00X'
+  creator:
+    url: https://www.kyocera-avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/
+    retrieved: '2026-11-18'
+    notes: ©2026 KYOCERA AVX Components Corporation. All Rights Reserved
+  mechanical.pitch:
+    url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+    retrieved: '2026-11-18'
+    notes: These connectors are available in 2 to 5 positions and are centered on a 2.0mm pitch
+  mechanical.max_pins:
+    url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+    retrieved: '2026-11-18'
+    notes: These connectors are available in 2 to 5 positions
+  ratings.max_current:
+    url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+    retrieved: '2026-11-18'
+    notes: 'Current Rating: 3 Amps / Contact'
+  ratings.max_voltage:
+    url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+    retrieved: '2026-11-18'
+    notes: 'Voltage Rating: 300 VAC (RMS) or DC equivalent'
+  mechanical.wire_to_wire:
+    url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+    retrieved: '2026-11-18'
+    notes: The 9159 Series Board-to-Board Interconnect System allows two PCBs to be mated end-to-end to create LED lighting strips.
+  termination.crimp:
+    url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+    retrieved: '2026-11-18'
+    notes: The 1-Piece Card Edge Connector is designed to provide a reliable, cost effective and simple means of connecting multiple PCB's together.
+  termination.idc:
+    url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+    retrieved: '2026-11-18'
+    notes: The 1-Piece Card Edge Connector is designed to provide a reliable, cost effective and simple means of connecting multiple PCB's together.
 termination:
   solder: true
-  crimp: true
-  idc: true
-  smallest_gauge: 24
-  largest_gauge: 22
+  crimp: false
+  idc: false
 wiring:
   colors: White

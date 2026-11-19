@@ -16,9 +16,9 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 5.08mm
-  min_pins: 2
-  max_pins: 10
+  pitch: 4.14-6.35mm
+  min_pins: 1
+  max_pins: 24
   rows: 2
   gendered: true
   locking: Latching
@@ -51,6 +51,18 @@ sources:
     url: https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story
     retrieved: '2026-11-18'
     notes: TE family table (centerline, max current, voltage, AWG, positions). Sub-family names, all covered by this entry.
+  mechanical.pitch:
+    url: https://www.te.com/en/products/brands/mate-n-lok.html?tab=pgp-story
+    retrieved: '2026-11-18'
+    notes: Universal MATE-N-LOK | (.250) 6.35 ... Mini-Universal MATE-N-LOK | (.163) 4.14 ... Commercial MATE-N-LOK | (.200) 5.08
+  mechanical.max_pins:
+    url: https://www.te.com/en/products/brands/mate-n-lok.html?tab=pgp-story
+    retrieved: '2026-11-18'
+    notes: Universal MATE-N-LOK ... 1-15 ... Mini-Universal MATE-N-LOK ... 1-24 ... Commercial MATE-N-LOK ... 1-16
+  mechanical.min_pins:
+    url: https://www.te.com/en/products/brands/mate-n-lok.html?tab=pgp-story
+    retrieved: '2026-11-18'
+    notes: Universal MATE-N-LOK ... 1-15 ... Mini-Universal MATE-N-LOK ... 1-24 ... Commercial MATE-N-LOK ... 1-16
 termination:
   solder: false
   screw_terminal: false

@@ -21,14 +21,28 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 5A
+  max_current: 13A
   max_voltage: 250V
   ip_rating: IP68
+  max_current_notes: 13A for 2-3 contacts, 5A for 4-7, 3A for 9
+sources:
+  ratings.max_current:
+    url: https://www.weipuconnector.com/products/sp13/
+    retrieved: '2026-11-18'
+    notes: Supports 3-13A, suitable for both low and medium-power applications.
+  ratings.max_current_notes:
+    url: https://www.weipuconnector.com/wp-content/uploads/2023/11/SP13-Series-WEIPU-Connector-1.pdf
+    retrieved: '2026-11-18'
+    notes: Rated current (A) 13 13 5 5 5 5 3
+  termination.largest_gauge:
+    url: https://www.weipuconnector.com/wp-content/uploads/2023/11/SP13-Series-WEIPU-Connector-1.pdf
+    retrieved: '2026-11-18'
+    notes: Wire size (mm²/AWG) ≤2/14
 termination:
   solder: true
   crimp: false
   idc: false
   smallest_gauge: 24
-  largest_gauge: 20
+  largest_gauge: 14
 wiring:
   colors: Black Blue collar

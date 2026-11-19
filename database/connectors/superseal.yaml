@@ -16,7 +16,7 @@ mechanical:
   contact_type: Pins
   pitch: 6mm
   min_pins: 1
-  max_pins: 8
+  max_pins: 6
   rows: 2
   gendered: true
   locking: Latching
@@ -43,12 +43,20 @@ price_source:
 ratings:
   max_current: 14A
   max_voltage: 24V
-  ip_rating: IP68
+  ip_rating: IP67
 sources:
   aliases:
     url: https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html
     retrieved: '2026-11-18'
     notes: TE series page title.
+  mechanical.max_pins:
+    url: https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html
+    retrieved: '2026-11-18'
+    notes: 1-6 positions
+  ratings.ip_rating:
+    url: https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html
+    retrieved: '2026-11-18'
+    notes: Engineered to exceed IP67 standards in accordance with IEC 60529 and DIN 40050-9.
 termination:
   solder: false
   crimp: true

@@ -33,14 +33,23 @@ price_source:
   url: https://www.thomannmusic.com/pce_013_6_shark_16a_3pol_230v_m.htm
   vendor: Thomann
 ratings:
-  max_current: 16A
+  max_current: 125A
   max_voltage: 415V
   ip_rating: IP65
+  max_current_notes: 16A, 32A, 63A or 125A per size; the blue 3-pin stage-power plug is 16A
 sources:
   aliases:
     url: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/
     retrieved: '2026-11-18'
     notes: Entry's own linked article. 'CEEFORM' normalizes to the existing name, so not added. 'Commando' (in the entry notes) isn't on this page.
+  ratings.max_current:
+    url: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/
+    retrieved: '2026-11-18'
+    notes: For the current, there are widely used 16A, 32A, 63A, 125A
+  ratings.max_current_notes:
+    url: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/
+    retrieved: '2026-11-18'
+    notes: For the current, there are widely used 16A, 32A, 63A, 125A
 termination:
   solder: false
   screw_terminal: true

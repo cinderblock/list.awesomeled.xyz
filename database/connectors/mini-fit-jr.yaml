@@ -17,7 +17,7 @@ mechanical:
   contact_type: Pins
   pitch: 4.2mm
   min_pins: 2
-  max_pins: 16
+  max_pins: 24
   rows: 2
   gendered: true
   locking: Latching
@@ -45,6 +45,11 @@ ratings:
   max_current: 13A
   max_voltage: 600V
   ip_rating: false
+sources:
+  mechanical.max_pins:
+    url: https://static.chipdip.ru/lib/054/DOC034054920.pdf
+    retrieved: '2026-11-18'
+    notes: Ckt.Size 4-6 7 - 10 12 - 24
 termination:
   solder: false
   crimp: true

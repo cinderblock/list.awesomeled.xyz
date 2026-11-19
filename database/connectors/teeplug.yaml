@@ -24,12 +24,20 @@ ratings:
   max_current: 17.5A
   max_voltage: 450V
   ip_rating: IP68
+sources:
+  termination.largest_gauge:
+    url: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html
+    retrieved: '2026-11-18'
+    notes: 'Max Conductor Size (Sq mm): 4'
+  termination.idc:
+    url: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html
+    retrieved: '2026-11-18'
+    notes: 'Terminal Type: Screw'
 termination:
   solder: false
   screw_terminal: true
   crimp: false
-  idc: true
-  smallest_gauge: 6
-  largest_gauge: 16
+  idc: false
+  largest_gauge: 12
 wiring:
   colors: Green or Grey Collar

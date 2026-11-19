@@ -35,12 +35,16 @@ sources:
     url: https://www.wago.com/us/products/electrical-interconnect/discover-wire-and-splicing-connectors/221-series-levernuts
     retrieved: '2026-11-18'
     notes: "WAGO US page heading; body: 'WAGO's 221 Series COMPACT Splicing Connectors ...'"
+  termination.smallest_gauge:
+    url: https://www.wago.com/us/products/electrical-interconnect/discover-wire-and-splicing-connectors/221-series-levernuts
+    retrieved: '2026-11-18'
+    notes: all conductor types ranging from 24-10 AWG
 termination:
   solder: false
   screw_terminal: false
   crimp: false
   idc: false
-  smallest_gauge: 28
+  smallest_gauge: 24
   largest_gauge: 10
 wiring:
   colors: Clear/Orange

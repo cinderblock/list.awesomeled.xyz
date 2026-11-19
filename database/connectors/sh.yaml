@@ -20,12 +20,12 @@ mechanical:
   contact_type: Pins
   pitch: 1mm
   min_pins: 2
-  max_pins: 25
-  rows: 2
+  max_pins: 20
+  rows: 1
   gendered: true
-  locking: Latching
+  locking: Friction
   panel_mount: false
-  wire_to_wire: true
+  wire_to_wire: false
   pcb_mount: both
   board_fingers: false
 price:
@@ -53,9 +53,29 @@ sources:
     url: https://learn.adafruit.com/introducing-adafruit-stemma-qt?view=all
     retrieved: '2026-11-18'
     notes: 4-pin JST SH is the Qwiic / STEMMA QT connector; those names aren't added as aliases.
+  mechanical.rows:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=231
+    retrieved: '2026-11-18'
+    notes: Single-row
+  mechanical.wire_to_wire:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=231
+    retrieved: '2026-11-18'
+    notes: It features a compact, low profile design in a wire-to-board configuration.
+  mechanical.max_pins:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=231
+    retrieved: '2026-11-18'
+    notes: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20
+  termination.smallest_gauge:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=231
+    retrieved: '2026-11-18'
+    notes: 'AWG # 32 , # 30 , # 28'
+  mechanical.locking:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=231
+    retrieved: '2026-11-18'
+    notes: Friction lock
 termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 30
+  smallest_gauge: 32
   largest_gauge: 28
