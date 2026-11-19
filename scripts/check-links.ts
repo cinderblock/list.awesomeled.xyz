@@ -308,12 +308,21 @@ async function checkLinks({ byUrl, knownDead }: Targets): Promise<Result[]> {
 
 function printLinkReport(all: Result[], deadOnly: boolean): string {
   // Already-annotated dead links only matter if they came back.
-  // Same site only: a dead domain that now redirects to someone else's page
-  // (a new owner, a parent company's catalog) hasn't come back.
-  const sameSite = (r: Result) =>
-    !r.final || hostOf(r.final).replace(/^www\./, '') === hostOf(r.url).replace(/^www\./, '');
+  // Same page only: a dead link that now redirects elsewhere (a new owner, a
+  // successor's page, a category listing) hasn't come back.
+  const samePage = (r: Result) => {
+    if (!r.final) return true;
+    try {
+      const a = new URL(r.url);
+      const b = new URL(r.final);
+      const norm = (u: URL) => u.hostname.replace(/^www\./, '') + u.pathname.replace(/\/$/, '');
+      return norm(a) === norm(b) && a.search === b.search;
+    } catch {
+      return false;
+    }
+  };
   const back = all
-    .filter((r) => r.known && r.verdict === 'ok' && sameSite(r))
+    .filter((r) => r.known && r.verdict === 'ok' && samePage(r))
     .sort((a, b) => a.entry.localeCompare(b.entry));
   const results = all.filter((r) => !r.known);
   const dead = results
@@ -350,7 +359,7 @@ function printLinkReport(all: Result[], deadOnly: boolean): string {
 
   if (!deadOnly && back.length > 0) {
     console.log(
-      `\n${'='.repeat(60)}\nBACK (${back.length}) — in dead_links but answering again; check the page shows the right product, then drop the dead_links entry:\n`
+      `\n${'='.repeat(60)}\nBACK (${back.length}) — in dead_links but the same page answers again; check it shows the right product, then drop the dead_links entry:\n`
     );
     for (const r of back) console.log(`  ${r.entry}: ${r.url} (${r.detail})`);
   }
