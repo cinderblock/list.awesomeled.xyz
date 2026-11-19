@@ -31,6 +31,13 @@ related:
     source:
       url: https://github.com/srg74/WLED-wemos-shield/blob/master/resources/BOM/BOM_Digi-key_v3.0.csv
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/wemos-d1-mini
+    notes: Shield for the Wemos D1 Mini (or the ESP32 D1 Mini)
+    source:
+      url: https://github.com/srg74/WLED-wemos-shield
+      retrieved: '2026-11-18'
+      notes: "'Wemos D1 Mini (ESP8266) or Wemos ESP32 D1 Mini (ESP32) based universal shield'"
 software:
   firmware:
     - WLED

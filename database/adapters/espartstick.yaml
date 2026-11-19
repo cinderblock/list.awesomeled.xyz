@@ -28,6 +28,14 @@ price_source:
   retrieved: '2021-08-03'
   url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
   vendor: Microcyb (ESPArtStick)
+related:
+  - type: host
+    ref: microboards/wemos-d1-mini
+    notes: Shield for the Wemos D1 Mini
+    source:
+      url: https://web.archive.org/web/20191021235037/https://espartstick.ecwid.com/ESP-Art-Stick-12v-enhanced-complete-p145284289
+      retrieved: '2026-11-18'
+      notes: "'This add on shield works with the Wemos D1 mini'"
 software:
   firmware:
     - ESPixelStick

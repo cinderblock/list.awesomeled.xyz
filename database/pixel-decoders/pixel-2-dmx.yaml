@@ -40,6 +40,13 @@ related:
     source:
       url: https://store.experiencelights.com/product-category/pixel2things/
       retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/xconnect
+    notes: Pixel-data input is a male xConnect pigtail
+    source:
+      url: https://store.experiencelights.com/pixel2dmx---realtime-dmx-bridge/
+      retrieved: '2026-11-18'
+      notes: "'This board features 1 Male xConnect Pigtail on one side, and a Female 3-Pin XLR Connector on the other side.'"
 sources:
   inputs.protocols:
     url: https://store.experiencelights.com/pixel2dmx---realtime-dmx-bridge/

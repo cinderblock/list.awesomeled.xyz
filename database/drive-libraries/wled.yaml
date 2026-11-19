@@ -28,6 +28,21 @@ protocols:
   - DMX512
   - MQTT
   - ESP-NOW
+related:
+  - type: uses
+    ref: drive-libraries/neopixelbus
+    notes: LED output library
+    source:
+      url: https://github.com/wled/WLED/blob/main/platformio.ini
+      retrieved: '2026-11-18'
+      notes: "lib_deps: 'https://github.com/Makuna/NeoPixelBus.git' ('standard NPB version used in main branch')"
+  - type: uses
+    ref: drive-libraries/espasynce131
+    notes: Bundled, modified, for its E1.31 (sACN) input
+    source:
+      url: https://github.com/wled/WLED/blob/main/wled00/src/dependencies/e131/ESPAsyncE131.h
+      retrieved: '2026-11-18'
+      notes: "'Project: ESPAsyncE131 - Asynchronous E.131 (sACN) library for Arduino ESP8266 and ESP32'"
 sources:
   status:
     url: https://github.com/wled/WLED/releases

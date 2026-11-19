@@ -11,6 +11,20 @@ platforms:
   - ESP8266
 protocols:
   - sACN
+related:
+  - type: host
+    ref: microboards/wemos-d1-mini
+    notes: Built for the WeMos D1 Mini (PlatformIO environment d1_mini)
+    source:
+      url: https://github.com/garymueller/ESP-131GPIO/blob/master/platformio.ini
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/espasynce131
+    notes: E1.31 receiver library
+    source:
+      url: https://github.com/garymueller/ESP-131GPIO/blob/master/platformio.ini
+      retrieved: '2026-11-18'
+      notes: "lib_deps: 'forkineye/ESPAsyncE131 @ ^1.0.4'"
 sources:
   status:
     url: https://github.com/garymueller/ESP-131GPIO

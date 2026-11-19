@@ -11,3 +11,11 @@ links:
   product: http://orangepi-dmx.org/
 parent: Orange Pi
 price: 12
+related:
+  - type: host
+    ref: microboards/orange-pi-zero
+    notes: The project's pixel boards are built for the Orange Pi Zero
+    source:
+      url: https://www.orangepi-dmx.org/
+      retrieved: '2026-11-18'
+      notes: "Pixel prototype boards sit under the Orange Pi section, 'Successfully tested with the following Orange Pi models: Zero (including SPI flash support)'; their Eagle files are under eagle/Orange-Pi-Zero/"

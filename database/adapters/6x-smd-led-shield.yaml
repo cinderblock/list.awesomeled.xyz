@@ -35,6 +35,25 @@ related:
     source:
       url: https://www.tindie.com/products/19174/
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/wemos-d1-mini
+    notes: Shield for the Wemos D1 Mini
+    source:
+      url: https://www.tindie.com/products/19174/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/wemos-d1-mini-pro
+    notes: Also fits the D1 Mini Pro
+    source:
+      url: https://www.tindie.com/products/19174/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/sn74hct245
+    notes: Surface-mount 74HCT245 level shifter
+    source:
+      url: https://www.tindie.com/products/19174/
+      retrieved: '2026-11-18'
+      notes: "'The shield includes a surface mounted 74HCT245 level shifter'"
 software:
   firmware:
     - esp8266-fastled-webserver

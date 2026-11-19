@@ -42,6 +42,13 @@ related:
     source:
       url: https://github.com/hzeller/spixels
       retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/sn74hct245
+    notes: Four 74HCT245 buffers (HCT or AHCT, not HC)
+    source:
+      url: https://github.com/hzeller/spixels
+      retrieved: '2026-11-18'
+      notes: "BOM: '4 | 74HCT245 | TSSOP-20 | HCT or AHCT _not_ HC.'"
 software:
   firmware:
     - FPP

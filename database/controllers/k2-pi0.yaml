@@ -68,6 +68,13 @@ related:
     source:
       url: https://kulplights.com/manuals/boards/k2-pi0/
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-5
+    notes: Also works on the bigger Pis
+    source:
+      url: https://kulplights.com/manuals/boards/k2-pi0/
+      retrieved: '2026-11-18'
+      notes: "'It also works on the bigger Pis (3 B+, 4, 5)'"
 software:
   firmware:
     - FPP

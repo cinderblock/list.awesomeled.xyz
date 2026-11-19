@@ -38,6 +38,13 @@ related:
     source:
       url: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/beaglebone-green
+    notes: Also fits the BeagleBone Green
+    source:
+      url: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/
+      retrieved: '2026-11-18'
+      notes: "'A BeagleBone Black, BeagleBone Black Wireless, BeagleBone Green, or SanCloud BeagleBone enhanced.'"
 software:
   firmware:
     - FPP

@@ -32,6 +32,13 @@ related:
     source:
       url: https://www.orangepi-dmx.org/orange-pi/ws28xxapa102ucsx903tlc59711p9813-configuration/prototype-boards/multi-port-pixel-prototype-boards/8-output-8x-4-universes
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/orange-pi-zero
+    notes: Pixel-controller builds target the Orange Pi Zero
+    source:
+      url: https://github.com/vanvught/rpidmx512/blob/master/README.md
+      retrieved: '2026-11-18'
+      notes: "'Pixel controller WS28xx/SK6812/APA102/UCSx903/P9813 with DMX [Orange Pi Zero]'"
 sources:
   status:
     url: https://github.com/vanvught/rpidmx512

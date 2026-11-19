@@ -30,6 +30,13 @@ related:
     source:
       url: https://www.evilgeniuslabs.org/level-shifter-featherwing
       retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/sn74hct245
+    notes: 74HCT245 level shifter
+    source:
+      url: https://www.evilgeniuslabs.org/level-shifter-featherwing
+      retrieved: '2026-11-18'
+      notes: "'The shield includes a 74HCT245 level shifter'; kit 'SN74HCT245N Level Shifter'"
 software:
   firmware:
     - esp32-fastled-webserver

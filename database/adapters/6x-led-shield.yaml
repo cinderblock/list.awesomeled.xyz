@@ -30,6 +30,25 @@ related:
     source:
       url: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/wemos-d1-mini
+    notes: Shield for the Wemos D1 Mini
+    source:
+      url: https://www.tindie.com/products/16255/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/wemos-d1-mini-pro
+    notes: Also fits the D1 Mini Pro
+    source:
+      url: https://www.tindie.com/products/16255/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/sn74hct245
+    notes: 74HCT245 level shifter
+    source:
+      url: https://www.tindie.com/products/16255/
+      retrieved: '2026-11-18'
+      notes: "'The shield includes a 74HCT245 level shifter'"
 software:
   firmware:
     - esp8266-fastled-webserver

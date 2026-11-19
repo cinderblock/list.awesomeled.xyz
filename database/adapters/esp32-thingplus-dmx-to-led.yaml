@@ -34,6 +34,20 @@ related:
     source:
       url: https://www.sparkfun.com/products/15110
       retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/txb0104
+    notes: 3.3 V to 5 V level translator for the pixel outputs (U2)
+    source:
+      url: https://cdn.sparkfun.com/assets/c/1/c/c/d/SparkFun_ESP32_Thing_Plus_DMX_to_LED_Shield.pdf
+      retrieved: '2026-11-18'
+      notes: "Schematic: U2 'TXB0104'"
+  - type: uses
+    ref: level-converters/max3485
+    notes: RS-485 transceiver for the DMX port (U1)
+    source:
+      url: https://github.com/sparkfun/SparkFun_ESP32_Thing_Plus_DMX_to_LED_Shield/blob/master/Hardware/SparkFun%20ESP32%20Thing%20Plus%20DMX%20to%20LED%20Shield.sch
+      retrieved: '2026-11-18'
+      notes: "Eagle schematic: U1, deviceset 'RS485', value 'MAX3485CSA'"
 software:
   works_with:
     - SparkFunDMX

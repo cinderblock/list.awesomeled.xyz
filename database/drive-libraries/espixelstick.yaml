@@ -29,6 +29,13 @@ related:
     source:
       url: https://github.com/forkineye/ESPixelStick/blob/main/platformio.ini
       retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/espasynce131
+    notes: E1.31 input library
+    source:
+      url: https://github.com/forkineye/ESPixelStick/blob/main/platformio.ini
+      retrieved: '2026-11-18'
+      notes: "lib_deps: 'https://github.com/forkineye/ESPAsyncE131'"
 sources:
   status:
     url: https://github.com/forkineye/ESPixelStick

@@ -42,6 +42,13 @@ related:
     source:
       url: https://www.tindie.com/products/25767/
       retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/sn74hct245
+    notes: Four 74HCT245 output buffers
+    source:
+      url: https://github.com/brianamos1/DuotrigesimalWS2811
+      retrieved: '2026-11-18'
+      notes: "KiCad schematic TPP-0.3/Controller_T41_rev0.3.kicad_sch: four symbols with value '74HCT245'"
 software:
   works_with:
     - OctoWS2811

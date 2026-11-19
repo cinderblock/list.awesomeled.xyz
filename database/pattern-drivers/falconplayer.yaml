@@ -118,6 +118,34 @@ related:
     source:
       url: https://github.com/FalconChristmas/fpp/blob/master/README.md
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3b
+    notes: Raspberry Pi 3 family
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+      notes: "'a Raspberry Pi (Zero, 2, 3, 4, 5)'"
+  - type: host
+    ref: microboards/raspberry-pi-5
+    notes: Raspberry Pi 5
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+      notes: "'a Raspberry Pi (Zero, 2, 3, 4, 5)'"
+  - type: host
+    ref: microboards/raspberry-pi-zero-2-w
+    notes: Raspberry Pi Zero family
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+      notes: "'a Raspberry Pi (Zero, 2, 3, 4, 5)'"
+  - type: host
+    ref: microboards/beaglebone-green
+    notes: BeagleBone Green
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+      notes: "'a Beagle Bone (Black, Green, Pocket)'"
 sources:
   status:
     url: https://github.com/FalconChristmas/fpp/releases

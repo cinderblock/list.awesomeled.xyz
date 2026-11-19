@@ -60,6 +60,13 @@ related:
     source:
       url: https://www.pjrc.com/store/octo28_adaptor.html
       retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/sn74hct245
+    notes: 74HCT245 buffer with 100 ohm impedance matching
+    source:
+      url: https://www.pjrc.com/store/octo28_adaptor.html
+      retrieved: '2026-11-18'
+      notes: "'The adaptor features a 74HCT245 buffer chip and 100 ohm impedance matching resistors.'"
 software:
   works_with:
     - OctoWS2811

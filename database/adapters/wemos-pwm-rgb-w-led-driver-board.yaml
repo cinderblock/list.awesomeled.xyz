@@ -23,6 +23,14 @@ price_source:
   retrieved: '2026-02-08'
   url: https://web.archive.org/web/20260208103400/https://www.ebay.co.uk/itm/133875147448
   vendor: Mottramlabs (eBay UK)
+related:
+  - type: host
+    ref: microboards/wemos-d1-mini
+    notes: Takes a Wemos D1 Mini (or a soldered ESP-12 module)
+    source:
+      url: https://web.archive.org/web/2025id_/https://mottramlabs.com/pdf/DTA201141.pdf
+      retrieved: '2026-11-18'
+      notes: "'either a Wemos D1 Mini or the ESP12 Wi-Fi module (soldered)'"
 software:
   works_with:
     - WLED

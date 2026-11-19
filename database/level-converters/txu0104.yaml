@@ -32,6 +32,14 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.ti.com/product/TXU0104
   vendor: TI
+related:
+  - type: compatible
+    ref: level-converters/txb0104
+    notes: Pin-compatible with the TXB0104
+    source:
+      url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
+      retrieved: '2026-11-18'
+      notes: "Features: 'Pinout compatible with TXB family level shifters'"
 sources:
   aliases:
     url: https://www.ti.com/lit/ds/symlink/txu0104.pdf

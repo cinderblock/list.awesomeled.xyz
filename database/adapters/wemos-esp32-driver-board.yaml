@@ -23,6 +23,14 @@ price_source:
   retrieved: '2025-12-23'
   url: https://web.archive.org/web/20251223085343/https://www.ebay.co.uk/itm/133705567939
   vendor: Mottramlabs (eBay UK)
+related:
+  - type: uses
+    ref: level-converters/sn74hct125
+    notes: 74HCT125 line driver for a 5 V push-pull output
+    source:
+      url: https://web.archive.org/web/2025id_/https://mottramlabs.com/pdf/DTA201123.pdf
+      retrieved: '2026-11-18'
+      notes: "'An on-board 74HCT125 line driver provides a 5V P/P output'"
 software:
   firmware:
     - WLED

@@ -30,6 +30,27 @@ related:
     source:
       url: https://www.evilgeniuslabs.org/mini-wifi-led-controller
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/wemos-d1-mini
+    notes: Shield for the Wemos D1 Mini
+    source:
+      url: https://www.evilgeniuslabs.org/mini-wifi-led-controller
+      retrieved: '2026-11-18'
+      notes: "'This is a shield/breakout for the Wemos D1 Mini (and D1 Mini Pro) ESP8266 board'"
+  - type: host
+    ref: microboards/wemos-d1-mini-pro
+    notes: Also fits the D1 Mini Pro
+    source:
+      url: https://www.evilgeniuslabs.org/mini-wifi-led-controller
+      retrieved: '2026-11-18'
+      notes: "'This is a shield/breakout for the Wemos D1 Mini (and D1 Mini Pro) ESP8266 board'"
+  - type: uses
+    ref: level-converters/sn74hct125
+    notes: 74HCT125 level shifter
+    source:
+      url: https://www.evilgeniuslabs.org/mini-wifi-led-controller
+      retrieved: '2026-11-18'
+      notes: "'The shield includes the slightly smaller 74HCT125 level shifter.'; parts list 'SN74HCT125N Level Shifter'"
 software:
   works_with:
     - FastLED

@@ -32,6 +32,13 @@ related:
     source:
       url: https://kulplights.com/product/pocketscroller/
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/pocketbeagle-2
+    notes: Sold premounted on a PocketBeagle 2 as an option
+    source:
+      url: https://kulplights.com/product/pocketscroller/
+      retrieved: '2026-11-18'
+      notes: Option 'PocketBeagle2 Premounted' (No / Regular / Industrial)
 software:
   firmware:
     - FPP

@@ -29,6 +29,12 @@ related:
     source:
       url: https://github.com/Golden-Geek/BLIP/blob/main/configs/components.ini
       retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/neopixelbus
+    notes: LED strip component builds on a NeoPixelBus fork (tommag/NeoPixelBus)
+    source:
+      url: https://github.com/Golden-Geek/BLIP/blob/main/configs/components.ini
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://github.com/Golden-Geek/BLIP

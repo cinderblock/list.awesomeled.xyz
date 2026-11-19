@@ -30,6 +30,13 @@ related:
     source:
       url: https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller
       retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/sn74hct245
+    notes: Two 74HCT245 level shifters
+    source:
+      url: https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller
+      retrieved: '2026-11-18'
+      notes: "'two 74HCT245 level shifters'; parts list 'SN74HCT245N Level Shifters'"
 software:
   firmware:
     - esp32-fastled-webserver

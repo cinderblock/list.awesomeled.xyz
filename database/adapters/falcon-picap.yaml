@@ -82,6 +82,12 @@ related:
     source:
       url: https://github.com/nick-diel/Falcon-PiCap-Manual
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3b
+    notes: "'PI 3' among the supported Raspberry Pis"
+    source:
+      url: https://web.archive.org/web/20180908183659/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP

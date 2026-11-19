@@ -54,6 +54,14 @@ price_source:
   retrieved: '2025-06'
   vendor: EspartStick (Microcyb)
   url: https://web.archive.org/web/20250621071152/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+related:
+  - type: host
+    ref: microboards/wemos-d1-mini
+    notes: Built as a shield for the Wemos D1 Mini
+    source:
+      url: https://web.archive.org/web/20231130033100/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+      retrieved: '2026-11-18'
+      notes: "'using a special shield and for the Wemos D1 mini'"
 software:
   firmware:
     - WLED

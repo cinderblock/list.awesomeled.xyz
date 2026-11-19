@@ -95,6 +95,13 @@ related:
     source:
       url: https://kulplights.com/manuals/hardware/beaglebone-black/
       retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/beaglebone-green
+    notes: Also runs on a BeagleBone Green (not the Green Wireless)
+    source:
+      url: https://kulplights.com/manuals/hardware/beaglebone-black/
+      retrieved: '2026-11-18'
+      notes: "Compatibility table: 'BeagleBone Green | ✔ | no barrel jack (it's powered from the cape anyway)'; the BeagleBone Green Wireless is not compatible"
 software:
   firmware:
     - FPP
