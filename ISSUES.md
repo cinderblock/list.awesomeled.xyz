@@ -54,6 +54,9 @@ their card (a long list shows 12, then a tap-to-expand "+N more"), and
 `sources` provenance renders under the field it documents as "source: host,
 date", with the source's own words behind a "note" toggle. "Related products"
 ends with "More from <maker>", minus what its other rows already show.
+Table pages now load entries through `loadCategoryTableData`, which drops
+`sources` (a quarter to a half of a researched entry, never shown in a
+table); exports and entry pages keep it.
 Stream 4 also added compatibility columns through `app/lib/columns.tsx` only
 (no `DataTable` / `ColumnFilter` internals): controllers and adapters get
 "Pixel ICs" (filter `linked.pixels`, which matches same-protocol parts and
