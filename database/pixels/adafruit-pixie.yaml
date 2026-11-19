@@ -1,0 +1,62 @@
+name: Adafruit Pixie
+status: active
+creator: Adafruit Industries
+notes: 3W RGB LED module with its own microcontroller, chained over 115200-baud serial
+color:
+  order: RGB
+  brightness_bits: 8
+  pwm_frequency: 500Hz
+data:
+  type: Pixie
+  clocked: false
+  bitrate: 115.2kHz
+  bitrate_notes: UART at 115200 baud, 8N1
+  pixel_size_bits: 30
+  pixel_size_notes: Three bytes (R, G, B), each 10 bit-times with 8N1 framing
+  backup_line: false
+electrical:
+  vcc_voltage: 5V
+  gpio:
+    max: 5V
+  wattage: 3W
+other_links:
+  - https://learn.adafruit.com/pixie-3-watt-smart-chainable-led-pixels
+  - https://www.advateklighting.com/pixel-protocols/adafruit-pixie
+  - https://www.enttec.com/pixel-protocols/Adafruit-Pixie
+sources:
+  status:
+    url: https://www.adafruit.com/product/2741
+    retrieved: '2026-11-18'
+    notes: "'Pixie - 3W Chainable Smart LED Pixel' (product ID 2741), in stock"
+  creator:
+    url: https://www.adafruit.com/product/2741
+    retrieved: '2026-11-18'
+    notes: Adafruit product; the learn guide credits Ytai Ben-Tsvi with the design
+  data.type:
+    - url: https://www.adafruit.com/product/2741
+      retrieved: '2026-11-18'
+      notes: "New label: plain UART serial, not a pixel-IC protocol. '115,200 baud 8N1', '1 byte per color'; each Pixie forwards the data it doesn't use 'so you can chain them like a shift register'."
+    - url: https://github.com/adafruit/Adafruit_Pixie/blob/master/Adafruit_Pixie.cpp
+      retrieved: '2026-11-18'
+      notes: Adafruit's library writes 3 bytes per pixel (r, g, b) and waits 1 ms after a frame before the next ('Wait for 1ms elapsed since prior call')
+  color.order:
+    url: https://github.com/adafruit/Adafruit_Pixie/blob/master/Adafruit_Pixie.cpp
+    retrieved: '2026-11-18'
+    notes: setPixelColor stores p[0] = r, p[1] = g, p[2] = b
+  color.pwm_frequency:
+    url: https://www.advateklighting.com/pixel-protocols/adafruit-pixie
+    retrieved: '2026-11-18'
+    notes: "'PWM Rate 500Hz', 'Unsuitable for cameras' (ENTTEC: 500Hz); Adafruit gives no PWM rate"
+  electrical.vcc_voltage:
+    url: https://learn.adafruit.com/pixie-3-watt-smart-chainable-led-pixels/pinouts
+    retrieved: '2026-11-18'
+    notes: "'Power with 5VDC'; the data pins are '5V logic in and out'"
+  electrical.wattage:
+    url: https://www.adafruit.com/product/2741
+    retrieved: '2026-11-18'
+    notes: "'3W total, compared to 0.2W of a standard NeoPixel'; up to 1A per Pixie"
+technical_notes:
+  - Built around a PIC12F1572 microcontroller, one IRLML2060 MOSFET per color (no constant-current driver) and a 3W RGB LED
+  - The colour must be refreshed at least every 2 seconds (Adafruit suggests every second) or the LED times out and turns off
+  - A temperature cutoff turns the LED off until it cools
+  - 24.1 x 19.7 x 8.2 mm, 2 g, with M2 mounting holes

@@ -1,0 +1,56 @@
+name: UCS2603
+creator: Lianxinke Microelectronics
+notes: RGB driver with a backup data line, 4-bit current setting per color and 8kHz PWM
+color:
+  channel_bits: 8
+  pwm_frequency: 8.0kHz
+data:
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  backup_line: true
+electrical:
+  output_voltage: 28V
+  output_voltage_notes: Top of the 5-28V output pixel voltage Advatek and ENTTEC list (no maker datasheet found)
+  supply_voltage: 5V
+  current_programmable: true
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ucs2603
+  - https://www.enttec.com/pixel-protocols/UCS2603
+physical:
+  packages:
+    - SOP-8
+sources:
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2603
+    retrieved: '2026-11-18'
+    notes: "'UCS2603 was designed by Lianxinke in China'; ENTTEC: 'Manufacturer: Shenzhen UCS'"
+  data.backup_line:
+    - url: https://www.advateklighting.com/pixel-protocols/ucs2603
+      retrieved: '2026-11-18'
+      notes: "'Redundant data line reduces chance of entire strip failure'"
+    - url: https://www.enttec.com/pixel-protocols/UCS2603
+      retrieved: '2026-11-18'
+      notes: "'Redundant Data Line: Yes'"
+  data.bitrate:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2603
+    retrieved: '2026-11-18'
+    notes: "'Clock Type Data-Only', 'Data Transfer Rate 800kbps', 'Color Resolution 8 Bits', 'Color Types RGB'"
+  color.pwm_frequency:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2603
+    retrieved: '2026-11-18'
+    notes: "'PWM Rate 8000Hz' (ENTTEC: 8000Hz)"
+  electrical.current_programmable:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2603
+    retrieved: '2026-11-18'
+    notes: "'UCS2603 has the ability to digitally control the current of the connected LEDs. Use the 4-bit current control per color'"
+  electrical.supply_voltage:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2603
+    retrieved: '2026-11-18'
+    notes: "'Input Voltage 5V', 'Output Pixel Voltage 5 - 28V'"
+  physical.packages:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2603
+    retrieved: '2026-11-18'
+    notes: "'The control circuit comes in a SOP8 package'"
+technical_notes:
+  - No maker datasheet found; all values are from Advatek's and ENTTEC's protocol pages, so the frame format (and protocol family) is unknown

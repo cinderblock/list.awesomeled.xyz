@@ -1,0 +1,91 @@
+name: SM16824E
+status: active
+creator: Shenzhen Sunmoon Microelectronics
+notes: High-current (60-350mA) RGBW driver with gamma-corrected 16-bit output, 4-bit current gain per channel and 4kHz PWM
+aliases:
+  - SM16824
+color:
+  channel_bits: 8
+  pwm_frequency: 4.0kHz
+  pwm_frequency_notes: "Patented SM-PWM, 'refresh rate is up to 4KHz'; output gray level 65,536 (gamma correction)"
+data:
+  type: 4chSM16803
+  clocked: false
+  channels: 4
+  bitrate: 800kHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://www.chinaasic.com/websiteManage/product/20230523140052341.pdf # Sunmoon SM16824E product brief, English IBZOZZV1.4 (1 page; full datasheet not public)
+  sources:
+    - url: https://www.chinaasic.com/websiteManage/product/20201228163204065.pdf
+      host: manufacturer
+      notes: Chinese edition, IBZOZOV1.2
+electrical:
+  output_voltage: 26V
+  supply_voltage: 5-24V
+  supply_voltage_notes: Built-in power clamp module
+  max_current: 350mA
+  max_current_notes: An external REXT resistor sets 60-350mA (+/-5%); the protocol data adds a 4-bit current gain (16 levels) per channel
+  current_programmable: true
+  current_range: 60-350mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/sm16824
+physical:
+  packages:
+    - ESOP-8
+related:
+  - type: related
+    ref: pixel-ics/sm16804
+    notes: Sunmoon's briefs give both the same SID protocol features (RGBW, 4-bit current gain per channel, 65,536-level gamma output, 4kHz SM-PWM, 800Kbps); the SM16804 drives 19mA by default, the SM16824E 60-350mA set by REXT
+    source:
+      url: https://www.chinaasic.com/websiteManage/product/20230523114051341.pdf
+      retrieved: '2026-11-18'
+      notes: SM16804EB brief (English) compared with the SM16824E brief
+sources:
+  status:
+    url: https://www.chinaasic.com/en/chipDetails/detail_140.html
+    retrieved: '2026-11-18'
+    notes: Sunmoon product pages detail_140 (landscape lighting) and detail_533 (stage lighting) list the SM16824E (ESOP8, SID protocol, 4 channels, 65536 gray levels, 26V)
+  creator:
+    url: https://www.chinaasic.com/websiteManage/product/20230523140052341.pdf
+    retrieved: '2026-11-18'
+    notes: Sunmoon (chinaasic.com) SM16824E brief
+  aliases:
+    url: https://www.advateklighting.com/pixel-protocols/sm16824
+    retrieved: '2026-11-18'
+    notes: "Advatek and the controller lists write SM16824 ('SM16824, designed by Sunmoon Microelectronics in China, is dedicated to RGBW ... SOP8 package'); Sunmoon's catalog has only the SM16824E"
+  data.type:
+    - url: https://www.chinaasic.com/websiteManage/product/20230523140052341.pdf
+      retrieved: '2026-11-18'
+      notes: "'Single-line RZ code SID data protocol', 'Signal transmission speed: 800Kbps', 'OUT R/G/B/W each 4bits current gain adjustment bit' - the same feature list as Sunmoon's SM16804 briefs, whose full datasheet gives the 4-channel SM16803 frame (32 bits per chip plus a 16-bit current-gain word). The SM16824E brief doesn't show the frame."
+    - url: https://github.com/Makuna/NeoPixelBus/blob/master/src/internal/features/NeoSm168x4Features.h
+      retrieved: '2026-11-18'
+      notes: 'NeoPixelBus drives the SM16804EB and SM16824E with one element class (NeoRgbwSm168x4Elements): 4 bytes R, G, B, W per pixel and a 2-byte settings word (4-bit gain each for R, G, B, W) at the end of the data stream'
+    - url: https://github.com/FastLED/FastLED/issues/1941
+      retrieved: '2026-11-18'
+      notes: FastLED's SM16824E timing, from the datasheet a user attached (https://de.scribd.com/document/757938003/SM16824E-zh-CN-en-1), is T0H 0.3 us, T0L 0.9 us, T1H 0.9 us, T1L 0.3 us, reset 200 us, like the SM16703
+  data.pixel_size_bits:
+    url: https://github.com/Makuna/NeoPixelBus/blob/master/src/internal/features/NeoSm168x4Features.h
+    retrieved: '2026-11-18'
+    notes: 4 bytes (RGBW) per pixel, plus one 16-bit gain word per frame
+  data.channels:
+    url: https://www.chinaasic.com/websiteManage/product/20230523140052341.pdf
+    retrieved: '2026-11-18'
+    notes: "'SM16824E is a 4-channel LED constant current driver chip' (Sunmoon's product-page blurb says 'three-channel', but lists OUT R/G/B/W and 4 channels)"
+  color.channel_bits:
+    url: https://www.advateklighting.com/pixel-protocols/sm16824
+    retrieved: '2026-11-18'
+    notes: "'It receives 8-bit data, and upscales this to a gamma-corrected 16-bit curve'"
+  electrical.max_current:
+    url: https://www.chinaasic.com/websiteManage/product/20230523140052341.pdf
+    retrieved: '2026-11-18'
+    notes: "'External REXT resistor adjusts OUT R/G/B/W output current value 60~350mA', 'output current precision: ±5%', 'a total of 16 current gain levels'"
+  physical.packages:
+    url: https://www.chinaasic.com/en/chipDetails/detail_140.html
+    retrieved: '2026-11-18'
+    notes: "Sunmoon's product table lists ESOP8 and the brief's pin diagram is labeled ESOP8; the brief's feature list says 'Package: SOP8', as does Advatek"
+technical_notes:
+  - Works with Sunmoon's SM17500P DMX512 transcoder in parallel-serial schemes
+  - Over-temperature protection; outputs are off at power-on
+  - Advatek lists a 5-30V output pixel voltage

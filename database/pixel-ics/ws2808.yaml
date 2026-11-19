@@ -1,0 +1,80 @@
+name: WS2808
+status: active
+release_year: 2022
+creator: WorldSemi
+notes: 12V single-wire RGB driver with a backup data input, WS2811-style 800 kbps protocol
+color:
+  channel_bits: 8
+  pwm_frequency: 4.0kHz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: https://www.lcsc.com/datasheet/C22371539.pdf # WorldSemi WS2808 V1.0 (Chinese, 2022-10-28); LCSC copy, not on world-semi.com
+  sources:
+    - url: https://atta.szlcsc.com/upload/public/pdf/source/20251204/DA4CE1D18ACFD372B14BFCC64B6F5187.pdf
+      host: distributor
+      notes: LCSC China (szlcsc) copy of V1.2 (2025-12-02), titled WS2808F; same specifications, revised application circuit
+  discrepancies:
+    - "Advatek and ENTTEC list a 2000 Hz PWM rate; the datasheet gives a 4 kHz scan frequency ('扫描频率4KHz')"
+    - Advatek and ENTTEC describe WS2808 as an SMD5050 with integrated LEDs; WorldSemi sells it as a driver IC in SOP8 and FSOP8
+electrical:
+  supply_voltage: 12V
+  supply_voltage_notes: 'VDD 9.5-14.5 V; runs straight from 12 V with no external parts (electrical tables at 11.5-12.5 V)'
+  gpio:
+    min: 2.7V
+    max: 9.5V
+    notes: 'VIH at least 2.7 V, VIL at most 0.7 V; the DIN pin withstands 9.5 V'
+  max_current: 12mA
+  max_current_notes: 'OUT sink current with DIN = FFh at 12 V; no current-setting pin'
+  current_programmable: false
+  quiescent_current: 1.5mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ws2808
+  - https://www.enttec.com/pixel-protocols/WS2808
+physical:
+  packages:
+    - SOP-8
+    - FSOP-8
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C22371539.html
+    retrieved: '2026-11-18'
+    notes: "WS2808 (SOP-8) in stock at LCSC (3,710 pcs). WorldSemi's driver-IC catalog (https://www.world-semi.com/products-led-driver-ic.html) lists it among its 3-channel RGB parts: 'WS2801 · WS2811 · WS2808 · WS2818B'."
+  release_year:
+    url: https://www.lcsc.com/datasheet/C22371539.pdf
+    retrieved: '2026-11-18'
+    notes: "Datasheet revision log: 'V1.0 N 新建 20221028'"
+  creator:
+    url: https://www.lcsc.com/datasheet/C22371539.pdf
+    retrieved: '2026-11-18'
+    notes: WorldSemi header (www.world-semi.com) on every page; LCSC lists the maker as Worldsemi
+  data.type:
+    url: https://www.lcsc.com/datasheet/C22371539.pdf
+    retrieved: '2026-11-18'
+    notes: "'单线归零码' (single-wire return-to-zero), up to 800 Kbps; T0H 220-380 ns, T1H 580 ns-1 us, T0L/T1L 580 ns-1 us, reset 280 us or more; 24 bits per chip sent G R B, MSB first. Same framing and timing as the WS2812B."
+  data.channels:
+    url: https://www.lcsc.com/datasheet/C22371539.pdf
+    retrieved: '2026-11-18'
+    notes: "'单线256 级灰度三通道恒流LED 驱动IC'; outputs OUT1, OUT2, OUT3"
+  data.backup_line:
+    url: https://www.lcsc.com/datasheet/C22371539.pdf
+    retrieved: '2026-11-18'
+    notes: "'具备断点续传功能，即使一颗IC损坏其余IC也能正常工作' (break-point resume: the other ICs keep working if one fails); pin 5 DIN1 主数据输入 (main data input), pin 7 DIN2 辅助数据输入 (auxiliary data input)"
+  color.pwm_frequency:
+    url: https://www.lcsc.com/datasheet/C22371539.pdf
+    retrieved: '2026-11-18'
+    notes: "'PWM 控制端能够实现256级调节，扫描频率4KHz'"
+  physical.packages:
+    url: https://www.lcsc.com/datasheet/C22371539.pdf
+    retrieved: '2026-11-18'
+    notes: "'提供SOP8、FSOP8封装'; LCSC C22371539 is the SOP-8 part"
+technical_notes:
+  - 'Pins: OUT1-OUT3, DOUT, DIN1 (main data input), GND, DIN2 (auxiliary data input), VDD'
+  - Up to 2 m between two points without extra circuitry; at least 1024 points at 30 frames/s
+  - 'Outputs keep their previous values until a reset (280 us or more of low level) arrives'
+  - WorldSemi's V1.2 datasheet (2025-12-02, on szlcsc) is titled WS2808F and carries on the WS2808 revision log (V1.0 2022-10-28, V1.1 timing description, V1.2 application circuit)

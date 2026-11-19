@@ -1,0 +1,43 @@
+name: P943
+creator: Power MOS Microelectronics
+notes: 5050 RGB LED with a built-in single-wire driver and a backup data line; known only from controller makers' protocol pages
+color:
+  brightness_bits: 8
+  pwm_frequency: 1.6kHz
+data:
+  clocked: false
+  bitrate: 800kHz
+  backup_line: true
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/p943
+  - https://www.enttec.com/pixel-protocols/P943
+physical:
+  packages:
+    - '5050'
+sources:
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/p943
+    retrieved: '2026-11-18'
+    notes: "'This pixel protocol was designed by Power MOS Microelectronics (formerly DMS Microelectronics) in China'"
+  data.backup_line:
+    - url: https://www.advateklighting.com/pixel-protocols/p943
+      retrieved: '2026-11-18'
+      notes: "'Redundant data line reduces chance of entire strip failure'"
+    - url: https://www.enttec.com/pixel-protocols/P943
+      retrieved: '2026-11-18'
+      notes: "'a redundant backup data line'; 'Redundant Data Line: Yes'"
+  data.bitrate:
+    url: https://www.advateklighting.com/pixel-protocols/p943
+    retrieved: '2026-11-18'
+    notes: "'Clock Type Data-Only', 'Data Transfer Rate 800kbps', 'Color Resolution 8 Bits', 'Color Types RGB'"
+  color.pwm_frequency:
+    url: https://www.advateklighting.com/pixel-protocols/p943
+    retrieved: '2026-11-18'
+    notes: "'PWM Rate 1600Hz' (ENTTEC: 1600Hz)"
+  physical.packages:
+    url: https://www.advateklighting.com/pixel-protocols/p943
+    retrieved: '2026-11-18'
+    notes: "'The control circuit and LEDs are integrated in a 5050 SMD package'; ENTTEC: 'SMD5050 with integrated LEDs'"
+technical_notes:
+  - No maker datasheet found; all values are from Advatek's and ENTTEC's protocol pages, which give a 5V input and a 5-17V output pixel voltage
+  - Advatek's P943 specs match its P9883 page (same designer, data-only 8-bit RGB, 800 kbps, 1600Hz PWM, 5-17V, redundant data line), but no source says the P943 contains a P9883

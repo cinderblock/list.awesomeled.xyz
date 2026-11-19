@@ -1,0 +1,51 @@
+name: ICND2110
+creator: Chipone Technology
+notes: Clocked (data + clock) RGB driver with 16-bit gray scale per channel
+color:
+  channel_bits: 16
+  pwm_frequency: 3.84kHz
+data:
+  clocked: true
+  backup_line: false
+electrical:
+  output_voltage: 10V
+  output_voltage_notes: Top of the 5-10V output pixel voltage Advatek and ENTTEC list (no maker datasheet found)
+  supply_voltage: 5V
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/icnd2110
+  - https://www.enttec.com/pixel-protocols/ICND2110
+physical:
+  packages:
+    - QFN-20
+sources:
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/icnd2110
+    retrieved: '2026-11-18'
+    notes: "'This protocol was designed by Chipone Technology in China'; ENTTEC: 'Manufacturer: Chipone Technology'"
+  data.clocked:
+    url: https://www.enttec.com/pixel-protocols/ICND2110
+    retrieved: '2026-11-18'
+    notes: "'a clocked (two-wire) RGB pixel driver with 16-bit per-channel greyscale'; Advatek: 'Clock Type Clocked'"
+  data.backup_line:
+    url: https://www.enttec.com/pixel-protocols/ICND2110
+    retrieved: '2026-11-18'
+    notes: "'Redundant Data Line: No'"
+  color.channel_bits:
+    url: https://www.advateklighting.com/pixel-protocols/icnd2110
+    retrieved: '2026-11-18'
+    notes: "'It is a 16-bit protocol'; 'Color Types RGB'"
+  color.pwm_frequency:
+    url: https://www.advateklighting.com/pixel-protocols/icnd2110
+    retrieved: '2026-11-18'
+    notes: "'PWM Rate 3840Hz' (ENTTEC: 3840Hz)"
+  electrical.supply_voltage:
+    url: https://www.advateklighting.com/pixel-protocols/icnd2110
+    retrieved: '2026-11-18'
+    notes: "'Input Voltage 5V', 'Output Pixel Voltage 5 - 10V'"
+  physical.packages:
+    url: https://www.advateklighting.com/pixel-protocols/icnd2110
+    retrieved: '2026-11-18'
+    notes: "'The control circuit comes in a QFN20 package' (ENTTEC: QFN20)"
+technical_notes:
+  - No maker datasheet found; all values are from Advatek's and ENTTEC's protocol pages, so the channel count and frame format are unknown
+  - "Advatek: 'ICND2110 allows connection of three RGB LEDs per chip'"

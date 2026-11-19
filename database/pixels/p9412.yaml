@@ -1,0 +1,68 @@
+name: P9412
+release_year: 2016
+creator: Power MOS Microelectronics
+manufacturers:
+  - Shenzhen Weiersheng Optoelectronics (WEERSOM)
+notes: Eight-pin 5050 RGBW LED with a built-in single-wire driver that also drives plain RGBW LEDs in 12V and 24V strips
+color:
+  brightness_bits: 8
+  pwm_frequency: 1.2kHz
+data:
+  type: P9412
+  clocked: false
+  bitrate: 800kHz
+  backup_line: false
+electrical:
+  led_voltage: 5-24V
+  led_voltage_notes: "Advatek's output pixel voltage. WEERSOM: in 12 V strips each P9412 LED drives two IC-less RGBW LEDs, in 24 V strips five"
+  vcc_voltage: 5V
+  wattage: 0.2W
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/p9412
+  - https://www.enttec.com/pixel-protocols/P9412
+  - http://www.will-led.com/content/?83.html
+physical:
+  packages:
+    - '5050'
+  pin_count: 8
+sources:
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/p9412
+    retrieved: '2026-11-18'
+    notes: "'designed by Power MOS Microelectronics (formerly DMS Microelectronics) in China'. The LED maker names the built-in IC '台湾P9412' (a Taiwanese P9412 IC)."
+  manufacturers:
+    url: http://www.will-led.com/content/?82.html
+    retrieved: '2026-11-18'
+    notes: "深圳市威尔晟光电有限公司 (brand WEERSOM, www.will-led.com) news post '新品发布，P9412内置IC（5050RGBW）灯珠'; product page http://www.will-led.com/content/?83.html: 'P9412是威尔晟光电研发的一款新品灯珠'"
+  release_year:
+    url: http://www.will-led.com/content/?82.html
+    retrieved: '2026-11-18'
+    notes: New-product announcement dated 2016-11-09
+  data.type:
+    url: https://www.advateklighting.com/pixel-protocols/p9412
+    retrieved: '2026-11-18'
+    notes: "New label: no datasheet or timing found. Advatek lists P9412 as its own protocol: 'Clock Type Data-Only', 'Data Transfer Rate 800kbps', 8 bits, RGBW. WEERSOM says it pairs with RGBW 幻彩 (addressable) controllers."
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/p9412
+    retrieved: '2026-11-18'
+    notes: "Disadvantages: 'No redundancy in data'; ENTTEC also lists no redundant data line"
+  color.pwm_frequency:
+    url: https://www.advateklighting.com/pixel-protocols/p9412
+    retrieved: '2026-11-18'
+    notes: "'PWM Rate 1200Hz'; ENTTEC also lists 1200 Hz"
+  electrical.vcc_voltage:
+    url: https://www.advateklighting.com/pixel-protocols/p9412
+    retrieved: '2026-11-18'
+    notes: "'Input Voltage 5V', 'Output Pixel Voltage 5-24V'"
+  electrical.wattage:
+    url: http://www.will-led.com/content/?82.html
+    retrieved: '2026-11-18'
+    notes: "'灯珠功率：0.2W'"
+  physical.packages:
+    url: http://www.will-led.com/content/?82.html
+    retrieved: '2026-11-18'
+    notes: "'灯珠规格：5050 RGBW', '脚位数量：8个脚'"
+technical_notes:
+  - "WEERSOM: '12V实现 1拖2' (one P9412 LED plus two IC-less RGBW LEDs) and '24V实现 1拖5' (plus five)"
+  - 'WEERSOM: Sanan or Epistar LED chips, white 7-8 lm, 120° viewing angle'
+  - No datasheet found online; protocol figures come from Advatek and ENTTEC only

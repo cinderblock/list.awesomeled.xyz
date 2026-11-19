@@ -1,0 +1,75 @@
+name: DM412
+creator: Silicon Touch Technology
+notes: Clocked 3-channel constant-current driver with 16-bit PWM per channel, up to 200 mA per output
+color:
+  channel_bits: 16
+  pwm_frequency: 267Hz
+  pwm_frequency_notes: 'Free-running refresh from the internal oscillator (about 17.5 MHz); each 16-bit value mixes 8-bit PWM (MSBs) with 8-bit bit-angle modulation (LSBs)'
+data:
+  type: DM412
+  clocked: true
+  channels: 3
+  bitrate: 20MHz
+  bitrate_notes: 'Maximum serial-in clock: 20 MHz single chip or cascaded with SDO high, 10 MHz cascaded with SDO low'
+  pixel_size_bits: 48
+  backup_line: false
+datasheet:
+  url: https://datasheet4u.com/pdf/664190/DM412.pdf # SITI DM412 version A.003 (2007-08-27), English; datasheet4u mirror, no maker-hosted PDF found
+  sources:
+    - url: https://www.alldatasheet.com/datasheet-pdf/pdf/307120/SITI/DM412.html
+      host: community
+      notes: alldatasheet.com copy (SITI, 35 pages)
+electrical:
+  output_voltage: 17V
+  output_voltage_notes: 'Driver-off maximum; 1-10 V across the output while driving'
+  supply_voltage: 4-5.5V
+  gpio:
+    min: 4V
+    notes: 'CMOS levels: VIH 0.8 x VCC (4.0 V at 5 V), VIL 0.2 x VCC'
+  max_current: 200mA
+  max_current_notes: Each channel set by its own external resistor (RREXT, GREXT, BREXT); the datasheet recommends TSSOP16 for 100-200 mA
+  current_programmable: true
+  current_range: 5-200mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/dm412
+  - https://www.enttec.com/pixel-protocols/DM412
+physical:
+  packages:
+    - SSOP-16
+    - SOP-16
+    - TSSOP-16
+    - QFN-16
+sources:
+  creator:
+    url: https://datasheet4u.com/pdf/664190/DM412.pdf
+    retrieved: '2026-11-18'
+    notes: 'Cover page: SILICON TOUCH TECHNOLOGY INC. (點晶科技), Hsin-Chu, Taiwan; file SP-DM412-A.003'
+  data.type:
+    url: https://datasheet4u.com/pdf/664190/DM412.pdf
+    retrieved: '2026-11-18'
+    notes: "New label: no existing family fits. 'Input Data Format': R[15:0], G[15:0], B[15:0], MSB shifted in first, sampled on the rising edge of CKI; DAI/CKI in, DAO/CKO/STO buffered out for cascading; strobe on STI or internal ('Selectable auto/manual strobe'). Advatek and ENTTEC list DM412 as its own clocked protocol."
+  data.pixel_size_bits:
+    url: https://datasheet4u.com/pdf/664190/DM412.pdf
+    retrieved: '2026-11-18'
+    notes: Input Data Format figure, 3 x 16 luminance bits per chip
+  data.bitrate:
+    url: https://datasheet4u.com/pdf/664190/DM412.pdf
+    retrieved: '2026-11-18'
+    notes: "'Maximum serial-in clock frequency: 20 MHz'; Recommended Operating Condition, FCKI"
+  color.pwm_frequency:
+    url: https://datasheet4u.com/pdf/664190/DM412.pdf
+    retrieved: '2026-11-18'
+    notes: "'PWM free-running capability (refresh rate (~ 267 Hz) with internal oscillator (~ 17.5 MHz))'; section 'Output Modulation Technique'"
+  electrical.max_current:
+    url: https://datasheet4u.com/pdf/664190/DM412.pdf
+    retrieved: '2026-11-18'
+    notes: "'Maximum constant current outputs: 200mA determined by three external resistors'; Recommended Operating Condition IO 5-200 mA"
+  physical.packages:
+    url: https://datasheet4u.com/pdf/664190/DM412.pdf
+    retrieved: '2026-11-18'
+    notes: "'SSOP16, SOP16 (with exposed pad), TSSOP16 (with exposed pad), QFN16 (with exposed pad)'"
+technical_notes:
+  - LED open detection writes a status bit into each channel's LSB, read back from DAO
+  - The POL pin selects LED-driver mode (high) or PWM-generator mode for driving external high-power stages (low)
+  - 'Advatek: tie the Strobe/Sync pin to 5 V for PixLite controllers unless the fixture already handles it; four DM412 ICs can drive three RGBW LEDs'
+  - 'Internal oscillator 14-21 MHz (17.5 MHz typical)'

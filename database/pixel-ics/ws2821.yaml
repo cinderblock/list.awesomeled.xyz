@@ -1,0 +1,70 @@
+name: WS2821
+creator: WorldSemi
+notes: DMX512 pixel driver; chips share one data line in parallel and keep an address written over a separate address chain
+aliases:
+  - WS2821A
+  - WS2821B
+color:
+  channel_bits: 8
+data:
+  type: DMX512P
+  clocked: false
+  channels: 3
+  bitrate: 750kHz
+  bitrate_notes: 250-750 kbps (standard DMX512 is 250 kbps)
+  pixel_size_bits: 33
+  backup_line: false
+  max_per_string: 1024
+  max_per_string_notes: Up to 1024 chips in parallel on one data line
+datasheet:
+  url: https://www.acdcshop.gr/content/WS2821.pdf # WorldSemi WS2821 (English, undated, world-semi.com footer); acdcshop.gr copy, not on world-semi.com
+electrical:
+  output_voltage: 24V
+  supply_voltage: 5V
+  supply_voltage_notes: Built-in regulator, so supplies above 5V (up to 24V) feed VDD through one series resistor
+  max_current: 60mA
+  max_current_notes: 19mA default with REXT open; an external REXT resistor sets 19-60mA
+  current_programmable: true
+  current_range: 19-60mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/dmx512
+physical:
+  packages:
+    - SOP-8
+    - SOP-14
+sources:
+  creator:
+    url: https://www.acdcshop.gr/content/WS2821.pdf
+    retrieved: '2026-11-18'
+    notes: WorldSemi document (http://www.world-semi.com on every page). The current world-semi.com driver-IC catalog does not list it.
+  data.type:
+    - url: https://www.acdcshop.gr/content/WS2821.pdf
+      retrieved: '2026-11-18'
+      notes: "'Signal adopts the single line parallel connection type', 'Signal can compatible and expand the DMX512(1990) protocol signal', 'Data transmission speed is 250Kbps~750Kbps'"
+    - url: https://www.advateklighting.com/pixel-protocols/dmx512
+      retrieved: '2026-11-18'
+      notes: Advatek's single-wire DMX512 chip table lists WS2821 (RGB, 250-750 kbps); differential parts are on its separate DMX512-D page
+  data.pixel_size_bits:
+    url: https://www.acdcshop.gr/content/WS2821.pdf
+    retrieved: '2026-11-18'
+    notes: "One DMX512 slot per channel, 'each frame of data including 1 low start bit, 8 data bits, 2 stop bit high level': 3 x 11 bit-times per RGB pixel. The pixel-ics/dmx512 entry counts only the 24 data bits."
+  data.max_per_string:
+    url: https://www.acdcshop.gr/content/WS2821.pdf
+    retrieved: '2026-11-18'
+    notes: "'Storage space is built-in,support 1024 pixel's parallel connection'"
+  aliases:
+    url: https://www.acdcshop.gr/content/WS2821.pdf
+    retrieved: '2026-11-18'
+    notes: "Package section: 'WS2821A -SOP8 package', 'WS2821B-SOP-14 Package'; the pin table and application circuits show the 14-pin WS2821B. DMXking's LeDMX controllers list WS2821A."
+  physical.packages:
+    url: https://www.acdcshop.gr/content/WS2821.pdf
+    retrieved: '2026-11-18'
+    notes: WS2821A SOP8, WS2821B SOP-14
+  electrical.max_current:
+    url: https://www.acdcshop.gr/content/WS2821.pdf
+    retrieved: '2026-11-18'
+    notes: "'R/G/B output default current 19mA,maximum 60mA'; 'When the REXT being non connected ... output current is 19mA(default value) ... its range is 19mA~60mA'"
+technical_notes:
+  - Each chip stores its own address; addresses are written in one pass along the ADRI/ADRO chain (an independent write-code line), so one failed chip doesn't affect the others
+  - SPWM pin low reverses the output polarity of all three channels
+  - DMX512 framing per the datasheet (250 kbps timing) - break 88 us min, MAB 4-12 us, 44 us slots of 1 start bit, 8 data bits and 2 stop bits

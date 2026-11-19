@@ -1,0 +1,74 @@
+name: WS2822S
+creator: WorldSemi
+notes: 5050 RGB LED with a built-in DMX512 decoder; pixels share one data line in parallel and keep their address in EEPROM
+aliases:
+  - WS2822
+color:
+  brightness_bits: 8
+  pwm_frequency: 3.0kHz
+data:
+  type: DMX512P
+  clocked: false
+  bitrate: 750kHz
+  bitrate_notes: 250-750 kbps (standard DMX512 is 250 kbps); the protocol section gives 200-750 kHz
+  pixel_size_bits: 33
+  pixel_size_notes: One DMX512 slot per color, each 1 low start bit, 8 data bits and 2 high stop bits
+  backup_line: false
+  max_per_string: 1024
+  max_per_string_notes: Up to 1024 pixels in parallel on one data line; a packet carries up to 3072 channels
+datasheet:
+  url: https://www.hestore.hu/prod_getfile.php?id=10686 # WorldSemi WS2822S (English, undated, world-semi.com footer); HESTORE (distributor) copy
+electrical:
+  led_voltage: 3.6-5.5V
+  led_voltage_notes: Separate LED supply pin (VDD)
+  vcc_voltage: 5V
+  vcc_voltage_notes: Logic supply (VCC) 4.5-5.5V
+  gpio:
+    min: 3V
+    min_notes: DAI input VIH at VCC 5V (VIL 1.7V)
+  quiescent_current: 3mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/dmx512
+physical:
+  packages:
+    - '5050'
+  pin_count: 6
+sources:
+  creator:
+    url: https://www.hestore.hu/prod_getfile.php?id=10686
+    retrieved: '2026-11-18'
+    notes: WorldSemi document (http://www.world-semi.com on every page). The current world-semi.com catalog does not list it.
+  data.type:
+    - url: https://www.hestore.hu/prod_getfile.php?id=10686
+      retrieved: '2026-11-18'
+      notes: "'Signal adopts the single line parallel connection type', 'Signal can compatible and expand the DMX512(1990) protocol signal.Data transmission speed can be 250Kbps~750Kbps'"
+    - url: https://www.advateklighting.com/pixel-protocols/dmx512
+      retrieved: '2026-11-18'
+      notes: Advatek's single-wire DMX512 chip table lists WS2822 (RGB, 250-750 kbps)
+  data.pixel_size_bits:
+    url: https://www.hestore.hu/prod_getfile.php?id=10686
+    retrieved: '2026-11-18'
+    notes: "'Each data frame consists of 11 data bits, the first bit (the start bit) is a low level, the middle 8 bits are with information data ... 10th and 11th bit data is the end bit': 3 x 11 bit-times per pixel. The pixel-ics/dmx512 entry counts only the 24 data bits."
+  data.max_per_string:
+    url: https://www.hestore.hu/prod_getfile.php?id=10686
+    retrieved: '2026-11-18'
+    notes: "'EEPROM integrated in and maximum support 1024pixels in parallel connection'; 'the data frame contained in each package can be 3072 frames'"
+  color.pwm_frequency:
+    url: https://www.hestore.hu/prod_getfile.php?id=10686
+    retrieved: '2026-11-18'
+    notes: "'scan frequency can be 3000Hz/s'"
+  aliases:
+    - url: https://www.advateklighting.com/pixel-protocols/dmx512
+      retrieved: '2026-11-18'
+      notes: Controller makers write WS2822 (Advatek's DMX512 chip table; Falcon's DMX512P alternatives 'DMX512, UCS512, WS2822' at https://pixelcontroller.com/store/PixelTypes.html), with the same 250-750 kbps as the WS2822S datasheet
+    - url: https://trac.switch-science.com/wiki/WS2822S
+      retrieved: '2026-11-18'
+      notes: WorldSemi's document and the distributors found (HESTORE, Switch Science) name only WS2822S; no separate WS2822 part turned up
+  electrical.quiescent_current:
+    url: https://www.hestore.hu/prod_getfile.php?id=10686
+    retrieved: '2026-11-18'
+    notes: Static current ICC 2.5-3.5mA (3mA typical) at VCC 5V
+technical_notes:
+  - 'Pins: DAI (data in), ADRI and ADRO (address chain in and out), VCC (logic), GND, VDD (LEDs)'
+  - Addresses are written into each pixel's EEPROM in one pass along the ADRI/ADRO chain, using a 250 kHz DMX-like packet that starts with a low level of more than 5 ms
+  - Being wired in parallel, one failed pixel doesn't affect the others

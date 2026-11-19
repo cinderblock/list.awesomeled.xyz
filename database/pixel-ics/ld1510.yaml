@@ -1,0 +1,78 @@
+name: LD1510
+release_year: 2008
+creator: LDT Inc.
+notes: Clocked 3-channel driver with 8- or 12-bit PWM chosen by a pin and 5-100mA outputs
+color:
+  channel_bits: 8/12
+data:
+  type: LD1510
+  clocked: true
+  channels: 3
+  bitrate: 10MHz
+  bitrate_notes: CLKI up to 10MHz (datasheet V3.0 lowered it from 20MHz)
+  pixel_size_bits: 36
+  backup_line: false
+datasheet:
+  url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf # LDT LD1510 datasheet Ver 3.0 (2009-02-17); DatasheetBank copy
+electrical:
+  output_voltage: 17V
+  output_voltage_notes: Maximum sinking output voltage (absolute maximum 20V)
+  supply_voltage: 4.5-18V
+  supply_voltage_notes: VCC; a built-in regulator (VDD_R pin) powers the logic, or VDD 4.5-5.5V can be supplied directly
+  gpio:
+    min: 4V
+    max: 5V
+    notes: 5V CMOS inputs, VIH 0.8 x VDD (4V at VDD 5V)
+  max_current: 100mA
+  max_current_notes: Set per channel by three external resistors (RREX, GREX, BREX), IOUT = 1.16 / (30 + REXT) x 50
+  current_programmable: true
+  current_range: 5-100mA
+  quiescent_current: 1mA
+physical:
+  packages:
+    - SOP-16
+    - SSOP-16
+sources:
+  release_year:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: Revision history, first version 2008.10.21
+  creator:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: "'LDT Inc. does NOT assume any responsibility for use of circuits described'"
+  data.type:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: "New label: no other family found with this latch. DI/CLKI in, DO/CLKO out; 24 (MOD low) or 36 (MOD high) clocks per chip, R then G then B, MSB first; data latches on a 'strobe' (DI toggled five times while CLKI is low) at least 10 us after the last clock."
+  data.pixel_size_bits:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: "12-bit mode: 'strobe signal shall be applied after N x 36ea of clock input'; 8-bit mode: N x 24"
+  data.bitrate:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: "'Maximum serial input frequency : 10MHz' (revision 3.0 changed it from 20MHz)"
+  color.channel_bits:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: "'8/12bit grayscale PWM control'; MOD pin 'L: 8bit luminance data transfer. H: 12bit luminance data transfer'"
+  electrical.max_current:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: "'Output current : set-up at 5mA to 100mA', 'IOUT[A] = {1.16/(30+REXT)} * 50'"
+  electrical.supply_voltage:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: DC characteristics, VCC supply voltage 4.5-18V; VDD regulator voltage or external supply 4.5-5.5V
+  electrical.quiescent_current:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: ICC1 1.0mA typical (2.0mA max) with REXT open and outputs off
+  physical.packages:
+    url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+    retrieved: '2026-11-18'
+    notes: Ordering information, LD1510-SP (16 SOP) and LD1510-SS (16 SSOP)
+technical_notes:
+  - The 8- or 12-bit gray scale is spread over four PWM sub-cycles (4096 internal PWM clocks per cycle, internal PWM clock 8-12MHz) to raise the visual refresh rate
+  - The datasheet's load-resistor example runs three LEDs in series per channel from 12V at 50mA, with the resistor sized to leave about 1V across the output; its application circuits also show 24V LED supplies

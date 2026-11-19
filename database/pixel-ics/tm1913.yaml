@@ -1,0 +1,61 @@
+name: TM1913
+creator: Titan Micro Electronics
+notes: Fixed 18mA RGB driver that falls back to built-in color patterns when its input signal stops
+color:
+  channel_bits: 8
+  pwm_frequency: 666Hz
+data:
+  type: TM1913
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  bitrate_notes: 0/1-code periods from 1.25 us (800 kHz) to 2.5 us (400 kHz) work; internal-control mode sends at 500 kHz
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf # Titan Micro TM1913 V1.3 (Chinese); Lumikit copy, no English edition found
+electrical:
+  output_voltage: 24V
+  output_voltage_notes: OUT port rating with the output off; absolute maximum 32V
+  supply_voltage: 5V
+  supply_voltage_notes: VDD 4.5-6.5V; built-in 5V regulator, so 6-24V supplies feed VDD through a series resistor
+  max_current: 18mA
+  max_current_notes: Fixed constant current, 17.1-18.9mA; +/-3% between channels, +/-5% between chips
+  current_programmable: false
+  quiescent_current: 1.65mA
+physical:
+  packages:
+    - SOP-8
+    - MSOP-8
+sources:
+  creator:
+    url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf
+    retrieved: '2026-11-18'
+    notes: "'©Titan Micro Electronics', www.titanmec.com on every page"
+  data.type:
+    url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf
+    retrieved: '2026-11-18'
+    notes: "New label: inverted single-wire RZ. DO stays high until it forwards data ('在转发数据之前，DO端口一直为高电平'), the 0 and 1 codes are told apart by their low time (T0l 310-410 ns, T1l 650-1000 ns, 1.25 us period) and Reset is a high level of 200-20,000 us. Same polarity as the TM1829, but with no constant-current command packet (TM1829 treats a packet whose first byte is 0xFF as a current setting), so it is kept apart."
+  data.pixel_size_bits:
+    url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf
+    retrieved: '2026-11-18'
+    notes: "'每个数据包包含8×3bit数据位，高位先发' (8 x 3 bits per packet, MSB first: R[7:0], G[7:0], B[7:0])"
+  color.pwm_frequency:
+    url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf
+    retrieved: '2026-11-18'
+    notes: Switching characteristics, OUT PWM output frequency 666Hz
+  electrical.max_current:
+    url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf
+    retrieved: '2026-11-18'
+    notes: "'固定恒流输出18mA'; electrical table Iout 17.1/18/18.9mA at Vout 3V"
+  electrical.quiescent_current:
+    url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf
+    retrieved: '2026-11-18'
+    notes: IDD 1-2.3mA (1.65mA typical) at VDD 4V with the other pins floating
+  physical.packages:
+    url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf
+    retrieved: '2026-11-18'
+    notes: "'封装形式：SOP8、MSOP8'"
+technical_notes:
+  - 'Internal-control mode: with no pulses on DIN for 600 ms the chip plays fixed seven-color patterns in sync and sends its own data downstream (500 kHz, up to 2048 points), so chips after a failed one keep running and strips can run without a controller'
+  - Between bytes of one frame the line must not stay high for more than 50 us, or the chip resets

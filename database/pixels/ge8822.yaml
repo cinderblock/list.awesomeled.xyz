@@ -1,0 +1,90 @@
+name: GE8822
+status: active
+creator: Greeled Electronic
+notes: 5050 RGB LED with a built-in two-wire (data + clock) driver; Greeled calls the protocol SK9822/APA102-compatible
+color:
+  brightness_bits: 8+5
+  brightness_method: current
+  brightness_method_notes: The 5-bit global brightness sets the current of all three outputs together
+  pwm_frequency: 1.2kHz
+data:
+  type: APA102
+  clocked: true
+  bitrate: 30MHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf # Greeled 'GE8822 LED series specification' (English, 14 pages, undated)
+electrical:
+  vcc_voltage: 5V
+  vcc_voltage_notes: VDD 5.0V typical, 5.3V max (absolute maximum 5.5V)
+  channel_current: 19mA
+  channel_current_notes: 18-19mA per channel (product naming); 20mA maximum in the electrical table
+  quiescent_current: 1mA
+  wattage: 0.25W
+physical:
+  packages:
+    - '5050'
+  pin_count: 6
+related:
+  - type: compatible
+    ref: pixels/sk9822
+    notes: Greeled says the GE8822's protocol is compatible with SK9822 and APA102
+    source:
+      url: https://www.gree-leds.com/ic-built-in-led/ge8822-chip-built-in-led.html
+      retrieved: '2026-11-18'
+      notes: "'Remark: GE8822 IC Protocol is compatible with SK9822 /APA102'"
+  - type: compatible
+    ref: pixels/apa102
+    notes: Greeled says the GE8822's protocol is compatible with SK9822 and APA102
+    source:
+      url: https://www.gree-leds.com/ic-built-in-led/ge8822-chip-built-in-led.html
+      retrieved: '2026-11-18'
+      notes: "'Remark: GE8822 IC Protocol is compatible with SK9822 /APA102'"
+sources:
+  status:
+    url: https://www.gree-leds.com/ic-built-in-led/ge8822-chip-built-in-led.html
+    retrieved: '2026-11-18'
+    notes: Listed under Greeled's 'APA-GE IC Built-in led' products, also sold as GE8822 strips (https://gree-leds.com/5v-ic-built-in-tape/ge8822-colorful-led-strip.html)
+  creator:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: Greeled specification ('GREELED smart led'). Greeled names no other IC maker, but may be the LED packager rather than the IC designer.
+  data.type:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: "'two-wire transmission three channel (RGB)', 'The two-wire synchronous control', SDI/CKI in and SDO/CKO out; product page: 'compatible with SK9822 /APA102'"
+  data.bitrate:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: "'The maximum frequency of 30MHZ serial data input'"
+  data.pixel_size_bits:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: "Refresh rate: 'Frame rate =1/ (64+ (32* points)) *CKI (cycle)', i.e. 32 clocks per pixel plus 64 per frame"
+  color.brightness_bits:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: "'8Bit (256) color; 5Bit (32) to adjust the brightness'; '5-Bit (level 32) brightness adjustment (simultaneous control of OUTR\\OUTG\\OUTB three port current)'"
+  color.pwm_frequency:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: Electrical parameters, 'The frequency of PWM' 1.2 (typical)
+  electrical.wattage:
+    url: https://www.gree-leds.com/ic-built-in-led/ge8822-chip-built-in-led.html
+    retrieved: '2026-11-18'
+    notes: "Product table 'Watt/led 0.25w', 'SMD5050 6Pins'"
+  technical_notes:
+    - url: https://github.com/FastLED/FastLED/blob/master/src/fl/chipsets/led_timing.h
+      retrieved: '2026-11-18'
+      notes: "'GE8822 RGB controller @ 800 kHz, Four-phase: TH0=350ns, TH1=1010ns, TL0=1010ns, TL1=350ns'; chipsets.h adds 4 extra bits (GE8822Controller800Khz, ..., RGB_ORDER, 4, false)"
+    - url: https://github.com/FalconChristmas/fpp/blob/10.4/www/co-pixelStrings.php
+      retrieved: '2026-11-18'
+      notes: "FPP's single-wire pixel timing table: label 'GE8822', t0 375, t1 1000, period 1375 (ns)"
+technical_notes:
+  - 'Pins: SDI, CKI, GND, VCC, CKO, SDO'
+  - FastLED (T0H 350 ns, T1H 1010 ns, 1360 ns bit, 4 extra bits per pixel) and FPP (T0H 375 ns, T1H 1000 ns, 1375 ns bit) drive a chip they call GE8822 as a single-wire part, which doesn't match Greeled's two-wire GE8822; the K-series controllers' GE8822 entry comes from FPP
+variants:
+  - name: GE8822-B
+    suffix: -B
+    differences: Black surface

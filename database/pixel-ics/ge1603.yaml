@@ -1,0 +1,30 @@
+name: GE1603
+creator: Greeled Electronic
+notes: Greeled RGB driver IC with a backup data line, used on its 24V strips; no datasheet found
+aliases:
+  - GE1603R
+color:
+  channel_bits: 8
+data:
+  clocked: false
+  channels: 3
+  backup_line: true
+sources:
+  creator:
+    url: https://www.gree-leds.com/web/index.php?topclassid=16&classid=130&id=286&lanstr=en&wap=1
+    retrieved: '2026-11-18'
+    notes: "Greeled product page '8mm 24V GE1603R Dual data digital RGB tape' ('IC Protocol GE1603R'). Greeled names no other IC maker, but may be the vendor rather than the IC designer."
+  aliases:
+    url: https://www.gree-leds.com/web/index.php?topclassid=16&classid=130&id=286&lanstr=en&wap=1
+    retrieved: '2026-11-18'
+    notes: "Greeled writes the IC as GE1603R ('Mini 3.8mm*1.8mm GE1603R IC'); deskontrol's controller lists write GE1603"
+  data.backup_line:
+    url: https://www.gree-leds.com/web/index.php?topclassid=16&classid=130&id=286&lanstr=en&wap=1
+    retrieved: '2026-11-18'
+    notes: "'Dual data to prevent signal interrupt.', 'Breakpoint signal transmission continuously.' The two lines are main and backup data, not data and clock (Greeled's two-wire clocked parts are described as 'Dual signal (Data,Clk)')."
+  data.channels:
+    url: https://www.gree-leds.com/web/index.php?topclassid=16&classid=130&id=286&lanstr=en&wap=1
+    retrieved: '2026-11-18'
+    notes: "'SMD3535 RGB Color,8bit/color,256 grayscale'; emitting color RGB"
+technical_notes:
+  - "Greeled's only description is a strip listing: 8 mm 24V tape with 120 SMD3535 LEDs/m driven as 20 pixels/m (6 LEDs per pixel) by GE1603R ICs measuring 3.8 x 1.8 mm"

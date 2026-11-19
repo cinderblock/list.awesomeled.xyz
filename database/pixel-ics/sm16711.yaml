@@ -1,0 +1,68 @@
+name: SM16711
+creator: Shenzhen Sunmoon Microelectronics
+notes: Single-wire RGB constant-current driver with data-set output current (white-balance gain) and selectable 400/800 kbps
+color:
+  channel_bits: 8
+  pwm_frequency: 1.2kHz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  bitrate_notes: 'SET pin floating (default) selects high speed, tied to VDD low speed: 833 / 417 kHz typical'
+  backup_line: false
+datasheet:
+  url: https://datasheet4u.com/pdf/905204/SM16711.pdf # Sunmoon SM16711 V1.2 (Chinese); datasheet4u mirror, not on chinaasic.com
+  sources:
+    - url: https://datasheetspdf.com/pdf/905204/Sunmoon/SM16711/1
+      host: community
+      notes: datasheetspdf.com viewer of the same file
+electrical:
+  output_voltage: 26V
+  output_voltage_notes: R/G/B output withstand voltage
+  supply_voltage: 4-24V
+  supply_voltage_notes: 'Chip input VIN through a series resistor (1K at 12 V, 3K at 24 V) into a built-in 5.3 V regulator (VDD 5-5.8 V); Features say 5-24 V'
+  gpio:
+    min: 3.4V
+    max: 5.5V
+    notes: 'Input thresholds VIH 3.4 V / VIL 1.6 V typical at VDD 5 V; logic input absolute maximum 5.5 V'
+  max_current: 33mA
+  max_current_notes: Output current is set by the data; default 18.8 mA (R) and 18.0 mA (G, B)
+  current_programmable: true
+  current_range: 10-33mA
+  quiescent_current: 3.0mA
+physical:
+  packages:
+    - SOP-8
+sources:
+  creator:
+    url: https://datasheet4u.com/pdf/905204/SM16711.pdf
+    retrieved: '2026-11-18'
+    notes: '深圳市明微电子股份有限公司 / SHENZHEN SUNMOON MICROELECTRONICS CO.,LTD header, www.chinaasic.com footer'
+  data.type:
+    url: https://pixelcontroller.com/store/PixelTypes.html
+    retrieved: '2026-11-18'
+    notes: "Falcon's pixel-type table lists SM16711 among the alternatives of its WS2811 type (3 channels, 8 bits, 3 wires). Datasheet: unipolar return-to-zero code where the high time decides 0 or 1 and the 0/1 periods are equal."
+  data.channels:
+    url: https://datasheet4u.com/pdf/905204/SM16711.pdf
+    retrieved: '2026-11-18'
+    notes: "'SM16711 是单线传输三通道RGB LED 恒流驱芯片'; outputs OUTR, OUTG, OUTB"
+  data.bitrate:
+    url: https://datasheet4u.com/pdf/905204/SM16711.pdf
+    retrieved: '2026-11-18'
+    notes: "'数据发送速度400Kbps（低速）或800Kbps（高速）可选，内置默认高速模式'; pin 7 SET: '悬空时（默认）为高速模式；接VDD 时为低速模式'"
+  color.pwm_frequency:
+    url: https://datasheet4u.com/pdf/905204/SM16711.pdf
+    retrieved: '2026-11-18'
+    notes: 'Electrical characteristics: PWM 频率 fPWM 1.2 KHZ typical'
+  electrical.max_current:
+    url: https://datasheet4u.com/pdf/905204/SM16711.pdf
+    retrieved: '2026-11-18'
+    notes: "'芯片输出电流由输入数据设定，OUTR,OUTG,OUTB 默认输出恒流值18.8mA, 18.0mA, 18.0mA'; 'R/G/B 输出电流 IOL1 10——33 mA'; '可编程的增益调节实现LED 白平衡'"
+technical_notes:
+  - 'Pins: OUTR, OUTG, OUTB, GND, DOUT, DIN, SET (speed select), VDD'
+  - Output polarity can be inverted (instruction register bit 23 = 1) to drive external NPN transistors for LEDs above 33 mA
+  - 'Put a 47 ohm series resistor on the data line for runs over 10 m between points'
+  - HBM ESD above 8 kV
+  - The available datasheet copy shows the 0/1/reset code shapes but not the data-frame bit layout or timing values
+  - "Sunmoon's own site search (chinaasic.com) returns no SM16711 as of 2026-11-18, so it may be discontinued"

@@ -1,0 +1,80 @@
+name: GE8812
+status: active
+creator: Greeled Electronic
+notes: 5050 RGB LED with a built-in single-wire driver; Greeled calls the protocol SK6812-compatible
+color:
+  order: GRB
+  brightness_bits: 8
+  pwm_frequency: 1.2kHz
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf # Greeled 'GE8812B LED series specification' (English, document SPC/23012); covers GE8812, GE8812B, GE8812-B and GE8812B-B
+electrical:
+  vcc_voltage: 5V
+  vcc_voltage_notes: VDD 5.0V typical (absolute maximum range 3.5-5.5V)
+  gpio:
+    min: 3.5V
+    min_notes: DIN VIH at VDD 5.0V (VIL 1.5V)
+  channel_current: 13mA
+  channel_current_notes: 12-13mA per channel (product naming)
+  quiescent_current: 1mA
+  wattage: 0.2W
+physical:
+  packages:
+    - '5050'
+  pin_count: 4
+related:
+  - type: compatible
+    ref: pixels/sk6812
+    notes: Greeled says the GE8812's protocol is compatible with SK6812
+    source:
+      url: https://www.gree-leds.com/ic-built-in-led/ge8812-chip-built-in-led.html
+      retrieved: '2026-11-18'
+      notes: "'Remark: GE8812 IC Protocol is compatible with SK6812'"
+sources:
+  status:
+    url: https://www.gree-leds.com/ic-built-in-led/ge8812-chip-built-in-led.html
+    retrieved: '2026-11-18'
+    notes: Listed under Greeled's 'APA-GE IC Built-in led' products, alongside GE8812B, GE8808N, GE8808B and GE8805B
+  creator:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: Greeled specification. Greeled names no other IC maker, but may be the LED packager rather than the IC designer.
+  data.type:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: "Unipolar return-to-zero code, 24-bit data per pixel (G7...G0 R7...R0 B7...B0), 800 Kbps; T0H 0.3 us, T1H 0.9 us (+/-0.05 us), 1.25 us bit, reset 200 us low; product page: 'compatible with SK6812'"
+  color.pwm_frequency:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: Electrical parameters, 'The frequency of PWM' 1.2 KHZ (typical)
+  electrical.channel_current:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: "Product naming: 'GE8812 mean white surface ,12-13ma/channel ,capacitor integrated in 5050 (standard version)'"
+  electrical.wattage:
+    url: https://www.gree-leds.com/ic-built-in-led/ge8812-chip-built-in-led.html
+    retrieved: '2026-11-18'
+    notes: "Product table 'Watt/led 0.2w', 'SMD5050 4Pins', 'Capacitor built-in'"
+  variants:
+    url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf
+    retrieved: '2026-11-18'
+    notes: Section 4, Product Naming
+technical_notes:
+  - 'Pins: VDD, DOUT, VSS, DIN'
+  - The B versions have no decoupling capacitor inside the LED; the application circuit adds a 104 (100 nF) capacitor at each one
+variants:
+  - name: GE8812B
+    suffix: B
+    differences: No capacitor inside the LED
+  - name: GE8812-B
+    suffix: -B
+    differences: Black surface
+  - name: GE8812B-B
+    suffix: B-B
+    differences: Black surface, no capacitor inside the LED

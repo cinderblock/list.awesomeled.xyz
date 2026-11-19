@@ -1,0 +1,64 @@
+name: MBI6120
+release_year: 2012
+creator: Macroblock
+notes: Single-wire 3-channel 12-bit S-PWM driver for small LED clusters, with a built-in LDO for 5-12V supplies
+color:
+  channel_bits: 12
+data:
+  type: MBI6120
+  clocked: false
+  channels: 3
+  bitrate: 1MHz
+  bitrate_notes: Bit width 1-10 us (100kHz-1MHz); the chip measures the rate from the twelve 1s that start each packet
+  pixel_size_bits: 38
+  backup_line: false
+  max_per_string: 1023
+datasheet:
+  url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf # Macroblock MBI6120 preliminary datasheet V1.00 (June 2012); Neumüller (authorized distributor) copy
+electrical:
+  output_voltage: 17V
+  supply_voltage: 5-12V
+  supply_voltage_notes: Built-in LDO
+  max_current: 30mA
+  max_current_notes: One external resistor (R-EXT) sets 3-30mA for all three outputs
+  current_programmable: true
+  current_range: 3-30mA
+physical:
+  packages:
+    - SOP-8
+sources:
+  release_year:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Preliminary datasheet footer 'June 2012, V1.00' (device version code A)
+  creator:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'©Macroblock, Inc. 2012', 'Single-wire 3-Channel Constant Current Sink Driver for Small LED Clusters'"
+  data.type:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "New label: Macroblock's own one-wire protocol ('a unique protocol (patent pending)'). RZ bits sampled between rising edges; SDI low for more than 750 us, then a 36-bit header (12 ones for data-rate detection, 4-bit gray-scale clock select, 8-bit command 0x00 gray scale or 0x55 software reset, 12-bit cascade count), then each IC's 3 x 12-bit data plus a gap symbol, last IC first."
+  data.pixel_size_bits:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'The data for each IC contains: 12-bit OUTA gray scale data, 12-bit OUTB ..., 12-bit OUTC ..., a gap symbol'; the gap is two bit widths ('Tgap = 2xTbit'), so 36 + 2"
+  data.max_per_string:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'The maximum allowable cascaded IC's for MBI6120 is 1023' (10-bit NUM field in the header)"
+  data.bitrate:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Logic 0/1 bit width (SDI rising to rising) 1-10 us; minimum pulse width 0.08 us to 0.25 x Tbit
+  color.channel_bits:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'Embedded 12-bit PWM generator', 'The 12-bit gray scale mode provides 4,096 gray scales'"
+  physical.packages:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "Ordering information: 'MBI6120GD SOP8L-150-1.27', with a thermal pad"
+technical_notes:
+  - S-PWM splits each 12-bit PWM cycle into 16 segments of 256 gray scale clocks; the clock is 5.2MHz (default), 2.6, 1.3 or 0.65MHz, chosen in each packet header
+  - Not on Macroblock's current RGB lighting product list (MBI6023, MBI6024, MBI6030, MBI6033, MBI6034 at https://www.mblock.com.tw/en/Driver_ICs/LED_Driver_ICs/2?sub, 2026-11-18)

@@ -1,0 +1,64 @@
+name: LB1908
+notes: 12V single-wire RGB driver with a backup data input (FDIN), WS2811-style 800 kHz protocol and 8 kHz PWM
+color:
+  channel_bits: 8
+  pwm_frequency: 8.0kHz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf # LB1908 'DC12V Power supply 3 channels LED driver' (English, undated, no maker named); LEDYi copy
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/LB1908-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path (redirects to media.ledyi.com)
+    - url: https://suntechlite.com/wp-content/uploads/2023/11/LB1908-specification-sheet-download.pdf
+      host: community
+      notes: SuntechLite copy, same text
+  discrepancies:
+    - 'Features give a fixed 14 mA output, but the electrical table gives 9-11 mA (10 mA typical) at Vout 3 V'
+electrical:
+  output_voltage: 24V
+  output_voltage_notes: OUT port withstand voltage; absolute maximum 26 V
+  supply_voltage: 12V
+  supply_voltage_notes: 'VDD 10-16 V straight from the 12 V supply, with a built-in 5 V regulator; a 33 ohm resistor in series with VDD cuts IC heating'
+  max_current: 14mA
+  max_current_notes: Fixed constant current (see discrepancies); outputs default off at power-up
+  current_programmable: false
+  quiescent_current: 1.4mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/lb1908
+  - https://www.enttec.com/pixel-protocols/LB1908
+physical:
+  packages:
+    - SOP-8
+sources:
+  data.type:
+    url: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf
+    retrieved: '2026-11-18'
+    notes: "'Using return to 0 code, serial data transmission rate 800KHz'; T0H 250-350 ns, T1H 700-900 ns, bit period 1.1-1.3 us, reset 200 us or more; 24 bits R G B per chip, higher bits first. Falcon's pixel-type table (https://pixelcontroller.com/store/PixelTypes.html) lists LB1908 among its WS2811 alternatives."
+  data.channels:
+    url: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf
+    retrieved: '2026-11-18'
+    notes: "'There are 3 open-drain constant current output terminals' (OUTR, OUTG, OUTB)"
+  data.backup_line:
+    url: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf
+    retrieved: '2026-11-18'
+    notes: "'the chip provides dual data inputs as redundant control to ensure signal transmission in the case of single chip damage'; pins DIN (5) and FDIN (7)"
+  color.pwm_frequency:
+    url: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf
+    retrieved: '2026-11-18'
+    notes: "'gray-scale clock supports 8KHZ refresh rate'; Advatek and ENTTEC also list 8000 Hz"
+  electrical.output_voltage:
+    url: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf
+    retrieved: '2026-11-18'
+    notes: "'OUT output port withstand voltage 24V'; Maximum Ratings Vout 26 V"
+technical_notes:
+  - "FDIN carries the same stream as the previous chip's DIN and drops the first 24 bits, so wire the controller to the first chip's DIN and ground that chip's FDIN; leave FDIN floating if break-point resume isn't wanted"
+  - 'Gaps over 80 us between bytes may reset the chip mid-frame'
+  - 'Put 68-100 ohm protective resistors on the signal pins and a 0.1 uF (104) decoupling capacitor at each chip'
+  - "The datasheet names no maker; its ESD paragraph reads 'Titan Micro Electronics suggests taking all appropriate preventive measures'"
