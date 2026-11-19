@@ -81,7 +81,15 @@ function priced(price: PriceInfo, qty: number) {
   };
 }
 
-function controllerPrice(controller: ControllerOption, units: number, pixelsPerUnit: number) {
+/**
+ * What `units` of a controller cost. Controllers sold by licence size are
+ * priced at the cheapest tier that covers the pixels each unit drives.
+ */
+export function controllerPrice(
+  controller: ControllerOption,
+  units: number,
+  pixelsPerUnit: number
+) {
   if (controller.licenseTiers.length === 0) {
     const p = priced(controller.price, units);
     return { ...p, priceNote: undefined as string | undefined };

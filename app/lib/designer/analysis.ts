@@ -159,7 +159,6 @@ export function analyzeDesign(design: Design, catalog: CatalogIndex): Analysis {
     uses.set(g.controller.id, use);
   }
 
-  const multi = design.groups.length > 1;
   const groups: GroupAnalysis[] = resolved.map((g) => {
     const issues: Issue[] = [];
     const add = (issue: Omit<Issue, 'group'>) => issues.push({ ...issue, group: g.index });
@@ -299,7 +298,7 @@ export function analyzeDesign(design: Design, catalog: CatalogIndex): Analysis {
       dataLines: lines,
       shifterFit,
       connectorFit,
-      issues: multi ? issues.map((i) => ({ ...i, message: `${g.label}: ${i.message}` })) : issues,
+      issues,
     };
   });
 

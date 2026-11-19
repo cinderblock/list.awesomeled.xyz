@@ -74,9 +74,11 @@ describe('a complete single-group design', () => {
     expect(codes(a)).not.toContain('power-advisory');
   });
 
-  test('single-group messages are not prefixed with the group', () => {
+  test('issues carry their group index, not a text prefix', () => {
     const injection = a.issues.find((i) => i.code === 'injection');
+    expect(injection?.group).toBe(0);
     expect(injection?.message.startsWith('Each string')).toBe(true);
+    expect(a.issues.find((i) => i.code === 'power-strong')?.group).toBeUndefined();
   });
 
   test('issues are sorted worst first', () => {
@@ -160,9 +162,11 @@ describe('several groups', () => {
     expect(a.issues.filter((i) => i.code === 'multiple-units')).toHaveLength(1);
   });
 
-  test('messages name their group', () => {
+  test('each group reports its own issues', () => {
     const injection = a.issues.filter((i) => i.code === 'injection');
-    expect(injection.map((i) => i.message.split(':')[0])).toEqual(['Roof', 'Group 2']);
+    expect(injection.map((i) => i.group)).toEqual([0, 1]);
+    expect(a.groups.map((g) => g.label)).toEqual(['Roof', 'Group 2']);
+    expect(a.groups[1].issues.every((i) => i.group === 1)).toBe(true);
   });
 
   test('the same pixel in two groups is one purchase at the volume price', () => {
