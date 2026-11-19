@@ -11,6 +11,10 @@
 
 .layout-main {
   flex: 1 1 0%;
+  /* A column itself, so a page's tinted background (.category-page,
+     .about-page: flex 1 0 auto) reaches the footer when its content is short */
+  display: flex;
+  flex-direction: column;
   view-transition-name: main-content;
 }
 
