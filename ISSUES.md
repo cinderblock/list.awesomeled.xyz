@@ -299,3 +299,38 @@ quoted; not applied because they're spec values, not links. Verify and apply:
 - `diffusive-materials/ld45-plaztazote` `name`: "LD45 Plaztazote" → "LD45 Plastazote" <https://www.zotefoams.com/product/azote/plastazote/>
 - `diffusive-materials/lexan-dclw` `name`: "Lexan DCLW" → "LEXAN DLCW" <https://led-professional.com/products/led-optics/sabic-to-introduce-pioneering-lexantm-dlcw-light-diffusing-technology>
 - `diffusive-materials/perspex-diffuse` `physical.sizes_available`: "up to 1220x2440" → "3050 x 2030 mm" <https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/>
+
+## Controller statuses and links found during the inputs audit (stream 6)
+
+From database review's audit of every controller's inputs
+([plans/database-review-inputs-audit.md](plans/database-review-inputs-audit.md),
+sources there). Inputs were applied; these status/link findings were not
+(prices, availability and links are stream 6's). Skip any you've already done.
+
+- Likely **active** (still sold / page live): `an6usp10`, `blink-tape-controller`,
+  `dmx-to-spi` (now "miniDMX V3.0"), `epix-flex-drive`, `e682`, `qolorpix`,
+  `spinode`, `uli-led-control` (EUR 79.98, supply now 7-24 V),
+  `madrix-nebula`, `pixblasters-ms1`, `pb-complete-controller` ($195),
+  `led-player-dmx` (EUR 99.90), `wb1616` / `wb48` (in stock 2025; "discontinued"
+  unconfirmed).
+- Likely **discontinued**: `falcon-f48` (PixelController's Discontinued
+  category), `falcon-f4v3`, `lightkraken` (sold out since Mar 2022),
+  `led-player-m`, `led-player-s`, `orange-pro-plus-32`, `scenex-pp4`,
+  `twinpixx16`, `sp102e`, the three `protopixel-*` boards, `pixelator-mini-px1-8d`,
+  `pixelbox`, `pixlite-t8-s-mk2` (Aug 2022). `esp32-wled-controller-8chan`
+  sold out since Aug 2024; Adafruit no longer stocks `fadecandy`.
+- **Links**: led-genial.de product pages 404 (moved to diamex-shop.de);
+  go3d.fr now belongs to an unrelated company (`fp48f`, `eth032f-pixel-breakout`);
+  dmxking.com product URLs land on a generic page (docs on dmxking.tv);
+  `k16000s`'s Amazon link now sells a CANRIA DMX decoder; `uli-led-control`'s
+  old URL redirects to the homepage; `mini-8-port-controller`'s Tindie listing
+  is now "Basic Eight Port LED Controller"; `dmx-core` is now "DMX Core 100".
+
+## FYI browse UX (stream 7): table-columns.tsx still reads the old package fields
+
+`app/components/data/table-columns.tsx` `packageList` reads
+`physical.package_size` / `package_sizes`, and `fields.ts` skips
+`physical.package_sizes`. Both fields are gone: pixels and pixel ICs have one
+`physical.packages` array (common.json `ic_package` / `led_package`), which the
+generic array handling already facets correctly. The override and skip rule
+are dead code now; not a visible bug.
