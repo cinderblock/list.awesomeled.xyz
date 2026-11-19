@@ -1,10 +1,11 @@
 name: Pixel Data Isolator
 creator: Essence Engineering
+notes: Provides a 5 kV isolated data connection from controller to LEDs when each is powered separately.
 outputs:
-  max_channels: 1
-  pixel_types: provides a 5kV isolated data connection from controller to LED when each are powered separately.
-  connectors: solder
-  description: Data
+  count: 1
+  types:
+    - pixel-data
+  connector: Solder pads
 diy_or_ots: OTS
 links:
   product: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/

@@ -1,77 +1,55 @@
-# Example 1: Full-featured pixel decoder with all fields
-name: Example Art-Net Decoder Pro
-creator: Decoder Corp
+# Example 1: Pixel data in, PWM out (all fields)
+name: Example Pixel-to-PWM Board
+status: active
+creator:
+  name: Decoder Corp
+  url: https://example.com
+  page: https://example.com/pixel-to-pwm
 manufacturers:
   - Decoder Corp
-  - Licensed Manufacturer
 vendors:
-  - LED Supplier
-  - Amazon
-notes: Converts Art-Net/sACN to 16 pixel outputs
-outputs: Single and Clock
-diy_or_ots: OTS
-max_channels: 16
-output_connectors: RJ45
-pixel_types: Both
-price: 149.99
-url: https://example.com/artnet-decoder
-
+  - name: LED Supplier
+    page: https://example.com/shop/pixel-to-pwm
+notes: Turns one WS2811 address into four high-current MOSFET channels for plain (non-addressable) strip.
+inputs:
+  protocols: # pixel protocols accepted on the data input, as the vendor names them
+    - WS2811
+outputs:
+  count: 4
+  types: # pixel-data, dmx512, pwm, relay, servo, power
+    - pwm
+  connector: Screw terminal # or a ref into connectors/, see Example 2
+diy_or_ots: OTS # DIY, OTS or both
+links:
+  product: https://example.com/pixel-to-pwm
+price: 9.5
 ---
-# Example 2: Budget DMX to pixel decoder
-name: Example DMX Decoder Mini
-creator: null
-manufacturers:
-  - Generic Factory
-vendors:
-  - AliExpress
-notes: Budget DMX512 to WS2812 decoder
-outputs: Single
+# Example 2: Pixel data in, DMX512 out
+name: Example Pixel-to-DMX Bridge
+creator: Bridge Works
+notes: Maps the first 170 RGB pixels of a string onto one DMX universe (512 channels).
+outputs:
+  count: 1 # a DMX512 output counts once per universe
+  types:
+    - dmx512
+  connector:
+    ref: xlr-3 # slug of an entry in connectors/ (checked by bun run validate)
+    notes: pass-through pixel output on a 3-pin pigtail
 diy_or_ots: OTS
-max_channels: 4
-output_connectors: Screw Terminal
-pixel_types: Async
-price: 29.99
-url: https://example.com/dmx-mini
-
+price: 49
 ---
-# Example 3: DIY decoder project
-name: Example Open Decoder
-creator: Open Source Community
-manufacturers:
-  - JLCPCB
-  - PCBWay
-notes: Open source ESP32-based sACN decoder
-outputs: Single or Clock
+# Example 3: Inline data conditioning, DIY
+name: Example Data Isolator
+creator: Open Hardware Project
+notes: Galvanically isolates the data line between a controller and a separately powered string.
+outputs:
+  count: 1
+  types:
+    - pixel-data
+  connector: Solder pads
 diy_or_ots: DIY
-max_channels: 8
-output_connectors: JST-XH
-pixel_types: Both
-price: 25
-url: https://github.com/example/open-decoder
+links:
+  product: https://example.com/isolator
 
----
-# Example 4: High channel count commercial decoder
-name: Example Matrix Decoder
-creator: Commercial LED Corp
-manufacturers:
-  - Commercial LED Corp
-vendors:
-  - Authorized Distributor
-notes: Industrial decoder for large LED matrix installations
-outputs: Single
-diy_or_ots: OTS
-max_channels: 48
-output_connectors: Phoenix Contact
-pixel_types: Async
-price: 599
-url: https://example.com/matrix-decoder
-
----
-# Example 5: Minimal decoder entry
-name: Example Simple Decoder
-creator: null
-notes: Basic 2-channel decoder
-diy_or_ots: OTS
-max_channels: 2
-pixel_types: Async
-price: 15
+# disable URL checks on this file
+# textlint-disable

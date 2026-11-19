@@ -1,9 +1,11 @@
 name: WS2811 MosFetDriver
 status: discontinued
 creator: Freetronics
+notes: WS2811 to high-current MOSFET outputs.
 outputs:
-  max_channels: 3
-  pixel_types: WS2811 to High current Mosfet
+  count: 3
+  types:
+    - pwm
 dead_links:
   - url: https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
     archive: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module

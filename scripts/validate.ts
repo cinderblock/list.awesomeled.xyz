@@ -51,7 +51,6 @@ const STALE_EXAMPLES = new Set([
   'level-converters',
   'microboards',
   'pattern-drivers',
-  'pixel-decoders',
   'pixel-ics',
   'pixels',
 ]);

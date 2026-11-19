@@ -184,13 +184,14 @@ function renderCreator(v: unknown): React.ReactNode {
 // Helper for rendering arrays as badges (limited to 3). Known protocols /
 // platforms / features (Art-Net, Wi-Fi, WLED, Linux, …) render with their icon
 // badge; unmatched values fall back to a plain pill — same pattern as the
-// Package column and CellValue arrays.
-function renderBadgeArray(v: unknown) {
+// Package column and CellValue arrays. `labels` maps enum values to display
+// text (e.g. pixel-data -> Pixel data).
+function renderBadgeArray(v: unknown, labels?: Record<string, string>) {
   if (!Array.isArray(v)) return null;
   return (
     <div className="data-table-array">
       {v.slice(0, 3).map((i, idx) => {
-        const str = String(i);
+        const str = labels?.[String(i)] ?? String(i);
         const badge = getBadgeForValue(str);
         return badge ? <Badge key={idx} badge={badge} /> : <TextPill key={idx} text={str} />;
       })}
@@ -451,7 +452,7 @@ export const controllerColumns: Column[] = [
   {
     key: 'inputs.protocols',
     label: 'Protocols',
-    render: renderBadgeArray,
+    render: (v) => renderBadgeArray(v),
     filterConfig: { type: 'select' },
   },
   {
@@ -735,7 +736,7 @@ export const driveLibraryColumns: Column[] = [
   {
     key: 'platforms',
     label: 'Platforms',
-    render: renderBadgeArray,
+    render: (v) => renderBadgeArray(v),
     filterConfig: { type: 'select' },
   },
   { key: 'license', label: 'License', filterConfig: { type: 'select' } },
@@ -812,6 +813,16 @@ export const levelConverterColumns: Column[] = [
   },
 ];
 
+// pixel-decoder.json outputs.types enum -> display label
+const DECODER_OUTPUT_LABELS: Record<string, string> = {
+  'pixel-data': 'Pixel data',
+  dmx512: 'DMX512',
+  pwm: 'PWM',
+  relay: 'Relay',
+  servo: 'Servo',
+  power: 'Power',
+};
+
 export const pixelDecoderColumns: Column[] = [
   {
     key: 'links',
@@ -823,14 +834,19 @@ export const pixelDecoderColumns: Column[] = [
   { key: 'name', label: 'Name' },
   { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'outputs.max_channels',
+    key: 'outputs.types',
+    label: 'Output',
+    render: (v) => renderBadgeArray(v, DECODER_OUTPUT_LABELS),
+    filterConfig: { type: 'select' },
+    headerTip: 'What the decoder turns pixel data into (or passes it on as)',
+  },
+  {
+    key: 'outputs.count',
     label: 'Channels',
     render: formatNumericValue,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
-  { key: 'outputs.pixel_types', label: 'Pixel Types', filterConfig: { type: 'select' } },
-  { key: 'outputs.description', label: 'Outputs' },
   {
     key: 'price',
     label: 'Price',

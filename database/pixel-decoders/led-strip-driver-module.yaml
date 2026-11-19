@@ -1,10 +1,11 @@
 name: LED Strip Driver Module
 creator: AliExpress
+notes: WS2811 to high-current MOSFET outputs.
 outputs:
-  max_channels: 3
-  pixel_types: WS2811 to High current Mosfet
-  connectors: Screw Terminals
-  description: PWM
+  count: 3
+  types:
+    - pwm
+  connector: Screw terminal
 links:
   product: https://de.aliexpress.com/item/32786272573.html
 price: 1

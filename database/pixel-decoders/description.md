@@ -1,9 +1,8 @@
-Pixel decoders convert network lighting protocols into the signal format that addressable LEDs need.
-They receive Art-Net, sACN, or other protocols over Ethernet/WiFi and output pixel data.
+Pixel decoders sit on a pixel data line. They take the data a controller sends to a string
+and turn it into something else, or pass it on in better shape:
 
-Decoders are useful when:
+- **Other outputs** - PWM dimmer channels for plain LED strip, relays, servos, DMX512
+- **Signal conditioning** - isolating, boosting or switching the data line
+- **Testing** - generating test patterns and analyzing incoming pixel data
 
-- **Long cable runs** - Network cables can run further than pixel data
-- **Distributed systems** - Multiple decoder nodes from one controller
-- **Protocol conversion** - Bridging different lighting ecosystems
-- **Retrofit installations** - Adding addressable LEDs to existing DMX systems
+They let one pixel controller drive loads it has no outputs for, without another network node.

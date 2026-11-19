@@ -1,10 +1,11 @@
 name: ATtiny10
 creator: Wayne Holder
-notes: Wayne only provides a proof of concept.
+notes: Drives 3-wire clockless LEDs from a 4-wire clocked protocol. Experimental. Wayne only provides a proof of concept.
 outputs:
-  max_channels: 1
-  pixel_types: allows driving 3-wire clockless leds with 4-wire clocked protocol. Experimental
-  connectors: solder, breakout
+  count: 1
+  types:
+    - pixel-data
+  connector: Solder pads / breakout
 dead_links:
   - url: https://sites.google.com/site/wayneholder/besting-ben-heck
     archive: https://web.archive.org/web/20230305072712/https://sites.google.com/site/wayneholder/besting-ben-heck

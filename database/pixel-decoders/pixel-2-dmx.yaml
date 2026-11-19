@@ -1,10 +1,13 @@
 name: Pixel 2 DMX
 creator: Experience Lights
+notes: WS28xx pixel data to DMX512 (512 channels).
 outputs:
-  max_channels: 512
-  pixel_types: WS28XX data to DMX 512
-  connectors: X Connect /XLR3
-  description: DMX
+  count: 1
+  types:
+    - dmx512
+  connector:
+    ref: xlr-3
+    notes: xConnect pixel-data input
 diy_or_ots: OTS
 links:
   product: https://store.experiencelights.com/pixel2dmx---realtime-dmx-bridge/

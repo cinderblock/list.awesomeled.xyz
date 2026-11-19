@@ -79,9 +79,7 @@
     "price": {
       "oneOf": [{ "$ref": "common.json#/definitions/price" }, { "type": "null" }]
     },
-    "diy_or_ots": {
-      "type": ["string", "null"]
-    },
+    "diy_or_ots": { "$ref": "common.json#/definitions/diy_or_ots" },
     "inputs": {
       "type": ["object", "null"],
       "additionalProperties": false,
@@ -99,18 +97,19 @@
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "max_channels": {
-          "type": ["integer", "null"]
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Output channels (a DMX512 output counts as one channel per universe)"
         },
-        "pixel_types": {
-          "type": ["string", "null"]
+        "types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "What the outputs carry: pixel-data (isolated, boosted or switched pixel data), dmx512, pwm (MOSFET/dimmer outputs), relay, servo, power",
+          "items": { "enum": ["pixel-data", "dmx512", "pwm", "relay", "servo", "power"] }
         },
-        "connectors": {
-          "type": ["string", "null"]
-        },
-        "description": {
-          "type": ["string", "null"]
-        }
+        "connector": { "$ref": "common.json#/definitions/output_connector" }
       }
     },
     "links": {
@@ -118,7 +117,8 @@
       "additionalProperties": false,
       "properties": {
         "product": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "format": "uri"
         }
       }
     },

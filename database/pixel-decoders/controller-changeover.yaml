@@ -1,10 +1,12 @@
 name: Controller Changeover
 creator: Wasatch Pixels
+notes: WLED override from other pixel control to a single output.
 outputs:
-  max_channels: 2
-  pixel_types: WLed override from other pixel control to single output
-  connectors: Phoenix
-  description: Data
+  count: 2
+  types:
+    - pixel-data
+  connector:
+    ref: mtsb-combicon
 diy_or_ots: OTS
 links:
   product: https://www.tindie.com/products/k7bbr/led-controller-multiplexer/

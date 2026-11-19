@@ -124,8 +124,46 @@ export function has(doc: Document, path: (string | number)[]): boolean {
 }
 
 /**
+ * Root key order enforced by eslint (yml/sort-keys in eslint.config.js):
+ * these first, in this order, then everything else alphabetically.
+ */
+const ROOT_ORDER = [
+  'name',
+  'status',
+  'release_year',
+  'creator',
+  'developer',
+  'manufacturers',
+  'vendors',
+  'notes',
+  'inputs',
+  'outputs',
+  'power',
+];
+
+function rootRank(key: string): [number, string] {
+  const i = ROOT_ORDER.indexOf(key);
+  return i >= 0 ? [i, ''] : [ROOT_ORDER.length, key];
+}
+
+/** Insert a new root key where the lint-enforced order puts it. */
+function insertRootKey(doc: Document, key: string, node: Node): void {
+  const root = doc.contents;
+  if (!isMap(root)) throw new Error('document root is not a map');
+  const [rank, name] = rootRank(key);
+  const index = root.items.findIndex((pair) => {
+    const [r, n] = rootRank(String(isScalar(pair.key) ? pair.key.value : pair.key));
+    return r > rank || (r === rank && n > name);
+  });
+  const pair = doc.createPair(key, node);
+  if (index < 0) root.items.push(pair);
+  else root.items.splice(index, 0, pair);
+}
+
+/**
  * Set `path` to a plain value, rendering arrays as block sequences. Existing
- * comments on a replaced node are carried over to the new node.
+ * comments on a replaced node are carried over to the new node. A missing
+ * root key is inserted at its lint-enforced position, not appended.
  */
 export function setJS(doc: Document, path: (string | number)[], value: unknown): void {
   const old = doc.getIn(path, true) as Node | undefined;
@@ -134,6 +172,12 @@ export function setJS(doc: Document, path: (string | number)[], value: unknown):
     (node as { comment?: string | null }).comment = old.comment;
   if (old && 'commentBefore' in old && old.commentBefore) {
     (node as { commentBefore?: string | null }).commentBefore = old.commentBefore;
+  }
+  const rootKey = String(path[0]);
+  if (!doc.hasIn([rootKey])) {
+    const top = path.length === 1 ? node : (doc.createNode({}) as Node);
+    insertRootKey(doc, rootKey, top);
+    if (path.length === 1) return;
   }
   doc.setIn(path, node);
 }
