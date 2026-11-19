@@ -62,8 +62,8 @@ so the entry page shows them (see Plan step 4).
 7. [x] Mirror prep: `--check`/`--only`, `datasheet.sources` fallback (`mirror.fetched_from`), curl fallback (Git-for-Windows safe), `R2_ENDPOINT`, single-quoted dates, end-to-end test vs mock S3 (`tests/unit/mirror-datasheets.test.ts`).
 8. [x] Mirror bot commits keep "Reviewed" dates: `Not-A-Review:` trailer honored by `app/lib/data.ts`; workflow sets it and runs prettier + validate.
 9. [x] Docs: CONTRIBUTING "Adding Images", README licence carve-out for product images, `docs/datasheet-mirroring.md` (incl. owner setup), ROADMAP, ISSUES.md (suspected data errors).
-10. [ ] Pattern-driver screenshots (agent running) and controller/adapter datasheets (agent running). ← current
-11. [ ] R2 setup — Cameron, one step at a time (see Open questions).
+10. [x] Pattern-driver screenshots (30/40) and controller/adapter datasheets (54).
+11. [ ] R2 setup — Cameron, one step at a time (see Open questions). ← current (blocked on Cameron)
 
 ## Working method (two worktrees)
 
@@ -94,31 +94,31 @@ so the entry page shows them (see Plan step 4).
 
 Only pixels and pixel ICs had a `datasheet` field at all.
 
-### After (2026-11-18 ~7:30 PM PST, `origin/master` 41295f3)
+### After (2026-11-18 ~9:30 PM PST, `origin/master` 9ef42f2)
 
 Entry counts changed meanwhile (stream 2 merged duplicates and moved entries);
-the datasheet denominator now includes controllers and adapters.
+the datasheet columns now include controllers and adapters (stream 2 extended
+the shared block to them).
 
 | Category            | Entries |     Image | Attributed | Open license |     Datasheet | Mirrored |
 | ------------------- | ------: | --------: | ---------: | -----------: | ------------: | -------: |
-| adapters            |      41 |  29 (71%) |         29 |            1 |        0 (0%) |        0 |
+| adapters            |      40 |  28 (70%) |         28 |            1 |        1 (3%) |        0 |
 | commercial-systems  |      18 | 18 (100%) |         18 |            0 |             — |        — |
 | connectors          |      45 |  38 (84%) |         38 |           11 |      36 (80%) |        0 |
-| controllers         |     132 | 115 (87%) |        115 |            1 |        4 (3%) |        0 |
+| controllers         |     132 | 115 (87%) |        115 |            1 |      53 (40%) |        0 |
 | diffusive-materials |      44 |  28 (64%) |         28 |           13 |             — |        — |
 | drive-libraries     |      29 |    0 (0%) |          0 |            0 |             — |        — |
 | level-converters    |       9 |  9 (100%) |          9 |            0 |       8 (89%) |        0 |
 | microboards         |      36 |  32 (89%) |         32 |           13 |     36 (100%) |        0 |
-| pattern-drivers     |      40 |    0 (0%) |          0 |            0 |             — |        — |
+| pattern-drivers     |      40 |  30 (75%) |         30 |            0 |             — |        — |
 | pixel-decoders      |      13 |  12 (92%) |         12 |            1 |       2 (15%) |        0 |
 | pixel-ics           |      41 |    3 (7%) |          3 |            0 |      34 (83%) |        0 |
 | pixels              |      36 |  20 (56%) |         20 |            2 |      32 (89%) |        0 |
-| **Total**           |     484 | 304 (63%) |        304 |           42 | 152/353 (43%) |        0 |
+| **Total**           |     483 | 333 (69%) |        333 |           42 | 202/352 (57%) |        0 |
 
-- Hardware entries (all but drive libraries and pattern drivers): **304 / 415 images (73%)**, up from 18; every image attributed (was 11).
-- Datasheets on the original part categories (pixels, pixel ICs, level converters, connectors, microboards, pixel decoders): **148 / 180 (82%)**, up from 38 / 77, and every one is now a verified direct PDF (18 of the original 38 were product pages, HTML viewers, a marketplace listing or dead).
-- Remaining gaps are deliberate skips with reasons (marketplace-only photos, maker sites that block bots, pixel ICs without real chip photos, standards without an originator's datasheet): `bun run coverage:assets --missing`.
-- Drive libraries: no product image by decision (code libraries; a logo isn't a product image).
+- **Images: 18 → 333**, every one attributed (was 11 of 18). Hardware entries: 303 / 414 (73%); pattern drivers 30 / 40 (official app screenshots); drive libraries none by decision (code libraries; a logo isn't a product image).
+- **Datasheets: 38 → 202**, every one a verified direct PDF (18 of the original 38 weren't). Part categories (pixels, pixel ICs, level converters, connectors, microboards, pixel decoders): 148 / 180 (82%). Controllers 53 / 132 and adapters 1 / 40: most makers publish web pages, Google Docs or nothing.
+- Remaining gaps are deliberate skips with reasons (marketplace-only photos, maker sites that block bots, pixel ICs without real chip photos, standards without an originator's datasheet, unarchived discontinued products): `bun run coverage:assets --missing` and `plans/assets-research/`.
 
 ## Findings / gotchas
 
@@ -142,7 +142,7 @@ the datasheet denominator now includes controllers and adapters.
 - [x] converters-decoders, trailer, workflow, docs (c92c4bc).
 - [x] pixels, pixel ICs, microboards, connectors, adapters, controllers, validator, CONTRIBUTING/README (a694a76).
 - [x] commercial systems, diffusive materials, ISSUES.md (41295f3).
-- [ ] Pattern-driver screenshots; controller/adapter datasheets (agents running).
+- [x] Pattern-driver screenshots (ea8f9ac); controller/adapter datasheets (9ef42f2).
 - [ ] R2 mirror switched on (Cameron).
 
 ## Open questions for the user
