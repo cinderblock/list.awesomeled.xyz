@@ -3,9 +3,11 @@ status: active
 creator:
   name: ILIGHTTHAT
   url: https://www.ilightthat.com
-  page: https://baldrickboard.com/docs/category/baldrickdmx
+  page: https://www.baldrickboard.com/en/boards/baldrickdmx
 notes: Single DMX output available on 3 ports (RJ45, 3-pin Neutrik XLR, 5-pin Neutrik XLR).
 inputs:
+  physical:
+    Ethernet: true # network input only; it does not take pixel data
   protocols:
     - Art-Net
     - sACN # E1.31

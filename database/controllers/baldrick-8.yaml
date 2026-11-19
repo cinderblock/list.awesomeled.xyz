@@ -8,7 +8,9 @@ creator:
 notes: V1.1 supports 48V
 inputs:
   physical:
-    Ethernet: true
+    Ethernet: true # 1 port on v1.0/v1.1; 2 with a built-in switch on v2
+    buttons: 3 # network reset, set IP, factory reset
+    triggers: 3 # contact-closure inputs: buttons, beam breaks, motion sensors
   protocols:
     - DDP
     - Art-Net
@@ -28,7 +30,7 @@ outputs:
 power:
   voltage:
     min: 5
-    max: 24 # up to 48V on V1.1
+    max: 48 # 24 V on v1.0
   current:
     max: 60
 images:

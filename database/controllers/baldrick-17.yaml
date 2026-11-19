@@ -6,8 +6,9 @@ creator:
   page: https://www.baldrickboard.com/en/boards/baldrick17
 inputs:
   physical:
-    Ethernet: true # network input for DDP/Art-Net/sACN
-    buttons: 3 # three physical buttons for testing
+    Ethernet: 2 # daisy-chainable; network input for DDP/Art-Net/sACN
+    buttons: true # test buttons (count not published)
+    triggers: 3 # Turniput contact-closure inputs with button-lamp control
   protocols:
     - Art-Net
     - sACN # E1.31
