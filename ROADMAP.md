@@ -58,9 +58,7 @@ scripts/check-links.ts --prices` lists undated/stale prices
   pixel ICs rarely have real chip photos, discontinued boards whose images
   were never archived. `bun run coverage:assets --missing` lists them
 - The CHECK list in the rolling link-rot issue #2 (mostly distributor bot
-  walls: Digi-Key, Mouser, Farnell, RS, eBay) needs a human with a browser;
-  the monthly workflow is disabled by GitHub's 60-day inactivity rule until
-  re-enabled
+  walls: Digi-Key, Mouser, Farnell, RS, eBay) needs a human with a browser
 - Cross-links long tail (2026-11-18 pass: 86–100% of names resolve; see
   `plans/cross-links.md`): `bun run validate` lists the 195 names hardware
   entries use that match no entry. Next new-entry candidates: LPD1101 ×13,
@@ -77,10 +75,8 @@ scripts/check-links.ts --prices` lists undated/stale prices
 
 ## Decisions parked (owner: Cameron)
 
-- Re-enable the monthly link-check workflow (GitHub disabled it for
-  inactivity) and add a self-heal step to the deploy workflow
-- Commercial systems' `$`…`$$$$$$` scale: per-pixel bands or a documented
-  qualitative tier (`plans/data-freshness.md`, open question 2)
+- Commercial systems' `$`…`$$$$$$` rating: replace with computed "From" and
+  "Per Pixel" prices (`plans/data-freshness.md`, open question 1)
 - R2 bucket + public domain + account-owned token → switches on the
   datasheet mirror (pipeline, tests and docs are ready:
   `docs/datasheet-mirroring.md` "One-time setup"; plan: `plans/assets.md`)

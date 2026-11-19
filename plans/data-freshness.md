@@ -11,21 +11,22 @@ then make freshness durable: the site should show how old a price is, and
 the tooling should keep finding rot and staleness without someone remembering
 to look.
 
-## Status (2026-11-18, evening PST)
+## Status (2026-11-18, 9:40 PM PST / 05:40Z)
 
 Everything below is on `master` except where marked. One owner decision is
-open (monthly workflow re-enable); the `$` scale for commercial systems is a
-proposal waiting on Cameron.
+open: what replaces the commercial `$` rating (proposal below). The monthly
+workflow is running again and NS/HD pairs are merged.
 
-|                                                 | Start of day                  | Now                                      |
-| ----------------------------------------------- | ----------------------------- | ---------------------------------------- |
-| Prices with a retrieval date (`price_source`)   | 0 (40 as YAML comments)       | 287                                      |
-| Priced entries with no date                     | 227                           | 39 (no real source found)                |
-| Connectors priced                               | 0 / 45                        | 34 / 45                                  |
-| Pixel ICs / pixels priced                       | 12 / 10                       | 18 / 16                                  |
-| Stale prices (> 12 months, still sold)          | —                             | 2 (archived captures)                    |
-| Entries with status evidence (`sources.status`) | 0                             | 300 of 483                               |
-| Link sweep (Node, local)                        | 12 dead · 69 check (415 URLs) | 0 dead · 106 check · 0 back (1,420 URLs) |
+|                                                 | Start of day                  | Now                                       |
+| ----------------------------------------------- | ----------------------------- | ----------------------------------------- |
+| Prices with a retrieval date (`price_source`)   | 0 (40 as YAML comments)       | 287                                       |
+| Priced entries with no date                     | 227                           | 39 (no real source found)                 |
+| Connectors priced                               | 0 / 45                        | 34 / 45                                   |
+| Pixel ICs / pixels priced                       | 12 / 10                       | 18 / 16                                   |
+| Stale prices (> 12 months, still sold)          | —                             | 2 (archived captures)                     |
+| Entries with status evidence (`sources.status`) | 0                             | 300 of 483                                |
+| Link sweep (Node, local)                        | 12 dead · 69 check (415 URLs) | 0 dead · 106 check · 0 back (1,420 URLs)  |
+| Monthly link check workflow                     | disabled (60-day inactivity)  | active; warns 28+ days into a quiet spell |
 
 ## Environment / context
 
@@ -69,6 +70,9 @@ proposal waiting on Cameron.
 - Status `discontinued` only with evidence; out of stock ≠ discontinued.
 - Link-liveness-only commits are excluded from "Reviewed"; status
   re-confirmed with evidence counts as a review.
+- **NS/HD pairs are one part** (Cameron, 2026-11-18: "happy if they're
+  merged or highly linked"): merged into the HD entries, NS names as
+  aliases.
 
 ## What shipped
 
@@ -99,13 +103,36 @@ proposal waiting on Cameron.
    file).
 7. **Reviewed date** — entry pages say "Reviewed <date>" and link to the
    YAML file's GitHub history (was a hover-only tooltip).
+8. **Inactivity warning** — each monthly run looks up the latest commit and,
+   28+ days into a quiet spell, says on issue #2 when GitHub will stop the
+   schedule (runs are monthly, so it always warns before day 60).
+9. **NS107S/NS108 merged into HD107S/HD108** (`ec19baf`): Newstar developed
+   the ICs and sells each LED under both names. Aliases keep controller
+   protocol lists resolving; NS8808 got alias HD8808. Sheet parity pairs the
+   NS rows with the HD entries (aliases.ts, 12 acks; 0 unexplained cells);
+   removed-entry map in `plans/database-review.md`.
 
 ## Findings / gotchas
 
-- **The monthly link check stopped running.** `gh workflow list --all` →
-  `Monthly link check  disabled_inactivity`: GitHub disables scheduled
-  workflows on public repos after 60 days with no commits (2026-07-17 →
-  2026-11-18). No Nov 3 run. Re-enabling needs Cameron's yes.
+- **The monthly link check stopped running, then restarted itself.**
+  `gh workflow list --all` showed `disabled_inactivity` at 3:34 PM PST
+  (23:34Z): GitHub disables scheduled workflows on public repos after 60
+  days with no commits (last commit 2026-07-17; runs Aug 3, Sep 3, Oct 3;
+  none Nov 3). The bot's own issue #2 updates in Aug–Oct didn't count as
+  activity. The push at 4:15 PM PST (00:15Z) that edited `check-links.yml`
+  re-enabled it (workflow `updated_at` 00:15:45Z, state `active`), so no
+  manual re-enable was needed.
+- **Why NS and HD names exist:** NS = Newstar's IC part number. Newstar:
+  "HD107s pixel RGB led used Newstar's IC, so we named 'HD107S', Newstar's
+  model number is Ns107s" (ledstrip-newstar.com); Hida: "HD107S, produced by
+  Hida, used Newstar's 107S IC" (hd107s-led.com); Rose Lighting's HD107S
+  spec is a reworded copy of Newstar's NS107S spec (same tables; 40 MHz vs
+  30 MHz). The market (AliExpress, Advatek, controller lists) uses HD.
+- **Wayback rate-limits scripted downloads** ("flagged as suspected abusive
+  bot traffic") after a few PDFs; retry after a pause. WebFetch can't reach
+  web.archive.org at all.
+- `bun run sheet-parity` hits the same Bun TLS failure on Windows; download
+  the xlsx and tab CSVs with curl and pass `--xlsx` / `--csv-dir`.
 - **Bun 1.4.4 on Windows fails TLS** to github.com and many hosts
   (`EPROTO: The TLS handshake failed`, 213 false CHECKs). Use
   `node scripts/check-links.ts` locally; CI (Linux) is fine.
@@ -154,25 +181,24 @@ proposal waiting on Cameron.
       discontinued never stale).
 - [x] Issue #2: body refreshed with the 2026-11-18 sweep + summary comment
       (<https://github.com/cinderblock/list.awesomeled.xyz/issues/2#issuecomment-6998997065>).
-- [ ] Owner decisions below.
+- [x] Monthly workflow: restarted by the 4:15 PM push; inactivity warning
+      added (`1d8b88b`).
+- [x] NS/HD pairs merged (`ec19baf`).
+- [ ] Commercial `$` rating: waiting on Cameron (below).
 
 ## Open questions for the user
 
-1. **Monthly link check workflow** — re-enable it (`gh workflow enable
-check-links.yml`) and add a deploy-workflow job that re-enables it on
-   every push, so the 60-day inactivity rule can't silently stop it again?
-   Recommendation: yes to both.
-2. **Commercial `$` scale** — define `price_range` as USD per pixel,
-   ×4 per step: `$` < $0.25, `$$` < $1, `$$$` < $4, `$$$$` < $16,
-   `$$$$$` < $64, `$$$$$$` ≥ $64? That would re-rate Festoon 2 and Q4
-(`$$$` → `$$$$$`), Flex and VC-Dot (`$$$$$$`→`$$$$$`), Lightwalls
-   (`$$$$$`→`$$$`), and rate the SmartShow panels `$`. Alternative: keep
-`$` as the sheet's qualitative market tier and rely on the new Per Pixel
-   column. Recommendation: keep the qualitative tier, document it as such,
-   and let Per Pixel carry the objective comparison.
-3. **Same chip, two names** (NS107S/HD107S, NS108/HD108, NS8808/HD8808 —
-   Newstar sells both): reuse the HD price on the NS entries, or merge
-   them (stream 2's duplicates call)?
+1. **Commercial `$` rating** (Cameron: "open to suggestions. User
+   voting?"). Nobody ever defined the sheet's scale, and it contradicts
+   the sourced prices (Festoon 2 `$$$` at $21/pixel vs Triklit `$$$$` at
+   $5/pixel; Vinci `$$$$$` from $31). Proposal: drop the hand rating and
+   show numbers computed from the sourced price points, which refresh with
+   them: **From** (cheapest published buy-in, USD) next to the existing
+   **Per Pixel**; the 6 systems without a public price (Active RGB, DFS3000,
+   Intelligent Marquee, LEDSnaps, SmartPXL, Strip and Tiles) read "Quote
+   only". Not voting: price is a checkable fact, votes would need a backend
+   (a Cloudflare change), spam defences, and more traffic than ~18 systems
+   get. Recommendation: yes to the proposal.
 
 ## Things not to do
 
