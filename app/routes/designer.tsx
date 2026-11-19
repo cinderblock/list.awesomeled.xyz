@@ -24,6 +24,7 @@ const PART_CATEGORIES = [
   'level-converters',
   'connectors',
   'pattern-drivers',
+  'adapters',
 ];
 
 // Runs at prerender time: the page ships a slim catalog, not the database

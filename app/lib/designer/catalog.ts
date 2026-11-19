@@ -476,9 +476,12 @@ export interface OutputConnector {
 }
 
 export interface ControllerOption {
-  /** Entry slug, or `mb-<slug>` for a bare dev board from /microboards */
+  /**
+   * Entry slug; `mb-<slug>` for a bare dev board from /microboards;
+   * `ad-<slug>` for a shield, cape or HAT from /adapters
+   */
   id: string;
-  kind: 'controller' | 'board';
+  kind: 'controller' | 'board' | 'adapter';
   path: string;
   ref: string;
   name: string;
@@ -572,7 +575,12 @@ const PIXEL_ID: Record<string, (slug: string) => string> = {
 const BOARD_ID: Record<string, (slug: string) => string> = { microboards: (slug) => `mb-${slug}` };
 const SOURCE_ID: Record<string, (slug: string) => string> = { 'pattern-drivers': (slug) => slug };
 
-export function buildControllerOption(entry: BaseEntry, graph?: RelationGraph): ControllerOption {
+export function buildControllerOption(
+  entry: BaseEntry,
+  graph?: RelationGraph,
+  /** Adapters share the controllers' outputs / power shapes */
+  category: 'controllers' | 'adapters' = 'controllers'
+): ControllerOption {
   const outputs = dict(entry.outputs);
   const pixels = dict(outputs.pixels);
   const driver = dict(outputs.driver);
@@ -580,7 +588,7 @@ export function buildControllerOption(entry: BaseEntry, graph?: RelationGraph): 
   const power = dict(entry.power);
   const data = dict(entry.data);
   const software = dict(entry.software);
-  const ref = `controllers/${entry.id}`;
+  const ref = `${category}/${entry.id}`;
 
   const rawClocked = outputs.clocked;
   let clockedSupport: ControllerOption['clockedSupport'] = 'unknown';
@@ -617,10 +625,10 @@ export function buildControllerOption(entry: BaseEntry, graph?: RelationGraph): 
   return {
     id: String(entry.id),
     kind: 'controller',
-    path: `/controllers/${entry.id}`,
+    path: `/${category}/${entry.id}`,
     ref,
     name: entry.name,
-    image: imagePath('controllers', entry),
+    image: imagePath(category, entry),
     status: str(entry.status),
     outputs: num(outputs.count),
     maxPerOutput: num(pixels.max_per_output),
@@ -662,16 +670,44 @@ export function buildControllerOption(entry: BaseEntry, graph?: RelationGraph): 
  * and surface as "verify" notes. Returns null when the board records no
  * pixel-output capability.
  */
+/**
+ * A shield, cape or HAT from /adapters: pixel outputs for a dev board. It is
+ * offered once the database knows how many outputs it has and which board it
+ * sits on (a `host` link to /microboards); that board joins the parts list.
+ */
+export function buildAdapterOption(
+  entry: BaseEntry,
+  graph?: RelationGraph
+): ControllerOption | null {
+  const base = buildControllerOption(entry, graph, 'adapters');
+  if (base.outputs == null || base.outputs < 1 || base.hostIds.length === 0) return null;
+  // Built around a buffer IC: its outputs are driven at that buffer's level
+  const hasBuffer = (graph?.outgoing.get(base.ref) ?? []).some(
+    (edge) => edge.kind === 'uses' && edge.to.startsWith('level-converters/')
+  );
+  return {
+    ...base,
+    id: `ad-${entry.id}`,
+    kind: 'adapter',
+    buffered: base.buffered ?? (hasBuffer ? true : null),
+    requiresHost: str(entry.parent) ?? base.requiresHost ?? 'host board',
+  };
+}
+
+/** Lower-case names a dev board answers to when software lists its platforms */
+function boardTokens(entry: BaseEntry): string[] {
+  const compute = dict(entry.compute);
+  return [entry.name, ...strings(entry.aliases), str(compute.soc), str(compute.isa)]
+    .filter((t): t is string => !!t)
+    .map(normalizeName);
+}
+
 export function buildBoardOption(entry: BaseEntry): ControllerOption | null {
   const io = dict(entry.io);
   const outputs = num(io.max_outputs);
   if (outputs == null || outputs < 1) return null;
   const power = dict(entry.power);
-  const compute = dict(entry.compute);
-
-  const platformTokens = [entry.name, ...strings(entry.aliases), str(compute.soc), str(compute.isa)]
-    .filter((t): t is string => !!t)
-    .map(normalizeName);
+  const platformTokens = boardTokens(entry);
 
   return {
     id: `mb-${entry.id}`,
@@ -720,6 +756,11 @@ export interface HostOption {
   id: string;
   path: string;
   name: string;
+  status?: string;
+  /** Logic level of its pins, when recorded */
+  dataVoltage: number | null;
+  /** Names software platforms are matched against */
+  platformTokens: string[];
   price: PriceInfo;
 }
 
@@ -728,7 +769,29 @@ export function buildHostOption(entry: BaseEntry): HostOption {
     id: `mb-${entry.id}`,
     path: `/microboards/${entry.id}`,
     name: entry.name,
+    status: str(entry.status),
+    dataVoltage: nominalVoltage(dict(entry.power).gpio_voltage),
+    platformTokens: boardTokens(entry),
     price: buildPrice(entry),
+  };
+}
+
+/** What an adapter takes from the boards it plugs into */
+function withHosts(adapter: ControllerOption, hosts: Map<string, HostOption>): ControllerOption {
+  const known = adapter.hostIds.map((id) => hosts.get(id)).filter((h): h is HostOption => !!h);
+  // Boards still on sale first: the first is the one the parts list names
+  const ordered = [...known].sort(
+    (a, b) => Number(isRetired(a.status)) - Number(isRetired(b.status))
+  );
+  const levels = [...new Set(known.map((h) => h.dataVoltage))];
+  return {
+    ...adapter,
+    hostIds: ordered.map((h) => h.id),
+    platformTokens: [...new Set(known.flatMap((h) => h.platformTokens))],
+    // Outputs recorded as unbuffered are the board's own pins: their level is
+    // known when every host agrees. Unrecorded stays unknown — most adapters
+    // exist to add a 5 V buffer, so assuming 3.3 V would cry wolf.
+    dataVoltage: adapter.buffered === false && levels.length === 1 ? levels[0] : null,
   };
 }
 
@@ -925,8 +988,7 @@ export function buildCatalog(db: Database, graph?: RelationGraph): Catalog {
   // A controller that lists one member of a protocol family can drive the
   // rest of it (SK6812 speaks the WS2812 protocol)
   const familyOf = new Map(pixels.map((p) => [p.id, p.family]));
-  const controllers = entries('controllers').map((e) => {
-    const option = buildControllerOption(e, graph);
+  const withFamilies = (option: ControllerOption): ControllerOption => {
     option.driveFamilies = [
       ...new Set(
         option.drives
@@ -936,12 +998,24 @@ export function buildCatalog(db: Database, graph?: RelationGraph): Catalog {
       ),
     ];
     return option;
-  });
+  };
+  const controllers = entries('controllers').map((e) =>
+    withFamilies(buildControllerOption(e, graph))
+  );
+
+  const hosts = entries('microboards').map(buildHostOption).sort(byName);
+  const hostIndex = new Map(hosts.map((h) => [h.id, h]));
+  const adapters = entries('adapters')
+    .map((e) => buildAdapterOption(e, graph))
+    .filter((a): a is ControllerOption => a !== null)
+    .map((a) => withFamilies(withHosts(a, hostIndex)))
+    // Every host has left the database: nothing to plug it into
+    .filter((a) => a.hostIds.length > 0);
 
   return {
     pixels,
-    controllers: [...controllers.sort(byName), ...boards.sort(byName)],
-    hosts: entries('microboards').map(buildHostOption).sort(byName),
+    controllers: [...controllers.sort(byName), ...adapters.sort(byName), ...boards.sort(byName)],
+    hosts,
     shifters: entries('level-converters').map(buildShifterOption).sort(byName),
     connectors: entries('connectors').map(buildConnectorOption).sort(byName),
     // Sources that can neither send a control protocol nor run on a board

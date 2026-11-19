@@ -175,6 +175,26 @@ test.describe('System Designer: building a design', () => {
     await expect(page.locator('#designer-power [data-rail="5"]')).toBeVisible();
   });
 
+  test('an adapter brings its host board into the parts list', async ({ page }) => {
+    await open(page, '/designer?p=ws2812&x=8&n=300');
+    const controllers = await openPicker(page, 'g0-controller');
+    // Found by the board it plugs into, not only by its own name
+    await controllers.getByLabel('Search controllers').fill('teensy');
+    await controllers.locator('[data-id="ad-octows2811-adaptor"] > button').click();
+
+    const controllerSlot = slot(page, 'g0-controller');
+    await expect(controllerSlot).toContainText('OctoWS2811 Adaptor');
+    await expect(controllerSlot.locator('[data-code="requires-host"]')).toBeVisible();
+    await expect(page).toHaveURL(/[?&]c=ad-octows2811-adaptor(&|$)/);
+
+    // The shield and the board under it are two lines of the parts list
+    const bom = page.locator('#designer-bom');
+    await expect(bom.locator('[data-key="controller:ad-octows2811-adaptor"]')).toContainText(
+      'OctoWS2811 Adaptor'
+    );
+    await expect(bom.locator('[data-key="host:ad-octows2811-adaptor"]')).toContainText('Teensy');
+  });
+
   test('examples load as ordinary links', async ({ page }) => {
     await open(page, '/designer');
     await page.locator('.designer-examples a').first().click();

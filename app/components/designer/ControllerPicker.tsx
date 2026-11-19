@@ -105,6 +105,9 @@ function OptionRow({
                 <Cpu size={12} aria-hidden="true" /> dev board
               </span>
             )}
+            {c.kind === 'adapter' && (
+              <span className="designer-badge designer-badge--neutral">adapter</span>
+            )}
             {isRetired(c.status) && (
               <span className="designer-badge designer-badge--warn">discontinued</span>
             )}
@@ -155,7 +158,16 @@ export function ControllerPicker({
       if (c.id === selectedId) return true;
       if (!showRetired && isRetired(c.status)) return false;
       if (!showBoards && c.kind === 'board') return false;
-      const haystack = c.name.toLowerCase();
+      // Also findable by what it plugs into and what it runs ("teensy", "wled")
+      const haystack = [
+        c.name,
+        c.requiresHost,
+        ...c.hostIds.map((id) => id.replace(/^mb-/, '').replace(/-/g, ' ')),
+        ...c.firmware,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
       return words.every((w) => haystack.includes(w));
     })
     .map((controller) => {
@@ -209,7 +221,7 @@ export function ControllerPicker({
           <Search size={15} aria-hidden="true" />
           <input
             type="search"
-            placeholder="Search controllers…"
+            placeholder="Search by name, host board or firmware…"
             aria-label="Search controllers"
             value={query}
             onChange={(e) => setQuery(e.target.value)}

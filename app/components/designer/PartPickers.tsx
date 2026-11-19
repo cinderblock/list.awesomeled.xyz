@@ -401,7 +401,7 @@ export function SourcePicker({ sources, controllers, selected, onSelect }: Sourc
         <p className="designer-picker-hint">
           <span className="designer-badge designer-badge--warn">verify</span> The database doesn’t
           record which protocols {unverified.map((c) => c.name).join(' or ')} accepts
-          {unverified.some((c) => c.kind === 'board')
+          {unverified.some((c) => c.kind !== 'controller')
             ? ' (a dev board takes them from its firmware)'
             : ''}
           , so these can’t be confirmed here: check its documentation.

@@ -330,6 +330,44 @@ describe('host boards and licence tiers in the BOM', () => {
     expect(host.totalUSD).toBe(35);
   });
 
+  test('an adapter brings a host board that is still on sale, and names the others', () => {
+    const a = analyze('p=rgb5&x=4&n=100&c=ad-shield4');
+    const adapter = line(a, 'controller:ad-shield4');
+    expect(adapter.category).toBe('Controller (adapter)');
+    expect(adapter.path).toBe('/adapters/shield4');
+    expect(adapter.totalUSD).toBe(12);
+    const host = line(a, 'host:ad-shield4');
+    expect(host.name).toBe('ESP Board');
+    expect(host.totalUSD).toBe(10);
+    expect(host.detail).toBe('Shield 4 plugs into it; also fits Old Board');
+    expect(a.bom.totalUSD).toBeCloseTo(12 + 10 + 100 * 4 * 0.1, 6);
+  });
+
+  test('a buffered adapter needs no level shifter; an unbuffered one does', () => {
+    const buffered = analyze('p=rgb5&x=4&n=100&c=ad-shield4');
+    expect(codes(buffered)).not.toContain('level-shift');
+    const bare = analyze('p=rgb5&x=2&n=100&c=ad-breakout2');
+    expect(bare.issues.find((i) => i.code === 'level-shift')?.severity).toBe('warning');
+    // Nothing recorded: no verdict either way
+    const unknown = analyze('p=rgb5&x=2&n=100&c=ad-plain8');
+    expect(codes(unknown)).not.toContain('level-shift');
+  });
+
+  test('an adapter says it needs its board, and too many strings need more of both', () => {
+    const a = analyze('p=rgb5&x=6&n=100&c=ad-shield4');
+    expect(a.issues.find((i) => i.code === 'requires-host')?.message).toContain(
+      'ESP Board or Old Board'
+    );
+    expect(line(a, 'controller:ad-shield4').qty).toBe(2);
+    expect(line(a, 'host:ad-shield4').qty).toBe(2);
+  });
+
+  test('firmware that runs on the host board runs on the adapter', () => {
+    const a = analyze('p=rgb5&x=4&n=100&c=ad-shield4&g=espfw');
+    expect(a.sourceFit?.links).toEqual(['onboard']);
+    expect(codes(a)).not.toContain('source-protocol');
+  });
+
   test('licence tiers pick the cheapest one that covers the pixels', () => {
     expect(line(analyze('p=rgb5&x=4&n=200&c=licensed'), 'controller:licensed').totalUSD).toBe(299);
     const big = line(analyze('p=rgb5&x=8&n=400&c=licensed'), 'controller:licensed');

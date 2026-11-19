@@ -416,7 +416,14 @@ export function evaluateController(controller: ControllerOption, input: FitInput
       `${name} refreshes at ${n(controller.fpsMax)} fps at most, below the ${n(input.targetFps)} fps target.`
     );
   }
-  if (controller.requiresHost) {
+  if (controller.kind === 'adapter') {
+    add(
+      'info',
+      'requires-host',
+      `${name} is an add-on for a dev board (${controller.requiresHost}).`,
+      'The board is in the parts list too; it runs the firmware.'
+    );
+  } else if (controller.requiresHost) {
     add(
       'info',
       'requires-host',
@@ -665,7 +672,8 @@ export interface SourceFit {
 export function runsOn(source: SourceOption, controller: ControllerOption): boolean {
   if (controller.firmwareIds.includes(source.id)) return true;
   if (controller.firmware.some((f) => source.nameKeys.includes(normalizeName(f)))) return true;
-  if (controller.kind !== 'board') return false;
+  // Firmware named by platform ("ESP32") runs on a dev board, or on the board under an adapter
+  if (controller.kind === 'controller') return false;
   return source.hardware.some((hw) => {
     const key = normalizeName(hw);
     return key.length > 2 && controller.platformTokens.some((t) => t.includes(key));
@@ -691,7 +699,9 @@ export function evaluateSource(source: SourceOption, controllers: ControllerOpti
         message:
           controller.kind === 'board'
             ? `${controller.name} takes its protocols from the firmware you flash.`
-            : `${controller.name}'s input protocols aren't recorded.`,
+            : controller.kind === 'adapter'
+              ? `${controller.name} takes its protocols from the firmware on its host board.`
+              : `${controller.name}'s input protocols aren't recorded.`,
         fix: `Confirm it accepts ${source.outputProtocols.map((p) => PROTOCOL_LABELS[p] ?? p).join(' or ') || `data from ${source.name}`}.`,
       });
       continue;
@@ -734,7 +744,7 @@ export function evaluateStandalone(controllers: ControllerOption[]): Issue[] {
       code: 'standalone-unsupported',
       slot: 'source' as const,
       message:
-        c.kind === 'board'
+        c.kind !== 'controller'
           ? `${c.name} only plays on its own once you flash firmware that does (for example WLED).`
           : `${c.name} isn't recorded as able to play patterns without a live source.`,
       fix: 'Pick a pattern source instead of standalone playback.',

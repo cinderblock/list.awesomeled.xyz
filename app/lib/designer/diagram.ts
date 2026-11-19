@@ -202,6 +202,8 @@ export function layoutDiagram(analysis: Analysis): DiagramModel {
     if (!use) continue;
     const c = use.controller;
     const textWidth = CONTROLLER.w - (c.image ? 76 : 24);
+    // The board the parts list names, else the host as the maker words it
+    const host = analysis.bom.lines.find((l) => l.key === `host:${c.id}`)?.name ?? c.requiresHost;
     const facts = [
       c.outputs != null
         ? `${fmtInt(use.strings)} of ${fmtInt(c.outputs * use.units)} outputs`
@@ -219,7 +221,7 @@ export function layoutDiagram(analysis: Analysis): DiagramModel {
             bold: true,
           },
           { text: fitText(facts.join(' · '), textWidth) },
-          ...(c.requiresHost ? [{ text: fitText(`on a ${c.requiresHost}`, textWidth) }] : []),
+          ...(host ? [{ text: fitText(`on a ${host}`, textWidth) }] : []),
         ],
       },
     });

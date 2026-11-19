@@ -398,6 +398,9 @@ export function GroupCard({
               {controller.kind === 'board' && (
                 <span className="designer-badge designer-badge--neutral">dev board</span>
               )}
+              {controller.kind === 'adapter' && (
+                <span className="designer-badge designer-badge--neutral">adapter</span>
+              )}
               {group.controllerFit?.support === 'listed' && (
                 <span className="designer-badge designer-badge--good">listed support</span>
               )}

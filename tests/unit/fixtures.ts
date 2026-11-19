@@ -264,6 +264,53 @@ export const MICROBOARDS: BaseEntry[] = [
     io: { max_outputs: 1 },
   }),
   entry('no-outputs', { name: 'No Outputs', power: { gpio_voltage: '3.3V' } }),
+  entry('oldboard', {
+    name: 'Old Board',
+    status: 'discontinued',
+    compute: { soc: 'ESP8266' },
+    power: { gpio_voltage: '3.3V' },
+    price: 4,
+  }),
+];
+
+export const ADAPTERS: BaseEntry[] = [
+  // A shield built around a buffer IC, for two boards: one retired, one on sale
+  entry('shield4', {
+    name: 'Shield 4',
+    status: 'active',
+    outputs: { count: 4, clocked: false, connector: 'Screw terminals' },
+    parent: 'ESP Board or Old Board',
+    software: { firmware: ['EspFirmware'] },
+    related: [
+      { type: 'host', ref: 'microboards/oldboard' },
+      { type: 'host', ref: 'microboards/esp' },
+      { type: 'uses', ref: 'level-converters/quad' },
+    ],
+    price: 12,
+  }),
+  // Recorded as unbuffered: its outputs are the host's own pins
+  entry('breakout2', {
+    name: 'Breakout 2',
+    outputs: { count: 2, clocked: 'selectable', driver: { buffered: false } },
+    parent: 'ESP Board',
+    related: [{ type: 'host', ref: 'microboards/esp' }],
+  }),
+  // Nothing recorded about its output stage
+  entry('plain8', {
+    name: 'Plain 8',
+    outputs: { count: 8, clocked: false },
+    parent: 'PiBoard',
+    related: [{ type: 'host', ref: 'microboards/pi' }],
+    price: 20,
+  }),
+  // No host link: the designer can't say what it plugs into
+  entry('orphan', { name: 'Orphan', outputs: { count: 8, clocked: false }, parent: 'Something' }),
+  // No pixel outputs recorded
+  entry('noouts', {
+    name: 'No Outs',
+    parent: 'ESP Board',
+    related: [{ type: 'host', ref: 'microboards/esp' }],
+  }),
 ];
 
 export const LEVEL_CONVERTERS: BaseEntry[] = [
@@ -376,6 +423,7 @@ export function fixtureDatabase(): Database {
     ['pixel-ics', PIXEL_ICS],
     ['controllers', CONTROLLERS],
     ['microboards', MICROBOARDS],
+    ['adapters', ADAPTERS],
     ['level-converters', LEVEL_CONVERTERS],
     ['connectors', CONNECTORS],
     ['pattern-drivers', PATTERN_DRIVERS],

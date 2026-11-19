@@ -190,7 +190,12 @@ export function buildBom(input: BomInput): Bom {
     lines.push({
       key: `controller:${c.id}`,
       section: 'parts',
-      category: c.kind === 'board' ? 'Controller (dev board)' : 'Controller',
+      category:
+        c.kind === 'board'
+          ? 'Controller (dev board)'
+          : c.kind === 'adapter'
+            ? 'Controller (adapter)'
+            : 'Controller',
       name: c.name,
       path: c.path,
       detail:
@@ -203,15 +208,24 @@ export function buildBom(input: BomInput): Bom {
     });
 
     if (c.requiresHost) {
-      const host = c.hostIds.map((id) => catalog.hosts.get(id)).find((h) => h != null);
+      const hosts = c.hostIds
+        .map((id) => catalog.hosts.get(id))
+        .filter((h): h is NonNullable<typeof h> => h != null);
+      const host = hosts[0];
       const hp = host ? priced(host.price, use.units) : null;
+      // Other boards it fits: the parts list names one, the choice is the builder's
+      const others = hosts.slice(1, 4).map((h) => h.name);
+      const more = hosts.length - 1 - others.length;
       lines.push({
         key: `host:${c.id}`,
         section: 'parts',
         category: 'Host board',
         name: host?.name ?? c.requiresHost,
         path: host?.path,
-        detail: `${c.name} plugs into it`,
+        detail:
+          others.length > 0
+            ? `${c.name} plugs into it; also fits ${others.join(', ')}${more > 0 ? ` and ${more} more` : ''}`
+            : `${c.name} plugs into it`,
         qty: use.units,
         ...(hp ? money(hp) : { unitUSD: null, totalUSD: null }),
       });

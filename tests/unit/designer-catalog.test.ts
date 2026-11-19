@@ -263,6 +263,57 @@ describe('dev boards as controllers', () => {
   });
 });
 
+describe('adapters as controllers', () => {
+  const catalog = fixtureCatalog();
+  const adapter = (id: string) => catalog.controllers.find((c) => c.id === id);
+
+  test('offered once the outputs and the host board are known', () => {
+    const ids = catalog.controllers.filter((c) => c.kind === 'adapter').map((c) => c.id);
+    expect(ids).toEqual(['ad-breakout2', 'ad-plain8', 'ad-shield4']);
+    expect(adapter('ad-orphan')).toBeUndefined(); // no host link
+    expect(adapter('ad-noouts')).toBeUndefined(); // no outputs
+  });
+
+  test('carries the shared controller facts and its own page', () => {
+    const shield = adapter('ad-shield4')!;
+    expect(shield.path).toBe('/adapters/shield4');
+    expect(shield.ref).toBe('adapters/shield4');
+    expect(shield.outputs).toBe(4);
+    expect(shield.clockedSupport).toBe('async');
+    expect(shield.requiresHost).toBe('ESP Board or Old Board');
+    expect(shield.outputConnector?.label).toBe('Screw terminals');
+    expect(shield.price.tiers[0].usd).toBe(12);
+  });
+
+  test('hosts still on sale come first', () => {
+    expect(adapter('ad-shield4')!.hostIds).toEqual(['mb-esp', 'mb-oldboard']);
+  });
+
+  test('a buffer IC on board means buffered outputs', () => {
+    expect(adapter('ad-shield4')!.buffered).toBe(true);
+    expect(adapter('ad-shield4')!.dataVoltage).toBeNull(); // buffered: 5 V by rule
+    expect(adapter('ad-plain8')!.buffered).toBeNull();
+  });
+
+  test('only outputs recorded as unbuffered take the host’s logic level', () => {
+    expect(adapter('ad-breakout2')!.dataVoltage).toBe(3.3);
+    // Unrecorded is not unbuffered: most adapters exist to add a buffer
+    expect(adapter('ad-plain8')!.dataVoltage).toBeNull();
+  });
+
+  test('software platforms are matched through the host boards', () => {
+    const tokens = adapter('ad-shield4')!.platformTokens;
+    for (const token of ['esp32', 'esp8266', 'espboard']) expect(tokens).toContain(token);
+  });
+
+  test('every dev board is a possible host, with its level and platform names', () => {
+    const esp = catalog.hosts.find((h) => h.id === 'mb-esp')!;
+    expect(esp.dataVoltage).toBe(3.3);
+    expect(esp.platformTokens).toContain('esp32');
+    expect(catalog.hosts.find((h) => h.id === 'mb-oldboard')!.status).toBe('discontinued');
+  });
+});
+
 describe('level shifters, connectors and sources', () => {
   test('level shifter fields', () => {
     const quad = buildShifterOption(
