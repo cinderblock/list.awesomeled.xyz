@@ -256,6 +256,7 @@ export function analyzeDesign(design: Design, catalog: CatalogIndex): Analysis {
           voltage: g.voltage,
           layout,
           totalStrings: use?.strings ?? layout.strings,
+          totalPixels: use?.pixels ?? g.pixels,
           power,
           targetFps: design.targetFps,
           outdoor: design.outdoor,

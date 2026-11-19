@@ -12,7 +12,8 @@ import {
   type Analysis,
   type BomLine,
 } from '~/lib/designer';
-import { copyText, designUrl, downloadBlob, fileSlug } from './browser';
+import { SITE_ORIGIN } from '~/lib/site';
+import { canonicalDesignUrl, copyText, downloadBlob, fileSlug } from './browser';
 
 function qty(line: BomLine): string {
   return line.unit ? `${fmtInt(line.qty)} ${line.unit}` : fmtInt(line.qty);
@@ -35,8 +36,8 @@ export function BomTable({ analysis }: { analysis: Analysis }) {
 
   const exportOptions = () => ({
     title,
-    origin: window.location.origin,
-    url: designUrl(designQuery(design)),
+    origin: SITE_ORIGIN,
+    url: canonicalDesignUrl(designQuery(design)),
   });
   const copy = async (kind: 'Markdown' | 'text') => {
     const text =

@@ -87,6 +87,10 @@ describe('pixel options', () => {
     expect(pixel.kind).toBe('pixel');
     expect(pixel.path).toBe('/pixels/rgb5');
     expect(pixel.ref).toBe('pixels/rgb5');
+    expect(pixel.image).toBeUndefined();
+    // images are the small build-time thumbnails
+    const pictured = buildPixelOption(entry('pic', { images: [{ file: 'pic.webp' }] }));
+    expect(pictured.image).toBe('/database-thumbs/sm/pixels/pic.webp');
   });
 });
 
@@ -158,6 +162,10 @@ describe('controller options', () => {
     const small = must(index.controllers, 'async4');
     expect(small.outputAmps).toBe(3);
     expect(small.outputFuse).toBe('3A');
+    expect(small.maxPerOutput).toBe(680);
+    expect(small.maxTotal).toBeNull();
+    expect(must(index.controllers, 'total8').maxTotal).toBe(2400);
+    expect(must(index.controllers, 'total8').maxPerOutput).toBeNull();
   });
 
   test('listed pixel protocols resolve through names, aliases and variants', () => {

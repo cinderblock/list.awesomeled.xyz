@@ -12,10 +12,12 @@
  * Pure byte/string work — no DOM, no canvas — so it runs in the unit tests.
  */
 
+import { SITE_ORIGIN } from '../site';
 import { designQuery, emptyDesign, parseLayout, type Design, type GroupDesign } from './design';
 
 export const EMBED_ID = 'awesomeled-design';
-export const GENERATOR = 'list.awesomeled.xyz/designer';
+/** "list.awesomeled.xyz/designer" */
+export const GENERATOR = `${new URL(SITE_ORIGIN).host}/designer`;
 
 export interface DesignEmbed {
   generator: string;

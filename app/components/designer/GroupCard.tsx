@@ -201,11 +201,14 @@ export function GroupCard({
   const multi = analysis.groups.length > 1;
   const toggle = (slot: Slot) => () => onOpen(open === slot ? null : slot);
 
-  // Strings other groups already put on each controller
-  const otherStrings = new Map<string, number>();
+  // What other groups already put on each controller
+  const others = new Map<string, { strings: number; pixels: number }>();
   for (const g of analysis.groups) {
     if (g.index === group.index || !g.controller) continue;
-    otherStrings.set(g.controller.id, (otherStrings.get(g.controller.id) ?? 0) + g.layout.strings);
+    const load = others.get(g.controller.id) ?? { strings: 0, pixels: 0 };
+    load.strings += g.layout.strings;
+    load.pixels += g.pixels;
+    others.set(g.controller.id, load);
   }
 
   const pixelTier = pixel ? unitPriceAt(pixel.price, group.pixels) : null;
@@ -422,7 +425,7 @@ export function GroupCard({
         <ControllerPicker
           controllers={catalog.controllers}
           group={group}
-          otherStrings={otherStrings}
+          others={others}
           targetFps={design.targetFps}
           outdoor={design.outdoor}
           onSelect={(controllerId) => {

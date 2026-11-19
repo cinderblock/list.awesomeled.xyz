@@ -6,6 +6,7 @@ import {
   evaluateController,
   evaluateShifter,
   evaluateSource,
+  layoutTotal,
   evaluateStandalone,
   levelNeed,
   logicThreshold,
@@ -13,6 +14,7 @@ import {
   protocolSupport,
   runsOn,
   sortIssues,
+  totalLimit,
   unitsNeeded,
   wiresNeeded,
   worstSeverity,
@@ -45,6 +47,7 @@ function fit(
     voltage,
     layout,
     totalStrings: layout.strings,
+    totalPixels: layoutTotal(layout),
     power: p ? planGroup(p, layout, voltage, settings) : null,
     targetFps: 30,
     outdoor: false,
@@ -151,6 +154,40 @@ describe('pixels per output', () => {
     expect(find(c.issues, 'per-output-unknown')?.severity).toBe('info');
     const b = fit(controller('mb-esp'), pixel('rgb5'), { strings: 1, perString: 100 });
     expect(codes(b.issues)).not.toContain('per-output-unknown');
+  });
+});
+
+describe('device-wide pixel limit', () => {
+  test('is scaled for pixels with more than three channels', () => {
+    expect(totalLimit(controller('total8'), pixel('rgb5'))).toBe(2400);
+    expect(totalLimit(controller('total8'), pixel('rgbw5'))).toBe(1800);
+    expect(totalLimit(controller('total8'), null)).toBe(2400);
+    expect(totalLimit(controller('big16'), pixel('rgb5'))).toBeNull();
+  });
+
+  test('more pixels than one unit drives means more units', () => {
+    expect(unitsNeeded(controller('total8'), 8, 2400)).toBe(1);
+    expect(unitsNeeded(controller('total8'), 8, 2401)).toBe(2);
+    // outputs still count: 9 strings need a second unit whatever the pixels
+    expect(unitsNeeded(controller('total8'), 9, 900)).toBe(2);
+
+    const result = fit(controller('total8'), pixel('rgb5'), { strings: 8, perString: 400 });
+    expect(result.ok).toBe(true);
+    expect(result.units).toBe(2);
+    expect(find(result.issues, 'multiple-units')?.message).toContain(
+      '3,200 pixels at 2,400 per unit'
+    );
+  });
+
+  test('a string longer than the whole device drives is an error', () => {
+    const result = fit(controller('total8'), pixel('rgb5'), { strings: 1, perString: 2500 });
+    expect(find(result.issues, 'per-output')?.severity).toBe('error');
+    expect(find(result.issues, 'per-output')?.message).toContain('in total');
+  });
+
+  test('stands in for the missing per-output figure', () => {
+    const result = fit(controller('total8'), pixel('rgb5'), { strings: 2, perString: 300 });
+    expect(codes(result.issues)).not.toContain('per-output-unknown');
   });
 });
 

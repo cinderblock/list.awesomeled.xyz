@@ -281,6 +281,17 @@ describe('controller current', () => {
   });
 });
 
+describe('controllers with a device-wide pixel limit', () => {
+  test('pixels on groups sharing the controller add up', () => {
+    // 1,500 + 1,500 pixels on a 2,400-pixel device: two units
+    const a = analyze('p=rgb5&x=3&n=500&c=total8&p=rgb5&x=3&n=500&c=total8');
+    expect(a.controllers[0].pixels).toBe(3000);
+    expect(a.controllers[0].units).toBe(2);
+    expect(line(a, 'controller:total8').qty).toBe(2);
+    expect(a.issues.filter((i) => i.code === 'multiple-units')).toHaveLength(1);
+  });
+});
+
 describe('parts that left the database', () => {
   const a = analyze('p=gone-pixel&x=1&n=100&c=gone-controller&l=gone-shifter&g=gone-source');
 

@@ -188,6 +188,8 @@ export interface FitInput {
   layout: Layout;
   /** Strings this controller drives across every group that shares it */
   totalStrings: number;
+  /** Pixels it drives across those groups */
+  totalPixels: number;
   power: GroupPower | null;
   targetFps: number;
   outdoor: boolean;
@@ -195,9 +197,30 @@ export interface FitInput {
   hasShifter: boolean;
 }
 
-export function unitsNeeded(controller: ControllerOption, totalStrings: number): number {
-  if (controller.outputs == null || controller.outputs < 1) return 1;
-  return Math.max(1, Math.ceil(totalStrings / controller.outputs));
+/** A controller's device-wide pixel limit for this pixel: the RGB figure, scaled by channel count */
+export function totalLimit(controller: ControllerOption, pixel: PixelOption | null): number | null {
+  if (controller.maxTotal == null) return null;
+  const channels = pixel?.channels ?? 3;
+  return channels > 3 ? Math.floor((controller.maxTotal * 3) / channels) : controller.maxTotal;
+}
+
+/**
+ * Units of a controller a design needs: enough outputs for the strings, and
+ * enough pixel capacity when the maker states a device-wide limit.
+ */
+export function unitsNeeded(
+  controller: ControllerOption,
+  totalStrings: number,
+  totalPixels = 0,
+  pixel: PixelOption | null = null
+): number {
+  const byOutputs =
+    controller.outputs != null && controller.outputs >= 1
+      ? Math.ceil(totalStrings / controller.outputs)
+      : 1;
+  const limit = totalLimit(controller, pixel);
+  const byPixels = limit != null && limit >= 1 ? Math.ceil(totalPixels / limit) : 1;
+  return Math.max(1, byOutputs, byPixels);
 }
 
 export function evaluateController(controller: ControllerOption, input: FitInput): ControllerFit {
@@ -239,8 +262,15 @@ export function evaluateController(controller: ControllerOption, input: FitInput
     );
   }
 
-  // Output count: too few outputs means more units, up to a point
-  const units = unitsNeeded(controller, input.totalStrings);
+  // Too few outputs, or too little pixel capacity, means more units — up to a point
+  const units = unitsNeeded(controller, input.totalStrings, input.totalPixels, pixel);
+  const limit = totalLimit(controller, pixel);
+  const byOutputs = unitsNeeded(controller, input.totalStrings);
+  // Which limit sets the unit count, in words
+  const why =
+    units > byOutputs && limit != null
+      ? `${n(input.totalPixels)} pixels at ${n(limit)} per unit`
+      : `${n(input.totalStrings)} strings at ${n(controller.outputs ?? 0)} output${controller.outputs === 1 ? '' : 's'} each`;
   if (controller.outputs == null) {
     add(
       'info',
@@ -248,19 +278,16 @@ export function evaluateController(controller: ControllerOption, input: FitInput
       `${name}'s number of pixel outputs isn't recorded.`,
       `Confirm it has at least ${n(input.totalStrings)}.`
     );
-  } else if (units > MAX_CONTROLLER_UNITS) {
+  }
+  if (units > MAX_CONTROLLER_UNITS) {
     add(
       'error',
       'too-many-units',
-      `${n(input.totalStrings)} strings would take ${n(units)} × ${name} (${n(controller.outputs)} output${controller.outputs === 1 ? '' : 's'} each).`,
-      'Choose a controller with more outputs, or use fewer, longer strings.'
+      `This would take ${n(units)} × ${name}: ${why}.`,
+      'Choose a larger controller, or fewer, longer strings.'
     );
   } else if (units > 1) {
-    add(
-      'info',
-      'multiple-units',
-      `${n(units)} × ${name} needed: ${n(input.totalStrings)} strings at ${n(controller.outputs)} output${controller.outputs === 1 ? '' : 's'} each.`
-    );
+    add('info', 'multiple-units', `${n(units)} × ${name} needed: ${why}.`);
   }
 
   // Pixels per output
@@ -285,7 +312,14 @@ export function evaluateController(controller: ControllerOption, input: FitInput
         );
       }
     }
-  } else if (!isBoard) {
+  } else if (limit != null && layout.perString > limit) {
+    add(
+      'error',
+      'per-output',
+      `${name} drives at most ${n(limit)} ${pixel && pixel.channels > 3 ? `${pixel.channels}-channel ` : ''}pixels in total; ${layout.lengths ? 'the longest string is' : 'strings are'} ${n(layout.perString)}.`,
+      `Split into strings of ${n(limit)} or fewer.`
+    );
+  } else if (!isBoard && limit == null) {
     add(
       'info',
       'per-output-unknown',

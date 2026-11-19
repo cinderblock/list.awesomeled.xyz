@@ -216,6 +216,12 @@ export const CONTROLLERS: BaseEntry[] = [
       { name: '4096 pixels', price: 599, pixels: 4096 },
     ],
   }),
+  entry('total8', {
+    name: 'Total8',
+    // no per-output figure, only a device-wide one
+    outputs: { count: 8, clocked: false, pixels: { max_total: 2400 }, driver: { buffered: true } },
+    price: 60,
+  }),
   entry('mystery', { name: 'Mystery' }),
 ];
 

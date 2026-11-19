@@ -16,7 +16,7 @@ import type { BaseEntry } from '../types';
 import { parseQuantity } from '../quantity';
 import { formatPriceText, parsePrice, toUSD } from '../currency';
 import { flattenPlatforms } from '../platforms';
-import { firstImageFile } from '../images';
+import { firstImageFile, imageUrl } from '../images';
 import { normalizeName, type Database, type RelationGraph } from '../relations';
 
 // ---------------------------------------------------------------------------
@@ -42,9 +42,10 @@ function strings(v: unknown): string[] {
   return v.filter((x): x is string => typeof x === 'string' && !!x.trim()).map((x) => x.trim());
 }
 
+/** Small thumbnail of the entry's first image (built by scripts/thumbs.ts) */
 function imagePath(category: string, entry: BaseEntry): string | undefined {
   const file = firstImageFile(entry);
-  return file ? `/database-images/${category}/${file}` : undefined;
+  return file ? imageUrl(category, file, 'sm') : undefined;
 }
 
 /** Discontinued or end-of-life: still usable in a design, but flagged */
@@ -434,6 +435,8 @@ export interface ControllerOption {
   /** Pixel data outputs per unit */
   outputs: number | null;
   maxPerOutput: number | null;
+  /** Device-wide pixel limit (quoted for 8-bit RGB), when the maker states one */
+  maxTotal: number | null;
   clockedSupport: 'clocked' | 'async' | 'both' | 'unknown';
   /** outputs.protocols exactly as the vendor lists them */
   listedProtocols: string[];
@@ -569,6 +572,7 @@ export function buildControllerOption(entry: BaseEntry, graph?: RelationGraph): 
     status: str(entry.status),
     outputs: num(outputs.count),
     maxPerOutput: num(pixels.max_per_output),
+    maxTotal: num(pixels.max_total),
     clockedSupport,
     listedProtocols: strings(outputs.protocols),
     drives: outgoingIds(graph, ref, 'drives', PIXEL_ID),
@@ -627,6 +631,7 @@ export function buildBoardOption(entry: BaseEntry): ControllerOption | null {
     status: str(entry.status),
     outputs,
     maxPerOutput: null,
+    maxTotal: null,
     clockedSupport: 'unknown',
     listedProtocols: [],
     drives: [],

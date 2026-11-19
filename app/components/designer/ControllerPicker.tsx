@@ -19,8 +19,8 @@ import { SeverityIcon, Thumb } from './parts';
 interface ControllerPickerProps {
   controllers: ControllerOption[];
   group: GroupAnalysis;
-  /** Strings other groups already put on each controller, by controller id */
-  otherStrings: Map<string, number>;
+  /** Strings and pixels other groups already put on each controller, by controller id */
+  others: Map<string, { strings: number; pixels: number }>;
   targetFps: number;
   outdoor: boolean;
   onSelect: (id: string) => void;
@@ -131,7 +131,7 @@ function OptionRow({
 export function ControllerPicker({
   controllers,
   group,
-  otherStrings,
+  others,
   targetFps,
   outdoor,
   onSelect,
@@ -154,18 +154,21 @@ export function ControllerPicker({
       return words.every((w) => haystack.includes(w));
     })
     .map((controller) => {
-      const totalStrings = group.layout.strings + (otherStrings.get(controller.id) ?? 0);
+      const other = others.get(controller.id);
+      const totalStrings = group.layout.strings + (other?.strings ?? 0);
+      const totalPixels = group.pixels + (other?.pixels ?? 0);
       const fit = evaluateController(controller, {
         pixel: group.pixel,
         voltage: group.voltage,
         layout: group.layout,
         totalStrings,
+        totalPixels,
         power: group.power,
         targetFps,
         outdoor,
         hasShifter: !!group.shifter,
       });
-      const cost = controllerPrice(controller, fit.units, Math.ceil(group.pixels / fit.units));
+      const cost = controllerPrice(controller, fit.units, Math.ceil(totalPixels / fit.units));
       return {
         controller,
         fit,

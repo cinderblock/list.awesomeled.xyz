@@ -12,6 +12,7 @@
 import type { Analysis } from './analysis';
 import { PROTOCOL_LABELS } from './catalog';
 import { describeLayout } from './design';
+import { GENERATOR } from './embed';
 import { fmtFps, fmtInt, fmtVolts, fmtWatts } from './format';
 
 export type BoxKind = 'source' | 'controller' | 'pixels' | 'shifter' | 'supply';
@@ -404,7 +405,7 @@ export function layoutDiagram(analysis: Analysis): DiagramModel {
   labels.push({
     x: PAD - 4,
     y: height - 8,
-    text: 'list.awesomeled.xyz/designer',
+    text: GENERATOR,
     anchor: 'start',
     kind: 'credit',
   });

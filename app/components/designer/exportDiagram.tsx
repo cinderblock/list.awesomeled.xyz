@@ -18,7 +18,7 @@ import {
   type Analysis,
   type DiagramModel,
 } from '~/lib/designer';
-import { designUrl } from './browser';
+import { canonicalDesignUrl } from './browser';
 import { EXPORT_PALETTE, SystemDiagram } from './SystemDiagram';
 
 /** Thumbnails are drawn about 52 px wide; 3× keeps them crisp in a 2× PNG */
@@ -105,7 +105,7 @@ export async function renderDiagramSvg(analysis: Analysis): Promise<DiagramExpor
           palette={EXPORT_PALETTE}
           images={images}
           embed={embed}
-          link={designUrl(designQuery(analysis.design))}
+          link={canonicalDesignUrl(designQuery(analysis.design))}
         />
       )
     );

@@ -1,3 +1,5 @@
+import { absoluteUrl } from '~/lib/site';
+
 /**
  * Small browser-only helpers for the designer: clipboard, downloads, file
  * names. Nothing here runs during prerendering — only from event handlers.
@@ -52,7 +54,16 @@ export function fileSlug(title: string): string {
   return slug || 'led-system';
 }
 
-/** Absolute URL of the current design */
+/**
+ * The design's link on the canonical site, for things that leave the page
+ * (exported diagrams, parts lists): a file made on a preview deployment or a
+ * dev server should still lead somewhere that exists.
+ */
+export function canonicalDesignUrl(query: string): string {
+  return absoluteUrl(`/designer${query ? `?${query}` : ''}`);
+}
+
+/** Absolute URL of the current design on this origin (what "Copy link" copies) */
 export function designUrl(query: string): string {
   const { origin, pathname } = window.location;
   return `${origin}${pathname}${query ? `?${query}` : ''}`;
