@@ -1219,14 +1219,13 @@ p.designer-slot-facts {
   font-size: 0.625rem !important;
 }
 
-/* Narrow screens: each row becomes a labelled block */
+/* Narrow screens: each row becomes a block of label/value pairs */
+.designer-cell-label {
+  display: none;
+}
 @media (max-width: 639px) {
   .designer-table--stack thead {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
+    display: none;
   }
   .designer-table--stack tbody tr {
     display: block;
@@ -1243,9 +1242,8 @@ p.designer-slot-facts {
     text-align: left;
     white-space: normal;
   }
-  .designer-table--stack tbody th::before,
-  .designer-table--stack tbody td::before {
-    content: attr(data-label);
+  .designer-table--stack .designer-cell-label {
+    display: block;
     font-size: 0.75rem;
     font-weight: 400;
     color: var(--muted-foreground);

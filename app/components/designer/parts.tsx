@@ -59,8 +59,10 @@ export function labelIssues(issues: Issue[], analysis: Analysis): Issue[] {
 }
 
 /**
- * Cell of a stacking table: on narrow screens each row becomes a block and
- * the column label is shown beside the value (see .designer-table--stack).
+ * Cell of a stacking table. On narrow screens the header row is dropped,
+ * each row becomes a block, and every cell shows its own column label (real
+ * text, so it is read out too); on wide screens the label is hidden and the
+ * header row does the job. See .designer-table--stack.
  */
 export function Cell({
   label,
@@ -75,11 +77,8 @@ export function Cell({
 }) {
   const Tag = head ? 'th' : 'td';
   return (
-    <Tag
-      scope={head ? 'row' : undefined}
-      data-label={label}
-      className={num ? 'designer-num' : undefined}
-    >
+    <Tag scope={head ? 'row' : undefined} className={num ? 'designer-num' : undefined}>
+      <span className="designer-cell-label">{label}</span>
       <span className="designer-cell">{children}</span>
     </Tag>
   );

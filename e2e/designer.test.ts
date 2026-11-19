@@ -424,23 +424,26 @@ test.describe('System Designer: on a phone', () => {
     await bar.tap();
     await expect(page.locator('#designer-checks')).toBeInViewport();
 
-    // Nothing of the designer's may stick out past the screen edge. (The
-    // diagram scrolls sideways inside its own box, by design.)
+    // Nothing of the designer's may stick out of its own column. Measured
+    // against the designer's box rather than the screen, so a too-wide site
+    // header can't fail this test — and can't hide a too-wide table either.
+    // (The diagram scrolls sideways inside its own box, and the summary bar
+    // is pinned to the screen edges; both by design.)
     for (const id of ['designer-power', 'designer-bom', 'designer-diagram']) {
       await page.locator(`#${id}`).scrollIntoViewIfNeeded();
       const sticking = await page.evaluate(() => {
-        const width = document.documentElement.clientWidth;
+        const frame = document.querySelector('.designer-page')!.getBoundingClientRect();
         const out: string[] = [];
         for (const el of document.querySelectorAll('.designer-page *')) {
-          if (el.closest('.designer-diagram-scroll')) continue;
+          if (el.closest('.designer-diagram-scroll, .designer-mobile-bar')) continue;
           const box = el.getBoundingClientRect();
-          if (box.width > 0 && box.right > width + 1) {
+          if (box.width > 0 && (box.right > frame.right + 1 || box.left < frame.left - 1)) {
             out.push(`${el.tagName.toLowerCase()}.${String(el.getAttribute('class'))}`);
           }
         }
         return out.slice(0, 5);
       });
-      expect(sticking, `wider than the screen with #${id} in view`).toEqual([]);
+      expect(sticking, `sticking out of the page with #${id} in view`).toEqual([]);
     }
     expect(errors).toEqual([]);
   });
