@@ -60,31 +60,76 @@ to look.
 
 ## Plan / steps
 
-1. **Link health** ← current
-   - Run the sweep locally (Nov run never happened, see Findings).
-   - DEAD → `dead_links` (+ replacement URL where the product moved).
-   - CHECK list (bot-blocked/timeouts) → verify by hand/browser-ish fetch,
-     fix moved URLs, replace dead ones, mark dead.
-   - Update issue #2 with the triage result.
-2. **Price provenance schema + UI** — structured `price_source`
-   (retrieved date, vendor/url/part) so "price as of" is data, not a comment;
-   migrate existing comment dates; show "as of" on entry pages and in the
-   price cell tooltip; flag stale (>12 months) prices.
-3. **Price gaps** — pixel-ICs/pixels not on LCSC (alt distributors: szlcsc,
-   Mouser/Digi-Key, manufacturer, AliExpress street price clearly labelled),
-   connectors (one representative orderable SKU with qty tiers), TC4427,
-   APD-2-500, generic ESP boards as street-price ranges, the 8 unpriced
-   adapters and 6 unpriced controllers.
-4. **Discontinued / availability audit** — per vendor catalog, mark
-   `discontinued` + `related: replacement` successor; record current price
-   while on the page.
-5. **Commercial systems** — find published price points for all 18, define
-   the `$` scale (proposal: USD per pixel, log-spaced), check each
-   `price_range` against it.
-6. **Durability** — check-links covers prose-embedded URLs and markdown
-   docs; workflow re-enabled + self-healing against the 60-day inactivity
-   disable; monthly report gains a price-staleness section; refresh
-   `currency.ts` rates.
+1. ~~**Price provenance schema + UI**~~ — shipped (`f7b9b7d`, `d5f86cd`):
+   `price_source` (retrieved/vendor/part/url/notes), `{amount, max}` street
+   ranges, entry-page "as of" line, stale (>12 mo) flag + table clock mark,
+   Price column on pixels/pixel-ICs/connectors, 4-decimal sub-dollar prices.
+2. **Research pass** ← current. Per-category agents, each doing link triage
+   (from the 2026-11-18 Node sweep), availability/status, and price
+   (re-confirm or fill) for every entry in its slice, following "Research
+   conventions" below. Findings land in the scratchpad `findings/` folder and
+   are summarized here. Pilot first (pixel-decoders + level-converters),
+   then fan out:
+   - controllers 8/a–e, f–k, l–o, p, q–w
+   - adapters + pixel-decoders, microboards + level-converters
+   - pixel-ICs + pixels (non-LCSC price gaps)
+   - connectors (representative SKU qty tiers)
+   - commercial systems + diffusive materials + pattern drivers (links)
+3. **Commit** each slice: files with verified price/status → review commit;
+   link-only files → separate commit added to `IGNORED_COMMITS` _after_ the
+   rebase that precedes the push (hashes change on rebase).
+4. **Commercial systems** — published price points for all 18; define the
+   `$` scale (proposal: USD per pixel, log-spaced); check each
+   `price_range`.
+5. **Issue #2** — post the triage result.
+6. **Durability** — check-links: run under Node in docs (Bun/Windows TLS
+   bug), probe prose-embedded URLs and `description.md`; workflow
+   re-enabled + self-healing (needs Cameron's yes); monthly report gains a
+   price-staleness section; refresh `currency.ts` rates.
+
+## Research conventions
+
+- **Dates**: `retrieved` / `checked` = the day you actually read the page.
+- **Sources, in order of preference**: the creator's own store/product page;
+  authorized distributors (LCSC, szlcsc.com, Mouser, Digi-Key, Farnell,
+  TME, RS, Arrow); well-known retailers (Adafruit, SparkFun, Pimoroni,
+  Tindie seller page). Marketplaces (AliExpress, Amazon, eBay) only for
+  generic/no-name parts, as a street range `{amount, max}` from at least 3
+  listings, `vendor: AliExpress (street)`.
+- **Never estimate.** No source found → leave the price as is and report it.
+- **Price shape**: original currency (`{amount, currency}` for non-USD);
+  ex-VAT when shown, else say "incl. VAT" in `price_source.notes`. Say what
+  the price buys when it isn't obvious (board-only vs kit, per piece vs
+  pair). Parts: 3 representative tiers `[{qty, price, sku}]` (MOQ / ~1k /
+  largest), like the LCSC entries.
+- **Re-confirmed, unchanged price** → still update `price_source.retrieved`
+  (that is the "as of").
+- **Status**: `discontinued` only with evidence (vendor says so, product
+  gone from the creator's catalog and not sold elsewhere by them, or a
+  manufacturer PCN/EOL notice). Out of stock ≠ discontinued. `end-of-life`
+  = EOL announced, remaining stock still sold. `active` = currently listed
+  for sale by the creator or an authorized seller. Unsure → leave it and
+  report.
+- **Successor**: on the discontinued entry only, `related: - type:
+replacement` with `ref: <category>/<slug>` if it's in the database, else
+  `name` + `url`.
+- **Links**: product moved → replace the URL in place. Gone → `dead_links`
+  entry (`url`, `checked`, curated `archive` = a Wayback capture that shows
+  the right product). Blocked to scripts but fine in a browser-like fetch →
+  leave it, report "ok (blocked)".
+- **Scope**: only price, `price_source`, `status`, `related` replacement,
+  link fields, `dead_links`. Other wrong facts spotted → report, don't edit
+  (other workstreams own them).
+- **Fetching**: WebFetch; `curl -A "Mozilla/5.0 …"`; `node -e` fetch (never
+  Bun's fetch — Bun 1.4.4 on Windows fails TLS to GitHub and others);
+  Shopify stores: `<product-url>.json` gives variants, prices,
+  availability; Wayback: `https://archive.org/wayback/available?url=` and
+  the CDX API. Headless Playwright via Node for JS-only storefronts. Never
+  the Chrome extension (it drives Cameron's real browser).
+- **Format**: key order `name, status, release_year, creator, developer,
+manufacturers, vendors, notes, inputs, outputs, power`, then
+  alphabetical; finish with `bunx eslint --fix database/<cat>`,
+  `bunx prettier --write database/<cat>`, `bun run validate <cat>`.
 
 ## Findings / gotchas
 
@@ -102,6 +147,18 @@ to look.
   converters 2026-07-01 (`a4ba15a`), 10 researched prices 2026-07-02
   (`cbc48d9`), LCSC batch 1 2026-07-07 (`6385282`), LCSC batch 2 swept
   2026-07-03 (`f40746b`).
+- **Bun 1.4.4 on Windows can't run the link checker**: its fetch fails the
+  TLS handshake to github.com and many others (`EPROTO: The TLS handshake
+failed`, 213 false CHECKs). `node scripts/check-links.ts` works (Node 26
+  strips the types). CI runs on Linux, unaffected.
+- Node sweep 2026-11-18: **ok 390 | dead 12 | check 69** (scratchpad log
+  `check-links-node-2026-11-18.log`). New dead since October: ACROBOTIC
+  ESP level shifter (Amazon 404), ESPixel Pops wiki, Orange Pro Plus 32
+  (winterlights.in), PB16 DIYC thread, GeoPix (geopix.io NXDOMAIN).
+- `IGNORED_COMMITS` hashes go stale when a rebase rewrites the commit: add
+  the entry only after the final rebase before pushing, or re-point it.
+- Pixels, pixel ICs and connectors had no Price column in their tables.
+- `formatPriceText` rounded $0.0446 to $0.045 (entry) / $0.04 (table).
 - The sheet's Commercial tab has no `$` legend; existing ratings imply a
   qualitative market tier (Twinkly 250-string $105 = `$$`; SGM 7-ball
   string €125 = `$$$$$`).
@@ -109,9 +166,12 @@ to look.
 ## Progress log
 
 - [x] Read build-out plan, ROADMAP, CLAUDE.md, issue #2, schemas; census.
-- [ ] Link sweep 2026-11-18 + triage
+- [x] Prettier `endOfLine: auto` + `.gitattributes` (`df13595`) — format:check
+      failed on every CRLF file on Windows.
+- [x] Link sweep 2026-11-18 (Node): 12 dead, 69 check.
+- [x] `price_source` schema + migration + UI, pushed (`f7b9b7d`..`2d7e815`).
+- [ ] Link triage (in the research pass)
 - [ ] Issue #2 updated
-- [ ] `price_source` schema + migration + UI
 - [ ] Price gaps
 - [ ] Discontinued audit
 - [ ] Commercial systems price ranges
