@@ -334,3 +334,28 @@ sources there). Inputs were applied; these status/link findings were not
 `physical.packages` array (common.json `ic_package` / `led_package`), which the
 generic array handling already facets correctly. The override and skip rule
 are dead code now; not a visible bug.
+
+## Spec errors seen during the price/status research pass (stream 2)
+
+The data-freshness pass (stream 6, 2026-11-18) read every hardware/software
+entry's vendor pages and noted, but did not edit, ~120 facts that disagree
+with the maker. Each findings file ends with a "(d) Wrong facts" list, with
+the source quoted in that entry's section:
+[plans/data-freshness/findings/](plans/data-freshness/findings/). The
+largest clusters:
+
+- Controllers listing `Ethernet` / `Wi-Fi` / `USB` they don't have
+  (ElectroMage 8x drivers, DIN Pixie, DigiLED micro player, Rocketlife
+  Lightboard/Lightbox, NLed mini, Octo MK2, ULS Stripe, Flex Pixel Driver…)
+- Wrong or placeholder creators (Tindie as creator on LED Octopus / PiPixel,
+  `creator: /` on PL9823, "Color" on LC8808B, Vinci's creator is a URL,
+  MadMapper, QLC+, Jinx, SmartPXL)
+- Channel/output counts and voltage ranges (Falcon F4v3 4×1024 not
+  48×340, MY9221 12 channels, SP901E 4 channels, QuinLED Dig-Octa 5–48 V)
+- Datasheet links that point at the wrong part (TM1804 → TM1803 sheet,
+  UCS8903 → DHgate listing, APA105 → a strip page, SK6818 → a Conrad strip)
+- Possibly nonexistent parts (LC2823-2020, SM1616) and renamed ones
+  (WS2816 → WS2916?, ProtoPixel Create → Mapping Tool)
+
+Why it matters: these are the facts the tables filter on. Overlaps the
+connector list above.

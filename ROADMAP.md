@@ -27,25 +27,33 @@ history. This is what's next.
 
 ## Data backlog
 
-- Price gaps that need different treatment: connectors (qty-tier pricing —
-  pixels/pixel-ICs are done where LCSC stocks them; NOT on LCSC 2026-07:
-  UCS1903/2903/2904/512B/8903/8904, GS8202/06/08, LPD6803/8806, HD107S/108,
-  APA104/107, SK6822, PL9823, P9813, MY9231, SM16716/16511, TLS3001,
-  MBI6020; NS107S listed but price anomalous), TC4427 (Microchip blocks
-  bots — manual), APD-2-500 (JS-only storefront), generic ESP/NodeMCU boards
-  (street price varies)
-- Commercial-systems `price_range` → verify against pricing.examples
+- Prices still missing after the 2026-11-18 freshness pass (every one was
+  searched; reasons in `plans/data-freshness/findings/`): 11 connector
+  families (Binder 720, Chogori, EventCon, Hirschmann CA, LD16/20/28,
+  Socapex, SP13/SP17, TeePlug, WAGO 221, Wieland RST — distributors block
+  scripts), 23 pixel ICs and 20 pixels (no distributor stocks them; lot-only
+  AliExpress listings), quote-only commercial systems (Lumisphere, Glasson,
+  TMB, LEDSnaps, ENTTEC SMART PXL, Schnick-Schnack). `node
+scripts/check-links.ts --prices` lists undated/stale prices
+- Commercial-systems `$` scale: undefined in the sheet and doesn't track
+  price per pixel — owner call (see `plans/data-freshness.md`); the Per
+  Pixel column gives the objective comparison meanwhile
 - Remaining images (2026-11-18 pass covered 73% of hardware entries; every
   skip has a reason in `plans/assets-research/`): molex.com /
   phoenixcontact.com block bots (XH, PicoBlade, Mini-Fit Jr, KK, MSTB),
   pixel ICs rarely have real chip photos, discontinued boards whose images
   were never archived. `bun run coverage:assets --missing` lists them
-- The bot-blocked/timeout CHECK list (59 urls, tracked in the rolling
-  link-rot issue #2; EMP 16 and SceneX PP4 product pages now 404)
-- Vendor-catalog discontinued audits beyond link-driven evidence
+- The CHECK list in the rolling link-rot issue #2 (mostly distributor bot
+  walls: Digi-Key, Mouser, Farnell, RS, eBay) needs a human with a browser;
+  the monthly workflow is disabled by GitHub's 60-day inactivity rule until
+  re-enabled
 
 ## Decisions parked (owner: Cameron)
 
+- Re-enable the monthly link-check workflow (GitHub disabled it for
+  inactivity) and add a self-heal step to the deploy workflow
+- Commercial systems' `$`…`$$$$$$` scale: per-pixel bands or a documented
+  qualitative tier (`plans/data-freshness.md`, open question 2)
 - R2 bucket + public domain + account-owned token → switches on the
   datasheet mirror (pipeline, tests and docs are ready:
   `docs/datasheet-mirroring.md` "One-time setup"; plan: `plans/assets.md`)
