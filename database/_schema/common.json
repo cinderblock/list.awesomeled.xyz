@@ -163,6 +163,139 @@
       "pattern": "^([0-9]{4}|[0-9]+mm)$",
       "description": "LED package: SMD footprint code in tenths of a millimetre ('5050' = 5.0 x 5.0 mm, '3535', '2020', '1515'), or a through-hole round LED's diameter ('5mm', '8mm')."
     },
+    "clocked_support": {
+      "enum": [false, "selectable", "always"],
+      "description": "Which pixel signal types the outputs drive. false: single-wire (async, data only: WS2811/WS2812 family). 'selectable': single-wire or clocked, configured per output. 'always': clocked only (separate data + clock lines: APA102 family)."
+    },
+    "output_connector": {
+      "description": "Output connector: a `ref` into the connectors database when the connector is there (preferred), else a short description ('Screw terminal', 'Solder pads').",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ref"],
+          "properties": {
+            "ref": {
+              "type": "string",
+              "description": "Slug of an entry in connectors/ (checked by scripts/validate.ts)"
+            },
+            "pins": { "type": "integer" },
+            "notes": {
+              "type": "string",
+              "description": "Detail the ref can't carry (pitch, variant, fusing)"
+            }
+          }
+        }
+      ]
+    },
+    "diy_or_ots": {
+      "enum": ["DIY", "OTS", "both"],
+      "description": "DIY: you build it (kit, PCB or open design). OTS: sold assembled, off the shelf. both: offered either way."
+    },
+    "pixel_outputs": {
+      "description": "Pixel-data outputs of a controller or controller-like board (adapters: shields, HATs, capes)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connector": { "$ref": "#/definitions/output_connector" },
+        "count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Number of pixel data outputs"
+        },
+        "fuse": {
+          "type": ["string", "null"],
+          "description": "Fuse type for outputs"
+        },
+        "driver": {
+          "type": "object",
+          "additionalProperties": false,
+          "description": "Data line driver details",
+          "properties": {
+            "IC": { "type": ["string", "null"], "description": "Buffer/driver IC" },
+            "replaceable": { "type": "boolean" },
+            "impedance": { "type": "number" },
+            "buffered": {
+              "type": "boolean",
+              "description": "Outputs from buffer driver (true) or direct from CPU (false)"
+            },
+            "notes": { "type": "string" }
+          }
+        },
+        "current": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "max": {
+              "description": "Maximum current per output in amps",
+              "$ref": "#/definitions/current"
+            }
+          }
+        },
+        "differential": {
+          "type": "boolean",
+          "description": "Outputs use differential signaling"
+        },
+        "pixels": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "max_per_output": { "type": "integer", "description": "Maximum pixels per output" }
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Supported pixel protocols (WS2812B, SK6812, APA102, etc.)"
+        },
+        "clocked": { "$ref": "#/definitions/clocked_support" },
+        "auxiliary": {
+          "type": "object",
+          "additionalProperties": { "type": ["integer", "boolean"] },
+          "description": "Additional outputs (DMX512, TTL, Servo, etc.) with counts; true = supported, count unrecorded"
+        }
+      }
+    },
+    "power_input": {
+      "description": "Power input of a controller or controller-like board",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connector": {
+          "description": "Power input connector",
+          "oneOf": [
+            { "type": "string" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "oem": { "type": "string" },
+                "type": { "type": "string" },
+                "pitch": { "type": "number" },
+                "pins": { "type": "integer" },
+                "count": { "type": "integer" }
+              }
+            }
+          ]
+        },
+        "current": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "max": { "description": "Maximum current in amps", "$ref": "#/definitions/current" }
+          }
+        },
+        "voltage": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "max": { "$ref": "#/definitions/voltage" },
+            "min": { "$ref": "#/definitions/voltage" }
+          }
+        }
+      }
+    },
     "datasheet_sources": {
       "type": ["array", "null"],
       "description": "Alternate hosts for the datasheet beyond datasheet.url, categorized by who hosts it. Manufacturer links are canonical but rot when sites restructure; distributor copies (LCSC, Pololu, Adafruit) are often more stable but may lag revisions — note the revision when known.",
