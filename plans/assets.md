@@ -70,6 +70,8 @@ so the entry page shows them (see Plan step 4).
     - [x] Ops change staged, uncommitted: worktree `C:/Users/camer/.t3/worktrees/ops/awesomeled-datasheets-r2` (branch `awesomeled-datasheets-r2`, no upstream). It adds R2 custom-domain support to the IaC and declares bucket `awesomeled-datasheets` + `assets.awesomeled.xyz`. Read-only dry run: exactly 2 creates; tests 405 pass. Plan: `plans/awesomeled-datasheets-r2.md` there.
     - [ ] Cameron's yes on that exact change → commit + push ops (CI applies) → R2 token → repo secrets/variable → Actions PR permission → first run.
 12. [ ] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
+    - [x] pixel ICs + pixels (f4c3620): 3 images, 1 datasheet added, 2 LCSC viewer URLs replaced by direct PDFs; 47 image skips and 12 parts with no published datasheet, reasons in `plans/assets-research/pass2-pixels-ics.md`.
+    - [ ] boards / converters / connectors / controllers, pattern drivers: agents running (T3 delegated tasks, own checkouts).
 
 ## Working method (two worktrees)
 
@@ -131,7 +133,8 @@ the shared block to them).
 - **Datasheet storage measured** (2026-11-18 ~10 PM PST): 249 datasheets download as PDFs, 419.6 MB in total. The biggest are wieland-rst 30 MB, ebyte-nrf-52840 17 MB and chogori 15 MB. That's 4% of R2's free 10 GB and 41% of the 1 GB mirror budget.
 - **Monitoring already exists in ops.** The uptime worker (`cloudflare/workers/uptime`) charts R2 storage per bucket and alerts at 50/75/90/100% of the 10 GB account total, plus on projected growth; it also polls Class A/B operations hourly into cost alerts. The spend breaker only blocks `api.openslate.us`, so it can't throttle `assets.awesomeled.xyz`.
 - Lumikit's PDFs start with a UTF-8 BOM before `%PDF-`. The check now accepts `%PDF-` anywhere in the first 1024 bytes, like PDF readers do.
-- Several LCSC `datasheet.url` values added by other streams serve HTML to bots (logged in ISSUES.md).
+- Several LCSC `datasheet.url` values added by other streams serve HTML to bots (logged in ISSUES.md). LCSC's direct-file form (`datasheet.lcsc.com/datasheet/pdf/<hash>.pdf`) works.
+- Titan Micro's own TM18xx/TM19xx PDFs (`titanmec.com/index/article/download.html?file=…`) download only with a `titanmec.com` Referer, otherwise a 439-byte 404. Not worth teaching the mirror: entry-page links are `rel="noopener noreferrer"`, so visitors would get the 404 too. Keep the community copies (Lumikit, LEDYi).
 
 - **SparkFun licence:** photos on sparkfun.com are **CC BY-NC-SA 3.0** (SparkFun news 735/1852), not CC BY 2.0. Only SparkFun's Flickr uploads (mirrored on Commons) are CC BY 2.0. The original brief had this wrong; the connectors agent caught it before any wrong tag shipped (two sparkfun.com images now carry CC BY-NC-SA 3.0).
 - Code licences (MIT/GPL) don't cover photos: repo images were recorded as maker photos without a licence unless a docs/hardware licence (CC BY-SA, CERN-OHL) explicitly covered them.
