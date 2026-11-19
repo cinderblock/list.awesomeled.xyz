@@ -8,7 +8,7 @@ vendors:
 aliases:
   - Orange Pi Zero LTS
 compute:
-  soc: Allwinner H2+
+  soc: Allwinner H3 # launched in 2019 with the H2+; H3 after an H2+ shortage
   cpu: 4× ARM Cortex-A7
   isa: ARMv7-A
   clock_speed: 1.2GHz
@@ -59,3 +59,7 @@ sources:
     url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
     retrieved: '2026-11-18'
     notes: "'TF card (Max. 32GB) / 2MB Spi Flash'"
+  compute.soc:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+    retrieved: '2026-11-18'
+    notes: Orange Pi Zero LTS uses the AllWinner H3 SoC, and has 256MB/512MB DDR3 SDRAM

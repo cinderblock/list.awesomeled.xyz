@@ -1,6 +1,6 @@
 name: LED Strip Driver Module
-creator: AliExpress
-notes: WS2811 to high-current MOSFET outputs.
+creator: diymore
+notes: P9813 (clocked CIN/DIN input) to three high-current MOSFET outputs for a 12V RGB strip; cascadable.
 outputs:
   count: 3
   types:
@@ -18,3 +18,12 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.aliexpress.us/w/wholesale-led-strip-driver-module-v1.0.html
   vendor: AliExpress (street)
+sources:
+  notes:
+    url: https://www.diymore.cc/products/full-color-rgb-led-strip-driver-module-shield-for-arduino-stm32-avr-v1-0
+    retrieved: '2026-11-18'
+    notes: Based on a P9813; Can be cascaded all lights of the drive module
+  creator:
+    url: https://www.diymore.cc/products/full-color-rgb-led-strip-driver-module-shield-for-arduino-stm32-avr-v1-0.js
+    retrieved: '2026-11-18'
+    notes: '"vendor":"diymore"'

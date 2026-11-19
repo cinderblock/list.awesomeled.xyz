@@ -24,7 +24,7 @@ connectivity:
     - 5GHz
   ethernet: 1000BASE-T # over USB 2.0, ~300Mbps
   bluetooth: '4.2'
-  usb: OTG x4
+  usb: 2.0 x4
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-b-plus-product-brief.pdf
@@ -61,6 +61,10 @@ sources:
   aliases:
     url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
     retrieved: '2026-11-18'
+  connectivity.usb:
+    url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/
+    retrieved: '2026-11-18'
+    notes: 4 USB 2.0 ports
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'
   - Its Gigabit Ethernet runs over USB 2.0, so throughput tops out around 300 Mbps

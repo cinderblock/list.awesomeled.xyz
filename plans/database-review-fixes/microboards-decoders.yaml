@@ -1,0 +1,543 @@
+# Fix list: wrong facts reported in
+#   plans/data-freshness/findings/microboards.md ("(d) Wrong facts for other workstreams")
+#   plans/data-freshness/findings/pilot-decoders-levelconv.md ("Wrong fact (reported, not edited)",
+#     "Possible wrong fact", "Wrong facts to route to the owning stream")
+# Checked against worktree ws-database-review at d20cf8f, 2026-11-18.
+# Records follow the reports' order. Records marked "Not in the report" in notes were found while verifying
+# a reported item and sit next to it.
+# already-fixed records carry no `value`: the YAML already says the right thing, nothing to apply.
+# Downloads (archived pages, PDFs, listing photos) are in ...\scratchpad\fixes\dl\mb-dec\.
+
+# ---------------------------------------------------------------- microboards: Bluetooth values
+
+- entry: microboards/esp-01
+  field: connectivity.bluetooth
+  current: false
+  status: already-fixed
+  owner: stream2
+  source: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+  retrieved: '2026-11-18'
+  notes: >-
+    Report: bluetooth '4.1' on an ESP8266. Fixed in 2676feb ("ESP-01 and NodeMCU (ESP8266) have no
+    Bluetooth"), with a sources entry citing the ESP8266EX datasheet. Not re-fetched: the ESP8266EX is a
+    Wi-Fi-only SoC.
+
+- entry: microboards/nodemcu-v2
+  field: connectivity.bluetooth
+  current: false
+  status: already-fixed
+  owner: stream2
+  source: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+  retrieved: '2026-11-18'
+  notes: Report said '4.1'. Fixed in 2676feb, with a sources entry. Not re-fetched (ESP8266 has no Bluetooth).
+
+- entry: microboards/esp-32s
+  field: connectivity.bluetooth
+  current: '4.2'
+  status: already-fixed
+  owner: stream2
+  source: https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf
+  retrieved: '2026-11-18'
+  notes: >-
+    Report said '4.1'. Fixed in 2676feb. The sources entry quotes the datasheet: 'Compliant with Bluetooth
+    v4.2 BR/EDR and Bluetooth LE'. Not re-fetched.
+
+# ---------------------------------------------------------------- microboards: creators
+
+- entry: microboards/esp-32s
+  field: creator.name
+  current: NodeMCU
+  value: Ai-Thinker
+  status: apply
+  owner: stream2
+  source: https://web.archive.org/web/20210729143054/https://docs.ai-thinker.com/en/esp32-s_development_board
+  quote: The Nodemcu-32s module is developed by Ai-Thinker Technology.
+  retrieved: '2026-11-18'
+  notes: >-
+    The entry describes the NodeMCU-32S dev board (usb 'Power + UART', dev-board street prices), which is
+    built on Ai-Thinker's ESP-32S module. Ai-Thinker makes both, so the creator is Ai-Thinker either way.
+    A second archived Ai-Thinker page (2021-12-09,
+    https://web.archive.org/web/20211209010040/https://docs.ai-thinker.com/en/esp32/boards/nodemcu_32s) reads
+    "NodeMCU-32S is a core development board designed by Essence based on the ESP32-32S module". "Essence"
+    is a machine translation of 安信可 (Ai-Thinker). The ESP32S datasheet page (archived 2024-06-21) is
+    published by "Shenzhen Anxinke Technology Co., Ltd.", which is Ai-Thinker's legal name. "NodeMCU" is
+    only the board's name prefix.
+    Knock-on change for stream4: the pattern-drivers/wled.yaml related note (ref microboards/esp-32s) says
+    "(creator NodeMCU)". An alias 'NodeMCU-32S' on this entry would match the name WLED uses.
+
+- entry: microboards/esp-32s
+  field: creator.page
+  current: https://www.espressif.com/en/products/socs/esp32
+  value: https://docs.ai-thinker.com/en/esp32-s_development_board
+  status: other-owner
+  owner: stream6
+  source: https://web.archive.org/web/20210729143054/https://docs.ai-thinker.com/en/esp32-s_development_board
+  quote: Nodemcu-32s Development Board
+  retrieved: '2026-11-18'
+  notes: >-
+    Once the creator is Ai-Thinker, Espressif's SoC page no longer fits as creator.page (it could move to
+    other_links). Ai-Thinker's live docs have dropped the classic ESP32: /en/esp32 renders an empty page,
+    and the URL above now returns the docs home page (a soft 404). Either use the original URL plus a
+    dead_links item with the archive above, or set a creator name with no page.
+
+- entry: microboards/esp-01
+  field: creator.name
+  value: Ai-Thinker
+  status: apply
+  owner: stream2
+  source: https://docs.ai-thinker.com/en/esp8266
+  quote: The ESP8266 series modules are low-power UART-WiFi modules developed by Ai-Thinker Co.,Ltd. based on Espressif's ESP8266EX.
+  retrieved: '2026-11-18'
+  notes: >-
+    The entry has no creator now. The page's module table lists "ESP-01" and "ESP-01S". ESP-01 is not on
+    Ai-Thinker's discontinuation notice (https://docs.ai-thinker.com/en/productDiscontinuationNotice/index.html),
+    so stream6 can now cite a maker for `status`. For stream5: Ai-Thinker's own module spec is at
+    https://aithinker-static.oss-cn-shenzhen.aliyuncs.com/docs/Public%20Document%20Center/WiFi/esp8266/Specification/ESP-01%20Specification-20220807.pdf
+    (the entry links Espressif's ESP8266EX chip datasheet).
+
+- entry: microboards/esp-01
+  field: creator.page
+  value: https://docs.ai-thinker.com/en/esp8266
+  status: other-owner
+  owner: stream6
+  source: https://docs.ai-thinker.com/en/esp8266
+  quote: ESP-01 View Download
+  retrieved: '2026-11-18'
+  notes: >-
+    The live maker page for the ESP8266 module series, with ESP-01 in its module table. The report said no
+    link could be added without a creator; the record above supplies the creator.
+
+# ---------------------------------------------------------------- microboards: t-eth-lite
+
+- entry: microboards/t-eth-lite
+  field: compute.cpu
+  current: Xtensa LX7
+  status: already-fixed
+  owner: stream2
+  source: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
+  retrieved: '2026-11-18'
+  notes: Report said 'Xtensa LX6'. Fixed in 2676feb, with a sources entry. LilyGO's spec table lists the ESP32-S3-WROOM-1 for this variant.
+
+- entry: microboards/t-eth-lite
+  field: connectivity.bluetooth
+  current: 5.0 LE
+  status: already-fixed
+  owner: stream2
+  source: https://lilygo.cc/products/t-eth-lite
+  quote: 'Wi-Fi: 802.11 b/g/n BLE 5 + Bluetooth mesh'
+  retrieved: '2026-11-18'
+  notes: Report said '4.1'. Fixed in 2676feb. The quote is the ESP32-S3 column of LilyGO's spec table.
+
+- entry: microboards/t-eth-lite
+  field: compute.flash
+  current: 16MB
+  status: already-fixed
+  owner: stream2
+  source: https://lilygo.cc/products/t-eth-lite
+  quote: 'Memory Flash: 16MB, PSRAM: 8MB'
+  retrieved: '2026-11-18'
+  notes: >-
+    The report flagged 'flash: microSD'. Fixed in 2676feb (16MB). The microSD value was really the board's card
+    slot, which the fix dropped; see the next record.
+
+- entry: microboards/t-eth-lite
+  field: io.storage
+  value: microSD
+  status: apply
+  owner: stream2
+  source: https://lilygo.cc/products/t-eth-lite
+  quote: Onboard Ethernet + TF Card
+  retrieved: '2026-11-18'
+  notes: >-
+    Not in the report; this is the rest of the reported 'flash: microSD' item. TF card = microSD. LilyGO's
+    README (https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series) marks SDCard ✅ for T-ETH-Lite-ESP32S3.
+    Also unrecorded but unreported: 8MB PSRAM (could go in compute.ram_notes).
+
+- entry: microboards/t-eth-lite
+  field: io.max_outputs
+  current: 4
+  status: already-fixed
+  owner: stream2
+  source: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
+  retrieved: '2026-11-18'
+  notes: >-
+    The report said the comment cited classic-ESP32 RMT. The value is now 4 with the comment "ESP32-S3: 4 RMT
+    TX channels", and a sources entry quotes "Four TX channels". Fixed in 2676feb.
+
+- entry: microboards/t-eth-lite
+  field: name
+  current: T-ETH-Lite
+  status: already-fixed
+  owner: stream2
+  source: https://lilygo.cc/products/t-eth-lite
+  quote: T-ETH-Lite ESP32 S3
+  retrieved: '2026-11-18'
+  notes: The report flagged a lowercase name. Fixed in 2676feb; the name now matches LilyGO's spelling.
+
+# ---------------------------------------------------------------- microboards: orange-pi-lts
+
+- entry: microboards/orange-pi-lts
+  field: name
+  current: Orange Pi Zero LTS
+  status: already-fixed
+  owner: stream2
+  source: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+  quote: Orange Pi Zero LTS uses the AllWinner H3 SoC
+  retrieved: '2026-11-18'
+  notes: Renamed in 2676feb. The rename left the alias list repeating the name; see the next record.
+
+- entry: microboards/orange-pi-lts
+  field: aliases
+  current: [Orange Pi Zero LTS]
+  value: null
+  status: other-owner
+  owner: stream4
+  source: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+  retrieved: '2026-11-18'
+  notes: >-
+    Not in the report; it follows from the rename. The only alias is now identical to `name`. Remove it, or
+    replace it with the old sheet name 'Orange Pi LTS' if that should stay findable. Its sources.aliases
+    entry goes with it.
+
+- entry: microboards/orange-pi-lts
+  field: connectivity.wifi
+  current: ['2.4GHz']
+  status: already-fixed
+  owner: stream2
+  source: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+  quote: Onboard WiFi XR819, IEEE 802.11 b/g/n
+  retrieved: '2026-11-18'
+  notes: The report said the entry listed 5GHz. Fixed in 2676feb.
+
+- entry: microboards/orange-pi-lts
+  field: compute.soc
+  current: Allwinner H2+
+  value: Allwinner H3
+  status: apply
+  owner: stream2
+  source: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+  quote: Orange Pi Zero LTS uses the AllWinner H3 SoC, and has 256MB/512MB DDR3 SDRAM
+  retrieved: '2026-11-18'
+  notes: >-
+    The board has shipped with both SoCs. The maker's spec table also says "CPU H3 Quad-core Cortex-A7".
+    Launch coverage (CNX Software, 2019-07-20, Zero LTS v1.5:
+    https://www.cnx-software.com/2019/07/20/orange-pi-zero-lts-allwinner-h2-sbc-gets-more-efficient-and-cooler/)
+    lists "Allwinner H2+ quad-core Cortex A7 processor @ 1.2 GHz". A reseller notice
+    (https://www.fabtolab.com/boards/orange-pi-zero) reads "Now we are unable to provide the version of
+    Orange Pi Zero Lts 256(H2), ... Orange Pi Zero Lts 512(H2) ... In order to ensure the supply of the board,
+    we will replace H3 with H2", meaning the H3 replaced the H2+ during a shortage. The board this entry prices
+    and marks active is the H3 one; its datasheet link is already the H3 datasheet.
+    Suggestion: add a technical_notes line saying the early boards (2019 launch) have the H2+.
+    clock_speed 1.2GHz is the H2+ figure from launch coverage; the maker's page states no clock. Leave it as is.
+
+# ---------------------------------------------------------------- microboards: orange-pi-pc-plus
+
+- entry: microboards/orange-pi-pc-plus
+  field: connectivity.wifi
+  current: ['2.4GHz']
+  status: already-fixed
+  owner: stream2
+  source: https://www.cnx-software.com/2016/06/09/orange-pi-pc-plus-quad-core-development-board-with-1gb-ram-8gb-emmc-flash-sells-for-20/
+  retrieved: '2026-11-18'
+  notes: >-
+    The report said the entry listed 5GHz. Fixed in 2676feb; the entry's sources cite CNX ("802.11 b/g/n
+    Wi-Fi"). The maker's page names no Wi-Fi chip in its text. Not re-fetched.
+
+- entry: microboards/orange-pi-pc-plus
+  field: compute.flash
+  current: 8GB
+  status: already-fixed
+  owner: stream2
+  source: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-PC-Plus.html
+  quote: TF card (Max. 32GB) • 8GB eMMC Flash
+  retrieved: '2026-11-18'
+  notes: >-
+    The report flagged 'flash: microSD'. Now 8GB with flash_notes eMMC and io.storage microSD (2676feb and the
+    microboards migration).
+
+# ---------------------------------------------------------------- microboards: ebyte-nrf-52840
+
+- entry: microboards/ebyte-nrf-52840
+  field: release_year
+  current: 2021
+  value: 2018
+  status: apply
+  owner: stream2
+  source: http://web.archive.org/web/20190605040121/http://ebyte.com/en/new-view-info.aspx?id=378
+  quote: 【nRF52840】BLE SoC Module 2018-08-08
+  retrieved: '2026-11-18'
+  notes: >-
+    This is Ebyte's product-news page (the entry's original link). Its only image is titled
+    "产品动态_E73(2G4M08S1C)_EN" ("product news"), which identifies the module. The live cdebyte.com product
+    page gives no date. Nothing supports 2021.
+
+- entry: microboards/ebyte-nrf-52840
+  field: name
+  current: Ebyte NRF 52840
+  value: E73-2G4M08S1C
+  status: apply
+  owner: stream2
+  source: https://www.cdebyte.com/products/E73-2G4M08S1C
+  quote: E73-2G4M08S1C IoT Solutions Modules nRF52840 ble5.0 SMD 2.4GHz Nordic Wireless Module
+  retrieved: '2026-11-18'
+  notes: >-
+    The entry is pinned to this module (price_source part E73-2G4M08S1C, from the 2018 news item above). The
+    current name also misspells the chip: the maker writes "[IC]： nRF52840", as Nordic does. Module-model
+    names match house style (ESP-01, WT32-ETH01). If the bare model is too cryptic, "Ebyte E73-2G4M08S1C"
+    is fine. The minimum fix is just the spelling, "Ebyte nRF52840". Keep the old name findable (next record).
+
+- entry: microboards/ebyte-nrf-52840
+  field: aliases
+  value: [Ebyte nRF52840]
+  status: other-owner
+  owner: stream4
+  source: https://www.cdebyte.com/products/E73-2G4M08S1C
+  retrieved: '2026-11-18'
+  notes: >-
+    Only needed if the rename above is applied. Name matching ignores case, spaces and punctuation, so this
+    alias also catches the old spelling "Ebyte NRF 52840". No other entry links to this board by name;
+    pattern-drivers/bekonix.yaml mentions "Ebyte" only in plain text.
+
+# ---------------------------------------------------------------- microboards: Raspberry Pi
+
+- entry: microboards/raspberry-pi-4-model-b
+  field: compute.ram
+  current: [1GB, 2GB, 3GB, 4GB, 8GB]
+  status: already-fixed
+  owner: stream2
+  source: https://pip-assets.raspberrypi.com/categories/545-raspberry-pi-4-model-b/documents/RP-008344-DS-7-raspberry-pi-4-product-brief.pdf
+  quote: 1GB, 2GB, 3GB, 4GB or 8GB LPDDR4 (depending on model)
+  retrieved: '2026-11-18'
+  notes: >-
+    The report said 8GB and 3GB were missing. Fixed in 2676feb. Checked against the brief dated "Published
+    October 2026"; datasheets.raspberrypi.com/rpi4/raspberry-pi-4-product-brief.pdf redirects to it.
+
+- entry: microboards/raspberry-pi-1-model-b
+  field: connectivity.usb
+  current: OTG x4
+  value: '2.0 x4'
+  status: apply
+  owner: stream2
+  source: https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/
+  quote: It comes with 4 USB 2.0 ports, compared to 2 on the Model B.
+  retrieved: '2026-11-18'
+  notes: >-
+    Raspberry Pi's USB documentation
+    (https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/usb-bus-on-raspberry-pi.adoc)
+    says "Raspberry Pi 1 Model B+, Raspberry Pi 2, and Raspberry Pi 3 boards offer four USB 2.0 ports.
+    Raspberry Pi Zero boards have one micro USB on-the-go (OTG) port." These are host ports behind the
+    on-board hub, not OTG. The value uses the schema's grammar ("OTG x1, 2.0 x2" in _example.yaml).
+
+- entry: microboards/raspberry-pi-2-model-b
+  field: connectivity.usb
+  current: OTG x4
+  value: '2.0 x4'
+  status: apply
+  owner: stream2
+  source: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/usb-bus-on-raspberry-pi.adoc
+  quote: Raspberry Pi 1 Model B+, Raspberry Pi 2, and Raspberry Pi 3 boards offer four USB 2.0 ports.
+  retrieved: '2026-11-18'
+  notes: The product page (https://www.raspberrypi.com/products/raspberry-pi-2-model-b/) says only "4 USB ports".
+
+- entry: microboards/raspberry-pi-2-model-b-v1-2
+  field: connectivity.usb
+  current: OTG x4
+  value: '2.0 x4'
+  status: apply
+  owner: stream2
+  source: https://www.farnell.com/datasheets/2163186.pdf
+  quote: 4 USB 2.0 ports
+  retrieved: '2026-11-18'
+  notes: >-
+    Farnell/element14's "Raspberry Pi2 Model B v1.2" datasheet. Raspberry Pi's USB documentation agrees
+    (see the raspberry-pi-2-model-b record).
+
+- entry: microboards/raspberry-pi-3-model-b
+  field: connectivity.usb
+  current: OTG x4
+  value: '2.0 x4'
+  status: apply
+  owner: stream2
+  source: https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/
+  quote: 4 USB 2.0 ports
+  retrieved: '2026-11-18'
+  notes: This entry is the 3B+. Raspberry Pi's USB documentation agrees (see the raspberry-pi-1-model-b record).
+
+- entry: microboards/raspberry-pi-4-model-b
+  field: connectivity.usb
+  current: OTG x2, 3.0 x2
+  value: '2.0 x2, 3.0 x2'
+  status: apply
+  owner: stream2
+  source: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/usb-bus-on-raspberry-pi.adoc
+  quote: Raspberry Pi 4 offers two USB 3.0 ports and two USB 2.0 ports which are connected to a VL805 USB controller.
+  retrieved: '2026-11-18'
+  notes: >-
+    Not in the report; it is the same error as the four records above. The product brief agrees ("2 × USB
+    3.0 ports" / "2 × USB 2.0 ports"). The same documentation page says the SoC's own controller "is
+    located on the USB type C port and is disabled by default". If that port should count, use
+    'OTG x1, 2.0 x2, 3.0 x2'. The schema's usb description example 'OTG x2, 3.0 x2'
+    (database/_schema/microboard.json) copies this wrong value; update it too.
+
+- entry: microboards/raspberry-pi-2-model-b-v1-2
+  field: release_year
+  value: 2016
+  status: apply
+  owner: stream2
+  source: https://www.farnell.com/datasheets/2163186.pdf
+  quote: It is necessary to update to the latest (October 2016) version of the device firmware and Linux kernel to allow the board to boot up properly.
+  retrieved: '2026-11-18'
+  notes: >-
+    The same datasheet calls it "The new release Raspberry Pi 2 Model B v1.2 board uses BCM2837"; element14
+    was a licensed Pi manufacturer. Raspberry Pi's own pages give no date for v1.2. Press coverage from
+    CNX Software and Hackaday on 2016-11-21 agrees on 2016.
+
+# ---------------------------------------------------------------- microboards: attiny85
+
+- entry: microboards/attiny85
+  field: notes
+  value: Bare 8-pin AVR microcontroller (8-pin PDIP or SOIC, 20-pad QFN/MLF), not a development board.
+  status: apply
+  owner: stream2
+  source: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
+  quote: 8-pin PDIP, 8-pin SOIC, 20-pad QFN/MLF, and 8-pin TSSOP (only ATtiny45/V)
+  retrieved: '2026-11-18'
+  notes: >-
+    The report is right that this is a bare chip, and the right fix is structural. No field can say "not a
+    board". database/microboards/description.md defines the category as "Microcontroller development
+    boards", and there is no category for bare MCUs. The entry does fit the schema (title "DIY MicroBoard")
+    and its fields are correct. This notes line is the minimum change. Moving or dropping the entry is a
+    scope decision for stream2. (TSSOP is ATtiny45 only, hence its absence from the value.)
+
+- entry: microboards/attiny85
+  field: creator.name
+  current: Atmel
+  status: reject
+  owner: stream2
+  source: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
+  quote: © 2013 Atmel Corporation. All rights reserved.
+  retrieved: '2026-11-18'
+  notes: >-
+    CLAUDE.md defines `creator` as the original designer/developer, and Atmel designed the part (datasheet
+    title "Atmel 8-bit AVR Microcontroller with 2/4/8K Bytes In-System Programmable Flash"). Keep Atmel and
+    record today's maker in `manufacturers` (next record). Harmonize with level-converters/tc4427, which has
+    creator Microchip, if the two should follow the same rule.
+
+- entry: microboards/attiny85
+  field: manufacturers
+  value: [Microchip]
+  status: apply
+  owner: stream2
+  source: https://www.microchip.com/en-us/product/ATtiny85
+  quote: 'Status: In Production'
+  retrieved: '2026-11-18'
+  notes: Spelled as level-converters/tc4427's creator ("Microchip"). The entry's price_source is already Microchip Direct.
+
+# ---------------------------------------------------------------- microboards: wt32-eth01
+
+- entry: microboards/wt32-eth01
+  field: creator.name
+  current: Shenzhen Qiming Cloud Co., Ltd
+  value: Shenzhen Qiming Cloud Technology Co., Ltd.
+  status: apply
+  owner: stream2
+  source: https://en.wireless-tag.com/product-item-2.html
+  quote: WT32-ETH01_Shenzhen Qiming Cloud Technology Co., Ltd.
+  retrieved: '2026-11-18'
+  notes: >-
+    The quote is the page title; the logo alt text is the same. The page also uses the English brand: "WT32-ETH01 is an
+    embedded serial-to-Ethernet module based on ESP32 series launched by Wireless-tag Technology Co., Ltd."
+    The V1.4 datasheet (https://img03.71360.com/w3/77q677/20240919/5d6cececc6c26c4578416e5960c038f5.pdf)
+    says "launched by Wireless-Tag Technology Co. Limited". The entry's image credit already says
+    "Wireless-Tag". House style often drops "Co., Ltd" (Shenzhen Xunlong Software, Shenzhen Sunmoon
+    Microelectronics), so "Wireless-Tag" or "Shenzhen Qiming Cloud Technology" are equally valid.
+    The value above is the exact spelling the report asked for. Separately for stream6: creator.page is the
+    dead wireless-tag.com URL that is listed in dead_links; the live page is the source URL above.
+
+# ---------------------------------------------------------------- pixel-decoders: led-strip-driver-module
+
+- entry: pixel-decoders/led-strip-driver-module
+  field: notes
+  current: WS2811 to high-current MOSFET outputs.
+  value: P9813 (clocked CIN/DIN input) to three high-current MOSFET outputs for a 12V RGB strip; cascadable.
+  status: apply
+  owner: stream2
+  source: https://www.diymore.cc/products/full-color-rgb-led-strip-driver-module-shield-for-arduino-stm32-avr-v1-0
+  quote: Based on a P9813; Can be cascaded all lights of the drive module
+  retrieved: '2026-11-18'
+  notes: >-
+    Report confirmed. The AliExpress item itself is captcha-blocked. A 2025-01-31 capture
+    (https://web.archive.org/web/20250131114801/https://www.aliexpress.com/item/32786272573.html?gatewayAdapt=4itemAdapt)
+    gives og:title "For Arduino R3 For MCU System LED Strip Driver Module v1.0 For Arduino STM32 AVR 12V DC 5V
+    MCU Full Color RGB Board One", plus the listing photos. The photos show the chip marked "P9813", an input
+    header labelled "GND VCC DIN CIN", and the silkscreen "LED Strip Driver" / "www.diymore.cc". The diymore store
+    sells the same board with the same photos, and its text (read from the store's product JSON) also has
+    "External power supply is 12VDC". Bot'n Roll sells it too
+    (https://www.botnroll.com/en/controllers/4256-rgb-led-strip-driver-module-shield-for-arduino-stm32.html):
+    "RGB LED Ribbon Controller P9813 is a small board capable of controlling 5 meter RGB LED ribbon using
+    only two digital pins." outputs (3 × pwm, screw terminal) are correct.
+
+- entry: pixel-decoders/led-strip-driver-module
+  field: inputs.protocols
+  value: [P9813]
+  status: other-owner
+  owner: stream4
+  source: https://www.diymore.cc/products/full-color-rgb-led-strip-driver-module-shield-for-arduino-stm32-avr-v1-0
+  quote: Based on a P9813
+  retrieved: '2026-11-18'
+  notes: Currently absent. Resolves to pixel-ics/p9813. Evidence is in the notes record above.
+
+- entry: pixel-decoders/led-strip-driver-module
+  field: related
+  value: [{ type: uses, ref: pixel-ics/p9813 }]
+  status: other-owner
+  owner: stream4
+  source: https://www.diymore.cc/products/full-color-rgb-led-strip-driver-module-shield-for-arduino-stm32-avr-v1-0
+  quote: Based on a P9813
+  retrieved: '2026-11-18'
+  notes: Same pattern as ws2811-mosfetdriver's "uses pixel-ics/ws2811". Optional.
+
+- entry: pixel-decoders/led-strip-driver-module
+  field: creator
+  current: AliExpress
+  value: diymore
+  status: apply
+  owner: stream2
+  source: https://www.diymore.cc/products/full-color-rgb-led-strip-driver-module-shield-for-arduino-stm32-avr-v1-0.js
+  quote: '"vendor":"diymore"'
+  retrieved: '2026-11-18'
+  notes: >-
+    Not in the report; found while identifying the listing. AliExpress is the marketplace, and the listing's
+    store is "Module Fans". The board's silkscreen carries the diymore logo and "www.diymore.cc" (listing
+    photos; inferred from the photos). diymore's own store sells it as "Full Color RGB LED Strip Driver
+    Module Shield for Arduino STM32 AVR V1.0" (SKU 011442, $5.99, available, listed 2018-07-26). For stream6:
+    the maker page could become links.product or a price source.
+
+# ---------------------------------------------------------------- pixel-decoders: ws2811-mosfetdriver
+
+- entry: pixel-decoders/ws2811-mosfetdriver
+  field: outputs.count
+  current: 1
+  status: already-fixed
+  owner: stream2
+  source: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
+  quote: This high-power N-MOSFET module includes a built-in WS2811 addressable driver IC
+  retrieved: '2026-11-18'
+  notes: >-
+    The reported field `max_channels: 3` no longer exists (the outputs migration in 64a0d09). f58a359 set
+    outputs.count 1, with the comment "single N-MOSFET; the 3-channel version is a separate module". The
+    same page says "For a similar product with three N-MOSFETs, see the Addressable Triple N-MOSFET Module."
+
+- entry: pixel-decoders/ws2811-mosfetdriver
+  field: sources.outputs.count.url
+  current: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-module
+  value: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
+  status: other-owner
+  owner: stream4
+  source: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-module
+  quote: Wayback Machine has not archived that URL
+  retrieved: '2026-11-18'
+  notes: >-
+    Not in the report; found while verifying the item above. The URL drops "-output", and the CDX API has no
+    captures of it. The entry's dead_links, images, price_source and sources.inputs.protocols all use the
+    correct URL (the value above).

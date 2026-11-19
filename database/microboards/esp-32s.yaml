@@ -1,7 +1,7 @@
 name: ESP-32S
 release_year: 2016
 creator:
-  name: NodeMCU
+  name: Ai-Thinker
   page: https://www.espressif.com/en/products/socs/esp32
 power:
   gpio_voltage: 3.3V
@@ -36,3 +36,7 @@ sources:
     url: https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf
     retrieved: '2026-11-18'
     notes: "'Compliant with Bluetooth v4.2 BR/EDR and Bluetooth LE'"
+  creator.name:
+    url: https://web.archive.org/web/20210729143054/https://docs.ai-thinker.com/en/esp32-s_development_board
+    retrieved: '2026-11-18'
+    notes: The Nodemcu-32s module is developed by Ai-Thinker Technology.

@@ -22,7 +22,7 @@ connectivity:
   wifi: add-on # USB dongle
   ethernet: 100BASE-TX
   bluetooth: add-on # USB dongle
-  usb: OTG x4
+  usb: 2.0 x4
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/bcm2836/bcm2836-peripherals.pdf
@@ -65,5 +65,9 @@ sources:
   aliases:
     url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
     retrieved: '2026-11-18'
+  connectivity.usb:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/usb-bus-on-raspberry-pi.adoc
+    retrieved: '2026-11-18'
+    notes: Raspberry Pi 1 Model B+, Raspberry Pi 2, and Raspberry Pi 3 boards offer four USB 2.0 ports.
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

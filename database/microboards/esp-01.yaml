@@ -1,5 +1,7 @@
 name: ESP-01
 release_year: 2014
+creator:
+  name: Ai-Thinker
 power:
   gpio_voltage: 3.3V
 compute:
@@ -40,3 +42,7 @@ sources:
     url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
     retrieved: '2026-11-18'
     notes: ESP8266EX is a Wi-Fi SoC; no Bluetooth
+  creator.name:
+    url: https://docs.ai-thinker.com/en/esp8266
+    retrieved: '2026-11-18'
+    notes: The ESP8266 series modules are low-power UART-WiFi modules developed by Ai-Thinker Co.,Ltd. based on Espressif's ESP8266EX.

@@ -1,5 +1,6 @@
 name: Raspberry Pi 2 Model B v1.2
 status: end-of-life
+release_year: 2016
 creator:
   name: Raspberry Pi Foundation
   page: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
@@ -19,7 +20,7 @@ connectivity:
   wifi: add-on # USB dongle
   ethernet: 100BASE-TX
   bluetooth: add-on # USB dongle
-  usb: OTG x4
+  usb: 2.0 x4
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/bcm2836/bcm2836-peripherals.pdf
@@ -59,5 +60,13 @@ sources:
     url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
     retrieved: '2026-11-18'
     notes: revisions 1.1 and 1.2 have reached end of life
+  connectivity.usb:
+    url: https://www.farnell.com/datasheets/2163186.pdf
+    retrieved: '2026-11-18'
+    notes: 4 USB 2.0 ports
+  release_year:
+    url: https://www.farnell.com/datasheets/2163186.pdf
+    retrieved: '2026-11-18'
+    notes: It is necessary to update to the latest (October 2016) version of the device firmware and Linux kernel to allow the board to boot up properly.
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

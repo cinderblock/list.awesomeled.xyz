@@ -30,7 +30,7 @@ connectivity:
     - 5GHz
   ethernet: 1000BASE-T
   bluetooth: '5.0'
-  usb: OTG x2, 3.0 x2
+  usb: 2.0 x2, 3.0 x2
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-datasheet.pdf
@@ -76,3 +76,7 @@ sources:
   compute.ram:
     url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-product-brief.pdf
     retrieved: '2026-11-18'
+  connectivity.usb:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/usb-bus-on-raspberry-pi.adoc
+    retrieved: '2026-11-18'
+    notes: Raspberry Pi 4 offers two USB 3.0 ports and two USB 2.0 ports which are connected to a VL805 USB controller.

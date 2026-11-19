@@ -24,7 +24,7 @@ connectivity:
   wifi: add-on # USB dongle
   ethernet: 100BASE-TX
   bluetooth: add-on # USB dongle
-  usb: OTG x4
+  usb: 2.0 x4
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf
@@ -54,5 +54,9 @@ sources:
     url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
     retrieved: '2026-11-18'
     notes: official Raspberry Pi documentation source; section heading '== Raspberry Pi Model A+ and B+'
+  connectivity.usb:
+    url: https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/
+    retrieved: '2026-11-18'
+    notes: It comes with 4 USB 2.0 ports, compared to 2 on the Model B.
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

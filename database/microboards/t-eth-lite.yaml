@@ -24,6 +24,7 @@ images:
     credit: LilyGO
 io:
   max_outputs: 4 # ESP32-S3: 4 RMT TX channels
+  storage: microSD
 price: 14.88
 price_source:
   notes: ESP32-S3 variant [H674]; classic ESP32 variant [H673] $13.30; PoE shield [H675] $11.43 extra
@@ -59,3 +60,7 @@ sources:
     url: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
     retrieved: '2026-11-18'
     notes: "RMT: 'Four TX channels'"
+  io.storage:
+    url: https://lilygo.cc/products/t-eth-lite
+    retrieved: '2026-11-18'
+    notes: Onboard Ethernet + TF Card

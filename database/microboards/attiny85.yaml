@@ -3,6 +3,9 @@ status: active
 creator:
   name: Atmel
   page: https://www.microchip.com/en-us/product/ATtiny85
+manufacturers:
+  - Microchip
+notes: Bare 8-pin AVR microcontroller (8-pin PDIP or SOIC, 20-pad QFN/MLF), not a development board.
 power:
   voltage:
     max: 5V
@@ -49,3 +52,11 @@ sources:
     url: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
     retrieved: '2026-11-18'
     notes: speed grades up to 20 MHz at 4.5-5.5 V
+  notes:
+    url: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: 8-pin PDIP, 8-pin SOIC, 20-pad QFN/MLF, and 8-pin TSSOP (only ATtiny45/V)
+  manufacturers:
+    url: https://www.microchip.com/en-us/product/ATtiny85
+    retrieved: '2026-11-18'
+    notes: 'Status: In Production'

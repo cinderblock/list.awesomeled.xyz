@@ -1,6 +1,6 @@
-name: Ebyte NRF 52840
+name: E73-2G4M08S1C
 status: active
-release_year: 2021
+release_year: 2018
 creator:
   name: Ebyte
   page: https://www.cdebyte.com/products/E73-2G4M08S1C
@@ -24,3 +24,11 @@ sources:
     url: https://www.ebyteiot.com/products/2-4ghz-ble-mesh-small-smd-e73-2g4m08s1c-nordic-nrf52840-module-small-size-ble-5-0
     retrieved: '2026-11-18'
     notes: "E73-2G4M08S1C available at Ebyte's official store, $6.54"
+  release_year:
+    url: http://web.archive.org/web/20190605040121/http://ebyte.com/en/new-view-info.aspx?id=378
+    retrieved: '2026-11-18'
+    notes: 【nRF52840】BLE SoC Module 2018-08-08
+  name:
+    url: https://www.cdebyte.com/products/E73-2G4M08S1C
+    retrieved: '2026-11-18'
+    notes: E73-2G4M08S1C IoT Solutions Modules nRF52840 ble5.0 SMD 2.4GHz Nordic Wireless Module
