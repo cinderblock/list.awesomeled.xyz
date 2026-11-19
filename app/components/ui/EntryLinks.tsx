@@ -172,31 +172,18 @@ export function NameLinkList({
   names: string[];
   links: Record<string, LinkItem[]>;
 }) {
-  return (
-    <div className="entry-related">
-      {names.map((name, i) => {
-        const targets = links[name] ?? [];
-        if (targets.length === 0) {
-          return (
-            <span key={i} className="entry-related-link entry-related-link--plain">
-              {name}
-            </span>
-          );
-        }
-        return targets.map((t, j) => (
-          <EntryLinkPill
-            key={`${i}-${j}`}
-            item={{
-              ...t,
-              name:
-                targets.length > 1
-                  ? `${name} (${categoryById.get(t.category ?? '')?.name ?? t.category})`
-                  : name,
-              via: undefined,
-            }}
-          />
-        ));
-      })}
-    </div>
-  );
+  const items: LinkItem[] = names.flatMap((name) => {
+    const targets = links[name] ?? [];
+    if (targets.length === 0) return [{ name }];
+    return targets.map((t) => ({
+      ...t,
+      name:
+        targets.length > 1
+          ? `${name} (${categoryById.get(t.category ?? '')?.name ?? t.category})`
+          : name,
+      via: undefined,
+    }));
+  });
+  // Long vendor lists (PixLite Mk3 names 99 pixel types) collapse like link rows
+  return <Pills items={items} />;
 }
