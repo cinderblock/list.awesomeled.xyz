@@ -97,6 +97,17 @@ source recorded where the schema allows. Part of
 - [microboards + level converters](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/thread:delegated-task:command%3Amcp%3Ad77378e9-1111-4e9e-98df-d008601d2b3d%3Adelegate-task%3A9e2d71b7-95d4-4fb5-8eea-28e81908584a)
 - [connectors + commercial + diffusers](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/thread:delegated-task:command%3Amcp%3Ad77378e9-1111-4e9e-98df-d008601d2b3d%3Adelegate-task%3A869f8115-e2aa-4ab6-99a1-e4963f1fc98c)
 
+### New-entry agents (delegated 2026-11-18, step 9)
+
+Brief: `.research/NEW-ENTRIES.md`. Output: `.research/new/<category>/<slug>.yaml` (staging, git-ignored).
+
+- [pixel ICs A](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/thread:delegated-task:command%3Amcp%3Ad77378e9-1111-4e9e-98df-d008601d2b3d%3Adelegate-task%3A8e9e21de-4727-497a-a5ce-af2186c5af81): WS2818, SM16704, TM1812, INK1003, WS2803, UCS2912, P9883, SM16804, LPD8803, SM16714, MBI6023, SM16803
+- [pixel ICs B](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/thread:delegated-task:command%3Amcp%3Ad77378e9-1111-4e9e-98df-d008601d2b3d%3Adelegate-task%3Aadbd4739-9927-44be-88af-141d4411141c): UCS5603, TM1903, UCS1912, UCS2909, UCS7604, TM1934, SM16726, INK1002, TM1824, LPD1886, UCS6909, UCS1909, FW1906, UCS7804
+- [boards, buffers, software, connectors](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/thread:delegated-task:command%3Amcp%3Ad77378e9-1111-4e9e-98df-d008601d2b3d%3Adelegate-task%3A6b9a1fdc-f773-4695-8dd0-8f5378a1625a): Wemos D1 Mini / Pro, Pi Zero 2 W, Pi 3 B, Pi 5, PocketBeagle 2, BeagleBone Green, Orange Pi Zero; SN74HCT245, SN74HCT125, TXB0104, MAX3485; Glediator; NeoPixelBus, ESPAsyncE131; xConnect, PCB screw terminal block, XLR 4
+- [pixel ICs C](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/thread:delegated-task:command%3Amcp%3Ad77378e9-1111-4e9e-98df-d008601d2b3d%3Adelegate-task%3Ae6c16bb6-5247-48ab-a7ad-67c80df963de): D705 (D707/D708), LPD1101, LB1908, P9412, DM412, UCS6912, GS8304, NS107, SM16711, TLS3002, TX1818, WS2808
+- [pixel ICs D](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/thread:delegated-task:command%3Amcp%3Ad77378e9-1111-4e9e-98df-d008601d2b3d%3Adelegate-task%3Ad3c7260f-219e-4278-ae47-7b25167e79e9): GE8822 (GE8812/GE1603), MBI6024, MBI6120, UCS2603, WS2821, WS2822, UCS512, DMX512-D, APA101, CY3005, GW6205, ICND2110, LD1510, LPD1882, P943, SK6851, SM16824, TM1913, Adafruit Pixie
+- [software](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/thread:delegated-task:command%3Amcp%3Ad77378e9-1111-4e9e-98df-d008601d2b3d%3Adelegate-task%3A234fd594-0b18-46c2-92eb-ae81ea32cf4f): grandMA, Light-O-Rama, Light Show Pro, LightFactory, vvvv, WATCHOUT, FreeStyler, HLS, Pharos, POET, OLA, ESPHome, MoonLight, CircuitPython, MicroPython, Tasmota, ESPEasy, the fastled-webservers; aliases for MagicQ, Mapio, ArKaos, AllPixMatrix, MADRIX (to `.research/out/software-aliases.json`)
+
 ## Findings / gotchas
 
 - Controllers' pixel-IC list (`outputs.protocols`) is filled on only 7/135 entries; `software.firmware` 20/135; `works_with` 5/135; `outputs.driver.IC` 0/135. `outputs.connector` is a ref on 81 entries, free text on ~40 (ambiguous: "Screw", "JST", "Phoenix Screw/RJ45").
