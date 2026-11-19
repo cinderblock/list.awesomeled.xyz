@@ -8,6 +8,8 @@ power:
     min: 5V
     max: 5V
   gpio_voltage: 3.3V
+aliases:
+  - Raspberry Pi Zero
 compute:
   soc: BCM2835
   cpu: ARM11
@@ -46,5 +48,9 @@ sources:
     url: https://www.raspberrypi.com/products/raspberry-pi-zero/
     retrieved: '2026-11-18'
     notes: '"will remain in production until at least January 2030"'
+  aliases:
+    url: https://www.raspberrypi.com/products/raspberry-pi-zero/
+    retrieved: '2026-11-18'
+    notes: "Product page 'Raspberry Pi Zero' (specs: 'CSI camera connector (v1.3 only)'); v1.3 has been the Zero in production since May 2016"
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

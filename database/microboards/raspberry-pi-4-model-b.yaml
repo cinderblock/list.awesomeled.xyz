@@ -11,6 +11,7 @@ power:
   gpio_voltage: 3.3V
 aliases:
   - Raspberry Pi 4B
+  - Raspberry Pi 4
 compute:
   soc: BCM2711
   cpu: 4× ARM Cortex-A72
@@ -63,8 +64,11 @@ sources:
     retrieved: '2026-11-18'
     notes: '"will remain in production until at least January 2034"'
   aliases:
-    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
-    retrieved: '2026-11-18'
+    - url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+      retrieved: '2026-11-18'
+    - url: https://www.raspberrypi.com/news/raspberry-pi-4-on-sale-now-from-35/
+      retrieved: '2026-11-18'
+      notes: "'Raspberry Pi 4 is now on sale, starting at $35', under the heading 'Raspberry Pi 4 Model B'"
   compute.clock_speed:
     url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-product-brief.pdf
     retrieved: '2026-11-18'

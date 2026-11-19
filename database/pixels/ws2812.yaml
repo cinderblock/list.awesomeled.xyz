@@ -5,6 +5,7 @@ creator: WorldSemi
 notes: Individually addressable RGB pixel; cheap and everywhere
 aliases:
   - WS2812S
+  - NeoPixel
 color:
   order: GRB
   brightness_bits: 8
@@ -74,9 +75,12 @@ sources:
     retrieved: '2026-11-18'
     notes: WorldSemi WS2812B Ver. No. V5 (new version 2019-02-19), general description
   aliases:
-    url: https://web.archive.org/web/20180101003828/http://www.world-semi.com:80/Certifications/details-115-4.html
-    retrieved: '2026-11-18'
-    notes: "WorldSemi product page: the part number of the original 6-pin WS2812 (the YAML's WS2812.pdf is that 6-pin part). Reviewer may prefer it under variants[]."
+    - url: https://web.archive.org/web/20180101003828/http://www.world-semi.com:80/Certifications/details-115-4.html
+      retrieved: '2026-11-18'
+      notes: "WorldSemi product page: the part number of the original 6-pin WS2812 (the YAML's WS2812.pdf is that 6-pin part). Reviewer may prefer it under variants[]."
+    - url: https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels
+      retrieved: '2026-11-18'
+      notes: "Adafruit's NeoPixel guide: 'NeoPixel is Adafruit's brand for individually-addressable RGB color pixels and strips based on the WS2812, WS2811 and SK6812 LED/drivers'"
   status:
     url: https://www.lcsc.com/product-detail/C114586.html
     retrieved: '2026-11-18'

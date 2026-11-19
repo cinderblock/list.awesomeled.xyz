@@ -5,6 +5,7 @@ creator: APA Electronics
 notes: Fast refresh, fast PWM, except extra 5 bits PWM at 400Hz
 aliases:
   - APA-102
+  - DotStar
 color:
   order: BGR
   brightness_bits: 8+5
@@ -70,9 +71,12 @@ sources:
     retrieved: '2026-11-18'
     notes: The YAML's datasheet. It is an image-only Shiji Lighting / iPixel LED sheet that is actually titled 'APA102C' (general description mentions 'APA102 with two-output WAY'). Page 3, '(1).cascading data structure' diagram.
   aliases:
-    url: https://web.archive.org/web/20170808203517/http://neon-world.com:80/en/product_detail.php?cid=59&id=114
-    retrieved: '2026-11-18'
-    notes: APA Electronic Co. (neon-world.com) product page, Wayback capture 2017-08-08. Maker's own spelling; resolves anyway through punctuation-insensitive matching, so this alias is cosmetic.
+    - url: https://web.archive.org/web/20170808203517/http://neon-world.com:80/en/product_detail.php?cid=59&id=114
+      retrieved: '2026-11-18'
+      notes: APA Electronic Co. (neon-world.com) product page, Wayback capture 2017-08-08. Maker's own spelling; resolves anyway through punctuation-insensitive matching, so this alias is cosmetic.
+    - url: https://learn.adafruit.com/adafruit-sparkle-motion/dotstar-apa102-leds
+      retrieved: '2026-11-18'
+      notes: "'4-wire RGB LEDs commonly known as APA102-compatible (DotStar, in Adafruit jargon)'"
 technical_notes:
   - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/
   - Extra 5-bit brightness control is PWM-based, not current control
