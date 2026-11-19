@@ -63,3 +63,4 @@ sources:
     retrieved: '2026-11-18'
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'
+  - Its Gigabit Ethernet runs over USB 2.0, so throughput tops out around 300 Mbps
