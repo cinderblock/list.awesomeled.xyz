@@ -91,6 +91,8 @@ export const IGNORED_COMMITS = new Set([
   'f92675844c3c7a32b799dea0760bf620ea53ff89', // sheet-parity: restore more sheet values the import lost (28)
   'd5f86cd5f5e66092311965397ae2384c8dfd3be5', // price comments -> price_source (40)
   '3575aabbe87ca8955e2bded24b3925721644aae6', // data-freshness: Microcyb link live again (1)
+  '51b4e0768f715e8fb90f611fdc01aa1e9849374c', // data-freshness: diffusive-material link fixes (3)
+  '6106eeb4e1c050d83afdd2c84def90588787a330', // data-freshness: controllers f–k dead-link re-checks (2)
 ]);
 
 /**
