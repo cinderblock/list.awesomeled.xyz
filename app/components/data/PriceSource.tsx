@@ -4,6 +4,7 @@ import { formatPriceText, parsePrice } from '~/lib/currency';
 import {
   type PriceSource,
   PRICE_STALE_MONTHS,
+  isNoLongerSold,
   isPriceStale,
   sourceLabel,
 } from '~/lib/price-source';
@@ -12,18 +13,25 @@ import {
  * "as of 2026-11-18 · LCSC C155753" under a price on the entry page, linking
  * the source when known. Flags prices older than PRICE_STALE_MONTHS once
  * mounted (staleness depends on the viewer's clock, not the build's).
+ * Discontinued products read "last list price" instead and are never stale.
  */
-export function PriceAsOf({ source }: { source: PriceSource | null }) {
+export function PriceAsOf({ source, status }: { source: PriceSource | null; status?: unknown }) {
   const now = useNow();
+  const ended = isNoLongerSold(status);
   if (!source) {
-    return <span className="price-as-of price-as-of--unknown">price date not recorded</span>;
+    return (
+      <span className="price-as-of price-as-of--unknown">
+        {ended ? 'last list price; ' : ''}price date not recorded
+      </span>
+    );
   }
   const label = sourceLabel(source);
-  const stale = isPriceStale(source, now);
+  const stale = isPriceStale(source, now, status);
   return (
     <span className={`price-as-of${stale ? ' price-as-of--stale' : ''}`}>
       {stale && <History size={12} aria-hidden="true" className="price-as-of-icon" />}
-      as of <time dateTime={source.retrieved}>{source.retrieved}</time>
+      {ended ? 'last list price, ' : ''}as of{' '}
+      <time dateTime={source.retrieved}>{source.retrieved}</time>
       {label && (
         <>
           {' · '}
@@ -46,9 +54,15 @@ export function PriceAsOf({ source }: { source: PriceSource | null }) {
  * Small clock mark before a table price that is older than
  * PRICE_STALE_MONTHS. Renders nothing on the server / first paint.
  */
-export function PriceStaleMark({ source }: { source: PriceSource | null }) {
+export function PriceStaleMark({
+  source,
+  status,
+}: {
+  source: PriceSource | null;
+  status?: unknown;
+}) {
   const now = useNow();
-  if (!isPriceStale(source, now)) return null;
+  if (!isPriceStale(source, now, status)) return null;
   return (
     <span className="price-stale-mark">
       <History size={11} aria-hidden="true" />
@@ -72,7 +86,15 @@ function priceText(v: unknown): string | null {
  * tiers (`[{qty, price, sku}]`) or named options (`[{name, price, pixels}]`),
  * followed by the "as of" provenance line.
  */
-export function PriceDetail({ value, source }: { value: unknown; source: PriceSource | null }) {
+export function PriceDetail({
+  value,
+  source,
+  status,
+}: {
+  value: unknown;
+  source: PriceSource | null;
+  status?: unknown;
+}) {
   let body: React.ReactNode;
   if (Array.isArray(value)) {
     body = (
@@ -110,7 +132,7 @@ export function PriceDetail({ value, source }: { value: unknown; source: PriceSo
   return (
     <div className="price-detail">
       {body}
-      <PriceAsOf source={source} />
+      <PriceAsOf source={source} status={status} />
     </div>
   );
 }

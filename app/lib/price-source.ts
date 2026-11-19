@@ -53,9 +53,17 @@ export function priceAgeMonths(source: PriceSource, now: number): number | null 
   return Math.floor((now - d.getTime()) / (30.44 * 86_400_000));
 }
 
-/** True when the price is older than PRICE_STALE_MONTHS. False when `now` is 0 (SSR). */
-export function isPriceStale(source: PriceSource | null, now: number): boolean {
-  if (!source || now === 0) return false;
+/** Discontinued / end-of-life: the recorded price is a last list price, not a live one. */
+export function isNoLongerSold(status: unknown): boolean {
+  return status === 'discontinued' || status === 'end-of-life';
+}
+
+/**
+ * True when the price is older than PRICE_STALE_MONTHS. False when `now` is 0
+ * (SSR), and for products no longer sold (their price can't be refreshed).
+ */
+export function isPriceStale(source: PriceSource | null, now: number, status?: unknown): boolean {
+  if (!source || now === 0 || isNoLongerSold(status)) return false;
   const age = priceAgeMonths(source, now);
   return age != null && age >= PRICE_STALE_MONTHS;
 }

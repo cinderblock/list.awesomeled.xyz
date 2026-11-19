@@ -573,6 +573,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               priceSource={getPriceSource(entry)}
               nameLinks={nameLinks}
               sources={fieldSources}
+              status={status}
             />
           </Section>
         )}
@@ -678,6 +679,7 @@ function KeyValueGrid({
   nameLinks = {},
   sources = {},
   pathPrefix,
+  status,
 }: {
   entries: [string, unknown][];
   categoryPath: string;
@@ -690,6 +692,7 @@ function KeyValueGrid({
   sources?: Record<string, FieldSource | FieldSource[]>;
   /** Dotted path of the group these entries sit in ("outputs"), for nameLinks/sources lookup */
   pathPrefix?: string;
+  status?: string | null;
 }) {
   const ctx: FormatContext = {
     categoryPath,
@@ -705,7 +708,7 @@ function KeyValueGrid({
           <dt className="detail-key">{key.replace(/_/g, ' ')}</dt>
           <dd className="detail-value">
             {key === 'price' && priceSource !== undefined ? (
-              <PriceDetail value={value} source={priceSource} />
+              <PriceDetail value={value} source={priceSource} status={status} />
             ) : (
               formatValue(key, value, ctx, pathPrefix ? `${pathPrefix}.${key}` : key)
             )}

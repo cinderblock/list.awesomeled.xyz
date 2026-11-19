@@ -255,7 +255,7 @@ function formatPrice(v: unknown, item?: Record<string, unknown>) {
   const hasCents = parsed.amount % 1 !== 0;
   const rendered = (
     <span className="tabular-nums">
-      {item && <PriceStaleMark source={getPriceSource(item)} />}
+      {item && <PriceStaleMark source={getPriceSource(item)} status={item.status} />}
       {prefix}
       {formatPriceText(parsed, hasCents)}
       {!hasCents && <span style={{ visibility: 'hidden' }}>.00</span>}
