@@ -2,7 +2,7 @@ name: PocketBeagle
 release_year: 2017
 creator:
   name: Beagleboard.org
-  page: http://beagleboard.org/pocket
+  page: https://www.beagleboard.org/boards/pocketbeagle-original
 power:
   voltage:
     min: 5V
