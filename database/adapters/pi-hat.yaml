@@ -1,20 +1,29 @@
-name: Pi Hat
+name: Raspberry Pi Pixel HAT (Dual Output)
 status: discontinued
 creator:
   name: Microcyb
   url: http://microcyb.com/
-notes: Phoenix Screw
+notes: Two-output pixel HAT for a Raspberry Pi running FPP (RPIWS281X driver, single-wire pixels), with a data level amplifier on each output; it powers the Pi from the 5 V or 12 V pixel supply. "Over 512" pixels per output, 1024 in total at 40 fps. Listed as "Pi Hat" in the original spreadsheet, whose row was shifted (its "3200" and "Phoenix Screw" don't fit this product); the connector type isn't published.
 outputs:
   count: 2
+  clocked: false
+  driver:
+    buffered: true # data level amplifier per output
+  pixels:
+    max_per_output: 512 # "over 512" each, 1024 total at 40 fps
+power:
+  voltage:
+    min: 5
+    max: 12
 dead_links:
   - url: https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
     archive: https://web.archive.org/web/20250716105223/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
     checked: '2026-11-18'
+diy_or_ots: OTS
 images:
   - file: pi-hat.webp
     source: https://web.archive.org/web/20220717054556/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
     credit: Microcyb
-links: {}
 parent: Raspberry Pi Zero / Zero W (also Pi 3, Pi 4)
 price: 28.99
 price_source:
