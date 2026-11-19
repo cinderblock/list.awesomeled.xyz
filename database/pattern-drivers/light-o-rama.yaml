@@ -1,0 +1,66 @@
+name: Light-O-Rama
+status: active
+creator: Light-O-Rama
+notes: Light-O-Rama's ShowTime Sequencing Suite (S6) for holiday and animated light shows - Sequencer, Control Panel with Show Player, Hardware Utility and Cue List Player. Drives Light-O-Rama controllers (including Pixie smart-pixel controllers) over LOR/ELOR networks, and DMX universes over E1.31, Art-Net or a USB DMX adapter. License levels Basic, Advanced and Pro set the limits (1, 999 or 3000 DMX universes; 1, 16 or 16 LOR networks).
+inputs:
+  other:
+    - SMPTE
+  other_notes: SMPTE / Art-Net timecode (Show Player leader/follower, S6.3.10+)
+outputs:
+  protocols:
+    artnet: Output
+    sacn: Output
+    dmx: Output
+  dmx_notes: USB adapter (Open DMX or Enttec Pro) or E1.31, not both at the same time
+  other:
+    - LOR
+  other_notes: LOR / ELOR networks for Light-O-Rama controllers
+aliases:
+  - LOR
+  - ShowTime Sequencing Suite
+  - Light-O-Rama Software Suite
+capabilities:
+  designer: true
+links:
+  url: https://store.lightorama.com/pages/download-software
+platforms:
+  os:
+    - Windows
+sources:
+  status:
+    url: https://store.lightorama.com/pages/download-software
+    retrieved: '2026-11-18'
+    notes: "'ShowTime Sequencing Suite' (aka S6) version 6.6.12, LOR-6.6.12.exe, released August 18, 2026"
+  aliases:
+    - url: https://store.lightorama.com/pages/download-software
+      retrieved: '2026-11-18'
+      notes: "Download page names the software 'ShowTime Sequencing Suite' (aka: S6)"
+    - url: https://www.lightorama.com/help/whats_new.htm
+      retrieved: '2026-11-18'
+      notes: "'Initial production release of the S6 Light-O-Rama Software Suite.'"
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/README.txt
+      retrieved: '2026-11-18'
+      notes: "'LOR' as the sequencer's name: 'xLights imports and exports sequence data from sequencers such as LOR (SE, PE, SS and S5), Vixen2, Vixen 3, LSP, and HLS.' LOR's own site also uses it ('LOR/ELOR Networks', 'LOR store sequences')"
+  notes:
+    url: https://store.lightorama.com/pages/software-license-features
+    retrieved: '2026-11-18'
+    notes: "License table Basic (Free) / Advanced / Pro: 'DMX Universes via E1.31 (sACN)' 1 / 999 / 3000; 'LOR/ELOR Networks Supported' 1 / 16 / 16; programs listed in the What's New notes (Sequencer, Control Panel, Hardware Utility, Show Player, Cue List Player)"
+  inputs.other:
+    url: https://store.lightorama.com/pages/software-license-features
+    retrieved: '2026-11-18'
+    notes: "'Show Player Timecode Leader/Follower {SMPTE/Art-Net} (S6.3.10+ Only)'"
+  outputs.protocols:
+    - url: https://www.lightorama.com/help/art-net-controller.htm
+      retrieved: '2026-11-18'
+      notes: "'On this screen you define a group of DMX universes for a controller that uses the Art-Net protocol.'"
+    - url: https://www.lightorama.com/help/e_31-(sacn)-controller.htm
+      retrieved: '2026-11-18'
+      notes: "'On this screen you define a group of DMX universes for a controller that uses the E1.31 (sACN) protocol.'"
+  outputs.dmx_notes:
+    url: https://store.lightorama.com/pages/software-license-features
+    retrieved: '2026-11-18'
+    notes: "'DMX Universes via USB Adapter (Open DMX or Enttec Pro)'; footnote 'Cannot use both types at the same time. Choose one or the other.'"
+  platforms.os:
+    url: https://store.lightorama.com/pages/download-software
+    retrieved: '2026-11-18'
+    notes: "'Windows 10* / 11 64-bit Operating System'; 'Versions 6.0.0 and later only support Windows 10 and above.'"

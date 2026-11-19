@@ -1,0 +1,65 @@
+name: Tasmota
+status: active
+creator: Theo Arends
+notes: Open-source firmware for ESP8266 and ESP32 smart-home devices - web-UI configuration, OTA updates, timers and rules, and entirely local control over MQTT, HTTP, serial or KNX. Began in January 2016 as Sonoff-MQTT-OTA. Lights include WS2812-type addressable strips (NeoPixelBus; RMT or I2S on ESP32) and SM16716 / MY92x1 bulb drivers; ESP32 builds can take DMX over Art-Net to drive a WS2812 strip or matrix (experimental).
+features: Addressable strips via the WS2812 GPIO component (USE_WS2812, NeoPixelBus); other chip types (SK6812, LC8812, APA106, P9813) need a custom build with USE_WS2812_HARDWARE; Art-Net receive (USE_LIGHT_ARTNET, in the Tasmota32 binaries)
+hardware: ESP8266, ESP32, ESP32-S and ESP32-C3 based devices
+language: C++ # Arduino-framework C/C++
+license: GPL-3.0
+links:
+  repo: https://github.com/arendst/Tasmota
+other_links:
+  - https://tasmota.github.io/docs/
+  - https://tasmota.github.io/docs/ArtNet/
+platforms:
+  - ESP8266
+  - ESP32
+protocols:
+  - Art-Net
+  - MQTT
+  - KNX
+sources:
+  status:
+    url: https://github.com/arendst/Tasmota/releases
+    retrieved: '2026-11-18'
+    notes: Release v16.0.0 published 2026-10-16
+  creator:
+    url: https://tasmota.github.io/docs/About/
+    retrieved: '2026-11-18'
+    notes: "'Tasmota is an open source firmware for Espressif ESP8266, ESP32, ESP32-S or ESP32-C3 chipset based devices created and maintained by Theo Arends.' 'Everything began as Sonoff-MQTT-OTA with a commit on 25th January 2016'"
+  notes:
+    url: https://github.com/arendst/Tasmota
+    retrieved: '2026-11-18'
+    notes: "Repository description: 'Alternative firmware for ESP8266 and ESP32 based devices with easy configuration using webUI, OTA updates, automation using timers or rules, expandability and entirely local control over MQTT, HTTP, Serial or KNX.'"
+  features:
+    url: https://github.com/arendst/Tasmota/blob/development/tasmota/my_user_config.h
+    retrieved: '2026-11-18'
+    notes: "'#define USE_WS2812 // WS2812 Led string using library NeoPixelBus'; 'USE_WS2812_HARDWARE NEO_HW_WS2812 // Hardware type (NEO_HW_WS2812, NEO_HW_WS2812X, NEO_HW_WS2813, NEO_HW_SK6812, NEO_HW_LC8812, NEO_HW_APA106, NEO_HW_P9813)'; USE_WS2812_RMT / USE_WS2812_I2S on ESP32; 'USE_SM16716', 'USE_MY92X1'"
+  license:
+    url: https://github.com/arendst/Tasmota
+    retrieved: '2026-11-18'
+    notes: GPL-3.0 (repository licence)
+  platforms:
+    url: https://tasmota.github.io/docs/About/
+    retrieved: '2026-11-18'
+    notes: ESP8266, ESP32, ESP32-S or ESP32-C3
+  protocols:
+    url: https://tasmota.github.io/docs/ArtNet/
+    retrieved: '2026-11-18'
+    notes: "'This feature included in Tasmota32 precompiled binary but not in ESP8266 builds'; 'It allows to control either a Light, or a WS2812 Matrix/Strip'; 'This feature is experimental'. MQTT and KNX from the repository description"
+  supported_ics:
+    - url: https://tasmota.github.io/docs/Lights/
+      retrieved: '2026-11-18'
+      notes: "Addressable LEDs: 'WS2812 - These are also commonly called Neopixel lights'; 'SK6812 RGBW LEDs are not supported in standard binaries and need custom compiled firmware'; 'SM16716 LEDs, sometimes mislabelled as WS2801'"
+    - url: https://tasmota.github.io/docs/WS2812B-and-WS2813/
+      retrieved: '2026-11-18'
+      notes: "'The newer version of ws2812b is the ws2813b'; NEO_HW_* hardware types from my_user_config.h"
+supported_ics:
+  - WS2812
+  - WS2812B
+  - WS2813
+  - SK6812
+  - LC8812
+  - APA106
+  - P9813
+  - SM16716

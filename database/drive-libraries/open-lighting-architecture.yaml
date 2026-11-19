@@ -1,0 +1,81 @@
+name: Open Lighting Architecture
+status: active
+creator: Simon Newton (Open Lighting Project)
+notes: Framework that distributes DMX512 lighting-control data between network protocols and USB DMX devices - the olad daemon with protocol/device plugins, plus client libraries in C++, Python and (experimental) Java. Runs on ARM boards such as the Raspberry Pi, making a cheap Ethernet-to-DMX gateway, and converts between protocols. Its SPI plugin drives pixel strings directly, with per-port pixel type and DMX start address settable over RDM.
+aliases:
+  - OLA
+features: Protocol conversion (e.g. Art-Net to sACN), DMX-over-IP to DMX512 gateway with a USB DMX interface, SPI pixel output, Fadecandy USB output for WS2811/WS2812 pixels
+hardware: Linux and macOS hosts incl. Raspberry Pi; USB DMX interfaces (Enttec DMX USB Pro / Pro Mk2 / Open DMX USB, DMXking ultraDMX, Robe Universal Interface, Scanlime Fadecandy and others)
+language: C++
+license: LGPL-2.1-or-later AND GPL-2.0-or-later
+links:
+  repo: https://github.com/OpenLightingProject/ola
+other_links:
+  - https://www.openlighting.org/ola/
+  - https://www.openlighting.org/ola/tutorials/ola-on-raspberry-pi/
+platforms:
+  - Linux
+  - macOS
+  - FreeBSD
+  - Raspberry Pi
+protocols:
+  - Art-Net
+  - sACN
+  - ESP Net
+  - KiNET
+  - Open Pixel Control
+  - OSC
+  - Pathport
+  - SandNet
+  - ShowNet
+  - Renard
+  - DMX512
+related:
+  - type: related
+    ref: controllers/fadecandy
+    notes: OLA supports the Scanlime Fadecandy as a USB output device, which drives WS2811/WS2812 pixels
+    source:
+      url: https://www.openlighting.org/ola/
+      retrieved: '2026-11-18'
+      notes: Supported devices list ('Scanlime Fadecandy'); protocol list 'WS2811/WS2812 pixels through Fadecandy'
+sources:
+  status:
+    url: https://github.com/OpenLightingProject/ola
+    retrieved: '2026-11-18'
+    notes: Last tagged release 0.10.9 (2023-02-26); repository still pushed to 2026-10-14
+  creator:
+    url: https://github.com/OpenLightingProject/ola/blob/master/LICENCE
+    retrieved: '2026-11-18'
+    notes: Licence file signed 'Simon Newton 15/7/2005'; repository of the Open Lighting Project
+  notes:
+    url: https://github.com/OpenLightingProject/ola/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: "'The Open Lighting Architecture (OLA) is a framework for controlling entertainment lighting equipment.' 'OLA consists of three parts, the daemon olad, the olad plugins and the client library, libola.' 'With the use of a USB to DMX512 device, OLA can act as a DMX-over-IP to DMX512 gateway.'"
+  aliases:
+    url: https://github.com/OpenLightingProject/ola/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme title 'Open Lighting Architecture - OLA'
+  license:
+    url: https://github.com/OpenLightingProject/ola/blob/master/LICENCE
+    retrieved: '2026-11-18'
+    notes: "'libola and libolacommon are licenced under the LGPLv2.1 (or later)'; 'libolaserver and olad are licenced under the GPL v2 (or later)'"
+  platforms:
+    - url: https://github.com/OpenLightingProject/ola/blob/master/README.md
+      retrieved: '2026-11-18'
+      notes: "Readme: OLA runs on Linux and macOS, and 'some features will also work on Windows'. The openlighting.org support tables add a FreeBSD column"
+    - url: https://www.openlighting.org/ola/tutorials/ola-on-raspberry-pi/
+      retrieved: '2026-11-18'
+      notes: "'This tutorial describes how to get OLA running on the Raspberry Pi.'"
+  protocols:
+    url: https://www.openlighting.org/ola/
+    retrieved: '2026-11-18'
+    notes: 'Protocols: Art-Net (1, 2 and 3), E1.31/sACN, ESP Net, KiNET, Nanoleaf Aurora, Open Pixel Control, Open Sound Control, Pathport, SandNet, Strand Shownet; Renard from the plugins directory (github.com/OpenLightingProject/ola/tree/master/plugins/renard)'
+  supported_ics:
+    url: https://github.com/OpenLightingProject/ola/blob/master/plugins/spi/SPIOutput.cpp
+    retrieved: '2026-11-18'
+    notes: SPI plugin personalities 'WS2801 Individual Control', 'LPD8806 ...', 'P9813 ...', 'APA102 ...'; openlighting.org lists 'SPI pixel strings (P9813, LPD8806, WS2801, APA102)'
+supported_ics:
+  - WS2801
+  - LPD8806
+  - P9813
+  - APA102

@@ -1,0 +1,59 @@
+name: ESP32 FastLED Web Server
+status: unknown
+creator: Jason Coon (Evil Genius Labs)
+notes: Work-in-progress ESP32 port of Jason Coon's FastLED + ESP8266 Web Server - controls addressable LEDs from a web browser over Wi-Fi, with DemoReel100 patterns, palettes, twinkle and fire effects, an HTTP REST API and settings kept in EEPROM.
+features: Static web app served from SPIFFS; REST settings for power, brightness, pattern, autoplay, speed, palette, solid colour, twinkle and fire parameters
+hardware: ESP32 boards (Adafruit HUZZAH32 Feather, WEMOS LOLIN D32 / D1 Mini32, Adafruit QT Py ESP32-S3)
+language: C++
+license: GPL-3.0
+links:
+  repo: https://github.com/jasoncoon/esp32-fastled-webserver
+platforms:
+  - ESP32
+related:
+  - type: variant
+    ref: drive-libraries/fastled-esp8266-web-server
+    notes: ESP32 port of the ESP8266 web server firmware
+    source:
+      url: https://github.com/jasoncoon/esp32-fastled-webserver/blob/main/README.md
+      retrieved: '2026-11-18'
+      notes: "'Work in progress ESP32 port of https://github.com/jasoncoon/esp8266-fastled-webserver'"
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: FastLED drives the LEDs
+    source:
+      url: https://github.com/jasoncoon/esp32-fastled-webserver/blob/main/README.md
+      retrieved: '2026-11-18'
+      notes: Libraries section lists FastLED
+sources:
+  status:
+    url: https://github.com/jasoncoon/esp32-fastled-webserver
+    retrieved: '2026-11-18'
+    notes: Last commit 2024-05-31 ('Adafruit QT Py ESP32 S3'); no tagged releases; not archived; the readme still says 'Work in progress'
+  creator:
+    url: https://github.com/jasoncoon
+    retrieved: '2026-11-18'
+    notes: GitHub profile 'Jason Coon', company @evilgeniuslabs, evilgeniuslabs.org
+  notes:
+    url: https://github.com/jasoncoon/esp32-fastled-webserver/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'Control addressable LEDs with an ESP32 via a web browser over Wi-Fi.' Currently working: DemoReel100 patterns, static web app file serving from SPIFFS, HTTP REST API settings, setting storage in EEPROM; lacking WebSockets"
+  hardware:
+    - url: https://github.com/jasoncoon/esp32-fastled-webserver/blob/main/README.md
+      retrieved: '2026-11-18'
+      notes: Adafruit HUZZAH32 - ESP32 Feather Board, WEMOS LOLIN D32, or any ESP32 development board
+    - url: https://github.com/jasoncoon/esp32-fastled-webserver/blob/main/platformio.ini
+      retrieved: '2026-11-18'
+      notes: Environments wemos_d1_mini32 and adafruit_qtpy_esp32s3_n4r2
+  license:
+    url: https://github.com/jasoncoon/esp32-fastled-webserver/blob/main/LICENSE
+    retrieved: '2026-11-18'
+    notes: GPL-3.0 (repository licence)
+  supported_ics:
+    url: https://github.com/jasoncoon/esp32-fastled-webserver/blob/main/esp32-fastled-webserver/esp32-fastled-webserver.ino
+    retrieved: '2026-11-18'
+    notes: "'#define LED_TYPE WS2812B'; comment '// three-wire LEDs (WS2811, WS2812, NeoPixel)' above FastLED.addLeds"
+supported_ics:
+  - WS2811
+  - WS2812
+  - WS2812B

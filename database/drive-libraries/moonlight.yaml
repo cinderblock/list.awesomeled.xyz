@@ -1,0 +1,65 @@
+name: MoonLight
+status: active
+creator: MoonModules
+notes: MoonModules' open-source system for large LED installations and DMX fixtures - effects, modifiers and layouts with the same web interface and light pipeline on every device; several devices work together as one installation over Art-Net, DDP and E1.31. ESP32 boards are flashed from a web installer; host builds run on desktops and Android. The current codebase (MoonModules/MoonLight, 2026) follows the earlier ewowi/MoonLight, StarLight and the WLED-MoonModules fork.
+features: RMT LED and Parallel LED drivers for addressable strips, plus drivers for HUB75 panels, HDMI, NDI, Hue and PWM lights
+hardware: ESP32, Teensy, desktop and Android hosts
+language: C++
+license: GPL-3.0
+links:
+  repo: https://github.com/MoonModules/MoonLight
+other_links:
+  - https://moonmodules.org/MoonLight/
+  - https://github.com/ewowi/MoonLight
+platforms:
+  - ESP32
+  - Teensy
+  - Raspberry Pi
+  - Windows
+  - Linux
+  - macOS
+  - Android
+protocols:
+  - Art-Net
+  - DDP
+  - sACN
+sources:
+  status:
+    url: https://github.com/MoonModules/MoonLight/releases
+    retrieved: '2026-11-18'
+    notes: Release v7.0.0 published 2026-10-27; rolling 'latest' prerelease 2026-11-18
+  creator:
+    url: https://github.com/MoonModules/MoonLight
+    retrieved: '2026-11-18'
+    notes: MoonModules organisation repository; the earlier repository is github.com/ewowi/MoonLight (created 2025-03, last release v10.0.1 on 2026-05-07)
+  notes:
+    - url: https://github.com/MoonModules/MoonLight/blob/main/README.md
+      retrieved: '2026-11-18'
+      notes: "'Drive large LED installations and DMX fixtures. One source tree drives ESP32, Teensy, Raspberry Pi, macOS, Windows, Linux and Android.' 'several work together as one installation, driving LEDs and DMX fixtures over Art-Net, DDP and E1.31'"
+    - url: https://github.com/MoonModules/MoonLight/blob/main/docs/explanation/why-we-write-our-own.md
+      retrieved: '2026-11-18'
+      notes: "'Where it comes from' table: WLED, WLED-MoonModules, StarLight (ewowi/StarLight), MoonLight (ewowi/MoonLight)"
+  features:
+    url: https://github.com/MoonModules/MoonLight/tree/main/src/light/drivers
+    retrieved: '2026-11-18'
+    notes: Driver sources RmtLedDriver, ParallelLedDriver, Hub75Driver, HdmiDriver, NdiDriver, HueDriver, PwmLightDriver; docs/reference/hardware/led-drivers.md describes RMT LED and Parallel LED
+  license:
+    url: https://github.com/MoonModules/MoonLight/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'See LICENSE: GPL-3.0.'"
+  platforms:
+    url: https://github.com/MoonModules/MoonLight/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'One source tree drives ESP32, Teensy, Raspberry Pi, macOS, Windows, Linux and Android.'"
+  protocols:
+    url: https://github.com/MoonModules/MoonLight/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'over Art-Net, DDP and E1.31'"
+  supported_ics:
+    url: https://github.com/MoonModules/MoonLight/blob/main/docs/reference/hardware/led-drivers.md
+    retrieved: '2026-11-18'
+    notes: "'Addressable LEDs (WS2812B, SK6812, WS2811) go out through one of two drivers: RMT LED ... and Parallel LED'"
+supported_ics:
+  - WS2812B
+  - SK6812
+  - WS2811

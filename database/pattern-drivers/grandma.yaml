@@ -1,0 +1,56 @@
+name: grandMA
+status: active
+creator: MA Lighting
+notes: MA Lighting's lighting-console software line (grandMA 1997, grandMA2 2008, grandMA3 since 2018). The same software runs on MA consoles and as grandMA3 onPC for Windows and macOS; onPC unlocks DMX parameters only when MA hardware (command wing, xPort Nodes, DMX-key, fader wing) is connected. Bitmaps map images and videos onto a selection of fixtures for pixel effects.
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Both
+  dmx_notes: DMX512 ports are on MA hardware (consoles, xPort Nodes, DMX-key); the number of DMX outputs varies with each grandMA3 onPC product
+aliases:
+  - grandMA3
+  - grandMA2
+  - grandMA3 onPC
+  - grandMA onPC
+capabilities:
+  live: true
+  designer: true
+links:
+  url: https://www.malighting.com/grandMA3-software
+platforms:
+  os:
+    - Windows
+    - macOS
+  notes: grandMA3 onPC; the same software runs on MA's grandMA3 consoles and onPC hardware
+sources:
+  status:
+    url: https://www.malighting.com/news/article/grandma3-software-release-version-25-is-out-now-1521/
+    retrieved: '2026-11-18'
+    notes: "News dated 01-09-2026: 'MA Lighting has released the new grandMA3 software release v2.5', released together with 'the grandMA2 software v3.9.63.10'"
+  creator:
+    url: https://www.malighting.com/company/history/
+    retrieved: '2026-11-18'
+    notes: "'Michael Adenau (MA) founds MA Lighting' (1983); 'In the spring of 1997 MA introduces the eagerly awaited grandMA console to the world.'"
+  aliases:
+    - url: https://www.malighting.com/company/history/
+      retrieved: '2026-11-18'
+      notes: "Timeline: 2004 'presentation of the grandMA onPC Software'; 2008 'introduction of the grandMA2 series'; 2018 'presents with the grandMA3 series a radical re-think'"
+    - url: https://help.malighting.com/grandMA3/2.4/HTML/onpc.html
+      retrieved: '2026-11-18'
+      notes: "'Simply download the grandMA3 onPC software and connect to any of the grandMA3 onPC products to unlock parameters.'"
+  notes:
+    url: https://help.malighting.com/grandMA3/2.5/HTML/keyword_bitmap.html
+    retrieved: '2026-11-18'
+    notes: "'The Bitmap keyword allows you to use media files such as images or videos, also called bitmap generator objects', applied to a selection of fixtures (manual version 2.5)"
+  outputs.protocols:
+    url: https://help.malighting.com/grandMA3/2.5/HTML/dmx_ethernet.html
+    retrieved: '2026-11-18'
+    notes: "'There are currently two supported protocols for sending and receiving DMX over the network: sACN and Art-Net.'"
+  outputs.dmx_notes:
+    url: https://help.malighting.com/grandMA3/2.4/HTML/onpc.html
+    retrieved: '2026-11-18'
+    notes: "'The amount of DMX outputs varies with each grandMA3 onPC product'; products: command wing, command wing XT, xPort Nodes, DMX-key, DMX-key starter, fader wing"
+  platforms.os:
+    url: https://www.malighting.com/grandMA3-software
+    retrieved: '2026-11-18'
+    notes: "'available as onPC software for Windows and Mac'; page title 'The free-of-cost grandMA3 software'"

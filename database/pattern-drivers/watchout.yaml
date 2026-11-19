@@ -1,0 +1,54 @@
+name: WATCHOUT
+status: active
+creator: Dataton
+notes: Dataton's multi-display show software. A Producer computer edits the timeline; Display computers play the media to projectors, monitors and LED walls, frame-synchronised over the network. ArtNet fixture cues on the timeline send Art-Net DMX at 44 frames per second, and incoming Art-Net can drive show variables.
+inputs:
+  other:
+    - Art-Net
+    - HTTP
+    - OSC
+    - MIDI
+    - LTC
+    - PosiStageNet
+    - MIDI Show Control
+  other_notes: Art-Net, HTTP REST API, OSC, MIDI, LTC timecode, PosiStageNet, MIDI Show Control
+outputs:
+  protocols:
+    artnet: Both
+  other_notes: Video outputs on the Display computers (4-8 per computer, depending on the graphics card)
+capabilities:
+  live: true
+  designer: true
+links:
+  url: https://www.dataton.com/watchout
+platforms:
+  os:
+    - Windows
+sources:
+  status:
+    url: https://www.dataton.com/watchout
+    retrieved: '2026-11-18'
+    notes: "'WATCHOUT 7.8 out now' (June 2026); '© Dataton AB 2026'"
+  creator:
+    url: https://www.dataton.com/watchout
+    retrieved: '2026-11-18'
+    notes: "Page title 'Dataton WATCHOUT multi-display show composer'; footer '© Dataton AB 2026'"
+  notes:
+    url: https://docs.dataton.com/watchout-7-new/watchout/getting-started/system-requirements.html
+    retrieved: '2026-11-18'
+    notes: "WATCHOUT 7 User Guide: 'Producer Computer - This is your creative workstation'; 'Display Computer(s) - These are dedicated playback machines that render content and drive physical outputs (projectors, LED walls, monitors)'; 'A single Display computer can drive up to 4-8 outputs depending on the graphics card.'"
+  inputs.other:
+    url: https://docs.dataton.com/watchout-7-new/watchout/external-control/artnet-input.html
+    retrieved: '2026-11-18'
+    notes: 'External Control chapter: HTTP REST API, OSC Protocol, ArtNet Input, MIDI Bridge, LTC Bridge, PosiStageNet, MIDI Show Control, WATCHOUT 6 Protocol'
+  outputs.protocols:
+    - url: https://docs.dataton.com/watchout-7-new/watchout/timeline-and-cues/artnet-fixture-cues.html
+      retrieved: '2026-11-18'
+      notes: "'ArtNet fixture cues are WATCHOUT's mechanism for controlling DMX lighting fixtures directly from the timeline ... output Art-Net DMX data at 44 frames per second'"
+    - url: https://docs.dataton.com/watchout-7-new/watchout/external-control/artnet-input.html
+      retrieved: '2026-11-18'
+      notes: "'WATCHOUT can receive ArtNet DMX data over the network and map incoming DMX channel values to show variables.'"
+  platforms.os:
+    url: https://docs.dataton.com/watchout-7-new/watchout/getting-started/system-requirements.html
+    retrieved: '2026-11-18'
+    notes: "'WATCHOUT 7 requires a Windows-based computer with modern hardware'"

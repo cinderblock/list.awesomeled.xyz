@@ -1,0 +1,58 @@
+name: ESPEasy
+status: active
+creator: Let's Control It (letscontrolit)
+notes: Open-source multi-sensor firmware for ESP8266 and ESP32 boards - plugins read sensors and drive outputs, configured from a web UI, and report to controllers such as Domoticz, Home Assistant/openHAB (MQTT), Homie MQTT and generic HTTP/UDP. NeoPixel plugins drive WS281x strips (GRB or GRBW) as plain strips, effects, clocks, matrices or 7-segment displays.
+features: 'NeoPixel plugins: P038 NeoPixel (Basic), P041 NeoPixel (Word Clock), P042 NeoPixel (Candle), P070 NeoPixel Ring Clock, P128 NeoPixel (BusFX, uses NeoPixelBus), P131 NeoPixel Matrix (uses Adafruit_NeoMatrix), P165 NeoPixel (7-Segment)'
+hardware: ESP8266 and ESP32 boards (incl. ESP32-S2, -S3, -C2, -C3, -C5, -C6, -C61, -P4 builds)
+language: C++
+license: GPL-3.0-or-later
+links:
+  repo: https://github.com/letscontrolit/ESPEasy
+other_links:
+  - https://espeasy.readthedocs.io/en/latest/
+platforms:
+  - ESP8266
+  - ESP32
+protocols:
+  - MQTT
+sources:
+  status:
+    url: https://github.com/letscontrolit/ESPEasy/releases
+    retrieved: '2026-11-18'
+    notes: Release mega-20260720 published 2026-07-20; mega branch pushed 2026-11-18
+  creator:
+    url: https://github.com/letscontrolit/ESPEasy/blob/mega/License.txt
+    retrieved: '2026-11-18'
+    notes: '''Arduino project "ESP Easy" © Copyright 2018-2020 github.com/letscontrolit''; support forum at letscontrolit.com'
+  notes:
+    url: https://github.com/letscontrolit/ESPEasy/blob/mega/docs/source/Controller/_controller_substitutions.repl
+    retrieved: '2026-11-18'
+    notes: "Repository description 'Easy MultiSensor device based on ESP8266/ESP32'; controllers Domoticz HTTP/MQTT, Home Assistant (openHAB) MQTT, Homie MQTT, Generic HTTP, Generic UDP, ESPEasy P2P Networking and others"
+  features:
+    url: https://github.com/letscontrolit/ESPEasy/blob/mega/docs/source/Plugin/P128.rst
+    retrieved: '2026-11-18'
+    notes: "Plugin names and used libraries from docs/source/Plugin/_plugin_substitutions_*.repl; P128: 'The NeoPixel (BusFX) plugin is designed to use strings of NeoPixel LEDs, like the WS2811/WS2812/WS2813, to show light-effects.' Strip type GRB or GRBW (P038, P131, P165)"
+  hardware:
+    url: https://github.com/letscontrolit/ESPEasy/tree/mega
+    retrieved: '2026-11-18'
+    notes: PlatformIO environment files for esp82xx, esp32, esp32s2, esp32s3, esp32c2, esp32c3, esp32c5, esp32c6, esp32c61, esp32p4
+  license:
+    url: https://github.com/letscontrolit/ESPEasy/blob/mega/License.txt
+    retrieved: '2026-11-18'
+    notes: "'GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version'"
+  platforms:
+    url: https://github.com/letscontrolit/ESPEasy
+    retrieved: '2026-11-18'
+    notes: "Repository description: 'Easy MultiSensor device based on ESP8266/ESP32'"
+  protocols:
+    url: https://github.com/letscontrolit/ESPEasy/blob/mega/docs/source/Controller/_controller_substitutions.repl
+    retrieved: '2026-11-18'
+    notes: MQTT controllers (Domoticz MQTT, Home Assistant (openHAB) MQTT, PiDome MQTT, Homie MQTT); no Art-Net / sACN receiver is listed
+  supported_ics:
+    url: https://github.com/letscontrolit/ESPEasy/blob/mega/docs/source/Plugin/P128.rst
+    retrieved: '2026-11-18'
+    notes: "'strings of NeoPixel LEDs, like the WS2811/WS2812/WS2813'"
+supported_ics:
+  - WS2811
+  - WS2812
+  - WS2813

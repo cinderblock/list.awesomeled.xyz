@@ -1,0 +1,60 @@
+name: FastLED + ESP8266 Web Server
+status: unknown
+creator: Jason Coon (Evil Genius Labs)
+notes: Arduino/PlatformIO firmware that controls an addressable LED strip from a web browser (a single-page app served from the board's flash) or an infrared remote - on/off, brightness, pattern, colour - with REST web services and connected or stand-alone access-point modes. Built on FastLED, with build configurations for plain strips and for specific LED products (Fibonacci32 to Fibonacci1024, Kraken64, Chamaeleon64, 1628 Rings, ESP8266 Thing).
+aliases:
+  - esp8266-fastled-webserver
+features: Web app (jQuery + Bootstrap) over LittleFS, WebSockets, WiFiManager setup, NTP clock, IR remote control
+hardware: Wemos D1 Mini (ESP8266) or D1 Mini32 (ESP32)
+language: C++
+license: GPL-3.0
+links:
+  repo: https://github.com/jasoncoon/esp8266-fastled-webserver
+platforms:
+  - ESP8266
+  - ESP32
+related:
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: FastLED is the LED driver library the firmware depends on
+    source:
+      url: https://github.com/jasoncoon/esp8266-fastled-webserver/blob/main/README.md
+      retrieved: '2026-11-18'
+      notes: "'The app depends on the following libraries': FastLED, Arduino WebSockets, WiFiManager, NTPClient, Arduino JSON, LittleFS"
+sources:
+  status:
+    url: https://github.com/jasoncoon/esp8266-fastled-webserver
+    retrieved: '2026-11-18'
+    notes: Last commit 2022-07-12; latest release v1.0.0 (2021-05-17); not archived
+  creator:
+    url: https://github.com/jasoncoon
+    retrieved: '2026-11-18'
+    notes: GitHub profile 'Jason Coon', company @evilgeniuslabs, evilgeniuslabs.org
+  notes:
+    url: https://github.com/jasoncoon/esp8266-fastled-webserver/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'Control an addressable LED strip with an ESP8266 via a web browser or infrared remote control.' 'The firmware implements basic RESTful web services ... It can run in connected or standalone access point modes.' Product configs in include/configs/product/"
+  aliases:
+    url: https://github.com/jasoncoon/esp8266-fastled-webserver
+    retrieved: '2026-11-18'
+    notes: Repository name; the readme title is 'FastLED + ESP8266 Web Server'
+  hardware:
+    url: https://github.com/jasoncoon/esp8266-fastled-webserver/blob/main/platformio.ini
+    retrieved: '2026-11-18'
+    notes: Environments for board d1_mini (ESP8266) and wemos_d1_mini32 (espressif32), e.g. fib256__d1_mini32
+  license:
+    url: https://github.com/jasoncoon/esp8266-fastled-webserver/blob/main/LICENSE
+    retrieved: '2026-11-18'
+    notes: GNU General Public License Version 3
+  platforms:
+    url: https://github.com/jasoncoon/esp8266-fastled-webserver/blob/main/platformio.ini
+    retrieved: '2026-11-18'
+    notes: ESP8266 (d1_mini) and ESP32 (wemos_d1_mini32) build environments
+  supported_ics:
+    url: https://github.com/jasoncoon/esp8266-fastled-webserver/tree/main/include/configs/product
+    retrieved: '2026-11-18'
+    notes: "LED_TYPE per product config: default.h 'WS2811', fibonacci*.h / kraken64.h 'WS2812B', fibonacci64.h 'SK6812'; any FastLED clockless type can be set at compile time"
+supported_ics:
+  - WS2811
+  - WS2812B
+  - SK6812

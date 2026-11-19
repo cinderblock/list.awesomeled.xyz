@@ -1,0 +1,65 @@
+name: LightFactory
+status: active
+creator: Dream Solutions Ltd
+notes: PC lighting-console software for theatre, concerts, clubs, film/TV and houses of worship - traditional dimmer control plus moving lights, cue lists, palettes, a scheduler and six effects engines including LED/matrix effects, up to 250 DMX universes. Free iOS and Android remote apps; LightFactory registrations also unlock Vari-Lite's NEO PC software.
+inputs:
+  audio: Input
+  other:
+    - MIDI
+    - SMPTE
+    - Telnet
+    - Vision.Net
+    - ChilliNet
+    - iCAN
+  other_notes: MIDI notes and control changes, SMPTE / MIDI / Winamp timecode, Telnet, Vision.Net, ChilliNet and iCAN, contact closures, MySQL web triggers
+outputs:
+  protocols:
+    artnet: Output
+    sacn: Output
+    dmx: Both
+    kinet: Output
+  dmx_notes: USB DMX interfaces (DMXKing ultraDMX RDM Pro / Micro, Enttec Open DMX / DMX USB Pro / Pro Mk2, Peperoni and others); a DMX lighting desk can be attached as an input for submasters, and version 2.23 merges incoming DMX streams into the output
+  other:
+    - Pathport
+    - ShowNet
+capabilities:
+  live: true
+  designer: true
+links:
+  url: https://www.lightfactory.net/
+platforms:
+  os:
+    - Windows
+  notes: Windows 7, 8, 10 and 11; also supported under Parallels Desktop on macOS
+sources:
+  status:
+    url: https://www.lightfactory.net/Downloads.html?mPath=3_17
+    retrieved: '2026-11-18'
+    notes: "LightFactory V2 full installation version V2.23.4; 'Latest LightFactory & NEO fixture library Rev 142 - 16th Dec 2025'"
+  creator:
+    url: https://www.lightfactory.net/
+    retrieved: '2026-11-18'
+    notes: "Footer: '© 2026 Dream Solutions Ltd, Auckland, New Zealand'"
+  notes:
+    url: https://www.lightfactory.net/Introducing_LightFactory__Lighting_Without_Limits_.html?mPath=2_8
+    retrieved: '2026-11-18'
+    notes: "'Lightfactory is a leading software based lighting control system.' Features: 'Up to 250 DMX universes', '6 different effects engines (including LED/Matrix)', 'Free iOS & Android apps'. Vari-Lite NEO: 'Existing LightFactory registrations will also unlock the Vari-Lite NEO PC software' (Downloads page)"
+  inputs.other:
+    url: https://www.lightfactory.net/Specifications.html?mPath=2_11
+    retrieved: '2026-11-18'
+    notes: "Input and External Triggers: 'PC Audio trigger', 'MIDI Note and Control Change trigger', 'Winamp, SMPTE, MIDI and Intrenal Timecodes', 'ChilliNet & iCAN support', 'VisionNet', 'Contact Closures', MySQL support for web-based triggers"
+  outputs.protocols:
+    url: https://www.lightfactory.net/Specifications.html?mPath=2_11
+    retrieved: '2026-11-18'
+    notes: "'Supports industry standard USB and Ethernet DMX interfaces': ... 'ArtNet DMX over Ethernet', 'PathWay - Pathport DMX over Ethernet', 'sACN (E1.31)', 'ShowNet', 'KiNet'; 'Attach a standard DMX based lighting desk to add up to 10000 sub-masters'"
+  outputs.dmx_notes:
+    url: https://www.lightfactory.net/LightFactory-223-Features.html?mPath=2_10_70
+    retrieved: '2026-11-18'
+    notes: "2.23: 'The system is now able to merge multiple incoming DMX streams into the output.'"
+  platforms.os:
+    url: https://www.lightfactory.net/Downloads.html?mPath=3_17
+    retrieved: '2026-11-18'
+    notes: "'Operating systems: Windows 7, 8, 10, and 11. Also supported on Paralles Desktop under OSX.'"
+technical_notes:
+  - The free download is the full version; without a registration code DMX output stops after 30 minutes, off-line programming is unlimited
+  - Supports the Capture and WYSIWYG visualisers

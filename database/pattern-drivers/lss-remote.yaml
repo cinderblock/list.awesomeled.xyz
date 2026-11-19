@@ -1,0 +1,39 @@
+name: LSS Remote
+status: active
+creator: LED Strip Studio
+notes: LED Strip Studio's phone and tablet app for its Reactivo 2, SPI Matrix and LEC3 (LED Ethernet Controller 3) controllers - plays the animations stored on the controller's SD card, builds playlists, sets colours and device settings (strip type, colour order, autoplay), and groups controllers into zones that stay in sync, without a computer. A separate product from the LED Strip Studio desktop software.
+capabilities:
+  live: true
+  designer: false
+integrations: Reactivo 2, SPI Matrix, LEC3 (LED Ethernet Controller 3)
+links:
+  url: https://www.ledstripstudio.com/products/lss_remote/
+other_links:
+  - https://apps.apple.com/app/lss-remote/id1543386675
+  - https://play.google.com/store/apps/details?id=com.ledstripstudio.reactivo
+platforms:
+  mobile:
+    - iOS
+    - Android
+  notes: iPhone and iPad (iOS 16 or later); Android from Google Play or as an APK; the iPad app also runs on Apple-silicon Macs (macOS 13 or later)
+sources:
+  status:
+    url: https://apps.apple.com/us/app/lss-remote/id1543386675
+    retrieved: '2026-11-18'
+    notes: Version 2.0.11 (11/12/2025) 'Added support for LEC3 firmware 3.71'; version 1.0 dated 12/08/2020
+  creator:
+    url: https://apps.apple.com/us/app/lss-remote/id1543386675
+    retrieved: '2026-11-18'
+    notes: "App Store developer 'Showtacle Ltd.', seller 'Showtacle s.r.o.'; the privacy-policy link and the product page are on ledstripstudio.com"
+  notes:
+    url: https://www.ledstripstudio.com/products/lss_remote/
+    retrieved: '2026-11-18'
+    notes: "'Control your addressable LED strips from your mobile with ease'; 'works great with REACTIVO 2, SPI MATRIX, and LEC 3 devices'; playlists, SD-card animation library, colours, device settings (strip type, color order, autoplay), zones. Listed separately from 'LED Strip Studio 4' under Software"
+  integrations:
+    url: https://www.ledstripstudio.com/products/reactivo2/
+    retrieved: '2026-11-18'
+    notes: "'Use LSS Remote on iOS or Android to create playlists, select animations, configure the controller, edit zones and adjust colors - without needing a computer.'"
+  platforms.mobile:
+    url: https://www.ledstripstudio.com/products/lss_remote/
+    retrieved: '2026-11-18'
+    notes: App Store, Google Play and a direct APK download (LSS-Remote-2.0.5.apk); App Store requirements iOS/iPadOS 16, macOS 13 on Apple M1 or later

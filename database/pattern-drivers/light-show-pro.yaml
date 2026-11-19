@@ -1,0 +1,61 @@
+name: Light Show Pro
+status: discontinued
+creator: David Johnson
+notes: Commercial Windows sequencer and playback engine for Christmas light shows (LSP), built on .NET; a spring 2009 magazine article had it in technology preview, due for release in May 2009. Imports LOR II/S2, Aurora, Animated Lighting and Vixen sequences. Its site showed only a hosting placeholder by June 2024 and no longer answers; a 2021 community-wiki update says updates were suspended while a rewrite was possibly in the works.
+outputs:
+  protocols:
+    artnet: Output
+    sacn: Output
+    dmx: Output
+  other:
+    - LOR
+    - D-Light
+    - X10
+    - Renard
+    - Pixelnet
+  other_notes: LOR, D-Light Enhanced, X-10, Renard, PixelNet
+aliases:
+  - LSP
+capabilities:
+  designer: true
+dead_links:
+  - url: http://www.lightshowpro.com/
+    archive: https://web.archive.org/web/20231014135954/http://www.lightshowpro.com/
+    checked: '2026-11-18'
+    notes: Domain does not resolve; the June 2024 captures show only a web-host default page, the last real capture (Oct 2023) is the 'Light Show Pro' forum
+links:
+  url: http://www.lightshowpro.com/
+platforms:
+  os:
+    - Windows
+sources:
+  status:
+    - url: https://web.archive.org/web/20240627145134/http://www.lightshowpro.com/
+      retrieved: '2026-11-18'
+      notes: Capture redirects to the host's cgi-sys/defaultwebpage.cgi; lightshowpro.com itself did not resolve on 2026-11-18
+    - url: https://auschristmaslighting.com/wiki/LightShow-Pro
+      retrieved: '2026-11-18'
+      notes: "Community wiki (last updated Aug 23, 2021): 'Updates are currently suspended while a rewrite of the program is possibly in the works.' Stable version 2.8.5087.34674"
+  creator:
+    url: https://planetchristmas.com/is-it-time-to-blink-those-lights/
+    retrieved: '2026-11-18'
+    notes: "PlanetChristmas Magazine, Spring 2009 (Chuck Smith): David Johnson 'teamed up with software developers out of Texas and Ohio to build LightShow Pro', 'Start with the Microsoft.Net foundation', due to 'go gold in May of 2009'. The community wiki heads its page 'Minleon LightShowPro' without explaining the link"
+  aliases:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/README.txt
+    retrieved: '2026-11-18'
+    notes: "'xLights imports and exports sequence data from sequencers such as LOR (SE, PE, SS and S5), Vixen2, Vixen 3, LSP, and HLS.'"
+  notes:
+    url: https://web.archive.org/web/20250603212302/https://www.doityourselfchristmas.com/wiki/index.php?title=LightShow_Pro_(LSP)
+    retrieved: '2026-11-18'
+    notes: "DIYC community wiki (archived; page last edited 29 July 2013): 'a commercial Christmas light sequencer and playback engine for use on Microsoft Windows systems'; imports 'LOR II/S2, Aurora, Animated Lighting, and Vixen'"
+  outputs.protocols:
+    - url: https://web.archive.org/web/20250603212302/https://www.doityourselfchristmas.com/wiki/index.php?title=LightShow_Pro_(LSP)
+      retrieved: '2026-11-18'
+      notes: "Community wiki: 'supports numerous hardware types and protocols including: LOR, D-Light Enhanced, DMX-512, X-10, Renard, E1.31, PixelNet'"
+    - url: https://auschristmaslighting.com/wiki/LightShow-Pro
+      retrieved: '2026-11-18'
+      notes: 'Community wiki protocol list: E1.31, ArtNet, DMX512, LightORama, X-10, Renard'
+  platforms.os:
+    url: https://web.archive.org/web/20250603212302/https://www.doityourselfchristmas.com/wiki/index.php?title=LightShow_Pro_(LSP)
+    retrieved: '2026-11-18'
+    notes: "'for use on Microsoft Windows systems' (community wiki; the maker's site is gone)"

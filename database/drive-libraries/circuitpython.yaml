@@ -1,0 +1,69 @@
+name: CircuitPython
+status: active
+creator: Adafruit
+notes: Adafruit's beginner-friendly Python for microcontrollers, based on MicroPython - boards show up as a USB drive and code.py reloads automatically on save. The built-in neopixel_write module sends the 800 kHz NeoPixel protocol; the Adafruit NeoPixel and DotStar libraries add strip classes with RGB/RGBW support.
+features: neopixel_write core module; Adafruit_CircuitPython_NeoPixel and Adafruit_CircuitPython_DotStar libraries (from the Adafruit library bundle)
+hardware: 700+ boards (SAMD21/SAMD51, ESP32 family, RP2040, nRF52, STM32, i.MX RT10xx and more)
+language: Python # interpreter written in C
+license: MIT
+links:
+  repo: https://github.com/adafruit/circuitpython
+other_links:
+  - https://circuitpython.org/
+  - https://github.com/adafruit/Adafruit_CircuitPython_NeoPixel
+  - https://github.com/adafruit/Adafruit_CircuitPython_DotStar
+platforms:
+  - SAMD21
+  - SAMD51
+  - ESP32
+  - RP2040
+  - nRF52
+  - STM32
+  - i.MX RT
+related:
+  - type: related
+    ref: drive-libraries/micropython
+    notes: CircuitPython is based on MicroPython and shares its core code
+    source:
+      url: https://github.com/adafruit/circuitpython/blob/main/README.rst
+      retrieved: '2026-11-18'
+      notes: "'CircuitPython is based on MicroPython.' 'The core code of MicroPython is shared amongst ports including CircuitPython'"
+sources:
+  status:
+    url: https://github.com/adafruit/circuitpython/releases
+    retrieved: '2026-11-18'
+    notes: Stable release 10.3.2 published 2026-11-11; 11.0.0-alpha.3 on 2026-11-12
+  creator:
+    url: https://github.com/adafruit/circuitpython/blob/main/README.rst
+    retrieved: '2026-11-18'
+    notes: "'Most, but not all, CircuitPython development is sponsored by Adafruit and is available on their educational development boards.'"
+  notes:
+    url: https://github.com/adafruit/circuitpython/blob/main/README.rst
+    retrieved: '2026-11-18'
+    notes: "'CircuitPython is a beginner friendly, open source version of Python for tiny, inexpensive computers called microcontrollers.' 'edit a code.py file on the CIRCUITPY drive. The code will automatically reload.'"
+  features:
+    url: https://github.com/adafruit/circuitpython/blob/main/shared-bindings/neopixel_write/__init__.c
+    retrieved: '2026-11-18'
+    notes: "'The neopixel_write module contains a helper method to write out bytes in the 800khz neopixel protocol.' Strip classes: Adafruit_CircuitPython_NeoPixel ('Higher level NeoPixel driver that presents the strip as a sequence') and Adafruit_CircuitPython_DotStar ('DotStar strip driver (for CircuitPython 5.0+ with _pixelbuf)')"
+  hardware:
+    url: https://circuitpython.org/downloads
+    retrieved: '2026-11-18'
+    notes: "'Displaying 700 boards'"
+  license:
+    url: https://github.com/adafruit/circuitpython/blob/main/LICENSE
+    retrieved: '2026-11-18'
+    notes: The MIT License (MIT)
+  platforms:
+    url: https://github.com/adafruit/circuitpython/blob/main/docs/supported_ports.rst
+    retrieved: '2026-11-18'
+    notes: "Ports atmel-samd ('SAMD21 and SAMD51'), espressif (ESP32, -S2, -S3, -C3, -C6...), raspberrypi ('RP2040'), nordic ('nRF52 series'), stm ('STM32 ... F4, F7, and H7'), mimxrt10xx ('i.MX RT10xx'); also cxd56, silabs, zephyr-cp and a Unix port"
+  supported_ics:
+    url: https://github.com/adafruit/circuitpython/blob/main/shared-bindings/neopixel_write/__init__.c
+    retrieved: '2026-11-18'
+    notes: neopixel_write timing comments cite the WS2811, SK6812, WS2812 and WS2812B datasheets; DotStar via the Adafruit_CircuitPython_DotStar library
+supported_ics:
+  - WS2811
+  - WS2812
+  - WS2812B
+  - SK6812
+  - DotStar

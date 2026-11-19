@@ -1,0 +1,75 @@
+name: Poet Creator
+status: active
+creator: Skandal Technologies
+notes: Real-time visual content and control system for architecture and fixed installations (introduced as the POET platform in 2018). Generative content engines driven by cameras, microphones, sensors and live data (crowds, sports scores, weather) feed LED pixels and lights over Art-Net/sACN, plus screens, projections and sound. Free download with watermarked outputs; project licences come on a USB dongle.
+inputs:
+  video: Input
+  other:
+    - TCP
+    - UDP
+    - OSC
+    - Serial
+    - Web API
+    - NDI
+    - Spout
+  other_notes: Cameras, microphones and sensors; live data feeds; TCP/IP, UDP, OSC and RS232 commands; REST API; RTSP, NDI and Spout streams
+outputs:
+  protocols:
+    artnet: Output
+    sacn: Output
+  other:
+    - NDI
+    - Spout
+    - MQTT
+    - OSC
+    - TCP
+    - UDP
+    - Dante
+  other_notes: Up to 4 x 4K video, 2 x NDI, Spout, MQTT, OSC, TCP/UDP commands, multi-channel sound (Dante); DALI and Casambi through converters
+aliases:
+  - POET
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D
+links:
+  url: https://poet.software/
+platforms:
+  os:
+    - Windows
+sources:
+  status:
+    url: https://poet.software/download/
+    retrieved: '2026-11-18'
+    notes: Download offered for Windows; site '©2026 Skandal Technologies'
+  creator:
+    url: https://poet.software/about-us/
+    retrieved: '2026-11-18'
+    notes: "'Skandal Technologies are the developers of the Poet Creator Software.' 'Founded in Helsinki, Finland, with operational base in Madrid, Spain'"
+  aliases:
+    url: https://web.archive.org/web/20180902065808/http://www.skandal.tech/
+    retrieved: '2026-11-18'
+    notes: "2018 Skandal site: 'POET Software', 'POET COMPLETE AMBIENT COMMUNICATION PLATFORM', 'POET Server --> DVI or ArtNet Output'"
+  notes:
+    - url: https://poet.software/
+      retrieved: '2026-11-18'
+      notes: "'Poet Creator Software is the first real-time visual content & control system developed specifically for responsive environments.' Licensing per https://poet.software/faqs/ : free download, 'the outputs will include watermarks', licence 'provided via a USB security dongle'"
+    - url: https://lucept.com/2018/04/17/skandal-technologies-update/
+      retrieved: '2026-11-18'
+      notes: "Trade blog, 17 Apr 2018: 'their new “Poet” system for controlling ambient information in architectural environments'"
+  inputs.other:
+    url: https://poet.software/faqs/
+    retrieved: '2026-11-18'
+    notes: "'You can send and receive TCP/IP, UDP, OSC and RS232 commands with Poet Creator. We also offer REST API.'; streams in 'as RTSP, NDI or SPOUT'"
+  outputs.protocols:
+    url: https://poet.software/poet-creator-software/
+    retrieved: '2026-11-18'
+    notes: "'Poet Creator runs multiple outputs at the same time. These include up to 4 x 4K video, 2 x NDI, 1 to 85000 RGB pixels of Art-Net/sACN, MQTT, OSC and TCP/UDP commands and multi-channel sound. DALI & Casambi available through converters.'"
+  capabilities.visualizer:
+    url: https://poet.software/poet-creator-software/
+    retrieved: '2026-11-18'
+    notes: Feature list 'Real-time 3D preview'
+  platforms.os:
+    url: https://poet.software/download/
+    retrieved: '2026-11-18'
+    notes: "Minimum requirements: 'OS Windows 10/11 64-bit'"

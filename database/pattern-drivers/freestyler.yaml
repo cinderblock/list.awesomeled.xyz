@@ -1,0 +1,48 @@
+name: FreeStyler
+status: active
+creator: Raphael Wellekens
+notes: Free DMX lighting-control software for DJs, venues and lighting designers - live control plus programmed scenes, sequences and cues, up to 512 fixtures on 2 universes, with a built-in chaser for LED fixtures. The package also contains Fixture Creator, FreeStandalone and an Art-Net to DMX client for a remote PC.
+inputs:
+  other:
+    - MIDI
+  other_notes: MIDI, touchscreen
+outputs:
+  protocols:
+    artnet: Output
+    dmx: Output
+  dmx_notes: Over 15 USB, serial and parallel-port DMX interfaces (Enttec Open DMX / PRO / ODE, DMXking, DMX4ALL, Eurolite, ELC Sidekick, MADRIX Interface and others)
+capabilities:
+  live: true
+  designer: true
+links:
+  url: https://www.freestylerdmx.be/
+platforms:
+  os:
+    - Windows
+sources:
+  status:
+    url: https://www.freestylersupport.com/fsforum/viewforum.php?f=1
+    retrieved: '2026-11-18'
+    notes: "'Download the Latest release: Version 4.1.7', 'Uploaded 28/12/2024'"
+  creator:
+    url: https://www.freestylersupport.com/wiki/about_the_developer
+    retrieved: '2026-11-18'
+    notes: "'there is only one (1!) developer for FreeStyler DMX! He is Raphael Wellekens'"
+  notes:
+    - url: https://www.freestylerdmx.be/begin.htm
+      retrieved: '2026-11-18'
+      notes: "'Freestyler is free lighting control software used by many leading dj's, venues and lighting designers'"
+    - url: https://www.freestylerdmx.be/download.htm
+      retrieved: '2026-11-18'
+      notes: "Highlights: 'Up to 512 fixtures', '2 universes', 'Supports over 15 interfaces', 'Built-in chaser for LED fixtures', 'Touchscreen support', 'MIDI support'"
+    - url: https://www.freestylersupport.com/wiki/faq:what_is_freestyler
+      retrieved: '2026-11-18'
+      notes: "Package: FreeStyler, Fixture Creator, FreeStandalone, Art-Net to DMX; 'live control over the light but also to make pre programmed scenes'"
+  outputs.protocols:
+    url: https://www.freestylersupport.com/wiki/faq:supported_dmx_interface
+    retrieved: '2026-11-18'
+    notes: "'Supported DMX Interfaces' table lists Art-Net alongside the USB/serial/LPT DMX interfaces"
+  platforms.os:
+    url: https://www.freestylerdmx.be/download.htm
+    retrieved: '2026-11-18'
+    notes: "'Designed for windows XP, 7, 8, 8.1 and 10'"

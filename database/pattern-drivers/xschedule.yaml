@@ -1,0 +1,82 @@
+name: xSchedule
+status: active
+creator: Keith Westley
+notes: Show player and scheduler from the xLights family - plays FSEQ sequences (with audio and video) frame-accurately, runs playlists by time of day and day of week, and has a built-in web UI and REST API. It shipped inside the xLights install from 2017.1 until xLights moved its companion apps to separate repositories in April 2026 (2026.05); since then it is a separate download.
+inputs:
+  other:
+    - MIDI
+    - Serial
+    - sACN
+    - Art-Net
+    - OSC
+    - FPP Remote
+    - SMPTE
+    - Web API
+  other_notes: MIDI, serial, E1.31, Art-Net, OSC, FPP Remote, SMPTE / LTC timecode, REST API
+outputs:
+  protocols:
+    artnet: Output
+    sacn: Output
+    dmx: Output
+    ddp: Output
+aliases:
+  - xScheduler
+capabilities:
+  live: true
+  designer: false
+integrations: Falcon Player (FPP master / remote), Remote Falcon
+license: GPL-3.0
+links:
+  url: https://github.com/xLightsSequencer/xSchedule
+platforms:
+  os:
+    - Windows
+    - Linux
+related:
+  - type: related
+    ref: pattern-drivers/xlights
+    notes: Companion player/scheduler for xLights sequences; bundled with xLights from 2017.1 to 2026.04, a separate download since
+    source:
+      url: https://github.com/xLightsSequencer/xLights/blob/master/README.txt
+      retrieved: '2026-11-18'
+      notes: "2017.1 '-- enh (keith) Add xSchedule'; 2026.05 'Move companion apps (xSchedule, xFade, xCapture, xScanner) to separate repos'"
+sources:
+  status:
+    url: https://github.com/xLightsSequencer/xSchedule/releases
+    retrieved: '2026-11-18'
+    notes: Release 2026.06 (2026-08-25, xSchedule_2026_06.exe); nightly build 2026-11-07
+  creator:
+    url: https://manual.xlights.org/xlights/chapters/untitled/history
+    retrieved: '2026-11-18'
+    notes: "'On February 18th, 2017, the sequence player/scheduler was removed making xLights a light sequencer only application. This capability was replaced with a standalone application called xScheduler created by Keith Westley.'"
+  aliases:
+    url: https://manual.xlights.org/xlights/chapters/untitled/history
+    retrieved: '2026-11-18'
+    notes: The xLights manual's history page calls it 'xScheduler'
+  notes:
+    url: https://github.com/xLightsSequencer/xSchedule/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'xSchedule is a show scheduler and player for lighting control. It plays FSEQ sequences, manages playlists, responds to events (MIDI, serial, timecode, API), and outputs to controllers via E1.31 (sACN), Art-Net, DDP, DMX, and other protocols. It includes a built-in web UI for remote control.' 'xSchedule is part of the xLights family of tools'"
+  inputs.other:
+    url: https://github.com/xLightsSequencer/xSchedule/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'Event system: MIDI, serial, E1.31, Art-Net, OSC, FPP Remote, timecode (SMPTE/LTC)'; 'REST API for automation'"
+  outputs.protocols:
+    url: https://github.com/xLightsSequencer/xSchedule/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'outputs to controllers via E1.31 (sACN), Art-Net, DDP, DMX'"
+  integrations:
+    - url: https://github.com/xLightsSequencer/xSchedule/blob/main/README.md
+      retrieved: '2026-11-18'
+      notes: "'Plugin system (xSMSDaemon for SMS control, RemoteFalcon integration)'"
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/README.txt
+      retrieved: '2026-11-18'
+      notes: "Release notes: 'Complete FPP Master mode in xScheduler', 'Complete FPP Remote mode in xScheduler'"
+  license:
+    url: https://github.com/xLightsSequencer/xSchedule/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: "'xSchedule is licensed under the GNU General Public License v3.0'"
+  platforms.os:
+    url: https://github.com/xLightsSequencer/xSchedule/releases
+    retrieved: '2026-11-18'
+    notes: Release 2026.05 ships xSchedule_2026_05.exe and xSchedule-2026.05-x86_64.AppImage; 2026.06 a Windows installer only

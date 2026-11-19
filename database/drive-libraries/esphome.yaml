@@ -1,0 +1,105 @@
+name: ESPHome
+status: active
+creator: Otto Winter (founder), Open Home Foundation (current)
+notes: Firmware built from YAML configuration files for ESP32, ESP8266, RP2040, LibreTiny (BK72xx, RTL87xx, LN882x) and nRF52 chips, controlled locally from Home Assistant (native API) or MQTT. Started by Otto Winter in 2018; Nabu Casa took it over in 2021 and it is now an Open Home Foundation project.
+features: 'Addressable LED light platforms: esp32_rmt_led_strip, i2s_clockless_led_strip, rp2040_pio_led_strip, beken_spi_led_strip, spi_led_strip, neopixelbus (ESP32 support deprecated in 2026.6) and fastled (not with ESP-IDF). Light effects can take E1.31 (sACN), Adalight serial and WLED UDP realtime data'
+hardware: ESP32, ESP8266, RP2040, BK72xx, RTL87xx, LN882x, nRF52
+language:
+  - C++
+  - Python
+license: GPL-3.0 AND MIT
+links:
+  repo: https://github.com/esphome/esphome
+other_links:
+  - https://esphome.io/
+  - https://esphome.io/components/light/
+platforms:
+  - ESP32
+  - ESP8266
+  - RP2040
+  - BK72xx
+  - RTL87xx
+  - LN882x
+  - nRF52
+protocols:
+  - sACN
+  - Adalight
+  - WLED UDP realtime
+  - MQTT
+related:
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: The fastled_clockless and fastled_spi light platforms are built on the Arduino FastLED library (not available with ESP-IDF)
+    source:
+      url: https://github.com/esphome/esphome-docs/blob/current/src/content/docs/components/light/fastled.mdx
+      retrieved: '2026-11-18'
+      notes: Docs source of esphome.io/components/light/fastled; See Also 'Arduino FastLED library'
+sources:
+  status:
+    url: https://github.com/esphome/esphome/releases
+    retrieved: '2026-11-18'
+    notes: Release 2026.11.0 published 2026-11-18
+  creator:
+    url: https://home-assistant.io/blog/2021/03/18/nabu-casa-has-acquired-esphome
+    retrieved: '2026-11-18'
+    notes: "'Nabu Casa came to an agreement to acquire the ESPHome project from Otto Winter, the founder of ESPHome.' The readme badge reads 'ESPHome - A project from the Open Home Foundation'"
+  notes:
+    url: https://github.com/esphome/esphome
+    retrieved: '2026-11-18'
+    notes: "Repository description: 'ESPHome is a system to control your ESP32, ESP8266, BK72xx, RP2040 by simple yet powerful configuration files and control them remotely through Home Automation systems.'"
+  features:
+    url: https://github.com/esphome/esphome-docs/tree/current/src/content/docs/components/light
+    retrieved: '2026-11-18'
+    notes: "Docs source of esphome.io/components/light/ (each platform page); neopixelbus: 'ESP32 support deprecated in 2026.6'; fastled: 'FastLED does not work with ESP-IDF'; light/index: E1.31, Adalight and WLED effects"
+  license:
+    url: https://github.com/esphome/esphome/blob/dev/LICENSE
+    retrieved: '2026-11-18'
+    notes: "'The C++/runtime codebase of the ESPHome project (file extensions .c, .cpp, .h, .hpp, .tcc, .ino) are published under the GPLv3 license. The python codebase and all other parts of this codebase are published under the MIT license.'"
+  platforms:
+    - url: https://github.com/esphome/esphome
+      retrieved: '2026-11-18'
+      notes: Repository description names ESP32, ESP8266, BK72xx, RP2040
+    - url: https://github.com/esphome/esphome-docs/blob/current/src/content/docs/components/libretiny.mdx
+      retrieved: '2026-11-18'
+      notes: "LibreTiny platform: 'BK72xx: BK7231T, BK7231N, BK7238', 'RTL87xx: RTL8710BN, RTL8710BX, RTL8720CF, RTL8720CM', 'LN882x: LN882H'; nRF52 has its own platform page (components/nrf52)"
+  protocols:
+    url: https://github.com/esphome/esphome-docs/blob/current/src/content/docs/components/light/index.mdx
+    retrieved: '2026-11-18'
+    notes: "Effects table: 'E1.31 - Receive sACN / E1.31 frames over the network', 'Adalight - Receive Adalight protocol over UART', 'WLED - Receive WLED UDP sync protocol' ('UDP Realtime Control protocol used by WLED'); MQTT component at components/mqtt"
+  supported_ics:
+    url: https://github.com/esphome/esphome-docs/tree/current/src/content/docs/components/light
+    retrieved: '2026-11-18'
+    notes: 'Union of the chipset lists: esp32_rmt / i2s_clockless (WS2811, WS2812, SK6812, APA106, SM16703); rp2040_pio (WS2812, WS2812B, SK6812, SM16703); beken_spi (WS2812, SK6812, APA106, SM16703); neopixelbus (WS2811, WS2812, WS2813, SK6812, TM1814, TM1829, TM1914, APA106, LC8812, WS2801, DotStar, LPD6803, LPD8806, P9813); fastled clockless (incl. WS2852, APA104, GW6205, LPD1886, PL9823, SK6822, TM1803, TM1804, TM1809, UCS1903, UCS1903B, UCS1904, UCS2903) and SPI (APA102, LPD8806, P9813, SK9822, SM16716, WS2801, WS2803); spi_led_strip tested with APA102 and P9813'
+supported_ics:
+  - WS2811
+  - WS2812
+  - WS2812B
+  - WS2813
+  - WS2852
+  - SK6812
+  - SK6822
+  - APA104
+  - APA106
+  - PL9823
+  - GW6205
+  - LPD1886
+  - TM1803
+  - TM1804
+  - TM1809
+  - TM1814
+  - TM1829
+  - TM1914
+  - UCS1903
+  - UCS1903B
+  - UCS1904
+  - UCS2903
+  - SM16703
+  - LC8812
+  - WS2801
+  - WS2803
+  - LPD6803
+  - LPD8806
+  - P9813
+  - APA102
+  - SK9822
+  - SM16716

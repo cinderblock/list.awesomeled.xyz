@@ -1,0 +1,57 @@
+name: MicroPython
+status: active
+creator: Damien George
+notes: Lean and efficient Python 3 implementation for microcontrollers and constrained systems. Its neopixel module drives WS2812 / NeoPixel strips, RGB or RGBW, with 800 kHz or 400 kHz timing; it is included by default on the ESP8266, ESP32 and RP2 ports and installable with mip on STM32 and others.
+features: neopixel module (NeoPixel class; bpp 3 or 4, timing 800 kHz / 400 kHz or a custom bitstream timing tuple)
+hardware: ESP32 family, ESP8266, RP2040/RP2350, SAMD21/SAMD51, STM32, nRF51/nRF52, i.MX RT and more
+language: Python # interpreter written in C
+license: MIT
+links:
+  repo: https://github.com/micropython/micropython
+other_links:
+  - https://micropython.org/
+  - https://docs.micropython.org/en/latest/library/neopixel.html
+platforms:
+  - ESP32
+  - ESP8266
+  - RP2040
+  - RP2350
+  - SAMD21
+  - SAMD51
+  - STM32
+  - nRF52
+  - i.MX RT
+  - Linux
+  - macOS
+  - Windows
+sources:
+  status:
+    url: https://github.com/micropython/micropython/releases
+    retrieved: '2026-11-18'
+    notes: Release v1.29.0 published 2026-08-24
+  creator:
+    url: https://github.com/micropython/micropython/blob/master/LICENSE
+    retrieved: '2026-11-18'
+    notes: "'Copyright (c) 2013-2026 Damien P. George'"
+  notes:
+    url: https://github.com/micropython/micropython
+    retrieved: '2026-11-18'
+    notes: "Repository description: 'MicroPython - a lean and efficient Python implementation for microcontrollers and constrained systems'"
+  features:
+    url: https://docs.micropython.org/en/latest/library/neopixel.html
+    retrieved: '2026-11-18'
+    notes: "'neopixel --- control of WS2812 / NeoPixel LEDs'; 'This module is only included by default on the ESP8266, ESP32 and RP2 ports. On STM32 / Pyboard and others, you can either install the neopixel package using mip'; 'bpp is 3 for RGB LEDs, and 4 for RGBW LEDs'; 'timing is 0 for 400KHz, and 1 for 800kHz LEDs'"
+  license:
+    url: https://github.com/micropython/micropython/blob/master/LICENSE
+    retrieved: '2026-11-18'
+    notes: The MIT License (MIT)
+  platforms:
+    url: https://github.com/micropython/micropython/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: "Tier 1 ports: esp32 (ESP32, ESP32S2, ESP32S3, ESP32C3, ESP32C6), mimxrt (NXP i.MX RT), rp2 ('Raspberry Pi RP2040 and RP2350'), samd ('SAMD21 and SAMD51'), stm32, the Unix port ('Linux, BSD, macOS, WSL'), windows; Tier 2 nrf ('nRF51 and nRF52'), renesas-ra, zephyr...; Tier 3 esp8266"
+  supported_ics:
+    url: https://docs.micropython.org/en/latest/library/neopixel.html
+    retrieved: '2026-11-18'
+    notes: "Module title 'control of WS2812 / NeoPixel LEDs' and 'This class stores pixel data for a WS2812 LED strip'. The intro sentence says 'WS2818 / NeoPixel LEDs', which reads as a typo, so WS2818 is not listed"
+supported_ics:
+  - WS2812

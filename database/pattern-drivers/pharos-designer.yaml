@@ -1,0 +1,65 @@
+name: Pharos Designer
+status: active
+creator: Pharos Architectural Controls
+notes: Pharos' free Windows/macOS software (Designer 2) for programming its Designer controllers - LPC, LPC X, VLC and VLC+ - which then run the show standalone without a PC. Timelines, scenes and Designer Trigger rules; Designer Mapping turns fixtures into a pixel canvas for effects and video, and the VLC drives large LED pixel arrays from media files or an HDMI input.
+inputs:
+  video: Input
+  other:
+    - DMX
+  other_notes: Designer Trigger rules and scripting, DMX and eDMX input
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Both
+    dmx: Both
+    kinet: Output
+  other:
+    - Pathport
+    - DALI
+    - DVI
+    - DisplayPort
+  other_notes: Pathport, DALI (via RIO D4), DVI/DisplayPort pixel-matrix output (LPC X)
+aliases:
+  - Pharos
+capabilities:
+  live: true
+  designer: true
+links:
+  url: https://www.pharoscontrols.com/designer/
+platforms:
+  os:
+    - Windows
+    - macOS
+  notes: Projects are uploaded over Ethernet to Pharos LPC / VLC controllers, which play them back
+sources:
+  status:
+    url: https://www.pharoscontrols.com/designer/
+    retrieved: '2026-11-18'
+    notes: "'Designer 2 Software', 'Free to download' for Windows and macOS, 'including all future updates'; controllers on sale (datasheet '© 2004-2026')"
+  creator:
+    url: https://dl.pharoscontrols.com/documentation/datasheets_specifications/designer/Pharos_Designer_Full_Range_Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'© 2004-2026 Pharos Architectural Controls Limited.'"
+  notes:
+    url: https://dl.pharoscontrols.com/documentation/datasheets_specifications/designer/Pharos_Designer_Full_Range_Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "LPC: 'Programmed and configured using the free Pharos Designer software - available for Windows or macOS - with upload over Ethernet'; Designer Mapping 'play video across the entire array'; VLC 'for large LED pixel arrays such as building façades, bridges, and presentation walls ... from locally stored HD media files or an HDMI video input'"
+  inputs.video:
+    url: https://dl.pharoscontrols.com/documentation/datasheets_specifications/designer/Pharos_Designer_Full_Range_Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "VLC: 'Live video can be captured on the HDMI input at resolutions up to 1080p60.'"
+  outputs.protocols:
+    - url: https://dl.pharoscontrols.com/documentation/datasheets_specifications/designer/Pharos_Designer_Full_Range_Datasheet.pdf
+      retrieved: '2026-11-18'
+      notes: "sACN 'ANSI E1.31 (with per fixture priority)'; 'Art-Net I, Art-Net II, Art-Net 3, Art-Net 4 (transmit only)'; 'KiNET V1, V2, V3'; Pathport; LPC inputs 'sACN or Art-Net (option to pass-thru on local DMX output)'; VLC 'can output all commonly used eDMX protocols (sACN, Art-Net, KiNET)'"
+    - url: https://dl.pharoscontrols.com/software_help/designer2/content/help/reference/network/controller%20protocols.htm
+      retrieved: '2026-11-18'
+      notes: Designer 2 help, Controller Protocols - Art-Net output customisation, KiNET sync, eDMX pass-through, DVI/DisplayPort pixel matrix output on the LPC X
+  aliases:
+    url: https://www.pharoscontrols.com/
+    retrieved: '2026-11-18'
+    notes: "Brand name ('Welcome to Pharos Architectural Controls'); hardware makers (e.g. DiGidot) list 'Pharos' as an Art-Net/DMX source. Pharos also sells a separate Express range ('Solutions Express Designer'), so the alias is a judgement call"
+  platforms.os:
+    url: https://www.pharoscontrols.com/designer/
+    retrieved: '2026-11-18'
+    notes: "'Free to download' for Windows and macOS"

@@ -1,0 +1,49 @@
+name: HLS
+status: end-of-life
+creator: Joe Hinkle
+notes: Joe Hinkle's free Windows sequencer for Christmas light shows, released as a beta in February 2012 - RGB channels, PixelPlane pixel matrices, Nutcracker effects, a preview window, shows played by HLS Player and a video player. Converts Vixen and LOR sequences. The last release-notes entry is version 25A (8 Mar 2016) and the download page no longer exists.
+outputs:
+  protocols:
+    sacn: Output
+    dmx: Output
+  dmx_notes: COM-port DMX through Enttec Open DMX and Enttec DMX USB Pro
+  other:
+    - Renard
+    - Lynx
+    - Pixelnet
+capabilities:
+  designer: true
+dead_links:
+  - url: http://joehinkle.com/HLS/
+    archive: https://web.archive.org/web/20190917203119/http://joehinkle.com:80/HLS/
+    checked: '2026-11-18'
+    notes: Redirects to www.joehinkle.com/HLS/, which returns 404 (the site now sells Joe Hinkle's pixel controllers); the 2019 capture lists HLS_Install_26A.zip, HLS_PLAYER_1D.zip and the manuals
+links:
+  url: http://joehinkle.com/HLS/
+platforms:
+  os:
+    - Windows
+sources:
+  status:
+    - url: https://web.archive.org/web/2019/http://joehinkle.com:80/HLS/HLS%20Release%20Notes.txt
+      retrieved: '2026-11-18'
+      notes: "Maker's release notes (archived 2019): newest entry '3/8/2016 Version 25A', oldest '2/16/12 - Version 0E'; the 2019 directory listing also holds HLS_Install_26A.zip dated 2018-08-21"
+    - url: https://www.joehinkle.com/HLS/
+      retrieved: '2026-11-18'
+      notes: HTTP 404 'Page not found'
+  creator:
+    url: https://web.archive.org/web/20250601081502/https://www.doityourselfchristmas.com/wiki/index.php?title=HLS
+    retrieved: '2026-11-18'
+    notes: "DIYC community wiki (archived): 'In February of 2012 Joe offered his sequencer in beta form to all who wanted to try it ( HLS Sequencer - Beta - Free to use ).'"
+  notes:
+    url: https://web.archive.org/web/2019/http://joehinkle.com:80/HLS/HLS%20Release%20Notes.txt
+    retrieved: '2026-11-18'
+    notes: "Release notes: 'Added Pixel Matrix Animation', 'auto-create MegaTree PixelPlane', 'Fixed Nutcracker to PGN Pixel Mapping', 'Completed Video Player Implementation', 'Added support for HLS Player', 'Vixen and LOR Conversion'"
+  outputs.protocols:
+    url: https://web.archive.org/web/2019/http://joehinkle.com:80/HLS/HLS%20Release%20Notes.txt
+    retrieved: '2026-11-18'
+    notes: "'Added Unicast to E131', 'Added COM based Entec Pro', 'Added Entec Open driver', 'Added 7d padding to Renard Protocol', 'Lynx working', 'Revided PixelNet code'"
+  platforms.os:
+    url: https://web.archive.org/web/2019/http://joehinkle.com:80/HLS/Read%20Me%20about%20HLS%20Download.txt
+    retrieved: '2026-11-18'
+    notes: "Joe Hinkle's readme: the download is a self-extracting .exe ('a concern about Windows 7 security and Admin rights'); the HLS user manual (UMaRG-13F) installs HLS.exe and also has Linux and OSX installation sections"

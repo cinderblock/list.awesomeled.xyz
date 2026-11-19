@@ -1,0 +1,64 @@
+name: vvvv
+status: active
+creator: vvvv (Dießl & Gregor GbR)
+notes: Visual live-programming environment for .NET (vvvv gamma), used for interactive installations and custom media servers; DMX, Art-Net and sACN are among its built-in I/O options. Free without restrictions for non-commercial use; commercial use needs a per-developer licence.
+inputs:
+  other:
+    - MIDI
+    - OSC
+    - TUIO
+    - MQTT
+    - ZeroMQ
+    - UDP
+    - TCP
+    - WebSocket
+    - HTTP
+    - Spout
+    - NDI
+    - Ableton Link
+  other_notes: MIDI, OSC, TUIO, MQTT, ZeroMQ, UDP, TCP, Websocket, HTTP, Spout, NDI, Ableton Link, Arduino, Raspberry Pi
+outputs:
+  protocols:
+    artnet: Output
+    sacn: Output
+    dmx: Output
+aliases:
+  - vvvv gamma
+capabilities:
+  live: true
+  programmatic: true
+links:
+  url: https://vvvv.org/
+platforms:
+  os:
+    - Windows
+  notes: Windows x64 and Windows Arm builds; no native macOS version (runs in Parallels on Apple silicon)
+sources:
+  status:
+    url: https://thegraybook.vvvv.org/changelog/7.x.html
+    retrieved: '2026-11-18'
+    notes: vvvv gamma 7.4 released 17 07 2026
+  creator:
+    url: https://vvvv.org/
+    retrieved: '2026-11-18'
+    notes: "Imprint: 'vvvv - Dießl & Gregor GbR', Oranienstrasse 10, 10997 Berlin/Germany"
+  notes:
+    url: https://vvvv.org/
+    retrieved: '2026-11-18'
+    notes: "'A visual live-programming environment that takes you from rapid prototyping to final production.' Licensing: 'vvvv is free without any restrictions for non-commercial use. Commercial use requires a License.'"
+  inputs.other:
+    url: https://vvvv.org/
+    retrieved: '2026-11-18'
+    notes: "Rapid Prototyping list: Arduino, RaspberryPi, Midi, OSC, TUIO, RCP, MQTT, ZeroMQ, UDP, TCP, redis, dmx, Art-Net, sACN, Websocket, HTTP, Spout, NDI, Ableton Link; Media Server: 'video, audio, realtime graphics, lights, lasers'"
+  outputs.protocols:
+    url: https://vvvv.org/
+    retrieved: '2026-11-18'
+    notes: Rapid Prototyping list names 'dmx', 'Art-Net' and 'sACN' (direction not stated)
+  aliases:
+    url: https://vvvv.org/
+    retrieved: '2026-11-18'
+    notes: "Current version named 'vvvv gamma', 'Version: 7.4'"
+  platforms.os:
+    url: https://vvvv.org/
+    retrieved: '2026-11-18'
+    notes: "Downloads for Windows and 'Windows Arm'; 'vvvv does not have a native version for macOS!' - use the Windows Arm build in Parallels on Apple silicon"
