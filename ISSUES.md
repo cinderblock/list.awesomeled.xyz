@@ -314,15 +314,6 @@ quoted; not applied because they're spec values, not links. Verify and apply:
 - `diffusive-materials/lexan-dclw` `name`: "Lexan DCLW" → "LEXAN DLCW" <https://led-professional.com/products/led-optics/sabic-to-introduce-pioneering-lexantm-dlcw-light-diffusing-technology>
 - `diffusive-materials/perspex-diffuse` `physical.sizes_available`: "up to 1220x2440" → "3050 x 2030 mm" <https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/>
 
-## FYI browse UX (stream 7): table-columns.tsx still reads the old package fields
-
-`app/components/data/table-columns.tsx` `packageList` reads
-`physical.package_size` / `package_sizes`, and `fields.ts` skips
-`physical.package_sizes`. Both fields are gone: pixels and pixel ICs have one
-`physical.packages` array (common.json `ic_package` / `led_package`), which the
-generic array handling already facets correctly. The override and skip rule
-are dead code now; not a visible bug.
-
 ## Spec errors seen during the price/status research pass (stream 2)
 
 The data-freshness pass (stream 6, 2026-11-18) read every hardware/software

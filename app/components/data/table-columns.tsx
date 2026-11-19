@@ -62,26 +62,6 @@ const RIGHT_ALIGNED = new Set<FieldKind>(['number', 'quantity', 'price', 'year']
 // Columns that are not database fields
 const PSEUDO_COLUMNS = new Set(['links']);
 
-// The Package column shows individual sizes; facet on those, not on the
-// joined source string ("5050, 3535, 2020"). Mirrors renderPackages in
-// lib/columns.tsx.
-function packageList(item: BaseEntry): string[] {
-  const physical = item.physical as { package_sizes?: unknown; package_size?: unknown } | undefined;
-  if (Array.isArray(physical?.package_sizes)) return physical.package_sizes.map(String);
-  const raw = physical?.package_size;
-  if (typeof raw === 'string') {
-    return raw
-      .split(/[,&]/)
-      .map((s) => s.trim())
-      .filter(Boolean)
-      .flatMap((part) => {
-        const subs = part.split('/').map((s) => s.trim());
-        return subs.length > 1 && subs.every((s) => s.length >= 3) ? subs : [part];
-      });
-  }
-  return raw == null ? [] : [String(raw)];
-}
-
 // Pattern-driver platforms: the cell collapses a full desktop set to "All
 // OS", but a filter for "Windows" must still find those entries.
 function platformList(item: BaseEntry): string[] {
@@ -100,7 +80,6 @@ function platformList(item: BaseEntry): string[] {
 // Per-column accessor overrides, keyed by "<category>/<column key>" or just
 // the column key when it applies everywhere.
 const VALUE_OVERRIDES: Record<string, (item: BaseEntry) => string[]> = {
-  'physical.package_size': packageList,
   'pattern-drivers/platforms.os': platformList,
 };
 
