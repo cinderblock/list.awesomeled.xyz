@@ -15,11 +15,12 @@ compute:
   isa: Xtensa
   linux: false
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   ethernet: 100BASE-TX
   bluetooth: '4.2'
   usb: Power + UART (CP2104)
-  poe: Y
+  poe: true
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf
 images:

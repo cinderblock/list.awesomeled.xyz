@@ -11,14 +11,15 @@ compute:
   isa: Xtensa
   linux: false
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   bluetooth: '4.2'
   usb: Power + UART
   serial: true
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf
 io:
-  bms: 'No'
+  bms: false
   imu: false
   max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
 price:

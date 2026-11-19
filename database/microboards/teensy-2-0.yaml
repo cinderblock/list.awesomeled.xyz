@@ -6,11 +6,11 @@ creator:
 power:
   voltage:
     max: 5V
-  gpio_voltage: 5.0V
+  gpio_voltage: 5V
 compute:
   soc: AT90USB1286
   cpu: AVR
-  isa: AVR5
+  isa: AVR
   clock_speed: 16MHz
   flash: 127kB
   ram: 8kB
@@ -29,8 +29,8 @@ images:
     source: https://www.pjrc.com/store/teensypp.html
     credit: PJRC
 io:
-  storage: Shield
-  bms: 'No'
+  storage: add-on # shield
+  bms: false
   imu: false
   max_outputs: 1 # AVR bit-bang
 price: 24

@@ -6,11 +6,11 @@ creator:
 power:
   voltage:
     max: 5V
-  gpio_voltage: 5.0V
+  gpio_voltage: 5V
 compute:
   soc: ATmega32u4
   cpu: AVR
-  isa: AVR5
+  isa: AVR
   clock_speed: 16MHz
   flash: 32kB
   ram: 2.5kB
@@ -26,7 +26,7 @@ images:
     credit: Geek3
     license: CC BY-SA 3.0
 io:
-  bms: 'No'
+  bms: false
   imu: false
   max_outputs: 1 # AVR bit-bang (FastLED)
 price: 22.8

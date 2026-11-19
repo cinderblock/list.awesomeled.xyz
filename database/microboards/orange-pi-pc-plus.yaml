@@ -3,15 +3,17 @@ creator:
   name: Shenzhen Xunlong Software
   page: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-PC-Plus.html
 compute:
-  soc: Allwinner Quad Core H3
+  soc: Allwinner H3
   cpu: 4× ARM Cortex-A7
   isa: ARMv7-A
   clock_speed: 1.6GHz
-  flash: 8GB eMMC
+  flash: 8GB
   ram: 1GB
   linux: true
+  flash_notes: eMMC
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   ethernet: 100BASE-TX
   usb: OTG x1, 2.0 x3
 datasheet:
@@ -29,7 +31,7 @@ images:
     credit: Shenzhen Xunlong Software (Orange Pi)
 io:
   storage: microSD
-  bms: 'No'
+  bms: false
   imu: false
 price: 23.99
 sources:

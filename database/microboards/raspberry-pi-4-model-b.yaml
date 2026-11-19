@@ -16,14 +16,18 @@ compute:
   cpu: 4× ARM Cortex-A72
   isa: ARMv8-A
   clock_speed: 1.8GHz
-  flash: microSD
-  ram: 1GB, 2GB, 3GB, 4GB or 8GB
+  ram:
+    - 1GB
+    - 2GB
+    - 3GB
+    - 4GB
+    - 8GB
   linux: true
 connectivity:
   wifi:
     - 2.4GHz
     - 5GHz
-  ethernet: Gigabit
+  ethernet: 1000BASE-T
   bluetooth: '5.0'
   usb: OTG x2, 3.0 x2
   serial: true
@@ -36,7 +40,7 @@ images:
     license: CC BY-SA 4.0
 io:
   storage: microSD
-  bms: 'No'
+  bms: false
   imu: false
 price: 35
 price_source:

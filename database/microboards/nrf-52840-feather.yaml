@@ -8,7 +8,7 @@ aliases:
   - Adafruit Feather nRF52840 Express
   - Feather nRF52840 Express
 compute:
-  soc: NRF 52840
+  soc: nRF52840
   cpu: ARM Cortex-M4
   isa: ARMv7-M
   clock_speed: 64MHz
@@ -30,7 +30,7 @@ images:
 io:
   max_outputs: 21
   bms: 1S
-  imu: Wing
+  imu: add-on # FeatherWing
 price: 24.95
 price_source:
   part: '4062'

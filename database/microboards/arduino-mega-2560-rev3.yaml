@@ -30,7 +30,7 @@ images:
     license: CC BY-SA 4.0
 io:
   max_outputs: 54
-  bms: 'No'
+  bms: false
   imu: false
 price: 49.9
 price_source:

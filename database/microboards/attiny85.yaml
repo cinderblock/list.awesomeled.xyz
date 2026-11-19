@@ -6,7 +6,7 @@ creator:
 power:
   voltage:
     max: 5V
-  gpio_voltage: 5.0V
+  gpio_voltage: 5V
 aliases:
   - ATtiny85-20PU
   - ATtiny85-20SU
@@ -14,19 +14,19 @@ aliases:
 compute:
   soc: ATtiny85
   cpu: AVR
-  isa: AVR2.5
+  isa: AVR
   clock_speed: 20MHz
   flash: 8kB
   ram: 512B
   linux: false
 connectivity:
   serial: true
-  usb: No
+  usb: false
 datasheet:
   url: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
 io:
   max_outputs: 6
-  bms: 'No'
+  bms: false
   imu: false
 price: 1.66
 price_source:

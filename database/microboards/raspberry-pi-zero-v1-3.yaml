@@ -13,12 +13,11 @@ compute:
   cpu: ARM11
   isa: ARMv6Z
   clock_speed: 1.0GHz
-  flash: microSD
   ram: 512MB
   linux: true
 connectivity:
-  wifi: USB
-  ethernet: USB
+  wifi: add-on # USB dongle
+  ethernet: add-on # USB adapter
   usb: OTG
   serial: true
 datasheet:
@@ -31,7 +30,7 @@ images:
 io:
   max_outputs: 1
   storage: microSD
-  bms: 'No'
+  bms: false
   imu: false
 price: 10
 price_source:

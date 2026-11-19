@@ -48,7 +48,6 @@ const STALE_EXAMPLES = new Set([
   'commercial-systems',
   'drive-libraries',
   'level-converters',
-  'microboards',
   'pattern-drivers',
   'pixel-ics',
   'pixels',

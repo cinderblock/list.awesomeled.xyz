@@ -154,6 +154,11 @@
         { "type": "string", "pattern": "^~?\\d+(\\.\\d+)?\\s?(mW|W)$" }
       ]
     },
+    "memory": {
+      "description": "A memory size with its unit: '512kB', '4MB', '1GB' (B, kB, MB, GB, TB). Parsed by app/lib/quantity.ts.",
+      "type": "string",
+      "pattern": "^\\d+(\\.\\d+)?\\s?(B|kB|MB|GB|TB)$"
+    },
     "length": {
       "description": "A length with its unit, always: '0.1mm', '3.2 mm', '0.004in', '25um', or a range ('0.125-0.22in'). No bare numbers: mm vs inches is exactly the mistake this prevents. Parsed by app/lib/quantity.ts.",
       "oneOf": [

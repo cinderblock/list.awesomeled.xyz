@@ -9,13 +9,14 @@ power:
     max: 5V
   gpio_voltage: 3.3V
 compute:
-  soc: iMXRT1062
+  soc: i.MX RT1062
   cpu: ARM Cortex-M7
   isa: ARMv7-M
   clock_speed: 600MHz
   flash: 1984kB
-  ram: 1024kB (512kB is "tightly coupled")
+  ram: 1024kB
   linux: false
+  ram_notes: 512kB is "tightly coupled"
 connectivity:
   usb: OTG
   serial: true
@@ -26,7 +27,7 @@ images:
     source: https://www.pjrc.com/store/teensy40.html
     credit: PJRC
 io:
-  bms: 'No'
+  bms: false
   imu: false
   max_outputs: 8 # OctoWS2811; 4.x any-pin support allows more
 price: 23.8

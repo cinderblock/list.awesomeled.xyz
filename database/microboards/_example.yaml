@@ -1,147 +1,62 @@
-# Example 1: Full-featured microboard with all fields
-name: Example DevBoard Pro
+# Example 1: Wi-Fi microcontroller board (all fields)
+name: Example ESP32 Board
+status: active
 release_year: 2024
-creator: DevBoard Inc
-manufacturers:
-  - DevBoard Inc
-  - Licensed Manufacturer
-vendors:
-  - Adafruit
-  - SparkFun
-  - Amazon
-notes: Feature-rich development board for LED projects
-
-bluetooth: BLE 5.0
-bms: 1S LiPo
-clock_speed: 240MHz
-cpu: Xtensa LX7 Dual-Core
-ethernet: 100Mbps
-flash: 16MB
-gpio_voltage: 3.3V
-imu: 6-axis
-isa: Xtensa
-linux: false
-max_input_voltage: 12
-max_outputs: 16
-min_input_voltage: 4.5
-poe: false
-price: 24.99
-ram: 8MB PSRAM
-soc: ExampleSoC-S3
-storage: microSD
-ttl_serial: true
-url: https://example.com/devboard-pro
-usb: USB-C OTG
-wifi: Wi-Fi 6
+creator:
+  name: Example Boards
+  url: https://example.com
+  page: https://example.com/esp32-board
+notes: ESP32-S3 board with an Ethernet PHY; runs WLED.
+power:
+  voltage:
+    min: 5V
+    max: 12V
+  gpio_voltage: 3.3V
+compute:
+  soc: ESP32-S3 # spelled as the maker does
+  cpu: 2x Xtensa LX7
+  isa: Xtensa # Xtensa, RISC-V, AVR, ARMv6-M, ARMv6Z, ARMv7-M, ARMv7-A, ARMv8-A
+  clock_speed: 240MHz
+  flash: 16MB # memory grammar: B, kB, MB, GB, TB
+  ram: 512kB
+  ram_notes: plus 8MB PSRAM
+  linux: false
+connectivity:
+  wifi: # bands on the board; false when none; add-on = dongle, shield or module
+    - 2.4GHz
+  ethernet: 100BASE-TX # false, 100BASE-TX, 1000BASE-T or add-on
+  bluetooth: 5.0 LE
+  usb: USB-C (native USB)
+  serial: true
+  poe: add-on # true, false or add-on
+io:
+  max_outputs: 8 # usable pixel data outputs
+  storage: microSD # false, microSD, SD or add-on
+  bms: false # false, 1S (LiPo charger) or diode
+  imu: false # false, true or add-on
 ---
-# Example 2: Linux-capable single board computer
-name: Example Pi Clone
-release_year: 2023
-creator: SBC Company
-manufacturers:
-  - SBC Company
-notes: Linux SBC suitable for Falcon Player or similar
+# Example 2: Linux single-board computer with RAM variants
+name: Example SBC
+compute:
+  soc: Example A53
+  isa: ARMv8-A
+  clock_speed: 1.5GHz
+  flash: 8GB
+  flash_notes: eMMC
+  ram: # a list when variants differ
+    - 1GB
+    - 2GB
+    - 4GB
+  linux: true
+connectivity:
+  wifi:
+    - 2.4GHz
+    - 5GHz
+  ethernet: 1000BASE-T
+  bluetooth: '5.0'
+  usb: OTG x1, 2.0 x2
+io:
+  storage: microSD
 
-bluetooth: BT 5.0
-bms: null
-clock_speed: 1.8GHz
-cpu: Cortex-A53 Quad-Core
-ethernet: Gigabit
-flash: null
-gpio_voltage: 3.3V
-imu: false
-isa: ARMv8-A
-linux: true
-max_input_voltage: 5
-max_outputs: 8
-min_input_voltage: 5
-poe: PoE HAT compatible
-price: 45
-ram: 2GB DDR4
-soc: AllwinnerH6
-storage: eMMC 16GB + microSD
-ttl_serial: '/dev/ttyS0'
-url: https://example.com/pi-clone
-usb: USB 3.0 x2, USB 2.0 x2
-wifi: 802.11ac
----
-# Example 3: Budget ESP-based board
-name: Example ESP Mini
-release_year: 2021
-creator: null
-manufacturers:
-  - Generic ESP Factory
-vendors:
-  - AliExpress
-notes: Budget-friendly WLED-compatible board
-
-bluetooth: false
-bms: null
-clock_speed: 240MHz
-cpu: Xtensa LX7
-ethernet: false
-flash: 4MB
-gpio_voltage: 3.3V
-imu: false
-isa: Xtensa
-linux: false
-max_input_voltage: 5
-max_outputs: 8
-min_input_voltage: 3.3
-poe: false
-price: 4.99
-ram: 320KB
-soc: ESP32-S2
-storage: null
-ttl_serial: true
-url: https://example.com/esp-mini
-usb: USB-C
-wifi: 802.11 b/g/n
----
-# Example 4: PoE-powered Ethernet board
-name: Example PoE Controller Board
-release_year: 2022
-creator: Industrial IoT Corp
-manufacturers:
-  - Industrial IoT Corp
-notes: PoE-powered for clean installations without separate power
-
-bluetooth: false
-bms: null
-clock_speed: 168MHz
-cpu: Cortex-M4
-ethernet: 100Mbps
-flash: 1MB
-gpio_voltage: 5V
-imu: false
-isa: ARMv7-M
-linux: false
-max_input_voltage: 57
-max_outputs: 4
-min_input_voltage: 48
-poe: '802.3at PoE+'
-price: 35
-ram: 256KB
-soc: W5500 + STM32
-storage: null
-ttl_serial: true
-usb: Micro-USB (programming only)
-wifi: false
----
-# Example 5: Minimal entry for simple board
-name: Example Nano
-creator: null
-vendors:
-  - Various
-notes: Arduino Nano compatible for simple LED projects
-clock_speed: 16MHz
-cpu: AVR
-flash: 32KB
-gpio_voltage: 5V
-isa: AVR
-linux: false
-max_outputs: 6
-price: 2.50
-ram: 2KB
-soc: ATmega328P
-usb: Mini-USB
+# disable URL checks on this file
+# textlint-disable

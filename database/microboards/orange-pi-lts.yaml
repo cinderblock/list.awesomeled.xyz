@@ -12,11 +12,14 @@ compute:
   cpu: 4× ARM Cortex-A7
   isa: ARMv7-A
   clock_speed: 1.2GHz
-  flash: 2MB SPI flash
-  ram: 256MB+
+  flash: 2MB
+  ram: 256MB
   linux: true
+  flash_notes: SPI flash
+  ram_notes: larger variants exist
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   ethernet: 100BASE-TX
   usb: OTG x1, 2.0 x1
 datasheet:

@@ -17,7 +17,8 @@ compute:
   ram: 32kB
   linux: false
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   usb: OTG
   serial: true
 datasheet:
@@ -28,7 +29,7 @@ images:
     credit: Adafruit Industries
 io:
   bms: 1S
-  imu: Wing
+  imu: add-on # FeatherWing
   max_outputs: 1 # SAMD21 NeoPixel bit-bang
 price: 34.95
 price_source:

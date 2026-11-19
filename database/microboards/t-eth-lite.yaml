@@ -6,15 +6,16 @@ creator:
   page: https://lilygo.cc/products/t-eth-lite
 notes: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
 compute:
-  soc: ESP32 S3
+  soc: ESP32-S3
   cpu: Xtensa LX7
   isa: Xtensa
   flash: 16MB
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   ethernet: 100BASE-TX
-  bluetooth: 5 (LE)
-  poe: optional (PoE shield)
+  bluetooth: 5.0 LE
+  poe: add-on # PoE shield
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf
 images:

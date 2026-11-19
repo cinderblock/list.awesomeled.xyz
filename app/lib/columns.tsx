@@ -758,6 +758,27 @@ export const connectorColumns: Column[] = [
   partPriceColumn,
 ];
 
+// Microboard flash / RAM (common.json memory): one size, or a list of
+// variants ("1GB", "2GB", ...) shown together and sorted by the smallest
+function renderMemoryVariants(v: unknown) {
+  if (Array.isArray(v)) return <span className="tabular-nums">{v.map(String).join(' / ')}</span>;
+  return formatMemory(v);
+}
+const sortMemoryVariants = (v: unknown) => sortMemory(Array.isArray(v) ? v[0] : v);
+
+// Microboard connectivity (microboard.json): a list of Wi-Fi bands or one
+// Ethernet speed, false when absent, or 'add-on' (dongle, shield, module)
+function renderConnectivity(v: unknown) {
+  if (v === false) return <span className="data-table-null">No</span>;
+  if (v === 'add-on') return <TextPill text="Add-on" />;
+  if (Array.isArray(v)) return renderBadgeArray(v);
+  if (typeof v === 'string') {
+    const badge = getBadgeForValue(v);
+    return badge ? <Badge badge={badge} /> : <TextPill text={v} />;
+  }
+  return null;
+}
+
 export const microboardColumns: Column[] = [
   {
     key: 'links',
@@ -780,19 +801,31 @@ export const microboardColumns: Column[] = [
   {
     key: 'compute.flash',
     label: 'Flash',
-    render: formatMemory,
-    sortValue: sortMemory,
+    render: renderMemoryVariants,
+    sortValue: sortMemoryVariants,
     className: 'data-table-cell--right',
   },
   {
     key: 'compute.ram',
     label: 'RAM',
-    render: formatMemory,
-    sortValue: sortMemory,
+    render: renderMemoryVariants,
+    sortValue: sortMemoryVariants,
     className: 'data-table-cell--right',
   },
-  { key: 'connectivity.wifi', label: 'Wi-Fi', filterConfig: { type: 'select' } },
-  { key: 'connectivity.ethernet', label: 'Ethernet', filterConfig: { type: 'select' } },
+  {
+    key: 'connectivity.wifi',
+    label: 'Wi-Fi',
+    render: renderConnectivity,
+    filterConfig: { type: 'select' },
+    headerTip: 'Bands on the board; Add-on = through a USB dongle or shield',
+  },
+  {
+    key: 'connectivity.ethernet',
+    label: 'Ethernet',
+    render: renderConnectivity,
+    filterConfig: { type: 'select' },
+    headerTip: 'On-board speed; Add-on = through a USB adapter or module',
+  },
   linkCountColumn(
     'linked.hosts',
     'Add-ons',

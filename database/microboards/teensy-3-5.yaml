@@ -16,7 +16,7 @@ compute:
   ram: 256kB
   linux: false
 connectivity:
-  wifi: Shield
+  wifi: add-on # shield
   usb: OTG
   serial: true
 datasheet:
@@ -27,7 +27,7 @@ images:
     credit: PJRC
 io:
   storage: microSD
-  bms: 'No'
+  bms: false
   imu: false
   max_outputs: 8 # OctoWS2811 DMA port
 price: 32.45

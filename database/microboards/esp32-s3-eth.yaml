@@ -10,12 +10,13 @@ aliases:
   - ESP32-S3-POE-ETH
   - ESP32-S3-POE-ETH-M
 compute:
-  soc: ESP32 S3
+  soc: ESP32-S3
   isa: Xtensa
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   ethernet: 100BASE-TX
-  poe: optional (PoE module)
+  poe: add-on # PoE module
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
 images:

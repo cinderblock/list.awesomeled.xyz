@@ -26,8 +26,8 @@ images:
     source: https://www.pjrc.com/store/teensylc.html
     credit: PJRC
 io:
-  storage: Shield
-  bms: 'No'
+  storage: add-on # shield
+  bms: false
   imu: false
   max_outputs: 1 # WS2812Serial
 price: 12.85

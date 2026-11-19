@@ -13,13 +13,14 @@ compute:
   soc: ESP32
   cpu: Xtensa LX6
   isa: Xtensa
-  flash: 32Mbit
+  flash: 4MB # 32 Mbit
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   ethernet: 100BASE-TX
   bluetooth: '4.2'
-  poe: N
-  usb: No
+  poe: false
+  usb: false
 datasheet:
   url: https://img03.71360.com/w3/77q677/20240919/5d6cececc6c26c4578416e5960c038f5.pdf
   sources:

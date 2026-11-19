@@ -13,13 +13,12 @@ compute:
   cpu: 4× ARM Cortex-A53
   isa: ARMv8-A
   clock_speed: 900MHz
-  flash: microSD
   ram: 1GB
   linux: true
 connectivity:
-  wifi: USB
+  wifi: add-on # USB dongle
   ethernet: 100BASE-TX
-  bluetooth: USB
+  bluetooth: add-on # USB dongle
   usb: OTG x4
   serial: true
 datasheet:
@@ -31,7 +30,7 @@ images:
 io:
   max_outputs: 1
   storage: microSD
-  bms: 'No'
+  bms: false
   imu: false
 price: 35
 price_source:

@@ -28,7 +28,7 @@ images:
     credit: Adafruit Industries
 io:
   max_outputs: 4
-  bms: Diode
+  bms: diode
   imu: false
 price: 10.95
 price_source:

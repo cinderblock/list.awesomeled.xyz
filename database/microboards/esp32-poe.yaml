@@ -20,11 +20,12 @@ compute:
   isa: Xtensa
   linux: false
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   ethernet: 100BASE-TX
   bluetooth: '4.2'
   usb: Power + UART (CH340T)
-  poe: Y
+  poe: true
 datasheet:
   url: https://raw.githubusercontent.com/OLIMEX/ESP32-POE/master/DOCUMENTS/ESP32-POE-user-manual.pdf
 images:

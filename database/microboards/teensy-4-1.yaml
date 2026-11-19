@@ -4,13 +4,15 @@ creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensy41.html
 compute:
-  soc: iMXRT1062
+  soc: i.MX RT1062
   cpu: ARM Cortex-M7
   isa: ARMv7-M
   clock_speed: 600MHz
-  flash: 7936kB (256kB reserved for recovery & EEPROM emulation)
-  ram: 1024kB (512kB is "tightly coupled")
+  flash: 7936kB
+  ram: 1024kB
   linux: false
+  flash_notes: 256kB reserved for recovery & EEPROM emulation
+  ram_notes: 512kB is "tightly coupled"
 datasheet:
   url: https://www.pjrc.com/teensy/IMXRT1060CEC_rev4.pdf
 images:
@@ -18,7 +20,7 @@ images:
     source: https://www.pjrc.com/store/teensy41.html
     credit: PJRC
 io:
-  bms: 'No'
+  bms: false
   imu: false
   max_outputs: 32 # OctoWS2811 any-pin on 4.1 (8 with the classic adaptor)
 price: 31.5

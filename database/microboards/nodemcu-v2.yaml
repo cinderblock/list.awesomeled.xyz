@@ -12,7 +12,8 @@ compute:
   isa: Xtensa
   linux: false
 connectivity:
-  wifi: 2.4GHz
+  wifi:
+    - 2.4GHz
   bluetooth: false
   serial: true
 datasheet:
@@ -23,7 +24,7 @@ images:
     credit: Vowstar
     license: CC BY-SA 4.0
 io:
-  bms: 'No'
+  bms: false
   imu: false
   max_outputs: 2 # WLED on ESP8266: UART1/DMA + bit-bang
 price:

@@ -100,24 +100,48 @@
       "additionalProperties": false,
       "properties": {
         "soc": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "description": "SoC / microcontroller part, spelled as its maker does (ESP32-S3, nRF52840, BCM2711)"
         },
         "cpu": {
           "type": ["string", "null"]
         },
         "isa": {
-          "type": ["string", "null"],
-          "description": "Instruction set (Xtensa, ARM, RISC-V, AVR, ...)"
+          "enum": ["Xtensa", "RISC-V", "AVR", "ARMv6-M", "ARMv6Z", "ARMv7-M", "ARMv7-A", "ARMv8-A"],
+          "description": "Instruction set architecture"
         },
         "clock_speed": {
           "$ref": "common.json#/definitions/frequency"
         },
         "flash": {
-          "type": ["string", "null"]
+          "description": "On-board program flash or eMMC (removable cards go in io.storage); a list when variants differ",
+          "oneOf": [
+            { "$ref": "common.json#/definitions/memory" },
+            {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": { "$ref": "common.json#/definitions/memory" }
+            }
+          ]
+        },
+        "flash_notes": {
+          "type": "string",
+          "description": "Kind (eMMC, SPI flash) or reserved space"
         },
         "ram": {
-          "type": ["string", "null"]
+          "description": "RAM; a list when variants differ",
+          "oneOf": [
+            { "$ref": "common.json#/definitions/memory" },
+            {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": { "$ref": "common.json#/definitions/memory" }
+            }
+          ]
         },
+        "ram_notes": { "type": "string" },
         "linux": {
           "type": ["boolean", "null"],
           "description": "Runs a Linux OS (vs bare-metal MCU)"
@@ -127,36 +151,39 @@
     "connectivity": {
       "type": ["object", "null"],
       "additionalProperties": false,
+      "description": "On-board connectivity. 'add-on' = available through a USB dongle, shield, FeatherWing or module, not on the board itself.",
       "properties": {
         "wifi": {
-          "description": "Wi-Fi support: band(s) as an array (2.4GHz, 5GHz), a single band string, or boolean",
+          "description": "Bands on the board, false when none, or 'add-on'",
           "oneOf": [
+            { "enum": [false, "add-on"] },
             {
               "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            {
-              "type": ["string", "boolean", "null"]
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "enum": ["2.4GHz", "5GHz", "6GHz"] }
             }
           ]
         },
         "ethernet": {
-          "type": ["string", "boolean", "null"]
+          "enum": [false, "100BASE-TX", "1000BASE-T", "add-on"],
+          "description": "On-board Ethernet speed, false when none, or 'add-on'"
         },
         "bluetooth": {
-          "type": ["string", "boolean", "null"]
+          "description": "Version ('4.2', '5.0 LE'), 'BLE', false when none, or 'add-on'",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
         },
         "usb": {
-          "type": ["string", "boolean", "null"]
+          "description": "USB ports, kind and count ('OTG', 'OTG x2, 3.0 x2', 'Power + UART'); false when none",
+          "oneOf": [{ "const": false }, { "type": "string" }]
         },
         "serial": {
-          "type": ["boolean", "string", "null"],
+          "type": "boolean",
           "description": "TTL serial / UART"
         },
         "poe": {
-          "type": ["boolean", "string", "null"]
+          "enum": [true, false, "add-on"],
+          "description": "Powered over Ethernet on the board, or with an add-on module"
         }
       }
     },
@@ -168,12 +195,8 @@
           "type": ["object", "null"],
           "additionalProperties": false,
           "properties": {
-            "min": {
-              "type": ["string", "number", "null"]
-            },
-            "max": {
-              "type": ["string", "number", "null"]
-            }
+            "min": { "$ref": "common.json#/definitions/voltage" },
+            "max": { "$ref": "common.json#/definitions/voltage" }
           }
         },
         "gpio_voltage": {
@@ -190,14 +213,16 @@
           "description": "Usable data outputs for pixels"
         },
         "storage": {
-          "type": ["string", "null"]
+          "enum": [false, "microSD", "SD", "add-on"],
+          "description": "Card slot on the board, false when none, or 'add-on' (shield)"
         },
         "bms": {
-          "type": ["string", "null"],
-          "description": "Battery management (1S, Diode, No, ...)"
+          "enum": [false, "1S", "diode"],
+          "description": "Battery handling: a 1S LiPo charger, a diode power path (battery input without charging), or none"
         },
         "imu": {
-          "type": ["boolean", "string", "null"]
+          "enum": [false, true, "add-on"],
+          "description": "Motion sensor on the board, or through an add-on (FeatherWing)"
         }
       }
     },
