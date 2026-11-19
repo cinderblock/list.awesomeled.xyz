@@ -1,0 +1,159 @@
+Probing 415 unique URLs (concurrency 8)…
+
+  …50/415
+  …100/415
+  …150/415
+  …200/415
+  …250/415
+  …300/415
+  …350/415
+  …400/415
+
+============================================================
+DEAD (12) — add to the entry's dead_links:
+
+# adapters/esp-level-shifter.yaml  (HTTP 404)
+dead_links:
+  - url: https://www.amazon.com/ACROBOTIC-ESP8266-Adapter-WS2812B-Raspberry/dp/B07JFCGH8C
+    checked: '2026-11-18'
+
+# adapters/esp-pixnode-sdcard-adapter.yaml  (HTTP 404)
+dead_links:
+  - url: https://jboards.ecwid.com/ESPixNode-microSD-adapter-p428060492
+    checked: '2026-11-18'
+
+# adapters/esp-pixnode.yaml  (HTTP 404)
+dead_links:
+  - url: https://jboards.ecwid.com/ESPixNode-p127558674
+    archive: https://web.archive.org/web/20250822194830/https://jboards.ecwid.com/ESPixNode-p127558674 # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+# adapters/pixel-string-pihat-zero.yaml  (HTTP 404)
+dead_links:
+  - url: https://jboards.ecwid.com/Pixel-String-Pihat-Zero-p133155360
+    archive: https://web.archive.org/web/20250603173027/https://jboards.ecwid.com/Pixel-String-Pihat-Zero-p133155360 # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+# adapters/pixelpops.yaml  (HTTP 404)
+dead_links:
+  - url: https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+    archive: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+# controllers/led-player-dmx.yaml  (HTTP 404)
+dead_links:
+  - url: https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
+    archive: https://web.archive.org/web/20260718154705/https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+# controllers/led-player-l.yaml  (HTTP 404)
+dead_links:
+  - url: https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
+    archive: https://web.archive.org/web/20260718154636/https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+# controllers/led-player-s.yaml  (HTTP 404)
+dead_links:
+  - url: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+    archive: https://web.archive.org/web/20260421063856/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+# controllers/orange-pro-plus-32.yaml  (HTTP 404)
+dead_links:
+  - url: https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+    archive: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+# controllers/pb16.yaml  (HTTP 404)
+dead_links:
+  - url: http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controlleri
+    checked: '2026-11-18'
+
+# diffusive-materials/corrugated-split-loom-conduit-tubing-sleeving.yaml  (HTTP 404)
+dead_links:
+  - url: https://www.cabletiesandmore.ca/images/gallery/white-wire-loom-perfoot.jpg
+    archive: https://web.archive.org/web/20250820223319/https://www.cabletiesandmore.ca/images/gallery/white-wire-loom-perfoot.jpg # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+# pattern-drivers/geopix-2-0-full.yaml  (getaddrinfo ENOTFOUND www.geopix.io)
+dead_links:
+  - url: https://www.geopix.io/
+    archive: https://web.archive.org/web/20250328095802/https://geopix.io/ # latest capture; curate if domain changed hands
+    checked: '2026-11-18'
+
+============================================================
+CHECK MANUALLY (69) — blocked/erroring, not provably dead:
+
+  adapters/led-octopus.yaml: https://www.tindie.com/products/EssenceEng/led-octopus/?pt=ac_prod_search&fbclid=IwAR0w77lL9NKRWRN5rjs89GbIYH6X89oUKeTyQUXs0GWmvsbt0Y-RF29wdO8 (HTTP 429)
+  adapters/pipixel.yaml: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/ (HTTP 429)
+  adapters/pro-serial-led-driver.yaml: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/ (HTTP 429)
+  adapters/serial-led-driver.yaml: https://www.tindie.com/products/electromage/electromage-serial-to-8x-ws2812apa102-driver/ (HTTP 429)
+  adapters/wemos-esp32-driver-board.yaml: https://www.ebay.co.uk/itm/133705567939?hash=item1f21790ec3:g:IAUAAOSwo5VgXL05 (HTTP 403)
+  adapters/wemos-pwm-rgb-w-led-driver-board.yaml: https://www.ebay.co.uk/itm/133875147448?hash=item1f2b94a2b8:g:4rAAAOSwRG1hPezJ (HTTP 403)
+  connectors/9159.yaml: https://www.digikey.com/short/zvwmnz (HTTP 403)
+  connectors/binder-720.yaml: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?brand=binder&product-range=720-series (Stream closed with error code NGHTTP2_INTERNAL_ERROR)
+  connectors/bulgin-disco-8-pole.yaml: https://uk.farnell.com/bulgin/px0551/plug-8way-6a-free/dp/151740 (Stream closed with error code NGHTTP2_INTERNAL_ERROR)
+  connectors/bulgin-disco-8-pole.yaml: https://www.mouser.co.uk/datasheet/2/57/bulgs00368_1-2263014.pdf (Stream closed with error code NGHTTP2_INTERNAL_ERROR)
+  connectors/chogori-standard-size.yaml: https://www.digikey.co.uk/en/products/filter/circular-connectors/circular-connector-assemblies/436?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRACZyBOABhogF0CAHAFyhAGVWAnASwB2AcxABfAgFp40EMkjps%2BIqQpgArDRANxICQBYEs1JlwFikMmoDsVgMzktop0A (HTTP 403)
+  connectors/d-c-barrel.yaml: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack (Stream closed with error code NGHTTP2_INTERNAL_ERROR)
+  connectors/dupont.yaml: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/ (unable to verify the first certificate; if the root CA is installed locally, try running Node.js with --use-system-ca)
+  connectors/hirschmann-ca.yaml: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?product-range=ca-series (Stream closed with error code NGHTTP2_INTERNAL_ERROR)
+  connectors/ic5-ec5.yaml: https://blog.ampow.com/ic5-vs-ec5-connector/ (HTTP 521)
+  connectors/m12.yaml: https://uk.rs-online.com/web/p/industrial-circular-connectors/2906584/ (HTTP 403)
+  connectors/mini-bucaneer.yaml: https://www.bulgin.com/us/products/range/circular-power-connectors/mini-series.html (HTTP 403)
+  connectors/mini-fit-jr.yaml: https://www.molex.com/molex/products/family/minifit_power_connector_solutions (Stream closed with error code NGHTTP2_INTERNAL_ERROR)
+  connectors/molex-kk-aka-kf2510.yaml: https://www.molex.com/molex/products/family/kk (Stream closed with error code NGHTTP2_INTERNAL_ERROR)
+  connectors/mt30-60.yaml: https://www.flyingtech.co.uk/cables-connectors/amass-nylon-mt60-3-pole-motor-esc-35mm-connector (HTTP 403)
+  connectors/mtsb-combicon.yaml: https://www.digikey.com/en/products/detail/phoenix-contact/1757035/260381?s=N4IgTCBcDaIIwHYCsCAMBmJIC6BfIA (HTTP 403)
+  connectors/ph.yaml: http://www.jst-mfg.com/product/detail_e.php?series=199 (The operation was aborted due to timeout)
+  connectors/picoblade.yaml: https://www.molex.com/molex/products/family/picoblade (Stream closed with error code NGHTTP2_INTERNAL_ERROR)
+  connectors/powerpole-15-45.yaml: https://www.digikey.com/en/products/filter/blade-type-power-connectors-accessories/360?s=N4IgTCBcDaIIYDsAmBTATgZwPYIAQAcsB3dQgGxRAF0BfIA (HTTP 403)
+  connectors/sh.yaml: https://www.jst-mfg.com/product/detail_e.php?series=231 (Connect Timeout Error (attempted addresses: 219.101.193.83:443, timeout: 10000ms))
+  connectors/sm.yaml: http://www.jst-mfg.com/product/detail_e.php?series=238 (The operation was aborted due to timeout)
+  connectors/superseal.yaml: https://www.te.com/content/dam/te-com/documents/automotive/global/1654292-2_AMP%20SUPERSEAL%201.5.pdf (HTTP 500)
+  connectors/vh-r.yaml: https://www.jst.com/wp-content/uploads/2021/08/eVH.pdf (HTTP 403)
+  connectors/xh.yaml: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors (HTTP 403)
+  controllers/an6usp10.yaml: https://www.ebay.co.uk/itm/ArtNet-to-pixel-sACN-ArtNet-SPI-WS2811-12-WS2801-SM16703-GS8208-WS2815/221181172896 (HTTP 403)
+  controllers/dmx-to-spi.yaml: https://www.ebay.com/itm/321934091091 (HTTP 403)
+  controllers/lightboard-mini.yaml: https://www.rocketlife.com/technology/ (Client network socket disconnected before secure TLS connection was established)
+  controllers/lightbox.yaml: https://www.rocketlife.com/technology/ (Client network socket disconnected before secure TLS connection was established)
+  controllers/lightkraken.yaml: https://www.tindie.com (HTTP 403)
+  controllers/lightkraken.yaml: https://www.lightkraken.net (HTTP 502)
+  controllers/netpixel-one.yaml: https://www.ebay.co.uk/itm/SmartShow-NetPixel-ONE-32-Universe-Ethernet-Pixel-Driver-ArtNet-sACN/274037107730 (HTTP 403)
+  controllers/netpixel-quad.yaml: https://www.ebay.co.uk/itm/SmartShow-NetPixel-Quad-16-Universe-Pixel-Driver-4-output-ArtNet-SPI/273982361910 (HTTP 403)
+  controllers/pixie.yaml: https://www.ebay.co.uk/itm/SmartShow-PIXIE-Wi-Fi-1-Universe-WS2812-Pixel-Controller-ArtNet-SPI/273946916411 (HTTP 403)
+  controllers/sp108e.yaml: https://www.ledlightinghut.com/sp108e-wifi-spi-led-controller.html (Stream closed with error code NGHTTP2_PROTOCOL_ERROR)
+  controllers/thunderpack-wearable.yaml: https://www.tindie.com/stores/jeremy/ (HTTP 403)
+  controllers/uls-stripe.yaml: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller (Stream closed with error code NGHTTP2_PROTOCOL_ERROR)
+  diffusive-materials/3m-envision-diffuser.yaml: https://www.3m.co.uk/3M/en_GB/p/d/b00024897/ (HTTP 403)
+  diffusive-materials/diffraction-grating.yaml: https://www.edmundoptics.com/p/25400-linesinch-6quot-x-12quot-sheets-2pack/4621?gclid=CjwKCAjwgdX4BRB_EiwAg8O8HWjw1QGEzk6K58RKoEc3b26oilbvFs6GMut1InyfgzmqdJbvjyPs9BoC58gQAvD_BwE (HTTP 403)
+  diffusive-materials/perspex-diffuse.yaml: https://perspex.com/news/pom-diffuse/ (BC8F0000:error:0A000438:SSL routines:ssl3_read_bytes:tlsv1 alert internal error:openssl\ssl\record\rec_layer_s3.c:918:SSL alert number 80
+)
+  diffusive-materials/plastic-glass-shards.yaml: https://tjlighting.co.uk/product/fake-clear-plastic-iceglass-shards/ (Stream closed with error code NGHTTP2_PROTOCOL_ERROR)
+  diffusive-materials/poly-pro-pipe-thin-wall.yaml: https://www.omega.co.uk/pptst/TYPP.html (HTTP 403)
+  diffusive-materials/polyester-film.yaml: https://www.lexjet.com/hp-backlit-polyester-film-60in-x-100ft?CAWELAID=320012560000042473&CAGPSPN=pla&CAAGID=61396511513&CATCI=pla-862634440483&CATARGETID=320012560000750478&CADevice=c&gclid=Cj0KCQjwpNr4BRDYARIsAADIx9xwg2gMLqN09JDo8E9ehIjSRdLMUWf4aRfGx4EIg2X-TDfUrlzeVXsaAjF2EALw_wcB (HTTP 403)
+  level-converters/tc4427.yaml: https://www.microchip.com/en-us/product/TC4427 (HTTP 403)
+  microboards/attiny85.yaml: https://www.microchip.com/wwwproducts/en/ATtiny85 (HTTP 403)
+  microboards/raspberry-pi-1-model-a.yaml: https://www.raspberrypi.com/products/raspberry-pi-1-model-a-plus/ (HTTP 403)
+  microboards/raspberry-pi-1-model-b.yaml: https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/ (HTTP 403)
+  microboards/raspberry-pi-2-model-b-v1-2.yaml: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/ (HTTP 403)
+  microboards/raspberry-pi-2-model-b.yaml: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/ (HTTP 403)
+  microboards/raspberry-pi-3-model-a.yaml: https://www.raspberrypi.com/products/raspberry-pi-3-model-a-plus/ (HTTP 403)
+  microboards/raspberry-pi-3-model-b.yaml: https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/ (HTTP 403)
+  microboards/raspberry-pi-4-model-b.yaml: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/ (HTTP 403)
+  microboards/raspberry-pi-zero-v1-2.yaml: https://www.raspberrypi.com/products/raspberry-pi-zero/ (HTTP 403)
+  microboards/raspberry-pi-zero-v1-3.yaml: https://www.raspberrypi.com/products/raspberry-pi-zero/ (HTTP 403)
+  microboards/raspberry-pi-zero-w.yaml: https://www.raspberrypi.com/products/raspberry-pi-zero-w/ (HTTP 403)
+  microboards/ttgo-esp32-poe.yaml: http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3 (HTTP 403)
+  pattern-drivers/arkaos.yaml: https://www.arkaos.com/ (The operation was aborted due to timeout)
+  pattern-drivers/jinx.yaml: https://oneguyoneblog.com/download/glediator-v2-0-3/ (The operation was aborted due to timeout)
+  pattern-drivers/leds-master.yaml: https://antoine.doussaud.org/leds_master (HTTP 502)
+  pattern-drivers/lightdesigner.yaml: https://www.rocketlife.com/technology/ (Client network socket disconnected before secure TLS connection was established)
+  pattern-drivers/lightmobile.yaml: https://www.rocketlife.com/technology/ (Client network socket disconnected before secure TLS connection was established)
+  pattern-drivers/vixen-lights.yaml: https://www.vixenlights.com/downloads/ (HTTP 403)
+  pixels/hd107s.yaml: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf (The operation was aborted due to timeout)
+  pixels/hd108.yaml: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf (The operation was aborted due to timeout)
+  pixels/pl9823.yaml: https://content.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf (HTTP 403)
+
+============================================================
+ok 390 | dead 12 | check 69
