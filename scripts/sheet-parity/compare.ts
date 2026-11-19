@@ -122,9 +122,18 @@ const SYNONYMS: Record<string, string> = {
   microsd: 'sd',
   sdcard: 'sd',
   dmx512: 'dmx',
+  // Diffusive materials store polymer codes (2c469a1)
+  polyester: 'pet',
+  acrylic: 'pmma',
+  polycarbonate: 'pc',
+  polypropylene: 'pp',
+  polyethylene: 'pe',
+  polyethelene: 'pe',
+  vinyl: 'pvc',
   wlan: 'wifi',
   colour: 'color',
   colours: 'color',
+  fibre: 'fiber',
   grey: 'gray',
   centre: 'center',
 };
@@ -145,6 +154,7 @@ export function tokens(s: string, joinUnits = true): string[] {
     .replace(/\bwi-fi\b/g, 'wifi')
     .replace(/\bart-net\b/g, 'artnet')
     .replace(/\bmicro[\s-]?sd\b/g, 'microsd')
+    .replace(/\bsd \(micro\)/g, 'microsd')
     .split(/[^a-z0-9.+]+/)
     .map((t) => t.replace(/^[.+]+|[.]+$/g, ''))
     .filter((t) => t.length > 1 || /\d/.test(t))
@@ -462,7 +472,9 @@ export function compareCell(
       const key = Object.keys(kind.map).find((k) => k.toLowerCase() === text.toLowerCase());
       if (key) {
         const allowed = kind.map[key];
-        if (mapped.some((m) => allowed.some((a) => a === m)))
+        // Array fields (outputs.types: [pwm, servo]) match on any element
+        const flat = mapped.flatMap((m) => (Array.isArray(m) ? m : [m]));
+        if (flat.some((m) => allowed.some((a) => a === m)))
           return { status: 'ok', yaml: yamlShown };
         return { status: mapped.length ? 'differs' : 'missing', yaml: yamlShown };
       }

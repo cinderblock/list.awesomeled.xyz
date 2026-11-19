@@ -61,10 +61,66 @@ const phoenix: Kind = {
   fn: (text, _mapped, view) => {
     const ref = getAt(view.entry.data, 'outputs.connector.ref')[0];
     if (/phoenix/i.test(text) && ref === 'mtsb-combicon') {
-      const extra = text.replace(/phoenix|screw|plug|pluggable/gi, '').trim();
+      // longest word first: /plug/ would leave "gable" of "pluggable"
+      const extra = text.replace(/pluggable|phoenix|screw|plug/gi, '').trim();
       return extra ? undefined : { status: 'ok' };
     }
     return undefined;
+  },
+};
+
+/** IC pin counts ("8", "8/10/14") must each appear in a package name (SOP8, QFN16) */
+const packagePins: Kind = {
+  type: 'custom',
+  fn: (text, mapped) => {
+    const want = text.match(/\d+/g);
+    if (!want) return undefined;
+    const pins = new Set(
+      mapped.flatMap((m) => (Array.isArray(m) ? m : [m])).flatMap((p) => String(p).match(/\d+$/) ?? [])
+    );
+    return want.every((n) => pins.has(n)) ? { status: 'ok' } : { status: mapped.length ? 'differs' : 'missing' };
+  },
+};
+
+/** Pixel-decoder "Outputs" words -> outputs.types enum (64a0d09) */
+const decoderOutputs: Kind = {
+  type: 'enum',
+  map: {
+    PWM: ['pwm'],
+    Data: ['pixel-data'],
+    'Pixel Data': ['pixel-data'],
+    DMX: ['dmx512'],
+    Relay: ['relay'],
+  },
+};
+
+/** Inches in the sheet; YAML lengths carry their unit ('0.06in', '3mm') */
+const LENGTH_MM: Record<string, number> = { um: 1e-3, µm: 1e-3, mm: 1, cm: 10, m: 1000, in: 25.4 };
+const sheetInches: Kind = {
+  type: 'custom',
+  fn: (text, mapped) => {
+    const inches = Number(text);
+    if (!Number.isFinite(inches)) return undefined; // "variable", ranges, "2mm": text rules
+    for (const m of mapped) {
+      const q = String(m).match(/^~?(\d+(?:\.\d+)?)\s?(µm|um|mm|cm|m|in)$/);
+      if (!q) continue;
+      const mm = Number(q[1]) * LENGTH_MM[q[2]];
+      if (Math.abs(mm - inches * 25.4) <= inches * 25.4 * 0.02) return { status: 'ok' };
+    }
+    return { status: mapped.length ? 'differs' : 'missing' };
+  },
+};
+
+/** Tinted/Clear: T, C, T&C -> optical.tints */
+const tints: Kind = {
+  type: 'custom',
+  fn: (text, mapped) => {
+    const want = new Set<string>();
+    if (/t/i.test(text)) want.add('tinted');
+    if (/c/i.test(text)) want.add('clear');
+    const have = new Set(mapped.flatMap((m) => (Array.isArray(m) ? m.map(String) : [String(m)])));
+    if (!want.size) return undefined;
+    return [...want].every((w) => have.has(w)) ? { status: 'ok' } : { status: mapped.length ? 'differs' : 'missing' };
   },
 };
 
@@ -93,8 +149,9 @@ const controllerOutputs: Kind = {
     const wantsClock = /clock|spi|configurable|multiple/.test(t);
     if (wantsClock && !clockOk)
       return { status: 'differs', detail: 'sheet: clock-capable outputs' };
+    // "SPI" in the sheet means clocked output (937d734 retired the jargon)
     const extras = t
-      .replace(/single|signal|data|clock(ed)?|and|or|configurable|multiple|ground/g, ' ')
+      .replace(/single|signal|data|clock(ed)?|spi|and|or|configurable|multiple|ground/g, ' ')
       .replace(/[,/]/g, ' ')
       .trim();
     if (extras && coverage(extras, `${view.visible}\n${view.comments}`) < 0.85) {
@@ -211,7 +268,7 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Wattage', milliwatts, ['electrical.wattage']),
     col('Channel Current', milliamps, ['electrical.channel_current']),
     col('Quiescent Current', milliamps, ['electrical.quiescent_current']),
-    col('Package Size', text, ['physical.package_size', 'physical.package_sizes']),
+    col('Package Size', text, ['physical.packages'], { note: 'Standardized package list (0bb3346)' }),
     col('Pin Count', num, ['physical.pin_count']),
     col('Data Type', text, ['data.type']),
     col('Backup Data Line', bool, ['data.backup_line']),
@@ -242,8 +299,10 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('GPIO Max', volts, ['electrical.gpio.max']),
     col('Max Current', milliamps, ['electrical.max_current']),
     col('Quiescent Current', milliamps, ['electrical.quiescent_current']),
-    col('Package Size', text, ['physical.package_size', 'physical.package_sizes']),
-    col('Pin Count', text, ['physical.pin_count']),
+    col('Package Size', text, ['physical.packages'], { note: 'Standardized package list (0bb3346)' }),
+    col('Pin Count', packagePins, ['physical.packages'], {
+      note: 'Pin counts now come from the package names (SOP8, QFN16, ...)',
+    }),
     col('Data Type', text, ['data.type']),
     col('Backup Data Line', bool, ['data.backup_line']),
     col('Max pixel per string', text, ['data.max_per_string', 'data.max_per_string_notes']),
@@ -259,11 +318,13 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
   'Pixel Decoders': [
     name,
     col('Manufacturer/Designer', text, ['creator', 'manufacturers']),
-    col('Max Channels', num, ['outputs.max_channels']),
-    col('Pixel Types', text, ['outputs.pixel_types']),
+    col('Max Channels', num, ['outputs.count']),
+    col('Pixel Types', text, ['inputs.protocols', 'outputs.types', 'notes'], {
+      note: 'Free-text description of what the decoder does; structured as inputs.protocols + outputs.types (64a0d09), the prose in notes',
+    }),
     col('Unit Price (USD)', price, ['price']),
-    col('Output Connectors', text, ['outputs.connectors']),
-    col('Outputs', text, ['outputs.description']),
+    col('Output Connectors', phoenix, ['outputs.connector'], { derive: connectorNames }),
+    col('Outputs', decoderOutputs, ['outputs.types']),
     col('DIY/OTS', text, ['diy_or_ots']),
     col('Notes', text, ['notes']),
     col('Product URL', text, ['links.product'], { note: 'One cell lists two URLs' }),
@@ -388,29 +449,19 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('URL', url, ['links.product']),
     col('Color Rendition', num, ['optical.color_rendition']),
     col('Light Transmission', num, ['optical.light_transmission']),
-    col(
-      'Flexible/Rigid',
-      {
-        type: 'enum',
-        map: { F: [true, 'F', 'Flexible', 'flexible'], R: [false, 'R', 'Rigid', 'rigid'] },
-      },
-      ['physical.flexible']
-    ),
+    col('Flexible/Rigid', { type: 'enum', map: { F: [true], R: [false] } }, ['physical.flexible']),
     col('Purpose Made ?', bool, ['purpose_made']),
-    col('Properties', text, ['physical.properties']),
+    col('Properties', text, ['optical.properties']),
     col('Fire Retardent?', bool, ['physical.fire_retardant']),
-    col('Tinted/Clear', text, ['optical.tinted']),
-    col(
-      'Sample thickness (inches)',
-      { type: 'number', scale: 25.4, tol: 0.02 },
-      ['physical.sample_thickness'],
-      {
-        note: 'Inches in the sheet; millimetres in YAML',
-      }
-    ),
+    col('Tinted/Clear', tints, ['optical.tints']),
+    col('Sample thickness (inches)', sheetInches, ['physical.sample_thickness'], {
+      note: 'Inches in the sheet; a length with its unit in YAML (2c469a1)',
+    }),
     col('Diffusivity', num, ['optical.diffusivity']),
     col('Sizes Available', text, ['physical.sizes_available']),
-    col('Material Type', text, ['material_type']),
+    col('Material Type', text, ['materials', 'form', 'notes'], {
+      note: 'Polymer names became material codes (PET, PMMA, ...) and a form (2c469a1)',
+    }),
     col('Usage Notes', text, ['notes']),
     col('$', exact, ['pricing.price_range']),
   ],
