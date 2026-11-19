@@ -8,16 +8,17 @@
  * refreshed occasionally rather than fetched live (the site is fully static).
  */
 
-// Mid-market rates → USD. Refresh occasionally; update RATES_AS_OF with them.
-export const RATES_AS_OF = '2026-07';
+// ECB reference rates → USD (via https://api.frankfurter.dev/v1/latest?base=USD).
+// Refresh occasionally; update RATES_AS_OF with them.
+export const RATES_AS_OF = '2026-11-18';
 export const USD_PER: Record<string, number> = {
   USD: 1,
-  EUR: 1.14,
-  GBP: 1.33,
-  CAD: 0.7,
-  AUD: 0.69,
-  JPY: 0.0062,
-  CNY: 0.147,
+  EUR: 1.097,
+  GBP: 1.317,
+  CAD: 0.699,
+  AUD: 0.673,
+  JPY: 0.00627,
+  CNY: 0.15,
 };
 
 const CODE_TO_SYMBOL: Record<string, string> = { USD: '$', EUR: '€', GBP: '£', JPY: '¥' };
