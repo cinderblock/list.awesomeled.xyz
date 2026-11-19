@@ -21,7 +21,12 @@ platforms:
   os:
     - macOS
 pricing:
-  price: 176
+  price: €149
+  source:
+    retrieved: '2020-08-08'
+    url: https://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing
+    vendor: ProtoPixel
+    notes: 'last published price: ProtoPixel Create "€ 149 Per Month" (Aug 2020 capture); the renamed Mapping Tool has no public price'
   demo:
     available: Trial + watermark
   license_type: subscription (price is per month)

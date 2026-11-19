@@ -123,16 +123,6 @@ Why it matters: they show up in "what drives my pixels" filters and the
 designer. Keep (with outputs removed) or move out of controllers: the
 category call isn't stream 4's.
 
-## Prices that disagree with the maker (stream 6)
-
-Seen while verifying links (not changed; prices are stream 6's):
-
-- `controllers/spi-led-controller`: one 1024-pixel model at EUR 170 ex VAT,
-  not the 1024/2048/4096 tiers.
-  <https://www.ledstripstudio.com/shop/product/spi-led-controller/>
-- `pattern-drivers/protopixel-create`: EUR 149 per month subscription
-  (YAML 176). <http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing>
-
 ## Sheet: a second "M8 Port Pixel" row is an ENTTEC product
 
 For parity (stream 1). The Controllers tab has two "M8 Port Pixel" rows. One
