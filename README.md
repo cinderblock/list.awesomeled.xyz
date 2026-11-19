@@ -73,7 +73,9 @@ bun review
 ```
 
 This tool will pick a random old entry from the database and display its details.
-It also has a little tool to help download product images.
+It also has a little tool to help download product images; for adding one
+with its attribution, use `bun run add-image` (see
+[CONTRIBUTING.md](CONTRIBUTING.md#adding-images)).
 
 ### Linting, Formatting, and Spell Checking
 
@@ -147,6 +149,10 @@ This project uses dual licensing:
 
 - **Code** (everything except `database/`): [AGPL-3.0](LICENSE)
 - **Database** (`database/` directory): [ODbL-1.0](database/LICENSE)
+- **Product images** (`public/database-images/`): not covered by either license.
+  Each image belongs to the owner credited on its entry (`images[].credit`,
+  linked to `images[].source`) or is used under the license recorded there
+  (`images[].license`). See [CONTRIBUTING.md](CONTRIBUTING.md#adding-images).
 
 For commercial licensing inquiries, please open an issue.
 

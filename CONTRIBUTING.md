@@ -143,8 +143,8 @@ notes: Popular Arduino library with extensive pixel support
 | `price_source` | object        | No       | Where/when the price was read (see below)          |
 | `notes`        | string        | No       | Additional information                             |
 | `status`       | string        | No       | `active`, `discontinued`, `end-of-life`, `unknown` |
-| `image`        | string        | No       | Filename in `images/` subdirectory                 |
-| `images`       | array         | No       | Multiple image filenames                           |
+| `image`        | string/object | No       | Legacy single image; prefer `images`               |
+| `images`       | array         | No       | `{file, source, credit, license?}` — see below     |
 
 ### Prices
 
@@ -370,47 +370,74 @@ All styles are in `app/app.css` using vanilla CSS with CSS custom properties.
 
 ## Adding Images
 
-### Current Status
-
-Image support is defined in the schema but not yet fully implemented. Here's how to prepare for it:
-
-### Schema Support
-
-Every category supports image fields:
+Every hardware entry should show what the product looks like. Images are
+optimized WebP files committed under `public/database-images/<category>/`,
+referenced from the entry with their attribution:
 
 ```yaml
-# Single image
-image: my-product.jpg
-
-# Multiple images
 images:
-  - front-view.jpg
-  - back-view.jpg
-  - detail.jpg
+  - file: falcon-f16v4.webp
+    source: https://pixelcontroller.com/store/products/70-f16v4.html # page the photo came from
+    credit: PixelController, LLC # who to credit
+    license: CC BY 2.0 # only when the source states a license
 ```
 
-### Image Directory Structure (Planned)
+### Which images are OK
 
+1. **Openly licensed photos of the exact product** — Wikimedia Commons files
+   (including SparkFun's Flickr uploads mirrored there, CC BY 2.0), open-hardware
+   repos whose license covers their images. Copy the license exactly into
+   `license` and the author into `credit`. Photos taken from sparkfun.com itself
+   are CC BY-NC-SA 3.0 — record that license.
+2. **The maker's own product photo** (or an authorized vendor's own photo of
+   what it sells — Adafruit, SparkFun, Pololu, the maker's store), linked from
+   its product page. No `license` field: rights stay with the owner and the
+   image identifies the product.
+
+Don't use marketplace listings that re-host other people's photos
+(AliExpress, Amazon, eBay, …), images watermarked by a third party, stock
+photos, renders of a different variant, or forum/blog photos without a license.
+For a product whose site is gone, a Wayback Machine capture of the maker's page
+is fine (`source` = the archived URL).
+
+Entry pages show the credit (linked to `source`), plus the license and a
+"cropped" note for openly licensed images, as CC licenses require.
+
+### Adding one
+
+```bash
+bun run add-image controllers/my-entry https://maker.example/img/large.jpg \
+  --source https://maker.example/products/my-entry --credit "Maker Inc"
 ```
-database/
-├── controllers/
-│   ├── images/
-│   │   ├── esp32-controller.jpg
-│   │   └── wled-board.png
-│   ├── esp32-controller.yaml
-│   └── wled-board.yaml
-├── pixels/
-│   ├── images/
-│   │   └── ws2812b.jpg
-│   └── ws2812b.yaml
+
+- Accepts an image URL, a product page URL (uses its `og:image`), or a local file.
+- Removes a solid white/black background, trims, resizes to ≤1200 px and
+  encodes WebP ≤200 KB (`scripts/crop-image.ts`), writes
+  `public/database-images/<category>/<id>.webp`, and adds the `images:` entry.
+- Prints a preview PNG on a checkerboard — look at it. If light parts of the
+  product were eaten by the background removal, re-run with `--keep-bg`.
+- `--license "CC BY 2.0"` for openly licensed images; `--primary` to put a new
+  image first; `--attribute-only` to add attribution to an image already in the
+  repo.
+
+`bun run validate` checks that every referenced image exists, is a WebP within
+the size limits and carries `source` + `credit`, and that no image file is left
+unreferenced. Thumbnails (240/480 px) for tables, the designer and entry pages
+are generated at build time — don't commit them. `bun run coverage:assets
+--missing` lists entries still without an image or datasheet.
+
+### Datasheets
+
+Parts (pixels, pixel ICs, level converters, connectors, microboards, pixel
+decoders) record their datasheet as a direct PDF link; CI mirrors it to R2
+(see [docs/datasheet-mirroring.md](docs/datasheet-mirroring.md)):
+
+```yaml
+datasheet:
+  url: https://manufacturer.example/part.pdf
 ```
 
-### Image Guidelines
-
-- **Format**: JPEG or PNG (prefer JPEG for photos, PNG for graphics)
-- **Size**: Maximum 1200px on longest edge
-- **File size**: Under 200KB when possible
-- **Naming**: Match the entry ID (`my-entry.jpg` for `my-entry.yaml`)
+Check it with `bun run mirror-datasheets --check --only <category>/<id>`.
 
 ---
 
