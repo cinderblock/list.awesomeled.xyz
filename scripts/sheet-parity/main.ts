@@ -13,6 +13,7 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
 import { dirname, join } from 'path';
+import { format, resolveConfig } from 'prettier';
 import { IGNORED_COMMITS } from '../../app/lib/data';
 import { ackKey, findAck } from './acks';
 import { ALIASES } from './aliases';
@@ -336,7 +337,9 @@ async function main() {
 
   const out = arg('--out') ?? 'plans/spreadsheet-parity/report.md';
   mkdirSync(dirname(out), { recursive: true });
-  writeFileSync(out, renderReport(results, cellUrl));
+  // Prettier-clean, so the committed report passes format:check
+  const config = (await resolveConfig(out)) ?? {};
+  writeFileSync(out, await format(renderReport(results, cellUrl), { ...config, filepath: out }));
   const json = arg('--json');
   if (json) writeFileSync(json, JSON.stringify(results, null, 1));
 
