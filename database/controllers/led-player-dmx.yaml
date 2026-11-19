@@ -1,10 +1,10 @@
 name: LED Player DMX
-status: unknown
+status: active
 creator: Diamex
 vendors:
-  - name: led-genial.de
-    url: https://www.led-genial.de
-    page: https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
+  - name: Diamex
+    url: https://www.diamex-shop.de
+    page: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
 notes: Plays TPM2 animation files from a microSD card, triggered and addressed over DMX512.
 inputs:
   physical:
@@ -27,4 +27,17 @@ data:
   storage:
     - type: uSD
       max_size: 32 # FAT32
-price: 99
+price:
+  amount: 99.9
+  currency: EUR
+price_source:
+  notes: incl. 19% German VAT (only gross price shown); led-genial.de closed and moved its range to the Diamex shop
+  part: '150095'
+  retrieved: '2026-11-18'
+  url: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
+  vendor: Diamex
+sources:
+  status:
+    url: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
+    retrieved: '2026-11-18'
+    notes: '"Sofort verfügbar", EUR 99.90 incl. VAT'

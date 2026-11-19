@@ -3,7 +3,7 @@ status: active
 creator:
   name: ENTTEC
   url: https://www.enttec.com
-  page: https://www.enttec.com/product/addressable-led-pixel-control/led-pixel-controller/
+  page: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
 notes: Daisy-chainable through Ethernet up to 8 devices.
 inputs:
   physical:
@@ -23,4 +23,15 @@ outputs:
 power:
   voltage:
     max: 60
-price: 330
+price: 249
+price_source:
+  notes: ENTTEC web store, excl. tax; the page compares it as "OCTO MK2" next to the separate OCTO MK3 (SKU 71522)
+  part: '71521'
+  retrieved: '2026-11-18'
+  url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+  vendor: ENTTEC
+sources:
+  status:
+    url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: '"Buy Now $249.00", schema.org InStock, SKU 71521 (OCTO MK2)'

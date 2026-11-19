@@ -3,7 +3,7 @@ status: active
 release_year: 2021
 creator:
   name: Wasatch Pixels
-  page: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+  page: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
 inputs:
   physical:
     Ethernet: true
@@ -20,4 +20,14 @@ outputs:
 power:
   voltage:
     max: 12
-price: 45
+price: 43
+price_source:
+  notes: 12V board with WT32-ETH01 module (the default option); 5V $42, PCB only $33 (12V) / $32 (5V). Tindie now calls it the "Basic Eight Port LED Controller" (old URL redirects).
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
+  vendor: Wasatch Pixels (Tindie)
+sources:
+  status:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: 'in stock ("48 in stock" for the 12V + WT32 option), $43'

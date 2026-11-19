@@ -44,6 +44,10 @@ sources:
     url: https://smartshow.lighting/support-page/netpixel-one/
     retrieved: '2026-11-18'
     notes: "'Software Compatibility' and the 'Lets Animate !' Jinx walkthrough."
+  status:
+    url: https://smartshow.lighting/archive/
+    retrieved: '2026-11-18'
+    notes: 'NetPixel-ONE listed under "Archived User Guides"; current shop sells only Pro-ONE, NetDMX-PoE, VIBE and pixel panels/tubes'
 technical_notes:
   - Decodes up to 32 Art-Net universes (5440 RGB pixels) or 28 sACN/E1.31 universes via isolated RJ45 Ethernet
   - Drives WS281x, SK6812, UCS19xx, UCS2903, TM180x, INK1003

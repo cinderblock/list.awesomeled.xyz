@@ -33,15 +33,26 @@ data:
     - type: uSD # microSD on host Raspberry Pi
 dead_links:
   - url: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
-    archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html
-    checked: '2026-07-01'
-price: 35
+    archive: http://web.archive.org/web/20240519213626/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
+    checked: '2026-11-18'
+    notes: microcyb.com is live again but this Ecwid store URL redirects to its 404 page; archive is the same product (Ecwid ID 468426786) on Microcyb's EspArtStick store
+price: 47.99
+price_source:
+  notes: last list price (Wayback capture, in stock); the product was gone from the store by January 2025
+  part: '04255'
+  retrieved: '2024-05-19'
+  url: http://web.archive.org/web/20240519213626/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
+  vendor: Microcyb (EspArtStick store)
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://microcyb.com/shop.php?category=LED+pixel+Controller
+    retrieved: '2026-11-18'
+    notes: "Microcyb's Controllers category lists only ShowSpark models; M4-PI no longer offered"
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/microcyb.xcontroller
     retrieved: '2026-11-18'

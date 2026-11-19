@@ -4,7 +4,7 @@ release_year: 2022
 creator:
   name: DMXking
   url: https://dmxking.com
-  page: https://dmxking.com/led-pixel-control/ledmx4-max
+  page: https://dmxking.tv/max-series/ledmx4-max
 notes: Show record and playback trigger capability
 inputs:
   physical:
@@ -74,7 +74,13 @@ power:
 data:
   storage:
     - type: SD
-price: 299
+price: 420
+price_source:
+  notes: DMXKING Global Shop US price, which includes shipping, tax and duty ("Free shipping, tax & duty paid"); US distributor DMX Pro Sales lists it at $389 excl. tax/shipping (sold out there)
+  part: '0129'
+  retrieved: '2026-11-18'
+  url: https://dmxking.shop/products/ledmx4-max
+  vendor: DMXKING Global Shop
 related:
   - type: predecessor
     ref: controllers/ledmx4-pro
@@ -83,6 +89,10 @@ related:
       url: https://dmxking.tv/downloads/LeDMX4%20MAX%20User%20Manual%20(EN).pdf
       retrieved: '2026-11-18'
 sources:
+  status:
+    url: https://dmxking.shop/products/ledmx4-max
+    retrieved: '2026-11-18'
+    notes: 'listed for sale, USD 420, available'
   outputs.protocols:
     url: https://dmxking.tv/downloads/LeDMX4%20MAX%20User%20Manual%20(EN).pdf
     retrieved: '2026-11-18'

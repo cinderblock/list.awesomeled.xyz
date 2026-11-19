@@ -25,12 +25,26 @@ power:
     max: 5
   current:
     max: 6
+dead_links:
+  - url: https://www.rocketlife.com/technology/
+    archive: http://web.archive.org/web/20191115023243/https://www.rocketlife.com/technology/
+    checked: '2026-11-18'
+    notes: HTTPS fails the TLS handshake; plain HTTP returns 410 Gone
 price: 99
+price_source:
+  notes: last list price (Wayback capture), MSRP; intro price $89, sold through Amazon
+  retrieved: '2019-11-15'
+  url: http://web.archive.org/web/20191115023243/https://www.rocketlife.com/technology/
+  vendor: RocketLife
 software:
   works_with:
     - LightDesigner
     - LightMobile
 sources:
+  status:
+    url: http://www.rocketlife.com/technology/
+    retrieved: '2026-11-18'
+    notes: 'RocketLife site returns 410 Gone; successor company Bekonix sells no hardware'
   software.works_with:
     - url: http://web.archive.org/web/20191119161838/https://rocketlife.com/technology/
       retrieved: '2026-11-18'

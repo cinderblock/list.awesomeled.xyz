@@ -31,6 +31,11 @@ features:
   - ESD protection
   - USB-C Power Delivery (5V/12V, up to 36W)
 price: 29.9
+price_source:
+  part: SU-RZMM-NGSU
+  retrieved: '2026-11-18'
+  url: https://magwled.com/products/dgrz-led-cpd-36-1-mini
+  vendor: MagWLED
 software:
   firmware:
     - WLED
@@ -43,4 +48,8 @@ sources:
     url: https://magwled.com/pages/about-magwled-1
     retrieved: '2026-11-18'
     notes: Wayback capture 2026-07-19 (https://web.archive.org/web/20260719093734/https://magwled.com/pages/about-magwled-1)
+  status:
+    url: https://magwled.com/products/dgrz-led-cpd-36-1-mini
+    retrieved: '2026-11-18'
+    notes: '$29.90, available (Add to cart)'
 wled_compatible: true

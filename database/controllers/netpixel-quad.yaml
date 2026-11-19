@@ -49,3 +49,7 @@ sources:
     url: https://smartshow.lighting/support-page/netpixel-quad/
     retrieved: '2026-11-18'
     notes: "'Software Compatibility' and the 'Lets Animate !' Jinx walkthrough."
+  status:
+    url: https://smartshow.lighting/archive/
+    retrieved: '2026-11-18'
+    notes: 'NetPixel-Quad listed under "Archived User Guides"; current shop sells only Pro-ONE, NetDMX-PoE, VIBE and pixel panels/tubes'

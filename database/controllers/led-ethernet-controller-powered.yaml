@@ -1,5 +1,5 @@
 name: LED Ethernet Controller Powered
-status: active
+status: discontinued
 creator:
   name: LED Strip Studio
   url: https://www.ledstripstudio.com
@@ -46,14 +46,25 @@ other_links:
   - https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 price:
   - name: 1024 pixels
-    price: 850
+    price:
+      amount: 850
+      currency: EUR
     pixels: 1024
   - name: 2048 pixels
-    price: 1125
+    price:
+      amount: 1125
+      currency: EUR
     pixels: 2048
   - name: 4096 pixels
-    price: 1400
+    price:
+      amount: 1400
+      currency: EUR
     pixels: 4096
+price_source:
+  notes: last list price (Wayback capture), excl. VAT; SKUs V073/V074/V075 for the 1024/2048/4096-pixel versions
+  retrieved: '2023-12-02'
+  url: http://web.archive.org/web/20231202085638/https://www.ledstripstudio.com/shop/product/led-ethernet-controller-powered/
+  vendor: LED Strip Studio
 related:
   - type: variant
     ref: controllers/led-ethernet-controller-3
@@ -77,5 +88,9 @@ sources:
     url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
     retrieved: '2026-11-18'
     notes: "'Required Input 88 ~ 264 VAC/47 ~ 63Hz (360W, without the LED strips)'"
+  status:
+    url: https://www.ledstripstudio.com/shop/product/led-ethernet-controller-powered/
+    retrieved: '2026-11-18'
+    notes: 'product URL now redirects to the LEC 3 page; absent from the shop and its product sitemap'
 technical_notes:
   - Lifetime LED Strip Studio software license included

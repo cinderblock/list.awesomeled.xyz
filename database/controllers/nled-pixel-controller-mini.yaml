@@ -31,11 +31,20 @@ outputs:
 power:
   voltage:
     max: 25
-price: 13.5
+price: 13
+price_source:
+  notes: board only; optional XLR DMX connectors +$3 to +$17
+  retrieved: '2026-11-18'
+  url: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
+  vendor: Northern Lights Electronic Design
 software:
   works_with:
     - AllPixMatrix
 sources:
+  status:
+    url: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
+    retrieved: '2026-11-18'
+    notes: '"Availability: In stock", as low as $13.00'
   software.works_with:
     url: https://github.com/NLED/allpixmatrix
     retrieved: '2026-11-18'

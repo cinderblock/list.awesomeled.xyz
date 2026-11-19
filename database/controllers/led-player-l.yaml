@@ -2,9 +2,9 @@ name: LED Player L
 status: active
 creator: Diamex
 vendors:
-  - name: LED-Genial
-    url: https://www.led-genial.de
-    page: https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
+  - name: Diamex
+    url: https://www.diamex-shop.de
+    page: https://www.diamex-shop.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
 notes: Standalone TPM2 player (microSD or USB stick) for up to 4096 LEDs across
   8 outputs; USB virtual COM takes live data from JINX. OLED display + 4
   buttons; ARM Cortex-M7. No network input.
@@ -25,5 +25,16 @@ power:
   voltage:
     max: 5
 price:
-  amount: 99 # led-genial.de 2026-07, ex 19% VAT
+  amount: 99
   currency: EUR
+price_source:
+  notes: incl. 19% German VAT (only gross price shown), without USB cable (+EUR 2); led-genial.de closed and moved its range to the Diamex shop
+  part: '150188'
+  retrieved: '2026-11-18'
+  url: https://www.diamex-shop.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
+  vendor: Diamex
+sources:
+  status:
+    url: https://www.diamex-shop.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
+    retrieved: '2026-11-18'
+    notes: '"Sofort verfügbar", EUR 99.00 incl. VAT'

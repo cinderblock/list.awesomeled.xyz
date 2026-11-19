@@ -69,6 +69,11 @@ features:
   - 3-axis accelerometer
   - Optional WiFi/Bluetooth add-on modules
 price: 30
+price_source:
+  notes: base board with unpopulated solder-pad output; header +$0.50, screw terminal +$1.50
+  retrieved: '2026-11-18'
+  url: https://store.nledshop.com/index.php/nled-pixel-controller-electron-flow-toys-wearables.html
+  vendor: Northern Lights Electronic Design
 related:
   - type: related
     ref: controllers/nled-pixel-controller-mini
@@ -81,6 +86,10 @@ software:
     - AllPixMatrix
     - NLED AllPixMatrix
 sources:
+  status:
+    url: https://store.nledshop.com/index.php/nled-pixel-controller-electron-flow-toys-wearables.html
+    retrieved: '2026-11-18'
+    notes: '"Availability: 88 In stock", as low as $30.00'
   software.works_with:
     - url: https://github.com/NLED/allpixmatrix
       retrieved: '2026-11-18'

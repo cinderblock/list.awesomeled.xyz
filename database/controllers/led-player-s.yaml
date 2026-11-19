@@ -1,5 +1,5 @@
 name: LED Player S
-status: discontinued # led-genial product archive - "Artikel ist nicht mehr lieferbar"
+status: discontinued
 creator: Diamex
 vendors:
   - name: LED-Genial
@@ -25,7 +25,34 @@ outputs:
 data:
   storage:
     - type: uSD # micro-SD up to 32 GB (SDHC)
+dead_links:
+  - url: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+    archive: http://web.archive.org/web/20170727133740/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+    checked: '2026-11-18'
+    notes: led-genial.de closed (its range moved to diamex-shop.de, which has no LED-Player-S page)
+price:
+  amount: 19.9
+  currency: EUR
+price_source:
+  notes: last list price (Wayback capture), incl. 19% German VAT, without USB cable (+EUR 2); moved to the product archive by 2019
+  part: '150081'
+  retrieved: '2017-07-27'
+  url: http://web.archive.org/web/20170727133740/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+  vendor: LED-Genial
 related:
   - type: related
     ref: controllers/led-player-m
     notes: Diamex LED Player family sibling
+  - type: replacement
+    source:
+      url: https://web.archive.org/web/20160620140918/http://www.led-genial.de:80/LED-Player-S2-next-Generation-mit-mehr-Funktionen
+      retrieved: '2026-11-18'
+      notes: 'listing titled "LED-Player-S2, next Generation mit mehr Funktionen"'
+    name: LED-Player-S2
+    url: https://web.archive.org/web/20160620140918/http://www.led-genial.de:80/LED-Player-S2-next-Generation-mit-mehr-Funktionen
+    notes: Diamex launched the S2 as the S's "next Generation"; the S2 is itself no longer available (product archive, 2026), and Diamex now sells the LED-Player-S3
+sources:
+  status:
+    url: http://web.archive.org/web/20260421063856/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+    retrieved: '2026-11-18'
+    notes: 'listed under Produkt-Archiv, "Artikel ist nicht mehr lieferbar"'

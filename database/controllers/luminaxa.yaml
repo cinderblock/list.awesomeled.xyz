@@ -31,7 +31,12 @@ power:
 features:
   - Internal 3500mAh rechargeable battery
   - Android app control
-price: 49.99
+price: 55.99
+price_source:
+  notes: regular price for the controller + charger (no LEDs); on sale for $32.99 at retrieval
+  retrieved: '2026-11-18'
+  url: https://luminxa.com/product/luminxa-controller-only/
+  vendor: Luminxa
 sources:
   outputs.protocols:
     url: https://luminxa.com/wifi-led-settings/
@@ -44,3 +49,7 @@ sources:
     url: https://luminxa.com/product/luminxa-controller-only/
     retrieved: '2026-11-18'
     notes: "'Wi-Fi Enabled, Battery Powered LED controllers'"
+  status:
+    url: https://luminxa.com/product/luminxa-controller-only/
+    retrieved: '2026-11-18'
+    notes: 'in stock, regular $55.99 (on sale $32.99)'

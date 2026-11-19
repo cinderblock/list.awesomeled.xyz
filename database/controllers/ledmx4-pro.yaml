@@ -3,7 +3,7 @@ status: discontinued
 creator:
   name: DMXKing
   url: https://dmxking.com
-  page: https://dmxking.com/led-pixel-control/ledmx4-pro
+  page: https://dmxking.tv/discontinued/ledmx4-pro
 notes: Show record and playback trigger capability through RJ-12 port
 inputs:
   physical:
@@ -61,11 +61,24 @@ power:
 data:
   storage:
     - type: SD
-price: 134
+price:
+  - name: 5V
+    price: 145
+  - name: 12-24V
+    price: 150
+price_source:
+  notes: last list price at the US distributor, still listed but sold out (both models); SKUs DMXKING-LEDMX4PRO-5 / -1224
+  retrieved: '2026-11-18'
+  url: https://dmxprosales.com/products/dmxking-ledmx4-pro
+  vendor: DMX Pro Sales
 software:
   works_with:
     - Madrix
 sources:
+  status:
+    url: https://dmxking.tv/discontinued/ledmx4-pro
+    retrieved: '2026-11-18'
+    notes: 'DMXking support site files it under "Discontinued"'
   outputs.protocols:
     url: https://dmxking.tv/downloads/LeDMX4%20PRO%20User%20Manual%20(EN).pdf
     retrieved: '2026-11-18'

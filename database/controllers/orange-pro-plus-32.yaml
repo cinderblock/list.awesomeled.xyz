@@ -1,5 +1,5 @@
 name: Orange Pro Plus 32
-status: active
+status: discontinued
 creator:
   name: Winterlights India
   url: https://www.winterlights.in
@@ -29,7 +29,23 @@ power:
 data:
   storage:
     - type: uSD
-price: 275
+dead_links:
+  - url: https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+    archive: http://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+    checked: '2026-11-18'
+price:
+  amount: 25000
+  currency: INR
+price_source:
+  notes: last list price (Wayback capture, in stock) - regular price; on sale for INR 21,999 at the time
+  retrieved: '2026-05-16'
+  url: http://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+  vendor: Winter Lights India
 software:
   firmware:
     - FPP
+sources:
+  status:
+    url: https://www.winterlights.in/shop
+    retrieved: '2026-11-18'
+    notes: 'rebuilt store lists only WL8v2, WL16v2, WL24v3 and WL48D1; Orange product page now 404'

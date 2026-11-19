@@ -77,14 +77,26 @@ datasheet:
   url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 price:
   - name: 1024 pixels
-    price: 625
+    price:
+      amount: 650
+      currency: EUR
     pixels: 1024
   - name: 2048 pixels
-    price: 950
+    price:
+      amount: 950
+      currency: EUR
     pixels: 2048
   - name: 4096 pixels
-    price: 1250
+    price:
+      amount: 1250
+      currency: EUR
     pixels: 4096
+price_source:
+  notes: excl. VAT; variants are 1024/2048/4096-pixel (6/12/24 Art-Net universe) versions of the same board, all in stock
+  part: controllerLEC3
+  retrieved: '2026-11-18'
+  url: https://www.ledstripstudio.com/shop/product/led-ethernet-controller-3/
+  vendor: LED Strip Studio
 software:
   works_with:
     - LED Strip Studio Software
@@ -93,6 +105,10 @@ software:
     - MA Grand
     - LSS Remote
 sources:
+  status:
+    url: https://www.ledstripstudio.com/shop/product/led-ethernet-controller-3/
+    retrieved: '2026-11-18'
+    notes: 'in stock, from EUR 650 excl. VAT'
   software.works_with:
     - url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
       retrieved: '2026-11-18'

@@ -1,5 +1,5 @@
 name: Madrix Nebula
-status: unknown
+status: active
 creator:
   name: Madrix
   url: https://www.madrix.com
@@ -30,11 +30,21 @@ power:
 features:
   - TTL pixel-data output (12x 512 channels across two ports)
   - Powers LEDs directly through screw terminals (6A max per port)
-price: 350
+price: 355
+price_source:
+  notes: MSRP shown by the dealer, which sells it for $248; MADRIX publishes no price itself. In Germany LTT-Versand lists EUR 240.68 incl. VAT (currently unavailable). Hardware only, MADRIX software license sold separately.
+  part: IA-HW-001018
+  retrieved: '2026-11-18'
+  url: https://goknight.com/madrix-lighting-control-ia-hw-001018-madrix-nebula/
+  vendor: GoKnight
 software:
   works_with:
     - MADRIX
 sources:
+  status:
+    url: https://goknight.com/madrix-lighting-control-ia-hw-001018-madrix-nebula/
+    retrieved: '2026-11-18'
+    notes: "in stock at a US dealer (MSRP $355); still in MADRIX's current product menu"
   software.works_with:
     url: https://www.madrix.com/products/software
     retrieved: '2026-11-18'

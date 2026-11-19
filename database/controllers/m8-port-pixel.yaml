@@ -30,15 +30,25 @@ power:
     max: 30
 dead_links:
   - url: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
-    archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html
-    checked: '2026-07-01'
-price: 44.99
+    archive: https://web.archive.org/web/20250621084308/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+    checked: '2026-11-18'
+    notes: microcyb.com is live again but this Ecwid store URL redirects to its 404 page; archive is the same product (Ecwid ID 471859299) on Microcyb's EspArtStick store
+price: 76.99
+price_source:
+  notes: last list price (Wayback capture, in stock; $61.99 in April 2024); the product was gone from the store by February 2026
+  retrieved: '2025-06-21'
+  url: https://web.archive.org/web/20250621084308/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+  vendor: Microcyb (EspArtStick store)
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://microcyb.com/shop.php?category=LED+pixel+Controller
+    retrieved: '2026-11-18'
+    notes: "Microcyb's Controllers category lists only ShowSpark models; M8-PI no longer offered"
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/microcyb.xcontroller
     retrieved: '2026-11-18'

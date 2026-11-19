@@ -42,6 +42,11 @@ features:
   - Selectable output voltage (5.4V / 12V / 24V)
   - Built-in web configurator
 price: 69
+price_source:
+  notes: listed price; out of stock on Tindie, "Sold out since Mar 24, 2022"
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/tinicuro/lightkraken/
+  vendor: Obtainium Consulting (Tindie)
 technical_notes:
   - GigaDevice GD32F107RCT6 Cortex-M3 microcontroller
   - Supports WS2812, SK6812, TM1804, UCS1904, GS8208, APA102, APA107, P9813, SK9822 and analog RGB(W) via 14-bit PWM

@@ -1,5 +1,5 @@
 name: LED Player M
-status: unknown
+status: discontinued
 creator: Diamex
 notes: Standalone TPM2 player (microSD) for up to 2048 LEDs; USB virtual COM
   takes live data from JINX/GLEDIATOR. No network input.
@@ -18,4 +18,26 @@ outputs:
 power:
   voltage:
     max: 5
-price: 40
+price:
+  amount: 49.9
+  currency: EUR
+price_source:
+  notes: last list price (Wayback capture, still orderable), incl. 19% German VAT; "nicht mehr lieferbar" from late 2022
+  part: '150043'
+  retrieved: '2022-01-18'
+  url: http://web.archive.org/web/20220118132830/https://www.led-genial.de/LED-Player-M-fuer-Stripes-und-Panels-bis-2048-LEDs
+  vendor: LED-Genial
+related:
+  - type: replacement
+    source:
+      url: https://www.diamex-shop.de/LED-Player-ME-fuer-Stripes-und-Panels-bis-2048-RGB-LEDs
+      retrieved: '2026-11-18'
+      notes: '"LED-Player-ME [2048], der Nachfolger des erfolgreichen LED-Player-M"'
+    name: LED-Player-ME [2048]
+    url: https://www.diamex-shop.de/LED-Player-ME-fuer-Stripes-und-Panels-bis-2048-RGB-LEDs
+    notes: Diamex calls it the successor of the LED-Player-M; EUR 59.90 incl. VAT, in stock (2026-11-18)
+sources:
+  status:
+    url: http://web.archive.org/web/20230603144022/https://www.led-genial.de/LED-Player-M-fuer-Stripes-und-Panels-bis-2048-LEDs
+    retrieved: '2026-11-18'
+    notes: '"Artikel ist nicht mehr lieferbar"; absent from the Diamex shop today'

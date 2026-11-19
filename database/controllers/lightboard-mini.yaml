@@ -3,7 +3,7 @@ status: discontinued
 creator:
   name: RocketLife
   url: https://www.bekonix.com/ # formerly rocketlife.com
-  page: https://www.rocketlife.com/technology/ # original product page, now redirects to bekonix.com
+  page: https://www.rocketlife.com/technology/ # original product page (gone; see dead_links)
 notes: Now Bekonix; see Pattern Drivers.
 inputs:
   physical:
@@ -25,7 +25,17 @@ outputs:
 power:
   voltage:
     max: 5
+dead_links:
+  - url: https://www.rocketlife.com/technology/
+    archive: http://web.archive.org/web/20191115023243/https://www.rocketlife.com/technology/
+    checked: '2026-11-18'
+    notes: HTTPS fails the TLS handshake; plain HTTP returns 410 Gone
 price: 40
+price_source:
+  notes: last list price (Wayback capture), MSRP; intro price $35, sold through Amazon
+  retrieved: '2019-11-15'
+  url: http://web.archive.org/web/20191115023243/https://www.rocketlife.com/technology/
+  vendor: RocketLife
 related:
   - type: variant
     ref: controllers/lightbox
@@ -38,6 +48,10 @@ software:
     - LightDesigner
     - LightMobile
 sources:
+  status:
+    url: http://www.rocketlife.com/technology/
+    retrieved: '2026-11-18'
+    notes: 'RocketLife site returns 410 Gone; successor company Bekonix sells no hardware'
   software.works_with:
     - url: http://web.archive.org/web/20191119161838/https://rocketlife.com/technology/
       retrieved: '2026-11-18'
