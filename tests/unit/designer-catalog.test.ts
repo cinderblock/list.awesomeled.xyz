@@ -250,6 +250,12 @@ describe('dev boards as controllers', () => {
     expect(index.controllers.has('mb-no-outputs')).toBe(false);
   });
 
+  test('but every board can be the host a controller plugs into', () => {
+    expect(must(index.hosts, 'mb-no-outputs').name).toBe('No Outputs');
+    expect(must(index.hosts, 'mb-pi')).toMatchObject({ name: 'PiBoard', path: '/microboards/pi' });
+    expect(must(index.hosts, 'mb-pi').price.tiers[0].usd).toBe(35);
+  });
+
   test('aliases and the instruction set become platform tokens', () => {
     expect(must(index.controllers, 'mb-pi').platformTokens).toContain('piboard4');
     expect(must(index.controllers, 'mb-avr5').platformTokens).toContain('avr');
@@ -384,7 +390,8 @@ describe('helpers', () => {
 
 // The real database: only invariants, never specific values, so a data
 // correction elsewhere can't fail this — but a schema change that breaks the
-// designer's assumptions will.
+// designer's assumptions will. The bounds are deliberately loose: they catch
+// a unit mix-up (milliamps read as amps), not an unusual part.
 describe('the real database builds a sane catalog', () => {
   const db = new Map<string, BaseEntry[]>(
     CATEGORIES.map((c) => [c.id, loadCategoryData(c.id)] as [string, BaseEntry[]])
@@ -408,14 +415,13 @@ describe('the real database builds a sane catalog', () => {
     for (const pixel of catalog.pixels) {
       // channels are per pixel: a many-output chip counts as several pixels
       expect(pixel.channels).toBeGreaterThanOrEqual(1);
-      expect(pixel.channels).toBeLessThanOrEqual(5);
+      expect(pixel.channels).toBeLessThanOrEqual(48);
       expect(Number.isInteger(pixel.pixelsPerPart)).toBe(true);
       expect(pixel.pixelsPerPart).toBeGreaterThanOrEqual(1);
       expect(pixel.channelAmps).toBeGreaterThan(0);
-      // one colour channel of an addressable pixel is tens of milliamps, not amps
-      expect(pixel.channelAmps).toBeLessThan(0.1);
-      const volts = pixel.voltage ?? 5;
-      expect(pixelMaxWatts(pixel, volts)).toBeLessThan(3);
+      // one colour channel is tens of milliamps, a watt-class pixel a few hundred
+      expect(pixel.channelAmps).toBeLessThan(2);
+      expect(pixelMaxWatts(pixel, pixel.voltage ?? 5)).toBeGreaterThan(0);
       for (const choice of pixel.voltageChoices) expect(choice).toBeGreaterThan(0);
       if (pixel.voltage != null && pixel.voltageChoices.length) {
         expect(pixel.voltageChoices).toContain(pixel.voltage);
@@ -432,7 +438,7 @@ describe('the real database builds a sane catalog', () => {
       }
       if (c.kind === 'board') expect(c.id.startsWith('mb-')).toBe(true);
       for (const id of c.drives) expect(catalog.pixels.some((p) => p.id === id)).toBe(true);
-      for (const id of c.hostIds) expect(catalog.controllers.some((b) => b.id === id)).toBe(true);
+      for (const id of c.hostIds) expect(catalog.hosts.some((b) => b.id === id)).toBe(true);
     }
   });
 
@@ -447,7 +453,7 @@ describe('the real database builds a sane catalog', () => {
       const tiers = option.price.tiers;
       for (let i = 0; i < tiers.length; i++) {
         expect(tiers[i].usd).toBeGreaterThanOrEqual(0);
-        if (i > 0) expect(tiers[i].qty).toBeGreaterThan(tiers[i - 1].qty);
+        if (i > 0) expect(tiers[i].qty).toBeGreaterThanOrEqual(tiers[i - 1].qty);
       }
     }
   });

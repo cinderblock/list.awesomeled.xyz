@@ -673,6 +673,28 @@ export function buildBoardOption(entry: BaseEntry): ControllerOption | null {
   };
 }
 
+/**
+ * A dev board as the thing a controller plugs into (a cape's BeagleBone, a
+ * HAT's Raspberry Pi). Every board qualifies, with or without recorded pixel
+ * outputs of its own.
+ */
+export interface HostOption {
+  /** `mb-<slug>`, matching the ids in ControllerOption.hostIds */
+  id: string;
+  path: string;
+  name: string;
+  price: PriceInfo;
+}
+
+export function buildHostOption(entry: BaseEntry): HostOption {
+  return {
+    id: `mb-${entry.id}`,
+    path: `/microboards/${entry.id}`,
+    name: entry.name,
+    price: buildPrice(entry),
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Level shifters
 
@@ -841,6 +863,8 @@ export interface Catalog {
   pixels: PixelOption[];
   /** Controllers and dev boards */
   controllers: ControllerOption[];
+  /** Every dev board, for controllers that need a host */
+  hosts: HostOption[];
   shifters: ShifterOption[];
   connectors: ConnectorOption[];
   sources: SourceOption[];
@@ -880,6 +904,7 @@ export function buildCatalog(db: Database, graph?: RelationGraph): Catalog {
   return {
     pixels,
     controllers: [...controllers.sort(byName), ...boards.sort(byName)],
+    hosts: entries('microboards').map(buildHostOption).sort(byName),
     shifters: entries('level-converters').map(buildShifterOption).sort(byName),
     connectors: entries('connectors').map(buildConnectorOption).sort(byName),
     // Sources that can neither send a control protocol nor run on a board
@@ -895,6 +920,7 @@ export function buildCatalog(db: Database, graph?: RelationGraph): Catalog {
 export interface CatalogIndex {
   pixels: Map<string, PixelOption>;
   controllers: Map<string, ControllerOption>;
+  hosts: Map<string, HostOption>;
   shifters: Map<string, ShifterOption>;
   connectors: Map<string, ConnectorOption>;
   sources: Map<string, SourceOption>;
@@ -905,6 +931,7 @@ export function indexCatalog(catalog: Catalog): CatalogIndex {
   return {
     pixels: index(catalog.pixels),
     controllers: index(catalog.controllers),
+    hosts: index(catalog.hosts),
     shifters: index(catalog.shifters),
     connectors: index(catalog.connectors),
     sources: index(catalog.sources),

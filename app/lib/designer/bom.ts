@@ -179,7 +179,7 @@ export function buildBom(input: BomInput): Bom {
     });
 
     if (c.requiresHost) {
-      const host = c.hostIds.map((id) => catalog.controllers.get(id)).find((h) => h != null);
+      const host = c.hostIds.map((id) => catalog.hosts.get(id)).find((h) => h != null);
       const hp = host ? priced(host.price, use.units) : null;
       lines.push({
         key: `host:${c.id}`,
