@@ -59,9 +59,11 @@ jobs:
           MIRROR_SUMMARY_FILE: ${{ runner.temp }}/mirror-summary.md
         run: bun run mirror-datasheets
 
-      - name: Validate database after rewrite
+      - name: Format and validate the rewritten YAML
         if: steps.r2.outputs.configured == 'true'
-        run: bun run validate
+        run: |
+          bunx prettier --write --log-level warn "database/**/*.yaml"
+          bun run validate
 
       - name: Read summary
         if: steps.r2.outputs.configured == 'true'
@@ -79,10 +81,15 @@ jobs:
         with:
           branch: ci/mirror-datasheets
           title: 'data: mirror new datasheets to R2'
+          # The trailer keeps these rows' "Reviewed" dates (app/lib/data.ts):
+          # recording a mirror isn't a review of the entry. Keep it in the
+          # merge commit's message if the PR is squashed.
           commit-message: |
             data: mirror new datasheets to R2
 
             Automated by .github/workflows/mirror-datasheets.yml
+
+            Not-A-Review: datasheet mirror references (CI)
           body: |
             Mirrored the following datasheets to R2 and recorded
             `datasheet.mirror` (URL, sha256, retrieved, source) in the YAML:
@@ -90,5 +97,10 @@ jobs:
             ${{ steps.summary.outputs.body }}
 
             Original `datasheet.url` values are untouched (attribution).
+
+            Merge with **Rebase and merge** (or keep the `Not-A-Review:`
+            trailer in the squash message) so these rows keep their
+            "Reviewed" dates. PRs opened with the default token don't
+            trigger CI; the workflow already ran prettier + validate.
           add-paths: database/**
           delete-branch: true
