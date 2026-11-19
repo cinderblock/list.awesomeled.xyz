@@ -29,13 +29,24 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
-// Inline script to prevent flash of wrong theme on load
+// Inline script to prevent a flash of the wrong theme or table layout on
+// load: it runs before first paint and before React, so it applies the
+// per-device preferences the prerendered HTML could not know about.
+// Keys match lib/prefs.ts (values there are JSON-encoded).
 const themeScript = `
 (function() {
+  var root = document.documentElement;
   var theme = localStorage.getItem('theme');
   var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   var isDark = theme === 'dark' || (theme === 'system' && prefersDark) || (!theme && prefersDark);
-  document.documentElement.classList.add(isDark ? 'dark' : 'light');
+  root.classList.add(isDark ? 'dark' : 'light');
+  function pref(key) {
+    try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; }
+  }
+  root.dataset.density = pref('awesomeledlist_density') === 'compact' ? 'compact' : 'comfortable';
+  var view = pref('awesomeledlist_table_view');
+  var narrow = window.matchMedia('(max-width: 640px)').matches;
+  root.dataset.tableLayout = view === 'cards' || (view !== 'table' && narrow) ? 'cards' : 'table';
 })();
 `;
 

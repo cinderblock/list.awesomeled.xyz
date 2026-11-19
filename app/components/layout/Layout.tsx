@@ -3,6 +3,8 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { CategoryNav } from './CategoryNav';
 import { PixelScrollbar } from '../ui/PixelScrollbar';
+import { Toaster } from '../ui/Toaster';
+import { TooltipProvider } from '../ui/Tooltip';
 
 interface LayoutProps {
   children: ReactNode;
@@ -17,13 +19,22 @@ export function Layout({ children }: LayoutProps) {
     };
   }, []);
 
+  // The page is prerendered, so it looks ready before it is. Mark the moment
+  // React has taken over: end-to-end tests wait for it before clicking.
+  useEffect(() => {
+    document.documentElement.dataset.hydrated = '';
+  }, []);
+
   return (
-    <div className="layout-wrapper">
-      <Header />
-      <CategoryNav />
-      <main className="layout-main">{children}</main>
-      <Footer />
-      <PixelScrollbar position="right" pixelSpacing={20} />
-    </div>
+    <TooltipProvider>
+      <div className="layout-wrapper">
+        <Header />
+        <CategoryNav />
+        <main className="layout-main">{children}</main>
+        <Footer />
+        <PixelScrollbar position="right" pixelSpacing={20} />
+        <Toaster />
+      </div>
+    </TooltipProvider>
   );
 }

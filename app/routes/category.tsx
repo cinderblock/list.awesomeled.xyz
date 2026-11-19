@@ -1,7 +1,7 @@
 import type { Route } from './+types/category';
 import { data } from 'react-router';
 import { getCategoryById, loadCategoryData } from '~/lib/data';
-import { getColumnsForCategory, getSearchKeysForCategory } from '~/lib/columns';
+import { loadFieldCatalog } from '~/lib/fields.server';
 import { DataTable } from '~/components/data/DataTable';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
@@ -30,8 +30,10 @@ export async function loader({ params }: Route.LoaderArgs) {
   }
 
   const entries = loadCategoryData(categoryId);
+  // Every field the category's entries carry: optional columns, filters, exports
+  const fields = loadFieldCatalog(categoryId);
 
-  return { category, entries };
+  return { category, entries, fields };
 }
 
 export async function clientLoader({ params, serverLoader }: Route.ClientLoaderArgs) {
@@ -53,9 +55,7 @@ export async function clientLoader({ params, serverLoader }: Route.ClientLoaderA
 clientLoader.hydrate = true;
 
 export default function CategoryPage({ loaderData }: Route.ComponentProps) {
-  const { category, entries } = loaderData;
-  const columns = getColumnsForCategory(category.id);
-  const searchKeys = getSearchKeysForCategory(category.id);
+  const { category, entries, fields } = loaderData;
 
   return (
     <PageWrapper category={category}>
@@ -66,13 +66,8 @@ export default function CategoryPage({ loaderData }: Route.ComponentProps) {
         <p className="page-description">{category.description}</p>
       </header>
 
-      <DataTable
-        data={entries}
-        columns={columns}
-        categoryPath={category.path}
-        categoryId={category.id}
-        searchKeys={searchKeys}
-      />
+      {/* Keyed so each category starts with its own table state */}
+      <DataTable key={category.id} data={entries} fields={fields} category={category} />
     </PageWrapper>
   );
 }

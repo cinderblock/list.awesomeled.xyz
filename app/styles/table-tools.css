@@ -1,0 +1,836 @@
+/* ==========================================================================
+   Table tools - toolbar, column menu, column picker, filter drawer, menus,
+   density, tap-to-open detail, toasts
+   ========================================================================== */
+
+/* ==========================================================================
+   Toolbar
+   ========================================================================== */
+.data-table-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.data-table-tools--end {
+  margin-left: auto;
+}
+
+/* Keyboard hint inside the search box */
+.data-table-search-kbd {
+  position: absolute;
+  right: 0.5rem;
+  padding: 0 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--muted);
+  pointer-events: none;
+}
+
+.data-table-search-input:focus + .data-table-search-kbd,
+.data-table-search-input:not(:placeholder-shown) + .data-table-search-kbd {
+  display: none;
+}
+
+/* The browser's own clear button is enough; keep it tidy */
+.data-table-search-input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.data-table-filter-tag svg {
+  flex-shrink: 0;
+}
+
+.data-table-filter-tag--sort {
+  background-color: transparent;
+  border-style: dashed;
+}
+
+.data-table-active-filters {
+  align-items: center;
+}
+
+/* Sorting from the toolbar is for layouts without column headers */
+.data-table-sort-menu {
+  display: none;
+}
+
+html[data-table-layout='cards'] .data-table-sort-menu {
+  display: inline-flex;
+}
+
+.data-table-empty p {
+  margin-bottom: var(--space-3);
+}
+
+/* ==========================================================================
+   Column header: sort button + menu button
+   ========================================================================== */
+.data-table-th-content {
+  gap: 0.125rem;
+}
+
+.column-header-menu {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin-left: 0.25rem;
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+  border-radius: var(--radius-sm);
+  opacity: 0.55;
+  transition:
+    opacity var(--transition-fast),
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.column-header-menu:hover,
+.column-header-menu:focus-visible,
+.column-header-menu[data-state='open'],
+.data-table th:hover .column-header-menu {
+  opacity: 1;
+  background-color: var(--accent);
+  color: var(--foreground);
+}
+
+.column-header-menu--filtered {
+  opacity: 1;
+  color: var(--category-primary-foreground, var(--primary-foreground));
+  background-color: var(--category-primary, var(--primary));
+}
+
+.column-header-menu--filtered:hover,
+.column-header-menu--filtered[data-state='open'],
+.data-table th:hover .column-header-menu--filtered {
+  color: var(--category-primary-foreground, var(--primary-foreground));
+  background-color: var(--category-primary-hover, var(--primary));
+}
+
+.column-header-popover-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+}
+
+.column-header-hide-btn {
+  gap: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.column-header-hide-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.column-header-hide-btn:disabled:hover {
+  background-color: transparent;
+  color: var(--muted-foreground);
+}
+
+.column-header-description {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+  border-bottom: 1px solid var(--border);
+  white-space: normal;
+}
+
+.column-header-tip {
+  margin: var(--space-2) 0 0;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--muted-foreground);
+  white-space: normal;
+}
+
+.column-header-sort-buttons + .column-header-sort-buttons {
+  margin-top: var(--space-1);
+}
+
+.column-header-popover {
+  font-weight: 400;
+  text-align: left;
+  color: var(--popover-foreground);
+}
+
+/* ==========================================================================
+   Filter editor additions
+   ========================================================================== */
+.filter-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-count {
+  margin-left: auto;
+  padding-left: var(--space-2);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted-foreground);
+}
+
+.filter-boolean-btn .filter-count,
+.filter-action-btn .filter-count {
+  margin-left: 0.35rem;
+  padding-left: 0;
+}
+
+.filter-boolean-btn--active .filter-count {
+  color: inherit;
+  opacity: 0.85;
+}
+
+.filter-option--empty .filter-option-label,
+.filter-option--empty .filter-count {
+  opacity: 0.5;
+}
+
+.filter-options-list {
+  max-height: 240px;
+}
+
+.filter-option {
+  padding: 0.3rem var(--space-2);
+}
+
+.filter-presence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--border);
+}
+
+.filter-content > .filter-presence:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.filter-action-btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid transparent;
+}
+
+.filter-action-btn--active {
+  background-color: var(--accent);
+}
+
+.filter-error {
+  margin-bottom: var(--space-2);
+  font-size: 0.75rem;
+  color: var(--destructive);
+}
+
+.filter-input[aria-invalid='true'] {
+  border-color: var(--destructive);
+}
+
+.filter-hint--below {
+  margin-top: var(--space-1);
+  margin-bottom: 0;
+}
+
+.filter-numeric-inputs {
+  margin-bottom: var(--space-2);
+}
+
+/* ==========================================================================
+   Column picker
+   ========================================================================== */
+.column-picker {
+  width: min(22rem, calc(100vw - 1rem));
+  max-height: min(34rem, calc(100vh - 8rem));
+  display: flex;
+  flex-direction: column;
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  animation: filterSlideIn 0.15s ease-out;
+}
+
+.column-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--border);
+}
+
+.column-picker-body {
+  overflow-y: auto;
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.column-picker-heading {
+  margin: 0 0 var(--space-2);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+}
+
+.column-picker-shown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.column-picker-shown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.125rem;
+  padding: 0.2rem 0.25rem 0.2rem var(--space-3);
+  font-size: 0.875rem;
+}
+
+.column-picker-shown-item + .column-picker-shown-item {
+  border-top: 1px solid var(--border);
+}
+
+.column-picker-shown-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.column-picker-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--muted-foreground);
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.column-picker-icon-btn:hover:not(:disabled) {
+  color: var(--foreground);
+  background-color: var(--accent);
+}
+
+.column-picker-icon-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.column-picker-search {
+  margin-bottom: var(--space-2);
+}
+
+.column-picker-order summary {
+  padding: var(--space-1) 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+
+.column-picker-order[open] summary {
+  margin-bottom: var(--space-2);
+}
+
+.column-picker-group {
+  margin: 0 0 var(--space-2);
+  padding: 0;
+  border: none;
+  min-width: 0;
+}
+
+.column-picker-group legend {
+  padding: var(--space-1) 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+.column-picker-group .column-visibility-option {
+  padding: 0.3rem var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.column-picker-note {
+  margin: var(--space-2) 0 0;
+  font-size: 0.6875rem;
+  color: var(--muted-foreground);
+}
+
+/* ==========================================================================
+   Drawer (side panel on wide screens, sheet on phones)
+   ========================================================================== */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: rgb(0 0 0 / 0.35);
+  animation: overlayFadeIn 0.15s ease-out;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 151;
+  width: min(24rem, 100vw);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  color: var(--foreground);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  animation: drawerSlideIn 0.18s ease-out;
+}
+
+.drawer:focus {
+  outline: none;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes drawerSlideIn {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.drawer-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.drawer-count {
+  margin-right: auto;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.drawer-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.drawer-toolbar .filter-input {
+  flex: 1;
+  min-width: 0;
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3) var(--space-4) var(--space-6);
+}
+
+.drawer-footer {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border);
+}
+
+.drawer-footer .btn {
+  width: 100%;
+}
+
+.filter-drawer-group + .filter-drawer-group {
+  margin-top: var(--space-5);
+}
+
+.filter-drawer-field {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.filter-drawer-field + .filter-drawer-field {
+  margin-top: var(--space-1);
+}
+
+.filter-drawer-field--active {
+  border-color: var(--ring);
+}
+
+.filter-drawer-field-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
+  text-align: left;
+  color: var(--foreground);
+  border-radius: var(--radius-md);
+}
+
+.filter-drawer-field-header:hover {
+  background-color: var(--accent);
+}
+
+.filter-drawer-field-label {
+  font-weight: 500;
+}
+
+.filter-drawer-field-value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.filter-drawer-chevron {
+  margin-left: auto;
+  width: 1rem;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.filter-drawer-field-body {
+  padding: 0 var(--space-3) var(--space-3);
+}
+
+.filter-drawer-field-body .column-header-description {
+  padding: 0 0 var(--space-2);
+  border-bottom: none;
+}
+
+.filter-drawer-field-body > .filter-clear-btn {
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  .drawer {
+    width: 100vw;
+    border-left: none;
+  }
+}
+
+/* ==========================================================================
+   Dropdown menus
+   ========================================================================== */
+.menu {
+  min-width: 14rem;
+  max-width: calc(100vw - 1rem);
+  max-height: min(28rem, calc(100vh - 6rem));
+  overflow-y: auto;
+  padding: var(--space-1);
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 160;
+  animation: filterSlideIn 0.15s ease-out;
+}
+
+.menu-label {
+  padding: var(--space-2) var(--space-3) var(--space-1);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu-item[data-highlighted] {
+  outline: none;
+  background-color: var(--accent);
+}
+
+.menu-item svg {
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+}
+
+.menu-item-check {
+  display: inline-flex;
+  width: 0.875rem;
+}
+
+.menu-separator {
+  height: 1px;
+  margin: var(--space-1) 0;
+  background-color: var(--border);
+}
+
+.menu-arrow {
+  fill: var(--popover);
+}
+
+/* Icon-and-label buttons collapse to the icon when space is tight */
+@media (max-width: 720px) {
+  .data-table-tools .btn-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+}
+
+/* ==========================================================================
+   Tap-to-open detail (MoreInfo)
+   ========================================================================== */
+.more-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background-color: var(--background);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.more-info:hover,
+.more-info[data-state='open'] {
+  color: var(--foreground);
+  background-color: var(--accent);
+}
+
+.more-info--text {
+  padding: 0 0.35rem;
+  font-size: 0.6875rem;
+}
+
+.more-info--note {
+  padding: 0.15rem;
+  border-color: transparent;
+  background-color: transparent;
+  color: var(--category-primary, var(--muted-foreground));
+}
+
+.more-info-popover {
+  max-width: min(24rem, calc(100vw - 1rem));
+  max-height: min(20rem, calc(100vh - 4rem));
+  overflow-y: auto;
+  padding: var(--space-3);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  white-space: normal;
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  animation: filterSlideIn 0.15s ease-out;
+}
+
+.more-info-arrow {
+  fill: var(--popover);
+}
+
+.more-info-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.more-info-text,
+.more-info-list {
+  margin: 0;
+}
+
+.more-info-list {
+  padding-left: 1.1rem;
+}
+
+.more-info-list li + li {
+  margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   Field values
+   ========================================================================== */
+.field-quantity {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.field-unit {
+  color: var(--muted-foreground);
+}
+
+.field-with-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* One clipped line of prose, with the rest a tap away */
+.field-clip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  max-width: 22rem;
+}
+
+.field-clip-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.field-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+/* Pills in a filterable cell are buttons in disguise */
+.data-table td[data-filterable] [data-pill],
+.data-table td[data-filterable] .badge {
+  cursor: pointer;
+}
+
+.data-table td[data-filterable] [data-pill]:hover {
+  filter: brightness(0.95);
+}
+
+/* ==========================================================================
+   Density
+   ========================================================================== */
+html[data-density='compact'] .data-table {
+  font-size: 0.8125rem;
+}
+
+html[data-density='compact'] .data-table th,
+html[data-density='compact'] .data-table td {
+  padding: 0.25rem 0.625rem;
+}
+
+html[data-density='compact'] .data-table th[data-col='name'],
+html[data-density='compact'] .data-table td[data-col='name'] {
+  padding-left: var(--space-4);
+}
+
+/* Pills carry inline sizes; dense rows need them a notch smaller */
+html[data-density='compact'] .data-table [data-pill] {
+  font-size: 0.75rem !important;
+  padding: 0 0.4rem !important;
+}
+
+html[data-density='compact'] .data-table [data-pill] svg {
+  width: 12px;
+  height: 12px;
+}
+
+html[data-density='compact'] .data-table .badge {
+  padding: 0 0.4rem;
+  font-size: 0.6875rem;
+}
+
+html[data-density='compact'] .data-table-link-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ==========================================================================
+   Toasts
+   ========================================================================== */
+.toaster {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-6);
+  transform: translateX(-50%);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+.toast {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.875rem;
+  color: var(--background);
+  background-color: var(--foreground);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-lg);
+  animation: toastIn 0.18s ease-out;
+}
+
+.toast--error {
+  background-color: var(--destructive);
+  color: white;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer,
+  .drawer-overlay,
+  .toast,
+  .menu,
+  .column-picker,
+  .more-info-popover {
+    animation: none;
+  }
+}

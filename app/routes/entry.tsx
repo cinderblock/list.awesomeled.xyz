@@ -19,11 +19,7 @@ import {
   Link2,
 } from 'lucide-react';
 import { useEffect, useState, useSyncExternalStore } from 'react';
-import {
-  parseFilters,
-  getFilterDescription,
-  FILTER_STORAGE_KEY,
-} from '~/components/data/DataTable';
+import { parseFilters, getFilterDescription, FILTER_STORAGE_KEY } from '~/lib/table-state';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
 import { FeatureBadges, ValueBadges } from '~/components/ui/FeatureBadges';

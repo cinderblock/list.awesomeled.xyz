@@ -38,12 +38,15 @@ test.describe('Basic functionality', () => {
   test('navigation to entry page works', async ({ page }) => {
     await page.goto('/controllers');
 
-    // Click on first entry link in the table
-    const firstLink = page.locator('.data-table tbody tr:first-child td:first-child a');
+    // Click the first entry's name (the first cell holds the external product
+    // link, which opens a new tab)
+    const firstLink = page.locator('.data-table tbody tr:first-child a.data-table-entry-link');
+    const name = (await firstLink.innerText()).trim();
     await firstLink.click();
 
-    // Should navigate to entry page
-    await expect(page.locator('h1')).toBeVisible();
+    // Should navigate to that entry's page
+    await expect(page).toHaveURL(/\/controllers\/[^/?]+$/);
+    await expect(page.locator('h1')).toContainText(name);
 
     // Should have breadcrumb with Home link
     await expect(page.locator('nav >> text=Home')).toBeVisible();
@@ -217,10 +220,13 @@ test.describe('Console errors', () => {
 
     await page.click('.category-tab >> text=Pixels');
     await expect(page).toHaveURL(/\/pixels/);
+    // The URL changes before the new table renders: wait for the page itself
+    await expect(page.locator('h1')).toContainText('Pixels');
     await page.waitForLoadState('networkidle');
 
-    const firstLink = page.locator('.data-table tbody tr:first-child td:first-child a');
+    const firstLink = page.locator('.data-table tbody tr:first-child a.data-table-entry-link');
     await firstLink.click();
+    await expect(page).toHaveURL(/\/pixels\/[^/?]+$/);
     await page.waitForLoadState('networkidle');
 
     expect(consoleErrors).toEqual([]);

@@ -414,11 +414,13 @@ export function Badge({ badge, to }: BadgeProps) {
   );
 
   const pill = to ? (
-    <Link to={to} style={style}>
+    <Link to={to} style={style} data-pill="">
       {content}
     </Link>
   ) : (
-    <span style={style}>{content}</span>
+    <span style={style} data-pill="">
+      {content}
+    </span>
   );
 
   return badge.tip ? <Tooltip content={badge.tip}>{pill}</Tooltip> : pill;
@@ -435,13 +437,17 @@ export function TextPill({ text, to }: { text: string; to?: string }) {
 
   if (to) {
     return (
-      <Link to={to} style={{ ...style, color: 'var(--category-primary)' }}>
+      <Link to={to} style={{ ...style, color: 'var(--category-primary)' }} data-pill="">
         {text}
       </Link>
     );
   }
 
-  return <span style={style}>{text}</span>;
+  return (
+    <span style={style} data-pill="">
+      {text}
+    </span>
+  );
 }
 
 // Get badge for a single string value (exact match against a term or alias)

@@ -1,45 +1,31 @@
-import { useState, useMemo, useRef, useEffect } from 'react';
-import * as Popover from '@radix-ui/react-popover';
-import { X, Check, ArrowUp, ArrowDown, ArrowUpDown, EyeOff } from 'lucide-react';
-import type { Column, FilterConfig } from '~/lib/columns';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { X } from 'lucide-react';
 import type { BaseEntry } from '~/lib/types';
-import { priceUSD } from '~/lib/currency';
-import { Tooltip } from '~/components/ui/Tooltip';
+import { countFacet, numericRange } from '~/lib/table-model';
+import {
+  isBooleanFilter,
+  isDateFilter,
+  isNumericFilter,
+  isPresenceFilter,
+  isSelectFilter,
+  isStringFilter,
+  type FilterValue,
+} from '~/lib/table-state';
+import { formatQuantity, parseNumberWithUnit } from '~/lib/units';
 import { useNow } from '~/hooks/useNow';
+import type { TableColumn } from './table-columns';
 
-type SortDirection = 'asc' | 'desc';
-
-// Filter value types
-export interface NumericFilterValue {
-  min?: number;
-  max?: number;
-}
-
-export interface SelectFilterValue {
-  selected: string[];
-  exclude: boolean;
-}
-
-export interface BooleanFilterValue {
-  value: boolean | null;
-}
-
-export interface StringFilterValue {
-  value: string;
-  fuzzy: boolean;
-}
-
-export interface DateFilterValue {
-  /** ISO day (YYYY-MM-DD): keep entries updated on/after this date */
-  since: string;
-}
-
-export type FilterValue =
-  | NumericFilterValue
-  | SelectFilterValue
-  | BooleanFilterValue
-  | StringFilterValue
-  | DateFilterValue;
+// Filter value types live in lib/table-state; re-exported for existing imports
+export type {
+  BooleanFilterValue,
+  DateFilterValue,
+  FilterState,
+  FilterValue,
+  NumericFilterValue,
+  SelectFilterValue,
+  StringFilterValue,
+} from '~/lib/table-state';
+export { isFilterActive } from '~/lib/table-state';
 
 /**
  * Loose "since" text: a year (2024), year-month (2024-06), or a full date.
@@ -59,408 +45,462 @@ export function parseSinceInput(raw: string): string | null {
   return null;
 }
 
-export type FilterState = Record<string, FilterValue>;
+/** A numeric bound as a person would read it ("800 kHz", "$25", "1,024"). */
+export function formatBound(column: TableColumn, n: number): string {
+  if (column.quantity) return formatQuantity(n, column.quantity);
+  const unit = column.filterConfig?.type === 'numeric' ? column.filterConfig.unit : undefined;
+  const text = n.toLocaleString('en-US', { maximumFractionDigits: 2 });
+  return unit === '$' ? `$${text}` : unit ? `${text} ${unit}` : text;
+}
 
-interface ColumnFilterProps {
-  column: Column;
-  data: BaseEntry[];
+interface FilterEditorProps {
+  column: TableColumn;
+  /** Every row of the category: the full option list and numeric bounds */
+  allRows: BaseEntry[];
+  /** Rows passing the search and every OTHER filter: what the counts count */
+  rows: BaseEntry[];
   value: FilterValue | undefined;
   onChange: (value: FilterValue | undefined) => void;
 }
 
-// Resolve a possibly-dotted key (e.g. "outputs.count") against an object
-function resolveKey(item: unknown, key: string): unknown {
-  return key.split('.').reduce<unknown>((v, k) => {
-    if (v == null) return null;
-    return (v as Record<string, unknown>)[k];
-  }, item);
-}
+/**
+ * The filter controls for one column, by its filter kind, plus the
+ * has-a-value / has-none toggles every column gets.
+ */
+export function FilterEditor(props: FilterEditorProps) {
+  const { column, value } = props;
+  const presence = value && isPresenceFilter(value) ? value : undefined;
+  // A presence filter replaces the value filter; the editor shows as unset
+  const own = presence ? undefined : value;
 
-// Parse numeric value from string (handles units like "16 A", "50 V")
-function parseNumericValue(val: unknown): number | null {
-  if (val == null) return null;
-  if (typeof val === 'number') return val;
-  const str = String(val);
-  const match = str.match(/^([\d.,]+)/);
-  if (match) {
-    const num = parseFloat(match[1].replace(/,/g, ''));
-    if (!isNaN(num)) return num;
-  }
-  // Currency-shaped values ("$25", {amount, currency}, price-tier arrays)
-  // compare in normalized USD, matching how price columns sort.
-  return priceUSD(val);
-}
-
-// Get unique values from data for a column
-function getUniqueValues(data: BaseEntry[], key: string): string[] {
-  const values = new Set<string>();
-  for (const item of data) {
-    const val = resolveKey(item, key);
-    if (val == null) continue;
-    if (Array.isArray(val)) {
-      val.forEach((v) => values.add(String(v)));
-    } else {
-      values.add(String(val));
-    }
-  }
-  return Array.from(values).sort((a, b) => a.localeCompare(b));
-}
-
-// Get min/max values from data for a numeric column. A column's sortValue
-// normalizer (prices → USD, quantities → base units) takes precedence so the
-// slider bounds match how the filter compares.
-function getNumericRange(
-  data: BaseEntry[],
-  key: string,
-  sortValue?: Column['sortValue']
-): { min: number; max: number } | null {
-  let min = Infinity;
-  let max = -Infinity;
-  let hasValues = false;
-
-  for (const item of data) {
-    const raw = resolveKey(item, key);
-    const normalized = sortValue ? sortValue(raw, item) : parseNumericValue(raw);
-    const val = typeof normalized === 'number' ? normalized : null;
-    if (val !== null) {
-      hasValues = true;
-      min = Math.min(min, val);
-      max = Math.max(max, val);
-    }
-  }
-
-  return hasValues ? { min, max } : null;
-}
-
-// Check if filter has any active value
-export function isFilterActive(value: FilterValue | undefined): boolean {
-  if (!value) return false;
-
-  if ('since' in value) {
-    return !!value.since;
-  }
-  if ('min' in value || 'max' in value) {
-    return value.min !== undefined || value.max !== undefined;
-  }
-  if ('selected' in value) {
-    return value.selected.length > 0;
-  }
-  if ('value' in value && typeof value.value === 'boolean') {
-    return value.value !== null;
-  }
-  if ('value' in value && typeof value.value === 'string') {
-    return value.value.trim() !== '';
-  }
-  return false;
-}
-
-// Apply filter to a single item. `sortValue` (from the column) normalizes
-// values before numeric comparison so filters agree with sorting.
-export function applyFilter(
-  item: BaseEntry,
-  key: string,
-  config: FilterConfig,
-  value: FilterValue,
-  sortValue?: Column['sortValue']
-): boolean {
-  const itemValue = resolveKey(item, key);
-
-  switch (config.type) {
-    case 'date': {
-      const filterVal = value as DateFilterValue;
-      if (!filterVal.since) return true;
-      const date =
-        itemValue instanceof Date ? itemValue : itemValue ? new Date(String(itemValue)) : null;
-      if (!date || isNaN(date.getTime())) return true; // don't drop unknown dates
-      return date.getTime() >= new Date(`${filterVal.since}T00:00:00`).getTime();
-    }
-
-    case 'numeric': {
-      const normalized = sortValue ? sortValue(itemValue, item) : parseNumericValue(itemValue);
-      const numValue = typeof normalized === 'number' ? normalized : null;
-      if (numValue === null) return true; // Don't filter out items with no value
-      const filterVal = value as NumericFilterValue;
-      if (filterVal.min !== undefined && numValue < filterVal.min) return false;
-      if (filterVal.max !== undefined && numValue > filterVal.max) return false;
-      return true;
-    }
-
-    case 'select': {
-      const filterVal = value as SelectFilterValue;
-      if (filterVal.selected.length === 0) return true;
-
-      let itemValues: string[];
-      if (Array.isArray(itemValue)) {
-        itemValues = itemValue.map(String);
-      } else if (itemValue != null) {
-        itemValues = [String(itemValue)];
-      } else {
-        itemValues = [];
-      }
-
-      if (filterVal.exclude) {
-        // Exclude mode: item passes if it doesn't have ANY of the selected values
-        return !filterVal.selected.some((sel) => itemValues.includes(sel));
-      } else {
-        // Include mode: item passes if it has ANY of the selected values
-        return filterVal.selected.some((sel) => itemValues.includes(sel));
-      }
-    }
-
-    case 'boolean': {
-      const filterVal = value as BooleanFilterValue;
-      if (filterVal.value === null) return true;
-      return itemValue === filterVal.value;
-    }
-
-    case 'string': {
-      const filterVal = value as StringFilterValue;
-      if (!filterVal.value.trim()) return true;
-      const itemStr = String(itemValue ?? '').toLowerCase();
-
-      if (filterVal.fuzzy) {
-        // Space-separated fuzzy search: all terms must match
-        const terms = filterVal.value.toLowerCase().split(/\s+/).filter(Boolean);
-        return terms.every((term) => itemStr.includes(term));
-      } else {
-        return itemStr.includes(filterVal.value.toLowerCase());
-      }
-    }
-  }
-}
-
-interface ColumnHeaderPopoverProps {
-  column: Column;
-  data: BaseEntry[];
-  filterValue: FilterValue | undefined;
-  onFilterChange: (value: FilterValue | undefined) => void;
-  /** This column's place in the sort layers, if any */
-  sortState: { dir: SortDirection; index: number; count: number } | null;
-  /** True when other columns are already sorted (enables "add level") */
-  hasOtherSort: boolean;
-  onSortChange: (dir: SortDirection | null, additive?: boolean) => void;
-  onHide?: () => void;
-  children: React.ReactNode;
-}
-
-export function ColumnHeaderPopover({
-  column,
-  data,
-  filterValue,
-  onFilterChange,
-  sortState,
-  hasOtherSort,
-  onSortChange,
-  onHide,
-  children,
-}: ColumnHeaderPopoverProps) {
-  const [open, setOpen] = useState(false);
-  const hasFilter = column.filterConfig != null;
-  const isSortable = column.sortable !== false && column.key !== 'links';
-  const isFilterActive_ = isFilterActive(filterValue);
-  const isSorted = sortState != null;
-  const sortDir = sortState?.dir ?? null;
-
-  // Close popover on scroll to prevent it from detaching from sticky header
-  useEffect(() => {
-    if (!open) return;
-
-    const handleScroll = () => {
-      setOpen(false);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [open]);
-
-  // If column has no filter and is not sortable, just render children
-  if (!hasFilter && !isSortable) {
-    return <>{children}</>;
+  let editor: React.ReactNode = null;
+  switch (column.filterKind) {
+    case 'select':
+      editor = <SelectFilter {...props} value={own && isSelectFilter(own) ? own : undefined} />;
+      break;
+    case 'numeric':
+      editor = <NumericFilter {...props} value={own && isNumericFilter(own) ? own : undefined} />;
+      break;
+    case 'boolean':
+      editor = <BooleanFilter {...props} value={own && isBooleanFilter(own) ? own : undefined} />;
+      break;
+    case 'string':
+      editor = <StringFilter {...props} value={own && isStringFilter(own) ? own : undefined} />;
+      break;
+    case 'date':
+      editor = (
+        <DateFilter value={own && isDateFilter(own) ? own : undefined} onChange={props.onChange} />
+      );
+      break;
   }
 
   return (
-    <Popover.Root open={open} onOpenChange={setOpen}>
-      <Popover.Trigger asChild>
-        <button
-          className={`column-header-trigger${isFilterActive_ ? ' column-header-trigger--filtered' : ''}${isSorted ? ' column-header-trigger--sorted' : ''}`}
-        >
-          {children}
-          {isSortable && (
-            <span className="column-header-sort-indicator">
-              {isSorted && sortDir === 'asc' && <ArrowUp size={14} />}
-              {isSorted && sortDir === 'desc' && <ArrowDown size={14} />}
-              {sortState && sortState.count > 1 && (
-                <sup className="column-header-sort-layer">{sortState.index}</sup>
-              )}
-              {!isSorted && <ArrowUpDown size={14} className="column-header-sort-hint" />}
-            </span>
-          )}
-        </button>
-      </Popover.Trigger>
-      <Popover.Portal>
-        <Popover.Content className="column-header-popover" sideOffset={5} align="start">
-          <div className="column-header-popover-header">
-            <span className="column-header-popover-title">{column.label || column.key}</span>
-            {onHide && (
-              <Tooltip content="Hide column">
-                <button
-                  className="column-header-hide-btn"
-                  onClick={() => {
-                    onHide();
-                    setOpen(false);
-                  }}
-                >
-                  <EyeOff size={14} />
-                </button>
-              </Tooltip>
-            )}
-          </div>
-
-          {/* Sort controls */}
-          {isSortable && (
-            <div className="column-header-sort-section">
-              <div className="column-header-section-label">
-                Sort
-                {sortState && sortState.count > 1 ? ` (level ${sortState.index})` : ''}
-              </div>
-              <div className="column-header-sort-buttons">
-                <button
-                  className={`column-header-sort-btn${sortDir === 'asc' ? ' column-header-sort-btn--active' : ''}`}
-                  onClick={() => onSortChange('asc')}
-                >
-                  <ArrowUp size={14} />
-                  Ascending
-                </button>
-                <button
-                  className={`column-header-sort-btn${sortDir === 'desc' ? ' column-header-sort-btn--active' : ''}`}
-                  onClick={() => onSortChange('desc')}
-                >
-                  <ArrowDown size={14} />
-                  Descending
-                </button>
-                {isSorted && (
-                  <button
-                    className="column-header-sort-btn column-header-sort-btn--clear"
-                    onClick={() => onSortChange(null)}
-                  >
-                    <X size={14} />
-                    Clear
-                  </button>
-                )}
-              </div>
-              {hasOtherSort && !isSorted && (
-                <div className="column-header-sort-buttons">
-                  <Tooltip content="Keep the current sort and use this column to break ties">
-                    <button
-                      className="column-header-sort-btn"
-                      onClick={() => onSortChange(column.defaultSortDir ?? 'asc', true)}
-                    >
-                      <ArrowUpDown size={14} />
-                      Add as tie-break level
-                    </button>
-                  </Tooltip>
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Filter controls */}
-          {hasFilter && (
-            <div className="column-header-filter-section">
-              <div className="column-header-section-header">
-                <span className="column-header-section-label">Filter</span>
-                {isFilterActive_ && (
-                  <button className="filter-clear-btn" onClick={() => onFilterChange(undefined)}>
-                    <X size={14} />
-                    Clear
-                  </button>
-                )}
-              </div>
-              <FilterContent
-                column={column}
-                data={data}
-                value={filterValue}
-                onChange={onFilterChange}
-              />
-            </div>
-          )}
-
-          <Popover.Arrow className="filter-arrow" />
-        </Popover.Content>
-      </Popover.Portal>
-    </Popover.Root>
+    <div className="filter-content">
+      {editor}
+      <PresenceToggle {...props} />
+    </div>
   );
 }
 
-// Legacy export for backwards compatibility - keeping the old function signature
-interface ColumnFilterProps {
-  column: Column;
-  data: BaseEntry[];
-  value: FilterValue | undefined;
-  onChange: (value: FilterValue | undefined) => void;
+// "Has a value" / "No value": useful on any column, e.g. to find entries
+// that still lack a price or a datasheet
+function PresenceToggle({ column, rows, value, onChange }: FilterEditorProps) {
+  const present = useMemo(() => rows.filter((r) => column.hasValue(r)).length, [rows, column]);
+  const missing = rows.length - present;
+  const current = value && isPresenceFilter(value) ? value.present : null;
+  // A column every entry fills in has nothing to offer here
+  if (missing === 0 && current === null) return null;
+  const toggle = (want: boolean) => onChange(current === want ? undefined : { present: want });
+  return (
+    <div
+      className="filter-presence"
+      role="group"
+      aria-label="Filter by whether a value is recorded"
+    >
+      <button
+        type="button"
+        className={`filter-action-btn${current === true ? ' filter-action-btn--active' : ''}`}
+        aria-pressed={current === true}
+        onClick={() => toggle(true)}
+      >
+        Has a value <span className="filter-count">{present}</span>
+      </button>
+      <button
+        type="button"
+        className={`filter-action-btn${current === false ? ' filter-action-btn--active' : ''}`}
+        aria-pressed={current === false}
+        onClick={() => toggle(false)}
+      >
+        No value <span className="filter-count">{missing}</span>
+      </button>
+    </div>
+  );
 }
 
-function FilterContent({ column, data, value, onChange }: ColumnFilterProps) {
-  const config = column.filterConfig!;
+// ---------------------------------------------------------------------------
+// Select: checkbox list with live counts
+// ---------------------------------------------------------------------------
 
-  switch (config.type) {
-    case 'numeric':
-      return (
-        <NumericFilter
-          column={column}
-          data={data}
-          value={value as NumericFilterValue | undefined}
-          onChange={onChange}
-          config={config}
-        />
-      );
-    case 'select':
-      return (
-        <SelectFilter
-          column={column}
-          data={data}
-          value={value as SelectFilterValue | undefined}
-          onChange={onChange}
-          config={config}
-        />
-      );
-    case 'boolean':
-      return (
-        <BooleanFilter
-          column={column}
-          value={value as BooleanFilterValue | undefined}
-          onChange={onChange}
-          config={config}
-        />
-      );
-    case 'string':
-      return (
-        <StringFilter
-          column={column}
-          value={value as StringFilterValue | undefined}
-          onChange={onChange}
-          config={config}
-        />
-      );
-    case 'date':
-      return <DateFilter value={value as DateFilterValue | undefined} onChange={onChange} />;
+function SelectFilter({
+  column,
+  allRows,
+  rows,
+  value,
+  onChange,
+}: FilterEditorProps & { value: Extract<FilterValue, { selected: string[] }> | undefined }) {
+  const [search, setSearch] = useState('');
+  const selected = useMemo(() => value?.selected ?? [], [value]);
+  const exclude = value?.exclude ?? false;
+  // Remember "exclude" while nothing is selected yet
+  const [pendingExclude, setPendingExclude] = useState(exclude);
+  const excluding = selected.length > 0 ? exclude : pendingExclude;
+
+  const options = useMemo(() => {
+    const counts = new Map(countFacet(column, rows).map((o) => [o.value.toLowerCase(), o.count]));
+    const all = countFacet(column, allRows).map((o) => ({
+      value: o.value,
+      count: counts.get(o.value.toLowerCase()) ?? 0,
+    }));
+    // Selected values no entry has any more (stale link): still show them so
+    // they can be unticked
+    const known = new Set(all.map((o) => o.value.toLowerCase()));
+    for (const s of selected) {
+      if (!known.has(s.toLowerCase())) all.push({ value: s, count: 0 });
+    }
+    return all.sort((a, b) => b.count - a.count || a.value.localeCompare(b.value));
+  }, [column, rows, allRows, selected]);
+
+  const isSelected = (opt: string) => selected.some((s) => s.toLowerCase() === opt.toLowerCase());
+
+  const visible = search
+    ? options.filter((o) => o.value.toLowerCase().includes(search.toLowerCase()))
+    : options;
+
+  const commit = (next: string[], nextExclude = excluding) => {
+    onChange(next.length === 0 ? undefined : { selected: next, exclude: nextExclude });
+  };
+
+  const toggleOption = (opt: string) => {
+    commit(
+      isSelected(opt)
+        ? selected.filter((s) => s.toLowerCase() !== opt.toLowerCase())
+        : [...selected, opt]
+    );
+  };
+
+  return (
+    <>
+      <div className="filter-select-header">
+        {options.length > 8 && (
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Find a value…"
+            aria-label={`Find a ${column.label} value`}
+            className="filter-input filter-search"
+          />
+        )}
+        <button
+          type="button"
+          className={`filter-exclude-btn${excluding ? ' filter-exclude-btn--active' : ''}`}
+          aria-pressed={excluding}
+          onClick={() => {
+            setPendingExclude(!excluding);
+            if (selected.length > 0) commit(selected, !excluding);
+          }}
+        >
+          {excluding ? 'Hiding ticked' : 'Showing ticked'}
+        </button>
+      </div>
+      <div className="filter-select-actions">
+        <button
+          type="button"
+          className="filter-action-btn"
+          onClick={() => commit(visible.map((o) => o.value))}
+        >
+          Tick all
+        </button>
+        <button type="button" className="filter-action-btn" onClick={() => onChange(undefined)}>
+          Untick all
+        </button>
+      </div>
+      <div className="filter-options-list">
+        {visible.map((opt) => (
+          <label
+            key={opt.value}
+            className={`filter-option${opt.count === 0 ? ' filter-option--empty' : ''}`}
+          >
+            <input
+              type="checkbox"
+              checked={isSelected(opt.value)}
+              onChange={() => toggleOption(opt.value)}
+            />
+            <span className="filter-option-label">{opt.value}</span>
+            <span className="filter-count">{opt.count}</span>
+          </label>
+        ))}
+        {visible.length === 0 && <div className="filter-no-options">No matching values</div>}
+      </div>
+    </>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Numeric: range with units
+// ---------------------------------------------------------------------------
+
+function NumericFilter({
+  column,
+  allRows,
+  value,
+  onChange,
+}: FilterEditorProps & { value: Extract<FilterValue, { min?: number }> | undefined }) {
+  const range = useMemo(() => numericRange(column, allRows), [column, allRows]);
+  const unknown = allRows.length - (range?.known ?? 0);
+
+  const show = (n: number | undefined) =>
+    n === undefined
+      ? ''
+      : column.quantity
+        ? formatQuantity(n, column.quantity)
+        : String(Number(n.toPrecision(12)));
+
+  const [minText, setMinText] = useState(() => show(value?.min));
+  const [maxText, setMaxText] = useState(() => show(value?.max));
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // What the inputs currently mean; used to tell an outside change (a chip
+  // removed, a link followed) from our own
+  const read = (text: string) => parseNumberWithUnit(text, column.quantity);
+  const minValid = minText.trim() === '' || read(minText) !== undefined;
+  const maxValid = maxText.trim() === '' || read(maxText) !== undefined;
+
+  // When the applied value changes from outside, re-seed the inputs — but
+  // not when it merely caught up with what is being typed, which would
+  // rewrite the text under the cursor ("1" → "1 Hz" on the way to "12kHz")
+  const [applied, setApplied] = useState({ min: value?.min, max: value?.max });
+  if (applied.min !== value?.min || applied.max !== value?.max) {
+    setApplied({ min: value?.min, max: value?.max });
+    if (read(minText) !== value?.min) setMinText(show(value?.min));
+    if (read(maxText) !== value?.max) setMaxText(show(value?.max));
   }
+
+  useEffect(
+    () => () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    },
+    []
+  );
+
+  const apply = (nextMin: string, nextMax: string, strict = value?.strict ?? false) => {
+    const min = read(nextMin);
+    const max = read(nextMax);
+    if (min === undefined && max === undefined) {
+      onChange(undefined);
+      return;
+    }
+    onChange(strict ? { min, max, strict: true } : { min, max });
+  };
+
+  const schedule = (nextMin: string, nextMax: string) => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => apply(nextMin, nextMax), 350);
+  };
+
+  const applyNow = () => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    apply(minText, maxText);
+  };
+
+  const example = column.quantity && range ? `e.g. ${formatBound(column, range.min)}` : undefined;
+
+  return (
+    <>
+      {range && (
+        <div className="filter-hint">
+          Recorded values run from {formatBound(column, range.min)} to{' '}
+          {formatBound(column, range.max)}.
+        </div>
+      )}
+      <div className="filter-numeric-inputs">
+        <div className="filter-input-group">
+          <label htmlFor={`min-${column.key}`}>At least</label>
+          <input
+            id={`min-${column.key}`}
+            type="text"
+            inputMode="decimal"
+            value={minText}
+            onChange={(e) => {
+              setMinText(e.target.value);
+              schedule(e.target.value, maxText);
+            }}
+            onKeyDown={(e) => e.key === 'Enter' && applyNow()}
+            placeholder={example}
+            aria-invalid={!minValid}
+            className="filter-input"
+          />
+        </div>
+        <div className="filter-input-group">
+          <label htmlFor={`max-${column.key}`}>At most</label>
+          <input
+            id={`max-${column.key}`}
+            type="text"
+            inputMode="decimal"
+            value={maxText}
+            onChange={(e) => {
+              setMaxText(e.target.value);
+              schedule(minText, e.target.value);
+            }}
+            onKeyDown={(e) => e.key === 'Enter' && applyNow()}
+            aria-invalid={!maxValid}
+            className="filter-input"
+          />
+        </div>
+      </div>
+      {(!minValid || !maxValid) && (
+        <div className="filter-error" role="alert">
+          Enter a number{column.quantity ? ' (a unit is fine: "800kHz", "22 mA")' : ''}.
+        </div>
+      )}
+      {unknown > 0 && (
+        <label className="filter-fuzzy-toggle">
+          <input
+            type="checkbox"
+            checked={value?.strict ?? false}
+            disabled={!value}
+            onChange={(e) => apply(minText, maxText, e.target.checked)}
+          />
+          <span>
+            Hide the {unknown} {unknown === 1 ? 'entry' : 'entries'} with no value recorded
+          </span>
+        </label>
+      )}
+    </>
+  );
 }
 
-// "Since" filter: big obvious presets first, a forgiving text field second,
-// and a native date picker only for those who go looking for it.
+// ---------------------------------------------------------------------------
+// Boolean
+// ---------------------------------------------------------------------------
+
+function BooleanFilter({
+  column,
+  rows,
+  value,
+  onChange,
+}: FilterEditorProps & { value: Extract<FilterValue, { value: boolean | null }> | undefined }) {
+  const config = column.filterConfig?.type === 'boolean' ? column.filterConfig : undefined;
+  const trueLabel = config?.trueLabel ?? 'Yes';
+  const falseLabel = config?.falseLabel ?? 'No';
+  const current = value?.value ?? null;
+
+  const counts = useMemo(() => {
+    let yes = 0;
+    let no = 0;
+    for (const row of rows) {
+      const b = column.bool?.(row);
+      if (b === true) yes++;
+      else if (b === false) no++;
+    }
+    return { yes, no };
+  }, [rows, column]);
+
+  const option = (want: boolean | null, label: string, count?: number) => (
+    <button
+      type="button"
+      className={`filter-boolean-btn${current === want ? ' filter-boolean-btn--active' : ''}`}
+      aria-pressed={current === want}
+      onClick={() => onChange(want === null ? undefined : { value: want })}
+    >
+      {label}
+      {count !== undefined && <span className="filter-count">{count}</span>}
+    </button>
+  );
+
+  return (
+    <div className="filter-boolean-options" role="group" aria-label={column.label}>
+      {option(null, 'Any')}
+      {option(true, trueLabel, counts.yes)}
+      {option(false, falseLabel, counts.no)}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Text contains
+// ---------------------------------------------------------------------------
+
+function StringFilter({
+  column,
+  value,
+  onChange,
+}: FilterEditorProps & { value: Extract<FilterValue, { fuzzy: boolean }> | undefined }) {
+  const [text, setText] = useState(value?.value ?? '');
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Re-seed when the applied value changes from outside (a chip removed)
+  const [applied, setApplied] = useState(value?.value);
+  if (applied !== value?.value) {
+    setApplied(value?.value);
+    if ((value?.value ?? '') !== text.trim()) setText(value?.value ?? '');
+  }
+
+  useEffect(
+    () => () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    },
+    []
+  );
+
+  const handleChange = (next: string) => {
+    setText(next);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      onChange(next.trim() ? { value: next.trim(), fuzzy: true } : undefined);
+    }, 250);
+  };
+
+  return (
+    <>
+      <input
+        type="text"
+        value={text}
+        onChange={(e) => handleChange(e.target.value)}
+        placeholder="Contains…"
+        aria-label={`${column.label} contains`}
+        className="filter-input"
+      />
+      <div className="filter-hint filter-hint--below">Every word must appear, in any order.</div>
+    </>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Date: "since"
+// ---------------------------------------------------------------------------
+
+// Big obvious presets first, a forgiving text field second, and a native
+// date picker only for those who go looking for it.
 function DateFilter({
   value,
   onChange,
 }: {
-  value: DateFilterValue | undefined;
+  value: Extract<FilterValue, { since: string }> | undefined;
   onChange: (value: FilterValue | undefined) => void;
 }) {
   const [text, setText] = useState(value?.since ?? '');
   const [showPicker, setShowPicker] = useState(false);
-  // Client clock (0 during SSR/hydration); the popover only opens
+  // Client clock (0 during SSR/hydration); the editor only opens
   // client-side, so this is always set before the presets are visible.
   const now = useNow();
+
+  // Re-seed when the applied value changes from outside (a chip removed)
+  const [applied, setApplied] = useState(value?.since);
+  if (applied !== value?.since) {
+    setApplied(value?.since);
+    setText(value?.since ?? '');
+  }
 
   const setSince = (since: string | null) => {
     setText(since ?? '');
@@ -491,7 +531,9 @@ function DateFilter({
         {presets.map(([label, since]) => (
           <button
             key={label}
+            type="button"
             className={`filter-action-btn${value?.since === since ? ' filter-action-btn--active' : ''}`}
+            aria-pressed={value?.since === since}
             onClick={() => setSince(value?.since === since ? null : since)}
           >
             {label}
@@ -503,331 +545,36 @@ function DateFilter({
           type="text"
           className="filter-input"
           placeholder="since… (2024, 2024-06, or 2024-06-15)"
+          aria-label="Reviewed since"
           value={text}
           onChange={(e) => setText(e.target.value)}
           onBlur={commitText}
           onKeyDown={(e) => e.key === 'Enter' && commitText()}
         />
-        <Tooltip content="Pick from a calendar instead">
-          <button className="filter-action-btn" onClick={() => setShowPicker((v) => !v)}>
-            📅
-          </button>
-        </Tooltip>
+        <button
+          type="button"
+          className="filter-action-btn"
+          aria-expanded={showPicker}
+          onClick={() => setShowPicker((v) => !v)}
+        >
+          Calendar
+        </button>
       </div>
       {showPicker && (
         <input
           type="date"
           className="filter-input"
+          aria-label="Pick a date"
           value={value?.since ?? ''}
           onChange={(e) => setSince(e.target.value || null)}
         />
       )}
       {value?.since && (
-        <button className="filter-clear-btn" onClick={() => setSince(null)}>
+        <button type="button" className="filter-clear-btn" onClick={() => setSince(null)}>
           <X size={14} />
           Clear
         </button>
       )}
-    </div>
-  );
-}
-
-interface NumericFilterProps {
-  column: Column;
-  data: BaseEntry[];
-  value: NumericFilterValue | undefined;
-  onChange: (value: FilterValue | undefined) => void;
-  config: { type: 'numeric'; unit?: string };
-}
-
-function NumericFilter({ column, data, value, onChange, config }: NumericFilterProps) {
-  const range = useMemo(
-    () => getNumericRange(data, column.key, column.sortValue),
-    [data, column.key, column.sortValue]
-  );
-
-  // Initialize local state from value, will be reset when popover opens
-  const [localMin, setLocalMin] = useState(value?.min?.toString() ?? '');
-  const [localMax, setLocalMax] = useState(value?.max?.toString() ?? '');
-
-  // Reset local state when popover opens (value prop is current at that point)
-  const resetToCurrentValue = () => {
-    setLocalMin(value?.min?.toString() ?? '');
-    setLocalMax(value?.max?.toString() ?? '');
-  };
-
-  // Call reset on mount effect - safe because it's inside popover content
-  useEffect(() => {
-    resetToCurrentValue();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleApply = () => {
-    const min = localMin ? parseFloat(localMin) : undefined;
-    const max = localMax ? parseFloat(localMax) : undefined;
-
-    if (min === undefined && max === undefined) {
-      onChange(undefined);
-    } else {
-      onChange({ min, max });
-    }
-  };
-
-  return (
-    <div className="filter-content">
-      {range && (
-        <div className="filter-hint">
-          Range: {range.min.toLocaleString('en-US')} - {range.max.toLocaleString('en-US')}
-          {config.unit && ` ${config.unit}`}
-        </div>
-      )}
-      <div className="filter-numeric-inputs">
-        <div className="filter-input-group">
-          <label>Min</label>
-          <input
-            type="number"
-            value={localMin}
-            onChange={(e) => setLocalMin(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleApply()}
-            placeholder={range?.min.toString() ?? ''}
-            className="filter-input"
-          />
-        </div>
-        <div className="filter-input-group">
-          <label>Max</label>
-          <input
-            type="number"
-            value={localMax}
-            onChange={(e) => setLocalMax(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleApply()}
-            placeholder={range?.max.toString() ?? ''}
-            className="filter-input"
-          />
-        </div>
-      </div>
-      <button className="filter-apply-btn" onClick={handleApply}>
-        Apply
-      </button>
-    </div>
-  );
-}
-
-interface SelectFilterProps {
-  column: Column;
-  data: BaseEntry[];
-  value: SelectFilterValue | undefined;
-  onChange: (value: FilterValue | undefined) => void;
-  config: { type: 'select'; options?: string[]; multi?: boolean; exclude?: boolean };
-}
-
-function SelectFilter({ column, data, value, onChange, config }: SelectFilterProps) {
-  const options = useMemo(
-    () => config.options ?? getUniqueValues(data, column.key),
-    [config.options, data, column.key]
-  );
-
-  const [search, setSearch] = useState('');
-  const [exclude, setExclude] = useState(value?.exclude ?? false);
-  const selected = value?.selected ?? [];
-
-  const filteredOptions = useMemo(() => {
-    if (!search) return options;
-    const searchLower = search.toLowerCase();
-    return options.filter((opt) => opt.toLowerCase().includes(searchLower));
-  }, [options, search]);
-
-  const toggleOption = (opt: string) => {
-    const newSelected = selected.includes(opt)
-      ? selected.filter((s) => s !== opt)
-      : [...selected, opt];
-
-    if (newSelected.length === 0) {
-      onChange(undefined);
-    } else {
-      onChange({ selected: newSelected, exclude });
-    }
-  };
-
-  const toggleExclude = () => {
-    const newExclude = !exclude;
-    setExclude(newExclude);
-    if (selected.length > 0) {
-      onChange({ selected, exclude: newExclude });
-    }
-  };
-
-  const selectAll = () => {
-    onChange({ selected: filteredOptions, exclude });
-  };
-
-  const clearAll = () => {
-    onChange(undefined);
-  };
-
-  return (
-    <div className="filter-content">
-      <div className="filter-select-header">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search options..."
-          className="filter-input filter-search"
-        />
-        <Tooltip
-          content={
-            exclude
-              ? 'Matching entries are hidden; click to include instead'
-              : 'Matching entries are shown; click to exclude instead'
-          }
-        >
-          <button
-            className={`filter-exclude-btn${exclude ? ' filter-exclude-btn--active' : ''}`}
-            onClick={toggleExclude}
-          >
-            {exclude ? 'Exclude' : 'Include'}
-          </button>
-        </Tooltip>
-      </div>
-      <div className="filter-select-actions">
-        <button className="filter-action-btn" onClick={selectAll}>
-          Select all
-        </button>
-        <button className="filter-action-btn" onClick={clearAll}>
-          Clear
-        </button>
-      </div>
-      <div className="filter-options-list">
-        {filteredOptions.map((opt) => (
-          <label key={opt} className="filter-option">
-            <input
-              type="checkbox"
-              checked={selected.includes(opt)}
-              onChange={() => toggleOption(opt)}
-            />
-            <span className="filter-option-label">{opt}</span>
-            {selected.includes(opt) && <Check size={14} className="filter-check" />}
-          </label>
-        ))}
-        {filteredOptions.length === 0 && (
-          <div className="filter-no-options">No matching options</div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-interface BooleanFilterProps {
-  column: Column;
-  value: BooleanFilterValue | undefined;
-  onChange: (value: FilterValue | undefined) => void;
-  config: { type: 'boolean'; trueLabel?: string; falseLabel?: string };
-}
-
-function BooleanFilter({ value, onChange, config }: BooleanFilterProps) {
-  const currentValue = value?.value ?? null;
-  const trueLabel = config.trueLabel ?? 'Yes';
-  const falseLabel = config.falseLabel ?? 'No';
-
-  const handleChange = (newValue: boolean | null) => {
-    if (newValue === null) {
-      onChange(undefined);
-    } else {
-      onChange({ value: newValue });
-    }
-  };
-
-  return (
-    <div className="filter-content">
-      <div className="filter-boolean-options">
-        <button
-          className={`filter-boolean-btn${currentValue === null ? ' filter-boolean-btn--active' : ''}`}
-          onClick={() => handleChange(null)}
-        >
-          Any
-        </button>
-        <button
-          className={`filter-boolean-btn${currentValue === true ? ' filter-boolean-btn--active' : ''}`}
-          onClick={() => handleChange(true)}
-        >
-          {trueLabel}
-        </button>
-        <button
-          className={`filter-boolean-btn${currentValue === false ? ' filter-boolean-btn--active' : ''}`}
-          onClick={() => handleChange(false)}
-        >
-          {falseLabel}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-interface StringFilterProps {
-  column: Column;
-  value: StringFilterValue | undefined;
-  onChange: (value: FilterValue | undefined) => void;
-  config: { type: 'string'; fuzzy?: boolean };
-}
-
-function StringFilter({ value, onChange, config }: StringFilterProps) {
-  const [localValue, setLocalValue] = useState(value?.value ?? '');
-  const [fuzzy, setFuzzy] = useState(value?.fuzzy ?? config.fuzzy ?? false);
-  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // Reset local state when popover opens
-  useEffect(() => {
-    setLocalValue(value?.value ?? '');
-    setFuzzy(value?.fuzzy ?? config.fuzzy ?? false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleChange = (newValue: string, newFuzzy: boolean) => {
-    setLocalValue(newValue);
-
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
-
-    debounceRef.current = setTimeout(() => {
-      if (!newValue.trim()) {
-        onChange(undefined);
-      } else {
-        onChange({ value: newValue, fuzzy: newFuzzy });
-      }
-    }, 150);
-  };
-
-  useEffect(() => {
-    return () => {
-      if (debounceRef.current) {
-        clearTimeout(debounceRef.current);
-      }
-    };
-  }, []);
-
-  return (
-    <div className="filter-content">
-      <input
-        type="text"
-        value={localValue}
-        onChange={(e) => handleChange(e.target.value, fuzzy)}
-        placeholder="Filter text..."
-        className="filter-input"
-      />
-      <label className="filter-fuzzy-toggle">
-        <input
-          type="checkbox"
-          checked={fuzzy}
-          onChange={(e) => {
-            setFuzzy(e.target.checked);
-            if (localValue) {
-              onChange({ value: localValue, fuzzy: e.target.checked });
-            }
-          }}
-        />
-        <span>Fuzzy match (space-separated terms)</span>
-      </label>
     </div>
   );
 }
