@@ -7,7 +7,6 @@ vendors:
 notes: On board Sound To Light, 31 channel DMX Macro mode.
 inputs:
   physical:
-    Wi-Fi: true
     Ethernet: true
   protocols:
     - Art-Net # "ART" in product name
@@ -42,3 +41,7 @@ sources:
     url: https://digitaltape.co.uk/apd-2-500-12v-art
     retrieved: '2026-11-18'
     notes: Digital Tape product page for APD-2-500-12v-ART
+  inputs.physical:
+    url: https://digitaltape.co.uk/apd-2-500-12v-art
+    retrieved: '2026-11-18'
+    notes: "'Ethernet input socket'; no Wi-Fi"

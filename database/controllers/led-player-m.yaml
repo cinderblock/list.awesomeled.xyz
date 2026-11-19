@@ -8,7 +8,7 @@ inputs:
     microSD: true # TPM2 file playback
   standalone: true
 outputs:
-  count: 1
+  count: 8 # single-wire LEDs on CH1-CH8; one clocked channel (DATA on CH4, CLOCK on CH8)
   connector:
     ref: mtsb-combicon
   pixels:
@@ -63,3 +63,7 @@ sources:
     url: https://media.elv.com/file/121060_led_player_um.pdf
     retrieved: '2026-11-18'
     notes: Maker manual Features list; also 'Freie Software wie JINX! oder gLEDiator sind dafür bestens geeignet' and the Links section (live-leds.de, solderlab.de GLEDIATOR).
+  outputs.count:
+    url: https://media.elv.com/file/121060_led_player_um.pdf
+    retrieved: '2026-11-18'
+    notes: "'Maximal 8 Kanäle (bei Single Wire LEDs), 1 Kanal (bei Dual Wire LEDs)'"

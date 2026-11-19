@@ -1,5 +1,5 @@
 name: DMX to SPI
-status: unknown
+status: active
 creator: Electron Design
 vendors:
   - name: eBay
@@ -7,7 +7,6 @@ vendors:
 inputs:
   physical:
     DMX512: true
-    Bluetooth: true
   standalone: false
 outputs:
   count: 1
@@ -15,7 +14,7 @@ outputs:
     ref: mtsb-combicon
   driver:
     buffered: true
-  clocked: false # async pixels only
+  clocked: selectable # mode 1 drives two-wire WS2801/WS2803
   pixels:
     max_per_output: 170
   protocols:
@@ -32,7 +31,7 @@ outputs:
     - GS8208
 power:
   voltage:
-    max: 24
+    max: 12 # 7-12 V (5 V optional)
 price: 17.8
 software:
   works_with:
@@ -47,5 +46,24 @@ sources:
     url: https://www.electrondigit.com/products/dmx-controllers/product/dmx-to-spi-sk6812-ws2812-b-ws2813-ws2801-sm16703-pixels-combination-controller
     retrieved: '2026-11-18'
     notes: The maker's Downloads tab provides fixture files for both programs.
+  outputs.clocked:
+    url: https://www.electrondigit.com/products/dmx-controllers/product/dmx-to-spi-sk6812-ws2812-b-ws2813-ws2801-sm16703-pixels-combination-controller
+    retrieved: '2026-11-18'
+    notes: "'Mode 1 (bit 10 is on)' drives WS2801/WS2803"
+  inputs.physical:
+    url: https://www.electrondigit.com/products/dmx-controllers/product/dmx-to-spi-sk6812-ws2812-b-ws2813-ws2801-sm16703-pixels-combination-controller
+    retrieved: '2026-11-18'
+    notes: "'Input Signal: DMX-512/1990 digital signal'"
+  power.voltage.max:
+    url: https://www.electrondigit.com/products/dmx-controllers/product/dmx-to-spi-sk6812-ws2812-b-ws2813-ws2801-sm16703-pixels-combination-controller
+    retrieved: '2026-11-18'
+    notes: "'Power 7V - 12V (5V optional)'"
+  technical_notes:
+    url: https://www.electrondigit.com/products/dmx-controllers/product/dmx-to-spi-sk6812-ws2812-b-ws2813-ws2801-sm16703-pixels-combination-controller
+    retrieved: '2026-11-18'
+  status:
+    url: https://www.electrondigit.com/products/dmx-controllers/product/dmx-to-spi-sk6812-ws2812-b-ws2813-ws2801-sm16703-pixels-combination-controller
+    retrieved: '2026-11-18'
+    notes: sold as miniDMX V3.0 in the maker's shop
 technical_notes:
-  - Pixels groupable in 1, 2, 4, 5, 10, 100 as a single pixel
+  - 'Pixel combination mode: 1, 2, 3, 4, 5, 10 or all (170) pixels driven as one'

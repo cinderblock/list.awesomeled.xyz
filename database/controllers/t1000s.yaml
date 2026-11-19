@@ -4,10 +4,6 @@ vendors:
   - name: Amazon
     url: https://www.amazon.com
 inputs:
-  physical:
-    USB: true # for SD card programming via LedEdit
-  protocols:
-    - DMX # DMX512 input mode
   standalone: true # plays effects from SD card
 outputs:
   count: 1

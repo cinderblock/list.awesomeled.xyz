@@ -47,7 +47,7 @@ sources:
   status:
     url: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
     retrieved: '2026-11-18'
-    notes: '"Sofort verfügbar", EUR 99.90 incl. VAT'
+    notes: listed, 'Sofort verfügbar'
   outputs.protocols:
     url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-DMX.pdf
     retrieved: '2026-11-18'

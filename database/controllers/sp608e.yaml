@@ -14,7 +14,7 @@ inputs:
 outputs:
   count: 8
   connector: Screw
-  clocked: selectable # one-wire (WS281x) and clocked (WS2801, LPD6803/8806, SM16716) ICs
+  clocked: false # single-wire ICs only; 8 × DATA/GND outputs
   pixels:
     max_per_output: 600 # 4800 total across 8 outputs
   protocols:
@@ -56,3 +56,7 @@ sources:
     url: https://www.superlightingled.com/product_spec.php?products_id=3768
     retrieved: '2026-11-18'
     notes: RESELLER (Superlightingled spec sheet, the page this entry's creator link points to).
+  outputs.clocked:
+    url: https://backend.sperll.com/uploads/20240911/847d55735c67785b4e72ff55424323cc.pdf
+    retrieved: '2026-11-18'
+    notes: 'SP608E manual: supports common single-wire ICs; outputs have no clock line'

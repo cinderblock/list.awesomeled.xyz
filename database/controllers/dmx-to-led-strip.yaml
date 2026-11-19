@@ -7,8 +7,7 @@ creator:
 notes: DMX modes and address selected via dip switch. Setting of pixel mode X1 X2 X3 or 11 channels program mode
 inputs:
   physical:
-    Bluetooth: true
-    Audio: true
+    DMX512: 3-point connector
   protocols:
     - DMX512
   standalone: false
@@ -61,3 +60,7 @@ sources:
     url: https://www.boutique-electroconcept.com/media/Productattachments//d/m/dmx_to_ws2812.pdf
     retrieved: '2026-11-18'
     notes: Maker manual 'DMX TO WS2812' (Electroconcept), SPECIFICATIONS TECHNIQUES.
+  inputs.physical:
+    url: https://www.boutique-electroconcept.com/carte-dmx-en-signal-pour-ledstrip-digital-ws2812-et-compatible-a-souder.html
+    retrieved: '2026-11-18'
+    notes: only input is DMX 512; no Bluetooth or audio

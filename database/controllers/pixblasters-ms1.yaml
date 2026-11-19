@@ -7,12 +7,11 @@ notes: Connects to a PC or Mac (or other device) over HDMI and acts like a monit
 inputs:
   physical:
     HDMI: true
-    SD Card: true
-    Ethernet: Daisy-chain # cascade multiple controllers, not a control-protocol input
+    Ethernet: Daisy-chain
   standalone: false
 outputs:
   count: 32
-  connector: Header strip
+  connector: Push-in terminal blocks (8-pin)
   clocked: selectable
   pixels:
     max_per_output: 512
@@ -46,3 +45,11 @@ sources:
     url: https://pixblasters.com/wp-content/uploads/2024/07/Pixblasters-MS1-Users-Guide_v2.10.pdf
     retrieved: '2026-11-18'
     notes: "Maker User's Guide v2.10, feature list (both lines end with an ellipsis: 'not limited to')."
+  outputs.connector:
+    url: https://pixblasters.com/wp-content/uploads/2024/07/Pixblasters-MS1-Users-Guide_v2.10.pdf
+    retrieved: '2026-11-18'
+    notes: push-in (snap-action) terminals CN7-CN14, 8 pins each
+  inputs.physical:
+    url: https://pixblasters.com/wp-content/uploads/2024/12/Pixblasters_MS1_ds_v2.0.pdf
+    retrieved: '2026-11-18'
+    notes: no SD card in the datasheet or 94-page user's guide; configured over USB

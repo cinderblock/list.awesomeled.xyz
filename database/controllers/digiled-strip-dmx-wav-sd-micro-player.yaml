@@ -6,8 +6,8 @@ creator:
 notes: 6 switch inputs trigger pixel, DMX or WAV sound scenes. Programmed using Artrender.
 inputs:
   physical:
-    Ethernet: true
-    buttons: 6 # switch inputs trigger scenes
+    DMX512: solder pads
+    buttons: 6
   standalone: true
 outputs:
   count: 1
@@ -51,6 +51,10 @@ sources:
     url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
     retrieved: '2026-11-18'
     notes: "Product page Details. The manual repeats it: files 'générés par ArtRender ou le Recoder V2'. Recorder V2 is an Electroconcept DMX recorder (hardware), not software."
+  inputs.physical:
+    url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+    retrieved: '2026-11-18'
+    notes: 5 V, DMX/data pads and 6 dry-contact inputs on a 35 × 18 mm board; no Ethernet
 technical_notes:
   - Pixel, DMX512, or WAV sound scene playback from SD card
   - Programmed using Artrender (https://www.boutique-electroconcept.com/informations/telechargements.html)
