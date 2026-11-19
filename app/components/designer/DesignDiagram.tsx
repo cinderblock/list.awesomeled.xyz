@@ -7,7 +7,7 @@ import {
   type Chain,
   type PatternSourceOption,
   type SystemPower,
-} from '~/lib/designer';
+} from '~/lib/designer/legacy';
 import { imageUrl } from '~/lib/images';
 
 // Absolute so downloaded SVGs still resolve their thumbnails offline-shared

@@ -5,11 +5,11 @@
  * browser as the user picks parts.
  */
 
-import type { BaseEntry } from './types';
-import { parseQuantity } from './quantity';
-import { priceUSD, parsePrice, formatPriceText } from './currency';
-import { flattenPlatforms } from './platforms';
-import { firstImageFile } from './images';
+import type { BaseEntry } from '../types';
+import { parseQuantity } from '../quantity';
+import { priceUSD, parsePrice, formatPriceText } from '../currency';
+import { flattenPlatforms } from '../platforms';
+import { firstImageFile } from '../images';
 
 // Classic per-channel budget when the database has no electrical data:
 // 20 mA per colour channel, i.e. 60 mA for an RGB pixel at full white.

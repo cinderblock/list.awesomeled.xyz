@@ -31,7 +31,7 @@ import {
   PROTOCOL_LABELS,
   type Chain,
   type ControllerOption,
-} from '~/lib/designer';
+} from '~/lib/designer/legacy';
 import { imageUrl } from '~/lib/images';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { Tooltip } from '~/components/ui/Tooltip';

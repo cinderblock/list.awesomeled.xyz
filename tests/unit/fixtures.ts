@@ -1,0 +1,358 @@
+// Synthetic database for the designer unit tests.
+//
+// Fixtures are made up on purpose: other workstreams correct real database
+// rows all the time, and a datasheet fix must never break a logic test. The
+// values are realistic, but nothing here should be read as a fact about a
+// real part.
+
+import { buildRelationGraph, type Database } from '../../app/lib/relations';
+import {
+  buildCatalog,
+  indexCatalog,
+  type Catalog,
+  type CatalogIndex,
+} from '../../app/lib/designer';
+import type { BaseEntry } from '../../app/lib/types';
+
+export function entry(id: string, fields: Record<string, unknown>): BaseEntry {
+  return { id, name: id, updated: new Date(0), ...fields };
+}
+
+export const PIXELS: BaseEntry[] = [
+  entry('rgb5', {
+    name: 'RGB5',
+    status: 'active',
+    color: { order: 'GRB', brightness_bits: 8 },
+    data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 24 },
+    // wattage is ONE channel's power in the database
+    electrical: {
+      led_voltage: '5V',
+      vcc_voltage: '5V',
+      gpio: { min: '3.5V', max: '5V' },
+      channel_current: '20mA',
+      quiescent_current: '1mA',
+      wattage: '100mW',
+    },
+    variants: [{ name: 'RGB5B' }],
+    price: [
+      { qty: 5, price: 0.1, sku: 'RGB5-5050' },
+      { qty: 1000, price: 0.06, sku: 'RGB5-5050' },
+    ],
+    price_source: { vendor: 'LCSC', retrieved: '2026-07-03' },
+  }),
+  entry('rgb5-lowvih', {
+    name: 'RGB5 LowVIH',
+    color: { order: 'GRB' },
+    data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 24 },
+    electrical: {
+      led_voltage: '5V',
+      vcc_voltage: '5V',
+      gpio: { min: '3.0V', max: '5V' },
+      channel_current: '20mA',
+    },
+  }),
+  entry('rgbw5', {
+    name: 'RGBW5',
+    color: { order: 'GRBW' },
+    data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 32 },
+    electrical: { led_voltage: '5V', vcc_voltage: '5V', channel_current: '20mA' },
+  }),
+  entry('clk5', {
+    name: 'CLK5',
+    color: { order: 'BGR', brightness_bits: '8+5' },
+    data: {
+      type: 'APA102',
+      clocked: true,
+      bitrate: '30MHz',
+      pixel_size_bits: 32,
+      max_per_string: 250,
+      max_per_string_notes: 'Clock degrades along the string.',
+    },
+    electrical: {
+      led_voltage: '5V',
+      vcc_voltage: '5V',
+      gpio: { min: '3.5V', max: '5V' },
+      channel_current: '22mA',
+    },
+  }),
+  entry('rgb12', {
+    name: 'RGB12',
+    color: { order: 'RGB' },
+    data: {
+      type: 'WS2811/12',
+      clocked: false,
+      bitrate: '800kHz',
+      pixel_size_bits: 24,
+      backup_line: true,
+    },
+    electrical: {
+      led_voltage: '12V',
+      vcc_voltage: '5V',
+      gpio: { min: '3.5V', max: '5V' },
+      channel_current: '10mA',
+    },
+  }),
+  entry('deep5', {
+    name: 'DEEP5',
+    status: 'discontinued',
+    color: { order: 'RGB', brightness_bits: '16+5' },
+    data: { type: 'HD108', clocked: true, bitrate: '40MHz', pixel_size_bits: 64 },
+    electrical: { led_voltage: '5V', vcc_voltage: '5V' },
+  }),
+  entry('wide', {
+    name: 'WIDE',
+    color: { order: 'RGB' },
+    data: { clocked: true },
+    electrical: { led_voltage: '3-7.5V', vcc_voltage: '5V', channel_current: '18mA' },
+  }),
+  entry('bare', { name: 'BARE' }),
+];
+
+export const PIXEL_ICS: BaseEntry[] = [
+  entry('ic12', {
+    name: 'IC12',
+    aliases: ['IC-Twelve'],
+    data: {
+      type: 'WS2811/12',
+      clocked: false,
+      channels: 3,
+      bitrate: '800kHz',
+      pixel_size_bits: 24,
+    },
+    electrical: {
+      output_voltage: '12V',
+      supply_voltage: '5V',
+      gpio: { min: '3.0V', max: '5V' },
+      max_current: '19mA',
+    },
+    price: [{ qty: 20, price: 0.04, sku: 'IC12' }],
+  }),
+  entry('ic-strong', {
+    name: 'ICSTRONG',
+    data: { clocked: true, channels: 3, bitrate: '20MHz', pixel_size_bits: 32 },
+    electrical: { output_voltage: '24V', supply_voltage: '5V', max_current: '45mA' },
+  }),
+  entry('ic-lowv', {
+    name: 'ICLOWV',
+    data: { clocked: true, channels: 3 },
+    electrical: { output_voltage: '7V', supply_voltage: '5V' },
+  }),
+  entry('ic-integrated', {
+    name: 'ICINT',
+    data: { clocked: false, channels: 3 },
+    electrical: { supply_voltage: '5V' },
+  }),
+  entry('ic-unknown', { name: 'ICUNKNOWN', data: { clocked: false, channels: 4 } }),
+];
+
+export const CONTROLLERS: BaseEntry[] = [
+  entry('big16', {
+    name: 'Big16',
+    status: 'active',
+    inputs: {
+      physical: { Ethernet: true, 'Wi-Fi': '2.4GHz', USB: false },
+      protocols: ['Art-Net', 'sACN', 'DDP'],
+      standalone: true,
+    },
+    outputs: {
+      count: 16,
+      clocked: 'selectable',
+      pixels: { max_per_output: 1024 },
+      driver: { buffered: true },
+      connector: { ref: 'screw', notes: '5.08 mm pitch' },
+      differential: true,
+    },
+    power: { voltage: { min: 5, max: 24 }, current: { max: 60 } },
+    software: { firmware: ['FPP'] },
+    price: 280,
+  }),
+  entry('async4', {
+    name: 'Async4',
+    inputs: { protocols: ['E1.31'], standalone: false },
+    outputs: {
+      count: 4,
+      clocked: false,
+      pixels: { max_per_output: 680 },
+      driver: { buffered: true },
+      protocols: ['RGB5', 'IC-Twelve'],
+      current: { max: 3 },
+      fuse: '3A',
+    },
+    power: { voltage: { max: 5 }, current: { max: 8 } },
+    price: 45,
+  }),
+  entry('raw1', {
+    name: 'Raw1',
+    inputs: { protocols: ['DMX512'] },
+    outputs: { count: 1, clocked: 'always', driver: { buffered: false } },
+    wled_compatible: true,
+    price: { amount: 20, currency: 'EUR' },
+  }),
+  entry('wild8', {
+    name: 'Wild8',
+    outputs: { count: 8, clocked: 'selectable', protocols: ['WS281x', 'LPD8806'] },
+    price: { amount: 3, max: 8 },
+  }),
+  entry('cape', {
+    name: 'Cape48',
+    status: 'discontinued',
+    inputs: { requires_host: 'PiBoard', protocols: ['sACN'], standalone: true },
+    outputs: {
+      count: 48,
+      clocked: false,
+      pixels: { max_per_output: 800 },
+      driver: { buffered: true },
+    },
+    power: { voltage: { min: 12, max: 24 } },
+    data: { fps: 20 },
+    case: { waterproof: 'IP65' },
+    price: 150,
+  }),
+  entry('licensed', {
+    name: 'Licensed',
+    outputs: { count: 8, clocked: 'selectable' },
+    price: [
+      { name: '1024 pixels', price: 299, pixels: 1024 },
+      { name: '4096 pixels', price: 599, pixels: 4096 },
+    ],
+  }),
+  entry('mystery', { name: 'Mystery' }),
+];
+
+export const MICROBOARDS: BaseEntry[] = [
+  entry('esp', {
+    name: 'ESP Board',
+    compute: { soc: 'ESP32', isa: 'Xtensa' },
+    power: { gpio_voltage: '3.3V', voltage: { min: '5V', max: '5V' } },
+    io: { max_outputs: 8 },
+    price: 10,
+  }),
+  entry('pi', {
+    name: 'PiBoard',
+    aliases: ['Pi Board 4'],
+    compute: { soc: 'BCM2711', linux: true },
+    power: { gpio_voltage: '3.3V' },
+    io: { max_outputs: 2 },
+    price: 35,
+  }),
+  entry('avr5', {
+    name: 'AVR Five',
+    compute: { soc: 'ATmega', isa: 'AVR' },
+    power: { gpio_voltage: '5.0V' },
+    io: { max_outputs: 1 },
+  }),
+  entry('no-outputs', { name: 'No Outputs', power: { gpio_voltage: '3.3V' } }),
+];
+
+export const LEVEL_CONVERTERS: BaseEntry[] = [
+  entry('quad', {
+    name: 'Quad Buffer',
+    io: { channels: 4, interface: 'DIP' },
+    electrical: { max_voltage: '5.5V' },
+    price: [
+      { qty: 1, price: 0.9, sku: 'QB' },
+      { qty: 1000, price: 0.3, sku: 'QB' },
+    ],
+    price_source: { vendor: 'TI', retrieved: '2026-07' },
+  }),
+  entry('octal', { name: 'Octal Buffer', io: { channels: 8 }, price: 1.5 }),
+  entry('lowv', { name: 'LowV Translator', io: { channels: 2 }, electrical: { max_voltage: 3.6 } }),
+  entry('diff', {
+    name: 'Differential Receiver',
+    io: { channels: 4, interface: 'Differential Pairs', buffered: true },
+    price: 22,
+  }),
+];
+
+export const CONNECTORS: BaseEntry[] = [
+  entry('screw', {
+    name: 'Screw Terminal',
+    ratings: { max_current: '10 A', max_voltage: '300 V' },
+    mechanical: { min_pins: 2, max_pins: 12, locking: 'Friction', wire_to_wire: false },
+  }),
+  entry('pigtail', {
+    name: 'Pigtail',
+    ratings: { max_current: '5 A', max_voltage: '50 V', ip_rating: 'IP68' },
+    mechanical: { min_pins: 2, max_pins: 4, locking: 'Screw Lock', wire_to_wire: true },
+  }),
+  entry('two-pin', {
+    name: 'Two Pin',
+    ratings: { max_current: '60 A', max_voltage: '42 V' },
+    mechanical: { min_pins: 2, max_pins: 2 },
+  }),
+  entry('lowvolt', {
+    name: 'LowVolt',
+    ratings: { max_current: '2 A', max_voltage: '9 V', ip_rating: 'IP20-IP65' },
+    mechanical: { min_pins: 3, max_pins: 5 },
+  }),
+  entry('eight', {
+    name: 'Eight Way',
+    ratings: { max_current: '1.5 A', max_voltage: '125 V' },
+    mechanical: { min_pins: 8, max_pins: 8 },
+  }),
+];
+
+export const PATTERN_DRIVERS: BaseEntry[] = [
+  entry('seq', {
+    name: 'Sequencer',
+    status: 'active',
+    outputs: { protocols: { artnet: 'Output', sacn: 'Output', dmx: 'Output' } },
+    platforms: { os: ['Windows', 'macOS', 'Linux'] },
+    license: 'GPL-3.0',
+    foss: true,
+    pricing: { price: 'Free' },
+  }),
+  entry('ddponly', {
+    name: 'DDP Only',
+    outputs: { protocols: { ddp: 'Output', artnet: 'Input' } },
+    platforms: { os: ['Windows'] },
+    pricing: { price: 299 },
+  }),
+  entry('espfw', {
+    name: 'EspFirmware',
+    aliases: ['WLED'],
+    outputs: { protocols: { artnet: 'Input', sacn: 'Input' } },
+    platforms: { hardware: ['ESP32', 'ESP8266'] },
+    license: 'MIT',
+    foss: true,
+    pricing: { price: 'FOSS' },
+  }),
+  entry('player', {
+    name: 'Player',
+    aliases: ['FPP'],
+    status: 'end-of-life',
+    outputs: { protocols: { sacn: 'Both' } },
+    platforms: { hardware: ['PiBoard'] },
+    pricing: { price: 'Free - $99' },
+  }),
+  entry('silent', { name: 'Silent', platforms: { os: ['Windows'] } }),
+];
+
+export function fixtureDatabase(): Database {
+  return new Map([
+    ['pixels', PIXELS],
+    ['pixel-ics', PIXEL_ICS],
+    ['controllers', CONTROLLERS],
+    ['microboards', MICROBOARDS],
+    ['level-converters', LEVEL_CONVERTERS],
+    ['connectors', CONNECTORS],
+    ['pattern-drivers', PATTERN_DRIVERS],
+    ['drive-libraries', []],
+  ]);
+}
+
+export function fixtureCatalog(): Catalog {
+  const db = fixtureDatabase();
+  return buildCatalog(db, buildRelationGraph(db));
+}
+
+export function fixtureIndex(): CatalogIndex {
+  return indexCatalog(fixtureCatalog());
+}
+
+/** Look up an option that must exist */
+export function must<T>(map: Map<string, T>, id: string): T {
+  const value = map.get(id);
+  if (!value) throw new Error(`fixture "${id}" not found`);
+  return value;
+}

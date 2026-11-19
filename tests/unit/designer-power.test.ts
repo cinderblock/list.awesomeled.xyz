@@ -6,7 +6,7 @@ import {
   pixelChannels,
   systemPower,
   type Chain,
-} from '../../app/lib/designer';
+} from '../../app/lib/designer/legacy';
 import type { BaseEntry } from '../../app/lib/types';
 
 // Fixtures are synthetic on purpose: other workstreams correct database rows
