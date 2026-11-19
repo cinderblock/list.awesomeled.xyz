@@ -17,13 +17,12 @@ const PAGES = [
   '/designer',
   '/designer?p=ws2812&x=8&n=500&c=falcon-f16v5&g=xlights',
   '/designer?p=ic-ws2811&x=16&n=400&c=falcon-f16v5&k=pigtails&g=xlights&b=30&o=1&t=House+outline',
+  // Pages whose content follows the query string hold it back until hydrated
+  '/controllers?sort=price&f=wled_compatible:yes',
+  '/controllers?q=falcon',
+  '/search?q=falcon',
+  '/compare?e=controllers/falcon-f16v5,controllers/pixlite-16-mk2-eco',
 ];
-
-// Known to fail today: tables read their sort / filter / search from the
-// query string while rendering, so these throw React error #418. Logged in
-// ISSUES.md ("Table pages with a query string fail hydration"); move them into
-// PAGES when that is fixed.
-const KNOWN_FAILING = ['/controllers?sort=price&f=wled_compatible:yes', '/controllers?q=falcon'];
 
 function collectErrors(page: Page): string[] {
   const errors: string[] = [];
@@ -46,9 +45,6 @@ async function hydratesCleanly(page: Page, path: string) {
 test.describe('prerendered pages hydrate cleanly', () => {
   for (const path of PAGES) {
     test(path, ({ page }) => hydratesCleanly(page, path));
-  }
-  for (const path of KNOWN_FAILING) {
-    test.fixme(path, ({ page }) => hydratesCleanly(page, path));
   }
 });
 
