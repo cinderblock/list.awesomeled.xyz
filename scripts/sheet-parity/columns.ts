@@ -351,7 +351,7 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('PCB mount', bool, ['mechanical.pcb_mount']),
     col('Smallest Guage', text, ['termination.smallest_gauge']),
     col('Largest Guage', text, ['termination.largest_gauge']),
-    col('Pitch', text, ['mechanical.pitch']),
+    col('Pitch', num, ['mechanical.pitch']),
     col('Contact Type', text, ['mechanical.contact_type']),
     col('Solder?', bool, ['termination.solder']),
     col('Screw Terminal?', bool, ['termination.screw_terminal']),
