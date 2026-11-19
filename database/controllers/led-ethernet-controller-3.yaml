@@ -8,7 +8,6 @@ vendors:
   - name: LED Strip Studio
     page: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
     warranty: 5 Years
-notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 inputs:
   physical:
     Ethernet: Dual # 2x RJ-45 100 Mbit/sec with internal switch
@@ -39,6 +38,8 @@ data:
   storage:
     - type: uSD
       max_size: 32 # FAT32
+datasheet:
+  url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 price: 625
 technical_notes:
   - 4096 digital RGB LEDs or 3072 RGBW LEDs total; available in 1024/2048/4096 pixel versions

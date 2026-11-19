@@ -22,6 +22,8 @@ language: C++
 license: EUPL-1.2
 links:
   url: https://github.com/Aircoookie/WLED
+other_links:
+  - https://kno.wled.ge/
 platforms:
   hardware:
     - ESP32

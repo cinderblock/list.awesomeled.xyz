@@ -26,7 +26,8 @@ electrical:
   channel_current: 17mA
   quiescent_current: 0.1mA
 other_links:
-  - HD107S Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/hd107s
+  - https://www.hd107s-led.com/product-category/hd107s-led-chip/
 physical:
   packages:
     - '5050'

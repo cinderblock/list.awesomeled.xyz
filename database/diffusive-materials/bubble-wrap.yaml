@@ -1,7 +1,7 @@
 name: Bubble Wrap
 notes: Used as stuffing in wider pipes to space LED strip
 links:
-  product: Bubble wrap - Wikipedia
+  product: https://en.wikipedia.org/wiki/Bubble_wrap
 material_type: Air Filled PE
 optical:
   color_rendition: 4

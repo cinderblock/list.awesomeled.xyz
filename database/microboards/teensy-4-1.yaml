@@ -1,5 +1,7 @@
 name: Teensy 4.1
-creator: PJRC
+creator:
+  name: PJRC
+  page: https://www.pjrc.com/store/teensy41.html
 compute:
   soc: iMXRT1062
   cpu: ARM Cortex-M7

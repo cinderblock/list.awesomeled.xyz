@@ -24,7 +24,7 @@ electrical:
     max: 5V
   max_current: 20mA
 other_links:
-  - LPD8806 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/lpd8806
 physical:
   packages:
     - SOP-16

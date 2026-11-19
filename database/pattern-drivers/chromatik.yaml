@@ -1,8 +1,7 @@
 name: Chromatik
 status: active
 creator: Mark C Slee
-notes: VJ like live control, extensive support for 3D animation matrices
-  Successor to LX Studio
+notes: VJ like live control, extensive support for 3D animation matrices Successor to LX Studio
 inputs:
   audio: Input
   other: MIDI , OSC, DMX
@@ -18,6 +17,8 @@ capabilities:
   designer: true
   visualizer: 3D
   programmatic: true
+links:
+  url: https://chromatik.co/
 platforms:
   os:
     - Windows

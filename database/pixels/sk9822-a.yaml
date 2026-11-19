@@ -1,5 +1,7 @@
 name: SK9822-A
-creator: Newstar LED Co.
+creator:
+  name: Newstar LED Co.
+  page: http://www.newstar-ledstrip.com/productshow851.html
 notes: Higher PWM version of SK9822
 color:
   pwm_frequency: 27.0kHz
@@ -8,6 +10,10 @@ data:
   clocked: true
   bitrate: 30MHz
   backup_line: false
+dead_links:
+  - url: http://www.newstar-ledstrip.com/productshow851.html
+    archive: https://web.archive.org/web/20220327215325/http://newstar-ledstrip.com/productshow851.html
+    checked: '2026-11-18'
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V

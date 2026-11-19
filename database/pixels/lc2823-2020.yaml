@@ -6,6 +6,8 @@ data:
   type: APA102
   clocked: true
   backup_line: false
+datasheet:
+  url: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
 electrical:
   led_voltage: 3-7.5V
   vcc_voltage: 5V

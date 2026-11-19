@@ -1,5 +1,7 @@
 name: Wemos ESP32 Driver Board
-creator: Mottram Labs
+creator:
+  name: Mottram Labs
+  url: https://www.mottramlabs.com/
 notes: On board fuse , 5V regulator, 74 HCT Buffer
 outputs:
   max_channels: 1

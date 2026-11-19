@@ -1,5 +1,7 @@
 name: MTSB CombiCon
-creator: Phoenix Contact
+creator:
+  name: Phoenix Contact
+  url: https://www.phoenixcontact.com/
 notes: Also in 2.54 mm pitch , and literally thousands of variations
 links:
   product: https://in.rsdelivers.com/product/phoenix-contact/1757035/phoenix-contact-classic-combicon-mstb-non-fused/1896032

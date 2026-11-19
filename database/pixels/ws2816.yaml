@@ -15,6 +15,8 @@ data:
   bitrate: 800kHz
   pixel_size_bits: 48
   backup_line: true
+datasheet:
+  url: https://www.lcsc.com/datasheet/C965560.pdf
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V

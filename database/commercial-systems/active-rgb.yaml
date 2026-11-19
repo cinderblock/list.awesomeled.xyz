@@ -1,5 +1,7 @@
 name: Active RGB
-creator: Lumisphere
+creator:
+  name: Lumisphere
+  url: https://lumisphere.co.uk/
 notes: Time proven Clear bubble festoon lamp
 pricing:
   price_range: $$$$$

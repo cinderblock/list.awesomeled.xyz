@@ -13,7 +13,7 @@ electrical:
   output_voltage: 24V
   supply_voltage: 5V
 other_links:
-  - DMX512 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/dmx512
 physical:
   packages:
     - SOP-8

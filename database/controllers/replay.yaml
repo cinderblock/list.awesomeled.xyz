@@ -1,6 +1,9 @@
 name: Replay
 status: discontinued
 creator: Smartshow
+vendors:
+  - name: eBay
+    page: https://www.ebay.co.uk/itm/SmartShow-REPLAY-SDCard-Pixel-Player-2720-WS2812-SK6812-TMP2-FSEQ-PSEQ/274135104445
 notes: Replays Jinx and xLights files on 4 separate 680 pixel outputs
 inputs:
   physical:

@@ -4,6 +4,9 @@ release_year: 2020
 creator:
   name: ElectroMage
   page: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
+vendors:
+  - name: Tindie
+    page: https://www.tindie.com/products/electromage/electromage-pro-8x-ws2812apa102-led-driver/
 notes: Stacks up to 8 on a bus
 inputs:
   physical:

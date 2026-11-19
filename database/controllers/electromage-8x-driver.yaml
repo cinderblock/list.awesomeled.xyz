@@ -5,6 +5,9 @@ creator:
   name: ElectroMage
   url: https://electromage.com
   page: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
+vendors:
+  - name: Tindie
+    page: https://www.tindie.com/products/electromage/electromage-serial-to-8x-ws2812apa102-driver/
 notes: Stacks up to 8 on a bus via internal Ethernet switch
 inputs:
   physical:

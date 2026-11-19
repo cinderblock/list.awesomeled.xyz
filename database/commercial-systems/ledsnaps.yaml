@@ -1,7 +1,8 @@
 name: Ledsnaps
-creator: Ledsnaps
-notes: LED strip Units aimed at gym studiomarket , closed architecture, presumed
-  WS28XX
+creator:
+  name: Ledsnaps
+  url: https://www.ledsnaps.com/
+notes: LED strip Units aimed at gym studiomarket , closed architecture, presumed WS28XX
 pricing:
   price_range: $$$$$
 specs:

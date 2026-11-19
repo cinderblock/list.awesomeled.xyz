@@ -21,6 +21,8 @@ integrations: Triggering via HTTP/OSC/Art-net/sACN/DMX
 language: null
 links:
   url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/pixel-mapping-software/
+other_links:
+  - https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/#download
 platforms:
   os:
     - Windows

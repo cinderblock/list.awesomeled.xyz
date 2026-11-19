@@ -7,7 +7,7 @@ data:
   clocked: false
   channels: 3
 other_links:
-  - UCS9812 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/ucs9812
 physical:
   packages:
     - SOP-16

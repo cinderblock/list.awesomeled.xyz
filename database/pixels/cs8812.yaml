@@ -1,5 +1,7 @@
 name: CS8812
-creator: Witop
+creator:
+  name: Witop
+  page: https://www.witop-tech.com/product-item/dc12v-addressable-high-brightness-smd5050-led-chip-cs8812b/
 manufacturers:
   - Witop
 notes: Built-in 8->12bit gamma correction. "B" version is "without original program". Similar to GS8208
@@ -20,7 +22,7 @@ electrical:
   channel_current: 17.5mA
   wattage: 210mW
 other_links:
-  - CS8812 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/cs8812
 physical:
   packages:
     - '5050'

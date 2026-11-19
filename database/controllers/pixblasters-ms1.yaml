@@ -1,6 +1,8 @@
 name: PixBlasters MS1
 status: unknown
-creator: Pixblasters
+creator:
+  name: Pixblasters
+  page: https://pixblasters.com/products/ms1-controller/
 notes: Connects to a PC or Mac (or other device) over HDMI and acts like a monitor. Outputs a selected section of the screen to a matrix of LED strips or to prefab LED panels at up to 60 FPS. Up to 48 controllers can be daisy-chained via Ethernet to drive up to 786,432 pixels. Strip power must be supplied by external power sources; 5V and 12V both work.
 inputs:
   physical:

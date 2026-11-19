@@ -1,7 +1,8 @@
 name: Strip and Tiles
-creator: Schnick Schnack
-notes: Strip and Tiles with very high resolution dimming and video input
-  compatible, very long established pioneers.
+creator:
+  name: Schnick Schnack
+  url: https://schnick.schnack.systems/
+notes: Strip and Tiles with very high resolution dimming and video input compatible, very long established pioneers.
 pricing:
   price_range: $$$$$$
 since: 2001

@@ -1,6 +1,8 @@
 name: SP102E
 status: active
-creator: Sperll
+creator:
+  name: Sperll
+  url: https://sperll.com/
 vendors:
   - Amazon
 inputs:

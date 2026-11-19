@@ -3,6 +3,7 @@ status: active
 creator:
   name: EMP Designs
   url: https://www.empdesigns.co.uk
+  page: https://www.empdesigns.co.uk/our-products/poe-%2B-pixel
 notes: Single-output PoE-powered pixel controller; 30W 5V PoE output to LEDs.
 inputs:
   physical:

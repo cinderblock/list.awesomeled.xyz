@@ -6,5 +6,7 @@ color:
 data:
   clocked: true
   channels: 4
+datasheet:
+  url: http://www.my-semi.com.tw/file/MY9291_BF_0.91.pdf
 other_links:
-  - MY9291 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/my9291

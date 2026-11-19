@@ -7,7 +7,7 @@ data:
   clocked: false
   channels: 3
 other_links:
-  - UCS1904 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/ucs1904
 physical:
   packages:
     - SOP-8

@@ -13,7 +13,7 @@ electrical:
   led_voltage: 5V
   vcc_voltage: 5V
 other_links:
-  - SK6818 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/sk6818
 physical:
   packages:
     - '5050'

@@ -21,7 +21,7 @@ electrical:
   max_current: 60mA
   quiescent_current: 3.0mA
 other_links:
-  - TM1804 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/tm1804
 physical:
   packages:
     - SOP-8

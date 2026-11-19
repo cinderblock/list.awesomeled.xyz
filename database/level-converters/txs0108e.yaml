@@ -2,6 +2,8 @@ name: TXS0108e
 creator: Texas Instruments
 io:
   channels: 8
+links:
+  product: https://www.ti.com/product/TXS0108E
 price:
   - qty: 1
     price: 1.387

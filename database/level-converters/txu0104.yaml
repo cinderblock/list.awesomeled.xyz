@@ -2,6 +2,8 @@ name: TXU0104
 creator: Texas Instruments
 io:
   channels: 4
+links:
+  product: https://www.ti.com/product/TXU0104
 price:
   - qty: 1
     price: 0.818

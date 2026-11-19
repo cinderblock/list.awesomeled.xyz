@@ -25,6 +25,11 @@ dead_links:
   - url: https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
     archive: https://web.archive.org/web/20260217143850/https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
     checked: '2026-07-01'
+  - url: https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
+    archive: https://web.archive.org/web/20210305140936/https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
+    checked: '2026-11-18'
+other_links:
+  - https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
 price: 700
 technical_notes:
   - 16 universes (8192 channels), up to 2730 RGB pixels across 8 outputs

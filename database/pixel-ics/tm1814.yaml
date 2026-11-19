@@ -6,8 +6,13 @@ color:
 data:
   clocked: false
   channels: 4
+datasheet:
+  sources:
+    - url: https://pdf1.alldatasheet.com/datasheet-pdf/view/1133653/TITAN/TM1814.html
+      host: community
+      notes: alldatasheet.com mirror
 other_links:
-  - TM1814 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/tm1814
 physical:
   packages:
     - SOP-8

@@ -1,5 +1,7 @@
 name: Intelligent Marquee System
-creator: TMB
+creator:
+  name: TMB
+  page: https://tmb.com/ims/
 notes: 2 Wire addressable Festoon, Professional level pricing structure
 core_tech: Proprietary
 pricing:

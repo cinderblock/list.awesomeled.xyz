@@ -29,6 +29,8 @@ power:
 data:
   storage:
     - type: SD
+datasheet:
+  url: https://www.ledstripstudio.com/download/tech-specs/SPI_LED_Controller_tech_specs.pdf
 price:
   - name: 1024 pixels
     price: 299

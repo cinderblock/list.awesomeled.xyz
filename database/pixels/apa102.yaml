@@ -40,7 +40,7 @@ images:
     source: https://www.adafruit.com/product/2343
     credit: Adafruit Industries
 other_links:
-  - APA102 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/apa102
 physical:
   packages:
     - '5050'

@@ -5,4 +5,6 @@ outputs:
   connector:
     ref: mtsb-combicon
 diy_or_ots: OTS
+links:
+  product: https://www.innotronix.net/PixFog-Pixel-Based-Fog-Controller-p232730399
 price: 33

@@ -4,6 +4,7 @@ release_year: 2023
 creator:
   name: SmartShow
   url: https://smartshow.lighting/
+  page: https://smartshow.lighting/product/smartshow-pro-one/
 notes: Inbuilt Ethernet Switch, allows daisy chaining units
 inputs:
   physical:

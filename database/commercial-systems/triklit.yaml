@@ -1,9 +1,17 @@
 name: Triklit
-creator: Minelon - Rainmin
+creator:
+  name: Minelon - Rainmin
+  page: https://minleonusa.com/luminaires
 vendors:
   - Wiedamark # online pricing published here
 notes: WS2811/12 based commercial quality LED products
 core_tech: WS281x
+dead_links:
+  - url: https://minleonusa.com/luminaires
+    checked: '2026-11-18'
+    archive: https://web.archive.org/web/20191207172459/https://minleonusa.com/luminaires
+other_links:
+  - https://www.wiedamark.com/?product_cat=&s=minleon&post_type=product
 pricing:
   price_range: $$$$
 specs:

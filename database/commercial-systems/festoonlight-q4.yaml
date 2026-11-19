@@ -1,5 +1,7 @@
 name: FestoonLight Q4
-creator: Showtec
+creator:
+  name: Showtec
+  page: https://www.highlite.com/en/41751-festoonlight-q4-string.html
 notes: Separate 20 globe strings, controller and booster components
 pricing:
   price_range: $$$

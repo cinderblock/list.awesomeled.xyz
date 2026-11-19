@@ -1,8 +1,11 @@
 name: RGBW-Pixel-Panel
-creator: SmartShow
-notes: 169 Pixel Interlockable panel, arranged as 13x13 snakelined pixels on
-  1.6mm PCB, 10mm pitch
+creator:
+  name: SmartShow
+  url: https://smartshow.lighting/
+notes: 169 Pixel Interlockable panel, arranged as 13x13 snakelined pixels on 1.6mm PCB, 10mm pitch
 core_tech: SKC6812RGBW-NW
+links:
+  product: https://smartshow.lighting/product/pixel-panels/
 pricing:
   examples:
     - price:

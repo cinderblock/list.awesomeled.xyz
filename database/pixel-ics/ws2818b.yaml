@@ -27,7 +27,7 @@ electrical:
   max_current: 16mA
   quiescent_current: 2.1mA
 other_links:
-  - WS2818 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/ws2818
 physical:
   packages:
     - SOP-8

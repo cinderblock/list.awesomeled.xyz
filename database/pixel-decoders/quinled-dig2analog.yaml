@@ -9,4 +9,6 @@ outputs:
 diy_or_ots: OTS
 links:
   product: https://quinled.info/quinled-dig2analog/
+other_links:
+  - https://quinled.info/dig2analog-buying-page/
 price: 7.49

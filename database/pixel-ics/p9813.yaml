@@ -22,7 +22,7 @@ electrical:
     max: 5V
   max_current: 45mA
 other_links:
-  - P9813 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/p9813
 physical:
   packages:
     - SOP-14

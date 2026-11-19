@@ -2,15 +2,13 @@ name: GS8208
 status: active
 release_year: 2018
 creator: Genesis Systec
-notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version
-  booted with onboard patterns - now eliminated
+notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version booted with onboard patterns - now eliminated
 color:
   order: RGB
   brightness_bits: 8
   brightness_method_notes: 36 bits interpolated 12 bits gamma correction per colour
   pwm_frequency: 8.0kHz
-  pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively
-    multiply 2kHz PWM to 8kHz
+  pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively multiply 2kHz PWM to 8kHz
 data:
   type: WS2811/12
   clocked: false
@@ -33,7 +31,7 @@ electrical:
   quiescent_current: 2.5mA
   wattage: 120mW
 other_links:
-  - GS8208 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/gs8208
 physical:
   packages:
     - '5050'

@@ -1,7 +1,11 @@
 name: Twinkly
-creator: Twinkly
-notes: Consumer Level App Controlled , now with "Pro" range. artnet2twinkly third-party
-  project linked on Drive Libraries page
+creator:
+  name: Twinkly
+  url: https://twinkly.com/
+vendors:
+  - name: Amazon
+    page: https://www.amazon.com/Twinkly-Multicolor-App-Controlled-Decorations-Generation/dp/B086XJ17XV
+notes: Consumer Level App Controlled , now with "Pro" range. artnet2twinkly third-party project linked on Drive Libraries page
 pricing:
   examples:
     - item: 250 string

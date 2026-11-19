@@ -21,7 +21,8 @@ electrical:
   channel_current: 17.0mA
   quiescent_current: 0.1mA
 other_links:
-  - View technical specs and advantages of the pixel protocol HD108. - Advatek
+  - https://www.advateklighting.com/pixel-protocols/hd108
+  - https://www.hd108-led.com/product-category/hd108-led-chip/
 physical:
   packages:
     - '5050'

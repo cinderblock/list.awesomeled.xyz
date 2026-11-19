@@ -32,7 +32,7 @@ electrical:
   current_range: 3-60mA typical depending on Rext
   quiescent_current: 0.7mA
 other_links:
-  - WS2811 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/ws2811
 physical:
   packages:
     - SOIC-8

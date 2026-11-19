@@ -35,7 +35,8 @@ electrical:
   quiescent_current: 2.1mA
   wattage: 120mW
 other_links:
-  - WS2815 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/ws2815
+  - http://newstar-ledstrip.com/productshow833.html
 physical:
   packages:
     - '5050'

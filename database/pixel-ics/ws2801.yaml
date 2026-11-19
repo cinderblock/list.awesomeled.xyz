@@ -24,7 +24,7 @@ electrical:
   max_current: 50mA
   quiescent_current: 1.5mA
 other_links:
-  - WS2801 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/ws2801
 physical:
   packages:
     - SO-14

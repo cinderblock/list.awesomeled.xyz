@@ -30,7 +30,7 @@ electrical:
   quiescent_current: 1.0mA
   wattage: 110mW
 other_links:
-  - APA102C Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/apa102
 physical:
   packages:
     - '5050'

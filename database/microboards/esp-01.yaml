@@ -15,3 +15,5 @@ io:
   bms: 'No'
   imu: false
   max_outputs: 1 # two exposed GPIO; one pixel line practical
+other_links:
+  - https://www.edn.com/electroschematics/the-mighty-esp-01-adapter/

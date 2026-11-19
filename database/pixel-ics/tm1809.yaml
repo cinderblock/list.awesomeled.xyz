@@ -7,7 +7,7 @@ data:
   clocked: false
   channels: 3
 other_links:
-  - TM1809 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/tm1809
 physical:
   packages:
     - SOP-14

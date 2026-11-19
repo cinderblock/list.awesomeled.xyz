@@ -13,7 +13,8 @@ electrical:
   supply_voltage: 5V
   max_current: 17mA
 other_links:
-  - SM16704 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/sm16704
+  - https://www.advateklighting.com/pixel-protocols/ucs2904
 physical:
   packages:
     - SOP-8

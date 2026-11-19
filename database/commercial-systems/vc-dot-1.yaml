@@ -1,5 +1,7 @@
 name: VC-Dot 1
-creator: Martin
+creator:
+  name: Martin
+  page: https://www.martin.com/en-US/products/vc-dot-1
 notes: Martin, stage lighting part of Harmon Kardon group
 pricing:
   price_range: $$$$$$

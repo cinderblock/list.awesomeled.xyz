@@ -25,6 +25,8 @@ power:
 data:
   storage:
     - type: SD
+datasheet:
+  url: https://www.advateklighting.com/downloads/datasheets#download;datasheets-pixlite-a4-s-mk3
 features:
   - Electronic fusing
   - Dithering

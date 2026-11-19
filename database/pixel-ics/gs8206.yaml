@@ -8,4 +8,4 @@ data:
   clocked: false
   channels: 3
 other_links:
-  - GS8206 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/gs8206

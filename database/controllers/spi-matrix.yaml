@@ -4,11 +4,11 @@ release_year: 2020
 creator:
   name: Led Strip Studio
   url: https://www.ledstripstudio.com
+  page: https://www.ledstripstudio.com/products/spi_matrix/
 vendors:
   - name: TLS Lighting
     page: https://tlslighting.co.uk/product/spi-matrix-lite-led-strip-studio-art-net-to-spi-stand-alone-spi-controller/
     warranty: 5 Years
-notes: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 inputs:
   physical:
     Ethernet: true
@@ -33,4 +33,6 @@ power:
 data:
   storage:
     - type: SD
+other_links:
+  - https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 price: 299

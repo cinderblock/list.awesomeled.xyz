@@ -1,5 +1,7 @@
 name: Wemos PWM RGB/W LED Driver Board
-creator: Mottram Labs
+creator:
+  name: Mottram Labs
+  url: https://www.mottramlabs.com/
 notes: RGBW MosFet driver fro strips compatible with Wled
 outputs:
   max_channels: 4

@@ -25,7 +25,7 @@ electrical:
     min: 3.5V
     max: 5V
 other_links:
-  - APA109 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/apa109
 physical:
   packages:
     - '5050'

@@ -1,7 +1,11 @@
 name: Lightwalls
-creator: Lightwalls
-notes: Strip and panels associated with Protopixel.io, subscription based
-  control systems, "dynamic lighting"
+creator:
+  name: Lightwalls
+  url: https://www.lightwalls.co.uk/
+notes: Strip and panels associated with Protopixel.io, subscription based control systems, "dynamic lighting"
+other_links:
+  - https://www.lightwalls.co.uk/learning-kits/
+  - https://www.protopixel.io/
 pricing:
   examples:
     - item: Learning kit

@@ -7,7 +7,7 @@ data:
   clocked: false
   channels: 4
 other_links:
-  - SM16511 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/dmx512
 physical:
   packages:
     - SOP-10

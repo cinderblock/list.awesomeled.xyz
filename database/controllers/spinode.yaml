@@ -3,6 +3,7 @@ status: unknown
 creator:
   name: Visual Productions
   url: https://www.visualproductions.nl
+  page: https://www.visualproductions.nl/products/spinode/
 notes: Use max 2 SpiNodes per CueCore3, to open up 32 universes
 inputs:
   physical:

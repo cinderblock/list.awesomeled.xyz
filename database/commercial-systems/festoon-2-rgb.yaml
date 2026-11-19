@@ -1,5 +1,7 @@
 name: Festoon 2 RGB
-creator: Chauvet
+creator:
+  name: Chauvet
+  page: https://www.chauvetdj.com/products/festoon-2-rgb/
 notes: Separate controller, 20 globes per string max 3 strings per control IP 54
 pricing:
   price_range: $$$

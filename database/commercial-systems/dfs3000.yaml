@@ -1,7 +1,8 @@
 name: DFS3000
-creator: Glasson Electronics
-notes: Glasson, developer of the world's first addressable incandescent festoon, range of
-  LED and festoon products, professional products, professional pricing
+creator:
+  name: Glasson Electronics
+  url: https://glassonelectronics.co.uk/
+notes: Glasson, developer of the world's first addressable incandescent festoon, range of LED and festoon products, professional products, professional pricing
 pricing:
   price_range: $$$$$$
 since: 2004

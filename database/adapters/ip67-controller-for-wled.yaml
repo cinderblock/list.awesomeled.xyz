@@ -1,5 +1,8 @@
 name: IP67 Controller for WLED
 creator: SerKo
+vendors:
+  - name: Amazon
+    page: https://www.amazon.com/dp/B07Q6XK8KM
 notes: Easy to assemble with TH parts
 outputs:
   max_channels: 2

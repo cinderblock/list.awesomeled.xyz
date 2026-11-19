@@ -29,6 +29,8 @@ power:
 data:
   storage:
     - type: SD
+other_links:
+  - https://www.advateklighting.com/pixlite-mk3-e-series-2022
 price: 950
 related:
   - type: related

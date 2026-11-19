@@ -6,8 +6,14 @@ color:
 data:
   clocked: false
   channels: 3
+datasheet:
+  url: https://www.bestlightingbuy.com/pdf/TLS3001%20Datasheet.pdf
+dead_links:
+  - url: https://www.bestlightingbuy.com/pdf/TLS3001%20Datasheet.pdf
+    archive: https://web.archive.org/web/20190918095010/https://www.bestlightingbuy.com/pdf/TLS3001%20Datasheet.pdf
+    checked: '2026-11-18'
 other_links:
-  - TLS3001 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/tls3001
 physical:
   packages:
     - SOP-8

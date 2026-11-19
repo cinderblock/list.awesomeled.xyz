@@ -29,6 +29,8 @@ features:
   - 4 high-power PWM MOSFET outputs (1.4-2.3A each)
   - Status LEDs
   - Runs Arduino or CircuitPython
+other_links:
+  - https://hackaday.io/project/161054-thunder-pack
 price: 40
 software:
   firmware:

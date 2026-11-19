@@ -20,7 +20,7 @@ electrical:
     max: 5V
   max_current: 350mA
 other_links:
-  - MY9231 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/my9231
 physical:
   packages:
     - SOP-16

@@ -6,8 +6,13 @@ color:
 data:
   clocked: false
   channels: 3
+dead_links:
+  - url: https://www.advateklights.com/knowledge-base/ucs512B
+    checked: '2026-11-18'
+    notes: Advatek moved its pixel-protocol pages; this one now redirects to the home page
+    archive: https://web.archive.org/web/20230605223544/https://www.advateklights.com/knowledge-base/ucs512b
 other_links:
-  - UCS512B Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklights.com/knowledge-base/ucs512B
 physical:
   packages:
     - SOP-8

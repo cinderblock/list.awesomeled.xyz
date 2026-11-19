@@ -3,6 +3,7 @@ status: active
 creator:
   name: HolidayCoro
   url: https://www.holidaycoro.com
+  page: https://www.holidaycoro.com/Flex-Modular-Lighting-Controller-System-p/951.htm
 inputs:
   physical:
     Ethernet: true

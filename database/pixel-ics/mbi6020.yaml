@@ -9,4 +9,4 @@ data:
 electrical:
   output_voltage: 12V
 other_links:
-  - MBI6020 Pixel Protocol Overview | Advatek Lighting
+  - https://www.advateklighting.com/pixel-protocols/mbi6020

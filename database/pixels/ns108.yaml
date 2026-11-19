@@ -1,6 +1,8 @@
 name: NS108
 release_year: 2018
-creator: Newstar LED Co.
+creator:
+  name: Newstar LED Co.
+  page: http://newstar-ledstrip.com/productshow847.html
 notes: 16bit/color version of NS107S
 color:
   order: BGR

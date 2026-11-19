@@ -1,5 +1,7 @@
 name: DuPont
-creator: Harwin/ Generic
+creator:
+  name: Harwin/ Generic
+  url: https://www.harwin.com/products?attributes.pitch=2.54mm-0.1
 notes: Arduino standard patch connector, Harwin clones, proper crimp tool 400USD+ , lesser crimp tools not up to job
 common_applications:
   - Arduino / breadboard prototyping jumpers

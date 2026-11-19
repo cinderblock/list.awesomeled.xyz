@@ -27,11 +27,17 @@ power:
 data:
   storage:
     - type: SD
+dead_links:
+  - url: https://ledstripstudio.com/gaming/
+    archive: https://web.archive.org/web/20250622130840/https://www.ledstripstudio.com/gaming/
+    checked: '2026-11-18'
 features:
   - Screen grabber (screen capture to pixels)
   - Web interface
   - Mobile app
   - Sensors and triggers management
+other_links:
+  - https://ledstripstudio.com/gaming/
 price:
   amount: 150
   currency: EUR
