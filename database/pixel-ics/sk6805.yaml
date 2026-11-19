@@ -19,6 +19,7 @@ physical:
   packages:
     - '2427'
     - '1515'
+    - '2020'
 related:
   - type: variant
     ref: pixel-ics/sk6812-5050

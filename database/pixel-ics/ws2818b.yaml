@@ -33,7 +33,7 @@ other_links:
 physical:
   packages:
     - SOP-8
-    - CPC-8
+    - FSOP-8
 price:
   - qty: 10
     price: 0.0728
@@ -52,3 +52,5 @@ price_source:
 related:
   - type: related
     ref: pixels/ws2813
+technical_notes:
+  - Datasheet V1.5 (Oct 2022) dropped the CPC-8 package (a ~2.6 x 2.6 mm WorldSemi 8-lead part) and added FSOP-8.

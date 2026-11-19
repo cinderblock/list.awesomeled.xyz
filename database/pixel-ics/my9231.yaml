@@ -26,6 +26,7 @@ physical:
   packages:
     - SOP-16
     - SSOP-16
+    - TSSOP-16
     - QFN-16
 technical_notes:
   - Pixel data size is variable (it depends on the configured bit depth)

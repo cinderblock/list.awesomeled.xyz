@@ -10,3 +10,6 @@ electrical:
   output_voltage: 12V
 other_links:
   - https://www.advateklighting.com/pixel-protocols/mbi6020
+physical:
+  packages:
+    - SSOP-16

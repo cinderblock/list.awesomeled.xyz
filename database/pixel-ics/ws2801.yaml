@@ -27,8 +27,7 @@ other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2801
 physical:
   packages:
-    - SO-14
-    - DIP-14
+    - SOP-14
 price:
   - qty: 5
     price: 0.2715
@@ -44,3 +43,5 @@ price_source:
   retrieved: '2026-07-03'
   url: https://www.lcsc.com/product-detail/C114580.html
   vendor: LCSC
+technical_notes:
+  - The 2009 preliminary datasheet also listed a DIP-14 package; current WS2801S datasheets list SOP-14 only.

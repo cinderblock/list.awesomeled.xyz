@@ -28,6 +28,7 @@ physical:
   packages:
     - '1515'
     - '2427'
+    - '2020'
   pin_count: 4
 price:
   - qty: 5

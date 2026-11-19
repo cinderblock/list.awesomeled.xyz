@@ -9,3 +9,6 @@ data:
   channels: 3
 other_links:
   - https://www.advateklighting.com/pixel-protocols/gs8206
+physical:
+  packages:
+    - SOP-8

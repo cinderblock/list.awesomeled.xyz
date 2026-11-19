@@ -26,3 +26,5 @@ price_source:
   retrieved: '2026-07-03'
   url: https://www.lcsc.com/product-detail/C5446694.html
   vendor: LCSC
+technical_notes:
+  - 'Variants: WS2814A (SOP-8 / FSOP-8), WS2814C (SOP-8), WS2814F (FSOP-8); the listed prices are for WS2814F.'

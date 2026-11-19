@@ -8,6 +8,9 @@ data:
   channels: 4
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6818
+physical:
+  packages:
+    - '5050'
 related:
   - type: related
     ref: pixels/sk6818

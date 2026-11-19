@@ -10,3 +10,9 @@ electrical:
   output_voltage: 24V
 other_links:
   - https://www.advateklighting.com/pixel-protocols/my9221
+physical:
+  packages:
+    - SOP-24
+    - SSOP-24
+    - TSSOP-24
+    - QFN-20

@@ -11,6 +11,7 @@ other_links:
 physical:
   packages:
     - SOP-14
+    - DIP-14
 price:
   - qty: 5
     price: 0.2131

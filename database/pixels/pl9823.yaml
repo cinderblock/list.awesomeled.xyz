@@ -26,4 +26,5 @@ physical:
   packages:
     - 5mm
     - 8mm
+    - '5050'
   pin_count: 4

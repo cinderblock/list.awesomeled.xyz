@@ -11,3 +11,5 @@ other_links:
 physical:
   packages:
     - SOP-16
+    - SSOP-16
+    - QFN-16

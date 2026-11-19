@@ -35,8 +35,9 @@ other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2811
 physical:
   packages:
-    - SOIC-8
-    - DIP-8
+    - SOP-8
+    - MSOP-8
+    - FSOP-8
 price:
   - qty: 20
     price: 0.0417
@@ -60,3 +61,4 @@ technical_notes:
   - PWM updated from 400Hz to 2kHz in newer silicon revisions
   - Widely cloned - many compatible ICs available
   - Specs updated in 2018 to match the other WS281x parts
+  - 'Packages per the V2.2 datasheet (2024): SOP-8, MSOP-8, FSOP-8 (FSOP-8 added 2022). DIP-8 appears only in pre-2017 datasheets.'

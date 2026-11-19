@@ -10,7 +10,9 @@ other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1914
 physical:
   packages:
-    - SOP-10
+    - MSOP-10
+    - SSOP-10
+    - ESOP-8
 price:
   - qty: 5
     price: 0.0985
@@ -27,3 +29,5 @@ price_source:
   retrieved: '2026-07-03'
   url: https://www.lcsc.com/product-detail/C5174521.html
   vendor: LCSC
+technical_notes:
+  - TM1914A is the SOP-8 version; the listed prices are for TM1914A.

@@ -10,6 +10,9 @@ data:
 datasheet:
   third_party_testing: https://www.advateklighting.com/pixel-protocols/gs8208
   url: https://www.artleds.com/images/Specs/gs8208-datasheet.pdf
+physical:
+  packages:
+    - SOP-8
 related:
   - type: related
     ref: pixels/gs8208

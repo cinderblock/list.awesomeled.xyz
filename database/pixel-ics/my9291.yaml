@@ -10,3 +10,8 @@ datasheet:
   url: http://www.my-semi.com.tw/file/MY9291_BF_0.91.pdf
 other_links:
   - https://www.advateklighting.com/pixel-protocols/my9291
+physical:
+  packages:
+    - SSOP-20
+    - TSSOP-20
+    - QFN-20
