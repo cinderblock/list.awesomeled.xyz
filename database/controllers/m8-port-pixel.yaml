@@ -1,10 +1,14 @@
-name: M8 Port Pixel
+name: M8-PI
 status: discontinued
+release_year: 2022
 creator:
   name: Microcyb
   url: https://www.microcyb.com
   page: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
-notes: Raspberry Pi 3B+ or above HAT running FPP (Falcon Player).
+vendors:
+  - name: EspartStick
+    page: https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+notes: Raspberry Pi HAT (Pi 3B/4, Zero/Zero 2) running FPP 6+ with a separately sold FPP license key. OLED display and joystick; powers the Pi from the 12 V pixel supply. Listed as "M8 Port Pixel" in the original spreadsheet.
 inputs:
   physical:
     Ethernet: true
@@ -16,9 +20,9 @@ outputs:
     ref: mtsb-combicon
   driver:
     buffered: true
-  clocked: selectable # single (async) or clocked pixels
+  clocked: false # single-wire only (FPP DPIPixels driver)
   pixels:
-    max_per_output: 1600 # 12800 total / 8 outputs
+    max_per_output: 1600 # at 20 fps
 power:
   voltage:
     max: 12

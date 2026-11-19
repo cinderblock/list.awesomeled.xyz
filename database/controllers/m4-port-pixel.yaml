@@ -1,10 +1,14 @@
-name: M4 Port Pixel
+name: M4-PI
 status: discontinued
+release_year: 2022
 creator:
   name: Microcyb
   url: https://www.microcyb.com
   page: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
-notes: Raspberry Pi 3B+ or above cape running FPP (Falcon Player).
+vendors:
+  - name: EspartStick
+    page: https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
+notes: Raspberry Pi HAT (Pi 3B/4, Zero/Zero 2) running FPP 6+ with a separately sold FPP license key. OLED display and joystick; powers the Pi from the 12 V pixel supply. Listed as "M4 Port Pixel" in the original spreadsheet.
 inputs:
   physical:
     Ethernet: true # via host Raspberry Pi
@@ -17,8 +21,8 @@ outputs:
   driver:
     buffered: true
   pixels:
-    max_per_output: 1600
-  clocked: selectable # single or clocked pixels
+    max_per_output: 1600 # at 20 fps
+  clocked: false # single-wire only (FPP DPIPixels driver)
 power:
   voltage:
     max: 12

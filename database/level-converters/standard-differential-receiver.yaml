@@ -1,5 +1,7 @@
 name: Standard Differential Receiver
+status: discontinued # gone from Microcyb's store by Oct 2022; the store is offline now
 creator: Microcyb
+notes: "Receives differential pixel data over RJ45 from a controller's long-range ports and drives 4 single-ended pixel outputs on Phoenix screw terminals: 6400 pixels in total (1600 per port) per the original spreadsheet. Sold in Microcyb's ESPArtStick store in 2022, probably for its M16-PI differential HAT; compatibility with other brands' differential ports is unconfirmed."
 electrical:
   max_voltage: 12V
 images:
