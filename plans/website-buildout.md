@@ -38,6 +38,7 @@ Each thread keeps its own `plans/<workstream>.md` and owns the files listed. Tou
 ## Progress log
 
 - [x] 2026-11-18: project cloned and registered in T3; workstream threads launched (links below).
+- [x] 2026-11-18: CI test job pinned to `ubuntu-24.04` (`44a6f99`); `ubuntu-latest` = 26.04 broke Playwright 1.58 browser install, so every deploy was failing.
 
 ## Threads
 
