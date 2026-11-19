@@ -25,7 +25,7 @@ power:
     max: 5 # 5 V 3 A supply
 data:
   storage:
-    - type: uSD # 16 GB card included
+    - type: microSD # 16 GB card included
 features:
   - OLED display
   - Test button

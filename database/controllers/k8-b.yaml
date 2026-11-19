@@ -31,7 +31,7 @@ power:
     max: 30
 data:
   storage:
-    - type: uSD
+    - type: microSD
 features:
   - 8 fused local outputs
   - Differential receiver outputs

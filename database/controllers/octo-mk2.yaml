@@ -7,7 +7,7 @@ creator:
 notes: Daisy-chainable through Ethernet up to 8 devices.
 inputs:
   physical:
-    Ethernet: Dual
+    Ethernet: 2
   standalone: true # built-in FX engine plays gradient effects on power-up
 outputs:
   count: 2

@@ -8,7 +8,7 @@ creator:
 notes: Inbuilt Ethernet Switch, allows daisy chaining units
 inputs:
   physical:
-    Ethernet: Dual
+    Ethernet: 2
   standalone: false
 outputs:
   count: 8

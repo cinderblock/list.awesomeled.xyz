@@ -33,7 +33,7 @@ power:
     max: 5
 data:
   storage:
-    - type: uSD
+    - type: microSD
 dead_links:
   - url: https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
     archive: http://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller

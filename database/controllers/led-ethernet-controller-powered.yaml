@@ -10,7 +10,7 @@ vendors:
     warranty: 5 Years
 inputs:
   physical:
-    Ethernet: Dual
+    Ethernet: 2
     DMX512: XLR 3-pin
   standalone: true
 outputs:

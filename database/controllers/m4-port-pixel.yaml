@@ -32,7 +32,7 @@ power:
     max: 30
 data:
   storage:
-    - type: uSD # microSD on host Raspberry Pi
+    - type: microSD # microSD on host Raspberry Pi
 dead_links:
   - url: https://www.microcyb.com/index.html#!/M4-PI-Raspberry-Pi-4-Port-Pixel-controller/p/468426786/category=0
     archive: http://web.archive.org/web/20240519213626/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786

@@ -200,6 +200,94 @@
         }
       ]
     },
+    "input_interfaces": {
+      "description": "Physical inputs of a controller or controller-like board: a fixed vocabulary of keys, each `true` (present) or a count / qualifier. A host board's interface (a cape's BeagleBone Ethernet) is recorded with a `# via host` comment. Storage (SD, microSD, USB stick) is not an input: it goes in data.storage.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Ethernet": {
+          "description": "true, or the number of ports (2 = dual / built-in switch)",
+          "oneOf": [{ "type": "boolean" }, { "type": "integer", "minimum": 1 }]
+        },
+        "Wi-Fi": {
+          "description": "true, or the bands",
+          "oneOf": [
+            { "type": "boolean" },
+            {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "enum": ["2.4GHz", "5GHz", "6GHz"] }
+            }
+          ]
+        },
+        "Bluetooth": {
+          "description": "true, or the version ('5.0', 'BLE')",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "USB": {
+          "description": "USB that carries data or configuration (not power only): true, or the connector ('USB-C', 'micro-USB', 'USB-A host')",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "DMX512": {
+          "description": "Wired DMX512 input: true, or the connector ('XLR-5 in + thru', 'RJ45')",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "Wireless DMX": {
+          "description": "Radio DMX receiver: true, or the system ('Multiverse', 'RC4')",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "Serial": {
+          "description": "Other serial data input: true, or the kind ('TTL', 'RS-485')",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "PoE": {
+          "description": "Powered over Ethernet: true, or the class ('PoE+', 'PoE++')",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "buttons": {
+          "description": "Onboard buttons: true, or how many",
+          "oneOf": [{ "type": "boolean" }, { "type": "integer", "minimum": 1 }]
+        },
+        "triggers": {
+          "description": "External trigger / contact-closure inputs: true, or how many",
+          "oneOf": [{ "type": "boolean" }, { "type": "integer", "minimum": 1 }]
+        },
+        "GPIO": {
+          "description": "General-purpose I/O pins usable as inputs: true, or how many",
+          "oneOf": [{ "type": "boolean" }, { "type": "integer", "minimum": 1 }]
+        },
+        "IR": { "type": "boolean", "description": "Infrared remote receiver" },
+        "NFC": { "type": "boolean", "description": "NFC tap-to-pair or tap-to-configure" },
+        "RF remote": {
+          "description": "Radio remote receiver: true, or a qualifier ('15 m range')",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "Microphone": { "type": "boolean" },
+        "Audio": {
+          "description": "Audio input: true, or the kind ('line-in', 'AUX')",
+          "oneOf": [{ "type": "boolean" }, { "type": "string" }]
+        },
+        "HDMI": { "type": "boolean" }
+      }
+    },
+    "control_protocol": {
+      "description": "A network or serial lighting-control protocol a device accepts (not a pixel protocol like WS2811)",
+      "enum": [
+        "Art-Net",
+        "sACN",
+        "DDP",
+        "DMX512",
+        "USB DMX",
+        "OPC",
+        "KiNET",
+        "ZCPP",
+        "TPM2",
+        "TPM2.net",
+        "Glediator",
+        "MadLED"
+      ]
+    },
     "diy_or_ots": {
       "enum": ["DIY", "OTS", "both"],
       "description": "DIY: you build it (kit, PCB or open design). OTS: sold assembled, off the shelf. both: offered either way."

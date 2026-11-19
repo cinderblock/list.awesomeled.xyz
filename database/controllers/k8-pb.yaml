@@ -34,7 +34,7 @@ power:
     max: 30
 data:
   storage:
-    - type: uSD
+    - type: microSD
 features:
   - eFuse protected power distribution
   - Current sensing for fault detection

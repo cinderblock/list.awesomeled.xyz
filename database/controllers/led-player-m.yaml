@@ -5,7 +5,6 @@ notes: Standalone TPM2 player (microSD) for up to 2048 LEDs; USB virtual COM tak
 inputs:
   physical:
     USB: true # Mini-USB - virtual COM (live JINX/GLEDIATOR), config, bootloader
-    microSD: true # TPM2 file playback
   standalone: true
 outputs:
   count: 8 # single-wire LEDs on CH1-CH8; one clocked channel (DATA on CH4, CLOCK on CH8)
@@ -28,6 +27,9 @@ outputs:
 power:
   voltage:
     max: 5
+data:
+  storage:
+    - type: microSD
 images:
   - file: led-player-m.webp
     source: https://web.archive.org/web/20230603144022/https://www.led-genial.de/LED-Player-M-fuer-Stripes-und-Panels-bis-2048-LEDs

@@ -10,9 +10,9 @@ vendors:
     warranty: 5 Years
 inputs:
   physical:
-    Ethernet: Dual # 2x RJ-45 100 Mbit/sec with internal switch
+    Ethernet: 2 # 2x RJ-45 100 Mbit/sec with internal switch
     USB: true
-    DMX: XLR 3-pin # DMX in (optional 5-pin)
+    DMX512: XLR 3-pin
   protocols:
     - Art-Net # up to 24 universes
   standalone: true # microSD playlist/autoplay mode
@@ -71,7 +71,7 @@ power:
     max: 10 # 10 A total, 5 A per output (polyfuse protected)
 data:
   storage:
-    - type: uSD
+    - type: microSD
       max_size: 32 # FAT32
 datasheet:
   url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf

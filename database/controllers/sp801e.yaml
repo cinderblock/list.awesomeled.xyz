@@ -7,7 +7,9 @@ creator:
 notes: Wi-Fi Art-Net pixel controller configured via the BanlanX app; records app scenes to onboard flash for standalone playback. This entry previously carried SP608E specs (8 outputs, mic, triggers) — those now live on the SP608E entry.
 inputs:
   physical:
-    Wi-Fi: 2.4GHz # AP or STA mode; 5 GHz unsupported. Bluetooth is only used for BluFi provisioning
+    Wi-Fi:
+      - 2.4GHz
+      # AP or STA mode; 5 GHz unsupported. Bluetooth is only used for BluFi provisioning
   protocols:
     - Art-Net
   standalone: true # built-in effect layers; records scenes to onboard flash

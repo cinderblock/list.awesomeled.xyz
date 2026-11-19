@@ -26,7 +26,7 @@ power:
     max: 5
 data:
   storage:
-    - type: Flash
+    - type: flash
 features:
   - GPIO breakout
 images:

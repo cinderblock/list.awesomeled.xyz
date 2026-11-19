@@ -6,7 +6,9 @@ creator:
   page: https://www.protopixel.io/pricing
 inputs:
   physical:
-    Wi-Fi: 2.4GHz # IEEE 802.11 b/g/n
+    Wi-Fi:
+      - 2.4GHz
+      # IEEE 802.11 b/g/n
   protocols:
     - Art-Net
     - sACN # up to 4 universes
@@ -34,7 +36,7 @@ power:
 data:
   fps: 30 # 30fps in streaming
   storage:
-    - type: uSD
+    - type: microSD
 dead_links:
   - url: https://www.protopixel.io/pricing
     archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing

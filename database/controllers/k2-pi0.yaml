@@ -6,7 +6,9 @@ creator:
 notes: Raspberry Pi Zero cape running FPP (Pi Zero W/2W recommended; Wi-Fi via the Pi - the Zero has no Ethernet port). 2 eFuse-protected ports, up to 800 pixels each (with power injection) at 40FPS, 6A per port, 5-24V input powers both cape and Pi. Small GPIO/i2c header; no OLED, buttons, or RTC.
 inputs:
   physical:
-    Wi-Fi: 2.4GHz # via the host Raspberry Pi Zero W/2W
+    Wi-Fi:
+      - 2.4GHz
+      # via the host Raspberry Pi Zero W/2W
   standalone: true # runs FPP (Falcon Player)
   requires_host: Raspberry Pi Zero 2 W, Raspberry Pi Zero W
 outputs:
@@ -28,7 +30,7 @@ power:
     max: 24
 data:
   storage:
-    - type: uSD
+    - type: microSD
 features:
   - Per-output eFuse protection
 images:

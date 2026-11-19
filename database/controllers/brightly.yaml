@@ -8,7 +8,6 @@ notes: Modular breakouts allow for direct screw terminal plug or differential RJ
 inputs:
   physical:
     Ethernet: true
-    SD Card: true
   protocols:
     - Art-Net
     - sACN

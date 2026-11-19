@@ -7,8 +7,8 @@ creator:
 notes: DMX-controlled LED tape replay unit (model 5850, "QolorPIX Tape Controller, Eight Output")
 inputs:
   physical:
-    DMX: true # 5-pin XLR wired DMX512-A in/thru, with RDM
-    Multiverse: true # built-in Multiverse wireless DMX receiver
+    DMX512: true
+    Wireless DMX: Multiverse
   protocols:
     - DMX512 # DMX512-A only; no Art-Net or sACN
   standalone: true # 24 base effects + 4 recordable presets, runs without external controller
@@ -31,7 +31,7 @@ case:
   waterproof: IP20
 data:
   storage:
-    - type: uSD # firmware updates via micro-SD card
+    - type: microSD # firmware updates via micro-SD card
 features:
   - Integrated power supply (no external PSU)
   - Multiverse wireless DMX receiver

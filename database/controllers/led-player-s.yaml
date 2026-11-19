@@ -21,7 +21,7 @@ outputs:
     - APA-106
 data:
   storage:
-    - type: uSD # micro-SD up to 32 GB (SDHC)
+    - type: microSD # micro-SD up to 32 GB (SDHC)
 dead_links:
   - url: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
     archive: http://web.archive.org/web/20170727133740/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab

@@ -7,9 +7,10 @@ creator:
 notes: ESP32, open to any software, often run with WLED
 inputs:
   physical:
-    Wi-Fi: 2.4GHz
+    Wi-Fi:
+      - 2.4GHz
   protocols:
-    - DMX
+    - DMX512
   standalone: true
 outputs:
   count: 1

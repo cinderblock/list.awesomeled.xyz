@@ -33,7 +33,7 @@ power:
     max: 20
 data:
   storage:
-    - type: uSD # FPP image on the host microSD
+    - type: microSD # FPP image on the host microSD
 features:
   - Per-port resettable eFuses with current monitoring and fuse alerts
   - Pixel counting test pattern

@@ -18,14 +18,14 @@ vendors:
 notes: Flagship controller with all premium features
 
 inputs:
-  physical:
-    Ethernet: Dual
+  physical: # fixed keys: common.json input_interfaces
+    Ethernet: 2 # ports; true when the count is unknown
     Wi-Fi:
       - 2.4GHz
       - 5GHz
     Bluetooth: 5 LE
     buttons: 2 # besides dedicated reset
-  protocols:
+  protocols: # common.json control_protocol
     - Art-Net
     - sACN # E1.31
   standalone: true
@@ -48,7 +48,7 @@ outputs:
   protocols:
     - WS2812B
     - SK6812
-  clocked: always # or "selectable" or "false"
+  clocked: always # false (single-wire only), selectable, or always (clocked only)
   auxiliary:
     DMX512: 1
     TTL: 4
@@ -84,7 +84,7 @@ data:
     - 8
     - 16
   storage:
-    - type: uSD
+    - type: microSD # SD, microSD, flash, eMMC or USB
       max_size: 128 # GB
       features:
         - FAT32 support
@@ -134,7 +134,8 @@ notes: Budget-friendly option for small installations
 
 inputs:
   physical:
-    Wi-Fi: 2.4GHz
+    Wi-Fi:
+      - 2.4GHz
   standalone: true
 
 outputs:
@@ -157,7 +158,7 @@ case:
 
 data:
   storage:
-    - type: Flash
+    - type: flash
       features:
         - WLED firmware pre-installed
 
@@ -210,7 +211,7 @@ notes: No longer manufactured, limited firmware support
 inputs:
   physical:
     USB: true
-    DMX: true
+    DMX512: XLR-5 in + thru
   standalone: false
 
 outputs:

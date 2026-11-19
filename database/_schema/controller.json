@@ -124,35 +124,12 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "physical": {
-          "type": "object",
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "integer"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
-            ]
-          },
-          "description": "Physical interfaces (Ethernet, Wi-Fi, USB, Bluetooth, buttons, etc.)"
-        },
+        "physical": { "$ref": "common.json#/definitions/input_interfaces" },
         "protocols": {
           "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Data protocols (Art-Net, sACN, etc.)"
+          "uniqueItems": true,
+          "items": { "$ref": "common.json#/definitions/control_protocol" },
+          "description": "Control protocols it accepts (Art-Net, sACN, DDP, DMX512, ...)"
         },
         "standalone": {
           "type": "boolean",
@@ -234,8 +211,8 @@
                 "additionalProperties": false,
                 "properties": {
                   "type": {
-                    "type": "string",
-                    "description": "Storage type (SD, uSD, Flash, etc.)"
+                    "enum": ["SD", "microSD", "flash", "eMMC", "USB"],
+                    "description": "SD / microSD card slot, internal flash or eMMC, or a USB stick"
                   },
                   "max_size": {
                     "type": "integer",

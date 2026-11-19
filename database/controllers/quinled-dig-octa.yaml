@@ -26,7 +26,7 @@ core:
   family: ESP32
 data:
   storage:
-    - type: uSD
+    - type: microSD
 images:
   - file: quinled-dig-octa.webp
     source: https://shop.allnetchina.cn/products/quinled-dig-octa-brainboard-32-8l-v4

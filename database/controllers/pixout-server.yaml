@@ -25,7 +25,7 @@ power:
     max: 24
 data:
   storage:
-    - type: uSD # SD card with Pixout firmware
+    - type: microSD # SD card with Pixout firmware
 features:
   - ArtNet DMX cue recording and playback
   - Web control panels and iOS/Android remote app

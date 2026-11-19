@@ -5,7 +5,8 @@ creator:
   page: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
 inputs:
   physical:
-    Wi-Fi: 2.4GHz
+    Wi-Fi:
+      - 2.4GHz
   standalone: true # runs WLED firmware standalone
 outputs:
   count: 8

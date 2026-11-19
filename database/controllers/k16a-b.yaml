@@ -66,7 +66,7 @@ power:
     max: 60
 data:
   storage:
-    - type: uSD # via the BeagleBone Black
+    - type: microSD # via the BeagleBone Black
 features:
   - Replaceable fuses with indicator LEDs
   - Onboard sound output

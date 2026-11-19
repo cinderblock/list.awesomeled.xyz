@@ -10,7 +10,7 @@ inputs:
     USB: true
     Serial: true
   protocols:
-    - DMX
+    - DMX512
   standalone: true
 outputs:
   count: 1
@@ -64,7 +64,7 @@ power:
     max: 12
 data:
   storage:
-    - type: Flash
+    - type: flash
 features:
   - 3-axis accelerometer
   - Optional WiFi/Bluetooth add-on modules

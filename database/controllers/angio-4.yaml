@@ -8,7 +8,7 @@ creator:
 notes: Bulk fleet manager.
 inputs:
   physical:
-    Ethernet: 100Mbps
+    Ethernet: true # 100 Mbps
     Wi-Fi: true
     Bluetooth: 5 LE (future)
   protocols:

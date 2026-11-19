@@ -118,7 +118,7 @@ power:
     max: 24
 data:
   storage:
-    - type: uSD
+    - type: microSD
       max_size: 8
 features:
   - Converts Art-Net/DMX to 50+ pixel protocols (single-wire and clocked)

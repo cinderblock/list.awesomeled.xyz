@@ -7,7 +7,9 @@ creator:
 notes: ESP8266/ESP32 based, open to any software, often run with WLED
 inputs:
   physical:
-    Wi-Fi: 2.4GHz # via plug-in QuinLED-ESP32 module; wired Ethernet ESP32 variant optional
+    Wi-Fi:
+      - 2.4GHz
+      # via plug-in QuinLED-ESP32 module; wired Ethernet ESP32 variant optional
   standalone: true # commonly runs WLED firmware
 outputs:
   count: 4

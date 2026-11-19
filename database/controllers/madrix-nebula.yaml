@@ -6,7 +6,7 @@ creator:
   page: https://www.madrix.com/products/nebula
 inputs:
   physical:
-    Ethernet: Dual
+    Ethernet: 2
     USB: true
   protocols:
     - Art-Net # incl. ArtSync (Art-Net I/II/3/4)

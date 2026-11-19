@@ -37,7 +37,7 @@ power:
     max: 35
 data:
   storage:
-    - type: Flash # onboard pattern/keyframe storage
+    - type: flash # onboard pattern/keyframe storage
 features:
   - Onboard DMX pattern replay and keyframing
 images:

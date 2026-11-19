@@ -88,15 +88,12 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "physical": {
-          "type": "object",
-          "additionalProperties": {},
-          "description": "Physical inputs (Wi-Fi, Ethernet, SD card, ...) as key: value/true"
-        },
+        "physical": { "$ref": "common.json#/definitions/input_interfaces" },
         "protocols": {
           "type": "array",
-          "items": { "type": "string" },
-          "description": "Control protocols accepted (Art-Net, E1.31, DMX512, ...)"
+          "uniqueItems": true,
+          "items": { "$ref": "common.json#/definitions/control_protocol" },
+          "description": "Control protocols accepted (Art-Net, sACN, DMX512, ...)"
         }
       }
     },

@@ -8,7 +8,7 @@ inputs:
   physical:
     Ethernet: true
     USB: Type-A 2.0 OTG
-    Trigger inputs: 8
+    triggers: 8
   protocols:
     - sACN
     - DDP

@@ -7,7 +7,7 @@ creator:
 notes: 48 differential pixel outputs via remote receiver boards (4 outputs each).
 inputs:
   physical:
-    Ethernet: Dual # 2-port switch for daisy-chaining
+    Ethernet: 2 # 2-port switch for daisy-chaining
   protocols:
     - Art-Net
     - sACN # E1.31
@@ -47,7 +47,7 @@ power:
     max: 5
 data:
   storage:
-    - type: uSD
+    - type: microSD
 features:
   - OLED status display
   - 2-port Ethernet switch for daisy-chaining

@@ -7,7 +7,8 @@ creator:
 inputs:
   physical:
     Ethernet: true
-    Wi-Fi: 2.4GHz
+    Wi-Fi:
+      - 2.4GHz
   protocols:
     - Art-Net
     - sACN # E1.31
@@ -103,7 +104,7 @@ power:
     max: 60
 data:
   storage:
-    - type: uSD
+    - type: microSD
 images:
   - file: falcon-f16v4.webp
     source: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html

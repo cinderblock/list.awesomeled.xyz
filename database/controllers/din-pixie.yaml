@@ -127,7 +127,7 @@ data:
     - 8
     - 16
   storage:
-    - type: Flash
+    - type: flash
       features:
         - non-removable
 images:

@@ -9,7 +9,8 @@ vendors:
 notes: Wi-Fi pixel controller configured via the 'LED Shop' phone app. The source sheet's 'DMX' interface referred to supported DMX-type pixel ICs, not a DMX input.
 inputs:
   physical:
-    Wi-Fi: 2.4GHz
+    Wi-Fi:
+      - 2.4GHz
   standalone: true
 outputs:
   count: 1

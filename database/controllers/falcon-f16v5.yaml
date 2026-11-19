@@ -7,8 +7,10 @@ creator:
 notes: 16 local pixel outputs expandable to 32 via SmartReceivers; 192 universes in.
 inputs:
   physical:
-    Ethernet: Dual # 2-port switch for daisy-chaining
-    Wi-Fi: 2.4GHz # onboard ESP-07 module
+    Ethernet: 2 # 2-port switch for daisy-chaining
+    Wi-Fi:
+      - 2.4GHz
+      # onboard ESP-07 module
   protocols:
     - Art-Net
     - sACN # E1.31
@@ -108,7 +110,7 @@ power:
     max: 13
 data:
   storage:
-    - type: uSD
+    - type: microSD
 features:
   - Per-output resettable e-fuses with current/voltage/fuse status in web UI
   - OLED status display

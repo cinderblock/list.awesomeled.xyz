@@ -8,7 +8,9 @@ creator:
 notes: ESP32 based (custom QuinLED-ESP32 top board, USB-C), ships with WLED pre-installed; board/external antenna options, Ethernet on select variants.
 inputs:
   physical:
-    Wi-Fi: 2.4GHz # ESP32, board/external antenna options
+    Wi-Fi:
+      - 2.4GHz
+      # ESP32, board/external antenna options
     USB: true # USB-C on QuinLED-ESP32 top board
   protocols:
     - DMX512

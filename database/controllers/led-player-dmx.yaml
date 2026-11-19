@@ -28,7 +28,7 @@ power:
     max: 5
 data:
   storage:
-    - type: uSD
+    - type: microSD
       max_size: 32 # FAT32
 images:
   - file: led-player-dmx.webp

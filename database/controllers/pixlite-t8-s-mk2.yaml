@@ -7,7 +7,7 @@ creator:
 notes: 2 types of receivers available
 inputs:
   physical:
-    Ethernet: Dual
+    Ethernet: 2
   protocols:
     - Art-Net
     - sACN # E1.31

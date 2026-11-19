@@ -32,7 +32,7 @@ power:
     max: 160
 data:
   storage:
-    - type: uSD # via BeagleBone Black
+    - type: microSD # via BeagleBone Black
 features:
   - OLED display
   - Real-time clock (RTC)

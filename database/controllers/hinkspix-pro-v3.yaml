@@ -7,7 +7,7 @@ creator:
 notes: Modular "Flex" pixel controller CPU; onboard pixel ports plus long-range differential receivers add on through stackable expansion boards.
 inputs:
   physical:
-    Ethernet: Dual # built-in 2-port network switch for daisy-chaining
+    Ethernet: 2 # built-in 2-port network switch for daisy-chaining
   protocols:
     - Art-Net
     - sACN # E1.31

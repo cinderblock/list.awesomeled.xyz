@@ -7,7 +7,7 @@ creator:
 notes: Long range data transmission extenders available.
 inputs:
   physical:
-    Ethernet: Dual
+    Ethernet: 2
     Wi-Fi: true
   protocols:
     - Art-Net

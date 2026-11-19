@@ -6,7 +6,7 @@ creator:
   page: https://chauvetprofessional.com/product/epix-flex-drive/
 inputs:
   physical:
-    Ethernet: Dual (RJ45, IP65 EtherCON)
+    Ethernet: 2 # RJ45, IP65 EtherCON
     DMX512: 5-pin XLR in/out
 outputs:
   count: 2

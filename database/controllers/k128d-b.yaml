@@ -60,7 +60,7 @@ power:
     max: 5
 data:
   storage:
-    - type: uSD # via the host BeagleBone Black
+    - type: microSD # via the host BeagleBone Black
 features:
   - Onboard sound
   - Optional FM transmitter

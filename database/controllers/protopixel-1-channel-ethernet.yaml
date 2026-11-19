@@ -31,7 +31,7 @@ power:
     max: 12
 data:
   storage:
-    - type: uSD
+    - type: microSD
 dead_links:
   - url: https://www.protopixel.io/pricing
     archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing
