@@ -48,9 +48,28 @@ jobs:
             const prices = (log.match(/^prices: \d+ dated \| \d+ stale \| \d+ undated$/m) ?? [''])[0];
             const date = new Date().toISOString().slice(0, 10);
             const title = 'Link-rot report (rolling)';
+
+            // GitHub turns scheduled workflows off after 60 days without a
+            // commit (this bot's issue updates don't count: it went quiet
+            // after 2026-07-17 and missed 2026-11-03). Runs are monthly, so a
+            // 28-day threshold always warns at least once before the cutoff.
+            const { data: [latest] } = await github.rest.repos.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 1,
+            });
+            const lastCommit = new Date(latest.commit.committer.date);
+            const quietDays = Math.floor((Date.now() - lastCommit) / 86400000);
+            const cutoff = new Date(lastCommit.getTime() + 60 * 86400000).toISOString().slice(0, 10);
+            const quiet =
+              quietDays >= 28
+                ? `⚠️ No commits for ${quietDays} days (last ${lastCommit.toISOString().slice(0, 10)}). GitHub stops scheduled workflows after 60 days without repository activity, so this monthly check stops after ${cutoff} unless something is pushed before then.`
+                : '';
+
             const body = [
               `Automated sweep from ${date} — \`bun run check-links\`.`,
               '',
+              ...(quiet ? [quiet, ''] : []),
               `**${summary}**`,
               ...(prices ? ['', `**${prices}**`] : []),
               '',
@@ -79,7 +98,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issues[0].number,
-                body: `Refreshed ${date}: **${summary}**${prices ? ` — ${prices}` : ''}`,
+                body: `Refreshed ${date}: **${summary}**${prices ? ` — ${prices}` : ''}${quiet ? `\n\n${quiet}` : ''}`,
               });
             } else {
               await github.rest.issues.create({
