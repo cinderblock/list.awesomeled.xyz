@@ -9,12 +9,15 @@ datasheet:
   url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
 electrical:
   max_current: 1.5A
+  input_high_voltage: 2.4V
+  input_high_voltage_notes: 'VDD = 4.5 V to 18 V; 2.0 V for V temperature range devices'
 images:
   - file: tc4427.webp
     source: https://www.microchip.com/en-us/product/TC4427
     credit: Microchip Technology
 io:
   channels: 2
+  buffered: true
 links:
   product: https://www.microchip.com/en-us/product/TC4427
 price:
@@ -38,3 +41,11 @@ sources:
     url: https://ww1.microchip.com/downloads/en/DeviceDoc/20001422G.pdf
     retrieved: '2026-11-18'
     notes: "Microchip TC4426/TC4427/TC4428 data sheet, Product Identification System examples: 'a) TC4427CPA: 1.5A Dual Non-Inverting MOSFET driver, 0°C to +70°C PDIP package', 'b) TC4427EPA: ... -40°C to +85°C PDIP package'"
+  electrical.input_high_voltage:
+    url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
+    retrieved: '2026-11-18'
+    notes: "Microchip data sheet DS20001422G, DC Characteristics (4.5 V ≤ VDD ≤ 18 V): Logic '1' High Input Voltage VIH 2.4 V min, Logic '0' VIL 0.8 V max; note 2: 'For V temperature range devices, the VIH (Min) limit is 2.0V'"
+  io.buffered:
+    url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
+    retrieved: '2026-11-18'
+    notes: "Microchip data sheet DS20001422G: title '1.5A Dual High-Speed Power MOSFET Drivers'; Features: 'High Capacitive Load Drive Capability: 1000 pF'"

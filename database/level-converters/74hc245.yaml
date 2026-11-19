@@ -15,12 +15,15 @@ datasheet:
 electrical:
   max_voltage: 6
   max_current: 8mA
+  input_high_voltage: 3.5V
+  input_high_voltage_notes: '0.7 × VCC: 3.15 V at VCC = 4.5 V and 4.2 V at 6 V, so 3.5 V on a 5 V supply. A 3.3 V output is below it.'
 images:
   - file: '74hc245.webp'
     source: https://www.ti.com/product/SN74HC245
     credit: Texas Instruments
 io:
   channels: 8
+  buffered: true
 links:
   product: https://www.ti.com/product/SN74HC245
 price:
@@ -40,3 +43,11 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74hc245.pdf
     retrieved: '2026-11-18'
     notes: 'TI datasheet SCLS131F: title + Package Option Addendum orderables (N = PDIP-20, DW = SOIC-20, PW = TSSOP-20, DB = SSOP-20, NS = SOP-20)'
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74hc245.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCLS131F, 6.3 Recommended Operating Conditions: VIH min 1.5 V at VCC = 2 V, 3.15 V at 4.5 V, 4.2 V at 6 V'
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/sn74hc245.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS131F, Features: 'High-Current 3-State Outputs Drive Bus Lines Directly or Up to 15 LSTTL Loads', '±6-mA Output Drive at 5 V'"

@@ -10,6 +10,8 @@ datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
 electrical:
   max_voltage: 5.5V
+  input_high_voltage: 2.03V
+  input_high_voltage_notes: 'VCC = 4.5 V to 5.0 V, -40 °C to +125 °C; 2.11 V at VCC = 5.5 V'
 images:
   - file: sn74lv1t34dbvrg4.webp
     source: https://www.ti.com/product/SN74LV1T34
@@ -17,6 +19,7 @@ images:
 io:
   channels: 1
   interface: SOT 23
+  buffered: true
 links:
   product: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4
 price:
@@ -40,3 +43,11 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
     retrieved: '2026-11-18'
     notes: "'Operating range of 1.65V to 5.5V'"
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS743E, 6.5 Electrical Characteristics: VIH min 2.02 V (25 °C) / 2.03 V (-40 °C to +125 °C) at VCC = 4.5 V to 5.0 V; 8.3.3.2: 'VIH(MIN) with a 5-V supply is only 2 V'"
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS743E: title 'Single Power Supply Single Buffer GATE CMOS Logic Level Shifter'"

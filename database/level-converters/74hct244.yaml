@@ -13,6 +13,8 @@ datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
 electrical:
   max_voltage: 5.5V
+  input_high_voltage: 2V
+  input_high_voltage_notes: 'VCC = 4.5 V to 5.5 V'
 images:
   - file: '74hct244.webp'
     source: https://www.ti.com/product/SN74HCT244
@@ -40,3 +42,11 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
     retrieved: '2026-11-18'
     notes: 'TI datasheet SCLS175I: title + Package Option Addendum orderables (N = PDIP-20, DW = SOIC-20, PW = TSSOP-20, DB = SSOP-20, NS = SOP-20, DGS = VSSOP-20)'
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCLS175I, 5.3 Recommended Operating Conditions: VIH min 2 V, VIL max 0.8 V, VCC = 4.5 V to 5.5 V'
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS175I: title 'Octal Buffers and Line Drivers With 3-State Outputs'; Features: '±6mA output drive at 5V'"

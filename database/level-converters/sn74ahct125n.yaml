@@ -15,6 +15,9 @@ aliases:
   - 74AHCT125N
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
+electrical:
+  input_high_voltage: 2V
+  input_high_voltage_notes: 'VCC = 4.5 V to 5.5 V'
 images:
   - file: sn74ahct125n.webp
     source: https://www.ti.com/product/SN74AHCT125
@@ -22,6 +25,7 @@ images:
 io:
   channels: 4
   interface: Through-Hole DIP
+  buffered: true
 links:
   product: https://www.ti.com/product/SN74AHCT125
 price:
@@ -41,3 +45,11 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
     retrieved: '2026-11-18'
     notes: "TI datasheet SCLS264R: title + Package Option Addendum (N = PDIP-14 'Active', D = SOIC-14 'Obsolete', DR = SOIC-14 'Active', PW/DB/DGV/NS/RGY/BQA = other packages)"
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS264R, 5.2 Recommended Operating Conditions: VIH min 2 V, VIL max 0.8 V, VCC 4.5 V to 5.5 V; Features: 'Inputs are TTL-voltage compatible'"
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS264R: title 'Quadruple Bus Buffer Gates With 3-State Outputs'; 5.2: IOH -8 mA, IOL 8 mA"

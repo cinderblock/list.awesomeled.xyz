@@ -8,12 +8,16 @@ aliases:
   - TXU0104DTRR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
+electrical:
+  input_high_voltage: 1.92V
+  input_high_voltage_notes: 'Dual supply: Schmitt-trigger inputs; the upper threshold (VT+ max) with the input side at 3 V'
 images:
   - file: txu0104.webp
     source: https://www.ti.com/product/TXU0104
     credit: Texas Instruments
 io:
   channels: 4
+  buffered: true
 links:
   product: https://www.ti.com/product/TXU0104
 price:
@@ -33,3 +37,11 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
     retrieved: '2026-11-18'
     notes: 'TI datasheet SCES937B: title + Package Option Addendum (PW = TSSOP-14, BQA = WQFN, RUT = UQFN, DTR = X2QFN)'
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCES937B, 5.5 Electrical Characteristics: positive-going input threshold VT+ 1.48 V min / 1.92 V max at VCCI = 3 V (2.19 V / 2.74 V at 4.5 V)'
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCES937B: title '4-Bit Fixed Direction Voltage-Level Translator with Schmitt-Trigger Inputs and 3-State Outputs'; Features: 'High drive strength (up to 12mA at 5V)'"

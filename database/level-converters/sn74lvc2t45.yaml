@@ -7,12 +7,16 @@ aliases:
   - SN74LVC2T45YZPR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
+electrical:
+  input_high_voltage: 2V
+  input_high_voltage_notes: 'Dual supply: with the input side on 3 V to 3.6 V. On a 4.5 V to 5.5 V input side it is 0.7 × that supply.'
 images:
   - file: sn74lvc2t45.webp
     source: https://www.ti.com/product/SN74LVC2T45
     credit: Texas Instruments
 io:
   channels: 2
+  buffered: true
 links:
   product: https://www.ti.com/product/SN74LVC2T45
 price:
@@ -32,3 +36,11 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
     retrieved: '2026-11-18'
     notes: 'TI datasheet SCES516N: title + Package Option Addendum (DCT = SSOP-8, DCU = VSSOP-8, YZP = DSBGA-8)'
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCES516N, Recommended Operating Conditions: VIH data inputs min 2 V at VCCI = 3 V to 3.6 V; VCCI × 0.7 at 4.5 V to 5.5 V'
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCES516N: title 'Dual-Bit Dual-Supply Bus Transceiver With Configurable Voltage Translation and 3-State Outputs'; IOH -32 mA at VCCO = 4.5 V to 5.5 V"

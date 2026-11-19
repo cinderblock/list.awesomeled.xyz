@@ -9,12 +9,16 @@ aliases:
   - TXS0108ERKSR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
+electrical:
+  input_high_voltage: 2.9V
+  input_high_voltage_notes: 'Dual supply: VCCA - 0.4 V on the A side, so 2.9 V with VCCA at 3.3 V'
 images:
   - file: txs0108e.webp
     source: https://www.ti.com/product/TXS0108E
     credit: Texas Instruments
 io:
   channels: 8
+  buffered: false
 links:
   product: https://www.ti.com/product/TXS0108E
 price:
@@ -37,3 +41,11 @@ sources:
   name:
     url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
     retrieved: '2026-11-18'
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCES642L, Recommended Operating Conditions: VIH A-port I/Os min VCCI - 0.4 V at VCCA = 1.95 V to 3.6 V'
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCES642L, 7.3: 'The device uses pass gate architecture with edge rate accelerators (one shots)'; 'a modest DC-current sourcing capability of hundreds of micro-amperes, as determined by the internal pull-up resistors'; 7.3.3: 'TI recommends careful PCB layout practices with short PCB trace lengths to avoid excessive capacitive loading'"
