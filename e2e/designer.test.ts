@@ -485,6 +485,34 @@ test.describe('System overview', () => {
   });
 });
 
+test.describe('Entry pages', () => {
+  test.beforeEach(async ({ page }) => withoutDraft(page));
+
+  test('a part page starts a design with that part in its slot', async ({ page }) => {
+    await page.goto('/controllers/falcon-f16v5');
+    await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+    await page.getByRole('link', { name: 'Use in the designer' }).click();
+    await expect(page.locator('.designer-page[data-ready]')).toBeVisible();
+    await expect(slot(page, 'g0-controller')).toContainText('Falcon F16V5');
+    await search(page).toContain('c=falcon-f16v5');
+  });
+
+  test('an adapter the designer can place links in; categories it has no slot for do not', async ({
+    page,
+  }) => {
+    await page.goto('/adapters/octows2811-adaptor');
+    await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+    await expect(page.getByRole('link', { name: 'Use in the designer' })).toHaveAttribute(
+      'href',
+      '/designer?c=ad-octows2811-adaptor'
+    );
+    await page.goto('/drive-libraries/fastled');
+    await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Use in the designer' })).toHaveCount(0);
+  });
+});
+
 test.describe('System Designer: on a phone', () => {
   test.use({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
   test.beforeEach(async ({ page }) => withoutDraft(page));

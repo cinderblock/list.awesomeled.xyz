@@ -17,10 +17,12 @@ import {
   Archive,
   AlertTriangle,
   Link2,
+  PencilRuler,
 } from 'lucide-react';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { parseFilters, getFilterDescription, FILTER_STORAGE_KEY } from '~/lib/table-state';
 import { CompareButton } from '~/components/compare/CompareTray';
+import { designerHref } from '~/lib/designer/links';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
 import { FeatureBadges, ValueBadges } from '~/components/ui/FeatureBadges';
@@ -94,6 +96,8 @@ export async function loader({ params }: Route.LoaderArgs) {
     nameLinks,
     siblings,
     connectorNames,
+    // Parts the System Designer can use get a link that starts a design with them
+    designer: designerHref(params.category, entry, graph),
   };
 }
 
@@ -526,6 +530,11 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
             <h1 className="page-title category-page-title">{entry.name}</h1>
             {status && <StatusBadge status={status} />}
             <CompareButton categoryId={category.id} entryId={String(entry.id)} name={entry.name} />
+            {loaderData.designer && (
+              <Link className="btn btn--outline btn--sm" to={loaderData.designer}>
+                <PencilRuler size={14} aria-hidden="true" /> Use in the designer
+              </Link>
+            )}
           </div>
           {entry.creator ? (
             <CreatorLine

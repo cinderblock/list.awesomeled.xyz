@@ -10,6 +10,7 @@
  *   embed       designs embedded in exported SVG / PNG files
  *   diagram     geometry of the system diagram
  *   examples    starter designs
+ *   links       links into the designer from entry pages
  *   format      number formatting
  */
 
@@ -22,4 +23,5 @@ export * from './bom';
 export * from './embed';
 export * from './diagram';
 export * from './examples';
+export * from './links';
 export * from './format';

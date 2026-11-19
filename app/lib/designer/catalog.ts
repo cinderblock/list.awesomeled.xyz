@@ -955,6 +955,14 @@ export function buildSourceOption(entry: BaseEntry): SourceOption {
   };
 }
 
+/**
+ * Sources that can neither send a control protocol nor run on a board give
+ * the designer nothing to check against, so it doesn't offer them.
+ */
+export function isUsableSource(source: SourceOption): boolean {
+  return source.outputProtocols.length > 0 || source.hardware.length > 0;
+}
+
 // ---------------------------------------------------------------------------
 // The catalog
 
@@ -1018,12 +1026,7 @@ export function buildCatalog(db: Database, graph?: RelationGraph): Catalog {
     hosts,
     shifters: entries('level-converters').map(buildShifterOption).sort(byName),
     connectors: entries('connectors').map(buildConnectorOption).sort(byName),
-    // Sources that can neither send a control protocol nor run on a board
-    // give the designer nothing to check against
-    sources: entries('pattern-drivers')
-      .map(buildSourceOption)
-      .filter((s) => s.outputProtocols.length > 0 || s.hardware.length > 0)
-      .sort(byName),
+    sources: entries('pattern-drivers').map(buildSourceOption).filter(isUsableSource).sort(byName),
   };
 }
 
