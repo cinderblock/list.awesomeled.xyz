@@ -309,6 +309,7 @@ const SKIPPED_PATHS = [
   /^related_/,
   /^variants$/,
   /^price_source$/,
+  /^sources$/, // per-field provenance, shown under each field on entry pages
   /^physical\.package_sizes$/, // shown through physical.package_size
   /^datasheet\.mirror(\.|$)/,
   /^datasheet\.sources$/,
