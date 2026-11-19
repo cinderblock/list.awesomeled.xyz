@@ -1,0 +1,132 @@
+name: Falcon F16V3
+status: discontinued
+release_year: 2017
+creator:
+  name: PixelController, LLC
+  url: https://pixelcontroller.com
+  page: https://pixelcontroller.com/store/discontinued-products/48-f16v3.html # formerly https://pixelcontroller.com/store/products/48-f16v3.html, which redirects here
+notes: 16-output E1.31/Art-Net pixel controller; one or two expansion boards raise it to 32 or 48 outputs that share the same pixel budget. Succeeded by the F16V4.
+inputs:
+  physical:
+    Ethernet: Dual # 2-port switch for daisy-chaining
+    Wi-Fi: 2.4GHz # ESP-07 module; partial configuration only, no E1.31/Art-Net/DDP input
+  protocols:
+    - Art-Net
+    - sACN # E1.31
+    - DDP # firmware 2.58+
+    - ZCPP
+  standalone: true # FPP remote mode plays FSEQ sequences from microSD
+outputs:
+  count: 16 # 32 or 48 with one or two expansion boards
+  connector:
+    ref: mtsb-combicon
+    pins: 4
+    notes: 3.5 mm pitch pluggable screw terminal
+  fuse: Mini-ATO blade, 5 A per output
+  current:
+    max: 5
+  driver:
+    buffered: true # sheet value, not verified
+  pixels:
+    max_per_output: 1024
+    max_total: 16320 # 96 universes; the 2017 manual says 16,384
+  clocked: selectable # WS2801, APA102, LPD6803 etc. alongside WS2811-type
+  auxiliary:
+    DMX512: 4 # RS-485 (DMX/Renard/Pixelnet/LOR): three RJ45 jacks plus a 3-pin header
+power:
+  connector: Screw terminals for two pixel-power banks (V1 = outputs 1-8, V2 = outputs 9-16), up to 10 AWG
+  voltage:
+    min: 5
+    max: 13 # 13-24 V pixels need the R92 board modification
+  current:
+    max: 60 # two banks x 30 A
+data:
+  storage:
+    - type: uSD
+features:
+  - 128x64 OLED display with five navigation buttons
+  - Per-output fuse-good LEDs
+  - Two pixel-power banks that can run different voltages
+  - Pixel-voltage monitoring and three temperature sensors
+  - Pluggable resistor banks
+other_links:
+  - https://docs.google.com/document/d/1S67ZVLgQRYsdqPhgfPkQucnFXvu1FmQAME9qnK5RixU/
+  - https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+  - https://docs.google.com/document/d/1pfd9Wxm8Asw2FAdOMr8-Nda2d8eqW-mp7sF7ticACeI/edit
+  - https://pixelcontroller.com/store/content/9-f16v3-pixel-controller
+price: 250
+price_source:
+  retrieved: '2026-11-18'
+  vendor: PixelController, LLC
+  url: https://pixelcontroller.com/store/discontinued-products/48-f16v3.html
+  notes: last list price, out of stock; USD 200 in the 2018-2019 store
+related:
+  - type: replacement
+    ref: controllers/falcon-f16v4
+    source:
+      url: https://auschristmaslighting.com/wiki/F16V3
+      retrieved: '2026-11-18'
+      notes: '"no longer available"; successor is the F16v4'
+sources:
+  status:
+    url: https://pixelcontroller.com/store/discontinued-products/48-f16v3.html
+    retrieved: '2026-11-18'
+    notes: listed under Discontinued Products, out of stock
+  release_year:
+    url: https://docs.google.com/document/d/1S67ZVLgQRYsdqPhgfPkQucnFXvu1FmQAME9qnK5RixU/
+    retrieved: '2026-11-18'
+    notes: F16v3 manual Rev 1.02, 5 July 2017
+  inputs.physical:
+    - url: https://pixelcontroller.com/store/discontinued-products/48-f16v3.html
+      retrieved: '2026-11-18'
+      notes: 2-port switch; ESP-07 Wi-Fi module
+    - url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+      retrieved: '2026-11-18'
+      notes: Controller Specifications Rev 3.0 (Jul 2023), built-in Wi-Fi row
+  inputs.protocols:
+    - url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+      retrieved: '2026-11-18'
+      notes: E1.31/Art-Net, DDP and ZCPP rows
+    - url: https://docs.google.com/document/d/1xcEewFtAJ8EzxstdH9H6LRlWAlYiTKY2z8ymwAUN_-Q
+      retrieved: '2026-11-18'
+      notes: F16V3/F48/F4V3 firmware release notes (DDP added in 2.58)
+  outputs.count:
+    url: https://docs.google.com/document/d/1S67ZVLgQRYsdqPhgfPkQucnFXvu1FmQAME9qnK5RixU/
+    retrieved: '2026-11-18'
+    notes: Features, 16 outputs, up to 48 with two expansion boards
+  outputs.connector:
+    url: https://docs.google.com/document/d/1S67ZVLgQRYsdqPhgfPkQucnFXvu1FmQAME9qnK5RixU/
+    retrieved: '2026-11-18'
+    notes: 4-pin 3.5 mm pitch pluggable screw terminal blocks
+  outputs.fuse:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+    retrieved: '2026-11-18'
+  outputs.pixels.max_total:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+    retrieved: '2026-11-18'
+    notes: Max pixels per board
+  outputs.clocked:
+    url: https://pixelcontroller.com/store/discontinued-products/48-f16v3.html
+    retrieved: '2026-11-18'
+    notes: String Types list
+  outputs.auxiliary:
+    url: https://pixelcontroller.com/store/discontinued-products/48-f16v3.html
+    retrieved: '2026-11-18'
+    notes: 4 dedicated RS-485 outputs, 3 RJ45 and one 3-pin connector
+  power.voltage.max:
+    url: https://docs.google.com/document/d/1S67ZVLgQRYsdqPhgfPkQucnFXvu1FmQAME9qnK5RixU/
+    retrieved: '2026-11-18'
+    notes: Sections 2.1 and 12 (5-13 V; 13-24 V after removing R92; above 24 V may damage the controller)
+  power.current.max:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+    retrieved: '2026-11-18'
+    notes: 30 A per bank, 2 banks (the 2017 manual rates each connector 32 A)
+  data.storage:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+    retrieved: '2026-11-18'
+    notes: Stand Alone Player rows (microSD sequence upload)
+technical_notes:
+  - 96 universes of E1.31/Art-Net (49,152 channels)
+  - With expansion boards each port's 1024-pixel budget is shared between main-board and expansion outputs
+  - Differential expansion boards drive remote 4-string receivers up to about 75 m away
+  - 13-24 V pixels need resistor R92 removed, which disables the fuse LEDs; above 24 V may damage the board

@@ -1,0 +1,118 @@
+name: Pixel Octo
+status: discontinued
+creator:
+  name: ENTTEC
+  url: https://www.enttec.com
+  page: https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/
+notes: ENTTEC 71520, the original 8-universe DIN-rail Ethernet-to-pixel controller with two 4-universe outputs. Superseded by the OCTO MK2 (71521).
+inputs:
+  physical:
+    Ethernet: Dual # 2x RJ45, daisy-chain up to 50 units
+    buttons: 1 # identify/test button
+  protocols:
+    - Art-Net
+    - sACN
+    - KiNET
+    - ESP # ENTTEC Show Protocol
+  standalone: true # Fx generator plays a stored preset from power-up
+outputs:
+  count: 2
+  connector:
+    ref: mtsb-combicon
+    pins: 4
+    notes: pluggable Phoenix terminal block
+  driver:
+    buffered: true # sheet value, not verified
+  pixels:
+    max_per_output: 680 # RGB (4 universes); 512 RGBW
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
+    - SK6812
+    - TM1804
+    - TM1812
+    - TM1814
+    - APA102
+    - APA104
+    - 9PDOT
+  clocked: selectable # 3-wire and 4-wire (clock) LED protocols
+power:
+  connector: 2-pin pluggable Phoenix terminal
+  voltage:
+    min: 4
+    max: 60
+case:
+  dimensions: 103x69x58mm
+  material: Aluminium
+  mounting: 35 mm DIN rail (4 modules)
+  waterproof: IP20
+datasheet:
+  url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+dead_links:
+  - url: https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/
+    archive: https://web.archive.org/web/20190723230438/https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/
+    checked: '2026-11-18'
+features:
+  - Wide 4-60 V DC input; can be back-fed from the pixel strip's supply
+  - Identify button checks the wiring without a network input
+  - Temperature and network-traffic monitoring in the web interface
+  - Fx generator with a 100-slot preset library (14 factory effects)
+other_links:
+  - https://support.enttec.com/legacy-product/legacy-products/pixel-octo-71520-legacy-product
+  - https://dol2kh495zr52.cloudfront.net/pdf/manuals/Pixel_Octo_UM+(Feb+2019).pdf
+price: 400
+price_source:
+  retrieved: '2019-07-23'
+  vendor: ENTTEC
+  url: https://web.archive.org/web/20190723230438/https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/
+  notes: list price on ENTTEC's product page (archived)
+related:
+  - type: replacement
+    ref: controllers/octo-mk2
+    source:
+      url: https://support.enttec.com/legacy-product/legacy-products/pixel-octo-71520-legacy-product
+      retrieved: '2026-11-18'
+      notes: superseded by the OCTO Mk2 LED Pixel Controller (71521)
+sources:
+  status:
+    url: https://support.enttec.com/legacy-product/legacy-products/pixel-octo-71520-legacy-product
+    retrieved: '2026-11-18'
+  inputs.protocols:
+    url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    retrieved: '2026-11-18'
+  inputs.physical:
+    url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    retrieved: '2026-11-18'
+    notes: 2 x RJ45, daisy chain up to 50 devices
+  outputs.count:
+    url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    retrieved: '2026-11-18'
+    notes: 2 x 4-pin output Phoenix connectors; up to 8 universes, 4 per output
+  outputs.pixels.max_per_output:
+    url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    retrieved: '2026-11-18'
+    notes: 680 RGB or 512 RGBW pixels per output
+  outputs.protocols:
+    url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    retrieved: '2026-11-18'
+  outputs.clocked:
+    url: https://web.archive.org/web/20190723230438/https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: 3-wire and 4-wire (CLK) LED protocols
+  power.voltage.max:
+    url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    retrieved: '2026-11-18'
+    notes: Input Voltage 4-60V DC
+  case.dimensions:
+    url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    retrieved: '2026-11-18'
+  case.waterproof:
+    url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    retrieved: '2026-11-18'
+technical_notes:
+  - Up to 8 universes of DMX over Ethernet, at most 4 per output (2048 channels per output)
+  - 5 W maximum power consumption; operating temperature -10 to 60 °C
+  - Datasheet and user manual dated February 2019, firmware v1.2 (Feb 2019)

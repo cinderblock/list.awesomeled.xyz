@@ -1,0 +1,119 @@
+name: Elite 4D-EXMU
+status: active
+release_year: 2025
+creator:
+  name: GLEDOPTO
+  url: https://www.gledopto.com
+  page: https://www.gledopto.com/gl-c-618wl.html
+vendors:
+  - name: LED-Trading (gledopto.eu)
+    url: https://www.gledopto.eu
+    page: https://www.gledopto.eu/gledopto-gl-c-618wl-wled-controller-en
+notes: GLEDOPTO GL-C-618WL, a 4-output ESP32 WLED controller with Wi-Fi and Ethernet, a built-in microphone and a relay that cuts strip power when the lights are off. 4-output sibling of the Elite 2D-EXMU (GL-C-616WL).
+inputs:
+  physical:
+    Wi-Fi: 2.4GHz
+    Ethernet: true # LAN8720 PHY; WLED Ethernet type "Gledopto Series With Ethernet"
+    USB: USB-C # 5 V / 3 A power input and UART firmware flashing
+    Microphone: PDM # WLED AudioReactive, Generic I2S PDM (SD GPIO32, WS GPIO15)
+    buttons: 1 # function button on GPIO17
+  standalone: true # runs WLED
+outputs:
+  count: 4 # data on GPIO16, GPIO12, GPIO4 and GPIO2
+  connector: Wago lever-operated spring terminals (0.34-4 mm², 22-12 AWG)
+  current:
+    max: 10 # per channel; 15 A total
+  driver:
+    buffered: true # TI level shifter to 5 V data
+  clocked: false # maker lists single-wire chips only
+  auxiliary:
+    GPIO: 1 # IO13 DIY port for push buttons, switches or sensors
+power:
+  connector: V+/V- screw terminal (15 A max), 5.5 x 2.1 mm DC socket or USB-C
+  voltage:
+    min: 5
+    max: 24
+  current:
+    max: 15
+case:
+  color: White
+  dimensions: 129x50x23mm
+  material: Flame-retardant PC
+  waterproof: IP20
+core:
+  family: ESP32
+datasheet:
+  url: https://www.gledopto.com/618wl-manual-en.pdf
+features:
+  - Built-in PDM microphone for WLED AudioReactive effects
+  - Relay (GPIO18) cuts power to the strips when the lights are switched off
+  - 20 A pluggable mini blade fuse (spare 5 A fuse included)
+  - Reverse-polarity and ESD protection
+  - Toggle switch selects the data-line resistor for signal calibration
+price:
+  amount: 32.99
+  currency: EUR
+price_source:
+  retrieved: '2026-11-18'
+  vendor: LED-Trading (gledopto.eu)
+  url: https://www.gledopto.eu/gledopto-gl-c-618wl-wled-controller-en
+  notes: incl. 19% VAT
+software:
+  firmware:
+    - WLED
+sources:
+  release_year:
+    - url: https://www.gledopto.com/618wl-manual-en.pdf
+      retrieved: '2026-11-18'
+      notes: English manual PDF created 2025-11-05
+    - url: https://github.com/wled/WLED/pull/5156
+      retrieved: '2026-11-18'
+      notes: WLED Ethernet support for GL-C-616WL and GL-C-618WL, merged 2025-12-13
+  outputs.count:
+    url: https://www.gledopto.com/618wl-manual-en.pdf
+    retrieved: '2026-11-18'
+    notes: Wiring Terminal Instructions, up to four digital LED strips
+  outputs.current.max:
+    url: https://www.gledopto.eu/mediafiles/anleitungen/7020-gl-c-618wl-de.pdf
+    retrieved: '2026-11-18'
+    notes: Produktparameter, 10 A max per channel, 15 A max total
+  outputs.clocked:
+    url: https://www.gledopto.com/618wl-manual-en.pdf
+    retrieved: '2026-11-18'
+    notes: Supported Chips lists only single-wire ICs
+  outputs.connector:
+    url: https://www.gledopto.com/gl-c-618wl.html
+    retrieved: '2026-11-18'
+  outputs.driver.buffered:
+    url: https://www.gledopto.com/gl-c-618wl.html
+    retrieved: '2026-11-18'
+    notes: TI level shifter IC
+  inputs.physical:
+    - url: https://www.gledopto.com/618wl-manual-en.pdf
+      retrieved: '2026-11-18'
+      notes: Ethernet, mic, function button and Type-C sections
+    - url: https://github.com/wled/WLED/pull/5156
+      retrieved: '2026-11-18'
+      notes: LAN8720 Ethernet PHY settings for GL-C-616WL and GL-C-618WL
+  power.voltage.max:
+    url: https://www.gledopto.com/618wl-manual-en.pdf
+    retrieved: '2026-11-18'
+  power.current.max:
+    url: https://www.gledopto.com/618wl-manual-en.pdf
+    retrieved: '2026-11-18'
+  case.waterproof:
+    url: https://www.gledopto.com/gl-c-618wl.html
+    retrieved: '2026-11-18'
+  case.dimensions:
+    url: https://www.gledopto.com/618wl-manual-en.pdf
+    retrieved: '2026-11-18'
+  core.family:
+    url: https://github.com/GLEDOPTO/WLED/releases
+    retrieved: '2026-11-18'
+    notes: GLEDOPTO's WLED builds ship as GL-C-618WL_<version>_ESP32_Ethernet.bin
+technical_notes:
+  - 'Manual: "Recommended 1600 IC Max" (it does not say whether per output or in total)'
+  - 'Supported chips (manual): WS2805, WS2811, WS2811F, WS2812B, WS2814A, WS2815, SK6812, SM16703, SM16703SP3, FL19038, FW1935, UCS2903B; the product page adds WS2813, GS8208 and TM1814'
+  - The USB-C port takes 5 V / 3 A from a wall adapter, not a PC USB port
+  - Operating temperature -20 to 45 °C
+wled_compatible: true

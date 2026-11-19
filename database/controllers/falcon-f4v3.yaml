@@ -1,9 +1,11 @@
 name: Falcon F4V3
 status: discontinued
+release_year: 2018
 creator:
   name: PixelController, LLC
   url: https://pixelcontroller.com
   page: https://pixelcontroller.com/store/content/11-f4v3-pixel-controller
+notes: 4-output E1.31/Art-Net pixel controller that replaced the F4V2 in 2018; a differential expansion board and two 4-string receivers add 8 remote outputs.
 inputs:
   physical:
     Ethernet: 2
@@ -14,18 +16,21 @@ inputs:
     - Art-Net
     - DDP
     - ZCPP
-  standalone: true # Falcon Player (FPP) remote mode plays from SD
+  standalone: true # FPP remote mode plays FSEQ sequences from microSD
 outputs:
   count: 4 # built-in; 12 with expansion boards or receivers
   connector:
     ref: mtsb-combicon
-  clocked: selectable # supports Single and Clock pixel types
+  fuse: Mini-ATO blade, 5 A per output
+  current:
+    max: 5
+  clocked: selectable # WS2801, APA102, LPD6803 etc. alongside WS2811-type
   pixels:
     max_per_output: 1024 # 12288 pixels per board
   driver:
-    buffered: true
+    buffered: true # sheet value, not verified
   auxiliary:
-    DMX512: 1
+    DMX512: 1 # RS-485 on RJ45 (DMX, Pixelnet or Renard)
   protocols:
     - WS2801
     - WS2803
@@ -53,12 +58,24 @@ outputs:
     - UCS2903
 power:
   voltage:
+    min: 5
     max: 13
-  current:
-    max: 60
 data:
   storage:
     - type: microSD
+dead_links:
+  - url: https://www.pixelcontroller.com/store/index.php?id_product=51&controller=product
+    archive: https://web.archive.org/web/20211027062744/https://www.pixelcontroller.com/store/controllers/51-f4v2-pixel-controller.html
+    checked: '2026-11-18'
+    notes: Now redirects to a "no longer available" page; the archive is the same product page under its 2021 URL
+features:
+  - 128x64 OLED display with five navigation buttons
+  - Per-output fuse-good LEDs
+  - Real-time clock (battery not supplied)
+  - Pluggable resistor banks
+other_links:
+  - https://www.pixelcontroller.com/store/index.php?id_product=51&controller=product
+  - https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
 price: 125
 price_source:
   notes: last list price (assembled board), from the vendor's archived product page; "This product is no longer in stock" at capture
@@ -79,9 +96,24 @@ software:
     - HLS
 sources:
   status:
-    url: https://auschristmaslighting.com/wiki/Falcon-F4v3
+    - url: https://auschristmaslighting.com/wiki/Falcon-F4v3
+      retrieved: '2026-11-18'
+      notes: listed under "Discontinued Pixel Controllers"; vendor store product page (ID 51) now 404 and absent from every store category; listed under Discontinued Pixel Controllers; the PixelController store's product page now reads "This product is no longer available"
+  release_year:
+    url: https://web.archive.org/web/20180910170900/https://www.pixelcontroller.com/store/index.php?id_product=51&amp;controller=product
     retrieved: '2026-11-18'
-    notes: 'listed under "Discontinued Pixel Controllers"; vendor store product page (ID 51) now 404 and absent from every store category'
+    notes: Sept 2018 store listing, "Customers that placed an order for F4V2 this year will receive the new F4V3"
+  inputs.physical:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+    retrieved: '2026-11-18'
+    notes: Controller Specifications Rev 3.0 (Jul 2023), Onboard Ethernet Ports and built-in Wi-Fi rows
+  inputs.protocols:
+    - url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+      retrieved: '2026-11-18'
+      notes: E1.31/Art-Net, DDP and ZCPP rows
+    - url: https://docs.google.com/document/d/1xcEewFtAJ8EzxstdH9H6LRlWAlYiTKY2z8ymwAUN_-Q/
+      retrieved: '2026-11-18'
+      notes: F16V3/F48/F4V3 firmware release notes (DDP added in 2.58)
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
       retrieved: '2026-11-18'
@@ -94,14 +126,40 @@ sources:
     retrieved: '2026-11-18'
     notes: Controller Specifications sheet Rev 3.0 Jul 2023, 'Pixel Protocols' rows, F4v3 column (read from the xlsx export with merged cells expanded).
   outputs.count:
-    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+    - url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+      retrieved: '2026-11-18'
+      notes: 'Falcon spec sheet, F4v3 column: Pixel Outputs 4 built-in, 12 with expansion'
+    - url: https://web.archive.org/web/20211027062744/https://www.pixelcontroller.com/store/controllers/51-f4v2-pixel-controller.html
+      retrieved: '2026-11-18'
+      notes: 4 strings, or 12 with the expansion board, 1024 pixels per string
+  outputs.fuse:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
     retrieved: '2026-11-18'
-    notes: 'Falcon spec sheet, F4v3 column: Pixel Outputs 4 built-in, 12 with expansion'
+  outputs.clocked:
+    url: https://web.archive.org/web/20211027062744/https://www.pixelcontroller.com/store/controllers/51-f4v2-pixel-controller.html
+    retrieved: '2026-11-18'
+    notes: String Types list
+  outputs.auxiliary:
+    url: https://web.archive.org/web/20211027062744/https://www.pixelcontroller.com/store/controllers/51-f4v2-pixel-controller.html
+    retrieved: '2026-11-18'
+    notes: One DMX, Pixelnet or Renard RS-485 output
   outputs.pixels.max_per_output:
     url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
     retrieved: '2026-11-18'
     notes: 'Falcon spec sheet, F4v3 column: Pixels per output 1024, max 12288 per board'
   power.voltage.max:
-    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+    - url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+      retrieved: '2026-11-18'
+      notes: 'Falcon spec sheet, F4v3 column: Voltage Range 5-13v DC'
+    - url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
+      retrieved: '2026-11-18'
+      notes: Voltage Range 5-13 V; Controller powered by external power input 5-24 V
+  data.storage:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing
     retrieved: '2026-11-18'
-    notes: 'Falcon spec sheet, F4v3 column: Voltage Range 5-13v DC'
+    notes: Stand Alone Player rows (microSD sequence upload)
+technical_notes:
+  - 73 universes of E1.31/Art-Net (37,376 channels) per the 2023 spec sheet; the store page said 64 universes
+  - With the expansion board, 12 outputs x 1024 pixels, up to 12,288 pixels per board
+  - The store page said the board runs from 5-24 V pixel power; the 2023 spec sheet gives 5-13 V for pixel power and 5-24 V for the separate controller power input
+  - pixelcontroller.com's F4V3 support page links the F16V3 manual as its user manual; no F4V3-specific manual is published
