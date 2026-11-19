@@ -127,6 +127,9 @@ Brief: `.research/NEW-ENTRIES.md`. Output: `.research/new/<category>/<slug>.yaml
 - Brand names controllers use: "NeoPixel" (Adafruit's brand for WS2812-protocol pixels) and "DotStar" (Adafruit's name for APA102-compatible LEDs) are aliases on `pixels/ws2812` and `pixels/apa102`, sourced from Adafruit's guides; family expansion then covers the rest of each protocol family.
 - The slug `microboards/raspberry-pi-3-model-b` belongs to the 3 Model B+ entry, so the new original 3 Model B is `raspberry-pi-3b`. The B+ declares it as its `predecessor` (newer entry declares, per BRIEF.md).
 - New-entry agents wrote microboards in the pre-tightening style; stream 2 made the microboard schema stricter the same day (`compute.flash` a memory size only, removable cards in `io.storage`; `connectivity.wifi` a list of bands; enums for `isa`, `ethernet`, `poe`, `bms`). Converted on integration: lists for Wi-Fi bands and RAM variants, `flash: microSD` dropped, "Gigabit" → `1000BASE-T`, PoE HAT → `add-on`.
+- Table payloads: `sources` was 339 of 1153 kB across all category tables (27–44% per research-heavy category) and tables never show it. The table route now loads through `loadCategoryTableData` (drops `sources`); exports and entry pages keep it. controllers.data 299 → 226 kB.
+- Local e2e under load: with research agents, a dev server and Playwright workers sharing the machine, `/controllers` takes ~8 s per dev-mode load, so tests that load it several times (mobile header: four widths in one 30 s budget) time out. Every failure was a navigation/hydration timeout that passed when re-run alone, except one console-error 404 caused by adding entries while the e2e server was running (its prerender list predates them). Run the final suite with the machine otherwise idle.
+- Names deliberately left unresolved (no source equates them): "UCS512" (Lianxinke's series name, which includes differential parts), "DMX512-D" (the differential protocol, while `pixel-ics/dmx512` is single-wire), "NS107" (Newstar sells only NS107S / NS107S-SA), "D707"/"D708", "WS28xx", "NeoPixels".
 - ESLint lints the git-ignored `.research/` too (it doesn't read `.git/info/exclude`), so staged entries with lint errors failed the local ship script; it now runs `eslint . --ignore-pattern '.research/**'`, matching what CI sees.
 - Research found several entries that were wrong beyond links (column-shifted sheet rows, wrong makers, output counts that were DMX universes); spec values outside this stream's fields went to ISSUES.md for streams 2 and 6 rather than being edited here.
 
@@ -197,7 +200,10 @@ Unresolved names (24 distinct, 50 uses): FPP ×18, DMX ×5, Raspberry Pi ×4, An
 - [x] 2026-11-18: all 15 batches applied and pushed, each a review commit plus a corrections commit: software ↔ hardware (`53e14cd`, `b3e5fea`), Advatek / DMXking (`d06a9da`, `6db00d3`), LED Strip Studio / ProtoPixel / RocketLife (`1ea6142`), WLED / ESP (`794114f`), pro / stage (`cbcc0be`), pixel ICs (`62d686a`), pixels (`d84d17a`, `8312a25`), Falcon / Kulp (`9ea88f0`, `08d3a64`), HolidayCoro and hobby (`083ebca`, `943342f`, `dabde25`), ENTTEC / DiGidot / Deskontrol (`457af9f`, `3b97340`), SP-series / Diamex (`dcb5674`, `093c845`), drive libraries (`c41def6`), adapters / decoders (`db0559d`, `f58a359`), boards / level converters (`33d1371`), connectors / commercial / diffusers (`766e632`, `f57a6f4`), WS2816A / DMX512-P (`bbd5320`).
 - [x] 2026-11-18: legacy `related_*` retired (`1ae1a4d`, ignored in `0b6d14a`); ISSUES.md entries for spec corrections (`1791181`) and the two pixel-less "controllers".
 - [x] 2026-11-18: UI pass at real data volume + `tests/unit/relations.test.ts`.
-- [ ] New entries for missing parts (step 9), then after-stats and close-out.
+- [x] 2026-11-18: comma-separated host lists resolve (`fieldNames`); aliases Raspberry Pi 4 / Zero, NeoPixel, DotStar.
+- [x] 2026-11-18: new entries, wave 1: 27 pixel parts, 18 boards / buffers / libraries / connectors; 45 sourced links they unlock; connector strings → refs (Not-A-Review trailer).
+- [x] 2026-11-18: new entries, wave 2: 22 pixel parts (batches C, D); table payloads drop `sources`.
+- [ ] Software entries (agent running), then after-stats and close-out.
 
 ## Open questions for the user
 
