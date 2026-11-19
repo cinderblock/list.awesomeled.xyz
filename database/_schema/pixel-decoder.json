@@ -82,6 +82,19 @@
     "diy_or_ots": {
       "type": ["string", "null"]
     },
+    "inputs": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "protocols": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          },
+          "description": "Pixel protocols / ICs the decoder accepts on its data input (WS2811, WS2814, …), as the vendor names them. Resolved to pixels / pixel-ics entries like a controller's outputs.protocols."
+        }
+      }
+    },
     "outputs": {
       "type": ["object", "null"],
       "additionalProperties": false,

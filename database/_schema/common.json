@@ -250,7 +250,7 @@
     },
     "related": {
       "type": ["array", "null"],
-      "description": "Related products (replacement, predecessor, variant, accessory, etc.). For a discontinued product, a `replacement` item points at its successor. Declare each relationship on one side only; detail pages derive the reverse direction automatically.",
+      "description": "Curated links to other products. Family: `replacement` (successor of a discontinued product), `predecessor`, `variant`, `accessory`, `related`. Compatibility: `uses` (built around / contains it: a buffer IC, a pixel IC, a module), `host` (plugs into or runs on it: a shield's dev board, a cape's BeagleBone), `compatible` (protocol-, pin- or mating-compatible). Declare each relationship on one side only; detail pages derive the reverse direction automatically (app/lib/relations.ts). Put the source (datasheet/vendor page) in `notes` when the link isn't obvious from the two entries.",
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -259,7 +259,16 @@
         "properties": {
           "type": {
             "type": "string",
-            "enum": ["replacement", "predecessor", "variant", "accessory", "related"]
+            "enum": [
+              "replacement",
+              "predecessor",
+              "variant",
+              "accessory",
+              "related",
+              "uses",
+              "host",
+              "compatible"
+            ]
           },
           "ref": {
             "type": "string",

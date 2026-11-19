@@ -9,6 +9,13 @@
     "name": {
       "type": "string"
     },
+    "aliases": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      },
+      "description": "Other part numbers / names for the same device (vendor prefixes, package suffixes). Name references elsewhere (a controller's outputs.driver.IC) resolve against name and aliases."
+    },
     "status": {
       "anyOf": [
         {

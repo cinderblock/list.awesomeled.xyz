@@ -9,6 +9,13 @@
     "name": {
       "type": "string"
     },
+    "aliases": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      },
+      "description": "Other names this part is sold or listed under (alternate spellings, rebrands, clone part numbers). Name references elsewhere (a controller's outputs.protocols, a library's supported_ics) resolve against name, aliases and variants[].name."
+    },
     "status": {
       "anyOf": [
         {
