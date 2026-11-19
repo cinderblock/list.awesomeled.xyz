@@ -15,7 +15,7 @@ compute:
 connectivity:
   wifi: 2.4GHz
   ethernet: 100BASE-TX
-  poe: Y
+  poe: optional (PoE module)
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
 images:
@@ -41,3 +41,7 @@ sources:
     url: https://www.waveshare.com/esp32-s3-eth.htm
     retrieved: '2026-11-18'
     notes: "order options: ESP32-S3-ETH-M = 'ESP32-S3-ETH with pre-soldered headers'; ESP32-S3-POE-ETH(-M) = same board + PoE module (-CAM-KIT bundles omitted)"
+  connectivity.poe:
+    url: https://www.waveshare.com/esp32-s3-eth.htm
+    retrieved: '2026-11-18'
+    notes: "'Optional For PoE Module And Camera Module'"

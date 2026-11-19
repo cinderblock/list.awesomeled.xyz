@@ -7,13 +7,11 @@ compute:
   cpu: 4× ARM Cortex-A7
   isa: ARMv7-A
   clock_speed: 1.6GHz
-  flash: microSD
+  flash: 8GB eMMC
   ram: 1GB
   linux: true
 connectivity:
-  wifi:
-    - 2.4GHz
-    - 5GHz
+  wifi: 2.4GHz
   ethernet: 100BASE-TX
   usb: OTG x1, 2.0 x3
 datasheet:
@@ -34,3 +32,12 @@ io:
   bms: 'No'
   imu: false
 price: 23.99
+sources:
+  compute.flash:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-PC-Plus.html
+    retrieved: '2026-11-18'
+    notes: "'TF card (Max. 32GB) • 8GB eMMC Flash'"
+  connectivity.wifi:
+    url: https://www.cnx-software.com/2016/06/09/orange-pi-pc-plus-quad-core-development-board-with-1gb-ram-8gb-emmc-flash-sells-for-20/
+    retrieved: '2026-11-18'
+    notes: 802.11 b/g/n Wi-Fi

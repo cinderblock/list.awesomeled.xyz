@@ -15,9 +15,9 @@ compute:
   soc: BCM2711
   cpu: 4× ARM Cortex-A72
   isa: ARMv8-A
-  clock_speed: 1.5GHz
+  clock_speed: 1.8GHz
   flash: microSD
-  ram: 1GB or 2GB or 4GB
+  ram: 1GB, 2GB, 3GB, 4GB or 8GB
   linux: true
 connectivity:
   wifi:
@@ -60,4 +60,11 @@ sources:
     notes: '"will remain in production until at least January 2034"'
   aliases:
     url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+  compute.clock_speed:
+    url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'Cortex-A72 (Arm v8) 64-bit SoC @ 1.8GHz' (later boards)"
+  compute.ram:
+    url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-product-brief.pdf
     retrieved: '2026-11-18'

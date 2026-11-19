@@ -13,7 +13,7 @@ compute:
   linux: false
 connectivity:
   wifi: 2.4GHz
-  bluetooth: '4.1'
+  bluetooth: false
   serial: true
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
@@ -40,3 +40,7 @@ sources:
     url: https://frightanic.com/iot/comparison-of-esp8266-nodemcu-development-boards/
     retrieved: '2026-11-18'
     notes: Marcel Stör (NodeMCU firmware maintainer) maps the unofficial 'V2' name to the official 2nd-generation devkit v1.0
+  connectivity.bluetooth:
+    url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: ESP8266EX is a Wi-Fi SoC; no Bluetooth

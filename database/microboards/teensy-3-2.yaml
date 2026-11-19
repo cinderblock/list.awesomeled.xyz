@@ -47,6 +47,6 @@ sources:
   status:
     url: https://www.pjrc.com/store/teensy32.html
     retrieved: '2026-11-18'
-    notes: '"Teensy 3.2 is Discontinued"'
+    notes: "'Teensy 3.2 is Discontinued'"
 technical_notes:
   - 'Max outputs: theoretically many more, but the common library for efficient hardware use is limited to 8'

@@ -13,7 +13,7 @@ compute:
   cpu: ARM Cortex-M7
   isa: ARMv7-M
   clock_speed: 600MHz
-  flash: 2048kB (64kB reserved for recovery & EEPROM emulation)
+  flash: 1984kB
   ram: 1024kB (512kB is "tightly coupled")
   linux: false
 connectivity:
@@ -41,3 +41,7 @@ sources:
     url: https://www.sparkfun.com/teensy-4-0.html
     retrieved: '2026-11-18'
     notes: 'in stock, $23.80 (PJRC: SparkFun now manufactures Teensy)'
+  compute.flash:
+    url: https://www.pjrc.com/store/teensy40.html
+    retrieved: '2026-11-18'
+    notes: "'1984K Flash, 1024K RAM'"

@@ -1,4 +1,4 @@
-name: Beaglebone Black
+name: BeagleBone Black
 status: active
 release_year: 2012
 creator:
@@ -41,8 +41,7 @@ io:
 price: 53.77
 price_source:
   notes: >-
-    qty-1 price from a Wayback capture of Digi-Key's page (live Digi-Key, Mouser and Newark pages block scripts);
-    Adafruit and SparkFun have retired their listings
+    qty-1 price from a Wayback capture of Digi-Key's page (live Digi-Key, Mouser and Newark pages block scripts); Adafruit and SparkFun have retired their listings
   part: 2820-102110420-ND
   retrieved: '2026-03-10'
   url: https://web.archive.org/web/20260310095517/https://www.digikey.com/en/products/detail/beagleboard-by-seeed-studio/102110420/12719590
@@ -52,3 +51,6 @@ sources:
     url: https://www.beagleboard.org/boards/beaglebone-black
     retrieved: '2026-11-18'
     notes: 'current board page with buy links (Digi-Key, Mouser, Newark); Digi-Key had 3,522 in stock in Mar 2026'
+  name:
+    url: https://www.beagleboard.org/boards/beaglebone-black
+    retrieved: '2026-11-18'

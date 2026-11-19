@@ -1,4 +1,4 @@
-name: TXS0108e
+name: TXS0108E
 status: active
 creator: Texas Instruments
 aliases:
@@ -34,3 +34,6 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
     retrieved: '2026-11-18'
     notes: 'TI datasheet SCES642L: title + Package Option Addendum (PW = TSSOP-20, RGY/RKS = VQFN, DGS = VSSOP, NME = NFBGA)'
+  name:
+    url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
+    retrieved: '2026-11-18'

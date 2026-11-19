@@ -1,5 +1,5 @@
 name: Raspberry Pi 2 Model B v1.2
-status: discontinued
+status: end-of-life
 creator:
   name: Raspberry Pi Foundation
   page: https://www.raspberrypi.com/products/raspberry-pi-2-model-b/
@@ -57,8 +57,8 @@ related:
       retrieved: '2026-11-18'
 sources:
   status:
-    url: https://pip-assets.raspberrypi.com/categories/1283-eol-notices/documents/RP-009284-PC-3-Raspberry%20Pi%202%20Model%20B%20revision%201.1,%201.2.pdf
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
     retrieved: '2026-11-18'
-    notes: 'obsolescence notice for revs 1.1 and 1.2: EOL 16 Oct 2025, last time buy 28 Nov 2025, last time ship 30 Jun 2026'
+    notes: revisions 1.1 and 1.2 have reached end of life
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

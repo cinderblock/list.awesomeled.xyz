@@ -1,4 +1,4 @@
-name: t-eth-lite
+name: T-ETH-Lite
 status: active
 release_year: 2024
 creator:
@@ -7,14 +7,14 @@ creator:
 notes: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
 compute:
   soc: ESP32 S3
-  cpu: Xtensa LX6
+  cpu: Xtensa LX7
   isa: Xtensa
-  flash: microSD
+  flash: 16MB
 connectivity:
   wifi: 2.4GHz
   ethernet: 100BASE-TX
-  bluetooth: '4.1'
-  poe: 'Y'
+  bluetooth: 5 (LE)
+  poe: optional (PoE shield)
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf
 images:
@@ -22,7 +22,7 @@ images:
     source: https://lilygo.cc/products/t-eth-lite
     credit: LilyGO
 io:
-  max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
+  max_outputs: 4 # ESP32-S3: 4 RMT TX channels
 price: 14.88
 price_source:
   notes: ESP32-S3 variant [H674]; classic ESP32 variant [H673] $13.30; PoE shield [H675] $11.43 extra
@@ -35,3 +35,26 @@ sources:
     url: https://lilygo.cc/products/t-eth-lite
     retrieved: '2026-11-18'
     notes: 'ESP32-S3 variant available, $14.88'
+  name:
+    url: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
+    retrieved: '2026-11-18'
+  compute.cpu:
+    url: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: 'ESP32-S3: Xtensa 32-bit LX7 dual-core'
+  connectivity.bluetooth:
+    url: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: "'Bluetooth LE: Bluetooth 5, Bluetooth Mesh'"
+  compute.flash:
+    url: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
+    retrieved: '2026-11-18'
+    notes: 'T-ETH-Lite-ESP32S3: ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM'
+  connectivity.poe:
+    url: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
+    retrieved: '2026-11-18'
+    notes: T-ETH-Lite-POE-Shield (802.3af)
+  io.max_outputs:
+    url: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: "RMT: 'Four TX channels'"

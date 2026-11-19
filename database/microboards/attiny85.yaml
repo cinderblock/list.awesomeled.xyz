@@ -15,7 +15,7 @@ compute:
   soc: ATtiny85
   cpu: AVR
   isa: AVR2.5
-  clock_speed: 16MHz
+  clock_speed: 20MHz
   flash: 8kB
   ram: 512B
   linux: false
@@ -45,3 +45,7 @@ sources:
     url: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
     retrieved: '2026-11-18'
     notes: 'Ordering Information table: package 8P3 (PDIP-8), 8S2 (SOIC-8), 20M1 (QFN-20); tape-and-reel suffixes omitted'
+  compute.clock_speed:
+    url: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: speed grades up to 20 MHz at 4.5-5.5 V

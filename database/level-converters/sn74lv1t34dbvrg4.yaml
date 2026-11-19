@@ -9,7 +9,7 @@ aliases:
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
 electrical:
-  max_voltage: 7V
+  max_voltage: 5.5V
 images:
   - file: sn74lv1t34dbvrg4.webp
     source: https://www.ti.com/product/SN74LV1T34
@@ -36,3 +36,7 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
     retrieved: '2026-11-18'
     notes: 'TI datasheet SCLS743E: title + Package Option Addendum (DBV = SOT-23-5, DCK = SC70-5; the G4 orderables are listed alongside)'
+  electrical.max_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
+    retrieved: '2026-11-18'
+    notes: "'Operating range of 1.65V to 5.5V'"

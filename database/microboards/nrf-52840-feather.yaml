@@ -1,4 +1,4 @@
-name: NRF 52840 Feather
+name: Feather nRF52840 Express
 status: active
 release_year: 2021
 creator:
@@ -46,3 +46,6 @@ sources:
     url: https://www.adafruit.com/product/4062
     retrieved: '2026-11-18'
     notes: product title
+  name:
+    url: https://www.adafruit.com/product/4062
+    retrieved: '2026-11-18'

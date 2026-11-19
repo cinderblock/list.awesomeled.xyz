@@ -1,4 +1,4 @@
-name: Orange Pi LTS
+name: Orange Pi Zero LTS
 status: active
 creator:
   name: Shenzhen Xunlong Software
@@ -12,13 +12,11 @@ compute:
   cpu: 4× ARM Cortex-A7
   isa: ARMv7-A
   clock_speed: 1.2GHz
-  flash: microSD
+  flash: 2MB SPI flash
   ram: 256MB+
   linux: true
 connectivity:
-  wifi:
-    - 2.4GHz
-    - 5GHz
+  wifi: 2.4GHz
   ethernet: 100BASE-TX
   usb: OTG x1, 2.0 x1
 datasheet:
@@ -47,3 +45,14 @@ sources:
   aliases:
     url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
     retrieved: '2026-11-18'
+  name:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+    retrieved: '2026-11-18'
+  connectivity.wifi:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+    retrieved: '2026-11-18'
+    notes: "'Onboard Wi-Fi XR819, IEEE 802.11 b/g/n'"
+  compute.flash:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+    retrieved: '2026-11-18'
+    notes: "'TF card (Max. 32GB) / 2MB Spi Flash'"
