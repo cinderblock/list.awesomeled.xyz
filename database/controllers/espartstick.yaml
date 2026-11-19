@@ -3,7 +3,7 @@ status: discontinued
 creator:
   name: Microcyb
   url: https://www.microcyb.com
-  page: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-Wi-Fi-EspArtStick-pixel-controller/p/170368862/category=0
+  page: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller/p/170368862/category=0
 notes: 2.4 GHz Wi-Fi pixel controller with SD card playback and IR/RF remote receiver.
 inputs:
   physical:
@@ -36,7 +36,7 @@ data:
     - type: SD
       max_size: 32
 dead_links:
-  - url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-Wi-Fi-EspArtStick-pixel-controller/p/170368862/category=0
+  - url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller/p/170368862/category=0
     archive: https://web.archive.org/web/20220311162702/https://microcyb.com/index.html
     checked: '2026-11-18'
     notes: microcyb.com is live again with a new store, but index.html returns 404 and the product is gone; the archive is the 2022 EspArtStick home page

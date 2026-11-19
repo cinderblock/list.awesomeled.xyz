@@ -114,6 +114,14 @@ export const terminology = {
 
         const text = value;
 
+        // Never "fix" terms inside URLs: a slug like ".../SD-Card-WiFi-..."
+        // must stay byte-exact, or the link (and its Wayback lookup) breaks.
+        const urlSpans = [...text.matchAll(/(?:https?:\/\/|www\.)\S+/gi)].map((m) => [
+          m.index,
+          m.index + m[0].length,
+        ]);
+        const inUrl = (start, end) => urlSpans.some(([s, e]) => start < e && end > s);
+
         for (const [pattern, replacements] of rules) {
           const regExp = new RegExp(
             typeof pattern === 'string' ? getAdvancedRegExp(pattern) : pattern,
@@ -124,6 +132,7 @@ export const terminology = {
           while ((match = regExp.exec(text))) {
             const index = match.index;
             const matched = match[0];
+            if (inUrl(index, index + matched.length)) continue;
             let replacement = getReplacement(pattern, replacements, matched);
 
             if (replacement === undefined) continue;
