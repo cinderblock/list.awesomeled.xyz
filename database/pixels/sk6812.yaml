@@ -67,5 +67,9 @@ sources:
     url: https://www.lcsc.com/product-detail/C5378720.html
     retrieved: '2026-11-18'
     notes: 'OPSCO SK6812 listed, 15300 in stock'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C5378720.pdf
+    retrieved: '2026-11-18'
+    notes: "The YAML's datasheet: Opsco SK6812-012 specification Rev."
 technical_notes:
   - PWM frequency tested at 4.7kHz despite 1.2kHz datasheet claim

@@ -12,7 +12,7 @@ color:
   brightness_method: current
   brightness_method_notes: Extra 5-bit brightness control by LED current
 data:
-  type: APA102
+  type: SK9826
   clocked: true
   bitrate: 30MHz
   pixel_size_bits: 64
@@ -34,8 +34,19 @@ physical:
     - '3535'
     - '2020'
   pin_count: 6
+related:
+  - type: predecessor
+    ref: pixels/ns107s
+    notes: 'Newstar: NS108 is the 16-bit upgrade of NS107S.'
+    source:
+      url: https://web.archive.org/web/20230131080044/http://newstar-ledstrip.com/product/20220705164520116.pdf
+      retrieved: '2026-11-18'
 sources:
+  data.type:
+    url: https://web.archive.org/web/20230131080044/http://newstar-ledstrip.com/product/20220705164520116.pdf
+    retrieved: '2026-11-18'
+    notes: 'Newstar NS108 specification, Document No. SPC/NS108 Rev. No. 04, section 12 ''Data communication protocol''. Also: ''first into at least 128bits "0" as the starting frame''; 40 MHz, 27 kHz; ''GRB order to light''.'
   status:
     url: http://newstar-ledstrip.com/productshow847.html
     retrieved: '2026-11-18'
-    notes: "NS108 HD108 5050 RGB Pixel LED Chip listed in Newstar's Pixel LED Chip catalog (inquiry, no price)"
+    notes: NS108 HD108 5050 RGB Pixel LED Chip listed in Newstar's Pixel LED Chip catalog (inquiry, no price)

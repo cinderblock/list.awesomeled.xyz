@@ -25,3 +25,7 @@ sources:
     url: https://www.addressable-led.com/Products/Fast-LED-Chip-LC8823.html
     retrieved: '2026-11-18'
     notes: 'Led-Color lists the LC8823 Fast LED Chip (inquiry, no price)'
+  data.type:
+    url: http://addressable-led.com/UploadFile/upi/file/20190724/LC8823-LED.pdf
+    retrieved: '2026-11-18'
+    notes: Shenzhen LED Color LC8823 specification, revision 02 (Andy Zhu, 2018-07-09), linked from https://www.addressable-led.com/Products/Fast-LED-Chip-LC8823.html.

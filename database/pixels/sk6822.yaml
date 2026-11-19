@@ -8,6 +8,7 @@ data:
   clocked: false
   bitrate: 800kHz
   backup_line: true
+  type: WS2811/12
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -22,3 +23,7 @@ sources:
     url: https://www.addressable-led.com/Products/SK6822-Dual-Signal-LED.html
     retrieved: '2026-11-18'
     notes: 'Led-Color lists the SK6822 Dual-Signal LED, DC5V 5050 (inquiry, no price)'
+  data.type:
+    url: https://web.archive.org/web/20190221140257/http://newstar-ledstrip.com/product/20180411113844377.pdf
+    retrieved: '2026-11-18'
+    notes: SK6822 specification Rev. No. 01 (2015-10-10), Newstar-hosted (Wayback).

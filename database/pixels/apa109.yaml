@@ -3,6 +3,8 @@ status: active
 release_year: 2018
 creator: APA Electronics
 notes: WS2812b clone like SK6812 RGBW variant
+aliases:
+  - APA-109-RGBW
 color:
   order: GRBW
   brightness_bits: 8
@@ -35,3 +37,11 @@ sources:
     url: http://neon-world.com/en/product_detail.php?cid=59&id=167
     retrieved: '2026-11-18'
     notes: "APA-109-RGBW listed in APA Electronic's 5050 LED series catalog"
+  data.type:
+    url: https://web.archive.org/web/20250113200646/https://neon-world.com/en/product_detail.php?cid=59&id=167
+    retrieved: '2026-11-18'
+    notes: APA Electronic APA-109-RGBW product page ('4ch integrated RGBW SMD LED'). Bit rate not stated there; Advatek's protocol index lists APA109 as Data-Only, 8 bits, RGBW.
+  aliases:
+    url: https://web.archive.org/web/20250113200646/https://neon-world.com/en/product_detail.php?cid=59&id=167
+    retrieved: '2026-11-18'
+    notes: Maker's item number.

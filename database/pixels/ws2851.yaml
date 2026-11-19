@@ -35,3 +35,14 @@ physical:
 related:
   - type: variant
     ref: pixels/ws2812
+  - type: uses
+    ref: pixel-ics/ws2811
+    notes: 'WorldSemi: a WS2811 IC drives the built-in RGB die plus external 12 V RGB LEDs.'
+    source:
+      url: https://web.archive.org/web/20200920151054/http://www.world-semi.com/Certifications/details-121-4.html
+      retrieved: '2026-11-18'
+sources:
+  data.type:
+    url: https://web.archive.org/web/20200920151054/http://www.world-semi.com/Certifications/details-121-4.html
+    retrieved: '2026-11-18'
+    notes: "The YAML's datasheet link: WorldSemi WS2851 product page (Wayback). Speaks the WS2811 protocol because it contains a WS2811; Advatek lists 800 kbps, 8 bits, RGB (https://www.advateklighting.com/pixel-protocols/ws2851)."

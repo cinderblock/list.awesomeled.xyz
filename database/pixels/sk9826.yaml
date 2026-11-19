@@ -30,3 +30,8 @@ physical:
 related:
   - type: variant
     ref: pixels/sk9822
+sources:
+  data.type:
+    url: https://web.archive.org/web/20200925071204/http://newstar-ledstrip.com/product/20190927165451294.pdf
+    retrieved: '2026-11-18'
+    notes: "The YAML's (dead, previously unarchived) datasheet, found in Wayback (2020-09-25): Newstar SK9826 specification Rev. No. 04, section 12 'Data communication protocol'; 'GRB order to light'; 30 MHz."

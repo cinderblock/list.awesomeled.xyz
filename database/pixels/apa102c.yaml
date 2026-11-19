@@ -2,6 +2,8 @@ name: APA102C
 status: active
 creator: APA Electronics
 notes: Very similar to its previous version, APA102, APA102C provides a larger metallic area for better heat dissipation.
+aliases:
+  - APA-102C
 color:
   order: BGR
   brightness_bits: 8+5
@@ -52,6 +54,14 @@ sources:
     url: https://neon-world.com/en/product_detail.php?cid=59&id=115
     retrieved: '2026-11-18'
     notes: "APA-102C-NEW listed in APA Electronic's 5050 LED series catalog"
+  data.type:
+    url: https://www.lcd-module.de/eng/pdf/zubehoer/APA102C.pdf
+    retrieved: '2026-11-18'
+    notes: APA ELECTRONIC CO., LTD. APA102C datasheet dated 2018/10/11, hosted by distributor Electronic Assembly. 'Communication protocol and timing' section; also states 30 MHz max clock, 20 kHz PWM.
+  aliases:
+    url: https://web.archive.org/web/20170808205413/http://neon-world.com:80/en/product_detail.php?cid=59&id=115
+    retrieved: '2026-11-18'
+    notes: APA Electronic product page (Wayback 2017-08-08). Cosmetic alias; normalizes to the existing name.
 technical_notes:
   - Improved thermal design over APA102
   - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/

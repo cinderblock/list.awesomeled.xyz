@@ -3,6 +3,8 @@ status: active
 release_year: 2013
 creator: APA Electronics
 notes: WS2812b clone like SK6812
+aliases:
+  - APA-104
 color:
   order: RGB
   brightness_bits: 8
@@ -45,6 +47,14 @@ sources:
     url: https://neon-world.com/en/product.php?cid=59
     retrieved: '2026-11-18'
     notes: "APA Electronic's 5050 LED series lists APA-104-22C and APA-104-4RGB"
+  data.type:
+    url: https://web.archive.org/web/20210411015822/http://www.newstar-ledstrip.com/product/20141229104216693.pdf
+    retrieved: '2026-11-18'
+    notes: "'APA104 LED CHIP' sheet hosted by Newstar (Wayback). General description + timing table: 24bit, 'Send data at speeds of 800Kbps', TH+TL=1.25us+-600ns with T0H 0.35us / T1H 1.36us."
+  aliases:
+    url: https://web.archive.org/web/20260520135812/https://neon-world.com/en/product_detail.php?cid=60&id=171
+    retrieved: '2026-11-18'
+    notes: APA Electronic site navigation and product 'APA-104-3535 12mA'. Cosmetic alias.
 technical_notes:
   - WS2812 protocol compatible clone from APA Electronics
   - Available in very small 1212 package size

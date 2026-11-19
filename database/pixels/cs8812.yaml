@@ -26,3 +26,8 @@ other_links:
 physical:
   packages:
     - '5050'
+sources:
+  data.type:
+    url: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "CS8812 datasheet Version V0.1 (reseller-hosted copy), 'Data Format' section: 8 bits x 3 channels = 24 bits, 800 kHz, 0 code 1/4T high, 1 code 3/4T high, reset >300us, dual SDI/SDI2 inputs."

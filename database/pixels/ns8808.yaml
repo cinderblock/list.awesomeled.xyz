@@ -9,7 +9,7 @@ color:
   pwm_frequency: 8.0kHz
   pwm_frequency_notes: 8kHz per the datasheet
 data:
-  type: UCS1903
+  type: WS2811/12
   clocked: false
   bitrate: 800kHz
   pixel_size_bits: 24
@@ -30,8 +30,19 @@ physical:
   packages:
     - '5050'
   pin_count: 6
+related:
+  - type: compatible
+    ref: pixels/ws2815
+    notes: Maker states protocol compatibility and drop-in replacement for WS2815 (12 V, dual signal).
+    source:
+      url: https://web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html
+      retrieved: '2026-11-18'
 sources:
+  data.type:
+    url: https://web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html
+    retrieved: '2026-11-18'
+    notes: "Newstar NS8808 product page (the YAML's datasheet link, Wayback). Feature list also: 'Use e-RZ code, serial data frequency 800kHz', '8bits data transfer, 12bits build-in GAMMA correction', dual-signal."
   status:
     url: http://newstar-ledstrip.com/productshow855.html
     retrieved: '2026-11-18'
-    notes: "NS8808 HD8808 DC12V Pixel LED Chip listed in Newstar's Pixel LED Chip catalog (inquiry, no price)"
+    notes: NS8808 HD8808 DC12V Pixel LED Chip listed in Newstar's Pixel LED Chip catalog (inquiry, no price)

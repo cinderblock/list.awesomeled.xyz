@@ -45,11 +45,21 @@ price_source:
 related:
   - type: related
     ref: pixels/apa107
+  - type: compatible
+    ref: pixels/apa102
+    notes: "Maker states full APA102 compatibility (cover: 'The upgrade LED of APA102 RGB'); 40 MHz clock, ~26 kHz PWM."
+    source:
+      url: https://web.archive.org/web/20220216171018/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+      retrieved: '2026-11-18'
 sources:
+  data.type:
+    url: https://web.archive.org/web/20220216171018/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+    retrieved: '2026-11-18'
+    notes: Rose Lighting HD107S specification V1.0.1 (March 18, 2019); the YAML's datasheet URL (site now returns 522; Wayback capture). 'Operating Characteristic' section + frame diagram 111 | Global | BLUE | GREEN | RED.
   status:
     url: https://www.rose-lighting.com/products/fastest-digital-addressable-rgb-5050led-chip-hd107s/
     retrieved: '2026-11-18'
-    notes: 'Rose Lighting lists the HD107S 5050 chip, marked in stock (no price shown)'
+    notes: Rose Lighting lists the HD107S 5050 chip, marked in stock (no price shown)
 technical_notes:
   - High-speed 40MHz data rate - faster than APA102's 30MHz
   - 27kHz PWM frequency for flicker-free video

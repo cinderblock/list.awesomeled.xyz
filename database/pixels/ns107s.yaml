@@ -38,8 +38,19 @@ physical:
     - '3535'
     - '2020'
   pin_count: 6
+related:
+  - type: predecessor
+    ref: pixels/apa107
+    notes: 'Newstar: NS107S is the upgrade of APA107 (same APA102 frame, 26-27 kHz PWM).'
+    source:
+      url: https://web.archive.org/web/20220216171258/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+      retrieved: '2026-11-18'
 sources:
+  data.type:
+    url: https://web.archive.org/web/20220216171258/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+    retrieved: '2026-11-18'
+    notes: "Newstar NS107S specification Rev. 01 (the YAML's datasheet, Wayback). Page 5 'Series data structure': 0*32 start, 111 + Global + BLUE + GREEN + RED, 1*32 end; 30 MHz, +26 kHz PWM."
   status:
     url: http://newstar-ledstrip.com/productshow818.html
     retrieved: '2026-11-18'
-    notes: "NS107S HD107S 5050 RGB Pixel LED Chip listed in Newstar's Pixel LED Chip catalog (inquiry, no price)"
+    notes: NS107S HD107S 5050 RGB Pixel LED Chip listed in Newstar's Pixel LED Chip catalog (inquiry, no price)

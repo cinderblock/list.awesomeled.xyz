@@ -47,3 +47,7 @@ sources:
     url: https://www.lcsc.com/product-detail/C5378730.html
     retrieved: '2026-11-18'
     notes: 'OPSCO SK9822-A listed, 9095 in stock'
+  data.type:
+    url: https://web.archive.org/web/20240527134816/https://www.rose-lighting.com/wp-content/uploads/sites/53/2020/05/SK9822-A-REV.01-EN-5050-RGB-27K-HZ-PWM-30M-bps-speed.pdf
+    retrieved: '2026-11-18'
+    notes: SK9822-A specification Rev. No. 01 (2019-12-26), hosted by Rose Lighting (Wayback).

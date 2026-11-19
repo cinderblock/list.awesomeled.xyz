@@ -8,7 +8,7 @@ color:
   brightness_method: per_channel
   brightness_method_notes: 5-bit for each color, R, G, & B
 data:
-  type: APA102
+  type: SK9826
   clocked: true
   bitrate: 40MHz
   pixel_size_bits: 64
@@ -48,3 +48,7 @@ sources:
     url: https://www.rose-lighting.com/products/hd108-rgb-5050-pixel-led-chip-with-gray-lever-65536/
     retrieved: '2026-11-18'
     notes: 'Rose Lighting lists the HD108 5050 chip, marked in stock (no price shown)'
+  data.type:
+    url: https://web.archive.org/web/20220216182230/https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+    retrieved: '2026-11-18'
+    notes: "Rose Lighting HD108 specification V1.1.0 (Nov 22, 2020), 'Operating Characteristic' p.6. Diagram: 128 bits of zero start frame; LED frame 64 bits = 1 | 5 bits R | 5 bits G | 5 bits B (brightness) | RED 16 | GREEN 16 | BLUE 16."

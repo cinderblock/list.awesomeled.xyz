@@ -7,6 +7,7 @@ data:
   bitrate: 800kHz
   pixel_size_bits: 24
   backup_line: false
+  type: WS2811/12
 datasheet:
   url: https://www.normandled.com/upload/201907/12V%20SK6813%20LED%20Datasheet.pdf
 electrical:
@@ -35,3 +36,8 @@ price_source:
 related:
   - type: variant
     ref: pixels/sk6813
+sources:
+  data.type:
+    url: https://www.lcsc.com/datasheet/C5378733.pdf
+    retrieved: '2026-11-18'
+    notes: Opsco SK6813HV-09-6P-001 specification Rev.

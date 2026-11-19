@@ -49,6 +49,10 @@ sources:
     url: https://www.lcsc.com/product-detail/C4154877.html
     retrieved: '2026-11-18'
     notes: 'Worldsemi WS2816B-2020 listed, 11800 in stock'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C4154877.pdf
+    retrieved: '2026-11-18'
+    notes: WorldSemi WS2816B-2020 V1.0 (2020-12-06), the LCSC part already used for the YAML price.
 technical_notes:
   - 48-bit pixel data for 16-bit per channel color depth
   - Independent 5-bit brightness control for each R, G, B channel

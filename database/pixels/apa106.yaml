@@ -1,8 +1,13 @@
 name: APA106
 status: active
 notes: 5V WS2811 clone in 5 and 8mm package
+aliases:
+  - APA106-F5
+  - APA106-F8
 color:
   order: RGB
+data:
+  type: WS2811/12
 datasheet:
   url: https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107
 electrical:
@@ -31,3 +36,11 @@ sources:
     url: https://www.sparkfun.com/led-rgb-addressable-pth-5mm-diffused-5-pack.html
     retrieved: '2026-11-18'
     notes: 'COM-12986 in stock at $4.75 per 5-pack; its datasheet is the APA-106-F5/F8 sheet'
+  data.type:
+    url: https://kyohritsu.com/eclib/PDF/L/LEDX226-APA-Z.pdf
+    retrieved: '2026-11-18'
+    notes: APA106-F8/F5/5050 datasheet ('Prepard date:2022.11.08'), hosted by Japanese distributor Kyohritsu. Product introduction + features; timing table T0H 0.35us, T1H 1.36us, reset 50us; 24-bit data sent in RGB order. New value (YAML had none).
+  aliases:
+    url: https://kyohritsu.com/eclib/PDF/L/LEDX226-APA-Z.pdf
+    retrieved: '2026-11-18'
+    notes: Package-suffixed part numbers (5 mm / 8 mm through-hole) the datasheet uses; reviewer may prefer variants[] instead.

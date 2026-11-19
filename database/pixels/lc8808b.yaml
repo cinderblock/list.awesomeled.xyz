@@ -2,6 +2,8 @@ name: LC8808B
 status: active
 creator: Color
 notes: Very similar to the GS8208, the spec sheets are almost identical
+aliases:
+  - LC8808
 color:
   order: BGR
   brightness_bits: 8
@@ -11,6 +13,7 @@ data:
   bitrate: 800kHz
   pixel_size_bits: 24
   backup_line: true
+  type: WS2811/12
 datasheet:
   url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
 electrical:
@@ -26,8 +29,23 @@ physical:
   packages:
     - '5050'
   pin_count: 6
+related:
+  - type: compatible
+    ref: pixel-ics/ucs1903
+    notes: Maker lists UCS1903 as the controller protocol setting for this LED.
+    source:
+      url: https://www.addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
+      retrieved: '2026-11-18'
 sources:
+  data.type:
+    url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
+    retrieved: '2026-11-18'
+    notes: "Shenzhen LED Color 'LC8808B LED SERIES' specification (the YAML's datasheet). Same e-RZ text as GS8208: 800 kHz, 1:3 duty, 8 bits x 3, dual SDI/SDI2. New value (YAML had none)."
+  aliases:
+    url: https://www.addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
+    retrieved: '2026-11-18'
+    notes: Maker's product page calls the same 12 V dual-signal 5050 part 'LC8808'; the datasheet file is LC8808-LED.pdf but titled LC8808B.
   status:
     url: https://www.addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
     retrieved: '2026-11-18'
-    notes: 'Led-Color lists the DC12V Pixel LED LC8808 (inquiry, no price); the LC8808B datasheet is on the same site'
+    notes: Led-Color lists the DC12V Pixel LED LC8808 (inquiry, no price); the LC8808B datasheet is on the same site

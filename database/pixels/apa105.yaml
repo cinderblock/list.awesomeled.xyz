@@ -36,3 +36,8 @@ physical:
 related:
   - type: related
     ref: pixels/ws2812
+sources:
+  data.type:
+    url: https://www.advateklighting.com/pixel-protocols/apa105
+    retrieved: '2026-11-18'
+    notes: 'Advatek Lighting (pixel-controller maker, not the LED maker) protocol page, Specifications table: Data-Only, 8 bits, RGB, 800 kbps.'

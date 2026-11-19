@@ -3,6 +3,8 @@ status: active
 release_year: 2018
 creator: WorldSemi/Newstar
 notes: 12V WS2813
+aliases:
+  - WS2815B
 color:
   order: RGB
   brightness_bits: 8
@@ -64,6 +66,14 @@ sources:
     url: https://www.lcsc.com/product-detail/C5446699.html
     retrieved: '2026-11-18'
     notes: 'Worldsemi WS2815B-V1 listed, 405840 in stock'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C5446699.pdf
+    retrieved: '2026-11-18'
+    notes: WorldSemi WS2815B-V1 datasheet (revision record up to V1.4; the LCSC part already used for the YAML price). General description; 'Send data at speeds of 800Kbps'; 'Composition of 24bit Data', GRB; RESET >280us.
+  aliases:
+    url: https://web.archive.org/web/20170826222332/http://www.world-semi.com:80/Certifications/details-122-4.html
+    retrieved: '2026-11-18'
+    notes: "WorldSemi product page: the maker's model name for this 12 V dual-signal part (WS2815B-B = black face, WS2815B-Mini = 3535)."
 technical_notes:
   - 12V version allows longer cable runs with less voltage drop
   - Internal regulator provides 5V logic from 12V supply

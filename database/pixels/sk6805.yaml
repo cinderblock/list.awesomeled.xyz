@@ -53,6 +53,10 @@ sources:
     url: https://www.lcsc.com/product-detail/C2890035.html
     retrieved: '2026-11-18'
     notes: 'SK6805-EC15 listed, 37210 in stock'
+  data.type:
+    url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Opsco SK6805-2427 specification Rev. No. 01 (2016-08-08), product overview; 800 Kbps, TH+TL=1.25us+-600ns.
 technical_notes:
   - 24-bit color (8 bits per channel) over a single-wire unipolar RZ protocol
   - NeoPixel-compatible; sold by Adafruit as nano (2427) and other micro packages

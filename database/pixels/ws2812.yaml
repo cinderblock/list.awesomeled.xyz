@@ -3,6 +3,8 @@ status: active
 release_year: 2012
 creator: WorldSemi
 notes: Individually addressable RGB pixel; cheap and everywhere
+aliases:
+  - WS2812S
 color:
   order: GRB
   brightness_bits: 8
@@ -59,11 +61,26 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C114586.html
   vendor: LCSC
+related:
+  - type: uses
+    ref: pixel-ics/ws2811
+    notes: WorldSemi names the WS2811 chip as the IC inside WS2812E (a variant in this entry) and likewise WS2812S, WS2812T, WS2812B-MINI and WS2812D-F5; its WS2812B page and datasheet don't name the IC.
+    source:
+      url: https://web.archive.org/web/20180325050654/http://www.world-semi.com:80/Certifications/details-134-4.html
+      retrieved: '2026-11-18'
 sources:
+  data.type:
+    url: https://www.lcsc.com/datasheet/C2761795.pdf
+    retrieved: '2026-11-18'
+    notes: WorldSemi WS2812B Ver. No. V5 (new version 2019-02-19), general description
+  aliases:
+    url: https://web.archive.org/web/20180101003828/http://www.world-semi.com:80/Certifications/details-115-4.html
+    retrieved: '2026-11-18'
+    notes: "WorldSemi product page: the part number of the original 6-pin WS2812 (the YAML's WS2812.pdf is that 6-pin part). Reviewer may prefer it under variants[]."
   status:
     url: https://www.lcsc.com/product-detail/C114586.html
     retrieved: '2026-11-18'
-    notes: 'Worldsemi WS2812B-B/W listed, 195250 in stock'
+    notes: Worldsemi WS2812B-B/W listed, 195250 in stock
 spec_update_year: 2018
 technical_notes:
   - PWM frequency updated from 400Hz to 2.0kHz in 2018 silicon revision

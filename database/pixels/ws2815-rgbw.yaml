@@ -3,10 +3,13 @@ status: active
 creator: World Semi
 manufacturers:
   - World Semi
+aliases:
+  - WS2815B-RGBW
 color:
   order: RGBW
 data:
   clocked: false
+  type: 4chWS2811/12
 datasheet:
   url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
 electrical:
@@ -19,3 +22,11 @@ sources:
     url: https://www.world-semi.com/products-rgbic-led.html
     retrieved: '2026-11-18'
     notes: 'WorldSemi catalog lists the WS2815 series as its 12 V RGB and RGBW family; WS2815B-RGBW is in its model list'
+  data.type:
+    url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
+    retrieved: '2026-11-18'
+    notes: "The YAML's datasheet: WorldSemi WS2815B-RGBW V0.1 (Chinese). Product overview; '数据发送速度可达800Kbps'; T0H 220-380ns, T1H 580-840ns, RES >=280us; dual DIN1/DIN2 ('双路信号传输'). New value (YAML had none)."
+  aliases:
+    url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
+    retrieved: '2026-11-18'
+    notes: WorldSemi's part number (datasheet title).
