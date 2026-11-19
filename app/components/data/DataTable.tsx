@@ -1,5 +1,16 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { ArrowDown, ArrowDownUp, ArrowUp, Rows3, Rows4, Scale, Search, X } from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowDownUp,
+  ArrowUp,
+  LayoutList,
+  Rows3,
+  Rows4,
+  Scale,
+  Search,
+  Table2,
+  X,
+} from 'lucide-react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
@@ -44,6 +55,7 @@ import { describeFilter, FilterDrawer } from './FilterDrawer';
 import { buildTableColumns, defaultColumnKeys, type TableColumn } from './table-columns';
 import { FIXED_HEADER_HEIGHT, useStickyHeader } from './useStickyHeader';
 import { useTableParams } from './useTableParams';
+import { useTableLayout } from '~/hooks/useTableLayout';
 
 // Re-exported for existing imports; these live in lib/table-state now
 export { FILTER_STORAGE_KEY, getFilterDescription, parseFilters } from '~/lib/table-state';
@@ -358,6 +370,9 @@ export function DataTable({ data, fields, category }: DataTableProps) {
     [categoryId]
   );
 
+  // ---- Layout: a table, or a card per entry (the default on phones) --------
+  const [layout, toggleLayout] = useTableLayout();
+
   // ---- Keyboard navigation -------------------------------------------------
   // "/" focuses search, j/k walk the (filtered, sorted) rows, Enter opens the
   // active row, Esc clears.
@@ -542,7 +557,7 @@ export function DataTable({ data, fields, category }: DataTableProps) {
     columnWidths,
     controlsHeight,
     headerHeight,
-  } = useStickyHeader(sortedData, visibleKeys, density);
+  } = useStickyHeader(sortedData, visibleKeys, density, layout);
 
   // Shared between the real header and its sticky clone
   const renderHeaderRow = () => (
@@ -657,12 +672,21 @@ export function DataTable({ data, fields, category }: DataTableProps) {
               {density === 'compact' ? <Rows4 size={16} /> : <Rows3 size={16} />}
               <span className="btn-label">{density === 'compact' ? 'Dense' : 'Roomy'}</span>
             </button>
+            <button
+              type="button"
+              className="btn btn--ghost btn--sm"
+              aria-label={layout === 'cards' ? 'Show as a table' : 'Show as cards'}
+              onClick={toggleLayout}
+            >
+              {layout === 'cards' ? <Table2 size={16} /> : <LayoutList size={16} />}
+              <span className="btn-label">{layout === 'cards' ? 'Table' : 'Cards'}</span>
+            </button>
             {statusColumn && (
               <button
                 type="button"
                 onClick={toggleHideInactive}
                 aria-pressed={hidingInactive}
-                className={`btn btn--ghost btn--sm${hidingInactive ? ' btn--badge' : ''}`}
+                className={`btn btn--ghost btn--sm data-table-inactive-toggle${hidingInactive ? ' btn--badge' : ''}`}
               >
                 {hidingInactive ? 'Discontinued hidden' : 'Hide discontinued'}
               </button>
@@ -1014,6 +1038,11 @@ function SortMenu({
                   {layer?.dir === 'desc' && <ArrowDown size={14} />}
                 </span>
                 {col.label}
+                {layer && (
+                  <span className="sr-only">
+                    , sorted {layer.dir === 'asc' ? 'ascending' : 'descending'}
+                  </span>
+                )}
               </DropdownMenu.Item>
             );
           })}

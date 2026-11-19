@@ -16,10 +16,15 @@ const CONTROLS_HEIGHT = 52;
  * So a clone of the header is fixed to the viewport and its horizontal scroll
  * mirrors the table's. This hook owns the measuring and mirroring.
  *
- * Pass whatever changes the table's geometry (rows, columns, density); the
- * header is re-measured when any of them changes identity.
+ * Pass whatever changes the table's geometry (rows, columns, density, table
+ * or cards); the header is re-measured when any of them changes identity.
  */
-export function useStickyHeader(rows: unknown, columns: unknown, density: unknown) {
+export function useStickyHeader(
+  rows: unknown,
+  columns: unknown,
+  density: unknown,
+  layout: unknown
+) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const tableRef = useRef<HTMLTableElement>(null);
   const controlsRef = useRef<HTMLDivElement>(null);
@@ -79,7 +84,11 @@ export function useStickyHeader(rows: unknown, columns: unknown, density: unknow
     const thead = tableRef.current?.querySelector('thead');
     if (!thead) return;
     const stickyTop = FIXED_HEADER_HEIGHT + controlsHeightRef.current;
-    setShowStickyHeader(thead.getBoundingClientRect().top < stickyTop);
+    const rect = thead.getBoundingClientRect();
+    // Pinned once the real header has scrolled under the controls. A header
+    // that isn't laid out (the card layout hides it) has no height, which
+    // makes the product zero: never pinned.
+    setShowStickyHeader((rect.top - stickyTop) * rect.height < 0);
   }, []);
 
   useEffect(() => {
@@ -127,7 +136,7 @@ export function useStickyHeader(rows: unknown, columns: unknown, density: unknow
       checkStickyVisibility();
     }, 50);
     return () => clearTimeout(timer);
-  }, [rows, columns, density, measureAll, syncHorizontalScroll, checkStickyVisibility]);
+  }, [rows, columns, density, layout, measureAll, syncHorizontalScroll, checkStickyVisibility]);
 
   // Sync scroll the moment the clone becomes visible
   useEffect(() => {

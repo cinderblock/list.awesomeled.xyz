@@ -296,6 +296,12 @@ function renderPackages(v: unknown) {
   );
 }
 
+// The unit's slot is as wide as the column's widest unit, so numbers line up
+// (styles in data-table.css; the card layout drops the alignment)
+function unitStyle(unitWidth?: string): React.CSSProperties | undefined {
+  return unitWidth ? ({ '--unit-width': unitWidth } as React.CSSProperties) : undefined;
+}
+
 // Helper for formatting numeric values with units
 function formatNumericWithUnit(v: unknown, unitWidth?: string) {
   if (v == null) return <span className="data-table-null">-</span>;
@@ -306,27 +312,12 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
   const range = str.match(/^([\d.]+)-([\d.]+)\s*(.*)$/);
   if (range) {
     return (
-      <span
-        style={{
-          display: 'inline-flex',
-          alignItems: 'baseline',
-          justifyContent: 'flex-end',
-          width: '100%',
-        }}
-      >
+      <span className="data-table-qty">
         <span className="tabular-nums">
           {range[1]}–{range[2]}
         </span>
         {range[3] && (
-          <span
-            className="data-table-null"
-            style={{
-              marginLeft: '0.25rem',
-              width: unitWidth,
-              textAlign: 'left',
-              display: 'inline-block',
-            }}
-          >
+          <span className="data-table-null data-table-qty-unit" style={unitStyle(unitWidth)}>
             {range[3]}
           </span>
         )}
@@ -350,32 +341,13 @@ function formatNumericWithUnit(v: unknown, unitWidth?: string) {
   const formatted = num.toLocaleString('en-US');
 
   return (
-    <span
-      style={{
-        display: 'inline-flex',
-        alignItems: 'baseline',
-        justifyContent: 'flex-end',
-        width: '100%',
-      }}
-    >
+    <span className="data-table-qty">
       <span className="tabular-nums">{formatted}</span>
       {/* Decimal-align: whole numbers get invisible tenths so "1 GHz" lines
           up with "1.2 GHz" */}
-      {!formatted.includes('.') && (
-        <span className="tabular-nums" style={{ visibility: 'hidden' }}>
-          .0
-        </span>
-      )}
+      {!formatted.includes('.') && <span className="tabular-nums data-table-qty-pad">.0</span>}
       {unit && (
-        <span
-          className="data-table-null"
-          style={{
-            marginLeft: '0.25rem',
-            width: unitWidth,
-            textAlign: 'left',
-            display: 'inline-block',
-          }}
-        >
+        <span className="data-table-null data-table-qty-unit" style={unitStyle(unitWidth)}>
           {unit}
         </span>
       )}

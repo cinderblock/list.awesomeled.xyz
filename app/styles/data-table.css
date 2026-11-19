@@ -380,6 +380,26 @@
    Table Cell Content
    ========================================================================== */
 
+/* A number with its unit, right-aligned so a column's digits line up */
+.data-table-qty {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Invisible tenths after a whole number, for decimal alignment */
+.data-table-qty-pad {
+  visibility: hidden;
+}
+
+.data-table-qty-unit {
+  display: inline-block;
+  width: var(--unit-width, auto);
+  margin-left: 0.25rem;
+  text-align: left;
+}
+
 /* Entry name link */
 .data-table-entry-link {
   font-weight: 500;
