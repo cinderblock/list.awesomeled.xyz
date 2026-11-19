@@ -232,6 +232,21 @@
 'Controllers | PixLite T8-S Mk3 | Auxilary Outputs':
   - value: 'DMX In/Out'
     reason: 'Same in structured form: outputs.auxiliary DMX512 count'
+'Controllers | DiGidot C4 Live 12 | (name) (link)':
+  - value: 'https://digidot.eu/c4/digidot-c4-live'
+    reason: "Dead (404); YAML links DiGidot's current product page"
+'Controllers | DiGidot C4 Live 12 | Product URL':
+  - value: 'https://digidot.eu/c4/digidot-c4-live'
+    reason: "Dead (404); YAML links DiGidot's current product page"
+'Controllers | DiGidot C4 Extended 8 | (name) (link)':
+  - value: 'https://digidot.eu/c4/digidot-c4-extended'
+    reason: "Dead (404); YAML links DiGidot's current product page"
+'Controllers | DiGidot C4 Extended 8 | Product URL':
+  - value: 'https://digidot.eu/c4/digidot-c4-extended'
+    reason: "Dead (404); YAML links DiGidot's current product page"
+'Controllers | DiGidot C4 Live 12 | Max Current':
+  - value: '0'
+    reason: '0 in the sheet is a placeholder, not a rating; YAML leaves it empty'
 'Controllers | PIXPoE | Product URL':
   - value: 'https://www.empdesigns.co.uk/portfolio-item/poe-pixel-controller//'
     reason: 'Old page; it now redirects to the product page YAML links'
@@ -700,6 +715,15 @@
 'Diffusive Materials | Perspex Diffuse | URL (link)':
   - value: 'https://perspex.com/news/pom-diffuse/'
     reason: 'YAML revised by research since the import (6d2133d)'
+'Diffusive Materials | Plexiglas LED Edge Lit was EndlightenT | URL':
+  - value: 'https://www.plexiglas-shop.com/en-de/products/plexiglas-led/'
+    reason: 'Plexiglas moved to Polyvantis: the old shop URL redirects to the product page YAML links'
+'Diffusive Materials | Plexiglas LED Edge Lit was EndlightenT | URL (link)':
+  - value: 'https://www.plexiglas-shop.com/en-de/products/plexiglas-led/'
+    reason: 'Plexiglas moved to Polyvantis: the old shop URL redirects to the product page YAML links'
+'Diffusive Materials | Plexiglas LED Edge Lit was EndlightenT | Properties':
+  - value: 'Edge Lit front diffuser'
+    reason: 'Same in structured form: optical.properties edge-lit; the notes describe the diffusing particles'
 'Commercial Pixel Systems | Lightwalls | Online Pricing':
   - value: 'Learning kit £550+VAT'
     reason: 'Same in structured form: pricing.examples (item, £550, +VAT)'
