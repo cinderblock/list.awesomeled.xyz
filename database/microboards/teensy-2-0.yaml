@@ -10,7 +10,7 @@ power:
 compute:
   soc: ATmega32U4
   cpu: AVR
-  isa: AVR5
+  isa: AVR
   clock_speed: 16MHz
   flash: 31.5kB
   ram: 2.5kB
@@ -19,8 +19,8 @@ connectivity:
   usb: OTG
   serial: true
 io:
-  storage: Shield
-  bms: 'No'
+  storage: add-on
+  bms: false
   imu: false
 price: 16
 price_source:
