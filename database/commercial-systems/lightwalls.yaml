@@ -4,6 +4,10 @@ creator:
   name: Lightwalls
   url: https://www.lightwalls.co.uk/
 notes: Strip and panels associated with Protopixel.io, subscription based control systems, "dynamic lighting"
+dead_links:
+  - url: https://www.lightwalls.co.uk/learning-kits/
+    archive: https://web.archive.org/web/20251112012933/https://www.lightwalls.co.uk/learning-kits/
+    checked: '2026-11-18'
 images:
   - file: lightwalls.webp
     source: https://www.lightwalls.co.uk/products/matrix-5x5-rgbw-16bit
