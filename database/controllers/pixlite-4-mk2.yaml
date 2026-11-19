@@ -29,6 +29,6 @@ power:
     max: 24
   current:
     max: 30
-price: 340
+price: 339.95
 technical_notes:
   - Pixel counting test pattern in firmware is useful for mapping large installations

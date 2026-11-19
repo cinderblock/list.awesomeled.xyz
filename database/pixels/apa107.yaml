@@ -28,7 +28,7 @@ electrical:
   vcc_voltage: 5V
   gpio:
     min: 3.5V
-    max: 5V
+    max: 5.3V
   channel_current: 22.0mA
   quiescent_current: 1.0mA
   wattage: 110mW

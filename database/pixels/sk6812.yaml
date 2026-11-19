@@ -27,7 +27,7 @@ datasheet:
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "17V Vds, Max" but LEDs are built-in and share power with 5V VDD
-  vcc_voltage: 5V
+  vcc_voltage: 5.2V
   gpio:
     min: 3.4V
     min_notes: Not in datasheet

@@ -19,6 +19,7 @@ mechanical:
 ratings:
   max_current: 90 A # XT90; the smaller XT60 variant is rated 60 A
   max_voltage: 42 V
+  ip_rating: No
 termination:
   solder: true
   screw_terminal: false

@@ -20,5 +20,5 @@ power:
     max: 24
 core:
   family: ESP32
-price: 16
+price: 15.99
 wled_compatible: true

@@ -26,7 +26,7 @@ power:
     max: 24
   current:
     max: 64
-price: 190
+price: 189.95
 related:
   - type: variant
     ref: controllers/pixlite-16-mk2-control-board

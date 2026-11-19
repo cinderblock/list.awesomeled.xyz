@@ -19,6 +19,7 @@ mechanical:
 ratings:
   max_current: 5 A
   max_voltage: 125 V
+  ip_rating: No
 termination:
   solder: true
   crimp: true

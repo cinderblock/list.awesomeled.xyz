@@ -2,7 +2,7 @@ name: TM1804
 creator: Titan Micro Electronics
 color:
   channel_bits: 8
-  pwm_frequency: 286Hz
+  pwm_frequency: 285.7Hz
 data:
   type: WS2811/12
   clocked: false

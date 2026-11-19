@@ -1,8 +1,6 @@
 name: Bulgin ` Disco` 8 pole
 creator: Bulgin
-notes: Bulgin, long established UK connector maker, 8 pole connector popular with
-  mobile discos. Used to be panel mount Sockets and male to male leads, now
-  follow outlets on Sockets only.
+notes: Bulgin, long established UK connector maker, 8 pole connector popular with mobile discos. Used to be panel mount Sockets and male to male leads, now follow outlets on Sockets only.
 links:
   product: https://uk.farnell.com/bulgin/px0551/plug-8way-6a-free/dp/151740
   mouser: https://www.mouser.co.uk/datasheet/2/57/bulgs00368_1-2263014.pdf
@@ -20,6 +18,7 @@ mechanical:
 ratings:
   max_current: 6 A
   max_voltage: 250 V
+  ip_rating: No
 termination:
   solder: true
   screw_terminal: true

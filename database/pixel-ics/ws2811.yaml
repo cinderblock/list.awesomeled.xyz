@@ -26,7 +26,7 @@ electrical:
     min: 3.0V
     max: 5V
     notes: 0.6*VDD at 5V supply
-  max_current: 19mA
+  max_current: 18.5mA
   max_current_notes: Constant current driver, actual current set by external resistor
   current_programmable: true
   current_range: 3-60mA typical depending on Rext

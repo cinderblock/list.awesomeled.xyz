@@ -15,6 +15,10 @@ capabilities:
   designer: true
 links:
   url: https://visution.com/
+platforms:
+  os:
+    - Windows
+    - macOS
 pricing:
   price: 234
   demo:

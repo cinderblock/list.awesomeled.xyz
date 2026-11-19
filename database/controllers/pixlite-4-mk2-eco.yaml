@@ -29,7 +29,7 @@ power:
     max: 24
   current:
     max: 30
-price: 115
+price: 114.95
 related:
   - type: variant
     ref: controllers/pixlite-4-mk2

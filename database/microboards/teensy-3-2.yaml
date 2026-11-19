@@ -23,6 +23,6 @@ io:
   storage: Shield
   bms: 'No'
   imu: false
-price: 20
+price: 19.8
 technical_notes:
   - 'Max outputs: theoretically many more, but the common library for efficient hardware use is limited to 8'

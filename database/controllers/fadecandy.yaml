@@ -30,7 +30,7 @@ dead_links:
   - url: https://github.com/scanlime/fadecandy
     archive: https://web.archive.org/web/20230923191147/https://github.com/scanlime/fadecandy/
     checked: '2026-07-01'
-price: 25
+price: 24.95
 technical_notes:
   - Very popular platform with excellent dithering and interpolation
   - Project maintenance status uncertain - check GitHub readme

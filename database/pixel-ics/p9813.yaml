@@ -17,7 +17,7 @@ data:
   max_per_string_notes: TCL estimates up to 8000 pixels at 30 FPS
 electrical:
   output_voltage: 12V
-  supply_voltage: 5V
+  supply_voltage: 4.5V
   gpio:
     min: 3.5V
     max: 5V

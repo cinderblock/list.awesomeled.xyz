@@ -21,6 +21,6 @@ outputs:
 power:
   voltage:
     max: 24
-price: 18
+price: 17.8
 technical_notes:
   - Pixels groupable in 1, 2, 4, 5, 10, 100 as a single pixel

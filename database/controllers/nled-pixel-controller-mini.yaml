@@ -21,4 +21,4 @@ outputs:
 power:
   voltage:
     max: 25
-price: 14
+price: 13.5

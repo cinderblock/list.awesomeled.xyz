@@ -15,7 +15,7 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 18 A
+  max_current: 17.5 A
   max_voltage: 450 V
   ip_rating: IP68
 termination:

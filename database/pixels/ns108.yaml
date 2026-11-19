@@ -24,10 +24,10 @@ dead_links:
     checked: '2026-07-01'
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  vcc_voltage: 5.1V
   gpio:
     min: 3.0V
-    max: 6V
+    max: 5.6V
   channel_current: 20.0mA
   quiescent_current: 1.0mA
   wattage: 102mW
