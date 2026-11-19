@@ -30,13 +30,17 @@
     },
     "image": {
       "description": "Primary image: a bare filename, or an object carrying source/credit attribution (preferred for new images)",
-      "oneOf": [{ "type": "string" }, { "type": "null" }, { "$ref": "#/definitions/image_object" }]
+      "oneOf": [
+        { "type": "string" },
+        { "type": "null" },
+        { "$ref": "common.json#/definitions/image_object" }
+      ]
     },
     "images": {
       "description": "Array of images: bare filenames, or objects carrying source/credit attribution (preferred for new images)",
       "type": ["array", "null"],
       "items": {
-        "oneOf": [{ "type": "string" }, { "$ref": "#/definitions/image_object" }]
+        "oneOf": [{ "type": "string" }, { "$ref": "common.json#/definitions/image_object" }]
       }
     },
     "price": {
@@ -109,7 +113,7 @@
             "minimum": 1,
             "description": "Quantity this unit price applies at"
           },
-          "price": { "$ref": "#/definitions/price" },
+          "price": { "$ref": "common.json#/definitions/price" },
           "sku": {
             "type": "string",
             "description": "Exact orderable part number the price is for"
@@ -297,7 +301,7 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "connector": { "$ref": "#/definitions/output_connector" },
+        "connector": { "$ref": "common.json#/definitions/output_connector" },
         "count": {
           "type": "integer",
           "minimum": 1,
@@ -328,7 +332,7 @@
           "properties": {
             "max": {
               "description": "Maximum current per output in amps",
-              "$ref": "#/definitions/current"
+              "$ref": "common.json#/definitions/current"
             }
           }
         },
@@ -352,7 +356,7 @@
           "items": { "type": "string" },
           "description": "Supported pixel protocols (WS2812B, SK6812, APA102, etc.)"
         },
-        "clocked": { "$ref": "#/definitions/clocked_support" },
+        "clocked": { "$ref": "common.json#/definitions/clocked_support" },
         "auxiliary": {
           "type": "object",
           "additionalProperties": { "type": ["integer", "boolean"] },
@@ -386,15 +390,18 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "max": { "description": "Maximum current in amps", "$ref": "#/definitions/current" }
+            "max": {
+              "description": "Maximum current in amps",
+              "$ref": "common.json#/definitions/current"
+            }
           }
         },
         "voltage": {
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "max": { "$ref": "#/definitions/voltage" },
-            "min": { "$ref": "#/definitions/voltage" }
+            "max": { "$ref": "common.json#/definitions/voltage" },
+            "min": { "$ref": "common.json#/definitions/voltage" }
           }
         }
       }
@@ -527,8 +534,8 @@
       "propertyNames": { "pattern": "^[A-Za-z0-9_]+(\\.[A-Za-z0-9_]+)*$" },
       "additionalProperties": {
         "oneOf": [
-          { "$ref": "#/definitions/source" },
-          { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/source" } }
+          { "$ref": "common.json#/definitions/source" },
+          { "type": "array", "minItems": 1, "items": { "$ref": "common.json#/definitions/source" } }
         ]
       }
     },
@@ -570,7 +577,7 @@
           },
           "notes": { "type": "string" },
           "source": {
-            "$ref": "#/definitions/source",
+            "$ref": "common.json#/definitions/source",
             "description": "Where the relationship was verified (maker page, manual, datasheet)"
           }
         }

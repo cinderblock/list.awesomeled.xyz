@@ -324,11 +324,22 @@ function isPlainObject(v: unknown): v is Record<string, unknown> {
   return v != null && typeof v === 'object' && !Array.isArray(v) && !(v instanceof Date);
 }
 
+// Maps with a fixed key vocabulary that still read as one field whose truthy
+// keys are the values (common.json input_interfaces: "Ethernet", "Wi-Fi", …),
+// exactly like an open map
+const KEY_MAP_DEFS = ['input_interfaces'];
+
+function isKeyMap(info: NodeInfo | undefined): boolean {
+  if (!info) return false;
+  return (info.mapOf != null && !info.properties) || KEY_MAP_DEFS.some((d) => info.defs.has(d));
+}
+
 // A node is one field (not a group to descend into) when it is a scalar, a
 // list, an open map, or a string-or-object union such as creator.
 function isLeafNode(info: NodeInfo, path: string): boolean {
   if (leafKey(path) === 'price') return true;
   if (info.defs.has('price') || info.defs.has('price_tiers')) return true;
+  if (isKeyMap(info)) return true;
   if (!info.properties) return true;
   if (info.types.has('string') || info.types.has('array')) return true; // union with object
   return false;
@@ -464,8 +475,8 @@ function inferKind(
     if (defs.has(kind)) return { kind: 'quantity', quantity: kind };
   }
 
-  // Open map: its keys are the values ("Ethernet", "Wi-Fi", …)
-  if (info?.mapOf && !info.properties) return { kind: 'keys' };
+  // Open map (or fixed-vocabulary key map): its keys are the values
+  if (isKeyMap(info)) return { kind: 'keys' };
 
   if (types.has('array')) {
     const itemInfo = info?.items ? describeNode(info.items, ctx) : undefined;
