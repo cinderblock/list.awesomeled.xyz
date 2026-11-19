@@ -199,13 +199,29 @@ function makeS3(): { s3: S3Client; publicBase: string } {
 
 type Fetched = { ok: true; bytes: Uint8Array } | { ok: false; reason: string };
 
+const PDF_MAGIC = [0x25, 0x50, 0x44, 0x46, 0x2d]; // "%PDF-"
+
+/**
+ * Whether the bytes are a PDF: `%PDF-` within the first 1024 bytes, the same
+ * allowance PDF readers make. Some hosts prepend junk, e.g. a UTF-8 BOM
+ * (lumikit.com.br). Vendor sites also love serving HTML interstitials, which
+ * this rejects.
+ */
+export function isPdf(bytes: Uint8Array): boolean {
+  const end = Math.min(bytes.byteLength, 1024) - PDF_MAGIC.length;
+  for (let i = 0; i <= end; i++) {
+    if (PDF_MAGIC.every((b, j) => bytes[i + j] === b)) return true;
+  }
+  return false;
+}
+
 function checkPdf(bytes: Uint8Array): Fetched {
   if (bytes.byteLength > MAX_BYTES)
     return { ok: false, reason: `too large (${bytes.byteLength} bytes)` };
-  // PDF magic number - vendor sites love serving HTML interstitials
-  const head = new TextDecoder().decode(bytes.slice(0, 5));
-  if (head !== '%PDF-')
+  if (!isPdf(bytes)) {
+    const head = new TextDecoder().decode(bytes.slice(0, 5));
     return { ok: false, reason: `not a PDF (starts with ${JSON.stringify(head)})` };
+  }
   return { ok: true, bytes };
 }
 

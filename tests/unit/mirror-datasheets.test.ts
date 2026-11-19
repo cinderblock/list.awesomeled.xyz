@@ -12,7 +12,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'fs'
 import { tmpdir } from 'os';
 import { join, resolve } from 'path';
 import { parse } from 'yaml';
-import { insertMirrorBlock, type Mirror } from '../../scripts/mirror-datasheets';
+import { insertMirrorBlock, isPdf, type Mirror } from '../../scripts/mirror-datasheets';
 
 const MIRROR: Mirror = {
   url: 'https://assets.example/datasheets/pixels/ws2812-0123abcd.pdf',
@@ -20,6 +20,21 @@ const MIRROR: Mirror = {
   retrieved: '2026-11-18',
   source: 'https://cdn.example/ws2812.pdf',
 };
+
+describe('isPdf', () => {
+  const bytes = (s: string) => new Uint8Array(Buffer.from(s, 'latin1'));
+
+  test('accepts %PDF- at the start or after leading junk such as a BOM', () => {
+    expect(isPdf(bytes('%PDF-1.7\n'))).toBe(true);
+    expect(isPdf(bytes('\xef\xbb\xbf%PDF-1.7\n'))).toBe(true);
+  });
+
+  test('rejects HTML, empty bodies and a header past the first 1024 bytes', () => {
+    expect(isPdf(bytes('<!DOCTYPE html><p>blocked</p>'))).toBe(false);
+    expect(isPdf(new Uint8Array())).toBe(false);
+    expect(isPdf(bytes(' '.repeat(1020) + '%PDF-1.7'))).toBe(false);
+  });
+});
 
 describe('insertMirrorBlock', () => {
   test('inserts after url, before other datasheet keys', () => {
