@@ -60,7 +60,7 @@ related:
       url: https://kulplights.com/manuals/hardware/raspberry-pi/
       retrieved: '2026-11-18'
   - type: host
-    ref: microboards/raspberry-pi-3-model-b
+    ref: microboards/raspberry-pi-3-model-b-plus
     notes: Also works on a Pi 3 B+ (held only by the GPIO header; holes don't line up)
     source:
       url: https://kulplights.com/manuals/boards/k2-pi0/

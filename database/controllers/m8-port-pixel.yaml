@@ -63,7 +63,7 @@ related:
       retrieved: '2026-11-18'
   - type: host
     ref: microboards/raspberry-pi-3-model-b
-    notes: Pi 3 B+ falls under the maker's 'Raspberry Pi 3B and above'
+    notes: The maker's 'Raspberry Pi 3B and above'
     source:
       url: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
       retrieved: '2026-11-18'

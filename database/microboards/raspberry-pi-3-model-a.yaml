@@ -47,7 +47,7 @@ price_source:
   vendor: PiShop.us
 related:
   - type: variant
-    ref: microboards/raspberry-pi-3-model-b
+    ref: microboards/raspberry-pi-3-model-b-plus
     notes: 'A+ form of the Pi 3B+: same BCM2837B0 and wireless, less RAM, fewer ports'
     source:
       url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc

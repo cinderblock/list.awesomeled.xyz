@@ -52,7 +52,7 @@ price_source:
   vendor: Raspberry Pi
 related:
   - type: predecessor
-    ref: microboards/raspberry-pi-3-model-b
+    ref: microboards/raspberry-pi-3-model-b-plus
     notes: Pi 4B succeeded the Pi 3B+ and stays backward compatible with it
     source:
       url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-product-brief.pdf
