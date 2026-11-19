@@ -58,6 +58,8 @@ interface Result {
   archive?: string;
   /** Listed in the entry's dead_links (re-probe) */
   known?: boolean;
+  /** Final URL after redirects (ok verdicts) */
+  final?: string;
 }
 
 interface Targets {
@@ -65,11 +67,25 @@ interface Targets {
   knownDead: Set<string>; // `${entry}\n${url}` pairs listed in that entry's dead_links
 }
 
-// Whole-URL strings and URLs embedded in prose. Trailing punctuation that
-// ends a sentence or closes a parenthetical isn't part of the URL.
-const URL_IN_TEXT = /https?:\/\/[^\s<>"'`\])]+/g;
+// Whole-URL strings are taken as-is; URLs embedded in prose end at whitespace
+// or quotes. Parentheses are legal in URLs (Wikimedia `File:…_(123).jpg`,
+// `Manual (EN).pdf`), so only a trailing `)` that closes a parenthetical
+// (unbalanced) is dropped, along with sentence punctuation.
+const WHOLE_URL = /^https?:\/\/\S+$/;
+const URL_IN_TEXT = /https?:\/\/[^\s<>"'`]+/g;
+function trimUrl(u: string): string {
+  for (;;) {
+    const t = u.replace(/[.,;:!?\]]+$/, '');
+    const open = (t.match(/\(/g) ?? []).length;
+    const close = (t.match(/\)/g) ?? []).length;
+    const next = t.endsWith(')') && close > open ? t.slice(0, -1) : t;
+    if (next === u) return u;
+    u = next;
+  }
+}
 function urlsInText(text: string): string[] {
-  return (text.match(URL_IN_TEXT) ?? []).map((u) => u.replace(/[.,;:!?]+$/, ''));
+  if (WHOLE_URL.test(text)) return [text];
+  return (text.match(URL_IN_TEXT) ?? []).map(trimUrl);
 }
 
 // Recursively collect http(s) URLs from an entry value.
@@ -85,7 +101,19 @@ function collectUrls(value: unknown, out: Set<string>): void {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-async function probe(url: string): Promise<{ verdict: Verdict; detail: string }> {
+/** A deep link (with a path) that ended up at a bare site root. */
+function redirectedHome(from: string, to: string): boolean {
+  try {
+    const a = new URL(from);
+    const b = new URL(to);
+    const deep = a.pathname.replace(/\/$/, '') !== '' || a.search !== '';
+    return deep && (b.pathname === '/' || b.pathname === '') && b.search === '';
+  } catch {
+    return false;
+  }
+}
+
+async function probe(url: string): Promise<{ verdict: Verdict; detail: string; final?: string }> {
   const attempt = (method: 'HEAD' | 'GET') =>
     fetch(url, {
       method,
@@ -110,8 +138,13 @@ async function probe(url: string): Promise<{ verdict: Verdict; detail: string }>
     if (res.status === 404 || res.status === 410) {
       return { verdict: 'dead', detail: `HTTP ${res.status}` };
     }
+    if (res.ok && redirectedHome(url, res.url)) {
+      // A product page that now redirects to the site's front page is gone,
+      // even though the final response is a 200.
+      return { verdict: 'check', detail: `redirects to the homepage (${res.url})` };
+    }
     if (res.ok || (res.status >= 300 && res.status < 400)) {
-      return { verdict: 'ok', detail: `HTTP ${res.status}` };
+      return { verdict: 'ok', detail: `HTTP ${res.status}`, final: res.url };
     }
     return { verdict: 'check', detail: `HTTP ${res.status}` };
   } catch (e) {
@@ -256,13 +289,13 @@ async function checkLinks({ byUrl, knownDead }: Targets): Promise<Result[]> {
         const urls = queue.shift()!;
         for (const [i, url] of urls.entries()) {
           if (i > 0) await sleep(PER_HOST_GAP_MS);
-          const { verdict, detail } = await probe(url);
+          const { verdict, detail, final } = await probe(url);
           const places = byUrl.get(url)!;
           const isKnown = (entry: string) => knownDead.has(`${entry}\n${url}`);
           const archive =
             verdict === 'dead' && !places.every(isKnown) ? await waybackLatest(url) : undefined;
           for (const entry of places) {
-            results.push({ entry, url, verdict, detail, archive, known: isKnown(entry) });
+            results.push({ entry, url, verdict, detail, archive, final, known: isKnown(entry) });
           }
           done++;
           if (done % 50 === 0) console.log(`  …${done}/${byUrl.size}`);
@@ -275,8 +308,12 @@ async function checkLinks({ byUrl, knownDead }: Targets): Promise<Result[]> {
 
 function printLinkReport(all: Result[], deadOnly: boolean): string {
   // Already-annotated dead links only matter if they came back.
+  // Same site only: a dead domain that now redirects to someone else's page
+  // (a new owner, a parent company's catalog) hasn't come back.
+  const sameSite = (r: Result) =>
+    !r.final || hostOf(r.final).replace(/^www\./, '') === hostOf(r.url).replace(/^www\./, '');
   const back = all
-    .filter((r) => r.known && r.verdict === 'ok')
+    .filter((r) => r.known && r.verdict === 'ok' && sameSite(r))
     .sort((a, b) => a.entry.localeCompare(b.entry));
   const results = all.filter((r) => !r.known);
   const dead = results
