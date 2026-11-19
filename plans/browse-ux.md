@@ -85,7 +85,9 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**Current step: 7 (mobile card list).** Steps 1–6 are live (`d406c2c`, `60cd310`, `4681573`, `632ddde`).
+**Current step: 9 (entry page polish), then 10 (SEO / OpenGraph), 11 (contribution funnel), 12 (accessibility + performance).** Steps 1–8 are done; 1–6 are live (`d406c2c`, `60cd310`, `4681573`, `632ddde`), 7–8 ship together.
+
+Drafted ahead while test runs were in flight (uncommitted, in the worktree or the scratchpad `draft/` folder): the link-preview card renderer (`app/lib/og.server.ts`, `assets/fonts/`), the meta builder, sitemap / robots / preview-image routes, the entry-page contribute strip, the `/contribute` page with its generated field reference, and three GitHub issue forms (`.github/ISSUE_TEMPLATE/`).
 
 ## Findings / gotchas
 
@@ -135,16 +137,18 @@ Each step ships on its own (rebase, checks, push).
 - [x] Step 5 global search + 404 — `60cd310`: `/search-index.json` (490 entries, 41 kB gz), Ctrl/⌘+K palette, `/search?q=`, not-found page with suggestions, `404.html` written by `buildEnd`, catch-all route.
 - [x] Step 6 compare — `4681573`: row checkboxes + tray, `/compare?e=…` with differences-only, add / reorder / remove, copy link and Markdown, entry-page button.
 - [x] 2026-11-18 7:15 PM PST (03:15Z): hydration fix for URLs with a query string and the phone-width header fix pushed (`4681573`, `632ddde`). 77 e2e tests, 286 unit tests pass.
-- [ ] Step 7 mobile — header done (`632ddde`); card list for tables is next.
-- [ ] Step 8 home page
-- [ ] Step 9 entry page polish
-- [ ] Step 10 SEO / OpenGraph
-- [ ] Step 11 contribution funnel
+- [x] Step 7 mobile — header (`632ddde`); card list: below 640 px a category opens as one card per entry (same table, restyled), with a Sort menu, a remembered Cards / Table switch on any screen, and several cards per row on wide screens. 7 new e2e tests in `e2e/mobile.test.ts`.
+- [x] Step 8 home page — search box with live results from every category, the database in numbers, six "start with a question" links (each checked by e2e to still match something), category grid, what the site does that a sheet cannot, recently reviewed entries, contribute box. README gained "Using the Site". 6 e2e tests in `e2e/home.test.ts`.
+- [x] 2026-11-18 8:40 PM PST (04:40Z): full e2e on steps 7–8 after rebasing: 111 of 111 pass (one test needed a locator fix: it assumed a single `<header>` per page). 324 unit tests pass.
+- [ ] Step 9 entry page polish — contribute strip and copy-link drafted; generic value rendering of long URLs (ISSUES.md, from cross-links) still to do.
+- [ ] Step 10 SEO / OpenGraph — renderer, meta builder and routes drafted.
+- [ ] Step 11 contribution funnel — issue forms and `/contribute` drafted; CONTRIBUTING.md examples still show the old flat schema.
 - [ ] Step 12 accessibility + performance pass
 
 ## Open questions for the user
 
 1. **Default density.** Dense mode ships as a toggle and the current roomy rows stay the default. Recommendation: make dense the default on desktop (it is what a sheet user expects); say the word and it is a one-line change.
+2. **Issue labels.** The issue forms (step 11) can only apply labels that exist. The repository has GitHub's defaults plus `link-rot`; the site-bug form uses `bug`. Recommendation: add `data` and `new-entry` labels so corrections and additions sort themselves. Creating labels is a repository setting, so it waits for a yes.
 
 ## Things not to do
 
