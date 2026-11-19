@@ -1,8 +1,9 @@
 name: Monthly link check
 
-# Sweeps every URL in the database for link rot and keeps one rolling issue
-# up to date with the findings (DEAD urls come with ready-to-paste dead_links
-# stubs; CHECK urls are blocked/erroring and need a human look).
+# Sweeps every URL in the database for link rot, lists prices that are older
+# than a year or undated, and keeps one rolling issue up to date with the
+# findings (DEAD urls come with ready-to-paste dead_links stubs; CHECK urls
+# are blocked/erroring and need a human look).
 
 on:
   schedule:
@@ -44,14 +45,16 @@ jobs:
             const start = log.search(/^={10,}$/m);
             const report = (start >= 0 ? log.slice(start) : log.split('\n').slice(-5).join('\n')).trim();
             const summary = (log.match(/^ok \d+ \| dead \d+ \| check \d+$/m) ?? ['(no summary — checker crashed?)'])[0];
+            const prices = (log.match(/^prices: \d+ dated \| \d+ stale \| \d+ undated$/m) ?? [''])[0];
             const date = new Date().toISOString().slice(0, 10);
             const title = 'Link-rot report (rolling)';
             const body = [
               `Automated sweep from ${date} — \`bun run check-links\`.`,
               '',
               `**${summary}**`,
+              ...(prices ? ['', `**${prices}**`] : []),
               '',
-              'DEAD urls need a `dead_links` entry (stubs below); CHECK urls are bot-blocked or erroring and need a human look. See the workflow run for the full log.',
+              'DEAD urls need a `dead_links` entry (stubs below); CHECK urls are bot-blocked or erroring and need a human look. Stale prices need re-checking at their source (bump `price_source.retrieved`). See the workflow run for the full log.',
               '',
               '```',
               report.length > 60000 ? report.slice(0, 60000) + '\n… (truncated — see workflow log)' : report,
@@ -76,7 +79,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issues[0].number,
-                body: `Refreshed ${date}: **${summary}**`,
+                body: `Refreshed ${date}: **${summary}**${prices ? ` — ${prices}` : ''}`,
               });
             } else {
               await github.rest.issues.create({
