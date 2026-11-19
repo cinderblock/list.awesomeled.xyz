@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { existsSync, readdirSync, readFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
@@ -110,8 +110,19 @@ export function getGitTimestamps(): Map<string, Date> {
   const repoRoot = resolve(getDatabasePath(), '..');
 
   try {
-    const output = execSync(
-      `git log --format="%H %aI" --name-only --diff-filter=ACMR -- "database/**/*.yaml"`,
+    // A `Not-A-Review: <reason>` commit trailer works like IGNORED_COMMITS for
+    // commits whose hash isn't known in advance (CI bots, e.g. the datasheet
+    // mirror's PR, which may be rebased or squashed on merge).
+    const output = execFileSync(
+      'git',
+      [
+        'log',
+        '--format=%H %aI %(trailers:key=Not-A-Review,valueonly,separator=%x2C)',
+        '--name-only',
+        '--diff-filter=ACMR',
+        '--',
+        'database/**/*.yaml',
+      ],
       {
         encoding: 'utf-8',
         cwd: repoRoot,
@@ -122,18 +133,20 @@ export function getGitTimestamps(): Map<string, Date> {
     const lines = output.trim().split('\n');
     let currentCommit: string | null = null;
     let currentTimestamp: string | null = null;
+    let currentNotReview = false;
 
     for (const line of lines) {
       if (!line) continue;
 
-      // Commit hash + ISO timestamp pattern (e.g., "abc123 2024-01-15T...")
-      const commitMatch = line.match(/^([a-f0-9]{40}) (\d{4}-\d{2}-\d{2}T.+)$/);
+      // Commit hash + ISO timestamp (+ Not-A-Review trailer value, usually empty)
+      const commitMatch = line.match(/^([a-f0-9]{40}) (\d{4}-\d{2}-\d{2}T\S+) ?(.*)$/);
       if (commitMatch) {
         currentCommit = commitMatch[1];
         currentTimestamp = commitMatch[2];
+        currentNotReview = commitMatch[3].trim() !== '';
       } else if (currentTimestamp && line.endsWith('.yaml')) {
         // Skip files from ignored commits
-        if (currentCommit && IGNORED_COMMITS.has(currentCommit)) {
+        if (currentNotReview || (currentCommit && IGNORED_COMMITS.has(currentCommit))) {
           continue;
         }
         const fullPath = resolve(repoRoot, line);
