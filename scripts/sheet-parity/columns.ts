@@ -76,9 +76,13 @@ const packagePins: Kind = {
     const want = text.match(/\d+/g);
     if (!want) return undefined;
     const pins = new Set(
-      mapped.flatMap((m) => (Array.isArray(m) ? m : [m])).flatMap((p) => String(p).match(/\d+$/) ?? [])
+      mapped
+        .flatMap((m) => (Array.isArray(m) ? m : [m]))
+        .flatMap((p) => String(p).match(/\d+$/) ?? [])
     );
-    return want.every((n) => pins.has(n)) ? { status: 'ok' } : { status: mapped.length ? 'differs' : 'missing' };
+    return want.every((n) => pins.has(n))
+      ? { status: 'ok' }
+      : { status: mapped.length ? 'differs' : 'missing' };
   },
 };
 
@@ -120,7 +124,9 @@ const tints: Kind = {
     if (/c/i.test(text)) want.add('clear');
     const have = new Set(mapped.flatMap((m) => (Array.isArray(m) ? m.map(String) : [String(m)])));
     if (!want.size) return undefined;
-    return [...want].every((w) => have.has(w)) ? { status: 'ok' } : { status: mapped.length ? 'differs' : 'missing' };
+    return [...want].every((w) => have.has(w))
+      ? { status: 'ok' }
+      : { status: mapped.length ? 'differs' : 'missing' };
   },
 };
 
@@ -268,7 +274,9 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Wattage', milliwatts, ['electrical.wattage']),
     col('Channel Current', milliamps, ['electrical.channel_current']),
     col('Quiescent Current', milliamps, ['electrical.quiescent_current']),
-    col('Package Size', text, ['physical.packages'], { note: 'Standardized package list (0bb3346)' }),
+    col('Package Size', text, ['physical.packages'], {
+      note: 'Standardized package list (0bb3346)',
+    }),
     col('Pin Count', num, ['physical.pin_count']),
     col('Data Type', text, ['data.type']),
     col('Backup Data Line', bool, ['data.backup_line']),
@@ -299,7 +307,9 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('GPIO Max', volts, ['electrical.gpio.max']),
     col('Max Current', milliamps, ['electrical.max_current']),
     col('Quiescent Current', milliamps, ['electrical.quiescent_current']),
-    col('Package Size', text, ['physical.packages'], { note: 'Standardized package list (0bb3346)' }),
+    col('Package Size', text, ['physical.packages'], {
+      note: 'Standardized package list (0bb3346)',
+    }),
     col('Pin Count', packagePins, ['physical.packages'], {
       note: 'Pin counts now come from the package names (SOP8, QFN16, ...)',
     }),
