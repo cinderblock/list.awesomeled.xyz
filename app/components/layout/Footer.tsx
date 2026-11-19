@@ -1,3 +1,4 @@
+import { Link } from 'react-router';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { REPO_URL } from '~/lib/site';
 
@@ -12,6 +13,24 @@ export function Footer() {
             Contribute on GitHub
           </a>
         </p>
+        {/* Everything the header drops on small phones is still reachable here */}
+        <nav className="site-footer-nav" aria-label="Footer">
+          <Link to="/designer" className="site-footer-link">
+            Designer
+          </Link>
+          <Link to="/system-overview" className="site-footer-link">
+            System overview
+          </Link>
+          <Link to="/search" className="site-footer-link">
+            Search
+          </Link>
+          <Link to="/compare" className="site-footer-link">
+            Compare
+          </Link>
+          <Link to="/about" className="site-footer-link">
+            About
+          </Link>
+        </nav>
       </div>
     </footer>
   );

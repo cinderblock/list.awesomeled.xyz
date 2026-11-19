@@ -150,19 +150,6 @@ says ENTTEC, $400, 2 outputs, 60 V, discontinued, and links
 an ENTTEC DIN-rail pixel controller under the wrong name. No database entry
 seems to cover it; needs identifying from that URL (Wayback if dead).
 
-## Header is wider than a phone: every page scrolls sideways (stream 7)
-
-Seen by the designer's phone test (stream 3) after the header search landed.
-At a 390 px viewport `.site-nav` ends at x = 399, so `document.documentElement`
-is 399 px wide on every page (`/controllers` too, not just `/designer`).
-Repro: any page at 390 × 844, then
-`document.documentElement.scrollWidth - document.documentElement.clientWidth`
-is 9. The logo, the search icon and the four nav items don't fit together.
-
-Why it matters: the whole site slides sideways under a thumb on phones. The
-designer's own test now checks only the designer's content, so this needs its
-own fix and test in the header.
-
 ## Pixels' `electrical.wattage` is one channel's power, not the pixel's (stream 2)
 
 Found by the designer (stream 3). The schema describes `wattage` as "Power

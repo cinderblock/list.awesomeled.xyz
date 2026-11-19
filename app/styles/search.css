@@ -5,13 +5,21 @@
 /* ==========================================================================
    Header trigger: looks like a search box, opens the palette
    ========================================================================== */
+/* The logo never wraps; the search box is what gives way */
+.site-logo {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
 .site-search {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  width: min(22rem, 100%);
+  flex: 0 1 22rem;
+  min-width: 0;
   height: 2.25rem;
   margin-left: var(--space-6);
+  margin-right: var(--space-2);
   padding: 0 var(--space-2) 0 var(--space-3);
   font-size: 0.875rem;
   color: var(--muted-foreground);
@@ -51,12 +59,15 @@
   white-space: nowrap;
 }
 
-/* The header has to fit a phone: the box becomes an icon button */
+/* The header has to fit a phone: the box becomes an icon button, and the
+   rest tightens up step by step so nothing pushes the page sideways */
 @media (max-width: 720px) {
   .site-search {
-    width: 2.5rem;
-    height: 2.5rem;
+    flex: 0 0 2.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
     margin-left: auto;
+    margin-right: 0;
     padding: 0;
     justify-content: center;
     color: var(--foreground);
@@ -71,6 +82,55 @@
 
   .site-search + .site-nav {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header-content {
+    padding-left: var(--space-3);
+    padding-right: var(--space-2);
+  }
+
+  .site-logo {
+    font-size: 1.0625rem;
+    white-space: nowrap;
+  }
+
+  .site-nav {
+    gap: 0;
+  }
+
+  .site-nav .site-nav-link:not(.btn--icon) {
+    padding: var(--space-2);
+  }
+
+  .site-nav .btn--icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+/* Narrow phones: the repository link is in the footer too */
+@media (max-width: 420px) {
+  .site-nav a.btn--icon {
+    display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-logo {
+    font-size: 1rem;
+  }
+
+  .site-nav .site-nav-link:not(.btn--icon) {
+    padding: var(--space-2) 0.375rem;
+  }
+}
+
+/* The smallest phones: About moves to the footer */
+@media (max-width: 340px) {
+  .site-nav a[href='/about'] {
+    display: none;
   }
 }
 

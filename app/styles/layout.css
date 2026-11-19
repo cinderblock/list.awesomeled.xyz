@@ -107,6 +107,16 @@
   transition: color var(--transition-fast);
 }
 
+.site-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1) var(--space-4);
+  margin-top: var(--space-2);
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
 .site-footer-link:hover {
   color: var(--foreground);
 }
