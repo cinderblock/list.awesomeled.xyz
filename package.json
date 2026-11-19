@@ -18,6 +18,7 @@
     "test:e2e": "playwright test --project=chromium",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:visual": "playwright test --project=visual --workers=1",
+    "test:prod": "playwright test --config playwright.prod.config.ts",
     "agent-review": "bun run scripts/agent-review.ts",
     "review": "bun run scripts/review-entry.ts",
     "review:agent": "bun run scripts/review-entry-agent.ts",
