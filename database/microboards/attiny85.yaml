@@ -16,6 +16,7 @@ compute:
   linux: false
 connectivity:
   serial: true
+  usb: No
 io:
   max_outputs: 6
   bms: 'No'

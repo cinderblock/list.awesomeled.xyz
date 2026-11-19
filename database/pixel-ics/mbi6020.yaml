@@ -2,7 +2,7 @@ name: MBI6020
 creator: Macroblock
 color:
   channel_bits: 10
-  pwm_frequency: 9.8kHz
+  pwm_frequency: 9.766kHz
 data:
   clocked: true
   channels: 3

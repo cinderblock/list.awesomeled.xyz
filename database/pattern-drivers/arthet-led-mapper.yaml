@@ -13,5 +13,6 @@ platforms:
     - Windows
     - macOS
     - Linux
+  notes: arm64 builds too
 pricing:
   price: Free

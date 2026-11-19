@@ -2,7 +2,7 @@ name: UCS9812
 creator: Normand Electronics
 color:
   channel_bits: 16
-  pwm_frequency: 1.0kHz
+  pwm_frequency: 1.024kHz
 data:
   clocked: false
   channels: 3

@@ -5,7 +5,7 @@ notes: Fast refresh, fast PWM, 2 RGB pixels per IC, refresh any time
 color:
   channel_bits: 8
   aggregate_bits: 7
-  pwm_frequency: 9.4kHz
+  pwm_frequency: 9.375kHz
   pwm_frequency_notes: 1.2MHz internal clock / 128
 data:
   type: LPD8806

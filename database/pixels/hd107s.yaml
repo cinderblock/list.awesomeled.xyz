@@ -25,6 +25,7 @@ electrical:
     max: 5V
   channel_current: 17mA
   quiescent_current: 0.1mA
+  wattage: 85mW
 other_links:
   - https://www.advateklighting.com/pixel-protocols/hd107s
   - https://www.hd107s-led.com/product-category/hd107s-led-chip/

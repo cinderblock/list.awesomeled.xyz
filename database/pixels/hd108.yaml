@@ -22,6 +22,7 @@ electrical:
     max: 5V
   channel_current: 17.0mA
   quiescent_current: 0.1mA
+  wattage: 85mW
 other_links:
   - https://www.advateklighting.com/pixel-protocols/hd108
   - https://www.hd108-led.com/product-category/hd108-led-chip/

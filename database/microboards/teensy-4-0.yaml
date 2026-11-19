@@ -6,6 +6,7 @@ creator:
 power:
   voltage:
     max: 5V
+  gpio_voltage: 3.3V
 compute:
   soc: iMXRT1062
   cpu: ARM Cortex-M7

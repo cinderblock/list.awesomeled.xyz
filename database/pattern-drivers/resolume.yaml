@@ -8,9 +8,9 @@ inputs:
   other: MIDI, OSC, Spout, Syphon
 outputs:
   protocols:
-    artnet: true
+    artnet: Both
     sacn: true
-    dmx: true
+    dmx: Both
   other: MIDI
 capabilities:
   live: true
@@ -23,15 +23,15 @@ platforms:
     - Windows
     - macOS
 pricing:
-  price: 299-799
+  price: €299-€799
   license_type: perpetual
   tiers:
     - tier: Avenue
-      price: 299
+      price: €299
       features: VJ and media server software
       limitations: No advanced output options
     - tier: Arena
-      price: 799
+      price: €799
       features: Full version with advanced output mapping and LED control
   demo:
     available: true

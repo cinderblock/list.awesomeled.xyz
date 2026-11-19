@@ -22,7 +22,9 @@ outputs:
 power:
   voltage:
     max: 24
-price: 269
+price:
+  amount: 200
+  currency: GBP
 technical_notes:
   - Decodes up to 32 Art-Net universes (5440 RGB pixels) or 28 sACN/E1.31 universes via isolated RJ45 Ethernet
   - Drives WS281x, SK6812, UCS19xx, UCS2903, TM180x, INK1003

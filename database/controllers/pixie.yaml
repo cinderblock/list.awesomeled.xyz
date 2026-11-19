@@ -22,4 +22,6 @@ outputs:
 power:
   voltage:
     max: 5
-price: 47
+price:
+  amount: 35
+  currency: GBP

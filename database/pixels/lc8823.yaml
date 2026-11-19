@@ -12,6 +12,7 @@ electrical:
   led_voltage: 3-7.5V
   vcc_voltage: 5V
   channel_current: 17.0mA
+  wattage: 85mW
 other_links:
   - https://www.szledcolor.com/product/view/id/622
 physical:

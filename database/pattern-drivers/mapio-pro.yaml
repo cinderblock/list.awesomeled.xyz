@@ -20,6 +20,6 @@ platforms:
     - Windows
     - macOS
 pricing:
-  price: 234
+  price: €200
   demo:
     available: Watermarked demo

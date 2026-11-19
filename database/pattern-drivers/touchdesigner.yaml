@@ -3,26 +3,26 @@ status: active
 creator: Derivative
 notes: Visual programming environment with lots of useful built-ins. Not specifically for LED patterns, but they're easy to make with a little extra.
 inputs:
-  video: true
-  audio: true
+  video: Both
+  audio: Both
   adc: true
   other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton, SMPTE/LTC
 outputs:
   protocols:
-    artnet: true
-    sacn: true
-    dmx: true
-    kinet: true
+    artnet: Both
+    sacn: Both
+    dmx: Both
+    kinet: Both
   dmx_notes: Requires DMX USB adapter for direct DMX output. USB DMX output is limited to ENTTEC "DMX USB PRO" devices (not the Open DMX USB)
-  gpio: true
-  serial: true
+  gpio: Both
+  serial: Both
   serial_notes: Serial support for Arduino and microcontroller communication
   other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton
 capabilities:
   live: true
   designer: true
-  visualizer: 3D
-  programmatic: true
+  visualizer: 3D (build your own)
+  programmatic: Both
 integrations: Tons
 language: Python, GLSL
 links:

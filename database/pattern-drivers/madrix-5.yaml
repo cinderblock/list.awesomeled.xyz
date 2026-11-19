@@ -3,15 +3,15 @@ status: active
 creator: Inoage
 notes: GPIO available with Madrix Orion external box
 inputs:
-  video: true
-  audio: true
+  video: Both
+  audio: Both
   adc: false
   other: MIDI, HTTP, MA-net, CITP, SMPTE, Spout, GamePort
 outputs:
   protocols:
-    artnet: true
-    sacn: true
-    dmx: true
+    artnet: Both
+    sacn: Both
+    dmx: Both
     kinet: true
   gpio: false
   other: DVI, Robe, Insta, Hue

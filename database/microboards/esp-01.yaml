@@ -11,6 +11,7 @@ connectivity:
   wifi: 2.4GHz
   bluetooth: '4.1'
   serial: true
+  usb: No
 io:
   bms: 'No'
   imu: false
