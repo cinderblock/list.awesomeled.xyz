@@ -41,8 +41,8 @@ price_source:
   url: https://www.lcsc.com/product-detail/C16214.html
   vendor: LCSC
 ratings:
-  max_current: 2 A
-  max_voltage: 30 V
+  max_current: 2A
+  max_voltage: 30V
   ip_rating: IP20-IP65
 sources:
   aliases:
@@ -53,8 +53,8 @@ termination:
   solder: true
   crimp: true
   idc: true
-  smallest_gauge: 24 AWG
-  largest_gauge: 18 AWG
+  smallest_gauge: 24
+  largest_gauge: 18
 wiring:
   pinout: +pin -sleeve
   convention: Female source

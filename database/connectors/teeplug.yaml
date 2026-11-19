@@ -21,15 +21,15 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 17.5 A
-  max_voltage: 450 V
+  max_current: 17.5A
+  max_voltage: 450V
   ip_rating: IP68
 termination:
   solder: false
   screw_terminal: true
   crimp: false
   idc: true
-  smallest_gauge: 6 AWG
-  largest_gauge: 16 AWG
+  smallest_gauge: 6
+  largest_gauge: 16
 wiring:
   colors: Green or Grey Collar

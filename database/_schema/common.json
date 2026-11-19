@@ -161,6 +161,13 @@
         { "type": "string", "pattern": "^\\d+(\\.\\d+)?-\\d+(\\.\\d+)?\\s?(µm|um|mm|cm|m|in)$" }
       ]
     },
+    "ip_rating": {
+      "description": "Ingress-protection rating ('IP67'), a range across variants ('IP20-IP65'), or false when not sealed",
+      "oneOf": [
+        { "const": false },
+        { "type": "string", "pattern": "^IP[0-9X][0-9X]K?(-IP[0-9X][0-9X]K?)?$" }
+      ]
+    },
     "price_range": {
       "enum": ["$", "$$", "$$$", "$$$$", "$$$$$", "$$$$$$"],
       "description": "Relative cost band, $ (cheapest) to $$$$$$, for things without one comparable unit price"

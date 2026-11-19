@@ -16,7 +16,7 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 10.0 mm
+  pitch: 10mm
   min_pins: 2
   max_pins: 2
   rows: 1
@@ -43,9 +43,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C5334533.html
   vendor: LCSC
 ratings:
-  max_current: 90 A # XT90; the smaller XT60 variant is rated 60 A
-  max_voltage: 42 V
-  ip_rating: No
+  max_current: 90A # XT90; the smaller XT60 variant is rated 60 A
+  max_voltage: 42V
+  ip_rating: false
 sources:
   aliases:
     url: https://connectorsupplier.com/meet-the-connector-xt-connectors/
@@ -56,8 +56,8 @@ termination:
   screw_terminal: false
   crimp: false
   idc: false
-  smallest_gauge: 22 AWG
-  largest_gauge: 10 AWG
+  smallest_gauge: 22
+  largest_gauge: 10
 wiring:
   convention: Female source, shrouded male load
   colors: Yellow, black

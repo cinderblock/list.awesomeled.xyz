@@ -19,8 +19,8 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 10 A
-  max_voltage: 60 V
+  max_current: 10A
+  max_voltage: 60V
   ip_rating: IP68
 termination:
   solder: true

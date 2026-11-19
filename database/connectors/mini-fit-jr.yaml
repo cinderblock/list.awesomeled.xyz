@@ -15,7 +15,7 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 4.2 mm
+  pitch: 4.2mm
   min_pins: 2
   max_pins: 16
   rows: 2
@@ -42,14 +42,14 @@ price_source:
   url: https://www.lcsc.com/product-detail/C277599.html
   vendor: LCSC
 ratings:
-  max_current: 13 A
-  max_voltage: 600 V
-  ip_rating: No
+  max_current: 13A
+  max_voltage: 600V
+  ip_rating: false
 termination:
   solder: false
   crimp: true
   idc: false
-  smallest_gauge: 28 AWG
-  largest_gauge: 16 AWG
+  smallest_gauge: 28
+  largest_gauge: 16
 wiring:
   colors: Nylon Natural

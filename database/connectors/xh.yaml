@@ -14,14 +14,14 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 2.5 mm
+  pitch: 2.5mm
   min_pins: 1
   max_pins: 20
   gendered: true
   locking: Latching
   panel_mount: false
   wire_to_wire: true
-  pcb_mount: Both
+  pcb_mount: both
   board_fingers: false
 price:
   - qty: 20
@@ -40,9 +40,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C144402.html
   vendor: LCSC
 ratings:
-  max_current: 3 A
-  max_voltage: 250 V
-  ip_rating: No
+  max_current: 3A
+  max_voltage: 250V
+  ip_rating: false
 sources:
   aliases:
     url: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
@@ -51,8 +51,8 @@ sources:
 termination:
   solder: true
   idc: false
-  smallest_gauge: 30 AWG
-  largest_gauge: 22 AWG
+  smallest_gauge: 30
+  largest_gauge: 22
   crimp: true
 wiring:
   colors: White

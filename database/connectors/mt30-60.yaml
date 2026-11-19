@@ -40,8 +40,8 @@ price_source:
   url: https://www.lcsc.com/product-detail/C99176.html
   vendor: LCSC
 ratings:
-  max_current: 60 A # MT60; the smaller MT30 variant is rated 30 A
-  max_voltage: 60 V
+  max_current: 60A # MT60; the smaller MT30 variant is rated 30 A
+  max_voltage: 60V
   ip_rating: IP20-IP65
 related:
   - type: related
@@ -64,8 +64,8 @@ termination:
   screw_terminal: false
   crimp: false
   idc: false
-  smallest_gauge: 20 AWG
-  largest_gauge: 16 AWG
+  smallest_gauge: 20
+  largest_gauge: 16
 wiring:
   colors: Yellow or Black
 year_introduced: 2018

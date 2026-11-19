@@ -46,7 +46,6 @@ const FOLDER_SCHEMAS: Record<string, string> = {
 // plans/database-review.md); remove it from this list in the same commit.
 const STALE_EXAMPLES = new Set([
   'commercial-systems',
-  'connectors',
   'drive-libraries',
   'level-converters',
   'microboards',

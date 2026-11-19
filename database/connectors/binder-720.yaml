@@ -20,15 +20,15 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 5 A
-  max_voltage: 250 V
+  max_current: 5A
+  max_voltage: 250V
   ip_rating: IP67
 termination:
   solder: true
   screw_terminal: false
   crimp: false
   idc: false
-  smallest_gauge: 28 AWG
-  largest_gauge: 22 AWG
+  smallest_gauge: 28
+  largest_gauge: 22
 wiring:
   colors: Colour Coded Collar

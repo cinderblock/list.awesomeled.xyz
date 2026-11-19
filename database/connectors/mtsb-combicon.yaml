@@ -20,7 +20,7 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 5.08 mm
+  pitch: 5.08mm
   min_pins: 2
   max_pins: 12
   rows: 1
@@ -28,7 +28,7 @@ mechanical:
   locking: Friction
   panel_mount: false
   wire_to_wire: false
-  pcb_mount: Both
+  pcb_mount: both
   board_fingers: true
 price:
   - qty: 1
@@ -47,9 +47,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C90073.html
   vendor: LCSC
 ratings:
-  max_current: 10 A
-  max_voltage: 300 V
-  ip_rating: No
+  max_current: 10A
+  max_voltage: 300V
+  ip_rating: false
 sources:
   aliases:
     url: https://novapart.co/products/1757022/pluggable-terminal-block-508-mm-3-ways-24-awg-12
@@ -63,7 +63,7 @@ termination:
   solder: true
   crimp: true
   idc: true
-  smallest_gauge: 20 AWG
-  largest_gauge: 10 AWG
+  smallest_gauge: 20
+  largest_gauge: 10
 wiring:
   colors: Green

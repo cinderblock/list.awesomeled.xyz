@@ -45,9 +45,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C157899.html
   vendor: LCSC
 ratings:
-  max_current: 10 A
-  max_voltage: 250 V
-  ip_rating: No
+  max_current: 10A
+  max_voltage: 250V
+  ip_rating: false
 sources:
   aliases:
     url: https://www.lcsc.com/product-detail/C160314.html
@@ -57,5 +57,5 @@ termination:
   solder: false
   crimp: true
   idc: false
-  smallest_gauge: 22 AWG
-  largest_gauge: 16 AWG
+  smallest_gauge: 22
+  largest_gauge: 16

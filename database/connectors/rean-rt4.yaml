@@ -34,8 +34,8 @@ price_source:
   url: https://www.thomannmusic.com/neutrik_rean_tiny_xlr_rt_4_fcb.htm
   vendor: Thomann
 ratings:
-  max_current: 5 A
-  max_voltage: 250 V
+  max_current: 5A
+  max_voltage: 250V
   ip_rating: IP40
 sources:
   aliases:
@@ -46,5 +46,5 @@ termination:
   solder: true
   crimp: false
   idc: false
-  smallest_gauge: 28 AWG
-  largest_gauge: 24 AWG
+  smallest_gauge: 28
+  largest_gauge: 24

@@ -16,10 +16,9 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Blade
-  pitch: 15.9 mm
+  pitch: 15.9mm
   min_pins: 1
   max_pins: 16
-  rows: N/A
   gendered: false
   locking: Friction
   panel_mount: true
@@ -37,10 +36,10 @@ price_source:
   url: https://www.lcsc.com/product-detail/C367207.html
   vendor: LCSC
 ratings:
-  max_current: 55 A
-  max_voltage: 600 V
-  ip_rating: IP65 Available
-  ip_rating_notes: SpecPak shells and boots for waterproofing
+  max_current: 55A
+  max_voltage: 600V
+  ip_rating: false
+  ip_rating_notes: IP65 with SpecPak shells and boots
 sources:
   aliases:
     url: https://www.andersonpower.com/?p=301
@@ -51,8 +50,8 @@ termination:
   screw_terminal: false
   crimp: true
   idc: false
-  smallest_gauge: 20 AWG
-  largest_gauge: 6 AWG
+  smallest_gauge: 20
+  largest_gauge: 6
 wiring:
   convention: When viewed from mating connector's perspective with tongues on the bottom, the red housing is on the left
   colors: Multi

@@ -18,7 +18,7 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 1.0 mm
+  pitch: 1mm
   min_pins: 2
   max_pins: 25
   rows: 2
@@ -26,7 +26,7 @@ mechanical:
   locking: Latching
   panel_mount: false
   wire_to_wire: true
-  pcb_mount: Both
+  pcb_mount: both
   board_fingers: false
 price:
   - qty: 5
@@ -45,9 +45,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C268100.html
   vendor: LCSC
 ratings:
-  max_current: 1 A
-  max_voltage: 50 V
-  ip_rating: No
+  max_current: 1A
+  max_voltage: 50V
+  ip_rating: false
 sources:
   aliases:
     url: https://learn.adafruit.com/introducing-adafruit-stemma-qt?view=all
@@ -57,5 +57,5 @@ termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 30 AWG
-  largest_gauge: 28 AWG
+  smallest_gauge: 30
+  largest_gauge: 28

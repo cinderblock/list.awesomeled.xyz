@@ -20,14 +20,14 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 2.0 mm
+  pitch: 2mm
   min_pins: 2
   rows: 1
   gendered: true
   locking: Detent
   panel_mount: false
   wire_to_wire: false
-  pcb_mount: Both
+  pcb_mount: both
   board_fingers: false
 price:
   - qty: 50
@@ -46,9 +46,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C265393.html
   vendor: LCSC
 ratings:
-  max_current: 2 A
-  max_voltage: 100 V
-  ip_rating: No
+  max_current: 2A
+  max_voltage: 100V
+  ip_rating: false
 sources:
   aliases:
     url: https://learn.adafruit.com/introducing-adafruit-stemma-qt?view=all
@@ -58,8 +58,8 @@ termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 24 AWG
-  largest_gauge: 24 AWG
+  smallest_gauge: 24
+  largest_gauge: 24
 wiring:
   pinout: G D V
   colors: White

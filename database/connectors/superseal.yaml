@@ -1,5 +1,5 @@
 name: Superseal
-creator: TE /AMP
+creator: TE / AMP
 notes: AMP Superseal original product ,automotive and marine series, much copied . Requires specific crimp tool for contacts.
 aliases:
   - AMP SUPERSEAL 1.5
@@ -14,7 +14,7 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 6.0 mm
+  pitch: 6mm
   min_pins: 1
   max_pins: 8
   rows: 2
@@ -41,8 +41,8 @@ price_source:
   url: https://www.lcsc.com/product-detail/C86482.html
   vendor: LCSC
 ratings:
-  max_current: 14 A
-  max_voltage: 24 V
+  max_current: 14A
+  max_voltage: 24V
   ip_rating: IP68
 sources:
   aliases:
@@ -53,5 +53,5 @@ termination:
   solder: false
   crimp: true
   idc: false
-  smallest_gauge: 22 AWG
-  largest_gauge: 14 AWG
+  smallest_gauge: 22
+  largest_gauge: 14

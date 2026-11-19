@@ -1,5 +1,5 @@
 name: Mate-N-Lok
-creator: TE /AMP
+creator: TE / AMP
 notes: Popular automotive connector
 aliases:
   - Universal MATE-N-LOK
@@ -16,7 +16,7 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 5.08 mm
+  pitch: 5.08mm
   min_pins: 2
   max_pins: 10
   rows: 2
@@ -43,9 +43,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C187803.html
   vendor: LCSC
 ratings:
-  max_current: 19 A
-  max_voltage: 600 V
-  ip_rating: No
+  max_current: 19A
+  max_voltage: 600V
+  ip_rating: false
 sources:
   aliases:
     url: https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story
@@ -56,7 +56,7 @@ termination:
   screw_terminal: false
   crimp: true
   idc: false
-  smallest_gauge: 30 AWG
-  largest_gauge: 10 AWG
+  smallest_gauge: 30
+  largest_gauge: 10
 wiring:
   colors: Range of Colours

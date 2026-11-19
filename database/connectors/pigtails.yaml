@@ -26,14 +26,14 @@ price_source:
   url: https://wiredwatts.com/wire
   vendor: WiredWatts
 ratings:
-  max_current: 5 A
-  max_voltage: 50 V
+  max_current: 5A
+  max_voltage: 50V
   ip_rating: IP55
 termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 20 AWG
-  largest_gauge: 18 AWG
+  smallest_gauge: 20
+  largest_gauge: 18
 wiring:
   colors: Black

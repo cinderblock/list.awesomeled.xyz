@@ -1,5 +1,5 @@
 name: Hirschmann CA
-creator: Lumberg /Belden
+creator: Lumberg / Belden
 notes: panel mount ones fit in a D-size/XLR cutout
 datasheet:
   url: https://catalog.belden.com/techdata/EN/CA3LD_techdata.pdf
@@ -14,7 +14,6 @@ mechanical:
   contact_type: Pins
   min_pins: 3
   max_pins: 7
-  rows: N/A
   gendered: true
   locking: Screw Lock
   panel_mount: true
@@ -22,13 +21,13 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 16 A
-  max_voltage: 400 V
+  max_current: 16A
+  max_voltage: 400V
   ip_rating: IP67
 termination:
   solder: true
   screw_terminal: true
   crimp: false
   idc: false
-  smallest_gauge: 22 AWG
-  largest_gauge: 12 AWG
+  smallest_gauge: 22
+  largest_gauge: 12

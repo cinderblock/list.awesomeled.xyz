@@ -24,7 +24,6 @@ mechanical:
   contact_type: Pins
   min_pins: 6
   max_pins: 6
-  rows: N/A
   gendered: true
   locking: Latching
   panel_mount: false
@@ -32,13 +31,13 @@ mechanical:
   pcb_mount: false
   board_fingers: false
 ratings:
-  max_current: 16 A
-  max_voltage: 250 V
+  max_current: 16A
+  max_voltage: 250V
   ip_rating: IP67
 termination:
   screw_terminal: false
   crimp: false
   idc: false
-  smallest_gauge: 20 AWG
-  largest_gauge: 12 AWG
+  smallest_gauge: 20
+  largest_gauge: 12
 year_introduced: 2023

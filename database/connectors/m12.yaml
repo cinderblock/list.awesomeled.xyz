@@ -13,7 +13,6 @@ mechanical:
   contact_type: Pins
   min_pins: 3
   max_pins: 8
-  rows: N/A
   gendered: true
   locking: Screw Lock
   panel_mount: true
@@ -37,14 +36,14 @@ price_source:
   url: https://www.lcsc.com/product-detail/C20828529.html
   vendor: LCSC
 ratings:
-  max_current: 4 A
-  max_voltage: 50 V
+  max_current: 4A
+  max_voltage: 50V
   ip_rating: IP67
 termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 22 AWG
-  largest_gauge: 14 AWG
+  smallest_gauge: 22
+  largest_gauge: 14
 wiring:
   colors: Black

@@ -1,5 +1,5 @@
 name: XLR 5
-creator: Neutrik /Generic
+creator: Neutrik / Generic
 notes: 5 Pin is USITT Standard for DMX 512, Pins 4 + 5 Not Used In Standard. Beware of power or second universe on non standard pinouts . XLR 4 scroller cable 2 data+2 power, XLR 6 comms & video gear.
 aliases:
   - 5-pin XLR
@@ -18,12 +18,11 @@ mechanical:
   contact_type: Pins
   min_pins: 2
   max_pins: 7
-  rows: N/A
   gendered: true
   locking: Latching
   panel_mount: true
   wire_to_wire: true
-  pcb_mount: Both
+  pcb_mount: both
   board_fingers: false
 price:
   - qty: 1
@@ -36,8 +35,8 @@ price_source:
   url: https://www.thomannmusic.com/neutrik_nc5_mxx.htm
   vendor: Thomann
 ratings:
-  max_current: 10 A
-  max_voltage: 50 V
+  max_current: 10A
+  max_voltage: 50V
   ip_rating: IP40
 related:
   - type: variant
@@ -55,8 +54,8 @@ termination:
   solder: true
   crimp: true
   idc: true
-  smallest_gauge: 22 AWG
-  largest_gauge: 14 AWG
+  smallest_gauge: 22
+  largest_gauge: 14
 wiring:
   convention: Female output jack, male input jack
   colors: Black, Silver, optional colored collars

@@ -18,7 +18,7 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Pins
-  pitch: 2.5 mm
+  pitch: 2.5mm
   min_pins: 2
   rows: 1
   gendered: true
@@ -44,9 +44,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C157908.html
   vendor: LCSC
 ratings:
-  max_current: 3 A
-  max_voltage: 250 V
-  ip_rating: No
+  max_current: 3A
+  max_voltage: 250V
+  ip_rating: false
 sources:
   aliases:
     url: https://www.adafruit.com/product/2880

@@ -44,9 +44,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C17676506.html
   vendor: LCSC
 ratings:
-  max_current: 1 A
-  max_voltage: 50 V
-  ip_rating: No
+  max_current: 1A
+  max_voltage: 50V
+  ip_rating: false
 sources:
   aliases:
     url: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/
@@ -56,7 +56,7 @@ termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 28 AWG
-  largest_gauge: 24 AWG
+  smallest_gauge: 28
+  largest_gauge: 24
 wiring:
   colors: Black shell

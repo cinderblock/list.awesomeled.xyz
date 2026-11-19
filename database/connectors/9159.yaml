@@ -14,7 +14,7 @@ links:
 mechanical:
   outline: Rectangular
   contact_type: Spring
-  pitch: 3.0 mm
+  pitch: 3mm
   min_pins: 2
   max_pins: 6
   rows: 1
@@ -41,9 +41,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C21287753.html
   vendor: LCSC
 ratings:
-  max_current: 5 A
-  max_voltage: 125 V
-  ip_rating: No
+  max_current: 5A
+  max_voltage: 125V
+  ip_rating: false
 sources:
   aliases:
     url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
@@ -53,7 +53,7 @@ termination:
   solder: true
   crimp: true
   idc: true
-  smallest_gauge: 24 AWG
-  largest_gauge: 22 AWG
+  smallest_gauge: 24
+  largest_gauge: 22
 wiring:
   colors: White

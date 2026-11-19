@@ -33,8 +33,8 @@ price_source:
   url: https://www.thomannmusic.com/pce_013_6_shark_16a_3pol_230v_m.htm
   vendor: Thomann
 ratings:
-  max_current: 16 A
-  max_voltage: 415 V
+  max_current: 16A
+  max_voltage: 415V
   ip_rating: IP65
 sources:
   aliases:
@@ -46,7 +46,7 @@ termination:
   screw_terminal: true
   crimp: true
   idc: false
-  smallest_gauge: 22 AWG
-  largest_gauge: 12 AWG
+  smallest_gauge: 22
+  largest_gauge: 12
 wiring:
   colors: Yellow 110V Blue 240V Red 415V

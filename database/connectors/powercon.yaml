@@ -18,7 +18,6 @@ mechanical:
   contact_type: Blade
   min_pins: 3
   max_pins: 3
-  rows: N/A
   gendered: true
   locking: Latching
   panel_mount: true
@@ -42,8 +41,8 @@ price_source:
   url: https://www.thomannmusic.com/neutrik_nac3fxxa_w_s.htm
   vendor: Thomann
 ratings:
-  max_current: 16 A
-  max_voltage: 250 V
+  max_current: 16A
+  max_voltage: 250V
   ip_rating: IP65
   max_current_notes: 16A True1 TOP, 20A powerCON, 32A big powerCON
 sources:
@@ -58,7 +57,7 @@ termination:
   screw_terminal: true
   crimp: true
   idc: false
-  smallest_gauge: 20 AWG
-  largest_gauge: 12 AWG
+  smallest_gauge: 20
+  largest_gauge: 12
 wiring:
   colors: Black, silver, white, blue, grey

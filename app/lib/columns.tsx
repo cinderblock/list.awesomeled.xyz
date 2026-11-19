@@ -737,7 +737,18 @@ export const connectorColumns: Column[] = [
     sortValue: sortVoltage,
     className: 'data-table-cell--right',
   },
-  { key: 'ratings.ip_rating', label: 'IP Rating', filterConfig: { type: 'select' } },
+  {
+    key: 'ratings.ip_rating',
+    label: 'IP Rating',
+    // common.json ip_rating: 'IP67', a range across variants, or false (unsealed)
+    render: (v) =>
+      v === false ? (
+        <span className="data-table-null">Unsealed</span>
+      ) : v == null ? null : (
+        <span>{String(v)}</span>
+      ),
+    filterConfig: { type: 'select' },
+  },
   { key: 'mechanical.locking', label: 'Locking', filterConfig: { type: 'select' } },
   linkCountColumn(
     'linked.usedBy',

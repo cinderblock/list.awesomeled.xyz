@@ -24,8 +24,8 @@ mechanical:
   pcb_mount: PTH
   board_fingers: false
 ratings:
-  max_current: 23 A
-  max_voltage: 600 V
+  max_current: 23A
+  max_voltage: 600V
   ip_rating: IP67
 sources:
   aliases:
@@ -36,6 +36,6 @@ termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 20 AWG
-  largest_gauge: 12 AWG
+  smallest_gauge: 20
+  largest_gauge: 12
 year_introduced: 1962

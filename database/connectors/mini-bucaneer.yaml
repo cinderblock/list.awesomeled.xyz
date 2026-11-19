@@ -37,8 +37,8 @@ price_source:
   url: https://www.lcsc.com/product-detail/C4382455.html
   vendor: LCSC
 ratings:
-  max_current: 10 A
-  max_voltage: 250 V
+  max_current: 10A
+  max_voltage: 250V
   ip_rating: IP68
 sources:
   name:
@@ -49,7 +49,7 @@ termination:
   solder: true
   crimp: true
   idc: false
-  smallest_gauge: 24 AWG
-  largest_gauge: 18 AWG
+  smallest_gauge: 24
+  largest_gauge: 18
 wiring:
   colors: Black Blue collar

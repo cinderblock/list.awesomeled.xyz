@@ -107,8 +107,8 @@
           "$ref": "common.json#/definitions/voltage"
         },
         "ip_rating": {
-          "type": ["string", "null"],
-          "description": "IP rating when mated"
+          "description": "IP rating when mated; false when not sealed",
+          "$ref": "common.json#/definitions/ip_rating"
         },
         "ip_rating_notes": {
           "type": ["string", "null"]
@@ -120,16 +120,24 @@
       "additionalProperties": false,
       "properties": {
         "outline": {
-          "type": ["string", "null"],
-          "description": "Rectangular, Circular, Triangular"
+          "description": "Housing shape; a list when variants differ",
+          "oneOf": [
+            { "$ref": "#/definitions/outline" },
+            {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": { "$ref": "#/definitions/outline" }
+            }
+          ]
         },
         "contact_type": {
-          "type": ["string", "null"],
-          "description": "Pin, blade, socket, ..."
+          "enum": ["Pins", "Blade", "Spring", "Spring blade"],
+          "description": "Pins (pin and socket), Blade (flat blades), Spring (spring-clamp or spring contacts), Spring blade (RJ45-style)"
         },
         "pitch": {
-          "type": ["string", "null"],
-          "description": "Pin-to-pin spacing"
+          "description": "Pin-to-pin spacing",
+          "$ref": "common.json#/definitions/length"
         },
         "min_pins": {
           "type": ["integer", "null"]
@@ -138,15 +146,17 @@
           "type": ["integer", "null"]
         },
         "rows": {
-          "type": ["integer", "string", "null"]
+          "type": "integer",
+          "minimum": 1,
+          "description": "Rows of contacts on header-style connectors (omit for circular ones)"
         },
         "gendered": {
           "type": ["boolean", "null"],
           "description": "Distinct male/female versions"
         },
         "locking": {
-          "type": ["string", "null"],
-          "description": "Friction, Latching, Screw Lock, ..."
+          "enum": ["Friction", "Detent", "Latching", "Screw Lock", "Twist Lock"],
+          "description": "How mated halves stay together"
         },
         "panel_mount": {
           "type": ["boolean", "null"]
@@ -155,7 +165,8 @@
           "type": ["boolean", "null"]
         },
         "pcb_mount": {
-          "type": ["string", "boolean", "null"]
+          "enum": [false, "PTH", "SMT", "both"],
+          "description": "Board-mount versions: through-hole (PTH), surface-mount (SMT), both, or false when it is cable-only"
         },
         "board_fingers": {
           "type": ["boolean", "null"]
@@ -186,12 +197,16 @@
           "description": "Insulation displacement connection"
         },
         "smallest_gauge": {
-          "type": ["string", "null"],
-          "description": "Smallest wire gauge (AWG)"
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 40,
+          "description": "Thinnest wire it accepts, as an AWG number (the larger number)"
         },
         "largest_gauge": {
-          "type": ["string", "null"],
-          "description": "Largest wire gauge (AWG)"
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 40,
+          "description": "Thickest wire it accepts, as an AWG number (the smaller number)"
         }
       }
     },
@@ -216,13 +231,16 @@
       "additionalProperties": false,
       "properties": {
         "product": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "format": "uri"
         },
         "digikey": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "format": "uri"
         },
         "mouser": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "format": "uri"
         }
       }
     },
@@ -264,5 +282,8 @@
         }
       ]
     }
+  },
+  "definitions": {
+    "outline": { "enum": ["Rectangular", "Circular", "Triangular"] }
   }
 }

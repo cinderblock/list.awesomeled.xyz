@@ -14,7 +14,6 @@ mechanical:
   contact_type: Blade
   min_pins: 2
   max_pins: 8
-  rows: N/A
   gendered: true
   locking: Latching
   panel_mount: true
@@ -32,8 +31,8 @@ price_source:
   url: https://www.thomannmusic.com/neutrik_nl4fxx_w_l.htm
   vendor: Thomann
 ratings:
-  max_current: 30 A
-  max_voltage: 250 V
+  max_current: 30A
+  max_voltage: 250V
   ip_rating: IP30
   max_current_notes: 50A in the high-current range
   ip_rating_notes: IP54 with a sealing ring on some variants
@@ -41,7 +40,7 @@ termination:
   solder: true
   crimp: false
   idc: false
-  smallest_gauge: 18 AWG
-  largest_gauge: 10 AWG
+  smallest_gauge: 18
+  largest_gauge: 10
 wiring:
   colors: Multi

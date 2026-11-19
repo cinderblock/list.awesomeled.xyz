@@ -36,8 +36,8 @@ price_source:
   url: https://www.thomannmusic.com/harting_09_30_016_2601.htm
   vendor: Thomann
 ratings:
-  max_current: 25 A
-  max_voltage: 450 V
+  max_current: 25A
+  max_voltage: 450V
   ip_rating: IP40
 sources:
   aliases:
@@ -49,5 +49,5 @@ termination:
   screw_terminal: true
   crimp: true
   idc: true
-  smallest_gauge: 28 AWG
-  largest_gauge: 10 AWG
+  smallest_gauge: 28
+  largest_gauge: 10

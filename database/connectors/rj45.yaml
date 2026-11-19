@@ -23,7 +23,7 @@ images:
 mechanical:
   outline: Rectangular
   contact_type: Spring blade
-  pitch: 1.02 mm
+  pitch: 1.02mm
   min_pins: 8
   max_pins: 8
   rows: 1
@@ -50,18 +50,17 @@ price_source:
   url: https://www.lcsc.com/product-detail/C414201.html
   vendor: LCSC
 ratings:
-  max_current: 1.5 A
+  max_current: 1.5A
   max_current_notes: Per contact, typical for 8P8C
-  max_voltage: 125 V
-  ip_rating: null
+  max_voltage: 125V
   ip_rating_notes: Standard jacks are unsealed; ruggedized IP67/IP68 variants exist
 termination:
   solder: true
   crimp: true
   crimp_tool: RJ45 modular crimper
   idc: true
-  smallest_gauge: 26 AWG
-  largest_gauge: 22 AWG
+  smallest_gauge: 26
+  largest_gauge: 22
 wiring:
   pinout: T568A / T568B for Ethernet; pixel and DMX pinouts vary by vendor
   convention: TIA/EIA-568
