@@ -22,7 +22,8 @@ pricing:
         retrieved: '2026-11-18'
         url: https://www.highlite.com/en/41750-festoonlight-q4-controller.html
         vendor: Highlite (Showtec)
-    - item: Festoon Q4 String IP65, 15 m (20 pixels)
+    - item: Festoon Q4 String IP65, 15 m
+      pixels: 20
       price:
         amount: 465
         currency: EUR

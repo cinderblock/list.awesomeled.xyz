@@ -13,7 +13,8 @@ links:
   product: https://astera-led.com/products/nyx-bulb/
 pricing:
   examples:
-    - item: NYX Bulb (1 pixel)
+    - item: NYX Bulb
+      pixels: 1
       price: 115.2
       source:
         notes: Dealer price; list price $128.00. Light Trader also lists $115.20.

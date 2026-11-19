@@ -13,7 +13,8 @@ links:
   product: https://www.colorkinetics.com/global/flex
 pricing:
   examples:
-    - item: Flex Compact gen3 RGB strand, 50 nodes (50 pixels)
+    - item: Flex Compact gen3 RGB strand, 50 nodes
+      pixels: 50
       price: 1054.92
       source:
         notes: Cone lens, 12 in node spacing, white. Power/data supply sold separately.
@@ -21,7 +22,8 @@ pricing:
         retrieved: '2026-11-18'
         url: https://marvellighting.com/product-detail-page/50-node-flex-compact-gen3-rgb-come-lens-12-spacing-by-color-kinetics
         vendor: Marvel Lighting
-    - item: iColor Flex MX gen2 strand, 50 nodes (50 pixels)
+    - item: iColor Flex MX gen2 strand, 50 nodes
+      pixels: 50
       price: 1937.4
       source:
         notes: Special order, drop-shipped from Color Kinetics. Clear dome lens, 4 in spacing, black. Older generation than Flex Compact gen3.

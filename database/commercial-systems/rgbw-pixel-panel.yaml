@@ -13,7 +13,8 @@ links:
   product: https://smartshow.lighting/product/pixel-panels/
 pricing:
   examples:
-    - item: RGBW Pixel Panel, 13×13 (169 pixels)
+    - item: RGBW Pixel Panel, 13×13
+      pixels: 169
       price:
         amount: 30
         currency: GBP

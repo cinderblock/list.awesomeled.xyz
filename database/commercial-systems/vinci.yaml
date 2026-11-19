@@ -10,7 +10,8 @@ links:
   product: https://www.lucenti.lighting/collection/vinci
 pricing:
   examples:
-    - item: Vinci Pearl v2 lamp, RGB + filament (1 pixel)
+    - item: Vinci Pearl v2 lamp, RGB + filament
+      pixels: 1
       price:
         amount: 95
         currency: EUR
@@ -19,7 +20,8 @@ pricing:
         retrieved: '2026-11-18'
         url: https://www.lucenti.lighting/product/vinci-pearl-v2
         vendor: Lucenti
-    - item: Ruby lamp, RGBW (1 pixel)
+    - item: Ruby lamp, RGBW
+      pixels: 1
       price:
         amount: 28
         currency: EUR

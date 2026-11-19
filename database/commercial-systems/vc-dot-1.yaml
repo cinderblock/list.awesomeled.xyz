@@ -12,7 +12,8 @@ links:
   product: https://www.martin.com/en-US/products/vc-dot-1
 pricing:
   examples:
-    - item: VC-Dot 1 RGB string, 100 dots at 100 mm pitch (100 pixels)
+    - item: VC-Dot 1 RGB string, 100 dots at 100 mm pitch
+      pixels: 100
       price: 2304
       source:
         notes: MSRP shown by Martin's US distributor; out of stock (notify-when-in-stock). Feeder/PSU sold separately.

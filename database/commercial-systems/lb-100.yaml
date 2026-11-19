@@ -12,7 +12,8 @@ links:
   product: https://sgmlight.com/products/entertainment/lb%C2%B7100
 pricing:
   examples:
-    - item: 7-ball string (7 pixels)
+    - item: 7-ball string
+      pixels: 7
       price:
         amount: 125
         currency: EUR

@@ -15,7 +15,8 @@ other_links:
   - https://www.protopixel.io/
 pricing:
   examples:
-    - item: Learning (Starter) kit, 3 × 29-pixel RGBW bars + 16×16 matrix (343 pixels)
+    - item: Learning (Starter) kit, 3 × 29-pixel RGBW bars + 16×16 matrix
+      pixels: 343
       notes: +VAT
       price:
         amount: 550
@@ -25,7 +26,8 @@ pricing:
         retrieved: '2020-10-30'
         url: https://web.archive.org/web/20201030185350/https://www.lightwalls.co.uk/product/starter-kit-protopixel-and-lightwalls/
         vendor: Light Walls
-    - item: Matrix 5x5 RGBW 16-bit tile (25 pixels)
+    - item: Matrix 5x5 RGBW 16-bit tile
+      pixels: 25
       price:
         amount: 286.67
         currency: GBP

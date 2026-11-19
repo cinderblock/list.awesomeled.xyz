@@ -21,7 +21,8 @@ other_links:
   - https://www.wiedamark.com/?product_cat=&s=minleon&post_type=product
 pricing:
   examples:
-    - item: Triklits Plus 25-bulb string, 12 in spacing (25 pixels)
+    - item: Triklits Plus 25-bulb string, 12 in spacing
+      pixels: 25
       price: 190
       source:
         notes: G40 bulbs. Power supply and controller sold separately.
@@ -29,7 +30,8 @@ pricing:
         retrieved: '2026-11-18'
         url: https://www.wiedamark.com/product/25minleonrgbtrikliks/
         vendor: Wiedamark (WDM Lighting)
-    - item: Mini Trikliks Plus 25-bulb string, 6 in spacing (25 pixels)
+    - item: Mini Trikliks Plus 25-bulb string, 6 in spacing
+      pixels: 25
       price: 124
       source:
         notes: 28 mm bulbs. Power supply and controller sold separately.

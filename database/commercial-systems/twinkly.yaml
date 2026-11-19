@@ -15,7 +15,8 @@ links:
   product: https://twinkly.com/products/strings-multicolor
 pricing:
   examples:
-    - item: Strings Multicolor, 250 LEDs (250 pixels)
+    - item: Strings Multicolor, 250 LEDs
+      pixels: 250
       price: 119.99
       source:
         notes: US plug (Type A), green wire. 100 LEDs $74.99, 600 LEDs $239.99.
