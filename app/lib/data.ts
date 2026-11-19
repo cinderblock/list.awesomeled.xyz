@@ -18,7 +18,7 @@ let gitTimestampCache: Map<string, Date> | null = null;
 const categoryDataCache = new Map<string, BaseEntry[]>();
 
 // Commits to ignore when calculating timestamps (e.g., bulk metadata changes)
-const IGNORED_COMMITS = new Set([
+export const IGNORED_COMMITS = new Set([
   'b867ec196ee1f68be4e92fa369aa2bdb96018754', // Remove redundant id field from database entries
   'e2eb1e6261e16e3524b9988bedc9d2365bbb3b39', // Standardize database attribution fields and add ESLint terminology rules
   // Flat -> nested rich-schema migration (structural reshaping, not content updates)
