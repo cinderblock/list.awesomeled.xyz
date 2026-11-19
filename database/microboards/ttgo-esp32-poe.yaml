@@ -14,7 +14,7 @@ connectivity:
   wifi: 2.4GHz
   ethernet: 100BASE-TX
   bluetooth: '4.2'
-  usb: Power + UART
+  usb: Power + UART (CP2104)
   poe: Y
 io:
   max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32

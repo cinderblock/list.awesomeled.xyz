@@ -11,8 +11,8 @@ compute:
   cpu: ARM Cortex-M7
   isa: ARMv7-M
   clock_speed: 600MHz
-  flash: 2048kB
-  ram: 1024kB
+  flash: 2048kB (64kB reserved for recovery & EEPROM emulation)
+  ram: 1024kB (512kB is "tightly coupled")
   linux: false
 connectivity:
   usb: OTG

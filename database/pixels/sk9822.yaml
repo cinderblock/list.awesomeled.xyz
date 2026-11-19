@@ -9,6 +9,7 @@ color:
   brightness_method: current
   brightness_method_notes: Extra 5-bit brightness control by LED current, not PWM - superior to APA102's PWM-based brightness
   pwm_frequency: 4.6kHz
+  pwm_frequency_notes: Datasheet claims 1.2kHz but testing shows 4.7kHz
 data:
   type: APA102
   clocked: true
@@ -27,6 +28,7 @@ electrical:
   channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control current, not PWM
   quiescent_current: 1.0mA
   wattage: 100mW
+  led_voltage_notes: Datasheet claims "17V Vds, Max" but LEDs are built-in and share power with 5V VDD
 images:
   - file: sk9822.webp
     source: https://www.adafruit.com/product/2343

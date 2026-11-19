@@ -21,6 +21,7 @@ ratings:
   max_current: 55 A
   max_voltage: 600 V
   ip_rating: IP65 Available
+  ip_rating_notes: SpecPak shells and boots for waterproofing
 termination:
   solder: true
   screw_terminal: false

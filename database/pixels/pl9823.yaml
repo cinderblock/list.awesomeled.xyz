@@ -21,6 +21,7 @@ electrical:
   gpio:
     min: 3.5V
     max: 5V
+  channel_current_notes: Not listed in the datasheet, but ~20mA probable
 physical:
   packages:
     - 5mm

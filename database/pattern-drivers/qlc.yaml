@@ -10,9 +10,10 @@ outputs:
     artnet: Both
     sacn: Both
     dmx: Both
-  gpio: Output
+  gpio: Output (Raspberry Pi version only; also SPI)
   serial: Output
   other: USB, OSC
+  serial_notes: Raspberry Pi version only; also SPI
 capabilities:
   live: true
   designer: true
@@ -34,3 +35,6 @@ pricing:
   price: FOSS
   demo:
     available: €15 Donation requested
+  tiers:
+    - tier: Raspberry Pi build
+      price: €15 donation

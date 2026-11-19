@@ -8,6 +8,6 @@ pricing:
 since: 2004
 specs:
   pixels_per_run: 170
-  dimming_resolution: 13 Bit
+  dimming_resolution: 13 Bit (current control, not PWM)
   color_type: RGB/RGBW/WW
   dedicated_psu: true

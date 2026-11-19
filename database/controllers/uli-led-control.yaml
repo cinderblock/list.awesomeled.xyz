@@ -16,3 +16,5 @@ power:
   voltage:
     max: 12
 price: 99
+technical_notes:
+  - With data + clock pixels only 4 of the 8 outputs are available

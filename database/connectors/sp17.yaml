@@ -19,6 +19,7 @@ ratings:
   max_current: 10 A
   max_voltage: 500 V
   ip_rating: IP68
+  max_current_notes: 15A for lower pin counts
 termination:
   solder: true
   crimp: true

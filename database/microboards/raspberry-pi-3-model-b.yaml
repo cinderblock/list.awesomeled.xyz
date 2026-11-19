@@ -20,7 +20,7 @@ connectivity:
   wifi:
     - 2.4GHz
     - 5GHz
-  ethernet: Gigabit
+  ethernet: Gigabit (over USB 2.0, ~300Mbps)
   bluetooth: '4.2'
   usb: OTG x4
   serial: true
@@ -34,3 +34,5 @@ price_source:
   notes: official list price; in production until at least Jan 2028
   retrieved: '2026-07-03'
   vendor: Raspberry Pi
+technical_notes:
+  - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

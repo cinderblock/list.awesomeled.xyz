@@ -28,6 +28,8 @@ outputs:
     DMX512: 1
   driver:
     buffered: true
+  current:
+    max: 10
 power:
   voltage:
     min: 5
@@ -40,7 +42,16 @@ data:
       max_size: 32 # FAT32
 datasheet:
   url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
-price: 625
+price:
+  - name: 1024 pixels
+    price: 625
+    pixels: 1024
+  - name: 2048 pixels
+    price: 950
+    pixels: 2048
+  - name: 4096 pixels
+    price: 1250
+    pixels: 4096
 technical_notes:
   - 4096 digital RGB LEDs or 3072 RGBW LEDs total; available in 1024/2048/4096 pixel versions
   - Art-Net up to 24 universes; LED Strip Studio software lifetime license included

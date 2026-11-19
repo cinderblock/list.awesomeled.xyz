@@ -1,7 +1,6 @@
 name: Smode
 status: active
-notes: This application is more of a game engine crossed with a volumetric
-  mapping solution. 3D mapping
+notes: This application is more of a game engine crossed with a volumetric mapping solution. 3D mapping
 inputs:
   video: Both
   audio: Both
@@ -26,3 +25,4 @@ pricing:
   price: Expensive
   demo:
     available: Free for SD card output
+  license_type: Free for basic SD output; generally very expensive as the resolution goes up

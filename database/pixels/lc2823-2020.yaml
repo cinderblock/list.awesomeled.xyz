@@ -2,6 +2,8 @@ name: LC2823-2020
 color:
   brightness_bits: 8+5
   pwm_frequency: 27kHz
+  brightness_method: global
+  brightness_method_notes: Extra 5-bit global brightness control
 data:
   type: APA102
   clocked: true

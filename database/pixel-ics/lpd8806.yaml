@@ -6,6 +6,7 @@ color:
   channel_bits: 8
   aggregate_bits: 7
   pwm_frequency: 9.4kHz
+  pwm_frequency_notes: 1.2MHz internal clock / 128
 data:
   type: LPD8806
   clocked: true

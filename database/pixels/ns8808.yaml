@@ -6,6 +6,7 @@ color:
   order: RGB
   brightness_bits: 8
   pwm_frequency: 8.0kHz
+  pwm_frequency_notes: 8kHz per the datasheet
 data:
   type: UCS1903
   clocked: false
@@ -27,6 +28,7 @@ electrical:
   channel_current: 9.0mA
   quiescent_current: 2.0mA
   wattage: 45mW
+  led_voltage_notes: Datasheet range 10.8-13.2V
 physical:
   packages:
     - '5050'

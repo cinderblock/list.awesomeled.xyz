@@ -12,6 +12,7 @@ outputs:
   connector: Solder, JST
   driver:
     buffered: false
+    notes: 5V outputs straight from the microcontroller
   clocked: false
   pixels:
     max_per_output: 512

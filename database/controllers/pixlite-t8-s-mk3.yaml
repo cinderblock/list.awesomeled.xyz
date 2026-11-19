@@ -25,7 +25,11 @@ power:
 data:
   storage:
     - type: SD
+other_links:
+  - https://www.advateklighting.com/software/showtime
 price: 1200
 related:
   - type: predecessor
     ref: controllers/pixlite-t8-s-mk2
+technical_notes:
+  - Standalone playback via Advatek's SHOWTime

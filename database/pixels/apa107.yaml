@@ -6,6 +6,7 @@ color:
   order: BGR
   brightness_bits: 8+5
   pwm_frequency: 9.0kHz
+  brightness_method_notes: Extra 5-bit brightness control, likely by LED current like SK9822
 data:
   type: APA102
   clocked: true
@@ -31,6 +32,7 @@ electrical:
   channel_current: 22.0mA
   quiescent_current: 1.0mA
   wattage: 110mW
+  channel_current_notes: Datasheet claims 22-26mA; every other spec matches SK9822, so 19-22mA is most likely
 physical:
   packages:
     - '5050'

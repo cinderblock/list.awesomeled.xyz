@@ -1,5 +1,6 @@
 name: PiPixel
 creator: Tindie
+notes: Does not provide power to the Pi
 outputs:
   max_channels: 1
   pixel_types: Single or Clocked

@@ -23,6 +23,8 @@ outputs:
   clocked: selectable
   auxiliary:
     DMX512: 1
+  current:
+    max: 10
 power:
   voltage:
     max: 24
@@ -40,4 +42,15 @@ dead_links:
     notes: Now redirects to the LED Ethernet Controller 3 page
 other_links:
   - https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
-price: 850
+price:
+  - name: 1024 pixels
+    price: 850
+    pixels: 1024
+  - name: 2048 pixels
+    price: 1125
+    pixels: 2048
+  - name: 4096 pixels
+    price: 1400
+    pixels: 4096
+technical_notes:
+  - Lifetime LED Strip Studio software license included

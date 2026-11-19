@@ -35,6 +35,7 @@ electrical:
   channel_current: 20mA
   quiescent_current: 1.0mA
   wattage: 104mW
+  channel_current_notes: Datasheet states max 49mA, but the graph for the 5050 and 2040 packages shows R=19mA, G,B=22mA (W, WW not specified); likely lower in the 3537 mini
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6812
 physical:

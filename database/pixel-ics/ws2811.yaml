@@ -21,7 +21,7 @@ electrical:
   output_voltage: 12V
   output_voltage_notes: Vds max - can drive LEDs at various voltages up to 12V via constant current
   supply_voltage: 5V
-  supply_voltage_notes: VCC range 4.5-5.5V
+  supply_voltage_notes: VCC range 4.5-5.5V. Can use an external resistor to supply 5V Vdd from a higher system voltage
   gpio:
     min: 3.0V
     max: 5V
@@ -59,3 +59,4 @@ technical_notes:
   - External resistor sets output current
   - PWM updated from 400Hz to 2kHz in newer silicon revisions
   - Widely cloned - many compatible ICs available
+  - Specs updated in 2018 to match the other WS281x parts

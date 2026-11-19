@@ -13,6 +13,7 @@ data:
   bitrate: 800kHz
   pixel_size_bits: 24
   backup_line: false
+  pixel_size_notes: The datasheet PDF says 32 bits
 datasheet:
   url: http://neon-world.com/en/product_detail.php?cid=60&id=171
   discrepancies:

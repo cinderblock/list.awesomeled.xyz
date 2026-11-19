@@ -14,6 +14,7 @@ data:
   pixel_size_bits: 32
   backup_line: false
   max_per_string: 1024
+  max_per_string_notes: TCL estimates up to 8000 pixels at 30 FPS
 electrical:
   output_voltage: 12V
   supply_voltage: 5V
@@ -21,6 +22,7 @@ electrical:
     min: 3.5V
     max: 5V
   max_current: 45mA
+  output_voltage_notes: The datasheet also claims 17V and shows a 24V application
 other_links:
   - https://www.advateklighting.com/pixel-protocols/p9813
 physical:

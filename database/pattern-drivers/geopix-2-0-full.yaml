@@ -22,6 +22,8 @@ platforms:
     - Windows
   notes: Runs inside TouchDesigner
 pricing:
-  price: Free
+  price: Free - $2200
   demo:
     available: Open Source
+technical_notes:
+  - Paid tiers at $200, $500 and $2200

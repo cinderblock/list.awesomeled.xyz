@@ -24,3 +24,4 @@ pricing:
   price: 176
   demo:
     available: Trial + watermark
+  license_type: subscription (price is per month)

@@ -4,6 +4,8 @@ color:
   order: RGB
   brightness_bits: 15
   pwm_frequency: 27.0kHz
+  brightness_method: per_channel
+  brightness_method_notes: 5-bit for each color, R, G, & B
 data:
   type: APA102
   clocked: true

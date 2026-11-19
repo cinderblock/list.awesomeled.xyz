@@ -8,6 +8,8 @@ color:
   order: BGR
   brightness_bits: 16+5
   pwm_frequency: 27.0kHz
+  brightness_method: current
+  brightness_method_notes: Extra 5-bit brightness control by LED current
 data:
   type: APA102
   clocked: true

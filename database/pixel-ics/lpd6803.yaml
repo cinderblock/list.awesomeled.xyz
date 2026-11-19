@@ -5,6 +5,7 @@ color:
   channel_bits: 5
   aggregate_bits: 5
   pwm_frequency: 1.0kHz
+  pwm_frequency_notes: Not listed in the datasheet
 data:
   type: LPD6803
   clocked: true
@@ -12,6 +13,7 @@ data:
   bitrate: 15MHz
   pixel_size_bits: 16
   backup_line: false
+  bitrate_notes: 'The datasheet is ambiguous: it lists 15MHz, 24MHz and 25MHz maximums'
 datasheet:
   url: https://cdn-shop.adafruit.com/datasheets/LPD6803.pdf
 electrical:

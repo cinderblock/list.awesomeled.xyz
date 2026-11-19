@@ -31,8 +31,11 @@ data:
     - type: SD
 other_links:
   - https://www.advateklighting.com/pixlite-mk3-e-series-2022
+  - https://www.advateklighting.com/software/showtime
 price: 950
 related:
   - type: related
     ref: controllers/pixlite-16-mk2-control-board
     notes: Mk3 counterpart of the PixLite 16 Mk2
+technical_notes:
+  - Standalone playback via Advatek's SHOWTime

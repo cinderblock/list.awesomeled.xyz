@@ -14,7 +14,7 @@ connectivity:
   wifi: 2.4GHz
   ethernet: 100BASE-TX
   bluetooth: '4.2'
-  usb: Power + UART
+  usb: Power + UART (CH340T)
   poe: Y
 io:
   bms: 1S

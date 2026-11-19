@@ -26,6 +26,8 @@ electrical:
     max: 5V
   max_current: 16mA
   quiescent_current: 2.1mA
+  output_voltage_notes: 24V version also available
+  supply_voltage_notes: Can use an external resistor to supply 5V Vdd from a higher system voltage
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2818
 physical:

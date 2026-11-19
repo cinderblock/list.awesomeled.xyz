@@ -1,8 +1,7 @@
 name: LX Studio / Chromatik
 status: active
 creator: Mark Slee
-notes: Java. Next version (Chromatik) will no longer use the Processing graphics
-  library.
+notes: Java. Next version (Chromatik) will no longer use the Processing graphics library.
 inputs:
   video: Both
   audio: Input
@@ -33,3 +32,4 @@ pricing:
   price: Free
   demo:
     available: Open source. Commercial applications require license
+  license_type: Free for small projects; larger commercial projects need a license

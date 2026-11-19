@@ -25,6 +25,8 @@ outputs:
     buffered: true
   auxiliary:
     DMX512: 1
+  current:
+    max: 10
 power:
   voltage:
     max: 24
@@ -35,4 +37,15 @@ data:
     - type: SD
 other_links:
   - https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
-price: 299
+price:
+  - name: 1024 pixels
+    price: 299
+    pixels: 1024
+  - name: 2048 pixels
+    price: 449
+    pixels: 2048
+  - name: 4096 pixels
+    price: 599
+    pixels: 4096
+technical_notes:
+  - One year of LED Strip Studio software license included

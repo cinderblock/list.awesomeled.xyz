@@ -49,3 +49,4 @@ technical_notes:
   - GPIO requires separate Madrix Orion hardware
   - Extensive fixture library
   - MADRIX Nebula hardware can be used for standalone playback
+  - License dongles are priced by node count

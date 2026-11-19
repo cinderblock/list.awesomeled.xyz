@@ -3,6 +3,7 @@ creator: Shenzhen Sunmoon Microelectronics
 color:
   channel_bits: 8
   pwm_frequency: 3.3kHz
+  pwm_frequency_notes: Configurable to 800Hz
 data:
   clocked: false
   channels: 4

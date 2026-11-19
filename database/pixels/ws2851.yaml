@@ -27,6 +27,7 @@ electrical:
   channel_current: 18.5mA
   quiescent_current: 2.1mA
   wattage: 92.5mW
+  vcc_voltage_notes: Can use an external resistor to supply 5V Vdd from a higher system voltage
 physical:
   packages:
     - '5050'

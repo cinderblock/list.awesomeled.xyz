@@ -30,3 +30,5 @@ io:
   bms: 'No'
   imu: false
 price: 25
+technical_notes:
+  - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'
