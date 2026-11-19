@@ -76,6 +76,10 @@ power:
 data:
   storage:
     - type: SD
+images:
+  - file: ledmx2-max.webp
+    source: https://dmxking.tv/max-series/ledmx2-max
+    credit: DMXking
 price: 300
 price_source:
   notes: DMXKING Global Shop US price, which includes shipping, tax and duty ("Free shipping, tax & duty paid"); US distributor DMX Pro Sales lists it at $240 excl. tax/shipping

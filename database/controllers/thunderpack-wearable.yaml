@@ -29,6 +29,10 @@ features:
   - 4 high-power PWM MOSFET outputs (1.4-2.3A each)
   - Status LEDs
   - Runs Arduino or CircuitPython
+images:
+  - file: thunderpack-wearable.webp
+    source: https://github.com/jgillick/ThunderPack
+    credit: Jeremy Gillick
 other_links:
   - https://hackaday.io/project/161054-thunder-pack
 price: 40

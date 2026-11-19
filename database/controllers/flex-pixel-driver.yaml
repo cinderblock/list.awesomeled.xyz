@@ -30,6 +30,10 @@ power:
 case:
   dimensions: 90x40x20mm
   waterproof: IP20
+images:
+  - file: flex-pixel-driver.webp
+    source: https://www.elationlighting.com/products/flex-pixel-driver-1
+    credit: Elation Professional
 price: 120
 price_source:
   notes: last list price ("Regular price $120.00") on the discontinued product page; not purchasable

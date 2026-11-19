@@ -72,6 +72,10 @@ power:
     max: 24
   current:
     max: 30
+images:
+  - file: pixlite-4-mk2.webp
+    source: https://www.advateklighting.com/products/shop/pixlite-4-mk2
+    credit: Advatek
 price:
   amount: 499
   currency: AUD

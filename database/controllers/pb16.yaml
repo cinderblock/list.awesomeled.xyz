@@ -33,6 +33,11 @@ dead_links:
     archive: https://web.archive.org/web/20230604010133/http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controller
     checked: '2026-11-18'
     notes: The DIYC forums are gone; every forum URL now returns 404
+images:
+  - file: pb16.webp
+    source: https://github.com/computergeek1507/PB_16
+    credit: Scott Hanson
+    license: CERN-OHL-S-2.0
 price: 130
 related:
   - type: host

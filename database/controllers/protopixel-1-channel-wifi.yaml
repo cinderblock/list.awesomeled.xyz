@@ -40,6 +40,10 @@ dead_links:
     archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing
     checked: '2026-11-18'
     notes: Now redirects to the generic product overview, which no longer lists this controller
+images:
+  - file: protopixel-1-channel-wifi.webp
+    source: https://web.archive.org/web/20200929124958/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/1ch_wifi_spec_sheet_v101.pdf?mtime=20200811193443&focal=none
+    credit: ProtoPixel
 price: 221
 related:
   - type: variant

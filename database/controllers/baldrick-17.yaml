@@ -40,7 +40,9 @@ features:
   - Push from xLights integration
   - FPP API control to start/stop sequences and full lamp control
 images:
-  - baldrick-17.webp
+  - file: baldrick-17.webp
+    source: https://www.baldrickboard.com/en/boards/baldrick17
+    credit: ILIGHTTHAT
 price: 189
 price_source:
   notes: Official US store, linked from the creator's buy page

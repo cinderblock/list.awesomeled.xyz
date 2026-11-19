@@ -39,6 +39,10 @@ dead_links:
   - url: https://glowbrightly.io/
     archive: https://web.archive.org/web/20210321145613/https://glowbrightly.io/
     checked: '2026-11-18'
+images:
+  - file: brightly.webp
+    source: https://web.archive.org/web/20250416032520/https://glowbrightly.io/
+    credit: Polytronic
 price:
   - name: Base creator kit (driver, D·8 breakout, 16x16 matrix, PSU)
     price: 275

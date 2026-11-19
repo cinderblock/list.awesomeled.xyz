@@ -41,6 +41,10 @@ features:
   - Pixel counting for setup verification
   - RTC
   - OLED status display
+images:
+  - file: k8-pb.webp
+    source: https://kulplights.com/product/k8-pb/
+    credit: KulpLights, LLC
 price: 90
 price_source:
   notes: board only (no PocketBeagle 2, no SD card); $90-$167 with a premounted PocketBeagle 2 (regular or industrial) and/or FPP SD card

@@ -44,6 +44,10 @@ dead_links:
 features:
   - Proprietary PLINK protocol over Cat5e/Cat6 up to 300m to PLINK injectors
   - Onboard storage / standalone playback
+images:
+  - file: pixelator.webp
+    source: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
+    credit: ENTTEC
 price:
   amount: 1475
   currency: GBP

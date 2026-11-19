@@ -71,6 +71,10 @@ outputs:
 power:
   voltage:
     max: 24
+images:
+  - file: pixlite-16-long-range-mk2.webp
+    source: https://www.advateklighting.com/products/shop/pixlite-16-long-range-mk2
+    credit: Advatek
 price:
   amount: 1175
   currency: AUD

@@ -55,6 +55,10 @@ features:
   - Built-in 2-port Ethernet switch for daisy-chaining without extra hardware
   - Long-range differential receivers extend pixel ports over Cat5/RJ45 (4 ports each)
   - Per-port resettable fusing
+images:
+  - file: hinkspix-pro-v3.webp
+    source: https://www.holidaycoro.com/HinksPix-Pro-CPU-for-Flex-Expansion-Boards-V3-p/930.htm
+    credit: HolidayCoro
 price: 214.99
 price_source:
   notes: CPU board only, no tech support or warranty (option on the Flex Expansion System configurator); $249.95 with tech support and 1-yr warranty. The CPU's own product page (930) shows a $999.99 placeholder because it is only sold through the Flex system or as a Ready2Run option.

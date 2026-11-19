@@ -29,6 +29,10 @@ power:
     max: 24
 core:
   family: ESP32
+images:
+  - file: a1-slwf-03.webp
+    source: https://www.tindie.com/products/smartlightme/a1-slwf-03-wled-esp32-controller-home-assistant/
+    credit: SMARTLIGHT.ME
 price: 15.99
 price_source:
   notes: Controller only; +$7 with 24-button IR remote

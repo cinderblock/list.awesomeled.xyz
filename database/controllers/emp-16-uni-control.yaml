@@ -21,5 +21,9 @@ power:
 features:
   - Internal Ethernet switch for daisy-chaining
   - 19mm slim DIN rail mountable
+images:
+  - file: emp-16-uni-control.webp
+    source: https://web.archive.org/web/20250418032547/https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/
+    credit: EMP Designs
 technical_notes:
   - 16 universes total (up to 2728 pixels)

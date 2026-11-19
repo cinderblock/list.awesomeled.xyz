@@ -30,6 +30,10 @@ dead_links:
     archive: http://web.archive.org/web/20191115023243/https://www.rocketlife.com/technology/
     checked: '2026-11-18'
     notes: HTTPS fails the TLS handshake; plain HTTP returns 410 Gone
+images:
+  - file: lightboard-mini.webp
+    source: https://web.archive.org/web/20190909090306/https://www.rocketlife.com/
+    credit: RocketLife
 price: 40
 price_source:
   notes: last list price (Wayback capture), MSRP; intro price $35, sold through Amazon

@@ -75,6 +75,10 @@ data:
       max_size: 32 # FAT32
 datasheet:
   url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+images:
+  - file: led-ethernet-controller-3.webp
+    source: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+    credit: LED Strip Studio
 price:
   - name: 1024 pixels
     price:

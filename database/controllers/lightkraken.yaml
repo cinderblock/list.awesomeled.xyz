@@ -58,6 +58,10 @@ features:
   - PoE++ (802.3bt Type 4) powered, up to 70W over Cat5
   - Selectable output voltage (5.4V / 12V / 24V)
   - Built-in web configurator
+images:
+  - file: lightkraken.webp
+    source: https://www.tindie.com/products/tinicuro/lightkraken/
+    credit: Obtainium Consulting
 price: 69
 price_source:
   notes: listed price; out of stock on Tindie, "Sold out since Mar 24, 2022"

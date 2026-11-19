@@ -38,6 +38,10 @@ dead_links:
   - url: https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
     archive: http://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
     checked: '2026-11-18'
+images:
+  - file: orange-pro-plus-32.webp
+    source: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+    credit: Winter Lights India
 price:
   amount: 25000
   currency: INR

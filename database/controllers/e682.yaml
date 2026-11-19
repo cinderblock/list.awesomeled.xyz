@@ -56,6 +56,10 @@ power:
     max: 24
   current:
     max: 64
+images:
+  - file: e682.webp
+    source: https://sandevices.com/product/e682-pixel-controller-assembled-and-tested/
+    credit: SanDevices
 price: 215
 price_source:
   notes: Assembled and tested

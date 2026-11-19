@@ -36,6 +36,10 @@ outputs:
 power:
   voltage:
     max: 24
+images:
+  - file: sp105e.webp
+    source: https://sperll.com/product/82
+    credit: Sperll
 price: 21.32
 price_source:
   notes: Regular price; on sale $15.99 at retrieval. Elsewhere SuperLightingLED $12.98, LED Lighting Hut $30.00 (regular)

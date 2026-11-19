@@ -130,6 +130,10 @@ data:
     - type: Flash
       features:
         - non-removable
+images:
+  - file: din-pixie.webp
+    source: https://www.enttec.com.au/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+    credit: ENTTEC
 price: 96
 price_source:
   notes: ENTTEC US store; the Australian store lists AUD 137.50 ex GST

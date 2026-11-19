@@ -133,6 +133,10 @@ features:
   - Electronic fusing
   - Dithering
   - Gamma correction on 8-bit/color pixels
+images:
+  - file: pixlite-a4-s-mk3.webp
+    source: https://www.advateklighting.com/products/a4-s-mk3
+    credit: Advatek
 price: 649
 price_source:
   notes: RRP, USD ex tax, uncoated; conformal-coated variant $715

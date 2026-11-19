@@ -68,6 +68,10 @@ power:
     max: 24
   current:
     max: 64
+images:
+  - file: pixlite-16-mk2-control-board.webp
+    source: https://www.advateklighting.com/products/shop/pixlite-16-mk2
+    credit: Advatek
 price:
   amount: 1175
   currency: AUD

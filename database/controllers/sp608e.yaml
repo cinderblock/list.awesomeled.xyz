@@ -36,6 +36,10 @@ features:
   - Built-in microphone for sound-reactive modes
   - Channel grouping (any combination of the 8 outputs)
   - Reverse-polarity protection
+images:
+  - file: sp608e.webp
+    source: https://sperll.com/product/104
+    credit: Sperll
 price: 49.98
 price_source:
   notes: Regular price, controller only (no triggers); on sale $36.98 at retrieval. BTF-Lighting $55.99 regular

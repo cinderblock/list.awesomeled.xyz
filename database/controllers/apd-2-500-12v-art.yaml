@@ -32,6 +32,10 @@ power:
 features:
   - Onboard Sound To Light
   - 31 channel DMX Macro mode
+images:
+  - file: apd-2-500-12v-art.webp
+    source: https://digitaltape.co.uk/apd-2-500-12v-art
+    credit: Abstract AVR (via Digital Tape)
 sources:
   status:
     url: https://digitaltape.co.uk/apd-2-500-12v-art

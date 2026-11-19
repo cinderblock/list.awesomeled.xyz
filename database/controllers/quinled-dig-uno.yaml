@@ -43,6 +43,10 @@ core:
 features:
   - Available as DIY kit or pre-assembled
   - Ships with WLED pre-installed
+images:
+  - file: quinled-dig-uno.webp
+    source: https://shop.allnetchina.cn/products/quinled-dig-uno-v4-digital-led-controller
+    credit: ALLNET China
 price: 32.49
 price_source:
   notes: Dig-Uno v4, pre-assembled, board antenna. External-antenna $34.99, Ethernet (LAN) $39.99. DrZzs (US) $39.00

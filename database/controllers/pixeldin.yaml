@@ -38,6 +38,10 @@ power:
     max: 24
   current:
     max: 8
+images:
+  - file: pixeldin.webp
+    source: https://web.archive.org/web/20241105183413/https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
+    credit: YariloPro
 price: 142
 price_source:
   notes: 'Last list price, from the archived English product page ("Price: USD $142"); the English site is gone and the Russian page lists no price for this model'

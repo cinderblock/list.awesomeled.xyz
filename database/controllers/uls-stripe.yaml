@@ -27,6 +27,10 @@ power:
     max: 12
   current:
     max: 18
+images:
+  - file: uls-stripe.webp
+    source: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+    credit: Ultra Light & Sound
 price:
   amount: 199
   currency: GBP

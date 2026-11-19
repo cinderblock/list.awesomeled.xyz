@@ -127,6 +127,10 @@ power:
 data:
   storage:
     - type: SD
+images:
+  - file: pixlite-t8-s-mk3.webp
+    source: https://www.advateklighting.com/products/t8-s-mk3
+    credit: Advatek
 other_links:
   - https://www.advateklighting.com/software/showtime
 price: 1150

@@ -42,6 +42,10 @@ dead_links:
     archive: https://web.archive.org/web/20231202085638/https://www.ledstripstudio.com/shop/product/led-ethernet-controller-powered/
     checked: '2026-11-18'
     notes: Now redirects to the LED Ethernet Controller 3 page
+images:
+  - file: led-ethernet-controller-powered.webp
+    source: https://web.archive.org/web/20231202085638/https://www.ledstripstudio.com/shop/product/led-ethernet-controller-powered/
+    credit: LED Strip Studio
 other_links:
   - https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 price:

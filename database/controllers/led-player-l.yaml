@@ -28,6 +28,10 @@ outputs:
 power:
   voltage:
     max: 5
+images:
+  - file: led-player-l.webp
+    source: https://www.diamex-shop.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
+    credit: Diamex
 price:
   amount: 99
   currency: EUR

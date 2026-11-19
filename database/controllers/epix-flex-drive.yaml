@@ -18,6 +18,10 @@ outputs:
     max_per_output: 960 # 1920 total across 2 outputs
 case:
   waterproof: IP20
+images:
+  - file: epix-flex-drive.webp
+    source: https://chauvetprofessional.com/product/epix-flex-drive/
+    credit: Chauvet Professional
 price: 786
 price_source:
   notes: Dealer's regular "Our Price"; manufacturer List Price $975. Chauvet publishes no price

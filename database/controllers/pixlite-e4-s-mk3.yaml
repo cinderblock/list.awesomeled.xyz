@@ -128,6 +128,10 @@ power:
 data:
   storage:
     - type: SD
+images:
+  - file: pixlite-e4-s-mk3.webp
+    source: https://www.advateklighting.com/products/e4-s-mk3
+    credit: Advatek
 other_links:
   - https://www.advateklighting.com/pixlite-mk3-e-series-2022
   - https://www.advateklighting.com/software/showtime

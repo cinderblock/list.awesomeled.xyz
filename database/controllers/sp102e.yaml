@@ -18,6 +18,10 @@ outputs:
 power:
   voltage:
     max: 12
+images:
+  - file: sp102e.webp
+    source: https://web.archive.org/web/20170926215041/http://www.sperll.com/a/chanpinzhongxin/SP102E/2017/0802/115.html
+    credit: Sperll
 price: 13
 sources:
   status:

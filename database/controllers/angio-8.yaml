@@ -33,7 +33,10 @@ power:
   connector: 2-pin Phoenix Screw 5.08mm
 case:
   waterproof: false
-image: angio-8.webp
+images:
+  - file: angio-8.webp
+    source: https://shop.chroma.tech/products/angio-8
+    credit: chroma.tech
 price: 199
 price_source:
   notes: Regular price; on sale $169 at retrieval

@@ -62,6 +62,10 @@ dead_links:
   - url: https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
     archive: https://web.archive.org/web/20210120183833/https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
     checked: '2026-11-18'
+images:
+  - file: twinpixx16.webp
+    source: https://www.dmx4all.de/download/manuals_english/artnet_twinpixx_16_english.pdf
+    credit: DMX4ALL
 price:
   amount: 339
   currency: EUR

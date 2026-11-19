@@ -52,6 +52,10 @@ features:
   - OLED status display
   - 2-port Ethernet switch for daisy-chaining
   - Reverse-polarity protected 5V input
+images:
+  - file: falcon-f48.webp
+    source: https://pixelcontroller.com/store/discontinued-products/52-f16v2-beta-board.html
+    credit: PixelController, LLC
 price: 255
 price_source:
   notes: last list price, still shown on the vendor's discontinued-product page (Out-of-Stock)

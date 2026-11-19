@@ -32,6 +32,10 @@ outputs:
     - APA102
     - SK9822
     - P9813
+images:
+  - file: www-orangepi-dmx-org.webp
+    source: https://www.orangepi-dmx.org/orange-pi/ws28xxapa102ucsx903tlc59711p9813-configuration/prototype-boards/multi-port-pixel-prototype-boards/schematic-and-board_1
+    credit: Arjan van Vught
 price: 50
 software:
   firmware:

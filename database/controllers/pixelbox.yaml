@@ -32,6 +32,10 @@ outputs:
     - SK9822
 data:
   fps: 30 # 15-30 FPS depending on pixel chip
+images:
+  - file: pixelbox.webp
+    source: https://lumikit.com.br/pixelbox
+    credit: Lumikit
 price: 199
 related:
   - type: replacement

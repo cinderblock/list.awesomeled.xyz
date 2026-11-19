@@ -58,7 +58,10 @@ power:
     max: 60
 features:
   - Onboard LCD display for status and configuration
-image: alphapix-classic-16-v3.webp
+images:
+  - file: alphapix-classic-16-v3.webp
+    source: https://www.holidaycoro.com/AlphaPix-16-Pixel-Controller-V3-p/721-v3.htm
+    credit: HolidayCoro
 price: 204.99
 price_source:
   notes: '"Starting At" price: bare board, no pigtails, 30-day factory-defects warranty (1-year warranty +$24.99)'

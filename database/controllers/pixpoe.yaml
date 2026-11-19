@@ -22,6 +22,10 @@ power:
     max: 5
 features:
   - PoE powered (30W 5V output to LEDs)
+images:
+  - file: pixpoe.webp
+    source: https://www.empdesigns.co.uk/our-products/poe-%2B-pixel
+    credit: EMP Designs
 price: unknown
 sources:
   status:

@@ -63,6 +63,10 @@ data:
 features:
   - Onboard sound
   - Optional FM transmitter
+images:
+  - file: k64d-b.webp
+    source: https://kulplights.com/product/k64d-b/
+    credit: KulpLights, LLC
 price: 130
 price_source:
   notes: board only (no BeagleBone, no SD card); $130-$247 with a premounted BeagleBone Black/Green and/or FPP SD card

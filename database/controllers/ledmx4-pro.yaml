@@ -61,6 +61,10 @@ power:
 data:
   storage:
     - type: SD
+images:
+  - file: ledmx4-pro.webp
+    source: https://web.archive.org/web/20251028133025/https://dmxking.com/led-pixel-control/ledmx4-pro
+    credit: DMXking
 price:
   - name: 5V
     price: 145

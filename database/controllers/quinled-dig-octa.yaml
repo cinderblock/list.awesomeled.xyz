@@ -27,6 +27,10 @@ core:
 data:
   storage:
     - type: uSD
+images:
+  - file: quinled-dig-octa.webp
+    source: https://shop.allnetchina.cn/products/quinled-dig-octa-brainboard-32-8l-v4
+    credit: ALLNET China
 price: 70.48
 price_source:
   notes: 'Cheapest working pair, as the QuinLED shop states ("A working Brainboard-plus-Powerboard pair starts from $70.48"): Brainboard-32-8L v4 $37.49 (QLD-DOBBV4) + Power-5 $32.99 (QLD-DOP5) at ALLNET China. Other powerboards: Power-7 $34.99, Power-5HV (48 V) $39.99, Power-7HC (100 A) $44.99'

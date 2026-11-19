@@ -36,6 +36,10 @@ power:
     max: 48
 features:
   - PoE powered
+images:
+  - file: pixnet-4.webp
+    source: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+    credit: PixNet Control
 price: 450
 software:
   works_with:

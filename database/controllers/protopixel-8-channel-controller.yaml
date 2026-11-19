@@ -36,6 +36,10 @@ dead_links:
     notes: Now redirects to the generic product overview, which no longer lists this controller
 features:
   - Two 4-output satellites connected to the controller via Ethernet
+images:
+  - file: protopixel-8-channel-controller.webp
+    source: https://web.archive.org/web/20200929142224/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/LED_controller_spec_sheet.pdf?mtime=20200509143456&focal=none
+    credit: ProtoPixel
 price: 573
 software:
   works_with:

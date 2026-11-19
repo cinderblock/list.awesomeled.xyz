@@ -27,6 +27,10 @@ outputs:
 power:
   voltage:
     max: 12
+images:
+  - file: uli-led-control.webp
+    source: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+    credit: Ulrich Radig
 price:
   amount: 79.98
   currency: EUR

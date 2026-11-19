@@ -26,6 +26,10 @@ power:
 features:
   - Bluetooth app control
   - Music/spectrum mode (built-in microphone and AUX input)
+images:
+  - file: sp107e.webp
+    source: https://sperll.com/product/84
+    credit: Sperll
 price: 16.98
 price_source:
   notes: Controller only (Bluetooth "LED Chord" app or Wi-Fi Tuya version, same price). Elsewhere BTF-Lighting $26.65 and LED Lighting Hut $30.00 (regular)

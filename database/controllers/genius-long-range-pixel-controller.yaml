@@ -28,6 +28,10 @@ power:
 data:
   storage:
     - type: SD
+images:
+  - file: genius-long-range-pixel-controller.webp
+    source: https://store.experiencelights.com/long-range-genius-pixel-controller/
+    credit: Experience Lights
 price: 238.99
 price_source:
   notes: regular price; on sale $214.99 (-10%) at retrieval

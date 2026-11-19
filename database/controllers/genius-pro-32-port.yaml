@@ -29,6 +29,10 @@ features:
   - eFuse protected power distribution
   - On-board power supply mounting
   - On-board fault finding
+images:
+  - file: genius-pro-32-port.webp
+    source: https://store.experiencelights.com/genius-pro-32-port-controller/
+    credit: Experience Lights
 price: 331.99
 price_source:
   notes: regular price; on sale $299.99 (-10%) at retrieval

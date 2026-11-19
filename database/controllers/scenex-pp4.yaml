@@ -39,6 +39,10 @@ dead_links:
   - url: https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     archive: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     checked: '2026-11-18'
+images:
+  - file: scenex-pp4.webp
+    source: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
+    credit: German Light Products
 price: 1249
 price_source:
   notes: Last listed price, new unit, at UsedLighting/NewLighting (GLP never published a price); that listing now reads "no longer available"

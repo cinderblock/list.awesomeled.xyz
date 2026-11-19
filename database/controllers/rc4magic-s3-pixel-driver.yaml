@@ -40,6 +40,10 @@ data:
     - type: Flash # onboard pattern/keyframe storage
 features:
   - Onboard DMX pattern replay and keyframing
+images:
+  - file: rc4magic-s3-pixel-driver.webp
+    source: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
+    credit: RC4 Wireless
 price: 640
 price_source:
   notes: Regular price; on sale $544 at retrieval ("Save 15% on listed prices"). Includes a set of Phoenix connectors

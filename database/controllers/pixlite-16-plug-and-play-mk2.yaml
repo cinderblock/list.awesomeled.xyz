@@ -63,6 +63,10 @@ outputs:
 power:
   voltage:
     max: 12
+images:
+  - file: pixlite-16-plug-and-play-mk2.webp
+    source: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
+    credit: Advatek
 price: 500
 related:
   - type: variant

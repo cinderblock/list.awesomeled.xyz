@@ -31,6 +31,10 @@ outputs:
 power:
   voltage:
     max: 25
+images:
+  - file: nled-pixel-controller-mini.webp
+    source: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
+    credit: Northern Lights Electronic Design
 price: 13
 price_source:
   notes: board only; optional XLR DMX connectors +$3 to +$17

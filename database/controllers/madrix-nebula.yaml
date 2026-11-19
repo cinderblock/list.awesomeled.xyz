@@ -99,6 +99,10 @@ power:
 features:
   - TTL pixel-data output (12x 512 channels across two ports)
   - Powers LEDs directly through screw terminals (6A max per port)
+images:
+  - file: madrix-nebula.webp
+    source: https://www.madrix.com/products/nebula
+    credit: MADRIX
 price: 355
 price_source:
   notes: MSRP shown by the dealer, which sells it for $248; MADRIX publishes no price itself. In Germany LTT-Versand lists EUR 240.68 incl. VAT (currently unavailable). Hardware only, MADRIX software license sold separately.

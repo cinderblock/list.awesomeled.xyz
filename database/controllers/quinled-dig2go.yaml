@@ -31,6 +31,10 @@ power:
     max: 3
 core:
   family: ESP32
+images:
+  - file: quinled-dig2go.webp
+    source: https://shop.allnetchina.cn/products/quinled-dig2go-portable-digital-led-controller
+    credit: ALLNET China
 price: 24.99
 price_source:
   notes: Controller only (no PSU or strip). DrZzs (US) $28.00

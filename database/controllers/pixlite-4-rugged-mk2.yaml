@@ -68,6 +68,10 @@ power:
     max: 30
 case:
   waterproof: IP65
+images:
+  - file: pixlite-4-rugged-mk2.webp
+    source: https://www.advateklighting.com/products/shop/pixlite-4-rugged-mk2
+    credit: Advatek
 price:
   amount: 809
   currency: AUD

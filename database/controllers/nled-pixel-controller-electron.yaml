@@ -68,6 +68,10 @@ data:
 features:
   - 3-axis accelerometer
   - Optional WiFi/Bluetooth add-on modules
+images:
+  - file: nled-pixel-controller-electron.webp
+    source: https://store.nledshop.com/index.php/nled-pixel-controller-electron-flow-toys-wearables.html
+    credit: Northern Lights Electronic Design
 price: 30
 price_source:
   notes: base board with unpopulated solder-pad output; header +$0.50, screw terminal +$1.50

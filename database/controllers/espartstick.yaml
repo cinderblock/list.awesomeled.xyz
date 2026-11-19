@@ -46,6 +46,10 @@ dead_links:
 features:
   - IR remote receiver
   - Data level shifter
+images:
+  - file: espartstick.webp
+    source: https://web.archive.org/web/20210803015116/https://espartstick.ecwid.com/5v-12V-SD-Card-WiFi-Enhanced-Edition-WLED-pre-Installed-p170368862
+    credit: Microcyb
 price: 28
 software:
   firmware:

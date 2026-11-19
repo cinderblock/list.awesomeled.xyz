@@ -140,6 +140,10 @@ data:
   formats:
     - RGB
     - RGBW
+images:
+  - file: deskontroller-lite-v3-96.webp
+    source: https://www.deskontrol.net/en/art-net-led-controllers/381-deskontroller-lite-v3-96-artnet-universes.html
+    credit: deskontrol electronics
 price:
   amount: 940
   currency: EUR

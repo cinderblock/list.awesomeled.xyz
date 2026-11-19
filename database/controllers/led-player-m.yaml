@@ -28,6 +28,10 @@ outputs:
 power:
   voltage:
     max: 5
+images:
+  - file: led-player-m.webp
+    source: https://web.archive.org/web/20230603144022/https://www.led-genial.de/LED-Player-M-fuer-Stripes-und-Panels-bis-2048-LEDs
+    credit: Diamex
 price:
   amount: 49.9
   currency: EUR

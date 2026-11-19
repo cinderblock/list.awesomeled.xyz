@@ -30,6 +30,10 @@ data:
   storage:
     - type: uSD
       max_size: 32 # FAT32
+images:
+  - file: led-player-dmx.webp
+    source: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
+    credit: Diamex
 price:
   amount: 99.9
   currency: EUR

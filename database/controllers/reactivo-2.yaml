@@ -70,6 +70,10 @@ features:
   - Web interface
   - Mobile app
   - Sensors and triggers management
+images:
+  - file: reactivo-2.webp
+    source: https://reactivo.lighting/first-touch/
+    credit: LED Strip Studio
 other_links:
   - https://ledstripstudio.com/gaming/
 price:

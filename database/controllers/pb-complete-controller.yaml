@@ -35,6 +35,10 @@ power:
 data:
   storage:
     - type: SD
+images:
+  - file: pb-complete-controller.webp
+    source: https://kurtcontrollers.com/?product=pb-complete-controller
+    credit: Kurt Controllers
 price: 195
 price_source:
   notes: Complete controller with PocketBeagle, pluggable screw terminals, fuses and a pre-flashed 32GB microSD card

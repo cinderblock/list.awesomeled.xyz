@@ -30,6 +30,10 @@ features:
   - 3A resettable fuse
   - ESD protection
   - USB-C Power Delivery (5V/12V, up to 36W)
+images:
+  - file: magwled-1.webp
+    source: https://magwled.com/products/dgrz-led-cpd-36-1-mini
+    credit: MagWLED Electronics
 price: 29.9
 price_source:
   part: SU-RZMM-NGSU

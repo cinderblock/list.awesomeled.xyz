@@ -142,6 +142,10 @@ outputs:
 features:
   - Web-based (browser) configuration UI
   - Supports over 100 pixel IC families (RGB and RGBW)
+images:
+  - file: deskontroller-lite-v3-32.webp
+    source: https://www.deskontrol.net/en/art-net-led-controllers/384-deskontroller-lite-v3-32-artnet-universes.html
+    credit: deskontrol electronics
 price:
   amount: 490
   currency: EUR

@@ -71,6 +71,10 @@ features:
   - Replaceable fuses with indicator LEDs
   - Onboard sound output
   - Optional FM transmitter
+images:
+  - file: k16a-b.webp
+    source: https://kulplights.com/product/k16a-b/
+    credit: KulpLights, LLC
 price: 130
 price_source:
   notes: last list price, board only (no BeagleBone, no SD card); the product page is still reachable but delisted from the shop and every variant is out of stock

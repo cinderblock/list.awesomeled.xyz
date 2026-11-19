@@ -116,6 +116,10 @@ outputs:
 power:
   voltage:
     max: 60
+images:
+  - file: octo-mk2.webp
+    source: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+    credit: ENTTEC
 price: 249
 price_source:
   notes: ENTTEC web store, excl. tax; the page compares it as "OCTO MK2" next to the separate OCTO MK3 (SKU 71522)

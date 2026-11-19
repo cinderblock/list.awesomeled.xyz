@@ -53,6 +53,10 @@ features:
   - GPIO pins (analog and touch inputs on Standard)
   - Web-based live pattern editor
   - Output Expander Boards (8 channels each, up to 51K pixels total)
+images:
+  - file: pixelblaze-v3.webp
+    source: https://electromage.com/pixelblaze
+    credit: ElectroMage
 price: 39
 price_source:
   notes: Pixelblaze V3 Standard (XL), the only Standard variant listed; the Pixelblaze V3 Pico+ (EM-PB-PICO32P6A) is $35

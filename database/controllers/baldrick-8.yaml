@@ -39,7 +39,9 @@ power:
   current:
     max: 60
 images:
-  - baldrick-8.webp
+  - file: baldrick-8.webp
+    source: https://web.archive.org/web/20260520043643/https://www.baldrickboard.com/en/boards/baldrick8
+    credit: ILIGHTTHAT
 price: 75
 price_source:
   notes: Current v2 board (dual Ethernet with switch); the v1.x listing ($70) is out of stock, and Wired Watts lists its v1 edition as discontinued

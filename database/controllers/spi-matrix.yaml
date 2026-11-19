@@ -68,6 +68,10 @@ power:
 data:
   storage:
     - type: SD
+images:
+  - file: spi-matrix.webp
+    source: https://www.ledstripstudio.com/products/spi_matrix/
+    credit: LED Strip Studio
 other_links:
   - https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 price:

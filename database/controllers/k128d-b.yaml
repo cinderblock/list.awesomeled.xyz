@@ -64,6 +64,10 @@ data:
 features:
   - Onboard sound
   - Optional FM transmitter
+images:
+  - file: k128d-b.webp
+    source: https://kulplights.com/product/k128d-b/
+    credit: KulpLights, LLC
 price: 180
 price_source:
   notes: board only (no BeagleBone, no SD card); $180-$297 with a premounted BeagleBone Black/Green and/or FPP SD card

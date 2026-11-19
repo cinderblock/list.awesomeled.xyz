@@ -117,6 +117,10 @@ power:
 features:
   - Supports 60+ single-wire and clocked pixel protocols
   - DIN-rail mountable
+images:
+  - file: digidot-c4-live-12.webp
+    source: https://www.digidot.eu/shop/digidot-c4-live-125
+    credit: DiGidot Technologies
 price:
   amount: 425
   currency: EUR

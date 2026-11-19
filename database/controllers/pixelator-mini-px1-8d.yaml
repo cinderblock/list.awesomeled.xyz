@@ -47,6 +47,10 @@ dead_links:
   - url: https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
     archive: https://web.archive.org/web/20210305140936/https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
     checked: '2026-11-18'
+images:
+  - file: pixelator-mini-px1-8d.webp
+    source: https://www.techni-lux.com/files/documents/CT-EN71066_Manual.pdf
+    credit: ENTTEC
 other_links:
   - https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
 price: 735

@@ -37,6 +37,10 @@ outputs:
 power:
   voltage:
     max: 12
+images:
+  - file: electromage-8x-driver.webp
+    source: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
+    credit: ElectroMage
 price: 19
 price_source:
   notes: Pixelblaze Output Expander; sold out at the ElectroMage store at retrieval ("check distributors")

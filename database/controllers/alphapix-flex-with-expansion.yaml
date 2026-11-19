@@ -71,6 +71,10 @@ power:
     max: 24
   current:
     max: 80
+images:
+  - file: alphapix-flex-with-expansion.webp
+    source: https://www.holidaycoro.com/Flex-Modular-Lighting-Controller-System-p/951.htm
+    credit: HolidayCoro
 price:
   - name: CPU + 1 Flex 16-port board
     price: 194.9

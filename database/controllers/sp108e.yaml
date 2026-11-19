@@ -37,6 +37,10 @@ power:
   voltage:
     min: 5
     max: 24
+images:
+  - file: sp108e.webp
+    source: https://sperll.com/product/78
+    credit: Sperll
 price: 35
 price_source:
   notes: Regular price; "Special Price" $29.50 at retrieval. Elsewhere BTF-Lighting $30.00 (regular), SuperLightingLED $21.99

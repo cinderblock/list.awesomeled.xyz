@@ -38,6 +38,10 @@ power:
     max: 12
   current:
     max: 25
+images:
+  - file: e6804.webp
+    source: https://sandevices.com/product/e6804-pixel-controller-assembled-tested/
+    credit: SanDevices
 price: 129
 price_source:
   notes: Assembled and tested; listed as "Limited Stock Inquire", out of stock at retrieval

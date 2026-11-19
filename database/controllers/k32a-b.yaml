@@ -38,6 +38,10 @@ features:
   - Real-time clock (RTC)
   - Onboard sound DAC
   - Optional FM transmitter
+images:
+  - file: k32a-b.webp
+    source: https://kulplights.com/product/k32a-b/
+    credit: KulpLights, LLC
 price: 150
 price_source:
   notes: last list price, board only (no BeagleBone, no SD card; $250 with a premounted BeagleBone Black); the product page is reachable again but delisted from the shop and every variant is out of stock

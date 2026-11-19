@@ -40,6 +40,10 @@ outputs:
 power:
   voltage:
     max: 24
+images:
+  - file: smartshow-pro-one.webp
+    source: https://smartshow.lighting/product/smartshow-pro-one/
+    credit: SmartShow
 price:
   amount: 250
   currency: GBP

@@ -57,6 +57,10 @@ power:
     max: 20
 case:
   waterproof: IP20
+images:
+  - file: spinode.webp
+    source: https://www.visualproductions.nl/products/spinode/
+    credit: Visual Productions
 price: 600
 price_source:
   notes: MSRP; GoKnight sells it at $450. Visual Productions publishes no price (dealer sales)

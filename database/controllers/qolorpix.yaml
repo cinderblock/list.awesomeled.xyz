@@ -38,6 +38,10 @@ features:
   - Full RDM support (wired DMX and Multiverse)
   - 24 base effects with recordable presets
   - Test function and flicker finder
+images:
+  - file: qolorpix.webp
+    source: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
+    credit: City Theatrical
 price: 2861.3
 price_source:
   notes: MSRP (list); dealers sell at the $2,432.11 MAP price (SoundPro, Production Advantage, GoKnight). City Theatrical sells through dealers only

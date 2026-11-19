@@ -22,7 +22,10 @@ power:
 features:
   - Button / Turnip activated presets
   - Push from xLights integration
-image: baldrick-dmx.webp
+images:
+  - file: baldrick-dmx.webp
+    source: https://www.baldrickboard.com/en/boards/baldrickdmx
+    credit: ILIGHTTHAT
 other_links:
   - https://www.baldrickboard.com/en/boards/baldrickdmx
 price: 70

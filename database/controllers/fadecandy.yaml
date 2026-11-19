@@ -36,6 +36,10 @@ dead_links:
   - url: https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7
     archive: https://web.archive.org/web/20220107030305/https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7
     checked: '2026-11-18'
+images:
+  - file: fadecandy.webp
+    source: https://www.adafruit.com/product/1689
+    credit: Adafruit
 price: 24.95
 price_source:
   notes: last list price; Adafruit marks it "No longer stocked"

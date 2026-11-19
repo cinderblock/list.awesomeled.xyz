@@ -19,6 +19,10 @@ core:
   family: ESP32
 features:
   - GPIO / Relay outputs
+images:
+  - file: esp32-wled-controller-8chan.webp
+    source: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
+    credit: Giovanni's Domotica Store
 price: 45
 price_source:
   notes: Listed price; out of stock since 2024-08-18

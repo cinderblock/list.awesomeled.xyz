@@ -31,6 +31,10 @@ power:
 features:
   - Internal 3500mAh rechargeable battery
   - Android app control
+images:
+  - file: luminaxa.webp
+    source: https://luminxa.com/
+    credit: Luminxa
 price: 55.99
 price_source:
   notes: regular price for the controller + charger (no LEDs); on sale for $32.99 at retrieval

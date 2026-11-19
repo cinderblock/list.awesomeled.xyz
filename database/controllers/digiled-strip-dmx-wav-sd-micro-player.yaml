@@ -26,6 +26,10 @@ power:
 data:
   storage:
     - type: uSD # "Micro SD player" per Electroconcept product page
+images:
+  - file: digiled-strip-dmx-wav-sd-micro-player.webp
+    source: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+    credit: Electroconcept
 price:
   amount: 20.83
   currency: EUR

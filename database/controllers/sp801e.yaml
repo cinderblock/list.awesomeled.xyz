@@ -34,6 +34,10 @@ features:
   - Two overlay effect layers (text, music, ...) with custom parameters
   - Matrix layout by rectangle or DXF import
   - OTA firmware updates
+images:
+  - file: sp801e.webp
+    source: https://sperll.com/product/62
+    credit: Sperll
 price: 45.32
 price_source:
   notes: Regular price; on sale $22.66 at retrieval. SuperLightingLED lists it at $28.99 (no sale)

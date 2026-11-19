@@ -134,6 +134,10 @@ outputs:
     - CS8812B
     - UCS2905
     - WS2805
+images:
+  - file: deskontroller-lite-v3-192.webp
+    source: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
+    credit: deskontrol electronics
 price:
   amount: 1240
   currency: EUR

@@ -27,6 +27,10 @@ dead_links:
     archive: http://web.archive.org/web/20170727133740/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
     checked: '2026-11-18'
     notes: led-genial.de closed (its range moved to diamex-shop.de, which has no LED-Player-S page)
+images:
+  - file: led-player-s.webp
+    source: https://web.archive.org/web/20260421063856/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+    credit: Diamex
 price:
   amount: 19.9
   currency: EUR

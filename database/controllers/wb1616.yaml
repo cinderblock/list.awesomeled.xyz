@@ -31,6 +31,10 @@ dead_links:
   - url: https://wallyslights.com/products/wallys-lights-wb1616-controller
     archive: https://web.archive.org/web/20250805175734/https://wallyslights.com/products/wallys-lights-wb1616-controller
     checked: '2026-11-18'
+images:
+  - file: wb1616.webp
+    source: https://web.archive.org/web/20240421061419/https://wallyslights.com/products/wallys-lights-wb1616-controller
+    credit: Wally's Lights
 price: 209
 price_source:
   notes: Last list ("regular") price from the final Wayback capture of Wally's product page; shown on sale at $174.99 in every capture since 2022

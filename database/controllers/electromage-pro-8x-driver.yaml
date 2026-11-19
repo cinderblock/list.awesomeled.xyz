@@ -37,6 +37,10 @@ power:
     max: 12
   current:
     max: 15
+images:
+  - file: electromage-pro-8x-driver.webp
+    source: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
+    credit: ElectroMage
 price: 65
 price_source:
   notes: Pixelblaze Pro Output Expander; 12V (DC converter, EM-O5-12V-PT) and 5V (EM-O5-5V-PT) variants both $65; sold out at the ElectroMage store at retrieval ("check distributors")

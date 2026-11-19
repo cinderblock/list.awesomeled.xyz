@@ -31,6 +31,10 @@ data:
     - type: uSD
 features:
   - Per-output eFuse protection
+images:
+  - file: k2-pi0.webp
+    source: https://kulplights.com/product/k2-pi0/
+    credit: KulpLights, LLC
 price: 28
 price_source:
   notes: board only (no Raspberry Pi, no SD card); $28-$77 with a premounted Pi Zero W/2 W and/or FPP SD card
