@@ -19,6 +19,8 @@ outputs:
   clocked: false # single-wire / async pixels
   auxiliary:
     GPIO: 7 # GPIO17, 32, 33, 34, 35, 36, 39 broken out for buttons/mics/sensors
+  pixels:
+    max_total: 4800
 power:
   voltage:
     min: 12 # V4 (current production); V3 (discontinued) was 5-24V

@@ -19,6 +19,8 @@ outputs:
   driver:
     buffered: true
   clocked: selectable # supports WS2812 (clockless) and APA102 (clocked)
+  pixels:
+    max_total: 6400
 power:
   voltage:
     max: 12

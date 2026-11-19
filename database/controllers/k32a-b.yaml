@@ -20,6 +20,8 @@ outputs:
   clocked: false # async pixel types
   auxiliary:
     DMX512: 2 # two RS485 outputs (DMX/PixelNet/Renard/LOR)
+  pixels:
+    max_total: 72000
 power:
   voltage:
     max: 12

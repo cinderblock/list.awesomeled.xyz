@@ -17,6 +17,8 @@ outputs:
     buffered: true
   auxiliary:
     DMX512: 2 # DMX In/Out
+  pixels:
+    max_total: 4080
 power:
   voltage:
     max: 24

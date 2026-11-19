@@ -23,6 +23,8 @@ outputs:
   auxiliary:
     DMX512: 4
   differential: true # long-range receivers take differential data over Cat5
+  pixels:
+    max_total: 16320
 power:
   voltage:
     max: 24

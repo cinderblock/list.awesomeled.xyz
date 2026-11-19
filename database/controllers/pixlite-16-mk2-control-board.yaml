@@ -18,6 +18,8 @@ outputs:
   clocked: selectable
   auxiliary:
     DMX512: 4
+  pixels:
+    max_total: 16320
 power:
   voltage:
     max: 24

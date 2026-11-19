@@ -23,6 +23,8 @@ outputs:
   current:
     max: 3
   clocked: selectable # supports WS2812 (async) and APA102 (clocked)
+  pixels:
+    max_total: 6400
 power:
   voltage:
     max: 12

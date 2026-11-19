@@ -15,6 +15,8 @@ outputs:
   clocked: selectable # supports single-wire and clocked (e.g. SK9822/APA102) strips
   driver:
     buffered: true # level-shifted output per channel
+  pixels:
+    max_total: 4096
 power:
   voltage:
     max: 24

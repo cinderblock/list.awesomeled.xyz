@@ -18,6 +18,8 @@ outputs:
   clocked: false # async pixel types
   driver:
     buffered: true
+  pixels:
+    max_total: 1000
 power:
   voltage:
     max: 12

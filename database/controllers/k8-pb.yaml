@@ -21,6 +21,8 @@ outputs:
     buffered: true
   auxiliary:
     DMX512: 1
+  pixels:
+    max_total: 57600
 power:
   voltage:
     min: 5

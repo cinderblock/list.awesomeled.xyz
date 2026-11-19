@@ -21,6 +21,8 @@ outputs:
   clocked: selectable # single (async) or clocked pixels per output
   auxiliary:
     DMX512: 4 # outputs configurable as DMX512 in groups of 4
+  pixels:
+    max_total: 6120
 power:
   voltage:
     max: 24

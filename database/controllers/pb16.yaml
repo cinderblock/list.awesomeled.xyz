@@ -19,6 +19,8 @@ outputs:
   clocked: false # async WS2811-style pixels
   auxiliary:
     DMX512: 2
+  pixels:
+    max_total: 22400
 power:
   voltage:
     max: 24

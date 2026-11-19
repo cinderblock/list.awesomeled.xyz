@@ -18,6 +18,8 @@ outputs:
   clocked: selectable # supports both single-wire and clocked pixels
   auxiliary:
     DMX512: 1 # DMX Thru
+  pixels:
+    max_total: 1000
 power:
   voltage:
     max: 35

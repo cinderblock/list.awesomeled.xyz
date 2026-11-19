@@ -19,6 +19,8 @@ outputs:
   clocked: false # async pixels only
   auxiliary:
     DMX512: 2 # two UARTs drive DMX/Renard/LOR
+  pixels:
+    max_total: 57600
 power:
   voltage:
     max: 12

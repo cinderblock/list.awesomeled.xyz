@@ -15,6 +15,8 @@ outputs:
   clocked: selectable # supports Single (async) or Clock pixel types
   driver:
     buffered: true
+  pixels:
+    max_total: 5440
 power:
   voltage:
     max: 12

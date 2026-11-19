@@ -16,6 +16,8 @@ outputs:
   clocked: false # async pixel types
   auxiliary:
     DMX512: 2
+  pixels:
+    max_total: 40000
 power:
   voltage:
     max: 12
