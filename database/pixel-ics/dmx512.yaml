@@ -1,4 +1,7 @@
 name: DMX512
+aliases:
+  - DMX512-P
+  - DMX512P
 color:
   channel_bits: 8
   pwm_frequency: 3.0kHz
@@ -22,3 +25,7 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols/dmx512
     retrieved: '2026-11-18'
     notes: Advatek Lighting pixel-protocol page (third-party controller maker; read via the advatek.netlify.app deployment of the same site); Overview + 'DMX512 Chips' table. Confirms the existing label.
+  aliases:
+    url: https://dmxking.tv/downloads/LeDMX4%20MAX%20User%20Manual%20(EN).pdf
+    retrieved: '2026-11-18'
+    notes: DMXking lists the single-wire DMX512 pixel type as 'DMX512-P'
