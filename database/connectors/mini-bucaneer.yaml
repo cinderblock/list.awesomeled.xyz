@@ -1,7 +1,6 @@
-name: Mini Bucaneer
+name: Mini Buccaneer
 creator: Bulgin
-notes: Bulgin, long established UK connector maker, available with crimp or
-  screw terminals. locking collar can be fragile with rough handling
+notes: Bulgin, long established UK connector maker, available with crimp or screw terminals. locking collar can be fragile with rough handling
 datasheet:
   url: https://www.bulgin.com/products/pub/media/import/attachments/Mini_power.pdf
 images:
@@ -41,6 +40,11 @@ ratings:
   max_current: 10 A
   max_voltage: 250 V
   ip_rating: IP68
+sources:
+  name:
+    url: https://www.bulgin.com/us/products/range/circular-power-connectors/mini-series.html
+    retrieved: '2026-11-18'
+    notes: Bulgin 'Mini Series Buccaneer'
 termination:
   solder: true
   crimp: true

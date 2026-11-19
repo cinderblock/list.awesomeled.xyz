@@ -1,10 +1,11 @@
-name: MTSB CombiCon
+name: MSTB COMBICON
 creator:
   name: Phoenix Contact
   url: https://www.phoenixcontact.com/
 notes: Also in 2.54 mm pitch , and literally thousands of variations
 aliases:
   - MSTB
+  - MTSB CombiCon
   - COMBICON MSTB
   - MSTB 2,5
 datasheet:
@@ -54,6 +55,10 @@ sources:
     url: https://novapart.co/products/1757022/pluggable-terminal-block-508-mm-3-ways-24-awg-12
     retrieved: '2026-11-18'
     notes: Reseller page reproducing Phoenix Contact's datasheet for 1757022; series shown as 'COMBICON MSTB Series'. phoenixcontact.com, RS, TME, DigiKey and Mouser all blocked automated reads.
+  name:
+    url: https://novapart.co/products/1757022/pluggable-terminal-block-508-mm-3-ways-24-awg-12
+    retrieved: '2026-11-18'
+    notes: Phoenix Contact 'COMBICON MSTB Series'
 termination:
   solder: true
   crimp: true
