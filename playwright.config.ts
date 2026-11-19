@@ -1,5 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Parallel worktrees each run their own dev server: set E2E_PORT to a port
+// nobody else uses, or the tests silently reuse another checkout's server.
+// strictPort makes a collision fail loudly instead of drifting to a new port.
+const PORT = Number(process.env.E2E_PORT) || 5173;
+const BASE_URL = `http://localhost:${PORT}`;
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
@@ -8,7 +14,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: BASE_URL,
     trace: 'on-first-retry',
   },
   projects: [
@@ -29,8 +35,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'bun run dev',
-    url: 'http://localhost:5173',
+    command: `bun run dev --port ${PORT} --strictPort`,
+    url: BASE_URL,
     reuseExistingServer: !process.env.CI,
   },
 });
