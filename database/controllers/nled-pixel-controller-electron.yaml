@@ -20,6 +20,45 @@ outputs:
     buffered: true
   pixels:
     max_per_output: 170
+  protocols:
+    - WS2801
+    - WS2803
+    - APA102
+    - APA107
+    - NS107S
+    - HD107S
+    - SK9822
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2814
+    - WS2815
+    - WS2816
+    - WS2812-V4
+    - WS2812-2020
+    - TM1812
+    - SK6805
+    - SK6812
+    - SK6812 RGBW
+    - SK6812HV-4P
+    - SK6805-EC15
+    - SK5812
+    - SK6812RGBP8
+    - SK6812RGBWP8
+    - LC8806B
+    - LPD1886
+    - LPD8806
+    - LPD6803
+    - APA104
+    - APA106
+    - P9823
+    - SK6822
+    - UCS1903
+    - UCS2903
+    - UCS2904
+    - SM16703
+    - SM16704
 power:
   voltage:
     max: 24
@@ -30,11 +69,26 @@ features:
   - 3-axis accelerometer
   - Optional WiFi/Bluetooth add-on modules
 price: 30
+related:
+  - type: related
+    ref: controllers/nled-pixel-controller-mini
+    notes: NLED pixel controller family sibling (USB/standalone wearable controller vs the DMX/serial Mini)
+    source:
+      url: https://www.nledshop.com/pixelchipsets/
+      retrieved: '2026-11-18'
 software:
   works_with:
     - AllPixMatrix
+    - NLED AllPixMatrix
 sources:
   software.works_with:
-    url: https://github.com/NLED/allpixmatrix
+    - url: https://github.com/NLED/allpixmatrix
+      retrieved: '2026-11-18'
+      notes: AllPixMatrix docs name this hardware
+    - url: http://www.nledshop.com/downloads/datasheets/nled-pixel-controller-electron.pdf
+      retrieved: '2026-11-18'
+      notes: Datasheet p.2 'Extended Pixel Output' (needs the 'Aurora Matrix' firmware).
+  outputs.protocols:
+    url: https://www.nledshop.com/pixelchipsets/
     retrieved: '2026-11-18'
-    notes: AllPixMatrix docs name this hardware
+    notes: "'Controller Compatibility Chart' (page 'Updated 12/8/2023'): every row with an X in the Electron column"

@@ -17,6 +17,12 @@ outputs:
     buffered: true # level-shifted output per channel
   pixels:
     max_total: 4096
+  protocols:
+    - ws2812b
+    - ws2811
+    - sk6812
+    - TM1814
+    - APA102
 power:
   voltage:
     max: 24
@@ -29,18 +35,38 @@ features:
   - Onboard fuses with power distribution terminals
   - Reverse polarity protection
 price: 37.5
+related:
+  - type: related
+    ref: controllers/quinled-dig-uno
+    notes: "QuinLED Dig family sibling: 4 outputs plus 7 fused power-injection terminals vs the Uno's 2 outputs"
+    source:
+      url: https://quinled.info/quinled-dig-quad/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - WLED
+    - ESPixelstick
+    - ESPhome
+    - Moonlight
   works_with:
     - xLights
 sources:
   software.firmware:
-    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
-    retrieved: '2026-11-18'
-    notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+      notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://quinled.info/quinled-dig-quad-pre-assembled-v4-specifications/
+      retrieved: '2026-11-18'
+      notes: "'EXPixelstick' is the page's typo; the index page https://quinled.info/quinled-dig-quad/ says 'The board is supported in the current versions of WLED and…"
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
     retrieved: '2026-11-18'
     notes: xLights controller definition (config upload supported)
+  outputs.protocols:
+    url: https://quinled.info/quinled-dig-quad/
+    retrieved: '2026-11-18'
+    notes: Intro paragraph (spelling as on the page).
+  wled_compatible:
+    url: https://quinled.info/quinled-dig-quad/
+    retrieved: '2026-11-18'
 wled_compatible: true

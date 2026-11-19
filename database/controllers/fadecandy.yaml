@@ -23,6 +23,9 @@ outputs:
   pixels:
     max_per_output: 64 # 512 total across 8 outputs
   clocked: false # async (WS2811-style) pixels
+  protocols:
+    - WS2811
+    - WS2812
 power:
   voltage:
     max: 5
@@ -40,7 +43,25 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.adafruit.com/product/1689
   vendor: Adafruit
+related:
+  - type: uses
+    ref: drive-libraries/octows2811
+    notes: Fadecandy firmware's LED drive engine is built on OctoWS2811
+    source:
+      url: https://github.com/scanlime/fadecandy
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - Fadecandy
 sources:
+  outputs.protocols:
+    url: https://github.com/scanlime/fadecandy
+    retrieved: '2026-11-18'
+    notes: Readme 'Project Scope', read via Wayback capture 2020-08-08 (https://web.archive.org/web/20200808161353/https://github.com/scanlime/fadecandy)
+  software.firmware:
+    url: https://github.com/scanlime/fadecandy
+    retrieved: '2026-11-18'
+    notes: Open-source (MIT) firmware the board ships with; no database entry.
   status:
     url: https://www.adafruit.com/product/1689
     retrieved: '2026-11-18'

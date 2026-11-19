@@ -43,9 +43,17 @@ price_source:
   retrieved: '2026-11-18'
   url: https://shop.chroma.tech/products/angio-4
   vendor: chroma.tech
+software:
+  works_with:
+    - Madrix
+    - Resolume
 sources:
+  software.works_with:
+    url: https://shop.chroma.tech/products/angio-4
+    retrieved: '2026-11-18'
+    notes: Read via Wayback capture 2025-12-05 (https://web.archive.org/web/20251205210748/https://shop.chroma.tech/products/angio-4)
   status:
     url: https://shop.chroma.tech/products/angio-4
     retrieved: '2026-11-18'
-    notes: 'listed (regular $129, sale $99), sold out'
+    notes: listed (regular $129, sale $99), sold out
 wled_compatible: false

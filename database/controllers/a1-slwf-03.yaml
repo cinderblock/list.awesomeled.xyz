@@ -15,6 +15,15 @@ outputs:
   clocked: selectable
   pixels:
     max_per_output: 2000
+  protocols:
+    - WS2812B
+    - WS2811
+    - WS2813
+    - WS2815
+    - APA102
+    - LPD8806
+    - WS2801
+    - SK9822
 power:
   voltage:
     max: 24
@@ -29,13 +38,24 @@ price_source:
 software:
   firmware:
     - WLED
+    - ESPHome
 sources:
   status:
     url: https://www.tindie.com/products/smartlightme/a1-slwf-03-wled-esp32-controller-home-assistant
     retrieved: '2026-11-18'
     notes: 'listed $15.99, controller-only option 610 in stock'
   software.firmware:
-    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+    - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+      notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://smlight.tech/product/slwf-03
+      retrieved: '2026-11-18'
+      notes: "'Supported modes'. ESPHome on the same page: 'Fully supports ESPHome firmwares.' Tindie: 'WLED + soundReactive WLED powered! Pre-flashed and ready to use.'"
+  outputs.protocols:
+    url: https://www.tindie.com/products/smartlightme/a1-slwf-03-wled-esp32-controller-home-assistant
     retrieved: '2026-11-18'
-    notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    notes: Key Features list on the maker's own Tindie store (SMARTLIGHT.ME = SMLIGHT). smlight.tech gives no IC list.
+  wled_compatible:
+    url: https://smlight.tech/product/slwf-03
+    retrieved: '2026-11-18'
 wled_compatible: true

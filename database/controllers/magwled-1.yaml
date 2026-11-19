@@ -31,4 +31,16 @@ features:
   - ESD protection
   - USB-C Power Delivery (5V/12V, up to 36W)
 price: 29.9
+software:
+  firmware:
+    - WLED
+sources:
+  software.firmware:
+    url: https://magwled.com/pages/magwled-1
+    retrieved: '2026-11-18'
+    notes: Read via Wayback capture 2026-07-19 (https://web.archive.org/web/20260719093817/https://magwled.com/pages/magwled-1); the live site serves a bot check to cURL.
+  wled_compatible:
+    url: https://magwled.com/pages/about-magwled-1
+    retrieved: '2026-11-18'
+    notes: Wayback capture 2026-07-19 (https://web.archive.org/web/20260719093734/https://magwled.com/pages/about-magwled-1)
 wled_compatible: true

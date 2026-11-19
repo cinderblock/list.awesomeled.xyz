@@ -23,6 +23,20 @@ outputs:
   pixels:
     max_per_output: 5000 # 5000 APA102 / 2500 WS2812
   clocked: selectable # single and clock-based pixels both supported
+  protocols:
+    - APA102
+    - SK9822
+    - DotStar
+    - WS2811
+    - WS2812
+    - WS2812b
+    - NeoPixel
+    - WS2813
+    - WS2815
+    - GS8208
+    - SK6812
+    - SK6812 RGBW
+    - WS2801
 power:
   voltage:
     max: 5
@@ -38,3 +52,15 @@ features:
   - Web-based live pattern editor
   - Output Expander Boards (8 channels each, up to 51K pixels total)
 price: 35
+software:
+  firmware:
+    - Pixelblaze
+sources:
+  outputs.protocols:
+    url: https://electromage.com/pixelblaze
+    retrieved: '2026-11-18'
+    notes: "'Specs' list. 'Supported LEDs' list on the same page adds WS2812b and SK6812: 'WS2811, WS2812/WS2812b, NeoPixel, WS2813, WS2815, GS8208, SK6812 RGB or RGBW.'…"
+  software.firmware:
+    url: https://electromage.com/pixelblaze
+    retrieved: '2026-11-18'
+    notes: The board runs the Pixelblaze pattern engine/editor (pattern-drivers/pixelblaze); 'The Settings tab lets you update the firmware over-the-air'.

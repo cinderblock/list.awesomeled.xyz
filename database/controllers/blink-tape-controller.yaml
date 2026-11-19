@@ -16,6 +16,9 @@ outputs:
   clocked: false
   pixels:
     max_per_output: 512
+  protocols:
+    - WS2812
+    - neopixel
 power:
   current:
     max: 1
@@ -34,7 +37,11 @@ price_source:
   url: https://shop.blinkinlabs.com/products/blinkytape-control-board
   vendor: Blinkinlabs
 sources:
+  outputs.protocols:
+    url: https://shop.blinkinlabs.com/products/blinkytape-control-board
+    retrieved: '2026-11-18'
+    notes: Read via Wayback capture 2026-02-26 (https://web.archive.org/web/20260226091835/https://shop.blinkinlabs.com/products/blinkytape-control-board)
   status:
     url: https://shop.blinkinlabs.com/products/blinkytape-control-board
     retrieved: '2026-11-18'
-    notes: 'listed, PCB $17.99 (16 in stock), JST $18.99 (12 in stock)'
+    notes: listed, PCB $17.99 (16 in stock), JST $18.99 (12 in stock)

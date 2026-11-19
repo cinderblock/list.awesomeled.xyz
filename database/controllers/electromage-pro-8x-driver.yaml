@@ -21,6 +21,17 @@ outputs:
   clocked: selectable # supports WS2812 (clockless) and APA102 (clocked)
   pixels:
     max_total: 6400
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2813
+    - WS2815
+    - GS8208
+    - SK6812
+    - NeoPixel
+    - APA102
+    - SK9822
+    - DotStar
 power:
   voltage:
     max: 12
@@ -33,6 +44,19 @@ price_source:
   retrieved: '2026-11-18'
   url: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
   vendor: ElectroMage
+related:
+  - type: accessory
+    ref: controllers/pixelblaze-v3
+    notes: 'Pro serial output expander for Pixelblaze: 8 channels, 15 A fused power distribution, up to 8 boards'
+    source:
+      url: https://electromage.com/docs/pro-output-expander
+      retrieved: '2026-11-18'
+  - type: variant
+    ref: controllers/electromage-8x-driver
+    notes: 'Pro version of the Serial to 8x WS2812/APA102 Driver: 5 V or 12 V, 15 A fused, 4 pluggable output terminals'
+    source:
+      url: https://electromage.com/docs/pro-output-expander
+      retrieved: '2026-11-18'
 software:
   works_with:
     - Pixelblaze
@@ -42,6 +66,12 @@ sources:
     retrieved: '2026-11-18'
     notes: 'listed $65 (12V and 5V variants), Sold out - check distributors'
   software.works_with:
-    url: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
+    - url: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
+      retrieved: '2026-11-18'
+      notes: Pixelblaze docs name this hardware
+    - url: https://electromage.com/docs/pro-output-expander
+      retrieved: '2026-11-18'
+  outputs.protocols:
+    url: https://electromage.com/docs/pro-output-expander
     retrieved: '2026-11-18'
-    notes: Pixelblaze docs name this hardware
+    notes: "'Addressable LED Support' (two lines of the list joined)."

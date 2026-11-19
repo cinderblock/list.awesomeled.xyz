@@ -22,6 +22,17 @@ outputs:
   clocked: selectable # Single and Clock (both)
   pixels:
     max_per_output: 1024 # 2048 total across 2 outputs
+  protocols:
+    - WS2812b
+    - APA102
+    - SK9822
+    - SK6822
+    - WS2814
+    - WS2805
+    - ws2811
+    - sk6812
+    - TM1814
+    - WS2815
 power:
   voltage:
     max: 24
@@ -36,15 +47,32 @@ price: 27.5
 software:
   firmware:
     - WLED
+    - ESPixelstick
+    - ESPhome
+    - Moonlight
   works_with:
     - xLights
+    - FastLED
 sources:
   software.firmware:
-    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
-    retrieved: '2026-11-18'
-    notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+      notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://quinled.info/quinled-dig-uno/
+      retrieved: '2026-11-18'
+      notes: "ESPhome from the v4 spec page https://quinled.info/quinled-dig-uno-pre-assembled-v4-specifications/: 'Further the QuinLED Dig-Uno has been tested to work with…"
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://quinled.info/quinled-dig-uno-pre-assembled-v4-specifications/
+      retrieved: '2026-11-18'
+      notes: "'Adafruit NeoPixelbus' is also named but ambiguous (NeoPixelBus is Makuna's library; drive-libraries/neopixel is Adafruit_NeoPixel), so not mapped."
+  outputs.protocols:
+    url: https://quinled.info/quinled-dig-uno-pre-assembled-v4-specifications/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: "Union of three maker pages. ws2811/sk6812/TM1814 from https://quinled.info/quinled-dig-uno/: 'The board is perfect for driving up to 2 (the board has 2…"
+  wled_compatible:
+    url: https://quinled.info/quinled-dig-uno/
+    retrieved: '2026-11-18'
 wled_compatible: true

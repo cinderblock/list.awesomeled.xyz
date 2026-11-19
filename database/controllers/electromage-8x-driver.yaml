@@ -25,6 +25,17 @@ outputs:
   clocked: selectable # supports WS2812 (async) and APA102 (clocked)
   pixels:
     max_total: 6400
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2813
+    - WS2815
+    - GS8208
+    - SK6812
+    - NeoPixel
+    - APA102
+    - SK9822
+    - DotStar
 power:
   voltage:
     max: 12
@@ -35,6 +46,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
   vendor: ElectroMage
+related:
+  - type: accessory
+    ref: controllers/pixelblaze-v3
+    notes: 'Serial output expander for Pixelblaze: 8 channels per board, up to 8 boards (64 channels) on one serial line'
+    source:
+      url: https://electromage.com/docs/output-expander
+      retrieved: '2026-11-18'
 software:
   works_with:
     - Pixelblaze
@@ -44,6 +62,13 @@ sources:
     retrieved: '2026-11-18'
     notes: 'listed $19, Sold out - check distributors'
   software.works_with:
-    url: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
+    - url: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
+      retrieved: '2026-11-18'
+      notes: Pixelblaze docs name this hardware
+    - url: https://electromage.com/docs/output-expander
+      retrieved: '2026-11-18'
+      notes: "Also: 'To use with Pixelblaze, go to the Settings tab and change the LED type to “Pixelblaze Output Expander”'."
+  outputs.protocols:
+    url: https://electromage.com/docs/output-expander
     retrieved: '2026-11-18'
-    notes: Pixelblaze docs name this hardware
+    notes: "'What is it?' (two lines of the list joined)."

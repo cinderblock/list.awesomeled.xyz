@@ -43,9 +43,24 @@ price_source:
   retrieved: '2026-11-18'
   url: https://shop.chroma.tech/products/angio-8
   vendor: chroma.tech
+related:
+  - type: variant
+    ref: controllers/angio-4
+    notes: 8-output version of the Angio 4 (two 12 A power inputs, each feeding 4 outputs)
+    source:
+      url: https://shop.chroma.tech/products/angio-8
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - Madrix
+    - Resolume
 sources:
+  software.works_with:
+    url: https://shop.chroma.tech/products/angio-8
+    retrieved: '2026-11-18'
+    notes: Read via Wayback capture 2026-06-06 (https://web.archive.org/web/20260606050521/https://shop.chroma.tech/products/angio-8).
   status:
     url: https://shop.chroma.tech/products/angio-8
     retrieved: '2026-11-18'
-    notes: 'listed and available (regular $199, sale $169)'
+    notes: listed and available (regular $199, sale $169)
 wled_compatible: false

@@ -36,3 +36,8 @@ software:
   firmware:
     - Arduino
     - CircuitPython
+sources:
+  software.firmware:
+    url: https://github.com/jgillick/ThunderPack
+    retrieved: '2026-11-18'
+    notes: Readme 'Features' (confirms the existing YAML values; neither is a database entry).

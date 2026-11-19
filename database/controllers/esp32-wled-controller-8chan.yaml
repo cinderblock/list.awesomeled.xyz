@@ -25,9 +25,22 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
   vendor: Giovanni's Domotica Store (Tindie)
+software:
+  firmware:
+    - WLED
+    - Tasmota
+    - ESPHome
+    - ESPEasy
 sources:
+  software.firmware:
+    url: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
+    retrieved: '2026-11-18'
+    notes: "'Why did you make it?'. Ships with WLED: 'WLED latest version already preloaded for quick start!'"
+  wled_compatible:
+    url: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
+    retrieved: '2026-11-18'
   status:
     url: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
     retrieved: '2026-11-18'
-    notes: 'still listed at $45 (not retired) but Out of Stock, sold out since Aug 18, 2024'
+    notes: still listed at $45 (not retired) but Out of Stock, sold out since Aug 18, 2024
 wled_compatible: true

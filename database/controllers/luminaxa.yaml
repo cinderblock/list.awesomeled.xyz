@@ -20,6 +20,9 @@ outputs:
   pixels:
     max_per_output: 600
   clocked: false
+  protocols:
+    - WS2812B
+    - SK6812
 power:
   voltage:
     max: 5
@@ -32,3 +35,8 @@ price: 49.99
 software:
   works_with:
     - Android
+sources:
+  outputs.protocols:
+    url: https://luminxa.com/wifi-led-settings/
+    retrieved: '2026-11-18'
+    notes: "'LED Settings' table; SK6812 from the same table: 'Support for SK6812 LEDs with white channel' (RGBW option)."

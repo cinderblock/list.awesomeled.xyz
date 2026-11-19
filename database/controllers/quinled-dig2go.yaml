@@ -19,6 +19,11 @@ outputs:
     buffered: true
   pixels:
     max_per_output: 1024
+  protocols:
+    - WS2812B
+    - SK6812
+    - SK6812 RGBW
+    - WS2811
 power:
   voltage:
     max: 5
@@ -27,18 +32,41 @@ power:
 core:
   family: ESP32
 price: 24.99
+related:
+  - type: related
+    ref: controllers/quinled-dig-uno
+    notes: 'QuinLED family: dig2go is the 5 V single-output plug-and-play entry model; the Dig-Uno is the next step up (5-24 V, 2 outputs)'
+    source:
+      url: https://dig2go.info/compare.html
+      retrieved: '2026-11-18'
 software:
   firmware:
     - WLED
+    - ESPHome
+    - Moonlight
   works_with:
     - xLights
+    - FastLED
 sources:
   software.firmware:
-    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
-    retrieved: '2026-11-18'
-    notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+      notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://dig2go.info/
+      retrieved: '2026-11-18'
+      notes: Spec table 'Firmware' row. FastLED (a library) is in the same row; reported under works_with.
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://dig2go.info/
+      retrieved: '2026-11-18'
+      notes: Maker lists FastLED as a reflash option alongside firmware; it is a library (drive-libraries/fastled).
+  outputs.protocols:
+    url: https://dig2go.info/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: Spec table 'LED support' row; 'SK6812 (RGB & RGBW)' split into SK6812 + SK6812 RGBW.
+  wled_compatible:
+    url: https://dig2go.info/
+    retrieved: '2026-11-18'
 wled_compatible: true
