@@ -19,3 +19,27 @@ declare module 'bun' {
     ): Promise<number>;
   }
 }
+
+// The Bun global, as used by tests/unit (local mock servers + async subprocesses).
+declare namespace Bun {
+  interface Server {
+    port: number;
+    stop(closeActiveConnections?: boolean): void;
+  }
+  function serve(options: {
+    port?: number;
+    fetch(req: Request): Response | Promise<Response>;
+  }): Server;
+  interface Subprocess {
+    stdout: ReadableStream<Uint8Array>;
+    exited: Promise<number>;
+  }
+  function spawn(
+    cmd: string[],
+    options?: {
+      cwd?: string;
+      env?: Record<string, string | undefined>;
+      stdout?: 'pipe' | 'inherit';
+    }
+  ): Subprocess;
+}
