@@ -13,8 +13,10 @@ outputs:
     sacn: Both
     dmx: Both
     kinet: Both
+    ddp: false # scriptable only
+    opc: false # scriptable only
   dmx_notes: Requires DMX USB adapter for direct DMX output. USB DMX output is limited to ENTTEC "DMX USB PRO" devices (not the Open DMX USB)
-  gpio: Both
+  gpio: false
   serial: Both
   serial_notes: Serial support for Arduino and microcontroller communication
   other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton

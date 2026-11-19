@@ -3,14 +3,20 @@ status: active
 creator: Resolume
 notes: Heavily integrated with VJ features
 inputs:
-  video: true
-  audio: true
+  video: Both
+  audio: Both
   other: MIDI, OSC, Spout, Syphon
 outputs:
   protocols:
-    artnet: Both
-    sacn: true
-    dmx: Both
+    artnet: Both # Arena only; Avenue has no DMX output
+    sacn: false
+    dmx: false
+    kinet: false
+    ddp: false
+    opc: false
+  dmx_notes: No DMX interfaces ("Arena 6 and up do not support Enttec DMX USB devices"); DMX fixtures are driven over Art-Net, in Arena only
+  gpio: false
+  serial: false
   other: MIDI
 aliases:
   - Resolume Arena

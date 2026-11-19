@@ -9,11 +9,15 @@ inputs:
   other: MIDI, HTTP, MA-net, CITP, SMPTE, Spout, GamePort
 outputs:
   protocols:
-    artnet: Both
+    artnet: Both # in: Art-Net Remote control (4 universes)
     sacn: Both
     dmx: Both
-    kinet: true
+    kinet: Output
+    ddp: false
+    opc: false
+  dmx_notes: MADRIX-brand USB DMX interfaces only (Windows)
   gpio: false
+  serial: false
   other: DVI, Robe, Insta, Hue
 aliases:
   - MADRIX

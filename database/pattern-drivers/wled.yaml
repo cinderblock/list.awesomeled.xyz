@@ -3,14 +3,19 @@ status: active
 creator: Aircoookie, community
 notes: 'Great standalone pixel controller software for ESP8266 and ESP32 based boards. See also: WLED-SR, sound reactive fork'
 inputs:
+  video: false
+  audio: Input # AudioReactive, built in since 0.15
   other: UDP Sync
 outputs:
   protocols:
-    artnet: Input
-    sacn: Input
-    dmx: Output
-    ddp: Input
-  gpio: Possible
+    artnet: Both # sends since 0.14
+    sacn: Input # receive only
+    dmx: Both
+    kinet: false
+    ddp: Both # sends since 0.13
+    opc: false
+  dmx_notes: 'RS-485 transceiver on a GPIO pin: output needs a _dmx build, input the v16 "V4" builds'
+  gpio: Both # buttons, switches and PIR in; relay out
   serial: Input
   other: ws281x protocol, APA102, etc.
 capabilities:

@@ -3,17 +3,22 @@ status: active
 creator: Massimo Calegari
 notes: Includes sound responsive features. Large fixture compatibility list.
 inputs:
-  audio: Input
+  video: Output
+  audio: Both
   other: OSC, MIDI, Web API
 outputs:
   protocols:
     artnet: Both
     sacn: Both
-    dmx: Both
-  gpio: Output (Raspberry Pi version only; also SPI)
+    dmx: Both # Open DMX and Vince interfaces: output only
+    kinet: Output # through the OLA plugin
+    ddp: false
+    opc: Output # through the OLA plugin
+    spi: Output # SPI plugin, /dev/spidev0.0 (Linux)
+  gpio: Both # GPIO plugin (Linux)
   serial: Output
+  serial_notes: 'UART plugin: DMX framing on a serial port (Linux)'
   other: USB, OSC
-  serial_notes: Raspberry Pi version only; also SPI
 aliases:
   - Q Light Controller+
   - Q Light Controller Plus

@@ -3,15 +3,20 @@ status: active
 creator: Mark C Slee
 notes: VJ like live control, extensive support for 3D animation matrices Successor to LX Studio
 inputs:
-  audio: Input
-  other: MIDI , OSC, DMX
+  video: false
+  audio: Both
+  other: MIDI, OSC, DMX
 outputs:
   protocols:
-    artnet: Output
+    artnet: Both
     sacn: Output
-    dmx: Possible
+    dmx: false
     kinet: Output
     ddp: Output
+    opc: Output # including Fadecandy
+  dmx_notes: 'No direct DMX interface: send Art-Net or sACN to a DMX node, or write a Java plugin'
+  gpio: false
+  serial: false
 capabilities:
   live: true
   designer: true

@@ -2,12 +2,19 @@ name: Millumin
 status: active
 creator: Anomes SARL
 inputs:
-  video: Possible
+  video: Both
+  audio: Both
 outputs:
   protocols:
     artnet: Both
     sacn: Both
-    dmx: Output
+    dmx: Both
+    kinet: false
+    ddp: false
+    opc: false
+  dmx_notes: ENTTEC DMX USB Pro and Pro Mk2
+  gpio: Both # through an Arduino or Teensy
+  serial: false
 capabilities:
   live: true
 links:

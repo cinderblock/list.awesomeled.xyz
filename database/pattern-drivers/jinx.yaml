@@ -2,9 +2,20 @@ name: Jinx!
 status: end-of-life
 creator: Sven Karschewski
 notes: Basically a mapper/pattern generator for microcontrollers with pixels. Development ceased
+inputs:
+  video: Both
+  audio: Input
 outputs:
-  gpio: Input
-  serial: Output
+  protocols:
+    artnet: Both
+    sacn: Both
+    dmx: Both
+    kinet: false
+    ddp: false
+    opc: false
+  gpio: false
+  serial: Both
+  serial_notes: tpm2, Glediator and MiniDMX out; tpm2 in for remote control
 capabilities:
   live: false
   designer: true
