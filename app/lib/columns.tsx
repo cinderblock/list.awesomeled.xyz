@@ -247,7 +247,15 @@ function formatPrice(v: unknown, item?: Record<string, unknown>) {
       if (tiers.length > 1) prefix = 'from ';
     }
   }
-  if (!parsed) return <span className="data-table-null">-</span>;
+  if (!parsed) {
+    // Free-text software pricing ("39/week +", "€15 donation") is still
+    // information: show it muted rather than a bare dash.
+    return typeof v === 'string' && v.trim() ? (
+      <span className="data-table-null">{v.trim()}</span>
+    ) : (
+      <span className="data-table-null">-</span>
+    );
+  }
 
   const usd = toUSD(parsed);
   // Decimal-align: whole-dollar prices get invisible cents so the ones digits

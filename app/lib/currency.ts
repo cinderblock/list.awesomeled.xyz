@@ -20,6 +20,7 @@ export const USD_PER: Record<string, number> = {
   JPY: 0.00627,
   CNY: 0.15,
   INR: 0.0107,
+  BRL: 0.172,
 };
 
 const CODE_TO_SYMBOL: Record<string, string> = { USD: '$', EUR: '€', GBP: '£', JPY: '¥' };
@@ -27,16 +28,33 @@ const SYMBOL_TO_CODE: Record<string, string> = { $: 'USD', '€': 'EUR', '£': '
 
 export interface ParsedPrice {
   amount: number;
-  /** High end of a street-price range ({amount, max}); `amount` is the low end */
+  /** High end of a range ({amount, max}, "€299-799"); `amount` is the low end */
   max?: number;
+  /** "330+": a starting price, more for bigger editions */
+  from?: boolean;
   currency: string;
+}
+
+// One money amount: optional symbol, number with thousands commas, or "free"
+const AMOUNT = String.raw`(free|foss|[$€£¥]?\s*[\d,]+(?:\.\d+)?)`;
+const SINGLE = new RegExp(String.raw`^${AMOUNT}\s*([A-Z]{3})?(\+)?$`, 'i');
+const RANGE = new RegExp(String.raw`^${AMOUNT}\s*[-–]\s*${AMOUNT}\s*([A-Z]{3})?$`, 'i');
+
+function amountOf(token: string): { amount: number; symbol: string } | null {
+  if (/^(free|foss)$/i.test(token)) return { amount: 0, symbol: '' };
+  const m = token.match(/^([$€£¥]?)\s*([\d,]+(?:\.\d+)?)$/);
+  if (!m) return null;
+  const amount = parseFloat(m[2].replace(/,/g, ''));
+  return isNaN(amount) ? null : { amount, symbol: m[1] };
 }
 
 /**
  * Parse a price value from the database into {amount, currency}.
- * Handles: bare numbers (USD), "$25" / "€25" / "25 EUR" strings, "free",
- * {amount, currency} objects, and {name, price, …} tier objects.
- * Returns null for unpriceable values ("varies", "contact", "unknown", null).
+ * Handles: bare numbers (USD), "$25" / "€25" / "25 EUR" strings, "free" /
+ * "FOSS", ranges ("€299-799", "Free - $399", "125 - 450"), starting prices
+ * ("330+"), {amount, max?, currency} objects, and {name, price, …} tier
+ * objects. Returns null for unpriceable values ("varies", "contact",
+ * "unknown", free text, null).
  */
 export function parsePrice(v: unknown): ParsedPrice | null {
   if (typeof v === 'number') {
@@ -44,12 +62,25 @@ export function parsePrice(v: unknown): ParsedPrice | null {
   }
   if (typeof v === 'string') {
     const s = v.trim();
-    if (/^free$/i.test(s)) return { amount: 0, currency: 'USD' };
-    const m = s.match(/^([$€£¥]?)\s*([\d,]+(?:\.\d+)?)\s*([A-Z]{3})?$/);
-    if (!m) return null;
-    const amount = parseFloat(m[2].replace(/,/g, ''));
-    if (isNaN(amount)) return null;
-    return { amount, currency: m[3] ?? SYMBOL_TO_CODE[m[1]] ?? 'USD' };
+    const single = s.match(SINGLE);
+    if (single) {
+      const a = amountOf(single[1]);
+      if (!a) return null;
+      const currency = single[2]?.toUpperCase() ?? SYMBOL_TO_CODE[a.symbol] ?? 'USD';
+      return single[3]
+        ? { amount: a.amount, from: true, currency }
+        : { amount: a.amount, currency };
+    }
+    const range = s.match(RANGE);
+    if (range) {
+      const lo = amountOf(range[1]);
+      const hi = amountOf(range[2]);
+      if (!lo || !hi || hi.amount <= lo.amount) return null;
+      const currency =
+        range[3]?.toUpperCase() ?? SYMBOL_TO_CODE[lo.symbol] ?? SYMBOL_TO_CODE[hi.symbol] ?? 'USD';
+      return { amount: lo.amount, max: hi.amount, currency };
+    }
+    return null;
   }
   if (v && typeof v === 'object' && !Array.isArray(v)) {
     const o = v as { amount?: unknown; max?: unknown; currency?: unknown; price?: unknown };
@@ -84,9 +115,9 @@ export function priceUSD(v: unknown): number | null {
 }
 
 /**
- * "€1,500", "$25", "1,500 SEK", "$3–8" (street-price range) — original
- * currency, never converted. `forceCents` renders exactly two decimals (for
- * decimal-aligned columns).
+ * "€1,500", "$25", "1,500 SEK", "$3–8" (range), "Free–$399", "$330+" —
+ * original currency, never converted. `forceCents` renders exactly two
+ * decimals (for decimal-aligned columns).
  */
 export function formatPriceText(p: ParsedPrice, forceCents = false): string {
   const symbol = CODE_TO_SYMBOL[p.currency];
@@ -100,6 +131,13 @@ export function formatPriceText(p: ParsedPrice, forceCents = false): string {
           ? { minimumFractionDigits: 2, maximumFractionDigits: 2 }
           : undefined
     );
-  const n = p.max != null ? `${fmt(p.amount)}–${fmt(p.max)}` : fmt(p.amount);
-  return symbol ? `${symbol}${n}` : `${n} ${p.currency}`;
+  const money = (x: number) => (symbol ? `${symbol}${fmt(x)}` : `${fmt(x)} ${p.currency}`);
+  if (p.max != null) {
+    if (p.amount === 0) return `Free–${money(p.max)}`;
+    return symbol
+      ? `${symbol}${fmt(p.amount)}–${fmt(p.max)}`
+      : `${fmt(p.amount)}–${fmt(p.max)} ${p.currency}`;
+  }
+  if (p.amount === 0) return 'Free';
+  return p.from ? `${money(p.amount)}+` : money(p.amount);
 }
