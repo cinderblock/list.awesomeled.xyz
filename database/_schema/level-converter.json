@@ -114,6 +114,13 @@
         },
         "max_current": {
           "type": ["string", "number", "null"]
+        },
+        "input_high_voltage": {
+          "description": "Lowest input voltage guaranteed to read as high (the datasheet's VIH min) when the part is powered to output 5 V; for dual-supply parts, with the input side on the controller's 3.3 V rail. A 3.3 V controller can only drive the part when this is below 3.3 V. Put the datasheet's test condition in input_high_voltage_notes.",
+          "$ref": "common.json#/definitions/voltage"
+        },
+        "input_high_voltage_notes": {
+          "type": ["string", "null"]
         }
       }
     },
