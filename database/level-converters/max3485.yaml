@@ -26,7 +26,7 @@ electrical:
   max_voltage: 3.6V
 io:
   channels: 1
-  interface: RS-485 / RS-422 (half duplex)
+  differential: true
 links:
   product: https://www.analog.com/en/products/max3485.html
 sources:

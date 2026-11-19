@@ -19,7 +19,7 @@ datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
 electrical:
   max_voltage: 5.5V
-  max_current: 6mA
+  output_current: 6mA
 io:
   channels: 8
   buffered: true
@@ -46,7 +46,7 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
     retrieved: '2026-11-18'
     notes: "'Operating voltage range of 4.5 V to 5.5 V' (absolute maximum 7 V)"
-  electrical.max_current:
+  electrical.output_current:
     url: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
     retrieved: '2026-11-18'
     notes: "'±6-mA output drive at 5 V'"

@@ -97,13 +97,25 @@ const lc = migrateCategory('level-converters', (doc, { id }) => {
   const iface = getJS(doc, ['io', 'interface']);
   if (iface !== undefined) {
     remove(doc, ['io', 'interface']);
-    if (iface === 'Differential Pairs') setJS(doc, ['io', 'differential'], true);
+    // Signalling and direction move to their own fields; package names were
+    // the sheet's (packages are filled from datasheets)
+    if (iface === 'Differential Pairs' || iface === 'RS-485 / RS-422 (half duplex)')
+      setJS(doc, ['io', 'differential'], true);
+    else if (iface === 'Auto-direction bidirectional') setJS(doc, ['io', 'direction'], 'auto');
     else if (!['PDIP largest', 'Through-Hole DIP', 'SOT 23'].includes(String(iface))) {
       throw new Error(`level-converters/${id}: io.interface ${JSON.stringify(iface)}`);
     }
     touched = true;
   }
   if (renameKey(doc, ['electrical'], 'max_current', 'output_current')) touched = true;
+  if (renameKey(doc, ['sources'], 'electrical.max_current', 'electrical.output_current'))
+    touched = true;
+  if (getJS(doc, ['sources', 'io.interface']) !== undefined) {
+    const to =
+      getJS(doc, ['io', 'differential']) !== undefined ? 'io.differential' : 'io.direction';
+    renameKey(doc, ['sources'], 'io.interface', to);
+    touched = true;
+  }
   const max = getJS(doc, ['electrical', 'max_voltage']);
   if (typeof max === 'number') {
     setJS(doc, ['electrical', 'max_voltage'], `${max}V`);

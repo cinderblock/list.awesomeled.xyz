@@ -20,7 +20,7 @@ electrical:
   max_voltage: 5.5V
 io:
   channels: 4
-  interface: Auto-direction bidirectional
+  direction: auto
 links:
   product: https://www.ti.com/product/TXB0104
 sources:
