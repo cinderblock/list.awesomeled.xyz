@@ -108,7 +108,8 @@ export function sheetRows(sheet: Sheet): SheetRow[] {
     if (i === 0) return;
     const v = cells[0]?.v;
     const name = v === undefined ? '' : String(v).trim();
-    if (!name && !cells.some((c) => c?.v !== undefined)) return;
+    // Blank rows (a lone space counts as blank) aren't products
+    if (!name && !cells.some((c) => c?.v !== undefined && String(c.v).trim() !== '')) return;
     rows.push({ tab: sheet.name, rowNumber: i + 1, name, cells });
   });
   return rows;

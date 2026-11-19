@@ -6,7 +6,8 @@
  * how much of the row's content the entry holds (so mislabeled and duplicate
  * rows go to the right place). This table covers the rest: keyed by tab, then
  * by the sheet's trimmed column-A text, valued with the `<category>/<slug>`
- * the row's data lives at now.
+ * the row's data lives at now. When several rows share a name, key one of
+ * them as `<name> @ <url>`, with a URL the row links (its product URL).
  */
 
 export const ALIASES: Record<string, Record<string, string>> = {
@@ -19,6 +20,9 @@ export const ALIASES: Record<string, Record<string, string>> = {
     // Researched by the database-review stream (c13218a): it is Elation's
     // "Flex Pixel Driver 1", a DMX-in, single clocked-output driver
     'Flex Pixel Driver': 'controllers/flex-pixel-driver',
+    // The second "Falcon F4V3" row is the F16V3 (its product URL)
+    'Falcon F4V3 @ https://pixelcontroller.com/store/products/48-f16v3.html':
+      'controllers/falcon-f16v3',
   },
   'Pixel Decoders': {
     // Moved to controllers (it holds DMX universes, not just pixel data)
@@ -28,6 +32,9 @@ export const ALIASES: Record<string, Record<string, string>> = {
     // The K40D-PB's pre-K-series name; merged in a61acdb
     'F40D-B': 'controllers/k40d-pb',
     '4 Channel Differntial Transmitter': 'adapters/4-channel-differential-transmitter',
+    // Two "QuinLED-Dig-Uno" rows: this one is the current board (the other,
+    // the 2018 DIY guide's v2r5, is adapters/quinled-dig-uno)
+    'QuinLED-Dig-Uno @ https://quinled.info/quinled-dig-uno/': 'controllers/quinled-dig-uno',
     'Meanwell PDU with Differential Reciever': 'adapters/meanwell-pdu-with-differential-receiver',
   },
   'Diffusive Materials': {

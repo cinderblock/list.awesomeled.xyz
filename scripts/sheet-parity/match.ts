@@ -91,7 +91,12 @@ export function matchRows(
   const taken = new Map<string, Pair>();
 
   for (const row of rows) {
-    const alias = aliases[row.name];
+    // Plain name, or "<name> @ <url>" for one of several same-named rows
+    const alias =
+      aliases[row.name] ??
+      rowUrls(row)
+        .map((u) => aliases[`${row.name} @ ${u}`])
+        .find(Boolean);
     if (alias) {
       const view = all.get(alias);
       if (!view) throw new Error(`${tab}: alias for "${row.name}" points at missing ${alias}`);
