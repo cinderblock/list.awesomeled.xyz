@@ -92,11 +92,11 @@ export function matchRows(
 
   for (const row of rows) {
     // Plain name, or "<name> @ <url>" for one of several same-named rows
+    // "<name> @ <url>" (one of several same-named rows) beats the plain name
     const alias =
-      aliases[row.name] ??
       rowUrls(row)
         .map((u) => aliases[`${row.name} @ ${u}`])
-        .find(Boolean);
+        .find(Boolean) ?? aliases[row.name];
     if (alias) {
       const view = all.get(alias);
       if (!view) throw new Error(`${tab}: alias for "${row.name}" points at missing ${alias}`);

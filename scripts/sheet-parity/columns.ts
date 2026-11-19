@@ -48,8 +48,12 @@ const STATUS: Kind = {
 const pixelTotal = (data: Record<string, unknown>) => {
   const count = getAt(data, 'outputs.count')[0];
   const per = getAt(data, 'outputs.pixels.max_per_output')[0];
-  const out: unknown[] = [];
-  if (typeof count === 'number' && typeof per === 'number') out.push(count * per);
+  // A stated device-wide limit is the total; count x per-output only without one
+  const total = getAt(data, 'outputs.pixels.max_total');
+  const out: unknown[] = [...total];
+  if (!total.length && typeof count === 'number' && typeof per === 'number') {
+    out.push(count * per);
+  }
   return out.concat(getAt(data, 'price[].pixels'));
 };
 
@@ -176,6 +180,30 @@ const controllerOutputs: Kind = {
   },
 };
 
+/**
+ * Adapters' "Pixel Types" / "Outputs": Single, Clocked, or both ("Single or
+ * Clocked", "Single+Clocked", "Both") against outputs.clocked; anything else
+ * ("Fet power output", "1 Universe Artnet to DMX Node") falls back to text.
+ */
+const adapterPixelTypes: Kind = {
+  type: 'custom',
+  fn: (text, mapped) => {
+    const t = text.toLowerCase();
+    const both = t === 'both' || (/single/.test(t) && /clock/.test(t));
+    const single = both || /^single\b/.test(t);
+    const clock = both || /^clocked\b/.test(t);
+    if (!single && !clock) return undefined;
+    const c = mapped[0];
+    if (c === undefined) return { status: 'missing' };
+    const ok = both
+      ? c === 'selectable' || c === true
+      : clock
+        ? c === 'always' || c === 'selectable' || c === true
+        : c === false || c === 'selectable';
+    return ok ? { status: 'ok' } : { status: 'differs', detail: `outputs.clocked is ${String(c)}` };
+  },
+};
+
 /** Pattern-driver prices use the format `$0;"FOSS";"Free";@`: -1 = FOSS, 0 = Free. */
 const pdPrice = (v: string | number | boolean) => (v === 0 ? 'Free' : v === -1 ? 'FOSS' : v);
 
@@ -220,7 +248,8 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Manufacturer', text, ['creator', 'manufacturers', 'vendors']),
     col('Max Pixels', num, [], {
       derive: pixelTotal,
-      note: 'outputs.count x outputs.pixels.max_per_output (or price[].pixels)',
+      cite: ['outputs.pixels', 'outputs.count'],
+      note: 'outputs.pixels.max_total, else outputs.count x max_per_output (or price[].pixels)',
     }),
     col('Price', price, ['price', 'price[]']),
     col('Max outputs', num, ['outputs.count']),
@@ -365,20 +394,23 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Product URL', url, ['links.product']),
   ],
 
+  // Adapters share the controllers' outputs/power shapes since 3b9da1a
   Adapters: [
     name,
     col('Manufacturer/Designer', text, ['creator', 'manufacturers']),
-    col('Max Channels', num, ['outputs.max_channels']),
-    col('Pixel Types', text, ['outputs.pixel_types']),
-    col('Max Voltage', volts, ['power.voltage']),
-    col('Max LED Current', amps, ['power.current']),
+    col('Max Channels', num, ['outputs.count']),
+    col('Pixel Types', adapterPixelTypes, ['outputs.clocked'], {
+      note: 'Single / Clocked / both -> outputs.clocked; other text is compared as text',
+    }),
+    col('Max Voltage', volts, ['power.voltage.max']),
+    col('Max LED Current', amps, ['power.current.max', 'outputs.current.max']),
     col('Parent', text, ['parent']),
     col('Unit Price (USD)', price, ['price']),
-    col('Output Connectors', text, ['outputs.connectors']),
-    col('(J, no header)', text, ['outputs.description', 'power.voltage'], {
+    col('Output Connectors', phoenix, ['outputs.connector'], { derive: connectorNames }),
+    col('(J, no header)', text, ['outputs.differential', 'power.voltage.max'], {
       note: 'Stray values (F40D-B "Differential", Pi Hat 12)',
     }),
-    col('Outputs', text, ['outputs.description']),
+    col('Outputs', adapterPixelTypes, ['outputs.clocked']),
     col('DIY/OTS', text, ['diy_or_ots']),
     col('Notes', text, ['notes']),
     col('Product URL', url, ['links.product']),

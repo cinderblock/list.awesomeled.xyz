@@ -23,6 +23,18 @@ export const ALIASES: Record<string, Record<string, string>> = {
     // The second "Falcon F4V3" row is the F16V3 (its product URL)
     'Falcon F4V3 @ https://pixelcontroller.com/store/products/48-f16v3.html':
       'controllers/falcon-f16v3',
+    // Microcyb's Pi HATs, renamed M4-PI / M8-PI; stream 2 merged "M4- Pi" into
+    // the M4 (plans/database-review.md). The second "M8 Port Pixel" row is
+    // ENTTEC's Pixel Octo.
+    'M4 Port Pixel': 'controllers/m4-port-pixel',
+    'M4- Pi': 'controllers/m4-port-pixel',
+    'M8 Port Pixel': 'controllers/m8-port-pixel',
+    'M8 Port Pixel @ https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/':
+      'controllers/pixel-octo',
+  },
+  'Pattern Drivers': {
+    // The sheet's typo; the project is cyberboy666's artnet_led_mapper
+    'Arthet LED Mapper': 'pattern-drivers/arthet-led-mapper',
   },
   'Pixel Decoders': {
     // Moved to controllers (it holds DMX universes, not just pixel data)
@@ -32,9 +44,13 @@ export const ALIASES: Record<string, Record<string, string>> = {
     // The K40D-PB's pre-K-series name; merged in a61acdb
     'F40D-B': 'controllers/k40d-pb',
     '4 Channel Differntial Transmitter': 'adapters/4-channel-differential-transmitter',
-    // Two "QuinLED-Dig-Uno" rows: this one is the current board (the other,
-    // the 2018 DIY guide's v2r5, is adapters/quinled-dig-uno)
-    'QuinLED-Dig-Uno @ https://quinled.info/quinled-dig-uno/': 'controllers/quinled-dig-uno',
+    // Both "QuinLED-Dig-Uno" rows (the current board, and the 2018 DIY guide's
+    // v2r5) and the Pi HATs: stream 2 merged the adapter copies into the
+    // controllers (plans/database-review.md, removed-entry map)
+    'QuinLED-Dig-Uno': 'controllers/quinled-dig-uno',
+    'QuinLED-Dig-Quad': 'controllers/quinled-dig-quad',
+    'M4 Port Pixel': 'controllers/m4-port-pixel',
+    'M8 Port Pixel': 'controllers/m8-port-pixel',
     'Meanwell PDU with Differential Reciever': 'adapters/meanwell-pdu-with-differential-receiver',
   },
   'Diffusive Materials': {

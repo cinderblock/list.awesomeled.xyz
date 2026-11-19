@@ -63,6 +63,8 @@ export interface ColumnSpec {
   derive?: (data: Record<string, unknown>, ctx: DeriveContext) => unknown[];
   /** Rewrite the sheet value before comparing (e.g. pattern-driver price codes) */
   transform?: (v: string | number | boolean) => string | number | boolean;
+  /** Fields whose `sources` citation settles a difference (default: paths) */
+  cite?: string[];
 }
 
 // ---------------------------------------------------------------------------
@@ -320,9 +322,12 @@ export function mappedValue(
   ctx: DeriveContext
 ): { yaml?: string; sourced: boolean } {
   const data = view.entry.data;
-  const roots = spec.paths.map((p) => p.replace(/(\[\]|@keys).*$/, ''));
+  const roots = (spec.cite ?? spec.paths).map((p) => p.replace(/(\[\]|@keys).*$/, ''));
   const sources = Object.keys((data as { sources?: object }).sources ?? {});
-  const sourced = sources.some((s) => roots.some((r) => r === s || r.startsWith(`${s}.`)));
+  // A citation for the field, a parent of it, or a part of it
+  const sourced = sources.some((s) =>
+    roots.some((r) => r === s || r.startsWith(`${s}.`) || s.startsWith(`${r}.`))
+  );
   const mapped = [
     ...spec.paths.flatMap((p) => getAt(data, p)),
     ...(spec.derive ? spec.derive(data, ctx) : []),

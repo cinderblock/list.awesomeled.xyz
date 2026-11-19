@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// cspell:ignore acks
+// cspell:ignore acks unsourced
 /**
  * Spreadsheet parity audit: diff the original Google Sheet against the YAML
  * database, cell by cell, including cell notes, hyperlinks, and the sheet's
@@ -22,9 +22,12 @@ import { COLUMNS, KNOWN_BAD_HEADERS } from './columns';
 import {
   compareCell,
   coverage,
+  getAt,
   hasUrl,
   mappedValue,
+  normUrl,
   viewOf,
+  type ColumnSpec,
   type DeriveContext,
   type EntryView,
   type Status,
@@ -53,6 +56,38 @@ export const HIGHLIGHTS: Record<string, string> = {
 };
 /** Row banding / header colors with no meaning */
 const DECORATIVE = new Set(['FEF8E3', 'F3F3F3', 'FFE599', 'FFFFFF']);
+
+/**
+ * Why YAML's differing value stands without a hand-written acknowledgement:
+ * the entry cites a source for that very field (`sources.<field>`, or
+ * `price_source` / `pricing.source` with a retrieval date for prices), or it
+ * archives the sheet's link in `dead_links`. Research beats the sheet's
+ * unsourced value (the audit's rule); the report still lists these.
+ */
+function citation(
+  spec: ColumnSpec | undefined,
+  view: EntryView,
+  ctx: DeriveContext,
+  url?: string
+): string | undefined {
+  const data = view.entry.data as Record<string, unknown>;
+  if (url) {
+    const dead = getAt(data, 'dead_links[].url').map((u) => normUrl(String(u)));
+    if (dead.includes(normUrl(url))) return "the sheet's link is archived in dead_links";
+    return undefined;
+  }
+  if (!spec) return undefined;
+  if (spec.kind.type === 'price') {
+    const ps = (data.price_source ?? (data.pricing as { source?: unknown } | undefined)?.source) as
+      | { retrieved?: string }
+      | undefined;
+    if (ps?.retrieved) return `re-priced at the source (retrieved ${ps.retrieved})`;
+  }
+  const field = (spec.cite ?? spec.paths)[0]?.replace(/(\[\]|@keys).*$/, '');
+  return mappedValue(spec, view, ctx).sourced
+    ? `YAML cites a source for ${field ?? 'this field'}`
+    : undefined;
+}
 
 /** Where a difference came from (see history.ts) */
 export type Origin =
@@ -312,7 +347,12 @@ async function main() {
               .join('; '),
           };
           const ack = findAck(ackKey(sheet.name, name, `${column}${suffix}`), ackValue);
-          return ack ? { ...withOrigin, status: 'ack', ack: ack.reason } : withOrigin;
+          if (ack) return { ...withOrigin, status: 'ack', ack: ack.reason };
+          // Research since the import that YAML cites settles the difference
+          const cited = pair
+            ? citation(spec, pair.view, ctx, suffix === ' (link)' ? ackValue : undefined)
+            : undefined;
+          return cited ? { ...withOrigin, status: 'ack', ack: `(cited) ${cited}` } : withOrigin;
         };
 
         if (shown !== undefined && String(shown).trim() !== '' && pair && spec) {
