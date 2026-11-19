@@ -1,11 +1,12 @@
 name: 3M Envision Diffuser
-notes: Backlight white self adhesive film for glass and plastics
+creator: 3M
+notes: 'Self-adhesive white backlight film for glass and plastics: 3M Envision Diffuser Film 3735-50 / 3735-60 (50 or 60 % transmission), cast PVC.'
 form:
   - film
 links:
   product: https://www.3m.co.uk/3M/en_GB/p/d/b00024897/
 materials:
-  - PET
+  - PVC
 optical:
   color_rendition: 4
   light_transmission: 3
@@ -18,6 +19,7 @@ physical:
   flexible: true
   fire_retardant: true
   sizes_available: 1219mm wide
+  sample_thickness: 50um
 pricing:
   price_range: $$$$
 purpose_made: true

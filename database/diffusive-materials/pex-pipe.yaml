@@ -5,7 +5,7 @@ form:
 links:
   product: https://www.homedepot.com/b/Plumbing-Pipe-Fittings-Pipe-PEX-Pipe/N-5yc1vZ1z18i33
 materials:
-  - ethylene copolymer
+  - XLPE
 optical:
   color_rendition: 2
   light_transmission: 2

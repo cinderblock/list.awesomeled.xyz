@@ -1,8 +1,12 @@
-name: Plexiglas LED Edge Lit was EndlightenT
+name: Plexiglas LED (formerly EndLighten T)
+creator: Röhm
+vendors:
+  - Polyvantis
+notes: PMMA sheets and rods with light-diffusing particles for edge lighting.
 form:
   - sheet
 links:
-  product: https://www.plexiglas-shop.com/en-de/products/plexiglas-led/
+  product: https://www.polyvantis-shop.com/ie/products/plexiglas-led/
 materials:
   - PMMA
 optical:

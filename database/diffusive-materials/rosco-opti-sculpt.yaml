@@ -1,4 +1,5 @@
 name: Rosco Opti Sculpt
+creator: Rosco
 notes: embossed DOE, 10°, 20°, 30°, 10°x20°, 10°x30°, 10°x40°, 10°x60°, 15°x35°,
   15°x45°, 20°x40° and the unique 40°/60° Reversible
 form:
@@ -15,7 +16,9 @@ optical:
     - transmissive
 physical:
   flexible: true
-  sizes_available: 24”x40”
+  sizes_available: 24x20in, 24x40in
+  fire_retardant: true
+  sample_thickness: 0.01in
 pricing:
   price_range: $$$$
 purpose_made: true

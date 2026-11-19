@@ -1,8 +1,9 @@
 name: Perspex Diffuse
+creator: Perspex International
 form:
   - sheet
 links:
-  product: https://perspex.com/news/pom-diffuse/
+  product: https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/
 materials:
   - PMMA
 optical:

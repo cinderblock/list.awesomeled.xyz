@@ -1,6 +1,6 @@
-name: Lexan DCLW
-notes: Lexan DLCW (Diffused Light Cool White)special combination of high light
-  diffusion and high transmission via an optimized surface texture
+name: Lexan DLCW
+creator: SABIC
+notes: "LEXAN DLCW (Diffused Light Cool White): translucent polycarbonate sheet whose surface texture combines high diffusion with high transmission (60-85 %). Rated UL94 HB. SABIC's sheet business is now Polyvantis (2024); current availability unconfirmed."
 dead_links:
   - url: https://sfs.sabic.eu/product/lexan-solid-sheet/sign-sheet/
     checked: '2026-07-01'
@@ -20,7 +20,7 @@ optical:
     - backlight
 physical:
   flexible: false
-  fire_retardant: true
+  fire_retardant: false
 pricing:
   price_range: $$$$$
 purpose_made: true

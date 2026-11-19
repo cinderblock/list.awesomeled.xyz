@@ -1,4 +1,5 @@
 name: BrightView
+creator: BrightView Technologies
 notes: High End ,High-efficiency microlenses in optically clear materials
 form:
   - film
@@ -6,8 +7,9 @@ form:
 links:
   product: https://www.brightviewtechnologies.com/products/led-diffusers/led-diffuser-products/page.aspx?id=1102
 materials:
-  - PMMA
   - PET
+  - PC
+  - PMMA
 optical:
   color_rendition: 4
   light_transmission: 5
