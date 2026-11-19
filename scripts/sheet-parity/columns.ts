@@ -223,13 +223,16 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     }),
     col('Price', price, ['price', 'price[]']),
     col('Max outputs', num, ['outputs.count']),
-    col('Interface', text, [
-      'inputs.physical@keys',
-      'inputs.physical',
-      'inputs.protocols',
-      'inputs.requires_host',
-      'software',
-    ]),
+    // Sorted on its own at some point: the values run alphabetically down the
+    // price-sorted rows (" ", "ArtNet Ethernet", "Bluetooth" x4, ... "WiFi"),
+    // so most cells describe some other controller. Only rows edited after
+    // the sort are right, and those were researched anyway (ISSUES.md)
+    col(
+      'Interface',
+      { type: 'dropped', why: 'Scrambled: the column was sorted apart from its rows' },
+      ['inputs.physical', 'inputs.protocols', 'inputs.requires_host'],
+      { note: 'Inputs were researched from vendor documentation instead' }
+    ),
     col('Storage', bool, [], { derive: storage }),
     col('Standalone', bool, ['inputs.standalone']),
     col(

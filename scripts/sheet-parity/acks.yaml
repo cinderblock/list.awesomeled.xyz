@@ -94,9 +94,6 @@
 'Controllers | SP108E | Product URL':
   - value: 'Amazon'
     reason: 'The sheet cell says only "Amazon" (no link); YAML names a real vendor page'
-'Controllers | Fadecandy | Interface':
-  - value: 'DMX'
-    reason: 'Fadecandy is USB-only (driven by fcserver); "DMX" in the sheet is wrong'
 'Controllers | QuinLED-Dig-Uno | Price':
   - value: '24.99'
     reason: 'YAML revised by research since the import (newer price/hardware revision)'
@@ -126,9 +123,6 @@
     reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
 'Controllers | SP801e | Price':
   - value: '30'
-    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
-'Controllers | SP801e | Interface':
-  - value: 'Ethernet'
     reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
 'Controllers | SP801e | Output Connectors':
   - value: 'Screw'
@@ -169,9 +163,6 @@
 'Controllers | Flex Pixel Driver | Max outputs':
   - value: '2'
     reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
-'Controllers | Flex Pixel Driver | Interface':
-  - value: 'Ethernet'
-    reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
 'Controllers | Flex Pixel Driver | Output Connectors':
   - value: 'Phoenix Screw'
     reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
@@ -181,12 +172,6 @@
 'Controllers | K8-PB | Price':
   - value: '98'
     reason: 'YAML revised by research since the import (newer price/hardware revision)'
-'Controllers | LED Player DMX | Interface':
-  - value: 'Ethernet'
-    reason: 'The Diamex LED Players have no Ethernet (a77491b)'
-'Controllers | LED Player L | Interface':
-  - value: 'Ethernet'
-    reason: 'The Diamex LED Players have no Ethernet (a77491b)'
 'Controllers | K40D-PB | Price':
   - value: '108'
     reason: 'YAML revised by research since the import (newer price/hardware revision)'
@@ -226,9 +211,6 @@
 'Controllers | K64D-B | Price':
   - value: '230'
     reason: 'YAML revised by research since the import (newer price/hardware revision)'
-'Controllers | NetPixel-One | Interface':
-  - value: 'FPP'
-    reason: '"FPP" is a sender, not an input; YAML lists Ethernet with Art-Net/sACN'
 'Controllers | NetPixel-One | Output Connectors':
   - value: 'JST'
     reason: 'YAML revised by research: 10-way plug-in harness'
@@ -253,9 +235,6 @@
 'Controllers | PIXPoE | Product URL':
   - value: 'https://www.empdesigns.co.uk/portfolio-item/poe-pixel-controller//'
     reason: 'Old page; it now redirects to the product page YAML links'
-'Controllers | LEDEddy | Interface':
-  - value: 'WiFi/Ethernet'
-    reason: 'The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb'
 'Controllers | LEDEddy | Max Voltage':
   - value: '5'
     reason: 'The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb'
