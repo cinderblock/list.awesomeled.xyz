@@ -15,6 +15,11 @@ common_applications:
   - Differential pixel data to long-range / Smart receivers over Cat5/Cat6
   - DMX512 over RJ45 (e.g. Falcon, Renard)
   - Daisy-chaining controllers via built-in network switches
+images:
+  - file: rj45.webp
+    source: https://commons.wikimedia.org/wiki/File:Uncrimped_rj-45_connector_close-up.jpg
+    credit: Mike1024
+    license: Public domain
 mechanical:
   outline: Rectangular
   contact_type: Spring blade

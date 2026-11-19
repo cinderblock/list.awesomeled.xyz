@@ -1,6 +1,16 @@
 name: Bulgin ` Disco` 8 pole
 creator: Bulgin
 notes: Bulgin, long established UK connector maker, 8 pole connector popular with mobile discos. Used to be panel mount Sockets and male to male leads, now follow outlets on Sockets only.
+datasheet:
+  url: https://www.farnell.com/datasheets/341330.pdf
+  sources:
+    - url: https://web.archive.org/web/20251110020907/https://www.farnell.com/datasheets/341330.pdf
+      host: distributor
+      notes: Wayback Machine capture of the Farnell copy (Farnell resets non-browser clients)
+images:
+  - file: bulgin-disco-8-pole.webp
+    source: https://www.rapidonline.com/bulgin-px0551-8-pole-free-plug-mains-20-0760
+    credit: Rapid Electronics
 links:
   product: https://uk.farnell.com/bulgin/px0551/plug-8way-6a-free/dp/151740
   mouser: https://www.mouser.co.uk/datasheet/2/57/bulgs00368_1-2263014.pdf

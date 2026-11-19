@@ -1,6 +1,12 @@
 name: Speakon
 creator: Neutrik
 notes: World Standard professional amplifier to speaker connector, compatibles offer low cost high current connector , if avoid mix up with audio....
+datasheet:
+  url: https://www.neutrik.com/en/product/nl4fxx-w-s.pdf
+images:
+  - file: speakon.webp
+    source: https://www.neutrik.com/en/product/nl4fxx-w-s
+    credit: Neutrik
 links:
   product: https://www.neutrik.com/en/neutrik/products/speakon-r-loudspeaker-connectors/speakon-r-cable-connectors
 mechanical:

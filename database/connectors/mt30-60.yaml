@@ -1,6 +1,12 @@
 name: MT30/60
 creator: Generic
 notes: 3 Pin XT 60
+datasheet:
+  url: https://www.china-amass.net/uploads/130.MT60-F-SPEC-2025V0.pdf
+images:
+  - file: mt30-60.webp
+    source: https://www.china-amass.net/mt60-f-product/
+    credit: Amass
 links:
   product: https://www.flyingtech.co.uk/cables-connectors/amass-nylon-mt60-3-pole-motor-esc-35mm-connector
 mechanical:

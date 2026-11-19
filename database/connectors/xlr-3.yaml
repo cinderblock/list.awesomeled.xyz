@@ -4,6 +4,13 @@ notes: AKA Cannon, original with side grub screw, Neutrik developed chuck cable 
 common_applications:
   - 'DMX512 lighting control (3-pin: common but out of spec)'
   - Audio / microphone cabling
+datasheet:
+  url: https://www.neutrik.com/en/product/nc3mxx.pdf
+images:
+  - file: xlr-3.webp
+    source: https://commons.wikimedia.org/wiki/File:XLR_connectors,_male_and_female.jpg
+    credit: Jud McCranie
+    license: CC BY-SA 4.0
 links:
   product: https://www.neutrik.com/en/neutrik/products/xlr-connectors/xlr-cable-connectors?c=audio
 mechanical:

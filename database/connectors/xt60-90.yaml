@@ -1,6 +1,12 @@
 name: XT60/90
 creator: Generic
 notes: Also XT30, 30A & XT90 ,90A , Standard connector for LiPo batteries in RC, generic connector, some poor quality versions around dimensions http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf
+datasheet:
+  url: https://www.china-amass.net/uploads/57.XT60-F-SPEC-2025V0.pdf
+images:
+  - file: xt60-90.webp
+    source: https://www.china-amass.net/xt60-f-product/
+    credit: Amass
 links:
   product: https://www.sparkfun.com/xt60-connectors-male-female-pair.html
 mechanical:

@@ -1,6 +1,12 @@
 name: SM
 creator: JST
 notes: Most popular LED strip connector seen
+datasheet:
+  url: https://www.jst.com/wp-content/uploads/2025/06/eSM.pdf
+  sources:
+    - url: https://www.jst-mfg.com/product/pdf/eng/eSM.pdf
+      host: manufacturer
+      notes: JST Japan (jst-mfg.com) copy
 images:
   - file: sm.webp
     source: https://www.adafruit.com/product/2880

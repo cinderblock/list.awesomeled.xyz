@@ -1,5 +1,11 @@
 name: XH
 creator: JST
+datasheet:
+  url: https://www.jst.com/wp-content/uploads/2025/06/eXH.pdf
+  sources:
+    - url: https://www.jst-mfg.com/product/pdf/eng/eXH.pdf
+      host: manufacturer
+      notes: JST Japan (jst-mfg.com) copy
 links:
   product: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
   digikey: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors

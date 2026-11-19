@@ -1,6 +1,12 @@
 name: Hirschmann CA
 creator: Lumberg /Belden
 notes: panel mount ones fit in a D-size/XLR cutout
+datasheet:
+  url: https://catalog.belden.com/techdata/EN/CA3LD_techdata.pdf
+images:
+  - file: hirschmann-ca.webp
+    source: https://catalog.belden.com/index.cfm?event=pd&p=PF_CA3LD
+    credit: Belden
 links:
   product: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?product-range=ca-series
 mechanical:

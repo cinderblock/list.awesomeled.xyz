@@ -1,5 +1,11 @@
 name: Binder 720
 creator: Binder
+datasheet:
+  url: https://www.binder-connector.com/en/products/series-snap-in-ip67-1.pdf
+images:
+  - file: binder-720.webp
+    source: https://www.binder-connector.com/en/products/miniature-circular-connectors/snap-in-ip67-1
+    credit: binder
 links:
   product: https://uk.farnell.com/c/connectors/circular-connectors-components/circular-industrial-connectors?brand=binder&product-range=720-series
 mechanical:

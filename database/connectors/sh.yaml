@@ -1,5 +1,16 @@
 name: SH
 creator: JST
+datasheet:
+  url: https://www.jst.com/wp-content/uploads/2025/06/eSH.pdf
+  sources:
+    - url: https://www.jst-mfg.com/product/pdf/eng/eSH.pdf
+      host: manufacturer
+      notes: JST Japan (jst-mfg.com) copy
+images:
+  - file: sh.webp
+    source: https://commons.wikimedia.org/wiki/File:Qwiic_JST_Connector_-_SMD_4-pin_(36428734893).jpg
+    credit: SparkFun Electronics
+    license: CC BY 2.0
 links:
   product: https://www.jst-mfg.com/product/index.php?series=231&lang=2
 mechanical:

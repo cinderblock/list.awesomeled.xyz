@@ -1,6 +1,19 @@
 name: DF62W
 creator: Hirose
 notes: W is water resistant version. PCB and Wire to wire make it competitor to JST SM
+datasheet:
+  url: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+  sources:
+    - url: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
+      host: distributor
+      notes: Nov 2023 revision of the series catalog
+    - url: https://cdn.components.ru/media/PDF/8050245.pdf
+      host: distributor
+      notes: Jun 2022 revision of the series catalog
+images:
+  - file: df62w.webp
+    source: https://www.hirose.com/en/product/series/DF62W
+    credit: Hirose Electric
 links:
   product: https://www.hirose.com/en/product/series/DF62W
 mechanical:

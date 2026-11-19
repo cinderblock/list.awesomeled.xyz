@@ -1,6 +1,15 @@
 name: Mini-Fit Jr
 creator: Molex
 notes: Available with 2 wire into single crimp.
+datasheet:
+  url: https://www.molex.com/pdm_docs/ps/PS-5556-001.pdf
+  sources:
+    - url: https://static.chipdip.ru/lib/054/DOC034054920.pdf
+      host: distributor
+      notes: PS-5556-001 Rev G2 (2020-11-12) copy
+    - url: https://www.farnell.com/datasheets/328793.pdf
+      host: distributor
+      notes: PS-5556-001 Rev E1 (2008-08-07) copy
 links:
   product: https://www.molex.com/en-us/products/connectors/wire-to-board-connectors/mini-fit-connectors
 mechanical:

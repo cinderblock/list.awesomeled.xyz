@@ -2,6 +2,12 @@ name: Deutsch DT
 creator: TE Deutsch
 notes: Automotive and Marine connector series , compatible/knock offs common,
   specific crimp tool required
+datasheet:
+  url: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-151009&DocType=SS&DocLang=EN
+images:
+  - file: deutsch-dt.webp
+    source: https://www.te.com/en/product-DT06-2S.html
+    credit: TE Connectivity
 links:
   product: https://www.te.com/en/products/connectors/automotive-connectors/intersection/deutsch-dt-series-connectors.html?tab=pgp-story
 mechanical:

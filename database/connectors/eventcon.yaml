@@ -3,10 +3,20 @@ creator: GLP
 notes: Combined power and DMX connector. push locking. No panel mount connectors currently (3/24)
 common_applications:
   - Combined power + DMX512 for event fixtures
+datasheet:
+  url: https://web.archive.org/web/20240714093755/https://ehrgeiz.glp.de/downloads/eventcon/eventCON_DB_E_Rev13.pdf
+  sources:
+    - url: https://www.techni-lux.com/files/documents/Ehrgeiz_eventCON_DB_E_Rev10-1.pdf
+      host: distributor
+      notes: Techni-Lux (US distributor) copy, older Rev 10
 dead_links:
   - url: https://ehrgeiz.glp.de/en/products/accessories/eventcon
     archive: https://web.archive.org/web/20250908124909/https://ehrgeiz.glp.de/en/products/accessories/eventcon
     checked: '2026-11-18'
+images:
+  - file: eventcon.webp
+    source: https://www.sommercable.com/en-gb/eventCON-IP67-3-pole-female-connector-straight-black/EC-PD1F
+    credit: Sommer Cable
 links:
   product: https://ehrgeiz.glp.de/en/products/accessories/eventcon
 mechanical:

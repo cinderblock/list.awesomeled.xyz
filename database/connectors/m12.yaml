@@ -1,6 +1,11 @@
 name: M12
 creator: Generic
 notes: Originally sensor connectors for automation, low cost varieties available
+images:
+  - file: m12.webp
+    source: https://commons.wikimedia.org/wiki/File:M12_plugs_with_M12_bulkhead_socket.jpg
+    credit: Phiarc
+    license: CC BY-SA 4.0
 links:
   product: https://uk.rs-online.com/web/p/industrial-circular-connectors/2906584/
 mechanical:

@@ -2,10 +2,20 @@ name: EN3
 creator: Switchcraft/Conxall
 notes: Switchcraft/Conxall , long established USA connector maker, available
   with straight and right angle PCB mounting
+datasheet:
+  url: https://www.switchcraft.com/assets/1/27/switchcraft_en3_npb.pdf
+  sources:
+    - url: https://web.archive.org/web/20220728231921/https://www.switchcraft.com/assets/1/27/switchcraft_en3_npb.pdf
+      host: manufacturer
+      notes: Wayback Machine capture (2022-07-28) of Switchcraft's own copy; switchcraft.com's bot protection sometimes serves HTML to non-browser clients
 dead_links:
   - url: https://www.conxall.com/Documents/en3.pdf
     archive: https://web.archive.org/web/20220216170121/https://www.conxall.com/Documents/en3.pdf
     checked: '2026-11-18'
+images:
+  - file: en3.webp
+    source: https://www.switchcraft.com/en3-sealed-connectors/
+    credit: Switchcraft
 links:
   product: https://www.conxall.com/Documents/en3.pdf
 mechanical:

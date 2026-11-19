@@ -1,6 +1,13 @@
 name: Rean RT4
 creator: Rean / Neutrik
 notes: MIni XLR , 13mm Diameter, used on Shure and other microphones
+datasheet:
+  url: https://www.rean-connectors.com/en/product/rt4fc-b-1.pdf
+images:
+  - file: rean-rt4.webp
+    source: https://commons.wikimedia.org/wiki/File:Neutrik_REAN_tiny_XLR.jpg
+    credit: Phiarc
+    license: CC BY-SA 4.0
 links:
   product: https://www.rean-connectors.com/en/product/rt4fc-b-1
 mechanical:

@@ -2,6 +2,11 @@ name: D.C. Barrel
 creator: Generic
 notes: D.C Barrel Connector. 5.5mm barrel with a 2.1mm centre pin is most
   common; 2.5 mm pin looks similar but doesn't fit.
+images:
+  - file: d-c-barrel.webp
+    source: https://commons.wikimedia.org/wiki/File:2.1_mm_DC_Plug.jpg
+    credit: oomlout
+    license: CC BY-SA 2.0
 links:
   product: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack
   mouser: https://www2.mouser.com/Connectors/Power-Connectors/DC-Power-Connectors/_/N-axip3?keyword=2.1mm%20jack

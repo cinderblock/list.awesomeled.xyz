@@ -1,6 +1,12 @@
 name: Mate-N-Lok
 creator: TE /AMP
 notes: Popular automotive connector
+datasheet:
+  url: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-1031&DocType=SS&DocLang=EN
+images:
+  - file: mate-n-lok.webp
+    source: https://www.te.com/en/product-350779-1.html
+    credit: TE Connectivity
 links:
   product: https://www.te.com/en/products/brands/mate-n-lok.html?tab=pgp-story
 mechanical:

@@ -1,6 +1,12 @@
 name: Wago 221
 creator: Wago
 notes: Successor to Wago 222 Tool free, lever clamping wire to wire connectors, wide range of wire diameter acceptance in stranded or solid Ideal for thin taps of thick bus lines
+datasheet:
+  url: https://www.wago.com/lv/download/public/InfoMedia_60598269/WAGO-221-Series---The-Way-to-Connect-EN-60598269.pdf
+images:
+  - file: wago-221.webp
+    source: https://www.wago.com/global/electrical-interconnections/compact-splicing-connector/p/221-413
+    credit: WAGO
 links:
   product: https://www.wago.com/global/products/electrical-interconnections/discover-installation-terminal-blocks-and-connectors/221
 mechanical:

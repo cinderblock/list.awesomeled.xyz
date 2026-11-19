@@ -1,6 +1,12 @@
 name: SP13
 creator: Weipu
 notes: Glass filled nylon shell with gold plated brass solder contacts.Weipu originator of format, cheaper clones around. SP 12/13/16/17/20/21/28 shell sizes. LD16/20/28 Screw Terminal clone
+datasheet:
+  url: https://www.weipuconnector.com/wp-content/uploads/2023/11/SP13-Series-WEIPU-Connector-1.pdf
+images:
+  - file: sp13.webp
+    source: https://www.weipuconnector.com/products/sp13/
+    credit: Weipu
 links:
   product: https://www.weipuconnector.com/products/sp13/
 mechanical:

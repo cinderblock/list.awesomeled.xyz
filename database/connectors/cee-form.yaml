@@ -1,6 +1,11 @@
 name: CEE Form
 creator: Generic
 notes: Also known in building trade as Commando Connectors. 16A Blue 3 Pin single phase popular European connector for stage power distribution. Red Three Phase connector up to 125A . Other colours used for low voltage
+images:
+  - file: cee-form.webp
+    source: https://commons.wikimedia.org/wiki/File:CEE60309_5315.jpg
+    credit: Karl Gruber
+    license: CC BY 3.0 AT
 links:
   product: https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/
 mechanical:

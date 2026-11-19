@@ -1,6 +1,12 @@
 name: SP17
 creator: Weipu
 notes: Also available is SP21 and SP29 , clones in SP16 and SP28
+datasheet:
+  url: https://www.weipuconnector.com/wp-content/uploads/2023/11/SP17-Series-WEIPU-Connector-1.pdf
+images:
+  - file: sp17.webp
+    source: https://www.weipuconnector.com/products/sp17/
+    credit: Weipu
 links:
   product: https://www.weipuconnector.com/products/sp17/
 mechanical:

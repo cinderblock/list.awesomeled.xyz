@@ -1,6 +1,17 @@
 name: PH
 creator: JST
 notes: R.C, Lipo Balance connector , Internal connector in some controllers 2.5mm not 2.54 (1/10") pitch runs off on boards drilled for 2.54
+datasheet:
+  url: https://www.jst.com/wp-content/uploads/2025/06/ePH.pdf
+  sources:
+    - url: https://www.jst-mfg.com/product/pdf/eng/ePH.pdf
+      host: manufacturer
+      notes: JST Japan (jst-mfg.com) copy
+images:
+  - file: ph.webp
+    source: https://commons.wikimedia.org/wiki/File:JSTS-02-X-04PI-01.jpg
+    credit: oomlout
+    license: CC BY-SA 2.0
 links:
   product: https://www.jst-mfg.com/product/index.php?series=199&lang=2
 mechanical:

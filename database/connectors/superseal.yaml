@@ -2,6 +2,12 @@ name: Superseal
 creator: TE /AMP
 notes: AMP Superseal original product ,automotive and marine series, much copied
   . Requires specific crimp tool for contacts.
+datasheet:
+  url: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-20090&DocType=SS&DocLang=EN
+images:
+  - file: superseal.webp
+    source: https://www.te.com/en/product-282080-1.html
+    credit: TE Connectivity
 links:
   product: https://www.te.com/content/dam/te-com/documents/automotive/global/1654292-2_AMP%20SUPERSEAL%201.5.pdf
 mechanical:

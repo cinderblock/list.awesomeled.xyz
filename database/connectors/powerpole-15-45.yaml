@@ -1,6 +1,12 @@
 name: PowerPole 15/45
 creator: Anderson
 notes: Anderson PowerPole, Genderless, Clip together shells in 11 colours, Radio HAM power standard, panel mounting and waterproofing options.Extremely robust mixed signal and high current connector.
+datasheet:
+  url: https://p1.aprimocdn.net/idealindustries/5d665ad6-38c3-4088-98b6-b3f0007370ef/ap-web_product-assets_default_data-sheets_DS-PP1545_Original%20file.pdf
+images:
+  - file: powerpole-15-45.webp
+    source: https://www.andersonpower.com/product/powerpole-connector-housing-red/
+    credit: Anderson Power Products
 links:
   product: https://www.andersonpower.com/product-lines/powerpole/
   digikey: https://www.digikey.com/en/products/filter/blade-type-power-connectors-accessories/360?s=N4IgTCBcDaIIYDsAmBTATgZwPYIAQAcsB3dQgGxRAF0BfIA

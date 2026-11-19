@@ -4,6 +4,12 @@ notes: Molex KK Pitch 2.54 ( 1/10") Arduino pitch also 3.96 and 5.08 . Industria
 common_applications:
   - Arduino-pitch (2.54 mm) board headers
   - Amusement / arcade machine wiring
+datasheet:
+  url: https://www.molex.com/pdm_docs/ps/PS-10-07.pdf
+  sources:
+    - url: https://static.chipdip.ru/lib/825/DOC027825561.pdf
+      host: distributor
+      notes: PS-10-07 (EC UCP2008-0956, 2007-11-06) copy
 links:
   product: https://www.molex.com/en-us/products/connectors/wire-to-board-connectors/kk-connectors
 mechanical:

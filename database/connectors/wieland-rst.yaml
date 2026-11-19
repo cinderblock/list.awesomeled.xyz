@@ -2,6 +2,12 @@ name: Wieland RST
 creator: Wieland
 notes: IP 69 Fully Waterproof with sealing rings, Available in Micro to Power size
   series
+datasheet:
+  url: https://cdn.wieland-electric.com/_Resources/Persistent/8/9/e/c/89ecb341640e627142f162a08a3882acae93d730/0690.1_CAT_RST_Gesamt_screen_EN.pdf
+images:
+  - file: wieland-rst.webp
+    source: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
+    credit: Wieland Electric
 links:
   product: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/
 mechanical:

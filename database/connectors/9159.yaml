@@ -1,5 +1,11 @@
 name: '9159'
 creator: AVX
+datasheet:
+  url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+images:
+  - file: '9159.webp'
+    source: https://www.kyocera-avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/
+    credit: KYOCERA AVX
 links:
   product: https://www.kyocera-avx.com/product/9159-000-series/
   digikey: https://www.digikey.com/short/zvwmnz

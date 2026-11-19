@@ -1,6 +1,16 @@
 name: VH /R
 creator: JST
 notes: Optikinetics wheel rotator connector , post 2000s
+datasheet:
+  url: https://www.jst.com/wp-content/uploads/2025/06/eVH.pdf
+  sources:
+    - url: https://www.jst-mfg.com/product/pdf/eng/eVH.pdf
+      host: manufacturer
+      notes: JST Japan (jst-mfg.com) copy
+images:
+  - file: vh-r.webp
+    source: https://www.jst.com/products/crimp-style-connectors-wire-to-board-type/vh-connector/
+    credit: JST
 links:
   product: https://www.jst.com/wp-content/uploads/2021/08/eVH.pdf
 mechanical:

@@ -6,6 +6,10 @@ dead_links:
     archive: https://web.archive.org/web/20250621084645/https://blog.ampow.com/ic5-vs-ec5-connector/
     checked: '2026-11-18'
     notes: The whole blog host returns Cloudflare 521 (origin web server down); the article is not on the vendor main site either.
+images:
+  - file: ic5-ec5.webp
+    source: https://www.horizonhobby.com/product/connector-ic5-device-and-ic5-battery-set/SPMXCA502.html
+    credit: Spektrum (Horizon Hobby)
 links:
   product: https://blog.ampow.com/ic5-vs-ec5-connector/
 mechanical:

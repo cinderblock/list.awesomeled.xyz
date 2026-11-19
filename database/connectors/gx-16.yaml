@@ -3,6 +3,10 @@ creator: Generic
 notes: AKA Aviation Connector, CB Mic Connector, most common in 4 pin
   variant,Chrome metal Shell and IP65 Version in Black Plastic *Legacy Connector
   NOT For New Designs*
+images:
+  - file: gx-16.webp
+    source: https://renhotecpro.com/product/gx16-straight-plug-connector/
+    credit: Renhotec
 links:
   product: https://renhotecpro.com/gx16-connector-data-sheet/
 mechanical:

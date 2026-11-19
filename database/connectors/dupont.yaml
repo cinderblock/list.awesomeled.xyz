@@ -5,6 +5,11 @@ creator:
 notes: Arduino standard patch connector, Harwin clones, proper crimp tool 400USD+ , lesser crimp tools not up to job
 common_applications:
   - Arduino / breadboard prototyping jumpers
+images:
+  - file: dupont.webp
+    source: https://commons.wikimedia.org/wiki/File:F-F_jumper_wires.jpg
+    credit: Limor
+    license: CC BY 2.0
 links:
   product: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/
 mechanical:
