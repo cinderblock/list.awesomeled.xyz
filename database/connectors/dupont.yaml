@@ -3,6 +3,8 @@ creator:
   name: Harwin/ Generic
   url: https://www.harwin.com/products?attributes.pitch=2.54mm-0.1
 notes: Arduino standard patch connector, Harwin clones, proper crimp tool 400USD+ , lesser crimp tools not up to job
+aliases:
+  - Harwin M20
 common_applications:
   - Arduino / breadboard prototyping jumpers
 images:
@@ -45,6 +47,11 @@ ratings:
   max_current: 1 A
   max_voltage: 50 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/
+    retrieved: '2026-11-18'
+    notes: Entry's own linked page. The original 'DuPont' connector is Amphenol Mini-PV, which is NOT interchangeable with the clones, so it isn't added as an alias.
 termination:
   solder: true
   crimp: true

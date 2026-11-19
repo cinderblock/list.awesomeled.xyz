@@ -1,6 +1,8 @@
 name: VH /R
 creator: JST
 notes: Optikinetics wheel rotator connector , post 2000s
+aliases:
+  - VH
 datasheet:
   url: https://www.jst.com/wp-content/uploads/2025/06/eVH.pdf
   sources:
@@ -46,6 +48,11 @@ ratings:
   max_current: 10 A
   max_voltage: 250 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://www.lcsc.com/product-detail/C160314.html
+    retrieved: '2026-11-18'
+    notes: LCSC (authorized) lists manufacturer JST, reference series 'VH'. The odd name 'VH /R' normalizes to 'vhr', so 'VH' doesn't resolve today.
 termination:
   solder: false
   crimp: true

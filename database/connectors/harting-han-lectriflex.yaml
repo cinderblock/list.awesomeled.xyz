@@ -1,8 +1,8 @@
 name: Harting Han/ Lectriflex
 creator: Harting
-notes: Harting Han rectangular AKA 16 pin Lectriflex as alternative to Socapex
-  in stage lighting. Multi pin mains connector , modular able to have power ,
-  data and even hose lines on one connector.
+notes: Harting Han rectangular AKA 16 pin Lectriflex as alternative to Socapex in stage lighting. Multi pin mains connector , modular able to have power , data and even hose lines on one connector.
+aliases:
+  - Han 16 E
 datasheet:
   url: https://b2b.harting.com/files/download/PRD/PDF_DS/PDF_DS_09330162601_EN.pdf
 images:
@@ -39,6 +39,11 @@ ratings:
   max_current: 25 A
   max_voltage: 450 V
   ip_rating: IP40
+sources:
+  aliases:
+    url: https://www.electronicspecifier.com/cables-and-connecting/harting-features-connectivity-solutions-for-light-and-sound-engineering
+    retrieved: '2026-11-18'
+    notes: "HARTING press release reprinted by Electronic Specifier: used 'where multi-cables incorporating six or eight lines are used'."
 termination:
   solder: true
   screw_terminal: true

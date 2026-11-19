@@ -1,5 +1,7 @@
 name: XH
 creator: JST
+aliases:
+  - JST XH
 datasheet:
   url: https://www.jst.com/wp-content/uploads/2025/06/eXH.pdf
   sources:
@@ -41,6 +43,11 @@ ratings:
   max_current: 3 A
   max_voltage: 250 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://www.digikey.com/en/product-highlight/j/jst/xh-series-connectors
+    retrieved: '2026-11-18'
+    notes: Entry's own linked DigiKey page; 'XH series connectors are available with one to twenty positions.'
 termination:
   solder: true
   idc: false

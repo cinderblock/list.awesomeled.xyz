@@ -1,6 +1,11 @@
 name: Molex KK AKA KF2510
 creator: Molex
 notes: Molex KK Pitch 2.54 ( 1/10") Arduino pitch also 3.96 and 5.08 . Industrial standard connector common in amusement machines. Larger contact area than XH. Clones KF2510 2.54 CH 3.96 and CH5.08
+aliases:
+  - KK 254
+  - KK 396
+  - KK 508
+  - KF2510
 common_applications:
   - Arduino-pitch (2.54 mm) board headers
   - Amusement / arcade machine wiring
@@ -44,6 +49,11 @@ ratings:
   max_current: 4 A
   max_voltage: 250 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://www.digikey.com/en/product-highlight/m/molex/kk-interconnect-solutions
+    retrieved: '2026-11-18'
+    notes: DigiKey (authorized) KK highlight names KK 254 (2.54 mm), KK 396 (3.96 mm) and KK 508 (5.08 mm), all pitches the entry's notes cover.
 termination:
   solder: true
   crimp: true

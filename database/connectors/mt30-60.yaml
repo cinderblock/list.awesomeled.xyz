@@ -1,6 +1,9 @@
 name: MT30/60
 creator: Generic
 notes: 3 Pin XT 60
+aliases:
+  - MT30
+  - MT60
 datasheet:
   url: https://www.china-amass.net/uploads/130.MT60-F-SPEC-2025V0.pdf
 images:
@@ -40,6 +43,18 @@ ratings:
   max_current: 60 A # MT60; the smaller MT30 variant is rated 30 A
   max_voltage: 60 V
   ip_rating: IP20-IP65
+related:
+  - type: related
+    ref: connectors/xt60-90
+    notes: 'Same maker: Amass files its 3-pole MT60 motor connector under its XT Series'
+    source:
+      url: https://www.china-amass.net/mt60-m-product/
+      retrieved: '2026-11-18'
+sources:
+  aliases:
+    url: https://www.china-amass.net/3pin/
+    retrieved: '2026-11-18'
+    notes: Amass 3PIN category lists MT30-M, MT30-F, MT60-M, MT60-F.
 termination:
   solder: true
   screw_terminal: false

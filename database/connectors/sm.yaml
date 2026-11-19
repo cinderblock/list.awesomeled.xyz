@@ -1,6 +1,8 @@
 name: SM
 creator: JST
 notes: Most popular LED strip connector seen
+aliases:
+  - JST SM
 datasheet:
   url: https://www.jst.com/wp-content/uploads/2025/06/eSM.pdf
   sources:
@@ -45,6 +47,11 @@ ratings:
   max_current: 3 A
   max_voltage: 250 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://www.adafruit.com/product/2880
+    retrieved: '2026-11-18'
+    notes: Adafruit (authorized) product page the entry's image comes from. 'JST-SM' normalizes to the same key.
 termination:
   solder: true
   crimp: true

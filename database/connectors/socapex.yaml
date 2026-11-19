@@ -1,6 +1,8 @@
 name: Socapex
 creator: Amphenol / Generic
 notes: 19 Pin Socapex World standard 6 circuit mains multi core connector for production use, accepts up to 2.5mm per pin cable.
+aliases:
+  - Soca
 datasheet:
   url: https://www.amphenol-socapex.com/sites/default/files/media/document/2023-07/dedicated%20solution%20for%20entertainment_datasheet.pdf
 images:
@@ -25,6 +27,11 @@ ratings:
   max_current: 23 A
   max_voltage: 600 V
   ip_rating: IP67
+sources:
+  aliases:
+    url: https://www.amphenol-socapex.com/industry/entertainment
+    retrieved: '2026-11-18'
+    notes: Amphenol Socapex (maker) entertainment page.
 termination:
   solder: true
   crimp: true

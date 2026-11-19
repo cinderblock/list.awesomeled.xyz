@@ -3,6 +3,10 @@ creator:
   name: Phoenix Contact
   url: https://www.phoenixcontact.com/
 notes: Also in 2.54 mm pitch , and literally thousands of variations
+aliases:
+  - MSTB
+  - COMBICON MSTB
+  - MSTB 2,5
 datasheet:
   url: https://www.phoenixcontact.com/us/products/1757035/PDF
   sources:
@@ -45,6 +49,11 @@ ratings:
   max_current: 10 A
   max_voltage: 300 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://novapart.co/products/1757022/pluggable-terminal-block-508-mm-3-ways-24-awg-12
+    retrieved: '2026-11-18'
+    notes: Reseller page reproducing Phoenix Contact's datasheet for 1757022; series shown as 'COMBICON MSTB Series'. phoenixcontact.com, RS, TME, DigiKey and Mouser all blocked automated reads.
 termination:
   solder: true
   crimp: true

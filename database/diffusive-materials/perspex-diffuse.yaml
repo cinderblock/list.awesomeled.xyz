@@ -24,3 +24,10 @@ physical:
 pricing:
   price_range: $$$$$
 purpose_made: true
+related:
+  - type: related
+    ref: diffusive-materials/perspex-g-lux-edge-lit-acrylic
+    notes: Same maker's diffuser sheet, made for back-lit and edge-lit LED panels like G-Lux
+    source:
+      url: https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/
+      retrieved: '2026-11-18'

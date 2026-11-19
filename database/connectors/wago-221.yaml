@@ -1,6 +1,10 @@
 name: Wago 221
 creator: Wago
 notes: Successor to Wago 222 Tool free, lever clamping wire to wire connectors, wide range of wire diameter acceptance in stranded or solid Ideal for thin taps of thick bus lines
+aliases:
+  - Lever-Nuts
+  - 221 Series Lever-Nuts
+  - COMPACT Splicing Connectors
 datasheet:
   url: https://www.wago.com/lv/download/public/InfoMedia_60598269/WAGO-221-Series---The-Way-to-Connect-EN-60598269.pdf
 images:
@@ -26,6 +30,11 @@ ratings:
   max_current: 32 A
   max_voltage: 450 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://www.wago.com/us/products/electrical-interconnect/discover-wire-and-splicing-connectors/221-series-levernuts
+    retrieved: '2026-11-18'
+    notes: "WAGO US page heading; body: 'WAGO's 221 Series COMPACT Splicing Connectors ...'"
 termination:
   solder: false
   screw_terminal: false

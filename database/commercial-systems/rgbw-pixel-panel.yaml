@@ -23,6 +23,25 @@ pricing:
         retrieved: '2026-11-18'
         url: https://smartshow.lighting/product/pixel-panels/
         vendor: SmartShow
+related:
+  - type: variant
+    ref: commercial-systems/rgb-pixel-panel
+    notes: RGBW option of SmartShow's Pixel Panel (same 13x13 layout)
+    source:
+      url: https://smartshow.lighting/product/pixel-panels/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: pixels/sk6812-rgbw
+    notes: 169 SKC6812RGBW-NW pixels (OPSCO's SK6812RGBW part number)
+    source:
+      url: https://smartshow.lighting/product/pixel-panels/
+      retrieved: '2026-11-18'
+  - type: compatible
+    ref: controllers/smartshow-pro-one
+    notes: Maker names it for RGB-to-RGBW expansion so a panel fits one universe
+    source:
+      url: https://smartshow.lighting/product/pixel-panels/
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://smartshow.lighting/product/pixel-panels/

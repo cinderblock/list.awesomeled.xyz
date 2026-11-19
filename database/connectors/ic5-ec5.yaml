@@ -1,6 +1,9 @@
 name: IC5 EC5
 creator: Spektrum
 notes: IC5 LiPo battery connector with Third pin for charger communication. EC5 mates with IC5 BUT no third pin
+aliases:
+  - IC5
+  - EC5
 dead_links:
   - url: https://blog.ampow.com/ic5-vs-ec5-connector/
     archive: https://web.archive.org/web/20250621084645/https://blog.ampow.com/ic5-vs-ec5-connector/
@@ -36,6 +39,11 @@ ratings:
   max_current: 60 A
   max_voltage: 24 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://www.horizonhobby.com/product/connector-ec5-battery-2/EFLAEC502.html
+    retrieved: '2026-11-18'
+    notes: "IC5: Spektrum Smart battery page https://assets.horizonhobby.com/product/14.8v-5000mah-4s-30c-smart-lipo-battery-ic5/SPMX50004S30.html ('The IC connector series is entirely backward compatible with existing connectors')."
 termination:
   solder: true
   crimp: false

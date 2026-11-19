@@ -1,8 +1,8 @@
 name: GX-16
 creator: Generic
-notes: AKA Aviation Connector, CB Mic Connector, most common in 4 pin
-  variant,Chrome metal Shell and IP65 Version in Black Plastic *Legacy Connector
-  NOT For New Designs*
+notes: AKA Aviation Connector, CB Mic Connector, most common in 4 pin variant,Chrome metal Shell and IP65 Version in Black Plastic *Legacy Connector NOT For New Designs*
+aliases:
+  - Aviation plug
 images:
   - file: gx-16.webp
     source: https://renhotecpro.com/product/gx16-straight-plug-connector/
@@ -41,6 +41,11 @@ ratings:
   max_current: 7 A
   max_voltage: 100 V
   ip_rating: IP30
+sources:
+  aliases:
+    url: https://www.renhotecpro.com/gx16-connector-data-sheet/
+    retrieved: '2026-11-18'
+    notes: "Entry's own linked datasheet page. Caution: 'aviation plug' is the trade nickname for the whole GX family (GX12/GX16/GX20), so a reviewer may prefer to leave it out."
 termination:
   solder: true
   crimp: false

@@ -1,6 +1,8 @@
 name: DF62W
 creator: Hirose
 notes: W is water resistant version. PCB and Wire to wire make it competitor to JST SM
+aliases:
+  - SignalBee
 datasheet:
   url: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
   sources:
@@ -48,6 +50,11 @@ ratings:
   max_current: 3.5 A
   max_voltage: 30 V
   ip_rating: IP67
+sources:
+  aliases:
+    url: https://www.digikey.ca/en/product-highlight/h/hirose/df62w-series-connectors
+    retrieved: '2026-11-18'
+    notes: DigiKey (authorized distributor) product highlight; hirose.com returned 403.
 termination:
   solder: false
   crimp: true

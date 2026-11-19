@@ -1,6 +1,9 @@
 name: PowerPole 15/45
 creator: Anderson
 notes: Anderson PowerPole, Genderless, Clip together shells in 11 colours, Radio HAM power standard, panel mounting and waterproofing options.Extremely robust mixed signal and high current connector.
+aliases:
+  - PP15-45
+  - Powerpole 15-45
 datasheet:
   url: https://p1.aprimocdn.net/idealindustries/5d665ad6-38c3-4088-98b6-b3f0007370ef/ap-web_product-assets_default_data-sheets_DS-PP1545_Original%20file.pdf
 images:
@@ -38,6 +41,11 @@ ratings:
   max_voltage: 600 V
   ip_rating: IP65 Available
   ip_rating_notes: SpecPak shells and boots for waterproofing
+sources:
+  aliases:
+    url: https://www.andersonpower.com/?p=301
+    retrieved: '2026-11-18'
+    notes: Same page calls the housings the 'PP15-45 series'.
 termination:
   solder: true
   screw_terminal: false

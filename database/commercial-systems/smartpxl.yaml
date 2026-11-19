@@ -10,6 +10,19 @@ links:
   product: https://www.enttec.com/products/led-pixel-dot-lights/
 pricing:
   price_range: $$$$
+related:
+  - type: compatible
+    ref: pixel-ics/ucs8903
+    notes: RGB dots (SPXL-16 protocol) are UCS8903B-compatible, 16-bit only
+    source:
+      url: https://www.enttec.com/product/uncategorized/hi-res-smart-pxl-100x25-rgb-rgbw-led-pixel-dot-strings/
+      retrieved: '2026-11-18'
+  - type: compatible
+    ref: pixel-ics/ucs8904
+    notes: RGBW dots (SPXL-16 protocol) are UCS8904B-compatible, 16-bit only
+    source:
+      url: https://www.enttec.com/product/uncategorized/hi-res-smart-pxl-100x25-rgb-rgbw-led-pixel-dot-strings/
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://www.enttec.com/product/led-pixel-dot-lights/hi-res-smart-pxl40p-rgb-led-pixel-dot-strings/

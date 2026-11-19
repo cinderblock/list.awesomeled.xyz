@@ -26,6 +26,13 @@ ratings:
   max_voltage: 500 V
   ip_rating: IP68
   max_current_notes: 15A for lower pin counts
+related:
+  - type: variant
+    ref: connectors/sp13
+    notes: 'Same Weipu IP68 SP series: SP17 is the medium (17 mm) shell, SP13 the small one'
+    source:
+      url: https://www.cieonline.co.uk/in2connect-introduces-series-of-connectors-by-weipu/
+      retrieved: '2026-11-18'
 termination:
   solder: true
   crimp: true

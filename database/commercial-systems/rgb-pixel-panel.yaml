@@ -23,6 +23,13 @@ pricing:
         retrieved: '2026-11-18'
         url: https://smartshow.lighting/product/pixel-panels/
         vendor: SmartShow
+related:
+  - type: uses
+    ref: pixels/ws2812
+    notes: 169 WS2812B pixels (13x13 snake, 10 mm pitch)
+    source:
+      url: https://smartshow.lighting/product/pixel-panels/
+      retrieved: '2026-11-18'
 since: 2024
 sources:
   status:

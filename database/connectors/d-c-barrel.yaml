@@ -1,7 +1,10 @@
 name: D.C. Barrel
 creator: Generic
-notes: D.C Barrel Connector. 5.5mm barrel with a 2.1mm centre pin is most
-  common; 2.5 mm pin looks similar but doesn't fit.
+notes: D.C Barrel Connector. 5.5mm barrel with a 2.1mm centre pin is most common; 2.5 mm pin looks similar but doesn't fit.
+aliases:
+  - Coaxial power connector
+  - Barrel connector
+  - Concentric barrel connector
 images:
   - file: d-c-barrel.webp
     source: https://commons.wikimedia.org/wiki/File:2.1_mm_DC_Plug.jpg
@@ -41,6 +44,11 @@ ratings:
   max_current: 2 A
   max_voltage: 30 V
   ip_rating: IP20-IP65
+sources:
+  aliases:
+    url: https://en.wikipedia.org/wiki/Coaxial_power_connector
+    retrieved: '2026-11-18'
+    notes: Wikipedia article titled 'Coaxial power connector' (reference source, not a maker).
 termination:
   solder: true
   crimp: true

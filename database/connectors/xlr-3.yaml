@@ -1,6 +1,9 @@
 name: XLR 3
 creator: Neutrik /Generic
 notes: AKA Cannon, original with side grub screw, Neutrik developed chuck cable grip. Metal bodied world standard audio and microphone connector, 5 pin for DMX512
+aliases:
+  - 3-pin XLR
+  - Cannon connector
 common_applications:
   - 'DMX512 lighting control (3-pin: common but out of spec)'
   - Audio / microphone cabling
@@ -45,6 +48,11 @@ ratings:
   max_current: 16 A
   max_voltage: 50 V
   ip_rating: IP40
+sources:
+  aliases:
+    url: https://en.wikipedia.org/wiki/DMX512
+    retrieved: '2026-11-18'
+    notes: "Reference source, not a maker. 'Cannon connector': https://en.wikipedia.org/wiki/XLR_connector says XLR is 'also called a Cannon plug or Cannon connector'"
 termination:
   solder: true
   crimp: true

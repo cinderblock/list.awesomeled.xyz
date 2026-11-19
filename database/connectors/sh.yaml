@@ -1,5 +1,7 @@
 name: SH
 creator: JST
+aliases:
+  - JST SH
 datasheet:
   url: https://www.jst.com/wp-content/uploads/2025/06/eSH.pdf
   sources:
@@ -46,6 +48,11 @@ ratings:
   max_current: 1 A
   max_voltage: 50 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://learn.adafruit.com/introducing-adafruit-stemma-qt?view=all
+    retrieved: '2026-11-18'
+    notes: 4-pin JST SH is the Qwiic / STEMMA QT connector; those names aren't added as aliases.
 termination:
   solder: true
   crimp: true

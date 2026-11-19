@@ -1,7 +1,8 @@
 name: Superseal
 creator: TE /AMP
-notes: AMP Superseal original product ,automotive and marine series, much copied
-  . Requires specific crimp tool for contacts.
+notes: AMP Superseal original product ,automotive and marine series, much copied . Requires specific crimp tool for contacts.
+aliases:
+  - AMP SUPERSEAL 1.5
 datasheet:
   url: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-20090&DocType=SS&DocLang=EN
 images:
@@ -43,6 +44,11 @@ ratings:
   max_current: 14 A
   max_voltage: 24 V
   ip_rating: IP68
+sources:
+  aliases:
+    url: https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html
+    retrieved: '2026-11-18'
+    notes: TE series page title.
 termination:
   solder: false
   crimp: true

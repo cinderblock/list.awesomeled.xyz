@@ -1,5 +1,7 @@
 name: '9159'
 creator: AVX
+aliases:
+  - 9159-000
 datasheet:
   url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
 images:
@@ -42,6 +44,11 @@ ratings:
   max_current: 5 A
   max_voltage: 125 V
   ip_rating: No
+sources:
+  aliases:
+    url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+    retrieved: '2026-11-18'
+    notes: Datasheet title; ordering code prefix is '00 9159 00X'
 termination:
   solder: true
   crimp: true
