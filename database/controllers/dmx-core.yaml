@@ -19,6 +19,17 @@ data:
     - type: SD
 features:
   - 4.3" touchscreen for presets and playback
-price: 799
+price: 999
+price_source:
+  notes: DMX Core 100 4.3-inch Light Controller (includes the Full licence); the 4.3-inch External Remote Control (Q-SYS/Symetrix) variant is $799, the 7-inch $1,099
+  part: DMXCORE-100-LIGHT
+  retrieved: '2026-11-18'
+  url: https://dmxprosales.com/products/dmx-core-100-wall-controller
+  vendor: DMX Pro Sales
+sources:
+  status:
+    url: https://dmxprosales.com/products/dmx-core-100-wall-controller
+    retrieved: '2026-11-18'
+    notes: 'DMX Core 100 4.3in Light Controller $999, available'
 technical_notes:
   - Up to 40 universes (~6800 pixels)

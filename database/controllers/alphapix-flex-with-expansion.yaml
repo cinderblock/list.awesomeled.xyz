@@ -24,11 +24,30 @@ power:
     max: 24
   current:
     max: 80
-price: 190
+price:
+  - name: CPU + 1 Flex 16-port board
+    price: 194.9
+    pixels: 5440
+  - name: CPU + 2 Flex 16-port boards
+    price: 254.85
+    pixels: 10880
+  - name: CPU + 3 Flex 16-port boards
+    price: 314.8
+    pixels: 16320
+price_source:
+  notes: 'Sum of configurator options: AlphaPix Evolution V2 CPU (no tech support/warranty) $134.95 + Flex 16 Port SPI Expansion Board $59.95 each (the AlphaPix Evolution takes up to 3); CPU with support and 1-year warranty is $164.95'
+  part: '951'
+  retrieved: '2026-11-18'
+  url: https://www.holidaycoro.com/Flex-Modular-Lighting-Controller-System-p/951.htm
+  vendor: HolidayCoro
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.holidaycoro.com/Flex-Modular-Lighting-Controller-System-p/951.htm
+    retrieved: '2026-11-18'
+    notes: 'AlphaPix Evolution V2 CPU and Flex 16-port boards listed, Usually Ships in 24 Hours'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/holidaycoro.xcontroller
     retrieved: '2026-11-18'

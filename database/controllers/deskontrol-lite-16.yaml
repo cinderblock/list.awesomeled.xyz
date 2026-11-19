@@ -21,4 +21,21 @@ outputs:
   pixels:
     max_per_output: 170
   clocked: selectable
-price: 363
+dead_links:
+  - url: https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
+    archive: https://web.archive.org/web/20210924031804/https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
+    checked: '2026-11-18'
+    notes: Redirects to the generic Art-Net LED controllers category page
+price:
+  amount: 300
+  currency: EUR
+price_source:
+  notes: Last list price, tax excluded, from the archived product page ("Last items in stock!")
+  retrieved: '2021-09-24'
+  url: https://web.archive.org/web/20210924031804/https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
+  vendor: deskontrol
+sources:
+  status:
+    url: https://www.deskontrol.net/en/26-art-net-led-controllers
+    retrieved: '2026-11-18'
+    notes: 'old product URL redirects to the Art-Net controllers category, which lists only LITE V3 models'

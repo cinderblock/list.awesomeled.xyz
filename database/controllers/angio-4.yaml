@@ -36,5 +36,16 @@ power:
 case:
   waterproof: false
 image: angio-4.webp
-price: 99
+price: 129
+price_source:
+  notes: Regular price; on sale $99 at retrieval (sold out)
+  part: angio4
+  retrieved: '2026-11-18'
+  url: https://shop.chroma.tech/products/angio-4
+  vendor: chroma.tech
+sources:
+  status:
+    url: https://shop.chroma.tech/products/angio-4
+    retrieved: '2026-11-18'
+    notes: 'listed (regular $129, sale $99), sold out'
 wled_compatible: false

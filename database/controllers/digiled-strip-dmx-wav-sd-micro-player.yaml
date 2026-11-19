@@ -23,7 +23,20 @@ power:
 data:
   storage:
     - type: uSD # "Micro SD player" per Electroconcept product page
-price: 30
+price:
+  amount: 20.83
+  currency: EUR
+price_source:
+  notes: Ex VAT (€25.00 incl. 20% VAT); bare board, SD card not included (+€15)
+  part: SD_PLAYER_TO
+  retrieved: '2026-11-18'
+  url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+  vendor: Electroconcept
+sources:
+  status:
+    url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+    retrieved: '2026-11-18'
+    notes: '€25.00 TTC, En stock'
 technical_notes:
   - Pixel, DMX512, or WAV sound scene playback from SD card
-  - Programmed using Artrender (https://www.boutique-electroconcept.com/information/downloads.html)
+  - Programmed using Artrender (https://www.boutique-electroconcept.com/informations/telechargements.html)

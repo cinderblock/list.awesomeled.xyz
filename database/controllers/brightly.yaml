@@ -37,6 +37,22 @@ data:
     - type: SD
 dead_links:
   - url: https://glowbrightly.io/
-    archive: https://web.archive.org/web/20250416032520/https://glowbrightly.io/
-    checked: '2026-07-01'
-price: 200
+    archive: https://web.archive.org/web/20210321145613/https://glowbrightly.io/
+    checked: '2026-11-18'
+price:
+  - name: Base creator kit (driver, D·8 breakout, 16x16 matrix, PSU)
+    price: 275
+  - name: Plus project kit (driver, D·8, 2x R·4 breakouts, 2 PSUs)
+    price: 500
+  - name: Pro studio kit (driver, D·8, L·8 breakout, 8 receiver nodes, 8 PSUs)
+    price: 750
+price_source:
+  notes: Last published prices, from the archived "Prelaunch kits" section; regular prices, the presale offer was $200 / $350 / $500. Kits only, no board-only price.
+  retrieved: '2021-03-21'
+  url: https://web.archive.org/web/20210321145613/https://glowbrightly.io/
+  vendor: Polytronic (glowbrightly.io)
+sources:
+  status:
+    url: https://glowbrightly.io/
+    retrieved: '2026-11-18'
+    notes: 'domain no longer resolves (DNS ENOTFOUND); last capture 2025-04-16 was still a pre-launch sign-up page'

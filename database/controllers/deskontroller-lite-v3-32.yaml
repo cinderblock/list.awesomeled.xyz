@@ -27,7 +27,19 @@ outputs:
 features:
   - Web-based (browser) configuration UI
   - Supports over 100 pixel IC families (RGB and RGBW)
-price: 630
+price:
+  amount: 490
+  currency: EUR
+price_source:
+  notes: Tax excluded (page data shows price_amount 490 = price_tax_exc 490 for a non-EU visitor)
+  retrieved: '2026-11-18'
+  url: https://www.deskontrol.net/en/art-net-led-controllers/384-deskontroller-lite-v3-32-artnet-universes.html
+  vendor: deskontrol
+sources:
+  status:
+    url: https://www.deskontrol.net/en/art-net-led-controllers/384-deskontroller-lite-v3-32-artnet-universes.html
+    retrieved: '2026-11-18'
+    notes: '€490.00, In stock'
 technical_notes:
   - 32 Art-Net universes (16,384 DMX channels); ~5,440 RGB / 4,096 RGBW pixels
   - ~102 FPS in normal mode; 1 universe per output (2 universes per output in clock mode)

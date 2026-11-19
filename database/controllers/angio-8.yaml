@@ -36,5 +36,16 @@ power:
 case:
   waterproof: false
 image: angio-8.webp
-price: 169
+price: 199
+price_source:
+  notes: Regular price; on sale $169 at retrieval
+  part: angio8
+  retrieved: '2026-11-18'
+  url: https://shop.chroma.tech/products/angio-8
+  vendor: chroma.tech
+sources:
+  status:
+    url: https://shop.chroma.tech/products/angio-8
+    retrieved: '2026-11-18'
+    notes: 'listed and available (regular $199, sale $169)'
 wled_compatible: false

@@ -32,10 +32,20 @@ features:
   - Onboard LCD display for status and configuration
 image: alphapix-classic-16-v3.webp
 price: 204.99
+price_source:
+  notes: '"Starting At" price: bare board, no pigtails, 30-day factory-defects warranty (1-year warranty +$24.99)'
+  part: 721-V3
+  retrieved: '2026-11-18'
+  url: https://www.holidaycoro.com/AlphaPix-16-Pixel-Controller-V3-p/721-v3.htm
+  vendor: HolidayCoro
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.holidaycoro.com/AlphaPix-16-Pixel-Controller-V3-p/721-v3.htm
+    retrieved: '2026-11-18'
+    notes: 'listed, Starting At $204.99, Usually Ships in 24 Hours'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/holidaycoro.xcontroller
     retrieved: '2026-11-18'

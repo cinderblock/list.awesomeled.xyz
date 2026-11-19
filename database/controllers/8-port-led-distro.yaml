@@ -31,6 +31,11 @@ features:
   - Runs WLED (pre-installed) or ESPixelStick firmware
   - Pluggable Phoenix connectors for outputs
 price: 65
+price_source:
+  notes: 'V4.1 board (ESP32, internal antenna, 12-48V): $40 base + $25 option; V3.1 5-24V options $55 (internal antenna) / $57 (external)'
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/bong69/8-port-led-distro
+  vendor: Bong69 (Tindie)
 software:
   firmware:
     - WLED
@@ -38,6 +43,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.tindie.com/products/bong69/8-port-led-distro
+    retrieved: '2026-11-18'
+    notes: 'listed $65, v4.1 option 312 in stock'
   software.firmware:
     url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
     retrieved: '2026-11-18'

@@ -3,7 +3,7 @@ status: active
 creator:
   name: ENTTEC
   url: https://www.enttec.com.au
-  page: https://www.enttec.com.au/product/lighting-show-controller/din-pixie-2-universe-dmx-to-led-pixel-converter-controller/
+  page: https://www.enttec.com.au/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
 notes: Back powered from pixel strip - connect thru USB to record a show onto the device using live Art-Net
 inputs:
   physical:
@@ -36,7 +36,18 @@ data:
     - type: Flash
       features:
         - non-removable
-price: 100
+price: 96
+price_source:
+  notes: ENTTEC US store; the Australian store lists AUD 137.50 ex GST
+  part: '73539'
+  retrieved: '2026-11-18'
+  url: https://www.enttec.com/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+  vendor: ENTTEC
+sources:
+  status:
+    url: https://www.enttec.com/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+    retrieved: '2026-11-18'
+    notes: 'SKU 73539, $96.00, 8 in stock'
 technical_notes:
   - 'RGB (8-bit): 340 pixels max'
   - 'RGBW (8-bit): 256 pixels max'

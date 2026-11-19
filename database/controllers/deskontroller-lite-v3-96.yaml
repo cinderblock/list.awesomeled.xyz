@@ -24,7 +24,19 @@ data:
   formats:
     - RGB
     - RGBW
-price: 1060
+price:
+  amount: 940
+  currency: EUR
+price_source:
+  notes: Tax excluded (the price shown to non-EU visitors equals the store's price_tax_exc)
+  retrieved: '2026-11-18'
+  url: https://www.deskontrol.net/en/art-net-led-controllers/381-deskontroller-lite-v3-96-artnet-universes.html
+  vendor: deskontrol
+sources:
+  status:
+    url: https://www.deskontrol.net/en/art-net-led-controllers/381-deskontroller-lite-v3-96-artnet-universes.html
+    retrieved: '2026-11-18'
+    notes: '€940.00, In stock'
 technical_notes:
   - 96 Art-Net universes (49,152 DMX channels)
   - ~16,320 RGB pixels or ~12,288 RGBW pixels total

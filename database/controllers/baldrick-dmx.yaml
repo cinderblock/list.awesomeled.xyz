@@ -25,11 +25,20 @@ features:
 image: baldrick-dmx.webp
 other_links:
   - https://www.baldrickboard.com/en/boards/baldrickdmx
-price: 75
+price: 70
+price_source:
+  notes: Official US store, linked from the creator's buy page
+  retrieved: '2026-11-18'
+  url: https://www.baldrickstore.com/dmx-controllers/baldrickdmx/
+  vendor: Baldrick Store
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.baldrickstore.com/dmx-controllers/baldrickdmx/
+    retrieved: '2026-11-18'
+    notes: 'official US store, $70, in stock'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
     retrieved: '2026-11-18'

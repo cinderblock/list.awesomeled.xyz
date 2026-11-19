@@ -37,11 +37,20 @@ features:
 images:
   - baldrick-17.webp
 price: 189
+price_source:
+  notes: Official US store, linked from the creator's buy page
+  retrieved: '2026-11-18'
+  url: https://www.baldrickstore.com/pixel-controllers/baldrick17/
+  vendor: Baldrick Store
 software:
   works_with:
     - xLights
     - FPP
 sources:
+  status:
+    url: https://www.baldrickstore.com/pixel-controllers/baldrick17/
+    retrieved: '2026-11-18'
+    notes: 'official US store, $189, in stock'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
     retrieved: '2026-11-18'

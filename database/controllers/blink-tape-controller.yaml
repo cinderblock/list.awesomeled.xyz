@@ -1,5 +1,5 @@
 name: Blink tape Controller
-status: unknown
+status: active
 creator:
   name: Blinkinlabs
   page: https://shop.blinkinlabs.com/products/blinkytape-control-board
@@ -26,4 +26,15 @@ data:
     - type: Flash
 features:
   - GPIO breakout
-price: 15.99
+price: 17.99
+price_source:
+  notes: PCB variant (for soldering to a strip); JST-connector variant $18.99
+  part: '1011'
+  retrieved: '2026-11-18'
+  url: https://shop.blinkinlabs.com/products/blinkytape-control-board
+  vendor: Blinkinlabs
+sources:
+  status:
+    url: https://shop.blinkinlabs.com/products/blinkytape-control-board
+    retrieved: '2026-11-18'
+    notes: 'listed, PCB $17.99 (16 in stock), JST $18.99 (12 in stock)'

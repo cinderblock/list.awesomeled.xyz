@@ -3,7 +3,7 @@ status: active
 creator:
   name: DiGidot
   url: https://digidot.eu
-  page: https://digidot.eu/digidot-controllers/1406-digidot-c4-extended.html
+  page: https://www.digidot.eu/shop/digidot-c4-extended-127
 notes: Packed with features
 inputs:
   physical:
@@ -37,4 +37,17 @@ features:
   - HTP input signal merger
   - Gamma correction and output limiters
   - Calendar, dry-contact, and analog (0-10V) triggers
-price: 385
+price:
+  amount: 645
+  currency: EUR
+price_source:
+  notes: 8-universe licence; 2U €420, 4U €495, 12U €795. "DiGidot List price" pricelist; VAT treatment not stated (read as a non-EU visitor)
+  part: '20204'
+  retrieved: '2026-11-18'
+  url: https://www.digidot.eu/shop/digidot-c4-extended-127?attribute_values=77
+  vendor: DiGidot
+sources:
+  status:
+    url: https://www.digidot.eu/shop/digidot-c4-extended-127?attribute_values=77
+    retrieved: '2026-11-18'
+    notes: 'C4 Extended (8) SKU 20204, €645, InStock'

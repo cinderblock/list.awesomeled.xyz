@@ -18,7 +18,19 @@ outputs:
   pixels:
     max_per_output: 1020 # 32640 total RGB pixels across 32 data lines
   clocked: selectable # supports clockless and clocked signal types
-price: 1490
+price:
+  amount: 1240
+  currency: EUR
+price_source:
+  notes: Tax excluded (the price shown to non-EU visitors equals the store's price_tax_exc)
+  retrieved: '2026-11-18'
+  url: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
+  vendor: deskontrol
+sources:
+  status:
+    url: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
+    retrieved: '2026-11-18'
+    notes: '€1,240.00, In stock'
 technical_notes:
   - 192 Art-Net universes; up to 32,640 RGB pixels (~24,576 RGBW)
   - 32 data lines via 8 RJ45 output connectors with terminal adapters

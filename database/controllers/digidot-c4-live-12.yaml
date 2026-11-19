@@ -3,7 +3,7 @@ status: active
 creator:
   name: DiGidot Technologies BV
   url: https://digidot.eu
-  page: https://digidot.eu/compact-controllers/1254-digidot-c4-live.html
+  page: https://www.digidot.eu/shop/digidot-c4-live-125
 notes: Long range data transmission extenders available.
 inputs:
   physical:
@@ -29,6 +29,19 @@ power:
 features:
   - Supports 60+ single-wire and clocked pixel protocols
   - DIN-rail mountable
-price: 330
+price:
+  amount: 425
+  currency: EUR
+price_source:
+  notes: 12-universe licence; 8U €345, 16U €495, 24U €623. "DiGidot List price" pricelist; VAT treatment not stated (read as a non-EU visitor)
+  part: '20103'
+  retrieved: '2026-11-18'
+  url: https://www.digidot.eu/shop/digidot-c4-live-125?attribute_values=74
+  vendor: DiGidot
+sources:
+  status:
+    url: https://www.digidot.eu/shop/digidot-c4-live-125?attribute_values=74
+    retrieved: '2026-11-18'
+    notes: 'C4 Live (12) SKU 20103, €425, InStock'
 technical_notes:
   - Up to 16 universes (8192 channels) depending on license

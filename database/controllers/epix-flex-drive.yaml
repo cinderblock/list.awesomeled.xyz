@@ -1,9 +1,9 @@
 name: Epix Flex Drive
-status: unknown
+status: active
 creator:
   name: Chauvet Professional
   url: https://www.chauvetprofessional.com
-  page: https://www.chauvetprofessional.com/products/epix-flex-drive/
+  page: https://chauvetprofessional.com/product/epix-flex-drive/
 inputs:
   physical:
     USB: true
@@ -19,4 +19,15 @@ outputs:
     max_per_output: 960 # 1920 total across 2 outputs
 case:
   waterproof: IP65
-price: 600
+price: 786
+price_source:
+  notes: Dealer's regular "Our Price"; manufacturer List Price $975. Chauvet publishes no price
+  part: EPIXFLEXDRIVE
+  retrieved: '2026-11-18'
+  url: https://www.fullcompass.com/prod/556840-chauvet-pro-epix-flex-drive-epix-flex-power-supply-processor
+  vendor: Full Compass
+sources:
+  status:
+    url: https://www.fullcompass.com/prod/556840-chauvet-pro-epix-flex-drive-epix-flex-power-supply-processor
+    retrieved: '2026-11-18'
+    notes: "authorized dealer sells it ($786, ships in 19-21 business days); still in Chauvet's product catalog as SKU EPIXFLEXDRIVE"

@@ -27,10 +27,15 @@ core:
   family: ESP32
 dead_links:
   - url: https://go3d.fr/produit/carte-de-controle-pour-led-pixels-eth032f/
-    archive: https://web.archive.org/web/20221208030737/https://go3d.fr/
-    checked: '2026-07-01'
-    notes: Vendor site is gone; go3d.fr was re-registered by an unrelated company
+    archive: https://web.archive.org/web/20230201034543/https://go3d.fr/categorie-produit/controleurs-de-pixels-et-accessoires/controleurs-de-pixels/
+    checked: '2026-11-18'
+    notes: Vendor site is gone; go3d.fr was re-registered by an unrelated company. The product page itself was never archived; the archive is GO 3D's pixel-controller category listing the ETH032F
 features:
   - Per-output fuses
 price: 55
+sources:
+  status:
+    url: https://go3d.fr/produit/carte-de-controle-pour-led-pixels-eth032f/
+    retrieved: '2026-11-18'
+    notes: '404 on a now-unrelated go3d.fr site (pest control), GO 3D shop gone'
 wled_compatible: true

@@ -1,9 +1,9 @@
 name: E682
-status: unknown
+status: active
 creator:
   name: SanDevices
   url: https://sandevices.com
-  page: http://sandevices.com/product/e682-assembled-tested/
+  page: https://sandevices.com/product/e682-pixel-controller-assembled-and-tested/
 inputs:
   physical:
     Ethernet: true # 100mb Ethernet, DMX-over-Ethernet bridge
@@ -28,11 +28,20 @@ power:
     max: 24
   current:
     max: 64
-price: 180
+price: 215
+price_source:
+  notes: Assembled and tested
+  retrieved: '2026-11-18'
+  url: https://sandevices.com/product/e682-pixel-controller-assembled-and-tested/
+  vendor: SanDevices
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://sandevices.com/product/e682-pixel-controller-assembled-and-tested/
+    retrieved: '2026-11-18'
+    notes: '$215.00, InStock, Add to cart'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/sandevices.xcontroller
     retrieved: '2026-11-18'

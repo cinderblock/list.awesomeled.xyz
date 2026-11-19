@@ -1,9 +1,9 @@
 name: E6804
-status: unknown
+status: active
 creator:
   name: SanDevices
   url: http://sandevices.com
-  page: http://sandevices.com/product/e6804-assembled-tested/
+  page: https://sandevices.com/product/e6804-pixel-controller-assembled-tested/
 inputs:
   physical:
     Ethernet: true
@@ -24,11 +24,20 @@ power:
     max: 12
   current:
     max: 25
-price: 100
+price: 129
+price_source:
+  notes: Assembled and tested; listed as "Limited Stock Inquire", out of stock at retrieval
+  retrieved: '2026-11-18'
+  url: https://sandevices.com/product/e6804-pixel-controller-assembled-tested/
+  vendor: SanDevices
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://sandevices.com/product/e6804-pixel-controller-assembled-tested/
+    retrieved: '2026-11-18'
+    notes: 'listed $129 as E6804 Assembled- Limited Stock Inquire, Out of stock'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/sandevices.xcontroller
     retrieved: '2026-11-18'

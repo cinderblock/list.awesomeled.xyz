@@ -3,7 +3,7 @@ status: active
 creator: Abstract AVR
 vendors:
   - name: Digital Tape
-    page: https://www.digitaltape.co.uk/pixel-drivers
+    page: https://digitaltape.co.uk/apd-2-500-12v-art
 notes: On board Sound To Light, 31 channel DMX Macro mode.
 inputs:
   physical:
@@ -29,3 +29,8 @@ power:
 features:
   - Onboard Sound To Light
   - 31 channel DMX Macro mode
+sources:
+  status:
+    url: https://digitaltape.co.uk/apd-2-500-12v-art
+    retrieved: '2026-11-18'
+    notes: 'product page live and listed in the Drivers range (no price published)'

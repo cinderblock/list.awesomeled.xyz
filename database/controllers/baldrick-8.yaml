@@ -35,11 +35,20 @@ power:
     max: 60
 images:
   - baldrick-8.webp
-price: 80
+price: 75
+price_source:
+  notes: Current v2 board (dual Ethernet with switch); the v1.x listing ($70) is out of stock, and Wired Watts lists its v1 edition as discontinued
+  retrieved: '2026-11-18'
+  url: https://www.baldrickstore.com/pixel-controllers/baldrick8v2-pixel-controller/
+  vendor: Baldrick Store
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.baldrickboard.com/en/boards/baldrick8
+    retrieved: '2026-11-18'
+    notes: 'creator page offers Baldrick8 v2 at $75 via Baldrick Store, in stock'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
     retrieved: '2026-11-18'
