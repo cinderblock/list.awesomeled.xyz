@@ -14,9 +14,9 @@ export function headerCell(page: Page, columnKey: string): Locator {
   return page.locator(`.data-table-container thead th[data-col="${columnKey}"]`);
 }
 
-/** Labels of the visible columns, left to right. */
+/** Labels of the visible data columns, left to right (not the compare checkbox column). */
 export async function columnLabels(page: Page): Promise<string[]> {
-  const cells = page.locator('.data-table-container thead th');
+  const cells = page.locator('.data-table-container thead th:not(.data-table-select)');
   return (await cells.allInnerTexts()).map((text) => text.trim());
 }
 

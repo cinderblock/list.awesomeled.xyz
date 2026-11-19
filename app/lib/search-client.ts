@@ -51,10 +51,23 @@ export function useSearchIndex(enabled: boolean): SearchIndexState {
 // shortcut, 404 page) can open the one palette the layout renders.
 // ---------------------------------------------------------------------------
 
+/**
+ * "Pick" mode: the palette lists entries only and hands the chosen one to
+ * the caller instead of navigating (the compare page adds entries this way).
+ */
+export interface PalettePick {
+  /** What the person is choosing, shown as the input's placeholder */
+  prompt: string;
+  onPick: (doc: SearchDoc) => void;
+  /** Leave out entries that cannot be picked (already chosen, wrong kind) */
+  accept?: (doc: SearchDoc) => boolean;
+}
+
 interface PaletteState {
   open: boolean;
   /** Text to start with when opening */
   query: string;
+  pick?: PalettePick;
 }
 
 type Listener = () => void;
@@ -68,8 +81,8 @@ function setPalette(next: PaletteState) {
   listeners.forEach((listener) => listener());
 }
 
-export function openSearch(query = ''): void {
-  setPalette({ open: true, query });
+export function openSearch(query = '', pick?: PalettePick): void {
+  setPalette({ open: true, query, pick });
 }
 
 export function closeSearch(): void {

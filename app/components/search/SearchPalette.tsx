@@ -3,7 +3,13 @@ import { ArrowRight, CornerDownLeft, Search } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { searchIndex, type SearchDoc } from '~/lib/search';
-import { closeSearch, openSearch, usePaletteState, useSearchIndex } from '~/lib/search-client';
+import {
+  closeSearch,
+  openSearch,
+  usePaletteState,
+  useSearchIndex,
+  type PalettePick,
+} from '~/lib/search-client';
 import { CATEGORIES } from '~/lib/types';
 import { resultPath, SearchResult } from './SearchResult';
 
@@ -25,6 +31,8 @@ interface Item {
   path: string;
   group: string;
   render: () => React.ReactNode;
+  /** The entry behind this row, when it is one */
+  doc?: SearchDoc;
 }
 
 // A plain destination row: a label, a line of explanation, an arrow
@@ -46,7 +54,7 @@ function linkRow(label: string, hint: string) {
  * Mounted once by the layout; open it from code with openSearch().
  */
 export function SearchPalette() {
-  const { open, query } = usePaletteState();
+  const { open, query, pick } = usePaletteState();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -79,14 +87,14 @@ export function SearchPalette() {
         <Dialog.Content className="search-palette" aria-describedby={undefined}>
           <Dialog.Title className="sr-only">Search the Awesome LED List</Dialog.Title>
           {/* Mounted fresh on every open, so it starts clean */}
-          <PaletteBody initialQuery={query} />
+          <PaletteBody initialQuery={query} pick={pick} />
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
   );
 }
 
-function PaletteBody({ initialQuery }: { initialQuery: string }) {
+function PaletteBody({ initialQuery, pick }: { initialQuery: string; pick?: PalettePick }) {
   const [query, setQuery] = useState(initialQuery);
   const [active, setActive] = useState(0);
   const navigate = useNavigate();
@@ -94,10 +102,11 @@ function PaletteBody({ initialQuery }: { initialQuery: string }) {
   const { index, failed } = useSearchIndex(true);
   const trimmed = query.trim();
 
-  const hits = useMemo(
-    () => (index && trimmed ? searchIndex(index, trimmed, HIT_LIMIT) : []),
-    [index, trimmed]
-  );
+  const hits = useMemo(() => {
+    if (!index || !trimmed) return [];
+    const all = searchIndex(index, trimmed, HIT_LIMIT);
+    return pick?.accept ? all.filter((hit) => pick.accept!(hit.doc)) : all;
+  }, [index, trimmed, pick]);
 
   const items = useMemo((): Item[] => {
     const out: Item[] = [];
@@ -115,18 +124,21 @@ function PaletteBody({ initialQuery }: { initialQuery: string }) {
     });
 
     if (!trimmed) {
-      return [...CATEGORIES.map(categoryItem), ...PAGES.map(pageItem)];
+      // Picking an entry: there is nothing to offer until something is typed
+      return pick ? [] : [...CATEGORIES.map(categoryItem), ...PAGES.map(pageItem)];
     }
 
-    for (const hit of hits.slice(0, ENTRY_LIMIT)) {
+    for (const hit of hits.slice(0, pick ? ENTRY_LIMIT * 2 : ENTRY_LIMIT)) {
       const doc: SearchDoc = hit.doc;
       out.push({
         id: `entry-${doc.c}-${doc.i}`,
         path: resultPath(doc),
         group: 'Entries',
+        doc,
         render: () => <SearchResult doc={doc} query={trimmed} />,
       });
     }
+    if (pick) return out;
     if (hits.length > ENTRY_LIMIT) {
       const total = hits.length === HIT_LIMIT ? `${HIT_LIMIT}+` : String(hits.length);
       out.push({
@@ -165,14 +177,15 @@ function PaletteBody({ initialQuery }: { initialQuery: string }) {
       if (page.label.toLowerCase().includes(needle)) out.push(pageItem(page));
     }
     return out;
-  }, [trimmed, hits]);
+  }, [trimmed, hits, pick]);
 
   const activeIndex = Math.min(active, Math.max(items.length - 1, 0));
   const activeItem = items[activeIndex];
 
   const go = (item: Item) => {
     closeSearch();
-    navigate(item.path);
+    if (pick && item.doc) pick.onPick(item.doc);
+    else navigate(item.path);
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -202,8 +215,8 @@ function PaletteBody({ initialQuery }: { initialQuery: string }) {
           aria-controls="search-palette-results"
           aria-activedescendant={activeItem ? `search-option-${activeIndex}` : undefined}
           aria-autocomplete="list"
-          aria-label="Search every category"
-          placeholder="Search every category…"
+          aria-label={pick?.prompt ?? 'Search every category'}
+          placeholder={pick ? `${pick.prompt}…` : 'Search every category…'}
           autoComplete="off"
           spellCheck={false}
           value={query}
@@ -243,6 +256,9 @@ function PaletteBody({ initialQuery }: { initialQuery: string }) {
             </a>
           </div>
         ))}
+        {pick && !trimmed && (
+          <p className="search-palette-empty">Type a name, a part number or a maker.</p>
+        )}
         {trimmed && index && items.length === 0 && (
           <p className="search-palette-empty">
             Nothing matches “{trimmed}”. Try a part number, a maker, or a protocol.

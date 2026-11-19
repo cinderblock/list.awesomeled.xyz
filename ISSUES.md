@@ -94,15 +94,6 @@ Repro: open any pixel IC with `price` tiers + `sku` at a 1600 px wide window.
 Probably a flex/grid min-width issue in the price-tier renderer. For prices
 (stream 6) or browse UX (stream 7).
 
-## Table: header tips are hover-only; "+N" pill click filters on "+N" (stream 7)
-
-Seen by stream 4 while adding columns. `Column.headerTip` renders as a hover
-tooltip on the header label (`DataTable.tsx`), so touch users never see it;
-the column popover (tap) could show the same text. Separately,
-`handleBadgeClick` toggles a filter on any `.badge` in a cell, and the
-overflow pill from `renderBadgeArray` ("+3", class `badge`) is one: clicking
-it filters the column on the literal "+3", which matches nothing.
-
 ## Sheet's Controllers "Interface" column is scrambled — don't restore from it
 
 **in progress — database review (stream 2, `ws/database-review`)**: verifying

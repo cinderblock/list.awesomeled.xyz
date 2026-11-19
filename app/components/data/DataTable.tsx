@@ -1,9 +1,10 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { ArrowDown, ArrowDownUp, ArrowUp, Rows3, Rows4, Search, X } from 'lucide-react';
+import { ArrowDown, ArrowDownUp, ArrowUp, Rows3, Rows4, Scale, Search, X } from 'lucide-react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
 import { getPath, type FieldMeta } from '~/lib/fields';
+import { COMPARE_MAX, entryRef, toggleCompare, useCompareItems } from '~/lib/compare';
 import { firstImageFile, imageUrl } from '~/lib/images';
 import { DENSITY_PREF, getPref, setPref, usePref } from '~/lib/prefs';
 import {
@@ -33,6 +34,7 @@ import {
   type SortDirection,
   type SortLayer,
 } from '~/lib/table-state';
+import { toast } from '~/lib/toast';
 import type { BaseEntry } from '~/lib/types';
 import { formatQuantity, parseNumberWithUnit } from '~/lib/units';
 import { ColumnHeader } from './ColumnHeader';
@@ -333,6 +335,27 @@ export function DataTable({ data, fields, category }: DataTableProps) {
     document.documentElement.dataset.density = density;
   }, [density]);
 
+  // ---- Picking rows to compare ---------------------------------------------
+  const compareItems = useCompareItems();
+  const pickedIds = useMemo(() => {
+    const prefix = `${categoryId}/`;
+    return new Set(
+      compareItems
+        .filter((item) => item.ref.startsWith(prefix))
+        .map((item) => item.ref.slice(prefix.length))
+    );
+  }, [compareItems, categoryId]);
+
+  const togglePick = useCallback(
+    (item: BaseEntry) => {
+      const added = toggleCompare({ ref: entryRef(categoryId, String(item.id)), name: item.name });
+      if (!added) {
+        toast(`A comparison holds ${COMPARE_MAX} entries. Remove one to add another.`, 'error');
+      }
+    },
+    [categoryId]
+  );
+
   // ---- Keyboard navigation -------------------------------------------------
   // "/" focuses search, j/k walk the (filtered, sorted) rows, Enter opens the
   // active row, Esc clears.
@@ -372,13 +395,15 @@ export function DataTable({ data, fields, category }: DataTableProps) {
       } else if (e.key === 'Enter' && clampedActive >= 0 && sortedData[clampedActive]) {
         if (t instanceof HTMLButtonElement || t instanceof HTMLAnchorElement) return;
         navigate(`${categoryPath}/${sortedData[clampedActive].id}`);
+      } else if (e.key === 'x' && clampedActive >= 0 && sortedData[clampedActive]) {
+        togglePick(sortedData[clampedActive]);
       } else if (e.key === 'Escape') {
         setActiveRow(-1);
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [sortedData, clampedActive, categoryPath, navigate]);
+  }, [sortedData, clampedActive, categoryPath, navigate, togglePick]);
 
   // Hand the currently visible order to entry pages, so j/k there walks the
   // same filtered + sorted list the user was just looking at.
@@ -520,6 +545,10 @@ export function DataTable({ data, fields, category }: DataTableProps) {
   // Shared between the real header and its sticky clone
   const renderHeaderRow = () => (
     <tr>
+      <th scope="col" className="data-table-select" data-col="__select">
+        <Scale size={14} aria-hidden="true" />
+        <span className="sr-only">Compare</span>
+      </th>
       {visibleColumns.map((col, index) => {
         const layerIndex = sortLayers.findIndex((l) => l.key === col.key);
         const layer = layerIndex >= 0 ? sortLayers[layerIndex] : null;
@@ -764,7 +793,7 @@ export function DataTable({ data, fields, category }: DataTableProps) {
               <tbody onClick={handleCellClick}>
                 {sortedData.length === 0 ? (
                   <tr>
-                    <td colSpan={visibleColumns.length} className="data-table-empty">
+                    <td colSpan={visibleColumns.length + 1} className="data-table-empty">
                       <p>No {category.name.toLowerCase()} match.</p>
                       {hasFilters && (
                         <button
@@ -787,6 +816,8 @@ export function DataTable({ data, fields, category }: DataTableProps) {
                       categoryPath={categoryPath}
                       thumbCategory={showThumbs ? categoryId : undefined}
                       active={rowIndex === clampedActive}
+                      picked={pickedIds.has(String(item.id))}
+                      onTogglePick={togglePick}
                       onEnter={handleRowEnter}
                       onLeave={handleRowLeave}
                     />
@@ -830,6 +861,8 @@ const TableRow = memo(function TableRow({
   categoryPath,
   thumbCategory,
   active,
+  picked,
+  onTogglePick,
   onEnter,
   onLeave,
 }: {
@@ -839,17 +872,31 @@ const TableRow = memo(function TableRow({
   /** Category id when names carry a product thumbnail */
   thumbCategory?: string;
   active: boolean;
+  /** Picked for comparison */
+  picked: boolean;
+  onTogglePick: (item: BaseEntry) => void;
   onEnter: (id: string, top: number) => void;
   onLeave: (id: string) => void;
 }) {
   const id = String(item.id);
+  const classes = [active && 'data-table-row--active', picked && 'data-table-row--picked']
+    .filter(Boolean)
+    .join(' ');
   return (
     <tr
       data-row-id={id}
-      className={active ? 'data-table-row--active' : undefined}
+      className={classes || undefined}
       onMouseEnter={(e) => onEnter(id, e.currentTarget.getBoundingClientRect().top)}
       onMouseLeave={() => onLeave(id)}
     >
+      <td className="data-table-select" data-col="__select">
+        <input
+          type="checkbox"
+          checked={picked}
+          aria-label={`Compare ${item.name}`}
+          onChange={() => onTogglePick(item)}
+        />
+      </td>
       {columns.map((col) => (
         <TableCell
           key={col.key}

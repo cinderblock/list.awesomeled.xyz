@@ -1,0 +1,412 @@
+/* ==========================================================================
+   Compare - row checkboxes, the tray, the side-by-side page
+   ========================================================================== */
+
+/* ==========================================================================
+   Table: the pick-to-compare column
+   ========================================================================== */
+.data-table th.data-table-select,
+.data-table td.data-table-select {
+  width: 2.25rem;
+  padding-left: var(--space-3);
+  padding-right: 0;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.data-table td.data-table-select input {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: middle;
+  cursor: pointer;
+  accent-color: var(--category-primary, var(--primary));
+}
+
+.data-table tbody tr.data-table-row--picked > td {
+  background-color: color-mix(in oklab, var(--category-primary, #2563eb) 7%, transparent);
+}
+
+/* ==========================================================================
+   Tray
+   ========================================================================== */
+.compare-tray {
+  position: fixed;
+  left: 50%;
+  bottom: var(--space-4);
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: calc(100vw - 2rem);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4);
+  transform: translateX(-50%);
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 12px 32px -8px rgb(0 0 0 / 0.3),
+    var(--shadow-md);
+  animation: trayIn 0.18s ease-out;
+}
+
+@keyframes trayIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+
+.compare-tray-title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.compare-tray-items {
+  display: flex;
+  gap: var(--space-1);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.compare-tray-items::-webkit-scrollbar {
+  display: none;
+}
+
+.compare-tray-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex-shrink: 0;
+  padding: 0.15rem 0.25rem 0.15rem 0.6rem;
+  font-size: 0.8125rem;
+  background-color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+}
+
+.compare-tray-item a {
+  max-width: 11rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.compare-tray-item a:hover {
+  text-decoration: underline;
+}
+
+.compare-tray-item button {
+  display: inline-flex;
+  padding: 0.2rem;
+  color: var(--muted-foreground);
+  border-radius: var(--radius-full);
+}
+
+.compare-tray-item button:hover {
+  color: var(--foreground);
+  background-color: var(--accent);
+}
+
+.compare-tray-hint {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  white-space: nowrap;
+}
+
+/* Keep the tray off the footer and the toasts off the tray */
+body:has(.compare-tray) .site-footer {
+  padding-bottom: 4.5rem;
+}
+
+body:has(.compare-tray) .toaster {
+  bottom: 5rem;
+}
+
+@media (max-width: 640px) {
+  .compare-tray {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: none;
+    transform: none;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    border-bottom: none;
+    padding-bottom: max(var(--space-2), env(safe-area-inset-bottom));
+    animation: none;
+  }
+
+  .compare-tray-title {
+    /* the icon alone: the button says "Compare" */
+    font-size: 0;
+    gap: 0;
+  }
+
+  .compare-tray-items {
+    flex: 1;
+  }
+
+  .compare-tray-hint {
+    display: none;
+  }
+}
+
+.compare-button--on {
+  color: var(--category-primary-foreground, var(--primary-foreground));
+  background-color: var(--category-primary, var(--primary));
+  border-color: var(--category-primary, var(--primary));
+}
+
+.compare-button--on:hover {
+  background-color: var(--category-primary-hover, var(--primary));
+  opacity: 0.92;
+}
+
+/* ==========================================================================
+   Compare page
+   ========================================================================== */
+.compare-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.compare-actions-spacer {
+  flex: 1;
+}
+
+.compare-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-2);
+  font-size: 0.875rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.compare-toggle input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--primary);
+}
+
+.compare-empty {
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  color: var(--muted-foreground);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.compare-empty .compare-actions {
+  justify-content: center;
+  margin: var(--space-4) 0 0;
+}
+
+.compare-hint {
+  margin-top: var(--space-4);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.compare-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background-color: var(--background);
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: var(--space-2) var(--space-4);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.compare-table tbody tr:last-child > * {
+  border-bottom: none;
+}
+
+/* Field names stay put while the entries scroll sideways */
+.compare-corner,
+.compare-label {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: 13rem;
+  min-width: 9rem;
+  max-width: 13rem;
+  background-color: var(--background);
+}
+
+.compare-label {
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+
+.compare-head {
+  min-width: 13rem;
+  vertical-align: top;
+  font-weight: 400;
+  background-color: var(--muted);
+}
+
+.compare-corner {
+  background-color: var(--muted);
+}
+
+.compare-cell {
+  min-width: 13rem;
+  max-width: 24rem;
+  overflow-wrap: anywhere;
+}
+
+/* Prose that tables clip to one line wraps here */
+.compare-cell .field-clip {
+  max-width: none;
+}
+
+.compare-cell .field-clip-text {
+  white-space: normal;
+}
+
+.compare-cell .data-table-array {
+  flex-wrap: wrap;
+}
+
+.compare-section th {
+  position: sticky;
+  left: 0;
+  padding-top: var(--space-4);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+  background-color: var(--background);
+}
+
+/* A row whose values differ: a mark on the label, a tint on the cells */
+.compare-row--differs .compare-label {
+  color: var(--foreground);
+  font-weight: 500;
+  box-shadow: inset 3px 0 0 oklch(0.75 0.15 75);
+}
+
+.compare-row--differs .compare-cell {
+  background-color: oklch(0.97 0.04 90);
+}
+
+.dark .compare-row--differs .compare-cell {
+  background-color: oklch(0.26 0.03 90);
+}
+
+.compare-nothing {
+  padding: var(--space-8) var(--space-4) !important;
+  text-align: center !important;
+  color: var(--muted-foreground);
+}
+
+.compare-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+
+.compare-header-tools {
+  display: flex;
+  align-self: stretch;
+  justify-content: flex-end;
+  margin: -0.25rem -0.5rem 0 0;
+}
+
+.compare-header-image {
+  display: block;
+  width: 4.5rem;
+  height: 3.25rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.compare-header-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+a.compare-header-name:hover {
+  text-decoration: underline;
+}
+
+.compare-header-sub {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+
+.compare-header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 640px) {
+  /* Two entries beside the labels on a phone; more scroll sideways */
+  .compare-corner,
+  .compare-label {
+    width: 6.25rem;
+    min-width: 6.25rem;
+    max-width: 6.25rem;
+    padding-left: var(--space-3);
+    padding-right: var(--space-2);
+    font-size: 0.8125rem;
+    overflow-wrap: anywhere;
+  }
+
+  .compare-head,
+  .compare-cell {
+    min-width: 8.75rem;
+    max-width: 8.75rem;
+  }
+
+  .compare-table th,
+  .compare-table td {
+    padding: var(--space-2) var(--space-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .compare-tray {
+    animation: none;
+  }
+}
+
+@media print {
+  .compare-tray,
+  .compare-actions,
+  .compare-header-tools {
+    display: none !important;
+  }
+}

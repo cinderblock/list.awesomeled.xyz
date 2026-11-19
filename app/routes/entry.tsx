@@ -20,6 +20,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { parseFilters, getFilterDescription, FILTER_STORAGE_KEY } from '~/lib/table-state';
+import { CompareButton } from '~/components/compare/CompareTray';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
 import { FeatureBadges, ValueBadges } from '~/components/ui/FeatureBadges';
@@ -524,6 +525,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           <div className="entry-title-row">
             <h1 className="page-title category-page-title">{entry.name}</h1>
             {status && <StatusBadge status={status} />}
+            <CompareButton categoryId={category.id} entryId={String(entry.id)} name={entry.name} />
           </div>
           {entry.creator ? (
             <CreatorLine

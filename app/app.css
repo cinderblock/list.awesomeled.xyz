@@ -28,6 +28,9 @@
 /* Search: header trigger, command palette, results, not-found page */
 @import './styles/search.css';
 
+/* Compare: row checkboxes, the tray, the side-by-side page */
+@import './styles/compare.css';
+
 /* Category Theme: Dynamic category colors */
 @import './styles/category-theme.css';
 
