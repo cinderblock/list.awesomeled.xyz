@@ -49,41 +49,45 @@ Research findings with sources: [database-review-research.md](database-review-re
 - Research agents' `curl` can drop files into the worktree; tell them to use the scratchpad.
 - A plain `yaml` re-stringify can't round-trip the database (files mix folded and long prose lines); the block-splice in `lib.ts` does (verified: no-op over all entries is byte-identical).
 - `JSON.stringify` + prettier on a schema file reformats every compact object; edit schema JSON as text.
+- **The sheet's Controllers "Interface" column was sorted on its own** (values run alphabetically down the sheet while rows are ordered by price), so imported controller inputs were often another product's. Every controller was re-audited against makers' docs ([database-review-inputs-audit.md](database-review-inputs-audit.md)). Never trust or restore that column (ISSUES.md says so too).
+- In common.json, refs must be fully qualified (`common.json#/definitions/x`): AJV resolves local `#/...` fine, but the table's field catalog (`app/lib/fields.ts`, stream 7) resolves file-less refs in the category schema. Category-local defs (diffusive `#/definitions/rating`) are fine as local refs.
+- Fixed-key maps (common.json `input_interfaces`) are listed in `KEY_MAP_DEFS` in `app/lib/fields.ts` so the table keeps one "Interfaces" facet instead of a column per key.
+- Other streams edit the same YAML constantly: rebase conflicts are routine. Resolve by taking upstream's file and re-running my (idempotent) migration on it, or merging their `sources`/`price_source`/`images` into my version. Never push mid-rebase: `scratchpad/ship.sh` (fetch, rebase-or-stop, install, validate, typecheck, push) refuses on any failure; a plain `git rebase | tail && git push` once pushed past a stopped rebase.
+- E2E under load: run with `--workers=1`; parallel workers time out. One serial-run flake (designer power warnings) passes alone.
 
 ## Plan / steps
 
 1. ✅ Orient: read plans/docs, census every category.
 2. ✅ CI runs `bun run validate`; ajv-formats enforces uri/date; examples validated.
-3. ✅ Packages standardized (`0bb3346`).
-4. ✅ Shared output/power/connector/diy definitions (`7d3bad0`); pixel decoders structured (`64a0d09`).
-5. ✅ issues.txt: F-Test → pixel-decoders, Flex Pixel Driver 1, Baldrick inputs.
-6. **(current)** Package datasheet corrections (data commits; research in notes).
-7. Diffusive materials: `materials` list, boolean `flexible`, ratings, tints, thickness with units, `status`; then per-entry corrections and the Silicone Sealant / LD45 merge. Closes the last issues.txt item → delete issues.txt.
-8. Adapters: outputs/power adopt shared shapes (`pixel_types`/`description` → `outputs.clocked`, `max_channels` → `outputs.count`, connectors carried as strings), `diy_or_ots` enum; Pi Hat, M4/M8 facts.
-9. Duplicate products: keep/merge per pair (claimed in ISSUES.md); record removed entries' sheet rows.
-10. Controllers: `inputs.physical` key vocabulary, `inputs.protocols` DMX → DMX512, storage types, creator spelling, warranty case.
-11. Remaining categories: connectors (AWG ints, pcb_mount, rows, IP ratings, pitch lengths, enums), microboards (memory grammar, connectivity enums, PoE boolean, BMS), pattern drivers (I/O direction enum, visualizer, pricing, demo, language), commercial systems (color types, dimming bits, creator URL), level converters (packages, electrical grammar), pixels/pixel ICs (brightness bits/method, unit trailing zeros, creators), drive libraries (language; not supported_ics).
-12. Cross-cutting: shared attribution definitions (creator/vendors/links uri formats), unit formatting convention, `app/lib/types.ts` stale flat interfaces.
-13. Docs: CONTRIBUTING.md schema reference, `database/_schema/README.md`, OVERHAUL-PLAN.md (pixel_rate_max done), TODO.md.
+3. ✅ Packages standardized, then corrected from datasheets.
+4. ✅ Shared output/power/connector/diy definitions; pixel decoders structured.
+5. ✅ issues.txt fully resolved and deleted (F-Test, Flex Pixel Driver 1, Baldrick inputs, diffusive materials).
+6. ✅ Diffusive materials typed + researched corrections + Silicone Sealant → Plastazote LD45 merge.
+7. ✅ Adapters adopt shared shapes (TODO async/clocked); ESPArtStick researched and merged.
+8. ✅ Duplicate products merged (QuinLED ×2, M4-PI ×3, M8-PI, differential receiver, ESPArtStick).
+9. ✅ Input vocabulary (controllers + adapters) and the full controller inputs audit (119 entries corrected).
+10. **(current)** Pi Hat (adapters) from research; then remaining categories: connectors (AWG ints, pcb_mount, rows, IP ratings, pitch lengths, enums), microboards (memory grammar, connectivity enums, PoE boolean, BMS), pattern drivers (I/O direction enum from research, visualizer, pricing, demo, language), commercial systems (color types, dimming bits, creator URL), level converters (packages from research, electrical grammar), pixels/pixel ICs (brightness bits/method, unit trailing zeros, creators), drive libraries (language; not supported_ics).
+11. Cross-cutting: shared attribution definitions (creator/vendors/links uri formats), unit formatting convention, `app/lib/types.ts` stale flat interfaces.
+12. Docs: CONTRIBUTING.md schema reference, `database/_schema/README.md`, OVERHAUL-PLAN.md (pixel_rate_max done), TODO.md (both items done).
 
 ## Progress log
 
 - [x] 2026-11-18: oriented; plan created; census of all 12 categories.
-- [x] CI validation + formats + example validation (`931864c`); E2E_PORT (`6a53139`).
-- [x] Packages (`0bb3346`, ignored in `d6f09fc`).
-- [x] Shared definitions (`7d3bad0`); pixel decoders (`64a0d09`, ignored in follow-up).
-- [x] F-Test (`3c1f084`), Flex Pixel Driver 1 (`c13218a`), Baldrick (`2222e62`).
-- [ ] Package corrections from datasheets.
-- [ ] Diffusive materials.
-- [ ] Adapters.
-- [ ] Duplicates.
-- [ ] Controllers vocabulary.
-- [ ] Remaining categories.
+- [x] CI validation + formats + example validation; E2E_PORT.
+- [x] Packages: standardized (`0bb3346`), datasheet corrections, maker fixes (TLS3001, PL9823).
+- [x] Shared definitions; pixel decoders (`64a0d09`).
+- [x] issues.txt items; issues.txt deleted.
+- [x] Diffusive materials (`2c469a1`), corrections, LD45 merge.
+- [x] Adapters (`3b9da1a`); terminology lint no longer rewrites URLs (`a000cd1`).
+- [x] Duplicates merged; removed-entry map below.
+- [x] Input vocabulary (`df38d67`); field-catalog regressions fixed; controller inputs audit applied (`afe02c4`).
+- [ ] Pi Hat.
+- [ ] Remaining categories (see step 10).
 - [ ] Cross-cutting + docs.
 
 ## Open questions for the user
 
-(none yet)
+1. `controllers/dmx-core` (a network show controller) and `controllers/pixout-server` (an Art-Net recorder/player) drive no pixels (stream 4's finding, confirmed by the inputs audit). Recommendation: treat them as "players", the same bucket as the parked pattern-driver `kind` question (sequencer / live-VJ / player / ...): if pattern drivers get a `kind` field, move both there as hardware players; until then keep them in controllers with the false pixel outputs removed. Your call, since it's tied to the parked decision.
 
 ## Things not to do
 
@@ -105,5 +109,6 @@ Research findings with sources: [database-review-research.md](database-review-re
 | `controllers/m4-pi`                          | Controllers: "M4- Pi"                                               | `controllers/m4-port-pixel` (M4-PI)               |
 | `adapters/m8-port-pixel`                     | Adapters: "M8 Port Pixel"                                           | `controllers/m8-port-pixel` (M8-PI)               |
 | `controllers/standard-differential-receiver` | Controllers: "Standard Differential Receiver"                       | `level-converters/standard-differential-receiver` |
+| `adapters/espartstick-wled`                  | Adapters: "EspArtStick WLED" (same product as the controller)       | `controllers/espartstick`                         |
 
-Not merged yet: the ESPArtStick group (`adapters/espartstick`, `controllers/espartstick`, `adapters/espartstick-wled`) disagrees on output count (2 vs 6); research pending.
+`adapters/espartstick` stays: it is the earlier 2019 shield (no SD card), a different product.
