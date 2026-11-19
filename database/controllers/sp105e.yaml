@@ -18,4 +18,15 @@ outputs:
 power:
   voltage:
     max: 24
-price: 18.35
+price: 21.32
+price_source:
+  notes: Regular price; on sale $15.99 at retrieval. Elsewhere SuperLightingLED $12.98, LED Lighting Hut $30.00 (regular)
+  part: SP105E
+  retrieved: '2026-11-18'
+  url: https://www.btf-lighting.com/products/sp105e-spi-led-controller
+  vendor: BTF-Lighting
+sources:
+  status:
+    url: https://www.btf-lighting.com/products/sp105e-spi-led-controller
+    retrieved: '2026-11-18'
+    notes: 'in stock; also listed on sperll.com/product/82'

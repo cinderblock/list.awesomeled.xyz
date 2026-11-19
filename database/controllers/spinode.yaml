@@ -1,5 +1,5 @@
 name: SpiNode
-status: unknown
+status: active
 creator:
   name: Visual Productions
   url: https://www.visualproductions.nl
@@ -57,8 +57,18 @@ power:
     max: 20
 case:
   waterproof: IP20
-price: 349
+price: 600
+price_source:
+  notes: MSRP; GoKnight sells it at $450. Visual Productions publishes no price (dealer sales)
+  part: VPSpiNode
+  retrieved: '2026-11-18'
+  url: https://goknight.com/visual-productions-vpspinode-visual-productions-din-rail-4port-spi-ethernet-node/
+  vendor: GoKnight
 sources:
+  status:
+    url: https://www.visualproductions.nl/products/spinode/
+    retrieved: '2026-11-18'
+    notes: 'current product page; in stock at GoKnight, MSRP $600'
   outputs.protocols:
     url: https://api.visualproductions.nl/api/download/6814741389a6e093b3ef70a1
     retrieved: '2026-11-18'

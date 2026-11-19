@@ -1,5 +1,5 @@
 name: TwinPixx16
-status: unknown
+status: discontinued
 creator:
   name: DMX4All
   url: https://www.dmx4all.de
@@ -28,5 +28,18 @@ power:
 dead_links:
   - url: https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
     archive: https://web.archive.org/web/20210120183833/https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
-    checked: '2026-07-01'
-price: 399
+    checked: '2026-11-18'
+price:
+  amount: 339
+  currency: EUR
+price_source:
+  notes: Last list price (2021 Wayback capture of DMX4ALL's shop), incl. 19% German VAT
+  part: 99-3616
+  retrieved: '2021-01-20'
+  url: https://web.archive.org/web/20210120183833/https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
+  vendor: DMX4ALL
+sources:
+  status:
+    url: https://dmx4all.store/en/search?search=twinpixx
+    retrieved: '2026-11-18'
+    notes: '0 products found for twinpixx in the DMX4ALL store; old product URL 404; last shop capture 2021-01'

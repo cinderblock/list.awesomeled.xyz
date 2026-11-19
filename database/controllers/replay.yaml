@@ -38,12 +38,20 @@ power:
 data:
   storage:
     - type: SD
+dead_links:
+  - url: https://smartshow.lighting/replay/
+    archive: https://web.archive.org/web/20230129030107/https://smartshow.lighting/replay/
+    checked: '2026-11-18'
 price: 80
 software:
   works_with:
     - xLights
     - Jinx
 sources:
+  status:
+    url: https://smartshow.lighting/archive/
+    retrieved: '2026-11-18'
+    notes: 'REPLAY listed under Archived User Guides, gone from shop; /replay/ page 404'
   outputs.protocols:
     url: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
     retrieved: '2026-11-18'

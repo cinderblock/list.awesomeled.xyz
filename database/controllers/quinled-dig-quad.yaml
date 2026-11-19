@@ -35,7 +35,13 @@ features:
   - Onboard fuses with power distribution terminals
   - Reverse polarity protection
   - Available as DIY kit or pre-assembled
-price: 37.5
+price: 42.49
+price_source:
+  notes: Dig-Quad v4, pre-assembled, board antenna. External-antenna $44.49, Ethernet (LAN) $49.99, acrylic case +$4.50. DrZzs (US) $47.00
+  part: QLD-DQV4
+  retrieved: '2026-11-18'
+  url: https://shop.allnetchina.cn/products/quinled-dig-quad-v4-digital-led-controller
+  vendor: ALLNET China
 related:
   - type: related
     ref: controllers/quinled-dig-uno
@@ -52,6 +58,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://shop.allnetchina.cn/products/quinled-dig-quad-v4-digital-led-controller
+    retrieved: '2026-11-18'
+    notes: 'v4 in stock, $42.49'
   software.firmware:
     - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
       retrieved: '2026-11-18'

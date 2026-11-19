@@ -17,4 +17,9 @@ outputs:
     buffered: true
   clocked: selectable # supports both clocked and clockless pixels
 price: 50
+sources:
+  status:
+    url: https://github.com/vanvught/rpidmx512
+    retrieved: '2026-11-18'
+    notes: 'open-source firmware repository last pushed 2026-07-26; site still documents the 8-output pixel board'
 wled_compatible: false

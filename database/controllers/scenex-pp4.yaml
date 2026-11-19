@@ -1,5 +1,5 @@
 name: SceneX PP4
-status: active
+status: discontinued
 creator:
   name: German Light Products
   url: https://www.germanlightproducts.com
@@ -26,4 +26,15 @@ power:
 dead_links:
   - url: https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     archive: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
-    checked: '2026-07-01'
+    checked: '2026-11-18'
+price: 1249
+price_source:
+  notes: Last listed price, new unit, at UsedLighting/NewLighting (GLP never published a price); that listing now reads "no longer available"
+  retrieved: '2026-07-21'
+  url: https://web.archive.org/web/20260721043704/https://www.usedlighting.com/38474/new-scenex-lighting-led-driver-box-4-output?ref=product.nf
+  vendor: UsedLighting (NewLighting.com)
+sources:
+  status:
+    url: https://www.germanlightproducts.com/product-category/scenex-lighting/
+    retrieved: '2026-11-18'
+    notes: 'whole Scenex Lighting category now 404 and absent from GLP product sitemap; PP4 page 404; dealer listing no longer available'

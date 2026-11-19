@@ -27,8 +27,19 @@ features:
   - Built-in microphone for sound-reactive modes
   - Channel grouping (any combination of the 8 outputs)
   - Reverse-polarity protection
-price: 30
+price: 49.98
+price_source:
+  notes: Regular price, controller only (no triggers); on sale $36.98 at retrieval. BTF-Lighting $55.99 regular
+  part: CONFULL-SP608E
+  retrieved: '2026-11-18'
+  url: https://www.superlightingled.com/sp608e-spi-led-music-controller-8-output-compatible-bluetooth-app-rf-remote-p-3768.html
+  vendor: SuperLightingLED
 related:
   - type: related
     ref: controllers/sp801e
     notes: Same SPxxxE family; Wi-Fi Art-Net sibling
+sources:
+  status:
+    url: https://www.superlightingled.com/sp608e-spi-led-music-controller-8-output-compatible-bluetooth-app-rf-remote-p-3768.html
+    retrieved: '2026-11-18'
+    notes: 'in stock, $49.98 regular'

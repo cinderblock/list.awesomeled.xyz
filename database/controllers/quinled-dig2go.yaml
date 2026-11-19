@@ -32,6 +32,12 @@ power:
 core:
   family: ESP32
 price: 24.99
+price_source:
+  notes: Controller only (no PSU or strip). DrZzs (US) $28.00
+  part: QLED-D2G
+  retrieved: '2026-11-18'
+  url: https://shop.allnetchina.cn/products/quinled-dig2go-portable-digital-led-controller
+  vendor: ALLNET China
 related:
   - type: related
     ref: controllers/quinled-dig-uno
@@ -48,6 +54,10 @@ software:
     - xLights
     - FastLED
 sources:
+  status:
+    url: https://shop.allnetchina.cn/products/quinled-dig2go-portable-digital-led-controller
+    retrieved: '2026-11-18'
+    notes: 'in stock, $24.99'
   software.firmware:
     - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
       retrieved: '2026-11-18'

@@ -71,15 +71,26 @@ data:
 other_links:
   - https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 price:
-  - name: 1024 pixels
-    price: 299
+  - name: LITE (1024 pixels, 6 universes)
+    price:
+      amount: 300
+      currency: EUR
     pixels: 1024
-  - name: 2048 pixels
-    price: 449
+  - name: STANDARD (2048 pixels, 12 universes)
+    price:
+      amount: 450
+      currency: EUR
     pixels: 2048
-  - name: 4096 pixels
-    price: 599
+  - name: PRO (4096 pixels, 24 universes)
+    price:
+      amount: 600
+      currency: EUR
     pixels: 4096
+price_source:
+  notes: Excl. VAT. Tiers differ only by pixel/universe licence; each includes a 1-year LED Strip Studio software licence
+  retrieved: '2026-11-18'
+  url: https://www.ledstripstudio.com/shop/product/spi-matrix-pixel-led-decoder-for-art-net/
+  vendor: LED Strip Studio
 related:
   - type: variant
     ref: controllers/led-ethernet-controller-3
@@ -100,6 +111,10 @@ software:
     - ELM
     - LSS Remote
 sources:
+  status:
+    url: https://www.ledstripstudio.com/shop/product/spi-matrix-pixel-led-decoder-for-art-net/
+    retrieved: '2026-11-18'
+    notes: 'in stock, from EUR 300 excl. VAT'
   software.works_with:
     - url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
       retrieved: '2026-11-18'

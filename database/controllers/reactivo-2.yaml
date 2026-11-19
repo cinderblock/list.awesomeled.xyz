@@ -76,9 +76,11 @@ price:
   amount: 150
   currency: EUR
 price_source:
-  notes: OEM board, ex VAT; full kit EUR 230
-  retrieved: '2026-07-03'
-  vendor: ledstripstudio.com
+  notes: OEM edition (controller only, Art-Net-only licence), excl. VAT; full kit EUR 230; with LED Strip Studio software licence EUR 400 (OEM) / EUR 480 (kit). reactivo.lighting lists the kit at EUR 225
+  part: VP036
+  retrieved: '2026-11-18'
+  url: https://www.ledstripstudio.com/shop/product/reactivo-2-art-net-standalone-pixel-controller/
+  vendor: LED Strip Studio
 software:
   works_with:
     - LED Strip Studio Software
@@ -92,6 +94,10 @@ software:
     - LSS Remote
     - REACTIVO software
 sources:
+  status:
+    url: https://www.ledstripstudio.com/shop/product/reactivo-2-art-net-standalone-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: 'in stock, OEM EUR 150 excl. VAT'
   software.works_with:
     - url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
       retrieved: '2026-11-18'

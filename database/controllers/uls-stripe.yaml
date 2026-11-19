@@ -25,7 +25,19 @@ power:
     max: 12
   current:
     max: 18
-price: 330
+price:
+  amount: 199
+  currency: GBP
+price_source:
+  notes: Single unit, ex VAT; kit of 4 GBP 720
+  retrieved: '2026-11-18'
+  url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+  vendor: Ultra Light & Sound
 software:
   firmware:
     - FPP
+sources:
+  status:
+    url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: 'in stock, single unit GBP 199 ex VAT'

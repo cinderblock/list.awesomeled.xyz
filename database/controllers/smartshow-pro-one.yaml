@@ -40,7 +40,14 @@ outputs:
 power:
   voltage:
     max: 24
-price: 300
+price:
+  amount: 250
+  currency: GBP
+price_source:
+  notes: Regular price; on sale GBP 199 at retrieval. VAT treatment not stated
+  retrieved: '2026-11-18'
+  url: https://smartshow.lighting/product/smartshow-pro-one/
+  vendor: SmartShow UK
 related:
   - type: related
     ref: controllers/netpixel-one
@@ -58,6 +65,10 @@ software:
     - Jinx
     - XLights
 sources:
+  status:
+    url: https://smartshow.lighting/product/smartshow-pro-one/
+    retrieved: '2026-11-18'
+    notes: 'in stock, GBP 250 list (GBP 199 sale)'
   outputs.protocols:
     url: https://smartshow.lighting/wp-content/uploads/2025/10/Pro-ONE-User-Guide-FW-V2.0.pdf
     retrieved: '2026-11-18'

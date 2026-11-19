@@ -1,5 +1,5 @@
 name: SP102E
-status: active
+status: discontinued
 creator:
   name: Sperll
   url: https://sperll.com/
@@ -19,3 +19,8 @@ power:
   voltage:
     max: 12
 price: 13
+sources:
+  status:
+    url: https://sperll.com/
+    retrieved: '2026-11-18'
+    notes: 'SP102E absent from Sperll current product catalog (last product-page capture 2020-07-06); no current listing found'

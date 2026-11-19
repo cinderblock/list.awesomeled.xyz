@@ -26,8 +26,14 @@ data:
     - type: SD
 dead_links:
   - url: https://wallyslights.com/products/wallys-lights-wb1616-controller
-    checked: '2026-07-01'
-price: 189
+    archive: https://web.archive.org/web/20250805175734/https://wallyslights.com/products/wallys-lights-wb1616-controller
+    checked: '2026-11-18'
+price: 209
+price_source:
+  notes: Last list ("regular") price from the final Wayback capture of Wally's product page; shown on sale at $174.99 in every capture since 2022
+  retrieved: '2025-08-05'
+  url: https://web.archive.org/web/20250805175734/https://wallyslights.com/products/wallys-lights-wb1616-controller
+  vendor: Wally's Lights
 related:
   - type: replacement
     ref: controllers/wb48
@@ -36,6 +42,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://wallyslights.com/products/wallys-lights-wb1616-controller
+    retrieved: '2026-11-18'
+    notes: 'product page now 302s to the homepage and its Shopify .json is 404 (removed from catalog); last capture 2025-08-05'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
     retrieved: '2026-11-18'

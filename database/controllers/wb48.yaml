@@ -32,13 +32,23 @@ images:
   - file: wb48.webp
     source: https://wallyslights.com/products/wallys-lights-wb48-controller
     credit: Wally's Lights
-price: 159
+price: 199
+price_source:
+  notes: Regular price; shown on sale at $159 and sold out at retrieval
+  part: CB-WB48
+  retrieved: '2026-11-18'
+  url: https://wallyslights.com/products/wallys-lights-wb48-controller
+  vendor: Wally's Lights
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://wallyslights.com/products/wallys-lights-wb48-controller
+    retrieved: '2026-11-18'
+    notes: 'listed for sale but Sold out; $199 regular, $159 sale'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
     retrieved: '2026-11-18'

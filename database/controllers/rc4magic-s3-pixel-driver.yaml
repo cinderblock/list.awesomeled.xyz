@@ -2,8 +2,8 @@ name: RC4Magic S3 Pixel Driver
 status: active
 creator:
   name: Theatre Wireless
-  url: https://theatrewireless.com
-  page: https://theatrewireless.com/shop/rc4magic-s3/dmxpix/
+  url: https://rc4wireless.com
+  page: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
 notes: DMX pattern replay and keyframing onboard RC4 Wireless
 inputs:
   physical:
@@ -28,6 +28,17 @@ data:
     - type: Flash # onboard pattern/keyframe storage
 features:
   - Onboard DMX pattern replay and keyframing
-price: 399
+price: 640
+price_source:
+  notes: Regular price; on sale $544 at retrieval ("Save 15% on listed prices"). Includes a set of Phoenix connectors
+  part: RC4-M2400-PIX
+  retrieved: '2026-11-18'
+  url: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
+  vendor: RC4 Wireless
+sources:
+  status:
+    url: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
+    retrieved: '2026-11-18'
+    notes: 'in stock, $640 list ($544 sale)'
 technical_notes:
   - With data + clock pixels only 4 of the 8 outputs are available

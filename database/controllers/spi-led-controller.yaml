@@ -3,7 +3,7 @@ status: active
 creator:
   name: LED Strip Studio
   url: https://ledstripstudio.com
-  page: https://ledstripstudio.com/spi-led-controller/
+  page: https://www.ledstripstudio.com/products/spi_led_controller/
 notes: See tech specs PDF for full details
 inputs:
   physical:
@@ -73,15 +73,14 @@ data:
 datasheet:
   url: https://www.ledstripstudio.com/download/tech-specs/SPI_LED_Controller_tech_specs.pdf
 price:
-  - name: 1024 pixels
-    price: 299
-    pixels: 1024
-  - name: 2048 pixels
-    price: 449
-    pixels: 2048
-  - name: 4096 pixels
-    price: 599
-    pixels: 4096
+  amount: 170
+  currency: EUR
+price_source:
+  notes: Excl. VAT. Single 1024-pixel version is the only configuration sold (3-pack EUR 460). The previous 1024/2048/4096-pixel tiers were the SPI Matrix's
+  part: VP007
+  retrieved: '2026-11-18'
+  url: https://www.ledstripstudio.com/shop/product/spi-led-controller/
+  vendor: LED Strip Studio
 related:
   - type: related
     ref: controllers/led-ethernet-controller-3
@@ -93,6 +92,10 @@ software:
   works_with:
     - LED Strip Studio software
 sources:
+  status:
+    url: https://www.ledstripstudio.com/shop/product/spi-led-controller/
+    retrieved: '2026-11-18'
+    notes: 'in stock, EUR 170 excl. VAT'
   outputs.protocols:
     url: https://www.ledstripstudio.com/user_manual/lss_supported-IC-types_clients.pdf
     retrieved: '2026-11-18'

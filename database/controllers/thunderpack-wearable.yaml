@@ -32,6 +32,11 @@ features:
 other_links:
   - https://hackaday.io/project/161054-thunder-pack
 price: 40
+price_source:
+  notes: '"ThunderPack - Standard 18650" incl. free shipping, from the latest Wayback capture of the Tindie store; the live page blocks scripts (Cloudflare), so not re-read on 2026-11-18'
+  retrieved: '2026-05-03'
+  url: https://web.archive.org/web/20260503133025/https://www.tindie.com/stores/jeremy/
+  vendor: Tindie (Jeremy Gillick Labs)
 software:
   firmware:
     - Arduino

@@ -26,4 +26,15 @@ power:
 features:
   - Bluetooth app control
   - Music/spectrum mode (built-in microphone and AUX input)
-price: 24.88
+price: 16.98
+price_source:
+  notes: Controller only (Bluetooth "LED Chord" app or Wi-Fi Tuya version, same price). Elsewhere BTF-Lighting $26.65 and LED Lighting Hut $30.00 (regular)
+  part: CONFULL-SP107E
+  retrieved: '2026-11-18'
+  url: https://www.superlightingled.com/dc524v-sp107e-wireless-bluetooth-spi-music-spectrum-controller-for-addressable-ws2812b-sk6812-led-strip-lights-p-1715.html
+  vendor: SuperLightingLED
+sources:
+  status:
+    url: https://www.superlightingled.com/dc524v-sp107e-wireless-bluetooth-spi-music-spectrum-controller-for-addressable-ws2812b-sk6812-led-strip-lights-p-1715.html
+    retrieved: '2026-11-18'
+    notes: 'in stock, $16.98'

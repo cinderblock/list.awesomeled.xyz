@@ -1,9 +1,9 @@
 name: Qolorpix
-status: unknown
+status: active
 creator:
   name: City Theatrical
   url: https://www.citytheatrical.com
-  page: http://www.citytheatrical.com/Products/qolorpix-tape-controller-eight-output
+  page: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
 notes: DMX-controlled LED tape replay unit (model 5850, "QolorPIX Tape Controller, Eight Output")
 inputs:
   physical:
@@ -36,7 +36,18 @@ features:
   - Full RDM support (wired DMX and Multiverse)
   - 24 base effects with recordable presets
   - Test function and flicker finder
-price: 1500
+price: 2861.3
+price_source:
+  notes: MSRP (list); dealers sell at the $2,432.11 MAP price (SoundPro, Production Advantage, GoKnight). City Theatrical sells through dealers only
+  part: '5850'
+  retrieved: '2026-11-18'
+  url: https://soundpro.com/products/city-theatrical-5850
+  vendor: SoundPro (City Theatrical dealer)
+sources:
+  status:
+    url: https://proadv.com/city-theatrical-8-output-qolorpix-tape-controller/
+    retrieved: '2026-11-18'
+    notes: "in stock at a dealer, $2432.11 (MAP); still on City Theatrical's current product pages"
 technical_notes:
   - 600W total output; 85-264 VAC input via PowerCON
   - Max 10 m cable run to LED tape; up to 320 pixels per output

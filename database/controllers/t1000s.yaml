@@ -1,5 +1,5 @@
 name: T1000S
-status: unknown
+status: active
 vendors:
   - name: Amazon
     url: https://www.amazon.com
@@ -22,11 +22,21 @@ power:
 data:
   storage:
     - type: SD
-price: 28
+price: 29.98
+price_source:
+  notes: Regular price, controller only (no music add-on); on sale $21.98 at retrieval
+  part: T-1000S
+  retrieved: '2026-11-18'
+  url: https://www.superlightingled.com/dc524vmax-2048-pixelsoriginal-t1000s-series-programmable-pixel-module-full-color-controller-with-sd-card-for-programmable-ic-led-lighting-p-378.html
+  vendor: SuperLightingLED
 software:
   works_with:
     - LEDEdit
 sources:
+  status:
+    url: https://www.superlightingled.com/dc524vmax-2048-pixelsoriginal-t1000s-series-programmable-pixel-module-full-color-controller-with-sd-card-for-programmable-ic-led-lighting-p-378.html
+    retrieved: '2026-11-18'
+    notes: 'Original T-1000S in stock, $29.98 regular'
   software.works_with:
     url: https://derunledlights.com/t1000s-led-controller-with-sd-card
     retrieved: '2026-11-18'

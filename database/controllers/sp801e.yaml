@@ -24,15 +24,22 @@ features:
   - Two overlay effect layers (text, music, ...) with custom parameters
   - Matrix layout by rectangle or DXF import
   - OTA firmware updates
-price: 23
+price: 45.32
 price_source:
-  notes: sale price; regular $45
-  retrieved: '2026-07-02'
+  notes: Regular price; on sale $22.66 at retrieval. SuperLightingLED lists it at $28.99 (no sale)
+  part: SP801E
+  retrieved: '2026-11-18'
+  url: https://www.btf-lighting.com/products/sp801e-wifi-art-net-led-controller-led-matrix-panel-module-wireless-control-dc5-24v
   vendor: BTF-Lighting
 related:
   - type: related
     ref: controllers/sp608e
     notes: Same SPxxxE family; Bluetooth/RF music-controller sibling
+sources:
+  status:
+    url: https://www.btf-lighting.com/products/sp801e-wifi-art-net-led-controller-led-matrix-panel-module-wireless-control-dc5-24v
+    retrieved: '2026-11-18'
+    notes: 'in stock, $45.32 regular'
 technical_notes:
   - AP and STA Wi-Fi modes; BluFi provisioning over Bluetooth
   - 'Flash capacity: 128M (per spec sheet); working current 25-130 mA'

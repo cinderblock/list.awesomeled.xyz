@@ -30,4 +30,15 @@ power:
   voltage:
     min: 5
     max: 24
-price: 24.88
+price: 35
+price_source:
+  notes: Regular price; "Special Price" $29.50 at retrieval. Elsewhere BTF-Lighting $30.00 (regular), SuperLightingLED $21.99
+  part: LLH-SP108E
+  retrieved: '2026-11-18'
+  url: https://www.ledlightinghut.com/sp108e-wifi-spi-led-controller.html
+  vendor: LED Lighting Hut
+sources:
+  status:
+    url: https://www.ledlightinghut.com/sp108e-wifi-spi-led-controller.html
+    retrieved: '2026-11-18'
+    notes: 'In stock, $35 regular'
