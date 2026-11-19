@@ -6,7 +6,7 @@ common_applications:
 dead_links:
   - url: https://ehrgeiz.glp.de/en/products/accessories/eventcon
     archive: https://web.archive.org/web/20250908124909/https://ehrgeiz.glp.de/en/products/accessories/eventcon
-    checked: '2026-07-01'
+    checked: '2026-11-18'
 links:
   product: https://ehrgeiz.glp.de/en/products/accessories/eventcon
 mechanical:
