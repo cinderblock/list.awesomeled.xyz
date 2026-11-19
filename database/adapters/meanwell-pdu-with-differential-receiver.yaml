@@ -11,7 +11,10 @@ power:
     min: 5 # 5 V or 12-24 V, jumper-selectable
     max: 24
 diy_or_ots: OTS
-image: meanwell-pdu-with-differential-receiver.webp
+images:
+  - file: meanwell-pdu-with-differential-receiver.webp
+    source: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection/
+    credit: Wizard of Wire
 links:
   product: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection/
 parent: Meanwell 350w PSU

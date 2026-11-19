@@ -5,6 +5,10 @@ outputs:
   clocked: selectable
   connector: Screw terminals
 diy_or_ots: OTS
+images:
+  - file: plasma-2040.webp
+    source: https://shop.pimoroni.com/products/plasma-2040
+    credit: Pimoroni
 links:
   product: https://shop.pimoroni.com/products/plasma-2040
 parent: Rpi 2040

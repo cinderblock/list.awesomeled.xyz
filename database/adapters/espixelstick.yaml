@@ -12,6 +12,10 @@ outputs:
 power:
   voltage:
     max: 5
+images:
+  - file: espixelstick.webp
+    source: https://forkineye.com/espixelstick-v2-assembly-usage-manual/
+    credit: Forkineye (Shelby Merrick)
 links:
   product: https://www.amazon.com/ESPixelStick-Wireless-DMX-Pixel-Controller/dp/B072XT1V77/
 parent: ESP8266

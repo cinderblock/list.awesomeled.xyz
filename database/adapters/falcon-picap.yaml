@@ -13,6 +13,10 @@ dead_links:
     checked: '2026-11-18'
     notes: redirects to the store home page
 diy_or_ots: OTS
+images:
+  - file: falcon-picap.webp
+    source: https://web.archive.org/web/20240911200037/https://pixelcontroller.com/store/pixel-controllers/47-falcon-picap.html
+    credit: PixelController, LLC
 links:
   product: https://www.pixelcontroller.com/store/index.php?id_product=47
 parent: Raspberry Pi

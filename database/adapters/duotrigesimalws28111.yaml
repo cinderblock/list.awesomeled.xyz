@@ -10,6 +10,10 @@ outputs:
   clocked: false
   connector: Solder pads
 diy_or_ots: DIY
+images:
+  - file: duotrigesimalws28111.webp
+    source: https://www.tindie.com/products/amoscomputing/teensy-41-pixel-pusher/
+    credit: Amos Computing (Brian Amos)
 links:
   product: https://github.com/brianamos1/DuotrigesimalWS2811
 parent: Teensy 4.1

@@ -9,6 +9,10 @@ power:
   voltage:
     max: 12
 diy_or_ots: OTS
+images:
+  - file: rpi-28d.webp
+    source: https://www.hansonelectronics.com.au/product/rpi-28d/
+    credit: Hanson Electronics
 links:
   product: http://www.hansonelectronics.com.au/product/rpi-28d/
 parent: Raspberry Pi

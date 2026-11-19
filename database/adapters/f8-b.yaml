@@ -12,6 +12,10 @@ dead_links:
   - url: https://kulplights.com/product/f8-b/
     archive: https://web.archive.org/web/20211025190910/https://kulplights.com/product/f8-b/
     checked: '2026-11-18'
+images:
+  - file: f8-b.webp
+    source: https://web.archive.org/web/20211025190910/https://kulplights.com/product/f8-b/
+    credit: Kulp Lights
 links:
   product: https://kulplights.com/product/f8-b/
 parent: BeagleBone

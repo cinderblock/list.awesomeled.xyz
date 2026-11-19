@@ -7,6 +7,10 @@ outputs:
     DMX512: 1
   connector: XLR-3 / XLR-5
 diy_or_ots: OTS
+images:
+  - file: rasppi-isolated-dmx.webp
+    source: https://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+    credit: BitWizard
 links:
   product: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
 parent: Raspberry Pi

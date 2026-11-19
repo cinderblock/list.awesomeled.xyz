@@ -8,6 +8,10 @@ power:
   voltage:
     max: 5
 diy_or_ots: DIY
+images:
+  - file: spixels-board.webp
+    source: https://github.com/hzeller/spixels
+    credit: Henner Zeller
 links:
   product: https://github.com/hzeller/spixels
 parent: Raspberry Pi

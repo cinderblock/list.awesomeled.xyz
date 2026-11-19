@@ -11,6 +11,10 @@ power:
   current:
     max: 10
 diy_or_ots: DIY
+images:
+  - file: wled-wemos-shield.webp
+    source: https://github.com/srg74/WLED-wemos-shield
+    credit: SerKo (srg74)
 links:
   product: https://github.com/srg74/WLED-wemos-shield
 parent: Wemos D1 Mini (ESP32/ESP8266)

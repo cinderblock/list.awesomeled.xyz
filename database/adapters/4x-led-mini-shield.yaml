@@ -9,6 +9,10 @@ power:
   voltage:
     max: 5
 diy_or_ots: DIY
+images:
+  - file: '4x-led-mini-shield.webp'
+    source: https://www.tindie.com/products/jasoncoon/wemos-d1-mini-esp8266-level-shifter-mini-shield/
+    credit: Evil Genius Labs
 links:
   product: https://www.evilgeniuslabs.org/mini-wifi-led-controller
 parent: Wemos Dx Mini (ESP32/ESP8266)

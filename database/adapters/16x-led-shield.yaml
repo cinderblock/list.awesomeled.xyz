@@ -9,6 +9,10 @@ power:
   voltage:
     max: 5
 diy_or_ots: DIY
+images:
+  - file: '16x-led-shield.webp'
+    source: https://www.tindie.com/products/jasoncoon/16-output-nodemcu-esp32-wifi-ble-led-controller/
+    credit: Evil Genius Labs
 links:
   product: https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller
 parent: NodeMCU ESP32

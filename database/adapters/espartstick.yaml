@@ -11,6 +11,10 @@ dead_links:
     archive: https://web.archive.org/web/20191021235104/https://espartstick.ecwid.com/
     checked: '2026-11-18'
     notes: now redirects to espartstick.company.site, which says "The site is not available"
+images:
+  - file: espartstick.webp
+    source: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
+    credit: Microcyb
 links:
   product: https://espartstick.ecwid.com/
 parent: Wemos Dx Mini (ESP32/ESP8266)

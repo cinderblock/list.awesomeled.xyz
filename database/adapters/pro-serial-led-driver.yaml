@@ -10,6 +10,10 @@ power:
   current:
     max: 15
 diy_or_ots: OTS
+images:
+  - file: pro-serial-led-driver.webp
+    source: https://www.tindie.com/products/electromage/electromage-pro-8x-ws2812apa102-led-driver/
+    credit: ElectroMage
 links:
   product: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/
 other_links:

@@ -35,6 +35,10 @@ dead_links:
     archive: https://web.archive.org/web/20250621084308/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
     checked: '2026-11-18'
     notes: microcyb.com is live again but this Ecwid store URL redirects to its 404 page; archive is the same product (Ecwid ID 471859299) on Microcyb's EspArtStick store
+images:
+  - file: m8-port-pixel.webp
+    source: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+    credit: Microcyb
 price: 76.99
 price_source:
   notes: last list price (Wayback capture, in stock; $61.99 in April 2024); the product was gone from the store by February 2026

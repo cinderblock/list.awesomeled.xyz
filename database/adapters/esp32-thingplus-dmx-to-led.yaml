@@ -13,6 +13,11 @@ power:
   voltage:
     max: 12
 diy_or_ots: OTS
+images:
+  - file: esp32-thingplus-dmx-to-led.webp
+    source: https://www.sparkfun.com/products/15110
+    credit: SparkFun Electronics
+    license: CC BY-NC-SA 3.0
 links:
   product: https://www.sparkfun.com/sparkfun-esp32-thing-plus-dmx-to-led-shield.html
 parent: ESP32

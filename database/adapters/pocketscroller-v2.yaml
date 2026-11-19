@@ -11,6 +11,10 @@ power:
   voltage:
     max: 5
 diy_or_ots: DIY
+images:
+  - file: pocketscroller-v2.webp
+    source: https://kulplights.com/product/pocketscroller/
+    credit: Kulp Lights
 links:
   product: https://kulplights.com/product/pocketscroller/
 parent: PocketBeagle

@@ -8,6 +8,10 @@ dead_links:
   - url: https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
     archive: https://web.archive.org/web/20250716105223/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
     checked: '2026-11-18'
+images:
+  - file: pi-hat.webp
+    source: https://web.archive.org/web/20220717054556/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
+    credit: Microcyb
 links: {}
 parent: Yes
 price: 28.99

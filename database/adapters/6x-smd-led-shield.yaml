@@ -9,6 +9,10 @@ power:
   voltage:
     max: 5
 diy_or_ots: OTS
+images:
+  - file: '6x-smd-led-shield.webp'
+    source: https://www.tindie.com/products/jasoncoon/smd-6-output-wemos-d1-mini-wi-fi-led-controller/
+    credit: Evil Genius Labs
 links:
   product: https://www.tindie.com/products/19174/
 parent: Wemos Dx Mini (ESP32/ESP8266)

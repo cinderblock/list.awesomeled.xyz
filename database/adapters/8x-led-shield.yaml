@@ -9,6 +9,10 @@ power:
   voltage:
     max: 5
 diy_or_ots: DIY
+images:
+  - file: '8x-led-shield.webp'
+    source: https://www.tindie.com/products/jasoncoon/octo-level-shifter-featherwing/
+    credit: Evil Genius Labs
 links:
   product: https://www.evilgeniuslabs.org/level-shifter-featherwing
 parent: Adafruit Feather

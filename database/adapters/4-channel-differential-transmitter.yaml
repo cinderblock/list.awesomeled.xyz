@@ -10,6 +10,10 @@ power:
   voltage:
     max: 12
 diy_or_ots: OTS
+images:
+  - file: '4-channel-differential-transmitter.webp'
+    source: https://www.wizardofwire.com/product/data-to-differential-board/
+    credit: Wizard of Wire
 links:
   product: https://www.wizardofwire.com/product/data-to-differential-board/
 parent: Pixel Data

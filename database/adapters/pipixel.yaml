@@ -12,6 +12,10 @@ power:
   current:
     max: 5
 diy_or_ots: OTS
+images:
+  - file: pipixel.webp
+    source: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
+    credit: Maniacal Labs
 links:
   product: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
 parent: Raspberry Pi

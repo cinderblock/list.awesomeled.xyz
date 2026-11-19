@@ -9,6 +9,10 @@ power:
   voltage:
     max: 5
 diy_or_ots: OTS
+images:
+  - file: octows2811-adaptor.webp
+    source: https://www.pjrc.com/store/octo28_adaptor.html
+    credit: PJRC
 links:
   product: https://www.pjrc.com/store/octo28_adaptor.html
 parent: Teensy 3.2

@@ -20,6 +20,10 @@ dead_links:
     archive: https://web.archive.org/web/20250621071152/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
     checked: '2026-11-18'
 diy_or_ots: DIY
+images:
+  - file: espartstick-wled.webp
+    source: https://web.archive.org/web/20210803015116/https://espartstick.ecwid.com/5v-12V-SD-Card-WiFi-Enhanced-Edition-WLED-pre-Installed-p170368862
+    credit: Microcyb
 links:
   product: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller/p/170368862/category=0
 parent: Wemos D1 Mini (ESP32/ESP8266)
