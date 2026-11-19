@@ -133,6 +133,8 @@ power:
 data:
   storage:
     - type: microSD
+datasheet:
+  url: https://cdn.sanity.io/files/3y31615s/production/b9a02c7c76b3772eb138b375c6957d9dd52573c3.pdf
 images:
   - file: pixlite-e4-s-mk3.webp
     source: https://www.advateklighting.com/products/e4-s-mk3

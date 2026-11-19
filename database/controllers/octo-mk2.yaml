@@ -122,6 +122,12 @@ outputs:
 power:
   voltage:
     max: 60
+datasheet:
+  url: https://cdn.enttec.com/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
+  sources:
+    - url: https://cdn.enttec.com.cn/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
+      host: manufacturer
+      notes: ENTTEC China CDN mirror
 images:
   - file: octo-mk2.webp
     source: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/

@@ -33,6 +33,8 @@ data:
   storage:
     - type: microSD
       max_size: 32 # FAT32
+datasheet:
+  url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-DMX.pdf # user manual v1.4 (German); has a Technische Daten section
 images:
   - file: led-player-dmx.webp
     source: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen

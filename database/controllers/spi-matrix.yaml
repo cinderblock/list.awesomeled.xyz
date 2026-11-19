@@ -70,6 +70,12 @@ power:
 data:
   storage:
     - type: microSD
+datasheet:
+  url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI-MATRIX_tech.specs_.pdf # tech specs sheet
+  sources:
+    - url: https://www.ledstripstudio.com/download/tech-specs/SPI_MATRIX_tech.specs.pdf
+      host: manufacturer
+      notes: older revision (6 Art-Net universes per output, 24 total; the current sheet says 7 and 28)
 images:
   - file: spi-matrix.webp
     source: https://www.ledstripstudio.com/products/spi_matrix/

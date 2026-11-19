@@ -35,6 +35,8 @@ outputs:
 power:
   voltage:
     max: 24
+datasheet:
+  url: https://www.boutique-electroconcept.com/media/Productattachments//d/m/dmx_to_ws2812.pdf # user manual (French); has a spec section
 images:
   - file: dmx-to-led-strip.webp
     source: https://www.boutique-electroconcept.com/carte-dmx-en-signal-pour-ledstrip-digital-ws2812-et-compatible-a-souder.html

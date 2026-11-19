@@ -67,6 +67,8 @@ power:
     max: 24
   current:
     max: 30
+datasheet:
+  url: https://cdn.sanity.io/files/3y31615s/production/d8011717ad0caaa0a0a0e7f096d64f57714d936c.pdf
 dead_links:
   - url: https://www.advateklighting.com/pixlite-t8-s-mk2
     archive: https://web.archive.org/web/20220118111855/https://www.advateklights.com/pixlite-t8-s-mk2

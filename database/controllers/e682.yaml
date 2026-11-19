@@ -56,6 +56,8 @@ power:
     max: 24
   current:
     max: 64
+datasheet:
+  url: https://sandevices.com/wp-content/uploads/2017/11/E682_Operating_Manual.pdf # user manual (V4 firmware); has a Specifications section
 images:
   - file: e682.webp
     source: https://sandevices.com/product/e682-pixel-controller-assembled-and-tested/

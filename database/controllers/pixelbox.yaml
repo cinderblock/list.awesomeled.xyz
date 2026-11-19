@@ -34,6 +34,8 @@ data:
   fps: 30 # 15-30 FPS depending on pixel chip
   storage:
     - type: USB
+datasheet:
+  url: https://www.lumikit.com.br/help.br/LumikitPixelBOXDMX(br).pdf # user manual (Portuguese); has a spec list
 images:
   - file: pixelbox.webp
     source: https://lumikit.com.br/pixelbox

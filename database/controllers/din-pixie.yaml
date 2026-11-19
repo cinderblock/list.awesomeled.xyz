@@ -129,6 +129,12 @@ data:
     - type: flash
       features:
         - non-removable
+datasheet:
+  url: https://cdn.enttec.com/pdf/assets/73539/73539_DIN_PIXIE_DATASHEET.pdf
+  sources:
+    - url: https://cdn.enttec.com.cn/pdf/assets/73539/73539_DIN_PIXIE_DATASHEET.pdf
+      host: manufacturer
+      notes: ENTTEC China CDN mirror
 images:
   - file: din-pixie.webp
     source: https://www.enttec.com.au/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/

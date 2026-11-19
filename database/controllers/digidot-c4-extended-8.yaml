@@ -125,6 +125,8 @@ data:
   storage:
     - type: microSD
       max_size: 8
+datasheet:
+  url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270 # "C4 Extended Specification Sheet" (PDF download)
 features:
   - Converts Art-Net/DMX to 50+ pixel protocols (single-wire and clocked)
   - Art-Net and DMX recording, playback, and triggering

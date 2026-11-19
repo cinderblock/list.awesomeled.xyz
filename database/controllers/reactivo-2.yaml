@@ -66,6 +66,11 @@ power:
 data:
   storage:
     - type: microSD
+datasheet:
+  url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/reactivo-2_datasheet.pdf
+  sources:
+    - url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/reactivo-2_datasheet.pdf
+      host: distributor
 dead_links:
   - url: https://ledstripstudio.com/gaming/
     archive: https://web.archive.org/web/20250622130840/https://www.ledstripstudio.com/gaming/

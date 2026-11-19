@@ -67,6 +67,8 @@ outputs:
 power:
   voltage:
     max: 12
+datasheet:
+  url: https://cdn.sanity.io/files/3y31615s/production/50fe327df6dea73913628917e9e890411452b23b.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
 images:
   - file: pixlite-16-plug-and-play-mk2.webp
     source: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2

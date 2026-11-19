@@ -43,6 +43,8 @@ power:
     max: 48
 case:
   waterproof: IP20
+datasheet:
+  url: https://web.archive.org/web/20211203093448id_/https://dol2kh495zr52.cloudfront.net/pdf/datasheets/200130_PX1-8D_Datasheet.pdf
 dead_links:
   - url: https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
     archive: https://web.archive.org/web/20260217143850/https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product

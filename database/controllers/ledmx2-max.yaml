@@ -80,6 +80,11 @@ power:
 data:
   storage:
     - type: microSD
+datasheet:
+  url: https://dmxking.com/downloads/LeDMX2%20MAX%20User%20Manual%20(EN).pdf # user manual; has a Technical Specifications section
+  sources:
+    - url: https://dmxking.tv/downloads/LeDMX2%20MAX%20User%20Manual%20(EN).pdf
+      host: manufacturer
 images:
   - file: ledmx2-max.webp
     source: https://dmxking.tv/max-series/ledmx2-max

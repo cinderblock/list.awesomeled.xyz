@@ -24,6 +24,8 @@ outputs:
     max_per_output: 960 # 1920 total across 2 outputs
 case:
   waterproof: IP20
+datasheet:
+  url: https://www.chauvetprofessional.com/wp-content/uploads/pdf/en/EPIXFLEXDRIVE.pdf # spec sheet
 images:
   - file: epix-flex-drive.webp
     source: https://chauvetprofessional.com/product/epix-flex-drive/

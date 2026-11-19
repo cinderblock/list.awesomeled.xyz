@@ -70,6 +70,8 @@ power:
     max: 24
   current:
     max: 64
+datasheet:
+  url: https://cdn.sanity.io/files/3y31615s/production/3e65b12987f43b2b7cd69792a2617efa4433cc42.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
 price: 189.95
 related:
   - type: variant

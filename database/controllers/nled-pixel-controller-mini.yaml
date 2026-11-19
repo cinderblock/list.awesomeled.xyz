@@ -31,6 +31,8 @@ outputs:
 power:
   voltage:
     max: 25
+datasheet:
+  url: https://www.nledshop.com/downloads/datasheets/nled-pixel-controller-mini-v4a.pdf
 images:
   - file: nled-pixel-controller-mini.webp
     source: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html

@@ -29,6 +29,8 @@ outputs:
     - WS2813
     - CS8812
     - WS2815
+datasheet:
+  url: https://web.archive.org/web/20200929142224id_/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/LED_controller_spec_sheet.pdf?mtime=20200509143456&focal=none # spec sheet; the live bucket now returns 403
 dead_links:
   - url: https://www.protopixel.io/pricing
     archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing

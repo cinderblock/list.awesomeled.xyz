@@ -131,6 +131,12 @@ outputs:
     - WS2821
     - WS2822
     - WS2851
+datasheet:
+  url: https://web.archive.org/web/20240617044053id_/https://www.deskontrol.net/descargas/manuales/deskontroller-lite-datasheet.pdf
+  sources:
+    - url: https://web.archive.org/web/20210416131156id_/https://www.deskontrol.net/descargas/manuales/deskontroller-lite-datasheet.pdf
+      host: manufacturer
+      notes: Jan 2021 revision (Wayback capture)
 dead_links:
   - url: https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
     archive: https://web.archive.org/web/20210924031804/https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html

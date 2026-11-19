@@ -35,6 +35,8 @@ data:
   fps: 30 # 30fps in streaming
   storage:
     - type: microSD
+datasheet:
+  url: https://web.archive.org/web/20200929124958id_/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/1ch_wifi_spec_sheet_v101.pdf?mtime=20200811193443&focal=none # spec sheet; the live bucket now returns 403
 dead_links:
   - url: https://www.protopixel.io/pricing
     archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing

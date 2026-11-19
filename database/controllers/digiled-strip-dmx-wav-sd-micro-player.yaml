@@ -25,6 +25,8 @@ power:
 data:
   storage:
     - type: microSD # "Micro SD player" per Electroconcept product page
+datasheet:
+  url: https://www.boutique-electroconcept.com/media/Productattachments//m/i/micro_player_sd.pdf # user manual (French); has a spec section
 images:
   - file: digiled-strip-dmx-wav-sd-micro-player.webp
     source: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html

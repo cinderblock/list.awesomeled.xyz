@@ -45,6 +45,8 @@ outputs:
 power:
   voltage:
     max: 24
+datasheet:
+  url: https://smartshow.lighting/wp-content/uploads/2025/10/Pro-ONE-Brochure-DataSheet-V2.pdf
 images:
   - file: smartshow-pro-one.webp
     source: https://smartshow.lighting/product/smartshow-pro-one/

@@ -72,6 +72,8 @@ power:
     max: 30
 case:
   waterproof: IP65
+datasheet:
+  url: https://cdn.sanity.io/files/3y31615s/production/487c91bb8db95d317405bec8907856ca06591aa4.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
 images:
   - file: pixlite-4-rugged-mk2.webp
     source: https://www.advateklighting.com/products/shop/pixlite-4-rugged-mk2

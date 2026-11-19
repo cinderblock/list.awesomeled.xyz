@@ -33,6 +33,8 @@ data:
   storage:
     - type: microSD
     - type: USB
+datasheet:
+  url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-L_Info.pdf # product info sheet (German) with Technische Daten
 images:
   - file: led-player-l.webp
     source: https://www.diamex-shop.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs

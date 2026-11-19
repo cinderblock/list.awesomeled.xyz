@@ -133,6 +133,8 @@ power:
 data:
   storage:
     - type: microSD
+datasheet:
+  url: https://cdn.sanity.io/files/3y31615s/production/97662dddc82a6b09df556a62f5f60b76147418ef.pdf
 images:
   - file: pixlite-t8-s-mk3.webp
     source: https://www.advateklighting.com/products/t8-s-mk3

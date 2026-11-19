@@ -67,6 +67,12 @@ power:
 data:
   storage:
     - type: flash
+datasheet:
+  url: https://www.nledshop.com/downloads/datasheets/nled-pixel-controller-electron.pdf
+  sources:
+    - url: https://www.nledshop.com/downloads/datasheets/nled-pixel-controller-electron-v1c.pdf
+      host: manufacturer
+      notes: older datasheet for firmware version 1 (2016)
 features:
   - 3-axis accelerometer
   - Optional WiFi/Bluetooth add-on modules

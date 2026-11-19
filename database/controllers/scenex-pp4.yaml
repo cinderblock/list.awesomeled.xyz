@@ -39,6 +39,8 @@ power:
     max: 5
   current:
     max: 40
+datasheet:
+  url: https://www.germanlightproducts.com/wp-content/uploads/2016/01/PP4-Controller-Operating-Manual_08_2015.pdf # user manual; has a Specifications section
 dead_links:
   - url: https://www.germanlightproducts.com/product-category/scenex-lighting/
     archive: https://web.archive.org/web/20251010040221/https://www.germanlightproducts.com/product-category/scenex-lighting/

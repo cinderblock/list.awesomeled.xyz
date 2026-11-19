@@ -36,6 +36,8 @@ power:
 data:
   storage:
     - type: microSD
+datasheet:
+  url: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf # user manual ("Installation & Use"); has a Specifications section
 dead_links:
   - url: https://smartshow.lighting/replay/
     archive: https://web.archive.org/web/20230129030107/https://smartshow.lighting/replay/

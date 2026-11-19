@@ -140,6 +140,8 @@ data:
   formats:
     - RGB
     - RGBW
+datasheet:
+  url: https://deskontroller.com/download/deskontroller-lite-V3-datasheet.pdf # covers the whole LITE V3 family (32U-192U)
 images:
   - file: deskontroller-lite-v3-96.webp
     source: https://www.deskontrol.net/en/art-net-led-controllers/381-deskontroller-lite-v3-96-artnet-universes.html

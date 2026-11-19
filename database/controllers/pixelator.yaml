@@ -40,6 +40,8 @@ outputs:
     - UCS8903
     - UCS8904
     - SPXL
+datasheet:
+  url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
 dead_links:
   - url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
     archive: https://web.archive.org/web/20220629132059/https://www.enttec.co.uk/product/controls/addressable-led-pixel-control/24-port-ethernet-pixel-controller/

@@ -139,6 +139,8 @@ outputs:
     - CS8812B
     - UCS2905
     - WS2805
+datasheet:
+  url: https://deskontroller.com/download/deskontroller-lite-V3-datasheet.pdf # covers the whole LITE V3 family (32U-192U)
 features:
   - Web-based (browser) configuration UI
   - Supports over 100 pixel IC families (RGB and RGBW)

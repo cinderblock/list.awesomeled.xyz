@@ -96,6 +96,8 @@ power:
   voltage:
     min: 5
     max: 24
+datasheet:
+  url: https://www.madrix.com/download/mhm/documentation/NEBULA/Datasheet_MADRIX_NEBULA.pdf
 features:
   - TTL pixel-data output (12x 512 channels across two ports)
   - Powers LEDs directly through screw terminals (6A max per port)

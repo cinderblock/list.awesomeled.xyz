@@ -33,6 +33,8 @@ case:
 data:
   storage:
     - type: microSD # firmware updates via micro-SD card
+datasheet:
+  url: https://www.citytheatrical.com/docs/default-source/cut-sheets/5850-qolorpix-tape-controller.pdf # cut sheet (spec sheet)
 features:
   - Integrated power supply (no external PSU)
   - Multiverse wireless DMX receiver

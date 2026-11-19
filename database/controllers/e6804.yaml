@@ -41,6 +41,8 @@ power:
     max: 12
   current:
     max: 25
+datasheet:
+  url: https://sandevices.com/wp-content/uploads/2017/11/E6804_Operating_Manual.pdf # user manual; has a Specifications section
 images:
   - file: e6804.webp
     source: https://sandevices.com/product/e6804-pixel-controller-assembled-tested/

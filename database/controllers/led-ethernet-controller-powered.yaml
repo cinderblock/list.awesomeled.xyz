@@ -40,7 +40,7 @@ data:
   storage:
     - type: microSD
 datasheet:
-  url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf # tech specs sheet
 dead_links:
   - url: https://ledstripstudio.com/shop/product/led-ethernet-controller-powered/
     archive: https://web.archive.org/web/20231202085638/https://www.ledstripstudio.com/shop/product/led-ethernet-controller-powered/

@@ -8,6 +8,8 @@ outputs:
 power:
   voltage:
     max: 12
+datasheet:
+  url: https://www.hansonelectronics.com.au/wp-content/uploads/2018/01/rPi-28D-user-manual-1.1.pdf # user manual (rev 1.1); feature/spec list on page 1
 diy_or_ots: OTS
 images:
   - file: rpi-28d.webp

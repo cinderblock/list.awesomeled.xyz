@@ -75,7 +75,14 @@ data:
     - type: microSD
       max_size: 32 # FAT32
 datasheet:
-  url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+  url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/LEC_3_tech_specs.pdf # tech specs sheet
+  sources:
+    - url: https://www.ledstripstudio.com/download/tech-specs/LEC_3_tech_specs.pdf
+      host: manufacturer
+      notes: older site path, same file
+    - url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+      host: manufacturer
+      notes: 46-page hardware manual
 images:
   - file: led-ethernet-controller-3.webp
     source: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/

@@ -72,6 +72,8 @@ power:
     max: 24
   current:
     max: 30
+datasheet:
+  url: https://cdn.sanity.io/files/3y31615s/production/2eb3c09cb46ddc211c9a746c38a4c0c479491c4f.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
 images:
   - file: pixlite-4-mk2-eco.webp
     source: https://cdn.sanity.io/files/3y31615s/production/2eb3c09cb46ddc211c9a746c38a4c0c479491c4f.pdf

@@ -31,6 +31,8 @@ power:
 case:
   dimensions: 90x40x20mm
   waterproof: IP20
+datasheet:
+  url: https://assets.centryngroup.com/dl/files/FLE768__DL__001.pdf # spec sheet, linked from Elation's product page
 images:
   - file: flex-pixel-driver.webp
     source: https://www.elationlighting.com/products/flex-pixel-driver-1

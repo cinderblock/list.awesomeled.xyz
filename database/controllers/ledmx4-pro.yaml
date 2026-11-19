@@ -67,6 +67,11 @@ power:
 data:
   storage:
     - type: microSD
+datasheet:
+  url: https://dmxking.com/downloads/LeDMX4%20PRO%20User%20Manual%20(EN).pdf # user manual; has a Technical Specifications section
+  sources:
+    - url: https://dmxking.tv/downloads/LeDMX4%20PRO%20User%20Manual%20(EN).pdf
+      host: manufacturer
 images:
   - file: ledmx4-pro.webp
     source: https://web.archive.org/web/20251028133025/https://dmxking.com/led-pixel-control/ledmx4-pro

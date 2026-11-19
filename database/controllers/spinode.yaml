@@ -62,6 +62,12 @@ power:
     max: 20
 case:
   waterproof: IP20
+datasheet:
+  url: https://api.visualproductions.nl/api/download/67f4e47389a6e093b3b34507 # "SpiNode Datasheet" rev 4 from the product page's Downloads list
+  sources:
+    - url: https://goknight.com/content/documentation/datasheet_spinode_rev4%20(1).pdf
+      host: distributor
+      notes: same rev 4 file
 images:
   - file: spinode.webp
     source: https://www.visualproductions.nl/products/spinode/

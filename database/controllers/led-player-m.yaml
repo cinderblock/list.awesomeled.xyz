@@ -35,6 +35,12 @@ power:
 data:
   storage:
     - type: microSD
+datasheet:
+  url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-M_Anleitung.pdf # user manual (German); has a Technische Daten section
+  sources:
+    - url: https://media.elv.com/file/121060_led_player_um.pdf
+      host: distributor
+      notes: ELV copy of the 2015 V1.0 manual
 images:
   - file: led-player-m.webp
     source: https://web.archive.org/web/20230603144022/https://www.led-genial.de/LED-Player-M-fuer-Stripes-und-Panels-bis-2048-LEDs
