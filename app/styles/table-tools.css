@@ -4,6 +4,20 @@
    ========================================================================== */
 
 /* ==========================================================================
+   URL state before hydration
+   The prerendered HTML is the page without its query string. Until React
+   applies the URL, content that the query changes is held back (space kept,
+   so nothing jumps) instead of flashing the unfiltered version.
+   ========================================================================== */
+html[data-url-state='pending'] .data-table-container tbody,
+html[data-url-state='pending'] .data-table-count,
+html[data-url-state='pending'] .compare-empty,
+html[data-url-state='pending'] .compare-page .page-description,
+html[data-url-state='pending'] .search-page-status {
+  visibility: hidden;
+}
+
+/* ==========================================================================
    Toolbar
    ========================================================================== */
 .data-table-tools {

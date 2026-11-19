@@ -119,7 +119,9 @@ export function DataTable({ data, fields, category }: DataTableProps) {
   const categoryId = category.id;
   const categoryPath = category.path;
   // URL state with writes that apply in the same frame (see useTableParams)
-  const [searchParams, updateParams] = useTableParams();
+  // `urlReady` is false while hydrating: the prerendered table has no query
+  // string, so nothing here may act on the URL until it turns true
+  const [searchParams, updateParams, urlReady] = useTableParams();
   const navigate = useNavigate();
 
   // ---- Columns -------------------------------------------------------------
@@ -167,7 +169,7 @@ export function DataTable({ data, fields, category }: DataTableProps) {
   // search, and the saved column layout. A URL that already carries state wins.
   const hasRestoredRef = useRef(false);
   useEffect(() => {
-    if (hasRestoredRef.current) return;
+    if (!urlReady || hasRestoredRef.current) return;
     hasRestoredRef.current = true;
 
     const restore: Record<string, string> = {};
@@ -186,12 +188,12 @@ export function DataTable({ data, fields, category }: DataTableProps) {
       if (cols) restore.cols = cols;
     }
     if (Object.keys(restore).length > 0) updateParams(restore, true);
-  }, [categoryId, searchParams, defaultKeys, isKnown, updateParams]);
+  }, [urlReady, categoryId, searchParams, defaultKeys, isKnown, updateParams]);
 
   // Remember filters / sort / search whenever they change
   useEffect(() => {
-    saveFiltersToStorage(categoryId, searchParams);
-  }, [categoryId, searchParams]);
+    if (urlReady) saveFiltersToStorage(categoryId, searchParams);
+  }, [urlReady, categoryId, searchParams]);
 
   // ---- Column layout -------------------------------------------------------
   const setColumns = useCallback(

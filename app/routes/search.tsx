@@ -2,6 +2,7 @@ import { Search as SearchIcon } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { PageWrapper } from '~/components/layout/PageWrapper';
+import { useHydrated } from '~/hooks/useHydrated';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { resultPath, SearchResult } from '~/components/search/SearchResult';
 import { searchIndex, type SearchHit } from '~/lib/search';
@@ -31,7 +32,9 @@ export function meta(_args: Route.MetaArgs) {
  */
 export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const urlQuery = searchParams.get('q') ?? '';
+  // The page is prerendered without a query: hydrate that way, then read ?q=
+  const hydrated = useHydrated();
+  const urlQuery = hydrated ? (searchParams.get('q') ?? '') : '';
   const [text, setText] = useState(urlQuery);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { index, failed } = useSearchIndex(true);

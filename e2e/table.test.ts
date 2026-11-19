@@ -63,12 +63,15 @@ test.describe('Sorting', () => {
   test('missing values sort last in both directions', async ({ page }) => {
     await gotoReady(page, '/controllers?sort=price.');
     const texts = await columnTexts(page, 'price');
-    // "-" and unpriceable labels ("unknown", "varies") carry no number
-    const isBlank = (t: string) => !/\d/.test(t);
-    const firstBlank = texts.findIndex(isBlank);
-    // every row after the first blank is blank too
+    // Descending, yet every row without a price still comes after every
+    // priced row. (Prices in a currency with no exchange rate on file cannot
+    // be ordered either and sit with the blanks, so only "-" is checked.)
+    const firstBlank = texts.indexOf('-');
+    const priced = texts.map(money);
+    let lastPriced = priced.length - 1;
+    while (lastPriced >= 0 && priced[lastPriced] === null) lastPriced--;
     expect(firstBlank).toBeGreaterThan(0);
-    expect(texts.slice(firstBlank).every(isBlank)).toBe(true);
+    expect(lastPriced).toBeLessThan(firstBlank);
   });
 });
 
