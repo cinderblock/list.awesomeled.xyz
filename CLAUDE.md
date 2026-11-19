@@ -29,7 +29,9 @@ Entry pages and tables show "Reviewed" from each YAML file's last git commit —
 it means "when this row was last specifically checked for accuracy". Any commit
 that touches rows WITHOUT reviewing their data MUST have its hash added to
 `IGNORED_COMMITS` in `app/lib/data.ts` in a follow-up commit. Keep structural
-commits and per-entry data commits separate.
+commits and per-entry data commits separate. (Commits whose hash isn't known in
+advance — CI bots such as the datasheet mirror — carry a
+`Not-A-Review: <reason>` trailer instead, which `app/lib/data.ts` honors.)
 
 The test: did someone verify this row's facts? Ignore migrations, key
 reordering, prettier passes, restructures, link-liveness sweeps, and batch
