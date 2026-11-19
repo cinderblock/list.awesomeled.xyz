@@ -3,7 +3,7 @@ status: unknown
 creator:
   name: computergeek1507
   url: https://github.com/computergeek1507/PB_16
-  page: http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controlleri
+  page: http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controller
 notes: Open source DIY FPP pixel controller cape for the BeagleBone Black.
 inputs:
   physical:
@@ -26,6 +26,11 @@ power:
     max: 24
   current:
     max: 40
+dead_links:
+  - url: http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controller
+    archive: https://web.archive.org/web/20230604010133/http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controller
+    checked: '2026-11-18'
+    notes: The DIYC forums are gone; every forum URL now returns 404
 price: 130
 software:
   firmware:
