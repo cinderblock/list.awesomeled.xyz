@@ -8,14 +8,19 @@ fixed with the commit hash when done. Workstreams: see
 
 ## Same product in two categories
 
+**in progress — database review (stream 2, `ws/database-review`)**: keep/merge
+calls and the merges, recorded in [plans/database-review.md](plans/database-review.md)
+with the sheet row each removed entry came from (for the parity audit).
+
 Seen by cross-links (stream 4). These entries describe one product twice:
 
 - `adapters/quinled-dig-quad` and `controllers/quinled-dig-quad`
 - `adapters/quinled-dig-uno` and `controllers/quinled-dig-uno`
 - `adapters/espartstick` and `controllers/espartstick`
-- `adapters/m4-port-pixel` and `controllers/m4-port-pixel`
+- `adapters/m4-port-pixel` and `controllers/m4-port-pixel` (and `controllers/m4-pi`: Microcyb M4-PI, a third copy)
 - `adapters/m8-port-pixel` and `controllers/m8-port-pixel`
 - `controllers/standard-differential-receiver` and `level-converters/standard-differential-receiver`
+- `diffusive-materials/silicone-sealant` carries Plastazote LD45 foam data (link, XLPE, sizes), duplicating `diffusive-materials/ld45-plaztazote`
 
 Why it matters: specs drift apart, and compatibility links and filters show the
 product twice. Needs a keep/merge call (parity or standardization stream).
@@ -59,3 +64,38 @@ their card, and `sources` provenance renders under the field it documents.
 Next from stream 4: compatibility columns and "compatible with X" filters,
 added through `app/lib/columns.tsx` only (no `DataTable` / `ColumnFilter`
 internals). Shout here if that collides with the browse-UX work.
+
+## Schema changes from database review (stream 2, FYI)
+
+Validation (`bun run validate`, now also in CI) rejects the old shapes, so a
+rebased branch with entries in them fails until they're converted. Each
+migration in `scripts/migrations/` is re-runnable (no-op on migrated data).
+Plan and field-by-field detail: [plans/database-review.md](plans/database-review.md).
+
+- **Packages**: pixels' and pixel ICs' `physical.package_size` /
+  `package_sizes` → one `physical.packages` array (`SOP-8`, `QFN-16`, `5050`,
+  `5mm`; common.json `ic_package` / `led_package`). Pixel ICs lost `pin_count`
+  (the package names carry it).
+- **Shared shapes**: controllers' `outputs` / `power` now live in common.json
+  (`pixel_outputs`, `power_input`), with `clocked_support`, `output_connector`
+  and `diy_or_ots`. `outputs.clocked: true` is no longer accepted (use
+  `always` or `selectable`).
+- **Pixel decoders**: `outputs.{count, types, connector}` replace
+  `max_channels` / `pixel_types` / `connectors` / `description`; the old
+  free-text description moved into `notes`. For cross-links (stream 4): that
+  migration mapped four connector strings to refs (`mtsb-combicon` for
+  controller-changeover, pixel-2-things-servo and PixFog; `xlr-3` for Pixel 2
+  DMX), following the controllers precedent. Adapters' connector strings will
+  be carried over as strings only, and `parent` is left untouched for your
+  host-board links.
+- **Next** (not landed yet): adapters' outputs/power adopt the shared shapes
+  (`pixel_types` → `outputs.clocked`); diffusive materials' `material_type` →
+  `materials` list and boolean `flexible`.
+
+## Price tiers: SKU squeezed into a vertical letter stack
+
+On narrow entry-page cards the price-tier SKU column wraps one character per
+line (seen on `/pixel-ics/ws2811`: "W S 2 8 11" beside each tier price).
+Repro: open any pixel IC with `price` tiers + `sku` at a 1600 px wide window.
+Probably a flex/grid min-width issue in the price-tier renderer. For prices
+(stream 6) or browse UX (stream 7).
