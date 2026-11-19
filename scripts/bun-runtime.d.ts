@@ -17,6 +17,11 @@ declare module 'bun' {
       data: Uint8Array | ArrayBuffer | string,
       options?: { type?: string }
     ): Promise<number>;
+    list(input?: { prefix?: string; continuationToken?: string; maxKeys?: number }): Promise<{
+      contents?: { key: string; size?: number }[];
+      isTruncated?: boolean;
+      nextContinuationToken?: string;
+    }>;
   }
 }
 

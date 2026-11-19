@@ -77,59 +77,99 @@ describe('insertMirrorBlock', () => {
   });
 });
 
-describe('mirror-datasheets CLI (mock R2)', () => {
-  test('uploads, falls back to sources, writes valid mirror blocks', async () => {
-    const pdf = Buffer.from('%PDF-1.4\n% test datasheet\n%%EOF\n');
-    const sha = createHash('sha256').update(pdf).digest('hex');
+const PDF = Buffer.from('%PDF-1.4\n% test datasheet\n%%EOF\n');
+const SHA = createHash('sha256').update(PDF).digest('hex');
+const key = (id: string) => `datasheets/pixels/${id}-${SHA.slice(0, 8)}.pdf`;
+const xml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
-    // Datasheet host: /ok.pdf works, /dead.pdf 404s, /html.pdf is an interstitial
-    const host = Bun.serve({
-      port: 0,
-      fetch(req) {
-        const path = new URL(req.url).pathname;
-        if (path === '/ok.pdf' || path === '/alt.pdf') return new Response(pdf);
-        if (path === '/html.pdf') return new Response('<!DOCTYPE html><p>blocked</p>');
-        return new Response('nope', { status: 404 });
-      },
-    });
-    // Mock S3: accept PUTs, remember them
-    const puts: { path: string; bytes: number; type: string | null }[] = [];
-    const s3 = Bun.serve({
-      port: 0,
-      async fetch(req) {
-        if (req.method === 'PUT') {
-          const body = new Uint8Array(await req.arrayBuffer());
-          puts.push({
-            path: new URL(req.url).pathname,
-            bytes: body.byteLength,
-            type: req.headers.get('content-type'),
-          });
-          return new Response('', { status: 200, headers: { ETag: '"abc"' } });
-        }
-        return new Response('', { status: 200 });
-      },
-    });
+type Run = (
+  env?: Record<string, string>,
+  ...args: string[]
+) => Promise<{ code: number; out: string }>;
 
-    const dir = mkdtempSync(join(tmpdir(), 'mirror-test-'));
-    try {
-      const pixels = join(dir, 'database', 'pixels');
-      mkdirSync(pixels, { recursive: true });
-      const base = `http://localhost:${host.port}`;
-      writeFileSync(
-        join(pixels, 'good.yaml'),
-        `name: Good\ndatasheet:\n  url: ${base}/ok.pdf\nprice: 1\n`
-      );
-      writeFileSync(
-        join(pixels, 'fallback.yaml'),
-        `name: Fallback\ndatasheet:\n  url: ${base}/dead.pdf\n  sources:\n    - url: ${base}/html.pdf\n      host: distributor\n    - url: ${base}/alt.pdf\n      host: community\n`
-      );
-      writeFileSync(
-        join(pixels, 'broken.yaml'),
-        `name: Broken\ndatasheet:\n  url: ${base}/dead.pdf\n`
-      );
-      writeFileSync(join(pixels, 'none.yaml'), 'name: None\n');
+/**
+ * A datasheet host (/ok.pdf and /alt.pdf work, /dead.pdf 404s, /html.pdf is an
+ * HTML interstitial), a mock S3 that stores PUTs and answers ListObjectsV2
+ * (pre-filled from `seed`, key → size), and a temp database with four pixels.
+ */
+async function withFixture(
+  seed: Record<string, number>,
+  body: (f: {
+    dir: string;
+    pixels: string;
+    base: string;
+    puts: { path: string; bytes: number; type: string | null }[];
+    run: Run;
+  }) => Promise<void>
+) {
+  const host = Bun.serve({
+    port: 0,
+    fetch(req) {
+      const path = new URL(req.url).pathname;
+      if (path === '/ok.pdf' || path === '/alt.pdf') return new Response(PDF);
+      if (path === '/html.pdf') return new Response('<!DOCTYPE html><p>blocked</p>');
+      return new Response('nope', { status: 404 });
+    },
+  });
+  const stored = new Map<string, number>(Object.entries(seed));
+  const puts: { path: string; bytes: number; type: string | null }[] = [];
+  const s3 = Bun.serve({
+    port: 0,
+    async fetch(req) {
+      const url = new URL(req.url);
+      if (req.method === 'PUT') {
+        const bytes = new Uint8Array(await req.arrayBuffer());
+        puts.push({
+          path: url.pathname,
+          bytes: bytes.byteLength,
+          type: req.headers.get('content-type'),
+        });
+        stored.set(url.pathname.replace(/^\/bucket\//, ''), bytes.byteLength);
+        return new Response('', { status: 200, headers: { ETag: '"abc"' } });
+      }
+      if (req.method === 'GET' && url.searchParams.get('list-type') === '2') {
+        const prefix = url.searchParams.get('prefix') ?? '';
+        const hits = [...stored].filter(([k]) => k.startsWith(prefix));
+        const contents = hits
+          .map(
+            ([k, size]) =>
+              `<Contents><Key>${xml(k)}</Key><LastModified>2026-11-18T00:00:00.000Z</LastModified>` +
+              `<ETag>"abc"</ETag><Size>${size}</Size><StorageClass>STANDARD</StorageClass></Contents>`
+          )
+          .join('');
+        return new Response(
+          `<?xml version="1.0" encoding="UTF-8"?>` +
+            `<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">` +
+            `<Name>bucket</Name><Prefix>${xml(prefix)}</Prefix><KeyCount>${hits.length}</KeyCount>` +
+            `<MaxKeys>1000</MaxKeys><IsTruncated>false</IsTruncated>${contents}</ListBucketResult>`,
+          { headers: { 'Content-Type': 'application/xml' } }
+        );
+      }
+      return new Response('', { status: 200 });
+    },
+  });
 
-      const script = resolve(import.meta.dirname, '../../scripts/mirror-datasheets.ts');
+  const dir = mkdtempSync(join(tmpdir(), 'mirror-test-'));
+  try {
+    const pixels = join(dir, 'database', 'pixels');
+    mkdirSync(pixels, { recursive: true });
+    const base = `http://localhost:${host.port}`;
+    writeFileSync(
+      join(pixels, 'good.yaml'),
+      `name: Good\ndatasheet:\n  url: ${base}/ok.pdf\nprice: 1\n`
+    );
+    writeFileSync(
+      join(pixels, 'fallback.yaml'),
+      `name: Fallback\ndatasheet:\n  url: ${base}/dead.pdf\n  sources:\n    - url: ${base}/html.pdf\n      host: distributor\n    - url: ${base}/alt.pdf\n      host: community\n`
+    );
+    writeFileSync(
+      join(pixels, 'broken.yaml'),
+      `name: Broken\ndatasheet:\n  url: ${base}/dead.pdf\n`
+    );
+    writeFileSync(join(pixels, 'none.yaml'), 'name: None\n');
+
+    const script = resolve(import.meta.dirname, '../../scripts/mirror-datasheets.ts');
+    const run: Run = async (extra = {}, ...args) => {
       const env = {
         ...process.env,
         R2_ACCOUNT_ID: 'test',
@@ -139,27 +179,40 @@ describe('mirror-datasheets CLI (mock R2)', () => {
         R2_ENDPOINT: `http://localhost:${s3.port}`,
         R2_PUBLIC_BASE_URL: 'https://assets.example/',
         MIRROR_SUMMARY_FILE: join(dir, 'summary.md'),
+        GITHUB_STEP_SUMMARY: '',
+        MIRROR_BUDGET_MB: '',
+        ...extra,
       };
       // Async spawn: the mock servers live on this event loop.
-      const run = async (...args: string[]) => {
-        const proc = Bun.spawn(['bun', script, ...args], { cwd: dir, env, stdout: 'pipe' });
-        const out = await new Response(proc.stdout).text();
-        return { code: await proc.exited, out };
-      };
-      expect((await run()).code).toBe(0);
+      const proc = Bun.spawn(['bun', script, ...args], { cwd: dir, env, stdout: 'pipe' });
+      const out = await new Response(proc.stdout).text();
+      return { code: await proc.exited, out };
+    };
+    await body({ dir, pixels, base, puts, run });
+  } finally {
+    host.stop(true);
+    s3.stop(true);
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
 
-      const key = (id: string) => `datasheets/pixels/${id}-${sha.slice(0, 8)}.pdf`;
-      expect(puts.map((p) => p.path).sort()).toEqual(
-        [`/bucket/${key('fallback')}`, `/bucket/${key('good')}`].sort()
-      );
-      expect(puts.every((p) => p.bytes === pdf.byteLength && p.type === 'application/pdf')).toBe(
-        true
-      );
+describe('mirror-datasheets CLI (mock R2)', () => {
+  test('uploads, falls back to sources, skips stored objects, reports storage', async () => {
+    // `good` is already in the bucket (same bytes, same key); `old` is a stale
+    // version that no entry references any more.
+    const seed = { [key('good')]: PDF.byteLength, 'datasheets/pixels/old-deadbeef.pdf': 1000 };
+    await withFixture(seed, async ({ dir, pixels, base, puts, run }) => {
+      const res = await run({ GITHUB_STEP_SUMMARY: join(dir, 'step.md') });
+      expect(res.code).toBe(0);
+
+      // Content-addressed: the stored copy of `good` isn't uploaded again
+      expect(puts.map((p) => p.path)).toEqual([`/bucket/${key('fallback')}`]);
+      expect(puts[0]).toMatchObject({ bytes: PDF.byteLength, type: 'application/pdf' });
 
       const good = parse(readFileSync(join(pixels, 'good.yaml'), 'utf-8'));
       expect(good.datasheet.mirror).toMatchObject({
         url: `https://assets.example/${key('good')}`,
-        sha256: sha,
+        sha256: SHA,
         source: `${base}/ok.pdf`,
       });
       expect(good.datasheet.mirror.fetched_from).toBeUndefined();
@@ -175,14 +228,34 @@ describe('mirror-datasheets CLI (mock R2)', () => {
       const summary = readFileSync(join(dir, 'summary.md'), 'utf-8');
       expect(summary).toContain(':warning: `pixels/broken`');
 
+      // Storage report: good + fallback + old, and old is unreferenced
+      expect(summary).toContain('**Storage:** 3 PDFs');
+      expect(summary).toContain('1 of them (0.0 MB) are no longer referenced');
+      expect(readFileSync(join(dir, 'step.md'), 'utf-8')).toContain('**Storage:** 3 PDFs');
+      expect(res.out).not.toContain('::warning::');
+
       // Mirrored entries are skipped next time; only the still-broken one remains
-      const dry = await run('--dry-run');
+      const dry = await run({}, '--dry-run');
       expect(dry.out).toContain('1 datasheet(s) to mirror');
       expect(dry.out).toContain('pixels/broken');
-    } finally {
-      host.stop(true);
-      s3.stop(true);
-      rmSync(dir, { recursive: true, force: true });
-    }
+    });
+  });
+
+  test('stops uploading at the storage budget', async () => {
+    await withFixture({}, async ({ dir, pixels, puts, run }) => {
+      // Room for one test PDF, not two. Files run in name order: broken
+      // (fails), fallback (uploaded), good (over budget).
+      const budgetMb = String((PDF.byteLength * 1.5) / (1024 * 1024));
+      const res = await run({ MIRROR_BUDGET_MB: budgetMb });
+      expect(res.code).toBe(0);
+      expect(puts.map((p) => p.path)).toEqual([`/bucket/${key('fallback')}`]);
+      const fb = parse(readFileSync(join(pixels, 'fallback.yaml'), 'utf-8'));
+      expect(fb.datasheet.mirror).toBeDefined();
+      expect(readFileSync(join(pixels, 'good.yaml'), 'utf-8')).not.toContain('mirror:');
+      const summary = readFileSync(join(dir, 'summary.md'), 'utf-8');
+      expect(summary).toContain(':warning: `pixels/good` skipped');
+      expect(res.out).toContain('::warning::Datasheet mirror at');
+      expect(res.out).toContain('1 datasheet(s) skipped');
+    });
   });
 });

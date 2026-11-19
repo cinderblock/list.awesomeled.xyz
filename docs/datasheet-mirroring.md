@@ -58,12 +58,50 @@ bun run mirror-datasheets --limit 3          # mirror a few (needs the R2 env va
 ```
 
 Env: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET`,
-`R2_PUBLIC_BASE_URL`; optional `R2_ENDPOINT` (any S3-compatible endpoint — the
-unit test points it at a local mock) and `MIRROR_SUMMARY_FILE`.
+`R2_PUBLIC_BASE_URL`. Optional: `MIRROR_BUDGET_MB` (default 1024), `R2_ENDPOINT`
+(any S3-compatible endpoint; the unit test points it at a local mock), and
+`MIRROR_SUMMARY_FILE`.
 
 `tests/unit/mirror-datasheets.test.ts` (`bun run test:unit`) runs the whole CLI
-against a local PDF host and a mock S3 endpoint: uploads, keys, content type,
-the YAML it writes, the `sources` fallback, and failures leaving YAML untouched.
+against a local PDF host and a mock S3 endpoint. It covers uploads, keys,
+content type, the YAML written, the `sources` fallback, failures leaving YAML
+untouched, skipping objects already stored, the storage report and the budget
+stop.
+
+## Storage and usage
+
+The bucket should stay small and well inside R2's free tier. Two layers keep an
+eye on it.
+
+**This repo (per run):**
+
+- **Content-addressed keys.** An object already in the bucket is never uploaded
+  again.
+- **Storage report.** Every run reports what the bucket holds, for example
+  `Storage: 150 PDFs, 210.3 MB of the 1024.0 MB budget (21%)`. The count
+  includes objects no entry references any more (old versions after a datasheet
+  URL changed). The report appears in the log, the job summary and the bot PR
+  body.
+- **Budget stop.** Uploads stop at `MIRROR_BUDGET_MB`: the remaining entries
+  are skipped and listed in the PR body as warnings. Set it with the repository
+  _variable_ of the same name; the default is 1024.
+- **Run annotation.** Past 80% of the budget, the run gets an Actions warning
+  annotation.
+- **Per-file cap.** Downloads over 50 MB are refused.
+- **Measuring.** `bun run mirror-datasheets --check` prints the total size of
+  every datasheet, which is what a full mirror would store.
+
+**Account-wide (ops):** the uptime worker in `cinderblock/ops` watches R2 for
+the whole Cloudflare account, so this bucket is covered with no extra setup.
+
+- It charts each bucket's bytes held against `R2_STORAGE_BUDGET_GB` (10 GB, the
+  free tier).
+- It pushes an alert when the account total reaches 50, 75, 90 or 100% of that
+  budget, and when projected growth would overrun it.
+- It polls R2 Class A and Class B operations hourly into its cost alerts.
+
+Reads are free of egress. Behind the custom domain, Cloudflare's edge cache
+answers repeat downloads, so few reach R2 as Class B operations.
 
 ## One-time setup (Cloudflare + GitHub — owner only)
 

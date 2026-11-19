@@ -22,12 +22,24 @@
  * recorded as `mirror.fetched_from`. `mirror.source` always records
  * `datasheet.url`, so changing the URL re-mirrors.
  *
+ * Storage stays bounded and visible:
+ * - Keys are content-addressed, so an object already in the bucket is never
+ *   uploaded twice.
+ * - Before each upload, the bytes under `datasheets/` are checked against
+ *   MIRROR_BUDGET_MB. Once the budget would be exceeded, the remaining entries
+ *   are skipped with a warning.
+ * - Every run reports what the bucket holds. That includes objects no entry
+ *   references any more, such as old versions after a datasheet URL changed.
+ *   The report goes to the log, the bot PR body and the Actions job summary.
+ *
  * Required env (not needed for --dry-run / --check):
  *   R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET
  *   R2_PUBLIC_BASE_URL  e.g. https://assets.awesomeled.xyz
  * Optional:
+ *   MIRROR_BUDGET_MB    cap on bytes under datasheets/ (default 1024)
  *   R2_ENDPOINT         override the S3 endpoint (tests / other S3 hosts)
  *   MIRROR_SUMMARY_FILE Markdown summary for the bot PR body
+ *   GITHUB_STEP_SUMMARY set by Actions; the storage report is appended to it
  */
 
 import { spawnSync } from 'child_process';
@@ -49,6 +61,8 @@ import { S3Client } from 'bun';
 const DB_DIR = 'database';
 const KEY_PREFIX = 'datasheets';
 const MAX_BYTES = 50 * 1024 * 1024; // refuse anything over 50 MB
+const DEFAULT_BUDGET_MB = 1024;
+const MB = 1024 * 1024;
 const USER_AGENT = 'awesomeledlist-datasheet-mirror/1.0 (+https://list.awesomeled.xyz)';
 
 export interface Candidate {
@@ -100,6 +114,68 @@ export function findCandidates(dbDir = DB_DIR, all = false): Candidate[] {
     }
   }
   return out;
+}
+
+/** Bucket keys that some entry's `datasheet.mirror.url` points at. */
+export function referencedKeys(publicBase: string, dbDir = DB_DIR): Set<string> {
+  const prefix = `${publicBase}/`;
+  const keys = new Set<string>();
+  for (const folder of readdirSync(dbDir)) {
+    if (folder.startsWith('_') || !statSync(join(dbDir, folder)).isDirectory()) continue;
+    for (const file of readdirSync(join(dbDir, folder))) {
+      if (!file.endsWith('.yaml') || file.startsWith('_')) continue;
+      const url = parse(readFileSync(join(dbDir, folder, file), 'utf-8'))?.datasheet?.mirror?.url;
+      if (typeof url === 'string' && url.startsWith(prefix)) keys.add(url.slice(prefix.length));
+    }
+  }
+  return keys;
+}
+
+/** Every object under `datasheets/`, key → size in bytes. */
+async function listObjects(s3: S3Client): Promise<Map<string, number>> {
+  const objects = new Map<string, number>();
+  let continuationToken: string | undefined;
+  do {
+    const page = await s3.list({ prefix: `${KEY_PREFIX}/`, continuationToken });
+    for (const o of page.contents ?? []) objects.set(o.key, o.size ?? 0);
+    continuationToken = page.isTruncated ? page.nextContinuationToken : undefined;
+  } while (continuationToken);
+  return objects;
+}
+
+const mb = (bytes: number) => (bytes / MB).toFixed(1);
+
+/** One Markdown line on what the bucket holds against the budget. */
+export function storageReport(
+  objects: Map<string, number>,
+  referenced: Set<string>,
+  budgetBytes: number
+): string {
+  let total = 0;
+  let unrefCount = 0;
+  let unrefBytes = 0;
+  for (const [key, size] of objects) {
+    total += size;
+    if (!referenced.has(key)) {
+      unrefCount++;
+      unrefBytes += size;
+    }
+  }
+  const pct = budgetBytes > 0 ? Math.round((total / budgetBytes) * 100) : 100;
+  const unref = unrefCount
+    ? ` ${unrefCount} of them (${mb(unrefBytes)} MB) are no longer referenced by any entry.`
+    : '';
+  return `**Storage:** ${objects.size} PDFs, ${mb(total)} MB of the ${mb(budgetBytes)} MB budget (${pct}%).${unref}`;
+}
+
+function budgetBytes(): number {
+  const raw = process.env.MIRROR_BUDGET_MB;
+  const n = raw ? Number(raw) : DEFAULT_BUDGET_MB;
+  if (!Number.isFinite(n) || n < 0) {
+    console.error(`MIRROR_BUDGET_MB must be a non-negative number, got ${JSON.stringify(raw)}`);
+    process.exit(1);
+  }
+  return n * MB;
 }
 
 function makeS3(): { s3: S3Client; publicBase: string } {
@@ -267,10 +343,12 @@ async function main() {
 
   if (opts.check) {
     let bad = 0;
+    let total = 0;
     console.log(`Checking ${candidates.length} datasheet URL(s)…`);
     for (const c of candidates) {
       const r = await fetchCandidate(c);
       if ('bytes' in r) {
+        total += r.bytes.byteLength;
         const kb = (r.bytes.byteLength / 1024).toFixed(0);
         const via = r.from === c.url ? '' : ` (via fallback ${r.from})`;
         console.log(`  ok   ${c.category}/${c.id} ${kb} KB${via}`);
@@ -280,21 +358,27 @@ async function main() {
         for (const f of r.failures) console.log(`         ${f}`);
       }
     }
-    console.log(`\n${candidates.length - bad} ok, ${bad} failing`);
+    // The bucket would hold about this much if every datasheet were mirrored once.
+    console.log(`\n${candidates.length - bad} ok, ${bad} failing; ${mb(total)} MB in total`);
     return;
   }
 
   console.log(`${candidates.length} datasheet(s) to mirror${opts.dryRun ? ' (dry run)' : ''}`);
-  if (candidates.length === 0) return;
+  if (opts.dryRun) {
+    for (const c of candidates) console.log(`- ${c.category}/${c.id}: ${c.url}`);
+    return;
+  }
 
-  const ctx = opts.dryRun ? null : makeS3();
+  const ctx = makeS3();
+  const budget = budgetBytes();
+  const objects = await listObjects(ctx.s3);
+  let used = [...objects.values()].reduce((a, b) => a + b, 0);
   const summary: string[] = [];
   let failures = 0;
+  let overBudget = 0;
 
   for (const c of candidates) {
     console.log(`- ${c.category}/${c.id}: ${c.url}`);
-    if (opts.dryRun) continue;
-
     const r = await fetchCandidate(c);
     if (!('bytes' in r)) {
       failures++;
@@ -305,10 +389,23 @@ async function main() {
 
     const sha256 = createHash('sha256').update(r.bytes).digest('hex');
     const key = `${KEY_PREFIX}/${c.category}/${c.id}-${sha256.slice(0, 8)}.pdf`;
-    await ctx!.s3.write(key, r.bytes, { type: 'application/pdf' });
+    if (objects.has(key)) {
+      console.log('  already in the bucket');
+    } else if (used + r.bytes.byteLength > budget) {
+      overBudget++;
+      console.warn(`  skipped: would take the bucket past its ${mb(budget)} MB budget`);
+      summary.push(
+        `- :warning: \`${c.category}/${c.id}\` skipped: the bucket is at its ${mb(budget)} MB budget`
+      );
+      continue;
+    } else {
+      await ctx.s3.write(key, r.bytes, { type: 'application/pdf' });
+      objects.set(key, r.bytes.byteLength);
+      used += r.bytes.byteLength;
+    }
 
     const mirror: Mirror = {
-      url: `${ctx!.publicBase}/${key}`,
+      url: `${ctx.publicBase}/${key}`,
       sha256,
       retrieved: new Date().toISOString().slice(0, 10),
       source: c.url,
@@ -330,8 +427,21 @@ async function main() {
     );
   }
 
+  const report = storageReport(objects, referencedKeys(ctx.publicBase), budget);
+  console.log(`\n${report.replace(/\*\*/g, '')}`);
   if (process.env.MIRROR_SUMMARY_FILE && summary.length) {
-    appendFileSync(process.env.MIRROR_SUMMARY_FILE, summary.join('\n') + '\n');
+    appendFileSync(process.env.MIRROR_SUMMARY_FILE, [...summary, '', report].join('\n') + '\n');
+  }
+  if (process.env.GITHUB_STEP_SUMMARY) {
+    appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${report}\n`);
+  }
+  if (overBudget || used > budget * 0.8) {
+    // An Actions annotation, so a nearly full bucket is visible on the run page.
+    console.log(
+      `::warning::Datasheet mirror at ${mb(used)} of ${mb(budget)} MB` +
+        (overBudget ? `; ${overBudget} datasheet(s) skipped` : '') +
+        '. Raise MIRROR_BUDGET_MB or clean up unreferenced objects.'
+    );
   }
   if (failures) console.warn(`\n${failures} datasheet(s) failed; their YAML was left untouched.`);
 }

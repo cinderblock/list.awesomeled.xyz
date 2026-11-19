@@ -197,10 +197,30 @@ function getEntryLinks(
     add(links.mirror, 'Mirror', Globe);
   }
   const datasheet = entry.datasheet as
-    | { url?: string; sources?: { url?: string; host?: string; notes?: string }[] }
+    | {
+        url?: string;
+        mirror?: { url?: string };
+        sources?: { url?: string; host?: string; notes?: string }[];
+      }
     | undefined;
   if (datasheet && typeof datasheet === 'object') {
-    add(datasheet.url, 'Datasheet', FileText);
+    // Our R2 copy (scripts/mirror-datasheets.ts). When the original is dead,
+    // it replaces the Wayback guess, unless an explicit archive was curated.
+    const mirror = typeof datasheet.mirror?.url === 'string' ? datasheet.mirror.url : undefined;
+    const dead = typeof datasheet.url === 'string' ? deadLinks.get(datasheet.url) : undefined;
+    if (dead && mirror && !dead.archive && !seen.has(dead.url)) {
+      seen.add(dead.url);
+      seen.add(mirror);
+      out.push({
+        url: mirror,
+        label: 'Datasheet (archived)',
+        icon: Archive,
+        deadOriginal: dead.url,
+      });
+    } else {
+      add(datasheet.url, 'Datasheet', FileText);
+      add(mirror, 'Datasheet (mirror)', FileText);
+    }
     if (Array.isArray(datasheet.sources)) {
       for (const s of datasheet.sources) {
         if (s && typeof s === 'object') {
@@ -433,6 +453,12 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
       continue;
     }
     if (isGroup(value)) {
+      // The datasheet mirror is shown as a link; its hash and dates are bookkeeping
+      if (key === 'datasheet' && 'mirror' in value) {
+        const rest = Object.fromEntries(Object.entries(value).filter(([k]) => k !== 'mirror'));
+        if (isGroup(rest)) groups.push([key, rest]);
+        continue;
+      }
       groups.push([key, value]);
       continue;
     }
