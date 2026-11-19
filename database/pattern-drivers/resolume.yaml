@@ -26,7 +26,12 @@ platforms:
     - Windows
     - macOS
 pricing:
-  price: €299-€799
+  price: €299-799
+  source:
+    retrieved: '2026-11-18'
+    vendor: Resolume
+    url: https://resolume.com/shop
+    notes: 'Per computer: Avenue "€ 299.00 Euro", Arena "€ 799.00 Euro"; each includes 12 months of updates (renewable). The shop does not say whether VAT is included'
   license_type: perpetual
   tiers:
     - tier: Avenue
@@ -40,6 +45,10 @@ pricing:
     available: true
     limitations: Watermark on output
 sources:
+  status:
+    url: https://resolume.com/shop
+    retrieved: '2026-11-18'
+    notes: 'Avenue, Arena and Wire licenses on sale'
   aliases:
     url: https://resolume.com/software
     retrieved: '2026-11-18'

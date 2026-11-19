@@ -33,6 +33,11 @@ platforms:
     - macOS
 pricing:
   price: Free-$2200
+  source:
+    retrieved: '2026-11-18'
+    vendor: Derivative
+    url: https://derivative.ca/UserGuide/Licensing
+    notes: 'USD: Non-Commercial "No Charge" (1280x1280 limit), Educational $300, Commercial $600, Pro $2200 (shop: derivative.ca/shop). Floating Cloud variants $450/$900/$3300'
   license_type: perpetual
   tiers:
     - tier: Non-Commercial
@@ -52,6 +57,11 @@ pricing:
   demo:
     available: true
     limitations: Non-commercial license is free with full features
+sources:
+  status:
+    url: https://derivative.ca/shop
+    retrieved: '2026-11-18'
+    notes: 'Commercial and Pro licenses on sale'
 technical_notes:
   - Node-based visual programming environment
   - Powerful 3D capabilities for spatial mapping

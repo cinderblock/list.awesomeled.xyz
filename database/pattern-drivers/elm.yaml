@@ -22,14 +22,35 @@ capabilities:
 integrations: Triggering via HTTP/OSC/Art-net/sACN/DMX
 language: null
 links:
-  url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/pixel-mapping-software/
+  url: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
 other_links:
   - https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/#download
 platforms:
   os:
     - Windows
 pricing:
-  price: £70
+  price: 250
+  source:
+    retrieved: '2026-11-18'
+    vendor: ENTTEC
+    part: 70581-PROF
+    url: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
+    notes: ELM 2026 Professional, perpetual, 16 universes (universe packs extra); US site
+  tiers:
+    - tier: Demo
+      price: 0
+      features: Full app, no sign-up
+      limitations: Watermarked
+    - tier: Free
+      price: 0
+      features: Full engine, no watermark (70581-FREE)
+      limitations: 2 universes, telemetry/marketing opt-in required
+    - tier: Professional
+      price: 250
+      features: 16 universes, packs up to 32,768; remote control (70581-PROF)
+    - tier: Architectural
+      price: 1999
+      features: 256 universes, packs up to 32,768; Device Manager and Sentry monitoring (70581-ARCH)
   demo:
     available: Nag for free one
 related:
@@ -40,11 +61,11 @@ related:
       url: https://plsn.com/newsroom/product-news/mapping-the-pixel-forest-enttec-branches-out-into-pixel-mapping-with-elm
       retrieved: '2026-11-18'
 sources:
+  status:
+    url: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
+    retrieved: '2026-11-18'
+    notes: 'ELM 2026 download and perpetual licenses (Free/Professional/Architectural) sold by ENTTEC'
   aliases:
     url: https://www.enttec.com/story/introducing-elm-2026/
     retrieved: '2026-11-18'
     notes: ENTTEC's ELM 2026 announcement; ELM is the short form.
-  status:
-    url: https://www.enttec.com/story/introducing-elm-2026/
-    retrieved: '2026-11-18'
-    notes: ELM 2026 released

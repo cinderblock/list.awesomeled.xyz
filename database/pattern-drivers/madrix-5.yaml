@@ -47,6 +47,10 @@ pricing:
     available: true
     limitations: Demo mode - no data output
 sources:
+  status:
+    url: https://www.madrix.com/products/software
+    retrieved: '2026-11-18'
+    notes: 'MADRIX 5 licenses (start to maximum) offered through resellers; no public price list'
   aliases:
     url: https://www.madrix.com/products/software
     retrieved: '2026-11-18'

@@ -1,5 +1,5 @@
 name: GeoPix 2.0(full)
-status: unknown
+status: active
 creator: Enviral Design
 inputs:
   video: Input
@@ -38,5 +38,10 @@ related:
     source:
       url: https://github.com/EnviralDesign/GeoPix
       retrieved: '2026-11-18'
+sources:
+  status:
+    url: https://github.com/EnviralDesign/GeoPix
+    retrieved: '2026-11-18'
+    notes: 'not archived; last commit 2026-02-27 shipped build v2.0.15534; geopix.io no longer resolves'
 technical_notes:
   - Paid tiers at $200, $500 and $2200

@@ -12,3 +12,8 @@ platforms:
   - Linux
   - macOS
   - Raspberry Pi
+sources:
+  status:
+    url: https://gitlab.com/CalcProgrammer1/OpenRGB/-/releases
+    retrieved: '2026-11-18'
+    notes: 'release 1.1 published 2026-10-16'

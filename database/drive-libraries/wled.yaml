@@ -3,7 +3,8 @@ status: active
 creator: Aircookie
 dead_links:
   - url: https://www.welcometothefuture.one/blog/wled-get-started
-    checked: '2026-07-01'
+    archive: https://web.archive.org/web/20211113051625/https://www.welcometothefuture.one/blog/wled-get-started
+    checked: '2026-11-18'
 features: Android/Apple App available, built-in patterns, sACN receiver
 hardware: ESP8266/32
 instructional_resources:
@@ -35,6 +36,11 @@ related_pixel_ics:
   - ws2805
   - ws2811
   - ws2814
+sources:
+  status:
+    url: https://github.com/wled/WLED/releases
+    retrieved: '2026-11-18'
+    notes: 'release v16.0.1 published 2026-07-07'
 supported_ics:
   - WS2812B
   - WS2811

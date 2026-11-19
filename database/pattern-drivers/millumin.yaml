@@ -17,5 +17,15 @@ platforms:
     - macOS
 pricing:
   price: 39/week +
+  source:
+    retrieved: '2026-11-18'
+    vendor: Millumin
+    url: https://www.millumin.com/v5/index.php
+    notes: 'Prices shown to US visitors: rental (week, month or year) from US$39, permanent license from US$499, V5 upgrade from US$110. Euro prices: rental from €29, permanent from €399, upgrade from €85'
   demo:
     available: 30 day trial
+sources:
+  status:
+    url: https://www.millumin.com/v5/index.php
+    retrieved: '2026-11-18'
+    notes: 'Millumin V5 rentals, permanent licenses and upgrades on sale; 30-day trial download'

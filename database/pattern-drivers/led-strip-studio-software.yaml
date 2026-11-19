@@ -18,15 +18,25 @@ capabilities:
   designer: true
   visualizer: 2D
 links:
-  url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+  url: https://www.ledstripstudio.com/products/lss4/
 platforms:
   os:
     - Windows
     - macOS
 pricing:
+  price: €53
+  source:
+    retrieved: '2026-11-18'
+    vendor: LED Strip Studio
+    url: https://www.ledstripstudio.com/shop/product/pixel-led-mapping-software/
+    notes: 'LSS4 Art-Net license, 1 universe, excl. VAT (regular price; on sale for €15 at retrieval). Priced per universe: 6 €200, 12 €336, 64 €1,008, 512 €3,584. Licenses run 1 or 5 years; the separate "5 Years" listing has the same regular prices (on sale from €45). LSS controllers include a lifetime license for their own outputs'
   demo:
     available: Free demo - No output
 sources:
+  status:
+    url: https://www.ledstripstudio.com/products/lss4/
+    retrieved: '2026-11-18'
+    notes: 'LSS4 version 4.0.42 downloads for Windows and macOS; licenses sold in the LSS shop'
   aliases:
     url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
     retrieved: '2026-11-18'

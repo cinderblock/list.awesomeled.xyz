@@ -1,5 +1,5 @@
 name: Blux
-status: unknown
+status: active
 creator: Benjamin Kuperberg
 inputs:
   audio: Output
@@ -26,3 +26,8 @@ platforms:
     - Linux
 pricing:
   price: Free
+sources:
+  status:
+    url: https://github.com/benkuper/Blux
+    retrieved: '2026-11-18'
+    notes: 'last commit 2026-10-07; download page offers stable and beta builds'

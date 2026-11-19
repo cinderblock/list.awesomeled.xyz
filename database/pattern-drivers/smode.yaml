@@ -17,7 +17,7 @@ capabilities:
   designer: true
   programmatic: Both
 links:
-  url: https://smode.fr/
+  url: https://www.smode.io/en/
 platforms:
   os:
     - Windows
@@ -26,3 +26,8 @@ pricing:
   demo:
     available: Free for SD card output
   license_type: Free for basic SD output; generally very expensive as the resolution goes up
+sources:
+  status:
+    url: https://www.smode.io/en/product/live-media-server
+    retrieved: '2026-11-18'
+    notes: 'Smode Live tiers (Basic/1/2/4) offered via "Contact us"; free Smode Community download'

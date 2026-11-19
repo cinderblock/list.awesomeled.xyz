@@ -30,3 +30,8 @@ pricing:
   price: Free
   demo:
     available: Free
+sources:
+  status:
+    url: http://benjamin.kuperberg.fr/chataigne/en
+    retrieved: '2026-11-18'
+    notes: 'stable 1.10.4 downloads for Windows/macOS/Linux; GitHub last commit 2026-11-17'

@@ -32,3 +32,8 @@ related:
     source:
       url: https://github.com/LedFx/LedFx
       retrieved: '2026-11-18'
+sources:
+  status:
+    url: https://github.com/LedFx/LedFx/releases
+    retrieved: '2026-11-18'
+    notes: 'release v2.2.1 published 2026-10-04'

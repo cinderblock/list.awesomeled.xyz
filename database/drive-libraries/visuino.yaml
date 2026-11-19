@@ -13,5 +13,10 @@ platforms:
   - ESP8266
   - Teensy
   - Raspberry Pi
+sources:
+  status:
+    url: https://www.visuino.com/visuino-downloads/
+    retrieved: '2026-11-18'
+    notes: 'version 8.0.0.167 download; Pro version sold'
 supported_ics:
   - WS2812

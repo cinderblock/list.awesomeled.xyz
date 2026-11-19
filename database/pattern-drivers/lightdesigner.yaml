@@ -8,6 +8,11 @@ outputs:
   other: Bluetooth/NFC to RocketLife hardware
 capabilities:
   designer: true
+dead_links:
+  - url: https://www.rocketlife.com/technology/
+    archive: https://web.archive.org/web/20191115023243/https://www.rocketlife.com/technology/
+    checked: '2026-11-18'
+    notes: HTTPS connection reset, HTTP returns 410 Gone; domain parked
 integrations: LightBox&LightBoard Mini
 links:
   url: https://www.rocketlife.com/technology/
@@ -17,3 +22,8 @@ platforms:
     - macOS
 pricing:
   price: Free
+sources:
+  status:
+    url: http://www.rocketlife.com/technology/
+    retrieved: '2026-11-18'
+    notes: 'HTTP 410 Gone; rocketlife.com is parked. The old free Windows build is still listed in the Microsoft Store (9NWK9DKV7DFL) without a vendor site or support'

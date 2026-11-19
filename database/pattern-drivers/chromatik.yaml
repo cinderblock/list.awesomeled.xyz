@@ -26,6 +26,11 @@ platforms:
     - Linux
 pricing:
   price: Free - $399
+  source:
+    retrieved: '2026-11-18'
+    vendor: Heron Arts (Chromatik)
+    url: https://chromatik.co/download/
+    notes: 'Perpetual licenses for the purchased version, 2 machines each: Free (1,000 output pixels), Lite $99, Basic $199, Pro $399 (50,000 pixels); also €99/€199/€399, £79/£159/£319'
   demo:
     available: <1000 LEDs free, various paid options
 related:
@@ -36,6 +41,10 @@ related:
       url: https://github.com/heronarts/Chromatik
       retrieved: '2026-11-18'
 sources:
+  status:
+    url: https://chromatik.co/download/
+    retrieved: '2026-11-18'
+    notes: 'version 1.2.1 downloads; licenses sold (Free/Lite/Basic/Pro)'
   platforms.os:
     url: https://chromatik.co/download/
     retrieved: '2026-11-18'

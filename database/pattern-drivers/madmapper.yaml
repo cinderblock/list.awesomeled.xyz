@@ -19,8 +19,17 @@ platforms:
     - Windows
     - macOS
 pricing:
-  price: €359
+  price: €479
+  source:
+    retrieved: '2026-11-18'
+    vendor: MadMapper
+    url: https://madmapper.com/madmapper/software
+    notes: MadMapper 6 perpetual license (current 6.x versions, one extra seat for a spare computer), EUR excl. VAT (the shop's base price; US visitors are shown $545.44 excl. tax). Rental from $50.10/month, upgrade from $181.05 as shown to US visitors
 sources:
+  status:
+    url: https://madmapper.com/madmapper/software
+    retrieved: '2026-11-18'
+    notes: 'MadMapper 6 perpetual licenses, rentals and upgrades on sale'
   creator:
     url: https://madmapper.com/aboutus
     retrieved: '2026-11-18'

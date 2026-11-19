@@ -1,5 +1,5 @@
 name: artnet_led_mapper
-status: unknown
+status: active
 creator: cyberboy666
 notes: input video from connected devices (webcams, capture cards etc) or over NDI, output artnet across multiple universes
 outputs:
@@ -21,6 +21,10 @@ platforms:
 pricing:
   price: Free
 sources:
+  status:
+    url: https://underscores.shop/product/artnet_led_mapper/
+    retrieved: '2026-11-18'
+    notes: 'compiled builds for Linux/macOS/Windows still offered (name your price 10-100 EUR); GitHub release 1_0_0 2024-09-23'
   aliases:
     url: https://github.com/cyberboy666/artnet_led_mapper
     retrieved: '2026-11-18'

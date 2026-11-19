@@ -63,3 +63,8 @@ related:
     source:
       url: https://github.com/wled/WLED
       retrieved: '2026-11-18'
+sources:
+  status:
+    url: https://github.com/wled/WLED/releases
+    retrieved: '2026-11-18'
+    notes: 'release v16.0.1 published 2026-07-07; repository moved from Aircoookie/WLED to wled/WLED'

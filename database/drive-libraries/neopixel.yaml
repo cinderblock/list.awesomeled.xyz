@@ -16,6 +16,11 @@ platforms:
 related_pixel_ics:
   - ws2811
   - sk6812-5050
+sources:
+  status:
+    url: https://github.com/adafruit/Adafruit_NeoPixel/releases
+    retrieved: '2026-11-18'
+    notes: 'release 1.15.5 published 2026-05-12; last commit 2026-11-12'
 supported_ics:
   - WS2811
   - WS2812

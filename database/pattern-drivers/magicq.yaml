@@ -19,5 +19,15 @@ platforms:
     - Linux
 pricing:
   price: Free 64 universes
+  source:
+    retrieved: '2026-11-18'
+    vendor: ChamSys
+    url: https://chamsyslighting.com/software/magicq-software-licensing/
+    notes: 'Demo mode (no ChamSys hardware connected): "64 universes Art-Net / ACN Output fully enabled"'
   demo:
     available: Demo 64 Universes via ArtNet
+sources:
+  status:
+    url: https://downloads.chamsys.co.uk/magicq
+    retrieved: '2026-11-18'
+    notes: 'latest stable MagicQ build dated 18 Nov 2026'

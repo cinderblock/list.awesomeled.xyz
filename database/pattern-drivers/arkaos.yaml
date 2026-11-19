@@ -1,11 +1,16 @@
 name: ArKaos
-status: active
+status: discontinued
 creator: ArKaos S.A.
 outputs:
   other: Klingnet
 capabilities:
   live: true
   designer: true
+dead_links:
+  - url: https://www.arkaos.com/
+    archive: https://web.archive.org/web/20250906170847/https://arkaos.com/
+    checked: '2026-11-18'
+    notes: Redirected to chamsyslighting.com/media-control/ after the ChamSys acquisition (Nov 2025 to Feb 2026); Cloudflare 522 since June 2026
 links:
   url: https://www.arkaos.com/
 platforms:
@@ -13,3 +18,16 @@ platforms:
     - Windows
 pricing:
   price: 299
+related:
+  - type: replacement
+    source:
+      url: https://chamsyslighting.com/product/mediamaster-software/
+      retrieved: '2026-11-18'
+      notes: 'ChamSys continues the Arkaos MediaMaster line as MediaMaster 26 (built-in LED Mapper, Kling-Net discovery)'
+    name: ChamSys MediaMaster
+    url: https://chamsyslighting.com/product/mediamaster-software/
+sources:
+  status:
+    url: https://chamsyslighting.com/support/product-policy/
+    retrieved: '2026-11-18'
+    notes: 'ChamSys bought the Arkaos SA portfolio (Sept 2025); ArKaos VJ, GrandVJ, LEDMaster and MediaMaster 1-6 all listed "Discontinued"; arkaos.com redirected to ChamSys, now offline'

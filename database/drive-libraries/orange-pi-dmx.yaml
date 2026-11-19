@@ -20,6 +20,11 @@ related_pixel_ics:
   - ucs1903
   - ucs2903
   - p9813
+sources:
+  status:
+    url: https://github.com/vanvught/rpidmx512
+    retrieved: '2026-11-18'
+    notes: 'last commit 2026-07-26'
 supported_ics:
   - DMX512
   - WS2801

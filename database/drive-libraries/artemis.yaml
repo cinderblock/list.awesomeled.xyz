@@ -11,5 +11,10 @@ platforms:
   - Windows
   - Linux
   - macOS
+sources:
+  status:
+    url: https://github.com/Artemis-RGB/Artemis
+    retrieved: '2026-11-18'
+    notes: 'last commit 2026-10-27; downloads on artemis-rgb.com'
 supported_ics:
   - WS281X

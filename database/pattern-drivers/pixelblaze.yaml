@@ -24,6 +24,12 @@ platforms:
   notes: Editor is served in the browser by the Pixelblaze itself
 pricing:
   price: 39
+  source:
+    retrieved: '2026-11-18'
+    vendor: ElectroMage
+    part: EM-PIXELBLAZE-PB32XL
+    url: https://shop.electromage.com/products/pixelblaze-v3-standard-wifi-led-controller
+    notes: The editor ships on the controller; price is the Pixelblaze V3 Standard (XL) board. Pixelblaze V3 Pico+ is $35.00
   demo:
     available: w/PixelBlaze purchase
 related:
@@ -33,3 +39,8 @@ related:
     source:
       url: https://electromage.com/pixelblaze
       retrieved: '2026-11-18'
+sources:
+  status:
+    url: https://shop.electromage.com/products/pixelblaze-v3-standard-wifi-led-controller
+    retrieved: '2026-11-18'
+    notes: 'Pixelblaze V3 Standard listed at $39.00 in the ElectroMage shop'

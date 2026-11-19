@@ -1,9 +1,11 @@
 name: Artnet2twinkly
-status: end-of-life
+status: discontinued
 creator: John Lord
 dead_links:
   - url: http://artnet2twinkly.com/
-    checked: '2026-07-01'
+    archive: https://web.archive.org/web/20240705183448/http://www.artnet2twinkly.com/artnet2twinkly.html
+    checked: '2026-11-18'
+    notes: Domain no longer resolves; 2025 captures show a parked lander
 features: ArtNet to Twinkly consumer lights via Wi-Fi, allows control of Twinkly via professional lighting controls
 hardware: Twinkly
 links:
@@ -13,3 +15,8 @@ platforms:
   - Windows
 protocols:
   - Art-Net
+sources:
+  status:
+    url: https://web.archive.org/web/20240705183448/http://www.artnet2twinkly.com/artnet2twinkly.html
+    retrieved: '2026-11-18'
+    notes: 'developer: "Artnet 2 Twinkly PC App in its current form is being retired"; the domain lapsed in early 2025 (parked, now NXDOMAIN)'

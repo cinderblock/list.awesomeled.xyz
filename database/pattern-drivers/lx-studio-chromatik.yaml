@@ -33,6 +33,13 @@ pricing:
   demo:
     available: Open source. Commercial applications require license
   license_type: Free for small projects; larger commercial projects need a license
+related:
+  - type: replacement
+    source:
+      url: https://lx.studio/
+      retrieved: '2026-11-18'
+      notes: '"The next generation has arrived. LX Studio has become Chromatik."'
+    ref: pattern-drivers/chromatik
 sources:
   name:
     url: https://github.com/heronarts/LXStudio

@@ -1,5 +1,5 @@
 name: ProtoPixel Create
-status: unknown
+status: active
 creator: ProtoPixel
 inputs:
   video: Input
@@ -16,7 +16,7 @@ capabilities:
   programmatic: Input
 integrations: Python (scriptable)
 links:
-  url: https://www.protopixel.io/design
+  url: https://www.protopixel.io/product/mapping-tool
 platforms:
   os:
     - macOS
@@ -25,3 +25,8 @@ pricing:
   demo:
     available: Trial + watermark
   license_type: subscription (price is per month)
+sources:
+  status:
+    url: https://protopixel.zendesk.com/hc/en-us/articles/31199693048977-Content
+    retrieved: '2026-11-18'
+    notes: 'renamed: "the Mapping Tool (formerly known as Create) 3.0 or higher"; Mapping Tool download offered on protopixel.io, install guides updated 2026'

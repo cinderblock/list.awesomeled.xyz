@@ -61,6 +61,10 @@ related:
       url: https://www.qlcplus.org/discover/raspberry-pi
       retrieved: '2026-11-18'
 sources:
+  status:
+    url: https://github.com/mcallegari/qlcplus/releases
+    retrieved: '2026-11-18'
+    notes: 'release QLC+ 5.3.1 published 2026-11-05'
   aliases:
     url: https://github.com/mcallegari/qlcplus
     retrieved: '2026-11-18'

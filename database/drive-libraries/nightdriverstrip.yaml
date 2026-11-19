@@ -10,6 +10,11 @@ links:
   youtube: https://www.youtube.com/watch?v=UZxY_BLSsGg
 platforms:
   - ESP32
+sources:
+  status:
+    url: https://github.com/PlummersSoftwareLLC/NightDriverStrip/releases
+    retrieved: '2026-11-18'
+    notes: 'release v2.0.1 published 2026-06-14'
 supported_ics:
   - WS2812B
   - HUB75

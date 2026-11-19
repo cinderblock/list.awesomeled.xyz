@@ -9,6 +9,11 @@ outputs:
 capabilities:
   live: true
   designer: false
+dead_links:
+  - url: https://www.rocketlife.com/technology/
+    archive: https://web.archive.org/web/20191115023243/https://www.rocketlife.com/technology/
+    checked: '2026-11-18'
+    notes: HTTPS connection reset, HTTP returns 410 Gone; domain parked
 integrations: LightBox&LightBoard Mini
 links:
   url: https://www.rocketlife.com/technology/
@@ -25,3 +30,8 @@ related:
     source:
       url: https://apps.microsoft.com/detail/9nwk9dkv7dfl
       retrieved: '2026-11-18'
+sources:
+  status:
+    url: http://www.rocketlife.com/technology/
+    retrieved: '2026-11-18'
+    notes: 'HTTP 410 Gone; rocketlife.com is parked, no vendor site or support'

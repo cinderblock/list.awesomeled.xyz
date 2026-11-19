@@ -35,6 +35,10 @@ related:
       url: https://github.com/zak-45/WLED-Chataigne-Module
       retrieved: '2026-11-18'
 sources:
+  status:
+    url: https://github.com/zak-45/WLED-Chataigne-Module
+    retrieved: '2026-11-18'
+    notes: 'not archived, last commit 2025-01-16; sibling WLED tools by the same developer updated in 2026'
   aliases:
     url: https://github.com/zak-45/WLED-Chataigne-Module
     retrieved: '2026-11-18'

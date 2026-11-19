@@ -1,5 +1,5 @@
 name: FastLED "FX" engine
-status: unknown
+status: active
 creator: Zach Vorhies
 aliases:
   - FxEngine
@@ -8,6 +8,8 @@ capabilities:
   designer: true
   visualizer: Browser Wasm Preview
 license: MIT
+links:
+  url: https://github.com/FastLED/FastLED
 platforms:
   web: true
   hardware:
@@ -26,6 +28,10 @@ related:
       url: https://github.com/FastLED/FastLED/blob/master/src/fl/fx/fx_engine.h
       retrieved: '2026-11-18'
 sources:
+  status:
+    url: https://github.com/FastLED/FastLED/tree/master/src/fl/fx
+    retrieved: '2026-11-18'
+    notes: 'FX engine (moved from src/fx to src/fl/fx in March 2026) last changed 2026-10-08; FastLED 3.10.9 released 2026-11-01'
   aliases:
     url: https://github.com/FastLED/FastLED/blob/master/src/fl/fx/fx_engine.h
     retrieved: '2026-11-18'

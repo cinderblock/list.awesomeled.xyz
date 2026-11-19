@@ -14,6 +14,11 @@ platforms:
 related_pixel_ics:
   - dmx512
   - ws2811
+sources:
+  status:
+    url: https://github.com/rstephan/ArtnetWifi/releases
+    retrieved: '2026-11-18'
+    notes: 'release 1.6.3 published 2026-07-28'
 supported_ics:
   - DMX
   - WS2811

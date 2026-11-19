@@ -108,6 +108,10 @@ related:
       url: https://github.com/FalconChristmas/fpp/blob/master/README.md
       retrieved: '2026-11-18'
 sources:
+  status:
+    url: https://github.com/FalconChristmas/fpp/releases
+    retrieved: '2026-11-18'
+    notes: 'release 10.4 published 2026-11-09'
   aliases:
     url: https://github.com/FalconChristmas/fpp/blob/master/README.md
     retrieved: '2026-11-18'
@@ -116,7 +120,3 @@ sources:
     url: https://github.com/FalconChristmas/fpp/blob/master/README.md
     retrieved: '2026-11-18'
     notes: "'FPP - Falcon Player'"
-  status:
-    url: https://github.com/FalconChristmas/fpp/releases
-    retrieved: '2026-11-18'
-    notes: FPP 10.x releases

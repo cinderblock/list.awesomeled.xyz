@@ -1,5 +1,5 @@
 name: GeoPix0.9
-status: unknown
+status: discontinued
 creator: Enviral Design
 notes: beta release, not supported
 capabilities:
@@ -16,3 +16,15 @@ pricing:
   price: Free
   demo:
     available: Limited
+related:
+  - type: replacement
+    source:
+      url: https://web.archive.org/web/20201030041622/https://www.enviral-design.com/
+      retrieved: '2026-11-18'
+      notes: 'creator announced "GeoPix 1.0 now available! Get it at www.geopix.io"; GeoPix 2.0 is now free and open source on GitHub'
+    ref: pattern-drivers/geopix-2-0-full
+sources:
+  status:
+    url: https://www.enviral-design.com/
+    retrieved: '2026-11-18'
+    notes: "creator's site no longer offers 0.9 (it sold v0.9.07 free/paid in the 2020 capture web.archive.org/web/20201030041622/https://www.enviral-design.com/)"

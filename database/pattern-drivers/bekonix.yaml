@@ -22,3 +22,8 @@ pricing:
   price: Free- $99
   demo:
     available: Demo
+sources:
+  status:
+    url: https://apps.microsoft.com/detail/9mtmcztpvxwk
+    retrieved: '2026-11-18'
+    notes: 'Bekonix Designer listed free in the Microsoft Store by Bekonix, Inc. (last updated 2026-04-02); bekonix.com now pitches the platform to enterprises, no public downloads or plans'

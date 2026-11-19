@@ -11,6 +11,11 @@ platforms:
   - ESP32
 protocols:
   - Art-Net
+sources:
+  status:
+    url: https://github.com/Golden-Geek/BLIP
+    retrieved: '2026-11-18'
+    notes: 'tag 1.2.3 committed 2026-10-01'
 supported_ics:
   - WS2812B
   - WS2816

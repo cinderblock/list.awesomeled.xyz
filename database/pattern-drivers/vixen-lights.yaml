@@ -14,18 +14,18 @@ capabilities:
   live: false
   designer: true
 links:
-  url: https://www.vixenlights.com/downloads/
+  url: https://www.vixenlights.com/download/
 platforms:
   os:
     - Windows
 pricing:
   price: Free
 sources:
+  status:
+    url: https://github.com/VixenLights/Vixen/releases
+    retrieved: '2026-11-18'
+    notes: 'release 3.13u4 published 2026-10-22; dev build 2026-11-12'
   aliases:
     url: https://github.com/VixenLights/Vixen
     retrieved: '2026-11-18'
     notes: Readme; the program itself is called 'Vixen' ('Vixen is a full featured sequencer for producing animated light shows').
-  status:
-    url: https://www.vixenlights.com/
-    retrieved: '2026-11-18'
-    notes: Vixen 3.13u4 released 2026-10-22

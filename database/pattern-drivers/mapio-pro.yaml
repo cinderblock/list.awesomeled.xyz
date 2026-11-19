@@ -21,9 +21,18 @@ platforms:
     - macOS
 pricing:
   price: €200
+  source:
+    retrieved: '2026-11-18'
+    vendor: Visution
+    url: https://visution.com/
+    notes: MAPIO PRO, excl. VAT (VAT added for Euro-zone buyers); LED strip output is a PRO feature; LITE €100; volume discounts
   demo:
     available: Watermarked demo
 sources:
+  status:
+    url: https://visution.com/
+    retrieved: '2026-11-18'
+    notes: 'MAPIO PRO and LITE still sold (Buy Now via 2Checkout); last changelog 2.3.4 posted 2020-06-10, macOS development suspended'
   creator:
     url: https://visution.com/
     retrieved: '2026-11-18'

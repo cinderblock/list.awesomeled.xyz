@@ -22,10 +22,19 @@ platforms:
     - Windows
     - macOS
 pricing:
-  price: Free- $30/month
+  price: Free - $5.99/month
+  source:
+    retrieved: '2026-11-18'
+    vendor: Lumia Stream
+    url: https://lumiastream.com/pricing
+    notes: 'Premium: $5.99/month, $32.99 every 6 months, $59.99/year (auto-renewing); a lifetime plan is mentioned without a listed price'
   demo:
     available: Free / premium Monthly
 sources:
+  status:
+    url: https://lumiastream.com/pricing
+    retrieved: '2026-11-18'
+    notes: 'free download and Premium plans on sale'
   aliases:
     url: https://lumiastream.com/
     retrieved: '2026-11-18'

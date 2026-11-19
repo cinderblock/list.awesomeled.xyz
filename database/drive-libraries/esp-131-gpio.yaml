@@ -9,6 +9,11 @@ links:
 platforms:
   - Arduino
   - ESP8266
+sources:
+  status:
+    url: https://github.com/garymueller/ESP-131GPIO
+    retrieved: '2026-11-18'
+    notes: 'last commit 2025-09-28'
 supported_ics:
   - E1.31
   - sACN

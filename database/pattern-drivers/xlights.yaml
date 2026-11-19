@@ -26,6 +26,10 @@ platforms:
 pricing:
   price: Free
 sources:
+  status:
+    url: https://github.com/xLightsSequencer/xLights/releases
+    retrieved: '2026-11-18'
+    notes: 'release 2026.20 published 2026-11-12'
   aliases:
     url: https://manual.xlights.org/xlights/chapters/untitled/history
     retrieved: '2026-11-18'

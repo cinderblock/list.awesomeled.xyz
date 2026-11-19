@@ -17,6 +17,11 @@ related_pixel_ics:
   - ucs1903
   - ucs8903
   - dmx512
+sources:
+  status:
+    url: https://github.com/forkineye/ESPixelStick
+    retrieved: '2026-11-18'
+    notes: 'last commit 2026-11-11 (latest tagged release v4.0-beta5, 2023-12-01)'
 supported_ics:
   - WS2811
   - WS2812

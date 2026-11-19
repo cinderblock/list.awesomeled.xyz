@@ -10,3 +10,8 @@ links:
   repo: https://github.com/jasoncoon/led-mapper
 platforms:
   - Web
+sources:
+  status:
+    url: https://github.com/jasoncoon/led-mapper
+    retrieved: '2026-11-18'
+    notes: 'last commit 2025-04-29'

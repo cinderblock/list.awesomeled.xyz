@@ -29,6 +29,11 @@ related_pixel_ics:
   - ucs1903
   - ucs1904
   - ws2801
+sources:
+  status:
+    url: https://github.com/FastLED/FastLED/releases
+    retrieved: '2026-11-18'
+    notes: 'release 3.10.9 published 2026-11-01'
 supported_ics:
   - WS2811
   - WS2812

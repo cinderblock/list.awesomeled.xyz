@@ -16,13 +16,27 @@ capabilities:
   live: true
   designer: true
   visualizer: Yes Basic 2D
+dead_links:
+  - url: https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
+    archive: https://web.archive.org/web/20211112071836/https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
+    checked: '2026-11-18'
 integrations: Obsidian Onyx
 links:
-  url: https://obsidiancontrol.com/dylos
+  url: https://www.obsidiancontrol.com/pages/dylos
 platforms:
   os:
     - Windows
 pricing:
   price: Free 1 universe
+  source:
+    retrieved: '2026-11-18'
+    vendor: Obsidian Control Systems
+    url: https://www.obsidiancontrol.com/pages/onyx
+    notes: 'ONYX "Free" license unlocks universe 1 over Art-Net/sACN; DYLOS page: "2 DYLOS Zones in Free Mode", 5 zones and up to 128 universes depending on the paid ONYX license'
   demo:
     available: Limited Demo
+sources:
+  status:
+    url: https://www.obsidiancontrol.com/pages/dylos
+    retrieved: '2026-11-18'
+    notes: 'current Obsidian product page; ONYX software listed at $0.00 in the Obsidian store'

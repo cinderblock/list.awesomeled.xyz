@@ -10,6 +10,11 @@ platforms:
   - Teensy
 related_pixel_ics:
   - ws2811
+sources:
+  status:
+    url: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
+    retrieved: '2026-11-18'
+    notes: 'PJRC library page live (library ships with Teensyduino); GitHub last commit 2023-07-28'
 supported_ics:
   - WS2811
   - WS2812
