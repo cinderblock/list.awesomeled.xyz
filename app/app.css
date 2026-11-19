@@ -25,6 +25,9 @@
 /* Table tools: toolbar, column picker, filter drawer, menus, density, toasts */
 @import './styles/table-tools.css';
 
+/* Search: header trigger, command palette, results, not-found page */
+@import './styles/search.css';
+
 /* Category Theme: Dynamic category colors */
 @import './styles/category-theme.css';
 

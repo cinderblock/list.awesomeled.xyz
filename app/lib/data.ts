@@ -345,9 +345,9 @@ export function getCategoryById(id: string): Category | undefined {
  * Get all routes that should be pre-rendered
  */
 export function getAllRoutes(): string[] {
-  const routes: string[] = ['/', '/about', '/system-overview', '/designer'];
+  const routes: string[] = ['/', '/about', '/system-overview', '/designer', '/search'];
 
-  routes.push('/database.csv.zip', '/database.yaml.zip');
+  routes.push('/database.csv.zip', '/database.yaml.zip', '/search-index.json');
 
   for (const category of CATEGORIES) {
     // Add category page

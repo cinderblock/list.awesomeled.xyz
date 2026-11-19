@@ -11,6 +11,7 @@ import type { Route } from './+types/root';
 import './app.css';
 import { RainbowProvider } from '~/context/RainbowContext';
 import { Layout as AppLayout } from '~/components/layout/Layout';
+import { NotFound } from '~/components/search/NotFound';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', href: '/favicon.ico', sizes: '48x48' },
@@ -93,6 +94,19 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;
+  }
+
+  // A missing page gets search suggestions instead of a dead end
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return (
+      <RainbowProvider>
+        <AppLayout>
+          <title>Page not found - Awesome LED List</title>
+          <meta name="robots" content="noindex" />
+          <NotFound />
+        </AppLayout>
+      </RainbowProvider>
+    );
   }
 
   return (

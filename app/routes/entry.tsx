@@ -96,6 +96,14 @@ export async function loader({ params }: Route.LoaderArgs) {
   };
 }
 
+// A URL for an entry that does not exist has no prerendered data file; the
+// static host answers the request for it with a 404. Going through a client
+// loader turns that into a proper not-found response (the root error boundary
+// then suggests the closest entries) instead of a generic loader failure.
+export async function clientLoader({ serverLoader }: Route.ClientLoaderArgs) {
+  return serverLoader();
+}
+
 function collectConnectorRefs(value: unknown, out: Set<string>): void {
   if (!value || typeof value !== 'object') return;
   for (const [k, v] of Object.entries(value as Record<string, unknown>)) {

@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from 'react';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { CategoryNav } from './CategoryNav';
+import { SearchPalette } from '../search/SearchPalette';
 import { PixelScrollbar } from '../ui/PixelScrollbar';
 import { Toaster } from '../ui/Toaster';
 import { TooltipProvider } from '../ui/Tooltip';
@@ -33,6 +34,7 @@ export function Layout({ children }: LayoutProps) {
         <main className="layout-main">{children}</main>
         <Footer />
         <PixelScrollbar position="right" pixelSpacing={20} />
+        <SearchPalette />
         <Toaster />
       </div>
     </TooltipProvider>
