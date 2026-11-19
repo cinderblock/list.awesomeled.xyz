@@ -241,7 +241,11 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "max_per_output": { "type": "integer", "description": "Maximum pixels per output" }
+            "max_per_output": { "type": "integer", "description": "Maximum pixels per output" },
+            "max_total": {
+              "type": "integer",
+              "description": "Device-wide pixel limit (RGB, 8-bit), when the maker states one: needed when it is lower than count x max_per_output, or no per-output limit is published"
+            }
           }
         },
         "protocols": {
