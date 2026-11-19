@@ -53,6 +53,10 @@ price_source:
   url: https://www.lcsc.com/product-detail/C4154877.html
   vendor: LCSC
 sources:
+  color.pwm_frequency:
+    url: https://www.enttec.com/pixel-protocols/WS2816C
+    retrieved: '2026-11-18'
+    notes: PWM rate 10,000Hz, 16-bit per channel (distributor listings agree)
   status:
     url: https://www.lcsc.com/product-detail/C4154877.html
     retrieved: '2026-11-18'
