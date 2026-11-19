@@ -95,6 +95,9 @@ export const IGNORED_COMMITS = new Set([
   '6106eeb4e1c050d83afdd2c84def90588787a330', // data-freshness: controllers f–k dead-link re-checks (2)
   'bd81611df795e78f9d473c35d46a695af670030a', // data-freshness: EMP link live again (1)
   'd860c62d8cd13d86c0a6190139b1d4e6fcc32515', // data-freshness: Jinx / LEDs Master links (2)
+  'c1ff0a0bf27b587a8d69ad42fe7d59dcdc49f269', // data-freshness: pixel dead-link re-checks (4)
+  '23323c6ba53fb7aaaf416a5cf4ca6f34d1b7c918', // data-freshness: UCS8903 dead-link re-check (1)
+  'd673e019502956d3a3922afe711163fd62ba4fef', // data-freshness: connector link fixes (4)
 ]);
 
 /**
