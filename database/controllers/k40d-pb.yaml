@@ -10,7 +10,7 @@ inputs:
     Ethernet: true # via USB Ethernet adapter on host (preferred)
     Wi-Fi: true # via USB WiFi adapter on host
   standalone: true # runs FPP (Falcon Player) from SD card
-  requires_host: PocketBeagle # cape for PocketBeagle / PocketBeagle2
+  requires_host: PocketBeagle, PocketBeagle 2 # cape for PocketBeagle / PocketBeagle2
 outputs:
   connector:
     ref: rj45
@@ -21,6 +21,8 @@ outputs:
   clocked: false # async pixels
   auxiliary:
     DMX512: 4 # two RJ45 ports can output four DMX universes
+  protocols:
+    - WS2811
 power:
   voltage:
     max: 5
@@ -34,6 +36,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kulplights.com/product/k40d-pb/
   vendor: Kulp Lights LLC
+related:
+  - type: host
+    ref: microboards/pocketbeagle
+    notes: PocketBeagle cape (also works with the PocketBeagle 2)
+    source:
+      url: https://kulplights.com/product/k40d-pb/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -45,6 +54,20 @@ sources:
     retrieved: '2026-11-18'
     notes: 'In stock, board-only $110'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://kulplights.com/manuals/boards/k40d-pb/
+      retrieved: '2026-11-18'
+      notes: xLights' kulp.xcontroller lists the K40D-PB.
+  outputs.protocols:
+    url: https://kulplights.com/product/k40d-pb/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: "Product page. Board manual (https://kulplights.com/manuals/boards/k40d-pb/): '| FPP output | BBB48String |'; FPP 10.4 treats BBB48String capes as ws281x-only (co-pixelStrings.php L257). All outputs go through differential receivers."
+  software.firmware:
+    url: https://kulplights.com/product/k40d-pb/
+    retrieved: '2026-11-18'
+  inputs.requires_host:
+    url: https://kulplights.com/manuals/boards/k40d-pb/
+    retrieved: '2026-11-18'
+    notes: requires_host is a single string; current 'PocketBeagle' is fine.

@@ -23,6 +23,9 @@ outputs:
     max_per_output: 512
   driver:
     buffered: true # data level shifter
+  protocols:
+    - WS2811
+    - WS2812
 power:
   voltage:
     min: 5
@@ -44,9 +47,32 @@ features:
   - IR remote receiver
   - Data level shifter
 price: 28
+software:
+  firmware:
+    - WLED
+    - ESPixelStick
+  works_with:
+    - xLights
+    - FPP
 sources:
   status:
     url: https://microcyb.com/
     retrieved: '2026-11-18'
     notes: 'relaunched Microcyb store lists 3 controllers (ShowSpark line), no EspArtStick'
+  outputs.protocols:
+    url: https://web.archive.org/web/20191020131554/http://www.microcyb.com/ESPArtStick/index.html
+    retrieved: '2026-11-18'
+    notes: "Partial, generic list: the maker's 2019 ESP Art Stick page names WS2811/WS2812 'etc.' as the pixels its controllers drive"
+  software.firmware:
+    url: https://web.archive.org/web/20231130033100/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+    retrieved: '2026-11-18'
+    notes: Wayback copy of the maker's Ecwid page for this exact product (ID 170368862, same as the YAML's microcyb.com URL).
+  software.works_with:
+    url: https://web.archive.org/web/20231130033100/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+    retrieved: '2026-11-18'
+    notes: Store-level description on the same archived page ('ESPArtStick line are a small pixel controller ... for the Wemos D1 mini. Works with FPP and xLights.'); the product meta description says 'Works with esppixelstick & xlights'.
+  wled_compatible:
+    url: https://web.archive.org/web/20231130033100/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+    retrieved: '2026-11-18'
+    notes: Confirms the current value; product name 'WLED SD-Card / Wi-Fi EspArtStick pixel controller'.
 wled_compatible: true

@@ -9,7 +9,7 @@ inputs:
   physical:
     Ethernet: true # provided by BeagleBone Black host
   standalone: true # runs Falcon Player (FPP) on the BeagleBone
-  requires_host: BeagleBone Black
+  requires_host: PocketBeagle
 outputs:
   count: 32 # 16 onboard plus 16 via expansion header
   connector:
@@ -21,6 +21,8 @@ outputs:
     DMX512: 2
   pixels:
     max_total: 22400
+  protocols:
+    - WS2811
 power:
   voltage:
     max: 24
@@ -32,6 +34,13 @@ dead_links:
     checked: '2026-11-18'
     notes: The DIYC forums are gone; every forum URL now returns 404
 price: 130
+related:
+  - type: host
+    ref: microboards/pocketbeagle
+    notes: PocketBeagle cape (PB16 = PocketBeagle 16-port)
+    source:
+      url: https://github.com/computergeek1507/PB_16/blob/master/PB_16v1/README.md
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -39,10 +48,21 @@ software:
     - xLights
 sources:
   software.firmware:
-    url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
-    retrieved: '2026-11-18'
-    notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/pb/PB16-eeprom.bin'
+    - url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
+      retrieved: '2026-11-18'
+      notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/pb/PB16-eeprom.bin'
+    - url: https://github.com/computergeek1507/PB_16/blob/master/PB_16v1/README.md
+      retrieved: '2026-11-18'
+      notes: "Repository readme: 'Powered by FPP Falcon Player'."
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/scott.xcontroller
     retrieved: '2026-11-18'
     notes: xLights controller definition (config upload supported)
+  outputs.protocols:
+    url: https://github.com/FalconChristmas/fpp/blob/10.4/capes/pb/PB16-eeprom.bin
+    retrieved: '2026-11-18'
+    notes: FPP's own PB16 cape definition
+  inputs.requires_host:
+    url: https://github.com/computergeek1507/PB_16
+    retrieved: '2026-11-18'
+    notes: "Repository readme. The BeagleBone versions are separate boards ('BBB 16v2': 'The BBB 16v2 is a BeagleBone Version ...')."

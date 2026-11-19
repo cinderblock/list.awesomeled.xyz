@@ -18,6 +18,42 @@ outputs:
   clocked: false # async pixels only
   auxiliary:
     DMX512: 2 # two UART differential outputs (DMX/Renard/LOR/PixelNet)
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
+    - WS2818
+    - SK6812
+    - SK6813
+    - SM16703
+    - GS8206
+    - GS8208
+    - TM1809
+    - TM1812
+    - UCS1904
+    - UCS2903
+    - APA104
+    - APA106
+    - APA109
+    - SK6812RGBW
+    - SK6818
+    - SM16704
+    - UCS2904
+    - WS2814
+    - TM1814
+    - TM1814A
+    - UCS8903
+    - UCS8904
+    - UCS1903
+    - TM1803
+    - GW6205
+    - TM1804
+    - SK6822
+    - PL9823
+    - UCS1912
+    - GE8822
 power:
   voltage:
     max: 5
@@ -34,6 +70,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kulplights.com/product/k64d-b/
   vendor: Kulp Lights LLC
+related:
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: BeagleBone Black cape; the BBB mounts upside down on top
+    source:
+      url: https://kulplights.com/manuals/hardware/beaglebone-black/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -45,8 +88,21 @@ sources:
     retrieved: '2026-11-18'
     notes: 'In stock, board-only $130'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://kulplights.com/manuals/boards/k64d-b/
+      retrieved: '2026-11-18'
+      notes: xLights' kulp.xcontroller lists the K64D-B.
+  outputs.protocols:
+    url: https://github.com/FalconChristmas/fpp/blob/10.4/www/co-pixelStrings.php
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: "Inherited from FPP. Kulp manual (https://kulplights.com/manuals/boards/k64d-b/): '| FPP output | BBShiftString |'."
+  software.firmware:
+    url: https://kulplights.com/product/k64d-b/
+    retrieved: '2026-11-18'
+  inputs.requires_host:
+    url: https://kulplights.com/product/k64d-b/
+    retrieved: '2026-11-18'
 technical_notes:
   - Up to 80000 pixels total across all outputs

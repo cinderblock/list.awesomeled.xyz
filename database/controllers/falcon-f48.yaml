@@ -25,6 +25,22 @@ outputs:
   clocked: false
   auxiliary:
     DMX512: 3
+  protocols:
+    - WS2811
+    - WS2812
+    - TM1804
+    - TM1803
+    - TM1809
+    - TM1812
+    - SM16715
+    - INK1003
+    - LX1203
+    - UCS1903
+    - TLS3001
+    - TLS3002
+    - CY3005
+    - GE Color Effects
+    - UCS2903
 power:
   voltage:
     min: 5
@@ -56,12 +72,24 @@ related:
 software:
   works_with:
     - xLights
+    - FPP
+    - Vixen
+    - LSP
+    - LOR
+    - HLS
 sources:
   status:
     url: https://pixelcontroller.com/store/19-discontinued-products
     retrieved: '2026-11-18'
     notes: 'F48 Differential Controller listed under Discontinued Products, Out-of-Stock'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported) — xLights also has separate F48V4 and F48V5 models; DB entry is the original F48
+    - url: https://docs.google.com/document/d/1sAzoFztiKdI3BPDl_Kegu28DKKlIM4PlSNaCNvvDtgk/edit
+      retrieved: '2026-11-18'
+      notes: F48 manual, addressing-mode section (two sentences).
+  outputs.protocols:
+    url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported) — xLights also has separate F48V4 and F48V5 models; DB entry is the original F48
+    notes: 'This database entry is the original F48 (store product 52: 5V-powered, 96 universes, fw 2.x), not the later F48V4/F48V5.'

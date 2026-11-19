@@ -18,6 +18,86 @@ outputs:
   pixels:
     max_per_output: 1024
   clocked: selectable
+  protocols:
+    - APA104
+    - APA106
+    - APA107
+    - CS8812
+    - GS8202
+    - GS8206
+    - GS8208
+    - INK1002
+    - INK1003
+    - LB1908
+    - LPD1882
+    - LX1203
+    - P9883
+    - SK6812 (RGB)
+    - SK6813
+    - SK6822
+    - SM16703
+    - SM16711
+    - SM16712
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - TM1914
+    - UCS1903
+    - UCS1904
+    - UCS1909
+    - UCS1912
+    - UCS2903
+    - UCS2909
+    - UCS2912
+    - UCS9812
+    - WS2811
+    - WS2812
+    - WS2813
+    - WS2815
+    - WS2818
+    - APA101
+    - APA102
+    - APA102C
+    - HD107S
+    - SK9822
+    - HD108
+    - WS2805
+    - APA109
+    - SK6812 (RGBW)
+    - SK6818
+    - SM16704
+    - SM16804
+    - UCS2904
+    - WS2814
+    - DMX512
+    - UCS512
+    - WS2822
+    - UCS512C4
+    - CY3005
+    - TLS3001
+    - TLS3002
+    - QED3001
+    - D705
+    - LPD1101
+    - LPD6803
+    - UCS6909
+    - UCS6912S
+    - LPD8803
+    - LPD8806
+    - LPD8809
+    - UCS8812
+    - WS2801
+    - WS2803
+    - SM16716
+    - SM16726
+    - TM1814
+    - TM1829
+    - UCS8903
+    - UCS8904
+    - SJ1221
+    - UCS5603
+    - SM16825
 power:
   current:
     max: 60
@@ -37,12 +117,20 @@ price_source:
 software:
   works_with:
     - xLights
+    - FPP
 sources:
   status:
     url: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html
     retrieved: '2026-11-18'
     notes: 'In Stock, USD $255.00'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+      retrieved: '2026-11-18'
+      notes: "Spec sheet rows for the F16v4 column: 'xLights integration' = Yes, 'Configuration method' = 'Web Page/xLights Sequencer', 'Falcon Player (FPP) modes' = Master/Remote."
+  outputs.protocols:
+    url: https://pixelcontroller.com/store/PixelTypes.html
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: "Falcon's 'Supported Pixel Types' page, linked by that name from the F16V4 product page (https://pixelcontroller.com/store/products/70-f16v4.html: 'String Types: More than 70+ pixel types supported.')."

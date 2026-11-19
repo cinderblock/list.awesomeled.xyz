@@ -19,6 +19,42 @@ outputs:
     max_per_output: 625 # ~80k practical limit across 128 outputs
   auxiliary:
     DMX512: 2 # two UART differential outputs for DMX/Renard/LOR/PixelNet
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
+    - WS2818
+    - SK6812
+    - SK6813
+    - SM16703
+    - GS8206
+    - GS8208
+    - TM1809
+    - TM1812
+    - UCS1904
+    - UCS2903
+    - APA104
+    - APA106
+    - APA109
+    - SK6812RGBW
+    - SK6818
+    - SM16704
+    - UCS2904
+    - WS2814
+    - TM1814
+    - TM1814A
+    - UCS8903
+    - UCS8904
+    - UCS1903
+    - TM1803
+    - GW6205
+    - TM1804
+    - SK6822
+    - PL9823
+    - UCS1912
+    - GE8822
 power:
   voltage:
     max: 5
@@ -35,6 +71,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kulplights.com/product/k128d-b/
   vendor: Kulp Lights LLC
+related:
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: BeagleBone Black cape; the BBB mounts upside down on top
+    source:
+      url: https://kulplights.com/manuals/hardware/beaglebone-black/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -46,9 +89,24 @@ sources:
     retrieved: '2026-11-18'
     notes: 'In stock, board-only $180'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://kulplights.com/manuals/boards/k128d-b/
+      retrieved: '2026-11-18'
+      notes: "Board manual, 'FPP setup'. The manual's 'Configuring outputs' page (https://kulplights.com/manuals/software/outputs/) recommends xLights: 'From xLights (recommended)'. xLights' kulp.xcontroller lists the K128D-B."
+  outputs.protocols:
+    url: https://github.com/FalconChristmas/fpp/blob/10.4/www/co-pixelStrings.php
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: Inherited from FPP. Kulp's manual (https://kulplights.com/manuals/boards/k128d-b/) gives '| FPP output | BBShiftString |'.
+  software.firmware:
+    url: https://kulplights.com/product/k128d-b/
+    retrieved: '2026-11-18'
+    notes: Product page, 'You WILL need' list.
+  inputs.requires_host:
+    url: https://kulplights.com/product/k128d-b/
+    retrieved: '2026-11-18'
+    notes: "Manual: '| Requires | BeagleBone Black or compatible, FPP 9.5 or later |'."
 technical_notes:
   - ~80k pixel practical limit from the single-core AM3358 in the BeagleBone Black
   - Two UART differential outputs for DMX/Renard/LOR/PixelNet

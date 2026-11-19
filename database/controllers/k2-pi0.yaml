@@ -8,7 +8,7 @@ inputs:
   physical:
     Wi-Fi: 2.4GHz # via the host Raspberry Pi Zero W/2W
   standalone: true # runs FPP (Falcon Player)
-  requires_host: Raspberry Pi Zero
+  requires_host: Raspberry Pi Zero 2 W, Raspberry Pi Zero W
 outputs:
   count: 2
   connector:
@@ -19,6 +19,9 @@ outputs:
     max: 6
   auxiliary:
     I2C: true # small GPIO/i2c header
+  protocols:
+    - WS2811
+    - WS2812
 power:
   voltage:
     min: 5
@@ -35,6 +38,25 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kulplights.com/product/k2-pi0/
   vendor: Kulp Lights LLC
+related:
+  - type: host
+    ref: microboards/raspberry-pi-zero-w
+    notes: Pi Zero hat; designed for the Pi Zero 2 W, also works on the original Pi Zero W
+    source:
+      url: https://kulplights.com/manuals/hardware/raspberry-pi/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3-model-b
+    notes: Also works on a Pi 3 B+ (held only by the GPIO header; holes don't line up)
+    source:
+      url: https://kulplights.com/manuals/boards/k2-pi0/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Also works on a Pi 4 (held only by the GPIO header)
+    source:
+      url: https://kulplights.com/manuals/boards/k2-pi0/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -46,6 +68,21 @@ sources:
     retrieved: '2026-11-18'
     notes: 'In stock, board-only $28'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://kulplights.com/manuals/boards/k2-pi0/
+      retrieved: '2026-11-18'
+      notes: xLights' kulp.xcontroller also lists the K2-Pi0.
+  outputs.protocols:
+    url: https://kulplights.com/manuals/hardware/pixel-outputs/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: Kulp manual, 'Data signal' (applies to all Kulp boards' local ports).
+  software.firmware:
+    url: https://kulplights.com/product/k2-pi0/
+    retrieved: '2026-11-18'
+    notes: "Manual: '| Requires | Raspberry Pi Zero 2 W (see below for other Pis), FPP 10 or later |'."
+  inputs.requires_host:
+    url: https://kulplights.com/manuals/boards/k2-pi0/
+    retrieved: '2026-11-18'
+    notes: requires_host is a single string in the schema

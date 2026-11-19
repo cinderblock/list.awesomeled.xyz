@@ -24,3 +24,8 @@ price_source:
   retrieved: '2026-11-18'
   vendor: PixelController
   url: https://pixelcontroller.com/store/diy-controllers/85-F-Test.html
+sources:
+  inputs.protocols:
+    url: https://docs.google.com/document/d/120dhIltqEcNxDoGgmjNeP6NHb6vISE70OXnZNWJYHhk/edit
+    retrieved: '2026-11-18'
+    notes: Confirms the current value. F-Test Owners Manual (v1.00), linked from https://pixelcontroller.com/store/diy-controllers/85-F-Test.html.

@@ -13,7 +13,7 @@ inputs:
   physical:
     Ethernet: true
   standalone: true # FPP plays sequences from the Raspberry Pi
-  requires_host: Raspberry Pi # 3B+ or above
+  requires_host: Raspberry Pi 3B, Raspberry Pi 4, Raspberry Pi Zero, Raspberry Pi Zero 2 # 3B+ or above
 outputs:
   count: 8
   connector:
@@ -23,6 +23,8 @@ outputs:
   clocked: false # single-wire only (FPP DPIPixels driver)
   pixels:
     max_per_output: 1600 # at 20 fps
+  protocols:
+    - WS2811
 power:
   voltage:
     max: 12
@@ -39,6 +41,19 @@ price_source:
   retrieved: '2025-06-21'
   url: https://web.archive.org/web/20250621084308/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
   vendor: Microcyb (EspArtStick store)
+related:
+  - type: host
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Raspberry Pi hat; maker names the Pi 3B and Pi 4
+    source:
+      url: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3-model-b
+    notes: Pi 3 B+ falls under the maker's 'Raspberry Pi 3B and above'
+    source:
+      url: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -53,3 +68,15 @@ sources:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/microcyb.xcontroller
     retrieved: '2026-11-18'
     notes: xLights controller definition (config upload supported) — M8-PI
+  outputs.protocols:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/microcyb.xcontroller
+    retrieved: '2026-11-18'
+    notes: No maker list (archived product page names no pixel types).
+  software.firmware:
+    url: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+    retrieved: '2026-11-18'
+    notes: "Wayback copy of the maker's Ecwid page. Also: 'NOTE : The M8-Pi require FPP 6 and above. FPP 6 and above will require a license Key (Sold Separately by FPP).'"
+  inputs.requires_host:
+    url: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+    retrieved: '2026-11-18'
+    notes: "Single-string field; current 'Raspberry Pi # 3B+ or above' is reasonable."

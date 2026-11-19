@@ -22,6 +22,9 @@ outputs:
     DMX512: 2 # two RS485 outputs (DMX/PixelNet/Renard/LOR)
   pixels:
     max_total: 72000
+  protocols:
+    - WS2811
+    - WS2812
 power:
   voltage:
     max: 12
@@ -42,6 +45,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kulplights.com/product/k32a-b/
   vendor: Kulp Lights LLC
+related:
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: BeagleBone Black cape (BBB sits underneath)
+    source:
+      url: https://kulplights.com/manuals/hardware/beaglebone-black/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -53,6 +63,20 @@ sources:
     retrieved: '2026-11-18'
     notes: '"Discontinued: This product has been discontinued."; delisted from the kulplights.com shop, all variants out of stock'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported) — variant of <Controller Name="K32">
+    - url: https://kulplights.com/manuals/boards/k32a-b/
+      retrieved: '2026-11-18'
+      notes: xLights' kulp.xcontroller lists the K32A-B.
+  outputs.protocols:
+    url: https://kulplights.com/manuals/hardware/pixel-outputs/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported) — variant of <Controller Name="K32">
+    notes: "Kulp manual 'Data signal'. Product page: 'designed to drive ws2811 LED pixels'."
+  software.firmware:
+    url: https://kulplights.com/product/k32a-b/
+    retrieved: '2026-11-18'
+  inputs.requires_host:
+    url: https://kulplights.com/product/k32a-b/
+    retrieved: '2026-11-18'
+    notes: "Also: 'Note: a BeagleBone Green Wireless will NOT work.'"

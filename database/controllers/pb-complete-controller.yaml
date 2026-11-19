@@ -12,6 +12,7 @@ inputs:
   protocols:
     - DMX512
   standalone: true
+  requires_host: PocketBeagle
 outputs:
   count: 16
   connector:
@@ -24,6 +25,8 @@ outputs:
   auxiliary:
     DC: 16
     Servo: 16
+  protocols:
+    - WS2811
 power:
   voltage:
     max: 24
@@ -36,7 +39,41 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kurtcontrollers.com/?product=pb-complete-controller
   vendor: Kurt Controllers
+related:
+  - type: host
+    ref: microboards/pocketbeagle
+    notes: Runs on a PocketBeagle (included)
+    source:
+      url: https://kurtcontrollers.com/?product=pb-complete-controller
+      retrieved: '2026-11-18'
+  - type: compatible
+    ref: controllers/pb16
+    notes: Configured in xLights/FPP as a ScottNation PB16 (No Expansion)
+    source:
+      url: https://kurtcontrollers.com/?product=pb-complete-controller
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - FPP
+  works_with:
+    - xLights
 sources:
+  outputs.protocols:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: Maker writes '16 WS28xx pixel ports' and says to configure it as FPP/xLights 'PB16'
+  software.firmware:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: "Also: 'If you want to use FPP version 6 or above with this controller you will need to purchase a licence key from Shop.FalconPlayer.com'."
+  software.works_with:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: "Also: 'Visit our GitHub to download FPP backups and xLights show folder' (https://github.com/kurtlamm/PB-Complete-Controller)."
+  inputs.requires_host:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: The PocketBeagle is included with the controller ('The controller comes with pluggable screw terminals, fuses, PocketBeagle SBC, and SanDisk Ultra 32GB micro SD card'), so this is the board it runs on rather than an extra purchase
   status:
     url: https://kurtcontrollers.com/?product=pb-complete-controller
     retrieved: '2026-11-18'

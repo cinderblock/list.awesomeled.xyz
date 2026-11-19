@@ -23,6 +23,9 @@ outputs:
     DMX512: 1
   pixels:
     max_total: 57600
+  protocols:
+    - WS2811
+    - WS2812
 power:
   voltage:
     min: 5
@@ -60,9 +63,24 @@ sources:
     retrieved: '2026-11-18'
     notes: 'In stock, board-only $90'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported) — variant of <Controller Name="K8">
+    - url: https://kulplights.com/manuals/boards/k8-pb/
+      retrieved: '2026-11-18'
+      notes: xLights' kulp.xcontroller lists 'K8-PB' and 'K8-PB w/Expansion'.
+  outputs.protocols:
+    url: https://kulplights.com/manuals/hardware/pixel-outputs/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported) — variant of <Controller Name="K8">
+    notes: "Kulp manual 'Data signal'. Product page: 'The K8-PB is a cape for the PocketBeagle 2 designed to drive ws2811 LED pixels.' Board manual: 'FPP drives this board with its BBB48String output'…"
+  software.firmware:
+    url: https://kulplights.com/product/k8-pb/
+    retrieved: '2026-11-18'
+    notes: "Manual: DMX on the PB2 'Needs FPP 10.3 or later'."
+  inputs.requires_host:
+    url: https://kulplights.com/manuals/boards/k8-pb/
+    retrieved: '2026-11-18'
+    notes: "Confirms the current value. Product page: 'The newer K8-PBs are designed specifically for the PocketBeagle 2 and will not work with an older PocketBeagle 1.'"
 technical_notes:
   - 12 of 36 channels require differential receivers to drive LEDs
   - Runs FPP (Falcon Player)

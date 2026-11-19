@@ -13,7 +13,7 @@ inputs:
   physical:
     Ethernet: true # via host Raspberry Pi
   standalone: true # plays from host running FPP
-  requires_host: Raspberry Pi
+  requires_host: Raspberry Pi 3B, Raspberry Pi 4, Raspberry Pi Zero, Raspberry Pi Zero 2
 outputs:
   count: 4
   connector:
@@ -23,6 +23,8 @@ outputs:
   pixels:
     max_per_output: 1600 # at 20 fps
   clocked: false # single-wire only (FPP DPIPixels driver)
+  protocols:
+    - WS2811
 power:
   voltage:
     max: 12
@@ -43,6 +45,19 @@ price_source:
   retrieved: '2024-05-19'
   url: http://web.archive.org/web/20240519213626/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
   vendor: Microcyb (EspArtStick store)
+related:
+  - type: host
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Raspberry Pi hat; maker names the Pi 3B and Pi 4
+    source:
+      url: https://web.archive.org/web/20231130050450/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3-model-b
+    notes: Pi 3 B+ falls under the maker's 'Raspberry Pi 3B and above'
+    source:
+      url: https://web.archive.org/web/20231130050450/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -57,3 +72,15 @@ sources:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/microcyb.xcontroller
     retrieved: '2026-11-18'
     notes: xLights controller definition (config upload supported) — duplicate DB entry of the M4-PI
+  outputs.protocols:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/microcyb.xcontroller
+    retrieved: '2026-11-18'
+    notes: Same product as m4-pi (see its notes). No maker list; inherited from FPP via xLights' FPPStringDPIPiHat base (ws2811 only) and FPP 10.4 DPIPixels.cpp L638 'if (protocol == "ws2811") {'.
+  software.firmware:
+    url: https://web.archive.org/web/20231130050450/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
+    retrieved: '2026-11-18'
+    notes: Confirms the current value.
+  inputs.requires_host:
+    url: https://web.archive.org/web/20231130050450/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
+    retrieved: '2026-11-18'
+    notes: Single-string field; see m4-pi.

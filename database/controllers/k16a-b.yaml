@@ -23,6 +23,42 @@ outputs:
     DMX512: 2 # two RS485 outputs (DMX/PixelNet/Renard/LOR)
   pixels:
     max_total: 72000
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
+    - WS2818
+    - SK6812
+    - SK6813
+    - SM16703
+    - GS8206
+    - GS8208
+    - TM1809
+    - TM1812
+    - UCS1904
+    - UCS2903
+    - APA104
+    - APA106
+    - APA109
+    - SK6812RGBW
+    - SK6818
+    - SM16704
+    - UCS2904
+    - WS2814
+    - TM1814
+    - TM1814A
+    - UCS8903
+    - UCS8904
+    - UCS1903
+    - TM1803
+    - GW6205
+    - TM1804
+    - SK6822
+    - PL9823
+    - UCS1912
+    - GE8822
 power:
   voltage:
     max: 12
@@ -42,6 +78,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kulplights.com/product/k16a-b/
   vendor: Kulp Lights LLC
+related:
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: BeagleBone Black cape (BBB sits underneath)
+    source:
+      url: https://kulplights.com/manuals/hardware/beaglebone-black/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -53,12 +96,26 @@ sources:
     retrieved: '2026-11-18'
     notes: '"Discontinued: This product has been discontinued."; delisted from the kulplights.com shop, all variants out of stock'
   software.firmware:
-    url: https://github.com/FalconChristmas/fpp/blob/master/www/api/controllers/cape.php
-    retrieved: '2026-11-18'
-    notes: Falcon Player (FPP) names this cape/board — Example response in FPP's /api/cape docs (vendor Kulp Lights)
+    - url: https://github.com/FalconChristmas/fpp/blob/master/www/api/controllers/cape.php
+      retrieved: '2026-11-18'
+      notes: Falcon Player (FPP) names this cape/board — Example response in FPP's /api/cape docs (vendor Kulp Lights)
+    - url: https://kulplights.com/product/k16a-b/
+      retrieved: '2026-11-18'
+      notes: "Product page, 'You WILL need' list. Manual: 'All three need a BeagleBone Black or compatible and run on FPP 9.5 or later.'"
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported) — K16 controller, variants 'K16A-B 1.x' and 'K16A-B 2.x/3.x'
+    - url: https://kulplights.com/manuals/boards/k16a-b/
+      retrieved: '2026-11-18'
+      notes: Board manual 'FPP setup'; xLights' kulp.xcontroller lists 'K16A-B 1.x' and 'K16A-B 2.x/3.x' variants.
+  outputs.protocols:
+    url: https://github.com/FalconChristmas/fpp/blob/10.4/www/co-pixelStrings.php
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported) — K16 controller, variants 'K16A-B 1.x' and 'K16A-B 2.x/3.x'
+    notes: Inherited from FPP, and only for K16A-B v2/v3.
+  inputs.requires_host:
+    url: https://kulplights.com/product/k16a-b/
+    retrieved: '2026-11-18'
+    notes: "Product page also: 'Note: a BeagleBone Green Wireless will NOT work.'"
 technical_notes:
   - Two RS485 outputs support DMX / PixelNet / Renard / LOR

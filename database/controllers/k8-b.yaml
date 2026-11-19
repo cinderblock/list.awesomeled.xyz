@@ -21,6 +21,9 @@ outputs:
     DMX512: 2 # two UARTs drive DMX/Renard/LOR
   pixels:
     max_total: 57600
+  protocols:
+    - WS2811
+    - WS2812
 power:
   voltage:
     max: 12
@@ -44,6 +47,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kulplights.com/product/k8-b/
   vendor: Kulp Lights LLC
+related:
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: BeagleBone Black cape (plugs on top of the BBB)
+    source:
+      url: https://kulplights.com/manuals/hardware/beaglebone-black/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -55,9 +65,23 @@ sources:
     retrieved: '2026-11-18'
     notes: 'In stock, board-only $80'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported) — variant of <Controller Name="K8">
+    - url: https://kulplights.com/manuals/boards/k8-b/
+      retrieved: '2026-11-18'
+      notes: xLights' kulp.xcontroller lists 'K8-B' and 'K8-B w/Expansion'.
+  outputs.protocols:
+    url: https://kulplights.com/manuals/hardware/pixel-outputs/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported) — variant of <Controller Name="K8">
+    notes: "Kulp manual 'Data signal'. Product page: 'The K8-B is a cape for the BeagleBone Black designed to drive ws2811 LED pixels.' Board manual: '| FPP output | BBB48String |' (ws281x-only in FPP 10.4, co-pixelStrings.php L257)."
+  software.firmware:
+    url: https://kulplights.com/product/k8-b/
+    retrieved: '2026-11-18'
+  inputs.requires_host:
+    url: https://kulplights.com/product/k8-b/
+    retrieved: '2026-11-18'
+    notes: "Also: 'Note: a BeagleBone Green Wireless will NOT work.'"
 technical_notes:
   - 8 local ports drive 800 pixels each at 40FPS (1500 at 20FPS)
   - 12 channels require differential receivers
