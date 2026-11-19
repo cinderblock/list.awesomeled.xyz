@@ -1,4 +1,5 @@
 name: WS2805
+status: active
 creator: WorldSemi
 notes: RGB+CCT with data backup line
 color:
@@ -11,16 +12,21 @@ datasheet:
   url: https://www.lcsc.com/datasheet/lcsc_datasheet_2306301035_Worldsemi-WS2805_C5446697.pdf
 price:
   - qty: 5
-    price: 0.1346
+    price: 0.1592
     sku: WS2805
   - qty: 500
-    price: 0.0835
+    price: 0.0923
     sku: WS2805
   - qty: 4000
-    price: 0.0712
+    price: 0.0763
     sku: WS2805
 price_source:
   part: C5446697
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C5446697.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5446697.html
+    retrieved: '2026-11-18'
+    notes: 'in stock at LCSC (6,560 pcs)'

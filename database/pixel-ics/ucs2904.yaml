@@ -18,3 +18,11 @@ other_links:
 physical:
   packages:
     - SOP-8
+price:
+  amount: 0.438
+  max: 1.334
+price_source:
+  notes: 'per chip (UCS2904B, SOP-8): regular price of 3 fixed 10-pc lots, excl. shipping; $4.38, $4.52, $13.34 per lot'
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-UCS2904B.html
+  vendor: AliExpress (street)

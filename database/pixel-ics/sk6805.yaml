@@ -1,4 +1,5 @@
 name: SK6805
+status: active
 creator: Opsco Optoelectronics
 notes: Low-current SK6812 sibling (5 mA/channel vs 12 mA) in miniature packages,
   used for dense strips and tiny pixels (e.g. NeoPixel Nano 2427).
@@ -20,6 +21,22 @@ physical:
     - '2427'
     - '1515'
     - '2020'
+price:
+  - qty: 5
+    price: 0.0904
+    sku: SK6805MICRO-J
+  - qty: 500
+    price: 0.0536
+    sku: SK6805MICRO-J
+  - qty: 6000
+    price: 0.048
+    sku: SK6805MICRO-J
+price_source:
+  notes: only sold integrated in the LED; price is per 2427 LED (SK6805MICRO-J, 2.7x2.4mm)
+  part: C2909056
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C2909056.html
+  vendor: LCSC
 related:
   - type: variant
     ref: pixel-ics/sk6812-5050
@@ -27,3 +44,8 @@ related:
   - type: related
     ref: pixels/sk6805
     notes: The same part as an integrated LED pixel
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C2909056.html
+    retrieved: '2026-11-18'
+    notes: 'SK6805MICRO-J (2427) in stock at LCSC (95,510 pcs)'

@@ -1,4 +1,5 @@
 name: TM1804
+status: active
 creator: Titan Micro Electronics
 color:
   channel_bits: 8
@@ -27,16 +28,22 @@ physical:
     - SOP-8
 price:
   - qty: 5
-    price: 0.1283
+    price: 0.1318
     sku: TM1804 (TA1610B SOP8)
   - qty: 500
-    price: 0.0738
+    price: 0.0758
     sku: TM1804 (TA1610B SOP8)
   - qty: 4000
-    price: 0.0607
+    price: 0.0623
     sku: TM1804 (TA1610B SOP8)
 price_source:
+  notes: regular price; 5% off at retrieval (0.1253 / 0.0721 / 0.0592)
   part: C20622206
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C20622206.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C20622206.html
+    retrieved: '2026-11-18'
+    notes: 'TM1804 (TA1610B SOP8) in stock at LCSC (1,090 pcs)'

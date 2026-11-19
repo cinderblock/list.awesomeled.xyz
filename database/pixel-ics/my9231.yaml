@@ -1,4 +1,5 @@
 name: MY9231
+status: active
 release_year: 2010
 creator: MY-Semi
 color:
@@ -28,5 +29,10 @@ physical:
     - SSOP-16
     - TSSOP-16
     - QFN-16
+sources:
+  status:
+    url: http://www.my-semi.com/content/products/product_mean.aspx?id=5
+    retrieved: '2026-11-18'
+    notes: "listed in MY-Semi's LED Lighting product catalog"
 technical_notes:
   - Pixel data size is variable (it depends on the configured bit depth)

@@ -1,4 +1,5 @@
 name: WS2814
+status: active
 creator: WorldSemi
 color:
   channel_bits: 8
@@ -13,18 +14,24 @@ physical:
     - SOP-12
 price:
   - qty: 5
-    price: 0.0962
+    price: 0.0899
     sku: WS2814F
   - qty: 500
-    price: 0.0625
+    price: 0.0559
     sku: WS2814F
   - qty: 6000
-    price: 0.0544
+    price: 0.0477
     sku: WS2814F
 price_source:
+  notes: WS2814F (FSOP-8) variant; the SOP-12 WS2814 (C965562) is no longer listed
   part: C5446694
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C5446694.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5446694.html
+    retrieved: '2026-11-18'
+    notes: 'WS2814F in stock at LCSC (79,595 pcs)'
 technical_notes:
   - 'Variants: WS2814A (SOP-8 / FSOP-8), WS2814C (SOP-8), WS2814F (FSOP-8); the listed prices are for WS2814F.'

@@ -1,4 +1,5 @@
 name: MY9221
+status: active
 creator: MY-Semi
 color:
   channel_bits: 16
@@ -16,3 +17,16 @@ physical:
     - SSOP-24
     - TSSOP-24
     - QFN-20
+price:
+  amount: 0.919
+  max: 2.67
+price_source:
+  notes: 'per chip (MY9221SS SSOP-24, one MY9221QD QFN-20): regular price of 9 fixed-lot listings (1-10 pcs), excl. shipping; low = 10-pc lot at $9.19, high = 5-pc lot at $13.35'
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-MY9221SS.html
+  vendor: AliExpress (street)
+sources:
+  status:
+    url: http://www.my-semi.com/content/products/product_mean.aspx?id=4
+    retrieved: '2026-11-18'
+    notes: "listed in MY-Semi's LED Lighting product catalog"

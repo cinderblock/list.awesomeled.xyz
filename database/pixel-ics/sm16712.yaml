@@ -11,3 +11,11 @@ other_links:
 physical:
   packages:
     - SOP-16
+price:
+  amount: 0.46
+  max: 0.94
+price_source:
+  notes: 'per chip (SM16712P, SOP-16): regular price of 3 fixed-lot listings, excl. shipping; 10 pcs $4.60, 10 pcs $7.78, 5 pcs $4.70'
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-SM16712.html
+  vendor: AliExpress (street)

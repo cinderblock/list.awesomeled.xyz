@@ -1,4 +1,5 @@
 name: TM1809
+status: active
 creator: Titan Micro Electronics
 color:
   channel_bits: 8
@@ -23,7 +24,13 @@ price:
     price: 0.0977
     sku: TM1809 (TA1515)
 price_source:
+  notes: regular price; 3% off at retrieval (0.2068 / 0.1131 / 0.0948)
   part: C20622180
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C20622180.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C20622180.html
+    retrieved: '2026-11-18'
+    notes: 'TM1809 (TA1515) in stock at LCSC (2,410 pcs) but flagged not recommended for new designs; original TM1809 C62083 discontinued'

@@ -1,4 +1,5 @@
 name: TM1914
+status: active
 creator: Titan Micro Electronics
 color:
   channel_bits: 8
@@ -20,14 +21,19 @@ price:
   - qty: 500
     price: 0.0566
     sku: TM1914A
-  - qty: 5000
+  - qty: 4000
     price: 0.0466
     sku: TM1914A
 price_source:
   notes: in-stock TM1914A; original TM1914 C5174535 out of stock at same tiers
   part: C5174521
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C5174521.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5174521.html
+    retrieved: '2026-11-18'
+    notes: 'TM1914A in stock at LCSC (20,945 pcs)'
 technical_notes:
   - TM1914A is the SOP-8 version; the listed prices are for TM1914A.

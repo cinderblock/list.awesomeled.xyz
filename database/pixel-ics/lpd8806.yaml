@@ -29,3 +29,11 @@ other_links:
 physical:
   packages:
     - SOP-16
+price:
+  amount: 0.275
+  max: 2.03
+price_source:
+  notes: 'per chip (LPD8806S, SOP-16): best regular lot price of each of 8 sellers, lots of 5-100 pcs, excl. shipping; low = 10-pc lot at $2.75, high = 20-pc lot at $40.66'
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-LPD8806-IC.html
+  vendor: AliExpress (street)

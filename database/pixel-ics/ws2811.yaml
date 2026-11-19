@@ -40,20 +40,25 @@ physical:
     - FSOP-8
 price:
   - qty: 20
-    price: 0.0417
+    price: 0.0483
     sku: WS2811
   - qty: 600
-    price: 0.0281
+    price: 0.0325
     sku: WS2811
-  - qty: 4000
-    price: 0.0211
+  - qty: 20000
+    price: 0.0199
     sku: WS2811
 price_source:
   notes: SOP-8
   part: C114581
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C114581.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C114581.html
+    retrieved: '2026-11-18'
+    notes: 'in stock at LCSC (120,800 pcs)'
 technical_notes:
   - Standalone IC, not integrated with LEDs like WS2812
   - Commonly used for 12V pixels with 3 LEDs in series

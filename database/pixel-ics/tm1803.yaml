@@ -1,4 +1,5 @@
 name: TM1803
+status: active
 creator: Titan Micro Electronics
 color:
   channel_bits: 8
@@ -13,16 +14,21 @@ physical:
     - SOP-8
 price:
   - qty: 5
-    price: 0.144
+    price: 0.146
     sku: TM1803
   - qty: 500
-    price: 0.0828
+    price: 0.0839
     sku: TM1803
   - qty: 4000
-    price: 0.0681
+    price: 0.069
     sku: TM1803
 price_source:
   part: C5159541
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C5159541.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5159541.html
+    retrieved: '2026-11-18'
+    notes: 'in stock at LCSC (90 pcs)'

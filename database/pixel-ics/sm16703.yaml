@@ -1,4 +1,5 @@
 name: SM16703
+status: active
 creator: Shenzhen Sunmoon Microelectronics
 color:
   channel_bits: 8
@@ -13,16 +14,22 @@ physical:
     - SOP-8
 price:
   - qty: 10
-    price: 0.0446
+    price: 0.0531
     sku: SM16703P
   - qty: 1000
-    price: 0.0285
+    price: 0.0339
     sku: SM16703P
   - qty: 40000
-    price: 0.0213
+    price: 0.0253
     sku: SM16703P
 price_source:
+  notes: regular price; 7% off at retrieval (0.0494 / 0.0316 / 0.0236)
   part: C155753
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C155753.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C155753.html
+    retrieved: '2026-11-18'
+    notes: 'SM16703P in stock at LCSC (38,710 pcs)'

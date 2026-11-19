@@ -1,4 +1,5 @@
 name: MY9291
+status: active
 creator: MY-Semi
 color:
   channel_bits: 16
@@ -15,3 +16,8 @@ physical:
     - SSOP-20
     - TSSOP-20
     - QFN-20
+sources:
+  status:
+    url: http://www.my-semi.com/content/products/product_mean.aspx?id=6
+    retrieved: '2026-11-18'
+    notes: "listed in MY-Semi's LED Lighting product catalog"

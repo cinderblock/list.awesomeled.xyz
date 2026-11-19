@@ -1,4 +1,5 @@
 name: TM1814
+status: active
 creator: Titan Micro Electronics
 color:
   channel_bits: 8
@@ -18,17 +19,22 @@ physical:
     - SOP-8
 price:
   - qty: 5
-    price: 0.1099
+    price: 0.111
     sku: TM1814 (TA2105B)
   - qty: 500
-    price: 0.0632
+    price: 0.0638
     sku: TM1814 (TA2105B)
   - qty: 4000
-    price: 0.052
+    price: 0.0525
     sku: TM1814 (TA2105B)
 price_source:
   notes: TA2105B re-issue; original TM1814 C62614 discontinued
   part: C20622183
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C20622183.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C20622183.html
+    retrieved: '2026-11-18'
+    notes: 'TM1814 (TA2105B) re-issue in stock at LCSC (3,125 pcs)'

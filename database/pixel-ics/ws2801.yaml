@@ -1,4 +1,5 @@
 name: WS2801
+status: active
 release_year: 2010
 creator: WorldSemi
 notes: Early Addressable LED controller still common on 4 wire pixel and puck strings
@@ -30,18 +31,23 @@ physical:
     - SOP-14
 price:
   - qty: 5
-    price: 0.2715
+    price: 0.2718
     sku: WS2801S
   - qty: 500
-    price: 0.1592
+    price: 0.1572
     sku: WS2801S
   - qty: 6000
-    price: 0.1374
+    price: 0.1349
     sku: WS2801S
 price_source:
   part: C114580
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C114580.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C114580.html
+    retrieved: '2026-11-18'
+    notes: 'WS2801S in stock at LCSC (2,880 pcs)'
 technical_notes:
   - The 2009 preliminary datasheet also listed a DIP-14 package; current WS2801S datasheets list SOP-14 only.

@@ -1,4 +1,5 @@
 name: TM1829
+status: active
 creator: Titan Micro Electronics
 color:
   channel_bits: 8
@@ -13,16 +14,21 @@ physical:
     - SOP-8
 price:
   - qty: 10
-    price: 0.0704
+    price: 0.0695
     sku: TM1829B-SOP8-TA2105B
   - qty: 1000
-    price: 0.0442
+    price: 0.0431
     sku: TM1829B-SOP8-TA2105B
   - qty: 8000
-    price: 0.0379
+    price: 0.0368
     sku: TM1829B-SOP8-TA2105B
 price_source:
   part: C52109855
-  retrieved: '2026-07-03'
+  retrieved: '2026-11-18'
   url: https://www.lcsc.com/product-detail/C52109855.html
   vendor: LCSC
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C52109855.html
+    retrieved: '2026-11-18'
+    notes: 'TM1829B-SOP8-TA2105B in stock at LCSC (50 pcs)'

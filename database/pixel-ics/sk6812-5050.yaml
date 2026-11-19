@@ -1,4 +1,5 @@
 name: SK6812(5050)
+status: active
 creator: Opsco Optoelectronics
 color:
   channel_bits: 8
@@ -15,6 +16,27 @@ electrical:
   quiescent_current: 1.0mA
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6812
+price:
+  - qty: 5
+    price: 0.0908
+    sku: SK6812
+  - qty: 1000
+    price: 0.0528
+    sku: SK6812
+  - qty: 5000
+    price: 0.0446
+    sku: SK6812
+price_source:
+  notes: only sold integrated in the LED; price is per 5050 LED (SMD-4P, 5.4x5mm)
+  part: C5378720
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C5378720.html
+  vendor: LCSC
 related:
   - type: related
     ref: pixels/sk6812
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5378720.html
+    retrieved: '2026-11-18'
+    notes: 'SK6812 5050 in stock at LCSC (15,300 pcs)'
