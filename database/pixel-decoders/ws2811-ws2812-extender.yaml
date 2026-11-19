@@ -1,0 +1,45 @@
+name: WS2811 / WS2812 Extender
+status: discontinued
+creator:
+  name: EagleDecorations
+  url: https://www.tindie.com/stores/ericgu/
+notes: >-
+  Acts as one WS2812 pixel with a high-current output per colour, for driving non-addressable
+  5V or 12V loads (old-school LED ornaments) from a WS2812 controller. 5V or 12V selected by a
+  solder jumper; 4A per channel with all channels driven, 8A with one. Chains like WS2812 LEDs.
+  34 × 28mm.
+inputs:
+  protocols:
+    - WS2811
+    - WS2812
+outputs:
+  count: 3
+  types:
+    - pwm
+  connector: Solder pads or 3.96mm headers
+diy_or_ots: OTS
+links:
+  product: https://www.tindie.com/products/ericgu/ws2811-ws2812-extender/
+price: 14
+price_source:
+  notes: >-
+    Last list price; sold out since Sep 14, 2026 and no longer sold assembled (bare PCBs on request
+    from the seller). Listed at $10 in a Wayback capture from 2019-08-18.
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/ericgu/ws2811-ws2812-extender/
+  vendor: Tindie (EagleDecorations)
+sources:
+  status:
+    url: https://www.tindie.com/products/ericgu/ws2811-ws2812-extender/
+    retrieved: '2026-11-18'
+    notes: >-
+      "Sold out since Sep 14, 2026"; "I'm no longer selling assembled boards but I do have a lot of
+      PCBs left over. If you want to self-assemble, drop me a message."
+  notes:
+    url: https://www.tindie.com/products/ericgu/ws2811-ws2812-extender/
+    retrieved: '2026-11-18'
+    notes: Product description (voltages, supported current, chaining, size, headers)
+  outputs.connector:
+    url: https://www.tindie.com/products/ericgu/ws2811-ws2812-extender/
+    retrieved: '2026-11-18'
+    notes: Signal on 0.1" (2.54mm) headers; main power and LED connections on 0.16" (3.96mm) headers

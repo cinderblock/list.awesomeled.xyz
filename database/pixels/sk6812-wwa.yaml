@@ -1,0 +1,110 @@
+name: SK6812WWA
+status: active
+release_year: 2015
+creator: Opsco/Newstar
+vendors:
+  - name: Newstar LED
+    page: http://newstar-ledstrip.com/productshow751.html
+notes: >-
+  SK6812 with three white dies in place of RGB, for tunable-white (variable CCT) strips: cool
+  white (6000-7000K), warm white (2700-3000K) and amber (1800-2000K). Same single-wire protocol
+  and 24-bit frames as the RGB SK6812.
+aliases:
+  - SK6812 WWA
+  - LC8812WWA
+  - HD8812WWA
+color:
+  brightness_bits: 8
+  pwm_frequency: 1.2kHz
+  pwm_frequency_notes: 1.2kHz in datasheet rev 01 (2015) and rev 03 (2019); 4kHz in the SKC6812WWA (2021) revision
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://cdn-shop.adafruit.com/product-files/6509/P6509+SK6812WWA+LED+datasheet.pdf
+  sources:
+    - url: https://ge.voron.ua/files/pdf/Addressed_LEDs/SK6812_WWA/SK6812WWA%20LED%20Datasheet.pdf
+      host: distributor
+      notes: rev 03 (2019-01-21)
+    - url: https://www.lcsc.com/datasheet/C7423112.pdf
+      host: distributor
+      notes: SKC6812WWA rev A/0 (2021-09-09), Chinese
+electrical:
+  led_voltage: 5V
+  led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
+  vcc_voltage: 5.2V
+  vcc_voltage_notes: Datasheet typical; VDD range 3.5-5.5V (rev 01), 3.7-5.5V (rev 03)
+  gpio:
+    min: 3.4V
+    min_notes: VIH 3.4V in rev 01; rev 03 gives 0.7×VDD
+    max: 5V
+  channel_current: 12mA
+  channel_current_notes: The rev 03 part-number key reads "68 series IC, 12mA current version"
+  quiescent_current: 1mA
+  wattage: 200mW
+physical:
+  packages:
+    - '5050'
+  pin_count: 4
+price:
+  - qty: 5
+    price: 0.1352
+    sku: SKC6812WWA
+  - qty: 1000
+    price: 0.0813
+    sku: SKC6812WWA
+  - qty: 5000
+    price: 0.0684
+    sku: SKC6812WWA
+price_source:
+  notes: SKC6812WWA, Opsco's current (2021) revision of this part
+  part: C7423112
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C7423112.html
+  vendor: LCSC
+related:
+  - type: variant
+    ref: pixels/sk6812
+    notes: RGB base part; same IC and protocol
+sources:
+  release_year:
+    url: https://ge.voron.ua/files/pdf/Addressed_LEDs/SK6812_WWA/SK6812WWA%20LED%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: 'Change history: rev 01, initial document, 2015-06-18'
+  status:
+    url: https://www.lcsc.com/product-detail/C7423112.html
+    retrieved: '2026-11-18'
+    notes: SKC6812WWA in stock at LCSC
+  aliases:
+    url: https://www.hida-led.com/lc8812wwa-sk6812wwa-led-strip-product/
+    retrieved: '2026-11-18'
+    notes: Hida sells pin-compatible clones as HD8812WWA / LC8812WWA, "same function with SK6812WWA"
+  color.pwm_frequency:
+    url: https://cdn-shop.adafruit.com/product-files/6509/P6509+SK6812WWA+LED+datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Section 8, FPWM 1.2kHz typical
+  electrical.channel_current:
+    url: https://ge.voron.ua/files/pdf/Addressed_LEDs/SK6812_WWA/SK6812WWA%20LED%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Section 7, product naming
+  electrical.wattage:
+    url: https://cdn-shop.adafruit.com/product-files/6509/P6509+SK6812WWA+LED+datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Cover page, "0.2Watt" package rating
+  notes:
+    url: https://cdn-shop.adafruit.com/product-files/6509/P6509+SK6812WWA+LED+datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Section 6, colour temperature bins (rev 03 widens warm white to 2600-3200K)
+  technical_notes:
+    url: https://www.adafruit.com/product/6509
+    retrieved: '2026-11-18'
+    notes: NeoPixel Stick - 8 x 5050 WWA, built on the SK6812WWA
+technical_notes:
+  - The datasheet keeps the RGB SK6812's G-R-B bit names and doesn't say which byte drives which white
+  - "Adafruit's NeoPixel Stick WWA page: with an RGB NeoPixel library, the byte that would drive red drives cool white"
+variants:
+  - name: SKC6812WWA
+    differences: 'Opsco 2021 revision (rev A/0): 4kHz PWM, 0.25mA quiescent current, reset ≥200µs, CCT bins 5800-8000K / 2800-3150K / 1500-1800K'

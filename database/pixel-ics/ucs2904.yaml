@@ -1,5 +1,8 @@
 name: UCS2904
 creator: Lianxinke Microelectronics
+notes: >-
+  RGBW (4-channel) version of the UCS2903. Constant-current outputs preset to 17mA; current
+  datasheets are for the UCS2904B.
 color:
   channel_bits: 8
   pwm_frequency: 1.8kHz
@@ -7,6 +10,7 @@ data:
   clocked: false
   channels: 4
   bitrate: 800kHz
+  pixel_size_bits: 32
   backup_line: false
   type: 4chUCS1903
 datasheet:
@@ -14,16 +18,27 @@ datasheet:
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2022/02/UCS2904-Specification_English.pdf
       host: community
-      notes: LEDYi copy of the UCS2904B specification
+      notes: LEDYi copy of an older UCS2904B specification (24V rated, 28V absolute maximum output)
+    - url: https://www.gree-leds.com/web/userfiles/download/UCS2904BGreeledEnglish.pdf
+      host: distributor
+      notes: Greeled copy of the UCS2904B datasheet
 electrical:
-  output_voltage: 30V
+  output_voltage: 26V
+  output_voltage_notes: Rated port withstand voltage; 30V absolute maximum. An older UCS2904B spec gives 24V rated, 28V absolute maximum.
   supply_voltage: 5V
+  supply_voltage_notes: Built-in 5V regulator on VDD, so 12V and 24V strips feed it through a series resistor. Recommended VDD 2.6-6V, 6.5V absolute maximum.
+  gpio:
+    min: 3.5V
+    max: 5.5V
+    notes: VIH 0.7×VDD (3.5V at VDD 5V); logic input up to VDD+0.5V
   max_current: 17mA
+  max_current_notes: Preset constant current (no current-setting pin); ±1.5% between channels, ±3% between chips
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs2904
 physical:
   packages:
     - SOP-8
+    - DIP-8
 price:
   amount: 0.438
   max: 1.334
@@ -41,15 +56,51 @@ related:
       retrieved: '2026-11-18'
       notes: Maker product table, Shenzhen Lianxinke Microelectronics (深圳联芯科微电子, www.szucs.cn), 256-level single-wire cascade IC table (adjacent rows, same 1.8 kHz / 800K / SOP8 spec).
 sources:
+  notes:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2904
+    retrieved: '2026-11-18'
+    notes: '"UCS2904 offers all the same features as its RGB version, UCS2903, but is dedicated to RGBW."'
+  data.pixel_size_bits:
+    url: https://www.gree-leds.com/web/userfiles/download/UCS2904BGreeledEnglish.pdf
+    retrieved: '2026-11-18'
+    notes: Function description, 32-bit frames
+  electrical.output_voltage:
+    url: https://www.gree-leds.com/web/userfiles/download/UCS2904BGreeledEnglish.pdf
+    retrieved: '2026-11-18'
+    notes: Maximum ratings (Vout 30V) and recommended working range (Vout 26V)
+  electrical.supply_voltage:
+    url: https://www.gree-leds.com/web/userfiles/download/UCS2904BGreeledEnglish.pdf
+    retrieved: '2026-11-18'
+    notes: Functional features (built-in 5V regulator), maximum ratings and recommended working range
+  electrical.max_current:
+    url: https://www.gree-leds.com/web/userfiles/download/UCS2904BGreeledEnglish.pdf
+    retrieved: '2026-11-18'
+    notes: Electrical parameters, Iout 17mA (R, G, B, W)
+  physical.packages:
+    url: https://www.gree-leds.com/web/userfiles/download/UCS2904BGreeledEnglish.pdf
+    retrieved: '2026-11-18'
+    notes: Footprint (DIP8, SOP8)
   data.type:
     url: https://superlightingled.com/PDF/UCS2904-Datasheet.pdf
     retrieved: '2026-11-18'
     notes: UCS2904B product sheet
-  color.pwm_frequency:
-    url: https://superlightingled.com/PDF/UCS2904-Datasheet.pdf
-    retrieved: '2026-11-18'
-    notes: "'Port scanning frequency ... of 1.8 KHZ/S'"
   creator:
     url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
     retrieved: '2026-11-18'
     notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'
+  color.pwm_frequency:
+    - url: https://superlightingled.com/PDF/UCS2904-Datasheet.pdf
+      retrieved: '2026-11-18'
+      notes: "'Port scanning frequency ... of 1.8 KHZ/S'"
+    - url: https://www.gree-leds.com/web/userfiles/download/UCS2904BGreeledEnglish.pdf
+      retrieved: '2026-11-18'
+      notes: Functional features, port scanning frequency 1.8kHz
+    - url: https://www.advateklighting.com/pixel-protocols/ucs2904
+      retrieved: '2026-11-18'
+      notes: PWM rate 1800Hz
+    - url: https://www.gree-leds.com/rgbw-digital-strip/24v-ucs2904-digital-rgbw.html
+      retrieved: '2026-11-18'
+      notes: Greeled 24V UCS2904 RGBW strip, "UCS2904 Protocol (Pwm scanning frequency 1.8khz)"
+technical_notes:
+  - The blue output lights at power-on as a self-test
+  - Latches on a low level longer than 24µs
