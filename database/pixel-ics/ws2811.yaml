@@ -44,6 +44,7 @@ physical:
     - SOP-8
     - MSOP-8
     - FSOP-8
+    - DIP-8
 price:
   - qty: 20
     price: 0.0483
@@ -73,6 +74,10 @@ sources:
     url: https://github.com/jgarff/rpi_ws281x
     retrieved: '2026-11-18'
     notes: "rpi_ws281x readme (widely used Raspberry Pi driver library): uses 'WS281X' as the family nickname for WS2811-protocol LEDs and names its API after the WS2811."
+  physical.packages:
+    url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
+    retrieved: 2026-11-18
+    notes: 'Original WS2811 datasheet: "We offer two package SOP8 and DIP8", with DIP-8 and SOP-8 package drawings'
 technical_notes:
   - Standalone IC, not integrated with LEDs like WS2812
   - Commonly used for 12V pixels with 3 LEDs in series

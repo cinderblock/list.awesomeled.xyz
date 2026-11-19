@@ -7,7 +7,7 @@ color:
   brightness_bits: 16+5
   pwm_frequency: 4.0kHz
   brightness_method: current
-  brightness_method_notes: Extra 5-bit brightness control by LED current
+  brightness_method_notes: 5-bit current gain per color (R, G and B set separately), on top of 16-bit PWM
 data:
   type: SK9826
   clocked: true
@@ -47,3 +47,7 @@ sources:
     url: https://web.archive.org/web/20250818161935/http://newstar-ledstrip.com/product/20191018160652775.pdf
     retrieved: '2026-11-18'
     notes: Newstar NS108E-5050 specification Rev. No. 04 (2019-01-12), section 12 'Data communication protocol' (the YAML's datasheet). Also requires extra DCLK pulses after the data.
+  color.brightness_bits:
+    url: https://web.archive.org/web/20250818161935/http://newstar-ledstrip.com/product/20191018160652775.pdf
+    retrieved: 2026-11-18
+    notes: 'Datasheet: "each set of data are 1bit start code +15 Bit (32) brightness adjustment (red, green, blue three ports each 5bits, corresponding to S4 ~ S0); 48bits gray data (red, green, blue 16bits)"'

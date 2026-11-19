@@ -10,7 +10,7 @@ data:
   type: P9813
   clocked: true
   channels: 3
-  bitrate: 20MHz
+  bitrate: 15MHz
   pixel_size_bits: 32
   backup_line: false
   max_per_string: 1024
@@ -44,3 +44,15 @@ sources:
     url: https://www.electrokit.com/upload/product/41011/41011147/P9813_datasheet.pdf
     retrieved: '2026-11-18'
     notes: "datasheet header: 'DMS MICROELECTRONICS LTD., P9813'"
+  color.channel_bits:
+    url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
+    retrieved: 2026-11-18
+    notes: '"3 constant-current driver as well as 256 grade modulation output"'
+  color.aggregate_bits:
+    url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
+    retrieved: 2026-11-18
+    notes: '32-bit frame: two "1" flag bits, 6 check bits (inverted B7 B6 G7 G6 R7 R6), 24 bits of gray; no chip-wide dimming, so 8 effective bits'
+  data.bitrate:
+    url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
+    retrieved: 2026-11-18
+    notes: 'Features: "Serial input data the maximum clock frequency 15MHZ"'

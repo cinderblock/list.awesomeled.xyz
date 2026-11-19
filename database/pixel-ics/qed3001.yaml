@@ -18,3 +18,7 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols/qed3001
     retrieved: '2026-11-18'
     notes: "'This pixel protocol was designed by QED Microelectronics Inc. in China'"
+  color.channel_bits:
+    url: https://www.advateklighting.com/pixel-protocols/qed3001
+    retrieved: 2026-11-18
+    notes: 'Specifications: Color Resolution 12 Bits; PWM Rate 1000Hz; data-only, 500-1000kbps'

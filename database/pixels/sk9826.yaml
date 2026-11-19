@@ -7,7 +7,7 @@ color:
   brightness_bits: 16+5
   pwm_frequency: 4.0kHz
   brightness_method: current
-  brightness_method_notes: Extra 5-bit brightness control by LED current
+  brightness_method_notes: 5-bit current gain per color (R, G and B set separately), on top of 16-bit PWM
 data:
   type: SK9826
   clocked: true
@@ -36,3 +36,7 @@ sources:
     url: https://web.archive.org/web/20200925071204/http://newstar-ledstrip.com/product/20190927165451294.pdf
     retrieved: '2026-11-18'
     notes: "The YAML's (dead, previously unarchived) datasheet, found in Wayback (2020-09-25): Newstar SK9826 specification Rev. No. 04, section 12 'Data communication protocol'; 'GRB order to light'; 30 MHz."
+  color.brightness_bits:
+    url: https://web.archive.org/web/20220216171300/http://newstar-ledstrip.com/product/20190927165451294.pdf
+    retrieved: 2026-11-18
+    notes: 'Datasheet: 1 start bit + 15 bits of current gain (5 per color, S4~S0) + 48 bits of gray data (16 per color), 65536 levels'

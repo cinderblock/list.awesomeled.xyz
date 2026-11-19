@@ -8,6 +8,7 @@ color:
   brightness_bits: 8+5
   pwm_frequency: 9.0kHz
   brightness_method_notes: Extra 5-bit brightness control, likely by LED current like SK9822
+  pwm_frequency_notes: Unverified. The datasheet gives only its oscillator, 800-1200 kHz, which at 8-bit PWM means about 3.1-4.7 kHz, as on the SK9822 (measured at 4.7 kHz); no source found for 9 kHz
 data:
   type: APA102
   clocked: true

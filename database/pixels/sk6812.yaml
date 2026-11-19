@@ -6,8 +6,8 @@ notes: WS2812 copy. The 4-channel RGBW version is a separate part (SK6812RGBW).
 color:
   order: GRB
   brightness_bits: 8
-  pwm_frequency: 4.7kHz
-  pwm_frequency_notes: Datasheet claims 1.2kHz but testing shows 4.7kHz
+  pwm_frequency: 1.1kHz
+  pwm_frequency_notes: Measured; the datasheet (rev 02) says 1.2kHz
 data:
   type: WS2811/12
   clocked: false
@@ -22,15 +22,14 @@ datasheet:
       host: distributor
       notes: rev 02 (older)
   discrepancies:
-    - Older datasheet PWM frequency (1.2kHz) differs from tested value (4.7kHz)
-    - GPIO min threshold not documented in datasheet
+    - Datasheet PWM frequency (1.2kHz) is a little above the measured 1.1kHz
 electrical:
   led_voltage: 5V
-  led_voltage_notes: Datasheet claims "17V Vds, Max" but LEDs are built-in and share power with 5V VDD
+  led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
   vcc_voltage: 5.2V
   gpio:
     min: 3.4V
-    min_notes: Not in datasheet
+    min_notes: VIH 3.4V at VDD 5.0V (datasheet rev 02)
     max: 5V
   channel_current: 20mA
   quiescent_current: 1.0mA
@@ -75,5 +74,16 @@ sources:
     url: https://www.lcsc.com/datasheet/C5378720.pdf
     retrieved: '2026-11-18'
     notes: "The YAML's datasheet: Opsco SK6812-012 specification Rev."
+  color.pwm_frequency:
+    - url: https://cpldcpu.github.io/2016/03/09/the-sk6812-another-intelligent-rgb-led
+      retrieved: 2026-11-18
+      notes: '"the PWM frequency of the SK6812 is more than twice as high as that of the WS2812 (1.1 kHz vs. 430 Hz)"'
+    - url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+      retrieved: 2026-11-18
+      notes: 'Electrical parameters: FPWM 1.2 KHZ typical'
+  electrical.gpio:
+    url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+    retrieved: 2026-11-18
+    notes: 'Electrical parameters: VIH 3.4V min, VIL 1.6V max, at VDD=5.0V; R/G/B port VDS,MAX 26V'
 technical_notes:
-  - PWM frequency tested at 4.7kHz despite 1.2kHz datasheet claim
+  - PWM measured at 1.1kHz (more than twice the WS2812's 430Hz); the datasheet says 1.2kHz
