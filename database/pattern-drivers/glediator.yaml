@@ -9,7 +9,10 @@ notes: >-
   SolderLab's Arduino sketches for WS2801 and WS2811/WS2812 pixels), or over Ethernet as Art-Net and
   TPM2.Net. Last release V2.0.3; solderlab.de now serves only a placeholder page.
 inputs:
-  other: Animated GIFs; remote control over the network (UDP) with Glediator Remote Control
+  other:
+    - Animated GIF
+    - UDP remote control
+  other_notes: Glediator Remote Control commands over the network (UDP)
 outputs:
   protocols:
     artnet: Output
@@ -26,15 +29,15 @@ capabilities:
 dead_links:
   - url: http://www.solderlab.de/index.php/software/glediator
     archive: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
-    checked: 2026-11-18
+    checked: '2026-11-18'
     notes: Returns 404; the domain's home page is now a placeholder
   - url: http://www.solderlab.de/
     archive: https://web.archive.org/web/20190624062157/http://solderlab.de:80/
-    checked: 2026-11-18
+    checked: '2026-11-18'
     notes: Home page now shows only a placeholder ('test')
   - url: https://oneguyoneblog.com/download/glediator-v2-0-3/
     archive: https://web.archive.org/web/20230604201344/https://oneguyoneblog.com/download/glediator-v2-0-3/
-    checked: 2026-11-18
+    checked: '2026-11-18'
     notes: Third-party mirror of glediator_v2.0.3.zip, posted 2018-11-26; the whole site returned Cloudflare error 522 (origin unreachable)
 integrations: Solderlab true-color matrix driver boards and Universal Interface Board; Arduino (Uno,
   Leonardo, Micro, Mini, Mega) with Solderlab's WS2801 and WS2811/WS2812 sketches

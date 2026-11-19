@@ -307,7 +307,17 @@
       ]
     },
     "programming_language": {
-      "enum": ["C++", "C#", "GLSL", "Java", "JavaScript", "Processing", "Python", "Visual Basic"],
+      "enum": [
+        "C++",
+        "C#",
+        "GLSL",
+        "Java",
+        "JavaScript",
+        "Processing",
+        "Python",
+        "Visual Basic",
+        "WGSL"
+      ],
       "description": "A programming language, spelled as its community does ('C++', 'JavaScript'). Add new ones here."
     },
     "programming_languages": {

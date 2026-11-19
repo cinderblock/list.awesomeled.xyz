@@ -8,9 +8,18 @@ notes: Free LED matrix control software for Windows. Four effect channels with t
 inputs:
   video: Both
   audio: Input
-  other: Webcam, screen capture, images (animated GIF) and AVI files as effect sources; remote
-    control of scenes, chases, crossfader, master brightness and strobe over DMX, Art-Net, sACN
-    (E1.31), MIDI, tpm2.net and tpm2
+  other:
+    - Webcam
+    - Screen capture
+    - Animated GIF
+    - AVI
+    - DMX
+    - Art-Net
+    - sACN
+    - MIDI
+    - TPM2.net
+    - TPM2
+  other_notes: Webcam, screen capture, images and AVI files as effect sources; scenes, chases, crossfader, master brightness and strobe remote-controlled over DMX, Art-Net, sACN (E1.31), MIDI, tpm2.net and tpm2
 outputs:
   protocols:
     artnet: Both
@@ -24,8 +33,13 @@ outputs:
   gpio: false
   serial: Both
   serial_notes: tpm2, Glediator protocol and MiniDMX out (several serial ports can drive one matrix); tpm2 in for remote control
-  other: tpm2.net, borderless DVI output window, any output redirected to a file for standalone
-    controllers, Windows Bitmap series export, Glediator 2 / Solderlab UIB recorder files
+  other:
+    - TPM2.net
+    - DVI window
+    - File
+    - Bitmap series
+    - Glediator recorder files
+  other_notes: Borderless DVI output window; any output redirected to a file for standalone controllers; Windows Bitmap series export; Glediator 2 / Solderlab UIB recorder files
 capabilities:
   live: true
   designer: true
@@ -34,7 +48,6 @@ images:
   - file: jinx.webp
     source: https://live-leds.de/
     credit: 'Live-LEDs.de (Jinx!)'
-language: Jinx!Script (BASIC-like)
 links:
   url: https://live-leds.de/
 platforms:
@@ -68,9 +81,6 @@ sources:
   capabilities.programmatic:
     url: https://live-leds.de/features/
     retrieved: '2026-11-18'
-  language:
-    url: https://live-leds.de/features/
-    retrieved: '2026-11-18'
   platforms:
     url: https://live-leds.de/faqs/
     retrieved: '2026-11-18'
@@ -89,3 +99,4 @@ technical_notes:
   - Art-Net 3 addressing (Net, Subnet, Universe) with ArtPoll node discovery
   - Binaries are code-signed and check the signature at every start. V2.2 and V2.3 stopped starting
     after their certificate expired on 2017-01-04, so use V2.4
+  - Effects are scripted in Jinx!Script, its own BASIC-like language

@@ -9,8 +9,16 @@ notes: iPad and iPhone app that drives LED displays from lists of Scenes, played
 inputs:
   video: Both
   audio: Both
-  other: Live camera and video files; songs from the music library and a live microphone; any
-    animatable parameter can follow MIDI, DMX, Art-Net or OSC
+  other:
+    - Camera
+    - Video files
+    - Music library
+    - Microphone
+    - MIDI
+    - DMX
+    - Art-Net
+    - OSC
+  other_notes: Any animatable parameter can follow MIDI, DMX, Art-Net or OSC
 outputs:
   protocols:
     artnet: Both
@@ -18,8 +26,14 @@ outputs:
     dmx: Input
     ddp: Output
     opc: Output
-  other: PixelPusher, DDP (Minleon, TekLights), RGB-123, FadeCandy/FCServer, OSC; external monitor
-    or projector as a VJ app
+  other:
+    - PixelPusher
+    - DDP
+    - RGB-123
+    - FadeCandy
+    - OSC
+    - External display
+  other_notes: DDP for Minleon and TekLights; FadeCandy through FCServer; an external monitor or projector as a VJ app
 aliases:
   - LED Lab
 capabilities:

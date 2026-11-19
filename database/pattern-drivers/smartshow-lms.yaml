@@ -8,8 +8,19 @@ notes: LED matrix server for live shows, made in partnership with Smartshow Ligh
 inputs:
   video: Both
   audio: Input
-  other: Video files, images, webcam, screen capture and NDI; control over Art-Net, sACN, OSC, MIDI
-    (with learn), MIDI clock and MTC, and DMX from an ENTTEC DMX USB Pro
+  other:
+    - Video files
+    - Images
+    - Webcam
+    - Screen capture
+    - NDI
+    - Art-Net
+    - sACN
+    - OSC
+    - MIDI
+    - MTC
+    - DMX
+  other_notes: MIDI with learn and MIDI clock; DMX in from an ENTTEC DMX USB Pro
 outputs:
   protocols:
     artnet: Both
@@ -20,8 +31,14 @@ outputs:
     an ENTTEC DMX USB Pro (Mk1 or Mk2)
   serial: Output
   serial_notes: USB serial DMX dongles, and the Glediator protocol for Arduino-driven strips
-  other: TPM2.net, PixelPusher (new in 1.3.5, tested only against an emulator), NDI, HDMI to LED
-    sender cards; FSEQ and Glediator .out export for standalone players
+  other:
+    - TPM2.net
+    - PixelPusher
+    - NDI
+    - HDMI
+    - FSEQ export
+    - Glediator export
+  other_notes: PixelPusher new in 1.3.5 (tested only against an emulator); HDMI to LED sender cards; FSEQ and Glediator .out export for standalone players
 aliases:
   - Smart Show LMS
   - Smartshow LED Matrix Server
@@ -30,7 +47,7 @@ capabilities:
   designer: true
   programmatic: true
 integrations: WLED, xLights and Falcon controllers; HDMI LED sender cards such as Colorlight
-language: LMS Script (same language as Jinx!Script), GLSL, ISF
+language: GLSL
 links:
   url: https://smartshowlms.leejamesapps.co.uk/
 other_links:
@@ -119,3 +136,4 @@ technical_notes:
     (Art-Net to a node, HDMI to an LED wall, Glediator to an Arduino strip)
   - Runs fully offline and only goes online to check for updates
   - Windows builds are signed as Hi-Lite Entertainment Limited
+  - Scripts in LMS Script (the Jinx!Script language) as well as GLSL and ISF shaders

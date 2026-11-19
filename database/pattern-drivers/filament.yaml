@@ -10,16 +10,29 @@ notes: LED mapping tool, LED player and VJ mixer in one app. Draw fixtures over 
 inputs:
   video: Both
   audio: Both
-  other: NDI, Spout and Syphon feeds; MIDI (with MIDI Learn) and OSC control; Art-Net from lighting
-    consoles; tempo from Ableton Link, Pioneer Pro DJ Link, MIDI clock or tap
+  other:
+    - NDI
+    - Spout
+    - Syphon
+    - MIDI
+    - OSC
+    - Art-Net
+    - Ableton Link
+    - Pro DJ Link
+  other_notes: MIDI with MIDI Learn; Art-Net from lighting consoles; tempo from Ableton Link, Pioneer Pro DJ Link, MIDI clock or tap
 outputs:
   protocols:
     artnet: Both
     sacn: Output
   dmx_notes: DMX universes go out over Art-Net or sACN; Art-Net input lets a lighting console
     launch clips and ride parameters
-  other: NDI, Spout and Syphon; screens and projectors; video file export; MIDI to controllers
-    (pad LEDs, motorized faders, MIDI clock); OSC feedback
+  other:
+    - NDI
+    - Spout
+    - Syphon
+    - MIDI
+    - OSC
+  other_notes: Screens and projectors; video file export; MIDI to controllers (pad LEDs, motorized faders, MIDI clock); OSC feedback
 aliases:
   - Filament LED
 capabilities:
