@@ -3,7 +3,7 @@ release_year: 2011
 creator: Greeled Electronic
 notes: Fast refresh, fast PWM, 2 RGB pixels per IC, refresh any time
 color:
-  channel_bits: 8
+  channel_bits: 7
   aggregate_bits: 7
   pwm_frequency: 9.375kHz
   pwm_frequency_notes: 1.2MHz internal clock / 128
@@ -54,3 +54,7 @@ sources:
     - url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
       retrieved: '2026-11-18'
       notes: '''LPD8803 and LPD8806 output 3 channel and 6 channel respectively''; "LPD8803 and LPD8806 output 3 channel and 6 channel respectively" (two RGB LEDs per chip)'
+  color.channel_bits:
+    url: https://github.com/adafruit/LPD8806/blob/master/LPD8806.cpp
+    retrieved: '2026-11-18'
+    notes: 'Protocol notes: "All color data bytes have the high bit (128) set, with the remaining seven bits containing a brightness value (0-127)". The datasheet claims "256 independent PWM grayscale" levels inside.'
