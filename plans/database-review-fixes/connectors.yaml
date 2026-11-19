@@ -880,10 +880,8 @@
 
 - entry: diffusive-materials/3m-envision-diffuser
   field: materials
-  current:
-    - PVC
-  value:
-    - PVC
+  current: [PVC]
+  value: [PVC]
   status: already-fixed
   owner: stream2
   source: https://www.sirvisual.com/Attachment/100/Product%20Bulletin%203735-50-60.pdf

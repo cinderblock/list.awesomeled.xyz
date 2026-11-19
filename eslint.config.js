@@ -26,7 +26,15 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['node_modules/', 'build/', '.react-router/', 'playwright-report/', 'test-results/'],
+    ignores: [
+      'node_modules/',
+      'build/',
+      '.react-router/',
+      'playwright-report/',
+      'test-results/',
+      // Research evidence: verbatim quotes from makers' pages, not site content
+      'plans/database-review-fixes/',
+    ],
   },
   // YAML style rules
   {
