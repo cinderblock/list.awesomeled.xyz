@@ -424,12 +424,23 @@ test.describe('System Designer: on a phone', () => {
     await bar.tap();
     await expect(page.locator('#designer-checks')).toBeInViewport();
 
+    // Nothing of the designer's may stick out past the screen edge. (The
+    // diagram scrolls sideways inside its own box, by design.)
     for (const id of ['designer-power', 'designer-bom', 'designer-diagram']) {
       await page.locator(`#${id}`).scrollIntoViewIfNeeded();
-      const overflow = await page.evaluate(
-        () => document.documentElement.scrollWidth - document.documentElement.clientWidth
-      );
-      expect(overflow, `sideways scroll with #${id} in view`).toBeLessThanOrEqual(0);
+      const sticking = await page.evaluate(() => {
+        const width = document.documentElement.clientWidth;
+        const out: string[] = [];
+        for (const el of document.querySelectorAll('.designer-page *')) {
+          if (el.closest('.designer-diagram-scroll')) continue;
+          const box = el.getBoundingClientRect();
+          if (box.width > 0 && box.right > width + 1) {
+            out.push(`${el.tagName.toLowerCase()}.${String(el.getAttribute('class'))}`);
+          }
+        }
+        return out.slice(0, 5);
+      });
+      expect(sticking, `wider than the screen with #${id} in view`).toEqual([]);
     }
     expect(errors).toEqual([]);
   });
