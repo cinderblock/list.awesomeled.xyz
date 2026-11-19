@@ -17,8 +17,8 @@ Thank you for your interest in contributing! This guide covers how to add new en
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/awesomeledlist-reactrouter.git
-cd awesomeledlist-reactrouter
+git clone https://github.com/your-username/list.awesomeled.xyz.git
+cd list.awesomeled.xyz
 
 # Install dependencies
 npm install

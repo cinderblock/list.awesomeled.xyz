@@ -154,4 +154,4 @@ For commercial licensing inquiries, please open an issue.
 
 Information is provided "as-is" with no guarantee of accuracy. Product specifications may change; verify details with manufacturers before making purchasing decisions.
 
-If you are a rights holder and wish to have content removed, please [open an issue](https://github.com/awesomeledlist/awesomeledlist-reactrouter/issues).
+If you are a rights holder and wish to have content removed, please [open an issue](https://github.com/cinderblock/list.awesomeled.xyz/issues).

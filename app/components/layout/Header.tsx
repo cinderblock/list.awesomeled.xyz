@@ -31,7 +31,7 @@ export function Header() {
             */}
             <Tooltip content="View on GitHub">
               <a
-                href="https://github.com/cinderblock/awesomeledlist"
+                href="https://github.com/cinderblock/list.awesomeled.xyz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--ghost btn--icon site-nav-link"
