@@ -21,6 +21,118 @@ outputs:
   pixels:
     max_per_output: 170
   clocked: selectable
+  protocols:
+    - APA102
+    - APA102C
+    - DotStar
+    - APA104
+    - APA106
+    - APA107
+    - APA109
+    - D705
+    - D707
+    - D708
+    - DM412
+    - DM413
+    - CS8812
+    - GE8812
+    - GE8822
+    - GS8206
+    - GS8208
+    - HD107S
+    - INK1002
+    - INK1002B
+    - INK1003
+    - LC8805B
+    - LC8808B
+    - LC8812
+    - LC8812B
+    - LC8822
+    - LC8823
+    - LD1510
+    - LPD1101
+    - LPD1882
+    - LPD1886
+    - LPD6803
+    - LPD6813
+    - LPD8803
+    - LPD8806
+    - NS107
+    - NS107S
+    - NS107SA
+    - NS108
+    - NS108E
+    - P9813
+    - P9816
+    - P9823
+    - P9883
+    - PB3xxxxxx
+    - PC4xxxxxx
+    - PC5xxxxxx
+    - PD9823
+    - PL9823
+    - SC6803
+    - SK6805
+    - SK6812
+    - SK6813
+    - SK6818
+    - SK6822
+    - SK9816
+    - SK9822
+    - SK9822A
+    - SK9826
+    - SM16703
+    - SM16704
+    - SM16711
+    - SM16716
+    - SM16726
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - TM1814
+    - TM1825
+    - TM1826
+    - TM1829
+    - TM1903
+    - TM1913
+    - TM1914
+    - TM1925
+    - TM1926
+    - UCS1903
+    - UCS1904
+    - UCS2903
+    - UCS2904
+    - UCS2909
+    - UCS2912
+    - UCS3903
+    - UCS512
+    - UCS5903
+    - UCS6909
+    - UCS6912
+    - UCS7009
+    - UCS8903
+    - UCS9812
+    - WS2801
+    - WS2803
+    - WS2811
+    - WS2812
+    - NeoPixel
+    - WS2812B
+    - WS2812C
+    - WS2812D
+    - WS2812S
+    - WS2813
+    - WS2813A
+    - WS2813B
+    - WS2813C
+    - WS2813D
+    - WS2814
+    - WS2815
+    - WS2818
+    - WS2821
+    - WS2822
+    - WS2851
 dead_links:
   - url: https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
     archive: https://web.archive.org/web/20210924031804/https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
@@ -34,8 +146,33 @@ price_source:
   retrieved: '2021-09-24'
   url: https://web.archive.org/web/20210924031804/https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
   vendor: deskontrol
+software:
+  works_with:
+    - MADRIX
+    - Resolume
+    - MadMapper
+    - TouchDesigner
+    - VVVV
+    - MagicQ PC
+    - LightFactory
+    - xLights
+    - LXconsole
+    - Glediator
+    - Qlight
+    - Lightjams
+    - Enttec light mapper
+    - Jinx
+    - Mapio
 sources:
   status:
     url: https://www.deskontrol.net/en/26-art-net-led-controllers
     retrieved: '2026-11-18'
     notes: 'old product URL redirects to the Art-Net controllers category, which lists only LITE V3 models'
+  outputs.protocols:
+    url: https://web.archive.org/web/20210924031804/https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
+    retrieved: '2026-11-18'
+    notes: Wayback capture 2021-09-24 of the deskontrol.net LITE 16 product page (live URL now redirects to the LITE V3 range), section 'LED types supported'.
+  software.works_with:
+    url: https://web.archive.org/web/20210924031804/https://www.deskontrol.net/en/art-net-led-controller/362-art-net-led-controller-deskontroller-lite-16-universes.html
+    retrieved: '2026-11-18'
+    notes: "Same archived page, 'More info'. DB matches need aliases: MADRIX -> madrix-5, MagicQ PC -> magicq, Enttec light mapper -> elm, Mapio -> mapio-pro."

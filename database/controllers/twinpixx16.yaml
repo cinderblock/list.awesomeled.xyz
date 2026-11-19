@@ -22,6 +22,40 @@ outputs:
   clocked: selectable # supports both single-wire and clocked pixels
   pixels:
     max_per_output: 1360 # 2720 total across 2 outputs
+  protocols:
+    - APA-102
+    - SK9822
+    - MagiarLED III flex
+    - APA-101
+    - APA-104
+    - GS8208
+    - DycoLED PB3
+    - DycoLED PB5
+    - INK1002
+    - INK1003
+    - LPD1101
+    - LPD8803
+    - LPD6803
+    - LPD1886
+    - SK6812
+    - TM1804
+    - TM1812
+    - TM1814
+    - TM1829
+    - UCS1903
+    - UCS2912
+    - WS2801
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
+    - WS2818
+    - WS2821
+    - UCS9812
+    - DMX512
+    - LPD8806
+    - TLS3001
 power:
   voltage:
     max: 5
@@ -38,8 +72,19 @@ price_source:
   retrieved: '2021-01-20'
   url: https://web.archive.org/web/20210120183833/https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
   vendor: DMX4ALL
+software:
+  works_with:
+    - MADRIX
 sources:
   status:
     url: https://dmx4all.store/en/search?search=twinpixx
     retrieved: '2026-11-18'
     notes: '0 products found for twinpixx in the DMX4ALL store; old product URL 404; last shop capture 2021-01'
+  outputs.protocols:
+    url: https://www.dmx4all.de/download/manuals_english/artnet_twinpixx_16_english.pdf
+    retrieved: '2026-11-18'
+    notes: DMX4ALL 'ArtNet TwinPixx 16' user manual, data sheet (p.3).
+  software.works_with:
+    url: https://www.dmx4all.de/download/manuals_english/artnet_twinpixx_16_english.pdf
+    retrieved: '2026-11-18'
+    notes: Settings chapter. MADRIX -> pattern-drivers/madrix-5 (alias needed).

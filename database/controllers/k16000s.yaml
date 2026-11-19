@@ -24,6 +24,23 @@ outputs:
   pixels:
     max_per_output: 1024
   clocked: false
+  protocols:
+    - UCS1912
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - UCS2903
+    - UCS2909
+    - UCS2912
+    - '8205'
+    - '8206'
+    - '16703'
+    - WS2811
+    - TM1914
+    - '9883'
+    - WS2812B
+    - UCS1903
 data:
   storage:
     - type: SD
@@ -32,3 +49,16 @@ dead_links:
     archive: https://web.archive.org/web/20230604162206/https://autuneertech.com/products/k16000s-madrix-artnet-addressable-led-controller/
     checked: '2026-11-18'
 price: 229
+software:
+  works_with:
+    - MADRIX 3
+    - MADRIX 5
+sources:
+  outputs.protocols:
+    url: https://www.amazon.com/dp/B09PKDLHQG
+    retrieved: '2026-11-18'
+    notes: AUTUNEER's own Amazon brand-store listing
+  software.works_with:
+    url: https://www.amazon.com/dp/B09PKDLHQG
+    retrieved: '2026-11-18'
+    notes: Same AUTUNEER listing. Written by the maker as 'Madrix version3 and version5'; MADRIX 5 -> pattern-drivers/madrix-5 (MADRIX 3 not in DB). No other software named.

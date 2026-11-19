@@ -20,6 +20,10 @@ outputs:
     buffered: true
   pixels:
     max_total: 1000
+  protocols:
+    - ws2811
+    - ws 2812
+    - APA102
 power:
   voltage:
     max: 12
@@ -41,3 +45,7 @@ sources:
     url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
     retrieved: '2026-11-18'
     notes: 'in stock, single unit GBP 199 ex VAT'
+  outputs.protocols:
+    url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: Maker page (ULS Manufacturing). Repeated 'ws 2812' deduped; spelling as written (site normalizes).

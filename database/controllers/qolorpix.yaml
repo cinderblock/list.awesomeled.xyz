@@ -19,6 +19,8 @@ outputs:
     buffered: true
   pixels:
     max_per_output: 320
+  protocols:
+    - WS2812B
 power:
   voltage:
     min: 85 # 85-264 VAC mains input via PowerCON
@@ -48,6 +50,10 @@ sources:
     url: https://proadv.com/city-theatrical-8-output-qolorpix-tape-controller/
     retrieved: '2026-11-18'
     notes: "in stock at a dealer, $2432.11 (MAP); still on City Theatrical's current product pages"
+  outputs.protocols:
+    url: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
+    retrieved: '2026-11-18'
+    notes: Product page FAQ A4 ('Can I use other brands of tape with the controller?'). Only chipset City Theatrical names; the manual says only 'Compatible with City Theatrical QolorPIX Pixel Controlled LED Tape'.
 technical_notes:
   - 600W total output; 85-264 VAC input via PowerCON
   - Max 10 m cable run to LED tape; up to 320 pixels per output

@@ -15,6 +15,25 @@ outputs:
   count: 8
   connector: RJ45 PLink
   clocked: false
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
+    - WS2818
+    - SK6812
+    - TM1804
+    - TM1812
+    - APA-104
+    - 9PDOT
+    - UCS1903
+    - UCS2903
+    - UCS2904
+    - TLC5973
+    - UCS8903
+    - UCS8904
+    - SPXL
 power:
   voltage:
     min: 7
@@ -37,11 +56,30 @@ price_source:
   retrieved: '2022-10-06'
   url: https://web.archive.org/web/20221006200506/https://www.enttec.com/product-tag/px18d/
   vendor: ENTTEC
+related:
+  - type: variant
+    ref: controllers/pixelator
+    notes: 8-output DIN-rail member of ENTTEC's Pixelator (PLink) range
+    source:
+      url: https://web.archive.org/web/20260217143850/https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - ELM
+    - xLights
 sources:
   status:
     url: https://support.enttec.com/legacy-product/legacy-products/pixelator-mini-px1-8d-71066-legacy-product
     retrieved: '2026-11-18'
     notes: '"DISCONTINUED: This product has been discontinued."'
+  outputs.protocols:
+    url: https://web.archive.org/web/20240813084918/https://www.enttec.com/support/supported-led-pixel-protocols/
+    retrieved: '2026-11-18'
+    notes: Wayback capture (2024-08-13) of ENTTEC's 'Supported LED protocols' page, legacy table, column '[LEGACY] PIXELATOR PX1-8D (v1.12)'.
+  software.works_with:
+    url: https://www.techni-lux.com/files/documents/CT-EN71066_Manual.pdf
+    retrieved: '2026-11-18'
+    notes: ENTTEC user manual UM-71066
 technical_notes:
   - 16 universes (8192 channels), up to 2730 RGB pixels across 8 outputs
   - Outputs synchronize up to 300m away when paired with ENTTEC PLink or PSAT

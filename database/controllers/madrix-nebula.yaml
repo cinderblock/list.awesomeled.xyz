@@ -23,6 +23,79 @@ outputs:
     max: 6 # per port when supplying LED power through
   pixels:
     max_per_output: 1020 # 1020 RGB / 768 RGBW per port (firmware 6.0+)
+  protocols:
+    - APA101
+    - APA102
+    - APA104
+    - APA106
+    - FW1935
+    - GS8206
+    - GS8207
+    - GS8208
+    - GW6201
+    - GW6205
+    - HD108
+    - LB1908
+    - LPD1882S
+    - LPD6803
+    - LPD8806
+    - MBI6023
+    - MBI6024
+    - MBI6120
+    - MY9291
+    - P9883
+    - SJ1221
+    - SK6112
+    - SK6805
+    - SK6812
+    - SK6813
+    - SK6822
+    - SK9816
+    - SK9822
+    - SK9826
+    - SM16703
+    - SM16704
+    - SM16716
+    - TLC5973
+    - TLS3001
+    - TLS3008
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - TM1814
+    - TM1829
+    - TM1934
+    - UCS512B3
+    - UCS1903
+    - UCS2603
+    - UCS2903
+    - UCS2904
+    - UCS2904B
+    - UCS5603
+    - UCS5603A
+    - UCS7604
+    - UCS8903
+    - UCS8904
+    - UCS9812S
+    - VS17822
+    - WS2801
+    - WS2803
+    - WS2811
+    - WS2811F
+    - WS2811M
+    - WS2811S
+    - WS2812
+    - WS2812B
+    - WS2812C
+    - WS2813
+    - WS2814
+    - WS2814F
+    - WS2815
+    - WS2818
+    - WS2818M
+    - WS2821
+    - WS2822S
 power:
   voltage:
     min: 5
@@ -40,12 +113,20 @@ price_source:
 software:
   works_with:
     - MADRIX
+    - MADRIX 5
 sources:
   status:
     url: https://goknight.com/madrix-lighting-control-ia-hw-001018-madrix-nebula/
     retrieved: '2026-11-18'
     notes: "in stock at a US dealer (MSRP $355); still in MADRIX's current product menu"
   software.works_with:
-    url: https://www.madrix.com/products/software
+    - url: https://www.madrix.com/products/software
+      retrieved: '2026-11-18'
+      notes: MADRIX docs name this hardware
+    - url: https://www.madrix.com/products/nebula
+      retrieved: '2026-11-18'
+      notes: "Also: 'MADRIX 5 and MADRIX hardware allow you to fully synchronize Art-Net data for all ports and across devices'. -> pattern-drivers/madrix-5 (maker's own software)."
+  outputs.protocols:
+    url: https://www.madrix.com/products/nebula
     retrieved: '2026-11-18'
-    notes: MADRIX docs name this hardware
+    notes: Product page 'Supported LEDs' (same list under Technical Specifications), 'As of January 2026.

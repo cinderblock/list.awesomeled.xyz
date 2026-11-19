@@ -20,6 +20,18 @@ outputs:
     DMX512: 1 # DMX Thru
   pixels:
     max_total: 1000
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2801
+    - SK6812RGBW
+    - UCS8904RGBW
+    - TM1814RGBW
+    - APA102
+    - APA104
+    - LPD8806
+    - HD108
+    - MY9231
 power:
   voltage:
     max: 35
@@ -40,5 +52,9 @@ sources:
     url: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
     retrieved: '2026-11-18'
     notes: 'in stock, $640 list ($544 sale)'
+  outputs.protocols:
+    url: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
+    retrieved: '2026-11-18'
+    notes: Product Specifications tab ('RC4 CodeLoader firmware updatable to add new string types').
 technical_notes:
   - With data + clock pixels only 4 of the 8 outputs are available

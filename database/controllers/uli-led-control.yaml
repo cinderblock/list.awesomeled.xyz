@@ -12,6 +12,18 @@ outputs:
   pixels:
     max_per_output: 170 # 1360 total pixels / 8 outputs
   clocked: selectable # supports both clocked and non-clocked pixel types
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812b
+    - APA104
+    - APA102
+    - LPD6803
+    - WS2801
+    - SK6812 RGBW
+    - LPD8803
+    - LPD8806
+    - UCS1909
 power:
   voltage:
     max: 12
@@ -24,10 +36,23 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
   vendor: Radig Shop (Ulrich Radig)
+software:
+  works_with:
+    - Jinx
+    - Madrix
+    - PixelInvaders
 sources:
   status:
     url: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
     retrieved: '2026-11-18'
     notes: 'Sofort verfügbar (in stock), EUR 79.98 incl. VAT'
+  outputs.protocols:
+    url: https://web.archive.org/web/20211020061125/https://shop.ulrichradig.de/Module/Light-Control-DMX/4096-Kanal-LED-Strip-Controller.html
+    retrieved: '2026-11-18'
+    notes: Wayback capture 2021-10-20 of the shop page 'Technische Daten'
+  software.works_with:
+    url: https://web.archive.org/web/20211020061125/https://shop.ulrichradig.de/Module/Light-Control-DMX/4096-Kanal-LED-Strip-Controller.html
+    retrieved: '2026-11-18'
+    notes: Jinx -> pattern-drivers/jinx (Jinx!), Madrix -> madrix-5 (alias needed); PixelInvaders not in DB.
 technical_notes:
   - With data + clock pixels only 4 of the 8 outputs are available

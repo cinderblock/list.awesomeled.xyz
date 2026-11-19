@@ -19,6 +19,24 @@ outputs:
   driver:
     buffered: true
   clocked: false # async pixel support
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
+    - WS2818
+    - SK6812
+    - TM1804
+    - TM1812
+    - APA-104
+    - 9PDOT
+    - UCS1903
+    - UCS2903
+    - UCS2904
+    - UCS8903
+    - UCS8904
+    - SPXL
 dead_links:
   - url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
     archive: https://web.archive.org/web/20220629132059/https://www.enttec.co.uk/product/controls/addressable-led-pixel-control/24-port-ethernet-pixel-controller/
@@ -36,10 +54,22 @@ price_source:
   retrieved: '2022-06-29'
   url: https://web.archive.org/web/20220629132059/https://www.enttec.co.uk/product/controls/addressable-led-pixel-control/24-port-ethernet-pixel-controller/
   vendor: ENTTEC
+software:
+  works_with:
+    - ELM
+    - xLights
 sources:
   status:
     url: https://www.enttec.com/?s=pixelator&post_type=product
     retrieved: '2026-11-18'
     notes: "gone from ENTTEC's catalog; product search lists only Pixelator Mini and Mini Mk2"
+  outputs.protocols:
+    url: https://web.archive.org/web/20240813084918/https://www.enttec.com/support/supported-led-pixel-protocols/
+    retrieved: '2026-11-18'
+    notes: Wayback capture (2024-08-13) of ENTTEC's 'Supported LED protocols' page, legacy table, column 'PIXELATOR [LEGACY] (RevC)'.
+  software.works_with:
+    url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
+    retrieved: '2026-11-18'
+    notes: Box contents of the Rev C datasheet (ELM promo 'implemented after SN#0050C2084699 (August 2022)')
 technical_notes:
   - Controls up to 8192 RGB pixels (24,576 channels) across 24 PLINK ports

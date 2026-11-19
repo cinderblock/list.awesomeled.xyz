@@ -20,6 +20,101 @@ outputs:
     ref: mtsb-combicon
   driver:
     buffered: true
+  protocols:
+    - Adafruit Pixie
+    - APA102
+    - APA102C
+    - APA104
+    - APA105
+    - APA109
+    - CS8812
+    - DM412
+    - DMX512
+    - DMX512-D
+    - FW1906
+    - GS8206
+    - GS8208
+    - HD107S
+    - HD108
+    - ICND2110
+    - INK1003
+    - LB1908
+    - LPD6803
+    - LPD8803
+    - LPD8806
+    - MBI6020
+    - MBI6023
+    - MY9221
+    - MY9231
+    - MY9291
+    - NS108E
+    - P9412
+    - P943
+    - P9813
+    - P9883
+    - QED3001
+    - SK6805
+    - SK6812
+    - SK6813
+    - SK6818
+    - SK6822
+    - SK9822
+    - SM16511
+    - SM16703
+    - SM16704
+    - SM16712
+    - SM16714
+    - SM16716
+    - SM16803
+    - SM16804
+    - TLS3001
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1814
+    - TM1824
+    - TM1829
+    - TM1903
+    - TM1914
+    - TM1934
+    - TX1818
+    - UCS1903
+    - UCS1904
+    - UCS2603
+    - UCS2903
+    - UCS2904
+    - UCS2912
+    - UCS512B
+    - UCS5603
+    - UCS7604
+    - UCS7804
+    - UCS8903
+    - UCS8904
+    - UCS9812
+    - WS2801
+    - WS2808
+    - WS2811
+    - WS2811 V1.4
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2814
+    - WS2815
+    - WS2815B
+    - WS2816A
+    - WS2816B
+    - WS2816C
+    - WS2818
+    - WS2818A
+    - WS2818B
+    - WS2851
+    - AHL003
+    - GS8208B
+    - SJ1221
+    - SPXL
+    - TLC5973
+    - TM1812
+    - 9PDOT
 power:
   voltage:
     max: 60
@@ -30,8 +125,20 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
   vendor: ENTTEC
+software:
+  works_with:
+    - ELM
+    - xLights
 sources:
   status:
     url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
     retrieved: '2026-11-18'
     notes: '"Buy Now $249.00", schema.org InStock, SKU 71521 (OCTO MK2)'
+  outputs.protocols:
+    url: https://www.enttec.com/pixel-protocols
+    retrieved: '2026-11-18'
+    notes: Values = every protocol marked 'Yes' in the 'OCTO' (links to the OCTO page, SKU 71521, 'Referred to as the ‘OCTO Mk2,’') column of ENTTEC's pixel-protocol support table (87 rows), plus the product's pre-listed protocols that are missing…
+  software.works_with:
+    url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: ELM -> pattern-drivers/elm

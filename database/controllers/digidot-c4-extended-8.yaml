@@ -24,6 +24,95 @@ outputs:
   clocked: selectable # single-wire and clocked protocols
   auxiliary:
     DMX512: 2 # DMX in and out
+  protocols:
+    - APA102
+    - APA104
+    - APA105
+    - APA106
+    - APA109
+    - BS0901
+    - CS8812
+    - CX808
+    - DM412
+    - DMX TTL
+    - GS8206
+    - GS8208
+    - GW6205
+    - HD107S
+    - INK1003
+    - LB1908
+    - LD1510
+    - LPD1101
+    - LPD6803
+    - MBI6024
+    - MBI6120
+    - MY9221
+    - MY9231
+    - MY9291
+    - P9883
+    - PC5XS301V0500
+    - SK6805
+    - SK6812
+    - SK6812 RGBW
+    - SK6813
+    - SK6815
+    - SK6818
+    - SK6822
+    - SK6851
+    - SM16703
+    - SM16704
+    - SM16712
+    - SM16716
+    - SM16726
+    - SM16824
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - TM1814
+    - TM1824
+    - TM1903
+    - TM1914
+    - TM1934
+    - TX1818
+    - UCS1903
+    - UCS1904
+    - UCS1909
+    - UCS2903
+    - UCS2904
+    - UCS2909
+    - UCS2912
+    - UCS512B3
+    - UCS512B4
+    - UCS512C1
+    - UCS512C4
+    - UCS512CN
+    - UCS512D
+    - UCS512G4
+    - UCS512G6
+    - UCS512H4
+    - UCS512H5
+    - UCS5603
+    - UCS7604
+    - UCS7804
+    - UCS8903
+    - UCS8904
+    - UCS9812
+    - WES9412
+    - WES943
+    - WS2801
+    - WS2803
+    - WS2808
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2812S
+    - WS2813
+    - WS2814
+    - WS2815
+    - WS2818
+    - WS2851
+    - WS2852
 power:
   voltage:
     max: 24
@@ -46,8 +135,32 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.digidot.eu/shop/digidot-c4-extended-127?attribute_values=77
   vendor: DiGidot
+related:
+  - type: variant
+    ref: controllers/digidot-c4-live-12
+    notes: C4 Live plus Art-Net/DMX recording, playback, scenes and triggers
+    source:
+      url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - MADRIX
+    - Pharos
+    - ArKaos
+    - Resolume Arena
+    - MadMapper
+    - POET
+    - grandMA
 sources:
   status:
     url: https://www.digidot.eu/shop/digidot-c4-extended-127?attribute_values=77
     retrieved: '2026-11-18'
     notes: 'C4 Extended (8) SKU 20204, €645, InStock'
+  outputs.protocols:
+    url: https://www.digidot.eu/web/content/111291
+    retrieved: '2026-11-18'
+    notes: DiGidot Performance Guide v3.0.1-2 (08-04-2025), section 'COMPLETE IC OVERVIEW (ALPHABETICAL)' pp.
+  software.works_with:
+    url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/271
+    retrieved: '2026-11-18'
+    notes: C4 Manual v2.3.0 p.11 'DMX, Art-Net or sACN source required' (same PDF linked from both C4 product pages).

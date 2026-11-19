@@ -18,6 +18,122 @@ outputs:
   pixels:
     max_per_output: 1020 # 32640 total RGB pixels across 32 data lines
   clocked: selectable # supports clockless and clocked signal types
+  protocols:
+    - APA102
+    - APA102C
+    - DotStar
+    - APA104
+    - APA106
+    - APA107
+    - APA109
+    - D705
+    - D707
+    - D708
+    - FW1906
+    - CS8812
+    - GE1603
+    - GE8812
+    - GE8822
+    - GS8206
+    - GS8208
+    - HD107S
+    - INK1002
+    - INK1002B
+    - INK1003
+    - LC8805B
+    - LC8808B
+    - LC8812
+    - LC8812B
+    - LC8822
+    - LC8823
+    - LD1510
+    - LPD1101
+    - LPD1882
+    - LPD1886
+    - LPD6803
+    - LPD6813
+    - LPD8803
+    - LPD8806
+    - NS107
+    - NS107S
+    - NS107SA
+    - NS108
+    - NS108E
+    - P9813
+    - P9816
+    - P9823
+    - P9883
+    - PB3-4-5xxx
+    - PD9823
+    - PL9823
+    - SC6803
+    - SK6805
+    - SK6812
+    - SK6813
+    - SK6818
+    - SK6822
+    - SK9816
+    - SK9822
+    - SK9822A
+    - SK9826
+    - SM16703
+    - SM16704
+    - SM16711
+    - SM16716
+    - SM16726
+    - SM18512
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - TM1814
+    - TM1825
+    - TM1826
+    - TM1829
+    - TM1903
+    - TM1913
+    - TM1914
+    - TM1925
+    - TM1926
+    - UCS1903
+    - UCS1904
+    - UCS2903
+    - UCS2904
+    - UCS2909
+    - UCS2912
+    - UCS3903
+    - UCS512
+    - UCS5903
+    - UCS6909
+    - UCS6912
+    - UCS7009
+    - UCS8903
+    - UCS8904
+    - UCS9812
+    - WS2801
+    - WS2803
+    - WS2811
+    - WS2812
+    - NeoPixel
+    - WS2812B
+    - WS2812C
+    - WS2812D
+    - WS2812S
+    - WS2813
+    - WS2813A
+    - WS2813B
+    - WS2813C
+    - WS2813D
+    - WS2814
+    - WS2815
+    - WS2818
+    - WS2821
+    - WS2822
+    - WS2851
+    - HD108
+    - CS8812B
+    - UCS2905
+    - WS2805
 price:
   amount: 1240
   currency: EUR
@@ -26,11 +142,49 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
   vendor: deskontrol
+related:
+  - type: predecessor
+    ref: controllers/deskontrol-lite-16
+    notes: Earlier generation of the deskontroller LITE line (16 universes, 16 outputs)
+    source:
+      url: https://www.deskontrol.net/descargas/manuales/deskontroller-lite-user-manual.pdf
+      retrieved: '2026-11-18'
+  - type: variant
+    ref: controllers/deskontroller-lite-v3-32
+    notes: Same LITE V3 hardware (32 outputs) with a larger universe licence; upgradeable by key
+    source:
+      url: https://www.deskontrol.net/en/26-art-net-led-controllers
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - MADRIX
+    - MadMapper
+    - Resolume Arena
+    - TouchDesigner
+    - VVVV
+    - grandMA
+    - ChamSys
+    - QLC+
+    - WATCHOUT
+    - Lightjams
+    - ENTTEC LED Mapper
+    - Mapio
+    - xLights
+    - Jinx!
+    - LightFactory
 sources:
   status:
     url: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
     retrieved: '2026-11-18'
     notes: '€1,240.00, In stock'
+  outputs.protocols:
+    url: https://deskontroller.com/download/deskontroller-lite-V3-user-manual.pdf
+    retrieved: '2026-11-18'
+    notes: "deskontroller LITE V3 technical manual, Appendix A (applies to all LITE V3 models: 'The deskontroller LITE V3 series shares the same hardware logic, the same Web UI and the same output architecture across the full range')."
+  software.works_with:
+    url: https://deskontroller.com/support/software/
+    retrieved: '2026-11-18'
+    notes: deskontroller.com 'Compatible Software' page (setup guides for MADRIX, MadMapper, Resolume Arena, TouchDesigner).
 technical_notes:
   - 192 Art-Net universes; up to 32,640 RGB pixels (~24,576 RGBW)
   - 32 data lines via 8 RJ45 output connectors with terminal adapters
