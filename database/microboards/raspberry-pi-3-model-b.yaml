@@ -1,0 +1,78 @@
+name: Raspberry Pi 3 Model B
+status: active
+release_year: 2016
+creator:
+  name: Raspberry Pi Foundation
+  page: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+compute:
+  soc: BCM2837
+  cpu: 4× ARM Cortex-A53
+  isa: ARMv8-A
+  clock_speed: 1.2GHz
+  flash: microSD
+  ram: 1GB
+  linux: true
+connectivity:
+  wifi: 2.4GHz
+  ethernet: 100BASE-TX
+  bluetooth: '4.1'
+  usb: OTG x4
+  serial: true
+io:
+  max_outputs: 1
+  storage: microSD
+  bms: 'No'
+  imu: false
+price: 35
+price_source:
+  notes: Same as the launch price (Raspberry Pi blog, 29 Feb 2016)
+  part: '3055'
+  retrieved: '2026-11-18'
+  url: https://www.adafruit.com/product/3055
+  vendor: Adafruit
+related:
+  - type: predecessor
+    ref: microboards/raspberry-pi-2-model-b
+    source:
+      url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+      retrieved: '2026-11-18'
+      notes: '"It replaced Raspberry Pi 2 Model B in February 2016."'
+  - type: variant
+    ref: microboards/raspberry-pi-3-model-b-plus
+    notes: Later model in the Raspberry Pi 3 range (2018)
+sources:
+  status:
+    url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+    retrieved: '2026-11-18'
+    notes: 'Obsolescence statement: in production until at least January 2028'
+  release_year:
+    url: https://www.raspberrypi.com/news/raspberry-pi-3-on-sale/
+    retrieved: '2026-11-18'
+    notes: Launch post, 29 Feb 2016
+  compute:
+    url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+    retrieved: '2026-11-18'
+    notes: Quad Core 1.2GHz Broadcom BCM2837 64bit CPU, 1GB RAM
+  connectivity.wifi:
+    - url: https://www.raspberrypi.com/news/raspberry-pi-3-on-sale/
+      retrieved: '2026-11-18'
+      notes: Integrated 802.11n wireless LAN (BCM43438)
+    - url: https://www.infineon.com/cms/cn/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/cyw43438/
+      retrieved: '2026-11-18'
+      notes: CYW43438 (ex-BCM43438) is single-band 2.4GHz
+  connectivity.bluetooth:
+    url: https://www.raspberrypi.com/news/raspberry-pi-3-on-sale/
+    retrieved: '2026-11-18'
+    notes: '"Integrated 802.11n wireless LAN and Bluetooth 4.1"'
+  connectivity.ethernet:
+    url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+    retrieved: '2026-11-18'
+    notes: 100 Base Ethernet
+technical_notes:
+  - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'
+  - Switched micro-USB power input rated up to 2.5A

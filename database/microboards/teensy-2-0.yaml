@@ -1,0 +1,52 @@
+name: Teensy 2.0
+status: discontinued
+creator:
+  name: PJRC
+  page: https://www.pjrc.com/store/teensy.html
+power:
+  voltage:
+    max: 5V
+  gpio_voltage: 5V
+compute:
+  soc: ATmega32U4
+  cpu: AVR
+  isa: AVR5
+  clock_speed: 16MHz
+  flash: 31.5kB
+  ram: 2.5kB
+  linux: false
+connectivity:
+  usb: OTG
+  serial: true
+io:
+  storage: Shield
+  bms: 'No'
+  imu: false
+price: 16
+price_source:
+  notes: final list price; out of stock (last physical count Jul 20, 2022)
+  retrieved: '2026-11-18'
+  url: https://www.pjrc.com/store/teensy.html
+  vendor: PJRC
+related:
+  - type: variant
+    ref: microboards/teensy-plus-plus-2-0
+    notes: Larger AT90USB1286 board in PJRC's 8-bit Teensy line
+    source:
+      url: https://www.pjrc.com/teensy/index.html
+      retrieved: '2026-11-18'
+sources:
+  status:
+    url: https://www.pjrc.com/store/teensy.html
+    retrieved: '2026-11-18'
+    notes: 'Marked "Discontinued"; Inventory Status: Out Of Stock'
+  compute:
+    url: https://www.pjrc.com/teensy/index.html
+    retrieved: '2026-11-18'
+    notes: 'Specification table: ATMEGA32U4 8 bit AVR 16 MHz, 32256 bytes flash, 2560 bytes RAM, 1024 bytes EEPROM'
+  power.gpio_voltage:
+    url: https://www.pjrc.com/teensy/index.html
+    retrieved: '2026-11-18'
+    notes: 'I/O: 25, 5 Volt'
+technical_notes:
+  - 25 I/O pins, 12 analog inputs, 7 PWM outputs, 1 each of UART, I2C and SPI
