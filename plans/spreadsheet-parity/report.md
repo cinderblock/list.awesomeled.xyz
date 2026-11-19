@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/18/2026, 8:10 PM PST (2026-11-19 04:10Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/18/2026, 9:09 PM PST (2026-11-19 05:09Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -10,14 +10,14 @@ Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the 
 | ----------------------------------------------------- | ---: | -------------: | --------: | ---------: | ---------: | ---------: | ---------: |
 | [Pattern Drivers](#pattern-drivers)                   |   44 |              0 |         1 |    0 / 642 |     0 / 86 |     0 / 16 |          1 |
 | [Controllers](#controllers)                           |  133 |              0 |         6 |   0 / 2053 |    0 / 231 |     0 / 17 |          0 |
-| [Pixels](#pixels)                                     |   35 |              0 |         2 |    0 / 669 |     0 / 79 |     0 / 47 |        110 |
-| [Pixel ICs](#pixel-ics)                               |   41 |              0 |         1 |    0 / 451 |     0 / 63 |     0 / 15 |         77 |
+| [Pixels](#pixels)                                     |   35 |              0 |        11 |    0 / 669 |     0 / 79 |     0 / 47 |        110 |
+| [Pixel ICs](#pixel-ics)                               |   41 |              0 |        40 |    0 / 451 |     0 / 63 |     0 / 15 |         77 |
 | [Pixel Decoders](#pixel-decoders)                     |   14 |              0 |         1 |    0 / 118 |     0 / 26 |      0 / 0 |         14 |
-| [Level Converters](#level-converters)                 |    9 |              0 |         0 |     0 / 49 |     0 / 17 |      0 / 0 |          0 |
+| [Level Converters](#level-converters)                 |    9 |              0 |         4 |     0 / 49 |     0 / 17 |      0 / 0 |          0 |
 | [Adapters](#adapters)                                 |   47 |              0 |         0 |    0 / 471 |     0 / 95 |      0 / 1 |          0 |
-| [DIY MicroBoards](#diy-microboards)                   |   38 |              0 |         0 |    0 / 702 |     0 / 84 |     0 / 19 |          0 |
-| [Connectors](#connectors)                             |   44 |              0 |         1 |   0 / 1066 |    44 / 98 |      0 / 9 |          0 |
-| [Drive Libraries](#drive-libraries)                   |   29 |              0 |         0 |    0 / 144 |     0 / 66 |      0 / 0 |          0 |
+| [DIY MicroBoards](#diy-microboards)                   |   38 |              0 |         8 |    0 / 702 |     0 / 84 |     0 / 19 |          0 |
+| [Connectors](#connectors)                             |   44 |              0 |         4 |   0 / 1066 |    44 / 98 |      0 / 9 |          0 |
+| [Drive Libraries](#drive-libraries)                   |   29 |              0 |         2 |    0 / 144 |     0 / 66 |      0 / 0 |          0 |
 | [Diffusive Materials](#diffusive-materials)           |   45 |              0 |         0 |    0 / 555 |     0 / 42 |      0 / 0 |          0 |
 | [Commercial Pixel Systems](#commercial-pixel-systems) |   18 |              0 |         0 |    0 / 144 |     0 / 24 |      0 / 1 |          0 |
 
@@ -27,33 +27,33 @@ Database folder: `database/pattern-drivers/`.
 
 <details><summary>Column mapping</summary>
 
-| Col | Sheet header  | YAML field(s)                                | Compared as | Note |
-| --- | ------------- | -------------------------------------------- | ----------- | ---- |
-| A   | (name)        | `name`                                       | text        |      |
-| B   | Developer     | `creator`                                    | text        |      |
-| C   | Price         | `pricing.price`, `pricing.tiers`             | price       |      |
-| D   | Platform      | `platforms`                                  | text        |      |
-| E   | Live          | `capabilities.live`                          | bool        |      |
-| F   | Designer      | `capabilities.designer`                      | bool        |      |
-| G   | Visualizer    | `capabilities.visualizer`                    | bool        |      |
-| H   | ArtNet        | `outputs.protocols.artnet`                   | text        |      |
-| I   | E1.31 sACN    | `outputs.protocols.sacn`                     | text        |      |
-| J   | DMX           | `outputs.protocols.dmx`, `outputs.dmx_notes` | text        |      |
-| K   | KiNet         | `outputs.protocols.kinet`                    | text        |      |
-| L   | DDP           | `outputs.protocols.ddp`                      | text        |      |
-| M   | GPIO          | `outputs.gpio`, `inputs.adc`                 | text        |      |
-| N   | Serial        | `outputs.serial`, `outputs.serial_notes`     | text        |      |
-| O   | Video         | `inputs.video`                               | text        |      |
-| P   | Audio         | `inputs.audio`                               | text        |      |
-| Q   | Programmatic  | `capabilities.programmatic`                  | bool        |      |
-| R   | Language      | `language`                                   | text        |      |
-| S   | Other Inputs  | `inputs.other`                               | text        |      |
-| T   | Other Outputs | `outputs.other`                              | text        |      |
-| U   | Integrations  | `integrations`                               | text        |      |
-| V   | Notes         | `notes`, `technical_notes`                   | text        |      |
-| W   | Demo/Free     | `pricing.demo`                               | bool        |      |
-| X   | Status        | `status`                                     | enum        |      |
-| Y   | URL           | `links.url`, `links.mirror`                  | url         |      |
+| Col | Sheet header  | YAML field(s)                                                      | Compared as | Note |
+| --- | ------------- | ------------------------------------------------------------------ | ----------- | ---- |
+| A   | (name)        | `name`                                                             | text        |      |
+| B   | Developer     | `creator`                                                          | text        |      |
+| C   | Price         | `pricing.price`, `pricing.tiers`                                   | price       |      |
+| D   | Platform      | `platforms`                                                        | text        |      |
+| E   | Live          | `capabilities.live`                                                | bool        |      |
+| F   | Designer      | `capabilities.designer`                                            | bool        |      |
+| G   | Visualizer    | `capabilities.visualizer`, `capabilities.visualizer_notes`         | bool        |      |
+| H   | ArtNet        | `outputs.protocols.artnet`                                         | text        |      |
+| I   | E1.31 sACN    | `outputs.protocols.sacn`                                           | text        |      |
+| J   | DMX           | `outputs.protocols.dmx`, `outputs.dmx_notes`                       | text        |      |
+| K   | KiNet         | `outputs.protocols.kinet`                                          | text        |      |
+| L   | DDP           | `outputs.protocols.ddp`                                            | text        |      |
+| M   | GPIO          | `outputs.gpio`, `inputs.adc`                                       | text        |      |
+| N   | Serial        | `outputs.serial`, `outputs.serial_notes`                           | text        |      |
+| O   | Video         | `inputs.video`                                                     | text        |      |
+| P   | Audio         | `inputs.audio`                                                     | text        |      |
+| Q   | Programmatic  | `capabilities.programmatic`                                        | bool        |      |
+| R   | Language      | `language`                                                         | text        |      |
+| S   | Other Inputs  | `inputs.other`, `inputs.other_notes`, `inputs.adc`, `inputs.audio` | text        |      |
+| T   | Other Outputs | `outputs.other`, `outputs.other_notes`, `outputs.protocols`        | text        |      |
+| U   | Integrations  | `integrations`                                                     | text        |      |
+| V   | Notes         | `notes`, `technical_notes`                                         | text        |      |
+| W   | Demo/Free     | `pricing.demo`                                                     | bool        |      |
+| X   | Status        | `status`                                                           | enum        |      |
+| Y   | URL           | `links.url`, `links.mirror`                                        | url         |      |
 
 </details>
 
@@ -63,7 +63,7 @@ Database folder: `database/pattern-drivers/`.
 - [A16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A16) "Filament LED" → `pattern-drivers/filament` (url, score 0.85)
 - [A19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A19) "Jinx!" → `pattern-drivers/glediator` (url, score 0.73)
 - [A30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A30) "LX Studio / Chromatik" → `pattern-drivers/lx-studio-chromatik` (url, score 0.86)
-- [A36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A36) "Millumin" → `pattern-drivers/millumin` (name, score 1, duplicate of row 35)
+- [A36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A36) "Millumin" → `pattern-drivers/millumin` (name, score 0.91, duplicate of row 35)
 
 ### YAML entries with no sheet row
 
@@ -77,19 +77,22 @@ Database folder: `database/pattern-drivers/`.
 
 | Cell                                                                                                                    | Entry           | Column       | Sheet | YAML now                                                     | Sourced |
 | ----------------------------------------------------------------------------------------------------------------------- | --------------- | ------------ | ----- | ------------------------------------------------------------ | ------- |
-| [S40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S40) | `smartshow-lms` | Other Inputs | vide  | Video files, images, webcam, screen capture and NDI; contro… | yes     |
+| [S40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S40) | `smartshow-lms` | Other Inputs | vide  | ["Video files","Images","Webcam","Screen capture","NDI","Ar… | yes     |
 
 </details>
 
-<details><summary>Acknowledged differences (56)</summary>
+<details><summary>Acknowledged differences (71)</summary>
 
 - [X3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=X3) `arkaos` Status "Active": (cited) YAML cites a source for status
 - [D4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D4) `arthet-led-mapper` Platform "ubuntu, windows, mac and arm64": Same platforms in structured form (Ubuntu = Linux, mac = macOS); arm64 is in platforms.notes
 - [Y5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y5) `bekonix` URL "https://www.bekonix.com/platform/": The sheet links a sub-page that is gone (404); YAML links the live site
 - [V9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V9) `chataigne-wled-mod` Notes "Plug on for vcontrol of WLED, other WLED plugins from same …": Typo fixed in YAML
-- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.91245": (cited) re-priced at the source (retrieved 2026-11-18)
+- [J10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=J10) `chromatik` DMX "Possible": Typed by stream 2 (e215cd7): no direct DMX; it sends Art-Net or sACN to a node (dmx_notes)
+- [Q10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Q10) `chromatik` Programmatic "Possible": Typed by stream 2 (e215cd7): "Possible" became programmatic: true
+- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.93975": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y12) `elm` URL "https://www.enttec.co.uk/product/controls-gb/addressable-le…": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
 - [D15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D15) `fastled-fx-engine` Platform "ESP/AVR/NRF/RP/Browser": Same platforms in structured form (web + hardware list)
+- [G15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=G15) `fastled-fx-engine` Visualizer "Browser wasm Preview": Same: a browser (WebAssembly) preview
 - [C16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C16) `filament` Price "59": The maker sells it for EUR 49 one-time (VAT incl.); $59 isn't on its site
 - [U16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=U16) `filament` Integrations "Standalone installation player for Raspberry Pi": Same: integrations and platforms.notes describe the free Raspberry Pi standalone player
 - [V16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V16) `filament` Notes "Full Resolume replacement with a complex VJ mixer and proje…": Reworded from the maker's site: VJ mixer, projection mapping and Resolume import/export are in the notes
@@ -100,24 +103,34 @@ Database folder: `database/pattern-drivers/`.
 - [V20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V20) `jinx` Notes "Development ceased": Same: status discontinued; the notes give the last release (V2.4, 2016)
 - [S21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S21) `led-lab` Other Inputs "audio (input / playback), video, MIDI, /, OSC": Same, in more detail (camera, video and music inputs; MIDI, DMX, Art-Net and OSC control)
 - [T21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=T21) `led-lab` Other Outputs "DDP/Minleon/TekLights, OpenPixel": Same: DDP (Minleon, TekLights) in outputs.other and OpenPixel as outputs.protocols.opc
+- [S22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S22) `led-strip-studio-software` Other Inputs "MIDI, OSC, CMD Line, DMX": Same, as a list (CMD Line = Command line)
 - [D23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D23) `lededit` Platform "Desktop": LEDEdit is Windows desktop software; "Desktop" became os: [Windows]
+- [S26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S26) `lightdesigner` Other Inputs "GPIO pins": Same, as a list
 - [V26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V26) `lightdesigner` Notes "RocketLife controllers, serial/SPI pixels only": "SPI" wording normalized to clocked pixels (937d734)
+- [S28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S28) `lightmobile` Other Inputs "GPIO pins": Same, as a list
 - [V28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V28) `lightmobile` Notes "RocketLife controllers, serial/SPI pixels only": "SPI" wording normalized to clocked pixels (937d734)
 - [C29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C29) `lumiastream` Price "Free- $30/month": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W29) `lumiastream` Demo/Free "Free / premiumn Monthly": Typo fixed in YAML
 - [W30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W30) `lx-studio-chromatik` Demo/Free "Open source. Comercial applications require license": Typo fixed in YAML
 - [X30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=X30) `lx-studio-chromatik` Status "Active": (cited) YAML cites a source for status
 - [B31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B31) `madmapper` Developer "Smode Tech": (cited) YAML cites a source for creator
-- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.46759": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.598625": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W32) `madrix-5` Demo/Free "Demo no data out": Same in structured form: demo.available + limitations
 - [B34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B34) `mapio-pro` Developer "Vistitution": (cited) YAML cites a source for creator
+- [S34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S34) `mapio-pro` Other Inputs "Native support for PixelPusher devices": PixelPusher support is an output, which the entry lists; the sheet wrote it in Other Inputs
+- [O35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=O35) `millumin` Video "Possible": Typed by stream 2 (e215cd7): "Possible" became video in and out (Both)
+- [O36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=O36) `millumin` Video "Possible": Typed by stream 2 (e215cd7): "Possible" became video in and out (Both)
 - [C37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C37) `protopixel-create` Price "176": (cited) re-priced at the source (retrieved 2020-08-08)
+- [T37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=T37) `protopixel-create` Other Outputs "ProtoPixel proprietary protocol, OSC, UDP": Same, as a list
 - [Y37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y37) `protopixel-create` URL "https://www.protopixel.io/design": ProtoPixel's old 'design' page; YAML links the Create product page
+- [G38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=G38) `qlc` Visualizer "3D view available in V5": Same: 3D, from QLC+ 5
 - [V40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V40) `smartshow-lms` Notes "aimed at live show use , big button execute interface": Same: the notes cover live-show use and the big-button Show Mode
 - [Y41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y41) `smode` URL "https://smode.fr/": Old URL; it redirects to the page YAML links
 - [D42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D42) `touchdesigner` Platform "0": Sheet cell overwritten after the import (was "Windows, MacOS"); YAML keeps the platforms
 - [G42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=G42) `touchdesigner` Visualizer "Yes, DIY": "Yes, DIY" = you build the visualizer yourself: capabilities.visualizer "3D (build your own)"
 - [Y43](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y43) `vixen-lights` URL "https://www.vixenlights.com/downloads/": Old URL (the site blocks scripted checks); YAML links the maker's current page
+- [M44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=M44) `wled` GPIO "Possible": Typed by stream 2 (e215cd7): "Possible" became GPIO in and out (Both)
+- [T44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=T44) `wled` Other Outputs "ws281x protocol, APA102, etc.": Same, in other_notes (pixels directly: WS281x, APA102 and others)
 - [Y44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y44) `wled` URL "GitHub - Aircoookie/WLED: Control WS2812B and many more typ…": The old repository's link title; github.com/Aircoookie/WLED redirects to github.com/wled/WLED, which YAML links
 - [Y5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y5) `bekonix` URL "https://www.bekonix.com/platform/": The sheet links a sub-page that is gone (404); YAML links the live site
 - [A12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A12) `elm` (name) "ELM": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
@@ -138,6 +151,8 @@ Database folder: `database/pattern-drivers/`.
 - [C32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C32) `madrix-5` Price "330+": Migrated into pricing/demo/technical_notes (b1c26ec), reworded
 - [C37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C37) `protopixel-create` Price "176": Migrated into pricing/demo/technical_notes (b1c26ec), reworded
 - [C38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C38) `qlc` Price "-1": In YAML (a pricing tier and the demo text); QLC+ now asks EUR 20 for the Pi image (ISSUES.md, stream 6)
+- [M38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=M38) `qlc` GPIO "Output": Stream 2's I/O check (0690af1): the GPIO, SPI and UART plugins run on Linux, not only the Raspberry Pi build; SPI is an output protocol
+- [N38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=N38) `qlc` Serial "Output": Stream 2's I/O check (0690af1): the GPIO, SPI and UART plugins run on Linux, not only the Raspberry Pi build; SPI is an output protocol
 - [C41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C41) `smode` Price "Expensive": Migrated into pricing/demo/technical_notes (b1c26ec), reworded
 
 </details>
@@ -464,7 +479,7 @@ Database folder: `database/controllers/`.
 - [D126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D126) `qolorpix` Price "1500": (cited) re-priced at the source (retrieved 2026-11-18)
 - [K126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K126) `qolorpix` Max Current "120": (cited) YAML cites a source for power.current.max
 - [V126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V126) `qolorpix` Product URL "http://www.citytheatrical.com/Products/qolorpix-tape-contro…": Old URL; it redirects to the page YAML links
-- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1848.75328": (cited) re-priced at the source (retrieved 2022-06-29)
+- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1849.3024": (cited) re-priced at the source (retrieved 2022-06-29)
 - [G127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=G127) `pixelator` Storage "Yes": The manual describes no show storage; its DMX Generator holds static looks only
 - [H127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H127) `pixelator` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone (Pixelator datasheet)
 - [V128](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V128) `emp-16-uni-control` Product URL "https://www.empdesigns.co.uk/portfolio-item/16-universe-led…": Old URL; it redirects to the page YAML links
@@ -594,8 +609,17 @@ Database folder: `database/pixels/`.
 
 ### YAML entries with no sheet row
 
+- `pixels/adafruit-pixie` "Adafruit Pixie": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixels/ge8812` "GE8812": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixels/ge8822` "GE8822": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixels/ink1002` "INK1002": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixels/p9412` "P9412": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixels/p943` "P943": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
 - `pixels/sk6805` "SK6805": added 2026-06-14 in 556d5da (data: add SK6805 addressable LED)
 - `pixels/sk6812-rgbw` "SK6812RGBW": added 2026-07-01 in 10c865a (data: add SK6812RGBW)
+- `pixels/sk6851` "SK6851": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixels/tx1818` "TX1818": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixels/ws2822s` "WS2822S": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
 
 ### Highlighted cells
 
@@ -821,7 +845,46 @@ Database folder: `database/pixel-ics/`.
 
 ### YAML entries with no sheet row
 
+- `pixel-ics/d705` "D705": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/dm412` "DM412": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/fw1906` "FW1906": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ge1603` "GE1603": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/icnd2110` "ICND2110": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/ink1003` "INK1003": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/lb1908` "LB1908": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/ld1510` "LD1510": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/lpd1886` "LPD1886": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/lpd8803` "LPD8803": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/mbi6023` "MBI6023": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/mbi6024` "MBI6024": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/mbi6120` "MBI6120": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/p9883` "P9883": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
 - `pixel-ics/sk6805` "SK6805": added 2026-07-01 in b3b1e7a (data: add SK6805 pixel IC)
+- `pixel-ics/sm16711` "SM16711": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/sm16714` "SM16714": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/sm16726` "SM16726": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/sm16803` "SM16803": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/sm16804` "SM16804": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/sm16824e` "SM16824E": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/tm1812` "TM1812": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/tm1824` "TM1824": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/tm1903` "TM1903": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/tm1913` "TM1913": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/tm1934` "TM1934": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ucs1909` "UCS1909": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ucs1912` "UCS1912": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ucs2603` "UCS2603": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/ucs2909` "UCS2909": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ucs2912` "UCS2912": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ucs5603` "UCS5603": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ucs6909` "UCS6909": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ucs7604` "UCS7604": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ucs7804` "UCS7804": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ws2803` "WS2803": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ws2808` "WS2808": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/ws2818` "WS2818": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ws2818a` "WS2818A": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
+- `pixel-ics/ws2821` "WS2821": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
 
 ### Highlighted cells
 
@@ -1024,6 +1087,13 @@ Database folder: `database/level-converters/`.
 
 </details>
 
+### YAML entries with no sheet row
+
+- `level-converters/max3485` "MAX3485": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `level-converters/sn74hct125` "SN74HCT125": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `level-converters/sn74hct245` "SN74HCT245": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `level-converters/txb0104` "TXB0104": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+
 <details><summary>Acknowledged differences (2)</summary>
 
 - [F4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1484346977&range=F4) `sn74ahct125n` Price "0.75": YAML has distributor price tiers verified since the import
@@ -1075,7 +1145,7 @@ Header problems:
 - [A41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A41) "Meanwell PDU with Differential Reciever" → `adapters/meanwell-pdu-with-differential-receiver` (alias, score 0.8)
 - [A46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A46) "QuinLED-Dig-Uno" → `controllers/quinled-dig-uno` (alias, score 0.43)
 
-<details><summary>Acknowledged differences (74)</summary>
+<details><summary>Acknowledged differences (73)</summary>
 
 - [D3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=D3) `rasppi-isolated-dmx` Pixel Types "Allows easy control of DMX-512 devices from Pi": A description in the Pixel Types column; the entry's notes say it
 - [E5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=E5) `pixelpops` Max Voltage "5": (cited) YAML cites a source for power.voltage.max
@@ -1138,7 +1208,6 @@ Header problems:
 - [H44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H44) `espartstick` Unit Price (USD) "25": (cited) re-priced at the source (retrieved 2021-08-03)
 - [C45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=C45) `espixelstick` Max Channels "4": (cited) YAML cites a source for outputs.count
 - [H45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H45) `espixelstick` Unit Price (USD) "30": (cited) re-priced at the source (retrieved 2026-11-18)
-- [E46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=E46) `quinled-dig-uno` Max Voltage "5": The 2018 DIY board was built for 5 V (12 V optional); merged into the current controller entry
 - [G46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=G46) `quinled-dig-uno` Parent "Wemos Dx Mini (ESP32/ESP8266)": The 2018 DIY board took a Wemos D1/D32 Mini; merged into controllers/quinled-dig-uno (now an ESP32 board)
 - [I46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=I46) `quinled-dig-uno` Output Connectors "Phoniex Screw": Typo fixed in YAML (Phoenix Screw)
 - [N46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=N46) `quinled-dig-uno` Product URL "https://quinled.info/2018/10/12/quinled-dig-uno-hardware-gu…": Old URL; it redirects to the page YAML links
@@ -1199,6 +1268,17 @@ Header problems:
 
 - [A3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A3) "NRF 52840 Feather" → `microboards/nrf-52840-feather` (url, score 0.87)
 - [A36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A36) "Orange Pi LTS" → `microboards/orange-pi-lts` (url, score 0.79)
+
+### YAML entries with no sheet row
+
+- `microboards/beaglebone-green` "BeagleBone Green": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `microboards/orange-pi-zero` "Orange Pi Zero": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `microboards/pocketbeagle-2` "PocketBeagle 2": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `microboards/raspberry-pi-3b` "Raspberry Pi 3 Model B": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `microboards/raspberry-pi-5` "Raspberry Pi 5": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `microboards/raspberry-pi-zero-2-w` "Raspberry Pi Zero 2 W": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `microboards/wemos-d1-mini-pro` "Wemos D1 Mini Pro": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `microboards/wemos-d1-mini` "Wemos D1 Mini": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 
 <details><summary>Acknowledged differences (81)</summary>
 
@@ -1336,7 +1416,10 @@ Database folder: `database/connectors/`.
 
 ### YAML entries with no sheet row
 
+- `connectors/pcb-screw-terminal-block` "PCB Screw Terminal Block": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `connectors/rj45` "RJ45 (8P8C)": added 2026-06-14 in c4c67d3 (data: add RJ45 (8P8C) connector)
+- `connectors/xconnect` "xConnect": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+- `connectors/xlr-4` "XLR 4": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 
 ### Hyperlinks not in YAML
 
@@ -1448,11 +1531,27 @@ Database folder: `database/drive-libraries/`.
 
 </details>
 
-<details><summary>Acknowledged differences (5)</summary>
+### Rows paired by alias, URL, or as duplicates
+
+- [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=A11) "ESPixelstick" → `drive-libraries/espasynce131` (url, score 1)
+
+### YAML entries with no sheet row
+
+- `drive-libraries/espixelstick` "ESPixelstick": in the 2026-01-21 import
+- `drive-libraries/neopixelbus` "NeoPixelBus": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
+
+<details><summary>Acknowledged differences (12)</summary>
 
 - [D2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=D2) `arduino-ethernet-nano-with-enc28j60` Features "WS2811/12 Ethernet Hardwire": YAML revised by research since the import
+- [C4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C4) `artnet-receive` Hardware "Arduino/Teensie/ESP8266": Same hardware, spelled out and as a list
+- [C6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C6) `artnet-dmx-sd-card` Hardware "NodeMcu /ESP8266/32": Same hardware, spelled out and as a list
+- [C8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C8) `artnetwifi` Hardware "ESP8266/32": Same hardware, spelled out and as a list
 - [B13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=B13) `fade` Developer "Eric Arcana": Fade is Eric Gunnerson's (riderx.info); "Eric Arcana" was a sheet error, fixed in 388c2cf
+- [C16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C16) `led-mapper` Hardware "Arduino/ Esp 66/32": Same hardware, spelled out and as a list
+- [C27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C27) `visuino` Hardware "Arduino/Esp66/32/ RasPi/MicroBit/Teensy": Same hardware, spelled out and as a list
+- [C28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C28) `wled` Hardware "ESP8266/32": Same hardware, spelled out and as a list
 - [E28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=E28) `wled` URL "https://github.com/Aircoookie/WLED": Old URL; it redirects to the page YAML links
+- [C29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C29) `xod` Hardware "Arduino/ ESP 66/32": Same hardware, spelled out and as a list
 - [A28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=A28) `wled` (name) "WLED": Old URL; it redirects to the page YAML links
 - [E28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=E28) `wled` URL "https://github.com/Aircoookie/WLED": Old URL; it redirects to the page YAML links
 

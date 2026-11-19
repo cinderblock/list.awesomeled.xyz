@@ -168,6 +168,48 @@
 'Pattern Drivers | WLED | URL (link)':
   - value: 'https://github.com/Aircoookie/WLED'
     reason: 'Old URL; it redirects to the page YAML links'
+'Pattern Drivers | Chromatik | DMX':
+  - value: 'Possible'
+    reason: 'Typed by stream 2 (e215cd7): no direct DMX; it sends Art-Net or sACN to a node (dmx_notes)'
+'Pattern Drivers | Chromatik | Programmatic':
+  - value: 'Possible'
+    reason: 'Typed by stream 2 (e215cd7): "Possible" became programmatic: true'
+'Pattern Drivers | FastLED "FX" engine | Visualizer':
+  - value: 'Browser wasm Preview'
+    reason: 'Same: a browser (WebAssembly) preview'
+'Pattern Drivers | LED Strip Studio Software | Other Inputs':
+  - value: 'MIDI, OSC, CMD Line, DMX'
+    reason: 'Same, as a list (CMD Line = Command line)'
+'Pattern Drivers | LightDesigner | Other Inputs':
+  - value: 'GPIO pins'
+    reason: 'Same, as a list'
+'Pattern Drivers | LightMobile | Other Inputs':
+  - value: 'GPIO pins'
+    reason: 'Same, as a list'
+'Pattern Drivers | Mapio Pro | Other Inputs':
+  - value: 'Native support for PixelPusher devices'
+    reason: 'PixelPusher support is an output, which the entry lists; the sheet wrote it in Other Inputs'
+'Pattern Drivers | Millumin | Video':
+  - value: 'Possible'
+    reason: 'Typed by stream 2 (e215cd7): "Possible" became video in and out (Both)'
+'Pattern Drivers | ProtoPixel Create | Other Outputs':
+  - value: 'ProtoPixel proprietary protocol, OSC, UDP'
+    reason: 'Same, as a list'
+'Pattern Drivers | QLC+ | Visualizer':
+  - value: '3D view available in V5'
+    reason: 'Same: 3D, from QLC+ 5'
+'Pattern Drivers | WLED | GPIO':
+  - value: 'Possible'
+    reason: 'Typed by stream 2 (e215cd7): "Possible" became GPIO in and out (Both)'
+'Pattern Drivers | WLED | Other Outputs':
+  - value: 'ws281x protocol, APA102, etc.'
+    reason: 'Same, in other_notes (pixels directly: WS281x, APA102 and others)'
+'Pattern Drivers | QLC+ | GPIO (note)':
+  - value: "Only on RaspberryPi version\n\nAlso SPI"
+    reason: "Stream 2's I/O check (0690af1): the GPIO, SPI and UART plugins run on Linux, not only the Raspberry Pi build; SPI is an output protocol"
+'Pattern Drivers | QLC+ | Serial (note)':
+  - value: "Only on RaspberryPi version\n\nAlso SPI"
+    reason: "Stream 2's I/O check (0690af1): the GPIO, SPI and UART plugins run on Linux, not only the Raspberry Pi build; SPI is an output protocol"
 'Controllers | SP102E | Standalone':
   - value: 'Presets'
     reason: '"Presets" = plays built-in patterns on its own; YAML inputs.standalone: true'
@@ -1518,6 +1560,27 @@
 'Drive Libraries | WLED | URL (link)':
   - value: 'https://github.com/Aircoookie/WLED'
     reason: 'Old URL; it redirects to the page YAML links'
+'Drive Libraries | Artnet Receive | Hardware':
+  - value: 'Arduino/Teensie/ESP8266'
+    reason: 'Same hardware, spelled out and as a list'
+'Drive Libraries | ArtNet_DMX_SD_Card | Hardware':
+  - value: 'NodeMcu /ESP8266/32'
+    reason: 'Same hardware, spelled out and as a list'
+'Drive Libraries | ArtnetWiFi | Hardware':
+  - value: 'ESP8266/32'
+    reason: 'Same hardware, spelled out and as a list'
+'Drive Libraries | LED Mapper | Hardware':
+  - value: 'Arduino/ Esp 66/32'
+    reason: 'Same hardware, spelled out and as a list'
+'Drive Libraries | Visuino | Hardware':
+  - value: 'Arduino/Esp66/32/ RasPi/MicroBit/Teensy'
+    reason: 'Same hardware, spelled out and as a list'
+'Drive Libraries | WLED | Hardware':
+  - value: 'ESP8266/32'
+    reason: 'Same hardware, spelled out and as a list'
+'Drive Libraries | XOD | Hardware':
+  - value: 'Arduino/ ESP 66/32'
+    reason: 'Same hardware, spelled out and as a list'
 'Diffusive Materials | Printer Paper | Material Type':
   - value: 'Wood Pulp'
     reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'

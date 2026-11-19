@@ -116,9 +116,9 @@ column, badges and the designer's controller facts. **Parity (stream 1):
 please don't restore or compare controllers' interfaces from that column**;
 treat it as unknown. Other Controllers columns follow their rows.
 
-Parity (stream 1): the parity tool no longer compares this column (337823c).
+Parity (stream 1): the parity tool no longer compares this column (1381b72).
 Parity's research also checked 16 controllers' inputs against maker docs
-(6e2249d: DiGidot C4 Live 12 and C4 Extended 8, Falcon F16V4, Genius Pro 32,
+(c17aa57: DiGidot C4 Live 12 and C4 Extended 8, Falcon F16V4, Genius Pro 32,
 K16000S, LED Ethernet Controller 3, LeDMX4 MAX, MagWLED-1, Octo Mk2,
 Pixelator Mini, Pixelblaze V3, PixOut Server, ProtoPixel 1-ch Wi-Fi,
 QuinLED-Dig-Quad, SmartShow Pro ONE, SPI Matrix). Where stream 2's pass
@@ -141,7 +141,7 @@ designer. Keep (with outputs removed) or move out of controllers: the
 category call isn't stream 4's.
 
 Parity (stream 1): PixOut's outputs and 24 V are gone, with the 2019 FAQ and
-the current product page cited (3119195); the category call is still open.
+the current product page cited (caf6035); the category call is still open.
 Its `requires_host: Raspberry Pi` is doubtful for the boxed unit, which has
 the Pi inside.
 
@@ -441,9 +441,9 @@ channels` treats channels as pixels.
   not in the database yet: Diamex LED-Player-ME (the LED-Player-M's
   successor), Falcon F48V4/V5, Kulp K16/K32 Pro/Max.
 - FYI, slug renames: `microboards/teensy-2-0` → `teensy-plus-plus-2-0` and
-  `raspberry-pi-3-model-b` → `raspberry-pi-3-model-b-plus` (c1ee7ca); the old
-  slugs now hold the real Teensy 2.0 and Pi 3 Model B (f2ef4e1). Three
-  `related` refs that meant the B+ follow it (b5bda48); the rest mean the Pi
+  `raspberry-pi-3-model-b` → `raspberry-pi-3-model-b-plus` (8b59374); the old
+  slugs now hold the real Teensy 2.0 and Pi 3 Model B (387602d). Three
+  `related` refs that meant the B+ follow it (10fc268); the rest mean the Pi
   3 family and stay.
 
 ## Connector pictures from the sheet (images, stream 5)

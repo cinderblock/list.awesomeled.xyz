@@ -221,8 +221,8 @@ was skipped:
 
 Every thread with its disposition:
 [spreadsheet-parity/comments.md](spreadsheet-parity/comments.md) (commenters
-unnamed; the repo is public). Factual ones were migrated (b1c26ec, 6fa4018)
-or settled by the research agents (862f980, 6e2249d); the rest are
+unnamed; the repo is public). Factual ones were migrated (b1c26ec, 33897e7)
+or settled by the research agents (dd765af, c17aa57); the rest are
 process/history, which fed the About page (domain story, category
 definitions, how the data was gathered).
 
@@ -249,46 +249,46 @@ definitions, how the data was gathered).
       (`d26e73c`, `703a4a2`), notes (`b1c26ec`), precision + migration
       losses (`66342a4`), pixel totals (`919d9da`), batch 3 (`f926758`).
 - [x] README → About page (pushed).
-- [x] Researched fixes: controller inputs (`84c6d8a`), comment facts
-      (`6fa4018`); non-review details (`6b13714`, `Not-A-Review:` trailer).
-- [x] 241 reviewed differences acknowledged (`3c6bd34`; acks.yaml disables
+- [x] Researched fixes: controller inputs (`a81aebc`), comment facts
+      (`33897e7`); non-review details (`0d8190f`, `Not-A-Review:` trailer).
+- [x] 241 reviewed differences acknowledged (`68c8f09`; acks.yaml disables
       the terminology lint rules, since its values are the sheet's verbatim
       text and `eslint --fix` would rewrite them).
 - [x] Comments: 61 threads dispositioned
       ([comments.md](spreadsheet-parity/comments.md)).
-- [x] Controllers Interface column marked scrambled/dropped (`337823c`).
-- [x] Highlights show what YAML holds (`c7819db`); yellow cells still empty
+- [x] Controllers Interface column marked scrambled/dropped (`1381b72`).
+- [x] Highlights show what YAML holds (`f9b4abf`); yellow cells still empty
       in YAML are the sheet's own to-do list, carried over in the report.
 - [x] Five research agents reviewed and committed (each a research commit):
-      pattern drivers `2c949f1`; Teensy++/Pi 3 B+ slug renames `c1ee7ca`
-      (Not-A-Review) + Teensy 2.0 / Pi 3 B `f2ef4e1`; SK6812WWA, UCS2904,
-      SM16704, WS2811/WS2812 Extender `5260240`; Falcon F4V3/F16V3,
-      Gledopto Elite 2D/4D-EXMU, ENTTEC Pixel Octo `e802510`; 16
-      controllers' inputs `6e2249d`; D1 follow-ups `3119195` (PixOut has no
+      pattern drivers `ff69967`; Teensy++/Pi 3 B+ slug renames `8b59374`
+      (Not-A-Review) + Teensy 2.0 / Pi 3 B `387602d`; SK6812WWA, UCS2904,
+      SM16704, WS2811/WS2812 Extender `d19c85f`; Falcon F4V3/F16V3,
+      Gledopto Elite 2D/4D-EXMU, ENTTEC Pixel Octo `c1efd83`; 16
+      controllers' inputs `c17aa57`; D1 follow-ups `caf6035` (PixOut has no
       pixel outputs; LSS 5 A/output 10 A total; Genius/SmartShow capacities);
-      29 controllers' specs `862f980`.
+      29 controllers' specs `dd765af`.
 - [x] Rebased five times onto same-day upstream (about 140 commits) with a
       structural YAML merge driver (scratch `_yamlmerge.ts`): 44 of 60
       overlapping files merged field by field; both sides' citations kept;
       upstream kept for prices, statuses and link archives (streams 5/6 own
       them); 16 real conflicts decided by hand.
 - [x] Stream 2's fixed inputs vocabulary landed mid-way: research re-encoded
-      with its own migration plus hand fixes (`c92a44b`, Not-A-Review).
-- [x] Purple cells verified against datasheets (`41a215f`): NS108 family
+      with its own migration plus hand fixes (`5466960`, Not-A-Review).
+- [x] Purple cells verified against datasheets (`e9fd68f`): NS108 family
       "16+5" right (16-bit + 5-bit per-color gain), NS108 40 MHz; P9813 8/8
       right, 15 MHz clock; QED3001 12-bit right; WS2811 DIP-8 real; SK6812
       1.1 kHz measured (the import had pasted SK9822's note), 26 V Vds, VIH
       3.4 V; APA107 9 kHz unsourced, doubt recorded.
-- [x] Rename-aware "Reviewed" dates (`a2d90c9`, unit-tested); B+ links
-      follow the rename (`b5bda48`).
-- [x] Two sheet facts the database lacked (`2e64d28`).
+- [x] Rename-aware "Reviewed" dates (`20a8696`, unit-tested); B+ links
+      follow the rename (`10fc268`).
+- [x] Two sheet facts the database lacked (`416530c`).
 - [x] Tool: a difference YAML cites a source for is settled; adapters on
       the shared output/power shape; `max_total` in Max Pixels; aliases for
-      upstream renames/merges (`211a3f6`, `ec74917`). Old sheet URLs each
+      upstream renames/merges (`32c6269`, `f140990`). Old sheet URLs each
       checked (redirect/404/blocked) and acknowledged with the result
-      (`c8f9745`, `ebf1731`).
+      (`235c778`, `3884991`).
 - [x] Report at zero open differences except the 44 connector pictures
-      (`650e2ef`); ISSUES.md handoffs to streams 2, 4, 5, 6 (`f707296`).
+      (`715ba15`); ISSUES.md handoffs to streams 2, 4, 5, 6 (`04eae0f`).
 - [ ] **(current)** Ship (full gate), then Cameron's retire checklist.
 
 ## Ready to retire the sheet: checklist
