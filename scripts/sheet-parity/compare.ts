@@ -129,12 +129,18 @@ const SYNONYMS: Record<string, string> = {
   centre: 'center',
 };
 
-export function tokens(s: string): string[] {
-  return s
+/**
+ * Normalized word tokens. With `joinUnits`, "400 Hz" becomes "400hz" (the
+ * spelling YAML quantities use); without it, "400Hz" stays one token.
+ */
+export function tokens(s: string, joinUnits = true): string[] {
+  let t = s
     .toLowerCase()
     .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/(\d),(\d{3})/g, '$1$2')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/(\d),(\d{3})/g, '$1$2');
+  if (joinUnits) t = t.replace(/(\d)\s+(k?hz|mhz|ghz|mv|v|ma|a|mw|w|kb|mb|gb|bits?|mm|awg)\b/g, '$1$2');
+  return t
     .replace(/\bwi-fi\b/g, 'wifi')
     .replace(/\bart-net\b/g, 'artnet')
     .replace(/\bmicro[\s-]?sd\b/g, 'microsd')
@@ -155,7 +161,9 @@ function compact(s: string): string {
 export function coverage(needle: string, hay: string): number {
   const nt = tokens(needle);
   if (nt.length === 0) return 1;
-  const hayTokens = new Set(tokens(hay));
+  // Both spellings on the haystack side: "22" must match "22 AWG", and
+  // "400 Hz" must match "400Hz"
+  const hayTokens = new Set([...tokens(hay), ...tokens(hay, false)]);
   const hayCompact = compact(hay);
   const whole = compact(needle);
   if (whole.length >= 4 && hayCompact.includes(whole)) return 1; // "RJ-45" vs "RJ45"

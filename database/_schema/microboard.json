@@ -85,6 +85,12 @@
     "notes": {
       "type": ["string", "null"]
     },
+    "technical_notes": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string"
+      }
+    },
     "price_source": { "$ref": "common.json#/definitions/price_source" },
     "price": {
       "oneOf": [{ "$ref": "common.json#/definitions/price" }, { "type": "null" }]
