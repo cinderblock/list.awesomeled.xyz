@@ -30,6 +30,11 @@ sources:
     notes: 'ENTTEC SMART PXL 40 dot strings on the current site, quoted via Pixel Designer'
 specs:
   pixels_per_run: 1360
-  dimming_resolution: 16bit or 8 bit
-  color_type: RGB/RGBW/CTA
+  dimming_bits:
+    - 8
+    - 16
+  color_type:
+    - RGB
+    - RGBW
+    - CTA
   dedicated_psu: true

@@ -24,7 +24,6 @@ images:
     credit: Texas Instruments
 io:
   channels: 4
-  interface: Through-Hole DIP
   buffered: true
 links:
   product: https://www.ti.com/product/SN74AHCT125

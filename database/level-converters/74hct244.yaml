@@ -21,7 +21,6 @@ images:
     credit: Texas Instruments
 io:
   channels: 8
-  interface: PDIP largest
   buffered: true
 links:
   product: https://www.ti.com/product/SN74HCT244

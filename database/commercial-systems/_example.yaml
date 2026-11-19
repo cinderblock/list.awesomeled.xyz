@@ -1,96 +1,56 @@
-# Example 1: Full-featured commercial system with all fields
-name: Example Pro Lighting System
-creator: Commercial Lighting Corp
+# Example 1: architectural pixel system (most fields)
+name: Example Pro Pixel System
+status: active
+release_year: 2015
+creator:
+  name: Example Lighting
+  url: https://example.com
 manufacturers:
-  - Commercial Lighting Corp
-  - Authorized Manufacturer
+  - Example Lighting
 vendors:
-  - Commercial Lighting Distributor
-  - Regional Dealer Network
-notes: Enterprise-grade system with full project support and warranty
-color_type: RGBW
+  - Example Distributor
+notes: Pixel dots and controllers sold as one system with project support.
 core_tech: Proprietary protocol over Cat6
-dedicated_psu: true
-dimming_resolution: 16-bit
-image: pro-system.jpg
 images:
-  - pro-system.jpg
-  - pro-system-controller.jpg
-  - pro-system-installation.jpg
-
-online_pricing: 'Contact for quote'
-pixels_per_run: 500
-price_range: $$$$$
-since: 2015
+  - file: example-pro.webp
+    source: https://example.com/pro-system
+    credit: Example Lighting
+links:
+  product: https://example.com/pro-system
+pricing:
+  price_range: $$$$$ # common.json price_range, $ to $$$$$$
+  examples: # published price points; pixels drives the per-pixel comparison
+    - item: 50-dot string
+      pixels: 50
+      price: 499
+      source:
+        vendor: Example Lighting
+        url: https://example.com/pro-system/buy
+        retrieved: '2026-01-01'
+specs:
+  pixels_per_run: 170
+  dimming_bits: # bits of dimming resolution; a list when selectable
+    - 8
+    - 16
+  dimming_notes: 16-bit needs the Pro controller
+  color_type: # one, or a list of the variants sold: RGB, RGBW, W, WW, CTA
+    - RGB
+    - RGBW
+  dedicated_psu: true
 target_market: Architectural, commercial installations
-url: https://example.com/pro-system
 ---
-# Example 2: Prosumer addressable LED system
-name: Example Home LED System
-creator: Smart Home Corp
-manufacturers:
-  - Smart Home Corp
-vendors:
-  - Amazon
-  - Best Buy
-notes: Consumer-friendly addressable LED system with app control
-color_type: RGB
-core_tech: Wi-Fi + proprietary app
-dedicated_psu: false
-dimming_resolution: 8-bit
-online_pricing: Available
-pixels_per_run: 150
-price_range: $$
-since: 2020
-target_market: Residential, DIY-friendly
-url: https://example.com/home-system
+# Example 2: consumer system (fewer fields)
+name: Example Home Lights
+status: active
+creator: Example Home
+notes: App-controlled addressable string lights.
+pricing:
+  price_range: $$
+specs:
+  color_type: RGB
+  dimming_bits: 8
+  dedicated_psu: false
+target_market: Consumer
 
----
-# Example 3: Entertainment industry system
-name: Example Stage Pixel
-creator: Stage Tech Inc
-manufacturers:
-  - Stage Tech Inc
-vendors:
-  - Professional Lighting Dealers
-notes: Designed for rental and touring applications
-color_type: RGBW
-core_tech: Art-Net, sACN
-dedicated_psu: true
-dimming_resolution: 16-bit
-online_pricing: null
-pixels_per_run: 1000
-price_range: $$$$
-since: 2018
-target_market: Live events, touring
-url: https://example.com/stage-pixel
-
----
-# Example 4: Budget commercial system
-name: Example Budget Commercial
-creator: null
-manufacturers:
-  - OEM Factory
-vendors:
-  - Alibaba
-notes: Budget option for basic commercial signage
-
-color_type: RGB
-core_tech: DMX512
-dedicated_psu: true
-dimming_resolution: 8-bit
-online_pricing: Available
-pixels_per_run: 200
-price_range: $
-since: 2019
-target_market: Budget commercial, signage
----
-# Example 5: Minimal system entry
-name: Example Basic System
-creator: Basic LED Corp
-notes: Entry-level commercial LED system
-color_type: RGB
-pixels_per_run: 100
-price_range: $$
-target_market: Small business
-url: https://example.com/basic-system
+# disable URL checks on this file
+# textlint-disable

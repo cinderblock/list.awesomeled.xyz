@@ -1,5 +1,6 @@
 name: Strip and Tiles
 status: active
+release_year: 2001
 creator:
   name: Schnick Schnack
   url: https://schnick.schnack.systems/
@@ -12,7 +13,6 @@ links:
   product: https://schnick.schnack.systems/en/products/
 pricing:
   price_range: $$$$$$
-since: 2001
 sources:
   status:
     url: https://schnick.schnack.systems/en/product/led-streifen-c25-500-cut-mk4/

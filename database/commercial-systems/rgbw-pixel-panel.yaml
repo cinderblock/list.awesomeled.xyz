@@ -49,6 +49,6 @@ sources:
     notes: 'RGBW panel in stock (44), regular £30'
 specs:
   pixels_per_run: 169
-  dimming_resolution: 8 Bit
+  dimming_bits: 8
   color_type: RGBW
   dedicated_psu: true

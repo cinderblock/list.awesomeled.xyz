@@ -18,7 +18,6 @@ images:
     credit: Texas Instruments
 io:
   channels: 1
-  interface: SOT 23
   buffered: true
 links:
   product: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4

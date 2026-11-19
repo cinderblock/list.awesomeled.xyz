@@ -316,8 +316,9 @@ export const ADAPTERS: BaseEntry[] = [
 export const LEVEL_CONVERTERS: BaseEntry[] = [
   entry('quad', {
     name: 'Quad Buffer',
-    io: { channels: 4, interface: 'DIP', buffered: true },
-    electrical: { max_voltage: '5.5V', input_high_voltage: '2V' },
+    io: { channels: 4, direction: 'fixed', buffered: true },
+    physical: { packages: ['DIP-14'] },
+    electrical: { supply_voltage: '4.5-5.5V', input_high_voltage: '2V' },
     price: [
       { qty: 1, price: 0.9, sku: 'QB' },
       { qty: 1000, price: 0.3, sku: 'QB' },
@@ -342,7 +343,7 @@ export const LEVEL_CONVERTERS: BaseEntry[] = [
   }),
   entry('diff', {
     name: 'Differential Receiver',
-    io: { channels: 4, interface: 'Differential Pairs', buffered: true },
+    io: { channels: 4, buffered: true, differential: true },
     price: 22,
   }),
 ];

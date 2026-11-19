@@ -10,8 +10,8 @@ images:
     credit: Microcyb
 io:
   channels: 4
-  interface: Differential Pairs
   buffered: true
+  differential: true
 links:
   product: https://microcyb.com
 price: 22

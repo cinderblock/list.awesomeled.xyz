@@ -13,8 +13,8 @@ aliases:
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hc245.pdf
 electrical:
-  max_voltage: 6
-  max_current: 8mA
+  max_voltage: 6V
+  output_current: 8mA
   input_high_voltage: 3.5V
   input_high_voltage_notes: '0.7 × VCC: 3.15 V at VCC = 4.5 V and 4.2 V at 6 V, so 3.5 V on a 5 V supply. A 3.3 V output is below it.'
 images:

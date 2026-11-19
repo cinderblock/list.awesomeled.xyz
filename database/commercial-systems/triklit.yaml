@@ -46,6 +46,6 @@ sources:
     retrieved: '2026-11-18'
     notes: 'Triklits Plus strings in stock (100), 25-bulb $190'
 specs:
-  dimming_resolution: 8 Bit
+  dimming_bits: 8
   color_type: RGB
   dedicated_psu: true

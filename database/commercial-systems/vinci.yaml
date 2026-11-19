@@ -1,6 +1,8 @@
 name: Vinci
 status: active
-creator: https://www.lucenti.lighting/products
+creator:
+  name: Lucenti
+  url: https://www.lucenti.lighting/
 notes: RGB and flexi LED filament in one lamp
 images:
   - file: vinci.webp
@@ -30,8 +32,13 @@ pricing:
         retrieved: '2026-11-18'
         url: https://www.lucenti.lighting/product/ruby
         vendor: Lucenti
+    - item: RGB lamp
+      pixels: 1
+      price:
+        amount: 120
+        currency: EUR
+      notes: The original spreadsheet's "RGB €120 per lamp" (undated, no source)
   price_range: $$$$$
-  online_pricing: RGB €120 per lamp
 sources:
   status:
     url: https://www.lucenti.lighting/collection/vinci

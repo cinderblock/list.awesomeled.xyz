@@ -1,5 +1,6 @@
 name: DFS3000
 status: active
+release_year: 2004
 creator:
   name: Glasson Electronics
   url: https://glassonelectronics.co.uk/
@@ -12,7 +13,6 @@ links:
   product: https://glassonelectronics.co.uk/dfs3000/
 pricing:
   price_range: $$$$$$
-since: 2004
 sources:
   status:
     url: https://glassonelectronics.co.uk/dfs3000/
@@ -20,6 +20,10 @@ sources:
     notes: 'maker''s page: "continues to be a most successful product", no price published'
 specs:
   pixels_per_run: 170
-  dimming_resolution: 13 Bit (current control, not PWM)
-  color_type: RGB/RGBW/WW
+  dimming_bits: 13
+  color_type:
+    - RGB
+    - RGBW
+    - WW
   dedicated_psu: true
+  dimming_notes: current control, not PWM

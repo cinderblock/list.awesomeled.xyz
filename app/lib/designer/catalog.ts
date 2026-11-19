@@ -808,7 +808,7 @@ export interface ShifterOption {
   channels: number | null;
   /** Highest output-side supply it takes */
   maxVoltage: number | null;
-  /** Package / form factor as written */
+  /** Packages it comes in ("DIP-14, SOIC-14") */
   interface?: string;
   /** Lowest input it reads as high when powered for 5 V output (datasheet VIH) */
   inputHighMin: number | null;
@@ -822,7 +822,10 @@ export interface ShifterOption {
 export function buildShifterOption(entry: BaseEntry): ShifterOption {
   const io = dict(entry.io);
   const el = dict(entry.electrical);
-  const iface = str(io.interface);
+  const physical = dict(entry.physical);
+  // ICs record their supply range ("1.65-5.5V"); boards only a maximum
+  const supply = parseQuantity(el.supply_voltage, 'voltage');
+  const packages = Array.isArray(physical.packages) ? physical.packages.map(String) : [];
   return {
     id: String(entry.id),
     path: `/level-converters/${entry.id}`,
@@ -830,11 +833,11 @@ export function buildShifterOption(entry: BaseEntry): ShifterOption {
     image: imagePath('level-converters', entry),
     status: str(entry.status),
     channels: num(io.channels),
-    maxVoltage: looseVoltage(el.max_voltage),
-    interface: iface,
+    maxVoltage: supply ? (supply.max ?? supply.value) : looseVoltage(el.max_voltage),
+    interface: packages.length ? packages.join(', ') : undefined,
     inputHighMin: nominalVoltage(el.input_high_voltage),
     buffered: typeof io.buffered === 'boolean' ? io.buffered : null,
-    differential: /differential/i.test(`${iface ?? ''} ${entry.name}`),
+    differential: io.differential === true || /differential/i.test(entry.name),
     price: buildPrice(entry),
   };
 }

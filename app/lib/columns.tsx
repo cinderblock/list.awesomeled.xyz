@@ -984,7 +984,30 @@ export const commercialSystemColumns: Column[] = [
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
-  { key: 'specs.color_type', label: 'Color Type', filterConfig: { type: 'select' } },
+  {
+    key: 'specs.color_type',
+    label: 'Color Type',
+    // One color type, or a list of the variants sold
+    render: (v) => renderBadgeArray(Array.isArray(v) ? v : v == null ? [] : [v]),
+    filterConfig: { type: 'select' },
+    headerTip:
+      'Emitter colors of the variants sold. RGBMA: with mint and amber. WW: warm white. CTA: tunable white.',
+  },
+  {
+    key: 'specs.dimming_bits',
+    label: 'Dimming',
+    // Bits per channel; a list when selectable (8 or 16)
+    render: (v) => {
+      const bits = Array.isArray(v) ? v : typeof v === 'number' ? [v] : [];
+      if (bits.length === 0) return <span className="data-table-null">-</span>;
+      return <span className="tabular-nums">{bits.join(' or ')}-bit</span>;
+    },
+    sortValue: (v) =>
+      Array.isArray(v) ? Math.max(...(v as number[])) : typeof v === 'number' ? v : null,
+    defaultSortDir: 'desc',
+    className: 'data-table-cell--right',
+    filterConfig: { type: 'select' },
+  },
   {
     key: 'pricing.price_range',
     label: 'Price Range',
@@ -1011,6 +1034,13 @@ export const commercialSystemColumns: Column[] = [
   },
 ];
 
+// level-converter.json io.direction -> display label
+const SHIFTER_DIRECTION_LABELS: Record<string, string> = {
+  fixed: 'One-way',
+  'dir-pin': 'DIR pin',
+  auto: 'Auto',
+};
+
 export const levelConverterColumns: Column[] = [
   {
     key: 'links',
@@ -1027,6 +1057,33 @@ export const levelConverterColumns: Column[] = [
     render: formatNumericValue,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
+  },
+  {
+    key: 'io.direction',
+    label: 'Direction',
+    render: (v) =>
+      v == null ? (
+        <span className="data-table-null">-</span>
+      ) : (
+        <span>{SHIFTER_DIRECTION_LABELS[String(v)] ?? String(v)}</span>
+      ),
+    filterConfig: { type: 'select' },
+    valueLabels: SHIFTER_DIRECTION_LABELS,
+    headerTip:
+      'One-way: buffers and drivers. DIR pin: a direction input picks the way. Auto: senses the direction itself, with weak drive (not suited to long pixel cables).',
+  },
+  {
+    key: 'electrical.supply_voltage',
+    label: 'Supply',
+    render: formatVoltage,
+    sortValue: sortVoltage,
+    className: 'data-table-cell--right',
+  },
+  {
+    key: 'physical.packages',
+    label: 'Package',
+    render: renderPackages,
+    filterConfig: { type: 'select' },
   },
   {
     key: 'price',

@@ -5,6 +5,12 @@
   "type": "object",
   "required": ["name"],
   "additionalProperties": false,
+  "definitions": {
+    "color_type": {
+      "enum": ["RGB", "RGBW", "RGBMA", "W", "WW", "CTA"],
+      "description": "RGB; RGBW (with white); RGBMA (with mint and amber); W (white); WW (warm white); CTA (tunable white, color-temperature adjustable). Add new ones here."
+    }
+  },
   "properties": {
     "name": {
       "type": "string"
@@ -19,8 +25,8 @@
         }
       ]
     },
-    "since": {
-      "type": ["integer", "null"],
+    "release_year": {
+      "$ref": "common.json#/definitions/year",
       "description": "Year the system was introduced"
     },
     "creator": {
@@ -92,12 +98,32 @@
         "pixels_per_run": {
           "type": ["integer", "null"]
         },
-        "dimming_resolution": {
+        "dimming_bits": {
+          "description": "Dimming resolution in bits per channel; a list when selectable (8 or 16)",
+          "oneOf": [
+            { "type": "integer", "minimum": 1, "maximum": 32 },
+            {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": { "type": "integer", "minimum": 1, "maximum": 32 }
+            }
+          ]
+        },
+        "dimming_notes": {
           "type": ["string", "null"]
         },
         "color_type": {
-          "type": ["string", "null"],
-          "description": "RGB, RGBW, WW, ..."
+          "description": "Emitter colors of the variants sold: one, or a list",
+          "oneOf": [
+            { "$ref": "#/definitions/color_type" },
+            {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": { "$ref": "#/definitions/color_type" }
+            }
+          ]
         },
         "dedicated_psu": {
           "type": ["boolean", "null"]
@@ -109,12 +135,7 @@
       "additionalProperties": false,
       "properties": {
         "price_range": {
-          "type": ["string", "null"],
-          "description": "$ to $$$$$$"
-        },
-        "online_pricing": {
-          "type": ["string", "null"],
-          "description": "Deprecated free text — use examples for published price points"
+          "$ref": "common.json#/definitions/price_range"
         },
         "examples": {
           "type": "array",

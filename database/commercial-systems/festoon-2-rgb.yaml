@@ -38,5 +38,8 @@ sources:
     notes: 'listed for sale at MAP $649.99; Chauvet DJ product page has no discontinued notice'
 specs:
   pixels_per_run: 60
-  color_type: RGB W/WW
+  color_type:
+    - RGB
+    - W
+    - WW
   dedicated_psu: true

@@ -8,7 +8,7 @@ aliases:
 datasheet:
   url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
 electrical:
-  max_current: 1.5A
+  output_current: 1.5A
   input_high_voltage: 2.4V
   input_high_voltage_notes: 'VDD = 4.5 V to 18 V; 2.0 V for V temperature range devices'
 images:

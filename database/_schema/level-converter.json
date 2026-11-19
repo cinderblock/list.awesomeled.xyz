@@ -97,11 +97,30 @@
         "channels": {
           "type": ["integer", "null"]
         },
-        "interface": {
-          "type": ["string", "null"]
+        "direction": {
+          "enum": ["fixed", "dir-pin", "auto"],
+          "description": "fixed: one way, input to output (buffers, drivers). dir-pin: either way, set by a DIR input (bus transceivers). auto: senses the direction itself (auto-direction translators, weak drive)."
         },
         "buffered": {
-          "type": ["boolean", "null"]
+          "type": ["boolean", "null"],
+          "description": "Push-pull outputs that can drive a cable; false for pass-gate / pull-up translators"
+        },
+        "differential": {
+          "type": ["boolean", "null"],
+          "description": "Differential signalling (RS-485-style pairs) on the input side: a line receiver, not a logic-level buffer"
+        }
+      }
+    },
+    "physical": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "packages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Every package the part comes in (common.json ic_package); pin counts come from the names",
+          "items": { "$ref": "common.json#/definitions/ic_package" }
         }
       }
     },
@@ -109,11 +128,23 @@
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "max_voltage": {
-          "type": ["string", "number", "null"]
+        "supply_voltage": {
+          "description": "Supply voltage (VCC) the part runs from, usually a range ('1.65-5.5V')",
+          "$ref": "common.json#/definitions/voltage"
         },
-        "max_current": {
-          "type": ["string", "number", "null"]
+        "supply_voltage_notes": {
+          "type": ["string", "null"]
+        },
+        "max_voltage": {
+          "description": "Highest voltage it takes, for boards whose supply range isn't published (ICs use supply_voltage)",
+          "$ref": "common.json#/definitions/voltage"
+        },
+        "output_current": {
+          "description": "Drive current per output",
+          "$ref": "common.json#/definitions/current"
+        },
+        "output_current_notes": {
+          "type": ["string", "null"]
         },
         "input_high_voltage": {
           "description": "Lowest input voltage guaranteed to read as high (the datasheet's VIH min) when the part is powered to output 5 V; for dual-supply parts, with the input side on the controller's 3.3 V rail. A 3.3 V controller can only drive the part when this is below 3.3 V. Put the datasheet's test condition in input_high_voltage_notes.",

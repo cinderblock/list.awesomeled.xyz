@@ -1,5 +1,6 @@
 name: RGB-Pixel-Panel
 status: active
+release_year: 2024
 creator:
   name: SmartShow
   url: https://smartshow.lighting/
@@ -30,7 +31,6 @@ related:
     source:
       url: https://smartshow.lighting/product/pixel-panels/
       retrieved: '2026-11-18'
-since: 2024
 sources:
   status:
     url: https://smartshow.lighting/product/pixel-panels/
@@ -38,6 +38,6 @@ sources:
     notes: 'RGB panel in stock (51), regular £20'
 specs:
   pixels_per_run: 169
-  dimming_resolution: 8 Bit
+  dimming_bits: 8
   color_type: RGB
   dedicated_psu: true

@@ -48,6 +48,8 @@ sources:
     retrieved: '2026-11-18'
     notes: 'Light Walls store lists light engines for sale, e.g. Matrix 5x5 £286.67'
 specs:
-  color_type: RGB/W
+  color_type:
+    - RGB
+    - W
   dedicated_psu: true
 target_market: Architectural

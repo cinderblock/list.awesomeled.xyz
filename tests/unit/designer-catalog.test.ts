@@ -324,9 +324,16 @@ describe('level shifters, connectors and sources', () => {
     expect(quad.differential).toBe(false);
     // bare numbers and differential receivers
     expect(buildShifterOption(entry('n', { electrical: { max_voltage: 6 } })).maxVoltage).toBe(6);
-    expect(
-      buildShifterOption(entry('d', { io: { interface: 'Differential Pairs' } })).differential
-    ).toBe(true);
+    expect(buildShifterOption(entry('d', { io: { differential: true } })).differential).toBe(true);
+    // ICs record a supply range: the top of it is the limit; packages list
+    const ic = buildShifterOption(
+      entry('r', {
+        electrical: { supply_voltage: '1.65-5.5V' },
+        physical: { packages: ['SOT-23-5', 'SC-70-5'] },
+      })
+    );
+    expect(ic.maxVoltage).toBe(5.5);
+    expect(ic.interface).toBe('SOT-23-5, SC-70-5');
   });
 
   test('connector ratings parse with or without a space before the unit', () => {

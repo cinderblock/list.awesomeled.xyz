@@ -1,77 +1,61 @@
-# Example 1: Full-featured level converter with all fields
-name: Example Quad Level Shifter
-creator: Logic Shifter Inc
-manufacturers:
-  - Logic Shifter Inc
-  - Authorized Partner
-vendors:
-  - SparkFun
-  - Adafruit
-  - DigiKey
-notes: Converts 3.3V signals to 5V for pixel data lines
-buffered: false
-channels: 4
-interface: Bi-directional MOSFET
-max_current: 50mA
-max_voltage: 5.5
-price: 4.99
-url: https://example.com/quad-shifter
-
+# Example 1: buffer IC (most fields)
+name: Example 74XX125
+status: active
+creator: Example Semiconductor
+notes: Quad buffer with 5V-tolerant inputs, a common 3.3V-to-5V pixel data shifter.
+aliases: # other part numbers for the same device (package suffixes, other makers)
+  - EX74XX125D
+  - EX74XX125PW
+datasheet:
+  url: https://example.com/ex74xx125.pdf
+electrical:
+  supply_voltage: 4.5-5.5V # range the part runs from
+  output_current: 8mA # drive per output
+  input_high_voltage: 2V # VIH min powered for 5 V output: below 3.3V means a 3.3V controller can drive it
+io:
+  channels: 4
+  direction: fixed # fixed (one way), dir-pin (set by a DIR input) or auto (auto-sensing)
+  buffered: true
+links:
+  product: https://example.com/ex74xx125
+physical:
+  packages: # common.json ic_package
+    - SOIC-14
+    - TSSOP-14
+price:
+  - qty: 1
+    price: 0.5
+  - qty: 1000
+    price: 0.2
+price_source:
+  vendor: Example Semiconductor
+  url: https://example.com/ex74xx125
+  retrieved: '2026-01-01'
 ---
-# Example 2: Buffered high-current driver
-name: Example Buffered Driver
-creator: Buffer Corp
-manufacturers:
-  - Buffer Corp
-vendors:
-  - LED Parts Store
-notes: Active buffer with high current drive capability for long runs
-buffered: true
-channels: 8
-interface: 74AHCT125
-max_current: 24mA
-max_voltage: 5.5
-price: 8.99
-url: https://example.com/buffered-driver
-
+# Example 2: dual-supply translator with per-port supplies
+name: Example XT0108
+creator: Example Semiconductor
+electrical:
+  supply_voltage: 1.4-5.5V
+  supply_voltage_notes: A port 1.4-3.6V, B port 1.65-5.5V
+io:
+  channels: 8
+  direction: auto
+physical:
+  packages:
+    - TSSOP-20
 ---
-# Example 3: Single channel inline converter
-name: Example Inline Shifter
-creator: null
-manufacturers:
-  - Generic
-vendors:
-  - Amazon
-  - AliExpress
-notes: Simple inline level shifter, fits between controller and first pixel
-buffered: false
+# Example 3: differential receiver board
+name: Example Differential Receiver
+creator: Example Boards
+electrical:
+  max_voltage: 12V # boards whose supply range isn't published
+io:
+  channels: 4
+  direction: fixed
+  buffered: true
+  differential: true
+price: 22
 
-channels: 1
-interface: Single transistor
-max_current: 20mA
-max_voltage: 5
-price: 0.50
----
-# Example 4: Industrial differential driver
-name: Example Differential Driver
-creator: Industrial LED Corp
-manufacturers:
-  - Industrial LED Corp
-notes: Converts pixel data to differential signaling for long cable runs
-buffered: true
-channels: 4
-interface: RS-485 differential
-max_current: 60mA
-max_voltage: 12
-price: 24.99
-url: https://example.com/differential-driver
-
----
-# Example 5: Minimal entry
-name: Example Basic Shifter
-creator: null
-notes: Basic 2-channel 3.3V to 5V shifter
-buffered: false
-channels: 2
-interface: Level shift
-price: 1.99
+# disable URL checks on this file
+# textlint-disable
