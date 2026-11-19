@@ -13,7 +13,7 @@ vendors:
 notes: Not a Kulp product despite the K-name; generic Madrix/Art-Net pixel controller sold under AUTUNEER, CANRIA, and CLAUTOP brands. Online control via Art-Net/Madrix over Ethernet (NET IN/NET OUT ports cascade units); offline standalone playback from SD card (16 ports x 1024 pixels).
 inputs:
   physical:
-    Ethernet: Dual # NET IN + NET OUT; NET OUT cascades the next controller
+    Ethernet: 2 # NET IN + NET OUT; NET OUT cascades the next controller
     # No DMX512 input: an earlier pass listed a "DMX512 console input", but the K-16000S
     # instruction sheet shows none; CANRIA's "K16 ARTNET+DMX Console" is a different model.
   protocols:

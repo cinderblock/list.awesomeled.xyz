@@ -10,7 +10,6 @@ inputs:
     Ethernet: true # LAN8720A, 10/100
     Wi-Fi:
       - 2.4GHz
-    Button inputs: 2 # debounced button/switch terminals
     USB: USB-C
     buttons: 2
     triggers: 2

@@ -7,7 +7,7 @@ creator:
 notes: Long range data transmission extenders available.
 inputs:
   physical:
-    Ethernet: 2
+    Ethernet: 2 # 2x RJ45 with onboard 100Mbit switch
     Wi-Fi:
       - 2.4GHz
     DMX512: 6-pin I/O terminal (up to 2 inputs)

@@ -29,7 +29,7 @@ core:
   clock: 100000000
 data:
   storage:
-    - type: SPI flash # GD25Q16 (16 Mbit), holds CircuitPython files
+    - type: flash # GD25Q16 SPI flash (16 Mbit), holds CircuitPython files
 features:
   - Integrated 18650 lithium battery and 800 mA charger
   - 4 high-power PWM MOSFET outputs (1.4-2.3A each), each with a PCB LED

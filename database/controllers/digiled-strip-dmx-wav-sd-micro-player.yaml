@@ -6,7 +6,6 @@ creator:
 notes: 35 x 18 mm micro-SD player board, sold in one of three firmware modes chosen when ordering - WS2812 pixel programs (up to 8 universes, made with ArtRender), one DMX512 universe (Recorder V2 recordings) or WAV audio. 6 dry-contact inputs start programs. Programmed using Artrender.
 inputs:
   physical:
-    Trigger inputs: 6 # dry-contact (non-isolated) inputs select programs 1-6, plus an optional default program
     triggers: 6 # dry-contact solder pads
   standalone: true
 outputs:

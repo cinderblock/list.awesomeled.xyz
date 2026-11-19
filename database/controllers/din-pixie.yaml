@@ -130,7 +130,7 @@ data:
     - 8
     - 16
   storage:
-    - type: Flash
+    - type: flash
       features:
         - non-removable
         - 4,000 frames (about 100 s)

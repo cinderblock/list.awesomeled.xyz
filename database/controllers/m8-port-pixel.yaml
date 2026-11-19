@@ -38,7 +38,7 @@ power:
     max: 30
 data:
   storage:
-    - type: uSD # FPP image on the host Pi's microSD
+    - type: microSD # FPP image on the host Pi's microSD
 dead_links:
   - url: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
     archive: https://web.archive.org/web/20250621084308/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299

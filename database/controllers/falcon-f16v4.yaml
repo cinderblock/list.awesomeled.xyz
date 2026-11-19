@@ -108,7 +108,7 @@ power:
     max: 60
 data:
   storage:
-    - type: uSD
+    - type: microSD
       max_size: 32 # FAT32; holds FSEQ sequences, audio, playlists and schedules
 features:
   - 'Player mode: standalone show player from microSD, with playlists and schedules (RTC)'

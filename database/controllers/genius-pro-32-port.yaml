@@ -9,8 +9,8 @@ notes: On board PSU mounting, eFuse protected power distribution, on board fault
 inputs:
   physical:
     Ethernet: true # single port; show data must arrive over wired Ethernet
-    Wi-Fi: hotspot # built-in access point for configuration only
-    USB: Micro USB # firmware programming/updates
+    Wi-Fi: true # built-in access point for configuration only
+    USB: micro-USB # firmware programming/updates
     Bluetooth: true
     buttons: 2
   protocols:

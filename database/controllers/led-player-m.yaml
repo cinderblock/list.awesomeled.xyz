@@ -36,7 +36,7 @@ power:
     max: 5
 data:
   storage:
-    - type: uSD
+    - type: microSD
       max_size: 32 # SD/SDHC; SDXC cards are not readable
 datasheet:
   url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-M_Anleitung.pdf # user manual (German); has a Technische Daten section

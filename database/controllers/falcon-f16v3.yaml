@@ -8,8 +8,10 @@ creator:
 notes: 16-output E1.31/Art-Net pixel controller; one or two expansion boards raise it to 32 or 48 outputs that share the same pixel budget. Succeeded by the F16V4.
 inputs:
   physical:
-    Ethernet: Dual # 2-port switch for daisy-chaining
-    Wi-Fi: 2.4GHz # ESP-07 module; partial configuration only, no E1.31/Art-Net/DDP input
+    Ethernet: 2 # 2-port switch for daisy-chaining
+    Wi-Fi:
+      - 2.4GHz
+      # ESP-07 module; partial configuration only, no E1.31/Art-Net/DDP input
   protocols:
     - Art-Net
     - sACN # E1.31
@@ -42,7 +44,7 @@ power:
     max: 60 # two banks x 30 A
 data:
   storage:
-    - type: uSD
+    - type: microSD
 features:
   - 128x64 OLED display with five navigation buttons
   - Per-output fuse-good LEDs

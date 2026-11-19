@@ -11,10 +11,11 @@ vendors:
 notes: GLEDOPTO GL-C-616WL, a 2-output ESP32 WLED controller with Wi-Fi and Ethernet, a built-in microphone and a relay that cuts strip power when the lights are off. The Wi-Fi-only GL-C-615WL (Elite 2D-MU) is the same controller without Ethernet.
 inputs:
   physical:
-    Wi-Fi: 2.4GHz
+    Wi-Fi:
+      - 2.4GHz
     Ethernet: true # LAN8720 PHY; WLED Ethernet type "Gledopto Series With Ethernet"
     USB: USB-C # 5 V / 3 A power input and UART firmware flashing
-    Microphone: PDM # WLED AudioReactive, Generic I2S PDM (SD GPIO32, WS GPIO15)
+    Microphone: true # PDM; WLED AudioReactive, Generic I2S PDM (SD GPIO32, WS GPIO15)
     buttons: 1 # function button on GPIO17
   standalone: true # runs WLED
 outputs:

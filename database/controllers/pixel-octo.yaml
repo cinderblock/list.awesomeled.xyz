@@ -7,13 +7,12 @@ creator:
 notes: ENTTEC 71520, the original 8-universe DIN-rail Ethernet-to-pixel controller with two 4-universe outputs. Superseded by the OCTO MK2 (71521).
 inputs:
   physical:
-    Ethernet: Dual # 2x RJ45, daisy-chain up to 50 units
+    Ethernet: 2 # 2x RJ45, daisy-chain up to 50 units
     buttons: 1 # identify/test button
   protocols:
     - Art-Net
     - sACN
     - KiNET
-    - ESP # ENTTEC Show Protocol
   standalone: true # Fx generator plays a stored preset from power-up
 outputs:
   count: 2
@@ -116,3 +115,4 @@ technical_notes:
   - Up to 8 universes of DMX over Ethernet, at most 4 per output (2048 channels per output)
   - 5 W maximum power consumption; operating temperature -10 to 60 °C
   - Datasheet and user manual dated February 2019, firmware v1.2 (Feb 2019)
+  - Also accepts ENTTEC's own ESP (ENTTEC Show Protocol), which the site's protocol list doesn't name
