@@ -35,6 +35,7 @@ import {
 import { RainbowText } from '~/components/ui/RainbowText';
 import { Tooltip } from '~/components/ui/Tooltip';
 import { DesignDiagram } from '~/components/designer/DesignDiagram';
+import { useHydrated } from '~/hooks/useHydrated';
 
 export function meta(_args: Route.MetaArgs) {
   return [
@@ -87,6 +88,7 @@ interface RawChain {
 }
 
 const DRAFT_KEY = 'awesomeledlist_designer_draft';
+const NO_PARAMS = new URLSearchParams();
 
 function fmt(n: number, digits = 1): string {
   return n.toLocaleString('en-US', { maximumFractionDigits: digits });
@@ -98,7 +100,11 @@ function fmtHz(hz: number): string {
 
 export default function DesignerPage({ loaderData }: Route.ComponentProps) {
   const { pixels, controllers, sources, shifters } = loaderData;
-  const [searchParams, setSearchParams] = useSearchParams();
+  // The page is prerendered without a query string: render the empty design
+  // until hydrated, then switch to the URL's (avoids React hydration error #418)
+  const hydrated = useHydrated();
+  const [urlParams, setSearchParams] = useSearchParams();
+  const searchParams = hydrated ? urlParams : NO_PARAMS;
   const [showIncompatible, setShowIncompatible] = useState(false);
   const [pixelQuery, setPixelQuery] = useState('');
   const [importError, setImportError] = useState<string | null>(null);
@@ -146,6 +152,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
   // into localStorage, and a fresh /designer visit (no params) restores the
   // last draft. The URL stays the shareable source of truth.
   useEffect(() => {
+    if (!hydrated) return;
     const s = searchParams.toString();
     try {
       if (s) {
@@ -157,7 +164,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
     } catch {
       // storage unavailable; URL-only
     }
-  }, [searchParams, setSearchParams]);
+  }, [hydrated, searchParams, setSearchParams]);
 
   const write = (nextRaw: RawChain[], patch: { g?: string | null } = {}) => {
     setSearchParams(
