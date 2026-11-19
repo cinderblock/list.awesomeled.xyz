@@ -104,7 +104,11 @@
           "type": ["string", "null"]
         },
         "max_voltage": {
+          "description": "Voltage rating; for a family, its highest member (variants in max_voltage_notes)",
           "$ref": "common.json#/definitions/voltage"
+        },
+        "max_voltage_notes": {
+          "type": ["string", "null"]
         },
         "ip_rating": {
           "description": "IP rating when mated; false when not sealed",
