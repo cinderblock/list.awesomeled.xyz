@@ -251,6 +251,16 @@ URLs are in [plans/assets-research/](plans/assets-research/).
   the Plexiglas shop link redirects to polyvantis-shop.com; "Plaztazote" and
   "polyethelene" are misspelled.
 
+- **Pattern drivers**
+  ([pattern-drivers.md](plans/assets-research/pattern-drivers.md)):
+  geopix.io now belongs to a gambling site (link should be
+  github.com/EnviralDesign/GeoPix); Jinx! is by Live-LEDs.de, not
+  Solderlab.de, and its URL is a third-party Glediator download;
+  arthet-led-mapper is `artnet_led_mapper` (github.com/cyberboy666) with no
+  URL; protopixel-create looks discontinued; mapio-pro's creator is probably
+  Visution; elm's `status: unknown` is stale (ELM 2026 ships); wled's URL
+  redirects to wled/WLED; chataigne-wled-mod links the author's profile.
+
 ## Connector and diffuser spec corrections (stream 2 or 6)
 
 Found by cross-links research (stream 4) with the maker's datasheet or page
