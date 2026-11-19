@@ -1,22 +1,28 @@
-name: LD45 Plaztazote
-notes: Sheet and in pool noodle form, flexible suitable diffuser for wearables
+name: Plastazote LD45
+creator:
+  name: Zotefoams
+  url: https://www.zotefoams.com
+  page: https://www.zotefoams.com/product/azote/plastazote/
+notes: 'Cross-linked closed-cell polyethylene foam, as sheet and in pool-noodle form. Flexible: a good diffuser for wearables and costumes (cosplay suppliers sell it as "LED foam", 2-8 mm sheets up to 40 x 80 in; search Etsy).'
 form:
   - foam
 links:
   product: https://www.theplasticshop.co.uk/LD45-45kg-foam-sheet.html
 materials:
-  - LDPE
+  - XLPE
 optical:
   color_rendition: 3
   light_transmission: 4
+  diffusivity: 4
   tints:
     - tinted
   properties:
     - backlight
+    - diffusive
 physical:
   flexible: true
   fire_retardant: false
-  sizes_available: 2000mm wide
+  sizes_available: 2000mm wide; cosplay sheets 2-8mm, up to 40x80in
 pricing:
   price_range: $$
 purpose_made: false
