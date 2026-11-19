@@ -14,7 +14,7 @@ inputs:
   protocols:
     - Art-Net
     - sACN
-  standalone: false # listed FPP support implies Falcon Player remote mode, but flat data marked standalone false
+  standalone: false # no storage or show playback; data over Ethernet only
 outputs:
   count: 8
   connector:
@@ -93,6 +93,10 @@ software:
   works_with:
     - xLights
 sources:
+  inputs.physical:
+    url: https://manuals.plus/advatek-lighting/pixlite-4-mk2-control-board-manual.pdf
+    retrieved: '2026-11-18'
+    notes: 'Control board manual: data via the one RJ45 Ethernet jack (sACN/Art-Net); no USB, Wi-Fi or SD'
   status:
     url: https://www.advateklighting.com/products/shop/pixlite-4-mk2
     retrieved: '2026-11-18'

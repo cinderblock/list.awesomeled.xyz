@@ -192,9 +192,12 @@ sources:
     retrieved: '2026-11-18'
     notes: deskontroller.com 'Compatible Software' page (setup guides for MADRIX, MadMapper, Resolume Arena, TouchDesigner).
   inputs.physical:
-    url: https://deskontroller.com/download/deskontroller-lite-V3-user-manual.pdf
-    retrieved: '2026-11-18'
-    notes: "'Input 1 x RJ45 Ethernet (10/100)'"
+    - url: https://deskontroller.com/download/deskontroller-lite-V3-user-manual.pdf
+      retrieved: '2026-11-18'
+      notes: "'Input 1 x RJ45 Ethernet (10/100)'"
+    - url: https://www.deskontrol.net/en/art-net-led-controllers/386-deskontroller-lite-v3-192-artnet-universes.html
+      retrieved: '2026-11-18'
+      notes: 'deskontrol product page: "Art-Net Ethernet input"; no wireless input listed'
 technical_notes:
   - 192 Art-Net universes; up to 32,640 RGB pixels (~24,576 RGBW)
   - 32 data lines via 8 RJ45 output connectors with terminal adapters

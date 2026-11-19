@@ -168,6 +168,10 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'
     notes: "Every row of Advatek's glossary table is ticked in the 'PixLite Mk3' column (97 rows)"
+  inputs.physical:
+    url: https://www.advateklighting.com/products/a4-s-mk3
+    retrieved: '2026-11-18'
+    notes: 2 x 10/100/1000 Mbit/s Ethernet ports; microSD slot for SHOWTime; RS485 aux port for DMX512 in/out
 technical_notes:
   - Standalone playback via SHOWTime software
   - High frame rate capability - 'hundreds of FPS'
