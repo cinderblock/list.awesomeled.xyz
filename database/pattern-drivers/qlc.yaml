@@ -1,6 +1,6 @@
 name: QLC+
 status: active
-creator: Massimo Calegari
+creator: Massimo Callegari
 notes: Includes sound responsive features. Large fixture compatibility list.
 inputs:
   video: Output
@@ -84,3 +84,7 @@ sources:
     url: https://github.com/mcallegari/qlcplus
     retrieved: '2026-11-18'
     notes: Readme heading; the repository description says 'Q Light Controller Plus (QLC+)'.
+  creator:
+    url: https://www.qlcplus.org/
+    retrieved: '2026-11-18'
+    notes: QLC+ by Massimo Callegari

@@ -1,0 +1,708 @@
+# Fix list: software slice (database/pattern-drivers, database/drive-libraries)
+#
+# Covers the "(d) Wrong facts for other workstreams" list in
+# plans/data-freshness/findings/software.md (in that order), then the inline
+# wrong/outdated remarks in software-notes.md that (d) doesn't already cover,
+# then one extra finding made while verifying (flagged in its notes).
+#
+# Checked against the repo at d20cf8f (ws/database-review). Many items were
+# already fixed by b3e5fea ("corrections found while verifying links"),
+# d609eda and 66342a4.
+#
+# Conventions in this file:
+# - `value` is omitted when nothing should change (already-fixed, reject,
+#   unverifiable, or a structural issue the schema can't express).
+# - Array elements are addressed as `pricing.tiers[0]...`; the notes name the tier.
+# - web.archive.org and http-only hosts (tlhome.de) can't be fetched with
+#   WebFetch (it forces HTTPS); where that mattered the notes say so.
+
+# ---------------------------------------------------------------- (d) list
+
+- entry: pattern-drivers/madmapper
+  field: creator
+  current: 1024 architecture and GarageCube
+  status: already-fixed
+  owner: stream2
+  source: https://madmapper.com/aboutus
+  quote: 'Created and developed by 1024 architecture and GarageCube since 2010'
+  retrieved: '2026-11-18'
+  notes: >-
+    Fixed in b3e5fea (was "Smode Tech"); sources.creator already cites this
+    page. The report's "MadMapper sàrl" is the legal entity behind the shop;
+    the about page's two studios are the better creator value.
+
+- entry: pattern-drivers/mapio-pro
+  field: creator
+  current: Visution
+  status: already-fixed
+  owner: stream2
+  source: https://visution.com/
+  retrieved: '2026-11-18'
+  notes: Fixed in b3e5fea (was "Vistitution"). The maker's own site is visution.com.
+
+- entry: pattern-drivers/mapio-pro
+  field: platforms.os
+  current: [Windows, macOS]
+  value: [Windows, macOS, Linux]
+  status: apply
+  owner: stream2
+  source: https://visution.com/
+  quote: 'LINUX free beta version'
+  retrieved: '2026-11-18'
+  notes: >-
+    The report said the entry had no platforms; 66342a4 later restored
+    Windows + macOS from the sheet, so only Linux is missing. The Linux build
+    is a free beta in the Downloads section (next to "Prerelease builds and
+    archive"). Windows requirement: "Windows 7 (SP1 + DirectX) / 8.1 / 10
+    (32/64bit)".
+
+- entry: pattern-drivers/mapio-pro
+  field: platforms.notes
+  value: >-
+    Linux build is a free beta. macOS support stopped at MAPIO 2.2.9
+    (macOS 10.8–10.12) and macOS development is suspended.
+  status: apply
+  owner: stream2
+  source: https://visution.com/
+  quote: 'MacOS X 10.8.x – 10.12.x (MAPIO up to 2.2.9 version)'
+  retrieved: '2026-11-18'
+  notes: >-
+    Same page: "Attention! macOS version is outdated." and "MAPIO for macOS
+    development is currently suspended." macOS stays in platforms.os (a build
+    exists); this note says it's frozen.
+
+- entry: pattern-drivers/madrix-5
+  field: pricing.tiers
+  current:
+    - tier: Entry
+      price: 330
+      features: Basic LED control
+      limitations: Limited universe count
+    - tier: Start
+      price: 600
+      features: Increased universe count
+    - tier: Professional
+      price: 1650
+      features: Professional features
+    - tier: Maximum
+      price: 3300
+      features: All features, maximum universes
+  value:
+    - tier: Start
+      features: 1,024 DMX channels (2 universes)
+    - tier: Entry
+      features: 6,144 DMX channels (12 universes)
+    - tier: Basic
+      features: 18,432 DMX channels (36 universes)
+    - tier: Professional
+      features: 67,584 DMX channels (132 universes)
+    - tier: Ultimate
+      features: 264,192 DMX channels (516 universes)
+    - tier: Maximum
+      features: 2,101,248 DMX channels (4,104 universes)
+  status: other-owner
+  owner: stream6
+  source: https://www.madrix.com/products/software
+  quote: 'Contact A Reseller For Your Individual Quote'
+  retrieved: '2026-11-18'
+  notes: >-
+    Report confirmed. The page's license table, in order: start 1,024 /
+    entry 6,144 / basic 18,432 / professional 67,584 / "arcedia standard"
+    135,168 / ultimate 264,192 / "arcadia extended" 270,336 / maximum
+    2,101,248 DMX channels (universes in brackets on the page). Left out of
+    `value`: the two ARCEDIA tiers ("Only Available With MADRIX ARCEDIA";
+    the page spells them both ways) and "preprogrammer" ("It provides no
+    output for MADRIX 5"). The Start tier is the smallest, not "Increased
+    universe count" above Entry. MADRIX publishes no prices, so the
+    330/600/1650/3300 can't be tied to tiers (pricing.price "330+" is
+    affected too). The I/O-directions research has Wiedamark reseller prices
+    (low confidence): Start $63.53, Entry $519.75, Basic $1,466.85,
+    Professional $3,811.50.
+
+- entry: pattern-drivers/touchdesigner
+  field: pricing.tiers[0].limitations
+  current: Non-commercial use only, watermark on export
+  value: Non-commercial use only; resolution limited to 1280x1280
+  status: other-owner
+  owner: stream6
+  source: https://derivative.ca/UserGuide/Licensing
+  quote: '1280x1280 limited'
+  retrieved: '2026-11-18'
+  notes: >-
+    tiers[0] is the Non-Commercial tier. The licensing table gives
+    Non-Commercial "1280x1280 limited" in the Unlimited Resolution row and
+    never mentions a watermark. Agrees with the I/O-directions research
+    (free Non-Commercial license, 1280×1280 cap) and with the entry's own
+    pricing.source.notes.
+
+- entry: pattern-drivers/dylos
+  field: notes
+  current: Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Artnet https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
+  value: >-
+    ONYX's free license unlocks universe 1 (Art-Net or sACN) and 2 DYLOS
+    zones; a paid ONYX license gives 5 zones and up to 128 universes.
+  status: apply
+  owner: stream2
+  source: https://www.obsidiancontrol.com/pages/dylos
+  quote: '2 DYLOS Zones in "Free" Mode'
+  retrieved: '2026-11-18'
+  notes: >-
+    Same page: "5 DYLOS Zones" and "Up to 128 Universes, depending on ONYX
+    License". https://www.obsidiancontrol.com/pages/onyx: "Universe 1
+    unlocked via Art-Net and sACN (ONYX "Free" License)". The URL in the old
+    notes is dead and already in dead_links with its archive, so the new
+    text drops it. pricing.price "Free 1 universe" already agrees.
+
+- entry: pattern-drivers/elm
+  field: pricing.demo.available
+  current: Nag for free one
+  value: true
+  status: other-owner
+  owner: stream6
+  source: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
+  quote: 'Full app, all features, no sign-up. Watermarked.'
+  retrieved: '2026-11-18'
+  notes: >-
+    The demo's limits go in pricing.demo.limitations (next record). The
+    entry's pricing.tiers already lists the Demo and Free tiers correctly.
+
+- entry: pattern-drivers/elm
+  field: pricing.demo.limitations
+  value: >-
+    Watermarked; blanks all in-use universes for about 10 seconds every
+    5 minutes until a license is activated. A free account (ELM Free,
+    2 universes) removes both.
+  status: other-owner
+  owner: stream6
+  source: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
+  quote: 'It blanks all in-use universes for about 10 seconds every 5 minutes and adds a watermark, until you activate a license.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Same page, Free tier: "register a free account and it removes the
+    watermark and output pauses"; "ELM Free requires telemetry / marketing
+    opt-in"; Free is $0, 70581-FREE, 2 universes.
+
+- entry: pattern-drivers/smode
+  field: pricing.demo.available
+  current: Free for SD card output
+  value: true
+  status: other-owner
+  owner: stream6
+  source: https://www.smode.io/en/
+  quote: 'which is fully usable without watermarks up to the Full HD resolution (1920x1080).'
+  retrieved: '2026-11-18'
+  notes: >-
+    The free option is Smode Community, a free non-commercial edition, not
+    an SD-card mode. Limits in the next record.
+
+- entry: pattern-drivers/smode
+  field: pricing.demo.limitations
+  value: >-
+    Smode Community: free, non-commercial license; no watermark up to Full HD
+    (1920x1080).
+  status: other-owner
+  owner: stream6
+  source: https://www.smode.io/en/
+  quote: "Although this is a non-commercial software license, it's designed to give everyone access to our state-of-the-art tools,"
+  retrieved: '2026-11-18'
+  notes: >-
+    https://www.smode.io/en/product/live-media-server lists Smode Community
+    as "Free" with commercial use "No".
+
+- entry: pattern-drivers/smode
+  field: pricing.license_type
+  current: Free for basic SD output; generally very expensive as the resolution goes up
+  value: >-
+    Smode Live: CodeMeter dongle licenses, price on request. Smode
+    Community: free, non-commercial, up to 1920x1080.
+  status: other-owner
+  owner: stream6
+  source: https://www.smode.io/en/product/live-media-server
+  quote: 'Requires a Codemeter Dongle.'
+  retrieved: '2026-11-18'
+  notes: >-
+    LIVE BASIC / LIVE 1 / LIVE 2 / LIVE 4 all say "Contact us" (no prices),
+    "Dongle" licenses, commercial use "Yes". The page states no perpetual or
+    subscription term. The report also saw Smode Compose at "300 € / year (
+    Excl. VAT. )" (not re-read here).
+
+- entry: pattern-drivers/smode
+  field: creator
+  value: Smode Tech
+  status: apply
+  owner: stream2
+  source: https://www.smode.io/en/legals
+  quote: 'SAS Smode Tech'
+  retrieved: '2026-11-18'
+  notes: >-
+    Legal notice: "SAS Smode Tech", 9 ter rue Auguste Barbier 75011 Paris,
+    RCS Paris 852 538 206. The page also lists Smode Japan Co., Ltd.; the
+    French company is the maker. (Smode Tech is not MadMapper's maker; see
+    the madmapper record.)
+
+- entry: pattern-drivers/protopixel-create
+  field: name
+  current: ProtoPixel Create
+  value: Protopixel Mapping Tool
+  status: apply
+  owner: stream2
+  source: https://protopixel.zendesk.com/hc/en-us/articles/31199693048977-Content
+  quote: 'These instructions only work for the Mapping Tool (formerly known as Create) 3.0 or higher versions.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Read via the Help Center API
+    (https://protopixel.zendesk.com/api/v2/help_center/en-us/articles/31199693048977.json,
+    updated 2026-04-14) because the page returns 403 to WebFetch. Product
+    page https://www.protopixel.io/product/mapping-tool has the heading
+    "Mapping Tool" and says "Protopixel Mapping Tool" in its description;
+    help-center titles use the same spelling. Keep the slug. The old name
+    goes to aliases (stream4 record below). The entry's price is Create's
+    2020 price, which pricing.source.notes already says.
+
+- entry: pattern-drivers/protopixel-create
+  field: platforms.os
+  current: [macOS]
+  value: [Windows, macOS]
+  status: apply
+  owner: stream2
+  source: https://protopixel.zendesk.com/hc/en-us/articles/31080284550673-Install-the-Protopixel-Mapping-Tool-on-a-Windows-device
+  quote: 'Install the Protopixel Mapping Tool on a Windows device'
+  retrieved: '2026-11-18'
+  notes: >-
+    Article title, read via
+    https://protopixel.zendesk.com/api/v2/help_center/en-us/articles/31080284550673.json
+    (created 2024-12-18, updated 2026-04-14). Body: "On Windows 11 operating
+    systems, it is necessary to install K-Lite Codec Pack Basic". macOS
+    stays (the report saw a macOS install guide updated 2026-02-16).
+
+- entry: pattern-drivers/protopixel-create
+  field: aliases
+  value: [ProtoPixel Create]
+  status: other-owner
+  owner: stream4
+  source: https://protopixel.zendesk.com/hc/en-us/articles/31199693048977-Content
+  quote: 'Mapping Tool (formerly known as Create)'
+  retrieved: '2026-11-18'
+  notes: Goes with the name change above, so references to the old name still resolve.
+
+- entry: pattern-drivers/led-strip-studio-software
+  field: platforms.os
+  current: [Windows, macOS]
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/products/lss4/
+  quote: 'Download for macOS'
+  retrieved: '2026-11-18'
+  notes: Fixed in b3e5fea with sources.platforms.os. Page also shows "Download for Windows", "Version 4.0.42".
+
+- entry: pattern-drivers/chromatik
+  field: platforms.os
+  current: [Windows, macOS, Linux]
+  status: already-fixed
+  owner: stream2
+  source: https://chromatik.co/download/
+  quote: 'CLI builds require a JVM.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Linux added in b3e5fea. Optional refinement: the Linux downloads ("Linux
+    (aarch64)", "Linux (x64)") exist only under "Version 1.2.1 — Command
+    Line Builds", and https://chromatik.co/develop/overview says "Headless
+    CLI-only usability a primary design goal, with Raspberry Pi a typical
+    target for physical deployments." A platforms.notes such as "Linux:
+    command-line builds only (x64, aarch64; need a JVM)" would say so; the
+    page doesn't state whether the Linux build has the UI.
+
+- entry: pattern-drivers/lx-studio-chromatik
+  field: name
+  current: LX Studio
+  status: already-fixed
+  owner: stream2
+  source: https://github.com/heronarts/LXStudio
+  quote: 'LX Studio has been superceded by the Chromatik Digital Lighting Workstation, which uses the same underlying LX libraries'
+  retrieved: '2026-11-18'
+  notes: Fixed in b3e5fea (was "LX Studio / Chromatik"). The slug still says chromatik; renaming the file is structural.
+
+- entry: pattern-drivers/lx-studio-chromatik
+  field: notes
+  current: Java. Next version (Chromatik) will no longer use the Processing graphics library.
+  value: >-
+    Java, built on the Processing framework. Superseded by Chromatik, which
+    keeps the LX engine but replaced the Processing-based UI with GLX
+    (LWJGL, GLFW, bgfx).
+  status: apply
+  owner: stream2
+  source: https://github.com/heronarts/LXStudio
+  quote: 'LX Studio uses the Processing framework.'
+  retrieved: '2026-11-18'
+  notes: >-
+    The old text is a forecast that has since happened. https://github.com/heronarts/P4LX:
+    "Development of P4LX has been retired in favor of GLX" ... "in place of
+    the Processing runtime." https://chromatik.co/develop/overview: GLX is a
+    "Cross-platform UI harness using LWJGL, GLFW, and bgfx." Side note for
+    stream6: the LXStudio README says "The license grants permission to use
+    this software freely in non-commercial applications." and "Commercial
+    use is subject to a total annual revenue limit of $25K on any and all
+    projects associated with the software." (pricing.license_type is vaguer).
+
+- entry: pattern-drivers/jinx
+  field: creator
+  current: Sven Karschewski
+  status: already-fixed
+  owner: stream2
+  source: https://live-leds.de/impressum/
+  quote: 'Sven Karschewski'
+  retrieved: '2026-11-18'
+  notes: >-
+    Fixed in b3e5fea (was "Solderlab.de", Glediator's maker). The imprint
+    names him as the site operator; an ELV Journal article and the v2.4 user
+    manual's copyright notice credit him with Jinx! too (search results, not
+    re-fetched).
+
+- entry: pattern-drivers/jinx
+  field: integrations
+  current: Should be solderlab.de (which is down)
+  value: null
+  status: apply
+  owner: stream2
+  source: https://live-leds.de/downloads/
+  quote: 'Jinx! - LED Matrix Control'
+  retrieved: '2026-11-18'
+  notes: >-
+    An editorial note left from the sheet, not an integration, and wrong:
+    Jinx! lives at live-leds.de (links.url and creator already moved there),
+    while solderlab.de made Glediator. Its output targets ("Art-Net, sACN
+    (E1.31), tpm2.net, tpm2, Glediator protocol and MiniDMX" per
+    https://live-leds.de/features/) belong to the I/O-directions values being
+    applied separately, so nothing needs to replace it here. Not part of this
+    item, but that research also has Jinx! GPIO → false where the YAML says
+    outputs.gpio: Input.
+
+- entry: pattern-drivers/arthet-led-mapper
+  field: name
+  current: artnet_led_mapper
+  status: already-fixed
+  owner: stream2
+  source: https://github.com/cyberboy666/artnet_led_mapper
+  retrieved: '2026-11-18'
+  notes: >-
+    Fixed in b3e5fea (was "Arthet LED Mapper"). Leftovers for stream4:
+    aliases still lists "artnet_led_mapper", now identical to the name; the
+    slug keeps the "arthet" typo (renaming the file is structural).
+
+- entry: pattern-drivers/arthet-led-mapper
+  field: pricing.tiers
+  current: null
+  value:
+    - tier: Source code
+      price: Free
+      features: GPL-3.0 source on GitHub
+    - tier: Compiled builds
+      price: €10-100
+      features: Name your price (default €20); Linux, macOS, Windows and RPi/aarch64 builds
+  status: other-owner
+  owner: stream6
+  source: https://underscores.shop/product/artnet_led_mapper/
+  quote: 'name your price between 10-100'
+  retrieved: '2026-11-18'
+  notes: >-
+    Report confirmed. The shop shows "€20" as the default, says "download
+    compiled versions for linux, mac_os, windows and rpi / aarch64 !", and
+    calls the project "fully open-source". GitHub API: license "GPL-3.0".
+    pricing.price "Free" can stay (it holds for the source). The entry has no
+    `license` field; "GPL-3.0" would fit it.
+
+- entry: pattern-drivers/leds-master
+  field: pricing.price
+  current: FOSS
+  value: Free
+  status: other-owner
+  owner: stream6
+  source: https://api.github.com/repos/spectrenoir06/LED_master
+  quote: '"license": null'
+  retrieved: '2026-11-18'
+  notes: >-
+    Report confirmed. https://github.com/spectrenoir06/LED_master has no
+    LICENSE or COPYING file and the README states no license, so the source
+    is public but not open source (all rights reserved by default). Gratis,
+    so "Free" rather than "FOSS". Don't add a `license` field.
+
+- entry: pattern-drivers/qlc
+  field: creator
+  current: Massimo Calegari
+  value: Massimo Callegari
+  status: apply
+  owner: stream2
+  source: https://www.qlcplus.org/
+  quote: 'QLC+ by Massimo Callegari'
+  retrieved: '2026-11-18'
+  notes: Page title and logo alt text; "Calegari" doesn't appear. The repo owner is github.com/mcallegari.
+
+- entry: pattern-drivers/qlc
+  field: pricing.demo.available
+  current: €15 Donation requested
+  value: true
+  status: other-owner
+  owner: stream6
+  source: https://www.qlcplus.org/discover/raspberry-pi
+  quote: 'we request a contribution of 20€ or the equivalent amount in your currency'
+  retrieved: '2026-11-18'
+  notes: >-
+    The report only said "not verified". QLC+ itself is free and open source
+    on every desktop OS; the requested contribution applies to the ready-made
+    Raspberry Pi image (next record), so it isn't a demo limitation. The
+    contribution is now 20€, not €15.
+
+- entry: pattern-drivers/qlc
+  field: pricing.tiers[0].price
+  current: €15 donation
+  value: €20 contribution
+  status: other-owner
+  owner: stream6
+  source: https://www.qlcplus.org/discover/raspberry-pi
+  quote: '(€20 or more - lower amount will be refunded)'
+  retrieved: '2026-11-18'
+  notes: >-
+    tiers[0] is "Raspberry Pi build". Same page: "Supports every 64bit
+    Raspberry Pi model (3, 4, 400, 5 and Zero 2W)", future updates free;
+    fulfilment is manual. The software can also be built on a Pi for free.
+
+- entry: pattern-drivers/chataigne-wled-mod
+  field: links.url
+  current: https://github.com/zak-45/WLED-Chataigne-Module
+  status: already-fixed
+  owner: stream6
+  source: https://github.com/zak-45/WLED-Chataigne-Module
+  retrieved: '2026-11-18'
+  notes: Was the developer's GitHub profile; fixed in b3e5fea.
+
+- entry: pattern-drivers/bekonix
+  field: creator
+  current: Bekonix ex Rocketlife
+  value: Bekonix, Inc.
+  status: apply
+  owner: stream2
+  source: https://apps.apple.com/us/app/id1513072328
+  quote: 'Bekonix, Inc.'
+  retrieved: '2026-11-18'
+  notes: >-
+    App Store seller of Bekonix Mobile; the report saw the same publisher on
+    the Microsoft Store listing of Bekonix Designer (9MTMCZTPVXWK). The
+    "ex Rocketlife" claim is unproven (next record), and either way the
+    creator field should name the maker only.
+
+- entry: pattern-drivers/bekonix
+  field: notes
+  current: Rocketlife reborn.
+  status: unverifiable
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: >-
+    No vendor statement found linking Bekonix to RocketLife. Circumstantial
+    only: RocketLife's CEO was Daniel Kaye (2018–19 press releases, seen in
+    search results only); https://zonebourse.com/insider/DANIEL-KAYE-A3NDVK
+    lists Daniel Kaye as "Directeur Général" of "Bekonix, Inc." since
+    "01/01/2020" (an aggregator); both firms are in the Sacramento area
+    (Folsom / Sacramento); same design-on-desktop, play-on-Bluetooth-hardware,
+    pick-on-phone workflow, and the store texts reuse RocketLife wording.
+    The Microsoft Store still lists RocketLife LightDesigner separately. The
+    App Store page (https://apps.apple.com/us/app/id1513072328) doesn't
+    mention RocketLife. Leave as is or soften; don't add a related link
+    without a vendor source.
+
+- entry: pattern-drivers/arkaos
+  field: name
+  current: ArKaos
+  status: unverifiable
+  owner: stream2
+  source: https://chamsyslighting.com/support/product-policy/
+  quote: 'LEDMaster | LED Pixel Mapping Software | 2010 | Final Release | Discontinued | N/A'
+  retrieved: '2026-11-18'
+  notes: >-
+    Report confirmed (the entry is vendor-level), but which product the sheet
+    row meant can't be settled; needs a decision. The original row: price
+    299, Windows only, live + designer, other output "Klingnet".
+    Candidates: GrandVJ 2 (search snippets give the ArKaos shop price as
+    EUR 299, with Kling-Net/LED mapping in GrandVJ XT at EUR 399; the shop
+    can't be fetched: TLS error, and Wayback is blocked for WebFetch);
+    MediaMaster (fits the `related` replacement, ChamSys MediaMaster 26, and
+    controllers/epix-flex-drive's works_with "Arkaos Media Master Express");
+    LEDMaster, the Kling-Net pixel mapper (US retail $349.99–$849.99). ChamSys
+    lists all of them as discontinued. If no product is chosen, a notes line
+    saying the entry covers the ArKaos product line would at least make that
+    explicit.
+
+- entry: drive-libraries/artnet-to-tmp2-convertor
+  field: name
+  current: ArtNet to TMP2 Convertor
+  value: Artnet to TPM2 Converter + Editor
+  status: apply
+  owner: stream2
+  source: https://live-leds.de/features/
+  quote: 'supporting Art-Net, sACN (E1.31), tpm2.net, tpm2, Glediator protocol and MiniDMX'
+  retrieved: '2026-11-18'
+  notes: >-
+    The format is TPM2 (tpm2), not TMP2. The maker's page
+    (http://www.tlhome.de/ATCE.htm) can't be fetched with WebFetch (the
+    forced HTTPS upgrade fails with a TLS error), so the product's own
+    spelling comes from this entry's sources.aliases (retrieved 2026-11-18,
+    "page heading": "Artnet to TPM2 Converter + Editor") and the report
+    ("ATCE Artnet to TPM2 Converter + Editor"). Using the maker's name makes
+    that alias a duplicate (stream4: drop it, keep "ATCE"). Minimal
+    alternative: "ArtNet to TPM2 Converter". Also odd but unchecked:
+    creator "ATCE" is the product's own acronym, not a maker.
+
+- entry: drive-libraries/artnet-to-tmp2-convertor
+  field: features
+  current: Wireshark captured artnet stream convert to TMP2(Jinx native) file
+  value: Wireshark captured artnet stream convert to TPM2 (Jinx native) file
+  status: apply
+  owner: stream2
+  source: https://live-leds.de/features/
+  quote: 'all output protocols can be redirected to a file to create animation files for standalone controllers'
+  retrieved: '2026-11-18'
+  notes: >-
+    Spelling only (TMP2 → TPM2). Jinx! speaks tpm2 and can write any output
+    protocol to a file, so "Jinx native" holds. The Wireshark claim comes
+    from the maker's page, which can't be fetched here (see previous record).
+
+- entry: drive-libraries/branchcontroller2
+  field: features
+  current: Teensy 3.2 branch controller for up to 8 separate LED strips, based on instructions received over TCP-IP.
+  status: reject
+  owner: stream2
+  source: https://github.com/jspolsky/branchController2
+  quote: 'We use TCP and not UDP for Open Pixel Control.'
+  retrieved: '2026-11-18'
+  notes: >-
+    The report went by the GitHub About blurb ("...based on instructions
+    received over UDP."), but the README is explicit: "Ethernet control.
+    Connects to an ethernet network to receive pixel data over TCP/IP.", it
+    listens "for TCP connections on port 7890", and "The w5500 ethernet chip
+    used in this design has a tiny buffer and will lose UDP packets if they
+    are sent too fast." The YAML (and its sources.protocols, TCP port 7890)
+    is right; the About text is stale.
+
+- entry: drive-libraries/artemis
+  field: links.repo
+  current: https://artemis-rgb.com/
+  value: https://github.com/Artemis-RGB/Artemis
+  status: other-owner
+  owner: stream6
+  source: https://api.github.com/repos/Artemis-RGB/Artemis
+  quote: 'Provides advanced unified lighting across many different brands RGB peripherals'
+  retrieved: '2026-11-18'
+  notes: >-
+    Repo description; not archived, pushed 2026-10-27, homepage
+    https://artemis-rgb.com. Structural: drive-library `links` has only repo
+    and youtube, so the website has no field once repo holds the repo
+    (other_links excludes product/vendor links). Same for openrgb, visuino
+    and xod below; a `links.url` like pattern-drivers have would fix all
+    four. Side check: the repo LICENSE is "PolyForm Noncommercial License
+    1.0.0", matching the YAML (GitHub only reports NOASSERTION).
+
+- entry: drive-libraries/openrgb
+  field: links.repo
+  current: https://openrgb.org/index.html
+  value: https://gitlab.com/CalcProgrammer1/OpenRGB
+  status: other-owner
+  owner: stream6
+  source: https://gitlab.com/api/v4/projects/CalcProgrammer1%2FOpenRGB
+  quote: "Open source RGB lighting control that doesn't depend on manufacturer software."
+  retrieved: '2026-11-18'
+  notes: >-
+    Project description; last activity 2026-11-19 UTC. The entry's
+    sources.status already cites its GitLab releases page. Website
+    https://openrgb.org/ needs a field (structural, see artemis).
+
+- entry: drive-libraries/visuino
+  field: links.repo
+  current: http://visuino.com/
+  status: other-owner
+  owner: stream6
+  source: https://www.visuino.com/
+  quote: '© Visuino.com - 2026 - All Rights Reserved.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Structural, no value: Visuino is commercial and closed source ("Visuino
+    PROFESSIONAL was developed for those that Need professional Industrial
+    tool capable of customization."), so there is no repo to link. The site
+    is the product page, which the drive-library schema has no field for.
+    Leave as is until a `links.url` exists, then move it there and drop
+    links.repo.
+
+- entry: drive-libraries/xod
+  field: links.repo
+  current: https://xod.io/
+  value: https://github.com/xodio/xod
+  status: other-owner
+  owner: stream6
+  source: https://api.github.com/repos/xodio/xod
+  quote: 'XOD IDE'
+  retrieved: '2026-11-18'
+  notes: >-
+    Repo description; license "AGPL-3.0" matches the YAML; homepage
+    https://xod.io. Website needs a field (structural, see artemis).
+
+- entry: drive-libraries/fade
+  field: links.repo
+  current: http://www.riderx.info/fade-an-esp32-animation-system/
+  value: https://github.com/ericgu/Fade
+  status: other-owner
+  owner: stream6
+  source: https://github.com/ericgu/Fade
+  quote: 'Fade is an ESP32-based animation system.'
+  retrieved: '2026-11-18'
+  notes: >-
+    README's opening line; sources.supported_ics already cites this repo's
+    README. The blog post fits the existing `instructional_resources` field,
+    so no structural change is needed here. GitHub reports no license and a
+    last push on 2022-12-11; the entry has no `license` field, which is
+    right.
+
+- entry: pattern-drivers/*
+  field: pricing.price
+  status: already-fixed
+  owner: stream6
+  source: app/lib/currency.ts
+  retrieved: '2026-11-18'
+  notes: >-
+    The report's display item ("125 - 450", "Free-$2200", "€299-799",
+    "39/week +" show "-"). Not a data change. Since 23765d3, parsePrice()
+    parses ranges ("Free - $399", "125 - 450", "€299-799", "Free-$2200") and
+    starting prices ("330+"); free text it can't parse ("39/week +",
+    "Free - $5.99/month") renders muted instead of "-" (formatPrice in
+    app/lib/columns.tsx).
+
+# ------------------------------------------- inline remarks not in (d)
+
+- entry: pattern-drivers/lumiastream
+  field: pricing.price
+  current: Free - $5.99/month
+  status: already-fixed
+  owner: stream6
+  source: https://lumiastream.com/pricing
+  quote: 'Enjoy essential features at zero cost'
+  retrieved: '2026-11-18'
+  notes: >-
+    software-notes.md called "Free- $30/month" outdated; the research pass
+    applied the fix in d609eda. Premium is "$5.99" per month, "$32.99" every
+    6 months, "$59.99" per year; "Life time access" is listed without a price.
+
+# ------------------------------------------------ extra finding (not in the report)
+
+- entry: pattern-drivers/jinx
+  field: platforms.os
+  current: [Windows, Linux]
+  value: [Windows]
+  status: apply
+  owner: stream2
+  source: https://live-leds.de/features/
+  quote: "small, fast and native windows application, doesn't need any additional runtimes"
+  retrieved: '2026-11-18'
+  notes: >-
+    Not in the report; found while verifying the creator. The downloads page
+    (https://live-leds.de/downloads/) offers one build, "Jinx! - LED Matrix
+    Control" Version 2.4, with no Linux or macOS variant, and the features
+    page never mentions Linux. The I/O-directions research also calls Jinx!
+    Windows-only. Running it under Wine doesn't make Linux a supported
+    platform.

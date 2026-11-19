@@ -26,6 +26,8 @@ platforms:
   os:
     - Windows
     - macOS
+    - Linux
+  notes: Linux build is a free beta. macOS support stopped at MAPIO 2.2.9 (macOS 10.8–10.12) and macOS development is suspended.
 pricing:
   price: €200
   source:
@@ -47,3 +49,11 @@ sources:
     url: https://visution.com/
     retrieved: '2026-11-18'
     notes: Visution's product page calls the product 'Visution Mapio' / 'MAPIO' (MAPIO 2); LED strip and Art-Net pixel-mapping output are listed under MAPIO PRO, which this entry describes
+  platforms.os:
+    url: https://visution.com/
+    retrieved: '2026-11-18'
+    notes: Linux free beta version
+  platforms.notes:
+    url: https://visution.com/
+    retrieved: '2026-11-18'
+    notes: MacOS X 10.8.x – 10.12.x (MAPIO up to 2.2.9 version)

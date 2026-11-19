@@ -1,5 +1,6 @@
 name: Smode
 status: active
+creator: Smode Tech
 notes: This application is more of a game engine crossed with a volumetric mapping solution. 3D mapping
 inputs:
   video: Both
@@ -46,3 +47,7 @@ sources:
     url: https://www.smode.io/en/product/live-media-server
     retrieved: '2026-11-18'
     notes: 'Smode Live tiers (Basic/1/2/4) offered via "Contact us"; free Smode Community download'
+  creator:
+    url: https://www.smode.io/en/legals
+    retrieved: '2026-11-18'
+    notes: SAS Smode Tech

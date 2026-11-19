@@ -31,6 +31,12 @@ export const ALIASES: Record<string, Record<string, string>> = {
     'M8 Port Pixel': 'controllers/m8-port-pixel',
     'M8 Port Pixel @ https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/':
       'controllers/pixel-octo',
+    // Renamed to what their makers call them (database review)
+    'Mini 8 Port Controller': 'controllers/mini-8-port-controller',
+    'PixOut Server': 'controllers/pixout-server',
+    'PixNet 4+': 'controllers/pixnet-4',
+    'DMX Core': 'controllers/dmx-core',
+    PixelDIN: 'controllers/pixeldin',
   },
   Pixels: {
     // Newstar's IC part numbers. Newstar lists each LED as "NS107S HD107S",
@@ -43,10 +49,15 @@ export const ALIASES: Record<string, Record<string, string>> = {
     // rows describe the LEDs
     HD107S: 'pixels/hd107s',
     HD108: 'pixels/hd108',
+    // No such part: the row links the SM16716 driver's datasheet (database
+    // review removed the empty stub entry)
+    SM1616: 'pixel-ics/sm16716',
   },
   'Pattern Drivers': {
     // The sheet's typo; the project is cyberboy666's artnet_led_mapper
     'Arthet LED Mapper': 'pattern-drivers/arthet-led-mapper',
+    // Renamed to what its maker calls it now (database review)
+    'ProtoPixel Create': 'pattern-drivers/protopixel-create',
   },
   'Pixel Decoders': {
     // Moved to controllers (it holds DMX universes, not just pixel data)
@@ -71,9 +82,8 @@ export const ALIASES: Record<string, Record<string, string>> = {
     'Plexiglas LED Edge Lit was EndlightenT':
       'diffusive-materials/plexiglas-led-edge-lit-was-endlightent',
   },
-  Pixels: {
-    // No such part: the row links the SM16716 driver's datasheet (database
-    // review removed the empty stub entry)
-    SM1616: 'pixel-ics/sm16716',
+  'Drive Libraries': {
+    // Renamed to what its maker calls it now (database review)
+    'ArtNet to TMP2 Convertor': 'drive-libraries/artnet-to-tmp2-convertor',
   },
 };

@@ -1,7 +1,7 @@
 name: LX Studio
 status: end-of-life
 creator: Mark Slee
-notes: Java. Next version (Chromatik) will no longer use the Processing graphics library.
+notes: Java, built on the Processing framework. Superseded by Chromatik, which keeps the LX engine but replaced the Processing-based UI with GLX (LWJGL, GLFW, bgfx).
 inputs:
   video: Both
   audio: Input
@@ -56,3 +56,7 @@ sources:
     url: https://github.com/heronarts/LXStudio
     retrieved: '2026-11-18'
     notes: END OF LIFECYCLE NOTICE in the readme
+  notes:
+    url: https://github.com/heronarts/LXStudio
+    retrieved: '2026-11-18'
+    notes: LX Studio uses the Processing framework.

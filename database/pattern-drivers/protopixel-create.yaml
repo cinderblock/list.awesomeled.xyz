@@ -1,4 +1,4 @@
-name: ProtoPixel Create
+name: Protopixel Mapping Tool
 status: active
 creator: ProtoPixel
 inputs:
@@ -16,6 +16,8 @@ outputs:
     - ProtoPixel protocol
     - OSC
     - UDP
+aliases:
+  - ProtoPixel Create
 capabilities:
   live: true
   designer: true
@@ -30,6 +32,7 @@ links:
   url: https://www.protopixel.io/product/mapping-tool
 platforms:
   os:
+    - Windows
     - macOS
 pricing:
   price: €149
@@ -46,3 +49,11 @@ sources:
     url: https://protopixel.zendesk.com/hc/en-us/articles/31199693048977-Content
     retrieved: '2026-11-18'
     notes: 'renamed: "the Mapping Tool (formerly known as Create) 3.0 or higher"; Mapping Tool download offered on protopixel.io, install guides updated 2026'
+  name:
+    url: https://protopixel.zendesk.com/hc/en-us/articles/31199693048977-Content
+    retrieved: '2026-11-18'
+    notes: These instructions only work for the Mapping Tool (formerly known as Create) 3.0 or higher versions.
+  platforms.os:
+    url: https://protopixel.zendesk.com/hc/en-us/articles/31080284550673-Install-the-Protopixel-Mapping-Tool-on-a-Windows-device
+    retrieved: '2026-11-18'
+    notes: Install the Protopixel Mapping Tool on a Windows device

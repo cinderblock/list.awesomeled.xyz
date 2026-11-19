@@ -1,8 +1,7 @@
 name: Dylos
 status: active
 creator: Obsidian
-notes: Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Artnet
-  https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
+notes: ONYX's free license unlocks universe 1 (Art-Net or sACN) and 2 DYLOS zones; a paid ONYX license gives 5 zones and up to 128 universes.
 inputs:
   video: Input
   audio: Input
@@ -47,3 +46,7 @@ sources:
     url: https://www.obsidiancontrol.com/pages/dylos
     retrieved: '2026-11-18'
     notes: 'current Obsidian product page; ONYX software listed at $0.00 in the Obsidian store'
+  notes:
+    url: https://www.obsidiancontrol.com/pages/dylos
+    retrieved: '2026-11-18'
+    notes: 2 DYLOS Zones in "Free" Mode
