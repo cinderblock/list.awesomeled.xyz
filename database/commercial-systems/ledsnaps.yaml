@@ -4,6 +4,10 @@ creator:
   name: Ledsnaps
   url: https://www.ledsnaps.com/
 notes: LED strip Units aimed at gym studiomarket , closed architecture, presumed WS28XX
+images:
+  - file: ledsnaps.webp
+    source: https://www.ledsnaps.com/products/pace-system
+    credit: LEDSnaps
 links:
   product: https://ledsnaps.com/products/pace-system
 pricing:

@@ -5,6 +5,10 @@ creator:
   page: https://astera-led.com/products/nyx-bulb/
 notes: Wireless DMX /Bluetooth controlled AC Line / Dc Battery Pack Powered, aimed at high end entertainment and film
 core_tech: CRMX DMX / Bluetooth
+images:
+  - file: astera-nyx.webp
+    source: https://astera-led.com/nyx/
+    credit: Astera
 links:
   product: https://astera-led.com/products/nyx-bulb/
 pricing:

@@ -4,6 +4,10 @@ creator:
   name: Chauvet
   page: https://www.chauvetdj.com/products/festoon-2-rgb/
 notes: Separate controller, 20 globes per string max 3 strings per control IP 54
+images:
+  - file: festoon-2-rgb.webp
+    source: https://www.chauvetdj.com/products/festoon-2-rgb/
+    credit: Chauvet DJ
 links:
   product: https://www.chauvetdj.com/products/festoon-2-rgb/
 pricing:

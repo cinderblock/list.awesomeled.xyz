@@ -4,6 +4,10 @@ creator:
   name: Glasson Electronics
   url: https://glassonelectronics.co.uk/
 notes: Glasson, developer of the world's first addressable incandescent festoon, range of LED and festoon products, professional products, professional pricing
+images:
+  - file: dfs3000.webp
+    source: https://glassonelectronics.co.uk/dfs3000/
+    credit: Glasson Electronics
 links:
   product: https://glassonelectronics.co.uk/dfs3000/
 pricing:

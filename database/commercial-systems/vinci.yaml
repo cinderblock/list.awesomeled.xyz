@@ -2,6 +2,10 @@ name: Vinci
 status: active
 creator: https://www.lucenti.lighting/products
 notes: RGB and flexi LED filament in one lamp
+images:
+  - file: vinci.webp
+    source: https://www.lucenti.lighting/product/vinci-pearl-v2
+    credit: Lucenti
 links:
   product: https://www.lucenti.lighting/collection/vinci
 pricing:

@@ -4,6 +4,10 @@ creator:
   name: Showtec
   page: https://www.highlite.com/en/41751-festoonlight-q4-string.html
 notes: Separate 20 globe strings, controller and booster components
+images:
+  - file: festoonlight-q4.webp
+    source: https://www.highlite.com/en/41751-festoonlight-q4-string.html
+    credit: Highlite International (Showtec)
 links:
   product: https://www.highlite.com/en/41750-festoonlight-q4-controller.html
 pricing:

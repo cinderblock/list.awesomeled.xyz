@@ -11,6 +11,10 @@ dead_links:
   - url: https://minleonusa.com/luminaires
     checked: '2026-11-18'
     archive: https://web.archive.org/web/20191207172459/https://minleonusa.com/luminaires
+images:
+  - file: triklit.webp
+    source: https://www.minleon.com/RGB-G42-Triklit-Light-pd759699688.html
+    credit: Minleon
 links:
   product: https://www.minleon.com/RGB-Triklit-Light-pl68458467.html
 other_links:

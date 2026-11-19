@@ -4,6 +4,10 @@ creator:
   name: SGM
   page: https://www.sgmlighting.com/products/lb%C2%B7100
 notes: SGM established Danish stage lighting manufacturer, 2W balls
+images:
+  - file: lb-100.webp
+    source: https://web.archive.org/web/20210804144948/https://sgmlight.com/products/lb%C2%B7100
+    credit: SGM
 links:
   product: https://sgmlight.com/products/entertainment/lb%C2%B7100
 pricing:

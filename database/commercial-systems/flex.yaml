@@ -5,6 +5,10 @@ creator:
   url: https://www.colorkinetics.com/global
 notes: Icolor Flex and relatives. Philips Color Kinetics closed eco system of RGB lighting,
 core_tech: Proprietary
+images:
+  - file: flex.webp
+    source: https://www.colorkinetics.com/global/flex
+    credit: Color Kinetics (Signify)
 links:
   product: https://www.colorkinetics.com/global/flex
 pricing:

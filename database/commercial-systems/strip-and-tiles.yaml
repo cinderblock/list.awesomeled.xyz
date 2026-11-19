@@ -4,6 +4,10 @@ creator:
   name: Schnick Schnack
   url: https://schnick.schnack.systems/
 notes: Strip and Tiles with very high resolution dimming and video input compatible, very long established pioneers.
+images:
+  - file: strip-and-tiles.webp
+    source: https://schnick.schnack.systems/en/product/led-kachel-d50/
+    credit: Schnick-Schnack-Systems
 links:
   product: https://schnick.schnack.systems/en/products/
 pricing:

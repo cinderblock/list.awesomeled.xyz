@@ -4,6 +4,10 @@ creator:
   name: Martin
   page: https://www.martin.com/en-US/products/vc-dot-1
 notes: Martin, stage lighting part of Harmon Kardon group
+images:
+  - file: vc-dot-1.webp
+    source: https://www.martin.com/en-US/products/vc-dot-1
+    credit: Martin (Harman)
 links:
   product: https://www.martin.com/en-US/products/vc-dot-1
 pricing:

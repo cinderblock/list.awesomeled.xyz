@@ -7,6 +7,10 @@ vendors:
   - name: Amazon
     page: https://www.amazon.com/Twinkly-Multicolor-App-Controlled-Decorations-Generation/dp/B086XJ17XV
 notes: Consumer Level App Controlled , now with "Pro" range. artnet2twinkly third-party project linked on Drive Libraries page
+images:
+  - file: twinkly.webp
+    source: https://twinkly.com/products/strings-multicolor
+    credit: Twinkly
 links:
   product: https://twinkly.com/products/strings-multicolor
 pricing:

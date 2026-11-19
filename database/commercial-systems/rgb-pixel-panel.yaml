@@ -5,6 +5,10 @@ creator:
   url: https://smartshow.lighting/
 notes: 169 Pixel Interlockable panel, arranged as 13x13 snakelined pixels on 1.6mm PCB, 10mm pitch
 core_tech: WS2812b
+images:
+  - file: rgb-pixel-panel.webp
+    source: https://smartshow.lighting/product/pixel-panels/
+    credit: SmartShow
 links:
   product: https://smartshow.lighting/product/pixel-panels/
 pricing:
