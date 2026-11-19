@@ -34,6 +34,8 @@ outputs:
 power:
   voltage:
     max: 12 # 7-12 V (5 V optional)
+features:
+  - Pixels can be grouped in 1, 2, 4, 5, 10 or 100 # from the original spreadsheet, not verified
 price: 17.8
 software:
   works_with:

@@ -30,6 +30,8 @@ platforms:
     - Windows
     - macOS
     - Linux
+  hardware:
+    - Raspberry Pi
 pricing:
   price: Free
 sources:
@@ -37,3 +39,7 @@ sources:
     url: https://github.com/benkuper/Blux
     retrieved: '2026-11-18'
     notes: 'last commit 2026-10-07; download page offers stable and beta builds'
+  platforms:
+    url: https://github.com/benkuper/Blux
+    retrieved: '2026-11-18'
+    notes: The readme says it works on Windows x64, macOS, Linux x64 and Raspberry Pi
