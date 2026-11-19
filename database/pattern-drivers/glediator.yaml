@@ -13,7 +13,8 @@ outputs:
     artnet: Output
   serial: Output
   serial_notes: Glediator protocol or TPM2 at up to 1,000,000 baud (about 1000 pixels at 24 FPS)
-  other: TPM2.Net
+  other:
+    - TPM2.net
 aliases:
   - Graphical LED Installation AnimaTOR
 capabilities:
