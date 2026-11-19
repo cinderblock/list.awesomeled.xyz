@@ -1341,6 +1341,57 @@
 'DIY MicroBoards | TTGo ESP32 PoE | Product URL (link)':
   - value: 'http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3'
     reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | NRF 52840 Feather | IMU':
+  - value: 'Wing'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Wing" is an add-on'
+'DIY MicroBoards | Feather M0 WiFi | IMU':
+  - value: 'Wing'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Wing" is an add-on'
+'DIY MicroBoards | Arduino Micro | ISA':
+  - value: 'AVR5'
+    reason: "Same in stream 2's typed microboard vocabulary (475d1d0): AVR5 is AVR"
+'DIY MicroBoards | ATtiny85 | ISA':
+  - value: 'AVR2.5'
+    reason: "Same in stream 2's typed microboard vocabulary (475d1d0): AVR2.5 is AVR"
+'DIY MicroBoards | Beaglebone Black | Flash':
+  - value: '4GBeMMC/microSD'
+    reason: "Same in stream 2's typed microboard vocabulary (475d1d0): 4 GB eMMC flash; microSD is storage"
+'DIY MicroBoards | Teensy-LC | Storage':
+  - value: 'Shield'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Shield" is an add-on'
+'DIY MicroBoards | Teensy 2.0 | Storage':
+  - value: 'Shield'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Shield" is an add-on'
+'DIY MicroBoards | Teensy 3.2 | Wi-Fi':
+  - value: 'Shield'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Shield" is an add-on'
+'DIY MicroBoards | Teensy 3.2 | Storage':
+  - value: 'Shield'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Shield" is an add-on'
+'DIY MicroBoards | Teensy++ 2.0 | ISA':
+  - value: 'AVR5'
+    reason: "Same in stream 2's typed microboard vocabulary (475d1d0): AVR5 is AVR"
+'DIY MicroBoards | Teensy++ 2.0 | Storage':
+  - value: 'Shield'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Shield" is an add-on'
+'DIY MicroBoards | Teensy 3.5 | Wi-Fi':
+  - value: 'Shield'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Shield" is an add-on'
+'DIY MicroBoards | Teensy 3.6 | Wi-Fi':
+  - value: 'Shield'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): "Shield" is an add-on'
+'DIY MicroBoards | Raspberry Pi 4 Model B | Ethernet':
+  - value: 'Gigabit'
+    reason: "Same in stream 2's typed microboard vocabulary (475d1d0): Gigabit is 1000BASE-T"
+'DIY MicroBoards | Raspberry Pi 3 Model B+ | Ethernet':
+  - value: 'Gigabit'
+    reason: "Same in stream 2's typed microboard vocabulary (475d1d0): Gigabit is 1000BASE-T"
+'DIY MicroBoards | WT32-ETH01 | Flash':
+  - value: '32Mbit'
+    reason: "Same in stream 2's typed microboard vocabulary (475d1d0): 32 Mbit is 4 MB"
+'DIY MicroBoards | Orange Pi LTS | RAM':
+  - value: '256MB+'
+    reason: 'Same in stream 2''s typed microboard vocabulary (475d1d0): 256MB (the "+" was a note)'
 'Connectors | Molex KK AKA KF2510 | Link':
   - value: 'https://www.molex.com/molex/products/family/kk'
     reason: "Old Molex link (hyperlink target differs from the cell text); YAML keeps the cell's URL"

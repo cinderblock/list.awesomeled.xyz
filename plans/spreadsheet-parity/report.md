@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/18/2026, 7:58 PM PST (2026-11-19 03:58Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/18/2026, 8:10 PM PST (2026-11-19 04:10Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -87,7 +87,7 @@ Database folder: `database/pattern-drivers/`.
 - [D4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D4) `arthet-led-mapper` Platform "ubuntu, windows, mac and arm64": Same platforms in structured form (Ubuntu = Linux, mac = macOS); arm64 is in platforms.notes
 - [Y5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y5) `bekonix` URL "https://www.bekonix.com/platform/": The sheet links a sub-page that is gone (404); YAML links the live site
 - [V9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V9) `chataigne-wled-mod` Notes "Plug on for vcontrol of WLED, other WLED plugins from same …": Typo fixed in YAML
-- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.8981": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.91245": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y12) `elm` URL "https://www.enttec.co.uk/product/controls-gb/addressable-le…": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
 - [D15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D15) `fastled-fx-engine` Platform "ESP/AVR/NRF/RP/Browser": Same platforms in structured form (web + hardware list)
 - [C16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C16) `filament` Price "59": The maker sells it for EUR 49 one-time (VAT incl.); $59 isn't on its site
@@ -108,7 +108,7 @@ Database folder: `database/pattern-drivers/`.
 - [W30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W30) `lx-studio-chromatik` Demo/Free "Open source. Comercial applications require license": Typo fixed in YAML
 - [X30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=X30) `lx-studio-chromatik` Status "Active": (cited) YAML cites a source for status
 - [B31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B31) `madmapper` Developer "Smode Tech": (cited) YAML cites a source for creator
-- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.401175": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.46759": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W32) `madrix-5` Demo/Free "Demo no data out": Same in structured form: demo.available + limitations
 - [B34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B34) `mapio-pro` Developer "Vistitution": (cited) YAML cites a source for creator
 - [C37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C37) `protopixel-create` Price "176": (cited) re-priced at the source (retrieved 2020-08-08)
@@ -464,7 +464,7 @@ Database folder: `database/controllers/`.
 - [D126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D126) `qolorpix` Price "1500": (cited) re-priced at the source (retrieved 2026-11-18)
 - [K126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K126) `qolorpix` Max Current "120": (cited) YAML cites a source for power.current.max
 - [V126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V126) `qolorpix` Product URL "http://www.citytheatrical.com/Products/qolorpix-tape-contro…": Old URL; it redirects to the page YAML links
-- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1848.46464": (cited) re-priced at the source (retrieved 2022-06-29)
+- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1848.75328": (cited) re-priced at the source (retrieved 2022-06-29)
 - [G127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=G127) `pixelator` Storage "Yes": The manual describes no show storage; its DMX Generator holds static looks only
 - [H127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H127) `pixelator` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone (Pixelator datasheet)
 - [V128](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V128) `emp-16-uni-control` Product URL "https://www.empdesigns.co.uk/portfolio-item/16-universe-led…": Old URL; it redirects to the page YAML links
@@ -1197,20 +1197,25 @@ Header problems:
 
 ### Rows paired by alias, URL, or as duplicates
 
-- [A3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A3) "NRF 52840 Feather" → `microboards/nrf-52840-feather` (url, score 0.93)
-- [A36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A36) "Orange Pi LTS" → `microboards/orange-pi-lts` (url, score 0.86)
+- [A3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A3) "NRF 52840 Feather" → `microboards/nrf-52840-feather` (url, score 0.87)
+- [A36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A36) "Orange Pi LTS" → `microboards/orange-pi-lts` (url, score 0.79)
 
-<details><summary>Acknowledged differences (64)</summary>
+<details><summary>Acknowledged differences (81)</summary>
 
 - [W2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W2) `trinket-m0` Unit Price (USD) "8.95": (cited) re-priced at the source (retrieved 2026-11-18)
+- [V3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=V3) `nrf-52840-feather` IMU "Wing": Same in stream 2's typed microboard vocabulary (475d1d0): "Wing" is an add-on
 - [W3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W3) `nrf-52840-feather` Unit Price (USD) "25": (cited) re-priced at the source (retrieved 2026-11-18)
+- [V4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=V4) `feather-m0-wifi` IMU "Wing": Same in stream 2's typed microboard vocabulary (475d1d0): "Wing" is an add-on
 - [W5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W5) `arduino-mega-2560-rev3` Unit Price (USD) "40.3": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y5) `arduino-mega-2560-rev3` Product URL "https://store-usa.arduino.cc/collections/boards/products/ar…": Old URL (the site blocks scripted checks); YAML links the maker's current page
+- [E6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=E6) `arduino-micro` ISA "AVR5": Same in stream 2's typed microboard vocabulary (475d1d0): AVR5 is AVR
 - [Y6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y6) `arduino-micro` Product URL "https://store.arduino.cc/usa/arduino-micro": Old URL (the site blocks scripted checks); YAML links the maker's current page
+- [E7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=E7) `attiny85` ISA "AVR2.5": Same in stream 2's typed microboard vocabulary (475d1d0): AVR2.5 is AVR
 - [F7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=F7) `attiny85` Clock Speed "16": (cited) YAML cites a source for compute.clock_speed
 - [W7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W7) `attiny85` Unit Price (USD) "1": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y7) `attiny85` Product URL "https://www.microchip.com/wwwproducts/en/ATtiny85": Old URL (the site blocks scripted checks); YAML links the maker's current page
 - [Y8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y8) `pocketbeagle` Product URL "http://beagleboard.org/pocket": Old URL; it redirects to the page YAML links
+- [G9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=G9) `beaglebone-black` Flash "4GBeMMC/microSD": Same in stream 2's typed microboard vocabulary (475d1d0): 4 GB eMMC flash; microSD is storage
 - [W9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W9) `beaglebone-black` Unit Price (USD) "50": (cited) re-priced at the source (retrieved 2026-03-10)
 - [Y9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y9) `beaglebone-black` Product URL "http://beagleboard.org/black": Old URL; it redirects to the page YAML links
 - [W10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W10) `ebyte-nrf-52840` Unit Price (USD) "10": (cited) re-priced at the source (retrieved 2026-11-18)
@@ -1225,16 +1230,28 @@ Header problems:
 - [S13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=S13) `nodemcu-v2` Bluetooth "4.1": (cited) YAML cites a source for connectivity.bluetooth
 - [S14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=S14) `esp-32s` Bluetooth "4.1": (cited) YAML cites a source for connectivity.bluetooth
 - [W15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W15) `esp32-poe` Unit Price (USD) "25": (cited) re-priced at the source (retrieved 2026-11-18)
+- [T16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=T16) `teensy-lc` Storage "Shield": Same in stream 2's typed microboard vocabulary (475d1d0): "Shield" is an add-on
 - [W16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W16) `teensy-lc` Unit Price (USD) "11.65": (cited) re-priced at the source (retrieved 2026-11-18)
+- [E17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=E17) `teensy-2-0` ISA "AVR5": (cited) YAML cites a source for compute.isa
+- [T17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=T17) `teensy-2-0` Storage "Shield": Same in stream 2's typed microboard vocabulary (475d1d0): "Shield" is an add-on
+- [P18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=P18) `teensy-3-2` Wi-Fi "Shield": Same in stream 2's typed microboard vocabulary (475d1d0): "Shield" is an add-on
+- [T18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=T18) `teensy-3-2` Storage "Shield": Same in stream 2's typed microboard vocabulary (475d1d0): "Shield" is an add-on
 - [W18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W18) `teensy-3-2` Unit Price (USD) "19.8": (cited) re-priced at the source (retrieved 2025-11-08)
 - [G19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=G19) `teensy-4-0` Flash "2048kB": (cited) YAML cites a source for compute.flash
 - [W19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W19) `teensy-4-0` Unit Price (USD) "19.95": (cited) re-priced at the source (retrieved 2026-11-18)
+- [E20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=E20) `teensy-plus-plus-2-0` ISA "AVR5": Same in stream 2's typed microboard vocabulary (475d1d0): AVR5 is AVR
+- [T20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=T20) `teensy-plus-plus-2-0` Storage "Shield": Same in stream 2's typed microboard vocabulary (475d1d0): "Shield" is an add-on
+- [P21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=P21) `teensy-3-5` Wi-Fi "Shield": Same in stream 2's typed microboard vocabulary (475d1d0): "Shield" is an add-on
+- [P22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=P22) `teensy-3-6` Wi-Fi "Shield": Same in stream 2's typed microboard vocabulary (475d1d0): "Shield" is an add-on
 - [W25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W25) `raspberry-pi-zero-v1-3` Unit Price (USD) "5": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W26) `raspberry-pi-zero-w` Unit Price (USD) "10": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W28) `raspberry-pi-1-model-b` Unit Price (USD) "25": (cited) re-priced at the source (retrieved 2026-11-18)
 - [S32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=S32) `raspberry-pi-3-model-b` Bluetooth "4.0": Bluetooth 4.1 per the launch post
 - [F33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=F33) `raspberry-pi-4-model-b` Clock Speed "1500": (cited) YAML cites a source for compute.clock_speed
+- [R33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=R33) `raspberry-pi-4-model-b` Ethernet "Gigabit": Same in stream 2's typed microboard vocabulary (475d1d0): Gigabit is 1000BASE-T
+- [G35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=G35) `wt32-eth01` Flash "32Mbit": Same in stream 2's typed microboard vocabulary (475d1d0): 32 Mbit is 4 MB
 - [W35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W35) `wt32-eth01` Unit Price (USD) "7": (cited) re-priced at the source (retrieved 2026-11-18)
+- [H36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=H36) `orange-pi-lts` RAM "256MB+": Same in stream 2's typed microboard vocabulary (475d1d0): 256MB (the "+" was a note)
 - [P36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=P36) `orange-pi-lts` Wi-Fi "2.4GHz & 5GHz": (cited) YAML cites a source for connectivity.wifi
 - [W36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W36) `orange-pi-lts` Unit Price (USD) "8.5": (cited) re-priced at the source (retrieved 2026-11-18)
 - [P37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=P37) `orange-pi-pc-plus` Wi-Fi "2.4GHz & 5GHz": (cited) YAML cites a source for connectivity.wifi
