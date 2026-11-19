@@ -26,6 +26,8 @@ Part of `plans/website-buildout.md` (workstream 5).
 
 - Images live in git as optimized WebP (≤1200 px, ≤200 KB); datasheet PDFs never do (R2 mirror). From OVERHAUL-PLAN "Asset strategy".
 - R2/Cloudflare: Cameron's explicit per-change yes, account-owned API token. This thread stages, never applies.
+- **Keep our own copies in R2** (Cameron, 2026-11-18 ~9:15 PM PST): "I'm ok with keeping our own copies. We just need to keep an eye on storage/usage." Wayback-only was the alternative; not chosen.
+- The sheet's connector "Picture" links (third-party sellers' photos: AliExpress, scondar, pcboard.ca, RS) are not used. Same rule as every other image: the maker's own photo or an open license (closes the ISSUES.md item from parity).
 - Image sources allowed by the brief: manufacturer/vendor pages for that product, or permissively licensed sources. Skip anything we can't legitimately use.
 
 ## Image sourcing policy (this stream's rules)
@@ -64,6 +66,10 @@ so the entry page shows them (see Plan step 4).
 9. [x] Docs: CONTRIBUTING "Adding Images", README licence carve-out for product images, `docs/datasheet-mirroring.md` (incl. owner setup), ROADMAP, ISSUES.md (suspected data errors).
 10. [x] Pattern-driver screenshots (30/40) and controller/adapter datasheets (54).
 11. [ ] R2 setup — Cameron, one step at a time (see Open questions). ← current (blocked on Cameron)
+    - [x] Repo side: storage budget (`MIRROR_BUDGET_MB`, default 1024), per-run storage report (log, job summary, PR body), no re-upload of stored keys, `--check` total; entry pages link the mirror (2eab8e6).
+    - [x] Ops change staged, uncommitted: worktree `C:/Users/camer/.t3/worktrees/ops/awesomeled-datasheets-r2` (branch `awesomeled-datasheets-r2`, no upstream). It adds R2 custom-domain support to the IaC and declares bucket `awesomeled-datasheets` + `assets.awesomeled.xyz`. Read-only dry run: exactly 2 creates; tests 405 pass. Plan: `plans/awesomeled-datasheets-r2.md` there.
+    - [ ] Cameron's yes on that exact change → commit + push ops (CI applies) → R2 token → repo secrets/variable → Actions PR permission → first run.
+12. [ ] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
 
 ## Working method (two worktrees)
 
@@ -122,6 +128,11 @@ the shared block to them).
 
 ## Findings / gotchas
 
+- **Datasheet storage measured** (2026-11-18 ~10 PM PST): 249 datasheets download as PDFs, 419.6 MB in total. The biggest are wieland-rst 30 MB, ebyte-nrf-52840 17 MB and chogori 15 MB. That's 4% of R2's free 10 GB and 41% of the 1 GB mirror budget.
+- **Monitoring already exists in ops.** The uptime worker (`cloudflare/workers/uptime`) charts R2 storage per bucket and alerts at 50/75/90/100% of the 10 GB account total, plus on projected growth; it also polls Class A/B operations hourly into cost alerts. The spend breaker only blocks `api.openslate.us`, so it can't throttle `assets.awesomeled.xyz`.
+- Lumikit's PDFs start with a UTF-8 BOM before `%PDF-`. The check now accepts `%PDF-` anywhere in the first 1024 bytes, like PDF readers do.
+- Several LCSC `datasheet.url` values added by other streams serve HTML to bots (logged in ISSUES.md).
+
 - **SparkFun licence:** photos on sparkfun.com are **CC BY-NC-SA 3.0** (SparkFun news 735/1852), not CC BY 2.0. Only SparkFun's Flickr uploads (mirrored on Commons) are CC BY 2.0. The original brief had this wrong; the connectors agent caught it before any wrong tag shipped (two sparkfun.com images now carry CC BY-NC-SA 3.0).
 - Code licences (MIT/GPL) don't cover photos: repo images were recorded as maker photos without a licence unless a docs/hardware licence (CC BY-SA, CERN-OHL) explicitly covered them.
 - Table images were hover-preview only (full-size WebP); the designer loaded 100–200 KB originals into 42 px cards.
@@ -143,15 +154,16 @@ the shared block to them).
 - [x] pixels, pixel ICs, microboards, connectors, adapters, controllers, validator, CONTRIBUTING/README (a694a76).
 - [x] commercial systems, diffusive materials, ISSUES.md (41295f3).
 - [x] Pattern-driver screenshots (ea8f9ac); controller/adapter datasheets (9ef42f2).
+- [x] Storage guard + report, mirror links on entry pages (2eab8e6); ops R2 change staged (not committed).
 - [ ] R2 mirror switched on (Cameron).
+- [ ] Second sourcing pass for new entries (step 12).
 
 ## Open questions for the user
 
-1. **R2 mirror setup** (blocked on Cameron; infra needs per-change approval). Proposed: bucket `awesomeled-datasheets` declared in the ops IaC (`cloudflare/config/projects/awesomeled.yaml`: `- r2: awesomeled-datasheets`), public custom domain `assets.awesomeled.xyz`, an account-owned R2 token (Object Read & Write, that bucket only), four repo secrets + one variable, Actions allowed to open PRs. Full list: `docs/datasheet-mirroring.md` → "One-time setup". Gap: the ops IaC has no R2 custom-domain support, and its DNS sync manages the `awesomeled.xyz` zone, so a dashboard-made R2 domain record must be declared external there first (or the IaC taught R2 domains). Recommendation: teach the IaC (a small handler), in an ops thread.
-   - **Why R2 at all** (Cameron asked, 2026-11-18): so we hold our own copy of each datasheet PDF, plus a sha256 of it, for when a maker moves or deletes the PDF. Makers do this a lot: 18 of the 38 pre-existing links were already bad.
-   - **Gap:** nothing on the site displays `datasheet.mirror` yet. `entry.tsx` shows only `datasheet.url` and `sources`, so even a working mirror would need a one-line UI change before anyone saw it.
-   - **No-infra alternative:** the site already falls back to the newest Wayback Machine capture for anything listed in `dead_links`. CI could submit each datasheet URL to Wayback's Save Page Now instead of uploading to R2. That needs no Cloudflare work and avoids re-hosting manufacturers' copyrighted PDFs on our own domain. It is less certain: Wayback can miss bot-blocked hosts and has had outages.
-   - Recommendation: Wayback first; keep R2 for any datasheets Wayback can't capture.
+1. **R2 mirror setup**: approved in principle. Waiting on Cameron's yes to the exact ops change staged in `C:/Users/camer/.t3/worktrees/ops/awesomeled-datasheets-r2` (see step 11). The change carries three choices of its own:
+   - R2 custom domains that config doesn't declare are _held_ (flagged, never deleted). Recommended.
+   - Minimum TLS stays at R2's default of 1.0, matching every zone today.
+   - The bucket is declared both standalone and on the domain entry.
 2. **Borderline image calls** worth a glance (details in `plans/assets-research/`): neopixelbooster recorded as CC BY-NC-SA 4.0 (README) though its LICENCE file says CC BY-SA 4.0; LED-strip sellers (LEDYi, Superlighting) as `community` datasheet hosts for Titan/UCS ICs whose makers publish none; a few retailer photos for generic diffusers (Screwfix, eplastics).
 
 ## Things not to do

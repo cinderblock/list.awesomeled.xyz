@@ -130,6 +130,8 @@ interface EntryLink {
   icon: React.ComponentType<{ size?: number }>;
   /** Set when the original URL is dead and `url` points at an archived copy */
   deadOriginal?: string;
+  /** Extra tooltip text, e.g. a datasheet source's notes */
+  note?: string;
 }
 
 // One item of an entry's `dead_links` array (common.json#/definitions/dead_links)
@@ -165,7 +167,7 @@ function getEntryLinks(
 ): EntryLink[] {
   const out: EntryLink[] = [];
   const seen = new Set<string>();
-  const add = (url: unknown, label: string, icon: EntryLink['icon']) => {
+  const add = (url: unknown, label: string, icon: EntryLink['icon'], note?: string) => {
     if (typeof url !== 'string' || !url.startsWith('http') || seen.has(url)) return;
     seen.add(url);
     const dead = deadLinks.get(url);
@@ -175,9 +177,10 @@ function getEntryLinks(
         label: `${label} (archived)`,
         icon: Archive,
         deadOriginal: url,
+        note,
       });
     } else {
-      out.push({ url, label, icon });
+      out.push({ url, label, icon, note });
     }
   };
 
@@ -199,7 +202,7 @@ function getEntryLinks(
   const datasheet = entry.datasheet as
     | {
         url?: string;
-        mirror?: { url?: string };
+        mirror?: { url?: string; retrieved?: string };
         sources?: { url?: string; host?: string; notes?: string }[];
       }
     | undefined;
@@ -207,6 +210,9 @@ function getEntryLinks(
     // Our R2 copy (scripts/mirror-datasheets.ts). When the original is dead,
     // it replaces the Wayback guess, unless an explicit archive was curated.
     const mirror = typeof datasheet.mirror?.url === 'string' ? datasheet.mirror.url : undefined;
+    const mirrorNote = datasheet.mirror?.retrieved
+      ? `Our copy, retrieved ${datasheet.mirror.retrieved}`
+      : 'Our copy';
     const dead = typeof datasheet.url === 'string' ? deadLinks.get(datasheet.url) : undefined;
     if (dead && mirror && !dead.archive && !seen.has(dead.url)) {
       seen.add(dead.url);
@@ -216,15 +222,16 @@ function getEntryLinks(
         label: 'Datasheet (archived)',
         icon: Archive,
         deadOriginal: dead.url,
+        note: mirrorNote,
       });
     } else {
       add(datasheet.url, 'Datasheet', FileText);
-      add(mirror, 'Datasheet (mirror)', FileText);
+      add(mirror, 'Datasheet (mirror)', FileText, mirrorNote);
     }
     if (Array.isArray(datasheet.sources)) {
       for (const s of datasheet.sources) {
         if (s && typeof s === 'object') {
-          add(s.url, `Datasheet (${s.host ?? 'alt'})`, FileText);
+          add(s.url, `Datasheet (${s.host ?? 'alt'})`, FileText, s.notes);
         }
       }
     }
@@ -453,9 +460,13 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
       continue;
     }
     if (isGroup(value)) {
-      // The datasheet mirror is shown as a link; its hash and dates are bookkeeping
-      if (key === 'datasheet' && 'mirror' in value) {
-        const rest = Object.fromEntries(Object.entries(value).filter(([k]) => k !== 'mirror'));
+      // The datasheet, its mirror and its alternate hosts are all in the links
+      // bar (source notes in their tooltips). As raw URLs and nested grids in a
+      // narrow card they were noise; the card keeps the rest.
+      if (key === 'datasheet') {
+        const rest = Object.fromEntries(
+          Object.entries(value).filter(([k]) => !['url', 'mirror', 'sources'].includes(k))
+        );
         if (isGroup(rest)) groups.push([key, rest]);
         continue;
       }
@@ -572,14 +583,17 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           <FeatureBadges entry={entry} />
           {links.length > 0 && (
             <div className="entry-links">
-              {links.map(({ url, label, icon: Icon, deadOriginal }) => (
+              {links.map(({ url, label, icon: Icon, deadOriginal, note }) => (
                 <Tooltip
                   key={url}
-                  content={
+                  content={[
                     deadOriginal
                       ? `Original link no longer works (${deadOriginal}) — showing an archived copy`
-                      : stripSchemaAndWww(url)
-                  }
+                      : stripSchemaAndWww(url),
+                    note,
+                  ]
+                    .filter(Boolean)
+                    .join('. ')}
                 >
                   <a href={url} target="_blank" rel="noopener noreferrer" className="entry-link">
                     <Icon size={15} />

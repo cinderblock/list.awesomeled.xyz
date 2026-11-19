@@ -287,6 +287,21 @@ URLs are in [plans/assets-research/](plans/assets-research/).
   Visution; elm's `status: unknown` is stale (ELM 2026 ships); wled's URL
   redirects to wled/WLED; chataigne-wled-mod links the author's profile.
 
+## Datasheet URLs that serve HTML instead of a PDF (stream 2)
+
+`bun run mirror-datasheets --check` (2026-11-18 ~10 PM PST, 06:00Z) found
+LCSC datasheet links that answer with an HTML page, not the PDF, for anything
+but a full browser. The mirror can't copy them, and stream 5's rule is that
+`datasheet.url` is a direct PDF:
+
+- `connectors/pcb-screw-terminal-block`: lcsc.com C5128849, added in f7d10be.
+- `pixel-ics/tm1804`: C20622206, f40746b.
+- `pixels/tx1818`: C784552 and C784557, fa24de9.
+
+Fix: point `datasheet.url` at the maker's PDF, or add a direct-PDF host under
+`datasheet.sources`; the mirror falls back to sources. Re-run `--check` to
+confirm.
+
 ## Connector and diffuser spec corrections (stream 2 or 6)
 
 Found by cross-links research (stream 4) with the maker's datasheet or page
@@ -365,18 +380,15 @@ largest clusters:
 Why it matters: these are the facts the tables filter on. Overlaps the
 connector list above.
 
-## Entry pages: datasheet `sources` and long URLs in narrow cards (stream 5 / 7)
+## Entry pages: long URLs in narrow cards (stream 7)
 
-Seen by cross-links (stream 4) on e.g. `/microboards/beaglebone-black` and
-`/controllers/deskontroller-lite-v3-32` at 1280 px. A datasheet's alternate
-hosts (`datasheet.sources`: `url` / `host` / `notes`, 53 entries) render as a
-raw nested grid, and URLs there and in vendors' `page` break every few
-characters down a third-width card (8 lines for one `raw.githubusercontent.com`
-link). Why it matters: the datasheet card is the one people look for, and the
-alternate links read as noise. Showing each link as its host name (the way
-`sources` provenance does: "docs.beagleboard.org", "github.com") would fix
-both; the datasheet card's design is stream 5's, the generic value rendering
-stream 7's.
+Seen by cross-links (stream 4) at 1280 px. URLs in vendors' `page` (and other
+URL values) break every few characters down a third-width card: 8 lines for one
+`raw.githubusercontent.com` link. Showing each URL as its host name, the way
+`sources` provenance does ("docs.beagleboard.org"), would fix it; the generic
+value rendering is stream 7's. The datasheet half of this entry is fixed: the
+datasheet card no longer repeats `url`, `mirror` or `sources`, which are all
+in the links bar with source notes in their tooltips (stream 5).
 
 ## Spec contradictions found while writing new entries (stream 2)
 
@@ -446,12 +458,3 @@ channels` treats channels as pixels.
   slugs now hold the real Teensy 2.0 and Pi 3 Model B (387602d). Three
   `related` refs that meant the B+ follow it (10fc268); the rest mean the Pi
   3 family and stay.
-
-## Connector pictures from the sheet (images, stream 5)
-
-From parity (stream 1). The sheet's Connectors tab has a "Picture" column: 44
-connectors link a product photo on someone else's site (AliExpress CDN,
-pcboard.ca, scondar.com, ...). None are in YAML; the parity report lists them
-under Connectors → "Links not in YAML". Hosting our own images or linking is
-stream 5's call; they are the only open items left in
-[plans/spreadsheet-parity/report.md](plans/spreadsheet-parity/report.md).
