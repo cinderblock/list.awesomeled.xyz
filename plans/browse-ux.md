@@ -84,7 +84,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**Current step: 1.**
+**Current step: 5 (global search).** Steps 1–4 shipped in `d406c2c`.
 
 ## Findings / gotchas
 
@@ -100,14 +100,26 @@ Each step ships on its own (rebase, checks, push).
 - `e2e/basic.test.ts` "navigation to entry page works" clicks `td:first-child a`, which is the external product link, not the entry link; it passes by accident.
 - `CONTRIBUTING.md` documents the old flat schema (`id`, `manufacturer`, `npm`). Data-freshness has it open; coordinate before rewriting.
 - Other streams' uncommitted work touches `entry.tsx` (cross-links: relation graph, `FormatContext`; data-freshness: price provenance), `columns.tsx` (part price column) and `playwright.config.ts` (`E2E_PORT`, twice).
+- **Sort latency.** A sort click took ~190 ms on the live site (and 1–2.6 s on a dev server): every URL write was a router navigation, which re-renders the route in a transition, and each row carried several Radix tooltip providers. Now ~30 ms in production: URL writes update a local copy first (`useTableParams`), rows are memoized and keyed by id, and there is one tooltip provider.
+- **Table state leaked across categories.** `DataTable` kept one instance across `:category` navigations, so hidden columns from one category were saved under the next and saved filters were never restored after the first tab. Fixed by keying the table on the category id.
+- **Master moves every minute or two** (six streams pushing). What works: rebase, run the fast checks (typecheck, lint, format, unit, validate: ~2 min), push straight away; run the full e2e just before and again on what shipped. Expect to port other streams' edits when they touch a file being rewritten (`DataTable.tsx` thumbnails).
+- **e2e flakes under load are launch timeouts**, not assertions (`browserContext.newPage: Test timeout`), when the machine sits at 100 % CPU. Re-run the test alone before believing it.
+- **Hydration marker.** The prerendered page looks ready before it is; tests wait for `html[data-hydrated]` (set by the layout). A Playwright screenshot taken before hydration also causes a spurious hydration-mismatch error (it touches the focused input).
+- **Radix versions must match.** `bun add @radix-ui/react-dialog` pulled 1.3.1 and with it second copies of the shared internals (dismissable-layer, focus-scope, portal…), which would have doubled bundle weight and broken nested layers. Pinned to 1.1.15, the release that shares internals with the installed popover / dropdown / tooltip.
+- **Stale nested dependency after a rebase.** When upstream added `ajv-formats`, `bun install` reported no changes but left `node_modules/ajv-formats/node_modules/ajv@8.17.1` behind, and `tsc` failed on mismatched types. Deleting that folder and reinstalling fixed it.
+- **Shell quirks here.** `curl` fails on https (`(43) A libcurl function was given a bad argument`): use `node` `fetch`. Backslashes in an inline `python - <<EOF` are halved: write the script to a file, or use the Edit tool. Git Bash rewrites arguments that start with `/` into Windows paths.
+- **The Windows clipboard turns line feeds into CRLF**; clipboard assertions split on either.
+- New unit kinds appear upstream (`length` arrived mid-rebase). `units.ts` needs a display-unit list per kind; `fields.ts` treats any shared schema definition named after a unit kind as a quantity.
+- Build after this increment (`d406c2c`): category chunk 158 kB (47 gz, was 84 / 27 for table + route), `columns` chunk 40 kB (13 gz) is all an entry page loads from the table code (was 83 / 27), CSS 77 kB (13 gz), `controllers/index.html` 455 kB (52 gz). The table chunk grew; lazy-loading the drawer, picker and export menu is a candidate for step 12.
 
 ## Progress log
 
 - [x] 2026-11-18 3:56 PM PST (23:56Z): read the build-out plan and the app; audited the live site and the sheet headlessly; measured the baseline build; wrote this plan.
-- [ ] Step 1 foundations
-- [ ] Step 2 field catalog + column picker
-- [ ] Step 3 faster table
-- [ ] Step 4 copy & export
+- [x] Step 1 foundations — `app/lib/site.ts`, `table-state.ts`, `prefs.ts`; entry pages no longer import the table. (The archived-repo links were fixed by the parity stream minutes earlier; this stream's commit only centralizes the URL.)
+- [x] Step 2 field catalog + column picker — `app/lib/fields.ts` (+ `.server`), `table-columns.tsx`, `ColumnPicker.tsx`; `cols` in the URL, layout saved per device.
+- [x] Step 3 faster table — one-click sort, facet counts, filters panel, dense rows, search over all fields, pill click-to-filter, `_notes` footnotes, has-a-value filters.
+- [x] Step 4 copy & export — share & export menu; static CSV with every field; `/<category>.json`.
+- [x] 2026-11-18 5:49 PM PST (01:49Z): steps 1–4 pushed as `d406c2c` and live. 48 e2e tests (20 new in `e2e/table.test.ts`) and 61 unit tests pass; production smoke test clean.
 - [ ] Step 5 global search + 404
 - [ ] Step 6 compare
 - [ ] Step 7 mobile
