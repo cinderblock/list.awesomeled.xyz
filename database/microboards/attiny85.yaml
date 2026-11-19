@@ -18,6 +18,8 @@ compute:
 connectivity:
   serial: true
   usb: No
+datasheet:
+  url: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
 io:
   max_outputs: 6
   bms: 'No'

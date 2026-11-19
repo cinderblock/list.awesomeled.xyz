@@ -13,6 +13,13 @@ connectivity:
   wifi: 2.4GHz
   bluetooth: '4.1'
   serial: true
+datasheet:
+  url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+images:
+  - file: nodemcu-v2.webp
+    source: https://commons.wikimedia.org/wiki/File:NodeMCU_DEVKIT_1.0.jpg
+    credit: Vowstar
+    license: CC BY-SA 4.0
 io:
   bms: 'No'
   imu: false

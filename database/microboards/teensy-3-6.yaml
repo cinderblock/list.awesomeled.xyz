@@ -19,6 +19,12 @@ connectivity:
   wifi: Shield
   usb: OTG
   serial: true
+datasheet:
+  url: https://www.pjrc.com/teensy/K66P144M180SF5V2.pdf
+images:
+  - file: teensy-3-6.webp
+    source: https://www.pjrc.com/store/teensy36.html
+    credit: PJRC
 io:
   storage: microSD
   bms: 'No'

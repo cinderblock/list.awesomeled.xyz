@@ -10,6 +10,8 @@ compute:
   isa: ARMv7-M
 connectivity:
   bluetooth: BLE
+datasheet:
+  url: https://cdn-learn.adafruit.com/assets/assets/000/092/427/original/nRF52840_PS_v1.1.pdf
 price: 6.54
 price_source:
   notes: E73-2G4M08S1C module (the product of the old Ebyte news page); the E73-2G4M08S1E variant is $6.50

@@ -23,6 +23,13 @@ connectivity:
   bluetooth: USB
   usb: OTG
   serial: true
+datasheet:
+  url: https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf
+images:
+  - file: raspberry-pi-1-model-a.webp
+    source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_A%2B.jpg
+    credit: Florian Frankenberger
+    license: CC BY-SA 4.0
 io:
   max_outputs: 1
   storage: microSD

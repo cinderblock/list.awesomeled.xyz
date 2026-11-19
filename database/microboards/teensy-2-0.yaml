@@ -18,6 +18,16 @@ compute:
 connectivity:
   usb: OTG
   serial: true
+datasheet:
+  url: https://www.pjrc.com/teensy/at90usb1286.pdf
+  sources:
+    - url: https://ww1.microchip.com/downloads/en/DeviceDoc/doc7593.pdf
+      host: manufacturer
+      notes: Microchip (Atmel) AT90USB646/647/1286/1287 datasheet
+images:
+  - file: teensy-2-0.webp
+    source: https://www.pjrc.com/store/teensypp.html
+    credit: PJRC
 io:
   storage: Shield
   bms: 'No'

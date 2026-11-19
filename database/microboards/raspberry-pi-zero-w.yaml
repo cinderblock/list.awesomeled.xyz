@@ -23,6 +23,8 @@ connectivity:
   bluetooth: '4.1'
   usb: OTG
   serial: true
+datasheet:
+  url: https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf
 images:
   - file: raspberry-pi-zero-w.webp
     source: https://www.raspberrypi.com/products/raspberry-pi-zero-w/

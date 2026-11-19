@@ -23,6 +23,13 @@ connectivity:
   bluetooth: USB
   usb: OTG x4
   serial: true
+datasheet:
+  url: https://datasheets.raspberrypi.com/bcm2836/bcm2836-peripherals.pdf
+images:
+  - file: raspberry-pi-2-model-b.webp
+    source: https://commons.wikimedia.org/wiki/File:Raspberry-Pi-2-Bare-FL.jpg
+    credit: Evan-Amos
+    license: Public domain
 io:
   max_outputs: 1
   storage: microSD

@@ -21,6 +21,13 @@ connectivity:
   ethernet: USB
   usb: OTG
   serial: true
+datasheet:
+  url: https://docs.beagleboard.org/pocketbeagle.pdf
+images:
+  - file: pocketbeagle.webp
+    source: https://github.com/beagleboard/docs.beagleboard.io/blob/main/boards/pocketbeagle/images/PocketBeagle_Front_BW.jpg
+    credit: BeagleBoard.org Foundation
+    license: CC BY-SA 4.0
 io:
   max_outputs: 40
   storage: microSD

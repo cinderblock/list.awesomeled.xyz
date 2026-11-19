@@ -25,6 +25,13 @@ connectivity:
   bluetooth: '5.0'
   usb: OTG x2, 3.0 x2
   serial: true
+datasheet:
+  url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-datasheet.pdf
+images:
+  - file: raspberry-pi-4-model-b.webp
+    source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_4_Model_B_-_Side.jpg
+    credit: Laserlicht
+    license: CC BY-SA 4.0
 io:
   storage: microSD
   bms: 'No'

@@ -25,6 +25,12 @@ connectivity:
   bluetooth: '4.2'
   usb: OTG
   serial: true
+datasheet:
+  url: https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-a-plus-product-brief.pdf
+images:
+  - file: raspberry-pi-3-model-a.webp
+    source: https://www.raspberrypi.com/products/raspberry-pi-3-model-a-plus/
+    credit: Raspberry Pi Ltd
 io:
   max_outputs: 1
   storage: microSD

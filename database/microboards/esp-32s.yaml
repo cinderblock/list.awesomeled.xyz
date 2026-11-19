@@ -15,6 +15,8 @@ connectivity:
   bluetooth: '4.1'
   usb: Power + UART
   serial: true
+datasheet:
+  url: https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf
 io:
   bms: 'No'
   imu: false

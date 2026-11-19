@@ -14,6 +14,16 @@ compute:
 connectivity:
   bluetooth: BLE
   usb: Power + UART
+datasheet:
+  url: https://www.raytac.com/download/index.php?index_id=43
+  sources:
+    - url: https://cdn-learn.adafruit.com/assets/assets/000/068/544/original/Raytac_MDBT50Q.pdf
+      host: distributor
+      notes: Adafruit-hosted copy (older revision) linked from the Feather nRF52840 guide
+images:
+  - file: nrf-52840-feather.webp
+    source: https://www.adafruit.com/product/4062
+    credit: Adafruit Industries
 io:
   max_outputs: 21
   bms: 1S

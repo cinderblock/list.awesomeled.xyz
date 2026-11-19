@@ -11,6 +11,12 @@ compute:
   flash: 7936kB (256kB reserved for recovery & EEPROM emulation)
   ram: 1024kB (512kB is "tightly coupled")
   linux: false
+datasheet:
+  url: https://www.pjrc.com/teensy/IMXRT1060CEC_rev4.pdf
+images:
+  - file: teensy-4-1.webp
+    source: https://www.pjrc.com/store/teensy41.html
+    credit: PJRC
 io:
   bms: 'No'
   imu: false

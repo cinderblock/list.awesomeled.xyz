@@ -18,6 +18,8 @@ compute:
 connectivity:
   usb: OTG
   serial: true
+datasheet:
+  url: https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf
 images:
   - file: trinket-m0.webp
     source: https://www.adafruit.com/product/3500

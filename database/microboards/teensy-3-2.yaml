@@ -19,6 +19,12 @@ connectivity:
   wifi: Shield
   usb: OTG
   serial: true
+datasheet:
+  url: https://www.pjrc.com/teensy/K20P64M72SF1.pdf
+images:
+  - file: teensy-3-2.webp
+    source: https://www.pjrc.com/store/teensy32.html
+    credit: PJRC
 io:
   max_outputs: 8
   storage: Shield

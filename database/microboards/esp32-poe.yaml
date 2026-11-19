@@ -17,6 +17,12 @@ connectivity:
   bluetooth: '4.2'
   usb: Power + UART (CH340T)
   poe: Y
+datasheet:
+  url: https://raw.githubusercontent.com/OLIMEX/ESP32-POE/master/DOCUMENTS/ESP32-POE-user-manual.pdf
+images:
+  - file: esp32-poe.webp
+    source: https://www.olimex.com/Products/IoT/ESP32/ESP32-POE/open-source-hardware
+    credit: Olimex
 io:
   bms: 1S
   imu: false

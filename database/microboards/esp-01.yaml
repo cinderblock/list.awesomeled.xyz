@@ -12,6 +12,13 @@ connectivity:
   bluetooth: '4.1'
   serial: true
   usb: No
+datasheet:
+  url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+images:
+  - file: esp-01.webp
+    source: https://commons.wikimedia.org/wiki/File:ESP-01.jpg
+    credit: SparkFun Electronics
+    license: CC BY 2.0
 io:
   bms: 'No'
   imu: false

@@ -18,6 +18,13 @@ compute:
 connectivity:
   usb: OTG
   serial: true
+datasheet:
+  url: https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf
+images:
+  - file: arduino-micro.webp
+    source: https://commons.wikimedia.org/wiki/File:Arduino_Micro.jpg
+    credit: Geek3
+    license: CC BY-SA 3.0
 io:
   bms: 'No'
   imu: false

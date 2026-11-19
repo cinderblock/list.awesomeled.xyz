@@ -18,6 +18,13 @@ compute:
 connectivity:
   wifi: false
   usb: Power + UART
+datasheet:
+  url: https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf
+images:
+  - file: arduino-mega-2560-rev3.webp
+    source: https://github.com/arduino/docs-content/blob/main/content/hardware/mega/boards/mega-2560/datasheet/assets/ArduinoFeatureImage.png
+    credit: Arduino
+    license: CC BY-SA 4.0
 io:
   max_outputs: 54
   bms: 'No'

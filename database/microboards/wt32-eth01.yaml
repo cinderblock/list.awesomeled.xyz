@@ -21,7 +21,14 @@ connectivity:
   poe: N
   usb: No
 datasheet:
-  url: http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
+  url: https://img03.71360.com/w3/77q677/20240919/5d6cececc6c26c4578416e5960c038f5.pdf
+  sources:
+    - url: https://web.archive.org/web/20211019172238id_/http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
+      host: manufacturer
+      notes: V1.2 EN, Wayback Machine capture of the original wireless-tag.com file
+    - url: http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
+      host: manufacturer
+      notes: Original wireless-tag.com file (connection resets as of 2026-11)
 dead_links:
   - url: http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
     archive: https://web.archive.org/web/20211019172238/http://www.wireless-tag.com/wp-content/uploads/2020/08/WT32-ETH01%E8%A7%84%E6%A0%BC%E4%B9%A6V1.2EN%EF%BC%88%E8%8B%B1%E6%96%87%EF%BC%89.pdf
@@ -29,6 +36,10 @@ dead_links:
   - url: http://www.wireless-tag.com/portfolio/wt32-eth01/
     archive: https://web.archive.org/web/20230510114209/http://www.wireless-tag.com/portfolio/wt32-eth01/
     checked: '2026-11-18'
+images:
+  - file: wt32-eth01.webp
+    source: https://en.wireless-tag.com/product-item-2.html
+    credit: Wireless-Tag
 io:
   max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
 price: 10.93

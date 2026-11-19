@@ -12,6 +12,12 @@ connectivity:
   wifi: 2.4GHz
   ethernet: 100BASE-TX
   poe: Y
+datasheet:
+  url: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
+images:
+  - file: esp32-s3-eth.webp
+    source: https://www.waveshare.com/esp32-s3-eth.htm
+    credit: Waveshare
 io:
   storage: microSD
   max_outputs: 4 # ESP32-S3: 4 RMT TX channels

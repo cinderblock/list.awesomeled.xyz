@@ -16,6 +16,19 @@ connectivity:
     - 5GHz
   ethernet: 100BASE-TX
   usb: OTG x1, 2.0 x3
+datasheet:
+  url: https://linux-sunxi.org/images/4/4b/Allwinner_H3_Datasheet_V1.2.pdf
+  sources:
+    - url: https://wiki.friendlyelec.com/wiki/images/4/4b/Allwinner_H3_Datasheet_V1.2.pdf
+      host: community
+      notes: FriendlyELEC wiki copy of the same V1.2 file
+    - url: https://web.archive.org/web/20260502221834id_/https://linux-sunxi.org/images/4/4b/Allwinner_H3_Datasheet_V1.2.pdf
+      host: community
+      notes: Wayback Machine capture of the linux-sunxi copy
+images:
+  - file: orange-pi-pc-plus.webp
+    source: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-PC-Plus.html
+    credit: Shenzhen Xunlong Software (Orange Pi)
 io:
   storage: microSD
   bms: 'No'

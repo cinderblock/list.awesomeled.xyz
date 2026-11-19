@@ -17,6 +17,12 @@ connectivity:
   bluetooth: '4.2'
   usb: Power + UART (CP2104)
   poe: Y
+datasheet:
+  url: https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf
+images:
+  - file: ttgo-esp32-poe.webp
+    source: https://web.archive.org/web/20241212081659/https://lilygo.cc/products/t-internet-poe
+    credit: LilyGO
 io:
   max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
 price: 16.01

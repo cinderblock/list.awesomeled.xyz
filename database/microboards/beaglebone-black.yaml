@@ -22,6 +22,17 @@ connectivity:
   ethernet: 100BASE-TX
   usb: USB 2.0
   serial: true
+datasheet:
+  url: https://docs.beagleboard.org/beaglebone-black.pdf
+  sources:
+    - url: https://raw.githubusercontent.com/beagleboard/beaglebone-black/master/docs/OLD_BBB_SRM.pdf
+      host: manufacturer
+      notes: Legacy Rev C System Reference Manual from the board's design repository
+images:
+  - file: beaglebone-black.webp
+    source: https://commons.wikimedia.org/wiki/File:Beaglebone_Black_-_Top_(14491195107).jpg
+    credit: Gareth Halfacree
+    license: CC BY-SA 2.0
 io:
   max_outputs: 48
   storage: microSD

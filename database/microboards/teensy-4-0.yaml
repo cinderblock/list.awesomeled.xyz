@@ -19,6 +19,12 @@ compute:
 connectivity:
   usb: OTG
   serial: true
+datasheet:
+  url: https://www.pjrc.com/teensy/IMXRT1060CEC_rev4.pdf
+images:
+  - file: teensy-4-0.webp
+    source: https://www.pjrc.com/store/teensy40.html
+    credit: PJRC
 io:
   bms: 'No'
   imu: false

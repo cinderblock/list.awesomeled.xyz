@@ -22,6 +22,13 @@ connectivity:
   ethernet: USB
   usb: OTG
   serial: true
+datasheet:
+  url: https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf
+images:
+  - file: raspberry-pi-zero-v1-2.webp
+    source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_Zero_(23317581605).png
+    credit: Gareth Halfacree
+    license: CC BY-SA 2.0
 io:
   max_outputs: 1
   storage: microSD

@@ -19,6 +19,12 @@ connectivity:
   usb: OTG
   serial: true
   wifi: false
+datasheet:
+  url: https://www.pjrc.com/teensy/KL26P64M48SF5.pdf
+images:
+  - file: teensy-lc.webp
+    source: https://www.pjrc.com/store/teensylc.html
+    credit: PJRC
 io:
   storage: Shield
   bms: 'No'
