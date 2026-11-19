@@ -276,11 +276,3 @@ URLs are in [plans/assets-research/](plans/assets-research/).
   longer lists "Lumieo II"; rosco-diffusion redirects to Rosco's myColor app;
   the Plexiglas shop link redirects to polyvantis-shop.com; "Plaztazote" and
   "polyethelene" are misspelled.
-
-## e2e: "missing values sort last in both directions" fails on master
-
-`e2e/table.test.ts:63` (`/controllers?sort=price.`) fails in master's CI
-(run 44444691531, 2026-11-18 ~6:37 PM PST) and locally: a blank price lands
-before a priced row in descending order. Blocks every deploy (the deploy job
-needs the test job). Seen by stream 5 while verifying; not investigated —
-owner is the table (stream 7) or price data (stream 6).
