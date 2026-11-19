@@ -23,3 +23,11 @@ data:
   storage:
     - type: SD
 price: 28
+software:
+  works_with:
+    - LEDEdit
+sources:
+  software.works_with:
+    url: https://derunledlights.com/t1000s-led-controller-with-sd-card
+    retrieved: '2026-11-18'
+    notes: LEDEdit docs name this hardware

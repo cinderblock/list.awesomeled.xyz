@@ -32,3 +32,34 @@ pricing:
   price: FOSS
   demo:
     available: Open source
+related:
+  - type: host
+    ref: microboards/esp-01
+    notes: "Runs on the ESP-01 (doc: 'Not recommended for general WLED installs', 1 MB flash)"
+    source:
+      url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/esp32-poe
+    notes: Olimex ESP32-POE; also a built-in 'ESP32-POE' Ethernet type in WLED's Wi-Fi settings
+    source:
+      url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/wt32-eth01
+    notes: WT32-ETH01; also a built-in 'WT32-ETH01' Ethernet type in WLED's Wi-Fi settings
+    source:
+      url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/esp-32s
+    notes: NodeMCU-32S dev board; matched to the database's 'ESP-32S' (creator NodeMCU) by name, check before applying
+    source:
+      url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+  - type: related
+    ref: drive-libraries/wled
+    notes: "Same project: drive-libraries/wled's links.repo points at the same WLED repository"
+    source:
+      url: https://github.com/wled/WLED
+      retrieved: '2026-11-18'

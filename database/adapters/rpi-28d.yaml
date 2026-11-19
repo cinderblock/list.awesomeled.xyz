@@ -12,3 +12,17 @@ links:
   product: http://www.hansonelectronics.com.au/product/rpi-28d/
 parent: Raspberry Pi
 price: 21.85
+software:
+  firmware:
+    - FPP
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
+    retrieved: '2026-11-18'
+    notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/pi/rPi-28D-eeprom.bin'
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/hanson.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)

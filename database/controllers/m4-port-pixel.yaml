@@ -35,3 +35,10 @@ price: 35
 software:
   firmware:
     - FPP
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/microcyb.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — duplicate DB entry of the M4-PI

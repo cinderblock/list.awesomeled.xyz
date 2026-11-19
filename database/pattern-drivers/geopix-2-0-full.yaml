@@ -25,5 +25,18 @@ pricing:
   price: Free - $2200
   demo:
     available: Open Source
+related:
+  - type: predecessor
+    ref: pattern-drivers/geopix0-9
+    notes: GeoPix version 2 follows the GeoPix 0.9 beta (and a 1.0 release) by the same maker, Enviral Design
+    source:
+      url: https://github.com/EnviralDesign/GeoPix/wiki
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: pattern-drivers/touchdesigner
+    notes: Made with TouchDesigner; the launcher installs a local TouchDesigner if none is found
+    source:
+      url: https://github.com/EnviralDesign/GeoPix
+      retrieved: '2026-11-18'
 technical_notes:
   - Paid tiers at $200, $500 and $2200

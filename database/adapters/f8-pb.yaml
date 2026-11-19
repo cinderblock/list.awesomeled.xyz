@@ -15,3 +15,11 @@ links:
   product: https://kulplights.com/product/f8-pb/
 parent: BeagleBone
 price: 81
+software:
+  firmware:
+    - FPP
+sources:
+  software.firmware:
+    url: https://github.com/FalconChristmas/fpp/tree/master/capes/pb
+    retrieved: '2026-11-18'
+    notes: Falcon Player (FPP) names this cape/board — filename in FPP's capes/pb (PocketBeagle) folder

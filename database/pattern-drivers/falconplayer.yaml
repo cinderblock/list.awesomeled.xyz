@@ -14,6 +14,10 @@ outputs:
   gpio: Both
   serial: Output
   other: Pixelnet, Renard, UDP, HTTP, MQTT
+aliases:
+  - FPP
+  - Falcon Player
+  - Falcon Pi Player
 capabilities:
   live: true
   designer: false
@@ -30,3 +34,81 @@ platforms:
     - BeagleBone
 pricing:
   price: FOSS
+related:
+  - type: host
+    ref: microboards/raspberry-pi-1-model-a
+    notes: Pi 1 (32-bit image 'compatible with every Pi model including Pi 1 / Zero')
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/SD/README.RaspberryPi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-1-model-b
+    notes: Pi 1 (32-bit image 'compatible with every Pi model including Pi 1 / Zero')
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/SD/README.RaspberryPi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b
+    notes: Raspberry Pi 2
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b-v1-2
+    notes: Raspberry Pi 2
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3-model-a
+    notes: Raspberry Pi 3 family
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3-model-b
+    notes: Raspberry Pi 3 family
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Raspberry Pi 4
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-2
+    notes: Raspberry Pi Zero
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-3
+    notes: Raspberry Pi Zero
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-w
+    notes: Raspberry Pi Zero
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: BeagleBone Black (FPP image built for am335x BeagleBone)
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/pocketbeagle
+    notes: PocketBeagle (FPP ships PocketBeagle cape EEPROMs in capes/pb)
+    source:
+      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+      retrieved: '2026-11-18'
+sources:
+  aliases:
+    url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme title '# FPP - Falcon Player'. The spelled-out original name 'Falcon Pi Player' appears in the 2013 launch thread 'Introducing the free Falcon Pi Player (FPP)' (https://www.auschristmaslighting.com/threads/introducing-the-free-falcon-pi-player-fpp.4115/, forum).

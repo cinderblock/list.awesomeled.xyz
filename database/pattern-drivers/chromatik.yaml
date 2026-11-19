@@ -27,3 +27,10 @@ pricing:
   price: Free - $399
   demo:
     available: <1000 LEDs free, various paid options
+related:
+  - type: predecessor
+    ref: pattern-drivers/lx-studio-chromatik
+    notes: Chromatik is the renamed successor of LX Studio (same LX engine, new UI)
+    source:
+      url: https://github.com/heronarts/Chromatik
+      retrieved: '2026-11-18'

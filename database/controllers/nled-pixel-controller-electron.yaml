@@ -30,3 +30,11 @@ features:
   - 3-axis accelerometer
   - Optional WiFi/Bluetooth add-on modules
 price: 30
+software:
+  works_with:
+    - AllPixMatrix
+sources:
+  software.works_with:
+    url: https://github.com/NLED/allpixmatrix
+    retrieved: '2026-11-18'
+    notes: AllPixMatrix docs name this hardware

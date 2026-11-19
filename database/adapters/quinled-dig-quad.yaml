@@ -14,3 +14,17 @@ links:
   product: https://quinled.info/quinled-dig-quad/
 parent: ESP8266 or ESP32
 price: 37.5
+software:
+  firmware:
+    - WLED
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+    retrieved: '2026-11-18'
+    notes: 'WLED docs: compatible controllers — duplicate entry of the same board under adapters/'
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — duplicate DB entry of the same board

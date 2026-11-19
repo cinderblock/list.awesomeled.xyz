@@ -52,6 +52,14 @@ price:
   - name: 4096 pixels
     price: 1250
     pixels: 4096
+software:
+  works_with:
+    - LED Strip Studio Software
+sources:
+  software.works_with:
+    url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+    retrieved: '2026-11-18'
+    notes: LED Strip Studio Software docs name this hardware — abbreviation match, see field notes
 technical_notes:
   - 4096 digital RGB LEDs or 3072 RGBW LEDs total; available in 1024/2048/4096 pixel versions
   - Art-Net up to 24 universes; LED Strip Studio software lifetime license included

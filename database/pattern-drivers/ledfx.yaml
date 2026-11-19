@@ -1,8 +1,7 @@
 name: LedFx
 status: active
 creator: Yeon V, M Bowley, community
-notes: Python based. A programming environment to sync musical effects across a
-  network of LED pixel controllers
+notes: Python based. A programming environment to sync musical effects across a network of LED pixel controllers
 inputs:
   other: Audio
 outputs:
@@ -26,3 +25,10 @@ pricing:
   price: FOSS
   demo:
     available: Open Source
+related:
+  - type: related
+    ref: pattern-drivers/wled
+    notes: LedFx streams audio-reactive effects to WLED devices (its reference setup)
+    source:
+      url: https://github.com/LedFx/LedFx
+      retrieved: '2026-11-18'

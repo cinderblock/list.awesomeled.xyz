@@ -14,3 +14,17 @@ links:
   product: https://www.amazon.com/ESPixelStick-Wireless-DMX-Pixel-Controller/dp/B072XT1V77/
 parent: ESP8266
 price: 30
+software:
+  firmware:
+    - WLED
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+    retrieved: '2026-11-18'
+    notes: "WLED docs: compatible controllers — section 'Controllers WLED can be installed to' (v3 hardware)"
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/espixelstick.xcontroller
+    retrieved: '2026-11-18'
+    notes: 'xLights controller definition (config upload supported) — ESPixelStick firmware V3/V4 (vendor ''ForkInEye''); also V3: <Controller Name="ESPixelStickV3">'

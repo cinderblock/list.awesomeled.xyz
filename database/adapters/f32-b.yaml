@@ -16,3 +16,17 @@ links:
   product: https://kulplights.com/product/f32-b/
 parent: BeagleBone
 price: 95
+software:
+  firmware:
+    - FPP
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
+    retrieved: '2026-11-18'
+    notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/bbb/F32-B-eeprom.bin'
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)

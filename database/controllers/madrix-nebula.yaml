@@ -31,3 +31,11 @@ features:
   - TTL pixel-data output (12x 512 channels across two ports)
   - Powers LEDs directly through screw terminals (6A max per port)
 price: 350
+software:
+  works_with:
+    - MADRIX
+sources:
+  software.works_with:
+    url: https://www.madrix.com/products/software
+    retrieved: '2026-11-18'
+    notes: MADRIX docs name this hardware

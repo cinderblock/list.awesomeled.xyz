@@ -31,5 +31,12 @@ price: 130 # board-only per kulplights.com
 software:
   firmware:
     - FPP
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 technical_notes:
   - Up to 80000 pixels total across all outputs

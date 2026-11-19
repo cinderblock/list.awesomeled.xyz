@@ -29,3 +29,11 @@ data:
 features:
   - Power over Ethernet (PoE)
 price: 189
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/experience.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)

@@ -29,3 +29,11 @@ data:
   storage:
     - type: uSD
 price: 221
+software:
+  works_with:
+    - ProtoPixel Create
+sources:
+  software.works_with:
+    url: http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing
+    retrieved: '2026-11-18'
+    notes: ProtoPixel Create docs name this hardware

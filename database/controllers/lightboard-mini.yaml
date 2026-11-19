@@ -20,3 +20,12 @@ power:
   voltage:
     max: 5
 price: 40
+software:
+  works_with:
+    - LightDesigner
+    - LightMobile
+sources:
+  software.works_with:
+    url: http://web.archive.org/web/20191119161838/https://rocketlife.com/technology/
+    retrieved: '2026-11-18'
+    notes: LightDesigner docs name this hardware

@@ -39,5 +39,16 @@ price: 130
 software:
   firmware:
     - FPP
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/FalconChristmas/fpp/blob/master/www/api/controllers/cape.php
+    retrieved: '2026-11-18'
+    notes: Falcon Player (FPP) names this cape/board — Example response in FPP's /api/cape docs (vendor Kulp Lights)
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — K16 controller, variants 'K16A-B 1.x' and 'K16A-B 2.x/3.x'
 technical_notes:
   - Two RS485 outputs support DMX / PixelNet / Renard / LOR

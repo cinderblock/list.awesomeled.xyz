@@ -41,6 +41,13 @@ price: 80 # board-only; vendor lists $80-$165 depending on BeagleBone/SD options
 software:
   firmware:
     - FPP
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — variant of <Controller Name="K8">
 technical_notes:
   - 8 local ports drive 800 pixels each at 40FPS (1500 at 20FPS)
   - 12 channels require differential receivers

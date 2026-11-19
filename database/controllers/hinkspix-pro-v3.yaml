@@ -26,6 +26,14 @@ price_source:
   notes: main site blocks bots
   retrieved: '2026-07-03'
   vendor: HolidayCoro (eBay listing)
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/hinkspix.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 technical_notes:
   - Flex CPU supports 0/16/32/48 onboard pixel ports and 0/4/8/12 long-range receiver outputs
   - Up to roughly 16,320 pixels per CPU; larger assembled systems reach ~32,640

@@ -12,6 +12,9 @@ outputs:
     sacn: true
     dmx: Both
   other: MIDI
+aliases:
+  - Resolume Arena
+  - Resolume Avenue
 capabilities:
   live: true
   designer: true
@@ -36,6 +39,11 @@ pricing:
   demo:
     available: true
     limitations: Watermark on output
+sources:
+  aliases:
+    url: https://resolume.com/software
+    retrieved: '2026-11-18'
+    notes: The two editions the entry's price tiers describe.
 technical_notes:
   - Primary use is VJ software with LED control as additional feature
   - Arena version includes advanced mapping for LED installations

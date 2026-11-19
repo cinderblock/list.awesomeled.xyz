@@ -29,3 +29,11 @@ power:
   current:
     max: 64
 price: 180
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/sandevices.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)

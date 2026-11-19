@@ -30,5 +30,13 @@ power:
   current:
     max: 30
 price: 339.95
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 technical_notes:
   - Pixel counting test pattern in firmware is useful for mapping large installations

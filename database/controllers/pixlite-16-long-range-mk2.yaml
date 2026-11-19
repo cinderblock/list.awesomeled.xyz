@@ -33,3 +33,11 @@ related:
   - type: variant
     ref: controllers/pixlite-16-mk2-control-board
     notes: Long-range (differential receiver) version
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)

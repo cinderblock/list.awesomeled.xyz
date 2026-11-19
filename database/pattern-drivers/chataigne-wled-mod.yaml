@@ -2,6 +2,9 @@ name: Chataigne Wled Mod
 status: active
 creator: Zak-45
 notes: Plug-in for control of WLED, other WLED plugins from same developer on GitHub
+aliases:
+  - WLED-Chataigne-Module
+  - WLED Module for Chataigne
 capabilities:
   live: true
 license: GPL-3.0
@@ -18,3 +21,21 @@ pricing:
   price: Free
   demo:
     available: Free
+related:
+  - type: host
+    ref: pattern-drivers/chataigne
+    notes: Community module that runs inside Chataigne (needs Chataigne 1.9.25+)
+    source:
+      url: https://github.com/zak-45/WLED-Chataigne-Module
+      retrieved: '2026-11-18'
+  - type: related
+    ref: pattern-drivers/wled
+    notes: Controls WLED devices over the WLED HTTP/JSON API and UDP sync
+    source:
+      url: https://github.com/zak-45/WLED-Chataigne-Module
+      retrieved: '2026-11-18'
+sources:
+  aliases:
+    url: https://github.com/zak-45/WLED-Chataigne-Module
+    retrieved: '2026-11-18'
+    notes: Readme title; repository name is WLED-Chataigne-Module.

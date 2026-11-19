@@ -26,3 +26,10 @@ pricing:
   price: 39
   demo:
     available: w/PixelBlaze purchase
+related:
+  - type: related
+    ref: controllers/pixelblaze-v3
+    notes: The Pixelblaze software and its browser editor run on the Pixelblaze V3 controller
+    source:
+      url: https://electromage.com/pixelblaze
+      retrieved: '2026-11-18'

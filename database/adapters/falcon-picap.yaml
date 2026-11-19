@@ -10,3 +10,17 @@ links:
   product: https://www.pixelcontroller.com/store/index.php?id_product=47
 parent: Raspberry Pi
 price: 35
+software:
+  firmware:
+    - FPP
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/FalconChristmas/fpp/blob/master/www/help/warning-helpers/warning-13.md
+    retrieved: '2026-11-18'
+    notes: Falcon Player (FPP) names this cape/board
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — xLights model is 'PiCap V2' (FPP-hosted)

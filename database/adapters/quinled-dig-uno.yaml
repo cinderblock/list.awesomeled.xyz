@@ -9,3 +9,17 @@ diy_or_ots: DIY
 links:
   product: https://quinled.info/2018/10/12/quinled-dig-uno-hardware-guide/#quinled-quad-pcb-boards
 parent: Wemos Dx Mini (ESP32/ESP8266)
+software:
+  firmware:
+    - WLED
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+    retrieved: '2026-11-18'
+    notes: 'WLED docs: compatible controllers — duplicate entry of the same board under adapters/'
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — duplicate DB entry of the same board

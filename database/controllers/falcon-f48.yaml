@@ -41,3 +41,11 @@ related:
   - type: related
     ref: controllers/falcon-f16v4
     notes: Falcon family sibling; all-differential outputs
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — xLights also has separate F48V4 and F48V5 models; DB entry is the original F48

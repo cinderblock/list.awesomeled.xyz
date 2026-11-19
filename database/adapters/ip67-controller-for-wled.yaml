@@ -16,3 +16,11 @@ diy_or_ots: DIY
 links:
   product: https://github.com/srg74/Controller-for-WLED-firmware
 parent: ESP-07S module
+software:
+  firmware:
+    - WLED
+sources:
+  software.firmware:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+    retrieved: '2026-11-18'
+    notes: 'WLED docs: compatible controllers — same repository URL as the database entry'

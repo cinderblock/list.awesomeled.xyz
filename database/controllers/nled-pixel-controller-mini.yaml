@@ -22,3 +22,11 @@ power:
   voltage:
     max: 25
 price: 13.5
+software:
+  works_with:
+    - AllPixMatrix
+sources:
+  software.works_with:
+    url: https://github.com/NLED/allpixmatrix
+    retrieved: '2026-11-18'
+    notes: AllPixMatrix docs name this hardware

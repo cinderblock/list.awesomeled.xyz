@@ -18,3 +18,10 @@ platforms:
     - Android
 pricing:
   price: Free
+related:
+  - type: related
+    ref: pattern-drivers/lightdesigner
+    notes: Mobile companion app of the RocketLife Light system
+    source:
+      url: https://apps.microsoft.com/detail/9nwk9dkv7dfl
+      retrieved: '2026-11-18'

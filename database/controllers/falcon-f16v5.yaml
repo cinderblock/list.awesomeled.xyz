@@ -41,6 +41,14 @@ price: 280
 related:
   - type: predecessor
     ref: controllers/falcon-f16v4
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 technical_notes:
   - 192 universes of E1.31 / Art-Net plus DDP
   - 1024 pixels per output; supports 70+ pixel IC types

@@ -10,3 +10,11 @@ diy_or_ots: DIY
 links:
   product: http://spixels.org/
 parent: Raspberry Pi
+software:
+  firmware:
+    - FPP
+sources:
+  software.firmware:
+    url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
+    retrieved: '2026-11-18'
+    notes: "Falcon Player (FPP) names this cape/board — FPP bundles Henner Zeller's spixels library (.gitmodules: URL = https://github.com/hzeller/spixels.git) and ships capes/pi/spixels-eeprom.bin"

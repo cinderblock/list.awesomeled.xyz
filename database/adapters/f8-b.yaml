@@ -16,3 +16,17 @@ links:
   product: https://kulplights.com/product/f8-b/
 parent: BeagleBone
 price: 51
+software:
+  firmware:
+    - FPP
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
+    retrieved: '2026-11-18'
+    notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/bbb/F8-B-eeprom.bin (also F8-Bv2-eeprom.bin)'
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)

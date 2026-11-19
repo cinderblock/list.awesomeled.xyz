@@ -7,6 +7,9 @@ outputs:
     sacn: Output
     dmx: Output
   other: Renard
+aliases:
+  - Vixen 3
+  - Vixen
 capabilities:
   live: false
   designer: true
@@ -17,3 +20,8 @@ platforms:
     - Windows
 pricing:
   price: Free
+sources:
+  aliases:
+    url: https://github.com/VixenLights/Vixen
+    retrieved: '2026-11-18'
+    notes: Readme; the program itself is called 'Vixen' ('Vixen is a full featured sequencer for producing animated light shows').

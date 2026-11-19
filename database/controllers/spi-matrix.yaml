@@ -47,5 +47,13 @@ price:
   - name: 4096 pixels
     price: 599
     pixels: 4096
+software:
+  works_with:
+    - LED Strip Studio Software
+sources:
+  software.works_with:
+    url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+    retrieved: '2026-11-18'
+    notes: LED Strip Studio Software docs name this hardware
 technical_notes:
   - One year of LED Strip Studio software license included

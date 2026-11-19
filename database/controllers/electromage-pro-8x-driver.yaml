@@ -27,3 +27,11 @@ power:
   current:
     max: 15
 price: 49
+software:
+  works_with:
+    - Pixelblaze
+sources:
+  software.works_with:
+    url: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
+    retrieved: '2026-11-18'
+    notes: Pixelblaze docs name this hardware

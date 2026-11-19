@@ -32,3 +32,11 @@ related:
   - type: replacement
     ref: controllers/wb48
     notes: Wally's current controller offering (mounts for the WB1616 are still sold)
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)

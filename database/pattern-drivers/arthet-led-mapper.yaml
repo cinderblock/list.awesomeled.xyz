@@ -5,6 +5,8 @@ notes: input video from connected devices (webcams, capture cards etc) or over N
 outputs:
   protocols:
     artnet: Output
+aliases:
+  - artnet_led_mapper
 capabilities:
   live: false
   designer: true
@@ -16,3 +18,8 @@ platforms:
   notes: arm64 builds too
 pricing:
   price: Free
+sources:
+  aliases:
+    url: https://github.com/cyberboy666/artnet_led_mapper
+    retrieved: '2026-11-18'
+    notes: Readme title. The entry's notes ('input video from connected devices ... over NDI, output artnet across multiple universes') match this README's feature list word for word.

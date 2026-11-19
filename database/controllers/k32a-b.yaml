@@ -42,3 +42,10 @@ price: 150 # board-only; was $195
 software:
   firmware:
     - FPP
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — variant of <Controller Name="K32">

@@ -13,6 +13,8 @@ outputs:
     dmx: Both
     kinet: Output
   other: NDI, DVI
+aliases:
+  - ENTTEC LED Mapper
 capabilities:
   live: true
   designer: true
@@ -30,3 +32,15 @@ pricing:
   price: £70
   demo:
     available: Nag for free one
+related:
+  - type: related
+    ref: pattern-drivers/lightjams
+    notes: Built for ENTTEC by the Lightjams developer, Mathieu Jacques
+    source:
+      url: https://plsn.com/newsroom/product-news/mapping-the-pixel-forest-enttec-branches-out-into-pixel-mapping-with-elm
+      retrieved: '2026-11-18'
+sources:
+  aliases:
+    url: https://www.enttec.com/story/introducing-elm-2026/
+    retrieved: '2026-11-18'
+    notes: ENTTEC's ELM 2026 announcement; ELM is the short form.

@@ -15,3 +15,14 @@ price: 51
 software:
   firmware:
     - FPP
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/FalconChristmas/fpp/blob/master/capes/pb/panels/PocketScroller.json
+    retrieved: '2026-11-18'
+    notes: Falcon Player (FPP) names this cape/board — FPP names it just 'PocketScroller' (no version); EEPROM capes/pb/PocketScroller-eeprom.bin
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported) — xLights names it 'PocketScroller' (no version)

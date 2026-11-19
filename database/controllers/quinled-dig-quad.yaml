@@ -32,4 +32,15 @@ price: 37.5
 software:
   firmware:
     - WLED
+  works_with:
+    - xLights
+sources:
+  software.firmware:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+    retrieved: '2026-11-18'
+    notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 wled_compatible: true

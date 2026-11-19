@@ -45,3 +45,11 @@ price_source:
   notes: OEM board, ex VAT; full kit EUR 230
   retrieved: '2026-07-03'
   vendor: ledstripstudio.com
+software:
+  works_with:
+    - LED Strip Studio Software
+sources:
+  software.works_with:
+    url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+    retrieved: '2026-11-18'
+    notes: LED Strip Studio Software docs name this hardware

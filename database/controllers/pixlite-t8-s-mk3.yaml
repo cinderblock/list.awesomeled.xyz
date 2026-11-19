@@ -33,5 +33,13 @@ price: 1200
 related:
   - type: predecessor
     ref: controllers/pixlite-t8-s-mk2
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 technical_notes:
   - Standalone playback via Advatek's SHOWTime

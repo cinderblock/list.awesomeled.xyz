@@ -15,6 +15,8 @@ outputs:
     kinet: true
   gpio: false
   other: DVI, Robe, Insta, Hue
+aliases:
+  - MADRIX
 capabilities:
   live: true
   designer: true
@@ -44,6 +46,11 @@ pricing:
   demo:
     available: true
     limitations: Demo mode - no data output
+sources:
+  aliases:
+    url: https://www.madrix.com/products/software
+    retrieved: '2026-11-18'
+    notes: Page title; the brand name is commonly used for the software.
 technical_notes:
   - Industry standard for professional LED installations
   - GPIO requires separate Madrix Orion hardware

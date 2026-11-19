@@ -9,6 +9,8 @@ outputs:
   protocols:
     artnet: Output
   other: Tuya, Govee,Hue, Nano, etc home automation and ArtNet
+aliases:
+  - Lumia Stream
 capabilities:
   live: false
   designer: false
@@ -23,3 +25,8 @@ pricing:
   price: Free- $30/month
   demo:
     available: Free / premium Monthly
+sources:
+  aliases:
+    url: https://lumiastream.com/
+    retrieved: '2026-11-18'
+    notes: The product writes its name as two words.

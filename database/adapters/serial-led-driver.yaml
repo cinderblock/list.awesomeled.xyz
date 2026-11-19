@@ -15,3 +15,11 @@ other_links:
   - https://electromage.com/docs/output-expander
 parent: Any UART / Serial
 price: 15
+software:
+  works_with:
+    - Pixelblaze
+sources:
+  software.works_with:
+    url: https://www.tindie.com/products/electromage/electromage-serial-to-8x-ws2812apa102-driver/
+    retrieved: '2026-11-18'
+    notes: Pixelblaze docs name this hardware

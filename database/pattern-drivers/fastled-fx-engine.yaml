@@ -1,6 +1,8 @@
 name: FastLED "FX" engine
 status: unknown
 creator: Zach Vorhies
+aliases:
+  - FxEngine
 capabilities:
   live: false
   designer: true
@@ -16,3 +18,15 @@ platforms:
     - RP2040
 pricing:
   price: Free
+related:
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: The FX engine ships inside the FastLED library (src/fl/fx) and renders through it
+    source:
+      url: https://github.com/FastLED/FastLED/blob/master/src/fl/fx/fx_engine.h
+      retrieved: '2026-11-18'
+sources:
+  aliases:
+    url: https://github.com/FastLED/FastLED/blob/master/src/fl/fx/fx_engine.h
+    retrieved: '2026-11-18'
+    notes: "Class name used in FastLED's docs and examples (examples/Fx/FxEngine/FxEngine.ino: 'Demonstrates FxEngine for switching between effects')."

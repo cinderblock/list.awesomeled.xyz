@@ -10,6 +10,8 @@ outputs:
     sacn: Output
     dmx: Output
   other: LOR, DDP
+aliases:
+  - xLights/Nutcracker
 capabilities:
   live: false
   designer: true
@@ -23,3 +25,8 @@ platforms:
     - Linux
 pricing:
   price: Free
+sources:
+  aliases:
+    url: https://manual.xlights.org/xlights/chapters/untitled/history
+    retrieved: '2026-11-18'
+    notes: Former product name, e.g. figure captions 'xLights/Nutcracker 4.0 GUI'; Nutcracker (Sean Meighan's web sequencer) was merged into xLights in 2013 ('made Nutcracker a part of xLights').

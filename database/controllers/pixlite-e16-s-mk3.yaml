@@ -37,5 +37,13 @@ related:
   - type: related
     ref: controllers/pixlite-16-mk2-control-board
     notes: Mk3 counterpart of the PixLite 16 Mk2
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 technical_notes:
   - Standalone playback via Advatek's SHOWTime

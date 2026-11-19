@@ -29,3 +29,11 @@ images:
     source: https://pixelcontroller.com/store/products/70-f16v4.html
     credit: PixelController, LLC
 price: 275
+software:
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)

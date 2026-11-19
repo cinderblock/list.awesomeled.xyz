@@ -36,5 +36,12 @@ price: 159
 software:
   firmware:
     - FPP
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 technical_notes:
   - Up to 800 pixels per port at 40 fps, 1400 per port at 20 fps

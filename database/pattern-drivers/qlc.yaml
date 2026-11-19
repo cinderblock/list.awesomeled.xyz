@@ -14,6 +14,9 @@ outputs:
   serial: Output
   other: USB, OSC
   serial_notes: Raspberry Pi version only; also SPI
+aliases:
+  - Q Light Controller+
+  - Q Light Controller Plus
 capabilities:
   live: true
   designer: true
@@ -38,3 +41,27 @@ pricing:
   tiers:
     - tier: Raspberry Pi build
       price: €15 donation
+related:
+  - type: host
+    ref: microboards/raspberry-pi-3-model-a
+    notes: Raspberry Pi 3 family (64-bit QLC+ Pi image)
+    source:
+      url: https://www.qlcplus.org/discover/raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3-model-b
+    notes: Raspberry Pi 3 family (64-bit QLC+ Pi image)
+    source:
+      url: https://www.qlcplus.org/discover/raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Raspberry Pi 4 (64-bit QLC+ Pi image)
+    source:
+      url: https://www.qlcplus.org/discover/raspberry-pi
+      retrieved: '2026-11-18'
+sources:
+  aliases:
+    url: https://github.com/mcallegari/qlcplus
+    retrieved: '2026-11-18'
+    notes: Readme heading; the repository description says 'Q Light Controller Plus (QLC+)'.

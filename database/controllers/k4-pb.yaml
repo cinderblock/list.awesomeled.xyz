@@ -39,6 +39,13 @@ price: 70
 software:
   firmware:
     - FPP
+  works_with:
+    - xLights
+sources:
+  software.works_with:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
+    retrieved: '2026-11-18'
+    notes: xLights controller definition (config upload supported)
 technical_notes:
   - 4 eFused ports, each driving 800+ pixels at 40FPS
   - 3-pin UART header for one DMX universe or PixelNet/Renard/LOR
