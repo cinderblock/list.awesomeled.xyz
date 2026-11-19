@@ -2,7 +2,7 @@ name: NS8808
 status: active
 release_year: 2018
 creator: Newstar LED Co.
-notes: Similar to ws2815, but UCS1903 protocol
+notes: Same protocol as WS2815 and sold as its drop-in replacement (12 V, dual signal).
 color:
   order: RGB
   brightness_bits: 8

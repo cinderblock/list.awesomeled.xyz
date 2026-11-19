@@ -6,7 +6,7 @@ data:
   clocked: false
   bitrate: 800kHz
   pixel_size_bits: 24
-  backup_line: false
+  backup_line: true
   type: WS2811/12
 datasheet:
   url: https://www.normandled.com/upload/201807/SK6813%20LED%20Datasheet.pdf
@@ -22,3 +22,7 @@ sources:
     url: https://www.superlightingled.com/PDF/SPEC/SK6813-Datasheet.pdf
     retrieved: '2026-11-18'
     notes: "SK6813 specification Rev. No. 01 (2018-04-28), reseller-hosted copy of the Normand/Opsco sheet: product overview, '15."
+  data.backup_line:
+    url: https://www.superlightingled.com/PDF/SPEC/SK6813-Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: pin 6 'BIN Backup Data Input'

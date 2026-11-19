@@ -6,7 +6,7 @@ manufacturers:
 aliases:
   - WS2815B-RGBW
 color:
-  order: RGBW
+  order: GRBW
 data:
   clocked: false
   type: 4chWS2811/12
@@ -30,3 +30,7 @@ sources:
     url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
     retrieved: '2026-11-18'
     notes: WorldSemi's part number (datasheet title).
+  color.order:
+    url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
+    retrieved: '2026-11-18'
+    notes: 32-bit data structure G7…G0 R7…R0 B7…B0 W7…W0

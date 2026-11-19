@@ -6,7 +6,7 @@ data:
   clocked: false
   bitrate: 800kHz
   pixel_size_bits: 24
-  backup_line: false
+  backup_line: true
   type: WS2811/12
 datasheet:
   url: https://www.normandled.com/upload/201907/12V%20SK6813%20LED%20Datasheet.pdf
@@ -41,3 +41,7 @@ sources:
     url: https://www.lcsc.com/datasheet/C5378733.pdf
     retrieved: '2026-11-18'
     notes: Opsco SK6813HV-09-6P-001 specification Rev.
+  data.backup_line:
+    url: https://ge.voron.ua/files/pdf/Addressed_LEDs/12V_SK6813_LED_Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'DIN 2 ... Standby control signal input data'"

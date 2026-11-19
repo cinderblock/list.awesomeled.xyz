@@ -3,6 +3,9 @@ status: active
 creator:
   name: Newstar LED Co.
   page: http://www.newstar-ledstrip.com/productshow851.html
+vendors:
+  - name: Newstar LED Co.
+    page: http://www.newstar-ledstrip.com/productshow851.html
 notes: Higher PWM version of SK9822
 color:
   pwm_frequency: 27.0kHz
@@ -51,3 +54,7 @@ sources:
     url: https://web.archive.org/web/20240527134816/https://www.rose-lighting.com/wp-content/uploads/sites/53/2020/05/SK9822-A-REV.01-EN-5050-RGB-27K-HZ-PWM-30M-bps-speed.pdf
     retrieved: '2026-11-18'
     notes: SK9822-A specification Rev. No. 01 (2019-12-26), hosted by Rose Lighting (Wayback).
+  creator:
+    url: https://web.archive.org/web/20240527134816/https://www.rose-lighting.com/wp-content/uploads/sites/53/2020/05/SK9822-A-REV.01-EN-5050-RGB-27K-HZ-PWM-30M-bps-speed.pdf
+    retrieved: '2026-11-18'
+    notes: datasheet is Opsco's ('making OPSCO's customers and users…')

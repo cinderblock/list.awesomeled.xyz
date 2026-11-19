@@ -4,7 +4,7 @@ release_year: 2019
 creator: Rose Lighting
 notes: APA107 Competitor/clone
 color:
-  order: RGB
+  order: BGR
   brightness_bits: 8+5
   brightness_method: global
   brightness_method_notes: Global 5-bit brightness control
@@ -60,6 +60,10 @@ sources:
     url: https://www.rose-lighting.com/products/fastest-digital-addressable-rgb-5050led-chip-hd107s/
     retrieved: '2026-11-18'
     notes: Rose Lighting lists the HD107S 5050 chip, marked in stock (no price shown)
+  color.order:
+    url: https://web.archive.org/web/20220216171018/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+    retrieved: '2026-11-18'
+    notes: "'00000000 00000000 11111111' is the output of full red"
 technical_notes:
   - High-speed 40MHz data rate - faster than APA102's 30MHz
   - 27kHz PWM frequency for flicker-free video

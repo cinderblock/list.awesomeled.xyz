@@ -27,9 +27,6 @@ physical:
     - '5050'
     - '3535'
   pin_count: 6
-related:
-  - type: variant
-    ref: pixels/sk9822
 sources:
   data.type:
     url: https://web.archive.org/web/20200925071204/http://newstar-ledstrip.com/product/20190927165451294.pdf
