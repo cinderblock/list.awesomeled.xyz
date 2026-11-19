@@ -37,8 +37,8 @@ physical:
   pin_count: 6
 related:
   - type: variant
-    ref: pixels/ns108
-    notes: 'Newstar: economy (4 kHz PWM) version of NS108.'
+    ref: pixels/hd108
+    notes: 'Newstar: economy (4 kHz PWM) version of NS108 (HD108).'
     source:
       url: https://web.archive.org/web/20220128020039/http://newstar-ledstrip.com/productshow848.html
       retrieved: '2026-11-18'
