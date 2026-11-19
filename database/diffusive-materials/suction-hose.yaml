@@ -2,6 +2,10 @@ name: Suction Hose
 notes: Multiple diameters, clear and colours, heavier duty and more expensive than dryer hose
 form:
   - tube
+images:
+  - file: suction-hose.webp
+    source: http://hose-products.com/suction-hose.html
+    credit: Tigerflex (hose-products.com)
 links:
   product: http://hose-products.com/suction-hose.html
 materials:

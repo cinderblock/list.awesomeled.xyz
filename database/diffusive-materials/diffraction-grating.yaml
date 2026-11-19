@@ -3,6 +3,10 @@ creator: Edmund Optics
 notes: 'Cool, but probably not a good option. Edmund Optics #40-267: holographic grating, 25,400 grooves per inch, on clear polyester film, 6 x 12 in sheets.'
 form:
   - film
+images:
+  - file: diffraction-grating.webp
+    source: https://www.edmundoptics.com/p/25400-linesinch-6quot-x-12quot-sheets-2pack/4621/
+    credit: Edmund Optics
 links:
   product: https://www.edmundoptics.com/p/25400-linesinch-6quot-x-12quot-sheets-2pack/4621?gclid=CjwKCAjwgdX4BRB_EiwAg8O8HWjw1QGEzk6K58RKoEc3b26oilbvFs6GMut1InyfgzmqdJbvjyPs9BoC58gQAvD_BwE
 materials:

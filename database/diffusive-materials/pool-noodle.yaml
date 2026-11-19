@@ -2,6 +2,11 @@ name: Pool Noodle
 notes: See also Plastazote and Foam Backer Rod
 form:
   - foam
+images:
+  - file: pool-noodle.webp
+    source: https://commons.wikimedia.org/wiki/File:Pool_Noodles_(9733355071).jpg
+    credit: Emma Craig
+    license: CC BY 2.0
 links:
   product: https://www.amazon.com/Oodles-Noodles-Deluxe-Foam-Pool/dp/B01LZ8FAHO?th=1
 materials:

@@ -2,6 +2,11 @@ name: Hot Melt Glue
 notes: Shorter working time than silicone similar applications
 form:
   - liquid
+images:
+  - file: hot-melt-glue.webp
+    source: https://commons.wikimedia.org/wiki/File:Hot_glue_gun_pro.jpg
+    credit: ASDFS
+    license: CC BY-SA 4.0
 links:
   product: https://www.gluegunsdirect.com/service-and-advice/hot-melt-adhesive/
 materials:

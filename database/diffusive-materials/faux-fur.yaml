@@ -2,6 +2,11 @@ name: Faux Fur
 notes: White long pile faux fur
 form:
   - fabric
+images:
+  - file: faux-fur.webp
+    source: https://commons.wikimedia.org/wiki/File:White_fake_fur_blanket.jpg
+    credit: Sydney Blackburn
+    license: CC BY 2.0
 links:
   product: https://en.wikipedia.org/wiki/Fake_fur
 materials:

@@ -3,6 +3,10 @@ creator: Rosco
 notes: Rosco theatrical diffusion
 form:
   - film
+images:
+  - file: rosco-diffusion.webp
+    source: https://ca.rosco.com/en/product/cinegel
+    credit: Rosco
 links:
   product: https://emea.rosco.com/en/products/catalog/filters-diffusions
 materials:

@@ -2,6 +2,11 @@ name: PEX Pipe
 notes: Christmas light leaping arches, linear 360 diffusion
 form:
   - tube
+images:
+  - file: pex-pipe.webp
+    source: https://commons.wikimedia.org/wiki/File:PEX_piping_bending_in_a_basement.jpg
+    credit: Tomwsulcer
+    license: CC BY-SA 3.0
 links:
   product: https://www.homedepot.com/b/Plumbing-Pipe-Fittings-Pipe-PEX-Pipe/N-5yc1vZ1z18i33
 materials:

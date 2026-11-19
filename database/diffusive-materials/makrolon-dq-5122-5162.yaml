@@ -3,6 +3,10 @@ creator: Covestro
 notes: 'Makrolon DQ ("Diffusion Quality"): light-diffusing polycarbonate injection-moulding resins, DQ5122 (low), DQ5142 (medium) and DQ5162 (high diffusion).'
 form:
   - resin
+images:
+  - file: makrolon-dq-5122-5162.webp
+    source: https://solutions.covestro.com/en/highlights/articles/cases/2019/trevos
+    credit: Covestro
 links:
   product: https://solutions.covestro.com/en/highlights/articles/cases/2019/trevos
 materials:

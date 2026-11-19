@@ -2,6 +2,10 @@ name: Foam Backer Rod
 notes: Pool noodle material , slit and re seal with tape or adhesive
 form:
   - foam
+images:
+  - file: foam-backer-rod.webp
+    source: https://www.dortechdirect.co.uk/polyethylene-foam-backer-rod-25mm.html
+    credit: Dortech Direct
 links:
   product: https://www.dortechdirect.co.uk/polyethylene-foam-backer-rod-25mm.html
 materials:

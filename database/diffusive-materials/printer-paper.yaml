@@ -2,6 +2,11 @@ name: Printer Paper
 notes: Pretty good diffusion for thickness, organic texture
 form:
   - film
+images:
+  - file: printer-paper.webp
+    source: https://commons.wikimedia.org/wiki/File:6_reams_of_paper_stacked_on_the_floor.jpg
+    credit: Sage Ross (WMF)
+    license: CC BY-SA 3.0
 materials:
   - paper
 optical:

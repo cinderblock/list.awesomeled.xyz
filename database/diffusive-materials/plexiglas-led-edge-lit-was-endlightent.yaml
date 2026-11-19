@@ -5,6 +5,10 @@ vendors:
 notes: PMMA sheets and rods with light-diffusing particles for edge lighting.
 form:
   - sheet
+images:
+  - file: plexiglas-led-edge-lit-was-endlightent.webp
+    source: https://www.polyvantis-shop.com/en-de/products/plexiglas/plexiglas-led/pl0e011l.html
+    credit: Polyvantis (PLEXIGLAS)
 links:
   product: https://www.polyvantis-shop.com/ie/products/plexiglas-led/
 materials:

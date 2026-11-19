@@ -3,6 +3,11 @@ creator: Happy Wire Dog
 notes: Hot water mouldable plastic, very rigid when set and possible to mould round single LEDs into shapes
 form:
   - moldable
+images:
+  - file: instamorph-polymorph.webp
+    source: https://commons.wikimedia.org/wiki/File:PCL_beads.jpg
+    credit: Prosthetic Head
+    license: CC BY-SA 4.0
 links:
   product: https://www.instamorph.com/
 materials:

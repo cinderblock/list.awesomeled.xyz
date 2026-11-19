@@ -2,6 +2,10 @@ name: Perspex Diffuse
 creator: Perspex International
 form:
   - sheet
+images:
+  - file: perspex-diffuse.webp
+    source: https://www.display.3acomposites.com/perspex/perspex-light/diffuse/
+    credit: '3A Composites (Perspex)'
 links:
   product: https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/
 materials:

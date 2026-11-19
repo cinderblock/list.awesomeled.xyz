@@ -2,6 +2,11 @@ name: Shower Curtain
 notes: Non woven type shower curtain
 form:
   - fabric
+images:
+  - file: shower-curtain.webp
+    source: https://commons.wikimedia.org/wiki/File:Water_drops_on_clear_plastic_shower_curtain.jpg
+    credit: FuriousYogi
+    license: CC BY-SA 4.0
 links:
   product: https://www.amazon.co.uk/Discoball-Waterproof-Antifungal-Curtains-Bathroom/dp/B00Y1XV3VM
 materials:

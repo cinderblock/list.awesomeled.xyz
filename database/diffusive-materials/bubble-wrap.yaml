@@ -2,6 +2,11 @@ name: Bubble Wrap
 notes: Used as stuffing in wider pipes to space LED strip
 form:
   - film
+images:
+  - file: bubble-wrap.webp
+    source: https://commons.wikimedia.org/wiki/File:Bubble-wrap_closeup.JPG
+    credit: Juliancolton
+    license: Public domain
 links:
   product: https://en.wikipedia.org/wiki/Bubble_wrap
 materials:

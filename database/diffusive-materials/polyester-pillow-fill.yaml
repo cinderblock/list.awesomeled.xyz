@@ -2,6 +2,11 @@ name: Polyester Pillow Fill
 notes: Clouds and rocket plumes
 form:
   - fiber
+images:
+  - file: polyester-pillow-fill.webp
+    source: https://commons.wikimedia.org/wiki/File:Polyfill.jpg
+    credit: 'KamillaŚ'
+    license: CC BY 4.0
 links:
   product: https://www.amazon.com/Fairfield-Poly-Premium-Fiber-32-Ounce/dp/B004ALQ0M2
 materials:
