@@ -1,0 +1,97 @@
+name: L.E.D. Lab
+status: active
+creator: Christopher Schardt
+notes: iPad and iPhone app that drives LED displays from lists of Scenes, played in order or
+  shuffled. Pictures Scenes animate a montage of images, videos and live camera feeds (with
+  photographically generated maps for odd-shaped displays); Strips Scenes send particles of color
+  down each strip. Music tracks, audio reactivity and external control. It also runs the developer's
+  own large LED sculptures.
+inputs:
+  video: Both
+  audio: Both
+  other: Live camera and video files; songs from the music library and a live microphone; any
+    animatable parameter can follow MIDI, DMX, Art-Net or OSC
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Output
+    dmx: Input
+    ddp: Output
+    opc: Output
+  other: PixelPusher, DDP (Minleon, TekLights), RGB-123, FadeCandy/FCServer, OSC; external monitor
+    or projector as a VJ app
+aliases:
+  - LED Lab
+capabilities:
+  live: true
+  designer: true
+integrations: PixelPusher, RGB-123, FadeCandy/FCServer
+links:
+  url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+other_links:
+  - http://www.ledlabs.co/
+platforms:
+  mobile:
+    - iOS
+  notes: iPhone, iPad and iPod touch on iOS 15.6 or later; an iPad is best for full editing. Also
+    installs on Apple silicon Macs as an iPad app, not verified for macOS by the developer
+pricing:
+  price: Free
+  source:
+    retrieved: '2026-11-18'
+    vendor: Apple App Store (US)
+    url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    notes: Free download; features are in-app purchases
+  tiers:
+    - tier: Live Microphone
+      price: 9.99
+    - tier: Live Video
+      price: 9.99
+    - tier: External Control
+      price: 19.99
+    - tier: LED Display
+      price: 19.99
+    - tier: Music
+      price: 19.99
+    - tier: Authoring
+      price: 49.99
+    - tier: LED Artist Pack
+      price: 59.99
+    - tier: VJ Pack
+      price: 79.99
+    - tier: Advanced Mapping
+      price: 84.99
+    - tier: Everything Pack
+      price: 209.99
+  demo:
+    available: Free app; features unlock with in-app purchases
+sources:
+  status:
+    url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    retrieved: '2026-11-18'
+    notes: Version 2.38 released 2026-10-07
+  creator:
+    url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    retrieved: '2026-11-18'
+    notes: Seller; © 2013-2023 Christopher Schardt
+  notes:
+    - url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+      retrieved: '2026-11-18'
+    - url: http://www.ledlabs.co/
+      retrieved: '2026-11-18'
+      notes: Biography, Interactivity section
+  inputs:
+    url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    retrieved: '2026-11-18'
+    notes: Description (External Control, Music, Audio Reactivity) and in-app purchase names
+  outputs:
+    url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    retrieved: '2026-11-18'
+    notes: Description lists the LED controllers it works with; version 2.26 notes mention OSC output
+  integrations:
+    url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    retrieved: '2026-11-18'
+  platforms:
+    url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    retrieved: '2026-11-18'
+    notes: Compatibility section

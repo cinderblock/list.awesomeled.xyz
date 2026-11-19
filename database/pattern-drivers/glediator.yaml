@@ -8,30 +8,40 @@ notes: >-
   matrices and strips and streams them live: over serial in its own Glediator protocol or TPM2 (with
   SolderLab's Arduino sketches for WS2801 and WS2811/WS2812 pixels), or over Ethernet as Art-Net and
   TPM2.Net. Last release V2.0.3; solderlab.de now serves only a placeholder page.
+inputs:
+  other: Animated GIFs; remote control over the network (UDP) with Glediator Remote Control
 outputs:
   protocols:
     artnet: Output
   serial: Output
-  serial_notes: Glediator protocol or TPM2 at up to 1,000,000 baud (about 1000 pixels at 24 FPS)
+  serial_notes: Glediator protocol, TPM2 or MiniDMX over COM or virtual COM ports at up to 1,000,000 baud (about 1000 pixels at 24 FPS)
   other:
     - TPM2.net
+    - Recorder files that play back in Glediator or upload to the Solderlab Universal Interface Board
 aliases:
   - Graphical LED Installation AnimaTOR
 capabilities:
   live: true
+  designer: true
 dead_links:
   - url: http://www.solderlab.de/index.php/software/glediator
     archive: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
-    checked: '2026-11-18'
+    checked: 2026-11-18
     notes: Returns 404; the domain's home page is now a placeholder
   - url: http://www.solderlab.de/
     archive: https://web.archive.org/web/20190624062157/http://solderlab.de:80/
-    checked: '2026-11-18'
+    checked: 2026-11-18
     notes: Home page now shows only a placeholder ('test')
-integrations: SolderLab matrix driver boards and Universal Interface Board; Arduino sketches for WS2801 and WS2811/WS2812 strips
+  - url: https://oneguyoneblog.com/download/glediator-v2-0-3/
+    archive: https://web.archive.org/web/20230604201344/https://oneguyoneblog.com/download/glediator-v2-0-3/
+    checked: 2026-11-18
+    notes: Third-party mirror of glediator_v2.0.3.zip, posted 2018-11-26; the whole site returned Cloudflare error 522 (origin unreachable)
+integrations: Solderlab true-color matrix driver boards and Universal Interface Board; Arduino (Uno,
+  Leonardo, Micro, Mini, Mega) with Solderlab's WS2801 and WS2811/WS2812 sketches
 language: Java
 links:
   url: http://www.solderlab.de/index.php/software/glediator
+  mirror: https://oneguyoneblog.com/download/glediator-v2-0-3/
 platforms:
   os:
     - Windows
@@ -51,13 +61,33 @@ related:
       notes: "Jinx! features page: output options 'supporting Art-Net, sACN (E1.31), tpm2.net, tpm2, Glediator protocol and MiniDMX'"
 sources:
   status:
-    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    - url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+      retrieved: '2026-11-18'
+      notes: "Last archived page (2019): 'The current Version of Glediator Software is V2.0.3'. V2.0 came out on 2013-10-07 (https://web.archive.org/web/20131219160056/http://www.solderlab.de:80/index.php/80-news/124-news-glediator-v2-0-out). The live page returns 404"
+    - url: https://web.archive.org/web/20190709201157/http://www.solderlab.de/index.php/software/glediator/78-software-projects/88-glediatorcahngelog
+      retrieved: '2026-11-18'
+      notes: Changelog, newest entry V2.0.3 - 12.02.2014 (archived 2019)
+  inputs:
+    url: https://web.archive.org/web/20190709201157/http://www.solderlab.de/index.php/software/glediator/78-software-projects/88-glediatorcahngelog
     retrieved: '2026-11-18'
-    notes: "Last archived page (2019): 'The current Version of Glediator Software is V2.0.3'. V2.0 came out on 2013-10-07 (https://web.archive.org/web/20131219160056/http://www.solderlab.de:80/index.php/80-news/124-news-glediator-v2-0-out). The live page returns 404"
+    notes: V1.0.6 added animated GIFs; V2.0.2 added Glediator Remote Control commands over UDP
+  outputs:
+    - url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+      retrieved: '2026-11-18'
+      notes: Data output section
+    - url: https://web.archive.org/web/20190709201157/http://www.solderlab.de/index.php/software/glediator/78-software-projects/88-glediatorcahngelog
+      retrieved: '2026-11-18'
+      notes: TPM2 (V1.0.1), MiniDMX (V1.0.4), TPM2.Net (V1.1.0), recorder and UIB upload (V2.0.0, V2.0.3)
   creator:
-    url: https://web.archive.org/web/20141208112112/http://www.solderlab.de:80/index.php/faq
-    retrieved: '2026-11-18'
-    notes: "SolderLab FAQ: 'we are just two guys with technical interest'; site footer 'Copyright © 2014. SolderLab.'"
+    - url: https://web.archive.org/web/20141208112112/http://www.solderlab.de:80/index.php/faq
+      retrieved: '2026-11-18'
+      notes: "SolderLab FAQ: 'we are just two guys with technical interest'; site footer 'Copyright © 2014. SolderLab.'"
+    - url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+      retrieved: '2026-11-18'
+      notes: Solderlab's Glediator page (archived 2019)
+    - url: https://web.archive.org/web/20190716215437/http://solderlab.de/index.php/downloads/category/4-glediator
+      retrieved: '2026-11-18'
+      notes: Download list names René Heller as author (archived 2019)
   aliases:
     url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
     retrieved: '2026-11-18'
@@ -79,9 +109,16 @@ sources:
     retrieved: '2026-11-18'
     notes: '''The serial interface can be adjusted up to 1000000 baud allowing to push out frames as big as about 1000 pixels with a frame rate of 24 FPS''; ''select "Glediator Protocol" as output type''; drives ''any light installation that receives TPM2 & TPM2.Net data'''
   integrations:
+    - url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+      retrieved: '2026-11-18'
+      notes: "'Glediator can drive led installations made of: our true color matrix driver boards, stripes & matrices made of WS2801 pixels, stripes & matrices made of WS2811 / WS2812 pixels'; V2.0.3 added file upload to a connected Universal Interface Board"
+  platforms:
     url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
     retrieved: '2026-11-18'
-    notes: "'Glediator can drive led installations made of: our true color matrix driver boards, stripes & matrices made of WS2801 pixels, stripes & matrices made of WS2811 / WS2812 pixels'; V2.0.3 added file upload to a connected Universal Interface Board"
+    notes: Installation section
+  technical_notes:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
   platforms.os:
     url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
     retrieved: '2026-11-18'
@@ -90,3 +127,8 @@ sources:
     url: https://web.archive.org/web/20141208112112/http://www.solderlab.de:80/index.php/faq
     retrieved: '2026-11-18'
     notes: "'All programs under Software Projects (e.g. Glediator) are not Open Source but free of use.'"
+technical_notes:
+  - No limit on matrix size; serial at 1,000,000 baud carries frames of about 1,000 pixels at 24 fps,
+    and Ethernet output supplies much bigger matrices
+  - "Solderlab's Arduino sketches: WS2801 at 500,000 baud (up to 512 pixels; about 1,024 on a Mega at
+    1,000,000 baud) and WS2811/WS2812 at 1,000,000 baud (up to 512 pixels, BRG color order)"

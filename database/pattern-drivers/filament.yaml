@@ -1,0 +1,120 @@
+name: Filament
+status: active
+creator:
+  name: Hexagon Intergalactic Ltd
+  url: https://hexagon.fi
+notes: LED mapping tool, LED player and VJ mixer in one app. Draw fixtures over a photo of the rig,
+  then mix video files, shaders and live feeds to LEDs over Art-Net or sACN, and to screens and
+  projectors with built-in projection mapping. Session grid plus a timeline (Arrangement) view;
+  imports and exports Resolume.
+inputs:
+  video: Both
+  audio: Both
+  other: NDI, Spout and Syphon feeds; MIDI (with MIDI Learn) and OSC control; Art-Net from lighting
+    consoles; tempo from Ableton Link, Pioneer Pro DJ Link, MIDI clock or tap
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Output
+  dmx_notes: DMX universes go out over Art-Net or sACN; Art-Net input lets a lighting console
+    launch clips and ride parameters
+  other: NDI, Spout and Syphon; screens and projectors; video file export; MIDI to controllers
+    (pad LEDs, motorized faders, MIDI clock); OSC feedback
+aliases:
+  - Filament LED
+capabilities:
+  live: true
+  designer: true
+  visualizer: 2D
+  programmatic: true
+integrations: Built-in support for WLED (including Gledopto and QuinLED boards) and Advatek PixLite
+  Mk3; any Art-Net or sACN receiver. A free standalone player replays exported DMX shows on a
+  Raspberry Pi
+language: WGSL
+links:
+  url: https://filament.click/
+platforms:
+  os:
+    - Windows
+    - macOS
+    - Linux
+  hardware:
+    - Raspberry Pi
+  notes: Windows 10 or later (64-bit), macOS 13 or later (Universal), Linux x86_64 (.deb, .rpm or
+    AppImage; no NDI). Needs a GPU. On a Raspberry Pi (3, 4, 5 or Zero 2 W, 64-bit OS) only the
+    standalone player runs, looping a DMX show exported from Filament over Art-Net or sACN
+pricing:
+  price: €49
+  source:
+    retrieved: '2026-11-18'
+    vendor: Hexagon Intergalactic Ltd
+    url: https://filament.click/
+    notes: VAT included
+  license_type: perpetual (one-time purchase with lifetime updates, active on up to two machines)
+  demo:
+    available: Unlimited trial
+    limitations: Evaluation only, not for commercial shows. Export is blocked (WLED export stays
+      free), live output is interrupted about every 20 seconds and video output is watermarked
+sources:
+  creator:
+    url: https://filament.click/
+    retrieved: '2026-11-18'
+  status:
+    - url: https://filament.click/releases
+      retrieved: '2026-11-18'
+      notes: Stable 1.9.52 released 2026-10-14
+    - url: https://filament.click/download
+      retrieved: '2026-11-18'
+      notes: Beta 1.12.0-beta.3 released 2026-11-17
+  inputs:
+    - url: https://filament.click/
+      retrieved: '2026-11-18'
+    - url: https://filament.click/releases
+      retrieved: '2026-11-18'
+      notes: 1.9.46 added Art-Net input
+  outputs:
+    - url: https://filament.click/
+      retrieved: '2026-11-18'
+    - url: https://filament.click/releases
+      retrieved: '2026-11-18'
+      notes: 1.9.46 added MIDI output; OSC feedback
+  capabilities:
+    url: https://filament.click/
+    retrieved: '2026-11-18'
+  integrations:
+    - url: https://filament.click/docs/faq
+      retrieved: '2026-11-18'
+    - url: https://filament.click/docs/standalone-player
+      retrieved: '2026-11-18'
+  language:
+    url: https://filament.click/
+    retrieved: '2026-11-18'
+    notes: Write your own effects in WGSL
+  platforms:
+    - url: https://filament.click/download
+      retrieved: '2026-11-18'
+    - url: https://filament.click/docs/gpu-requirements
+      retrieved: '2026-11-18'
+    - url: https://filament.click/docs/standalone-player
+      retrieved: '2026-11-18'
+  pricing.license_type:
+    - url: https://filament.click/
+      retrieved: '2026-11-18'
+      notes: One time purchase, lifetime updates
+    - url: https://filament.click/docs/licensing/licensing-and-trial
+      retrieved: '2026-11-18'
+      notes: Up to two machines at once
+  pricing.demo:
+    - url: https://filament.click/docs/licensing/licensing-and-trial
+      retrieved: '2026-11-18'
+    - url: https://filament.click/docs/faq
+      retrieved: '2026-11-18'
+  technical_notes:
+    - url: https://filament.click/docs/gpu-requirements
+      retrieved: '2026-11-18'
+    - url: https://filament.click/
+      retrieved: '2026-11-18'
+technical_notes:
+  - Renderer written in Rust; a hardware GPU is required (software-only adapters don't count)
+  - Custom effects and animations are WGSL shaders whose @param annotations become sliders
+  - Works fully offline; includes an MCP server so AI agents (Claude Code, Codex) can operate it

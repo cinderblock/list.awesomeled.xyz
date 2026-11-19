@@ -1,10 +1,16 @@
 name: Jinx!
-status: end-of-life
+status: discontinued
 creator: Sven Karschewski
-notes: Basically a mapper/pattern generator for microcontrollers with pixels. Development ceased
+notes: Free LED matrix control software for Windows. Four effect channels with two generators each,
+  22 effect generators, Jinx!Script for your own effects, scenes, chases, crossfades and a
+  touch-friendly show mode. Last release V2.4 (2016-05-16); still downloadable, but there has been
+  no release since.
 inputs:
   video: Both
   audio: Input
+  other: Webcam, screen capture, images (animated GIF) and AVI files as effect sources; remote
+    control of scenes, chases, crossfader, master brightness and strobe over DMX, Art-Net, sACN
+    (E1.31), MIDI, tpm2.net and tpm2
 outputs:
   protocols:
     artnet: Both
@@ -13,27 +19,73 @@ outputs:
     kinet: false
     ddp: false
     opc: false
+  dmx_notes: DMX out through Enttec Open DMX USB or Enttec DMX USB Pro compatible interfaces; DMX
+    in (remote control) through DMX USB Pro compatible interfaces
   gpio: false
   serial: Both
-  serial_notes: tpm2, Glediator and MiniDMX out; tpm2 in for remote control
+  serial_notes: tpm2, Glediator protocol and MiniDMX out (several serial ports can drive one matrix); tpm2 in for remote control
+  other: tpm2.net, borderless DVI output window, any output redirected to a file for standalone
+    controllers, Windows Bitmap series export, Glediator 2 / Solderlab UIB recorder files
 capabilities:
-  live: false
+  live: true
   designer: true
+  programmatic: true
 images:
   - file: jinx.webp
     source: https://live-leds.de/
     credit: 'Live-LEDs.de (Jinx!)'
-integrations: Should be solderlab.de (which is down)
+language: Jinx!Script (BASIC-like)
 links:
   url: https://live-leds.de/
 platforms:
   os:
     - Windows
-    - Linux
+  notes: Native Win32 application; the developer rules out ports to Linux or macOS
 pricing:
   price: Free
+  license_type: freeware
 sources:
   creator:
-    url: https://live-leds.de/impressum/
+    - url: https://live-leds.de/impressum/
+      retrieved: '2026-11-18'
+      notes: site imprint names the author; Imprint; the V2.4 user manual is also © 2013-2016 Sven Karschewski
+  status:
+    - url: https://live-leds.de/downloads/
+      retrieved: '2026-11-18'
+      notes: V2.4 is the only and latest download
+    - url: https://live-leds.de/wp-json/wp/v2/posts/588
+      retrieved: '2026-11-18'
+      notes: The V2.4 release post is dated 2016-05-16, the newest post on the site
+  inputs:
+    url: https://live-leds.de/features/
     retrieved: '2026-11-18'
-    notes: site imprint names the author
+  outputs:
+    - url: https://live-leds.de/features/
+      retrieved: '2026-11-18'
+    - url: https://live-leds.de/download/190/
+      retrieved: '2026-11-18'
+      notes: User manual V2.4, output devices section (tpm2, Glediator and MiniDMX are serial protocols)
+  capabilities.programmatic:
+    url: https://live-leds.de/features/
+    retrieved: '2026-11-18'
+  language:
+    url: https://live-leds.de/features/
+    retrieved: '2026-11-18'
+  platforms:
+    url: https://live-leds.de/faqs/
+    retrieved: '2026-11-18'
+  pricing:
+    url: https://live-leds.de/faqs/
+    retrieved: '2026-11-18'
+    notes: A spare-time project; the developer accepts no money donations
+  technical_notes:
+    - url: https://live-leds.de/download/190/
+      retrieved: '2026-11-18'
+      notes: User manual V2.4
+    - url: https://live-leds.de/important-invalid-certificates-for-jinx-v2-2-and-v2-3/
+      retrieved: '2026-11-18'
+technical_notes:
+  - Always renders at 25 fps; serial outputs need a baud rate fast enough for the frame size
+  - Art-Net 3 addressing (Net, Subnet, Universe) with ArtPoll node discovery
+  - Binaries are code-signed and check the signature at every start. V2.2 and V2.3 stopped starting
+    after their certificate expired on 2017-01-04, so use V2.4
