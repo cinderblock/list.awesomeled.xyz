@@ -11,9 +11,9 @@ import { priceUSD, parsePrice, formatPriceText } from './currency';
 import { flattenPlatforms } from './platforms';
 import { firstImageFile } from './images';
 
-// Classic per-pixel budget when the database has no electrical data:
-// 60 mA at 5 V for a 5050 RGB pixel at full white.
-const DEFAULT_WATTS_PER_PIXEL = 0.3;
+// Classic per-channel budget when the database has no electrical data:
+// 20 mA per colour channel, i.e. 60 mA for an RGB pixel at full white.
+const DEFAULT_CHANNEL_AMPS = 0.02;
 
 export interface PixelOption {
   id: string;
@@ -24,9 +24,11 @@ export interface PixelOption {
   clocked: boolean | null;
   /** LED supply voltage in volts (null = unknown, assume 5) */
   voltage: number | null;
-  /** Estimated max draw per pixel in watts */
+  /** Colour channels per pixel (3 = RGB, 4 = RGBW) */
+  channels: number;
+  /** Max draw per pixel in watts with every channel fully on (full white) */
   wattsPerPixel: number;
-  wattsBasis: 'measured wattage' | 'channel current' | 'typical 5050 estimate';
+  wattsBasis: 'channel current' | 'per-channel wattage' | 'typical estimate';
   /** Protocol family, e.g. "WS2811/12" — used to spot explicit controller support */
   type?: string;
   /** Data rate in Hz (null = unknown) */
@@ -127,27 +129,56 @@ function protocolToken(name: string): string | null {
   );
 }
 
+/**
+ * Nominal supply voltage for a database voltage value. Ranges ("3-7.5V")
+ * resolve to 5 V when they include it — the rail such parts are run from —
+ * and otherwise to their upper end.
+ */
+export function nominalVoltage(v: unknown): number | null {
+  const q = parseQuantity(v, 'voltage');
+  if (!q) return null;
+  if (q.max == null) return q.value;
+  return q.value <= 5 && q.max >= 5 ? 5 : q.max;
+}
+
+/**
+ * Colour channels per pixel. Pixels record no channel count, so it comes from
+ * the channel order ("GRBW" -> 4); driver ICs record data.channels directly.
+ */
+export function pixelChannels(entry: BaseEntry): number {
+  const data = (entry.data ?? {}) as Record<string, unknown>;
+  if (typeof data.channels === 'number' && data.channels > 0) return data.channels;
+  const order = (entry.color as Record<string, unknown> | undefined)?.order;
+  if (typeof order === 'string') {
+    const letters = order.replace(/[^A-Za-z]/g, '').length;
+    if (letters >= 3 && letters <= 6) return letters;
+  }
+  return /rgbw|wwa/i.test(entry.name) ? 4 : 3;
+}
+
 export function buildPixelOption(entry: BaseEntry): PixelOption {
   const data = (entry.data ?? {}) as Record<string, unknown>;
   const el = (entry.electrical ?? {}) as Record<string, unknown>;
 
   const clocked = typeof data.clocked === 'boolean' ? data.clocked : null;
-  const voltage =
-    parseQuantity(el.led_voltage ?? el.supply_voltage ?? el.vcc_voltage, 'voltage')?.value ?? null;
+  const voltage = nominalVoltage(el.led_voltage ?? el.supply_voltage ?? el.vcc_voltage);
+  const channels = pixelChannels(entry);
+  const volts = voltage ?? 5;
 
-  let wattsPerPixel = DEFAULT_WATTS_PER_PIXEL;
-  let wattsBasis: PixelOption['wattsBasis'] = 'typical 5050 estimate';
+  // Full-white draw = one channel's current × channels × LED voltage. The
+  // database's electrical.wattage is ONE channel's power (it equals
+  // channel_current × led_voltage), so it is only a fallback for the
+  // per-channel figure — never a per-pixel number on its own.
+  let wattsPerPixel = DEFAULT_CHANNEL_AMPS * channels * volts;
+  let wattsBasis: PixelOption['wattsBasis'] = 'typical estimate';
+  const current = parseQuantity(el.channel_current ?? el.max_current, 'current');
   const wattage = parseQuantity(el.wattage, 'power');
-  if (wattage) {
-    wattsPerPixel = wattage.value;
-    wattsBasis = 'measured wattage';
-  } else {
-    const current = parseQuantity(el.channel_current ?? el.max_current, 'current');
-    if (current) {
-      const channels = typeof data.channels === 'number' ? data.channels : 3;
-      wattsPerPixel = current.value * channels * (voltage ?? 5);
-      wattsBasis = 'channel current';
-    }
+  if (current) {
+    wattsPerPixel = current.value * channels * volts;
+    wattsBasis = 'channel current';
+  } else if (wattage) {
+    wattsPerPixel = wattage.value * channels;
+    wattsBasis = 'per-channel wattage';
   }
 
   return {
@@ -157,6 +188,7 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
     status: typeof entry.status === 'string' ? entry.status : undefined,
     clocked,
     voltage,
+    channels,
     wattsPerPixel,
     wattsBasis,
     type: typeof data.type === 'string' ? data.type : undefined,

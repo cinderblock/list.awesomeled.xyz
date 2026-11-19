@@ -421,7 +421,8 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                     ? ' · clocked (data + clock lines)'
                     : ' · data-only (single wire)'}
                 {' · ~'}
-                {fmt(chain.pixel.wattsPerPixel * 1000, 0)} mW/pixel ({chain.pixel.wattsBasis})
+                {fmt(chain.pixel.wattsPerPixel * 1000, 0)} mW/pixel at full white (
+                {chain.pixel.channels} channels, {chain.pixel.wattsBasis})
                 {chain.pixel.bitrateHz ? ` · ${fmtHz(chain.pixel.bitrateHz)} data` : ''}
               </p>
             )}
@@ -737,7 +738,7 @@ export default function DesignerPage({ loaderData }: Route.ComponentProps) {
                   <dd>{power.totalPixels.toLocaleString('en-US')}</dd>
                 </div>
                 <div>
-                  <dt>Max load</dt>
+                  <dt>Max load (full white)</dt>
                   <dd>{fmt(power.totalWatts)} W</dd>
                 </div>
                 {power.rails.map((rail) => (
