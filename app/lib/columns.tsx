@@ -73,6 +73,9 @@ export interface Column {
   // Header tooltip with EXTRA information (jargon translation, units) —
   // never a restatement of the label.
   headerTip?: string;
+  // Display labels for enum values (raw value -> label). Filter options,
+  // URL filters and copied text use the label too, so they match the cells.
+  valueLabels?: Record<string, string>;
 }
 
 // Link configuration for external URLs
@@ -435,6 +438,7 @@ const clockedColumn: Column = {
       <span>{CLOCKED_LABELS[String(v)]}</span>
     ),
   filterConfig: { type: 'select' },
+  valueLabels: CLOCKED_LABELS,
   headerTip:
     'Single-wire: data only (WS2811 family). Clocked: data + clock lines (APA102 family). Both: selectable per output.',
 };

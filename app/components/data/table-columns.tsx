@@ -118,10 +118,19 @@ function fromCurated(categoryId: string, col: Column, field: FieldMeta | undefin
   const override = VALUE_OVERRIDES[`${categoryId}/${key}`] ?? VALUE_OVERRIDES[key];
   const facetField = field && FACET_KINDS.has(field.kind) ? field : undefined;
 
+  // Enum values shown under display labels: facets, filters and copy use
+  // the same words as the cells
+  const labels = col.valueLabels;
+  const labelled = (raw: unknown): string[] =>
+    (Array.isArray(raw) ? raw : isEmptyValue(raw) ? [] : [raw]).map(
+      (v) => labels?.[String(v)] ?? enumLabel(v)
+    );
+
   const values = (item: BaseEntry): string[] => {
     if (pseudo) return [];
     if (override) return override(item);
     const raw = getPath(item, key);
+    if (labels) return labelled(raw);
     return facetField ? fieldValues(facetField, raw) : genericValues(raw);
   };
 
@@ -145,6 +154,7 @@ function fromCurated(categoryId: string, col: Column, field: FieldMeta | undefin
     if (pseudo) return '';
     if (override) return override(item).join(', ');
     const raw = getPath(item, key);
+    if (labels) return labelled(raw).join(', ');
     return field ? fieldText(field, raw) : plainText(raw);
   };
 
