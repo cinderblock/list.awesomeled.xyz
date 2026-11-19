@@ -20,7 +20,7 @@ optical:
 physical:
   flexible: false
   fire_retardant: true
-  sizes_available: up to 1220x2440
+  sizes_available: 3050x2030mm
 pricing:
   price_range: $$$$$
 purpose_made: true
@@ -31,3 +31,8 @@ related:
     source:
       url: https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/
       retrieved: '2026-11-18'
+sources:
+  physical.sizes_available:
+    url: https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/
+    retrieved: '2026-11-18'
+    notes: 3050 x 2030
