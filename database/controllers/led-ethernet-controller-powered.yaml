@@ -3,7 +3,7 @@ status: active
 creator:
   name: LED Strip Studio
   url: https://www.ledstripstudio.com
-  page: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  page: https://ledstripstudio.com/shop/product/led-ethernet-controller-powered/
 vendors:
   - name: LED Strip Studio
     url: https://www.ledstripstudio.com
@@ -31,6 +31,13 @@ power:
 data:
   storage:
     - type: SD
+datasheet:
+  url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+dead_links:
+  - url: https://ledstripstudio.com/shop/product/led-ethernet-controller-powered/
+    archive: https://web.archive.org/web/20231202085638/https://www.ledstripstudio.com/shop/product/led-ethernet-controller-powered/
+    checked: '2026-11-18'
+    notes: Now redirects to the LED Ethernet Controller 3 page
+other_links:
+  - https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
 price: 850
-technical_notes:
-  - Hardware manual https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf

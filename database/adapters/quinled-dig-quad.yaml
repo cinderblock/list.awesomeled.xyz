@@ -11,6 +11,6 @@ power:
   current: 30A
 diy_or_ots: Both
 links:
-  product: https://quinled.info/quinled-dig-uno/
+  product: https://quinled.info/quinled-dig-quad/
 parent: ESP8266 or ESP32
 price: 38

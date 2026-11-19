@@ -2,7 +2,10 @@ name: K16A-B
 status: discontinued
 creator:
   name: KulpLights, LLC
-  page: https://www.wiredwatts.com/products/klk16a-bv3
+  page: https://kulplights.com/product/k16a-b/
+vendors:
+  - name: Wired Watts
+    page: https://www.wiredwatts.com/products/klk16a-bv3
 notes: BeagleBone Black cape running FPP. 16 fused local ports plus 4 RJ45 differential ports (not Ethernet) expanding to 48 strings via Smart Receivers. Onboard sound, FM transmitter optional.
 inputs:
   physical:
