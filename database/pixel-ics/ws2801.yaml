@@ -1,6 +1,6 @@
 name: WS2801
 status: active
-release_year: 2010
+release_year: 2008
 creator: WorldSemi
 notes: Early Addressable LED controller still common on 4 wire pixel and puck strings
 aliases:

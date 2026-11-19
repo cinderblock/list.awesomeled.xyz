@@ -1,8 +1,6 @@
 name: SK9822-A
 status: active
-creator:
-  name: Newstar LED Co.
-  page: http://www.newstar-ledstrip.com/productshow851.html
+creator: Opsco Optoelectronics
 vendors:
   - name: Newstar LED Co.
     page: http://www.newstar-ledstrip.com/productshow851.html
