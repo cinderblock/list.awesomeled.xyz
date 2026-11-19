@@ -4,7 +4,7 @@ creator: Opsco/Newstar
 notes: Integrated-IC addressable RGB LED in nano/micro packages; single-wire WS2812/NeoPixel-compatible. Smaller sibling of the SK6812.
 color:
   order: GRB
-  brightness_bits: 8
+  channel_bits: 8
 data:
   type: WS2811/12
   clocked: false
@@ -15,8 +15,8 @@ datasheet:
   url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
 electrical:
   led_voltage: 5V
-  vcc_voltage: 3.7-5.5V
-  vcc_voltage_notes: Datasheet recommends roughly 3.7-5.5V VDD
+  supply_voltage: 3.7-5.5V
+  supply_voltage_notes: Datasheet recommends roughly 3.7-5.5V VDD
   channel_current: ~5mA
   channel_current_notes: Approximate for the 2427 nano package; well below the 20mA of a 5050 SK6812
   wattage: 100mW

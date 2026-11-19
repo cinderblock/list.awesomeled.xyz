@@ -306,6 +306,36 @@
         "MadLED"
       ]
     },
+    "channel_bits": {
+      "description": "Color depth in bits per channel; a list when selectable (8, 12, 14 or 16)",
+      "oneOf": [
+        { "type": "integer", "minimum": 1, "maximum": 32 },
+        {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 1, "maximum": 32 }
+        }
+      ]
+    },
+    "brightness_control": {
+      "description": "Extra brightness control on top of the per-channel PWM, e.g. APA102's 5-bit global brightness",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bits", "scope"],
+      "properties": {
+        "bits": { "type": "integer", "minimum": 1, "maximum": 16 },
+        "method": {
+          "enum": ["pwm", "current"],
+          "description": "pwm: a slower PWM overlaid on the LEDs (APA102). current: scales the LED drive current (SK9822). Leave out when the datasheet doesn't say."
+        },
+        "scope": {
+          "enum": ["global", "per_channel"],
+          "description": "global: one value for all of a pixel's channels. per_channel: one per color."
+        },
+        "notes": { "type": "string" }
+      }
+    },
     "programming_language": {
       "enum": [
         "C++",

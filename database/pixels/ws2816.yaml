@@ -5,9 +5,10 @@ creator: WorldSemi
 notes: 16-bit per channel color depth with per-channel brightness control
 color:
   order: GRB
-  brightness_bits: 16
-  brightness_method: per_channel
-  brightness_method_notes: 5-bit brightness control for each color channel (R, G, and B independently)
+  channel_bits: 16
+  brightness_control:
+    bits: 5
+    scope: per_channel
   pwm_frequency: 10kHz
 data:
   type: WS2816
@@ -23,7 +24,7 @@ datasheet:
       notes: WS2816B-2020 English datasheet (2020 package), LCSC C4154877
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   channel_current: 20mA
   channel_current_notes: WS2816C is 10mA, WS2816B is 20mA
   quiescent_current: 6mA
@@ -65,7 +66,7 @@ sources:
     url: https://www.lcsc.com/datasheet/C4154877.pdf
     retrieved: '2026-11-18'
     notes: WorldSemi WS2816B-2020 V1.0 (2020-12-06), the LCSC part already used for the YAML price.
-  color.brightness_bits:
+  color.channel_bits:
     url: https://www.lcsc.com/datasheet/C4154877.pdf
     retrieved: '2026-11-18'
     notes: "'each channel with 16bit gray scale, 4bit gamma correction inside'"

@@ -5,7 +5,7 @@ creator: WorldSemi/Newstar
 notes: WS2812b update with Back Up Data Line
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 2kHz
   pwm_frequency_notes: 2kHz according to datasheet
 data:
@@ -25,7 +25,7 @@ datasheet:
       notes: Wayback copy of the Newstar-hosted datasheet this entry used to link
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3V
     max: 5V

@@ -22,12 +22,12 @@ export const PIXELS: BaseEntry[] = [
   entry('rgb5', {
     name: 'RGB5',
     status: 'active',
-    color: { order: 'GRB', brightness_bits: 8 },
+    color: { order: 'GRB', channel_bits: 8 },
     data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 24 },
     // wattage is ONE channel's power in the database
     electrical: {
       led_voltage: '5V',
-      vcc_voltage: '5V',
+      supply_voltage: '5V',
       gpio: { min: '3.5V', max: '5V' },
       channel_current: '20mA',
       quiescent_current: '1mA',
@@ -45,7 +45,7 @@ export const PIXELS: BaseEntry[] = [
     name: 'Range5',
     color: { order: 'GRB' },
     data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 24 },
-    electrical: { led_voltage: '5V', vcc_voltage: '5V', channel_current: '20mA' },
+    electrical: { led_voltage: '5V', supply_voltage: '5V', channel_current: '20mA' },
     price: { amount: 0.1, max: 0.25 },
   }),
   entry('rgb5-lowvih', {
@@ -54,7 +54,7 @@ export const PIXELS: BaseEntry[] = [
     data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 24 },
     electrical: {
       led_voltage: '5V',
-      vcc_voltage: '5V',
+      supply_voltage: '5V',
       gpio: { min: '3.0V', max: '5V' },
       channel_current: '20mA',
     },
@@ -63,11 +63,15 @@ export const PIXELS: BaseEntry[] = [
     name: 'RGBW5',
     color: { order: 'GRBW' },
     data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 32 },
-    electrical: { led_voltage: '5V', vcc_voltage: '5V', channel_current: '20mA' },
+    electrical: { led_voltage: '5V', supply_voltage: '5V', channel_current: '20mA' },
   }),
   entry('clk5', {
     name: 'CLK5',
-    color: { order: 'BGR', brightness_bits: '8+5' },
+    color: {
+      order: 'BGR',
+      channel_bits: 8,
+      brightness_control: { bits: 5, method: 'pwm', scope: 'global' },
+    },
     data: {
       type: 'APA102',
       clocked: true,
@@ -78,7 +82,7 @@ export const PIXELS: BaseEntry[] = [
     },
     electrical: {
       led_voltage: '5V',
-      vcc_voltage: '5V',
+      supply_voltage: '5V',
       gpio: { min: '3.5V', max: '5V' },
       channel_current: '22mA',
     },
@@ -95,7 +99,7 @@ export const PIXELS: BaseEntry[] = [
     },
     electrical: {
       led_voltage: '12V',
-      vcc_voltage: '5V',
+      supply_voltage: '5V',
       gpio: { min: '3.5V', max: '5V' },
       channel_current: '10mA',
     },
@@ -103,15 +107,19 @@ export const PIXELS: BaseEntry[] = [
   entry('deep5', {
     name: 'DEEP5',
     status: 'discontinued',
-    color: { order: 'RGB', brightness_bits: '16+5' },
+    color: {
+      order: 'RGB',
+      channel_bits: 16,
+      brightness_control: { bits: 5, method: 'current', scope: 'global' },
+    },
     data: { type: 'HD108', clocked: true, bitrate: '40MHz', pixel_size_bits: 64 },
-    electrical: { led_voltage: '5V', vcc_voltage: '5V' },
+    electrical: { led_voltage: '5V', supply_voltage: '5V' },
   }),
   entry('wide', {
     name: 'WIDE',
     color: { order: 'RGB' },
     data: { clocked: true },
-    electrical: { led_voltage: '3-7.5V', vcc_voltage: '5V', channel_current: '18mA' },
+    electrical: { led_voltage: '3-7.5V', supply_voltage: '5V', channel_current: '18mA' },
   }),
   entry('bare', { name: 'BARE' }),
 ];

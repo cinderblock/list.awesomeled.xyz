@@ -2,7 +2,7 @@ name: SK6822
 status: active
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.2kHz
 data:
   clocked: false
@@ -17,7 +17,7 @@ datasheet:
       notes: Wayback copy of Newstar's SK6822 spec (newstar-ledstrip.com now 404s)
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
 images:
   - file: sk6822.webp
     source: https://addressable-led.com/Products/SK6822-Dual-Signal-LED.html

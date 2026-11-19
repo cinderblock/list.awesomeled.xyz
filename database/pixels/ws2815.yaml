@@ -7,7 +7,7 @@ aliases:
   - WS2815B
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 2kHz
   pwm_frequency_notes: 2kHz according to datasheet
 data:
@@ -30,8 +30,8 @@ datasheet:
 electrical:
   led_voltage: 12V
   led_voltage_notes: Datasheet 9.5-13.5V range
-  vcc_voltage: 5V
-  vcc_voltage_notes: Internal regulator drops 12V to 5V for logic. Can use external resistor to supply 5V Vdd from higher system voltage
+  supply_voltage: 5V
+  supply_voltage_notes: Internal regulator drops 12V to 5V for logic. Can use external resistor to supply 5V Vdd from higher system voltage
   gpio:
     min: 3.5V
     min_notes: Datasheet says 0.7*VDD which would be 8.4V at 12V - this appears to be a copypaste error. Actual Vdd is internal 5V bus, so 3.5V threshold

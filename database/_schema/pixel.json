@@ -139,16 +139,14 @@
           "type": ["string", "null"],
           "description": "Channel order (RGB, GRB, RGBW, ...)"
         },
-        "brightness_bits": {
-          "type": ["integer", "string", "null"],
-          "description": "Depth per channel (8, 8+5, ...)"
+        "channel_bits": {
+          "$ref": "common.json#/definitions/channel_bits"
         },
-        "brightness_method": {
-          "type": ["string", "null"],
-          "description": "pwm | current | global — how extra brightness bits work"
-        },
-        "brightness_method_notes": {
+        "channel_bits_notes": {
           "type": ["string", "null"]
+        },
+        "brightness_control": {
+          "$ref": "common.json#/definitions/brightness_control"
         },
         "pwm_frequency": {
           "$ref": "common.json#/definitions/frequency"
@@ -168,10 +166,11 @@
         "led_voltage_notes": {
           "type": ["string", "null"]
         },
-        "vcc_voltage": {
+        "supply_voltage": {
+          "description": "Supply voltage (VCC / VDD) of the built-in driver IC",
           "$ref": "common.json#/definitions/voltage"
         },
-        "vcc_voltage_notes": {
+        "supply_voltage_notes": {
           "type": ["string", "null"]
         },
         "gpio": {

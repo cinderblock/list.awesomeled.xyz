@@ -7,7 +7,6 @@ aliases:
   - WS281x
 color:
   channel_bits: 8
-  aggregate_bits: 24
   pwm_frequency: 2kHz
   pwm_frequency_notes: 400Hz was old spec. Newer WS2811 chips have 2kHz PWM like WS2812B post-2018
 data:

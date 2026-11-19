@@ -20,7 +20,7 @@ dead_links:
     checked: '2026-11-18'
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   quiescent_current: 1mA
 images:
   - file: sk9822-a.webp

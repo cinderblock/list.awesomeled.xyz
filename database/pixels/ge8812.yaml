@@ -4,7 +4,7 @@ creator: Greeled Electronic
 notes: 5050 RGB LED with a built-in single-wire driver; Greeled calls the protocol SK6812-compatible
 color:
   order: GRB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.2kHz
 data:
   type: WS2811/12
@@ -15,8 +15,8 @@ data:
 datasheet:
   url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf # Greeled 'GE8812B LED series specification' (English, document SPC/23012); covers GE8812, GE8812B, GE8812-B and GE8812B-B
 electrical:
-  vcc_voltage: 5V
-  vcc_voltage_notes: VDD 5.0V typical (absolute maximum range 3.5-5.5V)
+  supply_voltage: 5V
+  supply_voltage_notes: VDD 5.0V typical (absolute maximum range 3.5-5.5V)
   gpio:
     min: 3.5V
     min_notes: DIN VIH at VDD 5.0V (VIL 1.5V)

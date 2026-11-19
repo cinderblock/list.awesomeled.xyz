@@ -7,7 +7,7 @@ aliases:
   - SKC6812RGBW
 color:
   order: GRBW
-  brightness_bits: 8
+  channel_bits: 8
 data:
   type: 4chWS2811/12
   clocked: false
@@ -18,7 +18,7 @@ datasheet:
   url: https://cdn-shop.adafruit.com/product-files/2757/p2757_SK6812RGBW_REV01.pdf
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
 images:
   - file: sk6812-rgbw.webp
     source: https://www.adafruit.com/product/2757

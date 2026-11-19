@@ -7,7 +7,7 @@ aliases:
   - APA-104
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.2kHz
 data:
   type: WS2811/12
@@ -27,7 +27,7 @@ datasheet:
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3.5V
     max: 5V

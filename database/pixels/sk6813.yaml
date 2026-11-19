@@ -1,6 +1,6 @@
 name: SK6813
 color:
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.2kHz
 data:
   clocked: false

@@ -6,7 +6,7 @@ manufacturers:
 notes: ws2812b/sk6812 with built-in capacitors
 color:
   order: GRB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.2kHz
 data:
   type: WS2811/12
@@ -16,7 +16,7 @@ data:
   backup_line: false
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3.4V
     max: 5.5V

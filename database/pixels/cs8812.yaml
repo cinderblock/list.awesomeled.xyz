@@ -6,7 +6,7 @@ manufacturers:
   - Witop
 notes: Built-in 8->12bit gamma correction. "B" version is "without original program". Similar to GS8208
 color:
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 8kHz
 data:
   type: WS2811/12
@@ -18,7 +18,7 @@ datasheet:
   url: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
 electrical:
   led_voltage: 12V
-  vcc_voltage: 12V
+  supply_voltage: 12V
   channel_current: 17.5mA
   wattage: 210mW
 other_links:

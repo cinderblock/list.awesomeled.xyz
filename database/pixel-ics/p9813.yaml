@@ -4,7 +4,6 @@ creator: DMS Microelectronics
 notes: old but fast, still used in strings such as TCL
 color:
   channel_bits: 8
-  aggregate_bits: 8
   pwm_frequency: 4.687kHz
 data:
   type: P9813
@@ -47,11 +46,7 @@ sources:
   color.channel_bits:
     url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
     retrieved: 2026-11-18
-    notes: '"3 constant-current driver as well as 256 grade modulation output"'
-  color.aggregate_bits:
-    url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
-    retrieved: 2026-11-18
-    notes: '32-bit frame: two "1" flag bits, 6 check bits (inverted B7 B6 G7 G6 R7 R6), 24 bits of gray; no chip-wide dimming, so 8 effective bits'
+    notes: '"3 constant-current driver as well as 256 grade modulation output"; 32-bit frame: two "1" flag bits, 6 check bits (inverted B7 B6 G7 G6 R7 R6), 24 bits of gray; no chip-wide dimming, so 8 effective bits'
   data.bitrate:
     url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
     retrieved: 2026-11-18

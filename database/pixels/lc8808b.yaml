@@ -6,7 +6,7 @@ aliases:
   - LC8808
 color:
   order: BGR
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 8kHz
 data:
   clocked: false
@@ -18,7 +18,7 @@ datasheet:
   url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
 electrical:
   led_voltage: 12V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 4V
     max: 12.5V

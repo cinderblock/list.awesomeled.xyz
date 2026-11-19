@@ -2,7 +2,7 @@ name: GS8208
 creator: Genesis Systech
 color:
   channel_bits: 8
-  aggregate_bits: 12
+  channel_bits_notes: 12-bit gamma correction per colour
   pwm_frequency: 8kHz
 data:
   clocked: false

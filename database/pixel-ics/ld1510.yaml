@@ -3,7 +3,9 @@ release_year: 2008
 creator: LDT Inc.
 notes: Clocked 3-channel driver with 8- or 12-bit PWM chosen by a pin and 5-100mA outputs
 color:
-  channel_bits: 8/12
+  channel_bits:
+    - 8
+    - 12
 data:
   type: LD1510
   clocked: true

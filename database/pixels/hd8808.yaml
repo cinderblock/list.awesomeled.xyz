@@ -5,7 +5,7 @@ creator: Newstar LED Co.
 notes: 12 V 5050 RGB LED built around Newstar's NS8808 IC. Same protocol as WS2815 and sold as its drop-in replacement (12 V, dual signal).
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 8kHz
   pwm_frequency_notes: 8kHz per the datasheet
 data:
@@ -16,7 +16,7 @@ data:
   backup_line: true
 electrical:
   led_voltage: 12V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3.5V
     max: 5V

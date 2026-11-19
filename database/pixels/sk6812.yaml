@@ -5,7 +5,7 @@ creator: Opsco/Newstar
 notes: WS2812 copy. The 4-channel RGBW version is a separate part (SK6812RGBW).
 color:
   order: GRB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.1kHz
   pwm_frequency_notes: Measured; the datasheet (rev 02) says 1.2kHz
 data:
@@ -26,7 +26,7 @@ datasheet:
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
-  vcc_voltage: 5.2V
+  supply_voltage: 5.2V
   gpio:
     min: 3.4V
     min_notes: VIH 3.4V at VDD 5.0V (datasheet rev 02)

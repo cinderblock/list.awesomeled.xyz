@@ -428,6 +428,37 @@ const CLOCKED_LABELS: Record<string, string> = {
   always: 'Clocked',
 };
 
+// color.channel_bits (common.json channel_bits: bits, or a list of
+// selectable depths) plus brightness_control (APA102-style extra bits)
+function colorDepthText(item: Record<string, unknown>): string | null {
+  const color = (item.color ?? {}) as { channel_bits?: unknown; brightness_control?: unknown };
+  const bits = color.channel_bits;
+  const depth = Array.isArray(bits)
+    ? bits.join('/')
+    : typeof bits === 'number'
+      ? String(bits)
+      : null;
+  if (depth == null) return null;
+  const extra = color.brightness_control as { bits?: number; scope?: string } | undefined;
+  if (!extra?.bits) return `${depth}-bit`;
+  return `${depth}-bit + ${extra.bits}${extra.scope === 'per_channel' ? ' per channel' : ''}`;
+}
+
+const colorDepthColumn: Column = {
+  key: 'color.channel_bits',
+  label: 'Color Depth',
+  render: (_, item) => {
+    const text = colorDepthText(item);
+    return text ? <span>{text}</span> : <span className="data-table-null">-</span>;
+  },
+  sortValue: (v) =>
+    Array.isArray(v) ? Math.max(...(v as number[])) : typeof v === 'number' ? v : null,
+  defaultSortDir: 'desc',
+  filterConfig: { type: 'select' },
+  headerTip:
+    'PWM bits per color channel. "+ 5": extra brightness bits, one value per pixel (APA102 / SK9822 style) or per channel.',
+};
+
 const clockedColumn: Column = {
   key: 'outputs.clocked',
   label: 'Pixel Signal',
@@ -557,12 +588,13 @@ export const pixelColumns: Column[] = [
     className: 'data-table-cell--right',
   },
   {
-    key: 'electrical.vcc_voltage',
+    key: 'electrical.supply_voltage',
     label: 'VCC',
     render: formatVoltage,
     sortValue: sortVoltage,
     className: 'data-table-cell--right',
   },
+  colorDepthColumn,
   {
     key: 'data.clocked',
     label: 'Clocked',
@@ -610,6 +642,7 @@ export const pixelICColumns: Column[] = [
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
+  colorDepthColumn,
   {
     key: 'data.clocked',
     label: 'Clocked',

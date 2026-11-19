@@ -128,19 +128,13 @@
       "additionalProperties": false,
       "properties": {
         "channel_bits": {
-          "type": ["integer", "string", "null"],
-          "description": "Bits per channel"
+          "$ref": "common.json#/definitions/channel_bits"
         },
-        "aggregate_bits": {
-          "type": ["integer", "string", "null"],
-          "description": "Total bits across channels"
+        "channel_bits_notes": {
+          "type": ["string", "null"]
         },
-        "brightness_bits": {
-          "type": ["integer", "string", "null"]
-        },
-        "brightness_method": {
-          "type": ["string", "null"],
-          "description": "pwm | current | global"
+        "brightness_control": {
+          "$ref": "common.json#/definitions/brightness_control"
         },
         "pwm_frequency": {
           "$ref": "common.json#/definitions/frequency"

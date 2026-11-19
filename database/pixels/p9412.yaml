@@ -5,7 +5,7 @@ manufacturers:
   - Shenzhen Weiersheng Optoelectronics (WEERSOM)
 notes: Eight-pin 5050 RGBW LED with a built-in single-wire driver that also drives plain RGBW LEDs in 12V and 24V strips
 color:
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.2kHz
 data:
   type: P9412
@@ -15,7 +15,7 @@ data:
 electrical:
   led_voltage: 5-24V
   led_voltage_notes: "Advatek's output pixel voltage. WEERSOM: in 12 V strips each P9412 LED drives two IC-less RGBW LEDs, in 24 V strips five"
-  vcc_voltage: 5V
+  supply_voltage: 5V
   wattage: 0.2W
 other_links:
   - https://www.advateklighting.com/pixel-protocols/p9412
@@ -50,7 +50,7 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols/p9412
     retrieved: '2026-11-18'
     notes: "'PWM Rate 1200Hz'; ENTTEC also lists 1200 Hz"
-  electrical.vcc_voltage:
+  electrical.supply_voltage:
     url: https://www.advateklighting.com/pixel-protocols/p9412
     retrieved: '2026-11-18'
     notes: "'Input Voltage 5V', 'Output Pixel Voltage 5-24V'"

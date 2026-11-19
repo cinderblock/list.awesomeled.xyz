@@ -6,7 +6,7 @@ manufacturers:
 notes: TCWIN 12V RGB LEDs with a built-in single-wire driver; the six-pin 5050 version adds a backup data input
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 8kHz
 data:
   type: WS2811/12
@@ -24,8 +24,8 @@ datasheet:
       host: distributor
       notes: TX1818HLJ-F01 (3535) specification A2, same driver figures, no FDIN pin (LCSC C784557, viewer https://www.lcsc.com/datasheet/C784557.pdf)
 electrical:
-  vcc_voltage: 12V
-  vcc_voltage_notes: 'Supply 10.8-13.2 V (absolute maximum 14 V)'
+  supply_voltage: 12V
+  supply_voltage_notes: 'Supply 10.8-13.2 V (absolute maximum 14 V)'
   gpio:
     min: 4V
     min_notes: 'VIH at least 4 V, VIL at most 1 V at VDD 12 V'

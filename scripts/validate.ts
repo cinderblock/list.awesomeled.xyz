@@ -41,11 +41,6 @@ const FOLDER_SCHEMAS: Record<string, string> = {
   'commercial-systems': 'commercial-system.json',
 };
 
-// Categories whose _example.yaml still shows the pre-migration flat schema.
-// Each is rewritten when its category's schema review lands (see
-// plans/database-review.md); remove it from this list in the same commit.
-const STALE_EXAMPLES = new Set(['pixel-ics', 'pixels']);
-
 /**
  * `sources` keys (common.json#/definitions/sources) must name a field the
  * entry actually has: catches typos and provenance left behind when a field
@@ -253,7 +248,7 @@ async function main() {
     console.log(`${folder}: ${folderValid}/${files.size} valid`);
 
     const examplePath = join(DB_DIR, folder, '_example.yaml');
-    if (existsSync(examplePath) && !STALE_EXAMPLES.has(folder)) {
+    if (existsSync(examplePath)) {
       const docs = parseAllDocuments(readFileSync(examplePath, 'utf-8'));
       const list = Array.isArray(docs) ? docs : [docs];
       list.forEach((doc, i) => {

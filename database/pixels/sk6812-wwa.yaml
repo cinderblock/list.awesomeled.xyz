@@ -14,7 +14,7 @@ aliases:
   - LC8812WWA
   - HD8812WWA
 color:
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.2kHz
   pwm_frequency_notes: 1.2kHz in datasheet rev 01 (2015) and rev 03 (2019); 4kHz in the SKC6812WWA (2021) revision
 data:
@@ -35,8 +35,8 @@ datasheet:
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
-  vcc_voltage: 5.2V
-  vcc_voltage_notes: Datasheet typical; VDD range 3.5-5.5V (rev 01), 3.7-5.5V (rev 03)
+  supply_voltage: 5.2V
+  supply_voltage_notes: Datasheet typical; VDD range 3.5-5.5V (rev 01), 3.7-5.5V (rev 03)
   gpio:
     min: 3.4V
     min_notes: VIH 3.4V in rev 01; rev 03 gives 0.7×VDD

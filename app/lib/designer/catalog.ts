@@ -281,6 +281,12 @@ export function pixelChannels(entry: BaseEntry): number {
 /** Leading integer of a bit-depth value: 8, "8+5" -> 8, "16+5" -> 16 */
 function leadingBits(v: unknown): number | null {
   if (typeof v === 'number') return v > 0 ? v : null;
+  // Selectable depths (common.json channel_bits): the smallest, which any
+  // controller can send
+  if (Array.isArray(v)) {
+    const bits = v.filter((b): b is number => typeof b === 'number' && b > 0);
+    return bits.length ? Math.min(...bits) : null;
+  }
   if (typeof v !== 'string') return null;
   const m = v.match(/^\s*(\d+)/);
   return m ? parseInt(m[1], 10) : null;
@@ -320,9 +326,9 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
   const shared = sharedPixelFields(entry);
 
   const ledRange = parseQuantity(el.led_voltage, 'voltage');
-  const voltage = nominalVoltage(el.led_voltage ?? el.vcc_voltage);
+  const voltage = nominalVoltage(el.led_voltage ?? el.supply_voltage);
   const logicVoltage =
-    nominalVoltage(el.vcc_voltage) ?? (voltage != null && voltage <= 5.5 ? voltage : null);
+    nominalVoltage(el.supply_voltage) ?? (voltage != null && voltage <= 5.5 ? voltage : null);
 
   // Full-white draw = one channel's current × channels × LED voltage. The
   // database's electrical.wattage is ONE channel's power (it equals
@@ -356,7 +362,7 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
     ref: `pixels/${entry.id}`,
     image: imagePath('pixels', entry),
     colorOrder: str(color.order),
-    channelBits: leadingBits(color.brightness_bits),
+    channelBits: leadingBits(color.channel_bits),
     voltage,
     voltageChoices: choices.length > 1 ? choices : voltage != null ? [voltage] : [],
     logicVoltage,

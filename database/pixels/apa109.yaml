@@ -7,7 +7,7 @@ aliases:
   - APA-109-RGBW
 color:
   order: GRBW
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.1kHz
 data:
   type: 4chWS2811/12
@@ -19,7 +19,7 @@ datasheet:
   url: https://neon-world.com/uploads/soft/20180416/1523869790.pdf # APA109RGBW-XX spec rev 02, from APA's APA-109-RGBW product page
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3.5V
     max: 5V

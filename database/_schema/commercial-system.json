@@ -99,16 +99,8 @@
           "type": ["integer", "null"]
         },
         "dimming_bits": {
-          "description": "Dimming resolution in bits per channel; a list when selectable (8 or 16)",
-          "oneOf": [
-            { "type": "integer", "minimum": 1, "maximum": 32 },
-            {
-              "type": "array",
-              "minItems": 2,
-              "uniqueItems": true,
-              "items": { "type": "integer", "minimum": 1, "maximum": 32 }
-            }
-          ]
+          "$ref": "common.json#/definitions/channel_bits",
+          "description": "Dimming resolution in bits per channel; a list when selectable (8 or 16)"
         },
         "dimming_notes": {
           "type": ["string", "null"]

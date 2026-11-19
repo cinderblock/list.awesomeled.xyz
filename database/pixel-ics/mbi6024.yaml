@@ -5,7 +5,9 @@ creator:
   page: https://www.mblock.com.tw/en/Driver_ICs/LED_Driver_ICs/detail/49
 notes: 3x4-channel (four RGB pixels) 16-bit S-PWM driver; the MBI6023 plus dot correction and manual synchronization
 color:
-  channel_bits: 10/16
+  channel_bits:
+    - 10
+    - 16
   pwm_frequency: 11.718kHz
   pwm_frequency_notes: Visual refresh rate in 16-bit S-PWM mode with the default ~12MHz gray scale clock (12MHz / 65536 x 64); the 10-bit mode uses conventional PWM
 data:

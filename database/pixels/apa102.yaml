@@ -8,9 +8,12 @@ aliases:
   - DotStar
 color:
   order: BGR
-  brightness_bits: 8+5
-  brightness_method: pwm
-  brightness_method_notes: Extra 5-bit brightness control by overlaying 400Hz PWM on LEDs
+  channel_bits: 8
+  brightness_control:
+    bits: 5
+    method: pwm
+    scope: global
+    notes: a 400 Hz PWM overlaid on the LEDs
   pwm_frequency: 19.2kHz
 data:
   type: APA102
@@ -26,7 +29,7 @@ datasheet:
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3.5V
     max: 5V

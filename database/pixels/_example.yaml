@@ -1,180 +1,66 @@
-# Example 1: Full-featured RGB pixel IC with all fields
-name: Example RGB Pixel
-status: active
-release_year: 2020
-creator: Example Semiconductor
-manufacturers:
-  - Example Semiconductor
-  - Secondary Fab
-vendors:
-  - LED Parts Supplier
-  - Component Distributor
-notes: Industry standard RGB pixel, widely compatible
-backup_data_line: false
-brightness_bits: 8
-brightness_control_method: pwm
-channel_current: 18mA
-channel_current_notes: 5mA-18mA range depending on package
-clocked: false
-color_order: GRB
-data_bitrate: 800kbps
-data_bitrate_notes: Fixed timing, 1.25us per bit
-data_type: WS2812
-datasheet_discrepancies:
-  - Datasheet claims 400kHz PWM but measured 1.2kHz
-  - Actual reset time 280us vs datasheet 50us
-datasheet_url: https://example.com/datasheet.pdf
-gpio_max: 5.5
-gpio_min: 2.7
-gpio_min_notes: VIH = 0.7 * VDD at 5V supply
-image: example-rgb-pixel.jpg
-images:
-  - example-rgb-pixel.jpg
-  - example-rgb-pixel-5050.jpg
-  - example-rgb-pixel-3535.jpg
-
-led_voltage: 5
-led_voltage_notes: Operates 4.5V-5.5V, optimal at 5.0V
-max_pixels_notes: Signal degradation limits practical length, use signal boosters for longer runs
-max_pixels_per_string: 1024
-other_links:
-  - https://example.com/application-notes
-  - https://example.com/timing-diagram
-package_size: 5050/3535/2020
-package_sizes:
-  - '5050'
-  - '3535'
-  - '2020'
-pin_count: 4
-pixel_data_size: '24'
-pixel_data_size_notes: 8 bits per channel, RGB only
-pwm_frequency: 1.2kHz
-pwm_frequency_notes: Measured 1.18kHz typical, uses MPWM for flicker reduction
-quiescent_current: 0.3mA
-spec_update_year: 2022
-technical_notes:
-  - Reset time increased to 280us in 2022 revision
-  - PWM frequency varies by batch, 800Hz-1.5kHz observed
-  - Compatible with WS2812B timing in most controllers
-third_party_testing: https://example.com/testing-report
-variants:
-  - name: Example RGB Pixel B
-    suffix: -B
-    differences: Updated timing, improved signal regeneration
-  - name: Example RGB Pixel E
-    suffix: -E
-    differences: Extended temperature range -40C to +85C
-vcc_voltage: 5
-vcc_voltage_notes: Internal 3.3V regulator for logic
-wattage: 0.3
----
-# Example 2: RGBW pixel with global brightness control
-name: Example RGBW Pixel
-status: active
-
-release_year: 2019
-creator: Example Semiconductor
-manufacturers:
-  - Example Semiconductor
-notes: RGBW version with dedicated white channel for better CRI
-backup_data_line: false
-brightness_bits: '8+5'
-brightness_control_method: global
-channel_current: 12mA
-channel_current_notes: 12mA per channel including white
-clocked: false
-color_order: GRBW
-data_bitrate: 800kbps
-data_type: SK6812
-gpio_max: 5.5
-gpio_min: 2.7
-led_voltage: 5
-package_sizes:
-  - '5050'
-pin_count: 6
-pixel_data_size: '32'
-pixel_data_size_notes: 8 bits per channel, 4 channels
-pwm_frequency: 1.1kHz
----
-# Example 3: Clocked APA102-style pixel with high data rate
-name: Example HD Pixel
+# Example 1: single-wire 5050 pixel (most fields)
+name: EX2812B
 status: active
 release_year: 2014
-creator: HD LED Corp
+creator: Example Semi # the maker as written on its own datasheet
 manufacturers:
-  - HD LED Corp
-notes: High speed clocked pixel ideal for POV and video applications
-backup_data_line: false
-brightness_bits: '8+5'
-brightness_control_method: current
-channel_current: 20mA
-clocked: true
-color_order: BGR
-data_bitrate: 24MHz
-data_bitrate_notes: SPI clock, 1MHz-24MHz supported
-data_type: APA102
-datasheet_url: https://example.com/hd-pixel-datasheet.pdf
-
-gpio_max: 5.5
-gpio_min: 2.0
-led_voltage: 5
-max_pixels_notes: Clock line degrades after ~250 pixels, SK9822 compatible timing
-max_pixels_per_string: 250
-package_sizes:
-  - '5050'
-  - '2020'
-pin_count: 6
-pixel_data_size: '32'
-pwm_frequency: 19.2kHz
-pwm_frequency_notes: True constant current PWM, excellent for video
-technical_notes:
-  - 5-bit global brightness uses current control for true dimming
-  - 'Start frame: 32 zero bits, End frame: (n/2) one bits'
-vcc_voltage: 5
+  - Example Semi
+notes: 5050 RGB LED with a built-in single-wire driver.
+aliases: # other names for the same LED
+  - EX2812
+color:
+  order: GRB
+  channel_bits: 8 # PWM bits per channel
+  pwm_frequency: 2kHz
+data:
+  type: WS2812 # protocol family (stream 4 links pixels that speak it)
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24 # pixel_rate_max is derived from bitrate / pixel_size_bits
+  backup_line: false
+datasheet:
+  url: https://example.com/ex2812b.pdf
+electrical:
+  led_voltage: 5V
+  supply_voltage: 5V # the built-in driver's VCC / VDD
+  gpio:
+    min: 3.5V # lowest logic high on the data input
+    max: 5V
+  channel_current: 18.5mA # per color channel at full brightness
+  quiescent_current: 0.7mA
+physical:
+  packages: # common.json led_package: footprint code or through-hole size
+    - '5050'
+price:
+  - qty: 100
+    price: 0.08
+price_source:
+  vendor: Example Distributor
+  url: https://example.com/ex2812b
+  retrieved: '2026-01-01'
 ---
-# Example 4: 12V pixel with integrated voltage regulator
-name: Example 12V Pixel
-status: active
+# Example 2: clocked pixel with extra brightness control (fewer fields)
+name: EX102
+creator: Example Semi
+color:
+  order: BGR
+  channel_bits: 8
+  brightness_control: # extra bits on top of PWM
+    bits: 5
+    method: pwm # pwm (a slower overlaid PWM) or current (scales the LED current)
+    scope: global # global (one value per pixel) or per_channel
+    notes: a 440 Hz PWM overlaid on the LEDs
+data:
+  clocked: true
+  bitrate: 30MHz
+  pixel_size_bits: 32
+electrical:
+  led_voltage: 5V
+  supply_voltage: 5V
+physical:
+  packages:
+    - '5050'
+    - '2020'
 
-creator: null
-manufacturers:
-  - Generic LED Factory
-notes: 12V version for long runs with reduced voltage drop
-backup_data_line: false
-brightness_bits: 8
-channel_current: 18mA
-clocked: false
-color_order: RGB
-data_bitrate: 800kbps
-data_type: WS2811
-gpio_max: 5.5
-gpio_min: 3.5
-gpio_min_notes: Higher threshold due to integrated regulator noise
-led_voltage: 12
-led_voltage_notes: Internal buck regulator, 9-14V input range
-package_sizes:
-  - '5050'
-pixel_data_size: '24'
-pwm_frequency: 2kHz
-quiescent_current: 2mA
-vcc_voltage: 5
-vcc_voltage_notes: Regulated internally from 12V supply
-wattage: 0.3
----
-# Example 5: Discontinued pixel IC
-name: Example Legacy Pixel
-status: discontinued
-release_year: 2010
-creator: Defunct Semiconductor
-manufacturers:
-  - Defunct Semiconductor
-notes: Original WS2811-compatible IC, replaced by faster alternatives
-brightness_bits: 8
-clocked: false
-color_order: RGB
-data_bitrate: 400kbps
-data_type: WS2811
-led_voltage: 5
-pixel_data_size: '24'
-pwm_frequency: 400Hz
-pwm_frequency_notes: Low frequency causes visible flicker in video
+# disable URL checks on this file
+# textlint-disable

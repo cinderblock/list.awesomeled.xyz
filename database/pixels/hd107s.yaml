@@ -12,9 +12,10 @@ vendors:
 notes: 5050 RGB LED built around Newstar's NS107S IC. Upgrade of APA107 with the APA102 protocol and 26 kHz PWM.
 color:
   order: BGR
-  brightness_bits: 8+5
-  brightness_method: global
-  brightness_method_notes: Global 5-bit brightness control
+  channel_bits: 8
+  brightness_control:
+    bits: 5
+    scope: global
   pwm_frequency: 27kHz
 data:
   type: APA102
@@ -35,7 +36,7 @@ datasheet:
       notes: Newstar's NS107S spec, from the IC's developer (Wayback; the newstar-ledstrip.com file now returns 404)
 electrical:
   led_voltage: 5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3.4V
     max: 5V

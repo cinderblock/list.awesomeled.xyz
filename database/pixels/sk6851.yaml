@@ -6,7 +6,7 @@ aliases:
   - SK6851N-RG
 color:
   order: GRB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 4kHz
 data:
   type: WS2811/12
@@ -17,8 +17,8 @@ data:
 datasheet:
   url: https://datasheet.lcsc.com/datasheet/pdf/80b71069049ae9c8aaafeb0811733cd2.pdf # OPSCO SK6851N-RG-002 specification Rev B/0 (2024-03-18, Chinese/English), via LCSC C5440839
 electrical:
-  vcc_voltage: 4.2V
-  vcc_voltage_notes: Chip clamping voltage 3.8-4.2V; the LEDs sit in series strings fed through a current-limiting resistor (30mA per string), 6 on 24V or 30 on rectified 120V AC
+  supply_voltage: 4.2V
+  supply_voltage_notes: Chip clamping voltage 3.8-4.2V; the LEDs sit in series strings fed through a current-limiting resistor (30mA per string), 6 on 24V or 30 on rectified 120V AC
   channel_current: 8.5mA
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6851
@@ -43,7 +43,7 @@ sources:
     url: https://datasheet.lcsc.com/datasheet/pdf/80b71069049ae9c8aaafeb0811733cd2.pdf
     retrieved: '2026-11-18'
     notes: IC electrical parameters, PWM frequency 4.0KHz (typical); Advatek lists 4000Hz
-  electrical.vcc_voltage:
+  electrical.supply_voltage:
     url: https://datasheet.lcsc.com/datasheet/pdf/80b71069049ae9c8aaafeb0811733cd2.pdf
     retrieved: '2026-11-18'
     notes: "IC limit parameter 'Chip clamping voltage VDD +3.8~+4.2V'; chip input voltage 4.2V typical at IDD 1mA; application notes: 'Applicable working voltage for product circuit: 24V、120V, 24V series connected light source 6PCS, 120V series connected light source 30PCS'"

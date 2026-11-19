@@ -5,7 +5,7 @@ aliases:
   - INK1002B
   - GEINK1002RGB
 color:
-  brightness_bits: 8
+  channel_bits: 8
 data:
   type: WS2811/12
   clocked: false
@@ -17,8 +17,8 @@ datasheet:
 electrical:
   led_voltage: 3.5-7.5V
   led_voltage_notes: Separate LED supply (VLED); absolute maximum 7.5 V
-  vcc_voltage: 5V
-  vcc_voltage_notes: 'Driver supply 3-5.5 V in the electrical table (Features: 3.3-5.4 V; absolute maximum 5.4 V)'
+  supply_voltage: 5V
+  supply_voltage_notes: 'Driver supply 3-5.5 V in the electrical table (Features: 3.3-5.4 V; absolute maximum 5.4 V)'
   channel_current: 17mA
   channel_current_notes: 17-19 mA (min-max); ±1% between channels, ±3% between chips
   quiescent_current: 1mA

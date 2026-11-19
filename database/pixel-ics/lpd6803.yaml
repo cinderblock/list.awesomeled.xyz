@@ -3,7 +3,6 @@ creator: Greeled Electronic
 notes: obsolete; superseded by LPD8806
 color:
   channel_bits: 5
-  aggregate_bits: 5
   pwm_frequency: 1kHz
   pwm_frequency_notes: Not listed in the datasheet
 data:

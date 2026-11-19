@@ -8,7 +8,7 @@ aliases:
   - PL9823-F8
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 800Hz
 data:
   type: WS2811/12
@@ -26,7 +26,7 @@ dead_links:
     notes: Hotlink-protected; returns 403 unless the request is referred from instructables.com
 electrical:
   led_voltage: 6V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3.5V
     max: 5V

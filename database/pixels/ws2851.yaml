@@ -4,7 +4,7 @@ creator: WorldSemi
 notes: 12V WS2812 with RGB + external LEDs
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 2kHz
 data:
   type: WS2811/12
@@ -18,14 +18,14 @@ dead_links:
     checked: '2026-11-18'
 electrical:
   led_voltage: 12V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     min: 3V
     max: 5V
   channel_current: 18.5mA
   quiescent_current: 2.1mA
   wattage: 92.5mW
-  vcc_voltage_notes: Can use an external resistor to supply 5V Vdd from a higher system voltage
+  supply_voltage_notes: Can use an external resistor to supply 5V Vdd from a higher system voltage
 other_links:
   - http://www.world-semi.com/Certifications/details-121-4.html
 physical:

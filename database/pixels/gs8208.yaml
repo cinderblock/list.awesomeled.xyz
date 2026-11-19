@@ -5,8 +5,8 @@ creator: Genesis Systec
 notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version booted with onboard patterns - now eliminated
 color:
   order: RGB
-  brightness_bits: 8
-  brightness_method_notes: 36 bits interpolated 12 bits gamma correction per colour
+  channel_bits: 8
+  channel_bits_notes: 12-bit gamma correction per colour (36 bits interpolated)
   pwm_frequency: 8kHz
   pwm_frequency_notes: 8kHz according to datasheet - uses MPWM to effectively multiply 2kHz PWM to 8kHz
 data:
@@ -22,7 +22,7 @@ datasheet:
 electrical:
   led_voltage: 12V
   led_voltage_notes: Datasheet 10.8-13.2V
-  vcc_voltage: 12V
+  supply_voltage: 12V
   gpio:
     min: 3.5V
     max: 5V

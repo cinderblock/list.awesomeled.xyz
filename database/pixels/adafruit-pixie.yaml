@@ -4,7 +4,7 @@ creator: Adafruit Industries
 notes: 3W RGB LED module with its own microcontroller, chained over 115200-baud serial
 color:
   order: RGB
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 500Hz
 data:
   type: Pixie
@@ -17,7 +17,7 @@ data:
 datasheet:
   url: https://cdn-learn.adafruit.com/downloads/pdf/pixie-3-watt-smart-chainable-led-pixels.pdf # Adafruit's learn guide as PDF; the product page says 'Datasheets, schematic, and Fritzing available in the product tutorial' and Adafruit publishes no separate datasheet
 electrical:
-  vcc_voltage: 5V
+  supply_voltage: 5V
   gpio:
     max: 5V
   wattage: 3W
@@ -53,7 +53,7 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols/adafruit-pixie
     retrieved: '2026-11-18'
     notes: "'PWM Rate 500Hz', 'Unsuitable for cameras' (ENTTEC: 500Hz); Adafruit gives no PWM rate"
-  electrical.vcc_voltage:
+  electrical.supply_voltage:
     url: https://learn.adafruit.com/pixie-3-watt-smart-chainable-led-pixels/pinouts
     retrieved: '2026-11-18'
     notes: "'Power with 5VDC'; the data pins are '5V logic in and out'"

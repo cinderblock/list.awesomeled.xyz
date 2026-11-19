@@ -2,7 +2,7 @@ name: P943
 creator: Power MOS Microelectronics
 notes: 5050 RGB LED with a built-in single-wire driver and a backup data line; known only from controller makers' protocol pages
 color:
-  brightness_bits: 8
+  channel_bits: 8
   pwm_frequency: 1.6kHz
 data:
   clocked: false

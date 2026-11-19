@@ -1,9 +1,10 @@
 name: LC2823-2020
 color:
-  brightness_bits: 8+5
+  channel_bits: 8
+  brightness_control:
+    bits: 5
+    scope: global
   pwm_frequency: 27kHz
-  brightness_method: global
-  brightness_method_notes: Extra 5-bit global brightness control
 data:
   type: APA102
   clocked: true
@@ -12,7 +13,7 @@ datasheet:
   url: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
 electrical:
   led_voltage: 3-7.5V
-  vcc_voltage: 5V
+  supply_voltage: 5V
   channel_current: 18mA
   wattage: 90mW
 physical:
