@@ -4,16 +4,15 @@ import { Link } from 'react-router';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { LEDSystemDiagram } from '~/components/diagram/LEDSystemDiagram';
 import { DiagramModeToggle, useDiagramMode } from '~/components/diagram/DiagramModeToggle';
+import { pageMeta } from '~/lib/meta';
 
 export function meta(_args: Route.MetaArgs) {
-  return [
-    { title: 'LED System Overview - Awesome LED List' },
-    {
-      name: 'description',
-      content:
-        'Interactive diagram showing how LED system components connect together - from pattern software through controllers to addressable pixels.',
-    },
-  ];
+  return pageMeta({
+    title: 'LED System Overview',
+    description:
+      'Interactive diagram showing how LED system components connect together - from pattern software through controllers to addressable pixels.',
+    path: '/system-overview',
+  });
 }
 
 export async function loader() {

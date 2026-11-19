@@ -9,9 +9,10 @@ export function Footer() {
         <p className="site-footer-text">
           <RainbowText>Awesome LED List</RainbowText> is a community resource. Data is provided
           as-is with no guarantee of accuracy.{' '}
-          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="site-footer-link">
-            Contribute on GitHub
-          </a>
+          <Link to="/contribute" className="site-footer-link">
+            Help keep it right
+          </Link>
+          .
         </p>
         {/* Everything the header drops on small phones is still reachable here */}
         <nav className="site-footer-nav" aria-label="Footer">
@@ -27,9 +28,15 @@ export function Footer() {
           <Link to="/compare" className="site-footer-link">
             Compare
           </Link>
+          <Link to="/contribute" className="site-footer-link">
+            Contribute
+          </Link>
           <Link to="/about" className="site-footer-link">
             About
           </Link>
+          <a href={REPO_URL} target="_blank" rel="noopener noreferrer" className="site-footer-link">
+            GitHub
+          </a>
         </nav>
       </div>
     </footer>

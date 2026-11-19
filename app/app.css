@@ -40,6 +40,9 @@
 /* Home page: search-first hero, ways in, what the site does, recent reviews */
 @import './styles/home.css';
 
+/* Contributing: the /contribute page and the strip at the foot of entry pages */
+@import './styles/contribute.css';
+
 /* LED System Diagram: Interactive system overview */
 @import './styles/diagram.css';
 

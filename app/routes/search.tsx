@@ -5,6 +5,7 @@ import { PageWrapper } from '~/components/layout/PageWrapper';
 import { useHydrated } from '~/hooks/useHydrated';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { resultPath, SearchResult } from '~/components/search/SearchResult';
+import { pageMeta } from '~/lib/meta';
 import { searchIndex, type SearchHit } from '~/lib/search';
 import { useSearchIndex } from '~/lib/search-client';
 import { CATEGORIES } from '~/lib/types';
@@ -14,15 +15,13 @@ import type { Route } from './+types/search';
 const RESULT_LIMIT = 300;
 
 export function meta(_args: Route.MetaArgs) {
-  return [
-    { title: 'Search - Awesome LED List' },
-    {
-      name: 'description',
-      content: 'Search every category of the Awesome LED List at once.',
-    },
+  return pageMeta({
+    title: 'Search',
+    description: 'Search every category of the Awesome LED List at once.',
+    path: '/search',
     // Result pages are not content: keep them out of search engines
-    { name: 'robots', content: 'noindex, follow' },
-  ];
+    noindex: true,
+  });
 }
 
 /**

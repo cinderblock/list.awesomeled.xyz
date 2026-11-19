@@ -83,6 +83,89 @@ html[data-table-layout='cards'] .data-table-sort-menu {
   margin-bottom: var(--space-3);
 }
 
+.data-table-empty .data-table-empty-missing {
+  margin: var(--space-4) 0 0;
+  font-size: 0.875rem;
+}
+
+.data-table-empty-missing a,
+.category-contribute a {
+  color: var(--category-primary, var(--foreground));
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* ==========================================================================
+   Around the table: the category's introduction above, a way to add below
+   ========================================================================== */
+.category-intro {
+  max-width: 46rem;
+  margin-top: var(--space-2);
+  font-size: 0.9375rem;
+}
+
+.category-intro > summary {
+  display: inline-block;
+  padding: 0.125rem 0;
+  font-weight: 500;
+  color: var(--category-primary, var(--foreground));
+  cursor: pointer;
+  list-style: none;
+}
+
+.category-intro > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* A chevron that turns when the introduction opens */
+.category-intro > summary::after {
+  content: '';
+  display: inline-block;
+  width: 0.4em;
+  height: 0.4em;
+  margin-left: 0.5em;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-0.15em) rotate(45deg);
+  transition: transform var(--transition-fast);
+}
+
+.category-intro[open] > summary::after {
+  transform: translateY(0.05em) rotate(-135deg);
+}
+
+.category-intro-body {
+  padding: var(--space-2) 0 var(--space-1);
+  line-height: 1.6;
+}
+
+.category-intro-body p + p,
+.category-intro-body p + ul,
+.category-intro-body ul + p {
+  margin-top: var(--space-3);
+}
+
+.category-intro-body ul {
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.category-intro-body li + li {
+  margin-top: 0.25rem;
+}
+
+.category-intro-body a {
+  color: var(--category-primary, var(--foreground));
+  text-decoration: underline;
+}
+
+.category-contribute {
+  margin-top: var(--space-6);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
 /* ==========================================================================
    Column header: sort button + menu button
    ========================================================================== */

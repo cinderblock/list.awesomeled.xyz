@@ -34,6 +34,11 @@ import {
   type FieldSource,
 } from '~/components/ui/EntryLinks';
 import { entryImages, imageUrl, licenseUrl, type EntryImage } from '~/lib/images';
+import { CopyLinkButton, EntryContribute } from '~/components/entry/EntryActions';
+import { pageMeta } from '~/lib/meta';
+import { entrySeo } from '~/lib/seo.server';
+import { LinkRecord, UrlText } from '~/components/entry/LinkRecord';
+import { asLinkRecord } from '~/lib/url-label';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -58,10 +63,15 @@ export function meta({ data: loaderData }: Route.MetaArgs) {
   if (!loaderData) {
     return [{ title: 'Not Found - Awesome LED List' }];
   }
-  return [
-    { title: `${loaderData.entry.name} - ${loaderData.category.name} - Awesome LED List` },
-    { name: 'description', content: `Details about ${loaderData.entry.name}` },
-  ];
+  const { category, entry, seo } = loaderData;
+  return pageMeta({
+    title: `${entry.name} - ${category.name}`,
+    description: seo.description,
+    path: `${category.path}/${entry.id}`,
+    image: seo.image,
+    imageAlt: `${entry.name}: ${category.name} on the Awesome LED List`,
+    jsonLd: seo.jsonLd,
+  });
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
@@ -98,6 +108,8 @@ export async function loader({ params }: Route.LoaderArgs) {
     connectorNames,
     // Parts the System Designer can use get a link that starts a design with them
     designer: designerHref(params.category, entry, graph),
+    // Description, preview image and structured data for the page's <head>
+    seo: entrySeo(category, entry),
   };
 }
 
@@ -572,6 +584,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
                 <PencilRuler size={14} aria-hidden="true" /> Use in the designer
               </Link>
             )}
+            <CopyLinkButton path={`${category.path}/${entry.id}`} />
           </div>
           {entry.creator ? (
             <CreatorLine
@@ -689,6 +702,13 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
           </Section>
         ))}
       </div>
+
+      <EntryContribute
+        categoryId={category.id}
+        entryId={String(entry.id)}
+        name={entry.name}
+        path={`${category.path}/${entry.id}`}
+      />
 
       {modalImage && (
         <div className="image-modal" onClick={() => setModalImage(null)}>
@@ -918,9 +938,9 @@ function formatValue(
               target="_blank"
               rel="noopener noreferrer"
               className="entry-value-link"
-              style={{ wordBreak: 'break-all' }}
+              style={{ overflowWrap: 'break-word' }}
             >
-              {stripSchemaAndWww(url)}
+              <UrlText url={url} />
             </a>
           ))}
         </div>
@@ -976,6 +996,11 @@ function formatValue(
     }
   }
 
+  // A link with a few words about it ({url, host, notes}, {name, page}):
+  // one line instead of a nested grid of its keys
+  const linkRecord = asLinkRecord(value);
+  if (linkRecord) return <LinkRecord record={linkRecord} />;
+
   // Nested sub-object (e.g. power.voltage {min,max}, protocols {...})
   if (typeof value === 'object' && !(value instanceof Date)) {
     const obj = value as Record<string, unknown>;
@@ -1021,9 +1046,9 @@ function formatValue(
         target="_blank"
         rel="noopener noreferrer"
         className="entry-value-link"
-        style={{ wordBreak: 'break-all' }}
+        style={{ overflowWrap: 'break-word' }}
       >
-        {stripSchemaAndWww(strValue)}
+        <UrlText url={strValue} />
       </a>
     );
   }

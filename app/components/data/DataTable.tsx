@@ -18,6 +18,7 @@ import { getPath, type FieldMeta } from '~/lib/fields';
 import { COMPARE_MAX, entryRef, toggleCompare, useCompareItems } from '~/lib/compare';
 import { firstImageFile, imageUrl } from '~/lib/images';
 import { DENSITY_PREF, getPref, setPref, usePref } from '~/lib/prefs';
+import { newIssueUrl } from '~/lib/site';
 import {
   applyFilters,
   buildSearchText,
@@ -830,6 +831,26 @@ export function DataTable({ data, fields, category }: DataTableProps) {
                           <X size={14} />
                           Clear search and filters
                         </button>
+                      )}
+                      {/* Searched for something by name and came up empty:
+                          it may simply not be on the list yet */}
+                      {search.trim() && (
+                        <p className="data-table-empty-missing">
+                          Not on the list?{' '}
+                          <a
+                            href={newIssueUrl({
+                              template: '2-new-entry.yml',
+                              title: `Add: ${search.trim()}`,
+                              name: search.trim(),
+                              category: category.name,
+                            })}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Tell us about it
+                          </a>{' '}
+                          or <Link to={`/contribute#${category.id}`}>add it yourself</Link>.
+                        </p>
                       )}
                     </td>
                   </tr>

@@ -3,16 +3,16 @@ import { getRelationGraph, loadCategoryData } from '~/lib/data';
 import { buildCatalog } from '~/lib/designer';
 import type { BaseEntry } from '~/lib/types';
 import { Designer } from '~/components/designer/Designer';
+import { pageMeta } from '~/lib/meta';
 
 export function meta(_args: Route.MetaArgs) {
-  return [
-    { title: 'System Designer - Awesome LED List' },
-    {
-      name: 'description',
-      content:
-        'Design an addressable LED system: pick pixels, a controller, level shifters and connectors, with live compatibility checks, a power plan with injection and fusing guidance, a priced parts list, a shareable link and a downloadable diagram.',
-    },
-  ];
+  // Every design is a query string on this one page (canonical: /designer)
+  return pageMeta({
+    title: 'System Designer',
+    description:
+      'Design an addressable LED system: pick pixels, a controller, level shifters and connectors, with live compatibility checks, a power plan with injection and fusing guidance, a priced parts list, a shareable link and a downloadable diagram.',
+    path: '/designer',
+  });
 }
 
 // Categories the designer draws parts from

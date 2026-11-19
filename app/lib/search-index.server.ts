@@ -4,18 +4,15 @@
  * by the browser the first time someone searches.
  */
 
-import { buildTableColumns } from '~/components/data/table-columns';
 import { loadCategoryData } from './data';
 import { entityName, fieldText, fieldValues, getPath, isEmptyValue } from './fields';
 import { loadFieldCatalog } from './fields.server';
+import { factColumns, keyFacts } from './key-facts.server';
 import { firstImageFile } from './images';
 import type { SearchDoc } from './search';
 import { CATEGORIES, type BaseEntry } from './types';
 
-// Columns that are shown elsewhere on a result row, or say nothing about it
-const NOT_KEY_FACTS = new Set(['links', 'name', 'creator', 'status', 'updated']);
 const KEY_FACT_COUNT = 3;
-const KEY_FACT_MAX_LENGTH = 36;
 // Prose is searchable, but only its opening: the index ships to every searcher
 const PROSE_LIMIT = 240;
 
@@ -36,8 +33,7 @@ export function buildSearchIndex(): SearchDoc[] {
   const docs: SearchDoc[] = [];
   for (const category of CATEGORIES) {
     const fields = loadFieldCatalog(category.id);
-    const columns = buildTableColumns(category.id, fields);
-    const factColumns = columns.filter((c) => c.isDefault && !NOT_KEY_FACTS.has(c.key));
+    const columns = factColumns(category.id);
 
     for (const entry of loadCategoryData(category.id)) {
       const doc: SearchDoc = { c: category.id, i: String(entry.id), n: entry.name };
@@ -52,15 +48,7 @@ export function buildSearchIndex(): SearchDoc[] {
       if (aliases.length) doc.a = aliases;
 
       // A few facts to tell results apart: the first default columns with a value
-      const facts: string[] = [];
-      for (const col of factColumns) {
-        if (facts.length >= KEY_FACT_COUNT) break;
-        const text = col.text(entry);
-        // "No" and zero counts are not what tells two results apart
-        if (!text || text.length > KEY_FACT_MAX_LENGTH || text === 'No' || text === '0') continue;
-        const numeric = col.field && ['number', 'year', 'boolean'].includes(col.field.kind);
-        facts.push(numeric ? `${col.label} ${text === 'Yes' ? '' : text}`.trim() : text);
-      }
+      const facts = keyFacts(entry, columns, KEY_FACT_COUNT);
       if (facts.length) doc.k = facts.join(' · ');
 
       // Everything else worth matching: facet values and the start of prose.

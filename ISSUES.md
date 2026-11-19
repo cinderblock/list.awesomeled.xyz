@@ -383,16 +383,6 @@ largest clusters:
 Why it matters: these are the facts the tables filter on. Overlaps the
 connector list above.
 
-## Entry pages: long URLs in narrow cards (stream 7)
-
-Seen by cross-links (stream 4) at 1280 px. URLs in vendors' `page` (and other
-URL values) break every few characters down a third-width card: 8 lines for one
-`raw.githubusercontent.com` link. Showing each URL as its host name, the way
-`sources` provenance does ("docs.beagleboard.org"), would fix it; the generic
-value rendering is stream 7's. The datasheet half of this entry is fixed: the
-datasheet card no longer repeats `url`, `mirror` or `sources`, which are all
-in the links bar with source notes in their tooltips (stream 5).
-
 ## Spec contradictions found while writing new entries (stream 2)
 
 Found by cross-links (stream 4) research for the new pixel-IC and board

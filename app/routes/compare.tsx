@@ -19,6 +19,7 @@ import { copyText } from '~/lib/download';
 import { matrixToMarkdown } from '~/lib/export';
 import { entityName, getPath, SECTION_ORDER } from '~/lib/fields';
 import { firstImageFile, imageUrl } from '~/lib/images';
+import { pageMeta } from '~/lib/meta';
 import { openSearch } from '~/lib/search-client';
 import { absoluteUrl } from '~/lib/site';
 import { toast } from '~/lib/toast';
@@ -26,15 +27,13 @@ import { CATEGORIES, type BaseEntry } from '~/lib/types';
 import type { Route } from './+types/compare';
 
 export function meta(_args: Route.MetaArgs) {
-  return [
-    { title: 'Compare - Awesome LED List' },
-    {
-      name: 'description',
-      content: 'Compare up to four entries of the Awesome LED List side by side.',
-    },
+  return pageMeta({
+    title: 'Compare',
+    description: 'Compare up to four entries of the Awesome LED List side by side.',
+    path: '/compare',
     // Every combination of entries is a different page: not for search engines
-    { name: 'robots', content: 'noindex, follow' },
-  ];
+    noindex: true,
+  });
 }
 
 // One compared entry, resolved against its category's data

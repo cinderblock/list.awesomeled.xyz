@@ -20,15 +20,18 @@ import { RainbowText } from '~/components/ui/RainbowText';
 import { RelativeDate } from '~/components/ui/RelativeDate';
 import { loadHomeSummary } from '~/lib/home.server';
 import { imageUrl } from '~/lib/images';
-import { newIssueUrl, repoFileUrl, SITE_DESCRIPTION, SITE_NAME } from '~/lib/site';
+import { pageMeta, siteJsonLd } from '~/lib/meta';
+import { newIssueUrl, SITE_DESCRIPTION, SITE_NAME } from '~/lib/site';
 import { CATEGORIES } from '~/lib/types';
 import type { Route } from './+types/home';
 
 export function meta(_args: Route.MetaArgs) {
-  return [
-    { title: `${SITE_NAME}: addressable LEDs, pixel controllers, and parts` },
-    { name: 'description', content: SITE_DESCRIPTION },
-  ];
+  return pageMeta({
+    fullTitle: `${SITE_NAME}: addressable LEDs, pixel controllers, and parts`,
+    description: SITE_DESCRIPTION,
+    path: '/',
+    jsonLd: [siteJsonLd()],
+  });
 }
 
 export async function loader() {
@@ -288,25 +291,20 @@ export default function Home({ loaderData }: Route.ComponentProps) {
           </h2>
           <p>
             The data is plain YAML on GitHub. Corrections arrive as pull requests, so they are
-            reviewed before they go live. If you’d rather just tell us, open an issue.
+            reviewed before they go live. If you’d rather just tell us, that works too.
           </p>
         </div>
         <div className="home-contribute-actions">
+          <Link className="btn btn--primary" to="/contribute">
+            How to contribute
+          </Link>
           <a
-            className="btn btn--primary"
-            href={newIssueUrl()}
+            className="btn btn--outline"
+            href={newIssueUrl({ template: '1-correction.yml' })}
             target="_blank"
             rel="noopener noreferrer"
           >
             Report a problem
-          </a>
-          <a
-            className="btn btn--outline"
-            href={repoFileUrl('CONTRIBUTING.md')}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            How to contribute
           </a>
         </div>
       </section>

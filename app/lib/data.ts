@@ -402,22 +402,34 @@ export function getCategoryById(id: string): Category | undefined {
  * Get all routes that should be pre-rendered
  */
 export function getAllRoutes(): string[] {
-  const routes: string[] = ['/', '/about', '/system-overview', '/designer', '/search', '/compare'];
+  const routes: string[] = [
+    '/',
+    '/about',
+    '/contribute',
+    '/system-overview',
+    '/designer',
+    '/search',
+    '/compare',
+  ];
 
   routes.push('/database.csv.zip', '/database.yaml.zip', '/search-index.json');
+  // For search engines and link previews (routes/sitemap.ts, robots.ts, og.*.ts)
+  routes.push('/sitemap.xml', '/robots.txt', '/og/site.jpg');
 
   for (const category of CATEGORIES) {
-    // Add category page
+    // Add category page and its link-preview image
     routes.push(category.path);
+    routes.push(`/og/${category.id}.jpg`);
 
     // Add CSV and JSON exports
     routes.push(`/${category.id}.csv`);
     routes.push(`/${category.id}.json`);
 
-    // Add individual entry pages
+    // Add individual entry pages, each with its link-preview image
     const entries = loadCategoryData(category.id);
     for (const entry of entries) {
       routes.push(`${category.path}/${entry.id}`);
+      routes.push(`/og/${category.id}/${entry.id}.jpg`);
     }
   }
 
