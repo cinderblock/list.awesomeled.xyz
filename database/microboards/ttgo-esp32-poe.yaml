@@ -1,8 +1,9 @@
 name: TTGo ESP32 PoE
+status: active
 release_year: 2020
 creator:
   name: Lilygo
-  page: http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3
+  page: https://lilygo.cc/products/t-internet-poe
 power:
   gpio_voltage: 3.3V
 compute:
@@ -18,4 +19,15 @@ connectivity:
   poe: Y
 io:
   max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
-price: 16
+price: 16.01
+price_source:
+  notes: T-Internet-POE V2 board only [H438-01]; with the downloader board [H439] $17.62
+  part: H438-01
+  retrieved: '2026-11-18'
+  url: https://lilygo.cc/products/t-internet-poe
+  vendor: LILYGO
+sources:
+  status:
+    url: https://lilygo.cc/products/t-internet-poe
+    retrieved: '2026-11-18'
+    notes: 'T-Internet-POE V2 available, $16.01'

@@ -1,5 +1,5 @@
 name: Teensy++ 2.0
-status: discontinued # PJRC: no plans to manufacture more
+status: discontinued
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensypp.html
@@ -25,6 +25,12 @@ io:
   max_outputs: 1 # AVR bit-bang
 price: 24
 price_source:
-  notes: final list price
-  retrieved: '2026-07-03'
+  notes: last list price, still shown on the PJRC store page (Inventory Status Out Of Stock)
+  retrieved: '2026-11-18'
+  url: https://www.pjrc.com/store/teensypp.html
   vendor: PJRC
+sources:
+  status:
+    url: https://www.pjrc.com/store/teensypp.html
+    retrieved: '2026-11-18'
+    notes: '"Teensy++ 2.0 is discontinued. PJRC has no plans to manufacture more"'

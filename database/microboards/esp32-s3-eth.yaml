@@ -1,4 +1,5 @@
 name: ESP32-S3 ETH
+status: active
 release_year: 2024
 creator:
   name: Waveshare
@@ -14,4 +15,15 @@ connectivity:
 io:
   storage: microSD
   max_outputs: 4 # ESP32-S3: 4 RMT TX channels
-price: 17
+price: 16.99
+price_source:
+  notes: board only, without pin headers (SKU 28972); with PoE module $20.99 (SKU 28771)
+  part: '28972'
+  retrieved: '2026-11-18'
+  url: https://www.waveshare.com/esp32-s3-eth.htm?sku=28972
+  vendor: Waveshare
+sources:
+  status:
+    url: https://www.waveshare.com/esp32-s3-eth.htm
+    retrieved: '2026-11-18'
+    notes: 'listed for sale, $16.99 board only'

@@ -1,4 +1,5 @@
 name: Raspberry Pi Zero v1.2
+status: discontinued
 release_year: 2015
 creator:
   name: Raspberry Pi Foundation
@@ -27,5 +28,22 @@ io:
   bms: 'No'
   imu: false
 price: 5
+price_source:
+  notes: 'launch list price ("Raspberry Pi Zero: the $5 computer")'
+  retrieved: '2015-11-26'
+  url: https://www.raspberrypi.com/news/raspberry-pi-zero/
+  vendor: Raspberry Pi
+related:
+  - type: replacement
+    source:
+      url: https://www.raspberrypi.com/news/zero-grows-camera-connector/
+      retrieved: '2026-11-18'
+      notes: 'Zero with camera connector (v1.3) replaced v1.2'
+    ref: microboards/raspberry-pi-zero-v1-3
+sources:
+  status:
+    url: https://www.raspberrypi.com/news/zero-grows-camera-connector/
+    retrieved: '2026-11-18'
+    notes: 'May 2016: production switched to the camera-connector Zero (v1.3); resellers list only v1.3 (SC0019)'
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

@@ -17,3 +17,15 @@ io:
   bms: 'No'
   imu: false
   max_outputs: 2 # WLED on ESP8266: UART1/DMA + bit-bang
+price:
+  amount: 2.03
+  max: 4.15
+price_source:
+  notes: >-
+    Single-board NodeMCU V2 / CP2102 (Amica-style, some now with the CH9102 USB chip) listings on aliexpress.us:
+    $2.03, $2.30, $2.65, $2.76, $2.95, $3.62, $3.92, $4.15. Regular prices, excluding the $1.09 new-shopper deal
+    and shipping. Combined "CH340/CP2102 V3 V2" listings start lower ($1.12-$2.56) but that is usually the CH340 V3
+    variant.
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-NodeMCU-v2-ESP8266-CP2102.html
+  vendor: AliExpress (street)

@@ -1,4 +1,5 @@
 name: Raspberry Pi 4 Model B
+status: active
 release_year: 2019
 creator:
   name: Raspberry Pi Foundation
@@ -29,3 +30,15 @@ io:
   bms: 'No'
   imu: false
 price: 35
+price_source:
+  notes: >-
+    1GB list price from the product brief (published October 2026); 2GB $67.50, 3GB $83.75, 4GB $100, 8GB $165
+    after the 2025-2026 memory-cost rises; product page "From $35"
+  retrieved: '2026-11-18'
+  url: https://pip-assets.raspberrypi.com/categories/545-raspberry-pi-4-model-b/documents/RP-008344-DS-7-raspberry-pi-4-product-brief.pdf
+  vendor: Raspberry Pi
+sources:
+  status:
+    url: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
+    retrieved: '2026-11-18'
+    notes: '"will remain in production until at least January 2034"'

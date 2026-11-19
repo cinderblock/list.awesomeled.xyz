@@ -1,4 +1,5 @@
 name: Teensy 3.2
+status: discontinued
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensy32.html
@@ -23,6 +24,23 @@ io:
   storage: Shield
   bms: 'No'
   imu: false
-price: 19.8
+price: 24.9
+price_source:
+  notes: last list price, from a Wayback capture of the PJRC store page (shown as Sold Out); the page no longer shows a price
+  retrieved: '2025-11-08'
+  url: https://web.archive.org/web/20251108111313/https://www.pjrc.com/store/teensy32.html
+  vendor: PJRC
+related:
+  - type: replacement
+    source:
+      url: https://www.pjrc.com/store/teensy32.html
+      retrieved: '2026-11-18'
+      notes: 'PJRC: "We highly recommend migrating to Teensy 4.0"'
+    ref: microboards/teensy-4-0
+sources:
+  status:
+    url: https://www.pjrc.com/store/teensy32.html
+    retrieved: '2026-11-18'
+    notes: '"Teensy 3.2 is Discontinued"'
 technical_notes:
   - 'Max outputs: theoretically many more, but the common library for efficient hardware use is limited to 8'

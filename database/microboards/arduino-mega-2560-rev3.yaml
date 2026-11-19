@@ -1,7 +1,8 @@
 name: Arduino Mega 2560 Rev3
+status: active
 creator:
   name: Arduino
-  page: https://store-usa.arduino.cc/collections/boards/products/arduino-mega-2560-rev3
+  page: https://store-usa.arduino.cc/products/arduino-mega-2560-rev3
 power:
   voltage:
     min: 6V
@@ -21,4 +22,15 @@ io:
   max_outputs: 54
   bms: 'No'
   imu: false
-price: 40.3
+price: 49.9
+price_source:
+  notes: regular price (also $49.90 in Aug and Oct 2026 captures); on sale $34.93 (30% off) at retrieval
+  part: A000067
+  retrieved: '2026-11-18'
+  url: https://store-usa.arduino.cc/products/arduino-mega-2560-rev3
+  vendor: Arduino Store USA
+sources:
+  status:
+    url: https://store-usa.arduino.cc/products/arduino-mega-2560-rev3
+    retrieved: '2026-11-18'
+    notes: 'in stock, regular $49.90'

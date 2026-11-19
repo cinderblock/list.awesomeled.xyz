@@ -19,3 +19,14 @@ io:
   bms: 'No'
   imu: false
   max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
+price:
+  amount: 2.84
+  max: 6.09
+price_source:
+  notes: >-
+    Single-board ESP32 DevKit / NodeMCU-32S (ESP-32S / ESP-WROOM-32) clone listings on aliexpress.us with 350+ sold:
+    12 listings from $2.84 to $6.09 (most $3.13-$4.55). Regular prices, excluding the $1.09 new-shopper deal and
+    shipping; the price shown is each listing's cheapest variant (30- or 38-pin, CH340 or CP2102).
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-NodeMCU-32S-ESP32.html
+  vendor: AliExpress (street)

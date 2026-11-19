@@ -1,4 +1,5 @@
 name: Raspberry Pi 1 Model A+
+status: active
 release_year: 2014
 creator:
   name: Raspberry Pi Foundation
@@ -28,5 +29,18 @@ io:
   bms: 'No'
   imu: false
 price: 20
+price_source:
+  notes: >-
+    Raspberry Pi publishes no list price for this model; approved reseller Vilros lists it at $20 (out of stock);
+    Adafruit's listing shows $24.95, marked discontinued
+  part: RP1A+
+  retrieved: '2026-11-18'
+  url: https://vilros.com/products/raspberry-pi1-model
+  vendor: Vilros
+sources:
+  status:
+    url: https://www.raspberrypi.com/products/raspberry-pi-1-model-a-plus/
+    retrieved: '2026-11-18'
+    notes: '"will remain in production until at least January 2030"'
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

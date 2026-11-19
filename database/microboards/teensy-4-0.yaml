@@ -1,4 +1,5 @@
 name: Teensy 4.0
+status: active
 release_year: 2019
 creator:
   name: PJRC
@@ -22,4 +23,15 @@ io:
   bms: 'No'
   imu: false
   max_outputs: 8 # OctoWS2811; 4.x any-pin support allows more
-price: 19.95
+price: 23.8
+price_source:
+  notes: PJRC's store page says SparkFun now manufactures Teensy and sends buyers there; 25+ $21.49, 100+ $19.95
+  part: DEV-15583
+  retrieved: '2026-11-18'
+  url: https://www.sparkfun.com/teensy-4-0.html
+  vendor: SparkFun
+sources:
+  status:
+    url: https://www.sparkfun.com/teensy-4-0.html
+    retrieved: '2026-11-18'
+    notes: 'in stock, $23.80 (PJRC: SparkFun now manufactures Teensy)'

@@ -1,7 +1,8 @@
 name: ATtiny85
+status: active
 creator:
   name: Atmel
-  page: https://www.microchip.com/wwwproducts/en/ATtiny85
+  page: https://www.microchip.com/en-us/product/ATtiny85
 power:
   voltage:
     max: 5V
@@ -21,4 +22,17 @@ io:
   max_outputs: 6
   bms: 'No'
   imu: false
-price: 1
+price: 1.66
+price_source:
+  notes: >-
+    microchipDIRECT buy-now price for the PDIP-8 tube part at 1-24 pcs, read from the Purchase
+    table on the product page; 100+ $1.39, 5000+ est. $1.22; SOIC-8 ATTINY85-20SU is $1.50
+  part: ATTINY85-20PU
+  retrieved: '2026-11-18'
+  url: https://www.microchip.com/en-us/product/ATtiny85
+  vendor: Microchip Direct
+sources:
+  status:
+    url: https://www.microchip.com/en-us/product/ATtiny85
+    retrieved: '2026-11-18'
+    notes: '"Status: In Production"'

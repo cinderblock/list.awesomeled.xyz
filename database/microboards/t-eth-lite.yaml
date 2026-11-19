@@ -1,8 +1,9 @@
 name: t-eth-lite
+status: active
 release_year: 2024
 creator:
   name: Lilygo
-  page: https://www.lilygo.cc/products/t-eth-lite
+  page: https://lilygo.cc/products/t-eth-lite
 notes: https://github.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series
 compute:
   soc: ESP32 S3
@@ -16,4 +17,15 @@ connectivity:
   poe: 'Y'
 io:
   max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
-price: 15
+price: 14.88
+price_source:
+  notes: ESP32-S3 variant [H674]; classic ESP32 variant [H673] $13.30; PoE shield [H675] $11.43 extra
+  part: H674
+  retrieved: '2026-11-18'
+  url: https://lilygo.cc/products/t-eth-lite
+  vendor: LILYGO
+sources:
+  status:
+    url: https://lilygo.cc/products/t-eth-lite
+    retrieved: '2026-11-18'
+    notes: 'ESP32-S3 variant available, $14.88'

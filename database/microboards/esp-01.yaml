@@ -18,3 +18,14 @@ io:
   max_outputs: 1 # two exposed GPIO; one pixel line practical
 other_links:
   - https://www.edn.com/electroschematics/the-mighty-esp-01-adapter/
+price:
+  amount: 1.4
+  max: 3.87
+price_source:
+  notes: >-
+    Single-module ESP-01/ESP-01S listings on aliexpress.us: $1.40, $2.11, $3.72 (Ai-Thinker original), $3.87.
+    Regular prices, excluding the $1.09 new-shopper deal and shipping. Amazon 4-5 packs work out to $2.25-$2.80
+    per module. Current listings are almost all the ESP-01S revision.
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-ESP-01S-ESP8266-serial-WiFi-module.html
+  vendor: AliExpress (street)

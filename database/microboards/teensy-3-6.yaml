@@ -1,5 +1,5 @@
 name: Teensy 3.6
-status: discontinued # PJRC EOL (90 nm chip supply); last stock sold out
+status: discontinued
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensy36.html
@@ -26,6 +26,19 @@ io:
   max_outputs: 8 # OctoWS2811 DMA port
 price: 38.65
 price_source:
-  notes: last list price
-  retrieved: '2026-07-03'
+  notes: last list price, still shown on the PJRC store page (Inventory Status Out Of Stock)
+  retrieved: '2026-11-18'
+  url: https://www.pjrc.com/store/teensy36.html
   vendor: PJRC
+related:
+  - type: replacement
+    source:
+      url: https://www.pjrc.com/store/teensy36.html
+      retrieved: '2026-11-18'
+      notes: 'PJRC: "We highly recommend migrating to Teensy 4.1"'
+    ref: microboards/teensy-4-1
+sources:
+  status:
+    url: https://www.pjrc.com/store/teensy36.html
+    retrieved: '2026-11-18'
+    notes: 'store page marked Discontinued; "These are the very last Teensy 3.6"; out of stock'

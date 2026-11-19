@@ -1,4 +1,5 @@
 name: Teensy-LC
+status: discontinued
 creator:
   name: PJRC
   page: https://www.pjrc.com/teensy/teensyLC.html
@@ -23,4 +24,21 @@ io:
   bms: 'No'
   imu: false
   max_outputs: 1 # WS2812Serial
-price: 11.65
+price: 12.85
+price_source:
+  notes: last list price, still shown on the PJRC store page (marked Unavailable, Inventory Status Out Of Stock)
+  retrieved: '2026-11-18'
+  url: https://www.pjrc.com/store/teensylc.html
+  vendor: PJRC
+related:
+  - type: replacement
+    source:
+      url: https://www.pjrc.com/store/teensylc.html
+      retrieved: '2026-11-18'
+      notes: 'PJRC: "We highly recommend migrating to Teensy 4.0"'
+    ref: microboards/teensy-4-0
+sources:
+  status:
+    url: https://www.pjrc.com/store/teensylc.html
+    retrieved: '2026-11-18'
+    notes: '"We do not expect to ever have more Teensy LC available"; Unavailable, out of stock'

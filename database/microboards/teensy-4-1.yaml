@@ -1,4 +1,5 @@
 name: Teensy 4.1
+status: active
 creator:
   name: PJRC
   page: https://www.pjrc.com/store/teensy41.html
@@ -16,5 +17,13 @@ io:
   max_outputs: 32 # OctoWS2811 any-pin on 4.1 (8 with the classic adaptor)
 price: 31.5
 price_source:
-  retrieved: '2026-07-03'
+  notes: PJRC's store page says SparkFun now manufactures Teensy and sends buyers there; with Ethernet chip; 25+ $28.49, 100+ $26.49
+  part: DEV-16771
+  retrieved: '2026-11-18'
+  url: https://www.sparkfun.com/teensy-4-1.html
   vendor: SparkFun
+sources:
+  status:
+    url: https://www.sparkfun.com/teensy-4-1.html
+    retrieved: '2026-11-18'
+    notes: 'in stock, $31.50 (PJRC: SparkFun now manufactures Teensy)'

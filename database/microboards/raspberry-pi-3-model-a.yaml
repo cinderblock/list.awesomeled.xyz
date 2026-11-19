@@ -1,4 +1,5 @@
 name: Raspberry Pi 3 Model A+
+status: active
 release_year: 2018
 creator:
   name: Raspberry Pi Foundation
@@ -30,5 +31,18 @@ io:
   bms: 'No'
   imu: false
 price: 25
+price_source:
+  notes: >-
+    Raspberry Pi publishes no list price for 3A+ (its product brief has none); approved resellers PiShop.us and
+    Adafruit list $25 (both out of stock), Maker Bright $26, SparkFun $27.50, Vilros $29.50
+  part: SC0130(J)
+  retrieved: '2026-11-18'
+  url: https://www.pishop.us/product/raspberry-pi-3-model-a-plus-512mb-ram/
+  vendor: PiShop.us
+sources:
+  status:
+    url: https://www.raspberrypi.com/products/raspberry-pi-3-model-a-plus/
+    retrieved: '2026-11-18'
+    notes: '"will remain in production until at least January 2030"'
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

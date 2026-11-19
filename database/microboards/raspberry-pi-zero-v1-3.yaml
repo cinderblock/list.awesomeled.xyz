@@ -1,4 +1,5 @@
 name: Raspberry Pi Zero v1.3
+status: active
 creator:
   name: Raspberry Pi Foundation
   page: https://www.raspberrypi.com/products/raspberry-pi-zero/
@@ -25,6 +26,19 @@ io:
   storage: microSD
   bms: 'No'
   imu: false
-price: 5
+price: 10
+price_source:
+  notes: >-
+    Raspberry Pi publishes no list price for Zero; approved resellers PiShop.us, Adafruit and Vilros all list $10
+    (all out of stock), Maker Bright $11, SparkFun $14; launched at $5 in 2015
+  part: SC0019
+  retrieved: '2026-11-18'
+  url: https://www.pishop.us/product/raspberry-pi-zero/
+  vendor: PiShop.us
+sources:
+  status:
+    url: https://www.raspberrypi.com/products/raspberry-pi-zero/
+    retrieved: '2026-11-18'
+    notes: '"will remain in production until at least January 2030"'
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

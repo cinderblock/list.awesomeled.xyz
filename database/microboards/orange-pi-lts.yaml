@@ -1,5 +1,8 @@
 name: Orange Pi LTS
-creator: Shenzhen Xunlong Software
+status: active
+creator:
+  name: Shenzhen Xunlong Software
+  page: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
 vendors:
   - url: https://www.aliexpress.com/item/4000049660873.html
 compute:
@@ -18,4 +21,16 @@ connectivity:
   usb: OTG x1, 2.0 x1
 io:
   storage: microSD
-price: 8.5
+price: 31.99
+price_source:
+  notes: >-
+    Orange Pi Zero LTS 512MB from Orange Pi's official Amazon store (a purchase link on orangepi.org); the official
+    AliExpress store listing shows $31.49
+  retrieved: '2026-11-18'
+  url: https://www.amazon.com/dp/B0B2RBKMC6
+  vendor: Orange Pi Store (Amazon)
+sources:
+  status:
+    url: https://www.amazon.com/dp/B0B2RBKMC6
+    retrieved: '2026-11-18'
+    notes: "Orange Pi's official Amazon store (linked from orangepi.org), Zero LTS 512MB in stock at $31.99"

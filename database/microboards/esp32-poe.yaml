@@ -1,4 +1,5 @@
 name: ESP32-PoE
+status: active
 release_year: 2020
 creator:
   name: Olimex
@@ -20,4 +21,19 @@ io:
   bms: 1S
   imu: false
   max_outputs: 8 # WLED: 8 parallel RMT channels on classic ESP32
-price: 25
+price:
+  amount: 17.95
+  currency: EUR
+price_source:
+  notes: >-
+    base ESP32-POE, ex-VAT (Olimex lists net export prices; EU buyers without a VAT ID pay 20% on top);
+    10-49 pcs 16.16 EUR, 50+ 14.36 EUR
+  part: ESP32-POE
+  retrieved: '2026-11-18'
+  url: https://www.olimex.com/Products/IoT/ESP32/ESP32-POE/open-source-hardware
+  vendor: Olimex
+sources:
+  status:
+    url: https://www.olimex.com/Products/IoT/ESP32/ESP32-POE/open-source-hardware
+    retrieved: '2026-11-18'
+    notes: 'In Stock, 17.95 EUR'

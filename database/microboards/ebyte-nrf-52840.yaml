@@ -1,12 +1,24 @@
 name: Ebyte NRF 52840
+status: active
 release_year: 2021
 creator:
   name: Ebyte
-  page: https://www.ebyte.com/en/new-view-info.aspx?id=378
+  page: https://www.cdebyte.com/products/E73-2G4M08S1C
 compute:
   soc: NRF 52840
   cpu: ARM Cortex-M4
   isa: ARMv7-M
 connectivity:
   bluetooth: BLE
-price: 10
+price: 6.54
+price_source:
+  notes: E73-2G4M08S1C module (the product of the old Ebyte news page); the E73-2G4M08S1E variant is $6.50
+  part: E73-2G4M08S1C
+  retrieved: '2026-11-18'
+  url: https://www.ebyteiot.com/products/2-4ghz-ble-mesh-small-smd-e73-2g4m08s1c-nordic-nrf52840-module-small-size-ble-5-0
+  vendor: EBYTE Official Online Store
+sources:
+  status:
+    url: https://www.ebyteiot.com/products/2-4ghz-ble-mesh-small-smd-e73-2g4m08s1c-nordic-nrf52840-module-small-size-ble-5-0
+    retrieved: '2026-11-18'
+    notes: "E73-2G4M08S1C available at Ebyte's official store, $6.54"
