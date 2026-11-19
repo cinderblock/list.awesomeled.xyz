@@ -1,0 +1,486 @@
+/* ==========================================================================
+   Home page
+   Search first, then ways in: questions, categories, what the site can do,
+   what was reviewed lately, and how to help.
+   ========================================================================== */
+
+.home-hero {
+  text-align: center;
+  padding-top: var(--space-4);
+}
+
+.home-title {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--space-4);
+}
+
+.home-tagline {
+  max-width: 42rem;
+  margin: 0 auto var(--space-6);
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+  text-wrap: balance;
+}
+
+/* ---- Search ---------------------------------------------------------------- */
+.home-search {
+  max-width: 44rem;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.home-search-form {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.375rem 0.375rem 0.375rem var(--space-4);
+  background-color: var(--background);
+  border: 1px solid var(--input);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.home-search-form:focus-within {
+  border-color: var(--ring);
+  box-shadow:
+    var(--shadow-md),
+    0 0 0 3px color-mix(in oklch, var(--ring) 35%, transparent);
+}
+
+.home-search-icon {
+  flex: none;
+  color: var(--muted-foreground);
+}
+
+.home-search-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.625rem 0;
+  font-size: 1.0625rem;
+  color: var(--foreground);
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.home-search-form input::placeholder {
+  color: var(--muted-foreground);
+  opacity: 1;
+}
+
+/* The browser's own clear button would sit beside ours-to-be submit button */
+.home-search-form input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.home-search-submit {
+  flex: none;
+  padding-inline: var(--space-5);
+  border-radius: var(--radius-lg);
+}
+
+.home-search-results:not(:empty) {
+  margin-top: var(--space-3);
+  padding: var(--space-2);
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.home-search-list {
+  margin: 0;
+}
+
+.home-search-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--foreground);
+  border-radius: var(--radius-md);
+}
+
+.home-search-all:hover,
+.home-search-all:focus-visible {
+  background-color: var(--accent);
+  text-decoration: none;
+}
+
+.home-search-note {
+  padding: var(--space-3);
+  font-size: 0.9375rem;
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+.home-search-examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.home-search-example {
+  padding: 0.1875rem 0.625rem;
+  color: var(--foreground);
+  background-color: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-fast);
+}
+
+.home-search-example:hover,
+.home-search-example:focus-visible {
+  background-color: var(--accent);
+  border-color: var(--ring);
+  text-decoration: none;
+}
+
+/* ---- The database in four numbers ----------------------------------------- */
+.home-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2) var(--space-6);
+  margin: var(--space-8) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+  color: var(--muted-foreground);
+}
+
+.home-stats strong {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--foreground);
+}
+
+/* ---- Sections --------------------------------------------------------------- */
+.home-section {
+  margin-top: var(--space-16);
+}
+
+.home-section-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.home-section-lede {
+  max-width: 44rem;
+  margin-top: var(--space-1);
+  color: var(--muted-foreground);
+}
+
+.home-section-title + .home-grid,
+.home-section-lede + .home-grid,
+.home-section-title + .category-grid,
+.home-section-lede + .category-grid,
+.home-section-lede + .home-recent,
+.home-section-title + .home-recent {
+  margin-top: var(--space-5);
+}
+
+.home-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each grid holds six things: three and three, not four and two */
+@media (min-width: 900px) {
+  .home-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ---- Ways in: a question each ----------------------------------------------- */
+.home-start {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  height: 100%;
+  padding: var(--space-4);
+  color: var(--foreground);
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.home-start:hover,
+.home-start:focus-visible {
+  border-color: var(--ring);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.home-start > svg {
+  flex: none;
+  margin-top: 0.125rem;
+  color: var(--muted-foreground);
+}
+
+.home-start-title {
+  display: block;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.home-start-hint {
+  display: block;
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+/* ---- What the site does that a sheet can't ---------------------------------- */
+.home-feature {
+  padding: var(--space-4) 0 0;
+  border-top: 2px solid var(--border);
+}
+
+.home-feature > svg {
+  color: oklch(0.6 0.2 var(--feature-hue, 250));
+}
+
+.dark .home-feature > svg {
+  color: oklch(0.75 0.16 var(--feature-hue, 250));
+}
+
+.home-feature-title {
+  margin-top: var(--space-2);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.home-feature-text {
+  margin-top: var(--space-1);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+}
+
+.home-feature-text a,
+.home-section-lede a,
+.home-contribute a:not(.btn) {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--ring);
+  text-underline-offset: 0.15em;
+}
+
+.home-feature-text a:hover,
+.home-section-lede a:hover,
+.home-contribute a:not(.btn):hover {
+  text-decoration-color: currentColor;
+}
+
+.home kbd {
+  padding: 0.0625rem 0.3125rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125em;
+  color: var(--foreground);
+  background-color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Recently reviewed -------------------------------------------------------- */
+.home-recent {
+  display: grid;
+  gap: var(--space-2) var(--space-6);
+  grid-template-columns: minmax(0, 1fr);
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .home-recent {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.home-recent-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-2);
+  color: var(--foreground);
+  border-radius: var(--radius-md);
+}
+
+.home-recent-item:hover,
+.home-recent-item:focus-visible {
+  background-color: var(--accent);
+  text-decoration: none;
+}
+
+.home-recent-thumb {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 2.25rem;
+  overflow: hidden;
+  background-color: var(--muted);
+  border-radius: var(--radius-sm);
+}
+
+.home-recent-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.home-recent-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-recent-name {
+  display: block;
+  overflow: hidden;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-recent-meta {
+  display: block;
+  overflow: hidden;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-recent-category {
+  flex: none;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: oklch(0.4 0.12 var(--chip-hue));
+  background-color: oklch(0.95 0.03 var(--chip-hue));
+  border: 1px solid oklch(0.87 0.06 var(--chip-hue));
+  border-radius: var(--radius-full);
+}
+
+.dark .home-recent-category {
+  color: oklch(0.8 0.1 var(--chip-hue));
+  background-color: oklch(0.28 0.04 var(--chip-hue));
+  border-color: oklch(0.4 0.06 var(--chip-hue));
+}
+
+/* ---- Help keep it right ---------------------------------------------------- */
+.home-contribute {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-8);
+  padding: var(--space-6);
+  background-color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+}
+
+.home-contribute-text {
+  flex: 1 1 24rem;
+}
+
+.home-contribute-text p {
+  margin-top: var(--space-1);
+  color: var(--muted-foreground);
+}
+
+.home-contribute-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+@media (max-width: 640px) {
+  .home-tagline {
+    font-size: 1rem;
+  }
+
+  /* The button would leave no room to type: Enter and the keyboard's search
+     key submit, and results appear as you type anyway */
+  .home-search-submit {
+    display: none;
+  }
+
+  .home-search-form {
+    padding-right: var(--space-4);
+  }
+
+  .home-section {
+    margin-top: var(--space-12);
+  }
+
+  /* Twelve full-width cards are a long scroll: two to a row */
+  .home .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .home .category-card {
+    padding: var(--space-3);
+  }
+
+  .home .category-card-title {
+    font-size: 1rem;
+    margin-bottom: var(--space-1);
+  }
+
+  .home .category-card-description {
+    font-size: 0.8125rem;
+  }
+
+  .home-recent-category {
+    display: none;
+  }
+
+  .home-contribute {
+    padding: var(--space-4);
+  }
+}
+
+@media (max-width: 359px) {
+  .home .category-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media print {
+  .home-search,
+  .home-contribute-actions {
+    display: none;
+  }
+}

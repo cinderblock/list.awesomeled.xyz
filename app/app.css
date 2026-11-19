@@ -37,6 +37,9 @@
 /* Category Theme: Dynamic category colors */
 @import './styles/category-theme.css';
 
+/* Home page: search-first hero, ways in, what the site does, recent reviews */
+@import './styles/home.css';
+
 /* LED System Diagram: Interactive system overview */
 @import './styles/diagram.css';
 

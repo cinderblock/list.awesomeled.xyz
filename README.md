@@ -17,6 +17,17 @@ A comprehensive database of addressable LEDs, controllers, and related products 
 - **Diffusive Materials** - Materials the community has tested as light diffusers
 - **Commercial Systems** - Complete systems usually only compatible with a closed ecosystem; often based on common technologies but "cleaned up", "easy to use", or provided as a service
 
+## Using the Site
+
+<https://list.awesomeled.xyz> grew out of a shared spreadsheet, and is meant to be faster than one at everything a spreadsheet gets used for:
+
+- **Search everything**: the box on the home page, or `Ctrl`/`⌘`+`K` on any page, searches part numbers, makers, aliases, and protocols in every category at once.
+- **Sort and filter**: click a column header to sort, again to reverse, `Shift`+click to add a tie-break level. **Filters** lists every structured field with a count beside each value, and clicking a value pill in the table filters by it.
+- **Columns**: the default view is curated; **Columns** adds any other field the entries record. **Dense** rows fit more on a screen. On a phone the table becomes a list of cards (**Cards** / **Table** switches either way, on any screen).
+- **Compare**: tick up to four entries and open **Compare** to see them side by side, with a differences-only switch.
+- **Share and export**: search, sort, filters, and columns live in the URL, so the address bar always links to exactly what you see. **Share & export** copies the table as TSV or Markdown and downloads CSV, JSON, or YAML.
+- **Keyboard**: `/` jumps to the table's search, `j` / `k` move between rows, `Enter` opens one, and `x` picks it for comparison.
+
 ## Contributing
 
 We hope you find these lists useful.
