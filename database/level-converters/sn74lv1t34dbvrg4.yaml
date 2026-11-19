@@ -9,7 +9,9 @@ aliases:
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
 electrical:
-  max_voltage: 5.5V
+  supply_voltage: 1.65-5.5V
+  output_current: 8mA
+  output_current_notes: at 5 V; 7 mA at 3.3 V
   input_high_voltage: 2.03V
   input_high_voltage_notes: 'VCC = 4.5 V to 5.0 V, -40 °C to +125 °C; 2.11 V at VCC = 5.5 V'
 images:
@@ -18,9 +20,14 @@ images:
     credit: Texas Instruments
 io:
   channels: 1
+  direction: fixed
   buffered: true
 links:
   product: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4
+physical:
+  packages:
+    - SOT-23-5
+    - SC-70-5
 price:
   - qty: 1
     price: 1.239
@@ -38,7 +45,7 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
     retrieved: '2026-11-18'
     notes: 'TI datasheet SCLS743E: title + Package Option Addendum (DBV = SOT-23-5, DCK = SC70-5; the G4 orderables are listed alongside)'
-  electrical.max_voltage:
+  electrical.supply_voltage:
     url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
     retrieved: '2026-11-18'
     notes: "'Operating range of 1.65V to 5.5V'"
@@ -50,3 +57,15 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
     retrieved: '2026-11-18'
     notes: "TI datasheet SCLS743E: title 'Single Power Supply Single Buffer GATE CMOS Logic Level Shifter'"
+  physical.packages:
+    url: https://www.ti.com/product/SN74LV1T34
+    retrieved: '2026-11-18'
+    notes: 'Package options: SOT-23 (DBV), SOT-SC70 (DCK), 5 pins'
+  electrical.output_current:
+    url: https://www.ti.com/product/SN74LV1T34
+    retrieved: '2026-11-18'
+    notes: '"8mA output drive at 5V", "7mA output drive at 3.3V"'
+  io.direction:
+    url: https://www.ti.com/product/SN74LV1T34
+    retrieved: '2026-11-18'
+    notes: Topology "Fixed-direction"; "a single buffer gate with reduced input thresholds"

@@ -10,6 +10,7 @@ images:
     credit: Microcyb
 io:
   channels: 4
+  direction: fixed
   buffered: true
   differential: true
 links:

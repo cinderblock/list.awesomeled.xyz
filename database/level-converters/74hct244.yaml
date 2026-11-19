@@ -12,7 +12,9 @@ aliases:
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
 electrical:
-  max_voltage: 5.5V
+  supply_voltage: 4.5-5.5V
+  output_current: 6mA
+  output_current_notes: at 5 V
   input_high_voltage: 2V
   input_high_voltage_notes: 'VCC = 4.5 V to 5.5 V'
 images:
@@ -21,9 +23,18 @@ images:
     credit: Texas Instruments
 io:
   channels: 8
+  direction: fixed
   buffered: true
 links:
   product: https://www.ti.com/product/SN74HCT244
+physical:
+  packages:
+    - DIP-20
+    - SOIC-20
+    - SOP-20
+    - SSOP-20
+    - TSSOP-20
+    - VSSOP-20
 price:
   - qty: 1
     price: 2.015
@@ -49,3 +60,19 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
     retrieved: '2026-11-18'
     notes: "TI datasheet SCLS175I: title 'Octal Buffers and Line Drivers With 3-State Outputs'; Features: '±6mA output drive at 5V'"
+  physical.packages:
+    url: https://www.ti.com/product/SN74HCT244
+    retrieved: '2026-11-18'
+    notes: 'Package options: PDIP (N), SOIC (DW), SOP (NS), SSOP (DB), TSSOP (PW), VSSOP (DGS), 20 pins'
+  electrical.supply_voltage:
+    url: https://www.ti.com/product/SN74HCT244
+    retrieved: '2026-11-18'
+    notes: '"Operating voltage range of 4.5V to 5.5V"'
+  electrical.output_current:
+    url: https://www.ti.com/product/SN74HCT244
+    retrieved: '2026-11-18'
+    notes: '"±6mA output drive at 5V"'
+  io.direction:
+    url: https://www.ti.com/product/SN74HCT244
+    retrieved: '2026-11-18'
+    notes: '"Eight-channel 4.5-V to 5.5-V buffers ... with tri-state outputs" (A inputs to Y outputs)'

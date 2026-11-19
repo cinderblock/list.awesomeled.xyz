@@ -8,6 +8,10 @@ aliases:
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
 electrical:
+  supply_voltage: 1.65-5.5V
+  supply_voltage_notes: Each port (VCCA, VCCB) on its own supply
+  output_current: 24mA
+  output_current_notes: at 3.3 V
   input_high_voltage: 2V
   input_high_voltage_notes: 'Dual supply: with the input side on 3 V to 3.6 V. On a 4.5 V to 5.5 V input side it is 0.7 × that supply.'
 images:
@@ -16,9 +20,15 @@ images:
     credit: Texas Instruments
 io:
   channels: 2
+  direction: dir-pin
   buffered: true
 links:
   product: https://www.ti.com/product/SN74LVC2T45
+physical:
+  packages:
+    - SSOP-8
+    - VSSOP-8
+    - DSBGA-8
 price:
   - qty: 1
     price: 0.642
@@ -44,3 +54,19 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
     retrieved: '2026-11-18'
     notes: "TI datasheet SCES516N: title 'Dual-Bit Dual-Supply Bus Transceiver With Configurable Voltage Translation and 3-State Outputs'; IOH -32 mA at VCCO = 4.5 V to 5.5 V"
+  physical.packages:
+    url: https://www.ti.com/product/SN74LVC2T45
+    retrieved: '2026-11-18'
+    notes: 'Package options: SSOP (DCT), VSSOP (DCU), DSBGA (YZP), 8 pins'
+  electrical.supply_voltage:
+    url: https://www.ti.com/product/SN74LVC2T45
+    retrieved: '2026-11-18'
+    notes: '"VCCA accepts any supply voltage from 1.65V to 5.5V", VCCB the same'
+  electrical.output_current:
+    url: https://www.ti.com/product/SN74LVC2T45
+    retrieved: '2026-11-18'
+    notes: '"±24-mA output drive at 3.3 V"'
+  io.direction:
+    url: https://www.ti.com/product/SN74LVC2T45
+    retrieved: '2026-11-18'
+    notes: '"The logic levels of the direction-control (DIR) input activate either the B-port outputs or the A-port outputs"'

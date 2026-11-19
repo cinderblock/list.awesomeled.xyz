@@ -10,6 +10,8 @@ aliases:
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
 electrical:
+  supply_voltage: 1.4-5.5V
+  supply_voltage_notes: A port 1.4-3.6 V, B port 1.65-5.5 V (VCCA ≤ VCCB)
   input_high_voltage: 2.9V
   input_high_voltage_notes: 'Dual supply: VCCA - 0.4 V on the A side, so 2.9 V with VCCA at 3.3 V'
 images:
@@ -18,9 +20,16 @@ images:
     credit: Texas Instruments
 io:
   channels: 8
+  direction: auto
   buffered: false
 links:
   product: https://www.ti.com/product/TXS0108E
+physical:
+  packages:
+    - TSSOP-20
+    - VSSOP-20
+    - VQFN-20
+    - NFBGA-20
 price:
   - qty: 1
     price: 1.595
@@ -49,3 +58,15 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
     retrieved: '2026-11-18'
     notes: "TI datasheet SCES642L, 7.3: 'The device uses pass gate architecture with edge rate accelerators (one shots)'; 'a modest DC-current sourcing capability of hundreds of micro-amperes, as determined by the internal pull-up resistors'; 7.3.3: 'TI recommends careful PCB layout practices with short PCB trace lengths to avoid excessive capacitive loading'"
+  physical.packages:
+    url: https://www.ti.com/product/TXS0108E
+    retrieved: '2026-11-18'
+    notes: 'Package options: TSSOP (PW), VSSOP (DGS), VQFN (RGY, RKS), NFBGA (NME), 20 pins'
+  electrical.supply_voltage:
+    url: https://www.ti.com/product/TXS0108E
+    retrieved: '2026-11-18'
+    notes: '"1.4V to 3.6V on A port and 1.65V to 5.5V on B port (VCCA ≤ VCCB)"'
+  io.direction:
+    url: https://www.ti.com/product/TXS0108E
+    retrieved: '2026-11-18'
+    notes: '"No direction-control signal needed"; "Direction control (typ): Auto-direction"'

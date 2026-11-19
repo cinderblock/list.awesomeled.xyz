@@ -8,7 +8,9 @@ aliases:
 datasheet:
   url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
 electrical:
+  supply_voltage: 4.5-18V
   output_current: 1.5A
+  output_current_notes: peak
   input_high_voltage: 2.4V
   input_high_voltage_notes: 'VDD = 4.5 V to 18 V; 2.0 V for V temperature range devices'
 images:
@@ -17,9 +19,16 @@ images:
     credit: Microchip Technology
 io:
   channels: 2
+  direction: fixed
   buffered: true
 links:
   product: https://www.microchip.com/en-us/product/TC4427
+physical:
+  packages:
+    - DIP-8
+    - SOIC-8
+    - MSOP-8
+    - DFN-8
 price:
   - qty: 1
     price: 1.62
@@ -49,3 +58,19 @@ sources:
     url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
     retrieved: '2026-11-18'
     notes: "Microchip data sheet DS20001422G: title '1.5A Dual High-Speed Power MOSFET Drivers'; Features: 'High Capacitive Load Drive Capability: 1000 pF'"
+  physical.packages:
+    url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
+    retrieved: '2026-11-18'
+    notes: 'Package Types: "8-Pin MSOP/PDIP/SOIC", "8-Pin DFN-S" (6x5)'
+  electrical.supply_voltage:
+    url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
+    retrieved: '2026-11-18'
+    notes: 'Features: "Wide Input Supply Voltage Operating Range: 4.5V to 18V"'
+  electrical.output_current:
+    url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
+    retrieved: '2026-11-18'
+    notes: 'Features: "High Peak Output Current: 1.5A"'
+  io.direction:
+    url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
+    retrieved: '2026-11-18'
+    notes: '"1.5A Dual High-Speed Power MOSFET Drivers" (IN A/B to OUT A/B)'

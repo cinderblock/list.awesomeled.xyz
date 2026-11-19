@@ -9,6 +9,10 @@ aliases:
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
 electrical:
+  supply_voltage: 1.1-5.5V
+  supply_voltage_notes: Each port on its own supply
+  output_current: 12mA
+  output_current_notes: at 5 V
   input_high_voltage: 1.92V
   input_high_voltage_notes: 'Dual supply: Schmitt-trigger inputs; the upper threshold (VT+ max) with the input side at 3 V'
 images:
@@ -17,9 +21,16 @@ images:
     credit: Texas Instruments
 io:
   channels: 4
+  direction: fixed
   buffered: true
 links:
   product: https://www.ti.com/product/TXU0104
+physical:
+  packages:
+    - TSSOP-14
+    - WQFN-14
+    - UQFN-12
+    - X2QFN-12
 price:
   - qty: 1
     price: 1.063
@@ -53,3 +64,19 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
     retrieved: '2026-11-18'
     notes: "TI datasheet SCES937B: title '4-Bit Fixed Direction Voltage-Level Translator with Schmitt-Trigger Inputs and 3-State Outputs'; Features: 'High drive strength (up to 12mA at 5V)'"
+  physical.packages:
+    url: https://www.ti.com/product/TXU0104
+    retrieved: '2026-11-18'
+    notes: 'Package options: TSSOP (PW), WQFN (BQA), 14 pins; UQFN (RUT), X2QFN (DTR), 12 pins'
+  electrical.supply_voltage:
+    url: https://www.ti.com/product/TXU0104
+    retrieved: '2026-11-18'
+    notes: '"Fully configurable dual-rail design allows each port to operate from 1.1V to 5.5V"'
+  electrical.output_current:
+    url: https://www.ti.com/product/TXU0104
+    retrieved: '2026-11-18'
+    notes: '"High drive strength (up to 12mA at 5V)"'
+  io.direction:
+    url: https://www.ti.com/product/TXU0104
+    retrieved: '2026-11-18'
+    notes: '"4-bit, dual-supply noninverting fixed direction voltage level translation device"'
