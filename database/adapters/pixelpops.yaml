@@ -6,6 +6,11 @@ outputs:
 power:
   voltage:
     max: 5
+dead_links:
+  - url: https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+    archive: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+    checked: '2026-11-18'
+    notes: the whole DIYC wiki is gone (every wiki URL returns "Page Not Found")
 diy_or_ots: DIY
 links:
   product: https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops

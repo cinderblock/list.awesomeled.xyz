@@ -9,5 +9,5 @@ power:
     max: 12
 diy_or_ots: DIY
 links:
-  product: https://github.com/ArtGateOne/ArtGateOne-DMX?
+  product: https://github.com/ArtGateOne/ArtGateOne-DMX
 parent: Arduino Uno
