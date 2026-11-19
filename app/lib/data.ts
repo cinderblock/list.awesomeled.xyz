@@ -104,6 +104,7 @@ export const IGNORED_COMMITS = new Set([
   '5715fc89d2165dfa8af8b20f63a5a4ba94cf7af7', // data-freshness: adapter link fixes (2)
   'aa3c3935ca3ad0b81b0b511ee900c32d7f2447da', // data-freshness: microboard link fixes (2)
   '1ae1a4d59a148a5d1ac41f9430afb679a97fbc9f', // retire legacy related_* arrays (16)
+  'a1f669e1491de8d6891bb95208172739638cd221', // data-freshness: commercial item pixels -> field (17)
 ]);
 
 /**
