@@ -43,8 +43,13 @@ import { renderReport } from './report';
 import { colLetters, type Cell } from './xlsx';
 
 export const HIGHLIGHTS: Record<string, string> = {
+  // The README tab's legend
   D9D2E9: 'needs verification',
   FFF2CC: 'missing data, easy to fill',
+  // Not in the legend: formatting that came along with pasted text, on
+  // rows added after the import (a whole shaded row; one near-black cell)
+  E8F0FE: 'pasted formatting, no meaning',
+  '17161F': 'pasted formatting, no meaning',
 };
 /** Row banding / header colors with no meaning */
 const DECORATIVE = new Set(['FEF8E3', 'F3F3F3', 'FFE599', 'FFFFFF']);
