@@ -18,6 +18,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: Both
   board_fingers: false
+price:
+  - qty: 1
+    price: 3.4966
+    sku: NC3MXX
+  - qty: 100
+    price: 3.2356
+    sku: NC3MXX
+  - qty: 1000
+    price: 3.2009
+    sku: NC3MXX
+price_source:
+  notes: One Neutrik 3-pole male XLR cable connector.
+  part: C368472
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C368472.html
+  vendor: LCSC
 ratings:
   max_current: 16 A
   max_voltage: 50 V

@@ -17,6 +17,16 @@ mechanical:
   wire_to_wire: true
   pcb_mount: Both
   board_fingers: false
+price:
+  - qty: 1
+    price: 5.9
+    sku: NC5MXX
+price_source:
+  notes: One Neutrik 5-pole male XLR cable connector. Thomann US price, excl. sales tax.
+  part: '283114'
+  retrieved: '2026-11-18'
+  url: https://www.thomannmusic.com/neutrik_nc5_mxx.htm
+  vendor: Thomann
 ratings:
   max_current: 10 A
   max_voltage: 50 V

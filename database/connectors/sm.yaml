@@ -6,7 +6,7 @@ images:
     source: https://www.adafruit.com/product/2880
     credit: Adafruit Industries
 links:
-  product: http://www.jst-mfg.com/product/detail_e.php?series=238
+  product: https://www.jst-mfg.com/product/index.php?series=238&lang=2
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -19,6 +19,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 10
+    price: 0.0632
+    sku: SMP-03V-BC
+  - qty: 100
+    price: 0.0505
+    sku: SMP-03V-BC
+  - qty: 1000
+    price: 0.0346
+    sku: SMP-03V-BC
+price_source:
+  notes: 3-pin SM plug housing only; contacts sold separately (SYM-001T-P0.6).
+  part: C157908
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C157908.html
+  vendor: LCSC
 ratings:
   max_current: 3 A
   max_voltage: 250 V

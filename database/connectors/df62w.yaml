@@ -2,7 +2,7 @@ name: DF62W
 creator: Hirose
 notes: W is water resistant version. PCB and Wire to wire make it competitor to JST SM
 links:
-  product: https://www.hirose.com/product/series/DF62W#
+  product: https://www.hirose.com/en/product/series/DF62W
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -15,6 +15,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 1
+    price: 0.6829
+    sku: DF62W-3S-2.2C
+  - qty: 100
+    price: 0.4169
+    sku: DF62W-3S-2.2C
+  - qty: 1000
+    price: 0.3602
+    sku: DF62W-3S-2.2C
+price_source:
+  notes: 3-position DF62W socket (female) crimp housing only; crimp contacts sold separately.
+  part: C2904695
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C2904695.html
+  vendor: LCSC
 ratings:
   max_current: 3.5 A
   max_voltage: 30 V

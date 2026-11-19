@@ -2,7 +2,7 @@ name: XT60/90
 creator: Generic
 notes: Also XT30, 30A & XT90 ,90A , Standard connector for LiPo batteries in RC, generic connector, some poor quality versions around dimensions http://cdn.sparkfun.com/datasheets/Prototyping/xt60.pdf
 links:
-  product: https://www.sparkfun.com/products/10474
+  product: https://www.sparkfun.com/xt60-connectors-male-female-pair.html
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -16,6 +16,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 1
+    price: 0.3882
+    sku: XT60H-M
+  - qty: 100
+    price: 0.3271
+    sku: XT60H-M
+  - qty: 1000
+    price: 0.2808
+    sku: XT60H-M
+price_source:
+  notes: One Amass XT60H male plug with housing (solder); the mating female XT60H-F is sold separately.
+  part: C5334533
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C5334533.html
+  vendor: LCSC
 ratings:
   max_current: 90 A # XT90; the smaller XT60 variant is rated 60 A
   max_voltage: 42 V

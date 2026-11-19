@@ -14,6 +14,16 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 1
+    price: 2.7
+    sku: '013-6'
+price_source:
+  notes: One PCE Shark 16 A 3-pole 230 V (blue) male cable plug, IP44, screw terminals. Thomann US price, excl. sales tax.
+  part: '489040'
+  retrieved: '2026-11-18'
+  url: https://www.thomannmusic.com/pce_013_6_shark_16a_3pol_230v_m.htm
+  vendor: Thomann
 ratings:
   max_current: 16 A
   max_voltage: 415 V

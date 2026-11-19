@@ -14,6 +14,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 1
+    price: 0.4992
+    sku: MT60-M
+  - qty: 100
+    price: 0.3991
+    sku: MT60-M
+  - qty: 1000
+    price: 0.3877
+    sku: MT60-M
+price_source:
+  notes: One Amass MT60 3-pin male plug (solder cup); the mating female MT60-F is sold separately.
+  part: C99176
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C99176.html
+  vendor: LCSC
 ratings:
   max_current: 60 A # MT60; the smaller MT30 variant is rated 30 A
   max_voltage: 60 V

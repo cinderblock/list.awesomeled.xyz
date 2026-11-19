@@ -14,6 +14,16 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 1
+    price: 2.55
+    sku: RT4FC-B
+price_source:
+  notes: One Rean 4-pin female mini-XLR cable connector (black, gold contacts). Thomann US price, excl. sales tax.
+  part: '234345'
+  retrieved: '2026-11-18'
+  url: https://www.thomannmusic.com/neutrik_rean_tiny_xlr_rt_4_fcb.htm
+  vendor: Thomann
 ratings:
   max_current: 5 A
   max_voltage: 250 V

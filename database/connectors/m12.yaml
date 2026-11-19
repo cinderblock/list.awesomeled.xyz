@@ -15,6 +15,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 1
+    price: 8.6635
+    sku: M12A-04PFFP-SF8001
+  - qty: 10
+    price: 7.5086
+    sku: M12A-04PFFP-SF8001
+  - qty: 100
+    price: 6.2135
+    sku: M12A-04PFFP-SF8001
+price_source:
+  notes: One Amphenol M12 A-coded 4-pin female straight cable connector (IP69K).
+  part: C20828529
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C20828529.html
+  vendor: LCSC
 ratings:
   max_current: 4 A
   max_voltage: 50 V

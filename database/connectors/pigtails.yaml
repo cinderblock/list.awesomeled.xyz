@@ -15,6 +15,12 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price: 1.05
+price_source:
+  notes: One 18 in round 3-core (Ray Wu style) female pigtail; the male version is the same price.
+  retrieved: '2026-11-18'
+  url: https://wiredwatts.com/wire
+  vendor: WiredWatts
 ratings:
   max_current: 5 A
   max_voltage: 50 V

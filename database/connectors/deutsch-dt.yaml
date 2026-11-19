@@ -3,7 +3,7 @@ creator: TE Deutsch
 notes: Automotive and Marine connector series , compatible/knock offs common,
   specific crimp tool required
 links:
-  product: https://www.te.com/usa-en/products/connectors/automotive-connectors/intersection/deutsch-dt-series-connectors.html?tab=pgp-story
+  product: https://www.te.com/en/products/connectors/automotive-connectors/intersection/deutsch-dt-series-connectors.html?tab=pgp-story
 mechanical:
   outline: Rectangular/Triangular
   contact_type: Pins
@@ -16,6 +16,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 1
+    price: 1.0291
+    sku: DT06-2S
+  - qty: 100
+    price: 0.6333
+    sku: DT06-2S
+  - qty: 1000
+    price: 0.5179
+    sku: DT06-2S
+price_source:
+  notes: 2-position DT plug housing (socket side) only; W2S wedge lock and size-16 socket contacts sold separately.
+  part: C138526
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C138526.html
+  vendor: LCSC
 ratings:
   max_current: 13 A
   max_voltage: 230 V

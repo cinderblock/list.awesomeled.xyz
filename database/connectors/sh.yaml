@@ -1,7 +1,7 @@
 name: SH
 creator: JST
 links:
-  product: https://www.jst-mfg.com/product/detail_e.php?series=231
+  product: https://www.jst-mfg.com/product/index.php?series=231&lang=2
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -15,6 +15,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: Both
   board_fingers: false
+price:
+  - qty: 5
+    price: 0.1822
+    sku: SHR-03V-S-B
+  - qty: 50
+    price: 0.1443
+    sku: SHR-03V-S-B
+  - qty: 500
+    price: 0.1079
+    sku: SHR-03V-S-B
+price_source:
+  notes: 3-pin SH crimp housing only; SSH contacts sold separately.
+  part: C268100
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C268100.html
+  vendor: LCSC
 ratings:
   max_current: 1 A
   max_voltage: 50 V

@@ -17,6 +17,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 1
+    price: 0.5206
+    sku: '282104-1'
+  - qty: 100
+    price: 0.2942
+    sku: '282104-1'
+  - qty: 1125
+    price: 0.2512
+    sku: '282104-1'
+price_source:
+  notes: 2-position Superseal 1.5 housing only; the mating housing (282080-1), contacts and wire seals are sold separately.
+  part: C86482
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C86482.html
+  vendor: LCSC
 ratings:
   max_current: 14 A
   max_voltage: 24 V

@@ -15,6 +15,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 1
+    price: 36.6998
+    sku: PX0551
+  - qty: 200
+    price: 14.6434
+    sku: PX0551
+  - qty: 1000
+    price: 13.9126
+    sku: PX0551
+price_source:
+  notes: One 8-way free (cable-mount) plug. LCSC showed 0 stock at retrieval (lead-time order); the 1-piece rate is far above the 200+ rate.
+  part: C22226028
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C22226028.html
+  vendor: LCSC
 ratings:
   max_current: 6 A
   max_voltage: 250 V

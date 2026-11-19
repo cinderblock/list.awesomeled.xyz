@@ -2,7 +2,7 @@ name: PowerPole 15/45
 creator: Anderson
 notes: Anderson PowerPole, Genderless, Clip together shells in 11 colours, Radio HAM power standard, panel mounting and waterproofing options.Extremely robust mixed signal and high current connector.
 links:
-  product: https://www.andersonpower.com/us/en/resources/PowerPoleResourcesPage.html
+  product: https://www.andersonpower.com/product-lines/powerpole/
   digikey: https://www.digikey.com/en/products/filter/blade-type-power-connectors-accessories/360?s=N4IgTCBcDaIIYDsAmBTATgZwPYIAQAcsB3dQgGxRAF0BfIA
 mechanical:
   outline: Rectangular
@@ -17,6 +17,16 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 1
+    price: 0.8987
+    sku: '1327'
+price_source:
+  notes: One red PP15/30/45 housing only (LCSC publishes a single price break); contacts sold separately, and a red/black pair needs two housings.
+  part: C367207
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C367207.html
+  vendor: LCSC
 ratings:
   max_current: 55 A
   max_voltage: 600 V

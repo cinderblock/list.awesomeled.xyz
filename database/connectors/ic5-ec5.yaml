@@ -1,6 +1,11 @@
 name: IC5 EC5
 creator: Spektrum
 notes: IC5 LiPo battery connector with Third pin for charger communication. EC5 mates with IC5 BUT no third pin
+dead_links:
+  - url: https://blog.ampow.com/ic5-vs-ec5-connector/
+    archive: https://web.archive.org/web/20250621084645/https://blog.ampow.com/ic5-vs-ec5-connector/
+    checked: '2026-11-18'
+    notes: The whole blog host returns Cloudflare 521 (origin web server down); the article is not on the vendor main site either.
 links:
   product: https://blog.ampow.com/ic5-vs-ec5-connector/
 mechanical:
@@ -16,6 +21,13 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price: 7.99
+price_source:
+  notes: 'Mated pair: one IC5 device connector plus one IC5 battery connector.'
+  part: SPMXCA502
+  retrieved: '2026-11-18'
+  url: https://www.horizonhobby.com/product/spektrum-connector-ic5-device-and-ic5-battery-set/SPMXCA502.html
+  vendor: Horizon Hobby (Spektrum)
 ratings:
   max_current: 60 A
   max_voltage: 24 V

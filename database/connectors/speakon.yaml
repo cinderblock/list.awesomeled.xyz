@@ -2,7 +2,7 @@ name: Speakon
 creator: Neutrik
 notes: World Standard professional amplifier to speaker connector, compatibles offer low cost high current connector , if avoid mix up with audio....
 links:
-  product: https://www.neutrik.com/en/neutrik/products/speakon-loudspeaker-connectors/speakon-cable-connectors
+  product: https://www.neutrik.com/en/neutrik/products/speakon-r-loudspeaker-connectors/speakon-r-cable-connectors
 mechanical:
   outline: Circular
   contact_type: Blade
@@ -15,6 +15,16 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 1
+    price: 5.3
+    sku: NL4FXX-W-L
+price_source:
+  notes: One 4-pole speakON female cable connector for 10-16 mm cable. Thomann US price, excl. sales tax.
+  part: '563043'
+  retrieved: '2026-11-18'
+  url: https://www.thomannmusic.com/neutrik_nl4fxx_w_l.htm
+  vendor: Thomann
 ratings:
   max_current: 30 A
   max_voltage: 250 V

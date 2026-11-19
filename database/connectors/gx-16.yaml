@@ -4,7 +4,7 @@ notes: AKA Aviation Connector, CB Mic Connector, most common in 4 pin
   variant,Chrome metal Shell and IP65 Version in Black Plastic *Legacy Connector
   NOT For New Designs*
 links:
-  product: https://www.renhotecpro.com/gx16-connector-data-sheet/
+  product: https://renhotecpro.com/gx16-connector-data-sheet/
 mechanical:
   outline: Circular
   contact_type: Pins
@@ -17,6 +17,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 1
+    price: 1.0142
+    sku: XD-GX16-4P-M
+  - qty: 100
+    price: 0.6277
+    sku: XD-GX16-4P-M
+  - qty: 1000
+    price: 0.555
+    sku: XD-GX16-4P-M
+price_source:
+  notes: One 4-pin GX16 male connector; the mating female XD-GX16-4P-F is sold separately.
+  part: C22392643
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C22392643.html
+  vendor: LCSC
 ratings:
   max_current: 7 A
   max_voltage: 100 V

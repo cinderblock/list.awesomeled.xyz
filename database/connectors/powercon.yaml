@@ -2,7 +2,7 @@ name: PowerCon
 creator: Neutrik
 notes: Powercon is original blue, True 1 was IP rated version frequent latch failure, True1 TOP is current recommended mains power connector Seetronic common Compatible/Clone. Grey is recommended (cheap) and not readily used elsewhere
 links:
-  product: https://www.neutrik.com/en/neutrik/products/powercon
+  product: https://www.neutrik.com/en/neutrik/products/powercon-r
 mechanical:
   outline: Circular
   contact_type: Blade
@@ -15,6 +15,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 1
+    price: 6.8
+    sku: NAC3FXXA-W-S
+  - qty: 10
+    price: 6.69
+    sku: NAC3FXXA-W-S
+  - qty: 50
+    price: 6.49
+    sku: NAC3FXXA-W-S
+price_source:
+  notes: One blue powerCON power-in (type A) female cable connector for 6-12 mm cable; Thomann published quantity discounts. US price, excl. sales tax.
+  part: '564773'
+  retrieved: '2026-11-18'
+  url: https://www.thomannmusic.com/neutrik_nac3fxxa_w_s.htm
+  vendor: Thomann
 ratings:
   max_current: 16 A
   max_voltage: 250 V

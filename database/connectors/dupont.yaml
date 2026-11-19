@@ -20,6 +20,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 5
+    price: 0.3459
+    sku: M20-1060300
+  - qty: 50
+    price: 0.2743
+    sku: M20-1060300
+  - qty: 1000
+    price: 0.2053
+    sku: M20-1060300
+price_source:
+  notes: Harwin M20 3-way 2.54 mm crimp housing only (the original the DuPont-style clones copy); crimp contacts sold separately. Generic clone housings are cheaper.
+  part: C17676506
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C17676506.html
+  vendor: LCSC
 ratings:
   max_current: 1 A
   max_voltage: 50 V

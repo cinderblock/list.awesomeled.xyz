@@ -5,7 +5,7 @@ notes: Switchcraft/Conxall , long established USA connector maker, available
 dead_links:
   - url: https://www.conxall.com/Documents/en3.pdf
     archive: https://web.archive.org/web/20220216170121/https://www.conxall.com/Documents/en3.pdf
-    checked: '2026-07-01'
+    checked: '2026-11-18'
 links:
   product: https://www.conxall.com/Documents/en3.pdf
 mechanical:
@@ -18,6 +18,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 1
+    price: 20.8235
+    sku: EN3C3FX
+  - qty: 200
+    price: 8.31
+    sku: EN3C3FX
+  - qty: 1000
+    price: 7.8944
+    sku: EN3C3FX
+price_source:
+  notes: One 3-pin female EN3 cable-end connector. LCSC showed 0 stock at retrieval (lead-time order); the 1-piece rate is far above the 200+ rate.
+  part: C22003394
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C22003394.html
+  vendor: LCSC
 ratings:
   max_current: 13 A
   max_voltage: 250 V

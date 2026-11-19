@@ -16,6 +16,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: PTH
   board_fingers: false
+price:
+  - qty: 10
+    price: 0.057
+    sku: DC-005 2.0
+  - qty: 100
+    price: 0.0459
+    sku: DC-005 2.0
+  - qty: 1000
+    price: 0.0321
+    sku: DC-005 2.0
+price_source:
+  notes: One PCB-mount right-angle DC-005-style barrel jack (6.4 mm OD, 2.0 mm pin; takes 5.5 x 2.1 mm plugs); mating plug not included.
+  part: C16214
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C16214.html
+  vendor: LCSC
 ratings:
   max_current: 2 A
   max_voltage: 30 V

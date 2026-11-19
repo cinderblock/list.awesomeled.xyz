@@ -2,7 +2,7 @@ name: PicoBlade
 creator: Molex
 notes: Molex massive US connector maker
 links:
-  product: https://www.molex.com/molex/products/family/picoblade
+  product: https://www.molex.com/en-us/products/connectors/wire-to-board-connectors/picoblade-connectors
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -16,6 +16,22 @@ mechanical:
   wire_to_wire: true
   pcb_mount: Both
   board_fingers: false
+price:
+  - qty: 50
+    price: 0.0204
+    sku: '51021-0300'
+  - qty: 500
+    price: 0.0163
+    sku: '51021-0300'
+  - qty: 2000
+    price: 0.0128
+    sku: '51021-0300'
+price_source:
+  notes: 3-circuit PicoBlade receptacle crimp housing only; crimp terminals sold separately.
+  part: C122445
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C122445.html
+  vendor: LCSC
 ratings:
   max_current: 2.5 A
   max_voltage: 125 V

@@ -4,7 +4,7 @@ notes: Harting Han rectangular AKA 16 pin Lectriflex as alternative to Socapex
   in stage lighting. Multi pin mains connector , modular able to have power ,
   data and even hose lines on one connector.
 links:
-  product: https://www.harting.com/US/en/heavy-duty-electrical-connectors#Han%C2%AE-Rangee
+  product: https://www.harting.com/en-US/c/Industrial-connectors-Han-57904/Rectangular-connectors-57905
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -16,6 +16,19 @@ mechanical:
   wire_to_wire: true
   pcb_mount: false
   board_fingers: false
+price:
+  - qty: 1
+    price: 8.2
+  - qty: 2
+    price: 7.69
+  - qty: 4
+    price: 7.59
+price_source:
+  notes: One 16-pole male insert for the 16-pin stage load system (listed by Thomann as a Harting 16-pin male chassis insert); hood (e.g. Han 16B-gg-21) and crimp contacts sold separately. Thomann quantity discounts; US price, excl. sales tax.
+  part: '105234'
+  retrieved: '2026-11-18'
+  url: https://www.thomannmusic.com/harting_09_30_016_2601.htm
+  vendor: Thomann
 ratings:
   max_current: 25 A
   max_voltage: 450 V

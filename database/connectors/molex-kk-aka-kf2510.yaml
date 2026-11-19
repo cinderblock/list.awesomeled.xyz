@@ -5,7 +5,7 @@ common_applications:
   - Arduino-pitch (2.54 mm) board headers
   - Amusement / arcade machine wiring
 links:
-  product: https://www.molex.com/molex/products/family/kk
+  product: https://www.molex.com/en-us/products/connectors/wire-to-board-connectors/kk-connectors
 mechanical:
   outline: Rectangular
   contact_type: Pins
@@ -18,6 +18,22 @@ mechanical:
   wire_to_wire: false
   pcb_mount: PTH
   board_fingers: true
+price:
+  - qty: 10
+    price: 0.0604
+    sku: '22-01-3037'
+  - qty: 100
+    price: 0.0504
+    sku: '22-01-3037'
+  - qty: 1000
+    price: 0.0416
+    sku: '22-01-3037'
+price_source:
+  notes: 3-circuit KK 254 crimp housing only; crimp terminals sold separately.
+  part: C185238
+  retrieved: '2026-11-18'
+  url: https://www.lcsc.com/product-detail/C185238.html
+  vendor: LCSC
 ratings:
   max_current: 4 A
   max_voltage: 250 V
