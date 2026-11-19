@@ -8,6 +8,11 @@ notes: Use max 2 SpiNodes per CueCore3, to open up 32 universes
 inputs:
   physical:
     Ethernet: true
+    PoE: 802.3af Class 1
+    buttons: 1
+  protocols:
+    - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 4

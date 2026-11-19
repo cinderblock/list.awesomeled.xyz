@@ -7,6 +7,14 @@ creator:
   page: https://www.advateklighting.com/products/a4-s-mk3
 notes: Electronic fusing; dithering and gamma on 8-bit/color pixels, "hundreds of FPS"
 inputs:
+  physical:
+    Ethernet: 2 # dual gigabit
+    DMX512: RS-485 aux (in or out)
+    buttons: 2
+  protocols:
+    - Art-Net
+    - sACN
+    - DMX512
   standalone: true # SHOWTime software plays from SD card
 outputs:
   count: 8
@@ -126,7 +134,7 @@ power:
     max: 28
 data:
   storage:
-    - type: SD
+    - type: microSD
 datasheet:
   url: https://www.advateklighting.com/downloads/datasheets#download;datasheets-pixlite-a4-s-mk3
 features:

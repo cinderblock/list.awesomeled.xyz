@@ -7,7 +7,11 @@ creator:
 notes: new firmware has a pixel counting test pattern, great for mapping
 inputs:
   physical:
-    USB: true
+    Ethernet: true
+    buttons: 2
+  protocols:
+    - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 32

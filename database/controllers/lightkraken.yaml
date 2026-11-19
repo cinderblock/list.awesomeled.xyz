@@ -13,10 +13,11 @@ notes: 70W PoE++ powered via Cat5 from a PoE switch (single cable for power and 
 inputs:
   physical:
     Ethernet: true
-    PoE: true # 802.3bt Type 4 (PoE++), up to 70W
+    PoE: PoE++
   protocols:
     - Art-Net
-    - sACN # E1.31
+    - sACN
+  standalone: false
 outputs:
   count: 2
   connector:

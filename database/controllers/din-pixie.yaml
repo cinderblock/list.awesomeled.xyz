@@ -7,11 +7,10 @@ creator:
 notes: Back powered from pixel strip - connect thru USB to record a show onto the device using live Art-Net
 inputs:
   physical:
-    USB: true
-    DMX512: 2 × RJ45 in
+    USB: USB-B # config, live input and show upload
+    DMX512: RJ45 x2
   protocols:
-    - Art-Net
-    - DMX512 # 2-universe DMX-to-pixel converter (per ENTTEC product name)
+    - DMX512
   standalone: true
 outputs:
   connector:

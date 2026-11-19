@@ -11,7 +11,13 @@ vendors:
 notes: Raspberry Pi HAT (Pi 3B/4, Zero/Zero 2) running FPP 6+ with a separately sold FPP license key. OLED display and joystick; powers the Pi from the 12 V pixel supply. Listed as "M8 Port Pixel" in the original spreadsheet.
 inputs:
   physical:
-    Ethernet: true
+    Ethernet: true # via host Raspberry Pi
+    Wi-Fi: true # via host Raspberry Pi
+    buttons: true # joystick
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # FPP plays sequences from the Raspberry Pi
   requires_host: Raspberry Pi 3B, Raspberry Pi 4, Raspberry Pi Zero, Raspberry Pi Zero 2 # 3B+ or above
 outputs:

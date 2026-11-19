@@ -6,8 +6,11 @@ creator:
 notes: 7 DMX Modes from Individual to grouped
 inputs:
   physical:
-    DMX512: 5-pin and 3-pin XLR in/out
-  standalone: true # Falcon Player (FPP) remote mode
+    DMX512: XLR-5 + XLR-3 in and out
+    buttons: true # rotary encoder
+  protocols:
+    - DMX512
+  standalone: false
 outputs:
   count: 4
   connector:

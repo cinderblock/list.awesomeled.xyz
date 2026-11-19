@@ -6,7 +6,9 @@ vendors:
     page: https://www.ebay.com/itm/321934091091
 inputs:
   physical:
-    DMX512: true
+    DMX512: 3-pin screw terminal
+  protocols:
+    - DMX512
   standalone: false
 outputs:
   count: 1

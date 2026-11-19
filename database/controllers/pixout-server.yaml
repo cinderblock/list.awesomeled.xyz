@@ -9,6 +9,7 @@ inputs:
   physical:
     Ethernet: true
     Wi-Fi: true
+    GPIO: true # triggers
   protocols:
     - Art-Net
   standalone: true # plays recorded cues from SD without external input
@@ -25,7 +26,7 @@ power:
     max: 24
 data:
   storage:
-    - type: microSD # SD card with Pixout firmware
+    - type: SD
 features:
   - ArtNet DMX cue recording and playback
   - Web control panels and iOS/Android remote app

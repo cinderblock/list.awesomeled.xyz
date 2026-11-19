@@ -6,11 +6,11 @@ creator:
 notes: 16 WS281x pixel ports, 16 4A DC solid-state outputs, 16 servo motor outputs, 8 trigger inputs, and a female USB type-A 2.0 OTG.
 inputs:
   physical:
-    Ethernet: true
-    USB: Type-A 2.0 OTG
+    USB: USB-A host # network only through a USB Ethernet or Wi-Fi adapter
     triggers: 8
   protocols:
     - sACN
+    - Art-Net
     - DDP
   standalone: true
   requires_host: PocketBeagle
@@ -34,7 +34,7 @@ power:
     max: 24
 data:
   storage:
-    - type: SD
+    - type: microSD
 images:
   - file: pb-complete-controller.webp
     source: https://kurtcontrollers.com/?product=pb-complete-controller

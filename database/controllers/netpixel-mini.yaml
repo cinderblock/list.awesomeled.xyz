@@ -4,6 +4,10 @@ creator: SmartShow
 inputs:
   physical:
     Ethernet: true
+    buttons: 1
+  protocols:
+    - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 1

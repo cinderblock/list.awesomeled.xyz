@@ -7,9 +7,12 @@ creator:
 notes: PocketBeagle 2 cape running FPP (network via USB Ethernet/Wi-Fi adapter on the host; not compatible with PocketBeagle 1). 8 local fused ports, 3 RJ45 differential ports adding 12 strings, and a 16-string expansion header. Accepts 5-18V input automatically. eFuses with current monitoring, pixel counting, RTC, OLED.
 inputs:
   physical:
-    Ethernet: true # via USB Ethernet adapter on host
-    Wi-Fi: true # via USB Wi-Fi adapter on host
-    USB: true
+    USB: USB-A host # network only through a USB Ethernet or Wi-Fi adapter
+    buttons: 4
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # runs FPP (Falcon Player)
   requires_host: PocketBeagle 2
 outputs:

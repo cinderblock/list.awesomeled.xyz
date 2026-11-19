@@ -7,8 +7,12 @@ creator:
 notes: DMX pattern replay and keyframing onboard RC4 Wireless
 inputs:
   physical:
-    DMX512: wireless (built-in RC4Magic receiver) + wired 3.5 mm in/out
-  standalone: true
+    DMX512: 3.5mm miniplug in + out
+    Wireless DMX: RC4Magic
+    buttons: 3
+  protocols:
+    - DMX512
+  standalone: false
 outputs:
   count: 2
   connector:
@@ -35,9 +39,6 @@ outputs:
 power:
   voltage:
     max: 35
-data:
-  storage:
-    - type: flash # onboard pattern/keyframe storage
 features:
   - Onboard DMX pattern replay and keyframing
 images:

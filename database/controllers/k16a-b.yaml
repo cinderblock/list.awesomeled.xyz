@@ -9,7 +9,13 @@ vendors:
 notes: BeagleBone Black cape running FPP. 16 fused local ports plus 4 RJ45 differential ports (not Ethernet) expanding to 48 strings via Smart Receivers. Onboard sound, FM transmitter optional.
 inputs:
   physical:
-    Ethernet: true # via the BeagleBone Black
+    Ethernet: true # via host BeagleBone
+    buttons: 6
+    GPIO: 9
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # Falcon Player (FPP)
   requires_host: BeagleBone Black
 outputs:

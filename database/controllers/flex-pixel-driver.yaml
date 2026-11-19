@@ -8,6 +8,7 @@ notes: DMX driver for Elation FLEX PIXEL WP and P40WP pixel tape (72 pixels per 
 inputs:
   physical:
     DMX512: 3-pin terminals, in + thru
+    buttons: 2
   protocols:
     - DMX512
   standalone: false

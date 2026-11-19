@@ -9,6 +9,8 @@ inputs:
   physical:
     Bluetooth: BLE
     NFC: true
+    GPIO: 4
+  standalone: true
 outputs:
   count: 1
   connector: Headers

@@ -12,9 +12,11 @@ vendors:
 inputs:
   physical:
     Ethernet: 2
-    DMX512: XLR 3-pin
+    DMX512: XLR-3 in + out (XLR-5 optional)
   protocols:
     - Art-Net
+    - sACN
+    - DMX512
   standalone: true
 outputs:
   count: 4
@@ -67,7 +69,7 @@ power:
     max: 10 # 10 A total, 5 A per output
 data:
   storage:
-    - type: SD
+    - type: microSD
 images:
   - file: spi-matrix.webp
     source: https://www.ledstripstudio.com/products/spi_matrix/

@@ -9,8 +9,6 @@ inputs:
     Ethernet: true
   protocols:
     - Art-Net
-    - sACN
-    - DDP
   standalone: false
 outputs:
   count: 16

@@ -6,10 +6,10 @@ creator:
   page: https://lumikit.com.br/pixelbox
 inputs:
   physical:
-    Ethernet: true # 10/100 Mbps, selectable
-    USB: true # firmware updates via USB pen drive
+    Ethernet: true
   protocols:
     - Art-Net
+  standalone: true
 outputs:
   count: 2 # two signal output lines
   connector: Quick data connectors
@@ -32,6 +32,8 @@ outputs:
     - SK9822
 data:
   fps: 30 # 15-30 FPS depending on pixel chip
+  storage:
+    - type: USB
 images:
   - file: pixelbox.webp
     source: https://lumikit.com.br/pixelbox

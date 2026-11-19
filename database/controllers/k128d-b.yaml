@@ -6,7 +6,14 @@ creator:
   page: https://kulplights.com/product/k128d-b/
 notes: BeagleBone Black cape running FPP. 32 RJ45 differential ports driving 128 strings via standard or v1/v2 Smart receivers. Onboard sound, FM transmitter optional.
 inputs:
-  protocols: [] # Ethernet/data via the host BeagleBone Black running FPP
+  physical:
+    Ethernet: true # via host BeagleBone
+    buttons: 7
+    GPIO: 8
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # Falcon Player (FPP) plays from the BBB's microSD
   requires_host: BeagleBone Black
 outputs:

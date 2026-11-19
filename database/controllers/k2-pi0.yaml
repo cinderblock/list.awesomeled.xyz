@@ -7,8 +7,13 @@ notes: Raspberry Pi Zero cape running FPP (Pi Zero W/2W recommended; Wi-Fi via t
 inputs:
   physical:
     Wi-Fi:
+      # via host Pi Zero 2 W
       - 2.4GHz
-      # via the host Raspberry Pi Zero W/2W
+    GPIO: 5
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # runs FPP (Falcon Player)
   requires_host: Raspberry Pi Zero 2 W, Raspberry Pi Zero W
 outputs:

@@ -8,7 +8,13 @@ notes: Daisy-chainable through Ethernet up to 8 devices.
 inputs:
   physical:
     Ethernet: 2
-  standalone: true # built-in FX engine plays gradient effects on power-up
+    buttons: 1
+  protocols:
+    - Art-Net
+    - sACN
+    - ESP
+    - KiNET
+  standalone: true # built-in effects engine runs at power-up
 outputs:
   count: 2
   pixels:

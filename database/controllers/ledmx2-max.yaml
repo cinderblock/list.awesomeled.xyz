@@ -9,9 +9,13 @@ notes: Show record and playback trigger capability
 inputs:
   physical:
     Ethernet: true
+    USB: USB-C # carries DMX
+    DMX512: 3-pin terminal (in or out)
   protocols:
     - Art-Net
-    - sACN # E1.31
+    - sACN
+    - DMX512
+    - USB DMX
   standalone: true
 outputs:
   count: 2
@@ -75,7 +79,7 @@ power:
     max: 16
 data:
   storage:
-    - type: SD
+    - type: microSD
 images:
   - file: ledmx2-max.webp
     source: https://dmxking.tv/max-series/ledmx2-max

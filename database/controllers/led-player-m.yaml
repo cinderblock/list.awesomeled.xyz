@@ -4,7 +4,12 @@ creator: Diamex
 notes: Standalone TPM2 player (microSD) for up to 2048 LEDs; USB virtual COM takes live data from JINX/GLEDIATOR. No network input.
 inputs:
   physical:
-    USB: true # Mini-USB - virtual COM (live JINX/GLEDIATOR), config, bootloader
+    USB: mini-USB
+    buttons: 2
+    triggers: 4
+  protocols:
+    - TPM2
+    - Glediator
   standalone: true
 outputs:
   count: 8 # single-wire LEDs on CH1-CH8; one clocked channel (DATA on CH4, CLOCK on CH8)

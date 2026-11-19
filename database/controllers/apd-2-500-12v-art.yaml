@@ -8,9 +8,11 @@ notes: On board Sound To Light, 31 channel DMX Macro mode.
 inputs:
   physical:
     Ethernet: true
+    Microphone: true
+    buttons: true
   protocols:
-    - Art-Net # "ART" in product name
-  standalone: false
+    - Art-Net
+  standalone: true
 outputs:
   count: 2
   connector:

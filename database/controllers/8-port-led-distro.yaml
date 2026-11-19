@@ -7,10 +7,15 @@ vendors:
   - name: Wasatch Lights
 inputs:
   physical:
-    Ethernet: true # RJ45 onboard
+    Ethernet: true # WT32-ETH01 module
+    Wi-Fi:
+      - 2.4GHz
+    USB: USB-C # programming
+    GPIO: 4
   protocols:
-    - sACN # E1.31
+    - sACN
     - DDP
+    - Art-Net
   standalone: true # WLED firmware can play effects without a host
 outputs:
   count: 8

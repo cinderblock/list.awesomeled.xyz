@@ -7,14 +7,17 @@ creator:
 notes: 16 local pixel outputs expandable to 32 via SmartReceivers; 192 universes in.
 inputs:
   physical:
-    Ethernet: 2 # 2-port switch for daisy-chaining
+    Ethernet: 2
     Wi-Fi:
+      # configuration and upload only
       - 2.4GHz
-      # onboard ESP-07 module
+    buttons: 6
+    triggers: 2
   protocols:
+    - sACN
     - Art-Net
-    - sACN # E1.31
     - DDP
+    - ZCPP
   standalone: true # Falcon Player (FPP) remote mode plays from microSD
 outputs:
   count: 16

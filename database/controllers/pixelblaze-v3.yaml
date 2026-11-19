@@ -13,7 +13,8 @@ inputs:
   physical:
     Wi-Fi:
       - 2.4GHz
-      # ESP32 onboard
+    buttons: 1
+    GPIO: 18
   standalone: true # runs patterns from onboard flash without external input
 outputs:
   count: 1

@@ -7,8 +7,15 @@ creator:
 notes: Unique central configuration with human readable UDP messages. No FPS limit except what is given for the pixel protocol.
 inputs:
   physical:
-    Ethernet: true
-  standalone: true
+    Ethernet: true # Orange Pi
+    DMX512: via an add-on board
+    Wi-Fi: true # ESP8266 add-on board only
+  protocols:
+    - Art-Net
+    - sACN
+    - DDP
+    - DMX512
+  standalone: false
   requires_host: Orange Pi Zero
 outputs:
   count: 8

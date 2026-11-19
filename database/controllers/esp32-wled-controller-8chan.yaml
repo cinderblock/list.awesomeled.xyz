@@ -7,6 +7,13 @@ inputs:
   physical:
     Wi-Fi:
       - 2.4GHz
+    USB: micro-USB
+    triggers: 1
+    GPIO: true
+  protocols:
+    - Art-Net
+    - sACN
+    - DDP
   standalone: true # runs WLED firmware standalone
 outputs:
   count: 8

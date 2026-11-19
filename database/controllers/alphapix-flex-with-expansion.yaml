@@ -6,7 +6,8 @@ creator:
   page: https://www.holidaycoro.com/Flex-Modular-Lighting-Controller-System-p/951.htm
 inputs:
   physical:
-    Ethernet: true
+    Ethernet: 2 # built-in switch
+    buttons: 5
   protocols:
     - sACN
   standalone: false

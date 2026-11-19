@@ -5,8 +5,16 @@ creator:
   page: https://www.tindie.com/products/smartlightme/a1-slwf-03-wled-esp32-controller-home-assistant
 inputs:
   physical:
-    Wi-Fi: true
-    Bluetooth: true
+    Wi-Fi:
+      - 2.4GHz
+    USB: USB-C
+    buttons: 1
+    IR: true
+    Microphone: true
+  protocols:
+    - Art-Net
+    - sACN
+    - DDP
   standalone: true
 outputs:
   count: 2

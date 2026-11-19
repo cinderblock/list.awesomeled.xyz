@@ -7,7 +7,7 @@ vendors:
   - Amazon
 inputs:
   physical:
-    buttons: true # onboard buttons + display for standalone pattern control
+    IR: true
   standalone: true # built-in patterns selectable via onboard buttons/display
 outputs:
   count: 1

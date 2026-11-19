@@ -8,7 +8,10 @@ vendors:
 notes: Plays TPM2 animation files from a microSD card, triggered and addressed over DMX512.
 inputs:
   physical:
-    DMX512: 3-pin XLR in + pass-through # 4 DMX channels, adjustable start address
+    DMX512: XLR-3 in + thru
+    buttons: 2
+  protocols:
+    - DMX512
   standalone: true # plays TPM2 files from microSD without a host
 outputs:
   count: 2

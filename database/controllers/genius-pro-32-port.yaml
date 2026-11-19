@@ -10,6 +10,12 @@ inputs:
   physical:
     Ethernet: true
     Wi-Fi: true
+    Bluetooth: true
+    buttons: 2
+  protocols:
+    - DDP
+    - sACN
+    - Art-Net
   standalone: true
 outputs:
   count: 32
@@ -25,6 +31,9 @@ outputs:
 power:
   voltage:
     max: 24
+data:
+  storage:
+    - type: microSD
 features:
   - eFuse protected power distribution
   - On-board power supply mounting

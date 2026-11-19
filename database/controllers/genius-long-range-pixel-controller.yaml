@@ -7,6 +7,13 @@ creator:
 inputs:
   physical:
     Ethernet: true
+    Wi-Fi: true # setup hotspot; client mode from firmware 2.0
+    Bluetooth: true # firmware 2.0
+    buttons: 2
+  protocols:
+    - DDP
+    - sACN
+    - Art-Net
   standalone: true
 outputs:
   connector:
@@ -27,7 +34,7 @@ power:
     max: 5
 data:
   storage:
-    - type: SD
+    - type: microSD
 images:
   - file: genius-long-range-pixel-controller.webp
     source: https://store.experiencelights.com/long-range-genius-pixel-controller/

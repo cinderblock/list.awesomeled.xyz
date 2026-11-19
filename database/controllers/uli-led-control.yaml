@@ -7,6 +7,11 @@ creator:
 inputs:
   physical:
     Ethernet: true
+    USB: true # firmware updates
+  protocols:
+    - Art-Net
+    - sACN
+  standalone: false
 outputs:
   count: 8
   pixels:

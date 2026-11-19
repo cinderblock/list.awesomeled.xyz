@@ -8,7 +8,8 @@ creator:
 notes: Internal 3500mAh battery; configured from a browser (no app needed).
 inputs:
   physical:
-    Wi-Fi: true
+    Wi-Fi:
+      - 2.4GHz
   standalone: true
 outputs:
   count: 1

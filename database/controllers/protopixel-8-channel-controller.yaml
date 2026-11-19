@@ -8,7 +8,7 @@ notes: Driven over Ethernet (direct or through a switch) by ProtoPixel Create on
 inputs:
   physical:
     Ethernet: true
-    USB: true
+    buttons: 1
   standalone: false
   requires_host: Mac (MacBook or iMac) running ProtoPixel Create, or a ProtoPixel Node / ProtoPixel Player
 outputs:

@@ -9,9 +9,10 @@ notes: >-
 inputs:
   physical:
     Ethernet: true
+    buttons: 5
   protocols:
+    - sACN
     - Art-Net
-    - sACN # E1.31
     - DDP
   standalone: true # plays FPP sequences from microSD
 outputs:

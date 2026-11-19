@@ -11,7 +11,7 @@ vendors:
 notes: Up to 8 boards share one serial line (address set by cuttable jumpers).
 inputs:
   physical:
-    Serial: UART, 2 Mbps
+    Serial: TTL UART (Pixelblaze expander bus)
   standalone: false
 outputs:
   count: 8

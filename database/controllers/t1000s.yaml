@@ -4,6 +4,9 @@ vendors:
   - name: Amazon
     url: https://www.amazon.com
 inputs:
+  physical:
+    buttons: 4
+    Serial: A/B cascade sync in
   standalone: true # plays effects from SD card
 outputs:
   count: 1

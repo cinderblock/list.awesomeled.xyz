@@ -7,10 +7,13 @@ creator:
 notes: DIN-rail Ethernet-to-pixel converter; 8 outputs, 16 universes, up to 2730 RGB pixels.
 inputs:
   physical:
-    Ethernet: true # RJ45 Ethercon input
+    Ethernet: true
   protocols:
     - Art-Net
-    - sACN # E1.31
+    - sACN
+    - ESP
+    - Kling-Net
+  standalone: false
 outputs:
   count: 8
   connector: RJ45 PLink

@@ -15,7 +15,7 @@ inputs:
     - DDP
     - Art-Net
     - sACN # E1.31
-  standalone: true
+  standalone: true # CunningFX effects, no show player needed
 outputs:
   connector:
     ref: mtsb-combicon

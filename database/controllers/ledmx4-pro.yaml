@@ -8,6 +8,12 @@ notes: Show record and playback trigger capability through RJ-12 port
 inputs:
   physical:
     Ethernet: true
+    DMX512: 3-pin terminal (in or out)
+    triggers: 4 # RJ12 accessory port
+  protocols:
+    - Art-Net
+    - sACN
+    - DMX512
   standalone: true
 outputs:
   count: 4
@@ -60,7 +66,7 @@ power:
     max: 24
 data:
   storage:
-    - type: SD
+    - type: microSD
 images:
   - file: ledmx4-pro.webp
     source: https://web.archive.org/web/20251028133025/https://dmxking.com/led-pixel-control/ledmx4-pro

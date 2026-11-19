@@ -8,7 +8,10 @@ vendors:
 notes: Standalone TPM2 player (microSD or USB stick) for up to 4096 LEDs across 8 outputs; USB virtual COM takes live data from JINX. OLED display + 4 buttons; ARM Cortex-M7. No network input.
 inputs:
   physical:
-    USB: true # Mini-USB - virtual COM (live JINX), config, BIOS updates
+    USB: mini-USB # live TPM2 data and configuration
+    buttons: 4
+  protocols:
+    - TPM2
   standalone: true
 outputs:
   count: 8

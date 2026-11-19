@@ -7,7 +7,13 @@ creator:
 notes: BeagleBone Black cape running FPP (Ethernet/storage via the BBB; Wi-Fi only if paired with a BBB Wireless host). 16 RJ45 differential ports driving 64 strings via standard or v1/v2 Smart receivers. Two UART differential outputs for DMX/Renard/LOR/PixelNet. Onboard sound, FM transmitter optional.
 inputs:
   physical:
-    Ethernet: true # provided by the BeagleBone Black host
+    Ethernet: true # via host BeagleBone
+    buttons: 7
+    GPIO: 8
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # Falcon Player (FPP)
   requires_host: BeagleBone Black
 outputs:

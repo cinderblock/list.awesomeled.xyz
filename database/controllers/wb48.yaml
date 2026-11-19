@@ -7,7 +7,13 @@ creator:
 notes: BeagleBone Black (Rev C) based FPP controller; designed with Scott Hanson. 12 differential RJ45 ports drive up to 48 remote ports via Universal Differential Receivers (5 V or 12 V pixels at the receiver).
 inputs:
   physical:
-    Ethernet: true
+    Ethernet: true # via host BeagleBone
+    USB: true # via host BeagleBone
+    buttons: 1
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # FPP 5.5 preloaded on the included 16 GB microSD
   requires_host: BeagleBone Black
 outputs:

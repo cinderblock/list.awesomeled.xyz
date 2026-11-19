@@ -6,8 +6,14 @@ creator:
   page: https://wallyslights.com/products/wallys-lights-wb1616-controller
 inputs:
   physical:
-    Ethernet: true
-    USB: true
+    Ethernet: true # via host BeagleBone
+    USB: true # via host BeagleBone
+    buttons: 6
+    GPIO: true
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # plays from SD card
   requires_host: BeagleBone Black
 outputs:

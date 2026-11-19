@@ -10,11 +10,12 @@ vendors:
     warranty: 5 Years
 inputs:
   physical:
-    Ethernet: 2 # 2x RJ-45 100 Mbit/sec with internal switch
-    USB: true
-    DMX512: XLR 3-pin
+    Ethernet: 2
+    DMX512: XLR-3 in + thru (XLR-5 optional)
+    buttons: true
   protocols:
-    - Art-Net # up to 24 universes
+    - Art-Net
+    - DMX512
   standalone: true # microSD playlist/autoplay mode
 outputs:
   count: 4

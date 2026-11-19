@@ -8,6 +8,18 @@ notes: ESP32, open to any software, often run with WLED
 inputs:
   physical:
     Ethernet: true
+    Wi-Fi:
+      - 2.4GHz
+    USB: USB-C
+    buttons: 2
+    triggers: 2
+    Microphone: true
+    GPIO: 4
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
+    - TPM2.net
   standalone: true
 outputs:
   count: 8
@@ -27,6 +39,7 @@ core:
 data:
   storage:
     - type: microSD
+    - type: flash
 images:
   - file: quinled-dig-octa.webp
     source: https://shop.allnetchina.cn/products/quinled-dig-octa-brainboard-32-8l-v4

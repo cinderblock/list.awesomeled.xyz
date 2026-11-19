@@ -5,7 +5,8 @@ creator:
   page: https://shop.blinkinlabs.com/products/blinkytape-control-board
 inputs:
   physical:
-    USB: true
+    USB: micro-USB # live data and pattern uploads
+    buttons: 1
   standalone: true
 outputs:
   count: 1

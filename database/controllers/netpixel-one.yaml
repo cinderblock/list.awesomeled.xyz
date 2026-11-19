@@ -6,10 +6,11 @@ vendors:
     page: https://www.ebay.co.uk/itm/SmartShow-NetPixel-ONE-32-Universe-Ethernet-Pixel-Driver-ArtNet-sACN/274037107730
 inputs:
   physical:
-    Ethernet: true # isolated RJ45
+    Ethernet: true
+    buttons: 1
   protocols:
-    - Art-Net # decodes up to 32 universes
-    - sACN # E1.31, up to 28 universes
+    - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 8

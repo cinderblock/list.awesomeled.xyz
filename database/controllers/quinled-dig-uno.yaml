@@ -10,10 +10,16 @@ inputs:
   physical:
     Wi-Fi:
       - 2.4GHz
-      # ESP32, board/external antenna options
-    USB: true # USB-C on QuinLED-ESP32 top board
+    Ethernet: true # optional ABE variant
+    USB: USB-C
+    buttons: 2
+    Microphone: true
+    GPIO: 6
   protocols:
-    - DMX512
+    - sACN
+    - Art-Net
+    - DDP
+    - TPM2.net
   standalone: true # commonly runs WLED
 outputs:
   count: 2

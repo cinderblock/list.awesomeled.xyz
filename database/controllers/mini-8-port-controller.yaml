@@ -7,8 +7,13 @@ creator:
 inputs:
   physical:
     Ethernet: true
+    Wi-Fi:
+      - 2.4GHz
   protocols:
-    - sACN # E1.31
+    - sACN
+    - Art-Net
+    - DDP
+    - TPM2.net
   standalone: true
   requires_host: WT32-ETH01
 outputs:

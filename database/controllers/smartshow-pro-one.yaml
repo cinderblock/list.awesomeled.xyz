@@ -8,7 +8,12 @@ creator:
 notes: Inbuilt Ethernet Switch, allows daisy chaining units
 inputs:
   physical:
-    Ethernet: 2
+    Ethernet: 2 # isolated switch
+    USB: true # firmware uploads
+    buttons: 1 # 4-way joystick
+  protocols:
+    - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 8

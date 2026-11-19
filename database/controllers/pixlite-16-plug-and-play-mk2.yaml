@@ -7,7 +7,11 @@ creator:
 notes: 5V or 12V available. Multiple power plug versions available.
 inputs:
   physical:
-    USB: true
+    Ethernet: true
+    buttons: 2
+  protocols:
+    - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 16

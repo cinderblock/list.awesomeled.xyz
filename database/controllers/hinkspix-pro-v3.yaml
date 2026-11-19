@@ -7,11 +7,14 @@ creator:
 notes: Modular "Flex" pixel controller CPU; onboard pixel ports plus long-range differential receivers add on through stackable expansion boards.
 inputs:
   physical:
-    Ethernet: 2 # built-in 2-port network switch for daisy-chaining
+    Ethernet: 2
+    Wi-Fi: true # firmware and multi-controller sync only
+    buttons: 5
   protocols:
+    - sACN
     - Art-Net
-    - sACN # E1.31
     - DDP
+  standalone: true
 outputs:
   count: 80 # 5 Flex expansion boards × 16
   differential: true # long-range receivers carry differential pixel data over Cat5/RJ45
@@ -51,6 +54,9 @@ outputs:
     - UCS2904
     - WS2814
     - WS2805
+data:
+  storage:
+    - type: SD
 features:
   - Built-in 2-port Ethernet switch for daisy-chaining without extra hardware
   - Long-range differential receivers extend pixel ports over Cat5/RJ45 (4 ports each)

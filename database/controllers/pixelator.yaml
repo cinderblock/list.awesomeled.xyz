@@ -6,11 +6,15 @@ creator:
   page: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
 inputs:
   physical:
-    Ethernet: true
+    Ethernet: true # gigabit
+    buttons: 4
+    Serial: RS-232 (profile select; not on RevC)
   protocols:
     - Art-Net
-    - sACN # E1.31
-  standalone: true
+    - sACN
+    - ESP
+    - KiNET
+  standalone: false
 outputs:
   count: 24 # RJ45 ports carrying proprietary PLINK protocol to PLINK injectors
   connector:

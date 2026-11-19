@@ -10,8 +10,8 @@ notes: Bluetooth app + music controller with built-in microphone and AUX audio i
 inputs:
   physical:
     Bluetooth: true
-    Audio: AUX # 3.5mm line-in for music sync
-    Microphone: true # built-in mic for music spectrum mode
+    Audio: line-in
+    Microphone: true
   standalone: true
 outputs:
   count: 1

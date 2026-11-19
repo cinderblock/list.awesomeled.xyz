@@ -9,7 +9,8 @@ inputs:
   physical:
     Wi-Fi:
       - 2.4GHz
-      # AP or STA mode; 5 GHz unsupported. Bluetooth is only used for BluFi provisioning
+    Bluetooth: true # Wi-Fi setup (BluFi) only
+    buttons: 1
   protocols:
     - Art-Net
   standalone: true # built-in effect layers; records scenes to onboard flash
@@ -32,6 +33,9 @@ power:
   voltage:
     min: 5
     max: 24
+data:
+  storage:
+    - type: flash
 features:
   - Two overlay effect layers (text, music, ...) with custom parameters
   - Matrix layout by rectangle or DXF import

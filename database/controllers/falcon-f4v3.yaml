@@ -6,8 +6,14 @@ creator:
   page: https://pixelcontroller.com/store/content/11-f4v3-pixel-controller
 inputs:
   physical:
-    Ethernet: true
-    Wi-Fi: true
+    Ethernet: 2
+    Wi-Fi: true # configuration only
+    buttons: 6
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
+    - ZCPP
   standalone: true # Falcon Player (FPP) remote mode plays from SD
 outputs:
   count: 4 # built-in; 12 with expansion boards or receivers
@@ -52,7 +58,7 @@ power:
     max: 60
 data:
   storage:
-    - type: SD
+    - type: microSD
 price: 125
 price_source:
   notes: last list price (assembled board), from the vendor's archived product page; "This product is no longer in stock" at capture

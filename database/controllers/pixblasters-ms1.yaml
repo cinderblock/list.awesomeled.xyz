@@ -7,7 +7,7 @@ notes: Connects to a PC or Mac (or other device) over HDMI and acts like a monit
 inputs:
   physical:
     HDMI: true
-    Ethernet: 2 # daisy-chain in + out
+    USB: USB-C # configuration and updates
   standalone: false
 outputs:
   count: 32

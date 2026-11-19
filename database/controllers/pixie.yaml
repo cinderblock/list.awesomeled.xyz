@@ -11,6 +11,7 @@ inputs:
       - 2.4GHz
   protocols:
     - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 1

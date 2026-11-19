@@ -6,10 +6,11 @@ creator:
 notes: Bluetooth app + RF remote music controller with a built-in microphone and 4 adjustable dry-contact triggers. 36+ built-in effects with grouping across the 8 outputs; settings survive power-down.
 inputs:
   physical:
-    Bluetooth: true # iOS/Android app control
-    RF remote: 15 m range
-    Microphone: true # built-in mic for music-reactive modes
-    triggers: 4 # adjustable dry-contact trigger inputs
+    Bluetooth: true
+    RF remote: true
+    Microphone: true
+    Audio: line-in
+    triggers: 4
   standalone: true # built-in effects, no host needed
 outputs:
   count: 8

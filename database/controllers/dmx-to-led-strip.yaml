@@ -7,7 +7,8 @@ creator:
 notes: DMX modes and address selected via dip switch. Setting of pixel mode X1 X2 X3 or 11 channels program mode
 inputs:
   physical:
-    DMX512: 3-point connector
+    DMX512: 3-pin input (solder; optional XLR or wireless-DMX card)
+    USB: USB-C
   protocols:
     - DMX512
   standalone: false

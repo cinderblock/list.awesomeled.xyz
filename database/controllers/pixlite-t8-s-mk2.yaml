@@ -7,10 +7,10 @@ creator:
 notes: 2 types of receivers available
 inputs:
   physical:
-    Ethernet: 2
+    Ethernet: true
   protocols:
     - Art-Net
-    - sACN # E1.31
+    - sACN
   standalone: false
 outputs:
   count: 32

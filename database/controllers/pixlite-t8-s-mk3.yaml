@@ -8,7 +8,13 @@ creator:
 notes: 2 types of receivers available, dithering and gamma on 8-bit/color pixels, "hundreds of FPS"
 inputs:
   physical:
-    Wi-Fi: true
+    Ethernet: 2 # dual gigabit
+    DMX512: RS-485 aux (in or out)
+    buttons: 2
+  protocols:
+    - Art-Net
+    - sACN
+    - DMX512
   standalone: true
 outputs:
   count: 32
@@ -126,7 +132,7 @@ power:
     max: 24
 data:
   storage:
-    - type: SD
+    - type: microSD
 images:
   - file: pixlite-t8-s-mk3.webp
     source: https://www.advateklighting.com/products/t8-s-mk3

@@ -5,8 +5,8 @@ creator:
   page: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
 inputs:
   physical:
-    DMX512: RS-485 (XLR via optional pigtail)
-    Serial: TTL header
+    DMX512: screw terminal
+    Serial: TTL
   protocols:
     - DMX512
   standalone: false

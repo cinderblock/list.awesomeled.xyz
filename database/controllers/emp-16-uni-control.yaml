@@ -7,8 +7,10 @@ creator:
 notes: 19mm slim DIN rail mount, internal Ethernet switch for daisy-chain.
 inputs:
   physical:
-    Ethernet: true # internal Ethernet switch for daisy-chaining
-    Wi-Fi: true
+    Ethernet: 2 # built-in switch
+  protocols:
+    - Art-Net
+  standalone: false
 outputs:
   count: 4
   connector: Push Terminal

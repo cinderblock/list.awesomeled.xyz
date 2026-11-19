@@ -7,10 +7,11 @@ creator:
 notes: DMX-controlled LED tape replay unit (model 5850, "QolorPIX Tape Controller, Eight Output")
 inputs:
   physical:
-    DMX512: true
+    DMX512: XLR-5 in + thru
     Wireless DMX: Multiverse
+    buttons: true
   protocols:
-    - DMX512 # DMX512-A only; no Art-Net or sACN
+    - DMX512
   standalone: true # 24 base effects + 4 recordable presets, runs without external controller
 outputs:
   connector: XLR4 # 4-pin XLRF per output

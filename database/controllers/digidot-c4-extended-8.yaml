@@ -7,11 +7,16 @@ creator:
 notes: Packed with features
 inputs:
   physical:
-    Ethernet: true # onboard ethernet switch
-    Wi-Fi: true # built-in WiFi with DHCP server
+    Ethernet: 2
+    Wi-Fi:
+      - 2.4GHz
+    DMX512: 6-pin I/O terminal (up to 2 inputs)
+    buttons: 1
+    triggers: 3 # TRRS jack: dry contacts or 0-10 V
   protocols:
     - Art-Net
     - sACN
+    - DMX512
   standalone: true # records Art-Net/DMX to microSD for standalone playback
 outputs:
   count: 4 # four multi-functional I/O ports

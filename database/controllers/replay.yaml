@@ -6,8 +6,6 @@ vendors:
     page: https://www.ebay.co.uk/itm/SmartShow-REPLAY-SDCard-Pixel-Player-2720-WS2812-SK6812-TMP2-FSEQ-PSEQ/274135104445
 notes: Replays Jinx and xLights files on 4 separate 680 pixel outputs
 inputs:
-  physical:
-    Ethernet: true
   standalone: true # plays FSEQ/PSEQ sequence files from SD card
 outputs:
   count: 4
@@ -37,7 +35,7 @@ power:
     max: 24
 data:
   storage:
-    - type: SD
+    - type: microSD
 dead_links:
   - url: https://smartshow.lighting/replay/
     archive: https://web.archive.org/web/20230129030107/https://smartshow.lighting/replay/

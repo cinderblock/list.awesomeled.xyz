@@ -7,8 +7,15 @@ creator:
 notes: USB-C powered, 5V or 12V capable (USB-C Power Delivery up to 36W).
 inputs:
   physical:
-    Wi-Fi: true # ESP32-C3 onboard
-    USB: USB-C # power + firmware flashing
+    Wi-Fi:
+      - 2.4GHz
+    USB: USB-C
+    buttons: 1
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
+    - TPM2.net
   standalone: true # runs WLED
 outputs:
   count: 1

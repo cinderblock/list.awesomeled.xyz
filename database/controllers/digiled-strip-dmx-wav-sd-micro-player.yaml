@@ -6,8 +6,7 @@ creator:
 notes: 6 switch inputs trigger pixel, DMX or WAV sound scenes. Programmed using Artrender.
 inputs:
   physical:
-    DMX512: solder pads
-    buttons: 6
+    triggers: 6 # dry-contact solder pads
   standalone: true
 outputs:
   count: 1

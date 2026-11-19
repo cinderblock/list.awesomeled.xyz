@@ -8,8 +8,13 @@ creator:
 notes: Pixels cannot be powered through PixLite. All other features of Mk3 are available in the E Series.
 inputs:
   physical:
-    Ethernet: true # single 100Mbps port
-    USB: true
+    Ethernet: true # 10/100
+    DMX512: RS-485 aux (in or out)
+    buttons: 2
+  protocols:
+    - Art-Net
+    - sACN
+    - DMX512
   standalone: true
 outputs:
   count: 8
@@ -127,7 +132,7 @@ power:
     max: 24
 data:
   storage:
-    - type: SD
+    - type: microSD
 images:
   - file: pixlite-e4-s-mk3.webp
     source: https://www.advateklighting.com/products/e4-s-mk3

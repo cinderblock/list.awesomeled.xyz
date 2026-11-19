@@ -7,7 +7,13 @@ creator:
 notes: Open source DIY FPP pixel controller cape for the PocketBeagle.
 inputs:
   physical:
-    Ethernet: true # provided by BeagleBone Black host
+    USB: USB-A host # network only through a USB Ethernet or Wi-Fi adapter
+    buttons: 2
+    GPIO: 1
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # runs Falcon Player (FPP) on the BeagleBone
   requires_host: PocketBeagle
 outputs:
@@ -28,6 +34,9 @@ power:
     max: 24
   current:
     max: 40
+data:
+  storage:
+    - type: microSD
 dead_links:
   - url: http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controller
     archive: https://web.archive.org/web/20230604010133/http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controller

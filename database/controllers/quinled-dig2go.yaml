@@ -9,8 +9,16 @@ inputs:
   physical:
     Wi-Fi:
       - 2.4GHz
+    USB: USB-C
+    buttons: 1
+    IR: true
+    Microphone: true
+    GPIO: 4
   protocols:
-    - DMX512
+    - sACN
+    - Art-Net
+    - DDP
+    - TPM2.net
   standalone: true
 outputs:
   count: 1

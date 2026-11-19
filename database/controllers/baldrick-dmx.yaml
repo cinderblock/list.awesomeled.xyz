@@ -12,6 +12,7 @@ inputs:
     - Art-Net
     - sACN # E1.31
     - DDP
+  standalone: true # static DMX presets at boot or over the Turnip network
 outputs:
   auxiliary:
     DMX512: 1

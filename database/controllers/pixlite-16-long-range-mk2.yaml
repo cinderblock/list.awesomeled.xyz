@@ -6,10 +6,11 @@ creator:
   page: https://www.advateklighting.com/products/shop/pixlite-16-long-range-mk2
 inputs:
   physical:
-    USB: true # configuration
+    Ethernet: true
+    buttons: 2
   protocols:
     - Art-Net
-    - sACN # E1.31
+    - sACN
   standalone: false
 outputs:
   count: 32

@@ -6,13 +6,17 @@ creator:
   page: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html
 inputs:
   physical:
-    Ethernet: true
+    Ethernet: 2
     Wi-Fi:
+      # configuration and upload only
       - 2.4GHz
+    buttons: 6
+    triggers: 4
   protocols:
+    - sACN
     - Art-Net
-    - sACN # E1.31
     - DDP
+    - ZCPP
   standalone: true # Falcon Player (FPP)
 outputs:
   count: 16

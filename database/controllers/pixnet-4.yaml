@@ -8,8 +8,11 @@ creator:
 notes: Powered by PoE or screw terminals, 5-48 Volt.
 inputs:
   physical:
-    USB: true
+    Ethernet: true
     PoE: true
+  protocols:
+    - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 8

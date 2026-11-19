@@ -8,6 +8,10 @@ notes: Internal PSU
 inputs:
   physical:
     Ethernet: true
+    buttons: 1
+  protocols:
+    - sACN
+    - Art-Net
   standalone: false
 outputs:
   count: 4

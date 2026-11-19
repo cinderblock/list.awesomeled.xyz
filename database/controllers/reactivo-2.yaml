@@ -8,7 +8,12 @@ creator:
 inputs:
   physical:
     Ethernet: true
-    Wi-Fi: true
+    Wi-Fi:
+      - 2.4GHz
+    triggers: 2
+    buttons: 1
+  protocols:
+    - Art-Net
   standalone: true
 outputs:
   count: 1
@@ -60,7 +65,7 @@ power:
     max: 7 # max total pass-through current
 data:
   storage:
-    - type: SD
+    - type: microSD
 dead_links:
   - url: https://ledstripstudio.com/gaming/
     archive: https://web.archive.org/web/20250622130840/https://www.ledstripstudio.com/gaming/

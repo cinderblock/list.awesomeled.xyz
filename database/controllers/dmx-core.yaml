@@ -7,7 +7,17 @@ notes: Standalone wall-mounted controller with 4.3" touch interface for presets 
   playback. Up to 40 universes.
 inputs:
   physical:
-    Wi-Fi: true
+    Ethernet: true # 1 GbE
+    PoE: true
+    USB: USB-A
+    buttons: true
+    DMX512: optional 2-port isolated board
+    triggers: 4 # optional ADIO board
+  protocols:
+    - Art-Net
+    - sACN
+    - KiNET
+    - DMX512
   standalone: true
 outputs:
   clocked: selectable
@@ -16,7 +26,8 @@ power:
     max: 28
 data:
   storage:
-    - type: SD
+    - type: eMMC
+    - type: microSD
 features:
   - 4.3" touchscreen for presets and playback
 price: 999

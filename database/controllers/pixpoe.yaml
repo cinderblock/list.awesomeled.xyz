@@ -8,8 +8,8 @@ notes: Single-output PoE-powered pixel controller; 30W 5V PoE output to LEDs.
 inputs:
   physical:
     Ethernet: true
-    Wi-Fi: true
-    PoE: true
+    PoE: PoE+
+    buttons: 1
   standalone: false
 outputs:
   count: 1

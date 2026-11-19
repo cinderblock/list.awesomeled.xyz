@@ -10,7 +10,7 @@ inputs:
   physical:
     Ethernet: true # 100 Mbps
     Wi-Fi: true
-    Bluetooth: 5 LE (future)
+    Bluetooth: 5 LE # hardware only; support promised in a future release
   protocols:
     - Art-Net
   standalone: false

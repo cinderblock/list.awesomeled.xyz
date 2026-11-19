@@ -10,8 +10,10 @@ notes: new firmware has a pixel counting test pattern, great for mapping
 inputs:
   physical:
     Ethernet: true
-    Wi-Fi: true
-    USB: true
+    buttons: 2
+  protocols:
+    - Art-Net
+    - sACN
   standalone: false # listed FPP support implies Falcon Player remote mode, but flat data marked standalone false
 outputs:
   count: 8

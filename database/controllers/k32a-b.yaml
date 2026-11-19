@@ -7,8 +7,13 @@ creator:
 notes: BeagleBone Black cape running FPP (Ethernet via the BBB). 32 fused local string ports plus 4 RJ45 differential ports adding up to 16 strings via standard or 48 via smart receivers (80 strings max). Two RS485 outputs for DMX/PixelNet/Renard/LOR. OLED display, RTC, onboard sound DAC; FM transmitter optional. Discontinued per Wired Watts; no longer in the kulplights.com shop.
 inputs:
   physical:
-    Ethernet: true # via the BeagleBone Black host
-    PoE: PoE++
+    Ethernet: true # via host BeagleBone
+    buttons: 6
+    GPIO: 9
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # runs FPP (Falcon Player)
   requires_host: BeagleBone Black
 outputs:

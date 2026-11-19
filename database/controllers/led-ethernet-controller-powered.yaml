@@ -11,7 +11,11 @@ vendors:
 inputs:
   physical:
     Ethernet: 2
-    DMX512: XLR 3-pin
+    DMX512: XLR-3 in + thru (XLR-5 optional)
+    buttons: true
+  protocols:
+    - Art-Net
+    - DMX512
   standalone: true
 outputs:
   count: 4
@@ -34,7 +38,7 @@ power:
   connector: PowerCON
 data:
   storage:
-    - type: SD
+    - type: microSD
 datasheet:
   url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
 dead_links:

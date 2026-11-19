@@ -7,7 +7,10 @@ creator:
 notes: See tech specs PDF for full details
 inputs:
   physical:
-    DMX512: RJ-45 in/out
+    DMX512: RJ45 in + out
+    buttons: 2
+  protocols:
+    - DMX512
   standalone: true
 outputs:
   count: 1
@@ -69,7 +72,7 @@ power:
     max: 10
 data:
   storage:
-    - type: SD
+    - type: microSD
 datasheet:
   url: https://www.ledstripstudio.com/download/tech-specs/SPI_LED_Controller_tech_specs.pdf
 images:

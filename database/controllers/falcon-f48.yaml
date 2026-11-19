@@ -7,10 +7,16 @@ creator:
 notes: 48 differential pixel outputs via remote receiver boards (4 outputs each).
 inputs:
   physical:
-    Ethernet: 2 # 2-port switch for daisy-chaining
+    Ethernet: 2
+    Wi-Fi:
+      # limited configuration only
+      - 2.4GHz
+    buttons: 6
   protocols:
+    - sACN
     - Art-Net
-    - sACN # E1.31
+    - DDP
+    - ZCPP
   standalone: true # Falcon Player (FPP) remote mode plays FSEQ from SD card
 outputs:
   count: 48

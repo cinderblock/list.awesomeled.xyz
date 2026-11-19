@@ -6,11 +6,11 @@ creator:
   page: https://www.madrix.com/products/nebula
 inputs:
   physical:
-    Ethernet: 2
-    USB: true
+    Ethernet: 2 # built-in switch
+    USB: USB-B # MADRIX 5 data; also power
   protocols:
-    - Art-Net # incl. ArtSync (Art-Net I/II/3/4)
-    - sACN # ANSI E1.31
+    - Art-Net
+    - sACN
   standalone: false
 outputs:
   count: 2

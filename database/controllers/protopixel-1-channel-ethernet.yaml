@@ -7,8 +7,6 @@ creator:
 inputs:
   physical:
     Ethernet: true
-  protocols:
-    - Art-Net
   standalone: true
 outputs:
   count: 1

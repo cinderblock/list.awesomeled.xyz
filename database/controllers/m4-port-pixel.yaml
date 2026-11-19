@@ -12,6 +12,12 @@ notes: Raspberry Pi HAT (Pi 3B/4, Zero/Zero 2) running FPP 6+ with a separately 
 inputs:
   physical:
     Ethernet: true # via host Raspberry Pi
+    Wi-Fi: true # via host Raspberry Pi
+    buttons: true # joystick
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
   standalone: true # plays from host running FPP
   requires_host: Raspberry Pi 3B, Raspberry Pi 4, Raspberry Pi Zero, Raspberry Pi Zero 2
 outputs:

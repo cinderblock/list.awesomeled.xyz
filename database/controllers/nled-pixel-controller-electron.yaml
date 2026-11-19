@@ -7,8 +7,10 @@ creator:
 notes: On board 3 Axis Accelerometer, programmable for wearables and standalone. 512 channels (170 RGB pixels) via 16MB onboard flash; optional WiFi/Bluetooth add-on modules available. Output connector is user-selectable at order time.
 inputs:
   physical:
-    USB: true
-    Serial: true
+    USB: micro-USB
+    Serial: TTL
+    DMX512: with the add-on RS-485 card
+    buttons: 1
   protocols:
     - DMX512
   standalone: true

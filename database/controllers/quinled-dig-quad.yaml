@@ -9,7 +9,16 @@ inputs:
   physical:
     Wi-Fi:
       - 2.4GHz
-      # via plug-in QuinLED-ESP32 module; wired Ethernet ESP32 variant optional
+    Ethernet: true # optional ABE variant
+    USB: USB-C
+    buttons: 2
+    Microphone: true
+    GPIO: 6
+  protocols:
+    - sACN
+    - Art-Net
+    - DDP
+    - TPM2.net
   standalone: true # commonly runs WLED firmware
 outputs:
   count: 4

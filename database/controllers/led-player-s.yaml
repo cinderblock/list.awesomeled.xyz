@@ -8,7 +8,10 @@ vendors:
 notes: Plays TPM2 effect files from microSD on WS2812-compatible LEDs, or streams TPM2 over the USB 2.0 virtual COM port (Jinx!, GLEDIATOR). Config files can be edited with Diamex's LedEddy desktop tool — which a previous entry here mistook for a controller.
 inputs:
   physical:
-    USB: true # USB 2.0 virtual COM port for TPM2 streaming
+    USB: true # TPM2 over a virtual serial port
+    buttons: 2
+  protocols:
+    - TPM2
   standalone: true # plays TPM2 files from microSD
 outputs:
   count: 1
