@@ -37,13 +37,23 @@ images:
   - file: k8-b.webp
     source: https://kulplights.com/product/k8-b/
     credit: KulpLights, LLC
-price: 80 # board-only; vendor lists $80-$165 depending on BeagleBone/SD options
+price: 80
+price_source:
+  notes: board only (no BeagleBone, no SD card); $80-$197 with a premounted BeagleBone Black/Green and/or FPP SD card
+  part: K8-B-None-None
+  retrieved: '2026-11-18'
+  url: https://kulplights.com/product/k8-b/
+  vendor: Kulp Lights LLC
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://kulplights.com/product/k8-b/
+    retrieved: '2026-11-18'
+    notes: 'In stock, board-only $80'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

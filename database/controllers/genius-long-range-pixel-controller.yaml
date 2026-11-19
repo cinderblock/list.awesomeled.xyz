@@ -3,7 +3,7 @@ status: active
 release_year: 2022
 creator:
   name: Experience Lights
-  page: https://experiencelights.com/long-range-genius-pixel-controller/
+  page: https://store.experiencelights.com/long-range-genius-pixel-controller/
 inputs:
   physical:
     Ethernet: true
@@ -28,11 +28,21 @@ data:
     - type: SD
 features:
   - Power over Ethernet (PoE)
-price: 189
+price: 238.99
+price_source:
+  notes: regular price; on sale $214.99 (-10%) at retrieval
+  part: GCONTROLLER-LONGRANGE
+  retrieved: '2026-11-18'
+  url: https://store.experiencelights.com/long-range-genius-pixel-controller/
+  vendor: Experience Lights
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://store.experiencelights.com/long-range-genius-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: 'In stock, regular $238.99'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/experience.xcontroller
     retrieved: '2026-11-18'

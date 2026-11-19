@@ -30,9 +30,15 @@ power:
 case:
   dimensions: 90x40x20mm
   waterproof: IP20
-price: 74.99
+price: 120
 price_source:
-  retrieved: 2015-06
-  vendor: B&H Photo
-  url: https://web.archive.org/web/20141108233524/http://www.bhphotovideo.com/c/product/1036496-REG/elation_professional_flex_pixel_driver1.html
-  notes: street price (Nov 2014 and Jun 2015); Elation publishes no price
+  notes: last list price ("Regular price $120.00") on the discontinued product page; not purchasable
+  part: FLE768
+  retrieved: '2026-11-18'
+  url: https://www.elationlighting.com/products/flex-pixel-driver-1
+  vendor: Elation
+sources:
+  status:
+    url: https://www.elationlighting.com/products/flex-pixel-driver-1
+    retrieved: '2026-11-18'
+    notes: 'product page badged "Discontinued"'

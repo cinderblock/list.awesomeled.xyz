@@ -41,3 +41,8 @@ price: 190
 software:
   firmware:
     - FPP
+sources:
+  status:
+    url: https://go3d.fr/produit/controleur-de-pixels-fp48f/
+    retrieved: '2026-11-18'
+    notes: 'vendor page 404; go3d.fr now belongs to an unrelated pest-control company'

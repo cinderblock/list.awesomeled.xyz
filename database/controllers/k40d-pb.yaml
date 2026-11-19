@@ -27,13 +27,23 @@ power:
 data:
   storage:
     - type: SD
-price: 115
+price: 110
+price_source:
+  notes: board only (no PocketBeagle 2, no SD card); $110-$187 with a premounted PocketBeagle 2 (regular or industrial) and/or FPP SD card
+  part: K40D-PB-N-N
+  retrieved: '2026-11-18'
+  url: https://kulplights.com/product/k40d-pb/
+  vendor: Kulp Lights LLC
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://kulplights.com/product/k40d-pb/
+    retrieved: '2026-11-18'
+    notes: 'In stock, board-only $110'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

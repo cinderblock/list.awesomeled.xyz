@@ -4,7 +4,7 @@ release_year: 2023
 creator:
   name: Experience Lights
   url: https://experiencelights.com
-  page: https://experiencelights.com/genius-pro-32-port-controller/#/
+  page: https://store.experiencelights.com/genius-pro-32-port-controller/
 notes: On board PSU mounting, eFuse protected power distribution, on board fault finding
 inputs:
   physical:
@@ -26,11 +26,21 @@ features:
   - eFuse protected power distribution
   - On-board power supply mounting
   - On-board fault finding
-price: 300
+price: 331.99
+price_source:
+  notes: regular price; on sale $299.99 (-10%) at retrieval
+  part: GCONTROLLER-PRO-32PORT
+  retrieved: '2026-11-18'
+  url: https://store.experiencelights.com/genius-pro-32-port-controller/
+  vendor: Experience Lights
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://store.experiencelights.com/genius-pro-32-port-controller/
+    retrieved: '2026-11-18'
+    notes: 'In stock, regular $331.99'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/experience.xcontroller
     retrieved: '2026-11-18'

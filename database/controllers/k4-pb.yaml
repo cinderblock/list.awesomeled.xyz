@@ -35,13 +35,23 @@ features:
   - Per-port resettable eFuses with current monitoring and fuse alerts
   - Pixel counting test pattern
   - Power injection per port
-price: 70
+price: 55
+price_source:
+  notes: board only (no PocketBeagle 2, no SD card); $55-$132 with a premounted PocketBeagle 2 (regular or industrial) and/or FPP SD card
+  part: K4-PB-N-N
+  retrieved: '2026-11-18'
+  url: https://kulplights.com/product/k4-pb/
+  vendor: Kulp Lights LLC
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://kulplights.com/product/k4-pb/
+    retrieved: '2026-11-18'
+    notes: 'In stock, board-only $55'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

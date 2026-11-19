@@ -29,12 +29,22 @@ data:
 features:
   - Per-output eFuse protection
 price: 28
+price_source:
+  notes: board only (no Raspberry Pi, no SD card); $28-$77 with a premounted Pi Zero W/2 W and/or FPP SD card
+  part: K2-Pi0-N-N
+  retrieved: '2026-11-18'
+  url: https://kulplights.com/product/k2-pi0/
+  vendor: Kulp Lights LLC
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://kulplights.com/product/k2-pi0/
+    retrieved: '2026-11-18'
+    notes: 'In stock, board-only $28'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

@@ -30,21 +30,28 @@ power:
 data:
   storage:
     - type: uSD # via BeagleBone Black
-dead_links:
-  - url: https://kulplights.com/product/k32a-b/
-    checked: '2026-07-01'
 features:
   - OLED display
   - Real-time clock (RTC)
   - Onboard sound DAC
   - Optional FM transmitter
-price: 150 # board-only; was $195
+price: 150
+price_source:
+  notes: last list price, board only (no BeagleBone, no SD card; $250 with a premounted BeagleBone Black); the product page is reachable again but delisted from the shop and every variant is out of stock
+  part: K32A-B-None-None
+  retrieved: '2026-11-18'
+  url: https://kulplights.com/product/k32a-b/
+  vendor: Kulp Lights LLC
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://wiredwatts.com/products/klk32a-b
+    retrieved: '2026-11-18'
+    notes: '"Discontinued: This product has been discontinued."; delisted from the kulplights.com shop, all variants out of stock'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

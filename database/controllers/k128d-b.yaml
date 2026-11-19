@@ -28,13 +28,23 @@ data:
 features:
   - Onboard sound
   - Optional FM transmitter
-price: 270
+price: 180
+price_source:
+  notes: board only (no BeagleBone, no SD card); $180-$297 with a premounted BeagleBone Black/Green and/or FPP SD card
+  part: K128D-N-N
+  retrieved: '2026-11-18'
+  url: https://kulplights.com/product/k128d-b/
+  vendor: Kulp Lights LLC
 software:
   firmware:
     - FPP
   works_with:
     - xLights
 sources:
+  status:
+    url: https://kulplights.com/product/k128d-b/
+    retrieved: '2026-11-18'
+    notes: 'In stock, board-only $180'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

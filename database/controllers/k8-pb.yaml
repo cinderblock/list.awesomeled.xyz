@@ -39,6 +39,12 @@ features:
   - RTC
   - OLED status display
 price: 90
+price_source:
+  notes: board only (no PocketBeagle 2, no SD card); $90-$167 with a premounted PocketBeagle 2 (regular or industrial) and/or FPP SD card
+  part: K8-PB-N-N
+  retrieved: '2026-11-18'
+  url: https://kulplights.com/product/k8-pb/
+  vendor: Kulp Lights LLC
 related:
   - type: variant
     ref: controllers/k8-b
@@ -49,6 +55,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://kulplights.com/product/k8-pb/
+    retrieved: '2026-11-18'
+    notes: 'In stock, board-only $90'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

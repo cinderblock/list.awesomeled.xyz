@@ -21,15 +21,21 @@ features:
   - Built-in 2-port Ethernet switch for daisy-chaining without extra hardware
   - Long-range differential receivers extend pixel ports over Cat5/RJ45 (4 ports each)
   - Per-port resettable fusing
-price: 300
+price: 214.99
 price_source:
-  notes: main site blocks bots
-  retrieved: '2026-07-03'
-  vendor: HolidayCoro (eBay listing)
+  notes: CPU board only, no tech support or warranty (option on the Flex Expansion System configurator); $249.95 with tech support and 1-yr warranty. The CPU's own product page (930) shows a $999.99 placeholder because it is only sold through the Flex system or as a Ready2Run option.
+  part: '930'
+  retrieved: '2026-11-18'
+  url: https://www.holidaycoro.com/Flex-Modular-Lighting-Controller-System-p/951.htm
+  vendor: HolidayCoro
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.holidaycoro.com/Flex-Modular-Lighting-Controller-System-p/951.htm
+    retrieved: '2026-11-18'
+    notes: 'offered as the HinksPix PRO CPU Board V3 option (+$214.99), "Usually Ships in 24 Hours"'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/hinkspix.xcontroller
     retrieved: '2026-11-18'

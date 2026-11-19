@@ -3,7 +3,7 @@ status: active
 creator:
   name: PixelController, LLC
   url: https://pixelcontroller.com
-  page: https://pixelcontroller.com/store/products/70-f16v4.html
+  page: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html
 inputs:
   physical:
     Ethernet: true
@@ -26,13 +26,22 @@ data:
     - type: uSD
 images:
   - file: falcon-f16v4.webp
-    source: https://pixelcontroller.com/store/products/70-f16v4.html
+    source: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html
     credit: PixelController, LLC
-price: 275
+price: 255
+price_source:
+  notes: bare board (DIY Controllers); the Ready To Run version with PSU and enclosure is USD $510
+  retrieved: '2026-11-18'
+  url: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html
+  vendor: PixelController, LLC
 software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html
+    retrieved: '2026-11-18'
+    notes: 'In Stock, USD $255.00'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
     retrieved: '2026-11-18'

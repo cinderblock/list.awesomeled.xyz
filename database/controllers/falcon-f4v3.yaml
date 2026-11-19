@@ -1,8 +1,9 @@
 name: Falcon F4V3
-status: active
+status: discontinued
 creator:
   name: PixelController, LLC
   url: https://pixelcontroller.com
+  page: https://pixelcontroller.com/store/content/11-f4v3-pixel-controller
 inputs:
   physical:
     Ethernet: true
@@ -27,7 +28,12 @@ power:
 data:
   storage:
     - type: SD
-price: 200
+price: 125
+price_source:
+  notes: last list price (assembled board), from the vendor's archived product page; "This product is no longer in stock" at capture
+  retrieved: '2021-10-27'
+  url: https://web.archive.org/web/20211027063641/https://www.pixelcontroller.com/store/controllers/51-f4v2-pixel-controller.html
+  vendor: PixelController, LLC
 related:
   - type: related
     ref: controllers/falcon-f16v4
@@ -36,6 +42,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://auschristmaslighting.com/wiki/Falcon-F4v3
+    retrieved: '2026-11-18'
+    notes: 'listed under "Discontinued Pixel Controllers"; vendor store product page (ID 51) now 404 and absent from every store category'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
     retrieved: '2026-11-18'

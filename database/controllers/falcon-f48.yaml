@@ -1,9 +1,9 @@
 name: Falcon F48
-status: active
+status: discontinued
 creator:
   name: PixelController, LLC
   url: https://pixelcontroller.com
-  page: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
+  page: https://pixelcontroller.com/store/discontinued-products/52-f16v2-beta-board.html
 notes: 48 differential pixel outputs via remote receiver boards (4 outputs each).
 inputs:
   physical:
@@ -36,8 +36,20 @@ features:
   - OLED status display
   - 2-port Ethernet switch for daisy-chaining
   - Reverse-polarity protected 5V input
-price: 200
+price: 255
+price_source:
+  notes: last list price, still shown on the vendor's discontinued-product page (Out-of-Stock)
+  retrieved: '2026-11-18'
+  url: https://pixelcontroller.com/store/discontinued-products/52-f16v2-beta-board.html
+  vendor: PixelController, LLC
 related:
+  - type: replacement
+    source:
+      url: https://pixelcontroller.com/store/diy-controllers/96-f48v5.html
+      retrieved: '2026-11-18'
+      notes: 'current F48 generation, In Stock at USD $270.00 (F48V4 also discontinued)'
+    name: Falcon F48V5 Differential Controller
+    url: https://pixelcontroller.com/store/diy-controllers/96-f48v5.html
   - type: related
     ref: controllers/falcon-f16v4
     notes: Falcon family sibling; all-differential outputs
@@ -45,6 +57,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://pixelcontroller.com/store/19-discontinued-products
+    retrieved: '2026-11-18'
+    notes: 'F48 Differential Controller listed under Discontinued Products, Out-of-Stock'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
     retrieved: '2026-11-18'
