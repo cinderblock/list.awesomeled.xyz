@@ -215,7 +215,8 @@ export function normUrl(u: string): string {
   for (const [re, to] of MOVED_HOSTS) if (re.test(n)) return n.replace(re, to);
   const ebay = n.match(/^ebay\.[a-z.]+\/itm\/(?:.*\/)?(\d{9,})/);
   if (ebay) return `ebay/itm/${ebay[1]}`;
-  return n;
+  // Amazon share links append /ref=... to the product path
+  return n.replace(/^(amazon\.[a-z.]+\/(?:.*\/)?dp\/[a-z0-9]{10})\/ref=.*$/, '$1');
 }
 
 // ---------------------------------------------------------------------------
@@ -413,6 +414,11 @@ export function compareCell(
           .map(Number);
         const currencies = leaves(data).join(' ');
         if (amounts.some((a) => close(a, amt)) && currencies.includes(cur)) {
+          return { status: 'ok', yaml: yamlShown, detail: `${amt} ${cur}` };
+        }
+        // Free-text prices (pattern drivers) carry the symbol: "£70", "€299-€799"
+        const symbol = ({ GBP: '£', EUR: '€' } as Record<string, string>)[cur];
+        if (symbol && new RegExp(`${symbol}\\s?${amt}(?![0-9])`).test(currencies)) {
           return { status: 'ok', yaml: yamlShown, detail: `${amt} ${cur}` };
         }
         return {

@@ -1,2 +1,732 @@
-# Acknowledged sheet-vs-YAML differences; see acks.ts for the key format.
-{}
+# Acknowledged sheet-vs-YAML differences: reviewed and deliberately not
+# migrated. Keys: "<tab> | <sheet row name> | <column>" (" (link)" / " (note)"
+# for hyperlinks and cell notes); `value` pins the sheet value the reason
+# applies to, so a later sheet edit resurfaces. See acks.ts.
+#
+# Values are the sheet's text verbatim (typos and spacing included), so the
+# terminology rules don't apply to this file:
+# eslint-disable custom/terminology, custom/no-doubled-spaces
+
+'Pattern Drivers | Arthet LED Mapper | Platform':
+  - value: 'ubuntu, windows, mac and arm64'
+    reason: 'Same platforms in structured form (Ubuntu = Linux, mac = macOS); arm64 is in platforms.notes'
+'Pattern Drivers | Bekonix | URL':
+  - value: 'https://www.bekonix.com/platform/'
+    reason: 'The sheet links a sub-page that is gone (404); YAML links the live site'
+'Pattern Drivers | Chataigne Wled Mod | Notes':
+  - value: 'Plug on for vcontrol of WLED, other WLED plugins from same developer on Githhub'
+    reason: 'Typo fixed in YAML'
+'Pattern Drivers | FastLED "FX" engine | Platform':
+  - value: 'ESP/AVR/NRF/RP/Browser'
+    reason: 'Same platforms in structured form (web + hardware list)'
+'Pattern Drivers | LEDEdit | Platform':
+  - value: 'Desktop'
+    reason: 'LEDEdit is Windows desktop software; "Desktop" became os: [Windows]'
+'Pattern Drivers | LightDesigner | Notes':
+  - value: 'RocketLife controllers, serial/SPI pixels only'
+    reason: '"SPI" wording normalized to clocked pixels (937d734)'
+'Pattern Drivers | LightMobile | Notes':
+  - value: 'RocketLife controllers, serial/SPI pixels only'
+    reason: '"SPI" wording normalized to clocked pixels (937d734)'
+'Pattern Drivers | Lumiastream | Demo/Free':
+  - value: 'Free  / premiumn Monthly'
+    reason: 'Typo fixed in YAML'
+'Pattern Drivers | LX Studio / Chromatik | Demo/Free':
+  - value: 'Open source. Comercial applications require license'
+    reason: 'Typo fixed in YAML'
+'Pattern Drivers | MadMapper | URL':
+  - value: 'https://madmapper.com/madmapper/ '
+    reason: 'The sheet links a sub-page that is gone (404); YAML links the live site'
+'Pattern Drivers | MADRIX 5 | Demo/Free':
+  - value: 'Demo no data out'
+    reason: 'Same in structured form: demo.available + limitations'
+'Pattern Drivers | TouchDesigner | Platform':
+  - value: '0'
+    reason: 'Sheet cell overwritten after the import (was "Windows, MacOS"); YAML keeps the platforms'
+'Pattern Drivers | TouchDesigner | Visualizer':
+  - value: 'Yes, DIY'
+    reason: '"Yes, DIY" = you build the visualizer yourself: capabilities.visualizer "3D (build your own)"'
+'Pattern Drivers | Bekonix | URL (link)':
+  - value: 'https://www.bekonix.com/platform/'
+    reason: 'The sheet links a sub-page that is gone (404); YAML links the live site'
+'Pattern Drivers | ELM | Demo/Free (link)':
+  - value: 'https://www.enttec.com/elm-download-564258/'
+    reason: 'The ELM download link now redirects to the ELM page, which is in other_links'
+'Pattern Drivers | MadMapper | (name) (link)':
+  - value: 'https://madmapper.com/madmapper/ '
+    reason: 'The sheet links a sub-page that is gone (404); YAML links the live site'
+'Pattern Drivers | MadMapper | URL (link)':
+  - value: 'https://madmapper.com/madmapper/'
+    reason: 'The sheet links a sub-page that is gone (404); YAML links the live site'
+'Pattern Drivers | MADRIX 5 | Price (note)':
+  - value: '$330 (and up); free limited demo(no data out), dongles priced by node count'
+    reason: 'Migrated into pricing/demo/technical_notes (b1c26ec), reworded'
+'Pattern Drivers | ProtoPixel Create | Price (note)':
+  - value: 'Monthly'
+    reason: 'Migrated into pricing/demo/technical_notes (b1c26ec), reworded'
+'Pattern Drivers | Smode | Price (note)':
+  - value: 'free for basic SD output, generally very expensive as you move on up in res'
+    reason: 'Migrated into pricing/demo/technical_notes (b1c26ec), reworded'
+'Controllers | SP102E | Standalone':
+  - value: 'Presets'
+    reason: '"Presets" = plays built-in patterns on its own; YAML inputs.standalone: true'
+'Controllers | c,v.xxzzzzzzzASA | (name)':
+  - value: ' c,v.xxzzzzzzzASA'
+    reason: 'Vandalized after the import (keyboard mash); was A1-SLWF-03 / SMARTLIGHT.ME'
+'Controllers | c,v.xxzzzzzzzASA | Manufacturer':
+  - value: '`QWS'
+    reason: 'Vandalized after the import (keyboard mash); was A1-SLWF-03 / SMARTLIGHT.ME'
+'Controllers | SP105E | Standalone':
+  - value: 'Presets'
+    reason: '"Presets" = plays built-in patterns on its own; YAML inputs.standalone: true'
+'Controllers | Standard Differential  Receiver | Standalone':
+  - value: 'Yes'
+    reason: 'A differential receiver has no pattern source of its own; standalone: false is right'
+'Controllers | SP107E | Standalone':
+  - value: 'Presets'
+    reason: '"Presets" = plays built-in patterns on its own; YAML inputs.standalone: true'
+'Controllers | SP107E | Product URL':
+  - value: 'Amazon'
+    reason: 'The sheet cell says only "Amazon" (no link); YAML names a real vendor page'
+'Controllers | SP108E | Standalone':
+  - value: 'Presets'
+    reason: '"Presets" = plays built-in patterns on its own; YAML inputs.standalone: true'
+'Controllers | SP108E | Product URL':
+  - value: 'Amazon'
+    reason: 'The sheet cell says only "Amazon" (no link); YAML names a real vendor page'
+'Controllers | Fadecandy | Interface':
+  - value: 'DMX'
+    reason: 'Fadecandy is USB-only (driven by fcserver); "DMX" in the sheet is wrong'
+'Controllers | QuinLED-Dig-Uno | Price':
+  - value: '24.99'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | QuinLED-Dig-Uno | Notes':
+  - value: 'ESP8266/ESP32 based, open to any software, often run with WLED'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | NLed Pixel Controller Electron | Price':
+  - value: '27'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | NLed Pixel Controller Electron | Output Connectors':
+  - value: 'Phoenix Screw'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | T1000S | Manufacturer':
+  - value: "\\\\]Q[5D'`"
+    reason: 'Vandalized after the import (maker was empty, Max Pixels was 2048)'
+'Controllers | T1000S | Max Pixels':
+  - value: '0.456'
+    reason: 'Vandalized after the import (maker was empty, Max Pixels was 2048)'
+'Controllers | EspArtStick | Notes':
+  - value: '2.4 GHZ WiFi Pixel Controller, sdc-card, RF reciever'
+    reason: 'YAML revised by research since the import (rewritten notes; discontinued per vendor/dead links)'
+'Controllers | EspArtStick | Status':
+  - value: 'Active'
+    reason: 'YAML revised by research since the import (rewritten notes; discontinued per vendor/dead links)'
+'Controllers | SP801e | Max Pixels':
+  - value: '4800'
+    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
+'Controllers | SP801e | Price':
+  - value: '30'
+    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
+'Controllers | SP801e | Interface':
+  - value: 'Ethernet'
+    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
+'Controllers | SP801e | Output Connectors':
+  - value: 'Screw'
+    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
+'Controllers | SP801e | Notes':
+  - value: '8 Outputs 600 Px per Out, 4 dry Trigger Inputs, Built in Mic for Audio'
+    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
+'Controllers | SP801e | Introduction':
+  - value: '2020'
+    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
+'Controllers | SP801e | Product URL':
+  - value: 'https://www.superlightingled.com/sp608e-8-output-spi-channel-led-music-controller-work-with-bluetooth-app-rf-remote-4-adjustable-triggers-for-addressable-led-strips-p-3768.html'
+    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
+'Controllers | M4 Port Pixel | Status':
+  - value: 'Active'
+    reason: 'YAML revised by research since the import (rewritten notes; discontinued per vendor/dead links)'
+'Controllers | Baldrick Board | Manufacturer':
+  - value: 'Build A Light Show'
+    reason: 'Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details'
+'Controllers | Baldrick Board | Price':
+  - value: '75'
+    reason: 'Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details'
+'Controllers | Baldrick Board | Max Voltage':
+  - value: '24'
+    reason: 'Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details'
+'Controllers | Baldrick Board | Max Current':
+  - value: '15'
+    reason: 'Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details'
+'Controllers | Baldrick Board | Notes':
+  - value: 'Aimed at easy set up with Xlights.'
+    reason: 'Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details'
+'Controllers | Baldrick Board | Introduction':
+  - value: '2024'
+    reason: 'Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details'
+'Controllers | Flex Pixel Driver | Price':
+  - value: '80'
+    reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
+'Controllers | Flex Pixel Driver | Max outputs':
+  - value: '2'
+    reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
+'Controllers | Flex Pixel Driver | Interface':
+  - value: 'Ethernet'
+    reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
+'Controllers | Flex Pixel Driver | Output Connectors':
+  - value: 'Phoenix Screw'
+    reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
+'Controllers | Flex Pixel Driver | Product URL':
+  - value: 'https://www.elationlighting.com/flex-pixel-driver-1'
+    reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
+'Controllers | K8-PB | Price':
+  - value: '98'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | LED Player DMX | Interface':
+  - value: 'Ethernet'
+    reason: 'The Diamex LED Players have no Ethernet (a77491b)'
+'Controllers | LED Player L | Interface':
+  - value: 'Ethernet'
+    reason: 'The Diamex LED Players have no Ethernet (a77491b)'
+'Controllers | K40D-PB | Price':
+  - value: '108'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | K8-B | Price':
+  - value: '123'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | PixelDIN | Notes':
+  - value: 'Up to 4 independent outputs in 1-Wire SPI Mode. Total 5440 pixels.'
+    reason: 'YAML revised by research since the import (rewritten notes; discontinued per vendor/dead links)'
+'Controllers | PixelDIN | Status':
+  - value: 'Active'
+    reason: 'YAML revised by research since the import (rewritten notes; discontinued per vendor/dead links)'
+'Controllers | SPI LED Controller | Price':
+  - value: '150'
+    reason: 'YAML revised: current price tiers; "SPI" wording normalized (937d734)'
+'Controllers | SPI LED Controller | Output Connectors':
+  - value: 'RJ-45 DMX, Phoenix Plug SPI'
+    reason: 'YAML revised: current price tiers; "SPI" wording normalized (937d734)'
+'Controllers | AlphaPix Classic 16 V3 | Price':
+  - value: '174.95'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | E682 | Auxilary Outputs':
+  - value: 'DMX in groups of 4'
+    reason: 'Same in structured form: outputs.auxiliary DMX512 count'
+'Controllers | PixLite 16 Mk2 ECO | Notes':
+  - value: 'Limited stock left - no website listing - contact directly to order remaining stock'
+    reason: 'Reworded/typo fixed in YAML'
+'Controllers | LeDMX2 MAX | Product URL':
+  - value: 'https://dmxking.com/led-pixel-control/ledmx2-max'
+    reason: 'Sheet error: the LeDMX2 MAX row links the LeDMX4 MAX page'
+'Controllers | Pixelbox | Product URL':
+  - value: 'https://www.lumikit.com.br/international'
+    reason: 'Generic vendor landing page; YAML links the product page'
+'Controllers | Reactivo 2 | Price':
+  - value: '225'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | K64D-B | Price':
+  - value: '230'
+    reason: 'YAML revised by research since the import (newer price/hardware revision)'
+'Controllers | NetPixel-One | Interface':
+  - value: 'FPP'
+    reason: '"FPP" is a sender, not an input; YAML lists Ethernet with Art-Net/sACN'
+'Controllers | NetPixel-One | Output Connectors':
+  - value: 'JST'
+    reason: 'YAML revised by research: 10-way plug-in harness'
+'Controllers | ULS Stripe | Notes':
+  - value: '7 DMX Modes fom Individual to grouped'
+    reason: 'Reworded/typo fixed in YAML'
+'Controllers | PixLite A4-S Mk3 | Auxilary Outputs':
+  - value: 'DMX In/Out'
+    reason: 'Same in structured form: outputs.auxiliary DMX512 count'
+'Controllers | RC4Magic S3 Pixel Driver | Auxilary Outputs':
+  - value: 'DMX Thru'
+    reason: 'Same in structured form: outputs.auxiliary DMX512 count'
+'Controllers | PixLite E4-S Mk3 | Auxilary Outputs':
+  - value: 'DMX In/Out'
+    reason: 'Same in structured form: outputs.auxiliary DMX512 count'
+'Controllers | PixLite E16-S Mk3 | Auxilary Outputs':
+  - value: 'DMX In/Out'
+    reason: 'Same in structured form: outputs.auxiliary DMX512 count'
+'Controllers | PixLite T8-S Mk3 | Auxilary Outputs':
+  - value: 'DMX In/Out'
+    reason: 'Same in structured form: outputs.auxiliary DMX512 count'
+'Controllers | PIXPoE | Product URL':
+  - value: 'https://www.empdesigns.co.uk/portfolio-item/poe-pixel-controller//'
+    reason: 'Old page; it now redirects to the product page YAML links'
+'Controllers | LEDEddy | Interface':
+  - value: 'WiFi/Ethernet'
+    reason: 'The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb'
+'Controllers | LEDEddy | Max Voltage':
+  - value: '5'
+    reason: 'The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb'
+'Controllers | LEDEddy | Buffered':
+  - value: 'No'
+    reason: 'The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb'
+'Controllers | DMX to SPI | (name) (link)':
+  - value: 'https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/'
+    reason: 'Sheet error: the DMX to SPI name links an unrelated ENTTEC page (copy-paste)'
+'Controllers | SP801e | Product URL (link)':
+  - value: 'https://www.superlightingled.com/sp608e-8-output-spi-channel-led-music-controller-work-with-bluetooth-app-rf-remote-4-adjustable-triggers-for-addressable-led-strips-p-3768.html'
+    reason: 'The sheet row was the SP801E/SP608E chimera; split and researched in e1795d4'
+'Controllers | ElectroMage Pro 8x Driver | (name) (link)':
+  - value: 'https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/'
+    reason: 'Tindie moved the listing; YAML has the current listing URL'
+'Controllers | Flex Pixel Driver | (name) (link)':
+  - value: 'https://www.elationlighting.com/flex-pixel-driver-1'
+    reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
+'Controllers | Flex Pixel Driver | Product URL (link)':
+  - value: 'https://www.elationlighting.com/flex-pixel-driver-1'
+    reason: 'Researched as Elation''s "Flex Pixel Driver 1" (c13218a)'
+'Controllers | LeDMX2 MAX | Product URL (link)':
+  - value: 'https://dmxking.com/led-pixel-control/ledmx4-max'
+    reason: 'Sheet error: the LeDMX2 MAX row links the LeDMX4 MAX page'
+'Controllers | Pixelbox | (name) (link)':
+  - value: 'https://www.lumikit.com.br/international'
+    reason: 'Generic vendor landing page; YAML links the product page'
+'Controllers | Pixelbox | Product URL (link)':
+  - value: 'https://www.lumikit.com.br/international'
+    reason: 'Generic vendor landing page; YAML links the product page'
+'Controllers | Reactivo 2 | Notes (link)':
+  - value: 'https://reactivo.lighting/first-touch/%20Screen%20grabber,%20WEB%20interface,%20APP,%20Software,%20Sensors,%20Triggers%20management'
+    reason: 'Malformed link (notes text pasted into the URL); the page itself is in creator.page'
+'Controllers | PixLite A4-S Mk3 | (name) (link)':
+  - value: 'https://www.advateklights.com/downloads/datasheets/pixlite-a4-s-mk3'
+    reason: 'Old datasheet link; redirects to the download page in datasheet.url'
+'Controllers | PixNet 4+ | (name) (link)':
+  - value: 'https://pixnetcontrol.com/products/pixnet-4-2/'
+    reason: 'Dead (404) with no Wayback capture'
+'Controllers | LED Ethernet Controller Powered | Notes (link)':
+  - value: 'https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf%20%205%20years%20warranty'
+    reason: 'Malformed link (warranty text pasted into the URL); the manual is in other_links'
+'Controllers | PIXPoE | (name) (link)':
+  - value: 'https://www.empdesigns.co.uk/portfolio-item/poe-pixel-controller/'
+    reason: 'Old page; it now redirects to the product page YAML links'
+'Controllers | PIXPoE | Product URL (link)':
+  - value: 'https://www.empdesigns.co.uk/portfolio-item/poe-pixel-controller/'
+    reason: 'Old page; it now redirects to the product page YAML links'
+'Controllers | K40D-PB | Pixel Types (note)':
+  - value: 'Requires differential receivers to actually drive LEDs'
+    reason: 'YAML says differential: true and its notes describe the RJ45 differential ports'
+'Controllers | ProtoPixel 8 channel controller | Max Pixels (note)':
+  - value: '1 decoder and 2 staellites with 4 600 RGB LED outputs required to acheive total'
+    reason: 'In notes/technical_notes: 4800 LEDs across two 4-output satellites (600 per output)'
+'Controllers | LED Ethernet Controller Powered | Price (note)':
+  - value: "850 (1024px)\n 1125 (2048px)\n 1400 (4096px)\n Lifetime SW license incl"
+    reason: 'Migrated as price tiers, a technical note, and outputs.current.max 10A (b1c26ec)'
+'Controllers | LED Ethernet Controller Powered | Max Current (note)':
+  - value: '10A per OUT'
+    reason: 'Migrated as price tiers, a technical note, and outputs.current.max 10A (b1c26ec)'
+'Pixels | APA102 | Max pixel per string':
+  - value: '~250 - CLK sensitive'
+    reason: 'Same: max_per_string 250 with the clock-degradation explanation'
+'Pixels | APA102C | Max pixel per string':
+  - value: '~250 - CLK sensitive'
+    reason: 'Same: max_per_string 250 with the clock-degradation explanation'
+'Pixels | APA102C | Other Links':
+  - value: 'APA102C Pixel Protocol Overview | Advatek Lighting'
+    reason: 'Advatek folded APA102C into its APA102 page (the old URL redirects there; YAML links it)'
+'Pixels | APA106 | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | APA109 | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | NS8808 | NOTES':
+  - value: 'silimar to ws2815, but UCS1903 protocol'
+    reason: 'Typo fixed in YAML'
+'Pixels | PL9823 | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | PL9823 | Package Size':
+  - value: '5/8mm T style'
+    reason: 'Packages standardized (0bb3346): 5/8 mm "T style" = 5mm and 8mm through-hole'
+'Pixels | PL9823 | Datasheet URL':
+  - value: 'https://cdn.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf'
+    reason: 'Instructables moved its CDN (cdn -> content.instructables.com, 2be3f66)'
+'Pixels | SK6813 | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | SK6813 HV | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | SK6818 | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | SK6822 | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | SK9822-A | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | WS2815 RGBW | Wattage':
+  - value: '0'
+    reason: 'Formula artifact: Wattage = VCC x current computed 0 from empty inputs'
+'Pixels | WS2816 | Package Size':
+  - value: '7'
+    reason: 'Sheet error: "7" in Package Size'
+'Pixels | APA102C | Other Links (link)':
+  - value: 'https://www.advateklights.com/knowledge-base/apa102c'
+    reason: 'Advatek folded APA102C into its APA102 page (the old URL redirects there; YAML links it)'
+'Pixels | PL9823 | (name) (link)':
+  - value: 'https://cdn.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf'
+    reason: 'Instructables moved its CDN (cdn -> content.instructables.com, 2be3f66)'
+'Pixels | PL9823 | Datasheet URL (link)':
+  - value: 'https://cdn.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf'
+    reason: 'Instructables moved its CDN (cdn -> content.instructables.com, 2be3f66)'
+'Pixels | WS2816 | (name) (link)':
+  - value: 'https://datasheet.lcsc.com/szlcsc/2012110135_Worldsemi-WS2816B-2121_C965560.pdf'
+    reason: 'LCSC moved the datasheet; YAML has the current URL'
+'Pixel ICs | GS8202 | Other Links':
+  - value: 'GS8202 Pixel Protocol Overview | Advatek Lighting'
+    reason: 'Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)'
+'Pixel ICs | LPD8806 | Package Size':
+  - value: 'SOP16/QFN16'
+    reason: 'Packages checked against the datasheets (7b66e88)'
+'Pixel ICs | SM16511 | Other Links':
+  - value: 'SM16511 Pixel Protocol Overview | Advatek Lighting'
+    reason: 'Advatek merged SM16511 into its DMX512 page (the old URL redirects there; YAML links it)'
+'Pixel ICs | TM1804 | PWM Frequency':
+  - value: '285.7142857'
+    reason: '1/0.0035 s = 285.714 Hz; 285.7Hz is the honest precision'
+'Pixel ICs | WS2801 | Package Size':
+  - value: 'SO14/DIP14'
+    reason: 'Packages checked against the datasheets (7b66e88)'
+'Pixel ICs | GS8202 | Other Links (link)':
+  - value: 'https://www.advateklights.com/knowledge-base/gs8202'
+    reason: 'Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)'
+'Pixel ICs | SM16511 | Other Links (link)':
+  - value: 'https://www.advateklights.com/knowledge-base/sm16511'
+    reason: 'Advatek merged SM16511 into its DMX512 page (the old URL redirects there; YAML links it)'
+'Pixel ICs | MY9231 | Pixel Data Size (note)':
+  - value: "Variable\n\nTODO: create list of possible values"
+    reason: 'Migrated as a technical note (pixel data size is variable); the TODO was sheet housekeeping'
+'Pixel Decoders | ATtiny10 | Pixel Types':
+  - value: 'allows driving 3-wire clockless leds with 4-wire clocked protocol. Experimental '
+    reason: 'Same, as inputs.protocols/outputs.types plus notes (64a0d09)'
+'Pixel Decoders | ATtiny10 | Unit Price (USD)':
+  - value: '1'
+    reason: 'YAML price verified with a source since the import (1d45f70 and earlier)'
+'Pixel Decoders | Baldrick DMX | Max Channels':
+  - value: '512'
+    reason: 'Baldrick DMX lives in controllers (04a47e8); checked there'
+'Pixel Decoders | Baldrick DMX | Pixel Types':
+  - value: 'WS28XX data to DMX 512'
+    reason: 'Baldrick DMX lives in controllers (04a47e8); checked there'
+'Pixel Decoders | Baldrick DMX | DIY/OTS':
+  - value: 'OTS'
+    reason: 'Baldrick DMX lives in controllers (04a47e8); checked there'
+'Pixel Decoders | Baldrick DMX | Product URL':
+  - value: 'https://baldrickboard.com/docs/category/baldrickdmx'
+    reason: 'Baldrick DMX lives in controllers (04a47e8); checked there'
+'Pixel Decoders | Controller Changeover | Unit Price (USD)':
+  - value: '12'
+    reason: 'YAML price verified with a source since the import (1d45f70 and earlier)'
+'Pixel Decoders | NeopixelBooster | Pixel Types':
+  - value: 'Inline 5V buck convertor'
+    reason: 'Same, as inputs.protocols/outputs.types plus notes (64a0d09)'
+'Pixel Decoders | Pixel 2 DMX | Unit Price (USD)':
+  - value: '40'
+    reason: 'YAML price verified with a source since the import (1d45f70 and earlier)'
+'Pixel Decoders | Pixel 2 Things Relay | Unit Price (USD)':
+  - value: '99'
+    reason: 'YAML price verified with a source since the import (1d45f70 and earlier)'
+'Pixel Decoders | Pixel 2 Things Relay | Notes':
+  - value: 'WSXX to 9 Relay ouput card'
+    reason: 'Reworded in YAML'
+'Pixel Decoders | Pixel 2 Things Servo | Unit Price (USD)':
+  - value: '99.99'
+    reason: 'YAML price verified with a source since the import (1d45f70 and earlier)'
+'Pixel Decoders | PixFog Pixel Based Fog Controller | Pixel Types':
+  - value: 'single'
+    reason: "This sheet row's cells are shifted three columns right; values checked against the right columns"
+'Pixel Decoders | PixFog Pixel Based Fog Controller | Outputs':
+  - value: 'Pixel Data'
+    reason: "This sheet row's cells are shifted three columns right; values checked against the right columns"
+'Pixel Decoders | PixFog Pixel Based Fog Controller | DIY/OTS':
+  - value: '33'
+    reason: "This sheet row's cells are shifted three columns right; values checked against the right columns"
+'Pixel Decoders | PixFog Pixel Based Fog Controller | Notes':
+  - value: 'Phoenix Screw'
+    reason: "This sheet row's cells are shifted three columns right; values checked against the right columns"
+'Pixel Decoders | PixFog Pixel Based Fog Controller | (M, no header: shifted Notes)':
+  - value: 'Single channel intensity variable fog controller for specific fog machines,'
+    reason: 'Migrated into notes'
+'Pixel Decoders | WS2811 MosFET Driver | Unit Price (USD)':
+  - value: '18'
+    reason: 'YAML price verified with a source since the import (1d45f70 and earlier)'
+'Pixel Decoders | WS2811 MosFetDriver | Unit Price (USD)':
+  - value: '4'
+    reason: 'YAML price verified with a source since the import (1d45f70 and earlier)'
+'Pixel Decoders | LED Strip Driver Module | Unit Price (USD)':
+  - value: '1'
+    reason: 'YAML price verified with a source since the import (1d45f70 and earlier)'
+'Pixel Decoders | LED Strip Driver Module | Product URL':
+  - value: 'https://de.aliexpress.com/item/32786272573.html?spm=a2g0o.productlist.main.19.4039UqYwUqYwEq&algo_pvid=8add68a7-f316-420a-88fd-aec8a96d9bd9&algo_exp_id=8add68a7-f316-420a-88fd-aec8a96d9bd9-9&pdp_ext_f=%7B%22order%22%3A%22100%22%2C%22eval%22%3A%221%22%7D&pdp_npi=4%40dis%21EUR%212.46%210.98%21%21%212.48%210.99%21%40211b430817386563933403178e4f0f%2163365110433%21sea%21AT%210%21ABX&curPageLogUid=zQTH3Os98s1N&utparam-url=scene%3Asearch%7Cquery_from%3A'
+    reason: 'Same product; YAML has the current URL without tracking parameters'
+'Pixel Decoders | ATtiny10 | (name) (link)':
+  - value: 'https://sites.google.com/site/wayneholder/besting-ben-heck'
+    reason: 'Same article; YAML has its full URL'
+'Pixel Decoders | ATtiny10 | Product URL (link)':
+  - value: 'https://sites.google.com/site/wayneholder/besting-ben-heck'
+    reason: 'Same article; YAML has its full URL'
+'Pixel Decoders | Baldrick DMX | (name) (link)':
+  - value: 'https://baldrickboard.com/docs/baldrickdmx/introduction'
+    reason: 'Baldrick DMX lives in controllers (04a47e8); checked there'
+'Pixel Decoders | Baldrick DMX | Product URL (link)':
+  - value: 'https://baldrickboard.com/docs/category/baldrickdmx'
+    reason: 'Baldrick DMX lives in controllers (04a47e8); checked there'
+'Pixel Decoders | Controller Changeover | (name) (link)':
+  - value: 'https://www.tindie.com/products/k7bbr/led-controller-multiplexer/'
+    reason: 'Tindie renamed the listing; YAML has the current URL'
+'Pixel Decoders | Controller Changeover | Product URL (link)':
+  - value: 'https://www.tindie.com/products/k7bbr/led-controller-multiplexer/'
+    reason: 'Tindie renamed the listing; YAML has the current URL'
+'Pixel Decoders | Pixel 2 DMX | Product URL (link)':
+  - value: 'https://experiencelights.com/pixel2dmx---realtime-dmx-bridge/'
+    reason: 'Same product; YAML has the current URL without tracking parameters'
+'Level Converters | SN74AHCT125N | Price':
+  - value: '0.75'
+    reason: 'YAML has distributor price tiers verified since the import'
+'Adapters | RPI-28D | Manufacturer/Designer':
+  - value: 'Hanson Electroncs'
+    reason: 'Typo fixed in YAML'
+'Adapters | F40D-B | Pixel Types':
+  - value: 'Single'
+    reason: 'F40D-B = the K40D-PB under its pre-K-series name; merged into controllers/k40d-pb (a61acdb)'
+'Adapters | F40D-B | Parent':
+  - value: 'BeagleBone'
+    reason: 'F40D-B = the K40D-PB under its pre-K-series name; merged into controllers/k40d-pb (a61acdb)'
+'Adapters | F40D-B | Outputs':
+  - value: 'Single'
+    reason: 'F40D-B = the K40D-PB under its pre-K-series name; merged into controllers/k40d-pb (a61acdb)'
+'Adapters | F40D-B | Product URL':
+  - value: 'https://kulplights.com/product/f40d-pb/'
+    reason: 'F40D-B = the K40D-PB under its pre-K-series name; merged into controllers/k40d-pb (a61acdb)'
+'Adapters | Pi Hat | (J, no header)':
+  - value: '12'
+    reason: 'Stray value in the sheet (no header / not a URL)'
+'Adapters | Pi Hat | Product URL':
+  - value: 'Multiple'
+    reason: 'Stray value in the sheet (no header / not a URL)'
+'Adapters | QuinLED-Dig-Quad | Product URL':
+  - value: 'https://quinled.info/quinled-dig-uno/'
+    reason: "Sheet error: the Dig-Quad row's Product URL is the Dig-Uno page; fixed in YAML (703a4a2)"
+'Adapters | 4 Channel Differntial Transmitter | (name)':
+  - value: '4 Channel Differntial Transmitter'
+    reason: 'Typo fixed in YAML'
+'Adapters | 4 Channel Differntial Transmitter | Notes':
+  - value: '4 Channel differntial transmitter output to RJ45 fir connection with Cat5'
+    reason: 'Typo fixed in YAML'
+'Adapters | Meanwell PDU with Differential Reciever | (name)':
+  - value: 'Meanwell PDU with Differential Reciever'
+    reason: 'Typo fixed in YAML'
+'Adapters | Meanwell PDU with Differential Reciever | Unit Price (USD)':
+  - value: '18'
+    reason: 'YAML price verified since the import'
+'Adapters | Serial LED Driver | (name) (link)':
+  - value: 'https://www.bhencke.com/serial-led-driver'
+    reason: 'bhencke.com now redirects to the ElectroMage docs page in other_links'
+'Adapters | Pro Serial LED Driver | (name) (link)':
+  - value: 'https://www.bhencke.com/serial-led-driver-pro'
+    reason: 'bhencke.com now redirects to the ElectroMage docs page in other_links'
+'Adapters | F40D-B | (name) (link)':
+  - value: 'https://kulplights.com/product/f40d-pb/'
+    reason: 'F40D-B = the K40D-PB under its pre-K-series name; merged into controllers/k40d-pb (a61acdb)'
+'Adapters | F40D-B | Product URL (link)':
+  - value: 'https://kulplights.com/product/f40d-pb/'
+    reason: 'F40D-B = the K40D-PB under its pre-K-series name; merged into controllers/k40d-pb (a61acdb)'
+'Adapters | QuinLED-Dig-Quad | Product URL (link)':
+  - value: 'https://quinled.info/quinled-dig-uno/'
+    reason: "Sheet error: the Dig-Quad row's Product URL is the Dig-Uno page; fixed in YAML (703a4a2)"
+'Adapters | PixelLauncher Gen 2 Micro | (name) (link)':
+  - value: 'https://www.digitalambiance.com/products/products-led-controllers-accessories/products-pixellauncher-series'
+    reason: 'Dead series page; the product page (archived) is in YAML'
+'DIY MicroBoards | NodeMCU v2 | USB':
+  - value: 'No'
+    reason: 'The sheet''s "No" meant no native USB; the micro-USB is a USB-UART bridge, recorded as "Power + UART" like the other such boards'
+'DIY MicroBoards | ESP-01 | Product URL':
+  - value: 'https://www.electroschematics.com/the-mighty-esp-01-adapter/'
+    reason: 'Electroschematics moved to edn.com; YAML has the new URL in other_links'
+'DIY MicroBoards | ESP32-S3 ETH | Product URL':
+  - value: 'https://www.waveshare.com/product/arduino/boards-kits/esp32/esp32-s3-eth.htm?sku=28771'
+    reason: 'Waveshare moved the page; YAML has the current URL'
+'DIY MicroBoards | ESP32-S3 ETH | Notes':
+  - value: 'PoE sield available'
+    reason: 'Typo fixed in YAML'
+'DIY MicroBoards | Arduino Micro | (name) (link)':
+  - value: 'https://store.arduino.cc/products/arduino-micro'
+    reason: 'Same Arduino store page'
+'DIY MicroBoards | TTGo ESP32 PoE | CPU (link)':
+  - value: 'https://en.wikipedia.org/wiki/Xtensa_LX6'
+    reason: 'Generic reference link (Wikipedia: Xtensa LX6) on the CPU cell, not entry data'
+'DIY MicroBoards | ESP-32S | CPU (link)':
+  - value: 'https://en.wikipedia.org/wiki/Xtensa_LX6'
+    reason: 'Generic reference link (Wikipedia: Xtensa LX6) on the CPU cell, not entry data'
+'DIY MicroBoards | ESP32-PoE | CPU (link)':
+  - value: 'https://en.wikipedia.org/wiki/Xtensa_LX6'
+    reason: 'Generic reference link (Wikipedia: Xtensa LX6) on the CPU cell, not entry data'
+'DIY MicroBoards | WT32-ETH01 | CPU (link)':
+  - value: 'https://en.wikipedia.org/wiki/Xtensa_LX6'
+    reason: 'Generic reference link (Wikipedia: Xtensa LX6) on the CPU cell, not entry data'
+'DIY MicroBoards | ESP-01 | (name) (link)':
+  - value: 'https://www.electroschematics.com/the-mighty-esp-01-adapter/'
+    reason: 'Electroschematics moved to edn.com; YAML has the new URL in other_links'
+'DIY MicroBoards | ESP-01 | Product URL (link)':
+  - value: 'https://www.electroschematics.com/the-mighty-esp-01-adapter/'
+    reason: 'Electroschematics moved to edn.com; YAML has the new URL in other_links'
+'DIY MicroBoards | ESP32-S3 ETH | (name) (link)':
+  - value: 'https://www.waveshare.com/product/arduino/boards-kits/esp32/esp32-s3-eth.htm?sku=28771'
+    reason: 'Waveshare moved the page; YAML has the current URL'
+'DIY MicroBoards | ESP32-S3 ETH | Product URL (link)':
+  - value: 'https://www.waveshare.com/product/arduino/boards-kits/esp32/esp32-s3-eth.htm?sku=28771'
+    reason: 'Waveshare moved the page; YAML has the current URL'
+'Connectors | Molex KK AKA KF2510 | Link':
+  - value: 'https://www.molex.com/molex/products/family/kk'
+    reason: "Old Molex link (hyperlink target differs from the cell text); YAML keeps the cell's URL"
+'Connectors | SP13 | Link':
+  - value: 'https://www.weipuconnector.com/sp13-series/'
+    reason: "Sheet error: the SP13 link cell's hyperlink points at Hirose DF62W"
+'Connectors | DuPont | Manufacturer (link)':
+  - value: 'https://www.harwin.com/connectors-hardware/pcb-connectors/2-54mm-pitch-pcb-connectors/'
+    reason: 'Old Harwin page; redirects to the product listing in creator.url'
+'Connectors | Molex KK AKA KF2510 | Link (link)':
+  - value: 'https://www.molex.com/molex/products/group/kk_interconnect_solutions'
+    reason: "Old Molex link (hyperlink target differs from the cell text); YAML keeps the cell's URL"
+'Connectors | SP13 | Link (link)':
+  - value: 'https://www.hirose.com/product/series/DF62W'
+    reason: "Sheet error: the SP13 link cell's hyperlink points at Hirose DF62W"
+'Connectors | DuPont | Crimp? (note)':
+  - value: 'Proper crimp tool over 400 USD'
+    reason: 'Already in notes ("proper crimp tool 400USD+")'
+'Drive Libraries | Arduino Ethernet Nano with ENC28J60 | Features':
+  - value: 'WS2811/12 Ethernet Hardwire'
+    reason: 'YAML revised by research since the import'
+'Drive Libraries | Fade | Developer':
+  - value: 'Eric Arcana'
+    reason: 'Fade is Eric Gunnerson''s (riderx.info); "Eric Arcana" was a sheet error, fixed in 388c2cf'
+'Diffusive Materials | Printer Paper | Material Type':
+  - value: 'Wood Pulp'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Bubble Wrap | Material Type':
+  - value: 'Air Filled PE'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | PEX Pipe | Sample thickness (inches)':
+  - value: '3.2'
+    reason: 'Sheet error: 3.2 is millimetres in the inches column; YAML stores 3.2mm'
+'Diffusive Materials | PEX Pipe | Material Type':
+  - value: 'Ethelyne Copolymer'
+    reason: 'Material checked against the maker since the import (6d2133d, fb3f9b7)'
+'Diffusive Materials | Baking Parchment | Material Type':
+  - value: 'Paper with silicone or wax'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | LD45 Plaztazote | (name)':
+  - value: 'LD45 Plaztazote'
+    reason: 'Name typo fixed in YAML (slug kept)'
+'Diffusive Materials | LD45 Plaztazote | Material Type':
+  - value: 'Closed Cell LDPE foam'
+    reason: 'Material checked against the maker since the import (6d2133d, fb3f9b7)'
+'Diffusive Materials | Poly Pro Pipe Thin Wall | Sample thickness (inches)':
+  - value: '3.2'
+    reason: 'Sheet error: 3.2 is millimetres in the inches column; YAML stores 3.2mm'
+'Diffusive Materials | Poly Pro Pipe Thin Wall | Material Type':
+  - value: 'PP Poly Propylene'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Oyumaru | Material Type':
+  - value: 'Ethelyne Copolymer'
+    reason: 'Material checked against the maker since the import (6d2133d, fb3f9b7)'
+'Diffusive Materials | Oyumaru | Usage Notes':
+  - value: 'Hot water mouldlble rubber,flexible.  when set  and possible to mould round single LEDs into shapes , useable as a mould for ploymorph as well'
+    reason: 'Typo fixed in YAML'
+'Diffusive Materials | Pool Noodle | Material Type':
+  - value: 'PE Closed cell foam'
+    reason: 'Material checked against the maker since the import (6d2133d, fb3f9b7)'
+'Diffusive Materials | Pool Noodle | Usage Notes':
+  - value: 'See slo Plastazote and Foam Backer Rod'
+    reason: 'Typo fixed in YAML'
+'Diffusive Materials | Vinyl Dryer Hose | Material Type':
+  - value: 'PVC Wire reinforcement'
+    reason: 'Wire reinforcement kept in notes'
+'Diffusive Materials | Silicone Sealant | (name)':
+  - value: 'Silicone Sealant'
+    reason: 'Row mislabeled "Silicone Sealant" (it carries Plastazote data); merged into Plastazote LD45 in fb3f9b7'
+'Diffusive Materials | Silicone Sealant | Sample thickness (inches)':
+  - value: 'variable'
+    reason: 'Row mislabeled "Silicone Sealant" (it carries Plastazote data); merged into Plastazote LD45 in fb3f9b7'
+'Diffusive Materials | Silicone Sealant | Usage Notes':
+  - value: 'Great for costumes - search Etsy'
+    reason: 'Row mislabeled "Silicone Sealant" (it carries Plastazote data); merged into Plastazote LD45 in fb3f9b7'
+'Diffusive Materials | Instamorph/ Polymorph | Material Type':
+  - value: 'PCL Poly Capro Lactone'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Lexan DCLW | (name)':
+  - value: 'Lexan DCLW'
+    reason: 'Name typo fixed in YAML (slug kept)'
+'Diffusive Materials | Lexan DCLW | Fire Retardent?':
+  - value: 'Y'
+    reason: 'YAML revised by research since the import (6d2133d)'
+'Diffusive Materials | Lexan DCLW | Usage Notes':
+  - value: 'Lexan DLCW (Diffused Light Cool White)special combination of high light diffusion and high transmission via an optimized surface texture'
+    reason: 'YAML revised by research since the import (6d2133d)'
+'Diffusive Materials | Foam Backer Rod | Material Type':
+  - value: 'Closed cell PE foam'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Neutral Cure Silicone | Material Type':
+  - value: 'RTV Silicone rubber'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Suction Hose | Material Type':
+  - value: 'PVC Wire reinforcement'
+    reason: 'Wire reinforcement kept in notes'
+'Diffusive Materials | Textured Acrylic, various | Sample thickness (inches)':
+  - value: '.125-.220'
+    reason: 'Same range with units: 0.125-0.22in'
+'Diffusive Materials | Textured Acrylic, various | Material Type':
+  - value: 'PMMA Poly Methyl Meth Acrylate'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Rowlux | Properties':
+  - value: 'Backlight & Edgelight'
+    reason: 'Same in structured form: backlight + edge-lit'
+'Diffusive Materials | Rowlux | Material Type':
+  - value: 'PET,PVC,PC, TPU'
+    reason: 'Material checked against the maker since the import (6d2133d, fb3f9b7)'
+'Diffusive Materials | Rosco Diffusion | Usage Notes':
+  - value: 'Rosco theatrical diffussion'
+    reason: 'Typo fixed in YAML'
+'Diffusive Materials | Lumieo 2 | Usage Notes':
+  - value: 'premium white acrylic sheet which provides both high transmission and excellent lamp hiding capabilities'
+    reason: 'YAML revised by research since the import (6d2133d)'
+'Diffusive Materials | 3M Envision Diffuser | Material Type':
+  - value: 'polyester'
+    reason: 'Material checked against the maker since the import (6d2133d, fb3f9b7)'
+'Diffusive Materials | Perspex G-Lux Edge Lit Acrylic | Properties':
+  - value: 'Edge Lit front diffuser'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Perspex G-Lux Edge Lit Acrylic | Material Type':
+  - value: 'doped PMMA'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Diffraction grating | Material Type':
+  - value: 'PC ?'
+    reason: 'Material checked against the maker since the import (6d2133d, fb3f9b7)'
+'Diffusive Materials | Harmonia PC (1050-24)-(3050-24) | Usage Notes':
+  - value: 'reflective (unknown) dopant several polymer options'
+    reason: 'YAML revised by research since the import (6d2133d)'
+'Diffusive Materials | Makrolon DQ (5122)-(5162) | Usage Notes':
+  - value: 'doped polycarbonate (index mismatch)'
+    reason: 'YAML revised by research since the import (6d2133d)'
+'Diffusive Materials | Perspex Diffuse | URL':
+  - value: 'https://perspex.com/news/pom-diffuse/'
+    reason: 'YAML revised by research since the import (6d2133d)'
+'Diffusive Materials | Faux Fur | Material Type':
+  - value: 'Polyester,Acrylic'
+    reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
+'Diffusive Materials | Perspex Diffuse | URL (link)':
+  - value: 'https://perspex.com/news/pom-diffuse/'
+    reason: 'YAML revised by research since the import (6d2133d)'
+'Commercial Pixel Systems | Lightwalls | Online Pricing':
+  - value: 'Learning kit £550+VAT'
+    reason: 'Same in structured form: pricing.examples (item, £550, +VAT)'
+'Commercial Pixel Systems | VC-Dot 1 | Manufacturer (link)':
+  - value: 'https://www.martin.com/en/products/vc-dot-1'
+    reason: 'Maker moved the page; YAML has the current URL'
+'Commercial Pixel Systems | LB-100 | Manufacturer (link)':
+  - value: 'https://sgmlight.com/products/lb%C2%B7100'
+    reason: 'Maker moved the page; YAML has the current URL'

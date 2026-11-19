@@ -31,5 +31,8 @@ export const ALIASES: Record<string, Record<string, string>> = {
   },
   'Diffusive Materials': {
     Polyethelene: 'diffusive-materials/polyethelene',
+    // Renamed by research (6d2133d): Plexiglas LED (formerly EndLighten T)
+    'Plexiglas LED Edge Lit was EndlightenT':
+      'diffusive-materials/plexiglas-led-edge-lit-was-endlightent',
   },
 };
