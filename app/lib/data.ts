@@ -117,6 +117,42 @@ export const IGNORED_COMMITS = new Set([
  * Get git last-modified timestamps for all database YAML files in a single batch call.
  * Results are cached for the lifetime of the process.
  */
+/**
+ * Newest reviewing commit per database file, from `git log --name-status -M`
+ * output (newest first). A rename carries the file's history to its new path:
+ * commits older than the rename count for the renamed file, while a file
+ * added later at the old path starts fresh. Ignored and `Not-A-Review:`
+ * commits don't count, but the renames they make still apply.
+ */
+export function lastReviewTimes(log: string, ignored: Set<string>): Map<string, string> {
+  const times = new Map<string, string>();
+  // old path -> the path whose history it now is
+  const movedTo = new Map<string, string>();
+  const current = (path: string) => movedTo.get(path) ?? path;
+  let timestamp: string | null = null;
+  let skip = false;
+
+  for (const line of log.split('\n')) {
+    if (!line) continue;
+    // Commit hash + ISO timestamp (+ Not-A-Review trailer value, usually empty)
+    const commit = line.match(/^([a-f0-9]{40}) (\d{4}-\d{2}-\d{2}T\S+) ?(.*)$/);
+    if (commit) {
+      timestamp = commit[2];
+      skip = commit[3].trim() !== '' || ignored.has(commit[1]);
+      continue;
+    }
+    const [status, ...paths] = line.split('\t');
+    if (!timestamp || !paths.length) continue;
+    const path = current(paths[paths.length - 1]);
+    // Older commits on the old path belong to the renamed file
+    if (status.startsWith('R') && paths.length === 2) movedTo.set(paths[0], path);
+    if (skip || !path.endsWith('.yaml')) continue;
+    // Newest first, so the first time a path appears is its latest review
+    if (!times.has(path)) times.set(path, timestamp);
+  }
+  return times;
+}
+
 export function getGitTimestamps(): Map<string, Date> {
   if (gitTimestampCache) {
     return gitTimestampCache;
@@ -134,7 +170,8 @@ export function getGitTimestamps(): Map<string, Date> {
       [
         'log',
         '--format=%H %aI %(trailers:key=Not-A-Review,valueonly,separator=%x2C)',
-        '--name-only',
+        '--name-status',
+        '-M',
         '--diff-filter=ACMR',
         '--',
         'database/**/*.yaml',
@@ -146,31 +183,8 @@ export function getGitTimestamps(): Map<string, Date> {
       }
     );
 
-    const lines = output.trim().split('\n');
-    let currentCommit: string | null = null;
-    let currentTimestamp: string | null = null;
-    let currentNotReview = false;
-
-    for (const line of lines) {
-      if (!line) continue;
-
-      // Commit hash + ISO timestamp (+ Not-A-Review trailer value, usually empty)
-      const commitMatch = line.match(/^([a-f0-9]{40}) (\d{4}-\d{2}-\d{2}T\S+) ?(.*)$/);
-      if (commitMatch) {
-        currentCommit = commitMatch[1];
-        currentTimestamp = commitMatch[2];
-        currentNotReview = commitMatch[3].trim() !== '';
-      } else if (currentTimestamp && line.endsWith('.yaml')) {
-        // Skip files from ignored commits
-        if (currentNotReview || (currentCommit && IGNORED_COMMITS.has(currentCommit))) {
-          continue;
-        }
-        const fullPath = resolve(repoRoot, line);
-        // Only set if not already set (we want most recent non-ignored commit)
-        if (!gitTimestampCache.has(fullPath)) {
-          gitTimestampCache.set(fullPath, new Date(currentTimestamp));
-        }
-      }
+    for (const [path, time] of lastReviewTimes(output, IGNORED_COMMITS)) {
+      gitTimestampCache.set(resolve(repoRoot, path), new Date(time));
     }
   } catch (e) {
     console.warn('Failed to get git timestamps:', e);
