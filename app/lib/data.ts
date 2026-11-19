@@ -107,6 +107,8 @@ export const IGNORED_COMMITS = new Set([
   '1ae1a4d59a148a5d1ac41f9430afb679a97fbc9f', // retire legacy related_* arrays (16)
   'a1f669e1491de8d6891bb95208172739638cd221', // data-freshness: commercial item pixels -> field (17)
   '2547ac35f618d4ddd7eae8166945047748cec2b8', // data-freshness: EspArtStick/Lightwalls links (2)
+  '193f50df5a792fef720824377dae122ef9a073f8', // data-freshness: K16000S Amazon link (1)
+  '0c6abd22bfcb554bf555f021fc5e832d806637c1', // data-freshness: PiCap/SceneX evidence pages archived (2)
 ]);
 
 /**
