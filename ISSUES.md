@@ -161,8 +161,9 @@ Filling any of these makes its checks sharper with no code change:
   same position.
 - `inputs.protocols` is missing on about half of the controllers, which makes
   every pattern source "verify" for them.
-- Connectors have no prices, so every parts list with a connector is
-  incomplete.
+- Connectors: 34 of 45 families now carry a representative-SKU price
+  (2026-11-18); binder-720, chogori, eventcon, hirschmann-ca, ld16-20-28,
+  socapex, sp13, sp17, teeplug, wago-221 and wieland-rst still have none.
 - Level converters record no logic-family facts (push-pull buffer vs.
   auto-direction translator, output drive). The designer offers them all
   alike; the usual advice (a 74AHCT/74HCT buffer, not a TXS-style translator)
