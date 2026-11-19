@@ -18,7 +18,7 @@ outputs:
 power:
   voltage:
     min: 5
-    max: 24 # up to 48V on version 1.1
+    max: 48
 features:
   - Button / Turnip activated presets
   - Push from xLights integration
@@ -59,3 +59,7 @@ sources:
     - url: https://www.baldrickboard.com/en/boards/baldrickdmx/manual
       retrieved: '2026-11-18'
       notes: 'BaldrickDMX Manual (updated 25 Oct 2026), Step 4: xLights Connection and At a glance table'
+  power.voltage.max:
+    url: https://www.baldrickboard.com/en/boards/baldrickdmx/manual
+    retrieved: '2026-11-18'
+    notes: "'Power input: 5–48V DC'"

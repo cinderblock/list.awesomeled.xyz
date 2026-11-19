@@ -9,14 +9,14 @@ inputs:
     Ethernet: true
   protocols:
     - sACN # E1.31
-  standalone: false
+  standalone: true
   requires_host: WT32-ETH01
 outputs:
   count: 8
   connector:
     ref: mtsb-combicon
   pixels:
-    max_per_output: 600 # 4800 total across 8 outputs
+    max_per_output: 800 # at 20 fps (500 recommended at 40 fps)
   clocked: false # async pixel types only
   protocols:
     - WS2812
@@ -70,4 +70,12 @@ sources:
     url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
     retrieved: '2026-11-18'
     notes: "'What makes it special?'"
+  inputs.standalone:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: "'can be used to control simple animations of LED lights as well as receive E1.31 and DDP'"
+  outputs.pixels.max_per_output:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: 'pixels per pin by frame rate: 800 at 20 fps, 500 at 40 fps'
 wled_compatible: true

@@ -15,7 +15,7 @@ inputs:
     - DDP
     - Art-Net
     - sACN # E1.31
-  standalone: false
+  standalone: true
 outputs:
   connector:
     ref: mtsb-combicon
@@ -35,7 +35,7 @@ outputs:
 power:
   voltage:
     min: 5
-    max: 48 # 24 V on v1.0
+    max: 48 # 5-24 V on 1.0 boards
   current:
     max: 60
 images:
@@ -68,3 +68,11 @@ sources:
     url: https://www.baldrickboard.com/en/boards/baldrick8/manual
     retrieved: '2026-11-18'
     notes: Baldrick8 Manual (updated 25 Oct 2026), Introduction > 8 Pixel Outputs (also 'RGBW pixels supported' and 'Additional protocols are always being added').
+  power.voltage.max:
+    url: https://www.baldrickboard.com/en/boards/baldrick8/manual
+    retrieved: '2026-11-18'
+    notes: "'Supports 5V to 48V inputs, or 5V to 24V on 1.0 versions'"
+  inputs.standalone:
+    url: https://www.baldrickboard.com/en/boards/baldrick8/manual
+    retrieved: '2026-11-18'
+    notes: "'CunningFX allows you to use your controller without a show player'"

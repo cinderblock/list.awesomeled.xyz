@@ -23,7 +23,7 @@ outputs:
     - WS2811
 power:
   voltage:
-    max: 12
+    max: 24
 data:
   storage:
     - type: SD
@@ -38,9 +38,9 @@ price_source:
   url: https://web.archive.org/web/20250805175734/https://wallyslights.com/products/wallys-lights-wb1616-controller
   vendor: Wally's Lights
 related:
-  - type: replacement
+  - type: related
     ref: controllers/wb48
-    notes: Wally's current controller offering (mounts for the WB1616 are still sold)
+    notes: Wally's current controller (WB1616 mounts are still sold); no maker statement that it replaces the WB1616
   - type: host
     ref: microboards/beaglebone-black
     notes: FPP cape for the BeagleBone Black (a BBB Rev C is included in the kit)
@@ -76,3 +76,7 @@ sources:
     url: https://cdn.shopify.com/s/files/1/0354/4763/6013/files/WB1616-eeprom.bin?v=1699928501
     retrieved: '2026-11-18'
     notes: FPP cape EEPROM image published by the maker (cape-info.json, designer "Wally's Lights LLC").
+  power.voltage.max:
+    url: https://cdn.shopify.com/s/files/1/0354/4763/6013/files/WB1616-Manual.docx?v=1674769990
+    retrieved: '2026-11-18'
+    notes: "'5v - 24v Vin Support'"

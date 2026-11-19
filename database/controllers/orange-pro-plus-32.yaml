@@ -30,7 +30,7 @@ outputs:
     - '1903'
 power:
   voltage:
-    max: 24
+    max: 5
 data:
   storage:
     - type: uSD
@@ -64,3 +64,7 @@ sources:
     url: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
     retrieved: '2026-11-18'
     notes: Controller Features
+  power.voltage.max:
+    url: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+    retrieved: '2026-11-18'
+    notes: "'(controller is powered by 5v only)'"

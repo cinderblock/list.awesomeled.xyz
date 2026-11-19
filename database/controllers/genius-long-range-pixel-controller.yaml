@@ -7,7 +7,6 @@ creator:
 inputs:
   physical:
     Ethernet: true
-    PoE: true
   standalone: true
 outputs:
   connector:
@@ -16,10 +15,11 @@ outputs:
   driver:
     buffered: true
   pixels:
-    max_per_output: 544 # 21760 total across 40 outputs
+    max_total: 20000
+    # via DDP (~10,000 via E1.31/Art-Net); no per-port cap
   clocked: false # async pixels only
   auxiliary:
-    DMX512: 1
+    DMX512: 2
   protocols:
     - WS281X
 power:
@@ -28,8 +28,6 @@ power:
 data:
   storage:
     - type: SD
-features:
-  - Power over Ethernet (PoE)
 price: 238.99
 price_source:
   notes: regular price; on sale $214.99 (-10%) at retrieval
@@ -59,3 +57,15 @@ sources:
     url: https://experiencelights.com/long-range-genius-pixel-controller/
     retrieved: '2026-11-18'
     notes: Description > Features. Maker names only the WS281X family
+  inputs.physical:
+    url: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view?usp=sharing
+    retrieved: '2026-11-18'
+    notes: 'Genius manual: powered from a 5 V DC supply, not PoE'
+  outputs.auxiliary.DMX512:
+    url: https://experiencelights.com/long-range-genius-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: "'2 x RJ45 ports for DMX output'"
+  outputs.pixels:
+    url: https://experiencelights.com/long-range-genius-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: "'No banks or groups'; ~20,000 pixels via DDP"

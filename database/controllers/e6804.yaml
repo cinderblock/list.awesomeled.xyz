@@ -11,7 +11,7 @@ inputs:
 outputs:
   count: 4
   pixels:
-    max_per_output: 510 # 2040 total / 4 outputs
+    max_per_output: 2040 # any output up to the controller's full 2,040
   clocked: selectable # Single or Clock per output
   connector:
     ref: mtsb-combicon
@@ -73,3 +73,7 @@ sources:
     url: http://sandevices.com/wp-content/uploads/2017/11/E6804_Operating_Manual.pdf
     retrieved: '2026-11-18'
     notes: E6804 Operating Manual (V4 firmware) 'Supported Pixel Types', plus the V5 firmware documentation (https://sandevices.com/wp-content/uploads/2022/10/SanDevices-Version-5-Firmware-Documentation-thru-version-5.050-beta.pdf) which adds APA102…
+  outputs.pixels.max_per_output:
+    url: http://sandevices.com/product/e6804-assembled-tested/
+    retrieved: '2026-11-18'
+    notes: "'Any output can drive any number of pixels … up to the full capacity of the controller … 2,040 individual pixels'"

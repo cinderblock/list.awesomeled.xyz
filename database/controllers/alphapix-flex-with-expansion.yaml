@@ -8,7 +8,7 @@ inputs:
   physical:
     Ethernet: true
   protocols:
-    - Art-Net
+    - sACN
   standalone: false
 outputs:
   connector:
@@ -106,3 +106,7 @@ sources:
     url: https://www.holidaycoro.com/kb_results.php?ID=181
     retrieved: '2026-11-18'
     notes: "'AlphaPix Evolution vs. HinksPix Pro Controller Specifications' table, row 'Pixel Protocols Supported', AlphaPix Evolution (#951-12) column."
+  inputs.protocols:
+    url: https://www.holidaycoro.com/kb_results.php?ID=181
+    retrieved: '2026-11-18'
+    notes: "comparison: 'e1.31 / sACN … Yes … Artnet … No'"

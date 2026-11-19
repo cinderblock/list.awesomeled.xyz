@@ -13,10 +13,10 @@ inputs:
     - sACN # E1.31
     - DDP
 outputs:
-  count: 48 # configurable Flex local ports: 0, 16, 32, or 48
+  count: 80 # 5 Flex expansion boards × 16
   differential: true # long-range receivers carry differential pixel data over Cat5/RJ45
   auxiliary:
-    DMX512: true # pixel ports reconfigurable for DMX/serial
+    DMX512: 1
   protocols:
     - INK1002
     - INK1003
@@ -88,7 +88,14 @@ sources:
     url: https://www.holidaycoro.com/kb_results.php?ID=181
     retrieved: '2026-11-18'
     notes: "'AlphaPix Evolution vs. HinksPix Pro Controller Specifications', row 'Pixel Protocols Supported', HinksPix Pro V3 (#930) column (no 4-wire/clocked types in this column)."
+  outputs.count:
+    url: https://www.holidaycoro.com/kb_results.php?ID=181
+    retrieved: '2026-11-18'
+    notes: "'Maximum Number of SPI Output Ports … 5 x 16 / 80 Total'"
+  outputs.auxiliary.DMX512:
+    url: https://www.holidaycoro.com/kb_results.php?ID=181
+    retrieved: '2026-11-18'
+    notes: 'RS-485 / DMX output ports (screw terminals): 1'
 technical_notes:
-  - Flex CPU supports 0/16/32/48 onboard pixel ports and 0/4/8/12 long-range receiver outputs
-  - Up to roughly 16,320 pixels per CPU; larger assembled systems reach ~32,640
+  - 'Flex CPU drives up to 5 Flex expansion boards: 80 SPI ports, 1,024 pixels per port at 20 FPS, 81,920 pixels / 684 universes per controller'
   - Pixel ports can be reconfigured for DMX/serial output

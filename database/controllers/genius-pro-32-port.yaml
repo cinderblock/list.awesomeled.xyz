@@ -10,15 +10,16 @@ inputs:
   physical:
     Ethernet: true
     Wi-Fi: true
-  standalone: false # Falcon Player (FPP)
+  standalone: true
 outputs:
   count: 32
-  connector: Spring Terminal
+  connector: Clever Lock 3-pin (color coded)
   clocked: false # async pixel types
   driver:
     buffered: true
   pixels:
-    max_per_output: 625 # 20000 total / 32 outputs
+    max_total: 20000
+    # via DDP; no per-port cap
   protocols:
     - WS281X
 power:
@@ -64,3 +65,15 @@ sources:
     url: https://experiencelights.com/genius-pro-32-port-controller/
     retrieved: '2026-11-18'
     notes: Description > Features. No longer list in the maker's docs; xLights' experience.xcontroller lists ws2811 only.
+  outputs.connector:
+    url: https://experiencelights.com/genius-pro-32-port-controller/
+    retrieved: '2026-11-18'
+    notes: "'32 x 3-pin, extra large, color coded Clever Lock' connectors"
+  inputs.standalone:
+    url: https://experiencelights.com/genius-pro-32-port-controller/
+    retrieved: '2026-11-18'
+    notes: "'SD card slot for standalone operation or to operate as FPP remote'"
+  outputs.pixels:
+    url: https://experiencelights.com/genius-pro-32-port-controller/
+    retrieved: '2026-11-18'
+    notes: "'No banks or groups. Pixels can be distributed however you'd like on any output'"

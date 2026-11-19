@@ -7,7 +7,6 @@ creator:
 inputs:
   physical:
     Ethernet: true
-    Wi-Fi: true
   protocols:
     - Art-Net
     - sACN # E1.31
@@ -89,3 +88,7 @@ sources:
     url: https://www.holidaycoro.com/AlphaPix-16-Pixel-Controller-V3-p/721-v3.htm
     retrieved: '2026-11-18'
     notes: Product Features > Software Data Output > 'Supported pixel protocols' (complete list on the maker's page).
+  inputs.physical:
+    url: https://www.holidaycoro.com/AlphaPix-16-Pixel-Controller-V3-p/721-v3.htm
+    retrieved: '2026-11-18'
+    notes: E1.31 / Art-Net over Ethernet only; no Wi-Fi interface
