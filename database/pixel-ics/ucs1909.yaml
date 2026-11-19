@@ -1,0 +1,63 @@
+name: UCS1909
+status: active
+creator: Lianxinke Microelectronics
+notes: Nine outputs driving three RGB groups over the UCS1903 protocol; the current UCS1909BS selects 6 or 9 outputs
+aliases:
+  - UCS1909BS
+color:
+  channel_bits: 8
+  pwm_frequency: 1.8kHz
+  pwm_frequency_notes: UCS1909BS per the maker table; the older UCS1909 datasheet gives a PWM refresh period of about 1.5 ms
+data:
+  type: UCS1903
+  clocked: false
+  channels: 9
+  bitrate: 800kHz
+  bitrate_notes: 800 or 400 kbps, picked by the SET pin (floating = 800 kbps, tied to VDD = 400 kbps)
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://datasheet4u.com/pdf/905175/UCS1909.pdf # '9 路 LED 驱动电路-UCS1909' (Chinese, distributor copy, maker not named); datasheet4u mirror
+electrical:
+  output_voltage: 40V
+  output_voltage_notes: Older UCS1909 datasheet; the maker's table lists 30 V for the UCS1909BS
+  supply_voltage: 5V
+  supply_voltage_notes: VDD 4.5-6 V; built-in regulator, so 6-40 V supplies feed VDD through a series resistor (3K at 12 V, 9K at 24 V)
+other_links:
+  - http://szucs.cn/page136
+physical:
+  packages:
+    - SOP-14
+sources:
+  status:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: "Maker's current 256-level single-wire cascade IC table lists UCS1909BS: 6/9 ch, 1.8 kHz, constant voltage, 50 mA max, 30 V, 800K, SOP14"
+  data.type:
+    url: https://datasheet4u.com/pdf/905175/UCS1909.pdf
+    retrieved: '2026-11-18'
+    notes: '72 bits per chip as R1G1B1 R2G2B2 R3G3B3 (24 bits each, MSB first); T0H 250 ns, T1H 1000 ns, reset 24 us, SET selects 400 kbps (times doubled): the same codes as the UCS1903 datasheet.'
+  data.channels:
+    url: https://datasheet4u.com/pdf/905175/UCS1909.pdf
+    retrieved: '2026-11-18'
+    notes: "'一个电路有 9 路 LED 输出端，即 3 组 RGB' (9 outputs = 3 RGB groups); the maker table gives 6/9 for UCS1909BS"
+  data.pixel_size_bits:
+    url: https://datasheet4u.com/pdf/905175/UCS1909.pdf
+    retrieved: '2026-11-18'
+    notes: "'一组 RGB 需要 24 位二进制数' (24 bits per RGB group; 72 per chip). At 800 kbps, 1024 groups at 30 frames/s."
+  creator:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: 'Shenzhen Lianxinke Microelectronics (深圳联芯科微电子, www.szucs.cn) product table lists UCS1909BS'
+  aliases:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: UCS1909BS is the orderable part in the maker's current table
+  color.pwm_frequency:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: Maker table, port refresh rate 1.8 kHz for UCS1909BS
+technical_notes:
+  - 'UCS1909BS outputs are constant-voltage (no current regulation; LED resistors set the current), 50 mA max per output (maker table); the constant-current sibling is the UCS2909'
+  - "Falcon's pixel-type table lists UCS1909 as an alternative of its WS2811 type (https://pixelcontroller.com/store/PixelTypes.html)"
+  - 'All chips latch together after the reset code, so a frame never shows half old and half new data (datasheet)'

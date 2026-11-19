@@ -1,0 +1,59 @@
+name: TM1824
+status: discontinued
+creator: Titan Micro Electronics
+color:
+  channel_bits: 8
+  pwm_frequency: 1kHz
+  pwm_frequency_notes: 900-1100 Hz
+data:
+  type: 4chWS2811/12
+  clocked: false
+  channels: 4
+  bitrate: 800kHz
+  bitrate_notes: Works with 0/1-code periods from 1.25 us (800 kHz) to 2.5 us (400 kHz)
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1824_V1.1.pdf # Titan Micro TM1824 V1.1 (Chinese); Lumikit copy, not on titanmec.com
+  sources:
+    - url: https://www.lcsc.com/datasheet/C19192204.pdf
+      host: distributor
+      notes: LCSC C19192204, Chinese V1.2 (same content as V1.1)
+electrical:
+  output_voltage: 32V
+  output_voltage_notes: OUT port rating; recommended off-state maximum 24 V
+  supply_voltage: 5V
+  supply_voltage_notes: VDD 4.5-6.5 V; built-in 5 V regulator, so 6-24 V supplies feed VDD through a series resistor
+  max_current: 18mA
+  max_current_notes: Fixed constant current per output; shorting outputs together adds 18 mA each (72 mA with all four)
+  current_programmable: false
+  quiescent_current: 2.8mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/tm1824
+  - https://www.enttec.com/pixel-protocols/TM1824
+physical:
+  packages:
+    - SOP-8
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C19192204.html
+    retrieved: '2026-11-18'
+    notes: 'LCSC C19192204 product data: productCycle stop_product (the flag the discontinued original TM1814, C62614, carries), 165 pcs left in stock'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C19192204.pdf
+    retrieved: '2026-11-18'
+    notes: 'TM1824 V1.2 (LCSC C19192204): unipolar RZ single wire, T0h 360 ns, T1h 720 ns, 1.25 us bit, reset >=200 us, 32 bits R G B W MSB first. Same framing as WS2814 / SK6812 RGBW.'
+  data.channels:
+    url: https://www.lcsc.com/datasheet/C19192204.pdf
+    retrieved: '2026-11-18'
+    notes: "'4 通道 LED 恒流驱动专用电路 TM1824' (OUTR, OUTG, OUTB, OUTW)"
+  creator:
+    url: https://www.lcsc.com/datasheet/C19192204.pdf
+    retrieved: '2026-11-18'
+    notes: '©Titan Micro Electronics, www.titanmec.com on every page'
+  color.pwm_frequency:
+    url: https://www.lcsc.com/datasheet/C19192204.pdf
+    retrieved: '2026-11-18'
+    notes: 开关特性 table, OUT PWM output frequency 900 / 1000 / 1100 Hz (min / typ / max)
+technical_notes:
+  - Powers up with all outputs off

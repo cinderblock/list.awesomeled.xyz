@@ -1,0 +1,78 @@
+name: SM16704
+status: active
+creator: Shenzhen Sunmoon Microelectronics
+notes: RGBW (4-channel) version of the SM16703
+color:
+  channel_bits: 8
+  pwm_frequency: 1.2kHz
+data:
+  type: 4chWS2811/12
+  clocked: false
+  channels: 4
+  bitrate: 800kHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://www.chinaasic.com/websiteManage/product/20230523101647341.pdf # Sunmoon SM16704PB product brief, English V1.3 (1 page)
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SM16704PB-datasheet.pdf
+      host: community
+      notes: LEDYi copy of the full SM16704PB datasheet IBIBZIV1.3 (ratings, timing, frame format)
+    - url: https://www.chinaasic.com/websiteManage/product/20201228161625065.pdf
+      host: manufacturer
+      notes: SM16704PB brief, Chinese edition
+    - url: https://www.superlightingled.com/PDF/sm16704-datasheet-en.pdf
+      host: community
+      notes: Older 'SM16704' datasheet without suffix (Greeled Electronic watermark), Superlighting LED copy
+electrical:
+  output_voltage: 26V
+  output_voltage_notes: OUT R/G/B/W port withstand voltage; the older SM16704 datasheet lists 30V as the absolute maximum
+  supply_voltage: 5V
+  supply_voltage_notes: Built-in clamp (4.8-5.5V, 5.2V typical) lets it run from a 5-24V supply through a series resistor (1K at 12V, 3K at 24V)
+  max_current: 17mA
+  max_current_notes: Default constant current per channel; Sunmoon's SM16704PB product page says 16mA
+  quiescent_current: 1.2mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/sm16704
+physical:
+  packages:
+    - SOP-8
+related:
+  - type: variant
+    ref: pixel-ics/sm16703
+    notes: RGBW (4-channel) version of the SM16703
+    source:
+      url: https://www.advateklighting.com/pixel-protocols/sm16704
+      retrieved: '2026-11-18'
+      notes: "'SM16704 is equipped with all the same features as its previous version, SM16703, but is dedicated to RGBW'"
+sources:
+  status:
+    url: https://www.chinaasic.com/en/chipDetails/detail_128.html
+    retrieved: '2026-11-18'
+    notes: Sunmoon product pages for the SM16704PB and SM16704PK (detail_129), both SOP8, with downloadable briefs
+  creator:
+    url: https://www.chinaasic.com/websiteManage/product/20230523101647341.pdf
+    retrieved: '2026-11-18'
+    notes: Sunmoon (chinaasic.com) SM16704PB brief
+  data.type:
+    url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SM16704PB-datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "SM16704PB datasheet IBIBZIV1.3, Data Communication Protocol: single-polarity RZ code, T0H 200-400ns (300 typ), T1H 800-1000ns (900 typ), code period at least 1.2us, reset (Trst) at least 200us; 'Trst+ First chip 32bits data + ... + The N chip 32bits data +Trst', high bit first. Same RZ protocol as the SM16703 with a fourth (W) byte; note the longer 200us reset."
+  data.channels:
+    url: https://www.chinaasic.com/websiteManage/product/20230523101647341.pdf
+    retrieved: '2026-11-18'
+    notes: "'The SM16704PB is a single-line transmission 4-channel output LED driver'"
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/sm16704
+    retrieved: '2026-11-18'
+    notes: "Advatek lists 'No redundancy in data'; the SOP8 pinout has one DIN and one DOUT"
+  color.pwm_frequency:
+    url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SM16704PB-datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "Switching Characteristic: fPWM 'OUT R/G/B output PWM frequency' 1.2KHz typical; Advatek lists 1200Hz"
+  electrical.output_voltage:
+    url: https://www.chinaasic.com/websiteManage/product/20230523101647341.pdf
+    retrieved: '2026-11-18'
+    notes: "'OUTR/ G/ B port withstand voltage 26V'"
+technical_notes:
+  - Sunmoon currently lists two SOP-8 part numbers, SM16704PB and SM16704PK, with the same feature list.

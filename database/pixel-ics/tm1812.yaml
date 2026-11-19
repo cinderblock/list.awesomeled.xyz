@@ -1,0 +1,81 @@
+name: TM1812
+creator: Titan Micro Electronics
+notes: 12-channel driver, four RGB pixels per IC
+color:
+  channel_bits: 8
+  pwm_frequency: ~770Hz
+  pwm_frequency_notes: "Output PWM period 1.3ms typical (1.0-1.5ms); the feature list only promises 'scanning frequency no less than 400Hz'"
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 12
+  bitrate: 800kHz
+  pixel_size_bits: 24
+datasheet:
+  url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf # Titan Micro TM1812 V1.4 (English); LEDYi copy, not on titanmec.com
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1812-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
+    - url: https://www.lcsc.com/datasheet/C20622179.pdf
+      host: distributor
+      notes: LCSC C20622179, TM1812(TA1515), Chinese V1.6
+electrical:
+  output_voltage: 24V
+  output_voltage_notes: 24V recommended maximum (V1.4 features '24V output port voltage endurance'); 30V absolute maximum, which the V1.6 feature list quotes
+  supply_voltage: 5V
+  supply_voltage_notes: Built-in 5V regulator; VDD takes 6-24V through a series resistor (330 ohm at 6V, 1.2K at 9V, 2.4K at 12V, 6.8K at 24V)
+  gpio:
+    min: 3.8V
+    notes: VIH minimum at VCC 4.5-6.5V
+  max_current: 45mA
+  max_current_notes: RGB channel sink current at OUT = 0.5V, 40mA typical, 45mA maximum (60mA DC absolute maximum). The outputs are PWM switches (RON 13-14 ohm); series resistors set the LED current.
+  quiescent_current: 3mA
+physical:
+  packages:
+    - SOP-16
+    - DIP-16
+related:
+  - type: compatible
+    ref: pixel-ics/tm1809
+    notes: Same 800kHz single-wire protocol as the 9-channel TM1809; FastLED drives TM1812 with its TM1809 controller
+    source:
+      url: https://github.com/FastLED/FastLED/blob/master/src/FastLED.h
+      retrieved: '2026-11-18'
+      notes: "'class TM1812 : public TM1809Controller800Khz<DATA_PIN, RGB_ORDER> {};'"
+sources:
+  creator:
+    url: https://www.lcsc.com/datasheet/C20622179.pdf
+    retrieved: '2026-11-18'
+    notes: "Datasheet footer '©Titan Micro Electronics, www.titanmec.com', V1.6; LCSC lists the maker as TM (Shenzhen Titan Micro Elec)"
+  data.type:
+    url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf
+    retrieved: '2026-11-18'
+    notes: 'TM1812 V1.4 Function description + High speed mode time: single-line return-to-zero code, 96 bits per IC (4 groups of 24-bit RGB, high bit first), T0H 350-450ns, T1H 700-1000ns, 1.25us bit period (800KHz); low gaps over 8us reset the chip (Treset 8us min, 24us typical)'
+  data.channels:
+    url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf
+    retrieved: '2026-11-18'
+    notes: "'TM1812 is a 12-channel special circuit for LED driver control'"
+  data.pixel_size_bits:
+    url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf
+    retrieved: '2026-11-18'
+    notes: "Application info: 'a group of RGB is a pixel, one TM1812 chip controls 4 pixels ... the data to be received per pixel is 24 Bits'"
+  color.pwm_frequency:
+    url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf
+    retrieved: '2026-11-18'
+    notes: "TPWM 'OUT port duty ratio cycle' 1 / 1.3 / 1.5ms; 'signals of different duty ratios ... with the signal cycle at 1.3ms'"
+  electrical.output_voltage:
+    url: https://www.lcsc.com/datasheet/C20622179.pdf
+    retrieved: '2026-11-18'
+    notes: "V1.6 recommended operating range: VO 'output end voltage endurance range' max 24.0V; absolute maximum VOUT -0.5~+30.0V"
+  electrical.quiescent_current:
+    url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf
+    retrieved: '2026-11-18'
+    notes: IDD 1 / 3 / 5mA with OUTR/G/B, DIN and DO open, VDD 5.0V
+  technical_notes:
+    url: https://www.lcsc.com/datasheet/C5174608.pdf
+    retrieved: '2026-11-18'
+    notes: "TM1812B datasheet V1.2 (LCSC C5174608): '输出端口耐压30V' (30V outputs), '芯片VDD外接串联电阻，电压支持6～30V输入' (6-30V supply through a series resistor)"
+technical_notes:
+  - Outputs are 4 groups of R/G/B PWM outputs (1OUTR-4OUTB); the chip forwards data only after it has taken its own 96 bits.
+  - Titan Micro also sells the TM1812B (datasheet V1.2) with 30V outputs and a 6-30V supply range.

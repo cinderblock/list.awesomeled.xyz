@@ -1,0 +1,59 @@
+name: INK1002
+creator: Greeled Electronic
+notes: 5050 RGB LED with a built-in INK1003 single-wire driver and separate LED and driver supplies
+aliases:
+  - INK1002B
+  - GEINK1002RGB
+color:
+  brightness_bits: 8
+data:
+  type: WS2811/12
+  clocked: false
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://embdev.net/attachment/199047/INK1002_RGB_LED__GEINK1002RGB_.pdf # Greeled 'INK1002 RGB LED (GEINK1002RGB)' (English, 2013); embdev.net forum attachment
+electrical:
+  led_voltage: 3.5-7.5V
+  led_voltage_notes: Separate LED supply (VLED); absolute maximum 7.5 V
+  vcc_voltage: 5V
+  vcc_voltage_notes: 'Driver supply 3-5.5 V in the electrical table (Features: 3.3-5.4 V; absolute maximum 5.4 V)'
+  channel_current: 17mA
+  channel_current_notes: 17-19 mA (min-max); ±1% between channels, ±3% between chips
+  quiescent_current: 1mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ink1003
+  - https://www.enttec.com/pixel-protocols/INK1003
+physical:
+  packages:
+    - '5050'
+  pin_count: 6
+related:
+  - type: uses
+    ref: pixel-ics/ink1003
+    notes: Single-wire 3-channel 256-level driver IC packaged inside the LED
+    source:
+      url: https://embdev.net/attachment/199047/INK1002_RGB_LED__GEINK1002RGB_.pdf
+      retrieved: '2026-11-18'
+      notes: "Description: 'integrates high quality LED chips and INK1003 single-wire cascadable LED driver IC in a small SMD5050 LED package'"
+sources:
+  data.type:
+    url: https://pixelcontroller.com/store/PixelTypes.html
+    retrieved: '2026-11-18'
+    notes: "Falcon's pixel-type table lists INK1002 and INK1003 as alternatives of its WS2811 type. Datasheet: 'AUTO-ZERO' code, 24-bit packets, 800 kHz, about 150 ns forwarding delay."
+  data.pixel_size_bits:
+    url: https://embdev.net/attachment/199047/INK1002_RGB_LED__GEINK1002RGB_.pdf
+    retrieved: '2026-11-18'
+    notes: "'when the first 24-bit data package is received by the first chip, the later received data will be reconstructed'"
+  creator:
+    url: https://embdev.net/attachment/199047/INK1002_RGB_LED__GEINK1002RGB_.pdf
+    retrieved: '2026-11-18'
+    notes: Datasheet published by Greeled Electronic Ltd (www.gree-leds.com); GE prefix on the order code GEINK1002RGB
+  aliases:
+    url: https://www.advateklighting.com/pixel-protocols/ink1003
+    retrieved: '2026-11-18'
+    notes: "'It can also be integrated into a 5050 package with built-in LEDs in its INK1002B variant, but with the same protocol'. GEINK1002RGB is the datasheet's part code."
+technical_notes:
+  - 'Pins: NC, VLED, GND, SDO, SDI, VCC'
+  - 'Datasheet claims up to 2048 cascaded lamps without distortion, then says the cascade length is limited only by the data rate'

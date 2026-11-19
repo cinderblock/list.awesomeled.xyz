@@ -1,0 +1,90 @@
+name: MBI6023
+status: active
+release_year: 2011
+creator:
+  name: Macroblock
+  page: https://www.mblock.com.tw/en/Driver_ICs/LED_Driver_ICs/detail/48
+notes: 3x4-channel (four RGB pixels) version of the MBI6020, 16-bit S-PWM
+color:
+  channel_bits: 10/16
+  pwm_frequency: 11.718kHz
+  pwm_frequency_notes: Visual refresh rate in 16-bit S-PWM mode with the default ~12MHz gray scale clock (12MHz / 65536 x 64); the 10-bit mode uses conventional PWM
+data:
+  type: MBI6023
+  clocked: true
+  channels: 12
+  bitrate: 10MHz
+  bitrate_notes: CKI 0.2-10MHz
+  pixel_size_bits: 48
+  backup_line: false
+datasheet:
+  url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf # Macroblock MBI6023 datasheet VB.01 (November 2016); Neumüller (authorized distributor) copy
+  sources:
+    - url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datenblatt%20-%20Datasheet.pdf
+      host: distributor
+      notes: Preliminary datasheet V1.00 (October 2011), Neumüller copy
+electrical:
+  output_voltage: 17V
+  supply_voltage: 3-5.5V
+  max_current: 45mA
+  max_current_notes: Constant current 3-45mA; three external resistors (R-EXTA/B/C) each set one output group
+  current_programmable: true
+  current_range: 3-45mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/mbi6023
+physical:
+  packages:
+    - SSOP-24
+    - QFN-24
+related:
+  - type: variant
+    ref: pixel-ics/mbi6020
+    notes: 3x4-channel version of the 3-channel MBI6020, using the same packet format
+    source:
+      url: https://www.advateklighting.com/pixel-protocols/mbi6023
+      retrieved: '2026-11-18'
+      notes: "'MBI6023 is very similar to MBI6020, but also offers the ability to drive up to 4x RGB pixels per chip, and a slightly higher PWM rate'. Both Macroblock datasheets use the same prefix, 48/30-bit header and 6-bit commands (6'b111111 16-bit, 6'b101011 10-bit gray scale)."
+sources:
+  status:
+    url: https://www.mblock.com.tw/en/Driver_ICs/LED_Driver_ICs/2?sub
+    retrieved: '2026-11-18'
+    notes: Macroblock's current RGB Product Guide lists MBI6030, MBI6034, MBI6033, MBI6024 and MBI6023
+  release_year:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datenblatt%20-%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "Preliminary datasheet footer 'October 2011, V1.00'"
+  creator:
+    url: https://www.mblock.com.tw/en/Driver_ICs/LED_Driver_ICs/detail/48
+    retrieved: '2026-11-18'
+    notes: "Macroblock product page 'PWM-Embedded 3x4-Channel Constant-Current Sink Driver for LED Strips'"
+  data.type:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf
+    retrieved: '2026-11-18'
+    notes: "New label. Two-wire CKI/SDI interface; packet = prefix (CKI and SDI low for more than 172 CKI cycles), 48-bit header (16-bit mode) or 30-bit header (10-bit mode) holding the command and N-1 (N = number of ICs), then 12 words per IC, last IC first. Same packet format as the MBI6020, but each IC takes 12 words instead of 3, so the header's IC count differs for the same pixel count; kept apart from MBI6020."
+  data.pixel_size_bits:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf
+    retrieved: '2026-11-18'
+    notes: "16-bit mode: 'Each driver has 3 x 4 x16 bits' (48 bits per RGB group); 10-bit mode: 3 x 4 x 10 bits (30 per RGB group), plus one header per packet"
+  data.bitrate:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf
+    retrieved: '2026-11-18'
+    notes: Switching characteristics, FCKI 0.2-10MHz
+  color.channel_bits:
+    url: https://www.mblock.com.tw/en/Driver_ICs/LED_Driver_ICs/detail/48
+    retrieved: '2026-11-18'
+    notes: "'two selectable gray scale modes ... 16-bit gray scale mode and 10-bit gray scale mode'"
+  color.pwm_frequency:
+    url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf
+    retrieved: '2026-11-18'
+    notes: "'12MHz/65536x64=11,718Hz'; Advatek lists 11,718Hz"
+  electrical.output_voltage:
+    url: https://www.mblock.com.tw/en/Driver_ICs/LED_Driver_ICs/detail/48
+    retrieved: '2026-11-18'
+    notes: "Specification table: 'Sustaining Output Voltage 17V', 'Supply Voltage 3~5.5V', 'Constant Output Current Range per Channel 3~45mA'"
+  physical.packages:
+    url: https://www.mblock.com.tw/en/Driver_ICs/LED_Driver_ICs/detail/48
+    retrieved: '2026-11-18'
+    notes: "'RoHS Compliant Package SSOP24 QFN24' (datasheet: GP SSOP24L-150-0.64, GFN QFN24L-4*4-0.5). Advatek says SOP24."
+technical_notes:
+  - POL pin selects output polarity, so the chip can drive external regulators or MOSFETs as a PWM controller; with POL low it accepts only 10-bit data.
+  - Phase-inverted clock output (CKO) to stop pulse-width distortion accumulating along the chain.

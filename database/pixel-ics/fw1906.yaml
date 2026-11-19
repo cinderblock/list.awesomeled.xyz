@@ -1,0 +1,65 @@
+name: FW1906
+notes: Six outputs as two RGB groups (R1 G1 B1, R2 G2 B2); WLED uses it for RGB + CCT strips
+color:
+  channel_bits: 8
+  pwm_frequency: 2.6kHz
+  pwm_frequency_notes: 2.2-3.2 kHz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 6
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf # FW1906 V1.0 (English, maker not named); LEDYi copy
+  discrepancies:
+    - The package section is titled SSOP10, but the drawing gives both MSOP10 and SSOP10 dimensions
+    - Recommended VDD is 10-27 V (typ. 24 V), yet the application notes still call for a VDD series resistor (1.2K at 12 V, 3K at 24 V)
+  sources:
+    - url: https://www.superlightingled.com/PDF/FW1906.pdf
+      host: community
+      notes: Superlighting LED copy of the same V1.0
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/FW1906-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
+electrical:
+  output_voltage: 24V
+  output_voltage_notes: OUT port rating; absolute maximum 30 V
+  supply_voltage: 10-27V
+  supply_voltage_notes: "Recommended range, typ. 24 V (Features: 'VCC voltage supports 24V')"
+  max_current: 18mA
+  max_current_notes: Fixed constant current per output; ±2.5% between channels, ±5% between chips
+  current_programmable: false
+  quiescent_current: 3mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/fw1906
+  - https://www.enttec.com/pixel-protocols/FW1906
+physical:
+  packages:
+    - SSOP-10
+sources:
+  data.type:
+    url: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf
+    retrieved: '2026-11-18'
+    notes: 'Single-wire RZ, T0H 360 ns, T1H 720 ns, 1250 ns bit (800 kHz), reset 200-500 us; each chip takes two 24-bit R G B packets (48 bits), so a WS2811 controller drives it as two pixels.'
+  data.channels:
+    url: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf
+    retrieved: '2026-11-18'
+    notes: "'FW1906 is a six-channel LED fixed constant current drive control circuit'; outputs R1, G1, B1, R2, G2, B2"
+  data.pixel_size_bits:
+    url: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf
+    retrieved: '2026-11-18'
+    notes: "Per RGB group, as the datasheet's refresh table counts pixels ('One FW1906 chip can control two groups of RGB'); 48 bits per chip"
+  color.pwm_frequency:
+    url: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf
+    retrieved: '2026-11-18'
+    notes: Switching characteristics, OUT PWM output frequency 2.2 / 2.6 / 3.2 kHz (min / typ / max)
+  electrical.supply_voltage:
+    url: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf
+    retrieved: '2026-11-18'
+    notes: Recommended operating conditions table, VDD 10 / 24 / 27 V (min / typ / max)
+technical_notes:
+  - 'WLED drives one FW1906 as one pixel: G, R, B, cold white, warm white, sixth channel unused (TYPE_FW1906, wled00/const.h)'
+  - Powers up with white on
+  - The datasheet does not name the maker

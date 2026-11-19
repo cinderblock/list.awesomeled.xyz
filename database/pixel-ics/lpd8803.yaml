@@ -1,0 +1,71 @@
+name: LPD8803
+creator: Greeled Electronic
+notes: 3-channel sibling of the LPD8806, pin-compatible with the LPD6803
+color:
+  channel_bits: 7
+  pwm_frequency: 4.0kHz
+  pwm_frequency_notes: "Datasheet: built-in 1.2MHz oscillator, 'refresh rate greater than 4000Hz'"
+data:
+  type: LPD8806
+  clocked: true
+  channels: 3
+  bitrate: 20MHz
+  bitrate_notes: "'Two-wire control mode, the shift clock up to 20MHz' (absolute maximum); the recommended operating table gives 0-2MHz"
+  backup_line: false
+datasheet:
+  url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf # LPD8803/LPD8806 combined datasheet (Greeled Electronic watermark), Adafruit-hosted
+electrical:
+  output_voltage: 12V
+  supply_voltage: 5V
+  supply_voltage_notes: VCC 3.3-5.5V in the pin description; recommended VDD 4.5-5.5V
+  max_current: 18mA
+  max_current_notes: Default constant current 18mA (20mA absolute maximum); a series resistor RL can lower it
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/lpd8803
+physical:
+  packages:
+    - SOP-16
+related:
+  - type: variant
+    ref: pixel-ics/lpd8806
+    notes: 3-channel version; one datasheet covers both chips and their two-wire interface
+    source:
+      url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+      retrieved: '2026-11-18'
+      notes: "'LPD8803 and LPD8806 output 3chanhel and 6 channel respectively'"
+  - type: predecessor
+    ref: pixel-ics/lpd6803
+    notes: Newer generation of the LPD6803 and pin-compatible with it
+    source:
+      url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+      retrieved: '2026-11-18'
+      notes: "'LPD8803/LPD8806 as a new generation of driver chips'; 'LPD8803 support three-way output (pin downward compatible with LPD6803)'. Advatek: 'Very similar to its previous version, LPD6803'"
+sources:
+  creator:
+    url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+    retrieved: '2026-11-18'
+    notes: "Datasheet watermark 'Greeled Electronic Ltd', as for the existing LPD6803/LPD8806 entries. Advatek instead says 'This pixel protocol was designed by Qiancai Electronics in China' (https://www.advateklighting.com/pixel-protocols/lpd8803)."
+  data.type:
+    url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+    retrieved: '2026-11-18'
+    notes: "Shared LPD8803/8806 datasheet: two-wire SDI/SCLK input with regenerated SDO/SCLKO outputs, shift clock up to 20MHz; an LPD8806 with PMOD=0 'occupies only three sets of data on the data link', the same as the 3-channel LPD8803"
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/lpd8803
+    retrieved: '2026-11-18'
+    notes: "'No redundancy in data'"
+  color.channel_bits:
+    url: https://www.advateklighting.com/pixel-protocols/lpd8803
+    retrieved: '2026-11-18'
+    notes: "'LPD8803 provides 7 bits of data'; 'Color Resolution 7 Bits'. The datasheet describes '256 independent PWM grayscale control circuit for each channel'."
+  color.pwm_frequency:
+    url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+    retrieved: '2026-11-18'
+    notes: Features item 5; Advatek lists 4000Hz
+  electrical.output_voltage:
+    url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+    retrieved: '2026-11-18'
+    notes: "'the default driving current is 18mA, supporting LED lighting voltage up to 12V'; absolute maximum LED voltage 3-12V"
+  physical.packages:
+    url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+    retrieved: '2026-11-18'
+    notes: Pin figure shows the LPD8803 as a 16-pin SO package (outline SOT109-1)

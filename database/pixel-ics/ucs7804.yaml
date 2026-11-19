@@ -1,0 +1,55 @@
+name: UCS7804
+creator: Lianxinke Microelectronics
+notes: RGB or RGBW driver that takes 8-bit data and expands it on chip to a gamma-corrected 16-bit curve at 16 kHz PWM
+color:
+  channel_bits: 8
+  pwm_frequency: 16kHz
+data:
+  type: UCS7804
+  clocked: false
+  channels: 4
+  bitrate: 660kHz
+  backup_line: false
+electrical:
+  output_voltage: 30V
+  output_voltage_notes: "Advatek and ENTTEC 'Output Pixel Voltage 5 - 30V'; no datasheet found"
+  current_programmable: true
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ucs7804
+  - https://www.enttec.com/pixel-protocols/UCS7804
+physical:
+  packages:
+    - SOP-8
+sources:
+  data.type:
+    url: https://www.advateklighting.com/pixel-protocols/ucs7804
+    retrieved: '2026-11-18'
+    notes: 'New label (no datasheet found): 8-bit data gamma-expanded to 16-bit, 6-bit current per color, 660 kbps. The UCS7604 differs (800/1600 kbps, 4-bit current), so it is not the same family.'
+  data.channels:
+    url: https://www.advateklighting.com/pixel-protocols/ucs7804
+    retrieved: '2026-11-18'
+    notes: "'allows connection of either one RGB or one RGBW LED per chip, and selection between RGB/RGBW is made available through digital configuration'"
+  data.bitrate:
+    url: https://www.advateklighting.com/pixel-protocols/ucs7804
+    retrieved: '2026-11-18'
+    notes: Specifications table, Data Transfer Rate 660kbps
+  data.backup_line:
+    url: https://www.enttec.com/pixel-protocols/UCS7804
+    retrieved: '2026-11-18'
+    notes: "Specifications table, 'Redundant Data Line: No'"
+  color.pwm_frequency:
+    url: https://www.advateklighting.com/pixel-protocols/ucs7804
+    retrieved: '2026-11-18'
+    notes: Specifications table, PWM Rate 16,000Hz (ENTTEC agrees)
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/ucs7804
+    retrieved: '2026-11-18'
+    notes: "'This protocol was designed by Lianxinke in China' (ENTTEC: 'Manufacturer: Shenzhen Ucs')"
+  physical.packages:
+    url: https://www.advateklighting.com/pixel-protocols/ucs7804
+    retrieved: '2026-11-18'
+    notes: Specifications table, Physical Package SOP8 (ENTTEC agrees)
+technical_notes:
+  - 'Per-channel current control: 6 bits per color (Advatek)'
+  - Built-in gray-level smoothing on top of the 16-bit gamma curve (Advatek)
+  - No datasheet found; every value here is from the Advatek and ENTTEC protocol pages

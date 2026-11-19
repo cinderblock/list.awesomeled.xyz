@@ -1,0 +1,63 @@
+name: INK1003
+creator: Greeled Electronic
+notes: Also packaged inside the INK1002 5050 RGB LED
+color:
+  channel_bits: 8
+  pwm_frequency: ~312Hz
+  pwm_frequency_notes: "Datasheet: 'The period of output signal is 3.2mS'; Advatek lists 400Hz"
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  bitrate_notes: "'Data frequency range wide: 400~800KHz'"
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://monitor.espec.ws/download.php?id=205360 # Greeled Electronic 'Data Sheet Of INK1003 IC Driver' (English); forum attachment copy
+electrical:
+  output_voltage: 10V
+  output_voltage_notes: Driver pin voltage -0.3 to 10V with the output off (absolute maximum); written for 5-12V LED strips
+  supply_voltage: 3.3-5.4V
+  supply_voltage_notes: "'Wide operating voltage: 3.3~5.4V' (VCC range 3-5V in the electrical table); the built-in clamp holds VCC at 5.4V (5.3-5.6V) when fed from 12V"
+  max_current: 18mA
+  max_current_notes: Constant-current sinks, 17-19mA (18.6mA in the description); +/-1% between channels, +/-3% between chips
+  quiescent_current: 1mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ink1003
+physical:
+  packages:
+    - SOP-8
+    - DIP-8
+sources:
+  creator:
+    url: https://monitor.espec.ws/download.php?id=205360
+    retrieved: '2026-11-18'
+    notes: "Datasheet header and watermark 'Greeled Electronic Ltd' (www.gree-leds.com). Advatek names no designer. Greeled also watermarks other makers' datasheets (a Sunmoon SM16704 copy), so it may be the vendor rather than the designer."
+  notes:
+    url: https://embdev.net/attachment/199047/INK1002_RGB_LED__GEINK1002RGB_.pdf
+    retrieved: '2026-11-18'
+    notes: "Greeled INK1002 (GEINK1002RGB) datasheet: 'INK1003 and RGB LED chips are packaged in a single 5050 LED package'; Advatek: 'integrated into a 5050 package with built-in LEDs in its INK1002B variant, but with the same protocol'"
+  data.type:
+    url: https://monitor.espec.ws/download.php?id=205360
+    retrieved: '2026-11-18'
+    notes: 'One-line return-to-zero code, 24 bits per chip, R then G then B, MSB first; T0H 0.25us, T1H 1.0us, T0L 1.0us, T1L 0.25us (+/-75ns); RESET is a low signal of more than 24us'
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/ink1003
+    retrieved: '2026-11-18'
+    notes: "'No redundancy in data'"
+  color.pwm_frequency:
+    url: https://monitor.espec.ws/download.php?id=205360
+    retrieved: '2026-11-18'
+    notes: Gray Scale Data Word Format section
+  electrical.output_voltage:
+    url: https://monitor.espec.ws/download.php?id=205360
+    retrieved: '2026-11-18'
+    notes: "Absolute Maximum Ratings: Driver PIN voltage VXOUT '-0.3 to 10V, IOUT off'; Electrical Parameters: output voltage -0.3 to 10V; Applications: 'LED strips operate between 5~12V'"
+  electrical.quiescent_current:
+    url: https://monitor.espec.ws/download.php?id=205360
+    retrieved: '2026-11-18'
+    notes: ISTB 1000uA typical, 1600uA maximum
+technical_notes:
+  - POL pin (pin 7) inverts the outputs so the chip can drive external transistors or constant-current drivers for high-power LEDs
+  - "'When 800KHz, it can achieve 1024Pixels cascade connection'"

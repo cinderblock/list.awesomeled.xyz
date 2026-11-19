@@ -1,0 +1,52 @@
+name: P9883
+creator: Power MOS Microelectronics
+notes: RGB driver with a backup data line; Power MOS was formerly DMS Microelectronics, maker of the P9813
+color:
+  channel_bits: 8
+  pwm_frequency: 1.6kHz
+data:
+  type: P9883
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  backup_line: true
+electrical:
+  output_voltage: 17V
+  output_voltage_notes: Top of Advatek's 5-17V output pixel voltage (no maker datasheet found)
+  supply_voltage: 5V
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/p9883
+physical:
+  packages:
+    - ESOP-8
+sources:
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/p9883
+    retrieved: '2026-11-18'
+    notes: "'This pixel protocol was designed by Power MOS Microelectronics (formerly DMS Microelectronics) in China'"
+  notes:
+    url: https://www.advateklighting.com/pixel-protocols/p9883
+    retrieved: '2026-11-18'
+    notes: "'It offers a backup data line for redundancy in case of a chip failure'"
+  data.type:
+    url: https://www.advateklighting.com/pixel-protocols/p9883
+    retrieved: '2026-11-18'
+    notes: "New label: no maker datasheet found, and Advatek lists P9883 as its own pixel protocol ('Clock Type Data-Only', 'Data Transfer Rate 800kbps', 8 bits, RGB). Resellers describe the protocol as 'the same with UCS1903' (e.g. https://www.myneopixel.com/products/dc12v-30mm-p9883-dual-data-pixel-rgb-led-point-lights-string-1129), unverified."
+  data.channels:
+    url: https://www.advateklighting.com/pixel-protocols/p9883
+    retrieved: '2026-11-18'
+    notes: "'Color Types RGB'"
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/p9883
+    retrieved: '2026-11-18'
+    notes: "'Redundant data line reduces chance of entire strip failure'"
+  color.pwm_frequency:
+    url: https://www.advateklighting.com/pixel-protocols/p9883
+    retrieved: '2026-11-18'
+    notes: "'PWM Rate 1600Hz'"
+  physical.packages:
+    url: https://www.advateklighting.com/pixel-protocols/p9883
+    retrieved: '2026-11-18'
+    notes: "'The control circuit comes in a ESOP8 package'"
+technical_notes:
+  - No datasheet or maker page found online; all values are from Advatek's protocol page.

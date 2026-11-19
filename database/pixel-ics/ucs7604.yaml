@@ -1,0 +1,65 @@
+name: UCS7604
+creator: Lianxinke Microelectronics
+notes: 16-bit RGBW driver with a backup data input, selectable 800 kHz or 1.6 MHz data and per-channel current
+color:
+  channel_bits: 16
+  pwm_frequency: 16kHz
+data:
+  type: UCS7604
+  clocked: false
+  channels: 4
+  bitrate: 1.6MHz
+  bitrate_notes: 800 kHz or 1.6 MHz, selectable
+  backup_line: true
+datasheet:
+  url: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf # UCS7604 VER1.0 2022-09-15 (English); LEDYi copy, maker (szucs.cn) hosts no PDFs
+  discrepancies:
+    - The pin section is headed SOP 8, but the pin table lists 10 pins and the package drawing is SOP 10
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS7604-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
+electrical:
+  output_voltage: 30V
+  supply_voltage: 3-5.7V
+  supply_voltage_notes: VDD recommended range, typ. 5 V; built-in 5 V regulator, so 12 or 24 V supplies feed VDD through a series resistor
+  max_current: 60mA
+  max_current_notes: Set by the REXT resistor (IO = 256 / R_REXT), then scaled per channel in 16 software steps
+  current_programmable: true
+  current_range: 0-60mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ucs7604
+  - https://www.enttec.com/pixel-protocols/UCS7604
+physical:
+  packages:
+    - SOP-10
+sources:
+  data.type:
+    url: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf
+    retrieved: '2026-11-18'
+    notes: 'New label: selectable 8 (gamma to 16)/12/14/16-bit data, 800K or 1.6M, 1-4 field modes, set by a configuration preamble ahead of the pixel data (FastLED sends 15 bytes: sync, mode, RGBW current).'
+  data.channels:
+    url: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf
+    retrieved: '2026-11-18'
+    notes: "'series 4 channel 65536 level gray scale' driver; outputs OUTR, OUTG, OUTB, OUTW"
+  data.bitrate:
+    url: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf
+    retrieved: '2026-11-18'
+    notes: "'Data transmission frequencies of 800K / S and 1.6M / S are optional'; switch characteristics Fd1 800 kHz, Fd2 1600 kHz"
+  data.backup_line:
+    url: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf
+    retrieved: '2026-11-18'
+    notes: FDIN 'Auxiliary display data input'; double-channel bad point transmission
+  color.pwm_frequency:
+    url: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf
+    retrieved: '2026-11-18'
+    notes: "'Port refresh frequency is 16K'; switch characteristics F_pwm 16 kHz"
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/ucs7604
+    retrieved: '2026-11-18'
+    notes: "'This protocol was designed by Lianxinke in China' (ENTTEC: 'Manufacturer: Shenzhen Ucs')"
+technical_notes:
+  - 'Data depth is selectable: 8-bit (gamma 2.2 expanded to 16-bit), 12, 14 or 16 bits per channel; bits per chip on the wire follow the depth and field mode'
+  - 'Field mode sets how many values each chip takes: 1 (one value for all four outputs), 2 (RG and BW pairs), 3 (RGB, W off) or 4 (RGBW)'
+  - At 800 kHz and 30 frames/s one line carries 1111 three-value chips at 8-bit or 555 at 16-bit, twice that at 1.6 MHz
+  - 'FastLED (src/fl/chipsets/encoders/ucs7604.h) documents the 15-byte preamble: 6 x 0xFF sync, header 0x00 0x03, mode byte, 4-bit current per R/G/B/W, 2 reserved bytes'

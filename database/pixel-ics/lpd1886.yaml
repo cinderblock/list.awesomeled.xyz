@@ -1,0 +1,54 @@
+name: LPD1886
+creator: Insomnia Lighting
+notes: Single-wire 12-bit (4096-level) RGB driver; a pin selects 8-bit mode
+color:
+  channel_bits: 12
+  pwm_frequency: 400Hz
+  pwm_frequency_notes: "Datasheet: free-run refresh 'more than 400Hz'"
+data:
+  type: LPD1886
+  clocked: false
+  channels: 3
+  bitrate: 1.6MHz
+  bitrate_notes: 0.1-1.6 MHz; 1.25 MHz recommended
+  pixel_size_bits: 36
+  backup_line: false
+datasheet:
+  url: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf # Insomnia Lighting LPD1886 IC Datasheet (English); DMX4ALL copy
+electrical:
+  output_voltage: 12V
+  output_voltage_notes: LED supply (VLED) 5-12 V in constant-current mode
+  supply_voltage: 5V
+  supply_voltage_notes: VDD 5 V; 5-24 V supplies feed VDD through a series resistor (50 ohm at 5 V, 1.8K at 12 V, 4.5K at 24 V)
+  max_current: 17mA
+  max_current_notes: Fixed constant current, 17 mA on OUT1 (red) and 15.5 mA on OUT2 and OUT3
+  current_programmable: false
+physical:
+  packages:
+    - DIP-8
+    - SOP-8
+sources:
+  data.type:
+    url: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf
+    retrieved: '2026-11-18'
+    notes: 'New label: single-wire RZ, 36 bits per chip (3 x 12-bit, each sent 4 + 8 bits, high first), recommended T0H 200 / T1H 600 ns, reset over 24 us. No existing family matches.'
+  data.channels:
+    url: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf
+    retrieved: '2026-11-18'
+    notes: "'LPD1886 is single-line three-channel with 4096 levels PWM programmable constant current LED driver chip'"
+  data.pixel_size_bits:
+    url: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf
+    retrieved: '2026-11-18'
+    notes: "Application Description: 3 channels x 12 bits = 36 per chip; '1600000/each pixel 36levels/each second 25FPS=1778'"
+  data.bitrate:
+    url: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf
+    retrieved: '2026-11-18'
+    notes: Recommended working parameters, dat/clk frequency 1.25 MHz; ON/OFF parameters, data tempo 0.1-1.6 MHz
+  creator:
+    url: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf
+    retrieved: '2026-11-18'
+    notes: "Every page is branded 'Insomnia Lighting LPD1886 IC Datasheet', www.insomnialighting.com; no other maker is named"
+technical_notes:
+  - 'GM pin floating: 256 levels (8-bit); tied low: 4096 levels (12-bit)'
+  - Each frame latches automatically 10 us after the last bit; a low of more than 24 us marks the start of a new frame
+  - 'FastLED drives it as LPD1886 (12-bit) or LPD1886_8BIT at 1250 kHz (src/chipsets.h)'

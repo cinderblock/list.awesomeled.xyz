@@ -1,0 +1,74 @@
+name: WS2803
+status: discontinued
+creator: WorldSemi
+notes: 18-channel clocked constant-current driver using the WS2801 protocol
+color:
+  channel_bits: 8
+  pwm_frequency: 2.5kHz
+data:
+  type: WS2801
+  clocked: true
+  channels: 18
+  bitrate: 25MHz
+dead_links:
+  - url: http://www.world-semi.com/en/Driver/Lighting_LED_driver_chip/WS2803/
+    archive: https://web.archive.org/web/20121117004251/http://www.world-semi.com:80/en/Driver/Lighting%5FLED%5Fdriver%5Fchip/WS2803/
+    checked: '2026-11-18'
+electrical:
+  output_voltage: 40V
+  supply_voltage: 3.3-5.5V
+  max_current: 30mA
+  max_current_notes: Constant current per channel, set by one resistor from the IREF pin to ground
+  current_programmable: true
+other_links:
+  - http://www.world-semi.com/en/Driver/Lighting_LED_driver_chip/WS2803/
+physical:
+  packages:
+    - SOP-28
+    - DIP-28
+related:
+  - type: compatible
+    ref: pixel-ics/ws2801
+    notes: Same clocked protocol as the WS2801; FastLED drives it with its WS2801 controller at 25MHz
+    source:
+      url: https://github.com/FastLED/FastLED/blob/master/src/fl/chipsets/ws2801.h
+      retrieved: '2026-11-18'
+      notes: "'class WS2803Controller : public WS2801Controller<DATA_PIN, CLOCK_PIN, RGB_ORDER, SPI_SPEED>' with SPI_SPEED = DATA_RATE_MHZ(25); src/chipsets.h: 'WS2801 family: ws2801.h (WS2801, WS2803)'"
+sources:
+  status:
+    url: https://www.world-semi.com/products-led-driver-ic.html
+    retrieved: '2026-11-18'
+    notes: "Not in WorldSemi's current catalog (3-channel RGB: 'WS2801 · WS2811 · WS2808 · WS2818B'), nor in its 2016 LED driver IC menu (archived https://web.archive.org/web/20160403050153/http://www.world-semi.com:80/LEDqudongIC/WS2811/WS2818/), which still listed WS2801 and WS2811."
+  creator:
+    url: https://web.archive.org/web/20121117004251/http://www.world-semi.com:80/en/Driver/Lighting%5FLED%5Fdriver%5Fchip/WS2803/
+    retrieved: '2026-11-18'
+    notes: WorldSemi product page (2012), Home > Driver IC > Lighting LED driver chip > WS2803
+  data.type:
+    url: https://github.com/FastLED/FastLED/blob/master/src/fl/chipsets/ws2801.h
+    retrieved: '2026-11-18'
+    notes: FastLED's WS2803Controller is its WS2801Controller at 25MHz. WorldSemi page - 'The two-lane 18-channel programmable constant-current LED driver IC with PWM', data shifted in on the rising edge of CKI, data and clock output buffers for cascading.
+  data.channels:
+    url: https://web.archive.org/web/20121117004251/http://www.world-semi.com:80/en/Driver/Lighting%5FLED%5Fdriver%5Fchip/WS2803/
+    retrieved: '2026-11-18'
+    notes: "'WS2803 has 18 output channels, each channel can output up to 30mA constant current. The chip contains 144 internal serial shift register'"
+  data.bitrate:
+    url: https://web.archive.org/web/20121117004251/http://www.world-semi.com:80/en/Driver/Lighting%5FLED%5Fdriver%5Fchip/WS2803/
+    retrieved: '2026-11-18'
+    notes: "'maximum input data clock frequencies up to 25MHz'"
+  color.pwm_frequency:
+    url: https://web.archive.org/web/20121117004251/http://www.world-semi.com:80/en/Driver/Lighting%5FLED%5Fdriver%5Fchip/WS2803/
+    retrieved: '2026-11-18'
+    notes: "'8-bit PWM grayscale control ... the 2.5KHz grayscale data refresh frequency'"
+  electrical.output_voltage:
+    url: https://web.archive.org/web/20121117004251/http://www.world-semi.com:80/en/Driver/Lighting%5FLED%5Fdriver%5Fchip/WS2803/
+    retrieved: '2026-11-18'
+    notes: "'can withstand up to 40V output voltage of the output driver stage'; 'chip operating voltage of 3.3 ~ 5.5V'"
+  physical.packages:
+    url: https://web.archive.org/web/20121117004251/http://www.world-semi.com:80/en/Driver/Lighting%5FLED%5Fdriver%5Fchip/WS2803/
+    retrieved: '2026-11-18'
+    notes: "'WS2803 provides two kinds of package and DIP-28 SOP-28'"
+technical_notes:
+  - 144-bit shift register (18 channels x 8 bits); free-running PWM after the data is written, with staggered delays between output channels
+  - 'Current accuracy: +/-1% between channels, +/-2% between chips'
+  - Over-temperature protection shuts the outputs off at 150°C and re-enables them at 125°C
+  - No datasheet copy found online; WorldSemi's 2012 product page linked a 'WS2803 Specification book' archive that the Wayback Machine did not capture

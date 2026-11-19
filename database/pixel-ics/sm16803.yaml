@@ -1,0 +1,70 @@
+name: SM16803
+status: active
+creator: Shenzhen Sunmoon Microelectronics
+notes: 8-bit input gamma-corrected to 65,536 output levels, 4-bit current gain, 4kHz PWM
+color:
+  channel_bits: 8
+  pwm_frequency: 4.0kHz
+  pwm_frequency_notes: "Patented SM-PWM, 'refresh rate is up to 4KHz'; the 8-bit input is gamma-corrected to 65,536 output levels"
+data:
+  type: SM16803
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  backup_line: false
+datasheet:
+  url: https://www.chinaasic.com/websiteManage/product/20230523111339341.pdf # Sunmoon SM16803PB product brief, English IBSZZIV1.1 (1 page; full datasheet not public)
+  sources:
+    - url: https://www.chinaasic.com/websiteManage/product/20201228162956065.pdf
+      host: manufacturer
+      notes: SM16803PB brief, Chinese edition
+    - url: https://www.chinaasic.com/websiteManage/product/202503271124042564.pdf
+      host: manufacturer
+      notes: SM16803PH brief (2025, Chinese)
+electrical:
+  output_voltage: 26V
+  supply_voltage: 5V
+  supply_voltage_notes: Built-in clamp; supports a 5-24V input supply
+  max_current: 60mA
+  max_current_notes: 'SM16803PB: 19mA default with REXT floating, 1.8-19mA in 16 steps via the 4-bit current gain, up to 60mA with an external REXT resistor. The SM16803PH has no REXT (1.8-19mA).'
+  current_programmable: true
+  current_range: 1.8-19mA by current gain, up to 60mA with REXT
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/sm16803
+physical:
+  packages:
+    - SOP-8
+sources:
+  status:
+    url: https://www.chinaasic.com/en/chipDetails/detail_504.html
+    retrieved: '2026-11-18'
+    notes: Sunmoon product pages for the SM16803PH and SM16803PB (detail_135), both SOP8
+  creator:
+    url: https://www.chinaasic.com/websiteManage/product/20230523111339341.pdf
+    retrieved: '2026-11-18'
+    notes: Sunmoon (chinaasic.com) SM16803PB brief
+  data.type:
+    - url: https://www.chinaasic.com/websiteManage/product/20230523111339341.pdf
+      retrieved: '2026-11-18'
+      notes: "New label. SM16803PB brief: 'Adopt single-line return-to-zero code SID data protocol', 800Kbps, 'OUT R/G/B each 4bits current gain adjustment bit'; the gain is sent on the data line, so the frame is not plain WS2811/12. The frame layout is not in the public brief; the RGBW SM16804PB datasheet sends 32 bits per chip plus one 16-bit current-gain word per frame."
+    - url: https://www.advateklighting.com/pixel-protocols/sm16803
+      retrieved: '2026-11-18'
+      notes: "'SM16803 receives 8-bit data, but upscales this to a gamma-corrected 16-bit curve'; 'Use the 4-bit current control per color ... can be set when configuring your PixLite Mk3 controller'"
+  data.channels:
+    url: https://www.chinaasic.com/websiteManage/product/20230523111339341.pdf
+    retrieved: '2026-11-18'
+    notes: "'SM16803PB is a tri-channel LED driver control chip'"
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/sm16803
+    retrieved: '2026-11-18'
+    notes: "'No redundancy in data'"
+  color.channel_bits:
+    url: https://www.advateklighting.com/pixel-protocols/sm16803
+    retrieved: '2026-11-18'
+    notes: "'Color Resolution 8 Bits', 'Built-in Gamma Correction: Enhanced to 16 Bits (+8 Bits)'; Sunmoon: 'OUT R/G/B output gray level: 65536 levels (GAMMA correction)'"
+  electrical.max_current:
+    url: https://www.chinaasic.com/websiteManage/product/20230523111339341.pdf
+    retrieved: '2026-11-18'
+    notes: "'The default output current of SM16803PB is 19mA (REXT port is floating), and the current can be set to 1.8mA~19mA through the current gain adjustment function, a total of 16 current gain levels; the maximum current of OUT R/G/B can also be set to 60mA through the external resistor of the REXT port.'"
+technical_notes:
+  - Advatek lists a 5-30V output pixel voltage.

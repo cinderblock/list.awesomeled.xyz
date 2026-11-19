@@ -1,0 +1,82 @@
+name: WS2818A
+status: discontinued
+release_year: 2017
+creator: WorldSemi
+notes: 5V version of the dual-signal WS2818
+color:
+  channel_bits: 8
+  pwm_frequency: 2.0kHz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf # WorldSemi WS2818A V1.0 (2017-05-23, English, world-semi.com footer); LEDYi copy
+dead_links:
+  - url: http://www.world-semi.com/technology/details-105-4.html
+    archive: https://web.archive.org/web/20171214195803/http://www.world-semi.com:80/technology/details-105-4.html
+    checked: '2026-11-18'
+electrical:
+  output_voltage: 5V
+  output_voltage_notes: "'RGB output port withstand voltage 5V, DIN port withstand voltage 9V'; absolute maximum 7V on R/G/B"
+  supply_voltage: 5V
+  max_current: 16.5mA
+  max_current_notes: Constant-current outputs, 15.5-17.5mA (IOL)
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ws2818a
+  - http://www.world-semi.com/technology/details-105-4.html
+physical:
+  packages:
+    - SOP-8
+    - CPC-8
+related:
+  - type: variant
+    ref: pixel-ics/ws2818b
+    notes: 5V counterpart of the 12V WS2818B; both datasheets start at V1.0 on 2017-05-23
+    source:
+      url: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+      retrieved: '2026-11-18'
+      notes: "WS2818B revision log 'V1.0 N New 20170523' (WS2818A spec: 'V1.0 N New 20170523'); WorldSemi's 2017 WS2818A page lists WS2818B among 'Other models'"
+  - type: variant
+    ref: pixel-ics/ws2818
+    notes: 5V version of the WS2818 with revised timing
+    source:
+      url: https://www.advateklighting.com/pixel-protocols/ws2818a
+      retrieved: '2026-11-18'
+      notes: "'WS2818A offers the same functionality as WS2818, but with slightly different timing, and built only for 5V applications'"
+sources:
+  status:
+    url: https://www.world-semi.com/products-led-driver-ic.html
+    retrieved: '2026-11-18'
+    notes: "WorldSemi's current catalog lists 3-channel RGB 'WS2801 · WS2811 · WS2808 · WS2818B'; its 2023 'WS2818 Family' page (archived https://web.archive.org/web/20230519184404/http://world-semi.com/ws2818-family/) already held only WS2818B, WS2821A/B, WS2832, WS2832B and WS2833"
+  release_year:
+    url: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf
+    retrieved: '2026-11-18'
+    notes: "Modify Records: 'V1.0 N New 20170523'"
+  creator:
+    url: https://web.archive.org/web/20171214195803/http://www.world-semi.com:80/technology/details-105-4.html
+    retrieved: '2026-11-18'
+    notes: "WorldSemi product page (2017): 'P/N.:WS2818A', 'Apply to products working under DC5V', 'Double signal,one pixel failure.others will work normally'"
+  data.type:
+    url: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf
+    retrieved: '2026-11-18'
+    notes: "'Single-line Return-to-Zero communication protocol', 24 bits per chip, 800Kbps; T0H 220-380ns, T1H 580ns-1.6us, T0L 580ns-1.6us, T1L 220-420ns, reset over 280us"
+  data.backup_line:
+    url: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf
+    retrieved: '2026-11-18'
+    notes: "'it adopts dual signal transmission ... The user can select the first chip DIN/BIN as the control signal input pin'"
+  color.pwm_frequency:
+    url: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf
+    retrieved: '2026-11-18'
+    notes: "'the refresh frequency reaches to 2KHz'; Advatek lists 2000Hz"
+  electrical.max_current:
+    url: https://web.archive.org/web/20171214195803/http://www.world-semi.com:80/technology/details-105-4.html
+    retrieved: '2026-11-18'
+    notes: "Product page: 'RGB Current adjusting ranges is 16mA'; datasheet IOL 15.5/16.5/17.5mA and 'Constant Current driving of 16.5mA'"
+  physical.packages:
+    url: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf
+    retrieved: '2026-11-18'
+    notes: "'SOP8 and CPC8 packaging available for sale'"

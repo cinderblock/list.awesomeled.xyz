@@ -1,0 +1,49 @@
+name: UCS6909
+notes: Nine outputs driving three RGB groups over the LPD6803 clock + data protocol, 5-bit data mapped to 256 levels
+color:
+  channel_bits: 5
+data:
+  type: LPD6803
+  clocked: true
+  channels: 9
+  bitrate: 15MHz
+  bitrate_notes: Maximum clock; recommended below 10 MHz
+  pixel_size_bits: 16
+  backup_line: false
+datasheet:
+  url: https://datasheet4u.com/pdf/905173/UCS6909.pdf # 'UCS6909 说明书', 40V/25mA guardrail cascade driver (Chinese, maker not named); datasheet4u mirror
+electrical:
+  output_voltage: 40V
+  supply_voltage: 4.5-5.5V
+  max_current: 25mA
+  max_current_notes: At least 25 mA per output; recommended 25-35 mA, generally kept under 30 mA
+  current_programmable: false
+other_links:
+  - https://datasheet4u.com/datasheets/ETC/UCS6909/905173
+physical:
+  packages:
+    - DIP-16
+sources:
+  data.type:
+    url: https://datasheet4u.com/pdf/905173/UCS6909.pdf
+    retrieved: '2026-11-18'
+    notes: '基本应用时序: 32-bit 0 start frame, then per point a start bit 1 plus 5-bit R, G, B, MSB first on the clock rising edge, then N extra clocks: the LPD6803 frame. SanDevices and Falcon list it as LPD6803-equivalent.'
+  data.channels:
+    url: https://datasheet4u.com/pdf/905173/UCS6909.pdf
+    retrieved: '2026-11-18'
+    notes: "'UCS6909 是一款有 9 路输出（3 个像素点）' (9 outputs, 3 pixels); pins R1-R3, G1-G3, B1-B3"
+  data.pixel_size_bits:
+    url: https://datasheet4u.com/pdf/905173/UCS6909.pdf
+    retrieved: '2026-11-18'
+    notes: '1 start bit + 3 x 5-bit gray per point (bit15 to bit0)'
+  color.channel_bits:
+    url: https://datasheet4u.com/pdf/905173/UCS6909.pdf
+    retrieved: '2026-11-18'
+    notes: "'直接输入灰度数据，经内部逻辑调制成带反伽码校正的 256 级输出' (5-bit input, gamma-corrected to 256 output levels per a lookup table)"
+  data.clocked:
+    url: http://sandevices.com/wp-content/uploads/2017/11/E682_Operating_Manual.pdf
+    retrieved: '2026-11-18'
+    notes: "E682 manual, 'Full Pixel Type List': LPD6803 also equivalent to D705, LPD1101, UCS6909, UCS6912. Falcon's PixelTypes page agrees (LPD6803 type, 4 wires)."
+technical_notes:
+  - 'Pins: VDD, DI, CKI, CKO, DO, two GND and nine outputs (DIP16); clock and data are regenerated for the next chip'
+  - No maker is named in the datasheet. The 2012 T-1000S controller manual (https://www.nikom.biz/pdf/A404013.pdf) lists UCS6909 in both its LPD6803 group and its 32-gray-level UCS group (with UCS6912, UCS7009, UCS5903)

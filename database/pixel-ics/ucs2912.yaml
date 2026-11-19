@@ -1,0 +1,72 @@
+name: UCS2912
+status: active
+creator: Lianxinke Microelectronics
+notes: 12-channel member of the UCS2903 family, four RGB pixels per IC
+aliases:
+  - UCS2912S
+color:
+  channel_bits: 8
+  pwm_frequency: 1.8kHz
+  pwm_frequency_notes: Maker table (UCS2912S) gives 1.8kHz port refresh; Advatek lists 1600Hz
+data:
+  type: UCS1903
+  clocked: false
+  channels: 12
+  bitrate: 800kHz
+  backup_line: false
+electrical:
+  output_voltage: 30V
+  supply_voltage: 5V
+  max_current: 17mA
+  max_current_notes: Constant current, 17mA default and maximum, +/-5% between chips
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ucs2912
+physical:
+  packages:
+    - SOP-16
+related:
+  - type: variant
+    ref: pixel-ics/ucs2903
+    notes: 12-channel version of the UCS2903
+    source:
+      url: http://szucs.cn/page136
+      retrieved: '2026-11-18'
+      notes: Maker product table, Shenzhen Lianxinke Microelectronics (深圳联芯科微电子, www.szucs.cn), 256-level single-wire cascade IC table. UCS2903B (3 ch), UCS2904B (4 ch), UCS2909S (6/9 ch) and UCS2912S (12 ch) share the 1.8kHz, 17mA, 30V, 800K, industrial-grade spec.
+  - type: variant
+    ref: pixel-ics/ucs1912
+    notes: Constant-current version of the constant-voltage UCS1912 (UCS1912BS); same 12 channels, 1.8 kHz and 800K
+    source:
+      url: http://szucs.cn/page136
+      retrieved: '2026-11-18'
+      notes: "Maker's 256-level single-wire table: UCS1912BS (12 ch, constant voltage, 50 mA) and UCS2912S (12 ch, constant current 17 mA), both 1.8 kHz, 800K, SOP16"
+sources:
+  status:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: UCS2912S is in the maker's current product table
+  aliases:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: UCS2912S is the orderable part in the maker's current table
+  creator:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: "Maker product table (深圳联芯科微电子有限公司); Advatek: 'This pixel protocol was designed by Lianxinke in China'"
+  data.type:
+    url: http://szucs.cn/page148
+    retrieved: '2026-11-18'
+    notes: "Maker's DMX512 forwarding-IC table: UCS512C0/UCS512EO forward to '单线256级灰度：19系列，29系列' (single-wire 256-level grayscale, 19 series and 29 series), i.e. one protocol for the UCS19xx/29xx parts. No UCS2912 datasheet was found online."
+  data.channels:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: 'UCS2912S row: 通道数 (channels) 12, 端口刷新率 1.8KHz, 恒流 (constant current), ±5%, default 17mA, max 17mA, 耐压 30V, 800K, 256 levels, 工业级 (industrial), SOP16'
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2912
+    retrieved: '2026-11-18'
+    notes: "'No redundancy in data'"
+  electrical.supply_voltage:
+    url: https://www.advateklighting.com/pixel-protocols/ucs2912
+    retrieved: '2026-11-18'
+    notes: "Advatek 'Input Voltage 5V', 'Output Pixel Voltage 5 - 24V'"
+technical_notes:
+  - The maker's current part number is UCS2912S; its UCS1912BS is a 12-channel constant-voltage (not constant-current) part in the same SOP-16 package.

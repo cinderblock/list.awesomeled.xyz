@@ -1,0 +1,73 @@
+name: WS2818
+status: discontinued
+creator: WorldSemi
+notes: Original 12V/24V dual-signal WS2818, superseded by WS2818B
+color:
+  channel_bits: 8
+  pwm_frequency: 2.0kHz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: https://www.superlightingled.com/PDF/WS2818.pdf # WorldSemi WS2818 (English, undated, no maker imprint); Superlighting LED copy, never on world-semi.com
+  sources:
+    - url: https://signliteled.com/wp-content/uploads/2024/08/WS2818-Datasheet.pdf
+      host: community
+      notes: Signlite LED copy, same text
+    - url: https://media.ledyi.com/ws2818-datasheet_d2b58ef630a98842eb8fd2112229fe3a11649bbd97c4ec85a6539ec1bbd49faa.pdf
+      host: community
+      notes: LEDYi copy, same text
+  discrepancies:
+    - "The 24-bit data table is drawn R7-R0, G7-G0, B7-B0, but the note under it says 'Data transmit in order of GRB'"
+electrical:
+  supply_voltage: 5V
+  supply_voltage_notes: Built-in regulator; VDD is fed through one resistor from the 12V or 24V supply. Electrical characteristics are given at VDD 4.5-5.5V
+  max_current: 18.5mA
+  max_current_notes: Constant-current outputs, 17.5-19.5mA (IOL)
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ws2818
+physical:
+  packages:
+    - SOP-8
+    - DIP-8
+    - MSOP-8
+related:
+  - type: replacement
+    ref: pixel-ics/ws2818b
+    notes: In 2017 WorldSemi split the WS2818 by voltage into WS2818A (5V), WS2818B (12V) and WS2818C (24V); WS2818B added 24V applications in 2019 and is the one still sold
+    source:
+      url: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+      retrieved: '2026-11-18'
+      notes: "WS2818B datasheet V1.5 revision log: 'V1.0 ... New ... 20170523', 'V1.3 ... Modify the RGB port withstand voltage and add 24V applications ... 20190906'. The 2017 WS2818A/WS2818C product pages (archived world-semi.com details-105-4.html, WS2818C.html) give 'DC5V' and 'DC24V'; the current catalog lists WS2818B only."
+sources:
+  status:
+    url: https://www.world-semi.com/products-led-driver-ic.html
+    retrieved: '2026-11-18'
+    notes: "WorldSemi's current driver-IC catalog lists the 3-channel RGB parts as 'WS2801 · WS2811 · WS2808 · WS2818B'. Its 2017 product list (archived WS2818C page, https://web.archive.org/web/20171214195753/http://www.world-semi.com:80/technology/WS2818C.html) already showed WS2818A/B/C/M and no plain WS2818."
+  creator:
+    url: https://web.archive.org/web/20160403050153/http://www.world-semi.com:80/LEDqudongIC/WS2811/WS2818/
+    retrieved: '2026-11-18'
+    notes: "WorldSemi's 2016 site (Shenzhen Huacaiwei / Worldsemi) lists WS2818 under LED driver ICs; Advatek: 'This pixel protocol was designed by World Semi in China'"
+  data.type:
+    url: https://www.superlightingled.com/PDF/WS2818.pdf
+    retrieved: '2026-11-18'
+    notes: "'Single-line Return-to-Zero communication protocol', 24 bits per chip, 'Send data at speeds of 800Kbps'; T0H 220-480ns, T1H 750ns-2us, reset 300us or more"
+  data.backup_line:
+    url: https://www.superlightingled.com/PDF/WS2818.pdf
+    retrieved: '2026-11-18'
+    notes: "'it adopts dual signal transmission ... The user can select the first chip DIN/BIN as the control signal input pin'; pin 7 BIN 'Backup control data input'"
+  color.pwm_frequency:
+    url: https://www.superlightingled.com/PDF/WS2818.pdf
+    retrieved: '2026-11-18'
+    notes: "'the refresh frequency reaches to 2KHz/s'; Advatek lists 2000Hz"
+  physical.packages:
+    url: https://www.superlightingled.com/PDF/WS2818.pdf
+    retrieved: '2026-11-18'
+    notes: "'SOP8, DIP8 and MSOP8 packaging available'"
+technical_notes:
+  - "Features: '12V/24V available'. The WS2818A/WS2818B datasheets that followed shortened the timing (T0H 220-380ns, T1H 580ns-1.6us) and the reset (over 280us)."
+  - When BIN is the first chip's input, the controller sends 24 more bits than on DIN, so both inputs drive the same number of pixels.

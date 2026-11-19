@@ -1,0 +1,82 @@
+name: SM16714
+status: active
+creator: Shenzhen Sunmoon Microelectronics
+notes: RGBW driver with 5-bit current gain per channel, set over the data line
+aliases:
+  - SM16714P
+color:
+  channel_bits: 8
+  pwm_frequency: 1.0kHz
+data:
+  type: SM16714
+  clocked: false
+  channels: 4
+  bitrate: 800kHz
+  backup_line: false
+datasheet:
+  url: https://www.chinaasic.com/websiteManage/product/202504021552422564.pdf # Sunmoon SM16714PHT product brief, English V1.0 (1 page; full datasheet not public)
+  sources:
+    - url: https://www.chinaasic.com/websiteManage/product/202504021552382564.pdf
+      host: manufacturer
+      notes: SM16714PHT brief, Chinese edition
+    - url: https://www.chinaasic.com/websiteManage/product/202504021623312564.pdf
+      host: manufacturer
+      notes: SM16714TH (SOT23-8) brief, English V1.0
+electrical:
+  output_voltage: 26V
+  output_voltage_notes: Port withstand voltage of the current SM16714PHT/TH; Advatek lists a 5-15V output pixel voltage for the SM16714
+  supply_voltage: 5V
+  supply_voltage_notes: Built-in clamp; supports a 5-24V input supply
+  max_current: 40mA
+  max_current_notes: 2.5-40mA per channel in 32 steps of about 1.2mA (5-bit current gain)
+  current_programmable: true
+  current_range: 2.5-40mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/sm16714
+physical:
+  packages:
+    - SOP-8
+    - SOT-23-8
+sources:
+  status:
+    url: https://www.chinaasic.com/en/chipDetails/detail_521.html
+    retrieved: '2026-11-18'
+    notes: Sunmoon product pages for the SOP8 SM16714PHT and the SOT23-8 SM16714TH (detail_522); both briefs dated 2025
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/sm16714
+    retrieved: '2026-11-18'
+    notes: "'This pixel protocol was designed by Sunmoon Microelectronics in China'; the current parts are on Sunmoon's own site (chinaasic.com)"
+  aliases:
+    url: https://www.advateklighting.com/pixel-protocols/sm16714
+    retrieved: '2026-11-18'
+    notes: "'SM16714, also known as SM16714P'"
+  data.type:
+    - url: https://www.chinaasic.com/websiteManage/product/202504021552422564.pdf
+      retrieved: '2026-11-18'
+      notes: "New label. SM16714PHT brief: 'Unipolar return-to-zero code protocol', 800kbps, 256-level output and 'OUT R/G/B/W each 5bits current gain adjustment bit'. The SOP8 pinout has no current-setting pin, so the gain travels in the data stream and the frame is not plain 4chWS2811/12."
+    - url: https://www.advateklighting.com/pixel-protocols/sm16714
+      retrieved: '2026-11-18'
+      notes: "'Use the 5-bit current control per color ... This individual current control can be set when configuring your PixLite Mk3 controller'"
+    - url: https://wled.discourse.group/t/sm16714-pixel-ic/9794
+      retrieved: '2026-11-18'
+      notes: "WLED forum user reading the datasheet (Oct 2024): 'After all RGBW data has been sent, 20 Bits of current adjustment is sent' (secondary; frame layout not in the public brief)"
+  data.channels:
+    url: https://www.chinaasic.com/websiteManage/product/202504021552422564.pdf
+    retrieved: '2026-11-18'
+    notes: "'SM16714PHT is a single-line transmission and 4-channel output LED driver'"
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/sm16714
+    retrieved: '2026-11-18'
+    notes: "'No redundancy in data'"
+  color.pwm_frequency:
+    url: https://www.advateklighting.com/pixel-protocols/sm16714
+    retrieved: '2026-11-18'
+    notes: "Advatek 'PWM Rate 1000Hz'; the Sunmoon briefs give no PWM frequency"
+  electrical.max_current:
+    url: https://www.chinaasic.com/websiteManage/product/202504021552422564.pdf
+    retrieved: '2026-11-18'
+    notes: "'SM16714PHT can set the current from2.5mA to 40mA through the built-in current gain adjustment function, each of OUT R/ G/ B/ W has 32-level current gain (each adjustment step of current gain is 1.2mA)'"
+  physical.packages:
+    url: https://www.chinaasic.com/websiteManage/product/202504021623312564.pdf
+    retrieved: '2026-11-18'
+    notes: "SM16714PHT brief: 'Package: SOP8'; SM16714TH brief: 'Package: SOT23-8'"

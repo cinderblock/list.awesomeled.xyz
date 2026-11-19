@@ -1,0 +1,87 @@
+name: SM16804
+status: active
+creator: Shenzhen Sunmoon Microelectronics
+notes: RGBW version of the SM16803 (gamma-corrected 16-bit output, 4-bit current gain, 4kHz PWM)
+color:
+  channel_bits: 8
+  pwm_frequency: 4.0kHz
+  pwm_frequency_notes: "Patented SM-PWM, 'refresh rate is up to 4KHz' (fPWM 4KHz); the 8-bit input is gamma-corrected to 65,536 output levels"
+data:
+  type: 4chSM16803
+  clocked: false
+  channels: 4
+  bitrate: 800kHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://www.chinaasic.com/websiteManage/product/20230523111738341.pdf # Sunmoon SM16804PB product brief, English IBSZZIV1.1 (1 page)
+  sources:
+    - url: http://www.jad-leds.com/web/userfiles/download/SM16804PB-Datasheet.pdf
+      host: community
+      notes: Full SM16804PB datasheet IBSZZIV1.1 (ratings, timing, frame format), copy watermarked by JIAANDA, an LED strip maker
+    - url: https://www.chinaasic.com/websiteManage/product/20201228163028065.pdf
+      host: manufacturer
+      notes: SM16804PB brief, Chinese edition
+    - url: https://www.chinaasic.com/websiteManage/product/20230523114051341.pdf
+      host: manufacturer
+      notes: SM16804EB (ESOP8) brief, English
+electrical:
+  output_voltage: 26V
+  supply_voltage: 5V
+  supply_voltage_notes: Built-in clamp (4.8-5.5V, 5.2V typical); supports a 5-24V input supply through a series resistor
+  max_current: 19mA
+  max_current_notes: 'SM16804PB: 19mA default, 1.8-19mA in 16 steps via the 4-bit current gain. The ESOP8 SM16804EB (1.5-19mA) adds an REXT pin for up to 60mA.'
+  current_programmable: true
+  current_range: 1.8-19mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/sm16804
+physical:
+  packages:
+    - SOP-8
+    - ESOP-8
+related:
+  - type: variant
+    ref: pixel-ics/sm16803
+    notes: RGBW (4-channel) version of the SM16803
+    source:
+      url: https://www.advateklighting.com/pixel-protocols/sm16804
+      retrieved: '2026-11-18'
+      notes: "'SM16804 is equipped with all the same features as its previous version, SM16803, but is dedicated to RGBW'"
+sources:
+  status:
+    url: https://www.chinaasic.com/en/chipDetails/detail_136.html
+    retrieved: '2026-11-18'
+    notes: Sunmoon product pages for the SOP8 SM16804PB and the ESOP8 SM16804EB (detail_138)
+  creator:
+    url: https://www.chinaasic.com/websiteManage/product/20230523111738341.pdf
+    retrieved: '2026-11-18'
+    notes: Sunmoon (chinaasic.com) SM16804PB brief
+  data.type:
+    - url: http://www.jad-leds.com/web/userfiles/download/SM16804PB-Datasheet.pdf
+      retrieved: '2026-11-18'
+      notes: "New label (4-channel SM16803 protocol). SM16804PB datasheet IBSZZIV1.1, Data Communication Protocol: single-polarity RZ code, T0H 0.3us / T1H 0.9us (+/-0.05us), reset at least 200us; 'Trst+ First chip 32bits data +Second chip 32bits data +......+ The N chip32bits data +16bits current gain +Trst', RGBW order, high bit first; the 16-bit gain word is 4 reserved bits then 4 bits each for R, G, B and W."
+    - url: https://www.advateklighting.com/pixel-protocols/sm16804
+      retrieved: '2026-11-18'
+      notes: "'SM16804 is equipped with all the same features as its previous version, SM16803, but is dedicated to RGBW'"
+  data.channels:
+    url: https://www.chinaasic.com/websiteManage/product/20230523111738341.pdf
+    retrieved: '2026-11-18'
+    notes: "'SM16804PB is a four-channel LED driver control chip'"
+  data.backup_line:
+    url: https://www.advateklighting.com/pixel-protocols/sm16804
+    retrieved: '2026-11-18'
+    notes: "'No redundancy in data'"
+  color.channel_bits:
+    url: https://www.advateklighting.com/pixel-protocols/sm16804
+    retrieved: '2026-11-18'
+    notes: "'Color Resolution 8 Bits', 'Built-in Gamma Correction: Enhanced to 16 Bits (+8 Bits)'; the datasheet frame carries 8 bits per channel"
+  electrical.max_current:
+    url: https://www.chinaasic.com/websiteManage/product/20230523111738341.pdf
+    retrieved: '2026-11-18'
+    notes: "'The default output current of SM16804PB is 19mA, and the current can be set to 1.8mA~19mA through the current gain adjustment function, a total of 16 current gain levels'; SM16804EB brief: 1.5mA~19mA and 'the maximum current of OUT R/G/B can also be set to 60mA through the external resistor of the REXT port'"
+  physical.packages:
+    url: https://www.chinaasic.com/en/chipDetails/detail_138.html
+    retrieved: '2026-11-18'
+    notes: "Sunmoon's product table lists the SM16804PB as SOP8 and the SM16804EB as ESOP8; the EB brief's text says 'Package: SOP8', but its pin diagram shows an exposed GND pad"
+technical_notes:
+  - Advatek lists a 5-30V output pixel voltage.

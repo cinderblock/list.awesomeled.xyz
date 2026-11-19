@@ -1,0 +1,61 @@
+name: TM1934
+creator: Titan Micro Electronics
+notes: RGB driver with a backup data input (FDI) that keeps the string running past a failed chip
+color:
+  channel_bits: 8
+  pwm_frequency: 666Hz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  bitrate_notes: Works with 0/1-code periods from 1.25 us (800 kHz) to 2.5 us (400 kHz)
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: https://media.ledyi.com/tm1934-datasheet_d2e29278d772af174e8a9b25dba5c712669a8c86abf6f7c94af1c2e27edf8ff5.pdf # Titan Micro TM1934 V1.0 (English); LEDYi copy, no maker-hosted or Chinese edition found
+  discrepancies:
+    - "Features and the refresh-rate note still mention TM1914-style mode-setting commands (normal, DI and FDI modes; 'omitting C1, C2'), but the frame and controller data structures show only D1...Dn plus Reset and there is no mode-setting section"
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1934-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
+electrical:
+  output_voltage: 24V
+  output_voltage_notes: OUT port rating; absolute maximum 32 V
+  supply_voltage: 5V
+  supply_voltage_notes: VDD 4.5-6.5 V; built-in 5 V regulator, so 6-24 V supplies feed VDD through a series resistor (1.5K at 12 V, 2.4K at 24 V)
+  max_current: 15mA
+  max_current_notes: Fixed constant current, 14-16 mA
+  current_programmable: false
+  quiescent_current: 1.2mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/tm1934
+  - https://www.enttec.com/pixel-protocols/TM1934
+physical:
+  packages:
+    - SOP-8
+    - SOT-23-8
+sources:
+  data.type:
+    url: https://media.ledyi.com/tm1934-datasheet_d2e29278d772af174e8a9b25dba5c712669a8c86abf6f7c94af1c2e27edf8ff5.pdf
+    retrieved: '2026-11-18'
+    notes: 'TM1934 V1.0: 24-bit R G B packets MSB first, frame D1...Dn + Reset (>200 us), T0H 360 ns, T1H 720 ns, 1.25 us bit. Plain WS2811 framing plus a backup input, labelled like WS2813/WS2815.'
+  data.backup_line:
+    url: https://media.ledyi.com/tm1934-datasheet_d2e29278d772af174e8a9b25dba5c712669a8c86abf6f7c94af1c2e27edf8ff5.pdf
+    retrieved: '2026-11-18'
+    notes: "Pin table: FDI 'Backup data input'; DO forwards data received on DI or FDI"
+  data.channels:
+    url: https://media.ledyi.com/tm1934-datasheet_d2e29278d772af174e8a9b25dba5c712669a8c86abf6f7c94af1c2e27edf8ff5.pdf
+    retrieved: '2026-11-18'
+    notes: "'Dedicated Circuit for 3-channel LED Constant Current Drive TM1934' (OUTR, OUTG, OUTB)"
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/tm1934
+    retrieved: '2026-11-18'
+    notes: "'This pixel protocol was designed by Titan Micro Electronics in China'; the datasheet text is Titan Micro's"
+  physical.packages:
+    url: https://media.ledyi.com/tm1934-datasheet_d2e29278d772af174e8a9b25dba5c712669a8c86abf6f7c94af1c2e27edf8ff5.pdf
+    retrieved: '2026-11-18'
+    notes: "Features: 'Packaging mode: SOP8 and SOT23-8'"
+technical_notes:
+  - 'Test modes: the chip can be locked to DI-only or FDI-only input to check wiring during aging and installation (datasheet, Functions of different operating modes)'

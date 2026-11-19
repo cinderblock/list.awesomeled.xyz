@@ -1,0 +1,53 @@
+name: UCS2909
+status: active
+creator: Lianxinke Microelectronics
+notes: Constant-current (17 mA) driver with 6 or 9 outputs as RGB groups, the current-regulated sibling of the UCS1909
+aliases:
+  - UCS2909S
+color:
+  channel_bits: 8
+  pwm_frequency: 1.8kHz
+data:
+  type: UCS1903
+  clocked: false
+  channels: 9
+  bitrate: 800kHz
+electrical:
+  output_voltage: 30V
+  max_current: 17mA
+  max_current_notes: Fixed constant current (default and maximum 17 mA), ±5% between chips
+  current_programmable: false
+other_links:
+  - http://szucs.cn/page136
+physical:
+  packages:
+    - SOP-14
+related:
+  - type: variant
+    ref: pixel-ics/ucs1909
+    notes: Constant-current version of the constant-voltage UCS1909 (UCS1909BS); same 6/9 channels, 800K, 1.8 kHz and SOP14
+    source:
+      url: http://szucs.cn/page136
+      retrieved: '2026-11-18'
+      notes: Maker product table, Shenzhen Lianxinke Microelectronics (www.szucs.cn), 256-level single-wire cascade IC table (UCS1909BS and UCS2909S rows)
+sources:
+  status:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: "Maker's current 256-level single-wire cascade IC table lists UCS2909S: 6/9 ch, 1.8 kHz, constant current ±5%, 17 mA default and max, 30 V, 800K, industrial grade, SOP14"
+  data.type:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: 'Listed with UCS1903B, UCS1909BS and UCS1912BS (all 800K, 256 levels); Falcon files UCS2909 under its WS2811 type. No datasheet found, so the frame layout is not confirmed.'
+  data.channels:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: Maker table, channels '6/9'
+  creator:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: 'Shenzhen Lianxinke Microelectronics (深圳联芯科微电子, www.szucs.cn) product table'
+  aliases:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: UCS2909S is the orderable part in the maker's current table

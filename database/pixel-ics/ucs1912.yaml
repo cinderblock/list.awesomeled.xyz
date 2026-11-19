@@ -1,0 +1,61 @@
+name: UCS1912
+status: active
+creator: Lianxinke Microelectronics
+notes: Twelve outputs driving four RGB groups over the UCS1903 protocol, for 16-segment guardrail tubes
+aliases:
+  - UCS1912B
+  - UCS1912BS
+color:
+  channel_bits: 8
+  pwm_frequency: 1.8kHz
+data:
+  type: UCS1903
+  clocked: false
+  channels: 12
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: false
+electrical:
+  output_voltage: 30V
+  supply_voltage: 5V
+  supply_voltage_notes: VDD has a built-in 5 V regulator; 12 or 24 V supplies feed it through a series resistor (1K at 12 V, 3K at 24 V)
+  max_current: 50mA
+  max_current_notes: UCS1912BS outputs are constant-voltage (no current regulation; LED resistors set the current)
+other_links:
+  - http://szucs.cn/page165?article_id=19
+  - http://szucs.cn/page136
+physical:
+  packages:
+    - SOP-16
+sources:
+  status:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: "Maker's current 256-level single-wire cascade IC table lists UCS1912BS: 12 ch, 1.8 kHz, constant voltage, 50 mA max, 30 V, 800K, SOP16"
+  data.type:
+    url: http://szucs.cn/page165?article_id=19
+    retrieved: '2026-11-18'
+    notes: "Maker note 'UCS1912B在十六段护栏管上的应用': single wire, 800K/s, 256 levels, 1.8 kHz scan, 1024+ points at 30 frames/s. Same table and rate as UCS1903B; Falcon files UCS1912 under its WS2811 type."
+  data.channels:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: 'Maker table: UCS1912BS, 12 channels. Pinout figure in the maker note shows R1-R4, G1-G4, B1-B4 (four RGB groups), DIN, DOUT.'
+  data.pixel_size_bits:
+    url: http://szucs.cn/page165?article_id=19
+    retrieved: '2026-11-18'
+    notes: 'Derived: 800K/s and at least 1024 points at 30 frames/s leaves about 26 bits per point, i.e. one 24-bit RGB group per point (four per chip). No datasheet found.'
+  creator:
+    url: http://szucs.cn/page165?article_id=19
+    retrieved: '2026-11-18'
+    notes: 'Application note on the Shenzhen Lianxinke Microelectronics site (深圳联芯科微电子, www.szucs.cn)'
+  aliases:
+    url: http://szucs.cn/page136
+    retrieved: '2026-11-18'
+    notes: UCS1912BS in the current product table; UCS1912B in the maker's application note and pinout figure
+  electrical.output_voltage:
+    url: http://szucs.cn/page165?article_id=19
+    retrieved: '2026-11-18'
+    notes: "'输出端口耐压大于 30V' (output ports withstand more than 30 V); maker table 30 V"
+technical_notes:
+  - Power-on self-test lights the LEDs blue (maker note)
+  - 'Put at least 120 ohms in series with DIN and DOUT at 24 V, 68 ohms at 12 V (maker note)'

@@ -1,0 +1,69 @@
+name: TM1903
+status: active
+creator: Titan Micro Electronics
+color:
+  channel_bits: 8
+  pwm_frequency: 666Hz
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  bitrate_notes: Works with 0/1-code periods from 1.25 us (800 kHz) to 2.5 us (400 kHz)
+  pixel_size_bits: 24
+  backup_line: false
+datasheet:
+  url: https://media.ledyi.com/tm1903-datasheet_102d51ddfa211a8055eed209fab8fb5a4145d05f6a27dbc5880a3b8e7a2a3417.pdf # Titan Micro TM1903 V1.2 (English); LEDYi copy, not on titanmec.com
+  discrepancies:
+    - The V1.2 English 'current expansion' section says each OUT port sinks 18 mA (54 mA with all three shorted), but Features and the electrical table give a fixed 14 mA
+  sources:
+    - url: https://www.lcsc.com/datasheet/C5352786.pdf
+      host: distributor
+      notes: LCSC C5352786, Chinese V1.3 (adds the SOT23-8 package)
+    - url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1903_V1.0.pdf
+      host: community
+      notes: Lumikit copy, Chinese V1.0
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1903-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
+electrical:
+  output_voltage: 24V
+  output_voltage_notes: OUT port rating; absolute maximum 30 V
+  supply_voltage: 5V
+  supply_voltage_notes: VDD 4.5-6.5 V; built-in 5 V regulator, so 6-24 V supplies feed VDD through a series resistor
+  max_current: 14mA
+  max_current_notes: Fixed constant current, 13.3-14.7 mA
+  current_programmable: false
+  quiescent_current: 1.2mA
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/tm1903
+  - https://www.enttec.com/pixel-protocols/TM1903
+physical:
+  packages:
+    - SOP-8
+    - SOT-23-8
+sources:
+  status:
+    url: https://www.lcsc.com/product-detail/C5352786.html
+    retrieved: '2026-11-18'
+    notes: 'TM1903 in stock at LCSC (7,875 pcs), normal lifecycle'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C5352786.pdf
+    retrieved: '2026-11-18'
+    notes: 'Titan Micro TM1903 datasheet V1.3 (LCSC C5352786), 时序特性 + 功能说明: T0H 360 ns (max 410), T1H 720 ns (min 650), 1.25 us bit, reset 200-20000 us, 24 bits R G B MSB first. Same framing and timing as WS2811.'
+  data.channels:
+    url: https://www.lcsc.com/datasheet/C5352786.pdf
+    retrieved: '2026-11-18'
+    notes: "'3 通道 LED 恒流驱动专用电路 TM1903' (OUTR, OUTG, OUTB)"
+  creator:
+    url: https://www.lcsc.com/datasheet/C5352786.pdf
+    retrieved: '2026-11-18'
+    notes: '©Titan Micro Electronics, www.titanmec.com on every page'
+  physical.packages:
+    url: https://www.lcsc.com/datasheet/C5352786.pdf
+    retrieved: '2026-11-18'
+    notes: "V1.3 Features: '封装形式：SOP8、SOT23-8' (V1.0 and V1.2 list SOP8 only)"
+  color.pwm_frequency:
+    url: https://www.lcsc.com/datasheet/C5352786.pdf
+    retrieved: '2026-11-18'
+    notes: 开关特性 table, OUT PWM output frequency 666 Hz typical

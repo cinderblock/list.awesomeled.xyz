@@ -1,0 +1,78 @@
+name: UCS5603
+creator: Lianxinke Microelectronics
+notes: 12-bit RGB driver with a backup data input and per-channel current setting
+aliases:
+  - UCS5603A
+  - UCS5603B
+color:
+  channel_bits: 12
+  pwm_frequency: 2kHz
+  pwm_frequency_notes: Datasheet 'port refresh rate is 2K'; Advatek and ENTTEC list 1000 Hz
+data:
+  type: UCS5603
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  pixel_size_bits: 36
+  backup_line: true
+datasheet:
+  url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf # UCS5603 VER1.1 2017-04-05 (English); LEDYi copy, maker (szucs.cn) hosts no PDFs
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS5603-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
+electrical:
+  output_voltage: 30V
+  supply_voltage: 2.5-6V
+  supply_voltage_notes: VDD has a built-in 5 V regulator (series resistor from 12 or 24 V); the chip keeps working down to 2.5 V
+  max_current: 48mA
+  max_current_notes: UCS5603B; the UCS5603A tops out at 24 mA
+  current_programmable: true
+  current_range: 1.5-24mA (UCS5603A) or 3-48mA (UCS5603B), 16 steps per channel
+other_links:
+  - https://www.advateklighting.com/pixel-protocols/ucs5603
+  - https://www.enttec.com/pixel-protocols/UCS5603
+physical:
+  packages:
+    - SOP-8
+related:
+  - type: related
+    ref: pixel-ics/ucs8903
+    notes: Advatek calls the UCS5603 very similar to the UCS8903 but built on 12-bit color data
+    source:
+      url: https://www.advateklighting.com/pixel-protocols/ucs5603
+      retrieved: '2026-11-18'
+      notes: Overview paragraph
+sources:
+  data.type:
+    url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf
+    retrieved: '2026-11-18'
+    notes: "New label: no existing family is 12-bit RGB with a dual-input bad-point resume. Datasheet: 4096 gray, 800K/s, DIN + FDIN. Falcon's PixelTypes table files UCS5603 under its 'SJ1221' type (3 ch x 12 bit)."
+  data.pixel_size_bits:
+    url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf
+    retrieved: '2026-11-18'
+    notes: 'Derived from the datasheet cascade figures: at 800K/s, 740 points at 30 frames/s and 370 at 60 frames/s = 36 bits per point (3 x 12). The frame layout itself is not in the datasheet.'
+  data.channels:
+    url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf
+    retrieved: '2026-11-18'
+    notes: "Title '3-Channel 4096 gray scale bad point resume LED driver IC UCS5603' (OUTR, OUTG, OUTB)"
+  data.backup_line:
+    url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf
+    retrieved: '2026-11-18'
+    notes: "Pin 7 FDIN 'Auxiliary Display Data Input'; dual-channel bad point resume"
+  color.pwm_frequency:
+    url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf
+    retrieved: '2026-11-18'
+    notes: "Features: 'The RGB output port can reach 4096 gray levels, and the port refresh rate is 2K'"
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/ucs5603
+    retrieved: '2026-11-18'
+    notes: "'This pixel protocol was designed by Lianxinke in China' (ENTTEC: 'Manufacturer: Shenzhen Ucs')"
+  aliases:
+    url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf
+    retrieved: '2026-11-18'
+    notes: 'Datasheet current grades: UCS5603A (1.5-24 mA) and UCS5603B (3-48 mA). MADRIX NEBULA lists UCS5603A by name.'
+technical_notes:
+  - 'Per-channel current is set in software in 16 steps: UCS5603A 1.5-24 mA (power-on 18 mA), UCS5603B 3-48 mA (power-on 36 mA)'
+  - DIN and FDIN are decoded in parallel and the chip switches to the healthy input; the controller's FDO port feeds the first chip's FDIN
+  - Powers up with R, G and B at 50% gray

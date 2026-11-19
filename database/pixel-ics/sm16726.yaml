@@ -1,0 +1,65 @@
+name: SM16726
+status: active
+creator: Shenzhen Sunmoon Microelectronics
+notes: Two-wire (clock + data) RGB driver with online white-balance current adjustment
+aliases:
+  - SM16726P
+color:
+  channel_bits: 8
+  pwm_frequency: 4kHz
+data:
+  type: SM16716
+  clocked: true
+  channels: 3
+  bitrate: 30MHz
+electrical:
+  output_voltage: 26V
+  output_voltage_notes: "Product page 'OUT R/G/B 端口耐压 26V 以上' (26 V or more); the 2023 selection guide lists 30 V for SM16726P"
+  supply_voltage: 5V
+  supply_voltage_notes: Built-in 5 V regulator; external supply 5-24 V
+  current_programmable: true
+  current_range: 18-60mA
+other_links:
+  - https://www.chinaasic.com/chipDetails/detail_118.html
+physical:
+  packages:
+    - SOP-14
+    - ESOP-8
+sources:
+  status:
+    url: https://www.chinaasic.com/chipDetails/detail_118.html
+    retrieved: '2026-11-18'
+    notes: Listed on Sunmoon's site under LED智能景观驱动芯片 > 串联驱动; the 2023 Q1 selection guide also lists SM16726P
+  data.type:
+    url: https://pixelcontroller.com/store/PixelTypes.html
+    retrieved: '2026-11-18'
+    notes: "Falcon's pixel-type table: type SM16716 (3 ch, 8 bit, 4 wires), alternatives SM16716 and SM16726. Sunmoon: 双线三通道, 时钟加数据信号协议 (two-wire, clock + data)."
+  data.channels:
+    url: https://www.chinaasic.com/chipDetails/detail_118.html
+    retrieved: '2026-11-18'
+    notes: "'SM16726是双线三通道LED驱动控制专用芯片' (two-wire, three-channel)"
+  data.bitrate:
+    url: https://www.chinaasic.com/chipDetails/detail_118.html
+    retrieved: '2026-11-18'
+    notes: "'双线自整形数据传输，速率达 30MHz'; more than 1024 points at 30 Hz refresh"
+  creator:
+    url: https://www.chinaasic.com/chipDetails/detail_118.html
+    retrieved: '2026-11-18'
+    notes: Product page on chinaasic.com, Shenzhen Sunmoon Microelectronics (明微电子)
+  aliases:
+    url: https://www.chinaasic.com/images/technology/%E6%98%8E%E5%BE%AE%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%972023%20Q1-V1.1.pdf
+    retrieved: '2026-11-18'
+    notes: 'Sunmoon 2023 Q1 selection guide, 双线串联驱动 table: SM16726P, IIC, 3 ch, 256 levels, 30 V, 18-60 mA, 4 kHz, powers up white, SOP14'
+  color.pwm_frequency:
+    url: https://www.chinaasic.com/images/technology/%E6%98%8E%E5%BE%AE%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%972023%20Q1-V1.1.pdf
+    retrieved: '2026-11-18'
+    notes: Selection guide, SM16726P Fosc_out 4 KHz
+  physical.packages:
+    url: https://www.chinaasic.com/chipDetails/detail_118.html
+    retrieved: '2026-11-18'
+    notes: "'封装形式：SOP14，ESOP8'"
+technical_notes:
+  - R, G and B LED current can be adjusted online for white balance; constant-current error under ±5% (Sunmoon product page)
+  - Reverse-polarity protection against swapped power and ground; HBM ESD above 8 kV (Sunmoon product page)
+  - Powers up white (selection guide)
+  - "Sunmoon's product page links no datasheet; the frame layout is taken from Falcon's grouping with the SM16716"
