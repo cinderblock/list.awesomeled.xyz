@@ -33,3 +33,15 @@ software:
   works_with:
     - Android
     - iOS
+    - GrandMA 2/3
+    - MADRIX
+    - Mad Mapper
+    - Enttec LED Mapper
+    - Chamsys MagicQ
+    - Resolume Arena
+    - ArKaos
+sources:
+  software.works_with:
+    url: https://pixout.lighting/products/recorder/
+    retrieved: '2026-11-18'
+    notes: "Pixout ArtNet Recorder page: 'Compatibility: Works with your favourite tools' list and the FAQ 'Can Pixout accept ArtNet data from my controller (GrandMA3 /…"

@@ -17,9 +17,35 @@ outputs:
     max_per_output: 1365 # 2730 total single-wire / 2 outputs
   auxiliary:
     DMX512: 1 # on DMX variant models
+  protocols:
+    - WS2811
+    - UCS1903
+    - WS2812
+    - SK6812
+    - SK6812 RGBW
+    - SM16703
+    - GS8205
+    - WS2801
+    - LPD6803
+    - APA102
+    - APA 101
+    - SK9822
 data:
   fps: 30 # 15-30 FPS depending on pixel chip
 price: 199
+software:
+  works_with:
+    - Lumikit SHOW
+    - Madrix
+sources:
+  outputs.protocols:
+    url: https://www.lumikit.com.br/help.br/LumikitPixelBOXDMX(br).pdf
+    retrieved: '2026-11-18'
+    notes: Manual 'Controlador Lumikit PixelBOX com DMX', revision 5, 30/07/2019 (linked from https://lumikit.com.br/pixelbox), chapter 3 'Tabela referência de chips…
+  software.works_with:
+    url: https://www.lumikit.com.br/help.br/LumikitPixelBOXDMX(br).pdf
+    retrieved: '2026-11-18'
+    notes: Chapter 6 'Configuração no software Lumikit SHOW' (Lumikit's own show software
 technical_notes:
   - Up to 2730 single-wire pixels (1365 dual-wire) split across 2 output lines
   - Controls WS2801, WS2811, WS2812, WS2813, UCS1903, APA102 and others

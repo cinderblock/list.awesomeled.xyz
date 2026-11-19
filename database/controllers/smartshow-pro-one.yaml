@@ -8,21 +8,69 @@ creator:
 notes: Inbuilt Ethernet Switch, allows daisy chaining units
 inputs:
   physical:
-    Ethernet: true
-    Wi-Fi: true
+    Ethernet: Dual
   standalone: false
 outputs:
   count: 8
   connector:
     ref: mtsb-combicon
   pixels:
-    max_per_output: 680 # 5440 total / 8 outputs
+    max_per_output: 1020 # 8160 total / 8 outputs (768 RGBW per port)
   clocked: selectable
   driver:
     buffered: true
   auxiliary:
     DMX512: 4
+  protocols:
+    - GS8208
+    - SK6812GRB
+    - SK6812GRBW
+    - UCS2903
+    - UCS2904
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
+    - APA102
+    - HD107S
+    - NS107
+    - SK9822
+    - WS2801
 power:
   voltage:
     max: 24
 price: 300
+related:
+  - type: related
+    ref: controllers/netpixel-one
+    notes: SmartShow cut its range down to the Pro-ONE in 2023; like the NetPixel-ONE it takes 32 Art-Net / 28 sACN universes to 8 outputs
+    source:
+      url: https://smartshow.lighting/history/
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - Madrix
+    - Resolume
+    - MadMapper
+    - Chamsys MagicQ
+    - ELM
+    - Jinx
+    - XLights
+sources:
+  outputs.protocols:
+    url: https://smartshow.lighting/wp-content/uploads/2025/10/Pro-ONE-User-Guide-FW-V2.0.pdf
+    retrieved: '2026-11-18'
+    notes: "User Guide FW V2.0, 'Default Pixel Type': One-Wire and Two-Wire pixel options."
+  software.works_with:
+    url: https://smartshow.lighting/wp-content/uploads/2025/10/Pro-ONE-User-Guide-FW-V2.0.pdf
+    retrieved: '2026-11-18'
+    notes: Section 22 'Software Compatibility'.
+  inputs.physical:
+    url: https://smartshow.lighting/wp-content/uploads/2025/10/Pro-ONE-Brochure-DataSheet-V2.pdf
+    retrieved: '2026-11-18'
+    notes: "'Network 2 x RJ45 10/100 Network Ports, Auto MDIX'; no Wi-Fi"
+  outputs.pixels.max_per_output:
+    url: https://smartshow.lighting/product/smartshow-pro-one/
+    retrieved: '2026-11-18'
+    notes: "'Each Port can output up to 1020 RGB Pixels, or 768 RGBW Pixels'"

@@ -11,7 +11,7 @@ vendors:
 inputs:
   physical:
     Ethernet: Dual
-    DMX: XLR 3-pin
+    DMX512: XLR 3-pin
   standalone: true
 outputs:
   count: 4

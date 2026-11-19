@@ -23,7 +23,13 @@ outputs:
     max_per_output: 1020 # 8160 total / 8 outputs
   clocked: selectable # Single and Clock
   auxiliary:
-    DMX512: 1
+    DMX512: 4
+  protocols:
+    - WS2812B
+    - UCS1903
+    - SK6812
+    - GS8208
+    - WS2815
 power:
   voltage:
     min: 5
@@ -31,3 +37,21 @@ power:
 features:
   - PoE powered
 price: 450
+software:
+  works_with:
+    - Madrix
+    - Jinx
+    - Resolume
+sources:
+  outputs.protocols:
+    url: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+    retrieved: '2026-11-18'
+    notes: "Partial list only ('and more'). The same page adds WS2815: 'control the latest protocols from WS2815 to GS8208 as well as standards such as UCS1903 and SK6812,…"
+  software.works_with:
+    url: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+    retrieved: '2026-11-18'
+    notes: Section on Art-Net / sACN.
+  outputs.auxiliary.DMX512:
+    url: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+    retrieved: '2026-11-18'
+    notes: "'DMX Node Mode 4 x 512'"

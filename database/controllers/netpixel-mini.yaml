@@ -14,7 +14,34 @@ outputs:
     max_per_output: 680
   driver:
     buffered: true
+  protocols:
+    - WS281x
+    - UCS1903
+    - UCS290x
+    - TM1804
+    - SK6812
+    - GS8208
 power:
   voltage:
     max: 24
 price: 100
+related:
+  - type: related
+    ref: controllers/netpixel-one
+    notes: SmartShow NetPixel family sibling; single-output version
+    source:
+      url: https://smartshow.lighting/history/
+      retrieved: '2026-11-18'
+      notes: The archive page https://smartshow.lighting/archive/ lists the NetPixel-Quad, -ONE, -OCTO and -Mini guides together.
+software:
+  works_with:
+    - Jinx
+sources:
+  outputs.protocols:
+    url: https://smartshow.lighting/support-page/netpixel-mini/
+    retrieved: '2026-11-18'
+    notes: NetPixel-Mini User Guide (PDF served at this URL, linked from https://smartshow.lighting/archive/ 'Archived User Guides'), page 2.
+  software.works_with:
+    url: https://smartshow.lighting/support-page/netpixel-mini/
+    retrieved: '2026-11-18'
+    notes: "'Software Compatibility' and the 'Lets Animate !' Jinx walkthrough."

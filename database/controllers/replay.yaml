@@ -19,8 +19,19 @@ outputs:
     max_per_output: 680
   clocked: false # async (clockless) pixels only
   protocols:
+    - WS2811
     - WS2812
+    - WS2812b
+    - WS2813
+    - WS2815
+    - WS2818
     - SK6812
+    - UCS1903
+    - UCS1909
+    - UCS1912
+    - UCS2903
+    - TM1804
+    - TM1809
 power:
   voltage:
     max: 24
@@ -32,3 +43,12 @@ software:
   works_with:
     - xLights
     - Jinx
+sources:
+  outputs.protocols:
+    url: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
+    retrieved: '2026-11-18'
+    notes: REPLAY Installation & Use guide (linked from https://smartshow.lighting/archive/), page 2.
+  software.works_with:
+    url: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
+    retrieved: '2026-11-18'
+    notes: "'Software Compatibility'; plays Jinx '.OUT' and Xlights/Falcon '.FSEQ' (V1.1, renamed .FSQ) files."

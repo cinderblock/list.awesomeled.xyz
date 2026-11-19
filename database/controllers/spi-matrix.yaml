@@ -12,7 +12,7 @@ vendors:
 inputs:
   physical:
     Ethernet: Dual
-    DMX: XLR 3-pin
+    DMX512: XLR 3-pin
   protocols:
     - Art-Net
   standalone: true

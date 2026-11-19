@@ -6,9 +6,8 @@ creator:
   page: https://chauvetprofessional.com/product/epix-flex-drive/
 inputs:
   physical:
-    USB: true
-    Ethernet: true
-    Wi-Fi: true
+    Ethernet: Dual (RJ45, IP65 EtherCON)
+    DMX512: 5-pin XLR in/out
 outputs:
   count: 2
   connector: 3 pin IP65
@@ -18,7 +17,7 @@ outputs:
   pixels:
     max_per_output: 960 # 1920 total across 2 outputs
 case:
-  waterproof: IP65
+  waterproof: IP20
 price: 786
 price_source:
   notes: Dealer's regular "Our Price"; manufacturer List Price $975. Chauvet publishes no price
@@ -26,8 +25,23 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.fullcompass.com/prod/556840-chauvet-pro-epix-flex-drive-epix-flex-power-supply-processor
   vendor: Full Compass
+software:
+  works_with:
+    - Arkaos Media Master Express
 sources:
   status:
     url: https://www.fullcompass.com/prod/556840-chauvet-pro-epix-flex-drive-epix-flex-power-supply-processor
     retrieved: '2026-11-18'
     notes: "authorized dealer sells it ($786, ships in 19-21 business days); still in Chauvet's product catalog as SKU EPIXFLEXDRIVE"
+  software.works_with:
+    url: https://www.chauvetprofessional.com/wp-content/uploads/pdf/en/EPIXFLEXDRIVE.pdf
+    retrieved: '2026-11-18'
+    notes: Spec sheet bullet list. Also in the user manual Rev.
+  inputs.physical:
+    url: https://www.chauvetprofessional.com/wp-content/uploads/pdf/en/EPIXFLEXDRIVE.pdf
+    retrieved: '2026-11-18'
+    notes: "'Device Data Inputs: Ethernet (RJ45) (2 total) and 5-pin XLR (2 total)'; no USB or Wi-Fi"
+  case.waterproof:
+    url: https://www.chauvetprofessional.com/wp-content/uploads/pdf/en/EPIXFLEXDRIVE.pdf
+    retrieved: '2026-11-18'
+    notes: "'IP Rating: IP20, dry location'"

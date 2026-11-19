@@ -18,7 +18,34 @@ outputs:
   pixels:
     max_per_output: 680
   clocked: false
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812b
+    - WS2813
+    - UCS2903
+    - SK6812
 power:
   voltage:
     max: 5
 price: 140
+related:
+  - type: related
+    ref: controllers/netpixel-one
+    notes: SmartShow NetPixel family sibling; 4 outputs, 5 V only
+    source:
+      url: https://smartshow.lighting/history/
+      retrieved: '2026-11-18'
+      notes: The archive page https://smartshow.lighting/archive/ lists the NetPixel-Quad, -ONE, -OCTO and -Mini guides together.
+software:
+  works_with:
+    - Jinx
+sources:
+  outputs.protocols:
+    url: https://smartshow.lighting/support-page/netpixel-quad/
+    retrieved: '2026-11-18'
+    notes: NetPixel-Quad Installation & Use guide (PDF served at this URL, linked from https://smartshow.lighting/archive/).
+  software.works_with:
+    url: https://smartshow.lighting/support-page/netpixel-quad/
+    retrieved: '2026-11-18'
+    notes: "'Software Compatibility' and the 'Lets Animate !' Jinx walkthrough."

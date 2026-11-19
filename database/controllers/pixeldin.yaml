@@ -18,6 +18,21 @@ outputs:
   clocked: selectable
   pixels:
     max_per_output: 1360
+  protocols:
+    - APA102
+    - APA104
+    - SK6822
+    - TM1812
+    - TM1814
+    - TM1829
+    - UCS1903
+    - UCS9812S
+    - WS2801
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2815
 power:
   voltage:
     max: 24
@@ -27,3 +42,15 @@ dead_links:
   - url: https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
     checked: '2026-07-01'
 price: 142
+software:
+  works_with:
+    - Madrix
+sources:
+  outputs.protocols:
+    url: https://yarilo.pro/service/manuals/Yarilo_PixelDIN_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: English datasheet (2020-2021), Technical Specifications, still live although the product page is gone.
+  software.works_with:
+    url: https://yarilo.pro/service/manuals/Yarilo_PixelDIN_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: Key Features, 'Sync support'.

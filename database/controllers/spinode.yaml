@@ -18,6 +18,38 @@ outputs:
     buffered: true
   pixels:
     max_per_output: 1024
+  protocols:
+    - APA102
+    - APA107
+    - SC6803
+    - GS8304D
+    - HD107S
+    - HD108
+    - LC8823
+    - NS108
+    - SK6812
+    - SK6813
+    - SK9822
+    - SK9826
+    - TM1804
+    - TM1809
+    - TM1812
+    - TM1824
+    - TM1834
+    - TM1903
+    - UCS1903
+    - UCS2903
+    - UCS2904
+    - UCS8903
+    - UCS8904
+    - UCS9812
+    - WS2801
+    - WS2803
+    - WS2811
+    - WS2812
+    - WS2813
+    - WS2814
+    - WS2815
 power:
   voltage:
     max: 24
@@ -26,3 +58,8 @@ power:
 case:
   waterproof: IP20
 price: 349
+sources:
+  outputs.protocols:
+    url: https://api.visualproductions.nl/api/download/6814741389a6e093b3ef70a1
+    retrieved: '2026-11-18'
+    notes: SpiNode Manual (English), dated 2026-10-28 in the maker's download list for https://www.visualproductions.nl/products/spinode

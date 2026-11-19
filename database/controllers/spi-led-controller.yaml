@@ -7,7 +7,7 @@ creator:
 notes: See tech specs PDF for full details
 inputs:
   physical:
-    DMX: RJ-45 in/out
+    DMX512: RJ-45 in/out
   standalone: true
 outputs:
   count: 1

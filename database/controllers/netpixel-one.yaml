@@ -19,12 +19,31 @@ outputs:
   pixels:
     max_per_output: 680 # 5440 total RGB pixels across 8 outputs
   clocked: false # single-wire WS281x style only
+  protocols:
+    - WS281x
+    - SK6812
+    - UCS19xx
+    - UCS2903
+    - TM180x
+    - INK1003
 power:
   voltage:
     max: 24
 price:
   amount: 200
   currency: GBP
+software:
+  works_with:
+    - Jinx
+sources:
+  outputs.protocols:
+    url: https://smartshow.lighting/support-page/netpixel-one/
+    retrieved: '2026-11-18'
+    notes: NetPixel-ONE Installation & Use guide (PDF served at this URL, linked from https://smartshow.lighting/archive/), page 2.
+  software.works_with:
+    url: https://smartshow.lighting/support-page/netpixel-one/
+    retrieved: '2026-11-18'
+    notes: "'Software Compatibility' and the 'Lets Animate !' Jinx walkthrough."
 technical_notes:
   - Decodes up to 32 Art-Net universes (5440 RGB pixels) or 28 sACN/E1.31 universes via isolated RJ45 Ethernet
   - Drives WS281x, SK6812, UCS19xx, UCS2903, TM180x, INK1003

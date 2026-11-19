@@ -7,8 +7,7 @@ manufacturers:
   - SmartShow
 inputs:
   physical:
-    Ethernet: true
-    Wi-Fi: true
+    Wi-Fi: 2.4GHz
   protocols:
     - Art-Net
   standalone: false
@@ -18,10 +17,28 @@ outputs:
   pixels:
     max_per_output: 170
   protocols:
+    - WS2811
     - WS2812
+    - SK6812
 power:
   voltage:
     max: 5
 price:
   amount: 35
   currency: GBP
+software:
+  works_with:
+    - Jinx!
+sources:
+  outputs.protocols:
+    url: https://smartshow.lighting/support-page/pixie/
+    retrieved: '2026-11-18'
+    notes: "'Pixie' Installation & Use guide (PDF served at this URL, linked from https://smartshow.lighting/archive/), Introduction."
+  software.works_with:
+    url: https://smartshow.lighting/support-page/pixie/
+    retrieved: '2026-11-18'
+    notes: "'Software Compatibility' and the 'Lets Animate !' Jinx walkthrough."
+  inputs.physical:
+    url: https://smartshow.lighting/support-page/pixie/
+    retrieved: '2026-11-18'
+    notes: "'Radio Module : Wireless standard 802.11 b/g/n'; no Ethernet"
