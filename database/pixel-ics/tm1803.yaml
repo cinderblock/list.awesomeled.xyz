@@ -9,8 +9,8 @@ data:
 other_links:
   - TM1803 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_size: SOP8
-  pin_count: 8
+  packages:
+    - SOP-8
 price:
   - qty: 5
     price: 0.144

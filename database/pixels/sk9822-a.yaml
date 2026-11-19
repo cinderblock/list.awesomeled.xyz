@@ -13,7 +13,8 @@ electrical:
   vcc_voltage: 5V
   quiescent_current: 1.0mA
 physical:
-  package_size: '5050'
+  packages:
+    - '5050'
   pin_count: 6
 related:
   - type: variant

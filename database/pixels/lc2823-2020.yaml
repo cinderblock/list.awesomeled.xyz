@@ -11,5 +11,6 @@ electrical:
   vcc_voltage: 5V
   channel_current: 18.0mA
 physical:
-  package_size: '2020'
+  packages:
+    - '2020'
   pin_count: 6

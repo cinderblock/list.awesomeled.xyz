@@ -16,7 +16,7 @@ electrical:
   supply_voltage: 5V
   max_current: 5mA
 physical:
-  package_sizes:
+  packages:
     - '2427'
     - '1515'
 related:

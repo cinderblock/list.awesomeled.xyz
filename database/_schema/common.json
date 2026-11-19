@@ -153,6 +153,16 @@
     "year": {
       "oneOf": [{ "type": "integer", "minimum": 1990, "maximum": 2030 }, { "type": "null" }]
     },
+    "ic_package": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]*(-[0-9]+)+$",
+      "description": "IC package named the way distributors (LCSC) list it, pin count last: 'SOP-8', 'SSOP-16', 'QFN-16', 'DIP-14', 'SOT-23-5'. Keep the datasheet's package family (SOP vs SOIC) as written."
+    },
+    "led_package": {
+      "type": "string",
+      "pattern": "^([0-9]{4}|[0-9]+mm)$",
+      "description": "LED package: SMD footprint code in tenths of a millimetre ('5050' = 5.0 x 5.0 mm, '3535', '2020', '1515'), or a through-hole round LED's diameter ('5mm', '8mm')."
+    },
     "datasheet_sources": {
       "type": ["array", "null"],
       "description": "Alternate hosts for the datasheet beyond datasheet.url, categorized by who hosts it. Manufacturer links are canonical but rot when sites restructure; distributor copies (LCSC, Pololu, Adafruit) are often more stable but may lag revisions — note the revision when known.",

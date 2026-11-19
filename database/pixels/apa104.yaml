@@ -35,11 +35,10 @@ electrical:
 other_links:
   - APA104 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_sizes:
+  packages:
     - '5050'
     - '3535'
     - '1212'
-  package_size: 5050, 3535, 1212
   pin_count: 4
 related:
   - type: related

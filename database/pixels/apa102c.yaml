@@ -32,10 +32,9 @@ electrical:
 other_links:
   - APA102C Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_sizes:
+  packages:
     - '5050'
     - '2020'
-  package_size: 5050 & 2020
   pin_count: 6
 related:
   - type: predecessor

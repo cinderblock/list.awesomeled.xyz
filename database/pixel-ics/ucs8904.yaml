@@ -13,5 +13,5 @@ electrical:
 other_links:
   - UCS8904 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_size: SOP8
-  pin_count: 8
+  packages:
+    - SOP-8

@@ -23,7 +23,9 @@ electrical:
 other_links:
   - View technical specs and advantages of the pixel protocol HD108. - Advatek
 physical:
-  package_size: 5050, 2020
+  packages:
+    - '5050'
+    - '2020'
   pin_count: 6
 related:
   - type: variant

@@ -29,8 +29,9 @@ electrical:
 other_links:
   - WS2818 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_size: SOP8,CPC8
-  pin_count: 8
+  packages:
+    - SOP-8
+    - CPC-8
 price:
   - qty: 10
     price: 0.0728

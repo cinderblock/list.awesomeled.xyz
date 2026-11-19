@@ -9,8 +9,8 @@ data:
 other_links:
   - WS2811 V1.4 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_size: SOP8
-  pin_count: 8
+  packages:
+    - SOP-8
 related:
   - type: variant
     ref: pixel-ics/ws2811

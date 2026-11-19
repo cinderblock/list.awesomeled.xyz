@@ -25,10 +25,9 @@ images:
     source: https://www.adafruit.com/product/3484
     credit: Adafruit Industries
 physical:
-  package_sizes:
+  packages:
     - '1515'
     - '2427'
-  package_size: 1515,2427
   pin_count: 4
 price:
   - qty: 5

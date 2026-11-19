@@ -28,7 +28,8 @@ electrical:
   quiescent_current: 1.0mA
   wattage: 110mW
 physical:
-  package_size: '5050'
+  packages:
+    - '5050'
   pin_count: 6
 related:
   - type: variant

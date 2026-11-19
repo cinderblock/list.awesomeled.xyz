@@ -30,7 +30,7 @@ import { Tooltip } from '~/components/ui/Tooltip';
 // Expandable icon badge system for common terms/technologies
 // Each badge shows an icon with a tooltip for the full meaning
 
-interface BadgeConfig {
+export interface BadgeConfig {
   icon: React.ComponentType<{ size?: number; style?: React.CSSProperties }>;
   label: string;
   color: string;
@@ -182,8 +182,10 @@ const BADGES: Record<string, BadgeConfig> = {
   ip67: { icon: Droplets, label: 'IP67', color: C.rating },
   ip68: { icon: Droplets, label: 'IP68', color: C.rating },
 
-  // Pixel/IC package sizes. The numeric ones are valueOnly — "2020" or "5050"
-  // in free text is more likely a year or a quantity than a package.
+  // Pixel/IC packages, labelled with the canonical names physical.packages
+  // uses (common.json ic_package / led_package). The numeric LED codes are
+  // valueOnly — "2020" or "5050" in free text is more likely a year or a
+  // quantity than a package.
   'pkg-5050': { icon: Package, label: '5050', color: C.pixel, valueOnlyMatch: ['5050'] },
   'pkg-3535': { icon: Package, label: '3535', color: C.pixel, valueOnlyMatch: ['3535'] },
   'pkg-2020': { icon: Package, label: '2020', color: C.pixel, valueOnlyMatch: ['2020'] },
@@ -191,14 +193,17 @@ const BADGES: Record<string, BadgeConfig> = {
   'pkg-1515': { icon: Package, label: '1515', color: C.pixel, valueOnlyMatch: ['1515'] },
   'pkg-1212': { icon: Package, label: '1212', color: C.pixel, valueOnlyMatch: ['1212'] },
   'pkg-2427': { icon: Package, label: '2427', color: C.pixel, valueOnlyMatch: ['2427'] },
-  sop8: { icon: Package, label: 'SOP8', color: C.pixel, match: ['sop-8'] },
-  sop10: { icon: Package, label: 'SOP10', color: C.pixel, match: ['sop-10'] },
-  sop12: { icon: Package, label: 'SOP12', color: C.pixel, match: ['sop-12'] },
-  sop14: { icon: Package, label: 'SOP14', color: C.pixel, match: ['sop-14', 'so14'] },
-  sop16: { icon: Package, label: 'SOP16', color: C.pixel, match: ['sop-16'] },
-  soic8: { icon: Package, label: 'SOIC8', color: C.pixel, match: ['soic-8'] },
-  dip8: { icon: Package, label: 'DIP8', color: C.pixel, match: ['dip-8'] },
-  dip14: { icon: Package, label: 'DIP14', color: C.pixel, match: ['dip-14'] },
+  sop8: { icon: Package, label: 'SOP-8', color: C.pixel, match: ['sop-8'] },
+  sop10: { icon: Package, label: 'SOP-10', color: C.pixel, match: ['sop-10'] },
+  sop12: { icon: Package, label: 'SOP-12', color: C.pixel, match: ['sop-12'] },
+  sop14: { icon: Package, label: 'SOP-14', color: C.pixel, match: ['sop-14'] },
+  sop16: { icon: Package, label: 'SOP-16', color: C.pixel, match: ['sop-16'] },
+  ssop16: { icon: Package, label: 'SSOP-16', color: C.pixel, match: ['ssop-16'] },
+  so14: { icon: Package, label: 'SO-14', color: C.pixel, match: ['so-14'] },
+  soic8: { icon: Package, label: 'SOIC-8', color: C.pixel, match: ['soic-8'] },
+  qfn16: { icon: Package, label: 'QFN-16', color: C.pixel, match: ['qfn-16'] },
+  dip8: { icon: Package, label: 'DIP-8', color: C.pixel, match: ['dip-8'] },
+  dip14: { icon: Package, label: 'DIP-14', color: C.pixel, match: ['dip-14'] },
 
   // SoC / MCU families
   esp32: { icon: Cpu, label: 'ESP32', color: C.chip },
@@ -443,6 +448,13 @@ export function TextPill({ text, to }: { text: string; to?: string }) {
 export function getBadgeForValue(value: string): BadgeConfig | null {
   const id = TERM_TO_ID[value.trim().toLowerCase()];
   return id ? BADGES[id] : null;
+}
+
+// Any package name (physical.packages: SOP-8, QFN-16, 5050, 5mm) as a package
+// pill. Registry entries win so shared labels stay consistent; the rest get
+// the same icon and color.
+export function packageBadge(name: string): BadgeConfig {
+  return getBadgeForValue(name) ?? { icon: Package, label: name, color: C.pixel };
 }
 
 interface ValueBadgesProps {

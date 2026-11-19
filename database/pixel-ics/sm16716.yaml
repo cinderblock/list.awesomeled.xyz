@@ -9,5 +9,5 @@ data:
 other_links:
   - SM16716 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_size: SOP16
-  pin_count: 16
+  packages:
+    - SOP-16

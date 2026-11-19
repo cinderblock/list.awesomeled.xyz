@@ -22,5 +22,6 @@ electrical:
   quiescent_current: 2.5mA
   wattage: 65mW
 physical:
-  package_size: '5050'
+  packages:
+    - '5050'
   pin_count: 6

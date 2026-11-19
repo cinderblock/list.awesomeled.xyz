@@ -4,7 +4,7 @@
 
 import { ExternalLink, FileText, ShoppingCart, Youtube } from 'lucide-react';
 import type { BaseEntry } from './types';
-import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
+import { Badge, getBadgeForValue, packageBadge, TextPill } from '~/components/ui/FeatureBadges';
 import { RelativeDate } from '~/components/ui/RelativeDate';
 import { Tooltip } from '~/components/ui/Tooltip';
 import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
@@ -272,35 +272,15 @@ function formatPrice(v: unknown, item?: Record<string, unknown>) {
   return rendered;
 }
 
-// Package column: prefer the physical.package_sizes array, else split joined
-// strings ("5050, 3535, 2020", "5050 & 2020") into individual pills. Slash
-// groups only split when every fragment stands alone (so "SOP8/10/14" stays
-// whole instead of producing bare "10" pills).
-function renderPackages(v: unknown, item: BaseEntry) {
-  const physical = item.physical as { package_sizes?: unknown[] } | undefined;
-  let list: string[];
-  if (Array.isArray(physical?.package_sizes)) {
-    list = physical.package_sizes.map(String);
-  } else if (typeof v === 'string') {
-    list = v
-      .split(/[,&]/)
-      .map((s) => s.trim())
-      .filter(Boolean)
-      .flatMap((part) => {
-        const subs = part.split('/').map((s) => s.trim());
-        return subs.length > 1 && subs.every((s) => s.length >= 3) ? subs : [part];
-      });
-  } else if (v != null) {
-    list = [String(v)];
-  } else {
-    return <span className="data-table-null">-</span>;
-  }
+// Package column: physical.packages (canonical names, common.json
+// ic_package / led_package), one package pill each
+function renderPackages(v: unknown) {
+  if (!Array.isArray(v) || v.length === 0) return <span className="data-table-null">-</span>;
   return (
     <div className="data-table-array">
-      {list.map((p, i) => {
-        const badge = getBadgeForValue(p);
-        return badge ? <Badge key={i} badge={badge} /> : <TextPill key={i} text={p} />;
-      })}
+      {v.map((p, i) => (
+        <Badge key={i} badge={packageBadge(String(p))} />
+      ))}
     </div>
   );
 }
@@ -532,7 +512,7 @@ export const pixelColumns: Column[] = [
     className: 'data-table-cell--right',
   },
   {
-    key: 'physical.package_size',
+    key: 'physical.packages',
     label: 'Package',
     render: renderPackages,
     filterConfig: { type: 'select' },
@@ -584,7 +564,7 @@ export const pixelICColumns: Column[] = [
     className: 'data-table-cell--right',
   },
   {
-    key: 'physical.package_size',
+    key: 'physical.packages',
     label: 'Package',
     render: renderPackages,
     filterConfig: { type: 'select' },

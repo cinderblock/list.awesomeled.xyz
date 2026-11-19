@@ -9,8 +9,8 @@ data:
 other_links:
   - TM1914 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_size: SOP10
-  pin_count: 10
+  packages:
+    - SOP-10
 price:
   - qty: 5
     price: 0.0985

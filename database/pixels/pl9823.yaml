@@ -22,5 +22,7 @@ electrical:
     min: 3.5V
     max: 5V
 physical:
-  package_size: 5/8mm T style
+  packages:
+    - 5mm
+    - 8mm
   pin_count: 4

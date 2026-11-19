@@ -17,7 +17,7 @@ electrical:
   led_voltage: 5V
   vcc_voltage: 5V
 physical:
-  package_sizes:
+  packages:
     - '5050'
   pin_count: 4
 price:

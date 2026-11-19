@@ -38,11 +38,10 @@ electrical:
 other_links:
   - SK6812 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_sizes:
+  packages:
     - '5050'
     - '3535'
     - '2040'
-  package_size: 5050,3535,2040
   pin_count: 4
 price:
   - qty: 5

@@ -34,11 +34,9 @@ electrical:
 other_links:
   - WS2811 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_sizes:
-    - SOIC8
-    - DIP8
-  package_size: SOIC8/DIP8
-  pin_count: 8
+  packages:
+    - SOIC-8
+    - DIP-8
 price:
   - qty: 20
     price: 0.0417

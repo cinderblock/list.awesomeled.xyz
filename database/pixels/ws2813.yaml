@@ -33,9 +33,8 @@ electrical:
 other_links:
   - WS2813 Pixel Protocol Overview | Advatek Lighting
 physical:
-  package_sizes:
+  packages:
     - '5050'
-  package_size: '5050'
   pin_count: 6
 price:
   - qty: 5

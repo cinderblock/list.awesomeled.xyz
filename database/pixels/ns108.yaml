@@ -28,9 +28,8 @@ electrical:
   quiescent_current: 1.0mA
   wattage: 102mW
 physical:
-  package_sizes:
+  packages:
     - '5050'
     - '3535'
     - '2020'
-  package_size: 5050, 3535, 2020
   pin_count: 6

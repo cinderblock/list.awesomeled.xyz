@@ -205,17 +205,17 @@
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "package_sizes": {
-          "type": ["array", "null"],
+        "packages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Every package the IC is offered in; pin counts come from the package names. LED packages are for driver ICs sold built into an LED (e.g. SK6805).",
           "items": {
-            "type": "string"
+            "anyOf": [
+              { "$ref": "common.json#/definitions/ic_package" },
+              { "$ref": "common.json#/definitions/led_package" }
+            ]
           }
-        },
-        "package_size": {
-          "type": ["string", "null"]
-        },
-        "pin_count": {
-          "type": ["integer", "string", "null"]
         }
       }
     },

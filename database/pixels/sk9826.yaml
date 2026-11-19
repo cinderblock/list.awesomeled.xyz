@@ -24,7 +24,9 @@ electrical:
   quiescent_current: 3.6mA
   wattage: 90mW
 physical:
-  package_size: 5050, 3535
+  packages:
+    - '5050'
+    - '3535'
   pin_count: 6
 related:
   - type: variant

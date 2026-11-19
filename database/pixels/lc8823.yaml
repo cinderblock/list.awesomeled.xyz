@@ -11,5 +11,6 @@ electrical:
   vcc_voltage: 5V
   channel_current: 17.0mA
 physical:
-  package_size: '5050'
+  packages:
+    - '5050'
   pin_count: 6
