@@ -7,7 +7,7 @@ import type { BaseEntry } from './types';
 import { Badge, getBadgeForValue, packageBadge, TextPill } from '~/components/ui/FeatureBadges';
 import { RelativeDate } from '~/components/ui/RelativeDate';
 import { Tooltip } from '~/components/ui/Tooltip';
-import { parsePrice, toUSD, priceUSD, formatPriceText, RATES_AS_OF } from './currency';
+import { parsePrice, toUSD, priceUSD, perPixelUSD, formatPriceText, RATES_AS_OF } from './currency';
 import { getPriceSource } from './price-source';
 import { PriceStaleMark } from '~/components/data/PriceSource';
 import { quantitySortValue } from './quantity';
@@ -261,12 +261,14 @@ function formatPrice(v: unknown, item?: Record<string, unknown>) {
   // Decimal-align: whole-dollar prices get invisible cents so the ones digits
   // line up with prices that show cents (column is right-aligned).
   const hasCents = parsed.amount % 1 !== 0;
+  // "Free", ranges and "$330+" aren't single numbers: no alignment padding
+  const plain = parsed.max == null && parsed.amount !== 0 && !parsed.from;
   const rendered = (
     <span className="tabular-nums">
       {item && <PriceStaleMark source={getPriceSource(item)} status={item.status} />}
       {prefix}
       {formatPriceText(parsed, hasCents)}
-      {!hasCents && <span style={{ visibility: 'hidden' }}>.00</span>}
+      {plain && !hasCents && <span style={{ visibility: 'hidden' }}>.00</span>}
     </span>
   );
   if (parsed.currency !== 'USD' && usd != null) {
@@ -967,6 +969,24 @@ export const commercialSystemColumns: Column[] = [
     label: 'Price Range',
     sortValue: priceRangeSort,
     filterConfig: { type: 'select' },
+  },
+  {
+    key: 'pricing',
+    label: 'Per Pixel',
+    filterable: false,
+    // Cheapest published price point ÷ the pixels it buys, in USD
+    render: (v) => {
+      const per = perPixelUSD(v);
+      if (per == null) return <span className="data-table-null">-</span>;
+      return (
+        <span className="tabular-nums">
+          ${per.toLocaleString('en-US', { maximumSignificantDigits: 3 })}
+        </span>
+      );
+    },
+    sortValue: (v) => perPixelUSD(v),
+    className: 'data-table-cell--right',
+    headerTip: `Cheapest published price point divided by the pixels it buys, in USD (rates as of ${RATES_AS_OF})`,
   },
 ];
 

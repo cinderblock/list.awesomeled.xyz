@@ -141,3 +141,23 @@ export function formatPriceText(p: ParsedPrice, forceCents = false): string {
   if (p.amount === 0) return 'Free';
   return p.from ? `${money(p.amount)}+` : money(p.amount);
 }
+
+/**
+ * Cheapest published price per pixel, in USD, across a commercial system's
+ * `pricing.examples` that say how many pixels they buy. Null when no example
+ * has both a parseable price and a pixel count (quote-only systems).
+ */
+export function perPixelUSD(pricing: unknown): number | null {
+  const examples = (pricing as { examples?: unknown } | null | undefined)?.examples;
+  if (!Array.isArray(examples)) return null;
+  let best: number | null = null;
+  for (const ex of examples) {
+    const { price, pixels } = (ex ?? {}) as { price?: unknown; pixels?: unknown };
+    if (typeof pixels !== 'number' || pixels <= 0) continue;
+    const usd = priceUSD(price);
+    if (usd == null || usd <= 0) continue;
+    const per = usd / pixels;
+    if (best == null || per < best) best = per;
+  }
+  return best;
+}

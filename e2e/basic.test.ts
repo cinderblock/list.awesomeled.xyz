@@ -378,6 +378,13 @@ test.describe('Data loading', () => {
     await expect(page.locator('.data-table .price-stale-mark').first()).toBeVisible();
   });
 
+  test('commercial systems compare price per pixel', async ({ page }) => {
+    await page.goto('/commercial-systems');
+    await expect(page.getByRole('columnheader', { name: /Per Pixel/ })).toBeVisible();
+    // At least one system has a published price point with a pixel count
+    await expect(page.getByRole('cell', { name: /^\$\d/ }).first()).toBeVisible();
+  });
+
   test('footer is displayed', async ({ page }) => {
     await page.goto('/');
 

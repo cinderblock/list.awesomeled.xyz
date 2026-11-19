@@ -129,6 +129,11 @@
                 "description": "What the price buys, e.g. \"7 Ball String\""
               },
               "price": { "$ref": "common.json#/definitions/price" },
+              "pixels": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Individually addressable pixels the price buys; drives the per-pixel price comparison"
+              },
               "notes": { "type": "string" },
               "source": { "$ref": "common.json#/definitions/price_source" }
             }
