@@ -92,3 +92,18 @@ Research findings with sources: [database-review-research.md](database-review-re
 - Don't batch-edit stream 4's link fields (see Decisions).
 - Don't decide pattern-driver subcategories.
 - Don't append to the end of `IGNORED_COMMITS` (conflict magnet); use my block.
+
+## Removed or moved entries (for the parity audit)
+
+| Removed / moved entry                        | Sheet tab: row                                                      | Now covered by                                    |
+| -------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------- |
+| `controllers/f-test` (moved)                 | Controllers: "F-Test"                                               | `pixel-decoders/f-test`                           |
+| `diffusive-materials/silicone-sealant`       | Diffusive Materials: "Silicone Sealant" (row holds Plastazote data) | `diffusive-materials/ld45-plaztazote`             |
+| `adapters/quinled-dig-quad`                  | Adapters: "QuinLED-Dig-Quad"                                        | `controllers/quinled-dig-quad`                    |
+| `adapters/quinled-dig-uno`                   | Adapters: second "QuinLED-Dig-Uno " row (no maker, 6 outputs, 5 V)  | `controllers/quinled-dig-uno`                     |
+| `adapters/m4-port-pixel`                     | Adapters: "M4 Port Pixel"                                           | `controllers/m4-port-pixel` (M4-PI)               |
+| `controllers/m4-pi`                          | Controllers: "M4- Pi"                                               | `controllers/m4-port-pixel` (M4-PI)               |
+| `adapters/m8-port-pixel`                     | Adapters: "M8 Port Pixel"                                           | `controllers/m8-port-pixel` (M8-PI)               |
+| `controllers/standard-differential-receiver` | Controllers: "Standard Differential Receiver"                       | `level-converters/standard-differential-receiver` |
+
+Not merged yet: the ESPArtStick group (`adapters/espartstick`, `controllers/espartstick`, `adapters/espartstick-wled`) disagrees on output count (2 vs 6); research pending.

@@ -160,3 +160,12 @@ Seen while verifying links (not changed; prices are stream 6's):
   <https://www.ledstripstudio.com/shop/product/spi-led-controller/>
 - `pattern-drivers/protopixel-create`: EUR 149 per month subscription
   (YAML 176). <http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing>
+
+## Sheet: a second "M8 Port Pixel" row is an ENTTEC product
+
+For parity (stream 1). The Controllers tab has two "M8 Port Pixel" rows. One
+is Microcyb's Pi HAT ($45, now `controllers/m8-port-pixel`, M8-PI). The other
+says ENTTEC, $400, 2 outputs, 60 V, discontinued, and links
+<https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/>:
+an ENTTEC DIN-rail pixel controller under the wrong name. No database entry
+seems to cover it; needs identifying from that URL (Wayback if dead).
