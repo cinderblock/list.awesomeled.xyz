@@ -23,6 +23,7 @@ import {
   compareCell,
   coverage,
   hasUrl,
+  mappedValue,
   viewOf,
   type DeriveContext,
   type EntryView,
@@ -100,8 +101,18 @@ export interface TabResult {
   cells: CellResult[];
   links: (CellResult & { url: string })[];
   notes: (CellResult & { note: string })[];
-  flags: (CellResult & { color: string; meaning: string })[];
+  flags: Flag[];
 }
+
+/** A highlighted cell, with what its YAML field holds now */
+export type Flag = CellResult & {
+  color: string;
+  meaning: string;
+  /** The column is computed by the site, so there's nothing to hold */
+  derived?: boolean;
+  /** The entry cites a source for the column's field(s) */
+  sourced?: boolean;
+};
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(name);
@@ -325,10 +336,15 @@ async function main() {
         }
 
         if (cell.fill && !DECORATIVE.has(cell.fill)) {
+          const derived = spec?.kind.type === 'derived';
+          const now = pair && spec && !derived ? mappedValue(spec, pair.view, ctx) : undefined;
           res.flags.push({
             ...base,
             color: cell.fill,
             meaning: HIGHLIGHTS[cell.fill] ?? 'unknown highlight',
+            yaml: now?.yaml,
+            derived,
+            sourced: now?.sourced,
           });
         }
       });

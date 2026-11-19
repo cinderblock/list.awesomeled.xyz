@@ -310,6 +310,26 @@ function show(vs: unknown[]): string {
   return vs.map((v) => (typeof v === 'object' ? JSON.stringify(v) : String(v))).join(' | ');
 }
 
+/**
+ * What a column's YAML field(s) hold for an entry now, for display
+ * (undefined = nothing), and whether the entry cites a source for them.
+ */
+export function mappedValue(
+  spec: ColumnSpec,
+  view: EntryView,
+  ctx: DeriveContext
+): { yaml?: string; sourced: boolean } {
+  const data = view.entry.data;
+  const roots = spec.paths.map((p) => p.replace(/(\[\]|@keys).*$/, ''));
+  const sources = Object.keys((data as { sources?: object }).sources ?? {});
+  const sourced = sources.some((s) => roots.some((r) => r === s || r.startsWith(`${s}.`)));
+  const mapped = [
+    ...spec.paths.flatMap((p) => getAt(data, p)),
+    ...(spec.derive ? spec.derive(data, ctx) : []),
+  ];
+  return { yaml: mapped.length ? show(mapped) : undefined, sourced };
+}
+
 // ---------------------------------------------------------------------------
 
 export function compareCell(

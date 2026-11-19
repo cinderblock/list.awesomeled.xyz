@@ -4,7 +4,7 @@
  */
 
 import { COLUMNS } from './columns';
-import type { CellResult, TabResult } from './main';
+import type { CellResult, Flag, TabResult } from './main';
 import { colLetters } from './xlsx';
 
 const OPEN = new Set(['missing', 'differs', 'rounded', 'comment']);
@@ -17,6 +17,49 @@ const ORIGIN: Record<string, string> = {
   'new-row': 'row added after import',
   unknown: '?',
 };
+
+/**
+ * Highlighted cells grouped by meaning: computed columns collapse to one line
+ * each; the rest list what YAML holds now (yellow cells still empty in YAML
+ * are the sheet's own to-do list, carried over).
+ */
+function renderFlags(r: TabResult, link: (tab: string, a1: string) => string): string[] {
+  const out: string[] = [];
+  const groups = new Map<string, Flag[]>();
+  for (const f of r.flags) groups.set(f.meaning, [...(groups.get(f.meaning) ?? []), f]);
+  for (const [meaning, flags] of groups) {
+    const derived = flags.filter((f) => f.derived);
+    const rest = flags
+      .filter((f) => !f.derived)
+      .sort((a, b) => Number(Boolean(a.yaml)) - Number(Boolean(b.yaml)) || a.row - b.row);
+    const empty = rest.filter((f) => !f.yaml).length;
+    out.push(
+      `**${meaning[0].toUpperCase()}${meaning.slice(1)}** (#${flags[0].color}, ${flags.length} cells; ${empty} still empty in YAML)`
+    );
+    out.push('');
+    const byColumn = new Map<string, number>();
+    for (const f of derived) byColumn.set(f.column, (byColumn.get(f.column) ?? 0) + 1);
+    for (const [column, n] of byColumn) {
+      out.push(`- ${esc(column, 40)}: ${n} cells; computed by the site, nothing stored`);
+    }
+    if (byColumn.size) out.push('');
+    if (rest.length) {
+      out.push(`<details><summary>${rest.length} cells</summary>`);
+      out.push('');
+      out.push('| Cell | Entry | Column | Sheet | YAML now | Sourced |');
+      out.push('| --- | --- | --- | --- | --- | --- |');
+      for (const f of rest) {
+        out.push(
+          `| ${link(r.tab, f.a1)} | \`${f.entry?.split('/')[1] ?? '(no entry)'}\` | ${esc(f.column, 30)} | ${esc(f.value, 40)} | ${esc(f.yaml, 60) || '—'} | ${f.sourced ? 'yes' : ''} |`
+        );
+      }
+      out.push('');
+      out.push('</details>');
+      out.push('');
+    }
+  }
+  return out;
+}
 
 function origin(c: CellResult): string {
   return c.origin ? ORIGIN[c.origin] : '';
@@ -180,12 +223,7 @@ export function renderReport(
     if (r.flags.length) {
       out.push('### Highlighted cells');
       out.push('');
-      for (const f of r.flags) {
-        out.push(
-          `- ${link(r.tab, f.a1)} \`${f.entry?.split('/')[1] ?? ''}\` ${esc(f.column, 30)} = "${esc(f.value, 60)}": ${f.meaning} (#${f.color})`
-        );
-      }
-      out.push('');
+      out.push(...renderFlags(r, link));
     }
     const acked = [...r.cells, ...r.links, ...r.notes].filter((c) => c.status === 'ack');
     if (acked.length) {
