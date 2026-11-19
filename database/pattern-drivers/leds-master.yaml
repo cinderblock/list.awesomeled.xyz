@@ -10,6 +10,7 @@ capabilities:
   live: true
 links:
   url: https://antoine.doussaud.org/leds_master
+  mirror: https://github.com/spectrenoir06/LED_master
 platforms:
   os:
     - Windows
