@@ -108,6 +108,66 @@
 'Pattern Drivers | QLC+ | Price (note)':
   - value: 'RaspPi build-> 15 euro donation'
     reason: 'In YAML (a pricing tier and the demo text); QLC+ now asks EUR 20 for the Pi image (ISSUES.md, stream 6)'
+'Pattern Drivers | Dylos | URL':
+  - value: 'https://obsidiancontrol.com/dylos'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Pattern Drivers | ELM | URL':
+  - value: 'https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/pixel-mapping-software/'
+    reason: "ENTTEC's UK store moved the page; YAML links the product's enttec.com page"
+'Pattern Drivers | GeoPix 2.0(full) | URL':
+  - value: 'https://www.geopix.io/'
+    reason: 'geopix.io no longer answers; YAML links the GeoPix GitHub repository'
+'Pattern Drivers | ProtoPixel Create | URL':
+  - value: 'https://www.protopixel.io/design'
+    reason: "ProtoPixel's old 'design' page; YAML links the Create product page"
+'Pattern Drivers | Smode | URL':
+  - value: 'https://smode.fr/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Pattern Drivers | Vixen Lights | URL':
+  - value: 'https://www.vixenlights.com/downloads/'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Pattern Drivers | WLED | URL':
+  - value: 'GitHub - Aircoookie/WLED: Control WS2812B and many more types of digital RGB LEDs with an ESP8266 or ESP32 over WiFi!'
+    reason: "The old repository's link title; github.com/Aircoookie/WLED redirects to github.com/wled/WLED, which YAML links"
+'Pattern Drivers | Dylos | (name) (link)':
+  - value: 'https://obsidiancontrol.com/dylos'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Pattern Drivers | Dylos | URL (link)':
+  - value: 'https://obsidiancontrol.com/dylos'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Pattern Drivers | ELM | (name) (link)':
+  - value: 'https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/pixel-mapping-software/'
+    reason: "ENTTEC's UK store moved the page; YAML links the product's enttec.com page"
+'Pattern Drivers | ELM | URL (link)':
+  - value: 'https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/pixel-mapping-software/'
+    reason: "ENTTEC's UK store moved the page; YAML links the product's enttec.com page"
+'Pattern Drivers | GeoPix 2.0(full) | (name) (link)':
+  - value: 'https://www.geopix.io/'
+    reason: 'geopix.io no longer answers; YAML links the GeoPix GitHub repository'
+'Pattern Drivers | GeoPix 2.0(full) | URL (link)':
+  - value: 'https://www.geopix.io/'
+    reason: 'geopix.io no longer answers; YAML links the GeoPix GitHub repository'
+'Pattern Drivers | ProtoPixel Create | (name) (link)':
+  - value: 'https://www.protopixel.io/design'
+    reason: "ProtoPixel's old 'design' page; YAML links the Create product page"
+'Pattern Drivers | ProtoPixel Create | URL (link)':
+  - value: 'https://www.protopixel.io/design'
+    reason: "ProtoPixel's old 'design' page; YAML links the Create product page"
+'Pattern Drivers | Smode | (name) (link)':
+  - value: 'https://smode.fr/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Pattern Drivers | Smode | URL (link)':
+  - value: 'https://smode.fr/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Pattern Drivers | Vixen Lights | (name) (link)':
+  - value: 'http://www.vixenlights.com/downloads/'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Pattern Drivers | Vixen Lights | URL (link)':
+  - value: 'http://www.vixenlights.com/downloads/'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Pattern Drivers | WLED | URL (link)':
+  - value: 'https://github.com/Aircoookie/WLED'
+    reason: 'Old URL; it redirects to the page YAML links'
 'Controllers | SP102E | Standalone':
   - value: 'Presets'
     reason: '"Presets" = plays built-in patterns on its own; YAML inputs.standalone: true'
@@ -456,6 +516,276 @@
 'Controllers | LED Ethernet Controller 3 | Price (note)':
   - value: "625 (1024px)\n950 (2048px)\n1250 (4096px)\nLifetime SW license included"
     reason: 'Same: price tiers 625/950/1250 and the lifetime license in technical_notes'
+'Controllers | ElectroMage 8x Driver | Notes':
+  - value: 'Stacks up to 8 on a bus'
+    reason: 'Same: up to 8 boards share one serial line'
+'Controllers | DMX to LED Strip | Product URL':
+  - value: 'https://www.boutique-electroconcept.com/dmx-signal-board-for-ledstrip-digital-ws2812-and-compatible-to-be-welded.html'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | Standard Differential  Receiver | Pixel Types':
+  - value: 'Both'
+    reason: 'Moved to level-converters by stream 2; a receiver has no pixel-type setting (io.interface Differential Pairs)'
+'Controllers | Standard Differential  Receiver | Max Voltage':
+  - value: '12'
+    reason: "Same, as the level converter's electrical.max_voltage (12V)"
+'Controllers | Standard Differential  Receiver | Buffered':
+  - value: 'Yes'
+    reason: "Same, as the level converter's io.buffered"
+'Controllers | Standard Differential  Receiver | Outputs':
+  - value: 'Multiple'
+    reason: "Same, as the level converter's io.channels (4)"
+'Controllers | EspArtStick | Pixel Types':
+  - value: 'Both'
+    reason: "Stream 2's research (2a3efbf): the SD-card EspArtStick has one single-wire output"
+'Controllers | EspArtStick | Max Current':
+  - value: '30'
+    reason: "No published current rating (stream 2's research, 2a3efbf)"
+'Controllers | EspArtStick | Output Connectors':
+  - value: 'Phoenix Screw'
+    reason: 'Same: a plug-in screw terminal block (fixed on the 2022 revision)'
+'Controllers | EspArtStick | Outputs':
+  - value: 'Single or Clock'
+    reason: "Stream 2's research (2a3efbf): one single-wire output"
+'Controllers | Digiled Strip/DMX/WAV SD Micro Player | Outputs':
+  - value: 'SPI/ DMX/WAV'
+    reason: 'WS2812 single-wire output; DMX and WAV are alternative firmware modes chosen at purchase'
+'Controllers | Digiled Strip/DMX/WAV SD Micro Player | Notes':
+  - value: '6 switch input trigger SPI, DMX or Wav sound scenesProgrammed using Artrender https://www.boutique-electroconcept.com/information/downloads.html'
+    reason: 'Same, reworded: six trigger inputs; WS2812, DMX or WAV modes; sequences from ArtRender'
+'Controllers | M4 Port Pixel | Notes':
+  - value: 'Raspberry Pi 3B+ or Above with FPP'
+    reason: 'Same: a Raspberry Pi 3B-and-above HAT running FPP'
+'Controllers | LED Player M | Storage':
+  - value: 'No'
+    reason: "The LED-Player-M plays from microSD (Diamex's manual); the sheet's row mixed in another product"
+'Controllers | LED Player M | Product URL':
+  - value: 'https://www.led-genial.de/LED-Controller-L-Rev2-fuer-WS2812-Effekte-abspielen-und-TPM2-ueber-USB'
+    reason: 'The sheet linked a different product (Diamex LED-Controller-L Rev. 2), now 404; the entry links the LED-Player-M manual'
+'Controllers | ElectroMage Pro 8x Driver | Notes':
+  - value: 'Stacks up to 8 on a bus'
+    reason: 'Same: up to 8 boards share one serial line'
+'Controllers | ETH032F Pixel Breakout | Pixel Types':
+  - value: 'Async'
+    reason: "The row contradicts itself (Async pixel types, Single and Clock outputs) and no copy of the maker's page survives; left as selectable"
+'Controllers | LED Player DMX | Product URL':
+  - value: 'https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | LED Player L | Product URL':
+  - value: 'https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | DIN Pixie | Product URL':
+  - value: 'https://www.enttec.com.au/product/lighting-show-controller/din-pixie-2-universe-dmx-to-led-pixel-converter-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 4 Mk2 ECO | Product URL':
+  - value: 'sales@advateklights.com - ask for the ECO version. once the stock on shelves are gone no more will be manufactured'
+    reason: 'Not a URL: a sales note; the ordering advice is in notes'
+'Controllers | PB16 | Product URL':
+  - value: 'http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controlleri'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | LeDMX4 Pro | Product URL':
+  - value: 'https://dmxking.com/led-pixel-control/ledmx4-pro'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixelDIN | Product URL':
+  - value: 'https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | SPI LED Controller | Product URL':
+  - value: 'https://ledstripstudio.com/spi-led-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | E682 | Product URL':
+  - value: 'http://sandevices.com/product/e682-assembled-tested/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | LeDMX4 MAX | Product URL':
+  - value: 'https://dmxking.com/led-pixel-control/ledmx4-max'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | DiGidot C4 Live 12 | Max Pixels':
+  - value: '8192'
+    reason: '8192 is channels (16 universes, licence-dependent), not pixels'
+'Controllers | PixLite 4 Mk2 | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-4-mk2-control-board'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite A4-S Mk3 | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-a4-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 4 Rugged Mk2 | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-4-mk2-rugged'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 16 Long Range Mk2 | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-16-mk2-long-range-control-board'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 16 Mk2 Control Board | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-16-mk2-control-board'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 16 Plug and Play Mk2 | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-16-mk2-plug-and-play'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite E4-S Mk3 | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-e4-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | Epix Flex Drive | Product URL':
+  - value: 'https://www.chauvetprofessional.com/products/epix-flex-drive/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | Pixelator Mini PX1-8D | Max outputs':
+  - value: '24'
+    reason: "The Mini has 8 PLink ports (ENTTEC UM-71066); 24 is the full Pixelator's"
+'Controllers | LED Ethernet Controller Powered | Max Current':
+  - value: '20'
+    reason: "Unverified either way: the maker's spec PDF didn't load; YAML keeps the sheet note's 10 A per output"
+'Controllers | PixLite E16-S Mk3 | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-e16-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite T8-S Mk3 | Product URL':
+  - value: 'https://www.advateklights.com/pixlite-t8-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | Qolorpix | Product URL':
+  - value: 'http://www.citytheatrical.com/Products/qolorpix-tape-controller-eight-output#'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | Pixelator | Storage':
+  - value: 'Yes'
+    reason: 'The manual describes no show storage; its DMX Generator holds static looks only'
+'Controllers | EMP 16 Uni control | Product URL':
+  - value: 'https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | APD-2-500-12v-ART | Product URL':
+  - value: 'https://www.digitaltape.co.uk/pixel-drivers'
+    reason: "A category page; YAML links the product's own page"
+'Controllers | DMX to LED Strip | (name) (link)':
+  - value: 'https://www.boutique-electroconcept.com/dmx-signal-board-for-ledstrip-digital-ws2812-and-compatible-to-be-welded.html'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | DMX to LED Strip | Product URL (link)':
+  - value: 'https://www.boutique-electroconcept.com/dmx-signal-board-for-ledstrip-digital-ws2812-and-compatible-to-be-welded.html'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | Digiled Strip/DMX/WAV SD Micro Player | Notes (link)':
+  - value: 'https://www.boutique-electroconcept.com/information/downloads.html'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | LED Player M | (name) (link)':
+  - value: 'https://www.led-genial.de/LED-Controller-L-Rev2-fuer-WS2812-Effekte-abspielen-und-TPM2-ueber-USB'
+    reason: 'The sheet linked a different product (Diamex LED-Controller-L Rev. 2), now 404; the entry links the LED-Player-M manual'
+'Controllers | LED Player M | Product URL (link)':
+  - value: 'https://www.led-genial.de/LED-Controller-L-Rev2-fuer-WS2812-Effekte-abspielen-und-TPM2-ueber-USB'
+    reason: 'The sheet linked a different product (Diamex LED-Controller-L Rev. 2), now 404; the entry links the LED-Player-M manual'
+'Controllers | LED Player DMX | (name) (link)':
+  - value: 'https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | LED Player DMX | Product URL (link)':
+  - value: 'https://www.led-genial.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | LED Player L | (name) (link)':
+  - value: 'https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | LED Player L | Product URL (link)':
+  - value: 'https://www.led-genial.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | DIN Pixie | (name) (link)':
+  - value: 'https://www.enttec.com.au/product/lighting-show-controller/din-pixie-2-universe-dmx-to-led-pixel-converter-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | DIN Pixie | Product URL (link)':
+  - value: 'https://www.enttec.com.au/product/lighting-show-controller/din-pixie-2-universe-dmx-to-led-pixel-converter-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PB16 | (name) (link)':
+  - value: 'http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controlleri'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | PB16 | Product URL (link)':
+  - value: 'http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controlleri'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | LeDMX4 Pro | (name) (link)':
+  - value: 'https://dmxking.com/led-pixel-control/ledmx4-pro'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixelDIN | (name) (link)':
+  - value: 'https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | PixelDIN | Product URL (link)':
+  - value: 'https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin'
+    reason: 'Dead now; YAML links the current page'
+'Controllers | SPI LED Controller | (name) (link)':
+  - value: 'https://ledstripstudio.com/spi-led-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | SPI LED Controller | Product URL (link)':
+  - value: 'https://ledstripstudio.com/spi-led-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | E682 | (name) (link)':
+  - value: 'http://sandevices.com/product/e682-assembled-tested/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | E682 | Product URL (link)':
+  - value: 'http://sandevices.com/product/e682-assembled-tested/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | LeDMX2 MAX | (name) (link)':
+  - value: 'https://dmxking.com/led-pixel-control/ledmx2-max'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | LeDMX4 MAX | (name) (link)':
+  - value: 'https://dmxking.com/led-pixel-control/ledmx4-max'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | LeDMX4 MAX | Product URL (link)':
+  - value: 'https://dmxking.com/led-pixel-control/ledmx4-max'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 4 Mk2 | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-4-mk2-control-board'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite A4-S Mk3 | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-a4-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | RC4Magic S3 Pixel Driver | (name) (link)':
+  - value: 'https://theatrewireless.com/shop/rc4magic-s3/dmxpix/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | RC4Magic S3 Pixel Driver | Product URL (link)':
+  - value: 'https://theatrewireless.com/shop/rc4magic-s3/dmxpix/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 4 Rugged Mk2 | (name) (link)':
+  - value: 'https://www.advateklights.com/pixlite-4-mk2-rugged'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 4 Rugged Mk2 | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-4-mk2-rugged'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 16 Long Range Mk2 | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-16-mk2-long-range-control-board'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 16 Mk2 Control Board | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-16-mk2-control-board'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite 16 Plug and Play Mk2 | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-16-mk2-plug-and-play'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite E4-S Mk3 | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-e4-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | Epix Flex Drive | (name) (link)':
+  - value: 'https://www.chauvetprofessional.com/products/epix-flex-drive/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | Epix Flex Drive | Product URL (link)':
+  - value: 'https://www.chauvetprofessional.com/products/epix-flex-drive/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite E16-S Mk3 | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-e16-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite T8-S Mk3 | (name) (link)':
+  - value: 'https://www.advateklights.com/pixlite-t8-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | PixLite T8-S Mk3 | Product URL (link)':
+  - value: 'https://www.advateklights.com/pixlite-t8-s-mk3'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | Qolorpix | (name) (link)':
+  - value: 'http://www.citytheatrical.com/Products/qolorpix-tape-controller-eight-output#'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | Qolorpix | Product URL (link)':
+  - value: 'http://www.citytheatrical.com/Products/qolorpix-tape-controller-eight-output'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | EMP 16 Uni control | (name) (link)':
+  - value: 'https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | EMP 16 Uni control | Product URL (link)':
+  - value: 'https://www.empdesigns.co.uk/portfolio-item/16-universe-led-pixel-controller/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Controllers | APD-2-500-12v-ART | Product URL (link)':
+  - value: 'https://www.digitaltape.co.uk/pixel-drivers'
+    reason: "A category page; YAML links the product's own page"
+'Controllers | Falcon F48 | Pixel Types (note)':
+  - value: 'Requires differential receivers to actually drive LEDs'
+    reason: 'Same: outputs.differential (it drives Falcon differential receiver boards)'
+'Controllers | PixLite A4-S Mk3 | Standalone (note)':
+  - value: "SHOWTime™\nhttps://www.advateklights.com/advatek-showtime-2022"
+    reason: 'Same: standalone playback via SHOWTime (features, inputs.standalone)'
+'Controllers | DMX to SPI | Auxilary Outputs':
+  - value: 'Groupable in 1,2,4,5,10,100 as pixel'
+    reason: 'In features (pixel grouping in 1, 2, 4, 5, 10 or 100; from the sheet, unverified)'
 'Pixels | APA102 | Max pixel per string':
   - value: '~250 - CLK sensitive'
     reason: 'Same: max_per_string 250 with the clock-degradation explanation'
@@ -550,6 +880,54 @@
 'Pixels | SK6812 | Channel Current (note)':
   - value: 'not specified in datasheet but package limit is 0.2W, so ~20mA per channel probably'
     reason: 'The rev 03 datasheet specifies 12 mA; the 0.2 W package rating is in wattage'
+'Pixels | APA106 | Datasheet URL':
+  - value: 'https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107'
+    reason: 'A datasheet aggregator page; YAML links a direct datasheet PDF'
+'Pixels | NS107S | Datasheet URL':
+  - value: 'http://www.newstar-ledstrip.com/product/20190710114547839.pdf'
+    reason: 'Dead now; YAML links the current page'
+'Pixels | NS108 | Datasheet URL':
+  - value: 'http://newstar-ledstrip.com/productshow848.html'
+    reason: "The sheet linked the NS108E's page (gone); YAML links the NS108's own datasheet"
+'Pixels | PL9823 | 3rd Party Testing':
+  - value: 'https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-clones-pd9823/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Pixels | SK9822 | 3rd Party Testing':
+  - value: 'https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-the-apa102/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Pixels | WS2813 | Datasheet URL':
+  - value: 'http://newstar-ledstrip.com/product/20171208112004735.pdf'
+    reason: 'Dead now; YAML links the current page'
+'Pixels | WS2815 | Datasheet URL':
+  - value: 'http://newstar-ledstrip.com/product/20180125101420006.pdf'
+    reason: 'Dead now; YAML links the current page'
+'Pixels | APA106 | (name) (link)':
+  - value: 'https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107'
+    reason: 'A datasheet aggregator page; YAML links a direct datasheet PDF'
+'Pixels | APA106 | Datasheet URL (link)':
+  - value: 'https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107'
+    reason: 'A datasheet aggregator page; YAML links a direct datasheet PDF'
+'Pixels | NS107S | (name) (link)':
+  - value: 'http://www.newstar-ledstrip.com/product/20190710114547839.pdf'
+    reason: 'Dead now; YAML links the current page'
+'Pixels | NS107S | Datasheet URL (link)':
+  - value: 'http://www.newstar-ledstrip.com/product/20190710114547839.pdf'
+    reason: 'Dead now; YAML links the current page'
+'Pixels | NS108 | Datasheet URL (link)':
+  - value: 'http://newstar-ledstrip.com/productshow848.html'
+    reason: "The sheet linked the NS108E's page (gone); YAML links the NS108's own datasheet"
+'Pixels | PL9823 | 3rd Party Testing (link)':
+  - value: 'https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-clones-pd9823/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Pixels | SK9822 | 3rd Party Testing (link)':
+  - value: 'https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-the-apa102/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Pixels | WS2813 | Datasheet URL (link)':
+  - value: 'http://newstar-ledstrip.com/product/20171208112004735.pdf'
+    reason: 'Dead now; YAML links the current page'
+'Pixels | WS2815 | Datasheet URL (link)':
+  - value: 'http://newstar-ledstrip.com/product/20180125101420006.pdf'
+    reason: 'Dead now; YAML links the current page'
 'Pixel ICs | GS8202 | Other Links':
   - value: 'GS8202 Pixel Protocol Overview | Advatek Lighting'
     reason: 'Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)'
@@ -583,6 +961,24 @@
 'Pixel ICs | UCS2904 | (name) (link)':
   - value: 'https://www.gree-leds.com/rgbw-digital-strip/24v-ucs2904-digital-rgbw.html'
     reason: "Greeled's UCS2904 strip page, cited in pixel-ics/ucs2904 (this row is SM16704 data)"
+'Pixel ICs | TM1804 | Datasheet URL':
+  - value: 'http://www.ledlightmake.com/ledlightmake_serv/TM1804%20Datasheet.pdf'
+    reason: "Another copy of the datasheet; YAML links LCSC's (datasheet pass)"
+'Pixel ICs | WS2801 | Datasheet URL':
+  - value: 'https://www.futurlec.com/Others/WS2801.shtml'
+    reason: "Futurlec's datasheet page; YAML links WorldSemi's own PDF"
+'Pixel ICs | TM1804 | (name) (link)':
+  - value: 'http://www.ledlightmake.com/ledlightmake_serv/TM1804%20Datasheet.pdf'
+    reason: "Another copy of the datasheet; YAML links LCSC's (datasheet pass)"
+'Pixel ICs | TM1804 | Datasheet URL (link)':
+  - value: 'http://www.ledlightmake.com/ledlightmake_serv/TM1804%20Datasheet.pdf'
+    reason: "Another copy of the datasheet; YAML links LCSC's (datasheet pass)"
+'Pixel ICs | WS2801 | (name) (link)':
+  - value: 'https://www.futurlec.com/Others/WS2801.shtml'
+    reason: "Futurlec's datasheet page; YAML links WorldSemi's own PDF"
+'Pixel ICs | WS2801 | Datasheet URL (link)':
+  - value: 'https://www.futurlec.com/Others/WS2801.shtml'
+    reason: "Futurlec's datasheet page; YAML links WorldSemi's own PDF"
 'Pixel Decoders | ATtiny10 | Pixel Types':
   - value: 'allows driving 3-wire clockless leds with 4-wire clocked protocol. Experimental '
     reason: 'Same, as inputs.protocols/outputs.types plus notes (64a0d09)'
@@ -739,6 +1135,8 @@
 'Adapters | QuinLED-Dig-Uno | Parent':
   - value: 'ESP8266 or ESP32'
     reason: "The current board runs on QuinLED's ESP32 top board (core.family ESP32)"
+  - value: 'Wemos Dx Mini (ESP32/ESP8266)'
+    reason: 'The 2018 DIY board took a Wemos D1/D32 Mini; merged into controllers/quinled-dig-uno (now an ESP32 board)'
 'Adapters | QuinLED-Dig-Uno | Unit Price (USD)':
   - value: '24.99'
     reason: 'YAML price revised by research since the import'
@@ -751,6 +1149,75 @@
 'Adapters | QuinLED-Dig-Uno | Output Connectors':
   - value: 'Phoniex Screw'
     reason: 'Typo fixed in YAML (Phoenix Screw)'
+'Adapters | RaspPi Isolated DMX | Pixel Types':
+  - value: 'Allows easy control of DMX-512 devices from Pi'
+    reason: "A description in the Pixel Types column; the entry's notes say it"
+'Adapters | SP901E Pixel Data Distributor | Parent':
+  - value: '8 Ch Pixel data distribution'
+    reason: 'A description in the Parent column; it has no host board'
+'Adapters | ArtgateOne | Pixel Types':
+  - value: '1 Universe Artnet to DMX Node'
+    reason: 'A description in the Pixel Types column; the entry is the Art-Net to DMX node'
+'Adapters | EspArtStick WLED | Max LED Current':
+  - value: '15'
+    reason: "No published current rating (stream 2's research, 2a3efbf)"
+'Adapters | EspArtStick WLED | Parent':
+  - value: 'Wemos D1 Mini (ESP32/ESP8266)'
+    reason: 'Merged into controllers/espartstick (2a3efbf): a Wemos D1 Mini (ESP8266) shield, in its notes; ESP8266 only'
+'Adapters | EspArtStick WLED | Output Connectors':
+  - value: 'Phoenix Screw'
+    reason: 'Same: a plug-in screw terminal block'
+'Adapters | EspArtStick WLED | DIY/OTS':
+  - value: 'DIY'
+    reason: "Microcyb sold it assembled (stream 2's research); merged into controllers/espartstick"
+'Adapters | M4 Port Pixel | Max Channels':
+  - value: '37'
+    reason: 'Sheet error: the M4-PI has 4 outputs (merged into controllers/m4-port-pixel)'
+'Adapters | M4 Port Pixel | Parent':
+  - value: 'Raspberry Pi 3B+ or above'
+    reason: 'Same, as inputs.requires_host (merged into controllers/m4-port-pixel)'
+'Adapters | M4 Port Pixel | DIY/OTS':
+  - value: 'DIY'
+    reason: 'Merged into controllers/m4-port-pixel, which has no DIY/OTS field (sold assembled)'
+'Adapters | M8 Port Pixel | Max Channels':
+  - value: '75'
+    reason: 'Sheet error: the M8-PI has 8 outputs (merged into controllers/m8-port-pixel)'
+'Adapters | M8 Port Pixel | DIY/OTS':
+  - value: 'DIY'
+    reason: 'Merged into controllers/m8-port-pixel, which has no DIY/OTS field (sold assembled)'
+'Adapters | Pi Hat | Output Connectors':
+  - value: 'Both'
+    reason: 'Not a connector (a stray "Both")'
+'Adapters | Wemos PWM RGB/W LED Driver Board | Pixel Types':
+  - value: 'Fet power output'
+    reason: 'Same: MOSFET PWM outputs (notes, outputs.auxiliary PWM)'
+'Adapters | Plasma 2040 | Parent':
+  - value: 'Rpi 2040'
+    reason: 'The RP2040 is on the board; it has no host board'
+'Adapters | QuinLED-Dig-Quad | DIY/OTS':
+  - value: 'Both'
+    reason: 'Same: features "Available as DIY kit or pre-assembled" (merged into controllers/quinled-dig-quad)'
+'Adapters | Meanwell PDU with Differential Reciever | Max Voltage':
+  - value: '12'
+    reason: "Maker: 5 V or 12-24 V, set by jumper (wizardofwire's page)"
+'Adapters | ESPArtstick | Parent':
+  - value: 'Wemos Dx Mini (ESP32/ESP8266)'
+    reason: "ESP8266 only (stream 2's research, 2a3efbf)"
+'Adapters | QuinLED-Dig-Uno | Max Channels':
+  - value: '6'
+    reason: "The 2018 DIY board had 1 clocked or 2 single-wire outputs (QuinLED's 2018 guide); merged into controllers/quinled-dig-uno"
+'Adapters | QuinLED-Dig-Uno | Max Voltage':
+  - value: '5'
+    reason: 'The 2018 DIY board was built for 5 V (12 V optional); merged into the current controller entry'
+'Adapters | QuinLED-Dig-Uno | Product URL':
+  - value: 'https://quinled.info/2018/10/12/quinled-dig-uno-hardware-guide/#quinled-quad-pcb-boards'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Adapters | QuinLED-Dig-Uno | (name) (link)':
+  - value: 'https://quinled.info/2018/10/12/quinled-dig-uno-hardware-guide/#quinled-quad-pcb-boards'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Adapters | QuinLED-Dig-Uno | Product URL (link)':
+  - value: 'https://quinled.info/2018/10/12/quinled-dig-uno-hardware-guide/'
+    reason: 'Old URL; it redirects to the page YAML links'
 'DIY MicroBoards | NodeMCU v2 | USB':
   - value: 'No'
     reason: 'The sheet''s "No" meant no native USB; the micro-USB is a USB-UART bridge, recorded as "Power + UART" like the other such boards'
@@ -793,6 +1260,66 @@
 'DIY MicroBoards | Raspberry Pi 3 Model B | Bluetooth':
   - value: '4.0'
     reason: 'Bluetooth 4.1 per the launch post'
+'DIY MicroBoards | Arduino Mega 2560 Rev3 | Product URL':
+  - value: 'https://store-usa.arduino.cc/collections/boards/products/arduino-mega-2560-rev3'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | Arduino Micro | Product URL':
+  - value: 'https://store.arduino.cc/usa/arduino-micro'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | ATtiny85 | Product URL':
+  - value: 'https://www.microchip.com/wwwproducts/en/ATtiny85'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | PocketBeagle | Product URL':
+  - value: 'http://beagleboard.org/pocket'
+    reason: 'Old URL; it redirects to the page YAML links'
+'DIY MicroBoards | Beaglebone Black | Product URL':
+  - value: 'http://beagleboard.org/black'
+    reason: 'Old URL; it redirects to the page YAML links'
+'DIY MicroBoards | Ebyte NRF 52840 | Product URL':
+  - value: 'https://www.ebyte.com/en/new-view-info.aspx?id=378'
+    reason: "Ebyte's old site; YAML links its current product page (cdebyte.com)"
+'DIY MicroBoards | TTGo ESP32 PoE | Product URL':
+  - value: 'http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | Arduino Mega 2560 Rev3 | (name) (link)':
+  - value: 'https://store-usa.arduino.cc/collections/boards/products/arduino-mega-2560-rev3'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | Arduino Mega 2560 Rev3 | Product URL (link)':
+  - value: 'https://store-usa.arduino.cc/collections/boards/products/arduino-mega-2560-rev3'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | Arduino Micro | Product URL (link)':
+  - value: 'https://store.arduino.cc/usa/arduino-micro'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | ATtiny85 | (name) (link)':
+  - value: 'https://www.microchip.com/wwwproducts/en/ATtiny85'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | ATtiny85 | Product URL (link)':
+  - value: 'https://www.microchip.com/wwwproducts/en/ATtiny85'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | PocketBeagle | (name) (link)':
+  - value: 'http://beagleboard.org/pocket'
+    reason: 'Old URL; it redirects to the page YAML links'
+'DIY MicroBoards | PocketBeagle | Product URL (link)':
+  - value: 'http://beagleboard.org/pocket'
+    reason: 'Old URL; it redirects to the page YAML links'
+'DIY MicroBoards | Beaglebone Black | (name) (link)':
+  - value: 'http://beagleboard.org/black'
+    reason: 'Old URL; it redirects to the page YAML links'
+'DIY MicroBoards | Beaglebone Black | Product URL (link)':
+  - value: 'http://beagleboard.org/black'
+    reason: 'Old URL; it redirects to the page YAML links'
+'DIY MicroBoards | Ebyte NRF 52840 | Product URL (link)':
+  - value: 'https://www.ebyte.com/en/new-view-info.aspx?id=378'
+    reason: "Ebyte's old site; YAML links its current product page (cdebyte.com)"
+'DIY MicroBoards | TTGo ESP32 PoE | (name) (link)':
+  - value: 'http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | TTGo ESP32 PoE | Manufacturer (link)':
+  - value: 'http://www.lilygo.cn/'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'DIY MicroBoards | TTGo ESP32 PoE | Product URL (link)':
+  - value: 'http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
 'Connectors | Molex KK AKA KF2510 | Link':
   - value: 'https://www.molex.com/molex/products/family/kk'
     reason: "Old Molex link (hyperlink target differs from the cell text); YAML keeps the cell's URL"
@@ -811,12 +1338,111 @@
 'Connectors | DuPont | Crimp? (note)':
   - value: 'Proper crimp tool over 400 USD'
     reason: 'Already in notes ("proper crimp tool 400USD+")'
+'Connectors | SH | Link':
+  - value: 'https://www.jst-mfg.com/product/detail_e.php?series=231'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | PH | Link':
+  - value: 'http://www.jst-mfg.com/product/detail_e.php?series=199'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | PicoBlade | Link':
+  - value: 'https://www.molex.com/molex/products/family/picoblade'
+    reason: 'Dead now; YAML links the current page'
+'Connectors | DF62W | Link':
+  - value: 'https://www.hirose.com/product/series/DF62W#'
+    reason: 'Hirose now redirects it to its Japanese page; YAML links the English one'
+'Connectors | 9159 | Link':
+  - value: 'https://www.avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | SP17 | Link':
+  - value: 'https://weipuconnector.com/product/38'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | MTSB CombiCon | Link':
+  - value: 'https://in.rsdelivers.com/product/phoenix-contact/1757035/phoenix-contact-classic-combicon-mstb-non-fused/1896032'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | Deutsch DT | Link':
+  - value: 'https://www.te.com/usa-en/products/connectors/automotive-connectors/intersection/deutsch-dt-series-connectors.html?tab=pgp-story'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Connectors | Mini-Fit Jr | Link':
+  - value: 'https://www.molex.com/molex/products/family/minifit_power_connector_solutions'
+    reason: 'Dead now; YAML links the current page'
+'Connectors | PowerCon | Link':
+  - value: 'https://www.neutrik.com/en/neutrik/products/powercon'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | Harting Han/ Lectriflex | Link':
+  - value: 'https://www.harting.com/US/en/heavy-duty-electrical-connectors#Han%C2%AE-Rangee'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | Speakon | Link':
+  - value: 'https://www.neutrik.com/en/neutrik/products/speakon-loudspeaker-connectors/speakon-cable-connectors'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | Wago 221 | Link':
+  - value: 'https://www.wago.com/global/electrical-interconnections/discover-installation-terminal-blocks-and-connectors/221'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | PowerPole 15/45 | Link':
+  - value: 'https://www.andersonpower.com/us/en/resources/PowerPoleResourcesPage.html'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | XT60/90 | Link':
+  - value: 'https://www.sparkfun.com/products/10474'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | SH | Link (link)':
+  - value: 'https://www.jst-mfg.com/product/detail_e.php?series=231'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | PH | Link (link)':
+  - value: 'http://www.jst-mfg.com/product/detail_e.php?series=199'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | PicoBlade | Link (link)':
+  - value: 'https://www.molex.com/molex/products/family/picoblade'
+    reason: 'Dead now; YAML links the current page'
+'Connectors | DF62W | Link (link)':
+  - value: 'https://www.hirose.com/product/series/DF62W'
+    reason: 'Hirose now redirects it to its Japanese page; YAML links the English one'
+'Connectors | 9159 | Link (link)':
+  - value: 'https://www.avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | SP17 | Link (link)':
+  - value: 'https://weipuconnector.com/product/38'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | MTSB CombiCon | Link (link)':
+  - value: 'https://in.rsdelivers.com/product/phoenix-contact/1757035/phoenix-contact-classic-combicon-mstb-non-fused/1896032'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | Deutsch DT | Link (link)':
+  - value: 'https://www.te.com/usa-en/products/connectors/automotive-connectors/intersection/deutsch-dt-series-connectors.html?tab=pgp-story'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Connectors | Mini-Fit Jr | Link (link)':
+  - value: 'https://www.molex.com/molex/products/family/minifit_power_connector_solutions'
+    reason: 'Dead now; YAML links the current page'
+'Connectors | PowerCon | Link (link)':
+  - value: 'https://www.neutrik.com/en/neutrik/products/powercon'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | Harting Han/ Lectriflex | Link (link)':
+  - value: 'https://www.harting.com/US/en/heavy-duty-electrical-connectors'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | Speakon | Link (link)':
+  - value: 'https://www.neutrik.com/en/neutrik/products/speakon-loudspeaker-connectors/speakon-cable-connectors'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | Wago 221 | Link (link)':
+  - value: 'https://www.wago.com/global/electrical-interconnections/discover-installation-terminal-blocks-and-connectors/221'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | PowerPole 15/45 | Link (link)':
+  - value: 'https://www.andersonpower.com/us/en/resources/PowerPoleResourcesPage.html'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | XT60/90 | Link (link)':
+  - value: 'https://www.sparkfun.com/products/10474'
+    reason: 'Old URL; it redirects to the page YAML links'
 'Drive Libraries | Arduino Ethernet Nano with ENC28J60 | Features':
   - value: 'WS2811/12 Ethernet Hardwire'
     reason: 'YAML revised by research since the import'
 'Drive Libraries | Fade | Developer':
   - value: 'Eric Arcana'
     reason: 'Fade is Eric Gunnerson''s (riderx.info); "Eric Arcana" was a sheet error, fixed in 388c2cf'
+'Drive Libraries | WLED | URL':
+  - value: 'https://github.com/Aircoookie/WLED'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Drive Libraries | WLED | (name) (link)':
+  - value: 'https://github.com/Aircoookie/WLED'
+    reason: 'Old URL; it redirects to the page YAML links'
+'Drive Libraries | WLED | URL (link)':
+  - value: 'https://github.com/Aircoookie/WLED'
+    reason: 'Old URL; it redirects to the page YAML links'
 'Diffusive Materials | Printer Paper | Material Type':
   - value: 'Wood Pulp'
     reason: 'Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters'
@@ -943,6 +1569,18 @@
 'Diffusive Materials | Plexiglas LED Edge Lit was EndlightenT | Properties':
   - value: 'Edge Lit front diffuser'
     reason: 'Same in structured form: optical.properties edge-lit; the notes describe the diffusing particles'
+'Diffusive Materials | Poly Pro Pipe Thin Wall | URL':
+  - value: 'https://www.omega.co.uk/pptst/TYPP.html'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Diffusive Materials | Corrugated Split Loom Conduit/Tubing/Sleeving | URL':
+  - value: 'https://www.cabletiesandmore.ca/images/gallery/white-wire-loom-perfoot.jpg'
+    reason: 'Dead now; YAML links the current page'
+'Diffusive Materials | Poly Pro Pipe Thin Wall | URL (link)':
+  - value: 'https://www.omega.co.uk/pptst/TYPP.html'
+    reason: "Old URL (the site blocks scripted checks); YAML links the maker's current page"
+'Diffusive Materials | Corrugated Split Loom Conduit/Tubing/Sleeving | URL (link)':
+  - value: 'https://www.cabletiesandmore.ca/images/gallery/white-wire-loom-perfoot.jpg'
+    reason: 'Dead now; YAML links the current page'
 'Commercial Pixel Systems | Lightwalls | Online Pricing':
   - value: 'Learning kit £550+VAT'
     reason: 'Same in structured form: pricing.examples (item, £550, +VAT)'
@@ -952,3 +1590,6 @@
 'Commercial Pixel Systems | LB-100 | Manufacturer (link)':
   - value: 'https://sgmlight.com/products/lb%C2%B7100'
     reason: 'Maker moved the page; YAML has the current URL'
+'Commercial Pixel Systems | Twinkly | Online Pricing':
+  - value: '250 string $105'
+    reason: 'Re-priced at the source: $119.99 for 250 LEDs (Twinkly US store, retrieved 2026-11-18)'
