@@ -6,8 +6,14 @@ color:
 data:
   clocked: false
   channels: 3
+  type: UCS1903
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs2903
 physical:
   packages:
     - SOP-8
+sources:
+  data.type:
+    url: http://szucs.cn/page148
+    retrieved: '2026-11-18'
+    notes: Maker product table, Shenzhen Lianxinke Microelectronics (深圳联芯科微电子, www.szucs.cn), forwarding-IC table grouping the 19 and 29 series as one single-wire 256-level protocol.

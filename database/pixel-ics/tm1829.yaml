@@ -7,6 +7,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: TM1829
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1829
 physical:
@@ -32,3 +33,7 @@ sources:
     url: https://www.lcsc.com/product-detail/C52109855.html
     retrieved: '2026-11-18'
     notes: 'TM1829B-SOP8-TA2105B in stock at LCSC (50 pcs)'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C5174518.pdf
+    retrieved: '2026-11-18'
+    notes: Titan Micro TM1829 datasheet V1.5, English

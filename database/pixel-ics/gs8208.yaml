@@ -7,6 +7,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: WS2811/12
 datasheet:
   third_party_testing: https://www.advateklighting.com/pixel-protocols/gs8208
   url: https://www.artleds.com/images/Specs/gs8208-datasheet.pdf
@@ -16,3 +17,8 @@ physical:
 related:
   - type: related
     ref: pixels/gs8208
+sources:
+  data.type:
+    url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "GS8208 datasheet Version V0.1 (distributor Normand's copy; same PDF the pixels/gs8208 entry already cites), 'Data Format' section. Features: 'Use e-RZ code, serial data frequency 800kHz', '8bits data transfer'; reset '>300us'."

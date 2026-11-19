@@ -29,3 +29,8 @@ physical:
   packages:
     - SOP-14
     - DIP-14
+sources:
+  data.type:
+    url: https://www.electrokit.com/upload/product/41011/41011147/P9813_datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: DMS Microelectronics P9813 datasheet (English, distributor Electrokit-hosted), sections 二 Features and 五 'P9813 communication protocol'.

@@ -3,6 +3,8 @@ status: active
 release_year: 2010
 creator: WorldSemi
 notes: Early Addressable LED controller still common on 4 wire pixel and puck strings
+aliases:
+  - WS2801S
 color:
   channel_bits: 8
   pwm_frequency: 2.5kHz
@@ -49,5 +51,13 @@ sources:
     url: https://www.lcsc.com/product-detail/C114580.html
     retrieved: '2026-11-18'
     notes: 'WS2801S in stock at LCSC (2,880 pcs)'
+  data.type:
+    url: https://cdn-shop.adafruit.com/datasheets/WS2801.pdf
+    retrieved: '2026-11-18'
+    notes: WorldSemi WS2801 preliminary datasheet WS-Preliminary-V0.3
+  aliases:
+    url: https://www.lcsc.com/datasheet/C114580.pdf
+    retrieved: '2026-11-18'
+    notes: "WorldSemi WS2801S datasheet (LCSC C114580): the 'S' (SOP-14) part number; the body text calls the same chip 'WS2801'. LCSC lists the part as WS2801S (also the YAML's price SKU)."
 technical_notes:
   - The 2009 preliminary datasheet also listed a DIP-14 package; current WS2801S datasheets list SOP-14 only.

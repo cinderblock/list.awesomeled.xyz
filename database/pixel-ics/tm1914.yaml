@@ -7,6 +7,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: TM1914
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1914
 physical:
@@ -35,5 +36,9 @@ sources:
     url: https://www.lcsc.com/product-detail/C5174521.html
     retrieved: '2026-11-18'
     notes: 'TM1914A in stock at LCSC (20,945 pcs)'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C5174535.pdf
+    retrieved: '2026-11-18'
+    notes: Titan Micro TM1914 datasheet V1.2 (LCSC C5174535), 功能说明 sections 1-4.
 technical_notes:
   - TM1914A is the SOP-8 version; the listed prices are for TM1914A.

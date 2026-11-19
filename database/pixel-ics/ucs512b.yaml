@@ -6,6 +6,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: DMX512P
 dead_links:
   - url: https://www.advateklights.com/knowledge-base/ucs512B
     checked: '2026-11-18'
@@ -16,3 +17,8 @@ other_links:
 physical:
   packages:
     - SOP-8
+sources:
+  data.type:
+    url: https://media.ledyi.com/ucs512b3-datasheet_8c7b137827d5ad9fe6e7dcca8d318bd9acb6f06bc4fb98c674334cbd3ce2bc92.pdf
+    retrieved: '2026-11-18'
+    notes: UCS512B3 datasheet

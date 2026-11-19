@@ -31,3 +31,8 @@ other_links:
 physical:
   packages:
     - SOP-8
+sources:
+  data.type:
+    url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS8903-datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "UCS8903 datasheet (LEDYi-hosted English copy), Features + '48-bit data format' figure (rendered and read): one-wire RZ, 800 kbps, 3 x 16-bit (R15..R0, G15..G0, B15..B0) MSB first."

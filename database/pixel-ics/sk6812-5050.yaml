@@ -9,6 +9,7 @@ data:
   channels: 3
   bitrate: 800kHz
   pixel_size_bits: 24
+  type: WS2811/12
 datasheet:
   url: https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
 electrical:
@@ -40,3 +41,7 @@ sources:
     url: https://www.lcsc.com/product-detail/C5378720.html
     retrieved: '2026-11-18'
     notes: 'SK6812 5050 in stock at LCSC (15,300 pcs)'
+  data.type:
+    url: https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
+    retrieved: '2026-11-18'
+    notes: "SK6812 Technical Data Sheet Rev. No. 01 (LED Color / szledcolor.com, Adafruit-hosted; the YAML's own datasheet). Product overview + timing: 24 bits GRB per pixel, T0H 0.3 us / T1H 0.6 us, reset 80 us (frame diagram says >=50 us)."

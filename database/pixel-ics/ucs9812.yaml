@@ -6,6 +6,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: UCS9812
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs9812
 physical:
@@ -13,3 +14,8 @@ physical:
     - SOP-16
     - SSOP-16
     - QFN-16
+sources:
+  data.type:
+    url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS9812-datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: UCS9812 datasheet VER1.0 (2012-02-15; LEDYi-hosted English copy), Features + '240-bit data format' section.

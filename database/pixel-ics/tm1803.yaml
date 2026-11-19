@@ -7,6 +7,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: TM1803
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1803
 physical:
@@ -32,3 +33,7 @@ sources:
     url: https://www.lcsc.com/product-detail/C5159541.html
     retrieved: '2026-11-18'
     notes: 'in stock at LCSC (90 pcs)'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C5159541.pdf
+    retrieved: '2026-11-18'
+    notes: Titan Micro TM1803 datasheet V1.5 (LCSC C5159541), 功能特点 + 低速模式时间 table.

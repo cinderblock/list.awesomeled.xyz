@@ -6,8 +6,14 @@ color:
 data:
   clocked: false
   channels: 3
+  type: UCS1903
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs1903
 physical:
   packages:
     - SOP-8
+sources:
+  data.type:
+    url: https://www.superlightingled.com/PDF/UCS1903%20datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: UCS1903 datasheet V. 1.0 (English; reseller superlightingled.com copy), Functional Description + timing table.

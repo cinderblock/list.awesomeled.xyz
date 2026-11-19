@@ -7,9 +7,15 @@ color:
 data:
   clocked: false
   channels: 4
+  type: DMX512P
 other_links:
   - https://www.advateklighting.com/pixel-protocols/dmx512
 physical:
   packages:
     - SOP-10
     - SOP-16
+sources:
+  data.type:
+    url: https://www.advateklighting.com/pixel-protocols/sm16511
+    retrieved: '2026-11-18'
+    notes: Advatek Lighting pixel-protocol page

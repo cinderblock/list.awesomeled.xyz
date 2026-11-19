@@ -6,6 +6,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: WS2811/12
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sm16712
 physical:
@@ -19,3 +20,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.aliexpress.us/w/wholesale-SM16712.html
   vendor: AliExpress (street)
+sources:
+  data.type:
+    url: https://www.advateklighting.com/pixel-protocols/sm16712
+    retrieved: '2026-11-18'
+    notes: Advatek Lighting pixel-protocol page

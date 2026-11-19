@@ -59,5 +59,9 @@ sources:
     url: https://www.lcsc.com/product-detail/C114582.html
     retrieved: '2026-11-18'
     notes: 'in stock at LCSC (8,040 pcs)'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C114582.pdf
+    retrieved: '2026-11-18'
+    notes: WorldSemi WS2818B datasheet
 technical_notes:
   - Datasheet V1.5 (Oct 2022) dropped the CPC-8 package (a ~2.6 x 2.6 mm WorldSemi 8-lead part) and added FSOP-8.

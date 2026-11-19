@@ -6,6 +6,7 @@ color:
 data:
   clocked: true
   channels: 3
+  type: MBI6020
 electrical:
   output_voltage: 12V
 other_links:
@@ -13,3 +14,8 @@ other_links:
 physical:
   packages:
     - SSOP-16
+sources:
+  data.type:
+    url: https://www.datasheetcafe.com/mbi6020-pdf-27424/
+    retrieved: '2026-11-18'
+    notes: DatasheetCafe summary of the Macroblock MBI6020 datasheet

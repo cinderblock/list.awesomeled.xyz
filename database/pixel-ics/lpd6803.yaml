@@ -28,3 +28,8 @@ physical:
   packages:
     - SOP-16
     - QFN-16
+sources:
+  data.type:
+    url: https://cdn-shop.adafruit.com/datasheets/LPD6803.pdf
+    retrieved: '2026-11-18'
+    notes: LPD6803 datasheet (Adafruit-hosted English translation), 'Basic timing sequence' section; two-wire DIN + DCLK, data clocked on DCLK rising edge, 16 bits per pixel. Confirms the existing label.

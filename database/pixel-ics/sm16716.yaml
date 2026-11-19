@@ -6,8 +6,14 @@ color:
 data:
   clocked: true
   channels: 3
+  type: SM16716
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sm16716
 physical:
   packages:
     - SOP-16
+sources:
+  data.type:
+    url: https://media.ledyi.com/sm16716-datasheet_113cde8d9eb3ebef7dfbc0c43a943cb61b0f9cddca8580d353ae2dbc3ef95377.pdf
+    retrieved: '2026-11-18'
+    notes: Sunmoon SM16716 datasheet OTWB2011V1.1 (LEDYi-hosted copy), 'Function Description'.

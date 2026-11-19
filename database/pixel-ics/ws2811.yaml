@@ -3,6 +3,8 @@ status: active
 release_year: 2011
 creator: WorldSemi
 notes: Addressable in groups (usually of 3 LEDs), common on 3 wire pixels, pucks, floods
+aliases:
+  - WS281x
 color:
   channel_bits: 8
   aggregate_bits: 24
@@ -59,6 +61,14 @@ sources:
     url: https://www.lcsc.com/product-detail/C114581.html
     retrieved: '2026-11-18'
     notes: 'in stock at LCSC (120,800 pcs)'
+  data.type:
+    url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
+    retrieved: '2026-11-18'
+    notes: Original WorldSemi WS2811 English datasheet
+  aliases:
+    url: https://github.com/jgarff/rpi_ws281x
+    retrieved: '2026-11-18'
+    notes: "rpi_ws281x readme (widely used Raspberry Pi driver library): uses 'WS281X' as the family nickname for WS2811-protocol LEDs and names its API after the WS2811."
 technical_notes:
   - Standalone IC, not integrated with LEDs like WS2812
   - Commonly used for 12V pixels with 3 LEDs in series

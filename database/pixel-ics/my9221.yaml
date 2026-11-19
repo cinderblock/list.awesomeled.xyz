@@ -7,6 +7,7 @@ color:
 data:
   clocked: true
   channels: 3
+  type: MY9221
 electrical:
   output_voltage: 24V
 other_links:
@@ -26,7 +27,11 @@ price_source:
   url: https://www.aliexpress.us/w/wholesale-MY9221SS.html
   vendor: AliExpress (street)
 sources:
+  data.type:
+    url: https://github.com/Seeed-Studio/Grove_LED_Bar/blob/master/Grove_LED_Bar.cpp
+    retrieved: '2026-11-18'
+    notes: Seeed Studio Grove_LED_Bar library
   status:
     url: http://www.my-semi.com/content/products/product_mean.aspx?id=4
     retrieved: '2026-11-18'
-    notes: "listed in MY-Semi's LED Lighting product catalog"
+    notes: listed in MY-Semi's LED Lighting product catalog

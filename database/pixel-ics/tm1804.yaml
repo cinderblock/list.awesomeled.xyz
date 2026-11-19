@@ -47,3 +47,7 @@ sources:
     url: https://www.lcsc.com/product-detail/C20622206.html
     retrieved: '2026-11-18'
     notes: 'TM1804 (TA1610B SOP8) in stock at LCSC (1,090 pcs)'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C20622206.pdf
+    retrieved: '2026-11-18'
+    notes: 'Titan Micro TM1804 datasheet V1.9 (LCSC C20622206), 功能特点 + 高速模式时间 table: one-wire RZ, 24-bit RGB MSB first'

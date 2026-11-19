@@ -6,6 +6,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: TLS3001
 datasheet:
   url: https://www.bestlightingbuy.com/pdf/TLS3001%20Datasheet.pdf
   discrepancies:
@@ -21,3 +22,8 @@ physical:
     - SOP-8
     - SSOP-10
     - SOP-14
+sources:
+  data.type:
+    url: https://forkineye.github.io/ESPixelStick/doxy/_output_t_l_s3001_8hpp_source.html
+    retrieved: '2026-11-18'
+    notes: ESPixelStick firmware's TLS3001 output driver (OutputTLS3001.hpp, official ESPixelStick docs), header comment restating the chip's input-signal rules (looks translated from the datasheet).

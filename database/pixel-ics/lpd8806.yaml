@@ -37,3 +37,16 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.aliexpress.us/w/wholesale-LPD8806-IC.html
   vendor: AliExpress (street)
+related:
+  - type: predecessor
+    ref: pixel-ics/lpd6803
+    notes: LPD8806 is the newer generation of the LPD6803 (the 3-channel LPD8803 of the same family is pin-compatible with LPD6803)
+    source:
+      url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+      retrieved: '2026-11-18'
+      notes: Intro and Features item 2. Maker wording is 'new generation' plus the LPD8803 pin-compatibility note
+sources:
+  data.type:
+    url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+    retrieved: '2026-11-18'
+    notes: LPD8803/8806 datasheet (Greeled Electronic Ltd, Adafruit-hosted English), Features list. The data-frame layout is not in the text (likely in a figure). Confirms the existing label.

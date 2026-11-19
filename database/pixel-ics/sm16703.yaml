@@ -1,12 +1,15 @@
 name: SM16703
 status: active
 creator: Shenzhen Sunmoon Microelectronics
+aliases:
+  - SM16703P
 color:
   channel_bits: 8
   pwm_frequency: 1.2kHz
 data:
   clocked: false
   channels: 3
+  type: WS2811/12
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sm16703
 physical:
@@ -33,3 +36,11 @@ sources:
     url: https://www.lcsc.com/product-detail/C155753.html
     retrieved: '2026-11-18'
     notes: 'SM16703P in stock at LCSC (38,710 pcs)'
+  data.type:
+    url: https://www.lcsc.com/datasheet/C155753.pdf
+    retrieved: '2026-11-18'
+    notes: 'Sunmoon SM16703P datasheet IAV1.1 (LCSC C155753), 概述 + 编码描述 tables: single-wire unipolar RZ, 800 kbps, T0H 0.3 us / T1H 0.9 us (+/-0.05 us), reset 80 us low, 24 bits RGB MSB first.'
+  aliases:
+    url: https://www.lcsc.com/datasheet/C155753.pdf
+    retrieved: '2026-11-18'
+    notes: "Datasheet title and ordering table: SM16703P is the SOP8 orderable part number of this IC (the YAML's LCSC price SKU is also SM16703P). Sunmoon also sells an SM16703SP package variant (separate datasheet), not added."

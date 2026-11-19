@@ -7,8 +7,14 @@ color:
 data:
   clocked: false
   channels: 3
+  type: WS2811/12
 other_links:
   - https://www.advateklighting.com/pixel-protocols/gs8206
 physical:
   packages:
     - SOP-8
+sources:
+  data.type:
+    url: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Genesis Systech GS8206 datasheet version 0.2 (June 12, 2016), 'Data Format' section

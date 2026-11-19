@@ -34,5 +34,9 @@ sources:
     url: http://www.my-semi.com/content/products/product_mean.aspx?id=5
     retrieved: '2026-11-18'
     notes: "listed in MY-Semi's LED Lighting product catalog"
+  data.type:
+    url: http://www.my-semi.com/file/MY9231_BF_0.91.pdf
+    retrieved: '2026-11-18'
+    notes: MY-Semi MY9231 brief datasheet Ver. 0.91
 technical_notes:
   - Pixel data size is variable (it depends on the configured bit depth)

@@ -6,6 +6,7 @@ color:
 data:
   clocked: false
   channels: 3
+  type: WS2811/12
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2811-v1-4
 physical:
@@ -14,3 +15,8 @@ physical:
 related:
   - type: variant
     ref: pixel-ics/ws2811
+sources:
+  data.type:
+    url: https://www.lcsc.com/datasheet/C114581.pdf
+    retrieved: '2026-11-18'
+    notes: "WorldSemi WS2811 datasheet V2.2 (LCSC C114581), 开关特性 table + revision log: 'V1.4' is the 2018-09-10 datasheet revision that changed T1L and the logic-input spec."

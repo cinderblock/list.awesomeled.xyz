@@ -7,6 +7,7 @@ color:
 data:
   clocked: true
   channels: 4
+  type: MY9231
 datasheet:
   url: http://www.my-semi.com.tw/file/MY9291_BF_0.91.pdf
 other_links:
@@ -21,3 +22,7 @@ sources:
     url: http://www.my-semi.com/content/products/product_mean.aspx?id=6
     retrieved: '2026-11-18'
     notes: "listed in MY-Semi's LED Lighting product catalog"
+  data.type:
+    url: https://www.ic118.com/pdf/detail_76245082848856.html
+    retrieved: '2026-11-18'
+    notes: Excerpt of the MY-Semi MY9291 datasheet Ver.

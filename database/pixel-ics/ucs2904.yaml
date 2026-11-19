@@ -8,6 +8,7 @@ data:
   channels: 4
   bitrate: 800kHz
   backup_line: false
+  type: 4chUCS1903
 electrical:
   output_voltage: 30V
   supply_voltage: 5V
@@ -26,3 +27,16 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.aliexpress.us/w/wholesale-UCS2904B.html
   vendor: AliExpress (street)
+related:
+  - type: variant
+    ref: pixel-ics/ucs2903
+    notes: RGBW (4-channel) version of the UCS2903
+    source:
+      url: http://szucs.cn/page136
+      retrieved: '2026-11-18'
+      notes: Maker product table, Shenzhen Lianxinke Microelectronics (深圳联芯科微电子, www.szucs.cn), 256-level single-wire cascade IC table (adjacent rows, same 1.8 kHz / 800K / SOP8 spec).
+sources:
+  data.type:
+    url: https://superlightingled.com/PDF/UCS2904-Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: UCS2904B product sheet

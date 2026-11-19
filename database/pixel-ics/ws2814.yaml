@@ -7,6 +7,7 @@ color:
 data:
   clocked: false
   channels: 4
+  type: 4chWS2811/12
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2814
 physical:
@@ -33,5 +34,9 @@ sources:
     url: https://www.lcsc.com/product-detail/C5446694.html
     retrieved: '2026-11-18'
     notes: 'WS2814F in stock at LCSC (79,595 pcs)'
+  data.type:
+    url: https://media.ledyi.com/ws2814-datasheet_2b10ca91206f21ee684c6d907b6ef50d26bc74be422a289c596752b36ad6c1cc.pdf
+    retrieved: '2026-11-18'
+    notes: 'WorldSemi WS2814 (SOP12) datasheet, revision log V1.0 2019-04-10 to V1.4 2022-07-26 (LEDYi-hosted copy), General description + timing: one-wire NZR, 800 kbps, 32 bits per chip RGBW MSB first, T0H 220-380 ns / T1H 580 ns-1 us, reset >280 us.'
 technical_notes:
   - 'Variants: WS2814A (SOP-8 / FSOP-8), WS2814C (SOP-8), WS2814F (FSOP-8); the listed prices are for WS2814F.'

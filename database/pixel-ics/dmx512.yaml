@@ -17,3 +17,8 @@ other_links:
 physical:
   packages:
     - SOP-8
+sources:
+  data.type:
+    url: https://www.advateklighting.com/pixel-protocols/dmx512
+    retrieved: '2026-11-18'
+    notes: Advatek Lighting pixel-protocol page (third-party controller maker; read via the advatek.netlify.app deployment of the same site); Overview + 'DMX512 Chips' table. Confirms the existing label.

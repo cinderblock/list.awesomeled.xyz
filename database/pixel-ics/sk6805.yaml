@@ -1,8 +1,7 @@
 name: SK6805
 status: active
 creator: Opsco Optoelectronics
-notes: Low-current SK6812 sibling (5 mA/channel vs 12 mA) in miniature packages,
-  used for dense strips and tiny pixels (e.g. NeoPixel Nano 2427).
+notes: Low-current SK6812 sibling (5 mA/channel vs 12 mA) in miniature packages, used for dense strips and tiny pixels (e.g. NeoPixel Nano 2427).
 color:
   channel_bits: 8
   pwm_frequency: 1.2kHz
@@ -11,6 +10,7 @@ data:
   channels: 3
   bitrate: 800kHz
   pixel_size_bits: 24
+  type: WS2811/12
 datasheet:
   url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
 electrical:
@@ -49,3 +49,7 @@ sources:
     url: https://www.lcsc.com/product-detail/C2909056.html
     retrieved: '2026-11-18'
     notes: 'SK6805MICRO-J (2427) in stock at LCSC (95,510 pcs)'
+  data.type:
+    url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "SK6805-2427 specification Rev. 01 (2016-08-08), Adafruit-hosted (the YAML's own datasheet). Product overview + timing table: one-wire, 24 bits (GRB) per pixel, T0H 0.3 us / T1H 0.6 us (+/-0.15 us), reset 80 us low."
