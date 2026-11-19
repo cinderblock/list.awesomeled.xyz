@@ -26,6 +26,9 @@ test.describe('Phone widths', () => {
   }
 
   test('the header keeps its logo on one line and its search within reach', async ({ page }) => {
+    // Four loads of the full controllers table: more than the default budget
+    // on a busy machine
+    test.slow();
     for (const width of [320, 390, 768, 1024]) {
       await page.setViewportSize({ width, height: 800 });
       await gotoReady(page, '/controllers');
