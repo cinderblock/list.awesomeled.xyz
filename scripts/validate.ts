@@ -20,6 +20,7 @@ import addFormats from 'ajv-formats';
 import sharp from 'sharp';
 import type { BaseEntry } from '../app/lib/types';
 import { buildRelationGraph, type DanglingRef } from '../app/lib/relations';
+import { USD_PER } from '../app/lib/currency';
 
 const DB_DIR = 'database';
 const SCHEMA_DIR = 'database/_schema';
@@ -71,6 +72,25 @@ function checkSources(data: Record<string, unknown>): string[] {
         data
       );
     if (value == null) problems.push(`sources "${path}": the entry has no such field`);
+  }
+  return problems;
+}
+
+/**
+ * Every `currency` used in a price must have a rate in app/lib/currency.ts:
+ * without one the price can't be converted, so it sorts with the blanks and
+ * filters drop it (an INR price did exactly that and broke the table e2e).
+ */
+function checkCurrencies(data: unknown, path = ''): string[] {
+  if (!data || typeof data !== 'object') return [];
+  const problems: string[] = [];
+  for (const [k, v] of Object.entries(data as Record<string, unknown>)) {
+    const p = path ? `${path}.${k}` : k;
+    if (k === 'currency' && typeof v === 'string' && USD_PER[v] == null) {
+      problems.push(`${p} "${v}": no rate in app/lib/currency.ts USD_PER`);
+    } else if (v && typeof v === 'object') {
+      problems.push(...checkCurrencies(v, p));
+    }
   }
   return problems;
 }
@@ -224,6 +244,7 @@ async function main() {
           (p) => `${p.field} "${p.ref}": ${p.problem}`
         ),
         ...checkSources(data as Record<string, unknown>),
+        ...checkCurrencies(data),
         ...(await checkImages(folder, data as Record<string, unknown>, referencedImages)),
       ];
       if (validate(data) && refProblems.length === 0) {
