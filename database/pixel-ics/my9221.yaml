@@ -6,7 +6,7 @@ color:
   pwm_frequency: 1.0kHz
 data:
   clocked: true
-  channels: 3
+  channels: 12
   type: MY9221
 electrical:
   output_voltage: 24V
@@ -35,3 +35,7 @@ sources:
     url: http://www.my-semi.com/content/products/product_mean.aspx?id=4
     retrieved: '2026-11-18'
     notes: listed in MY-Semi's LED Lighting product catalog
+  data.channels:
+    url: https://www.allproducts.com/manufacture100/MYSemi/product3.html
+    retrieved: '2026-11-18'
+    notes: "'The MY9221, 12-channels (R/G/B x 4) constant current APDM LED driver'"

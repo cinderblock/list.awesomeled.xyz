@@ -1,5 +1,5 @@
 name: UCS8904
-creator: Normand Electronics
+creator: Lianxinke Microelectronics
 color:
   channel_bits: 16
   pwm_frequency: 1.0kHz
@@ -29,3 +29,7 @@ sources:
     url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS8904B-datasheet.pdf
     retrieved: '2026-11-18'
     notes: UCS8904B datasheet ver2.2 (LEDYi-hosted; the UCS8904A copy at media.ledyi.com has the same frame text).
+  creator:
+    url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
+    retrieved: '2026-11-18'
+    notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'

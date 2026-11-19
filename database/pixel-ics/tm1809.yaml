@@ -6,7 +6,7 @@ color:
   pwm_frequency: 400Hz
 data:
   clocked: false
-  channels: 3
+  channels: 9
   type: WS2811/12
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1809
@@ -39,3 +39,7 @@ sources:
     url: https://www.lcsc.com/datasheet/C20622180.pdf
     retrieved: '2026-11-18'
     notes: Titan Micro TM1809 datasheet V1.6 (LCSC C20622180), 功能描叙 + 72bit data structure + 高速模式时间 table.
+  data.channels:
+    url: https://www.lcsc.com/datasheet/C20622180.pdf
+    retrieved: '2026-11-18'
+    notes: "'9 通道LED 驱动控制专用电路 TM1809' (9-channel)"

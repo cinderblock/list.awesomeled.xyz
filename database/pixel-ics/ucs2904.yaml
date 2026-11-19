@@ -1,8 +1,8 @@
 name: UCS2904
-creator: Normand Electronics
+creator: Lianxinke Microelectronics
 color:
   channel_bits: 8
-  pwm_frequency: 1.2kHz
+  pwm_frequency: 1.8kHz
 data:
   clocked: false
   channels: 4
@@ -14,7 +14,6 @@ electrical:
   supply_voltage: 5V
   max_current: 17mA
 other_links:
-  - https://www.advateklighting.com/pixel-protocols/sm16704
   - https://www.advateklighting.com/pixel-protocols/ucs2904
 physical:
   packages:
@@ -40,3 +39,11 @@ sources:
     url: https://superlightingled.com/PDF/UCS2904-Datasheet.pdf
     retrieved: '2026-11-18'
     notes: UCS2904B product sheet
+  color.pwm_frequency:
+    url: https://superlightingled.com/PDF/UCS2904-Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'Port scanning frequency ... of 1.8 KHZ/S'"
+  creator:
+    url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
+    retrieved: '2026-11-18'
+    notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'

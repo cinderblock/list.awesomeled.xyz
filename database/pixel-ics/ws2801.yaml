@@ -59,5 +59,9 @@ sources:
     url: https://www.lcsc.com/datasheet/C114580.pdf
     retrieved: '2026-11-18'
     notes: "WorldSemi WS2801S datasheet (LCSC C114580): the 'S' (SOP-14) part number; the body text calls the same chip 'WS2801'. LCSC lists the part as WS2801S (also the YAML's price SKU)."
+  release_year:
+    url: https://cdn-shop.adafruit.com/datasheets/WS2801.pdf
+    retrieved: '2026-11-18'
+    notes: "'World Semiconductor, Inc Nov. 2008 WS-Preliminay-V0.3'"
 technical_notes:
   - The 2009 preliminary datasheet also listed a DIP-14 package; current WS2801S datasheets list SOP-14 only.

@@ -1,5 +1,5 @@
 name: UCS1903
-creator: Normand Electronics
+creator: Lianxinke Microelectronics
 color:
   channel_bits: 8
   pwm_frequency: 400Hz
@@ -17,3 +17,7 @@ sources:
     url: https://www.superlightingled.com/PDF/UCS1903%20datasheet.pdf
     retrieved: '2026-11-18'
     notes: UCS1903 datasheet V. 1.0 (English; reseller superlightingled.com copy), Functional Description + timing table.
+  creator:
+    url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
+    retrieved: '2026-11-18'
+    notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'

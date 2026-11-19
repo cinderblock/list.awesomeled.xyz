@@ -10,7 +10,7 @@ color:
 data:
   type: LPD8806
   clocked: true
-  channels: 3
+  channels: 6
   bitrate: 20MHz
   pixel_size_bits: 32
   backup_line: false
@@ -50,3 +50,7 @@ sources:
     url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
     retrieved: '2026-11-18'
     notes: LPD8803/8806 datasheet (Greeled Electronic Ltd, Adafruit-hosted English), Features list. The data-frame layout is not in the text (likely in a figure). Confirms the existing label.
+  data.channels:
+    url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+    retrieved: '2026-11-18'
+    notes: "'LPD8803 and LPD8806 output 3 channel and 6 channel respectively'"

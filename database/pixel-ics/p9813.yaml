@@ -1,6 +1,6 @@
 name: P9813
 release_year: 2010
-creator: WorldSemi
+creator: DMS Microelectronics
 notes: old but fast, still used in strings such as TCL
 color:
   channel_bits: 8
@@ -34,3 +34,7 @@ sources:
     url: https://www.electrokit.com/upload/product/41011/41011147/P9813_datasheet.pdf
     retrieved: '2026-11-18'
     notes: DMS Microelectronics P9813 datasheet (English, distributor Electrokit-hosted), sections 二 Features and 五 'P9813 communication protocol'.
+  creator:
+    url: https://www.electrokit.com/upload/product/41011/41011147/P9813_datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "datasheet header: 'DMS MICROELECTRONICS LTD., P9813'"

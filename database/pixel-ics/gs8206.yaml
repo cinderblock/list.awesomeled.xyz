@@ -1,5 +1,5 @@
 name: GS8206
-creator: Shenzhen Greesit Technology
+creator: Genesis Systech
 color:
   channel_bits: 8
   aggregate_bits: 12
@@ -18,3 +18,7 @@ sources:
     url: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf
     retrieved: '2026-11-18'
     notes: Genesis Systech GS8206 datasheet version 0.2 (June 12, 2016), 'Data Format' section
+  creator:
+    url: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "datasheet: 'June 12,2016 version0.2 Genesis Systech'"

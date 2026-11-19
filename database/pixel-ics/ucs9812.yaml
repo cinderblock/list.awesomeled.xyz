@@ -1,11 +1,11 @@
 name: UCS9812
-creator: Normand Electronics
+creator: Lianxinke Microelectronics
 color:
   channel_bits: 16
   pwm_frequency: 1.024kHz
 data:
   clocked: false
-  channels: 3
+  channels: 12
   type: UCS9812
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs9812
@@ -19,3 +19,11 @@ sources:
     url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS9812-datasheet.pdf
     retrieved: '2026-11-18'
     notes: UCS9812 datasheet VER1.0 (2012-02-15; LEDYi-hosted English copy), Features + '240-bit data format' section.
+  data.channels:
+    url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS9812-datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'a high gray scale display 12-channel LED display driver'"
+  creator:
+    url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
+    retrieved: '2026-11-18'
+    notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'

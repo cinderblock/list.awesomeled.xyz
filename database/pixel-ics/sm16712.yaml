@@ -5,7 +5,7 @@ color:
   pwm_frequency: 1.2kHz
 data:
   clocked: false
-  channels: 3
+  channels: 12
   type: WS2811/12
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sm16712
@@ -25,3 +25,7 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols/sm16712
     retrieved: '2026-11-18'
     notes: Advatek Lighting pixel-protocol page
+  data.channels:
+    url: https://www.advateklighting.com/pixel-protocols/sm16712
+    retrieved: '2026-11-18'
+    notes: "'supports 4 RGB pixels off the one chip'"

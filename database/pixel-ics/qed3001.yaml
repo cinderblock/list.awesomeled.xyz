@@ -1,5 +1,5 @@
 name: QED3001
-creator: Unknown
+creator: QED Microelectronics
 color:
   channel_bits: 12
   pwm_frequency: 1.0kHz
@@ -13,3 +13,8 @@ physical:
     - SOP-8
     - SOP-10
     - SOP-14
+sources:
+  creator:
+    url: https://www.advateklighting.com/pixel-protocols/qed3001
+    retrieved: '2026-11-18'
+    notes: "'This pixel protocol was designed by QED Microelectronics Inc. in China'"

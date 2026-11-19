@@ -1,6 +1,6 @@
 name: UCS8903
 release_year: 2013
-creator: Normand Electronics
+creator: Lianxinke Microelectronics
 notes: Early 16bit/color version of UCS1903 (WS2811 equiv)
 color:
   channel_bits: 16
@@ -36,3 +36,7 @@ sources:
     url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS8903-datasheet.pdf
     retrieved: '2026-11-18'
     notes: "UCS8903 datasheet (LEDYi-hosted English copy), Features + '48-bit data format' figure (rendered and read): one-wire RZ, 800 kbps, 3 x 16-bit (R15..R0, G15..G0, B15..B0) MSB first."
+  creator:
+    url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
+    retrieved: '2026-11-18'
+    notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'

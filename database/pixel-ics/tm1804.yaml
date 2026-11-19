@@ -12,7 +12,7 @@ data:
   pixel_size_bits: 24
   backup_line: false
 datasheet:
-  url: http://www.ledlightmake.com/ledlightmake_serv/TM1804%20Datasheet.pdf
+  url: https://www.lcsc.com/datasheet/C20622206.pdf
 electrical:
   output_voltage: 24V
   supply_voltage: 5V

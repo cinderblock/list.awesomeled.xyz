@@ -1,5 +1,5 @@
 name: UCS2903
-creator: Normand Electronics
+creator: Lianxinke Microelectronics
 color:
   channel_bits: 8
   pwm_frequency: 1.6kHz
@@ -17,3 +17,7 @@ sources:
     url: http://szucs.cn/page148
     retrieved: '2026-11-18'
     notes: Maker product table, Shenzhen Lianxinke Microelectronics (深圳联芯科微电子, www.szucs.cn), forwarding-IC table grouping the 19 and 29 series as one single-wire 256-level protocol.
+  creator:
+    url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
+    retrieved: '2026-11-18'
+    notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'

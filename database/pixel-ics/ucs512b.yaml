@@ -1,5 +1,5 @@
 name: UCS512B
-creator: Normand Electronics
+creator: Lianxinke Microelectronics
 color:
   channel_bits: 8
   pwm_frequency: 3.0kHz
@@ -22,3 +22,7 @@ sources:
     url: https://media.ledyi.com/ucs512b3-datasheet_8c7b137827d5ad9fe6e7dcca8d318bd9acb6f06bc4fb98c674334cbd3ce2bc92.pdf
     retrieved: '2026-11-18'
     notes: UCS512B3 datasheet
+  creator:
+    url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
+    retrieved: '2026-11-18'
+    notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'
