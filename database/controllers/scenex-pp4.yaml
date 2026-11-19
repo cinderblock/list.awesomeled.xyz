@@ -8,7 +8,6 @@ notes: Internal PSU
 inputs:
   physical:
     Ethernet: true
-    Wi-Fi: true
   standalone: false
 outputs:
   count: 4
@@ -64,3 +63,7 @@ sources:
     url: https://www.germanlightproducts.com/wp-content/uploads/2016/01/PP4-Controller-Operating-Manual_08_2015.pdf
     retrieved: '2026-11-18'
     notes: Named as example E1.31 senders, not a formal support list - weak; drop if a stronger statement is required. Madrix -> pattern-drivers/madrix-5 (alias needed); LOR (Light-O-Rama) and LightShowPro not in DB.
+  inputs.physical:
+    url: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
+    retrieved: '2026-11-18'
+    notes: wired Ethernet only

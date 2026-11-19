@@ -7,9 +7,8 @@ creator:
 notes: Long range data transmission extenders available.
 inputs:
   physical:
-    Ethernet: true # 2x RJ45 with onboard 100Mbit switch
+    Ethernet: Dual
     Wi-Fi: true
-    USB: true
   protocols:
     - Art-Net
     - sACN # E1.31
@@ -149,5 +148,13 @@ sources:
     url: https://www.digidot.eu/shop/digidot-c4-live-125/document/274
     retrieved: '2026-11-18'
     notes: C4 Manual v2.3.0 p.11 'DMX, Art-Net or sACN source required' (same PDF linked from both C4 product pages).
+  inputs.physical:
+    url: https://www.digidot.eu/shop/digidot-c4-live-125/document/274
+    retrieved: '2026-11-18'
+    notes: USB is only a 5 V power cable, not a data input
+  technical_notes:
+    url: https://www.digidot.eu/shop/digidot-c4-live-125
+    retrieved: '2026-11-18'
+    notes: "'able to control up to 24 universes (12.288 channels), depending on the license'"
 technical_notes:
-  - Up to 16 universes (8192 channels) depending on license
+  - Up to 24 universes (12,288 channels) depending on license

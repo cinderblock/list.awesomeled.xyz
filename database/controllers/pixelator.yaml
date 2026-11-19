@@ -6,8 +6,7 @@ creator:
   page: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
 inputs:
   physical:
-    Ethernet: true # 10/100 Mbps RJ45 input
-    Wi-Fi: true
+    Ethernet: true
   protocols:
     - Art-Net
     - sACN # E1.31
@@ -71,5 +70,9 @@ sources:
     url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
     retrieved: '2026-11-18'
     notes: Box contents of the Rev C datasheet (ELM promo 'implemented after SN#0050C2084699 (August 2022)')
+  inputs.physical:
+    url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
+    retrieved: '2026-11-18'
+    notes: "'24* PLINK Output (RJ-45) / 1* LAN port (RJ45)'; no Wi-Fi"
 technical_notes:
   - Controls up to 8192 RGB pixels (24,576 channels) across 24 PLINK ports

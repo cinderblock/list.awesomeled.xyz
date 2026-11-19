@@ -7,10 +7,8 @@ creator:
 notes: Daisy-chainable through Ethernet up to 8 devices.
 inputs:
   physical:
-    Ethernet: true
-    USB: true
-    Wi-Fi: true
-  standalone: true # Falcon Player (FPP)
+    Ethernet: Dual
+  standalone: true # built-in FX engine plays gradient effects on power-up
 outputs:
   count: 2
   pixels:
@@ -142,3 +140,11 @@ sources:
     url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
     retrieved: '2026-11-18'
     notes: ELM -> pattern-drivers/elm
+  inputs.physical:
+    url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: "'Connectors: 2 x Network (RJ45), 2 x SPI Output (4-Pin Phoenix), 1 x Power'"
+  inputs.standalone:
+    url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: localhost web interface sets gradient effects that play standalone

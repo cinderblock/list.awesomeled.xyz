@@ -1,13 +1,13 @@
 name: RC4Magic S3 Pixel Driver
 status: active
 creator:
-  name: Theatre Wireless
+  name: RC4 Wireless
   url: https://rc4wireless.com
   page: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
 notes: DMX pattern replay and keyframing onboard RC4 Wireless
 inputs:
   physical:
-    Serial: TTL # TTL serial DMX-PIX interface
+    DMX512: wireless (built-in RC4Magic receiver) + wired 3.5 mm in/out
   standalone: true
 outputs:
   count: 2
@@ -56,5 +56,13 @@ sources:
     url: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
     retrieved: '2026-11-18'
     notes: Product Specifications tab ('RC4 CodeLoader firmware updatable to add new string types').
+  creator:
+    url: https://rc4wireless.com/shop
+    retrieved: '2026-11-18'
+    notes: RC4 Wireless's own shop and documentation
+  inputs.physical:
+    url: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
+    retrieved: '2026-11-18'
+    notes: "'DMX Input/Output: RC4 3.5mm mini, USITT DMX512/1990'"
 technical_notes:
   - With data + clock pixels only 4 of the 8 outputs are available

@@ -6,16 +6,14 @@ creator:
 notes: 7 DMX Modes from Individual to grouped
 inputs:
   physical:
-    Ethernet: true
-    USB: true
-    Wi-Fi: true
+    DMX512: 5-pin and 3-pin XLR in/out
   standalone: true # Falcon Player (FPP) remote mode
 outputs:
   count: 4
   connector:
     pins: 5
     ref: gx-16
-  clocked: false # async pixel types
+  clocked: selectable
   driver:
     buffered: true
   pixels:
@@ -37,9 +35,6 @@ price_source:
   retrieved: '2026-11-18'
   url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
   vendor: Ultra Light & Sound
-software:
-  firmware:
-    - FPP
 sources:
   status:
     url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
@@ -49,3 +44,11 @@ sources:
     url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
     retrieved: '2026-11-18'
     notes: Maker page (ULS Manufacturing). Repeated 'ws 2812' deduped; spelling as written (site normalizes).
+  inputs.physical:
+    url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: DMX-in pixel controller; 'no web interfaces'
+  outputs.clocked:
+    url: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+    retrieved: '2026-11-18'
+    notes: "'4 x 5 pin GX16 connectors … each with 5v, 12v, Data, Clock and Ground'"

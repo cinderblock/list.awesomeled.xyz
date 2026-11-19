@@ -6,12 +6,8 @@ creator:
   page: https://www.madrix.com/products/nebula
 inputs:
   physical:
-    Ethernet: Dual # 2x RJ45, 10/100, Auto MDI-X, daisy-chain
-    USB: true # USB type-B
-    RF Remote: true
-    Bluetooth: true
-    Audio: true
-    Switch: true
+    Ethernet: Dual
+    USB: true
   protocols:
     - Art-Net # incl. ArtSync (Art-Net I/II/3/4)
     - sACN # ANSI E1.31
@@ -116,9 +112,9 @@ software:
     - MADRIX 5
 sources:
   status:
-    url: https://goknight.com/madrix-lighting-control-ia-hw-001018-madrix-nebula/
+    url: https://www.madrix.com/products/nebula
     retrieved: '2026-11-18'
-    notes: "in stock at a US dealer (MSRP $355); still in MADRIX's current product menu"
+    notes: current product page (LED type list 'As of January 2026')
   software.works_with:
     - url: https://www.madrix.com/products/software
       retrieved: '2026-11-18'
@@ -130,3 +126,7 @@ sources:
     url: https://www.madrix.com/products/nebula
     retrieved: '2026-11-18'
     notes: Product page 'Supported LEDs' (same list under Technical Specifications), 'As of January 2026.
+  inputs.physical:
+    url: https://www.madrix.com/products/nebula
+    retrieved: '2026-11-18'
+    notes: 'connectivity: 2 × RJ45 (daisy-chain), USB; no RF remote, Bluetooth or audio input listed'

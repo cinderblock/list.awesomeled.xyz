@@ -23,7 +23,7 @@ outputs:
   connector: Screw Terminal
   pixels:
     max_per_output: 1024
-  clocked: false
+  clocked: selectable
   protocols:
     - UCS1912
     - TM1803
@@ -62,3 +62,7 @@ sources:
     url: https://www.amazon.com/dp/B09PKDLHQG
     retrieved: '2026-11-18'
     notes: Same AUTUNEER listing. Written by the maker as 'Madrix version3 and version5'; MADRIX 5 -> pattern-drivers/madrix-5 (MADRIX 3 not in DB). No other software named.
+  outputs.clocked:
+    url: https://www.amazon.com/dp/B09PKDLHQG
+    retrieved: '2026-11-18'
+    notes: 'seller listing: DAT and CLK terminals for single- and two-wire ICs'

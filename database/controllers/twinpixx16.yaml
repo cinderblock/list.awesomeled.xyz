@@ -8,8 +8,7 @@ manufacturers:
   - DMX4All
 inputs:
   physical:
-    Ethernet: true # Art-Net over Ethernet (product is "ArtNet TwinPixx 16")
-    Switch Trigger: true
+    Ethernet: true
   protocols:
     - Art-Net
   standalone: false
@@ -88,3 +87,7 @@ sources:
     url: https://www.dmx4all.de/download/manuals_english/artnet_twinpixx_16_english.pdf
     retrieved: '2026-11-18'
     notes: Settings chapter. MADRIX -> pattern-drivers/madrix-5 (alias needed).
+  inputs.physical:
+    url: https://www.dmx4all.de/download/manuals_english/artnet_twinpixx_16_english.pdf
+    retrieved: '2026-11-18'
+    notes: "'Connection: RJ45 Ethernet / Art-Net … USB Mini-B (power supply connection)'; no trigger input"

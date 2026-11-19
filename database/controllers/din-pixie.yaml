@@ -7,8 +7,8 @@ creator:
 notes: Back powered from pixel strip - connect thru USB to record a show onto the device using live Art-Net
 inputs:
   physical:
-    Ethernet: true
-    USB: true # used to record shows
+    USB: true
+    DMX512: 2 × RJ45 in
   protocols:
     - Art-Net
     - DMX512 # 2-universe DMX-to-pixel converter (per ENTTEC product name)
@@ -146,6 +146,10 @@ sources:
     url: https://www.enttec.com/pixel-protocols
     retrieved: '2026-11-18'
     notes: Values = every protocol marked 'Yes' in the 'DIN PIXIE' (links to SKU 73539) column of ENTTEC's pixel-protocol support table (87 rows), plus the product's pre-listed protocols that are missing from that table…
+  inputs.physical:
+    url: https://www.enttec.com/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+    retrieved: '2026-11-18'
+    notes: 'inputs: 1 × USB 2.0 Type-B, 2 × DMX in (RJ45); no Ethernet'
 technical_notes:
   - 'RGB (8-bit): 340 pixels max'
   - 'RGBW (8-bit): 256 pixels max'

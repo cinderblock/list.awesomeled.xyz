@@ -12,8 +12,7 @@ vendors:
     warranty: 5 years
 inputs:
   physical:
-    Ethernet: true # Art-Net input via RJ45
-    Wi-Fi: true
+    Ethernet: true
   protocols:
     - Art-Net
   standalone: false
@@ -188,6 +187,10 @@ sources:
     url: https://deskontroller.com/support/software/
     retrieved: '2026-11-18'
     notes: deskontroller.com 'Compatible Software' page (setup guides for MADRIX, MadMapper, Resolume Arena, TouchDesigner).
+  inputs.physical:
+    url: https://deskontroller.com/download/deskontroller-lite-V3-user-manual.pdf
+    retrieved: '2026-11-18'
+    notes: "'Input 1 x RJ45 Ethernet (10/100)'"
 technical_notes:
   - 32 Art-Net universes (16,384 DMX channels); ~5,440 RGB / 4,096 RGBW pixels
   - ~102 FPS in normal mode; 1 universe per output (2 universes per output in clock mode)
