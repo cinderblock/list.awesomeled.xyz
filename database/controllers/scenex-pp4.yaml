@@ -40,6 +40,10 @@ power:
   current:
     max: 40
 dead_links:
+  - url: https://www.germanlightproducts.com/product-category/scenex-lighting/
+    archive: https://web.archive.org/web/20251010040221/https://www.germanlightproducts.com/product-category/scenex-lighting/
+    checked: '2026-11-18'
+    notes: GLP removed the whole SceneX category (404); the archive shows it while still listed
   - url: https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     archive: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     checked: '2026-11-18'

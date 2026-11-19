@@ -10,6 +10,10 @@ power:
     max: 24
     # 5 V, or 7-24 V (jumper-selectable)
 dead_links:
+  - url: https://pixelcontroller.com/store/pixel-controllers/47-falcon-picap.html
+    archive: https://web.archive.org/web/20240911200037/https://pixelcontroller.com/store/pixel-controllers/47-falcon-picap.html
+    checked: '2026-11-18'
+    notes: Product page removed (404) after the PiCap V2 replaced it
   - url: https://www.pixelcontroller.com/store/index.php?id_product=47
     archive: https://web.archive.org/web/20210415104512/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
     checked: '2026-11-18'
