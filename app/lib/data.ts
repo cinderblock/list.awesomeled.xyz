@@ -64,6 +64,7 @@ export const IGNORED_COMMITS = new Set([
   '3b9da1ae9940b220a03c622d1bdf074d2454de3d', // adapters shared output/power shapes (40)
   'df38d673dd54f288b2a62300dc855a2e9548bd92', // controllers/adapters input vocabulary (~60)
   '795a04fe41886738781c6b62d0e048cdb4aa74c0', // connectors typed ratings, pitch, gauges (45)
+  '475d1d0f23032e36c868b267fac4464d744c7d67', // microboards typed memory and connectivity (36)
   // Pure formatting passes (prettier/lint only, no content change)
   '35c9c5310c8b6c0624a86b69ce52e67785ad2dba', // Prettier and lint free (42)
   'd9edd7574e197624c721c543e49d418ee3225f06', // Fix prettier formatting (39)
