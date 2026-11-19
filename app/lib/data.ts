@@ -172,16 +172,24 @@ export function getGitTimestamps(): Map<string, Date> {
 }
 
 // Get the database directory path
-export function getDatabasePath(): string {
-  // In production, we need to handle both Node.js and bundled environments
-  // The database is located at the project root
-  const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
+let databasePath: string | null = null;
 
-  // Navigate from app/lib to project root, then to database
-  // During build: project/app/lib/data.ts -> project/database
-  // During dev: same structure
-  return resolve(__dirname, '../../database');
+export function getDatabasePath(): string {
+  if (databasePath) return databasePath;
+  // The database sits at the project root. This module runs from app/lib in
+  // dev, and from wherever the bundler put it in a build: build/server, or
+  // build/server/assets as soon as any route uses a dynamic import() and the
+  // server bundle is split into chunks. Walk up until the directory appears
+  // instead of assuming a fixed depth.
+  let dir = dirname(fileURLToPath(import.meta.url));
+  for (;;) {
+    const candidate = resolve(dir, 'database');
+    if (existsSync(resolve(candidate, '_schema'))) return (databasePath = candidate);
+    const parent = dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return (databasePath = resolve(process.cwd(), 'database'));
 }
 
 // SPDX ids that make an entry FOSS (drives the derived `foss` flag)
