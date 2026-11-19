@@ -38,6 +38,12 @@ Research findings with sources: [database-review-research.md](database-review-re
 - **Field ownership (stream 4, cross-links, per ISSUES.md)**: controllers' `outputs.protocols`, `software.firmware`/`works_with`, `inputs.requires_host`, `outputs.driver.IC`, free-text `outputs.connector`; drive libraries' `supported_ics`; `related*`, `aliases`, `sources`; pixels'/pixel ICs' `data.type`; adapters' host boards (`parent`) and connectors. I don't batch-edit those. Spelling variants there are handled by `app/lib/relations.ts` name matching.
 - Package naming: IC packages LCSC-style with pin count (`SOP-8`, `QFN-16`); LED packages as footprint codes (`5050`) or through-hole size (`5mm`). Keep the datasheet's family (SOP vs SOIC).
 - Clocked vocabulary: pixels/pixel ICs `data.clocked: boolean`; boards' `outputs.clocked`: `false` (single-wire) / `selectable` / `always` (common.json `clocked_support`). Prose term for non-clocked: "single-wire" ("async" accepted in comments).
+- Pattern-driver I/O directions keep the sheet's readable `Input` / `Output` / `Both`, plus `false` for a checked "not supported" (blank = unknown). Lowercase tokens would need relabeling in every UI; these display as-is.
+- "One or a list" for multi-valued facts: `language`, commercial `color_type`, `channel_bits` / `dimming_bits` (selectable depths), microboard `ram`. A plain value when there is one.
+- Family entries (a connector series, an IC with several package suffixes): ratings take the family's highest member, variants go in `*_notes`; packages list every package the entry's aliases name.
+- Mains-powered controllers record the AC input range in `power.voltage` with an "AC mains" comment (precedent: qolorpix, led-ethernet-controller-powered). The pixel-side voltage gap is logged in ISSUES.md.
+- Verified corrections carry `sources.<field>` on the entry; the full records (quotes, URLs, rejected and unverifiable items) live in `plans/database-review-fixes/*.yaml` (excluded from eslint so quotes stay verbatim).
+- Controllers have no `aliases` field (stream 4's infrastructure); a real former name goes in the notes instead.
 
 ## Findings / gotchas
 
@@ -54,6 +60,14 @@ Research findings with sources: [database-review-research.md](database-review-re
 - Fixed-key maps (common.json `input_interfaces`) are listed in `KEY_MAP_DEFS` in `app/lib/fields.ts` so the table keeps one "Interfaces" facet instead of a column per key.
 - Other streams edit the same YAML constantly: rebase conflicts are routine. Resolve by taking upstream's file and re-running my (idempotent) migration on it, or merging their `sources`/`price_source`/`images` into my version. Never push mid-rebase: `scratchpad/ship.sh` (fetch, rebase-or-stop, install, validate, typecheck, push) refuses on any failure; a plain `git rebase | tail && git push` once pushed past a stopped rebase.
 - E2E under load: run with `--workers=1`; parallel workers time out. One serial-run flake (designer power warnings) passes alone.
+- **A pipeline masks exit codes**: `e2e | grep | tail; ship.sh` pushed microboards with one e2e failure. Checks now run through `scratchpad/check-ship.sh` / `ship-wt.sh`, which stop on any failed step.
+- **Ship from a second worktree** (`scratchpad/ship-wt.sh`): snapshots a commit into `scratchpad/ship-wt`, rebases, runs every check with e2e on port 5274 and pushes, while work continues in the main worktree. Its dev server starts cold, so the first tests can time out on route compiles: e2e runs with `--retries=1` and reports flaky tests.
+- The phone-header e2e loads `/controllers` four times; it needed `test.slow()` on a busy machine (fixed).
+- `setJS` keeps a replaced node's comment: after a data correction, check the diff for comments that now contradict the value (XT90 "60 A", AN6USPI0 "1020 total"). Replacing a whole map drops comments on its children (Dig-Octa's "48 V only with Power-5HV").
+- Re-rendering a block re-quotes its scalars: replacing a list rewrote `retrieved: '…'` dates unquoted. Append to sequences instead; `setJS` now quotes dates.
+- Renaming a field must rename its `sources` key too (validate rejects sources for missing fields).
+- Other streams keep adding entries in the old shapes after a migration lands (cross-links' 2026-11-18 wave): re-run every migration after each rebase; extend its mappings when a new value appears.
+- Files here are CRLF on Windows: string replacements in `bun -e` that include `\n` miss; use the Edit tool.
 
 ## Plan / steps
 
@@ -66,9 +80,11 @@ Research findings with sources: [database-review-research.md](database-review-re
 7. ✅ Adapters adopt shared shapes (TODO async/clocked); ESPArtStick researched and merged.
 8. ✅ Duplicate products merged (QuinLED ×2, M4-PI ×3, M8-PI, differential receiver, ESPArtStick).
 9. ✅ Input vocabulary (controllers + adapters) and the full controller inputs audit (119 entries corrected).
-10. **(current)** Pi Hat (adapters) from research; then remaining categories: connectors (AWG ints, pcb_mount, rows, IP ratings, pitch lengths, enums), microboards (memory grammar, connectivity enums, PoE boolean, BMS), pattern drivers (I/O direction enum from research, visualizer, pricing, demo, language), commercial systems (color types, dimming bits, creator URL), level converters (packages from research, electrical grammar), pixels/pixel ICs (brightness bits/method, unit trailing zeros, creators), drive libraries (language; not supported_ics).
-11. Cross-cutting: shared attribution definitions (creator/vendors/links uri formats), unit formatting convention, `app/lib/types.ts` stale flat interfaces.
-12. Docs: CONTRIBUTING.md schema reference, `database/_schema/README.md`, OVERHAUL-PLAN.md (pixel_rate_max done), TODO.md (both items done).
+10. ✅ Remaining categories typed: Pi Hat; connectors; microboards; pattern drivers (I/O from research, tags for other I/O, visualizer, language) and drive libraries; commercial systems (color types, dimming bits, release_year); level converters (packages, supply range, direction, drive from TI/Microchip); pixels/pixel ICs (channel_bits, brightness_control, supply_voltage); trailing zeros; every `_example.yaml` validates.
+11. ✅ Verified the ~230 "wrong facts" other streams reported (data-freshness findings, ISSUES.md connector list) with 9 research agents; applied per category with sources on the entries (`plans/database-review-fixes/`).
+12. **(current)** Ship the batch; IGNORED_COMMITS for the structural commits; stream-5 suspected errors (2 agents still running) and pixels' `wattage` meaning; ISSUES.md handoffs (other-owner records, pattern-driver pricing for stream 6, mains-powered controllers' pixel voltage, luminaxa slug) and close the sections done.
+13. Cross-cutting: shared attribution definitions (creator/vendors/links uri formats), unit formatting convention, `app/lib/types.ts` stale flat interfaces.
+14. Docs: CONTRIBUTING.md schema reference, `database/_schema/README.md`, OVERHAUL-PLAN.md (pixel_rate_max done), TODO.md (both items done).
 
 ## Progress log
 
@@ -81,8 +97,13 @@ Research findings with sources: [database-review-research.md](database-review-re
 - [x] Adapters (`3b9da1a`); terminology lint no longer rewrites URLs (`a000cd1`).
 - [x] Duplicates merged; removed-entry map below.
 - [x] Input vocabulary (`df38d67`); field-catalog regressions fixed; controller inputs audit applied (`afe02c4`).
-- [ ] Pi Hat.
-- [ ] Remaining categories (see step 10).
+- [x] Pi Hat (`c246e98`); connectors (`795a04f`); microboards (`475d1d0`); phone-header e2e budget.
+- [x] Pattern drivers: research data (`0690af1`), structure (`e215cd7`).
+- [x] Table enums filter by their cell labels; commercial systems and level converters typed; level-converter datasheet facts; trailing zeros; LPD8806 7-bit; pixels/pixel ICs vocabulary; follow-up for entries added since (unpushed at this writing).
+- [x] Fix lists applied: connectors, controllers, microboards/decoders, pixels (SM1616 stub removed), software, adapters/commercial (ElectroMage duplicates merged), Perspex size (unpushed at this writing).
+- [ ] Push the batch; IGNORED_COMMITS follow-up.
+- [ ] Stream-5 suspected errors (agents running); wattage meaning.
+- [ ] ISSUES.md handoffs and closures.
 - [ ] Cross-cutting + docs.
 
 ## Open questions for the user
@@ -113,5 +134,8 @@ Research findings with sources: [database-review-research.md](database-review-re
 | `pixels/ns107s`                              | Pixels: "NS107S" (Newstar's part number for the HD107S)             | `pixels/hd107s`; IC `pixel-ics/ns107s`            |
 | `pixels/ns108`                               | Pixels: "NS108" (Newstar's part number for the HD108)               | `pixels/hd108`; IC `pixel-ics/ns108`              |
 | `pixels/ns8808`                              | Pixels: "NS8808" (Newstar's IC in the HD8808 LED)                   | `pixels/hd8808`; IC `pixel-ics/ns8808`            |
+| `adapters/serial-led-driver`                 | Adapters: "Serial LED Driver" (ElectroMage, also a controller)      | `controllers/electromage-8x-driver`               |
+| `adapters/pro-serial-led-driver`             | Adapters: "Pro Serial LED Driver"                                   | `controllers/electromage-pro-8x-driver`           |
+| `pixels/sm1616`                              | Pixels: "SM1616" (no such part; links the SM16716 datasheet)        | `pixel-ics/sm16716`                               |
 
 `adapters/espartstick` stays: it is the earlier 2019 shield (no SD card), a different product.
