@@ -1,4 +1,5 @@
 name: SN74LV1T34DBVRG4
+status: active
 creator: Texas Instruments
 electrical:
   max_voltage: 7V
@@ -9,13 +10,13 @@ links:
   product: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4
 price:
   - qty: 1
-    price: 0.827
+    price: 1.239
     sku: SN74LV1T34DBVRG4
   - qty: 1000
-    price: 0.288
+    price: 0.432
     sku: SN74LV1T34DBVRG4
 price_source:
   notes: list price
-  retrieved: '2026-07-01'
+  retrieved: '2026-11-18'
   url: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4
   vendor: TI

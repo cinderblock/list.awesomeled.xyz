@@ -1,4 +1,5 @@
 name: QuinLED Dig2Analog
+status: active
 creator: Quindor / Intermittent Technology
 notes: WS2814 to RGBW PWM MOSFET outputs. 4x 2kHz PWM output, 3A fuse, Daisy chain ability
 outputs:
@@ -12,3 +13,11 @@ links:
 other_links:
   - https://quinled.info/dig2analog-buying-page/
 price: 7.49
+price_source:
+  notes: >-
+    Single board, from QuinLED's global reseller (listed on quinled.shop); 5-pack $34.95,
+    10-pack $59.99
+  part: QLD-D2A
+  retrieved: '2026-11-18'
+  url: https://shop.allnetchina.cn/products/quinled-dig2analog
+  vendor: ALLNET China

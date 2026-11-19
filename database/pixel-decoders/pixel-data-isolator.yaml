@@ -10,3 +10,8 @@ diy_or_ots: OTS
 links:
   product: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/
 price: 16.99
+price_source:
+  notes: listed price; seller "On A Break" at check
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/
+  vendor: Essence Engineering (Tindie)

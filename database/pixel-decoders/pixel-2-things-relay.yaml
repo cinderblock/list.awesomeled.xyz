@@ -1,4 +1,5 @@
 name: Pixel 2 Things Relay
+status: discontinued
 creator: David Peace
 notes: Converts pixel data into relay drivers capable of switching 120 VAC. WSXX to 9 Relay output card
 outputs:
@@ -6,7 +7,30 @@ outputs:
   types:
     - relay
   connector: Screw terminal
+dead_links:
+  - url: https://www.pixel2things.com/
+    archive: https://web.archive.org/web/20200812112626/https://www.pixel2things.com/
+    checked: '2026-11-18'
+    notes: Now redirects to Experience Lights' Pixel2Things category, which no longer lists this board
 diy_or_ots: OTS
 links:
   product: https://www.pixel2things.com/
-price: 99
+price: 109.99
+price_source:
+  notes: >-
+    Last list price of the PIXEL2AC9 (9 AC outputs), from a Wayback capture of the vendor's
+    product page marked "Availability: Discontinued"; retrieved is the capture date.
+  part: PIXEL2AC9
+  retrieved: '2022-05-22'
+  url: https://web.archive.org/web/20220522221218/https://experiencelights.com/pixel2ac-9-ac-outputs/
+  vendor: Experience Lights
+related:
+  - type: replacement
+    name: Pixel2AC4
+    url: https://store.experiencelights.com/4-output-ac-dimming-controller-pixel2ac4/
+    notes: The vendor named Pixel2AC3 as the replacement; Pixel2AC3's page now redirects to the 4-output Pixel2AC4
+sources:
+  status:
+    url: https://web.archive.org/web/20220522221218/https://experiencelights.com/pixel2ac-9-ac-outputs/
+    retrieved: '2022-05-22'
+    notes: 'Availability: Discontinued; This product has been discontinued. Please see Pixel2AC3.'

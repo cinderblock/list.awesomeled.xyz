@@ -1,4 +1,5 @@
 name: 74HC245
+status: active
 creator: Texas Instruments
 electrical:
   max_voltage: 6
@@ -9,13 +10,13 @@ links:
   product: https://www.ti.com/product/SN74HC245
 price:
   - qty: 1
-    price: 0.872
+    price: 0.865
     sku: SN74HC245N
   - qty: 1000
-    price: 0.304
+    price: 0.35
     sku: SN74HC245N
 price_source:
   notes: list price
-  retrieved: '2026-07-01'
+  retrieved: '2026-11-18'
   url: https://www.ti.com/product/SN74HC245
   vendor: TI

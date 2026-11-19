@@ -1,4 +1,5 @@
 name: 74HCT244
+status: active
 creator: Texas Instruments
 electrical:
   max_voltage: 5.5V
@@ -10,13 +11,13 @@ links:
   product: https://www.ti.com/product/SN74HCT244
 price:
   - qty: 1
-    price: 1.547
+    price: 2.015
     sku: SN74HCT244N
   - qty: 1000
-    price: 0.539
+    price: 0.702
     sku: SN74HCT244N
 price_source:
   notes: list price
-  retrieved: '2026-07-01'
+  retrieved: '2026-11-18'
   url: https://www.ti.com/product/SN74HCT244
   vendor: TI

@@ -1,4 +1,5 @@
 name: PixFog Pixel Based Fog Controller
+status: active
 creator: Innotronix
 outputs:
   count: 1
@@ -7,4 +8,10 @@ outputs:
 diy_or_ots: OTS
 links:
   product: https://www.innotronix.net/PixFog-Pixel-Based-Fog-Controller-p232730399
-price: 33
+price: 39.99
+price_source:
+  notes: with 6 ft control cable
+  part: PXFOG1
+  retrieved: '2026-11-18'
+  url: https://www.innotronix.net/PixFog-Pixel-Based-Fog-Controller-p232730399
+  vendor: Innotronix

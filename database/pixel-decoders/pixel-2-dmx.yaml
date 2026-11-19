@@ -1,4 +1,5 @@
 name: Pixel 2 DMX
+status: active
 creator: Experience Lights
 notes: WS28xx pixel data to DMX512 (512 channels).
 outputs:
@@ -10,5 +11,11 @@ outputs:
     notes: xConnect pixel-data input
 diy_or_ots: OTS
 links:
-  product: https://store.experiencelights.com/pixel2dmx---realtime-dmx-bridge/
-price: 49.99
+  product: https://store.experiencelights.com/pixel2dmx-realtime-dmx-bridge/
+price: 54.99
+price_source:
+  notes: regular price; on sale for $49.99 at retrieval
+  part: PIXEL2DMX
+  retrieved: '2026-11-18'
+  url: https://store.experiencelights.com/pixel2dmx-realtime-dmx-bridge/
+  vendor: Experience Lights

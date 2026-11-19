@@ -1,4 +1,5 @@
 name: WS2811 MosFET Driver
+status: active
 creator: NLed
 notes: WS2811 to high-current MOSFET outputs.
 outputs:
@@ -7,4 +8,10 @@ outputs:
     - pwm
 links:
   product: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html
-price: 18
+price: 10
+price_source:
+  notes: connectors unpopulated; +$2.00 with screw terminals; $8.50 each at 100+
+  part: NLED-WS2811FET
+  retrieved: '2026-11-18'
+  url: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html
+  vendor: NLED

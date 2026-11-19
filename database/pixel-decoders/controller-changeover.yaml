@@ -1,4 +1,5 @@
 name: Controller Changeover
+status: active
 creator: Wasatch Pixels
 notes: WLED override from other pixel control to a single output.
 outputs:
@@ -9,5 +10,9 @@ outputs:
     ref: mtsb-combicon
 diy_or_ots: OTS
 links:
-  product: https://www.tindie.com/products/k7bbr/led-controller-multiplexer/
-price: 12
+  product: https://www.tindie.com/products/k7bbr/wasatch-pixels-led-controller-multiplexer/
+price: 17
+price_source:
+  retrieved: '2026-11-18'
+  url: https://www.tindie.com/products/k7bbr/wasatch-pixels-led-controller-multiplexer/
+  vendor: Wasatch Pixels (Tindie)

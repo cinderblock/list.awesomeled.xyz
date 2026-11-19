@@ -1,4 +1,5 @@
 name: SN74LVC2T45
+status: active
 creator: Texas Instruments
 io:
   channels: 2
@@ -6,13 +7,13 @@ links:
   product: https://www.ti.com/product/SN74LVC2T45
 price:
   - qty: 1
-    price: 0.494
+    price: 0.642
     sku: SN74LVC2T45DCTR
   - qty: 1000
-    price: 0.2
+    price: 0.26
     sku: SN74LVC2T45DCTR
 price_source:
   notes: list price
-  retrieved: '2026-07-01'
+  retrieved: '2026-11-18'
   url: https://www.ti.com/product/SN74LVC2T45
   vendor: TI

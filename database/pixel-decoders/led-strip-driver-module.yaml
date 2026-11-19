@@ -8,4 +8,13 @@ outputs:
   connector: Screw terminal
 links:
   product: https://de.aliexpress.com/item/32786272573.html
-price: 1
+price:
+  amount: 1.96
+  max: 2.66
+price_source:
+  notes: >-
+    Single-board "LED Strip Driver Module v1.0" listings on aliexpress.us: $1.96, $1.99 (this
+    entry's listing), $2.31, $2.66. Excludes the $1.09 new-shopper deal price and shipping.
+  retrieved: '2026-11-18'
+  url: https://www.aliexpress.us/w/wholesale-led-strip-driver-module-v1.0.html
+  vendor: AliExpress (street)

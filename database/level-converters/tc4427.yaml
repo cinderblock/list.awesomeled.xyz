@@ -1,4 +1,5 @@
 name: TC4427
+status: active
 creator: Microchip
 notes: https://electricfiredesign.com/2021/03/12/logic-level-shifters-for-driving-led-strips/
 electrical:
@@ -7,3 +8,20 @@ io:
   channels: 2
 links:
   product: https://www.microchip.com/en-us/product/TC4427
+price:
+  - qty: 1
+    price: 1.62
+    sku: TC4427EOA
+  - qty: 1000
+    price: 1.02
+    sku: TC4427EOA
+  - qty: 10000
+    price: 0.87
+    sku: TC4427EOA
+price_source:
+  notes: >-
+    microchipDIRECT buy-now price for the SOIC-8 tube part (-40 to +85 °C), read from
+    the Purchase table on the product page; the PDIP-8 TC4427CPA is $1.78 / $1.13 / $0.96
+  retrieved: '2026-11-18'
+  url: https://www.microchip.com/en-us/product/TC4427
+  vendor: Microchip Direct

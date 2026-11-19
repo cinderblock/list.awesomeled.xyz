@@ -1,4 +1,5 @@
 name: TXU0104
+status: active
 creator: Texas Instruments
 io:
   channels: 4
@@ -6,12 +7,13 @@ links:
   product: https://www.ti.com/product/TXU0104
 price:
   - qty: 1
-    price: 0.818
+    price: 1.063
     sku: TXU0104PWR
   - qty: 1000
-    price: 0.331
+    price: 0.43
     sku: TXU0104PWR
 price_source:
   notes: list price
-  retrieved: '2026-07-01'
+  retrieved: '2026-11-18'
+  url: https://www.ti.com/product/TXU0104
   vendor: TI

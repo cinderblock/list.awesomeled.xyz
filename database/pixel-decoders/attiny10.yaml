@@ -6,11 +6,15 @@ outputs:
   types:
     - pixel-data
   connector: Solder pads / breakout
-dead_links:
-  - url: https://sites.google.com/site/wayneholder/besting-ben-heck
-    archive: https://web.archive.org/web/20230305072712/https://sites.google.com/site/wayneholder/besting-ben-heck
-    checked: '2026-07-01'
 diy_or_ots: DIY
 links:
-  product: https://sites.google.com/site/wayneholder/besting-ben-heck
-price: 1
+  product: https://sites.google.com/site/wayneholder/besting-ben-heck-use-a-33-cent-microcontroller-to-drive-neopixels-instead-of-multivibrators
+price: 0.44
+price_source:
+  notes: >-
+    The design is just the ATtiny10, so this is the chip price (SOT-23-6, 1-24 pcs; $0.35 at
+    100+). The article quotes 33 cents.
+  part: ATTINY10-TSHR
+  retrieved: '2026-11-18'
+  url: https://www.microchip.com/en-us/product/ATtiny10
+  vendor: Microchip Direct
