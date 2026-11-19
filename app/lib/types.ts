@@ -131,6 +131,16 @@ export interface RelatedItem {
   name?: string;
   url?: string;
   notes?: string;
+  /** Where the relationship was verified (common.json#/definitions/source) */
+  source?: SourceRecord;
+}
+
+// One provenance record (common.json#/definitions/source)
+export interface SourceRecord {
+  url: string;
+  /** YYYY-MM-DD (or YYYY-MM) the source was read */
+  retrieved?: string;
+  notes?: string;
 }
 
 // Base entry interface that all category entries extend

@@ -24,7 +24,7 @@
  * an implicit symmetric grouping, not stored as edges.
  */
 
-import type { BaseEntry } from './types';
+import type { BaseEntry, SourceRecord } from './types';
 
 /** Entries per category id, as loaded from database/<category>/*.yaml */
 export type Database = ReadonlyMap<string, readonly BaseEntry[]>;
@@ -138,6 +138,8 @@ export interface Edge {
   /** For name-resolved links: the name exactly as written in the data */
   via?: string;
   notes?: string;
+  /** Where a curated `related` link was verified */
+  source?: SourceRecord;
 }
 
 export interface UnresolvedName {
@@ -328,6 +330,7 @@ export function buildRelationGraph(db: Database): RelationGraph {
               kind: item.type as EdgeKind,
               field: 'related',
               notes: item.notes,
+              source: item.source,
             });
           }
         }
@@ -384,6 +387,8 @@ export interface LinkItem {
   notes?: string;
   /** Name as written in the declaring field, when it differs from `name` */
   via?: string;
+  /** Where the link was verified */
+  source?: SourceRecord;
 }
 
 export interface LinkRow {
@@ -425,7 +430,7 @@ function itemFor(graph: RelationGraph, ref: EntryRef, edge?: Edge): LinkItem {
   const targetName = edge ? (graph.names.get(edge.to) ?? '') : '';
   const via =
     edge?.via && normalizeName(edge.via) !== normalizeName(targetName) ? edge.via : undefined;
-  return { name, category, id, notes: edge?.notes, via };
+  return { name, category, id, notes: edge?.notes, via, source: edge?.source };
 }
 
 function sortItems(items: LinkItem[]): LinkItem[] {
@@ -466,6 +471,7 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
         name: item.name,
         url: item.url,
         notes: item.notes,
+        source: item.source,
       });
     }
   }

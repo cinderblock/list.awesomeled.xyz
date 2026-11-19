@@ -242,6 +242,9 @@
     "related": {
       "$ref": "common.json#/definitions/related"
     },
+    "sources": {
+      "$ref": "common.json#/definitions/sources"
+    },
     "dead_links": {
       "$ref": "common.json#/definitions/dead_links"
     },

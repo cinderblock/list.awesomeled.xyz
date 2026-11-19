@@ -57,6 +57,27 @@ const STALE_EXAMPLES = new Set([
 ]);
 
 /**
+ * `sources` keys (common.json#/definitions/sources) must name a field the
+ * entry actually has: catches typos and provenance left behind when a field
+ * is removed or renamed.
+ */
+function checkSources(data: Record<string, unknown>): string[] {
+  const sources = data?.sources;
+  if (!sources || typeof sources !== 'object') return [];
+  const problems: string[] = [];
+  for (const path of Object.keys(sources)) {
+    const value = path
+      .split('.')
+      .reduce<unknown>(
+        (v, k) => (v && typeof v === 'object' ? (v as Record<string, unknown>)[k] : undefined),
+        data
+      );
+    if (value == null) problems.push(`sources "${path}": the entry has no such field`);
+  }
+  return problems;
+}
+
+/**
  * Parse every entry in every category up front: cross-references are checked
  * against the whole database even when validating a single category.
  * Unparseable files map to their error message instead of an entry.
@@ -134,7 +155,12 @@ async function main() {
         console.log(`  ✗ ${folder}/${file}: ${data.message}`);
         continue;
       }
-      const refProblems = danglingByEntry.get(`${folder}/${file.replace(/\.yaml$/, '')}`) ?? [];
+      const refProblems = [
+        ...(danglingByEntry.get(`${folder}/${file.replace(/\.yaml$/, '')}`) ?? []).map(
+          (p) => `${p.field} "${p.ref}": ${p.problem}`
+        ),
+        ...checkSources(data as Record<string, unknown>),
+      ];
       if (validate(data) && refProblems.length === 0) {
         valid++;
         folderValid++;
@@ -144,9 +170,7 @@ async function main() {
         for (const err of validate.errors ?? []) {
           console.log(`      ${err.instancePath || '/'}: ${err.message}`);
         }
-        for (const p of refProblems) {
-          console.log(`      ${p.field} "${p.ref}": ${p.problem}`);
-        }
+        for (const p of refProblems) console.log(`      ${p}`);
       }
     }
     console.log(`${folder}: ${folderValid}/${files.size} valid`);

@@ -1,6 +1,8 @@
 import { Link } from 'react-router';
 import type { LinkItem, LinkRow } from '~/lib/relations';
-import { CATEGORIES } from '~/lib/types';
+import { CATEGORIES, type SourceRecord } from '~/lib/types';
+
+export type FieldSource = SourceRecord;
 
 // Rows longer than this collapse the rest behind a tap-to-expand "+N more"
 const COLLAPSE_AFTER = 24;
@@ -41,12 +43,49 @@ export function EntryLinkPill({ item }: { item: LinkItem }) {
   }
 
   const extra = [item.via ? `as ${item.via}` : null, item.notes].filter(Boolean).join(' — ');
-  if (!extra) return pill;
+  if (!extra && !item.source) return pill;
   return (
     <span className="entry-related-item">
       {pill}
-      <span className="entry-related-note">{extra}</span>
+      {extra && <span className="entry-related-note">{extra}</span>}
+      {item.source && <SourceLink source={item.source} />}
     </span>
+  );
+}
+
+function hostOf(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
+/** "source: advateklights.com, 2026-11-18" — the provenance of one fact, visible inline */
+function SourceLink({ source, label = 'source' }: { source: FieldSource; label?: string }) {
+  return (
+    <span className="entry-source">
+      {label}:{' '}
+      <a href={source.url} target="_blank" rel="noopener noreferrer">
+        {hostOf(source.url)}
+      </a>
+      {source.retrieved ? `, ${source.retrieved}` : ''}
+      {source.notes ? ` (${source.notes})` : ''}
+    </span>
+  );
+}
+
+/** Provenance line(s) under a field value (the entry's `sources[path]`) */
+export function FieldSources({ sources }: { sources?: FieldSource | FieldSource[] }) {
+  if (!sources) return null;
+  const list = (Array.isArray(sources) ? sources : [sources]).filter((s) => s && s.url);
+  if (list.length === 0) return null;
+  return (
+    <div className="entry-field-sources">
+      {list.map((s, i) => (
+        <SourceLink key={i} source={s} />
+      ))}
+    </div>
   );
 }
 

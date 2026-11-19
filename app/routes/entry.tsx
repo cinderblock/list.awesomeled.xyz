@@ -27,7 +27,12 @@ import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { PageWrapper } from '~/components/layout/PageWrapper';
 import { FeatureBadges, ValueBadges } from '~/components/ui/FeatureBadges';
 import { Tooltip } from '~/components/ui/Tooltip';
-import { EntryLinkRows, NameLinkList } from '~/components/ui/EntryLinks';
+import {
+  EntryLinkRows,
+  NameLinkList,
+  FieldSources,
+  type FieldSource,
+} from '~/components/ui/EntryLinks';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -284,6 +289,7 @@ const SKIP_KEYS = new Set([
   'related', // rendered as the Works with / Related products sections
   'dead_links', // applied to the links they describe, plus a hero callout
   'price_source', // shown as the "as of" line under the price
+  'sources', // shown under each field it documents
 ]);
 
 function humanize(key: string): string {
@@ -306,6 +312,10 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   const { category, entry, links: entryLinks, siblings } = loaderData;
   const connectorNames = loaderData.connectorNames ?? {};
   const nameLinks = loaderData.nameLinks ?? {};
+  // Per-field provenance (common.json#/definitions/sources)
+  const fieldSources = (
+    entry.sources && typeof entry.sources === 'object' ? entry.sources : {}
+  ) as Record<string, FieldSource | FieldSource[]>;
   const filterableFields = getFilterableFields(category.id);
   const images = getEntryImages(entry);
   const deadLinks = getDeadLinks(entry);
@@ -555,6 +565,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               connectorNames={connectorNames}
               priceSource={getPriceSource(entry)}
               nameLinks={nameLinks}
+              sources={fieldSources}
             />
           </Section>
         )}
@@ -567,6 +578,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               filterableFields={filterableFields}
               connectorNames={connectorNames}
               nameLinks={nameLinks}
+              sources={fieldSources}
               pathPrefix={key}
             />
           </Section>
@@ -657,6 +669,7 @@ function KeyValueGrid({
   connectorNames = {},
   priceSource,
   nameLinks = {},
+  sources = {},
   pathPrefix,
 }: {
   entries: [string, unknown][];
@@ -666,10 +679,18 @@ function KeyValueGrid({
   /** Provenance for a top-level `price` row (undefined = not a price grid) */
   priceSource?: ReturnType<typeof getPriceSource>;
   nameLinks?: InlineNameLinks;
-  /** Dotted path of the group these entries sit in ("outputs"), for nameLinks lookup */
+  /** The entry's `sources` map (field path → provenance) */
+  sources?: Record<string, FieldSource | FieldSource[]>;
+  /** Dotted path of the group these entries sit in ("outputs"), for nameLinks/sources lookup */
   pathPrefix?: string;
 }) {
-  const ctx: FormatContext = { categoryPath, filterableFields, connectorNames, nameLinks };
+  const ctx: FormatContext = {
+    categoryPath,
+    filterableFields,
+    connectorNames,
+    nameLinks,
+    sources,
+  };
   return (
     <dl className="detail-grid">
       {entries.map(([key, value]) => (
@@ -681,6 +702,7 @@ function KeyValueGrid({
             ) : (
               formatValue(key, value, ctx, pathPrefix ? `${pathPrefix}.${key}` : key)
             )}
+            <FieldSources sources={sources[pathPrefix ? `${pathPrefix}.${key}` : key]} />
           </dd>
         </div>
       ))}
@@ -773,6 +795,7 @@ interface FormatContext {
   filterableFields: Set<string>;
   connectorNames: Record<string, string>;
   nameLinks: InlineNameLinks;
+  sources: Record<string, FieldSource | FieldSource[]>;
 }
 
 function formatValue(
@@ -865,7 +888,10 @@ function formatValue(
         {keys.map((k) => (
           <div key={k} className="detail-row">
             <dt className="detail-key">{k.replace(/_/g, ' ')}</dt>
-            <dd>{formatValue(k, obj[k], ctx, `${path}.${k}`)}</dd>
+            <dd>
+              {formatValue(k, obj[k], ctx, `${path}.${k}`)}
+              <FieldSources sources={ctx.sources[`${path}.${k}`]} />
+            </dd>
           </div>
         ))}
       </dl>

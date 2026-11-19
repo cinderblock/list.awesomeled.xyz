@@ -412,6 +412,26 @@ a.entry-image-credit:hover {
   font-size: 0.8125rem;
   color: var(--muted-foreground);
 }
+/* Provenance: where a fact or link was verified (always visible, never a hover) */
+.entry-source {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+.entry-source a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 2px;
+}
+.entry-source a:hover {
+  color: var(--category-primary);
+}
+.entry-field-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin-top: 0.3rem;
+}
 .entry-related-groups {
   display: flex;
   flex-direction: column;
