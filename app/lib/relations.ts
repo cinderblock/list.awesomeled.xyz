@@ -228,6 +228,80 @@ export function resolveName(index: NameIndex, name: string): EntryRef[] {
   return [];
 }
 
+// ---------------------------------------------------------------------------
+// Makers: "more from this maker" groups entries by their creator, tolerant of
+// the spelling variants the data has ("Advatek" / "Advatek Lights", "KulpLights,
+// LLC" / "Kulp Lights", "WorldSemi/Newstar").
+
+/** Creator values that aren't a maker: marketplaces, placeholders */
+const NOT_A_MAKER = new Set([
+  'generic',
+  'unknown',
+  'tindie',
+  'aliexpress',
+  'community',
+  'opensource',
+  'diy',
+  'boarddesign',
+]);
+
+/** Spelling variants → one maker key (keys are normalized: lowercase alphanumerics) */
+const MAKER_ALIASES: Record<string, string> = {
+  advateklighting: 'advatek',
+  advateklights: 'advatek',
+  aircookie: 'aircoookie',
+  chauvetprofessional: 'chauvet',
+  deskontrolelectronics: 'deskontrol',
+  digidottechnologies: 'digidot',
+  kulplights: 'kulp',
+  marksslee: 'markslee',
+  markcslee: 'markslee',
+  northernlightselectronicdesign: 'nled',
+  opscooptoelectronics: 'opsco',
+  bekonixexrocketlife: 'bekonix',
+  arjanvanvughtopensource: 'arjanvanvught',
+  quindorintermittenttechnology: 'quindor',
+  teamp: 'te',
+  tedeutsch: 'te',
+  elationlighting: 'elation',
+  newstarled: 'newstar',
+};
+
+/** Display label overrides where no spelling in the data names the maker well */
+const MAKER_LABELS: Record<string, string> = {
+  te: 'TE Connectivity',
+  aircoookie: 'Aircoookie',
+};
+
+/** Legal-form and filler words dropped before comparing maker names */
+const MAKER_NOISE = /\b(llc|inc|ltd|co|bv|sl|sarl|s\.?a|gmbh|corp|corporation|company)\b\.?/gi;
+
+/**
+ * Maker keys + display labels for an entry's creator. Multi-maker strings
+ * ("WorldSemi/Newstar", "Zach Vorhies (current), Daniel Garcia") yield one
+ * key per maker; "Quindor / Intermittent Technology" is one maker (alias).
+ */
+export function makersOf(entry: BaseEntry): { key: string; label: string }[] {
+  const raw =
+    typeof entry.creator === 'string'
+      ? entry.creator
+      : entry.creator && typeof entry.creator === 'object'
+        ? (entry.creator as { name?: unknown }).name
+        : null;
+  if (typeof raw !== 'string' || /^https?:/i.test(raw)) return [];
+  const whole = normalizeName(raw.replace(MAKER_NOISE, ''));
+  const parts = MAKER_ALIASES[whole] ? [raw] : raw.split(/\s*[/,]\s*/);
+  const out: { key: string; label: string }[] = [];
+  for (const part of parts) {
+    const label = part.replace(/\s*\((current|open source)\)\s*$/i, '').trim();
+    const norm = normalizeName(label.replace(MAKER_NOISE, ''));
+    const key = MAKER_ALIASES[norm] ?? norm;
+    if (!key || NOT_A_MAKER.has(key) || out.some((m) => m.key === key)) continue;
+    out.push({ key, label });
+  }
+  return out;
+}
+
 /** Protocol family label from a pixel / pixel IC entry's `data.type` */
 function protocolFamily(entry: BaseEntry): string | null {
   const t = (entry.data as { type?: unknown } | undefined)?.type;
@@ -249,6 +323,8 @@ export interface RelationGraph {
   familyOf: Map<EntryRef, string>;
   /** Derived per-entry compatibility summary (see LinkedSummary) */
   linked: Map<EntryRef, LinkedSummary>;
+  /** Maker key → display label (most common spelling) + every entry it made */
+  makers: Map<string, { label: string; refs: EntryRef[] }>;
 }
 
 /**
@@ -510,6 +586,23 @@ export function buildRelationGraph(db: Database): RelationGraph {
     }
   }
 
+  const makers = new Map<string, { label: string; refs: EntryRef[] }>();
+  const labelCounts = new Map<string, Map<string, number>>();
+  for (const [category, entries] of db) {
+    for (const entry of entries) {
+      for (const { key, label } of makersOf(entry)) {
+        if (!makers.has(key)) makers.set(key, { label, refs: [] });
+        makers.get(key)!.refs.push(`${category}/${entry.id}`);
+        const counts = labelCounts.get(key) ?? new Map<string, number>();
+        counts.set(label, (counts.get(label) ?? 0) + 1);
+        labelCounts.set(key, counts);
+      }
+    }
+  }
+  for (const [key, counts] of labelCounts) {
+    makers.get(key)!.label = MAKER_LABELS[key] ?? [...counts].sort((a, b) => b[1] - a[1])[0][0];
+  }
+
   return {
     edges,
     outgoing,
@@ -521,6 +614,7 @@ export function buildRelationGraph(db: Database): RelationGraph {
     families,
     familyOf,
     linked: computeLinked(db, names, outgoing, incoming, families, familyOf),
+    makers,
   };
 }
 
@@ -545,7 +639,7 @@ export interface LinkItem {
 
 export interface LinkRow {
   label: string;
-  kind: EdgeKind | 'family-protocol' | 'compatible-hardware' | 'via-firmware';
+  kind: EdgeKind | 'family-protocol' | 'compatible-hardware' | 'via-firmware' | 'same-maker';
   direction: 'forward' | 'reverse' | 'derived';
   items: LinkItem[];
 }
@@ -607,7 +701,9 @@ function sortItems(items: LinkItem[]): LinkItem[] {
 export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEntry): EntryLinks {
   const rows = new Map<string, LinkRow>();
   const row = (label: string, kind: LinkRow['kind'], direction: LinkRow['direction']) => {
-    const key = `${direction}:${label}`;
+    // Rows merge by label: symmetric kinds (variant, related, compatible)
+    // read the same from both ends, so declared and derived links share a row
+    const key = label;
     if (!rows.has(key)) rows.set(key, { label, kind, direction, items: [] });
     return rows.get(key)!;
   };
@@ -675,21 +771,35 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
     }
   }
 
+  // Product family: everything else from the same maker
+  for (const { key } of makersOf(entry)) {
+    const maker = graph.makers.get(key);
+    const others = (maker?.refs ?? []).filter((r) => r !== ref);
+    if (maker && others.length) {
+      row(`More from ${maker.label}`, 'same-maker', 'derived').items.push(
+        ...others.map((r) => itemFor(graph, r))
+      );
+    }
+  }
+
   const DERIVED_ORDER: LinkRow['kind'][] = [
     'via-firmware',
     'family-protocol',
     'compatible-hardware',
   ];
   const order = (r: LinkRow) =>
-    DERIVED_ORDER.includes(r.kind)
-      ? KIND_ORDER.length + DERIVED_ORDER.indexOf(r.kind)
-      : KIND_ORDER.indexOf(r.kind as EdgeKind);
+    r.kind === 'same-maker'
+      ? KIND_ORDER.length + DERIVED_ORDER.length
+      : DERIVED_ORDER.includes(r.kind)
+        ? KIND_ORDER.length + DERIVED_ORDER.indexOf(r.kind)
+        : KIND_ORDER.indexOf(r.kind as EdgeKind);
   const all = [...rows.values()]
     .map((r) => ({ ...r, items: sortItems(r.items) }))
     .sort((a, b) => order(a) - order(b) || a.direction.localeCompare(b.direction));
 
   const isFamily = (r: LinkRow) =>
-    !DERIVED_ORDER.includes(r.kind) && EDGE_KINDS[r.kind as EdgeKind].group === 'family';
+    r.kind === 'same-maker' ||
+    (!DERIVED_ORDER.includes(r.kind) && EDGE_KINDS[r.kind as EdgeKind].group === 'family');
   return {
     worksWith: all.filter((r) => !isFamily(r)),
     family: all.filter(isFamily),

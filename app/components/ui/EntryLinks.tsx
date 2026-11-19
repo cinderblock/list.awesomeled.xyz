@@ -148,7 +148,7 @@ export function EntryLinkRows({ rows }: { rows: LinkRow[] }) {
   return (
     <dl className="detail-grid detail-grid--links">
       {rows.map((row) => (
-        <div key={`${row.direction}:${row.label}`} className="detail-row">
+        <div key={row.label} className="detail-row">
           <dt className="detail-key">{row.label}</dt>
           <dd className="detail-value">
             <RowItems items={row.items} />
