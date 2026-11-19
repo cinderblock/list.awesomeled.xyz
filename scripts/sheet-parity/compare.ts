@@ -139,7 +139,8 @@ export function tokens(s: string, joinUnits = true): string[] {
     .normalize('NFKD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/(\d),(\d{3})/g, '$1$2');
-  if (joinUnits) t = t.replace(/(\d)\s+(k?hz|mhz|ghz|mv|v|ma|a|mw|w|kb|mb|gb|bits?|mm|awg)\b/g, '$1$2');
+  if (joinUnits)
+    t = t.replace(/(\d)\s+(k?hz|mhz|ghz|mv|v|ma|a|mw|w|kb|mb|gb|bits?|mm|awg)\b/g, '$1$2');
   return t
     .replace(/\bwi-fi\b/g, 'wifi')
     .replace(/\bart-net\b/g, 'artnet')
