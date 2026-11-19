@@ -116,24 +116,29 @@ export function matchRows(
     }
   }
 
-  // Best first; a name match beats a URL match at equal score
-  cands.sort((a, b) => b.score - a.score || (a.how === 'name' ? -1 : 1));
+  // Best first. Sharing the name is worth a little: sibling products share
+  // datasheet hosts and protocol pages, so a near-tie goes to the namesake.
+  const rank = (c: Cand) => c.score + (c.how === 'name' ? 0.15 : 0);
+  cands.sort((a, b) => rank(b) - rank(a));
   const assigned = new Set<SheetRow>(pairs.map((p) => p.row));
   for (const c of cands) {
     if (assigned.has(c.row)) continue;
     const id = `${c.view.entry.category}/${c.view.entry.slug}`;
-    const holder = taken.get(id);
-    if (!holder) {
-      // URL-only matches need real content agreement (vendor home pages are shared)
-      if (c.how === 'url' && c.score < 0.5) continue;
-      const p: Pair = { row: c.row, view: c.view, how: c.how, score: c.score };
-      pairs.push(p);
-      taken.set(id, p);
-      assigned.add(c.row);
-    } else if (c.score >= 0.6) {
-      pairs.push({ ...c, duplicateOf: holder.row.rowNumber });
-      assigned.add(c.row);
-    }
+    if (taken.has(id)) continue;
+    // URL-only matches need real content agreement (vendor home pages are shared)
+    if (c.how === 'url' && c.score < 0.5) continue;
+    const p: Pair = { row: c.row, view: c.view, how: c.how, score: c.score };
+    pairs.push(p);
+    taken.set(id, p);
+    assigned.add(c.row);
+  }
+  // Rows whose every candidate went to a better-matching row: duplicates
+  for (const c of cands) {
+    if (assigned.has(c.row) || c.score < 0.6) continue;
+    const holder = taken.get(`${c.view.entry.category}/${c.view.entry.slug}`);
+    if (!holder) continue;
+    pairs.push({ ...c, duplicateOf: holder.row.rowNumber });
+    assigned.add(c.row);
   }
 
   const sheetOnly = rows

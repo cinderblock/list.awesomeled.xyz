@@ -15,6 +15,9 @@ export const ALIASES: Record<string, Record<string, string>> = {
     'Baldrick Board': 'controllers/baldrick-8',
     // Misidentified in the sheet; resolved in a61acdb
     LEDEddy: 'controllers/led-player-s',
+    // Researched by the database-review stream (c13218a): it is Elation's
+    // "Flex Pixel Driver 1", a DMX-in, single clocked-output driver
+    'Flex Pixel Driver': 'controllers/flex-pixel-driver',
   },
   'Pixel Decoders': {
     // Moved to controllers (it holds DMX universes, not just pixel data)
