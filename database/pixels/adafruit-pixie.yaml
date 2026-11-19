@@ -14,11 +14,17 @@ data:
   pixel_size_bits: 30
   pixel_size_notes: Three bytes (R, G, B), each 10 bit-times with 8N1 framing
   backup_line: false
+datasheet:
+  url: https://cdn-learn.adafruit.com/downloads/pdf/pixie-3-watt-smart-chainable-led-pixels.pdf # Adafruit's learn guide as PDF; the product page says 'Datasheets, schematic, and Fritzing available in the product tutorial' and Adafruit publishes no separate datasheet
 electrical:
   vcc_voltage: 5V
   gpio:
     max: 5V
   wattage: 3W
+images:
+  - file: adafruit-pixie.webp
+    source: https://www.adafruit.com/product/2741
+    credit: Adafruit Industries
 other_links:
   - https://learn.adafruit.com/pixie-3-watt-smart-chainable-led-pixels
   - https://www.advateklighting.com/pixel-protocols/adafruit-pixie

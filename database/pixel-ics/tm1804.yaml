@@ -12,7 +12,17 @@ data:
   pixel_size_bits: 24
   backup_line: false
 datasheet:
-  url: https://www.lcsc.com/datasheet/C20622206.pdf
+  url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1804_V1.9.pdf # Titan Micro TM1804 V1.9 (Chinese); Lumikit copy, identical to LCSC's file apart from a leading BOM. Titan's own V2.3 download only works with a titanmec.com Referer
+  sources:
+    - url: https://datasheet.lcsc.com/datasheet/pdf/d076f3f9e38930226d4b36b0fbfe7794.pdf
+      host: distributor
+      notes: Same V1.9 document, LCSC's direct file (C20622206)
+    - url: https://www.lcsc.com/datasheet/C20622206.pdf
+      host: distributor
+      notes: LCSC viewer page for the V1.9 file (serves HTML to non-browsers)
+    - url: https://media.ledyi.com/tm1804-datasheet_58c656eae88e684e5fc0bb39b47ea8668c1825a43072c464a3a19284676787f4.pdf
+      host: community
+      notes: Older English translation (24 V outputs, 5-24 V supply); LEDYi copy
 electrical:
   output_voltage: 24V
   supply_voltage: 5V

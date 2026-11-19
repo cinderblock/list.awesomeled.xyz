@@ -24,6 +24,10 @@ electrical:
   channel_current_notes: 12-13mA per channel (product naming)
   quiescent_current: 1mA
   wattage: 0.2W
+images:
+  - file: ge8812.webp
+    source: https://www.gree-leds.com/ic-built-in-led/ge8812-chip-built-in-led.html
+    credit: Greeled Electronic
 physical:
   packages:
     - '5050'

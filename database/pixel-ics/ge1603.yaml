@@ -9,6 +9,10 @@ data:
   clocked: false
   channels: 3
   backup_line: true
+images:
+  - file: ge1603.webp
+    source: https://www.gree-leds.com/web/index.php?topclassid=16&classid=130&id=286&lanstr=en&wap=1
+    credit: Greeled Electronic
 sources:
   creator:
     url: https://www.gree-leds.com/web/index.php?topclassid=16&classid=130&id=286&lanstr=en&wap=1

@@ -215,7 +215,9 @@ URLs are in [plans/assets-research/](plans/assets-research/).
   Genesis Systech, not "Shenzhen Greesit"; sm16511 is a 3-channel DMX512 SOP8
   per its maker (entry: 4 channels, SOP10/16); ucs2904's `other_links` text
   names SM16704; ws2814's price SKU is the WS2814F; qed3001's specs duplicate
-  tls3001's.
+  tls3001's. Second pass ([pass2-pixels-ics.md](plans/assets-research/pass2-pixels-ics.md)):
+  tm1804 says 24 V outputs, but the V1.9 sheet it cites and Titan's current
+  V2.3 both say 30 V; ge1603's Greeled may be its vendor, not its designer.
 - **Pixels** ([pixels.md](plans/assets-research/pixels.md)): Adafruit
   product 2343 (apa102's image source) is now titled "[SK9822]"; ns108e and
   sk9826 `dead_links` mark PDFs that load today; sk9822-a's creator is probably

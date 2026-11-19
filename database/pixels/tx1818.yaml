@@ -15,11 +15,14 @@ data:
   pixel_size_bits: 24
   backup_line: true
 datasheet:
-  url: https://www.lcsc.com/datasheet/C784552.pdf # TCWIN TX1818BJJ-F01 (5050) specification A2 (2023-03-27), Chinese; LCSC copy
+  url: https://datasheet.lcsc.com/datasheet/pdf/b153efab9bc27ebcdabd89857c3357d8.pdf # TCWIN TX1818BJJ-F01 (5050) specification A2 (2023-03-27), Chinese; LCSC's direct file, TCWIN's own site hosts no datasheets
   sources:
-    - url: https://www.lcsc.com/datasheet/C784557.pdf
+    - url: https://www.lcsc.com/datasheet/C784552.pdf
       host: distributor
-      notes: TX1818HLJ-F01 (3535) specification A2, same driver figures, no FDIN pin
+      notes: LCSC viewer page for the same TX1818BJJ-F01 file (serves HTML to non-browsers)
+    - url: https://datasheet.lcsc.com/datasheet/pdf/ccf6c4ce438971261bcd22da2dbd0270.pdf
+      host: distributor
+      notes: TX1818HLJ-F01 (3535) specification A2, same driver figures, no FDIN pin (LCSC C784557, viewer https://www.lcsc.com/datasheet/C784557.pdf)
 electrical:
   vcc_voltage: 12V
   vcc_voltage_notes: 'Supply 10.8-13.2 V (absolute maximum 14 V)'
