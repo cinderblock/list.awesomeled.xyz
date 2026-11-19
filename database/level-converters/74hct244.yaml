@@ -1,6 +1,14 @@
 name: 74HCT244
 status: active
 creator: Texas Instruments
+aliases:
+  - SN74HCT244
+  - SN74HCT244N
+  - SN74HCT244DWR
+  - SN74HCT244PWR
+  - SN74HCT244DBR
+  - SN74HCT244NSR
+  - SN74HCT244DGSR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
 electrical:
@@ -27,3 +35,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.ti.com/product/SN74HCT244
   vendor: TI
+sources:
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCLS175I: title + Package Option Addendum orderables (N = PDIP-20, DW = SOIC-20, PW = TSSOP-20, DB = SSOP-20, NS = SOP-20, DGS = VSSOP-20)'

@@ -1,6 +1,11 @@
 name: SN74LV1T34DBVRG4
 status: active
 creator: Texas Instruments
+aliases:
+  - SN74LV1T34
+  - SN74LV1T34DBVR
+  - SN74LV1T34DCKR
+  - SN74LV1T34DCKRG4
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
 electrical:
@@ -26,3 +31,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.ti.com/product/SN74LV1T34/part-details/SN74LV1T34DBVRG4
   vendor: TI
+sources:
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCLS743E: title + Package Option Addendum (DBV = SOT-23-5, DCK = SC70-5; the G4 orderables are listed alongside)'

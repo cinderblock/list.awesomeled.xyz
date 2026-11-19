@@ -53,6 +53,12 @@ related:
     source:
       url: https://quinled.info/quinled-dig-quad/
       retrieved: '2026-11-18'
+  - type: uses
+    ref: level-converters/sn74ahct125n
+    notes: Data-line level shifter (buffer IC) on the board
+    source:
+      url: https://github.com/wled/WLED/wiki/Compatible-hardware
+      retrieved: '2026-11-18'
 software:
   firmware:
     - WLED

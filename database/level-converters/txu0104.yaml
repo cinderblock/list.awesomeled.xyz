@@ -1,6 +1,11 @@
 name: TXU0104
 status: active
 creator: Texas Instruments
+aliases:
+  - TXU0104PWR
+  - TXU0104BQAR
+  - TXU0104RUTR
+  - TXU0104DTRR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
 images:
@@ -23,3 +28,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.ti.com/product/TXU0104
   vendor: TI
+sources:
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCES937B: title + Package Option Addendum (PW = TSSOP-14, BQA = WQFN, RUT = UQFN, DTR = X2QFN)'

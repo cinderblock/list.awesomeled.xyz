@@ -6,6 +6,9 @@ creator:
   page: https://lilygo.cc/products/t-internet-poe
 power:
   gpio_voltage: 3.3V
+aliases:
+  - T-Internet-POE
+  - TTGO T-Internet-POE
 compute:
   soc: ESP32
   cpu: Xtensa LX6
@@ -37,3 +40,7 @@ sources:
     url: https://lilygo.cc/products/t-internet-poe
     retrieved: '2026-11-18'
     notes: 'T-Internet-POE V2 available, $16.01'
+  aliases:
+    url: https://web.archive.org/web/20201126221402/http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FId=t3:50033:3
+    retrieved: '2026-11-18'
+    notes: Wayback copy of this entry's creator.page (the live lilygo.cn URL now returns HTTP 403)

@@ -5,6 +5,9 @@ creator:
   page: https://www.adafruit.com/product/3010
 power:
   gpio_voltage: 3.3V
+aliases:
+  - Adafruit Feather M0 Wi-Fi
+  - Adafruit Feather M0 Wi-Fi - ATSAMD21 + ATWINC1500
 compute:
   soc: ATSAMD21G18
   cpu: ARM Cortex-M0
@@ -39,3 +42,7 @@ sources:
     url: https://www.adafruit.com/product/3010
     retrieved: '2026-11-18'
     notes: 'in stock (77), $39.95 PCB antenna / $34.95 uFL'
+  aliases:
+    url: https://www.adafruit.com/product/3010
+    retrieved: '2026-11-18'
+    notes: product title

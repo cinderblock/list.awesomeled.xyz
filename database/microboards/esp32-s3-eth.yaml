@@ -5,6 +5,10 @@ creator:
   name: Waveshare
   page: https://www.waveshare.com/esp32-s3-eth.htm
 notes: PoE shield available
+aliases:
+  - ESP32-S3-ETH-M
+  - ESP32-S3-POE-ETH
+  - ESP32-S3-POE-ETH-M
 compute:
   soc: ESP32 S3
   isa: Xtensa
@@ -33,3 +37,7 @@ sources:
     url: https://www.waveshare.com/esp32-s3-eth.htm
     retrieved: '2026-11-18'
     notes: 'listed for sale, $16.99 board only'
+  aliases:
+    url: https://www.waveshare.com/esp32-s3-eth.htm
+    retrieved: '2026-11-18'
+    notes: "order options: ESP32-S3-ETH-M = 'ESP32-S3-ETH with pre-soldered headers'; ESP32-S3-POE-ETH(-M) = same board + PoE module (-CAM-KIT bundles omitted)"

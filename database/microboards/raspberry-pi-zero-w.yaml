@@ -9,6 +9,8 @@ power:
     min: 5V
     max: 5V
   gpio_voltage: 3.3V
+aliases:
+  - Raspberry Pi Zero WH
 compute:
   soc: BCM2835
   cpu: ARM11
@@ -37,16 +39,27 @@ io:
 price: 15
 price_source:
   notes: >-
-    Raspberry Pi publishes no list price for Zero W; approved reseller, in stock; Maker Bright $15, Vilros $16.43,
-    SparkFun $16.50, PiShop.us $17.25
+    Raspberry Pi publishes no list price for Zero W; approved reseller, in stock; Maker Bright $15, Vilros $16.43, SparkFun $16.50, PiShop.us $17.25
   part: '3400'
   retrieved: '2026-11-18'
   url: https://www.adafruit.com/product/3400
   vendor: Adafruit
+related:
+  - type: variant
+    ref: microboards/raspberry-pi-zero-v1-3
+    notes: Pi Zero (camera-connector layout) plus 2.4 GHz Wi-Fi and Bluetooth
+    source:
+      url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/zero/zero-models.adoc
+      retrieved: '2026-11-18'
+      notes: "product page agrees: 'The Raspberry Pi Zero W extends the Pi Zero family and comes with added wireless LAN and Bluetooth connectivity.'"
 sources:
   status:
     url: https://www.raspberrypi.com/products/raspberry-pi-zero-w/
     retrieved: '2026-11-18'
     notes: '"will remain in production until at least January 2030"'
+  aliases:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/zero/zero-models.adoc
+    retrieved: '2026-11-18'
+    notes: WH = the same board with the GPIO header pre-soldered
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

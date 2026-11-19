@@ -9,6 +9,10 @@ power:
     min: 5V
     max: 5V
   gpio_voltage: 3.3V
+aliases:
+  - Raspberry Pi B+
+  - Raspberry Pi 1 B+
+  - Raspberry Pi Model B+
 compute:
   soc: BCM2835
   cpu: ARM11
@@ -47,5 +51,9 @@ sources:
     url: https://www.raspberrypi.com/products/raspberry-pi-1-model-b-plus/
     retrieved: '2026-11-18'
     notes: '"will remain in production until at least January 2030"'
+  aliases:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: official Raspberry Pi documentation source; section heading '== Raspberry Pi Model A+ and B+'
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

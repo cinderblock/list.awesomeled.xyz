@@ -34,3 +34,10 @@ io:
   bms: 1S
   imu: false
 price: 25
+related:
+  - type: related
+    ref: microboards/beaglebone-black
+    notes: Same AM3358 processor (inside the OSD3358 SiP) on a board one third the size
+    source:
+      url: https://www.beagleboard.org/boards/pocketbeagle-original
+      retrieved: '2026-11-18'

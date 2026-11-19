@@ -7,6 +7,10 @@ power:
   voltage:
     max: 5V
   gpio_voltage: 5.0V
+aliases:
+  - ATtiny85-20PU
+  - ATtiny85-20SU
+  - ATtiny85-20MU
 compute:
   soc: ATtiny85
   cpu: AVR
@@ -27,8 +31,7 @@ io:
 price: 1.66
 price_source:
   notes: >-
-    microchipDIRECT buy-now price for the PDIP-8 tube part at 1-24 pcs, read from the Purchase
-    table on the product page; 100+ $1.39, 5000+ est. $1.22; SOIC-8 ATTINY85-20SU is $1.50
+    microchipDIRECT buy-now price for the PDIP-8 tube part at 1-24 pcs, read from the Purchase table on the product page; 100+ $1.39, 5000+ est. $1.22; SOIC-8 ATTINY85-20SU is $1.50
   part: ATTINY85-20PU
   retrieved: '2026-11-18'
   url: https://www.microchip.com/en-us/product/ATtiny85
@@ -38,3 +41,7 @@ sources:
     url: https://www.microchip.com/en-us/product/ATtiny85
     retrieved: '2026-11-18'
     notes: '"Status: In Production"'
+  aliases:
+    url: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: 'Ordering Information table: package 8P3 (PDIP-8), 8S2 (SOIC-8), 20M1 (QFN-20); tape-and-reel suffixes omitted'

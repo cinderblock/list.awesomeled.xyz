@@ -9,6 +9,8 @@ power:
     min: 5V
     max: 5V
   gpio_voltage: 3.3V
+aliases:
+  - Raspberry Pi 3B+
 compute:
   soc: BCM2837B0
   cpu: 4× ARM Cortex-A53
@@ -40,8 +42,7 @@ io:
 price: 40
 price_source:
   notes: >-
-    official list price from the product brief (published October 2025); the product page now says in production
-    until at least January 2030 (the brief still says 2028); PiShop.us sells it at $40, in stock
+    official list price from the product brief (published October 2025); the product page now says in production until at least January 2030 (the brief still says 2028); PiShop.us sells it at $40, in stock
   retrieved: '2026-11-18'
   url: https://pip-assets.raspberrypi.com/categories/532-raspberry-pi-3-model-b/documents/RP-008338-DS-2-raspberry-pi-3-b-plus-product-brief.pdf
   vendor: Raspberry Pi
@@ -50,5 +51,8 @@ sources:
     url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/
     retrieved: '2026-11-18'
     notes: '"will remain in production until at least January 2030"'
+  aliases:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

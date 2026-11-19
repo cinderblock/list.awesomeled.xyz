@@ -4,6 +4,8 @@ creator:
   page: https://components101.com/development-boards/nodemcu-esp8266-pinout-features-and-datasheet
 power:
   gpio_voltage: 3.3V
+aliases:
+  - NodeMCU DEVKIT V1.0
 compute:
   soc: ESP8266
   cpu: Diamond Standard 106Micro
@@ -29,10 +31,12 @@ price:
   max: 4.15
 price_source:
   notes: >-
-    Single-board NodeMCU V2 / CP2102 (Amica-style, some now with the CH9102 USB chip) listings on aliexpress.us:
-    $2.03, $2.30, $2.65, $2.76, $2.95, $3.62, $3.92, $4.15. Regular prices, excluding the $1.09 new-shopper deal
-    and shipping. Combined "CH340/CP2102 V3 V2" listings start lower ($1.12-$2.56) but that is usually the CH340 V3
-    variant.
+    Single-board NodeMCU V2 / CP2102 (Amica-style, some now with the CH9102 USB chip) listings on aliexpress.us: $2.03, $2.30, $2.65, $2.76, $2.95, $3.62, $3.92, $4.15. Regular prices, excluding the $1.09 new-shopper deal and shipping. Combined "CH340/CP2102 V3 V2" listings start lower ($1.12-$2.56) but that is usually the CH340 V3 variant.
   retrieved: '2026-11-18'
   url: https://www.aliexpress.us/w/wholesale-NodeMCU-v2-ESP8266-CP2102.html
   vendor: AliExpress (street)
+sources:
+  aliases:
+    url: https://frightanic.com/iot/comparison-of-esp8266-nodemcu-development-boards/
+    retrieved: '2026-11-18'
+    notes: Marcel Stör (NodeMCU firmware maintainer) maps the unofficial 'V2' name to the official 2nd-generation devkit v1.0

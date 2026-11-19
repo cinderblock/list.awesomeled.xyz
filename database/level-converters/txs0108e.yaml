@@ -1,6 +1,12 @@
 name: TXS0108e
 status: active
 creator: Texas Instruments
+aliases:
+  - TXS0108EPWR
+  - TXS0108ERGYR
+  - TXS0108EDGSR
+  - TXS0108ENMER
+  - TXS0108ERKSR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
 images:
@@ -23,3 +29,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.ti.com/product/TXS0108E
   vendor: TI
+sources:
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCES642L: title + Package Option Addendum (PW = TSSOP-20, RGY/RKS = VQFN, DGS = VSSOP, NME = NFBGA)'

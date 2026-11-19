@@ -7,6 +7,8 @@ power:
   voltage:
     max: 5V
   gpio_voltage: 3.3V
+aliases:
+  - Adafruit Trinket M0
 compute:
   soc: ATSAMD21E18
   cpu: ARM Cortex-M0
@@ -39,3 +41,7 @@ sources:
     url: https://www.adafruit.com/product/3500
     retrieved: '2026-11-18'
     notes: 'in stock, $10.95'
+  aliases:
+    url: https://www.adafruit.com/product/3500
+    retrieved: '2026-11-18'
+    notes: product title

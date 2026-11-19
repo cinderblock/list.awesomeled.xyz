@@ -54,6 +54,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://shop.allnetchina.cn/products/quinled-dig-uno-v4-digital-led-controller
   vendor: ALLNET China
+related:
+  - type: uses
+    ref: level-converters/sn74ahct125n
+    notes: Data-line level shifter (buffer IC) on the board
+    source:
+      url: https://github.com/wled/WLED/wiki/Compatible-hardware
+      retrieved: '2026-11-18'
 software:
   firmware:
     - WLED

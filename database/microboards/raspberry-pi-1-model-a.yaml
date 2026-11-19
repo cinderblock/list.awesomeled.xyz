@@ -9,6 +9,10 @@ power:
     min: 5V
     max: 5V
   gpio_voltage: 3.3V
+aliases:
+  - Raspberry Pi A+
+  - Raspberry Pi 1 A+
+  - Raspberry Pi Model A+
 compute:
   soc: BCM2835
   cpu: ARM11
@@ -38,16 +42,27 @@ io:
 price: 20
 price_source:
   notes: >-
-    Raspberry Pi publishes no list price for this model; approved reseller Vilros lists it at $20 (out of stock);
-    Adafruit's listing shows $24.95, marked discontinued
+    Raspberry Pi publishes no list price for this model; approved reseller Vilros lists it at $20 (out of stock); Adafruit's listing shows $24.95, marked discontinued
   part: RP1A+
   retrieved: '2026-11-18'
   url: https://vilros.com/products/raspberry-pi1-model
   vendor: Vilros
+related:
+  - type: variant
+    ref: microboards/raspberry-pi-1-model-b
+    notes: Low-cost A+ form of the first-generation Pi (BCM2835)
+    source:
+      url: https://www.raspberrypi.com/products/raspberry-pi-1-model-a-plus/
+      retrieved: '2026-11-18'
+      notes: read via WebFetch (Cloudflare blocks direct download)
 sources:
   status:
     url: https://www.raspberrypi.com/products/raspberry-pi-1-model-a-plus/
     retrieved: '2026-11-18'
     notes: '"will remain in production until at least January 2030"'
+  aliases:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: official Raspberry Pi documentation source; section heading '== Raspberry Pi Model A+ and B+'
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'

@@ -28,6 +28,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.sparkfun.com/teensy-4-1.html
   vendor: SparkFun
+related:
+  - type: variant
+    ref: microboards/teensy-4-0
+    notes: 'Larger Teensy 4.x sibling on the same iMXRT1062: 55 vs 40 I/O pins, 8 vs 2 MB flash, Ethernet PHY'
+    source:
+      url: https://www.pjrc.com/store/teensy41.html
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://www.sparkfun.com/teensy-4-1.html

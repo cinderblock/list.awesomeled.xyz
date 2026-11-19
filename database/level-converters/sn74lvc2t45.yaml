@@ -1,6 +1,10 @@
 name: SN74LVC2T45
 status: active
 creator: Texas Instruments
+aliases:
+  - SN74LVC2T45DCTR
+  - SN74LVC2T45DCUR
+  - SN74LVC2T45YZPR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
 images:
@@ -23,3 +27,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.ti.com/product/SN74LVC2T45
   vendor: TI
+sources:
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
+    retrieved: '2026-11-18'
+    notes: 'TI datasheet SCES516N: title + Package Option Addendum (DCT = SSOP-8, DCU = VSSOP-8, YZP = DSBGA-8)'

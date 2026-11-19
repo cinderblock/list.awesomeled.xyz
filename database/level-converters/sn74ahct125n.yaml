@@ -1,6 +1,18 @@
 name: SN74AHCT125N
 status: active
 creator: Texas Instruments
+aliases:
+  - SN74AHCT125
+  - SN74AHCT125DR
+  - SN74AHCT125D
+  - SN74AHCT125PWR
+  - SN74AHCT125DBR
+  - SN74AHCT125DGVR
+  - SN74AHCT125NSR
+  - SN74AHCT125RGYR
+  - SN74AHCT125BQAR
+  - 74AHCT125
+  - 74AHCT125N
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
 images:
@@ -24,3 +36,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.ti.com/product/SN74AHCT125
   vendor: TI
+sources:
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS264R: title + Package Option Addendum (N = PDIP-14 'Active', D = SOIC-14 'Obsolete', DR = SOIC-14 'Active', PW/DB/DGV/NS/RGY/BQA = other packages)"

@@ -4,6 +4,9 @@ release_year: 2021
 creator:
   name: Adafruit
   page: https://www.adafruit.com/product/4062
+aliases:
+  - Adafruit Feather nRF52840 Express
+  - Feather nRF52840 Express
 compute:
   soc: NRF 52840
   cpu: ARM Cortex-M4
@@ -39,3 +42,7 @@ sources:
     url: https://www.adafruit.com/product/4062
     retrieved: '2026-11-18'
     notes: 'in stock, $24.95'
+  aliases:
+    url: https://www.adafruit.com/product/4062
+    retrieved: '2026-11-18'
+    notes: product title

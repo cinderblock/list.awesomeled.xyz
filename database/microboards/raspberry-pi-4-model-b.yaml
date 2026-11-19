@@ -9,6 +9,8 @@ power:
     min: 5V
     max: 5V
   gpio_voltage: 3.3V
+aliases:
+  - Raspberry Pi 4B
 compute:
   soc: BCM2711
   cpu: 4× ARM Cortex-A72
@@ -39,13 +41,23 @@ io:
 price: 35
 price_source:
   notes: >-
-    1GB list price from the product brief (published October 2026); 2GB $67.50, 3GB $83.75, 4GB $100, 8GB $165
-    after the 2025-2026 memory-cost rises; product page "From $35"
+    1GB list price from the product brief (published October 2026); 2GB $67.50, 3GB $83.75, 4GB $100, 8GB $165 after the 2025-2026 memory-cost rises; product page "From $35"
   retrieved: '2026-11-18'
   url: https://pip-assets.raspberrypi.com/categories/545-raspberry-pi-4-model-b/documents/RP-008344-DS-7-raspberry-pi-4-product-brief.pdf
   vendor: Raspberry Pi
+related:
+  - type: predecessor
+    ref: microboards/raspberry-pi-3-model-b
+    notes: Pi 4B succeeded the Pi 3B+ and stays backward compatible with it
+    source:
+      url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-product-brief.pdf
+      retrieved: '2026-11-18'
+      notes: "docs also: 'Raspberry Pi 4B features a shift in architecture from Raspberry Pi 3A+ and 3B+'"
 sources:
   status:
     url: https://www.raspberrypi.com/products/raspberry-pi-4-model-b/
     retrieved: '2026-11-18'
     notes: '"will remain in production until at least January 2034"'
+  aliases:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'

@@ -7,6 +7,9 @@ power:
   voltage:
     min: 6V
     max: 20V
+aliases:
+  - Arduino Mega 2560
+  - Mega 2560 Rev3
 compute:
   soc: ATmega2560
   cpu: AVR
@@ -41,3 +44,7 @@ sources:
     url: https://store-usa.arduino.cc/products/arduino-mega-2560-rev3
     retrieved: '2026-11-18'
     notes: 'in stock, regular $49.90'
+  aliases:
+    url: https://docs.arduino.cc/hardware/mega-2560/
+    retrieved: '2026-11-18'
+    notes: product description; page title/breadcrumb is 'Mega 2560 Rev3'; downloads are named A000067-* (SKU)
