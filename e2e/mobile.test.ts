@@ -40,7 +40,7 @@ test.describe('Phone widths', () => {
   test('what the header drops on the smallest phones is in the footer', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 800 });
     await gotoReady(page, '/');
-    await expect(page.locator('header').getByRole('link', { name: 'About' })).toBeHidden();
+    await expect(page.getByRole('banner').getByRole('link', { name: 'About' })).toBeHidden();
     await page.locator('footer').getByRole('link', { name: 'About' }).click();
     await expect(page).toHaveURL(/\/about$/);
   });

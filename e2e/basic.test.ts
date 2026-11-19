@@ -64,11 +64,12 @@ test.describe('Basic functionality', () => {
     // Wait for hydration
     await page.waitForLoadState('networkidle');
 
-    // Should have header element
-    await expect(page.locator('header')).toBeVisible();
+    // The site header (pages have headers of their own too)
+    const header = page.getByRole('banner');
+    await expect(header).toBeVisible();
 
     // Should have About link
-    await expect(page.locator('text=About').first()).toBeVisible();
+    await expect(header.getByRole('link', { name: 'About' })).toBeVisible();
   });
 
   test('category nav appears on category pages', async ({ page }) => {
