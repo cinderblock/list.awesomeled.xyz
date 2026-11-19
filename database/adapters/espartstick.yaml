@@ -1,24 +1,27 @@
-name: ESPArtstick
+name: ESP Art Stick
 status: discontinued
 creator: Microcyb
+notes: "Microcyb's 2019 Wemos D1 Mini (ESP8266) shield, sold assembled with the D1 Mini, before the SD-card EspArtStick: one pixel output, in 5 V kits ($16.99; terminal block with a clock pin, or a barrel-jack version that is data only) and a 12 V kit ($25, later 5-12 V). Runs ESPixelStick or custom Arduino code, up to about 1024 pixels. Gone from the store by 2022."
 outputs:
   count: 1
-  clocked: false
+  clocked: selectable # clock pin on the terminal-block kits; the barrel-jack kit is data only
 power:
   voltage:
-    max: 12 # 5 V or 12 V pixels
+    min: 5
+    max: 12
 dead_links:
   - url: https://espartstick.ecwid.com/
     archive: https://web.archive.org/web/20191021235104/https://espartstick.ecwid.com/
     checked: '2026-11-18'
     notes: now redirects to espartstick.company.site, which says "The site is not available"
+diy_or_ots: OTS
 images:
   - file: espartstick.webp
     source: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
     credit: Microcyb
 links:
   product: https://espartstick.ecwid.com/
-parent: Wemos Dx Mini (ESP32/ESP8266)
+parent: Wemos D1 Mini (ESP8266)
 price: 21
 price_source:
   notes: Last list price of "ESP Art Stick 5v/12v Wi-Fi pixel Controller" (archived capture; same product was $25 in 2019 as "12v enhanced complete")
@@ -31,21 +34,21 @@ software:
 sources:
   status:
     url: https://microcyb.com/shop.php?category=LED+pixel+Controller
-    retrieved: '2026-11-18'
-    notes: 'Microcyb now lists only ShowSpark controllers; the old Ecwid store (espartstick.company.site) says "The site is not available"'
+    retrieved: 2026-11-18
+    notes: Microcyb now lists only ShowSpark controllers; the old Ecwid store (espartstick.company.site) says "The site is not available"
   software.firmware:
     url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
-    retrieved: '2026-11-18'
+    retrieved: 2026-11-18
     notes: Microcyb store product page (SKU 00010), Wayback capture 2021-08-03; same sentence on the 2019 capture
   outputs.count:
     url: https://web.archive.org/web/20191021235104/https://espartstick.ecwid.com/
-    retrieved: '2026-11-18'
+    retrieved: 2026-11-18
     notes: one pixel output
   power.voltage.max:
     url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
-    retrieved: '2026-11-18'
+    retrieved: 2026-11-18
     notes: "'ESP Art Stick 5v/12v Wi-Fi pixel Controller'"
   creator:
     url: https://web.archive.org/web/20191021235104/https://espartstick.ecwid.com/
-    retrieved: '2026-11-18'
+    retrieved: 2026-11-18
     notes: "'About Us Microcyb'"
