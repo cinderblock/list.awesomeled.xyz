@@ -31,7 +31,8 @@ outputs:
     - WS281X
 power:
   voltage:
-    max: 5
+    min: 100 # AC mains into the on-board MEAN WELL 5 V supply (2023 edition); the 2022 edition took 5 V DC, 3 A
+    max: 240
 data:
   storage:
     - type: microSD
@@ -80,3 +81,7 @@ sources:
     url: https://experiencelights.com/long-range-genius-pixel-controller/
     retrieved: '2026-11-18'
     notes: "'No banks or groups'; ~20,000 pixels via DDP"
+  power.voltage:
+    url: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view?usp=sharing
+    retrieved: '2026-11-18'
+    notes: provide high voltage (100 - 240 V) AC power to the device

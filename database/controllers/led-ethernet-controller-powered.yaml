@@ -39,6 +39,7 @@ power:
 data:
   storage:
     - type: microSD
+      max_size: 32
 datasheet:
   url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf # tech specs sheet
 dead_links:
@@ -100,5 +101,9 @@ sources:
     url: https://www.ledstripstudio.com/shop/product/led-ethernet-controller-powered/
     retrieved: '2026-11-18'
     notes: 'product URL now redirects to the LEC 3 page; absent from the shop and its product sitemap'
+  data.storage:
+    url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+    retrieved: '2026-11-18'
+    notes: Micro SD Card (FAT32, up to 32GB)
 technical_notes:
   - Lifetime LED Strip Studio software license included

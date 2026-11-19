@@ -9,8 +9,7 @@ inputs:
   standalone: true # plays FSEQ/PSEQ sequence files from SD card
 outputs:
   count: 4
-  connector:
-    ref: mtsb-combicon
+  connector: JST
   driver:
     buffered: true
   pixels:
@@ -60,3 +59,7 @@ sources:
     url: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
     retrieved: '2026-11-18'
     notes: "'Software Compatibility'; plays Jinx '.OUT' and Xlights/Falcon '.FSEQ' (V1.1, renamed .FSQ) files."
+  outputs.connector:
+    url: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
+    retrieved: '2026-11-18'
+    notes: outputting pixel data to four JST outputs

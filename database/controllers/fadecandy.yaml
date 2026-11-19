@@ -10,7 +10,7 @@ vendors:
   - name: Adafruit
     url: https://www.adafruit.com
     page: https://www.adafruit.com/product/1689
-notes: Please see https://github.com/scanlime/fadecandy to confirm project status
+notes: 'Abandoned by its author: in July 2021 the readme was replaced with "STOP DOING FADECANDY", and the GitHub repository was deleted between September 2023 and January 2024 (an archived copy is linked). Adafruit no longer stocks the board.'
 inputs:
   physical:
     USB: true
@@ -70,8 +70,11 @@ sources:
     url: https://www.adafruit.com/product/1689
     retrieved: '2026-11-18'
     notes: '"No longer stocked" (schema.org/Discontinued); the GitHub repository returns 404'
+  notes:
+    url: https://web.archive.org/web/20220107030305/https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7
+    retrieved: '2026-11-18'
+    notes: STOP DOING FADECANDY
 technical_notes:
   - Very popular platform with excellent dithering and interpolation
-  - Project maintenance status uncertain - check GitHub readme
-  - 'See commit history for maintenance status: https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7'
+  - 'Readme replaced with "STOP DOING FADECANDY" on 2021-07-18: https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7'
 wled_compatible: false

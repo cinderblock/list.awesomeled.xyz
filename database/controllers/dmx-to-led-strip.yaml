@@ -8,7 +8,6 @@ notes: DMX modes and address selected via dip switch. Setting of pixel mode X1 X
 inputs:
   physical:
     DMX512: 3-pin input (solder; optional XLR or wireless-DMX card)
-    USB: USB-C
   protocols:
     - DMX512
   standalone: false

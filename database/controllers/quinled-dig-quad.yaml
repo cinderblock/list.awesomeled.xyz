@@ -4,7 +4,7 @@ release_year: 2020
 creator:
   name: Quindor / Intermittent Technology
   page: https://quinled.info/quinled-dig-quad/
-notes: ESP8266/ESP32 based, open to any software, often run with WLED
+notes: ESP32 based (ESP8266 support was dropped in v3; the v1 also took a Wemos D1 Mini ESP8266), open to any software, often run with WLED
 inputs:
   physical:
     Wi-Fi:
@@ -115,4 +115,8 @@ sources:
     url: https://quinled.info/quinled-dig-quad/
     retrieved: '2026-11-18'
     notes: '"comes in a DIY version (you buy the components and build it yourself) and a Pre-Assembled version"'
+  notes:
+    url: https://quinled.info/quinled-dig-quad-diy-v3-specifications/
+    retrieved: '2026-11-18'
+    notes: ESP32 (ESP8266 support dropped in v3!)
 wled_compatible: true

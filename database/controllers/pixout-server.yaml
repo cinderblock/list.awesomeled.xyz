@@ -1,4 +1,4 @@
-name: PixOut Server
+name: Pixout ArtNet DMX Recorder
 status: active
 creator:
   name: PixOut
@@ -14,6 +14,12 @@ inputs:
     - Art-Net
   standalone: true # plays recorded cues from SD without external input
   requires_host: Raspberry Pi # runs on Raspberry Pi 3B/3B+/4 or CM4
+outputs:
+  auxiliary:
+    DMX512: 4 # D-100 model only
+power:
+  voltage:
+    max: 12
 data:
   storage:
     - type: SD
@@ -80,5 +86,17 @@ sources:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'
     notes: "Pixout ArtNet Recorder page: 'Compatibility: Works with your favourite tools' list and the FAQ 'Can Pixout accept ArtNet data from my controller (GrandMA3 /…"
+  name:
+    url: https://pixout.lighting/products/recorder/
+    retrieved: '2026-11-18'
+    notes: Pixout ArtNet DMX Recorder - Pixout Lighting
+  outputs.auxiliary.DMX512:
+    url: https://pixout.lighting/products/recorder/
+    retrieved: '2026-11-18'
+    notes: Indoor controller with four native DMX512 outputs and RTC
+  power.voltage.max:
+    url: https://pixout.lighting/products/recorder/
+    retrieved: '2026-11-18'
+    notes: 12V DC across all models (110–240V AC adapter included)
 technical_notes:
   - 'No pixel outputs of its own: it drives pixels through Art-Net pixel controllers. Direct SPI output to WS2812B strips was "not available yet" in 2019 and is not offered now; the D-100 model adds four DMX512 outputs'

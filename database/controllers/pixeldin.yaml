@@ -1,11 +1,11 @@
-name: PixelDIN
+name: PixelDIN2
 status: discontinued
 release_year: 2021
 creator:
   name: YariloPro
   url: https://yarilo.pro
   page: https://yarilo.pro/ru/contollers/pixel/yarilo-pixeldin2
-notes: Up to 4 independent outputs in single-wire pixel mode. Total 5440 pixels.
+notes: Up to 4 independent outputs in single-wire pixel mode. Total 5440 pixels. Sold as PixelDIN; Yarilo now lists it as PixelDIN2 and uses the PixelDIN name for a newer 2-output, 2720-pixel model.
 inputs:
   physical:
     Ethernet: true
@@ -71,3 +71,11 @@ sources:
     url: https://yarilo.pro/service/manuals/Yarilo_PixelDIN_datasheet_en.pdf
     retrieved: '2026-11-18'
     notes: Key Features, 'Sync support'.
+  name:
+    url: https://yarilo.pro/ru/contollers/pixel/yarilo-pixeldin2
+    retrieved: '2026-11-18'
+    notes: Контроллер светодиодных пиксельных лент Yarilo PixelDIN2
+  notes:
+    url: https://yarilo.pro/service/manuals/Yarilo_PixelDIN_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: Up to 4 independent outputs in 1-Wire SPI Mode. Total 5440 pixels.

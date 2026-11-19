@@ -18,7 +18,7 @@ outputs:
   driver:
     buffered: true
   pixels:
-    max_per_output: 170 # 1020 total across 6 outputs
+    max_per_output: 340 # 2 universes (1020 channels) per port
   protocols:
     - TM1814
     - WS2811
@@ -56,3 +56,7 @@ sources:
     url: https://www.electrondigit.com/products/art-net-controllers/product/dmx-512-art-net-sacn-6-universe-to-ws2811-ws2812-ws2813-ws2801-sk6812-sm16703
     retrieved: '2026-11-18'
     notes: in the maker's shop, $85
+  outputs.pixels.max_per_output:
+    url: https://www.electrondigit.com/products/art-net-controllers/product/download/file_id-30
+    retrieved: '2026-11-18'
+    notes: There are two universes available per port.

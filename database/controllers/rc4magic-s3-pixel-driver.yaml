@@ -69,5 +69,3 @@ sources:
     url: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
     retrieved: '2026-11-18'
     notes: "'DMX Input/Output: RC4 3.5mm mini, USITT DMX512/1990'"
-technical_notes:
-  - With data + clock pixels only 4 of the 8 outputs are available

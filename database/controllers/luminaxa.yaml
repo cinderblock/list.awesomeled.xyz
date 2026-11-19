@@ -31,7 +31,6 @@ power:
     max: 1
 features:
   - Internal 3500mAh rechargeable battery
-  - Android app control
 images:
   - file: luminaxa.webp
     source: https://luminxa.com/
@@ -58,3 +57,7 @@ sources:
     url: https://luminxa.com/product/luminxa-controller-only/
     retrieved: '2026-11-18'
     notes: 'in stock, regular $55.99 (on sale $32.99)'
+  features:
+    url: https://luminxa.com/product/luminxa-controller-only/
+    retrieved: '2026-11-18'
+    notes: No app installation required.

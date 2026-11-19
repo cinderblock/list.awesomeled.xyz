@@ -1,0 +1,542 @@
+# Fix list for the "(d) Wrong facts for other workstreams" items in
+# plans/data-freshness/findings/ctrl-l.md and ctrl-q.md (controllers l–o, q–z).
+# Checked against the repo at bfd12d5 (ws/database-review), 2026-11-18. Commits
+# after d20cf8f only added datasheet links to these entries.
+# Values for controllers' power blocks are bare numbers (volts/amps), like every
+# other controller entry; the schema also accepts unit strings ('24V').
+# WebFetch cannot reach web.archive.org, so Wayback-only facts were not re-read;
+# those records say so. PDFs read are saved under fixes/dl/ctrl-lq/.
+
+# ───────────────────────── ctrl-l.md (d) ─────────────────────────
+
+- entry: controllers/lightboard-mini
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
+  retrieved: '2026-11-18'
+  notes: Ethernet is gone; inputs.physical is now Bluetooth BLE, NFC, GPIO 4, sourced in sources.inputs.physical ("the compact LightBoard Mini include NFC and Bluetooth BLE"). Not re-read (Wayback is blocked for WebFetch).
+
+- entry: controllers/lightbox
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
+  retrieved: '2026-11-18'
+  notes: Same as lightboard-mini. Now Bluetooth BLE, NFC, GPIO 4; the micro-USB port is for charging only (sources.inputs.physical). Not re-read (Wayback).
+
+- entry: controllers/led-ethernet-controller-powered
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  quote: '2x RJ-45 connector, internal switch, 100 Mbit/sec'
+  retrieved: '2026-11-18'
+  notes: Wi-Fi is no longer listed. The spec sheet names no Wi-Fi anywhere.
+
+- entry: controllers/led-ethernet-controller-powered
+  field: inputs.physical.Ethernet
+  current: 2
+  value: 2
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  quote: '2x RJ-45 connector, internal switch, 100 Mbit/sec'
+  retrieved: '2026-11-18'
+
+- entry: controllers/led-ethernet-controller-powered
+  field: inputs.physical.DMX512
+  current: XLR-3 in + thru (XLR-5 optional)
+  value: XLR-3 in + thru (XLR-5 optional)
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  quote: 'DMX input connector XLR 3-pin connector (optional 5 pin)'
+  retrieved: '2026-11-18'
+  notes: "'thru' is right. The LEC3 hardware manual, which covers the Powered LEC, p.30 says 'DMX Out can be used in two different modes – Out and Through' (https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf)."
+
+- entry: controllers/led-ethernet-controller-powered
+  field: data.storage
+  current: [{ type: microSD }]
+  value: [{ type: microSD, max_size: 32 }]
+  status: apply
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  quote: 'Micro SD Card (FAT32, up to 32GB)'
+  retrieved: '2026-11-18'
+  notes: The report item (microSD missing) is already fixed. This only adds max_size from the same spec line, as the LEC 3 entry has it.
+
+- entry: controllers/led-ethernet-controller-powered
+  field: power.voltage
+  current: { min: 88, max: 264 }
+  value: { min: 88, max: 264 }
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  quote: '88 ~ 264 VAC/47 ~ 63Hz (360W, without the LED strips)'
+  retrieved: '2026-11-18'
+  notes: "The old 24 V max is replaced by the AC range. The inline comment says 'built-in 360 W supply', but 360 W is the AC input figure. The LEC3 manual (p.7 and p.18) rates the supply 'PSU parameters are 320W, 5V, 60A'. Optional comment fix: '# AC mains (360 W draw) into the built-in 320 W, 5 V/60 A supply; 5 V, 10 A per SPI output'. The related[] note already says 320 W."
+
+- entry: controllers/led-ethernet-controller-powered
+  field: power.current
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  quote: 'Output power 5V/ 10A (per SPI output)'
+  retrieved: '2026-11-18'
+  notes: The 20 A power-input figure is gone. The per-output 10 A is now outputs.current.max 10.
+
+- entry: controllers/led-ethernet-controller-powered
+  field: power.connector
+  current: PowerCON
+  value: PowerCON
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+  quote: 'PowerCON connector, 230V/20A max'
+  retrieved: '2026-11-18'
+
+- entry: controllers/luminaxa
+  field: name
+  current: Luminxa
+  value: Luminxa
+  status: already-fixed
+  owner: stream2
+  source: https://luminxa.com/product/luminxa-controller-only/
+  quote: 'Luminxa – Controller Only'
+  retrieved: '2026-11-18'
+
+- entry: controllers/luminaxa
+  field: (filename)
+  current: luminaxa
+  value: luminxa
+  status: apply
+  owner: stream2
+  source: https://luminxa.com/product/luminxa-controller-only/
+  quote: 'Luminxa – Controller Only'
+  retrieved: '2026-11-18'
+  notes: "Structural rename of the slug, which the name fix left behind. Move database/controllers/luminaxa.yaml to luminxa.yaml, and public/database-images/controllers/luminaxa.webp to luminxa.webp along with images[0].file. Drop 'Luminaxa' from .cSpell/names.txt. Nothing in database/ or app/ refers to controllers/luminaxa. ISSUES.md mentions it in prose only. There is no redirect mechanism, so the old /controllers/luminaxa URL will 404."
+
+- entry: controllers/luminaxa
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://luminxa.com/product/luminxa-controller-only/
+  quote: 'WiFi Enabled'
+  retrieved: '2026-11-18'
+  notes: Ethernet is gone. inputs.physical is now Wi-Fi [2.4GHz].
+
+- entry: controllers/luminaxa
+  field: notes
+  current: Internal 3500mAh battery; configured from a browser (no app needed).
+  value: Internal 3500mAh battery; configured from a browser (no app needed).
+  status: already-fixed
+  owner: stream2
+  source: https://luminxa.com/product/luminxa-controller-only/
+  quote: 'No app installation required.'
+  retrieved: '2026-11-18'
+
+- entry: controllers/luminaxa
+  field: features
+  current: [Internal 3500mAh rechargeable battery, Android app control]
+  value: [Internal 3500mAh rechargeable battery]
+  status: apply
+  owner: stream2
+  source: https://luminxa.com/product/luminxa-controller-only/
+  quote: 'No app installation required.'
+  retrieved: '2026-11-18'
+  notes: "The 'controlled via Android app' claim survived here after notes was fixed. The homepage https://luminxa.com/ also says 'No app install.' A search found no Luminxa app. Unverified lead for whoever owns wled_compatible: the setup page https://luminxa.com/wifi-led-settings/ is a WLED-style settings UI ('presets can be saved via the “heart” tab in the UI'), so the board may run WLED."
+
+- entry: controllers/m4-pi
+  field: (entry)
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: 'Duplicate removed. Commit d487f11 merged controllers/m4-pi, controllers/m4-port-pixel and adapters/m4-port-pixel into controllers/m4-port-pixel (named M4-PI). The removed rows are listed in plans/database-review.md.'
+
+- entry: controllers/m4-port-pixel
+  field: name
+  current: M4-PI
+  value: M4-PI
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: The 'M4- Pi' typo went with the deleted m4-pi file.
+
+- entry: controllers/m4-port-pixel
+  field: outputs.clocked
+  current: false
+  value: false
+  status: already-fixed
+  owner: stream2
+  source: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/fpp.xcontroller
+  retrieved: '2026-11-18'
+  notes: The false-vs-selectable conflict is resolved to false. It is sourced to FPPStringDPIPiHat, whose only pixel protocol is ws2811. Not re-read by me.
+
+- entry: controllers/mini-8-port-controller
+  field: name
+  current: Mini 8 Port Controller
+  value: Basic Eight Port LED Controller
+  status: apply
+  owner: stream2
+  source: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
+  quote: 'Wasatch Pixels Basic Eight Port LED Controller'
+  retrieved: '2026-11-18'
+  notes: "The old name was 'Wasatch Pixels Mini Eight Port LED Controller', and its Tindie URL 301s here. The controller schema has no aliases field to keep the old name, a structural gap for stream4. The slug can stay. related[0].source and most sources.* URLs still use the old …/wasatch-pixels-mini-eight-port-led-controller/ slug, which redirects (link tidy, stream6)."
+
+- entry: controllers/mini-8-port-controller
+  field: inputs.physical
+  current: { Ethernet: true, Wi-Fi: [2.4GHz] }
+  value: { Ethernet: true, Wi-Fi: [2.4GHz] }
+  status: already-fixed
+  owner: stream2
+  source: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
+  quote: 'It comes installed with WLED software that supports both Ethernet and WiFi connectivity.'
+  retrieved: '2026-11-18'
+
+- entry: controllers/mini-8-port-controller
+  field: inputs.standalone
+  current: true
+  value: true
+  status: already-fixed
+  owner: stream2
+  source: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
+  quote: 'This can be used to control simple animations of LED lights as well as receive E1.31 and DDP data'
+  retrieved: '2026-11-18'
+
+- entry: controllers/mini-8-port-controller
+  field: inputs.protocols
+  current: [sACN, Art-Net, DDP, TPM2.net]
+  value: [sACN, Art-Net, DDP, TPM2.net]
+  status: already-fixed
+  owner: stream2
+  source: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
+  quote: 'receive E1.31 and DDP data'
+  retrieved: '2026-11-18'
+  notes: The page names only E1.31 and DDP. Art-Net and TPM2.net come from the WLED firmware it ships with, per the inputs audit.
+
+- entry: controllers/nled-pixel-controller-mini
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
+  quote: 'accept standard DMX-512, in addition to TTL serial signals from a computer'
+  retrieved: '2026-11-18'
+  notes: Now DMX512 'screw terminal' plus Serial 'TTL'. The XLR plugs are paid add-ons (3- or 5-pin, +$3 to +$17), so 'screw terminal' stays.
+
+- entry: controllers/nled-pixel-controller-mini
+  field: inputs.protocols
+  current: [DMX512]
+  value: [DMX512]
+  status: already-fixed
+  owner: stream2
+  source: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
+  quote: 'accept standard DMX-512, in addition to TTL serial signals from a computer'
+  retrieved: '2026-11-18'
+  notes: Art-Net is gone.
+
+- entry: controllers/octo-mk2
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+  quote: '2 x Network (RJ45)'
+  retrieved: '2026-11-18'
+  notes: "The connector list is complete: '2 x Network (RJ45) 2 x SPI Output (4-Pin Phoenix) 1 x Power (2-Pin Phoenix)'. Neither Wi-Fi nor USB is mentioned."
+
+- entry: controllers/octo-mk2
+  field: inputs.physical.USB
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+  quote: '2 x Network (RJ45)'
+  retrieved: '2026-11-18'
+
+- entry: controllers/octo-mk2
+  field: inputs.standalone
+  current: true
+  value: true
+  status: already-fixed
+  owner: stream2
+  source: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+  quote: 'Standalone FX mode'
+  retrieved: '2026-11-18'
+  notes: "The 'Falcon Player (FPP)' wording is gone. The comment now reads '# built-in effects engine runs at power-up', and the page doesn't mention FPP."
+
+- entry: controllers/led-player-l
+  field: price_source.notes
+  current: incl. 19% German VAT (only gross price shown), without USB cable (+EUR 2); led-genial.de closed and moved its range to the Diamex shop
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: The wrong 'ex 19% VAT' comment was replaced by the data-freshness pass.
+
+- entry: controllers/ledmx4-pro
+  field: creator.name
+  current: DMXking
+  value: DMXking
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+
+- entry: controllers/led-ethernet-controller-3
+  field: notes
+  value: null
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: The bare-URL notes field is gone. Since 9ef42f2, datasheet.url is the LEC_3 tech-specs sheet, and the hardware manual sits in datasheet.sources. The inputs audit cites a newer copy of the manual, https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/LEC3HardwareManual-fix.pdf (stream5).
+
+# ───────────────────────── ctrl-q.md (d) ─────────────────────────
+
+- entry: controllers/qolorpix
+  field: price
+  current: 2861.3
+  value: 2861.3
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: The unfounded $1500 was replaced by the MSRP (price_source SoundPro, part 5850).
+
+- entry: controllers/quinled-dig-octa
+  field: power.voltage
+  current: { max: 48 }
+  value: { min: 5, max: 48 }
+  status: apply
+  owner: stream2
+  source: https://quinled.info/quinled-dig-octa/
+  quote: 'compatible with addressable 5v-48v* (*48v supported using the Power-5HV only)'
+  retrieved: '2026-11-18'
+  notes: The report item (max 24) is already fixed to 48 with a Power-5HV comment. This adds min 5 from the same sentence. The Power-5HV is 'Special 24v-48v version'.
+
+- entry: controllers/quinled-dig-octa
+  field: power.current.max
+  current: 100
+  value: 100
+  status: apply
+  owner: stream2
+  source: https://quinled.info/quinled-dig-octa/
+  quote: '100Amps'
+  retrieved: '2026-11-18'
+  notes: "The value stays: 100 A is the family maximum. Add a comment like the voltage one: '# 100 A only with the Power-7HC powerboard (Power-5 / Power-7: 50 A, Power-5HV: 30 A)'. The page gives 'Power-7HC' 100Amps, Power-5 and Power-7 '50Amps', and Power-5HV 'Special 24v-48v version, 30Amps'."
+
+- entry: controllers/quinled-dig-quad
+  field: notes
+  current: ESP8266/ESP32 based, open to any software, often run with WLED
+  value: ESP32 based (ESP8266 support was dropped in v3; the v1 also took a Wemos D1 Mini ESP8266), open to any software, often run with WLED
+  status: apply
+  owner: stream2
+  source: https://quinled.info/quinled-dig-quad-diy-v3-specifications/
+  quote: 'ESP32 (ESP8266 support dropped in v3!)'
+  retrieved: '2026-11-18'
+  notes: "The v1 history comes from https://quinled.info/2020/06/23/quinled-dig-quad-hardware-guide/ (v1r6): 'can be the Wemos D1 Mini which is an ESP8266 based board or the Wemos D32 Mini which is an ESP32'. The v4 page says only 'Uses Espressif ESP32 Micro-controllers'. A shorter 'ESP32 based, open to any software, often run with WLED' is fine if the history isn't wanted."
+
+- entry: controllers/quinled-dig-quad
+  field: core.family
+  current: ESP32
+  value: ESP32
+  status: already-fixed
+  owner: stream2
+  source: https://quinled.info/quinled-dig-quad-pre-assembled-v4-specifications/
+  quote: 'Uses Espressif ESP32 Micro-controllers'
+  retrieved: '2026-11-18'
+
+- entry: controllers/rc4magic-s3-pixel-driver
+  field: creator.name
+  current: RC4 Wireless
+  value: RC4 Wireless
+  status: already-fixed
+  owner: stream2
+  source: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
+  retrieved: '2026-11-18'
+
+- entry: controllers/rc4magic-s3-pixel-driver
+  field: technical_notes
+  current: [With data + clock pixels only 4 of the 8 outputs are available]
+  value: null
+  status: apply
+  owner: stream2
+  source: https://rc4wireless.com/shop/rc4magic-s3/dmxpix/
+  quote: 'controls 2 pixel strings of up to 500 pixels each (1000 pixels total)'
+  retrieved: '2026-11-18'
+  notes: "Extra, not in the report. The note was copied verbatim from uli-led-control (8 outputs), but this unit has 2 outputs ('2 x Phoenix 1881464') and the page says nothing like it. Remove the field. Also unrecorded: input power '6VDC – 35VDC', so power.voltage.min 6 could join the existing max 35."
+
+- entry: controllers/replay
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
+  quote: 'REPLAY is a four output SD-Card Pixel Player'
+  retrieved: '2026-11-18'
+  notes: inputs now holds only standalone true. The guide describes no network or USB interface; firmware also loads from the SD card.
+
+- entry: controllers/replay
+  field: outputs.connector
+  current: { ref: mtsb-combicon }
+  value: JST
+  status: apply
+  owner: stream2
+  source: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
+  quote: 'outputting pixel data to four JST outputs'
+  retrieved: '2026-11-18'
+  notes: "The guide doesn't say which JST family (XH, PH or SM), so this is a plain string, not a connectors ref. It also lists a '7-way plug-in connector' as supplied, and power goes to the 'PWR & GND connections of the rear connector'. So the four outputs probably share one 7-pin plug with power, but that is unconfirmed without a photo. Could be 'JST, 7-way (4 outputs + power)' if a photo confirms it."
+
+- entry: controllers/scenex-pp4
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
+  retrieved: '2026-11-18'
+  notes: Now Ethernet plus 1 button, with sources.inputs.physical saying 'wired Ethernet only'. Not re-read (Wayback).
+
+- entry: controllers/sp102e
+  field: inputs.physical
+  current: { IR: true }
+  value: { IR: true }
+  status: already-fixed
+  owner: stream2
+  source: https://web.archive.org/web/20171226092940/http://www.sperll.com:80/a/Product/SP102E/2017/0731/81.html
+  retrieved: '2026-11-18'
+  notes: Now IR only, per the inputs audit ('LED IR Controller', 24-key remote, 5–12 V). Not re-read (Wayback). The old sperll.com URL returns 404 and no live listing exists.
+
+- entry: controllers/sp102e
+  field: inputs.standalone
+  current: true
+  value: true
+  status: unverifiable
+  owner: stream2
+  source: https://web.archive.org/web/20200706141248/http://www.sperll.com/a/Product/SP102E/2017/0731/81.html
+  retrieved: '2026-11-18'
+  notes: "Only the inline comment is wrong: '# built-in patterns selectable via onboard buttons/display'. Make it '# built-in patterns, selected with the IR remote'. Two earlier reads of different Sperll captures agree it's an IR-remote unit: the data-freshness report ('SP102E IR remote controller operating instructions', '红外控制器') and the inputs audit ('LED IR Controller', 24-key remote). I couldn't re-read either capture, because WebFetch is blocked from web.archive.org and no live source exists. Apply after a one-look check of the capture. The report also calls the 1024 px and 12 V max unverified; I couldn't check those either."
+
+- entry: controllers/spi-led-controller
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/tech-specs/SPI_LED_Controller_tech_specs.pdf
+  quote: 'DMX input connector RJ-45'
+  retrieved: '2026-11-18'
+  notes: Now DMX512 'RJ45 in + out' plus 2 buttons. The product page's comparison table gives Ethernet Ports '–'.
+
+- entry: controllers/spi-led-controller
+  field: technical_notes
+  current: [Price varies by pixel count software license (1 year included), 10A per output channel]
+  value: [LED Strip Studio software license is lifetime, 10A per output channel]
+  status: apply
+  owner: stream2
+  source: https://www.ledstripstudio.com/products/spi_led_controller/
+  quote: '1024-pixels | 1 SPI Output'
+  retrieved: '2026-11-18'
+  notes: "One configuration only (spec sheet: 'Maximum of LEDs 1024', 'SPI LED Outputs 1'), so no pixel-count pricing; the old note described the SPI Matrix. The product page's comparison table has the row 'Software License' with value 'Lifetime' for this controller (SPI Matrix: 1-Year). The second item matches the spec's 'Pass-Thru Current 10A' on its single output."
+
+- entry: controllers/spi-matrix
+  field: notes
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+  quote: 'LED Ethernet Controller 3 (LEC3), SPI-Matrix and Powered LED Ethernet Controller devices.'
+  retrieved: '2026-11-18'
+  notes: The bare URL moved to other_links. That placement is right, because the LEC3 manual covers the SPI Matrix too (p.7, and its own section on p.17).
+
+- entry: level-converters/standard-differential-receiver
+  field: creator
+  current: Microcyb
+  value: Microcyb
+  status: unverifiable
+  owner: stream2
+  source: https://microcyb.com/shop.php?category=LED+pixel+Controller
+  retrieved: '2026-11-18'
+  notes: "The controllers copy was deleted in d487f11, which kept this level-converters entry. Its notes now claim it was 'Sold in Microcyb's ESPArtStick store in 2022', and its image comes from a 2024-02-13 microcyb.com capture credited to Microcyb. That suggests Microcyb did sell it, but the entry has no sources and I couldn't confirm it: Wayback is blocked, and searches for Microcyb or ESPArtStick with 'differential receiver' return nothing. Microcyb's live shop lists only ShowSpark controllers. Similar 4-port receivers are sold by others, for example https://www.tindie.com/products/30457 (Wasatch Pixels)."
+
+- entry: controllers/t1000s
+  field: inputs.physical.USB
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://derunledlights.com/t1000s-led-controller-with-sd-card
+  retrieved: '2026-11-18'
+  notes: Now 4 buttons plus Serial 'A/B cascade sync in'. No USB.
+
+- entry: controllers/uli-led-control
+  field: power.voltage
+  current: { max: 12 }
+  value: { min: 7, max: 24 }
+  status: apply
+  owner: stream2
+  source: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+  quote: 'Betriebsspannung: 7-24V, 200mA'
+  retrieved: '2026-11-18'
+  notes: The 200 mA is the board's own draw, so power.current stays unset.
+
+- entry: controllers/uli-led-control
+  field: inputs.protocols
+  current: [Art-Net, sACN]
+  value: [Art-Net, sACN]
+  status: already-fixed
+  owner: stream2
+  source: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+  quote: 'Protokolle: Art Net und sACN E1.31'
+  retrieved: '2026-11-18'
+
+- entry: controllers/uls-stripe
+  field: inputs.physical
+  current: { DMX512: XLR-5 + XLR-3 in and out, buttons: true }
+  value: { DMX512: XLR-5 + XLR-3 in and out, buttons: true }
+  status: already-fixed
+  owner: stream2
+  source: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+  quote: '5pin and 3pin xlr in and out'
+  retrieved: '2026-11-18'
+  notes: "Ethernet, USB and Wi-Fi are gone. The page also says 'no web interfaces' and mentions no network."
+
+- entry: controllers/uls-stripe
+  field: inputs.standalone
+  current: false
+  value: false
+  status: already-fixed
+  owner: stream2
+  source: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+  quote: 'Dmx in led pixel tape / string out'
+  retrieved: '2026-11-18'
+  notes: The 'Falcon Player (FPP) remote mode' claim is gone.
+
+- entry: controllers/uls-stripe
+  field: software.firmware
+  value: null
+  status: already-fixed
+  owner: stream4
+  source: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+  retrieved: '2026-11-18'
+  notes: The software block (FPP) was removed. The page mentions no FPP or Falcon.
+
+- entry: controllers/uls-stripe
+  field: outputs.clocked
+  current: selectable
+  value: selectable
+  status: already-fixed
+  owner: stream2
+  source: https://ultralightsound.co.uk/product/uls-stripe-addressable-led-pixel-controller/
+  quote: '4 x 5 pin Robust GX16 connectors to leds. each with 5v, 12v, Data, Clock and Ground'
+  retrieved: '2026-11-18'
+  notes: APA102 is listed alongside ws2811/ws2812.
+
+- entry: controllers/wb1616
+  field: related[0].type
+  current: related
+  value: related
+  status: already-fixed
+  owner: stream4
+  retrieved: '2026-11-18'
+  notes: "It's no longer 'replacement'. The note says 'no maker statement that it replaces the WB1616'. The item has no source, which is stream4's call."

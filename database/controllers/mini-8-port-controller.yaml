@@ -1,9 +1,10 @@
-name: Mini 8 Port Controller
+name: Basic Eight Port LED Controller
 status: active
 release_year: 2021
 creator:
   name: Wasatch Pixels
   page: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
+notes: Sold earlier as the Wasatch Pixels Mini Eight Port LED Controller.
 inputs:
   physical:
     Ethernet: true
@@ -87,4 +88,8 @@ sources:
     url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
     retrieved: '2026-11-18'
     notes: 'pixels per pin by frame rate: 800 at 20 fps, 500 at 40 fps'
+  name:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: Wasatch Pixels Basic Eight Port LED Controller
 wled_compatible: true

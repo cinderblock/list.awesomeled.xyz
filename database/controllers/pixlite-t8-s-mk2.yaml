@@ -1,7 +1,7 @@
 name: PixLite T8-S Mk2
 status: discontinued
 creator:
-  name: Advatek Lighting
+  name: Advatek
   url: https://www.advateklighting.com
   page: https://www.advateklighting.com/pixlite-t8-s-mk2
 notes: 2 types of receivers available
@@ -101,3 +101,7 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'
     notes: "Rows ticked in the 'PixLite Mk2' column of Advatek's glossary table (97 rows"
+  creator.name:
+    url: https://www.advateklighting.com/
+    retrieved: '2026-11-18'
+    notes: PixLite® Professional LED Pixel Controllers & SHOWTime® - Advatek

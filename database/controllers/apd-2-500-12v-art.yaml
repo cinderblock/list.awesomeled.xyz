@@ -28,9 +28,8 @@ outputs:
     - WS2812b
 power:
   voltage:
-    max: 12
-  current:
-    max: 5
+    min: 90 # AC mains into the built-in 12 V supply (150 W max)
+    max: 256
 features:
   - Onboard Sound To Light
   - 31 channel DMX Macro mode
@@ -51,3 +50,7 @@ sources:
     url: https://digitaltape.co.uk/apd-2-500-12v-art
     retrieved: '2026-11-18'
     notes: "'Ethernet input socket'; no Wi-Fi"
+  power.voltage:
+    url: https://digitaltape.co.uk/apd-2-500-12v-art
+    retrieved: '2026-11-18'
+    notes: 90-256v input range-12v output to pixel LEDs

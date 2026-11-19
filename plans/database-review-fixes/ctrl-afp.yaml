@@ -1,0 +1,808 @@
+# Fix list: "(d) Wrong facts for other workstreams" in
+#   plans/data-freshness/findings/ctrl-a.md, ctrl-f.md, ctrl-p.md
+# YAML read 2026-11-18 at ws/database-review d20cf8f. Records follow the report order.
+#
+# Conventions used here:
+# - `technical_notes[n]` is a 0-based index into the array as it stands now.
+# - `value: null` means remove the field (or array item).
+# - Suggested YAML comments for a value are given in `notes` (a value can't carry one).
+# - Already-fixed records cite the source the entry itself now records; where I
+#   re-read the maker's page myself the record also has a `quote`.
+# - Records marked "EXTRA" are not in the (d) lists: wrong facts found while
+#   verifying the listed ones, on the same entries.
+# - Wayback pages were read with curl (WebFetch can't reach web.archive.org);
+#   downloads are in fixes\dl\ctrl-afp\.
+
+# ---------------------------------------------------------------- ctrl-a.md
+
+- entry: controllers/electromage-8x-driver
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://electromage.com/docs/output-expander
+  retrieved: '2026-11-18'
+  notes: "Was `Ethernet: true # internal switch`; now `inputs.physical.Serial: TTL UART (Pixelblaze expander bus)`, sourced in sources.inputs.physical ('This is a UART serial to addressable LED driver board')."
+
+- entry: controllers/electromage-8x-driver
+  field: inputs.protocols
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://electromage.com/docs/output-expander
+  retrieved: '2026-11-18'
+  notes: Was `[Art-Net]`; the key is gone. The board takes the Pixelblaze serial expander protocol, which is not in the control_protocol vocabulary, so no protocols is right.
+
+- entry: controllers/electromage-8x-driver
+  field: notes
+  current: Up to 8 boards share one serial line (address set by cuttable jumpers).
+  value: Up to 8 boards share one serial line (address set by cuttable jumpers).
+  status: already-fixed
+  owner: stream2
+  source: https://electromage.com/docs/output-expander
+  retrieved: '2026-11-18'
+  notes: Was "Stacks up to 8 on a bus via internal Ethernet switch".
+
+- entry: controllers/electromage-pro-8x-driver
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://electromage.com/docs/pro-output-expander
+  retrieved: '2026-11-18'
+  notes: "Was `Ethernet: true`; now `Serial: TTL UART (Pixelblaze expander bus)`. Notes now say 'Up to 8 boards share one serial line.'"
+
+- entry: controllers/din-pixie
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.enttec.com/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+  retrieved: '2026-11-18'
+  notes: "Was `Ethernet: true`; now `USB: USB-B` + `DMX512: RJ45 x2` (sources.inputs.physical: '1 × USB 2.0 Type-B, 2 × DMX in (RJ45); no Ethernet'). The notes and technical_notes keep the true fact that shows are recorded over USB from live Art-Net (EMU)."
+
+- entry: controllers/din-pixie
+  field: inputs.protocols
+  current: [DMX512]
+  value: [DMX512]
+  status: already-fixed
+  owner: stream2
+  source: https://cdn.enttec.com.cn/pdf/assets/73539/73539_DIN_PIXIE_DATASHEET.pdf
+  retrieved: '2026-11-18'
+  notes: Was `[Art-Net, DMX512]`; Art-Net is gone.
+
+- entry: controllers/digiled-strip-dmx-wav-sd-micro-player
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+  quote: 6 entrées pour contact SEC (non isolé) pour le choix de 6 programmes
+  retrieved: '2026-11-18'
+  notes: 'Was `Ethernet: true` + `buttons: 6`; now `triggers: 6 # dry-contact solder pads`. The page never mentions Ethernet.'
+
+- entry: controllers/digiled-strip-dmx-wav-sd-micro-player
+  field: outputs.pixels.max_per_output
+  current: 850
+  value: 1360
+  status: apply
+  owner: stream2
+  source: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+  quote: 512 en DMX , 4080 en WS2812
+  retrieved: '2026-11-18'
+  notes: >-
+    The quote is the "Canaux DMX" row of the page's spec table; the "Univers" row reads
+    "1 en DMX , 8 en WS2812". 4080 WS2812 channels / 3 = 1360 RGB pixels (8 universes x 170)
+    on the single output. Suggested comment: `# 4080 WS2812 channels (8 universes x 170 RGB)`.
+    850 matches the DMX-to-LED-Strip board's pattern-repeat figure and was probably copied
+    from it. The manual (Productattachments m/i/micro_player_sd.pdf) gives no pixel count.
+
+- entry: controllers/dmx-to-led-strip
+  field: inputs.physical.Bluetooth
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.boutique-electroconcept.com/carte-dmx-en-signal-pour-ledstrip-digital-ws2812-et-compatible-a-souder.html
+  quote: entrée DMX 512 sur un connecteur 3 points.
+  retrieved: '2026-11-18'
+  notes: 'Was `Bluetooth: true`; removed.'
+
+- entry: controllers/dmx-to-led-strip
+  field: inputs.physical.Audio
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.boutique-electroconcept.com/carte-dmx-en-signal-pour-ledstrip-digital-ws2812-et-compatible-a-souder.html
+  quote: entrée DMX 512 sur un connecteur 3 points.
+  retrieved: '2026-11-18'
+  notes: 'Was `Audio: true`; removed.'
+
+- entry: controllers/dmx-to-led-strip
+  field: inputs.physical.USB
+  current: USB-C
+  value: null
+  status: apply
+  owner: stream2
+  source: https://www.boutique-electroconcept.com/carte-dmx-en-signal-pour-ledstrip-digital-ws2812-et-compatible-a-souder.html
+  quote: Modes et adresse DMX sélectionné par Dip switch.
+  retrieved: '2026-11-18'
+  notes: >-
+    EXTRA, added by the inputs audit (de0730f). USB-C belongs to the successor, the RISCV board
+    ("réglage de l'adresse DMX, timings etc : EN USB SUR DMX TOOLS"; its "DMX TO WS2812 V2"
+    manual says "Connexion USB : USB C"). The audit read that V2 manual, which is attached to
+    the RISCV page. This entry is the discontinued DIP-switch board
+    (DMX_TO_WS2812_SOLDERING): its page and its V1 manual (Productattachments d/m/dmx_to_ws2812.pdf,
+    already this entry's outputs.protocols source) set everything by DIP switch and have only the
+    3-pin DMX input. The DMX512 qualifier "(solder; optional XLR or wireless-DMX card)" is in
+    neither manual nor on the old page; I couldn't source it, so it isn't changed here.
+    sources.inputs.physical already says "only input is DMX 512".
+
+- entry: controllers/apd-2-500-12v-art
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://digitaltape.co.uk/apd-2-500-12v-art
+  quote: Artnet capability via Ethernet socket
+  retrieved: '2026-11-18'
+  notes: >-
+    Was `Wi-Fi: true`; now Ethernet + Microphone + buttons. The product URL renders
+    client-side; its text is in the site builder's page script
+    https://storage.googleapis.com/te-websitebuilder-sites/user-12859271/sites/40338333/5586da718c27fSUFpf17/9701fe9a161444ff8830403408e1473b.js
+    (same for the quotes below).
+
+- entry: controllers/apd-2-500-12v-art
+  field: power.voltage.max
+  current: 12
+  value: 256
+  status: apply
+  owner: stream2
+  source: https://digitaltape.co.uk/apd-2-500-12v-art
+  quote: 90-256v input range-12v output to pixel LEDs
+  retrieved: '2026-11-18'
+  notes: >-
+    The unit has a built-in supply: mains in, 12 V out to the pixels. The page also says
+    "90-256v input/12v output." and "Low energy max 150w". Follow the precedent of
+    controllers/qolorpix and controllers/led-ethernet-controller-powered (AC input range in
+    power.voltage plus a comment). Suggested comment: `# AC mains into the built-in 12 V
+    supply (150 W max)`. Page also gives "307mm x 132mm x 43mm" and "IP20 non waterproof"
+    if case data is wanted.
+
+- entry: controllers/apd-2-500-12v-art
+  field: power.voltage.min
+  value: 90
+  status: apply
+  owner: stream2
+  source: https://digitaltape.co.uk/apd-2-500-12v-art
+  quote: 90-256v input/12v output.
+  retrieved: '2026-11-18'
+  notes: Pairs with the max above (field absent now).
+
+- entry: controllers/apd-2-500-12v-art
+  field: power.current.max
+  current: 5
+  value: null
+  status: apply
+  owner: stream2
+  source: https://digitaltape.co.uk/apd-2-500-12v-art
+  quote: Low energy max 150w
+  retrieved: '2026-11-18'
+  notes: >-
+    No source gives a current. 5 A fits neither the mains input (150 W is under 2 A even at
+    90 V) nor the 12 V side (150 W is 12.5 A). Remove rather than guess; if it was meant
+    per output it would belong in outputs.current.max, but nothing states an output current.
+
+- entry: controllers/dmx-core
+  field: notes
+  current: Standalone wall-mounted controller with 4.3" touch interface for presets and playback. Up to 40 universes.
+  value: Standalone wall-mounted show controller with a 4.3" or 7" touchscreen for presets, recorded cues and playback. Up to 800 universes at 40 Hz (600 at 60 Hz) with the Full licence; the Basic licence sends 8.
+  status: apply
+  owner: stream2
+  source: https://docs.dmxcore.com/dmx-core-100/main/specifications/
+  quote: Up to 800 universes at 40 Hz, or 600 universes at 60 Hz
+  retrieved: '2026-11-18'
+  notes: 'Licence table at https://dmxcore.com/dmx-core-100: "| Universes sent | 8 | Up to 800 |" (Basic | Full). The entry''s price ($999, 4.3" Light Controller) includes the Full licence.'
+
+- entry: controllers/dmx-core
+  field: technical_notes[0]
+  current: Up to 40 universes (~6800 pixels)
+  value: Sends up to 800 Art-Net / sACN / KiNET universes at 40 Hz (600 at 60 Hz); Basic licence 8
+  status: apply
+  owner: stream2
+  source: https://docs.dmxcore.com/dmx-core-100/main/specifications/
+  quote: Up to 800 universes at 40 Hz, or 600 universes at 60 Hz
+  retrieved: '2026-11-18'
+  notes: Drop the pixel figure; it is not a pixel driver (see outputs.clocked below).
+
+- entry: controllers/dmx-core
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://dmxcore.com/dmx-core-100
+  quote: 1 GbE Ethernet, MicroSD, USB-A
+  retrieved: '2026-11-18'
+  notes: 'Was `Wi-Fi: true` (only input); now Ethernet, PoE, USB-A, buttons, optional DMX512 board and triggers. The page also says "PoE or 8-28VDC input". The inputs.protocols (Art-Net, sACN, KiNET, DMX512) are right: "Record from ArtNet, sACN, DMX-512, or KiNet sources".'
+
+- entry: controllers/dmx-core
+  field: outputs.clocked
+  current: selectable
+  value: null
+  status: apply
+  owner: stream2
+  source: https://dmxcore.com/dmx-core-100
+  quote: ArtNet, sACN (E1.31), KiNet v1/v2, TPM2.net
+  retrieved: '2026-11-18'
+  notes: >-
+    It outputs network lighting protocols (quote) and DMX512 via an optional 2-port board; no
+    SPI/pixel outputs anywhere on the page or the spec page. `clocked` is the only key under
+    `outputs`, so remove the whole block. Whether a show controller belongs in controllers at
+    all is the open ISSUES.md item "Two 'controllers' drive no pixels"; removing the outputs is
+    right either way.
+
+- entry: controllers/dmx-core
+  field: name
+  current: DMX Core
+  value: DMX Core 100
+  status: apply
+  owner: stream2
+  source: https://dmxcore.com/dmx-core-100
+  quote: DMX Core 100 is available as dedicated touchscreen hardware that runs standalone, powered over PoE.
+  retrieved: '2026-11-18'
+  notes: >-
+    EXTRA (flagged by the inputs audit, not in the (d) list). "DMX Core" alone is also the
+    desktop software (Windows/macOS/Linux licences); this entry is the wall-mounted hardware.
+    creator.page is the homepage https://dmxcore.com/; the product page is
+    https://dmxcore.com/dmx-core-100 (stream6).
+
+- entry: controllers/deskontroller-lite-v3-192
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://deskontroller.com/download/deskontroller-lite-V3-user-manual.pdf
+  retrieved: '2026-11-18'
+  notes: "Was `Wi-Fi: true` (only input); now `Ethernet: true` ('Input 1 x RJ45 Ethernet (10/100)' per sources.inputs.physical)."
+
+- entry: controllers/deskontroller-lite-v3-32
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://deskontroller.com/download/deskontroller-lite-V3-user-manual.pdf
+  retrieved: '2026-11-18'
+  notes: 'Was `Ethernet: true` + `Wi-Fi: true`; Wi-Fi removed.'
+
+- entry: controllers/emp-16-uni-control
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.empdesigns.co.uk/our-products/16-universe-led-pixel
+  retrieved: '2026-11-18'
+  notes: 'Was `Ethernet: true` + `Wi-Fi: true`; now `Ethernet: 2 # built-in switch`.'
+
+- entry: controllers/epix-flex-drive
+  field: inputs.physical.Wi-Fi
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.chauvetprofessional.com/wp-content/uploads/pdf/en/EPIXFLEXDRIVE.pdf
+  retrieved: '2026-11-18'
+  notes: "Removed. Inputs are now `Ethernet: 2` + `DMX512: XLR in + thru` + `buttons: 4`, from the spec sheet ('Device Data Inputs: Ethernet (RJ45) (2 total) and 5-pin XLR (2 total)'). Optional polish: the DMX512 qualifier could say XLR-5, as the spec sheet does."
+
+- entry: controllers/epix-flex-drive
+  field: inputs.physical.USB
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.chauvetprofessional.com/wp-content/uploads/pdf/en/EPIXFLEXDRIVE.pdf
+  retrieved: '2026-11-18'
+  notes: 'Was `USB: true`; removed.'
+
+- entry: controllers/digidot-c4-live-12
+  field: technical_notes[0]
+  current: Up to 24 universes (12,288 channels) depending on license
+  value: Up to 24 universes (12,288 channels) depending on license
+  status: already-fixed
+  owner: stream2
+  source: https://www.digidot.eu/shop/digidot-c4-live-125
+  retrieved: '2026-11-18'
+  notes: Was "Up to 16 universes (8192 channels) depending on license"; sourced in sources.technical_notes.
+
+- entry: controllers/baldrick-8
+  field: power.voltage.max
+  current: 48
+  value: 48
+  status: already-fixed
+  owner: stream2
+  source: https://www.baldrickboard.com/en/boards/baldrick8
+  quote: 5-48V DC on v1.1 and v2 (24V on v1.0)
+  retrieved: '2026-11-18'
+  notes: 'min 5 / max 48 with `# 5-24 V on 1.0 boards`, sourced from the manual.'
+
+- entry: controllers/baldrick-8
+  field: inputs.physical.Ethernet
+  current: true
+  value: true
+  status: already-fixed
+  owner: stream2
+  source: https://www.baldrickboard.com/en/boards/baldrick8
+  quote: 2 ports with built-in switch for daisy-chaining on v2, 1 port on v1.0 and v1.1
+  retrieved: '2026-11-18'
+  notes: 'The comment already says `# 1 port on v1.0/v1.1; 2 with a built-in switch on v2`.'
+
+- entry: controllers/baldrick-8
+  field: notes
+  current: V1.1 supports 48V
+  value: 'v2 (current) is the v1.1 board plus a second Ethernet port with a built-in switch for daisy-chaining. v1.1 and v2 take 5-48 V; v1.0 tops out at 24 V.'
+  status: apply
+  owner: stream2
+  source: https://www.baldrickboard.com/en/boards/baldrick8
+  quote: The v2 is the same as the 1.1 apart from the second Ethernet port
+  retrieved: '2026-11-18'
+  notes: 'Not wrong, only stale: the entry is priced as the v2. Same page: "Both take 5v - 48v on each power input, while the 1.0 tops out at 24v."'
+
+- entry: controllers/an6usp10
+  field: outputs.pixels.max_per_output
+  current: 170
+  value: 340
+  status: apply
+  owner: stream2
+  source: https://www.electrondigit.com/products/art-net-controllers/product/download/file_id-30
+  quote: There are two universes available per port.
+  retrieved: '2026-11-18'
+  notes: >-
+    Maker's manual "AN6USPI0 BLUE firmware (6/12 4.0.00)": 2 universes (1020 channels) per port
+    with Art-Net and sACN unicast, 1 universe (512 channels) with sACN multicast. The maker's
+    page (already this entry's source) is titled "AN6USPI0 BLUE, Art-Net/sACN to 12U 6 port" and
+    says "6120 channels per controller (2040 RGB or 1530 RGBW LEDs)". 1020 / 3 = 340 RGB per
+    port, 6 x 340 = 2040. Suggested comment: `# 1020 channels (2 universes) per port; 170 with
+    sACN multicast; 2040 total`. The 6 x 170 figure matches the older 6-universe listing
+    (2021 eBay capture). Optional technical note: "12 universes (2 per port), 6,120 channels".
+
+- entry: controllers/brightly
+  field: status
+  current: discontinued
+  value: discontinued
+  status: other-owner
+  owner: stream6
+  source: https://www.kicktraq.com/projects/glowbrightly/brightly-interactive-light-toolkit-for-creatives/
+  quote: Funding Successful
+  retrieved: '2026-11-18'
+  notes: >-
+    The report's "never launched" is only half right. The Kickstarter
+    (https://www.kickstarter.com/projects/glowbrightly/brightly-interactive-light-toolkit-for-creatives,
+    linked from Make's 2021-04-01 crowdfunding roundup) was funded: Kicktraq shows
+    "Funded: $45,322 of $30,000", 90 backers, Mar 30 -> Apr 30 (2021). Whether rewards shipped
+    is unverified (Kickstarter answers 403 to scripts). glowbrightly.io never got past a
+    sign-up page ("Join for exclusive updates ... get early access" in the 2025-02-10 capture)
+    and the domain is gone. The status enum has no "never shipped"; I'd keep `discontinued`
+    and let stream2 add to notes: "Crowdfunded on Kickstarter in April 2021 (90 backers); never
+    sold at retail; whether rewards shipped is unknown."
+
+# ---------------------------------------------------------------- ctrl-f.md
+
+- entry: controllers/falcon-f4v3
+  field: outputs.count
+  current: 4
+  value: 4
+  status: already-fixed
+  owner: stream2
+  source: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+  retrieved: '2026-11-18'
+  notes: 'Was 48; now `4 # built-in; 12 with expansion boards or receivers` (Falcon spec sheet, F4v3 column).'
+
+- entry: controllers/falcon-f4v3
+  field: outputs.pixels.max_per_output
+  current: 1024
+  value: 1024
+  status: already-fixed
+  owner: stream2
+  source: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+  retrieved: '2026-11-18'
+  notes: Was 340; now 1024 (spec sheet "Pixels per output 1024, max 12288 per board").
+
+- entry: controllers/falcon-f4v3
+  field: power.voltage.max
+  current: 13
+  value: 13
+  status: already-fixed
+  owner: stream2
+  source: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+  retrieved: '2026-11-18'
+  notes: Was 36; now 13 (spec sheet "Voltage Range 5-13v DC").
+
+- entry: controllers/falcon-f48
+  field: outputs.auxiliary.DMX512
+  current: 4
+  value: 4
+  status: already-fixed
+  owner: stream2
+  source: https://pixelcontroller.com/store/discontinued-products/52-f16v2-beta-board.html
+  quote: 4 - Dedicated RS-485 outputs. 3 RJ-45 connectors and 1 3-pin connector
+  retrieved: '2026-11-18'
+  notes: Was 3.
+
+- entry: controllers/falcon-f48
+  field: inputs.physical.Wi-Fi
+  current: [2.4GHz]
+  value: [2.4GHz]
+  status: already-fixed
+  owner: stream2
+  source: https://pixelcontroller.com/store/discontinued-products/52-f16v2-beta-board.html
+  quote: Wireless ESP-07 Module with board mount antenna.
+  retrieved: '2026-11-18'
+  notes: Was missing; added by the inputs audit with the comment "limited configuration only".
+
+- entry: controllers/falcon-f48
+  field: outputs.pixels.max_total
+  value: 16384
+  status: apply
+  owner: stream2
+  source: https://pixelcontroller.com/store/discontinued-products/52-f16v2-beta-board.html
+  quote: Can drive up to 16384 pixels.
+  retrieved: '2026-11-18'
+  notes: >-
+    The report's "96 universes" item ("96 Universes of E131/Artnet."). 48 x 1022 = 49,056
+    overstates the board: "48 pixel ports are divided up into 3 groups ... Max pixels per port in
+    each group must always add up to 1024", so 16 x 1024 = 16,384 total. The schema asks for
+    max_total when it's lower than count x max_per_output. Field absent now. Optional
+    technical note: "96 universes of E1.31 / Art-Net".
+
+- entry: controllers/flex-pixel-driver
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.elationlighting.com/products/flex-pixel-driver-1
+  retrieved: '2026-11-18'
+  notes: 'Now `DMX512: 3-pin terminals, in + thru` + `buttons: 2`, protocols [DMX512]. The notes already carry the 432 DMX channels from the report.'
+
+- entry: controllers/genius-long-range-pixel-controller
+  field: inputs.physical.PoE
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://store.experiencelights.com/long-range-genius-pixel-controller/
+  quote: Hooks up directly to high voltage power.
+  retrieved: '2026-11-18'
+  notes: 'Was `PoE: true`; removed. The page never mentions PoE.'
+
+- entry: controllers/genius-long-range-pixel-controller
+  field: features
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://store.experiencelights.com/long-range-genius-pixel-controller/
+  retrieved: '2026-11-18'
+  notes: The "Power over Ethernet (PoE)" feature (the list's only item) is gone.
+
+- entry: controllers/genius-long-range-pixel-controller
+  field: outputs.auxiliary.DMX512
+  current: 2
+  value: 2
+  status: already-fixed
+  owner: stream2
+  source: https://store.experiencelights.com/long-range-genius-pixel-controller/
+  quote: 2 x RJ45 ports for DMX output
+  retrieved: '2026-11-18'
+  notes: Was 1.
+
+- entry: controllers/genius-long-range-pixel-controller
+  field: power.voltage.max
+  current: 5
+  value: 240
+  status: apply
+  owner: stream2
+  source: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view?usp=sharing
+  quote: provide high voltage (100 - 240 V) AC power to the device
+  retrieved: '2026-11-18'
+  notes: >-
+    Genius User Manual (the entry's own source), "Genius Long Range Controller (1) Input power
+    connection". The 2023 edition, the one sold now ("built in 5V 3A Mean Well power supply",
+    "Hooks up directly to high voltage power."), takes 100-240 V AC on screw terminals. The
+    2022 edition had no on-board supply: "Connect a 3A, 5V DC power supply to the power input
+    terminals." Suggested comment: `# AC mains into the on-board MEAN WELL 5 V supply (2023
+    edition); the 2022 edition took 5 V DC, 3 A`. Precedent: controllers/qolorpix. The
+    sources.inputs.physical note ("powered from a 5 V DC supply, not PoE") describes the 2022
+    edition; worth rewording to "not PoE" only.
+
+- entry: controllers/genius-long-range-pixel-controller
+  field: power.voltage.min
+  value: 100
+  status: apply
+  owner: stream2
+  source: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view?usp=sharing
+  quote: provide high voltage (100 - 240 V) AC power to the device
+  retrieved: '2026-11-18'
+  notes: Pairs with the max above (field absent now).
+
+- entry: controllers/genius-pro-32-port
+  field: inputs.standalone
+  current: true
+  value: true
+  status: already-fixed
+  owner: stream2
+  source: https://experiencelights.com/genius-pro-32-port-controller/
+  retrieved: '2026-11-18'
+  notes: "Was false; now true, sourced in sources.inputs.standalone ('SD card slot for standalone operation or to operate as FPP remote')."
+
+- entry: controllers/k16a-b
+  field: creator.page
+  current: https://kulplights.com/product/k16a-b/
+  value: https://kulplights.com/product/k16a-b/
+  status: already-fixed
+  owner: stream6
+  source: https://kulplights.com/product/k16a-b/
+  retrieved: '2026-11-18'
+  notes: Was the Wired Watts page; Wired Watts is now in vendors.
+
+- entry: controllers/fadecandy
+  field: notes
+  current: Please see https://github.com/scanlime/fadecandy to confirm project status
+  value: 'Abandoned by its author: in July 2021 the README was replaced with "STOP DOING FADECANDY", and the GitHub repository was deleted between September 2023 and January 2024 (an archived copy is linked). Adafruit no longer stocks the board.'
+  status: apply
+  owner: stream2
+  source: https://web.archive.org/web/20220107030305/https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7
+  quote: STOP DOING FADECANDY
+  retrieved: '2026-11-18'
+  notes: >-
+    Commit 82ca2b1 "Update README.md", scanlime, Jul 18, 2021: +5 / -249 lines; the added lines
+    are a "STOP DOING FADECANDY" meme. Wayback CDX for github.com/scanlime/fadecandy: last 200 on
+    2023-09-23, 404 from 2024-01-24 on; the GitHub API answers Not Found today. Adafruit's
+    "No longer stocked" is already in sources.status.
+
+- entry: controllers/fadecandy
+  field: technical_notes[1]
+  current: Project maintenance status uncertain - check GitHub readme
+  value: null
+  status: apply
+  owner: stream2
+  source: https://web.archive.org/web/20220107030305/https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7
+  quote: STOP DOING FADECANDY
+  retrieved: '2026-11-18'
+  notes: Status isn't uncertain any more, and there's no README to check; the new notes text above covers it.
+
+- entry: controllers/fadecandy
+  field: technical_notes[2]
+  current: 'See commit history for maintenance status: https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7'
+  value: 'README replaced with "STOP DOING FADECANDY" on 2021-07-18: https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7'
+  status: apply
+  owner: stream2
+  source: https://web.archive.org/web/20220107030305/https://github.com/scanlime/fadecandy/commit/82ca2b12f177cbbfbd305d349fa9754635b197b7
+  quote: STOP DOING FADECANDY
+  retrieved: '2026-11-18'
+  notes: Keep the original URL; its dead_links item already points readers to this archive.
+
+# ---------------------------------------------------------------- ctrl-p.md
+
+- entry: controllers/pb16
+  field: inputs.requires_host
+  current: PocketBeagle
+  value: PocketBeagle
+  status: already-fixed
+  owner: stream2
+  source: https://github.com/computergeek1507/PB_16
+  retrieved: '2026-11-18'
+  notes: 'Was BeagleBone Black. Leftover: the comment on inputs.standalone still reads `# runs Falcon Player (FPP) on the BeagleBone`; make it `on the PocketBeagle` (comment only).'
+
+- entry: controllers/pb16
+  field: notes
+  current: Open source DIY FPP pixel controller cape for the PocketBeagle.
+  value: Open source DIY FPP pixel controller cape for the PocketBeagle.
+  status: already-fixed
+  owner: stream2
+  source: https://github.com/computergeek1507/PB_16
+  retrieved: '2026-11-18'
+  notes: Was "... cape for the BeagleBone Black" (fixed in dabde25).
+
+- entry: controllers/pixeldin
+  field: name
+  current: PixelDIN
+  value: PixelDIN2
+  status: apply
+  owner: stream2
+  source: https://yarilo.pro/ru/contollers/pixel/yarilo-pixeldin2
+  quote: Контроллер светодиодных пиксельных лент Yarilo PixelDIN2
+  retrieved: '2026-11-18'
+  notes: >-
+    That page (the entry's creator.page): "4 выхода через клеммы", "Всего до 5440 пикселей",
+    "Входное напряжение: 5-24В", "Снят с производства". The archived English page at the
+    entry's old URL was titled "Yarilo PRO - Yarilo PixelDIN2" (2024-11-05 capture). The board
+    shipped as "YARILO PixelDIN" (2020-2021 datasheet; firmware PixelDin-0_8_xx), and Yarilo
+    now sells a different "Yarilo PixelDIN" (https://yarilo.pro/ru/contollers/pixel/yarilo-pixeldin:
+    "2 выхода через клеммы", "Всего до 2720 пикселей", "Входное напряжение: 5-12В",
+    "Цена: 11625 руб"). Controllers have no aliases field, so record the old name in notes
+    (next record). Keep the slug.
+
+- entry: controllers/pixeldin
+  field: notes
+  current: Up to 4 independent outputs in single-wire pixel mode. Total 5440 pixels.
+  value: Up to 4 independent outputs in single-wire pixel mode. Total 5440 pixels. Sold as PixelDIN; Yarilo now lists it as PixelDIN2 and uses the PixelDIN name for a newer 2-output, 2720-pixel model.
+  status: apply
+  owner: stream2
+  source: https://yarilo.pro/service/manuals/Yarilo_PixelDIN_datasheet_en.pdf
+  quote: Up to 4 independent outputs in 1-Wire SPI Mode. Total 5440 pixels.
+  retrieved: '2026-11-18'
+  notes: The datasheet is titled "YARILO PixelDIN" (c 2020-2021) and describes this 4-output board; see the name record for the current naming.
+
+- entry: controllers/pixout-server
+  field: name
+  current: PixOut Server
+  value: Pixout ArtNet DMX Recorder
+  status: apply
+  owner: stream2
+  source: https://pixout.lighting/products/recorder/
+  quote: Pixout ArtNet DMX Recorder - Pixout Lighting
+  retrieved: '2026-11-18'
+  notes: The quote is the page title. The maker writes "Pixout" (not "PixOut"); creator.name "PixOut" could follow.
+
+- entry: controllers/pixout-server
+  field: notes
+  current: Raspberry Pi based Art-Net DMX recorder/player; up to 255 universes; iOS/Android app.
+  value: Raspberry Pi based Art-Net DMX recorder/player; up to 64 universes (licence-key upgradable); iOS/Android app.
+  status: apply
+  owner: stream2
+  source: https://pixout.lighting/products/recorder/
+  quote: Up to 64 ArtNet universes (license-key upgradable)
+  retrieved: '2026-11-18'
+  notes: S-100 and I-100 max 64 universes; D-100 tiers 1/2/4 ("8u+ available on request").
+
+- entry: controllers/pixout-server
+  field: outputs.count
+  current: 8
+  value: null
+  status: apply
+  owner: stream2
+  source: https://pixout.lighting/products/recorder/
+  quote: Sending ArtNet directly to WS2812b via SPI is not available yet.
+  retrieved: '2026-11-18'
+  notes: 'FAQ "Can Pixout Controller output to WS2812b LED strips?". It continues: "The hardware supports SPI, but this feature is not production-ready. Use ArtNet-to-WS281x converters for this purpose." Also ISSUES.md "Two ''controllers'' drive no pixels".'
+
+- entry: controllers/pixout-server
+  field: outputs.pixels.max_per_output
+  current: 1024
+  value: null
+  status: apply
+  owner: stream2
+  source: https://pixout.lighting/products/recorder/
+  quote: Sending ArtNet directly to WS2812b via SPI is not available yet.
+  retrieved: '2026-11-18'
+  notes: Remove the whole `pixels` block (this is its only key).
+
+- entry: controllers/pixout-server
+  field: outputs.clocked
+  current: selectable
+  value: null
+  status: apply
+  owner: stream2
+  source: https://pixout.lighting/products/recorder/
+  quote: Sending ArtNet directly to WS2812b via SPI is not available yet.
+  retrieved: '2026-11-18'
+
+- entry: controllers/pixout-server
+  field: outputs.driver.buffered
+  current: true
+  value: null
+  status: apply
+  owner: stream2
+  source: https://pixout.lighting/products/recorder/
+  quote: Sending ArtNet directly to WS2812b via SPI is not available yet.
+  retrieved: '2026-11-18'
+  notes: Remove the whole `driver` block (its only key).
+
+- entry: controllers/pixout-server
+  field: outputs.auxiliary.DMX512
+  value: 4
+  status: apply
+  owner: stream2
+  source: https://pixout.lighting/products/recorder/
+  quote: Indoor controller with four native DMX512 outputs and RTC
+  retrieved: '2026-11-18'
+  notes: >-
+    EXTRA, optional. Only the D-100 model has them; suggested comment `# D-100 model only`.
+    With the four removals above this would be the only key left under `outputs`; if it
+    isn't wanted, remove `outputs` entirely.
+
+- entry: controllers/pixout-server
+  field: power.voltage.max
+  current: 24
+  value: 12
+  status: apply
+  owner: stream2
+  source: https://pixout.lighting/products/recorder/
+  quote: 12V DC across all models (110–240V AC adapter included)
+  retrieved: '2026-11-18'
+  notes: >-
+    EXTRA, found on the same page. Related but left alone: `requires_host: Raspberry Pi` fits
+    only the software-only licence ("Bring your own Raspberry Pi or mini-PC", from €104); the
+    S-100 / I-100 / D-100 are complete units.
+
+- entry: controllers/pixnet-4
+  field: name
+  current: PixNet 4+
+  value: PixNet 4
+  status: apply
+  owner: stream2
+  source: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+  quote: PixNet 4 | Digital aRGB Pixel Controller
+  retrieved: '2026-11-18'
+  notes: >-
+    Page title; the body says "The PixNet 4 is a powerful Art-Net / sACN to digital pixel
+    controller". No "PixNet 4+" found anywhere. outputs.count 8 is the expanded mode ("4 Ports
+    isolated output 4 x 1024 RGB/ 768 RGBW Expanded mode for non-clocked pixels 8 Outputs 8 x
+    1020 RGB / 768 RGBW"), the same convention as the PixLite 4 Mk2 entry (8), so I left it.
+
+- entry: controllers/pixnet-4
+  field: inputs.physical.USB
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+  quote: Single 100M Ethernet Port with POE
+  retrieved: '2026-11-18'
+  notes: 'Removed; inputs are now `Ethernet: true` + `PoE: true`.'
+
+- entry: controllers/pixnet-4
+  field: outputs.auxiliary.DMX512
+  current: 4
+  value: 4
+  status: already-fixed
+  owner: stream2
+  source: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+  quote: DMX Node Mode 4 x 512
+  retrieved: '2026-11-18'
+  notes: Was 1.
+
+- entry: controllers/pb-complete-controller
+  field: inputs.protocols
+  current: [sACN, Art-Net, DDP]
+  value: [sACN, Art-Net, DDP]
+  status: already-fixed
+  owner: stream2
+  source: https://kurtcontrollers.com/?product=pb-complete-controller
+  retrieved: '2026-11-18'
+  notes: 'Was [DMX512]. DMX is now `outputs.auxiliary.DMX512: 2` ("2 universes of DMX 512"), sourced.'
+
+- entry: controllers/pb-complete-controller
+  field: inputs.physical.Ethernet
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://kurtcontrollers.com/?product=pb-complete-controller
+  retrieved: '2026-11-18'
+  notes: 'Was `Ethernet: true`; now `USB: USB-A host # network only through a USB Ethernet or Wi-Fi adapter` + `triggers: 8`.'
+
+- entry: controllers/protopixel-8-channel-controller
+  field: technical_notes[2]
+  current: Subscription model - design software from $149/month, deployment from $79/month
+  value: Subscription model (2020-21 prices) - ProtoPixel Create design software €149/month; management plans from €79/month
+  status: apply
+  owner: stream2
+  source: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing
+  quote: For single lighting deployment € 79 Per Month
+  retrieved: '2026-11-18'
+  notes: 'Same capture: "ProtoPixel Create" ... "€ 149" "Per Month"; the "Expansion" management plan ("Manage multiple lighting deployments") is also € 149/month. The 2020-08-08 capture shows the same prices. This capture is already the entry''s dead_links archive.'
+
+- entry: controllers/pixlite-4-rugged-mk2
+  field: creator.name
+  current: Advatek Lights
+  value: Advatek
+  status: apply
+  owner: stream2
+  source: https://www.advateklighting.com/
+  quote: PixLite® Professional LED Pixel Controllers & SHOWTime® - Advatek
+  retrieved: '2026-11-18'
+  notes: The quote is the site's page title; the footer gives the legal name "Advatek Lighting Pty Ltd". The other ten PixLite entries use "Advatek"; "Advatek Lights" is the old advateklights.com domain.
+
+- entry: controllers/pixlite-t8-s-mk2
+  field: creator.name
+  current: Advatek Lighting
+  value: Advatek
+  status: apply
+  owner: stream2
+  source: https://www.advateklighting.com/
+  quote: PixLite® Professional LED Pixel Controllers & SHOWTime® - Advatek
+  retrieved: '2026-11-18'
+  notes: Same as above; matches the other PixLite entries.

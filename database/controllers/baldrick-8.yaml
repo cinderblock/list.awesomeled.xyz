@@ -5,7 +5,7 @@ creator:
   name: ILIGHTTHAT
   url: https://www.ilightthat.com
   page: https://www.baldrickboard.com/en/boards/baldrick8
-notes: V1.1 supports 48V
+notes: v2 (current) is the v1.1 board plus a second Ethernet port with a built-in switch for daisy-chaining. v1.1 and v2 take 5-48 V; v1.0 tops out at 24 V.
 inputs:
   physical:
     Ethernet: true # 1 port on v1.0/v1.1; 2 with a built-in switch on v2
@@ -78,3 +78,7 @@ sources:
     url: https://www.baldrickboard.com/en/boards/baldrick8/manual
     retrieved: '2026-11-18'
     notes: "'CunningFX allows you to use your controller without a show player'"
+  notes:
+    url: https://www.baldrickboard.com/en/boards/baldrick8
+    retrieved: '2026-11-18'
+    notes: The v2 is the same as the 1.1 apart from the second Ethernet port

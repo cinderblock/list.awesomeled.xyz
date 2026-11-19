@@ -1,7 +1,7 @@
 name: PixLite 4 Rugged Mk2
 status: end-of-life
 creator:
-  name: Advatek Lights
+  name: Advatek
   url: https://www.advateklighting.com
   page: https://www.advateklighting.com/products/shop/pixlite-4-rugged-mk2
 notes: 5V or 12V available. Multiple power plug versions available.
@@ -100,3 +100,7 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'
     notes: "Rows ticked in the 'PixLite Mk2' column of Advatek's glossary table (97 rows"
+  creator.name:
+    url: https://www.advateklighting.com/
+    retrieved: '2026-11-18'
+    notes: PixLite® Professional LED Pixel Controllers & SHOWTime® - Advatek

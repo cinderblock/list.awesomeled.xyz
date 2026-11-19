@@ -1,4 +1,4 @@
-name: PixNet 4+
+name: PixNet 4
 status: active
 release_year: 2022
 creator:
@@ -66,3 +66,7 @@ sources:
     url: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
     retrieved: '2026-11-18'
     notes: "'DMX Node Mode 4 x 512'"
+  name:
+    url: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+    retrieved: '2026-11-18'
+    notes: PixNet 4 | Digital aRGB Pixel Controller
