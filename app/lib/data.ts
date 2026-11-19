@@ -100,6 +100,9 @@ export const IGNORED_COMMITS = new Set([
   'c1ff0a0bf27b587a8d69ad42fe7d59dcdc49f269', // data-freshness: pixel dead-link re-checks (4)
   '23323c6ba53fb7aaaf416a5cf4ca6f34d1b7c918', // data-freshness: UCS8903 dead-link re-check (1)
   'd673e019502956d3a3922afe711163fd62ba4fef', // data-freshness: connector link fixes (4)
+  '5ec2efe3bf57ceb9083ca41084cf6818234ca844', // data-freshness: PB16 link (1)
+  '5715fc89d2165dfa8af8b20f63a5a4ba94cf7af7', // data-freshness: adapter link fixes (2)
+  'aa3c3935ca3ad0b81b0b511ee900c32d7f2447da', // data-freshness: microboard link fixes (2)
 ]);
 
 /**
