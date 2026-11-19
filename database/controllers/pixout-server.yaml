@@ -4,7 +4,7 @@ creator:
   name: PixOut
   url: http://pixout.lighting/
   page: https://pixout.lighting/products/recorder/
-notes: Raspberry Pi based Art-Net DMX recorder/player; up to 255 universes; iOS/Android app.
+notes: 'Raspberry Pi based Art-Net recorder/player: records universes from a console or media server and replays them standalone, as Art-Net over the network; up to 64 universes by license key; iOS/Android app.'
 inputs:
   physical:
     Ethernet: true
@@ -14,16 +14,6 @@ inputs:
     - Art-Net
   standalone: true # plays recorded cues from SD without external input
   requires_host: Raspberry Pi # runs on Raspberry Pi 3B/3B+/4 or CM4
-outputs:
-  count: 8
-  pixels:
-    max_per_output: 1024 # 8192 total across 8 outputs
-  clocked: selectable
-  driver:
-    buffered: true
-power:
-  voltage:
-    max: 24
 data:
   storage:
     - type: SD
@@ -71,6 +61,17 @@ sources:
     - url: https://pixout.lighting/products/recorder/
       retrieved: '2026-11-18'
       notes: Current ArtNet Recorder lists "RJ45 wired networking" and "Wi-Fi for setup & remote control"
+  notes:
+    url: https://pixout.lighting/products/recorder/
+    retrieved: 2026-11-18
+    notes: '"Up to 64 ArtNet universes (license-key upgradable)"; records from any Art-Net source and replays standalone'
+  technical_notes:
+    - url: https://web.archive.org/web/20190705112549/http://pixout.lighting/product-pixout/pixout-controller-faq/
+      retrieved: 2026-11-18
+      notes: '"Sending ArtNet directly from the Pixout controller to the ws2812b strip by SPI protocol not available yet"'
+    - url: https://pixout.lighting/products/recorder/
+      retrieved: 2026-11-18
+      notes: Outputs listed are Art-Net over RJ45/Wi-Fi, plus "4× DMX512 outputs" on the indoor D-100; no pixel ports
   status:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'
@@ -79,3 +80,5 @@ sources:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'
     notes: "Pixout ArtNet Recorder page: 'Compatibility: Works with your favourite tools' list and the FAQ 'Can Pixout accept ArtNet data from my controller (GrandMA3 /…"
+technical_notes:
+  - 'No pixel outputs of its own: it drives pixels through Art-Net pixel controllers. Direct SPI output to WS2812B strips was "not available yet" in 2019 and is not offered now; the D-100 model adds four DMX512 outputs'

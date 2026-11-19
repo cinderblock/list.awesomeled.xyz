@@ -28,7 +28,7 @@ outputs:
   auxiliary:
     DMX512: 1
   current:
-    max: 10
+    max: 5
   protocols:
     - D705
     - LPD6803
@@ -158,6 +158,17 @@ sources:
     url: https://www.ledstripstudio.com/user_manual/SPI_MATRIX_tech.specs.pdf
     retrieved: '2026-11-18'
     notes: 'SD Card row: "Micro SD Card (FAT32, up to 32 GB)"'
+  outputs.current:
+    url: https://www.ledstripstudio.com/products/spi_matrix/
+    retrieved: 2026-11-18
+    notes: 'Comparison table, Pass-Thru Current: "10A" total, "5A per output"'
+  power.current:
+    - url: https://www.ledstripstudio.com/products/spi_matrix/
+      retrieved: 2026-11-18
+      notes: 'Comparison table, Pass-Thru Current: 10A'
+    - url: https://www.ledstripstudio.com/user_manual/SPI_MATRIX_tech.specs.pdf
+      retrieved: 2026-11-18
+      notes: '"Maximal Current 10A"'
   power.current.max:
     url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI-MATRIX_tech.specs_.pdf
     retrieved: '2026-11-18'

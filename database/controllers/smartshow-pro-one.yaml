@@ -21,6 +21,7 @@ outputs:
     ref: mtsb-combicon
   pixels:
     max_per_output: 1020 # 8160 total / 8 outputs (768 RGBW per port)
+    max_total: 5440
   clocked: selectable
   driver:
     buffered: true
@@ -98,6 +99,10 @@ sources:
     - url: https://smartshow.lighting/product/smartshow-pro-one/
       retrieved: '2026-11-18'
       notes: '"USB interface for firmware uploads (or separate USB powering if required)"'
+  outputs.pixels:
+    url: https://smartshow.lighting/product/smartshow-pro-one/
+    retrieved: 2026-11-18
+    notes: '"Each Port can output up to 1020 RGB Pixels, or 768 RGBW Pixels"; "up to 32 Art-Net II/III/IV Unicast Universes (16,384 channels)" = 5,440 RGB pixels'
   outputs.pixels.max_per_output:
     url: https://smartshow.lighting/product/smartshow-pro-one/
     retrieved: '2026-11-18'

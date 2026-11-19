@@ -27,6 +27,8 @@ outputs:
   pixels:
     max_total: 20000
     # via DDP; no per-port cap
+  current:
+    max: 4
   protocols:
     - WS281X
 power:
@@ -110,6 +112,13 @@ sources:
     retrieved: '2026-11-18'
     notes: '"SD card slot for standalone operation or to operate as FPP remote"'
   outputs.pixels:
-    url: https://experiencelights.com/genius-pro-32-port-controller/
-    retrieved: '2026-11-18'
-    notes: "'No banks or groups. Pixels can be distributed however you'd like on any output'"
+    - url: https://experiencelights.com/genius-pro-32-port-controller/
+      retrieved: '2026-11-18'
+      notes: "'No banks or groups. Pixels can be distributed however you'd like on any output'"
+    - url: https://store.experiencelights.com/genius-pro-32-port-controller/
+      retrieved: '2026-11-18'
+      notes: '"Seamlessly control up to ~10,000 pixels using e1.31/artnet, or ~20,000 pixels using DDP"; "No banks or groups. Pixels can be distributed however you''d like on any outputs"'
+  outputs.current:
+    url: https://store.experiencelights.com/genius-pro-32-port-controller/
+    retrieved: 2026-11-18
+    notes: '"Max 4A per output"'

@@ -30,7 +30,7 @@ outputs:
   driver:
     buffered: true
   current:
-    max: 10
+    max: 5
   protocols:
     - D705
     - LPD6803
@@ -124,6 +124,17 @@ sources:
     - url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
       retrieved: '2026-11-18'
       notes: 'LEC 3 front connectors: Ethernet, status LEDs, buttons, IP/DMX DIP switch, SD card, DMX In/Out. The "micro SD card USB reader" in the box is an accessory, not a port'
+  outputs.current:
+    url: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+    retrieved: 2026-11-18
+    notes: 'Spec table, Max Current: "10 A total, 5 A per output, polyfuse protected"'
+  power.current:
+    - url: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+      retrieved: 2026-11-18
+      notes: 'Spec table, Max Current: "10 A total, 5 A per output"'
+    - url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+      retrieved: 2026-11-18
+      notes: The hardware manual instead allows "up to 20A power source" (4 x 5 A)
   status:
     url: https://www.ledstripstudio.com/shop/product/led-ethernet-controller-3/
     retrieved: '2026-11-18'
