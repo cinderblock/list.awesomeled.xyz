@@ -211,3 +211,85 @@ Filling any of these makes its checks sharper with no code change:
   `pixel_types`. Once they adopt the shared `pixel_outputs` shape and
   `host` links (stream 2 "Next", stream 4), the designer can offer shields
   for dev boards.
+
+## Suspected data errors seen while sourcing images & datasheets (stream 5)
+
+Not fixed by stream 5 (facts belong to streams 2 and 6). Each was noticed on
+the maker's own page or datasheet; the per-entry research notes with source
+URLs are in [plans/assets-research/](plans/assets-research/).
+
+- **Pixel ICs** ([pixel-ics.md](plans/assets-research/pixel-ics.md)):
+  p9813's datasheet names DMS Microelectronics, not WorldSemi; UCS-series
+  datasheets point to UCS (szucs.cn), not Normand; GS82xx datasheets say
+  Genesis Systech, not "Shenzhen Greesit"; sm16511 is a 3-channel DMX512 SOP8
+  per its maker (entry: 4 channels, SOP10/16); ucs2904's `other_links` text
+  names SM16704; ws2814's price SKU is the WS2814F; qed3001's specs duplicate
+  tls3001's.
+- **Pixels** ([pixels.md](plans/assets-research/pixels.md)): Adafruit
+  product 2343 (apa102's image source) is now titled "[SK9822]"; ns108e and
+  sk9826 `dead_links` mark PDFs that load today; sk9822-a's creator is probably
+  Normand, not Newstar; ws2816's 5-bit brightness claim isn't in WorldSemi's
+  datasheets; pl9823's datasheet names BaiCheng (entry creator "/");
+  lc2823-2020 and sm1616 couldn't be identified at all.
+- **Microboards** ([microboards.md](plans/assets-research/microboards.md)):
+  esp-01 and nodemcu-v2 list Bluetooth 4.1 (ESP8266 has none); t-eth-lite
+  lists an LX6 core / BT 4.1 / classic-ESP32 outputs for an ESP32-S3 board and
+  `flash: microSD`; Orange Pi Zero LTS and PC Plus claim 5 GHz Wi-Fi (2.4 GHz
+  only); PC Plus has 8 GB eMMC, not microSD; ttgo-esp32-poe needs an external
+  programmer (entry: USB serial); orange-pi-lts isn't a product name (specs
+  match the Zero LTS, which is H3, entry says H2+); esp-32s is ambiguous
+  (module vs dev board).
+- **Connectors** ([connectors.md](plans/assets-research/connectors.md)): ph's
+  notes describe XH; sh says `rows: 2`, `max_pins: 25`; df62w and teeplug have
+  their wire-gauge limits swapped; xt60-90 and mt30-60 say `creator: Generic`
+  (Amass originated them) and their ratings differ from Amass's specs;
+  "MTSB" → "MSTB", "Bucaneer" → "Buccaneer".
+- **Adapters** ([adapters.md](plans/assets-research/adapters.md)):
+  `max_channels` looks wrong on espartstick(-wled) 6, espixelstick 4,
+  quinled-dig-uno 6; pipixel and led-octopus have `creator: Tindie` (makers:
+  Maniacal Labs, Essence Engineering); pi-hat has `links.product: Multiple`,
+  `parent: Yes`; rasppi-isolated-dmx's linked BitWizard board isn't called
+  isolated; rpi-28d is superseded by the rPi-28D+.
+- **Controllers** ([controllers-a.md](plans/assets-research/controllers-a.md),
+  [controllers-b.md](plans/assets-research/controllers-b.md)): radios listed
+  that the maker pages don't show — blink-tape-controller (Bluetooth),
+  dmx-to-led-strip (Bluetooth, audio), apd-2-500-12v-art and
+  deskontroller-lite-v3-192 (Wi-Fi); Ethernet/Art-Net listed on DMX-only units
+  (din-pixie, flex-pixel-driver) and on lightbox, lightboard-mini, luminaxa,
+  nled-pixel-controller-mini; falcon-f4v3's specs look copied from the F48;
+  falcon-f48 is discontinued per its maker; led-player-m has 8 channels;
+  lightkraken shows 2 outputs; pb16 is a PocketBeagle cape (entry: BeagleBone
+  Black); ledmx4-pro's photo is the 5 V unit (entry: 24 V max); LEC Powered and
+  orange-pro-plus-32 look discontinued
+  ([controllers-c.md](plans/assets-research/controllers-c.md)): pixnet-4 has
+  4 outputs (8 only expanded); pixpoe and spi-matrix pages mention no Wi-Fi;
+  protopixel-8-channel's USB is power only (input is Ethernet);
+  uli-led-control takes 7–24 V; uls-stripe's output has a Clock pin (entry:
+  not clocked); replay has JST outputs and no Ethernet per its manual;
+  sp102e is an IR-remote controller; qolorpix and spinode pages are live
+  (status could be `active`); pixout-server's pixel outputs don't match any
+  Pixout hardware.
+- **Level converters / pixel decoders**
+  ([converters-decoders.md](plans/assets-research/converters-decoders.md)):
+  ws2811-mosfetdriver links Freetronics' single-MOSFET FREENFET but says 3
+  channels (FREENFET3 is the triple); pixel-2-things-relay is the Pixel2AC
+  triac dimmer; pixel2things.com now redirects to Experience Lights;
+  pixfog has no product link (live page:
+  innotronix.net/PixFog-Pixel-Based-Fog-Controller-p232730399, $39.99 vs
+  $33); 74hct244 has a stray `interface: PDIP largest`.
+- **Commercial systems / diffusive materials**
+  ([systems-diffusers.md](plans/assets-research/systems-diffusers.md)):
+  active-rgb is sold as RGBW now; smartpxl is an ENTTEC line (creator);
+  vinci's `creator` is a URL (Lucenti); silicone-sealant carries Plastazote
+  foam data (also listed under "Same product in two categories"); ALP no
+  longer lists "Lumieo II"; rosco-diffusion redirects to Rosco's myColor app;
+  the Plexiglas shop link redirects to polyvantis-shop.com; "Plaztazote" and
+  "polyethelene" are misspelled.
+
+## e2e: "missing values sort last in both directions" fails on master
+
+`e2e/table.test.ts:63` (`/controllers?sort=price.`) fails in master's CI
+(run 44444691531, 2026-11-18 ~6:37 PM PST) and locally: a blank price lands
+before a priced row in descending order. Blocks every deploy (the deploy job
+needs the test job). Seen by stream 5 while verifying; not investigated —
+owner is the table (stream 7) or price data (stream 6).
