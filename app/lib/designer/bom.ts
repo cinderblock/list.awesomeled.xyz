@@ -128,7 +128,12 @@ export function buildBom(input: BomInput): Bom {
     );
     pixelLines.set(key, line);
   }
-  for (const [key, { pixel, voltage, qty, where }] of pixelLines) {
+  for (const [key, { pixel, voltage, qty: pixelCount, where }] of pixelLines) {
+    // A multi-pixel driver chip is bought once per few pixels
+    const qty = Math.ceil(pixelCount / pixel.pixelsPerPart);
+    if (pixel.pixelsPerPart > 1) {
+      where.push(`one chip per ${n(pixel.pixelsPerPart)} pixels (${n(pixelCount)} pixels)`);
+    }
     const p = priced(pixel.price, qty);
     const what = pixel.kind === 'ic' ? 'chip' : 'LED';
     lines.push({

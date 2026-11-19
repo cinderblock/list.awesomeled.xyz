@@ -143,6 +143,14 @@ export const PIXEL_ICS: BaseEntry[] = [
     electrical: { supply_voltage: '5V' },
   }),
   entry('ic-unknown', { name: 'ICUNKNOWN', data: { clocked: false, channels: 4 } }),
+  // nine outputs: one chip runs three RGB pixels
+  entry('ic-triple', {
+    name: 'ICTRIPLE',
+    data: { clocked: false, channels: 9 },
+    electrical: { output_voltage: '12V', supply_voltage: '5V', max_current: '18mA' },
+    price: 0.3,
+  }),
+  entry('ic-quad-rgbw', { name: 'ICQUADRGBW', data: { clocked: false, channels: 16 } }),
 ];
 
 export const CONTROLLERS: BaseEntry[] = [

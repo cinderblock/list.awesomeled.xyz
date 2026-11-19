@@ -190,6 +190,11 @@ export interface PixelOption {
   backupLine: boolean;
   /** Colour channels per pixel (3 = RGB, 4 = RGBW) */
   channels: number;
+  /**
+   * Pixels one part drives: 1, except driver ICs with enough outputs for
+   * several pixels (a 9-channel chip runs three RGB pixels)
+   */
+  pixelsPerPart: number;
   colorOrder?: string;
   /** Bits per colour channel (8, 16 …), when recorded */
   channelBits: number | null;
@@ -309,6 +314,7 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
     ...shared,
     id: String(entry.id),
     kind: 'pixel',
+    pixelsPerPart: 1,
     path: `/pixels/${entry.id}`,
     ref: `pixels/${entry.id}`,
     image: imagePath('pixels', entry),
@@ -347,6 +353,13 @@ export function buildPixelIcOption(entry: BaseEntry): PixelOption {
   const prefers5 = outputLimit == null && supply != null && supply <= 5.5;
   const voltage = !prefers5 && voltageChoices.includes(12) ? 12 : voltageChoices[0];
 
+  // A chip with 6+ outputs drives several pixels: 9 channels are three RGB
+  // pixels, 16 are four RGBW ones. The designer counts pixels, so the option
+  // describes one pixel and remembers how many a chip covers.
+  const outputs = shared.channels;
+  const channels =
+    outputs > 5 ? (outputs % 3 === 0 ? 3 : outputs % 4 === 0 ? 4 : outputs) : outputs;
+
   // max_current is what the output stage can sink, not what the LEDs are run
   // at: a 45 mA driver still feeds ordinary 20 mA LEDs.
   const limit = parseQuantity(el.max_current, 'current')?.value ?? null;
@@ -356,6 +369,8 @@ export function buildPixelIcOption(entry: BaseEntry): PixelOption {
     ...shared,
     id: `ic-${entry.id}`,
     kind: 'ic',
+    channels,
+    pixelsPerPart: outputs / channels,
     path: `/pixel-ics/${entry.id}`,
     ref: `pixel-ics/${entry.id}`,
     image: imagePath('pixel-ics', entry),

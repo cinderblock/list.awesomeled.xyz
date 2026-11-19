@@ -211,7 +211,9 @@ export function GroupCard({
     others.set(g.controller.id, load);
   }
 
-  const pixelTier = pixel ? unitPriceAt(pixel.price, group.pixels) : null;
+  // Parts to buy for this group: fewer than pixels when one chip drives several
+  const pixelParts = pixel ? Math.ceil(group.pixels / pixel.pixelsPerPart) : 0;
+  const pixelTier = pixel ? unitPriceAt(pixel.price, pixelParts) : null;
   const use = controller
     ? analysis.controllers.find((u) => u.controller.id === controller.id)
     : null;
@@ -279,7 +281,7 @@ export function GroupCard({
             <Tooltip
               content={`${pixel?.price.vendor ?? 'Distributor'} price for the bare ${pixel?.kind === 'ic' ? 'chip' : 'LED'}${pixelTier.qty > 1 ? ` at ${fmtInt(pixelTier.qty)}+` : ''} (${fmtUsd(pixelTier.usd)} each). Strips, strings and modules cost more.`}
             >
-              <span>≈ {fmtUsd(pixelTier.usd * group.pixels)}</span>
+              <span>≈ {fmtUsd(pixelTier.usd * pixelParts)}</span>
             </Tooltip>
           ) : undefined
         }
@@ -301,6 +303,7 @@ export function GroupCard({
                       ? 'clocked (data + clock)'
                       : 'data-only (one wire)',
                   pixel.channels === 3 ? null : `${pixel.channels} channels`,
+                  pixel.pixelsPerPart > 1 ? `${pixel.pixelsPerPart} pixels per chip` : null,
                   power ? `${fmtWatts(power.pixelMaxWatts)} at full white` : null,
                   pixel.bitrateHz ? fmtHz(pixel.bitrateHz) : null,
                 ]

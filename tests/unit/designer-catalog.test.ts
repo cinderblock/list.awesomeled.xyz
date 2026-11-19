@@ -128,6 +128,18 @@ describe('driver IC options', () => {
     expect(strong.channelAmpsLimit).toBeCloseTo(0.045, 9);
   });
 
+  test('a chip with outputs for several pixels describes one pixel', () => {
+    const triple = must(index.pixels, 'ic-ic-triple');
+    expect(triple.channels).toBe(3);
+    expect(triple.pixelsPerPart).toBe(3);
+    expect(pixelMaxWatts(triple, 12)).toBeCloseTo(3 * 0.018 * 12, 9);
+    const quad = must(index.pixels, 'ic-ic-quad-rgbw');
+    expect(quad.channels).toBe(4);
+    expect(quad.pixelsPerPart).toBe(4);
+    expect(must(index.pixels, 'ic-ic12').pixelsPerPart).toBe(1);
+    expect(must(index.pixels, 'rgb5').pixelsPerPart).toBe(1);
+  });
+
   test('channel count comes from data.channels', () => {
     expect(must(index.pixels, 'ic-ic-unknown').channels).toBe(4);
     expect(buildPixelIcOption(entry('x', { data: { channels: 5 } })).channels).toBe(5);
@@ -394,8 +406,11 @@ describe('the real database builds a sane catalog', () => {
 
   test('every pixel has a usable power figure', () => {
     for (const pixel of catalog.pixels) {
-      expect(pixel.channels).toBeGreaterThanOrEqual(3);
-      expect(pixel.channels).toBeLessThanOrEqual(6);
+      // channels are per pixel: a many-output chip counts as several pixels
+      expect(pixel.channels).toBeGreaterThanOrEqual(1);
+      expect(pixel.channels).toBeLessThanOrEqual(5);
+      expect(Number.isInteger(pixel.pixelsPerPart)).toBe(true);
+      expect(pixel.pixelsPerPart).toBeGreaterThanOrEqual(1);
       expect(pixel.channelAmps).toBeGreaterThan(0);
       // one colour channel of an addressable pixel is tens of milliamps, not amps
       expect(pixel.channelAmps).toBeLessThan(0.1);

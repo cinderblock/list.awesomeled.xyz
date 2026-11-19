@@ -281,6 +281,18 @@ describe('controller current', () => {
   });
 });
 
+describe('driver chips that run several pixels', () => {
+  test('are bought once per few pixels', () => {
+    const a = analyze('p=ic-ic-triple&x=2&n=100&c=');
+    expect(a.groups[0].pixels).toBe(200);
+    expect(a.power.maxWatts).toBeCloseTo(200 * 3 * 0.018 * 12, 6);
+    const chips = line(a, 'pixel:ic-ic-triple@12');
+    expect(chips.qty).toBe(67); // 200 pixels ÷ 3 per chip, rounded up
+    expect(chips.totalUSD).toBeCloseTo(67 * 0.3, 6);
+    expect(chips.detail).toContain('one chip per 3 pixels (200 pixels)');
+  });
+});
+
 describe('controllers with a device-wide pixel limit', () => {
   test('pixels on groups sharing the controller add up', () => {
     // 1,500 + 1,500 pixels on a 2,400-pixel device: two units
