@@ -21,6 +21,7 @@ Seen by cross-links (stream 4). These entries describe one product twice:
 - `adapters/m8-port-pixel` and `controllers/m8-port-pixel`
 - `controllers/standard-differential-receiver` and `level-converters/standard-differential-receiver`
 - `diffusive-materials/silicone-sealant` carries Plastazote LD45 foam data (link, XLPE, sizes), duplicating `diffusive-materials/ld45-plaztazote`
+- `pixels/sm1616` is a typo placeholder for `pixel-ics/sm16716` (found by parity, stream 1): no SM1616 part exists anywhere, and the sheet row's only content is the SM16716 datasheet (sowbug/sm16716). Merge or delete; parity's alias follows
 
 Why it matters: specs drift apart, and compatibility links and filters show the
 product twice. Needs a keep/merge call (parity or standardization stream).
@@ -115,6 +116,17 @@ column, badges and the designer's controller facts. **Parity (stream 1):
 please don't restore or compare controllers' interfaces from that column**;
 treat it as unknown. Other Controllers columns follow their rows.
 
+Parity (stream 1): the parity tool no longer compares this column (16e4005).
+Parity's research also checked 16 controllers' inputs against maker docs
+(5aa72cd: DiGidot C4 Live 12 and C4 Extended 8, Falcon F16V4, Genius Pro 32,
+K16000S, LED Ethernet Controller 3, LeDMX4 MAX, MagWLED-1, Octo Mk2,
+Pixelator Mini, Pixelblaze V3, PixOut Server, ProtoPixel 1-ch Wi-Fi,
+QuinLED-Dig-Quad, SmartShow Pro ONE, SPI Matrix). Where stream 2's pass
+(de0730f) recorded the same facts, its encoding was kept on rebase and both
+citations merged. ENTTEC's ESP (ENTTEC Show Protocol) isn't in
+`control_protocol`, so the Octo Mk2, Pixel Octo and Pixelator note it in
+`technical_notes`; add it to the vocabulary if you want it as a protocol.
+
 ## Two "controllers" drive no pixels (parity / standardization)
 
 Found by cross-links research (stream 4), from the makers' own pages:
@@ -130,14 +142,10 @@ Why it matters: they show up in "what drives my pixels" filters and the
 designer. Keep (with outputs removed) or move out of controllers: the
 category call isn't stream 4's.
 
-## Sheet: a second "M8 Port Pixel" row is an ENTTEC product
-
-For parity (stream 1). The Controllers tab has two "M8 Port Pixel" rows. One
-is Microcyb's Pi HAT ($45, now `controllers/m8-port-pixel`, M8-PI). The other
-says ENTTEC, $400, 2 outputs, 60 V, discontinued, and links
-<https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/>:
-an ENTTEC DIN-rail pixel controller under the wrong name. No database entry
-seems to cover it; needs identifying from that URL (Wayback if dead).
+Parity (stream 1): PixOut's outputs and 24 V are gone, with the 2019 FAQ and
+the current product page cited (21de7d4); the category call is still open.
+Its `requires_host: Raspberry Pi` is doubtful for the boxed unit, which has
+the Pi inside.
 
 ## Pixels' `electrical.wattage` is one channel's power, not the pixel's (stream 2)
 
@@ -394,3 +402,57 @@ entries; not applied because they're existing spec values, not links:
   DMS Microelectronics, the creator on `pixel-ics/p9813`. If that's one
   company, one spelling (or a maker alias in `app/lib/relations.ts`) puts
   both under one "More from" row.
+
+## Facts to check, found by parity research (stream 2)
+
+Seen by parity's research agents (stream 1) on maker pages; not changed
+because they're outside the sheet rows being researched:
+
+- `pattern-drivers/leds-master`: `price: FOSS`, but the repository has no
+  license file; last commit 2021-04-25 (status `unknown`, maybe
+  `discontinued`); lists iOS, which its readme leaves unticked.
+- `controllers/digidot-c4-extended-8`: `max_per_output: 1024 # 4096 total
+channels` treats channels as pixels.
+- `controllers/pixelator-mini-px1-8d`: its manual (UM-71066) says 9-48 V
+  input; the entry has 7-24 V (the 2021 product page).
+- `controllers/protopixel-1-channel-wifi`: probably discontinued (product page
+  404; spec sheet: 680 px, Art-Net only).
+- `controllers/genius-pro-32-port`: connector name out of date; eFuses only on
+  the 2024 edition.
+- `pattern-drivers/qlc` (a price, for stream 6): the Raspberry Pi image now asks
+  a EUR 20 contribution; the tier and demo text say EUR 15.
+  <https://www.qlcplus.org/discover/raspberry-pi>
+- Controllers with a built-in mains supply record `power.voltage`
+  differently: QolorPIX the AC input, SceneX PP4 and PixLite 16 Plug and Play
+  the 5/12 V output. Needs a convention.
+- Pixel ICs `color.aggregate_bits`: the schema calls it "Total bits across
+  channels", but it came from the sheet's "Aggregate Bits" column (header
+  note: "Dimming for whole chip at once"), whose values read as effective
+  dimming bits: GS8202/GS8206/GS8208 12, P9813 8 (8-bit channels, no
+  chip-wide dimming; datasheet-checked), LPD8806 7, LPD6803 5.
+  `pixel-ics/ws2811` has 24, added by the import (not in the sheet),
+  following the schema's reading. Needs a definition, then the description
+  and WS2811 fixed to match.
+
+## Link fields for cross-links, from parity research (stream 4)
+
+- `inputs.requires_host`: PB16 says BeagleBone Black, but it's a PocketBeagle
+  board; WB1616 lacks its BeagleBone Black; K2-Pi0's maker names the Pi Zero
+  2 W.
+- Successors for `related`: Pixelator → `controllers/pixelator-mini-px1-8d`;
+  not in the database yet: Diamex LED-Player-ME (the LED-Player-M's
+  successor), Falcon F48V4/V5, Kulp K16/K32 Pro/Max.
+- FYI, slug renames: `microboards/teensy-2-0` → `teensy-plus-plus-2-0` and
+  `raspberry-pi-3-model-b` → `raspberry-pi-3-model-b-plus` (835460b); the old
+  slugs now hold the real Teensy 2.0 and Pi 3 Model B (9e791e7). Three
+  `related` refs that meant the B+ follow it (8a50b8d); the rest mean the Pi
+  3 family and stay.
+
+## Connector pictures from the sheet (images, stream 5)
+
+From parity (stream 1). The sheet's Connectors tab has a "Picture" column: 44
+connectors link a product photo on someone else's site (AliExpress CDN,
+pcboard.ca, scondar.com, ...). None are in YAML; the parity report lists them
+under Connectors → "Links not in YAML". Hosting our own images or linking is
+stream 5's call; they are the only open items left in
+[plans/spreadsheet-parity/report.md](plans/spreadsheet-parity/report.md).
