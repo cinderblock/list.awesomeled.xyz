@@ -12,11 +12,12 @@
  *   bun run validate controllers     # only one category folder
  */
 
-import { readFileSync, readdirSync, existsSync } from 'fs';
+import { readFileSync, readdirSync, existsSync, statSync } from 'fs';
 import { join } from 'path';
 import { parse, parseAllDocuments } from 'yaml';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import sharp from 'sharp';
 import type { BaseEntry } from '../app/lib/types';
 import { buildRelationGraph, type DanglingRef } from '../app/lib/relations';
 
@@ -79,6 +80,71 @@ function checkSources(data: Record<string, unknown>): string[] {
  * against the whole database even when validating a single category.
  * Unparseable files map to their error message instead of an entry.
  */
+const IMG_DIR = join('public', 'database-images');
+// scripts/crop-image.ts targets ≤1200 px and ≤200 KB; allow some slack before failing.
+const IMG_MAX_EDGE = 1200;
+const IMG_MAX_BYTES = 256 * 1024;
+const posix = (p: string) => p.split('\\').join('/');
+
+/**
+ * Image checks for one entry: every referenced file exists, is a processed WebP
+ * within budget, and carries attribution ({file, source, credit}). Collects the
+ * referenced paths for the orphan check.
+ */
+async function checkImages(
+  folder: string,
+  data: Record<string, unknown>,
+  referenced: Set<string>
+): Promise<string[]> {
+  const problems: string[] = [];
+  const items: unknown[] = [];
+  if (data.image != null) items.push(data.image);
+  if (Array.isArray(data.images)) items.push(...data.images);
+  for (const item of items) {
+    const obj = typeof item === 'string' ? { file: item } : (item as Record<string, unknown>);
+    const file = typeof obj?.file === 'string' ? obj.file : null;
+    if (!file) continue; // the schema reports shape problems
+    const rel = posix(join(IMG_DIR, folder, file));
+    referenced.add(rel);
+    if (!obj.source || !obj.credit) {
+      problems.push(`image "${file}": needs source + credit attribution (bun run add-image)`);
+    }
+    if (!file.endsWith('.webp')) {
+      problems.push(`image "${file}": must be a WebP processed by scripts/crop-image.ts`);
+    }
+    if (!existsSync(rel)) {
+      problems.push(`image "${file}": missing ${rel}`);
+      continue;
+    }
+    const bytes = statSync(rel).size;
+    if (bytes > IMG_MAX_BYTES) {
+      problems.push(
+        `image "${file}": ${Math.round(bytes / 1024)} KB (max ${IMG_MAX_BYTES / 1024} KB)`
+      );
+    }
+    const meta = await sharp(rel).metadata();
+    if (Math.max(meta.width ?? 0, meta.height ?? 0) > IMG_MAX_EDGE) {
+      problems.push(`image "${file}": ${meta.width}x${meta.height} (max ${IMG_MAX_EDGE}px edge)`);
+    }
+  }
+  return problems;
+}
+
+/** Image files no entry references (left behind by renames, merges, removals). */
+function findOrphanImages(referenced: Set<string>): string[] {
+  if (!existsSync(IMG_DIR)) return [];
+  const orphans: string[] = [];
+  for (const folder of readdirSync(IMG_DIR)) {
+    const dir = join(IMG_DIR, folder);
+    if (!statSync(dir).isDirectory()) continue;
+    for (const file of readdirSync(dir)) {
+      const rel = posix(join(dir, file));
+      if (!referenced.has(rel)) orphans.push(rel);
+    }
+  }
+  return orphans;
+}
+
 function loadAll(folders: string[]): Map<string, Map<string, BaseEntry | Error>> {
   const all = new Map<string, Map<string, BaseEntry | Error>>();
   for (const folder of folders) {
@@ -109,6 +175,7 @@ async function main() {
   let total = 0;
   let valid = 0;
   let errored = 0;
+  const referencedImages = new Set<string>();
 
   const folders = readdirSync(DB_DIR).filter(
     (f) => !f.startsWith('_') && existsSync(join(DB_DIR, f, '.')) && FOLDER_SCHEMAS[f]
@@ -157,6 +224,7 @@ async function main() {
           (p) => `${p.field} "${p.ref}": ${p.problem}`
         ),
         ...checkSources(data as Record<string, unknown>),
+        ...(await checkImages(folder, data as Record<string, unknown>, referencedImages)),
       ];
       if (validate(data) && refProblems.length === 0) {
         valid++;
@@ -214,6 +282,13 @@ async function main() {
         .map(([n, c]) => (c > 1 ? `${n} ×${c}` : n));
       console.log(`  ${field}: ${list.join(', ')}`);
     }
+  }
+
+  // Orphans only make sense when every category's references were collected
+  if (!only) {
+    const orphans = findOrphanImages(referencedImages);
+    for (const o of orphans) console.log(`  ✗ ${o}: image not referenced by any entry`);
+    errored += orphans.length;
   }
 
   console.log(`\n${'='.repeat(40)}\nTotal ${total} | valid ${valid} | errors ${errored}`);
