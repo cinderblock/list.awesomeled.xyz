@@ -102,22 +102,27 @@ export interface PriceInfo {
   text: string | null;
   /** ISO currency the price is published in; USD figures are converted from it */
   currency: string | null;
+  /** High end of a published range ("$3–8"), per unit in USD; null for a single figure */
+  maxUSD: number | null;
+  /** A starting price ("$330+"): larger editions cost more */
+  from: boolean;
   /** Who published the price ("LCSC"), when recorded */
   vendor?: string;
   /** YYYY-MM-DD (or YYYY-MM) the price was read */
   retrieved?: string;
 }
 
-const NO_PRICE: PriceInfo = { tiers: [], text: null, currency: null };
+const NO_PRICE: PriceInfo = { tiers: [], text: null, currency: null, maxUSD: null, from: false };
 
 /**
  * Price as quantity tiers in USD. Accepts a plain price (number, "$25",
- * {amount, currency}) or published quantity tiers ([{qty, price, sku}]).
+ * {amount, currency}), a range or starting price ("€299-799", "330+") or
+ * published quantity tiers ([{qty, price, sku}]). `raw` is the price value
+ * when it isn't the entry's `price` (pattern drivers keep it under `pricing`).
  */
-export function buildPrice(entry: BaseEntry): PriceInfo {
+export function buildPrice(entry: BaseEntry, raw: unknown = entry.price): PriceInfo {
   const source = dict(entry.price_source);
   const provenance = { vendor: str(source.vendor), retrieved: str(source.retrieved) };
-  const raw = entry.price;
 
   if (Array.isArray(raw)) {
     const tiers: PriceTier[] = [];
@@ -137,6 +142,8 @@ export function buildPrice(entry: BaseEntry): PriceInfo {
       tiers,
       text: formatPriceText({ amount: tiers[0].usd, currency: 'USD' }),
       currency,
+      maxUSD: null,
+      from: false,
       ...provenance,
     };
   }
@@ -148,6 +155,8 @@ export function buildPrice(entry: BaseEntry): PriceInfo {
     tiers: [{ qty: 1, usd }],
     text: formatPriceText(parsed),
     currency: parsed.currency,
+    maxUSD: parsed.max != null ? toUSD({ amount: parsed.max, currency: parsed.currency }) : null,
+    from: parsed.from === true,
     ...provenance,
   };
 }
@@ -158,6 +167,34 @@ export function unitPriceAt(price: PriceInfo, qty: number): PriceTier | null {
   let best = price.tiers[0];
   for (const tier of price.tiers) if (tier.qty <= qty) best = tier;
   return best;
+}
+
+export interface Cost {
+  /** The quantity tier the unit price comes from */
+  tier: PriceTier;
+  unitUSD: number;
+  /** High end per unit when the price is a published range */
+  unitMaxUSD: number | null;
+  totalUSD: number;
+  totalMaxUSD: number | null;
+  /** A starting price: the real figure may be higher */
+  from: boolean;
+}
+
+/** What `qty` of a part costs. A published range carries through to the total. */
+export function costOf(price: PriceInfo, qty: number): Cost | null {
+  const tier = unitPriceAt(price, qty);
+  if (!tier) return null;
+  // A range is a single-unit street price; quantity tiers are exact figures
+  const max = price.maxUSD != null && price.maxUSD > tier.usd ? price.maxUSD : null;
+  return {
+    tier,
+    unitUSD: tier.usd,
+    unitMaxUSD: max,
+    totalUSD: tier.usd * qty,
+    totalMaxUSD: max != null ? max * qty : null,
+    from: price.from,
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -710,6 +747,9 @@ export interface ShifterOption {
   maxVoltage: number | null;
   /** Package / form factor as written */
   interface?: string;
+  /** Lowest input it reads as high when powered for 5 V output (datasheet VIH) */
+  inputHighMin: number | null;
+  /** Push-pull outputs that can drive a cable; false for pass-gate / pull-up translators */
   buffered: boolean | null;
   /** A differential line receiver, not a logic-level buffer */
   differential: boolean;
@@ -729,6 +769,7 @@ export function buildShifterOption(entry: BaseEntry): ShifterOption {
     channels: num(io.channels),
     maxVoltage: looseVoltage(el.max_voltage),
     interface: iface,
+    inputHighMin: nominalVoltage(el.input_high_voltage),
     buffered: typeof io.buffered === 'boolean' ? io.buffered : null,
     differential: /differential/i.test(`${iface ?? ''} ${entry.name}`),
     price: buildPrice(entry),
@@ -804,9 +845,10 @@ export interface SourceOption {
   hardware: string[];
   /** Protocol tokens it can send to a controller */
   outputProtocols: string[];
+  /** Its price; no tiers when the database has no figure for it */
+  price: PriceInfo;
+  /** The price as written when it isn't a figure ("Free 1 universe", "39/week +") */
   priceText: string | null;
-  /** Price in USD when it is a single number or free */
-  priceUSD: number | null;
   license: string | null;
   /** Derived from the licence: true FOSS, false proprietary, null unknown */
   foss: boolean | null;
@@ -827,14 +869,11 @@ export function buildSourceOption(entry: BaseEntry): SourceOption {
   }
   const pricing = dict(entry.pricing);
   const rawPrice = pricing.price;
+  const price = buildPrice(entry, rawPrice);
   const priceText =
-    typeof rawPrice === 'string' || typeof rawPrice === 'number' ? String(rawPrice) : null;
-  let priceUSD: number | null = null;
-  if (typeof rawPrice === 'number') priceUSD = rawPrice;
-  else if (typeof rawPrice === 'string' && /^(free|foss)$/i.test(rawPrice.trim())) priceUSD = 0;
-  else if (typeof rawPrice === 'string' && /^\$?\d+(\.\d+)?$/.test(rawPrice.trim())) {
-    priceUSD = parseFloat(rawPrice.trim().replace('$', ''));
-  }
+    price.tiers.length === 0 && typeof rawPrice === 'string' && rawPrice.trim()
+      ? rawPrice.trim()
+      : null;
   const platforms = dict(entry.platforms);
 
   return {
@@ -846,8 +885,8 @@ export function buildSourceOption(entry: BaseEntry): SourceOption {
     platforms: flattenPlatforms(entry.platforms),
     hardware: strings(platforms.hardware),
     outputProtocols,
+    price,
     priceText,
-    priceUSD,
     license: str(entry.license) ?? null,
     foss: typeof entry.foss === 'boolean' ? entry.foss : null,
   };

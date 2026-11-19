@@ -55,6 +55,15 @@ export function fmtUsd(value: number): string {
   return `$${value.toLocaleString('en-US', digits)}`;
 }
 
+/**
+ * A cost that may be a published range or a starting price:
+ * "$139–$232", "Free–$399", "$330+", "$25".
+ */
+export function fmtCost(low: number, high?: number | null, from = false): string {
+  if (high != null && high > low) return `${fmtUsd(low)}–${fmtUsd(high)}`;
+  return from && low > 0 ? `${fmtUsd(low)}+` : fmtUsd(low);
+}
+
 /** Metres with a feet hint: "2 m (6.6 ft)" */
 export function fmtMeters(meters: number): string {
   return `${fmt(meters, 1)} m (${fmt(meters * 3.28084, 1)} ft)`;

@@ -463,6 +463,9 @@ function isWeatherproof(value: string | boolean | null): boolean {
 // ---------------------------------------------------------------------------
 // Level shifter
 
+/** Logic level of the controllers that need a shifter */
+export const LOW_LOGIC = 3.3;
+
 export interface ShifterFit {
   ok: boolean;
   /** Parts needed to cover every data line of the group */
@@ -502,6 +505,36 @@ export function evaluateShifter(
       'error',
       'shifter-voltage',
       `${shifter.name} is rated to ${volts(shifter.maxVoltage)}; the pixels' ${volts(logic)} logic is beyond it.`
+    );
+  }
+  // Can it read the controller? A buffer running from 5 V has an input
+  // threshold of its own: plain CMOS (74HC) wants 0.7 × VCC, which a 3.3 V
+  // output never reaches — the very problem the shifter is there to solve.
+  const out = controller ? dataVoltage(controller) : null;
+  if (shifter.inputHighMin != null) {
+    if (controller && out != null && out < shifter.inputHighMin - 0.01) {
+      add(
+        'warning',
+        'shifter-threshold',
+        `${shifter.name} needs ${volts(shifter.inputHighMin)} to read a high; ${controller.name} sends ${volts(out)}.`,
+        'Choose a part that reads 2 V as high: a 74HCT or 74AHCT buffer, or a dual-supply translator.'
+      );
+    } else if (out == null && shifter.inputHighMin > LOW_LOGIC) {
+      add(
+        'info',
+        'shifter-threshold',
+        `${shifter.name} needs ${volts(shifter.inputHighMin)} to read a high: more than a ${volts(LOW_LOGIC)} controller sends.`
+      );
+    }
+  }
+  // Can it drive the cable? Pass-gate translators hold the line high through
+  // a pull-up resistor: fine between chips, not down a lead to the pixels.
+  if (shifter.buffered === false) {
+    add(
+      'warning',
+      'shifter-drive',
+      `${shifter.name} is a pass-gate translator: its pull-up outputs can't drive a cable to the pixels.`,
+      'Choose a buffer with push-pull outputs.'
     );
   }
   if (controller && pixel && levelNeed(controller, pixel) === 'ok') {

@@ -21,8 +21,8 @@ import {
   emptyDesign,
   EXAMPLES,
   fmtFps,
+  fmtCost,
   fmtInt,
-  fmtUsd,
   fmtWatts,
   importDesignFile,
   indexCatalog,
@@ -173,7 +173,7 @@ function Summary({ analysis }: { analysis: Analysis }) {
         <div>
           <dt>Parts priced so far</dt>
           <dd>
-            {bom.priced > 0 ? fmtUsd(bom.totalUSD) : '—'}
+            {bom.priced > 0 ? fmtCost(bom.totalUSD, bom.totalMaxUSD, bom.open) : '—'}
             {bom.unpriced > 0 && <small> + {bom.unpriced} unpriced</small>}
           </dd>
         </div>
@@ -364,6 +364,8 @@ export function Designer({ catalog }: { catalog: Catalog }) {
           design lives in this page’s link.{' '}
           <Link to="/system-overview">New to pixel systems? See how the parts fit together.</Link>
         </p>
+        {/* On paper the name field is gone, so the name is printed here */}
+        {design.title.trim() && <p className="designer-print-title">{design.title.trim()}</p>}
       </header>
 
       <div className="designer-toolbar designer-no-print">
@@ -521,9 +523,7 @@ export function Designer({ catalog }: { catalog: Catalog }) {
               issues={sourceIssues}
               price={
                 analysis.source
-                  ? analysis.source.priceUSD != null
-                    ? fmtUsd(analysis.source.priceUSD)
-                    : (analysis.source.priceText ?? undefined)
+                  ? (analysis.source.price.text ?? analysis.source.priceText ?? undefined)
                   : undefined
               }
               summary={
@@ -657,7 +657,9 @@ export function Designer({ catalog }: { catalog: Catalog }) {
           </span>
           {analysis.bom.priced > 0 && (
             <span>
-              <strong>{fmtUsd(analysis.bom.totalUSD)}</strong>
+              <strong>
+                {fmtCost(analysis.bom.totalUSD, analysis.bom.totalMaxUSD, analysis.bom.open)}
+              </strong>
             </span>
           )}
           <span

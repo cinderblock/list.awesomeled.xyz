@@ -7,8 +7,8 @@ import {
   bomToMarkdown,
   bomToText,
   designQuery,
+  fmtCost,
   fmtInt,
-  fmtUsd,
   type Analysis,
   type BomLine,
 } from '~/lib/designer';
@@ -21,7 +21,7 @@ function qty(line: BomLine): string {
 
 function unitPrice(line: BomLine): string {
   if (line.unitUSD != null) {
-    const usd = fmtUsd(line.unitUSD);
+    const usd = fmtCost(line.unitUSD, line.unitMaxUSD, line.from);
     return line.priceText ? `${line.priceText} (≈ ${usd})` : usd;
   }
   return line.priceText ?? '—';
@@ -94,7 +94,9 @@ export function BomTable({ analysis }: { analysis: Analysis }) {
                   </th>
                   <td className="designer-num designer-bom-each">{unitPrice(line)}</td>
                   <td className="designer-num">
-                    {line.totalUSD != null ? fmtUsd(line.totalUSD) : '—'}
+                    {line.totalUSD != null
+                      ? fmtCost(line.totalUSD, line.totalMaxUSD, line.from)
+                      : '—'}
                   </td>
                 </tr>
               ))}
@@ -106,7 +108,7 @@ export function BomTable({ analysis }: { analysis: Analysis }) {
                 </th>
                 <td className="designer-bom-each" />
                 <td className="designer-num" data-testid="bom-total">
-                  {bom.priced > 0 ? fmtUsd(bom.totalUSD) : '—'}
+                  {bom.priced > 0 ? fmtCost(bom.totalUSD, bom.totalMaxUSD, bom.open) : '—'}
                 </td>
               </tr>
             </tfoot>

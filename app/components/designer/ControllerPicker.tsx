@@ -5,6 +5,7 @@ import {
   controllerPrice,
   describeLayout,
   evaluateController,
+  fmtCost,
   fmtInt,
   fmtUsd,
   fmtVolts,
@@ -32,6 +33,10 @@ interface Candidate {
   controller: ControllerOption;
   fit: ControllerFit;
   totalUSD: number | null;
+  /** High end when the price is a published range */
+  totalMaxUSD: number | null;
+  /** A starting price */
+  from: boolean;
   unitText: string | null;
 }
 
@@ -39,7 +44,7 @@ function priceLabel(c: Candidate): { main: string; sub?: string } {
   if (c.totalUSD == null) return { main: c.unitText ?? '—' };
   if (c.fit.units > 1) {
     return {
-      main: fmtUsd(c.totalUSD),
+      main: fmtCost(c.totalUSD, c.totalMaxUSD, c.from),
       sub: `${c.fit.units} × ${c.unitText ?? fmtUsd(c.totalUSD / c.fit.units)}`,
     };
   }
@@ -173,6 +178,8 @@ export function ControllerPicker({
         controller,
         fit,
         totalUSD: cost.totalUSD,
+        totalMaxUSD: cost.totalMaxUSD,
+        from: cost.from,
         unitText: controller.price.text ?? (cost.unitUSD != null ? fmtUsd(cost.unitUSD) : null),
       };
     });

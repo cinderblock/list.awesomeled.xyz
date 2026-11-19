@@ -102,6 +102,9 @@
   max-width: 44rem;
   margin: 0 auto;
 }
+.designer-print-title {
+  display: none;
+}
 .designer-intro a {
   color: var(--dz-accent);
   white-space: nowrap;
@@ -674,6 +677,15 @@ p.designer-slot-facts {
   margin: 0 0 0.6rem;
   line-height: 1.45;
 }
+.designer-picker-hint {
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+  margin: 0 0 0.6rem;
+  line-height: 1.6;
+}
+.designer-picker-hint .designer-badge {
+  margin-right: 0.25rem;
+}
 .designer-picker-more {
   margin-top: 0.5rem;
 }
@@ -1058,6 +1070,7 @@ p.designer-slot-facts {
   align-items: center;
   gap: 0.75rem;
   width: 100%;
+  min-height: calc(2.75rem + env(safe-area-inset-bottom));
   padding: 0.65rem 1.5rem calc(0.65rem + env(safe-area-inset-bottom)) 1rem;
   border-top: 1px solid var(--border);
   background: var(--background);
@@ -1087,6 +1100,31 @@ p.designer-slot-facts {
 @media (min-width: 1024px) {
   .designer-mobile-bar {
     display: none;
+  }
+}
+/* The compare tray and the toasts dock at the bottom of every page: here they
+   sit above the summary bar instead of under it */
+@media (max-width: 1023px) {
+  /* A floating pill on a tablet… */
+  body:has(.designer-mobile-bar) .compare-tray {
+    bottom: calc(2.75rem + env(safe-area-inset-bottom) + var(--space-3));
+  }
+  body:has(.designer-mobile-bar) .toaster {
+    bottom: calc(2.75rem + env(safe-area-inset-bottom) + 0.75rem);
+  }
+  body:has(.designer-mobile-bar):has(.compare-tray) .toaster {
+    bottom: calc(2.75rem + env(safe-area-inset-bottom) + 5rem);
+  }
+  body:has(.designer-mobile-bar):has(.compare-tray) .designer-page {
+    padding-bottom: 9.5rem;
+  }
+}
+@media (max-width: 640px) {
+  /* …and a docked strip on a phone, flush on top of the bar */
+  body:has(.designer-mobile-bar) .compare-tray {
+    bottom: calc(2.75rem + env(safe-area-inset-bottom));
+    border-bottom: 1px solid var(--border);
+    padding-bottom: var(--space-2);
   }
 }
 
@@ -1425,7 +1463,31 @@ p.designer-slot-facts {
   .dgm-label--title {
     fill: #111827;
   }
-  .designer-group-name::placeholder {
-    color: transparent;
+  /* The design's name heads the page; an unnamed group prints no empty box */
+  .designer-print-title {
+    display: block;
+    margin: 0.25rem 0 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+  }
+  .designer-group-name {
+    height: auto;
+    padding: 0;
+    border: 0;
+    font-weight: 600;
+  }
+  .designer-group-name:placeholder-shown {
+    display: none;
+  }
+  /* Optional slots left empty say nothing worth the paper, unless they carry a check */
+  .designer-slot:not(.designer-slot--filled):not(:has(.designer-issue)) {
+    display: none;
+  }
+  .designer-area-side {
+    margin-bottom: 1.25rem;
+  }
+  .designer-area-side > :last-child {
+    margin-bottom: 0;
   }
 }

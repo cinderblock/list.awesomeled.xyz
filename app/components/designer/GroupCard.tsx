@@ -6,7 +6,9 @@ import {
   dataVoltage,
   DEFAULTS,
   describeLayout,
+  costOf,
   fmtAmps,
+  fmtCost,
   fmtFps,
   fmtHz,
   fmtInt,
@@ -18,7 +20,6 @@ import {
   parseLayout,
   PROTOCOL_LABELS,
   stringLengths,
-  unitPriceAt,
   type Analysis,
   type Catalog,
   type GroupAnalysis,
@@ -213,7 +214,7 @@ export function GroupCard({
 
   // Parts to buy for this group: fewer than pixels when one chip drives several
   const pixelParts = pixel ? Math.ceil(group.pixels / pixel.pixelsPerPart) : 0;
-  const pixelTier = pixel ? unitPriceAt(pixel.price, pixelParts) : null;
+  const pixelCost = pixel ? costOf(pixel.price, pixelParts) : null;
   const use = controller
     ? analysis.controllers.find((u) => u.controller.id === controller.id)
     : null;
@@ -222,8 +223,8 @@ export function GroupCard({
     controller && use
       ? controllerPrice(controller, use.units, Math.ceil(use.pixels / use.units))
       : null;
-  const shifterTier =
-    shifter && group.shifterFit ? unitPriceAt(shifter.price, group.shifterFit.qty) : null;
+  const shifterCost =
+    shifter && group.shifterFit ? costOf(shifter.price, group.shifterFit.qty) : null;
   const level = group.controllerFit?.level ?? 'unknown';
   const out = controller ? dataVoltage(controller) : null;
 
@@ -277,11 +278,11 @@ export function GroupCard({
         action={pixel ? 'Change' : 'Choose'}
         issues={issuesFor(group, 'pixels')}
         price={
-          pixelTier ? (
+          pixelCost ? (
             <Tooltip
-              content={`${pixel?.price.vendor ?? 'Distributor'} price for the bare ${pixel?.kind === 'ic' ? 'chip' : 'LED'}${pixelTier.qty > 1 ? ` at ${fmtInt(pixelTier.qty)}+` : ''} (${fmtUsd(pixelTier.usd)} each). Strips, strings and modules cost more.`}
+              content={`${pixel?.price.vendor ?? 'Distributor'} price for the bare ${pixel?.kind === 'ic' ? 'chip' : 'LED'}${pixelCost.tier.qty > 1 ? ` at ${fmtInt(pixelCost.tier.qty)}+` : ''} (${fmtCost(pixelCost.unitUSD, pixelCost.unitMaxUSD, pixelCost.from)} each). Strips, strings and modules cost more.`}
             >
-              <span>≈ {fmtUsd(pixelTier.usd * pixelParts)}</span>
+              <span>≈ {fmtCost(pixelCost.totalUSD, pixelCost.totalMaxUSD, pixelCost.from)}</span>
             </Tooltip>
           ) : undefined
         }
@@ -372,7 +373,11 @@ export function GroupCard({
               <Tooltip content={controllerCost.priceNote}>
                 <span>
                   {use && use.units > 1
-                    ? fmtUsd(controllerCost.totalUSD)
+                    ? fmtCost(
+                        controllerCost.totalUSD,
+                        controllerCost.totalMaxUSD,
+                        controllerCost.from
+                      )
                     : (controller.price.text ?? fmtUsd(controllerCost.totalUSD))}
                 </span>
               </Tooltip>
@@ -448,8 +453,8 @@ export function GroupCard({
         action={shifter ? 'Change' : 'Add'}
         issues={issuesFor(group, 'shifter')}
         price={
-          shifter && shifterTier && group.shifterFit
-            ? fmtUsd(shifterTier.usd * group.shifterFit.qty)
+          shifterCost
+            ? fmtCost(shifterCost.totalUSD, shifterCost.totalMaxUSD, shifterCost.from)
             : undefined
         }
         summary={

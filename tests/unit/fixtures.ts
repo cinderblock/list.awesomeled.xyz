@@ -40,6 +40,14 @@ export const PIXELS: BaseEntry[] = [
     ],
     price_source: { vendor: 'LCSC', retrieved: '2026-07-03' },
   }),
+  // Sold at a street-price range rather than one figure
+  entry('range5', {
+    name: 'Range5',
+    color: { order: 'GRB' },
+    data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 24 },
+    electrical: { led_voltage: '5V', vcc_voltage: '5V', channel_current: '20mA' },
+    price: { amount: 0.1, max: 0.25 },
+  }),
   entry('rgb5-lowvih', {
     name: 'RGB5 LowVIH',
     color: { order: 'GRB' },
@@ -261,8 +269,8 @@ export const MICROBOARDS: BaseEntry[] = [
 export const LEVEL_CONVERTERS: BaseEntry[] = [
   entry('quad', {
     name: 'Quad Buffer',
-    io: { channels: 4, interface: 'DIP' },
-    electrical: { max_voltage: '5.5V' },
+    io: { channels: 4, interface: 'DIP', buffered: true },
+    electrical: { max_voltage: '5.5V', input_high_voltage: '2V' },
     price: [
       { qty: 1, price: 0.9, sku: 'QB' },
       { qty: 1000, price: 0.3, sku: 'QB' },
@@ -271,6 +279,20 @@ export const LEVEL_CONVERTERS: BaseEntry[] = [
   }),
   entry('octal', { name: 'Octal Buffer', io: { channels: 8 }, price: 1.5 }),
   entry('lowv', { name: 'LowV Translator', io: { channels: 2 }, electrical: { max_voltage: 3.6 } }),
+  // Plain CMOS inputs: 0.7 × VCC, out of a 3.3 V controller's reach
+  entry('cmos', {
+    name: 'CMOS Buffer',
+    io: { channels: 8, buffered: true },
+    electrical: { max_voltage: 6, input_high_voltage: '3.5V' },
+    price: 0.4,
+  }),
+  // Reads 3.3 V happily, but holds its outputs high through pull-up resistors
+  entry('passgate', {
+    name: 'Pass-Gate Translator',
+    io: { channels: 8, buffered: false },
+    electrical: { input_high_voltage: '2.9V' },
+    price: 0.7,
+  }),
   entry('diff', {
     name: 'Differential Receiver',
     io: { channels: 4, interface: 'Differential Pairs', buffered: true },
@@ -338,6 +360,12 @@ export const PATTERN_DRIVERS: BaseEntry[] = [
     outputs: { protocols: { sacn: 'Both' } },
     platforms: { hardware: ['PiBoard'] },
     pricing: { price: 'Free - $99' },
+  }),
+  entry('wordy', {
+    name: 'Wordy',
+    platforms: { os: ['Windows'] },
+    outputs: { protocols: { artnet: 'Output', sacn: 'Output' } },
+    pricing: { price: 'Free 1 universe' },
   }),
   entry('silent', { name: 'Silent', platforms: { os: ['Windows'] } }),
 ];

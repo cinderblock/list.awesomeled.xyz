@@ -14,7 +14,7 @@
 
 import { formatPriceText } from '../currency';
 import {
-  unitPriceAt,
+  costOf,
   type CatalogIndex,
   type ControllerOption,
   type PixelOption,
@@ -40,8 +40,14 @@ export interface BomLine {
   qty: number;
   /** Unit of the quantity when it isn't pieces ("pairs", "runs") */
   unit?: string;
+  /** Low end when the price is a published range */
   unitUSD: number | null;
   totalUSD: number | null;
+  /** High end of a published range ("$3–8" each) */
+  unitMaxUSD?: number | null;
+  totalMaxUSD?: number | null;
+  /** A starting price ("$330+") */
+  from?: boolean;
   /** Price as published when it isn't a plain USD figure ("€120", "Free - $399") */
   priceText?: string;
   /** What the price is for, and its caveats */
@@ -50,8 +56,12 @@ export interface BomLine {
 
 export interface Bom {
   lines: BomLine[];
-  /** Sum of the lines that have a price */
+  /** Sum of the lines that have a price (the low end of any ranges) */
   totalUSD: number;
+  /** The same sum with every range at its high end; equals totalUSD without ranges */
+  totalMaxUSD: number;
+  /** Some line is a starting price, so the real total may be higher still */
+  open: boolean;
   /** Database parts with / without a usable price */
   priced: number;
   unpriced: number;
@@ -71,13 +81,28 @@ function n(value: number, digits = 0): string {
 }
 
 function priced(price: PriceInfo, qty: number) {
-  const tier = unitPriceAt(price, qty);
+  const cost = costOf(price, qty);
   return {
-    tier,
-    unitUSD: tier?.usd ?? null,
-    totalUSD: tier ? tier.usd * qty : null,
+    tier: cost?.tier ?? null,
+    unitUSD: cost?.unitUSD ?? null,
+    unitMaxUSD: cost?.unitMaxUSD ?? null,
+    totalUSD: cost?.totalUSD ?? null,
+    totalMaxUSD: cost?.totalMaxUSD ?? null,
+    from: cost?.from ?? false,
     // Show the published figure next to the USD conversion for other currencies
     priceText: price.currency && price.currency !== 'USD' ? (price.text ?? undefined) : undefined,
+  };
+}
+
+/** The money fields of a parts-list line */
+function money(p: ReturnType<typeof priced>) {
+  return {
+    unitUSD: p.unitUSD,
+    unitMaxUSD: p.unitMaxUSD,
+    totalUSD: p.totalUSD,
+    totalMaxUSD: p.totalMaxUSD,
+    from: p.from,
+    priceText: p.priceText,
   };
 }
 
@@ -101,7 +126,10 @@ export function controllerPrice(
   return {
     tier: null,
     unitUSD: tier.usd,
+    unitMaxUSD: null,
     totalUSD: tier.usd * units,
+    totalMaxUSD: null,
+    from: false,
     priceText: undefined,
     priceNote: fits
       ? `“${tier.name}” tier`
@@ -144,9 +172,7 @@ export function buildBom(input: BomInput): Bom {
       path: pixel.path,
       detail: where.join('; '),
       qty,
-      unitUSD: p.unitUSD,
-      totalUSD: p.totalUSD,
-      priceText: p.priceText,
+      ...money(p),
       priceNote: p.tier
         ? `${pixel.price.vendor ?? 'Distributor'} price for the bare ${what}${p.tier.qty > 1 ? ` at ${n(p.tier.qty)}+` : ''}; strips, strings and modules cost more`
         : undefined,
@@ -172,9 +198,7 @@ export function buildBom(input: BomInput): Bom {
           ? `${capacity}, shared by ${use.groups.map((i) => groups[i].label).join(', ')}`
           : capacity,
       qty: use.units,
-      unitUSD: p.unitUSD,
-      totalUSD: p.totalUSD,
-      priceText: p.priceText,
+      ...money(p),
       priceNote: p.priceNote,
     });
 
@@ -189,9 +213,7 @@ export function buildBom(input: BomInput): Bom {
         path: host?.path,
         detail: `${c.name} plugs into it`,
         qty: use.units,
-        unitUSD: hp?.unitUSD ?? null,
-        totalUSD: hp?.totalUSD ?? null,
-        priceText: hp?.priceText,
+        ...(hp ? money(hp) : { unitUSD: null, totalUSD: null }),
       });
     }
   }
@@ -224,9 +246,7 @@ export function buildBom(input: BomInput): Bom {
         ? `${n(dataLines)} data line${dataLines === 1 ? '' : 's'}, ${shifter.channels} per part`
         : `${n(dataLines)} data line${dataLines === 1 ? '' : 's'}`,
       qty,
-      unitUSD: p.unitUSD,
-      totalUSD: p.totalUSD,
-      priceText: p.priceText,
+      ...money(p),
       priceNote:
         p.tier && shifter.price.vendor
           ? `${shifter.price.vendor} price${p.tier.qty > 1 ? ` at ${n(p.tier.qty)}+` : ''}`
@@ -246,13 +266,12 @@ export function buildBom(input: BomInput): Bom {
       detail: 'one mating pair per string',
       qty,
       unit: 'pairs',
-      unitUSD: p.unitUSD,
-      totalUSD: p.totalUSD,
-      priceText: p.priceText,
+      ...money(p),
     });
   }
 
   if (source) {
+    const p = priced(source.price, 1);
     lines.push({
       key: `source:${source.id}`,
       section: 'parts',
@@ -260,9 +279,9 @@ export function buildBom(input: BomInput): Bom {
       name: source.name,
       path: source.path,
       qty: 1,
-      unitUSD: source.priceUSD,
-      totalUSD: source.priceUSD,
-      priceText: source.priceUSD == null ? (source.priceText ?? undefined) : undefined,
+      ...money(p),
+      // A price that isn't a figure ("Free 1 universe") is shown as written
+      priceText: p.priceText ?? (p.unitUSD == null ? (source.priceText ?? undefined) : undefined),
     });
   }
 
@@ -318,6 +337,8 @@ export function buildBom(input: BomInput): Bom {
   return {
     lines,
     totalUSD: lines.reduce((sum, l) => sum + (l.totalUSD ?? 0), 0),
+    totalMaxUSD: lines.reduce((sum, l) => sum + (l.totalMaxUSD ?? l.totalUSD ?? 0), 0),
+    open: lines.some((l) => l.from === true && l.totalUSD != null),
     priced: parts.filter((l) => l.totalUSD != null).length,
     unpriced: parts.filter((l) => l.totalUSD == null).length,
   };
@@ -330,9 +351,16 @@ export function formatUSD(value: number, cents = true): string {
   return formatPriceText({ amount: value, currency: 'USD' }, cents);
 }
 
+/** "$139.00–$232.00", "$330.00+", "Free": a figure, a published range or a starting price */
+function usdRange(low: number, high?: number | null, from = false, cents = true): string {
+  const one = (value: number) => (value === 0 ? 'Free' : formatUSD(value, cents));
+  if (high != null && high > low) return `${one(low)}–${one(high)}`;
+  return from && low > 0 ? `${one(low)}+` : one(low);
+}
+
 function unitCell(line: BomLine): string {
   if (line.unitUSD != null) {
-    const usd = line.unitUSD === 0 ? 'Free' : formatUSD(line.unitUSD, false);
+    const usd = usdRange(line.unitUSD, line.unitMaxUSD, line.from, false);
     return line.priceText ? `${line.priceText} (≈ ${usd})` : usd;
   }
   return line.priceText ?? '—';
@@ -340,7 +368,7 @@ function unitCell(line: BomLine): string {
 
 function totalCell(line: BomLine): string {
   if (line.totalUSD == null) return '—';
-  return line.totalUSD === 0 ? 'Free' : formatUSD(line.totalUSD);
+  return usdRange(line.totalUSD, line.totalMaxUSD, line.from);
 }
 
 function qtyCell(line: BomLine): string {
@@ -349,7 +377,7 @@ function qtyCell(line: BomLine): string {
 
 export function bomSummary(bom: Bom): string {
   if (bom.priced === 0) return 'No prices recorded for these parts';
-  const total = formatUSD(bom.totalUSD);
+  const total = usdRange(bom.totalUSD, bom.totalMaxUSD, bom.open);
   return bom.unpriced === 0
     ? `${total} for all ${bom.priced} parts`
     : `${total} for ${bom.priced} of ${bom.priced + bom.unpriced} parts (${bom.unpriced} ${bom.unpriced === 1 ? 'has' : 'have'} no recorded price)`;
@@ -423,7 +451,9 @@ export function bomToCsv(bom: Bom, options: BomExportOptions): string {
     'Qty',
     'Unit',
     'Unit price (USD)',
+    'Unit price high (USD)',
     'Total (USD)',
+    'Total high (USD)',
     'Price as published',
     'Price note',
     'Link',
@@ -436,7 +466,9 @@ export function bomToCsv(bom: Bom, options: BomExportOptions): string {
     l.qty,
     l.unit,
     l.unitUSD != null ? Number(l.unitUSD.toFixed(4)) : null,
+    l.unitMaxUSD != null ? Number(l.unitMaxUSD.toFixed(4)) : null,
     l.totalUSD != null ? Number(l.totalUSD.toFixed(2)) : null,
+    l.totalMaxUSD != null ? Number(l.totalMaxUSD.toFixed(2)) : null,
     l.priceText,
     l.priceNote,
     l.path ? options.origin + l.path : null,

@@ -345,11 +345,55 @@ describe('host boards and licence tiers in the BOM', () => {
     expect(eur.unitUSD).toBeGreaterThan(20);
   });
 
-  test('software with a price range is listed but not totalled', () => {
+  test('software with a price range adds a range to the total', () => {
     const a = analyze('p=rgb5&x=1&n=50&c=big16&g=player');
     const software = line(a, 'source:player');
+    expect(software.totalUSD).toBe(0);
+    expect(software.totalMaxUSD).toBe(99);
+    expect(a.bom.totalMaxUSD - a.bom.totalUSD).toBeCloseTo(99, 9);
+    expect(a.bom.unpriced).toBe(0);
+  });
+
+  test('software priced in words is listed as written, not totalled', () => {
+    const a = analyze('p=rgb5&x=1&n=50&c=big16&g=wordy');
+    const software = line(a, 'source:wordy');
     expect(software.totalUSD).toBeNull();
-    expect(software.priceText).toBe('Free - $99');
+    expect(software.priceText).toBe('Free 1 universe');
+    expect(a.bom.unpriced).toBe(1);
+  });
+});
+
+describe('price ranges in the BOM', () => {
+  const a = analyze('p=range5&x=2&n=100&c=big16');
+  const pixels = a.bom.lines.find((l) => l.key.startsWith('pixel:'))!;
+
+  test('a part sold at a range gives a range, per unit and in total', () => {
+    expect(pixels.unitUSD).toBe(0.1);
+    expect(pixels.unitMaxUSD).toBe(0.25);
+    expect(pixels.totalUSD).toBeCloseTo(20, 9);
+    expect(pixels.totalMaxUSD).toBeCloseTo(50, 9);
+  });
+
+  test('the grand total spans the low and high ends', () => {
+    // big16 is $280, a single figure
+    expect(a.bom.totalUSD).toBeCloseTo(300, 9);
+    expect(a.bom.totalMaxUSD).toBeCloseTo(330, 9);
+    expect(a.bom.open).toBe(false);
+    expect(bomSummary(a.bom)).toBe('$300.00–$330.00 for all 2 parts');
+  });
+
+  test('a design without ranges has equal ends', () => {
+    const plain = analyze('p=rgb5&x=1&n=10&c=big16').bom;
+    expect(plain.totalMaxUSD).toBe(plain.totalUSD);
+    expect(plain.lines.every((l) => l.totalMaxUSD == null)).toBe(true);
+  });
+
+  test('exports carry the range', () => {
+    const options = { title: 'T', origin: 'https://example.test', url: 'https://example.test/d' };
+    expect(bomToMarkdown(a.bom, options)).toContain('| $0.10–$0.25 | $20.00–$50.00 |');
+    expect(bomToText(a.bom, options)).toContain('200 × Range5 (Pixels) — $20.00–$50.00');
+    const row = bomToCsv(a.bom, options).split('\r\n')[1];
+    expect(row).toContain(',200,,0.1,0.25,20,50,');
   });
 });
 
@@ -386,10 +430,10 @@ describe('BOM exports', () => {
     const csv = bomToCsv(a.bom, options);
     const rows = csv.trimEnd().split('\r\n');
     expect(rows[0]).toBe(
-      'Section,Category,Part,Detail,Qty,Unit,Unit price (USD),Total (USD),Price as published,Price note,Link'
+      'Section,Category,Part,Detail,Qty,Unit,Unit price (USD),Unit price high (USD),Total (USD),Total high (USD),Price as published,Price note,Link'
     );
     expect(rows).toHaveLength(a.bom.lines.length + 1);
-    expect(rows[1]).toContain('Part,Pixels,RGB5,8 × 500,4000,,0.06,240,');
+    expect(rows[1]).toContain('Part,Pixels,RGB5,8 × 500,4000,,0.06,,240,,');
     expect(rows[1]).toContain(
       '"LCSC price for the bare LED at 1,000+; strips, strings and modules cost more"'
     );

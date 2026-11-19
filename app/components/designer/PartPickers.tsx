@@ -5,13 +5,13 @@ import {
   evaluateConnector,
   evaluateShifter,
   evaluateSource,
+  costOf,
   fmtAmps,
-  fmtUsd,
+  fmtCost,
   fmtVolts,
   isRetired,
   PROTOCOL_LABELS,
   STANDALONE,
-  unitPriceAt,
   wiresNeeded,
   type ConnectorOption,
   type ControllerOption,
@@ -54,12 +54,18 @@ export function ShifterPicker({ shifters, group, onSelect }: ShifterPickerProps)
         pixel: group.pixel,
         lines: group.dataLines,
       });
-      const tier = unitPriceAt(shifter.price, fit.qty);
-      return { shifter, fit, totalUSD: tier ? tier.usd * fit.qty : null };
+      const cost = costOf(shifter.price, fit.qty);
+      // Parts that can't read the controller or drive the cable go last
+      const doubts = fit.issues.filter(
+        (i) => i.code === 'shifter-threshold' || i.code === 'shifter-drive'
+      ).length;
+      return { shifter, fit, doubts, cost, totalUSD: cost?.totalUSD ?? null };
     })
     .sort(
       (a, b) =>
+        Number(b.shifter.id === selectedId) - Number(a.shifter.id === selectedId) ||
         Number(b.fit.ok) - Number(a.fit.ok) ||
+        a.doubts - b.doubts ||
         Number(a.shifter.differential) - Number(b.shifter.differential) ||
         (a.totalUSD ?? Infinity) - (b.totalUSD ?? Infinity) ||
         a.shifter.name.localeCompare(b.shifter.name)
@@ -69,11 +75,13 @@ export function ShifterPicker({ shifters, group, onSelect }: ShifterPickerProps)
     <div className="designer-picker">
       <p className="designer-picker-count">
         {group.dataLines} data line{group.dataLines === 1 ? '' : 's'} to convert
-        {group.pixel?.clocked ? ' (data and clock for each string)' : ' (one per string)'}. A buffer
-        with 5 V outputs sits right next to the controller, before the cable to the pixels.
+        {group.pixel?.clocked ? ' (data and clock for each string)' : ' (one per string)'}. The
+        shifter sits right next to the controller, before the cable to the pixels: it has to read
+        the controller’s 3.3 V as a high and drive that cable at 5 V. Buffers that do both come
+        first.
       </p>
       <ul className="designer-options">
-        {rows.map(({ shifter: s, fit, totalUSD }) => {
+        {rows.map(({ shifter: s, fit, cost }) => {
           const selected = s.id === selectedId;
           return (
             <li
@@ -98,6 +106,7 @@ export function ShifterPicker({ shifters, group, onSelect }: ShifterPickerProps)
                         ? `${s.channels} channel${s.channels === 1 ? '' : 's'}`
                         : 'channels?',
                       s.interface,
+                      s.inputHighMin != null ? `reads ${fmtVolts(s.inputHighMin)} as high` : null,
                       s.maxVoltage != null ? `up to ${fmtVolts(s.maxVoltage)}` : null,
                     ]
                       .filter(Boolean)
@@ -106,10 +115,10 @@ export function ShifterPicker({ shifters, group, onSelect }: ShifterPickerProps)
                   <RowNote issues={fit.issues} />
                 </span>
                 <span className="designer-option-price">
-                  {totalUSD != null ? fmtUsd(totalUSD) : '—'}
-                  {totalUSD != null && fit.qty > 1 && (
+                  {cost ? fmtCost(cost.totalUSD, cost.totalMaxUSD, cost.from) : '—'}
+                  {cost && fit.qty > 1 && (
                     <small>
-                      {fit.qty} × {fmtUsd(totalUSD / fit.qty)}
+                      {fit.qty} × {fmtCost(cost.unitUSD, cost.unitMaxUSD, cost.from)}
                     </small>
                   )}
                 </span>
@@ -189,7 +198,7 @@ export function ConnectorPicker({ connectors, group, outdoor, onSelect }: Connec
                   <CircleCheck size={12} aria-hidden="true" /> on {group.controller?.name}
                 </span>
               )}
-              {c.ipText && (
+              {c.ip != null && c.ipText && (
                 <span className="designer-badge designer-badge--neutral">{c.ipText}</span>
               )}
             </span>
@@ -311,6 +320,10 @@ export function SourcePicker({ sources, controllers, selected, onSelect }: Sourc
   const fits = rows.filter((r) => r.fit.ok || r.source.id === selected);
   const unfit = rows.filter((r) => !r.fit.ok && r.source.id !== selected);
   const allStandalone = controllers.length > 0 && controllers.every((c) => c.standalone);
+  // Controllers whose accepted protocols the database doesn't record
+  const unverified = controllers.filter(
+    (c) => c.inputProtocols.length === 0 && fits.some((r) => r.fit.links.includes('unverified'))
+  );
 
   const row = ({ source: s, fit }: (typeof rows)[number], selectable: boolean) => {
     const isSelected = s.id === selected;
@@ -363,9 +376,7 @@ export function SourcePicker({ sources, controllers, selected, onSelect }: Sourc
             </span>
             <RowNote issues={fit.issues} />
           </span>
-          <span className="designer-option-price">
-            {s.priceUSD != null ? fmtUsd(s.priceUSD) : (s.priceText ?? '')}
-          </span>
+          <span className="designer-option-price">{s.price.text ?? s.priceText ?? ''}</span>
         </button>
         <Link className="designer-option-link" to={s.path}>
           details
@@ -386,6 +397,16 @@ export function SourcePicker({ sources, controllers, selected, onSelect }: Sourc
               )
               .join(', ')}: over a shared network protocol, or running on the controller itself.`}
       </p>
+      {unverified.length > 0 && (
+        <p className="designer-picker-hint">
+          <span className="designer-badge designer-badge--warn">verify</span> The database doesn’t
+          record which protocols {unverified.map((c) => c.name).join(' or ')} accepts
+          {unverified.some((c) => c.kind === 'board')
+            ? ' (a dev board takes them from its firmware)'
+            : ''}
+          , so these can’t be confirmed here: check its documentation.
+        </p>
+      )}
       <div className="designer-picker-tools">
         <label className="designer-search">
           <Search size={15} aria-hidden="true" />

@@ -5,6 +5,7 @@ import {
   buildPixelIcOption,
   buildPixelOption,
   buildPrice,
+  costOf,
   buildShifterOption,
   buildSourceOption,
   isRetired,
@@ -309,7 +310,8 @@ describe('level shifters, connectors and sources', () => {
       })
     );
     expect(seq.outputProtocols).toEqual(['artnet', 'sacn', 'kinet']);
-    expect(seq.priceUSD).toBe(0);
+    expect(seq.price.tiers[0].usd).toBe(0);
+    expect(seq.price.text).toBe('Free');
 
     const fw = buildSourceOption(
       entry('f', {
@@ -321,9 +323,15 @@ describe('level shifters, connectors and sources', () => {
     );
     expect(fw.hardware).toEqual(['ESP32']);
     expect(fw.nameKeys).toEqual(['fw', 'fw']);
-    expect(fw.priceUSD).toBeNull();
-    expect(fw.priceText).toBe('Free - $99');
-    expect(buildSourceOption(entry('p', { pricing: { price: 299 } })).priceUSD).toBe(299);
+    // A range is a figure with two ends; free text stays as written
+    expect(fw.price.tiers[0].usd).toBe(0);
+    expect(fw.price.maxUSD).toBe(99);
+    expect(fw.price.text).toBe('Free–$99');
+    expect(fw.priceText).toBeNull();
+    expect(buildSourceOption(entry('p', { pricing: { price: 299 } })).price.tiers[0].usd).toBe(299);
+    const odd = buildSourceOption(entry('o', { pricing: { price: 'Free 1 universe' } }));
+    expect(odd.price.tiers).toHaveLength(0);
+    expect(odd.priceText).toBe('Free 1 universe');
   });
 
   test('sources that can neither send a protocol nor run on a board are left out', () => {
@@ -361,6 +369,43 @@ describe('prices', () => {
       expect(unitPriceAt(price, 10)).toBeNull();
     }
     expect(buildPrice(entry('f', { price: 'free' })).tiers[0].usd).toBe(0);
+  });
+
+  test('a published range keeps both ends through to the total', () => {
+    const price = buildPrice(entry('p', { price: { amount: 0.1, max: 0.25 } }));
+    expect(price.text).toBe('$0.10–0.25');
+    expect(price.maxUSD).toBe(0.25);
+    const cost = costOf(price, 200);
+    expect(cost?.unitUSD).toBe(0.1);
+    expect(cost?.unitMaxUSD).toBe(0.25);
+    expect(cost?.totalUSD).toBeCloseTo(20, 9);
+    expect(cost?.totalMaxUSD).toBeCloseTo(50, 9);
+    expect(cost?.from).toBe(false);
+  });
+
+  test('ranges in another currency convert at both ends', () => {
+    const price = buildPrice(entry('p', { price: '€100-200' }));
+    expect(price.currency).toBe('EUR');
+    const cost = costOf(price, 1)!;
+    expect(cost.unitMaxUSD! / cost.unitUSD).toBeCloseTo(2, 9);
+  });
+
+  test('a starting price is marked as one', () => {
+    const cost = costOf(buildPrice(entry('p', { price: '330+' })), 2);
+    expect(cost?.totalUSD).toBe(660);
+    expect(cost?.totalMaxUSD).toBeNull();
+    expect(cost?.from).toBe(true);
+  });
+
+  test('a single figure has no range, and quantity tiers ignore one', () => {
+    expect(costOf(buildPrice(entry('p', { price: 25 })), 3)).toMatchObject({
+      unitUSD: 25,
+      unitMaxUSD: null,
+      totalUSD: 75,
+      totalMaxUSD: null,
+      from: false,
+    });
+    expect(costOf(buildPrice(entry('p', { price: 'varies' })), 3)).toBeNull();
   });
 });
 

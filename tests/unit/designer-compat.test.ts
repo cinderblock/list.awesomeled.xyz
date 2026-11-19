@@ -404,6 +404,65 @@ describe('level shifters', () => {
     expect(codes(right.issues)).not.toContain('shifter-differential');
   });
 
+  test('a buffer with TTL-level inputs reads a 3.3 V controller', () => {
+    const result = evaluateShifter(shifter('quad'), {
+      controller: controller('mb-esp'),
+      pixel: pixel('rgb5'),
+      lines: 1,
+    });
+    expect(codes(result.issues)).not.toContain('shifter-threshold');
+    expect(codes(result.issues)).not.toContain('shifter-drive');
+  });
+
+  test('a plain CMOS buffer can’t: its own threshold is above 3.3 V', () => {
+    const result = evaluateShifter(shifter('cmos'), {
+      controller: controller('mb-esp'),
+      pixel: pixel('rgb5'),
+      lines: 1,
+    });
+    const issue = find(result.issues, 'shifter-threshold');
+    expect(issue?.severity).toBe('warning');
+    expect(issue?.message).toContain('3.5 V');
+    expect(issue?.message).toContain('3.3 V');
+    // A warning, like the missing shifter it stands in for: it often works
+    expect(result.ok).toBe(true);
+  });
+
+  test('the same buffer behind 5 V logic has nothing to read wrong', () => {
+    const result = evaluateShifter(shifter('cmos'), {
+      controller: controller('big16'),
+      pixel: pixel('rgb5'),
+      lines: 1,
+    });
+    expect(codes(result.issues)).not.toContain('shifter-threshold');
+  });
+
+  test('before a controller is chosen the high threshold is only noted', () => {
+    const result = evaluateShifter(shifter('cmos'), { controller: null, pixel: null, lines: 1 });
+    expect(find(result.issues, 'shifter-threshold')?.severity).toBe('info');
+    const fine = evaluateShifter(shifter('quad'), { controller: null, pixel: null, lines: 1 });
+    expect(codes(fine.issues)).not.toContain('shifter-threshold');
+  });
+
+  test('a pass-gate translator can’t drive the cable to the pixels', () => {
+    const result = evaluateShifter(shifter('passgate'), {
+      controller: controller('mb-esp'),
+      pixel: pixel('rgb5'),
+      lines: 1,
+    });
+    expect(find(result.issues, 'shifter-drive')?.severity).toBe('warning');
+    expect(codes(result.issues)).not.toContain('shifter-threshold');
+  });
+
+  test('parts with nothing recorded are not second-guessed', () => {
+    const result = evaluateShifter(shifter('octal'), {
+      controller: controller('mb-esp'),
+      pixel: pixel('rgb5'),
+      lines: 1,
+    });
+    expect(result.issues).toEqual([]);
+  });
+
   test('a shifter on already-5 V outputs is noted as optional', () => {
     const result = evaluateShifter(shifter('quad'), {
       controller: controller('big16'),

@@ -34,7 +34,11 @@ function slot(page: Page, id: string) {
 
 /** Open a slot's picker and return its panel */
 async function openPicker(page: Page, id: string) {
-  await slot(page, id).locator('.designer-slot-toggle').click();
+  const toggle = slot(page, id).locator('.designer-slot-toggle');
+  // Fixed bars (the site header, the phone's summary bar) cover the viewport's
+  // edges: bring the button to the middle before clicking it
+  await toggle.evaluate((el) => el.scrollIntoView({ block: 'center' }));
+  await toggle.click();
   const panel = page.locator(`#slot-${id}-panel`);
   await expect(panel).toBeVisible();
   return panel;
@@ -277,6 +281,34 @@ test.describe('System Designer: checks', () => {
     await expect(page.locator('#designer-diagram svg.dgm')).toContainText('SN74AHCT125N');
   });
 
+  test('a shifter that can’t do the job is flagged and listed last', async ({ page }) => {
+    // 74HC245 has plain CMOS inputs: at 5 V it needs 3.5 V to read a high
+    await open(page, '/designer?p=apa102&x=2&n=144&c=mb-esp-32s&l=74hc245');
+    const shifterSlot = slot(page, 'g0-shifter');
+    await expect(shifterSlot.locator('[data-code="shifter-threshold"]')).toContainText('3.3 V');
+
+    const shifters = await openPicker(page, 'g0-shifter');
+    // Deselect it: the list goes back to its own order
+    await shifters.locator('[data-id="74hc245"] > button').click();
+    await openPicker(page, 'g0-shifter');
+    const order = await shifters
+      .locator('.designer-option')
+      .evaluateAll((items) => items.map((item) => item.getAttribute('data-id')));
+    expect(order.indexOf('sn74ahct125n')).toBeGreaterThanOrEqual(0);
+    expect(order.indexOf('sn74ahct125n')).toBeLessThan(order.indexOf('74hc245'));
+    expect(order.indexOf('sn74ahct125n')).toBeLessThan(order.indexOf('txs0108e'));
+    // A pass-gate translator reads 3.3 V fine but can't drive the cable
+    await expect(shifters.locator('[data-id="txs0108e"]')).toContainText('pass-gate');
+  });
+
+  test('software that can’t be confirmed for a controller says why', async ({ page }) => {
+    // A dev board's protocols depend on the firmware flashed onto it
+    await open(page, '/designer?p=ws2812&x=1&n=150&c=mb-esp-32s');
+    const sources = await openPicker(page, 'system-source');
+    await expect(sources.locator('.designer-picker-hint')).toContainText('ESP-32S');
+    await expect(sources.locator('.designer-picker-hint')).toContainText('firmware');
+  });
+
   test('outdoors, connectors are checked for sealing', async ({ page }) => {
     await open(page, '/designer?p=ws2812&x=2&n=100&k=dupont');
     const connectorSlot = slot(page, 'g0-connector');
@@ -399,6 +431,24 @@ test.describe('System Designer: saving and sharing', () => {
     expect(markdown).toContain('| Qty | Part | Category | Unit | Total |');
     expect(markdown).toContain('[WS2812]');
     expect(markdown).toContain(`/designer?${DESIGN}`);
+  });
+
+  test('on paper the design is there and the controls are not', async ({ page }) => {
+    await open(page, `/designer?${DESIGN}&gn=Roof+line&t=Garage+roof`);
+    await page.emulateMedia({ media: 'print' });
+
+    // The name field is a control; the name itself heads the page
+    await expect(page.locator('.designer-toolbar')).toBeHidden();
+    await expect(page.locator('.designer-print-title')).toHaveText('Garage roof');
+    await expect(page.locator('.designer-group-name')).toHaveValue('Roof line');
+    // Chosen parts stay; optional slots left empty take no space
+    await expect(slot(page, 'g0-controller')).toBeVisible();
+    await expect(slot(page, 'g0-controller').locator('.designer-slot-toggle')).toBeHidden();
+    await expect(slot(page, 'g0-connector')).toBeHidden();
+    await expect(page.locator('#designer-power')).toBeVisible();
+    await expect(page.locator('#designer-bom [data-key="controller:falcon-f16v5"]')).toBeVisible();
+    await expect(page.locator('#designer-bom').getByRole('button')).toHaveCount(0);
+    await expect(page.locator('#designer-diagram svg.dgm')).toBeVisible();
   });
 });
 
