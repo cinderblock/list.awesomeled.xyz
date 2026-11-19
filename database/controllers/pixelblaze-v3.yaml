@@ -71,6 +71,10 @@ software:
   firmware:
     - Pixelblaze
 sources:
+  inputs.physical:
+    url: https://electromage.com/pixelblaze
+    retrieved: '2026-11-18'
+    notes: ESP32 with Wi-Fi client mode and AP mode; no Ethernet port or option; the Standard's micro-USB is a 5 V power input
   status:
     url: https://shop.electromage.com/products/pixelblaze-v3-standard-wifi-led-controller
     retrieved: '2026-11-18'

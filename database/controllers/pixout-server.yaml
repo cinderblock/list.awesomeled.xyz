@@ -8,7 +8,7 @@ notes: Raspberry Pi based Art-Net DMX recorder/player; up to 255 universes; iOS/
 inputs:
   physical:
     Ethernet: true
-    Wi-Fi: true
+    Wi-Fi: true # setup and remote control (web panels, iOS/Android app)
     GPIO: true # triggers
   protocols:
     - Art-Net
@@ -64,6 +64,13 @@ software:
     - Resolume Arena
     - ArKaos
 sources:
+  inputs.physical:
+    - url: https://web.archive.org/web/20200110195105/http://pixout.lighting/product-pixout/pixout-controller-specification/
+      retrieved: '2026-11-18'
+      notes: Pixout Controller feature table (2019-era, contact sales@pixoutserver.com) marks Wireless and Ethernet available, Bluetooth on request
+    - url: https://pixout.lighting/products/recorder/
+      retrieved: '2026-11-18'
+      notes: Current ArtNet Recorder lists "RJ45 wired networking" and "Wi-Fi for setup & remote control"
   status:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'

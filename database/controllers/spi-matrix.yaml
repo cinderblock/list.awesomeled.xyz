@@ -17,7 +17,7 @@ inputs:
     - Art-Net
     - sACN
     - DMX512
-  standalone: true
+  standalone: true # plays effects from the microSD card (buttons, DMX, Art-Net, DIP switch or HTTP triggers)
 outputs:
   count: 4
   connector:
@@ -70,6 +70,7 @@ power:
 data:
   storage:
     - type: microSD
+      max_size: 32
 datasheet:
   url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI-MATRIX_tech.specs_.pdf # tech specs sheet
   sources:
@@ -139,9 +140,24 @@ sources:
     retrieved: '2026-11-18'
     notes: Linked as 'Supported ICs' from https://www.ledstripstudio.com/products/spi_matrix/ .
   inputs.physical:
-    url: https://www.ledstripstudio.com/products/spi_matrix/
+    - url: https://www.ledstripstudio.com/products/spi_matrix/
+      retrieved: '2026-11-18'
+      notes: 'comparison table: 2 Ethernet ports, no Wi-Fi; Comparison table marks Wi-Fi as not available on SPI Matrix'
+    - url: https://www.ledstripstudio.com/user_manual/SPI_MATRIX_tech.specs.pdf
+      retrieved: '2026-11-18'
+      notes: '"Ethernet 2x RJ-45 connector, internal switch, 100 Mbit/sec"; DMX input and output "XLR 3-pin connector (optional 5 pin)"; no Wi-Fi or USB'
+  inputs.protocols:
+    url: https://www.ledstripstudio.com/user_manual/SPI_MATRIX_tech.specs.pdf
     retrieved: '2026-11-18'
-    notes: 'comparison table: 2 Ethernet ports, no Wi-Fi'
+    notes: '"Controls over" section: Art-Net/sACN, DMX and stand-alone'
+  inputs.standalone:
+    url: https://www.ledstripstudio.com/user_manual/SPI_MATRIX_tech.specs.pdf
+    retrieved: '2026-11-18'
+    notes: Stand-alone mode controls the LEDs from the SD card with no software; trigger modes are buttons, DMX, Art-Net, DIP switch and HTTP
+  data.storage:
+    url: https://www.ledstripstudio.com/user_manual/SPI_MATRIX_tech.specs.pdf
+    retrieved: '2026-11-18'
+    notes: 'SD Card row: "Micro SD Card (FAT32, up to 32 GB)"'
   power.current.max:
     url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI-MATRIX_tech.specs_.pdf
     retrieved: '2026-11-18'

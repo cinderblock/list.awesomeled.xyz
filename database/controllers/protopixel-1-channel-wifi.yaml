@@ -58,6 +58,13 @@ software:
   works_with:
     - ProtoPixel Create
 sources:
+  inputs.physical:
+    - url: https://web.archive.org/web/20210511080411/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/1ch_wifi_spec_sheet_v101.pdf?mtime=20200811193444&focal=none
+      retrieved: '2026-11-18'
+      notes: '1 Channel Wi-Fi Controller spec sheet v1.01: IEEE 802.11 b/g/n Wi-Fi module, "MicroSD card slot for autonomous content playing"; no Ethernet or DMX'
+    - url: https://web.archive.org/web/20210107154800/https://www.protopixel.io/mini-controller
+      retrieved: '2026-11-18'
+      notes: The Mini controller came in two configurations, Wi-Fi and Ethernet; this entry is the Wi-Fi one
   status:
     url: https://www.protopixel.io/tools/product-overview
     retrieved: '2026-11-18'

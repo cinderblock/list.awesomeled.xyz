@@ -163,6 +163,13 @@ software:
     - POET
     - grandMA
 sources:
+  inputs.physical:
+    - url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270
+      retrieved: '2026-11-18'
+      notes: 'C4 Extended specification sheet (09/2020): Wi-Fi 802.11 b/g/n 2.4 GHz, client + access point; built-in network switch; input protocols "DMX512 (2 inputs)"; trigger port max. 3 dry contacts or 3 analog inputs (0-10V)'
+    - url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/271
+      retrieved: '2026-11-18'
+      notes: 'DiGidot C4 manual v2.3.0: "Network: 2x RJ45 bus", "Trigger input: 4-pin 3.5 mm TRRS mini jack"'
   status:
     url: https://www.digidot.eu/shop/digidot-c4-extended-127?attribute_values=77
     retrieved: '2026-11-18'

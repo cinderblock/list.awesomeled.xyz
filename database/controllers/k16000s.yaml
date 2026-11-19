@@ -10,11 +10,12 @@ manufacturers:
 vendors:
   - name: Amazon
     page: https://www.amazon.com/dp/B09PKDLHQG
-notes: Not a Kulp product despite the K-name; generic Madrix/Art-Net pixel controller sold under AUTUNEER, CANRIA, and CLAUTOP brands. Online control via Art-Net/Madrix over Ethernet or a DMX512 console; offline standalone playback from SD card (16 ports x 1024 pixels).
+notes: Not a Kulp product despite the K-name; generic Madrix/Art-Net pixel controller sold under AUTUNEER, CANRIA, and CLAUTOP brands. Online control via Art-Net/Madrix over Ethernet (NET IN/NET OUT ports cascade units); offline standalone playback from SD card (16 ports x 1024 pixels).
 inputs:
   physical:
-    Ethernet: true
-    DMX512: true # DMX512 console input
+    Ethernet: Dual # NET IN + NET OUT; NET OUT cascades the next controller
+    # No DMX512 input: an earlier pass listed a "DMX512 console input", but the K-16000S
+    # instruction sheet shows none; CANRIA's "K16 ARTNET+DMX Console" is a different model.
   protocols:
     - Art-Net
   standalone: true # offline SD-card playback
@@ -54,6 +55,14 @@ software:
     - MADRIX 3
     - MADRIX 5
 sources:
+  inputs.physical:
+    url: https://image.chukouplus.com/themes/simplebootx/Upload/W_1027/download/20210327/605f262e8bc7e.pdf
+    retrieved: '2026-11-18'
+    notes: 'OEM "ARTNET-SPI Controller Instruction" for the K-16000S: Art-Net/Madrix online over the network, SD-card offline mode, units cascade "NET OUT of the previous one and the next NET IN"; no Wi-Fi or DMX input mentioned'
+  creator:
+    url: https://web.archive.org/web/20230604162206/https://autuneertech.com/products/k16000s-madrix-artnet-addressable-led-controller/
+    retrieved: '2026-11-18'
+    notes: AUTUNEER product page "K16000S MADRIX Artnet Addressable LED Controller"; KulpLights' own controller range has no K16000S
   outputs.protocols:
     url: https://www.amazon.com/dp/B09PKDLHQG
     retrieved: '2026-11-18'

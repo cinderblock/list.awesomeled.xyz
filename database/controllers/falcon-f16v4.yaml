@@ -17,7 +17,7 @@ inputs:
     - Art-Net
     - DDP
     - ZCPP
-  standalone: true # Falcon Player (FPP)
+  standalone: true # Player/Master mode plays sequences from microSD on its own schedule
 outputs:
   count: 16
   pixels:
@@ -108,7 +108,11 @@ power:
     max: 60
 data:
   storage:
-    - type: microSD
+    - type: uSD
+      max_size: 32 # FAT32; holds FSEQ sequences, audio, playlists and schedules
+features:
+  - 'Player mode: standalone show player from microSD, with playlists and schedules (RTC)'
+  - 'Master/Remote modes: microSD playback kept in sync with other Falcons or FPP players via FPP sync packets'
 images:
   - file: falcon-f16v4.webp
     source: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html
@@ -124,6 +128,28 @@ software:
     - xLights
     - FPP
 sources:
+  inputs.physical:
+    - url: https://docs.google.com/document/d/1449zGk1HEiQjcu6e98ebWnFBMFKUiXaFzis9QGAnfsk/edit
+      retrieved: '2026-11-18'
+      notes: 'F16v4 manual (Build 38, 2021-09-12) §3.1: two Network Connectors joined by a switch; Wi-Fi Module 2.4 GHz 802.11 b/g/n, "Wireless does NOT support sending pixel data"'
+    - url: https://pixelcontroller.com/store/products/70-f16v4.html
+      retrieved: '2026-11-18'
+      notes: 'Feature list: 2-port switch to daisy-chain controllers; "Wireless ESP-07 Module with board mount antenna"'
+  inputs.standalone:
+    url: https://docs.google.com/document/d/1449zGk1HEiQjcu6e98ebWnFBMFKUiXaFzis9QGAnfsk/edit
+    retrieved: '2026-11-18'
+    notes: 'F16v4 manual: Player mode "allow[s] the controller to act as a stand alone show player"'
+  data.storage:
+    url: https://docs.google.com/document/d/1449zGk1HEiQjcu6e98ebWnFBMFKUiXaFzis9QGAnfsk/edit
+    retrieved: '2026-11-18'
+    notes: 'F16v4 manual §3.1.3 Micro SD Card Slot: 32GB or less, FAT32; required in Player, Master and Remote modes'
+  features:
+    - url: https://docs.google.com/document/d/1449zGk1HEiQjcu6e98ebWnFBMFKUiXaFzis9QGAnfsk/edit
+      retrieved: '2026-11-18'
+      notes: 'F16v4 manual: Player, Master and Remote modes; the master can drive "FPP based controllers" set to remote, and a remote can follow FPP'
+    - url: https://pixelcontroller.com/store/products/70-f16v4.html
+      retrieved: '2026-11-18'
+      notes: '"Falcon Player Remote Mode. The controller can store sequences on micro SD card and play in sync with FPP master."'
   status:
     url: https://pixelcontroller.com/store/diy-controllers/70-f16v4.html
     retrieved: '2026-11-18'

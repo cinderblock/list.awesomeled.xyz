@@ -8,8 +8,9 @@ creator:
 notes: On board PSU mounting, eFuse protected power distribution, on board fault finding
 inputs:
   physical:
-    Ethernet: true
-    Wi-Fi: true
+    Ethernet: true # single port; show data must arrive over wired Ethernet
+    Wi-Fi: hotspot # built-in access point for configuration only
+    USB: Micro USB # firmware programming/updates
     Bluetooth: true
     buttons: 2
   protocols:
@@ -38,6 +39,7 @@ features:
   - eFuse protected power distribution
   - On-board power supply mounting
   - On-board fault finding
+  - microSD playback standalone or as an FPP remote, synced to an FPP master
 images:
   - file: genius-pro-32-port.webp
     source: https://store.experiencelights.com/genius-pro-32-port-controller/
@@ -63,6 +65,13 @@ software:
     - xSchedule
     - Light-O-Rama
 sources:
+  inputs.physical:
+    - url: https://store.experiencelights.com/genius-pro-32-port-controller/
+      retrieved: '2026-11-18'
+      notes: '"1 Ethernet Port"; configuration from a phone, tablet or PC over Wi-Fi or a wired connection'
+    - url: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view
+      retrieved: '2026-11-18'
+      notes: 'Genius User Manual (updated 2025-09-27), 32 Output Genius PRO Controller: (14) LAN/ethernet port, (15) USB programming/firmware update interface (Micro USB); Wi-Fi hotspot for configuration; "For standard light show playback ... Genius must be connected to a wired ethernet network"'
   status:
     url: https://store.experiencelights.com/genius-pro-32-port-controller/
     retrieved: '2026-11-18'
@@ -83,9 +92,23 @@ sources:
     retrieved: '2026-11-18'
     notes: "'32 x 3-pin, extra large, color coded Clever Lock' connectors"
   inputs.standalone:
-    url: https://experiencelights.com/genius-pro-32-port-controller/
+    - url: https://experiencelights.com/genius-pro-32-port-controller/
+      retrieved: '2026-11-18'
+      notes: "'SD card slot for standalone operation or to operate as FPP remote'"
+    - url: https://store.experiencelights.com/genius-pro-32-port-controller/
+      retrieved: '2026-11-18'
+      notes: '"SD card slot for standalone operation or to operate as FPP remote"'
+    - url: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view
+      retrieved: '2026-11-18'
+      notes: (11) Micro SD card slot "is for standalone animation playback, and can hold xLights version 1 FSEQ files"; the manual also says "Genius is not a show player" (no scheduler)
+  data.storage:
+    url: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view
     retrieved: '2026-11-18'
-    notes: "'SD card slot for standalone operation or to operate as FPP remote'"
+    notes: 32 Output Genius PRO Controller, item (11) Micro SD card slot
+  features:
+    url: https://store.experiencelights.com/genius-pro-32-port-controller/
+    retrieved: '2026-11-18'
+    notes: '"SD card slot for standalone operation or to operate as FPP remote"'
   outputs.pixels:
     url: https://experiencelights.com/genius-pro-32-port-controller/
     retrieved: '2026-11-18'

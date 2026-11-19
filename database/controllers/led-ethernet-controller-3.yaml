@@ -117,6 +117,13 @@ software:
     - MA Grand
     - LSS Remote
 sources:
+  inputs.physical:
+    - url: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+      retrieved: '2026-11-18'
+      notes: 'Spec table: Ethernet "2 × RJ-45, internal switch, 100 Mbit/s"; DMX in "XLR 3-pin (5-pin optional)", DMX out "Out or Through mode"; microSD; no USB port'
+    - url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+      retrieved: '2026-11-18'
+      notes: 'LEC 3 front connectors: Ethernet, status LEDs, buttons, IP/DMX DIP switch, SD card, DMX In/Out. The "micro SD card USB reader" in the box is an accessory, not a port'
   status:
     url: https://www.ledstripstudio.com/shop/product/led-ethernet-controller-3/
     retrieved: '2026-11-18'

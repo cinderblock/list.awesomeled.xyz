@@ -89,9 +89,15 @@ sources:
     retrieved: '2026-11-18'
     notes: Section 22 'Software Compatibility'.
   inputs.physical:
-    url: https://smartshow.lighting/wp-content/uploads/2025/10/Pro-ONE-Brochure-DataSheet-V2.pdf
-    retrieved: '2026-11-18'
-    notes: "'Network 2 x RJ45 10/100 Network Ports, Auto MDIX'; no Wi-Fi"
+    - url: https://smartshow.lighting/wp-content/uploads/2025/10/Pro-ONE-Brochure-DataSheet-V2.pdf
+      retrieved: '2026-11-18'
+      notes: "'Network 2 x RJ45 10/100 Network Ports, Auto MDIX'; no Wi-Fi"
+    - url: https://smartshow.lighting/wp-content/uploads/2025/10/Pro-ONE-User-Guide-FW-V2.0.pdf
+      retrieved: '2026-11-18'
+      notes: '§3 Specifications: "Integrated 10/100M Ethernet Switch", "Dual RJ45 Ethernet connection"; power via screw terminals or USB; no Wi-Fi, no SD card'
+    - url: https://smartshow.lighting/product/smartshow-pro-one/
+      retrieved: '2026-11-18'
+      notes: '"USB interface for firmware uploads (or separate USB powering if required)"'
   outputs.pixels.max_per_output:
     url: https://smartshow.lighting/product/smartshow-pro-one/
     retrieved: '2026-11-18'

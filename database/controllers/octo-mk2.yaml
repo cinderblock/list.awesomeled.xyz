@@ -157,10 +157,23 @@ sources:
     retrieved: '2026-11-18'
     notes: ELM -> pattern-drivers/elm
   inputs.physical:
-    url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+    - url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+      retrieved: '2026-11-18'
+      notes: "'Connectors: 2 x Network (RJ45), 2 x SPI Output (4-Pin Phoenix), 1 x Power'"
+    - url: https://cdn.enttec.com/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
+      retrieved: '2026-11-18'
+      notes: 'OCTO MK2 (71521) datasheet, Oct 2025: connectors "2* Network (RJ45)", "Daisy-chain networking", "Chains of up to 8 devices give optimum synchronisation between outputs"; no Wi-Fi, USB, DMX input or SD card'
+    - url: https://www.enttec.com/product/addressable-led-pixel-control/led-pixel-controller/
+      retrieved: '2026-11-18'
+      notes: The two RJ45 ports are labelled Ethernet 10/100 IN and THROUGH
+  inputs.protocols:
+    url: https://cdn.enttec.com/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
     retrieved: '2026-11-18'
-    notes: "'Connectors: 2 x Network (RJ45), 2 x SPI Output (4-Pin Phoenix), 1 x Power'"
+    notes: 'eDMX input protocols: Art-Net, sACN, ESP, KiNet'
   inputs.standalone:
-    url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
-    retrieved: '2026-11-18'
-    notes: localhost web interface sets gradient effects that play standalone
+    - url: https://www.enttec.com/product/led-pixel-control/octo-8-universe-edmx-to-led-pixel-controller/
+      retrieved: '2026-11-18'
+      notes: localhost web interface sets gradient effects that play standalone
+    - url: https://cdn.enttec.com/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
+      retrieved: '2026-11-18'
+      notes: '"Inbuilt Fx engine allowing gradient effect in standalone operation without a DMX source"'

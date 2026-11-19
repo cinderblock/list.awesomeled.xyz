@@ -51,6 +51,10 @@ software:
   firmware:
     - WLED
 sources:
+  inputs.physical:
+    url: https://magwled.com/pages/magwled-1
+    retrieved: '2026-11-18'
+    notes: Setup joins the WLED-AP Wi-Fi access point; USB-C carries Power Delivery and firmware flashing; no Ethernet on this board or anywhere on magwled.com
   software.firmware:
     url: https://magwled.com/pages/magwled-1
     retrieved: '2026-11-18'

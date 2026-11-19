@@ -163,9 +163,12 @@ sources:
     retrieved: '2026-11-18'
     notes: C4 Manual v2.3.0 p.11 'DMX, Art-Net or sACN source required' (same PDF linked from both C4 product pages).
   inputs.physical:
-    url: https://www.digidot.eu/shop/digidot-c4-live-125/document/274
-    retrieved: '2026-11-18'
-    notes: USB is only a 5 V power cable, not a data input
+    - url: https://www.digidot.eu/shop/digidot-c4-live-125/document/274
+      retrieved: '2026-11-18'
+      notes: 'USB is only a 5 V power cable, not a data input; DiGidot C4 manual v2.3.0: "Network: 2x RJ45 bus", "We discourage sending Art-Net or sACN over Wi-Fi"; the box includes a USB power cable for the 5-24 Vdc power jack, not a USB data port'
+    - url: https://www.digidot.eu/shop/digidot-c4-live-125/document/273
+      retrieved: '2026-11-18'
+      notes: 'C4 Live specification sheet (09/2020): Wi-Fi 802.11 b/g/n 2.4 GHz in client + access point mode; built-in network switch; input protocols "DMX512 (2 inputs)"; no USB port'
   technical_notes:
     url: https://www.digidot.eu/shop/digidot-c4-live-125
     retrieved: '2026-11-18'

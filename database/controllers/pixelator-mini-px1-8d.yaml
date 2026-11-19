@@ -18,6 +18,7 @@ outputs:
   count: 8
   connector: RJ45 PLink
   clocked: false
+  differential: true # ENTTEC Pixel Link (PLink): Data+/Data- on RJ45 pins 1/2, ground on pin 7
   protocols:
     - WS2811
     - WS2812
@@ -77,6 +78,17 @@ software:
     - ELM
     - xLights
 sources:
+  inputs.physical:
+    - url: https://web.archive.org/web/20211203101605/https://dol2kh495zr52.cloudfront.net/pdf/manuals/191118_71066_UM.pdf
+      retrieved: '2026-11-18'
+      notes: 'User manual UM-71066 (2019-11-18): "1 RJ45 Ethercon connector (10/100 Mbps)" is the only data input; no Wi-Fi'
+    - url: https://web.archive.org/web/20210305140936/https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
+      retrieved: '2026-11-18'
+      notes: 'Input/output: "8 x PLink output ports on RJ45 (Pixel Link data)", "1 x 10/100Mbps Ethernet port"'
+  outputs.differential:
+    url: https://web.archive.org/web/20211203101605/https://dol2kh495zr52.cloudfront.net/pdf/manuals/191118_71066_UM.pdf
+    retrieved: '2026-11-18'
+    notes: 'Pixel Link pinout (RJ-45): pin 1 Data+, pin 2 Data-, pin 7 Ground; one PLink Injector (73546/73544) or PSAT per port'
   status:
     url: https://support.enttec.com/legacy-product/legacy-products/pixelator-mini-px1-8d-71066-legacy-product
     retrieved: '2026-11-18'
@@ -96,3 +108,4 @@ sources:
 technical_notes:
   - 16 universes (8192 channels), up to 2730 RGB pixels across 8 outputs
   - Outputs synchronize up to 300m away when paired with ENTTEC PLink or PSAT
+  - Outputs carry ENTTEC's proprietary Pixel Link (PLink) signal, not pixel data; each port needs a PLink Injector or PSAT, within 3 m of the tape or dots

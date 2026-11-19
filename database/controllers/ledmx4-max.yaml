@@ -8,7 +8,7 @@ creator:
 notes: Show record and playback trigger capability
 inputs:
   physical:
-    Ethernet: true
+    Ethernet: true # single 10/100 RJ45
     USB: USB-C # carries DMX
     DMX512: 3-pin terminal (in or out)
     triggers: 8
@@ -106,6 +106,14 @@ related:
       url: https://dmxking.tv/downloads/LeDMX4%20MAX%20User%20Manual%20(EN).pdf
       retrieved: '2026-11-18'
 sources:
+  inputs.physical:
+    url: https://dmxking.tv/downloads/LeDMX4%20MAX%20User%20Manual%20(EN).pdf
+    retrieved: '2026-11-18'
+    notes: 'User manual 0129-700-4.11, §2 Connections and Main Features: "Ethernet 10/100Mbps RJ45 socket", USB-C power and USB DMX, "1x DMX512 IN/OUT port", 10-way I/O triggering terminal; no Wi-Fi'
+  data.storage:
+    url: https://dmxking.tv/downloads/LeDMX4%20MAX%20User%20Manual%20(EN).pdf
+    retrieved: '2026-11-18'
+    notes: '"Recording and playback to microSD card (not included)"'
   status:
     url: https://dmxking.shop/products/ledmx4-max
     retrieved: '2026-11-18'

@@ -107,4 +107,12 @@ sources:
     url: https://quinled.info/quinled-dig-quad-pre-assembled-v4-specifications/
     retrieved: '2026-11-18'
     notes: "v4: 'Uses Espressif ESP32 Micro-controllers'"
+  inputs.physical:
+    url: https://quinled.info/quinled-dig-quad/
+    retrieved: '2026-11-18'
+    notes: 'Dig-Quad v4 is "fully compatible with the QuinLED-ESP32 which can be purchased with a board antenna, external or wired Ethernet option"'
+  features:
+    url: https://quinled.info/quinled-dig-quad/
+    retrieved: '2026-11-18'
+    notes: '"comes in a DIY version (you buy the components and build it yourself) and a Pre-Assembled version"'
 wled_compatible: true
