@@ -19,6 +19,8 @@ outputs:
     buffered: true
   pixels:
     max_per_output: 625 # 20000 total / 32 outputs
+  protocols:
+    - WS281X
 power:
   voltage:
     max: 24
@@ -33,15 +35,32 @@ price_source:
   retrieved: '2026-11-18'
   url: https://store.experiencelights.com/genius-pro-32-port-controller/
   vendor: Experience Lights
+related:
+  - type: related
+    ref: controllers/genius-long-range-pixel-controller
+    notes: Sibling in Experience Lights' Genius controller line (same firmware; both drive Genius long-range receivers)
+    source:
+      url: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view?usp=sharing
+      retrieved: '2026-11-18'
 software:
   works_with:
     - xLights
+    - FPP
+    - xSchedule
+    - Light-O-Rama
 sources:
   status:
     url: https://store.experiencelights.com/genius-pro-32-port-controller/
     retrieved: '2026-11-18'
     notes: 'In stock, regular $331.99'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/experience.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/experience.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view?usp=sharing
+      retrieved: '2026-11-18'
+      notes: "Genius User Manual, 'What Genius is Not' and '32 Output Genius PRO Controller (11) Micro SD card slot'. Product page: 'SD card slot for standalone operation or to operate as FPP remote.'"
+  outputs.protocols:
+    url: https://experiencelights.com/genius-pro-32-port-controller/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: Description > Features. No longer list in the maker's docs; xLights' experience.xcontroller lists ws2811 only.

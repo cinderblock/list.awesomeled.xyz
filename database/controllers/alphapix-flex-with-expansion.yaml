@@ -19,6 +19,53 @@ outputs:
   clocked: selectable # single and clocked pixel support
   auxiliary:
     DMX512: 2
+  protocols:
+    - INK1002
+    - INK1003
+    - LX1203
+    - SK6812-RGB
+    - SK6813
+    - SM16703
+    - SM16711
+    - SM16712
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - UCS1903
+    - UCS1904
+    - UCS1909
+    - UCS1912
+    - UCS2903
+    - UCS2909
+    - UCS2912
+    - UCS9812
+    - WS2811
+    - WS2812
+    - WS2813
+    - WS2815
+    - WS2818
+    - APA109
+    - SK6812 RGBW
+    - SK6818
+    - SM16704
+    - SM16804
+    - UCS2904
+    - WS2814
+    - WS2805
+    - WS2801
+    - WS2803
+    - LPD6803
+    - LPD1101
+    - D705
+    - UCS6909
+    - UCS6912
+    - TLS3001
+    - TLS3002
+    - CY3005
+    - LPD8803
+    - LPD8806
+    - P9813
 power:
   voltage:
     max: 24
@@ -49,6 +96,13 @@ sources:
     retrieved: '2026-11-18'
     notes: 'AlphaPix Evolution V2 CPU and Flex 16-port boards listed, Usually Ships in 24 Hours'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/holidaycoro.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/holidaycoro.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://www.holidaycoro.com/kb_results.php?ID=181
+      retrieved: '2026-11-18'
+      notes: same table, row 'xLights Support', AlphaPix Evolution column
+  outputs.protocols:
+    url: https://www.holidaycoro.com/kb_results.php?ID=181
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: "'AlphaPix Evolution vs. HinksPix Pro Controller Specifications' table, row 'Pixel Protocols Supported', AlphaPix Evolution (#951-12) column."

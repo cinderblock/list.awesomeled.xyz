@@ -23,6 +23,34 @@ outputs:
     DMX512: 4 # outputs configurable as DMX512 in groups of 4
   pixels:
     max_total: 6120
+  protocols:
+    - WS2801
+    - WS2803
+    - LPD6803
+    - D705
+    - LPD1101
+    - UCS6909
+    - UCS6912
+    - GE ColorEffects
+    - TM1804
+    - WS2811
+    - WS2812
+    - TM1803
+    - TM1809
+    - TM1812
+    - SM16715
+    - SM16716
+    - DMX512
+    - HX512A
+    - MY994X
+    - LPD8806
+    - LPD8809
+    - P981x
+    - TLS3001
+    - TLS3002
+    - CYT3005
+    - APA102
+    - '6818'
 power:
   voltage:
     max: 24
@@ -37,12 +65,22 @@ price_source:
 software:
   works_with:
     - xLights
+    - LOR
+    - LightShowPro
+    - Madrix
 sources:
   status:
     url: https://sandevices.com/product/e682-pixel-controller-assembled-and-tested/
     retrieved: '2026-11-18'
     notes: '$215.00, InStock, Add to cart'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/sandevices.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/sandevices.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: http://sandevices.com/wp-content/uploads/2017/11/E682_Operating_Manual.pdf
+      retrieved: '2026-11-18'
+      notes: "E682 manual, 'Universe Selection and Packet Statistics'. xLights lists the E682 with config upload: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/sandevices.xcontroller"
+  outputs.protocols:
+    url: http://sandevices.com/wp-content/uploads/2017/11/E682_Operating_Manual.pdf
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: E682 Operating Manual (V4 firmware) 'Full Pixel Type List, Supported Pixel Types (E682)' (common type + 'also equivalent to'), plus V5 firmware documentation…

@@ -10,6 +10,7 @@ inputs:
   protocols:
     - sACN # E1.31
   standalone: false
+  requires_host: WT32-ETH01
 outputs:
   count: 8
   connector:
@@ -17,6 +18,10 @@ outputs:
   pixels:
     max_per_output: 600 # 4800 total across 8 outputs
   clocked: false # async pixel types only
+  protocols:
+    - WS2812
+    - WS2811
+    - WS2815
 power:
   voltage:
     max: 12
@@ -26,8 +31,43 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
   vendor: Wasatch Pixels (Tindie)
+related:
+  - type: host
+    ref: microboards/wt32-eth01
+    notes: Level-shifting 8-port HAT that plugs onto a WT32-ETH01 (sold with or without the module)
+    source:
+      url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - WLED
+  works_with:
+    - Vixen
+    - xLights
+    - Falcon Player
 sources:
   status:
     url: https://www.tindie.com/products/k7bbr/wasatch-pixels-basic-eight-port-led-controller/
     retrieved: '2026-11-18'
     notes: 'in stock ("48 in stock" for the 12V + WT32 option), $43'
+  outputs.protocols:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: "Tindie listing (maker k7bbr / Wasatch Pixels), 'What is it?'. Partial list: the page adds 'and various other protocol LED lights' (WLED firmware)."
+  software.firmware:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: "'What is it?'"
+  software.works_with:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: "'What is it?'"
+  inputs.requires_host:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: "'What is it?'; options include 'PCB Only' (HAT without module) as well as 'PCB + WT32 Module'"
+  wled_compatible:
+    url: https://www.tindie.com/products/k7bbr/wasatch-pixels-mini-eight-port-led-controller/
+    retrieved: '2026-11-18'
+    notes: "'What makes it special?'"
+wled_compatible: true

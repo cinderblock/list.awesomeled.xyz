@@ -24,6 +24,11 @@ outputs:
     max_per_output: 750 # up to 750 RGB pixels per port at 40fps
   clocked: false # async / single-wire pixels
   fuse: '7.5A' # 17 fused connectors with included 7.5 amp fuses
+  protocols:
+    - WS2811
+    - UCS1903
+    - SM16703P
+    - UCS2904
 power:
   voltage:
     min: 5
@@ -42,6 +47,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.baldrickstore.com/pixel-controllers/baldrick17/
   vendor: Baldrick Store
+related:
+  - type: variant
+    ref: controllers/baldrick-8
+    notes: 17-port version of the Baldrick8 (same firmware, setup and pixel wiring, plus Turniputs)
+    source:
+      url: https://www.baldrickboard.com/en/boards/baldrick17/manual
+      retrieved: '2026-11-18'
 software:
   works_with:
     - xLights
@@ -52,6 +64,13 @@ sources:
     retrieved: '2026-11-18'
     notes: 'official US store, $189, in stock'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://www.baldrickboard.com/en/boards/baldrick17/manual
+      retrieved: '2026-11-18'
+      notes: Baldrick17 Manual (updated 18 Jun 2026), Port Configuration and Turniputs > FPP Integration Details
+  outputs.protocols:
+    url: https://www.baldrickboard.com/en/fun-stuff/release-notes
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: Release notes 3.7 'Don't go chasing Protocols'

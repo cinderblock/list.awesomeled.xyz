@@ -9,6 +9,7 @@ inputs:
   physical:
     Ethernet: true
   standalone: true # FPP 5.5 preloaded on the included 16 GB microSD
+  requires_host: BeagleBone Black
 outputs:
   count: 12
   connector:
@@ -16,6 +17,8 @@ outputs:
   differential: true # up to 48 remote ports via Universal Differential Receivers
   pixels:
     max_per_output: 1400 # at 20 fps; 800 per port at 40 fps
+  protocols:
+    - WS2811
 power:
   voltage:
     min: 5
@@ -39,6 +42,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://wallyslights.com/products/wallys-lights-wb48-controller
   vendor: Wally's Lights
+related:
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: FPP cape for the BeagleBone Black (a BBB Rev C is included in the kit)
+    source:
+      url: https://cdn.shopify.com/s/files/1/0354/4763/6013/files/WB48-eeprom.bin
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -50,8 +60,23 @@ sources:
     retrieved: '2026-11-18'
     notes: 'listed for sale but Sold out; $199 regular, $159 sale'
   software.works_with:
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://web.archive.org/web/20251006173741/https://wallyslights.com/products/wallys-lights-wb48-controller
+      retrieved: '2026-11-18'
+      notes: description and assembly steps
+  outputs.protocols:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: 'xLights controller definitions: WB48 is based on FPP:FPPStringCapeTTYs (ws2811 only, https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/fpp.xcontroller).'
+  software.firmware:
+    url: https://web.archive.org/web/20251006173741/https://wallyslights.com/products/wallys-lights-wb48-controller
+    retrieved: '2026-11-18'
+    notes: Wayback snapshot 2025-10-06 of the product page (live page returned HTTP 429 on 2026-11-18)
+  inputs.requires_host:
+    url: https://cdn.shopify.com/s/files/1/0354/4763/6013/files/WB48-eeprom.bin
+    retrieved: '2026-11-18'
+    notes: FPP cape EEPROM image published by the maker (cape-info.json). The kit includes '1 - BeagleBone Black Rev C' (archived product page). Value follows the database convention for BBB capes.
 technical_notes:
   - Up to 800 pixels per port at 40 fps, 1400 per port at 20 fps

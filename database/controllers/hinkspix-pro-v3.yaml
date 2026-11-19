@@ -17,6 +17,40 @@ outputs:
   differential: true # long-range receivers carry differential pixel data over Cat5/RJ45
   auxiliary:
     DMX512: true # pixel ports reconfigurable for DMX/serial
+  protocols:
+    - INK1002
+    - INK1003
+    - LX1203
+    - SK6812-RGB
+    - SK6813
+    - SM16703
+    - SM16711
+    - SM16712
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - UCS1903
+    - UCS1904
+    - UCS1909
+    - UCS1912
+    - UCS2903
+    - UCS2909
+    - UCS2912
+    - UCS9812
+    - WS2811
+    - WS2812
+    - WS2813
+    - WS2815
+    - WS2818
+    - APA109
+    - SK6812 RGBW
+    - SK6818
+    - SM16704
+    - SM16804
+    - UCS2904
+    - WS2814
+    - WS2805
 features:
   - Built-in 2-port Ethernet switch for daisy-chaining without extra hardware
   - Long-range differential receivers extend pixel ports over Cat5/RJ45 (4 ports each)
@@ -28,6 +62,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.holidaycoro.com/Flex-Modular-Lighting-Controller-System-p/951.htm
   vendor: HolidayCoro
+related:
+  - type: related
+    ref: controllers/alphapix-flex-with-expansion
+    notes: The other CPU HolidayCoro offers for the same Flex Expansion board system (AlphaPix Evolution)
+    source:
+      url: https://www.holidaycoro.com/kb_results.php?ID=181
+      retrieved: '2026-11-18'
 software:
   works_with:
     - xLights
@@ -37,9 +78,16 @@ sources:
     retrieved: '2026-11-18'
     notes: 'offered as the HinksPix PRO CPU Board V3 option (+$214.99), "Usually Ships in 24 Hours"'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/hinkspix.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/hinkspix.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://www.holidaycoro.com/kb_results.php?ID=181
+      retrieved: '2026-11-18'
+      notes: row 'xLights Support', HinksPix Pro V3 column
+  outputs.protocols:
+    url: https://www.holidaycoro.com/kb_results.php?ID=181
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: "'AlphaPix Evolution vs. HinksPix Pro Controller Specifications', row 'Pixel Protocols Supported', HinksPix Pro V3 (#930) column (no 4-wire/clocked types in this column)."
 technical_notes:
   - Flex CPU supports 0/16/32/48 onboard pixel ports and 0/4/8/12 long-range receiver outputs
   - Up to roughly 16,320 pixels per CPU; larger assembled systems reach ~32,640

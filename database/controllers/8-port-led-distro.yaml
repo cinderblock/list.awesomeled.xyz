@@ -21,6 +21,12 @@ outputs:
     GPIO: 7 # GPIO17, 32, 33, 34, 35, 36, 39 broken out for buttons/mics/sensors
   pixels:
     max_total: 4800
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2815
+    - SK6812 RGBW
+    - SM16825
 power:
   voltage:
     min: 12 # V4 (current production); V3 (discontinued) was 5-24V
@@ -36,6 +42,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/bong69/8-port-led-distro
   vendor: Bong69 (Tindie)
+related:
+  - type: uses
+    ref: microboards/wt32-eth01
+    notes: "Built on the WT32-ETH01 design: V1 carried the module, V2+ integrate its parts (WLED Ethernet type 'WT32-ETH01')"
+    source:
+      url: https://github.com/bobko69/8PortLEDDistro/blob/main/BOARD_VERSIONS.md
+      retrieved: '2026-11-18'
 software:
   firmware:
     - WLED
@@ -48,13 +61,27 @@ sources:
     retrieved: '2026-11-18'
     notes: 'listed $65, v4.1 option 312 in stock'
   software.firmware:
-    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
-    retrieved: '2026-11-18'
-    notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+      notes: "WLED docs: compatible controllers — section 'Controllers with WLED pre-installed'"
+    - url: https://github.com/bobko69/8PortLEDDistro/blob/main/README.md
+      retrieved: '2026-11-18'
+      notes: "Readme 'What is it?' and Specifications (Version 4): 'Firmware | WLED (ships installed and set up), or ESPixelStick'"
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wled.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported) — under the WLED vendor as Controller 'Bong69'
+    - url: https://github.com/bobko69/8PortLEDDistro/blob/main/README.md
+      retrieved: '2026-11-18'
+      notes: Readme 'What is it?'; FAQ has 'How do I add the 8 Port LED Distro to xLights?'
+  outputs.protocols:
+    url: https://github.com/bobko69/8PortLEDDistro/blob/main/README.md
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported) — under the WLED vendor as Controller 'Bong69'
+    notes: "Readme 'What else do I need?' (maker's official repository). Examples only ('such as'): the board takes any single-wire type WLED supports; clocked types (APA102, WS2801) explicitly won't work. FAQ pixel-count table lists the same five."
+  wled_compatible:
+    url: https://github.com/bobko69/8PortLEDDistro/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: Readme intro
 technical_notes:
   - Open hardware; design files and WLED/ESP32 firmware at https://github.com/bobko69/8PortLEDDistro
   - 'Versions: V4 (current) accepts 12-48V; V3 (discontinued) accepted 5-24V'

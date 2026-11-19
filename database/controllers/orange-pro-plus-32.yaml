@@ -23,6 +23,11 @@ outputs:
   clocked: false # async (Single and Clock pixel types, data-only)
   auxiliary:
     long-range: 16 # 16 long-range data ports on 4 RJ45 jacks
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2813
+    - '1903'
 power:
   voltage:
     max: 24
@@ -44,8 +49,18 @@ price_source:
 software:
   firmware:
     - FPP
+  works_with:
+    - FPP
 sources:
   status:
     url: https://www.winterlights.in/shop
     retrieved: '2026-11-18'
     notes: 'rebuilt store lists only WL8v2, WL16v2, WL24v3 and WL48D1; Orange product page now 404'
+  outputs.protocols:
+    url: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+    retrieved: '2026-11-18'
+    notes: Wayback snapshot 2026-05-16 of the product page (live URL returns 404 on 2026-11-18), section 'String Types'. Same text in the 2023-03 and 2025-06 snapshots.
+  software.works_with:
+    url: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+    retrieved: '2026-11-18'
+    notes: Controller Features

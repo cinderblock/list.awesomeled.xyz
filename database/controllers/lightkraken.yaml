@@ -28,6 +28,23 @@ outputs:
   clocked: selectable # async (e.g. WS2812) and clocked (e.g. APA102) types supported
   pixels:
     max_per_output: 1020
+  protocols:
+    - WS2812
+    - SK6812
+    - TM1804
+    - UCS1904
+    - GS8208
+    - SK6812 RGBW
+    - APA102
+    - APA107
+    - P9813
+    - SK9822
+    - HDS107S
+    - LPD8806
+    - TM1829
+    - WS2816
+    - WS2801
+    - HD108
 power:
   voltage:
     min: 5.4 # selectable 5.4V / 12V / 24V
@@ -47,6 +64,11 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/tinicuro/lightkraken/
   vendor: Obtainium Consulting (Tindie)
+sources:
+  outputs.protocols:
+    url: https://github.com/tinic/lightkraken-ui/blob/master/src/App.vue
+    retrieved: '2026-11-18'
+    notes: Maker's web-UI repository (tinic/lightkraken-ui, built into the firmware), stripOutputTypes list
 technical_notes:
   - GigaDevice GD32F107RCT6 Cortex-M3 microcontroller
   - Supports WS2812, SK6812, TM1804, UCS1904, GS8208, APA102, APA107, P9813, SK9822 and analog RGB(W) via 14-bit PWM

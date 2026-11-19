@@ -19,6 +19,20 @@ outputs:
     buffered: false
   auxiliary:
     DMX512: 4
+  protocols:
+    - WS2801
+    - WS2811
+    - LPD6803
+    - TM180x
+    - GE ColorEffects
+    - TLS3001
+    - CYT3005
+    - SM16716
+    - P981x
+    - LPD880x
+    - DMX512
+    - APA102
+    - '6818'
 power:
   voltage:
     max: 12
@@ -30,15 +44,32 @@ price_source:
   retrieved: '2026-11-18'
   url: https://sandevices.com/product/e6804-pixel-controller-assembled-tested/
   vendor: SanDevices
+related:
+  - type: variant
+    ref: controllers/e682
+    notes: Compact 4-output version of the E682 (same E68x firmware); the manual calls the E680/E681/E682 its predecessors
+    source:
+      url: http://sandevices.com/product/e6804-assembled-tested/
+      retrieved: '2026-11-18'
 software:
   works_with:
     - xLights
+    - LOR
+    - LightShowPro
+    - Madrix
 sources:
   status:
     url: https://sandevices.com/product/e6804-pixel-controller-assembled-tested/
     retrieved: '2026-11-18'
     notes: 'listed $129 as E6804 Assembled- Limited Stock Inquire, Out of stock'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/sandevices.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/sandevices.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: http://sandevices.com/wp-content/uploads/2017/11/E6804_Operating_Manual.pdf
+      retrieved: '2026-11-18'
+      notes: E6804 manual, 'Universe Selection and Packet Statistics' (named as example sending software).
+  outputs.protocols:
+    url: http://sandevices.com/wp-content/uploads/2017/11/E6804_Operating_Manual.pdf
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: E6804 Operating Manual (V4 firmware) 'Supported Pixel Types', plus the V5 firmware documentation (https://sandevices.com/wp-content/uploads/2022/10/SanDevices-Version-5-Firmware-Documentation-thru-version-5.050-beta.pdf) which adds APA102…

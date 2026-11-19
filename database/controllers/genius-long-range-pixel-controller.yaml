@@ -20,6 +20,8 @@ outputs:
   clocked: false # async pixels only
   auxiliary:
     DMX512: 1
+  protocols:
+    - WS281X
 power:
   voltage:
     max: 5
@@ -38,12 +40,22 @@ price_source:
 software:
   works_with:
     - xLights
+    - FPP
+    - xSchedule
+    - Light-O-Rama
 sources:
   status:
     url: https://store.experiencelights.com/long-range-genius-pixel-controller/
     retrieved: '2026-11-18'
     notes: 'In stock, regular $238.99'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/experience.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/experience.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://drive.google.com/file/d/1TxbGltzQDkVF4Rtoo1eURyIWos7Nxecd/view?usp=sharing
+      retrieved: '2026-11-18'
+      notes: Genius User Manual (linked as 'Genius User Manual' on the product page), sections 'What Genius is Not' and 'Genius Long Range Controller (7) Micro SD card slot'.
+  outputs.protocols:
+    url: https://experiencelights.com/long-range-genius-pixel-controller/
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: Description > Features. Maker names only the WS281X family

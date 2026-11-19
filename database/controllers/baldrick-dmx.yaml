@@ -31,6 +31,19 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.baldrickstore.com/dmx-controllers/baldrickdmx/
   vendor: Baldrick Store
+related:
+  - type: related
+    ref: controllers/baldrick-8
+    notes: Baldrick8 inputs can trigger BaldrickDMX presets over the Turnip Network
+    source:
+      url: https://www.baldrickboard.com/en/boards/baldrick8/manual
+      retrieved: '2026-11-18'
+  - type: related
+    ref: controllers/baldrick-17
+    notes: Baldrick17 Turniputs can trigger BaldrickDMX presets over the Turnip Network
+    source:
+      url: https://www.baldrickboard.com/en/boards/baldrick17/manual
+      retrieved: '2026-11-18'
 software:
   works_with:
     - xLights
@@ -40,6 +53,9 @@ sources:
     retrieved: '2026-11-18'
     notes: 'official US store, $70, in stock'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
-    retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://www.baldrickboard.com/en/boards/baldrickdmx/manual
+      retrieved: '2026-11-18'
+      notes: 'BaldrickDMX Manual (updated 25 Oct 2026), Step 4: xLights Connection and At a glance table'

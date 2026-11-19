@@ -27,6 +27,11 @@ outputs:
   pixels:
     max_per_output: 750 # ~2250 channels per port at 40fps
   clocked: false # async pixels
+  protocols:
+    - WS2811
+    - UCS1903
+    - SM16703P
+    - UCS2904
 power:
   voltage:
     min: 5
@@ -44,12 +49,22 @@ price_source:
 software:
   works_with:
     - xLights
+    - FPP
+    - ChamSys
+    - MA Lighting
 sources:
   status:
     url: https://www.baldrickboard.com/en/boards/baldrick8
     retrieved: '2026-11-18'
     notes: 'creator page offers Baldrick8 v2 at $75 via Baldrick Store, in stock'
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/ilightthat.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://www.baldrickboard.com/en/boards/baldrick8/manual
+      retrieved: '2026-11-18'
+      notes: 'Introduction > Flexible Input Support and 3 Input Ports. Customer-showcased tools (MadMapper, ELM, LOR, sacnView, Resolume Arena) are excluded: the maker says not to ask for support with them.'
+  outputs.protocols:
+    url: https://www.baldrickboard.com/en/boards/baldrick8/manual
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: Baldrick8 Manual (updated 25 Oct 2026), Introduction > 8 Pixel Outputs (also 'RGBW pixels supported' and 'Additional protocols are always being added').

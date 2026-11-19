@@ -9,6 +9,7 @@ inputs:
     Ethernet: true
     USB: true
   standalone: true # plays from SD card
+  requires_host: BeagleBone Black
 outputs:
   count: 32
   connector:
@@ -18,6 +19,8 @@ outputs:
     DMX512: 2
   pixels:
     max_total: 40000
+  protocols:
+    - WS2811
 power:
   voltage:
     max: 12
@@ -38,15 +41,38 @@ related:
   - type: replacement
     ref: controllers/wb48
     notes: Wally's current controller offering (mounts for the WB1616 are still sold)
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: FPP cape for the BeagleBone Black (a BBB Rev C is included in the kit)
+    source:
+      url: https://cdn.shopify.com/s/files/1/0354/4763/6013/files/WB1616-eeprom.bin?v=1699928501
+      retrieved: '2026-11-18'
 software:
   works_with:
     - xLights
+  firmware:
+    - FPP
 sources:
   status:
     url: https://wallyslights.com/products/wallys-lights-wb1616-controller
     retrieved: '2026-11-18'
     notes: 'product page now 302s to the homepage and its Shopify .json is 404 (removed from catalog); last capture 2025-08-05'
   software.works_with:
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://web.archive.org/web/20250805175734/https://wallyslights.com/products/wallys-lights-wb1616-controller
+      retrieved: '2026-11-18'
+      notes: Wayback snapshot 2025-08-05 of the (now 404) product page; description and assembly steps
+  outputs.protocols:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: 'xLights controller definitions: WB1616 is based on FPP:FPPStringCapeTTYs, whose PixelProtocols list only ws2811 (https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/fpp.xcontroller).'
+  software.firmware:
+    url: https://cdn.shopify.com/s/files/1/0354/4763/6013/files/WB1616-Manual.docx?v=1674769990
+    retrieved: '2026-11-18'
+    notes: "WB1616 Controller Manual (maker file on Wally's Shopify CDN), Features. Archived product page: 'The WB1616 is a BBB cape controller based off of the FPP software.'"
+  inputs.requires_host:
+    url: https://cdn.shopify.com/s/files/1/0354/4763/6013/files/WB1616-eeprom.bin?v=1699928501
+    retrieved: '2026-11-18'
+    notes: FPP cape EEPROM image published by the maker (cape-info.json, designer "Wally's Lights LLC").
