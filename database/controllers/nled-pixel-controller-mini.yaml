@@ -5,9 +5,10 @@ creator:
   page: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
 inputs:
   physical:
-    Ethernet: true
+    DMX: RS-485 (XLR via optional pigtail)
+    Serial: TTL header
   protocols:
-    - Art-Net
+    - DMX512
   standalone: false
 outputs:
   count: 1
@@ -43,3 +44,10 @@ sources:
     url: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
     retrieved: '2026-11-18'
     notes: WS2803 added from the v4a datasheet (http://www.nledshop.com/downloads/datasheets/nled-pixel-controller-mini-v4a.pdf) 'Supported Pixel I.C.
+  inputs.physical:
+    url: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
+    retrieved: '2026-11-18'
+    notes: "'accept standard DMX-512, in addition to TTL serial signals'"
+  inputs.protocols:
+    url: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html
+    retrieved: '2026-11-18'

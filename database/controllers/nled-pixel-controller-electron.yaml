@@ -19,7 +19,7 @@ outputs:
   driver:
     buffered: true
   pixels:
-    max_per_output: 170
+    max_per_output: 256 # standalone, firmware v2e+; up to 1024 with the Aurora Matrix firmware
   protocols:
     - WS2801
     - WS2803
@@ -61,7 +61,7 @@ outputs:
     - SM16704
 power:
   voltage:
-    max: 24
+    max: 12
 data:
   storage:
     - type: Flash
@@ -92,3 +92,11 @@ sources:
     url: https://www.nledshop.com/pixelchipsets/
     retrieved: '2026-11-18'
     notes: "'Controller Compatibility Chart' (page 'Updated 12/8/2023'): every row with an X in the Electron column"
+  power.voltage.max:
+    url: http://www.nledshop.com/pixelelectron/
+    retrieved: '2026-11-18'
+    notes: "'Low voltage, 3.3v to 12 volt support'"
+  outputs.pixels.max_per_output:
+    url: http://www.nledshop.com/pixelelectron/
+    retrieved: '2026-11-18'
+    notes: "'v.2e has expanded the amount of pixels that can be controlled in standalone to 768 channels, 256 RGB LEDs'"

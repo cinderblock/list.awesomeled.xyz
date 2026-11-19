@@ -9,12 +9,12 @@ inputs:
     Bluetooth: true
   standalone: true
 outputs:
-  count: 1
+  count: 2
   connector:
     ref: mtsb-combicon
   clocked: selectable
   pixels:
-    max_per_output: 2000
+    max_per_output: 1500 # 3000 total across 2 outputs at 25 fps (2000 at 35 fps)
   protocols:
     - WS2812B
     - WS2811
@@ -58,4 +58,12 @@ sources:
   wled_compatible:
     url: https://smlight.tech/product/slwf-03
     retrieved: '2026-11-18'
+  outputs.count:
+    url: https://smlight.tech/product/slwf-03
+    retrieved: '2026-11-18'
+    notes: "'support 2 channels for LED strips out of the box'"
+  outputs.pixels.max_per_output:
+    url: https://www.tindie.com/products/smartlightme/a1-slwf-03-wled-esp32-controller-home-assistant
+    retrieved: '2026-11-18'
+    notes: "'good performance 35 fps is 2000 LEDs (two outputs), OK performance (25 fps) is 3000 LEDs for two outputs'"
 wled_compatible: true

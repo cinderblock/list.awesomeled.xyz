@@ -39,7 +39,9 @@ outputs:
     - WS2801
 power:
   voltage:
-    max: 5
+    min: 4
+    max: 18
+    # V3 Standard; the Pico+ runs from 5 V
   current:
     max: 1.8
 core:
@@ -64,3 +66,7 @@ sources:
     url: https://electromage.com/pixelblaze
     retrieved: '2026-11-18'
     notes: The board runs the Pixelblaze pattern engine/editor (pattern-drivers/pixelblaze); 'The Settings tab lets you update the firmware over-the-air'.
+  power.voltage:
+    url: https://electromage.com/pixelblaze
+    retrieved: '2026-11-18'
+    notes: "'4-18 V with reverse polarity protection'"

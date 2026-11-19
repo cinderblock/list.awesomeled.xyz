@@ -13,8 +13,6 @@ inputs:
     Bluetooth: 5 LE (future)
   protocols:
     - Art-Net
-    - sACN # E1.31
-    - OPC # Open Pixel Control
   standalone: false
 outputs:
   count: 4
@@ -31,7 +29,7 @@ power:
   voltage:
     max: 24
   current:
-    max: 24
+    max: 12
   connector: 2-pin Phoenix Screw 5.08mm
 case:
   waterproof: false
@@ -56,4 +54,12 @@ sources:
     url: https://shop.chroma.tech/products/angio-4
     retrieved: '2026-11-18'
     notes: listed (regular $129, sale $99), sold out
+  inputs.protocols:
+    url: https://shop.chroma.tech/products/angio-4
+    retrieved: '2026-11-18'
+    notes: "'ArtNet (sACN / E1.31, Open Pixel Control will be supported in future software releases)'"
+  power.current.max:
+    url: https://shop.chroma.tech/products/angio-4
+    retrieved: '2026-11-18'
+    notes: "'Max: 12A input power is divided between the 4 outputs'"
 wled_compatible: false

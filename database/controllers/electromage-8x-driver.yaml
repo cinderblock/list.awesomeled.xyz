@@ -8,12 +8,10 @@ creator:
 vendors:
   - name: Tindie
     page: https://www.tindie.com/products/electromage/electromage-serial-to-8x-ws2812apa102-driver/
-notes: Stacks up to 8 on a bus via internal Ethernet switch
+notes: Up to 8 boards share one serial line (address set by cuttable jumpers).
 inputs:
   physical:
-    Ethernet: true # internal switch
-  protocols:
-    - Art-Net
+    Serial: UART, 2 Mbps
   standalone: false
 outputs:
   count: 8
@@ -72,3 +70,7 @@ sources:
     url: https://electromage.com/docs/output-expander
     retrieved: '2026-11-18'
     notes: "'What is it?' (two lines of the list joined)."
+  inputs.physical:
+    url: https://electromage.com/docs/output-expander
+    retrieved: '2026-11-18'
+    notes: "'This is a UART serial to addressable LED driver board'"

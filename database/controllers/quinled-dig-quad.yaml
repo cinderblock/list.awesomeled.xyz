@@ -29,7 +29,7 @@ power:
   current:
     max: 30
 core:
-  family: ESP8266/ESP32 # either module fits the socket
+  family: ESP32
 features:
   - Per-output level shifters
   - Onboard fuses with power distribution terminals
@@ -69,4 +69,8 @@ sources:
   wled_compatible:
     url: https://quinled.info/quinled-dig-quad/
     retrieved: '2026-11-18'
+  core.family:
+    url: https://quinled.info/quinled-dig-quad-pre-assembled-v4-specifications/
+    retrieved: '2026-11-18'
+    notes: "v4: 'Uses Espressif ESP32 Micro-controllers'"
 wled_compatible: true

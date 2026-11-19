@@ -1,14 +1,14 @@
-name: Luminaxa
+name: Luminxa
 status: active
 release_year: 2020
 creator:
   name: Luminxa
   url: https://luminxa.com/
   page: https://luminxa.com/
-notes: Internal 3500mAh battery; controlled via Android app.
+notes: Internal 3500mAh battery; configured from a browser (no app needed).
 inputs:
   physical:
-    Ethernet: true
+    Wi-Fi: true
   standalone: true
 outputs:
   count: 1
@@ -32,11 +32,15 @@ features:
   - Internal 3500mAh rechargeable battery
   - Android app control
 price: 49.99
-software:
-  works_with:
-    - Android
 sources:
   outputs.protocols:
     url: https://luminxa.com/wifi-led-settings/
     retrieved: '2026-11-18'
     notes: "'LED Settings' table; SK6812 from the same table: 'Support for SK6812 LEDs with white channel' (RGBW option)."
+  name:
+    url: https://luminxa.com/product/luminxa-controller-only/
+    retrieved: '2026-11-18'
+  inputs.physical:
+    url: https://luminxa.com/product/luminxa-controller-only/
+    retrieved: '2026-11-18'
+    notes: "'Wi-Fi Enabled, Battery Powered LED controllers'"

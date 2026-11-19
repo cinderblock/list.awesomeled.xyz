@@ -5,7 +5,7 @@ creator:
   page: https://shop.blinkinlabs.com/products/blinkytape-control-board
 inputs:
   physical:
-    Bluetooth: true
+    USB: true
   standalone: true
 outputs:
   count: 1
@@ -45,3 +45,7 @@ sources:
     url: https://shop.blinkinlabs.com/products/blinkytape-control-board
     retrieved: '2026-11-18'
     notes: listed, PCB $17.99 (16 in stock), JST $18.99 (12 in stock)
+  inputs.physical:
+    url: https://shop.blinkinlabs.com/products/blinkytape-control-board
+    retrieved: '2026-11-18'
+    notes: ATmega32u4 over USB; no Bluetooth

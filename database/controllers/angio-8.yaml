@@ -13,8 +13,6 @@ inputs:
     Bluetooth: 5 LE (future)
   protocols:
     - Art-Net
-    - sACN # E1.31
-    - OPC # Open Pixel Control
   standalone: false
 outputs:
   count: 8
@@ -63,4 +61,8 @@ sources:
     url: https://shop.chroma.tech/products/angio-8
     retrieved: '2026-11-18'
     notes: listed and available (regular $199, sale $169)
+  inputs.protocols:
+    url: https://shop.chroma.tech/products/angio-8
+    retrieved: '2026-11-18'
+    notes: "'ArtNet (sACN / E1.31, Open Pixel Control will be supported in future software releases)'"
 wled_compatible: false

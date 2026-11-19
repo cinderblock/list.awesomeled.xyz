@@ -7,10 +7,10 @@ creator:
 vendors:
   - name: Tindie
     page: https://www.tindie.com/products/electromage/electromage-pro-8x-ws2812apa102-led-driver/
-notes: Stacks up to 8 on a bus
+notes: Up to 8 boards share one serial line.
 inputs:
   physical:
-    Ethernet: true
+    Serial: UART, 2 Mbps
   standalone: false
 outputs:
   count: 8
@@ -75,3 +75,7 @@ sources:
     url: https://electromage.com/docs/pro-output-expander
     retrieved: '2026-11-18'
     notes: "'Addressable LED Support' (two lines of the list joined)."
+  inputs.physical:
+    url: https://electromage.com/docs/pro-output-expander
+    retrieved: '2026-11-18'
+    notes: "'can be used with just about any microcontroller's serial (UART) port(s)'"

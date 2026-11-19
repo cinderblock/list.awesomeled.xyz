@@ -19,7 +19,7 @@ outputs:
     max_total: 4096
 power:
   voltage:
-    max: 24
+    max: 48 # 48 V only with the Power-5HV powerboard
   current:
     max: 100
 core:
@@ -69,4 +69,8 @@ sources:
   wled_compatible:
     url: https://dig-octa.info/
     retrieved: '2026-11-18'
+  power.voltage.max:
+    url: https://quinled.info/quinled-dig-octa/
+    retrieved: '2026-11-18'
+    notes: "'compatible with addressable 5v-48v* (*48v supported using the Power-5HV only)'"
 wled_compatible: true

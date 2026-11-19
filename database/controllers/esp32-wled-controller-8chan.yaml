@@ -5,7 +5,7 @@ creator:
   page: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
 inputs:
   physical:
-    Ethernet: true
+    Wi-Fi: 2.4GHz
   standalone: true # runs WLED firmware standalone
 outputs:
   count: 8
@@ -43,4 +43,8 @@ sources:
     url: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
     retrieved: '2026-11-18'
     notes: still listed at $45 (not retired) but Out of Stock, sold out since Aug 18, 2024
+  inputs.physical:
+    url: https://www.tindie.com/products/giovannicas/esp32-wled-controller-8chan/
+    retrieved: '2026-11-18'
+    notes: ESP32-WROOM with PCB or external antenna; no Ethernet
 wled_compatible: true
