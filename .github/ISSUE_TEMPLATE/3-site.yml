@@ -1,0 +1,23 @@
+name: The site is broken or confusing
+description: A page that doesn't load, a filter that gives the wrong rows, a layout problem, an idea for the site itself.
+title: 'Site: '
+labels:
+  - bug
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: The full address, including everything after the "?". It records your search, sort, filters, and columns.
+      placeholder: https://list.awesomeled.xyz/controllers?f=wled_compatible:yes
+  - type: input
+    id: device
+    attributes:
+      label: Browser and device
+      placeholder: Safari on an iPhone 15, Firefox 133 on Windows 11

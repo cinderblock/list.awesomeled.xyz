@@ -1,0 +1,63 @@
+name: Something is missing from the list
+description: A controller, pixel, chip, board, connector, library, or system that should be on it.
+title: 'Add: '
+body:
+  # "markdown" is the issue-form block type, not prose
+  # eslint-disable-next-line custom/terminology
+  - type: markdown
+    attributes:
+      value: |
+        Suggest something to add. A name and a link are enough to start; every extra fact you fill in saves a lookup.
+        Makers are welcome to submit their own products: please say so, and stick to what your documentation states.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The product's name or part number, as its maker writes it.
+      placeholder: PixLite A16-S Mk3
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Pick the closest one. What each means is on https://list.awesomeled.xyz/about
+      options:
+        - Controllers
+        - Pixels
+        - Pixel ICs
+        - Pattern Drivers
+        - Connectors
+        - DIY MicroBoards
+        - Level Converters
+        - Adapters
+        - Drive Libraries
+        - Pixel Decoders
+        - Diffusive Materials
+        - Commercial Systems
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: maker
+    attributes:
+      label: Who makes it?
+      placeholder: Advatek Lighting
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: The maker's product page if there is one; otherwise a datasheet, repository, or store listing.
+      placeholder: https://example.com/product
+    validations:
+      required: true
+  - type: textarea
+    id: facts
+    attributes:
+      label: What do you know about it?
+      description: Outputs, voltages, protocols, price, package, whatever applies. Rough notes are fine.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why does it belong here?
+      description: Optional. What it does that the entries already listed don't, or who uses it.

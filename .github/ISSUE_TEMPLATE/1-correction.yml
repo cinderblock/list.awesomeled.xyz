@@ -1,0 +1,37 @@
+name: Something on the list is wrong
+description: A spec, price, link, status, or name that doesn't match the real product.
+title: 'Correction: '
+body:
+  # "markdown" is the issue-form block type, not prose
+  # eslint-disable-next-line custom/terminology
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping keep the list right. One entry per issue is easiest to act on.
+        If you know the right value and are comfortable editing a YAML file, the entry's page ends with **Suggest an edit**, which opens a pull request instead.
+  - type: input
+    id: entry
+    attributes:
+      label: Entry
+      description: The entry's page on list.awesomeled.xyz, or the product's name.
+      placeholder: https://list.awesomeled.xyz/controllers/falcon-f16v4
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong, and what should it say?
+      placeholder: Max pixels per output is listed as 680. The manual says 1,024 at 40 fps.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source
+      description: A link to the maker's page, manual, or datasheet that shows the right value. Corrections with a source can be applied without anyone having to look it up again.
+      placeholder: https://example.com/manual.pdf (page 12)
+  - type: textarea
+    id: more
+    attributes:
+      label: Anything else?
+      description: How you know (you own one, you make it, you measured it), or other entries with the same problem.

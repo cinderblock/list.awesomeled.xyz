@@ -2,6 +2,8 @@
 
 Thank you for your interest in contributing! This guide covers how to add new entries to the database, modify the UI, and add images.
 
+**Not here to write code?** <https://list.awesomeled.xyz/contribute> has the short version: forms to report a wrong value or a missing product, an edit link on every entry page, and a field reference for every category.
+
 ## Table of Contents
 
 - [Quick Start](#quick-start)
@@ -21,13 +23,14 @@ git clone https://github.com/your-username/list.awesomeled.xyz.git
 cd list.awesomeled.xyz
 
 # Install dependencies
-npm install
+bun install
 
 # Start development server
-npm run dev
+bun run dev
 
-# Run tests
-npm run test
+# Run tests (unit, then end-to-end in headless Chromium)
+bun run test:unit
+bun run test:e2e
 ```
 
 ---
@@ -283,6 +286,13 @@ every key names a field the entry has.
 | Diffusive Materials | [diffusive-material.json](database/_schema/diffusive-material.json) | [\_example.yaml](database/diffusive-materials/_example.yaml) |
 | Commercial Systems  | [commercial-system.json](database/_schema/commercial-system.json)   | [\_example.yaml](database/commercial-systems/_example.yaml)  |
 
+The same fields are listed for reading at
+<https://list.awesomeled.xyz/contribute>: each category's fields, what they
+hold, how many entries fill them in and the values in use. That page is
+generated from the schemas and the data, so it cannot drift from what the
+validator accepts. Its **Start a new entry** button opens GitHub's editor in
+the right directory with a starter file.
+
 Changing a schema means migrating the entries with it; see
 [database/\_schema/README.md](database/_schema/README.md).
 
@@ -502,31 +512,32 @@ Check it with `bun run mirror-datasheets --check --only <category>/<id>`.
 
 ```bash
 # Development server with hot reload
-npm run dev
+bun run dev
 
 # Build for production
-npm run build
+bun run build
 
-# Preview production build
-npm run preview
+# Serve the production build the way static hosting does
+bun scripts/serve-build.ts
 
-# Run tests
-npm run test
+# Run tests (unit, then end-to-end in headless Chromium)
+bun run test:unit
+bun run test:e2e
 
 # Type checking
-npm run typecheck
+bun run typecheck
 
 # Linting
-npm run lint
+bun run lint
 ```
 
 ### Testing Your Changes
 
-1. **Start the dev server**: `npm run dev`
+1. **Start the dev server**: `bun run dev`
 2. **Navigate to your new entry**: `http://localhost:5173/category/entry-id`
 3. **Check the category page**: Verify it appears in the table
 4. **Test search**: Ensure searchable fields work
-5. **Run the test suite**: `npm run test`
+5. **Run the test suite**: `bun run test:unit` and `bun run test:e2e`
 
 ### Submitting a Pull Request
 
@@ -546,6 +557,8 @@ npm run lint
 
 6. **Push and create a PR**
 
+The first time you open a pull request, a bot asks you to agree to the contributor agreement ([data](CLA-DATABASE.md), [code](CLA-CODE.md)) by posting a comment.
+
 ### Validation
 
 The database uses JSON Schema for validation. Schemas are located in `database/_schema/`.
@@ -561,7 +574,7 @@ Before submitting:
 
 ## Questions?
 
-- Open an issue on GitHub for questions or suggestions
+- [Open an issue](https://github.com/cinderblock/list.awesomeled.xyz/issues/new/choose): there are forms for a correction, a missing product and a problem with the site
 - Check existing entries in the same category for examples
 - Review the JSON schemas in `database/_schema/` for field details
 

@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Search the list first
+    url: https://list.awesomeled.xyz/search
+    about: The product may already be there under another name, or the value may already be fixed.
+  - name: Fix it yourself
+    url: https://github.com/cinderblock/list.awesomeled.xyz/blob/master/CONTRIBUTING.md
+    about: Every entry is one small YAML file. Each entry page ends with "Suggest an edit", which opens its file in GitHub's editor.
