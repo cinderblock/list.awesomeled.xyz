@@ -341,7 +341,7 @@
     "other_links": {
       "type": ["array", "null"],
       "description": "Other pages about this product that have no dedicated field: protocol write-ups, series overviews, build guides, reviews, old product pages. Product, datasheet, repository and vendor links belong in their own fields.",
-      "items": { "type": "string" }
+      "items": { "type": "string", "format": "uri" }
     },
     "datasheet": {
       "type": ["object", "null"],
