@@ -67,25 +67,33 @@ to look.
 2. **Research pass** ← current. Per-category agents, each doing link triage
    (from the 2026-11-18 Node sweep), availability/status, and price
    (re-confirm or fill) for every entry in its slice, following "Research
-   conventions" below. Findings land in the scratchpad `findings/` folder and
-   are summarized here. Pilot first (pixel-decoders + level-converters),
-   then fan out:
-   - controllers 8/a–e, f–k, l–o, p, q–w
-   - adapters + pixel-decoders, microboards + level-converters
-   - pixel-ICs + pixels (non-LCSC price gaps)
-   - connectors (representative SKU qty tiers)
-   - commercial systems + diffusive materials + pattern drivers (links)
-3. **Commit** each slice: files with verified price/status → review commit;
-   link-only files → separate commit added to `IGNORED_COMMITS` _after_ the
-   rebase that precedes the push (hashes change on rebase).
+   conventions" below. Briefs and findings live in the scratchpad
+   (`brief-*.md`, `findings/*.md`).
+   - [x] Pilot: pixel-decoders + level-converters — pushed (`1d45f70`).
+   - [ ] Running: connectors; commercial systems + diffusive links;
+         software (pattern drivers + drive libraries); controllers
+         0-9/a–e, f–k, l–o, p, q–z; adapters; microboards; pixel ICs; pixels.
+3. **Integrate each slice** (main worktree is on an old base while agents
+   edit it, so integration happens in a staging worktree
+   `scratchpad/push-wt` on `origin/master`):
+   - classify changed files (`classify.mjs`): verified price/status →
+     review commit; link-only → separate commit listed in
+     `ignore-subjects.txt`;
+   - commit in the main worktree, cherry-pick into push-wt, resolve
+     conflicts with the other streams' restructures (take theirs for
+     structure, ours for price/status/links);
+   - convert `# src: url | date | note` status comments into
+     `sources.status` / `related[].source` (`src2sources.mjs`);
+   - `push.sh`: rebase, re-point `IGNORED_COMMITS` at final hashes, strict
+     checks, fast-forward push, retry on rejection.
 4. **Commercial systems** — published price points for all 18; define the
    `$` scale (proposal: USD per pixel, log-spaced); check each
    `price_range`.
 5. **Issue #2** — post the triage result.
-6. **Durability** — check-links: run under Node in docs (Bun/Windows TLS
-   bug), probe prose-embedded URLs and `description.md`; workflow
-   re-enabled + self-healing (needs Cameron's yes); monthly report gains a
-   price-staleness section; refresh `currency.ts` rates.
+6. **Durability** — done: prose URLs + docs probed, per-host pacing,
+   dead_links re-probed (BACK), price-staleness section, FX rates
+   refreshed, discontinued prices never "stale". Pending: workflow
+   re-enabled + self-healing (needs Cameron's yes).
 
 ## Research conventions
 
@@ -126,6 +134,14 @@ replacement` with `ref: <category>/<slug>` if it's in the database, else
   availability; Wayback: `https://archive.org/wayback/available?url=` and
   the CDX API. Headless Playwright via Node for JS-only storefronts. Never
   the Chrome extension (it drives Cameron's real browser).
+- **Regular price, not sale price**; sale goes in `price_source.notes`.
+- **Archived last list prices**: `retrieved` = capture date, `url` = capture.
+- **Redirect to a generic brand page** without the product = dead.
+- Missing product links may be added.
+- **Status evidence**: `status: X # src: <url> | <date> | <note>` (and the
+  same on `- type: replacement` items) until the slice is integrated, where
+  it becomes `sources.status` / `related[].source` (stream 2's per-field
+  provenance, on master since 2026-11-18).
 - **Format**: key order `name, status, release_year, creator, developer,
 manufacturers, vendors, notes, inputs, outputs, power`, then
   alphabetical; finish with `bunx eslint --fix database/<cat>`,
@@ -157,6 +173,22 @@ failed`, 213 false CHECKs). `node scripts/check-links.ts` works (Node 26
   (winterlights.in), PB16 DIYC thread, GeoPix (geopix.io NXDOMAIN).
 - `IGNORED_COMMITS` hashes go stale when a rebase rewrites the commit: add
   the entry only after the final rebase before pushing, or re-point it.
+- **Pre-push checks must not be piped through `tail`** — the pipe hides the
+  exit code, and one push went out while typecheck printed an error. Use the
+  scratchpad `checks.sh` (`set -euo pipefail`). That error turned out to be
+  a stale nested `node_modules/ajv-formats/node_modules/ajv` (8.17.1) left
+  by an older lockfile; `bun install --frozen-lockfile` doesn't remove it,
+  a clean reinstall does. Master was fine.
+- Monthly CI had a wall of Tindie/Shopify 429s; per-host pacing removed them
+  (2nd local sweep: 0 × 429).
+- Pilot (21 entries): TI list prices up 15-50% since July; TC4427 priced
+  from microchipDIRECT (only headless Chrome-channel Playwright gets past
+  Microchip's bot wall); Pixel2Things boards discontinued (2022).
+- The Bash tool strips backslashes inside heredocs — write scripts with
+  the Write tool (bit me once: an escaped `\n` became a real newline in TS).
+- Other streams restructured pixel-decoder `outputs` and restored 117 sheet
+  hyperlinks while the pilot ran: cherry-picks conflict, resolve by taking
+  master's structure plus our price/status/links.
 - Pixels, pixel ICs and connectors had no Price column in their tables.
 - `formatPriceText` rounded $0.0446 to $0.045 (entry) / $0.04 (table).
 - The sheet's Commercial tab has no `$` legend; existing ratings imply a
