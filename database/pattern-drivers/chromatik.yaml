@@ -17,6 +17,10 @@ capabilities:
   designer: true
   visualizer: 3D
   programmatic: true
+images:
+  - file: chromatik.webp
+    source: https://chromatik.co/
+    credit: Heron Arts LLC (Chromatik)
 links:
   url: https://chromatik.co/
 platforms:

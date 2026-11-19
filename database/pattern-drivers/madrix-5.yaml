@@ -21,6 +21,10 @@ capabilities:
   live: true
   designer: true
   visualizer: 3D
+images:
+  - file: madrix-5.webp
+    source: https://help.madrix.com/m5/html/madrix/hidd_user_interface_link.html
+    credit: MADRIX / inoage GmbH
 links:
   url: https://www.madrix.com/products/software
 platforms:

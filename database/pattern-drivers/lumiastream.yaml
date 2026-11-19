@@ -14,6 +14,10 @@ aliases:
 capabilities:
   live: false
   designer: false
+images:
+  - file: lumiastream.webp
+    source: https://lumiastream.com/
+    credit: Lumia Stream
 integrations: Home Assistant
 links:
   url: https://lumiastream.com/

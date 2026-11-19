@@ -13,6 +13,10 @@ capabilities:
   designer: true
   visualizer: 3D
   programmatic: Both
+images:
+  - file: pixelblaze.webp
+    source: https://electromage.com/pixelblaze
+    credit: ElectroMage
 integrations: Home Assistant, Hubitat, Pixelblaze
 language: JS subset
 links:

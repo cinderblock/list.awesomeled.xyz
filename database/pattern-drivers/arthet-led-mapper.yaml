@@ -10,6 +10,10 @@ aliases:
 capabilities:
   live: false
   designer: true
+images:
+  - file: arthet-led-mapper.webp
+    source: https://github.com/cyberboy666/artnet_led_mapper
+    credit: cyberboy666 (artnet_led_mapper)
 links:
   url: https://github.com/cyberboy666/artnet_led_mapper
 platforms:

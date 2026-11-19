@@ -22,6 +22,10 @@ capabilities:
   live: true
   designer: false
   programmatic: Both
+images:
+  - file: falconplayer.webp
+    source: https://falconchristmas.github.io/FPP_Manual(9.x).pdf
+    credit: Falcon Player (FPP) project
 integrations: OSC, MIDI, Home Assistant, RemoteFalcon, plugins
 links:
   url: https://github.com/FalconChristmas/fpp

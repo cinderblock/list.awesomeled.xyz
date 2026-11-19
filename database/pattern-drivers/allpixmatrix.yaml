@@ -10,6 +10,10 @@ outputs:
 capabilities:
   live: false
   designer: true
+images:
+  - file: allpixmatrix.webp
+    source: https://www.nledshop.com/nledallpixmatrix/
+    credit: Northern Lights Electronic Design (NLED)
 links:
   url: https://github.com/NLED/allpixmatrix
 platforms:

@@ -8,6 +8,10 @@ outputs:
     artnet: Output
 capabilities:
   live: true
+images:
+  - file: leds-master.webp
+    source: https://github.com/spectrenoir06/LED_master
+    credit: Antoine Doussaud (LEDs Master)
 links:
   url: https://antoine.doussaud.org/leds_master
   mirror: https://github.com/spectrenoir06/LED_master

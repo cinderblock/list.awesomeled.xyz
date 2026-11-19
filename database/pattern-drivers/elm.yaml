@@ -19,6 +19,10 @@ capabilities:
   live: true
   designer: true
   visualizer: 3D
+images:
+  - file: elm.webp
+    source: https://www.enttec.co.uk/product/dmx-lighting-control-software/pixel-mapping-software/
+    credit: ENTTEC
 integrations: Triggering via HTTP/OSC/Art-net/sACN/DMX
 language: null
 links:

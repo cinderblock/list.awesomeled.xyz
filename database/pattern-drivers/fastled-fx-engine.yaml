@@ -7,6 +7,10 @@ capabilities:
   live: false
   designer: true
   visualizer: Browser Wasm Preview
+images:
+  - file: fastled-fx-engine.webp
+    source: https://github.com/FastLED/cli
+    credit: FastLED project
 license: MIT
 links:
   url: https://github.com/FastLED/FastLED

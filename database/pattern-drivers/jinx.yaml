@@ -8,6 +8,10 @@ outputs:
 capabilities:
   live: false
   designer: true
+images:
+  - file: jinx.webp
+    source: https://live-leds.de/
+    credit: 'Live-LEDs.de (Jinx!)'
 integrations: Should be solderlab.de (which is down)
 links:
   url: https://live-leds.de/

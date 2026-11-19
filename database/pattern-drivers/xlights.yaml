@@ -15,6 +15,10 @@ aliases:
 capabilities:
   live: false
   designer: true
+images:
+  - file: xlights.webp
+    source: https://apps.apple.com/us/app/xlights/id1137297689
+    credit: xLights project (Kulp Lights LLC)
 license: GPL-3.0
 links:
   url: https://www.xlights.org

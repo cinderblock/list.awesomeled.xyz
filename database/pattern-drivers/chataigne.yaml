@@ -15,6 +15,10 @@ outputs:
 capabilities:
   live: true
   programmatic: Both
+images:
+  - file: chataigne.webp
+    source: https://github.com/benkuper/Chataigne
+    credit: Benjamin Kuperberg (Chataigne project)
 language: JavaScript
 license: GPL-3.0
 links:

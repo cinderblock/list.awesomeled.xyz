@@ -23,6 +23,10 @@ capabilities:
   designer: true
   visualizer: 3D (build your own)
   programmatic: Both
+images:
+  - file: touchdesigner.webp
+    source: https://docs.derivative.ca/Intro_to_TouchDesigner
+    credit: Derivative
 integrations: Tons
 language: Python, GLSL
 links:

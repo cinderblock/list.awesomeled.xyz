@@ -16,6 +16,10 @@ capabilities:
   live: true
   designer: true
   programmatic: Both
+images:
+  - file: smode.webp
+    source: https://www.smode.io/en/products/smode-compose-in-real-time-creative-software
+    credit: Smode Tech
 links:
   url: https://www.smode.io/en/
 platforms:

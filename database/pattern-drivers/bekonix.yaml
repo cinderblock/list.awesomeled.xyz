@@ -12,6 +12,10 @@ capabilities:
   designer: true
   visualizer: 2D
   programmatic: Input
+images:
+  - file: bekonix.webp
+    source: https://www.bekonix.com/downloads-platform
+    credit: Bekonix
 links:
   url: https://www.bekonix.com/
 platforms:

@@ -10,6 +10,10 @@ capabilities:
   live: true
   designer: true
   visualizer: 3D
+images:
+  - file: magicq.webp
+    source: https://chamsyslighting.com/product/magicq-software/
+    credit: ChamSys
 links:
   url: https://chamsyslighting.com/
 platforms:

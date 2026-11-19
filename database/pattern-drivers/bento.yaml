@@ -15,6 +15,10 @@ capabilities:
   designer: true
   visualizer: 'Yes'
   programmatic: Both
+images:
+  - file: bento.webp
+    source: https://github.com/benkuper/BenTo
+    credit: Benjamin Kuperberg (BenTo project)
 language: JavaScript
 license: GPL-3.0
 links:

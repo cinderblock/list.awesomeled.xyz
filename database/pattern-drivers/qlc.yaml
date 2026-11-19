@@ -22,6 +22,10 @@ capabilities:
   designer: true
   visualizer: 3D view available in V5
   programmatic: Both
+images:
+  - file: qlc.webp
+    source: https://www.qlcplus.org/
+    credit: QLC+ Development Team
 integrations: 'Supported MIDI/DMX Hardware List: https://www.qlcplus.org/discover/compatibility'
 language: C++
 license: Apache-2.0

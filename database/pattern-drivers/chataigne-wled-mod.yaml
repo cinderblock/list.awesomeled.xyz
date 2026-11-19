@@ -7,6 +7,10 @@ aliases:
   - WLED Module for Chataigne
 capabilities:
   live: true
+images:
+  - file: chataigne-wled-mod.webp
+    source: https://github.com/zak-45/WLED-Chataigne-Module
+    credit: zak-45 (WLED Chataigne Module)
 license: GPL-3.0
 links:
   url: https://github.com/zak-45/WLED-Chataigne-Module

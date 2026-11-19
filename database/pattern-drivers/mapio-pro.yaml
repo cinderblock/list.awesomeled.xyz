@@ -13,6 +13,10 @@ outputs:
 capabilities:
   live: true
   designer: true
+images:
+  - file: mapio-pro.webp
+    source: https://visution.com/
+    credit: Visution
 links:
   url: https://visution.com/
 platforms:

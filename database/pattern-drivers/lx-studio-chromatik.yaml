@@ -20,6 +20,10 @@ capabilities:
   designer: true
   visualizer: 3D
   programmatic: Both
+images:
+  - file: lx-studio-chromatik.webp
+    source: https://lx.studio/
+    credit: Heron Arts LLC (LX Studio)
 language: Java
 links:
   url: https://lx.studio/

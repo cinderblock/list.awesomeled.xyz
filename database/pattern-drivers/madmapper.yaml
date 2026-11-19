@@ -12,6 +12,10 @@ outputs:
   other: MIDI, OSC, EtherDream, Arduino
 capabilities:
   designer: true
+images:
+  - file: madmapper.webp
+    source: https://madmapper.com/
+    credit: MadMapper
 links:
   url: https://madmapper.com/
 platforms:

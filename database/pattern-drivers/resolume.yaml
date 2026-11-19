@@ -19,6 +19,10 @@ capabilities:
   live: true
   designer: true
   visualizer: 2D
+images:
+  - file: resolume.webp
+    source: https://resolume.com/software
+    credit: Resolume
 links:
   url: https://resolume.com/software
 platforms:

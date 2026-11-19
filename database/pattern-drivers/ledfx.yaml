@@ -12,6 +12,10 @@ outputs:
 capabilities:
   live: true
   designer: false
+images:
+  - file: ledfx.webp
+    source: https://github.com/LedFx/LedFx-Frontend-v2
+    credit: LedFx project
 language: Python
 license: GPL-3.0
 links:

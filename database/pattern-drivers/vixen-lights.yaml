@@ -13,6 +13,10 @@ aliases:
 capabilities:
   live: false
   designer: true
+images:
+  - file: vixen-lights.webp
+    source: https://github.com/VixenLights/Vixen
+    credit: Vixen Lights project
 links:
   url: https://www.vixenlights.com/download/
 platforms:

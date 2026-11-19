@@ -17,6 +17,10 @@ capabilities:
   live: true
   designer: false
   visualizer: Limited 1D
+images:
+  - file: wled.webp
+    source: https://kno.wled.ge/basics/web-ui/
+    credit: WLED project
 integrations: Home Assistant, WLED App.
 language: C++
 license: EUPL-1.2

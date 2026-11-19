@@ -17,6 +17,10 @@ capabilities:
   live: true
   designer: true
   visualizer: 2D
+images:
+  - file: led-strip-studio-software.webp
+    source: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+    credit: LED Strip Studio
 links:
   url: https://www.ledstripstudio.com/products/lss4/
 platforms:

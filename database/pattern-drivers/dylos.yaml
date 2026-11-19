@@ -20,6 +20,10 @@ dead_links:
   - url: https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
     archive: https://web.archive.org/web/20211112071836/https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
     checked: '2026-11-18'
+images:
+  - file: dylos.webp
+    source: https://obsidiancontrol.com/dylos
+    credit: Obsidian Control Systems
 integrations: Obsidian Onyx
 links:
   url: https://www.obsidiancontrol.com/pages/dylos
