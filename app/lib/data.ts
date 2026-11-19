@@ -93,6 +93,8 @@ export const IGNORED_COMMITS = new Set([
   '3575aabbe87ca8955e2bded24b3925721644aae6', // data-freshness: Microcyb link live again (1)
   '51b4e0768f715e8fb90f611fdc01aa1e9849374c', // data-freshness: diffusive-material link fixes (3)
   '6106eeb4e1c050d83afdd2c84def90588787a330', // data-freshness: controllers f–k dead-link re-checks (2)
+  'bd81611df795e78f9d473c35d46a695af670030a', // data-freshness: EMP link live again (1)
+  'd860c62d8cd13d86c0a6190139b1d4e6fcc32515', // data-freshness: Jinx / LEDs Master links (2)
 ]);
 
 /**
