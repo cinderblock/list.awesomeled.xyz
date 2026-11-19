@@ -1,23 +1,38 @@
-name: Flex Pixel Driver
+name: Flex Pixel Driver 1
 status: discontinued
 creator:
-  name: Elation
+  name: Elation Lighting # Elation Professional on the original documents
   url: https://www.elationlighting.com
-  page: https://www.elationlighting.com/flex-pixel-driver-1
+  page: https://www.elationlighting.com/products/flex-pixel-driver-1
+notes: DMX driver for Elation FLEX PIXEL WP and P40WP pixel tape (72 pixels per 10 ft tape; P40WP uses the APA102 protocol). Uses 432 DMX channels and drives up to two tapes (144 pixels) from one data + clock output. SKU FLE768.
 inputs:
   physical:
-    Ethernet: true
+    DMX512: 3-pin terminals, in + thru
+  protocols:
+    - DMX512
   standalone: false
 outputs:
-  count: 2
-  connector:
-    ref: mtsb-combicon
+  count: 1
+  connector: 6-pin terminal (GND, NC, Data, CLK, NC, +5V)
   driver:
     buffered: true
   clocked: always
   pixels:
-    max_per_output: 72 # 144 total across 2 outputs
+    max_per_output: 144 # two 72-pixel tapes
+  protocols:
+    - APA102
 power:
   voltage:
+    min: 5
     max: 5
-price: 80
+  current:
+    max: 5
+case:
+  dimensions: 90x40x20mm
+  waterproof: IP20
+price: 74.99
+price_source:
+  retrieved: 2015-06
+  vendor: B&H Photo
+  url: https://web.archive.org/web/20141108233524/http://www.bhphotovideo.com/c/product/1036496-REG/elation_professional_flex_pixel_driver1.html
+  notes: street price (Nov 2014 and Jun 2015); Elation publishes no price
