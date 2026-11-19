@@ -32,6 +32,7 @@ outputs:
     - Philips Hue
 aliases:
   - MADRIX
+  - MADRIX 3
 capabilities:
   live: true
   designer: true
@@ -71,9 +72,12 @@ sources:
     retrieved: '2026-11-18'
     notes: 'MADRIX 5 licenses (start to maximum) offered through resellers; no public price list'
   aliases:
-    url: https://www.madrix.com/products/software
-    retrieved: '2026-11-18'
-    notes: Page title; the brand name is commonly used for the software.
+    - url: https://www.madrix.com/products/software
+      retrieved: '2026-11-18'
+      notes: Page title; the brand name is commonly used for the software.
+    - url: https://help.madrix.com/m5/html/madrix/hidd_5x_update.html
+      retrieved: '2026-11-18'
+      notes: "MADRIX 5 manual, 'Update From MADRIX 2 Or 3 To MADRIX 5': MADRIX 3 is the earlier version, licences update to MADRIX 5, and 'MADRIX 5 can automatically load MADRIX 3 Setup files.'"
 technical_notes:
   - Industry standard for professional LED installations
   - GPIO requires separate Madrix Orion hardware

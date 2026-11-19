@@ -1,5 +1,5 @@
 name: Allpixmatrix
-status: unknown
+status: end-of-life
 creator: NLED
 inputs:
   video: Input
@@ -9,6 +9,8 @@ outputs:
   other:
     - Glediator files
     - Pixel data
+aliases:
+  - NLED AllPixMatrix
 capabilities:
   live: false
   designer: true
@@ -24,7 +26,15 @@ platforms:
 pricing:
   price: Free
 sources:
+  status:
+    url: https://www.nledshop.com/nledallpixmatrix/
+    retrieved: '2026-11-18'
+    notes: "'This project is obsolete and abandoned.' NLED points to its successor, NLED AllMatrix"
   outputs.protocols.artnet:
     url: https://github.com/NLED/allpixmatrix
     retrieved: '2026-11-18'
     notes: "changelog: 'Added Artnet output support'"
+  aliases:
+    url: https://www.nledshop.com/nledallpixmatrix/
+    retrieved: '2026-11-18'
+    notes: Page headline 'NLED AllPixMatrix'; the GitHub repo's homepage field points here

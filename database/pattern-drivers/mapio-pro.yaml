@@ -11,6 +11,8 @@ outputs:
   serial: Output
   other:
     - PixelPusher
+aliases:
+  - Mapio
 capabilities:
   live: true
   designer: true
@@ -41,3 +43,7 @@ sources:
   creator:
     url: https://visution.com/
     retrieved: '2026-11-18'
+  aliases:
+    url: https://visution.com/
+    retrieved: '2026-11-18'
+    notes: Visution's product page calls the product 'Visution Mapio' / 'MAPIO' (MAPIO 2); LED strip and Art-Net pixel-mapping output are listed under MAPIO PRO, which this entry describes

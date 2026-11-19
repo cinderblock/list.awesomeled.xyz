@@ -4,6 +4,10 @@ creator: ArKaos S.A.
 outputs:
   other:
     - Kling-Net
+aliases:
+  - MediaMaster
+  - MediaMaster Express
+  - ArKaos Media Master Express
 capabilities:
   live: true
   designer: true
@@ -32,3 +36,13 @@ sources:
     url: https://chamsyslighting.com/support/product-policy/
     retrieved: '2026-11-18'
     notes: 'ChamSys bought the Arkaos SA portfolio (Sept 2025); ArKaos VJ, GrandVJ, LEDMaster and MediaMaster 1-6 all listed "Discontinued"; arkaos.com redirected to ChamSys, now offline'
+  aliases:
+    - url: https://web.archive.org/web/20250906170847/https://arkaos.com/
+      retrieved: '2026-11-18'
+      notes: "Archived ArKaos home page (Sept 2025): 'Are you searching for details about Arkaos’ classic products like MediaMaster or GrandVJ ?'"
+    - url: https://web.archive.org/web/20250906170847/https://pro.arkaos.com/software/professional-media-server-software
+      retrieved: '2026-11-18'
+      notes: "Archived ArKaos Pro software page: menu 'Software MediaMaster Express ... LED Mapper Extension'; features 'Pixel Mapping with Art-net and Kling-net'"
+    - url: https://es.chauvetprofessional.com/wp-content/uploads//2015/05/ArKaos-MediaMaster-Express_Cutsheet.pdf
+      retrieved: '2026-11-18'
+      notes: "Chauvet Professional cutsheet (ArKaos distributor, maker of the EPIX products): title 'ArKaos Media Master Express'"

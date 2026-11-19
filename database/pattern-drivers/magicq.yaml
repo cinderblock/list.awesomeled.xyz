@@ -1,11 +1,13 @@
 name: MagicQ
 status: active
 creator: Chamsys Systems
-notes: MagicQ Professional stage lighting console with Pixel Mapping ability,
-  software version of hardware console
+notes: MagicQ Professional stage lighting console with Pixel Mapping ability, software version of hardware console
 outputs:
   protocols:
     artnet: Both
+aliases:
+  - MagicQ PC
+  - ChamSys MagicQ
 capabilities:
   live: true
   designer: true
@@ -35,3 +37,10 @@ sources:
     url: https://downloads.chamsys.co.uk/magicq
     retrieved: '2026-11-18'
     notes: 'latest stable MagicQ build dated 18 Nov 2026'
+  aliases:
+    - url: https://chamsyslighting.com/product/magicq-software/
+      retrieved: '2026-11-18'
+      notes: "ChamSys MagicQ Software page: 'MagicQ PC is available free of charge for use on Windows, Mac and Linux with 64 universes of output fully enabled'"
+    - url: https://mmrmagazine.com/chamsys-magicq-software-now-supports-import-of-gdtf-personality-files
+      retrieved: '2026-11-18'
+      notes: "Trade press (MMR, 2019-12-02), not ChamSys: headline 'ChamSys MagicQ Software Now Supports Import of GDTF Personality Files'; ChamSys's own About Us page writes 'ChamSys MaqicQ MQ500 Stadium Console' (typo)"
