@@ -4,7 +4,7 @@ creator:
   name: computergeek1507
   url: https://github.com/computergeek1507/PB_16
   page: http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controller
-notes: Open source DIY FPP pixel controller cape for the BeagleBone Black.
+notes: Open source DIY FPP pixel controller cape for the PocketBeagle.
 inputs:
   physical:
     Ethernet: true # provided by BeagleBone Black host
