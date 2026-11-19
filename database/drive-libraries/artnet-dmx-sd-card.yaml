@@ -32,8 +32,6 @@ related:
     source:
       url: https://github.com/tangophi/Artnet_DMX_SD_Card/blob/master/README.md
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - dmx512
 sources:
   supported_ics:
     url: https://github.com/tangophi/Artnet_DMX_SD_Card/blob/master/README.md

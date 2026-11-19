@@ -15,9 +15,6 @@ platforms:
   - ESP32
   - ESP8266
   - Teensy
-related_pixel_ics:
-  - ws2811
-  - sk6812-5050
 sources:
   status:
     url: https://github.com/adafruit/Adafruit_NeoPixel/releases

@@ -28,20 +28,6 @@ protocols:
   - DMX512
   - MQTT
   - ESP-NOW
-related_pixel_ics:
-  - gs8208
-  - lpd6803
-  - lpd8806
-  - p9813
-  - sk6812-5050
-  - tm1814
-  - tm1829
-  - ucs8903
-  - ucs8904
-  - ws2801
-  - ws2805
-  - ws2811
-  - ws2814
 sources:
   status:
     url: https://github.com/wled/WLED/releases

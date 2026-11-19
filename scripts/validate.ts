@@ -184,8 +184,8 @@ async function main() {
 
   // Cross-reference checks beyond what JSON Schema can express, using the same
   // relationship graph the site renders (app/lib/relations.ts): every
-  // `related[].ref`, legacy `related_<category>` slug and
-  // `outputs.connector.ref` must point at an existing entry.
+  // `related[].ref` and `outputs.connector.ref` must point at an existing
+  // entry.
   const db = new Map<string, BaseEntry[]>();
   for (const [folder, files] of all) {
     const entries: BaseEntry[] = [];

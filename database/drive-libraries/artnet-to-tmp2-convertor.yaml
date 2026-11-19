@@ -13,8 +13,6 @@ platforms:
 protocols:
   - Art-Net
   - TPM2
-related_pixel_ics:
-  - dmx512
 sources:
   protocols:
     url: http://www.tlhome.de/ATCE.htm

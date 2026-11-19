@@ -32,14 +32,6 @@ related:
     source:
       url: https://www.orangepi-dmx.org/orange-pi/ws28xxapa102ucsx903tlc59711p9813-configuration/prototype-boards/multi-port-pixel-prototype-boards/8-output-8x-4-universes
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - dmx512
-  - ws2801
-  - ws2811
-  - sk6812-5050
-  - ucs1903
-  - ucs2903
-  - p9813
 sources:
   status:
     url: https://github.com/vanvught/rpidmx512

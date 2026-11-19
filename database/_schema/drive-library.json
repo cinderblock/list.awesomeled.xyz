@@ -88,13 +88,6 @@
       },
       "description": "Pixel IC / protocol names the library can drive"
     },
-    "related_pixel_ics": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
-      },
-      "description": "IDs of pixel-ics entries this library supports"
-    },
     "links": {
       "type": ["object", "null"],
       "additionalProperties": false,

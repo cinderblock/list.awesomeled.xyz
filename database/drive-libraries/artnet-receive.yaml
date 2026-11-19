@@ -28,9 +28,6 @@ related:
     source:
       url: https://github.com/natcl/Artnet/blob/master/README.md
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - ws2811
-  - dmx512
 sources:
   supported_ics:
     url: https://github.com/natcl/Artnet/blob/master/README.md

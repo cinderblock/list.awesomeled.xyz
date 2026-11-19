@@ -423,8 +423,6 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
       variants = value as Record<string, unknown>[];
       continue;
     }
-    // Legacy related_<category> slug arrays render via the relationship graph
-    if (key.startsWith('related_')) continue;
     if ((key === 'technical_notes' || key === 'datasheet_discrepancies') && Array.isArray(value)) {
       lists.push([humanize(key), value.map(String)]);
       continue;

@@ -20,8 +20,6 @@ related:
     source:
       url: https://github.com/PWRFLcreative/Lightwork/blob/master/README.md
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - dmx512
 sources:
   protocols:
     url: https://github.com/PWRFLcreative/Lightwork/blob/master/LightWork_Mapper/Interface.pde

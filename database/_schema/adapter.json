@@ -128,18 +128,6 @@
         }
       }
     },
-    "related_microboards": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
-      }
-    },
-    "related_connectors": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
-      }
-    },
     "image": {
       "$ref": "common.json#/definitions/image"
     },

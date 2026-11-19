@@ -11,8 +11,6 @@ links:
   repo: https://github.com/sonyhome/FAB_LED
 platforms:
   - Arduino
-related_pixel_ics:
-  - sk6812-5050
 sources:
   supported_ics:
     url: https://github.com/sonyhome/FAB_LED/blob/master/README.md

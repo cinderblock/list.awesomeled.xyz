@@ -32,9 +32,6 @@ related:
     source:
       url: https://github.com/rstephan/ArtnetWifi/blob/master/README.md
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - dmx512
-  - ws2811
 sources:
   status:
     url: https://github.com/rstephan/ArtnetWifi/releases

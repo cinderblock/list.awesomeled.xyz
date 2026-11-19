@@ -29,15 +29,6 @@ related:
     source:
       url: https://github.com/forkineye/ESPixelStick/blob/main/platformio.ini
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - ws2811
-  - ws2801
-  - gs8208
-  - tls3001
-  - tm1814
-  - ucs1903
-  - ucs8903
-  - dmx512
 sources:
   status:
     url: https://github.com/forkineye/ESPixelStick

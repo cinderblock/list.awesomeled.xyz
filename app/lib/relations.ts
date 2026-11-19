@@ -16,8 +16,7 @@
  *    built from each target entry's `name`, `aliases` and `variants[].name`.
  *    Names with no matching entry are kept (shown as plain text) and reported
  *    as `unresolved`.
- *  - Slug refs: `outputs.connector.ref`, and the legacy `related_<category>`
- *    slug arrays.
+ *  - Slug refs: `outputs.connector.ref`.
  *  - The generic `related` array: `{type, ref}` items with any `<category>/<slug>`.
  *
  * Protocol families (pixels / pixel ICs sharing a `data.type`) are derived as
@@ -120,14 +119,6 @@ export const NAME_FIELDS: NameField[] = [
   { category: 'controllers', path: 'inputs.requires_host', index: 'board', kind: 'host' },
   { category: 'controllers', path: 'outputs.driver.IC', index: 'level-converter', kind: 'uses' },
 ];
-
-/** Legacy `related_<category>` slug arrays → edge kind (target category comes from the field name) */
-const LEGACY_SLUG_FIELDS: Record<string, EdgeKind> = {
-  related_pixel_ics: 'supports',
-  related_microboards: 'host',
-  related_connectors: 'uses',
-  related_adapters: 'related',
-};
 
 export interface Edge {
   from: EntryRef;
@@ -531,15 +522,6 @@ export function buildRelationGraph(db: Database): RelationGraph {
         }
       }
 
-      for (const [field, kind] of Object.entries(LEGACY_SLUG_FIELDS)) {
-        const target = field.slice('related_'.length).replace(/_/g, '-');
-        for (const slug of asStrings(entry[field])) {
-          const to = `${target}/${slug}`;
-          if (names.has(to)) addEdge({ from, to, kind, field });
-          else dangling.push({ from, field, ref: slug, problem: `no such entry in ${target}` });
-        }
-      }
-
       if (Array.isArray(entry.related)) {
         for (const item of entry.related) {
           if (!item || typeof item !== 'object' || typeof item.ref !== 'string') continue;
@@ -709,7 +691,7 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
   };
 
   for (const edge of graph.outgoing.get(ref) ?? []) {
-    if (edge.field !== 'related' && !edge.field.startsWith('related_')) continue;
+    if (edge.field !== 'related') continue;
     row(EDGE_KINDS[edge.kind].forward, edge.kind, 'forward').items.push(
       itemFor(graph, edge.to, edge)
     );

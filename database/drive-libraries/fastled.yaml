@@ -29,18 +29,6 @@ related:
     source:
       url: https://github.com/FastLED/FastLED/blob/180218560aec55ac8883943db02d6dfbfb579f07/src/FastLED.h
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - dmx512
-  - lpd8806
-  - p9813
-  - sk6812-5050
-  - sm16716
-  - tm1803
-  - tm1804
-  - tm1809
-  - ucs1903
-  - ucs1904
-  - ws2801
 sources:
   status:
     url: https://github.com/FastLED/FastLED/releases

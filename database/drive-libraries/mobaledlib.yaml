@@ -24,9 +24,6 @@ related:
     source:
       url: https://github.com/Hardi-St/MobaLedLib/blob/master/library.properties
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - ws2811
-  - dmx512
 sources:
   status:
     url: https://github.com/Hardi-St/MobaLedLib

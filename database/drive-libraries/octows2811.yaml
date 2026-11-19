@@ -51,8 +51,6 @@ related:
     source:
       url: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
       retrieved: '2026-11-18'
-related_pixel_ics:
-  - ws2811
 sources:
   status:
     url: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
