@@ -32,10 +32,13 @@ Part of `plans/website-buildout.md` (workstream 5).
 
 In order of preference:
 
-1. **Openly licensed** photos of the exact product: SparkFun product photos
-   (CC BY 2.0), Wikimedia Commons (check the file's own license), open-hardware
-   repos whose license covers their images. Record `license` exactly
-   (e.g. `CC BY 2.0`, `CC BY-SA 4.0`).
+1. **Openly licensed** photos of the exact product: Wikimedia Commons (check
+   the file's own license; SparkFun's Flickr uploads are mirrored there as
+   CC BY 2.0), open-hardware repos whose license covers their images. Record
+   `license` exactly (e.g. `CC BY 2.0`, `CC BY-SA 4.0`). Photos taken from
+   sparkfun.com itself are **CC BY-NC-SA 3.0** (SparkFun news posts 735/1852),
+   not CC BY 2.0 — the brief originally said otherwise; corrected 2026-11-18
+   and all agents told.
 2. **The maker's or an authorized vendor's own product photo** of that product,
    from its product page. `credit` = the company, `source` = the product page,
    no `license` (rights stay with the owner; used to identify the product).
