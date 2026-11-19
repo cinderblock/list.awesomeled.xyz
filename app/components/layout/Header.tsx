@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { ThemeToggle } from '~/components/ui/ThemeToggle';
 import { Tooltip } from '~/components/ui/Tooltip';
+import { REPO_URL } from '~/lib/site';
 
 export function Header() {
   return (
@@ -31,7 +32,7 @@ export function Header() {
             */}
             <Tooltip content="View on GitHub">
               <a
-                href="https://github.com/cinderblock/list.awesomeled.xyz"
+                href={REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--ghost btn--icon site-nav-link"
