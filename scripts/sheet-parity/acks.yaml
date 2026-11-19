@@ -67,6 +67,47 @@
 'Pattern Drivers | Smode | Price (note)':
   - value: 'free for basic SD output, generally very expensive as you move on up in res'
     reason: 'Migrated into pricing/demo/technical_notes (b1c26ec), reworded'
+'Pattern Drivers | Filament LED | Price':
+  - value: '59'
+    reason: "The maker sells it for EUR 49 one-time (VAT incl.); $59 isn't on its site"
+'Pattern Drivers | Filament LED | Integrations':
+  - value: 'Standalone installation player for Raspberry Pi'
+    reason: 'Same: integrations and platforms.notes describe the free Raspberry Pi standalone player'
+'Pattern Drivers | Filament LED | Notes':
+  - value: 'Full Resolume replacement with a complex VJ mixer and projection mapping'
+    reason: "Reworded from the maker's site: VJ mixer, projection mapping and Resolume import/export are in the notes"
+'Pattern Drivers | Jinx! | Live':
+  - value: 'No'
+    reason: "This row is Glediator, which streams frames live (Solderlab's page); the sheet's No was wrong"
+'Pattern Drivers | Jinx! | Integrations':
+  - value: 'Should be solderlab.de (which is down)'
+    reason: "A remark, not an integration: Solderlab's archived page is the entry's link"
+'Pattern Drivers | Jinx! | Notes':
+  - value: 'Basically a mapper/pattern generator for microcontrollers with pixels. Development ceased'
+    reason: 'Same, in more detail and sourced (this row is Glediator)'
+  - value: 'Development ceased'
+    reason: 'Same: status discontinued; the notes give the last release (V2.4, 2016)'
+'Pattern Drivers | LED Lab | Other Inputs':
+  - value: 'audio (input / playback), video, MIDI, /, OSC'
+    reason: 'Same, in more detail (camera, video and music inputs; MIDI, DMX, Art-Net and OSC control)'
+'Pattern Drivers | LED Lab | Other Outputs':
+  - value: 'DDP/Minleon/TekLights, OpenPixel'
+    reason: 'Same: DDP (Minleon, TekLights) in outputs.other and OpenPixel as outputs.protocols.opc'
+'Pattern Drivers | Smart Show LMS | Notes':
+  - value: 'aimed at live show use , big button execute interface'
+    reason: 'Same: the notes cover live-show use and the big-button Show Mode'
+'Pattern Drivers | Jinx! | URL (note)':
+  - value: '3rd Party mirror since original is down'
+    reason: 'Same: links.mirror is that third-party mirror; it and the original are archived in dead_links'
+'Pattern Drivers | LED Lab | Price (note)':
+  - value: 'in-app purchases for various feature sets ($9.99 - $209.99)'
+    reason: 'Same as pricing.tiers: ten in-app purchases, $9.99-$209.99'
+'Pattern Drivers | LEDs Master | Price (note)':
+  - value: 'RaspPi build-> 15 euro donation'
+    reason: "Copied from the QLC+ row: LEDs Master's site, README and releases mention no Pi build or donation"
+'Pattern Drivers | QLC+ | Price (note)':
+  - value: 'RaspPi build-> 15 euro donation'
+    reason: 'In YAML (a pricing tier and the demo text); QLC+ now asks EUR 20 for the Pi image (ISSUES.md, stream 6)'
 'Controllers | SP102E | Standalone':
   - value: 'Presets'
     reason: '"Presets" = plays built-in patterns on its own; YAML inputs.standalone: true'
@@ -310,6 +351,111 @@
 'Controllers | LED Ethernet Controller Powered | Max Current (note)':
   - value: '10A per OUT'
     reason: 'Migrated as price tiers, a technical note, and outputs.current.max 10A (b1c26ec)'
+'Controllers | Elite 2D-EXMU | Max Pixels':
+  - value: '4000'
+    reason: 'Gledopto publishes no pixel limit for this model'
+'Controllers | Elite 2D-EXMU | Price':
+  - value: '19'
+    reason: "Maker's price is EUR 34.99 (gledopto.eu); the $19 couldn't be confirmed"
+'Controllers | Elite 2D-EXMU | Pixel Types':
+  - value: 'Both'
+    reason: 'The manual lists only single-wire pixel ICs'
+'Controllers | Elite 2D-EXMU | Notes':
+  - value: 'Built-in microphone for audioreactive patterns, USB for flashing alternative firmware'
+    reason: 'Same features in the entry (microphone, USB-C, relay), sourced'
+'Controllers | Elite 2D-EXMU | Introduction':
+  - value: '2023'
+    reason: "No evidence for 2023 (the maker's page showed another product in April 2025)"
+'Controllers | [+ | Max Pixels':
+  - value: '4000'
+    reason: 'Gledopto publishes no total; the manual''s "Recommended 1600 IC Max" is in technical_notes'
+'Controllers | [+ | Price':
+  - value: '29'
+    reason: "Maker's price is EUR 32.99 (gledopto.eu); the $29 couldn't be confirmed"
+'Controllers | [+ | Pixel Types':
+  - value: 'Both'
+    reason: 'The manual lists only single-wire pixel ICs'
+'Controllers | [+ | Notes':
+  - value: 'Built-in microphone for audioreactive patterns, USB for flashing alternative firmware'
+    reason: 'Same features in the entry (microphone, USB-C, relay), sourced'
+'Controllers | Falcon F4V3 | Status':
+  - value: 'Active'
+    reason: "Discontinued (PixelController's store and archived pages)"
+'Controllers | Falcon F4V3 | Price':
+  - value: '200'
+    reason: '$250 is the last list price; $200 was the 2018-19 price (in price_source)'
+'Controllers | Falcon F4V3 | Max Voltage':
+  - value: '36'
+    reason: "Manual: 5-12 V as shipped, 13-24 V with the R92 modification; 36 V isn't supported"
+'Controllers | Falcon F4V3 | Product URL':
+  - value: 'https://pixelcontroller.com/store/products/48-f16v3.html'
+    reason: 'The old URL redirects to the discontinued-products page the entry links'
+'Controllers | K16000S | Manufacturer':
+  - value: 'KulpLights, LLC'
+    reason: "Sheet error: KulpLights sells no K16000S; it's AUTUNEER's (sourced)"
+'Controllers | SPI Matrix | Max Current':
+  - value: '20'
+    reason: 'Maker: 10 A total, 5 A per output (sourced)'
+'Controllers | Genius Pro 32 Port | Standalone':
+  - value: 'No'
+    reason: 'Maker: an SD card slot for standalone operation (sourced)'
+'Controllers | PixOut Server | Max Pixels':
+  - value: '8192'
+    reason: "PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong"
+'Controllers | PixOut Server | Max outputs':
+  - value: '8'
+    reason: "PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong"
+'Controllers | PixOut Server | Pixel Types':
+  - value: 'Both'
+    reason: "PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong"
+'Controllers | PixOut Server | Max Voltage':
+  - value: '24'
+    reason: "PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong"
+'Controllers | PixOut Server | Buffered':
+  - value: 'Yes'
+    reason: "PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong"
+'Controllers | PixOut Server | Notes':
+  - value: 'Pi based artnet recorderUp to 255 Universes IOS/Android App'
+    reason: "Same, except up to 64 universes (the maker's current page)"
+'Controllers | Octo Mk2 | Auxilary Outputs':
+  - value: 'Ethernet thru'
+    reason: 'In inputs.physical: Ethernet Dual (in + thru)'
+'Controllers | M8 Port Pixel | (name)':
+  - value: 'M8 Port Pixel'
+    reason: "The row is ENTTEC's Pixel Octo (71520) under the wrong name (archived ENTTEC page)"
+'Controllers | M8 Port Pixel | Pixel Types':
+  - value: 'Clocked'
+    reason: 'The datasheet lists single-wire and clocked ICs'
+'Controllers | LED Ethernet Controller 3 | Max Current':
+  - value: '20'
+    reason: "Maker: 10 A total, 5 A per output (sourced); the manual's 20 A is the largest supply it allows"
+'Controllers | Pixelator Mini PX1-8D | Output Connectors':
+  - value: 'RJ-46'
+    reason: 'Typo: RJ45 PLink ports'
+'Controllers | Elite 2D-EXMU | (name) (link)':
+  - value: 'https://s.click.aliexpress.com/e/_c4P8ekqR'
+    reason: "AliExpress affiliate short link that no longer resolves; the entry links Gledopto's own pages"
+'Controllers | Falcon F4V3 | Product URL (link)':
+  - value: 'https://pixelcontroller.com/store/products/48-f16v3.html'
+    reason: 'The old URL redirects to the discontinued-products page the entry links'
+'Controllers | SPI Matrix | (name) (link)':
+  - value: 'https://ledstripstudio.com/art-net-to-spi-decoder/'
+    reason: 'Old page; it now redirects to the SPI Matrix page the entry links'
+'Controllers | SPI Matrix | Notes (link)':
+  - value: 'https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf%20%205%20years%20warranty'
+    reason: 'Malformed link (note text pasted into the URL); the hardware manual is in the entry'
+'Controllers | LED Ethernet Controller 3 | Notes (link)':
+  - value: 'https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf%20%205%20years%20warranty'
+    reason: 'Malformed link (note text pasted into the URL); the hardware manual is in the entry'
+'Controllers | SPI Matrix | Price (note)':
+  - value: "299 (1024px)\n 449 (2048px)\n 599 (4096px)\n 1Y SW license incl"
+    reason: 'Same: price tiers 299/449/599 for 1024/2048/4096 pixels, and the one-year license in technical_notes'
+'Controllers | SPI Matrix | Max Current (note)':
+  - value: '10A per OUT'
+    reason: 'Maker: 5 A per output, 10 A total (sourced)'
+'Controllers | LED Ethernet Controller 3 | Price (note)':
+  - value: "625 (1024px)\n950 (2048px)\n1250 (4096px)\nLifetime SW license included"
+    reason: 'Same: price tiers 625/950/1250 and the lifetime license in technical_notes'
 'Pixels | APA102 | Max pixel per string':
   - value: '~250 - CLK sensitive'
     reason: 'Same: max_per_string 250 with the clock-degradation explanation'
@@ -370,6 +516,40 @@
 'Pixels | WS2816 | (name) (link)':
   - value: 'https://datasheet.lcsc.com/szlcsc/2012110135_Worldsemi-WS2816B-2121_C965560.pdf'
     reason: 'LCSC moved the datasheet; YAML has the current URL'
+'Pixels | SK6812 | Colour Group':
+  - value: 'CW,WW,Amber'
+    reason: "The three dies are in the notes (cool white, warm white, amber); the datasheet doesn't give their byte order"
+  - value: 'GRB & GRBW'
+    reason: 'The RGBW version is its own entry (pixels/sk6812-rgbw)'
+'Pixels | SK6812 | PWM Frequency':
+  - value: '1100'
+    reason: 'Datasheets (rev 01 and 03) say 1.2 kHz'
+'Pixels | SK6812 | Wattage':
+  - value: '100'
+    reason: 'Datasheet rating: 0.2 W'
+'Pixels | SK6812 | Channel Current':
+  - value: '20'
+    reason: 'The rev 03 datasheet specifies the 12 mA current version'
+'Pixels | SK6812 | NOTES':
+  - value: 'replaces RGB LEDs with CW, WW, Amber for variable CCT'
+    reason: 'Same, in more detail'
+  - value: 'WS2812 copy also available in 4 channel RGBW variant'
+    reason: 'Same; the RGBW version is its own entry (pixels/sk6812-rgbw)'
+'Pixels | SM1616 | Wattage':
+  - value: '0'
+    reason: '0 is a placeholder'
+'Pixels | SK6812 | (name) (link)':
+  - value: 'https://www.hida-led.com/lc8812b-5050-led-product/'
+    reason: "Hida's page now shows its RGB LC8812B; Hida's WWA clones are in aliases"
+'Pixels | SM1616 | (name) (link)':
+  - value: 'https://github.com/sowbug/sm16716/blob/master/SM16716%20Datasheet%20%5BChinese%5D.pdf'
+    reason: "SM1616 is a typo for SM16716 (pixel-ics/sm16716); the row's only content is that chip's datasheet (merge flagged in ISSUES.md)"
+'Pixels | APA107 | PWM Frequency (note)':
+  - value: 'Datasheet claims 1.2kHz but all specs identical to SK6812 which tests at 4.7kHz'
+    reason: 'Kept as a doubt in color.pwm_frequency_notes, with what the datasheet does say (oscillator 800-1200 kHz)'
+'Pixels | SK6812 | Channel Current (note)':
+  - value: 'not specified in datasheet but package limit is 0.2W, so ~20mA per channel probably'
+    reason: 'The rev 03 datasheet specifies 12 mA; the 0.2 W package rating is in wattage'
 'Pixel ICs | GS8202 | Other Links':
   - value: 'GS8202 Pixel Protocol Overview | Advatek Lighting'
     reason: 'Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)'
@@ -394,6 +574,15 @@
 'Pixel ICs | MY9231 | Pixel Data Size (note)':
   - value: "Variable\n\nTODO: create list of possible values"
     reason: 'Migrated as a technical note (pixel data size is variable); the TODO was sheet housekeeping'
+'Pixel ICs | UCS2904 | (name)':
+  - value: 'UCS2904'
+    reason: "Row 32 is SM16704 data under the UCS2904 name (matches Sunmoon's datasheet; links Advatek's SM16704 page)"
+'Pixel ICs | UCS2904 | Output Voltage':
+  - value: '30'
+    reason: '30 V is the absolute maximum (in output_voltage_notes); 26 V is the rated output'
+'Pixel ICs | UCS2904 | (name) (link)':
+  - value: 'https://www.gree-leds.com/rgbw-digital-strip/24v-ucs2904-digital-rgbw.html'
+    reason: "Greeled's UCS2904 strip page, cited in pixel-ics/ucs2904 (this row is SM16704 data)"
 'Pixel Decoders | ATtiny10 | Pixel Types':
   - value: 'allows driving 3-wire clockless leds with 4-wire clocked protocol. Experimental '
     reason: 'Same, as inputs.protocols/outputs.types plus notes (64a0d09)'
@@ -478,6 +667,15 @@
 'Pixel Decoders | Pixel 2 DMX | Product URL (link)':
   - value: 'https://experiencelights.com/pixel2dmx---realtime-dmx-bridge/'
     reason: 'Same product; YAML has the current URL without tracking parameters'
+'Pixel Decoders | WS2811 MosFet  Driver | (name)':
+  - value: 'WS2811 MosFet  Driver'
+    reason: "The seller's listing name (EagleDecorations on Tindie)"
+'Pixel Decoders | WS2811 MosFet  Driver | Pixel Types':
+  - value: 'WS2811 to High current Mosfet'
+    reason: 'Same in structured form: WS2811/WS2812 in, PWM out (notes: high-current outputs)'
+'Pixel Decoders | WS2811 MosFet  Driver | Unit Price (USD)':
+  - value: '10'
+    reason: 'Last list price $14 (sold out); $10 was the 2019 price (in price_source)'
 'Level Converters | SN74AHCT125N | Price':
   - value: '0.75'
     reason: 'YAML has distributor price tiers verified since the import'
@@ -535,6 +733,24 @@
 'Adapters | PixelLauncher Gen 2 Micro | (name) (link)':
   - value: 'https://www.digitalambiance.com/products/products-led-controllers-accessories/products-pixellauncher-series'
     reason: 'Dead series page; the product page (archived) is in YAML'
+'Adapters | QuinLED-Dig-Uno | Pixel Types':
+  - value: 'Single or Clocked'
+    reason: 'Same: outputs.clocked selectable (controllers/quinled-dig-uno)'
+'Adapters | QuinLED-Dig-Uno | Parent':
+  - value: 'ESP8266 or ESP32'
+    reason: "The current board runs on QuinLED's ESP32 top board (core.family ESP32)"
+'Adapters | QuinLED-Dig-Uno | Unit Price (USD)':
+  - value: '24.99'
+    reason: 'YAML price revised by research since the import'
+'Adapters | QuinLED-Dig-Uno | Outputs':
+  - value: 'Both'
+    reason: 'Same: outputs.clocked selectable'
+'Adapters | QuinLED-Dig-Uno | DIY/OTS':
+  - value: 'Both'
+    reason: 'Same: features "Available as DIY kit or pre-assembled"'
+'Adapters | QuinLED-Dig-Uno | Output Connectors':
+  - value: 'Phoniex Screw'
+    reason: 'Typo fixed in YAML (Phoenix Screw)'
 'DIY MicroBoards | NodeMCU v2 | USB':
   - value: 'No'
     reason: 'The sheet''s "No" meant no native USB; the micro-USB is a USB-UART bridge, recorded as "Power + UART" like the other such boards'
@@ -574,6 +790,9 @@
 'DIY MicroBoards | ESP32-S3 ETH | Product URL (link)':
   - value: 'https://www.waveshare.com/product/arduino/boards-kits/esp32/esp32-s3-eth.htm?sku=28771'
     reason: 'Waveshare moved the page; YAML has the current URL'
+'DIY MicroBoards | Raspberry Pi 3 Model B | Bluetooth':
+  - value: '4.0'
+    reason: 'Bluetooth 4.1 per the launch post'
 'Connectors | Molex KK AKA KF2510 | Link':
   - value: 'https://www.molex.com/molex/products/family/kk'
     reason: "Old Molex link (hyperlink target differs from the cell text); YAML keeps the cell's URL"
