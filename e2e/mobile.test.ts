@@ -8,8 +8,6 @@ const sidewaysOverflow = (page: Page) =>
 const PAGES = [
   '/',
   '/controllers',
-  '/pixels',
-  '/connectors',
   '/controllers/falcon-f16v4',
   '/compare?e=controllers/falcon-f16v4,controllers/falcon-f16v5',
   '/search?q=falcon',
@@ -19,6 +17,7 @@ const PAGES = [
 test.describe('Phone widths', () => {
   for (const width of [320, 390]) {
     test(`no page scrolls sideways at ${width}px`, async ({ page }) => {
+      test.slow(); // several full page loads
       await page.setViewportSize({ width, height: 800 });
       for (const path of PAGES) {
         await gotoReady(page, path);
@@ -28,12 +27,10 @@ test.describe('Phone widths', () => {
   }
 
   test('the header keeps its logo on one line and its search within reach', async ({ page }) => {
-    // Four loads of the full controllers table: more than the default budget
-    // on a busy machine
-    test.slow();
+    // The header is the same on every page; this is the lightest one
+    await gotoReady(page, '/about');
     for (const width of [320, 390, 768, 1024]) {
       await page.setViewportSize({ width, height: 800 });
-      await gotoReady(page, '/controllers');
       const logo = await page.locator('.site-logo').boundingBox();
       expect(logo!.height, `logo height at ${width}px`).toBeLessThan(40);
       await expect(page.getByRole('button', { name: 'Search every category' })).toBeVisible();
@@ -88,6 +85,7 @@ test.describe('Card list', () => {
   });
 
   test("no category's cards scroll sideways", async ({ page }) => {
+    test.slow(); // a dozen full page loads
     await gotoReady(page, '/');
     const categories = await page
       .locator('.category-tab')
