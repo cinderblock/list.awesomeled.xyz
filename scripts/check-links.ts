@@ -414,6 +414,9 @@ function printPriceReport(entries: Entry[]): string {
       continue;
     }
     dated++;
+    // A discontinued product's price is a last list price: it can't go stale
+    // (the site doesn't flag it either).
+    if (data.status === 'discontinued' || data.status === 'end-of-life') continue;
     const months = monthsSince(retrieved, now);
     if (months != null && months >= STALE_MONTHS) stale.push({ path, retrieved, months });
   }
