@@ -16,7 +16,7 @@ Seen by cross-links (stream 4). These entries describe one product twice:
 
 - `adapters/quinled-dig-quad` and `controllers/quinled-dig-quad`
 - `adapters/quinled-dig-uno` and `controllers/quinled-dig-uno`
-- `adapters/espartstick` and `controllers/espartstick`
+- `adapters/espartstick` and `controllers/espartstick` (note, stream 4: two different boards, the 2019 shield without SD and the SD-card edition; `2a3efbf` merged the real twin, `adapters/espartstick-wled`)
 - `adapters/m4-port-pixel` and `controllers/m4-port-pixel` (and `controllers/m4-pi`: Microcyb M4-PI, a third copy)
 - `adapters/m8-port-pixel` and `controllers/m8-port-pixel`
 - `controllers/standard-differential-receiver` and `level-converters/standard-differential-receiver`
@@ -31,16 +31,17 @@ firmware twins such as `adapters/espixelstick` vs.
 
 ## Coordination: link fields belong to cross-links (stream 4)
 
-Stream 4 is researching and filling these fields across the database
+Stream 4 researched and filled these fields across the database
 ([plans/cross-links.md](plans/cross-links.md)): controllers'
 `outputs.protocols`, `software.firmware` / `works_with`,
 `inputs.requires_host`, `outputs.driver.IC` and the free-text
-`outputs.connector` values; drive libraries' `supported_ics` (being split
-from control protocols) and the legacy `related_*` arrays (being retired);
-every entry's `related`, `aliases` and `sources`; pixels' and pixel ICs'
-`data.type` protocol families. Please don't batch-edit those; log findings
-here instead. Spelling variants ("APA-106" vs "APA106", "WS2812b") don't need
-rewriting: `app/lib/relations.ts` matches names case- and
+`outputs.connector` values; drive libraries' `supported_ics` (pixel parts
+only; control protocols moved to `protocols`); every entry's `related`
+(including adapters' `host` boards), `aliases` and `sources`; pixels' and
+pixel ICs' `data.type` protocol families. The legacy `related_*` arrays are
+retired: the schemas reject them. Please don't batch-edit those fields; log
+findings here instead. Spelling variants ("APA-106" vs "APA106", "WS2812b")
+don't need rewriting: `app/lib/relations.ts` matches names case- and
 punctuation-insensitively, through `aliases` and `variants[].name`.
 
 ## Entry-page and table changes from cross-links (stream 7, FYI)
@@ -49,7 +50,10 @@ Entry pages now have a "Works with" section (driven by, supported by, runs on,
 host for, used in, same protocol) and a "Related products" section, both from
 `app/components/ui/EntryLinks.tsx`; they replaced the old "Related Products",
 `related_*` and "Used by …" sections. Name-list fields render as link pills in
-their card, and `sources` provenance renders under the field it documents.
+their card (a long list shows 12, then a tap-to-expand "+N more"), and
+`sources` provenance renders under the field it documents as "source: host,
+date", with the source's own words behind a "note" toggle. "Related products"
+ends with "More from <maker>", minus what its other rows already show.
 Stream 4 also added compatibility columns through `app/lib/columns.tsx` only
 (no `DataTable` / `ColumnFilter` internals): controllers and adapters get
 "Pixel ICs" (filter `linked.pixels`, which matches same-protocol parts and
@@ -333,3 +337,16 @@ largest clusters:
 
 Why it matters: these are the facts the tables filter on. Overlaps the
 connector list above.
+
+## Entry pages: datasheet `sources` and long URLs in narrow cards (stream 5 / 7)
+
+Seen by cross-links (stream 4) on e.g. `/microboards/beaglebone-black` and
+`/controllers/deskontroller-lite-v3-32` at 1280 px. A datasheet's alternate
+hosts (`datasheet.sources`: `url` / `host` / `notes`, 53 entries) render as a
+raw nested grid, and URLs there and in vendors' `page` break every few
+characters down a third-width card (8 lines for one `raw.githubusercontent.com`
+link). Why it matters: the datasheet card is the one people look for, and the
+alternate links read as noise. Showing each link as its host name (the way
+`sources` provenance does: "docs.beagleboard.org", "github.com") would fix
+both; the datasheet card's design is stream 5's, the generic value rendering
+stream 7's.

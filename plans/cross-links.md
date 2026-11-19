@@ -69,14 +69,15 @@ source recorded where the schema allows. Part of
 1. [x] Survey schema, data, existing UI (`entry.tsx`, `data.ts`, `validate.ts`).
 2. [x] Plan doc + `scripts/cross-link-stats.ts`; baseline recorded.
 3. [x] Infrastructure (pushed): `aliases`, `related.type` += uses/host/compatible, pixel-decoder `inputs.protocols`, `sources` provenance; `relations.ts` graph; validator; entry-page "Works with" / "Related products"; compatibility columns + "compatible with X" filters + ecosystem counts (`entry.linked`).
-4. [ ] **Current:** research. 15 delegated agents (threads below) write `.research/out/<batch>.json`; then review each batch (spot-check sources), apply with `.research/apply.ts`, commit per batch as review commits.
-5. [ ] Pixel side: protocol families (`data.type`) on every pixel/IC, aliases, same-part / predecessor / uses links (batches `pixels`, `pixel-ics`).
-6. [ ] Controllers: `outputs.protocols`, `software.firmware/works_with`, connector refs, host boards, families (batches `controllers-A`…`H`).
-7. [ ] Drive libraries: split `supported_ics` from control `protocols`, retire `related_pixel_ics` (structural commit → IGNORED_COMMITS). Pattern drivers: aliases (FPP), hardware support → controllers' `works_with`, hosts.
-8. [ ] Adapters (host boards, connectors, firmware), pixel decoders (`inputs.protocols`), microboards (generations), level converters (aliases, used-by), connectors (families), commercial systems, diffusers.
-9. [ ] Missing entities: add the most-referenced missing ICs / boards / libraries / connectors as proper entries.
-10. [ ] Maker cross-links ("more from this maker") — decide after data lands.
-11. [ ] After-stats, ROADMAP/OVERHAUL-PLAN Goal 3 status, close out.
+4. [x] Research: 15 delegated agents (threads below) wrote `.research/out/<batch>.json`; each batch reviewed (sources spot-checked), applied with `.research/apply.ts`, committed as a review commit, plus a separate corrections commit for spec fixes found on the way.
+5. [x] Pixel side: protocol family (`data.type`) on every pixel IC and pixel, aliases, generation / IC links.
+6. [x] Controllers: `outputs.protocols` (114/132), firmware / works-with, connector refs, host boards, families.
+7. [x] Drive libraries: `supported_ics` holds pixel parts only, control protocols moved to `protocols`; `related_*` arrays retired (`1ae1a4d`, in IGNORED_COMMITS). Pattern drivers: aliases, hardware support.
+8. [x] Adapters (host boards, connectors, firmware), pixel decoders (`inputs.protocols`), microboards (generations), level converters (buffer-IC users), connectors (families, aliases), commercial systems, diffusers.
+9. [ ] **Current:** missing entities. Three delegated agents (below) write new entries for the most-referenced unresolved names into `.research/new/<category>/` (git-ignored). Review each (schema, sources), move into `database/`, add the host / uses links that now resolve, commit as research commits.
+10. [x] Maker cross-links: "More from <maker>" row (`bc36452`), minus what the other family rows already show.
+11. [x] UI at real data volume (screenshots of WS2811, xLights, BeagleBone Black, deskontroller LITE V3 32): source notes behind a "note" toggle, card lists collapse at 12, maker names keep their spelling in row labels, one explanation per "All compatible hardware" row; unit tests for `relations.ts`.
+12. [ ] After-stats, ROADMAP / OVERHAUL-PLAN Goal 3 status, README check, close out.
 
 ### Research agents (delegated 2026-11-18)
 
@@ -101,13 +102,17 @@ source recorded where the schema allows. Part of
 - Controllers' pixel-IC list (`outputs.protocols`) is filled on only 7/135 entries; `software.firmware` 20/135; `works_with` 5/135; `outputs.driver.IC` 0/135. `outputs.connector` is a ref on 81 entries, free text on ~40 (ambiguous: "Screw", "JST", "Phoenix Screw/RJ45").
 - `drive-libraries.related_pixel_ics` was batch-derived and is partly wrong: 10 libraries link `pixel-ics/dmx512` (a DMX512-P _pixel IC_ entry) because they output DMX512 the lighting protocol; `lightwork` links it while supporting no pixel ICs at all. It also cannot point at pixels (WS2812B, APA102 live in `pixels/`), which is why `supported_ics` carries names alongside it.
 - `supported_ics` mixes pixel ICs with control protocols (Art-Net, sACN, E1.31, Renard, PixelPusher, Fadecandy, HUB75).
-- Same product in two categories: QuinLED Dig-Quad/Dig-Uno, ESPArtStick, M4/M8 Port Pixel (adapters + controllers); ESPixelStick, Orange Pi DMX (adapters + drive-libraries); WLED (pattern-drivers + drive-libraries); Standard Differential Receiver (controllers + level-converters). Hardware-vs-firmware twins are legitimately distinct and get linked; true duplicates are a parity/standardization call (logged in ISSUES.md, not decided here).
+- Same product in two categories: QuinLED Dig-Quad/Dig-Uno, ESPArtStick, M4/M8 Port Pixel (adapters + controllers); ESPixelStick, Orange Pi DMX (adapters + drive-libraries); WLED (pattern-drivers + drive-libraries); Standard Differential Receiver (controllers + level-converters). Hardware-vs-firmware twins are legitimately distinct and get linked; true duplicates were a parity/standardization call (logged in ISSUES.md). Stream 2 merged them (`d487f11`, `2a3efbf`); the remaining ESPArtStick pair are two different boards (2019 shield without SD, and the SD-card edition).
 - The designer (`app/lib/designer.ts` `checkCompat`) matches `outputs.protocols` against pixel names with a substring token heuristic; the resolver here can replace it (stream 3's call, offered in ISSUES.md).
 - `pixel-ics/dmx512` is the DMX512 _pixel_ protocol (single-wire DMX512 pixel chips: UCS512 etc.; Advatek's "DMX512" pixel type, see advatek.netlify.app/pixel-protocols/dmx512), not the DMX512 lighting bus. "DMX512" in a controller's `outputs.protocols` (pixel types) means the pixel protocol; DMX universes belong in `outputs.auxiliary`.
 - Several pixels carry a doubtful `data.type` (e.g. HD108 labeled APA102 although its frame is 16-bit). The pixel batches verify every family against datasheets, because "compatible with X" filtering trusts families.
 - Stream 2 reshaped controllers' `outputs`/`power` into shared common.json defs (`pixel_outputs`, `output_connector`, `clocked_support`: `false | selectable | always`) and pixel decoders' `outputs`; every link field used here survived (`outputs.protocols`, `outputs.driver.IC`, `outputs.connector.ref`, decoder `inputs.protocols`).
 - Local gotchas: a stale nested `node_modules/ajv-formats/node_modules/ajv` made typecheck fail after another stream added ajv-formats — a clean `bun install --frozen-lockfile` fixes it. Under load (7 streams), the e2e tab-switch timing and stale-price tests flake on first run and pass on re-run.
-- `Column.headerTip` is hover-only (invisible on touch), so the "compatible with" semantics are also spelled out on entry pages ("All compatible hardware … lists it, a same-protocol part, or runs firmware that supports it"); logged for stream 7.
+- `Column.headerTip` is hover-only (invisible on touch), so the "compatible with" semantics are also spelled out on entry pages ("All compatible hardware": every controller and adapter that lists the part or a same-protocol one, or runs firmware that supports it); logged for stream 7.
+- **Pipes hide failures.** `git rebase … | tail` and `bun run validate | tail` return the exit status of `tail`, so a chained `git push` once ran in the middle of a conflicted rebase and pushed the commits replayed so far. They happened to be valid (verified by validating a `git archive` of the pushed tree), but since then shipping goes through a fail-fast script (`set -euo pipefail`, logs to files, no pipes on gating steps): fetch, rebase, frozen install, validate, typecheck, lint, unit tests, Prettier, push.
+- **Rebase merges can silently drop corrections.** Other streams edit the same YAML files concurrently; a hand-merged conflict once concatenated nested keys (duplicate `page:`) and another lost three corrections (WS2801 release year, SK9822-A creator, PB16 notes), re-applied in `dabde25` and later commits. The local conflict resolver now merges top-level maps key by key (`sources` / `related` / `software` lists unioned, prices upstream's) and stops for a human when both sides changed the same value.
+- CSS `text-transform: capitalize` on `.detail-key` turned "beagleboard.org" into "Beagleboard.Org"; proper nouns in row labels now sit in a span that keeps their spelling (`LinkRow.subject`).
+- Research found several entries that were wrong beyond links (column-shifted sheet rows, wrong makers, output counts that were DMX universes); spec values outside this stream's fields went to ISSUES.md for streams 2 and 6 rather than being edited here.
 
 ## Coverage stats
 
@@ -172,7 +177,11 @@ Unresolved names (24 distinct, 50 uses): FPP ×18, DMX ×5, Raspberry Pi ×4, An
 - [x] 2026-11-18: `sources` provenance (`4f75f95`), ISSUES.md coordination (`aab5be7`), pushed.
 - [x] 2026-11-18: "compatible with X" filters + ecosystem counts (`edb3de8`), pushed.
 - [x] 2026-11-18: 15 research agents delegated (see list above).
-- [ ] Apply + verify research batches (one review commit per batch).
+- [x] 2026-11-18: "More from <maker>" rows (`bc36452`); long inline name lists collapse (`055c79c`).
+- [x] 2026-11-18: all 15 batches applied and pushed, each a review commit plus a corrections commit: software ↔ hardware (`53e14cd`, `b3e5fea`), Advatek / DMXking (`d06a9da`, `6db00d3`), LED Strip Studio / ProtoPixel / RocketLife (`1ea6142`), WLED / ESP (`794114f`), pro / stage (`cbcc0be`), pixel ICs (`62d686a`), pixels (`d84d17a`, `8312a25`), Falcon / Kulp (`9ea88f0`, `08d3a64`), HolidayCoro and hobby (`083ebca`, `943342f`, `dabde25`), ENTTEC / DiGidot / Deskontrol (`457af9f`, `3b97340`), SP-series / Diamex (`dcb5674`, `093c845`), drive libraries (`c41def6`), adapters / decoders (`db0559d`, `f58a359`), boards / level converters (`33d1371`), connectors / commercial / diffusers (`766e632`, `f57a6f4`), WS2816A / DMX512-P (`bbd5320`).
+- [x] 2026-11-18: legacy `related_*` retired (`1ae1a4d`, ignored in `0b6d14a`); ISSUES.md entries for spec corrections (`1791181`) and the two pixel-less "controllers".
+- [x] 2026-11-18: UI pass at real data volume + `tests/unit/relations.test.ts`.
+- [ ] New entries for missing parts (step 9), then after-stats and close-out.
 
 ## Open questions for the user
 
@@ -183,3 +192,6 @@ Unresolved names (24 distinct, 50 uses): FPP ×18, DMX ×5, Raspberry Pi ×4, An
 - Don't batch-derive links from name similarity without checking a source — that is how the `dmx512` mislinks happened.
 - Don't link to entries another stream may delete (cross-category duplicates) until that's settled.
 - Don't edit `DataTable.tsx` / `ColumnFilter.tsx` internals (stream 7); add columns via `columns.tsx` and log the overlap.
+- Don't pipe a gating command (`git rebase`, `bun run validate`, tests) into `tail` / `grep` in a chain that ends in `git push`: the pipe's status is the filter's. Ship with the fail-fast script.
+- Don't resolve YAML conflicts by concatenating both sides; merge maps key by key and re-check that every correction from both sides survived.
+- Don't put `title=` tooltips on anything (touch users never see them); provenance and notes are inline or behind a tap-to-expand `<details>`.
