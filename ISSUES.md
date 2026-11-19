@@ -178,16 +178,18 @@ Filling any of these makes its checks sharper with no code change:
   flags 74HC245 (3.5 V threshold) and TXS0108E (pull-up outputs) from them. A
   new converter entry without the two facts is simply offered unjudged.
 - Adapters: the designer offers an adapter once it has `outputs.count` and a
-  `host` link to a /microboards entry (14 of 40 today). Still missing a
-  host link although `parent` names a board: the Wemos D1 Mini shields
-  (4x-led-mini-shield, 6x-led-shield, 6x-smd-led-shield, espartstick,
-  wemos-esp32-driver-board, wled-wemos-shield), 16x-led-shield (NodeMCU
-  ESP32), 8x-led-shield (Adafruit Feather), esp-level-shifter (ESP-01),
-  pipixel and pixel-string-pihat-zero (Raspberry Pi), orange-pi-dmx. Several
-  of those boards have no /microboards entry yet (Wemos D1 Mini, a
-  Feather). `outputs.driver.buffered` is recorded on one adapter only: an
-  adapter whose `related` has `uses: level-converters/…` counts as buffered,
-  the rest say nothing about level shifting.
+  `host` link to a /microboards entry: 22 of 40 after cross-links' new-entry
+  pass (2026-11-18), which added the Wemos D1 Mini / Pro, BeagleBone Green,
+  Pi 3 B, Pi 5, Pi Zero 2 W, PocketBeagle 2 and Orange Pi Zero entries and
+  linked the D1 Mini shields, wled-wemos-shield, espartstick and
+  orange-pi-dmx. Still without one, for lack of a source naming a board in
+  the database: wemos-esp32-driver-board (an ESP32 D1 Mini), 16x-led-shield
+  (NodeMCU-32S), 8x-led-shield (any Feather), esp-level-shifter (no source
+  survives), pipixel ("the Raspberry Pi family") and pixel-string-pihat-zero
+  (no maker text). `outputs.driver.buffered` is recorded on one adapter
+  only: an adapter whose `related` has `uses: level-converters/…` counts as
+  buffered (13 adapters now name their 74HCT245 / 74HCT125 / TXB0104), the
+  rest say nothing about level shifting.
 - `adapters/pocketscroller-v2` has `outputs.count: 6` with
   `protocols: [HUB75]`: panel outputs, not pixel strings. The designer
   offers it and says the pixel isn't among its listed protocols; a field

@@ -74,10 +74,10 @@ source recorded where the schema allows. Part of
 6. [x] Controllers: `outputs.protocols` (114/132), firmware / works-with, connector refs, host boards, families.
 7. [x] Drive libraries: `supported_ics` holds pixel parts only, control protocols moved to `protocols`; `related_*` arrays retired (`1ae1a4d`, in IGNORED_COMMITS). Pattern drivers: aliases, hardware support.
 8. [x] Adapters (host boards, connectors, firmware), pixel decoders (`inputs.protocols`), microboards (generations), level converters (buffer-IC users), connectors (families, aliases), commercial systems, diffusers.
-9. [ ] **Current:** missing entities. Three delegated agents (below) write new entries for the most-referenced unresolved names into `.research/new/<category>/` (git-ignored). Review each (schema, sources), move into `database/`, add the host / uses links that now resolve, commit as research commits.
+9. [x] Missing entities: six delegated agents (below) wrote 88 new entries for the most-referenced unresolved names (49 pixel parts, 8 boards, 4 level shifters / transceivers, 23 programs and libraries, 3 connectors, plus Glediator); each reviewed (schema, sources, relations), moved into `database/` and committed as research, with the 46 sourced host / uses / compatible / variant links they made possible.
 10. [x] Maker cross-links: "More from <maker>" row (`bc36452`), minus what the other family rows already show.
 11. [x] UI at real data volume (screenshots of WS2811, xLights, BeagleBone Black, deskontroller LITE V3 32): source notes behind a "note" toggle, card lists collapse at 12, maker names keep their spelling in row labels, one explanation per "All compatible hardware" row; unit tests for `relations.ts`.
-12. [ ] After-stats, ROADMAP / OVERHAUL-PLAN Goal 3 status, README check, close out.
+12. [x] After-stats (below), ROADMAP / OVERHAUL-PLAN Goal 3 status, CONTRIBUTING.md (links and sources), close out.
 
 ### Research agents (delegated 2026-11-18)
 
@@ -185,9 +185,72 @@ Protocol family (`data.type`) recorded on 38/77 pixels + pixel ICs (49%), in 13 
 
 Unresolved names (24 distinct, 50 uses): FPP ×18, DMX ×5, Raspberry Pi ×4, Android ×2, sACN ×2, Arduino, Art-Net, CircuitPython, Computer running ProtoPixel software, E1.31, Fadecandy, FW1906, GECE, HUB75, iOS, LPD1886, PixelPusher, PocketBeagle 2, Raspberry Pi Zero, Renard, SK6812W, TLC59711, WS281x, WS281X
 
-### After
+### After (2026-11-18, `eeacc23`)
 
-(pending)
+| Measure                                             |        Before |              After |
+| --------------------------------------------------- | ------------: | -----------------: |
+| Links (graph edges)                                 |           280 |               3614 |
+| Entries with any link                               | 191/491 (39%) |      437/571 (77%) |
+| Controllers listing their pixel ICs                 |         7/135 |            114/132 |
+| Names in controllers' pixel lists that link         |      22 of 23 | 2510 of 2932 (86%) |
+| Firmware / works-with names that link (controllers) |     4/22, 4/8 |     46/48, 249/267 |
+| Pixels + pixel ICs with a protocol family           |   38/77 (49%) |      117/126 (93%) |
+| Distinct unresolved names                           |  24 (50 uses) |     195 (478 uses) |
+
+Unresolved names grew because the pixel lists did: 2932 names are recorded now against 23 before, and
+most of what's left is long-tail parts named by one to four controllers (top: LPD1101 ×13, UCS6912 ×9,
+GS8304 ×8, GW6205 ×8, NS107 ×8, TLS3002 ×8). The ones with no source to resolve them are listed under
+Findings; the rest are candidates for the next new-entry pass (ROADMAP data backlog).
+
+Measured with `bun run scripts/cross-link-stats.ts`:
+
+**3614 links**; 437/571 entries (77%) have at least one link (either direction, or a shared protocol family).
+
+| Category            | Entries | Declares links | Linked to |  Any link |
+| ------------------- | ------: | -------------: | --------: | --------: |
+| adapters            |      40 |       35 (88%) |   7 (18%) |  35 (88%) |
+| commercial-systems  |      18 |        3 (17%) |   2 (11%) |   4 (22%) |
+| connectors          |      48 |         4 (8%) |  11 (23%) |  13 (27%) |
+| controllers         |     132 |      127 (96%) |  37 (28%) | 127 (96%) |
+| diffusive-materials |      44 |         1 (2%) |    1 (2%) |    2 (5%) |
+| drive-libraries     |      40 |       37 (93%) |  20 (50%) |  39 (98%) |
+| level-converters    |      13 |        3 (23%) |   6 (46%) |   7 (54%) |
+| microboards         |      44 |       21 (48%) |  32 (73%) |  32 (73%) |
+| pattern-drivers     |      53 |       15 (28%) |  40 (75%) |  43 (81%) |
+| pixel-decoders      |      13 |       11 (85%) |    1 (8%) |  11 (85%) |
+| pixel-ics           |      81 |       23 (28%) |  80 (99%) |  80 (99%) |
+| pixels              |      45 |       28 (62%) |  40 (89%) |  44 (98%) |
+
+| Name-list field                    |  Filled | Names | Resolve to an entry |
+| ---------------------------------- | ------: | ----: | ------------------: |
+| controllers `outputs.protocols`    | 114/132 |  2932 |          2510 (86%) |
+| drive-libraries `supported_ics`    |   32/40 |   227 |           204 (90%) |
+| pixel-decoders `inputs.protocols`  |   10/13 |    15 |            10 (67%) |
+| controllers `software.firmware`    |  31/132 |    48 |            46 (96%) |
+| adapters `software.firmware`       |   21/40 |    24 |           24 (100%) |
+| controllers `software.works_with`  |  94/132 |   267 |           249 (93%) |
+| adapters `software.works_with`     |   23/40 |    31 |            26 (84%) |
+| controllers `inputs.requires_host` |  20/132 |    30 |            27 (90%) |
+| controllers `outputs.driver.IC`    |   0/132 |     0 |               0 (–) |
+
+| Link kind   | Count |
+| ----------- | ----: |
+| drives      |  2557 |
+| supports    |   206 |
+| decodes     |     9 |
+| firmware    |    84 |
+| works-with  |   273 |
+| connector   |    86 |
+| host        |   132 |
+| uses        |    79 |
+| compatible  |    23 |
+| replacement |     9 |
+| predecessor |    22 |
+| variant     |    68 |
+| accessory   |     5 |
+| related     |    61 |
+
+Protocol family (`data.type`) recorded on 117/126 pixels + pixel ICs (93%), in 40 families.
 
 ## Progress log
 
@@ -203,11 +266,12 @@ Unresolved names (24 distinct, 50 uses): FPP ×18, DMX ×5, Raspberry Pi ×4, An
 - [x] 2026-11-18: comma-separated host lists resolve (`fieldNames`); aliases Raspberry Pi 4 / Zero, NeoPixel, DotStar.
 - [x] 2026-11-18: new entries, wave 1: 27 pixel parts, 18 boards / buffers / libraries / connectors; 45 sourced links they unlock; connector strings → refs (Not-A-Review trailer).
 - [x] 2026-11-18: new entries, wave 2: 22 pixel parts (batches C, D); table payloads drop `sources`.
-- [ ] Software entries (agent running), then after-stats and close-out.
+- [x] 2026-11-18: 21 software entries; aliases for MagicQ, Mapio, MediaMaster, AllPixMatrix, MADRIX (`992f7b5`, `eeacc23`).
+- [x] 2026-11-18: after-stats, ROADMAP / OVERHAUL-PLAN status, close-out.
 
 ## Open questions for the user
 
-(none yet)
+None. Judgment calls made without asking are under Decisions and Findings (e.g. names left unresolved for lack of a source, the Pi 3 B slug).
 
 ## Things not to do
 

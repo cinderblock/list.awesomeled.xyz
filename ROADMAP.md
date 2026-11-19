@@ -61,6 +61,19 @@ scripts/check-links.ts --prices` lists undated/stale prices
   walls: Digi-Key, Mouser, Farnell, RS, eBay) needs a human with a browser;
   the monthly workflow is disabled by GitHub's 60-day inactivity rule until
   re-enabled
+- Cross-links long tail (2026-11-18 pass: 86–100% of names resolve; see
+  `plans/cross-links.md`): `bun run validate` lists the 195 names hardware
+  entries use that match no entry. Next new-entry candidates: LPD1101 ×13,
+  UCS6912 ×9, GS8304, GW6205, TLS3002 ×8, LC8812 ×7, APA101, CY3005, LPD1882
+  ×6, and WorldSemi's WS2813A–D / WS2818M variants. Some need a source first
+  (no maker document found yet: APA101, CY3005, GW6205, LPD1882) and some
+  have no source equating them with a part ("UCS512", "DMX512-D", "NS107",
+  "ChamSys"). Controllers' `outputs.driver.IC` is still empty everywhere;
+  buffer ICs are linked through `related: uses` instead
+- Connector refs: several controllers and decoders describe fixed screw
+  terminals in free text (QuinLED Dig-Octa, K16000S, SP10xE, PiPixel, Plasma
+  2040, …); each needs checking fixed vs. pluggable before pointing it at
+  `connectors/pcb-screw-terminal-block` or `mtsb-combicon`
 
 ## Decisions parked (owner: Cameron)
 
