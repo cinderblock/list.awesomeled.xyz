@@ -786,6 +786,27 @@
 'Controllers | DMX to SPI | Auxilary Outputs':
   - value: 'Groupable in 1,2,4,5,10,100 as pixel'
     reason: 'In features (pixel grouping in 1, 2, 4, 5, 10 or 100; from the sheet, unverified)'
+'Controllers | www.orangepi-dmx.org | Standalone':
+  - value: 'Yes'
+    reason: "Stream 2's inputs audit (plans/database-review-inputs-audit.md): the pixel firmware is not standalone (a separate show-player firmware is)"
+'Controllers | RC4Magic S3 Pixel Driver | Storage':
+  - value: 'Yes'
+    reason: "Stream 2's inputs audit (plans/database-review-inputs-audit.md): no storage; it reshapes live console data"
+'Controllers | RC4Magic S3 Pixel Driver | Standalone':
+  - value: 'Yes'
+    reason: "Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone; it reshapes live console data"
+'Controllers | Pixelator | Standalone':
+  - value: 'Yes'
+    reason: "Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone (Pixelator datasheet)"
+'Controllers | APD-2-500-12v-ART | Standalone':
+  - value: 'No'
+    reason: "Stream 2's inputs audit (plans/database-review-inputs-audit.md): standalone, with internal programs (maker page)"
+'Controllers | K16000S | (name) (link)':
+  - value: 'https://www.amazon.com/dp/B09XB4QTGT'
+    reason: 'The Amazon listing is an unrelated CANRIA decoder (stream 6)'
+'Controllers | K16000S | Product URL (link)':
+  - value: 'https://www.amazon.com/dp/B09XB4QTGT'
+    reason: 'The Amazon listing is an unrelated CANRIA decoder (stream 6)'
 'Pixels | APA102 | Max pixel per string':
   - value: '~250 - CLK sensitive'
     reason: 'Same: max_per_string 250 with the clock-degradation explanation'
@@ -1428,6 +1449,9 @@
 'Connectors | XT60/90 | Link (link)':
   - value: 'https://www.sparkfun.com/products/10474'
     reason: 'Old URL; it redirects to the page YAML links'
+'Connectors | PowerPole 15/45 | IP Rating':
+  - value: 'IP65 Available'
+    reason: 'Same: IP65 only with SpecPak shells and boots (ratings notes)'
 'Drive Libraries | Arduino Ethernet Nano with ENC28J60 | Features':
   - value: 'WS2811/12 Ethernet Hardwire'
     reason: 'YAML revised by research since the import'

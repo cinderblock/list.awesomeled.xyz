@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/18/2026, 7:42 PM PST (2026-11-19 03:42Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/18/2026, 7:58 PM PST (2026-11-19 03:58Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -81,14 +81,12 @@ Database folder: `database/pattern-drivers/`.
 
 </details>
 
-<details><summary>Acknowledged differences (59)</summary>
+<details><summary>Acknowledged differences (56)</summary>
 
 - [X3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=X3) `arkaos` Status "Active": (cited) YAML cites a source for status
-- [A4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A4) `arthet-led-mapper` (name) "Arthet LED Mapper": (cited) YAML cites a source for name
 - [D4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D4) `arthet-led-mapper` Platform "ubuntu, windows, mac and arm64": Same platforms in structured form (Ubuntu = Linux, mac = macOS); arm64 is in platforms.notes
 - [Y5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y5) `bekonix` URL "https://www.bekonix.com/platform/": The sheet links a sub-page that is gone (404); YAML links the live site
 - [V9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V9) `chataigne-wled-mod` Notes "Plug on for vcontrol of WLED, other WLED plugins from same …": Typo fixed in YAML
-- [Y11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y11) `dylos` URL "https://obsidiancontrol.com/dylos": Old URL (the site blocks scripted checks); YAML links the maker's current page
 - [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.8981": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y12) `elm` URL "https://www.enttec.co.uk/product/controls-gb/addressable-le…": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
 - [D15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D15) `fastled-fx-engine` Platform "ESP/AVR/NRF/RP/Browser": Same platforms in structured form (web + hardware list)
@@ -113,6 +111,7 @@ Database folder: `database/pattern-drivers/`.
 - [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.401175": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W32) `madrix-5` Demo/Free "Demo no data out": Same in structured form: demo.available + limitations
 - [B34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B34) `mapio-pro` Developer "Vistitution": (cited) YAML cites a source for creator
+- [C37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C37) `protopixel-create` Price "176": (cited) re-priced at the source (retrieved 2020-08-08)
 - [Y37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y37) `protopixel-create` URL "https://www.protopixel.io/design": ProtoPixel's old 'design' page; YAML links the Create product page
 - [V40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V40) `smartshow-lms` Notes "aimed at live show use , big button execute interface": Same: the notes cover live-show use and the big-button Show Mode
 - [Y41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y41) `smode` URL "https://smode.fr/": Old URL; it redirects to the page YAML links
@@ -121,8 +120,6 @@ Database folder: `database/pattern-drivers/`.
 - [Y43](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y43) `vixen-lights` URL "https://www.vixenlights.com/downloads/": Old URL (the site blocks scripted checks); YAML links the maker's current page
 - [Y44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y44) `wled` URL "GitHub - Aircoookie/WLED: Control WS2812B and many more typ…": The old repository's link title; github.com/Aircoookie/WLED redirects to github.com/wled/WLED, which YAML links
 - [Y5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y5) `bekonix` URL "https://www.bekonix.com/platform/": The sheet links a sub-page that is gone (404); YAML links the live site
-- [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A11) `dylos` (name) "Dylos": Old URL (the site blocks scripted checks); YAML links the maker's current page
-- [Y11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y11) `dylos` URL "https://obsidiancontrol.com/dylos": Old URL (the site blocks scripted checks); YAML links the maker's current page
 - [A12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A12) `elm` (name) "ELM": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
 - [W12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W12) `elm` Demo/Free "Nag for free one": The ELM download link now redirects to the ELM page, which is in other_links
 - [Y12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y12) `elm` URL "https://www.enttec.co.uk/product/controls-gb/addressable-le…": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
@@ -181,7 +178,7 @@ Database folder: `database/controllers/`.
 ### Rows paired by alias, URL, or as duplicates
 
 - [A3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A3) "" → `controllers/nled-pixel-controller-mini` (url, score 0.67)
-- [A5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A5) "c,v.xxzzzzzzzASA" → `controllers/a1-slwf-03` (url, score 0.69)
+- [A5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A5) "c,v.xxzzzzzzzASA" → `controllers/a1-slwf-03` (url, score 0.62)
 - [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A11) "Standard Differential Receiver" → `level-converters/standard-differential-receiver` (url, score 0.77)
 - [A20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A20) "[+" → `controllers/elite-4d-exmu` (url, score 0.85)
 - [A26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A26) "M4 Port Pixel" → `controllers/m4-port-pixel` (alias, score 0.63)
@@ -189,7 +186,7 @@ Database folder: `database/controllers/`.
 - [A32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A32) "M8 Port Pixel" → `controllers/m8-port-pixel` (alias, score 0.75)
 - [A37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A37) "Luminaxa" → `controllers/luminaxa` (url, score 0.76)
 - [A44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A44) "Baldrick Board" → `controllers/baldrick-8` (alias, score 0.5)
-- [A45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A45) "Flex Pixel Driver" → `controllers/flex-pixel-driver` (alias, score 0.67)
+- [A45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A45) "Flex Pixel Driver" → `controllers/flex-pixel-driver` (alias, score 0.73)
 - [A47](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A47) "AN6USP10" → `controllers/an6usp10` (url, score 0.75)
 - [A81](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A81) "Falcon F4V3" → `controllers/falcon-f16v3` (alias, score 0.6)
 - [A108](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A108) "M8 Port Pixel" → `controllers/pixel-octo` (alias, score 0.73)
@@ -205,7 +202,7 @@ Database folder: `database/controllers/`.
 - `controllers/sp608e` "SP608E": added 2026-07-02 in e1795d4 (data: split the SP801E/SP608E chimera into two researched entries)
 - `controllers/wb48` "WB48": added 2026-07-01 in 67d17d0 (data: add Wally's Lights WB48 controller)
 
-<details><summary>Acknowledged differences (343)</summary>
+<details><summary>Acknowledged differences (344)</summary>
 
 - [H2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H2) `sp102e` Standalone "Presets": "Presets" = plays built-in patterns on its own; YAML inputs.standalone: true
 - [U2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U2) `sp102e` Status "Active": (cited) YAML cites a source for status
@@ -214,7 +211,6 @@ Database folder: `database/controllers/`.
 - [R4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R4) `electromage-8x-driver` Notes "Stacks up to 8 on a bus": Same: up to 8 boards share one serial line
 - [A5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A5) `a1-slwf-03` (name) "c,v.xxzzzzzzzASA": Vandalized after the import (keyboard mash); was A1-SLWF-03 / SMARTLIGHT.ME
 - [B5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=B5) `a1-slwf-03` Manufacturer "`QWS": Vandalized after the import (keyboard mash); was A1-SLWF-03 / SMARTLIGHT.ME
-- [E5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=E5) `a1-slwf-03` Max outputs "1": (cited) YAML cites a source for outputs.count
 - [D6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D6) `blink-tape-controller` Price "15.99": (cited) re-priced at the source (retrieved 2026-11-18)
 - [I7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I7) `dmx-to-spi` Pixel Types "Async": (cited) YAML cites a source for outputs.clocked
 - [J7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J7) `dmx-to-spi` Max Voltage "24": (cited) YAML cites a source for power.voltage.max
@@ -299,6 +295,7 @@ Database folder: `database/controllers/`.
 - [D36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D36) `electromage-pro-8x-driver` Price "49": (cited) re-priced at the source (retrieved 2026-11-18)
 - [R36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R36) `electromage-pro-8x-driver` Notes "Stacks up to 8 on a bus": Same: up to 8 boards share one serial line
 - [D37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D37) `luminaxa` Price "49.99": (cited) re-priced at the source (retrieved 2026-11-18)
+- [H38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H38) `www-orangepi-dmx-org` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): the pixel firmware is not standalone (a separate show-player firmware is)
 - [D39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D39) `8-port-led-distro` Price "55": (cited) re-priced at the source (retrieved 2026-11-18)
 - [J39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J39) `8-port-led-distro` Max Voltage "24": (cited) YAML cites a source for power.voltage.max
 - [P39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=P39) `8-port-led-distro` Auxilary Outputs "I.O. Pins broken out": (cited) YAML cites a source for outputs.auxiliary
@@ -315,7 +312,6 @@ Database folder: `database/controllers/`.
 - [R44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R44) `baldrick-8` Notes "Aimed at easy set up with Xlights.": Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details
 - [T44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=T44) `baldrick-8` Introduction "2024": Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details
 - [D45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D45) `flex-pixel-driver` Price "80": Researched as Elation's "Flex Pixel Driver 1" (c13218a)
-- [E45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=E45) `flex-pixel-driver` Max outputs "2": Researched as Elation's "Flex Pixel Driver 1" (c13218a)
 - [M45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=M45) `flex-pixel-driver` Output Connectors "Phoenix Screw": Researched as Elation's "Flex Pixel Driver 1" (c13218a)
 - [V45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V45) `flex-pixel-driver` Product URL "https://www.elationlighting.com/flex-pixel-driver-1": Researched as Elation's "Flex Pixel Driver 1" (c13218a)
 - [A47](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A47) `an6usp10` (name) "AN6USP10": (cited) YAML cites a source for name
@@ -378,6 +374,7 @@ Database folder: `database/controllers/`.
 - [K84](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K84) `reactivo-2` Max Current "5": (cited) YAML cites a source for power.current.max
 - [B85](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=B85) `k16000s` Manufacturer "KulpLights, LLC": Sheet error: KulpLights sells no K16000S; it's AUTUNEER's (sourced)
 - [I85](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I85) `k16000s` Pixel Types "Async": (cited) YAML cites a source for outputs.clocked
+- [V85](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V85) `k16000s` Product URL "https://www.amazon.com/dp/B09XB4QTGT": (cited) YAML cites a source for creator.page
 - [D86](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D86) `k64d-b` Price "230": YAML revised by research since the import (newer price/hardware revision)
 - [M87](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=M87) `netpixel-one` Output Connectors "JST": YAML revised by research: 10-way plug-in harness
 - [D88](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D88) `k128d-b` Price "270": (cited) re-priced at the source (retrieved 2026-11-18)
@@ -425,6 +422,8 @@ Database folder: `database/controllers/`.
 - [D106](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D106) `twinpixx16` Price "399": (cited) re-priced at the source (retrieved 2021-01-20)
 - [B107](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=B107) `rc4magic-s3-pixel-driver` Manufacturer "Theatre Wireless": (cited) YAML cites a source for creator
 - [D107](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D107) `rc4magic-s3-pixel-driver` Price "399": (cited) re-priced at the source (retrieved 2026-11-18)
+- [G107](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=G107) `rc4magic-s3-pixel-driver` Storage "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): no storage; it reshapes live console data
+- [H107](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H107) `rc4magic-s3-pixel-driver` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone; it reshapes live console data
 - [P107](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=P107) `rc4magic-s3-pixel-driver` Auxilary Outputs "DMX Thru": Same in structured form: outputs.auxiliary DMX512 count
 - [V107](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V107) `rc4magic-s3-pixel-driver` Product URL "https://theatrewireless.com/shop/rc4magic-s3/dmxpix/": (cited) YAML cites a source for creator.page
 - [A108](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A108) `pixel-octo` (name) "M8 Port Pixel": The row is ENTTEC's Pixel Octo (71520) under the wrong name (archived ENTTEC page)
@@ -443,7 +442,6 @@ Database folder: `database/controllers/`.
 - [V113](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V113) `pixlite-16-plug-and-play-mk2` Product URL "https://www.advateklights.com/pixlite-16-mk2-plug-and-play": Old URL; it redirects to the page YAML links
 - [C114](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=C114) `pixlite-e4-s-mk3` Max Pixels "16320": (cited) YAML cites a source for outputs.pixels
 - [D114](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D114) `pixlite-e4-s-mk3` Price "549": (cited) re-priced at the source (retrieved 2026-11-18)
-- [P114](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=P114) `pixlite-e4-s-mk3` Auxilary Outputs "DMX In/Out": Same in structured form: outputs.auxiliary DMX512 count
 - [V114](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V114) `pixlite-e4-s-mk3` Product URL "https://www.advateklights.com/pixlite-e4-s-mk3": Old URL; it redirects to the page YAML links
 - [U115](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U115) `protopixel-8-channel-controller` Status "Active": (cited) YAML cites a source for status
 - [D116](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D116) `epix-flex-drive` Price "600": (cited) re-priced at the source (retrieved 2026-11-18)
@@ -458,21 +456,20 @@ Database folder: `database/controllers/`.
 - [K121](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K121) `led-ethernet-controller-powered` Max Current "20": Unverified either way: the maker's spec PDF didn't load; YAML keeps the sheet note's 10 A per output
 - [U121](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U121) `led-ethernet-controller-powered` Status "Active": (cited) YAML cites a source for status
 - [D122](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D122) `pixlite-e16-s-mk3` Price "950": (cited) re-priced at the source (retrieved 2026-11-18)
-- [P122](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=P122) `pixlite-e16-s-mk3` Auxilary Outputs "DMX In/Out": Same in structured form: outputs.auxiliary DMX512 count
 - [V122](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V122) `pixlite-e16-s-mk3` Product URL "https://www.advateklights.com/pixlite-e16-s-mk3": Old URL; it redirects to the page YAML links
 - [D123](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D123) `deskontroller-lite-v3-96` Price "1060": (cited) re-priced at the source (retrieved 2026-11-18)
 - [D124](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D124) `pixlite-t8-s-mk3` Price "1200": (cited) re-priced at the source (retrieved 2026-11-18)
-- [P124](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=P124) `pixlite-t8-s-mk3` Auxilary Outputs "DMX In/Out": Same in structured form: outputs.auxiliary DMX512 count
 - [V124](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V124) `pixlite-t8-s-mk3` Product URL "https://www.advateklights.com/pixlite-t8-s-mk3": Old URL; it redirects to the page YAML links
 - [D125](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D125) `deskontroller-lite-v3-192` Price "1490": (cited) re-priced at the source (retrieved 2026-11-18)
 - [D126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D126) `qolorpix` Price "1500": (cited) re-priced at the source (retrieved 2026-11-18)
 - [K126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K126) `qolorpix` Max Current "120": (cited) YAML cites a source for power.current.max
-- [M126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=M126) `qolorpix` Output Connectors "XLR5": (cited) YAML cites a source for outputs.connector
 - [V126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V126) `qolorpix` Product URL "http://www.citytheatrical.com/Products/qolorpix-tape-contro…": Old URL; it redirects to the page YAML links
 - [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1848.46464": (cited) re-priced at the source (retrieved 2022-06-29)
 - [G127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=G127) `pixelator` Storage "Yes": The manual describes no show storage; its DMX Generator holds static looks only
+- [H127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H127) `pixelator` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone (Pixelator datasheet)
 - [V128](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V128) `emp-16-uni-control` Product URL "https://www.empdesigns.co.uk/portfolio-item/16-universe-led…": Old URL; it redirects to the page YAML links
 - [V129](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V129) `pixpoe` Product URL "https://www.empdesigns.co.uk/portfolio-item/poe-pixel-contr…": Old page; it now redirects to the product page YAML links
+- [H130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H130) `apd-2-500-12v-art` Standalone "No": Stream 2's inputs audit (plans/database-review-inputs-audit.md): standalone, with internal programs (maker page)
 - [V130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V130) `apd-2-500-12v-art` Product URL "https://www.digitaltape.co.uk/pixel-drivers": A category page; YAML links the product's own page
 - [J132](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J132) `led-player-s` Max Voltage "5": The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb
 - [L132](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=L132) `led-player-s` Buffered "No": The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb
@@ -509,6 +506,8 @@ Database folder: `database/controllers/`.
 - [V79](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V79) `pixelbox` Product URL "https://www.lumikit.com.br/international": Generic vendor landing page; YAML links the product page
 - [V81](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V81) `falcon-f16v3` Product URL "https://pixelcontroller.com/store/products/48-f16v3.html": The old URL redirects to the discontinued-products page the entry links
 - [R84](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R84) `reactivo-2` Notes "https://reactivo.lighting/first-touch/ Screen grabber, WEB …": Malformed link (notes text pasted into the URL); the page itself is in creator.page
+- [A85](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A85) `k16000s` (name) "K16000S": The Amazon listing is an unrelated CANRIA decoder (stream 6)
+- [V85](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V85) `k16000s` Product URL "https://www.amazon.com/dp/B09XB4QTGT": The Amazon listing is an unrelated CANRIA decoder (stream 6)
 - [A91](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A91) `ledmx4-max` (name) "LeDMX4 MAX": Old URL; it redirects to the page YAML links
 - [V91](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V91) `ledmx4-max` Product URL "https://dmxking.com/led-pixel-control/ledmx4-max": Old URL; it redirects to the page YAML links
 - [A92](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A92) `spi-matrix` (name) "SPI Matrix": Old page; it now redirects to the SPI Matrix page the entry links
@@ -544,7 +543,6 @@ Database folder: `database/controllers/`.
 - [I57](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I57) `k40d-pb` Pixel Types "Async": YAML says differential: true and its notes describe the RJ45 differential ports
 - [I80](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I80) `falcon-f48` Pixel Types "Async": Same: outputs.differential (it drives Falcon differential receiver boards)
 - [D92](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D92) `spi-matrix` Price "299": Same: price tiers 299/449/599 for 1024/2048/4096 pixels, and the one-year license in technical_notes
-- [K92](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K92) `spi-matrix` Max Current "20": Maker: 5 A per output, 10 A total (sourced)
 - [H105](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H105) `pixlite-a4-s-mk3` Standalone "Yes": Same: standalone playback via SHOWTime (features, inputs.standalone)
 - [C115](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=C115) `protopixel-8-channel-controller` Max Pixels "4800": In notes/technical_notes: 4800 LEDs across two 4-output satellites (600 per output)
 - [D117](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D117) `led-ethernet-controller-3` Price "625": Same: price tiers 625/950/1250 and the lifetime license in technical_notes
@@ -1070,13 +1068,14 @@ Header problems:
 - [A24](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A24) "EspArtStick WLED" → `controllers/espartstick` (url, score 0.5)
 - [A25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A25) "M4 Port Pixel" → `controllers/m4-port-pixel` (alias, score 0.4)
 - [A26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A26) "M8 Port Pixel" → `controllers/m8-port-pixel` (alias, score 0.5)
+- [A27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A27) "Pi Hat" → `adapters/pi-hat` (url, score 0.73)
 - [A33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A33) "QuinLED-Dig-Uno" → `controllers/quinled-dig-uno` (alias, score 0.58)
-- [A34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A34) "QuinLED-Dig-Quad" → `controllers/quinled-dig-quad` (alias, score 0.67)
+- [A34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A34) "QuinLED-Dig-Quad" → `controllers/quinled-dig-quad` (alias, score 0.58)
 - [A40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A40) "4 Channel Differntial Transmitter" → `adapters/4-channel-differential-transmitter` (alias, score 0.7)
 - [A41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A41) "Meanwell PDU with Differential Reciever" → `adapters/meanwell-pdu-with-differential-receiver` (alias, score 0.8)
-- [A46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A46) "QuinLED-Dig-Uno" → `controllers/quinled-dig-uno` (alias, score 0.29)
+- [A46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A46) "QuinLED-Dig-Uno" → `controllers/quinled-dig-uno` (alias, score 0.43)
 
-<details><summary>Acknowledged differences (77)</summary>
+<details><summary>Acknowledged differences (74)</summary>
 
 - [D3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=D3) `rasppi-isolated-dmx` Pixel Types "Allows easy control of DMX-512 devices from Pi": A description in the Pixel Types column; the entry's notes say it
 - [E5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=E5) `pixelpops` Max Voltage "5": (cited) YAML cites a source for power.voltage.max
@@ -1112,10 +1111,8 @@ Header problems:
 - [C26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=C26) `m8-port-pixel` Max Channels "75": Sheet error: the M8-PI has 8 outputs (merged into controllers/m8-port-pixel)
 - [H26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H26) `m8-port-pixel` Unit Price (USD) "45": (cited) re-priced at the source (retrieved 2025-06-21)
 - [L26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=L26) `m8-port-pixel` DIY/OTS "DIY": Merged into controllers/m8-port-pixel, which has no DIY/OTS field (sold assembled)
-- [C27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=C27) `pi-hat` Max Channels "3200": (cited) YAML cites a source for outputs.count
 - [H27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H27) `pi-hat` Unit Price (USD) "22": (cited) re-priced at the source (retrieved 2025-07-16)
 - [I27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=I27) `pi-hat` Output Connectors "Both": Not a connector (a stray "Both")
-- [J27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=J27) `pi-hat` (J, no header) "12": Stray value in the sheet (no header / not a URL)
 - [N27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=N27) `pi-hat` Product URL "Multiple": Stray value in the sheet (no header / not a URL)
 - [H28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H28) `wemos-esp32-driver-board` Unit Price (USD) "9": (cited) re-priced at the source (retrieved 2025-12-23)
 - [D29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=D29) `wemos-pwm-rgb-w-led-driver-board` Pixel Types "Fet power output": Same: MOSFET PWM outputs (notes, outputs.auxiliary PWM)
@@ -1141,7 +1138,6 @@ Header problems:
 - [H44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H44) `espartstick` Unit Price (USD) "25": (cited) re-priced at the source (retrieved 2021-08-03)
 - [C45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=C45) `espixelstick` Max Channels "4": (cited) YAML cites a source for outputs.count
 - [H45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H45) `espixelstick` Unit Price (USD) "30": (cited) re-priced at the source (retrieved 2026-11-18)
-- [C46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=C46) `quinled-dig-uno` Max Channels "6": The 2018 DIY board had 1 clocked or 2 single-wire outputs (QuinLED's 2018 guide); merged into controllers/quinled-dig-uno
 - [E46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=E46) `quinled-dig-uno` Max Voltage "5": The 2018 DIY board was built for 5 V (12 V optional); merged into the current controller entry
 - [G46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=G46) `quinled-dig-uno` Parent "Wemos Dx Mini (ESP32/ESP8266)": The 2018 DIY board took a Wemos D1/D32 Mini; merged into controllers/quinled-dig-uno (now an ESP32 board)
 - [I46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=I46) `quinled-dig-uno` Output Connectors "Phoniex Screw": Typo fixed in YAML (Phoenix Screw)
@@ -1372,7 +1368,7 @@ Database folder: `database/connectors/`.
 - [A44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=A44) `mt30-60` Picture: <https://www.hacker-motor-shop.com/hacker_e/prodpic/MT60-connector-plug-socket-A85068_b_1.JPG> (lost in CSV conversion)
 - [A45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=A45) `xt60-90` Picture: <https://cdn.sparkfun.com//assets/parts/4/9/7/1/10474-01.jpg> (lost in CSV conversion)
 
-<details><summary>Acknowledged differences (38)</summary>
+<details><summary>Acknowledged differences (39)</summary>
 
 - [C3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C3) `sh` Link "https://www.jst-mfg.com/product/detail_e.php?series=231": Old URL; it redirects to the page YAML links
 - [C5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C5) `ph` Link "http://www.jst-mfg.com/product/detail_e.php?series=199": Old URL; it redirects to the page YAML links
@@ -1391,6 +1387,7 @@ Database folder: `database/connectors/`.
 - [C40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C40) `speakon` Link "https://www.neutrik.com/en/neutrik/products/speakon-loudspe…": Old URL; it redirects to the page YAML links
 - [C41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C41) `wago-221` Link "https://www.wago.com/global/electrical-interconnections/dis…": Old URL; it redirects to the page YAML links
 - [C42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C42) `powerpole-15-45` Link "https://www.andersonpower.com/us/en/resources/PowerPoleReso…": Old URL; it redirects to the page YAML links
+- [G42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=G42) `powerpole-15-45` IP Rating "IP65 Available": Same: IP65 only with SpecPak shells and boots (ratings notes)
 - [B44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=B44) `mt30-60` Manufacturer "Generic": (cited) YAML cites a source for creator
 - [C45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C45) `xt60-90` Link "https://www.sparkfun.com/products/10474": Old URL; it redirects to the page YAML links
 - [B2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=B2) `dupont` Manufacturer "Harwin/ Generic": Old Harwin page; redirects to the product listing in creator.url
