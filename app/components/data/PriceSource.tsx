@@ -97,34 +97,43 @@ export function PriceDetail({
 }) {
   let body: React.ReactNode;
   if (Array.isArray(value)) {
+    const rows = value.map(
+      (row) => (row ?? {}) as { qty?: unknown; name?: unknown; sku?: unknown; pixels?: unknown }
+    );
+    // Quantity tiers usually all price one part: name it once above the list
+    // instead of repeating it in a third column (which narrow cards squeeze
+    // into one character per line).
+    const skus = new Set(rows.map((r) => (typeof r.sku === 'string' ? r.sku : '')));
+    const sharedSku = skus.size === 1 ? [...skus][0] : '';
+    const perRowExtra = (r: (typeof rows)[number]) =>
+      [
+        !sharedSku && typeof r.sku === 'string' ? r.sku : null,
+        typeof r.pixels === 'number' ? `${r.pixels.toLocaleString('en-US')} pixels` : null,
+      ]
+        .filter(Boolean)
+        .join(', ');
+    const hasExtra = rows.some((r) => perRowExtra(r) !== '');
     body = (
-      <ul className="price-list">
-        {value.map((row, i) => {
-          const r = (row ?? {}) as {
-            qty?: unknown;
-            name?: unknown;
-            sku?: unknown;
-            pixels?: unknown;
-          };
-          const label =
-            typeof r.qty === 'number'
-              ? `${r.qty.toLocaleString('en-US')}+`
-              : typeof r.name === 'string'
-                ? r.name
-                : null;
-          const extra = [
-            typeof r.sku === 'string' ? r.sku : null,
-            typeof r.pixels === 'number' ? `${r.pixels.toLocaleString('en-US')} pixels` : null,
-          ].filter(Boolean);
-          return (
-            <li key={i}>
-              <span className="price-list-label">{label}</span>
-              <span className="tabular-nums">{priceText(row) ?? '-'}</span>
-              <span className="price-list-extra">{extra.join(', ')}</span>
-            </li>
-          );
-        })}
-      </ul>
+      <>
+        {sharedSku && <span className="price-list-sku">{sharedSku}</span>}
+        <ul className={`price-list${hasExtra ? ' price-list--extra' : ''}`}>
+          {rows.map((r, i) => {
+            const label =
+              typeof r.qty === 'number'
+                ? `${r.qty.toLocaleString('en-US')}+`
+                : typeof r.name === 'string'
+                  ? r.name
+                  : null;
+            return (
+              <li key={i}>
+                <span className="price-list-label">{label}</span>
+                <span className="tabular-nums">{priceText(value[i]) ?? '-'}</span>
+                {hasExtra && <span className="price-list-extra">{perRowExtra(r)}</span>}
+              </li>
+            );
+          })}
+        </ul>
+      </>
     );
   } else {
     body = <span className="tabular-nums">{priceText(value) ?? String(value)}</span>;

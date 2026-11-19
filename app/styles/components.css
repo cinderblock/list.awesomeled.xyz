@@ -604,8 +604,16 @@ a.entry-updated:hover {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: max-content max-content 1fr;
+  grid-template-columns: max-content max-content;
   gap: 0.1rem 0.75rem;
+  overflow-wrap: normal;
+}
+.price-list--extra {
+  grid-template-columns: max-content max-content minmax(8ch, 1fr);
+}
+.price-list-sku {
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
 }
 .price-list li {
   display: contents;
@@ -617,6 +625,7 @@ a.entry-updated:hover {
 .price-list-extra {
   color: var(--muted-foreground);
   font-size: 0.8125rem;
+  overflow-wrap: break-word;
 }
 .price-as-of {
   color: var(--muted-foreground);
