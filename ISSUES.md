@@ -135,3 +135,32 @@ Why it matters: `inputs.physical` / `inputs.protocols` drive the Protocols
 column, badges and the designer's controller facts. **Parity (stream 1):
 please don't restore or compare controllers' interfaces from that column**;
 treat it as unknown. Other Controllers columns follow their rows.
+
+## Two "controllers" drive no pixels (parity / standardization)
+
+Found by cross-links research (stream 4), from the makers' own pages:
+
+- `controllers/dmx-core`: a network show controller (Raspberry Pi CM4
+  appliance, gigabit Ethernet/PoE, up to 800 Art-Net/sACN/KiNET universes),
+  no pixel outputs. <https://dmxcore.com/dmx-core-100>
+- `controllers/pixout-server`: Art-Net recorder/player; PixOut's FAQ says
+  direct SPI pixel output "is not available yet", so its 8 × 1024 pixel
+  outputs are wrong. <https://pixout.lighting/products/recorder/>
+
+Why it matters: they show up in "what drives my pixels" filters and the
+designer. Keep (with outputs removed) or move out of controllers: the
+category call isn't stream 4's.
+
+## Prices that disagree with the maker (stream 6)
+
+Seen while verifying links (not changed; prices are stream 6's):
+
+- `controllers/spi-led-controller`: one 1024-pixel model at EUR 170 ex VAT,
+  not the 1024/2048/4096 tiers.
+  <https://www.ledstripstudio.com/shop/product/spi-led-controller/>
+- `controllers/blink-tape-controller`: $17.99 (YAML 16).
+  <https://shop.blinkinlabs.com/products/blinkytape-control-board>
+- `controllers/dmx-core`: $999 for the 4.3-inch unit (YAML 799).
+  <https://dmxcore.com/dmx-core-100>
+- `pattern-drivers/protopixel-create`: EUR 149 per month subscription
+  (YAML 176). <http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing>
