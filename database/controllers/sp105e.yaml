@@ -15,6 +15,24 @@ outputs:
   pixels:
     max_per_output: 2048
   clocked: selectable # supports single-wire and clocked pixel types
+  protocols:
+    - WS2811
+    - WS2812B
+    - WS2801
+    - SK6812
+    - SK6812-RGBW
+    - LPD6803
+    - LPD8806
+    - APA102
+    - APA105
+    - TM1804
+    - TM1814
+    - TM1914
+    - TM1913
+    - P9813
+    - INK1003
+    - UCS1903
+    - DMX512
 power:
   voltage:
     max: 24
@@ -30,3 +48,7 @@ sources:
     url: https://www.btf-lighting.com/products/sp105e-spi-led-controller
     retrieved: '2026-11-18'
     notes: 'in stock; also listed on sperll.com/product/82'
+  outputs.protocols:
+    url: https://www.ledlightinghut.com/sp105e-bluetooth-spi-controller.html
+    retrieved: '2026-11-18'
+    notes: RESELLER (LED Lighting Hut) product Overview.

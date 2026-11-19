@@ -16,6 +16,16 @@ outputs:
   clocked: false # one-wire RZ-code ICs only (per spec sheet)
   pixels:
     max_per_output: 1024
+  protocols:
+    - WS2812B
+    - WS2811
+    - SK6812
+    - WS2813
+    - WS2815
+    - TM1812
+    - UCS1903
+    - WS2818
+    - GS8206
 power:
   voltage:
     min: 5
@@ -40,6 +50,10 @@ sources:
     url: https://www.btf-lighting.com/products/sp801e-wifi-art-net-led-controller-led-matrix-panel-module-wireless-control-dc5-24v
     retrieved: '2026-11-18'
     notes: 'in stock, $45.32 regular'
+  outputs.protocols:
+    url: https://www.superlightingled.com/product_spec.php?products_id=4453
+    retrieved: '2026-11-18'
+    notes: RESELLER (Superlightingled spec sheet; this entry's creator link).
 technical_notes:
   - AP and STA Wi-Fi modes; BluFi provisioning over Bluetooth
   - 'Flash capacity: 128M (per spec sheet); working current 25-130 mA'

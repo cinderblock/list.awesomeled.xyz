@@ -20,14 +20,31 @@ outputs:
   pixels:
     max_per_output: 170 # 1020 total across 6 outputs
   protocols:
+    - TM1814
     - WS2811
     - WS2812
+    - WS2813
     - WS2801
     - SM16703
-    - GS8208
+    - SK6812
     - WS2815
+    - SM16704
   clocked: selectable
 power:
   voltage:
     max: 24
 price: 97
+software:
+  works_with:
+    - FreeStyler
+    - Madrix
+    - Jinx
+sources:
+  outputs.protocols:
+    url: https://www.electrondigit.com/products/art-net-controllers/product/dmx-512-art-net-sacn-6-universe-to-ws2811-ws2812-ws2813-ws2801-sk6812-sm16703
+    retrieved: '2026-11-18'
+    notes: "Maker's product page (Electron-Design): 'Supported LEDs: TM1814, WS2811, WS2812, SM16703, SK6812'; the page's own title adds WS2813 and WS2801; WS2815 and SM16704 from the maker's eBay listing"
+  software.works_with:
+    url: https://www.electrondigit.com/products/art-net-controllers/product/download/file_id-30
+    retrieved: '2026-11-18'
+    notes: Maker user manual 'AN6USPI0 BLUE firmware (6/12 4.0.00)', 01.02.24, last page 'Links:' list. Named only as links, without a further compatibility statement.

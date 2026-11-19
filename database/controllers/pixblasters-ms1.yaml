@@ -18,6 +18,16 @@ outputs:
     max_per_output: 512
   driver:
     buffered: false
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2815
+    - SK6812
+    - GS8208B
+    - APA102
+    - HD107S
+    - SK9822
 power:
   voltage:
     max: 5
@@ -32,3 +42,7 @@ sources:
     url: https://pixblasters.com/how-to-order/
     retrieved: '2026-11-18'
     notes: 'orderable from Mouser (CS-PIXBLASTER-01) or direct; Crowd Supply "In stock" $375 (May 2026 capture)'
+  outputs.protocols:
+    url: https://pixblasters.com/wp-content/uploads/2024/07/Pixblasters-MS1-Users-Guide_v2.10.pdf
+    retrieved: '2026-11-18'
+    notes: "Maker User's Guide v2.10, feature list (both lines end with an ellipsis: 'not limited to')."

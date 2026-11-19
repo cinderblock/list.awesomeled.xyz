@@ -5,9 +5,7 @@ vendors:
   - name: Diamex
     url: https://www.diamex-shop.de
     page: https://www.diamex-shop.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
-notes: Standalone TPM2 player (microSD or USB stick) for up to 4096 LEDs across
-  8 outputs; USB virtual COM takes live data from JINX. OLED display + 4
-  buttons; ARM Cortex-M7. No network input.
+notes: Standalone TPM2 player (microSD or USB stick) for up to 4096 LEDs across 8 outputs; USB virtual COM takes live data from JINX. OLED display + 4 buttons; ARM Cortex-M7. No network input.
 inputs:
   physical:
     USB: true # Mini-USB - virtual COM (live JINX), config, BIOS updates
@@ -21,6 +19,12 @@ outputs:
   clocked: selectable # supports both clocked and clockless pixel types
   pixels:
     max_per_output: 512 # 4096 total across 8 outputs
+  protocols:
+    - WS2811
+    - WS2812
+    - UCS1903
+    - PL9823
+    - APA102
 power:
   voltage:
     max: 5
@@ -33,8 +37,26 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.diamex-shop.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
   vendor: Diamex
+related:
+  - type: predecessor
+    ref: controllers/led-player-m
+    notes: Diamex calls the LED-Player-M the L's 'small predecessor' (the M's direct successor is the LED-Player-ME, not in the database)
+    source:
+      url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-L_Anleitung.pdf
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - JINX!
 sources:
   status:
     url: https://www.diamex-shop.de/LED-Player-L-fuer-Strips-und-Panels-bis-4096-LEDs
     retrieved: '2026-11-18'
     notes: '"Sofort verfügbar", EUR 99.00 incl. VAT'
+  outputs.protocols:
+    url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-L_Anleitung.pdf
+    retrieved: '2026-11-18'
+    notes: Maker manual 'LED-PLAYER-L v1.0' (05/2019), Features list
+  software.works_with:
+    url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-L_Anleitung.pdf
+    retrieved: '2026-11-18'
+    notes: "Maker manual intro and Links section ('JINX – LED-Matrix Control'). Unlike the M, the L accepts only TPM2 over USB (comparison table: Datenprotokolle M 'TPM2, Glediator', L 'TPM2'), so GLEDIATOR is not named for it."

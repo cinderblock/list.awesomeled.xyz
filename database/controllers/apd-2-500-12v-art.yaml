@@ -21,6 +21,10 @@ outputs:
   clocked: false # async pixels
   pixels:
     max_per_output: 500 # 1000 total across 2 outputs
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2812b
 power:
   voltage:
     max: 12
@@ -34,3 +38,7 @@ sources:
     url: https://digitaltape.co.uk/apd-2-500-12v-art
     retrieved: '2026-11-18'
     notes: 'product page live and listed in the Drivers range (no price published)'
+  outputs.protocols:
+    url: https://digitaltape.co.uk/apd-2-500-12v-art
+    retrieved: '2026-11-18'
+    notes: Digital Tape product page for APD-2-500-12v-ART

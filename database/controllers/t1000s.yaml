@@ -16,6 +16,44 @@ outputs:
   pixels:
     max_per_output: 2048
   clocked: selectable # supports both single-wire and clocked pixels
+  protocols:
+    - LPD6803
+    - D705
+    - '1101'
+    - '6909'
+    - '6912'
+    - LPD8806
+    - LPD8809
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1812
+    - TM1903
+    - TM1904
+    - TM1909
+    - TM1912
+    - UCS6909
+    - UCS6912
+    - UCS7009
+    - UCS5903
+    - UCS1903
+    - UCS1909
+    - UCS1912
+    - UCS3903
+    - DMX512
+    - WS2801
+    - WS2803
+    - WS2811
+    - DS189
+    - TLS3001
+    - TLS3002
+    - TLS3008
+    - P9813
+    - SM16715
+    - SM16716
+    - BS0901
+    - BS0902
+    - BS0815
 power:
   voltage:
     max: 24
@@ -38,6 +76,13 @@ sources:
     retrieved: '2026-11-18'
     notes: 'Original T-1000S in stock, $29.98 regular'
   software.works_with:
-    url: https://derunledlights.com/t1000s-led-controller-with-sd-card
+    - url: https://derunledlights.com/t1000s-led-controller-with-sd-card
+      retrieved: '2026-11-18'
+      notes: LEDEdit docs name this hardware
+    - url: https://www.nikom.biz/pdf/A404013.pdf
+      retrieved: '2026-11-18'
+      notes: 2012 operating manual, section 1 NOTE 2. Later manuals name 'LedEdit 2014 V2.44'.
+  outputs.protocols:
+    url: https://www.nikom.biz/pdf/A404013.pdf
     retrieved: '2026-11-18'
-    notes: LEDEdit docs name this hardware
+    notes: "'2012 T-1000S Operating manual'"

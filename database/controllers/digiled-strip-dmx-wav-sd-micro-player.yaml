@@ -17,6 +17,9 @@ outputs:
     DMX512: 1
   pixels:
     max_per_output: 850
+  protocols:
+    - WS2812
+    - WS2811
 power:
   voltage:
     max: 5
@@ -32,11 +35,22 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
   vendor: Electroconcept
+software:
+  works_with:
+    - ArtRender
 sources:
   status:
     url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
     retrieved: '2026-11-18'
     notes: '€25.00 TTC, En stock'
+  outputs.protocols:
+    url: https://www.boutique-electroconcept.com/media/Productattachments//m/i/micro_player_sd.pdf
+    retrieved: '2026-11-18'
+    notes: Maker manual 'Micro SD Player V1' (Electroconcept), Installation section.
+  software.works_with:
+    url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+    retrieved: '2026-11-18'
+    notes: "Product page Details. The manual repeats it: files 'générés par ArtRender ou le Recoder V2'. Recorder V2 is an Electroconcept DMX recorder (hardware), not software."
 technical_notes:
   - Pixel, DMX512, or WAV sound scene playback from SD card
   - Programmed using Artrender (https://www.boutique-electroconcept.com/informations/telechargements.html)

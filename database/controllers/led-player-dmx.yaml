@@ -18,8 +18,11 @@ outputs:
     max_per_output: 512 # 1024 total across 2 ports
   clocked: false
   protocols:
-    - WS2812 # RGB
-    - SK6812 # RGBW
+    - WS2812
+    - WS2812B
+    - PL9823
+    - APA-106
+    - SK6812
 power:
   voltage:
     max: 5
@@ -36,8 +39,20 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
   vendor: Diamex
+software:
+  works_with:
+    - JINX!
+    - GLEDIATOR
 sources:
   status:
     url: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen
     retrieved: '2026-11-18'
     notes: '"Sofort verfügbar", EUR 99.90 incl. VAT'
+  outputs.protocols:
+    url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-DMX.pdf
+    retrieved: '2026-11-18'
+    notes: Maker manual 'DIAMEX LED-PLAYER-DMX v1.4', section LED-ANSCHLUSS (quoted); the Technische Daten line says 'Anschluss für LEDs oder Stripes mit WS2812 (RGB), SK6812 (RGBW) oder kompatiblen Leuchtdioden' (source of WS2812).
+  software.works_with:
+    url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-DMX.pdf
+    retrieved: '2026-11-18'
+    notes: Maker manual, section 'TPM2-DATEIEN PER DMX GESTEUERT VON SD-KARTE ABSPIELEN'

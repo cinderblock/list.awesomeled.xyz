@@ -5,10 +5,7 @@ vendors:
   - name: LED-Genial
     url: https://www.led-genial.de
     page: https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
-notes: Plays TPM2 effect files from microSD on WS2812-compatible LEDs, or streams
-  TPM2 over the USB 2.0 virtual COM port (Jinx!, GLEDIATOR). Config files can be
-  edited with Diamex's LedEddy desktop tool — which a previous entry here
-  mistook for a controller.
+notes: Plays TPM2 effect files from microSD on WS2812-compatible LEDs, or streams TPM2 over the USB 2.0 virtual COM port (Jinx!, GLEDIATOR). Config files can be edited with Diamex's LedEddy desktop tool — which a previous entry here mistook for a controller.
 inputs:
   physical:
     USB: true # USB 2.0 virtual COM port for TPM2 streaming
@@ -51,8 +48,20 @@ related:
     name: LED-Player-S2
     url: https://web.archive.org/web/20160620140918/http://www.led-genial.de:80/LED-Player-S2-next-Generation-mit-mehr-Funktionen
     notes: Diamex launched the S2 as the S's "next Generation"; the S2 is itself no longer available (product archive, 2026), and Diamex now sells the LED-Player-S3
+software:
+  works_with:
+    - JINX
+    - GLEDIATOR
 sources:
   status:
     url: http://web.archive.org/web/20260421063856/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
     retrieved: '2026-11-18'
     notes: 'listed under Produkt-Archiv, "Artikel ist nicht mehr lieferbar"'
+  outputs.protocols:
+    url: https://web.archive.org/web/20260421063856/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+    retrieved: '2026-11-18'
+    notes: Wayback copy (2026-04-21) of the maker's own shop page (led-genial.de was Diamex's shop; the live URL now 404s). Confirms the existing values; adds a source.
+  software.works_with:
+    url: https://web.archive.org/web/20260421063856/https://www.led-genial.de/LED-Player-S-spielt-LED-Effekte-von-SD-Karte-ab
+    retrieved: '2026-11-18'
+    notes: Product description; the page also offers 'Anleitung zur Konfiguration von Jinx!' and Diamex's own LedEddy editor (not in the database).

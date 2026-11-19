@@ -18,9 +18,34 @@ outputs:
   clocked: false # async pixels only
   pixels:
     max_per_output: 170
+  protocols:
+    - WS2811
+    - WS2812
+    - WS2813
+    - UCS1903
+    - UCS2903
+    - TM1804
+    - WS2801
+    - WS2803
+    - SK6812
+    - SM16703
+    - GS8208
 power:
   voltage:
     max: 24
 price: 17.8
+software:
+  works_with:
+    - FreeStyler
+    - Madrix
+sources:
+  outputs.protocols:
+    url: https://www.electrondigit.com/products/dmx-controllers/product/dmx-to-spi-sk6812-ws2812-b-ws2813-ws2801-sm16703-pixels-combination-controller
+    retrieved: '2026-11-18'
+    notes: Maker's own page for 'miniDMX V3.0, DMX to SPI pixels combination controller' (the model on this entry's eBay listing).
+  software.works_with:
+    url: https://www.electrondigit.com/products/dmx-controllers/product/dmx-to-spi-sk6812-ws2812-b-ws2813-ws2801-sm16703-pixels-combination-controller
+    retrieved: '2026-11-18'
+    notes: The maker's Downloads tab provides fixture files for both programs.
 technical_notes:
   - Pixels groupable in 1, 2, 4, 5, 10, 100 as a single pixel

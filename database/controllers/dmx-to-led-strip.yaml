@@ -20,6 +20,18 @@ outputs:
     max_per_output: 850
   protocols:
     - WS2812
+    - WS2801
+    - WS2803
+    - WS2811
+    - SK6812
+    - WS2812B
+    - APA102
+    - APA104
+    - GS8208
+    - UCS1903
+    - SM16703
+    - SM16704
+    - LC8808B
 power:
   voltage:
     max: 24
@@ -45,3 +57,7 @@ sources:
     url: https://www.boutique-electroconcept.com/carte-dmx-en-signal-pour-ledstrip-digital-ws2812-et-compatible-a-souder.html
     retrieved: '2026-11-18'
     notes: 'filed under Produits plus au catalogue (products no longer in the catalogue), En rupture de stock'
+  outputs.protocols:
+    url: https://www.boutique-electroconcept.com/media/Productattachments//d/m/dmx_to_ws2812.pdf
+    retrieved: '2026-11-18'
+    notes: Maker manual 'DMX TO WS2812' (Electroconcept), SPECIFICATIONS TECHNIQUES.

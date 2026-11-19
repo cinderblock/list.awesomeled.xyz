@@ -1,8 +1,7 @@
 name: LED Player M
 status: discontinued
 creator: Diamex
-notes: Standalone TPM2 player (microSD) for up to 2048 LEDs; USB virtual COM
-  takes live data from JINX/GLEDIATOR. No network input.
+notes: Standalone TPM2 player (microSD) for up to 2048 LEDs; USB virtual COM takes live data from JINX/GLEDIATOR. No network input.
 inputs:
   physical:
     USB: true # Mini-USB - virtual COM (live JINX/GLEDIATOR), config, bootloader
@@ -15,6 +14,17 @@ outputs:
   pixels:
     max_per_output: 2048 # per the LED-Player-M manual (was recorded as 512)
   clocked: selectable
+  protocols:
+    - WS2811
+    - WS2812
+    - UCS1903
+    - PL9823
+    - APA106
+    - WS2821
+    - WS2801
+    - APA102
+    - LPD8803
+    - LPD8806
 power:
   voltage:
     max: 5
@@ -36,8 +46,20 @@ related:
     name: LED-Player-ME [2048]
     url: https://www.diamex-shop.de/LED-Player-ME-fuer-Stripes-und-Panels-bis-2048-RGB-LEDs
     notes: Diamex calls it the successor of the LED-Player-M; EUR 59.90 incl. VAT, in stock (2026-11-18)
+software:
+  works_with:
+    - JINX!
+    - GLEDIATOR
 sources:
   status:
     url: http://web.archive.org/web/20230603144022/https://www.led-genial.de/LED-Player-M-fuer-Stripes-und-Panels-bis-2048-LEDs
     retrieved: '2026-11-18'
     notes: '"Artikel ist nicht mehr lieferbar"; absent from the Diamex shop today'
+  outputs.protocols:
+    url: https://media.elv.com/file/121060_led_player_um.pdf
+    retrieved: '2026-11-18'
+    notes: Maker manual 'LED-PLAYER-M V1.0'
+  software.works_with:
+    url: https://media.elv.com/file/121060_led_player_um.pdf
+    retrieved: '2026-11-18'
+    notes: Maker manual Features list; also 'Freie Software wie JINX! oder gLEDiator sind dafür bestens geeignet' and the Links section (live-leds.de, solderlab.de GLEDIATOR).

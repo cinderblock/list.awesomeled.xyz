@@ -3,9 +3,7 @@ status: active
 creator:
   name: Sperll
   page: https://www.superlightingled.com/sp608e-spi-led-music-controller-8-output-compatible-bluetooth-app-rf-remote-p-3768.html
-notes: Bluetooth app + RF remote music controller with a built-in microphone and
-  4 adjustable dry-contact triggers. 36+ built-in effects with grouping across
-  the 8 outputs; settings survive power-down.
+notes: Bluetooth app + RF remote music controller with a built-in microphone and 4 adjustable dry-contact triggers. 36+ built-in effects with grouping across the 8 outputs; settings survive power-down.
 inputs:
   physical:
     Bluetooth: true # iOS/Android app control
@@ -19,6 +17,17 @@ outputs:
   clocked: selectable # one-wire (WS281x) and clocked (WS2801, LPD6803/8806, SM16716) ICs
   pixels:
     max_per_output: 600 # 4800 total across 8 outputs
+  protocols:
+    - WS2811
+    - WS2812B
+    - WS2813
+    - WS2815
+    - WS2818
+    - GS8206
+    - UCS1903
+    - SK6812
+    - TM1914
+    - SM16703
 power:
   voltage:
     min: 5
@@ -43,3 +52,7 @@ sources:
     url: https://www.superlightingled.com/sp608e-spi-led-music-controller-8-output-compatible-bluetooth-app-rf-remote-p-3768.html
     retrieved: '2026-11-18'
     notes: 'in stock, $49.98 regular'
+  outputs.protocols:
+    url: https://www.superlightingled.com/product_spec.php?products_id=3768
+    retrieved: '2026-11-18'
+    notes: RESELLER (Superlightingled spec sheet, the page this entry's creator link points to).
