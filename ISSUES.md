@@ -61,9 +61,14 @@ host for, used in, same protocol) and a "Related products" section, both from
 `app/components/ui/EntryLinks.tsx`; they replaced the old "Related Products",
 `related_*` and "Used by …" sections. Name-list fields render as link pills in
 their card, and `sources` provenance renders under the field it documents.
-Next from stream 4: compatibility columns and "compatible with X" filters,
-added through `app/lib/columns.tsx` only (no `DataTable` / `ColumnFilter`
-internals). Shout here if that collides with the browse-UX work.
+Stream 4 also added compatibility columns through `app/lib/columns.tsx` only
+(no `DataTable` / `ColumnFilter` internals): controllers and adapters get
+"Pixel ICs" (filter `linked.pixels`, which matches same-protocol parts and
+firmware-supported ones, e.g. `/controllers?f=linked.pixels:WS2815`); pixels
+and pixel ICs get "Hardware" and "Libraries" counts; pattern drivers and
+drive libraries "Hardware"; connectors "Used by"; microboards "Add-ons". The
+values come from `entry.linked`, derived at load time in `relations.ts`.
+Shout here if that collides with the browse-UX work.
 
 ## Schema changes from database review (stream 2, FYI)
 
@@ -99,3 +104,12 @@ line (seen on `/pixel-ics/ws2811`: "W S 2 8 11" beside each tier price).
 Repro: open any pixel IC with `price` tiers + `sku` at a 1600 px wide window.
 Probably a flex/grid min-width issue in the price-tier renderer. For prices
 (stream 6) or browse UX (stream 7).
+
+## Table: header tips are hover-only; "+N" pill click filters on "+N" (stream 7)
+
+Seen by stream 4 while adding columns. `Column.headerTip` renders as a hover
+tooltip on the header label (`DataTable.tsx`), so touch users never see it;
+the column popover (tap) could show the same text. Separately,
+`handleBadgeClick` toggles a filter on any `.badge` in a cell, and the
+overflow pill from `renderBadgeArray` ("+3", class `badge`) is one: clicking
+it filters the column on the literal "+3", which matches nothing.
