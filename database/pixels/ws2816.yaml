@@ -16,7 +16,11 @@ data:
   pixel_size_bits: 48
   backup_line: true
 datasheet:
-  url: https://www.lcsc.com/datasheet/C965560.pdf
+  url: https://datasheet.lcsc.com/datasheet/pdf/33bcf57fa38933354736aabd35a09e83.pdf # WorldSemi WS2816B (5050) datasheet, Chinese, via LCSC C22371534
+  sources:
+    - url: https://datasheet.lcsc.com/datasheet/pdf/d13b7b1c4e768be6f2e6240e4c475b91.pdf
+      host: distributor
+      notes: WS2816B-2020 English datasheet (2020 package), LCSC C4154877
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -24,6 +28,10 @@ electrical:
   channel_current_notes: WS2816C is 10mA, WS2816B is 20mA
   quiescent_current: 6.0mA
   wattage: 100mW
+images:
+  - file: ws2816.webp
+    source: https://www.world-semi.com/products-rgbic-led.html
+    credit: Worldsemi
 physical:
   packages:
     - '5050'

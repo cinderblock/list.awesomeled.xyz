@@ -10,6 +10,12 @@ data:
   clocked: false
   channels: 3
   type: WS2811/12
+datasheet:
+  url: https://www.chinaasic.com/websiteManage/product/20230523095347341.pdf # Sunmoon SM16703P, English V1.3
+  sources:
+    - url: https://www.chinaasic.com/websiteManage/product/20201228150516065.pdf
+      host: manufacturer
+      notes: Chinese edition, V1.2
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sm16703
 physical:

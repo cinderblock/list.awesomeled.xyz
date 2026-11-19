@@ -7,6 +7,8 @@ data:
   clocked: false
   channels: 3
   type: WS2811/12
+datasheet:
+  url: https://www.world-semi.com/web/userfiles/productfile/WS2811_V1.5_EN.pdf # Worldsemi; pages labelled V1.4, revision history to V1.5 (2019)
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2811-v1-4
 physical:

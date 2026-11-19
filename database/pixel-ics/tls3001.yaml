@@ -8,7 +8,14 @@ data:
   channels: 3
   type: TLS3001
 datasheet:
-  url: https://www.bestlightingbuy.com/pdf/TLS3001%20Datasheet.pdf
+  url: https://raw.githubusercontent.com/TimGremalm/TLS3001_LED_ESP32/de664475644a003fdabe154c10d4f84a5c1fe32a/datasheets/TLS3001_datasheet_V2.2_english_missingprotocol.pdf # Teralane V2.2 English, community copy (TLS3001_LED_ESP32 repo); no maker-hosted PDF found
+  sources:
+    - url: https://raw.githubusercontent.com/mikbeng/esp32_TLS3001_spi/a48a1f1cead26e8c781c3d06e8260d8d532c0e10/docs/TLS3001%20Datasheet.pdf
+      host: community
+      notes: Same V2.2 English document (esp32_TLS3001_spi repository)
+    - url: https://raw.githubusercontent.com/TimGremalm/TLS3001_LED_ESP32/de664475644a003fdabe154c10d4f84a5c1fe32a/datasheets/TLS3001_datasheet_V2.0_chinese.pdf
+      host: community
+      notes: Chinese V2.0, includes the protocol section missing from the English V2.2
   discrepancies:
     - The V2.2 datasheet (https://datasheet4u.com/datasheet-pdf/TERALANESEMICONDUCTOR/TLS3001/pdf.php?id=905218) specifies 8-bit PWM; Advatek's protocol overview says 12-bit (recorded in color.channel_bits).
 dead_links:

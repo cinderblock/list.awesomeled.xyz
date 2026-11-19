@@ -17,7 +17,11 @@ data:
   backup_line: false
   max_per_string: 1024
 datasheet:
-  url: https://www.futurlec.com/Others/WS2801.shtml
+  url: https://www.world-semi.com/web/userfiles/productfile/WS2801S_V2.0_EN.pdf # Worldsemi WS2801S V2.0
+  sources:
+    - url: https://cdn-shop.adafruit.com/datasheets/WS2801.pdf
+      host: distributor
+      notes: Adafruit, older revision
 electrical:
   output_voltage: 7V
   supply_voltage: 5V

@@ -14,8 +14,6 @@ data:
   bitrate: 800kHz
   pixel_size_bits: 24
   backup_line: false
-datasheet:
-  url: http://www.newstar-ledstrip.com/productshow819.html
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -27,6 +25,8 @@ electrical:
   wattage: 100mW
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
   channel_current_notes: Datasheet states max 49mA, but the graph for the 5050 package shows R=19mA, G,B=22mA
+other_links:
+  - http://www.newstar-ledstrip.com/productshow819.html
 physical:
   packages:
     - '5050'

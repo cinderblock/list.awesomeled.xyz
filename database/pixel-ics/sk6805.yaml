@@ -16,6 +16,10 @@ datasheet:
 electrical:
   supply_voltage: 5V
   max_current: 5mA
+images:
+  - file: sk6805.webp
+    source: https://www.adafruit.com/product/3484
+    credit: Adafruit Industries
 physical:
   packages:
     - '2427'

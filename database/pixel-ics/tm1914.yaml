@@ -8,6 +8,15 @@ data:
   clocked: false
   channels: 3
   type: TM1914
+datasheet:
+  url: https://www.superlightingled.com/PDF/SPEC/TM1914-Datasheet.pdf # Titan Micro TM1914 V1.2 (English); Superlighting LED copy, not on titanmec.com
+  sources:
+    - url: https://media.ledyi.com/tm1914-datasheet_f53245ad945ae995c5711ffc5932c07ab88babf15d0e6f1a5859cfa9bc8c20e2.pdf
+      host: community
+      notes: LEDYi copy, same V1.2 English
+    - url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1914-TitanMicro.pdf
+      host: community
+      notes: Lumikit copy, Chinese V1.0
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1914
 physical:

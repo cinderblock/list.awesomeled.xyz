@@ -7,6 +7,12 @@ data:
   clocked: false
   channels: 12
   type: UCS9812
+datasheet:
+  url: https://media.ledyi.com/ucs9812-datasheet_3d133995e06893238670090b158d1da99ba5b2bbc1f6b4038b9a9c85ed2b753b.pdf # LEDYi copy, maker (szucs.cn) hosts no PDFs
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS9812-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs9812
 physical:

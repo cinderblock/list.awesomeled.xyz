@@ -19,6 +19,10 @@ datasheet:
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
+images:
+  - file: sk6812-rgbw.webp
+    source: https://www.adafruit.com/product/2757
+    credit: Adafruit Industries
 physical:
   packages:
     - '5050'

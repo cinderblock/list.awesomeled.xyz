@@ -9,9 +9,14 @@ color:
 data:
   type: WS2811/12
 datasheet:
-  url: https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?id=1139107
+  url: https://cdn.sparkfun.com/datasheets/Components/LED/COM-12877.pdf # iPixel APA-106-F5/F8 sheet, via SparkFun
 electrical:
   led_voltage: 5V
+images:
+  - file: apa106.webp
+    source: https://www.sparkfun.com/led-rgb-addressable-pth-8mm-diffused-5-pack.html
+    credit: SparkFun Electronics
+    license: CC BY-NC-SA 3.0
 price:
   - qty: 5
     price: 0.95

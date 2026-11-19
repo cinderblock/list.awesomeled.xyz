@@ -12,6 +12,8 @@ data:
   clocked: true
   bitrate: 30MHz
   backup_line: false
+datasheet:
+  url: https://www.normandled.com/upload/202005/SK9822-A%20LED%20Datasheet.pdf
 dead_links:
   - url: http://www.newstar-ledstrip.com/productshow851.html
     archive: https://web.archive.org/web/20220327215325/http://newstar-ledstrip.com/productshow851.html
@@ -20,6 +22,10 @@ electrical:
   led_voltage: 5V
   vcc_voltage: 5V
   quiescent_current: 1.0mA
+images:
+  - file: sk9822-a.webp
+    source: https://www.normandled.com/Product/view/id/876.html
+    credit: Shenzhen Normand Electronic
 physical:
   packages:
     - '5050'

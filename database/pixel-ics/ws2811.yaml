@@ -33,6 +33,10 @@ electrical:
   current_programmable: true
   current_range: 3-60mA typical depending on Rext
   quiescent_current: 0.7mA
+images:
+  - file: ws2811.webp
+    source: https://www.adafruit.com/product/1378
+    credit: Adafruit Industries
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2811
 physical:

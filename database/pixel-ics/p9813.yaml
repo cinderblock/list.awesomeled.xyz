@@ -15,6 +15,12 @@ data:
   backup_line: false
   max_per_string: 1024
   max_per_string_notes: TCL estimates up to 8000 pixels at 30 FPS
+datasheet:
+  url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf # DMS Microelectronics datasheet via Seeed Studio (Grove Chainable RGB LED)
+  sources:
+    - url: https://www.electrokit.com/upload/product/41011/41011147/P9813_datasheet.pdf
+      host: distributor
+      notes: Electrokit, identical copy
 electrical:
   output_voltage: 12V
   supply_voltage: 4.5V

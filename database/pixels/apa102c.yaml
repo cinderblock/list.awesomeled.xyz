@@ -31,6 +31,11 @@ electrical:
   channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control PWM, not current
   quiescent_current: 1.0mA
   wattage: 110mW
+images:
+  - file: apa102c.webp
+    source: https://commons.wikimedia.org/wiki/File:14863-SMD_LED_-_RGB_APA102C-5050_Pack_of_10_-02.jpg
+    credit: SparkFun Electronics
+    license: CC BY 2.0
 other_links:
   - https://www.advateklighting.com/pixel-protocols/apa102
 physical:

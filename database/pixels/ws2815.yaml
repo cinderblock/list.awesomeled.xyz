@@ -17,13 +17,16 @@ data:
   pixel_size_bits: 24
   backup_line: true
 datasheet:
-  url: http://newstar-ledstrip.com/product/20180125101420006.pdf
+  url: https://www.world-semi.com/downloads/datasheets/en/ws2815b-v1-v1.pdf # current WS2815B-V1 (VIH now 2.7V)
+  sources:
+    - url: https://www.normandled.com/upload/201808/WS2815%20LED%20Datasheet.pdf
+      host: distributor
+      notes: Original 2018 WS2815 datasheet (the 0.7*VDD VIH spec), Normand copy
+    - url: https://web.archive.org/web/20210226215913id_/http://www.newstar-ledstrip.com/product/20180125101420006.pdf
+      host: distributor
+      notes: Wayback copy of the Newstar-hosted datasheet this entry used to link
   discrepancies:
     - GPIO min spec of 0.7*VDD (8.4V) is incorrect - actual threshold is 3.5V based on internal 5V Vdd
-dead_links:
-  - url: http://newstar-ledstrip.com/product/20180125101420006.pdf
-    archive: https://web.archive.org/web/20210226215913/http://www.newstar-ledstrip.com/product/20180125101420006.pdf
-    checked: '2026-11-18'
 electrical:
   led_voltage: 12V
   led_voltage_notes: Datasheet 9.5-13.5V range
@@ -36,6 +39,10 @@ electrical:
   channel_current: 10mA
   quiescent_current: 2.1mA
   wattage: 120mW
+images:
+  - file: ws2815.webp
+    source: https://www.world-semi.com/products-rgbic-led.html
+    credit: Worldsemi
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2815
   - http://newstar-ledstrip.com/productshow833.html

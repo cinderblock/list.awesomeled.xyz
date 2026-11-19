@@ -14,8 +14,6 @@ data:
   bitrate: 800kHz
   pixel_size_bits: 24
   backup_line: true
-datasheet:
-  url: http://newstar-ledstrip.com/productshow855.html
 electrical:
   led_voltage: 12V
   vcc_voltage: 5V
@@ -26,6 +24,12 @@ electrical:
   quiescent_current: 2.0mA
   wattage: 45mW
   led_voltage_notes: Datasheet range 10.8-13.2V
+images:
+  - file: ns8808.webp
+    source: http://www.newstar-ledstrip.com/productshow855.html
+    credit: Newstar LED
+other_links:
+  - http://newstar-ledstrip.com/productshow855.html
 physical:
   packages:
     - '5050'

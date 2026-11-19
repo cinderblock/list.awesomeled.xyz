@@ -8,6 +8,12 @@ data:
   clocked: false
   channels: 3
   type: TM1829
+datasheet:
+  url: https://media.ledyi.com/tm1829-datasheet_ca2ab7a03d12522a298c2629fca3707f0d867407a3e374072246eff71b992370.pdf # Titan Micro TM1829 V1.5 (English); LEDYi copy, not on titanmec.com
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1829-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1829
 physical:

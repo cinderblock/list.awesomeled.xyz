@@ -10,7 +10,14 @@ data:
   backup_line: true
   type: 5chWS2811/12
 datasheet:
-  url: https://www.lcsc.com/datasheet/lcsc_datasheet_2306301035_Worldsemi-WS2805_C5446697.pdf
+  url: https://www.world-semi.com/web/userfiles/productfile/WS2805_V1.3_EN.pdf # Worldsemi V1.3
+  sources:
+    - url: https://www.superlightingled.com/PDF/WS2805-IC-Specification.pdf
+      host: community
+      notes: Superlighting LED copy, older revision
+    - url: https://www.lcsc.com/datasheet/lcsc_datasheet_2306301035_Worldsemi-WS2805_C5446697.pdf
+      host: distributor
+      notes: LCSC copy
 price:
   - qty: 5
     price: 0.1592

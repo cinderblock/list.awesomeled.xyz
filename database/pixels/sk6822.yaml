@@ -9,9 +9,19 @@ data:
   bitrate: 800kHz
   backup_line: true
   type: WS2811/12
+datasheet:
+  url: http://addressable-led.com/UploadFile/upi/file/20170621/SK6822-LED-Chip.pdf # LED Color SK6822 spec rev 01 (2015)
+  sources:
+    - url: https://web.archive.org/web/20210226221632id_/http://newstar-ledstrip.com/product/20180411113844377.pdf
+      host: distributor
+      notes: Wayback copy of Newstar's SK6822 spec (newstar-ledstrip.com now 404s)
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
+images:
+  - file: sk6822.webp
+    source: https://addressable-led.com/Products/SK6822-Dual-Signal-LED.html
+    credit: Shenzhen LED Color
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6822
 physical:

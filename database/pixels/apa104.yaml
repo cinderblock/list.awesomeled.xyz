@@ -17,7 +17,11 @@ data:
   backup_line: false
   pixel_size_notes: The datasheet PDF says 32 bits
 datasheet:
-  url: http://neon-world.com/en/product_detail.php?cid=60&id=171
+  url: https://neon-world.com/uploads/soft/20170622/1498136682.pdf # APA-104-4RGB (5050, 4-pin) spec, from APA's product page
+  sources:
+    - url: https://web.archive.org/web/20231206170247id_/http://neon-world.com/uploads/soft/20170622/1498136682.pdf
+      host: manufacturer
+      notes: Wayback Machine copy (neon-world.com is slow and sometimes times out)
   discrepancies:
     - Datasheet claims max 49mA but actual is ~19-22mA per channel
 electrical:
@@ -33,6 +37,7 @@ electrical:
   wattage: 100mW
 other_links:
   - https://www.advateklighting.com/pixel-protocols/apa104
+  - http://neon-world.com/en/product_detail.php?cid=60&id=171
 physical:
   packages:
     - '5050'

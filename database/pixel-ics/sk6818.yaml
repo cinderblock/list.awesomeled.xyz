@@ -6,6 +6,12 @@ color:
 data:
   clocked: false
   channels: 4
+datasheet:
+  url: https://www.normandled.com/upload/202609/SK6818-T52491H4RGBWP6-VC-XW-E-A%20LED%20Datasheet.pdf # Normand SK6818 LED spec (24 V 5249 RGBW variant); no standalone SK6818 IC datasheet published
+images:
+  - file: sk6818.webp
+    source: https://www.normandled.com/Product/view/id/930.html
+    credit: Shenzhen Normand Electronic
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6818
 physical:

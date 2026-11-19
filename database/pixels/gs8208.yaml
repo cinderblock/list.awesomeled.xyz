@@ -30,6 +30,10 @@ electrical:
   channel_current_notes: Measured current across 3 LEDs at 12V. Datasheet claims 15mA
   quiescent_current: 2.5mA
   wattage: 120mW
+images:
+  - file: gs8208.webp
+    source: https://www.normandled.com/Product/view/id/827.html
+    credit: Shenzhen Normand Electronic
 other_links:
   - https://www.advateklighting.com/pixel-protocols/gs8208
 physical:

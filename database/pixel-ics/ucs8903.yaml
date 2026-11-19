@@ -13,7 +13,11 @@ data:
   pixel_size_bits: 48
   backup_line: false
 datasheet:
-  url: https://www.dhgate.com/product/ucs8903-ic-3-channel-led-constant-current/421634760.html
+  url: https://media.ledyi.com/ucs8903-datasheet_06b0ecc6a47dd8e088d100a5976cef7e24ad8a3fee463edb061bb535cc57b56e.pdf # LEDYi copy, maker (szucs.cn) hosts no PDFs
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS8903-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
 dead_links:
   - url: https://www.dhgate.com/product/ucs8903-ic-3-channel-led-constant-current/421634760.html
     checked: '2026-11-18'

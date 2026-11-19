@@ -15,6 +15,10 @@ data:
   backup_line: false
 datasheet:
   url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+  sources:
+    - url: https://web.archive.org/web/20220216182230id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+      host: manufacturer
+      notes: Wayback Machine copy of the Rose Lighting original (V1.1.0); rose-lighting.com returned HTTP 522 in Nov 2026
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V

@@ -15,11 +15,14 @@ data:
   pixel_size_bits: 24
   backup_line: true
 datasheet:
-  url: http://newstar-ledstrip.com/product/20171208112004735.pdf
-dead_links:
-  - url: http://newstar-ledstrip.com/product/20171208112004735.pdf
-    archive: https://web.archive.org/web/20220216172054/http://newstar-ledstrip.com/product/20171208112004735.pdf
-    checked: '2026-11-18'
+  url: https://www.world-semi.com/downloads/datasheets/en/ws2813b-v6-1.0.pdf # current WS2813B-V6 (5050)
+  sources:
+    - url: https://www.normandled.com/upload/201605/WS2813%20LED%20Datasheet.pdf
+      host: distributor
+      notes: Original 2016 WS2813 datasheet, Normand copy
+    - url: https://web.archive.org/web/20220216172054id_/http://newstar-ledstrip.com/product/20171208112004735.pdf
+      host: distributor
+      notes: Wayback copy of the Newstar-hosted datasheet this entry used to link
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -30,6 +33,10 @@ electrical:
   channel_current_notes: Also has a 5mA version available
   quiescent_current: 0.7mA
   wattage: 90mW
+images:
+  - file: ws2813.webp
+    source: https://www.world-semi.com/products-rgbic-led.html
+    credit: Worldsemi
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2813
   - http://newstar-ledstrip.com/productshow755.html

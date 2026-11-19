@@ -8,6 +8,12 @@ data:
   clocked: false
   channels: 3
   type: TM1803
+datasheet:
+  url: https://media.ledyi.com/tm1803-datasheet_1b245d169446ce40cd2040738412bfc19511917f20c4d9c8a77c679cfab57aad.pdf # Titan Micro TM1803 (English); LEDYi copy, titanmec.com download link is broken
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1803-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1803
 physical:

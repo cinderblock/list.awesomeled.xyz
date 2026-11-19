@@ -8,6 +8,15 @@ data:
   clocked: false
   channels: 4
   type: 4chWS2811/12
+datasheet:
+  url: https://www.superlightingled.com/PDF/SPEC/WS2814-RGBW-Datasheet.pdf # Worldsemi WS2814 (SOP12, dual input) V1.4; Superlighting LED copy, not on world-semi.com
+  sources:
+    - url: https://media.ledyi.com/ws2814-datasheet_2b10ca91206f21ee684c6d907b6ef50d26bc74be422a289c596752b36ad6c1cc.pdf
+      host: community
+      notes: LEDYi copy
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/WS2814-datasheet.pdf
+      host: community
+      notes: LEDYi copy, older upload path
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2814
 physical:

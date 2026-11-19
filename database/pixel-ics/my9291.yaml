@@ -9,7 +9,11 @@ data:
   channels: 4
   type: MY9231
 datasheet:
-  url: http://www.my-semi.com.tw/file/MY9291_BF_0.91.pdf
+  url: http://www.my-semi.com/file/MY9291_BF_0.91.pdf # MY-Semi v0.91 (http only; https cert mismatch)
+  sources:
+    - url: http://www.my-semi.com.tw/file/MY9291_BF_0.91.pdf
+      host: manufacturer
+      notes: Same v0.91 file on the .com.tw domain
 other_links:
   - https://www.advateklighting.com/pixel-protocols/my9291
 physical:

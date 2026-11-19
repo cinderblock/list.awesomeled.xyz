@@ -17,6 +17,10 @@ data:
   backup_line: false
 datasheet:
   url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+  sources:
+    - url: https://web.archive.org/web/20220216171018id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+      host: manufacturer
+      notes: Wayback Machine copy of the Rose Lighting original (V1.0.1); rose-lighting.com returned HTTP 522 in Nov 2026
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V

@@ -15,11 +15,7 @@ data:
   pixel_size_bits: 32
   backup_line: false
 datasheet:
-  url: http://newstar-ledstrip.com/productshow816.html
-  sources:
-    - url: http://www.newstar-ledstrip.com/product/20180820112602493.pdf
-      host: manufacturer
-      notes: PDF; datasheet.url is the product page
+  url: http://www.newstar-ledstrip.com/product/20180820112602493.pdf # linked from the product page, productshow816.html
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -30,6 +26,12 @@ electrical:
   quiescent_current: 1.0mA
   wattage: 110mW
   channel_current_notes: Datasheet claims 22-26mA; every other spec matches SK9822, so 19-22mA is most likely
+images:
+  - file: apa107.webp
+    source: http://www.newstar-ledstrip.com/productshow816.html
+    credit: Newstar LED
+other_links:
+  - http://newstar-ledstrip.com/productshow816.html
 physical:
   packages:
     - '5050'

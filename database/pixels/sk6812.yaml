@@ -16,7 +16,7 @@ data:
   backup_line: false
   max_per_string: null
 datasheet:
-  url: https://www.lcsc.com/datasheet/C5378720.pdf # newer OPSCO revision via LCSC
+  url: https://datasheet.lcsc.com/datasheet/pdf/9f469126feffa69bd23486dc2acd2d83.pdf # newer OPSCO revision (SK6812-012 rev B/1) via LCSC C5378720
   sources:
     - url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
       host: distributor
@@ -36,6 +36,10 @@ electrical:
   quiescent_current: 1.0mA
   wattage: 104mW
   channel_current_notes: Datasheet states max 49mA, but the graph for the 5050 and 2040 packages shows R=19mA, G,B=22mA (W, WW not specified); likely lower in the 3537 mini
+images:
+  - file: sk6812.webp
+    source: https://www.normandled.com/Product/view/id/795.html
+    credit: Shenzhen Normand Electronic
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6812
 physical:

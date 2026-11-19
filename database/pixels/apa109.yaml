@@ -16,7 +16,7 @@ data:
   pixel_size_bits: 32
   backup_line: false
 datasheet:
-  url: http://neon-world.com/en/product_detail.php?cid=59&id=167
+  url: https://neon-world.com/uploads/soft/20180416/1523869790.pdf # APA109RGBW-XX spec rev 02, from APA's APA-109-RGBW product page
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -25,6 +25,7 @@ electrical:
     max: 5V
 other_links:
   - https://www.advateklighting.com/pixel-protocols/apa109
+  - http://neon-world.com/en/product_detail.php?cid=59&id=167
 physical:
   packages:
     - '5050'

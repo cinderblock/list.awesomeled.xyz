@@ -18,11 +18,7 @@ data:
   pixel_size_bits: 32
   backup_line: false
 datasheet:
-  url: http://www.newstar-ledstrip.com/product/20190710114547839.pdf
-dead_links:
-  - url: http://www.newstar-ledstrip.com/product/20190710114547839.pdf
-    archive: https://web.archive.org/web/20220216171258/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
-    checked: '2026-11-18'
+  url: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf # Newstar's NS107S spec; the original newstar-ledstrip.com file now 404s
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V

@@ -7,6 +7,15 @@ data:
   clocked: false
   channels: 3
   type: UCS1903
+datasheet:
+  url: https://www.superlightingled.com/PDF/SPEC/UCS2903-Datasheet.pdf # UCS ver2.2; Superlighting LED copy, maker (szucs.cn) hosts no PDFs
+  sources:
+    - url: https://media.ledyi.com/ucs2903-datasheet_6fd9dd0ef3578c081b6964d918dc663f64bda3b083e3045ff262d7d44bd76fef.pdf
+      host: community
+      notes: LEDYi copy
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS2903-datasheet.pdf
+      host: community
+      notes: LEDYi copy, older upload path
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs2903
 physical:

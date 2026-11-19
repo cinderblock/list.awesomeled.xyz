@@ -12,8 +12,6 @@ data:
   bitrate: 800kHz
   pixel_size_bits: 24
   backup_line: false
-datasheet:
-  url: http://www.world-semi.com/Certifications/details-121-4.html
 dead_links:
   - url: http://www.world-semi.com/Certifications/details-121-4.html
     archive: https://web.archive.org/web/20200920151054/http://www.world-semi.com/Certifications/details-121-4.html
@@ -28,6 +26,8 @@ electrical:
   quiescent_current: 2.1mA
   wattage: 92.5mW
   vcc_voltage_notes: Can use an external resistor to supply 5V Vdd from a higher system voltage
+other_links:
+  - http://www.world-semi.com/Certifications/details-121-4.html
 physical:
   packages:
     - '5050'

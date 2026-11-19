@@ -7,6 +7,12 @@ data:
   clocked: false
   channels: 3
   type: DMX512P
+datasheet:
+  url: https://media.ledyi.com/ucs512b-datasheet_d3027bf8ccef6f06edc736bf690f6939f39e2a8707101b5e40ef2d278d3b9787.pdf # Document covers UCS512B3 (3-channel UCS512B); LEDYi copy, maker (szucs.cn) hosts no PDFs
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS512B-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
 dead_links:
   - url: https://www.advateklights.com/knowledge-base/ucs512B
     checked: '2026-11-18'

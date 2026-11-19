@@ -18,7 +18,11 @@ data:
   pixel_size_bits: 64
   backup_line: false
 datasheet:
-  url: http://newstar-ledstrip.com/productshow847.html
+  url: https://voron.ua/files/pdf/led/NS108_5050.pdf # Newstar NS108-5050-16bit spec, distributor copy (Voron, UA)
+  sources:
+    - url: https://web.archive.org/web/20230131080044id_/http://newstar-ledstrip.com/product/20220705164520116.pdf
+      host: manufacturer
+      notes: Newstar's own NS108 spec (SPC/NS108 Rev. 04), Wayback capture
 electrical:
   led_voltage: 5V
   vcc_voltage: 5.1V

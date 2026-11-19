@@ -25,6 +25,10 @@ electrical:
   channel_current: 13.0mA
   quiescent_current: 2.5mA
   wattage: 65mW
+images:
+  - file: lc8808b.webp
+    source: https://addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
+    credit: Shenzhen LED Color
 physical:
   packages:
     - '5050'

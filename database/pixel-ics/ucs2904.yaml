@@ -9,6 +9,12 @@ data:
   bitrate: 800kHz
   backup_line: false
   type: 4chUCS1903
+datasheet:
+  url: https://www.superlightingled.com/PDF/UCS2904-Datasheet.pdf # Covers UCS2904B; Superlighting LED copy, maker (szucs.cn) hosts no PDFs
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2022/02/UCS2904-Specification_English.pdf
+      host: community
+      notes: LEDYi copy of the UCS2904B specification
 electrical:
   output_voltage: 30V
   supply_voltage: 5V

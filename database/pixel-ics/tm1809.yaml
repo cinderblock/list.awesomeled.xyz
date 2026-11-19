@@ -8,6 +8,12 @@ data:
   clocked: false
   channels: 9
   type: WS2811/12
+datasheet:
+  url: https://media.ledyi.com/tm1809-datasheet_f3014d562e6c15bbfb9fbe63d2e00fab9ebc2d95b20ad5aab5e3d946628b1d2d.pdf # Titan Micro TM1809 (English); LEDYi copy, titanmec.com download link is broken
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1809-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
 other_links:
   - https://www.advateklighting.com/pixel-protocols/tm1809
 physical:

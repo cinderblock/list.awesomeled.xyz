@@ -14,7 +14,7 @@ data:
   pixel_size_bits: 24
   backup_line: true
 datasheet:
-  url: http://www.world-semi.com/technology/details-104-4.html
+  url: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf # Worldsemi V1.5
 dead_links:
   - url: http://www.world-semi.com/technology/details-104-4.html
     archive: https://web.archive.org/web/20200720001510/http://www.world-semi.com:80/technology/details-104-4.html

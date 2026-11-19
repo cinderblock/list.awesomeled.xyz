@@ -8,6 +8,12 @@ data:
   clocked: true
   channels: 12
   type: MY9221
+datasheet:
+  url: http://www.my-semi.com/file/MY9221_BF_3.0.pdf # MY-Semi v3.0 (http only; https cert mismatch)
+  sources:
+    - url: https://files.seeedstudio.com/wiki/Grove-LED_Bar/res/MY9221_DS_1.0.pdf
+      host: distributor
+      notes: Seeed Studio (Grove LED Bar), older v1.0
 electrical:
   output_voltage: 24V
 other_links:

@@ -9,9 +9,13 @@ data:
   backup_line: true
   type: WS2811/12
 datasheet:
-  url: https://www.normandled.com/upload/201907/12V%20SK6813%20LED%20Datasheet.pdf
+  url: https://www.normandled.com/upload/201907/12V%20SK6813%20LED%20Datasheet.pdf # SK6813HV-09-6P
 electrical:
   led_voltage: 12V
+images:
+  - file: sk6813-hv.webp
+    source: https://www.normandled.com/Product/view/id/846.html
+    credit: Shenzhen Normand Electronic
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6813
 physical:

@@ -9,8 +9,15 @@ data:
   channels: 3
   type: WS2811/12
 datasheet:
+  url: https://media.ledyi.com/gs8208-datasheet_d7eeffbc8fc4c3a885c88babe6e51968677716f49f625b7b4043cf2162e8affa.pdf # Genesis Technology GS8208; LEDYi copy, no maker-hosted PDF found
   third_party_testing: https://www.advateklighting.com/pixel-protocols/gs8208
-  url: https://www.artleds.com/images/Specs/gs8208-datasheet.pdf
+  sources:
+    - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8208-datasheet.pdf
+      host: community
+      notes: Same LEDYi copy, older upload path
+    - url: https://www.artleds.com/images/Specs/gs8208-datasheet.pdf
+      host: community
+      notes: ArtLEDs copy
 physical:
   packages:
     - SOP-8
