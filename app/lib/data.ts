@@ -259,6 +259,16 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
   return entries;
 }
 
+/**
+ * A category's entries as its table page ships them: everything but the
+ * per-field provenance (`sources`), which only entry pages show and which is
+ * a quarter to a half of a researched entry's size. Exports keep it
+ * (they use `loadCategoryData`).
+ */
+export function loadCategoryTableData(categoryId: string): BaseEntry[] {
+  return loadCategoryData(categoryId).map(({ sources: _sources, ...entry }) => entry as BaseEntry);
+}
+
 /** Parse a category's YAML (plus load-time derived fields), without cross-links */
 function readCategory(categoryId: string): BaseEntry[] {
   const cached = categoryDataCache.get(categoryId);

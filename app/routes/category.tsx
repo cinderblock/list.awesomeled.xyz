@@ -1,6 +1,6 @@
 import type { Route } from './+types/category';
 import { data } from 'react-router';
-import { getCategoryById, loadCategoryData } from '~/lib/data';
+import { getCategoryById, loadCategoryTableData } from '~/lib/data';
 import { loadFieldCatalog } from '~/lib/fields.server';
 import { DataTable } from '~/components/data/DataTable';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
@@ -29,7 +29,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw data(null, { status: 404 });
   }
 
-  const entries = loadCategoryData(categoryId);
+  const entries = loadCategoryTableData(categoryId);
   // Every field the category's entries carry: optional columns, filters, exports
   const fields = loadFieldCatalog(categoryId);
 
