@@ -1,5 +1,3 @@
-controllers/f-test should be in pixel-decoders/
-
 controllers/flex-pixel-driver
 - update name "Flex Pixel Driver 1"
 - mfg is "Elation Lighting"

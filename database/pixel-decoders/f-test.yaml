@@ -1,0 +1,26 @@
+name: F-Test
+status: limited # listed but out of stock on the US and AU stores (2026-11-18); firmware build 3 posted 2024-09
+creator:
+  name: PixelController, LLC
+  url: https://pixelcontroller.com
+  page: https://pixelcontroller.com/store/diy-controllers/85-F-Test.html
+notes: 'Handheld pixel, DMX and SmartReceiver tester and data analyzer (released 2023). Output modes generate WS281x test patterns for up to 1400 pixels, Falcon, FPP and HinksPix smart-receiver test data, and DMX, LOR or Renard serial. Input modes decode, analyze and pass through incoming pixel, smart-receiver and DMX data, cleaning up the signal like an F-Amp. Powered from 5-13 V on the pixel port (not 24 V) or USB; microSD slot for firmware and logging.'
+inputs:
+  protocols:
+    - WS2811
+outputs:
+  count: 3 # pixel data (xConnect), Smart Remote, DMX (RJ45)
+  types:
+    - pixel-data
+    - dmx512
+  connector:
+    ref: rj45
+    notes: DMX; pixel data and Smart Remote on xConnect
+diy_or_ots: OTS
+links:
+  product: https://pixelcontroller.com/store/diy-controllers/85-F-Test.html
+price: 90
+price_source:
+  retrieved: '2026-11-18'
+  vendor: PixelController
+  url: https://pixelcontroller.com/store/diy-controllers/85-F-Test.html
