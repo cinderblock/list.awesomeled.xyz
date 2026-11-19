@@ -141,6 +141,7 @@ function checkPdf(bytes: Uint8Array): Fetched {
 function downloadWithCurl(url: string): Fetched {
   const dir = mkdtempSync(join(tmpdir(), 'ds-'));
   const out = join(dir, 'file');
+  const headers = join(dir, 'headers');
   try {
     const r = spawnSync(
       'curl',
@@ -154,16 +155,20 @@ function downloadWithCurl(url: string): Fetched {
         USER_AGENT,
         '-o',
         out,
-        '-w',
-        '%{http_code}',
+        // Status from the dumped headers, not `-w %{http_code}`: Git for
+        // Windows' bundled curl 8.8 exits 43 whenever -w is used.
+        '-D',
+        headers,
         url,
       ],
       { encoding: 'utf-8' }
     );
     if (r.error) return { ok: false, reason: `curl unavailable: ${r.error.message}` };
-    const status = Number(r.stdout.trim());
     if (r.status !== 0)
       return { ok: false, reason: `curl: ${r.stderr.trim() || `exit ${r.status}`}` };
+    // With -L every hop's headers are dumped; the last status line is the final one.
+    const statuses = [...readFileSync(headers, 'utf-8').matchAll(/^HTTP\/[\d.]+ (\d{3})/gm)];
+    const status = Number(statuses.at(-1)?.[1] ?? 0);
     if (status < 200 || status >= 300) return { ok: false, reason: `HTTP ${status}` };
     return checkPdf(new Uint8Array(readFileSync(out)));
   } finally {
