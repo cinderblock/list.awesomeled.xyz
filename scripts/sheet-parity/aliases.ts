@@ -32,6 +32,13 @@ export const ALIASES: Record<string, Record<string, string>> = {
     'M8 Port Pixel @ https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/':
       'controllers/pixel-octo',
   },
+  Pixels: {
+    // Newstar's part numbers for the LEDs sold as HD107S / HD108 (Newstar
+    // lists "NS107S HD107S", "NS108 HD108"); merged into the HD entries
+    // (plans/database-review.md, removed-entry map)
+    NS107S: 'pixels/hd107s',
+    NS108: 'pixels/hd108',
+  },
   'Pattern Drivers': {
     // The sheet's typo; the project is cyberboy666's artnet_led_mapper
     'Arthet LED Mapper': 'pattern-drivers/arthet-led-mapper',

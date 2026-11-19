@@ -1,8 +1,17 @@
 name: HD107S
 status: active
-release_year: 2019
-creator: Rose Lighting
-notes: APA107 Competitor/clone
+release_year: 2017
+creator: Newstar LED Co.
+manufacturers:
+  - Newstar LED Co.
+vendors:
+  - name: Rose Lighting
+    page: https://www.rose-lighting.com/products/fastest-digital-addressable-rgb-5050led-chip-hd107s/
+  - name: Hida
+    page: https://www.hd107s-led.com/product-category/hd107s-led-chip/
+notes: Newstar's NS107S, sold as HD107S. Upgrade of APA107 with the APA102 protocol and 26 kHz PWM.
+aliases:
+  - NS107S
 color:
   order: BGR
   brightness_bits: 8+5
@@ -17,25 +26,31 @@ data:
   backup_line: false
 datasheet:
   url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+  discrepancies:
+    - Newstar's NS107S spec gives a 30 MHz oscillator frequency; Rose Lighting's HD107S spec (V1.0.1) gives 40 MHz. Otherwise the two specs are the same text.
   sources:
     - url: https://web.archive.org/web/20220216171018id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
       host: manufacturer
       notes: Wayback Machine copy of the Rose Lighting original (V1.0.1); rose-lighting.com returned HTTP 522 in Nov 2026
+    - url: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+      host: manufacturer
+      notes: Newstar's NS107S spec, from the IC's developer (Wayback; the newstar-ledstrip.com file now returns 404)
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
   gpio:
     min: 3.4V
     max: 5V
-  channel_current: 17mA
+  channel_current: 20mA
   quiescent_current: 0.1mA
-  wattage: 85mW
+  wattage: 100mW
 other_links:
   - https://www.advateklighting.com/pixel-protocols/hd107s
-  - https://www.hd107s-led.com/product-category/hd107s-led-chip/
+  - http://newstar-ledstrip.com/productshow818.html
 physical:
   packages:
     - '5050'
+    - '3535'
     - '2020'
   pin_count: 6
 price:
@@ -47,8 +62,12 @@ price_source:
   url: https://www.aliexpress.us/w/wholesale-HD107S.html
   vendor: AliExpress (street)
 related:
-  - type: related
+  - type: predecessor
     ref: pixels/apa107
+    notes: 'Newstar: NS107S/HD107S is the upgrade of APA107 (same APA102 frame, 26-27 kHz PWM).'
+    source:
+      url: https://web.archive.org/web/20220216171258/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+      retrieved: '2026-11-18'
   - type: compatible
     ref: pixels/apa102
     notes: "Maker states full APA102 compatibility (cover: 'The upgrade LED of APA102 RGB'); 40 MHz clock, ~26 kHz PWM."
@@ -56,6 +75,26 @@ related:
       url: https://web.archive.org/web/20220216171018/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
       retrieved: '2026-11-18'
 sources:
+  aliases:
+    url: http://newstar-ledstrip.com/productshow818.html
+    retrieved: '2026-11-18'
+    notes: 'Newstar lists the part as "NS107S HD107S 5050 RGB Pixel LED Chip"; its Pixel LED Chip catalog (products.asp?sid=195&tid=274) has NS107S HD107S in 2020, 3535, 5050 and white versions.'
+  creator:
+    url: https://www.ledstrip-newstar.com/hd107s-led-details/
+    retrieved: '2026-11-18'
+    notes: 'Newstar: "HD107s pixel RGB led used Newstar''s IC, so we named "HD107S", Newstar''s model number is Ns107s." Hida (hd107s-led.com/blog): "the upgrade type named HD107S, produced by Hida, used Newstar''s 107S IC." Rose Lighting''s HD107S spec is a reworded copy of Newstar''s NS107S spec.'
+  release_year:
+    url: https://web.archive.org/web/20220216171258/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+    retrieved: '2026-11-18'
+    notes: The sheet's NS107S row says 2017; the NS107S spec's sample reel label is dated 2018-03-03. 2019 (the sheet's HD107S row) is the date of Rose Lighting's HD107S spec V1.0.
+  electrical.channel_current:
+    url: https://web.archive.org/web/20220216171018/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+    retrieved: '2026-11-18'
+    notes: '"Build-20ma constant current output", Imax 20 mA, in both Rose Lighting''s HD107S spec and Newstar''s NS107S spec (the earlier 17 mA is HD108''s typical output current).'
+  physical.packages:
+    url: http://newstar-ledstrip.com/products.asp?sid=195&tid=274
+    retrieved: '2026-11-18'
+    notes: Newstar's Pixel LED Chip catalog lists NS107S HD107S in 2020, 3535 and 5050.
   data.type:
     url: https://web.archive.org/web/20220216171018/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
     retrieved: '2026-11-18'

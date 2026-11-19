@@ -38,6 +38,7 @@ Gidot
 USITT
 Advatek
 Newstar
+Hida
 Shenzhen
 Sunmoon
 Greesit

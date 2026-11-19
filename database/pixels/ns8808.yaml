@@ -3,6 +3,8 @@ status: active
 release_year: 2018
 creator: Newstar LED Co.
 notes: Same protocol as WS2815 and sold as its drop-in replacement (12 V, dual signal).
+aliases:
+  - HD8808
 color:
   order: RGB
   brightness_bits: 8
@@ -42,6 +44,10 @@ related:
       url: https://web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html
       retrieved: '2026-11-18'
 sources:
+  aliases:
+    url: http://newstar-ledstrip.com/productshow855.html
+    retrieved: '2026-11-18'
+    notes: Newstar lists the part as "NS8808 HD8808 DC12V Pixel LED Chip replace WS2815", the same NS/HD naming as NS107S/HD107S and NS108/HD108.
   data.type:
     url: https://web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html
     retrieved: '2026-11-18'

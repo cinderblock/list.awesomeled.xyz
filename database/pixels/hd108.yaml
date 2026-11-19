@@ -1,12 +1,23 @@
 name: HD108
 status: active
-notes: HD107s with 64bit color
+release_year: 2018
+creator:
+  name: Newstar LED Co.
+  page: http://newstar-ledstrip.com/productshow847.html
+manufacturers:
+  - Newstar LED Co.
+vendors:
+  - name: Rose Lighting
+    page: https://www.rose-lighting.com/products/hd108-rgb-5050-pixel-led-chip-with-gray-lever-65536/
+notes: Newstar's NS108, sold as HD108. The 16-bit upgrade of NS107S/HD107S, with a 5-bit current gain per color.
+aliases:
+  - NS108
 color:
   order: RGB
-  brightness_bits: 15
+  brightness_bits: 16+5
   pwm_frequency: 27.0kHz
-  brightness_method: per_channel
-  brightness_method_notes: 5-bit for each color, R, G, & B
+  brightness_method: current
+  brightness_method_notes: 5-bit current gain per color (R, G and B set separately), on top of 16-bit PWM
 data:
   type: SK9826
   clocked: true
@@ -15,10 +26,18 @@ data:
   backup_line: false
 datasheet:
   url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+  discrepancies:
+    - Newstar's NS108 spec (Rev. 04) gives VDD 5.1 V (max 5.5 V), input high from 3.0 V, and 18 mA per output with REXT floating (up to 60 mA with an external resistor). Rose Lighting's HD108 spec (V1.1.0) gives input high 3.4-5.3 V and 17 mA typical.
   sources:
     - url: https://web.archive.org/web/20220216182230id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
       host: manufacturer
       notes: Wayback Machine copy of the Rose Lighting original (V1.1.0); rose-lighting.com returned HTTP 522 in Nov 2026
+    - url: https://web.archive.org/web/20230131080044id_/http://newstar-ledstrip.com/product/20220705164520116.pdf
+      host: manufacturer
+      notes: Newstar's NS108 spec (SPC/NS108 Rev. 04), from the IC's developer, Wayback capture
+    - url: https://voron.ua/files/pdf/led/NS108_5050.pdf
+      host: distributor
+      notes: Newstar NS108-5050-16bit spec (Rev. 04), distributor copy (Voron, UA)
 electrical:
   led_voltage: 5V
   vcc_voltage: 5V
@@ -45,9 +64,37 @@ price_source:
   url: https://www.aliexpress.us/w/wholesale-HD108-chip.html
   vendor: AliExpress (street)
 related:
-  - type: variant
+  - type: predecessor
     ref: pixels/hd107s
+    notes: 'Newstar: NS108/HD108 is the 16-bit upgrade of NS107S/HD107S.'
+    source:
+      url: https://web.archive.org/web/20230131080044/http://newstar-ledstrip.com/product/20220705164520116.pdf
+      retrieved: '2026-11-18'
 sources:
+  aliases:
+    url: http://newstar-ledstrip.com/productshow847.html
+    retrieved: '2026-11-18'
+    notes: 'Newstar lists the part as "NS108 HD108 5050 RGB Pixel LED Chip" ("NS108/HD108 LED is the upgrade type of NS107S"); its Pixel LED Chip catalog also has NS108 HD108 2020.'
+  creator:
+    url: https://web.archive.org/web/20230131080044/http://newstar-ledstrip.com/product/20220705164520116.pdf
+    retrieved: '2026-11-18'
+    notes: 'Newstar NS108 spec: "NEWSTAR LED as the original IC developer of NS107S NS108 series digital led". Rose Lighting sells the part as HD108 under its own spec.'
+  release_year:
+    url: https://web.archive.org/web/20230131080044/http://newstar-ledstrip.com/product/20220705164520116.pdf
+    retrieved: '2026-11-18'
+    notes: The sheet's NS108 row says 2018 (its HD108 row has no year); the NS108 spec's sample reel label is dated 2018-09-12.
+  physical.packages:
+    url: http://newstar-ledstrip.com/products.asp?sid=195&tid=274
+    retrieved: '2026-11-18'
+    notes: Newstar's Pixel LED Chip catalog lists NS108 HD108 in 5050 and 2020 only (the sheet's NS108 row also listed 3535).
+  color.brightness_bits:
+    url: https://web.archive.org/web/20250213151642/http://newstar-ledstrip.com/productshow847.html
+    retrieved: '2026-11-18'
+    notes: 'NS108 page (archived 2025-02): "64Bit (65536 level) color settings; each set of data are 1bit start code +15 Bit (32) brightness adjustment (red, green, blue three ports each 5bits) ; 48bits gray data (red, green, blue 16bits)"'
+  data.bitrate:
+    url: https://web.archive.org/web/20250213151642/http://newstar-ledstrip.com/productshow847.html
+    retrieved: '2026-11-18'
+    notes: '"The maximum serial data input frequency 40MHZ, refresh rate of up to 27KHz, cascade up to 1024 points" (the NS108E page says 30MHz and 4KHz)'
   status:
     url: https://www.rose-lighting.com/products/hd108-rgb-5050-pixel-led-chip-with-gray-lever-65536/
     retrieved: '2026-11-18'

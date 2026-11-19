@@ -110,5 +110,7 @@ Research findings with sources: [database-review-research.md](database-review-re
 | `adapters/m8-port-pixel`                     | Adapters: "M8 Port Pixel"                                           | `controllers/m8-port-pixel` (M8-PI)               |
 | `controllers/standard-differential-receiver` | Controllers: "Standard Differential Receiver"                       | `level-converters/standard-differential-receiver` |
 | `adapters/espartstick-wled`                  | Adapters: "EspArtStick WLED" (same product as the controller)       | `controllers/espartstick`                         |
+| `pixels/ns107s`                              | Pixels: "NS107S" (Newstar's part number for the HD107S)             | `pixels/hd107s` (alias NS107S)                    |
+| `pixels/ns108`                               | Pixels: "NS108" (Newstar's part number for the HD108)               | `pixels/hd108` (alias NS108)                      |
 
 `adapters/espartstick` stays: it is the earlier 2019 shield (no SD card), a different product.

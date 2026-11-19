@@ -991,6 +991,44 @@
 'Pixels | WS2815 | Datasheet URL (link)':
   - value: 'http://newstar-ledstrip.com/product/20180125101420006.pdf'
     reason: 'Dead now; YAML links the current page'
+# NS107S / NS108 are Newstar's part numbers for the LEDs sold as HD107S /
+# HD108; their rows merged into pixels/hd107s and pixels/hd108.
+'Pixels | HD107S | Wattage':
+  - value: '85'
+    reason: 'Both the HD107S and NS107S specs give 20 mA per channel ("Build-20ma constant current output"), so 100 mW at 5 V, as the NS107S row says; 17 mA / 85 mW is the HD108 figure'
+'Pixels | HD107S | NOTES':
+  - value: 'APA107 Competitor/clone'
+    reason: 'Not a clone: Newstar developed the IC (NS107S) and sells it as HD107S (sources.creator)'
+'Pixels | NS107S | Data BitRate':
+  - value: '30000000'
+    reason: "Merged into HD107S. Newstar's NS107S spec says 30 MHz, Rose Lighting's HD107S spec 40 MHz; YAML keeps 40 MHz and records 30 MHz in datasheet.discrepancies"
+'Pixels | NS107S | GPIO Min':
+  - value: '3.5'
+    reason: "Merged into HD107S, which keeps the HD107S row's 3.4 V (neither spec gives an input-high level)"
+'Pixels | NS107S | GPIO Max':
+  - value: '5.3'
+    reason: "Merged into HD107S, which keeps the HD107S row's 5 V (neither spec gives an input-high level)"
+'Pixels | NS107S | NOTES':
+  - value: 'upgrade of APA107, same protocol with APA102, higher PWM 27khz, more stable'
+    reason: 'Merged into HD107S; its notes and related links (predecessor APA107, compatible with APA102) say the same'
+'Pixels | NS108 | Colour Group':
+  - value: 'BGR'
+    reason: "Merged into HD108. Newstar's NS108 spec sends red, green, then blue (16 bits each), so RGB, as the HD108 row says"
+'Pixels | NS108 | VCC Voltage':
+  - value: '5.1'
+    reason: "Merged into HD108, which keeps Rose Lighting's figures; Newstar's 5.1 V (max 5.5 V) is in datasheet.discrepancies"
+'Pixels | NS108 | GPIO Max':
+  - value: '5.6'
+    reason: "Merged into HD108, which keeps Rose Lighting's figures (input high 3.4-5.3 V); Newstar's are in datasheet.discrepancies"
+'Pixels | NS108 | Wattage':
+  - value: '102'
+    reason: "Merged into HD108, which keeps Rose Lighting's 17 mA typical (85 mW); Newstar's figures are in datasheet.discrepancies"
+'Pixels | NS108 | Channel Current':
+  - value: '20'
+    reason: "Merged into HD108 (Rose Lighting: 17 mA typical). Newstar's spec gives 18 mA with REXT floating and a 20 mA maximum, in datasheet.discrepancies"
+'Pixels | NS108 | NOTES':
+  - value: '16bit/color version of NS107S'
+    reason: 'Merged into HD108; its notes and related link (predecessor HD107S) say the same'
 'Pixel ICs | GS8202 | Other Links':
   - value: 'GS8202 Pixel Protocol Overview | Advatek Lighting'
     reason: 'Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)'

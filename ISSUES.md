@@ -153,8 +153,9 @@ single colour channel: WS2812 18.5 mA × 5 V = 92.5 mW, APA102 22 mA × 5 V =
 110 mW (a WS2812 at full white draws about three times that). The ratio is
 1.00 on 15 of the 21 rows that have both fields. Rows that don't follow the
 pattern: `lc8808b`, `ns8808` and `ws2851` (computed at 5 V although
-`led_voltage` is 12 V), `sk6805` (100 mW with a ~5 mA channel), `ns108`,
-`ns108e` and `sk6812` (off by 2–4%).
+`led_voltage` is 12 V), `sk6805` (100 mW with a ~5 mA channel), `ns108e`
+and `sk6812` (off by 2–4%). (`ns108` merged into `hd108`, which follows the
+pattern.)
 
 Why it matters: the old designer multiplied this field by the pixel count and
 under-reported power about 3× (fixed: it now uses channel current × channels
