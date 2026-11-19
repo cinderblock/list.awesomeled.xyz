@@ -19,6 +19,106 @@ outputs:
     DMX512: 2 # DMX In/Out
   pixels:
     max_total: 4080
+  protocols:
+    - APA102
+    - APA102C
+    - APA104
+    - APA105
+    - APA109
+    - Adafruit Pixie
+    - Brightek VF1212VGBCHN1
+    - CS8812
+    - DM412
+    - DMX512
+    - DMX512-D
+    - ENTTEC SPXL
+    - FW1906
+    - GS8206
+    - GS8208
+    - GS8303
+    - GS8304
+    - HC1816
+    - HD107S
+    - HD108
+    - ICND2110
+    - INK1003
+    - LB1908
+    - LPD6803
+    - LPD8803
+    - LPD8806
+    - MBI6020
+    - MBI6023
+    - MBI6024
+    - MY9221
+    - MY9231
+    - MY9291
+    - NS108E
+    - P9412
+    - P943
+    - P9813
+    - P9883
+    - QED3001
+    - SK6805
+    - SK6808
+    - SK6812
+    - SK6813
+    - SK6818
+    - SK6822
+    - SK6851
+    - SK9822
+    - SM15055
+    - SM16703
+    - SM16704
+    - SM16705
+    - SM16712
+    - SM16714
+    - SM16716
+    - SM16803
+    - SM16804
+    - SM16824
+    - SM8606
+    - TLS3001
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1814
+    - TM1824
+    - TM1829
+    - TM1903
+    - TM1914
+    - TM1934
+    - TX1818
+    - UCS1903
+    - UCS1904
+    - UCS2603
+    - UCS2903
+    - UCS2904
+    - UCS2912
+    - UCS5603
+    - UCS7604
+    - UCS7804
+    - UCS8603
+    - UCS8903
+    - UCS8904
+    - UCS9812
+    - WS2801
+    - WS2805
+    - WS2808
+    - WS2811
+    - WS2811 V1.4
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2814
+    - WS2815
+    - WS2815B
+    - WS2816A
+    - WS2816B
+    - WS2816C
+    - WS2818
+    - WS2818A
+    - WS2818B
+    - WS2851
 power:
   voltage:
     max: 24
@@ -38,6 +138,11 @@ related:
   - type: related
     ref: controllers/pixlite-4-mk2
     notes: Mk3 counterpart of the PixLite 4 Mk2
+sources:
+  outputs.protocols:
+    url: https://www.advateklighting.com/pixel-protocols
+    retrieved: '2026-11-18'
+    notes: "Every row of Advatek's glossary table is ticked in the 'PixLite Mk3' column (97 rows)"
 technical_notes:
   - Standalone playback via SHOWTime software
   - High frame rate capability - 'hundreds of FPS'

@@ -22,6 +22,50 @@ outputs:
   clocked: selectable # supports both clocked and clockless pixels
   auxiliary:
     DMX512: 1
+  protocols:
+    - WS2805
+    - WS2811
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2814
+    - WS2815
+    - WS2822S
+    - UCS1903
+    - UCS2903
+    - UCS2912
+    - UCS5603
+    - UCS7604
+    - UCS7804
+    - UCS8903
+    - UCS8904
+    - PL9823
+    - TM1934
+    - APA101
+    - SK9822
+    - APA102
+    - APA104
+    - APA106
+    - APA107
+    - NS107
+    - INK1002
+    - INK1003
+    - SM16703
+    - SM16714
+    - SK6812
+    - SKC6812
+    - WS2801
+    - LPD6803
+    - LPD8806
+    - TM1824
+    - DMX512-P
+    - HD108
+    - P9813
+    - GS8208
+    - TM1814
+    - TM1914A
+    - TLS3001
+    - WS2821A
 power:
   voltage:
     max: 24
@@ -31,3 +75,15 @@ data:
   storage:
     - type: SD
 price: 299
+related:
+  - type: predecessor
+    ref: controllers/ledmx4-pro
+    notes: Replaces the 5V and 12-24V LeDMX4 PRO versions (now listed as discontinued)
+    source:
+      url: https://dmxking.tv/downloads/LeDMX4%20MAX%20User%20Manual%20(EN).pdf
+      retrieved: '2026-11-18'
+sources:
+  outputs.protocols:
+    url: https://dmxking.tv/downloads/LeDMX4%20MAX%20User%20Manual%20(EN).pdf
+    retrieved: '2026-11-18'
+    notes: 'LeDMX4 MAX User Manual doc 0129-700-4.11 (firmware history to V4.11), Specifications list.'

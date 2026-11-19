@@ -20,6 +20,49 @@ outputs:
     DMX512: 4
   pixels:
     max_total: 16320
+  protocols:
+    - APA102
+    - APA102C
+    - APA104
+    - APA109
+    - DMX512
+    - GS8208
+    - LPD6803
+    - MBI6020
+    - MBI6023
+    - MY9221
+    - MY9231
+    - MY9291
+    - P9813
+    - SK6812
+    - SK6813
+    - SK6822
+    - SK9822
+    - SM16703
+    - SM16704
+    - SM16714
+    - SM16716
+    - SM16803
+    - SM16804
+    - TLS3001
+    - TM1803
+    - TM1804
+    - TM1809
+    - TM1814
+    - TM1914
+    - UCS1903
+    - UCS2904
+    - UCS8903
+    - UCS8904
+    - UCS9812
+    - WS2801
+    - WS2811
+    - WS2811 V1.4
+    - WS2812
+    - WS2812B
+    - WS2813
+    - WS2814
+    - WS2815
 power:
   voltage:
     max: 24
@@ -31,6 +74,13 @@ software:
     - xLights
 sources:
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights controller definition (config upload supported)
+    - url: https://github.com/xLightsSequencer/xLights/blob/1e91de99f5ac4270bbb4e0d38c9827ddedff9beb/resources/controllers/advatek.xcontroller
+      retrieved: '2026-11-18'
+      notes: xLights' own controller definition file (official repository, resources/controllers/advatek.xcontroller, last changed in commit 1e91de9, 2026-04-06), vendor…
+  outputs.protocols:
+    url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'
-    notes: xLights controller definition (config upload supported)
+    notes: "Rows ticked in the 'PixLite Mk2' column of Advatek's glossary table (97 rows"
