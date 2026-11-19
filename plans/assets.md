@@ -148,6 +148,10 @@ the shared block to them).
 ## Open questions for the user
 
 1. **R2 mirror setup** (blocked on Cameron; infra needs per-change approval). Proposed: bucket `awesomeled-datasheets` declared in the ops IaC (`cloudflare/config/projects/awesomeled.yaml`: `- r2: awesomeled-datasheets`), public custom domain `assets.awesomeled.xyz`, an account-owned R2 token (Object Read & Write, that bucket only), four repo secrets + one variable, Actions allowed to open PRs. Full list: `docs/datasheet-mirroring.md` → "One-time setup". Gap: the ops IaC has no R2 custom-domain support, and its DNS sync manages the `awesomeled.xyz` zone, so a dashboard-made R2 domain record must be declared external there first (or the IaC taught R2 domains). Recommendation: teach the IaC (a small handler), in an ops thread.
+   - **Why R2 at all** (Cameron asked, 2026-11-18): so we hold our own copy of each datasheet PDF, plus a sha256 of it, for when a maker moves or deletes the PDF. Makers do this a lot: 18 of the 38 pre-existing links were already bad.
+   - **Gap:** nothing on the site displays `datasheet.mirror` yet. `entry.tsx` shows only `datasheet.url` and `sources`, so even a working mirror would need a one-line UI change before anyone saw it.
+   - **No-infra alternative:** the site already falls back to the newest Wayback Machine capture for anything listed in `dead_links`. CI could submit each datasheet URL to Wayback's Save Page Now instead of uploading to R2. That needs no Cloudflare work and avoids re-hosting manufacturers' copyrighted PDFs on our own domain. It is less certain: Wayback can miss bot-blocked hosts and has had outages.
+   - Recommendation: Wayback first; keep R2 for any datasheets Wayback can't capture.
 2. **Borderline image calls** worth a glance (details in `plans/assets-research/`): neopixelbooster recorded as CC BY-NC-SA 4.0 (README) though its LICENCE file says CC BY-SA 4.0; LED-strip sellers (LEDYi, Superlighting) as `community` datasheet hosts for Titan/UCS ICs whose makers publish none; a few retailer photos for generic diffusers (Screwfix, eplastics).
 
 ## Things not to do
