@@ -22,7 +22,9 @@ inputs:
   standalone: true # commonly runs WLED firmware
 outputs:
   count: 4
-  connector: 5mm screw terminal
+  connector:
+    ref: pcb-screw-terminal-block
+    notes: 5 mm pitch
   clocked: selectable # supports single-wire and clocked (e.g. SK9822/APA102) strips
   driver:
     buffered: true # level-shifted output per channel

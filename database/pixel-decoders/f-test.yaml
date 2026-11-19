@@ -28,6 +28,10 @@ price_source:
   retrieved: '2026-11-18'
   vendor: PixelController
   url: https://pixelcontroller.com/store/diy-controllers/85-F-Test.html
+related:
+  - type: uses
+    ref: connectors/xconnect
+    notes: Pixel-data and Smart Remote ports
 sources:
   inputs.protocols:
     url: https://docs.google.com/document/d/120dhIltqEcNxDoGgmjNeP6NHb6vISE70OXnZNWJYHhk/edit

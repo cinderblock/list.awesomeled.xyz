@@ -23,7 +23,9 @@ inputs:
   standalone: true # commonly runs WLED
 outputs:
   count: 2
-  connector: 5mm screw terminal
+  connector:
+    ref: pcb-screw-terminal-block
+    notes: 5 mm pitch
   fuse: 10A # 10A fuse included; 15A continuous / 25A max copper rating
   driver:
     buffered: true

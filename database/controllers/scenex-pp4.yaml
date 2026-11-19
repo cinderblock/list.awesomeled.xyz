@@ -15,7 +15,8 @@ inputs:
   standalone: false
 outputs:
   count: 4
-  connector: 4 Pin XLR
+  connector:
+    ref: xlr-4
   clocked: selectable # supports both clocked and async pixels
   driver:
     buffered: true
