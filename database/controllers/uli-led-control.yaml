@@ -4,6 +4,10 @@ creator:
   name: Ulrich Radig
   url: https://www.ulrichradig.de
   page: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+vendors:
+  - name: Radig Hard & Software
+    page: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+notes: Sold as the "4096 Kanal LED Strip Controller" - an Art-Net / sACN pixel controller kit (SMD parts pre-assembled, only sockets and plugs to solder) for up to 1360 RGB LEDs on 8 outputs, one universe each.
 inputs:
   physical:
     Ethernet: true
@@ -15,7 +19,7 @@ inputs:
 outputs:
   count: 8
   pixels:
-    max_per_output: 170 # 1360 total pixels / 8 outputs
+    max_per_output: 170 # one universe per output; 1360 RGB LEDs / 8 universes in total
   clocked: selectable # supports both clocked and non-clocked pixel types
   protocols:
     - WS2811
@@ -31,7 +35,16 @@ outputs:
     - UCS1909
 power:
   voltage:
-    max: 12
+    min: 7
+    max: 24 # current listing; the 2021 listing said 5-12 V
+core:
+  IC: STM32F405
+  family: STM32
+dead_links:
+  - url: https://shop.ulrichradig.de/Module/Light-Control-DMX/4096-Kanal-LED-Strip-Controller.html
+    archive: https://web.archive.org/web/20211020061125/https://shop.ulrichradig.de/Module/Light-Control-DMX/4096-Kanal-LED-Strip-Controller.html
+    checked: '2026-11-18'
+    notes: redirects to the radig.online shop home page since 2025; the product moved to radig.online
 images:
   - file: uli-led-control.webp
     source: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
@@ -52,9 +65,25 @@ software:
     - PixelInvaders
 sources:
   status:
+    - url: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+      retrieved: '2026-11-18'
+      notes: Sofort verfügbar (in stock), EUR 79.98 incl. VAT; EUR 79.98, "Sofort verfügbar"
+  outputs.pixels.max_per_output:
     url: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
     retrieved: '2026-11-18'
-    notes: 'Sofort verfügbar (in stock), EUR 79.98 incl. VAT'
+    notes: 'Maximale Anzahl an RGB LEDs: 1360 LEDs, 4096 Kanäle, 8 Universen'
+  outputs.clocked:
+    url: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+    retrieved: '2026-11-18'
+    notes: WS2811, WS2812/WS2815/WS2818, WS2812b, APA104, APA102, LPD6803, WS2801, SK6812 RGBW, LPD8803, LPD8806, UCS1909
+  power.voltage.max:
+    url: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+    retrieved: '2026-11-18'
+    notes: 'Betriebsspannung: 7-24V, 200mA (the 2021 shop listing gave 5-12V and said a DC/DC converter for 12 V strips is not included)'
+  inputs.protocols:
+    url: https://www.radig.online/4096-Kanal-LED-Strip-Controller/SW10008
+    retrieved: '2026-11-18'
+    notes: 'Protokolle: Art Net und sACN E1.31; Update: über USB'
   outputs.protocols:
     url: https://web.archive.org/web/20211020061125/https://shop.ulrichradig.de/Module/Light-Control-DMX/4096-Kanal-LED-Strip-Controller.html
     retrieved: '2026-11-18'
@@ -64,4 +93,5 @@ sources:
     retrieved: '2026-11-18'
     notes: Jinx -> pattern-drivers/jinx (Jinx!), Madrix -> madrix-5 (alias needed); PixelInvaders not in DB.
 technical_notes:
-  - With data + clock pixels only 4 of the 8 outputs are available
+  - With data + clock pixels only 4 of the 8 outputs are available (sheet note; not stated on the maker's pages)
+  - Pre-programmed STM32F405; works with Jinx, Madrix and PixelInvaders

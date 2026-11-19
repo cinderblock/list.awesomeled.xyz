@@ -4,6 +4,7 @@ creator:
   name: Madrix
   url: https://www.madrix.com
   page: https://www.madrix.com/products/nebula
+notes: Two-port SPI pixel-tape driver fed over Ethernet (Art-Net/sACN) or USB from MADRIX 5; 2,040 RGB pixels with firmware 6.0+. No standalone playback.
 inputs:
   physical:
     Ethernet: 2 # built-in switch
@@ -19,6 +20,7 @@ outputs:
     max: 6 # per port when supplying LED power through
   pixels:
     max_per_output: 1020 # 1020 RGB / 768 RGBW per port (firmware 6.0+)
+  clocked: selectable # 70+ ICs, single-wire (WS2811 family) and clocked (APA102, WS2801, LPD8806, HD108); chosen per port
   protocols:
     - APA101
     - APA102
@@ -96,11 +98,19 @@ power:
   voltage:
     min: 5
     max: 24
+  current:
+    max: 12 # 2-pin supply terminal; can also run from 5 V USB or from the LEDs on port 1 or 2
+case:
+  dimensions: 90 x 70 x 46 mm
+  mounting: 35 mm DIN rail or wall
+  waterproof: IP20
 datasheet:
   url: https://www.madrix.com/download/mhm/documentation/NEBULA/Datasheet_MADRIX_NEBULA.pdf
 features:
   - TTL pixel-data output (12x 512 channels across two ports)
   - Powers LEDs directly through screw terminals (6A max per port)
+  - ArtRdm (RDM responder) status and sensor reporting
+  - HTP merge of two Ethernet sources
 images:
   - file: madrix-nebula.webp
     source: https://www.madrix.com/products/nebula
@@ -118,9 +128,9 @@ software:
     - MADRIX 5
 sources:
   status:
-    url: https://www.madrix.com/products/nebula
-    retrieved: '2026-11-18'
-    notes: current product page (LED type list 'As of January 2026')
+    - url: https://www.madrix.com/products/nebula
+      retrieved: '2026-11-18'
+      notes: current product page (LED type list 'As of January 2026'); current product page; supported-LED list dated January 2026
   software.works_with:
     - url: https://www.madrix.com/products/software
       retrieved: '2026-11-18'
@@ -133,6 +143,21 @@ sources:
     retrieved: '2026-11-18'
     notes: Product page 'Supported LEDs' (same list under Technical Specifications), 'As of January 2026.
   inputs.physical:
+    - url: https://www.madrix.com/products/nebula
+      retrieved: '2026-11-18'
+      notes: 'connectivity: 2 × RJ45 (daisy-chain), USB; no RF remote, Bluetooth or audio input listed; Connectivity: 2x OUT, 2x RJ45 Ethernet, 1x USB, 1x power - no Bluetooth, RF remote, audio input or switch input'
+  outputs.clocked:
     url: https://www.madrix.com/products/nebula
     retrieved: '2026-11-18'
-    notes: 'connectivity: 2 × RJ45 (daisy-chain), USB; no RF remote, Bluetooth or audio input listed'
+    notes: Supported LEDs list (APA102, WS2801, LPD8806, HD108 ... WS2811, WS2812B ...); output protocol selectable per port
+  outputs.pixels.max_per_output:
+    url: https://www.madrix.com/products/nebula
+    retrieved: '2026-11-18'
+    notes: 'Firmware >= 6.00: max. output per port 1,020 RGB / 768 RGBW / 3,072 1-channel LEDs; "up to 2,040 RGB pixels" per device'
+  power.current.max:
+    url: https://www.madrix.com/products/nebula
+    retrieved: '2026-11-18'
+    notes: 'Supply of power: DC 5-24 V over a 2-pin screw terminal (12 A max.), 5 V USB, or port 1 or 2 sourced from LEDs'
+technical_notes:
+  - 'Firmware 5.x and older: 680 RGB / 512 RGBW / 2,048 single-channel LEDs per port (8x 512 channels)'
+  - SPI signal frequency up to 24 MHz

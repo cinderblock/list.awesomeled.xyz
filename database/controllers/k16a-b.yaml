@@ -6,7 +6,7 @@ creator:
 vendors:
   - name: Wired Watts
     page: https://www.wiredwatts.com/products/klk16a-bv3
-notes: BeagleBone Black cape running FPP. 16 fused local ports plus 4 RJ45 differential ports (not Ethernet) expanding to 48 strings via Smart Receivers. Onboard sound, FM transmitter optional.
+notes: BeagleBone Black cape running FPP (2020-2025, retired). 16 local ports plus 4 RJ45 differential ports (not Ethernet, 16 strings via receivers) and an expansion port (16 more) - 48 strings in all. Onboard sound, FM transmitter optional. Three generations differ in port protection and supply - v1 5 A mini-blade fuses and 5/12 V; v2 eFuses and 5-18 V; v3 eFuses, four power banks and 5-24 V. Successors are the K16, K16-Pro and K16-Max.
 inputs:
   physical:
     Ethernet: true # via host BeagleBone
@@ -19,16 +19,18 @@ inputs:
   standalone: true # Falcon Player (FPP)
   requires_host: BeagleBone Black
 outputs:
-  count: 16 # local ports; expands to 48 strings via Smart Receivers
+  count: 48 # 16 local + 16 differential (4 RJ45) + 16 via the expansion port
   connector: Phoenix Screw/RJ45
   driver:
     buffered: true
   differential: true # 4 RJ45 differential ports for Smart Receivers
   clocked: false # async pixels only
+  current:
+    max: 6 # v3 eFuse trips at about 6 A (v2 about 5.2 A, v1 5 A mini-blade fuse)
   auxiliary:
     DMX512: 2 # two RS485 outputs (DMX/PixelNet/Renard/LOR)
   pixels:
-    max_total: 72000
+    max_per_output: 1500 # at 20 fps; 800 at 40 fps
   protocols:
     - WS2811
     - WS2812
@@ -67,6 +69,7 @@ outputs:
     - GE8822
 power:
   voltage:
+    min: 5
     max: 24
   current:
     max: 60
@@ -74,9 +77,11 @@ data:
   storage:
     - type: microSD # via the BeagleBone Black
 features:
-  - Replaceable fuses with indicator LEDs
+  - 'eFuse power distribution (v2/v3): latching per-port eFuses with switching and current readings; v1 used 5 A mini-blade fuses'
+  - Port LEDs show power / fuse state
   - Onboard sound output
   - Optional FM transmitter
+  - OLED display with menu buttons, real-time clock, temperature and voltage sensors
 images:
   - file: k16a-b.webp
     source: https://kulplights.com/product/k16a-b/
@@ -109,9 +114,24 @@ software:
     - xLights
 sources:
   status:
-    url: https://www.wiredwatts.com/products/klk16a-bv3
+    - url: https://www.wiredwatts.com/products/klk16a-bv3
+      retrieved: '2026-11-18'
+      notes: '"Discontinued: This product has been discontinued."; delisted from the kulplights.com shop, all variants out of stock; Wired Watts: "This product has been discontinued" (v1 and v3 pages)'
+    - url: https://kulplights.com/manuals/boards/k16a-b/
+      retrieved: '2026-11-18'
+      notes: '"The K16A-B is no longer sold"; successors K16, K16-Pro and K16-Max'
+  outputs.count:
+    url: https://kulplights.com/manuals/boards/k16a-b/
     retrieved: '2026-11-18'
-    notes: '"Discontinued: This product has been discontinued."; delisted from the kulplights.com shop, all variants out of stock'
+    notes: 16 pixel ports, 4 differential ports (strings 17-32) and an expansion port (strings 33-48) - "48 strings in all"
+  outputs.pixels.max_per_output:
+    url: https://kulplights.com/product/k16a-b/
+    retrieved: '2026-11-18'
+    notes: '"each drive 800 pixels (with power injection) at 40FPS (1500 at 20fps)"'
+  outputs.current.max:
+    url: https://kulplights.com/manuals/boards/k16a-b/
+    retrieved: '2026-11-18'
+    notes: 'Port protection: v1 5 A mini-blade fuse per port; v2 eFuse about 5.2 A, latching; v3 eFuse about 6 A, latching'
   software.firmware:
     - url: https://github.com/FalconChristmas/fpp/blob/master/www/api/controllers/cape.php
       retrieved: '2026-11-18'
@@ -135,8 +155,12 @@ sources:
     retrieved: '2026-11-18'
     notes: "Product page also: 'Note: a BeagleBone Green Wireless will NOT work.'"
   power.voltage.max:
-    url: https://kulplights.com/product/k16a-b/
-    retrieved: '2026-11-18'
-    notes: "'Each port can handle up to 6A of current and 5-24V'"
+    - url: https://kulplights.com/product/k16a-b/
+      retrieved: '2026-11-18'
+      notes: "'Each port can handle up to 6A of current and 5-24V'"
+    - url: https://kulplights.com/manuals/boards/k16a-b/
+      retrieved: '2026-11-18'
+      notes: 'Voltage: v1 5 or 12 V (12 V max); v2 5-18 V; v3 5-24 V on each of four power terminals'
 technical_notes:
   - Two RS485 outputs support DMX / PixelNet / Renard / LOR
+  - 'Generations: v1 (v1.0.0-v1.2, 2020-2022) two power terminals, mini-blade fuses, 40-pin F16v3-style expansion, DMX on 3-pin terminals; v2 (v2.0-v2.1, 2023-2024) eFuses, 24-pin F16v4-style expansion, DMX on RJ45, two-way differential ports; v3 (v3.0-v3.0.1, 2024-2025) four power banks of 4 ports, 6 A eFuses, 5-24 V'

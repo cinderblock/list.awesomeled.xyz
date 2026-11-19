@@ -4,7 +4,7 @@ release_year: 2022
 creator:
   name: Quindor / Intermittent Technology
   page: https://dig2go.info/
-notes: ESP32, open to any software, often run with WLED
+notes: ESP32, open to any software, often run with WLED. Ships pre-assembled with WLED installed; USB-C powered (5 V, up to 15 W) with a built-in microphone and IR receiver. No wired DMX port - "wireless DMX" means E1.31 / Art-Net over Wi-Fi in WLED.
 inputs:
   physical:
     Wi-Fi:
@@ -25,9 +25,10 @@ outputs:
   connector: Pigtail (included)
   clocked: false
   driver:
-    buffered: true
+    buffered: true # level-shifted 5 V data line
   pixels:
     max_per_output: 1024
+  fuse: self-resetting
   protocols:
     - WS2812B
     - SK6812
@@ -40,6 +41,9 @@ power:
     max: 3
 core:
   family: ESP32
+features:
+  - Pre-assembled; ships running WLED (also runs ESPHome, FastLED, Moonlight)
+  - MOSFET switch cuts strip power when the lights are off
 images:
   - file: quinled-dig2go.webp
     source: https://shop.allnetchina.cn/products/quinled-dig2go-portable-digital-led-controller
@@ -67,6 +71,21 @@ software:
     - xLights
     - FastLED
 sources:
+  inputs.physical:
+    url: https://dig2go.info/
+    retrieved: '2026-11-18'
+    notes: 'IR receiver, on/off button, Wi-Fi (2.4 GHz, AP + home), built-in digital microphone; USB-C 5V / 3A, up to 15 W - no DMX connector'
+  inputs.protocols:
+    url: https://kno.wled.ge/interfaces/e1.31-dmx/
+    retrieved: '2026-11-18'
+    notes: WLED receives network DMX as E1.31 or Art-Net
+  features:
+    - url: https://dig2go.info/
+      retrieved: '2026-11-18'
+      notes: WLED pre-installed; arrives running WLED
+    - url: https://quinled.info/pre-assembled-boards/
+      retrieved: '2026-11-18'
+      notes: listed among QuinLED's pre-assembled boards
   status:
     url: https://shop.allnetchina.cn/products/quinled-dig2go-portable-digital-led-controller
     retrieved: '2026-11-18'
@@ -92,4 +111,6 @@ sources:
   wled_compatible:
     url: https://dig2go.info/
     retrieved: '2026-11-18'
+technical_notes:
+  - The maker rates the strip side at ~300 LEDs (about 5 m at 60/m) because of the 15 W USB-C power budget; 1024 per output is the sheet's figure
 wled_compatible: true

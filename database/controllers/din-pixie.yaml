@@ -4,7 +4,7 @@ creator:
   name: ENTTEC
   url: https://www.enttec.com.au
   page: https://www.enttec.com.au/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
-notes: Back powered from pixel strip - connect thru USB to record a show onto the device using live Art-Net
+notes: Back powered from pixel strip - connect thru USB to record a show onto the device using live Art-Net. DIN-rail DMX-to-SPI pixel converter and standalone player (SKU 73539); takes DMX on two RJ45 ports (not Ethernet) or up to 4 universes over USB from ENTTEC EMU.
 inputs:
   physical:
     USB: USB-B # config, live input and show upload
@@ -15,10 +15,13 @@ inputs:
 outputs:
   connector:
     ref: mtsb-combicon
+    pins: 3
   count: 2
   driver:
     buffered: true
   clocked: false # async / single-wire pixel outputs
+  pixels:
+    max_per_output: 340 # 2 universes per port (RGB 8-bit)
   protocols:
     - Adafruit Pixie
     - APA102
@@ -115,9 +118,10 @@ outputs:
     - TM1812
 power:
   voltage:
+    min: 5
     max: 48
   current:
-    max: 10
+    max: 10 # per VCC screw terminal
 data:
   formats:
     - RGB
@@ -126,9 +130,10 @@ data:
     - 8
     - 16
   storage:
-    - type: flash
+    - type: Flash
       features:
         - non-removable
+        - 4,000 frames (about 100 s)
 datasheet:
   url: https://cdn.enttec.com/pdf/assets/73539/73539_DIN_PIXIE_DATASHEET.pdf
   sources:
@@ -148,22 +153,39 @@ price_source:
   vendor: ENTTEC
 sources:
   status:
-    url: https://www.enttec.com/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
-    retrieved: '2026-11-18'
-    notes: 'SKU 73539, $96.00, 8 in stock'
+    - url: https://www.enttec.com/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+      retrieved: '2026-11-18'
+      notes: SKU 73539, $96.00, 8 in stock
+    - url: https://www.enttec.com.au/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+      retrieved: '2026-11-18'
+      notes: current product page, in stock
   outputs.protocols:
     url: https://www.enttec.com/pixel-protocols
     retrieved: '2026-11-18'
     notes: Values = every protocol marked 'Yes' in the 'DIN PIXIE' (links to SKU 73539) column of ENTTEC's pixel-protocol support table (87 rows), plus the product's pre-listed protocols that are missing from that table…
   inputs.physical:
-    url: https://www.enttec.com/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+    - url: https://www.enttec.com/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+      retrieved: '2026-11-18'
+      notes: 'inputs: 1 × USB 2.0 Type-B, 2 × DMX in (RJ45); no Ethernet'
+    - url: https://cdn.enttec.com/pdf/assets/73539/73539_DIN_PIXIE_DATASHEET.pdf
+      retrieved: '2026-11-18'
+      notes: 'Connectors: 1x USB 2.0 type-B input, 2x DMX input (RJ45 port); the datasheet warns not to connect them to Ethernet ports. For network Art-Net/sACN ENTTEC points to the OCTO'
+  outputs.pixels.max_per_output:
+    url: https://www.enttec.com.au/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
     retrieved: '2026-11-18'
-    notes: 'inputs: 1 × USB 2.0 Type-B, 2 × DMX in (RJ45); no Ethernet'
+    notes: 'Max. output per port 2 universes (1024 channels); max. pixels per device RGB 340 via DMX, 680 via USB or standalone; RGBW 256 / 512'
+  data.storage:
+    url: https://www.enttec.com.au/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+    retrieved: '2026-11-18'
+    notes: 'Standalone show memory: 4,000 frames (about 100 seconds), recorded from Art-Net or DMX via ENTTEC EMU'
+  power.current.max:
+    url: https://www.enttec.com.au/product/led-pixel-control/din-pixie-compact-2-universe-dmx-to-led-pixel-converter-controller/
+    retrieved: '2026-11-18'
+    notes: 'Input voltage 5-48V DC (via USB or output port VCC terminal); max. rated current per screw terminal (VCC / VCC0) 10A'
 technical_notes:
-  - 'RGB (8-bit): 340 pixels max'
-  - 'RGBW (8-bit): 256 pixels max'
-  - 'RGB (16-bit): 170 pixels max'
-  - 'RGBW (16-bit): 128 pixels max'
+  - 'DMX mode (1 universe per port, 2 in total): RGB (8-bit) 340, RGBW (8-bit) 256, RGB (16-bit) 170, RGBW (16-bit) 128 pixels max'
+  - 'USB or standalone mode (4 universes): RGB (8-bit) 680, RGBW (8-bit) 512 pixels max'
   - Storage is not removable
   - Can be powered from pixel strip (back-powered)
   - Record shows via USB using live Art-Net
+  - '16-bit protocols include AHL003, SJ1221, SPXL, TLC5973, UCS8903 and UCS8904'

@@ -4,7 +4,7 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k32a-b/
-notes: BeagleBone Black cape running FPP (Ethernet via the BBB). 32 fused local string ports plus 4 RJ45 differential ports adding up to 16 strings via standard or 48 via smart receivers (80 strings max). Two RS485 outputs for DMX/PixelNet/Renard/LOR. OLED display, RTC, onboard sound DAC; FM transmitter optional. Discontinued per Wired Watts; no longer in the kulplights.com shop.
+notes: BeagleBone Black cape running FPP (Ethernet via the BBB), retired. 32 local string ports with 5 A mini-blade fuses plus 4 send-only RJ45 differential ports for 16 more strings via receivers - 48 strings in all. Four power terminals, one per bank of 8 ports. Two RS485 outputs for DMX/PixelNet/Renard/LOR. OLED display, RTC, onboard sound DAC; FM transmitter optional. Successors are the K32, K32-Pro and K32-Max.
 inputs:
   physical:
     Ethernet: true # via host BeagleBone
@@ -17,24 +17,27 @@ inputs:
   standalone: true # runs FPP (Falcon Player)
   requires_host: BeagleBone Black
 outputs:
-  count: 80 # 32 fused local + up to 48 via smart receivers
+  count: 48 # 32 fused local + 16 via the 4 RJ45 differential ports
   connector: Phoenix Screw/RJ45
   driver:
     buffered: true
   differential: true # 4 RJ45 differential receiver ports
   clocked: false # async pixel types
+  current:
+    max: 5 # 5 A mini-blade fuse per port
   auxiliary:
     DMX512: 2 # two RS485 outputs (DMX/PixelNet/Renard/LOR)
   pixels:
-    max_total: 72000
+    max_per_output: 1500 # at 20 fps; 800 at 40 fps
   protocols:
     - WS2811
     - WS2812
 power:
   voltage:
+    min: 5
     max: 18
   current:
-    max: 160
+    max: 160 # sheet value (32 x 5 A fuses); each of the four supply terminals is rated 30 A
 data:
   storage:
     - type: microSD # via BeagleBone Black
@@ -75,9 +78,30 @@ software:
     - xLights
 sources:
   status:
-    url: https://wiredwatts.com/products/klk32a-b
+    - url: https://wiredwatts.com/products/klk32a-b
+      retrieved: '2026-11-18'
+      notes: '"Discontinued: This product has been discontinued."; delisted from the kulplights.com shop, all variants out of stock'
+    - url: https://kulplights.com/manuals/boards/k32a-b/
+      retrieved: '2026-11-18'
+      notes: '"The K32A-B is no longer sold"; successors K32, K32-Pro and K32-Max'
+    - url: https://www.wiredwatts.com/klk32b
+      retrieved: '2026-11-18'
+      notes: 'Wired Watts: "This product has been discontinued"'
+  inputs.physical:
+    url: https://kulplights.com/manuals/boards/k32a-b/
     retrieved: '2026-11-18'
-    notes: '"Discontinued: This product has been discontinued."; delisted from the kulplights.com shop, all variants out of stock'
+    notes: networking via the BeagleBone Black; no PoE on the board (the product page, manual and Wired Watts listing never mention it)
+  outputs.count:
+    url: https://kulplights.com/manuals/boards/k32a-b/
+    retrieved: '2026-11-18'
+    notes: '32 local pixel ports; differential ports 4 x RJ45 = 16 strings (33-48), send-only; "Total strings: 48"'
+  outputs.pixels.max_per_output:
+    - url: https://kulplights.com/manuals/hardware/pixel-outputs/
+      retrieved: '2026-11-18'
+      notes: FPP drives up to 800 pixels per port at 40 fps, on local ports and each differential string
+    - url: https://www.wiredwatts.com/klk32b
+      retrieved: '2026-11-18'
+      notes: '"up to 800 pixels at 40 frames per second or up to 1,500 pixels at 20 frames per second"'
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
       retrieved: '2026-11-18'
@@ -97,6 +121,9 @@ sources:
     retrieved: '2026-11-18'
     notes: "Also: 'Note: a BeagleBone Green Wireless will NOT work.'"
   power.voltage.max:
-    url: https://kulplights.com/product/k32a-b/
-    retrieved: '2026-11-18'
-    notes: "'The Beagle can be powered through the K32 with 5V-18V power'"
+    - url: https://kulplights.com/product/k32a-b/
+      retrieved: '2026-11-18'
+      notes: "'The Beagle can be powered through the K32 with 5V-18V power'"
+    - url: https://kulplights.com/manuals/boards/k32a-b/
+      retrieved: '2026-11-18'
+      notes: 'Voltage: v1.3 and later 5-18 V on any terminal; earlier 5 or 12 V, 12 V max. Terminals rated 30 A'

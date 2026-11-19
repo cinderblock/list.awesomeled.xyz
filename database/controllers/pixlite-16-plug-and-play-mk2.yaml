@@ -4,7 +4,7 @@ creator:
   name: Advatek
   url: https://www.advateklighting.com
   page: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
-notes: 5V or 12V available. Multiple power plug versions available.
+notes: 5V or 12V available. Multiple power plug versions available. PixLite 16 Mk2 controller in a rainproof, conformal-coated enclosure with a built-in 300-320 W supply (88-260 V AC in); pixels plug straight into 16 fused 4-pin outputs.
 inputs:
   physical:
     Ethernet: true
@@ -14,13 +14,15 @@ inputs:
     - sACN
   standalone: false
 outputs:
-  count: 16
+  count: 32 # 16 physical 4-pin outputs; 32 in expanded mode
   connector: 4 pin Advatek Male
   clocked: selectable # supports Single (async) or Clock pixel types
   driver:
     buffered: true
+  fuse: 16 fused outputs
   pixels:
-    max_total: 5440
+    max_per_output: 1020 # RGB in standard (16-output) mode; 768 RGBW
+    max_total: 16320 # 96 universes
   protocols:
     - APA102
     - APA102C
@@ -66,9 +68,15 @@ outputs:
     - WS2815
 power:
   voltage:
-    max: 12
+    max: 12 # 5 V or 12 V version of the built-in supply
+case:
+  dimensions: 300 x 200 x 140 mm
+  mounting: wall
 datasheet:
   url: https://cdn.sanity.io/files/3y31615s/production/50fe327df6dea73913628917e9e890411452b23b.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
+features:
+  - 'Built-in supply: 300 W at 5 V / 320.4 W at 12 V total, 18.75 W / 20 W per output'
+  - Rainproof, UV-resistant polycarbonate enclosure; conformal-coated board; fan cooled
 images:
   - file: pixlite-16-plug-and-play-mk2.webp
     source: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
@@ -80,9 +88,25 @@ related:
     notes: Assembled plug-and-play version of the control board
 sources:
   status:
+    - url: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
+      retrieved: '2026-11-18'
+      notes: flagged discontinued, "Limited stock available - contact us"; product page offer marked schema.org/Discontinued with no price (as are the other PixLite Mk2 pages); Advatek points buyers to the Mk3 range
+  outputs.count:
     url: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
     retrieved: '2026-11-18'
-    notes: 'flagged discontinued, "Limited stock available - contact us"'
+    notes: 'Standard Outputs 16, Expanded Outputs 32, Fused Pixel Outputs 16'
+  outputs.pixels.max_per_output:
+    url: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
+    retrieved: '2026-11-18'
+    notes: RGB Pixels/Output 1020; RGBW Pixels/Output 768
+  outputs.pixels.max_total:
+    url: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
+    retrieved: '2026-11-18'
+    notes: 96 sACN or Art-Net universes (16,320 RGB pixels)
+  inputs.physical:
+    url: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
+    retrieved: '2026-11-18'
+    notes: 'Ethernet Inputs: 1 - no USB'
   outputs.protocols:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'

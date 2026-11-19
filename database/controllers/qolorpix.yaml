@@ -4,7 +4,7 @@ creator:
   name: City Theatrical
   url: https://www.citytheatrical.com
   page: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
-notes: DMX-controlled LED tape replay unit (model 5850, "QolorPIX Tape Controller, Eight Output")
+notes: DMX-controlled LED tape replay unit (model 5850, "QolorPIX Tape Controller, Eight Output") with a built-in 600 W, 5 V supply for 5 V WS2812B QolorPIX tape.
 inputs:
   physical:
     DMX512: XLR-5 in + thru
@@ -22,6 +22,9 @@ outputs:
     buffered: true
   pixels:
     max_per_output: 240
+  current:
+    max: 6 # 5 VDC output, 6 A max per port
+  clocked: false # WS2812B tape
   protocols:
     - WS2812B
 power:
@@ -56,18 +59,37 @@ price_source:
   vendor: SoundPro (City Theatrical dealer)
 sources:
   status:
-    url: https://proadv.com/city-theatrical-8-output-qolorpix-tape-controller/
-    retrieved: '2026-11-18'
-    notes: "in stock at a dealer, $2432.11 (MAP); still on City Theatrical's current product pages"
+    - url: https://proadv.com/city-theatrical-8-output-qolorpix-tape-controller/
+      retrieved: '2026-11-18'
+      notes: in stock at a dealer, $2432.11 (MAP); still on City Theatrical's current product pages
+    - url: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
+      retrieved: '2026-11-18'
+      notes: current product page; firmware v1.0.2.9.0.0 listed as current
   outputs.protocols:
     url: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
     retrieved: '2026-11-18'
     notes: Product page FAQ A4 ('Can I use other brands of tape with the controller?'). Only chipset City Theatrical names; the manual says only 'Compatible with City Theatrical QolorPIX Pixel Controlled LED Tape'.
   outputs.pixels.max_per_output:
+    - url: https://www.citytheatrical.com/docs/default-source/manuals/5850-qolorpix-tape-controller.pdf
+      retrieved: '2026-11-18'
+      notes: '''Up to 240 individual pixels on each port''; Features: "Up to 240 individual pixels on each port"; Specifications: Pixels 1 to 240 per port; port setting "Pixels" accepts 1-240'
+    - url: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
+      retrieved: '2026-11-18'
+      notes: FAQ A4 "up to 240 pixels per port"; the spec table on the same page says Max Pixels per Output 320
+  outputs.current.max:
     url: https://www.citytheatrical.com/docs/default-source/manuals/5850-qolorpix-tape-controller.pdf
     retrieved: '2026-11-18'
-    notes: "'Up to 240 individual pixels on each port'"
+    notes: 'Specifications: Output Power 5VDC, 6A max per port'
+  outputs.connector:
+    url: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
+    retrieved: '2026-11-18'
+    notes: 'Output Connectors: 4-Pin XLRF (the 5-pin XLR is the DMX input)'
+  inputs.physical:
+    url: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
+    retrieved: '2026-11-18'
+    notes: 'DMX Connectors: 5-Pin XLR; built-in Multiverse wireless DMX receiver. FAQ A16: no sACN or Art-Net'
 technical_notes:
-  - 600W total output; 85-264 VAC input via PowerCON
-  - Max 10 m cable run to LED tape; up to 240 pixels per output
+  - 600 W total output at 5 VDC (6 A max per port); 85-264 VAC input via PowerCON (manual - 115/230 VAC, 3.5/1.8 A)
+  - Max 10 m cable run to LED tape
+  - powerCON TRUE1 power in/thru; power can daisy-chain to at most 3 units
   - Indoor use only (NEMA 1 / IP20 steel enclosure)

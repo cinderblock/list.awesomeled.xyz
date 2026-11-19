@@ -14,8 +14,8 @@ outputs:
   connector:
     ref: mtsb-combicon
   pixels:
-    max_per_output: 510 # 2040 total / 4 outputs
-  clocked: selectable # supports single-wire and clocked pixels
+    max_total: 2040 # sheet value; the maker's site is gone, so unverified
+  clocked: selectable # sheet "Single and Clock" outputs; the same sheet row says Async pixel types - unverified
   driver:
     buffered: true
 power:

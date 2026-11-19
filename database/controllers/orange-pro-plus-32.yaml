@@ -4,8 +4,11 @@ creator:
   name: Winterlights India
   url: https://www.winterlights.in
   page: https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+vendors:
+  - name: Flipkart (Motify Innovations)
+    page: https://www.flipkart.com/winterlights-orange-pro-plus-32-artnet-controller/p/itmd1ca9064ee284
 notes: >-
-  Vendor lists 16 direct pixel ports plus 16 long-range ports on 4 RJ45 jacks (32 total in the name), so output count reflects direct ports only. Data-only outputs with no V+ pass-through; plays FPP sequences from microSD.
+  16 direct pixel ports plus 16 long-distance ports on 4 RJ45 jacks (the 32 in the name), up to 1500 pixels each - 48,000 in total. Data-only outputs with no V+ pass-through; the controller itself runs from a 5 V adapter. Plays FPP sequences from microSD.
 inputs:
   physical:
     Ethernet: true
@@ -16,14 +19,15 @@ inputs:
     - DDP
   standalone: true # plays FPP sequences from microSD
 outputs:
-  count: 16
+  count: 32 # 16 direct + 16 long-distance (4 RJ45 jacks to long-distance receiver boards)
   connector:
     ref: mtsb-combicon
   driver:
     buffered: true
-  clocked: false # async (Single and Clock pixel types, data-only)
-  auxiliary:
-    long-range: 16 # 16 long-range data ports on 4 RJ45 jacks
+  differential: true # long-distance ports need receiver boards
+  clocked: false # 3-wire (data, GND, V+) WS2811/WS2812/WS2813 pixels only
+  pixels:
+    max_per_output: 1500
   protocols:
     - WS2811
     - WS2812
@@ -31,6 +35,7 @@ outputs:
     - '1903'
 power:
   voltage:
+    min: 5 # controller runs from the included 5 V 2 A adapter
     max: 5
 data:
   storage:
@@ -58,9 +63,24 @@ software:
     - FPP
 sources:
   status:
-    url: https://www.winterlights.in/shop
+    - url: https://www.winterlights.in/shop
+      retrieved: '2026-11-18'
+      notes: rebuilt store lists only WL8v2, WL16v2, WL24v3 and WL48D1; Orange product page now 404
+    - url: https://www.winterlights.in/
+      retrieved: '2026-11-18'
+      notes: product page 404; the maker's shop now lists only the WL48D1, WL8v2, WL16v2 and WL24v3; Flipkart listing shows Notify Me
+  outputs.count:
+    url: https://www.flipkart.com/winterlights-orange-pro-plus-32-artnet-controller/p/itmd1ca9064ee284
     retrieved: '2026-11-18'
-    notes: 'rebuilt store lists only WL8v2, WL16v2, WL24v3 and WL48D1; Orange product page now 404'
+    notes: '"16 Direct pixel output ports and 16 long Distance Output ports (Clubbed into 4 Rj45 ports)"'
+  outputs.pixels.max_per_output:
+    url: https://www.flipkart.com/winterlights-orange-pro-plus-32-artnet-controller/p/itmd1ca9064ee284
+    retrieved: '2026-11-18'
+    notes: '"Each output port support up to 1500 pixels"; "A total of 48000 pixels can be controlled"'
+  outputs.clocked:
+    url: https://www.flipkart.com/winterlights-orange-pro-plus-32-artnet-controller/p/itmd1ca9064ee284
+    retrieved: '2026-11-18'
+    notes: supports 3-wire (Data, Gnd, V+) pixels; WS2811 / WS2812 / WS2813 - no clock line
   outputs.protocols:
     url: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
     retrieved: '2026-11-18'
@@ -70,6 +90,9 @@ sources:
     retrieved: '2026-11-18'
     notes: Controller Features
   power.voltage.max:
-    url: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
-    retrieved: '2026-11-18'
-    notes: "'(controller is powered by 5v only)'"
+    - url: https://web.archive.org/web/20260516170006/https://www.winterlights.in/product-page/orange-pro-plus-32-48000-pixel-controller
+      retrieved: '2026-11-18'
+      notes: "'(controller is powered by 5v only)'"
+    - url: https://www.flipkart.com/winterlights-orange-pro-plus-32-artnet-controller/p/itmd1ca9064ee284
+      retrieved: '2026-11-18'
+      notes: powered by 5V only (5V 2A adapter included); no +ve output port

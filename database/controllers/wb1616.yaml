@@ -4,6 +4,7 @@ release_year: 2022
 creator:
   name: Wally's Lights
   page: https://wallyslights.com/products/wallys-lights-wb1616-controller
+notes: BeagleBone Black cape running FPP, designed with Scott Hanson and sold as a kit with a BeagleBone Black and an FPP microSD card. 16 local fused ports plus 16 remote (long-range) ports on 4 RJ45 jacks for Universal Differential Receivers, and 2 DMX ports; up to 1400 pixels per port at 20 fps.
 inputs:
   physical:
     Ethernet: true # via host BeagleBone
@@ -17,14 +18,15 @@ inputs:
   standalone: true # plays from SD card
   requires_host: BeagleBone Black
 outputs:
-  count: 32
+  count: 32 # 16 local + 16 remote via 4 RJ45 jacks
   connector:
     ref: mtsb-combicon
+  differential: true # 16 remote ports drive up to 4 Universal Differential Receivers
   clocked: false # async pixel types
   auxiliary:
     DMX512: 2
   pixels:
-    max_total: 40000
+    max_per_output: 1400 # 800 at 40 fps
   protocols:
     - WS2811
 power:
@@ -37,6 +39,10 @@ dead_links:
   - url: https://wallyslights.com/products/wallys-lights-wb1616-controller
     archive: https://web.archive.org/web/20250805175734/https://wallyslights.com/products/wallys-lights-wb1616-controller
     checked: '2026-11-18'
+features:
+  - OLED display, 4 navigation buttons and a test button
+  - Voltage sensors and reverse polarity protection
+  - Header pins for a real-time clock; holes for GPIO inputs/outputs
 images:
   - file: wb1616.webp
     source: https://web.archive.org/web/20240421061419/https://wallyslights.com/products/wallys-lights-wb1616-controller
@@ -64,9 +70,20 @@ software:
     - FPP
 sources:
   status:
-    url: https://wallyslights.com/products/wallys-lights-wb1616-controller
+    - url: https://wallyslights.com/products/wallys-lights-wb1616-controller
+      retrieved: '2026-11-18'
+      notes: product page now 302s to the homepage and its Shopify .json is 404 (removed from catalog); last capture 2025-08-05
+    - url: https://wallyslights.com/search?q=wb1616
+      retrieved: '2026-11-18'
+      notes: product page 404; the shop search finds only WB1616 mounts. Last archived listing (2025-08-05) was sold out
+  outputs.differential:
+    url: https://web.archive.org/web/20250805175734/https://wallyslights.com/products/wallys-lights-wb1616-controller
     retrieved: '2026-11-18'
-    notes: 'product page now 302s to the homepage and its Shopify .json is 404 (removed from catalog); last capture 2025-08-05'
+    notes: '"16 Remote Ports (available through the 4 - RJ45 Jacks)"; "Connect up to 4 Universal Differential Receivers to extend the range of your data lines and add 16 more ports"'
+  outputs.pixels.max_per_output:
+    url: https://web.archive.org/web/20250805175734/https://wallyslights.com/products/wallys-lights-wb1616-controller
+    retrieved: '2026-11-18'
+    notes: '"up to 800 Pixels per port at 40fps and up to 1400 pixels per port at 20fps"; "capable of controlling over 40,000 pixels"'
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/wallyslights.xcontroller
       retrieved: '2026-11-18'

@@ -22,10 +22,11 @@ outputs:
   connector:
     ref: mtsb-combicon
   clocked: false # single-wire / async pixels
+  fuse: 5 A replaceable 1808 fuses (V4); resettable fuses (V3)
   auxiliary:
     GPIO: 7 # GPIO17, 32, 33, 34, 35, 36, 39 broken out for buttons/mics/sensors
   pixels:
-    max_total: 4800
+    max_total: 4800 # sheet value, not stated by the maker (see technical_notes)
   protocols:
     - WS2811
     - WS2812
@@ -34,7 +35,7 @@ outputs:
     - SM16825
 power:
   voltage:
-    min: 12 # V4 (current production); V3 (discontinued) was 5-24V
+    min: 12 # V4 (current production); V3 (no longer made) was 5-24V
     max: 48
 core:
   family: ESP32
@@ -65,6 +66,18 @@ software:
   works_with:
     - xLights
 sources:
+  power.voltage.max:
+    url: https://www.tindie.com/products/bong69/8-port-led-distro/
+    retrieved: '2026-11-18'
+    notes: '"Version 4 accepts input voltages of 12v to 48v"; "Version 3 accepts input voltage of 5v to 24v" and is no longer being made'
+  outputs.auxiliary.GPIO:
+    url: https://www.tindie.com/products/bong69/8-port-led-distro/
+    retrieved: '2026-11-18'
+    notes: GPIO17, 32, 33, 34, 35, 36 and 39 listed as available
+  outputs.fuse:
+    url: https://www.tindie.com/products/bong69/8-port-led-distro/
+    retrieved: '2026-11-18'
+    notes: V4 has 5 A replaceable 1808 fuses on LED power (8 included); V3 has resettable fuses; PTC fuse protects the ESP32
   status:
     url: https://www.tindie.com/products/bong69/8-port-led-distro
     retrieved: '2026-11-18'
@@ -93,5 +106,7 @@ sources:
     notes: Readme intro
 technical_notes:
   - Open hardware; design files and WLED/ESP32 firmware at https://github.com/bobko69/8PortLEDDistro
-  - 'Versions: V4 (current) accepts 12-48V; V3 (discontinued) accepted 5-24V'
+  - 'Versions: V4 (current) accepts 12-48V and drops 5V pixels; V3 (no longer made, remaining stock sold) accepted 5-24V'
+  - Over Ethernet the maker quotes up to 40 FPS with 400 LEDs per output; all 8 outputs run at the same pixel voltage
+  - USB-C is for programming only
 wled_compatible: true

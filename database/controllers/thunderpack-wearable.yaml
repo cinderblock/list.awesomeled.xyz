@@ -1,32 +1,38 @@
 name: ThunderPack Wearable
-status: active
+status: limited # Tindie listing live, but the seller is "taking a break" (not purchasable, 2026-11-18)
 release_year: 2020
 creator:
   name: Jeremy Gillick Labs
   page: https://www.tindie.com/stores/jeremy/
 vendors:
   - name: Tindie
-    page: https://www.tindie.com/stores/jeremy/
-notes: 1.4 - 2.3A output per PWM channel. RGB PWM and/or addressable LEDs.
+    page: https://www.tindie.com/products/jeremy/thunderpack-standard-18650/
+notes: Battery-powered STM32 microcontroller board, not a network pixel controller - 4 high-current PWM outputs (1.4-2.3A per channel) for analog RGB(W) LEDs, and 12 GPIOs that can drive addressable LEDs from Arduino or CircuitPython.
 inputs:
   physical:
     USB: true # USB bootloader for programming
-    GPIO: 12
-    buttons: true
+    GPIO: 12 # USART, I2C, SPI, USB ...
+    buttons: 2 # tactile on/off switch + programmable user button
   standalone: true # battery-powered, runs Arduino/CircuitPython firmware
 outputs:
-  count: 4 # high-power PWM MOSFET channels
+  count: 4 # high-power PWM MOSFET channels (non-addressable); addressable LEDs run from the GPIO pins
   connector: Solder
   current:
-    max: 2.3 # per high-power PWM channel
+    max: 2.3 # per high-power PWM channel (1.4 A on the compact version)
+  clocked: selectable # addressable LEDs on GPIO via NeoPixel (single-wire) or DotStar (data + clock) libraries
 power:
   current:
     max: 10
 core:
+  IC: STM32F411
   family: STM32
+  clock: 100000000
+data:
+  storage:
+    - type: SPI flash # GD25Q16 (16 Mbit), holds CircuitPython files
 features:
-  - Integrated 18650 lithium battery and charger
-  - 4 high-power PWM MOSFET outputs (1.4-2.3A each)
+  - Integrated 18650 lithium battery and 800 mA charger
+  - 4 high-power PWM MOSFET outputs (1.4-2.3A each), each with a PCB LED
   - Status LEDs
   - Runs Arduino or CircuitPython
 images:
@@ -46,6 +52,30 @@ software:
     - Arduino
     - CircuitPython
 sources:
+  creator:
+    url: https://www.tindie.com/products/jeremy/thunderpack-standard-18650/
+    retrieved: '2026-11-18'
+    notes: '"Designed by Jeremy Gillick Labs" (Oakland, CA) - the sheet''s "Gillici" is a typo'
+  status:
+    url: https://www.tindie.com/products/jeremy/thunderpack-standard-18650/
+    retrieved: '2026-11-18'
+    notes: '$40 listing, not retired; "This seller is taking a break"'
+  inputs.physical:
+    url: https://www.tindie.com/products/jeremy/thunderpack-standard-18650/
+    retrieved: '2026-11-18'
+    notes: USB bootloader, 12 additional GPIOs, on/off switch and user button - no Ethernet
+  outputs.count:
+    url: https://www.tindie.com/products/jeremy/thunderpack-standard-18650/
+    retrieved: '2026-11-18'
+    notes: 4 high-current PWM outputs (2.3A per channel) plus 12 GPIOs; no dedicated pixel outputs (the sheet's 17 is not stated anywhere)
+  data.storage:
+    url: https://hackaday.io/project/161054-thunder-pack
+    retrieved: '2026-11-18'
+    notes: 'Components: GD25Q16 SPI flash'
+  core.IC:
+    url: https://www.tindie.com/products/jeremy/thunderpack-standard-18650/
+    retrieved: '2026-11-18'
+    notes: 32-bit microcontroller running up to 100Mhz (STM32F411xx)
   software.firmware:
     url: https://github.com/jgillick/ThunderPack
     retrieved: '2026-11-18'

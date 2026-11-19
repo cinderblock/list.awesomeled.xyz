@@ -3,25 +3,27 @@ status: active
 creator:
   name: Electroconcept
   page: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
-notes: 6 switch inputs trigger pixel, DMX or WAV sound scenes. Programmed using Artrender.
+notes: 35 x 18 mm micro-SD player board, sold in one of three firmware modes chosen when ordering - WS2812 pixel programs (up to 8 universes, made with ArtRender), one DMX512 universe (Recorder V2 recordings) or WAV audio. 6 dry-contact inputs start programs. Programmed using Artrender.
 inputs:
   physical:
+    Trigger inputs: 6 # dry-contact (non-isolated) inputs select programs 1-6, plus an optional default program
     triggers: 6 # dry-contact solder pads
   standalone: true
 outputs:
   count: 1
-  connector: Plated Through Hole
-  clocked: false # async (single-wire) pixels
+  connector: Solder pads
+  clocked: false # WS2812 single-wire pixels
   auxiliary:
-    DMX512: 1
+    DMX512: 1 # DMX firmware version only (mode chosen at purchase)
   pixels:
-    max_per_output: 850
+    max_per_output: 1360 # 4080 WS2812 channels (8 universes)
   protocols:
     - WS2812
     - WS2811
 power:
   voltage:
-    max: 5
+    min: 5
+    max: 5 # DC +5 V, 20-70 mA
 data:
   storage:
     - type: microSD # "Micro SD player" per Electroconcept product page
@@ -45,9 +47,9 @@ software:
     - ArtRender
 sources:
   status:
-    url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
-    retrieved: '2026-11-18'
-    notes: '€25.00 TTC, En stock'
+    - url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+      retrieved: '2026-11-18'
+      notes: €25.00 TTC, En stock; in stock (SKU SD_PLAYER_TO), EUR 25.00 incl. VAT
   outputs.protocols:
     url: https://www.boutique-electroconcept.com/media/Productattachments//m/i/micro_player_sd.pdf
     retrieved: '2026-11-18'
@@ -57,9 +59,19 @@ sources:
     retrieved: '2026-11-18'
     notes: "Product page Details. The manual repeats it: files 'générés par ArtRender ou le Recoder V2'. Recorder V2 is an Electroconcept DMX recorder (hardware), not software."
   inputs.physical:
+    - url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+      retrieved: '2026-11-18'
+      notes: 5 V, DMX/data pads and 6 dry-contact inputs on a 35 × 18 mm board; no Ethernet; solder pads for 5 V in, DMX/digital signal out and 6 dry-contact inputs - no Ethernet
+  outputs.connector:
     url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
     retrieved: '2026-11-18'
-    notes: 5 V, DMX/data pads and 6 dry-contact inputs on a 35 × 18 mm board; no Ethernet
+    notes: '"Sortie WS2812 1 PAD a souder + GND"; DMX on 2 solder pads + GND'
+  outputs.pixels.max_per_output:
+    url: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html
+    retrieved: '2026-11-18'
+    notes: '"Canaux DMX: 512 en DMX, 4080 en WS2812"; WS2812 programs up to 8 universes - 1360 RGB pixels'
 technical_notes:
   - Pixel, DMX512, or WAV sound scene playback from SD card
   - Programmed using Artrender (https://www.boutique-electroconcept.com/informations/telechargements.html)
+  - WAV mode drives an 8 ohm speaker (or a resistor divider to a line input); 8-bit 8 kHz to 44.1 kHz WAV files
+  - A config file on the SD card sets the input mode and whether programs loop

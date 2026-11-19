@@ -4,12 +4,13 @@ release_year: 2022
 creator:
   name: Quindor / Intermittent Technology
   page: https://quinled.info/quinled-dig-octa/
-notes: ESP32, open to any software, often run with WLED
+notes: ESP32, open to any software, often run with WLED. A modular, pre-assembled system - the Brainboard-32-8L (ESP32, Ethernet, microSD, 8 level-shifted LED channels) stacks on a Power-5, Power-5HV, Power-7 or Power-7HC powerboard that fuses and distributes LED power (30-100 A, 5-48 V depending on the board).
 inputs:
   physical:
-    Ethernet: true
+    Ethernet: true # LAN8720A, 10/100
     Wi-Fi:
       - 2.4GHz
+    Button inputs: 2 # debounced button/switch terminals
     USB: USB-C
     buttons: 2
     triggers: 2
@@ -25,21 +26,27 @@ outputs:
   count: 8
   connector: 5mm or 7.62mm screw terminal
   driver:
-    buffered: true
+    buffered: true # level-shifted to 5.12 V
   clocked: selectable
   pixels:
-    max_total: 4096
+    max_total: 3000 # QuinLED's suggested maximum with ESPixelStick v4; ~2000 with WLED
 power:
   voltage:
+    min: 5
     max: 48 # 48 V only with the Power-5HV powerboard
   current:
-    max: 100
+    max: 100 # Power-7HC powerboard; Power-5 / Power-7 50 A, Power-5HV 30 A
 core:
+  IC: ESP32-WROOM-32UE # Brainboard-32-8L v2
   family: ESP32
 data:
   storage:
     - type: microSD
     - type: flash
+features:
+  - Pre-assembled (not a DIY kit)
+  - Dedicated relay output to switch LED power supplies
+  - Stackable powerboards with mixed voltages
 images:
   - file: quinled-dig-octa.webp
     source: https://shop.allnetchina.cn/products/quinled-dig-octa-brainboard-32-8l-v4
@@ -74,6 +81,10 @@ software:
     - Madrix
     - FPP
 sources:
+  outputs.pixels.max_total:
+    url: https://quinled.info/quinled-dig-octa-brainboard-32-8l-specifications-v2/
+    retrieved: '2026-11-18'
+    notes: 'Suggested handling capabilities: WLED ~2000 LEDs divided over the 8 output ports; ESPixelstick v4 ~3000'
   status:
     url: https://shop.allnetchina.cn/products/quinled-dig-octa-brainboard-32-8l-v4
     retrieved: '2026-11-18'
@@ -96,7 +107,19 @@ sources:
     url: https://dig-octa.info/
     retrieved: '2026-11-18'
   power.voltage.max:
+    - url: https://quinled.info/quinled-dig-octa/
+      retrieved: '2026-11-18'
+      notes: '''compatible with addressable 5v-48v* (*48v supported using the Power-5HV only)''; "addressable 5v-48v* (*48v supported using the Power-5HV only)"'
+  power.current.max:
     url: https://quinled.info/quinled-dig-octa/
     retrieved: '2026-11-18'
-    notes: "'compatible with addressable 5v-48v* (*48v supported using the Power-5HV only)'"
+    notes: Power-5 50 A (12 pluggable ports), Power-5HV 30 A, Power-7 50 A (16 screw terminals), Power-7HC 100 A (16 screw terminals)
+  inputs.physical:
+    url: https://quinled.info/quinled-dig-octa-brainboard-32-8l-specifications-v2/
+    retrieved: '2026-11-18'
+    notes: 'Wi-Fi with external antenna, onboard RJ45 10/100 Ethernet (LAN8720A), SPI microSD slot, 2 button/switch input terminals'
+  features:
+    url: https://quinled.info/pre-assembled-boards/
+    retrieved: '2026-11-18'
+    notes: the Dig-Octa system is listed among QuinLED's pre-assembled boards
 wled_compatible: true

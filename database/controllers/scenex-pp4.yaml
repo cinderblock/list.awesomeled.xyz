@@ -4,7 +4,7 @@ creator:
   name: German Light Products
   url: https://www.germanlightproducts.com
   page: https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
-notes: Internal PSU
+notes: Internal PSU. All-in-one Scenex Lighting pixel tape driver - 4 outputs on 4-pin XLR carry data and 5 V power from a built-in 5 V / 40 A supply (100-240 VAC input). Any output can take any share of the 2,040-pixel capacity.
 inputs:
   physical:
     Ethernet: true
@@ -20,8 +20,9 @@ outputs:
   clocked: selectable # supports both clocked and async pixels
   driver:
     buffered: true
+  fuse: data and power fused per output
   pixels:
-    max_per_output: 510 # 2040 total across 4 outputs
+    max_total: 2040 # unicast E1.31 or Art-Net (12 universes); 1,190 with multicast E1.31
   protocols:
     - LPD6803
     - LPD880x
@@ -37,9 +38,9 @@ outputs:
     - '16716'
 power:
   voltage:
-    max: 5
+    max: 5 # 5 V DC output of the built-in supply
   current:
-    max: 40
+    max: 40 # 5 V / 40 A output; mains input 100-240 VAC, 50/60 Hz
 datasheet:
   url: https://www.germanlightproducts.com/wp-content/uploads/2016/01/PP4-Controller-Operating-Manual_08_2015.pdf # user manual; has a Specifications section
 dead_links:
@@ -50,6 +51,10 @@ dead_links:
   - url: https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     archive: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     checked: '2026-11-18'
+features:
+  - Built-in web server for configuration and status; built-in test patterns
+  - 2 extra power injection ports
+  - 1U rackmount steel case with forced-air cooling
 images:
   - file: scenex-pp4.webp
     source: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
@@ -67,9 +72,24 @@ software:
     - Madrix
 sources:
   status:
-    url: https://www.germanlightproducts.com/product-category/scenex-lighting/
+    - url: https://www.germanlightproducts.com/product-category/scenex-lighting/
+      retrieved: '2026-11-18'
+      notes: whole Scenex Lighting category now 404 and absent from GLP product sitemap; PP4 page 404; dealer listing no longer available
+    - url: https://www.germanlightproducts.com/?s=PP4
+      retrieved: '2026-11-18'
+      notes: product page and Scenex category return 404 and a site search for PP4 finds nothing; last archived listing 2025-08-05
+  outputs.pixels.max_total:
+    url: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     retrieved: '2026-11-18'
-    notes: 'whole Scenex Lighting category now 404 and absent from GLP product sitemap; PP4 page 404; dealer listing no longer available'
+    notes: '"Control of up to 2,040 individual pixels using Unicast E1.31 or Art-Net, and 1,190 pixels using Multicast E1.31"; "Any output can drive any number of pixels ... up to the full capacity of the driver"'
+  outputs.clocked:
+    url: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
+    retrieved: '2026-11-18'
+    notes: 'Supported pixels: LPD6803, LPD880x, WS2801, TM180x, TLS3001, CYT3005, DMS9813, WS2811, 1903, 9813'
+  power.current.max:
+    url: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
+    retrieved: '2026-11-18'
+    notes: 'Power output: 5V DC / 40 Amp; power input: 100-240VAC, 50/60 Hz'
   outputs.protocols:
     url: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
     retrieved: '2026-11-18'
@@ -79,6 +99,6 @@ sources:
     retrieved: '2026-11-18'
     notes: Named as example E1.31 senders, not a formal support list - weak; drop if a stronger statement is required. Madrix -> pattern-drivers/madrix-5 (alias needed); LOR (Light-O-Rama) and LightShowPro not in DB.
   inputs.physical:
-    url: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
-    retrieved: '2026-11-18'
-    notes: wired Ethernet only
+    - url: https://web.archive.org/web/20250805041228/https://www.germanlightproducts.com/product/pp4-pixel-led-tape-drivers/
+      retrieved: '2026-11-18'
+      notes: wired Ethernet only; Ethernet only (sACN E1.31 / Art-Net); no Wi-Fi mentioned

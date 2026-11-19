@@ -4,7 +4,7 @@ creator:
   name: KulpLights, LLC
   url: https://kulplights.com
   page: https://kulplights.com/product/k4-pb/
-notes: PocketBeagle/PocketBeagle2 cape running FPP (networking via USB adapter on the host - Ethernet preferred, Wi-Fi works; FPP image on the host microSD). 4 eFused ports with current monitoring, pixel counting, and fuse alerts; each port drives 800+ pixels at 40FPS with power injection. 5V/12V selectable via jumpers.
+notes: PocketBeagle/PocketBeagle2 cape running FPP (networking via USB adapter on the host - Ethernet preferred, Wi-Fi works; FPP image on the host microSD). 4 eFused ports with current monitoring, pixel counting, and fuse alerts; each port drives 800+ pixels at 40FPS with power injection. One 5 V or 12 V terminal powers the board and all four ports (18 V absolute maximum).
 inputs:
   physical:
     USB: USB-A host # network only through a USB Ethernet or Wi-Fi adapter
@@ -19,12 +19,16 @@ inputs:
 outputs:
   count: 4
   pixels:
-    max_per_output: 1600
+    max_per_output: 1600 # sheet value (6400 / 4); Kulp quotes 800+ at 40 fps
   clocked: false
   connector:
     ref: mtsb-combicon
+    pins: 3
+    notes: 3.5 mm pitch pluggable, plugs included
   driver:
     buffered: true
+  current:
+    max: 5.2 # per-port eFuse trips at about 5.2 A and latches off
   auxiliary:
     DMX512: 1 # 3-pin UART header: one DMX universe or PixelNet/Renard/LOR
   protocols:
@@ -32,16 +36,18 @@ outputs:
     - WS2812
 power:
   voltage:
-    max: 12
+    min: 5
+    max: 12 # 18 V absolute maximum; 24 V supplies damage the board
   current:
     max: 20
 data:
   storage:
     - type: microSD # FPP image on the host microSD
 features:
-  - Per-port resettable eFuses with current monitoring and fuse alerts
+  - Per-port latching eFuses with current monitoring and fuse alerts (eFuse power distribution)
   - Pixel counting test pattern
   - Power injection per port
+  - 128x64 OLED with two buttons and a temperature sensor (rev v3.0.1); no RTC
 images:
   - file: k4-pb.webp
     source: https://kulplights.com/product/k4-pb/
@@ -67,9 +73,21 @@ software:
     - xLights
 sources:
   status:
-    url: https://kulplights.com/product/k4-pb/
+    - url: https://kulplights.com/product/k4-pb/
+      retrieved: '2026-11-18'
+      notes: In stock, board-only $55; in the shop, every variant in stock (board only $55)
+  outputs.current.max:
+    url: https://kulplights.com/manuals/boards/k4-pb/
     retrieved: '2026-11-18'
-    notes: 'In stock, board-only $55'
+    notes: eFuse per port, about 5.2 A, latching (revision v3.0.1)
+  power.voltage.max:
+    url: https://kulplights.com/manuals/boards/k4-pb/
+    retrieved: '2026-11-18'
+    notes: 1 terminal, 5 or 12 V DC (18 V maximum), powers the controller and all 4 ports
+  outputs.connector:
+    url: https://kulplights.com/manuals/boards/k4-pb/
+    retrieved: '2026-11-18'
+    notes: 4 (PT1-PT4), 3-pin 3.5 mm pluggable, plugs included
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
       retrieved: '2026-11-18'
@@ -92,4 +110,4 @@ sources:
 technical_notes:
   - 4 eFused ports, each driving 800+ pixels at 40FPS
   - 3-pin UART header for one DMX universe or PixelNet/Renard/LOR
-  - 5V/12V selectable via jumpers
+  - The current board adjusts itself for 5 V or 12 V; early (2020) boards used 5V/12V jumpers and plain fuses

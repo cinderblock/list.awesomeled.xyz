@@ -8,7 +8,7 @@ creator:
 vendors:
   - name: EspartStick
     page: https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
-notes: Raspberry Pi HAT (Pi 3B/4, Zero/Zero 2) running FPP 6+ with a separately sold FPP license key. OLED display and joystick; powers the Pi from the 12 V pixel supply. Listed as "M8 Port Pixel" in the original spreadsheet.
+notes: Raspberry Pi 3B+ or above HAT running FPP (Falcon Player) 6 or later, which needs an FPP license key (sold separately). Also works on a Pi Zero / Zero 2 with fewer pixels. A built-in buck converter powers the Pi from the 12 V pixel supply; OLED with joystick navigation. Sold as M8-PI; listed as "M8 Port Pixel" in the original spreadsheet.
 inputs:
   physical:
     Ethernet: true # via host Raspberry Pi
@@ -36,6 +36,9 @@ power:
     max: 12
   current:
     max: 30
+data:
+  storage:
+    - type: uSD # FPP image on the host Pi's microSD
 dead_links:
   - url: https://www.microcyb.com/index.html#!/M8-PI-Raspberry-Pi-8-Port-Pixel-controller/p/471859299/category=0
     archive: https://web.archive.org/web/20250621084308/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
@@ -71,9 +74,20 @@ software:
     - xLights
 sources:
   status:
-    url: https://microcyb.com/shop.php?category=LED+pixel+Controller
+    - url: https://microcyb.com/shop.php?category=LED+pixel+Controller
+      retrieved: '2026-11-18'
+      notes: Microcyb's Controllers category lists only ShowSpark models; M8-PI no longer offered
+    - url: https://microcyb.com/
+      retrieved: '2026-11-18'
+      notes: the M8-PI is not in the current Microcyb shop; its Ecwid store page shows only a not-available notice (archived 2026-07-17)
+  outputs.pixels.max_per_output:
+    url: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
     retrieved: '2026-11-18'
-    notes: "Microcyb's Controllers category lists only ShowSpark models; M8-PI no longer offered"
+    notes: '"up to 1600 pixel per port at 20 FPS sequences, the M8-Pi is able to handle up to 12800 pixels or 6400 at 40 FPS"'
+  data.storage:
+    url: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
+    retrieved: '2026-11-18'
+    notes: FPP runs on the Raspberry Pi (not included), from its SD card
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/microcyb.xcontroller
     retrieved: '2026-11-18'

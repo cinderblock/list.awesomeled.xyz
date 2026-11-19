@@ -3,10 +3,10 @@ status: active
 creator:
   name: Pixblasters
   page: https://pixblasters.com/products/ms1-controller/
-notes: Connects to a PC or Mac (or other device) over HDMI and acts like a monitor. Outputs a selected section of the screen to a matrix of LED strips or to prefab LED panels at up to 60 FPS. Up to 48 controllers can be daisy-chained via Ethernet to drive up to 786,432 pixels. Strip power must be supplied by external power sources; 5V and 12V both work.
+notes: Connects to a PC or Mac (or other device) over HDMI and acts like a monitor. Outputs a selected section of the screen to a matrix of LED strips or to prefab LED panels at up to 60 FPS. Up to 48 controllers can be chained over ordinary Ethernet (UTP) cables as master and slaves; Pixblasters quotes more than 200,000 synchronized LEDs for a chain. Strip power must be supplied by external power sources; 5V and 12V both work.
 inputs:
   physical:
-    HDMI: true
+    HDMI: true # DVI-compatible video input, up to 720p at 60 Hz
     USB: USB-C # configuration and updates
   standalone: false
 outputs:
@@ -14,9 +14,11 @@ outputs:
   connector: Push-in terminal blocks (8-pin)
   clocked: selectable
   pixels:
-    max_per_output: 512
+    max_per_output: 512 # 3-wire mode; 4-wire mode uses 16 data + 16 clock outputs at 1024 LEDs per data output
   driver:
     buffered: false
+  auxiliary:
+    Daisy-chain: 1 # high-speed video output (HSO) over UTP cable to the next MS1
   protocols:
     - WS2811
     - WS2812
@@ -30,6 +32,8 @@ outputs:
 power:
   voltage:
     max: 5
+  current:
+    max: 0.6 # controller only; LEDs need separate supplies
 datasheet:
   url: https://pixblasters.com/wp-content/uploads/2024/12/Pixblasters_MS1_ds_v2.0.pdf
 images:
@@ -44,18 +48,41 @@ price_source:
   vendor: Crowd Supply
 sources:
   status:
-    url: https://pixblasters.com/how-to-order/
-    retrieved: '2026-11-18'
-    notes: 'orderable from Mouser (CS-PIXBLASTER-01) or direct; Crowd Supply "In stock" $375 (May 2026 capture)'
+    - url: https://pixblasters.com/how-to-order/
+      retrieved: '2026-11-18'
+      notes: orderable from Mouser (CS-PIXBLASTER-01) or direct; Crowd Supply "In stock" $375 (May 2026 capture)
+    - url: https://pixblasters.com/products/ms1-controller/
+      retrieved: '2026-11-18'
+      notes: orders through info@pixblasters.com or Crowd Supply / Mouser (CS-PIXBLASTER-01)
   outputs.protocols:
     url: https://pixblasters.com/wp-content/uploads/2024/07/Pixblasters-MS1-Users-Guide_v2.10.pdf
     retrieved: '2026-11-18'
     notes: "Maker User's Guide v2.10, feature list (both lines end with an ellipsis: 'not limited to')."
   outputs.connector:
+    - url: https://pixblasters.com/wp-content/uploads/2024/07/Pixblasters-MS1-Users-Guide_v2.10.pdf
+      retrieved: '2026-11-18'
+      notes: push-in (snap-action) terminals CN7-CN14, 8 pins each; "Push-in strip power and signal connectors enable easy wiring without soldering"
+  outputs.auxiliary:
     url: https://pixblasters.com/wp-content/uploads/2024/07/Pixblasters-MS1-Users-Guide_v2.10.pdf
     retrieved: '2026-11-18'
-    notes: push-in (snap-action) terminals CN7-CN14, 8 pins each
-  inputs.physical:
-    url: https://pixblasters.com/wp-content/uploads/2024/12/Pixblasters_MS1_ds_v2.0.pdf
+    notes: 'Up to 48 controllers chained; video and control links use common UTP cables (Ethernet); the low-speed control link is "not supported; future expansion"'
+  power.current.max:
+    url: https://pixblasters.com/products/ms1-controller/
     retrieved: '2026-11-18'
-    notes: no SD card in the datasheet or 94-page user's guide; configured over USB
+    notes: 'Power: 5 V DC, 0.6 A'
+  inputs.physical:
+    - url: https://pixblasters.com/wp-content/uploads/2024/12/Pixblasters_MS1_ds_v2.0.pdf
+      retrieved: '2026-11-18'
+      notes: no SD card in the datasheet or 94-page user's guide; configured over USB
+    - url: https://pixblasters.com/wp-content/uploads/2024/07/Pixblasters-MS1-Users-Guide_v2.10.pdf
+      retrieved: '2026-11-18'
+      notes: DVI (HDMI connector) video input; configuration through a menu on a PC over the USB serial cable; the display configuration is stored in the on-board microcontroller - no SD card
+  outputs.pixels.max_per_output:
+    url: https://pixblasters.com/wp-content/uploads/2024/07/Pixblasters-MS1-Users-Guide_v2.10.pdf
+    retrieved: '2026-11-18'
+    notes: '"32 LED digital outputs: max. 512 LEDs per output in 3-wire mode and max. 1024 LEDs per output in 4-wire mode"; 16,384 RGB LEDs per controller'
+technical_notes:
+  - AMD Spartan-6 XC6LX9 FPGA; Microchip PIC18F26J50 microcontroller stores the configuration and handles updates
+  - '3-wire LEDs: WS2811, WS2812, WS2812B, WS2815, SK6812, GS8208B; 4-wire LEDs: APA102, HD107S, SK9822'
+  - Master or slave mode set by on-board DIP switches
+  - The product page's "16 outputs, 512 smart pixels per output" (8,192 LEDs) disagrees with the datasheet and user guide (32 outputs, 16,384 LEDs)

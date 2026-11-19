@@ -4,7 +4,7 @@ creator:
   name: PixelController, LLC
   url: https://pixelcontroller.com
   page: https://pixelcontroller.com/store/discontinued-products/52-f16v2-beta-board.html
-notes: 48 differential pixel outputs via remote receiver boards (4 outputs each).
+notes: The original (F16V3-generation) Falcon F48 - 48 differential outputs and no local ports, driving up to 12 Falcon differential receiver boards (4 outputs each). Up to 16,384 pixels from 96 universes of E1.31 or Art-Net. Later models are the F48V4 and F48V5.
 inputs:
   physical:
     Ethernet: 2
@@ -21,13 +21,14 @@ inputs:
 outputs:
   count: 48
   connector:
-    notes: to differential SmartReceiver boards
+    notes: to Falcon differential receiver boards (up to 12, 4 outputs each)
     ref: rj45
   differential: true
   driver:
     buffered: true
   pixels:
-    max_per_output: 1022 # 1022 @ 20fps, 680 @ 40fps
+    max_per_output: 1024 # per-port maxima of the three 16-port groups must add up to 1024 (e.g. 512/256/256)
+    max_total: 16384
   clocked: false
   auxiliary:
     DMX512: 4 # 3 on RJ-45 + 1 on a 3-pin connector
@@ -89,9 +90,20 @@ software:
     - HLS
 sources:
   status:
-    url: https://pixelcontroller.com/store/19-discontinued-products
+    - url: https://pixelcontroller.com/store/19-discontinued-products
+      retrieved: '2026-11-18'
+      notes: F48 Differential Controller listed under Discontinued Products, Out-of-Stock
+    - url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
+      retrieved: '2026-11-18'
+      notes: listed under Discontinued Products, out of stock (last price USD 255)
+  outputs.pixels.max_total:
+    url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
     retrieved: '2026-11-18'
-    notes: 'F48 Differential Controller listed under Discontinued Products, Out-of-Stock'
+    notes: '"Can drive up to 16384 pixels"; 96 universes / 49,152 channels'
+  outputs.pixels.max_per_output:
+    url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
+    retrieved: '2026-11-18'
+    notes: '"All three groups share a portion of a 1024 max pixels per port" (ports 1-16, 17-32, 33-48)'
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
       retrieved: '2026-11-18'
@@ -104,6 +116,15 @@ sources:
     retrieved: '2026-11-18'
     notes: 'This database entry is the original F48 (store product 52: 5V-powered, 96 universes, fw 2.x), not the later F48V4/F48V5.'
   outputs.auxiliary.DMX512:
+    - url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
+      retrieved: '2026-11-18'
+      notes: "'DMX/Renard/Pixelnet Outputs 4 - Dedicated RS-485 outputs'; 4 dedicated RS-485 outputs for DMX/Renard/Pixelnet"
+  inputs.physical:
     url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
     retrieved: '2026-11-18'
-    notes: "'DMX/Renard/Pixelnet Outputs 4 - Dedicated RS-485 outputs'"
+    notes: 2-port switch to daisy-chain controllers; wireless ESP-07 module
+technical_notes:
+  - 'Pixel ports form three groups of 16 whose per-port maxima must add up to 1024 (e.g. 512 / 256 / 256): 16,384 pixels in total'
+  - Any of the 49,152 received channels can be a port's start address
+  - 'String types: WS2811/WS2812, TM1803/TM1804/TM1809/TM1812, SM16715, INK1003, LX1203'
+  - Runs from a 5 V, 3 A supply; a power output port feeds switches

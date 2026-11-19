@@ -4,6 +4,7 @@ creator:
   name: ENTTEC
   url: https://www.enttec.com
   page: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
+notes: 1U rack Ethernet-to-PLINK converter (SKU 70060) - 24 RJ45 ports each carry 2 universes over Cat5e/Cat6 (up to 300 m) to PLINK INJECTORs, which drive the pixels. Succeeded by the Pixelator Mini.
 inputs:
   physical:
     Ethernet: true # gigabit
@@ -22,6 +23,8 @@ outputs:
   driver:
     buffered: true
   clocked: false # async pixel support
+  pixels:
+    max_per_output: 340 # 2 universes per PLINK port; 256 RGBW
   protocols:
     - WS2811
     - WS2812
@@ -42,6 +45,10 @@ outputs:
     - SPXL
 datasheet:
   url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
+  sources:
+    - url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_USER_MANUAL.pdf
+      host: manufacturer
+      notes: Rev C user manual
 dead_links:
   - url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
     archive: https://web.archive.org/web/20220629132059/https://www.enttec.co.uk/product/controls/addressable-led-pixel-control/24-port-ethernet-pixel-controller/
@@ -49,7 +56,8 @@ dead_links:
     notes: Wayback has no capture of this exact URL; the archive is the same product's UK store page at its later path
 features:
   - Proprietary PLINK protocol over Cat5e/Cat6 up to 300m to PLINK injectors
-  - Onboard storage / standalone playback
+  - DMX Generator with snapshot capture (static looks without a live input) and switchable profiles
+  - Clock module and ArtSync keep all 24 outputs in sync
 images:
   - file: pixelator.webp
     source: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
@@ -69,9 +77,12 @@ software:
     - xLights
 sources:
   status:
-    url: https://www.enttec.com/?s=pixelator&post_type=product
-    retrieved: '2026-11-18'
-    notes: "gone from ENTTEC's catalog; product search lists only Pixelator Mini and Mini Mk2"
+    - url: https://www.enttec.com/?s=pixelator&post_type=product
+      retrieved: '2026-11-18'
+      notes: gone from ENTTEC's catalog; product search lists only Pixelator Mini and Mini Mk2
+    - url: https://www.enttec.com/sku/70060
+      retrieved: '2026-11-18'
+      notes: the 70060 SKU link now redirects to the Pixelator Mini page; ENTTEC's comparison lists only DIN PIXIE, OCTO and Pixelator Mini models
   outputs.protocols:
     url: https://web.archive.org/web/20240813084918/https://www.enttec.com/support/supported-led-pixel-protocols/
     retrieved: '2026-11-18'
@@ -81,8 +92,19 @@ sources:
     retrieved: '2026-11-18'
     notes: Box contents of the Rev C datasheet (ELM promo 'implemented after SN#0050C2084699 (August 2022)')
   inputs.physical:
+    - url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
+      retrieved: '2026-11-18'
+      notes: "'24* PLINK Output (RJ-45) / 1* LAN port (RJ45)'; no Wi-Fi; Connectors: 24 PLINK outputs (RJ45), 1 LAN port (RJ45), RS232 and 2 USB ports unused - no Wi-Fi"
+  inputs.protocols:
     url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
     retrieved: '2026-11-18'
-    notes: "'24* PLINK Output (RJ-45) / 1* LAN port (RJ45)'; no Wi-Fi"
+    notes: 'Input protocol: Art-Net, sACN, KiNet, ESP (KiNet input only per the manual)'
+  outputs.pixels.max_per_output:
+    url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
+    retrieved: '2026-11-18'
+    notes: 2 universes per PLINK output - up to 340 RGB or 256 RGBW pixels per output; 24,576 channels (8,192 RGB pixels) in total
 technical_notes:
   - Controls up to 8192 RGB pixels (24,576 channels) across 24 PLINK ports
+  - 85-264 V AC, 20 W, passive cooling, indoor use only; 40 fps per port
+  - The user manual describes no show recording or playback storage
+  - 'Revisions: Rev A no longer supported; Rev B added RS232 profile triggering; Rev C changed the operating system and dropped RS232'

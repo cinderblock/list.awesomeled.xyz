@@ -1,10 +1,10 @@
 name: PB16
-status: unknown
+status: active # open-source design, repository still maintained
 creator:
   name: computergeek1507
   url: https://github.com/computergeek1507/PB_16
   page: http://doityourselfchristmas.com/forums/showthread.php?53296-FPP-PB16-Pixel-Controller
-notes: Open source DIY FPP pixel controller cape for the PocketBeagle.
+notes: Open source (CERN-OHL-S) DIY FPP pixel controller by Scott Hanson, built around a PocketBeagle (the BeagleBone Black version is the BBB 16). 16 fused WS2811 ports plus an expansion header for 16 more, 2 DMX serial outputs, and a USB port for Ethernet, Wi-Fi or audio adapters.
 inputs:
   physical:
     USB: USB-A host # network only through a USB Ethernet or Wi-Fi adapter
@@ -14,7 +14,7 @@ inputs:
     - sACN
     - Art-Net
     - DDP
-  standalone: true # runs Falcon Player (FPP) on the BeagleBone
+  standalone: true # runs Falcon Player (FPP) on the PocketBeagle
   requires_host: PocketBeagle
 outputs:
   count: 32 # 16 onboard plus 16 via expansion header
@@ -23,17 +23,19 @@ outputs:
   driver:
     buffered: true
   clocked: false # async WS2811-style pixels
+  current:
+    max: 5 # 5 A mini-blade fuse per output
+  fuse: 5 A mini blade per output (F1-F16)
   auxiliary:
     DMX512: 2
   pixels:
-    max_total: 22400
+    max_per_output: 1400 # at 20 fps (the README says 1300); 700 at 40 fps
   protocols:
     - WS2811
 power:
   voltage:
+    min: 5
     max: 24
-  current:
-    max: 40
 data:
   storage:
     - type: microSD
@@ -61,6 +63,26 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://github.com/computergeek1507/PB_16
+    retrieved: '2026-11-18'
+    notes: open hardware design files; repository last pushed 2026-10-05
+  notes:
+    url: https://github.com/computergeek1507/PB_16
+    retrieved: '2026-11-18'
+    notes: 'Readme: PB 16v1 "Original Pocketbeagle Version", PB 16v2 SMD PocketBeagle version; BBB 16v2 is the BeagleBone version'
+  outputs.pixels.max_per_output:
+    url: https://github.com/computergeek1507/PB_16/raw/master/PB_16v1/FPP%20PB16%20Pixel%20Controller%20Manual%20and%20Assembly%20Guide.pdf
+    retrieved: '2026-11-18'
+    notes: '"Each output can run 700 pixels at 40 fps and 1400 pixels at 20 fps (with power injection)"; the repository readme says 1300 at 20 FPS'
+  outputs.current.max:
+    url: https://github.com/computergeek1507/PB_16/raw/master/PB_16v1/FPP%20PB16%20Pixel%20Controller%20Manual%20and%20Assembly%20Guide.pdf
+    retrieved: '2026-11-18'
+    notes: 'F1-F16: 5A pixel output fuses; F17: 2A PocketBeagle power fuse; F18: 5A DMX V_Out fuse - no input current rating is given'
+  power.voltage.max:
+    url: https://github.com/computergeek1507/PB_16
+    retrieved: '2026-11-18'
+    notes: 5v - 24v Vin support
   software.firmware:
     - url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
       retrieved: '2026-11-18'
@@ -80,3 +102,8 @@ sources:
     url: https://github.com/computergeek1507/PB_16
     retrieved: '2026-11-18'
     notes: "Repository readme. The BeagleBone versions are separate boards ('BBB 16v2': 'The BBB 16v2 is a BeagleBone Version ...')."
+technical_notes:
+  - 'Two supply inputs: J17 feeds pixel outputs 1-8 and the DMX VOUT, J18 feeds outputs 9-16 and the controller; a jumper sets the regulator for 5 V or 12/24 V pixels'
+  - 'Fuses: 5 A per pixel output, 2 A for the PocketBeagle supply, 5 A for the powered DMX output; the docs give no total current rating'
+  - 'DMX: PB 16v1 has two RJ45 serial outputs (DMX/Renard and DMX/LOR); PB 16v2 has one remote differential RJ45 port and one DMX/LOR RJ45'
+  - OLED display header, real-time-clock header and a 2-pin GPIO header for a button or relay

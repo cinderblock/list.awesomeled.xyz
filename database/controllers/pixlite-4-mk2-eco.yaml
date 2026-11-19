@@ -92,3 +92,5 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'
     notes: "Rows ticked in the 'PixLite Mk2' column of Advatek's glossary table (97 rows"
+technical_notes:
+  - Advatek's "PixLite 4 Mk2 ECO User Manual" (V210222, hardware rev 1.0) identifies the ECO board by a silver "ECO" sticker next to the PixLite 4 Mk2 silkscreen; its capacity of 16 universes (2,720 RGB pixels) compares with 24 universes on the standard PixLite 4 Mk2 (manual seen only through search excerpts - manuals.online blocks automated access)

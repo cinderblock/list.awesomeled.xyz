@@ -1,5 +1,5 @@
 name: Lightkraken
-status: active
+status: limited # Tindie listing out of stock (notify list); lightkraken.net returned 502 on 2026-11-18
 creator:
   name: Obtainium Consulting
   url: https://www.lightkraken.net
@@ -25,10 +25,10 @@ outputs:
   driver:
     buffered: true
   current:
-    max: 5
+    max: 10 # at 5.4 V (54 W); 5.8 A at 12 V, 3 A at 23.5 V (70 W)
   clocked: selectable # async (e.g. WS2812) and clocked (e.g. APA102) types supported
   pixels:
-    max_per_output: 1020
+    max_per_output: 1020 # 5 universes
   protocols:
     - WS2812
     - SK6812
@@ -70,6 +70,25 @@ price_source:
   url: https://www.tindie.com/products/tinicuro/lightkraken/
   vendor: Obtainium Consulting (Tindie)
 sources:
+  status:
+    url: https://www.tindie.com/products/tinicuro/lightkraken/
+    retrieved: '2026-11-18'
+    notes: $69, Out of Stock - "Sign up to get notified when this product is back in stock"
+  outputs.clocked:
+    - url: https://www.tindie.com/products/tinicuro/lightkraken/
+      retrieved: '2026-11-18'
+      notes: '"Supports most common programmable strips (WS2812b, APA102 etc.)"'
+    - url: https://github.com/tinic/lightkraken
+      retrieved: '2026-11-18'
+      notes: 'firmware strip.h output types: WS2812, SK6812, TM1804, UCS1904, GS8208, APA102, APA107, P9813, SK9822, HD107S, LPD8806, TM1829, WS2816, WS2801, HD108'
+  outputs.pixels.max_per_output:
+    url: https://www.tindie.com/products/tinicuro/lightkraken/
+    retrieved: '2026-11-18'
+    notes: '"up to 5 universes per output. For RGB strips that means up to 1020 LEDs per output"; realistically about 1 universe (~256 LEDs) at full brightness'
+  outputs.current.max:
+    url: https://www.tindie.com/products/tinicuro/lightkraken/
+    retrieved: '2026-11-18'
+    notes: 'Output power modes: 5.4V @ 10A (54W), 12V @ 5.8A (70W), 23.5V @ 3A (70W)'
   outputs.protocols:
     url: https://github.com/tinic/lightkraken-ui/blob/master/src/App.vue
     retrieved: '2026-11-18'
@@ -81,3 +100,5 @@ sources:
 technical_notes:
   - GigaDevice GD32F107RCT6 Cortex-M3 microcontroller
   - Supports WS2812, SK6812, TM1804, UCS1904, GS8208, APA102, APA107, P9813, SK9822 and analog RGB(W) via 14-bit PWM
+  - Also runs from 802.3bt Type 3 (50 W), 802.3at (25 W) and 802.3af (12.5 W) PoE; a fan is advised above 25 W
+  - Open-source firmware, upgradable over the network

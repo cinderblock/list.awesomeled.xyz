@@ -1,11 +1,11 @@
 name: Angio 8
-status: active
+status: limited # sold out on the chroma.tech shop (2026-11-18)
 release_year: 2022
 creator:
   name: chroma.tech
   url: https://chroma.tech
   page: https://shop.chroma.tech/products/angio-8
-notes: Bulk fleet manager.
+notes: Bulk fleet manager. FCC-certified 8-output Art-Net multiplexer for pixels driven by third-party software (Madrix, LED Lab, Resolume ...); sACN / E1.31 and Open Pixel Control are announced for future software releases.
 inputs:
   physical:
     Ethernet: true # 100 Mbps
@@ -27,9 +27,10 @@ outputs:
   clocked: selectable # single and clock pixels
 power:
   voltage:
+    min: 5
     max: 24
   current:
-    max: 24
+    max: 24 # two inputs, 12 A each, each feeding 4 outputs
   connector: 2-pin Phoenix Screw 5.08mm
 case:
   waterproof: false
@@ -61,11 +62,23 @@ sources:
     retrieved: '2026-11-18'
     notes: Read via Wayback capture 2026-06-06 (https://web.archive.org/web/20260606050521/https://shop.chroma.tech/products/angio-8).
   status:
-    url: https://shop.chroma.tech/products/angio-8
-    retrieved: '2026-11-18'
-    notes: listed and available (regular $199, sale $169)
+    - url: https://shop.chroma.tech/products/angio-8
+      retrieved: '2026-11-18'
+      notes: listed and available (regular $199, sale $169); Sold out; USD 169 (regular 199)
   inputs.protocols:
+    - url: https://shop.chroma.tech/products/angio-8
+      retrieved: '2026-11-18'
+      notes: '''ArtNet (sACN / E1.31, Open Pixel Control will be supported in future software releases)''; "Streaming protocols: ArtNet (sACN / E1.31, Open Pixel Control will be supported in future software releases)"'
+  outputs.connector:
     url: https://shop.chroma.tech/products/angio-8
     retrieved: '2026-11-18'
-    notes: "'ArtNet (sACN / E1.31, Open Pixel Control will be supported in future software releases)'"
+    notes: 'Output Connectors: 4-pin 3.81mm Phoenix screw terminal connectors; Power Input Connectors: 2-pin 5.08mm'
+  outputs.pixels.max_per_output:
+    url: https://shop.chroma.tech/products/angio-8
+    retrieved: '2026-11-18'
+    notes: 'Max pixels per channel: 1020'
+  power.current.max:
+    url: https://shop.chroma.tech/products/angio-8
+    retrieved: '2026-11-18'
+    notes: '"Input power draw Max: 12A for each of the 2 power inputs, each input drives 4 output"; voltage 5v-24v'
 wled_compatible: false

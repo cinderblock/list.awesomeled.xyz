@@ -3,7 +3,7 @@ status: active
 creator:
   name: Kurt Controllers
   page: https://kurtcontrollers.com/?product=pb-complete-controller
-notes: 16 WS281x pixel ports, 16 4A DC solid-state outputs, 16 servo motor outputs, 8 trigger inputs, and a female USB type-A 2.0 OTG.
+notes: PocketBeagle-based FPP show controller, sold with the PocketBeagle and a 32 GB microSD card pre-flashed with FPP 5.5 (FPP 6+ needs a license key). 16 WS281x pixel ports, 16 4A DC solid-state outputs, 16 servo motor outputs, 2 DMX512 universes, 8 trigger inputs, and a female USB type-A 2.0 OTG port for audio and network adapters.
 inputs:
   physical:
     USB: USB-A host # network only through a USB Ethernet or Wi-Fi adapter
@@ -20,6 +20,7 @@ outputs:
     ref: mtsb-combicon
   driver:
     buffered: true
+  fuse: 5 A per port
   pixels:
     max_per_output: 1400
   clocked: false
@@ -31,6 +32,7 @@ outputs:
     - WS2811
 power:
   voltage:
+    min: 5
     max: 24
 data:
   storage:
@@ -81,9 +83,21 @@ sources:
     retrieved: '2026-11-18'
     notes: The PocketBeagle is included with the controller ('The controller comes with pluggable screw terminals, fuses, PocketBeagle SBC, and SanDisk Ultra 32GB micro SD card'), so this is the board it runs on rather than an extra purchase
   status:
+    - url: https://kurtcontrollers.com/?product=pb-complete-controller
+      retrieved: '2026-11-18'
+      notes: '"In stock", $195.00; in stock at USD 195'
+  outputs.auxiliary:
     url: https://kurtcontrollers.com/?product=pb-complete-controller
     retrieved: '2026-11-18'
-    notes: '"In stock", $195.00'
+    notes: '"16 WS28xx pixel ports, 16 4A DC solid-state outputs, 16 servo motor outputs, 2 universes of DMX 512, 8 trigger inputs" - the trigger inputs are inputs, not outputs'
+  outputs.fuse:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: '"Each voltage input screw terminal is rated for 30A. Each port comes fused at 5A."'
+  power.voltage.max:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: 5 voltage inputs, each 5-24 V
   inputs.protocols:
     url: https://kurtcontrollers.com/?product=pb-complete-controller
     retrieved: '2026-11-18'
@@ -95,3 +109,5 @@ sources:
 technical_notes:
   - 16 x 4A DC solid-state outputs
   - 16 x servo motor outputs
+  - 'Five 5-24 V supply inputs, each terminal rated 30 A: pixel ports 1-8 + controller, pixel ports 9-16, DC ports 17-24, DC ports 25-32, servo power'
+  - 'xLights (older versions): Vendor FPP, Model PB16, Variant No Expansion'

@@ -3,7 +3,7 @@ status: active
 creator:
   name: KulpLights, LLC
   page: https://kulplights.com/product/k2-pi0/
-notes: Raspberry Pi Zero cape running FPP (Pi Zero W/2W recommended; Wi-Fi via the Pi - the Zero has no Ethernet port). 2 eFuse-protected ports, up to 800 pixels each (with power injection) at 40FPS, 6A per port, 5-24V input powers both cape and Pi. Small GPIO/i2c header; no OLED, buttons, or RTC.
+notes: Raspberry Pi Zero hat running FPP, made for the Pi Zero 2 W (a Zero W works; on a 3 B+/4/5 it is held only by the GPIO header). Network is the Pi's Wi-Fi - no Ethernet, DMX, display, buttons or RTC. 2 eFused ports with current monitoring, up to 1600 pixels per string (about 800 at 40 fps). One 5-24 V terminal powers the Pi and both ports.
 inputs:
   physical:
     Wi-Fi:
@@ -20,12 +20,14 @@ outputs:
   count: 2
   connector:
     ref: mtsb-combicon
+    pins: 3
+    notes: 3.5 mm pitch pluggable, plugs included
   pixels:
-    max_per_output: 800
+    max_per_output: 1600 # about 800 at 40 fps
   current:
-    max: 6
+    max: 6 # per-port eFuse trips at about 6 A and latches off
   auxiliary:
-    I2C: true # small GPIO/i2c header
+    I2C: true # 2x5 header: 3.3 V, GND, I2C bus and five Pi GPIO pins
   protocols:
     - WS2811
     - WS2812
@@ -37,7 +39,8 @@ data:
   storage:
     - type: microSD
 features:
-  - Per-output eFuse protection
+  - Per-port latching eFuses (about 6 A) with current monitoring and FPP port-status alerts
+  - Port power is switched off when no output is needed
 images:
   - file: k2-pi0.webp
     source: https://kulplights.com/product/k2-pi0/
@@ -82,9 +85,25 @@ software:
     - xLights
 sources:
   status:
-    url: https://kulplights.com/product/k2-pi0/
+    - url: https://kulplights.com/product/k2-pi0/
+      retrieved: '2026-11-18'
+      notes: In stock, board-only $28; listed in the shop; board-only variant in stock
+  outputs.pixels.max_per_output:
+    url: https://kulplights.com/manuals/boards/k2-pi0/
     retrieved: '2026-11-18'
-    notes: 'In stock, board-only $28'
+    notes: 'Specifications: "Pixels per string: up to 1600; about 800 at 40 fps" (the product page quotes the 800 at 40 FPS figure)'
+  outputs.current.max:
+    url: https://kulplights.com/manuals/boards/k2-pi0/
+    retrieved: '2026-11-18'
+    notes: eFuse per port, about 6 A, latching
+  outputs.connector:
+    url: https://kulplights.com/manuals/boards/k2-pi0/
+    retrieved: '2026-11-18'
+    notes: 2 (PT1, PT2), 3-pin 3.5 mm pluggable, plugs included
+  power.voltage.max:
+    url: https://kulplights.com/manuals/boards/k2-pi0/
+    retrieved: '2026-11-18'
+    notes: 1 terminal, 5-24 V DC, powers the Pi and both ports
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
       retrieved: '2026-11-18'
