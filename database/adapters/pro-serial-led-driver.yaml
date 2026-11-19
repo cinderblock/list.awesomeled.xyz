@@ -1,13 +1,14 @@
 name: Pro Serial LED Driver
 creator: ElectroMage
 outputs:
-  max_channels: 8
-  pixel_types: Single (8) or Clocked (6)
-  connectors: Phoenix Screw
-  description: Both
+  count: 8
+  clocked: selectable # 8 single-wire or 6 clocked outputs
+  connector: Phoenix Screw
 power:
-  voltage: 12V
-  current: 15A
+  voltage:
+    max: 12
+  current:
+    max: 15
 diy_or_ots: OTS
 links:
   product: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/

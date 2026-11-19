@@ -1,9 +1,10 @@
 name: ESP Pixnode
 outputs:
-  max_channels: 6
-  pixel_types: Single
+  count: 6
+  clocked: false
 power:
-  voltage: 5V
+  voltage:
+    max: 5
 links:
   product: https://jboards.ecwid.com/ESPixNode-p127558674
 parent: NodeMCU (ESP8266)

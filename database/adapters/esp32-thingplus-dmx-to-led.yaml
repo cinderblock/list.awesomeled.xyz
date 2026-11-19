@@ -6,11 +6,11 @@ inputs:
     - DMX512
     - Art-Net
 outputs:
-  pixel_types: Single+Clocked
-  connectors: Poke Home
-  description: Both
+  clocked: selectable
+  connector: Poke-home terminals
 power:
-  voltage: 12V
+  voltage:
+    max: 12
 diy_or_ots: OTS
 links:
   product: https://www.sparkfun.com/products/15110

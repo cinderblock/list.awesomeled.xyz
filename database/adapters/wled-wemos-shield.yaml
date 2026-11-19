@@ -2,13 +2,14 @@ name: WLED wemos shield
 creator: SerKo
 notes: Easy to assemble with TH parts
 outputs:
-  max_channels: 2
-  pixel_types: Single+Clocked
-  connectors: Screw Terminals
-  description: Both
+  count: 2
+  clocked: selectable
+  connector: Screw terminals
 power:
-  voltage: 12V
-  current: 10A
+  voltage:
+    max: 12
+  current:
+    max: 10
 diy_or_ots: DIY
 links:
   product: https://github.com/srg74/WLED-wemos-shield

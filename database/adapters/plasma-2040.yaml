@@ -1,8 +1,8 @@
 name: Plasma 2040
 creator: Pimoroni
 outputs:
-  pixel_types: Single and Clocked
-  connectors: screw Terminals
+  clocked: selectable
+  connector: Screw terminals
 diy_or_ots: OTS
 links:
   product: https://shop.pimoroni.com/products/plasma-2040

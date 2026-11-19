@@ -1,12 +1,12 @@
 name: OctoWS2811 Adaptor
 creator: PJRC
 outputs:
-  max_channels: 8
-  pixel_types: Single
-  connectors: RJ-45
-  description: Single
+  count: 8
+  clocked: false
+  connector: RJ45
 power:
-  voltage: 5V
+  voltage:
+    max: 5
 diy_or_ots: OTS
 links:
   product: https://www.pjrc.com/store/octo28_adaptor.html

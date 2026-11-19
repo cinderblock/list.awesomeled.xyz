@@ -1,99 +1,54 @@
-# Example 1: Full-featured expansion adapter with all fields
-name: Example 16-Port Expander
-creator: Expansion Board Co
-manufacturers:
-  - Expansion Board Co
-  - Community PCB
+# Example 1: Shield that turns a dev board into a pixel controller (all fields)
+name: Example 4x Pixel Shield
+status: active
+creator:
+  name: Example Labs
+  url: https://example.com
+  page: https://example.com/4x-shield
 vendors:
-  - LED Parts Store
-  - Direct from manufacturer
-notes: Adds 16 differential outputs to Raspberry Pi
-outputs: Single and Clock
+  - name: Tindie
+    page: https://example.com/tindie/4x-shield
+notes: Level-shifted pixel outputs for a Wemos D1 Mini; runs WLED.
+inputs:
+  physical:
+    Wi-Fi: # from the dev board
+      - 2.4GHz
+  protocols:
+    - Art-Net
+    - sACN
+outputs: # same shape as a controller's outputs (common.json pixel_outputs)
+  count: 4
+  connector: Screw terminals # or { ref: <connectors/ slug> }
+  clocked: selectable # false (single-wire only), selectable, or always (clocked only)
+  driver:
+    buffered: true
+power: # common.json power_input
+  voltage:
+    min: 5
+    max: 24
+  current:
+    max: 15
+diy_or_ots: OTS # DIY, OTS or both
+links:
+  product: https://example.com/4x-shield
+parent: Wemos D1 Mini # the board it plugs into
+price: 18
+software:
+  firmware:
+    - WLED
+  works_with:
+    - xLights
+---
+# Example 2: Raspberry Pi HAT that outputs DMX512, not pixels
+name: Example Pi DMX HAT
+notes: Isolated DMX512 output for a Raspberry Pi running OLA or FPP.
+outputs:
+  auxiliary:
+    DMX512: 1 # one universe
+  connector: XLR-5
 diy_or_ots: OTS
-image: 16-port-expander.jpg
-images:
-  - 16-port-expander.jpg
-  - 16-port-expander-installed.jpg
-max_channels: 16
-max_current: 40
-max_voltage: 24
-output_connectors: RJ45
-parent: Raspberry Pi GPIO
-pixel_types: Both
-price: 45.99
-related_connectors:
-  - rj45
-  - differential-receiver
+parent: Raspberry Pi
+price: 30
 
-related_microboards:
-  - raspberry-pi-4
-  - raspberry-pi-5
-url: https://example.com/16-port-expander
----
-# Example 2: ESP32 expansion shield
-name: Example ESP Output Shield
-creator: Open Source Contributor
-manufacturers:
-  - JLCPCB
-  - PCBWay
-notes: Open source level shifter and output expansion for ESP32
-outputs: Single
-diy_or_ots: DIY
-max_channels: 8
-max_current: 10
-max_voltage: 5
-output_connectors: JST-SM
-parent: ESP32 DevKit
-pixel_types: Async
-price: 15
-related_microboards:
-  - esp32-devkit
-
-url: https://github.com/example/esp-shield
----
-# Example 3: Commercial controller expansion
-name: Example Controller Expansion Board
-creator: Controller Company
-manufacturers:
-  - Controller Company
-vendors:
-  - Authorized Dealer
-notes: Official expansion for Example Controller Pro
-outputs: Single and Clock
-diy_or_ots: OTS
-max_channels: 16
-max_current: 20
-max_voltage: 12
-output_connectors: Screw Terminal
-parent: Example Controller Pro
-pixel_types: Both
-price: 89
-url: https://example.com/expansion
-
----
-# Example 4: DIY level shifter board
-name: Example Level Shift Board
-creator: null
-notes: Simple 74AHCT125 level shifter breakout
-outputs: Single
-diy_or_ots: DIY
-max_channels: 4
-max_current: null
-max_voltage: 5
-output_connectors: Pin Header
-parent: Any 3.3V microcontroller
-pixel_types: Async
-price: 3.50
-related_connectors:
-  - dupont
-
----
-# Example 5: Minimal adapter entry
-name: Example Simple Adapter
-creator: null
-notes: Basic 2-channel output adapter
-diy_or_ots: OTS
-max_channels: 2
-parent: Arduino
-pixel_types: Async
-price: 5
+# disable URL checks on this file
+# textlint-disable

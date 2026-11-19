@@ -1,9 +1,10 @@
 name: ESPArtstick
 outputs:
-  max_channels: 6
-  pixel_types: Single
+  count: 6
+  clocked: false
 power:
-  voltage: 5V
+  voltage:
+    max: 5
 links:
   product: https://espartstick.ecwid.com/
 parent: Wemos Dx Mini (ESP32/ESP8266)

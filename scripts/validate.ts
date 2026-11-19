@@ -43,7 +43,6 @@ const FOLDER_SCHEMAS: Record<string, string> = {
 // Each is rewritten when its category's schema review lands (see
 // plans/database-review.md); remove it from this list in the same commit.
 const STALE_EXAMPLES = new Set([
-  'adapters',
   'commercial-systems',
   'connectors',
   'drive-libraries',

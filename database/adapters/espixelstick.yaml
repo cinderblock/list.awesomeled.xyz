@@ -6,10 +6,11 @@ inputs:
   protocols:
     - E1.31
 outputs:
-  max_channels: 4
-  pixel_types: Single
+  count: 4
+  clocked: false
 power:
-  voltage: 5V
+  voltage:
+    max: 5
 links:
   product: https://www.amazon.com/ESPixelStick-Wireless-DMX-Pixel-Controller/dp/B072XT1V77/
 parent: ESP8266

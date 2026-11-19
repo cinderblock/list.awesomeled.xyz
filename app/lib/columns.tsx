@@ -435,6 +435,28 @@ function linkCountColumn(key: string, label: string, headerTip: string): Column 
   };
 }
 
+// outputs.clocked (common.json clocked_support): which pixel signal types a
+// board's outputs drive
+const CLOCKED_LABELS: Record<string, string> = {
+  false: 'Single-wire',
+  selectable: 'Both',
+  always: 'Clocked',
+};
+
+const clockedColumn: Column = {
+  key: 'outputs.clocked',
+  label: 'Pixel Signal',
+  render: (v) =>
+    v == null ? (
+      <span className="data-table-null">-</span>
+    ) : (
+      <span>{CLOCKED_LABELS[String(v)]}</span>
+    ),
+  filterConfig: { type: 'select' },
+  headerTip:
+    'Single-wire: data only (WS2811 family). Clocked: data + clock lines (APA102 family). Both: selectable per output.',
+};
+
 const drivesColumn: Column = {
   key: 'linked.pixels',
   label: 'Pixel ICs',
@@ -776,13 +798,13 @@ export const adapterColumns: Column[] = [
   { key: 'name', label: 'Name' },
   { key: 'creator', label: 'Creator', render: renderCreator },
   {
-    key: 'outputs.max_channels',
-    label: 'Channels',
+    key: 'outputs.count',
+    label: 'Outputs',
     render: formatNumericValue,
     className: 'data-table-cell--right',
     filterConfig: { type: 'numeric' },
   },
-  { key: 'outputs.pixel_types', label: 'Pixel Types', filterConfig: { type: 'select' } },
+  clockedColumn,
   drivesColumn,
   {
     key: 'price',

@@ -7,12 +7,14 @@ inputs:
     Wi-Fi: true
     SD card: true
 outputs:
-  max_channels: 6
-  connectors: Phoenix Screw
-  description: Single
+  count: 6
+  clocked: false
+  connector: Phoenix Screw
 power:
-  voltage: 12V
-  current: 15A
+  voltage:
+    max: 12
+  current:
+    max: 15
 dead_links:
   - url: https://www.microcyb.com/index.html#!/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller/p/170368862/category=0
     archive: https://web.archive.org/web/20260410115123/https://microcyb.com/index.html

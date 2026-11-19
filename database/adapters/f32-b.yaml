@@ -2,12 +2,12 @@ name: F32-B
 status: discontinued
 creator: Kulp Lights
 outputs:
-  max_channels: 32
-  pixel_types: Single
-  connectors: Phoenix Screw
-  description: Single
+  count: 32
+  clocked: false
+  connector: Phoenix Screw
 power:
-  voltage: 12V
+  voltage:
+    max: 12
 dead_links:
   - url: https://kulplights.com/product/f32-b/
     archive: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/

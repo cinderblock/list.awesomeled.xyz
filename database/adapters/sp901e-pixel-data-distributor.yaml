@@ -2,12 +2,12 @@ name: SP901E Pixel Data Distributor
 creator: Generic
 notes: Pixel data duplicated to 8 output channels
 outputs:
-  max_channels: 8
-  pixel_types: single +clocked
-  connectors: Phoenix Screw
-  description: Both
+  count: 8
+  clocked: selectable
+  connector: Phoenix Screw
 power:
-  voltage: 24V
+  voltage:
+    max: 24
 diy_or_ots: OTS
 links:
   product: https://www.superlightingled.com/dc524v-4-channel-spi-signal-output-data-signal-sp901e-amplifier-for-programmable-dream-color-6803-1903-1809-1812-2811-ic-led-light-strips-p-3125.html

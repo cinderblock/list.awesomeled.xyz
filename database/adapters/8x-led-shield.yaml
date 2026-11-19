@@ -1,11 +1,12 @@
 name: 8x LED Shield
 creator: Evil Genius Labs
 outputs:
-  max_channels: 8
-  pixel_types: Single or Clocked
-  connectors: Solder
+  count: 8
+  clocked: selectable
+  connector: Solder pads
 power:
-  voltage: 5V
+  voltage:
+    max: 5
 diy_or_ots: DIY
 links:
   product: https://www.tindie.com/products/11579/

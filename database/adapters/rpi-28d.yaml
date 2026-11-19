@@ -1,12 +1,12 @@
 name: RPI-28D
 creator: Hanson Electronics
 outputs:
-  max_channels: 3
-  pixel_types: Single and Clocked
-  connectors: Phoenix Screw
-  description: Both
+  count: 3
+  clocked: selectable
+  connector: Phoenix Screw
 power:
-  voltage: 12V
+  voltage:
+    max: 12
 diy_or_ots: OTS
 links:
   product: http://www.hansonelectronics.com.au/product/rpi-28d/

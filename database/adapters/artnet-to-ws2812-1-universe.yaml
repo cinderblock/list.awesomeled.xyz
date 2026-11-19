@@ -2,10 +2,11 @@ name: Artnet to WS2812 1 Universe
 creator: Krzysztof Korzeniowski
 notes: Artnet to 170 Pixels , single universe
 outputs:
-  max_channels: 1
-  pixel_types: single
+  count: 1
+  clocked: false
 power:
-  voltage: 12V
+  voltage:
+    max: 12
 diy_or_ots: DIY
 links:
   product: https://github.com/ArtGateOne/ArtGateOne-LED

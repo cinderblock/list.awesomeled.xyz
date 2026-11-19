@@ -4,12 +4,12 @@ creator: Digital Ambience
 notes: LED data up to 250 ft right out of your controller No sender. It cleans
   up the signal.
 outputs:
-  max_channels: 1
-  pixel_types: Single
-  connectors: Solder
-  description: Single
+  count: 1
+  clocked: false
+  connector: Solder pads
 power:
-  voltage: 24V
+  voltage:
+    max: 24
 dead_links:
   - url: https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/
     archive: https://web.archive.org/web/20250427203401/https://www.digitalambiance.com/product/pixellauncher-gen-2-micro/

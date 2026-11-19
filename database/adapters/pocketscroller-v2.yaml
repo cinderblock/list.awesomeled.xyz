@@ -2,11 +2,13 @@ name: PocketScroller V2
 creator: Kulp Lights
 notes: Drives LED panel matrices (P10/P5) via FPP, not pixel strings
 outputs:
-  max_channels: 6
-  pixel_types: Panel
-  connectors: HUB75
+  count: 6
+  protocols:
+    - HUB75
+  connector: HUB75
 power:
-  voltage: 5V
+  voltage:
+    max: 5
 diy_or_ots: DIY
 links:
   product: https://kulplights.com/product/pocketscroller/

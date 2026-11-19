@@ -2,11 +2,13 @@ name: 4 Channel Differential Transmitter
 creator: Wizard of Wire
 notes: 4 Channel differential transmitter output to RJ45 for connection with Cat5
 outputs:
-  max_channels: 4
-  pixel_types: single
-  connectors: Phoenix Screw
+  count: 4
+  clocked: false
+  differential: true
+  connector: Phoenix Screw
 power:
-  voltage: 12V
+  voltage:
+    max: 12
 diy_or_ots: OTS
 links:
   product: https://www.wizardofwire.com/product/data-to-differential-board/

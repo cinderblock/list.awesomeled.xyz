@@ -1,9 +1,10 @@
 name: Pixel String Pihat Zero
 creator: Jboards
 outputs:
-  max_channels: 2
+  count: 2
 power:
-  voltage: 12V
+  voltage:
+    max: 12
 links:
   product: https://jboards.ecwid.com/Pixel-String-Pihat-Zero-p133155360
 parent: Raspberry Pi

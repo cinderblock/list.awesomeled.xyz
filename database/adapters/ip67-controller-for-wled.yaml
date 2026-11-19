@@ -5,13 +5,14 @@ vendors:
     page: https://www.amazon.com/dp/B07Q6XK8KM
 notes: Easy to assemble with TH parts
 outputs:
-  max_channels: 2
-  pixel_types: Single+Clocked
-  connectors: IP67 plug
-  description: Both
+  count: 2
+  clocked: selectable
+  connector: IP67 plug
 power:
-  voltage: 12V
-  current: 10A
+  voltage:
+    max: 12
+  current:
+    max: 10
 diy_or_ots: DIY
 links:
   product: https://github.com/srg74/Controller-for-WLED-firmware

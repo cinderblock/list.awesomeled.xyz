@@ -2,11 +2,13 @@ name: Meanwell PDU with Differential Receiver
 creator: Wizard of Wire
 notes: 4 Channel differential receiver and fused power distribution bolts straight on to PSU
 outputs:
-  max_channels: 4
-  pixel_types: single
-  connectors: Phoenix Screw
+  count: 4
+  clocked: false
+  connector: Phoenix Screw
 power:
-  voltage: 5V / 12-24V (jumper-selectable)
+  voltage:
+    min: 5 # 5 V or 12-24 V, jumper-selectable
+    max: 24
 diy_or_ots: OTS
 image: meanwell-pdu-with-differential-receiver.webp
 links:

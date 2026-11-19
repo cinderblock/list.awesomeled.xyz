@@ -1,11 +1,11 @@
 name: SPIxels Board
 outputs:
-  max_channels: 16
-  pixel_types: Clocked
-  connectors: JST
-  description: Clocked
+  count: 16
+  clocked: always
+  connector: JST
 power:
-  voltage: 5V
+  voltage:
+    max: 5
 diy_or_ots: DIY
 links:
   product: http://spixels.org/

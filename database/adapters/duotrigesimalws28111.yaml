@@ -5,9 +5,9 @@ vendors:
     page: https://www.tindie.com/products/amoscomputing/teensy-41-pixel-pusher/
 notes: A board similar to the octoWS2811 designed for the Teensy 4.1 with 32 output ports
 outputs:
-  max_channels: 32
-  pixel_types: Single
-  connectors: Solder
+  count: 32
+  clocked: false
+  connector: Solder pads
 diy_or_ots: DIY
 links:
   product: https://github.com/brianamos1/DuotrigesimalWS2811

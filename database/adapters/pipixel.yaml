@@ -2,13 +2,14 @@ name: PiPixel
 creator: Tindie
 notes: Does not provide power to the Pi
 outputs:
-  max_channels: 1
-  pixel_types: Single or Clocked
-  connectors: Screw
-  description: Both
+  count: 1
+  clocked: selectable
+  connector: Screw terminals
 power:
-  voltage: 24V
-  current: 5A
+  voltage:
+    max: 24
+  current:
+    max: 5
 diy_or_ots: OTS
 links:
   product: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
