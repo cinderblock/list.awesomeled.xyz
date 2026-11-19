@@ -8,12 +8,38 @@ export const lead = (
   </>
 );
 
+## What goes where
+
+The categories keep the definitions the original spreadsheet used for its tabs:
+
+- **[Pattern Drivers](/pattern-drivers)**: high-level software that sends pattern data to controllers.
+- **[Controllers](/controllers)**: devices that generate the specific timings and packet formats needed to drive many addressable LEDs. A controller can usually hold and repeat at least one frame.
+- **[Pixels](/pixels)**: addressable LEDs, the innovation that enabled this world of wonder.
+- **[Pixel ICs](/pixel-ics)**: the driver chip usually built into pixels, as a standalone part (no LEDs).
+- **[Pixel Decoders](/pixel-decoders)**: devices that aren't meant to drive pixels directly but speak the same data protocols pixels use.
+- **[Level Converters](/level-converters)**: memory-less devices that translate pixel data from another signal format.
+- **[Adapters](/adapters)**: hardware that connects (usually commodity) controller hardware to light strings and panels. An adapter usually can't hold a frame on its own; if it can, it's probably a controller.
+- **[DIY MicroBoards](/microboards)**: microcontroller boards and single-board computers that can drive some pixel types directly, often paired with an adapter.
+- **[Connectors](/connectors)**: connectors commonly used in LED products.
+- **[Drive Libraries](/drive-libraries)**: software that turns off-the-shelf or commodity hardware into a controller.
+- **[Diffusive Materials](/diffusive-materials)**: materials the community has tested as light diffusers.
+- **[Commercial Systems](/commercial-systems)**: complete systems that usually work only within their own ecosystem. Often built on the same common technologies, but "cleaned up", made easy to use, or sold as a service.
+
+Not everything fits neatly. If something seems to need a new category, [open an issue](https://github.com/cinderblock/list.awesomeled.xyz/issues) so we can discuss it first.
+
+## How reliable is the data?
+
+Most of this information was contributed by the community, and specs are often only as good as a datasheet's claims.
+Where a value has been checked against a source, the entry page shows that source and the date it was read, and every entry shows when it was last reviewed.
+Values without a source may be unverified: if you can confirm or correct one, please do.
+
 ## History
 
-Cameron Tacklind started this project as a [Google Sheets document](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA) to organize information about LED controllers, pixels, and related products.
-With the help of communities like [LEDs ARE AWESOME](https://www.facebook.com/groups/LEDSAREAWESOME) on Facebook and [r/led](https://www.reddit.com/r/led/) and [r/WLED](https://www.reddit.com/r/WLED/) on Reddit, contributors added more data and tabs over time.
+Cameron Tacklind started this project in November 2019 as a [Google Sheets document](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA) to organize information about LED controllers, pixels, and related products.
+With the help of communities like [LEDs ARE AWESOME](https://www.facebook.com/groups/LEDSAREAWESOME) on Facebook and [r/led](https://www.reddit.com/r/led/) and [r/WLED](https://www.reddit.com/r/WLED/) on Reddit, contributors filled it in and grew it to a dozen tabs, from controllers and pixels to connectors, diffusers, and commercial systems.
+The awesomeledlist.com name came from one of those contributors in 2020, in recognition of the group where the list started.
 
-As usage grew, Google Sheets's limitations and drawbacks became apparent.
+As usage grew, Google Sheets's limitations and drawbacks became apparent: shared filters changed what everyone saw, accidental edits wiped columns, and there was no good way to review changes.
 Cameron had long envisioned a dedicated website, but never found the time.
 In 2026, Claude built the initial version, and Cameron refined it into the first public version.
 
@@ -27,7 +53,10 @@ In 2026, Claude built the initial version, and Cameron refined it into the first
 ## Contributing
 
 All data is stored in human-readable YAML files on GitHub.
-If you'd like to add or update information, you can submit a pull request to the repository.
+If you'd like to add or update information, you can submit a pull request to the repository; see [CONTRIBUTING.md](https://github.com/cinderblock/list.awesomeled.xyz/blob/master/CONTRIBUTING.md) for the format.
+If you're unsure about a change, or think something is wrong but can't fix it yourself, [open an issue](https://github.com/cinderblock/list.awesomeled.xyz/issues).
+
+House style, carried over from the spreadsheet: commas separate list items, periods are decimal separators, and we use the Oxford comma.
 
 ## Disclaimer
 
