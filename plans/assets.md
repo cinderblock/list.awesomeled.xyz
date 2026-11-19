@@ -54,18 +54,16 @@ so the entry page shows them (see Plan step 4).
 ## Plan / steps
 
 1. [x] Coverage script + baseline numbers (`bun run coverage:assets`).
-2. [x] Tooling: `bun run add-image` (fetch → crop → WebP → YAML `images:` block → checkerboard preview; `--attribute-only` for legacy files). Pushed.
-3. [x] Shared `datasheet` schema block, now also on connectors, level converters, microboards, pixel decoders; datasheet icon in those tables. Pushed.
-4. [x] Display: build-time thumbnails (`scripts/thumbs.ts`, 240/480 px, never committed); thumbnail before each table name; 480 px hover preview; entry hero 480 px + gallery strip + license/"cropped" credit; designer uses thumbnails (and DIY boards' images now resolve). Pushed 032204a.
-5. [ ] Research batches (10 parallel agents, one per category batch) — images + datasheets. ← current
-   - Agent brief: `<scratchpad>/assets-agent-brief.md`; per-batch reports in `<scratchpad>/assets-reports/`.
-   - Done: converters-decoders (20/21 images, 10 datasheets) → committed 8edae09 (not pushed yet).
-   - Running: controllers-a/b/c, adapters, connectors, microboards, pixels, pixel-ics, systems-diffusers.
-6. [ ] Validator image checks (file exists, WebP, ≤1200 px, ≤256 KB, source+credit required, no orphans). Written in the agent tree's `scripts/validate.ts`, uncommitted: lands after the 7 legacy bare images get attribution (controllers-a + adapters batches).
-7. [x] Mirror prep: `--check`/`--only`, `datasheet.sources` fallback (`mirror.fetched_from`), curl fallback, `R2_ENDPOINT`, single-quoted dates, end-to-end test vs mock S3 (`tests/unit/mirror-datasheets.test.ts`). Pushed.
-8. [ ] Mirror bot commits must not bump "Reviewed" dates (workflow: commit trailer or IGNORED_COMMITS follow-up) + prettier the rewritten YAML in the workflow.
-9. [ ] Step-by-step for Cameron (R2 bucket, account-owned token, repo secrets) — ask.
-10. [ ] Final coverage numbers, docs (CONTRIBUTING image section, `public/database-images` README), ROADMAP.
+2. [x] Tooling: `bun run add-image` (fetch → crop → WebP → YAML `images:` block → checkerboard preview; `--attribute-only`; honest UA for Wikimedia).
+3. [x] Shared `datasheet` schema block on connectors, level converters, microboards, pixel decoders (stream 2 later added controllers/adapters); datasheet icon in those tables.
+4. [x] Display: build-time thumbnails (`scripts/thumbs.ts`, 240/480 px, content-addressed cache, never committed); thumbnail before each table name; 480 px hover preview; entry hero 480 px + gallery strip + credit line with license link and "cropped" note; designer uses thumbnails (DIY boards' images now resolve).
+5. [x] Research: 10 parallel agents, one per category batch; every image reviewed on contact sheets; ported onto upstream with a three-way root-key port. Per-entry sources in `plans/assets-research/`.
+6. [x] Validator image checks (exists, WebP, ≤1200 px, ≤256 KB, source + credit, no orphans).
+7. [x] Mirror prep: `--check`/`--only`, `datasheet.sources` fallback (`mirror.fetched_from`), curl fallback (Git-for-Windows safe), `R2_ENDPOINT`, single-quoted dates, end-to-end test vs mock S3 (`tests/unit/mirror-datasheets.test.ts`).
+8. [x] Mirror bot commits keep "Reviewed" dates: `Not-A-Review:` trailer honored by `app/lib/data.ts`; workflow sets it and runs prettier + validate.
+9. [x] Docs: CONTRIBUTING "Adding Images", README licence carve-out for product images, `docs/datasheet-mirroring.md` (incl. owner setup), ROADMAP, ISSUES.md (suspected data errors).
+10. [ ] Pattern-driver screenshots (agent running) and controller/adapter datasheets (agent running). ← current
+11. [ ] R2 setup — Cameron, one step at a time (see Open questions).
 
 ## Working method (two worktrees)
 
@@ -96,33 +94,61 @@ so the entry page shows them (see Plan step 4).
 
 Only pixels and pixel ICs had a `datasheet` field at all.
 
-### After
+### After (2026-11-18 ~7:30 PM PST, `origin/master` 41295f3)
 
-(filled in at the end)
+Entry counts changed meanwhile (stream 2 merged duplicates and moved entries);
+the datasheet denominator now includes controllers and adapters.
+
+| Category            | Entries |     Image | Attributed | Open license |     Datasheet | Mirrored |
+| ------------------- | ------: | --------: | ---------: | -----------: | ------------: | -------: |
+| adapters            |      41 |  29 (71%) |         29 |            1 |        0 (0%) |        0 |
+| commercial-systems  |      18 | 18 (100%) |         18 |            0 |             — |        — |
+| connectors          |      45 |  38 (84%) |         38 |           11 |      36 (80%) |        0 |
+| controllers         |     132 | 115 (87%) |        115 |            1 |        4 (3%) |        0 |
+| diffusive-materials |      44 |  28 (64%) |         28 |           13 |             — |        — |
+| drive-libraries     |      29 |    0 (0%) |          0 |            0 |             — |        — |
+| level-converters    |       9 |  9 (100%) |          9 |            0 |       8 (89%) |        0 |
+| microboards         |      36 |  32 (89%) |         32 |           13 |     36 (100%) |        0 |
+| pattern-drivers     |      40 |    0 (0%) |          0 |            0 |             — |        — |
+| pixel-decoders      |      13 |  12 (92%) |         12 |            1 |       2 (15%) |        0 |
+| pixel-ics           |      41 |    3 (7%) |          3 |            0 |      34 (83%) |        0 |
+| pixels              |      36 |  20 (56%) |         20 |            2 |      32 (89%) |        0 |
+| **Total**           |     484 | 304 (63%) |        304 |           42 | 152/353 (43%) |        0 |
+
+- Hardware entries (all but drive libraries and pattern drivers): **304 / 415 images (73%)**, up from 18; every image attributed (was 11).
+- Datasheets on the original part categories (pixels, pixel ICs, level converters, connectors, microboards, pixel decoders): **148 / 180 (82%)**, up from 38 / 77, and every one is now a verified direct PDF (18 of the original 38 were product pages, HTML viewers, a marketplace listing or dead).
+- Remaining gaps are deliberate skips with reasons (marketplace-only photos, maker sites that block bots, pixel ICs without real chip photos, standards without an originator's datasheet): `bun run coverage:assets --missing`.
+- Drive libraries: no product image by decision (code libraries; a logo isn't a product image).
 
 ## Findings / gotchas
 
-- Table images were hover-preview only (full-size WebP); no thumbnails anywhere. Designer loaded full 100–200 KB originals into 42 px cards.
-- Designer `DesignDiagram.tsx` hard-coded `https://list.awesomeled.xyz/database-images/controllers/…` — DIY microboards' images pointed at the wrong folder (fixed).
-- Of the 38 pre-existing `datasheet.url` values, 18 failed a real download + `%PDF-` check: product pages (newstar, neon-world, world-semi), an HTML viewer (datasheet4u), a DHgate marketplace page (ucs8903), LCSC links (return HTML to non-browsers), dead hosts. The pixels / pixel-ics agents are replacing them.
-- Bun 1.4.4's `fetch` on Windows fails TLS handshakes with some servers (pololu.com: `EPROTO`) that curl and Node handle; `mirror-datasheets` falls back to curl.
-- `crop-image.ts` flood fill used `Array.shift()` (quadratic); multi-megapixel photos took minutes. Now linear, and inputs are pre-shrunk to 2400 px.
-- The mirror script wrote `retrieved: "…"` (double quotes) — prettier wants single quotes. Fixed.
-- A stale incremental `bun install --frozen-lockfile` left a nested `ajv` under `ajv-formats` and broke `tsc` locally (CI was fine); `rm -rf node_modules && bun install` fixed it.
-- e2e under load: `newPage` setup timeouts and the 10 s tab-switch assertion flake when many agents run; single-worker runs pass.
-- Upstream (stream 2) is merging duplicate entries listed in `ISSUES.md` (quinled-dig-quad/uno, espartstick, m4/m8-port-pixel, standard-differential-receiver). Agents may add images to both copies; whoever removes an entry must remove its image file (the orphan check will flag it).
-- Upstream moved `controllers/f-test` to `pixel-decoders/f-test`; the controllers-a agent works on the old path — port its image by hand.
+- **SparkFun licence:** photos on sparkfun.com are **CC BY-NC-SA 3.0** (SparkFun news 735/1852), not CC BY 2.0. Only SparkFun's Flickr uploads (mirrored on Commons) are CC BY 2.0. The original brief had this wrong; the connectors agent caught it before any wrong tag shipped (two sparkfun.com images now carry CC BY-NC-SA 3.0).
+- Code licences (MIT/GPL) don't cover photos: repo images were recorded as maker photos without a licence unless a docs/hardware licence (CC BY-SA, CERN-OHL) explicitly covered them.
+- Table images were hover-preview only (full-size WebP); the designer loaded 100–200 KB originals into 42 px cards.
+- `DesignDiagram.tsx` pointed DIY microboards' images at `controllers/` (fixed).
+- 18 of the 38 pre-existing `datasheet.url` values failed a real download + `%PDF-` check (product pages, datasheet4u viewer, a DHgate listing, LCSC links that serve HTML to bots, dead hosts). Product-page URLs moved to `other_links` (keeping their `dead_links` archive) rather than being dropped.
+- Bun 1.4.4's `fetch` on Windows fails TLS handshakes with some servers (pololu.com, raspberrypi.com: `EPROTO`); Git for Windows' curl 8.8 exits 43 whenever `-w` is used. The mirror's curl fallback reads the status from dumped headers.
+- Wikimedia's upload host 429s browser-imitating User-Agents and only serves standard thumbnail sizes to bots.
+- `crop-image.ts` flood fill was quadratic (`Array.shift()`); fixed, and inputs are pre-shrunk.
+- Upstream churn: other streams edited the same YAML constantly. Agents worked on an older tree; `<scratchpad>/port-assets.ts` ported only `image`/`images`/`datasheet` blocks three-way, and `<scratchpad>/merge-blocks.ts` resolved rebase conflicts per root key (both sides changing the same key → manual).
+- Stream 2 merged duplicate entries mid-pass (QuinLED, M4/M8-PI, standard-differential-receiver; F-Test moved): images were re-homed onto the surviving entries; the validator's orphan check catches leftovers.
+- e2e under load: `newPage` setup timeouts and the first-navigation test flake on a cold dev server; single-worker runs pass. Master CI currently fails `table.test.ts` "missing values sort last" (not this stream; logged in ISSUES.md).
+- A stale incremental `bun install` left a nested `ajv` under `ajv-formats` and broke `tsc` locally; a clean install fixed it.
 
 ## Progress log
 
 - [x] 2026-11-18: read plans, surveyed code, baseline coverage.
-- [x] Tooling + schema + mirror `--check` pushed (3d0a2ee); thumbnails + mirror e2e test pushed (032204a).
-- [x] converters-decoders batch reviewed (contact sheet) and committed in the integration tree (8edae09).
-- [ ] Remaining 9 agent batches; validator image checks; mirror timestamp handling; Cameron's R2 steps; docs; final numbers.
+- [x] Tooling + schema + mirror `--check` pushed (3d0a2ee); thumbnails + mirror e2e test (032204a).
+- [x] converters-decoders, trailer, workflow, docs (c92c4bc).
+- [x] pixels, pixel ICs, microboards, connectors, adapters, controllers, validator, CONTRIBUTING/README (a694a76).
+- [x] commercial systems, diffusive materials, ISSUES.md (41295f3).
+- [ ] Pattern-driver screenshots; controller/adapter datasheets (agents running).
+- [ ] R2 mirror switched on (Cameron).
 
 ## Open questions for the user
 
-(none yet)
+1. **R2 mirror setup** (blocked on Cameron; infra needs per-change approval). Proposed: bucket `awesomeled-datasheets` declared in the ops IaC (`cloudflare/config/projects/awesomeled.yaml`: `- r2: awesomeled-datasheets`), public custom domain `assets.awesomeled.xyz`, an account-owned R2 token (Object Read & Write, that bucket only), four repo secrets + one variable, Actions allowed to open PRs. Full list: `docs/datasheet-mirroring.md` → "One-time setup". Gap: the ops IaC has no R2 custom-domain support, and its DNS sync manages the `awesomeled.xyz` zone, so a dashboard-made R2 domain record must be declared external there first (or the IaC taught R2 domains). Recommendation: teach the IaC (a small handler), in an ops thread.
+2. **Borderline image calls** worth a glance (details in `plans/assets-research/`): neopixelbooster recorded as CC BY-NC-SA 4.0 (README) though its LICENCE file says CC BY-SA 4.0; LED-strip sellers (LEDYi, Superlighting) as `community` datasheet hosts for Titan/UCS ICs whose makers publish none; a few retailer photos for generic diffusers (Screwfix, eplastics).
 
 ## Things not to do
 

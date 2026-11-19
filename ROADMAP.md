@@ -35,15 +35,20 @@ history. This is what's next.
   bots — manual), APD-2-500 (JS-only storefront), generic ESP/NodeMCU boards
   (street price varies)
 - Commercial-systems `price_range` → verify against pricing.examples
-- More images: remaining pixels (Adafruit), XT60/Phoenix-class connectors
-  (manufacturer sources)
+- Remaining images (2026-11-18 pass covered 73% of hardware entries; every
+  skip has a reason in `plans/assets-research/`): molex.com /
+  phoenixcontact.com block bots (XH, PicoBlade, Mini-Fit Jr, KK, MSTB),
+  pixel ICs rarely have real chip photos, discontinued boards whose images
+  were never archived. `bun run coverage:assets --missing` lists them
 - The bot-blocked/timeout CHECK list (59 urls, tracked in the rolling
   link-rot issue #2; EMP 16 and SceneX PP4 product pages now 404)
 - Vendor-catalog discontinued audits beyond link-driven evidence
 
 ## Decisions parked (owner: Cameron)
 
-- R2 credentials → unblocks the datasheet mirror pipeline
+- R2 bucket + public domain + account-owned token → switches on the
+  datasheet mirror (pipeline, tests and docs are ready:
+  `docs/datasheet-mirroring.md` "One-time setup"; plan: `plans/assets.md`)
 - Pattern-driver subcategories: filterable `kind` field (sequencer / live-VJ /
   player / music-reactive / on-controller) vs. real category split
 - Connector line art (outline/locking icons) — needs art direction
