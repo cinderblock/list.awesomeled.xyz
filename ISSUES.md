@@ -43,17 +43,6 @@ here instead. Spelling variants ("APA-106" vs "APA106", "WS2812b") don't need
 rewriting: `app/lib/relations.ts` matches names case- and
 punctuation-insensitively, through `aliases` and `variants[].name`.
 
-## Designer: shared name resolver available (stream 3, FYI)
-
-`app/lib/designer.ts` `checkCompat` decides "vendor lists this pixel" with a
-substring token match between `outputs.protocols` and pixel names/types.
-`app/lib/relations.ts` now resolves those names to exact entries
-(`resolveName` against `graph.indexes.pixel`, aliases and variants included)
-and exposes protocol families (`graph.familyOf` / `graph.families`, from
-`data.type`). Switching would make the explicit-support check exact and let
-"WS2811 listed" count for every WS2811/12-family pixel. Not a bug; the
-designer's call.
-
 ## Entry-page and table changes from cross-links (stream 7, FYI)
 
 Entry pages now have a "Works with" section (driven by, supported by, runs on,
@@ -169,3 +158,56 @@ says ENTTEC, $400, 2 outputs, 60 V, discontinued, and links
 <https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/>:
 an ENTTEC DIN-rail pixel controller under the wrong name. No database entry
 seems to cover it; needs identifying from that URL (Wayback if dead).
+
+## Header is wider than a phone: every page scrolls sideways (stream 7)
+
+Seen by the designer's phone test (stream 3) after the header search landed.
+At a 390 px viewport `.site-nav` ends at x = 399, so `document.documentElement`
+is 399 px wide on every page (`/controllers` too, not just `/designer`).
+Repro: any page at 390 × 844, then
+`document.documentElement.scrollWidth - document.documentElement.clientWidth`
+is 9. The logo, the search icon and the four nav items don't fit together.
+
+Why it matters: the whole site slides sideways under a thumb on phones. The
+designer's own test now checks only the designer's content, so this needs its
+own fix and test in the header.
+
+## Pixels' `electrical.wattage` is one channel's power, not the pixel's (stream 2)
+
+Found by the designer (stream 3). The schema describes `wattage` as "Power
+per pixel", but the stored values are `channel_current × led_voltage` for a
+single colour channel: WS2812 18.5 mA × 5 V = 92.5 mW, APA102 22 mA × 5 V =
+110 mW (a WS2812 at full white draws about three times that). The ratio is
+1.00 on 15 of the 21 rows that have both fields. Rows that don't follow the
+pattern: `lc8808b`, `ns8808` and `ws2851` (computed at 5 V although
+`led_voltage` is 12 V), `sk6805` (100 mW with a ~5 mA channel), `ns108`,
+`ns108e` and `sk6812` (off by 2–4%).
+
+Why it matters: the old designer multiplied this field by the pixel count and
+under-reported power about 3× (fixed: it now uses channel current × channels
+× voltage and never reads `wattage` as a per-pixel figure). The entry pages
+and the Pixels table still show it as the pixel's wattage. Either the field
+means "per channel" and should say so, or the values should become true
+full-white figures. Not changed here: the data is stream 2's.
+
+## Designer facts that depend on unrecorded data (FYI, streams 2 / 4 / 6)
+
+Not bugs — where the designer says "verify" because the database is silent.
+Filling any of these makes its checks sharper with no code change:
+
+- `outputs.driver.buffered` is unrecorded on about a third of controllers, so
+  the designer can't say whether they need a level shifter. Dev boards without
+  `power.gpio_voltage` (Teensy 4.x, ESP32-S3 boards, Arduino Mega) are in the
+  same position.
+- `inputs.protocols` is missing on about half of the controllers, which makes
+  every pattern source "verify" for them.
+- Connectors have no prices, so every parts list with a connector is
+  incomplete.
+- Level converters record no logic-family facts (push-pull buffer vs.
+  auto-direction translator, output drive). The designer offers them all
+  alike; the usual advice (a 74AHCT/74HCT buffer, not a TXS-style translator)
+  isn't in the data.
+- Adapters still use `parent` free text and `outputs.max_channels` /
+  `pixel_types`. Once they adopt the shared `pixel_outputs` shape and
+  `host` links (stream 2 "Next", stream 4), the designer can offer shields
+  for dev boards.
