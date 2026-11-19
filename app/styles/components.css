@@ -460,11 +460,50 @@ a.entry-updated:hover {
 .entry-source a:hover {
   color: var(--category-primary);
 }
+/* What the source says (often a quote): a "note" toggle at the end of the
+   source line; the text opens below it, so a long quote doesn't bury the card */
+.entry-source-note {
+  display: inline;
+}
+.entry-source-note > summary {
+  display: inline;
+  margin-left: 0.4em;
+  cursor: pointer;
+  list-style: none;
+  color: var(--category-primary);
+}
+.entry-source-note > summary::-webkit-details-marker {
+  display: none;
+}
+.entry-source-note > summary::before {
+  content: '▸ ';
+}
+.entry-source-note[open] > summary::before {
+  content: '▾ ';
+}
+.entry-source-note-body {
+  display: block;
+  margin: 0.15rem 0 0.25rem;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--border);
+  overflow-wrap: anywhere;
+}
 .entry-field-sources {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
   margin-top: 0.3rem;
+}
+/* One explanation under a whole link row ("All compatible hardware") */
+.entry-related-row-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--muted-foreground);
+}
+/* Row labels are title-cased; the maker / protocol name in one isn't
+   ("More From beagleboard.org", not "Beagleboard.Org") */
+.detail-key-subject {
+  text-transform: none;
 }
 .entry-related-groups {
   display: flex;

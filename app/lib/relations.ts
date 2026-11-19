@@ -620,10 +620,18 @@ export interface LinkItem {
 }
 
 export interface LinkRow {
+  /** Generic words ("Driven by", "More from"); pages may title-case them */
   label: string;
+  /**
+   * Proper noun shown verbatim after the label: a maker ("beagleboard.org"),
+   * a protocol family ("(WS2811/12)"), a firmware ("(via WLED)")
+   */
+  subject?: string;
   kind: EdgeKind | 'family-protocol' | 'compatible-hardware' | 'via-firmware' | 'same-maker';
   direction: 'forward' | 'reverse' | 'derived';
   items: LinkItem[];
+  /** One explanation for the whole row, shown once after its items */
+  note?: string;
 }
 
 export interface EntryLinks {
@@ -682,11 +690,18 @@ function sortItems(items: LinkItem[]): LinkItem[] {
  */
 export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEntry): EntryLinks {
   const rows = new Map<string, LinkRow>();
-  const row = (label: string, kind: LinkRow['kind'], direction: LinkRow['direction']) => {
+  const row = (
+    label: string,
+    kind: LinkRow['kind'],
+    direction: LinkRow['direction'],
+    subject?: string
+  ) => {
     // Rows merge by label: symmetric kinds (variant, related, compatible)
     // read the same from both ends, so declared and derived links share a row
-    const key = label;
-    if (!rows.has(key)) rows.set(key, { label, kind, direction, items: [] });
+    const key = subject ? `${label} ${subject}` : label;
+    if (!rows.has(key)) {
+      rows.set(key, { label, ...(subject ? { subject } : {}), kind, direction, items: [] });
+    }
     return rows.get(key)!;
   };
 
@@ -720,7 +735,7 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
   if (fam) {
     const members = (graph.families.get(normalizeName(fam)) ?? []).filter((r) => r !== ref);
     if (members.length) {
-      row(`Same protocol (${fam})`, 'family-protocol', 'derived').items.push(
+      row('Same protocol', 'family-protocol', 'derived', `(${fam})`).items.push(
         ...members.map((m) => itemFor(graph, m))
       );
     }
@@ -731,11 +746,12 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
   const summary = graph.linked.get(ref);
   if (summary?.hardwareBy) {
     const r = row('All compatible hardware', 'compatible-hardware', 'derived');
+    r.note =
+      'Every controller and adapter that lists this part or a same-protocol one, or runs firmware that supports it';
     for (const [category, n] of Object.entries(summary.hardwareBy)) {
       r.items.push({
         name: `${n} ${n === 1 ? category.replace(/s$/, '') : category}`,
         to: `/${category}?f=linked.pixels:${escapeFilterValue(entry.name)}`,
-        notes: 'lists it, a same-protocol part, or runs firmware that supports it',
       });
     }
   }
@@ -746,9 +762,10 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
       const supported = (graph.outgoing.get(edge.to) ?? []).filter((e) => e.kind === 'supports');
       if (!supported.length) continue;
       row(
-        `Drives (via ${graph.names.get(edge.to) ?? edge.to})`,
+        'Drives',
         'via-firmware',
-        'derived'
+        'derived',
+        `(via ${graph.names.get(edge.to) ?? edge.to})`
       ).items.push(...supported.map((e) => itemFor(graph, e.to)));
     }
   }
@@ -758,7 +775,7 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
     const maker = graph.makers.get(key);
     const others = (maker?.refs ?? []).filter((r) => r !== ref);
     if (maker && others.length) {
-      row(`More from ${maker.label}`, 'same-maker', 'derived').items.push(
+      row('More from', 'same-maker', 'derived', maker.label).items.push(
         ...others.map((r) => itemFor(graph, r))
       );
     }
@@ -782,9 +799,24 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
   const isFamily = (r: LinkRow) =>
     r.kind === 'same-maker' ||
     (!DERIVED_ORDER.includes(r.kind) && EDGE_KINDS[r.kind as EdgeKind].group === 'family');
+  // "More from <maker>" sits right under the variant / predecessor / related
+  // rows, so it leaves out what those already show (and goes if that's all)
+  const familyRows = all.filter(isFamily);
+  const refOf = (i: LinkItem) => (i.category && i.id ? `${i.category}/${i.id}` : '');
+  const shown = new Set(
+    familyRows
+      .filter((r) => r.kind !== 'same-maker')
+      .flatMap((r) => r.items.map(refOf))
+      .filter(Boolean)
+  );
+  const family = familyRows
+    .map((r) =>
+      r.kind === 'same-maker' ? { ...r, items: r.items.filter((i) => !shown.has(refOf(i))) } : r
+    )
+    .filter((r) => r.items.length > 0);
   return {
     worksWith: all.filter((r) => !isFamily(r)),
-    family: all.filter(isFamily),
+    family,
   };
 }
 

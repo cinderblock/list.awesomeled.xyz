@@ -4,8 +4,12 @@ import { CATEGORIES, type SourceRecord } from '~/lib/types';
 
 export type FieldSource = SourceRecord;
 
-// Rows longer than this collapse the rest behind a tap-to-expand "+N more"
-const COLLAPSE_AFTER = 24;
+// Long lists collapse the rest behind a tap-to-expand "+N more": rows in the
+// full-width link sections after 24, lists inside a (narrow) field card after
+// 12. A list only collapses when that hides more than a few items.
+const ROW_LIMIT = 24;
+const CARD_LIMIT = 12;
+const COLLAPSE_SLACK = 4;
 
 const categoryById = new Map(CATEGORIES.map((c) => [c.id, c]));
 
@@ -51,11 +55,11 @@ export function EntryLinkPill({ item }: { item: LinkItem }) {
   const extra = [item.via ? `as ${item.via}` : null, item.notes].filter(Boolean).join(' — ');
   if (!extra && !item.source) return pill;
   return (
-    <span className="entry-related-item">
+    <div className="entry-related-item">
       {pill}
       {extra && <span className="entry-related-note">{extra}</span>}
       {item.source && <SourceLink source={item.source} />}
-    </span>
+    </div>
   );
 }
 
@@ -67,17 +71,26 @@ function hostOf(url: string): string {
   }
 }
 
-/** "source: advateklights.com, 2026-11-18" — the provenance of one fact, visible inline */
-function SourceLink({ source, label = 'source' }: { source: FieldSource; label?: string }) {
+/**
+ * "source: advateklights.com, 2026-11-18" — the provenance of one fact,
+ * visible inline. What the source says (`notes`, often a quote) is one tap
+ * away, so a long quote doesn't bury a narrow card.
+ */
+function SourceLink({ source }: { source: FieldSource }) {
   return (
-    <span className="entry-source">
-      {label}:{' '}
+    <div className="entry-source">
+      source:{' '}
       <a href={source.url} target="_blank" rel="noopener noreferrer">
         {hostOf(source.url)}
       </a>
       {source.retrieved ? `, ${source.retrieved}` : ''}
-      {source.notes ? ` (${source.notes})` : ''}
-    </span>
+      {source.notes && (
+        <details className="entry-source-note">
+          <summary>note</summary>
+          <span className="entry-source-note-body">{source.notes}</span>
+        </details>
+      )}
+    </div>
   );
 }
 
@@ -95,9 +108,10 @@ export function FieldSources({ sources }: { sources?: FieldSource | FieldSource[
   );
 }
 
-function Pills({ items }: { items: LinkItem[] }) {
-  const head = items.slice(0, COLLAPSE_AFTER);
-  const rest = items.slice(COLLAPSE_AFTER);
+function Pills({ items, limit = ROW_LIMIT }: { items: LinkItem[]; limit?: number }) {
+  const shown = items.length > limit + COLLAPSE_SLACK ? limit : items.length;
+  const head = items.slice(0, shown);
+  const rest = items.slice(shown);
   return (
     <div className="entry-related">
       {head.map((item, i) => (
@@ -148,10 +162,20 @@ export function EntryLinkRows({ rows }: { rows: LinkRow[] }) {
   return (
     <dl className="detail-grid detail-grid--links">
       {rows.map((row) => (
-        <div key={row.label} className="detail-row">
-          <dt className="detail-key">{row.label}</dt>
+        <div key={`${row.label} ${row.subject ?? ''}`} className="detail-row">
+          <dt className="detail-key">
+            {row.label}
+            {row.subject && (
+              <>
+                {' '}
+                {/* A maker or protocol name keeps its own spelling */}
+                <span className="detail-key-subject">{row.subject}</span>
+              </>
+            )}
+          </dt>
           <dd className="detail-value">
             <RowItems items={row.items} />
+            {row.note && <p className="entry-related-row-note">{row.note}</p>}
           </dd>
         </div>
       ))}
@@ -184,6 +208,7 @@ export function NameLinkList({
       via: undefined,
     }));
   });
-  // Long vendor lists (PixLite Mk3 names 99 pixel types) collapse like link rows
-  return <Pills items={items} />;
+  // Long vendor lists (PixLite Mk3 names 99 pixel types) collapse like link
+  // rows, sooner: a field card is a third of the page wide
+  return <Pills items={items} limit={CARD_LIMIT} />;
 }
