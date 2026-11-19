@@ -3,7 +3,7 @@ status: discontinued
 creator:
   name: Martin
   page: https://www.martin.com/en-US/products/vc-dot-1
-notes: Martin, stage lighting part of Harmon Kardon group
+notes: Martin Professional (stage lighting), part of HARMAN Professional Solutions, a business unit of HARMAN International (a Samsung Electronics subsidiary)
 images:
   - file: vc-dot-1.webp
     source: https://www.martin.com/en-US/products/vc-dot-1
@@ -27,6 +27,10 @@ sources:
     url: https://www.martin.com/en-US/products/vc-dot-1
     retrieved: '2026-11-18'
     notes: 'Martin product page marked "Discontinued", no successor named'
+  notes:
+    url: https://edisonreport.com/2026/10/19/harman-professional-solutions-announces-pablo-ruiz-campo-as-martin-professional-sales-leader-for-north-america/
+    retrieved: '2026-11-18'
+    notes: Martin Professional is part of HARMAN Professional Solutions, a Strategic Business Unit of HARMAN International
 specs:
   pixels_per_run: 100
   color_type: RGB

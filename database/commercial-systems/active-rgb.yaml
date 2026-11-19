@@ -1,4 +1,4 @@
-name: Active RGB
+name: Active RGBW
 status: active
 creator:
   name: Lumisphere
@@ -17,7 +17,19 @@ sources:
     url: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
     retrieved: '2026-11-18'
     notes: "listed in Lumisphere's current product range (Active RGBW), price on request"
+  name:
+    url: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+    retrieved: '2026-11-18'
+    notes: Large Harness Active RGBW Festoon Systems
+  specs.color_type:
+    url: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+    retrieved: '2026-11-18'
+    notes: incorporating 3 RGBW SMD LEDs, consuming just 1.0 watt
+  specs.pixels_per_run:
+    url: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+    retrieved: '2026-11-18'
+    notes: Each encoder can drive up to 127 RGBW LED units
 specs:
-  pixels_per_run: 170
-  color_type: RGB
+  pixels_per_run: 127
+  color_type: RGBW
   dedicated_psu: true

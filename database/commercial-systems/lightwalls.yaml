@@ -1,9 +1,9 @@
-name: Lightwalls
+name: Light Walls
 status: active
 creator:
-  name: Lightwalls
+  name: Light Walls
   url: https://www.lightwalls.co.uk/
-notes: Strip and panels associated with Protopixel.io, subscription based control systems, "dynamic lighting"
+notes: RGBW light engines (Matrix tiles, Linear bars, Down Lights, System Kits) with 16-bit dimming. Around 2020 Light Walls sold ProtoPixel-based learning kits, which are no longer offered.
 dead_links:
   - url: https://www.lightwalls.co.uk/learning-kits/
     archive: https://web.archive.org/web/20251112012933/https://www.lightwalls.co.uk/learning-kits/
@@ -47,9 +47,28 @@ sources:
     url: https://www.lightwalls.co.uk/products/matrix-5x5-rgbw-16bit
     retrieved: '2026-11-18'
     notes: 'Light Walls store lists light engines for sale, e.g. Matrix 5x5 £286.67'
+  notes:
+    url: https://www.lightwalls.co.uk/
+    retrieved: '2026-11-18'
+    notes: Light Walls RGBW light engines deliver uncompromised white-light quality, enhanced by deeply saturated red, green, and blue.
+  specs.color_type:
+    url: https://www.lightwalls.co.uk/
+    retrieved: '2026-11-18'
+    notes: Light Walls RGBW light engines deliver uncompromised white-light quality
+  creator.name:
+    url: https://www.lightwalls.co.uk/
+    retrieved: '2026-11-18'
+    notes: © 2026, Light Walls.
+  name:
+    url: https://www.lightwalls.co.uk/
+    retrieved: '2026-11-18'
+    notes: © 2026, Light Walls.
+  specs.dimming_bits:
+    url: https://www.lightwalls.co.uk/
+    retrieved: '2026-11-18'
+    notes: Benefit from 16-bit dimming, incredibly high CRI, and wide saturation.
 specs:
-  color_type:
-    - RGB
-    - W
+  dimming_bits: 16
+  color_type: RGBW
   dedicated_psu: true
 target_market: Architectural

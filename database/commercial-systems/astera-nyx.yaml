@@ -28,8 +28,11 @@ sources:
     url: https://www.filmandvideolighting.com/astera-nyx-bulb-led-10w-rgba-mint-practical-lamp-fp5.html
     retrieved: '2026-11-18'
     notes: 'dealer lists FP-5 at $115.20 (backorder); current product on astera-led.com'
+  specs.color_type:
+    url: https://astera-led.com/products/nyx-bulb/specs
+    retrieved: '2026-11-18'
+    notes: Colors | RGBMintAmber
 specs:
-  pixels_per_run: 170
-  color_type: RGBW
+  color_type: RGBMA
   dedicated_psu: true
 target_market: Entertainment

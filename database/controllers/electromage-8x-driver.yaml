@@ -18,8 +18,6 @@ outputs:
   connector: Solder/3 pin servo
   driver:
     buffered: true
-  current:
-    max: 3
   clocked: selectable # supports WS2812 (async) and APA102 (clocked)
   pixels:
     max_total: 6400
@@ -36,11 +34,15 @@ outputs:
     - DotStar
 power:
   voltage:
-    max: 12
+    max: 5
+  current:
+    max: 3
 images:
   - file: electromage-8x-driver.webp
     source: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
     credit: ElectroMage
+other_links:
+  - https://electromage.com/docs/output-expander
 price: 19
 price_source:
   notes: Pixelblaze Output Expander; sold out at the ElectroMage store at retrieval ("check distributors")
@@ -78,3 +80,11 @@ sources:
     url: https://electromage.com/docs/output-expander
     retrieved: '2026-11-18'
     notes: "'This is a UART serial to addressable LED driver board'"
+  power.voltage.max:
+    url: https://electromage.com/docs/output-expander
+    retrieved: '2026-11-18'
+    notes: Connect 5V power, GND, and data from the output side of Pixelblaze.
+  power.current.max:
+    url: https://electromage.com/docs/output-expander
+    retrieved: '2026-11-18'
+    notes: The board can deliver up to 3 A total.

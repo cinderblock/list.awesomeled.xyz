@@ -2,12 +2,13 @@ name: WLED wemos shield
 creator: SerKo
 notes: Easy to assemble with TH parts
 outputs:
-  count: 2
+  count: 4
   clocked: selectable
   connector: Screw terminals
 power:
   voltage:
-    max: 12
+    min: 5
+    max: 24
   current:
     max: 10
 diy_or_ots: DIY
@@ -49,3 +50,11 @@ sources:
     - url: https://github.com/srg74/WLED-wemos-shield
       retrieved: '2026-11-18'
       notes: repository description; readme 'Firmware' section ships WLED builds (Aircoookie WLED plus the blazoncek, Atuline and MoonModules forks)
+  outputs.count:
+    url: https://www.tindie.com/products/serg74/wled-shield-board-for-addressable-leds/
+    retrieved: '2026-11-18'
+    notes: Up to 4 LEDs outputs!
+  power.voltage:
+    url: https://www.tindie.com/products/serg74/wled-shield-board-for-addressable-leds/
+    retrieved: '2026-11-18'
+    notes: Power selector 5V or 12/24V;

@@ -75,12 +75,20 @@ export const ALIASES: Record<string, Record<string, string>> = {
     'M4 Port Pixel': 'controllers/m4-port-pixel',
     'M8 Port Pixel': 'controllers/m8-port-pixel',
     'Meanwell PDU with Differential Reciever': 'adapters/meanwell-pdu-with-differential-receiver',
+    // ElectroMage's expanders were in both tabs; merged into the controllers
+    'Serial LED Driver': 'controllers/electromage-8x-driver',
+    'Pro Serial LED Driver': 'controllers/electromage-pro-8x-driver',
   },
   'Diffusive Materials': {
     Polyethelene: 'diffusive-materials/polyethelene',
     // Renamed by research (6d2133d): Plexiglas LED (formerly EndLighten T)
     'Plexiglas LED Edge Lit was EndlightenT':
       'diffusive-materials/plexiglas-led-edge-lit-was-endlightent',
+  },
+  'Commercial Pixel Systems': {
+    SmartPXL: 'commercial-systems/smartpxl',
+    'Active RGB': 'commercial-systems/active-rgb',
+    Lightwalls: 'commercial-systems/lightwalls',
   },
   'Drive Libraries': {
     // Renamed to what its maker calls it now (database review)

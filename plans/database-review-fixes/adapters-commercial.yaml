@@ -1,0 +1,655 @@
+# Fix list: "(d) Wrong facts for other workstreams" in
+# plans/data-freshness/findings/adapters.md and .../commercial.md
+# Verified 2026-11-18 against repo HEAD d20cf8f (ws/database-review).
+#
+# Fetch notes:
+# - WebFetch cannot reach web.archive.org. Where a Wayback capture was the only
+#   source, the quote was read from the copy the data-freshness pass saved on
+#   2026-11-18 (its scratchpad adp/wb/), and the notes say so.
+# - shop.electromage.com returned HTTP 429 all session; the store quotes come
+#   from that pass's saved copy of the same day. electromage.com/docs pages
+#   were fetched live.
+# - PDFs read locally: fixes/dl/adapters-commercial/ (ESPixNode setup guide,
+#   Lumisphere 2026 brochure, Minleon TrikLits sheet, WLED shield pinout).
+# - Records marked "Extra" were found while verifying and are not in the report.
+
+# ---------------------------------------------------------------------------
+# adapters.md (d)
+# ---------------------------------------------------------------------------
+
+# Duplicates across categories
+
+- entry: adapters/serial-led-driver
+  field: (whole entry)
+  current: separate adapters entry for the product controllers/electromage-8x-driver also describes
+  value: null
+  status: apply
+  owner: stream2
+  source: https://electromage.com/docs/output-expander
+  quote: 'A Serial to 8x WS2812/APA102 Driver'
+  retrieved: '2026-11-18'
+  notes: >-
+    Same product: this entry's price_source.url and the controller's creator.page are the same
+    store page (shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver),
+    and its Tindie link is the controller's vendors page. Follow the d487f11 precedent: keep the
+    richer controllers entry, delete this one, and add it to the removed-entry table in
+    plans/database-review.md (sheet: Adapters tab, "Serial LED Driver"). This copy has the board's
+    power right (5 V, 3 A total); the controller copy is wrong on those (next three records).
+    other_links https://electromage.com/docs/output-expander is worth carrying over.
+
+- entry: controllers/electromage-8x-driver
+  field: power.voltage.max
+  current: 12
+  value: 5
+  status: apply
+  owner: stream2
+  source: https://electromage.com/docs/output-expander
+  quote: 'Connect 5V power, GND, and data from the output side of Pixelblaze.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Found while comparing the duplicates (the adapters copy says 5). Same page: "For more LEDs, or
+    for using 12V LEDs, just connect your power supply directly to the LEDs", so 12 V LEDs are
+    powered around the board, not through it. Only the Pro has a 12 V option: "Voltage options:
+    5V, or 12V with an installed DC-DC converter" (https://electromage.com/docs/pro-output-expander).
+
+- entry: controllers/electromage-8x-driver
+  field: outputs.current.max
+  current: 3
+  value: null
+  status: apply
+  owner: stream2
+  source: https://electromage.com/docs/output-expander
+  quote: 'The board can deliver up to 3 A total.'
+  retrieved: '2026-11-18'
+  notes: 3 A is the whole board, not per output; no per-output limit is published. It moves to power.current.max (next record), where the adapters copy has it.
+
+- entry: controllers/electromage-8x-driver
+  field: power.current.max
+  value: 3
+  status: apply
+  owner: stream2
+  source: https://electromage.com/docs/output-expander
+  quote: 'The board can deliver up to 3 A total.'
+  retrieved: '2026-11-18'
+
+- entry: controllers/electromage-8x-driver
+  field: outputs.connector
+  current: Solder/3 pin servo
+  value: 5mm screw terminals or 0.1in pin headers (kit parts, soldered on)
+  status: other-owner
+  owner: stream4
+  source: https://electromage.com/docs/output-expander
+  quote: 'In this kit you get the driver board (pictured), 5mm screw terminals, and 0.1" pin headers.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Free-text outputs.connector values belong to stream 4 (ISSUES.md coordination note). The two
+    copies disagree (adapters: "Solder pads"), and neither names the screw terminals. The store
+    page has the same sentence.
+
+- entry: adapters/pro-serial-led-driver
+  field: (whole entry)
+  current: separate adapters entry for the product controllers/electromage-pro-8x-driver also describes
+  value: null
+  status: apply
+  owner: stream2
+  source: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
+  quote: 'The ElectroMage Pro 8x WS2812/APA102 LED Driver, also known as a Pixelblaze Pro Output Expander'
+  retrieved: '2026-11-18'
+  notes: >-
+    Store page read from the data-freshness pass's saved copy (live fetch HTTP 429). Same product:
+    this entry's price_source.url is the controller's creator.page. The values agree (8 outputs,
+    5 or 12 V, 15 A, pluggable terminals = connectors/mtsb-combicon); keep the controllers entry
+    and record the removal in plans/database-review.md. The YAML comment on outputs.clocked here
+    ("8 single-wire or 6 clocked outputs") is wrong: "For APA102 types, 4 outputs are easily driven
+    by using a clock + data pair on each output. ... share a single clock output and have 7 APA102
+    data outputs." The controller's related variant link to controllers/electromage-8x-driver
+    already covers this entry's variant link.
+
+- entry: controllers/electromage-8x-driver
+  field: price
+  current: 19
+  status: already-fixed
+  owner: stream6
+  notes: Report said 15; 4d06088 set 19 from the maker's store.
+
+- entry: controllers/electromage-pro-8x-driver
+  field: price
+  current: 65
+  status: already-fixed
+  owner: stream6
+  notes: Report said 49; 4d06088 set 65 from the maker's store.
+
+- entry: controllers/electromage-8x-driver
+  field: status
+  current: active
+  value: null
+  status: other-owner
+  owner: stream6
+  source: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
+  quote: 'Sold out - check distributors'
+  retrieved: '2026-11-18'
+  notes: >-
+    Store page read from the saved copy (live fetch HTTP 429). The two passes used different rules
+    for the same sold-out state: the adapters pass left status unset (adapters/serial-led-driver),
+    the controllers pass kept active. Stream 6 should pick one for the merged entry. Tindie seller
+    on a break until 2027-05-29 per the report (not re-checked).
+
+- entry: controllers/electromage-pro-8x-driver
+  field: status
+  current: active
+  value: null
+  status: other-owner
+  owner: stream6
+  source: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
+  quote: 'Sold out - check distributors'
+  retrieved: '2026-11-18'
+  notes: Same as the previous record (both variants, 5V and 12V, sold out at the maker's store).
+
+- entry: adapters/quinled-dig-quad
+  field: (whole entry)
+  status: already-fixed
+  owner: stream2
+  notes: Removed in d487f11; controllers/quinled-dig-quad kept.
+
+- entry: adapters/quinled-dig-uno
+  field: (whole entry)
+  status: already-fixed
+  owner: stream2
+  notes: Removed in d487f11; controllers/quinled-dig-uno kept.
+
+# Wrong or missing creator
+
+- entry: adapters/led-octopus
+  field: creator
+  current: Essence Engineering
+  status: already-fixed
+  owner: stream2
+  notes: f58a359; sourced to the Tindie listing.
+
+- entry: adapters/pipixel
+  field: creator
+  current: Maniacal Labs
+  status: already-fixed
+  owner: stream2
+  notes: f58a359; sourced to github.com/ManiacalLabs/PiPixel.
+
+- entry: adapters/pixelpops
+  field: creator
+  current: Pops Electronics
+  status: already-fixed
+  owner: stream2
+  notes: f58a359; sources.creator notes it is ukewarrior's variation of Bill Porter's design.
+
+- entry: adapters/espartstick
+  field: creator
+  current: Microcyb
+  status: already-fixed
+  owner: stream2
+  notes: f58a359.
+
+- entry: adapters/esp-pixnode
+  field: creator
+  value: JBoards
+  status: apply
+  owner: stream2
+  source: https://web.archive.org/web/20210123104718/https://jboards.ecwid.com/ESPixNode-p127558674
+  quote: 'ecwidStoreName = "JBoards"'
+  retrieved: '2026-11-18'
+  notes: >-
+    Read from the data-freshness pass's saved copy of this capture (WebFetch can't reach
+    web.archive.org). The capture's seller name and footer copyright are also "JBoards", and the
+    store's Boards category sold its own designs; the product page links the maker's ESPixNode
+    setup guide. Spelling is "JBoards" (capital B), not "Jboards" as in the report.
+
+- entry: adapters/esp-level-shifter
+  field: creator
+  value: ACROBOTIC
+  status: unverifiable
+  owner: stream2
+  source: https://www.amazon.com/ACROBOTIC-ESP8266-Adapter-WS2812B-Raspberry/dp/B07JFCGH8C
+  retrieved: '2026-11-18'
+  notes: >-
+    The only evidence is the entry's own Amazon URL slug ("ACROBOTIC-ESP8266-Adapter-WS2812B-Raspberry",
+    the listing title's first words). The listing is 404, Amazon and price trackers block fetches
+    (503/403), there's no Wayback capture, and the archived acrobotic.com catalog doesn't list it.
+    ACROBOTIC does sell similar boards on Amazon (e.g. "ACROBOTIC WeMos ESP8266 D1 Mini WS2812B RGB
+    LED Shield"). Apply ACROBOTIC if the slug is accepted as evidence.
+
+- entry: adapters/espixelstick
+  field: creator
+  current: Forkineye (Shelby Merrick)
+  status: already-fixed
+  owner: stream2
+  notes: f58a359.
+
+- entry: controllers/quinled-dig-uno
+  field: creator
+  current:
+    name: Quindor / Intermittent Technology
+    url: https://quinled.info
+    page: https://quinled.info/quinled-dig-uno/
+  status: already-fixed
+  owner: stream2
+  notes: The report's entry was adapters/quinled-dig-uno, removed in d487f11; the surviving controllers entry has the creator.
+
+- entry: adapters/spixels-board
+  field: creator
+  current: Henner Zeller
+  status: already-fixed
+  owner: stream2
+  notes: f58a359.
+
+# Garbled fields (pi-hat). c246e98 rewrote the entry as Microcyb's dual-output
+# Raspberry Pi pixel HAT; the adapter restructure (3b9da1a) dropped the old fields.
+
+- entry: adapters/pi-hat
+  field: notes
+  current: Two-output pixel HAT for a Raspberry Pi running FPP ... (rewritten)
+  status: already-fixed
+  owner: stream2
+  notes: Was "Phoenix Screw"; rewritten in c246e98.
+
+- entry: adapters/pi-hat
+  field: outputs.count
+  current: 2
+  status: already-fixed
+  owner: stream2
+  notes: The report's max_channels 3200 is gone; outputs.count 2 is sourced to the archived Microcyb listing.
+
+- entry: adapters/pi-hat
+  field: pixel_types
+  status: already-fixed
+  owner: stream2
+  notes: Field no longer exists in the adapter schema; the stray '2' is gone.
+
+- entry: adapters/pi-hat
+  field: outputs.connector
+  status: already-fixed
+  owner: stream2
+  notes: 'The report''s "connectors: Both" is gone; the connector isn''t published, and the notes say so.'
+
+- entry: adapters/pi-hat
+  field: diy_or_ots
+  current: OTS
+  status: already-fixed
+  owner: stream2
+  notes: Was "Yes".
+
+- entry: adapters/pi-hat
+  field: parent
+  current: Raspberry Pi Zero / Zero W (also Pi 3, Pi 4)
+  status: already-fixed
+  owner: stream4
+  notes: Was "Yes" (parent is a stream 4 field).
+
+# Wrong channel counts
+
+- entry: adapters/sp901e-pixel-data-distributor
+  field: outputs.count
+  current: 4
+  status: already-fixed
+  owner: stream2
+  notes: f58a359. The notes field still says 8 (next record).
+
+- entry: adapters/sp901e-pixel-data-distributor
+  field: notes
+  current: Pixel data duplicated to 8 output channels
+  value: Pixel data amplified to 4 synchronous output channels
+  status: apply
+  owner: stream2
+  source: https://www.superlightingled.com/4ch-spi-signal-amplifier-sp901e-for-programmable-led-light-strips-p-3125.html
+  quote: 'Output: 4 SPI signal channels'
+  retrieved: '2026-11-18'
+  notes: >-
+    Title "4CH SPI Signal Amplifier SP901E For Programmable LED Light Strips"; the page says the
+    outputs keep strips "changing synchronously". It doesn't state the input count, so the new
+    text doesn't either.
+
+- entry: adapters/wled-wemos-shield
+  field: outputs.count
+  current: 2
+  value: 4
+  status: apply
+  owner: stream2
+  source: https://www.tindie.com/products/serg74/wled-shield-board-for-addressable-leds/
+  quote: 'Up to 4 LEDs outputs!'
+  retrieved: '2026-11-18'
+  notes: >-
+    Second maker source, the repo changelog (raw.githubusercontent.com/srg74/WLED-wemos-shield/master/Changelog.md),
+    v2.0: "Added capability to connect up to 4 LED strips with level shifting." v2.1: "Added
+    possibility to switch digital out 2 -> clock pin", so a clocked strip uses two of the four.
+    Inferred from the pinout PDF labels (not quoted): two data lines on the main LED terminal
+    (GPIO16/D4 and TX/RX), two more (IO14, IO15) level-shifted via solder jumpers. The SN74AHCT125
+    buffer (BOM part LV1) has 4 channels.
+
+- entry: adapters/espixelstick
+  field: outputs.count
+  current: 1
+  status: already-fixed
+  owner: stream2
+  notes: f58a359 (the 4 was universes).
+
+- entry: controllers/quinled-dig-uno
+  field: outputs.count
+  current: 2
+  status: already-fixed
+  owner: stream2
+  notes: >-
+    The suspect values (6 outputs, Phoenix Screw, 5 V) were on adapters/quinled-dig-uno, an
+    anonymous sheet row removed in d487f11. The controllers entry has 2 outputs, 5mm screw
+    terminals and 24 V max, sourced to quinled.info.
+
+# Minor
+
+- entry: adapters/espartstick
+  field: power.voltage
+  current:
+    min: 5
+    max: 12
+  status: already-fixed
+  owner: stream2
+  notes: 2a3efbf.
+
+- entry: adapters/octows2811-adaptor
+  field: parent
+  current: Teensy 3.2 - Teensy 4.1
+  status: already-fixed
+  owner: stream4
+  notes: f58a359 (parent is a stream 4 field).
+
+# Extra (not in the report), found while verifying the items above
+
+- entry: adapters/esp-pixnode
+  field: power.voltage
+  current:
+    max: 5
+  value:
+    min: 5
+    max: 12
+  status: apply
+  owner: stream2
+  source: https://web.archive.org/web/20210123104718/https://jboards.ecwid.com/ESPixNode-p127558674
+  quote: 'Supports both 5v/12v'
+  retrieved: '2026-11-18'
+  notes: >-
+    Extra. Read from the saved copy of the capture. The maker's setup guide agrees: "a voltage
+    regulator which allows use of both 5v and 12v"
+    (https://www.dropbox.com/s/t0p88c1wb4f22u8/espixnode.pdf, the PDF in sources.software.firmware).
+    The same listing says "5A fused output" and "Phoenix type plug in" terminals.
+
+- entry: adapters/wled-wemos-shield
+  field: power.voltage
+  current:
+    max: 12
+  value:
+    min: 5
+    max: 24
+  status: apply
+  owner: stream2
+  source: https://www.tindie.com/products/serg74/wled-shield-board-for-addressable-leds/
+  quote: 'Power selector 5V or 12/24V;'
+  retrieved: '2026-11-18'
+  notes: 'Extra. The repo README says the same: "Power selector (e.g 5VDC or 12/24VDC);".'
+
+# ---------------------------------------------------------------------------
+# commercial.md (d)
+# The color_type values keep the current "/"-separated string; notes give the
+# planned list form.
+# ---------------------------------------------------------------------------
+
+- entry: commercial-systems/active-rgb
+  field: name
+  current: Active RGB
+  value: Active RGBW
+  status: apply
+  owner: stream2
+  source: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+  quote: 'Large Harness Active RGBW Festoon Systems'
+  retrieved: '2026-11-18'
+  notes: >-
+    The 2026 brochure lists "Large Harness Festoon Systems - Active RGBW (DMX)", and the homepage
+    lists only the RGBW system. The product image's filename is "Lumisphere-Active-RGB" and the
+    page title says "Colour Changing RGB Festoon Lighting", so "Active RGB" was probably an older or
+    loose label. The slug stays active-rgb (renaming it is structural).
+
+- entry: commercial-systems/active-rgb
+  field: specs.color_type
+  current: RGB
+  value: RGBW
+  status: apply
+  owner: stream2
+  source: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+  quote: 'incorporating 3 RGBW SMD LEDs, consuming just 1.0 watt'
+  retrieved: '2026-11-18'
+  notes: Planned list form [RGBW].
+
+- entry: commercial-systems/active-rgb
+  field: specs.pixels_per_run
+  current: 170
+  value: 127
+  status: apply
+  owner: stream2
+  source: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+  quote: 'Each encoder can drive up to 127 RGBW LED units'
+  retrieved: '2026-11-18'
+  notes: >-
+    The 2026 brochure (https://lumisphere.co.uk/Lumisphere%20Brochure%202026.pdf) says less: "Each
+    encoder can drive up to 100 RGBW units and can be linked together to increase the number of
+    units." 127 x 4 channels fits one DMX universe; 170 is the RGB figure. Use 100 if you prefer the
+    conservative maker figure.
+
+- entry: commercial-systems/astera-nyx
+  field: specs.color_type
+  current: RGBW
+  value: RGBMA
+  status: apply
+  owner: stream2
+  source: https://astera-led.com/products/nyx-bulb/specs
+  quote: 'Colors | RGBMintAmber'
+  retrieved: '2026-11-18'
+  notes: >-
+    The product page tags it "RGBMA" (RGB + mint + amber; no white emitter). Structural: the planned
+    color list (RGB, RGBW, W, WW, CTA) has no value for RGBMA; it needs an RGBMA entry, or [RGB] plus
+    a note.
+
+- entry: commercial-systems/astera-nyx
+  field: specs.pixels_per_run
+  current: 170
+  value: null
+  status: apply
+  owner: stream2
+  source: https://astera-led.com/products/nyx-bulb/specs
+  quote: 'Pixels | 1'
+  retrieved: '2026-11-18'
+  notes: >-
+    Same spec page: "Wired DMX | No"; "Wireless Protocols | CRMX, UHF, Bluetooth". Each bulb is a
+    standalone one-pixel wireless fixture, with no data run to count; Astera publishes no per-universe
+    bulb count. Not changed but doubtful: dedicated_psu true. The bulb runs from ordinary lamp
+    sockets (FP5-E26 100-120 VAC; FP5-E27 and FP5-BC 100-240 VAC) or "5-18 VDC" from a power bank.
+
+- entry: commercial-systems/dfs3000
+  field: specs.color_type
+  current: RGB/RGBW/WW
+  value: RGB/RGBW
+  status: apply
+  owner: stream2
+  source: https://glassonelectronics.co.uk/dfs3000/
+  quote: 'All versions are available in RGB. Hi and SH are also available in RGBW.'
+  retrieved: '2026-11-18'
+  notes: No white or warm-white lamp version is described. Planned list form [RGB, RGBW]. pixels_per_run 170 matches "170 RGB or 127 RGBW" per driver.
+
+- entry: commercial-systems/festoon-2-rgb
+  field: specs.color_type
+  current: RGB W/WW
+  value: RGB
+  status: apply
+  owner: stream2
+  source: https://www.chauvetdj.com/products/festoon-2-rgb/
+  quote: '5 SMD LEDs (tri-color RGB)'
+  retrieved: '2026-11-18'
+  notes: The page mentions no white or warm-white bulbs; the kit includes "20 RGB bulbs". Planned list form [RGB].
+
+- entry: commercial-systems/festoon-2-rgb
+  field: creator.name
+  current: Chauvet
+  value: Chauvet DJ
+  status: apply
+  owner: stream2
+  source: https://www.chauvetdj.com/products/festoon-2-rgb/
+  quote: 'CHAUVET DJ'
+  retrieved: '2026-11-18'
+  notes: >-
+    Brand line, the way controllers/epix-flex-drive uses "Chauvet Professional" (both are brands of
+    Chauvet & Sons). The entry's image credit already says "Chauvet DJ". Leaving "Chauvet" isn't
+    wrong, just less specific.
+
+- entry: commercial-systems/smartpxl
+  field: creator
+  current: SmartPXL
+  value:
+    name: ENTTEC
+    url: https://www.enttec.com
+  status: apply
+  owner: stream2
+  source: https://www.enttec.com/products/led-pixel-dot-lights/
+  quote: 'ENTTEC designs and manufactures its SMART PXL waterproof LED pixel dot lights in Australia'
+  retrieved: '2026-11-18'
+  notes: Object form as on the other ENTTEC entries (controllers/pixelator uses url https://www.enttec.com).
+
+- entry: commercial-systems/smartpxl
+  field: name
+  current: SmartPXL
+  value: Smart PXL
+  status: apply
+  owner: stream2
+  source: https://www.enttec.com/products/led-pixel-dot-lights/
+  quote: 'Smart PXL 40 Dots'
+  retrieved: '2026-11-18'
+  notes: >-
+    From the entry's section, not the (d) list. ENTTEC writes "SMART PXL" in running text and
+    "Smart PXL" in product names ("Smart PXL 40 Dots", "Smart PXL 60 Dots", "Smart PXL 100×25 Dots").
+    Either fits; "SmartPXL" without the space doesn't. Not checked: the "CTA" in color_type (the
+    page says only "RGB or RGBW").
+
+- entry: commercial-systems/strip-and-tiles
+  field: creator.name
+  current: Schnick Schnack
+  value: Schnick-Schnack-Systems
+  status: apply
+  owner: stream2
+  source: https://schnick.schnack.systems/en/products/
+  quote: '© 2005—2026 Schnick-Schnack-Systems'
+  retrieved: '2026-11-18'
+  notes: Legal name per https://schnick.schnack.systems/en/imprint/ is "Schnick-Schnack-Systems GmbH" (Cologne).
+
+- entry: commercial-systems/triklit
+  field: creator.name
+  current: Minelon - Rainmin
+  value: Minleon
+  status: apply
+  owner: stream2
+  source: https://www.minleon.com/RGB-Triklit-Light-pl68458467.html
+  quote: 'Copyright © 2023 Minleon Outdoor Lighting. All Rights Reserved.'
+  retrieved: '2026-11-18'
+  notes: >-
+    The report is only half right: "Minelon" is a typo, but "Rainmin" isn't invented. Minleon USA's
+    TrikLits sheet (April 2018; Wiedamark links it as the Plus Line's specification sheet,
+    https://www.wiedamark.com/wp-content/uploads/archive/triklit42.pdf) says "Minleon-Rainmin's
+    TrikLits are 16-bit color-blended & 360-degree view-angle pixels". Rainmin Illumination Limited
+    is a separate Dongguan pixel-lighting maker. "Minleon" matches today's branding (site, and
+    Wiedamark's "Minleon RGB Triklits Plus Line"); "Minleon-Rainmin" is the attested alternative.
+
+- entry: commercial-systems/vc-dot-1
+  field: notes
+  current: Martin, stage lighting part of Harmon Kardon group
+  value: Martin Professional (stage lighting), part of HARMAN Professional Solutions, a business unit of HARMAN International (a Samsung Electronics subsidiary)
+  status: apply
+  owner: stream2
+  source: https://edisonreport.com/2026/10/19/harman-professional-solutions-announces-pablo-ruiz-campo-as-martin-professional-sales-leader-for-north-america/
+  quote: 'Martin Professional is part of HARMAN Professional Solutions, a Strategic Business Unit of HARMAN International'
+  retrieved: '2026-11-18'
+  notes: >-
+    HARMAN's press-release boilerplate (October 2026), which continues "a wholly owned subsidiary of
+    Samsung Electronics Co., Ltd." Ownership is current: no sale found. martin.com and pro.harman.com
+    return 403 to WebFetch, so this is the trade-press reprint.
+
+- entry: commercial-systems/vinci
+  field: creator
+  current: https://www.lucenti.lighting/products
+  value:
+    name: Lucenti
+    url: https://www.lucenti.lighting/
+  status: apply
+  owner: stream2
+  source: https://www.lucenti.lighting/collection/vinci
+  quote: '© 2026 Lucenti. All rights reserved.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Not in the report, and not changed: Lucenti's figures for pixels_per_run 128 disagree with each
+    other. The Ruby page says "up to 128 bulbs on a single string", and the Vinci controller spec
+    says "max 125 individual controllable bulbs".
+
+- entry: commercial-systems/lightwalls
+  field: notes
+  current: Strip and panels associated with Protopixel.io, subscription based control systems, "dynamic lighting"
+  value: RGBW light engines (Matrix tiles, Linear bars, Down Lights, System Kits) with 16-bit dimming. Around 2020 Light Walls sold ProtoPixel-based learning kits, which are no longer offered.
+  status: apply
+  owner: stream2
+  source: https://www.lightwalls.co.uk/
+  quote: 'Light Walls RGBW light engines deliver uncompromised white-light quality, enhanced by deeply saturated red, green, and blue.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Same page: "Benefit from 16-bit dimming, incredibly high CRI, and wide saturation." It doesn't
+    mention ProtoPixel; the 2020 part rests on the entry's own archived kit example ("Starter Kit
+    ProtoPixel and Lightwalls"). "Subscription based" is unsourced, so it's dropped.
+
+# Extra (not in the report), found while verifying the items above
+
+- entry: commercial-systems/triklit
+  field: specs.dimming_resolution
+  current: 8 Bit
+  value: 16-bit (8-bit via DDP)
+  status: apply
+  owner: stream2
+  source: https://www.wiedamark.com/wp-content/uploads/archive/triklit42.pdf
+  quote: '16-bit, 65,536 dimming levels*'
+  retrieved: '2026-11-18'
+  notes: >-
+    Extra. Footnote: "* 8-bit via DDP." The sheet is dated "Specifications as of April 2018"; it's
+    the spec sheet Wiedamark links from the Plus Line product page that the entry's prices come
+    from. For the restructure: dimming_bits 16, dimming_notes "8-bit via DDP". This also casts doubt
+    on notes ("WS2811/12 based") and core_tech ("WS281x"): those ICs are 8-bit. The sheet names no
+    IC, so those are left as they are.
+
+- entry: commercial-systems/lightwalls
+  field: specs.color_type
+  current: RGB/W
+  value: RGBW
+  status: apply
+  owner: stream2
+  source: https://www.lightwalls.co.uk/
+  quote: 'Light Walls RGBW light engines deliver uncompromised white-light quality'
+  retrieved: '2026-11-18'
+  notes: Extra. "RGB/W" is ambiguous for the planned list. Current products are RGBW, and so was the 2020 kit (the entry's example has "RGBW bars"). Planned list form [RGBW].
+
+- entry: commercial-systems/lightwalls
+  field: creator.name
+  current: Lightwalls
+  value: Light Walls
+  status: apply
+  owner: stream2
+  source: https://www.lightwalls.co.uk/
+  quote: '© 2026, Light Walls.'
+  retrieved: '2026-11-18'
+  notes: Extra, spelling only. The entry's image credit already says "Light Walls"; the domain is lightwalls.co.uk.
+
+- entry: commercial-systems/lightwalls
+  field: name
+  current: Lightwalls
+  value: Light Walls
+  status: apply
+  owner: stream2
+  source: https://www.lightwalls.co.uk/
+  quote: '© 2026, Light Walls.'
+  retrieved: '2026-11-18'
+  notes: Extra, spelling only (same as creator.name). The slug stays lightwalls.

@@ -1,7 +1,7 @@
 name: Triklit
 status: active
 creator:
-  name: Minelon - Rainmin
+  name: Minleon
   page: https://minleonusa.com/luminaires
 vendors:
   - Wiedamark # online pricing published here
@@ -45,7 +45,16 @@ sources:
     url: https://www.wiedamark.com/product/25minleonrgbtrikliks/
     retrieved: '2026-11-18'
     notes: 'Triklits Plus strings in stock (100), 25-bulb $190'
+  creator.name:
+    url: https://www.minleon.com/RGB-Triklit-Light-pl68458467.html
+    retrieved: '2026-11-18'
+    notes: Copyright © 2023 Minleon Outdoor Lighting. All Rights Reserved.
+  specs.dimming_bits:
+    url: https://www.wiedamark.com/wp-content/uploads/archive/triklit42.pdf
+    retrieved: '2026-11-18'
+    notes: 'Minleon spec sheet (as of April 2018): "16-bit, 65,536 dimming levels*", footnote "* 8-bit via DDP."'
 specs:
-  dimming_bits: 8
+  dimming_bits: 16
+  dimming_notes: 8-bit via DDP
   color_type: RGB
   dedicated_psu: true

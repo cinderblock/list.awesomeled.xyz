@@ -18,7 +18,7 @@ outputs:
     ref: mtsb-combicon
   driver:
     buffered: true
-  clocked: selectable # supports WS2812 (clockless) and APA102 (clocked)
+  clocked: selectable # 8 single-wire or 6 clocked outputs
   pixels:
     max_total: 6400
   protocols:
@@ -41,6 +41,8 @@ images:
   - file: electromage-pro-8x-driver.webp
     source: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
     credit: ElectroMage
+other_links:
+  - https://electromage.com/docs/pro-output-expander
 price: 65
 price_source:
   notes: Pixelblaze Pro Output Expander; 12V (DC converter, EM-O5-12V-PT) and 5V (EM-O5-5V-PT) variants both $65; sold out at the ElectroMage store at retrieval ("check distributors")

@@ -1,7 +1,7 @@
 name: SP901E Pixel Data Distributor
 status: active
 creator: Generic
-notes: Pixel data duplicated to 8 output channels
+notes: Pixel data amplified to 4 synchronous output channels
 outputs:
   count: 4
   clocked: selectable
@@ -28,3 +28,7 @@ sources:
     url: https://www.superlightingled.com/dc524v-4-channel-spi-signal-output-data-signal-sp901e-amplifier-for-programmable-dream-color-6803-1903-1809-1812-2811-ic-led-light-strips-p-3125.html
     retrieved: '2026-11-18'
     notes: "'Output: 4 SPI signal'"
+  notes:
+    url: https://www.superlightingled.com/4ch-spi-signal-amplifier-sp901e-for-programmable-led-light-strips-p-3125.html
+    retrieved: '2026-11-18'
+    notes: 'Output: 4 SPI signal channels'

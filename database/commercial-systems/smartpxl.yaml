@@ -1,6 +1,8 @@
-name: SmartPXL
+name: Smart PXL
 status: active
-creator: SmartPXL
+creator:
+  name: ENTTEC
+  url: https://www.enttec.com
 notes: High dimming resolution pixel dots made in Australia
 images:
   - file: smartpxl.webp
@@ -28,6 +30,14 @@ sources:
     url: https://www.enttec.com/product/led-pixel-dot-lights/hi-res-smart-pxl40p-rgb-led-pixel-dot-strings/
     retrieved: '2026-11-18'
     notes: 'ENTTEC SMART PXL 40 dot strings on the current site, quoted via Pixel Designer'
+  creator:
+    url: https://www.enttec.com/products/led-pixel-dot-lights/
+    retrieved: '2026-11-18'
+    notes: ENTTEC designs and manufactures its SMART PXL waterproof LED pixel dot lights in Australia
+  name:
+    url: https://www.enttec.com/products/led-pixel-dot-lights/
+    retrieved: '2026-11-18'
+    notes: Smart PXL 40 Dots
 specs:
   pixels_per_run: 1360
   dimming_bits:

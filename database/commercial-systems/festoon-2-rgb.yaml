@@ -1,7 +1,7 @@
 name: Festoon 2 RGB
 status: active
 creator:
-  name: Chauvet
+  name: Chauvet DJ
   page: https://www.chauvetdj.com/products/festoon-2-rgb/
 notes: Separate controller, 20 globes per string max 3 strings per control IP 54
 images:
@@ -36,10 +36,15 @@ sources:
     url: https://soundpro.com/products/chauvet-dj-festoon2rgb
     retrieved: '2026-11-18'
     notes: 'listed for sale at MAP $649.99; Chauvet DJ product page has no discontinued notice'
+  specs.color_type:
+    url: https://www.chauvetdj.com/products/festoon-2-rgb/
+    retrieved: '2026-11-18'
+    notes: 5 SMD LEDs (tri-color RGB)
+  creator.name:
+    url: https://www.chauvetdj.com/products/festoon-2-rgb/
+    retrieved: '2026-11-18'
+    notes: CHAUVET DJ
 specs:
   pixels_per_run: 60
-  color_type:
-    - RGB
-    - W
-    - WW
+  color_type: RGB
   dedicated_psu: true

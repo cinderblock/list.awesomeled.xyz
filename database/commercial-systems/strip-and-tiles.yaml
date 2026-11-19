@@ -2,7 +2,7 @@ name: Strip and Tiles
 status: active
 release_year: 2001
 creator:
-  name: Schnick Schnack
+  name: Schnick-Schnack-Systems
   url: https://schnick.schnack.systems/
 notes: Strip and Tiles with very high resolution dimming and video input compatible, very long established pioneers.
 images:
@@ -18,6 +18,10 @@ sources:
     url: https://schnick.schnack.systems/en/product/led-streifen-c25-500-cut-mk4/
     retrieved: '2026-11-18'
     notes: 'current LED-Strip C25-500 CUT MK4.1 page, prices behind dealer login'
+  creator.name:
+    url: https://schnick.schnack.systems/en/products/
+    retrieved: '2026-11-18'
+    notes: © 2005—2026 Schnick-Schnack-Systems
 specs:
   pixels_per_run: 3072
   color_type: RGBW
