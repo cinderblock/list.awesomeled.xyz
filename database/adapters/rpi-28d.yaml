@@ -32,6 +32,36 @@ related:
       notes: '"This product has been superseded by" the rPI-28D+ (in stock, AU$40)'
     name: rPI-28D+
     url: https://www.hansonelectronics.com.au/product/rpi-28dplus/
+  - type: host
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Raspberry Pi cape; maker lists Pi 2, 3, 4 or Zero
+    source:
+      url: http://www.hansonelectronics.com.au/product/rpi-28d/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b
+    notes: Pi 2 named by the maker
+    source:
+      url: http://www.hansonelectronics.com.au/product/rpi-28d/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b-v1-2
+    notes: Pi 2 named by the maker (v1.2 revision)
+    source:
+      url: http://www.hansonelectronics.com.au/product/rpi-28d/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-3
+    notes: Pi Zero named by the maker
+    source:
+      url: http://www.hansonelectronics.com.au/product/rpi-28d/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-2
+    notes: Pi Zero named by the maker
+    source:
+      url: http://www.hansonelectronics.com.au/product/rpi-28d/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -43,9 +73,12 @@ sources:
     retrieved: '2026-11-18'
     notes: '"This product has been superseded by" the rPI-28D+; category Obsolete, out of stock'
   software.firmware:
-    url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
-    retrieved: '2026-11-18'
-    notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/pi/rPi-28D-eeprom.bin'
+    - url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
+      retrieved: '2026-11-18'
+      notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/pi/rPi-28D-eeprom.bin'
+    - url: http://www.hansonelectronics.com.au/product/rpi-28d/
+      retrieved: '2026-11-18'
+      notes: Hanson Electronics product page
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/hanson.xcontroller
     retrieved: '2026-11-18'

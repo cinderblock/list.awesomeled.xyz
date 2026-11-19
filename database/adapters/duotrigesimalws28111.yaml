@@ -23,8 +23,34 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/amoscomputing/teensy-41-pixel-pusher/
   vendor: Amos Computing (Tindie)
+related:
+  - type: host
+    ref: microboards/teensy-4-1
+    notes: Carrier board for the Teensy 4.1 (socketed or soldered)
+    source:
+      url: https://github.com/brianamos1/DuotrigesimalWS2811
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/rj45
+    notes: Outputs on 4-port RJ45 jacks (Amphenol RJHSE508004 on v0.2, Adam Tech MTJG-4-88GX1-FSB on v0.2a); kit has 2 four-port jacks = 8 ports x 4 strings
+    source:
+      url: https://github.com/brianamos1/DuotrigesimalWS2811
+      retrieved: '2026-11-18'
+  - type: related
+    ref: adapters/octows2811-adaptor
+    notes: 32-output adaptation of PJRC's 8-output OctoWS2811 adaptor (same library, RJ45 4-strings-per-jack scheme)
+    source:
+      url: https://www.tindie.com/products/25767/
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - OctoWS2811
 sources:
   status:
     url: https://www.tindie.com/products/amoscomputing/teensy-41-pixel-pusher/
     retrieved: '2026-11-18'
     notes: 'Tindie "Product Retired" (sold as the Teensy 4.1 Pixel Pusher); design files stay on GitHub'
+  software.works_with:
+    url: https://github.com/brianamos1/DuotrigesimalWS2811
+    retrieved: '2026-11-18'
+    notes: Readme

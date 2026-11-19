@@ -23,3 +23,11 @@ price_source:
   retrieved: '2025-12-23'
   url: https://web.archive.org/web/20251223085343/https://www.ebay.co.uk/itm/133705567939
   vendor: Mottramlabs (eBay UK)
+software:
+  firmware:
+    - WLED
+sources:
+  software.firmware:
+    url: https://web.archive.org/web/2025id_/https://mottramlabs.com/pdf/DTA201123.pdf
+    retrieved: '2026-11-18'
+    notes: MottramLabs datasheet MLP201123 (updated 12 Aug 2021), 'Software – WLED' page; also links the 'WLED Sound Reactive' fork (atuline)

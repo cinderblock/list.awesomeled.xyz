@@ -25,6 +25,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://shop.electromage.com/products/pixelblaze-output-expander-serial-to-8x-ws2812-apa102-driver
   vendor: ElectroMage
+related:
+  - type: accessory
+    ref: controllers/pixelblaze-v3
+    notes: Serial output expander originally made for the Pixelblaze (also works from any UART)
+    source:
+      url: https://www.tindie.com/products/electromage/electromage-serial-to-8x-ws2812apa102-driver/
+      retrieved: '2026-11-18'
 software:
   works_with:
     - Pixelblaze

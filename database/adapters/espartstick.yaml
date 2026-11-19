@@ -24,8 +24,15 @@ price_source:
   retrieved: '2021-08-03'
   url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
   vendor: Microcyb (ESPArtStick)
+software:
+  firmware:
+    - ESPixelStick
 sources:
   status:
     url: https://microcyb.com/shop.php?category=LED+pixel+Controller
     retrieved: '2026-11-18'
     notes: 'Microcyb now lists only ShowSpark controllers; the old Ecwid store (espartstick.company.site) says "The site is not available"'
+  software.firmware:
+    url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
+    retrieved: '2026-11-18'
+    notes: Microcyb store product page (SKU 00010), Wayback capture 2021-08-03; same sentence on the 2019 capture

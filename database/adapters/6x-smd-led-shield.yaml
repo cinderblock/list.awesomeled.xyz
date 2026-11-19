@@ -22,8 +22,33 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/jasoncoon/smd-6-output-wemos-d1-mini-wi-fi-led-controller/
   vendor: Evil Genius Labs (Tindie)
+related:
+  - type: variant
+    ref: adapters/6x-led-shield
+    notes: Smaller, assembled SMD version of the through-hole 6-output Wemos D1 Mini shield (omits its 1000uF capacitor)
+    source:
+      url: https://www.tindie.com/products/19174/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/sm
+    notes: Maker lists pre-wired JST SM connectors as the LED connection (soldered to the output pads)
+    source:
+      url: https://www.tindie.com/products/19174/
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - esp8266-fastled-webserver
+  works_with:
+    - FastLED
 sources:
   status:
     url: https://www.tindie.com/products/jasoncoon/smd-6-output-wemos-d1-mini-wi-fi-led-controller/
     retrieved: '2026-11-18'
     notes: 'Tindie "Product Retired", sold out since 2021-07-25; the creator now only offers the bare PCB via OSH Park'
+  software.firmware:
+    url: https://www.tindie.com/products/19174/
+    retrieved: '2026-11-18'
+    notes: "'Specs and Docs' > Source Code link (maker's own example firmware, 'parallel' branch)"
+  software.works_with:
+    url: https://www.tindie.com/products/19174/
+    retrieved: '2026-11-18'

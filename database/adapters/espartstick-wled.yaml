@@ -33,8 +33,29 @@ price_source:
   retrieved: '2025-06-21'
   url: https://web.archive.org/web/20250621071152/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
   vendor: Microcyb
+related:
+  - type: variant
+    ref: adapters/espartstick
+    notes: SD-card edition of the ESP Art Stick Wemos D1 mini shield (adds microSD standalone playback and an IR receiver; sold with WLED pre-installed)
+    source:
+      url: https://web.archive.org/web/20210803013600/https://espartstick.ecwid.com/ESP-Art-Stick-5v-12v-WiFi-pixel-Controller-p145284289
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - WLED
+    - EsPixelStick
+  works_with:
+    - LedFx
 sources:
   status:
     url: https://microcyb.com/shop.php?category=LED+pixel+Controller
     retrieved: '2026-11-18'
     notes: 'Microcyb now lists only ShowSpark controllers; the old Ecwid store (espartstick.company.site) says "The site is not available"'
+  software.firmware:
+    url: https://web.archive.org/web/20231130033100/https://espartstick.ecwid.com/WLED-5v-12V-SD-Card-WiFi-EspArtStick-pixel-controller-p170368862
+    retrieved: '2026-11-18'
+    notes: "Microcyb store product page (SKU 0012), Wayback 2023-11-30: ships with 'WLED PRE-INSTALLED'; SD-card standalone playback needs ESPixelStick"
+  software.works_with:
+    url: https://web.archive.org/web/20210803015116/https://espartstick.ecwid.com/5v-12V-SD-Card-WiFi-Enhanced-Edition-WLED-pre-Installed-p170368862
+    retrieved: '2026-11-18'
+    notes: WLED USAGE section; the maker names the tool by its URL (ledfx.app = LedFx)

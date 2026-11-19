@@ -22,9 +22,30 @@ price_source:
   retrieved: '2026-11-18'
   url: https://oshpark.com/shared_projects/BTdhLFc3
   vendor: OSH Park
+related:
+  - type: host
+    ref: microboards/raspberry-pi-1-model-b
+    notes: Any 40-pin-GPIO Pi; Pi 1 B+ named
+    source:
+      url: https://github.com/hzeller/spixels
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b
+    notes: Pi 2 named by the maker
+    source:
+      url: https://github.com/hzeller/spixels
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b-v1-2
+    notes: Pi 2 named by the maker (v1.2 revision)
+    source:
+      url: https://github.com/hzeller/spixels
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
+  works_with:
+    - spixels
 sources:
   status:
     url: https://oshpark.com/shared_projects/BTdhLFc3
@@ -34,3 +55,7 @@ sources:
     url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
     retrieved: '2026-11-18'
     notes: "Falcon Player (FPP) names this cape/board — FPP bundles Henner Zeller's spixels library (.gitmodules: URL = https://github.com/hzeller/spixels.git) and ships capes/pi/spixels-eeprom.bin"
+  software.works_with:
+    url: https://github.com/hzeller/spixels
+    retrieved: '2026-11-18'
+    notes: the repository readme's first line links http://spixels.org/ (the entry's product link, which failed TLS when fetched); the board and its C++ library (MultiSPI class) live in this repository

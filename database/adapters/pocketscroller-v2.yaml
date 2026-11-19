@@ -25,6 +25,13 @@ price_source:
   retrieved: '2026-11-18'
   url: https://kulplights.com/product/pocketscroller/
   vendor: Kulp Lights
+related:
+  - type: host
+    ref: microboards/pocketbeagle
+    notes: Cape for the PocketBeagle (also sold premounted on a PocketBeagle 2)
+    source:
+      url: https://kulplights.com/product/pocketscroller/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -36,9 +43,12 @@ sources:
     retrieved: '2026-11-18'
     notes: 'all variants in stock, $28-$105'
   software.firmware:
-    url: https://github.com/FalconChristmas/fpp/blob/master/capes/pb/panels/PocketScroller.json
-    retrieved: '2026-11-18'
-    notes: Falcon Player (FPP) names this cape/board — FPP names it just 'PocketScroller' (no version); EEPROM capes/pb/PocketScroller-eeprom.bin
+    - url: https://github.com/FalconChristmas/fpp/blob/master/capes/pb/panels/PocketScroller.json
+      retrieved: '2026-11-18'
+      notes: Falcon Player (FPP) names this cape/board — FPP names it just 'PocketScroller' (no version); EEPROM capes/pb/PocketScroller-eeprom.bin
+    - url: https://kulplights.com/product/pocketscroller/
+      retrieved: '2026-11-18'
+      notes: Kulp product page (confirms the existing value)
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

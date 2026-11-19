@@ -24,11 +24,21 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/serg74/wled-shield-board-for-addressable-leds/
   vendor: serg74 (Tindie)
+related:
+  - type: uses
+    ref: level-converters/sn74ahct125n
+    notes: Data level shifter (BOM part LV1)
+    source:
+      url: https://github.com/srg74/WLED-wemos-shield/blob/master/resources/BOM/BOM_Digi-key_v3.0.csv
+      retrieved: '2026-11-18'
 software:
   firmware:
     - WLED
 sources:
   software.firmware:
-    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
-    retrieved: '2026-11-18'
-    notes: "WLED docs: compatible controllers — section 'WLED shields to be use with ESP8266/ESP32 controller boards'; same repository URL as the database entry"
+    - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+      notes: "WLED docs: compatible controllers — section 'WLED shields to be use with ESP8266/ESP32 controller boards'; same repository URL as the database entry"
+    - url: https://github.com/srg74/WLED-wemos-shield
+      retrieved: '2026-11-18'
+      notes: repository description; readme 'Firmware' section ships WLED builds (Aircoookie WLED plus the blazoncek, Atuline and MoonModules forks)

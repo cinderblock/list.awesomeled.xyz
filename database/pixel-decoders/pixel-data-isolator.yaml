@@ -1,6 +1,10 @@
 name: Pixel Data Isolator
 creator: Essence Engineering
 notes: Provides a 5 kV isolated data connection from controller to LEDs when each is powered separately.
+inputs:
+  protocols:
+    - WS28xx
+    - NeoPixels
 outputs:
   count: 1
   types:
@@ -19,3 +23,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/
   vendor: Essence Engineering (Tindie)
+sources:
+  inputs.protocols:
+    url: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/
+    retrieved: '2026-11-18'
+    notes: Tindie listing 'Fajardo LED data isolator' by Essence Engineering; passes any single-wire pixel data up to 5MHz (family names, not single ICs)

@@ -23,8 +23,27 @@ price_source:
   retrieved: '2026-11-18'
   url: https://oshpark.com/shared_projects/M36968Sg
   vendor: OSH Park
+related:
+  - type: uses
+    ref: connectors/sm
+    notes: Maker's build guide terminates the LED wires (soldered to the pads) with JST-SM connectors
+    source:
+      url: https://www.evilgeniuslabs.org/level-shifter-featherwing
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - esp32-fastled-webserver
+  works_with:
+    - FastLED
 sources:
   status:
     url: https://www.evilgeniuslabs.org/level-shifter-featherwing
     retrieved: '2026-11-18'
     notes: "creator's Buy section: order the PCB directly from OSH Park (Tindie listing retired)"
+  software.firmware:
+    url: https://www.evilgeniuslabs.org/level-shifter-featherwing
+    retrieved: '2026-11-18'
+    notes: maker's own open-source example firmware; also the Tindie 'Source Code' link
+  software.works_with:
+    url: https://www.tindie.com/products/11579/
+    retrieved: '2026-11-18'

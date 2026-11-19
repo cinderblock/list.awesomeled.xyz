@@ -23,8 +23,52 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.sparkfun.com/octows2811-adaptor-for-teensy-3-x-4-x.html
   vendor: SparkFun
+related:
+  - type: host
+    ref: microboards/teensy-3-2
+    notes: Plugs on with 14x1 pins/sockets
+    source:
+      url: https://www.pjrc.com/store/octo28_adaptor.html
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-4-0
+    notes: Plugs on with 14x1 pins/sockets
+    source:
+      url: https://www.pjrc.com/store/octo28_adaptor.html
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-4-1
+    notes: Longer board, mounted with double-insulator pins so it overhangs the RJ-45 jacks
+    source:
+      url: https://www.pjrc.com/store/octo28_adaptor.html
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-3-6
+    notes: Longer board, mounted with double-insulator pins
+    source:
+      url: https://www.pjrc.com/store/octo28_adaptor.html
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-3-5
+    notes: Longer board, mounted with double-insulator pins
+    source:
+      url: https://www.pjrc.com/store/octo28_adaptor.html
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/rj45
+    notes: Eight outputs on two RJ-45 jacks (4 strings per CAT6 cable)
+    source:
+      url: https://www.pjrc.com/store/octo28_adaptor.html
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - OctoWS2811
 sources:
   status:
     url: https://www.sparkfun.com/octows2811-adaptor-for-teensy-3-x-4-x.html
     retrieved: '2026-11-18'
     notes: 'in stock, $10.00; PJRC now sends buyers to SparkFun'
+  software.works_with:
+    url: https://www.pjrc.com/store/octo28_adaptor.html
+    retrieved: '2026-11-18'
+    notes: PJRC product page; resolves to drive-libraries/octows2811. The page also says 'It may be possible to use this board with FastLED to drive a long strip of APA102 LEDs' (hedged, not added)

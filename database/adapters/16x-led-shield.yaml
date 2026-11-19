@@ -23,8 +23,28 @@ price_source:
   retrieved: '2026-11-18'
   url: https://oshpark.com/shared_projects/dDX67jyf
   vendor: OSH Park
+related:
+  - type: uses
+    ref: connectors/sm
+    notes: Maker's build guide wires the LEDs with pre-assembled 3-pin JST-SM pigtails soldered to the large output pads (no connector on the board itself)
+    source:
+      url: https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - esp32-fastled-webserver
+  works_with:
+    - FastLED
 sources:
   status:
     url: https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller
     retrieved: '2026-11-18'
     notes: "creator's Buy section: order the PCB directly from OSH Park (Tindie kit listing retired)"
+  software.firmware:
+    url: https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller
+    retrieved: '2026-11-18'
+    notes: Code section; the maker's own open-source example firmware (also linked as 'Source Code' on the Tindie listing)
+  software.works_with:
+    url: https://www.tindie.com/products/15247/
+    retrieved: '2026-11-18'
+    notes: Tindie description

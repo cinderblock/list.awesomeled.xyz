@@ -2,6 +2,9 @@ name: WS2811 MosFetDriver
 status: discontinued
 creator: Freetronics
 notes: WS2811 to high-current MOSFET outputs.
+inputs:
+  protocols:
+    - WS2811
 outputs:
   count: 3
   types:
@@ -21,10 +24,20 @@ price:
   currency: AUD
 price_source:
   notes: >-
-    Last list price (sold out), from a Wayback capture of the Freetronics product page;
-    retrieved is the capture date. The Freetronics store closed in Dec 2025 and its products
-    are moving to superhouse.tv, which does not list this module yet.
+    Last list price (sold out), from a Wayback capture of the Freetronics product page; retrieved is the capture date. The Freetronics store closed in Dec 2025 and its products are moving to superhouse.tv, which does not list this module yet.
   part: FREENFET
   retrieved: '2025-11-07'
   url: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
   vendor: Freetronics
+related:
+  - type: uses
+    ref: pixel-ics/ws2811
+    notes: Built-in WS2811 switches one N-MOSFET
+    source:
+      url: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
+      retrieved: '2026-11-18'
+sources:
+  inputs.protocols:
+    url: https://web.archive.org/web/20251107015419/https://www.freetronics.com.au/products/addressable-n-mosfet-driver-output-module
+    retrieved: '2026-11-18'
+    notes: Freetronics product page (entry's own dead_links archive, 2025-11-07); 'fully compatible with the software that you already use to control addressable LEDs' (FastLED / NeoPixel)

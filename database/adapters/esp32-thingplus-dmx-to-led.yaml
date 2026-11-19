@@ -27,8 +27,26 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.sparkfun.com/sparkfun-esp32-thing-plus-dmx-to-led-shield.html
   vendor: SparkFun
+related:
+  - type: uses
+    ref: connectors/xlr-3
+    notes: One male and one female XLR-3 for DMX in/out
+    source:
+      url: https://www.sparkfun.com/products/15110
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - SparkFunDMX
+    - ArtnetWifi
+    - ESP32Servo
+    - Resolume Arena 6
+    - FastLED
 sources:
   status:
     url: https://www.sparkfun.com/sparkfun-esp32-thing-plus-dmx-to-led-shield.html
     retrieved: '2026-11-18'
     notes: 'in stock, $18.50'
+  software.works_with:
+    url: https://learn.sparkfun.com/tutorials/sparkfun-esp32-dmx-to-led-shield/all
+    retrieved: '2026-11-18'
+    notes: "Hookup guide 'Software Setup'; the product page lists 'Arduino Libraries: SparkFun DMX Arduino Library, ArtnetWifi Arduino Library, ESP32 Servo Library'."

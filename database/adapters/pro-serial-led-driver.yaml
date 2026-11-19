@@ -25,6 +25,25 @@ price_source:
   retrieved: '2026-11-18'
   url: https://shop.electromage.com/products/pixelblaze-pro-output-expander-pro-8x-ws2812-apa102-led-driver
   vendor: ElectroMage
+related:
+  - type: variant
+    ref: adapters/serial-led-driver
+    notes: 'Pro version of the Serial to 8x driver: 5-12V, fused, pluggable terminals, optional DC-DC for the host'
+    source:
+      url: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/
+      retrieved: '2026-11-18'
+  - type: accessory
+    ref: controllers/pixelblaze-v3
+    notes: Sold as the 'Pixelblaze Pro Output Expander'; a Pixelblaze can be mounted directly on it
+    source:
+      url: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/mtsb-combicon
+    notes: Pluggable screw-terminal outputs (a review calls them phoenix-style)
+    source:
+      url: https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/
+      retrieved: '2026-11-18'
 software:
   works_with:
     - Pixelblaze

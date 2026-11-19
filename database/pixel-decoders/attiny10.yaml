@@ -1,6 +1,9 @@
 name: ATtiny10
 creator: Wayne Holder
 notes: Drives 3-wire clockless LEDs from a 4-wire clocked protocol. Experimental. Wayne only provides a proof of concept.
+inputs:
+  protocols:
+    - SPI (Mode 0)
 outputs:
   count: 1
   types:
@@ -25,3 +28,15 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.microchip.com/en-us/product/ATtiny10
   vendor: Microchip Direct
+related:
+  - type: related
+    ref: pixels/ws2812
+    notes: 'Output side: generates NeoPixel (WS2812) bit timing from the SPI stream'
+    source:
+      url: https://web.archive.org/web/20230305072712/https://sites.google.com/site/wayneholder/besting-ben-heck
+      retrieved: '2026-11-18'
+sources:
+  inputs.protocols:
+    url: https://web.archive.org/web/20230305072712/https://sites.google.com/site/wayneholder/besting-ben-heck
+    retrieved: '2026-11-18'
+    notes: Wayne Holder, 'Besting Ben Heck' (entry's own archive link); input is a raw SPI bit stream (SCK on pin 1, MOSI on pin 3), not a pixel protocol - it won't resolve to a pixel entry

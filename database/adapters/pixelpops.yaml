@@ -15,3 +15,24 @@ diy_or_ots: DIY
 links:
   product: https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
 parent: ESP-01 (ESP8266)
+related:
+  - type: host
+    ref: microboards/esp-01
+    notes: Plug-in ESP-01 module on a 2x4 female header
+    source:
+      url: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+      retrieved: '2026-11-18'
+  - type: variant
+    ref: adapters/espixelstick
+    notes: All-through-hole DIY derivative (by Pops Electronics / ukewarrior, from a Bill Porter design) of the ESP-01-based ESPixelStick
+    source:
+      url: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - ESPixelStick
+sources:
+  software.firmware:
+    url: https://web.archive.org/web/20250627191305/https://www.doityourselfchristmas.com/wiki/index.php?title=ESPixel_Stick_%26_ESPixel_Pops
+    retrieved: '2026-11-18'
+    notes: "DIYC wiki 'ESPixel Stick & ESPixel Pops' (live URL now 404; Wayback 2025-06-27). Same page: 'there is one common firmware thread that works on all of the ESP-01 based DIYC pixel sticks.'"

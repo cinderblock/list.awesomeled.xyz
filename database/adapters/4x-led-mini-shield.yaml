@@ -23,8 +23,22 @@ price_source:
   retrieved: '2026-11-18'
   url: https://oshpark.com/shared_projects/6tHcl6u3
   vendor: OSH Park
+related:
+  - type: uses
+    ref: connectors/sm
+    notes: Maker's build guide wires the LEDs with pre-assembled 3-pin JST-SM pigtails soldered to the output pads
+    source:
+      url: https://www.evilgeniuslabs.org/mini-wifi-led-controller
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - FastLED
 sources:
   status:
     url: https://www.evilgeniuslabs.org/mini-wifi-led-controller
     retrieved: '2026-11-18'
     notes: "creator's Buy section: order the PCB directly from OSH Park (Tindie listing retired)"
+  software.works_with:
+    url: https://www.tindie.com/products/9723/
+    retrieved: '2026-11-18'
+    notes: Tindie description (same sentence on the maker docs page https://www.evilgeniuslabs.org/mini-wifi-led-controller)

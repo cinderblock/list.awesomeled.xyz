@@ -2,6 +2,9 @@ name: Pixel 2 Things Servo
 status: discontinued
 creator: David Peace
 notes: Converts pixel data into hobby servo outputs. WS to 9DC and 6 Servo Outputs
+inputs:
+  protocols:
+    - WS2811
 outputs:
   count: 15
   types:
@@ -24,14 +27,24 @@ links:
 price: 109.99
 price_source:
   notes: >-
-    Last list price of the PIXEL2DC9-S6 (9 DC + 6 servo outputs), from a Wayback capture of the
-    vendor's product page marked "Availability: Discontinued"; retrieved is the capture date.
+    Last list price of the PIXEL2DC9-S6 (9 DC + 6 servo outputs), from a Wayback capture of the vendor's product page marked "Availability: Discontinued"; retrieved is the capture date.
   part: PIXEL2DC9-S6
   retrieved: '2022-05-23'
   url: https://web.archive.org/web/20220523000451/https://experiencelights.com/pixel2dc9-s6/
   vendor: Experience Lights
+related:
+  - type: variant
+    ref: pixel-decoders/pixel-2-things-relay
+    notes: 'Sibling Pixel2Things board (Pixel2DC/DC9S6 vs Pixel2AC/AC9): same WS2811 input, pass-through and DMX output'
+    source:
+      url: https://web.archive.org/web/20190818073416/https://www.pixel2things.com/9-DC-6-Servo-Outputs-Fully-Assembled-p137348805
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://web.archive.org/web/20220523000451/https://experiencelights.com/pixel2dc9-s6/
     retrieved: '2022-05-23'
     notes: 'Availability: Discontinued; This product has been discontinued.'
+  inputs.protocols:
+    url: https://web.archive.org/web/20190818073416/https://www.pixel2things.com/9-DC-6-Servo-Outputs-Fully-Assembled-p137348805
+    retrieved: '2026-11-18'
+    notes: "Pixel2Things '9 DC + 6 Servo Outputs / Fully Assembled' (SKU PIXEL2DC9-S6), Board Specifications: 'Input Pixel Type: Any WS2811 Pixel'"

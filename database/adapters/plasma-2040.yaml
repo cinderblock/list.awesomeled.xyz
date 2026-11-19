@@ -27,8 +27,16 @@ related:
       notes: 'Pimoroni: "Meet its successor Plasma 2350"'
     name: Plasma 2350
     url: https://shop.pimoroni.com/en-us/products/plasma-2350
+software:
+  firmware:
+    - MicroPython
+    - CircuitPython
 sources:
   status:
     url: https://shop.pimoroni.com/en-us/products/plasma-2040
     retrieved: '2026-11-18'
     notes: '"We no longer stock this product" ... "Meet its successor Plasma 2350"'
+  software.firmware:
+    url: https://web.archive.org/web/20260202114411/https://shop.pimoroni.com/products/plasma-2040
+    retrieved: '2026-11-18'
+    notes: "Pimoroni product page (Wayback 2026-02-02; live page rate-limited with HTTP 429): 'Plasma MicroPython firmware and examples', 'You can also use CircuitPython on your Plasma 2040!'; C/C++ SDK also supported"

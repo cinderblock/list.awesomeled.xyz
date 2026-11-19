@@ -20,8 +20,45 @@ price_source:
   retrieved: '2025-07-16'
   url: https://web.archive.org/web/20250716105223/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Dual-Output-5v-12v-p228404281
   vendor: Microcyb
+related:
+  - type: host
+    ref: microboards/raspberry-pi-zero-w
+    notes: Designed for the Pi Zero / Zero W (powers the Pi through the HAT)
+    source:
+      url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-3
+    notes: Designed for the Pi Zero / Zero W
+    source:
+      url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-2
+    notes: Designed for the Pi Zero / Zero W
+    source:
+      url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Maker also lists RPI 3 and RPI 4 as compatible
+    source:
+      url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - FPP
+  works_with:
+    - xLights
 sources:
   status:
     url: https://microcyb.com/shop.php?category=LED+pixel+Controller
     retrieved: '2026-11-18'
     notes: 'Microcyb now lists only ShowSpark controllers; the old Ecwid store (espartstick.company.site) says "The site is not available"'
+  software.firmware:
+    url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
+    retrieved: '2026-11-18'
+    notes: Microcyb 'Raspberry Pi Pixel HAT Controller Dual Output 5v - 12v' (SKU 0302), Wayback 2021-08-03 - see notes for why this is taken to be the entry's product
+  software.works_with:
+    url: https://web.archive.org/web/20210803012831/https://espartstick.ecwid.com/Raspberry-Pi-Pixel-HAT-Controller-Duel-Output-5v-12v-p228404281
+    retrieved: '2026-11-18'

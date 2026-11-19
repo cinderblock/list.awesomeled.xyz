@@ -25,8 +25,22 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
   vendor: Maniacal Labs (Tindie)
+related:
+  - type: uses
+    ref: level-converters/sn74ahct125n
+    notes: Kit's level shifter is a 74AHCT125 (through-hole kit; exact vendor/package not stated)
+    source:
+      url: https://github.com/ManiacalLabs/PiPixel
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - BiblioPixel
 sources:
   status:
     url: https://www.tindie.com/products/ManiacalLabs/pipixel-raspberry-pi-led-strip-hat/
     retrieved: '2026-11-18'
     notes: 'Tindie "Product Retired"'
+  software.works_with:
+    url: https://github.com/ManiacalLabs/PiPixel/blob/master/Usage.md
+    retrieved: '2026-11-18'
+    notes: Maker's usage doc; BiblioPixel is also the Tindie listing's 'Source Code' link

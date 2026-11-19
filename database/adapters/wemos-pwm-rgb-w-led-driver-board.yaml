@@ -26,3 +26,15 @@ price_source:
 software:
   works_with:
     - WLED
+    - FastLED
+  firmware:
+    - WLED
+sources:
+  software.firmware:
+    url: https://web.archive.org/web/2025id_/https://mottramlabs.com/pdf/DTA201141.pdf
+    retrieved: '2026-11-18'
+    notes: MottramLabs datasheet MLP201141 (updated 11 Sep 2021), 'Software – WLED' page; the entry already lists WLED under works_with - it is the firmware the board is documented for
+  software.works_with:
+    url: https://web.archive.org/web/20240119042911/https://www.ebay.co.uk/itm/133875147448
+    retrieved: '2026-11-18'
+    notes: maker's own eBay listing title (seller/brand 'Mottramlabs', MPN MLP201141); keyword in the title only, not explained

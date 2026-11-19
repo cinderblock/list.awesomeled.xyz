@@ -25,6 +25,19 @@ price_source:
   retrieved: '2022-01-23'
   url: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/
   vendor: Kulp Lights
+related:
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: BeagleBone Black cape (also BBB Wireless, BeagleBone Green, SanCloud BeagleBone Enhanced; not BeagleBone Green Wireless)
+    source:
+      url: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/rj45
+    notes: 4 RJ45 differential ports (16 more strings via receivers, or DMX)
+    source:
+      url: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -36,9 +49,12 @@ sources:
     retrieved: '2026-11-18'
     notes: 'Wired Watts: "This product has been discontinued."; kulplights.com product page 404'
   software.firmware:
-    url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
-    retrieved: '2026-11-18'
-    notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/bbb/F32-B-eeprom.bin'
+    - url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
+      retrieved: '2026-11-18'
+      notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/bbb/F32-B-eeprom.bin'
+    - url: https://web.archive.org/web/20220123001147/https://kulplights.com/product/f32-b/
+      retrieved: '2026-11-18'
+      notes: Kulp product page, last Wayback capture 2022-01-23 (the entry's own dead_links archive)
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

@@ -26,21 +26,37 @@ price_source:
   retrieved: '2026-11-18'
   url: https://forkineye.com/product/espixelstick-v3/
   vendor: Forkineye
+related:
+  - type: host
+    ref: microboards/esp-01
+    notes: Motherboard for a plug-in ESP-01 module (2x4 header); module optional in the kit
+    source:
+      url: https://forkineye.com/espixelstick-v1/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - WLED
+    - ESPixelStick
   works_with:
     - xLights
+    - Vixen
+    - FPP
 sources:
   status:
     url: https://forkineye.com/product/espixelstick-v3/
     retrieved: '2026-11-18'
     notes: "ESPixelStick V3 in stock, $28 at the creator's store"
   software.firmware:
-    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
-    retrieved: '2026-11-18'
-    notes: "WLED docs: compatible controllers — section 'Controllers WLED can be installed to' (v3 hardware)"
+    - url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+      retrieved: '2026-11-18'
+      notes: "WLED docs: compatible controllers — section 'Controllers WLED can be installed to' (v3 hardware)"
+    - url: https://forkineye.com/espixelstick-v1/
+      retrieved: '2026-11-18'
+      notes: Maker's ESPixelStick page; its 'available for purchase on Amazon' link (amzn.to/2zR8HUI) redirects to amazon.com/dp/B072XT1V77, the entry's product link. Firmware repository github.com/forkineye/ESPixelStick = drive-libraries/espixelstick
   software.works_with:
-    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/espixelstick.xcontroller
-    retrieved: '2026-11-18'
-    notes: 'xLights controller definition (config upload supported) — ESPixelStick firmware V3/V4 (vendor ''ForkInEye''); also V3: <Controller Name="ESPixelStickV3">'
+    - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/espixelstick.xcontroller
+      retrieved: '2026-11-18'
+      notes: 'xLights controller definition (config upload supported) — ESPixelStick firmware V3/V4 (vendor ''ForkInEye''); also V3: <Controller Name="ESPixelStickV3">'
+    - url: http://forkineye.com/wp-content/uploads/2016/09/ESPixelStick-V2-Assembly-and-Usage.pdf
+      retrieved: '2026-11-18'
+      notes: ESPixelStick V2 Assembly and Usage manual (v2016.09.22), 'A note on 802.11 wireless networks'; the V1 page also recommends 'Vixen 3 and xLights'

@@ -22,8 +22,77 @@ price_source:
   retrieved: '2026-11-18'
   url: https://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
   vendor: BitWizard shop
+related:
+  - type: uses
+    ref: connectors/xlr-3
+    notes: Male + female XLR panel connectors for DMX in/out (3-pin standard, product photo)
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/xlr-5
+    notes: Optional 5-pin version
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-3
+    notes: Pi Zero option (header left unsoldered)
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-2
+    notes: Pi Zero option (header left unsoldered)
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b
+    notes: Option 'For model 2-3-4, A/B'
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b-v1-2
+    notes: Option 'For model 2-3-4, A/B'
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3-model-b
+    notes: Option 'For model 2-3-4, A/B'
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-3-model-a
+    notes: Option 'For model 2-3-4, A/B'
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Option 'For model 2-3-4, A/B'
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-1-model-a
+    notes: Short connector fits the Model A / A+
+    source:
+      url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - OLA
+    - QLC+
 sources:
   status:
     url: https://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
     retrieved: '2026-11-18'
     notes: '"Availability: In Stock", EUR 29.95'
+  software.works_with:
+    url: http://bitwizard.nl/shop/DMX-interface-for-Raspberry-pi
+    retrieved: '2026-11-18'
+    notes: "BitWizard product page; OLA: 'This normally allows you to use this with the OLA software on the raspberry pi to work with DMX hardware.' (RX not implemented in OLA)"

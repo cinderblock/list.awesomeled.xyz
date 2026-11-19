@@ -2,6 +2,10 @@ name: Pixel 2 DMX
 status: active
 creator: Experience Lights
 notes: WS28xx pixel data to DMX512 (512 channels).
+inputs:
+  protocols:
+    - WS2811
+    - WS281X
 outputs:
   count: 1
   types:
@@ -23,3 +27,21 @@ price_source:
   retrieved: '2026-11-18'
   url: https://store.experiencelights.com/pixel2dmx-realtime-dmx-bridge/
   vendor: Experience Lights
+related:
+  - type: uses
+    ref: connectors/xlr-3
+    notes: DMX output on a female 3-pin XLR (input is a male xConnect pigtail)
+    source:
+      url: https://store.experiencelights.com/pixel2dmx---realtime-dmx-bridge/
+      retrieved: '2026-11-18'
+  - type: related
+    ref: pixel-decoders/pixel-2-things-relay
+    notes: "Same 'Pixel2Things' product line: pixel2things.com (David Peace's original boards) now redirects to Experience Lights' Pixel2Things category, which lists Pixel2DMX"
+    source:
+      url: https://store.experiencelights.com/product-category/pixel2things/
+      retrieved: '2026-11-18'
+sources:
+  inputs.protocols:
+    url: https://store.experiencelights.com/pixel2dmx---realtime-dmx-bridge/
+    retrieved: '2026-11-18'
+    notes: Experience Lights product page; also 'Works with any 12V WS281X pixels.'

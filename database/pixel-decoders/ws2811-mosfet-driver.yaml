@@ -2,6 +2,10 @@ name: WS2811 MosFET Driver
 status: active
 creator: NLed
 notes: WS2811 to high-current MOSFET outputs.
+inputs:
+  protocols:
+    - WS2811
+    - WS2812
 outputs:
   count: 3
   types:
@@ -21,3 +25,15 @@ price_source:
   retrieved: '2026-11-18'
   url: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html
   vendor: NLED
+related:
+  - type: uses
+    ref: pixel-ics/ws2811
+    notes: One WS2811 drives three high-current MOSFETs
+    source:
+      url: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html
+      retrieved: '2026-11-18'
+sources:
+  inputs.protocols:
+    url: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html
+    retrieved: '2026-11-18'
+    notes: NLED store product page (SKU NLED-WS2811FET)

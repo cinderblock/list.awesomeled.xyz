@@ -24,3 +24,22 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.wizardofwire.com/product/data-to-differential-board/
   vendor: Wizard of Wire
+related:
+  - type: uses
+    ref: connectors/rj45
+    notes: Differential output on an RJ45 jack for Cat5 to a receiver board (maker's annotated photo/diagram)
+    source:
+      url: https://www.wizardofwire.com/wp-content/uploads/2020/10/Data-to-Diff-2-pdf.jpg
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/mtsb-combicon
+    notes: Inputs (+, -, D1-D4 from unused controller pixel ports) are two 3-position pluggable 5.08 mm screw-terminal blocks; identified from the maker's product photos, not named in text
+    source:
+      url: https://www.wizardofwire.com/wp-content/uploads/2020/10/Data-to-Diff-pdf.jpg
+      retrieved: '2026-11-18'
+  - type: compatible
+    ref: adapters/meanwell-pdu-with-differential-receiver
+    notes: Same maker's differential receiver; the transmitter's wiring diagram shows its Cat5 feeding a Wizard of Wire receiver mounted on a Mean Well LRS-350-12 PSU
+    source:
+      url: https://www.wizardofwire.com/wp-content/uploads/2020/10/Data-to-Diff-2-pdf.jpg
+      retrieved: '2026-11-18'

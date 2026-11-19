@@ -2,6 +2,10 @@ name: Controller Changeover
 status: active
 creator: Wasatch Pixels
 notes: WLED override from other pixel control to a single output.
+inputs:
+  protocols:
+    - WS2811
+    - WS2812
 outputs:
   count: 2
   types:
@@ -20,3 +24,8 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/k7bbr/wasatch-pixels-led-controller-multiplexer/
   vendor: Wasatch Pixels (Tindie)
+sources:
+  inputs.protocols:
+    url: https://www.tindie.com/products/k7bbr/led-controller-multiplexer/
+    retrieved: '2026-11-18'
+    notes: Tindie listing 'Wasatch Pixels LED Controller Multiplexer'; it passes data through rather than decoding it

@@ -18,3 +18,10 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/yaqwsx/rb0004-neopixelbooster/
   vendor: yaqwsx (Tindie)
+related:
+  - type: accessory
+    ref: pixels/ws2812
+    notes: In-strip 6-18V step-down module that powers WS2812B strips in segments (power only; it doesn't touch the data line)
+    source:
+      url: https://github.com/RoboticsBrno/RB0004-NeopixelBooster
+      retrieved: '2026-11-18'

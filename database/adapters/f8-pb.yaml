@@ -25,6 +25,25 @@ price_source:
   retrieved: '2022-01-23'
   url: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
   vendor: Kulp Lights
+related:
+  - type: host
+    ref: microboards/pocketbeagle
+    notes: PocketBeagle cape; networking via a USB Ethernet/Wi-Fi adapter
+    source:
+      url: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
+      retrieved: '2026-11-18'
+  - type: variant
+    ref: adapters/f8-b
+    notes: PocketBeagle version of the BeagleBone Black F8-B (same 8 local ports + 3 RJ45 + 16-string expansion layout)
+    source:
+      url: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/rj45
+    notes: 3 RJ45 differential ports (not Ethernet)
+    source:
+      url: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -34,6 +53,9 @@ sources:
     retrieved: '2026-11-18'
     notes: 'Wired Watts: "This product has been discontinued."; kulplights.com product page 404'
   software.firmware:
-    url: https://github.com/FalconChristmas/fpp/tree/master/capes/pb
-    retrieved: '2026-11-18'
-    notes: Falcon Player (FPP) names this cape/board — filename in FPP's capes/pb (PocketBeagle) folder
+    - url: https://github.com/FalconChristmas/fpp/tree/master/capes/pb
+      retrieved: '2026-11-18'
+      notes: Falcon Player (FPP) names this cape/board — filename in FPP's capes/pb (PocketBeagle) folder
+    - url: https://web.archive.org/web/20220123003658/https://kulplights.com/product/f8-pb/
+      retrieved: '2026-11-18'
+      notes: Kulp product page, last Wayback capture 2022-01-23

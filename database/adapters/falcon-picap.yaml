@@ -34,9 +34,52 @@ related:
       notes: "PixelController's current PiCap, 4 outputs, In Stock at USD $52.00"
     name: Falcon PiCap V2
     url: https://pixelcontroller.com/store/featured/99-falcon-picap-v2.html
+  - type: host
+    ref: microboards/raspberry-pi-1-model-b
+    notes: Raspberry Pi HAT; supports Pi B+, Pi 2, Pi 3 and Pi Zero (not the original Pi B)
+    source:
+      url: https://web.archive.org/web/20180908183659/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b
+    notes: Pi 2 named by the maker
+    source:
+      url: https://web.archive.org/web/20180908183659/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-2-model-b-v1-2
+    notes: Pi 2 named by the maker (v1.2 revision)
+    source:
+      url: https://web.archive.org/web/20180908183659/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-3
+    notes: Pi Zero named by the maker
+    source:
+      url: https://web.archive.org/web/20180908183659/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/raspberry-pi-zero-v1-2
+    notes: Pi Zero named by the maker
+    source:
+      url: https://web.archive.org/web/20180908183659/https://www.pixelcontroller.com/store/index.php?id_product=47&controller=product
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/mtsb-combicon
+    notes: Two 3-pin pluggable pixel connectors (GND D V+) and a 2-pin pluggable power connector (maker sells them as 'Picap Connectors'); type identified from photos, not named as Phoenix
+    source:
+      url: https://web.archive.org/web/20201112022152/https://www.pixelcontroller.com/store/index.php?id_product=47
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/rj45
+    notes: RJ-45 for the RS-485 DMX / LOR / Renard output (per the unofficial manual)
+    source:
+      url: https://github.com/nick-diel/Falcon-PiCap-Manual
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
+    - Falcon Player
   works_with:
     - xLights
 sources:
@@ -45,9 +88,12 @@ sources:
     retrieved: '2026-11-18'
     notes: '"This product is no longer available."; the store now sells the Falcon PiCap V2'
   software.firmware:
-    url: https://github.com/FalconChristmas/fpp/blob/master/www/help/warning-helpers/warning-13.md
-    retrieved: '2026-11-18'
-    notes: Falcon Player (FPP) names this cape/board
+    - url: https://github.com/FalconChristmas/fpp/blob/master/www/help/warning-helpers/warning-13.md
+      retrieved: '2026-11-18'
+      notes: Falcon Player (FPP) names this cape/board
+    - url: https://github.com/nick-diel/Falcon-PiCap-Manual
+      retrieved: '2026-11-18'
+      notes: UNOFFICIAL community manual (states it is not associated with PixelController)
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/falcon.xcontroller
     retrieved: '2026-11-18'

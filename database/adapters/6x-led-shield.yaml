@@ -23,8 +23,27 @@ price_source:
   retrieved: '2026-11-18'
   url: https://oshpark.com/shared_projects/xeBcFP0G
   vendor: OSH Park
+related:
+  - type: uses
+    ref: connectors/sm
+    notes: Maker's build guide wires the LEDs with pre-assembled 3-pin JST-SM pigtails soldered to the large output pads
+    source:
+      url: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - esp8266-fastled-webserver
+  works_with:
+    - FastLED
 sources:
   status:
     url: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
     retrieved: '2026-11-18'
     notes: "creator's Buy section: order the PCB directly from OSH Park (Tindie listing retired)"
+  software.firmware:
+    url: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
+    retrieved: '2026-11-18'
+    notes: maker's own open-source example firmware ('parallel' branch); also the Tindie 'Source Code' link
+  software.works_with:
+    url: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
+    retrieved: '2026-11-18'

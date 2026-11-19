@@ -11,3 +11,10 @@ diy_or_ots: DIY
 links:
   product: https://github.com/ArtGateOne/ArtGateOne-LED
 parent: Arduino Uno
+related:
+  - type: uses
+    ref: drive-libraries/neopixel
+    notes: The ArtGateOne-LED sketch drives the strip with the Adafruit NeoPixel library (readme lists it as a required library, spelled 'Andafruit_NeoPixel')
+    source:
+      url: https://github.com/ArtGateOne/ArtGateOne-LED/blob/main/ArtGateOne_LED_v1.4/ArtGateOne_LED_v1.4.ino
+      retrieved: '2026-11-18'

@@ -2,6 +2,10 @@ name: QuinLED Dig2Analog
 status: active
 creator: Quindor / Intermittent Technology
 notes: WS2814 to RGBW PWM MOSFET outputs. 4x 2kHz PWM output, 3A fuse, Daisy chain ability
+inputs:
+  protocols:
+    - WS2814F
+    - ws28xx
 outputs:
   count: 4
   types:
@@ -19,9 +23,20 @@ other_links:
 price: 7.49
 price_source:
   notes: >-
-    Single board, from QuinLED's global reseller (listed on quinled.shop); 5-pack $34.95,
-    10-pack $59.99
+    Single board, from QuinLED's global reseller (listed on quinled.shop); 5-pack $34.95, 10-pack $59.99
   part: QLD-D2A
   retrieved: '2026-11-18'
   url: https://shop.allnetchina.cn/products/quinled-dig2analog
   vendor: ALLNET China
+related:
+  - type: uses
+    ref: pixel-ics/ws2814
+    notes: WS2814F decodes one RGBW pixel's data and drives the 4 MOSFET PWM channels
+    source:
+      url: https://quinled.info/quinled-dig2analog/
+      retrieved: '2026-11-18'
+sources:
+  inputs.protocols:
+    url: https://quinled.info/quinled-dig2analog-pre-assembled-specifications/
+    retrieved: '2026-11-18'
+    notes: "QuinLED dig2analog specifications page; the board behaves as one WS2814F (RGBW) pixel per board in the chain (evidence joins two spec-list lines: 'Uses newest WorldSemi WS2814F chip' and 'ws28xx protocol compatible')"

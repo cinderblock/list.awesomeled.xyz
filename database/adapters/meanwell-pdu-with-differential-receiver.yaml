@@ -25,6 +25,19 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection/
   vendor: Wizard of Wire
+related:
+  - type: uses
+    ref: connectors/rj45
+    notes: Differential data input on an RJ45 jack ('Data In From Controller' in the maker's connection diagram)
+    source:
+      url: https://www.wizardofwire.com/wp-content/uploads/2022/03/MW-Straight-Diff-Wiring-Diagram-pdf.jpg
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/mtsb-combicon
+    notes: 4 pixel ports (- D +) and 2 power-injection ports are pluggable 5.08 mm screw-terminal blocks; identified from the maker's connection diagram/photos, not named in text
+    source:
+      url: https://www.wizardofwire.com/wp-content/uploads/2022/03/MW-Straight-Diff-Wiring-Diagram-pdf.jpg
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://www.wizardofwire.com/product/meanwell-differential-receiver-w-power-injection/

@@ -25,6 +25,25 @@ price_source:
   retrieved: '2021-10-25'
   url: https://web.archive.org/web/20211025190910/https://kulplights.com/product/f8-b/
   vendor: Kulp Lights
+related:
+  - type: host
+    ref: microboards/beaglebone-black
+    notes: BeagleBone Black cape (also BBB Wireless, BeagleBone Green, SanCloud BeagleBone Enhanced; not BeagleBone Green Wireless)
+    source:
+      url: https://web.archive.org/web/20211025190910/https://kulplights.com/product/f8-b/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/rj45
+    notes: 3 RJ45 differential ports (12 more strings via receivers, or DMX) - not Ethernet
+    source:
+      url: https://web.archive.org/web/20211025190910/https://kulplights.com/product/f8-b/
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/mtsb-combicon
+    notes: 8 pixel ports and the power input are pluggable 5.08 mm screw-terminal blocks; identified from the photo in the maker's F8-B manual (Overview), not named in text
+    source:
+      url: https://web.archive.org/web/2021id_/https://kulplights.com/manuals/F8-B-Manual.pdf
+      retrieved: '2026-11-18'
 software:
   firmware:
     - FPP
@@ -36,9 +55,12 @@ sources:
     retrieved: '2026-11-18'
     notes: 'Wired Watts: "This product has been discontinued."; kulplights.com product page 404'
   software.firmware:
-    url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
-    retrieved: '2026-11-18'
-    notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/bbb/F8-B-eeprom.bin (also F8-Bv2-eeprom.bin)'
+    - url: https://github.com/FalconChristmas/fpp/blob/master/src/non-gpl/CapeUtils/CapeUtils.cpp
+      retrieved: '2026-11-18'
+      notes: 'Falcon Player (FPP) names this cape/board — EEPROM shipped in repository: capes/bbb/F8-B-eeprom.bin (also F8-Bv2-eeprom.bin)'
+    - url: https://web.archive.org/web/20211025190910/https://kulplights.com/product/f8-b/
+      retrieved: '2026-11-18'
+      notes: Kulp product page, last Wayback capture 2021-10-25 ('You WILL need' list); the F8-B manual covers 'Getting the FPP software'
   software.works_with:
     url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/kulp.xcontroller
     retrieved: '2026-11-18'

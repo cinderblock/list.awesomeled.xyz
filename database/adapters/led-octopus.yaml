@@ -21,3 +21,30 @@ price_source:
   retrieved: '2026-11-18'
   url: https://www.tindie.com/products/essenceeng/led-octopus/
   vendor: Essence Engineering (Tindie)
+related:
+  - type: host
+    ref: microboards/teensy-3-2
+    notes: Teensy plugs in without soldering; maker gives the range 'Teensy (3.2-4.0)'
+    source:
+      url: https://www.tindie.com/products/EssenceEng/led-octopus/
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-4-0
+    notes: Upper end of the maker's 'Teensy (3.2-4.0)' range
+    source:
+      url: https://www.tindie.com/products/EssenceEng/led-octopus/
+      retrieved: '2026-11-18'
+  - type: related
+    ref: adapters/octows2811-adaptor
+    notes: Screw-terminal alternative to PJRC's RJ-45 OctoWS2811 adaptor (comparison made by a customer review on the listing, not the maker)
+    source:
+      url: https://www.tindie.com/products/EssenceEng/led-octopus/
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - OctoWS2811
+sources:
+  software.works_with:
+    url: https://www.tindie.com/products/EssenceEng/led-octopus/
+    retrieved: '2026-11-18'
+    notes: Tindie listing by Essence Engineering

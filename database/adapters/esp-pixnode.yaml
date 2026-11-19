@@ -19,8 +19,28 @@ price_source:
   retrieved: '2021-01-23'
   url: https://web.archive.org/web/20210123104718/https://jboards.ecwid.com/ESPixNode-p127558674
   vendor: JBoards
+related:
+  - type: host
+    ref: microboards/nodemcu-v2
+    notes: Daughter board for a NodeMCU ESP8266 dev board (ESP-12 module, CP2102 USB-UART per the setup guide); the NodeMCU was included in the purchase. Maker says 'NodeMCU' without a version number
+    source:
+      url: https://web.archive.org/web/20210123104718/https://jboards.ecwid.com/ESPixNode-p127558674
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: connectors/mtsb-combicon
+    notes: Pluggable screw terminals for PIXELS (- D0 +) and POWER (- +)
+    source:
+      url: https://web.archive.org/web/20210123104718/https://jboards.ecwid.com/ESPixNode-p127558674
+      retrieved: '2026-11-18'
+software:
+  firmware:
+    - ESPixelStick
 sources:
   status:
     url: https://web.archive.org/web/20250822194830/https://jboards.ecwid.com/ESPixNode-p127558674
     retrieved: '2026-11-18'
     notes: '"Sorry, the requested product is not available" (2025-08-22 capture); the JBoards store now returns 404'
+  software.firmware:
+    url: https://www.dropbox.com/s/t0p88c1wb4f22u8/espixnode.pdf?dl=0
+    retrieved: '2026-11-18'
+    notes: ESPixNode Version 1.0 User Setup Guide (PDF linked as 'Quick setup guide' from the maker's product page), Overview section
