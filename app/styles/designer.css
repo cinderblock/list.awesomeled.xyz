@@ -102,6 +102,10 @@
   max-width: 44rem;
   margin: 0 auto;
 }
+.designer-intro a {
+  color: var(--dz-accent);
+  white-space: nowrap;
+}
 
 /* Once a design exists a phone has better uses for the first screen */
 @media (max-width: 639px) {

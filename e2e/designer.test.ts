@@ -60,10 +60,14 @@ test.describe('System Designer: building a design', () => {
 
     // Pixel type
     const pixels = await openPicker(page, 'g0-pixels');
-    await pixels.getByLabel('Search pixel types').fill('ws2812');
+    // With a keyboard at hand the picker starts in its search box
+    await expect(pixels.getByLabel('Search pixel types')).toBeFocused();
+    await page.keyboard.type('ws2812');
     await pixels.locator('[data-id="ws2812"]').click();
     await expect(pixels).toBeHidden();
     await expect(slot(page, 'g0-pixels')).toContainText('WS2812');
+    // ...and focus returns to the slot when it closes
+    await expect(slot(page, 'g0-pixels').locator('.designer-slot-toggle')).toBeFocused();
     await expect(page).toHaveURL(/[?&]p=ws2812(&|$)/);
 
     // Layout
@@ -317,6 +321,7 @@ test.describe('System Designer: saving and sharing', () => {
   test('a downloaded SVG opens as the same design', async ({ page }) => {
     await withoutDraft(page);
     await open(page, `/designer?${DESIGN}&t=Round+trip`);
+    await expect(page).toHaveTitle('Round trip · System Designer - Awesome LED List');
     const [download] = await Promise.all([
       page.waitForEvent('download'),
       page.getByRole('button', { name: 'Download SVG' }).click(),
@@ -394,6 +399,19 @@ test.describe('System Designer: saving and sharing', () => {
     expect(markdown).toContain('| Qty | Part | Category | Unit | Total |');
     expect(markdown).toContain('[WS2812]');
     expect(markdown).toContain(`/designer?${DESIGN}`);
+  });
+});
+
+test.describe('System overview', () => {
+  test('leads into the designer, and the designer leads back', async ({ page }) => {
+    await withoutDraft(page);
+    await page.goto('/system-overview');
+    await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+    await page.getByRole('link', { name: 'Design your own system' }).click();
+    await expect(page).toHaveURL(/\/designer$/);
+    await expect(page.locator('h1')).toContainText('System Designer');
+    await page.getByRole('link', { name: /See how the parts fit together/ }).click();
+    await expect(page).toHaveURL(/\/system-overview$/);
   });
 });
 

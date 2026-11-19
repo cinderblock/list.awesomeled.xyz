@@ -60,6 +60,7 @@ export function SlotRow({
           className="btn btn--outline btn--sm designer-slot-toggle"
           aria-expanded={open}
           aria-controls={panelId}
+          aria-label={`${open ? 'Done choosing' : action} ${label.toLowerCase()}`}
           onClick={onToggle}
         >
           {open ? 'Done' : action}

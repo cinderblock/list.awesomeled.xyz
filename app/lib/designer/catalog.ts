@@ -755,7 +755,6 @@ export interface ConnectorOption {
   locking?: string;
   wireToWire: boolean | null;
   panelMount: boolean | null;
-  notes?: string;
   price: PriceInfo;
 }
 
@@ -785,7 +784,6 @@ export function buildConnectorOption(entry: BaseEntry): ConnectorOption {
     locking: str(mech.locking),
     wireToWire: typeof mech.wire_to_wire === 'boolean' ? mech.wire_to_wire : null,
     panelMount: typeof mech.panel_mount === 'boolean' ? mech.panel_mount : null,
-    notes: str(entry.notes),
     price: buildPrice(entry),
   };
 }

@@ -84,6 +84,36 @@ function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
+function slotDomId(slot: OpenSlot): string {
+  return slot.group === 'system' ? 'slot-system-source' : `slot-g${slot.group}-${slot.slot}`;
+}
+
+/** Once a picker has opened: bring it into view and, with a keyboard at hand, start in its search box */
+function enterPicker(slot: OpenSlot) {
+  const id = slotDomId(slot);
+  requestAnimationFrame(() => {
+    scrollToId(id);
+    // Not on touch screens: focusing an input there throws up the keyboard
+    if (window.matchMedia('(pointer: fine)').matches) {
+      document
+        .querySelector<HTMLInputElement>(`#${id}-panel input[type="search"]`)
+        ?.focus({ preventScroll: true });
+    }
+  });
+}
+
+/** Once a picker has closed: put focus back on its slot, where the choice now shows */
+function leavePicker(slot: OpenSlot) {
+  const id = slotDomId(slot);
+  requestAnimationFrame(() => {
+    const element = document.getElementById(id);
+    element
+      ?.querySelector<HTMLButtonElement>('.designer-slot-toggle')
+      ?.focus({ preventScroll: true });
+    element?.scrollIntoView({ block: 'nearest' });
+  });
+}
+
 /** No valid part chosen yet, and nothing wrong with the link either */
 function nothingToCheck(analysis: Analysis): boolean {
   return (
@@ -224,15 +254,21 @@ export function Designer({ catalog }: { catalog: Catalog }) {
     }
   }, [hydrated, canonical]);
 
+  // A named design names its browser tab (and its bookmark)
+  useEffect(() => {
+    if (!hydrated) return;
+    const base = 'System Designer - Awesome LED List';
+    document.title = design.title ? `${design.title} · ${base}` : base;
+  }, [hydrated, design.title]);
+
   const changeGroup = (i: number) => (patch: Partial<GroupDesign>) =>
     update((current) => updateGroup(current, i, patch));
 
   const toggleSlot = (group: OpenSlot['group']) => (slot: Slot | null) => {
-    setOpen(slot ? { group, slot } : null);
-    if (slot) {
-      const id = group === 'system' ? 'slot-system-source' : `slot-g${group}-${slot}`;
-      requestAnimationFrame(() => scrollToId(id));
-    }
+    const next = slot ? { group, slot } : null;
+    setOpen(next);
+    if (next) enterPicker(next);
+    else if (open) leavePicker(open);
   };
 
   const startOver = () => {
@@ -303,7 +339,10 @@ export function Designer({ catalog }: { catalog: Catalog }) {
       className={`container page-section designer-page${empty ? '' : ' designer-page--active'}`}
       data-ready={hydrated ? 'true' : undefined}
       onKeyDown={(e) => {
-        if (e.key === 'Escape' && open) setOpen(null);
+        if (e.key === 'Escape' && open) {
+          setOpen(null);
+          leavePicker(open);
+        }
       }}
       onDragOver={(e) => {
         if (e.dataTransfer.types.includes('Files')) e.preventDefault();
@@ -322,7 +361,8 @@ export function Designer({ catalog }: { catalog: Catalog }) {
         <p className="designer-intro">
           Pick pixels, a controller and the parts between them. Everything is checked for
           compatibility as you go, with a power plan, a parts list and a diagram at the end. Your
-          design lives in this page’s link.
+          design lives in this page’s link.{' '}
+          <Link to="/system-overview">New to pixel systems? See how the parts fit together.</Link>
         </p>
       </header>
 
@@ -532,7 +572,7 @@ export function Designer({ catalog }: { catalog: Catalog }) {
                 selected={design.source}
                 onSelect={(source) => {
                   update((current) => ({ ...current, source }));
-                  if (source) setOpen(null);
+                  if (source) toggleSlot('system')(null);
                 }}
               />
             </SlotRow>
