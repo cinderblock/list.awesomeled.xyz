@@ -88,6 +88,7 @@ export const IGNORED_COMMITS = new Set([
   '66342a416add1a219a50abb707e75137733129a7', // sheet-parity: restore sheet values the import rounded or migrations dropped (46)
   '919d9dadf64eecaf86c02013808bd17191083bd9', // sheet-parity: restore controller pixel totals the migration dropped (19)
   'd5f86cd5f5e66092311965397ae2384c8dfd3be5', // price comments -> price_source (40)
+  '3575aabbe87ca8955e2bded24b3925721644aae6', // data-freshness: Microcyb link live again (1)
 ]);
 
 /**
