@@ -13,6 +13,11 @@ outputs:
   driver:
     buffered: true
   clocked: selectable
+  protocols:
+    - APA
+    - APA 8192
+    - SK
+    - WS
 power:
   voltage:
     max: 5
@@ -25,6 +30,13 @@ software:
     - LightMobile
 sources:
   software.works_with:
-    url: http://web.archive.org/web/20191119161838/https://rocketlife.com/technology/
+    - url: http://web.archive.org/web/20191119161838/https://rocketlife.com/technology/
+      retrieved: '2026-11-18'
+      notes: LightDesigner docs name this hardware
+    - url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
+      retrieved: '2026-11-18'
+      notes: "'Hardware Comparison' → 'Software' rows and the 'LightBox' buy box."
+  outputs.protocols:
+    url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
     retrieved: '2026-11-18'
-    notes: LightDesigner docs name this hardware
+    notes: Wayback snapshot (2019-10-14); 'Hardware Comparison' row 'LED Protocol Support', LightBox column.

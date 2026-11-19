@@ -27,6 +27,39 @@ outputs:
     DMX512: 1
   current:
     max: 10
+  protocols:
+    - D705
+    - LPD6803
+    - APA102
+    - TM1809
+    - TM1803
+    - WS2811
+    - WS2812
+    - WS2813
+    - SK6812
+    - SK6822
+    - LPD1886
+    - UCS1903
+    - UCS2903
+    - APA104
+    - P9883
+    - WS2815
+    - GS8208
+    - GS8304
+    - SM16703
+    - FW1935
+    - WS2818
+    - SM16716
+    - SM16726
+    - WS2801
+    - WS2803
+    - UCS9812
+    - MBI6120
+    - LPD8806
+    - TM1829
+    - P9412
+    - UCS2904
+    - WS2814
 power:
   voltage:
     max: 24
@@ -47,13 +80,36 @@ price:
   - name: 4096 pixels
     price: 599
     pixels: 4096
+related:
+  - type: variant
+    ref: controllers/led-ethernet-controller-3
+    notes: Same hardware as the LEC 3, sold without the bundled lifetime LED Strip Studio licence; upgradable to LEC 3
+    source:
+      url: https://www.ledstripstudio.com/download/LEC3HardwareManual.pdf
+      retrieved: '2026-11-18'
 software:
   works_with:
     - LED Strip Studio Software
+    - MADRIX
+    - grandMA
+    - Resolume
+    - MadMapper
+    - ChamSys
+    - TouchDesigner
+    - MediaMaster
+    - ELM
+    - LSS Remote
 sources:
   software.works_with:
-    url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+    - url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+      retrieved: '2026-11-18'
+      notes: LED Strip Studio Software docs name this hardware
+    - url: https://www.ledstripstudio.com/products/spi_matrix/
+      retrieved: '2026-11-18'
+      notes: FAQ, intro and 'Compatibility' logo strip (MediaMaster, ELM).
+  outputs.protocols:
+    url: https://www.ledstripstudio.com/user_manual/lss_supported-IC-types_clients.pdf
     retrieved: '2026-11-18'
-    notes: LED Strip Studio Software docs name this hardware
+    notes: Linked as 'Supported ICs' from https://www.ledstripstudio.com/products/spi_matrix/ .
 technical_notes:
   - One year of LED Strip Studio software license included

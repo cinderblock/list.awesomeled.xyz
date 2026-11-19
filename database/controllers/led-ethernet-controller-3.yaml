@@ -30,6 +30,39 @@ outputs:
     buffered: true
   current:
     max: 10
+  protocols:
+    - D705
+    - LPD6803
+    - APA102
+    - TM1809
+    - TM1803
+    - WS2811
+    - WS2812
+    - WS2813
+    - SK6812
+    - SK6822
+    - LPD1886
+    - UCS1903
+    - UCS2903
+    - APA104
+    - P9883
+    - WS2815
+    - GS8208
+    - GS8304
+    - SM16703
+    - FW1935
+    - WS2818
+    - SM16716
+    - SM16726
+    - WS2801
+    - WS2803
+    - UCS9812
+    - MBI6120
+    - LPD8806
+    - TM1829
+    - P9412
+    - UCS2904
+    - WS2814
 power:
   voltage:
     min: 5
@@ -55,11 +88,22 @@ price:
 software:
   works_with:
     - LED Strip Studio Software
+    - Madrix
+    - MadMapper
+    - MA Grand
+    - LSS Remote
 sources:
   software.works_with:
-    url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+    - url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+      retrieved: '2026-11-18'
+      notes: LED Strip Studio Software docs name this hardware — abbreviation match, see field notes
+    - url: https://ledstripstudio.com/shop/product/led-ethernet-controller-3/
+      retrieved: '2026-11-18'
+      notes: Product Information tab. 'MA Grand consoles' = MA Lighting grandMA consoles (no DB entry)
+  outputs.protocols:
+    url: https://www.ledstripstudio.com/user_manual/lss_supported-IC-types_clients.pdf
     retrieved: '2026-11-18'
-    notes: LED Strip Studio Software docs name this hardware — abbreviation match, see field notes
+    notes: Maker's 'Supported ICs' PDF (dated 2026-04-28), linked from https://www.ledstripstudio.com/products/lec3/ .
 technical_notes:
   - 4096 digital RGB LEDs or 3072 RGBW LEDs total; available in 1024/2048/4096 pixel versions
   - Art-Net up to 24 universes; LED Strip Studio software lifetime license included

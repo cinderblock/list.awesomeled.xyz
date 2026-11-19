@@ -20,6 +20,13 @@ outputs:
   pixels:
     max_per_output: 600
   clocked: false # WS2811/WS2812b/WS2813/WS2815/SK6812 families
+  protocols:
+    - WS2811
+    - WS2812b
+    - WS2812d
+    - Sk6812
+    - WS2813
+    - WS2815
 power:
   voltage:
     min: 5
@@ -29,11 +36,25 @@ data:
   storage:
     - type: uSD
 price: 221
+related:
+  - type: variant
+    ref: controllers/protopixel-1-channel-ethernet
+    notes: Wi-Fi version of the 1-channel Ethernet controller (no Ethernet jack, internal antenna)
+    source:
+      url: https://protopixel.net/doc/1ch_wifi/pages/00-description.html
+      retrieved: '2026-11-18'
 software:
   works_with:
     - ProtoPixel Create
 sources:
   software.works_with:
-    url: http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing
+    - url: http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing
+      retrieved: '2026-11-18'
+      notes: ProtoPixel Create docs name this hardware
+    - url: https://protopixel.net/doc/1ch_wifi/pages/10-technical_features.html
+      retrieved: '2026-11-18'
+      notes: Also streams from any Art-Net source (pages/70-compatibility.html).
+  outputs.protocols:
+    url: https://protopixel.net/doc/1ch_wifi/pages/10-technical_features.html
     retrieved: '2026-11-18'
-    notes: ProtoPixel Create docs name this hardware
+    notes: Maker docs, 'Technical Features'.

@@ -52,5 +52,20 @@ price:
   - name: 4096 pixels
     price: 1400
     pixels: 4096
+related:
+  - type: variant
+    ref: controllers/led-ethernet-controller-3
+    notes: LEC 3 with a built-in power supply (320 W, 5 V/60 A default; 12/24 V on request) for rental use
+    source:
+      url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - LED Strip Studio software
+sources:
+  software.works_with:
+    url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
+    retrieved: '2026-11-18'
+    notes: "'Controls over' panel, page 1. Also any Art-Net hardware/software (the spec text copy-pastes 'SPI Matrix' there)."
 technical_notes:
   - Lifetime LED Strip Studio software license included

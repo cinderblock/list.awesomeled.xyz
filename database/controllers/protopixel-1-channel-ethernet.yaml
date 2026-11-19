@@ -19,6 +19,13 @@ outputs:
   pixels:
     max_per_output: 600
   clocked: false
+  protocols:
+    - WS2811
+    - WS2812b
+    - WS2812d
+    - Sk6812
+    - WS2813
+    - WS2815
 power:
   voltage:
     max: 12
@@ -26,11 +33,25 @@ data:
   storage:
     - type: Flash
 price: 191
+related:
+  - type: variant
+    ref: controllers/protopixel-8-channel-controller
+    notes: Single-outlet, SD-card-playing version of the ProtoPixel LED (8-channel) Controller
+    source:
+      url: https://protopixel.net/doc/1ch_controller/pages/description.html
+      retrieved: '2026-11-18'
 software:
   works_with:
     - ProtoPixel Create
 sources:
   software.works_with:
-    url: http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing
+    - url: http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing
+      retrieved: '2026-11-18'
+      notes: ProtoPixel Create docs name this hardware
+    - url: https://protopixel.net/doc/1ch_controller/pages/connecting.html
+      retrieved: '2026-11-18'
+      notes: "'Correctly connecting the controller'. SD-card recordings are also generated in ProtoPixel Create (pages/as_player.html: 'you must first generate the recording…"
+  outputs.protocols:
+    url: https://protopixel.net/doc/1ch_controller/pages/technical_features.html
     retrieved: '2026-11-18'
-    notes: ProtoPixel Create docs name this hardware
+    notes: Maker's Sphinx docs (© 2020), 'Technical Features'. WS2812d is not a listed variant of pixels/ws2812 (B/C/E) and will stay unresolved.

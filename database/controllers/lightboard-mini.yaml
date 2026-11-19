@@ -16,16 +16,35 @@ outputs:
   pixels:
     max_per_output: 1000
   clocked: selectable # supports single and clocked pixel protocols
+  protocols:
+    - APA
+    - APA 8192
+    - SK
+    - WS
 power:
   voltage:
     max: 5
 price: 40
+related:
+  - type: variant
+    ref: controllers/lightbox
+    notes: Compact embeddable board version of the LightBox (same nRF52832/BLE/NFC platform, no battery or enclosure)
+    source:
+      url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
+      retrieved: '2026-11-18'
 software:
   works_with:
     - LightDesigner
     - LightMobile
 sources:
   software.works_with:
-    url: http://web.archive.org/web/20191119161838/https://rocketlife.com/technology/
+    - url: http://web.archive.org/web/20191119161838/https://rocketlife.com/technology/
+      retrieved: '2026-11-18'
+      notes: LightDesigner docs name this hardware
+    - url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
+      retrieved: '2026-11-18'
+      notes: "'Hardware Comparison' → 'Software' rows and the 'LightBoard Mini' buy box."
+  outputs.protocols:
+    url: https://web.archive.org/web/20191014174625/https://www.rocketlife.com/technology/
     retrieved: '2026-11-18'
-    notes: LightDesigner docs name this hardware
+    notes: Wayback snapshot (2019-10-14) of the maker page

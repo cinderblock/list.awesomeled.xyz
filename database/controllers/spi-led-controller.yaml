@@ -21,6 +21,47 @@ outputs:
     max_per_output: 1024
   auxiliary:
     DMX512: 1
+  protocols:
+    - D705
+    - LPD6803
+    - APA102
+    - TM1809
+    - TM1803
+    - WS2811
+    - WS2812
+    - WS2813
+    - SK6812
+    - SK6822
+    - LPD1886
+    - UCS1903
+    - UCS2903
+    - APA104
+    - P9883
+    - WS2815
+    - GS8208
+    - GS8304
+    - SM16703
+    - FW1935
+    - WS2818
+    - SM16716
+    - SM16726
+    - WS2801
+    - WS2803
+    - UCS9812
+    - MBI6120
+    - LPD8806
+    - TM1829
+    - P9412
+    - UCS2904
+    - WS2814
+    - TM1914
+    - PL9823
+    - TM1814
+    - SM16823
+    - P9813
+    - UCS8903
+    - UCS8904
+    - UCS5603
 power:
   voltage:
     max: 24
@@ -41,6 +82,25 @@ price:
   - name: 4096 pixels
     price: 599
     pixels: 4096
+related:
+  - type: related
+    ref: controllers/led-ethernet-controller-3
+    notes: Can run as a single-output LSS Distributor fed (MMX) by an LSS Ethernet controller such as the LEC 3
+    source:
+      url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI_LED_Controller_user_manual.pdf
+      retrieved: '2026-11-18'
+software:
+  works_with:
+    - LED Strip Studio software
+sources:
+  outputs.protocols:
+    url: https://www.ledstripstudio.com/user_manual/lss_supported-IC-types_clients.pdf
+    retrieved: '2026-11-18'
+    notes: "Maker's 'Supported ICs' PDF (2026-04-28), linked from https://www.ledstripstudio.com/products/spi_led_controller/ "
+  software.works_with:
+    url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI_LED_Controller_user_manual.pdf
+    retrieved: '2026-11-18'
+    notes: Section 5 'Creating and exporting animations in LED Strip Studio software'.
 technical_notes:
   - Price varies by pixel count software license (1 year included)
   - 10A per output channel
