@@ -71,8 +71,10 @@ const normalize = (lines: string[]) => lines.join(' ').replace(/\s+/g, ' ').trim
  */
 export function renderPreserving(original: string, doc: Document): string {
   const rendered = doc.toString({ lineWidth: 0, singleQuote: true });
-  const before = splitBlocks(original);
-  const after = splitBlocks(rendered);
+  // Drop the final newline before splitting, or the last block carries an
+  // empty line that ends up between it and any key appended after it
+  const before = splitBlocks(original.replace(/\n+$/, ''));
+  const after = splitBlocks(rendered.replace(/\n+$/, ''));
   const out: string[] = [...before.prelude];
   for (const [key, lines] of after.blocks) {
     const old = before.blocks.get(key);
