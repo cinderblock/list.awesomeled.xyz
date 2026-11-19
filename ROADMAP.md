@@ -7,12 +7,26 @@ history. This is what's next.
 
 ## In flight
 
-- **Designer v2** — shipped: card-grid pixel picker, diagram thumbnails,
-  refresh-ceiling math (+ sub-30fps callouts), per-string lengths within a
-  group (`n=150.200.80`), SVG re-import, level-shifter advisories
-  (driver.buffered=false or sub-4 V gpio_voltage + 5 V pixels →
-  level-converter suggestions), and the DIY-microboard path (boards with
-  io.max_outputs join the controller list behind a toggle)
+- **System Designer** — rebuilt and shipped 2026-11-18 (plan, link format
+  and decisions: [plans/designer.md](plans/designer.md)). A parts-picker flow
+  (pixels or a bare driver IC → strings → controller, dev board or adapter
+  with its host board → level shifter, connector, pattern software) with
+  compatibility checks at every step, a power plan (supplies, injection
+  points, fuses, wire gauge, the ~20 W / ~200 W warnings), a priced parts
+  list with CSV / Markdown / text export, a diagram that downloads as SVG or
+  PNG with the design inside it, the whole design in the page's link, and a
+  "Use in the designer" link on every part page it has a slot for.
+  What's next for it:
+  - **Choose the host board** under an adapter: the parts list names the
+    first board still on sale and lists the others it fits; a picker would
+    let the builder choose
+  - **Power supplies, fuses and wire as database entries**: today they are
+    sized by the power plan but not priced, because the database has no such
+    categories
+  - More adapters appear by themselves as they gain output counts and `host`
+    links to /microboards (14 of 40 are offered today), and more checks
+    sharpen as the facts in ISSUES.md ("Designer facts that depend on
+    unrecorded data") are filled in
 
 ## Feature backlog
 

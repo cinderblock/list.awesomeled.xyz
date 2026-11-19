@@ -28,6 +28,35 @@ A comprehensive database of addressable LEDs, controllers, and related products 
 - **Share and export**: search, sort, filters, and columns live in the URL, so the address bar always links to exactly what you see. **Share & export** copies the table as TSV or Markdown and downloads CSV, JSON, or YAML.
 - **Keyboard**: `/` jumps to the table's search, `j` / `k` move between rows, `Enter` opens one, and `x` picks it for comparison.
 
+## System Designer
+
+[list.awesomeled.xyz/designer](https://list.awesomeled.xyz/designer) builds a
+system out of the database, the way a parts picker does for a PC:
+
+- Pick **pixels** (or a bare driver IC), how many strings and how long, a
+  **controller** (off the shelf, a dev board, or a shield with the board it
+  plugs into), and optionally a level shifter, a connector and the software
+  that plays the patterns. Several pixel groups can share a controller.
+- Everything is **checked as you go**: clocked vs. data-only, protocol
+  support, voltage, output and pixel capacity, refresh rate against string
+  length, logic levels and level shifting, connector ratings and sealing,
+  whether the software can reach the controller.
+- A **power plan**: full-white draw from each pixel's channel current, supply
+  sizing, where to inject power, fuse and wire gauge per feed, and warnings
+  from about 20 W and 200 W.
+- A **parts list** with prices where the database has them (ranges stay
+  ranges), exportable as CSV, Markdown or text.
+- A **diagram**, downloadable as SVG or PNG. The file carries the design
+  inside it: drop it back on the page to load it.
+- The whole design lives in the page's link, so it can be shared, bookmarked
+  or posted in a forum.
+
+The checks are only as good as the data: where a fact isn't recorded the
+designer says "verify" rather than guess. The logic is a plain library in
+`app/lib/designer/` (no React), the interface is in
+`app/components/designer/`, and the link format and design decisions are
+written up in [plans/designer.md](plans/designer.md).
+
 ## Contributing
 
 We hope you find these lists useful.
@@ -120,11 +149,17 @@ If you find these rules too strict or have suggestions, please open an issue or 
 
 ### Tests
 
-Run the test suite with:
-
 ```bash
-bun test
+bun run test:unit # Unit tests (bun test, tests/unit)
+bun run test:e2e  # Browser tests against the dev server (Playwright, e2e/)
+bun run build && bun run test:prod # Browser tests against the built site (e2e-prod/)
 ```
+
+The site ships as prerendered HTML that React then takes over. A page whose
+first render in the browser differs from that HTML (because it reads the query
+string or saved preferences too early) fails only in the built site, never on
+the dev server, which is why `test:prod` exists. All three run in CI before a
+deploy.
 
 ## Bulk Database Updates
 

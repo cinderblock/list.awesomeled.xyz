@@ -168,14 +168,28 @@ Filling any of these makes its checks sharper with no code change:
 - Connectors: 34 of 45 families now carry a representative-SKU price
   (2026-11-18); binder-720, chogori, eventcon, hirschmann-ca, ld16-20-28,
   socapex, sp13, sp17, teeplug, wago-221 and wieland-rst still have none.
-- Level converters record no logic-family facts (push-pull buffer vs.
-  auto-direction translator, output drive). The designer offers them all
-  alike; the usual advice (a 74AHCT/74HCT buffer, not a TXS-style translator)
-  isn't in the data.
-- Adapters still use `parent` free text and `outputs.max_channels` /
-  `pixel_types`. Once they adopt the shared `pixel_outputs` shape and
-  `host` links (stream 2 "Next", stream 4), the designer can offer shields
-  for dev boards.
+- Level converters: done for the eight active parts (stream 3, 2026-11-18).
+  `electrical.input_high_voltage` (+ `_notes`) is a new optional field: the
+  datasheet's VIH min in the 3.3 V → 5 V role; `io.buffered` says whether the
+  output is a push-pull driver. Both carry `sources` quotes. The designer
+  flags 74HC245 (3.5 V threshold) and TXS0108E (pull-up outputs) from them. A
+  new converter entry without the two facts is simply offered unjudged.
+- Adapters: the designer offers an adapter once it has `outputs.count` and a
+  `host` link to a /microboards entry (14 of 40 today). Still missing a
+  host link although `parent` names a board: the Wemos D1 Mini shields
+  (4x-led-mini-shield, 6x-led-shield, 6x-smd-led-shield, espartstick,
+  wemos-esp32-driver-board, wled-wemos-shield), 16x-led-shield (NodeMCU
+  ESP32), 8x-led-shield (Adafruit Feather), esp-level-shifter (ESP-01),
+  pipixel and pixel-string-pihat-zero (Raspberry Pi), orange-pi-dmx. Several
+  of those boards have no /microboards entry yet (Wemos D1 Mini, a
+  Feather). `outputs.driver.buffered` is recorded on one adapter only: an
+  adapter whose `related` has `uses: level-converters/…` counts as buffered,
+  the rest say nothing about level shifting.
+- `adapters/pocketscroller-v2` has `outputs.count: 6` with
+  `protocols: [HUB75]`: panel outputs, not pixel strings. The designer
+  offers it and says the pixel isn't among its listed protocols; a field
+  that separates panel outputs from pixel outputs would let it leave such
+  boards out.
 
 ## Suspected data errors seen while sourcing images & datasheets (stream 5)
 
