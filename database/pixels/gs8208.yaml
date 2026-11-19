@@ -1,7 +1,7 @@
 name: GS8208
 status: active
 release_year: 2018
-creator: Genesis Systec
+creator: Genesis Systech
 notes: Built-in 8->12bit gamma correction! Similar to WS2815; early version booted with onboard patterns - now eliminated
 color:
   order: RGB
@@ -49,6 +49,10 @@ sources:
     url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
     retrieved: '2026-11-18'
     notes: GS8208 datasheet Version V0.1 (Normand), 'Data Format' page 6.
+  creator:
+    url: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: Genesis Systech
 technical_notes:
   - Built-in 8-bit to 12-bit gamma correction for smoother fades
   - Uses MPWM (multiplexed PWM) for effective 8kHz refresh rate

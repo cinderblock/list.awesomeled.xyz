@@ -1,0 +1,432 @@
+# Fix list: "(d) Wrong facts for other workstreams" in
+# plans/data-freshness/findings/pixels.md and pixel-ics.md, in report order.
+# Checked against the worktree at d20cf8f; verified 2026-11-18 with WebFetch / WebSearch.
+# Downloaded PDFs (and OCR text of WorldSemi's image-only datasheets) are in
+# fixes/dl/pixels/. Not reachable with WebFetch: web.archive.org (blocked),
+# newstar-ledstrip.com and led-genial.de (TLS errors), datasheetspdf.com (DNS).
+
+# ---------------------------------------------------------------- pixels.md (d)
+
+- entry: pixels/apa102
+  field: datasheet.third_party_testing
+  current: http://neon-world.com/en/product_detail.php?cid=59&id=167
+  value: https://cpldcpu.com/2014/11/30/understanding-the-apa102-superled/
+  status: other-owner
+  owner: stream5
+  source: http://neon-world.com/en/product_detail.php?cid=59&id=167
+  quote: 'APA-109-RGBW - 5050 LED Series - APA ELECTRONIC CO., LTD'
+  retrieved: '2026-11-18'
+  notes: >-
+    The current link is APA Electronic's own product page for another part (APA-109-RGBW, "a smart
+    LED control circuit and light emitting circuit in one controlled LED source"). It isn't
+    third-party testing and isn't about the APA102. Suggested replacement: Tim's blog (cpldcpu),
+    "Understanding the APA102 Superled" (30 Nov 2014). It's an independent study: the author "used
+    a logic analyzer to probe both the input and output lines". Fallback: null (drop the field).
+
+- entry: pixels/apa102
+  field: images[0].source
+  current: https://www.adafruit.com/product/2343
+  value: null
+  status: other-owner
+  owner: stream5
+  source: https://www.adafruit.com/product/2343
+  quote: 'DotStar Addressable 5050 RGB LED w/ Integrated Driver - 10 Pack - SK9822'
+  retrieved: '2026-11-18'
+  notes: >-
+    Adafruit 2343 now sells the SK9822 ("the SK9822 version of DotStars have a 1.2 KHz PWM rate").
+    The page never mentions the APA102. apa102.webp was taken from this page on 2026-11-18
+    (03b1c42), so the photo is probably an SK9822. Here null means: drop the image (file and source)
+    unless stream 5 confirms the photo shows an APA102. Possible replacement: Adafruit 3341
+    "DotStar Micro LEDs (APA102-2020)", which the entry already cites for status. That's the 2020
+    package, not the 5050.
+
+- entry: pixels/apa105
+  field: datasheet.url
+  status: already-fixed
+  owner: stream5
+  source: commit bc63afb (plans/assets-research/pixels.md)
+  retrieved: '2026-11-18'
+  notes: >-
+    bc63afb removed datasheet.url, since no APA105 chip PDF is published, and moved the Newstar
+    page to other_links. other_links[0] (http://www.newstar-ledstrip.com/productshow819.html) is
+    still a page for an LED strip, not the chip. Stream 5 may want to drop it. Not re-fetched here:
+    newstar-ledstrip.com fails TLS for WebFetch, and the Wayback Machine is blocked.
+
+- entry: pixels/sk6818
+  field: datasheet.url
+  current: https://asset.conrad.com/media10/add/160267/c1/-/en/001575814DS01/datasheet-1575814-thomsen-strip-5m-300-rgbw-ip68-led-pasik-entrieda-a-a-e-zastrcky-zasuvka-5-v-5-m-rgbw.pdf
+  value: null
+  status: other-owner
+  owner: stream5
+  source: https://asset.conrad.com/media10/add/160267/c1/-/en/001575814DS01/datasheet-1575814-thomsen-strip-5m-300-rgbw-ip68-led-pasik-entrieda-a-a-e-zastrcky-zasuvka-5-v-5-m-rgbw.pdf
+  quote: 'DC5V 60LEDs/m 60pixels/m SK6812 SK6818 RGBW LED pixel strip'
+  retrieved: '2026-11-18'
+  notes: >-
+    A one-page spec sheet for a strip, dated 21.06.2017 (PDF title "BS Elektronik Service GmbH"):
+    "IC Type sk6818/sk6812", "60pcs SMD5050RGBW". It gives no chip specs. No SK6818 chip datasheet
+    was found. The only part-level sheet is Normand's "SK6818-T52491H4RGBWP6-VC-XW-E-A LED" (24 V
+    RGBW, 17 mA,
+    https://www.normandled.com/upload/202609/SK6818-T52491H4RGBWP6-VC-XW-E-A%20LED%20Datasheet.pdf).
+    Its voltage and package differ from this entry's 5 V 4-pin 5050, so it can't simply replace the
+    link. Suggestion: move the Conrad sheet to other_links, since it does show a 5 V SMD5050 RGBW
+    part, and leave datasheet empty.
+
+- entry: pixels/pl9823
+  field: creator
+  current: BaiCheng
+  value: BaiCheng
+  status: already-fixed
+  owner: stream2
+  source: commit 3b13586 ("TLS3001 is Teralane's; PL9823 creator from its datasheet")
+  retrieved: '2026-11-18'
+  notes: >-
+    No longer "/". The research plan records a "BaiCheng" logo on the datasheet. Not re-fetched:
+    led-genial.de fails TLS for WebFetch, and the entry's Wayback copy is unreachable.
+
+- entry: pixels/lc8808b
+  field: creator
+  current: Color
+  value: Shenzhen LED Color
+  status: apply
+  owner: stream2
+  source: https://www.addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
+  quote: 'SHENZHEN LED Color Co., Ltd.'
+  retrieved: '2026-11-18'
+  notes: >-
+    The maker's site names itself "SHENZHEN LED Color Co., Ltd." (header logo alt text and page
+    title). Its datasheets use the full legal name "Shenzhen LED Color Opto Electronic Co.,ltd" (see
+    the LC8823-2020 sheet below). "Shenzhen LED Color" matches this entry's image credit and the
+    short-name style of other creators. pixels/lc8823, from the same maker, has no creator; the same
+    value fits there.
+
+- entry: pixels/lc2823-2020
+  field: name
+  current: LC2823-2020
+  value: LC8823-2020
+  status: apply
+  owner: stream2
+  source: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+  quote: 'LC8823-2020'
+  retrieved: '2026-11-18'
+  notes: >-
+    The entry's own datasheet.url is this "LC8823-2020" spec from Shenzhen LED Color (it was
+    restored from the Google Sheet's hyperlink in d26e73c). Every value in the entry matches it:
+    "Outline (L* W*H): 2.0*2.0*0.75mm", "6 Pins type led", "LED voltage Vled 3-7.5 V", "The max led
+    output Current IOMAX 18 mA", "The maximum frequency of 27KHZ". The datasheet never says "LC2823".
+    A web search for "LC2823" finds only LC8823 documents, and the report found none on the maker's
+    site, LCSC/JLC or AliExpress. So the name is a typo. The report's guess, LC8822, is wrong:
+    Led-Color's "6Pin LC8822 2020 LED" page
+    (https://www.addressable-led.com/Products/LC8822-2020-LED.html) claims only "256 gray level" and
+    no 27 kHz, while 27 kHz with 8+5 bits is the LC8823 spec. Structural follow-up
+    for stream 2: either rename the file/slug to lc8823-2020, or merge it into pixels/lc8823 as that
+    part's 2020 package. Same maker and IC; the 5050 sheet says 17 mA / 85 mW against 18 mA / 90 mW
+    here. Nothing in the repo references the lc2823-2020 slug.
+
+- entry: pixels/lc2823-2020
+  field: creator
+  value: Shenzhen LED Color
+  status: apply
+  owner: stream2
+  source: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+  quote: 'Shenzhen LED Color Opto Electronic Co.,ltd'
+  retrieved: '2026-11-18'
+  notes: The field is currently absent. Same value as the lc8808b fix above.
+
+- entry: pixels/sm1616
+  field: (entry)
+  current: { name: SM1616 }
+  value: null
+  status: apply
+  owner: stream2
+  source: https://github.com/sowbug/sm16716
+  quote: 'An Arduino controller for SM16716-based LED strings.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Delete database/pixels/sm1616.yaml. In the Google Sheet (Pixels A30, per
+    plans/spreadsheet-parity/report.md line 533), the "SM1616" name cell was hyperlinked to
+    https://github.com/sowbug/sm16716/blob/master/SM16716%20Datasheet%20%5BChinese%5D.pdf, so the
+    row meant the Sunmoon SM16716. That's a 3-channel clocked driver IC already covered by
+    pixel-ics/sm16716 (SOP-16). It isn't an LED with a built-in IC, so it gets no pixels entry.
+    No addressable LED called SM1616 was found. An LCSC-scoped search returns only an unrelated
+    KH-SIM1616 part, the report found nothing on JLC or AliExpress, and web-wide searches found
+    nothing.
+    The only "SM1616" is a Sunmoon LED display/matrix driver IC (8x16, I2C, SOP28) listed on a
+    datasheet aggregator (datasheetspdf.com #972925). It appeared in search results only, since the
+    site did not resolve for WebFetch. Nothing in the repo references pixels/sm1616.
+
+- entry: pixels/ns108
+  field: datasheet.url
+  current: https://voron.ua/files/pdf/led/NS108_5050.pdf
+  value: https://voron.ua/files/pdf/led/NS108_5050.pdf
+  status: already-fixed
+  owner: stream5
+  source: https://pdf.voron.ua/files/pdf/led/NS108_5050.pdf
+  quote: 'Document No.: SPC / NS108 Rev. No.: 04'
+  retrieved: '2026-11-18'
+  notes: >-
+    The productshow848 link (the NS108E page) is gone. bc63afb set datasheet.url to Newstar's
+    "NS108-5050-16bit" spec, and creator.page is productshow847. voron.ua answers with a 302 to
+    pdf.voron.ua; consider storing the final URL.
+
+- entry: pixels/ns107s
+  field: related[1]
+  value:
+    type: variant
+    ref: pixels/hd107s
+    notes: "Newstar: NS107S and HD107S (and Led-Color's LC8823) are the same IC in LEDs made by different factories."
+  status: other-owner
+  owner: stream4
+  source: https://newstarleds.blogspot.com/2019
+  quote: 'NS107S HD107S LC8823 LEDs are same with each other, all with same IC but different factory make the LEDs'
+  retrieved: '2026-11-18'
+  notes: >-
+    Append after the existing related[0] (predecessor apa107). The source is Newstar's blog post "the difference of
+    NS107S HD107S LC8823" (17 Jul 2019). Newstar's NS108 spec also says "NEWSTAR LED as the original
+    IC developer of NS107S NS108 series digital led". hd107s's creator is Rose Lighting; per Newstar,
+    the HD107S uses Newstar's IC. The same sentence links pixels/lc8823 (and lc2823-2020, i.e. the
+    LC8823-2020). Stream 4 picks the type (variant, compatible or related).
+
+- entry: pixels/ns108
+  field: related[1]
+  value:
+    type: variant
+    ref: pixels/hd108
+  status: unverifiable
+  owner: stream4
+  source: http://newstar-ledstrip.com/productshow847.html
+  retrieved: '2026-11-18'
+  notes: >-
+    The report quotes Newstar's page title "NS108 HD108 5050 RGB Pixel LED Chip", and the entry's own
+    sources.status notes repeat it. That page couldn't be re-fetched (TLS error; Wayback blocked), and
+    no other source found ties NS108 to HD108: Newstar's blog has no HD108 posts, and the HD108
+    pages found (Rose Lighting, Superlighting) don't name Newstar. The specs agree (16-bit plus
+    3 x 5-bit current gain in a 64-bit frame, 27 kHz) but that doesn't prove identity. hd108 has no
+    creator.
+
+- entry: pixels/ns8808
+  field: aliases
+  value:
+    - HD8808
+  status: unverifiable
+  owner: stream4
+  source: http://newstar-ledstrip.com/productshow855.html
+  retrieved: '2026-11-18'
+  notes: >-
+    The report quotes Newstar's page title "NS8808 HD8808 DC12V Pixel LED Chip replace WS2815", and
+    the entry's sources.status notes repeat it. Not re-fetchable here. A web search finds no other
+    mention of HD8808, so there's no separate entry to link; if stream 4 confirms, an alias is the
+    only fit.
+
+- entry: pixels/ws2816
+  field: related
+  value:
+    - type: related
+      name: WS2916B
+      url: https://www.world-semi.com/downloads/datasheets/en/ws2916b-v1.pdf
+      notes: WorldSemi's "new generation" 16-bit 5050 LED, listed in place of the WS2816
+    - type: related
+      name: WS2916A
+      url: https://www.world-semi.com/downloads/datasheets/en/ws2916a-2.1.pdf
+  status: other-owner
+  owner: stream4
+  source: https://www.world-semi.com/downloads/datasheets/en/ws2916b-v1.pdf
+  quote: 'WS2916B is the new generation of digital LED from WORLDSEMI'
+  retrieved: '2026-11-18'
+  notes: >-
+    Confirmed: WorldSemi's RGBIC catalog (https://www.world-semi.com/products-rgbic-led.html) lists
+    only the WS2812, WS2813, WS2815 and WS2916 series ("High-grayscale RGB and RGBW digital LED
+    family"). WS2816 appears nowhere, and the site's datasheet index (datasheet-availability.js) has
+    no ws2816 key. The WS2916A/B product images are /assets/products/ws2816-family/ws2816a-...webp
+    and ws2816b-...webp, and app.js has "const isWs2816ThreePackageFamily = item.model ===
+    'WS2916A';". The WS2916A/B
+    datasheets are V1.0, marked "New" on 2026-08-22, and never mention WS2816. They do match it:
+    5050, 16-bit, 10 kHz refresh, dual-signal by-pass, 48-bit frames. A has "32 levels of current
+    gain", B has "an internal 4-bit gamma check". So the WS2916 is a successor and possibly a rename,
+    but WorldSemi doesn't say so. Use type replacement only if stream 6 marks WS2816 discontinued.
+    These datasheets are image-only; they were read by OCR (copies in fixes/dl/pixels/).
+
+- entry: pixels/ws2816
+  field: status
+  current: active
+  value: active
+  status: other-owner
+  owner: stream6
+  source: https://www.world-semi.com/products-rgbic-led.html
+  quote: 'High-grayscale RGB and RGBW digital LED family.'
+  retrieved: '2026-11-18'
+  notes: >-
+    No change proposed. LCSC still stocks the WS2816B-2020 (C4154877, 11,800 pcs per the pixels
+    report), which is the entry's status source. But the maker's catalog no longer lists any WS2816
+    (see the record above). Stream 6 to judge whether that warrants a note or another status.
+
+- entry: pixels/ws2815-rgbw
+  field: creator
+  current: World Semi
+  value: WorldSemi
+  status: apply
+  owner: stream2
+  source: https://www.world-semi.com/
+  quote: '© 2026 Worldsemi.'
+  retrieved: '2026-11-18'
+  notes: >-
+    The maker writes its name as one word (page title "Worldsemi LED IC & RGBIC GaN Platform"). The
+    database spells it "WorldSemi" in every other entry: 9 creators, plus 2 "WorldSemi/Newstar". So
+    "WorldSemi" is the consistent value. Changing them all to the maker's "Worldsemi" casing would
+    be a separate batch.
+
+- entry: pixels/ws2815-rgbw
+  field: manufacturers
+  current:
+    - World Semi
+  value:
+    - WorldSemi
+  status: apply
+  owner: stream2
+  source: https://www.world-semi.com/
+  quote: '© 2026 Worldsemi.'
+  retrieved: '2026-11-18'
+  notes: Same spelling fix as creator.
+
+# ------------------------------------------------------------- pixel-ics.md (d)
+
+- entry: pixel-ics/tm1804
+  field: datasheet.url
+  current: https://www.lcsc.com/datasheet/C20622206.pdf
+  value: https://www.lcsc.com/datasheet/C20622206.pdf
+  status: already-fixed
+  owner: stream5
+  source: https://www.lcsc.com/datasheet/C20622206.pdf
+  quote: 'TM1804(TA1610B SOP8) | Datasheet | TM(Shenzhen Titan Micro Elec) | LCSC Electronics'
+  retrieved: '2026-11-18'
+  notes: cfcb85b replaced the ledlightmake "TM1804 Datasheet.pdf" (a TM1803 sheet) with LCSC's TM1804 datasheet.
+
+- entry: pixel-ics/ucs8903
+  field: datasheet.url
+  current: https://media.ledyi.com/ucs8903-datasheet_06b0ecc6a47dd8e088d100a5976cef7e24ad8a3fee463edb061bb535cc57b56e.pdf
+  value: https://media.ledyi.com/ucs8903-datasheet_06b0ecc6a47dd8e088d100a5976cef7e24ad8a3fee463edb061bb535cc57b56e.pdf
+  status: already-fixed
+  owner: stream5
+  source: https://media.ledyi.com/ucs8903-datasheet_06b0ecc6a47dd8e088d100a5976cef7e24ad8a3fee463edb061bb535cc57b56e.pdf
+  quote: 'The UCS8903 is a 3-channel LED display driver / controller with a built-in MCU digital interface'
+  retrieved: '2026-11-18'
+  notes: bc63afb replaced the DHgate listing with this 8-page UCS8903 datasheet. The DHgate URL stays in dead_links.
+
+- entry: pixel-ics/my9221
+  field: data.channels
+  current: 12
+  value: 12
+  status: already-fixed
+  owner: stream2
+  source: https://files.seeedstudio.com/wiki/Grove-LED_Bar/res/MY9221_DS_1.0.pdf
+  quote: 'The MY9221, 12-channels (R/G/B x 4)'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. The datasheet title also reads "12-Channel LED Driver With Grayscale". my-semi.com fails TLS for WebFetch (certificate mismatch).
+
+- entry: pixel-ics/ws2814
+  field: physical.packages
+  current:
+    - SOP-12
+  value:
+    - SOP-12
+    - SOP-8
+    - SOP-10
+    - FSOP-8
+  status: apply
+  owner: stream2
+  source: https://www.world-semi.com/downloads/datasheets/en/ws2814b-1.3.pdf
+  quote: 'SOP10 package'
+  retrieved: '2026-11-18'
+  notes: >-
+    These are the packages of the whole family. The entry's price, status and technical notes
+    already cover the variants, and the schema asks for every package the IC is offered in.
+    SOP-12 is the original dual-input WS2814 (the entry's datasheet, V1.4 2022); WorldSemi no longer
+    lists it, and LCSC C965562 is gone. WorldSemi's catalog now lists the WS2814A, WS2814B and
+    WS2814F ("4-Channel RGBW"). WS2814A V2.1 has "SOP8 Packaging"; its history shows V1.4
+    (2023-03-28) "Add FSOP8 Package", and in V1.5 (2023-04-22) the FSOP8 spec was split off (that's
+    the WS2814F). WS2814B V1.3 has "SOP10 package"; it was new on 2023-07-18 and adds a BIN backup
+    input. For the WS2814F, LCSC C5446694 (our price) and WorldSemi's own image name
+    (ws2814f-fsop8.webp) say FSOP-8, but the V2.1 datasheet (2026-07-14) labels its drawing
+    "SOT23-8 package" (2.85 x 3.25 mm, 8 leads). FSOP-8 is kept here, following LCSC; use SOT-23-8
+    instead if the datasheet's name should win. WS2814C (SOP-8, in technical_notes) is not on
+    WorldSemi's site. Sources: .../en/ws2814a-2.1.pdf and .../en/ws2814f-2.1.pdf. These are
+    image-only PDFs, read by OCR, and the SOT23-8 label was checked by eye.
+
+- entry: pixel-ics/ws2814
+  field: technical_notes[0]
+  current: 'Variants: WS2814A (SOP-8 / FSOP-8), WS2814C (SOP-8), WS2814F (FSOP-8); the listed prices are for WS2814F.'
+  value: 'Variants: WS2814A (SOP-8; its FSOP-8 version became WS2814F in 2023), WS2814B (SOP-10, adds a BIN backup data input), WS2814C (SOP-8), WS2814F (FSOP-8); the listed prices are for WS2814F.'
+  status: apply
+  owner: stream2
+  source: https://www.world-semi.com/downloads/datasheets/en/ws2814b-1.3.pdf
+  quote: 'BIN Backup signal input'
+  retrieved: '2026-11-18'
+  notes: >-
+    Adds the WS2814B, which was missing. The WS2814C is left in: it isn't on WorldSemi's site but
+    hasn't been disproven. If stream 2 prefers, the entry could also get backup_line notes for the B
+    variant.
+
+- entry: pixel-ics/p9813
+  field: creator
+  current: DMS Microelectronics
+  value: DMS Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: https://www.electrokit.com/upload/product/41011/41011147/P9813_datasheet.pdf
+  quote: 'DMS MICROELECTRONICS LTD.,'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. It was WorldSemi.
+
+- entry: pixel-ics/tls3001
+  field: creator
+  current: Teralane Semiconductor
+  value: Teralane Semiconductor
+  status: already-fixed
+  owner: stream2
+  source: https://raw.githubusercontent.com/TimGremalm/TLS3001_LED_ESP32/de664475644a003fdabe154c10d4f84a5c1fe32a/datasheets/TLS3001_datasheet_V2.2_english_missingprotocol.pdf
+  quote: 'TERALANE SEMICONDUCTOR INC.'
+  retrieved: '2026-11-18'
+  notes: Fixed in 3b13586. It was Tianli Tech.
+
+- entry: pixel-ics/gs8208
+  field: creator
+  current: Genesis Systech
+  value: Genesis Systech
+  status: already-fixed
+  owner: stream2
+  source: https://www.enttec.com/pixel-protocols/GS8208
+  quote: 'ENTTEC is not affiliated with Genesis-Systech.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Fixed in cfcb85b; it was "Shenzhen Greesit Technology". The maker's own spelling is in the
+    GS8206 datasheet footer, "June 12,2016 version0.2 ... Genesis Systech"
+    (https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf). The GS8208
+    sheet's disclaimer says "Genesis Technology will not take any responsibilities". pixel-ics/gs8202
+    still says "Shenzhen Greesit Technology", but nothing was found for that part (GS-prefix only),
+    so it's not touched here.
+
+- entry: pixels/gs8208
+  field: creator
+  current: Genesis Systec
+  value: Genesis Systech
+  status: apply
+  owner: stream2
+  source: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf
+  quote: 'Genesis Systech'
+  retrieved: '2026-11-18'
+  notes: >-
+    The pixel-ics report's mismatch remains in this entry: "Genesis Systec" drops the final "h" from
+    the maker's name. That name is in the GS82xx datasheet footer (quoted) and is what ENTTEC and
+    Advatek use ("Genesis-Systech"). Applying this aligns the entry with pixel-ics/gs8208.
+
+- entry: pixel-ics/ucs2904
+  field: other_links
+  current:
+    - https://www.advateklighting.com/pixel-protocols/ucs2904
+  value:
+    - https://www.advateklighting.com/pixel-protocols/ucs2904
+  status: already-fixed
+  owner: stream5
+  source: https://www.advateklighting.com/pixel-protocols/ucs2904
+  quote: 'UCS2904 | Technical specs of pixel protocol UCS2904 - Advatek'
+  retrieved: '2026-11-18'
+  notes: cfcb85b dropped the advateklighting.com/pixel-protocols/sm16704 link. The remaining page is about the UCS2904 and doesn't mention SM16704.

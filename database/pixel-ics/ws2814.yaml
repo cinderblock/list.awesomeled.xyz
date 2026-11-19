@@ -22,6 +22,9 @@ other_links:
 physical:
   packages:
     - SOP-12
+    - SOP-8
+    - SOP-10
+    - FSOP-8
 price:
   - qty: 5
     price: 0.0899
@@ -47,5 +50,9 @@ sources:
     url: https://media.ledyi.com/ws2814-datasheet_2b10ca91206f21ee684c6d907b6ef50d26bc74be422a289c596752b36ad6c1cc.pdf
     retrieved: '2026-11-18'
     notes: 'WorldSemi WS2814 (SOP12) datasheet, revision log V1.0 2019-04-10 to V1.4 2022-07-26 (LEDYi-hosted copy), General description + timing: one-wire NZR, 800 kbps, 32 bits per chip RGBW MSB first, T0H 220-380 ns / T1H 580 ns-1 us, reset >280 us.'
+  physical.packages:
+    url: https://www.world-semi.com/downloads/datasheets/en/ws2814b-1.3.pdf
+    retrieved: '2026-11-18'
+    notes: SOP10 package
 technical_notes:
-  - 'Variants: WS2814A (SOP-8 / FSOP-8), WS2814C (SOP-8), WS2814F (FSOP-8); the listed prices are for WS2814F.'
+  - 'Variants: WS2814A (SOP-8; its FSOP-8 version became WS2814F in 2023), WS2814B (SOP-10, adds a BIN backup data input), WS2814C (SOP-8), WS2814F (FSOP-8); the listed prices are for WS2814F.'

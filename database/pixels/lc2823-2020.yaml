@@ -1,4 +1,5 @@
-name: LC2823-2020
+name: LC8823-2020
+creator: Shenzhen LED Color
 color:
   channel_bits: 8
   brightness_control:
@@ -20,3 +21,12 @@ physical:
   packages:
     - '2020'
   pin_count: 6
+sources:
+  name:
+    url: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+    retrieved: '2026-11-18'
+    notes: LC8823-2020
+  creator:
+    url: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+    retrieved: '2026-11-18'
+    notes: Shenzhen LED Color Opto Electronic Co.,ltd

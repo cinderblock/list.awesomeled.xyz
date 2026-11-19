@@ -71,4 +71,9 @@ export const ALIASES: Record<string, Record<string, string>> = {
     'Plexiglas LED Edge Lit was EndlightenT':
       'diffusive-materials/plexiglas-led-edge-lit-was-endlightent',
   },
+  Pixels: {
+    // No such part: the row links the SM16716 driver's datasheet (database
+    // review removed the empty stub entry)
+    SM1616: 'pixel-ics/sm16716',
+  },
 };

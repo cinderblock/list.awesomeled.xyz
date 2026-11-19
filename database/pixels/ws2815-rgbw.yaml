@@ -1,8 +1,8 @@
 name: WS2815 RGBW
 status: active
-creator: World Semi
+creator: WorldSemi
 manufacturers:
-  - World Semi
+  - WorldSemi
 aliases:
   - WS2815B-RGBW
 color:
@@ -38,3 +38,11 @@ sources:
     url: https://www.lcsc.com/datasheet/lcsc_datasheet_2406271507_Worldsemi-WS2815B-RGBW_C19188610.pdf
     retrieved: '2026-11-18'
     notes: 32-bit data structure G7…G0 R7…R0 B7…B0 W7…W0
+  creator:
+    url: https://www.world-semi.com/
+    retrieved: '2026-11-18'
+    notes: © 2026 Worldsemi.
+  manufacturers:
+    url: https://www.world-semi.com/
+    retrieved: '2026-11-18'
+    notes: © 2026 Worldsemi.
