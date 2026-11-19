@@ -29,11 +29,12 @@ data:
     - type: SD
 dead_links:
   - url: https://go3d.fr/produit/controleur-de-pixels-fp48f/
-    # Product page was never captured; nearest good capture is the shop's 2022
-    # homepage. The domain now belongs to an unrelated pest-control company,
-    # so the default latest-capture fallback would show the wrong site.
-    archive: https://web.archive.org/web/20221208030737/https://go3d.fr/
-    checked: 2026-07-01
+    # Product page was never captured; nearest good capture is the shop's
+    # 2023-02 pixel-controller category page, which lists the FP48F. The domain
+    # now belongs to an unrelated pest-control company, so the default
+    # latest-capture fallback would show the wrong site.
+    archive: https://web.archive.org/web/20230201034543/https://go3d.fr/categorie-produit/controleurs-de-pixels-et-accessoires/controleurs-de-pixels/
+    checked: '2026-11-18'
     notes: Vendor site is gone; go3d.fr was re-registered by an unrelated company
 features:
   - On-board RTC
