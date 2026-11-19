@@ -145,6 +145,9 @@ notes: Popular Arduino library with extensive pixel support
 | `status`       | string        | No       | `active`, `discontinued`, `end-of-life`, `unknown` |
 | `image`        | string/object | No       | Legacy single image; prefer `images`               |
 | `images`       | array         | No       | `{file, source, credit, license?}` — see below     |
+| `aliases`      | array         | No       | Other names the part is sold or listed under       |
+| `related`      | array         | No       | Links to other entries — see below                 |
+| `sources`      | object        | No       | Where facts were verified — see below              |
 
 ### Prices
 
@@ -164,6 +167,65 @@ Generic parts sold by many sellers at varying prices take a street-price
 range: `price: {amount: 3, max: 8}` with the marketplace as `vendor`.
 Commercial-system `pricing.examples[]` and pattern-driver `pricing` take the
 same object as `source`.
+
+### Links between entries
+
+Declare a link once, on the entry that uses the other one. The other
+direction ("Driven by", "Runs on", "Host for") is derived and shown on the
+other entry's page.
+
+**Name lists** keep the names the maker publishes. A name becomes a link when
+some entry answers to it through its `name`, `aliases` or `variants[].name`
+(matching ignores case, spaces and punctuation, so `APA-102` finds `APA102`):
+
+| Field                                        | Names                             |
+| -------------------------------------------- | --------------------------------- |
+| controllers `outputs.protocols`              | pixel ICs and pixels it can drive |
+| drive libraries `supported_ics`              | pixel ICs and pixels it supports  |
+| pixel decoders `inputs.protocols`            | pixel protocols it decodes        |
+| controllers / adapters `software.firmware`   | firmware it runs                  |
+| controllers / adapters `software.works_with` | software that can drive it        |
+| controllers `inputs.requires_host`           | the dev board it plugs into       |
+| controllers `outputs.driver.IC`              | the level-shifter / buffer IC     |
+
+A name nothing answers to stays plain text, and `bun run validate` lists it:
+that's a part the database is missing. When a maker spells a part
+differently, add the spelling to that part's `aliases` (with a source) rather
+than rewriting the maker's list.
+
+**`related`** links to one specific entry by `<category>/<id>`:
+
+```yaml
+related:
+  - type: host # also: uses, compatible, variant, predecessor, replacement, accessory, related
+    ref: microboards/pocketbeagle
+    notes: Cape for the PocketBeagle
+    source:
+      url: https://example.com/product-page
+      retrieved: '2026-11-18'
+```
+
+`outputs.connector.ref` names a connector entry by its id. Pixels and pixel
+ICs that speak the same protocol share a `data.type` family (`WS2811/12`,
+`APA102`, `TM1814`, …): hardware that drives one part of a family can drive
+the rest, which is what the tables' "Pixel ICs" filter relies on, so set it
+from the datasheet.
+
+### Sources
+
+Say where a fact was verified under `sources`, keyed by the field's dotted
+path (one source or a list):
+
+```yaml
+sources:
+  data.type:
+    url: https://example.com/datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: "'Compatible with the WS2811 protocol'" # optional: what it says
+```
+
+Entry pages show the source under the field. `bun run validate` checks that
+every key names a field the entry has.
 
 ### Controllers
 

@@ -197,6 +197,7 @@ Allpixmatrix
 Artstick
 Beagleboard
 Beaglebone
+PocketBeagle
 Blux
 Capro
 Chataigne
