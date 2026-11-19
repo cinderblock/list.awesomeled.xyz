@@ -220,12 +220,7 @@
       }
     },
     "datasheet": { "$ref": "common.json#/definitions/datasheet" },
-    "other_links": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
-      }
-    },
+    "other_links": { "$ref": "common.json#/definitions/other_links" },
     "technical_notes": {
       "type": ["array", "null"],
       "items": {

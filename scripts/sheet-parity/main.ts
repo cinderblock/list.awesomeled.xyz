@@ -47,7 +47,13 @@ export const HIGHLIGHTS: Record<string, string> = {
 const DECORATIVE = new Set(['FEF8E3', 'F3F3F3', 'FFE599', 'FFFFFF']);
 
 /** Where a difference came from (see history.ts) */
-export type Origin = 'sheet-edited' | 'yaml-revised' | 'conversion-loss' | 'new-row' | 'unknown';
+export type Origin =
+  | 'sheet-edited'
+  | 'yaml-revised'
+  | 'migration-loss'
+  | 'conversion-loss'
+  | 'new-row'
+  | 'unknown';
 
 export interface CellResult {
   a1: string;
@@ -260,10 +266,14 @@ async function main() {
         ): Origin => {
           if (!baseRow) return 'new-row';
           if (norm(baseRow[j]) !== norm(curRow?.[j])) return 'sheet-edited';
-          if (importText === undefined || sheetValue === undefined) return 'unknown';
-          if (valuePresent(sheetValue, importText)) return 'yaml-revised';
-          void x;
-          return 'conversion-loss';
+          // CSV exports carry no notes or hyperlinks, and print numbers at
+          // their format's precision: those were lost converting
+          if (sheetValue === undefined || x.status === 'rounded') return 'conversion-loss';
+          if (importText === undefined) return 'unknown';
+          if (!valuePresent(sheetValue, importText)) return 'conversion-loss';
+          // In the import but not now: a research commit changed it, or a
+          // bulk migration (IGNORED_COMMITS) dropped it
+          return pair && revisedBy(pair.view) ? 'yaml-revised' : 'migration-loss';
         };
         const finish = <T extends CellResult>(
           x: T,

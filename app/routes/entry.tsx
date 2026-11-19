@@ -16,6 +16,7 @@ import {
   X,
   Archive,
   AlertTriangle,
+  Link2,
 } from 'lucide-react';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import {
@@ -222,6 +223,14 @@ function getEntryLinks(
     }
   }
 
+  // Other pages about the product (protocol write-ups, series overviews,
+  // old product pages), labelled by site
+  if (Array.isArray(entry.other_links)) {
+    for (const url of entry.other_links) {
+      if (typeof url === 'string') add(url, stripSchemaAndWww(url).split('/')[0], Link2);
+    }
+  }
+
   // Legacy / flat fallbacks
   add(entry.url, 'Website', Globe);
   add(entry.datasheet_url, 'Datasheet', FileText);
@@ -288,6 +297,7 @@ const SKIP_KEYS = new Set([
   'links',
   'related', // rendered as the Works with / Related products sections
   'dead_links', // applied to the links they describe, plus a hero callout
+  'other_links', // shown with the other external links
   'price_source', // shown as the "as of" line under the price
   'sources', // shown under each field it documents
 ]);
@@ -824,6 +834,24 @@ function formatValue(
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
           {value.map((item, idx) => (
             <div key={idx}>{formatValue(key, item, ctx, path)}</div>
+          ))}
+        </div>
+      );
+    }
+    if (value.length > 0 && value.every((v) => typeof v === 'string' && v.startsWith('http'))) {
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+          {(value as string[]).map((url) => (
+            <a
+              key={url}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="entry-value-link"
+              style={{ wordBreak: 'break-all' }}
+            >
+              {stripSchemaAndWww(url)}
+            </a>
           ))}
         </div>
       );

@@ -324,6 +324,8 @@
       "type": "boolean",
       "description": "WLED firmware based or capable of running WLED"
     },
+    "other_links": { "$ref": "common.json#/definitions/other_links" },
+    "datasheet": { "$ref": "common.json#/definitions/datasheet" },
     "related": {
       "$ref": "common.json#/definitions/related"
     },

@@ -166,6 +166,14 @@ export function coverage(needle: string, hay: string): number {
   return found / nt.length;
 }
 
+/** Domains that moved; the same page under either host is the same link */
+const MOVED_HOSTS: [RegExp, string][] = [
+  [/^raspberrypi\.org\//, 'raspberrypi.com/'],
+  // Advatek moved domains and renamed its protocol knowledge base
+  [/^advateklights\.com\/knowledge-base\//, 'advateklighting.com/pixel-protocols/'],
+  [/^advateklights\.com\//, 'advateklighting.com/'],
+];
+
 export function normUrl(u: string): string {
   let s = u.trim();
   try {
@@ -173,17 +181,22 @@ export function normUrl(u: string): string {
   } catch {
     // keep as-is
   }
-  return s
+  const n = s
     .toLowerCase()
     .replace(/^https?:\/\//, '')
     .replace(/^www\./, '')
     .replace(/#.*$/, '')
     .replace(
-      /[?&](spm|algo_[a-z_]+|pdp_[a-z_]+|curpageloguid|utparam-url|gatewayadapt|aff_[a-z_]+|sk|src)=[^&]*/g,
+      /[?&](spm|algo_[a-z_]+|pdp_[a-z_]+|curpageloguid|utparam-url|gatewayadapt|aff_[a-z_]+|sk|src|srsltid|fbclid|_pos|_psq|_ss|_v|ref|pt|hash|attribute_pa_[a-z_]+)=[^&]*/g,
       ''
     )
+    .replace(/\?$/, '')
     .replace(/\/+$/, '')
     .replace(/\/+/g, '/');
+  for (const [re, to] of MOVED_HOSTS) if (re.test(n)) return n.replace(re, to);
+  const ebay = n.match(/^ebay\.[a-z.]+\/itm\/(?:.*\/)?(\d{9,})/);
+  if (ebay) return `ebay/itm/${ebay[1]}`;
+  return n;
 }
 
 // ---------------------------------------------------------------------------
@@ -216,7 +229,8 @@ export function viewOf(entry: Entry): EntryView {
 export function hasUrl(view: EntryView, url: string): boolean {
   const n = normUrl(url);
   if (view.urls.has(n)) return true;
-  for (const u of view.urls) if (u.startsWith(n) || n.startsWith(u + '/')) return true;
+  // A sheet link to a site root is covered by any deeper link into that site
+  for (const u of view.urls) if (u.startsWith(n + '/')) return true;
   return false;
 }
 

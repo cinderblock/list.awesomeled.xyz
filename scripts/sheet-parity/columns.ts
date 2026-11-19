@@ -218,10 +218,12 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Max pixel per string', text, ['data.max_per_string', 'data.max_per_string_notes']),
     col('Release Year', num, ['release_year']),
     col('NOTES', text, ['notes', 'technical_notes']),
-    col('3rd Party Testing', text, ['datasheet.third_party_testing']),
+    col('3rd Party Testing', url, ['datasheet.third_party_testing']),
     col('Original Manufacturer', text, ['creator', 'manufacturers']),
     col('Datasheet URL', url, ['datasheet.url', 'datasheet.sources[].url']),
-    col('Other Links', text, ['other_links']),
+    col('Other Links', url, ['other_links'], {
+      note: 'Cell text is the linked page title; the hyperlink is the data',
+    }),
   ],
 
   'Pixel ICs': [
@@ -247,9 +249,11 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Max pixel per string', text, ['data.max_per_string', 'data.max_per_string_notes']),
     col('Release Year', num, ['release_year']),
     col('NOTES', text, ['notes', 'technical_notes']),
-    col('3rd Party Testing', text, ['datasheet.third_party_testing']),
+    col('3rd Party Testing', url, ['datasheet.third_party_testing']),
     col('Datasheet URL', url, ['datasheet.url', 'datasheet.sources[].url']),
-    col('Other Links', text, ['other_links']),
+    col('Other Links', url, ['other_links'], {
+      note: 'Cell text is the linked page title; the hyperlink is the data',
+    }),
   ],
 
   'Pixel Decoders': [

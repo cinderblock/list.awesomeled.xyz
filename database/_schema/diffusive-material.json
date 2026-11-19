@@ -142,6 +142,7 @@
     "images": {
       "$ref": "common.json#/definitions/images"
     },
+    "other_links": { "$ref": "common.json#/definitions/other_links" },
     "related": {
       "$ref": "common.json#/definitions/related"
     },

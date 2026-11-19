@@ -177,6 +177,8 @@
     "images": {
       "$ref": "common.json#/definitions/images"
     },
+    "other_links": { "$ref": "common.json#/definitions/other_links" },
+    "datasheet": { "$ref": "common.json#/definitions/datasheet" },
     "related": {
       "$ref": "common.json#/definitions/related"
     },

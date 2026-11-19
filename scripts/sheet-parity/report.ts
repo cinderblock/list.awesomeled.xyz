@@ -2,13 +2,16 @@
  * Markdown rendering of the parity results (plans/spreadsheet-parity/report.md).
  */
 
+import { COLUMNS } from './columns';
 import type { CellResult, TabResult } from './main';
+import { colLetters } from './xlsx';
 
 const OPEN = new Set(['missing', 'differs', 'rounded', 'comment']);
 
 const ORIGIN: Record<string, string> = {
   'sheet-edited': 'sheet edited after import',
   'yaml-revised': 'YAML revised after import',
+  'migration-loss': 'dropped by a later bulk migration',
   'conversion-loss': 'lost in CSV conversion',
   'new-row': 'row added after import',
   unknown: '?',
@@ -79,6 +82,25 @@ export function renderReport(
     out.push(`## ${r.tab}`);
     out.push('');
     out.push(`Database folder: \`database/${r.category}/\`.`);
+    out.push('');
+    out.push('<details><summary>Column mapping</summary>');
+    out.push('');
+    out.push('| Col | Sheet header | YAML field(s) | Compared as | Note |');
+    out.push('| --- | --- | --- | --- | --- |');
+    (COLUMNS[r.tab] ?? []).forEach((spec, j) => {
+      const kind =
+        spec.kind.type === 'derived' || spec.kind.type === 'dropped'
+          ? `${spec.kind.type}: ${spec.kind.why}`
+          : spec.kind.type === 'number' && spec.kind.unit
+            ? `number (${spec.kind.unit})`
+            : spec.kind.type;
+      const paths = [...spec.paths.map((p) => `\`${p}\``), ...(spec.derive ? ['(derived)'] : [])];
+      out.push(
+        `| ${colLetters(j)} | ${esc(spec.header, 40)} | ${paths.join(', ') || '—'} | ${esc(kind, 120)} | ${esc(spec.note, 160)} |`
+      );
+    });
+    out.push('');
+    out.push('</details>');
     out.push('');
     if (r.headerProblems.length) {
       out.push('Header problems:');
