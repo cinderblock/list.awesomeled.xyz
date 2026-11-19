@@ -62,6 +62,7 @@ export const IGNORED_COMMITS = new Set([
   '2c469a1a615992642492bca92a1b015ecdf3d6a2', // diffusive-materials typed fields (45)
   'a000cd191ccf4077410dd556070f58d2b2ab032b', // URLs the terminology lint had rewritten (3)
   '3b9da1ae9940b220a03c622d1bdf074d2454de3d', // adapters shared output/power shapes (40)
+  'df38d673dd54f288b2a62300dc855a2e9548bd92', // controllers/adapters input vocabulary (~60)
   // Pure formatting passes (prettier/lint only, no content change)
   '35c9c5310c8b6c0624a86b69ce52e67785ad2dba', // Prettier and lint free (42)
   'd9edd7574e197624c721c543e49d418ee3225f06', // Fix prettier formatting (39)
