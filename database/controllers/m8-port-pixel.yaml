@@ -20,7 +20,7 @@ outputs:
     ref: mtsb-combicon
   driver:
     buffered: true
-  clocked: false # single-wire only (FPP DPIPixels driver)
+  clocked: false
   pixels:
     max_per_output: 1600 # at 20 fps
   protocols:
@@ -80,3 +80,7 @@ sources:
     url: https://web.archive.org/web/20231130050208/https://espartstick.ecwid.com/M8-PI-Raspberry-Pi-8-Port-Pixel-controller-p471859299
     retrieved: '2026-11-18'
     notes: "Single-string field; current 'Raspberry Pi # 3B+ or above' is reasonable."
+  outputs.clocked:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/fpp.xcontroller
+    retrieved: '2026-11-18'
+    notes: 'FPPStringDPIPiHat: PixelProtocols ws2811 only'

@@ -27,7 +27,7 @@ outputs:
     - WS2812
 power:
   voltage:
-    max: 12
+    max: 18
   current:
     max: 160
 data:
@@ -80,3 +80,7 @@ sources:
     url: https://kulplights.com/product/k32a-b/
     retrieved: '2026-11-18'
     notes: "Also: 'Note: a BeagleBone Green Wireless will NOT work.'"
+  power.voltage.max:
+    url: https://kulplights.com/product/k32a-b/
+    retrieved: '2026-11-18'
+    notes: "'The Beagle can be powered through the K32 with 5V-18V power'"

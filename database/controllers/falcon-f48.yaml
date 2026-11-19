@@ -24,7 +24,7 @@ outputs:
     max_per_output: 1022 # 1022 @ 20fps, 680 @ 40fps
   clocked: false
   auxiliary:
-    DMX512: 3
+    DMX512: 4 # 3 on RJ-45 + 1 on a 3-pin connector
   protocols:
     - WS2811
     - WS2812
@@ -93,3 +93,7 @@ sources:
     url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
     retrieved: '2026-11-18'
     notes: 'This database entry is the original F48 (store product 52: 5V-powered, 96 universes, fw 2.x), not the later F48V4/F48V5.'
+  outputs.auxiliary.DMX512:
+    url: https://www.pixelcontroller.com/store/index.php?id_product=52&controller=product
+    retrieved: '2026-11-18'
+    notes: "'DMX/Renard/Pixelnet Outputs 4 - Dedicated RS-485 outputs'"

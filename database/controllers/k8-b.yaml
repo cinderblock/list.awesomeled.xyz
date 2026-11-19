@@ -26,7 +26,7 @@ outputs:
     - WS2812
 power:
   voltage:
-    max: 12
+    max: 18
   current:
     max: 30
 data:
@@ -82,6 +82,10 @@ sources:
     url: https://kulplights.com/product/k8-b/
     retrieved: '2026-11-18'
     notes: "Also: 'Note: a BeagleBone Green Wireless will NOT work.'"
+  power.voltage.max:
+    url: https://kulplights.com/product/k8-b/
+    retrieved: '2026-11-18'
+    notes: "'It can be powered from the cape using power between 5V and 18V'"
 technical_notes:
   - 8 local ports drive 800 pixels each at 40FPS (1500 at 20FPS)
   - 12 channels require differential receivers

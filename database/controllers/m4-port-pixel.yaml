@@ -22,7 +22,7 @@ outputs:
     buffered: true
   pixels:
     max_per_output: 1600 # at 20 fps
-  clocked: false # single-wire only (FPP DPIPixels driver)
+  clocked: false
   protocols:
     - WS2811
 power:
@@ -84,3 +84,7 @@ sources:
     url: https://web.archive.org/web/20231130050450/https://espartstick.ecwid.com/M4-PI-Raspberry-Pi-4-Port-Pixel-controller-p468426786
     retrieved: '2026-11-18'
     notes: Single-string field; see m4-pi.
+  outputs.clocked:
+    url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/fpp.xcontroller
+    retrieved: '2026-11-18'
+    notes: 'FPPStringDPIPiHat: PixelProtocols ws2811 only'

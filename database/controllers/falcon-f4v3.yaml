@@ -10,12 +10,12 @@ inputs:
     Wi-Fi: true
   standalone: true # Falcon Player (FPP) remote mode plays from SD
 outputs:
-  count: 48
+  count: 4 # built-in; 12 with expansion boards or receivers
   connector:
     ref: mtsb-combicon
   clocked: selectable # supports Single and Clock pixel types
   pixels:
-    max_per_output: 340 # 16320 total across 48 outputs
+    max_per_output: 1024 # 12288 pixels per board
   driver:
     buffered: true
   auxiliary:
@@ -47,7 +47,7 @@ outputs:
     - UCS2903
 power:
   voltage:
-    max: 36
+    max: 13
   current:
     max: 60
 data:
@@ -87,3 +87,15 @@ sources:
     url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
     retrieved: '2026-11-18'
     notes: Controller Specifications sheet Rev 3.0 Jul 2023, 'Pixel Protocols' rows, F4v3 column (read from the xlsx export with merged cells expanded).
+  outputs.count:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+    retrieved: '2026-11-18'
+    notes: 'Falcon spec sheet, F4v3 column: Pixel Outputs 4 built-in, 12 with expansion'
+  outputs.pixels.max_per_output:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+    retrieved: '2026-11-18'
+    notes: 'Falcon spec sheet, F4v3 column: Pixels per output 1024, max 12288 per board'
+  power.voltage.max:
+    url: https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit#gid=2005112714
+    retrieved: '2026-11-18'
+    notes: 'Falcon spec sheet, F4v3 column: Voltage Range 5-13v DC'

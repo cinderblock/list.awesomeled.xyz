@@ -10,7 +10,8 @@ inputs:
     USB: Type-A 2.0 OTG
     Trigger inputs: 8
   protocols:
-    - DMX512
+    - sACN
+    - DDP
   standalone: true
   requires_host: PocketBeagle
 outputs:
@@ -25,6 +26,7 @@ outputs:
   auxiliary:
     DC: 16
     Servo: 16
+    DMX512: 2
   protocols:
     - WS2811
 power:
@@ -78,6 +80,14 @@ sources:
     url: https://kurtcontrollers.com/?product=pb-complete-controller
     retrieved: '2026-11-18'
     notes: '"In stock", $195.00'
+  inputs.protocols:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: network inputs E1.31/DDP; '2 universes of DMX 512' is an output
+  outputs.auxiliary.DMX512:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: "'2 universes of DMX 512'"
 technical_notes:
   - 16 x 4A DC solid-state outputs
   - 16 x servo motor outputs

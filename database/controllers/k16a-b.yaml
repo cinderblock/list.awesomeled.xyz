@@ -61,7 +61,7 @@ outputs:
     - GE8822
 power:
   voltage:
-    max: 12
+    max: 24
   current:
     max: 60
 data:
@@ -117,5 +117,9 @@ sources:
     url: https://kulplights.com/product/k16a-b/
     retrieved: '2026-11-18'
     notes: "Product page also: 'Note: a BeagleBone Green Wireless will NOT work.'"
+  power.voltage.max:
+    url: https://kulplights.com/product/k16a-b/
+    retrieved: '2026-11-18'
+    notes: "'Each port can handle up to 6A of current and 5-24V'"
 technical_notes:
   - Two RS485 outputs support DMX / PixelNet / Renard / LOR
