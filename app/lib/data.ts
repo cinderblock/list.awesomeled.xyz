@@ -86,6 +86,7 @@ export const IGNORED_COMMITS = new Set([
   'd26e73ca66c720ed6dc7efafcb09f5788b00f173', // sheet-parity: restore hyperlinks the sheet import dropped (117)
   'b1c26ecaec5aad615383c97334f20d5cd511dc40', // sheet-parity: restore sheet cell notes the import dropped (59)
   '66342a416add1a219a50abb707e75137733129a7', // sheet-parity: restore sheet values the import rounded or migrations dropped (46)
+  '919d9dadf64eecaf86c02013808bd17191083bd9', // sheet-parity: restore controller pixel totals the migration dropped (19)
   'd5f86cd5f5e66092311965397ae2384c8dfd3be5', // price comments -> price_source (40)
 ]);
 
