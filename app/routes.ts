@@ -6,6 +6,7 @@ export default [
   route('designer', 'routes/designer.tsx'),
   route('about', 'routes/about.tsx'),
   route(':category.csv', 'routes/csv.$category.ts'),
+  route(':category.json', 'routes/json.$category.ts'),
   route('database.csv.zip', 'routes/database-csv-zip.ts'),
   route('database.yaml.zip', 'routes/database-yaml-zip.ts'),
   route(':category', 'routes/category.tsx'),

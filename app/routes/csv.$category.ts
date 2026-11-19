@@ -1,8 +1,7 @@
 import type { Route } from './+types/csv.$category';
 import { data } from 'react-router';
-import { getCategoryById, loadCategoryData } from '~/lib/data';
-import { getColumnsForCategory } from '~/lib/columns';
-import { generateCSV } from '~/lib/csv';
+import { getCategoryById } from '~/lib/data';
+import { categoryCSV } from '~/lib/category-export.server';
 
 export async function loader({ params }: Route.LoaderArgs) {
   const categoryId = params.category;
@@ -12,11 +11,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     throw data(null, { status: 404 });
   }
 
-  const entries = loadCategoryData(categoryId);
-  const columns = getColumnsForCategory(categoryId);
-  const csv = generateCSV(entries, columns);
-
-  return new Response(csv, {
+  return new Response(categoryCSV(categoryId), {
     headers: {
       'Content-Type': 'text/csv; charset=utf-8',
       'Content-Disposition': `attachment; filename="${categoryId}.csv"`,
