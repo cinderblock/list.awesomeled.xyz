@@ -16,6 +16,7 @@ connectivity:
     - 2.4GHz
   bluetooth: false
   serial: true
+  usb: Power + UART
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
 images:

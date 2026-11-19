@@ -1,6 +1,7 @@
 name: PixFog Pixel Based Fog Controller
 status: active
 creator: Innotronix
+notes: Single-channel, variable-intensity fog controller for specific fog machines
 outputs:
   count: 1
   connector:
