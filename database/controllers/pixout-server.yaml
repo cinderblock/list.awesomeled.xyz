@@ -3,6 +3,7 @@ status: active
 creator:
   name: PixOut
   url: http://pixout.lighting/
+  page: https://pixout.lighting/products/recorder/
 notes: Raspberry Pi based Art-Net DMX recorder/player; up to 255 universes; iOS/Android app.
 inputs:
   physical:
@@ -28,7 +29,28 @@ data:
 features:
   - ArtNet DMX cue recording and playback
   - Web control panels and iOS/Android remote app
-price: 300
+price:
+  - name: S-100 Outdoor (IP67), 1 universe
+    price:
+      amount: 344
+      currency: EUR
+  - name: S-100 Outdoor (IP67), 16 universes
+    price:
+      amount: 664
+      currency: EUR
+  - name: S-100 Outdoor (IP67), 64 universes
+    price:
+      amount: 1197
+      currency: EUR
+  - name: Software-only licence for your own Raspberry Pi (from)
+    price:
+      amount: 104
+      currency: EUR
+price_source:
+  notes: MSRP in EUR, ex VAT and shipping. The indoor I-100 is €304 / €624 / €1,157 for 1 / 16 / 64 universes; the D-100 (4 DMX outputs) starts at €389.
+  retrieved: '2026-11-18'
+  url: https://pixout.lighting/products/recorder/
+  vendor: Pixout
 software:
   works_with:
     - Android
@@ -41,6 +63,10 @@ software:
     - Resolume Arena
     - ArKaos
 sources:
+  status:
+    url: https://pixout.lighting/products/recorder/
+    retrieved: '2026-11-18'
+    notes: 'sold as the Pixout ArtNet DMX Recorder, MSRP from €304'
   software.works_with:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'

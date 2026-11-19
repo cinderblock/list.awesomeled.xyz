@@ -1,9 +1,9 @@
 name: PixLite 16 Long Range Mk2
-status: active
+status: end-of-life
 creator:
   name: Advatek
-  url: https://www.advateklights.com
-  page: https://www.advateklights.com/pixlite-16-mk2-long-range-control-board
+  url: https://www.advateklighting.com
+  page: https://www.advateklighting.com/products/shop/pixlite-16-long-range-mk2
 inputs:
   physical:
     USB: true # configuration
@@ -71,7 +71,15 @@ outputs:
 power:
   voltage:
     max: 24
-price: 449.95
+price:
+  amount: 1175
+  currency: AUD
+price_source:
+  notes: Advatek AU store price from the product page's schema.org offer (availability Discontinued; GST treatment not stated). No USD price; US visitors see only "Limited stock available - contact us".
+  part: PIX16LRMKII
+  retrieved: '2026-11-18'
+  url: https://www.advateklighting.com/products/shop/pixlite-16-long-range-mk2
+  vendor: Advatek
 related:
   - type: variant
     ref: controllers/pixlite-16-mk2-control-board
@@ -80,6 +88,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.advateklighting.com/products/shop/pixlite-16-long-range-mk2
+    retrieved: '2026-11-18'
+    notes: 'flagged discontinued, "Limited stock available - contact us"'
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
       retrieved: '2026-11-18'

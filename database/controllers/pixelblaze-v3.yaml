@@ -53,11 +53,21 @@ features:
   - GPIO pins (analog and touch inputs on Standard)
   - Web-based live pattern editor
   - Output Expander Boards (8 channels each, up to 51K pixels total)
-price: 35
+price: 39
+price_source:
+  notes: Pixelblaze V3 Standard (XL), the only Standard variant listed; the Pixelblaze V3 Pico+ (EM-PB-PICO32P6A) is $35
+  part: EM-PIXELBLAZE-PB32XL
+  retrieved: '2026-11-18'
+  url: https://shop.electromage.com/products/pixelblaze-v3-standard-wifi-led-controller
+  vendor: ElectroMage
 software:
   firmware:
     - Pixelblaze
 sources:
+  status:
+    url: https://shop.electromage.com/products/pixelblaze-v3-standard-wifi-led-controller
+    retrieved: '2026-11-18'
+    notes: 'in stock, $39 (Standard XL)'
   outputs.protocols:
     url: https://electromage.com/pixelblaze
     retrieved: '2026-11-18'

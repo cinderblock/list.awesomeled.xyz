@@ -1,5 +1,5 @@
 name: PB Complete Controller
-status: unknown
+status: active
 creator:
   name: Kurt Controllers
   page: https://kurtcontrollers.com/?product=pb-complete-controller
@@ -30,7 +30,17 @@ power:
 data:
   storage:
     - type: SD
-price: 199
+price: 195
+price_source:
+  notes: Complete controller with PocketBeagle, pluggable screw terminals, fuses and a pre-flashed 32GB microSD card
+  retrieved: '2026-11-18'
+  url: https://kurtcontrollers.com/?product=pb-complete-controller
+  vendor: Kurt Controllers
+sources:
+  status:
+    url: https://kurtcontrollers.com/?product=pb-complete-controller
+    retrieved: '2026-11-18'
+    notes: '"In stock", $195.00'
 technical_notes:
   - 16 x 4A DC solid-state outputs
   - 16 x servo motor outputs

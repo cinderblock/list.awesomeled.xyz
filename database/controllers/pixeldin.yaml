@@ -4,7 +4,7 @@ release_year: 2021
 creator:
   name: YariloPro
   url: https://yarilo.pro
-  page: https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
+  page: https://yarilo.pro/ru/contollers/pixel/yarilo-pixeldin2
 notes: Up to 4 independent outputs in single-wire pixel mode. Total 5440 pixels.
 inputs:
   physical:
@@ -38,14 +38,20 @@ power:
     max: 24
   current:
     max: 8
-dead_links:
-  - url: https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
-    checked: '2026-07-01'
 price: 142
+price_source:
+  notes: 'Last list price, from the archived English product page ("Price: USD $142"); the English site is gone and the Russian page lists no price for this model'
+  retrieved: '2024-11-05'
+  url: https://web.archive.org/web/20241105183413/https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
+  vendor: YariloPro
 software:
   works_with:
     - Madrix
 sources:
+  status:
+    url: https://yarilo.pro/ru/contollers/pixel/yarilo-pixeldin2
+    retrieved: '2026-11-18'
+    notes: '"Снят с производства" (discontinued)'
   outputs.protocols:
     url: https://yarilo.pro/service/manuals/Yarilo_PixelDIN_datasheet_en.pdf
     retrieved: '2026-11-18'

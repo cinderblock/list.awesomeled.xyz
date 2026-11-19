@@ -3,8 +3,8 @@ status: active
 release_year: 2022
 creator:
   name: Advatek
-  url: https://www.advateklights.com
-  page: https://www.advateklights.com/pixlite-e4-s-mk3
+  url: https://www.advateklighting.com
+  page: https://www.advateklighting.com/products/e4-s-mk3
 notes: Pixels cannot be powered through PixLite. All other features of Mk3 are available in the E Series.
 inputs:
   physical:
@@ -131,7 +131,12 @@ data:
 other_links:
   - https://www.advateklighting.com/pixlite-mk3-e-series-2022
   - https://www.advateklighting.com/software/showtime
-price: 549
+price: 449
+price_source:
+  notes: RRP, USD ex tax, uncoated; conformal-coated variant $499
+  retrieved: '2026-11-18'
+  url: https://www.advateklighting.com/products/e4-s-mk3
+  vendor: Advatek
 related:
   - type: variant
     ref: controllers/pixlite-a4-s-mk3
@@ -146,6 +151,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.advateklighting.com/products/e4-s-mk3
+    retrieved: '2026-11-18'
+    notes: 'listed, $449 RRP USD ex tax, in stock'
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
       retrieved: '2026-11-18'

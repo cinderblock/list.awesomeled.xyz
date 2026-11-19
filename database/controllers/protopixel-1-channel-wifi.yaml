@@ -1,5 +1,5 @@
 name: ProtoPixel 1 channel Wi-Fi
-status: active
+status: discontinued
 creator:
   name: ProtoPixel
   url: https://www.protopixel.io
@@ -35,6 +35,11 @@ data:
   fps: 30 # 30fps in streaming
   storage:
     - type: uSD
+dead_links:
+  - url: https://www.protopixel.io/pricing
+    archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing
+    checked: '2026-11-18'
+    notes: Now redirects to the generic product overview, which no longer lists this controller
 price: 221
 related:
   - type: variant
@@ -47,6 +52,10 @@ software:
   works_with:
     - ProtoPixel Create
 sources:
+  status:
+    url: https://www.protopixel.io/tools/product-overview
+    retrieved: '2026-11-18'
+    notes: 'not in the current lineup (Brain and Gate controllers only); the old /mini-controller page returns 404'
   software.works_with:
     - url: http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing
       retrieved: '2026-11-18'

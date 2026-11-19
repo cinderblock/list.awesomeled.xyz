@@ -1,9 +1,9 @@
 name: PixLite 16 Plug and Play Mk2
-status: active
+status: end-of-life
 creator:
   name: Advatek
   url: https://www.advateklighting.com
-  page: https://www.advateklights.com/pixlite-16-mk2-plug-and-play
+  page: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
 notes: 5V or 12V available. Multiple power plug versions available.
 inputs:
   physical:
@@ -69,6 +69,10 @@ related:
     ref: controllers/pixlite-16-mk2-control-board
     notes: Assembled plug-and-play version of the control board
 sources:
+  status:
+    url: https://www.advateklighting.com/products/shop/pixlite-16-plug-and-play-mk2
+    retrieved: '2026-11-18'
+    notes: 'flagged discontinued, "Limited stock available - contact us"'
   outputs.protocols:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'

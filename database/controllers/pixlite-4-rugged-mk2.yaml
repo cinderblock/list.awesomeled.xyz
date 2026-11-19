@@ -1,9 +1,9 @@
 name: PixLite 4 Rugged Mk2
-status: active
+status: end-of-life
 creator:
   name: Advatek Lights
-  url: https://www.advateklights.com
-  page: https://www.advateklights.com/pixlite-4-mk2-rugged
+  url: https://www.advateklighting.com
+  page: https://www.advateklighting.com/products/shop/pixlite-4-rugged-mk2
 notes: 5V or 12V available. Multiple power plug versions available.
 inputs:
   physical:
@@ -68,12 +68,24 @@ power:
     max: 30
 case:
   waterproof: IP65
-price: 439.95
+price:
+  amount: 809
+  currency: AUD
+price_source:
+  notes: Advatek AU store price from the product page's schema.org offer (availability Discontinued; GST treatment not stated) for the only listed variant, conformal coated incl. power cable. No USD price; US visitors see only "Limited stock available - contact us".
+  part: PIX4MKIIRUGKITCC
+  retrieved: '2026-11-18'
+  url: https://www.advateklighting.com/products/shop/pixlite-4-rugged-mk2
+  vendor: Advatek
 related:
   - type: variant
     ref: controllers/pixlite-4-mk2
     notes: Enclosed rugged version
 sources:
+  status:
+    url: https://www.advateklighting.com/products/shop/pixlite-4-rugged-mk2
+    retrieved: '2026-11-18'
+    notes: 'flagged discontinued, "Limited stock available - contact us"'
   outputs.protocols:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'

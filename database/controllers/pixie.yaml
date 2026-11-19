@@ -30,6 +30,10 @@ software:
   works_with:
     - Jinx!
 sources:
+  status:
+    url: https://smartshow.lighting/archive/
+    retrieved: '2026-11-18'
+    notes: 'PIXIE listed under "Archived User Guides"; not in the current range'
   outputs.protocols:
     url: https://smartshow.lighting/support-page/pixie/
     retrieved: '2026-11-18'

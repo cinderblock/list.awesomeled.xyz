@@ -3,8 +3,8 @@ status: active
 release_year: 2022
 creator:
   name: Advatek
-  url: https://www.advateklights.com
-  page: https://www.advateklights.com/pixlite-t8-s-mk3
+  url: https://www.advateklighting.com
+  page: https://www.advateklighting.com/products/t8-s-mk3
 notes: 2 types of receivers available, dithering and gamma on 8-bit/color pixels, "hundreds of FPS"
 inputs:
   physical:
@@ -129,10 +129,13 @@ data:
     - type: SD
 other_links:
   - https://www.advateklighting.com/software/showtime
-price: 1200
+price: 1150
+price_source:
+  notes: RRP, USD ex tax, transmitter only (no power cable, uncoated); receivers sold separately
+  retrieved: '2026-11-18'
+  url: https://www.advateklighting.com/products/t8-s-mk3
+  vendor: Advatek
 related:
-  - type: predecessor
-    ref: controllers/pixlite-t8-s-mk2
   - type: related
     ref: controllers/pixlite-16-long-range-mk2
     notes: Mk3 long-range counterpart Advatek lists for the PixLite 16 Long Range Mk2
@@ -143,6 +146,10 @@ software:
   works_with:
     - xLights
 sources:
+  status:
+    url: https://www.advateklighting.com/products/t8-s-mk3
+    retrieved: '2026-11-18'
+    notes: 'listed, $1150 RRP USD ex tax'
   software.works_with:
     - url: https://github.com/xLightsSequencer/xLights/blob/master/resources/controllers/advatek.xcontroller
       retrieved: '2026-11-18'

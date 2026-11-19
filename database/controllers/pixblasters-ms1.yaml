@@ -1,5 +1,5 @@
 name: PixBlasters MS1
-status: unknown
+status: active
 creator:
   name: Pixblasters
   page: https://pixblasters.com/products/ms1-controller/
@@ -22,3 +22,13 @@ power:
   voltage:
     max: 5
 price: 375
+price_source:
+  notes: Crowd Supply "In stock", +$10 US / $20 worldwide shipping. The live page blocks scripts (Cloudflare 403), so this is the latest Wayback capture; Mouser (CS-PIXBLASTER-01) also blocks scripts.
+  retrieved: '2026-05-22'
+  url: https://web.archive.org/web/20260522230919/https://www.crowdsupply.com/pixblasters/video-led-controller
+  vendor: Crowd Supply
+sources:
+  status:
+    url: https://pixblasters.com/how-to-order/
+    retrieved: '2026-11-18'
+    notes: 'orderable from Mouser (CS-PIXBLASTER-01) or direct; Crowd Supply "In stock" $375 (May 2026 capture)'

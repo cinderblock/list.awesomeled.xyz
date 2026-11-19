@@ -3,8 +3,8 @@ status: active
 release_year: 2021
 creator:
   name: Advatek
-  url: https://www.advateklights.com
-  page: https://www.advateklights.com/pixlite-a4-s-mk3
+  url: https://www.advateklighting.com
+  page: https://www.advateklighting.com/products/a4-s-mk3
 notes: Electronic fusing; dithering and gamma on 8-bit/color pixels, "hundreds of FPS"
 inputs:
   standalone: true # SHOWTime software plays from SD card
@@ -133,12 +133,21 @@ features:
   - Electronic fusing
   - Dithering
   - Gamma correction on 8-bit/color pixels
-price: 399
+price: 649
+price_source:
+  notes: RRP, USD ex tax, uncoated; conformal-coated variant $715
+  retrieved: '2026-11-18'
+  url: https://www.advateklighting.com/products/a4-s-mk3
+  vendor: Advatek
 related:
   - type: related
     ref: controllers/pixlite-4-mk2
     notes: Mk3 counterpart of the PixLite 4 Mk2
 sources:
+  status:
+    url: https://www.advateklighting.com/products/a4-s-mk3
+    retrieved: '2026-11-18'
+    notes: 'listed, $649 RRP USD ex tax, in stock'
   outputs.protocols:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'

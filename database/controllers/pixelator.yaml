@@ -21,10 +21,25 @@ outputs:
   clocked: false # async pixel support
 dead_links:
   - url: https://www.enttec.co.uk/product/controls-gb/addressable-led-pixel-control-gb/24-port-ethernet-pixel-controller/
-    checked: '2026-07-01'
+    archive: https://web.archive.org/web/20220629132059/https://www.enttec.co.uk/product/controls/addressable-led-pixel-control/24-port-ethernet-pixel-controller/
+    checked: '2026-11-18'
+    notes: Wayback has no capture of this exact URL; the archive is the same product's UK store page at its later path
 features:
   - Proprietary PLINK protocol over Cat5e/Cat6 up to 300m to PLINK injectors
   - Onboard storage / standalone playback
-price: 1891
+price:
+  amount: 1475
+  currency: GBP
+price_source:
+  notes: Last list price, ex VAT ("£1,475.00 + VAT"), from the archived ENTTEC UK store page. The US store's last capture (Mar 2021) showed $2,100.
+  part: '70060'
+  retrieved: '2022-06-29'
+  url: https://web.archive.org/web/20220629132059/https://www.enttec.co.uk/product/controls/addressable-led-pixel-control/24-port-ethernet-pixel-controller/
+  vendor: ENTTEC
+sources:
+  status:
+    url: https://www.enttec.com/?s=pixelator&post_type=product
+    retrieved: '2026-11-18'
+    notes: "gone from ENTTEC's catalog; product search lists only Pixelator Mini and Mini Mk2"
 technical_notes:
   - Controls up to 8192 RGB pixels (24,576 channels) across 24 PLINK ports

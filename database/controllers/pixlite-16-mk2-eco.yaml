@@ -2,7 +2,7 @@ name: PixLite 16 Mk2 ECO
 status: discontinued
 creator:
   name: Advatek
-  url: https://www.advateklights.com
+  url: https://www.advateklighting.com
 notes: Limited stock left - no site listing. Contact sales@advateklights.com directly and ask for the ECO version; once shelf stock is gone no more will be manufactured.
 inputs:
   physical:
@@ -76,6 +76,10 @@ related:
     ref: controllers/pixlite-16-mk2-control-board
     notes: Cost-reduced Eco version
 sources:
+  status:
+    url: https://www.advateklighting.com/products/shop/pixlite-16-mk2
+    retrieved: '2026-11-18'
+    notes: "no ECO listing anywhere on Advatek's site; the base PixLite 16 Mk2 itself is flagged discontinued"
   outputs.protocols:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'

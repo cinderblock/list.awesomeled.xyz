@@ -67,7 +67,30 @@ power:
     max: 24
   current:
     max: 30
+dead_links:
+  - url: https://www.advateklighting.com/pixlite-t8-s-mk2
+    archive: https://web.archive.org/web/20220118111855/https://www.advateklights.com/pixlite-t8-s-mk2
+    checked: '2026-11-18'
+    notes: Now redirects to the T8-S Mk3 page; the archive is the product page on Advatek's old advateklights.com domain
+price: 879.95
+price_source:
+  notes: Last list price, transmitter only. From the store's product data (dataLayer "price") in the archived page; the page itself showed no price.
+  part: PIXT8SMK2
+  retrieved: '2022-01-18'
+  url: https://web.archive.org/web/20220118111855/https://www.advateklights.com/pixlite-t8-s-mk2
+  vendor: Advatek
+related:
+  - type: replacement
+    source:
+      url: https://web.archive.org/web/20230921232458/https://www.advateklights.com/pixlite-t8-s-mk2
+      retrieved: '2026-11-18'
+      notes: 'Sep 2023 capture, "The T8-S Mk2 is now replaced by the more powerful T8-S Mk3"'
+    ref: controllers/pixlite-t8-s-mk3
 sources:
+  status:
+    url: https://web.archive.org/web/20230921232458/https://www.advateklights.com/pixlite-t8-s-mk2
+    retrieved: '2026-11-18'
+    notes: 'Sep 2023 capture of Advatek''s page, "This item was discontinued in August 2022."'
   outputs.protocols:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'

@@ -23,3 +23,8 @@ power:
 features:
   - PoE powered (30W 5V output to LEDs)
 price: unknown
+sources:
+  status:
+    url: https://www.empdesigns.co.uk/our-products/poe-%2B-pixel
+    retrieved: '2026-11-18'
+    notes: 'listed in the product catalog as "PoE + Pixel" (no online price, contact sales)'

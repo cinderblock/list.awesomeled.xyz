@@ -1,5 +1,5 @@
 name: Pixelbox
-status: discontinued # replaced by PixelBOX 8 AMP
+status: discontinued
 creator:
   name: Lumikit
   url: https://www.lumikit.com.br
@@ -33,11 +33,23 @@ outputs:
 data:
   fps: 30 # 15-30 FPS depending on pixel chip
 price: 199
+related:
+  - type: replacement
+    source:
+      url: https://lumikit.com.br/pixelbox
+      retrieved: '2026-11-18'
+      notes: '"O produto que substitui é Controlador Lumikit PixelBOX 8 AMP DMX SINGLENET"'
+    name: Lumikit PixelBOX 8 AMP DMX SINGLENET
+    url: https://www.lumikit.com.br/pixelbox-8-amp
 software:
   works_with:
     - Lumikit SHOW
     - Madrix
 sources:
+  status:
+    url: https://lumikit.com.br/pixelbox
+    retrieved: '2026-11-18'
+    notes: '"Este produto não está mais ativo" (this product is no longer active)'
   outputs.protocols:
     url: https://www.lumikit.com.br/help.br/LumikitPixelBOXDMX(br).pdf
     retrieved: '2026-11-18'

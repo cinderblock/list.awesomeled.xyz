@@ -3,7 +3,7 @@ status: discontinued
 creator:
   name: ENTTEC
   url: https://www.enttec.com
-  page: https://support.enttec.com/support/solutions/articles/101000401138-pixelator-mini-px1-8d-71066-legacy-product
+  page: https://support.enttec.com/legacy-product/legacy-products/pixelator-mini-px1-8d-71066-legacy-product
 notes: DIN-rail Ethernet-to-pixel converter; 8 outputs, 16 universes, up to 2730 RGB pixels.
 inputs:
   physical:
@@ -30,7 +30,18 @@ dead_links:
     checked: '2026-11-18'
 other_links:
   - https://www.enttec.com/product/controls/addressable-led-pixel-control/din-rail-ethernet-pixel-converter/
-price: 700
+price: 735
+price_source:
+  notes: Last list price, from an archived ENTTEC US product-tag listing ("Buy Now"); by Feb 2023 the listing showed "Read more" only. Earlier list price was $700 (Mar 2021).
+  part: '71066'
+  retrieved: '2022-10-06'
+  url: https://web.archive.org/web/20221006200506/https://www.enttec.com/product-tag/px18d/
+  vendor: ENTTEC
+sources:
+  status:
+    url: https://support.enttec.com/legacy-product/legacy-products/pixelator-mini-px1-8d-71066-legacy-product
+    retrieved: '2026-11-18'
+    notes: '"DISCONTINUED: This product has been discontinued."'
 technical_notes:
   - 16 universes (8192 channels), up to 2730 RGB pixels across 8 outputs
   - Outputs synchronize up to 300m away when paired with ENTTEC PLink or PSAT

@@ -2,7 +2,7 @@ name: PixLite 4 Mk2 ECO
 status: discontinued
 creator:
   name: Advatek
-  url: https://www.advateklights.com
+  url: https://www.advateklighting.com
 manufacturers:
   - Advatek
 notes: Limited stock left - no site listing - contact sales@advateklights.com directly to order remaining ECO stock; once shelf stock is gone no more will be manufactured.
@@ -78,6 +78,10 @@ related:
     ref: controllers/pixlite-4-mk2
     notes: Cost-reduced Eco version
 sources:
+  status:
+    url: https://www.advateklighting.com/products/shop/pixlite-4-mk2
+    retrieved: '2026-11-18'
+    notes: "no ECO listing anywhere on Advatek's site; the base PixLite 4 Mk2 itself is flagged discontinued"
   outputs.protocols:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'

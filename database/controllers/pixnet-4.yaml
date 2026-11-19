@@ -4,7 +4,7 @@ release_year: 2022
 creator:
   name: PixNet Control
   url: https://pixnetcontrol.com/
-  page: https://pixnetcontrol.com/
+  page: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
 notes: Powered by PoE or screw terminals, 5-48 Volt.
 inputs:
   physical:
@@ -43,6 +43,10 @@ software:
     - Jinx
     - Resolume
 sources:
+  status:
+    url: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
+    retrieved: '2026-11-18'
+    notes: 'listed as PixNet 4, "Trade pricing only"'
   outputs.protocols:
     url: https://pixnetcontrol.com/pixel-controllers/20-pixnet-4.html
     retrieved: '2026-11-18'

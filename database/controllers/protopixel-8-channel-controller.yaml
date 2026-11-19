@@ -1,5 +1,5 @@
 name: ProtoPixel 8 channel controller
-status: active
+status: discontinued
 creator:
   name: ProtoPixel
   url: https://www.protopixel.io
@@ -29,6 +29,11 @@ outputs:
     - WS2813
     - CS8812
     - WS2815
+dead_links:
+  - url: https://www.protopixel.io/pricing
+    archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing
+    checked: '2026-11-18'
+    notes: Now redirects to the generic product overview, which no longer lists this controller
 features:
   - Two 4-output satellites connected to the controller via Ethernet
 price: 573
@@ -36,6 +41,10 @@ software:
   works_with:
     - ProtoPixel Create
 sources:
+  status:
+    url: https://www.protopixel.io/tools/product-overview
+    retrieved: '2026-11-18'
+    notes: 'not in the current lineup (Brain and Gate controllers only), no 8-channel controller'
   software.works_with:
     - url: http://web.archive.org/web/20200808024716/https://www.protopixel.io/pricing
       retrieved: '2026-11-18'
