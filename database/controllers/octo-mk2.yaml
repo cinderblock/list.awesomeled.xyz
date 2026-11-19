@@ -12,6 +12,7 @@ inputs:
   protocols:
     - Art-Net
     - sACN
+    - ESP
     - KiNET
   standalone: true # built-in effects engine runs at power-up
 outputs:
@@ -176,5 +177,3 @@ sources:
     - url: https://cdn.enttec.com/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
       retrieved: '2026-11-18'
       notes: '"Inbuilt Fx engine allowing gradient effect in standalone operation without a DMX source"'
-technical_notes:
-  - Also accepts ENTTEC's own ESP (ENTTEC Show Protocol), which the site's protocol list doesn't name

@@ -12,6 +12,7 @@ inputs:
   protocols:
     - Art-Net
     - sACN
+    - ESP # ENTTEC Show Protocol
     - KiNET
   standalone: true # Fx generator plays a stored preset from power-up
 outputs:
@@ -115,4 +116,3 @@ technical_notes:
   - Up to 8 universes of DMX over Ethernet, at most 4 per output (2048 channels per output)
   - 5 W maximum power consumption; operating temperature -10 to 60 °C
   - Datasheet and user manual dated February 2019, firmware v1.2 (Feb 2019)
-  - Also accepts ENTTEC's own ESP (ENTTEC Show Protocol), which the site's protocol list doesn't name

@@ -13,6 +13,7 @@ inputs:
   protocols:
     - Art-Net
     - sACN # E1.31
+    - ESP
     - KiNET # input only
   standalone: false
 outputs:
@@ -107,4 +108,3 @@ technical_notes:
   - 85-264 V AC, 20 W, passive cooling, indoor use only; 40 fps per port
   - The user manual describes no show recording or playback storage
   - 'Revisions: Rev A no longer supported; Rev B added RS232 profile triggering; Rev C changed the operating system and dropped RS232'
-  - Also accepts ENTTEC's own ESP (ENTTEC Show Protocol), which the site's protocol list doesn't name
