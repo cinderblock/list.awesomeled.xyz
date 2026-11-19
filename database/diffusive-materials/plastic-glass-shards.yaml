@@ -1,5 +1,9 @@
 name: Plastic 'Glass' Shards
 notes: Packing in larger clear or diffuse pipe or vase
+dead_links:
+  - url: https://tjlighting.co.uk/product/fake-clear-plastic-iceglass-shards/
+    checked: '2026-11-18'
+    notes: TJ Lighting has ceased trading (site shows a closure notice); the product page was never captured by the Wayback Machine.
 form:
   - loose
 links:
