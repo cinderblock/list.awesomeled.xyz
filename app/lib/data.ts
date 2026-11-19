@@ -54,6 +54,7 @@ const IGNORED_COMMITS = new Set([
   // Database review & standardization (plans/database-review.md): schema
   // re-encodings via scripts/migrations/, no facts re-checked
   '0bb334628be9cf26df3824c235c8d8612730996c', // physical.packages standardization (64)
+  '64a0d0908b7b554c4b0f26dd530caff189e029df', // pixel-decoders structured outputs (12)
   // Pure formatting passes (prettier/lint only, no content change)
   '35c9c5310c8b6c0624a86b69ce52e67785ad2dba', // Prettier and lint free (42)
   'd9edd7574e197624c721c543e49d418ee3225f06', // Fix prettier formatting (39)
