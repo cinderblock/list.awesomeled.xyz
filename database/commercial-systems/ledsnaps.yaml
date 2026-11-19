@@ -1,10 +1,18 @@
 name: Ledsnaps
+status: active
 creator:
   name: Ledsnaps
   url: https://www.ledsnaps.com/
 notes: LED strip Units aimed at gym studiomarket , closed architecture, presumed WS28XX
+links:
+  product: https://ledsnaps.com/products/pace-system
 pricing:
   price_range: $$$$$
+sources:
+  status:
+    url: https://ledsnaps.com/products/pace-system
+    retrieved: '2026-11-18'
+    notes: "PACE dynamic system on the maker's current product pages, sold by quote"
 specs:
   pixels_per_run: 1200
   color_type: RGB

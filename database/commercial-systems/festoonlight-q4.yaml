@@ -1,10 +1,39 @@
 name: FestoonLight Q4
+status: active
 creator:
   name: Showtec
   page: https://www.highlite.com/en/41751-festoonlight-q4-string.html
 notes: Separate 20 globe strings, controller and booster components
+links:
+  product: https://www.highlite.com/en/41750-festoonlight-q4-controller.html
 pricing:
+  examples:
+    - item: Festoonlight Q4 Controller (no pixels; drives 3 strings, 6 with booster)
+      price:
+        amount: 585
+        currency: EUR
+      source:
+        notes: Manufacturer R.R.P., ex VAT. Includes 10 m connection cable.
+        part: '41750'
+        retrieved: '2026-11-18'
+        url: https://www.highlite.com/en/41750-festoonlight-q4-controller.html
+        vendor: Highlite (Showtec)
+    - item: Festoon Q4 String IP65, 15 m (20 pixels)
+      price:
+        amount: 465
+        currency: EUR
+      source:
+        notes: Manufacturer R.R.P., ex VAT. Current string; the original Festoonlight Q4 String (41751) is listed as discontinued.
+        part: '41757'
+        retrieved: '2026-11-18'
+        url: https://www.highlite.com/en/41757-festoon-q4-string-ip65.html
+        vendor: Highlite (Showtec)
   price_range: $$$
+sources:
+  status:
+    url: https://www.highlite.com/en/41750-festoonlight-q4-controller.html
+    retrieved: '2026-11-18'
+    notes: 'controller and IP65 string listed as current on Highlite (original string 41751 discontinued)'
 specs:
   pixels_per_run: 120
   color_type: RGB

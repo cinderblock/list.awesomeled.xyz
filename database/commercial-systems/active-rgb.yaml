@@ -1,10 +1,18 @@
 name: Active RGB
+status: active
 creator:
   name: Lumisphere
   url: https://lumisphere.co.uk/
 notes: Time proven Clear bubble festoon lamp
+links:
+  product: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
 pricing:
   price_range: $$$$$
+sources:
+  status:
+    url: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+    retrieved: '2026-11-18'
+    notes: "listed in Lumisphere's current product range (Active RGBW), price on request"
 specs:
   pixels_per_run: 170
   color_type: RGB

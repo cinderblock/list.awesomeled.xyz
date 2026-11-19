@@ -1,10 +1,27 @@
 name: VC-Dot 1
+status: discontinued
 creator:
   name: Martin
   page: https://www.martin.com/en-US/products/vc-dot-1
 notes: Martin, stage lighting part of Harmon Kardon group
+links:
+  product: https://www.martin.com/en-US/products/vc-dot-1
 pricing:
+  examples:
+    - item: VC-Dot 1 RGB string, 100 dots at 100 mm pitch (100 pixels)
+      price: 2304
+      source:
+        notes: MSRP shown by Martin's US distributor; out of stock (notify-when-in-stock). Feeder/PSU sold separately.
+        part: 90357060HU
+        retrieved: '2026-11-18'
+        url: https://almoproav.com/p/90357060HU
+        vendor: Almo Pro A/V (Exertis Almo)
   price_range: $$$$$$
+sources:
+  status:
+    url: https://www.martin.com/en-US/products/vc-dot-1
+    retrieved: '2026-11-18'
+    notes: 'Martin product page marked "Discontinued", no successor named'
 specs:
   pixels_per_run: 100
   color_type: RGB

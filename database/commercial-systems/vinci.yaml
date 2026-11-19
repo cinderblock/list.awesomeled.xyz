@@ -1,9 +1,36 @@
 name: Vinci
+status: active
 creator: https://www.lucenti.lighting/products
 notes: RGB and flexi LED filament in one lamp
+links:
+  product: https://www.lucenti.lighting/collection/vinci
 pricing:
+  examples:
+    - item: Vinci Pearl v2 lamp, RGB + filament (1 pixel)
+      price:
+        amount: 95
+        currency: EUR
+      source:
+        notes: Complete lamp (lighting unit + bronze cover); Vinci controller and socket wiring sold separately. VAT treatment not stated. Out of stock at retrieval.
+        retrieved: '2026-11-18'
+        url: https://www.lucenti.lighting/product/vinci-pearl-v2
+        vendor: Lucenti
+    - item: Ruby lamp, RGBW (1 pixel)
+      price:
+        amount: 28
+        currency: EUR
+      source:
+        notes: Controller sold separately. VAT treatment not stated. Out of stock at retrieval.
+        retrieved: '2026-11-18'
+        url: https://www.lucenti.lighting/product/ruby
+        vendor: Lucenti
   price_range: $$$$$
   online_pricing: RGB €120 per lamp
+sources:
+  status:
+    url: https://www.lucenti.lighting/collection/vinci
+    retrieved: '2026-11-18'
+    notes: "Vinci lamps listed for sale on Lucenti's store (Pearl v2 95 EUR), out of stock at retrieval"
 specs:
   pixels_per_run: 128
   color_type: RGBW

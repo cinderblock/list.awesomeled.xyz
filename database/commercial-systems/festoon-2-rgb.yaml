@@ -1,10 +1,35 @@
 name: Festoon 2 RGB
+status: active
 creator:
   name: Chauvet
   page: https://www.chauvetdj.com/products/festoon-2-rgb/
 notes: Separate controller, 20 globes per string max 3 strings per control IP 54
+links:
+  product: https://www.chauvetdj.com/products/festoon-2-rgb/
 pricing:
+  examples:
+    - item: Festoon 2 RGB system, controller + 20-bulb string (20 pixels)
+      price: 649.99
+      source:
+        notes: 'MAP $649.99, MSRP $714.00. Kit: controller, 20 RGB bulbs, 5 m extension cable.'
+        part: FESTOON2RGB
+        retrieved: '2026-11-18'
+        url: https://soundpro.com/products/chauvet-dj-festoon2rgb
+        vendor: SoundPro
+    - item: Festoon 2 RGB EXT, 20-bulb extension string (20 pixels)
+      price: 419.99
+      source:
+        notes: MAP $419.99, MSRP $462.00. Needs the Festoon 2 RGB controller.
+        part: FESTOON2RGBEXT
+        retrieved: '2026-11-18'
+        url: https://soundpro.com/products/chauvet-dj-festoon2rgbext
+        vendor: SoundPro
   price_range: $$$
+sources:
+  status:
+    url: https://soundpro.com/products/chauvet-dj-festoon2rgb
+    retrieved: '2026-11-18'
+    notes: 'listed for sale at MAP $649.99; Chauvet DJ product page has no discontinued notice'
 specs:
   pixels_per_run: 60
   color_type: RGB W/WW

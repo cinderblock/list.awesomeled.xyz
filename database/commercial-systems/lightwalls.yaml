@@ -1,19 +1,42 @@
 name: Lightwalls
+status: active
 creator:
   name: Lightwalls
   url: https://www.lightwalls.co.uk/
 notes: Strip and panels associated with Protopixel.io, subscription based control systems, "dynamic lighting"
+links:
+  product: https://www.lightwalls.co.uk/
 other_links:
   - https://www.lightwalls.co.uk/learning-kits/
   - https://www.protopixel.io/
 pricing:
   examples:
-    - item: Learning kit
+    - item: Learning (Starter) kit, 3 × 29-pixel RGBW bars + 16×16 matrix (343 pixels)
       notes: +VAT
       price:
         amount: 550
         currency: GBP
+      source:
+        notes: Last list price, ex VAT (from a Wayback capture). Kit included a ProtoPixel Wi-Fi controller, PSU and flight case; no longer sold.
+        retrieved: '2020-10-30'
+        url: https://web.archive.org/web/20201030185350/https://www.lightwalls.co.uk/product/starter-kit-protopixel-and-lightwalls/
+        vendor: Light Walls
+    - item: Matrix 5x5 RGBW 16-bit tile (25 pixels)
+      price:
+        amount: 286.67
+        currency: GBP
+      source:
+        notes: Incl. VAT (£238.89 ex VAT).
+        part: LW-5X5-RGBW-16
+        retrieved: '2026-11-18'
+        url: https://www.lightwalls.co.uk/products/matrix-5x5-rgbw-16bit
+        vendor: Light Walls
   price_range: $$$$$
+sources:
+  status:
+    url: https://www.lightwalls.co.uk/products/matrix-5x5-rgbw-16bit
+    retrieved: '2026-11-18'
+    notes: 'Light Walls store lists light engines for sale, e.g. Matrix 5x5 £286.67'
 specs:
   color_type: RGB/W
   dedicated_psu: true

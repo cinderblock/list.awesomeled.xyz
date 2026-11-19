@@ -1,11 +1,28 @@
 name: Astera Nyx
+status: active
 creator:
   name: Astera
   page: https://astera-led.com/products/nyx-bulb/
 notes: Wireless DMX /Bluetooth controlled AC Line / Dc Battery Pack Powered, aimed at high end entertainment and film
 core_tech: CRMX DMX / Bluetooth
+links:
+  product: https://astera-led.com/products/nyx-bulb/
 pricing:
+  examples:
+    - item: NYX Bulb (1 pixel)
+      price: 115.2
+      source:
+        notes: Dealer price; list price $128.00. Light Trader also lists $115.20.
+        part: FP-5
+        retrieved: '2026-11-18'
+        url: https://www.filmandvideolighting.com/astera-nyx-bulb-led-10w-rgba-mint-practical-lamp-fp5.html
+        vendor: Film and Video Lighting (BarnDoor)
   price_range: $$$$$$
+sources:
+  status:
+    url: https://www.filmandvideolighting.com/astera-nyx-bulb-led-10w-rgba-mint-practical-lamp-fp5.html
+    retrieved: '2026-11-18'
+    notes: 'dealer lists FP-5 at $115.20 (backorder); current product on astera-led.com'
 specs:
   pixels_per_run: 170
   color_type: RGBW

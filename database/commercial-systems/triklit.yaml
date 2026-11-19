@@ -1,4 +1,5 @@
 name: Triklit
+status: active
 creator:
   name: Minelon - Rainmin
   page: https://minleonusa.com/luminaires
@@ -10,10 +11,34 @@ dead_links:
   - url: https://minleonusa.com/luminaires
     checked: '2026-11-18'
     archive: https://web.archive.org/web/20191207172459/https://minleonusa.com/luminaires
+links:
+  product: https://www.minleon.com/RGB-Triklit-Light-pl68458467.html
 other_links:
   - https://www.wiedamark.com/?product_cat=&s=minleon&post_type=product
 pricing:
+  examples:
+    - item: Triklits Plus 25-bulb string, 12 in spacing (25 pixels)
+      price: 190
+      source:
+        notes: G40 bulbs. Power supply and controller sold separately.
+        part: MN-RGB+TRIKLIT-25-12
+        retrieved: '2026-11-18'
+        url: https://www.wiedamark.com/product/25minleonrgbtrikliks/
+        vendor: Wiedamark (WDM Lighting)
+    - item: Mini Trikliks Plus 25-bulb string, 6 in spacing (25 pixels)
+      price: 124
+      source:
+        notes: 28 mm bulbs. Power supply and controller sold separately.
+        part: MN-RGB+MiniTriklit-25-6
+        retrieved: '2026-11-18'
+        url: https://www.wiedamark.com/product/minleonrgbminitrikliksplusline/
+        vendor: Wiedamark (WDM Lighting)
   price_range: $$$$
+sources:
+  status:
+    url: https://www.wiedamark.com/product/25minleonrgbtrikliks/
+    retrieved: '2026-11-18'
+    notes: 'Triklits Plus strings in stock (100), 25-bulb $190'
 specs:
   dimming_resolution: 8 Bit
   color_type: RGB

@@ -1,4 +1,5 @@
 name: Twinkly
+status: active
 creator:
   name: Twinkly
   url: https://twinkly.com/
@@ -6,11 +7,24 @@ vendors:
   - name: Amazon
     page: https://www.amazon.com/Twinkly-Multicolor-App-Controlled-Decorations-Generation/dp/B086XJ17XV
 notes: Consumer Level App Controlled , now with "Pro" range. artnet2twinkly third-party project linked on Drive Libraries page
+links:
+  product: https://twinkly.com/products/strings-multicolor
 pricing:
   examples:
-    - item: 250 string
-      price: 105
+    - item: Strings Multicolor, 250 LEDs (250 pixels)
+      price: 119.99
+      source:
+        notes: US plug (Type A), green wire. 100 LEDs $74.99, 600 LEDs $239.99.
+        part: TWS250STP-GUS
+        retrieved: '2026-11-18'
+        url: https://twinkly.com/products/strings-multicolor
+        vendor: Twinkly (US store)
   price_range: $$
+sources:
+  status:
+    url: https://twinkly.com/products/strings-multicolor
+    retrieved: '2026-11-18'
+    notes: '250-LED Strings Multicolor (US) available, $119.99'
 specs:
   pixels_per_run: 600
   color_type: RGB

@@ -1,11 +1,19 @@
 name: DFS3000
+status: active
 creator:
   name: Glasson Electronics
   url: https://glassonelectronics.co.uk/
 notes: Glasson, developer of the world's first addressable incandescent festoon, range of LED and festoon products, professional products, professional pricing
+links:
+  product: https://glassonelectronics.co.uk/dfs3000/
 pricing:
   price_range: $$$$$$
 since: 2004
+sources:
+  status:
+    url: https://glassonelectronics.co.uk/dfs3000/
+    retrieved: '2026-11-18'
+    notes: 'maker''s page: "continues to be a most successful product", no price published'
 specs:
   pixels_per_run: 170
   dimming_resolution: 13 Bit (current control, not PWM)

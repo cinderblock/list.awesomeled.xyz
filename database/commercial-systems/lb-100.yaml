@@ -1,15 +1,23 @@
 name: LB-100
+status: discontinued
 creator:
   name: SGM
   page: https://www.sgmlighting.com/products/lb%C2%B7100
 notes: SGM established Danish stage lighting manufacturer, 2W balls
+links:
+  product: https://sgmlight.com/products/entertainment/lb%C2%B7100
 pricing:
   examples:
-    - item: 7 Ball String
+    - item: 7-ball string (7 pixels)
       price:
         amount: 125
         currency: EUR
   price_range: $$$$$
+sources:
+  status:
+    url: https://www.sgmlighting.com/products/discontinued/pixel-lights
+    retrieved: '2026-11-18'
+    notes: 'LB·100 LED Balls listed under SGM Discontinued Products / Pixel lights'
 specs:
   pixels_per_run: 56
   color_type: RGB

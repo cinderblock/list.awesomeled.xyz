@@ -1,11 +1,36 @@
 name: Flex
+status: active
 creator:
   name: Color Kinetics
   url: https://www.colorkinetics.com/global
 notes: Icolor Flex and relatives. Philips Color Kinetics closed eco system of RGB lighting,
 core_tech: Proprietary
+links:
+  product: https://www.colorkinetics.com/global/flex
 pricing:
+  examples:
+    - item: Flex Compact gen3 RGB strand, 50 nodes (50 pixels)
+      price: 1054.92
+      source:
+        notes: Cone lens, 12 in node spacing, white. Power/data supply sold separately.
+        part: 101-000079-03
+        retrieved: '2026-11-18'
+        url: https://marvellighting.com/product-detail-page/50-node-flex-compact-gen3-rgb-come-lens-12-spacing-by-color-kinetics
+        vendor: Marvel Lighting
+    - item: iColor Flex MX gen2 strand, 50 nodes (50 pixels)
+      price: 1937.4
+      source:
+        notes: Special order, drop-shipped from Color Kinetics. Clear dome lens, 4 in spacing, black. Older generation than Flex Compact gen3.
+        part: 101-000076-06
+        retrieved: '2026-11-18'
+        url: https://www.superiorlighting.com/color-kinetics-icolor-flex-mx-gen2-50-nodes-4in-oc-black-node-cable-clear-dome-lens-3ft-leader/
+        vendor: Superior Lighting
   price_range: $$$$$$
+sources:
+  status:
+    url: https://www.colorkinetics.com/global/flex
+    retrieved: '2026-11-18'
+    notes: 'Flex family current (Flex Compact gen3, Flex Micro gen3, FlexElite); Flex Compact gen3 RGB in stock at Marvel Lighting $1054.92'
 specs:
   color_type: RGB W/WW
   dedicated_psu: true

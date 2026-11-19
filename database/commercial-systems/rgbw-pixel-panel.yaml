@@ -1,4 +1,5 @@
 name: RGBW-Pixel-Panel
+status: active
 creator:
   name: SmartShow
   url: https://smartshow.lighting/
@@ -8,9 +9,20 @@ links:
   product: https://smartshow.lighting/product/pixel-panels/
 pricing:
   examples:
-    - price:
+    - item: RGBW Pixel Panel, 13×13 (169 pixels)
+      price:
         amount: 30
         currency: GBP
+      source:
+        notes: Regular price, incl. VAT. On sale £14.99 at retrieval.
+        retrieved: '2026-11-18'
+        url: https://smartshow.lighting/product/pixel-panels/
+        vendor: SmartShow
+sources:
+  status:
+    url: https://smartshow.lighting/product/pixel-panels/
+    retrieved: '2026-11-18'
+    notes: 'RGBW panel in stock (44), regular £30'
 specs:
   pixels_per_run: 169
   dimming_resolution: 8 Bit

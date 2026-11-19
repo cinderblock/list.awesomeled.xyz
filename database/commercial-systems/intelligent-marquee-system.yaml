@@ -1,11 +1,19 @@
 name: Intelligent Marquee System
+status: active
 creator:
   name: TMB
   page: https://tmb.com/ims/
 notes: 2 Wire addressable Festoon, Professional level pricing structure
 core_tech: Proprietary
+links:
+  product: https://tmb.com/ims/
 pricing:
   price_range: $$$$$$
+sources:
+  status:
+    url: https://tmb.com/ims/
+    retrieved: '2026-11-18'
+    notes: "current IMS product page on TMB's site (cut sheets, manuals), no price published"
 specs:
   pixels_per_run: 128
   color_type: RGBW

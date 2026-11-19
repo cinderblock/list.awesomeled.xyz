@@ -1,8 +1,16 @@
 name: SmartPXL
+status: active
 creator: SmartPXL
 notes: High dimming resolution pixel dots made in Australia
+links:
+  product: https://www.enttec.com/products/led-pixel-dot-lights/
 pricing:
   price_range: $$$$
+sources:
+  status:
+    url: https://www.enttec.com/product/led-pixel-dot-lights/hi-res-smart-pxl40p-rgb-led-pixel-dot-strings/
+    retrieved: '2026-11-18'
+    notes: 'ENTTEC SMART PXL 40 dot strings on the current site, quoted via Pixel Designer'
 specs:
   pixels_per_run: 1360
   dimming_resolution: 16bit or 8 bit
