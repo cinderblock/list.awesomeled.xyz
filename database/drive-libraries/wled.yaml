@@ -6,7 +6,7 @@ dead_links:
     archive: https://web.archive.org/web/20211113051625/https://www.welcometothefuture.one/blog/wled-get-started
     checked: '2026-11-18'
 features: Android/Apple App available, built-in patterns, sACN receiver
-hardware: ESP8266/32
+hardware: ESP8266 / ESP32
 instructional_resources:
   - https://install.wled.me/
   - https://www.welcometothefuture.one/blog/wled-get-started

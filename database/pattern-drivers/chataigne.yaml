@@ -4,14 +4,38 @@ creator: Benjamin Kuperberg
 notes: Software `conductor` for live and timecode, interface with a lot of protocols
 inputs:
   audio: Both
-  other: OSC, OSCQuery, Midi, Serial, TCP, UDP, HTTP, MQTT, GPIO, AbletonLive, Stream Deck...
+  other:
+    - OSC
+    - OSCQuery
+    - MIDI
+    - Serial
+    - TCP
+    - UDP
+    - HTTP
+    - MQTT
+    - GPIO
+    - Ableton Live
+    - Stream Deck
+  other_notes: and more, through modules
 outputs:
   protocols:
     artnet: Both
     sacn: Both
     dmx: Both
   serial: Both
-  other: OSC, OSCQuery, Midi, Serial, TCP, UDP, HTTP, MQTT, GPIO, AbletonLive, Stream Deck...
+  other:
+    - OSC
+    - OSCQuery
+    - MIDI
+    - Serial
+    - TCP
+    - UDP
+    - HTTP
+    - MQTT
+    - GPIO
+    - Ableton Live
+    - Stream Deck
+  other_notes: and more, through modules
 capabilities:
   live: true
   programmatic: Both

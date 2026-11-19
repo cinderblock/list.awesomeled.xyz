@@ -5,7 +5,9 @@ aliases:
   - NightDriver
 features: 8 channels of WS2812B Python / C++ Pattern Creator
 hardware: ESP32
-language: C++ / Python
+language:
+  - C++
+  - Python
 license: GPL-3.0
 links:
   repo: https://github.com/PlummersSoftwareLLC/NightDriverStrip

@@ -3,14 +3,16 @@ status: unknown
 creator: Faith Chapel
 notes: Developed for Houses of Worship originally
 inputs:
-  other: NDI, SDI, Midi
+  other:
+    - NDI
+    - SDI
+    - MIDI
 outputs:
   protocols:
     artnet: Both
 capabilities:
   live: true
 integrations: LED Media server from console
-language: null
 links:
   url: https://resources.faithchapel.cc/blogs/pixel_mapping_software?fbclid=IwAR0I3imz0gy7R6-_x8hWD8CO6qJEM2o2P_KXTdmkpRUYbOaWYssicnD2IIE
 platforms:

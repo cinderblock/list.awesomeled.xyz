@@ -6,7 +6,9 @@ inputs:
 outputs:
   protocols:
     artnet: Output
-  other: glediator files, pixel data
+  other:
+    - Glediator files
+    - Pixel data
 capabilities:
   live: false
   designer: true

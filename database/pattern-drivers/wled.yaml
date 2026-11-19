@@ -5,7 +5,8 @@ notes: 'Great standalone pixel controller software for ESP8266 and ESP32 based b
 inputs:
   video: false
   audio: Input # AudioReactive, built in since 0.15
-  other: UDP Sync
+  other:
+    - WLED UDP Sync
 outputs:
   protocols:
     artnet: Both # sends since 0.14
@@ -17,11 +18,12 @@ outputs:
   dmx_notes: 'RS-485 transceiver on a GPIO pin: output needs a _dmx build, input the v16 "V4" builds'
   gpio: Both # buttons, switches and PIR in; relay out
   serial: Input
-  other: ws281x protocol, APA102, etc.
+  other_notes: 'Pixels directly: WS281x, APA102 and others'
 capabilities:
   live: true
   designer: false
-  visualizer: Limited 1D
+  visualizer: 1D
+  visualizer_notes: limited
 images:
   - file: wled.webp
     source: https://kno.wled.ge/basics/web-ui/

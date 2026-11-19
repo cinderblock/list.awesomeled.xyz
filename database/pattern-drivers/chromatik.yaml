@@ -5,7 +5,10 @@ notes: VJ like live control, extensive support for 3D animation matrices Success
 inputs:
   video: false
   audio: Both
-  other: MIDI, OSC, DMX
+  other:
+    - MIDI
+    - OSC
+    - DMX
 outputs:
   protocols:
     artnet: Both

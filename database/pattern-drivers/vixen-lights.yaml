@@ -6,7 +6,8 @@ outputs:
     artnet: Output
     sacn: Output
     dmx: Output
-  other: Renard
+  other:
+    - Renard
 aliases:
   - Vixen 3
   - Vixen

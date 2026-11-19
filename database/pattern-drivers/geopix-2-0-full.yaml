@@ -4,13 +4,17 @@ creator: Enviral Design
 inputs:
   video: Input
   audio: Both
-  other: MIDI, OSC, MQTT
+  other:
+    - MIDI
+    - OSC
+    - MQTT
 outputs:
   protocols:
     artnet: Both
     sacn: Both
     dmx: Output
-  other: MIDI
+  other:
+    - MIDI
 capabilities:
   live: true
   designer: true

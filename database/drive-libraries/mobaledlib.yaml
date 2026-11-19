@@ -2,7 +2,7 @@ name: MobaLedLib
 status: active
 creator: Hardi-St
 features: ESP32 49152 LEDs / DMX512 , signals, sound modules,servos or other actuators via one signal line ,originally model rail aimed useful beyond
-hardware: Arduino/ ESP32
+hardware: Arduino / ESP32
 language: C++
 license: LGPL-2.1
 links:

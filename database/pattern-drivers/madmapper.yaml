@@ -3,13 +3,22 @@ status: active
 creator: 1024 architecture and GarageCube
 inputs:
   video: Input
-  other: MIDI,OSC,Spout,Syphon,NDI
+  other:
+    - MIDI
+    - OSC
+    - Spout
+    - Syphon
+    - NDI
 outputs:
   protocols:
     artnet: Both
     sacn: Both
     dmx: Both
-  other: MIDI, OSC, EtherDream, Arduino
+  other:
+    - MIDI
+    - OSC
+    - Ether Dream
+    - Arduino
 capabilities:
   designer: true
 images:

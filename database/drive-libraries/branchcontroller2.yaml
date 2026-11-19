@@ -11,7 +11,7 @@ links:
 platforms:
   - Teensy
 protocols:
-  - Open Pixel Control
+  - OPC
 related:
   - type: host
     ref: microboards/teensy-3-2

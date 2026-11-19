@@ -306,6 +306,22 @@
         "MadLED"
       ]
     },
+    "programming_language": {
+      "enum": ["C++", "C#", "GLSL", "Java", "JavaScript", "Processing", "Python", "Visual Basic"],
+      "description": "A programming language, spelled as its community does ('C++', 'JavaScript'). Add new ones here."
+    },
+    "programming_languages": {
+      "description": "One language, or a list when a project uses several",
+      "oneOf": [
+        { "$ref": "common.json#/definitions/programming_language" },
+        {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "$ref": "common.json#/definitions/programming_language" }
+        }
+      ]
+    },
     "diy_or_ots": {
       "enum": ["DIY", "OTS", "both"],
       "description": "DIY: you build it (kit, PCB or open design). OTS: sold assembled, off the shelf. both: offered either way."

@@ -5,14 +5,19 @@ notes: Triggering via RS232/GPIO/UDP available thru S-Play controller
 inputs:
   video: Input
   audio: Input
-  other: OSC, Spout, NDI
+  other:
+    - OSC
+    - Spout
+    - NDI
 outputs:
   protocols:
     artnet: Both
     sacn: Both
     dmx: Both
     kinet: Output
-  other: NDI, DVI
+  other:
+    - NDI
+    - DVI
 aliases:
   - ENTTEC LED Mapper
 capabilities:
@@ -24,7 +29,6 @@ images:
     source: https://www.enttec.co.uk/product/dmx-lighting-control-software/pixel-mapping-software/
     credit: ENTTEC
 integrations: Triggering via HTTP/OSC/Art-net/sACN/DMX
-language: null
 links:
   url: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
 other_links:

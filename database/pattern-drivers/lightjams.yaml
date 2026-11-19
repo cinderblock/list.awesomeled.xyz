@@ -5,7 +5,12 @@ notes: ELM developed by same developer
 inputs:
   video: Both
   audio: Both
-  other: MIDI,OSC,Spout,Syphon, Ambilight
+  other:
+    - MIDI
+    - OSC
+    - Spout
+    - Syphon
+    - Ambilight
 outputs:
   protocols:
     artnet: Both

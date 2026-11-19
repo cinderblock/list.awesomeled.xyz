@@ -1,7 +1,7 @@
 name: ESPixelstick
 status: active
 creator: Shelby Merrick
-hardware: ESP8266/32
+hardware: ESP8266 / ESP32
 language: C++
 links:
   repo: https://github.com/forkineye/ESPixelStick

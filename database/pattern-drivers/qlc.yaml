@@ -5,7 +5,10 @@ notes: Includes sound responsive features. Large fixture compatibility list.
 inputs:
   video: Output
   audio: Both
-  other: OSC, MIDI, Web API
+  other:
+    - OSC
+    - MIDI
+    - Web API
 outputs:
   protocols:
     artnet: Both
@@ -18,14 +21,17 @@ outputs:
   gpio: Both # GPIO plugin (Linux)
   serial: Output
   serial_notes: 'UART plugin: DMX framing on a serial port (Linux)'
-  other: USB, OSC
+  other:
+    - USB
+    - OSC
 aliases:
   - Q Light Controller+
   - Q Light Controller Plus
 capabilities:
   live: true
   designer: true
-  visualizer: 3D view available in V5
+  visualizer: 3D
+  visualizer_notes: QLC+ 5 and later
   programmatic: Both
 images:
   - file: qlc.webp

@@ -196,6 +196,27 @@ export function remove(doc: Document, path: (string | number)[]): boolean {
   return true;
 }
 
+/**
+ * Reorder a nested map's keys: those in `order` first, in that order; the
+ * rest keep their relative order after them. Comments travel with their
+ * pairs. Returns true if anything moved.
+ */
+export function orderKeys(doc: Document, path: (string | number)[], order: string[]): boolean {
+  const map = doc.getIn(path, true);
+  if (!isMap(map)) return false;
+  const rank = (pair: (typeof map.items)[number]) => {
+    const i = order.indexOf(String(isScalar(pair.key) ? pair.key.value : pair.key));
+    return i < 0 ? order.length : i;
+  };
+  const sorted = map.items
+    .map((pair, index) => ({ pair, index }))
+    .sort((a, b) => rank(a.pair) - rank(b.pair) || a.index - b.index)
+    .map(({ pair }) => pair);
+  if (sorted.every((pair, i) => pair === map.items[i])) return false;
+  map.items = sorted;
+  return true;
+}
+
 /** Rename a key in place (same position in its parent map). */
 export function renameKey(
   doc: Document,

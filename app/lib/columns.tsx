@@ -885,7 +885,8 @@ export const driveLibraryColumns: Column[] = [
     // pill/plain column reads worse than a uniform one
     key: 'language',
     label: 'Language',
-    render: (v) => (v == null ? null : <span>{String(v)}</span>),
+    // common.json programming_languages: one language or a list
+    render: (v) => (v == null ? null : <span>{Array.isArray(v) ? v.join(', ') : String(v)}</span>),
     filterConfig: { type: 'select' },
   },
   {

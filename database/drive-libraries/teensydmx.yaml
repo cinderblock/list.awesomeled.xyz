@@ -10,7 +10,7 @@ links:
 platforms:
   - Teensy
 protocols:
-  - DMX512-A
+  - DMX512 # DMX512-A (ANSI E1.11)
 related:
   - type: host
     ref: microboards/teensy-lc

@@ -2,7 +2,8 @@ name: ArKaos
 status: discontinued
 creator: ArKaos S.A.
 outputs:
-  other: Klingnet
+  other:
+    - Kling-Net
 capabilities:
   live: true
   designer: true

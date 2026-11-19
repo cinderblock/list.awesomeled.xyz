@@ -5,16 +5,19 @@ notes: Java. Next version (Chromatik) will no longer use the Processing graphics
 inputs:
   video: Both
   audio: Input
-  other: Any
+  other_notes: Any
 outputs:
   protocols:
     artnet: Both
     sacn: Both
     dmx: Both
     kinet: Both
+    ddp: Output
+    opc: Output
   gpio: Both
   serial: Both
-  other: DDP, OPC, Fadecandy
+  other:
+    - Fadecandy
 capabilities:
   live: true
   designer: true

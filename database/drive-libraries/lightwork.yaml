@@ -9,7 +9,7 @@ platforms:
   - macOS
   - Windows
 protocols:
-  - Open Pixel Control
+  - OPC
   - PixelPusher
   - Art-Net
   - sACN

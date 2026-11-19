@@ -6,7 +6,17 @@ inputs:
   video: Both
   audio: Both
   adc: true
-  other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton, SMPTE/LTC
+  other:
+    - MIDI
+    - OSC
+    - MQTT
+    - NDI
+    - Syphon
+    - Spout
+    - TCP
+    - UDP
+    - Ableton Live
+    - SMPTE
 outputs:
   protocols:
     artnet: Both
@@ -19,18 +29,30 @@ outputs:
   gpio: false
   serial: Both
   serial_notes: Serial support for Arduino and microcontroller communication
-  other: MIDI, OSC, MQTT, NDI, Syphon/Spout, TCP, UDP, Ableton
+  other:
+    - MIDI
+    - OSC
+    - MQTT
+    - NDI
+    - Syphon
+    - Spout
+    - TCP
+    - UDP
+    - Ableton Live
 capabilities:
   live: true
   designer: true
-  visualizer: 3D (build your own)
+  visualizer: 3D
+  visualizer_notes: build your own
   programmatic: Both
 images:
   - file: touchdesigner.webp
     source: https://docs.derivative.ca/Intro_to_TouchDesigner
     credit: Derivative
 integrations: Tons
-language: Python, GLSL
+language:
+  - Python
+  - GLSL
 links:
   url: https://derivative.ca/
 platforms:

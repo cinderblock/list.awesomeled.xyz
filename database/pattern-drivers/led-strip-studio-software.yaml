@@ -3,13 +3,17 @@ status: active
 creator: LED Strip Studio
 notes: Use any video as animation, Picture grabber, BlackMagic grabber,
 inputs:
-  other: MIDI, OSC, CMD Line, DMX
+  other:
+    - MIDI
+    - OSC
+    - Command line
+    - DMX
 outputs:
   protocols:
     artnet: Both
     sacn: Input
     dmx: Both
-  other: Proprietary compressed LSS protocol for LSS controllers
+  other_notes: Proprietary compressed LSS protocol for LSS controllers
 aliases:
   - LED Strip Studio 4
   - LSS4

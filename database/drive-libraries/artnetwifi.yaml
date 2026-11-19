@@ -1,7 +1,7 @@
 name: ArtnetWiFi
 status: active
 creator: RStephan
-hardware: ESP8266/32
+hardware: ESP8266 / ESP32
 language: C++
 license: MIT
 links:

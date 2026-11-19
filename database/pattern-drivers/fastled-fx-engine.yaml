@@ -6,7 +6,8 @@ aliases:
 capabilities:
   live: false
   designer: true
-  visualizer: Browser Wasm Preview
+  visualizer: true
+  visualizer_notes: browser (WebAssembly) preview
 images:
   - file: fastled-fx-engine.webp
     source: https://github.com/FastLED/cli

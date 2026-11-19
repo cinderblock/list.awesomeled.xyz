@@ -6,7 +6,9 @@ notes: Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Artnet
 inputs:
   video: Input
   audio: Input
-  other: MIDI, OSC
+  other:
+    - MIDI
+    - OSC
 outputs:
   protocols:
     artnet: Both
@@ -15,7 +17,8 @@ outputs:
 capabilities:
   live: true
   designer: true
-  visualizer: Yes Basic 2D
+  visualizer: 2D
+  visualizer_notes: basic
 dead_links:
   - url: https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm
     archive: https://web.archive.org/web/20211112071836/https://support.obsidiancontrol.com/Content/Onyx/Onyx_PC_Modes.htm

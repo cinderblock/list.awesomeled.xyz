@@ -5,6 +5,18 @@
   "type": "object",
   "required": ["name"],
   "additionalProperties": false,
+  "definitions": {
+    "direction": {
+      "enum": ["Input", "Output", "Both", false],
+      "description": "Input: the software receives it. Output: it sends it. Both. false: not supported (checked). Leave the field out when unknown."
+    },
+    "other_io": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string" },
+      "description": "Short names, one per item ('MIDI', 'OSC', 'NDI', 'Spout'); prose goes in other_notes"
+    }
+  },
   "properties": {
     "name": {
       "type": "string"
@@ -55,8 +67,8 @@
       "type": ["string", "null"]
     },
     "language": {
-      "type": ["string", "null"],
-      "description": "Programming language if programmatic"
+      "$ref": "common.json#/definitions/programming_languages",
+      "description": "Language users write code in, when programmatic"
     },
     "platforms": {
       "type": ["object", "null"],
@@ -149,16 +161,19 @@
           "description": "Live output to actual lights"
         },
         "designer": {
-          "type": ["boolean", "string", "null"],
+          "type": ["boolean", "null"],
           "description": "Design patterns offline"
         },
         "visualizer": {
-          "type": ["string", "null"],
-          "description": "2D, 3D, both, or null"
+          "enum": [false, true, "1D", "2D", "3D"],
+          "description": "Preview of the layout: its dimensions when known, true when it has one of unknown kind, false when none"
+        },
+        "visualizer_notes": {
+          "type": ["string", "null"]
         },
         "programmatic": {
-          "type": ["string", "boolean", "null"],
-          "description": "User can write code to control I/O"
+          "anyOf": [{ "$ref": "#/definitions/direction" }, { "const": true }],
+          "description": "User code can drive inputs, outputs or both; true when the direction isn't recorded"
         }
       }
     },
@@ -167,16 +182,22 @@
       "additionalProperties": false,
       "properties": {
         "video": {
-          "type": ["string", "boolean", "null"]
+          "$ref": "#/definitions/direction",
+          "description": "Video in (capture, NDI, Spout...) and/or out"
         },
         "audio": {
-          "type": ["string", "boolean", "null"]
+          "$ref": "#/definitions/direction",
+          "description": "Audio in (sound-reactive) and/or out (plays audio with a show)"
         },
         "adc": {
-          "type": ["string", "boolean", "null"],
-          "description": "ADC input (audio, sensors)"
+          "type": ["boolean", "null"],
+          "description": "Analog input (sensors)"
         },
         "other": {
+          "$ref": "#/definitions/other_io",
+          "description": "Other inputs: control protocols, media and devices"
+        },
+        "other_notes": {
           "type": ["string", "null"]
         }
       }
@@ -189,43 +210,34 @@
           "type": ["object", "null"],
           "additionalProperties": false,
           "properties": {
-            "artnet": {
-              "type": ["string", "boolean", "null"]
-            },
-            "sacn": {
-              "type": ["string", "boolean", "null"]
-            },
+            "artnet": { "$ref": "#/definitions/direction" },
+            "sacn": { "$ref": "#/definitions/direction" },
             "dmx": {
-              "type": ["string", "boolean", "null"]
+              "$ref": "#/definitions/direction",
+              "description": "DMX512 through an interface (USB, RS-485)"
             },
-            "kinet": {
-              "type": ["string", "boolean", "null"]
-            },
-            "ddp": {
-              "type": ["string", "boolean", "null"]
-            },
+            "kinet": { "$ref": "#/definitions/direction" },
+            "ddp": { "$ref": "#/definitions/direction" },
             "opc": {
-              "type": ["string", "boolean", "null"],
+              "$ref": "#/definitions/direction",
               "description": "Open Pixel Control"
             },
-            "spi": {
-              "type": ["string", "boolean", "null"]
-            }
+            "spi": { "$ref": "#/definitions/direction" }
           }
         },
         "dmx_notes": {
           "type": ["string", "null"]
         },
-        "gpio": {
-          "type": ["string", "boolean", "null"]
-        },
-        "serial": {
-          "type": ["string", "boolean", "null"]
-        },
+        "gpio": { "$ref": "#/definitions/direction" },
+        "serial": { "$ref": "#/definitions/direction" },
         "serial_notes": {
           "type": ["string", "null"]
         },
         "other": {
+          "$ref": "#/definitions/other_io",
+          "description": "Other outputs: control protocols, media and devices"
+        },
+        "other_notes": {
           "type": ["string", "null"]
         }
       }

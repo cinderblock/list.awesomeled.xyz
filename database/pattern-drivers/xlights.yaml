@@ -3,13 +3,18 @@ status: active
 notes: originally Nutcracker, developed for holiday light shows as a sequencer, spread beyond , continually developed.
 inputs:
   audio: Both
-  other: Audacity plug-in,MIDI,video files
+  other:
+    - Audacity plug-in
+    - MIDI
+    - Video files
 outputs:
   protocols:
     artnet: Output
     sacn: Output
     dmx: Output
-  other: LOR, DDP
+    ddp: Output
+  other:
+    - LOR
 aliases:
   - xLights/Nutcracker
 capabilities:

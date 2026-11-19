@@ -191,7 +191,7 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Platform', text, ['platforms']),
     col('Live', bool, ['capabilities.live']),
     col('Designer', bool, ['capabilities.designer']),
-    col('Visualizer', bool, ['capabilities.visualizer']),
+    col('Visualizer', bool, ['capabilities.visualizer', 'capabilities.visualizer_notes']),
     col('ArtNet', text, ['outputs.protocols.artnet']),
     col('E1.31 sACN', text, ['outputs.protocols.sacn']),
     col('DMX', text, ['outputs.protocols.dmx', 'outputs.dmx_notes']),
@@ -203,8 +203,10 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Audio', text, ['inputs.audio']),
     col('Programmatic', bool, ['capabilities.programmatic']),
     col('Language', text, ['language']),
-    col('Other Inputs', text, ['inputs.other']),
-    col('Other Outputs', text, ['outputs.other']),
+    // Tag lists since the pattern-driver migration; prose in *_notes, and
+    // items naming a typed field (ADC, Audio, DDP) moved to that field
+    col('Other Inputs', text, ['inputs.other', 'inputs.other_notes', 'inputs.adc', 'inputs.audio']),
+    col('Other Outputs', text, ['outputs.other', 'outputs.other_notes', 'outputs.protocols']),
     col('Integrations', text, ['integrations']),
     col('Notes', text, ['notes', 'technical_notes']),
     col('Demo/Free', bool, ['pricing.demo']),

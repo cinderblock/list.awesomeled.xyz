@@ -3,9 +3,13 @@ status: discontinued
 creator: RocketLife
 notes: RocketLife controllers, clocked ('SPI') pixels only
 inputs:
-  other: GPIO pins
+  other:
+    - GPIO
 outputs:
-  other: Bluetooth/NFC to RocketLife hardware
+  other:
+    - Bluetooth
+    - NFC
+  other_notes: to Rocketlife hardware
 capabilities:
   live: true
   designer: false

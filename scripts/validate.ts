@@ -44,14 +44,7 @@ const FOLDER_SCHEMAS: Record<string, string> = {
 // Categories whose _example.yaml still shows the pre-migration flat schema.
 // Each is rewritten when its category's schema review lands (see
 // plans/database-review.md); remove it from this list in the same commit.
-const STALE_EXAMPLES = new Set([
-  'commercial-systems',
-  'drive-libraries',
-  'level-converters',
-  'pattern-drivers',
-  'pixel-ics',
-  'pixels',
-]);
+const STALE_EXAMPLES = new Set(['commercial-systems', 'level-converters', 'pixel-ics', 'pixels']);
 
 /**
  * `sources` keys (common.json#/definitions/sources) must name a field the

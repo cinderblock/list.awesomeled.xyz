@@ -2,7 +2,7 @@ name: XOD
 status: unknown
 creator: XOD Inc/Open Source
 features: Windows/Mac/Linux Graphical, no coding, Arduino Programming with limited native WS2812 support
-hardware: Arduino/ ESP 66/32
+hardware: Arduino / ESP8266 / ESP32
 instructional_resources:
   - https://www.youtube.com/watch?v=XU0u5OEra3o
 language: JavaScript

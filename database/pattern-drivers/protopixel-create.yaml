@@ -4,11 +4,18 @@ creator: ProtoPixel
 inputs:
   video: Input
   audio: Both
-  other: OSC, NDI, Syphon, UDP
+  other:
+    - OSC
+    - NDI
+    - Syphon
+    - UDP
 outputs:
   protocols:
     artnet: Both
-  other: ProtoPixel proprietary protocol, OSC, UDP
+  other:
+    - ProtoPixel protocol
+    - OSC
+    - UDP
 capabilities:
   live: true
   designer: true

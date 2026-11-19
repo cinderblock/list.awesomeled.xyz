@@ -5,11 +5,12 @@ notes: Mapio Pro has support for addressable LEDs
 inputs:
   video: Both
   audio: Output
-  other: Native support for PixelPusher devices
 outputs:
   protocols:
     artnet: Output
   serial: Output
+  other:
+    - PixelPusher
 capabilities:
   live: true
   designer: true

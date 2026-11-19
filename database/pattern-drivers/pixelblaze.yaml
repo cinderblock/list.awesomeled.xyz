@@ -4,10 +4,12 @@ creator: ElectroMage
 notes: Includes 2D/3D mapping, sound reactive, and scriptable pattern UI controls
 inputs:
   audio: Input
-  other: Websockets, ADC
+  adc: true
+  other:
+    - WebSocket
 outputs:
   gpio: Both
-  other: Direct or expansion board 8-64 channels
+  other_notes: Pixels directly, or 8-64 channels through an expansion board
 capabilities:
   live: true
   designer: true
@@ -18,7 +20,7 @@ images:
     source: https://electromage.com/pixelblaze
     credit: ElectroMage
 integrations: Home Assistant, Hubitat, Pixelblaze
-language: JS subset
+language: JavaScript # a subset
 links:
   url: https://electromage.com/pixelblaze/
 platforms:

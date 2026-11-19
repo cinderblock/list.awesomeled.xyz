@@ -6,7 +6,14 @@ inputs:
   video: Both
   audio: Both
   adc: false
-  other: MIDI, HTTP, MA-net, CITP, SMPTE, Spout, GamePort
+  other:
+    - MIDI
+    - HTTP
+    - MA-Net
+    - CITP
+    - SMPTE
+    - Spout
+    - Game Port
 outputs:
   protocols:
     artnet: Both # in: Art-Net Remote control (4 universes)
@@ -18,7 +25,11 @@ outputs:
   dmx_notes: MADRIX-brand USB DMX interfaces only (Windows)
   gpio: false
   serial: false
-  other: DVI, Robe, Insta, Hue
+  other:
+    - DVI
+    - Robe
+    - Insta
+    - Philips Hue
 aliases:
   - MADRIX
 capabilities:

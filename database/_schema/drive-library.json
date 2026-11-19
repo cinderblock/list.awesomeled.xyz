@@ -53,8 +53,8 @@
       "type": ["string", "null"]
     },
     "language": {
-      "type": ["string", "null"],
-      "description": "Primary implementation language (C++, Python, ...)"
+      "$ref": "common.json#/definitions/programming_languages",
+      "description": "Implementation language(s)"
     },
     "license": {
       "type": ["string", "null"],

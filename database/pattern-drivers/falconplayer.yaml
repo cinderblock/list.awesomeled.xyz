@@ -4,7 +4,9 @@ notes: FPP + RasPi/BBB = playback box
 inputs:
   video: Output
   audio: Output
-  other: Pixelnet,Renard
+  other:
+    - Pixelnet
+    - Renard
 outputs:
   protocols:
     artnet: Both
@@ -13,7 +15,12 @@ outputs:
     kinet: Output
   gpio: Both
   serial: Output
-  other: Pixelnet, Renard, UDP, HTTP, MQTT
+  other:
+    - Pixelnet
+    - Renard
+    - UDP
+    - HTTP
+    - MQTT
 aliases:
   - FPP
   - Falcon Player

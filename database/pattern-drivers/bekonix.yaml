@@ -6,7 +6,7 @@ inputs:
   audio: Input
 outputs:
   gpio: Both
-  other: NRF52840 target board Adafruit or Ebyte board
+  other_notes: nRF52840 target board (Adafruit or Ebyte)
 capabilities:
   live: true
   designer: true

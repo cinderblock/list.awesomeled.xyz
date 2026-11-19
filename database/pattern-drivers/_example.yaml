@@ -1,176 +1,92 @@
-# Example 1: Full-featured professional pattern software with all fields
-name: Example LED Studio Pro
+# Example 1: commercial pattern driver (most fields)
+name: Example LED Studio
 status: active
-creator: LED Software Inc
-notes: Professional LED design and live performance software
-adc_input: Via serial microcontroller
-audio_input: System audio + microphone
-demo_available: true
-demo_limitations: 100 pixels max, sessions limited to 30 minutes
-designer: true
-dmx_notes: Supports Enttec Pro and compatible USB-DMX adapters
-gpio: Linux only
-integrations: WLED, Falcon Player, xLights
-language: JavaScript/TypeScript
-license_type: perpetual
-live: true
-mirror_url: null
-
-other_inputs: MIDI, OSC, Gamepad
-other_outputs: HTTP webhooks, OSC
+creator:
+  name: Example Software
+  url: https://example.com
+notes: Mapping and live-performance software for pixel installations.
+inputs:
+  video: Both # capture and NDI in, NDI out
+  audio: Input # sound-reactive
+  adc: false
+  other: # short names, one per item
+    - MIDI
+    - OSC
+  other_notes: game controllers through plugins
+outputs:
+  protocols: # Input (receives), Output (sends), Both, or false (checked: not supported); leave out when unknown
+    artnet: Both
+    sacn: Output
+    dmx: Output
+    kinet: false
+    ddp: Output
+    opc: false
+  dmx_notes: ENTTEC DMX USB Pro
+  gpio: false
+  serial: Output
+  serial_notes: Adalight-style serial to an Arduino
+  other:
+    - NDI
+capabilities:
+  live: true
+  designer: true
+  visualizer: 3D # false, true (kind unknown), 1D, 2D or 3D
+  visualizer_notes: shows fixture models
+  programmatic: Output # user code drives outputs; Input, Both, or true when the direction is unknown
+integrations: WLED, Falcon Player
+language: JavaScript # one, or a list (common.json programming_language)
+links:
+  url: https://example.com/led-studio
 platforms:
-  - Windows
-  - Mac
-  - Linux
-price: 299
-price_tiers:
-  - tier: Free
-    price: 0
-    features: Basic patterns, 100 pixel limit
-    limitations: Watermark on export
-  - tier: Hobbyist
-    price: 49
-    features: No watermark, 1000 pixels
-    limitations: No commercial use
-  - tier: Professional
-    price: 299
-    features: Unlimited pixels, commercial license
-    limitations: Single seat
-  - tier: Enterprise
-    price: 999
-    features: Site license, priority support
-    limitations: null
-programmatic: true
-protocols:
-  artnet: true
-  sacn: true
-  dmx: Requires FTDI adapter
-  kinet: false
-  ddp: true
-  opc: Output only
-  spi: Via GPIO on Linux
-serial: true
-serial_notes: Arduino/Teensy serial protocol, custom baud rates supported
+  os:
+    - Windows
+    - macOS
+pricing:
+  price: 299
+  license_type: perpetual
+  tiers:
+    - tier: Free
+      price: 0
+      features: Up to 1,000 pixels
+      limitations: Watermark on output
+    - tier: Pro
+      price: 299
+      features: Unlimited pixels
+  demo:
+    available: true
+    limitations: No network output
 technical_notes:
-  - GPU-accelerated rendering requires OpenGL 3.3+
-  - Network output supports up to 100 universes
-  - Pattern library includes 500+ built-in effects
-url: https://example.com/led-studio-pro
-video_input: Screen capture + webcam
-visualizer: both
+  - GPU rendering needs OpenGL 3.3
 ---
-# Example 2: Free open source pattern driver
-name: Example Open Patterns
+# Example 2: open-source firmware with built-in effects (fewer fields)
+name: Example Pixel Firmware
 status: active
-creator: Open Source Community
-developer: null
-notes: Free and open source pattern generator
-audio_input: System audio
-demo_available: false
-designer: true
-gpio: RaspberryPi and BeagleBone
-language: Python
-license_type: donationware
-live: true
+creator: Example Community
+notes: Firmware for ESP32 boards with built-in effects and a web UI.
+inputs:
+  audio: Input
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Input
+    ddp: Both
+  gpio: Both
+capabilities:
+  live: true
+  designer: false
+  visualizer: false
+language:
+  - C++
+  - JavaScript
+license: MIT # SPDX id
+links:
+  url: https://example.com/pixel-firmware
 platforms:
-  - Windows
-  - Mac
-  - Linux
-  - RaspberryPi
-price: free
-programmatic: true
-protocols:
-  artnet: true
-  sacn: true
-  ddp: true
-  opc: true
-serial: true
-serial_notes: FastLED serial protocol
-url: https://github.com/example/open-patterns
+  web: true
+  hardware:
+    - ESP32
+pricing:
+  price: Free
 
-video_input: false
-visualizer: '2D'
----
-# Example 3: Mobile app for live control
-name: Example LED Remote
-status: active
-creator: Mobile Apps LLC
-notes: Mobile app for live LED control
-audio_input: Microphone only
-demo_available: '7-day trial'
-demo_limitations: All features available during trial
-designer: false
-integrations: WLED
-license_type: subscription
-live: true
-other_inputs: Accelerometer, touch gestures
-platforms:
-  - iOS
-  - Android
-price: 4.99
-programmatic: false
-protocols:
-  artnet: true
-  ddp: true
-serial: Bluetooth serial
-url: https://example.com/led-remote
-
-video_input: false
-visualizer: null
----
-# Example 4: Discontinued legacy software
-name: Example Legacy Sequencer
-status: discontinued
-creator: Defunct Software Co
-developer: Defunct Software Co
-notes: No longer maintained, Windows 7/10 only
-audio_input: WAV file only
-demo_available: false
-designer: true
-license_type: perpetual
-live: true
-mirror_url: https://archive.org/example-legacy
-
-platforms:
-  - Windows
-price: 149
-programmatic: false
-protocols:
-  artnet: true
-  dmx: true
-serial: true
-url: null
-video_input: false
-visualizer: '2D'
----
-# Example 5: Web-based pattern designer
-name: Example Web Designer
-status: beta
-creator: WebLED Inc
-notes: Browser-based pattern designer with optional cloud features
-audio_input: Web Audio API
-demo_available: true
-demo_limitations: Pattern export requires account
-designer: true
-language: JavaScript
-license_type: monthly
-live: WebUSB to serial
-platforms:
-  - Web
-price: free
-price_tiers:
-  - tier: Free
-    price: 0
-    features: Pattern design only
-    limitations: No live output
-  - tier: Pro
-    price: '9.99/month'
-    features: Live output via WebUSB
-    limitations: null
-programmatic: true
-protocols:
-  ddp: Via cloud relay
-serial: WebUSB
-url: https://webdesigner.example.com
-video_input: false
-visualizer: both
+# disable URL checks on this file
+# textlint-disable

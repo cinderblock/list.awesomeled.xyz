@@ -4,7 +4,7 @@ creator: tangophi
 aliases:
   - ArtNet_DMX_SD_Card_ESP8266
 features: store DMX frames received through Artnet on a nodemcu or a ESP8266/ESP12 module to a SD card
-hardware: NodeMcu / ESP8266/32 + SD card
+hardware: NodeMCU / ESP8266 / ESP32 + SD card
 language: C++
 links:
   repo: https://github.com/tangophi/Artnet_DMX_SD_Card

@@ -3,7 +3,7 @@ status: active
 creator: natcl
 aliases:
   - Artnet
-hardware: Arduino/Teensie/ESP8266
+hardware: Arduino / Teensy / ESP8266
 language: C++
 license: MIT
 links:

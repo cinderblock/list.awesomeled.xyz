@@ -4,14 +4,25 @@ notes: This application is more of a game engine crossed with a volumetric mappi
 inputs:
   video: Both
   audio: Both
-  other: MIDI, OSC, UDP, SMPTE, Spout, Game Port
+  other:
+    - MIDI
+    - OSC
+    - UDP
+    - SMPTE
+    - Spout
+    - Game Port
 outputs:
   protocols:
     artnet: Both
     sacn: Both
     dmx: Input
   serial: Both
-  other: OSC, MIDI, UDP, Spout, NDI
+  other:
+    - OSC
+    - MIDI
+    - UDP
+    - Spout
+    - NDI
 capabilities:
   live: true
   designer: true

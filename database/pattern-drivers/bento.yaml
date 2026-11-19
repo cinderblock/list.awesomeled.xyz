@@ -3,17 +3,21 @@ status: active
 creator: Benjamin Kuperberg
 inputs:
   audio: Output
-  other: OSC, OSCQuery
+  other:
+    - OSC
+    - OSCQuery
 outputs:
   protocols:
     artnet: Both
     sacn: Both
   serial: Both
-  other: OSC, OSCQuery
+  other:
+    - OSC
+    - OSCQuery
 capabilities:
   live: true
   designer: true
-  visualizer: 'Yes'
+  visualizer: true
   programmatic: Both
 images:
   - file: bento.webp

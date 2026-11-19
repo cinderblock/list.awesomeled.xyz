@@ -4,7 +4,7 @@ creator: Xaver2k
 aliases:
   - ArduinoENC_Artnet-WS2811
 features: WS2811/12 over Art-Net via ENC28J60 wired Ethernet
-hardware: Arduino Nano &Ethernet Shield
+hardware: Arduino Nano + Ethernet shield
 language: C++
 license: MIT
 links:
