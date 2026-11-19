@@ -1,15 +1,19 @@
 name: Printer Paper
 notes: Pretty good diffusion for thickness, organic texture
-material_type: Wood Pulp
+form:
+  - film
+materials:
+  - paper
 optical:
   color_rendition: 2
   light_transmission: 2
   diffusivity: 3
+  properties:
+    - diffusive
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: false
-  sample_thickness: 0.004
-  properties: Diffusive
+  sample_thickness: 0.004in
 pricing:
   price_range: $
 purpose_made: false

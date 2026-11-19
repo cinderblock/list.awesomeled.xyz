@@ -1,17 +1,22 @@
 name: Lee Theatrical Filters
 notes: Lee Filters, professional theatre and photo gel, diffusion range and Zircon LED specific diffusion; Zircon 810 is a solid choice
+form:
+  - film
 links:
   product: https://www.leefilters.com/lighting/zircon.html#zircon-divider-diffusion
-material_type: Polyester
+materials:
+  - PET
 optical:
   color_rendition: 5
   light_transmission: 3
   diffusivity: 4
-  tinted: C
+  tints:
+    - clear
+  properties:
+    - diffusive
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: true
-  properties: Diffusive
 pricing:
   price_range: $$$
 purpose_made: true

@@ -1,17 +1,23 @@
 name: Light Shaping Diffusers
 notes: Very efficient holographic repro gratings, only work with small point sources
+form:
+  - film
+  - sheet
 links:
   product: https://www.luminitco.com/
-material_type: PET
+materials:
+  - PET
 optical:
   color_rendition: 5
   light_transmission: 5
   diffusivity: 2-5
-  tinted: C
+  tints:
+    - clear
+  properties:
+    - transmissive
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: true
-  properties: Transmissive
 pricing:
   price_range: $$$$$
 purpose_made: true

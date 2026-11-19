@@ -1,17 +1,24 @@
 name: BrightView
 notes: High End ,High-efficiency microlenses in optically clear materials
+form:
+  - film
+  - sheet
 links:
   product: https://www.brightviewtechnologies.com/products/led-diffusers/led-diffuser-products/page.aspx?id=1102
-material_type: PMMA, PET
+materials:
+  - PMMA
+  - PET
 optical:
   color_rendition: 4
   light_transmission: 5
   diffusivity: 5
-  tinted: C
+  tints:
+    - clear
+  properties:
+    - transmissive
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: true
-  properties: Transmissive
 pricing:
   price_range: $$$$$
 purpose_made: true

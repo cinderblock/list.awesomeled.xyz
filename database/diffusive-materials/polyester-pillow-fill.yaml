@@ -1,17 +1,22 @@
 name: Polyester Pillow Fill
 notes: Clouds and rocket plumes
+form:
+  - fiber
 links:
   product: https://www.amazon.com/Fairfield-Poly-Premium-Fiber-32-Ounce/dp/B004ALQ0M2
-material_type: Polyester fibre
+materials:
+  - PET
 optical:
   color_rendition: 2
   light_transmission: 3
   diffusivity: 5
-  tinted: T
+  tints:
+    - tinted
+  properties:
+    - diffusive
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: true
-  properties: Diffusive
 pricing:
   price_range: $$
 purpose_made: false

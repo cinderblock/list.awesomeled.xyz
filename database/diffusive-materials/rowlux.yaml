@@ -1,18 +1,28 @@
 name: Rowlux
 notes: Lenticular embossed plastic sheet
+form:
+  - film
 links:
   product: https://www.orafol.com/en/americas/products/category/advanced-polymer-films-rowlux-illusion-film
-material_type: PET,PVC,PC, TPU
+materials:
+  - PET
+  - PVC
+  - PC
+  - TPU
 optical:
   color_rendition: 5
   light_transmission: 3
   diffusivity: 2
-  tinted: T&C
+  tints:
+    - tinted
+    - clear
+  properties:
+    - backlight
+    - edge-lit
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: true
-  sample_thickness: 0.015
-  properties: Backlight & Edgelight
+  sample_thickness: 0.015in
 pricing:
   price_range: $$$$
 purpose_made: true

@@ -1,18 +1,23 @@
 name: Makrolon DQ (5122)-(5162)
 notes: doped polycarbonate (index mismatch)
+form:
+  - resin
 links:
   product: https://solutions.covestro.com/en/highlights/articles/cases/2019/trevos
-material_type: PC
+materials:
+  - PC
 optical:
   color_rendition: 5
   light_transmission: 3-4
   diffusivity: 3-4
-  tinted: T
+  tints:
+    - tinted
+  properties:
+    - diffusive
 physical:
-  flexible: R
+  flexible: false
   fire_retardant: true
-  sample_thickness: 0.08
-  properties: Diffusive
+  sample_thickness: 0.08in
 pricing:
   price_range: $$$$$
 purpose_made: true

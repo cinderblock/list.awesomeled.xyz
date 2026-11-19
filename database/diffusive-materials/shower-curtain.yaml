@@ -1,16 +1,23 @@
 name: Shower Curtain
 notes: Non woven type shower curtain
+form:
+  - fabric
 links:
   product: https://www.amazon.co.uk/Discoball-Waterproof-Antifungal-Curtains-Bathroom/dp/B00Y1XV3VM
-material_type: PVC, EVA
+materials:
+  - PVC
+  - EVA
 optical:
   color_rendition: 3
   light_transmission: 2
-  tinted: T&C
+  tints:
+    - tinted
+    - clear
+  properties:
+    - backlight
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: false
-  properties: Backlight
 pricing:
   price_range: $$
 purpose_made: false

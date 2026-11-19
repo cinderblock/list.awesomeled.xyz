@@ -1,15 +1,19 @@
 name: Bubble Wrap
 notes: Used as stuffing in wider pipes to space LED strip
+form:
+  - film
 links:
   product: https://en.wikipedia.org/wiki/Bubble_wrap
-material_type: Air Filled PE
+materials:
+  - PE
 optical:
   color_rendition: 4
   light_transmission: 4
   diffusivity: 3
+  properties:
+    - diffusive
 physical:
-  flexible: F
-  properties: Diffusive
+  flexible: true
 pricing:
   price_range: $
 purpose_made: false

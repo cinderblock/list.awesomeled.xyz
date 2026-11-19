@@ -1,18 +1,23 @@
 name: White Acrylic 2447,7328,7508
 notes: white acrylic, various shades
+form:
+  - sheet
 links:
   product: https://www.eplastics.com/SAMPLE-ACRYWHITE
-material_type: PMMA
+materials:
+  - PMMA
 optical:
   color_rendition: 2-3
   light_transmission: 3
   diffusivity: 3-5
-  tinted: T
+  tints:
+    - tinted
+  properties:
+    - diffusive
 physical:
-  flexible: R
+  flexible: false
   fire_retardant: true
-  sample_thickness: 0.113
-  properties: Diffusive
+  sample_thickness: 0.113in
 pricing:
   price_range: $$$
 purpose_made: true

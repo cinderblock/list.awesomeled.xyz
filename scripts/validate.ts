@@ -46,7 +46,6 @@ const STALE_EXAMPLES = new Set([
   'adapters',
   'commercial-systems',
   'connectors',
-  'diffusive-materials',
   'drive-libraries',
   'level-converters',
   'microboards',

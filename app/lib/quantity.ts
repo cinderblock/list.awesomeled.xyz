@@ -11,21 +11,22 @@
  * Voltage additionally allows a `min-max` range ("3-7.5V").
  */
 
-export type QuantityKind = 'frequency' | 'current' | 'power' | 'voltage' | 'memory';
+export type QuantityKind = 'frequency' | 'current' | 'power' | 'voltage' | 'memory' | 'length';
 
-// Multipliers to the SI base unit (Hz, A, W, V, B)
+// Multipliers to the SI base unit (Hz, A, W, V, B, m)
 const UNITS: Record<QuantityKind, Record<string, number>> = {
   frequency: { Hz: 1, kHz: 1e3, MHz: 1e6, GHz: 1e9 },
   current: { µA: 1e-6, uA: 1e-6, mA: 1e-3, A: 1 },
   power: { mW: 1e-3, W: 1 },
   voltage: { mV: 1e-3, V: 1 },
   memory: { B: 1, kB: 1e3, KB: 1e3, kb: 1e3, MB: 1e6, GB: 1e9, TB: 1e12 },
+  length: { µm: 1e-6, um: 1e-6, mm: 1e-3, cm: 1e-2, m: 1, in: 0.0254 },
 };
 
 export interface Quantity {
-  /** Value in the SI base unit (Hz, A, W, V). For ranges, the minimum. */
+  /** Value in the SI base unit (Hz, A, W, V, B, m). For ranges, the minimum. */
   value: number;
-  /** Set for voltage ranges like "3-7.5V" */
+  /** Set for ranges like "3-7.5V" or "0.125-0.22in" (voltage, length) */
   max?: number;
   /** True when the source was marked approximate ("~5mA") */
   approx?: boolean;
@@ -44,15 +45,23 @@ export function parseQuantity(v: unknown, kind: QuantityKind): Quantity | null {
     .map((u) => u.replace('µ', '[µu]'))
     .join('|');
 
-  if (kind === 'voltage') {
-    const range = s.match(/^(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)\s?V$/);
-    if (range) return { value: parseFloat(range[1]), max: parseFloat(range[2]) };
+  // A "µ" written as "u" ("uA", "um") still finds its unit
+  const multiplier = (unit: string): number | undefined =>
+    units[unit] ?? units[unit.replace(/^u/, 'µ')];
+
+  if (kind === 'voltage' || kind === 'length') {
+    const range = s.match(
+      new RegExp(`^(\\d+(?:\\.\\d+)?)-(\\d+(?:\\.\\d+)?)\\s?(${unitPattern})$`)
+    );
+    const rangeMult = range ? multiplier(range[3]) : undefined;
+    if (range && rangeMult != null) {
+      return { value: parseFloat(range[1]) * rangeMult, max: parseFloat(range[2]) * rangeMult };
+    }
   }
 
   const m = s.match(new RegExp(`^(~?)(\\d+(?:\\.\\d+)?)\\s?(${unitPattern})$`));
   if (!m) return null;
-  const unit = Object.keys(units).find((u) => u === m[3] || (u === 'µA' && m[3] === 'uA')) ?? m[3];
-  const mult = units[unit];
+  const mult = multiplier(m[3]);
   if (mult == null) return null;
   const q: Quantity = { value: parseFloat(m[2]) * mult };
   if (m[1] === '~') q.approx = true;

@@ -1,18 +1,24 @@
 name: Oyumaru
 notes: Hot water mouldable rubber, flexible. When set, possible to mould
   round single LEDs into shapes, usable as a mould for polymorph as well
+form:
+  - moldable
 links:
   product: https://www.amazon.com/Hinodewashi-Oyumaru-Monochromatic-OO-250C-Clear/dp/B00MG5PYPI
-material_type: Ethylene Copolymer
+materials:
+  - ethylene copolymer
 optical:
   color_rendition: 3
   light_transmission: 4
   diffusivity: 3
-  tinted: T&C
+  tints:
+    - tinted
+    - clear
+  properties:
+    - diffusive
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: false
-  properties: Diffusive
 pricing:
   price_range: $$
 purpose_made: false

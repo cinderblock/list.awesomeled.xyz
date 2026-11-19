@@ -1,17 +1,22 @@
 name: LD45 Plaztazote
 notes: Sheet and in pool noodle form, flexible suitable diffuser for wearables
+form:
+  - foam
 links:
   product: https://www.theplasticshop.co.uk/LD45-45kg-foam-sheet.html
-material_type: Closed Cell LDPE foam
+materials:
+  - LDPE
 optical:
   color_rendition: 3
   light_transmission: 4
-  tinted: T
+  tints:
+    - tinted
+  properties:
+    - backlight
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: false
   sizes_available: 2000mm wide
-  properties: Backlight
 pricing:
   price_range: $$
 purpose_made: false

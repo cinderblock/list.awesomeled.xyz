@@ -3,16 +3,20 @@ notes: White , Black and colours, patterns, Diffuser for tape and strings
 dead_links:
   - url: https://www.newegg.com/p/38Y-00AA-00037
     checked: '2026-07-01'
+form:
+  - tube
 links:
   product: https://www.newegg.com/p/38Y-00AA-00037
-material_type: PET
+materials:
+  - PET
 optical:
   color_rendition: 3
   light_transmission: 2
   diffusivity: 4
+  properties:
+    - diffusive
 physical:
-  flexible: F
-  properties: Diffusive
+  flexible: true
 pricing:
   price_range: $$
 purpose_made: false

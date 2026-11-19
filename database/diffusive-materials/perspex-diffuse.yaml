@@ -1,15 +1,21 @@
 name: Perspex Diffuse
+form:
+  - sheet
 links:
   product: https://perspex.com/news/pom-diffuse/
-material_type: PMMA
+materials:
+  - PMMA
 optical:
-  light_transmission: 2 - 5
-  tinted: T&C
+  light_transmission: 2-5
+  tints:
+    - tinted
+    - clear
+  properties:
+    - backlight
 physical:
-  flexible: R
+  flexible: false
   fire_retardant: true
   sizes_available: up to 1220x2440
-  properties: Backlight
 pricing:
   price_range: $$$$$
 purpose_made: true

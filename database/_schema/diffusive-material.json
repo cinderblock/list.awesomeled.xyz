@@ -9,6 +9,9 @@
     "name": {
       "type": "string"
     },
+    "status": {
+      "anyOf": [{ "$ref": "common.json#/definitions/status" }, { "type": "null" }]
+    },
     "creator": {
       "anyOf": [
         {
@@ -62,8 +65,51 @@
         ]
       }
     },
-    "material_type": {
-      "type": ["string", "null"]
+    "materials": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "What it is made of. Polymer codes: PMMA (acrylic), PC (polycarbonate), PET (polyester film or fibre), PVC (vinyl), PE / LDPE / HDPE / XLPE (polyethylenes; XLPE = cross-linked, incl. PEX and Plastazote), PP, EVA, PCL (polycaprolactone), TPU, PAN (acrylic fibre); plus paper, silicone, and 'ethylene copolymer' where the exact polymer is unpublished.",
+      "items": {
+        "enum": [
+          "PMMA",
+          "PC",
+          "PET",
+          "PVC",
+          "PE",
+          "LDPE",
+          "HDPE",
+          "XLPE",
+          "PP",
+          "EVA",
+          "PCL",
+          "TPU",
+          "PAN",
+          "paper",
+          "silicone",
+          "ethylene copolymer"
+        ]
+      }
+    },
+    "form": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "What it comes as: sheet (rigid panel), film (thin flexible stock: film, gel, paper), foam, tube (pipe, hose, sleeving), fiber (loose fill), fabric, liquid (glue or sealant that sets), moldable (hand-shaped thermoplastic or clay), resin (moulding compound), loose (pieces, shards)",
+      "items": {
+        "enum": [
+          "sheet",
+          "film",
+          "foam",
+          "tube",
+          "fiber",
+          "fabric",
+          "liquid",
+          "moldable",
+          "resin",
+          "loose"
+        ]
+      }
     },
     "purpose_made": {
       "type": ["boolean", "null"],
@@ -76,21 +122,24 @@
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "color_rendition": {
-          "type": ["integer", "string", "null"],
-          "description": "Rating 1-5"
+        "color_rendition": { "$ref": "#/definitions/rating" },
+        "light_transmission": { "$ref": "#/definitions/rating" },
+        "diffusivity": { "$ref": "#/definitions/rating" },
+        "tints": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "Available as tinted (white/opal/coloured) and/or clear",
+          "items": { "enum": ["tinted", "clear"] }
         },
-        "light_transmission": {
-          "type": ["integer", "string", "null"],
-          "description": "Rating 1-5"
-        },
-        "diffusivity": {
-          "type": ["integer", "string", "null"],
-          "description": "Rating 1-5"
-        },
-        "tinted": {
-          "type": ["string", "null"],
-          "description": "T tinted, C clear, T&C both"
+        "properties": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "How it is used with light: diffusive (diffuser in front of the LEDs), backlight (back-lit panel or film), edge-lit (lit from the edge, emits from the face), transmissive (engineered beam-shaping diffuser), transparent (clear, textured or optical)",
+          "items": {
+            "enum": ["diffusive", "backlight", "edge-lit", "transmissive", "transparent"]
+          }
         }
       }
     },
@@ -99,20 +148,17 @@
       "additionalProperties": false,
       "properties": {
         "flexible": {
-          "type": ["boolean", "string", "null"],
-          "description": "F flexible, R rigid"
+          "type": "boolean",
+          "description": "true: flexible; false: rigid"
         },
         "fire_retardant": {
           "type": ["boolean", "null"]
         },
         "sample_thickness": {
-          "type": ["number", "string", "null"],
-          "description": "Thickness in mm"
+          "$ref": "common.json#/definitions/length",
+          "description": "Thickness of the sample the ratings describe"
         },
         "sizes_available": {
-          "type": ["string", "null"]
-        },
-        "properties": {
           "type": ["string", "null"]
         }
       }
@@ -121,10 +167,7 @@
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "price_range": {
-          "type": ["string", "null"],
-          "description": "$ to $$$$$"
-        }
+        "price_range": { "$ref": "common.json#/definitions/price_range" }
       }
     },
     "links": {
@@ -132,7 +175,8 @@
       "additionalProperties": false,
       "properties": {
         "product": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "format": "uri"
         }
       }
     },
@@ -151,6 +195,15 @@
     },
     "dead_links": {
       "$ref": "common.json#/definitions/dead_links"
+    }
+  },
+  "definitions": {
+    "rating": {
+      "description": "1 (poor) to 5 (excellent); a range ('3-4') when it varies by grade or product",
+      "oneOf": [
+        { "type": "integer", "minimum": 1, "maximum": 5 },
+        { "type": "string", "pattern": "^[1-5]-[1-5]$" }
+      ]
     }
   }
 }

@@ -1,18 +1,23 @@
 name: Diffraction grating
 notes: Cool, but probably not a good option
+form:
+  - film
 links:
   product: https://www.edmundoptics.com/p/25400-linesinch-6quot-x-12quot-sheets-2pack/4621?gclid=CjwKCAjwgdX4BRB_EiwAg8O8HWjw1QGEzk6K58RKoEc3b26oilbvFs6GMut1InyfgzmqdJbvjyPs9BoC58gQAvD_BwE
-material_type: PC ?
+materials:
+  - PC
 optical:
   color_rendition: 5
   light_transmission: 5
   diffusivity: 1
-  tinted: C
+  tints:
+    - clear
+  properties:
+    - transparent
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: true
-  sample_thickness: 0.003
-  properties: Transparent
+  sample_thickness: 0.003in
 pricing:
   price_range: $$$$$
 purpose_made: true

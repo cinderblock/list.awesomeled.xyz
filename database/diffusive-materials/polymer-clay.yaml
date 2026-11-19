@@ -1,16 +1,20 @@
 name: Polymer Clay
 notes: Oven hardening ,Fimo, Sculpey , Primo available in transparent and
   translucent, dyeable with alcohol inks
+form:
+  - moldable
 links:
   product: https://www.jessamatutorials.com/translucent-polymer-clay.html
-material_type: PVC
+materials:
+  - PVC
 optical:
   color_rendition: 2
   light_transmission: 2
   diffusivity: 3-4
+  properties:
+    - diffusive
 physical:
-  flexible: R
-  properties: Diffusive
+  flexible: false
 pricing:
   price_range: $$
 purpose_made: false

@@ -4,19 +4,25 @@ dead_links:
   - url: https://www.plastix-world.com/better-with-a-diffusing-polymers/
     archive: https://web.archive.org/web/20230923145646/https://www.plastix-world.com/better-with-a-diffusing-polymers/
     checked: '2026-07-01'
+form:
+  - resin
 links:
   product: https://www.plastix-world.com/better-with-a-diffusing-polymers/
-material_type: PMMA, PC,
+materials:
+  - PMMA
+  - PC
 optical:
   color_rendition: 5
   light_transmission: 3-4
   diffusivity: 3-4
-  tinted: T
+  tints:
+    - tinted
+  properties:
+    - diffusive
 physical:
-  flexible: R
+  flexible: false
   fire_retardant: true
-  sample_thickness: 0.087
-  properties: Diffusive
+  sample_thickness: 0.087in
 pricing:
   price_range: $$$$$
 purpose_made: true

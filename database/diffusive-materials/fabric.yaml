@@ -1,9 +1,13 @@
 name: Fabric
 notes: Not tested yet
+form:
+  - fabric
 optical:
-  tinted: T
+  tints:
+    - tinted
+  properties:
+    - diffusive
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: false
-  properties: Diffusive
 purpose_made: false

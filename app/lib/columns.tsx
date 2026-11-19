@@ -829,6 +829,24 @@ export const driveLibraryColumns: Column[] = [
   { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];
 
+// Diffusive-material ratings (diffusive-material.json definitions/rating):
+// 1-5, or a range "3-4" when it varies by grade. Sorts by the midpoint.
+function ratingValue(v: unknown): number | null {
+  if (typeof v === 'number') return v;
+  const m = typeof v === 'string' ? v.match(/^([1-5])-([1-5])$/) : null;
+  return m ? (Number(m[1]) + Number(m[2])) / 2 : null;
+}
+
+function renderRating(v: unknown) {
+  if (v == null) return <span className="data-table-null">-</span>;
+  return <span className="tabular-nums">{String(v).replace('-', '–')}</span>;
+}
+
+const RATING_TIP = '1 (poor) to 5 (excellent); a range when it varies by grade';
+
+// Price bands ($ to $$$$$$) sort by length, not lexically
+const priceRangeSort = (v: unknown) => (typeof v === 'string' ? v.length : null);
+
 export const diffusiveMaterialColumns: Column[] = [
   {
     key: 'links',
@@ -838,11 +856,62 @@ export const diffusiveMaterialColumns: Column[] = [
     render: (_, item) => renderLinks(item, productLinks),
   },
   { key: 'name', label: 'Name' },
-  { key: 'material_type', label: 'Type', filterConfig: { type: 'select' } },
-  { key: 'optical.color_rendition', label: 'Color Rendition', filterConfig: { type: 'select' } },
-  { key: 'optical.light_transmission', label: 'Transmission', filterConfig: { type: 'select' } },
-  { key: 'physical.flexible', label: 'Flexible', filterConfig: { type: 'select' } },
-  { key: 'pricing.price_range', label: 'Price Range', filterConfig: { type: 'select' } },
+  {
+    key: 'materials',
+    label: 'Material',
+    render: (v) => renderBadgeArray(v),
+    filterConfig: { type: 'select' },
+    headerTip:
+      'PMMA = acrylic, PC = polycarbonate, PET = polyester, PAN = acrylic fibre, XLPE = cross-linked polyethylene (PEX, Plastazote)',
+  },
+  {
+    key: 'form',
+    label: 'Form',
+    render: (v) => renderBadgeArray(v),
+    filterConfig: { type: 'select' },
+  },
+  {
+    key: 'optical.diffusivity',
+    label: 'Diffusivity',
+    render: renderRating,
+    sortValue: ratingValue,
+    defaultSortDir: 'desc',
+    className: 'data-table-cell--right',
+    filterConfig: { type: 'select' },
+    headerTip: RATING_TIP,
+  },
+  {
+    key: 'optical.light_transmission',
+    label: 'Transmission',
+    render: renderRating,
+    sortValue: ratingValue,
+    defaultSortDir: 'desc',
+    className: 'data-table-cell--right',
+    filterConfig: { type: 'select' },
+    headerTip: RATING_TIP,
+  },
+  {
+    key: 'optical.color_rendition',
+    label: 'Color Rendition',
+    render: renderRating,
+    sortValue: ratingValue,
+    defaultSortDir: 'desc',
+    className: 'data-table-cell--right',
+    filterConfig: { type: 'select' },
+    headerTip: RATING_TIP,
+  },
+  {
+    key: 'physical.flexible',
+    label: 'Flexibility',
+    render: (v) => (v === true ? <span>Flexible</span> : v === false ? <span>Rigid</span> : null),
+    filterConfig: { type: 'boolean', trueLabel: 'Flexible', falseLabel: 'Rigid' },
+  },
+  {
+    key: 'pricing.price_range',
+    label: 'Price Range',
+    sortValue: priceRangeSort,
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const commercialSystemColumns: Column[] = [
@@ -863,7 +932,12 @@ export const commercialSystemColumns: Column[] = [
     filterConfig: { type: 'numeric' },
   },
   { key: 'specs.color_type', label: 'Color Type', filterConfig: { type: 'select' } },
-  { key: 'pricing.price_range', label: 'Price Range', filterConfig: { type: 'select' } },
+  {
+    key: 'pricing.price_range',
+    label: 'Price Range',
+    sortValue: priceRangeSort,
+    filterConfig: { type: 'select' },
+  },
 ];
 
 export const levelConverterColumns: Column[] = [
@@ -971,7 +1045,7 @@ export function getSearchKeysForCategory(categoryId: string): string[] {
     adapters: ['name', 'creator', 'notes'],
     'drive-libraries': ['name', 'creator', 'hardware'],
     'pixel-decoders': ['name', 'creator', 'notes'],
-    'diffusive-materials': ['name', 'material_type', 'notes'],
+    'diffusive-materials': ['name', 'materials', 'notes'],
     'commercial-systems': ['name', 'creator', 'notes'],
   };
 

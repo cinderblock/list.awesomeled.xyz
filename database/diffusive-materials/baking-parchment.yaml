@@ -1,18 +1,23 @@
 name: Baking Parchment
 notes: Baking parchment also greaseproof paper, also used as low cost rear
   projection material
+form:
+  - film
 links:
   product: https://www.metsatissue.com/en/brands-products/baking-cooking-papers/paper-differencies/Pages/default.aspx
-material_type: Paper with silicone or wax
+materials:
+  - paper
 optical:
   color_rendition: 3
   light_transmission: 2
-  tinted: T
+  tints:
+    - tinted
+  properties:
+    - backlight
 physical:
-  flexible: F
+  flexible: true
   fire_retardant: false
   sizes_available: 600mm wide
-  properties: Backlight
 pricing:
   price_range: $
 purpose_made: false
