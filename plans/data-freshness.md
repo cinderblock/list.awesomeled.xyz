@@ -17,15 +17,15 @@ Everything below is on `master` except where marked. One owner decision is
 open (monthly workflow re-enable); the `$` scale for commercial systems is a
 proposal waiting on Cameron.
 
-|                                                 | Start of day                  | Now                       |
-| ----------------------------------------------- | ----------------------------- | ------------------------- |
-| Prices with a retrieval date (`price_source`)   | 0 (40 as YAML comments)       | 287                       |
-| Priced entries with no date                     | 227                           | 39 (no real source found) |
-| Connectors priced                               | 0 / 45                        | 34 / 45                   |
-| Pixel ICs / pixels priced                       | 12 / 10                       | 18 / 16                   |
-| Stale prices (> 12 months, still sold)          | —                             | 2 (archived captures)     |
-| Entries with status evidence (`sources.status`) | 0                             | 300 of 483                |
-| Link sweep (Node, local)                        | 12 dead · 69 check (415 URLs) | see Issue #2 comment      |
+|                                                 | Start of day                  | Now                                      |
+| ----------------------------------------------- | ----------------------------- | ---------------------------------------- |
+| Prices with a retrieval date (`price_source`)   | 0 (40 as YAML comments)       | 287                                      |
+| Priced entries with no date                     | 227                           | 39 (no real source found)                |
+| Connectors priced                               | 0 / 45                        | 34 / 45                                  |
+| Pixel ICs / pixels priced                       | 12 / 10                       | 18 / 16                                  |
+| Stale prices (> 12 months, still sold)          | —                             | 2 (archived captures)                    |
+| Entries with status evidence (`sources.status`) | 0                             | 300 of 483                               |
+| Link sweep (Node, local)                        | 12 dead · 69 check (415 URLs) | 0 dead · 106 check · 0 back (1,420 URLs) |
 
 ## Environment / context
 
@@ -152,7 +152,8 @@ proposal waiting on Cameron.
       SKU squeezed", "e2e missing values sort last" (cause: our INR price).
 - [x] Checker v3 (parentheses, homepage redirects, BACK same-site,
       discontinued never stale).
-- [ ] Issue #2 comment with the final sweep.
+- [x] Issue #2: body refreshed with the 2026-11-18 sweep + summary comment
+      (<https://github.com/cinderblock/list.awesomeled.xyz/issues/2#issuecomment-6998997065>).
 - [ ] Owner decisions below.
 
 ## Open questions for the user
