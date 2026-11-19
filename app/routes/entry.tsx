@@ -541,11 +541,16 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
             <kbd>j</kbd>
           </span>
         )}
-        <Tooltip content="Last reviewed for accuracy">
-          <span className="entry-updated">
-            <LocalDate date={entry.updated as Date} />
-          </span>
-        </Tooltip>
+        {/* Last commit that reviewed this entry's facts (data.ts IGNORED_COMMITS
+            excludes bulk reshaping); links to the file's history */}
+        <a
+          className="entry-updated"
+          href={`https://github.com/cinderblock/list.awesomeled.xyz/commits/master/database/${category.id}/${entry.id}.yaml`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Reviewed <LocalDate date={entry.updated as Date} />
+        </a>
       </div>
 
       <header className="entry-hero">

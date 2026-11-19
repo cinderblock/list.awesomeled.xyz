@@ -154,15 +154,22 @@
 /* ===== Entry detail page ===== */
 .entry-topbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.25rem 1rem;
   margin-bottom: 0.75rem;
 }
 .entry-updated {
   color: var(--muted-foreground);
   font-size: 0.8125rem;
   flex-shrink: 0;
+  white-space: nowrap;
+  text-decoration: none;
+}
+a.entry-updated:hover {
+  color: var(--foreground);
+  text-decoration: underline;
 }
 
 .entry-hero {
