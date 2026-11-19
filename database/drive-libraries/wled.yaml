@@ -12,7 +12,7 @@ instructional_resources:
 language: C++
 license: EUPL-1.2
 links:
-  repo: https://github.com/Aircoookie/WLED
+  repo: https://github.com/wled/WLED
   youtube: https://www.youtube.com/watch?v=2wM067jRki8
 platforms:
   - ESP32

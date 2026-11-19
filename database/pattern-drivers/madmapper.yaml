@@ -1,6 +1,6 @@
 name: MadMapper
 status: active
-creator: Smode Tech
+creator: 1024 architecture and GarageCube
 inputs:
   video: Input
   other: MIDI,OSC,Spout,Syphon,NDI
@@ -20,3 +20,8 @@ platforms:
     - macOS
 pricing:
   price: €359
+sources:
+  creator:
+    url: https://madmapper.com/aboutus
+    retrieved: '2026-11-18'
+    notes: "'Created and developed by 1024 architecture and GarageCube since 2010'"

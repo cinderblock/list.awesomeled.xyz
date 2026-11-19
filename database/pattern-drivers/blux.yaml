@@ -24,7 +24,5 @@ platforms:
     - Windows
     - macOS
     - Linux
-  hardware:
-    - Raspberry Pi
 pricing:
   price: Free

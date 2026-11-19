@@ -23,6 +23,7 @@ platforms:
   os:
     - Windows
     - macOS
+    - Linux
 pricing:
   price: Free - $399
   demo:
@@ -34,3 +35,8 @@ related:
     source:
       url: https://github.com/heronarts/Chromatik
       retrieved: '2026-11-18'
+sources:
+  platforms.os:
+    url: https://chromatik.co/download/
+    retrieved: '2026-11-18'
+    notes: builds for Linux (aarch64, x64), macOS, Windows

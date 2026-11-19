@@ -5,7 +5,7 @@ inputs:
   video: Input
 outputs:
   protocols:
-    artnet: Input
+    artnet: Output
   other: glediator files, pixel data
 capabilities:
   live: false
@@ -17,3 +17,8 @@ platforms:
     - Windows
 pricing:
   price: Free
+sources:
+  outputs.protocols.artnet:
+    url: https://github.com/NLED/allpixmatrix
+    retrieved: '2026-11-18'
+    notes: "changelog: 'Added Artnet output support'"

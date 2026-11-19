@@ -1,5 +1,5 @@
 name: BenTo
-status: unknown
+status: active
 creator: Benjamin Kuperberg
 inputs:
   audio: Output
@@ -28,3 +28,8 @@ platforms:
     - Raspberry Pi
 pricing:
   price: Free
+sources:
+  status:
+    url: https://github.com/benkuper/BenTo/releases
+    retrieved: '2026-11-18'
+    notes: ongoing releases

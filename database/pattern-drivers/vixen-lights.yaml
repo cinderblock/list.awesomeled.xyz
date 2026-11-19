@@ -1,5 +1,5 @@
 name: Vixen Lights
-status: unknown
+status: active
 notes: like xlights, initially developed for holiday light sequences
 outputs:
   protocols:
@@ -25,3 +25,7 @@ sources:
     url: https://github.com/VixenLights/Vixen
     retrieved: '2026-11-18'
     notes: Readme; the program itself is called 'Vixen' ('Vixen is a full featured sequencer for producing animated light shows').
+  status:
+    url: https://www.vixenlights.com/
+    retrieved: '2026-11-18'
+    notes: Vixen 3.13u4 released 2026-10-22

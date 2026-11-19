@@ -1,6 +1,6 @@
 name: Mapio Pro
 status: active
-creator: Vistitution
+creator: Visution
 notes: Mapio Pro has support for addressable LEDs
 inputs:
   video: Both
@@ -23,3 +23,7 @@ pricing:
   price: €200
   demo:
     available: Watermarked demo
+sources:
+  creator:
+    url: https://visution.com/
+    retrieved: '2026-11-18'

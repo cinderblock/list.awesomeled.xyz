@@ -1,4 +1,4 @@
-name: Arthet LED Mapper
+name: artnet_led_mapper
 status: unknown
 creator: cyberboy666
 notes: input video from connected devices (webcams, capture cards etc) or over NDI, output artnet across multiple universes
@@ -10,6 +10,8 @@ aliases:
 capabilities:
   live: false
   designer: true
+links:
+  url: https://github.com/cyberboy666/artnet_led_mapper
 platforms:
   os:
     - Windows
@@ -23,3 +25,7 @@ sources:
     url: https://github.com/cyberboy666/artnet_led_mapper
     retrieved: '2026-11-18'
     notes: Readme title. The entry's notes ('input video from connected devices ... over NDI, output artnet across multiple universes') match this README's feature list word for word.
+  name:
+    url: https://github.com/cyberboy666/artnet_led_mapper
+    retrieved: '2026-11-18'
+    notes: the project's own name

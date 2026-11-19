@@ -22,6 +22,7 @@ links:
 platforms:
   os:
     - Windows
+    - macOS
 pricing:
   demo:
     available: Free demo - No output
@@ -30,3 +31,7 @@ sources:
     url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
     retrieved: '2026-11-18'
     notes: Product page names the current version 'LED Strip Studio 4' (LSS4). Quotes via WebFetch (site blocks cURL).
+  platforms.os:
+    url: https://www.ledstripstudio.com/addressable-led-pixel-mapping-software/
+    retrieved: '2026-11-18'
+    notes: system requirements list macOS

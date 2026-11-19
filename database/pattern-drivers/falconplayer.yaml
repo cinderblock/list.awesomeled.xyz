@@ -1,5 +1,5 @@
-name: FalconPlayer
-status: unknown
+name: Falcon Player
+status: active
 notes: FPP + RasPi/BBB = playback box
 inputs:
   video: Output
@@ -112,3 +112,11 @@ sources:
     url: https://github.com/FalconChristmas/fpp/blob/master/README.md
     retrieved: '2026-11-18'
     notes: Readme title '# FPP - Falcon Player'. The spelled-out original name 'Falcon Pi Player' appears in the 2013 launch thread 'Introducing the free Falcon Pi Player (FPP)' (https://www.auschristmaslighting.com/threads/introducing-the-free-falcon-pi-player-fpp.4115/, forum).
+  name:
+    url: https://github.com/FalconChristmas/fpp/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: "'FPP - Falcon Player'"
+  status:
+    url: https://github.com/FalconChristmas/fpp/releases
+    retrieved: '2026-11-18'
+    notes: FPP 10.x releases

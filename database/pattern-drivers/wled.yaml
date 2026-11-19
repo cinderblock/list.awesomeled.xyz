@@ -21,7 +21,7 @@ integrations: Home Assistant, WLED App.
 language: C++
 license: EUPL-1.2
 links:
-  url: https://github.com/Aircoookie/WLED
+  url: https://github.com/wled/WLED
 other_links:
   - https://kno.wled.ge/
 platforms:

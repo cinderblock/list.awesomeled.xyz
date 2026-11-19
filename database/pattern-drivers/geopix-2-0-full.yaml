@@ -16,7 +16,7 @@ capabilities:
   designer: true
   visualizer: 3D
 links:
-  url: https://www.geopix.io/
+  url: https://github.com/EnviralDesign/GeoPix
 platforms:
   os:
     - Windows

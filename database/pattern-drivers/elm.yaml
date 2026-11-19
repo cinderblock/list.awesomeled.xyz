@@ -1,5 +1,5 @@
 name: ELM
-status: unknown
+status: active
 creator: ENTTEC
 notes: Triggering via RS232/GPIO/UDP available thru S-Play controller
 inputs:
@@ -44,3 +44,7 @@ sources:
     url: https://www.enttec.com/story/introducing-elm-2026/
     retrieved: '2026-11-18'
     notes: ENTTEC's ELM 2026 announcement; ELM is the short form.
+  status:
+    url: https://www.enttec.com/story/introducing-elm-2026/
+    retrieved: '2026-11-18'
+    notes: ELM 2026 released

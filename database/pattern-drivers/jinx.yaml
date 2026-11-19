@@ -1,8 +1,7 @@
 name: Jinx!
 status: end-of-life
-creator: Solderlab.de
-notes: Basically a mapper/pattern generator for microcontrollers with pixels.
-  Development ceased
+creator: Sven Karschewski
+notes: Basically a mapper/pattern generator for microcontrollers with pixels. Development ceased
 outputs:
   gpio: Input
   serial: Output
@@ -11,10 +10,15 @@ capabilities:
   designer: true
 integrations: Should be solderlab.de (which is down)
 links:
-  url: https://oneguyoneblog.com/download/glediator-v2-0-3/
+  url: https://live-leds.de/
 platforms:
   os:
     - Windows
     - Linux
 pricing:
   price: Free
+sources:
+  creator:
+    url: https://live-leds.de/impressum/
+    retrieved: '2026-11-18'
+    notes: site imprint names the author

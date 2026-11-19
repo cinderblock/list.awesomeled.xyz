@@ -1,5 +1,5 @@
-name: LX Studio / Chromatik
-status: active
+name: LX Studio
+status: end-of-life
 creator: Mark Slee
 notes: Java. Next version (Chromatik) will no longer use the Processing graphics library.
 inputs:
@@ -33,3 +33,12 @@ pricing:
   demo:
     available: Open source. Commercial applications require license
   license_type: Free for small projects; larger commercial projects need a license
+sources:
+  name:
+    url: https://github.com/heronarts/LXStudio
+    retrieved: '2026-11-18'
+    notes: "'LX Studio has been superceded by the Chromatik Digital Lighting Workstation'"
+  status:
+    url: https://github.com/heronarts/LXStudio
+    retrieved: '2026-11-18'
+    notes: END OF LIFECYCLE NOTICE in the readme
