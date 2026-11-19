@@ -7,6 +7,10 @@ outputs:
     - pixel-data
   connector: Solder pads
 diy_or_ots: OTS
+images:
+  - file: pixel-data-isolator.webp
+    source: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/
+    credit: Essence Engineering
 links:
   product: https://www.tindie.com/products/essenceeng/fajardo-led-data-isolator/
 price: 16.99

@@ -2,6 +2,10 @@ name: Standard Differential Receiver
 creator: Microcyb
 electrical:
   max_voltage: 12V
+images:
+  - file: standard-differential-receiver.webp
+    source: https://web.archive.org/web/20240213024101/http://www.microcyb.com/
+    credit: Microcyb
 io:
   channels: 4
   interface: Differential Pairs

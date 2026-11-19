@@ -1,6 +1,12 @@
 name: TXS0108e
 status: active
 creator: Texas Instruments
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
+images:
+  - file: txs0108e.webp
+    source: https://www.ti.com/product/TXS0108E
+    credit: Texas Instruments
 io:
   channels: 8
 links:

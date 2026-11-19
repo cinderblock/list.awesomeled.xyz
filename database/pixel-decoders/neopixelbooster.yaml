@@ -5,6 +5,11 @@ outputs:
   types:
     - power
   connector: Solder pads
+images:
+  - file: neopixelbooster.webp
+    source: https://github.com/RoboticsBrno/RB0004-NeopixelBooster
+    credit: 'Jan Mrázek and Martin Kousal'
+    license: CC BY-NC-SA 4.0
 links:
   product: https://www.tindie.com/products/yaqwsx/rb0004-neopixelbooster/
 price: 3.5

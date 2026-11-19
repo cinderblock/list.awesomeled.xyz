@@ -1,6 +1,12 @@
 name: TXU0104
 status: active
 creator: Texas Instruments
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
+images:
+  - file: txu0104.webp
+    source: https://www.ti.com/product/TXU0104
+    credit: Texas Instruments
 io:
   channels: 4
 links:

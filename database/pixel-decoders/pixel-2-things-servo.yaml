@@ -15,6 +15,10 @@ dead_links:
     checked: '2026-11-18'
     notes: Now redirects to Experience Lights' Pixel2Things category, which no longer lists this board
 diy_or_ots: OTS
+images:
+  - file: pixel-2-things-servo.webp
+    source: https://web.archive.org/web/20190818073416/https://www.pixel2things.com/9-DC-6-Servo-Outputs-Fully-Assembled-p137348805
+    credit: Pixel2Things
 links:
   product: https://www.pixel2things.com/
 price: 109.99

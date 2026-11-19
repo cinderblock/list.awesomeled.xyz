@@ -9,6 +9,10 @@ outputs:
   connector:
     ref: mtsb-combicon
 diy_or_ots: OTS
+images:
+  - file: controller-changeover.webp
+    source: https://www.tindie.com/products/k7bbr/wasatch-pixels-led-controller-multiplexer/
+    credit: Wasatch Pixels
 links:
   product: https://www.tindie.com/products/k7bbr/wasatch-pixels-led-controller-multiplexer/
 price: 17

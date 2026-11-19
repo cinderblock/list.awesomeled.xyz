@@ -6,7 +6,13 @@ outputs:
   types:
     - pixel-data
   connector: Solder pads / breakout
+datasheet:
+  url: https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/DataSheets/ATtiny4-5-9-10-Data-Sheet-DS40002060A.pdf
 diy_or_ots: DIY
+images:
+  - file: attiny10.webp
+    source: https://www.microchip.com/en-us/product/ATtiny10
+    credit: Microchip Technology
 links:
   product: https://sites.google.com/site/wayneholder/besting-ben-heck-use-a-33-cent-microcontroller-to-drive-neopixels-instead-of-multivibrators
 other_links:

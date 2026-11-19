@@ -1,6 +1,12 @@
 name: SN74LVC2T45
 status: active
 creator: Texas Instruments
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
+images:
+  - file: sn74lvc2t45.webp
+    source: https://www.ti.com/product/SN74LVC2T45
+    credit: Texas Instruments
 io:
   channels: 2
 links:

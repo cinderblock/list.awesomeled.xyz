@@ -1,8 +1,14 @@
 name: 74HCT244
 status: active
 creator: Texas Instruments
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
 electrical:
   max_voltage: 5.5V
+images:
+  - file: '74hct244.webp'
+    source: https://www.ti.com/product/SN74HCT244
+    credit: Texas Instruments
 io:
   channels: 8
   interface: PDIP largest

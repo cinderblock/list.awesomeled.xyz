@@ -1,8 +1,14 @@
 name: SN74LV1T34DBVRG4
 status: active
 creator: Texas Instruments
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
 electrical:
   max_voltage: 7V
+images:
+  - file: sn74lv1t34dbvrg4.webp
+    source: https://www.ti.com/product/SN74LV1T34
+    credit: Texas Instruments
 io:
   channels: 1
   interface: SOT 23

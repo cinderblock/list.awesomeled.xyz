@@ -1,6 +1,12 @@
 name: SN74AHCT125N
 status: active
 creator: Texas Instruments
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
+images:
+  - file: sn74ahct125n.webp
+    source: https://www.ti.com/product/SN74AHCT125
+    credit: Texas Instruments
 io:
   channels: 4
   interface: Through-Hole DIP

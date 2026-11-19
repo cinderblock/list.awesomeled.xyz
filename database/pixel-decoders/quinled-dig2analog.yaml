@@ -8,6 +8,10 @@ outputs:
     - pwm
   connector: Screw terminal
 diy_or_ots: OTS
+images:
+  - file: quinled-dig2analog.webp
+    source: https://quinled.shop/product/dig2analog/
+    credit: QuinLED (Intermit.Tech)
 links:
   product: https://quinled.info/quinled-dig2analog/
 other_links:

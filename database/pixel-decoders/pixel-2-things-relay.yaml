@@ -13,6 +13,10 @@ dead_links:
     checked: '2026-11-18'
     notes: Now redirects to Experience Lights' Pixel2Things category, which no longer lists this board
 diy_or_ots: OTS
+images:
+  - file: pixel-2-things-relay.webp
+    source: https://web.archive.org/web/20190818063751/https://www.pixel2things.com/9-AC-Outputs-Fully-Assembled-p137348814
+    credit: Pixel2Things
 links:
   product: https://www.pixel2things.com/
 price: 109.99

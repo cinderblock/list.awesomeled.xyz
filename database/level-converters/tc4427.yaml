@@ -2,8 +2,14 @@ name: TC4427
 status: active
 creator: Microchip
 notes: https://electricfiredesign.com/2021/03/12/logic-level-shifters-for-driving-led-strips/
+datasheet:
+  url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
 electrical:
   max_current: 1.5A
+images:
+  - file: tc4427.webp
+    source: https://www.microchip.com/en-us/product/TC4427
+    credit: Microchip Technology
 io:
   channels: 2
 links:

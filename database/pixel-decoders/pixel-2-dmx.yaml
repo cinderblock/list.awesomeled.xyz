@@ -10,6 +10,10 @@ outputs:
     ref: xlr-3
     notes: xConnect pixel-data input
 diy_or_ots: OTS
+images:
+  - file: pixel-2-dmx.webp
+    source: https://store.experiencelights.com/pixel2dmx---realtime-dmx-bridge/
+    credit: Experience Lights
 links:
   product: https://store.experiencelights.com/pixel2dmx-realtime-dmx-bridge/
 price: 54.99

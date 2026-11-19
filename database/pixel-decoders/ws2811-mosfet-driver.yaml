@@ -6,6 +6,12 @@ outputs:
   count: 3
   types:
     - pwm
+datasheet:
+  url: https://www.nledshop.com/downloads/datasheets/nled-ws2811fet-datasheet.pdf
+images:
+  - file: ws2811-mosfet-driver.webp
+    source: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html
+    credit: Northern Lights Electronic Design
 links:
   product: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html
 price: 10

@@ -6,6 +6,10 @@ outputs:
   connector:
     ref: mtsb-combicon
 diy_or_ots: OTS
+images:
+  - file: pixfog-pixel-based-fog-controller.webp
+    source: https://www.innotronix.net/PixFog-Pixel-Based-Fog-Controller-p232730399
+    credit: Innotronix, LLC
 links:
   product: https://www.innotronix.net/PixFog-Pixel-Based-Fog-Controller-p232730399
 price: 39.99

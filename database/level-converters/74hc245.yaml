@@ -1,9 +1,15 @@
 name: 74HC245
 status: active
 creator: Texas Instruments
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/sn74hc245.pdf
 electrical:
   max_voltage: 6
   max_current: 8mA
+images:
+  - file: '74hc245.webp'
+    source: https://www.ti.com/product/SN74HC245
+    credit: Texas Instruments
 io:
   channels: 8
 links:
