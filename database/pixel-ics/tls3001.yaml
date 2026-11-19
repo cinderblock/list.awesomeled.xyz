@@ -1,5 +1,5 @@
 name: TLS3001
-creator: Tianli Tech
+creator: Teralane Semiconductor
 color:
   channel_bits: 12
   pwm_frequency: 1.0kHz
@@ -8,6 +8,8 @@ data:
   channels: 3
 datasheet:
   url: https://www.bestlightingbuy.com/pdf/TLS3001%20Datasheet.pdf
+  discrepancies:
+    - The V2.2 datasheet (https://datasheet4u.com/datasheet-pdf/TERALANESEMICONDUCTOR/TLS3001/pdf.php?id=905218) specifies 8-bit PWM; Advatek's protocol overview says 12-bit (recorded in color.channel_bits).
 dead_links:
   - url: https://www.bestlightingbuy.com/pdf/TLS3001%20Datasheet.pdf
     archive: https://web.archive.org/web/20190918095010/https://www.bestlightingbuy.com/pdf/TLS3001%20Datasheet.pdf

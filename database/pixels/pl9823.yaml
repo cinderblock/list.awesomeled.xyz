@@ -1,6 +1,6 @@
 name: PL9823
 release_year: 2014
-creator: /
+creator: BaiCheng # brand on the datasheet (https://www.led-genial.de/mediafiles//Sonstiges/PL9823.pdf)
 notes: 5mm & 8mm epoxy leaded copy of WS2811/12
 color:
   order: RGB
