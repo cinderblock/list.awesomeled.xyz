@@ -8,6 +8,27 @@ links:
 platforms:
   - ESP8266
   - ESP32
+protocols:
+  - sACN
+  - Art-Net
+  - DDP
+  - FPP Remote
+  - MQTT
+  - DMX512
+  - Renard
+related:
+  - type: related
+    ref: adapters/espixelstick
+    notes: This firmware is written for the ESPixelStick hardware (forkineye.com). Current releases need 4MB+ flash, so ESP-01-based V1/V2 sticks stop at v3.2
+    source:
+      url: https://github.com/forkineye/ESPixelStick/blob/main/README.md
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/artnet-receive
+    notes: 'Art-Net input via MartinMueller2003/Artnet, a GitHub fork of natcl/Artnet (api.github.com/repos/MartinMueller2003/Artnet: fork=true, parent natcl/Artnet)'
+    source:
+      url: https://github.com/forkineye/ESPixelStick/blob/main/platformio.ini
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - ws2811
   - ws2801
@@ -22,16 +43,23 @@ sources:
     url: https://github.com/forkineye/ESPixelStick
     retrieved: '2026-11-18'
     notes: 'last commit 2026-11-11 (latest tagged release v4.0-beta5, 2023-12-01)'
+  supported_ics:
+    url: https://github.com/forkineye/ESPixelStick/blob/main/src/output/OutputMgr.cpp
+    retrieved: '2026-11-18'
+    notes: SupportedOutputProtocolList (pixel entries)
+  protocols:
+    url: https://github.com/forkineye/ESPixelStick/blob/main/src/input/InputMgr.cpp
+    retrieved: '2026-11-18'
+    notes: input types table (E1.31, DDP, FPP Remote, Artnet, Effects, MQTT, Alexa); serial outputs DMX512 / Renard / Generic Serial from the wiki's 'Serial Protocols' list. Alexa (voice) and the effect engine are left out
 supported_ics:
   - WS2811
   - WS2812
+  - WS2812b
+  - GECE
   - WS2801
   - APA102
-  - GECE
-  - GS8208
-  - TLS3001
-  - TM1814
   - UCS1903
+  - TM1814
+  - GS8208
   - UCS8903
-  - DMX512
-  - Renard
+  - TLS3001

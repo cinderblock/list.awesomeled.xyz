@@ -1,6 +1,8 @@
 name: Arduino Ethernet Nano with ENC28J60
 status: unknown
 creator: Xaver2k
+aliases:
+  - ArduinoENC_Artnet-WS2811
 features: WS2811/12 over Art-Net via ENC28J60 wired Ethernet
 hardware: Arduino Nano &Ethernet Shield
 language: C++
@@ -11,8 +13,28 @@ platforms:
   - Arduino
 protocols:
   - Art-Net
+related:
+  - type: uses
+    ref: drive-libraries/neopixel
+    notes: Drives the LEDs through a modified copy of the Adafruit NeoPixel library bundled in the project's src/ folder
+    source:
+      url: https://github.com/Xaver2k/ArduinoENC_Artnet-WS2811/blob/master/README.md
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - ws2811
+sources:
+  supported_ics:
+    url: https://github.com/Xaver2k/ArduinoENC_Artnet-WS2811/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme first line
+  protocols:
+    url: https://github.com/Xaver2k/ArduinoENC_Artnet-WS2811/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme intro; Art-Net received over an ENC28J60 Ethernet shield
+  aliases:
+    url: https://github.com/Xaver2k/ArduinoENC_Artnet-WS2811
+    retrieved: '2026-11-18'
+    notes: repository name and readme title; the database name is descriptive
 supported_ics:
   - WS2811
   - WS2812

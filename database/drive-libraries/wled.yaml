@@ -22,6 +22,12 @@ protocols:
   - sACN
   - Art-Net
   - DDP
+  - TPM2.net
+  - Adalight
+  - TPM2
+  - DMX512
+  - MQTT
+  - ESP-NOW
 related_pixel_ics:
   - gs8208
   - lpd6803
@@ -41,23 +47,36 @@ sources:
     url: https://github.com/wled/WLED/releases
     retrieved: '2026-11-18'
     notes: 'release v16.0.1 published 2026-07-07'
+  supported_ics:
+    url: https://kno.wled.ge/basics/compatible-led-strips/
+    retrieved: '2026-11-18'
+    notes: Addressable LED Strips table (read from the docs source https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-led-strips.md)
+  protocols:
+    url: https://github.com/wled/WLED/blob/main/readme.md
+    retrieved: '2026-11-18'
+    notes: "'Connectivity & Integrations' list; DMX output via MAX485 'As of version 0.9.2' (https://kno.wled.ge/interfaces/dmx-output/) and DMX input 'As of version v16.0' (docs/interfaces/dmx-input.md)."
 supported_ics:
-  - WS2812B
-  - WS2811
   - SK6812
+  - WS2811
+  - WS2812B
   - WS2813
-  - WS2815
   - APA102
-  - SK9822
-  - WS2801
   - LPD8806
-  - LPD6803
-  - P9813
-  - TM1814
-  - TM1829
-  - GS8208
+  - WS2801
+  - SK9822
   - UCS8903
-  - UCS8904
+  - GS8208
+  - TM1814
   - WS2805
   - WS2814
+  - WS2815
   - FW1906
+  - LPD6803
+  - P9813
+  - TM1829
+  - UCS8904
+  - APA106
+  - PL9823
+  - TM1914
+  - TM1815
+  - SM16825

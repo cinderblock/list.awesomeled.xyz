@@ -1,6 +1,9 @@
 name: FastLED
 status: active
 creator: Zach Vorhies (current), Daniel Garcia, Mark Kriegsman
+aliases:
+  - FastSPI_LED
+  - FastSPI_LED2
 hardware: many
 language: C++
 license: MIT
@@ -17,6 +20,15 @@ platforms:
   - Raspberry Pi Pico
   - Linux
   - Web
+protocols:
+  - DMX512
+related:
+  - type: uses
+    ref: drive-libraries/octows2811
+    notes: Optional OCTOWS2811 controller type on Teensy drives LEDs through PJRC's OctoWS2811 library
+    source:
+      url: https://github.com/FastLED/FastLED/blob/180218560aec55ac8883943db02d6dfbfb579f07/src/FastLED.h
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - dmx512
   - lpd8806
@@ -34,25 +46,65 @@ sources:
     url: https://github.com/FastLED/FastLED/releases
     retrieved: '2026-11-18'
     notes: 'release 3.10.9 published 2026-11-01'
+  supported_ics:
+    url: https://github.com/FastLED/FastLED/blob/180218560aec55ac8883943db02d6dfbfb579f07/src/FastLED.h
+    retrieved: '2026-11-18'
+    notes: ESPIChipsets enum + ClocklessChipsets classes at master 1802185
+  protocols:
+    url: https://github.com/FastLED/FastLED/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme chipset table 'Specialty' column; FastLED.h defines DMXSIMPLE / DMXSERIAL controllers (via the DmxSimple / DMXSerial Arduino libraries)
+  aliases:
+    url: https://github.com/FastLED/FastLED/blob/3.3.3/README.md
+    retrieved: '2026-11-18'
+    notes: '''What about that name?'' section; the current readme says: Originally "FastSPI_LED" ... became "FastLED"'
 supported_ics:
-  - WS2811
-  - WS2812
-  - WS2813
-  - WS2815
-  - SK6812
+  - LPD6803
+  - LPD8806
+  - WS2801
+  - WS2803
+  - SM16716
+  - MY9221
+  - P9813
   - APA102
   - SK9822
   - HD107S
   - HD108
-  - LPD8806
-  - LPD1886
-  - WS2801
-  - P9813
-  - SM16716
-  - TM1803
-  - TM1804
+  - NS108
+  - SM16703
+  - SM16824E
+  - TM1829
+  - TX1813N1
+  - TM1812
   - TM1809
+  - TM1908
+  - TM1804
+  - TM1803
   - UCS1903
+  - UCS1903B
   - UCS1904
   - UCS2903
-  - DMX
+  - UCS7604
+  - WS2812
+  - WS2815
+  - WS2816
+  - WS2852
+  - WS2812B
+  - OSTW2020C1E
+  - WS2812B-Mini-V3
+  - WS2812B-V5
+  - GS1903
+  - SK6812
+  - LC8816E
+  - SK6822
+  - APA106
+  - PL9823
+  - WS2811
+  - WS2813
+  - WS2814
+  - WS2818
+  - APA104
+  - GE8822
+  - GW6205
+  - LPD1886
+  - UCS1912

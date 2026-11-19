@@ -11,10 +11,28 @@ platforms:
   - Windows
   - Linux
   - macOS
+protocols:
+  - DMX512
+  - OpenRGB SDK
+related:
+  - type: compatible
+    ref: drive-libraries/openrgb
+    notes: Controls OpenRGB-supported devices through the OpenRGB SDK (direct-mode devices); OpenRGB's readme also lists Artemis among apps supporting its SDK
+    source:
+      url: https://wiki.artemis-rgb.com/en/guides/user/devices
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://github.com/Artemis-RGB/Artemis
     retrieved: '2026-11-18'
     notes: 'last commit 2026-10-27; downloads on artemis-rgb.com'
+  supported_ics:
+    url: https://wiki.artemis-rgb.com/en/guides/user/devices
+    retrieved: '2026-11-18'
+    notes: "'Custom hardware' section: Arduino, BitWizard and ESP8266 WS281X device support"
+  protocols:
+    url: https://wiki.artemis-rgb.com/en/guides/user/devices
+    retrieved: '2026-11-18'
+    notes: "'General hardware' (DMX) and 'RGB (gaming) periferals' (OpenRGB) sections"
 supported_ics:
   - WS281X

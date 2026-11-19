@@ -11,6 +11,19 @@ platforms:
   - Arduino
   - ESP32
   - Raspberry Pi Pico
+protocols:
+  - DMX512
+  - DCC
+  - CAN
+  - Selectrix
+  - LNet
+related:
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: Declared Arduino dependency; drives the LEDs through FastLED
+    source:
+      url: https://github.com/Hardi-St/MobaLedLib/blob/master/library.properties
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - ws2811
   - dmx512
@@ -19,7 +32,13 @@ sources:
     url: https://github.com/Hardi-St/MobaLedLib
     retrieved: '2026-11-18'
     notes: 'last commit 2026-11-13; release v3.5.0 2025-11-07'
+  supported_ics:
+    url: https://github.com/Hardi-St/MobaLedLib/blob/master/README.md
+    retrieved: '2026-11-18'
+  protocols:
+    url: https://github.com/Hardi-St/MobaLedLib/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: feature list + v3.0.0 changelog; DCC / Selectrix / LNet (LocoNet) / CAN are model-railway control buses, DMX512 is an output to DMX devices
 supported_ics:
   - WS2812
   - WS2811
-  - DMX512

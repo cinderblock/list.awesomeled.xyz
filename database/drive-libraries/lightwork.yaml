@@ -8,10 +8,22 @@ links:
 platforms:
   - macOS
   - Windows
-related_pixel_ics:
-  - dmx512
-supported_ics:
+protocols:
+  - Open Pixel Control
+  - PixelPusher
   - Art-Net
   - sACN
-  - PixelPusher
-  - Fadecandy
+related:
+  - type: compatible
+    ref: controllers/fadecandy
+    notes: Maps and drives Fadecandy controllers over Open Pixel Control (fcserver; 127.0.0.1 for a USB-connected Fadecandy)
+    source:
+      url: https://github.com/PWRFLcreative/Lightwork/blob/master/README.md
+      retrieved: '2026-11-18'
+related_pixel_ics:
+  - dmx512
+sources:
+  protocols:
+    url: https://github.com/PWRFLcreative/Lightwork/blob/master/LightWork_Mapper/Interface.pde
+    retrieved: '2026-11-18'
+    notes: "device enum FADECANDY, PIXELPUSHER, ARTNET, SACN; Fadecandy is reached through LightWork_Mapper/OPC.pde ('Simple Open Pixel Control client for Processing'). readme: 'ArtNet support is currently incomplete'"

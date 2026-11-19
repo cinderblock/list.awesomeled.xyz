@@ -1,6 +1,8 @@
 name: Orange PI DMX
 status: active
 creator: Arjan van Vught
+aliases:
+  - rpidmx512
 features: Tested and documented projects. Bare metal programming of low cost Orange Pi to Pixel, Artnet and DMX devices.
 hardware: Orange Pi
 language: C++
@@ -11,7 +13,25 @@ platforms:
   - Orange Pi
 protocols:
   - Art-Net
+  - sACN
+  - DDP
+  - OSC
   - DMX512
+  - RDM
+  - RDMNet LLRP
+related:
+  - type: related
+    ref: adapters/orange-pi-dmx
+    notes: The project's own 4-output (4x 4 universes) Orange Pi Zero pixel board, documented on orangepi-dmx.org (the adapters entry links that site and lists 4 outputs)
+    source:
+      url: https://www.orangepi-dmx.org/orange-pi/ws28xxapa102ucsx903tlc59711p9813-configuration/prototype-boards/multi-port-pixel-prototype-boards/4-output-4x-4-universes-for-new-implementations-please-use-the-8x-4u-board
+      retrieved: '2026-11-18'
+  - type: related
+    ref: controllers/www-orangepi-dmx-org
+    notes: The project's 8-output (8x 4 universes) Orange Pi Zero pixel board running this firmware (the controllers entry is named after the site and lists 8 outputs)
+    source:
+      url: https://www.orangepi-dmx.org/orange-pi/ws28xxapa102ucsx903tlc59711p9813-configuration/prototype-boards/multi-port-pixel-prototype-boards/8-output-8x-4-universes
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - dmx512
   - ws2801
@@ -25,8 +45,19 @@ sources:
     url: https://github.com/vanvught/rpidmx512
     retrieved: '2026-11-18'
     notes: 'last commit 2026-07-26'
+  supported_ics:
+    url: https://github.com/vanvught/rpidmx512/blob/master/lib-pixel/include/pixeltype.h
+    retrieved: '2026-11-18'
+    notes: LedType enum; TLC59711 (a separate driver) from the led_type list on https://www.orangepi-dmx.org/orange-pi/ws28xxapa102ucsx903tlc59711p9813-configuration, which reads 'WS2801, WS2811, WS2812, WS2812B, WS2813, WS2815, SK6812, SK6812W,…
+  protocols:
+    url: https://github.com/vanvught/rpidmx512/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme heading and firmware list; also SMPTE LTC, MIDI, TCNet (timecode/show control) and an Enttec USB Pro-compatible RDM controller. 'PP Real-time DMX Monitor {PixelPusher}' exists only in the Mac/Linux debugging builds
+  aliases:
+    url: https://www.orangepi-dmx.org/
+    retrieved: '2026-11-18'
+    notes: the project's GitHub repository name, linked from the site's home page
 supported_ics:
-  - DMX512
   - WS2801
   - WS2811
   - WS2812

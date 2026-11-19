@@ -1,6 +1,8 @@
 name: NightDriverStrip
 status: active
 creator: PlummersSoftwareLLC
+aliases:
+  - NightDriver
 features: 8 channels of WS2812B Python / C++ Pattern Creator
 hardware: ESP32
 language: C++ / Python
@@ -10,11 +12,23 @@ links:
   youtube: https://www.youtube.com/watch?v=UZxY_BLSsGg
 platforms:
   - ESP32
+related:
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: Base dependency for all builds (pinned to FastLED 3.10.3)
+    source:
+      url: https://github.com/PlummersSoftwareLLC/NightDriverStrip/blob/main/platformio.ini
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://github.com/PlummersSoftwareLLC/NightDriverStrip/releases
     retrieved: '2026-11-18'
     notes: 'release v2.0.1 published 2026-06-14'
+  supported_ics:
+    url: https://github.com/PlummersSoftwareLLC/NightDriverStrip/blob/main/README.md
+    retrieved: '2026-11-18'
+  aliases:
+    url: https://github.com/PlummersSoftwareLLC/NightDriverStrip/blob/main/README.md
+    retrieved: '2026-11-18'
 supported_ics:
   - WS2812B
-  - HUB75

@@ -12,5 +12,10 @@ links:
 platforms:
   - Arduino
   - ESP8266
+sources:
+  supported_ics:
+    url: https://xod.io/libs/xod-dev/ws2812/
+    retrieved: '2026-11-18'
+    notes: xod-dev/ws2812 library page (v0.37.3), read via WebFetch
 supported_ics:
   - WS2812

@@ -1,6 +1,8 @@
 name: LED Strip Effects Generator
 status: unknown
 creator: Adriano
+aliases:
+  - Neopixel-Effect-Generator
 features: Create your animation for the Neopixel LED Strip and press "Generate Arduino Code" to get it as code.
 hardware: Arduino
 language: JavaScript
@@ -12,5 +14,21 @@ other_links:
 platforms:
   - Web
   - Arduino
+related:
+  - type: uses
+    ref: drive-libraries/neopixel
+    notes: The generated Arduino sketch drives the strips through the Adafruit NeoPixel library
+    source:
+      url: https://github.com/Adrianotiger/Neopixel-Effect-Generator/blob/master/scripts/arduino.js
+      retrieved: '2026-11-18'
+sources:
+  supported_ics:
+    url: https://github.com/Adrianotiger/Neopixel-Effect-Generator/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: "'How create the hardware?' section"
+  aliases:
+    url: https://github.com/Adrianotiger/Neopixel-Effect-Generator/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme title / repository name; the web page itself is titled 'LED Strip Effects generator'
 supported_ics:
   - WS2812

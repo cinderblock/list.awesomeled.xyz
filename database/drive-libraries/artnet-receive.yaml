@@ -1,6 +1,8 @@
 name: Artnet Receive
 status: active
 creator: natcl
+aliases:
+  - Artnet
 hardware: Arduino/Teensie/ESP8266
 language: C++
 license: MIT
@@ -11,10 +13,36 @@ platforms:
   - Teensy
   - ESP8266
   - ESP32
+protocols:
+  - Art-Net
+related:
+  - type: uses
+    ref: drive-libraries/neopixel
+    notes: Example sketches only (ArtnetNeoPixel, ArtnetNeoPixelSD, ArtnetNeoPixelRGBW) drive pixels through Adafruit NeoPixel
+    source:
+      url: https://github.com/natcl/Artnet/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/octows2811
+    notes: Example sketches only (ArtnetOctoWS2811, ArtnetOctoWS2811Sync) drive pixels through OctoWS2811
+    source:
+      url: https://github.com/natcl/Artnet/blob/master/README.md
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - ws2811
   - dmx512
+sources:
+  supported_ics:
+    url: https://github.com/natcl/Artnet/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Examples section; sk6812RGBW from https://github.com/natcl/Artnet/blob/master/examples/NeoPixel/ArtnetNeoPixelRGBW/ArtnetNeoPixelRGBW.ino header comment.
+  protocols:
+    url: https://github.com/natcl/Artnet/blob/master/README.md
+    retrieved: '2026-11-18'
+  aliases:
+    url: https://github.com/natcl/Artnet/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: "Readme title / repository name; library.json names it 'Art-Net'. Reviewer: the alias equals the protocol spelling, so check it cannot mis-resolve"
 supported_ics:
-  - WS2811
-  - WS2812
-  - DMX
+  - ws2811
+  - sk6812RGBW

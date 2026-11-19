@@ -1,8 +1,9 @@
 name: FAB_LED
 creator: Dan Truong (sonyhome)
-features: Ws2812/Apa102/neopixel/dotstar etc. Compact code&data, Separates
-  driver from pixel array, no assembly code, support palette and up to 8 strips
-  in parallel.
+aliases:
+  - FabLED
+  - Fast Arduino Bitbang (FAB) LED library
+features: Ws2812/Apa102/neopixel/dotstar etc. Compact code&data, Separates driver from pixel array, no assembly code, support palette and up to 8 strips in parallel.
 hardware: Arduino
 language: C++
 license: GPL-2.0
@@ -12,9 +13,18 @@ platforms:
   - Arduino
 related_pixel_ics:
   - sk6812-5050
+sources:
+  supported_ics:
+    url: https://github.com/sonyhome/FAB_LED/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme feature list; APA-102 from FAB_LED.h (https://github.com/sonyhome/FAB_LED/blob/master/FAB_LED.h, 'class apa102' bit-banged SPI), although the readme still says APA102 is 'in plan'
+  aliases:
+    url: https://github.com/sonyhome/FAB_LED/blob/master/library.properties
+    retrieved: '2026-11-18'
 supported_ics:
   - WS2812
   - WS2812B
   - APA104
   - APA106
   - SK6812
+  - APA-102

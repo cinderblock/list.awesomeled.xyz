@@ -11,6 +11,27 @@ platforms:
   - ESP8266
   - ESP32
   - Raspberry Pi Pico
+protocols:
+  - Art-Net
+related:
+  - type: variant
+    ref: drive-libraries/artnet-receive
+    notes: Wi-Fi port of natcl/Artnet
+    source:
+      url: https://github.com/rstephan/ArtnetWifi/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: Example sketch ArtnetWifiFastLED drives the LEDs through FastLED
+    source:
+      url: https://github.com/rstephan/ArtnetWifi/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/neopixel
+    notes: Example sketch ArtnetWifiNeoPixel drives the LEDs through Adafruit NeoPixel
+    source:
+      url: https://github.com/rstephan/ArtnetWifi/blob/master/README.md
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - dmx512
   - ws2811
@@ -19,7 +40,13 @@ sources:
     url: https://github.com/rstephan/ArtnetWifi/releases
     retrieved: '2026-11-18'
     notes: 'release 1.6.3 published 2026-07-28'
+  supported_ics:
+    url: https://github.com/rstephan/ArtnetWifi/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Examples section (ArtnetWifiFastLED, ArtnetWifiNeoPixel); the library itself only handles Art-Net
+  protocols:
+    url: https://github.com/rstephan/ArtnetWifi/blob/master/README.md
+    retrieved: '2026-11-18'
 supported_ics:
-  - DMX
-  - WS2811
   - WS2812
+  - WS2811

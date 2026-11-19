@@ -1,8 +1,7 @@
 name: Visuino
 status: active
 creator: Mitov Software
-features: Windows Graphical Development tool, simple no-coding project
-  development. Good support for WS2812.
+features: Windows Graphical Development tool, simple no-coding project development. Good support for WS2812.
 hardware: Arduino/Esp66/32/ RasPi/MicroBit/Teensy
 links:
   repo: http://visuino.com/
@@ -18,5 +17,9 @@ sources:
     url: https://www.visuino.com/visuino-downloads/
     retrieved: '2026-11-18'
     notes: 'version 8.0.0.167 download; Pro version sold'
+  supported_ics:
+    url: https://www.visuino.com/wiki/index.php/NeoPixels
+    retrieved: '2026-11-18'
+    notes: "Visuino wiki 'NeoPixels' component page (read via WebFetch); WS2812 is named in its linked resource title 'Arduino: NeoPixels (WS2812) made easy - Indexed pixels'"
 supported_ics:
   - WS2812

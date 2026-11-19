@@ -12,8 +12,20 @@ platforms:
   - Linux
   - macOS
   - Raspberry Pi
+protocols:
+  - sACN
+  - DDP
+  - DMX512
+  - Adalight
+  - TPM2
+  - Keyboard Visualizer
+  - OpenRGB SDK
 sources:
   status:
     url: https://gitlab.com/CalcProgrammer1/OpenRGB/-/releases
     retrieved: '2026-11-18'
     notes: 'release 1.1 published 2026-10-16'
+  protocols:
+    url: https://gitlab.com/CalcProgrammer1/OpenRGB/-/tree/master/Controllers
+    retrieved: '2026-11-18'
+    notes: 'controller sources: E131Controller/RGBController_E131.cpp, DDPController/RGBController_DDP.cpp, DMXController/RGBController_DMX.cpp, LEDStripController/LEDStripController.h…'

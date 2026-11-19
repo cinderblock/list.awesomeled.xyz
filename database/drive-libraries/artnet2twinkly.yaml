@@ -1,6 +1,8 @@
 name: Artnet2twinkly
 status: discontinued
 creator: John Lord
+aliases:
+  - Artnet 2 Twinkly
 dead_links:
   - url: http://artnet2twinkly.com/
     archive: https://web.archive.org/web/20240705183448/http://www.artnet2twinkly.com/artnet2twinkly.html
@@ -15,8 +17,28 @@ platforms:
   - Windows
 protocols:
   - Art-Net
+related:
+  - type: compatible
+    ref: commercial-systems/twinkly
+    notes: Bridges Art-Net to Twinkly strings (gen 1 devices such as Twinkly Wall, Pro-Wired devices)
+    source:
+      url: https://web.archive.org/web/20240705183448/http://www.artnet2twinkly.com/artnet2twinkly.html
+      retrieved: '2026-11-18'
+  - type: compatible
+    ref: pattern-drivers/xlights
+    notes: 'Built around xLights: imports Twinkly layouts as xLights custom models and takes its Art-Net stream'
+    source:
+      url: https://web.archive.org/web/20240705183448/http://www.artnet2twinkly.com/artnet2twinkly.html
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://web.archive.org/web/20240705183448/http://www.artnet2twinkly.com/artnet2twinkly.html
     retrieved: '2026-11-18'
     notes: 'developer: "Artnet 2 Twinkly PC App in its current form is being retired"; the domain lapsed in early 2025 (parked, now NXDOMAIN)'
+  protocols:
+    url: https://web.archive.org/web/20240705183448/http://www.artnet2twinkly.com/artnet2twinkly.html
+    retrieved: '2026-11-18'
+    notes: Wayback snapshot (live site dead; a Feb 2025 snapshot already redirects to a parked '/lander' page)
+  aliases:
+    url: https://web.archive.org/web/20240705183448/http://www.artnet2twinkly.com/artnet2twinkly.html
+    retrieved: '2026-11-18'

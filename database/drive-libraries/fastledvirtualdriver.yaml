@@ -7,5 +7,12 @@ links:
   repo: https://github.com/hpwit/FASTLEDVIRTUALDRIVER
 platforms:
   - ESP32
+related:
+  - type: variant
+    ref: drive-libraries/fastled
+    notes: A copy of FastLED 3.2 with hpwit's ESP32 I2S 'virtual pin' driver added (shift registers give 5 strips per ESP32 pin)
+    source:
+      url: https://github.com/hpwit/FASTLEDVIRTUALDRIVER/blob/master/examples/VirtualdriverExamples/VirtualDrivers5pins/VirtualDrivers5pins.ino
+      retrieved: '2026-11-18'
 supported_ics:
   - WS2812

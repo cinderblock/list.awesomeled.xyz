@@ -1,6 +1,8 @@
 name: NeoPixel
 status: active
 creator: Adafruit
+aliases:
+  - Adafruit_NeoPixel
 features: WS281x, SK6812
 hardware: many
 language: C++
@@ -21,6 +23,14 @@ sources:
     url: https://github.com/adafruit/Adafruit_NeoPixel/releases
     retrieved: '2026-11-18'
     notes: 'release 1.15.5 published 2026-05-12; last commit 2026-11-12'
+  supported_ics:
+    url: https://github.com/adafruit/Adafruit_NeoPixel/blob/master/Adafruit_NeoPixel.h
+    retrieved: '2026-11-18'
+    notes: file header comment; the readme's 'Supported Chipsets' list is microcontrollers, not pixel ICs
+  aliases:
+    url: https://github.com/adafruit/Adafruit_NeoPixel/blob/master/library.properties
+    retrieved: '2026-11-18'
+    notes: library.properties name; 'Adafruit_NeoPixel' is the repository/folder/class name used in readme install steps
 supported_ics:
   - WS2811
   - WS2812

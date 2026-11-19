@@ -1,6 +1,8 @@
 name: BLIP
 status: active
 creator: Benjamin Kuperberg
+aliases:
+  - Beautiful Light In Props
 features: OSCQuery Enabled, ArtNet multi-ledstrip controller and multi purpose firmware (GPIO, motors, etc.) with a unified control system. ESPNow compatible
 hardware: ESP32
 language: C++
@@ -11,11 +13,39 @@ platforms:
   - ESP32
 protocols:
   - Art-Net
+  - DMX512
+  - OSC
+  - ESP-NOW
+related:
+  - type: uses
+    ref: drive-libraries/artnetwifi
+    notes: Art-Net input through rstephan's ArtnetWifi
+    source:
+      url: https://github.com/Golden-Geek/BLIP/blob/main/configs/components.ini
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: LED strip component outputs through FastLED (or NeoPixelBus, per board config)
+    source:
+      url: https://github.com/Golden-Geek/BLIP/blob/main/configs/components.ini
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://github.com/Golden-Geek/BLIP
     retrieved: '2026-11-18'
     notes: 'tag 1.2.3 committed 2026-10-01'
+  supported_ics:
+    url: https://github.com/Golden-Geek/BLIP/blob/main/src/Component/components/ledstrip/LedHelpers.h
+    retrieved: '2026-11-18'
+    notes: LED_MODEL_* switch (FastLED and NeoPixelBus paths); board configs in configs/creators.ini set LED_MODEL_WS2812B / WS2816 / SK9822 / HD108. readme has no LED information
+  protocols:
+    url: https://github.com/Golden-Geek/BLIP/blob/main/configs/components.ini
+    retrieved: '2026-11-18'
+    notes: "component build flags; DMX is a wired UART receiver at 250000 baud (src/Component/components/dmx/dmx.h: '#define DMX_BUF_SIZE 513 // Start Code + 512 Channels'); OSC via CNMAT/OSC"
+  aliases:
+    url: https://github.com/Golden-Geek/BLIP/blob/main/README.md
+    retrieved: '2026-11-18'
+    notes: acronym expansion in the readme title
 supported_ics:
   - WS2812B
   - WS2816

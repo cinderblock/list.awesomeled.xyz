@@ -1,13 +1,26 @@
 name: ArtNet to TMP2 Convertor
 status: unknown
 creator: ATCE
+aliases:
+  - ATCE
+  - Artnet to TPM2 Converter + Editor
 features: Wireshark captured artnet stream convert to TMP2(Jinx native) file
 language: Visual Basic
 links:
   repo: http://www.tlhome.de/ATCE.htm
 platforms:
   - Windows
+protocols:
+  - Art-Net
+  - TPM2
 related_pixel_ics:
   - dmx512
-supported_ics:
-  - DMX
+sources:
+  protocols:
+    url: http://www.tlhome.de/ATCE.htm
+    retrieved: '2026-11-18'
+    notes: German feature list; TPM2 here is the TPM2 file format (TPM2-RGB / TPM2-RGBW files)
+  aliases:
+    url: http://www.tlhome.de/ATCE.htm
+    retrieved: '2026-11-18'
+    notes: page heading

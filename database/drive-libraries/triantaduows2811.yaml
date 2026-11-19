@@ -9,7 +9,25 @@ links:
   repo: https://github.com/wramsdell/TriantaduoWS2811
 platforms:
   - Teensy
+related:
+  - type: host
+    ref: microboards/teensy-4-0
+    notes: Built for the Teensy 4.0 (FlexIO + DMA, external shift registers)
+    source:
+      url: https://github.com/wramsdell/TriantaduoWS2811/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: related
+    ref: drive-libraries/octows2811
+    notes: Inspired by and structured like OctoWS2811 (a separate project, not a successor or variant), with 32 outputs instead of 8
+    source:
+      url: https://github.com/wramsdell/TriantaduoWS2811/blob/master/README.md
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - ws2811
+sources:
+  supported_ics:
+    url: https://github.com/wramsdell/TriantaduoWS2811/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme says 'WS28XX streams'; WS2811 is the only part named
 supported_ics:
   - WS2811

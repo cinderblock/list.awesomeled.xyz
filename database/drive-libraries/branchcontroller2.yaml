@@ -1,6 +1,8 @@
 name: branchController2
 status: unknown
 creator: jspolsky
+aliases:
+  - Branch Controller
 features: Teensy 3.2 branch controller for up to 8 separate LED strips, based on instructions received over TCP-IP.
 hardware: Teensy
 language: C++
@@ -8,6 +10,45 @@ links:
   repo: https://github.com/jspolsky/branchController2
 platforms:
   - Teensy
+protocols:
+  - Open Pixel Control
+related:
+  - type: host
+    ref: microboards/teensy-3-2
+    notes: Runs on a Teensy 3.2 (PlatformIO board teensy31)
+    source:
+      url: https://github.com/jspolsky/branchController2/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/octows2811
+    notes: 8 parallel outputs through a resizable variant of FastLED's OctoWS2811 controller
+    source:
+      url: https://github.com/jspolsky/branchController2/blob/master/lib/ResizeableOctoWS2811Controller/ResizeableOctoWS2811Controller.h
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: Brightness, power limiting, colour correction and output via FastLED
+    source:
+      url: https://github.com/jspolsky/branchController2/blob/master/lib/ResizeableOctoWS2811Controller/ResizeableOctoWS2811Controller.h
+      retrieved: '2026-11-18'
+  - type: compatible
+    ref: controllers/fadecandy
+    notes: Speaks Open Pixel Control, so OPC apps can drive it as if it were a Fadecandy
+    source:
+      url: https://github.com/jspolsky/branchController2/blob/master/README.md
+      retrieved: '2026-11-18'
+sources:
+  supported_ics:
+    url: https://github.com/jspolsky/branchController2/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme intro; it explicitly does not handle APA102c-type (clocked) strips
+  protocols:
+    url: https://github.com/jspolsky/branchController2/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: "'Open Pixel Control' section (TCP port 7890)"
+  aliases:
+    url: https://github.com/jspolsky/branchController2/blob/master/README.md
+    retrieved: '2026-11-18'
 supported_ics:
-  - WS2812B
+  - WS2812b
   - WS2815

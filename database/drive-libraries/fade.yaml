@@ -1,6 +1,8 @@
 name: Fade
 status: unknown
 creator: Eric Gunnerson
+aliases:
+  - Fade Animation System
 features: Programming language based WS2812 and PWM LED ESP 32 with Windows based programming interface
 hardware: ESP32
 language: C++
@@ -10,5 +12,13 @@ links:
 platforms:
   - ESP32
   - Windows
+sources:
+  supported_ics:
+    url: https://github.com/ericgu/Fade/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme intro; also on http://eagledecorations.com/FadeAnimationSystem.html ('addressable WS2812 LEDs (aka "Neopixels")')
+  aliases:
+    url: http://eagledecorations.com/FadeAnimationSystem.html
+    retrieved: '2026-11-18'
 supported_ics:
   - WS2812

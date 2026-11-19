@@ -9,7 +9,55 @@ links:
   repo: https://github.com/ssilverman/TeensyDMX
 platforms:
   - Teensy
+protocols:
+  - DMX512-A
+related:
+  - type: host
+    ref: microboards/teensy-lc
+    notes: 'Supported: Teensy 3, Teensy LC, Teensy 4'
+    source:
+      url: https://github.com/ssilverman/TeensyDMX/blob/master/src/TeensyDMX.h
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-3-2
+    notes: 'Supported: Teensy 3, Teensy LC, Teensy 4'
+    source:
+      url: https://github.com/ssilverman/TeensyDMX/blob/master/src/TeensyDMX.h
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-3-5
+    notes: 'Supported: Teensy 3, Teensy LC, Teensy 4'
+    source:
+      url: https://github.com/ssilverman/TeensyDMX/blob/master/src/TeensyDMX.h
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-3-6
+    notes: 'Supported: Teensy 3, Teensy LC, Teensy 4'
+    source:
+      url: https://github.com/ssilverman/TeensyDMX/blob/master/src/TeensyDMX.h
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-4-0
+    notes: 'Supported: Teensy 3, Teensy LC, Teensy 4'
+    source:
+      url: https://github.com/ssilverman/TeensyDMX/blob/master/src/TeensyDMX.h
+      retrieved: '2026-11-18'
+  - type: host
+    ref: microboards/teensy-4-1
+    notes: 'Supported: Teensy 3, Teensy LC, Teensy 4 (Receiver.cpp also special-cases ARDUINO_TEENSY41)'
+    source:
+      url: https://github.com/ssilverman/TeensyDMX/blob/master/src/TeensyDMX.h
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/fastled
+    notes: 'Example sketch only (FastLEDController: DMX in -> pixels out via FastLED)'
+    source:
+      url: https://github.com/ssilverman/TeensyDMX/blob/master/README.md
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - dmx512
-supported_ics:
-  - DMX512
+sources:
+  protocols:
+    url: https://github.com/ssilverman/TeensyDMX/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: its synchronous mode is for building protocols such as RDM / SIP on top ('for example, for SIP and RDM', library.properties)

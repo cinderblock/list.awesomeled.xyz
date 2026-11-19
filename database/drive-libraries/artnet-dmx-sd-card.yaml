@@ -1,6 +1,8 @@
 name: ArtNet_DMX_SD_Card
 status: end-of-life
 creator: tangophi
+aliases:
+  - ArtNet_DMX_SD_Card_ESP8266
 features: store DMX frames received through Artnet on a nodemcu or a ESP8266/ESP12 module to a SD card
 hardware: NodeMcu / ESP8266/32 + SD card
 language: C++
@@ -11,8 +13,39 @@ platforms:
   - ESP8266
 protocols:
   - Art-Net
+related:
+  - type: uses
+    ref: drive-libraries/artnetwifi
+    notes: Receives Art-Net through rstephan's ArtnetWifi library (required library)
+    source:
+      url: https://github.com/tangophi/Artnet_DMX_SD_Card/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: uses
+    ref: drive-libraries/neopixel
+    notes: Drives the WS2812B strip through Adafruit_NeoPixel (required library)
+    source:
+      url: https://github.com/tangophi/Artnet_DMX_SD_Card/blob/master/README.md
+      retrieved: '2026-11-18'
+  - type: related
+    ref: drive-libraries/artnet-receive
+    notes: Based on natcl/Artnet's ArtnetNeoPixelSD record/playback example
+    source:
+      url: https://github.com/tangophi/Artnet_DMX_SD_Card/blob/master/README.md
+      retrieved: '2026-11-18'
 related_pixel_ics:
   - dmx512
+sources:
+  supported_ics:
+    url: https://github.com/tangophi/Artnet_DMX_SD_Card/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Hardware section
+  protocols:
+    url: https://github.com/tangophi/Artnet_DMX_SD_Card/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme intro
+  aliases:
+    url: https://github.com/tangophi/Artnet_DMX_SD_Card/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: Readme title
 supported_ics:
   - WS2812B
-  - DMX

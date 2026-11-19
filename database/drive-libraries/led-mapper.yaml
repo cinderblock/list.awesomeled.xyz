@@ -1,8 +1,7 @@
 name: LED Mapper
 status: active
 creator: Jason Coon
-features: An online tool to generate and visualize maps for irregular and/or
-  gapped LED layouts, for use with FastLED, Pixelblaze and other libraries.
+features: An online tool to generate and visualize maps for irregular and/or gapped LED layouts, for use with FastLED, Pixelblaze and other libraries.
 hardware: Arduino/ Esp 66/32
 language: JavaScript
 license: GPL-3.0
@@ -10,6 +9,19 @@ links:
   repo: https://github.com/jasoncoon/led-mapper
 platforms:
   - Web
+related:
+  - type: related
+    ref: drive-libraries/fastled
+    notes: Generates FastLED coordinate maps (coordsX/coordsY/angles/radii) for irregular layouts
+    source:
+      url: https://github.com/jasoncoon/led-mapper/blob/main/README.md
+      retrieved: '2026-11-18'
+  - type: related
+    ref: pattern-drivers/pixelblaze
+    notes: Also generates a Pixelblaze 2D XY pixel map
+    source:
+      url: https://github.com/jasoncoon/led-mapper/blob/main/README.md
+      retrieved: '2026-11-18'
 sources:
   status:
     url: https://github.com/jasoncoon/led-mapper
