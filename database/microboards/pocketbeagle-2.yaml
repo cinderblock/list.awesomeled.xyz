@@ -1,0 +1,81 @@
+name: PocketBeagle 2
+status: active
+release_year: 2025
+creator:
+  name: Beagleboard.org
+  page: https://www.beagleboard.org/boards/pocketbeagle-2
+notes: >-
+  Successor to the PocketBeagle in the same 55 × 35 mm size, with USB-C, pre-soldered headers, an
+  MSPM0 MCU for ADC/EEPROM and a LiPo charger. Rev A1 (in production) uses the quad-core AM6254; Rev
+  A0 used the AM6232 and is out of production. The P1/P2 cape headers are kept compatible with the
+  original PocketBeagle "as much as possible".
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+compute:
+  soc: AM6254
+  cpu: 4× ARM Cortex-A53
+  isa: ARMv8-A
+  clock_speed: 1.4GHz
+  ram: 512MB
+  linux: true
+connectivity:
+  usb: USB-C
+  serial: true
+datasheet:
+  url: https://docs.beagleboard.org/pocketbeagle-2.pdf
+io:
+  storage: microSD
+  bms: 1S
+  imu: false
+related:
+  - type: predecessor
+    ref: microboards/pocketbeagle
+    notes: Upgraded PocketBeagle (AM3358 Cortex-A8 to AM6254 Cortex-A53); cape headers kept compatible as much as possible
+    source:
+      url: https://docs.beagleboard.org/boards/pocketbeagle-2/01-introduction.html
+      retrieved: '2026-11-18'
+      notes: "'The board is intended to provide functionality well beyond classic PocketBeagle, while still providing compatibility with PocketBeagle's expansion headers as much as possible.' Docs index: 'PocketBeagle 2 is an upgraded version of the widely popular PocketBeagle'"
+sources:
+  status:
+    url: https://docs.beagleboard.org/boards/pocketbeagle-2/01-introduction.html
+    retrieved: '2026-11-18'
+    notes: "Revision note: 'A1(Current/In-production) w/ AM6254 SoC. A0(Out-of-production) w/ AM6232 SoC.' Board page lists Mouser, Digi-Key and Farnell"
+  release_year:
+    url: https://www.cnx-software.com/2025/02/18/pocketbeagle-2-sbc-combines-ti-am6232-soc-with-mspm0-mcu/
+    retrieved: '2026-11-18'
+    notes: "News report of 2025-02-18: 'Beagleboard has recently announced the PocketBeagle 2'"
+  compute.soc:
+    url: https://docs.beagleboard.org/boards/pocketbeagle-2/01-introduction.html
+    retrieved: '2026-11-18'
+    notes: "Comparison table: SoC AM6254, Cortex-A53 (64-bit), '4 x 1.4GHz', 512MB DDR4 (classic PocketBeagle: AM3358, 1 x 1GHz Cortex-A8)"
+  compute.isa:
+    url: https://en.wikipedia.org/wiki/ARM_Cortex-A53
+    retrieved: '2026-11-18'
+    notes: "Reference source: Cortex-A53 is 'a CPU microarchitecture of the ARMv8-A family'"
+  connectivity.usb:
+    url: https://docs.beagleboard.org/boards/pocketbeagle-2/01-introduction.html
+    retrieved: '2026-11-18'
+    notes: "'The new design comes with pre-soldered headers, 3-pin JST-SH 1.00mm uart debug port, USB-C port, MSPM0L1105, 512MB RAM, and LiPo Battery charger.'"
+  connectivity.serial:
+    url: https://docs.beagleboard.org/boards/pocketbeagle-2/01-introduction.html
+    retrieved: '2026-11-18'
+    notes: "'3 pin 3.3V JST-SH 1.00mm UART debug port (RPI debug probe compatible)'"
+  power.voltage:
+    url: https://docs.beagleboard.org/boards/pocketbeagle-2/01-introduction.html
+    retrieved: '2026-11-18'
+    notes: "'Power Source: USB C or Cape Header VIN (5V @ 1A)'"
+  power.gpio_voltage:
+    url: https://docs.beagleboard.org/boards/pocketbeagle-2/04-expansion.html
+    retrieved: '2026-11-18'
+    notes: "'All signals on the expansion headers are 3.3V unless otherwise indicated.' 'Do not connect 5V logic level signals to these pins or the board will be damaged.'"
+  io.bms:
+    url: https://docs.beagleboard.org/boards/pocketbeagle-2/03-design-and-specifications.html
+    retrieved: '2026-11-18'
+    notes: "'On PocketBeagle 2, the BQ21040 is used to manage the charging of a single-cell Li-Ion or Li-Polymer battery.'"
+  notes:
+    url: https://docs.beagleboard.org/boards/pocketbeagle-2/04-expansion.html
+    retrieved: '2026-11-18'
+    notes: "'PocketBeagle 2 P1 & P2 cape headers are designed to be compatible with PocketBeagle classic as much as possible.' PCB '55 x 35 mm' and 'MSPM0 MCU to provide ADC and EEPROM functionality' from the introduction chapter; CNX Software: it keeps 'the same compact (55 x 35mm) form factor'"

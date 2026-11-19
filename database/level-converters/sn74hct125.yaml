@@ -1,0 +1,56 @@
+name: SN74HCT125
+status: active
+creator: Texas Instruments
+notes: >-
+  Four independent buffers with TTL-voltage-compatible inputs and 3-state outputs on a 4.5-5.5 V
+  supply, so 3.3 V logic drives 5 V outputs. Evil Genius Labs uses it as the level shifter on its
+  4-output Wemos D1 Mini shield.
+aliases:
+  - 74HCT125
+  - SN74HCT125N
+  - SN74HCT125NE4
+  - SN74HCT125D
+  - SN74HCT125DR
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
+electrical:
+  max_voltage: 5.5V
+  max_current: 6mA
+io:
+  channels: 4
+  buffered: true
+links:
+  product: https://www.ti.com/product/SN74HCT125
+related:
+  - type: variant
+    ref: level-converters/sn74ahct125n
+    notes: Same quad 3-state buffer, pinout and TTL-compatible inputs in TI's faster AHCT family
+    source:
+      url: https://www.ti.com/lit/ds/symlink/sn74ahct125.pdf
+      retrieved: '2026-11-18'
+      notes: "SNx4AHCT125 'Quadruple Bus Buffer Gates With 3-State Outputs', 'Inputs are TTL-voltage compatible'; the SNx4HCT125 datasheet (SCLS069G) has the same title"
+sources:
+  status:
+    url: https://www.ti.com/product/SN74HCT125
+    retrieved: '2026-11-18'
+    notes: "TI product page status ACTIVE ('4-ch, 4.5-V to 5.5-V buffers with TTL-compatible CMOS inputs and 3-state outputs')"
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS069G (revised October 2022): Package Option Addendum (N, NE4 = PDIP-14 'Active'; DR = SOIC-14 'Active'; D and DT = SOIC-14 'Obsolete'). '74HCT125' and 'SN74HCT125N' are how Evil Genius Labs names it"
+  electrical.max_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
+    retrieved: '2026-11-18'
+    notes: "'Operating voltage range of 4.5 V to 5.5 V' (absolute maximum 7 V)"
+  electrical.max_current:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
+    retrieved: '2026-11-18'
+    notes: "'±6-mA output drive at 5 V'"
+  io.channels:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
+    retrieved: '2026-11-18'
+    notes: "'The SNx4HCT125 contains four independent buffers with TTL-compatible inputs and 3-state outputs.'"
+  notes:
+    url: https://www.evilgeniuslabs.org/mini-wifi-led-controller
+    retrieved: '2026-11-18'
+    notes: "'The shield includes the slightly smaller 74HCT125 level shifter. It belongs to the same family as the 74HCT245 ... This shifts the 3.3V logic level of the ESP8266 to the 5V expected by addressable RGB LEDs.' Parts list: 'SN74HCT125N Level Shifter'"

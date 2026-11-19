@@ -45,6 +45,14 @@ price_source:
   retrieved: '2026-11-18'
   url: https://pip-assets.raspberrypi.com/categories/532-raspberry-pi-3-model-b/documents/RP-008338-DS-2-raspberry-pi-3-b-plus-product-brief.pdf
   vendor: Raspberry Pi
+related:
+  - type: predecessor
+    ref: microboards/raspberry-pi-3b
+    notes: 'The 3B+ is the upgraded 3B: 1.4 GHz BCM2837B0, dual-band Wi-Fi, faster Ethernet, PoE header'
+    source:
+      url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+      retrieved: '2026-11-18'
+      notes: "'Raspberry Pi 3B+ is the enhanced third-generation (Raspberry Pi 3B) classic SBC'"
 sources:
   status:
     url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b-plus/

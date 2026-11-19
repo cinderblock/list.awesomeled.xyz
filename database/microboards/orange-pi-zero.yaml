@@ -1,0 +1,84 @@
+name: Orange Pi Zero
+release_year: 2016
+creator:
+  name: Shenzhen Xunlong Software
+  page: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero.html
+notes: >-
+  48 × 46 mm Allwinner quad-core board with 100 Mbit Ethernet, Wi-Fi, a 26-pin header and a 13-pin
+  header (USB, IR, audio), powered over micro-USB. The 2019 Orange Pi Zero LTS (v1.5) is the same
+  board with lower power draw and temperature.
+power:
+  voltage:
+    min: 5V
+    max: 5V
+compute:
+  soc: Allwinner H2+
+  cpu: 4× ARM Cortex-A7
+  isa: ARMv7-A
+  clock_speed: 1.2GHz
+  flash: 2MB # SPI NOR
+  ram:
+    - 256MB
+    - 512MB
+  linux: true
+connectivity:
+  wifi:
+    - 2.4GHz
+  ethernet: 100BASE-TX
+  usb: OTG x1, 2.0 x1
+  poe: true # passive PoE, off by default (enabled with solder jumpers)
+io:
+  storage: microSD
+related:
+  - type: variant
+    ref: microboards/orange-pi-lts
+    notes: The Zero LTS (v1.5, 2019) keeps the same specifications with lower power draw and temperature
+    source:
+      url: https://www.cnx-software.com/2019/07/20/orange-pi-zero-lts-allwinner-h2-sbc-gets-more-efficient-and-cooler/
+      retrieved: '2026-11-18'
+      notes: "'improvements in the design in order to reduce power consumption, and lower the board's temperature'; spec list headed 'Orange Pi Zero LTS v1.5 specifications'. Both orangepi.org product pages give the same 48 × 46 mm size and spec table"
+sources:
+  release_year:
+    url: https://www.cnx-software.com/2016/11/02/orange-pi-zero-allwinner-h2-board-with-wifi-and-ethernet-is-up-for-sale-for-7/
+    retrieved: '2026-11-18'
+    notes: News report of 2016-11-02 ('is now available for sale on Aliexpress')
+  compute.soc:
+    url: https://www.cnx-software.com/2016/11/02/orange-pi-zero-allwinner-h2-board-with-wifi-and-ethernet-is-up-for-sale-for-7/
+    retrieved: '2026-11-18'
+    notes: "'Allwinner H2+ quad core Cortex A7 processor @ 1.2 GHz with Mali-400MP2 GPU @ 600 MHz'. The maker's page writes 'AllWinner H2 SoC' and lists 'H2/H3' in its spec table"
+  compute.isa:
+    url: https://en.wikipedia.org/wiki/ARM_Cortex-A7
+    retrieved: '2026-11-18'
+    notes: Reference source for the Cortex-A7 instruction set (ARMv7-A)
+  compute.flash:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero.html
+    retrieved: '2026-11-18'
+    notes: "'Onboard Storage: TF card (Max. 32GB)/ 2MB Spi Flash'"
+  compute.ram:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero.html
+    retrieved: '2026-11-18'
+    notes: "'256MB/512MB DDR3 SDRAM(Share with GPU)(256MB version is Standard version)'"
+  connectivity.wifi:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero.html
+    retrieved: '2026-11-18'
+    notes: Spec table, onboard Wi-Fi row 'XR819, IEEE 802.11 b/g/n'
+  connectivity.ethernet:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero.html
+    retrieved: '2026-11-18'
+    notes: "'10/100M Ethernet RJ45 POE is default off.'"
+  connectivity.usb:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero.html
+    retrieved: '2026-11-18'
+    notes: "'Only One USB 2.0 HOST, one USB 2.0 OTG'"
+  connectivity.poe:
+    url: https://www.cnx-software.com/2016/11/02/orange-pi-zero-allwinner-h2-board-with-wifi-and-ethernet-is-up-for-sale-for-7/
+    retrieved: '2026-11-18'
+    notes: "'5V via micro USB port or optional PoE'; maker's page: 'POE is default off'"
+  power.voltage:
+    url: https://www.cnx-software.com/2016/11/02/orange-pi-zero-allwinner-h2-board-with-wifi-and-ethernet-is-up-for-sale-for-7/
+    retrieved: '2026-11-18'
+    notes: "'5V via micro USB port or optional PoE'; maker's page: 'USB OTG can supply power'"
+  notes:
+    url: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero.html
+    retrieved: '2026-11-18'
+    notes: "'Product size 48 mm × 46mm'; '26 Pins Header, 13 Pins Header, with 2x USB, IR pin, AUDIO(MIC, AV)'"

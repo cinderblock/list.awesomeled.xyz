@@ -1,0 +1,94 @@
+name: Raspberry Pi 5
+status: active
+release_year: 2023
+creator:
+  name: Raspberry Pi Foundation
+  page: https://www.raspberrypi.com/products/raspberry-pi-5/
+notes: >-
+  Fifth-generation classic Raspberry Pi. Most I/O, including the GPIO header, runs through Raspberry
+  Pi's own RP1 I/O controller instead of the SoC. Adds a PCIe 2.0 x1 connector, a power button and a
+  battery-backed RTC.
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+compute:
+  soc: BCM2712
+  cpu: 4× ARM Cortex-A76
+  isa: ARMv8-A # ARMv8.2-A (Cortex-A76)
+  clock_speed: 2.4GHz
+  ram:
+    - 1GB
+    - 2GB
+    - 4GB
+    - 8GB
+    - 16GB
+  linux: true
+connectivity:
+  wifi:
+    - 2.4GHz
+    - 5GHz
+  ethernet: 1000BASE-T
+  bluetooth: '5.0'
+  usb: 3.0 x2, 2.0 x2
+  serial: true
+  poe: add-on # PoE+ HAT
+datasheet:
+  url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+io:
+  storage: microSD
+  imu: false
+related:
+  - type: predecessor
+    ref: microboards/raspberry-pi-4-model-b
+    notes: Successor to the Pi 4 Model B with 2-3x its CPU performance
+    source:
+      url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+      retrieved: '2026-11-18'
+      notes: "'Raspberry Pi 5 delivers a 2 to 3x increase in CPU performance relative to Raspberry Pi 4'; docs: 'Feature changes from Raspberry Pi 4'"
+sources:
+  status:
+    url: https://www.raspberrypi.com/products/raspberry-pi-5/
+    retrieved: '2026-11-18'
+    notes: '"will remain in production until at least January 2036"'
+  release_year:
+    url: https://www.raspberrypi.com/news/introducing-raspberry-pi-5/
+    retrieved: '2026-11-18'
+    notes: "Announced 2023-09-28: 'Today, we're delighted to announce the launch of Raspberry Pi 5, coming at the end of October.'"
+  compute.soc:
+    url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "Product brief (published November 2026): 'Broadcom BCM2712 2.4GHz quad-core 64-bit Arm Cortex-A76 CPU'"
+  compute.isa:
+    url: https://en.wikipedia.org/wiki/ARM_Cortex-A76
+    retrieved: '2026-11-18'
+    notes: Reference source; the Cortex-A76 implements the 64-bit ARMv8.2-A architecture
+  compute.ram:
+    url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'LPDDR4X-4267 SDRAM (options for 1GB, 2GB, 4GB, 8GB and 16GB)'"
+  connectivity.wifi:
+    url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'Dual-band 802.11ac Wi-Fi'"
+  connectivity.usb:
+    url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'2 × USB 3.0 ports, supporting simultaneous 5Gbps operation; 2 × USB 2.0 ports'"
+  connectivity.poe:
+    url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'Gigabit Ethernet, with PoE+ support (requires separate PoE+ HAT)'"
+  power.voltage:
+    url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'5V/5A DC power via USB-C, with Power Delivery support'; a 5 V / 3 A supply also works with the USB peripheral current limited to 600 mA (docs)"
+  power.gpio_voltage:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/gpio-on-raspberry-pi.adoc
+    retrieved: '2026-11-18'
+    notes: "'Raspberry Pi GPIO pins operate at 3.3 V and aren't 5 V tolerant.'"
+  notes:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'The RP1 component acts as an intermediary between the SoC and the board's peripheral interfaces'; RP1 manages 'GPIO, USB, Ethernet, and MIPI'. PCIe 2.0, power button and RTC listed under 'Feature changes from Raspberry Pi 4'"

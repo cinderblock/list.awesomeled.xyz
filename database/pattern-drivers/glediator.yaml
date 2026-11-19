@@ -1,0 +1,91 @@
+name: Glediator
+status: end-of-life
+creator:
+  name: SolderLab
+  url: http://www.solderlab.de/
+notes: >-
+  Free Java program ("Graphical LED Installation AnimaTOR") that generates animations for LED
+  matrices and strips and streams them live: over serial in its own Glediator protocol or TPM2 (with
+  SolderLab's Arduino sketches for WS2801 and WS2811/WS2812 pixels), or over Ethernet as Art-Net and
+  TPM2.Net. Last release V2.0.3; solderlab.de now serves only a placeholder page.
+outputs:
+  protocols:
+    artnet: Output
+  serial: Output
+  serial_notes: Glediator protocol or TPM2 at up to 1,000,000 baud (about 1000 pixels at 24 FPS)
+  other: TPM2.Net
+aliases:
+  - Graphical LED Installation AnimaTOR
+capabilities:
+  live: true
+dead_links:
+  - url: http://www.solderlab.de/index.php/software/glediator
+    archive: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    checked: '2026-11-18'
+    notes: Returns 404; the domain's home page is now a placeholder
+  - url: http://www.solderlab.de/
+    archive: https://web.archive.org/web/20190624062157/http://solderlab.de:80/
+    checked: '2026-11-18'
+    notes: Home page now shows only a placeholder ('test')
+integrations: SolderLab matrix driver boards and Universal Interface Board; Arduino sketches for WS2801 and WS2811/WS2812 strips
+language: Java
+links:
+  url: http://www.solderlab.de/index.php/software/glediator
+platforms:
+  os:
+    - Windows
+    - macOS
+    - Linux
+  notes: Java, so it runs wherever Java does; serial output needs the RXTX library
+pricing:
+  price: Free
+  license_type: freeware
+related:
+  - type: compatible
+    ref: pattern-drivers/jinx
+    notes: Jinx! can output the Glediator serial protocol, so it drives the same Glediator-protocol receivers
+    source:
+      url: https://live-leds.de/?p=20
+      retrieved: '2026-11-18'
+      notes: "Jinx! features page: output options 'supporting Art-Net, sACN (E1.31), tpm2.net, tpm2, Glediator protocol and MiniDMX'"
+sources:
+  status:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
+    notes: "Last archived page (2019): 'The current Version of Glediator Software is V2.0.3'. V2.0 came out on 2013-10-07 (https://web.archive.org/web/20131219160056/http://www.solderlab.de:80/index.php/80-news/124-news-glediator-v2-0-out). The live page returns 404"
+  creator:
+    url: https://web.archive.org/web/20141208112112/http://www.solderlab.de:80/index.php/faq
+    retrieved: '2026-11-18'
+    notes: "SolderLab FAQ: 'we are just two guys with technical interest'; site footer 'Copyright © 2014. SolderLab.'"
+  aliases:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
+    notes: "'Glediator stands for Graphical LED Installation AnimaTOR'"
+  capabilities.live:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
+    notes: "'a small piece of software to control led matrix and led stripe installations'; frames stream live over serial or Ethernet"
+  language:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
+    notes: "'Glediator is written in Java and thus platform independent.'"
+  outputs.protocols.artnet:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
+    notes: "'Glediator can shift data out via serial interface (COM ports as well as virtual COM ports) and via Ethernet (ArtNet, TPM2.Net).'"
+  outputs.serial_notes:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
+    notes: '''The serial interface can be adjusted up to 1000000 baud allowing to push out frames as big as about 1000 pixels with a frame rate of 24 FPS''; ''select "Glediator Protocol" as output type''; drives ''any light installation that receives TPM2 & TPM2.Net data'''
+  integrations:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
+    notes: "'Glediator can drive led installations made of: our true color matrix driver boards, stripes & matrices made of WS2801 pixels, stripes & matrices made of WS2811 / WS2812 pixels'; V2.0.3 added file upload to a connected Universal Interface Board"
+  platforms.os:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-18'
+    notes: "'written in Java and thus platform independent'; it starts from Glediator.jar"
+  pricing.price:
+    url: https://web.archive.org/web/20141208112112/http://www.solderlab.de:80/index.php/faq
+    retrieved: '2026-11-18'
+    notes: "'All programs under Software Projects (e.g. Glediator) are not Open Source but free of use.'"

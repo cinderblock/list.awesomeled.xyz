@@ -1,0 +1,89 @@
+name: NeoPixelBus
+status: active
+creator: Michael C. Miller (Makuna)
+notes: >-
+  Arduino library for one-wire (NeoPixel-style) and two-wire (DotStar-style) pixels, with
+  asynchronous hardware output on ESP8266, ESP32, RP2040 and nRF52, RGB/RGBW/RGBWW colour features,
+  an animator, gamma correction and matrix layouts. WLED drives its LEDs through it.
+aliases:
+  - NeoPixelBus by Makuna
+features: RGB, RGBW and RGBWW pixels; async hardware output on ESP8266, ESP32, RP2040 and nRF52; animator, gamma and matrix/topology helpers
+hardware: AVR, ESP8266, ESP32, RP2040, Nano 33 BLE and many Arm Arduinos
+language: C++
+license: LGPL-3.0
+links:
+  repo: https://github.com/Makuna/NeoPixelBus
+platforms:
+  - Arduino
+  - ESP8266
+  - ESP32
+  - RP2040
+  - nRF52
+protocols:
+  - DMX512
+sources:
+  status:
+    url: https://github.com/Makuna/NeoPixelBus/releases
+    retrieved: '2026-11-18'
+    notes: 'release 2.8.4 published 2025-05-02; last push 2026-02-16'
+  creator:
+    url: https://github.com/Makuna/NeoPixelBus/blob/master/library.properties
+    retrieved: '2026-11-18'
+    notes: "'author=Michael C. Miller'; GitHub user Makuna"
+  aliases:
+    url: https://github.com/Makuna/NeoPixelBus/blob/master/library.properties
+    retrieved: '2026-11-18'
+    notes: "'name=NeoPixelBus by Makuna' (the Arduino Library Manager name the readme tells you to search for)"
+  license:
+    url: https://github.com/Makuna/NeoPixelBus
+    retrieved: '2026-11-18'
+    notes: GitHub repository license LGPL-3.0
+  platforms:
+    url: https://github.com/Makuna/NeoPixelBus/wiki
+    retrieved: '2026-11-18'
+    notes: "Wiki home, 'Supported Platforms': 'AVR 8 bit Arduino including LGT8F328P 32Mhz; Esp8266, Esp32, RP2040, and Nano 33 BLE in hardware; Many Arm based Arduinos.'"
+  protocols:
+    url: https://github.com/Makuna/NeoPixelBus/wiki
+    retrieved: '2026-11-18'
+    notes: Wiki home lists DMX512 among the one-data-wire supported pixels
+  supported_ics:
+    - url: https://github.com/Makuna/NeoPixelBus/wiki
+      retrieved: '2026-11-18'
+      notes: "Wiki home 'Supported Pixels': one data wire 'WS2811, WS2812, WS2812b, WS2813, WS2814, WS2816, WS2821, WS2805; APA 106; SK6812; LC8812; TM1814, TM1914; UCS8903 & UCS8904; SM168xx; DMX512'; two wire 'APA102; SK9822; LPD6803; LPD8806; WS2801; P9813; SM16716; MBI6033; TLC59711; HD108'"
+    - url: https://github.com/Makuna/NeoPixelBus/blob/master/library.json
+      retrieved: '2026-11-18'
+      notes: "Keywords name the SM168xx parts: 'SM16803, SM16823, SM16804, SM16824'"
+  notes:
+    url: https://github.com/wled/WLED/blob/main/platformio.ini
+    retrieved: '2026-11-18'
+    notes: "WLED lib_deps: 'https://github.com/Makuna/NeoPixelBus.git#1d7ff38f14d04a976f9c6e365c83a232bcba04fc ;; standard NPB version used in main branch'"
+supported_ics:
+  - WS2811
+  - WS2812
+  - WS2812b
+  - WS2813
+  - WS2814
+  - WS2816
+  - WS2821
+  - WS2805
+  - APA 106
+  - SK6812
+  - LC8812
+  - TM1814
+  - TM1914
+  - UCS8903
+  - UCS8904
+  - SM16803
+  - SM16804
+  - SM16823
+  - SM16824
+  - APA102
+  - SK9822
+  - LPD6803
+  - LPD8806
+  - WS2801
+  - P9813
+  - SM16716
+  - MBI6033
+  - TLC59711
+  - HD108

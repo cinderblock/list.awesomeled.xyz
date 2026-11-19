@@ -1,0 +1,52 @@
+name: MAX3485
+status: active
+creator: Analog Devices
+notes: >-
+  3.3 V half-duplex RS-485/RS-422 transceiver (one driver, one receiver) at up to 10 Mbps, in the
+  industry-standard 75176 pinout; interoperable with 5 V logic, and up to 32 transceivers can share
+  a bus. First released in 1994 (datasheet revision 0, 12/94); now an Analog Devices part.
+aliases:
+  - MAX3485CSA
+  - MAX3485ESA
+  - MAX3485CPA
+  - MAX3485EPA
+  - MAX3485CSA+
+  - MAX3485ESA+
+  - MAX3485CSA+T
+  - MAX3485ESA+T
+  - MAX3485CPA+
+  - MAX3485EPA+
+datasheet:
+  url: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483-MAX3491.pdf
+  sources:
+    - url: https://web.archive.org/web/20251203154522/https://www.analog.com/media/en/technical-documentation/data-sheets/max3483-max3491.pdf
+      host: manufacturer
+      notes: Wayback Machine capture of the same Rev 2 (5/24) file; analog.com timed out on 2026-11-18
+electrical:
+  max_voltage: 3.6V
+io:
+  channels: 1
+  interface: RS-485 / RS-422 (half duplex)
+links:
+  product: https://www.analog.com/en/products/max3485.html
+sources:
+  status:
+    url: https://web.archive.org/web/20251114164139/https://www.analog.com/en/products/max3485.html
+    retrieved: '2026-11-18'
+    notes: Wayback capture (2025-11-14) of the product page; part models show lifecycle PRODUCTION (analog.com itself timed out)
+  aliases:
+    url: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483-MAX3491.pdf
+    retrieved: '2026-11-18'
+    notes: 'Datasheet 19-0333 Rev 2 (5/24) ordering information (CPA = 8 plastic DIP, CSA = 8 SO; C = 0-70 °C, E = -40-85 °C); current part models on the product page: MAX3485CPA+, MAX3485CSA+, MAX3485CSA+T, MAX3485EPA+, MAX3485ESA+, MAX3485ESA+T'
+  electrical.max_voltage:
+    url: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483-MAX3491.pdf
+    retrieved: '2026-11-18'
+    notes: 'Selection table: supply 3.0 to 3.6 V (absolute maximum VCC 7 V)'
+  io.channels:
+    url: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483-MAX3491.pdf
+    retrieved: '2026-11-18'
+    notes: "'Each part contains one driver and one receiver.' 'the MAX3483, MAX3485, and MAX3486 are designed for half-duplex communication'"
+  notes:
+    url: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483-MAX3491.pdf
+    retrieved: '2026-11-18'
+    notes: "'The MAX3485, MAX3490, and MAX3491 transmit at up to 10Mbps'; 'Interoperable with +5V Logic'; 'Allows up to 32 Transceivers on the Bus'; 'Industry Standard 75176 Pinout (MAX3483/MAX3485/MAX3486)'. Revision history: '0 12/94 Initial release'"

@@ -1,0 +1,85 @@
+name: Wemos D1 Mini
+status: active
+creator:
+  name: WEMOS
+  page: https://www.wemos.cc/en/latest/d1/d1_mini.html
+notes: >-
+  Compact ESP8266 Wi-Fi board (34.2 × 25.6 mm, 4 MB flash) with two 8-pin headers that many LED shields
+  plug onto. WLED's docs call it Aircoookie's recommendation for running WLED on an ESP8266. Current
+  version V4.0.0 has USB-C; earlier versions used micro-USB.
+power:
+  gpio_voltage: 3.3V
+aliases:
+  - LOLIN D1 mini
+  - D1 mini
+compute:
+  soc: ESP8266EX
+  cpu: Tensilica L106
+  isa: Xtensa
+  clock_speed: 160MHz
+  flash: 4MB
+  linux: false
+connectivity:
+  wifi:
+    - 2.4GHz
+  bluetooth: false
+  usb: USB-C (CH340C)
+  serial: true
+datasheet:
+  url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+io:
+  max_outputs: 3 # WLED on ESP8266: GPIO1 + GPIO2 hardware-driven, GPIO3 for low LED counts
+  bms: false
+  imu: false
+other_links:
+  - https://www.wemos.cc/en/latest/_static/files/sch_d1_mini_v4.0.0.pdf
+  - https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+sources:
+  status:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini.html
+    retrieved: '2026-11-18'
+    notes: "Version list 'V4.0.0 (current)', V3.1.0, V3.0.0, V2.3.0, V2.2.0; '[Buy it]' links the maker's AliExpress listing"
+  aliases:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini.html
+    retrieved: '2026-11-18'
+    notes: "Page title 'LOLIN D1 mini'; the maker's navigation and WLED's docs call it 'D1 mini'"
+  compute.soc:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini.html
+    retrieved: '2026-11-18'
+    notes: Maker's description, a mini Wi-Fi board 'with 4MB flash based on ESP-8266EX'. The V4.0.0 schematic puts the bare ESP8266 chip on the board
+  compute.cpu:
+    url: https://documentation.espressif.com/0a-esp8266ex_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: "ESP8266EX datasheet v7.1: 'Tensilica L106 32-bit RISC processor ... maximum clock speed of 160 MHz'"
+  compute.clock_speed:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini.html
+    retrieved: '2026-11-18'
+    notes: "Technical specs: 'Clock Speed 80/160MHz'"
+  compute.flash:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini.html
+    retrieved: '2026-11-18'
+    notes: "'Flash 4M Bytes'"
+  connectivity.wifi:
+    url: https://documentation.espressif.com/0a-esp8266ex_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: ESP8266EX is a 2.4 GHz 802.11 b/g/n Wi-Fi SoC; no Bluetooth
+  connectivity.usb:
+    url: https://www.wemos.cc/en/latest/_static/files/sch_d1_mini_v4.0.0.pdf
+    retrieved: '2026-11-18'
+    notes: "V4.0.0 schematic: USB_C_16P connector and CH340C USB-serial chip (ME6211C33 regulator). Product page: 'Type-C USB Port'. Earlier versions had a micro-USB port (CNX Software, 2016: 'USB – micro USB port', https://www.cnx-software.com/2016/02/19/4-wemos-d1-mini-esp8266-board-supports-shields-with-a-temperature-sensor-a-button-a-relay-or-a-micro-sd-slot/)"
+  power.gpio_voltage:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini.html
+    retrieved: '2026-11-18'
+    notes: "'All of the IO pins run at 3.3V.'"
+  io.max_outputs:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/features/multi-strip.md
+    retrieved: '2026-11-18'
+    notes: "WLED multi-strip docs, ESP8266 section: 'There is a maximum of 3 strips supported.' GPIO1 (TX) and GPIO2 (D4) allow hardware driving; GPIO3 (RX) also does but uses 5x the memory per LED (recommended <50 LEDs)"
+  io.bms:
+    url: https://www.wemos.cc/en/latest/_static/files/sch_d1_mini_v4.0.0.pdf
+    retrieved: '2026-11-18'
+    notes: No battery charger on the V4.0.0 schematic (USB VBUS feeds the ME6211C33 regulator)
+  notes:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+    retrieved: '2026-11-18'
+    notes: "'An affordable ESP8266 development board. Aircoookie's recommendation for running WLED if you want an ESP8266 board.' Size from the maker page ('34.2*25.6mm'); headers J2/J3 (2 x 8 pins) from the V4.0.0 schematic"

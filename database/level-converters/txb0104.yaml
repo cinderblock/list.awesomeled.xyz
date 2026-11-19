@@ -1,0 +1,46 @@
+name: TXB0104
+status: active
+creator: Texas Instruments
+notes: >-
+  4-bit bidirectional translator that senses direction automatically: A port 1.2-3.6 V, B port
+  1.65-5.5 V, up to 100 Mbps. Only for push-pull signals; TI rates it for loads up to 70 pF and says
+  its output drivers have low DC drive strength. TI lists the TXB0604 as a newer version.
+aliases:
+  - TXB0104D
+  - TXB0104DR
+  - TXB0104PWR
+  - TXB0104RGYR
+  - TXB0104RUTR
+  - TXB0104BQAR
+  - TXB0104YZTR
+  - TXB0104DYYR
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
+electrical:
+  max_voltage: 5.5V
+io:
+  channels: 4
+  interface: Auto-direction bidirectional
+links:
+  product: https://www.ti.com/product/TXB0104
+sources:
+  status:
+    url: https://www.ti.com/product/TXB0104
+    retrieved: '2026-11-18'
+    notes: "TI product page status ACTIVE ('4-Bit Bidirectional Voltage-Level Shifter with Auto Direction Sensing and +/-15 kV ESD Protect'); notes a newer version, TXB0604"
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCES650K (revised March 2025): Package Option Addendum, all 'Active' (D/DR = SOIC-14, PW = TSSOP-14, RGY = VQFN-14, RUT = UQFN-12, BQA = WQFN-14, YZT = DSBGA-12, DYY = SOT-23-THIN)"
+  electrical.max_voltage:
+    url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
+    retrieved: '2026-11-18'
+    notes: "'1.2V to 3.6V on A port and 1.65V to 5.5V on B port (VCCA ≤ VCCB)'"
+  io.channels:
+    url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
+    retrieved: '2026-11-18'
+    notes: "'This TXB0104 4-bit noninverting translator uses two separate configurable power-supply rails.'"
+  notes:
+    url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
+    retrieved: '2026-11-18'
+    notes: "'This device can only translate push-pull CMOS logic outputs.' 'The device is designed to drive capacitive loads of up to 70 pF. The output drivers of the TXB0104 device have low dc drive strength.' Switching tables give data rates up to 100 Mbps"

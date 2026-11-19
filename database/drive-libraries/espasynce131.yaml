@@ -1,0 +1,47 @@
+name: ESPAsyncE131
+status: active
+creator: Shelby Merrick
+notes: >-
+  Asynchronous E1.31 (sACN) receiver library for Arduino on ESP8266 and ESP32: unicast or multicast,
+  validated packets queued in a ring buffer. Derived from the same author's E131 library; ESPixelStick
+  receives sACN through it.
+aliases:
+  - ESP Async E1.31
+hardware: ESP8266/32
+language: C++
+links:
+  repo: https://github.com/forkineye/ESPAsyncE131
+platforms:
+  - Arduino
+  - ESP8266
+  - ESP32
+protocols:
+  - sACN
+sources:
+  status:
+    url: https://github.com/forkineye/ESPAsyncE131
+    retrieved: '2026-11-18'
+    notes: 'last commits 2025-09-24 (merged pull requests); latest tag v1.0.5, no GitHub releases'
+  creator:
+    url: https://github.com/forkineye/ESPAsyncE131/blob/master/ESPAsyncE131.h
+    retrieved: '2026-11-18'
+    notes: "File header: 'Copyright (c) 2019 Shelby Merrick, http://www.forkineye.com'. The header grants free use but names no standard license"
+  aliases:
+    url: https://github.com/forkineye/ESPAsyncE131/blob/master/library.properties
+    retrieved: '2026-11-18'
+    notes: "'name=ESP Async E1.31'"
+  platforms:
+    url: https://github.com/forkineye/ESPAsyncE131/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: "'Asynchronous E.131 (sACN) library for Arduino ESP8266 and ESP32'; library.properties 'architectures=esp8266,esp32'"
+  protocols:
+    url: https://github.com/forkineye/ESPAsyncE131/blob/master/README.md
+    retrieved: '2026-11-18'
+    notes: "'This library is to simplify the validation and handling of E1.31 sACN (DMX over Ethernet) traffic ... It supports both Unicast and Multicast configurations'"
+  notes:
+    - url: https://github.com/forkineye/ESPAsyncE131/blob/master/README.md
+      retrieved: '2026-11-18'
+      notes: "'All incoming E1.31 packets are put into a ring buffer once validated.' 'please refer to the E131 library from which this project was derived from'"
+    - url: https://github.com/forkineye/ESPixelStick/blob/main/platformio.ini
+      retrieved: '2026-11-18'
+      notes: "ESPixelStick lib_deps: 'https://github.com/forkineye/ESPAsyncE131 ; supports setting buffer limits'"

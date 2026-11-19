@@ -1,0 +1,67 @@
+name: PCB Screw Terminal Block
+creator: Generic
+notes: >-
+  Fixed (one-piece, non-pluggable) screw-clamp terminal block soldered to the board, usually at 5.0 mm
+  or 5.08 mm (0.2 in) pitch: the power and pixel-output terminals on many DIY controllers and shields.
+  Ratings vary by maker; the datasheet linked here is Degson's DG301-5.0. Two-part pluggable blocks
+  are a separate entry (MSTB COMBICON).
+aliases:
+  - Screw terminal
+  - DG301
+  - MKDS 1,5
+datasheet:
+  url: https://www.lcsc.com/datasheet/C5128849.pdf
+links:
+  product: https://www.lcsc.com/product-detail/C5128849.html
+mechanical:
+  outline: Rectangular
+  pitch: 5.0-5.08mm
+  min_pins: 2
+  max_pins: 10
+  rows: 1
+  gendered: false
+  panel_mount: false
+  wire_to_wire: false
+  pcb_mount: PTH
+  board_fingers: false
+ratings:
+  max_current: 15A
+  max_current_notes: 'Degson DG301-5.0: UL 300 V / 15 A, VDE 250 V / 17.5 A'
+  max_voltage: 300V
+sources:
+  aliases:
+    - url: https://www.lcsc.com/datasheet/C5128849.pdf
+      retrieved: '2026-11-18'
+      notes: Degson DG301-5.0 drawing (DG301-5.0-XXP-1Y-1000A(H)), the common 5.0 mm fixed block
+    - url: https://www.embeddedrelated.com/parts/p/1715721
+      retrieved: '2026-11-18'
+      notes: 'Parts aggregator page for Phoenix Contact 1715721 ''MKDS 1,5/ 2-5,08'': ''2 Position Wire to Board Terminal Block Horizontal with Board 0.200" (5.08mm) Through Hole'', ''Screw - Rising Cage Clamp'' (phoenixcontact.com, RS and Digi-Key block automated reads)'
+  mechanical.pitch:
+    - url: https://www.lcsc.com/datasheet/C5128849.pdf
+      retrieved: '2026-11-18'
+      notes: "Degson DG301: '1.PITCH: 5.0MM, POLES: N=2-10P'"
+    - url: https://www.embeddedrelated.com/parts/p/1715721
+      retrieved: '2026-11-18'
+      notes: Phoenix Contact MKDS 1,5/ 2-5,08 at 0.200 in (5.08 mm)
+  mechanical.max_pins:
+    url: https://www.lcsc.com/datasheet/C5128849.pdf
+    retrieved: '2026-11-18'
+    notes: "'POLES: N=2-10P'"
+  ratings.max_current:
+    url: https://www.lcsc.com/datasheet/C5128849.pdf
+    retrieved: '2026-11-18'
+    notes: "'RATED VOLTAGE/CURRENT: UL 300V/15A, VDE 250V/17.5A'; LCSC lists the 3-position part (C5128849) at 17.5 A / 250 V"
+  termination.largest_gauge:
+    url: https://www.lcsc.com/datasheet/C5128849.pdf
+    retrieved: '2026-11-18'
+    notes: "'WIRE RANGE: 22~14AWG, 1.5MM²'; 'MAX.TORQUE VALUE: M2.6, 4.0KGF.CM'"
+  wiring.colors:
+    url: https://www.lcsc.com/datasheet/C5128849.pdf
+    retrieved: '2026-11-18'
+    notes: 'Color code 1-9: grey, blue, black, green, orange, red, transparent, yellow, white'
+termination:
+  screw_terminal: true
+  smallest_gauge: 22
+  largest_gauge: 14
+wiring:
+  colors: Blue, green, grey, black and others

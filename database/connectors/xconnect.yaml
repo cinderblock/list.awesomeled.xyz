@@ -1,0 +1,55 @@
+name: xConnect
+creator:
+  name: HolidayCoro
+  url: https://www.holidaycoro.com/
+notes: >-
+  Screw-together, 3-conductor waterproof plug for pixel strings and extensions: HolidayCoro's
+  EasyPlug3 standard, which other vendors call xConnect. The design isn't patented, so other vendors
+  copy it, and HolidayCoro warns their cables may not mate with its own. HolidayCoro's extensions use
+  18 AWG wire.
+aliases:
+  - EasyPlug3
+common_applications:
+  - Pixel strings, pigtails and extension cables (power, ground and data)
+links:
+  product: https://holidaycoro.com/3-Conductor-Waterproof-Extension-Pigtail-10ft-p/727.htm
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 3
+  max_pins: 3
+  gendered: true
+  locking: Screw Lock
+  wire_to_wire: true
+  pcb_mount: false
+ratings:
+  ip_rating: IP67
+  ip_rating_notes: "HolidayCoro lists 'Waterproof Level: 67' and adds 'Assumes proper waterproofing connections by customer'"
+sources:
+  creator:
+    url: https://support.holidaycoro.com/portal/en/kb/articles/pin-out-and-wiring-diagram-for-the-easyplug3-and-easyplug-4-cables
+    retrieved: '2026-11-18'
+    notes: '''EasyPlug3 or "xConnect"''; ''Please note that copies of our standard have been made by other vendors as our design is not patented''; ''most other vendors call this type of plug "xConnect"'''
+  aliases:
+    url: https://support.holidaycoro.com/portal/en/kb/articles/pin-out-and-wiring-diagram-for-the-easyplug3-and-easyplug-4-cables
+    retrieved: '2026-11-18'
+    notes: HolidayCoro's own name for the plug; its 4-conductor counterpart is EasyPlug 4
+  mechanical.locking:
+    url: https://holidaycoro.com/3-Conductor-Waterproof-Extension-Pigtail-10ft-p/727.htm
+    retrieved: '2026-11-18'
+    notes: "'xConnect / 3 Conductor / 10ft / Screw Together Extension / Waterproof Male + Female (18 AWG)'; the male side has a silicone o-ring gasket and a plastic connector nut"
+  ratings.ip_rating:
+    url: https://holidaycoro.com/3-Conductor-Waterproof-Extension-Pigtail-10ft-p/727.htm
+    retrieved: '2026-11-18'
+    notes: "'Waterproof Level: 67'"
+  wiring.pinout:
+    url: https://support.holidaycoro.com/portal/en/kb/articles/pin-out-and-wiring-diagram-for-the-easyplug3-and-easyplug-4-cables
+    retrieved: '2026-11-18'
+    notes: "Face diagrams (723-3.jpg, 723-4.jpg): 'MALE - PINS - INPUT SIDE' and 'FEMALE - HOLES - OUTPUT SIDE', each keyed, with POSITIVE RED, NEGATIVE BLACK and DATA YELLOW"
+  notes:
+    url: https://holidaycoro.com/3-Wire-Extension-Pigtail-20ft-EasyPlug3-xConnect-p/734.htm
+    retrieved: '2026-11-18'
+    notes: "'Wire gauge: 18 AWG'; 'It is not possible for HolidayCoro to know if our cables interconnect with other vendor's cables'"
+wiring:
+  pinout: V+ (red), GND (black), data (yellow); keyed
+  convention: Male pins on the input side, female sockets on the output side

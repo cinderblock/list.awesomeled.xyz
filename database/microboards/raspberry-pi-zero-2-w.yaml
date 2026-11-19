@@ -1,0 +1,84 @@
+name: Raspberry Pi Zero 2 W
+status: active
+release_year: 2021
+creator:
+  name: Raspberry Pi Foundation
+  page: https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/
+notes: >-
+  Zero-format board (65 × 30 mm) with the quad-core RP3A0 system-in-package. Also sold with a
+  pre-soldered GPIO header ("Raspberry Pi Zero 2 W with headers").
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+aliases:
+  - Raspberry Pi Zero 2
+compute:
+  soc: RP3A0 (BCM2710A1)
+  cpu: 4× ARM Cortex-A53
+  isa: ARMv8-A
+  clock_speed: 1GHz
+  ram: 512MB
+  linux: true
+connectivity:
+  wifi:
+    - 2.4GHz
+  bluetooth: '4.2'
+  usb: OTG
+  serial: true
+datasheet:
+  url: https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-product-brief.pdf
+io:
+  storage: microSD
+  bms: false
+  imu: false
+related:
+  - type: predecessor
+    ref: microboards/raspberry-pi-zero-w
+    notes: Successor to the Pi Zero W; same form factor, connectors and mounting holes (drop-in replacement)
+    source:
+      url: https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-product-brief.pdf
+      retrieved: '2026-11-18'
+      notes: "'The successor to the breakthrough Raspberry Pi Zero W, Raspberry Pi Zero 2 W is a form factor-compatible drop-in replacement for the original board.'"
+sources:
+  status:
+    url: https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/
+    retrieved: '2026-11-18'
+    notes: '"will remain in production until at least January 2030"'
+  aliases:
+    url: https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/
+    retrieved: '2026-11-18'
+    notes: "The product page shortens it: 'Zero 2 is up to five times as fast as the original Raspberry Pi Zero.' The docs' only Zero 2 model is 'Raspberry Pi Zero 2 W (with and without headers)'"
+  release_year:
+    url: https://www.raspberrypi.com/news/new-raspberry-pi-zero-2-w-2/
+    retrieved: '2026-11-18'
+    notes: "Launch post dated 2021-10-28: 'Announcing the successor to the groundbreaking Raspberry Pi Zero'"
+  compute.soc:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/zero/zero-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'The SiP is RP3A0, consisting of a Broadcom BCM2710A1 SoC, which includes a 1 GHz quad-core 64-bit Cortex-A53 (CPU)'; 512 MB LPDDR2 inside the SiP"
+  compute.isa:
+    url: https://en.wikipedia.org/wiki/ARM_Cortex-A53
+    retrieved: '2026-11-18'
+    notes: "Reference source: Cortex-A53 is 'a CPU microarchitecture of the ARMv8-A family'"
+  connectivity.wifi:
+    url: https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'2.4GHz IEEE 802.11b/g/n wireless LAN, Bluetooth 4.2, BLE, onboard antenna'"
+  connectivity.usb:
+    url: https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'1 × USB 2.0 interface with OTG'; power comes in on a separate micro USB socket"
+  power.voltage:
+    url: https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-product-brief.pdf
+    retrieved: '2026-11-18'
+    notes: "'Input power: 5V DC 2.5A'"
+  power.gpio_voltage:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/gpio-on-raspberry-pi.adoc
+    retrieved: '2026-11-18'
+    notes: "'Raspberry Pi GPIO pins operate at 3.3 V and aren't 5 V tolerant.'"
+  notes:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/zero/zero-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'Raspberry Pi Zero 2 W comes with an unpopulated GPIO header; Raspberry Pi Zero 2 W with headers comes with a pre-soldered GPIO header.' Size: 'approximately 65 mm × 30 mm'"

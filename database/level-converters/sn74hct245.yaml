@@ -1,0 +1,63 @@
+name: SN74HCT245
+status: active
+creator: Texas Instruments
+notes: >-
+  Octal bus transceiver (A-to-B or B-to-A per the DIR pin) with TTL-voltage-compatible inputs on a
+  4.5-5.5 V supply: a high input needs only 2 V, so 3.3 V logic drives its 5 V outputs. The
+  74HC245 has the same pinout but CMOS input thresholds (3.15 V minimum at a 4.5 V supply). Used as
+  the 5 V buffer on PJRC's OctoWS2811 Adaptor and on Evil Genius Labs' LED shields.
+aliases:
+  - 74HCT245
+  - SN74HCT245N
+  - SN74HCT245DW
+  - SN74HCT245DWR
+  - SN74HCT245PWR
+  - SN74HCT245DBR
+  - SN74HCT245NSR
+  - SN74HCT245DGSR
+datasheet:
+  url: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
+electrical:
+  max_voltage: 5.5V
+  max_current: 6mA
+io:
+  channels: 8
+  buffered: true
+links:
+  product: https://www.ti.com/product/SN74HCT245
+related:
+  - type: variant
+    ref: level-converters/74hc245
+    notes: Same octal transceiver and pinout in the HC family, with CMOS (not TTL) input thresholds
+    source:
+      url: https://www.ti.com/lit/ds/symlink/sn74hc245.pdf
+      retrieved: '2026-11-18'
+      notes: "SNx4HC245 'Octal Bus Transceivers With 3-State Outputs', 2-6 V supply, VIH 3.15 V at VCC = 4.5 V; SNx4HCT245 (SCLS020H) has the same title and pinout with 'Inputs are TTL-voltage compatible'"
+sources:
+  status:
+    url: https://www.ti.com/product/SN74HCT245
+    retrieved: '2026-11-18'
+    notes: TI product page status ACTIVE ('Octal bus transceivers with tri-state outputs')
+  aliases:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
+    retrieved: '2026-11-18'
+    notes: "TI datasheet SCLS020H (revised December 2022): Package Option Addendum orderables (N = PDIP-20, DW = SOIC-20, PW = TSSOP-20, DB = SSOP-20, NS = SOP-20, DGS = VSSOP-20); the addendum marks the DW, PW and PWT tubes/reels obsolete, DWR and PWR active. '74HCT245' is how PJRC and Evil Genius Labs name it"
+  electrical.max_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
+    retrieved: '2026-11-18'
+    notes: "'Operating voltage range of 4.5 V to 5.5 V' (absolute maximum 7 V)"
+  electrical.max_current:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
+    retrieved: '2026-11-18'
+    notes: "'±6-mA output drive at 5 V'"
+  io.channels:
+    url: https://www.ti.com/product/SN74HCT245
+    retrieved: '2026-11-18'
+    notes: Number of channels 8; input type TTL
+  notes:
+    - url: https://www.pjrc.com/store/octo28_adaptor.html
+      retrieved: '2026-11-18'
+      notes: "'The adaptor features a 74HCT245 buffer chip and 100 ohm impedance matching resistors.'"
+    - url: https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller
+      retrieved: '2026-11-18'
+      notes: "'The shield includes a 74HCT245 level shifter'; parts list 'SN74HCT245N Level Shifter'. Same chip on the Level Shifter FeatherWing (https://www.evilgeniuslabs.org/level-shifter-featherwing), two on the 16-output NodeMCU-32S shield (https://www.evilgeniuslabs.org/hexadecimal-nodemcu-32s-wi-fi-and-ble-led-controller) and an SMD one on the SMD 6-output D1 Mini shield (Tindie)"

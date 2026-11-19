@@ -1,0 +1,61 @@
+name: XLR 4
+creator: Neutrik / Generic
+notes: >-
+  4-pole member of the XLR family. On LED gear it carries power and data together: City Theatrical's
+  QolorPIX tape controller has a 4-pin XLR female on each output, and its QolorFLEX tape uses the same
+  plug.
+aliases:
+  - 4-pin XLR
+common_applications:
+  - LED tape power and data (City Theatrical QolorPIX / QolorFLEX)
+datasheet:
+  url: https://www.neutrik.com/en/product/nc4mxx.pdf
+links:
+  product: https://www.neutrik.com/en/product/nc4mxx
+mechanical:
+  outline: Circular
+  contact_type: Pins
+  min_pins: 4
+  max_pins: 4
+  gendered: true
+  locking: Latching
+  wire_to_wire: true
+ratings:
+  max_current: 10A
+  max_voltage: 50V
+  ip_rating: IP40
+related:
+  - type: variant
+    ref: connectors/xlr-3
+    notes: Same XLR family, four poles instead of three
+    source:
+      url: https://www.neutrik.com/en/product/nc4mxx.pdf
+      retrieved: '2026-11-18'
+      notes: "NC4MXX '4 pole male cable connector' and NC3MXX '3 pole male cable connector', both 'Connection Type: XLR' in Neutrik's XX series"
+  - type: variant
+    ref: connectors/xlr-5
+    notes: Same XLR family, four poles instead of five
+    source:
+      url: https://www.neutrik.com/en/product/nc4mxx.pdf
+      retrieved: '2026-11-18'
+      notes: "Neutrik XX series: NC4MXX (4 pole) alongside NC5MXX (5 pole), 'Connection Type: XLR'"
+sources:
+  aliases:
+    url: https://www.neutrik.com/en/product/nc4mxx.pdf
+    retrieved: '2026-11-18'
+    notes: "'4 pole male cable connector'; City Theatrical writes '4-Pin XLRF' and '4Pin XLR'"
+  common_applications:
+    url: https://www.citytheatrical.com/products/electronics/qolorflex-led-tape-and-accessories/qolorpix-tape-controller-eight-output
+    retrieved: '2026-11-18'
+    notes: "Spec table: output connector '4-Pin XLRF', 8 outputs; FAQ: '4Pin XLR connectors on the tape and Tape Controller and they are designed for handling power and data'"
+  ratings.max_current:
+    url: https://www.neutrik.com/en/product/nc4mxx.pdf
+    retrieved: '2026-11-18'
+    notes: 'NC4MXX: rated current per contact 10 A, rated voltage < 50 V, IP 40, wire size max 1.5 mm² / 16 AWG, solder contacts, latch lock, > 1000 mating cycles'
+  termination.largest_gauge:
+    url: https://www.neutrik.com/en/product/nc4mxx.pdf
+    retrieved: '2026-11-18'
+    notes: "'Wiresize max. 1.5 mm²' / '16 AWG'"
+termination:
+  solder: true
+  largest_gauge: 16

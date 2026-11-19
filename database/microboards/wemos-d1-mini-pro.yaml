@@ -1,0 +1,91 @@
+name: Wemos D1 Mini Pro
+status: active
+creator:
+  name: WEMOS
+  page: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+notes: >-
+  D1 mini with 16 MB flash, an external antenna connector next to the on-board antenna, and a
+  single-cell lithium battery charger. Version 2.0.0 is longer (48 × 25.4 mm); WLED's docs say
+  version 1.0.0 had the same form factor as the D1 mini.
+power:
+  gpio_voltage: 3.3V
+aliases:
+  - D1 mini Pro
+compute:
+  soc: ESP8266EX
+  cpu: Tensilica L106
+  isa: Xtensa
+  clock_speed: 160MHz
+  flash: 16MB
+  linux: false
+connectivity:
+  wifi:
+    - 2.4GHz
+  bluetooth: false
+  usb: Micro-USB (CH340C)
+  serial: true
+datasheet:
+  url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+io:
+  max_outputs: 3 # WLED on ESP8266: GPIO1 + GPIO2 hardware-driven, GPIO3 for low LED counts
+  bms: 1S
+  imu: false
+other_links:
+  - https://www.wemos.cc/en/latest/_static/files/sch_d1_mini_pro_v2.0.0.pdf
+related:
+  - type: variant
+    ref: microboards/wemos-d1-mini
+    notes: D1 mini with 16 MB flash, external antenna connector and LiPo charger; takes the same shields
+    source:
+      url: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+      retrieved: '2026-11-18'
+      notes: "Listed with the D1 mini and D1 mini Lite under the maker's D1 boards. Evil Genius Labs' D1 Mini shields say 'for the Wemos D1 Mini (and D1 Mini Pro)' (https://www.evilgeniuslabs.org/hex-wemos-d1-mini-wifi-led-controller)"
+sources:
+  status:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+    retrieved: '2026-11-18'
+    notes: "Version list 'V2.0.0 (current version)', V1.1.0, V1.0.0; '[Buy it]' links the maker's AliExpress store"
+  aliases:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+    retrieved: '2026-11-18'
+    notes: Page title 'D1 mini Pro'
+  compute.soc:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+    retrieved: '2026-11-18'
+    notes: Maker's description, a mini Wi-Fi board 'with 16MB flash, external antenna connector and built-in ceramic antenna based on ESP-8266EX'
+  compute.cpu:
+    url: https://documentation.espressif.com/0a-esp8266ex_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: "ESP8266EX datasheet v7.1: 'Tensilica L106 32-bit RISC processor'"
+  compute.clock_speed:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+    retrieved: '2026-11-18'
+    notes: "Technical specs: 'Clock Speed 80/160MHz'"
+  compute.flash:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+    retrieved: '2026-11-18'
+    notes: "'16M bytes(128M bit) Flash'; W25Q128FVSS on the V2.0.0 schematic"
+  connectivity.wifi:
+    url: https://documentation.espressif.com/0a-esp8266ex_datasheet_en.pdf
+    retrieved: '2026-11-18'
+    notes: ESP8266EX is a 2.4 GHz 802.11 b/g/n Wi-Fi SoC; no Bluetooth
+  connectivity.usb:
+    url: https://www.wemos.cc/en/latest/_static/files/sch_d1_mini_pro_v2.0.0.pdf
+    retrieved: '2026-11-18'
+    notes: V2.0.0 schematic (dated 2018-05-16) shows a USB-MICRO_5P connector and a CH340C USB-UART
+  power.gpio_voltage:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+    retrieved: '2026-11-18'
+    notes: "'All of the IO pins run at 3.3V.'"
+  io.max_outputs:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/features/multi-strip.md
+    retrieved: '2026-11-18'
+    notes: "WLED multi-strip docs, ESP8266 section: 'There is a maximum of 3 strips supported.' WLED lists the D1 mini Pro as an ESP8266 board (docs/basics/compatible-controllers.md)"
+  io.bms:
+    url: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+    retrieved: '2026-11-18'
+    notes: "'Lithium battery interface, 500mA Max charging current'; TP4054 charger on the V2.0.0 schematic"
+  notes:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/basics/compatible-controllers.md
+    retrieved: '2026-11-18'
+    notes: "'Current version: 2.0.0. Version 1.0.0 has the same form factor as the D1 mini.' Size from the maker page ('48*25.4mm')"

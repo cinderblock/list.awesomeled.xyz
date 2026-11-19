@@ -1,0 +1,96 @@
+name: BeagleBone Green
+status: active
+release_year: 2015
+creator:
+  name: Seeed Studio / Beagleboard.org
+  page: https://www.beagleboard.org/boards/seeedstudio-beaglebone-green
+manufacturers:
+  - Seeed Studio
+notes: >-
+  Seeed Studio's version of the BeagleBone Black, made with BeagleBoard.org: the HDMI port and the
+  5 V barrel jack are removed, power comes in over micro-USB (or 5 V on the P9 header), and two Grove
+  connectors (I2C, UART) are added. Not the same board as the BeagleBone Green Wireless.
+power:
+  voltage:
+    min: 5V
+    max: 5V
+  gpio_voltage: 3.3V
+aliases:
+  - SeeedStudio BeagleBone Green
+  - BBG
+compute:
+  soc: am3358
+  cpu: Cortex-A8, 2x PRUSS
+  isa: ARMv7-A
+  clock_speed: 1.0GHz
+  flash: 4GB # eMMC
+  ram: 512MB
+  linux: true
+connectivity:
+  ethernet: 100BASE-TX
+  usb: Micro-USB client, USB 2.0 host
+  serial: true
+datasheet:
+  url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+io:
+  storage: microSD
+  imu: false
+other_links:
+  - https://wiki.seeedstudio.com/BeagleBone_Green/
+related:
+  - type: variant
+    ref: microboards/beaglebone-black
+    notes: Based on the BeagleBone Black design and meant to stay compatible with it; HDMI and barrel jack removed, Grove connectors added
+    source:
+      url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+      retrieved: '2026-11-18'
+      notes: "SRM: 'BeagleBone Green (BBG) is based on the classical open-source hardware design of BeagleBone Black (BBB) and added two Grove connectors'; 'The board is intended to be compatible with the BeagleBone Black as much as possible.' Seeed wiki: 'Fully Compatible with BeagleBone® Black'"
+sources:
+  status:
+    url: https://www.seeedstudio.com/Seeed-Studio-BeagleBone-Green.html
+    retrieved: '2026-11-18'
+    notes: Seeed store product data (SKU 102010027) lists InStock offers from its China, US and Germany warehouses
+  release_year:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "SRM change history: 'V1 Production release June 3, 2015'"
+  creator:
+    url: https://www.beagleboard.org/boards/seeedstudio-beaglebone-green
+    retrieved: '2026-11-18'
+    notes: "'SeeedStudio BeagleBone Green (BBG) is a joint effort by BeagleBoard.org and Seeed Studio.'"
+  aliases:
+    url: https://www.beagleboard.org/boards/seeedstudio-beaglebone-green
+    retrieved: '2026-11-18'
+    notes: BeagleBoard.org titles it 'SeeedStudio BeagleBone® Green' and abbreviates it 'BBG' (the SRM does too); Seeed's store says 'Seeed Studio BeagleBone® Green'
+  compute.soc:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "'Sitara AM3358BZCZ100 1GHz, 2000 MIPS'; Seeed wiki lists '2x PRU 32-bit microcontrollers'"
+  compute.flash:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "'Onboard Flash 4GB, 8bit Embedded MMC'; 'SDRAM Memory 512MB DDR3L 800MHZ'"
+  connectivity.ethernet:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "'Ethernet 10/100, RJ45'"
+  connectivity.usb:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "'HS USB 2.0 Client Port: Access to USB0, Client mode via Micro USB'; 'HS USB 2.0 Host Port: Access to USB1, Type A Socket, 500mA LS/FS/HS'"
+  connectivity.serial:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "'UART0 access via 6 pin 3.3V TTL Header'; a second UART on a Grove connector"
+  power.voltage:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "'Power Source: Micro USB Jack, 5VDC External Via Expansion Header'"
+  power.gpio_voltage:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "'3.3V I/O on all signals'"
+  notes:
+    url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+    retrieved: '2026-11-18'
+    notes: "BeagleBone Black compatibility section: 'Removed the 5VDC Power Jack', 'Removed HDMI framer IC and connector', 'Grove interface onboard'; 'Grove Connectors 1-Uart2, 1-I2C2'. The BeagleBone Green Wireless is a separate Seeed board (Seeed wiki lists it as the next page)"
