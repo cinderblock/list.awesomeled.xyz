@@ -247,6 +247,155 @@ export interface RelationGraph {
   families: Map<string, EntryRef[]>;
   /** ref → its protocol family label as written */
   familyOf: Map<EntryRef, string>;
+  /** Derived per-entry compatibility summary (see LinkedSummary) */
+  linked: Map<EntryRef, LinkedSummary>;
+}
+
+/**
+ * Derived compatibility facts attached to each entry as `linked` by the
+ * loader, so tables can filter and sort on them ("controllers that can drive
+ * WS2815", "pixels most controllers support"). Never stored in YAML.
+ */
+export interface LinkedSummary {
+  /**
+   * Controllers / adapters: every pixel this hardware can drive — the names
+   * the maker lists, plus the same-protocol parts of those (`data.type`
+   * families), or, when the maker lists none, what its firmware (WLED, FPP,
+   * ESPixelStick) supports. Clocked parts are dropped for data-only outputs
+   * and vice versa. Includes the maker's own spellings so a cell's pill can
+   * be clicked into a filter.
+   */
+  pixels?: string[];
+  /** Firmware the `pixels` set was inferred from (empty when the maker lists them) */
+  pixelsVia?: string[];
+  /** Pixels / pixel ICs: controllers + adapters whose `pixels` include this part */
+  hardware?: number;
+  /** `hardware` split by category ({controllers: 38, adapters: 4}) */
+  hardwareBy?: Record<string, number>;
+  /** Pixels / pixel ICs: libraries that support this part or a same-protocol one */
+  libraries?: number;
+  /** Software: controllers + adapters that run it as firmware or work with it */
+  runsOn?: number;
+  /** Connectors: entries that use it */
+  usedBy?: number;
+  /** Microboards: add-ons, capes and firmware hosted on it */
+  hosts?: number;
+}
+
+const PIXEL_HARDWARE = ['controllers', 'adapters'];
+
+function computeLinked(
+  db: Database,
+  names: Map<EntryRef, string>,
+  outgoing: Map<EntryRef, Edge[]>,
+  incoming: Map<EntryRef, Edge[]>,
+  families: Map<string, EntryRef[]>,
+  familyOf: Map<EntryRef, string>
+): Map<EntryRef, LinkedSummary> {
+  const linked = new Map<EntryRef, LinkedSummary>();
+  const summary = (ref: EntryRef) => {
+    if (!linked.has(ref)) linked.set(ref, {});
+    return linked.get(ref)!;
+  };
+  const entryByRef = new Map<EntryRef, BaseEntry>();
+  for (const [category, entries] of db) {
+    for (const e of entries) entryByRef.set(`${category}/${e.id}`, e);
+  }
+  const clockedOf = (ref: EntryRef) => {
+    const c = (entryByRef.get(ref)?.data as { clocked?: unknown } | undefined)?.clocked;
+    return typeof c === 'boolean' ? c : null;
+  };
+  // A part plus every other part speaking the same protocol
+  const withFamily = (refs: Iterable<EntryRef>) => {
+    const out = new Set<EntryRef>();
+    for (const r of refs) {
+      out.add(r);
+      const fam = familyOf.get(r);
+      for (const m of fam ? (families.get(normalizeName(fam)) ?? []) : []) out.add(m);
+    }
+    return out;
+  };
+  const targets = (ref: EntryRef, kind: EdgeKind) =>
+    (outgoing.get(ref) ?? []).filter((e) => e.kind === kind).map((e) => e.to);
+
+  const hardwareCount = new Map<EntryRef, number>();
+  const hardwareBy = new Map<EntryRef, Record<string, number>>();
+  for (const category of PIXEL_HARDWARE) {
+    for (const entry of db.get(category) ?? []) {
+      const ref = `${category}/${entry.id}`;
+      const listed = asStrings(get(entry, 'outputs.protocols'));
+      let base = targets(ref, 'drives');
+      const via: string[] = [];
+      if (listed.length === 0) {
+        for (const fw of targets(ref, 'firmware')) {
+          const supported = targets(fw, 'supports');
+          if (supported.length) {
+            base = base.concat(supported);
+            via.push(names.get(fw) ?? fw);
+          }
+        }
+      }
+      if (base.length === 0 && listed.length === 0) continue;
+      const clocked = get(entry, 'outputs.clocked');
+      const parts = [...withFamily(base)].filter((r) => {
+        const c = clockedOf(r);
+        if (clocked === false && c === true) return false;
+        if ((clocked === 'always' || clocked === true) && c === false) return false;
+        return true;
+      });
+      for (const r of parts) {
+        hardwareCount.set(r, (hardwareCount.get(r) ?? 0) + 1);
+        const by = hardwareBy.get(r) ?? {};
+        by[category] = (by[category] ?? 0) + 1;
+        hardwareBy.set(r, by);
+      }
+      const pixelNames = new Set<string>(listed);
+      for (const r of parts) pixelNames.add(names.get(r) ?? r);
+      const s = summary(ref);
+      s.pixels = [...pixelNames].sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
+      if (via.length) s.pixelsVia = [...new Set(via)];
+    }
+  }
+
+  const libraryCount = new Map<EntryRef, number>();
+  for (const entry of db.get('drive-libraries') ?? []) {
+    const ref = `drive-libraries/${entry.id}`;
+    for (const r of withFamily(targets(ref, 'supports'))) {
+      libraryCount.set(r, (libraryCount.get(r) ?? 0) + 1);
+    }
+  }
+  for (const category of INDEX_CATEGORIES.pixel) {
+    for (const entry of db.get(category) ?? []) {
+      const ref = `${category}/${entry.id}`;
+      const s = summary(ref);
+      s.hardware = hardwareCount.get(ref) ?? 0;
+      if (hardwareBy.has(ref)) s.hardwareBy = hardwareBy.get(ref);
+      s.libraries = libraryCount.get(ref) ?? 0;
+    }
+  }
+
+  const distinctFrom = (ref: EntryRef, kinds: EdgeKind[], fromCategories?: string[]) =>
+    new Set(
+      (incoming.get(ref) ?? [])
+        .filter((e) => kinds.includes(e.kind))
+        .filter((e) => !fromCategories || fromCategories.includes(e.from.split('/')[0]))
+        .map((e) => e.from)
+    ).size;
+  for (const category of INDEX_CATEGORIES.software) {
+    for (const entry of db.get(category) ?? []) {
+      const ref = `${category}/${entry.id}`;
+      summary(ref).runsOn = distinctFrom(ref, ['firmware', 'works-with'], PIXEL_HARDWARE);
+    }
+  }
+  for (const entry of db.get('connectors') ?? []) {
+    const ref = `connectors/${entry.id}`;
+    summary(ref).usedBy = distinctFrom(ref, ['connector', 'uses']);
+  }
+  for (const entry of db.get('microboards') ?? []) {
+    const ref = `microboards/${entry.id}`;
+    summary(ref).hosts = distinctFrom(ref, ['host']);
+  }
+  return linked;
 }
 
 export function buildRelationGraph(db: Database): RelationGraph {
@@ -371,6 +520,7 @@ export function buildRelationGraph(db: Database): RelationGraph {
     dangling,
     families,
     familyOf,
+    linked: computeLinked(db, names, outgoing, incoming, families, familyOf),
   };
 }
 
@@ -384,6 +534,8 @@ export interface LinkItem {
   id?: string;
   /** External product link (related items without a ref) */
   url?: string;
+  /** Internal non-entry link, e.g. a filtered category table */
+  to?: string;
   notes?: string;
   /** Name as written in the declaring field, when it differs from `name` */
   via?: string;
@@ -393,7 +545,7 @@ export interface LinkItem {
 
 export interface LinkRow {
   label: string;
-  kind: EdgeKind | 'family-protocol';
+  kind: EdgeKind | 'family-protocol' | 'compatible-hardware' | 'via-firmware';
   direction: 'forward' | 'reverse' | 'derived';
   items: LinkItem[];
 }
@@ -431,6 +583,11 @@ function itemFor(graph: RelationGraph, ref: EntryRef, edge?: Edge): LinkItem {
   const via =
     edge?.via && normalizeName(edge.via) !== normalizeName(targetName) ? edge.via : undefined;
   return { name, category, id, notes: edge?.notes, via, source: edge?.source };
+}
+
+/** Escape a value for the category tables' `?f=key:value` URL filter format */
+export function escapeFilterValue(value: string): string {
+  return value.replace(/([|:,~!-])/g, '\\$1');
 }
 
 function sortItems(items: LinkItem[]): LinkItem[] {
@@ -491,19 +648,51 @@ export function linksForEntry(graph: RelationGraph, ref: EntryRef, entry: BaseEn
     }
   }
 
+  // Pixels: everything that can drive this part (listed, same protocol, or
+  // via firmware) is a filtered table away
+  const summary = graph.linked.get(ref);
+  if (summary?.hardwareBy) {
+    const r = row('All compatible hardware', 'compatible-hardware', 'derived');
+    for (const [category, n] of Object.entries(summary.hardwareBy)) {
+      r.items.push({
+        name: `${n} ${n === 1 ? category.replace(/s$/, '') : category}`,
+        to: `/${category}?f=linked.pixels:${escapeFilterValue(entry.name)}`,
+        notes: 'lists it, a same-protocol part, or runs firmware that supports it',
+      });
+    }
+  }
+  // Hardware with no maker-published IC list: what its firmware supports
+  if (summary?.pixelsVia?.length) {
+    for (const edge of graph.outgoing.get(ref) ?? []) {
+      if (edge.kind !== 'firmware') continue;
+      const supported = (graph.outgoing.get(edge.to) ?? []).filter((e) => e.kind === 'supports');
+      if (!supported.length) continue;
+      row(
+        `Drives (via ${graph.names.get(edge.to) ?? edge.to})`,
+        'via-firmware',
+        'derived'
+      ).items.push(...supported.map((e) => itemFor(graph, e.to)));
+    }
+  }
+
+  const DERIVED_ORDER: LinkRow['kind'][] = [
+    'via-firmware',
+    'family-protocol',
+    'compatible-hardware',
+  ];
   const order = (r: LinkRow) =>
-    r.kind === 'family-protocol' ? KIND_ORDER.length : KIND_ORDER.indexOf(r.kind);
+    DERIVED_ORDER.includes(r.kind)
+      ? KIND_ORDER.length + DERIVED_ORDER.indexOf(r.kind)
+      : KIND_ORDER.indexOf(r.kind as EdgeKind);
   const all = [...rows.values()]
     .map((r) => ({ ...r, items: sortItems(r.items) }))
     .sort((a, b) => order(a) - order(b) || a.direction.localeCompare(b.direction));
 
+  const isFamily = (r: LinkRow) =>
+    !DERIVED_ORDER.includes(r.kind) && EDGE_KINDS[r.kind as EdgeKind].group === 'family';
   return {
-    worksWith: all.filter(
-      (r) => r.kind === 'family-protocol' || EDGE_KINDS[r.kind].group === 'works-with'
-    ),
-    family: all.filter(
-      (r) => r.kind !== 'family-protocol' && EDGE_KINDS[r.kind].group === 'family'
-    ),
+    worksWith: all.filter((r) => !isFamily(r)),
+    family: all.filter(isFamily),
   };
 }
 

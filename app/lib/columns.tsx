@@ -400,6 +400,68 @@ function formatRelativeDate(v: unknown) {
   return <RelativeDate date={date} />;
 }
 
+// --- Cross-link columns (values derived in relations.ts → entry.linked) ----
+
+// What a controller/adapter drives, as the maker lists it — or "via WLED" when
+// the set comes from its firmware. The column's value (linked.pixels) is the
+// wider compatible set, so filtering "WS2815" also finds controllers that list
+// WS2811 (same protocol).
+function renderDrives(_: unknown, item: BaseEntry) {
+  const listed = (item.outputs as { protocols?: unknown } | undefined)?.protocols;
+  if (Array.isArray(listed) && listed.length > 0) return renderBadgeArray(listed);
+  const via = (item.linked as { pixelsVia?: string[] } | undefined)?.pixelsVia;
+  if (via?.length) return <span className="data-table-null">via {via.join(', ')}</span>;
+  return <span className="data-table-null">-</span>;
+}
+
+const sortByLength = (v: unknown) => (Array.isArray(v) ? v.length : null);
+
+// Ecosystem counts: 0 reads as "none recorded", shown muted
+function formatLinkCount(v: unknown) {
+  if (typeof v !== 'number' || v === 0) return <span className="data-table-null">–</span>;
+  return <span className="tabular-nums">{v}</span>;
+}
+
+function linkCountColumn(key: string, label: string, headerTip: string): Column {
+  return {
+    key,
+    label,
+    render: formatLinkCount,
+    sortValue: (v) => (typeof v === 'number' ? v : null),
+    defaultSortDir: 'desc',
+    className: 'data-table-cell--right',
+    filterConfig: { type: 'numeric' },
+    headerTip,
+  };
+}
+
+const drivesColumn: Column = {
+  key: 'linked.pixels',
+  label: 'Pixel ICs',
+  render: renderDrives,
+  sortValue: sortByLength,
+  defaultSortDir: 'desc',
+  filterConfig: { type: 'select', multi: true },
+  headerTip:
+    'Pixel ICs the maker lists. The filter also matches parts that speak the same protocol (listing WS2811 covers WS2815) and, when the maker lists none, what the board’s firmware supports.',
+};
+
+const pixelHardwareColumn = linkCountColumn(
+  'linked.hardware',
+  'Hardware',
+  'Controllers and adapters here that can drive it: the maker lists it or a same-protocol part, or their firmware supports it'
+);
+const pixelLibrariesColumn = linkCountColumn(
+  'linked.libraries',
+  'Libraries',
+  'Drive libraries here that support it or a same-protocol part'
+);
+const softwareHardwareColumn = linkCountColumn(
+  'linked.runsOn',
+  'Hardware',
+  'Controllers and adapters here that run it as firmware or name it as compatible software'
+);
+
 // Shared reviewed column: when the row was last specifically checked for
 // accuracy (git history, minus the IGNORED_COMMITS batches in data.ts)
 export const updatedColumn: Column = {
@@ -455,6 +517,7 @@ export const controllerColumns: Column[] = [
     render: (v) => renderBadgeArray(v),
     filterConfig: { type: 'select' },
   },
+  drivesColumn,
   {
     key: 'price',
     label: 'Price',
@@ -518,6 +581,8 @@ export const pixelColumns: Column[] = [
     render: renderPackages,
     filterConfig: { type: 'select' },
   },
+  pixelHardwareColumn,
+  pixelLibrariesColumn,
   partPriceColumn,
 ];
 
@@ -570,6 +635,8 @@ export const pixelICColumns: Column[] = [
     render: renderPackages,
     filterConfig: { type: 'select' },
   },
+  pixelHardwareColumn,
+  pixelLibrariesColumn,
   partPriceColumn,
 ];
 
@@ -609,6 +676,7 @@ export const patternDriverColumns: Column[] = [
     filterConfig: { type: 'boolean' },
   },
   { key: 'capabilities.visualizer', label: 'Visualizer', filterConfig: { type: 'select' } },
+  softwareHardwareColumn,
   { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];
 
@@ -639,6 +707,11 @@ export const connectorColumns: Column[] = [
   },
   { key: 'ratings.ip_rating', label: 'IP Rating', filterConfig: { type: 'select' } },
   { key: 'mechanical.locking', label: 'Locking', filterConfig: { type: 'select' } },
+  linkCountColumn(
+    'linked.usedBy',
+    'Used by',
+    'Controllers, adapters and decoders here that use this connector'
+  ),
   partPriceColumn,
 ];
 
@@ -677,6 +750,11 @@ export const microboardColumns: Column[] = [
   },
   { key: 'connectivity.wifi', label: 'Wi-Fi', filterConfig: { type: 'select' } },
   { key: 'connectivity.ethernet', label: 'Ethernet', filterConfig: { type: 'select' } },
+  linkCountColumn(
+    'linked.hosts',
+    'Add-ons',
+    'Shields, hats, capes, controllers and software here that are built for this board'
+  ),
   {
     key: 'price',
     label: 'Price',
@@ -705,6 +783,7 @@ export const adapterColumns: Column[] = [
     filterConfig: { type: 'numeric' },
   },
   { key: 'outputs.pixel_types', label: 'Pixel Types', filterConfig: { type: 'select' } },
+  drivesColumn,
   {
     key: 'price',
     label: 'Price',
@@ -746,6 +825,7 @@ export const driveLibraryColumns: Column[] = [
     render: renderBool,
     filterConfig: { type: 'boolean', trueLabel: 'Open source', falseLabel: 'Proprietary' },
   },
+  softwareHardwareColumn,
   { key: 'status', label: 'Status', render: renderStatus, filterConfig: { type: 'select' } },
 ];
 

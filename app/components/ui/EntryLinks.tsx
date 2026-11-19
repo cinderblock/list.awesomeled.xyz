@@ -32,6 +32,12 @@ export function EntryLinkPill({ item }: { item: LinkItem }) {
         {item.name}
       </Link>
     );
+  } else if (item.to) {
+    pill = (
+      <Link className="entry-related-link" to={item.to}>
+        {item.name} →
+      </Link>
+    );
   } else if (item.url) {
     pill = (
       <a className="entry-related-link" href={item.url} target="_blank" rel="noopener noreferrer">

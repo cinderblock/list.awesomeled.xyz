@@ -300,6 +300,7 @@ const SKIP_KEYS = new Set([
   'other_links', // shown with the other external links
   'price_source', // shown as the "as of" line under the price
   'sources', // shown under each field it documents
+  'linked', // derived compatibility summary, shown in Works with
 ]);
 
 function humanize(key: string): string {

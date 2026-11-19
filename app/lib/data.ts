@@ -11,11 +11,15 @@ import { buildRelationGraph, type RelationGraph } from './relations';
 // Cache for git timestamps (file path -> Date)
 let gitTimestampCache: Map<string, Date> | null = null;
 
-// Parsed category data, cached only during production builds: prerendering
-// scans every category per entry page for reverse links, which would otherwise
-// re-read all YAML hundreds of times. Skipped in dev so YAML edits show up on
+// Parsed category data. Production builds cache it for good: prerendering
+// reads every category for each entry page's links, which would otherwise
+// re-read all YAML hundreds of times. Dev keeps it for 2 seconds, so the many
+// reads within one request share a parse while YAML edits still show up on
 // refresh (the review-entry.ts workflow depends on that).
-const categoryDataCache = new Map<string, BaseEntry[]>();
+const categoryDataCache = new Map<string, { at: number; entries: BaseEntry[] }>();
+const DEV_CACHE_MS = 2000;
+const isFresh = (at: number) =>
+  process.env.NODE_ENV === 'production' || Date.now() - at < DEV_CACHE_MS;
 
 // Commits to ignore when calculating timestamps (e.g., bulk metadata changes)
 export const IGNORED_COMMITS = new Set([
@@ -194,13 +198,24 @@ function deriveFields(categoryId: string, entry: BaseEntry): void {
 }
 
 /**
- * Load all entries for a given category from YAML files
+ * Load all entries for a given category from YAML files, each carrying its
+ * derived `linked` compatibility summary (relations.ts LinkedSummary) for
+ * table columns and filters.
  */
 export function loadCategoryData(categoryId: string): BaseEntry[] {
-  if (process.env.NODE_ENV === 'production') {
-    const cached = categoryDataCache.get(categoryId);
-    if (cached) return cached;
+  const entries = readCategory(categoryId);
+  const linked = getRelationGraph().linked;
+  for (const e of entries) {
+    const summary = linked.get(`${categoryId}/${e.id}`);
+    if (summary) e.linked = summary;
   }
+  return entries;
+}
+
+/** Parse a category's YAML (plus load-time derived fields), without cross-links */
+function readCategory(categoryId: string): BaseEntry[] {
+  const cached = categoryDataCache.get(categoryId);
+  if (cached && isFresh(cached.at)) return cached.entries;
 
   const databasePath = getDatabasePath();
   const categoryDir = resolve(databasePath, categoryId);
@@ -235,9 +250,7 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
 
   // Sort by name
   entries.sort((a, b) => a.name.localeCompare(b.name));
-  if (process.env.NODE_ENV === 'production') {
-    categoryDataCache.set(categoryId, entries);
-  }
+  categoryDataCache.set(categoryId, { at: Date.now(), entries });
   return entries;
 }
 
@@ -262,6 +275,8 @@ export function loadEntry(categoryId: string, entryId: string): BaseEntry | null
     // Use git timestamp if available, otherwise use current date (for new/uncommitted files)
     parsed.updated = getGitTimestamps().get(filePath) ?? new Date();
     deriveFields(categoryId, parsed);
+    const summary = getRelationGraph().linked.get(`${categoryId}/${entryId}`);
+    if (summary) parsed.linked = summary;
     return parsed;
   } catch (e) {
     console.warn(`Failed to parse ${filePath}:`, e);
@@ -270,16 +285,16 @@ export function loadEntry(categoryId: string, entryId: string): BaseEntry | null
 }
 
 // The cross-category relationship graph (relations.ts), built from every
-// category at once. Cached for production builds like the category data; in
-// dev it's rebuilt per request so YAML edits show up on refresh.
-let relationGraphCache: RelationGraph | null = null;
+// category at once, cached like the category data (for good in production
+// builds, briefly in dev).
+let relationGraphCache: { at: number; graph: RelationGraph } | null = null;
 
 export function getRelationGraph(): RelationGraph {
-  if (relationGraphCache && process.env.NODE_ENV === 'production') return relationGraphCache;
+  if (relationGraphCache && isFresh(relationGraphCache.at)) return relationGraphCache.graph;
   const db = new Map<string, BaseEntry[]>();
-  for (const category of CATEGORIES) db.set(category.id, loadCategoryData(category.id));
-  relationGraphCache = buildRelationGraph(db);
-  return relationGraphCache;
+  for (const category of CATEGORIES) db.set(category.id, readCategory(category.id));
+  relationGraphCache = { at: Date.now(), graph: buildRelationGraph(db) };
+  return relationGraphCache.graph;
 }
 
 /**
