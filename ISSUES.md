@@ -276,3 +276,56 @@ URLs are in [plans/assets-research/](plans/assets-research/).
   longer lists "Lumieo II"; rosco-diffusion redirects to Rosco's myColor app;
   the Plexiglas shop link redirects to polyvantis-shop.com; "Plaztazote" and
   "polyethelene" are misspelled.
+
+## Connector and diffuser spec corrections (stream 2 or 6)
+
+Found by cross-links research (stream 4) with the maker's datasheet or page
+quoted; not applied because they're spec values, not links. Verify and apply:
+
+- `connectors/9159` `mechanical.pitch`: "3.0 mm" → "2.0 mm" <https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf>
+- `connectors/9159` `mechanical.max_pins`: 6 → 5 <https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf>
+- `connectors/9159` `ratings.max_current`: "5 A" → "3 A" <https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf>
+- `connectors/9159` `ratings.max_voltage`: "125 V" → "300 V AC" <https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf>
+- `connectors/cee-form` `ratings.max_current`: "16 A" → "125 A (family: 16/32/63/125 A)" <https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/>
+- `connectors/df62w` `termination.smallest_gauge`: "20 AWG" → "26 AWG" <https://www.digikey.ca/en/product-highlight/h/hirose/df62w-series-connectors>
+- `connectors/df62w` `termination.largest_gauge`: "26 AWG" → "20 AWG" <https://www.digikey.ca/en/product-highlight/h/hirose/df62w-series-connectors>
+- `connectors/dupont` `termination.largest_gauge`: "24 AWG" → "22 AWG" <https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/>
+- `connectors/gx-16` `ratings.max_voltage`: "100 V" → "400 V" <https://www.renhotecpro.com/gx16-connector-data-sheet/>
+- `connectors/gx-16` `ratings.max_current`: "7 A" → "10 A" <https://www.renhotecpro.com/gx16-connector-data-sheet/>
+- `connectors/ic5-ec5` `creator`: "Spektrum" → "Spektrum (IC5) / E-flite (EC5), both Horizon Hobby brands" <https://www.horizonhobby.com/product/connector-ec5-battery-2/EFLAEC502.html>
+- `connectors/mate-n-lok` `mechanical.pitch`: "5.08 mm" → "6.35 mm" <https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story>
+- `connectors/mate-n-lok` `mechanical.max_pins`: 10 → 15 <https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story>
+- `connectors/mini-fit-jr` `mechanical.max_pins`: 16 → 24 <https://www.digikey.ca/en/product-highlight/m/molex/mini-fit-jr-connectors>
+- `connectors/mt30-60` `ratings.max_current`: "60 A" → "35 A (MT60, 12 AWG); MT30 20 A (16 AWG)" <https://www.china-amass.net/mt60-m-product/>
+- `connectors/mt30-60` `ratings.max_voltage`: "60 V" → "80 V DC" <https://www.china-amass.net/mt60-m-product/>
+- `connectors/mtsb-combicon` `termination.smallest_gauge`: "20 AWG" → "24 AWG" <https://novapart.co/products/1757022/pluggable-terminal-block-508-mm-3-ways-24-awg-12>
+- `connectors/mtsb-combicon` `termination.largest_gauge`: "10 AWG" → "12 AWG" <https://novapart.co/products/1757022/pluggable-terminal-block-508-mm-3-ways-24-awg-12>
+- `connectors/ph` `notes`: "...2.5mm not 2.54 (1/10\") pitch runs off on boards drilled for 2.54" → "JST PH pitch is 2.0 mm" <https://www.jst-mfg.com/product/detail_e.php?series=199>
+- `connectors/ph` `termination.smallest_gauge`: "24 AWG" → "32 AWG" <https://www.jst-mfg.com/product/detail_e.php?series=199>
+- `connectors/ph` `mechanical.locking`: "Detent" → "Friction" <https://www.jst-mfg.com/product/detail_e.php?series=199>
+- `connectors/powerpole-15-45` `termination.largest_gauge`: "6 AWG" → "10 AWG" <https://www.andersonpower.com/?p=301>
+- `connectors/sh` `mechanical.rows`: 2 → 1 <https://www.jst-mfg.com/product/detail_e.php?series=231>
+- `connectors/sh` `mechanical.max_pins`: 25 → 20 <https://www.jst-mfg.com/product/detail_e.php?series=231>
+- `connectors/sh` `termination.smallest_gauge`: "30 AWG" → "32 AWG" <https://www.jst-mfg.com/product/detail_e.php?series=231>
+- `connectors/sh` `mechanical.locking`: "Latching" → "Friction" <https://www.jst-mfg.com/product/detail_e.php?series=231>
+- `connectors/sh` `mechanical.wire_to_wire`: true → false <https://www.jst-mfg.com/product/detail_e.php?series=231>
+- `connectors/sm` `mechanical.rows`: 1 → "1-2" <https://www.jst-mfg.com/product/detail_e.php?series=238>
+- `connectors/sp13` `ratings.max_current`: "5 A" → "13 A" <https://www.weipuconnector.com/sp13-series/>
+- `connectors/sp17` `links.product`: "https://weipuconnector.com/product/38" → "https://www.weipuconnector.com/sp17-series/" <https://www.weipuconnector.com/sp17-series/>
+- `connectors/sp17` `ratings.max_current`: "10 A" → "50 A" <https://www.weipuconnector.com/sp17-series/>
+- `connectors/sp17` `mechanical.min_pins`: 2 → 1 <https://www.weipuconnector.com/sp17-series/>
+- `connectors/superseal` `mechanical.max_pins`: 8 → 6 <https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html>
+- `connectors/superseal` `ratings.ip_rating`: "IP68" → "IP67" <https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html>
+- `connectors/teeplug` `termination.largest_gauge`: "16 AWG" → "4 mm² (about 12 AWG)" <https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html>
+- `connectors/teeplug` `termination.smallest_gauge`: "6 AWG" → null <https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html>
+- `connectors/wago-221` `termination.smallest_gauge`: "28 AWG" → "24 AWG" <https://www.wago.com/us/products/electrical-interconnect/discover-wire-and-splicing-connectors/221-series-levernuts>
+- `connectors/wieland-rst` `ratings.max_current`: "16 A" → "32 A" <https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/>
+- `connectors/xh` `mechanical.locking`: "Latching" → "Friction" <https://www.jst.com/products/crimp-style-connectors-wire-to-board-type/xh-connector/>
+- `connectors/xt60-90` `creator`: "Generic" → "Amass (Changzhou Amass Electronics)" <https://www.china-amass.net/about-us/>
+- `connectors/xt60-90` `ratings.max_current`: "90 A" → "45 A (XT90PW-M); XT60-F 35 A at 12 AWG" <https://www.china-amass.net/uploads/XT90PW-M-SPEC.pdf>
+- `connectors/xt60-90` `ratings.max_voltage`: "42 V" → "150 V DC (XT90PW-M); XT60-F 80 V DC" <https://www.china-amass.net/uploads/XT90PW-M-SPEC.pdf>
+- `commercial-systems/smartpxl` `creator`: "SmartPXL" → "ENTTEC" <https://www.enttec.com/product/uncategorized/hi-res-smart-pxl-100x25-rgb-rgbw-led-pixel-dot-strings/>
+- `diffusive-materials/3m-envision-diffuser` `material_type`: "polyester" → "vinyl (cast, PVC-free)" <https://www.3m.co.uk/3M/en_GB/p/d/b00024897/>
+- `diffusive-materials/ld45-plaztazote` `name`: "LD45 Plaztazote" → "LD45 Plastazote" <https://www.zotefoams.com/product/azote/plastazote/>
+- `diffusive-materials/lexan-dclw` `name`: "Lexan DCLW" → "LEXAN DLCW" <https://led-professional.com/products/led-optics/sabic-to-introduce-pioneering-lexantm-dlcw-light-diffusing-technology>
+- `diffusive-materials/perspex-diffuse` `physical.sizes_available`: "up to 1220x2440" → "3050 x 2030 mm" <https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/>
