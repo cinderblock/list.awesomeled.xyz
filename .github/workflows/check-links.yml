@@ -44,7 +44,7 @@ jobs:
             // to the tail so the issue always shows the summary line.
             const start = log.search(/^={10,}$/m);
             const report = (start >= 0 ? log.slice(start) : log.split('\n').slice(-5).join('\n')).trim();
-            const summary = (log.match(/^ok \d+ \| dead \d+ \| check \d+$/m) ?? ['(no summary — checker crashed?)'])[0];
+            const summary = (log.match(/^ok \d+ \| dead \d+ \| check \d+( \| back \d+)?$/m) ?? ['(no summary — checker crashed?)'])[0];
             const prices = (log.match(/^prices: \d+ dated \| \d+ stale \| \d+ undated$/m) ?? [''])[0];
             const date = new Date().toISOString().slice(0, 10);
             const title = 'Link-rot report (rolling)';

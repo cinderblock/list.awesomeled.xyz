@@ -13,7 +13,9 @@
  * For DEAD urls it also queries the Wayback Machine availability API and
  * prints a ready-to-paste `dead_links` YAML stub (latest capture pre-filled —
  * curate the timestamp if the domain changed hands). URLs already listed in
- * an entry's `dead_links` are skipped.
+ * an entry's `dead_links` are re-probed too: any that answer again are listed
+ * under BACK so a human can confirm and drop the entry (a parked domain also
+ * answers, so look before deleting).
  *
  * Requests are paced per host (one at a time, PER_HOST_GAP_MS apart, one
  * retry after a 429) so shared hosts like Tindie or Shopify don't rate-limit
@@ -54,6 +56,13 @@ interface Result {
   verdict: Verdict;
   detail: string;
   archive?: string;
+  /** Listed in the entry's dead_links (re-probe) */
+  known?: boolean;
+}
+
+interface Targets {
+  byUrl: Map<string, string[]>; // url -> places it appears
+  knownDead: Set<string>; // `${entry}\n${url}` pairs listed in that entry's dead_links
 }
 
 // Whole-URL strings and URLs embedded in prose. Trailing punctuation that
@@ -167,9 +176,9 @@ function loadEntries(only?: string): Entry[] {
   return entries;
 }
 
-// url -> places it appears
-function gatherTargets(entries: Entry[], only?: string): Map<string, string[]> {
+function gatherTargets(entries: Entry[], only?: string): Targets {
   const byUrl = new Map<string, string[]>();
+  const knownDead = new Set<string>();
   const add = (url: string, where: string) => {
     if (url.includes('web.archive.org') || /^https?:\/\/localhost\b/.test(url)) return;
     if (!byUrl.has(url)) byUrl.set(url, []);
@@ -187,7 +196,11 @@ function gatherTargets(entries: Entry[], only?: string): Map<string, string[]> {
     const { dead_links: _dead, ...rest } = data;
     const urls = new Set<string>();
     collectUrls(rest, urls);
-    for (const url of urls) if (!known.has(url)) add(url, path);
+    for (const url of urls) add(url, path);
+    for (const url of known) {
+      add(url, path);
+      knownDead.add(`${path}\n${url}`);
+    }
   }
 
   // Prose pages: category descriptions (always, or just the one category)
@@ -208,7 +221,7 @@ function gatherTargets(entries: Entry[], only?: string): Map<string, string[]> {
       }
     }
   }
-  return byUrl;
+  return { byUrl, knownDead };
 }
 
 function hostOf(url: string): string {
@@ -219,7 +232,7 @@ function hostOf(url: string): string {
   }
 }
 
-async function checkLinks(byUrl: Map<string, string[]>): Promise<Result[]> {
+async function checkLinks({ byUrl, knownDead }: Targets): Promise<Result[]> {
   // One queue per host; CONCURRENCY workers each drain whole hosts, so no
   // host ever sees parallel requests from us.
   const hosts = new Map<string, string[]>();
@@ -244,9 +257,12 @@ async function checkLinks(byUrl: Map<string, string[]>): Promise<Result[]> {
         for (const [i, url] of urls.entries()) {
           if (i > 0) await sleep(PER_HOST_GAP_MS);
           const { verdict, detail } = await probe(url);
-          const archive = verdict === 'dead' ? await waybackLatest(url) : undefined;
-          for (const entry of byUrl.get(url)!) {
-            results.push({ entry, url, verdict, detail, archive });
+          const places = byUrl.get(url)!;
+          const isKnown = (entry: string) => knownDead.has(`${entry}\n${url}`);
+          const archive =
+            verdict === 'dead' && !places.every(isKnown) ? await waybackLatest(url) : undefined;
+          for (const entry of places) {
+            results.push({ entry, url, verdict, detail, archive, known: isKnown(entry) });
           }
           done++;
           if (done % 50 === 0) console.log(`  …${done}/${byUrl.size}`);
@@ -257,7 +273,12 @@ async function checkLinks(byUrl: Map<string, string[]>): Promise<Result[]> {
   return results;
 }
 
-function printLinkReport(results: Result[], deadOnly: boolean): string {
+function printLinkReport(all: Result[], deadOnly: boolean): string {
+  // Already-annotated dead links only matter if they came back.
+  const back = all
+    .filter((r) => r.known && r.verdict === 'ok')
+    .sort((a, b) => a.entry.localeCompare(b.entry));
+  const results = all.filter((r) => !r.known);
   const dead = results
     .filter((r) => r.verdict === 'dead')
     .sort((a, b) => a.entry.localeCompare(b.entry));
@@ -290,8 +311,15 @@ function printLinkReport(results: Result[], deadOnly: boolean): string {
     for (const r of check) console.log(`  ${r.entry}: ${r.url} (${r.detail})`);
   }
 
+  if (!deadOnly && back.length > 0) {
+    console.log(
+      `\n${'='.repeat(60)}\nBACK (${back.length}) — in dead_links but answering again; check the page shows the right product, then drop the dead_links entry:\n`
+    );
+    for (const r of back) console.log(`  ${r.entry}: ${r.url} (${r.detail})`);
+  }
+
   const okCount = results.length - dead.length - check.length;
-  return `ok ${okCount} | dead ${dead.length} | check ${check.length}`;
+  return `ok ${okCount} | dead ${dead.length} | check ${check.length} | back ${back.length}`;
 }
 
 // --- Prices -----------------------------------------------------------------
