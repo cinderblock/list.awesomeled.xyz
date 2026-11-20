@@ -47,7 +47,7 @@ price_source:
   vendor: Raspberry Pi
 related:
   - type: predecessor
-    ref: microboards/raspberry-pi-3b
+    ref: microboards/raspberry-pi-3-model-b
     notes: 'The 3B+ is the upgraded 3B: 1.4 GHz BCM2837B0, dual-band Wi-Fi, faster Ethernet, PoE header'
     source:
       url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc

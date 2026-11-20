@@ -4,13 +4,19 @@ release_year: 2016
 creator:
   name: Raspberry Pi Foundation
   page: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+notes: >-
+  The original Pi 3 (not the 3B+): the first Raspberry Pi with a 64-bit CPU and built-in Wi-Fi and
+  Bluetooth, on very nearly the Pi 2 Model B's form factor. Revision 1.1 used the BCM2837 and has
+  reached end of life; the current revision uses the BCM2837B0 at 1.2 GHz.
 power:
   voltage:
     min: 5V
     max: 5V
   gpio_voltage: 3.3V
+aliases:
+  - Raspberry Pi 3B
 compute:
-  soc: BCM2837
+  soc: BCM2837B0
   cpu: 4× ARM Cortex-A53
   isa: ARMv8-A
   clock_speed: 1.2GHz
@@ -21,13 +27,15 @@ connectivity:
     - 2.4GHz
   ethernet: 100BASE-TX
   bluetooth: '4.1'
-  usb: OTG x4
+  usb: 2.0 x4
   serial: true
 io:
   max_outputs: 1
   storage: microSD
   bms: false
   imu: false
+other_links:
+  - https://pip.raspberrypi.com/documents/RP-008340-DS
 price: 35
 price_source:
   notes: Same as the launch price (Raspberry Pi blog, 29 Feb 2016)
@@ -38,41 +46,68 @@ price_source:
 related:
   - type: predecessor
     ref: microboards/raspberry-pi-2-model-b
+    notes: Replaced the Pi 2 Model B in February 2016, keeping its form factor
     source:
       url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
       retrieved: '2026-11-18'
-      notes: '"It replaced Raspberry Pi 2 Model B in February 2016."'
-  - type: variant
-    ref: microboards/raspberry-pi-3-model-b-plus
-    notes: Later model in the Raspberry Pi 3 range (2018)
+      notes: "'It replaced Raspberry Pi 2 Model B in February 2016.' Launch post: 'very nearly the same form-factor as the Raspberry Pi 1 Model B+ and Raspberry Pi 2 Model B'"
 sources:
   status:
     url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
     retrieved: '2026-11-18'
-    notes: 'Obsolescence statement: in production until at least January 2028'
+    notes: '"will remain in production until at least January 2028"'
   release_year:
     url: https://www.raspberrypi.com/news/raspberry-pi-3-on-sale/
     retrieved: '2026-11-18'
-    notes: Launch post, 29 Feb 2016
-  compute:
-    url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+    notes: "Launch post of 29 February 2016: 'Raspberry Pi 3 is now on sale'"
+  aliases:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
     retrieved: '2026-11-18'
-    notes: Quad Core 1.2GHz Broadcom BCM2837 64bit CPU, 1GB RAM
+    notes: Section 'Raspberry Pi 3 Model B' calls it 'Raspberry Pi 3B' throughout
+  compute.soc:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'On the most recent revision of Raspberry Pi 3B, Broadcom BCM2837B0, which includes a 1.2 GHz quad-core 64-bit Cortex-A53'; 'Revision 1.1 of Raspberry Pi 3B, which used BCM2837, has reached end of life'. The product page still says 'Quad Core 1.2GHz Broadcom BCM2837 64bit CPU'"
+  compute.isa:
+    url: https://en.wikipedia.org/wiki/ARM_Cortex-A53
+    retrieved: '2026-11-18'
+    notes: "Reference source: Cortex-A53 is 'a CPU microarchitecture of the ARMv8-A family'"
+  compute.ram:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'1 GB of LPDDR2 ... RAM that runs at 900 MHz'"
   connectivity.wifi:
-    - url: https://www.raspberrypi.com/news/raspberry-pi-3-on-sale/
-      retrieved: '2026-11-18'
-      notes: Integrated 802.11n wireless LAN (BCM43438)
-    - url: https://www.infineon.com/cms/cn/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/cyw43438/
-      retrieved: '2026-11-18'
-      notes: CYW43438 (ex-BCM43438) is single-band 2.4GHz
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'single-band (2.4 GHz) 802.11b/g/n Wi-Fi'"
   connectivity.bluetooth:
-    url: https://www.raspberrypi.com/news/raspberry-pi-3-on-sale/
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
     retrieved: '2026-11-18'
-    notes: '"Integrated 802.11n wireless LAN and Bluetooth 4.1"'
+    notes: "'Bluetooth 4.1 and Bluetooth Low Energy (BLE)'"
   connectivity.ethernet:
-    url: https://www.raspberrypi.com/products/raspberry-pi-3-model-b/
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
     retrieved: '2026-11-18'
-    notes: 100 Base Ethernet
+    notes: "'100BASE-T Ethernet port ... at 100 Mb/s', through the LAN9514 USB/Ethernet controller"
+  connectivity.usb:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'Four USB 2.0 ports'"
+  power.voltage:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'A micro USB power port ... supporting the 5 V at 2.5 A (12.5 W) required to power the board'"
+  power.gpio_voltage:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/gpio-on-raspberry-pi.adoc
+    retrieved: '2026-11-18'
+    notes: "'Raspberry Pi GPIO pins operate at 3.3 V and aren't 5 V tolerant.'"
+  other_links:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: Schematic drawings for Raspberry Pi 3B (RP-008340-DS); the product page links no product brief or datasheet
+  notes:
+    url: https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/sbcs/sbc-models.adoc
+    retrieved: '2026-11-18'
+    notes: "'It introduces a performance upgrade, increase in memory, and built-in wireless connectivity. It's also the first Raspberry Pi model to feature a 64-bit CPU'; form factor from the launch post (https://www.raspberrypi.com/news/raspberry-pi-3-on-sale/)"
 technical_notes:
   - 'Max outputs: software can make 1 PWM pin generate correct WS2812 output with DMA'
   - Switched micro-USB power input rated up to 2.5A

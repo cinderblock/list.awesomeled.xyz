@@ -77,12 +77,6 @@ related:
       url: https://github.com/FalconChristmas/fpp/blob/master/README.md
       retrieved: '2026-11-18'
   - type: host
-    ref: microboards/raspberry-pi-3-model-b
-    notes: Raspberry Pi 3 family
-    source:
-      url: https://github.com/FalconChristmas/fpp/blob/master/README.md
-      retrieved: '2026-11-18'
-  - type: host
     ref: microboards/raspberry-pi-4-model-b
     notes: Raspberry Pi 4
     source:
@@ -119,7 +113,7 @@ related:
       url: https://github.com/FalconChristmas/fpp/blob/master/README.md
       retrieved: '2026-11-18'
   - type: host
-    ref: microboards/raspberry-pi-3b
+    ref: microboards/raspberry-pi-3-model-b
     notes: Raspberry Pi 3 family
     source:
       url: https://github.com/FalconChristmas/fpp/blob/master/README.md
