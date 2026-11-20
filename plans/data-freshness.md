@@ -11,11 +11,12 @@ then make freshness durable: the site should show how old a price is, and
 the tooling should keep finding rot and staleness without someone remembering
 to look.
 
-## Status (2026-11-18, 9:40 PM PST / 05:40Z)
+## Status (2026-11-20, 2:40 AM PST / 10:40Z)
 
 Everything below is on `master` except where marked. One owner decision is
-open: what replaces the commercial `$` rating (proposal below). The monthly
-workflow is running again and NS/HD pairs are merged.
+open: the commercial "experience tier" that replaces the `$` rating
+(proposal below). The monthly workflow is running again; the NS/HD names
+are split into IC and LED entries.
 
 |                                                 | Start of day                  | Now                                       |
 | ----------------------------------------------- | ----------------------------- | ----------------------------------------- |
@@ -70,9 +71,12 @@ workflow is running again and NS/HD pairs are merged.
 - Status `discontinued` only with evidence; out of stock ≠ discontinued.
 - Link-liveness-only commits are excluded from "Reviewed"; status
   re-confirmed with evidence counts as a review.
-- **NS/HD pairs are one part** (Cameron, 2026-11-18: "happy if they're
-  merged or highly linked"): merged into the HD entries, NS names as
-  aliases.
+- **NS = the IC, HD = the LED** (Cameron, 2026-11-20: "be pedantic and
+  correct. the Pixels are "HD..." and the Pixel ICs are "NS...". they
+  should still be strongly linked"). Supersedes the 2026-11-18 merge with
+  NS aliases. Each HD pixel declares `uses: pixel-ics/ns…`; the reverse
+  link is derived. Controller protocol lists that say "NS107S" now resolve
+  to the IC entry.
 
 ## What shipped
 
@@ -111,6 +115,13 @@ workflow is running again and NS/HD pairs are merged.
    protocol lists resolving; NS8808 got alias HD8808. Sheet parity pairs the
    NS rows with the HD entries (aliases.ts, 12 acks; 0 unexplained cells);
    removed-entry map in `plans/database-review.md`.
+10. **NS/HD split into IC + LED** (Cameron's follow-up): new
+    `pixel-ics/ns107s`, `ns108`, `ns8808` (Newstar's own specs and pages);
+    `pixels/hd107s`, `hd108` lose the NS aliases and gain `uses` links;
+    `pixels/ns8808` renamed `pixels/hd8808` (image too), with channel
+    current 17.5 mA and 200 mW from Newstar's page (the sheet's 9 mA /
+    45 mW had no source). Not split: NS108E, since Newstar's catalog gives
+    it no HD name.
 
 ## Findings / gotchas
 
@@ -183,22 +194,33 @@ workflow is running again and NS/HD pairs are merged.
       (<https://github.com/cinderblock/list.awesomeled.xyz/issues/2#issuecomment-6998997065>).
 - [x] Monthly workflow: restarted by the 4:15 PM push; inactivity warning
       added (`1d8b88b`).
-- [x] NS/HD pairs merged (`ec19baf`).
-- [ ] Commercial `$` rating: waiting on Cameron (below).
+- [x] NS/HD pairs merged (`ec19baf`), then split into IC + LED entries.
+- [ ] Commercial experience tier: waiting on Cameron (below).
 
 ## Open questions for the user
 
-1. **Commercial `$` rating** (Cameron: "open to suggestions. User
-   voting?"). Nobody ever defined the sheet's scale, and it contradicts
-   the sourced prices (Festoon 2 `$$$` at $21/pixel vs Triklit `$$$$` at
-   $5/pixel; Vinci `$$$$$` from $31). Proposal: drop the hand rating and
-   show numbers computed from the sourced price points, which refresh with
-   them: **From** (cheapest published buy-in, USD) next to the existing
-   **Per Pixel**; the 6 systems without a public price (Active RGB, DFS3000,
-   Intelligent Marquee, LEDSnaps, SmartPXL, Strip and Tiles) read "Quote
-   only". Not voting: price is a checkable fact, votes would need a backend
-   (a Cloudflare change), spam defences, and more traffic than ~18 systems
-   get. Recommendation: yes to the proposal.
+1. **Commercial experience tier** (replaces the sheet's undefined `$`
+   rating). Cameron, 2026-11-20: "more like a restaurant system, or a star
+   system. some are fast food... some are a little more plug and play.
+   others are full experience". Voting dropped. Proposal, four tiers by
+   what the buyer gets, not by price (prices stay as computed **From** and
+   **Per Pixel** columns beside it):
+   - **Parts** (fast food): bare pixel products; bring your own
+     controller, power and software. RGB-Pixel-Panel, RGBW-Pixel-Panel.
+   - **Plug and play**: a complete kit that works out of the box with an
+     app or built-in controller. Twinkly.
+   - **Pro kit**: commercial-grade fixtures plus a dedicated controller on
+     standard protocols (DMX, Art-Net, sACN), bought online or from a
+     dealer and set up by an installer. Triklit, Festoon 2 RGB,
+     FestoonLight Q4, Vinci, SmartPXL.
+   - **Full experience**: a closed ecosystem from a pro lighting brand,
+     sold through dealers or integrators with system design, often quote
+     only. Flex, VC-Dot 1, LB-100, Astera Nyx, Strip and Tiles, DFS3000,
+     Intelligent Marquee, Active RGB, Ledsnaps, LightWalls.
+     The assignments are first guesses from the entries' notes; each gets a
+     sourced check (how it's sold and set up) when implemented. Schema: a
+     `pricing.tier` enum in place of `price_range` (needs stream 2's OK).
+     Recommendation: yes.
 
 ## Things not to do
 
