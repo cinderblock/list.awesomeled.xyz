@@ -108,6 +108,9 @@
 .designer-intro a {
   color: var(--dz-accent);
   white-space: nowrap;
+  /* Told from the sentence around it by more than its colour */
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 /* Once a design exists a phone has better uses for the first screen */
@@ -769,7 +772,11 @@ p.designer-slot-facts {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0.3rem;
+  bottom: 0;
+  /* Fills the strip the card leaves for it: 24 px tall, the smallest target
+     a finger can be asked to hit */
+  padding-block: 0.25rem;
+  line-height: 1rem;
   text-align: center;
   font-size: 0.6875rem;
   color: var(--muted-foreground);
@@ -978,9 +985,8 @@ p.designer-slot-facts {
   color: var(--muted-foreground);
   padding-block: 0.1rem;
 }
-.designer-issue-fix {
-  opacity: 0.85;
-}
+/* The advice reads at full strength: dimming it took a note's grey below
+   the contrast small text needs */
 .designer-sev {
   flex-shrink: 0;
   margin-top: 0.15rem;
@@ -1329,6 +1335,12 @@ p.designer-slot-facts {
   padding: 0.5rem;
   border-radius: var(--radius-md);
   background: var(--dgm-bg);
+}
+/* It takes focus only while it scrolls (ScrollRegion), for the arrow keys */
+.designer-diagram-scroll:focus-visible,
+.diagram-scroll:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
 .dgm {
   display: block;

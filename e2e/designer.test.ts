@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import AxeBuilder from '@axe-core/playwright';
 import { test, expect as baseExpect, type Page } from '@playwright/test';
 
 // These tests name parts by id but never assert exact numbers from the
@@ -11,6 +12,8 @@ test.describe.configure({ timeout: 90_000 });
 const expect = baseExpect.configure({ timeout: 15_000 });
 
 const DESIGN = 'p=ws2812&x=8&n=500&c=falcon-f16v5&g=xlights';
+/** A design with something to say in every slot: warnings, notes, an outdoor check */
+const WARNINGS = 'p=apa102&x=2&n=144&c=mb-esp-32s&l=74hc245&k=dupont&o=1';
 
 /** The address bar follows the design a moment later: wait for it */
 function search(page: Page) {
@@ -42,6 +45,43 @@ async function openPicker(page: Page, id: string) {
   const panel = page.locator(`#slot-${id}-panel`);
   await expect(panel).toBeVisible();
   return panel;
+}
+
+// WCAG 2.0 / 2.1 / 2.2, levels A and AA, plus axe's best practices: the set
+// e2e/a11y.test.ts holds the rest of the site to
+const AXE_TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
+
+/** The rules axe finds broken, one line each; `within` limits the check to one part of the page */
+async function a11yViolations(page: Page, within?: string): Promise<string[]> {
+  // Anything still fading in is measured half transparent and reads as low
+  // contrast: let entrance animations finish first
+  await page.evaluate(async () => {
+    const frame = () => new Promise((resolve) => requestAnimationFrame(() => resolve(null)));
+    for (let round = 0; round < 20; round++) {
+      await frame();
+      await frame();
+      const running = document
+        .getAnimations()
+        .filter(
+          (animation) =>
+            animation.playState === 'running' &&
+            animation.effect?.getComputedTiming().endTime !== Infinity
+        );
+      if (running.length === 0) return;
+      await Promise.all(running.map((animation) => animation.finished.catch(() => undefined)));
+    }
+  });
+  let builder = new AxeBuilder({ page }).withTags(AXE_TAGS);
+  if (within) builder = builder.include(within);
+  const results = await builder.analyze();
+  return results.violations.map(
+    (violation) =>
+      `${violation.id} (${violation.nodes.length}): ${violation.help}\n` +
+      violation.nodes
+        .slice(0, 3)
+        .map((node) => `    ${node.target.join(' ')}`)
+        .join('\n')
+  );
 }
 
 function collectErrors(page: Page): string[] {
@@ -483,7 +523,54 @@ test.describe('System overview', () => {
     await page.getByRole('link', { name: /See how the parts fit together/ }).click();
     await expect(page).toHaveURL(/\/system-overview$/);
   });
+
+  test('on a phone its diagram scrolls sideways, and the keyboard can reach it', async ({
+    page,
+  }) => {
+    test.slow();
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/system-overview');
+    await page.locator('html[data-hydrated]').waitFor({ state: 'attached' });
+    await expect(page.locator('.diagram-scroll')).toHaveAttribute('tabindex', '0');
+    expect(await a11yViolations(page)).toEqual([]);
+  });
 });
+
+for (const theme of ['light', 'dark'] as const) {
+  test.describe(`System Designer: accessibility, ${theme} theme`, () => {
+    test.beforeEach(async ({ context }) => {
+      await context.addInitScript((value) => {
+        window.localStorage.clear();
+        window.localStorage.setItem('theme', value);
+      }, theme);
+    });
+
+    test('a design with warnings, and each picker open', async ({ page }) => {
+      test.slow();
+      await open(page, `/designer?${WARNINGS}`);
+      expect(await a11yViolations(page)).toEqual([]);
+      for (const id of [
+        'g0-pixels',
+        'g0-controller',
+        'g0-shifter',
+        'g0-connector',
+        'system-source',
+      ]) {
+        await openPicker(page, id);
+        expect(await a11yViolations(page, `#slot-${id}`), `with the ${id} picker open`).toEqual([]);
+      }
+    });
+
+    test('a full design on a phone, where the diagram scrolls', async ({ page }) => {
+      test.slow();
+      await page.setViewportSize({ width: 390, height: 844 });
+      await open(page, `/designer?${DESIGN}`);
+      // While it scrolls sideways the diagram's box is a tab stop
+      await expect(page.locator('.designer-diagram-scroll')).toHaveAttribute('tabindex', '0');
+      expect(await a11yViolations(page)).toEqual([]);
+    });
+  });
+}
 
 test.describe('Entry pages', () => {
   test.beforeEach(async ({ page }) => withoutDraft(page));

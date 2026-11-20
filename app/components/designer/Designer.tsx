@@ -45,7 +45,7 @@ import { copyText, designUrl, downloadBlob, fileSlug } from './browser';
 import { renderDiagramPng, renderDiagramSvg } from './exportDiagram';
 import { GroupCard } from './GroupCard';
 import { SourcePicker } from './PartPickers';
-import { SeverityIcon } from './parts';
+import { ScrollRegion, SeverityIcon } from './parts';
 import { PowerPanel } from './PowerPanel';
 import { SlotRow } from './SlotRow';
 import { SystemDiagram } from './SystemDiagram';
@@ -604,9 +604,9 @@ export function Designer({ catalog }: { catalog: Catalog }) {
           </h2>
           {hasPixels || analysis.controllers.length > 0 ? (
             <>
-              <div className="designer-diagram-scroll">
+              <ScrollRegion className="designer-diagram-scroll" label="Diagram of this design">
                 <SystemDiagram model={diagram} />
-              </div>
+              </ScrollRegion>
               <div className="designer-actions designer-no-print">
                 <button
                   type="button"

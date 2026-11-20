@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { LEDSystemDiagram } from '~/components/diagram/LEDSystemDiagram';
 import { DiagramModeToggle, useDiagramMode } from '~/components/diagram/DiagramModeToggle';
+import { ScrollRegion } from '~/components/designer/parts';
 import { pageMeta } from '~/lib/meta';
 
 export function meta(_args: Route.MetaArgs) {
@@ -49,9 +50,9 @@ export default function SystemOverview({ loaderData }: Route.ComponentProps) {
       <div className="diagram-container">
         <DiagramModeToggle value={simpleMode} onChange={setSimpleMode} />
         {/* On a phone the diagram keeps a readable size and scrolls sideways */}
-        <div className="diagram-scroll">
+        <ScrollRegion className="diagram-scroll" label="Diagram of an LED system">
           <LEDSystemDiagram counts={counts} simpleMode={simpleMode} />
-        </div>
+        </ScrollRegion>
       </div>
     </div>
   );

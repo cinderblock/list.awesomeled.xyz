@@ -1,6 +1,46 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { CircleCheck, CircleX, Info, TriangleAlert } from 'lucide-react';
 import type { Analysis, Issue, Severity } from '~/lib/designer';
+
+/**
+ * A box that scrolls sideways when its content doesn't fit (a diagram on a
+ * phone). While it scrolls it is a tab stop, so the arrow keys can move it;
+ * when everything fits it is not one.
+ */
+export function ScrollRegion({
+  className,
+  label,
+  children,
+}: {
+  className: string;
+  /** What is in the box, for a screen reader */
+  label: string;
+  children: ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [scrolls, setScrolls] = useState(false);
+  useEffect(() => {
+    const box = ref.current;
+    if (!box) return;
+    const measure = () => setScrolls(box.scrollWidth > box.clientWidth + 1);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(box);
+    if (box.firstElementChild) observer.observe(box.firstElementChild);
+    return () => observer.disconnect();
+  }, []);
+  return (
+    <div
+      ref={ref}
+      className={className}
+      role="group"
+      aria-label={label}
+      tabIndex={scrolls ? 0 : undefined}
+    >
+      {children}
+    </div>
+  );
+}
 
 /** Icon for an issue severity (or a green check for "ok") */
 export function SeverityIcon({

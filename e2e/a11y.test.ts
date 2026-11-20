@@ -7,7 +7,8 @@ import { gotoReady } from './helpers';
 // light for its background, a link that is only an icon, a button whose
 // spoken name is not the word printed on it.
 //
-// Not covered here: the System Designer (its own stream's page).
+// The System Designer's first screen is checked here; its pickers, warnings
+// and phone layout are checked in designer.test.ts.
 
 const PAGES = [
   '/',
@@ -20,6 +21,7 @@ const PAGES = [
   '/contribute',
   '/about',
   '/system-overview',
+  '/designer',
 ];
 
 // WCAG 2.0 / 2.1 / 2.2, levels A and AA, plus axe's best practices
