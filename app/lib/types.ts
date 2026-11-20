@@ -143,7 +143,8 @@ export interface SourceRecord {
   notes?: string;
 }
 
-// Base entry interface that all category entries extend
+// An entry of any category: its YAML fields, typed by the category schema
+// (database/_schema) and read through the field catalog (app/lib/fields.ts)
 export interface BaseEntry {
   id: string;
   name: string;
@@ -151,60 +152,3 @@ export interface BaseEntry {
   related?: RelatedItem[] | null;
   [key: string]: unknown;
 }
-
-// Specific entry types for each category
-export interface ControllerEntry extends BaseEntry {
-  creator?: string;
-  manufacturers?: string[];
-  vendors?: string[];
-  max_pixels?: number;
-  price?: number;
-  max_outputs?: number;
-  interfaces?: string[];
-  storage?: string;
-  standalone?: boolean;
-  pixel_types?: string;
-  max_voltage?: number;
-  max_current?: string;
-  buffered?: boolean;
-  output_connectors?: string;
-  outputs?: string;
-  waterproof?: boolean;
-  auxiliary_outputs?: string;
-  wled_compatible?: boolean;
-  notes?: string;
-  warranty?: string;
-  release_year?: number;
-  status?: string;
-  url?: string;
-}
-
-export interface PixelEntry extends BaseEntry {
-  creator?: string;
-  manufacturers?: string[];
-  vendors?: string[];
-  color_order?: string;
-  led_voltage?: string;
-  vcc_voltage?: string;
-  clocked?: boolean;
-  data_bitrate?: string;
-  package_size?: string;
-  datasheet_url?: string;
-}
-
-export interface ConnectorEntry extends BaseEntry {
-  creator?: string;
-  manufacturers?: string[];
-  vendors?: string[];
-  outline?: string;
-  max_current?: string;
-  max_voltage?: string;
-  ip_rating?: string;
-  locking?: string;
-  url?: string;
-  digikey_url?: string;
-  mouser_url?: string;
-}
-
-// Generic category data type
-export type CategoryEntry = BaseEntry;

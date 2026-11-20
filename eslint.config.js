@@ -83,7 +83,6 @@ export default tseslint.config(
             'status',
             'release_year',
             'creator',
-            'developer',
             'manufacturers',
             'vendors',
             'notes',
