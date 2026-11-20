@@ -59,7 +59,7 @@
         },
         "buffered": {
           "type": ["boolean", "null"],
-          "description": "Push-pull outputs that can drive a cable; false for pass-gate / pull-up translators"
+          "description": "Whether the outputs are strong enough to drive a cable to the pixels. true for bus buffers and line drivers. false for translators made for short links between chips, whose outputs are held through a resistor: pass-gate parts with pull-ups (TXS010x), auto-direction parts with a series resistor on each output (TXB010x, whatever the maker calls the architecture), MOSFET or resistor shifters."
         },
         "differential": {
           "type": ["boolean", "null"],
