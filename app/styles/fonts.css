@@ -10,6 +10,18 @@
    `font-display: swap` shows text in the fallback font until Inter arrives.
    ========================================================================== */
 
+/* What shows until Inter arrives: Arial, scaled to Inter's proportions
+   (average glyph width, ascent, descent), so the text keeps its place and
+   its line breaks when the real font swaps in. */
+@font-face {
+  font-family: 'Inter Fallback';
+  src: local('Arial');
+  size-adjust: 107.06%;
+  ascent-override: 90.49%;
+  descent-override: 22.56%;
+  line-gap-override: 0%;
+}
+
 /* latin */
 @font-face {
   font-family: 'Inter';

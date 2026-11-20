@@ -26,6 +26,32 @@ test.describe('Phone widths', () => {
     });
   }
 
+  test('the header still fits when the page is set in a wider font', async ({ page }) => {
+    // Until Inter arrives (or if it never does) the text is in whatever the
+    // device has, and on Linux that is a much wider face: the header's
+    // buttons used to slide 5 to 9 px off a phone screen. Stand in for that
+    // with no web font at all and extra letter spacing.
+    await page.route('**/*', (route) =>
+      route.request().resourceType() === 'font' ? route.abort() : route.continue()
+    );
+    for (const width of [320, 390]) {
+      await page.setViewportSize({ width, height: 800 });
+      await gotoReady(page, '/search?q=falcon');
+      await page.addStyleTag({
+        content:
+          "body { font-family: Verdana, 'DejaVu Sans', sans-serif; letter-spacing: 0.02em; }",
+      });
+      await expect.poll(() => sidewaysOverflow(page), { message: `at ${width}px` }).toBe(0);
+      // Nothing was pushed out to make it fit: search and the theme switch are still there
+      await expect(page.getByRole('button', { name: 'Search everything' })).toBeInViewport({
+        ratio: 1,
+      });
+      await expect(page.getByRole('banner').getByRole('button').last()).toBeInViewport({
+        ratio: 1,
+      });
+    }
+  });
+
   test('the header keeps its logo on one line and its search within reach', async ({ page }) => {
     // The header is the same on every page; this is the lightest one
     await gotoReady(page, '/about');

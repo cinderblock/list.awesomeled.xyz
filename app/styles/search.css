@@ -91,9 +91,22 @@
     padding-right: var(--space-2);
   }
 
+  /* The logo is the one part of the header that may give: in a wider font
+     (the fallback, until Inter arrives, is much wider on Linux) it shortens
+     to "Awesome LED Li…" instead of pushing the buttons off the screen */
   .site-logo {
+    display: block;
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 1.0625rem;
     white-space: nowrap;
+  }
+
+  .site-search,
+  .site-nav {
+    flex-shrink: 0;
   }
 
   .site-nav {
