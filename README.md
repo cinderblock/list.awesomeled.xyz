@@ -26,7 +26,9 @@ A comprehensive database of addressable LEDs, controllers, and related products 
 - **Columns**: the default view is curated; **Columns** adds any other field the entries record. **Dense** rows fit more on a screen. On a phone the table becomes a list of cards (**Cards** / **Table** switches either way, on any screen).
 - **Compare**: tick up to four entries and open **Compare** to see them side by side, with a differences-only switch.
 - **Share and export**: search, sort, filters, and columns live in the URL, so the address bar always links to exactly what you see. **Share & export** copies the table as TSV or Markdown and downloads CSV, JSON, or YAML.
-- **Keyboard**: `/` jumps to the table's search, `j` / `k` move between rows, `Enter` opens one, and `x` picks it for comparison.
+- **Keyboard**: `/` jumps to the table's search, `j` / `k` move between rows, `Enter` opens one, and `x` picks it for comparison. The first `Tab` stop on every page skips to its content.
+- **Link to an entry**: every entry has its own page, with a **Copy link** button, and a link pasted into a chat or a forum unfurls as a card with the product's picture and key facts.
+- **Fix it**: every entry page ends with **Suggest an edit** and **Report a problem**, and <https://list.awesomeled.xyz/contribute> lists what each category records, with a button that starts a new entry.
 
 ## System Designer
 
@@ -61,6 +63,7 @@ written up in [plans/designer.md](plans/designer.md).
 
 We hope you find these lists useful.
 If there is something that should be added, please do so!
+The quickest ways are on the site: <https://list.awesomeled.xyz/contribute>.
 
 All product data is stored in YAML files in the `database/` directory.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or updating entries.
@@ -175,6 +178,10 @@ first render in the browser differs from that HTML (because it reads the query
 string or saved preferences too early) fails only in the built site, never on
 the dev server, which is why `test:prod` exists. All three run in CI before a
 deploy.
+
+`e2e/a11y.test.ts` runs [axe](https://github.com/dequelabs/axe-core) on the
+main pages in both themes, on a phone, and with each menu open: contrast,
+names for screen readers, keyboard reach. A new page belongs in its `PAGES`.
 
 ## Bulk Database Updates
 
