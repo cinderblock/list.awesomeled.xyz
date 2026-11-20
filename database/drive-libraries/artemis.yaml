@@ -7,6 +7,7 @@ language: C#
 license: PolyForm-Noncommercial-1.0.0
 links:
   url: https://artemis-rgb.com/
+  repo: https://github.com/Artemis-RGB/Artemis
 platforms:
   - Windows
   - Linux
@@ -34,5 +35,9 @@ sources:
     url: https://wiki.artemis-rgb.com/en/guides/user/devices
     retrieved: '2026-11-18'
     notes: "'General hardware' (DMX) and 'RGB (gaming) periferals' (OpenRGB) sections"
+  links.repo:
+    url: https://api.github.com/repos/Artemis-RGB/Artemis
+    retrieved: '2026-11-18'
+    notes: 'Repository description: "Provides advanced unified lighting across many different brands RGB peripherals"; homepage https://artemis-rgb.com'
 supported_ics:
   - WS281X

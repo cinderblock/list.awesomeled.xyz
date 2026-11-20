@@ -7,6 +7,7 @@ language: C++
 license: GPL-2.0-or-later
 links:
   url: https://openrgb.org/index.html
+  repo: https://gitlab.com/CalcProgrammer1/OpenRGB
 platforms:
   - Windows
   - Linux
@@ -29,3 +30,7 @@ sources:
     url: https://gitlab.com/CalcProgrammer1/OpenRGB/-/tree/master/Controllers
     retrieved: '2026-11-18'
     notes: 'controller sources: E131Controller/RGBController_E131.cpp, DDPController/RGBController_DDP.cpp, DMXController/RGBController_DMX.cpp, LEDStripController/LEDStripController.h…'
+  links.repo:
+    url: https://gitlab.com/api/v4/projects/CalcProgrammer1%2FOpenRGB
+    retrieved: '2026-11-18'
+    notes: 'Project description: "Open source RGB lighting control that doesn''t depend on manufacturer software."'

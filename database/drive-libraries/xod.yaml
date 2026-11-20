@@ -9,6 +9,7 @@ language: JavaScript
 license: AGPL-3.0
 links:
   url: https://xod.io/
+  repo: https://github.com/xodio/xod
 platforms:
   - Arduino
   - ESP8266
@@ -17,5 +18,9 @@ sources:
     url: https://xod.io/libs/xod-dev/ws2812/
     retrieved: '2026-11-18'
     notes: xod-dev/ws2812 library page (v0.37.3), read via WebFetch
+  links.repo:
+    url: https://api.github.com/repos/xodio/xod
+    retrieved: '2026-11-18'
+    notes: 'Repository description: "XOD IDE"; homepage https://xod.io'
 supported_ics:
   - WS2812

@@ -5,9 +5,11 @@ aliases:
   - Fade Animation System
 features: Programming language based WS2812 and PWM LED ESP 32 with Windows based programming interface
 hardware: ESP32
+instructional_resources:
+  - http://www.riderx.info/fade-an-esp32-animation-system/
 language: C++
 links:
-  url: http://www.riderx.info/fade-an-esp32-animation-system/
+  repo: https://github.com/ericgu/Fade
   youtube: https://www.youtube.com/watch?v=-CXQz1x2k9o
 platforms:
   - ESP32
@@ -20,5 +22,9 @@ sources:
   aliases:
     url: http://eagledecorations.com/FadeAnimationSystem.html
     retrieved: '2026-11-18'
+  links.repo:
+    url: https://github.com/ericgu/Fade
+    retrieved: '2026-11-18'
+    notes: 'Readme: "Fade is an ESP32-based animation system."'
 supported_ics:
   - WS2812
