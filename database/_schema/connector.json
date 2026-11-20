@@ -24,59 +24,14 @@
       "description": "Year first introduced (0/null if unknown)"
     },
     "creator": {
-      "anyOf": [
-        {
-          "type": ["string", "null"]
-        },
-        {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "url": {
-              "type": "string"
-            },
-            "page": {
-              "type": "string"
-            }
-          }
-        }
-      ],
+      "$ref": "common.json#/definitions/creator",
       "description": "Originating manufacturer; does not imply off-brand incompatibility"
     },
     "manufacturers": {
-      "type": ["array", "null"],
-      "items": {
-        "type": "string"
-      }
+      "$ref": "common.json#/definitions/manufacturers",
+      "description": "Companies that build it, when they differ from the creator"
     },
-    "vendors": {
-      "type": ["array", "null"],
-      "items": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string"
-              },
-              "page": {
-                "type": "string"
-              }
-            }
-          }
-        ]
-      }
-    },
+    "vendors": { "$ref": "common.json#/definitions/vendors", "description": "Where it is sold" },
     "notes": {
       "type": ["string", "null"]
     },

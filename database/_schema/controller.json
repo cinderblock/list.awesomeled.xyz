@@ -26,72 +26,16 @@
       "description": "Year of first market availability"
     },
     "creator": {
-      "oneOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        },
-        {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "url": {
-              "type": "string",
-              "format": "uri"
-            },
-            "page": {
-              "type": "string",
-              "format": "uri"
-            }
-          },
-          "required": ["name"]
-        }
-      ],
-      "description": "Original designer/developer"
+      "$ref": "common.json#/definitions/creator",
+      "description": "Original designer or maker"
     },
     "manufacturers": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Manufacturers that produce this item"
+      "$ref": "common.json#/definitions/manufacturers",
+      "description": "Companies that build it, when they differ from the creator"
     },
     "vendors": {
-      "type": "array",
-      "items": {
-        "oneOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "url": {
-                "type": "string",
-                "format": "uri"
-              },
-              "page": {
-                "type": "string",
-                "format": "uri"
-              },
-              "warranty": {
-                "type": "string"
-              }
-            },
-            "required": ["name"]
-          }
-        ]
-      },
-      "description": "Vendors that sell/distribute this item"
+      "$ref": "common.json#/definitions/vendors",
+      "description": "Where it is sold"
     },
     "notes": {
       "type": ["string", "null"],

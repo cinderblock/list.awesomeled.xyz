@@ -42,26 +42,8 @@
       ]
     },
     "creator": {
-      "anyOf": [
-        {
-          "type": ["string", "null"]
-        },
-        {
-          "type": "object",
-          "additionalProperties": false,
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "url": {
-              "type": "string"
-            },
-            "page": {
-              "type": "string"
-            }
-          }
-        }
-      ]
+      "$ref": "common.json#/definitions/creator",
+      "description": "Original designer or maker"
     },
     "notes": {
       "type": ["string", "null"]

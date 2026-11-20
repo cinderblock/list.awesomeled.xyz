@@ -306,6 +306,66 @@
         "MadLED"
       ]
     },
+    "organization": {
+      "description": "A company or person: a bare name ('ENTTEC'), or {name, url, page}",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string", "format": "uri", "description": "Their site" },
+            "page": {
+              "type": "string",
+              "format": "uri",
+              "description": "This product's page on their site"
+            }
+          }
+        }
+      ]
+    },
+    "vendor": {
+      "description": "A seller: a bare name, or {name, url, page, warranty}",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name"],
+          "properties": {
+            "name": { "type": "string" },
+            "url": { "type": "string", "format": "uri", "description": "Their site" },
+            "page": {
+              "type": "string",
+              "format": "uri",
+              "description": "This product's listing on their site"
+            },
+            "warranty": {
+              "type": "string",
+              "description": "Warranty this seller gives ('2 years')"
+            }
+          }
+        }
+      ]
+    },
+    "creator": {
+      "description": "Who designed it: a person, company or project",
+      "anyOf": [{ "$ref": "common.json#/definitions/organization" }, { "type": "null" }]
+    },
+    "manufacturers": {
+      "description": "Who builds it, when that differs from the creator",
+      "type": ["array", "null"],
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "vendors": {
+      "description": "Who sells it",
+      "type": ["array", "null"],
+      "uniqueItems": true,
+      "items": { "$ref": "common.json#/definitions/vendor" }
+    },
     "channel_bits": {
       "description": "Color depth in bits per channel; a list when selectable (8, 12, 14 or 16)",
       "oneOf": [

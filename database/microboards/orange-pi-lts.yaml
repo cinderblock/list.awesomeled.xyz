@@ -4,7 +4,8 @@ creator:
   name: Shenzhen Xunlong Software
   page: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
 vendors:
-  - url: https://www.aliexpress.com/item/4000049660873.html
+  - name: AliExpress
+    page: https://www.aliexpress.com/item/4000049660873.html
 aliases:
   - Orange Pi Zero LTS
 compute:
