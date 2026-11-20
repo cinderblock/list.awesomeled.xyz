@@ -7,9 +7,10 @@ manufacturers:
 notes: Newstar's 16-bit clocked RGB driver IC, the chip inside the HD108 LED. Adds a 5-bit current gain per color; Newstar's upgrade of the NS107S.
 color:
   channel_bits: 16
-  aggregate_bits: 48
-  brightness_bits: 5
-  brightness_method: current
+  brightness_control:
+    bits: 5
+    method: current
+    scope: per_channel
   pwm_frequency: 27kHz
 data:
   type: SK9826
@@ -63,7 +64,7 @@ sources:
     url: https://web.archive.org/web/20230131080044/http://newstar-ledstrip.com/product/20220705164520116.pdf
     retrieved: '2026-11-18'
     notes: The sheet's NS108 row says 2018; the NS108 spec's sample reel label is dated 2018-09-12.
-  color.brightness_bits:
+  color.brightness_control:
     url: http://newstar-ledstrip.com/productshow847.html
     retrieved: '2026-11-20'
     notes: '"64Bit (65536 level) color settings; each set of data are 1bit start code +15 Bit (32) brightness adjustment (red, green, blue three ports each 5bits, corresponding to S4 ~ S0) ; 48bits gray data (red, green, blue 16bits)"'

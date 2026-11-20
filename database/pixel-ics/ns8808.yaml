@@ -7,7 +7,6 @@ manufacturers:
 notes: Newstar's 12 V RGB driver IC with a backup data input, the chip inside the HD8808 LED. Sold as a drop-in replacement for the WS2815.
 color:
   channel_bits: 8
-  aggregate_bits: 24
   pwm_frequency: 8kHz
   pwm_frequency_notes: 12-bit built-in gamma correction on the PWM
 data:

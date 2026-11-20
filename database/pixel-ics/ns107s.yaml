@@ -7,9 +7,9 @@ manufacturers:
 notes: Newstar's clocked RGB driver IC, the chip inside the HD107S LED. APA102 frame with ~27 kHz PWM; Newstar's upgrade of the APA107.
 color:
   channel_bits: 8
-  aggregate_bits: 24
-  brightness_bits: 5
-  brightness_method: global
+  brightness_control:
+    bits: 5
+    scope: global
   pwm_frequency: 27kHz
   pwm_frequency_notes: Newstar's NS107S page says ">27kHz"
 data:

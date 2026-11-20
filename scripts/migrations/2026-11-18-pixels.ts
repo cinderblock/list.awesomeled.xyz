@@ -136,6 +136,13 @@ const IC_DEPTH_NOTES: Record<string, string> = {
   gs8208: '12-bit gamma correction per colour',
 };
 
+// Newstar's ICs inside the HD107S / HD108 LEDs (b4dc7499): the same control
+// as those pixels, from the NS107S / NS108 frame descriptions
+const IC_CONTROL: Record<string, Control> = {
+  ns107s: { bits: 5, scope: 'global' },
+  ns108: { bits: 5, method: 'current', scope: 'per_channel' },
+};
+
 const ics = migrateCategory('pixel-ics', (doc, { id }) => {
   let touched = false;
   const ch = getJS(doc, ['color', 'channel_bits']);
@@ -169,6 +176,21 @@ const ics = migrateCategory('pixel-ics', (doc, { id }) => {
       setJS(doc, ['sources', 'color.channel_bits', 'notes'], notes);
       remove(doc, ['sources', 'color.aggregate_bits']);
     } else throw new Error(`pixel-ics/${id}: sources for both channel_bits and aggregate_bits`);
+    touched = true;
+  }
+  // ICs with extra brightness control carry it like the LEDs built on them
+  // (brightness_bits here is the extra control's width, not the depth)
+  if (IC_CONTROL[id]) {
+    const c = IC_CONTROL[id];
+    setJS(doc, ['color', 'brightness_control'], {
+      bits: c.bits,
+      ...(c.method ? { method: c.method } : {}),
+      scope: c.scope,
+    });
+    remove(doc, ['color', 'brightness_bits']);
+    remove(doc, ['color', 'brightness_method']);
+    for (const from of ['color.brightness_bits', 'color.brightness_method'])
+      renameKey(doc, ['sources'], from, 'color.brightness_control');
     touched = true;
   }
   if (getJS(doc, ['color', 'brightness_bits']) !== undefined)
