@@ -85,7 +85,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**Current step: 12 (accessibility + performance).** Steps 1–11 are live (9–11 as `d1d23db4..ee64cc82`).
+**Current step: 12 (accessibility + performance), written and committed; being verified for the push.** Steps 1–11 are live (9–11 as `d1d23db4..ee64cc82`).
 
 ## Findings / gotchas
 
@@ -136,6 +136,14 @@ Each step ships on its own (rebase, checks, push).
 - **Every prerendered path gets a `.data` twin**, including resource routes. For the 593 link-preview images that was 40 MB of unused upload per deploy (an image's `.data` is 2.5 times the image). `buildEnd` in `react-router.config.ts` deletes them, plus the sitemap's and robots.txt's.
 - **Another stream may rewrite a shared doc mid-flight.** CONTRIBUTING.md was rewritten by the database review between this stream's two rebases; the resolution was to take theirs whole and re-apply only what is this stream's (pointers to the site's contribute paths). Each category now has a `database/<category>/_example.yaml` (skipped by the loader, validated by `bun run validate`); `/contribute` links it.
 
+- **A cold dev server hangs if its first request is a page.** The server-side transform of `app/app.css` then never answers and Vite gives up after 60 s ("transport invoke timed out", every time, even with the machine half idle), after which every request is a 500 until a restart. Asking for `/app/app.css` first (0.2 s) avoids it: `curl localhost:5773/app/app.css`, then a page (6 s), then the rest.
+- **`scrollIntoView` moves the keyboard's starting point** (Chrome): the category strip centering its active tab made the first Tab press land on the tab after it, skipping everything before. Scroll the container (`scrollTo`) instead. The live site had this before step 12.
+- **Radix Dialog without a `Dialog.Trigger` does not give focus back**: its close handler prevents the default return and focuses a trigger that does not exist. Remember `document.activeElement` in `onOpenAutoFocus` and focus it in `onCloseAutoFocus` (`ImageViewer.tsx`).
+- **Radix popovers are `role="dialog"`** and axe wants every dialog named: give `Popover.Content` an `aria-label`.
+- **axe's "visible text is part of the name" rule counts everything printed on the control**, `<kbd>` hint included, and `aria-hidden` does not exempt it. The header search button's label is its whole visible text ("Search everything… Ctrl K").
+- **Text colored like its own tint fails contrast at any tint.** Badge text is `oklch(from var(--badge-color) 0.45 c h)` in light and `0.8` in dark: the family hue at a lightness that reads, with the raw color as the fallback for browsers without relative color syntax.
+- Build after step 12 (`build3.log`): category chunk 96 kB (28 gz), shared chunk 124 kB (42 gz), `client` 180 kB (57 gz), root CSS 132 kB (21 gz, one file for every route including the designer's 40 kB), Inter latin 73 kB preloaded. Lazy-loading the filters drawer, column picker and export menu was dropped: together they are about 4 kB gzipped of the category chunk, and the export code is already its own chunk.
+
 ## Progress log
 
 - [x] 2026-11-18 3:56 PM PST (23:56Z): read the build-out plan and the app; audited the live site and the sheet headlessly; measured the baseline build; wrote this plan.
@@ -156,7 +164,8 @@ Each step ships on its own (rebase, checks, push).
 - [x] Step 11 contribution funnel — three GitHub issue forms (correction, new entry, site problem), `/contribute` with a field reference for every category generated from the schemas and the data plus a "start a new entry" link that opens GitHub's editor with a starter file, category intros from `database/*/description.md`, "Not on the list?" on an empty search, CONTRIBUTING.md rewritten to the current schema with examples a unit test validates.
 - [x] 2026-11-20 3:20 AM PST (11:20Z): steps 9–11 rebased onto 50 new upstream commits. Fast checks pass (typecheck, lint, format, 378 unit tests, validate 600/600). Full e2e: 126 of 128 passed; the two failures were the column menu running off a short window (fixed, test added, table + mobile files re-run 34/34). Dev-server data cache fixed on the way (`perf(dev)`).
 - [x] 2026-11-20 3:42 AM PST (11:42Z): steps 9–11 pushed (`d1d23db4..ee64cc82`) after a second rebase (37 more commits; the database review had rewritten CONTRIBUTING.md, so this stream's edits there shrank to pointers at `/contribute`, the issue forms and Bun commands). 21 production tests pass on the build; CI green; checked live: preview images, `/sitemap.xml` (596 URLs), `/robots.txt`, `/contribute`, entry-page head tags and the contribute strip.
-- [ ] Step 12 accessibility + performance pass — axe in e2e, badge contrast in light mode, skip link, the entry image viewer as a real dialog, self-hosted Inter (drop the render-blocking Google Fonts stylesheet), lazy-load the filters drawer / column picker / export menu, bundle check.
+- [x] Step 12 accessibility + performance pass — axe audit (about 3,700 failing elements: contrast, unnamed link icons, mismatched button names, an unnamed landmark, small targets) fixed and held by `e2e/a11y.test.ts` (ten pages × two themes, a phone, every overlay); skip link; first-Tab bug on category pages; the entry image viewer is a real dialog; Inter served from the site (no third-party requests for fonts or styles); link-preview `.data` twins removed from the build. Lazy-loading dropped after the bundle check (see findings). The designer's one finding is logged in ISSUES.md for stream 3.
+- [ ] Step 12: full e2e, production build + `test:prod`, push, live check.
 
 ## Open questions for the user
 
@@ -171,5 +180,5 @@ Each step ships on its own (rebase, checks, push).
 - Don't change `playwright.config.ts`; pass a scratch config for a private port instead.
 - Don't start a production build while another heavy run of this thread is going (compute budget).
 - Don't create or edit files under `app/`, `scripts/` or `e2e/` while an e2e run is in progress (see findings): draft in the scratchpad and copy in afterwards.
-- Don't make the first request to a freshly started dev server from a test run: warm it by hand and check for a 200 first (see findings).
+- Don't make the first request to a freshly started dev server a page, and never from a test run: ask for `/app/app.css` first, then warm it by hand and check for a 200 (see findings).
 - Don't touch Cloudflare (redirect rules, headers, Pages settings); the 404 fix must work with files in the build output alone.
