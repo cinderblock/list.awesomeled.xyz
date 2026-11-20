@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/18/2026, 9:35 PM PST (2026-11-19 05:35Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/20/2026, 2:23 AM PST (2026-11-20 10:23Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -11,7 +11,7 @@ Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the 
 | [Pattern Drivers](#pattern-drivers)                   |   44 |              0 |        13 |    0 / 642 |     0 / 86 |     0 / 16 |          1 |
 | [Controllers](#controllers)                           |  133 |              0 |         6 |   0 / 2053 |    0 / 231 |     0 / 17 |          0 |
 | [Pixels](#pixels)                                     |   35 |              0 |        11 |    0 / 669 |     0 / 79 |     0 / 47 |        110 |
-| [Pixel ICs](#pixel-ics)                               |   41 |              0 |        40 |    0 / 451 |     0 / 63 |     0 / 15 |         77 |
+| [Pixel ICs](#pixel-ics)                               |   41 |              0 |        43 |    0 / 451 |     0 / 63 |     0 / 15 |         77 |
 | [Pixel Decoders](#pixel-decoders)                     |   14 |              0 |         1 |    0 / 118 |     0 / 26 |      0 / 0 |         14 |
 | [Level Converters](#level-converters)                 |    9 |              0 |         4 |     0 / 49 |     0 / 17 |      0 / 0 |          0 |
 | [Adapters](#adapters)                                 |   47 |              0 |         0 |    0 / 471 |     0 / 95 |      0 / 1 |          0 |
@@ -617,10 +617,11 @@ Database folder: `database/pixels/`.
 
 ### Rows paired by alias, URL, or as duplicates
 
-- [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A11) "HD107S" → `pixels/hd107s` (name, score 0.77, duplicate of row 16)
-- [A12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A12) "HD108" → `pixels/hd108` (name, score 0.81, duplicate of row 17)
+- [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A11) "HD107S" → `pixels/hd107s` (alias, score 0.77)
+- [A12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A12) "HD108" → `pixels/hd108` (alias, score 0.81)
 - [A16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A16) "NS107S" → `pixels/hd107s` (alias, score 0.77)
-- [A17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A17) "NS108" → `pixels/hd108` (alias, score 0.64)
+- [A17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A17) "NS108" → `pixels/hd108` (alias, score 0.68)
+- [A19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A19) "NS8808" → `pixels/hd8808` (alias, score 0.86)
 - [A21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A21) "SK6812" → `pixels/sk6812-wwa` (url, score 0.77)
 
 ### YAML entries with no sheet row
@@ -706,9 +707,9 @@ Database folder: `database/pixels/`.
 | [U17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U17) | `hd108`       | Release Year      | 2018  | 2018     | yes     |
 | [M18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M18) | `ns108e`      | Wattage           | 91.8  | 91.8mW   |         |
 | [U18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U18) | `ns108e`      | Release Year      | 2019  | 2019     |         |
-| [M19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M19) | `ns8808`      | Wattage           | 45    | 45mW     |         |
-| [O19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O19) | `ns8808`      | Quiescent Current | 2     | 2.0mA    |         |
-| [U19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U19) | `ns8808`      | Release Year      | 2018  | 2018     |         |
+| [M19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M19) | `hd8808`      | Wattage           | 45    | 200mW    | yes     |
+| [O19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O19) | `hd8808`      | Quiescent Current | 2     | 2.0mA    |         |
+| [U19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U19) | `hd8808`      | Release Year      | 2018  | 2018     |         |
 | [S20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S20) | `pl9823`      | Backup Data Line  | No    | false    |         |
 | [U20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U20) | `pl9823`      | Release Year      | 2014  | 2014     |         |
 | [M21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M21) | `sk6812-wwa`  | Wattage           | 100   | 200mW    | yes     |
@@ -757,7 +758,7 @@ Database folder: `database/pixels/`.
 
 </details>
 
-<details><summary>Acknowledged differences (69)</summary>
+<details><summary>Acknowledged differences (68)</summary>
 
 - [T2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=T2) `apa102` Max pixel per string "~250 - CLK sensitive": Same: max_per_string 250 with the clock-degradation explanation
 - [T3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=T3) `apa102c` Max pixel per string "~250 - CLK sensitive": Same: max_per_string 250 with the clock-degradation explanation
@@ -768,22 +769,21 @@ Database folder: `database/pixels/`.
 - [M11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M11) `hd107s` Wattage "85": Both the HD107S and NS107S specs give 20 mA per channel ("Build-20ma constant current output"), so 100 mW at 5 V, as the NS107S row says; 17 mA / 85 mW is the HD108 figure
 - [V11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V11) `hd107s` NOTES "APA107 Competitor/clone": Not a clone: Newstar developed the IC (NS107S) and sells it as HD107S (sources.creator)
 - [R12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=R12) `hd108` Data Type "APA102": (cited) YAML cites a source for data.type
-- [H16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=H16) `hd107s` Data BitRate "30000000": Merged into HD107S. Newstar's NS107S spec says 30 MHz, Rose Lighting's HD107S spec 40 MHz; YAML keeps 40 MHz and records 30 MHz in datasheet.discrepancies
-- [K16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=K16) `hd107s` GPIO Min "3.5": Merged into HD107S, which keeps the HD107S row's 3.4 V (neither spec gives an input-high level)
-- [L16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=L16) `hd107s` GPIO Max "5.3": Merged into HD107S, which keeps the HD107S row's 5 V (neither spec gives an input-high level)
-- [V16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V16) `hd107s` NOTES "upgrade of APA107, same protocol with APA102, higher PWM 27…": Merged into HD107S; its notes and related links (predecessor APA107, compatible with APA102) say the same
+- [H16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=H16) `hd107s` Data BitRate "30000000": Row pairs with pixels/hd107s. Newstar's NS107S spec says 30 MHz, Rose Lighting's HD107S spec 40 MHz; the LED keeps 40 MHz (30 MHz in datasheet.discrepancies), and pixel-ics/ns107s carries Newstar's 3…
+- [K16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=K16) `hd107s` GPIO Min "3.5": Row pairs with pixels/hd107s, which keeps the HD107S row's 3.4 V (neither spec gives an input-high level)
+- [L16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=L16) `hd107s` GPIO Max "5.3": Row pairs with pixels/hd107s, which keeps the HD107S row's 5 V (neither spec gives an input-high level)
+- [V16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V16) `hd107s` NOTES "upgrade of APA107, same protocol with APA102, higher PWM 27…": Row pairs with pixels/hd107s; its notes and related links (predecessor APA107, compatible with APA102) say the same
 - [Y16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y16) `hd107s` Datasheet URL "http://www.newstar-ledstrip.com/product/20190710114547839.p…": Dead now; YAML links the current page
-- [B17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=B17) `hd108` Colour Group "BGR": Merged into HD108. Newstar's NS108 spec sends red, green, then blue (16 bits each), so RGB, as the HD108 row says
-- [E17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=E17) `hd108` VCC Voltage "5.1": Merged into HD108, which keeps Rose Lighting's figures; Newstar's 5.1 V (max 5.5 V) is in datasheet.discrepancies
+- [B17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=B17) `hd108` Colour Group "BGR": Row pairs with pixels/hd108. Newstar's NS108 spec sends red, green, then blue (16 bits each), so RGB, as the HD108 row says
+- [E17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=E17) `hd108` VCC Voltage "5.1": Row pairs with pixels/hd108, which keeps Rose Lighting's figures; Newstar's 5.1 V (max 5.5 V) is in datasheet.discrepancies
 - [H17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=H17) `hd108` Data BitRate "30000000": (cited) YAML cites a source for data.bitrate
-- [L17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=L17) `hd108` GPIO Max "5.6": Merged into HD108, which keeps Rose Lighting's figures (input high 3.4-5.3 V); Newstar's are in datasheet.discrepancies
-- [M17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M17) `hd108` Wattage "102": Merged into HD108, which keeps Rose Lighting's 17 mA typical (85 mW); Newstar's figures are in datasheet.discrepancies
-- [N17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=N17) `hd108` Channel Current "20": Merged into HD108 (Rose Lighting: 17 mA typical). Newstar's spec gives 18 mA with REXT floating and a 20 mA maximum, in datasheet.discrepancies
+- [L17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=L17) `hd108` GPIO Max "5.6": Row pairs with pixels/hd108, which keeps Rose Lighting's figures (input high 3.4-5.3 V); Newstar's are in datasheet.discrepancies
+- [M17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M17) `hd108` Wattage "102": Row pairs with pixels/hd108, which keeps Rose Lighting's 17 mA typical (85 mW); Newstar's figures are in datasheet.discrepancies
 - [R17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=R17) `hd108` Data Type "APA102": (cited) YAML cites a source for data.type
-- [V17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V17) `hd108` NOTES "16bit/color version of NS107S": Merged into HD108; its notes and related link (predecessor HD107S) say the same
+- [V17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V17) `hd108` NOTES "16bit/color version of NS107S": Row pairs with pixels/hd108; its notes and related link (predecessor HD107S) say the same
 - [Y17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y17) `hd108` Datasheet URL "http://newstar-ledstrip.com/productshow848.html": The sheet linked the NS108E's page (gone); YAML links the NS108's own datasheet
-- [R19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=R19) `ns8808` Data Type "UCS1903": (cited) YAML cites a source for data.type
-- [V19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V19) `ns8808` NOTES "silimar to ws2815, but UCS1903 protocol": Typo fixed in YAML
+- [R19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=R19) `hd8808` Data Type "UCS1903": (cited) YAML cites a source for data.type
+- [V19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V19) `hd8808` NOTES "silimar to ws2815, but UCS1903 protocol": Typo fixed in YAML
 - [M20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M20) `pl9823` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
 - [P20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=P20) `pl9823` Package Size "5/8mm T style": Packages standardized (0bb3346): 5/8 mm "T style" = 5mm and 8mm through-hole
 - [W20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=W20) `pl9823` 3rd Party Testing "https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-c…": Old URL; it redirects to the page YAML links
@@ -886,6 +886,9 @@ Database folder: `database/pixel-ics/`.
 - `pixel-ics/mbi6023` "MBI6023": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
 - `pixel-ics/mbi6024` "MBI6024": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
 - `pixel-ics/mbi6120` "MBI6120": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
+- `pixel-ics/ns107s` "NS107S"
+- `pixel-ics/ns108` "NS108"
+- `pixel-ics/ns8808` "NS8808"
 - `pixel-ics/p9883` "P9883": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
 - `pixel-ics/sk6805` "SK6805": added 2026-07-01 in b3b1e7a (data: add SK6805 pixel IC)
 - `pixel-ics/sm16711` "SM16711": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
