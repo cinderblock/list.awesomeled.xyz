@@ -104,6 +104,19 @@ export const PIXELS: BaseEntry[] = [
       channel_current: '10mA',
     },
   }),
+  // Dice in series: one 10 mA current through all three, and the maker's
+  // whole-pixel power (10 mA × 12 V) says so
+  entry('series12', {
+    name: 'SERIES12',
+    color: { order: 'RGB' },
+    data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 24 },
+    electrical: {
+      led_voltage: '12V',
+      supply_voltage: '5V',
+      channel_current: '10mA',
+      wattage: '120mW',
+    },
+  }),
   entry('deep5', {
     name: 'DEEP5',
     status: 'discontinued',

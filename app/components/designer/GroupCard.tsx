@@ -305,7 +305,9 @@ export function GroupCard({
                       : 'data-only (one wire)',
                   pixel.channels === 3 ? null : `${pixel.channels} channels`,
                   pixel.pixelsPerPart > 1 ? `${pixel.pixelsPerPart} pixels per chip` : null,
-                  power ? `${fmtWatts(power.pixelMaxWatts)} at full white` : null,
+                  power
+                    ? `${fmtWatts(power.pixelMaxWatts)} at full white${pixel.series ? ' (colours in series)' : ''}`
+                    : null,
                   pixel.bitrateHz ? fmtHz(pixel.bitrateHz) : null,
                 ]
                   .filter(Boolean)

@@ -15,6 +15,7 @@ import {
   nominalVoltage,
   parseIp,
   pixelChannels,
+  pixelMaxAmps,
   pixelMaxWatts,
   unitPriceAt,
 } from '../../app/lib/designer';
@@ -46,6 +47,44 @@ describe('pixel options', () => {
     expect(pixel.logicVoltage).toBe(5);
     expect(pixelMaxWatts(pixel, 12)).toBeCloseTo(0.36, 9);
     expect(pixel.backupLine).toBe(true);
+  });
+
+  test('a 12 V pixel with its dice in series draws its channel current once', () => {
+    // The maker's whole-pixel power is one channel's current at 12 V
+    const pixel = must(index.pixels, 'series12');
+    expect(pixel.series).toBe(true);
+    expect(pixel.channels).toBe(3);
+    expect(pixelMaxAmps(pixel)).toBeCloseTo(0.01, 9);
+    expect(pixelMaxWatts(pixel, 12)).toBeCloseTo(0.12, 9); // not 0.36 W
+    // Without the maker's figure nothing says so: the higher draw is assumed
+    expect(must(index.pixels, 'rgb12').series).toBe(false);
+    // When the maker's power is a little above current × voltage, it wins
+    const generous = buildPixelOption(
+      entry('g', {
+        color: { order: 'RGB' },
+        electrical: { led_voltage: '12V', channel_current: '9mA', wattage: '120mW' },
+      })
+    );
+    expect(generous.series).toBe(true);
+    expect(pixelMaxWatts(generous, 12)).toBeCloseTo(0.12, 9); // not 9 mA × 12 V = 0.108 W
+  });
+
+  test('only a matching whole-pixel power on a high enough rail means series', () => {
+    const series = (electrical: Record<string, unknown>) =>
+      buildPixelOption(entry('s', { color: { order: 'RGB' }, electrical })).series;
+    const at12 = { led_voltage: '12V', channel_current: '10mA' };
+    // Within the tolerance either side of 10 mA × 12 V = 120 mW
+    expect(series({ ...at12, wattage: '100mW' })).toBe(true);
+    expect(series({ ...at12, wattage: '150mW' })).toBe(true);
+    // Three channels' worth: the channels are in parallel
+    expect(series({ ...at12, wattage: '360mW' })).toBe(false);
+    // Far below one channel's worth: that figure is something else (the chip's own dissipation)
+    expect(series({ ...at12, wattage: '40mW' })).toBe(false);
+    // 5 V can't string three dice, whatever the numbers say
+    expect(series({ led_voltage: '5V', channel_current: '20mA', wattage: '100mW' })).toBe(false);
+    // One of the two facts missing
+    expect(series({ led_voltage: '12V', wattage: '120mW' })).toBe(false);
+    expect(series(at12)).toBe(false);
   });
 
   test('a lone wattage value is the whole pixel at full white', () => {

@@ -204,6 +204,10 @@ export function costOf(price: PriceInfo, qty: number): Cost | null {
 export const TYPICAL_CHANNEL_AMPS = 0.02;
 /** Integrated 12 V pixels run their channels leaner; median of the recorded ones */
 export const TYPICAL_HV_CHANNEL_AMPS = 0.012;
+/** Lowest rail that can string a pixel's red, green and blue dice in series (about 2 + 3 + 3 V, plus the driver) */
+export const SERIES_MIN_VOLTS = 9;
+/** How far a maker's whole-pixel power may sit from one channel's (current × voltage) and still mean one shared current */
+export const SERIES_TOLERANCE = 0.3;
 
 /** String voltages offered for driver ICs, which run whatever the LEDs need */
 const IC_VOLTAGES = [5, 12, 24];
@@ -254,6 +258,11 @@ export interface PixelOption {
   /** One colour channel fully on, in amps */
   channelAmps: number;
   ampsBasis: 'datasheet' | 'pixel wattage' | 'typical';
+  /**
+   * The colour dice are wired in series and share one current (12 V parts
+   * such as WS2815): full white draws channelAmps once, not once per channel
+   */
+  series: boolean;
   /** Datasheet channel limit when the typical figure was used instead */
   channelAmpsLimit?: number;
   /** Idle draw per pixel in amps */
@@ -346,6 +355,20 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
     ampsBasis = 'pixel wattage';
   }
 
+  // Dice in series pass one current, so the maker's whole-pixel power is what
+  // a single channel draws at the LED voltage; parallel channels would make it
+  // three times that. It takes both facts on record, and a rail high enough
+  // to string the dice.
+  const oneChannelWatts = current ? current.value * volts : 0;
+  const series =
+    current != null &&
+    wattage != null &&
+    volts >= SERIES_MIN_VOLTS &&
+    wattage.value >= oneChannelWatts * (1 - SERIES_TOLERANCE) &&
+    wattage.value <= oneChannelWatts * (1 + SERIES_TOLERANCE);
+  // The two figures rarely agree to the milliwatt: size for the larger
+  if (series && wattage) channelAmps = Math.max(channelAmps, wattage.value / volts);
+
   // A wide-range part ("3-7.5V") may be run from any common rail inside it
   const choices =
     ledRange?.max != null
@@ -369,6 +392,7 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
     logicMax: nominalVoltage(gpio.max),
     channelAmps,
     ampsBasis,
+    series,
     quiescentAmps: parseQuantity(el.quiescent_current, 'current')?.value ?? null,
   };
 }
@@ -425,6 +449,9 @@ export function buildPixelIcOption(entry: BaseEntry): PixelOption {
     logicMax: nominalVoltage(gpio.max),
     channelAmps: usesLimit ? limit : TYPICAL_CHANNEL_AMPS,
     ampsBasis: usesLimit ? 'datasheet' : 'typical',
+    // How a bare chip's LEDs are wired is the builder's doing: assume the
+    // arrangement that draws more
+    series: false,
     channelAmpsLimit: !usesLimit && limit != null ? limit : undefined,
     quiescentAmps: parseQuantity(el.quiescent_current, 'current')?.value ?? null,
   };

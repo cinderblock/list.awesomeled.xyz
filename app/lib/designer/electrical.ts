@@ -65,9 +65,13 @@ export interface PowerSettings {
 // ---------------------------------------------------------------------------
 // Per pixel
 
-/** Full-white current of one pixel, in amps on its LED rail */
+/**
+ * Full-white current of one pixel, in amps on its LED rail: every channel's
+ * current added up, or the one current a series part passes through all of
+ * its dice
+ */
 export function pixelMaxAmps(pixel: PixelOption): number {
-  return pixel.channelAmps * pixel.channels;
+  return pixel.series ? pixel.channelAmps : pixel.channelAmps * pixel.channels;
 }
 
 /** Full-white power of one pixel at the given rail voltage */
