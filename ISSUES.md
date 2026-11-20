@@ -228,17 +228,6 @@ Pi Zero LTS is H3 (4d013eb7). P9883 / P9813 keep their makers' names: only
 Advatek says Power MOS was DMS (hand-off below). Records:
 [issues-final.yaml](plans/database-review-fixes/issues-final.yaml).
 
-## Sheet parity: numeric cells pass as "elsewhere" on stray digits (stream 1)
-
-`compareCell` (scripts/sheet-parity/compare.ts) falls back to `coverage(text,
-view.visible)` for a numeric cell that doesn't match, so a short number found
-anywhere in the entry's text passes as `elsewhere`. Seen 2026-11-20: Pixels
-N17 (NS108 row, Channel Current "20") stopped being reported once `hd108`
-gained a `retrieved: '2026-11-20'` date, and N19 (NS8808 row, "9") vs
-`hd8808`'s 17.5 mA isn't reported either. Real differences can drop out of
-the report silently; numeric columns probably shouldn't use the text
-fallback, or should match whole numbers with their unit.
-
 ## Facts to check, found by parity research (stream 2)
 
 **Processed (stream 2).** LEDs Master's platforms, DiGidot C4 Extended 8's

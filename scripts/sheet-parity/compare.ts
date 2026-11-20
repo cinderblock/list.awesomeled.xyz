@@ -308,6 +308,53 @@ function isRounding(yaml: number, sheet: number): boolean {
   return false;
 }
 
+/** A cell holding one number, maybe with a unit or a word: "20", "~5", "20mA", "8 outputs" */
+const NUMERIC_CELL = /^[~≈]?\s*-?\d+(?:\.\d+)?\s*[a-zA-Zµ%" ]*$/;
+
+/**
+ * The text with digit runs that aren't values taken out: URLs, dates, times
+ * and version numbers. A `retrieved: '2026-11-20'` date must not read as 20.
+ */
+function valueText(hay: string): string {
+  return hay
+    .replace(/https?:\/\/\S+/g, ' ')
+    .replace(/\b\d{4}-\d{2}(?:-\d{2})?(?:[T ]\d{2}:\d{2}(?::\d{2})?(?:\.\d+)?Z?)?\b/g, ' ')
+    .replace(/\b\d{1,2}\/\d{1,2}\/\d{2,4}\b/g, ' ')
+    .replace(/\b\d{1,2}:\d{2}(?::\d{2})?\b/g, ' ')
+    .replace(/\bv?\d+(?:\.\d+){2,}\b/gi, ' ');
+}
+
+/**
+ * Whether a number appears in the text as a value of its own, never as
+ * digits inside a date, URL, version or part number ("WS2812B", "ESP32").
+ * With a unit, only that quantity counts: a 20 mA cell matches "20mA" or
+ * "0.02A" (or a range ending in it), not "20 outputs".
+ */
+export function numberIn(hay: string, value: number, unit?: QuantityKind, tol = 0): boolean {
+  const text = valueText(hay);
+  const same = (x: number) => close(x, value) || Math.abs(x - value) <= Math.abs(value) * tol;
+  // Not glued on the left to a letter, digit or dot, or to "<digit>-"
+  const re =
+    /(?<![\w.])(?<!\d-)(\d+(?:\.\d+)?)(?![\d.]*\d)(?:\s?-\s?(\d+(?:\.\d+)?))?\s?([a-zA-Zµ]+)?/g;
+  for (const m of text.matchAll(re)) {
+    if (!unit) {
+      // A count in a range ("8-16 universes") is a bound, not the value
+      if (m[2] === undefined && same(Number(m[1]))) return true;
+      continue;
+    }
+    if (!m[3]) continue;
+    const ends = [m[1], m[2]].filter((x): x is string => x !== undefined);
+    if (
+      ends.some((x) => {
+        const q = parseQuantity(`${x}${m[3]}`, unit);
+        return q !== null && same(q.value);
+      })
+    )
+      return true;
+  }
+  return false;
+}
+
 function show(vs: unknown[]): string {
   return vs.map((v) => (typeof v === 'object' ? JSON.stringify(v) : String(v))).join(' | ');
 }
@@ -359,6 +406,20 @@ export function compareCell(
 
   const fallback = (anyMapped: boolean): Verdict => {
     if (kind.type === 'url') {
+      return { status: anyMapped ? 'differs' : 'missing', yaml: yamlShown };
+    }
+    // A lone number must be found as a number: word coverage would find "20"
+    // in any date ending in -20, and the real difference would go unreported
+    if (NUMERIC_CELL.test(text)) {
+      const unit = kind.type === 'number' ? kind.unit : undefined;
+      const tol = kind.type === 'number' ? (kind.tol ?? 0) : 0;
+      const own = unit ? parseQuantity(text.replace(/\s+/g, ''), unit) : null;
+      const n = typeof value === 'number' ? value : Number(text.match(/-?\d+(?:\.\d+)?/)?.[0]);
+      const base = own?.value ?? n * (kind.type === 'number' ? (kind.scale ?? 1) : 1);
+      if (numberIn(view.visible, base, unit, tol)) return { status: 'elsewhere', yaml: yamlShown };
+      if (numberIn(`${view.visible}\n${view.comments}`, base, unit, tol)) {
+        return { status: 'comment', yaml: yamlShown };
+      }
       return { status: anyMapped ? 'differs' : 'missing', yaml: yamlShown };
     }
     if (coverage(text, view.visible) >= 0.85) return { status: 'elsewhere', yaml: yamlShown };
