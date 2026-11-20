@@ -85,9 +85,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**Current step: 9 (entry page polish), then 10 (SEO / OpenGraph), 11 (contribution funnel), 12 (accessibility + performance).** Steps 1–8 are done; 1–6 are live (`d406c2c`, `60cd310`, `4681573`, `632ddde`), 7–8 ship together.
-
-Drafted ahead while test runs were in flight (uncommitted, in the worktree or the scratchpad `draft/` folder): the link-preview card renderer (`app/lib/og.server.ts`, `assets/fonts/`), the meta builder, sitemap / robots / preview-image routes, the entry-page contribute strip, the `/contribute` page with its generated field reference, and three GitHub issue forms (`.github/ISSUE_TEMPLATE/`).
+**Current step: 12 (accessibility + performance).** Steps 1–8 are live. Steps 9–11 are committed on `ws/browse-ux` and being verified for the push (see the progress log for exactly where that stands).
 
 ## Findings / gotchas
 
@@ -126,6 +124,15 @@ Drafted ahead while test runs were in flight (uncommitted, in the worktree or th
 - New unit kinds appear upstream (`length` arrived mid-rebase). `units.ts` needs a display-unit list per kind; `fields.ts` treats any shared schema definition named after a unit kind as a quantity.
 - Build after this increment (`d406c2c`): category chunk 158 kB (47 gz, was 84 / 27 for table + route), `columns` chunk 40 kB (13 gz) is all an entry page loads from the table code (was 83 / 27), CSS 77 kB (13 gz), `controllers/index.html` 455 kB (52 gz). The table chunk grew; lazy-loading the drawer, picker and export menu is a candidate for step 12.
 
+- **`meta` runs in the browser too**, so it cannot import a `.server` module. What the head needs from the database (description, preview image path, structured data) is computed in the loader and returned as `seo`; `app/lib/meta.ts` is pure.
+- **Link-preview cards are drawn with sharp**: an SVG background plus Pango text (`sharp({ text: { …, fontfile, rgba: true } })`) with the Inter TTFs in `assets/fonts/`. Pango only finds a weight if its file was loaded first, so all three files are loaded once and the weight is chosen in the markup (`font_weight`). Cards are cached on disk (`node_modules/.cache/og-cards`, keyed by content and `TEMPLATE_VERSION`), so only changed entries are redrawn.
+- **The linter's YAML key order is not the one the project notes gave**: `name, status, release_year, creator, developer, manufacturers, vendors, notes, inputs, outputs, power`, then alphabetical (`eslint.config.js`). CONTRIBUTING.md's examples, the starter entry on `/contribute` and `CLAUDE.md` now follow it, and a unit test holds the guide's examples to the schemas and that order.
+- **A heredoc can truncate at a quote pair** (`'clipboard-read', 'clipboard-write'` cut a generated test file short). Write test and script files with the Write tool, not a shell heredoc.
+- **`tail -f | grep -m1` does not return when the writer has already finished.** Wait on the background task's own completion instead.
+- **The dev server re-parsed the whole database on every request** once the database outgrew its 2-second cache (580 files, 1.3 MB: about 6 s to parse with the machine busy). The first page load then timed out ("transport invoke timed out after 60000ms") and every later request answered 500 until a restart. Fixed in `app/lib/data.ts`: after the 2 seconds a category is re-parsed only if a file's name, size or modified time changed, and the relation graph only when a category was re-parsed. Listing all routes a second time went from 6.7 s to 60 ms.
+- **A dev server whose first request times out stays broken**: Vite caches the failed server build and answers 500 instantly from then on. Restart it, wait, and make one patient first request (it took 52 s at 100 % CPU) before warming the rest.
+- **Column menus must fit the window.** The Creator menu is about 620 px tall; under a table header at 377 px on a 720 px screen it flipped upward and ran off the top (and hung off the bottom on taller screens). Anything added above the table (the category intro did it) moves the header and can tip this over. The menu now measures the room under its trigger when it opens and scrolls inside; an e2e test opens it in a 620 px window.
+
 ## Progress log
 
 - [x] 2026-11-18 3:56 PM PST (23:56Z): read the build-out plan and the app; audited the live site and the sheet headlessly; measured the baseline build; wrote this plan.
@@ -140,10 +147,13 @@ Drafted ahead while test runs were in flight (uncommitted, in the worktree or th
 - [x] Step 7 mobile — header (`632ddde`); card list: below 640 px a category opens as one card per entry (same table, restyled), with a Sort menu, a remembered Cards / Table switch on any screen, and several cards per row on wide screens. 7 new e2e tests in `e2e/mobile.test.ts`.
 - [x] Step 8 home page — search box with live results from every category, the database in numbers, six "start with a question" links (each checked by e2e to still match something), category grid, what the site does that a sheet cannot, recently reviewed entries, contribute box. README gained "Using the Site". 6 e2e tests in `e2e/home.test.ts`.
 - [x] 2026-11-18 8:40 PM PST (04:40Z): full e2e on steps 7–8 after rebasing: 111 of 111 pass (one test needed a locator fix: it assumed a single `<header>` per page). 324 unit tests pass.
-- [ ] Step 9 entry page polish — contribute strip and copy-link drafted; generic value rendering of long URLs (ISSUES.md, from cross-links) still to do.
-- [ ] Step 10 SEO / OpenGraph — renderer, meta builder and routes drafted.
-- [ ] Step 11 contribution funnel — issue forms and `/contribute` drafted; CONTRIBUTING.md examples still show the old flat schema.
-- [ ] Step 12 accessibility + performance pass
+- [x] 2026-11-18 8:47 PM PST (04:47Z): steps 7–8 pushed (`e215cd7..22787b3`) and checked live: home search, start links, cards on a phone, the layout choice surviving a reload, no console errors.
+- [x] Step 9 entry page polish — copy-link button, a "Something wrong or missing?" strip (suggest an edit, report a problem with the entry pre-filled, source, history), URLs shown as where they go (`docs.beagleboard.org › beaglebone-black.pdf`) and wrapping at their dots, link records (`url` / `host` / `notes`, `name` / `page`) on one line. Short pages' tinted background reaches the footer.
+- [x] Step 10 SEO / OpenGraph — `app/lib/meta.ts` (title, description, canonical, OpenGraph, Twitter card, JSON-LD) on every route; entry descriptions built from the entry's key facts; `/sitemap.xml`, `/robots.txt`; a drawn 1200×630 preview card for the site, each category and each entry (`/og/…jpg`); search and compare marked noindex.
+- [x] Step 11 contribution funnel — three GitHub issue forms (correction, new entry, site problem), `/contribute` with a field reference for every category generated from the schemas and the data plus a "start a new entry" link that opens GitHub's editor with a starter file, category intros from `database/*/description.md`, "Not on the list?" on an empty search, CONTRIBUTING.md rewritten to the current schema with examples a unit test validates.
+- [x] 2026-11-20 3:20 AM PST (11:20Z): steps 9–11 rebased onto 50 new upstream commits. Fast checks pass (typecheck, lint, format, 378 unit tests, validate 600/600). Full e2e: 126 of 128 passed; the two failures were the column menu running off a short window (fixed, test added, table + mobile files re-run 34/34). Dev-server data cache fixed on the way (`perf(dev)`).
+- [ ] Steps 9–11: production build + `test:prod` + live check, then push.
+- [ ] Step 12 accessibility + performance pass — axe in e2e, badge contrast in light mode, skip link, the entry image viewer as a real dialog, self-hosted Inter (drop the render-blocking Google Fonts stylesheet), lazy-load the filters drawer / column picker / export menu, bundle check.
 
 ## Open questions for the user
 
@@ -158,4 +168,5 @@ Drafted ahead while test runs were in flight (uncommitted, in the worktree or th
 - Don't change `playwright.config.ts`; pass a scratch config for a private port instead.
 - Don't start a production build while another heavy run of this thread is going (compute budget).
 - Don't create or edit files under `app/`, `scripts/` or `e2e/` while an e2e run is in progress (see findings): draft in the scratchpad and copy in afterwards.
+- Don't make the first request to a freshly started dev server from a test run: warm it by hand and check for a 200 first (see findings).
 - Don't touch Cloudflare (redirect rules, headers, Pages settings); the 404 fix must work with files in the build output alone.
