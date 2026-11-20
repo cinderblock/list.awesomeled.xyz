@@ -215,6 +215,16 @@ function CategoryFields({ category }: { category: CategoryReference }) {
               ).
             </>
           )}
+          {category.exampleUrl && (
+            <>
+              {' '}
+              Every field, filled in and explained:{' '}
+              <a href={category.exampleUrl} {...external}>
+                the annotated example
+              </a>
+              .
+            </>
+          )}
         </p>
         <p className="contribute-actions">
           <a className="btn btn--primary btn--sm" href={category.newEntryUrl} {...external}>

@@ -4,7 +4,9 @@
  * cannot drift from what the validator accepts and what entries really carry.
  */
 
-import { loadCategoryData } from './data';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { getDatabasePath, loadCategoryData } from './data';
 import {
   fieldText,
   fieldValues,
@@ -56,6 +58,8 @@ export interface CategoryReference {
   newEntryUrl: string;
   /** The folder of YAML files on GitHub */
   folderUrl: string;
+  /** The category's `_example.yaml`: every field filled in, with a comment on each */
+  exampleUrl: string | null;
   /** A well-filled entry to copy from */
   sample: { name: string; path: string; sourceUrl: string } | null;
 }
@@ -122,8 +126,8 @@ function starterEntry(category: Category): string {
     '#    (falcon-f16v4.yaml). The file name becomes the page address.',
     '# 2. Fill in what you know and delete the lines you do not. Every field',
     `#    this category records: ${SITE_ORIGIN}/contribute#${category.id}`,
-    '# 3. Copying from a similar entry is the quickest start:',
-    `#    ${REPO_URL}/tree/${REPO_BRANCH}/database/${category.id}`,
+    '# 3. Every field, filled in and explained, is in the annotated example:',
+    `#    ${repoFileUrl(`database/${category.id}/_example.yaml`)}`,
     '',
     'name: ',
     'status: active',
@@ -184,6 +188,9 @@ function categoryReference(category: Category): CategoryReference {
     sections,
     newEntryUrl: newEntryUrl(category.id, starterEntry(category)),
     folderUrl: `${REPO_URL}/tree/${REPO_BRANCH}/database/${category.id}`,
+    exampleUrl: existsSync(resolve(getDatabasePath(), category.id, '_example.yaml'))
+      ? repoFileUrl(`database/${category.id}/_example.yaml`)
+      : null,
     sample: sample
       ? {
           name: sample.name,
