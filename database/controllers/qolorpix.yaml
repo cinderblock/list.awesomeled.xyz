@@ -29,8 +29,10 @@ outputs:
     - WS2812B
 power:
   voltage:
-    min: 85 # 85-264 VAC mains input via PowerCON
+    min: 85 # via PowerCON
     max: 264
+  ac: true
+  output_voltage: 5 # built-in 600 W supply
 case:
   dimensions: 34.6cm L x 20.3cm W x 8.9cm H
   mounting: 19" rack, 2U

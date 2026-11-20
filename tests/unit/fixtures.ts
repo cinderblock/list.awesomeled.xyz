@@ -247,6 +247,13 @@ export const CONTROLLERS: BaseEntry[] = [
     price: 60,
   }),
   entry('mystery', { name: 'Mystery' }),
+  entry('mains5', {
+    name: 'Mains5',
+    // AC in; its built-in supply puts 5 V on the pixel outputs
+    outputs: { count: 4, clocked: false, pixels: { max_per_output: 510 } },
+    power: { voltage: { min: 100, max: 240 }, ac: true, output_voltage: 5, current: { max: 40 } },
+    price: 600,
+  }),
 ];
 
 export const MICROBOARDS: BaseEntry[] = [

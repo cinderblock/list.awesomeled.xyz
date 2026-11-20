@@ -34,8 +34,9 @@ power:
   voltage:
     min: 88
     max: 264
-    # AC mains into the built-in 360 W supply (5 V, 10 A per SPI output)
   connector: PowerCON
+  ac: true
+  output_voltage: 5 # built-in 360 W supply, 10 A per SPI output
 data:
   storage:
     - type: microSD

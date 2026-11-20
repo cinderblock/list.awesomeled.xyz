@@ -28,8 +28,10 @@ outputs:
     - WS2812b
 power:
   voltage:
-    min: 90 # AC mains into the built-in 12 V supply (150 W max)
+    min: 90
     max: 256
+  ac: true
+  output_voltage: 12 # built-in supply, 150 W max
 features:
   - Onboard Sound To Light
   - 31 channel DMX Macro mode

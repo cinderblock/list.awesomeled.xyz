@@ -306,5 +306,24 @@ price:
   amount: 1500
   currency: EUR
 
+---
+# Example 6: plugs into the mains; a built-in supply powers the pixels
+name: Example Mains Pixel Driver
+status: active
+outputs:
+  count: 4
+  clocked: false
+  pixels:
+    max_per_output: 510
+power:
+  voltage: # the AC range its built-in supply takes
+    min: 100
+    max: 240
+  ac: true
+  output_voltage: 5 # on the pixel outputs; a list when versions differ ([5, 12])
+  current:
+    max: 40 # what the built-in supply delivers
+
+
 # disable URL checks on this file
 # textlint-disable

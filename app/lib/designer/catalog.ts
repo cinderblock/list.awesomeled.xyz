@@ -515,9 +515,11 @@ export interface ControllerOption {
   buffered: boolean | null;
   /** Recorded logic level of the data pins (dev boards) */
   dataVoltage: number | null;
-  /** Supply range the unit accepts */
+  /** Supply range the unit accepts; with a built-in supply, the pixel rail it gives */
   voltageMin: number | null;
   voltageMax: number | null;
+  /** Plugs into mains (power.ac): its built-in supply sets the pixel rail */
+  builtInSupply: boolean;
   /** Total current the board can pass to its outputs */
   boardAmps: number | null;
   /** Current limit per output */
@@ -627,6 +629,25 @@ export function buildControllerOption(
 
   const waterproof = dict(entry.case).waterproof;
 
+  // A mains unit's power.voltage is its AC input; the pixels see the DC rail
+  // of its built-in supply (power.output_voltage, a list when versions differ)
+  const builtInSupply = power.ac === true;
+  const rails = (
+    Array.isArray(power.output_voltage) ? power.output_voltage : [power.output_voltage]
+  )
+    .map(nominalVoltage)
+    .filter((v): v is number => v != null);
+  const voltageMin = builtInSupply
+    ? rails.length
+      ? Math.min(...rails)
+      : null
+    : nominalVoltage(dict(power.voltage).min);
+  const voltageMax = builtInSupply
+    ? rails.length
+      ? Math.max(...rails)
+      : null
+    : nominalVoltage(dict(power.voltage).max);
+
   return {
     id: String(entry.id),
     kind: 'controller',
@@ -650,8 +671,9 @@ export function buildControllerOption(
     differential: outputs.differential === true,
     buffered: typeof driver.buffered === 'boolean' ? driver.buffered : null,
     dataVoltage: null,
-    voltageMin: nominalVoltage(dict(power.voltage).min),
-    voltageMax: nominalVoltage(dict(power.voltage).max),
+    voltageMin,
+    voltageMax,
+    builtInSupply,
     boardAmps: parseQuantity(dict(power.current).max, 'current')?.value ?? null,
     outputAmps: parseQuantity(dict(outputs.current).max, 'current')?.value ?? null,
     outputFuse: str(outputs.fuse),
@@ -737,6 +759,7 @@ export function buildBoardOption(entry: BaseEntry): ControllerOption | null {
     dataVoltage: nominalVoltage(power.gpio_voltage),
     voltageMin: looseVoltage(dict(power.voltage).min),
     voltageMax: looseVoltage(dict(power.voltage).max),
+    builtInSupply: false,
     boardAmps: null,
     outputAmps: null,
     outputConnector: null,

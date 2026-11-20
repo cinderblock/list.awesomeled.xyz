@@ -38,9 +38,12 @@ outputs:
     - '16716'
 power:
   voltage:
-    max: 5 # 5 V DC output of the built-in supply
+    min: 100 # 50/60 Hz
+    max: 240
   current:
-    max: 40 # 5 V / 40 A output; mains input 100-240 VAC, 50/60 Hz
+    max: 40 # from the built-in 5 V supply
+  ac: true
+  output_voltage: 5
 datasheet:
   url: https://www.germanlightproducts.com/wp-content/uploads/2016/01/PP4-Controller-Operating-Manual_08_2015.pdf # user manual; has a Specifications section
 dead_links:

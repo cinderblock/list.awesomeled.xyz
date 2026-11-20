@@ -68,7 +68,12 @@ outputs:
     - WS2815
 power:
   voltage:
-    max: 12 # 5 V or 12 V version of the built-in supply
+    min: 88
+    max: 260
+  ac: true
+  output_voltage: # 5 V and 12 V versions of the built-in supply
+    - 5
+    - 12
 case:
   dimensions: 300 x 200 x 140 mm
   mounting: wall

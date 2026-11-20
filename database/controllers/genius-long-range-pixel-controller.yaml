@@ -31,8 +31,10 @@ outputs:
     - WS281X
 power:
   voltage:
-    min: 100 # AC mains into the on-board MEAN WELL 5 V supply (2023 edition); the 2022 edition took 5 V DC, 3 A
+    min: 100 # 2023 edition; the 2022 edition took 5 V DC, 3 A
     max: 240
+  ac: true
+  output_voltage: 5 # on-board MEAN WELL supply
 data:
   storage:
     - type: microSD

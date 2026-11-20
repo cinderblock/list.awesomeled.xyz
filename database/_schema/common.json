@@ -521,18 +521,35 @@
           "additionalProperties": false,
           "properties": {
             "max": {
-              "description": "Maximum current in amps",
+              "description": "Most current the board passes to its outputs, in amps (with a built-in supply: what that supply delivers)",
               "$ref": "common.json#/definitions/current"
             }
           }
         },
         "voltage": {
+          "description": "Supply voltage it takes (with `ac`: the mains range of its built-in supply)",
           "type": "object",
           "additionalProperties": false,
           "properties": {
             "max": { "$ref": "common.json#/definitions/voltage" },
             "min": { "$ref": "common.json#/definitions/voltage" }
           }
+        },
+        "ac": {
+          "description": "Plugs into AC mains: a built-in supply powers the pixels at output_voltage",
+          "type": "boolean"
+        },
+        "output_voltage": {
+          "description": "DC voltage its built-in supply puts on the pixel outputs; a list when versions differ (5 V or 12 V)",
+          "oneOf": [
+            { "$ref": "common.json#/definitions/voltage" },
+            {
+              "type": "array",
+              "items": { "$ref": "common.json#/definitions/voltage" },
+              "minItems": 2,
+              "uniqueItems": true
+            }
+          ]
         }
       }
     },

@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/20/2026, 3:03 AM PST (2026-11-20 11:03Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/20/2026, 3:16 AM PST (2026-11-20 11:16Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -15,7 +15,7 @@ Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the 
 | [Pixel Decoders](#pixel-decoders)                     |   14 |              0 |         1 |    0 / 118 |     0 / 26 |      0 / 0 |         14 |
 | [Level Converters](#level-converters)                 |    9 |              0 |         4 |     0 / 49 |     0 / 17 |      0 / 0 |          0 |
 | [Adapters](#adapters)                                 |   47 |              0 |         0 |    0 / 471 |     0 / 95 |      0 / 1 |          0 |
-| [DIY MicroBoards](#diy-microboards)                   |   38 |              0 |         8 |    0 / 702 |     0 / 84 |     0 / 19 |          0 |
+| [DIY MicroBoards](#diy-microboards)                   |   38 |              0 |         7 |    0 / 702 |     0 / 84 |     0 / 19 |          0 |
 | [Connectors](#connectors)                             |   44 |              0 |         4 |   0 / 1066 |    44 / 98 |      0 / 9 |          0 |
 | [Drive Libraries](#drive-libraries)                   |   29 |              0 |        11 |    0 / 144 |     0 / 66 |      0 / 0 |          0 |
 | [Diffusive Materials](#diffusive-materials)           |   45 |              0 |         0 |    0 / 555 |     0 / 42 |      0 / 0 |          0 |
@@ -191,7 +191,7 @@ Database folder: `database/controllers/`.
 | G   | Storage                | (derived)                                                     | bool                                                          |                                                                                                           |
 | H   | Standalone             | `inputs.standalone`                                           | bool                                                          |                                                                                                           |
 | I   | Pixel Types            | `outputs.clocked`                                             | enum                                                          |                                                                                                           |
-| J   | Max Voltage            | `power.voltage.max`                                           | number (voltage)                                              |                                                                                                           |
+| J   | Max Voltage            | `power.voltage.max`, `power.output_voltage`                   | number (voltage)                                              |                                                                                                           |
 | K   | Max Current            | `power.current.max`, `outputs.current.max`                    | number (current)                                              |                                                                                                           |
 | L   | Buffered               | `outputs.driver.buffered`                                     | bool                                                          |                                                                                                           |
 | M   | Output Connectors      | `outputs.connector`, `power.connector`, (derived)             | custom                                                        | String, or a ref into connectors (bd300fd); "Phoenix Screw/Plug" -> connectors/mtsb-combicon              |
@@ -239,7 +239,7 @@ Database folder: `database/controllers/`.
 - `controllers/sp608e` "SP608E": added 2026-07-02 in e1795d4 (data: split the SP801E/SP608E chimera into two researched entries)
 - `controllers/wb48` "WB48": added 2026-07-01 in 67d17d0 (data: add Wally's Lights WB48 controller)
 
-<details><summary>Acknowledged differences (353)</summary>
+<details><summary>Acknowledged differences (352)</summary>
 
 - [H2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H2) `sp102e` Standalone "Presets": "Presets" = plays built-in patterns on its own; YAML inputs.standalone: true
 - [U2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U2) `sp102e` Status "Active": (cited) YAML cites a source for status
@@ -513,7 +513,6 @@ Database folder: `database/controllers/`.
 - [V128](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V128) `emp-16-uni-control` Product URL "https://www.empdesigns.co.uk/portfolio-item/16-universe-led…": Old URL; it redirects to the page YAML links
 - [V129](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V129) `pixpoe` Product URL "https://www.empdesigns.co.uk/portfolio-item/poe-pixel-contr…": Old page; it now redirects to the product page YAML links
 - [H130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H130) `apd-2-500-12v-art` Standalone "No": Stream 2's inputs audit (plans/database-review-inputs-audit.md): standalone, with internal programs (maker page)
-- [J130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J130) `apd-2-500-12v-art` Max Voltage "12": (cited) YAML cites a source for power.voltage.max
 - [K130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K130) `apd-2-500-12v-art` Max Current "5": No source gives a current, and 5 A fits neither the mains input nor the 12 V side of its 150 W supply; removed (database review, plans/database-review-fixes/ctrl-afp.yaml)
 - [V130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V130) `apd-2-500-12v-art` Product URL "https://www.digitaltape.co.uk/pixel-drivers": A category page; YAML links the product's own page
 - [J132](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J132) `led-player-s` Max Voltage "5": The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb
@@ -1366,13 +1365,12 @@ Header problems:
 - `microboards/beaglebone-green` "BeagleBone Green": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `microboards/orange-pi-zero` "Orange Pi Zero": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `microboards/pocketbeagle-2` "PocketBeagle 2": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
-- `microboards/raspberry-pi-3b` "Raspberry Pi 3 Model B": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `microboards/raspberry-pi-5` "Raspberry Pi 5": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `microboards/raspberry-pi-zero-2-w` "Raspberry Pi Zero 2 W": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `microboards/wemos-d1-mini-pro` "Wemos D1 Mini Pro": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `microboards/wemos-d1-mini` "Wemos D1 Mini": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 
-<details><summary>Acknowledged differences (90)</summary>
+<details><summary>Acknowledged differences (91)</summary>
 
 - [W2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W2) `trinket-m0` Unit Price (USD) "8.95": (cited) re-priced at the source (retrieved 2026-11-18)
 - [V3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=V3) `nrf-52840-feather` IMU "Wing": Same in stream 2's typed microboard vocabulary (475d1d0): "Wing" is an add-on
@@ -1423,6 +1421,7 @@ Header problems:
 - [W28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W28) `raspberry-pi-1-model-b` Unit Price (USD) "25": (cited) re-priced at the source (retrieved 2026-11-18)
 - [N30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N30) `raspberry-pi-2-model-b` USB "OTG x4": (cited) YAML cites a source for connectivity.usb
 - [N31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N31) `raspberry-pi-2-model-b-v1-2` USB "OTG x4": (cited) YAML cites a source for connectivity.usb
+- [N32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N32) `raspberry-pi-3-model-b` USB "OTG x4": (cited) YAML cites a source for connectivity.usb
 - [S32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=S32) `raspberry-pi-3-model-b` Bluetooth "4.0": Bluetooth 4.1 per the launch post
 - [F33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=F33) `raspberry-pi-4-model-b` Clock Speed "1500": (cited) YAML cites a source for compute.clock_speed
 - [N33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N33) `raspberry-pi-4-model-b` USB "OTG x2, 3.0 x2": (cited) YAML cites a source for connectivity.usb

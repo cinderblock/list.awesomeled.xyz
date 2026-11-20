@@ -314,7 +314,7 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
       },
       ['outputs.clocked']
     ),
-    col('Max Voltage', volts, ['power.voltage.max']),
+    col('Max Voltage', volts, ['power.voltage.max', 'power.output_voltage']),
     col('Max Current', amps, ['power.current.max', 'outputs.current.max']),
     col('Buffered', bool, ['outputs.driver.buffered']),
     col('Output Connectors', phoenix, ['outputs.connector', 'power.connector'], {

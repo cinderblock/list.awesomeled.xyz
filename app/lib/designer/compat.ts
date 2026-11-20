@@ -349,8 +349,22 @@ export function evaluateController(controller: ControllerOption, input: FitInput
     );
   }
 
-  // Supply voltage: can the controller sit on the pixel rail?
-  if (pixel && controller.voltageMax != null && voltage > controller.voltageMax * 1.05) {
+  // Supply voltage. A mains unit's built-in supply is the pixel rail, so the
+  // pixels have to match it; any other controller can sit on the pixel rail
+  // when that is inside the range it takes.
+  if (pixel && controller.builtInSupply) {
+    const lo = controller.voltageMin;
+    const hi = controller.voltageMax;
+    if (lo != null && hi != null && (voltage > hi * 1.05 || voltage < lo * 0.95)) {
+      const rail = lo === hi ? volts(hi) : `${volts(lo)} or ${volts(hi)}`;
+      add(
+        'warning',
+        voltage > hi ? 'voltage-over' : 'voltage-under',
+        `${name}'s built-in supply gives the pixels ${rail}; these run on ${volts(voltage)}.`,
+        `Choose ${rail} pixels, or power these from their own supply, join the grounds, and take only data from ${name}.`
+      );
+    }
+  } else if (pixel && controller.voltageMax != null && voltage > controller.voltageMax * 1.05) {
     add(
       'warning',
       'voltage-over',

@@ -251,6 +251,16 @@ describe('supply voltage', () => {
     }
   });
 
+  test('a mains unit takes pixels that match its built-in supply', () => {
+    const fits = fit(controller('mains5'), pixel('rgb5'), { strings: 1, perString: 100 });
+    expect(codes(fits.issues)).not.toContain('voltage-under');
+    expect(codes(fits.issues)).not.toContain('voltage-over');
+    const result = fit(controller('mains5'), pixel('rgb12'), { strings: 1, perString: 100 });
+    const issue = find(result.issues, 'voltage-over');
+    expect(issue?.severity).toBe('warning');
+    expect(issue?.message).toContain('built-in supply gives the pixels 5');
+  });
+
   test('a dev board is never put on a 12 V rail', () => {
     const result = fit(controller('mb-esp'), pixel('rgb12'), { strings: 1, perString: 100 });
     expect(find(result.issues, 'voltage-over')?.severity).toBe('warning');
