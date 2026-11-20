@@ -6,6 +6,17 @@ coordination notes. Each entry: what was seen, why it matters. Claim an entry
 fixed with the commit hash when done. Workstreams: see
 [plans/website-buildout.md](plans/website-buildout.md).
 
+## Dev server took minutes to start on Windows — fixed (stream 3, FYI)
+
+If an e2e run died with "Timed out waiting 60000ms from config.webServer", or
+the dev server answered 500 with "transport invoke timed out after 60000ms …
+/app/app.css": Vite was opening a file watcher for every file under the
+root, twice (React Router runs a second Vite server), and a `build/` left by
+`bun run build` tripled the count. `vite.config.ts` now keeps the watcher out
+of `build/`, `database/` and `playwright-report/` (2026-11-20). Rebase to get
+it; no need to delete `build/` before running e2e. YAML edits still show up
+on refresh: the database is read with `fs`, not through Vite.
+
 ## Same product in two categories
 
 **Fixed (stream 2).** Merged: QuinLED-Dig-Quad and Dig-Uno, the M4-PI
@@ -161,12 +172,18 @@ Filling any of these makes its checks sharper with no code change:
 - Connectors: 34 of 45 families now carry a representative-SKU price
   (2026-11-18); binder-720, chogori, eventcon, hirschmann-ca, ld16-20-28,
   socapex, sp13, sp17, teeplug, wago-221 and wieland-rst still have none.
-- Level converters: done for the eight active parts (stream 3, 2026-11-18).
-  `electrical.input_high_voltage` (+ `_notes`) is a new optional field: the
-  datasheet's VIH min in the 3.3 V → 5 V role; `io.buffered` says whether the
-  output is a push-pull driver. Both carry `sources` quotes. The designer
-  flags 74HC245 (3.5 V threshold) and TXS0108E (pull-up outputs) from them. A
-  new converter entry without the two facts is simply offered unjudged.
+- Level converters: done for the eleven parts that shift logic levels
+  (stream 3, 2026-11-18 and 2026-11-20, the second pass for SN74HCT125,
+  SN74HCT245 and TXB0104). `electrical.input_high_voltage` (+ `_notes`) is
+  the datasheet's VIH min in the 3.3 V → 5 V role; `io.buffered` says whether
+  the outputs can drive a cable (the schema now spells that out: TI calls the
+  TXB0104 "a buffered architecture", but its outputs sit behind 4 kΩ and are
+  rated for 70 pF, so it is `false`). Both carry `sources` quotes. The
+  designer flags 74HC245 (3.5 V threshold), TXS0108E and TXB0104 (weak
+  outputs) from them. A new converter entry without the two facts is offered
+  unjudged, after the ones that have them; `io.direction: auto` alone is
+  enough for the weak-output warning. MAX3485 (`io.differential`) is set
+  apart like the differential receiver, not offered as a buffer.
 - Adapters: the designer offers an adapter once it has `outputs.count` and a
   `host` link to a /microboards entry: 22 of 40 after cross-links' new-entry
   pass (2026-11-18), which added the Wemos D1 Mini / Pro, BeagleBone Green,
@@ -179,12 +196,19 @@ Filling any of these makes its checks sharper with no code change:
   (no maker text). `outputs.driver.buffered` is recorded on one adapter
   only: an adapter whose `related` has `uses: level-converters/…` counts as
   buffered (13 adapters now name their 74HCT245 / 74HCT125 / TXB0104), the
-  rest say nothing about level shifting.
-- `adapters/pocketscroller-v2` has `outputs.count: 6` with
-  `protocols: [HUB75]`: panel outputs, not pixel strings. The designer
-  offers it and says the pixel isn't among its listed protocols; a field
-  that separates panel outputs from pixel outputs would let it leave such
-  boards out.
+  rest say nothing about level shifting. Since 2026-11-20 the converter has
+  to be one that can put 5 V logic on a data line: a MAX3485 on the same
+  board is there for DMX and proves nothing about the pixel outputs.
+- Hardware whose `outputs.protocols` lists only matrix-panel interfaces
+  (HUB75, HUB75E, HUB08…) is no longer offered by the designer
+  (`adapters/pocketscroller-v2` today). A panel driver recorded with no
+  protocol list at all would still be offered.
+- FYI, one row corrected by stream 3 (2026-11-20):
+  `controllers/pixlite-4-rugged-mk2` had `max_per_output: 85`, which made
+  the designer reject it for any string over 85 pixels. Advatek's manual
+  gives 4 universes on each of 4 outputs, halved on 8 in expanded mode, so
+  340 for the 8 outputs the entry counts (quote under `sources`). The other
+  PixLite rows follow the same arithmetic and looked right.
 
 ## Suspected data errors seen while sourcing images & datasheets (stream 5)
 
@@ -289,15 +313,17 @@ in the named file under [plans/database-review-fixes/](plans/database-review-fix
     is the former DMS Microelectronics (`pixel-ics/p9813`); every maker
     document says DMS. A maker alias in `app/lib/relations.ts` would put both
     under one "More from" row (issues-final.yaml).
-- Stream 3 (designer): 12 V "series" pixels run R, G and B on one current,
-  so a pixel draws its channel current once, not three times. CS8812: "It
-  is RGB LED series structure ... the LED constant current is 18mA.
-  Different to the parallel architecture of 5V power supply and 54mA";
-  WorldSemi gives the WS2815B "Power Consumption 0.1~0.18 W" at 10 mA. The
-  designer's `pixelMaxAmps` (channel current x channels) puts a WS2815 at
-  0.36 W, two to three times its datasheet (stream5-parts.yaml: cs8812,
-  gs8208, ws2815). Over-sizing the supply errs safe, but the figures shown
-  are wrong; series parts would need a flag in the data.
+- Stream 3 (designer): **done 2026-11-20.** 12 V "series" pixels run R, G
+  and B on one current, so a pixel draws its channel current once, not
+  three times (CS8812: "It is RGB LED series structure ... the LED constant
+  current is 18mA"; stream5-parts.yaml: cs8812, gs8208, ws2815). The
+  designer no longer puts a WS2815 at 0.36 W. No flag was needed: a part
+  counts as series when the maker's whole-pixel `wattage` is about one
+  channel's `channel_current` x `led_voltage` on a rail of 9 V or more
+  (six parts today: cs8812, gs8208, hd8808, lc8808b, tx1818, ws2815).
+  `sk6813-hv`, `ws2815-rgbw` and `ws2851` record no maker power, so they
+  are still budgeted as parallel channels, two to three times high if they
+  are series parts too; recording `electrical.wattage` settles each one.
 - Stream 5 (datasheets, images):
   - `pixels/apa102`: its image's source page (Adafruit 2343) now sells the
     SK9822; `datasheet.third_party_testing` links APA's page for another
