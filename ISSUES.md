@@ -152,10 +152,11 @@ per pixel", but the stored values are `channel_current × led_voltage` for a
 single colour channel: WS2812 18.5 mA × 5 V = 92.5 mW, APA102 22 mA × 5 V =
 110 mW (a WS2812 at full white draws about three times that). The ratio is
 1.00 on 15 of the 21 rows that have both fields. Rows that don't follow the
-pattern: `lc8808b`, `ns8808` and `ws2851` (computed at 5 V although
-`led_voltage` is 12 V), `sk6805` (100 mW with a ~5 mA channel), `ns108e`
-and `sk6812` (off by 2–4%). (`ns108` merged into `hd108`, which follows the
-pattern.)
+pattern: `lc8808b` and `ws2851` (computed at 5 V although `led_voltage` is
+12 V), `sk6805` (100 mW with a ~5 mA channel), `ns108e` and `sk6812` (off by
+2–4%). (`ns108` merged into `hd108`, which follows the pattern. `ns8808`,
+now `hd8808`, holds Newstar's "Max Power 0.2W", 200 mW: a true per-pixel
+figure, since a 12 V pixel's channels share one series current.)
 
 Why it matters: the old designer multiplied this field by the pixel count and
 under-reported power about 3× (fixed: it now uses channel current × channels
@@ -415,6 +416,17 @@ entries; not applied because they're existing spec values, not links:
   DMS Microelectronics, the creator on `pixel-ics/p9813`. If that's one
   company, one spelling (or a maker alias in `app/lib/relations.ts`) puts
   both under one "More from" row.
+
+## Sheet parity: numeric cells pass as "elsewhere" on stray digits (stream 1)
+
+`compareCell` (scripts/sheet-parity/compare.ts) falls back to `coverage(text,
+view.visible)` for a numeric cell that doesn't match, so a short number found
+anywhere in the entry's text passes as `elsewhere`. Seen 2026-11-20: Pixels
+N17 (NS108 row, Channel Current "20") stopped being reported once `hd108`
+gained a `retrieved: '2026-11-20'` date, and N19 (NS8808 row, "9") vs
+`hd8808`'s 17.5 mA isn't reported either. Real differences can drop out of
+the report silently; numeric columns probably shouldn't use the text
+fallback, or should match whole numbers with their unit.
 
 ## Facts to check, found by parity research (stream 2)
 
