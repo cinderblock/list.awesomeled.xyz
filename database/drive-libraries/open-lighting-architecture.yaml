@@ -23,7 +23,7 @@ protocols:
   - sACN
   - ESP Net
   - KiNET
-  - Open Pixel Control
+  - OPC
   - OSC
   - Pathport
   - SandNet
