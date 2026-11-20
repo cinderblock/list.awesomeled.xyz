@@ -381,12 +381,3 @@ language but left `pricing` alone: prices are stream 6's. What's loose now
 
 Why it matters: "free to try?" and "subscription or perpetual?" are the
 questions people filter software on, and the sheet couldn't answer them.
-
-## Designer intro: a link told from its sentence only by color (stream 3)
-
-Found by browse UX's accessibility audit (axe, rule `link-in-text-block`,
-serious), light and dark: on `/designer`, the "system overview" link in
-`.designer-intro` is blue on grey text with no underline, 1.04:1 against the
-words around it (3:1 is the minimum when color is the only cue). An underline
-fixes it. `e2e/a11y.test.ts` covers the rest of the site and leaves the
-designer out for this reason; add `/designer` to its `PAGES` once this is in.
