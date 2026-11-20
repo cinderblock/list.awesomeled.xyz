@@ -151,6 +151,12 @@ four DMX outputs and its 12 V supply (899dc868, b4389253). Where both belong
 is Cameron's call, tied to the parked pattern-driver kinds: open questions
 1-2 in [plans/database-review.md](plans/database-review.md).
 
+Designer (stream 3, 2026-11-20): an entry whose `outputs` block lists only
+`auxiliary` outputs is no longer offered as a pixel controller, so the PixOut
+recorder and Baldrick DMX are out of the designer wherever they end up. DMX
+Core 100 has no `outputs` block at all, which reads as "not recorded": it is
+still offered, with a note that its pixel outputs are unknown.
+
 ## Pixels' `electrical.wattage` is one channel's power, not the pixel's (stream 2)
 
 **Fixed (stream 2).** `wattage` is now the maker's whole-pixel figure
