@@ -33,6 +33,7 @@ const TYPES: Record<string, string> = {
   '.zip': 'application/zip',
   '.txt': 'text/plain; charset=utf-8',
   '.xml': 'application/xml',
+  '.woff2': 'font/woff2',
 };
 
 function isFile(path: string): boolean {

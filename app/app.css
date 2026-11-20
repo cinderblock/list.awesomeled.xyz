@@ -4,6 +4,9 @@
    This file imports all CSS modules in the correct order.
    ========================================================================== */
 
+/* Fonts: Inter, served from this site */
+@import './styles/fonts.css';
+
 /* Base: Reset, custom properties, typography */
 @import './styles/base.css';
 

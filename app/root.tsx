@@ -9,6 +9,7 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
+import interLatin from './fonts/inter-latin.woff2?url';
 import { RainbowProvider } from '~/context/RainbowContext';
 import { Layout as AppLayout } from '~/components/layout/Layout';
 import { NotFound } from '~/components/search/NotFound';
@@ -18,16 +19,10 @@ export const links: Route.LinksFunction = () => [
   { rel: 'icon', href: '/icon.svg', type: 'image/svg+xml' },
   { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
   { rel: 'manifest', href: '/site.webmanifest' },
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  {
-    rel: 'preconnect',
-    href: 'https://fonts.gstatic.com',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
-  },
+  // The one font file every page needs, fetched alongside the stylesheet
+  // instead of after it (styles/fonts.css has the rest, loaded on demand).
+  // Fonts are always fetched in CORS mode, so the preload must say so too.
+  { rel: 'preload', href: interLatin, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
 ];
 
 // Inline script to prevent a flash of the wrong theme or table layout on
