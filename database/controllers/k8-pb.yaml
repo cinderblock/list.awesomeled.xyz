@@ -88,6 +88,10 @@ sources:
     url: https://kulplights.com/manuals/boards/k8-pb/
     retrieved: '2026-11-18'
     notes: "Confirms the current value. Product page: 'The newer K8-PBs are designed specifically for the PocketBeagle 2 and will not work with an older PocketBeagle 1.'"
+  power.voltage:
+    url: https://kulplights.com/manuals/boards/k8-pb/
+    retrieved: '2026-11-20'
+    notes: "'One power terminal, 5–18 V. It powers the controller and all eight ports, so all of them run at the same voltage. Don't use 24 V supplies.' The eight ports drive 5 V or 12 V pixels."
 technical_notes:
   - 12 of 36 channels require differential receivers to drive LEDs
   - Runs FPP (Falcon Player)
