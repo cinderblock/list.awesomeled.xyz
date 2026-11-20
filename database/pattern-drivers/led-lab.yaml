@@ -39,6 +39,10 @@ aliases:
 capabilities:
   live: true
   designer: true
+images:
+  - file: led-lab.webp
+    source: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    credit: Christopher Schardt (L.E.D. Lab)
 integrations: PixelPusher, RGB-123, FadeCandy/FCServer
 links:
   url: https://apps.apple.com/us/app/l-e-d-lab/id832042156

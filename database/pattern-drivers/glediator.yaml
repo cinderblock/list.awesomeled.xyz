@@ -39,6 +39,10 @@ dead_links:
     archive: https://web.archive.org/web/20230604201344/https://oneguyoneblog.com/download/glediator-v2-0-3/
     checked: '2026-11-18'
     notes: Third-party mirror of glediator_v2.0.3.zip, posted 2018-11-26; the whole site returned Cloudflare error 522 (origin unreachable)
+images:
+  - file: glediator.webp
+    source: https://web.archive.org/web/20151230225115/http://www.solderlab.de/index.php/software/glediator
+    credit: SolderLab
 integrations: Solderlab true-color matrix driver boards and Universal Interface Board; Arduino (Uno,
   Leonardo, Micro, Mini, Mega) with Solderlab's WS2801 and WS2811/WS2812 sketches
 language: Java

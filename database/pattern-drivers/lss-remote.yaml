@@ -5,6 +5,10 @@ notes: LED Strip Studio's phone and tablet app for its Reactivo 2, SPI Matrix an
 capabilities:
   live: true
   designer: false
+images:
+  - file: lss-remote.webp
+    source: https://www.ledstripstudio.com/products/lss_remote/
+    credit: LED Strip Studio
 integrations: Reactivo 2, SPI Matrix, LEC3 (LED Ethernet Controller 3)
 links:
   url: https://www.ledstripstudio.com/products/lss_remote/

@@ -18,6 +18,10 @@ dead_links:
     archive: https://web.archive.org/web/20190917203119/http://joehinkle.com:80/HLS/
     checked: '2026-11-18'
     notes: Redirects to www.joehinkle.com/HLS/, which returns 404 (the site now sells Joe Hinkle's pixel controllers); the 2019 capture lists HLS_Install_26A.zip, HLS_PLAYER_1D.zip and the manuals
+images:
+  - file: hls.webp
+    source: https://web.archive.org/web/20250601205221/http://joehinkle.com/HLS/HLS%20Getting%20Started%20Manual.pdf
+    credit: Joe Hinkle (HLS)
 links:
   url: http://joehinkle.com/HLS/
 platforms:

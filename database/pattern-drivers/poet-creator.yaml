@@ -32,6 +32,10 @@ capabilities:
   live: true
   designer: true
   visualizer: 3D
+images:
+  - file: poet-creator.webp
+    source: https://poet.software/poet-creator-software/
+    credit: Skandal Technologies (POET)
 links:
   url: https://poet.software/
 platforms:

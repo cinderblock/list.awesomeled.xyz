@@ -15,6 +15,10 @@ aliases:
 capabilities:
   live: true
   designer: true
+images:
+  - file: grandma.webp
+    source: https://www.malighting.com/special/grandma3-software/
+    credit: MA Lighting
 links:
   url: https://www.malighting.com/grandMA3-software
 platforms:

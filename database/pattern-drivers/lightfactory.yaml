@@ -25,6 +25,10 @@ outputs:
 capabilities:
   live: true
   designer: true
+images:
+  - file: lightfactory.webp
+    source: https://www.lightfactory.net/LightFactory-221-Features.html
+    credit: Dream Solutions Ltd (LightFactory)
 links:
   url: https://www.lightfactory.net/
 platforms:

@@ -21,6 +21,10 @@ aliases:
   - Light-O-Rama Software Suite
 capabilities:
   designer: true
+images:
+  - file: light-o-rama.webp
+    source: https://www.lightorama.com/help/sequencer.htm
+    credit: Light-O-Rama
 links:
   url: https://store.lightorama.com/pages/download-software
 platforms:

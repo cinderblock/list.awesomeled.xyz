@@ -27,6 +27,10 @@ aliases:
 capabilities:
   live: true
   programmatic: true
+images:
+  - file: vvvv.webp
+    source: https://vvvv.org/
+    credit: 'vvvv (Dießl & Gregor GbR)'
 links:
   url: https://vvvv.org/
 platforms:

@@ -14,6 +14,11 @@ outputs:
 capabilities:
   live: true
   designer: true
+images:
+  - file: freestyler.webp
+    source: https://www.freestylersupport.com/wiki/external_control:touchscreen:touchscreen_ui2
+    credit: FreeStyler DMX support wiki
+    license: Public domain
 links:
   url: https://www.freestylerdmx.be/
 platforms:

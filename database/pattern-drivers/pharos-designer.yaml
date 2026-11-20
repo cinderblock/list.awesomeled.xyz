@@ -24,6 +24,10 @@ aliases:
 capabilities:
   live: true
   designer: true
+images:
+  - file: pharos-designer.webp
+    source: https://dl.pharoscontrols.com/software_help/designer2/content/help/quick%20start/user%20interface.htm
+    credit: Pharos Architectural Controls
 links:
   url: https://www.pharoscontrols.com/designer/
 platforms:

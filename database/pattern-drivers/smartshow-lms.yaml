@@ -46,6 +46,10 @@ capabilities:
   live: true
   designer: true
   programmatic: true
+images:
+  - file: smartshow-lms.webp
+    source: https://smartshowlms.leejamesapps.co.uk/
+    credit: Lee James Apps
 integrations: WLED, xLights and Falcon controllers; HDMI LED sender cards such as Colorlight
 language: GLSL
 links:
