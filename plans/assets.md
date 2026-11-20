@@ -71,7 +71,8 @@ so the entry page shows them (see Plan step 4).
     - [ ] Cameron's yes on that exact change → commit + push ops (CI applies) → R2 token → repo secrets/variable → Actions PR permission → first run.
 12. [ ] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
     - [x] pixel ICs + pixels (f4c3620): 3 images, 1 datasheet added, 2 LCSC viewer URLs replaced by direct PDFs; 47 image skips and 12 parts with no published datasheet, reasons in `plans/assets-research/pass2-pixels-ics.md`.
-    - [ ] boards / converters / connectors / controllers, pattern drivers: agents running (T3 delegated tasks, own checkouts).
+    - [x] pattern drivers: 12 official screenshots (Pharos swapped at review for the help's Layout view); light-show-pro (500 px only), watchout (callouts/marketing render) and xschedule (none exists) skipped. `plans/assets-research/pass2-pattern-drivers.md`.
+    - [ ] boards / converters / connectors / controllers: agent running (T3 delegated task, own checkout).
 
 ## Working method (two worktrees)
 
@@ -147,6 +148,7 @@ the shared block to them).
 - Upstream churn: other streams edited the same YAML constantly. Agents worked on an older tree; `<scratchpad>/port-assets.ts` ported only `image`/`images`/`datasheet` blocks three-way, and `<scratchpad>/merge-blocks.ts` resolved rebase conflicts per root key (both sides changing the same key → manual).
 - Stream 2 merged duplicate entries mid-pass (QuinLED, M4/M8-PI, standard-differential-receiver; F-Test moved): images were re-homed onto the surviving entries; the validator's orphan check catches leftovers.
 - e2e under load: `newPage` setup timeouts and the first-navigation test flake on a cold dev server; single-worker runs pass. Master CI currently fails `table.test.ts` "missing values sort last" (not this stream; logged in ISSUES.md).
+- **Dev server hung at startup** (2026-11-20 ~3 AM PST): every request returned 500 with `transport invoke timed out after 60000ms … fetchModule /app/app.css`, so e2e failed on Playwright's 60 s `webServer` wait. One failed fetch is cached, so waiting longer doesn't help. The cause was a stale Vite dependency-optimizer cache in `node_modules/.vite`, probably left behind by a start that died while the machine was pegged (Defender and other threads at 100% CPU). A start that logs "Re-optimizing dependencies because vite config has changed" rebuilds it; deleting `node_modules/.vite` should do the same. Clean `origin/master` sharing the same `node_modules` reproduced the rebuild and then served 200 in 32 s.
 - A stale incremental `bun install` left a nested `ajv` under `ajv-formats` and broke `tsc` locally; a clean install fixed it.
 
 ## Progress log
@@ -170,6 +172,8 @@ the shared block to them).
 2. **Borderline image calls** worth a glance (details in `plans/assets-research/`): neopixelbooster recorded as CC BY-NC-SA 4.0 (README) though its LICENCE file says CC BY-SA 4.0; LED-strip sellers (LEDYi, Superlighting) as `community` datasheet hosts for Titan/UCS ICs whose makers publish none; a few retailer photos for generic diffusers (Screwfix, eplastics).
 
 ## Things not to do
+
+- Don't run bare `bunx playwright test`: it includes the `visual` project, which is headed (`headless: false`, slowMo) and puts Chrome windows on Cameron's screen. Use `bun run test:e2e` (`--project=chromium`) or pass `--project=chromium`. Wrap e2e in `srmctl run --slots 2 --low`.
 
 - Don't touch Cloudflare, R2, DNS or repo secrets. Stage and ask.
 - Don't use the user's Chrome for scraping (keep off the screen).

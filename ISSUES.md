@@ -225,6 +225,17 @@ datasheet: records in
 in b4389253, f8749eae, 219a1408 (most were already fixed by earlier passes).
 What belongs to other streams is under "Hand-offs from the database review".
 
+**Not yet processed:** stream 5's second pass, after the review above.
+
+- **Pixel ICs** ([pass2-pixels-ics.md](plans/assets-research/pass2-pixels-ics.md)):
+  tm1804 says 24 V outputs, but the V1.9 sheet it cites and Titan's current
+  V2.3 both say 30 V; ge1603's Greeled may be its vendor, not its designer.
+- **Pattern drivers** ([pass2-pattern-drivers.md](plans/assets-research/pass2-pattern-drivers.md)):
+  grandma's link redirects to `/special/grandma3-software/`; hls's notes may
+  understate its last version (an `HLS_Install_26A.zip` was published);
+  lightfactory's site refuses non-browser downloads, so a link checker may
+  call it dead; Pharos now announces Designer 3 (the entry describes 2).
+
 ## Datasheet URLs that serve HTML instead of a PDF (stream 2)
 
 **Fixed.** `connectors/pcb-screw-terminal-block` links Degson's own DG301-5.0
