@@ -23,9 +23,10 @@ Research findings with sources: [database-review-research.md](database-review-re
 
 - Worktree: `C:\Users\camer\.t3\worktrees\list.awesomeled.xyz\ws-database-review-33c6178cfaf35956`, branch `ws/database-review`.
 - Ship: rebase onto `origin/master`, `git push origin HEAD:master` (fast-forward only, never force). Every push deploys production.
-- Checks before every push: `bun run validate`, `bun run lint`, `bunx prettier --check . --end-of-line auto` (plain `format:check` fails on Windows CRLF working copies), `bun run typecheck`, `E2E_PORT=5273 bun run test:e2e --workers=1` (parallel workers time out while 7 streams load the machine; one worker passes).
-- My dev server / e2e port: 5273 (announced in `~/.claude/skills/workspace-contention/active-agents/`).
-- Schemas: `database/_schema/*.json` (draft-07, AJV + ajv-formats via `scripts/validate.ts`); shared defs in `common.json`. `_example.yaml` files are validated except those in `STALE_EXAMPLES` (validate.ts), which shrinks as categories are migrated.
+- Checks before every push: `bun run validate`, `bun run lint`, `bunx prettier --check . --end-of-line auto` (plain `format:check` fails on Windows CRLF working copies), `bun run typecheck`, `bun run test:unit`, e2e with `--workers=1` (parallel workers time out while 7 streams load the machine). All of it runs in `scratchpad/ship-wt.sh <commit>`, which ships from a second worktree (see Findings).
+- Ports: 5273 for the main worktree's dev server, 5274 for the ship worktree's e2e (announced in `~/.claude/skills/workspace-contention/active-agents/2ef4421f.md`).
+- Schemas: `database/_schema/*.json` (draft-07, AJV + ajv-formats via `scripts/validate.ts`); shared defs in `common.json`; how to change one: `database/_schema/README.md`. Every `_example.yaml` is validated.
+- Sheet parity (stream 1's tool): `bun run sheet-parity` fetches the live sheet and rewrites `plans/spreadsheet-parity/report.md`; `scripts/sheet-parity/columns.ts` maps sheet columns to YAML paths (with custom comparison kinds), `aliases.ts` pairs renamed rows, `acks.yaml` records deliberate differences. My changes must leave it at zero open differences.
 - Migrations: `scripts/migrations/<date>-<topic>.ts` using `scripts/migrations/lib.ts` (comment-preserving; unchanged top-level blocks keep their original bytes; root keys inserted in lint order). Re-runnable no-ops.
 - IGNORED_COMMITS: my block in `app/lib/data.ts` sits under "Database review & standardization" (not at the list end, where other streams append). Push the migration commit first, then add its (now stable) hash in a follow-up commit.
 - UI consumers: `app/lib/columns.tsx`, `app/components/ui/FeatureBadges.tsx`, `app/routes/entry.tsx`, `app/lib/designer.ts` (stream 3), `app/lib/relations.ts` (stream 4).
@@ -41,7 +42,12 @@ Research findings with sources: [database-review-research.md](database-review-re
 - Pattern-driver I/O directions keep the sheet's readable `Input` / `Output` / `Both`, plus `false` for a checked "not supported" (blank = unknown). Lowercase tokens would need relabeling in every UI; these display as-is.
 - "One or a list" for multi-valued facts: `language`, commercial `color_type`, `channel_bits` / `dimming_bits` (selectable depths), microboard `ram`. A plain value when there is one.
 - Family entries (a connector series, an IC with several package suffixes): ratings take the family's highest member, variants go in `*_notes`; packages list every package the entry's aliases name.
-- Mains-powered controllers record the AC input range in `power.voltage` with an "AC mains" comment (precedent: qolorpix, led-ethernet-controller-powered). The pixel-side voltage gap is logged in ISSUES.md.
+- Mains-powered controllers: `power.ac: true`, `power.voltage` = the AC range their built-in supply takes, `power.output_voltage` = the DC rail on the pixel outputs (a list when versions differ), `power.current.max` = what the board passes to its outputs. The designer checks pixels against the built-in rail.
+- `electrical.wattage` on pixels is the maker's whole-pixel figure ("0.2Watt Power"); one channel's VCC x current (the sheet's formula) is derivable from `channel_current` and was removed where no maker figure exists. The designer prefers channel current and spreads a lone wattage over the channels.
+- Attribution is shared: `common.json` `organization` / `vendor` / `creator` / `manufacturers` / `vendors` (name required on objects, URI formats, unique lists); each category keeps its own column-tooltip description.
+- Quantities carry their unit everywhere except controllers' and adapters' `power.voltage` / `power.current` / `outputs.current`, which are bare volts and amps (consistent per field; `app/lib/quantity.ts` reads both). Not migrating: ~200 entries and the designer for no change in meaning.
+- Duplicates take the slug that fits their siblings: the Pi 3 Model B is `microboards/raspberry-pi-3-model-b` (cross-links' `raspberry-pi-3b` merged into it).
+- Slugs are URLs: a misspelled slug stays once its display name is right (`controllers/luminaxa` shows "Luminxa"); the site has no redirects, so renaming would break links for no gain.
 - Verified corrections carry `sources.<field>` on the entry; the full records (quotes, URLs, rejected and unverifiable items) live in `plans/database-review-fixes/*.yaml` (excluded from eslint so quotes stay verbatim).
 - Controllers have no `aliases` field (stream 4's infrastructure); a real former name goes in the notes instead.
 
@@ -67,7 +73,14 @@ Research findings with sources: [database-review-research.md](database-review-re
 - Re-rendering a block re-quotes its scalars: replacing a list rewrote `retrieved: '…'` dates unquoted. Append to sequences instead; `setJS` now quotes dates.
 - Renaming a field must rename its `sources` key too (validate rejects sources for missing fields).
 - Other streams keep adding entries in the old shapes after a migration lands (cross-links' 2026-11-18 wave): re-run every migration after each rebase; extend its mappings when a new value appears.
-- Files here are CRLF on Windows: string replacements in `bun -e` that include `\n` miss; use the Edit tool.
+- Files here are CRLF on Windows: string replacements in `bun -e` that include `\n` miss; use the Edit tool, or a Python script (written to a file, not a bash heredoc) that normalizes to LF and writes back the file's own line endings.
+- A Claude session ending kills a running ship: the e2e workers die with exit code 3221225794 (0xC0000142, DLL init failed) and the step fails. Check `scratchpad/logs/ship/e2e.log` before assuming a test regression.
+- Rebasing my migration commits onto new upstream data: take upstream's file (`git checkout --ours`), re-run that commit's migration, extend its maps when it throws (stream 1's NS ICs needed `IC_CONTROL`; a `sources.color.aggregate_bits` had to merge into `channel_bits`' source), then continue. A later commit that changes the same map lines conflicts again unless the earlier resolution already holds its exact change.
+- The fix-applying script must not overwrite a value another stream changed since the record was written: `_tmp-apply-fixes.ts` sends any record whose `current` no longer matches to manual review (LED-Player-M's per-channel limit, which stream 1 had set from the older manual; the current manual, read directly, says 256).
+- My typed fields open differences in stream 1's parity report (sheet "8+5" vs `channel_bits` + `brightness_control`, "16bit or 8 bit" vs `[8, 16]`, renamed rows): fix them in the same push with comparison kinds in `columns.ts`, aliases, or acks citing the evidence file, and regenerate the report.
+- Sources keyed by list index (`technical_notes.1`) validate but break when the list shifts; key sources by field only.
+- The apply script replaces a changed field's source; when the old source still backs part of the new value (Genius Pro's microSD feature), keep both as a list. Check every diff for removed `url:` lines under `sources`.
+- Never type a commit hash from memory: copy it from `git rev-parse`. A mistyped tail left the July prose-to-fields batch un-ignored for months (`2c7bf1195c27…` for `2c7bf116f257…`); `tests/unit/ignored-commits.test.ts` now fails on any hash that names no commit.
 
 ## Plan / steps
 
@@ -82,9 +95,11 @@ Research findings with sources: [database-review-research.md](database-review-re
 9. ✅ Input vocabulary (controllers + adapters) and the full controller inputs audit (119 entries corrected).
 10. ✅ Remaining categories typed: Pi Hat; connectors; microboards; pattern drivers (I/O from research, tags for other I/O, visualizer, language) and drive libraries; commercial systems (color types, dimming bits, release_year); level converters (packages, supply range, direction, drive from TI/Microchip); pixels/pixel ICs (channel_bits, brightness_control, supply_voltage); trailing zeros; every `_example.yaml` validates.
 11. ✅ Verified the ~230 "wrong facts" other streams reported (data-freshness findings, ISSUES.md connector list) with 9 research agents; applied per category with sources on the entries (`plans/database-review-fixes/`).
-12. **(current)** Ship the batch; IGNORED_COMMITS for the structural commits; stream-5 suspected errors (2 agents still running) and pixels' `wattage` meaning; ISSUES.md handoffs (other-owner records, pattern-driver pricing for stream 6, mains-powered controllers' pixel voltage, luminaxa slug) and close the sections done.
-13. Cross-cutting: shared attribution definitions (creator/vendors/links uri formats), unit formatting convention, `app/lib/types.ts` stale flat interfaces.
-14. Docs: CONTRIBUTING.md schema reference, `database/_schema/README.md`, OVERHAUL-PLAN.md (pixel_rate_max done), TODO.md (both items done).
+12. ✅ Shipped `5b734cc..6db9e30` (2026-11-20); IGNORED_COMMITS follow-up; stream-5 suspected errors applied; pixels' `wattage` meaning decided; Pi 3 Model B duplicate merged; parity report back to zero.
+13. ✅ Cross-cutting: shared attribution definitions; unit convention (documented); stale flat entry types removed; mains-supply convention (`power.ac`, `output_voltage`).
+14. ✅ Docs: CONTRIBUTING.md schema reference and value conventions, `database/_schema/README.md`, CLAUDE.md, OVERHAUL-PLAN.md, TODO.md.
+15. **(current)** Ship the second batch; IGNORED_COMMITS for its structural commits; apply the last research batch (`scratchpad/fixes/issues-final.yaml`: WS2818B, NodeMCU outputs, P9883 maker, LEDs Master, DiGidot C4, Pixelator Mini, ProtoPixel 1-ch, Genius Pro, two HTML datasheets); ISSUES.md: close my sections with hashes, hand off other-owner records.
+16. Cleanup: remove `scripts/migrations/_tmp-apply-fixes.ts`, the ship worktree, backup branches, the port marker.
 
 ## Progress log
 
@@ -101,10 +116,14 @@ Research findings with sources: [database-review-research.md](database-review-re
 - [x] Pattern drivers: research data (`0690af1`), structure (`e215cd7`).
 - [x] Table enums filter by their cell labels; commercial systems and level converters typed; level-converter datasheet facts; trailing zeros; LPD8806 7-bit; pixels/pixel ICs vocabulary; follow-up for entries added since (unpushed at this writing).
 - [x] Fix lists applied: connectors, controllers, microboards/decoders, pixels (SM1616 stub removed), software, adapters/commercial (ElectroMage duplicates merged), Perspex size (unpushed at this writing).
-- [ ] Push the batch; IGNORED_COMMITS follow-up.
-- [ ] Stream-5 suspected errors (agents running); wattage meaning.
+- [x] Pushed `5b734cc..6db9e30` (all checks, 114 e2e); IGNORED_COMMITS follow-up.
+- [x] Stream-5 suspected errors: 45 records applied with sources, the rest already fixed, rejected or handed over (`plans/database-review-fixes/stream5-*.yaml`); wattage meaning.
+- [x] Pi 3 Model B duplicate merged; parity report at zero open differences again.
+- [x] Cross-cutting (attribution, mains supplies, types) + docs.
+- [ ] Second batch shipped; its IGNORED_COMMITS.
+- [ ] Last research batch applied.
 - [ ] ISSUES.md handoffs and closures.
-- [ ] Cross-cutting + docs.
+- [ ] Cleanup.
 
 ## Open questions for the user
 
@@ -137,5 +156,6 @@ Research findings with sources: [database-review-research.md](database-review-re
 | `adapters/serial-led-driver`                 | Adapters: "Serial LED Driver" (ElectroMage, also a controller)      | `controllers/electromage-8x-driver`               |
 | `adapters/pro-serial-led-driver`             | Adapters: "Pro Serial LED Driver"                                   | `controllers/electromage-pro-8x-driver`           |
 | `pixels/sm1616`                              | Pixels: "SM1616" (no such part; links the SM16716 datasheet)        | `pixel-ics/sm16716`                               |
+| `microboards/raspberry-pi-3b`                | none (cross-links' duplicate of the Pi 3 Model B)                   | `microboards/raspberry-pi-3-model-b`              |
 
 `adapters/espartstick` stays: it is the earlier 2019 shield (no SD card), a different product.
