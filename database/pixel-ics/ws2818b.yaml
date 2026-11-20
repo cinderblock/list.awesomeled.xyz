@@ -1,11 +1,11 @@
 name: WS2818B
 status: active
-release_year: 2018
+release_year: 2017
 creator: WorldSemi
-notes: 12V WS2813 as separate IC
+notes: WS2813-style dual-signal driver (backup data input) as a separate IC, for 12 V and 24 V strips
 color:
   channel_bits: 8
-  pwm_frequency: 2kHz
+  pwm_frequency: 4kHz
 data:
   type: WS2811/12
   clocked: false
@@ -20,14 +20,14 @@ dead_links:
     archive: https://web.archive.org/web/20200720001510/http://www.world-semi.com:80/technology/details-104-4.html
     checked: '2026-11-18'
 electrical:
-  output_voltage: 12V
+  output_voltage: 20V
   supply_voltage: 5V
   gpio:
     min: 3V
     max: 5V
   max_current: 16mA
   quiescent_current: 2.1mA
-  output_voltage_notes: 24V version also available
+  output_voltage_notes: 'R/G/B port rating since datasheet V1.3 (2019-09-06), which also added 24 V applications: the same IC runs in 12 V and 24 V strips with one series resistor feeding VDD (there is no separate 24 V version)'
   supply_voltage_notes: Can use an external resistor to supply 5V Vdd from a higher system voltage
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ws2818
@@ -63,5 +63,31 @@ sources:
     url: https://www.lcsc.com/datasheet/C114582.pdf
     retrieved: '2026-11-18'
     notes: WorldSemi WS2818B datasheet
+  release_year:
+    url: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+    retrieved: '2026-11-20'
+    notes: V1.0 N New 20170523
+  electrical.output_voltage:
+    url: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+    retrieved: '2026-11-20'
+    notes: R/G/B Channel Output Port Withstand Voltage Vout 20 V
+  electrical.output_voltage_notes:
+    url: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+    retrieved: '2026-11-20'
+    notes: Built-in voltage-regulator tube, only a resistance needed to add to IC VDD feet when under 24V power supply.
+  notes:
+    url: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+    retrieved: '2026-11-20'
+    notes: Built-in voltage-regulator tube, only a resistance needed to add to IC VDD feet when under 24V power supply.
+  color.pwm_frequency:
+    url: https://atta.szlcsc.com/upload/public/pdf/source/20241202/4A771CD25CA8D056BF075AD1E8527C36.pdf
+    retrieved: '2026-11-20'
+    notes: PWM 控制端能够实现256级调节，扫描频率4KHz。
+  technical_notes:
+    url: https://atta.szlcsc.com/upload/public/pdf/source/20241202/4A771CD25CA8D056BF075AD1E8527C36.pdf
+    retrieved: '2026-11-20'
+    notes: V1.5 M 去除CPC8封装，增加FSOP8封装 20221027
 technical_notes:
-  - Datasheet V1.5 (Oct 2022) dropped the CPC-8 package (a ~2.6 x 2.6 mm WorldSemi 8-lead part) and added FSOP-8.
+  - Datasheet V1.3 (2019-09-06) raised the R/G/B port withstand voltage to 20 V and added 24 V applications.
+  - Datasheet V1.5 (Oct 2022) dropped the CPC-8 package (a ~2.6 x 2.6 mm WorldSemi 8-lead part) and added FSOP-8; the English V1.5 still says 'SOP8, CPC8 and FSOP8 package types available'.
+  - "Datasheet V2.0 (2023-09-23) revised the die: '优化内部芯片' (optimized internal chip)."

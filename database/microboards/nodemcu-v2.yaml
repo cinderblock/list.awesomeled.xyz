@@ -27,7 +27,7 @@ images:
 io:
   bms: false
   imu: false
-  max_outputs: 2 # WLED on ESP8266: UART1/DMA + bit-bang
+  max_outputs: 3 # WLED on ESP8266: UART1/DMA + bit-bang
 price:
   amount: 2.03
   max: 4.15
@@ -46,3 +46,7 @@ sources:
     url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
     retrieved: '2026-11-18'
     notes: ESP8266EX is a Wi-Fi SoC; no Bluetooth
+  io.max_outputs:
+    url: https://github.com/wled/WLED-Docs/blob/main/docs/features/multi-strip.md
+    retrieved: '2026-11-20'
+    notes: There is a maximum of 3 strips supported.

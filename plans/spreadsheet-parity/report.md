@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/20/2026, 3:21 AM PST (2026-11-20 11:21Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/20/2026, 3:40 AM PST (2026-11-20 11:40Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -1013,7 +1013,7 @@ Database folder: `database/pixel-ics/`.
 
 </details>
 
-<details><summary>Acknowledged differences (24)</summary>
+<details><summary>Acknowledged differences (25)</summary>
 
 - [Y3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=Y3) `gs8202` Other Links "GS8202 Pixel Protocol Overview \| Advatek Lighting": Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)
 - [P7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=P7) `lpd8806` Package Size "SOP16/QFN16": Packages checked against the datasheets (7b66e88)
@@ -1032,6 +1032,7 @@ Database folder: `database/pixel-ics/`.
 - [U37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=U37) `ws2801` Release Year "2010": (cited) YAML cites a source for release_year
 - [X37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=X37) `ws2801` Datasheet URL "https://www.futurlec.com/Others/WS2801.shtml": Futurlec's datasheet page; YAML links WorldSemi's own PDF
 - [P39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=P39) `ws2811` Package Size "SOIC8/DIP8": (cited) YAML cites a source for physical.packages
+- [U42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=U42) `ws2818b` Release Year "2018": (cited) YAML cites a source for release_year
 - [Y3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=Y3) `gs8202` Other Links "GS8202 Pixel Protocol Overview \| Advatek Lighting": Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)
 - [A23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=A23) `tm1804` (name) "TM1804": Another copy of the datasheet; YAML links LCSC's (datasheet pass)
 - [X23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=X23) `tm1804` Datasheet URL "http://www.ledlightmake.com/ledlightmake_serv/TM1804%20Data…": Another copy of the datasheet; YAML links LCSC's (datasheet pass)

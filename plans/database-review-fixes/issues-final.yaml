@@ -1,0 +1,538 @@
+# Fix records for the last open fact checks from ISSUES.md (BRIEF-issues.md), checked 2026-11-20.
+# Order follows the assignment's items 1-9. Records marked "Extra" in notes were found while
+# checking an item and are not in ISSUES.md.
+# Tooling notes: WebFetch refuses web.archive.org, so archived pages could not be re-read.
+# PDFs were saved and read locally (pdftotext / PyMuPDF) under fixes/dl/issues-final/.
+
+# 1. pixel-ics/ws2818b
+
+- entry: pixel-ics/ws2818b
+  field: release_year
+  current: 2018
+  value: 2017
+  status: apply
+  owner: stream2
+  source: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+  quote: 'V1.0 N New 20170523'
+  retrieved: '2026-11-20'
+  notes: >-
+    Evidence strength: moderate. The maker's revision log ("Modify Records", English V1.5; the Chinese
+    copy LCSC hosts has the same row, "V1.0 N 新建 20170523") dates the first datasheet to 2017-05-23,
+    and V1.1 revised it in the same year ("V1.1 M Absolute Maximum Ratings 20171010"). That shows the
+    part was specified and being revised in 2017; it does not prove a sale date, and no dated 2017
+    listing or announcement turned up in searches. The 2018 value has no source (sheet import). The
+    database already takes release_year from a datasheet's first version (ws2818a: 2017 from the same
+    20170523 row; ws2808; ld1510), so 2017 matches that convention. Add sources.release_year with this
+    quote.
+
+- entry: pixel-ics/ws2818b
+  field: electrical.output_voltage
+  current: 12V
+  value: 20V
+  status: apply
+  owner: stream2
+  source: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+  quote: 'R/G/B Channel Output Port Withstand Voltage Vout 20 V'
+  retrieved: '2026-11-20'
+  notes: >-
+    The field is the LED-side port rating (Vds max). V1.5's absolute-maximum table gives Vout 20 V, and
+    its Features say "R, G, B output port withstand voltage 20V, DIN1, DIN2 port withstand voltage 9V".
+    The Chinese copy agrees: "R、G、B输出端口耐压20V，DIN端口耐压9V"
+    (https://atta.szlcsc.com/upload/public/pdf/source/20241202/4A771CD25CA8D056BF075AD1E8527C36.pdf).
+    The rating changed in "V1.3 M Modify the RGB port withstand voltage and add 24V applications
+    20190906"; V1.5 doesn't print the old figure, so the entry's 12V presumably predates V1.3. Add
+    sources.electrical.output_voltage with this quote.
+
+- entry: pixel-ics/ws2818b
+  field: electrical.output_voltage_notes
+  current: 24V version also available
+  value: 'R/G/B port rating since datasheet V1.3 (2019-09-06), which also added 24 V applications: the same IC runs in 12 V and 24 V strips with one series resistor feeding VDD (there is no separate 24 V version)'
+  status: apply
+  owner: stream2
+  source: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+  quote: 'Built-in voltage-regulator tube, only a resistance needed to add to IC VDD feet when under 24V power supply.'
+  retrieved: '2026-11-20'
+  notes: >-
+    No 24 V variant exists in the maker's documents; the Chinese copy says the same thing more plainly:
+    "芯片内置稳压管，24V及以下电源只需串电阻到IC VDD 脚，无需外加稳压管" (built-in regulator; supplies
+    of 24 V and below need only a series resistor to VDD). Wording is a suggestion.
+
+- entry: pixel-ics/ws2818b
+  field: notes
+  current: 12V WS2813 as separate IC
+  value: WS2813-style dual-signal driver (backup data input) as a separate IC, for 12 V and 24 V strips
+  status: apply
+  owner: stream2
+  source: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+  quote: 'Built-in voltage-regulator tube, only a resistance needed to add to IC VDD feet when under 24V power supply.'
+  retrieved: '2026-11-20'
+  notes: >-
+    Extra, follows from the two records above: "12V" alone understates the part since V1.3. Optional;
+    wording is a suggestion.
+
+- entry: pixel-ics/ws2818b
+  field: color.pwm_frequency
+  current: 2kHz
+  value: 4kHz
+  status: apply
+  owner: stream2
+  source: https://atta.szlcsc.com/upload/public/pdf/source/20241202/4A771CD25CA8D056BF075AD1E8527C36.pdf
+  quote: 'PWM 控制端能够实现256级调节，扫描频率4KHz。'
+  retrieved: '2026-11-20'
+  notes: >-
+    Extra. WorldSemi's Chinese WS2818B datasheet (LCSC-hosted copy, file dated 2024-11-26; its log
+    runs to "V2.0 M 优化内部芯片 20230923") gives a 4 kHz PWM scan frequency. The English V1.5 (2022,
+    the entry's datasheet.url) says only "256 Gray-scale adjustable and scan frequency is more than
+    2KHz.", a lower bound that 4 kHz satisfies, so 2kHz reads the bound as the value. Cite the Chinese
+    copy in sources.color.pwm_frequency.
+
+- entry: pixel-ics/ws2818b
+  field: technical_notes
+  current:
+    - Datasheet V1.5 (Oct 2022) dropped the CPC-8 package (a ~2.6 x 2.6 mm WorldSemi 8-lead part) and added FSOP-8.
+  value:
+    - Datasheet V1.3 (2019-09-06) raised the R/G/B port withstand voltage to 20 V and added 24 V applications.
+    - "Datasheet V1.5 (Oct 2022) dropped the CPC-8 package (a ~2.6 x 2.6 mm WorldSemi 8-lead part) and added FSOP-8; the English V1.5 still says 'SOP8, CPC8 and FSOP8 package types available'."
+    - "Datasheet V2.0 (2023-09-23) revised the die: '优化内部芯片' (optimized internal chip)."
+  status: apply
+  owner: stream2
+  source: https://atta.szlcsc.com/upload/public/pdf/source/20241202/4A771CD25CA8D056BF075AD1E8527C36.pdf
+  quote: 'V1.5 M 去除CPC8封装，增加FSOP8封装 20221027'
+  retrieved: '2026-11-20'
+  notes: >-
+    Extra. The existing note is right per the Chinese datasheet ("提供SOP8 和FSOP8 两种封装"), but the
+    maker's English V1.5 (the entry's datasheet.url) still lists CPC8 in its description and has a
+    "CPC8 Package" page, so a reader comparing the two would be confused. The Chinese file's log also has
+    "V2.0 M 优化内部芯片 20230923" although its page footers still say V1.5. Wording is a suggestion.
+
+# 2. microboards/nodemcu-v2
+
+- entry: microboards/nodemcu-v2
+  field: io.max_outputs
+  current: 2
+  value: 3
+  status: apply
+  owner: stream2
+  source: https://github.com/wled/WLED-Docs/blob/main/docs/features/multi-strip.md
+  quote: 'There is a maximum of 3 strips supported.'
+  retrieved: '2026-11-20'
+  notes: >-
+    The schema defines io.max_outputs as "Usable data outputs for pixels". The entries mix two readings
+    (GPIO counts on arduino-mega-2560-rev3 54, beaglebone-black 48, attiny85 6; firmware-driven outputs
+    on the ESP and Teensy boards), and the ESP boards all count WLED's outputs: classic ESP32 8, ESP32-S3
+    4, and the other ESP8266 boards wemos-d1-mini and wemos-d1-mini-pro already have 3 from this same
+    page. WLED's ESP8266 section: GPIO1 (TX) and GPIO2 (D4) "allow for hardware driving"; "GPIO3 (RX) is
+    the third pin that allows hardware driving on ESP8266. However, it uses 5 times as much memory per LED
+    as GPIO 1 and 2, so use it only for low LED counts (recommended <50)". The NodeMCU DEVKIT V1.0 pin map
+    (github.com/nodemcu/nodemcu-devkit-v1.0, Documents/NODEMCU_DEVKIT_V1.0_PINMAP.png, read from the
+    image) breaks all three out: D4 = GPIO2 (TXD1), D9 = GPIO3 (RXD0), D10 = GPIO1 (TXD0). WLED's
+    compatible-controllers page lists "NodeMCU" as an ESP8266 board. The old comment ("UART1/DMA +
+    bit-bang", commit dfc99134, "ESP8266 1-2") has no source. Use wemos-d1-mini's comment
+    ("# WLED on ESP8266: GPIO1 + GPIO2 hardware-driven, GPIO3 for low LED counts") and add
+    sources.io.max_outputs.
+
+# 3. Makers: pixel-ics/p9883 (Power MOS) and pixel-ics/p9813 (DMS)
+
+- entry: pixel-ics/p9883
+  field: creator
+  current: Power MOS Microelectronics
+  value: Power MOS Microelectronics
+  status: reject
+  owner: stream2
+  source: https://www.advateklighting.com/pixel-protocols/p9813
+  quote: 'This pixel protocol was designed by Power MOS Microelectronics (formerly DMS Microelectronics) in China.'
+  retrieved: '2026-11-20'
+  notes: >-
+    One company, by Advatek's account: the sentence above is on its P9813 page and, word for word, on its
+    P9883 page (also P943 and P9412), each with "Note: Advatek Lighting is in no way affiliated with Power
+    MOS Microelectronics or DMS Microelectronics." That is the only source naming both. The maker itself
+    has no findable site under either name, and every maker document found uses the old name: the P9813
+    datasheet's header on every page is "DMS MICROELECTRONICS LTD.," (Electrokit copy, also Seeed), and
+    the D705 datasheet says the same. No P9883 datasheet is online, and ENTTEC's P9883 page says "The
+    manufacturer is not firmly established." So no rename in either direction: d705 and p9813 keep the
+    name their datasheets print; p9883, p943 and p9412 keep the name Advatek gives. To put all five under
+    one "More from" row, add a maker alias in app/lib/relations.ts MAKER_ALIASES (e.g.
+    dmsmicroelectronics -> powermosmicroelectronics) with a MAKER_LABELS label such as "Power MOS
+    Microelectronics (formerly DMS)", citing this Advatek page. That's a code change, not a YAML one.
+
+- entry: pixel-ics/p9813
+  field: creator
+  current: DMS Microelectronics
+  value: DMS Microelectronics
+  status: reject
+  owner: stream2
+  source: https://www.electrokit.com/upload/product/41011/41011147/P9813_datasheet.pdf
+  quote: 'DMS MICROELECTRONICS LTD.,'
+  retrieved: '2026-11-20'
+  notes: >-
+    Keep: the P9813's own datasheet names DMS on every page, and nothing from the maker uses "Power MOS".
+    See the p9883 record above for the rename evidence (Advatek only) and the maker-alias fix.
+
+# 4. pattern-drivers/leds-master
+
+- entry: pattern-drivers/leds-master
+  field: pricing.price
+  current: FOSS
+  value: Free
+  status: other-owner
+  owner: stream6
+  source: https://api.github.com/repos/spectrenoir06/LED_master
+  quote: '"license": null'
+  retrieved: '2026-11-20'
+  notes: >-
+    No licence anywhere: GitHub detects none, the repo root has no LICENSE, LICENSE.md or COPYING
+    (contents: .gitignore, .gitmodules, README.md, UI/, conf.lua, img/, lib/, main.lua, makefile,
+    ressource/, thread_led_controller.lua), and the README has no licence text and never says "free" or
+    "open source". Unlicensed code is all rights reserved, so "FOSS" overstates it; the builds are free
+    downloads (GitHub releases v0.1 to V0.4, all prereleases, assets win32/win64 zip, macOS zip, .deb,
+    debug-signed .apk, .love), so "Free", the value 21 pattern-drivers already use.
+
+- entry: pattern-drivers/leds-master
+  field: license
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://api.github.com/repos/spectrenoir06/LED_master
+  quote: '"license": null'
+  retrieved: '2026-11-20'
+  notes: >-
+    The entry has no license field, which is right: don't add an SPDX id. The derived foss flag comes only
+    from license (app/lib/data.ts), so the "FOSS" shown today comes from pricing.price (record above).
+
+- entry: pattern-drivers/leds-master
+  field: status
+  current: unknown
+  value: unknown
+  status: unverifiable
+  owner: stream6
+  source: https://api.github.com/repos/spectrenoir06/LED_master
+  quote: '"pushed_at": "2021-04-25T03:58:20Z"'
+  retrieved: '2026-11-20'
+  notes: >-
+    Dormant, but nothing says discontinued. Last commit 2021-04-25 ("add error twitch"), last release
+    V0.4 "public" 2020-07-08 (prerelease), repo not archived ("archived": false). The homepage
+    https://antoine.doussaud.org/leds_master and the site root both return 502 (Cloudflare, Retry-After
+    60) on 2026-11-20, as on 2026-11-18. Keep unknown unless stream6 counts five years without a commit
+    plus a dead homepage as discontinued.
+
+- entry: pattern-drivers/leds-master
+  field: platforms.mobile
+  current:
+    - Android
+    - iOS
+  value:
+    - Android
+  status: apply
+  owner: stream2
+  source: https://github.com/spectrenoir06/LED_master
+  quote: '- [ ] iOS'
+  retrieved: '2026-11-20'
+  notes: >-
+    The README's prose says "It work on PC ( Windows / OSX / Linux ) and on smartphone ( Android / IOS )",
+    but its checklist under "Compatibility ( need test )" ticks Linux, Windows, OSX, Android, Raspberry
+    Pi and Nintendo Switch and leaves iOS unticked, and no release has an iOS build. Read from
+    https://raw.githubusercontent.com/spectrenoir06/LED_master/master/README.md.
+
+- entry: pattern-drivers/leds-master
+  field: platforms.hardware
+  value:
+    - Raspberry Pi
+  status: apply
+  owner: stream2
+  source: https://github.com/spectrenoir06/LED_master
+  quote: '- [x] Raspberry Pi'
+  retrieved: '2026-11-20'
+  notes: >-
+    Extra, same checklist. It runs on LÖVE (the README says to install LÖVE; releases include a .love
+    file), and there is no Pi-specific build. The list also ticks "Nintendo Switch"; that's a console, not
+    an SBC, so put it in platforms.notes if wanted.
+
+# 5. controllers/digidot-c4-extended-8
+
+- entry: controllers/digidot-c4-extended-8
+  field: outputs.pixels.max_per_output
+  current: 1024
+  value: 1365
+  status: apply
+  owner: stream2
+  source: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270
+  quote: 'The output capacity goes up to 8 universes, which is 4096 channels (depending on the C4 license).'
+  retrieved: '2026-11-20'
+  notes: >-
+    DiGidot states capacity in channels, never pixels. The C4 Extended (8) licence (SKU 20204; the 2020
+    spec sheet lists "extended 4 20204" with output channels "512 / 1048 / 2048 / 4096") is 4096
+    channels = 1365 RGB 8-bit pixels (4096 / 3; 1360 if mapped at 170 per universe). No per-port cap
+    lies below that: the Performance Guide v3.0.1-2 (https://www.digidot.eu/web/content/111291) says
+    "The only limits the controllers has are; The total amount of channels you can control (this is
+    determined by the device license) and the physical port limit of 8 universes", its tables run to 8
+    universes on one port, and the C4 manual v2.3.0 (document/271) says "Physical port limit: 4096
+    channels." So one port can carry the whole licence. DiGidot's practical advice is lower: "Average
+    recommendation is max. 3 SPI universes per port" for 4 data-only outputs (512 RGB pixels) and "max. 6
+    SPI universes per port" for 2 data + clock pairs. Suggested comment: "# 8-universe licence (4096
+    channels) / 3; DiGidot recommends <= 3 universes (512 px) per data-only port". The old comment ("4096
+    total channels across 4 ports") divided the channels evenly and called them pixels. The creator,
+    DiGidot, is right (spec sheet footer "DiGidot Technologies B.V. 2020"); Dmx4All isn't involved.
+
+- entry: controllers/digidot-c4-extended-8
+  field: outputs.pixels.max_total
+  value: 1365
+  status: apply
+  owner: stream2
+  source: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270
+  quote: 'Up to 8 universes (4.096 channels)'
+  retrieved: '2026-11-20'
+  notes: >-
+    Needed because count x max_per_output (4 x 1365) exceeds the licence. 4096 channels / 3 = 1365 RGB
+    (1024 RGBW, 682 RGB at 16 bits). The manual: "The DiGidot C4 is always limited to the total amount of
+    output channels corresponding to the license."
+
+- entry: controllers/digidot-c4-extended-8
+  field: power.voltage.min
+  value: 5
+  status: apply
+  owner: stream2
+  source: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270
+  quote: 'Wide voltage range (5-24 Vdc)'
+  retrieved: '2026-11-20'
+  notes: >-
+    Extra: the entry has max 24 but no min. The C4 manual v2.3.0 (document/271) also gives "Input
+    Voltage: 5-24 Vdc".
+
+# 6. controllers/pixelator-mini-px1-8d
+
+- entry: controllers/pixelator-mini-px1-8d
+  field: power.voltage.min
+  current: 9
+  value: 9
+  status: already-fixed
+  owner: stream2
+  source: https://www.techni-lux.com/files/documents/CT-EN71066_Manual.pdf
+  quote: '9V - 48 V DC'
+  retrieved: '2026-11-20'
+  notes: >-
+    Changed from 7/24 to 9/48 in 3b973400 (2026-11-18), with sources.power.voltage citing this manual.
+    ENTTEC user manual UM-71066 dated "18 November 2019", Specifications table: Input Voltage 9V - 48 V
+    DC; Input Current Required 400 mA at 9V DC, 75 mA at 48V DC. No current product page states a
+    voltage: the legacy page
+    (https://support.enttec.com/legacy-product/legacy-products/pixelator-mini-px1-8d-71066-legacy-product,
+    "Updated Apr 27, 2026", "DISCONTINUED: This product has been discontinued.") has none, ENTTEC's
+    product URLs (/product/controls/... and /product/uncategorized/din-rail-ethernet-pixel-converter/) and
+    its CloudFront manual and datasheet copies return 404, and WebFetch can't read web.archive.org, so the
+    2021 page's 7-24 V wasn't re-read. A search snippet ties 7-24 V to ENTTEC's DIN-LED4PX (71003)
+    datasheet, a possible source of the old value (unverified). FYI: the same manual says "Control a
+    maximum of 2,720 RGB pixels." (16 x 170); the entry's notes and technical_notes say 2730 (8192 / 3,
+    which a search snippet attributes to ENTTEC's old product page). Both are maker figures; stream2 may
+    prefer the manual's 2,720.
+
+- entry: controllers/pixelator-mini-px1-8d
+  field: power.voltage.max
+  current: 48
+  value: 48
+  status: already-fixed
+  owner: stream2
+  source: https://www.techni-lux.com/files/documents/CT-EN71066_Manual.pdf
+  quote: '9V - 48 V DC'
+  retrieved: '2026-11-20'
+  notes: See the min record above.
+
+# 7. controllers/protopixel-1-channel-wifi
+
+- entry: controllers/protopixel-1-channel-wifi
+  field: status
+  current: discontinued
+  value: discontinued
+  status: already-fixed
+  owner: stream6
+  source: https://www.protopixel.io/mini-controller
+  quote: "Sorry, we couldn't find the page you're looking for."
+  retrieved: '2026-11-20'
+  notes: >-
+    The old product page answers 200 with a "404 – Page Not Found" body, and the current lineup
+    (https://www.protopixel.io/tools/product-overview) lists only Brain and Gate products (Wi-Fi ones:
+    "Brain Experience", "Gate SPI wireless", "Gate DALI wireless"). The maker docs at
+    protopixel.net/doc/1ch_wifi/ are still online (footer "Copyright 2020").
+
+- entry: controllers/protopixel-1-channel-wifi
+  field: outputs.pixels.max_per_output
+  current: 680
+  value: 680
+  status: already-fixed
+  owner: stream2
+  source: https://protopixel.net/doc/1ch_wifi/pages/10-technical_features.html
+  quote: 'Maximum capacity: Record and stream up to 680 RGB LEDs.'
+  retrieved: '2026-11-20'
+  notes: >-
+    One output, so per-output = total. The Art-Net page agrees: "The WiFi Controller can handle up to 4
+    universes" and "With one universe you can control 170 RGB pixels or 128 RGBW"
+    (pages/70-compatibility.html).
+
+- entry: controllers/protopixel-1-channel-wifi
+  field: inputs.protocols
+  current:
+    - Art-Net
+  value:
+    - Art-Net
+  status: already-fixed
+  owner: stream2
+  source: https://protopixel.net/doc/1ch_wifi/pages/10-technical_features.html
+  quote: 'Art-Net compatible.'
+  retrieved: '2026-11-20'
+  notes: >-
+    No page mentions sACN or E1.31. Art-Net needs firmware newer than 0.5.4 ("Make sure that your
+    controller has a firmware newer than 0.5.4", pages/70-compatibility.html).
+
+- entry: controllers/protopixel-1-channel-wifi
+  field: inputs.physical.Wi-Fi
+  current:
+    - 2.4GHz
+  value:
+    - 2.4GHz
+  status: already-fixed
+  owner: stream2
+  source: https://protopixel.net/doc/1ch_wifi/pages/10-technical_features.html
+  quote: 'IEEE 802.11 B,G,N WiFi module, capable of attaching to WEP, WPA, WPA2 or open networks.'
+  retrieved: '2026-11-20'
+  notes: >-
+    Band isn't stated; b/g are 2.4 GHz only. No Ethernet ("It doesn't have an Ethernet connector, instead
+    it has a WiFi antenna hidden inside", pages/00-description.html), no DMX. microSD standalone playback,
+    power 5-12 V and 30 fps also match the maker docs.
+
+- entry: controllers/protopixel-1-channel-wifi
+  field: outputs.protocols
+  current:
+    - WS2811
+    - WS2812b
+    - WS2812d
+    - Sk6812
+    - WS2813
+    - WS2815
+  value:
+    - WS2811
+    - WS2812b
+    - WS2812d
+    - Sk6812
+    - WS2813
+    - WS2815
+  status: already-fixed
+  owner: stream4
+  source: https://protopixel.net/doc/1ch_wifi/pages/10-technical_features.html
+  quote: 'Output: WS2811, WS2812b, WS2812d, Sk6812, WS2813, WS2815 protocol families.'
+  retrieved: '2026-11-20'
+  notes: Matches the maker's list, spellings included.
+
+- entry: controllers/protopixel-1-channel-wifi
+  field: outputs.connector
+  current:
+    ref: mtsb-combicon
+  status: unverifiable
+  owner: stream2
+  source: https://protopixel.net/doc/1ch_wifi/pages/20-connecting.html
+  quote: 'A three pin connector that powers the controller and sends data to the LED strip or fixture.'
+  retrieved: '2026-11-20'
+  notes: >-
+    The maker docs never name the connector type (the 1-channel Ethernet docs, protopixel.net/doc/
+    1ch_controller/pages/connecting.html, use the same wording). The value comes from the sheet's
+    "Phoenix Screw", migrated to the MSTB COMBICON ref in bd300fda. The entry's spec-sheet photo
+    (public/database-images/controllers/protopixel-1-channel-wifi.webp) shows three round openings in the
+    top of the case at the cable end, which look like the screw holes of a screw terminal; that is an
+    inference from the image, and it can't tell a pluggable MSTB from a fixed PCB block
+    (connectors/pcb-screw-terminal-block). The archived spec sheet v1.01 (web.archive.org) may settle it
+    but WebFetch can't read it. Same for outputs.driver.buffered: true, a sheet-era value no maker page
+    mentions (no buffer or line driver is described). Keep both until checked.
+
+# 8. controllers/genius-pro-32-port
+
+- entry: controllers/genius-pro-32-port
+  field: outputs.connector
+  current: Clever Lock 3-pin (color coded)
+  value: Clever Lock 3-pin (color coded)
+  status: already-fixed
+  owner: stream2
+  source: https://store.experiencelights.com/genius-pro-32-port-controller/
+  quote: '32 x 3-pin, extra large, color coded Clever Lock'
+  retrieved: '2026-11-20'
+  notes: >-
+    Fixed in 943342f5 (was "Spring Terminal"). The page continues "connectors (no phoenix connectors or
+    screw down terminals)". There's no Clever Lock entry in connectors/, so it stays a string.
+    experiencelights.com/genius-pro-32-port-controller now 301s to this store page.
+
+- entry: controllers/genius-pro-32-port
+  field: notes
+  current: On board PSU mounting, eFuse protected power distribution, on board fault finding
+  value: 'On-board PSU mounting, per-port current monitoring and fault finding; the 2024 edition has per-port eFuses, which the 2025 edition replaces with Power Banks (on/off power for groups of outputs)'
+  status: apply
+  owner: stream2
+  source: https://store.experiencelights.com/genius-pro-32-port-controller/
+  quote: 'eFuses were removed in the 2025 Editions in favor of Power Banks.'
+  retrieved: '2026-11-20'
+  notes: >-
+    The maker's page has two edition headings: "[eFuses – 2024 Edition Only]" ("Original eFuse design,
+    with configurable per port on/off power control.") and "[Power Banks – 2025 Edition & Newer Only]"
+    ("Power Banks provide full on/off power control to groups of outputs instead of 1-by-1."). It sells
+    one SKU (GCONTROLLER-PRO-32PORT) with no edition selector, so new units are presumably the 2025+
+    edition (inference). Both editions keep "Max 4A per output." and "Per port current monitoring (RTCM:
+    Real time current Monitoring)". If wanted, outputs.fuse could say "eFuse (2024 edition only)".
+
+- entry: controllers/genius-pro-32-port
+  field: features
+  current:
+    - eFuse protected power distribution
+    - On-board power supply mounting
+    - On-board fault finding
+    - microSD playback standalone or as an FPP remote, synced to an FPP master
+  value:
+    - eFuse-protected outputs with per-port power on/off (2024 edition only)
+    - Power Banks switching groups of outputs on and off (2025 edition and newer)
+    - Per-port current monitoring
+    - On-board power supply mounting
+    - On-board fault finding
+    - microSD playback standalone or as an FPP remote, synced to an FPP master
+  status: apply
+  owner: stream2
+  source: https://store.experiencelights.com/genius-pro-32-port-controller/
+  quote: 'Original eFuse design, with configurable per port on/off power control.'
+  retrieved: '2026-11-20'
+  notes: >-
+    Same evidence as the notes record. "Per-port current monitoring" is new, from "Per port current
+    monitoring (RTCM: Real time current Monitoring)". Wording is a suggestion.
+
+# 9. Datasheet links that serve HTML (LCSC viewer pages)
+
+- entry: connectors/pcb-screw-terminal-block
+  field: datasheet.url
+  current: https://www.lcsc.com/datasheet/C5128849.pdf
+  value: https://www.degson.com/index.php?a=downloadFile&id=5089057&name=%27ZmlsZTQ=%27
+  status: apply
+  owner: stream5
+  source: https://www.degson.com/content/details_552_879415.html?lang=en
+  quote: 'DG301-5.0-XXP-1Y-00Z(H).pdf'
+  retrieved: '2026-11-20'
+  notes: >-
+    Degson's own file, the "Data" download on its DG301-5.0 product page (order no. 10050000085).
+    Fetched 2026-11-20: HTTP 200, Content-Type application/octet-stream, body starts %PDF-1.5 (the
+    mirror's isPdf checks magic bytes, so the content type doesn't matter). It is customer drawing
+    200102539 "DG301-5.0-XXP-1Y-00Z(H)", rev 03 dated 2025-03-13, whose pattern covers LCSC C5128849
+    (DG301-5.0-03P-12-00A(H)). Use www: degson.com without www has an expired TLS certificate. The LCSC
+    viewer still answers HTML (title "DG301-5.0-03P-12-00A(H) | Datasheet | DEGSON | LCSC Electronics").
+    The maker drawing is newer than the LCSC copy the entry's sources quote and differs from it: poles
+    "5.0/N=02~22P" (LCSC copy "N=2-10P"; the Degson page lists 02P to 15P), screw "M2.5, 0.29/2.6"
+    N·m/lb.in (LCSC copy M2.6, 4.0 kgf·cm). Ratings agree (UL 300/15, IEC 250/17.5 at III/2), as do
+    wire range 22~14 AWG / 0.75~1.5 mm² and strip length 6~7 mm. stream2 may want mechanical.max_pins
+    (10) and the torque note re-checked against it.
+
+- entry: pixels/tx1818
+  field: datasheet.url
+  current: https://datasheet.lcsc.com/datasheet/pdf/b153efab9bc27ebcdabd89857c3357d8.pdf
+  value: https://datasheet.lcsc.com/datasheet/pdf/b153efab9bc27ebcdabd89857c3357d8.pdf
+  status: already-fixed
+  owner: stream5
+  source: https://datasheet.lcsc.com/datasheet/pdf/b153efab9bc27ebcdabd89857c3357d8.pdf
+  quote: 'TX1818BJJ-F01'
+  retrieved: '2026-11-20'
+  notes: >-
+    Swapped from the LCSC viewer to LCSC's direct file in f4c36200 (2026-11-18). Fetched 2026-11-20:
+    HTTP 200, application/pdf, %PDF-1.7, TCWIN's TX1818BJJ-F01 (5050) specification. The C784557 file in
+    datasheet.sources (https://datasheet.lcsc.com/datasheet/pdf/ccf6c4ce438971261bcd22da2dbd0270.pdf)
+    is also a real PDF (TX1818HLJ-F01). The viewer pages (lcsc.com/datasheet/C784552.pdf, C784557.pdf)
+    still serve HTML and remain only as notes or sources. No maker PDF: tcwinled.com's built-in-IC
+    product lists don't name TX1818 and its download centre (upload.html) fails TLS.

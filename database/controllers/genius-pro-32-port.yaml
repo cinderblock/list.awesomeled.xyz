@@ -5,7 +5,7 @@ creator:
   name: Experience Lights
   url: https://experiencelights.com
   page: https://store.experiencelights.com/genius-pro-32-port-controller/
-notes: On board PSU mounting, eFuse protected power distribution, on board fault finding
+notes: On-board PSU mounting, per-port current monitoring and fault finding; the 2024 edition has per-port eFuses, which the 2025 edition replaces with Power Banks (on/off power for groups of outputs)
 inputs:
   physical:
     Ethernet: true # single port; show data must arrive over wired Ethernet
@@ -38,7 +38,9 @@ data:
   storage:
     - type: microSD
 features:
-  - eFuse protected power distribution
+  - eFuse-protected outputs with per-port power on/off (2024 edition only)
+  - Power Banks switching groups of outputs on and off (2025 edition and newer)
+  - Per-port current monitoring
   - On-board power supply mounting
   - On-board fault finding
   - microSD playback standalone or as an FPP remote, synced to an FPP master
@@ -108,9 +110,12 @@ sources:
     retrieved: '2026-11-18'
     notes: 32 Output Genius PRO Controller, item (11) Micro SD card slot
   features:
-    url: https://store.experiencelights.com/genius-pro-32-port-controller/
-    retrieved: '2026-11-18'
-    notes: '"SD card slot for standalone operation or to operate as FPP remote"'
+    - url: https://store.experiencelights.com/genius-pro-32-port-controller/
+      retrieved: '2026-11-20'
+      notes: '"[eFuses – 2024 Edition Only] Original eFuse design, with configurable per port on/off power control."; "[Power Banks – 2025 Edition & Newer Only]"; "Per port current monitoring (RTCM: Real time current Monitoring)"'
+    - url: https://store.experiencelights.com/genius-pro-32-port-controller/
+      retrieved: '2026-11-18'
+      notes: '"SD card slot for standalone operation or to operate as FPP remote"'
   outputs.pixels:
     - url: https://experiencelights.com/genius-pro-32-port-controller/
       retrieved: '2026-11-18'
@@ -122,3 +127,7 @@ sources:
     url: https://store.experiencelights.com/genius-pro-32-port-controller/
     retrieved: 2026-11-18
     notes: '"Max 4A per output"'
+  notes:
+    url: https://store.experiencelights.com/genius-pro-32-port-controller/
+    retrieved: '2026-11-20'
+    notes: eFuses were removed in the 2025 Editions in favor of Power Banks.

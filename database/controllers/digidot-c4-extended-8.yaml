@@ -25,7 +25,8 @@ outputs:
   driver:
     buffered: true
   pixels:
-    max_per_output: 1024 # 4096 total channels across 4 ports
+    max_per_output: 1365 # the licence's 4096 channels / 3, on one port or across all four
+    max_total: 1365
   clocked: selectable # single-wire and clocked protocols
   auxiliary:
     DMX512: 2 # DMX in and out
@@ -120,6 +121,7 @@ outputs:
     - WS2852
 power:
   voltage:
+    min: 5
     max: 24
 data:
   storage:
@@ -182,3 +184,11 @@ sources:
     url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/271
     retrieved: '2026-11-18'
     notes: C4 Manual v2.3.0 p.11 'DMX, Art-Net or sACN source required' (same PDF linked from both C4 product pages).
+  outputs.pixels.max_total:
+    url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270
+    retrieved: '2026-11-20'
+    notes: Up to 8 universes (4.096 channels)
+  power.voltage.min:
+    url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270
+    retrieved: '2026-11-20'
+    notes: Wide voltage range (5-24 Vdc)

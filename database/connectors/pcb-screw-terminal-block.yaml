@@ -10,7 +10,7 @@ aliases:
   - DG301
   - MKDS 1,5
 datasheet:
-  url: https://www.lcsc.com/datasheet/C5128849.pdf
+  url: https://www.degson.com/index.php?a=downloadFile&id=5089057&name=%27ZmlsZTQ=%27 # Degson's DG301-5.0 drawing (rev 03, 2025); LCSC's datasheet link answers with an HTML viewer
 links:
   product: https://www.lcsc.com/product-detail/C5128849.html
 mechanical:

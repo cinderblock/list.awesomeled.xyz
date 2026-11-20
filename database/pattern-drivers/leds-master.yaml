@@ -22,6 +22,16 @@ platforms:
     - Linux
   mobile:
     - Android
-    - iOS
+  hardware:
+    - Raspberry Pi
 pricing:
   price: FOSS
+sources:
+  platforms.mobile:
+    url: https://github.com/spectrenoir06/LED_master
+    retrieved: '2026-11-20'
+    notes: '- [ ] iOS'
+  platforms.hardware:
+    url: https://github.com/spectrenoir06/LED_master
+    retrieved: '2026-11-20'
+    notes: '- [x] Raspberry Pi'
