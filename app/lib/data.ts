@@ -1,5 +1,5 @@
 import { execFileSync } from 'child_process';
-import { existsSync, readdirSync, readFileSync } from 'fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { parse } from 'yaml';
@@ -13,13 +13,33 @@ let gitTimestampCache: Map<string, Date> | null = null;
 
 // Parsed category data. Production builds cache it for good: prerendering
 // reads every category for each entry page's links, which would otherwise
-// re-read all YAML hundreds of times. Dev keeps it for 2 seconds, so the many
-// reads within one request share a parse while YAML edits still show up on
-// refresh (the review-entry.ts workflow depends on that).
-const categoryDataCache = new Map<string, { at: number; entries: BaseEntry[] }>();
+// re-read all YAML hundreds of times. Dev trusts it for 2 seconds, so the many
+// reads within one request share a parse, then checks the folder's files
+// (names, sizes, modified times) and parses again only if one changed. YAML
+// edits still show up on refresh (the review-entry.ts workflow depends on
+// that), without re-parsing the whole database every couple of seconds: that
+// parse takes longer than the 2 seconds on a busy machine, so every request
+// used to pay for it.
+const categoryDataCache = new Map<
+  string,
+  { at: number; signature: string; entries: BaseEntry[] }
+>();
 const DEV_CACHE_MS = 2000;
 const isFresh = (at: number) =>
   process.env.NODE_ENV === 'production' || Date.now() - at < DEV_CACHE_MS;
+// Counts every parse of a category, so the relation graph knows when the
+// entries it was built from have been replaced
+let dataVersion = 0;
+
+/** What a folder's YAML files look like from outside: changes when any is edited, added or removed. */
+function folderSignature(dir: string, files: string[]): string {
+  return files
+    .map((file) => {
+      const { mtimeMs, size } = statSync(resolve(dir, file));
+      return `${file}:${mtimeMs}:${size}`;
+    })
+    .join('|');
+}
 
 // Commits to ignore when calculating timestamps (e.g., bulk metadata changes)
 export const IGNORED_COMMITS = new Set([
@@ -278,6 +298,8 @@ export function loadCategoryData(categoryId: string): BaseEntry[] {
   for (const e of entries) {
     const summary = linked.get(`${categoryId}/${e.id}`);
     if (summary) e.linked = summary;
+    // Entries outlive a rebuilt graph in dev, so a summary that is gone goes
+    else delete e.linked;
   }
   return entries;
 }
@@ -308,6 +330,13 @@ function readCategory(categoryId: string): BaseEntry[] {
   const entries: BaseEntry[] = [];
   const files = readdirSync(categoryDir).filter((f) => f.endsWith('.yaml') && !f.startsWith('_'));
 
+  // Nothing on disk changed since the last parse: keep it
+  const signature = folderSignature(categoryDir, files);
+  if (cached && cached.signature === signature) {
+    cached.at = Date.now();
+    return cached.entries;
+  }
+
   const timestamps = getGitTimestamps();
 
   for (const file of files) {
@@ -330,7 +359,8 @@ function readCategory(categoryId: string): BaseEntry[] {
 
   // Sort by name
   entries.sort((a, b) => a.name.localeCompare(b.name));
-  categoryDataCache.set(categoryId, { at: Date.now(), entries });
+  categoryDataCache.set(categoryId, { at: Date.now(), signature, entries });
+  dataVersion++;
   return entries;
 }
 
@@ -367,13 +397,18 @@ export function loadEntry(categoryId: string, entryId: string): BaseEntry | null
 // The cross-category relationship graph (relations.ts), built from every
 // category at once, cached like the category data (for good in production
 // builds, briefly in dev).
-let relationGraphCache: { at: number; graph: RelationGraph } | null = null;
+let relationGraphCache: { at: number; version: number; graph: RelationGraph } | null = null;
 
 export function getRelationGraph(): RelationGraph {
   if (relationGraphCache && isFresh(relationGraphCache.at)) return relationGraphCache.graph;
   const db = new Map<string, BaseEntry[]>();
   for (const category of CATEGORIES) db.set(category.id, readCategory(category.id));
-  relationGraphCache = { at: Date.now(), graph: buildRelationGraph(db) };
+  // No category was parsed again, so the graph still describes these entries
+  if (relationGraphCache && relationGraphCache.version === dataVersion) {
+    relationGraphCache.at = Date.now();
+    return relationGraphCache.graph;
+  }
+  relationGraphCache = { at: Date.now(), version: dataVersion, graph: buildRelationGraph(db) };
   return relationGraphCache.graph;
 }
 
