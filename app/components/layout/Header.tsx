@@ -33,7 +33,9 @@ export function Header() {
           <button
             type="button"
             className="site-search"
-            aria-label="Search every category"
+            // The whole visible label, shortcut included: voice control
+            // finds a button by the words printed on it
+            aria-label={`Search everything… ${apple ? '⌘K' : 'Ctrl K'}`}
             aria-keyshortcuts={apple ? 'Meta+K' : 'Control+K'}
             onClick={() => openSearch()}
             onMouseEnter={warmSearch}

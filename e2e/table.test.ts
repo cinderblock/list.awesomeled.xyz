@@ -336,7 +336,7 @@ test.describe('Share and export', () => {
     await gotoReady(page, '/controllers?f=wled_compatible:yes&cols=name,price,status');
     const rows = await rowCount(page);
 
-    await page.getByRole('button', { name: 'Share and export' }).click();
+    await page.getByRole('button', { name: 'Share & export' }).click();
     await page.getByRole('menuitem', { name: 'Copy as a Markdown table' }).click();
     await expect(page.locator('.toast')).toContainText('as Markdown');
 
@@ -353,7 +353,7 @@ test.describe('Share and export', () => {
     await gotoReady(page, '/level-converters?cols=name,io.channels');
     const rows = await rowCount(page);
 
-    await page.getByRole('button', { name: 'Share and export' }).click();
+    await page.getByRole('button', { name: 'Share & export' }).click();
     await page.getByRole('menuitem', { name: 'Copy for a spreadsheet' }).click();
     await expect(page.locator('.toast')).toContainText('for a spreadsheet');
 
@@ -366,7 +366,7 @@ test.describe('Share and export', () => {
   test('copies a link that reproduces the view', async ({ page, context }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await gotoReady(page, '/controllers?sort=price&f=wled_compatible:yes');
-    await page.getByRole('button', { name: 'Share and export' }).click();
+    await page.getByRole('button', { name: 'Share & export' }).click();
     await page.getByRole('menuitem', { name: 'Copy link to this view' }).click();
     await expect(page.locator('.toast')).toContainText('link');
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(page.url());
@@ -376,7 +376,7 @@ test.describe('Share and export', () => {
     await gotoReady(page, '/controllers?f=wled_compatible:yes');
     const rows = await rowCount(page);
 
-    await page.getByRole('button', { name: 'Share and export' }).click();
+    await page.getByRole('button', { name: 'Share & export' }).click();
     const downloadPromise = page.waitForEvent('download');
     await page.getByRole('menuitem', { name: 'CSV — every field' }).click();
     const download = await downloadPromise;

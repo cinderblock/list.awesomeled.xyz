@@ -25,7 +25,7 @@ test.describe('Search everything', () => {
 
   test('arrow keys move the selection and Escape closes', async ({ page }) => {
     await gotoReady(page, '/about');
-    await page.getByRole('button', { name: 'Search every category' }).click();
+    await page.getByRole('button', { name: 'Search everything' }).click();
     const dialog = palette(page);
     const input = dialog.getByRole('combobox');
     await input.fill('ws28');

@@ -92,7 +92,7 @@ export function ExportMenu({
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button type="button" className="btn btn--outline btn--sm" aria-label="Share and export">
+        <button type="button" className="btn btn--outline btn--sm" aria-label="Share & export">
           <Share2 size={16} />
           <span className="btn-label">Share &amp; export</span>
         </button>

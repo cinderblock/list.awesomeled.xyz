@@ -666,7 +666,7 @@ export function DataTable({ data, fields, category }: DataTableProps) {
               aria-label={
                 density === 'compact'
                   ? 'Dense rows are on. Switch to roomy rows'
-                  : 'Switch to dense rows'
+                  : 'Roomy rows are on. Switch to dense rows'
               }
               onClick={() => setDensityPref(density === 'compact' ? 'comfortable' : 'compact')}
             >

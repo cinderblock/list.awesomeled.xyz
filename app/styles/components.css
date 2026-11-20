@@ -553,9 +553,28 @@ a.entry-updated:hover {
   right: 1rem;
   background: none;
   border: none;
+  border-radius: var(--radius-md);
   color: white;
   cursor: pointer;
   padding: 0.5rem;
+}
+.image-modal-close:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
+/* Icon badges (FeatureBadges.tsx): a tint of the badge's family color, with
+   text in the same hue at a fixed lightness. The raw color as text on its own
+   tint read between 2:1 (green, cyan) and 3.6:1 (violet); AA needs 4.5:1. */
+.icon-badge {
+  color: var(--badge-color);
+  color: oklch(from var(--badge-color) 0.45 c h);
+  background-color: color-mix(in srgb, var(--badge-color) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--badge-color) 25%, transparent);
+}
+
+.dark .icon-badge {
+  color: oklch(from var(--badge-color) 0.8 c h);
 }
 
 /* Styled tooltip (Tooltip.tsx) — replaces native title= bubbles */
@@ -599,7 +618,6 @@ a.entry-updated:hover {
   gap: 0.35rem;
   font-size: 0.75rem;
   color: var(--muted-foreground);
-  opacity: 0.75;
   flex-shrink: 1;
   min-width: 0;
 }

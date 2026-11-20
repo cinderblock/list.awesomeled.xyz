@@ -36,6 +36,8 @@ export function MoreInfo({
       <Popover.Portal>
         <Popover.Content
           className="more-info-popover"
+          // A popover is a dialog to a screen reader, and a dialog needs a name
+          aria-label="More information"
           sideOffset={4}
           collisionPadding={8}
           onClick={(e) => e.stopPropagation()}

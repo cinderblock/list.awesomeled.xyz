@@ -91,6 +91,7 @@ export function ColumnPicker({
       <Popover.Portal>
         <Popover.Content
           className="column-picker"
+          aria-label="Choose columns"
           sideOffset={5}
           align="start"
           collisionPadding={8}

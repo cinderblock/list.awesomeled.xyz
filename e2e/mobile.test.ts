@@ -33,7 +33,7 @@ test.describe('Phone widths', () => {
       await page.setViewportSize({ width, height: 800 });
       const logo = await page.locator('.site-logo').boundingBox();
       expect(logo!.height, `logo height at ${width}px`).toBeLessThan(40);
-      await expect(page.getByRole('button', { name: 'Search every category' })).toBeVisible();
+      await expect(page.getByRole('button', { name: 'Search everything' })).toBeVisible();
     }
   });
 

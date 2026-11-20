@@ -115,7 +115,7 @@ function renderLinks(item: BaseEntry, linkConfigs: LinkConfig[]) {
   if (links.length === 0) return null;
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
       {links.map((link) => (
         <Tooltip key={link.key} content={`${link.label}: ${getDomain(link.url)}`}>
           <a
@@ -123,6 +123,7 @@ function renderLinks(item: BaseEntry, linkConfigs: LinkConfig[]) {
             target="_blank"
             rel="noopener noreferrer"
             className="data-table-link-icon"
+            aria-label={`${link.label} for ${item.name} (${getDomain(link.url)})`}
             onClick={(e) => e.stopPropagation()}
           >
             {link.icon}

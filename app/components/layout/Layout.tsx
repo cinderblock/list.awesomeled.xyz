@@ -38,9 +38,26 @@ export function Layout({ children }: LayoutProps) {
   return (
     <TooltipProvider>
       <div className="layout-wrapper">
+        {/* First stop for the Tab key: past the header and the twelve category
+            tabs, straight to the page. Focus is moved by hand so the address
+            does not grow a #fragment that would then be copied into shared links. */}
+        <a
+          className="skip-link"
+          href="#main-content"
+          onClick={(event) => {
+            event.preventDefault();
+            const main = document.getElementById('main-content');
+            main?.focus();
+            main?.scrollIntoView();
+          }}
+        >
+          Skip to content
+        </a>
         <Header />
         <CategoryNav />
-        <main className="layout-main">{children}</main>
+        <main id="main-content" tabIndex={-1} className="layout-main">
+          {children}
+        </main>
         <Footer />
         <PixelScrollbar position="right" pixelSpacing={20} />
         <CompareTray />

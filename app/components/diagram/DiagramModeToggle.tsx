@@ -45,12 +45,14 @@ export function DiagramModeToggle({ value, onChange }: DiagramModeToggleProps) {
         type="button"
         className={`diagram-mode-toggle-button ${value ? 'simple' : 'advanced'}`}
         onClick={() => onChange(!value)}
-        aria-label={`Switch to ${value ? 'Advanced' : 'Simple'} view`}
+        role="switch"
+        aria-checked={!value}
+        aria-label="Advanced view"
       >
         <span className="toggle-track">
           <span className="toggle-thumb" />
         </span>
-        <span className="toggle-labels">
+        <span className="toggle-labels" aria-hidden="true">
           <span className={`toggle-label toggle-label-simple ${value ? 'active' : ''}`}>
             Simple
           </span>

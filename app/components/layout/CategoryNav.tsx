@@ -44,9 +44,19 @@ export function CategoryNav() {
 
   useEffect(() => {
     if (currentCategory && scrollRef.current) {
-      const activeTab = scrollRef.current.querySelector(`[data-category="${currentCategory.id}"]`);
+      const strip = scrollRef.current;
+      const activeTab = strip.querySelector<HTMLElement>(`[data-category="${currentCategory.id}"]`);
       if (activeTab) {
-        activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        // Center the tab by scrolling the strip itself. `scrollIntoView` on
+        // the tab also moved the browser's keyboard starting point to it, so
+        // the first Tab press on a category page landed on the *next* tab,
+        // past the logo, the search box and the tabs before it.
+        const tab = activeTab.getBoundingClientRect();
+        const box = strip.getBoundingClientRect();
+        strip.scrollTo({
+          left: strip.scrollLeft + tab.left - box.left - (box.width - tab.width) / 2,
+          behavior: 'smooth',
+        });
       }
     }
   }, [currentCategory]);
@@ -78,7 +88,7 @@ export function CategoryNav() {
   ].join(' ');
 
   return (
-    <nav className={navClasses}>
+    <nav className={navClasses} aria-label="Categories">
       {/* Left scroll arrow */}
       <button
         onClick={() => scroll('left')}

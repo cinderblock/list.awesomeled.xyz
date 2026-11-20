@@ -434,6 +434,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  /* A 24 px target around the 16 px icon (WCAG 2.2), without making the row
+     any taller */
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-block: -0.25rem;
   color: var(--muted-foreground);
   border-radius: var(--radius-sm);
   transition:

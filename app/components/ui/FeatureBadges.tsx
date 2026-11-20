@@ -399,12 +399,9 @@ interface BadgeProps {
 // Render a single badge pill, optionally as a link
 export function Badge({ badge, to }: BadgeProps) {
   const Icon = badge.icon;
-  const style: React.CSSProperties = {
-    ...pillStyle,
-    color: badge.color,
-    backgroundColor: `${badge.color}18`,
-    border: `1px solid ${badge.color}40`,
-  };
+  // The family color tints the pill; the text is that hue at a lightness
+  // that reads on the tint in either theme (.icon-badge, components.css)
+  const style = { ...pillStyle, '--badge-color': badge.color } as React.CSSProperties;
 
   const content = (
     <>
@@ -414,11 +411,11 @@ export function Badge({ badge, to }: BadgeProps) {
   );
 
   const pill = to ? (
-    <Link to={to} style={style} data-pill="">
+    <Link to={to} className="icon-badge" style={style} data-pill="">
       {content}
     </Link>
   ) : (
-    <span style={style} data-pill="">
+    <span className="icon-badge" style={style} data-pill="">
       {content}
     </span>
   );
@@ -430,9 +427,11 @@ export function Badge({ badge, to }: BadgeProps) {
 export function TextPill({ text, to }: { text: string; to?: string }) {
   const style: React.CSSProperties = {
     ...pillStyle,
-    color: 'var(--text-muted)',
-    backgroundColor: 'var(--bg-tertiary, #f3f4f6)',
-    border: '1px solid var(--border-color, #e5e7eb)',
+    // Theme tokens: the names used here before did not exist, so the pill
+    // fell back to a light grey in dark mode too, with near-white text on it
+    color: 'var(--muted-foreground)',
+    backgroundColor: 'var(--muted)',
+    border: '1px solid var(--border)',
   };
 
   if (to) {

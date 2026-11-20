@@ -142,6 +142,7 @@ export function ColumnHeader({
         <Popover.Portal>
           <Popover.Content
             className="column-header-popover"
+            aria-label={`${label} column: sort, filter and options`}
             sideOffset={5}
             align="start"
             collisionPadding={8}

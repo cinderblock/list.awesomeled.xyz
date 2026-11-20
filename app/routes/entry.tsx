@@ -13,7 +13,6 @@ import {
   Youtube,
   Globe,
   Github,
-  X,
   Archive,
   AlertTriangle,
   Link2,
@@ -35,6 +34,7 @@ import {
 } from '~/components/ui/EntryLinks';
 import { entryImages, imageUrl, licenseUrl, type EntryImage } from '~/lib/images';
 import { CopyLinkButton, EntryContribute } from '~/components/entry/EntryActions';
+import { ImageViewer } from '~/components/entry/ImageViewer';
 import { pageMeta } from '~/lib/meta';
 import { entrySeo } from '~/lib/seo.server';
 import { LinkRecord, UrlText } from '~/components/entry/LinkRecord';
@@ -550,6 +550,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
         {hero && (
           <figure className="entry-hero-figure">
             <button
+              type="button"
               className="entry-hero-image"
               onClick={() => setModalImage(imageUrl(category.id, hero.file))}
               aria-label={`Enlarge image of ${entry.name}`}
@@ -710,18 +711,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
         path={`${category.path}/${entry.id}`}
       />
 
-      {modalImage && (
-        <div className="image-modal" onClick={() => setModalImage(null)}>
-          <button
-            className="image-modal-close"
-            onClick={() => setModalImage(null)}
-            aria-label="Close"
-          >
-            <X size={32} />
-          </button>
-          <img src={modalImage} alt={entry.name} onClick={(e) => e.stopPropagation()} />
-        </div>
-      )}
+      <ImageViewer src={modalImage} alt={entry.name} onClose={() => setModalImage(null)} />
     </PageWrapper>
   );
 }
