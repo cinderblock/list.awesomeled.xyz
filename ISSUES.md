@@ -8,27 +8,15 @@ fixed with the commit hash when done. Workstreams: see
 
 ## Same product in two categories
 
-**in progress — database review (stream 2, `ws/database-review`)**: keep/merge
-calls and the merges, recorded in [plans/database-review.md](plans/database-review.md)
-with the sheet row each removed entry came from (for the parity audit).
-
-Seen by cross-links (stream 4). These entries describe one product twice:
-
-- `adapters/quinled-dig-quad` and `controllers/quinled-dig-quad`
-- `adapters/quinled-dig-uno` and `controllers/quinled-dig-uno`
-- `adapters/espartstick` and `controllers/espartstick` (note, stream 4: two different boards, the 2019 shield without SD and the SD-card edition; `2a3efbf` merged the real twin, `adapters/espartstick-wled`)
-- `adapters/m4-port-pixel` and `controllers/m4-port-pixel` (and `controllers/m4-pi`: Microcyb M4-PI, a third copy)
-- `adapters/m8-port-pixel` and `controllers/m8-port-pixel`
-- `controllers/standard-differential-receiver` and `level-converters/standard-differential-receiver`
-- `diffusive-materials/silicone-sealant` carries Plastazote LD45 foam data (link, XLPE, sizes), duplicating `diffusive-materials/ld45-plaztazote`
-- `pixels/sm1616` is a typo placeholder for `pixel-ics/sm16716` (found by parity, stream 1): no SM1616 part exists anywhere, and the sheet row's only content is the SM16716 datasheet (sowbug/sm16716). Merge or delete; parity's alias follows
-
-Why it matters: specs drift apart, and compatibility links and filters show the
-product twice. Needs a keep/merge call (parity or standardization stream).
-Cross-links leaves these pairs unlinked until that's decided. (Hardware vs.
-firmware twins such as `adapters/espixelstick` vs.
-`drive-libraries/espixelstick`, or `pattern-drivers/wled` vs.
-`drive-libraries/wled`, are distinct things and get linked.)
+**Fixed (stream 2).** Merged: QuinLED-Dig-Quad and Dig-Uno, the M4-PI
+(three copies), M8-PI and the differential receiver (d487f110); the
+"Silicone Sealant" row into Plastazote LD45 (fb3f9b76); ESPArtStick WLED
+(2a3efbf1); the SM1616 stub, whose sheet row maps to `pixel-ics/sm16716`
+(a2e23ddd); ElectroMage's two expanders into their controller entries
+(f39db2f5); and the Raspberry Pi 3 Model B, which cross-links added as
+`raspberry-pi-3b` while parity gave it `raspberry-pi-3-model-b` (63d7e346).
+Each removed entry and the sheet row it came from: the removed-entry map in
+[plans/database-review.md](plans/database-review.md).
 
 ## Coordination: link fields belong to cross-links (stream 4)
 
@@ -69,35 +57,36 @@ Shout here if that collides with the browse-UX work.
 
 ## Schema changes from database review (stream 2, FYI)
 
-Validation (`bun run validate`, now also in CI) rejects the old shapes, so a
-rebased branch with entries in them fails until they're converted. Each
-migration in `scripts/migrations/` is re-runnable (no-op on migrated data).
-Plan and field-by-field detail: [plans/database-review.md](plans/database-review.md).
+Validation (`bun run validate`, also in CI) rejects the old shapes, so a
+rebased branch with entries in them fails until they're converted: run the
+migrations in `scripts/migrations/` again after rebasing (they're no-ops on
+migrated data, and stop on a value they don't know). How to change a schema:
+[database/\_schema/README.md](database/_schema/README.md); how to write
+values: CONTRIBUTING.md, "Values". Field-by-field detail:
+[plans/database-review.md](plans/database-review.md).
 
-- **Packages**: pixels' and pixel ICs' `physical.package_size` /
-  `package_sizes` → one `physical.packages` array (`SOP-8`, `QFN-16`, `5050`,
-  `5mm`; common.json `ic_package` / `led_package`). Pixel ICs lost `pin_count`
-  (the package names carry it).
-- **Shared shapes**: controllers' `outputs` / `power` now live in common.json
-  (`pixel_outputs`, `power_input`), with `clocked_support`, `output_connector`
-  and `diy_or_ots`. `outputs.clocked: true` is no longer accepted (use
-  `always` or `selectable`).
-- **Pixel decoders**: `outputs.{count, types, connector}` replace
-  `max_channels` / `pixel_types` / `connectors` / `description`; the old
-  free-text description moved into `notes`. For cross-links (stream 4): that
-  migration mapped four connector strings to refs (`mtsb-combicon` for
-  controller-changeover, pixel-2-things-servo and PixFog; `xlr-3` for Pixel 2
-  DMX), following the controllers precedent. Adapters' connector strings will
-  be carried over as strings only, and `parent` is left untouched for your
-  host-board links.
-- **Next** (not landed yet): adapters' outputs/power adopt the shared shapes
-  (`pixel_types` → `outputs.clocked`); diffusive materials' `material_type` →
-  `materials` list and boolean `flexible`.
+- Packages: `physical.packages`, LCSC-style (`SOP-8`, `QFN-16`; LEDs `5050`,
+  `5mm`).
+- Controllers and adapters share `outputs` / `power` shapes;
+  `outputs.clocked` is `false`, `selectable` or `always`; inputs use a fixed
+  vocabulary. Mains-powered units: `power.ac`, `power.output_voltage` (d1d23db4).
+- Pixels and pixel ICs: `color.channel_bits` (one or a list),
+  `color.brightness_control {bits, method, scope}`,
+  `electrical.supply_voltage`; `aggregate_bits` is gone. `electrical.wattage`
+  is the maker's whole-pixel figure (52de8d86).
+- Pattern drivers: I/O directions `Input` / `Output` / `Both` / `false`, other
+  I/O as tag lists, visualizer `1D` / `2D` / `3D`, `language` one or a list.
+  Drive libraries: `language` likewise; `links.url` for a website, `links.repo`
+  for code only (8c69b346).
+- Typed connectors, microboards, diffusive materials, commercial systems and
+  level converters; attribution (`creator`, `manufacturers`, `vendors`) is one
+  shared definition (6bae2012); quantities drop trailing zeros (`20mA`).
 
 ## Sheet's Controllers "Interface" column is scrambled — don't restore from it
 
-**in progress — database review (stream 2, `ws/database-review`)**: verifying
-every controller's `inputs` against vendor docs.
+**Done (stream 2)**: every controller's `inputs` re-checked against makers'
+docs (de0730ff; evidence in
+[plans/database-review-inputs-audit.md](plans/database-review-inputs-audit.md)).
 
 In the Google Sheet's Controllers tab the Interface column was sorted on its
 own: its values run alphabetically down the sheet (" ", "ArtNet Ethernet",
@@ -145,25 +134,18 @@ the current product page cited (caf6035); the category call is still open.
 Its `requires_host: Raspberry Pi` is doubtful for the boxed unit, which has
 the Pi inside.
 
+Stream 2: DMX Core 100's pixel outputs are gone too (899dc868); the PixOut
+entry carries its maker's name ("Pixout ArtNet DMX Recorder"), the D-100's
+four DMX outputs and its 12 V supply (899dc868, b4389253). Where both belong
+is Cameron's call, tied to the parked pattern-driver kinds: open question 1
+in [plans/database-review.md](plans/database-review.md).
+
 ## Pixels' `electrical.wattage` is one channel's power, not the pixel's (stream 2)
 
-Found by the designer (stream 3). The schema describes `wattage` as "Power
-per pixel", but the stored values are `channel_current × led_voltage` for a
-single colour channel: WS2812 18.5 mA × 5 V = 92.5 mW, APA102 22 mA × 5 V =
-110 mW (a WS2812 at full white draws about three times that). The ratio is
-1.00 on 15 of the 21 rows that have both fields. Rows that don't follow the
-pattern: `lc8808b` and `ws2851` (computed at 5 V although `led_voltage` is
-12 V), `sk6805` (100 mW with a ~5 mA channel), `ns108e` and `sk6812` (off by
-2–4%). (`ns108` merged into `hd108`, which follows the pattern. `ns8808`,
-now `hd8808`, holds Newstar's "Max Power 0.2W", 200 mW: a true per-pixel
-figure, since a 12 V pixel's channels share one series current.)
-
-Why it matters: the old designer multiplied this field by the pixel count and
-under-reported power about 3× (fixed: it now uses channel current × channels
-× voltage and never reads `wattage` as a per-pixel figure). The entry pages
-and the Pixels table still show it as the pixel's wattage. Either the field
-means "per channel" and should say so, or the values should become true
-full-white figures. Not changed here: the data is stream 2's.
+**Fixed (stream 2).** `wattage` is now the maker's whole-pixel figure
+(52de8d86); per-channel values were replaced by datasheet figures or
+removed where the maker gives none (f8749eae). The designer already
+prefers `channel_current`; a lone wattage is now spread over the channels.
 
 ## Designer facts that depend on unrecorded data (FYI, streams 2 / 4 / 6)
 
@@ -206,206 +188,45 @@ Filling any of these makes its checks sharper with no code change:
 
 ## Suspected data errors seen while sourcing images & datasheets (stream 5)
 
-Not fixed by stream 5 (facts belong to streams 2 and 6). Each was noticed on
-the maker's own page or datasheet; the per-entry research notes with source
-URLs are in [plans/assets-research/](plans/assets-research/).
-
-- **Pixel ICs** ([pixel-ics.md](plans/assets-research/pixel-ics.md)):
-  p9813's datasheet names DMS Microelectronics, not WorldSemi; UCS-series
-  datasheets point to UCS (szucs.cn), not Normand; GS82xx datasheets say
-  Genesis Systech, not "Shenzhen Greesit"; sm16511 is a 3-channel DMX512 SOP8
-  per its maker (entry: 4 channels, SOP10/16); ucs2904's `other_links` text
-  names SM16704; ws2814's price SKU is the WS2814F; qed3001's specs duplicate
-  tls3001's. Second pass ([pass2-pixels-ics.md](plans/assets-research/pass2-pixels-ics.md)):
-  tm1804 says 24 V outputs, but the V1.9 sheet it cites and Titan's current
-  V2.3 both say 30 V; ge1603's Greeled may be its vendor, not its designer.
-- **Pixels** ([pixels.md](plans/assets-research/pixels.md)): Adafruit
-  product 2343 (apa102's image source) is now titled "[SK9822]"; ns108e and
-  sk9826 `dead_links` mark PDFs that load today; sk9822-a's creator is probably
-  Normand, not Newstar; ws2816's 5-bit brightness claim isn't in WorldSemi's
-  datasheets; pl9823's datasheet names BaiCheng (entry creator "/");
-  lc2823-2020 and sm1616 couldn't be identified at all.
-- **Microboards** ([microboards.md](plans/assets-research/microboards.md)):
-  esp-01 and nodemcu-v2 list Bluetooth 4.1 (ESP8266 has none); t-eth-lite
-  lists an LX6 core / BT 4.1 / classic-ESP32 outputs for an ESP32-S3 board and
-  `flash: microSD`; Orange Pi Zero LTS and PC Plus claim 5 GHz Wi-Fi (2.4 GHz
-  only); PC Plus has 8 GB eMMC, not microSD; ttgo-esp32-poe needs an external
-  programmer (entry: USB serial); orange-pi-lts isn't a product name (specs
-  match the Zero LTS, which is H3, entry says H2+); esp-32s is ambiguous
-  (module vs dev board).
-- **Connectors** ([connectors.md](plans/assets-research/connectors.md)): ph's
-  notes describe XH; sh says `rows: 2`, `max_pins: 25`; df62w and teeplug have
-  their wire-gauge limits swapped; xt60-90 and mt30-60 say `creator: Generic`
-  (Amass originated them) and their ratings differ from Amass's specs;
-  "MTSB" → "MSTB", "Bucaneer" → "Buccaneer".
-- **Adapters** ([adapters.md](plans/assets-research/adapters.md)):
-  `max_channels` looks wrong on espartstick(-wled) 6, espixelstick 4,
-  quinled-dig-uno 6; pipixel and led-octopus have `creator: Tindie` (makers:
-  Maniacal Labs, Essence Engineering); pi-hat has `links.product: Multiple`,
-  `parent: Yes`; rasppi-isolated-dmx's linked BitWizard board isn't called
-  isolated; rpi-28d is superseded by the rPi-28D+.
-- **Controllers** ([controllers-a.md](plans/assets-research/controllers-a.md),
-  [controllers-b.md](plans/assets-research/controllers-b.md)): radios listed
-  that the maker pages don't show — blink-tape-controller (Bluetooth),
-  dmx-to-led-strip (Bluetooth, audio), apd-2-500-12v-art and
-  deskontroller-lite-v3-192 (Wi-Fi); Ethernet/Art-Net listed on DMX-only units
-  (din-pixie, flex-pixel-driver) and on lightbox, lightboard-mini, luminaxa,
-  nled-pixel-controller-mini; falcon-f4v3's specs look copied from the F48;
-  falcon-f48 is discontinued per its maker; led-player-m has 8 channels;
-  lightkraken shows 2 outputs; pb16 is a PocketBeagle cape (entry: BeagleBone
-  Black); ledmx4-pro's photo is the 5 V unit (entry: 24 V max); LEC Powered and
-  orange-pro-plus-32 look discontinued
-  ([controllers-c.md](plans/assets-research/controllers-c.md)): pixnet-4 has
-  4 outputs (8 only expanded); pixpoe and spi-matrix pages mention no Wi-Fi;
-  protopixel-8-channel's USB is power only (input is Ethernet);
-  uli-led-control takes 7–24 V; uls-stripe's output has a Clock pin (entry:
-  not clocked); replay has JST outputs and no Ethernet per its manual;
-  sp102e is an IR-remote controller; qolorpix and spinode pages are live
-  (status could be `active`); pixout-server's pixel outputs don't match any
-  Pixout hardware.
-- **Level converters / pixel decoders**
-  ([converters-decoders.md](plans/assets-research/converters-decoders.md)):
-  ws2811-mosfetdriver links Freetronics' single-MOSFET FREENFET but says 3
-  channels (FREENFET3 is the triple); pixel-2-things-relay is the Pixel2AC
-  triac dimmer; pixel2things.com now redirects to Experience Lights;
-  pixfog has no product link (live page:
-  innotronix.net/PixFog-Pixel-Based-Fog-Controller-p232730399, $39.99 vs
-  $33); 74hct244 has a stray `interface: PDIP largest`.
-- **Commercial systems / diffusive materials**
-  ([systems-diffusers.md](plans/assets-research/systems-diffusers.md)):
-  active-rgb is sold as RGBW now; smartpxl is an ENTTEC line (creator);
-  vinci's `creator` is a URL (Lucenti); silicone-sealant carries Plastazote
-  foam data (also listed under "Same product in two categories"); ALP no
-  longer lists "Lumieo II"; rosco-diffusion redirects to Rosco's myColor app;
-  the Plexiglas shop link redirects to polyvantis-shop.com; "Plaztazote" and
-  "polyethelene" are misspelled.
-
-- **Pattern drivers**
-  ([pattern-drivers.md](plans/assets-research/pattern-drivers.md)):
-  geopix.io now belongs to a gambling site (link should be
-  github.com/EnviralDesign/GeoPix); Jinx! is by Live-LEDs.de, not
-  Solderlab.de, and its URL is a third-party Glediator download;
-  arthet-led-mapper is `artnet_led_mapper` (github.com/cyberboy666) with no
-  URL; protopixel-create looks discontinued; mapio-pro's creator is probably
-  Visution; elm's `status: unknown` is stale (ELM 2026 ships); wled's URL
-  redirects to wled/WLED; chataigne-wled-mod links the author's profile.
+**Processed (stream 2).** Every bullet was re-checked at the maker's page or
+datasheet: records in
+[stream5-boards.yaml](plans/database-review-fixes/stream5-boards.yaml) and
+[stream5-parts.yaml](plans/database-review-fixes/stream5-parts.yaml), applied
+in b4389253, f8749eae, 219a1408 (most were already fixed by earlier passes).
+What belongs to other streams is under "Hand-offs from the database review".
 
 ## Datasheet URLs that serve HTML instead of a PDF (stream 2)
 
-`bun run mirror-datasheets --check` (2026-11-18 ~10 PM PST, 06:00Z) found
-LCSC datasheet links that answer with an HTML page, not the PDF, for anything
-but a full browser. The mirror can't copy them, and stream 5's rule is that
-`datasheet.url` is a direct PDF:
-
-- `connectors/pcb-screw-terminal-block`: lcsc.com C5128849, added in f7d10be.
-- `pixel-ics/tm1804`: C20622206, f40746b.
-- `pixels/tx1818`: C784552 and C784557, fa24de9.
-
-Fix: point `datasheet.url` at the maker's PDF, or add a direct-PDF host under
-`datasheet.sources`; the mirror falls back to sources. Re-run `--check` to
-confirm.
+**Fixed.** `connectors/pcb-screw-terminal-block` links Degson's own DG301-5.0
+drawing (5abe3867); `pixel-ics/tm1804` and `pixels/tx1818` already had direct
+PDFs from stream 5 (f4c36200).
 
 ## Connector and diffuser spec corrections (stream 2 or 6)
 
-Found by cross-links research (stream 4) with the maker's datasheet or page
-quoted; not applied because they're spec values, not links. Verify and apply:
-
-- `connectors/9159` `mechanical.pitch`: "3.0 mm" → "2.0 mm" <https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf>
-- `connectors/9159` `mechanical.max_pins`: 6 → 5 <https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf>
-- `connectors/9159` `ratings.max_current`: "5 A" → "3 A" <https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf>
-- `connectors/9159` `ratings.max_voltage`: "125 V" → "300 V AC" <https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf>
-- `connectors/cee-form` `ratings.max_current`: "16 A" → "125 A (family: 16/32/63/125 A)" <https://www.epanorama.net/blog/2021/08/19/ceeform-connectors/>
-- `connectors/df62w` `termination.smallest_gauge`: "20 AWG" → "26 AWG" <https://www.digikey.ca/en/product-highlight/h/hirose/df62w-series-connectors>
-- `connectors/df62w` `termination.largest_gauge`: "26 AWG" → "20 AWG" <https://www.digikey.ca/en/product-highlight/h/hirose/df62w-series-connectors>
-- `connectors/dupont` `termination.largest_gauge`: "24 AWG" → "22 AWG" <https://www.mattmillman.com/info/crimpconnectors/dupont-and-dupont-connectors/>
-- `connectors/gx-16` `ratings.max_voltage`: "100 V" → "400 V" <https://www.renhotecpro.com/gx16-connector-data-sheet/>
-- `connectors/gx-16` `ratings.max_current`: "7 A" → "10 A" <https://www.renhotecpro.com/gx16-connector-data-sheet/>
-- `connectors/ic5-ec5` `creator`: "Spektrum" → "Spektrum (IC5) / E-flite (EC5), both Horizon Hobby brands" <https://www.horizonhobby.com/product/connector-ec5-battery-2/EFLAEC502.html>
-- `connectors/mate-n-lok` `mechanical.pitch`: "5.08 mm" → "6.35 mm" <https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story>
-- `connectors/mate-n-lok` `mechanical.max_pins`: 10 → 15 <https://www.te.com/usa-en/products/brands/mate-n-lok.html?tab=pgp-story>
-- `connectors/mini-fit-jr` `mechanical.max_pins`: 16 → 24 <https://www.digikey.ca/en/product-highlight/m/molex/mini-fit-jr-connectors>
-- `connectors/mt30-60` `ratings.max_current`: "60 A" → "35 A (MT60, 12 AWG); MT30 20 A (16 AWG)" <https://www.china-amass.net/mt60-m-product/>
-- `connectors/mt30-60` `ratings.max_voltage`: "60 V" → "80 V DC" <https://www.china-amass.net/mt60-m-product/>
-- `connectors/mtsb-combicon` `termination.smallest_gauge`: "20 AWG" → "24 AWG" <https://novapart.co/products/1757022/pluggable-terminal-block-508-mm-3-ways-24-awg-12>
-- `connectors/mtsb-combicon` `termination.largest_gauge`: "10 AWG" → "12 AWG" <https://novapart.co/products/1757022/pluggable-terminal-block-508-mm-3-ways-24-awg-12>
-- `connectors/ph` `notes`: "...2.5mm not 2.54 (1/10\") pitch runs off on boards drilled for 2.54" → "JST PH pitch is 2.0 mm" <https://www.jst-mfg.com/product/detail_e.php?series=199>
-- `connectors/ph` `termination.smallest_gauge`: "24 AWG" → "32 AWG" <https://www.jst-mfg.com/product/detail_e.php?series=199>
-- `connectors/ph` `mechanical.locking`: "Detent" → "Friction" <https://www.jst-mfg.com/product/detail_e.php?series=199>
-- `connectors/powerpole-15-45` `termination.largest_gauge`: "6 AWG" → "10 AWG" <https://www.andersonpower.com/?p=301>
-- `connectors/sh` `mechanical.rows`: 2 → 1 <https://www.jst-mfg.com/product/detail_e.php?series=231>
-- `connectors/sh` `mechanical.max_pins`: 25 → 20 <https://www.jst-mfg.com/product/detail_e.php?series=231>
-- `connectors/sh` `termination.smallest_gauge`: "30 AWG" → "32 AWG" <https://www.jst-mfg.com/product/detail_e.php?series=231>
-- `connectors/sh` `mechanical.locking`: "Latching" → "Friction" <https://www.jst-mfg.com/product/detail_e.php?series=231>
-- `connectors/sh` `mechanical.wire_to_wire`: true → false <https://www.jst-mfg.com/product/detail_e.php?series=231>
-- `connectors/sm` `mechanical.rows`: 1 → "1-2" <https://www.jst-mfg.com/product/detail_e.php?series=238>
-- `connectors/sp13` `ratings.max_current`: "5 A" → "13 A" <https://www.weipuconnector.com/sp13-series/>
-- `connectors/sp17` `links.product`: "https://weipuconnector.com/product/38" → "https://www.weipuconnector.com/sp17-series/" <https://www.weipuconnector.com/sp17-series/>
-- `connectors/sp17` `ratings.max_current`: "10 A" → "50 A" <https://www.weipuconnector.com/sp17-series/>
-- `connectors/sp17` `mechanical.min_pins`: 2 → 1 <https://www.weipuconnector.com/sp17-series/>
-- `connectors/superseal` `mechanical.max_pins`: 8 → 6 <https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html>
-- `connectors/superseal` `ratings.ip_rating`: "IP68" → "IP67" <https://www.te.com/en/products/connectors/automotive-connectors/intersection/amp-superseal-1-5.html>
-- `connectors/teeplug` `termination.largest_gauge`: "16 AWG" → "4 mm² (about 12 AWG)" <https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html>
-- `connectors/teeplug` `termination.smallest_gauge`: "6 AWG" → null <https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_C4A.html>
-- `connectors/wago-221` `termination.smallest_gauge`: "28 AWG" → "24 AWG" <https://www.wago.com/us/products/electrical-interconnect/discover-wire-and-splicing-connectors/221-series-levernuts>
-- `connectors/wieland-rst` `ratings.max_current`: "16 A" → "32 A" <https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/>
-- `connectors/xh` `mechanical.locking`: "Latching" → "Friction" <https://www.jst.com/products/crimp-style-connectors-wire-to-board-type/xh-connector/>
-- `connectors/xt60-90` `creator`: "Generic" → "Amass (Changzhou Amass Electronics)" <https://www.china-amass.net/about-us/>
-- `connectors/xt60-90` `ratings.max_current`: "90 A" → "45 A (XT90PW-M); XT60-F 35 A at 12 AWG" <https://www.china-amass.net/uploads/XT90PW-M-SPEC.pdf>
-- `connectors/xt60-90` `ratings.max_voltage`: "42 V" → "150 V DC (XT90PW-M); XT60-F 80 V DC" <https://www.china-amass.net/uploads/XT90PW-M-SPEC.pdf>
-- `commercial-systems/smartpxl` `creator`: "SmartPXL" → "ENTTEC" <https://www.enttec.com/product/uncategorized/hi-res-smart-pxl-100x25-rgb-rgbw-led-pixel-dot-strings/>
-- `diffusive-materials/3m-envision-diffuser` `material_type`: "polyester" → "vinyl (cast, PVC-free)" <https://www.3m.co.uk/3M/en_GB/p/d/b00024897/>
-- `diffusive-materials/ld45-plaztazote` `name`: "LD45 Plaztazote" → "LD45 Plastazote" <https://www.zotefoams.com/product/azote/plastazote/>
-- `diffusive-materials/lexan-dclw` `name`: "Lexan DCLW" → "LEXAN DLCW" <https://led-professional.com/products/led-optics/sabic-to-introduce-pioneering-lexantm-dlcw-light-diffusing-technology>
-- `diffusive-materials/perspex-diffuse` `physical.sizes_available`: "up to 1220x2440" → "3050 x 2030 mm" <https://www.perspex.co.uk/materials/perspex-cast-acrylic/diffuse/>
+**Processed (stream 2).** Every item verified at the maker's datasheet or
+catalog: 61 applied with sources (c014d639, efdd7703 for the Perspex sheet
+size, 8ca4f3e0 for JST SM's dual-row housings), 8 already fixed, 4 unverifiable,
+1 rejected. Records:
+[connectors.yaml](plans/database-review-fixes/connectors.yaml).
 
 ## Spec errors seen during the price/status research pass (stream 2)
 
-The data-freshness pass (stream 6, 2026-11-18) read every hardware/software
-entry's vendor pages and noted, but did not edit, ~120 facts that disagree
-with the maker. Each findings file ends with a "(d) Wrong facts" list, with
-the source quoted in that entry's section:
-[plans/data-freshness/findings/](plans/data-freshness/findings/). The
-largest clusters:
-
-- Controllers listing `Ethernet` / `Wi-Fi` / `USB` they don't have
-  (ElectroMage 8x drivers, DIN Pixie, DigiLED micro player, Rocketlife
-  Lightboard/Lightbox, NLed mini, Octo MK2, ULS Stripe, Flex Pixel Driver…)
-- Wrong or placeholder creators (Tindie as creator on LED Octopus / PiPixel,
-  `creator: /` on PL9823, "Color" on LC8808B, Vinci's creator is a URL,
-  MadMapper, QLC+, Jinx, SmartPXL)
-- Channel/output counts and voltage ranges (Falcon F4v3 4×1024 not
-  48×340, MY9221 12 channels, SP901E 4 channels, QuinLED Dig-Octa 5–48 V)
-- Datasheet links that point at the wrong part (TM1804 → TM1803 sheet,
-  UCS8903 → DHgate listing, APA105 → a strip page, SK6818 → a Conrad strip)
-- Possibly nonexistent parts (LC2823-2020, SM1616) and renamed ones
-  (WS2816 → WS2916?, ProtoPixel Create → Mapping Tool)
-
-Why it matters: these are the facts the tables filter on. Overlaps the
-connector list above.
+**Processed (stream 2).** The ~120 "(d) Wrong facts" in
+[plans/data-freshness/findings/](plans/data-freshness/findings/) were each
+re-read at the maker and applied with sources: controllers (899dc868),
+microboards and pixel decoders (4d013eb7), pixels and pixel ICs (a2e23ddd),
+software (3bf00c3a), adapters and commercial systems (f39db2f5). Records,
+including rejected and unverifiable ones:
+[plans/database-review-fixes/](plans/database-review-fixes/). Hand-offs below.
 
 ## Spec contradictions found while writing new entries (stream 2)
 
-Found by cross-links (stream 4) research for the new pixel-IC and board
-entries; not applied because they're existing spec values, not links:
-
-- `pixel-ics/ws2818b`: `release_year` 2018, but the datasheet's revision
-  log starts "V1.0 ... New ... 20170523"; `electrical.output_voltage` 12V,
-  but V1.3 (2019-09-06) "Modify the RGB port withstand voltage and add 24V
-  applications" <https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf>
-- `pixel-ics/lpd8806`: `color.channel_bits` 8, but the LPD8803/LPD8806
-  datasheet says "LPD8803 provides 7 bits of data" and "Color Resolution 7
-  Bits" <https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf>
-- `microboards/nodemcu-v2`: `io.max_outputs` 2, but WLED's ESP8266
-  multi-strip docs say "There is a maximum of 3 strips supported"
-  <https://github.com/wled/WLED-Docs/blob/main/docs/features/multi-strip.md>
-- `microboards/orange-pi-lts`: `compute.soc` H2+, but orangepi.org's
-  Zero LTS page says "AllWinner H3"
-  <http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html>
-  (CNX Software's 2019 article calls it H2+; needs a look at the board)
-- Makers: `pixel-ics/p9883` says "Power MOS Microelectronics", formerly
-  DMS Microelectronics, the creator on `pixel-ics/p9813`. If that's one
-  company, one spelling (or a maker alias in `app/lib/relations.ts`) puts
-  both under one "More from" row.
+**Processed (stream 2).** WS2818B: first datasheet May 2017, R/G/B ports
+rated 20 V since V1.3, one chip for 12 V and 24 V strips (5abe3867); LPD8806 7
+bits per channel (04566515); NodeMCU v2 three WLED outputs (5abe3867); Orange
+Pi Zero LTS is H3 (4d013eb7). P9883 / P9813 keep their makers' names: only
+Advatek says Power MOS was DMS (hand-off below). Records:
+[issues-final.yaml](plans/database-review-fixes/issues-final.yaml).
 
 ## Sheet parity: numeric cells pass as "elsewhere" on stray digits (stream 1)
 
@@ -420,34 +241,15 @@ fallback, or should match whole numbers with their unit.
 
 ## Facts to check, found by parity research (stream 2)
 
-Seen by parity's research agents (stream 1) on maker pages; not changed
-because they're outside the sheet rows being researched:
-
-- `pattern-drivers/leds-master`: `price: FOSS`, but the repository has no
-  license file; last commit 2021-04-25 (status `unknown`, maybe
-  `discontinued`); lists iOS, which its readme leaves unticked.
-- `controllers/digidot-c4-extended-8`: `max_per_output: 1024 # 4096 total
-channels` treats channels as pixels.
-- `controllers/pixelator-mini-px1-8d`: its manual (UM-71066) says 9-48 V
-  input; the entry has 7-24 V (the 2021 product page).
-- `controllers/protopixel-1-channel-wifi`: probably discontinued (product page
-  404; spec sheet: 680 px, Art-Net only).
-- `controllers/genius-pro-32-port`: connector name out of date; eFuses only on
-  the 2024 edition.
-- `pattern-drivers/qlc` (a price, for stream 6): the Raspberry Pi image now asks
-  a EUR 20 contribution; the tier and demo text say EUR 15.
-  <https://www.qlcplus.org/discover/raspberry-pi>
-- Controllers with a built-in mains supply record `power.voltage`
-  differently: QolorPIX the AC input, SceneX PP4 and PixLite 16 Plug and Play
-  the 5/12 V output. Needs a convention.
-- Pixel ICs `color.aggregate_bits`: the schema calls it "Total bits across
-  channels", but it came from the sheet's "Aggregate Bits" column (header
-  note: "Dimming for whole chip at once"), whose values read as effective
-  dimming bits: GS8202/GS8206/GS8208 12, P9813 8 (8-bit channels, no
-  chip-wide dimming; datasheet-checked), LPD8806 7, LPD6803 5.
-  `pixel-ics/ws2811` has 24, added by the import (not in the sheet),
-  following the schema's reading. Needs a definition, then the description
-  and WS2811 fixed to match.
+**Processed (stream 2).** LEDs Master's platforms, DiGidot C4 Extended 8's
+pixel capacity (its 4096-channel licence: 1365 RGB pixels) and supply, and
+Genius Pro 32's editions (eFuses 2024, Power Banks 2025) (5abe3867); Pixelator
+Mini's 9-48 V (3b973400) and ProtoPixel 1-ch Wi-Fi's specs and status were
+already right; Genius Pro's connector name was fixed in 943342f5. Mains
+supplies have a convention (d1d23db4); `aggregate_bits` is gone (da15001b).
+LEDs Master's "FOSS" price and QLC+'s contribution are stream 6's (hand-off
+below). Records:
+[issues-final.yaml](plans/database-review-fixes/issues-final.yaml).
 
 ## Link fields for cross-links, from parity research (stream 4)
 
@@ -462,3 +264,78 @@ channels` treats channels as pixels.
   slugs now hold the real Teensy 2.0 and Pi 3 Model B (387602d). Three
   `related` refs that meant the B+ follow it (10fc268); the rest mean the Pi
   3 family and stay.
+
+## Hand-offs from the database review (streams 3, 4, 5, 6)
+
+Found while verifying other streams' reports; each has its source and quote
+in the named file under [plans/database-review-fixes/](plans/database-review-fixes/).
+
+- Stream 4 (links, aliases, sources):
+  - `microboards/ebyte-nrf-52840`: renamed to its module, E73-2G4M08S1C; an
+    alias "Ebyte nRF52840" keeps the old name findable
+    (microboards-decoders.yaml).
+  - `microboards/orange-pi-lts`: its only alias now equals its name
+    (microboards-decoders.yaml).
+  - `pixel-decoders/led-strip-driver-module`: diymore's P9813 board;
+    `inputs.protocols: [P9813]` and a `uses` link to `pixel-ics/p9813`
+    (microboards-decoders.yaml).
+  - `pixel-decoders/ws2811-mosfetdriver`: `sources.outputs.count.url` drops
+    "-output" from the product slug (stream5-boards.yaml).
+  - `pixels/ws2816`: WorldSemi now lists the WS2916 series where the WS2816
+    was (pixels.yaml).
+  - `controllers/electromage-8x-driver`: `outputs.connector` "Solder/3 pin
+    servo"; the maker documents 5 mm screw terminals or 0.1" headers
+    (adapters-commercial.yaml).
+  - Makers: only Advatek says Power MOS Microelectronics (`pixel-ics/p9883`)
+    is the former DMS Microelectronics (`pixel-ics/p9813`); every maker
+    document says DMS. A maker alias in `app/lib/relations.ts` would put both
+    under one "More from" row (issues-final.yaml).
+- Stream 3 (designer): 12 V "series" pixels run R, G and B on one current,
+  so a pixel draws its channel current once, not three times. CS8812: "It
+  is RGB LED series structure ... the LED constant current is 18mA.
+  Different to the parallel architecture of 5V power supply and 54mA";
+  WorldSemi gives the WS2815B "Power Consumption 0.1~0.18 W" at 10 mA. The
+  designer's `pixelMaxAmps` (channel current x channels) puts a WS2815 at
+  0.36 W, two to three times its datasheet (stream5-parts.yaml: cs8812,
+  gs8208, ws2815). Over-sizing the supply errs safe, but the figures shown
+  are wrong; series parts would need a flag in the data.
+- Stream 5 (datasheets, images):
+  - `pixels/apa102`: its image's source page (Adafruit 2343) now sells the
+    SK9822; `datasheet.third_party_testing` links APA's page for another
+    part (cpldcpu's APA102 measurements fit) (pixels.yaml, stream5-parts.yaml).
+  - `pixels/sk6818`: `datasheet.url` is a strip's one-page spec sheet, not
+    the part's (pixels.yaml).
+- Stream 6 (prices, statuses, product links):
+  - Pattern-driver pricing: MADRIX 5's tiers, TouchDesigner's
+    non-commercial limits, ELM's and Smode's demos, Smode's license, QLC+'s
+    Raspberry Pi contribution (EUR 20), artnet_led_mapper's tiers, LEDs
+    Master's "FOSS" (no license file) (software.yaml).
+  - ElectroMage's two expanders are sold out at the maker; the passes used
+    different rules for that (adapters-commercial.yaml).
+  - `microboards/esp-01` and `esp-32s`: Ai-Thinker pages for `creator.page`
+    (microboards-decoders.yaml).
+  - `diffusive-materials/rosco-diffusion` and `lumieo-2`: product links that
+    redirect elsewhere; Pi Hat's dead Microcyb page (stream5-parts.yaml,
+    stream5-boards.yaml).
+
+## Pattern drivers' pricing fields are still free text (stream 6, recommendation)
+
+Database review (stream 2) typed the pattern drivers' I/O, visualizer and
+language but left `pricing` alone: prices are stream 6's. What's loose now
+(2026-11-18 census):
+
+- `pricing.demo.available` mixes booleans with prose ("Demo", "Free",
+  "Limited Demo", "30 day trial", "Watermarked demo", "<1000 LEDs free,
+  various paid options", "Open Source", "w/PixelBlaze purchase", "€15
+  Donation requested"). Suggested shape: `demo.kind`: `free` / `trial` /
+  `limited` / `none` (plus `demo.limitations` text, which exists), with
+  "Open Source" moving to `license` and donations to `license_type`.
+- `pricing.license_type` is prose on 2 of 5 rows ("Free for small projects;
+  larger commercial projects need a license"). Suggested enum: `free`,
+  `perpetual`, `subscription`, `donationware`, `freemium`, with the prose in
+  notes.
+- `pricing.price` is a string on free rows ("Free", "Free - $399"): the
+  tiers already carry the numbers.
+
+Why it matters: "free to try?" and "subscription or perpetual?" are the
+questions people filter software on, and the sheet couldn't answer them.
