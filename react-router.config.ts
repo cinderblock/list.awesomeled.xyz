@@ -1,5 +1,5 @@
 import type { Config } from '@react-router/dev/config';
-import { copyFile } from 'node:fs/promises';
+import { copyFile, readdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import { getAllRoutes } from './app/lib/data';
 
@@ -22,5 +22,16 @@ export default {
   async buildEnd({ reactRouterConfig }) {
     const client = join(reactRouterConfig.buildDirectory, 'client');
     await copyFile(join(client, '__spa-fallback.html'), join(client, '404.html'));
+
+    // Every prerendered path also gets a `.data` file, which the app fetches
+    // when it navigates to a page. Nothing navigates to a link-preview image,
+    // the sitemap or robots.txt (crawlers fetch the files themselves), and an
+    // image's `.data` is the picture again at two and a half times the size:
+    // 600 of them were 40 MB of upload for nothing.
+    const unused = [join(client, 'sitemap.xml.data'), join(client, 'robots.txt.data')];
+    for (const file of await readdir(join(client, 'og'), { recursive: true })) {
+      if (file.endsWith('.jpg.data')) unused.push(join(client, 'og', file));
+    }
+    await Promise.all(unused.map((file) => rm(file, { force: true })));
   },
 } satisfies Config;
