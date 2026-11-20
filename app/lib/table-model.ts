@@ -45,6 +45,20 @@ export interface ModelColumn {
 
 const lower = (s: string) => s.toLowerCase();
 
+/**
+ * What makes two spellings the same filter value. The database keeps names
+ * as their sources write them, so one program is "Jinx", "Jinx!" and "JINX!",
+ * one part "SK6812 RGBW", "SK6812RGBW" and "SK6812 (RGBW)". A filter that
+ * listed each spelling separately would hide most of the matches behind
+ * whichever one was ticked. Case, spaces, hyphens, underscores, brackets and
+ * exclamation marks are ignored; signs that carry meaning are kept ("C++" is
+ * not "C#", "$$" is not "$$$", "MAX3485CSA+" is not "MAX3485CSA").
+ */
+export function facetKey(value: string): string {
+  const folded = value.toLowerCase();
+  return folded.replace(/[\s\-_()!]+/g, '') || folded;
+}
+
 /** Does one row pass one column's filter? */
 export function matchesFilter(col: ModelColumn, item: BaseEntry, value: FilterValue): boolean {
   if (!isFilterActive(value)) return true;
@@ -52,8 +66,8 @@ export function matchesFilter(col: ModelColumn, item: BaseEntry, value: FilterVa
   if (isPresenceFilter(value)) return col.hasValue(item) === value.present;
 
   if (isSelectFilter(value)) {
-    const selected = new Set(value.selected.map(lower));
-    const has = col.values(item).some((v) => selected.has(lower(v)));
+    const selected = new Set(value.selected.map(facetKey));
+    const has = col.values(item).some((v) => selected.has(facetKey(v)));
     return value.exclude ? !has : has;
   }
 
@@ -118,8 +132,8 @@ export interface FacetOption {
 }
 
 /**
- * The values of a column across `rows` with how many rows have each. Values
- * differing only by case are one option (shown in its most common spelling).
+ * The values of a column across `rows` with how many rows have each. Spellings
+ * of one value (see `facetKey`) are one option, shown as it is most often written.
  * Ordered by count, then alphabetically.
  */
 export function countFacet(col: ModelColumn, rows: BaseEntry[]): FacetOption[] {
@@ -128,7 +142,7 @@ export function countFacet(col: ModelColumn, rows: BaseEntry[]): FacetOption[] {
     // A row counts once per value even if it lists the value twice
     const seen = new Set<string>();
     for (const value of col.values(row)) {
-      const key = lower(value);
+      const key = facetKey(value);
       if (seen.has(key)) continue;
       seen.add(key);
       let group = groups.get(key);

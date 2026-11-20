@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { X } from 'lucide-react';
 import type { BaseEntry } from '~/lib/types';
-import { countFacet, numericRange } from '~/lib/table-model';
+import { countFacet, facetKey, numericRange } from '~/lib/table-model';
 import {
   isBooleanFilter,
   isDateFilter,
@@ -156,21 +156,21 @@ function SelectFilter({
   const excluding = selected.length > 0 ? exclude : pendingExclude;
 
   const options = useMemo(() => {
-    const counts = new Map(countFacet(column, rows).map((o) => [o.value.toLowerCase(), o.count]));
+    const counts = new Map(countFacet(column, rows).map((o) => [facetKey(o.value), o.count]));
     const all = countFacet(column, allRows).map((o) => ({
       value: o.value,
-      count: counts.get(o.value.toLowerCase()) ?? 0,
+      count: counts.get(facetKey(o.value)) ?? 0,
     }));
     // Selected values no entry has any more (stale link): still show them so
     // they can be unticked
-    const known = new Set(all.map((o) => o.value.toLowerCase()));
+    const known = new Set(all.map((o) => facetKey(o.value)));
     for (const s of selected) {
-      if (!known.has(s.toLowerCase())) all.push({ value: s, count: 0 });
+      if (!known.has(facetKey(s))) all.push({ value: s, count: 0 });
     }
     return all.sort((a, b) => b.count - a.count || a.value.localeCompare(b.value));
   }, [column, rows, allRows, selected]);
 
-  const isSelected = (opt: string) => selected.some((s) => s.toLowerCase() === opt.toLowerCase());
+  const isSelected = (opt: string) => selected.some((s) => facetKey(s) === facetKey(opt));
 
   const visible = search
     ? options.filter((o) => o.value.toLowerCase().includes(search.toLowerCase()))
@@ -182,9 +182,7 @@ function SelectFilter({
 
   const toggleOption = (opt: string) => {
     commit(
-      isSelected(opt)
-        ? selected.filter((s) => s.toLowerCase() !== opt.toLowerCase())
-        : [...selected, opt]
+      isSelected(opt) ? selected.filter((s) => facetKey(s) !== facetKey(opt)) : [...selected, opt]
     );
   };
 

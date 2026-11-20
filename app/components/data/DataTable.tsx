@@ -22,6 +22,7 @@ import { newIssueUrl } from '~/lib/site';
 import {
   applyFilters,
   buildSearchText,
+  facetKey,
   matchesSearch,
   searchScore,
   searchTerms,
@@ -501,9 +502,9 @@ export function DataTable({ data, fields, category }: DataTableProps) {
 
       const select = current && isSelectFilter(current) ? current : undefined;
       const selected = select?.selected ?? [];
-      const has = selected.some((s) => s.toLowerCase() === value.toLowerCase());
+      const has = selected.some((s) => facetKey(s) === facetKey(value));
       const next = has
-        ? selected.filter((s) => s.toLowerCase() !== value.toLowerCase())
+        ? selected.filter((s) => facetKey(s) !== facetKey(value))
         : [...selected, value];
       setColumnFilter(
         col.key,
