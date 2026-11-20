@@ -1,10 +1,8 @@
-name: NS8808
+name: HD8808
 status: active
 release_year: 2018
 creator: Newstar LED Co.
-notes: Same protocol as WS2815 and sold as its drop-in replacement (12 V, dual signal).
-aliases:
-  - HD8808
+notes: 12 V 5050 RGB LED built around Newstar's NS8808 IC. Same protocol as WS2815 and sold as its drop-in replacement (12 V, dual signal).
 color:
   order: RGB
   brightness_bits: 8
@@ -22,12 +20,12 @@ electrical:
   gpio:
     min: 3.5V
     max: 5V
-  channel_current: 9.0mA
+  channel_current: 17.5mA
   quiescent_current: 2.0mA
-  wattage: 45mW
+  wattage: 200mW
   led_voltage_notes: Datasheet range 10.8-13.2V
 images:
-  - file: ns8808.webp
+  - file: hd8808.webp
     source: http://www.newstar-ledstrip.com/productshow855.html
     credit: Newstar LED
 other_links:
@@ -37,6 +35,12 @@ physical:
     - '5050'
   pin_count: 6
 related:
+  - type: uses
+    ref: pixel-ics/ns8808
+    notes: 'Newstar lists the LED as "NS8808 HD8808" with "IC Type:NS8808": NS8808 is the IC, HD8808 the LED.'
+    source:
+      url: http://newstar-ledstrip.com/productshow855.html
+      retrieved: '2026-11-20'
   - type: compatible
     ref: pixels/ws2815
     notes: Maker states protocol compatibility and drop-in replacement for WS2815 (12 V, dual signal).
@@ -44,10 +48,14 @@ related:
       url: https://web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html
       retrieved: '2026-11-18'
 sources:
-  aliases:
+  electrical.channel_current:
     url: http://newstar-ledstrip.com/productshow855.html
-    retrieved: '2026-11-18'
-    notes: Newstar lists the part as "NS8808 HD8808 DC12V Pixel LED Chip replace WS2815", the same NS/HD naming as NS107S/HD107S and NS108/HD108.
+    retrieved: '2026-11-20'
+    notes: '"Default 17.5mA constant current output, the minimum is 11mA". The sheet''s 9 mA has no source.'
+  electrical.wattage:
+    url: http://newstar-ledstrip.com/productshow855.html
+    retrieved: '2026-11-20'
+    notes: '"Max Power:0.2W" (12 V x 17.5 mA = 210 mW). The sheet''s 45 mW has no source.'
   data.type:
     url: https://web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html
     retrieved: '2026-11-18'

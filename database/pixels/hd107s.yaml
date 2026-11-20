@@ -9,9 +9,7 @@ vendors:
     page: https://www.rose-lighting.com/products/fastest-digital-addressable-rgb-5050led-chip-hd107s/
   - name: Hida
     page: https://www.hd107s-led.com/product-category/hd107s-led-chip/
-notes: Newstar's NS107S, sold as HD107S. Upgrade of APA107 with the APA102 protocol and 26 kHz PWM.
-aliases:
-  - NS107S
+notes: 5050 RGB LED built around Newstar's NS107S IC. Upgrade of APA107 with the APA102 protocol and 26 kHz PWM.
 color:
   order: BGR
   brightness_bits: 8+5
@@ -62,6 +60,12 @@ price_source:
   url: https://www.aliexpress.us/w/wholesale-HD107S.html
   vendor: AliExpress (street)
 related:
+  - type: uses
+    ref: pixel-ics/ns107s
+    notes: 'Newstar lists each LED as "NS107S HD107S": NS107S is the IC, HD107S the LED.'
+    source:
+      url: http://newstar-ledstrip.com/productshow818.html
+      retrieved: '2026-11-20'
   - type: predecessor
     ref: pixels/apa107
     notes: 'Newstar: NS107S/HD107S is the upgrade of APA107 (same APA102 frame, 26-27 kHz PWM).'
@@ -75,10 +79,6 @@ related:
       url: https://web.archive.org/web/20220216171018/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
       retrieved: '2026-11-18'
 sources:
-  aliases:
-    url: http://newstar-ledstrip.com/productshow818.html
-    retrieved: '2026-11-18'
-    notes: 'Newstar lists the part as "NS107S HD107S 5050 RGB Pixel LED Chip"; its Pixel LED Chip catalog (products.asp?sid=195&tid=274) has NS107S HD107S in 2020, 3535, 5050 and white versions.'
   creator:
     url: https://www.ledstrip-newstar.com/hd107s-led-details/
     retrieved: '2026-11-18'

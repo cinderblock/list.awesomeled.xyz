@@ -1,0 +1,52 @@
+name: NS8808
+status: active
+release_year: 2018
+creator: Newstar LED Co.
+manufacturers:
+  - Newstar LED Co.
+notes: Newstar's 12 V RGB driver IC with a backup data input, the chip inside the HD8808 LED. Sold as a drop-in replacement for the WS2815.
+color:
+  channel_bits: 8
+  aggregate_bits: 24
+  pwm_frequency: 8.0kHz
+  pwm_frequency_notes: 12-bit built-in gamma correction on the PWM
+data:
+  type: WS2811/12
+  clocked: false
+  channels: 3
+  bitrate: 800kHz
+  pixel_size_bits: 24
+  backup_line: true
+datasheet:
+  url: https://web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html
+  discrepancies:
+    - Newstar's NS8808 page names the GE8808B in one sentence of its description ("the GE8808B use the e-RZ ... as the signal transmission mode"), apparently text carried over from that chip's datasheet.
+electrical:
+  supply_voltage: 12V
+  supply_voltage_notes: Input range 9-15 V; the regulator (7805-type) is built-in
+  output_voltage: 12V
+  output_voltage_notes: Voltage endurance of the LED outputs
+  max_current: 17.5mA
+  max_current_notes: Default constant-current output; the minimum is 11 mA
+other_links:
+  - http://newstar-ledstrip.com/productshow855.html
+physical:
+  packages:
+    - '5050'
+sources:
+  creator:
+    url: http://newstar-ledstrip.com/productshow855.html
+    retrieved: '2026-11-20'
+    notes: 'Newstar lists the LED as "NS8808 HD8808 DC12V Pixel LED Chip replace WS2815", with "IC Type:NS8808".'
+  status:
+    url: http://newstar-ledstrip.com/products.asp?sid=195&tid=274
+    retrieved: '2026-11-20'
+    notes: NS8808 HD8808 DC12V listed in Newstar's Pixel LED Chip catalog (inquiry, no price)
+  data.type:
+    url: http://newstar-ledstrip.com/productshow855.html
+    retrieved: '2026-11-20'
+    notes: '"Use e-RZ code, serial data frequency 800kHz"; "8bits data transfer, 12bits build-in GAMMA correction of PWM display"; two-signal data input for redundancy'
+  electrical.max_current:
+    url: http://newstar-ledstrip.com/productshow855.html
+    retrieved: '2026-11-20'
+    notes: '"Default 17.5mA constant current output, the minimum is 11mA"; "Max Power:0.2W"'

@@ -1,0 +1,65 @@
+name: NS107S
+status: active
+release_year: 2017
+creator: Newstar LED Co.
+manufacturers:
+  - Newstar LED Co.
+notes: Newstar's clocked RGB driver IC, the chip inside the HD107S LED. APA102 frame with ~27 kHz PWM; Newstar's upgrade of the APA107.
+color:
+  channel_bits: 8
+  aggregate_bits: 24
+  brightness_bits: 5
+  brightness_method: global
+  pwm_frequency: 27.0kHz
+  pwm_frequency_notes: Newstar's NS107S page says ">27kHz"
+data:
+  type: APA102
+  clocked: true
+  channels: 3
+  bitrate: 30MHz
+  bitrate_notes: Newstar's NS107S page and spec give ">30Mhz"; Rose Lighting's HD107S spec gives 40 MHz
+  pixel_size_bits: 32
+  backup_line: false
+datasheet:
+  url: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+  sources:
+    - url: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+      host: manufacturer
+      notes: Newstar's NS107S spec, Wayback capture (the newstar-ledstrip.com file now returns 404)
+electrical:
+  supply_voltage: 5V
+  gpio:
+    min: 3.4V
+    max: 5V
+  max_current: 20mA
+  max_current_notes: '"Build-20ma constant current output"'
+  quiescent_current: 0.1mA
+other_links:
+  - http://newstar-ledstrip.com/productshow818.html
+  - https://www.advateklighting.com/pixel-protocols/hd107s
+physical:
+  packages:
+    - '5050'
+    - '3535'
+    - '2020'
+sources:
+  creator:
+    url: http://newstar-ledstrip.com/productshow818.html
+    retrieved: '2026-11-20'
+    notes: 'Newstar: "NS107S/HD107S RGB LED Chip is a type ic for the three-color RGB Diming control strip and string". Its Pixel LED Chip catalog lists each LED as "NS107S HD107S": NS107S is the IC, HD107S the LED.'
+  status:
+    url: http://newstar-ledstrip.com/products.asp?sid=195&tid=274
+    retrieved: '2026-11-20'
+    notes: Newstar's Pixel LED Chip catalog lists NS107S HD107S in 2020, 3535, 5050 and white 5050, plus an NS107S-SA.
+  release_year:
+    url: https://web.archive.org/web/20220216171258/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+    retrieved: '2026-11-18'
+    notes: The sheet's NS107S row says 2017; the NS107S spec's sample reel label is dated 2018-03-03.
+  color.pwm_frequency:
+    url: http://newstar-ledstrip.com/productshow818.html
+    retrieved: '2026-11-20'
+    notes: '"PWM refresh rate: >27kHz, Oscillator frequency: >30Mhz"'
+  data.type:
+    url: https://web.archive.org/web/20220216171258/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+    retrieved: '2026-11-18'
+    notes: Same frame as the APA102 (per LED 111, a 5-bit global brightness, then blue, green, red). Rose Lighting's HD107S spec is a reworded copy of this one.

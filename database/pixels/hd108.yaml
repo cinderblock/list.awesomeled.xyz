@@ -9,9 +9,7 @@ manufacturers:
 vendors:
   - name: Rose Lighting
     page: https://www.rose-lighting.com/products/hd108-rgb-5050-pixel-led-chip-with-gray-lever-65536/
-notes: Newstar's NS108, sold as HD108. The 16-bit upgrade of NS107S/HD107S, with a 5-bit current gain per color.
-aliases:
-  - NS108
+notes: 5050 RGB LED built around Newstar's NS108 IC. The 16-bit upgrade of the HD107S, with a 5-bit current gain per color.
 color:
   order: RGB
   brightness_bits: 16+5
@@ -64,6 +62,12 @@ price_source:
   url: https://www.aliexpress.us/w/wholesale-HD108-chip.html
   vendor: AliExpress (street)
 related:
+  - type: uses
+    ref: pixel-ics/ns108
+    notes: 'Newstar lists each LED as "NS108 HD108": NS108 is the IC, HD108 the LED.'
+    source:
+      url: http://newstar-ledstrip.com/productshow847.html
+      retrieved: '2026-11-20'
   - type: predecessor
     ref: pixels/hd107s
     notes: 'Newstar: NS108/HD108 is the 16-bit upgrade of NS107S/HD107S.'
@@ -71,10 +75,6 @@ related:
       url: https://web.archive.org/web/20230131080044/http://newstar-ledstrip.com/product/20220705164520116.pdf
       retrieved: '2026-11-18'
 sources:
-  aliases:
-    url: http://newstar-ledstrip.com/productshow847.html
-    retrieved: '2026-11-18'
-    notes: 'Newstar lists the part as "NS108 HD108 5050 RGB Pixel LED Chip" ("NS108/HD108 LED is the upgrade type of NS107S"); its Pixel LED Chip catalog also has NS108 HD108 2020.'
   creator:
     url: https://web.archive.org/web/20230131080044/http://newstar-ledstrip.com/product/20220705164520116.pdf
     retrieved: '2026-11-18'

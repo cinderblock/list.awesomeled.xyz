@@ -33,11 +33,16 @@ export const ALIASES: Record<string, Record<string, string>> = {
       'controllers/pixel-octo',
   },
   Pixels: {
-    // Newstar's part numbers for the LEDs sold as HD107S / HD108 (Newstar
-    // lists "NS107S HD107S", "NS108 HD108"); merged into the HD entries
-    // (plans/database-review.md, removed-entry map)
+    // Newstar's IC part numbers. Newstar lists each LED as "NS107S HD107S",
+    // "NS108 HD108", "NS8808 HD8808": the LEDs are the HD pixels, and the ICs
+    // have their own pixel-ics entries. These Pixels-tab rows describe the LEDs.
     NS107S: 'pixels/hd107s',
     NS108: 'pixels/hd108',
+    NS8808: 'pixels/hd8808',
+    // The HD rows' Advatek protocol links also sit on the IC entries; the
+    // rows describe the LEDs
+    HD107S: 'pixels/hd107s',
+    HD108: 'pixels/hd108',
   },
   'Pattern Drivers': {
     // The sheet's typo; the project is cyberboy666's artnet_led_mapper
