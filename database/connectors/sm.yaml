@@ -61,6 +61,12 @@ sources:
     url: https://www.jst-mfg.com/product/detail_e.php?series=238
     retrieved: '2026-11-18'
     notes: 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 18
+  mechanical.rows:
+    url: https://www.jst-mfg.com/product/detail_e.php?series=238
+    retrieved: '2026-11-18'
+    notes: 'Array: "Single-row, Dual-row"'
+technical_notes:
+  - JST also makes dual-row SM housings; LED strips use the single-row ones
 termination:
   solder: true
   crimp: true
