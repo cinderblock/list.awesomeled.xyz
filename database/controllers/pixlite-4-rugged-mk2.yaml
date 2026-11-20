@@ -19,7 +19,7 @@ outputs:
   driver:
     buffered: true
   pixels:
-    max_per_output: 85 # 680 total across 8 outputs
+    max_per_output: 340 # 2720 total across 8 outputs (expanded mode); 680 on each of the 4 outputs otherwise
   clocked: selectable # single or clock-based pixels
   protocols:
     - APA102
@@ -96,6 +96,10 @@ sources:
     url: https://www.advateklighting.com/products/shop/pixlite-4-rugged-mk2
     retrieved: '2026-11-18'
     notes: 'flagged discontinued, "Limited stock available - contact us"'
+  outputs.pixels.max_per_output:
+    url: https://cdn.sanity.io/files/3y31615s/production/487c91bb8db95d317405bec8907856ca06591aa4.pdf
+    retrieved: '2026-11-20'
+    notes: "PixLite 4 Rugged Mk2 User Manual V20260429, 5.3 Outputs: 'Each of the 4 outputs on the PixLite 4 Rugged Mk2 can drive up to 4 universes of data. This allows for a total of up to 16 universes'; 3.5 Expanded Mode: 'the controller effectively has twice as many pixel outputs (8), but half as many pixels per output can be run'. At 170 RGB pixels a universe that is 680 per output, or 340 on each of the 8 expanded-mode outputs that outputs.count records. The earlier 85 was 680 divided by 8"
   outputs.protocols:
     url: https://www.advateklighting.com/pixel-protocols
     retrieved: '2026-11-18'
