@@ -254,6 +254,13 @@ export const CONTROLLERS: BaseEntry[] = [
     power: { voltage: { min: 100, max: 240 }, ac: true, output_voltage: 5, current: { max: 40 } },
     price: 600,
   }),
+  // Its protocol list names makers, not parts
+  entry('prefixes', {
+    name: 'Prefixes',
+    outputs: { count: 4, clocked: 'selectable', protocols: ['WS', 'APA', 'SK'] },
+  }),
+  // A matrix-panel driver: none of its outputs takes a pixel string
+  entry('panels', { name: 'Panels', outputs: { count: 6, protocols: ['HUB75', 'HUB75E'] } }),
 ];
 
 export const MICROBOARDS: BaseEntry[] = [
@@ -326,6 +333,23 @@ export const ADAPTERS: BaseEntry[] = [
     parent: 'ESP Board',
     related: [{ type: 'host', ref: 'microboards/esp' }],
   }),
+  // Its outputs are for matrix panels
+  entry('panelcape', {
+    name: 'Panel Cape',
+    outputs: { count: 6, protocols: ['HUB75'] },
+    parent: 'PiBoard',
+    related: [{ type: 'host', ref: 'microboards/pi' }],
+  }),
+  // The only level converter on board is a line transceiver, there for DMX
+  entry('dmxshield', {
+    name: 'DMX Shield',
+    outputs: { count: 2, clocked: 'selectable' },
+    parent: 'ESP Board',
+    related: [
+      { type: 'host', ref: 'microboards/esp' },
+      { type: 'uses', ref: 'level-converters/rs485' },
+    ],
+  }),
 ];
 
 export const LEVEL_CONVERTERS: BaseEntry[] = [
@@ -360,6 +384,12 @@ export const LEVEL_CONVERTERS: BaseEntry[] = [
     name: 'Differential Receiver',
     io: { channels: 4, buffered: true, differential: true },
     price: 22,
+  }),
+  // An RS-485 transceiver on a 3.3 V supply: differential by its record, not its name
+  entry('rs485', {
+    name: 'Line Transceiver',
+    io: { channels: 1, differential: true },
+    electrical: { supply_voltage: '3-3.6V' },
   }),
 ];
 

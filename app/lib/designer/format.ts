@@ -64,6 +64,23 @@ export function fmtCost(low: number, high?: number | null, from = false): string
   return from && low > 0 ? `${fmtUsd(low)}+` : fmtUsd(low);
 }
 
+/** Package families that go into a breadboard or perfboard */
+const THROUGH_HOLE = /^(P?DIP|SIP)-/;
+
+/**
+ * The packages a part comes in, as one short phrase. A through-hole package
+ * is named when there is one, since that is the one to wire by hand;
+ * otherwise the first couple of surface-mount ones.
+ * "DIP-14 (through-hole)", "surface-mount (SOT-23-5, SC-70-5)"
+ */
+export function fmtPackages(packages: string[]): string | null {
+  if (packages.length === 0) return null;
+  const throughHole = packages.find((p) => THROUGH_HOLE.test(p));
+  if (throughHole) return `${throughHole} (through-hole)`;
+  const shown = packages.slice(0, 2).join(', ');
+  return `surface-mount (${shown}${packages.length > 2 ? ', …' : ''})`;
+}
+
 /** Metres with a feet hint: "2 m (6.6 ft)" */
 export function fmtMeters(meters: number): string {
   return `${fmt(meters, 1)} m (${fmt(meters * 3.28084, 1)} ft)`;

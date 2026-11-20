@@ -317,8 +317,8 @@ test.describe('System Designer: checks', () => {
     expect(order.indexOf('sn74ahct125n')).toBeGreaterThanOrEqual(0);
     expect(order.indexOf('sn74ahct125n')).toBeLessThan(order.indexOf('74hc245'));
     expect(order.indexOf('sn74ahct125n')).toBeLessThan(order.indexOf('txs0108e'));
-    // A pass-gate translator reads 3.3 V fine but can't drive the cable
-    await expect(shifters.locator('[data-id="txs0108e"]')).toContainText('pass-gate');
+    // A translator for chip-to-chip links reads 3.3 V fine but can't drive the cable
+    await expect(shifters.locator('[data-id="txs0108e"]')).toContainText('too weak');
   });
 
   test('software that can’t be confirmed for a controller says why', async ({ page }) => {

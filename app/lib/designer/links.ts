@@ -6,13 +6,21 @@
  */
 import type { RelationGraph } from '../relations';
 import type { BaseEntry } from '../types';
-import { buildAdapterOption, buildBoardOption, buildSourceOption, isUsableSource } from './catalog';
+import {
+  buildAdapterOption,
+  buildBoardOption,
+  buildControllerOption,
+  buildSourceOption,
+  isPanelOnly,
+  isUsableSource,
+} from './catalog';
 
 /**
  * The link that starts a design from one database entry, with the part
  * already in its slot. Null when the designer has no slot for the entry: a
- * category it doesn't use, or a part it can't offer yet (a dev board with no
- * pixel outputs recorded, an adapter without a host board in the database).
+ * category it doesn't use, or a part it can't offer (a dev board with no
+ * pixel outputs recorded, an adapter without a host board in the database,
+ * hardware that only drives matrix panels).
  */
 export function designerHref(
   categoryId: string,
@@ -27,7 +35,7 @@ export function designerHref(
     case 'pixel-ics':
       return link('p', `ic-${id}`);
     case 'controllers':
-      return link('c', id);
+      return isPanelOnly(buildControllerOption(entry, graph)) ? null : link('c', id);
     case 'microboards':
       return buildBoardOption(entry) ? link('c', `mb-${id}`) : null;
     case 'adapters': {

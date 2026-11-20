@@ -127,6 +127,13 @@ export function protocolSupport(
         return { support: 'family', via: listed };
       }
     }
+    // "WS", "SK", "APA": a maker's prefix alone stands for its whole range
+    if (
+      /^[a-z]{2,4}$/.test(key) &&
+      [...tokens].some((t) => t.startsWith(key) && /^\d/.test(t.slice(key.length)))
+    ) {
+      return { support: 'family', via: listed };
+    }
   }
   return { support: 'unlisted' };
 }
@@ -516,7 +523,7 @@ export function evaluateShifter(
     add(
       'warning',
       'shifter-differential',
-      `${shifter.name} is a differential line receiver, not a logic-level buffer.`,
+      `${shifter.name} works on differential pairs (RS-485 style); it isn't a logic-level buffer.`,
       'It pairs with a controller that has differential (long-range) outputs.'
     );
   }
@@ -548,14 +555,16 @@ export function evaluateShifter(
       );
     }
   }
-  // Can it drive the cable? Pass-gate translators hold the line high through
-  // a pull-up resistor: fine between chips, not down a lead to the pixels.
+  // Can it drive the cable? Translators made for links between chips hold the
+  // line through a resistor (a pull-up on pass-gate parts, a series resistor
+  // on auto-direction ones): fine on a circuit board, not down a lead to the
+  // pixels.
   if (shifter.buffered === false) {
     add(
       'warning',
       'shifter-drive',
-      `${shifter.name} is a pass-gate translator: its pull-up outputs can't drive a cable to the pixels.`,
-      'Choose a buffer with push-pull outputs.'
+      `${shifter.name} is made for short links between chips: its outputs are too weak to drive a cable to the pixels.`,
+      'Choose a buffer made to drive a line, such as a 74HCT or 74AHCT part.'
     );
   }
   if (controller && pixel && levelNeed(controller, pixel) === 'ok') {

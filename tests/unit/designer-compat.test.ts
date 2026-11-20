@@ -213,6 +213,20 @@ describe('vendor protocol lists', () => {
     expect(result.via).toBe('WS281x');
   });
 
+  test('a maker’s prefix alone ("WS", "APA") stands for its whole range', () => {
+    const ws = protocolSupport(controller('prefixes'), pixel('rgb5'));
+    expect(ws).toEqual({ support: 'family', via: 'WS' });
+    expect(protocolSupport(controller('prefixes'), pixel('clk5'))).toEqual({
+      support: 'family',
+      via: 'APA',
+    });
+    // Another maker's part is still not on the list
+    expect(protocolSupport(controller('prefixes'), pixel('deep5')).support).toBe('unlisted');
+    // A prefix is letters followed by the part number, not the start of a word
+    const loose = { ...controller('prefixes'), listedProtocols: ['WI'] };
+    expect(protocolSupport(loose, pixel('wide')).support).toBe('unlisted');
+  });
+
   test('a list that matches nothing is a warning, not an error', () => {
     expect(protocolSupport(controller('async4'), pixel('wide')).support).toBe('unlisted');
     const result = fit(controller('wild8'), pixel('clk5'), { strings: 1, perString: 100 });
@@ -414,6 +428,18 @@ describe('level shifters', () => {
     expect(codes(right.issues)).not.toContain('shifter-differential');
   });
 
+  test('an RS-485 transceiver is no logic-level buffer either', () => {
+    const result = evaluateShifter(shifter('rs485'), {
+      controller: controller('mb-esp'),
+      pixel: pixel('rgb5'),
+      lines: 1,
+    });
+    expect(find(result.issues, 'shifter-differential')?.severity).toBe('warning');
+    // On a 3.3 V supply it can't reach the pixels' logic level at all
+    expect(find(result.issues, 'shifter-voltage')?.severity).toBe('error');
+    expect(result.ok).toBe(false);
+  });
+
   test('a buffer with TTL-level inputs reads a 3.3 V controller', () => {
     const result = evaluateShifter(shifter('quad'), {
       controller: controller('mb-esp'),
@@ -454,14 +480,20 @@ describe('level shifters', () => {
     expect(codes(fine.issues)).not.toContain('shifter-threshold');
   });
 
-  test('a pass-gate translator can’t drive the cable to the pixels', () => {
+  test('a translator made for chip-to-chip links can’t drive the cable to the pixels', () => {
     const result = evaluateShifter(shifter('passgate'), {
       controller: controller('mb-esp'),
       pixel: pixel('rgb5'),
       lines: 1,
     });
-    expect(find(result.issues, 'shifter-drive')?.severity).toBe('warning');
+    const issue = find(result.issues, 'shifter-drive');
+    expect(issue?.severity).toBe('warning');
+    // Says what is wrong without naming an architecture the part may not have
+    expect(issue?.message).toContain('too weak to drive a cable');
+    expect(issue?.fix).toContain('74HCT');
     expect(codes(result.issues)).not.toContain('shifter-threshold');
+    // Still usable: a warning, since it often works on a short lead
+    expect(result.ok).toBe(true);
   });
 
   test('parts with nothing recorded are not second-guessed', () => {

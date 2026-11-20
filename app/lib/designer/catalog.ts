@@ -691,26 +691,43 @@ export function buildControllerOption(
   };
 }
 
+/** Matrix-panel interfaces ("HUB75", "HUB75E", "HUB08"): rows of LEDs, not pixel strings */
+const PANEL_INTERFACE = /^hub[\s-]?\d+[a-z]?$/i;
+
 /**
- * A bare microboard as a controller candidate: usable pixel outputs come from
- * io.max_outputs (firmware-documented); most other specs are honestly unknown
- * and surface as "verify" notes. Returns null when the board records no
- * pixel-output capability.
+ * Every output protocol it lists is a panel interface: it drives LED matrix
+ * panels, which the designer doesn't lay out. Hardware that lists nothing,
+ * or a pixel protocol alongside, is not panel-only.
  */
+export function isPanelOnly(option: Pick<ControllerOption, 'listedProtocols'>): boolean {
+  return (
+    option.listedProtocols.length > 0 &&
+    option.listedProtocols.every((protocol) => PANEL_INTERFACE.test(protocol.trim()))
+  );
+}
+
 /**
  * A shield, cape or HAT from /adapters: pixel outputs for a dev board. It is
  * offered once the database knows how many outputs it has and which board it
  * sits on (a `host` link to /microboards); that board joins the parts list.
+ *
+ * `buffers` are the refs of the level converters that put 5 V logic on a
+ * data line (see isDataBuffer); without it, any level converter counts.
  */
 export function buildAdapterOption(
   entry: BaseEntry,
-  graph?: RelationGraph
+  graph?: RelationGraph,
+  buffers?: ReadonlySet<string>
 ): ControllerOption | null {
   const base = buildControllerOption(entry, graph, 'adapters');
   if (base.outputs == null || base.outputs < 1 || base.hostIds.length === 0) return null;
+  if (isPanelOnly(base)) return null;
   // Built around a buffer IC: its outputs are driven at that buffer's level
   const hasBuffer = (graph?.outgoing.get(base.ref) ?? []).some(
-    (edge) => edge.kind === 'uses' && edge.to.startsWith('level-converters/')
+    (edge) =>
+      edge.kind === 'uses' &&
+      edge.to.startsWith('level-converters/') &&
+      (buffers == null || buffers.has(edge.to))
   );
   return {
     ...base,
@@ -729,6 +746,12 @@ function boardTokens(entry: BaseEntry): string[] {
     .map(normalizeName);
 }
 
+/**
+ * A bare microboard as a controller candidate: usable pixel outputs come from
+ * io.max_outputs (firmware-documented); most other specs are honestly unknown
+ * and surface as "verify" notes. Returns null when the board records no
+ * pixel-output capability.
+ */
 export function buildBoardOption(entry: BaseEntry): ControllerOption | null {
   const io = dict(entry.io);
   const outputs = num(io.max_outputs);
@@ -836,13 +859,17 @@ export interface ShifterOption {
   channels: number | null;
   /** Highest output-side supply it takes */
   maxVoltage: number | null;
-  /** Packages it comes in ("DIP-14, SOIC-14") */
-  interface?: string;
+  /** IC packages it comes in, as recorded ("DIP-14", "SOIC-14"); none for boards */
+  packages: string[];
   /** Lowest input it reads as high when powered for 5 V output (datasheet VIH) */
   inputHighMin: number | null;
-  /** Push-pull outputs that can drive a cable; false for pass-gate / pull-up translators */
+  /**
+   * Outputs strong enough to drive a cable; false for translators made for
+   * short links between chips (pass-gate parts with pull-ups, auto-direction
+   * parts that drive through a series resistor)
+   */
   buffered: boolean | null;
-  /** A differential line receiver, not a logic-level buffer */
+  /** Works on differential pairs (a line receiver, an RS-485 transceiver): not a logic-level buffer */
   differential: boolean;
   price: PriceInfo;
 }
@@ -862,12 +889,25 @@ export function buildShifterOption(entry: BaseEntry): ShifterOption {
     status: str(entry.status),
     channels: num(io.channels),
     maxVoltage: supply ? (supply.max ?? supply.value) : looseVoltage(el.max_voltage),
-    interface: packages.length ? packages.join(', ') : undefined,
+    packages,
     inputHighMin: nominalVoltage(el.input_high_voltage),
-    buffered: typeof io.buffered === 'boolean' ? io.buffered : null,
+    // A part that senses direction by itself has to let the other side
+    // overdrive it, so its outputs are weak by design: no recorded
+    // `buffered` needed to know that
+    buffered:
+      typeof io.buffered === 'boolean' ? io.buffered : io.direction === 'auto' ? false : null,
     differential: io.differential === true || /differential/i.test(entry.name),
     price: buildPrice(entry),
   };
+}
+
+/**
+ * Can this part put the pixels' 5 V logic on a data line? An adapter built
+ * around one sends data at that level. An RS-485 transceiver on the same
+ * board is there for DMX, and says nothing about the pixel outputs.
+ */
+export function isDataBuffer(shifter: ShifterOption): boolean {
+  return !shifter.differential && (shifter.maxVoltage == null || shifter.maxVoltage >= 4.5);
 }
 
 // ---------------------------------------------------------------------------
@@ -1038,14 +1078,17 @@ export function buildCatalog(db: Database, graph?: RelationGraph): Catalog {
     ];
     return option;
   };
-  const controllers = entries('controllers').map((e) =>
-    withFamilies(buildControllerOption(e, graph))
-  );
+  const controllers = entries('controllers')
+    .map((e) => withFamilies(buildControllerOption(e, graph)))
+    .filter((c) => !isPanelOnly(c));
+
+  const shifters = entries('level-converters').map(buildShifterOption).sort(byName);
+  const buffers = new Set(shifters.filter(isDataBuffer).map((s) => `level-converters/${s.id}`));
 
   const hosts = entries('microboards').map(buildHostOption).sort(byName);
   const hostIndex = new Map(hosts.map((h) => [h.id, h]));
   const adapters = entries('adapters')
-    .map((e) => buildAdapterOption(e, graph))
+    .map((e) => buildAdapterOption(e, graph, buffers))
     .filter((a): a is ControllerOption => a !== null)
     .map((a) => withFamilies(withHosts(a, hostIndex)))
     // Every host has left the database: nothing to plug it into
@@ -1055,7 +1098,7 @@ export function buildCatalog(db: Database, graph?: RelationGraph): Catalog {
     pixels,
     controllers: [...controllers.sort(byName), ...adapters.sort(byName), ...boards.sort(byName)],
     hosts,
-    shifters: entries('level-converters').map(buildShifterOption).sort(byName),
+    shifters,
     connectors: entries('connectors').map(buildConnectorOption).sort(byName),
     sources: entries('pattern-drivers').map(buildSourceOption).filter(isUsableSource).sort(byName),
   };

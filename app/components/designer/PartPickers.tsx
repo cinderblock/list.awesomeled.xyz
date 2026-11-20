@@ -8,6 +8,7 @@ import {
   costOf,
   fmtAmps,
   fmtCost,
+  fmtPackages,
   fmtVolts,
   isRetired,
   PROTOCOL_LABELS,
@@ -59,13 +60,16 @@ export function ShifterPicker({ shifters, group, onSelect }: ShifterPickerProps)
       const doubts = fit.issues.filter(
         (i) => i.code === 'shifter-threshold' || i.code === 'shifter-drive'
       ).length;
-      return { shifter, fit, doubts, cost, totalUSD: cost?.totalUSD ?? null };
+      // Neither flagged nor vouched for: a fact the checks need isn't recorded
+      const unjudged = shifter.inputHighMin == null || shifter.buffered == null;
+      return { shifter, fit, doubts, unjudged, cost, totalUSD: cost?.totalUSD ?? null };
     })
     .sort(
       (a, b) =>
         Number(b.shifter.id === selectedId) - Number(a.shifter.id === selectedId) ||
         Number(b.fit.ok) - Number(a.fit.ok) ||
         a.doubts - b.doubts ||
+        Number(a.unjudged) - Number(b.unjudged) ||
         Number(a.shifter.differential) - Number(b.shifter.differential) ||
         (a.totalUSD ?? Infinity) - (b.totalUSD ?? Infinity) ||
         a.shifter.name.localeCompare(b.shifter.name)
@@ -105,8 +109,12 @@ export function ShifterPicker({ shifters, group, onSelect }: ShifterPickerProps)
                       s.channels != null
                         ? `${s.channels} channel${s.channels === 1 ? '' : 's'}`
                         : 'channels?',
-                      s.interface,
-                      s.inputHighMin != null ? `reads ${fmtVolts(s.inputHighMin)} as high` : null,
+                      fmtPackages(s.packages),
+                      s.inputHighMin != null
+                        ? `reads ${fmtVolts(s.inputHighMin)} as high`
+                        : s.differential
+                          ? null
+                          : 'input threshold?',
                       s.maxVoltage != null ? `up to ${fmtVolts(s.maxVoltage)}` : null,
                     ]
                       .filter(Boolean)

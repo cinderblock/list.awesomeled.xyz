@@ -8,6 +8,9 @@ import {
   costOf,
   buildShifterOption,
   buildSourceOption,
+  fmtPackages,
+  isDataBuffer,
+  isPanelOnly,
   isRetired,
   nominalVoltage,
   parseIp,
@@ -232,6 +235,16 @@ describe('controller options', () => {
       [599, 4096],
     ]);
   });
+
+  test('hardware that only drives matrix panels is left out', () => {
+    expect(index.controllers.has('panels')).toBe(false);
+    expect(isPanelOnly({ listedProtocols: ['HUB75'] })).toBe(true);
+    expect(isPanelOnly({ listedProtocols: ['HUB75E', 'HUB 08', 'hub-12'] })).toBe(true);
+    // A pixel protocol alongside, or no list at all, keeps it in
+    expect(isPanelOnly({ listedProtocols: ['HUB75', 'WS2812B'] })).toBe(false);
+    expect(isPanelOnly({ listedProtocols: [] })).toBe(false);
+    expect(isPanelOnly({ listedProtocols: ['Hubble 75'] })).toBe(false);
+  });
 });
 
 describe('dev boards as controllers', () => {
@@ -270,9 +283,10 @@ describe('adapters as controllers', () => {
 
   test('offered once the outputs and the host board are known', () => {
     const ids = catalog.controllers.filter((c) => c.kind === 'adapter').map((c) => c.id);
-    expect(ids).toEqual(['ad-breakout2', 'ad-plain8', 'ad-shield4']);
+    expect(ids).toEqual(['ad-breakout2', 'ad-dmxshield', 'ad-plain8', 'ad-shield4']);
     expect(adapter('ad-orphan')).toBeUndefined(); // no host link
     expect(adapter('ad-noouts')).toBeUndefined(); // no outputs
+    expect(adapter('ad-panelcape')).toBeUndefined(); // panel outputs only
   });
 
   test('carries the shared controller facts and its own page', () => {
@@ -294,6 +308,12 @@ describe('adapters as controllers', () => {
     expect(adapter('ad-shield4')!.buffered).toBe(true);
     expect(adapter('ad-shield4')!.dataVoltage).toBeNull(); // buffered: 5 V by rule
     expect(adapter('ad-plain8')!.buffered).toBeNull();
+  });
+
+  test('a line transceiver on board says nothing about the pixel outputs', () => {
+    // It is there for DMX, and can't put 5 V logic on a data line anyway
+    expect(adapter('ad-dmxshield')!.buffered).toBeNull();
+    expect(adapter('ad-dmxshield')!.dataVoltage).toBeNull();
   });
 
   test('only outputs recorded as unbuffered take the host’s logic level', () => {
@@ -334,7 +354,31 @@ describe('level shifters, connectors and sources', () => {
       })
     );
     expect(ic.maxVoltage).toBe(5.5);
-    expect(ic.interface).toBe('SOT-23-5, SC-70-5');
+    expect(ic.packages).toEqual(['SOT-23-5', 'SC-70-5']);
+    // A board records none
+    expect(buildShifterOption(entry('b', { electrical: { max_voltage: 5 } })).packages).toEqual([]);
+  });
+
+  test('an auto-direction translator has weak outputs, recorded or not', () => {
+    const buffered = (io: Record<string, unknown>) =>
+      buildShifterOption(entry('x', { io })).buffered;
+    expect(buffered({ direction: 'auto' })).toBe(false);
+    // Other directions say nothing about drive; a recorded value always wins
+    expect(buffered({ direction: 'fixed' })).toBeNull();
+    expect(buffered({ direction: 'dir-pin' })).toBeNull();
+    expect(buffered({ direction: 'auto', buffered: true })).toBe(true);
+    expect(buffered({})).toBeNull();
+  });
+
+  test('a data buffer can put 5 V logic on a pixel line', () => {
+    const index = fixtureIndex();
+    expect(isDataBuffer(must(index.shifters, 'quad'))).toBe(true);
+    // No voltage recorded: not ruled out
+    expect(isDataBuffer(must(index.shifters, 'octal'))).toBe(true);
+    // Tops out at 3.6 V, or works on differential pairs
+    expect(isDataBuffer(must(index.shifters, 'lowv'))).toBe(false);
+    expect(isDataBuffer(must(index.shifters, 'rs485'))).toBe(false);
+    expect(isDataBuffer(must(index.shifters, 'diff'))).toBe(false);
   });
 
   test('connector ratings parse with or without a space before the unit', () => {
@@ -469,6 +513,18 @@ describe('prices', () => {
 });
 
 describe('helpers', () => {
+  test('packages are summed up by what a builder can solder', () => {
+    // A through-hole package is the one to name, wherever it is in the list
+    expect(fmtPackages(['SOIC-14', 'DIP-14', 'TSSOP-14'])).toBe('DIP-14 (through-hole)');
+    expect(fmtPackages(['PDIP-20'])).toBe('PDIP-20 (through-hole)');
+    // Surface-mount only: the first two, and a sign that there are more
+    expect(fmtPackages(['SOT-23-5', 'SC-70-5'])).toBe('surface-mount (SOT-23-5, SC-70-5)');
+    expect(fmtPackages(['TSSOP-20', 'VSSOP-20', 'VQFN-20'])).toBe(
+      'surface-mount (TSSOP-20, VSSOP-20, …)'
+    );
+    expect(fmtPackages([])).toBeNull();
+  });
+
   test('nominalVoltage', () => {
     expect(nominalVoltage('12V')).toBe(12);
     expect(nominalVoltage(5)).toBe(5);

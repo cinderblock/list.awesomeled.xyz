@@ -57,6 +57,9 @@ describe('links from entry pages into the designer', () => {
     expect(designerHref('adapters', pick(ADAPTERS, 'noouts'), graph)).toBeNull();
     // Software that neither sends a protocol nor runs on a board
     expect(designerHref('pattern-drivers', pick(PATTERN_DRIVERS, 'silent'), graph)).toBeNull();
+    // Hardware for matrix panels: the designer lays out pixel strings
+    expect(designerHref('controllers', pick(CONTROLLERS, 'panels'), graph)).toBeNull();
+    expect(designerHref('adapters', pick(ADAPTERS, 'panelcape'), graph)).toBeNull();
   });
 
   test('shifters, connectors and software go to their own slots', () => {
