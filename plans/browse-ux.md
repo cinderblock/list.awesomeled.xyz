@@ -85,7 +85,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**Current step: 12 (accessibility + performance).** Steps 1–8 are live. Steps 9–11 are committed on `ws/browse-ux` and being verified for the push (see the progress log for exactly where that stands).
+**Current step: 12 (accessibility + performance).** Steps 1–11 are live (9–11 as `d1d23db4..ee64cc82`).
 
 ## Findings / gotchas
 
@@ -133,6 +133,9 @@ Each step ships on its own (rebase, checks, push).
 - **A dev server whose first request times out stays broken**: Vite caches the failed server build and answers 500 instantly from then on. Restart it, wait, and make one patient first request (it took 52 s at 100 % CPU) before warming the rest.
 - **Column menus must fit the window.** The Creator menu is about 620 px tall; under a table header at 377 px on a 720 px screen it flipped upward and ran off the top (and hung off the bottom on taller screens). Anything added above the table (the category intro did it) moves the header and can tip this over. The menu now measures the room under its trigger when it opens and scrolls inside; an e2e test opens it in a 620 px window.
 
+- **Every prerendered path gets a `.data` twin**, including resource routes. For the 593 link-preview images that was 40 MB of unused upload per deploy (an image's `.data` is 2.5 times the image). `buildEnd` in `react-router.config.ts` deletes them, plus the sitemap's and robots.txt's.
+- **Another stream may rewrite a shared doc mid-flight.** CONTRIBUTING.md was rewritten by the database review between this stream's two rebases; the resolution was to take theirs whole and re-apply only what is this stream's (pointers to the site's contribute paths). Each category now has a `database/<category>/_example.yaml` (skipped by the loader, validated by `bun run validate`); `/contribute` links it.
+
 ## Progress log
 
 - [x] 2026-11-18 3:56 PM PST (23:56Z): read the build-out plan and the app; audited the live site and the sheet headlessly; measured the baseline build; wrote this plan.
@@ -152,7 +155,7 @@ Each step ships on its own (rebase, checks, push).
 - [x] Step 10 SEO / OpenGraph — `app/lib/meta.ts` (title, description, canonical, OpenGraph, Twitter card, JSON-LD) on every route; entry descriptions built from the entry's key facts; `/sitemap.xml`, `/robots.txt`; a drawn 1200×630 preview card for the site, each category and each entry (`/og/…jpg`); search and compare marked noindex.
 - [x] Step 11 contribution funnel — three GitHub issue forms (correction, new entry, site problem), `/contribute` with a field reference for every category generated from the schemas and the data plus a "start a new entry" link that opens GitHub's editor with a starter file, category intros from `database/*/description.md`, "Not on the list?" on an empty search, CONTRIBUTING.md rewritten to the current schema with examples a unit test validates.
 - [x] 2026-11-20 3:20 AM PST (11:20Z): steps 9–11 rebased onto 50 new upstream commits. Fast checks pass (typecheck, lint, format, 378 unit tests, validate 600/600). Full e2e: 126 of 128 passed; the two failures were the column menu running off a short window (fixed, test added, table + mobile files re-run 34/34). Dev-server data cache fixed on the way (`perf(dev)`).
-- [ ] Steps 9–11: production build + `test:prod` + live check, then push.
+- [x] 2026-11-20 3:42 AM PST (11:42Z): steps 9–11 pushed (`d1d23db4..ee64cc82`) after a second rebase (37 more commits; the database review had rewritten CONTRIBUTING.md, so this stream's edits there shrank to pointers at `/contribute`, the issue forms and Bun commands). 21 production tests pass on the build; CI green; checked live: preview images, `/sitemap.xml` (596 URLs), `/robots.txt`, `/contribute`, entry-page head tags and the contribute strip.
 - [ ] Step 12 accessibility + performance pass — axe in e2e, badge contrast in light mode, skip link, the entry image viewer as a real dialog, self-hosted Inter (drop the render-blocking Google Fonts stylesheet), lazy-load the filters drawer / column picker / export menu, bundle check.
 
 ## Open questions for the user
