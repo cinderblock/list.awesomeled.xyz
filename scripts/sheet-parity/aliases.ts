@@ -1,4 +1,4 @@
-// cspell:ignore differntial polyethelene reciever endlightent
+// cspell:ignore differntial electromage endlightent lucenti pixeldin pixnet pixout polyethelene reciever smartpxl
 /**
  * Sheet rows that can't be paired with their YAML entry automatically.
  *
