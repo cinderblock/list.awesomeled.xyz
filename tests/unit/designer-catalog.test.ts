@@ -23,7 +23,7 @@ import { entry, fixtureCatalog, fixtureIndex, must } from './fixtures';
 describe('pixel options', () => {
   const index = fixtureIndex();
 
-  test('full white is channel current × channels × voltage, never the per-channel wattage', () => {
+  test('full white is channel current × channels × voltage when the channel current is known', () => {
     const pixel = must(index.pixels, 'rgb5');
     expect(pixel.channels).toBe(3);
     expect(pixel.channelAmps).toBeCloseTo(0.02, 9);
@@ -45,11 +45,12 @@ describe('pixel options', () => {
     expect(pixel.backupLine).toBe(true);
   });
 
-  test('a lone wattage value is read as one channel', () => {
+  test('a lone wattage value is the whole pixel at full white', () => {
     const pixel = buildPixelOption(
-      entry('w', { color: { order: 'RGB' }, electrical: { led_voltage: '5V', wattage: '100mW' } })
+      entry('w', { color: { order: 'RGB' }, electrical: { led_voltage: '5V', wattage: '300mW' } })
     );
-    expect(pixel.ampsBasis).toBe('per-channel wattage');
+    expect(pixel.ampsBasis).toBe('pixel wattage');
+    expect(pixel.channelAmps).toBeCloseTo(0.02, 9);
     expect(pixelMaxWatts(pixel, 5)).toBeCloseTo(0.3, 9);
   });
 

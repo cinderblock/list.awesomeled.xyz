@@ -253,7 +253,7 @@ export interface PixelOption {
   logicMax: number | null;
   /** One colour channel fully on, in amps */
   channelAmps: number;
-  ampsBasis: 'datasheet' | 'per-channel wattage' | 'typical';
+  ampsBasis: 'datasheet' | 'pixel wattage' | 'typical';
   /** Datasheet channel limit when the typical figure was used instead */
   channelAmpsLimit?: number;
   /** Idle draw per pixel in amps */
@@ -330,10 +330,9 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
   const logicVoltage =
     nominalVoltage(el.supply_voltage) ?? (voltage != null && voltage <= 5.5 ? voltage : null);
 
-  // Full-white draw = one channel's current × channels × LED voltage. The
-  // database's electrical.wattage is ONE channel's power (it equals
-  // channel_current × led_voltage), so it only stands in for the per-channel
-  // figure — it is never a per-pixel number on its own.
+  // Full-white draw = one channel's current × channels × LED voltage. Without
+  // a channel current, the maker's whole-pixel power (electrical.wattage)
+  // stands in, shared evenly by the channels.
   const volts = voltage ?? 5;
   const current = parseQuantity(el.channel_current, 'current');
   const wattage = parseQuantity(el.wattage, 'power');
@@ -343,8 +342,8 @@ export function buildPixelOption(entry: BaseEntry): PixelOption {
     channelAmps = current.value;
     ampsBasis = 'datasheet';
   } else if (wattage) {
-    channelAmps = wattage.value / volts;
-    ampsBasis = 'per-channel wattage';
+    channelAmps = wattage.value / volts / shared.channels;
+    ampsBasis = 'pixel wattage';
   }
 
   // A wide-range part ("3-7.5V") may be run from any common rail inside it

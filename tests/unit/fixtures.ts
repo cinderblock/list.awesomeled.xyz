@@ -24,7 +24,7 @@ export const PIXELS: BaseEntry[] = [
     status: 'active',
     color: { order: 'GRB', channel_bits: 8 },
     data: { type: 'WS2811/12', clocked: false, bitrate: '800kHz', pixel_size_bits: 24 },
-    // wattage is ONE channel's power in the database
+    // channel_current wins over the maker's whole-pixel wattage
     electrical: {
       led_voltage: '5V',
       supply_voltage: '5V',

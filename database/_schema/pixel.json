@@ -155,7 +155,7 @@
           "$ref": "common.json#/definitions/current"
         },
         "wattage": {
-          "description": "Power per pixel",
+          "description": "The whole pixel's power at full white, as its maker states it",
           "$ref": "common.json#/definitions/power"
         }
       }
