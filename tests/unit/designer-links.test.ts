@@ -60,6 +60,8 @@ describe('links from entry pages into the designer', () => {
     // Hardware for matrix panels: the designer lays out pixel strings
     expect(designerHref('controllers', pick(CONTROLLERS, 'panels'), graph)).toBeNull();
     expect(designerHref('adapters', pick(ADAPTERS, 'panelcape'), graph)).toBeNull();
+    // A DMX node: no pixel outputs on record
+    expect(designerHref('controllers', pick(CONTROLLERS, 'dmxbox'), graph)).toBeNull();
   });
 
   test('shifters, connectors and software go to their own slots', () => {

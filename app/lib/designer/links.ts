@@ -11,7 +11,7 @@ import {
   buildBoardOption,
   buildControllerOption,
   buildSourceOption,
-  isPanelOnly,
+  drivesNoPixelStrings,
   isUsableSource,
 } from './catalog';
 
@@ -20,7 +20,7 @@ import {
  * already in its slot. Null when the designer has no slot for the entry: a
  * category it doesn't use, or a part it can't offer (a dev board with no
  * pixel outputs recorded, an adapter without a host board in the database,
- * hardware that only drives matrix panels).
+ * hardware that only drives matrix panels or DMX fixtures).
  */
 export function designerHref(
   categoryId: string,
@@ -35,7 +35,7 @@ export function designerHref(
     case 'pixel-ics':
       return link('p', `ic-${id}`);
     case 'controllers':
-      return isPanelOnly(buildControllerOption(entry, graph)) ? null : link('c', id);
+      return drivesNoPixelStrings(buildControllerOption(entry, graph)) ? null : link('c', id);
     case 'microboards':
       return buildBoardOption(entry) ? link('c', `mb-${id}`) : null;
     case 'adapters': {

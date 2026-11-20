@@ -519,7 +519,7 @@ export interface ControllerOption {
   name: string;
   image?: string;
   status?: string;
-  /** Pixel data outputs per unit */
+  /** Pixel data outputs per unit; 0 when the entry records only auxiliary outputs (DMX ports) */
   outputs: number | null;
   maxPerOutput: number | null;
   /** Device-wide pixel limit (quoted for 8-bit RGB), when the maker states one */
@@ -624,6 +624,11 @@ export function buildControllerOption(
   const software = dict(entry.software);
   const ref = `${category}/${entry.id}`;
 
+  // An outputs block that lists nothing but auxiliary outputs (DMX ports,
+  // relays) is the record of a device with no pixel outputs
+  const outputKeys = Object.keys(outputs);
+  const auxiliaryOnly = outputKeys.length > 0 && outputKeys.every((key) => key === 'auxiliary');
+
   const rawClocked = outputs.clocked;
   let clockedSupport: ControllerOption['clockedSupport'] = 'unknown';
   if (rawClocked === false || rawClocked === 'never') clockedSupport = 'async';
@@ -683,7 +688,7 @@ export function buildControllerOption(
     name: entry.name,
     image: imagePath(category, entry),
     status: str(entry.status),
-    outputs: num(outputs.count),
+    outputs: num(outputs.count) ?? (auxiliaryOnly ? 0 : null),
     maxPerOutput: num(pixels.max_per_output),
     maxTotal: num(pixels.max_total),
     clockedSupport,
@@ -731,6 +736,18 @@ export function isPanelOnly(option: Pick<ControllerOption, 'listedProtocols'>): 
     option.listedProtocols.length > 0 &&
     option.listedProtocols.every((protocol) => PANEL_INTERFACE.test(protocol.trim()))
   );
+}
+
+/**
+ * Hardware the designer has no slot for, by its own record: it drives matrix
+ * panels only, or its outputs block lists nothing but auxiliary outputs (a
+ * DMX node, a show recorder). Hardware with no record of its outputs is
+ * unknown, not excluded: it stays, with a note to check.
+ */
+export function drivesNoPixelStrings(
+  option: Pick<ControllerOption, 'listedProtocols' | 'outputs'>
+): boolean {
+  return option.outputs === 0 || isPanelOnly(option);
 }
 
 /**
@@ -1107,7 +1124,7 @@ export function buildCatalog(db: Database, graph?: RelationGraph): Catalog {
   };
   const controllers = entries('controllers')
     .map((e) => withFamilies(buildControllerOption(e, graph)))
-    .filter((c) => !isPanelOnly(c));
+    .filter((c) => !drivesNoPixelStrings(c));
 
   const shifters = entries('level-converters').map(buildShifterOption).sort(byName);
   const buffers = new Set(shifters.filter(isDataBuffer).map((s) => `level-converters/${s.id}`));

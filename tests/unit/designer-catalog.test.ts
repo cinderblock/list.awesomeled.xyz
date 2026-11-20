@@ -2,10 +2,12 @@ import { describe, expect, test } from 'bun:test';
 import {
   buildCatalog,
   buildConnectorOption,
+  buildControllerOption,
   buildPixelIcOption,
   buildPixelOption,
   buildPrice,
   costOf,
+  drivesNoPixelStrings,
   buildShifterOption,
   buildSourceOption,
   fmtPackages,
@@ -283,6 +285,23 @@ describe('controller options', () => {
     expect(isPanelOnly({ listedProtocols: ['HUB75', 'WS2812B'] })).toBe(false);
     expect(isPanelOnly({ listedProtocols: [] })).toBe(false);
     expect(isPanelOnly({ listedProtocols: ['Hubble 75'] })).toBe(false);
+  });
+
+  test('hardware that records only auxiliary outputs has no pixel outputs to offer', () => {
+    expect(index.controllers.has('dmxbox')).toBe(false);
+    const dmx = buildControllerOption(entry('d', { outputs: { auxiliary: { DMX512: 4 } } }));
+    expect(dmx.outputs).toBe(0);
+    expect(drivesNoPixelStrings(dmx)).toBe(true);
+    // DMX ports next to pixel outputs don't count against it
+    const both = buildControllerOption(
+      entry('b', { outputs: { count: 4, auxiliary: { DMX512: 1 } } })
+    );
+    expect(both.outputs).toBe(4);
+    expect(drivesNoPixelStrings(both)).toBe(false);
+    // No record of its outputs is unknown, not zero: it stays, with a note to check
+    const mystery = must(index.controllers, 'mystery');
+    expect(mystery.outputs).toBeNull();
+    expect(drivesNoPixelStrings(mystery)).toBe(false);
   });
 });
 

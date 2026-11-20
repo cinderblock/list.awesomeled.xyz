@@ -274,6 +274,8 @@ export const CONTROLLERS: BaseEntry[] = [
   }),
   // A matrix-panel driver: none of its outputs takes a pixel string
   entry('panels', { name: 'Panels', outputs: { count: 6, protocols: ['HUB75', 'HUB75E'] } }),
+  // A DMX node: its outputs block records DMX ports and no pixel outputs
+  entry('dmxbox', { name: 'DMX Box', outputs: { auxiliary: { DMX512: 4 } }, price: 90 }),
 ];
 
 export const MICROBOARDS: BaseEntry[] = [
