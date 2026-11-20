@@ -93,6 +93,8 @@ export const IGNORED_COMMITS = new Set([
   '6bae201244d9db8651c41eb4fe6ad1da29f73d14', // shared creator/manufacturers/vendors (1)
   '80b4911db8c56f17ff0502ad3fb3dd7b9dbb6559', // OLA's protocol list in the library vocabulary (1)
   '6db9e30248ced5d1e8a60a0b7679298b48ba39fa', // NS pixel ICs in the color-depth vocabulary (3)
+  '63d7e3463bf759f9857e693e012ca2373ec97f28', // Pi 3 Model B duplicate merged, links repointed (4)
+  'd1d23db4a29db1e5f4669b32bd354929367ae368', // mains-powered controllers: power.ac, output_voltage (6)
   // Pure formatting passes (prettier/lint only, no content change)
   '35c9c5310c8b6c0624a86b69ce52e67785ad2dba', // Prettier and lint free (42)
   'd9edd7574e197624c721c543e49d418ee3225f06', // Fix prettier formatting (39)
