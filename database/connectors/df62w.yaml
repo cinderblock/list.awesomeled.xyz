@@ -47,8 +47,9 @@ price_source:
   url: https://www.lcsc.com/product-detail/C2904695.html
   vendor: LCSC
 ratings:
-  max_current: 3.5A
-  max_voltage: 30V
+  max_current: 5A
+  max_current_notes: 2 positions 5A, 3-4 positions 4A, 6-9 positions 3.5A (20 AWG); 1A at 28-30 AWG
+  max_voltage: 250V
   ip_rating: IP67
 sources:
   aliases:
@@ -56,16 +57,24 @@ sources:
     retrieved: '2026-11-18'
     notes: DigiKey (authorized distributor) product highlight; hirose.com returned 403.
   termination.smallest_gauge:
-    url: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
+    url: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
     retrieved: '2026-11-18'
-    notes: 'Applicable Wire 2022 : 20 - 22 AWG / 2226 : 22 - 26 AWG'
+    notes: '2830: 28 to 30 AWG'
   termination.largest_gauge:
     url: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
     retrieved: '2026-11-18'
     notes: 'Applicable Wire 2022 : 20 - 22 AWG / 2226 : 22 - 26 AWG'
+  ratings.max_current:
+    url: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+    retrieved: '2026-11-18'
+    notes: 5A/pin
+  ratings.max_voltage:
+    url: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+    retrieved: '2026-11-18'
+    notes: Rated Voltage 250V AC/DC
 termination:
   solder: false
   crimp: true
   idc: false
-  smallest_gauge: 26
+  smallest_gauge: 30
   largest_gauge: 20

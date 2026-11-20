@@ -1,14 +1,14 @@
-name: Pixel 2 Things Relay
+name: Pixel2AC9
 status: discontinued
 creator: David Peace
-notes: Converts pixel data into relay drivers capable of switching 120 VAC. WSXX to 9 Relay output card
+notes: Drives 9 dimmable 110-120 VAC outputs (5 A each, 10 A per board) from WS2811 pixel data; also passes the WS2811 data on and outputs DMX. Powered from the 5, 12 or 24 V pixel line.
 inputs:
   protocols:
     - WS2811
 outputs:
   count: 9
   types:
-    - relay
+    - pwm
   connector: Screw terminal
 dead_links:
   - url: https://www.pixel2things.com/
@@ -44,3 +44,15 @@ sources:
     url: https://web.archive.org/web/20190818063751/https://www.pixel2things.com/9-AC-Outputs-Fully-Assembled-p137348814
     retrieved: '2026-11-18'
     notes: "Pixel2Things '9 AC Outputs / Fully Assembled' (SKU PIXEL2AC9), Board Specifications table: 'Input Pixel Type: Any WS2811 Pixel'; it also re-outputs WS2811 and DMX"
+  outputs.types:
+    url: https://web.archive.org/web/20190818063751/https://www.pixel2things.com/9-AC-Outputs-Fully-Assembled-p137348814
+    retrieved: '2026-11-18'
+    notes: The Pixel2AC line of boards allow you to drive dimmable high voltage AC outputs, from a WS2811 pixel line.
+  notes:
+    url: https://web.archive.org/web/20190818063751/https://www.pixel2things.com/9-AC-Outputs-Fully-Assembled-p137348814
+    retrieved: '2026-11-18'
+    notes: This board features 1 AC input, and 9 AC outputs.
+  name:
+    url: https://web.archive.org/web/20190818063751/https://www.pixel2things.com/9-AC-Outputs-Fully-Assembled-p137348814
+    retrieved: '2026-11-18'
+    notes: Pixel2Things | Pixel2AC, 9 AC Outputs
