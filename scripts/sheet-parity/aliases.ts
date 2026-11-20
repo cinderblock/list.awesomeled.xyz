@@ -62,6 +62,8 @@ export const ALIASES: Record<string, Record<string, string>> = {
   'Pixel Decoders': {
     // Moved to controllers (it holds DMX universes, not just pixel data)
     'Baldrick DMX': 'controllers/baldrick-dmx',
+    // Its maker's name (SKU PIXEL2AC9): an AC dimmer, not a relay board
+    'Pixel 2 Things Relay': 'pixel-decoders/pixel-2-things-relay',
   },
   Adapters: {
     // The K40D-PB's pre-K-series name; merged in a61acdb
@@ -89,6 +91,13 @@ export const ALIASES: Record<string, Record<string, string>> = {
     SmartPXL: 'commercial-systems/smartpxl',
     'Active RGB': 'commercial-systems/active-rgb',
     Lightwalls: 'commercial-systems/lightwalls',
+    // The nameless row is Lucenti's Vinci: it paired by the bare URL that was
+    // its creator, now {name: Lucenti, url} (database review)
+    '': 'commercial-systems/vinci',
+  },
+  'DIY MicroBoards': {
+    // Named for Ebyte's module now (database review)
+    'Ebyte NRF 52840': 'microboards/ebyte-nrf-52840',
   },
   'Drive Libraries': {
     // Renamed to what its maker calls it now (database review)

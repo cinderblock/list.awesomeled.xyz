@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/20/2026, 2:23 AM PST (2026-11-20 10:23Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/20/2026, 3:03 AM PST (2026-11-20 11:03Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -62,8 +62,9 @@ Database folder: `database/pattern-drivers/`.
 - [A4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A4) "Arthet LED Mapper" → `pattern-drivers/arthet-led-mapper` (alias, score 0.86)
 - [A16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A16) "Filament LED" → `pattern-drivers/filament` (url, score 0.85)
 - [A19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A19) "Jinx!" → `pattern-drivers/glediator` (url, score 0.73)
-- [A30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A30) "LX Studio / Chromatik" → `pattern-drivers/lx-studio-chromatik` (url, score 0.86)
+- [A30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A30) "LX Studio / Chromatik" → `pattern-drivers/lx-studio-chromatik` (url, score 0.82)
 - [A36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A36) "Millumin" → `pattern-drivers/millumin` (name, score 0.91, duplicate of row 35)
+- [A37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=A37) "ProtoPixel Create" → `pattern-drivers/protopixel-create` (alias, score 0.8)
 
 ### YAML entries with no sheet row
 
@@ -93,15 +94,17 @@ Database folder: `database/pattern-drivers/`.
 
 </details>
 
-<details><summary>Acknowledged differences (71)</summary>
+<details><summary>Acknowledged differences (75)</summary>
 
 - [X3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=X3) `arkaos` Status "Active": (cited) YAML cites a source for status
 - [D4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D4) `arthet-led-mapper` Platform "ubuntu, windows, mac and arm64": Same platforms in structured form (Ubuntu = Linux, mac = macOS); arm64 is in platforms.notes
+- [B5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B5) `bekonix` Developer "Bekonix ex Rocketlife": (cited) YAML cites a source for creator
 - [Y5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y5) `bekonix` URL "https://www.bekonix.com/platform/": The sheet links a sub-page that is gone (404); YAML links the live site
 - [V9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V9) `chataigne-wled-mod` Notes "Plug on for vcontrol of WLED, other WLED plugins from same …": Typo fixed in YAML
 - [J10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=J10) `chromatik` DMX "Possible": Typed by stream 2 (e215cd7): no direct DMX; it sends Art-Net or sACN to a node (dmx_notes)
 - [Q10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Q10) `chromatik` Programmatic "Possible": Typed by stream 2 (e215cd7): "Possible" became programmatic: true
-- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.9377186": (cited) re-priced at the source (retrieved 2026-11-18)
+- [V11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V11) `dylos` Notes "Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Ar…": (cited) YAML cites a source for notes
+- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.728": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y12) `elm` URL "https://www.enttec.co.uk/product/controls-gb/addressable-le…": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
 - [D15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D15) `fastled-fx-engine` Platform "ESP/AVR/NRF/RP/Browser": Same platforms in structured form (web + hardware list)
 - [G15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=G15) `fastled-fx-engine` Visualizer "Browser wasm Preview": Same: a browser (WebAssembly) preview
@@ -123,10 +126,11 @@ Database folder: `database/pattern-drivers/`.
 - [V28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V28) `lightmobile` Notes "RocketLife controllers, serial/SPI pixels only": "SPI" wording normalized to clocked pixels (937d734)
 - [C29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C29) `lumiastream` Price "Free- $30/month": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W29) `lumiastream` Demo/Free "Free / premiumn Monthly": Typo fixed in YAML
+- [V30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V30) `lx-studio-chromatik` Notes "Java. Next version (Chromatik) will no longer use the Proce…": (cited) YAML cites a source for notes
 - [W30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W30) `lx-studio-chromatik` Demo/Free "Open source. Comercial applications require license": Typo fixed in YAML
 - [X30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=X30) `lx-studio-chromatik` Status "Active": (cited) YAML cites a source for status
 - [B31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B31) `madmapper` Developer "Smode Tech": (cited) YAML cites a source for creator
-- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.616575": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.864285": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W32) `madrix-5` Demo/Free "Demo no data out": Same in structured form: demo.available + limitations
 - [B34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B34) `mapio-pro` Developer "Vistitution": (cited) YAML cites a source for creator
 - [S34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S34) `mapio-pro` Other Inputs "Native support for PixelPusher devices": PixelPusher support is an output, which the entry lists; the sheet wrote it in Other Inputs
@@ -135,6 +139,7 @@ Database folder: `database/pattern-drivers/`.
 - [C37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C37) `protopixel-create` Price "176": (cited) re-priced at the source (retrieved 2020-08-08)
 - [T37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=T37) `protopixel-create` Other Outputs "ProtoPixel proprietary protocol, OSC, UDP": Same, as a list
 - [Y37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y37) `protopixel-create` URL "https://www.protopixel.io/design": ProtoPixel's old 'design' page; YAML links the Create product page
+- [B38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B38) `qlc` Developer "Massimo Calegari": (cited) YAML cites a source for creator
 - [G38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=G38) `qlc` Visualizer "3D view available in V5": Same: 3D, from QLC+ 5
 - [V40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V40) `smartshow-lms` Notes "aimed at live show use , big button execute interface": Same: the notes cover live-show use and the big-button Show Mode
 - [Y41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y41) `smode` URL "https://smode.fr/": Old URL; it redirects to the page YAML links
@@ -211,12 +216,17 @@ Database folder: `database/controllers/`.
 - [A26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A26) "M4 Port Pixel" → `controllers/m4-port-pixel` (alias, score 0.63)
 - [A27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A27) "M4- Pi" → `controllers/m4-port-pixel` (alias, score 0.58)
 - [A32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A32) "M8 Port Pixel" → `controllers/m8-port-pixel` (alias, score 0.75)
-- [A37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A37) "Luminaxa" → `controllers/luminaxa` (url, score 0.76)
+- [A34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A34) "Mini 8 Port Controller" → `controllers/mini-8-port-controller` (alias, score 0.62)
+- [A37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A37) "Luminaxa" → `controllers/luminaxa` (url, score 0.71)
 - [A44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A44) "Baldrick Board" → `controllers/baldrick-8` (alias, score 0.5)
 - [A45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A45) "Flex Pixel Driver" → `controllers/flex-pixel-driver` (alias, score 0.73)
 - [A47](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A47) "AN6USP10" → `controllers/an6usp10` (url, score 0.75)
+- [A64](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A64) "PixelDIN" → `controllers/pixeldin` (alias, score 0.73)
 - [A81](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A81) "Falcon F4V3" → `controllers/falcon-f16v3` (alias, score 0.6)
+- [A94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A94) "PixOut Server" → `controllers/pixout-server` (alias, score 0.46)
 - [A108](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A108) "M8 Port Pixel" → `controllers/pixel-octo` (alias, score 0.73)
+- [A112](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A112) "PixNet 4+" → `controllers/pixnet-4` (alias, score 0.72)
+- [A120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A120) "DMX Core" → `controllers/dmx-core` (alias, score 0.73)
 - [A132](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A132) "LEDEddy" → `controllers/led-player-s` (alias, score 0.67)
 - [A134](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A134) "F-Test" → `pixel-decoders/f-test` (url, score 1)
 
@@ -229,12 +239,13 @@ Database folder: `database/controllers/`.
 - `controllers/sp608e` "SP608E": added 2026-07-02 in e1795d4 (data: split the SP801E/SP608E chimera into two researched entries)
 - `controllers/wb48` "WB48": added 2026-07-01 in 67d17d0 (data: add Wally's Lights WB48 controller)
 
-<details><summary>Acknowledged differences (344)</summary>
+<details><summary>Acknowledged differences (353)</summary>
 
 - [H2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H2) `sp102e` Standalone "Presets": "Presets" = plays built-in patterns on its own; YAML inputs.standalone: true
 - [U2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U2) `sp102e` Status "Active": (cited) YAML cites a source for status
 - [D3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D3) `nled-pixel-controller-mini` Price "13.5": (cited) re-priced at the source (retrieved 2026-11-18)
 - [D4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D4) `electromage-8x-driver` Price "15": (cited) re-priced at the source (retrieved 2026-11-18)
+- [J4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J4) `electromage-8x-driver` Max Voltage "12": (cited) YAML cites a source for power.voltage.max
 - [R4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R4) `electromage-8x-driver` Notes "Stacks up to 8 on a bus": Same: up to 8 boards share one serial line
 - [A5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A5) `a1-slwf-03` (name) "c,v.xxzzzzzzzASA": Vandalized after the import (keyboard mash); was A1-SLWF-03 / SMARTLIGHT.ME
 - [B5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=B5) `a1-slwf-03` Manufacturer "`QWS": Vandalized after the import (keyboard mash); was A1-SLWF-03 / SMARTLIGHT.ME
@@ -263,6 +274,7 @@ Database folder: `database/controllers/`.
 - [D13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D13) `sp108e` Price "24.88": (cited) re-priced at the source (retrieved 2026-11-18)
 - [H13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H13) `sp108e` Standalone "Presets": "Presets" = plays built-in patterns on its own; YAML inputs.standalone: true
 - [V13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V13) `sp108e` Product URL "Amazon": The sheet cell says only "Amazon" (no link); YAML names a real vendor page
+- [R14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R14) `fadecandy` Notes "Please see https://github.com/scanlime/fadecandy to confirm…": (cited) YAML cites a source for notes
 - [D16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D16) `quinled-dig-uno` Price "24.99": YAML revised by research since the import (newer price/hardware revision)
 - [R16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R16) `quinled-dig-uno` Notes "ESP8266/ESP32 based, open to any software, often run with W…": YAML revised by research since the import (newer price/hardware revision)
 - [D17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D17) `nled-pixel-controller-electron` Price "27": YAML revised by research since the import (newer price/hardware revision)
@@ -322,6 +334,7 @@ Database folder: `database/controllers/`.
 - [D36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D36) `electromage-pro-8x-driver` Price "49": (cited) re-priced at the source (retrieved 2026-11-18)
 - [R36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R36) `electromage-pro-8x-driver` Notes "Stacks up to 8 on a bus": Same: up to 8 boards share one serial line
 - [D37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D37) `luminaxa` Price "49.99": (cited) re-priced at the source (retrieved 2026-11-18)
+- [R37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R37) `luminaxa` Notes "Internal 3500mAh battery Android app": (cited) YAML cites a source for notes
 - [H38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H38) `www-orangepi-dmx-org` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): the pixel firmware is not standalone (a separate show-player firmware is)
 - [D39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D39) `8-port-led-distro` Price "55": (cited) re-priced at the source (retrieved 2026-11-18)
 - [J39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J39) `8-port-led-distro` Max Voltage "24": (cited) YAML cites a source for power.voltage.max
@@ -334,14 +347,15 @@ Database folder: `database/controllers/`.
 - [U42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U42) `lightkraken` Status "Active": (cited) YAML cites a source for status
 - [D43](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D43) `k4-pb` Price "70": (cited) re-priced at the source (retrieved 2026-11-18)
 - [B44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=B44) `baldrick-8` Manufacturer "Build A Light Show": Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details
-- [J44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J44) `baldrick-8` Max Voltage "24": Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details
 - [K44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K44) `baldrick-8` Max Current "15": Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details
 - [R44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R44) `baldrick-8` Notes "Aimed at easy set up with Xlights.": Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details
 - [T44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=T44) `baldrick-8` Introduction "2024": Baldrick boards re-researched by Cameron (04a47e8); the sheet row predates the Baldrick8 V1.1 details
 - [D45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D45) `flex-pixel-driver` Price "80": Researched as Elation's "Flex Pixel Driver 1" (c13218a)
 - [M45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=M45) `flex-pixel-driver` Output Connectors "Phoenix Screw": Researched as Elation's "Flex Pixel Driver 1" (c13218a)
 - [V45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V45) `flex-pixel-driver` Product URL "https://www.elationlighting.com/flex-pixel-driver-1": Researched as Elation's "Flex Pixel Driver 1" (c13218a)
+- [M46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=M46) `replay` Output Connectors "Phoenix Screw": (cited) YAML cites a source for outputs.connector
 - [A47](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A47) `an6usp10` (name) "AN6USP10": (cited) YAML cites a source for name
+- [C47](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=C47) `an6usp10` Max Pixels "1020": (cited) YAML cites a source for outputs.pixels
 - [D48](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D48) `k8-pb` Price "98": YAML revised by research since the import (newer price/hardware revision)
 - [D49](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D49) `angio-4` Price "99": (cited) re-priced at the source (retrieved 2026-11-18)
 - [U49](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U49) `angio-4` Status "Active": (cited) YAML cites a source for status
@@ -360,7 +374,6 @@ Database folder: `database/controllers/`.
 - [V61](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V61) `pb16` Product URL "http://doityourselfchristmas.com/forums/showthread.php?5329…": Dead now; YAML links the current page
 - [D62](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D62) `ledmx4-pro` Price "134": (cited) re-priced at the source (retrieved 2026-11-18)
 - [V62](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V62) `ledmx4-pro` Product URL "https://dmxking.com/led-pixel-control/ledmx4-pro": Old URL; it redirects to the page YAML links
-- [R64](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=R64) `pixeldin` Notes "Up to 4 independent outputs in 1-Wire SPI Mode. Total 5440 …": YAML revised by research since the import (rewritten notes; discontinued per vendor/dead links)
 - [U64](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U64) `pixeldin` Status "Active": YAML revised by research since the import (rewritten notes; discontinued per vendor/dead links)
 - [V64](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V64) `pixeldin` Product URL "https://yarilo.pro/en/controllers/pixel-controllers/yarilo-…": Dead now; YAML links the current page
 - [D65](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D65) `spi-led-controller` Price "150": YAML revised: current price tiers; "SPI" wording normalized (937d734)
@@ -464,6 +477,7 @@ Database folder: `database/controllers/`.
 - [D111](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D111) `pixlite-16-mk2-control-board` Price "449.95": (cited) re-priced at the source (retrieved 2026-11-18)
 - [U111](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U111) `pixlite-16-mk2-control-board` Status "Active": (cited) YAML cites a source for status
 - [V111](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V111) `pixlite-16-mk2-control-board` Product URL "https://www.advateklights.com/pixlite-16-mk2-control-board": Old URL; it redirects to the page YAML links
+- [A112](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A112) `pixnet-4` (name) "PixNet 4+": (cited) YAML cites a source for name
 - [C113](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=C113) `pixlite-16-plug-and-play-mk2` Max Pixels "5440": (cited) YAML cites a source for outputs.pixels
 - [U113](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U113) `pixlite-16-plug-and-play-mk2` Status "Active": (cited) YAML cites a source for status
 - [V113](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V113) `pixlite-16-plug-and-play-mk2` Product URL "https://www.advateklights.com/pixlite-16-mk2-plug-and-play": Old URL; it redirects to the page YAML links
@@ -479,7 +493,9 @@ Database folder: `database/controllers/`.
 - [D119](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D119) `pixelator-mini-px1-8d` Price "700": (cited) re-priced at the source (retrieved 2022-10-06)
 - [E119](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=E119) `pixelator-mini-px1-8d` Max outputs "24": The Mini has 8 PLink ports (ENTTEC UM-71066); 24 is the full Pixelator's
 - [M119](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=M119) `pixelator-mini-px1-8d` Output Connectors "RJ-46": Typo: RJ45 PLink ports
+- [C120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=C120) `dmx-core` Max Pixels "6800": DMX Core 100 is a DMX/Art-Net node that drives no pixels; its pixel outputs were removed (database review, plans/database-review-fixes/ctrl-afp.yaml)
 - [D120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D120) `dmx-core` Price "799": (cited) re-priced at the source (retrieved 2026-11-18)
+- [I120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I120) `dmx-core` Pixel Types "Both": DMX Core 100 is a DMX/Art-Net node that drives no pixels; its pixel outputs were removed (database review, plans/database-review-fixes/ctrl-afp.yaml)
 - [K121](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K121) `led-ethernet-controller-powered` Max Current "20": Unverified either way: the maker's spec PDF didn't load; YAML keeps the sheet note's 10 A per output
 - [U121](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U121) `led-ethernet-controller-powered` Status "Active": (cited) YAML cites a source for status
 - [D122](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D122) `pixlite-e16-s-mk3` Price "950": (cited) re-priced at the source (retrieved 2026-11-18)
@@ -491,12 +507,14 @@ Database folder: `database/controllers/`.
 - [D126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D126) `qolorpix` Price "1500": (cited) re-priced at the source (retrieved 2026-11-18)
 - [K126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K126) `qolorpix` Max Current "120": (cited) YAML cites a source for power.current.max
 - [V126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V126) `qolorpix` Product URL "http://www.citytheatrical.com/Products/qolorpix-tape-contro…": Old URL; it redirects to the page YAML links
-- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1849.26154": (cited) re-priced at the source (retrieved 2022-06-29)
+- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1845.0432": (cited) re-priced at the source (retrieved 2022-06-29)
 - [G127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=G127) `pixelator` Storage "Yes": The manual describes no show storage; its DMX Generator holds static looks only
 - [H127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H127) `pixelator` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone (Pixelator datasheet)
 - [V128](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V128) `emp-16-uni-control` Product URL "https://www.empdesigns.co.uk/portfolio-item/16-universe-led…": Old URL; it redirects to the page YAML links
 - [V129](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V129) `pixpoe` Product URL "https://www.empdesigns.co.uk/portfolio-item/poe-pixel-contr…": Old page; it now redirects to the product page YAML links
 - [H130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H130) `apd-2-500-12v-art` Standalone "No": Stream 2's inputs audit (plans/database-review-inputs-audit.md): standalone, with internal programs (maker page)
+- [J130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J130) `apd-2-500-12v-art` Max Voltage "12": (cited) YAML cites a source for power.voltage.max
+- [K130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K130) `apd-2-500-12v-art` Max Current "5": No source gives a current, and 5 A fits neither the mains input nor the 12 V side of its 150 W supply; removed (database review, plans/database-review-fixes/ctrl-afp.yaml)
 - [V130](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V130) `apd-2-500-12v-art` Product URL "https://www.digitaltape.co.uk/pixel-drivers": A category page; YAML links the product's own page
 - [J132](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J132) `led-player-s` Max Voltage "5": The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb
 - [L132](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=L132) `led-player-s` Buffered "No": The sheet row was misidentified (LedEddy is software); resolved as LED Player S in a61acdb
@@ -571,6 +589,7 @@ Database folder: `database/controllers/`.
 - [I80](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I80) `falcon-f48` Pixel Types "Async": Same: outputs.differential (it drives Falcon differential receiver boards)
 - [D92](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D92) `spi-matrix` Price "299": Same: price tiers 299/449/599 for 1024/2048/4096 pixels, and the one-year license in technical_notes
 - [H105](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H105) `pixlite-a4-s-mk3` Standalone "Yes": Same: standalone playback via SHOWTime (features, inputs.standalone)
+- [I107](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I107) `rc4magic-s3-pixel-driver` Pixel Types "Both": The note was copied from the 8-output Uli LED Control; this unit has 2 outputs and its maker says nothing like it (database review, plans/database-review-fixes/ctrl-lq.yaml)
 - [C115](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=C115) `protopixel-8-channel-controller` Max Pixels "4800": In notes/technical_notes: 4800 LEDs across two 4-output satellites (600 per output)
 - [D117](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D117) `led-ethernet-controller-3` Price "625": Same: price tiers 625/950/1250 and the lifetime license in technical_notes
 - [D121](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D121) `led-ethernet-controller-powered` Price "850": Migrated as price tiers, a technical note, and outputs.current.max 10A (b1c26ec)
@@ -590,9 +609,9 @@ Database folder: `database/pixels/`.
 | B   | Colour Group          | `color.order`                                      | text                                                                                                          |                                                               |
 | C   | LED Voltage           | `electrical.led_voltage`                           | number (voltage)                                                                                              |                                                               |
 | D   | Clocked               | `data.clocked`                                     | bool                                                                                                          |                                                               |
-| E   | VCC Voltage           | `electrical.vcc_voltage`                           | number (voltage)                                                                                              |                                                               |
+| E   | VCC Voltage           | `electrical.supply_voltage`                        | number (voltage)                                                                                              |                                                               |
 | F   | PWM Frequency         | `color.pwm_frequency`                              | number (frequency)                                                                                            |                                                               |
-| G   | Brightness Bits       | `color.brightness_bits`                            | number                                                                                                        |                                                               |
+| G   | Brightness Bits       | `color.channel_bits`, `color.brightness_control`   | custom                                                                                                        |                                                               |
 | H   | Data BitRate          | `data.bitrate`                                     | number (frequency)                                                                                            |                                                               |
 | I   | Pixel Data Size       | `data.pixel_size_bits`                             | number                                                                                                        |                                                               |
 | J   | Pixel Rate Max        | —                                                  | derived: Computed (bitrate / pixel size); the site derives it at render time (a1cd65f stripped stored copies) |                                                               |
@@ -618,11 +637,13 @@ Database folder: `database/pixels/`.
 ### Rows paired by alias, URL, or as duplicates
 
 - [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A11) "HD107S" → `pixels/hd107s` (alias, score 0.77)
-- [A12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A12) "HD108" → `pixels/hd108` (alias, score 0.81)
-- [A16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A16) "NS107S" → `pixels/hd107s` (alias, score 0.77)
-- [A17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A17) "NS108" → `pixels/hd108` (alias, score 0.68)
+- [A12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A12) "HD108" → `pixels/hd108` (alias, score 0.76)
+- [A13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A13) "LC2823-2020" → `pixels/lc2823-2020` (url, score 0.83)
+- [A16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A16) "NS107S" → `pixels/hd107s` (alias, score 0.73)
+- [A17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A17) "NS108" → `pixels/hd108` (alias, score 0.64)
 - [A19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A19) "NS8808" → `pixels/hd8808` (alias, score 0.86)
 - [A21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A21) "SK6812" → `pixels/sk6812-wwa` (url, score 0.77)
+- [A30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A30) "SM1616" → `pixel-ics/sm16716` (alias, score 1)
 
 ### YAML entries with no sheet row
 
@@ -640,20 +661,25 @@ Database folder: `database/pixels/`.
 
 ### Highlighted cells
 
-**Missing data, easy to fill** (#FFF2CC, 95 cells; 26 still empty in YAML)
+**Missing data, easy to fill** (#FFF2CC, 95 cells; 34 still empty in YAML)
 
 <details><summary>95 cells</summary>
 
 | Cell                                                                                                                    | Entry         | Column            | Sheet | YAML now | Sourced |
 | ----------------------------------------------------------------------------------------------------------------------- | ------------- | ----------------- | ----- | -------- | ------- |
 | [U3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U3)   | `apa102c`     | Release Year      |       | —        |         |
+| [M5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M5)   | `apa105`      | Wattage           | 100   | —        |         |
 | [M6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M6)   | `apa106`      | Wattage           | 0     | —        |         |
 | [U6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U6)   | `apa106`      | Release Year      |       | —        |         |
 | [M8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M8)   | `apa109`      | Wattage           | 0     | —        |         |
 | [U9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U9)   | `cs8812`      | Release Year      |       | —        |         |
+| [M11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M11) | `hd107s`      | Wattage           | 85    | —        |         |
+| [M13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M13) | `lc2823-2020` | Wattage           | 90    | —        |         |
 | [U13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U13) | `lc2823-2020` | Release Year      |       | —        |         |
 | [U14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U14) | `lc8808b`     | Release Year      |       | —        |         |
+| [M15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M15) | `lc8823`      | Wattage           | 85    | —        |         |
 | [U15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U15) | `lc8823`      | Release Year      |       | —        |         |
+| [M16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M16) | `hd107s`      | Wattage           | 100   | —        |         |
 | [M20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M20) | `pl9823`      | Wattage           | 0     | —        |         |
 | [O20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O20) | `pl9823`      | Quiescent Current |       | —        |         |
 | [M23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M23) | `sk6813`      | Wattage           | 0     | —        |         |
@@ -667,79 +693,74 @@ Database folder: `database/pixels/`.
 | [M28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M28) | `sk9822-a`    | Wattage           | 0     | —        |         |
 | [N28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=N28) | `sk9822-a`    | Channel Current   |       | —        |         |
 | [U28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U28) | `sk9822-a`    | Release Year      |       | —        |         |
-| [M30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M30) | `sm1616`      | Wattage           | 0     | —        |         |
-| [U30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U30) | `sm1616`      | Release Year      |       | —        |         |
+| [M30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M30) | `sm16716`     | Wattage           | 0     | —        |         |
+| [U30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U30) | `sm16716`     | Release Year      |       | —        |         |
+| [M31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M31) | `ws2812`      | Wattage           | 92.5  | —        |         |
+| [M32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M32) | `ws2813`      | Wattage           | 90    | —        |         |
 | [M34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M34) | `ws2815-rgbw` | Wattage           | 0     | —        |         |
 | [U34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U34) | `ws2815-rgbw` | Release Year      |       | —        |         |
+| [M36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M36) | `ws2851`      | Wattage           | 92.5  | —        |         |
 | [U37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U37) | `(no entry)`  | Release Year      |       | —        |         |
-| [M2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M2)   | `apa102`      | Wattage           | 110   | 110mW    |         |
+| [M2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M2)   | `apa102`      | Wattage           | 110   | 200mW    | yes     |
 | [N2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=N2)   | `apa102`      | Channel Current   | 22    | 22mA     |         |
-| [O2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O2)   | `apa102`      | Quiescent Current | 1     | 1.0mA    |         |
+| [O2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O2)   | `apa102`      | Quiescent Current | 1     | 1mA      |         |
 | [U2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U2)   | `apa102`      | Release Year      | 2014  | 2014     |         |
-| [M3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M3)   | `apa102c`     | Wattage           | 110   | 110mW    |         |
+| [M3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M3)   | `apa102c`     | Wattage           | 110   | 200mW    | yes     |
 | [N3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=N3)   | `apa102c`     | Channel Current   | 22    | 22mA     |         |
-| [O3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O3)   | `apa102c`     | Quiescent Current | 1     | 1.0mA    |         |
-| [M4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M4)   | `apa104`      | Wattage           | 100   | 100mW    |         |
+| [O3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O3)   | `apa102c`     | Quiescent Current | 1     | 1mA      |         |
+| [M4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M4)   | `apa104`      | Wattage           | 100   | 250mW    | yes     |
 | [N4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=N4)   | `apa104`      | Channel Current   | 20    | 20mA     |         |
-| [O4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O4)   | `apa104`      | Quiescent Current | 1     | 1.0mA    |         |
+| [O4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O4)   | `apa104`      | Quiescent Current | 1     | 1mA      |         |
 | [U4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U4)   | `apa104`      | Release Year      | 2013  | 2013     |         |
-| [M5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M5)   | `apa105`      | Wattage           | 100   | 100mW    |         |
 | [U5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U5)   | `apa105`      | Release Year      | 2015  | 2015     |         |
-| [M7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M7)   | `apa107`      | Wattage           | 110   | 110mW    |         |
-| [O7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O7)   | `apa107`      | Quiescent Current | 1     | 1.0mA    |         |
+| [M7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M7)   | `apa107`      | Wattage           | 110   | 200mW    | yes     |
+| [O7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O7)   | `apa107`      | Quiescent Current | 1     | 1mA      |         |
 | [U7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U7)   | `apa107`      | Release Year      | 2017  | 2017     |         |
 | [U8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U8)   | `apa109`      | Release Year      | 2018  | 2018     |         |
 | [M9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M9)   | `cs8812`      | Wattage           | 210   | 210mW    |         |
 | [M10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M10) | `gs8208`      | Wattage           | 120   | 120mW    |         |
 | [O10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O10) | `gs8208`      | Quiescent Current | 2.5   | 2.5mA    |         |
 | [U10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U10) | `gs8208`      | Release Year      | 2018  | 2018     |         |
-| [M11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M11) | `hd107s`      | Wattage           | 85    | 100mW    |         |
 | [U11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U11) | `hd107s`      | Release Year      | 2019  | 2017     | yes     |
-| [M12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M12) | `hd108`       | Wattage           | 85    | 85mW     |         |
+| [M12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M12) | `hd108`       | Wattage           | 85    | 300mW    | yes     |
 | [U12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U12) | `hd108`       | Release Year      |       | 2018     | yes     |
-| [M13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M13) | `lc2823-2020` | Wattage           | 90    | 90mW     |         |
-| [M14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M14) | `lc8808b`     | Wattage           | 65    | 65mW     |         |
-| [M15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M15) | `lc8823`      | Wattage           | 85    | 85mW     |         |
-| [M16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M16) | `hd107s`      | Wattage           | 100   | 100mW    |         |
+| [M14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M14) | `lc8808b`     | Wattage           | 65    | 156mW    | yes     |
 | [U16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U16) | `hd107s`      | Release Year      | 2017  | 2017     | yes     |
-| [M17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M17) | `hd108`       | Wattage           | 102   | 85mW     |         |
+| [M17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M17) | `hd108`       | Wattage           | 102   | 300mW    | yes     |
 | [O17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O17) | `hd108`       | Quiescent Current | 1     | 0.1mA    |         |
 | [U17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U17) | `hd108`       | Release Year      | 2018  | 2018     | yes     |
-| [M18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M18) | `ns108e`      | Wattage           | 91.8  | 91.8mW   |         |
+| [M18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M18) | `ns108e`      | Wattage           | 91.8  | 300mW    | yes     |
 | [U18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U18) | `ns108e`      | Release Year      | 2019  | 2019     |         |
 | [M19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M19) | `hd8808`      | Wattage           | 45    | 200mW    | yes     |
-| [O19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O19) | `hd8808`      | Quiescent Current | 2     | 2.0mA    |         |
+| [O19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O19) | `hd8808`      | Quiescent Current | 2     | 2mA      |         |
 | [U19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U19) | `hd8808`      | Release Year      | 2018  | 2018     |         |
 | [S20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S20) | `pl9823`      | Backup Data Line  | No    | false    |         |
 | [U20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U20) | `pl9823`      | Release Year      | 2014  | 2014     |         |
 | [M21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M21) | `sk6812-wwa`  | Wattage           | 100   | 200mW    | yes     |
 | [S21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S21) | `sk6812-wwa`  | Backup Data Line  | No    | false    |         |
 | [U21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U21) | `sk6812-wwa`  | Release Year      | 2019  | 2015     | yes     |
-| [M22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M22) | `sk6812`      | Wattage           | 104   | 104mW    |         |
+| [M22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M22) | `sk6812`      | Wattage           | 104   | 200mW    | yes     |
 | [S22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S22) | `sk6812`      | Backup Data Line  | No    | false    |         |
 | [U22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U22) | `sk6812`      | Release Year      | 2013  | 2013     |         |
 | [S23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S23) | `sk6813`      | Backup Data Line  | No    | true     | yes     |
 | [S24](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S24) | `sk6813-hv`   | Backup Data Line  | No    | true     | yes     |
 | [S25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S25) | `sk6818`      | Backup Data Line  | No    | false    |         |
 | [S26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S26) | `sk6822`      | Backup Data Line  | Yes   | true     |         |
-| [M27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M27) | `sk9822`      | Wattage           | 100   | 100mW    |         |
-| [O27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O27) | `sk9822`      | Quiescent Current | 1     | 1.0mA    |         |
+| [M27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M27) | `sk9822`      | Wattage           | 100   | 200mW    | yes     |
+| [O27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O27) | `sk9822`      | Quiescent Current | 1     | 1mA      |         |
 | [S27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S27) | `sk9822`      | Backup Data Line  | No    | false    |         |
 | [U27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U27) | `sk9822`      | Release Year      | 2016  | 2016     |         |
-| [O28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O28) | `sk9822-a`    | Quiescent Current | 1     | 1.0mA    |         |
+| [O28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O28) | `sk9822-a`    | Quiescent Current | 1     | 1mA      |         |
 | [S28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S28) | `sk9822-a`    | Backup Data Line  | No    | false    |         |
-| [M29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M29) | `sk9826`      | Wattage           | 90    | 90mW     |         |
+| [M29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M29) | `sk9826`      | Wattage           | 90    | 300mW    | yes     |
 | [U29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U29) | `sk9826`      | Release Year      | 2016  | 2016     |         |
-| [M31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M31) | `ws2812`      | Wattage           | 92.5  | 92.5mW   |         |
 | [O31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=O31) | `ws2812`      | Quiescent Current | 0.7   | 0.7mA    |         |
 | [U31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U31) | `ws2812`      | Release Year      | 2012  | 2012     |         |
-| [M32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M32) | `ws2813`      | Wattage           | 90    | 90mW     |         |
 | [U32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U32) | `ws2813`      | Release Year      | 2016  | 2016     |         |
 | [M33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M33) | `ws2815`      | Wattage           | 120   | 120mW    |         |
 | [U33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U33) | `ws2815`      | Release Year      | 2018  | 2018     |         |
 | [M35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M35) | `ws2816`      | Wattage           | 100   | 100mW    |         |
 | [U35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U35) | `ws2816`      | Release Year      | 2021  | 2021     |         |
-| [M36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M36) | `ws2851`      | Wattage           | 92.5  | 92.5mW   |         |
 | [U36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=U36) | `ws2851`      | Release Year      | 2018  | 2018     |         |
 
 </details>
@@ -750,25 +771,37 @@ Database folder: `database/pixels/`.
 
 <details><summary>3 cells</summary>
 
-| Cell                                                                                                                    | Entry    | Column          | Sheet | YAML now | Sourced |
-| ----------------------------------------------------------------------------------------------------------------------- | -------- | --------------- | ----- | -------- | ------- |
-| [G17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G17) | `hd108`  | Brightness Bits | 16+5  | 16+5     | yes     |
-| [G18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G18) | `ns108e` | Brightness Bits | 16+5  | 16+5     | yes     |
-| [G29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G29) | `sk9826` | Brightness Bits | 16+5  | 16+5     | yes     |
+| Cell                                                                                                                    | Entry    | Column          | Sheet | YAML now                                                  | Sourced |
+| ----------------------------------------------------------------------------------------------------------------------- | -------- | --------------- | ----- | --------------------------------------------------------- | ------- |
+| [G17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G17) | `hd108`  | Brightness Bits | 16+5  | 16 \| {"bits":5,"method":"current","scope":"per_channel"} | yes     |
+| [G18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G18) | `ns108e` | Brightness Bits | 16+5  | 16 \| {"bits":5,"method":"current","scope":"per_channel"} | yes     |
+| [G29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G29) | `sk9826` | Brightness Bits | 16+5  | 16 \| {"bits":5,"method":"current","scope":"per_channel"} | yes     |
 
 </details>
 
-<details><summary>Acknowledged differences (68)</summary>
+<details><summary>Acknowledged differences (86)</summary>
 
+- [M2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M2) `apa102` Wattage "110": (cited) YAML cites a source for electrical.wattage
 - [T2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=T2) `apa102` Max pixel per string "~250 - CLK sensitive": Same: max_per_string 250 with the clock-degradation explanation
+- [M3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M3) `apa102c` Wattage "110": (cited) YAML cites a source for electrical.wattage
 - [T3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=T3) `apa102c` Max pixel per string "~250 - CLK sensitive": Same: max_per_string 250 with the clock-degradation explanation
 - [Z3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Z3) `apa102c` Other Links "APA102C Pixel Protocol Overview \| Advatek Lighting": Advatek folded APA102C into its APA102 page (the old URL redirects there; YAML links it)
+- [M4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M4) `apa104` Wattage "100": (cited) YAML cites a source for electrical.wattage
+- [M5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M5) `apa105` Wattage "100": Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)
 - [M6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M6) `apa106` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
 - [Y6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y6) `apa106` Datasheet URL "https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?i…": A datasheet aggregator page; YAML links a direct datasheet PDF
+- [M7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M7) `apa107` Wattage "110": (cited) YAML cites a source for electrical.wattage
 - [M8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M8) `apa109` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
+- [G11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G11) `hd107s` Brightness Bits "5": The sheet gives only the 5-bit global brightness; YAML has 8-bit channels plus a 5-bit global brightness_control
 - [M11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M11) `hd107s` Wattage "85": Both the HD107S and NS107S specs give 20 mA per channel ("Build-20ma constant current output"), so 100 mW at 5 V, as the NS107S row says; 17 mA / 85 mW is the HD108 figure
 - [V11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V11) `hd107s` NOTES "APA107 Competitor/clone": Not a clone: Newstar developed the IC (NS107S) and sells it as HD107S (sources.creator)
+- [G12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G12) `hd108` Brightness Bits "15": (cited) YAML cites a source for color.channel_bits
+- [M12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M12) `hd108` Wattage "85": (cited) YAML cites a source for electrical.wattage
 - [R12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=R12) `hd108` Data Type "APA102": (cited) YAML cites a source for data.type
+- [A13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A13) `lc2823-2020` (name) "LC2823-2020": (cited) YAML cites a source for name
+- [M13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M13) `lc2823-2020` Wattage "90": Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)
+- [M14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M14) `lc8808b` Wattage "65": (cited) YAML cites a source for electrical.wattage
+- [M15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M15) `lc8823` Wattage "85": Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)
 - [H16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=H16) `hd107s` Data BitRate "30000000": Row pairs with pixels/hd107s. Newstar's NS107S spec says 30 MHz, Rose Lighting's HD107S spec 40 MHz; the LED keeps 40 MHz (30 MHz in datasheet.discrepancies), and pixel-ics/ns107s carries Newstar's 3…
 - [K16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=K16) `hd107s` GPIO Min "3.5": Row pairs with pixels/hd107s, which keeps the HD107S row's 3.4 V (neither spec gives an input-high level)
 - [L16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=L16) `hd107s` GPIO Max "5.3": Row pairs with pixels/hd107s, which keeps the HD107S row's 5 V (neither spec gives an input-high level)
@@ -782,6 +815,7 @@ Database folder: `database/pixels/`.
 - [R17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=R17) `hd108` Data Type "APA102": (cited) YAML cites a source for data.type
 - [V17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V17) `hd108` NOTES "16bit/color version of NS107S": Row pairs with pixels/hd108; its notes and related link (predecessor HD107S) say the same
 - [Y17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y17) `hd108` Datasheet URL "http://newstar-ledstrip.com/productshow848.html": The sheet linked the NS108E's page (gone); YAML links the NS108's own datasheet
+- [M18](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M18) `ns108e` Wattage "91.8": (cited) YAML cites a source for electrical.wattage
 - [R19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=R19) `hd8808` Data Type "UCS1903": (cited) YAML cites a source for data.type
 - [V19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V19) `hd8808` NOTES "silimar to ws2815, but UCS1903 protocol": Typo fixed in YAML
 - [M20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M20) `pl9823` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
@@ -794,6 +828,7 @@ Database folder: `database/pixels/`.
 - [N21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=N21) `sk6812-wwa` Channel Current "20": The rev 03 datasheet specifies the 12 mA current version
 - [V21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V21) `sk6812-wwa` NOTES "replaces RGB LEDs with CW, WW, Amber for variable CCT": Same, in more detail
 - [B22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=B22) `sk6812` Colour Group "GRB & GRBW": The RGBW version is its own entry (pixels/sk6812-rgbw)
+- [M22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M22) `sk6812` Wattage "104": (cited) YAML cites a source for electrical.wattage
 - [V22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=V22) `sk6812` NOTES "WS2812 copy also available in 4 channel RGBW variant": Same; the RGBW version is its own entry (pixels/sk6812-rgbw)
 - [M23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M23) `sk6813` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
 - [S23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S23) `sk6813` Backup Data Line "No": (cited) YAML cites a source for data.backup_line
@@ -801,13 +836,19 @@ Database folder: `database/pixels/`.
 - [S24](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S24) `sk6813-hv` Backup Data Line "No": (cited) YAML cites a source for data.backup_line
 - [M25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M25) `sk6818` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
 - [M26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M26) `sk6822` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
+- [M27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M27) `sk9822` Wattage "100": (cited) YAML cites a source for electrical.wattage
 - [W27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=W27) `sk9822` 3rd Party Testing "https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-…": Old URL; it redirects to the page YAML links
 - [M28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M28) `sk9822-a` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
-- [M30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M30) `sm1616` Wattage "0": 0 is a placeholder
+- [M29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M29) `sk9826` Wattage "90": (cited) YAML cites a source for electrical.wattage
+- [A30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A30) `sm16716` (name) "SM1616": No such part: the row links the SM16716 datasheet, so it maps to that pixel IC (aliases.ts)
+- [M30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M30) `sm16716` Wattage "0": 0 is a placeholder
+- [M31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M31) `ws2812` Wattage "92.5": Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)
+- [M32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M32) `ws2813` Wattage "90": Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)
 - [Y32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y32) `ws2813` Datasheet URL "http://newstar-ledstrip.com/product/20171208112004735.pdf": Dead now; YAML links the current page
 - [Y33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y33) `ws2815` Datasheet URL "http://newstar-ledstrip.com/product/20180125101420006.pdf": Dead now; YAML links the current page
 - [M34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M34) `ws2815-rgbw` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
 - [P35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=P35) `ws2816` Package Size "7": Sheet error: "7" in Package Size
+- [M36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M36) `ws2851` Wattage "92.5": Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)
 - [Z3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Z3) `apa102c` Other Links "APA102C Pixel Protocol Overview \| Advatek Lighting": Advatek folded APA102C into its APA102 page (the old URL redirects there; YAML links it)
 - [A6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A6) `apa106` (name) "APA106": A datasheet aggregator page; YAML links a direct datasheet PDF
 - [Y6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y6) `apa106` Datasheet URL "https://datasheet4u.com/datasheet-pdf/ETC/APA-106/pdf.php?i…": A datasheet aggregator page; YAML links a direct datasheet PDF
@@ -819,15 +860,13 @@ Database folder: `database/pixels/`.
 - [Y20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y20) `pl9823` Datasheet URL "https://cdn.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1…": Instructables moved its CDN (cdn -> content.instructables.com, 2be3f66)
 - [A21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A21) `sk6812-wwa` (name) "SK6812": Hida's page now shows its RGB LC8812B; Hida's WWA clones are in aliases
 - [W27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=W27) `sk9822` 3rd Party Testing "https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-…": Old URL; it redirects to the page YAML links
-- [A30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A30) `sm1616` (name) "SM1616": SM1616 is a typo for SM16716 (pixel-ics/sm16716); the row's only content is that chip's datasheet (merge flagged in ISSUES.md)
+- [A30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A30) `sm16716` (name) "SM1616": SM1616 is a typo for SM16716 (pixel-ics/sm16716); the row's only content is that chip's datasheet (merge flagged in ISSUES.md)
 - [Y32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y32) `ws2813` Datasheet URL "http://newstar-ledstrip.com/product/20171208112004735.pdf": Dead now; YAML links the current page
 - [Y33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=Y33) `ws2815` Datasheet URL "http://newstar-ledstrip.com/product/20180125101420006.pdf": Dead now; YAML links the current page
 - [A35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=A35) `ws2816` (name) "WS2816": LCSC moved the datasheet; YAML has the current URL
 - [F7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=F7) `apa107` PWM Frequency "9000": Kept as a doubt in color.pwm_frequency_notes, with what the datasheet does say (oscillator 800-1200 kHz)
-- [G17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G17) `hd108` Brightness Bits "16+5": (cited) YAML cites a source for color.brightness_bits
 - [N21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=N21) `sk6812-wwa` Channel Current "20": The rev 03 datasheet specifies 12 mA; the 0.2 W package rating is in wattage
 - [F22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=F22) `sk6812` PWM Frequency "1100": (cited) YAML cites a source for color.pwm_frequency
-- [G29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=G29) `sk9826` Brightness Bits "16+5": (cited) YAML cites a source for color.brightness_bits
 
 </details>
 
@@ -843,7 +882,7 @@ Database folder: `database/pixel-ics/`.
 | B   | PWM Frequency        | `color.pwm_frequency`                              | number (frequency)                                                                                            |                                                               |
 | C   | Channels             | `data.channels`                                    | number                                                                                                        |                                                               |
 | D   | Channel Bits         | `color.channel_bits`                               | number                                                                                                        |                                                               |
-| E   | Aggregate Bits       | `color.aggregate_bits`                             | number                                                                                                        |                                                               |
+| E   | Aggregate Bits       | `color.channel_bits`, `color.channel_bits_notes`   | number                                                                                                        |                                                               |
 | F   | Clocked              | `data.clocked`                                     | bool                                                                                                          |                                                               |
 | G   | Data BitRate         | `data.bitrate`                                     | number (frequency)                                                                                            |                                                               |
 | H   | Pixel Data Size      | `data.pixel_size_bits`                             | number                                                                                                        |                                                               |
@@ -886,9 +925,9 @@ Database folder: `database/pixel-ics/`.
 - `pixel-ics/mbi6023` "MBI6023": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
 - `pixel-ics/mbi6024` "MBI6024": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
 - `pixel-ics/mbi6120` "MBI6120": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
-- `pixel-ics/ns107s` "NS107S"
-- `pixel-ics/ns108` "NS108"
-- `pixel-ics/ns8808` "NS8808"
+- `pixel-ics/ns107s` "NS107S": added 2026-11-20 in b4dc749 (data: NS107S/NS108/NS8808 are pixel ICs; HD107S/HD108/HD8808 the LEDs)
+- `pixel-ics/ns108` "NS108": added 2026-11-20 in b4dc749 (data: NS107S/NS108/NS8808 are pixel ICs; HD107S/HD108/HD8808 the LEDs)
+- `pixel-ics/ns8808` "NS8808": added 2026-11-20 in b4dc749 (data: NS107S/NS108/NS8808 are pixel ICs; HD107S/HD108/HD8808 the LEDs)
 - `pixel-ics/p9883` "P9883": added 2026-11-18 in 9ec5afe (data(pixel-ics, pixels): 27 parts controllers list by name, from their makers' documents)
 - `pixel-ics/sk6805` "SK6805": added 2026-07-01 in b3b1e7a (data: add SK6805 pixel IC)
 - `pixel-ics/sm16711` "SM16711": added 2026-11-18 in fa24de9 (data(pixel-ics, pixels): 22 more parts controllers list, from their makers' documents)
@@ -919,7 +958,7 @@ Database folder: `database/pixel-ics/`.
 
 ### Highlighted cells
 
-**Needs verification** (#D9D2E9, 45 cells; 1 still empty in YAML)
+**Needs verification** (#D9D2E9, 45 cells; 0 still empty in YAML)
 
 - Pixel Rate Max: 41 cells; computed by the site, nothing stored
 
@@ -927,10 +966,10 @@ Database folder: `database/pixel-ics/`.
 
 | Cell                                                                                                                    | Entry     | Column         | Sheet | YAML now | Sourced |
 | ----------------------------------------------------------------------------------------------------------------------- | --------- | -------------- | ----- | -------- | ------- |
-| [E13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=E13) | `qed3001` | Aggregate Bits |       | —        |         |
 | [D12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=D12) | `p9813`   | Channel Bits   | 8     | 8        | yes     |
 | [E12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=E12) | `p9813`   | Aggregate Bits | 8     | 8        | yes     |
 | [D13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=D13) | `qed3001` | Channel Bits   | 12    | 12       | yes     |
+| [E13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=E13) | `qed3001` | Aggregate Bits |       | 12       | yes     |
 
 </details>
 
@@ -975,14 +1014,18 @@ Database folder: `database/pixel-ics/`.
 
 </details>
 
-<details><summary>Acknowledged differences (20)</summary>
+<details><summary>Acknowledged differences (24)</summary>
 
 - [Y3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=Y3) `gs8202` Other Links "GS8202 Pixel Protocol Overview \| Advatek Lighting": Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)
 - [P7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=P7) `lpd8806` Package Size "SOP16/QFN16": Packages checked against the datasheets (7b66e88)
 - [C9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=C9) `my9221` Channels "3": (cited) YAML cites a source for data.channels
 - [G12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=G12) `p9813` Data BitRate "20000000": (cited) YAML cites a source for data.bitrate
+- [C16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=C16) `sm16511` Channels "4": (cited) YAML cites a source for data.channels
+- [P16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=P16) `sm16511` Package Size "SOP10/SOP16": (cited) YAML cites a source for physical.packages
+- [Q16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=Q16) `sm16511` Pin Count "10/16": (cited) YAML cites a source for physical.packages
 - [B23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=B23) `tm1804` PWM Frequency "285.7142857": 1/0.0035 s = 285.714 Hz; 285.7Hz is the honest precision
 - [X23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=X23) `tm1804` Datasheet URL "http://www.ledlightmake.com/ledlightmake_serv/TM1804%20Data…": Another copy of the datasheet; YAML links LCSC's (datasheet pass)
+- [B30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=B30) `ucs2903` PWM Frequency "1600": (cited) YAML cites a source for color.pwm_frequency
 - [A32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=A32) `sm16704` (name) "UCS2904": Row 32 is SM16704 data under the UCS2904 name (matches Sunmoon's datasheet; links Advatek's SM16704 page)
 - [J32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=J32) `sm16704` Output Voltage "30": 30 V is the absolute maximum (in output_voltage_notes); 26 V is the rated output
 - [C36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=795156605&range=C36) `ucs9812` Channels "3": (cited) YAML cites a source for data.channels
@@ -1032,6 +1075,7 @@ Header problems:
 ### Rows paired by alias, URL, or as duplicates
 
 - [A3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=A3) "Baldrick DMX" → `controllers/baldrick-dmx` (alias, score 0.5)
+- [A7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=A7) "Pixel 2 Things Relay" → `pixel-decoders/pixel-2-things-relay` (alias, score 0.67)
 - [A12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=A12) "WS2811 MosFet Driver" → `pixel-decoders/ws2811-ws2812-extender` (url, score 0.83)
 
 ### YAML entries with no sheet row
@@ -1063,7 +1107,7 @@ Header problems:
 
 </details>
 
-<details><summary>Acknowledged differences (29)</summary>
+<details><summary>Acknowledged differences (32)</summary>
 
 - [D2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=D2) `attiny10` Pixel Types "allows driving 3-wire clockless leds with 4-wire clocked pr…": Same, as inputs.protocols/outputs.types plus notes (64a0d09)
 - [E2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=E2) `attiny10` Unit Price (USD) "1": YAML price verified with a source since the import (1d45f70 and earlier)
@@ -1075,7 +1119,9 @@ Header problems:
 - [E4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=E4) `controller-changeover` Unit Price (USD) "12": YAML price verified with a source since the import (1d45f70 and earlier)
 - [D5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=D5) `neopixelbooster` Pixel Types "Inline 5V buck convertor": Same, as inputs.protocols/outputs.types plus notes (64a0d09)
 - [E6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=E6) `pixel-2-dmx` Unit Price (USD) "40": YAML price verified with a source since the import (1d45f70 and earlier)
+- [D7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=D7) `pixel-2-things-relay` Pixel Types "Converts pixel data into relay drivers capable of switching…": (cited) YAML cites a source for inputs.protocols
 - [E7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=E7) `pixel-2-things-relay` Unit Price (USD) "99": YAML price verified with a source since the import (1d45f70 and earlier)
+- [G7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=G7) `pixel-2-things-relay` Outputs "Relay": (cited) YAML cites a source for outputs.types
 - [I7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=I7) `pixel-2-things-relay` Notes "WSXX to 9 Relay ouput card": Reworded in YAML
 - [E8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=E8) `pixel-2-things-servo` Unit Price (USD) "99.99": YAML price verified with a source since the import (1d45f70 and earlier)
 - [G10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=G10) `pixfog-pixel-based-fog-controller` Outputs "Pixel Data": This sheet row's cells are shifted three columns right; values checked against the right columns
@@ -1087,6 +1133,7 @@ Header problems:
 - [E13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=E13) `ws2811-mosfet-driver` Unit Price (USD) "18": YAML price verified with a source since the import (1d45f70 and earlier)
 - [C14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=C14) `ws2811-mosfetdriver` Max Channels "3": (cited) YAML cites a source for outputs.count
 - [E14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=E14) `ws2811-mosfetdriver` Unit Price (USD) "4": YAML price verified with a source since the import (1d45f70 and earlier)
+- [D15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=D15) `led-strip-driver-module` Pixel Types "WS2811 to High current Mosfet": (cited) YAML cites a source for inputs.protocols
 - [E15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=E15) `led-strip-driver-module` Unit Price (USD) "1": YAML price verified with a source since the import (1d45f70 and earlier)
 - [J15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=J15) `led-strip-driver-module` Product URL "https://de.aliexpress.com/item/32786272573.html?spm=a2g0o.p…": Same product; YAML has the current URL without tracking parameters
 - [A2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1520623513&range=A2) `attiny10` (name) "ATtiny10": Same article; YAML has its full URL
@@ -1103,18 +1150,18 @@ Database folder: `database/level-converters/`.
 
 <details><summary>Column mapping</summary>
 
-| Col | Sheet header | YAML field(s)              | Compared as      | Note |
-| --- | ------------ | -------------------------- | ---------------- | ---- |
-| A   | (name)       | `name`                     | text             |      |
-| B   | Manufacturer | `creator`, `manufacturers` | text             |      |
-| C   | Channels     | `io.channels`              | number           |      |
-| D   | Interface    | `io.interface`             | text             |      |
-| E   | Notes        | `notes`                    | text             |      |
-| F   | Price        | `price`, `price[]`         | price            |      |
-| G   | Max Voltage  | `electrical.max_voltage`   | number (voltage) |      |
-| H   | Max Current  | `electrical.max_current`   | number (current) |      |
-| I   | Buffered     | `io.buffered`              | bool             |      |
-| J   | Product URL  | `links.product`            | url              |      |
+| Col | Sheet header | YAML field(s)                                         | Compared as      | Note |
+| --- | ------------ | ----------------------------------------------------- | ---------------- | ---- |
+| A   | (name)       | `name`                                                | text             |      |
+| B   | Manufacturer | `creator`, `manufacturers`                            | text             |      |
+| C   | Channels     | `io.channels`                                         | number           |      |
+| D   | Interface    | `physical.packages`, `io.differential`                | custom           |      |
+| E   | Notes        | `notes`                                               | text             |      |
+| F   | Price        | `price`, `price[]`                                    | price            |      |
+| G   | Max Voltage  | `electrical.max_voltage`, `electrical.supply_voltage` | number (voltage) |      |
+| H   | Max Current  | `electrical.output_current`                           | number (current) |      |
+| I   | Buffered     | `io.buffered`                                         | bool             |      |
+| J   | Product URL  | `links.product`                                       | url              |      |
 
 </details>
 
@@ -1125,10 +1172,13 @@ Database folder: `database/level-converters/`.
 - `level-converters/sn74hct245` "SN74HCT245": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `level-converters/txb0104` "TXB0104": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 
-<details><summary>Acknowledged differences (2)</summary>
+<details><summary>Acknowledged differences (5)</summary>
 
+- [D4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1484346977&range=D4) `sn74ahct125n` Interface "Through-Hole DIP": (cited) YAML cites a source for physical.packages
 - [F4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1484346977&range=F4) `sn74ahct125n` Price "0.75": YAML has distributor price tiers verified since the import
 - [G8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1484346977&range=G8) `sn74lv1t34dbvrg4` Max Voltage "7V": (cited) YAML cites a source for electrical.max_voltage
+- [D9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1484346977&range=D9) `74hct244` Interface "PDIP largest": (cited) YAML cites a source for physical.packages
+- [H11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1484346977&range=H11) `74hc245` Max Current "8mA": (cited) YAML cites a source for electrical.output_current
 
 </details>
 
@@ -1165,6 +1215,8 @@ Header problems:
 ### Rows paired by alias, URL, or as duplicates
 
 - [A4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A4) "DuotrigesimalWS28111" → `adapters/duotrigesimalws28111` (url, score 0.9)
+- [A6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A6) "Serial LED Driver" → `controllers/electromage-8x-driver` (alias, score 0.55)
+- [A7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A7) "Pro Serial LED Driver" → `controllers/electromage-pro-8x-driver` (alias, score 0.55)
 - [A23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A23) "F40D-B" → `controllers/k40d-pb` (alias, score 0.78)
 - [A24](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A24) "EspArtStick WLED" → `controllers/espartstick` (url, score 0.5)
 - [A25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A25) "M4 Port Pixel" → `controllers/m4-port-pixel` (alias, score 0.4)
@@ -1176,12 +1228,16 @@ Header problems:
 - [A41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A41) "Meanwell PDU with Differential Reciever" → `adapters/meanwell-pdu-with-differential-receiver` (alias, score 0.8)
 - [A46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A46) "QuinLED-Dig-Uno" → `controllers/quinled-dig-uno` (alias, score 0.43)
 
-<details><summary>Acknowledged differences (73)</summary>
+<details><summary>Acknowledged differences (81)</summary>
 
 - [D3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=D3) `rasppi-isolated-dmx` Pixel Types "Allows easy control of DMX-512 devices from Pi": A description in the Pixel Types column; the entry's notes say it
 - [E5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=E5) `pixelpops` Max Voltage "5": (cited) YAML cites a source for power.voltage.max
-- [H6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H6) `serial-led-driver` Unit Price (USD) "15": (cited) re-priced at the source (retrieved 2026-11-18)
-- [H7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H7) `pro-serial-led-driver` Unit Price (USD) "49": (cited) re-priced at the source (retrieved 2026-11-18)
+- [G6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=G6) `electromage-8x-driver` Parent "Any UART / Serial": Merged into controllers/electromage-8x-driver (database review); its serial input is in inputs, and controllers have no parent field
+- [H6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H6) `electromage-8x-driver` Unit Price (USD) "15": (cited) re-priced at the source (retrieved 2026-11-18)
+- [L6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=L6) `electromage-8x-driver` DIY/OTS "OTS": Merged into controllers/electromage-8x-driver (database review); controllers are all off the shelf, with no DIY/OTS field
+- [H7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H7) `electromage-pro-8x-driver` Unit Price (USD) "49": (cited) re-priced at the source (retrieved 2026-11-18)
+- [L7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=L7) `electromage-pro-8x-driver` DIY/OTS "OTS": Merged into controllers/electromage-pro-8x-driver (database review); controllers are all off the shelf, with no DIY/OTS field
+- [N7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=N7) `electromage-pro-8x-driver` Product URL "https://www.tindie.com/products/electromage/electromage-pro…": Tindie renamed the listing; vendors (Tindie) has the current page
 - [G8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=G8) `4x-led-mini-shield` Parent "Wemos Dx Mini (ESP32/ESP8266)": (cited) YAML cites a source for parent
 - [H8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H8) `4x-led-mini-shield` Unit Price (USD) "5": (cited) re-priced at the source (retrieved 2026-11-18)
 - [H9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H9) `8x-led-shield` Unit Price (USD) "7": (cited) re-priced at the source (retrieved 2026-11-18)
@@ -1189,8 +1245,10 @@ Header problems:
 - [H10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H10) `6x-led-shield` Unit Price (USD) "8": (cited) re-priced at the source (retrieved 2026-11-18)
 - [H11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H11) `16x-led-shield` Unit Price (USD) "9": (cited) re-priced at the source (retrieved 2026-11-18)
 - [G12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=G12) `6x-smd-led-shield` Parent "Wemos Dx Mini (ESP32/ESP8266)": (cited) YAML cites a source for parent
+- [C13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=C13) `sp901e-pixel-data-distributor` Max Channels "8": (cited) YAML cites a source for outputs.count
 - [G13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=G13) `sp901e-pixel-data-distributor` Parent "8 Ch Pixel data distribution": A description in the Parent column; it has no host board
 - [H13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H13) `sp901e-pixel-data-distributor` Unit Price (USD) "22": (cited) re-priced at the source (retrieved 2026-11-18)
+- [M13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=M13) `sp901e-pixel-data-distributor` Notes "Pixel data duplicated to 8 output channels": (cited) YAML cites a source for notes
 - [B14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=B14) `rpi-28d` Manufacturer/Designer "Hanson Electroncs": Typo fixed in YAML
 - [H14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H14) `rpi-28d` Unit Price (USD) "21.85": (cited) re-priced at the source (retrieved 2026-11-18)
 - [D17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=D17) `artgateone` Pixel Types "1 Universe Artnet to DMX Node": A description in the Pixel Types column; the entry is the Art-Net to DMX node
@@ -1225,6 +1283,7 @@ Header problems:
 - [H34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H34) `quinled-dig-quad` Unit Price (USD) "37.5": (cited) re-priced at the source (retrieved 2026-11-18)
 - [L34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=L34) `quinled-dig-quad` DIY/OTS "Both": Same: features "Available as DIY kit or pre-assembled" (merged into controllers/quinled-dig-quad)
 - [N34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=N34) `quinled-dig-quad` Product URL "https://quinled.info/quinled-dig-uno/": Sheet error: the Dig-Quad row's Product URL is the Dig-Uno page; fixed in YAML (703a4a2)
+- [C35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=C35) `wled-wemos-shield` Max Channels "2": (cited) YAML cites a source for outputs.count
 - [H37](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H37) `esp32-thingplus-dmx-to-led` Unit Price (USD) "20": (cited) re-priced at the source (retrieved 2026-11-18)
 - [A40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A40) `4-channel-differential-transmitter` (name) "4 Channel Differntial Transmitter": Typo fixed in YAML
 - [H40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=H40) `4-channel-differential-transmitter` Unit Price (USD) "15": (cited) re-priced at the source (retrieved 2026-11-18)
@@ -1243,8 +1302,9 @@ Header problems:
 - [I46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=I46) `quinled-dig-uno` Output Connectors "Phoniex Screw": Typo fixed in YAML (Phoenix Screw)
 - [N46](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=N46) `quinled-dig-uno` Product URL "https://quinled.info/2018/10/12/quinled-dig-uno-hardware-gu…": Old URL; it redirects to the page YAML links
 - [B48](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=B48) `pixellauncher-gen-2-micro` Manufacturer/Designer "Digital Ambience": (cited) YAML cites a source for creator
-- [A6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A6) `serial-led-driver` (name) "Serial LED Driver": bhencke.com now redirects to the ElectroMage docs page in other_links
-- [A7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A7) `pro-serial-led-driver` (name) "Pro Serial LED Driver": bhencke.com now redirects to the ElectroMage docs page in other_links
+- [A6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A6) `electromage-8x-driver` (name) "Serial LED Driver": bhencke.com now redirects to the ElectroMage docs page in other_links
+- [A7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A7) `electromage-pro-8x-driver` (name) "Pro Serial LED Driver": bhencke.com now redirects to the ElectroMage docs page in other_links
+- [N7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=N7) `electromage-pro-8x-driver` Product URL "https://www.tindie.com/products/electromage/electromage-pro…": Tindie renamed the listing; vendors (Tindie) has the current page
 - [A23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=A23) `k40d-pb` (name) "F40D-B": F40D-B = the K40D-PB under its pre-K-series name; merged into controllers/k40d-pb (a61acdb)
 - [N23](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=N23) `k40d-pb` Product URL "https://kulplights.com/product/f40d-pb/": F40D-B = the K40D-PB under its pre-K-series name; merged into controllers/k40d-pb (a61acdb)
 - [N34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=866679715&range=N34) `quinled-dig-quad` Product URL "https://quinled.info/quinled-dig-uno/": Sheet error: the Dig-Quad row's Product URL is the Dig-Uno page; fixed in YAML (703a4a2)
@@ -1298,7 +1358,8 @@ Header problems:
 ### Rows paired by alias, URL, or as duplicates
 
 - [A3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A3) "NRF 52840 Feather" → `microboards/nrf-52840-feather` (url, score 0.87)
-- [A36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A36) "Orange Pi LTS" → `microboards/orange-pi-lts` (url, score 0.79)
+- [A10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A10) "Ebyte NRF 52840" → `microboards/ebyte-nrf-52840` (alias, score 0.63)
+- [A36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A36) "Orange Pi LTS" → `microboards/orange-pi-lts` (url, score 0.71)
 
 ### YAML entries with no sheet row
 
@@ -1311,7 +1372,7 @@ Header problems:
 - `microboards/wemos-d1-mini-pro` "Wemos D1 Mini Pro": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `microboards/wemos-d1-mini` "Wemos D1 Mini": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 
-<details><summary>Acknowledged differences (81)</summary>
+<details><summary>Acknowledged differences (90)</summary>
 
 - [W2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W2) `trinket-m0` Unit Price (USD) "8.95": (cited) re-priced at the source (retrieved 2026-11-18)
 - [V3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=V3) `nrf-52840-feather` IMU "Wing": Same in stream 2's typed microboard vocabulary (475d1d0): "Wing" is an add-on
@@ -1329,12 +1390,14 @@ Header problems:
 - [G9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=G9) `beaglebone-black` Flash "4GBeMMC/microSD": Same in stream 2's typed microboard vocabulary (475d1d0): 4 GB eMMC flash; microSD is storage
 - [W9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W9) `beaglebone-black` Unit Price (USD) "50": (cited) re-priced at the source (retrieved 2026-03-10)
 - [Y9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y9) `beaglebone-black` Product URL "http://beagleboard.org/black": Old URL; it redirects to the page YAML links
+- [A10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A10) `ebyte-nrf-52840` (name) "Ebyte NRF 52840": (cited) YAML cites a source for name
 - [W10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W10) `ebyte-nrf-52840` Unit Price (USD) "10": (cited) re-priced at the source (retrieved 2026-11-18)
+- [X10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=X10) `ebyte-nrf-52840` Release Year "2021": (cited) YAML cites a source for release_year
 - [Y10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y10) `ebyte-nrf-52840` Product URL "https://www.ebyte.com/en/new-view-info.aspx?id=378": Ebyte's old site; YAML links its current product page (cdebyte.com)
 - [D11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=D11) `t-eth-lite` CPU "Xtensa LX6": (cited) YAML cites a source for compute.cpu
-- [G11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=G11) `t-eth-lite` Flash "microSD": (cited) YAML cites a source for compute.flash
 - [S11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=S11) `t-eth-lite` Bluetooth "4.1": (cited) YAML cites a source for connectivity.bluetooth
 - [W11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W11) `t-eth-lite` Unit Price (USD) "15": (cited) re-priced at the source (retrieved 2026-11-18)
+- [N12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N12) `ttgo-esp32-poe` USB "Power + UART": (cited) YAML cites a source for connectivity.usb
 - [W12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W12) `ttgo-esp32-poe` Unit Price (USD) "16": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y12) `ttgo-esp32-poe` Product URL "http://www.lilygo.cn/prod_view.aspx?TypeId=50033&Id=1307&FI…": Old URL (the site blocks scripted checks); YAML links the maker's current page
 - [N13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N13) `nodemcu-v2` USB "No": The sheet's "No" meant no native USB; the micro-USB is a USB-UART bridge, recorded as "Power + UART" like the other such boards
@@ -1356,12 +1419,18 @@ Header problems:
 - [P22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=P22) `teensy-3-6` Wi-Fi "Shield": Same in stream 2's typed microboard vocabulary (475d1d0): "Shield" is an add-on
 - [W25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W25) `raspberry-pi-zero-v1-3` Unit Price (USD) "5": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W26) `raspberry-pi-zero-w` Unit Price (USD) "10": (cited) re-priced at the source (retrieved 2026-11-18)
+- [N28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N28) `raspberry-pi-1-model-b` USB "OTG x4": (cited) YAML cites a source for connectivity.usb
 - [W28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W28) `raspberry-pi-1-model-b` Unit Price (USD) "25": (cited) re-priced at the source (retrieved 2026-11-18)
+- [N30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N30) `raspberry-pi-2-model-b` USB "OTG x4": (cited) YAML cites a source for connectivity.usb
+- [N31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N31) `raspberry-pi-2-model-b-v1-2` USB "OTG x4": (cited) YAML cites a source for connectivity.usb
 - [S32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=S32) `raspberry-pi-3-model-b` Bluetooth "4.0": Bluetooth 4.1 per the launch post
 - [F33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=F33) `raspberry-pi-4-model-b` Clock Speed "1500": (cited) YAML cites a source for compute.clock_speed
+- [N33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N33) `raspberry-pi-4-model-b` USB "OTG x2, 3.0 x2": (cited) YAML cites a source for connectivity.usb
 - [R33](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=R33) `raspberry-pi-4-model-b` Ethernet "Gigabit": Same in stream 2's typed microboard vocabulary (475d1d0): Gigabit is 1000BASE-T
+- [N34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N34) `raspberry-pi-3-model-b-plus` USB "OTG x4": (cited) YAML cites a source for connectivity.usb
 - [G35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=G35) `wt32-eth01` Flash "32Mbit": Same in stream 2's typed microboard vocabulary (475d1d0): 32 Mbit is 4 MB
 - [W35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W35) `wt32-eth01` Unit Price (USD) "7": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=C36) `orange-pi-lts` SoC "Allwinner H2+": (cited) YAML cites a source for compute.soc
 - [H36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=H36) `orange-pi-lts` RAM "256MB+": Same in stream 2's typed microboard vocabulary (475d1d0): 256MB (the "+" was a note)
 - [P36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=P36) `orange-pi-lts` Wi-Fi "2.4GHz & 5GHz": (cited) YAML cites a source for connectivity.wifi
 - [W36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=W36) `orange-pi-lts` Unit Price (USD) "8.5": (cited) re-priced at the source (retrieved 2026-11-18)
@@ -1393,6 +1462,7 @@ Header problems:
 - [Y38](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y38) `esp-01` Product URL "https://www.electroschematics.com/the-mighty-esp-01-adapter/": Electroschematics moved to edn.com; YAML has the new URL in other_links
 - [A39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=A39) `esp32-s3-eth` (name) "ESP32-S3 ETH": Waveshare moved the page; YAML has the current URL
 - [Y39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=Y39) `esp32-s3-eth` Product URL "https://www.waveshare.com/product/arduino/boards-kits/esp32…": Waveshare moved the page; YAML has the current URL
+- [N12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=N12) `ttgo-esp32-poe` USB "Power + UART": (cited) YAML cites a source for connectivity.usb
 - [G19](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1497158237&range=G19) `teensy-4-0` Flash "2048kB": (cited) YAML cites a source for compute.flash
 
 </details>
@@ -1443,7 +1513,7 @@ Database folder: `database/connectors/`.
 ### Rows paired by alias, URL, or as duplicates
 
 - [A21](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=A21) "Mini Bucaneer" → `connectors/mini-bucaneer` (url, score 1)
-- [A25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=A25) "MTSB CombiCon" → `connectors/mtsb-combicon` (url, score 0.96)
+- [A25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=A25) "MTSB CombiCon" → `connectors/mtsb-combicon` (url, score 0.92)
 
 ### YAML entries with no sheet row
 
@@ -1499,31 +1569,52 @@ Database folder: `database/connectors/`.
 - [A44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=A44) `mt30-60` Picture: <https://www.hacker-motor-shop.com/hacker_e/prodpic/MT60-connector-plug-socket-A85068_b_1.JPG> (lost in CSV conversion)
 - [A45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=A45) `xt60-90` Picture: <https://cdn.sparkfun.com//assets/parts/4/9/7/1/10474-01.jpg> (lost in CSV conversion)
 
-<details><summary>Acknowledged differences (39)</summary>
+<details><summary>Acknowledged differences (60)</summary>
 
-- [C3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C3) `sh` Link "https://www.jst-mfg.com/product/detail_e.php?series=231": Old URL; it redirects to the page YAML links
-- [C5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C5) `ph` Link "http://www.jst-mfg.com/product/detail_e.php?series=199": Old URL; it redirects to the page YAML links
+- [H3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=H3) `sh` Locking "Latching": (cited) YAML cites a source for mechanical.locking
+- [J3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=J3) `sh` Wire -To -Wire "Yes": (cited) YAML cites a source for mechanical.wire_to_wire
+- [W3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=W3) `sh` Max Pins "25": (cited) YAML cites a source for mechanical.max_pins
+- [H5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=H5) `ph` Locking "Detent": (cited) YAML cites a source for mechanical.locking
+- [AF5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=AF5) `ph` Notes "R.C, Lipo Balance connector , Internal connector in some co…": (cited) YAML cites a source for notes
 - [C6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C6) `picoblade` Link "https://www.molex.com/molex/products/family/picoblade": Dead now; YAML links the current page
+- [H7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=H7) `xh` Locking "Latching": (cited) YAML cites a source for mechanical.locking
 - [N8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=N8) `sm` Pitch "2.54 mm": (cited) YAML cites a source for mechanical.pitch
 - [C9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C9) `df62w` Link "https://www.hirose.com/product/series/DF62W#": Hirose now redirects it to its Japanese page; YAML links the English one
+- [E9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=E9) `df62w` Max Current "3.5": (cited) YAML cites a source for ratings.max_current
 - [C11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C11) `molex-kk-aka-kf2510` Link "https://www.molex.com/molex/products/family/kk": Old Molex link (hyperlink target differs from the cell text); YAML keeps the cell's URL
 - [C15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C15) `sp13` Link "https://www.weipuconnector.com/sp13-series/": Sheet error: the SP13 link cell's hyperlink points at Hirose DF62W
 - [C16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C16) `9159` Link "https://www.avx.com/products/connectors/board-to-board/stan…": Old URL; it redirects to the page YAML links
+- [F16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=F16) `9159` Max Voltage "125": (cited) YAML cites a source for ratings.max_voltage
+- [J16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=J16) `9159` Wire -To -Wire "Yes": (cited) YAML cites a source for mechanical.wire_to_wire
+- [L16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=L16) `9159` Smallest Guage "24": Board-to-board only: it takes no wire, so the gauges were removed (database review, plans/database-review-fixes/connectors.yaml)
+- [M16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=M16) `9159` Largest Guage "22": Board-to-board only: it takes no wire, so the gauges were removed (database review, plans/database-review-fixes/connectors.yaml)
+- [R16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=R16) `9159` Crimp? "Yes": (cited) YAML cites a source for termination.crimp
+- [S16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=S16) `9159` IDC? "Yes": (cited) YAML cites a source for termination.idc
+- [W16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=W16) `9159` Max Pins "6": (cited) YAML cites a source for mechanical.max_pins
 - [C22](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C22) `sp17` Link "https://weipuconnector.com/product/38": Old URL; it redirects to the page YAML links
 - [C25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C25) `mtsb-combicon` Link "https://in.rsdelivers.com/product/phoenix-contact/1757035/p…": Old URL; it redirects to the page YAML links
+- [L25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=L25) `mtsb-combicon` Smallest Guage "20": (cited) YAML cites a source for termination.smallest_gauge
 - [C26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C26) `deutsch-dt` Link "https://www.te.com/usa-en/products/connectors/automotive-co…": Old URL (the site blocks scripted checks); YAML links the maker's current page
 - [C28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C28) `mini-fit-jr` Link "https://www.molex.com/molex/products/family/minifit_power_c…": Dead now; YAML links the current page
+- [G29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=G29) `superseal` IP Rating "IP68": (cited) YAML cites a source for ratings.ip_rating
+- [W29](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=W29) `superseal` Max Pins "8": (cited) YAML cites a source for mechanical.max_pins
 - [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C31) `powercon` Link "https://www.neutrik.com/en/neutrik/products/powercon": Old URL; it redirects to the page YAML links
+- [B34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=B34) `hirschmann-ca` Manufacturer "Lumberg /Belden": (cited) YAML cites a source for creator
+- [E35](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=E35) `wieland-rst` Max Current "16": (cited) YAML cites a source for ratings.max_current
+- [M36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=M36) `teeplug` Largest Guage "16": (cited) YAML cites a source for termination.largest_gauge
+- [S36](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=S36) `teeplug` IDC? "Yes": (cited) YAML cites a source for termination.idc
 - [C39](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C39) `harting-han-lectriflex` Link "https://www.harting.com/US/en/heavy-duty-electrical-connect…": Old URL; it redirects to the page YAML links
 - [C40](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C40) `speakon` Link "https://www.neutrik.com/en/neutrik/products/speakon-loudspe…": Old URL; it redirects to the page YAML links
 - [C41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C41) `wago-221` Link "https://www.wago.com/global/electrical-interconnections/dis…": Old URL; it redirects to the page YAML links
+- [L41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=L41) `wago-221` Smallest Guage "28": (cited) YAML cites a source for termination.smallest_gauge
 - [C42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C42) `powerpole-15-45` Link "https://www.andersonpower.com/us/en/resources/PowerPoleReso…": Old URL; it redirects to the page YAML links
 - [G42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=G42) `powerpole-15-45` IP Rating "IP65 Available": Same: IP65 only with SpecPak shells and boots (ratings notes)
+- [M42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=M42) `powerpole-15-45` Largest Guage "6": (cited) YAML cites a source for termination.largest_gauge
 - [B44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=B44) `mt30-60` Manufacturer "Generic": (cited) YAML cites a source for creator
+- [B45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=B45) `xt60-90` Manufacturer "Generic": (cited) YAML cites a source for creator
 - [C45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C45) `xt60-90` Link "https://www.sparkfun.com/products/10474": Old URL; it redirects to the page YAML links
+- [F45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=F45) `xt60-90` Max Voltage "42": (cited) YAML cites a source for ratings.max_voltage
 - [B2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=B2) `dupont` Manufacturer "Harwin/ Generic": Old Harwin page; redirects to the product listing in creator.url
-- [C3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C3) `sh` Link "https://www.jst-mfg.com/product/detail_e.php?series=231": Old URL; it redirects to the page YAML links
-- [C5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C5) `ph` Link "http://www.jst-mfg.com/product/detail_e.php?series=199": Old URL; it redirects to the page YAML links
 - [C6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C6) `picoblade` Link "https://www.molex.com/molex/products/family/picoblade": Dead now; YAML links the current page
 - [C9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C9) `df62w` Link "https://www.hirose.com/product/series/DF62W#": Hirose now redirects it to its Japanese page; YAML links the English one
 - [C11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=602979062&range=C11) `molex-kk-aka-kf2510` Link "https://www.molex.com/molex/products/family/kk": Old Molex link (hyperlink target differs from the cell text); YAML keeps the cell's URL
@@ -1564,15 +1655,15 @@ Database folder: `database/drive-libraries/`.
 
 ### Rows paired by alias, URL, or as duplicates
 
-- [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=A11) "ESPixelstick" → `drive-libraries/espasynce131` (url, score 1)
+- [A5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=A5) "ArtNet to TMP2 Convertor" → `drive-libraries/artnet-to-tmp2-convertor` (alias, score 1)
 
 ### YAML entries with no sheet row
 
 - `drive-libraries/circuitpython` "CircuitPython": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `drive-libraries/esp32-fastled-web-server` "ESP32 FastLED Web Server": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
+- `drive-libraries/espasynce131` "ESPAsyncE131": added 2026-11-18 in f7d10be (data: 18 boards, buffers, libraries and connectors that hardware entries name)
 - `drive-libraries/espeasy` "ESPEasy": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `drive-libraries/esphome` "ESPHome": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
-- `drive-libraries/espixelstick` "ESPixelstick": in the 2026-01-21 import
 - `drive-libraries/fastled-esp8266-web-server` "FastLED + ESP8266 Web Server": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `drive-libraries/micropython` "MicroPython": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `drive-libraries/moonlight` "MoonLight": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
@@ -1580,12 +1671,14 @@ Database folder: `database/drive-libraries/`.
 - `drive-libraries/open-lighting-architecture` "Open Lighting Architecture": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `drive-libraries/tasmota` "Tasmota": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 
-<details><summary>Acknowledged differences (12)</summary>
+<details><summary>Acknowledged differences (14)</summary>
 
 - [D2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=D2) `arduino-ethernet-nano-with-enc28j60` Features "WS2811/12 Ethernet Hardwire": YAML revised by research since the import
 - [C4](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C4) `artnet-receive` Hardware "Arduino/Teensie/ESP8266": Same hardware, spelled out and as a list
+- [A5](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=A5) `artnet-to-tmp2-convertor` (name) "ArtNet to TMP2 Convertor": (cited) YAML cites a source for name
 - [C6](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C6) `artnet-dmx-sd-card` Hardware "NodeMcu /ESP8266/32": Same hardware, spelled out and as a list
 - [C8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C8) `artnetwifi` Hardware "ESP8266/32": Same hardware, spelled out and as a list
+- [C11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C11) `espixelstick` Hardware "ESP8266/32": Same boards in structured form: hardware [ESP8266, ESP32]
 - [B13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=B13) `fade` Developer "Eric Arcana": Fade is Eric Gunnerson's (riderx.info); "Eric Arcana" was a sheet error, fixed in 388c2cf
 - [C16](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C16) `led-mapper` Hardware "Arduino/ Esp 66/32": Same hardware, spelled out and as a list
 - [C27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=1543805468&range=C27) `visuino` Hardware "Arduino/Esp66/32/ RasPi/MicroBit/Teensy": Same hardware, spelled out and as a list
@@ -1636,7 +1729,7 @@ Header problems:
 - [A27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=A27) "Plexiglas LED Edge Lit was EndlightenT" → `diffusive-materials/plexiglas-led-edge-lit-was-endlightent` (alias, score 0.82)
 - [A41](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=A41) "Diffraction grating" → `diffusive-materials/diffraction-grating` (url, score 0.92)
 
-<details><summary>Acknowledged differences (44)</summary>
+<details><summary>Acknowledged differences (45)</summary>
 
 - [M2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=M2) `printer-paper` Material Type "Wood Pulp": Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters
 - [M3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=M3) `bubble-wrap` Material Type "Air Filled PE": Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters
@@ -1677,6 +1770,7 @@ Header problems:
 - [N42](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=N42) `harmonia-pc-1050-24-3050-24` Usage Notes "reflective (unknown) dopant several polymer options": YAML revised by research since the import (6d2133d)
 - [N43](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=N43) `makrolon-dq-5122-5162` Usage Notes "doped polycarbonate (index mismatch)": YAML revised by research since the import (6d2133d)
 - [B44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=B44) `perspex-diffuse` URL "https://perspex.com/news/pom-diffuse/": YAML revised by research since the import (6d2133d)
+- [L44](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=L44) `perspex-diffuse` Sizes Available "upto1220x 2440": (cited) YAML cites a source for physical.sizes_available
 - [M45](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=M45) `faux-fur` Material Type "Polyester,Acrylic": Same material as codes + form (2c469a1); descriptive detail kept in notes where it matters
 - [B10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=B10) `poly-pro-pipe-thin-wall` URL "https://www.omega.co.uk/pptst/TYPP.html": Old URL (the site blocks scripted checks); YAML links the maker's current page
 - [B20](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=554721273&range=B20) `corrugated-split-loom-conduit-tubing-sleeving` URL "https://www.cabletiesandmore.ca/images/gallery/white-wire-l…": Dead now; YAML links the current page
@@ -1691,32 +1785,47 @@ Database folder: `database/commercial-systems/`.
 
 <details><summary>Column mapping</summary>
 
-| Col | Sheet header          | YAML field(s)                                | Compared as | Note |
-| --- | --------------------- | -------------------------------------------- | ----------- | ---- |
-| A   | (name)                | `name`                                       | text        |      |
-| B   | Manufacturer          | `creator`, `manufacturers`                   | text        |      |
-| C   | Pixels Per Run        | `specs.pixels_per_run`                       | number      |      |
-| D   | Dimming Resolution    | `specs.dimming_resolution`                   | text        |      |
-| E   | Dedicated PSU/control | `specs.dedicated_psu`                        | bool        |      |
-| F   | RGB/W                 | `specs.color_type`                           | text        |      |
-| G   | Online Pricing        | `pricing.online_pricing`, `pricing.examples` | text        |      |
-| H   | Price Range           | `pricing.price_range`                        | exact       |      |
-| I   | Core Tech             | `core_tech`                                  | text        |      |
-| J   | Since                 | `since`                                      | number      |      |
-| K   | Target Market         | `target_market`                              | text        |      |
-| L   | NOTES                 | `notes`                                      | text        |      |
+| Col | Sheet header          | YAML field(s)                               | Compared as | Note |
+| --- | --------------------- | ------------------------------------------- | ----------- | ---- |
+| A   | (name)                | `name`                                      | text        |      |
+| B   | Manufacturer          | `creator`, `manufacturers`                  | text        |      |
+| C   | Pixels Per Run        | `specs.pixels_per_run`                      | number      |      |
+| D   | Dimming Resolution    | `specs.dimming_bits`, `specs.dimming_notes` | custom      |      |
+| E   | Dedicated PSU/control | `specs.dedicated_psu`                       | bool        |      |
+| F   | RGB/W                 | `specs.color_type`                          | text        |      |
+| G   | Online Pricing        | `pricing.examples`                          | text        |      |
+| H   | Price Range           | `pricing.price_range`                       | exact       |      |
+| I   | Core Tech             | `core_tech`                                 | text        |      |
+| J   | Since                 | `release_year`                              | number      |      |
+| K   | Target Market         | `target_market`                             | text        |      |
+| L   | NOTES                 | `notes`                                     | text        |      |
 
 </details>
 
 ### Rows paired by alias, URL, or as duplicates
 
-- [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=A11) "" → `commercial-systems/vinci` (url, score 1)
+- [A8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=A8) "Active RGB" → `commercial-systems/active-rgb` (alias, score 0.67)
+- [A10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=A10) "Lightwalls" → `commercial-systems/lightwalls` (alias, score 0.71)
+- [A11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=A11) "" → `commercial-systems/vinci` (alias, score 0.86)
+- [A14](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=A14) "SmartPXL" → `commercial-systems/smartpxl` (alias, score 0.86)
 
-<details><summary>Acknowledged differences (4)</summary>
+<details><summary>Acknowledged differences (16)</summary>
 
+- [F2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=F2) `dfs3000` RGB/W "RGB/RGBW/WW": (cited) YAML cites a source for specs.color_type
+- [C3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=C3) `astera-nyx` Pixels Per Run "170": Each bulb is a standalone wireless one-pixel fixture (no wired DMX), so there is no run to count; removed (database review, plans/database-review-fixes/adapters-commercial.yaml)
+- [F3](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=F3) `astera-nyx` RGB/W "RGBW": (cited) YAML cites a source for specs.color_type
+- [L7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=L7) `vc-dot-1` NOTES "Martin, stage lighting part of Harmon Kardon group": (cited) YAML cites a source for notes
+- [C8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=C8) `active-rgb` Pixels Per Run "170": (cited) YAML cites a source for specs.pixels_per_run
+- [F8](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=F8) `active-rgb` RGB/W "RGB": (cited) YAML cites a source for specs.color_type
 - [G10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=G10) `lightwalls` Online Pricing "Learning kit £550+VAT": Same in structured form: pricing.examples (item, £550, +VAT)
+- [L10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=L10) `lightwalls` NOTES "Strip and panels assosciated with Protopixel.io, subscripti…": (cited) YAML cites a source for notes
+- [B13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=B13) `triklit` Manufacturer "Minelon - Rainmin": (cited) YAML cites a source for creator
+- [D13](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=D13) `triklit` Dimming Resolution "8 Bit": (cited) YAML cites a source for specs.dimming_bits
+- [F15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=F15) `festoon-2-rgb` RGB/W "RGB W/WW": (cited) YAML cites a source for specs.color_type
 - [G17](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=G17) `twinkly` Online Pricing "250 string $105": Re-priced at the source: $119.99 for 250 LEDs (Twinkly US store, retrieved 2026-11-18)
 - [B7](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=B7) `vc-dot-1` Manufacturer "Martin": Maker moved the page; YAML has the current URL
 - [B9](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=B9) `lb-100` Manufacturer "SGM": Maker moved the page; YAML has the current URL
+- [B11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=B11) `vinci` Manufacturer "https://www.lucenti.lighting/products": Lucenti's Vinci: creator is now {name: Lucenti, url: https://www.lucenti.lighting/}; the sheet linked the product index
+- [G11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=248280587&range=G11) `vinci` Online Pricing "RGB €120 per lamp": The cell linked Lucenti's product index; its price is kept as a pricing example with the sheet's text in its notes
 
 </details>

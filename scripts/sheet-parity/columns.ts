@@ -91,6 +91,47 @@ const packagePins: Kind = {
   },
 };
 
+/** Bit depths at a path: a number, or a list when selectable ([8, 16]) */
+const depthsAt = (data: Record<string, unknown>, path: string) =>
+  getAt(data, path)
+    .flatMap((v) => (Array.isArray(v) ? v : [v]))
+    .map(Number);
+
+/** "13 Bit", "16bit or 8 bit": every depth the sheet names is in the bits field */
+const bitDepths = (path: string): Kind => ({
+  type: 'custom',
+  fn: (text, _mapped, view) => {
+    const want = (text.match(/\d+/g) ?? []).map(Number);
+    if (!want.length) return undefined;
+    const have = depthsAt(view.entry.data, path);
+    if (!have.length) return { status: 'missing' };
+    return { status: want.every((n) => have.includes(n)) ? 'ok' : 'differs' };
+  },
+});
+
+/** Pixels' "8+5": color.channel_bits, plus a brightness_control of that many bits */
+const brightnessBits: Kind = {
+  type: 'custom',
+  fn: (text, _mapped, view) => {
+    const m = text.trim().match(/^(\d+)\s*(?:\+\s*(\d+))?$/);
+    if (!m) return undefined;
+    const depths = depthsAt(view.entry.data, 'color.channel_bits');
+    if (!depths.length) return { status: 'missing' };
+    const extra = getAt(view.entry.data, 'color.brightness_control.bits')[0];
+    const ok = depths.includes(Number(m[1])) && (m[2] === undefined || extra === Number(m[2]));
+    return { status: ok ? 'ok' : 'differs' };
+  },
+};
+
+/** Level converters' "Interface": a differential part is io.differential; packages otherwise */
+const shifterInterface: Kind = {
+  type: 'custom',
+  fn: (text, _mapped, view) => {
+    if (!/differential|rs-?4[28]5/i.test(text)) return undefined;
+    return { status: getAt(view.entry.data, 'io.differential')[0] === true ? 'ok' : 'differs' };
+  },
+};
+
 /** Pixel-decoder "Outputs" words -> outputs.types enum (64a0d09) */
 const decoderOutputs: Kind = {
   type: 'enum',
@@ -300,7 +341,7 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Clocked', bool, ['data.clocked']),
     col('VCC Voltage', volts, ['electrical.supply_voltage']),
     col('PWM Frequency', hertz, ['color.pwm_frequency']),
-    col('Brightness Bits', num, ['color.channel_bits', 'color.brightness_control']),
+    col('Brightness Bits', brightnessBits, ['color.channel_bits', 'color.brightness_control']),
     col('Data BitRate', hertz, ['data.bitrate']),
     col('Pixel Data Size', num, ['data.pixel_size_bits']),
     col('Pixel Rate Max', pixelRate, []),
@@ -386,7 +427,7 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     name,
     col('Manufacturer', text, ['creator', 'manufacturers']),
     col('Channels', num, ['io.channels']),
-    col('Interface', text, ['physical.packages', 'io.differential']),
+    col('Interface', shifterInterface, ['physical.packages', 'io.differential']),
     col('Notes', text, ['notes']),
     col('Price', price, ['price', 'price[]']),
     col('Max Voltage', volts, ['electrical.max_voltage', 'electrical.supply_voltage']),
@@ -519,7 +560,10 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     name,
     col('Manufacturer', text, ['creator', 'manufacturers']),
     col('Pixels Per Run', num, ['specs.pixels_per_run']),
-    col('Dimming Resolution', text, ['specs.dimming_bits', 'specs.dimming_notes']),
+    col('Dimming Resolution', bitDepths('specs.dimming_bits'), [
+      'specs.dimming_bits',
+      'specs.dimming_notes',
+    ]),
     col('Dedicated PSU/control', bool, ['specs.dedicated_psu']),
     col('RGB/W', text, ['specs.color_type']),
     col('Online Pricing', text, ['pricing.examples']),

@@ -1770,3 +1770,74 @@
 'Commercial Pixel Systems | Twinkly | Online Pricing':
   - value: '250 string $105'
     reason: 'Re-priced at the source: $119.99 for 250 LEDs (Twinkly US store, retrieved 2026-11-18)'
+
+# Database review (stream 2): deliberate changes, each with its evidence
+'Controllers | DMX Core | Max Pixels':
+  - value: '6800'
+    reason: 'DMX Core 100 is a DMX/Art-Net node that drives no pixels; its pixel outputs were removed (database review, plans/database-review-fixes/ctrl-afp.yaml)'
+'Controllers | DMX Core | Pixel Types':
+  - value: 'Both'
+    reason: 'DMX Core 100 is a DMX/Art-Net node that drives no pixels; its pixel outputs were removed (database review, plans/database-review-fixes/ctrl-afp.yaml)'
+'Controllers | APD-2-500-12v-ART | Max Current':
+  - value: '5'
+    reason: 'No source gives a current, and 5 A fits neither the mains input nor the 12 V side of its 150 W supply; removed (database review, plans/database-review-fixes/ctrl-afp.yaml)'
+'Controllers | RC4Magic S3 Pixel Driver | Pixel Types (note)':
+  - value: 'for data & clock type LEDs only 4 of the 8 outputs are available'
+    reason: 'The note was copied from the 8-output Uli LED Control; this unit has 2 outputs and its maker says nothing like it (database review, plans/database-review-fixes/ctrl-lq.yaml)'
+'Pixels | APA105 | Wattage':
+  - value: '100'
+    reason: "Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)"
+'Pixels | LC2823-2020 | Wattage':
+  - value: '90'
+    reason: "Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)"
+'Pixels | LC8823 | Wattage':
+  - value: '85'
+    reason: "Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)"
+'Pixels | WS2812 | Wattage':
+  - value: '92.5'
+    reason: "Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)"
+'Pixels | WS2813 | Wattage':
+  - value: '90'
+    reason: "Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)"
+'Pixels | WS2851 | Wattage':
+  - value: '92.5'
+    reason: "Per-channel VCC x current (the sheet's formula), not the pixel's power; electrical.wattage now holds only makers' whole-pixel figures (database review, plans/database-review-fixes/stream5-parts.yaml)"
+'Pixels | HD107S | Brightness Bits':
+  - value: '5'
+    reason: 'The sheet gives only the 5-bit global brightness; YAML has 8-bit channels plus a 5-bit global brightness_control'
+'Pixels | SM1616 | (name)':
+  - value: 'SM1616'
+    reason: 'No such part: the row links the SM16716 datasheet, so it maps to that pixel IC (aliases.ts)'
+'Adapters | Serial LED Driver | Parent':
+  - value: 'Any UART / Serial'
+    reason: 'Merged into controllers/electromage-8x-driver (database review); its serial input is in inputs, and controllers have no parent field'
+'Adapters | Serial LED Driver | DIY/OTS':
+  - value: 'OTS'
+    reason: 'Merged into controllers/electromage-8x-driver (database review); controllers are all off the shelf, with no DIY/OTS field'
+'Adapters | Pro Serial LED Driver | DIY/OTS':
+  - value: 'OTS'
+    reason: 'Merged into controllers/electromage-pro-8x-driver (database review); controllers are all off the shelf, with no DIY/OTS field'
+'Adapters | Pro Serial LED Driver | Product URL':
+  - value: 'https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/'
+    reason: 'Tindie renamed the listing; vendors (Tindie) has the current page'
+'Adapters | Pro Serial LED Driver | Product URL (link)':
+  - value: 'https://www.tindie.com/products/electromage/electromage-pro-5-12v-8x-ws2812apa102-led-driver/'
+    reason: 'Tindie renamed the listing; vendors (Tindie) has the current page'
+'Connectors | 9159 | Smallest Guage':
+  - value: '24'
+    reason: 'Board-to-board only: it takes no wire, so the gauges were removed (database review, plans/database-review-fixes/connectors.yaml)'
+'Connectors | 9159 | Largest Guage':
+  - value: '22'
+    reason: 'Board-to-board only: it takes no wire, so the gauges were removed (database review, plans/database-review-fixes/connectors.yaml)'
+'Drive Libraries | ESPixelstick | Hardware':
+  - value: 'ESP8266/32'
+    reason: 'Same boards in structured form: hardware [ESP8266, ESP32]'
+'Commercial Pixel Systems | Astera Nyx | Pixels Per Run':
+  - value: '170'
+    reason: 'Each bulb is a standalone wireless one-pixel fixture (no wired DMX), so there is no run to count; removed (database review, plans/database-review-fixes/adapters-commercial.yaml)'
+'Commercial Pixel Systems |  | Manufacturer (link)':
+  - value: 'https://www.lucenti.lighting/products'
+    reason: "Lucenti's Vinci: creator is now {name: Lucenti, url: https://www.lucenti.lighting/}; the sheet linked the product index"
+'Commercial Pixel Systems |  | Online Pricing (link)':
+  - value: 'https://lucenti.lighting/products'
+    reason: "The cell linked Lucenti's product index; its price is kept as a pricing example with the sheet's text in its notes"
