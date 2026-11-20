@@ -85,7 +85,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**Current step: 12 (accessibility + performance), written and committed; being verified for the push.** Steps 1–11 are live (9–11 as `d1d23db4..ee64cc82`).
+**All twelve steps are live** (9–11 as `d1d23db4..ee64cc82`, 12 as `d92d1adb..d2bde2f1`). A follow-up batch (entry labels, merged filter spellings, the header fix CI asked for) is the last push; see the progress log.
 
 ## Findings / gotchas
 
@@ -144,6 +144,10 @@ Each step ships on its own (rebase, checks, push).
 - **Text colored like its own tint fails contrast at any tint.** Badge text is `oklch(from var(--badge-color) 0.45 c h)` in light and `0.8` in dark: the family hue at a lightness that reads, with the raw color as the fallback for browsers without relative color syntax.
 - Build after step 12 (`build3.log`): category chunk 96 kB (28 gz), shared chunk 124 kB (42 gz), `client` 180 kB (57 gz), root CSS 132 kB (21 gz, one file for every route including the designer's 40 kB), Inter latin 73 kB preloaded. Lazy-loading the filters drawer, column picker and export menu was dropped: together they are about 4 kB gzipped of the category chunk, and the export code is already its own chunk.
 
+- **A wide fallback font pushed the header off phone screens, and only CI saw it.** With the font self-hosted, the dev server sends it uncached on every navigation, so on Linux a page can be measured in the fallback face (DejaVu, much wider than Inter): 5 px over at 320 px, 9 px at 390 px, on `/search` and `/compare`. Windows' fallback is narrower, so local runs passed. Reproduce anywhere by aborting font requests and setting the body in Verdana with a little letter spacing (`e2e/mobile.test.ts` does). Fix: the logo is the flexible part of the header on phones (ellipsis), and `Inter Fallback` (Arial with `size-adjust: 107.06%`, `ascent-override: 90.49%`, `descent-override: 22.56%`) stands in until Inter arrives.
+- **Filter values need folding beyond case.** The database keeps names as sources write them (ISSUES.md asks streams not to rewrite spellings), so the table model folds case, spaces, hyphens, underscores, brackets and exclamation marks (`facetKey` in `table-model.ts`) but keeps signs that carry meaning: `C++` / `C#`, `$$` / `$$$`, `MAX3485CSA+`.
+- **Resizing a page and measuring it in the same breath reads a stale layout** (16 px of phantom overflow after `setViewportSize`). Poll the measurement.
+
 ## Progress log
 
 - [x] 2026-11-18 3:56 PM PST (23:56Z): read the build-out plan and the app; audited the live site and the sheet headlessly; measured the baseline build; wrote this plan.
@@ -165,7 +169,8 @@ Each step ships on its own (rebase, checks, push).
 - [x] 2026-11-20 3:20 AM PST (11:20Z): steps 9–11 rebased onto 50 new upstream commits. Fast checks pass (typecheck, lint, format, 378 unit tests, validate 600/600). Full e2e: 126 of 128 passed; the two failures were the column menu running off a short window (fixed, test added, table + mobile files re-run 34/34). Dev-server data cache fixed on the way (`perf(dev)`).
 - [x] 2026-11-20 3:42 AM PST (11:42Z): steps 9–11 pushed (`d1d23db4..ee64cc82`) after a second rebase (37 more commits; the database review had rewritten CONTRIBUTING.md, so this stream's edits there shrank to pointers at `/contribute`, the issue forms and Bun commands). 21 production tests pass on the build; CI green; checked live: preview images, `/sitemap.xml` (596 URLs), `/robots.txt`, `/contribute`, entry-page head tags and the contribute strip.
 - [x] Step 12 accessibility + performance pass — axe audit (about 3,700 failing elements: contrast, unnamed link icons, mismatched button names, an unnamed landmark, small targets) fixed and held by `e2e/a11y.test.ts` (ten pages × two themes, a phone, every overlay); skip link; first-Tab bug on category pages; the entry image viewer is a real dialog; Inter served from the site (no third-party requests for fonts or styles); link-preview `.data` twins removed from the build. Lazy-loading dropped after the bundle check (see findings). The designer's one finding is logged in ISSUES.md for stream 3.
-- [ ] Step 12: full e2e, production build + `test:prod`, push, live check.
+- [x] 2026-11-20 5:26 AM PST (13:26Z): step 12 pushed (`d92d1adb..d2bde2f1`) after a full e2e (156 of 156) and the production tests (21 of 21). Live on Cloudflare Pages: no Google Fonts request, Inter preloaded from the site, skip link first. **CI failed on it** (GitHub Pages backup not deployed): two phone-width tests, Linux only; see the finding below and the follow-up batch.
+- [x] Follow-up batch: entry-page field labels worded like the tables ("GPIO voltage", "SoC"; the last open item of step 9); filter values that are spellings of one name count and match as one ("Jinx" / "Jinx!" / "JINX!", 30 groups); the shared Playwright config no longer opens a browser window when a local run fails; the header fits a phone in any font, and the fallback font is matched to Inter.
 
 ## Open questions for the user
 
