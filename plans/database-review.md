@@ -98,8 +98,9 @@ Research findings with sources: [database-review-research.md](database-review-re
 12. ✅ Shipped `5b734cc..6db9e30` (2026-11-20); IGNORED_COMMITS follow-up; stream-5 suspected errors applied; pixels' `wattage` meaning decided; Pi 3 Model B duplicate merged; parity report back to zero.
 13. ✅ Cross-cutting: shared attribution definitions; unit convention (documented); stale flat entry types removed; mains-supply convention (`power.ac`, `output_voltage`).
 14. ✅ Docs: CONTRIBUTING.md schema reference and value conventions, `database/_schema/README.md`, CLAUDE.md, OVERHAUL-PLAN.md, TODO.md.
-15. **(current)** Ship the second batch; IGNORED_COMMITS for its structural commits; apply the last research batch (`scratchpad/fixes/issues-final.yaml`: WS2818B, NodeMCU outputs, P9883 maker, LEDs Master, DiGidot C4, Pixelator Mini, ProtoPixel 1-ch, Genius Pro, two HTML datasheets); ISSUES.md: close my sections with hashes, hand off other-owner records.
-16. Cleanup: remove `scripts/migrations/_tmp-apply-fixes.ts`, the ship worktree, backup branches, the port marker.
+15. ✅ Shipped `0507cb7..d1d23db` and `ee64cc8..c6b3a69`; drive libraries' website field (`links.url`) and their repositories; the last research batch (`plans/database-review-fixes/issues-final.yaml`); the mistyped ignored hash fixed with a guard test; ISSUES.md: my sections closed with hashes, hand-offs to streams 3-6, pattern-driver pricing recommendation for stream 6.
+16. ✅ Cleanup: temp apply script, ship worktree, backup branches, safety stashes, port marker.
+17. Waiting on Cameron: open question 1 (where DMX Core 100 and the Pixout recorder belong). Nothing else is open in this stream.
 
 ## Progress log
 
@@ -111,19 +112,20 @@ Research findings with sources: [database-review-research.md](database-review-re
 - [x] Diffusive materials (`2c469a1`), corrections, LD45 merge.
 - [x] Adapters (`3b9da1a`); terminology lint no longer rewrites URLs (`a000cd1`).
 - [x] Duplicates merged; removed-entry map below.
-- [x] Input vocabulary (`df38d67`); field-catalog regressions fixed; controller inputs audit applied (`afe02c4`).
+- [x] Input vocabulary (`df38d67`); field-catalog regressions fixed; controller inputs audit applied (`de0730f`).
 - [x] Pi Hat (`c246e98`); connectors (`795a04f`); microboards (`475d1d0`); phone-header e2e budget.
 - [x] Pattern drivers: research data (`0690af1`), structure (`e215cd7`).
-- [x] Table enums filter by their cell labels; commercial systems and level converters typed; level-converter datasheet facts; trailing zeros; LPD8806 7-bit; pixels/pixel ICs vocabulary; follow-up for entries added since (unpushed at this writing).
-- [x] Fix lists applied: connectors, controllers, microboards/decoders, pixels (SM1616 stub removed), software, adapters/commercial (ElectroMage duplicates merged), Perspex size (unpushed at this writing).
+- [x] Table enums filter by their cell labels; commercial systems and level converters typed; level-converter datasheet facts; trailing zeros; LPD8806 7-bit; pixels/pixel ICs vocabulary; follow-up for entries added since.
+- [x] Fix lists applied: connectors, controllers, microboards/decoders, pixels (SM1616 stub removed), software, adapters/commercial (ElectroMage duplicates merged), Perspex size.
 - [x] Pushed `5b734cc..6db9e30` (all checks, 114 e2e); IGNORED_COMMITS follow-up.
 - [x] Stream-5 suspected errors: 45 records applied with sources, the rest already fixed, rejected or handed over (`plans/database-review-fixes/stream5-*.yaml`); wattage meaning.
 - [x] Pi 3 Model B duplicate merged; parity report at zero open differences again.
 - [x] Cross-cutting (attribution, mains supplies, types) + docs.
-- [ ] Second batch shipped; its IGNORED_COMMITS.
-- [ ] Last research batch applied.
-- [ ] ISSUES.md handoffs and closures.
-- [ ] Cleanup.
+- [x] Second and third batches shipped (`0507cb7..d1d23db`, `ee64cc8..c6b3a69`; all checks, 114 e2e each); their IGNORED_COMMITS.
+- [x] Last research batch applied (`5abe386`).
+- [x] ISSUES.md closures and hand-offs.
+- [x] Cleanup.
+- [ ] Open question 1 (Cameron).
 
 ## Open questions for the user
 
