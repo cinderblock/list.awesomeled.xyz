@@ -849,6 +849,9 @@
 'Controllers | K16000S | Product URL (link)':
   - value: 'https://www.amazon.com/dp/B09XB4QTGT'
     reason: 'The Amazon listing is an unrelated CANRIA decoder (stream 6)'
+'Controllers | DiGidot C4 Extended 8 | Max Current':
+  - value: '0'
+    reason: '0 in the sheet is a placeholder, not a rating; YAML leaves it empty'
 'Pixels | APA102 | Max pixel per string':
   - value: '~250 - CLK sensitive'
     reason: 'Same: max_per_string 250 with the clock-degradation explanation'
@@ -1030,6 +1033,12 @@
 'Pixels | NS108 | NOTES':
   - value: '16bit/color version of NS107S'
     reason: 'Row pairs with pixels/hd108; its notes and related link (predecessor HD107S) say the same'
+'Pixels | NS107S | Wattage':
+  - value: '100'
+    reason: "Per-channel VCC x current (the sheet's formula: 5 V x 20 mA), not the pixel's power; electrical.wattage holds only makers' whole-pixel figures (database review)"
+'Pixels | NS108 | Quiescent Current':
+  - value: '1'
+    reason: 'Same part as the HD108 row (0.1 mA, kept). Datasheets back neither: static IDD typ 0 (Newstar NS108 Rev. 04), max 1 uA (Rose Lighting HD108 V1.1.0); open in ISSUES.md'
 'Pixel ICs | GS8202 | Other Links':
   - value: 'GS8202 Pixel Protocol Overview | Advatek Lighting'
     reason: 'Advatek merged GS8202 into its GS8208 page (the old URL redirects there; YAML links it)'

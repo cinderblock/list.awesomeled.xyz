@@ -240,6 +240,16 @@ LEDs Master's "FOSS" price and QLC+'s contribution are stream 6's (hand-off
 below). Records:
 [issues-final.yaml](plans/database-review-fixes/issues-final.yaml).
 
+## HD108's quiescent current is unsourced (parity research)
+
+`pixels/hd108` has `quiescent_current: 0.1mA` from the import, with no
+source, and the sheet's two rows for the part disagree (HD108 0.1 mA, NS108
+1.0 mA). The datasheets back neither: static IDD typical 0 (Newstar NS108
+spec Rev. 04, <https://voron.ua/files/pdf/led/NS108_5050.pdf>), maximum 1 µA
+(Rose Lighting HD108 V1.1.0, the entry's datasheet). The designer's idle
+power uses this field. Needs a measurement or a better source. (The parity
+report acknowledges the sheet's 1 mA by pointing here.)
+
 ## Link fields for cross-links, from parity research (stream 4)
 
 - `inputs.requires_host`: PB16 says BeagleBone Black, but it's a PocketBeagle

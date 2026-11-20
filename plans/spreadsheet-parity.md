@@ -152,6 +152,12 @@ row's name/maker replaced with `[+`/`//`; Pattern Drivers' Pixelblaze row
   Baking Parchment URL turned into a link chip.
 - `GOOGLEFINANCE` prices drift daily (Pixie, NetPixel-One, Pixelator, ELM,
   MadMapper, Mapio Pro, Resolume) — not real edits.
+- Word coverage is wrong for numbers: the tokenizer splits
+  `'2026-11-20'` into 2026/11/20, so a sheet "20" counted as found in any
+  entry with a source retrieved on the 20th. Five real differences hid this
+  way (K8-PB 12 V, DiGidot C4 Extended "0A", DMX Core 6800 px, NS107S
+  100 mW, NS108 1 mA quiescent). Numbers now match only as values of their
+  own (`ad349fd`).
 
 ### Rows the conversion merged or lost (row parity)
 
@@ -242,6 +248,10 @@ definitions, how the data was gathered).
 - The tool now treats a difference as settled when YAML cites a source for
   that field (`sources`, `price_source`, `dead_links`): research beats the
   sheet's unsourced value. The report still lists every one as "(cited)".
+- Stream 2 now keeps the tool in step with its own schema moves (column
+  views, aliases and acks, e.g. `9a0aae2`). On 2026-11-20 both streams made
+  the same update within minutes; fetch and read upstream's
+  `scripts/sheet-parity/` changes before teaching the tool a new field.
 
 ## Progress log
 
@@ -301,10 +311,16 @@ definitions, how the data was gathered).
 - [x] Shipped through the full gate: everything is on master (last
       `5ebff5b`). CI and Cloudflare Pages are green on master (`f4c3620`), and
       the new entry pages serve in production.
-- [x] Re-checked 2026-11-20 2:13 AM PST (10:13Z) against the live sheet and
-      current master: still zero open cells besides the 44 connector
-      pictures. The only changes were the `GOOGLEFINANCE` price drift noted
-      in Findings, so the committed report was left as is.
+- [x] Re-checked 2026-11-20 2:13 AM PST (10:13Z): still zero open. Stream
+      2's next batch then reopened about 25 differences, and stream 2 taught
+      the tool its typed fields and acknowledged them itself (`9a0aae2`; a
+      duplicate of that work from this stream was dropped in the rebase).
+      Another thread logged a tool bug in ISSUES.md (numbers passing on
+      stray digits): fixed (`ad349fd`, unit tests). The fix unmasked five
+      real differences: K8-PB's voltage, now cited from Kulp's manual
+      (`07c5649`); three acknowledged; HD108's unsourced quiescent current
+      went to ISSUES.md. Back to zero open at 3:55 AM PST
+      (11:55Z).
 - [ ] **(current, waiting on Cameron)** The retire checklist below, then the
       final re-run once the sheet is frozen.
 
@@ -382,6 +398,8 @@ Cameron's side, in this order (the sheet is his; this stream never edits it):
   the git-excluded scratch scripts parked so the checks match CI.
 - Don't compare or restore controllers' interfaces from the sheet's
   Interface column (scrambled; see Findings).
+- Don't let a number pass on word coverage: dates, URLs and part numbers are
+  full of digits (see Findings; `numberIn` in compare.ts).
 - Don't run `eslint --fix` on `acks.yaml` without its disable directive: the
   terminology rules rewrite the pinned sheet values ("ubuntu" → "Ubuntu")
   and every such ack silently stops matching.
