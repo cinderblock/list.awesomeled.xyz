@@ -63,91 +63,130 @@ The database lives in the `database/` directory with 12 categories:
    database/controllers/my-new-controller.yaml
    ```
 
-3. **Use the entry ID as the filename** (lowercase, hyphens only):
+3. **Name the file for the entry** (lowercase, hyphens only); the file name
+   is the entry's id and its URL:
    - Good: `wled-controller-v3.yaml`
    - Bad: `WLED Controller v3.yaml`
 
-4. **Add required fields**:
+4. **Start from the category's example.** Every category has a
+   `database/<category>/_example.yaml` with every field filled in and a
+   comment on each; `bun run validate` checks the examples against the schema
+   too, so they are always current. Only `name` is required:
 
    ```yaml
-   id: my-new-controller
    name: My New Controller
+   status: active
    ```
 
-5. **Add optional fields** relevant to your category (see [Schema Reference](#yaml-schema-reference))
+5. **Fill in what you can verify** and say where it came from (see
+   [Sources](#sources)). Leave a field out rather than guess.
 
 ### Example Entry (Controller)
 
 ```yaml
-id: esp32-led-controller
 name: ESP32 LED Controller
-manufacturer: Example Corp
-url: https://example.com/controller
+status: active
+release_year: 2024
+creator:
+  name: Example Corp
+  url: https://example.com
+  page: https://example.com/esp32-led-controller
+vendors:
+  - name: Example Corp
+    page: https://example.com/shop/esp32-led-controller
+notes: Budget controller for medium-sized installations
+inputs:
+  physical:
+    Wi-Fi:
+      - 2.4GHz
+    Ethernet: 1
+  protocols:
+    - Art-Net
+    - sACN
+    - DDP
+outputs:
+  count: 8
+  clocked: selectable
+  pixels:
+    max_per_output: 1024
+    max_total: 4096
+power:
+  voltage:
+    min: 5
+    max: 24
 price: 25
-max_pixels: 2048
-max_outputs: 8
-interfaces:
-  - WiFi
-  - Ethernet
+price_source:
+  retrieved: '2026-11-18'
+  vendor: Example Corp
+  url: https://example.com/shop/esp32-led-controller
 wled_compatible: true
-standalone: true
-status: active
-notes: Great budget option for medium-sized installations
-```
-
-### Example Entry (Pixel)
-
-```yaml
-id: ws2812b-eco
-name: WS2812B-ECO
-manufacturer: WorldSemi
-url: https://worldsemi.com
-datasheet: https://example.com/datasheet.pdf
-led_voltage: 5V
-color_order: GRB
-clocked: false
-data_bitrate: 800kHz
-package_size: 5050
-status: active
-```
-
-### Example Entry (Software Library)
-
-```yaml
-id: fastled
-name: FastLED
-url: https://github.com/FastLED/FastLED
-platforms:
-  - Arduino
-  - ESP32
-  - ESP8266
-  - Teensy
-license: MIT
-price: free
-notes: Popular Arduino library with extensive pixel support
 ```
 
 ---
 
 ## YAML Schema Reference
 
-### Common Fields (All Categories)
+Each category's fields, with descriptions, are in its JSON schema
+(`database/_schema/<category>.json`, shared definitions in `common.json`) and
+shown in use in its `_example.yaml`. This section covers what applies across
+categories.
 
-| Field          | Type          | Required | Description                                        |
-| -------------- | ------------- | -------- | -------------------------------------------------- |
-| `id`           | string        | **Yes**  | URL-safe identifier (`^[a-z0-9-]+$`)               |
-| `name`         | string        | **Yes**  | Display name                                       |
-| `manufacturer` | string        | No       | Manufacturer or vendor name                        |
-| `url`          | string        | No       | Primary URL (product page)                         |
-| `price`        | number/string | No       | Price (`25`, `"$50"`, `"varies"`, `"free"`)        |
-| `price_source` | object        | No       | Where/when the price was read (see below)          |
-| `notes`        | string        | No       | Additional information                             |
-| `status`       | string        | No       | `active`, `discontinued`, `end-of-life`, `unknown` |
-| `image`        | string/object | No       | Legacy single image; prefer `images`               |
-| `images`       | array         | No       | `{file, source, credit, license?}` — see below     |
-| `aliases`      | array         | No       | Other names the part is sold or listed under       |
-| `related`      | array         | No       | Links to other entries — see below                 |
-| `sources`      | object        | No       | Where facts were verified — see below              |
+### Common Fields
+
+| Field                   | Description                                                                 |
+| ----------------------- | --------------------------------------------------------------------------- |
+| `name`                  | Display name, as the maker writes it (**required**)                         |
+| `status`                | `active`, `discontinued`, `end-of-life`, `limited` or `unknown`             |
+| `release_year`          | Year it first went on sale                                                  |
+| `creator`               | Who designed it (see below)                                                 |
+| `manufacturers`         | Who builds it, when that differs from the creator                           |
+| `vendors`               | Who sells it                                                                |
+| `notes`                 | One or two sentences: what it is and what sets it apart                     |
+| `aliases`               | Other names it is sold or listed under (search and links use them)          |
+| `images`                | `{file, source, credit, license?}`; see [Adding Images](#adding-images)     |
+| `datasheet`             | `{url, sources?}`; see [Datasheets](#datasheets)                            |
+| `price`, `price_source` | See [Prices](#prices)                                                       |
+| `related`               | Links to other entries; see [Links between entries](#links-between-entries) |
+| `other_links`           | Further pages: guides, protocol notes, forum threads                        |
+| `technical_notes`       | Longer facts, one per item                                                  |
+| `sources`               | Where facts were verified; see [Sources](#sources)                          |
+| `dead_links`            | Links that stopped working, with an archive copy when there is one          |
+
+### Who made it: creator, manufacturers, vendors
+
+- `creator` is who designed it: a company, a person or a project. A bare name
+  (`creator: WorldSemi`) or `{name, url, page}`, where `url` is their site and
+  `page` is this product's page there.
+- `manufacturers` lists who builds it, only when that differs from the
+  creator (a clone maker, a contract manufacturer).
+- `vendors` lists who sells it: bare names or `{name, url, page, warranty}`,
+  `page` being the listing.
+
+### Values
+
+- **Quantities carry their unit**, without trailing zeros: `5V`, `20mA`,
+  `800kHz`, `1.5kHz`, `300mW`, `2.54mm`; `~` marks an approximate figure
+  (`~5mA`). Exception: controllers' and adapters' `power.voltage`,
+  `power.current` and `outputs.current` are bare numbers in volts and amps.
+  `app/lib/quantity.ts` reads both forms.
+- **Ranges** are `{min, max}`; a fixed value has both equal. A part sold in
+  several versions records the family's range and says which version does
+  what in a comment or a `_notes` field.
+- **Vocabularies are closed.** Enumerated fields (protocols, interfaces,
+  packages, color types, statuses) take only the schema's spellings; add a
+  value to the schema (or `common.json`) when something new appears rather
+  than writing a near-synonym.
+- **One value or a list.** Where a part can be either (`channel_bits: 8`, or
+  `[8, 16]` when selectable), a single value is written bare, never as a
+  one-item list.
+- **`<field>_notes`** carries what the structured value can't
+  (`channel_bits: 8` with `channel_bits_notes: 12-bit gamma correction per
+colour`). Keep facts in the field and context in the note.
+- **Directions** on pattern drivers' protocols and I/O are `Input`, `Output`,
+  `Both` or `false` (checked and unsupported); leave the field out when
+  unknown.
+- **Absent means unknown.** Write `false` only when a source says it has no
+  such thing.
 
 ### Prices
 
@@ -227,60 +266,25 @@ sources:
 Entry pages show the source under the field. `bun run validate` checks that
 every key names a field the entry has.
 
-### Controllers
+### Category fields
 
-| Field             | Type    | Description                                  |
-| ----------------- | ------- | -------------------------------------------- |
-| `max_pixels`      | number  | Maximum supported pixels                     |
-| `max_outputs`     | number  | Number of data outputs                       |
-| `interfaces`      | array   | `WiFi`, `Ethernet`, `USB`, `Bluetooth`, etc. |
-| `wled_compatible` | boolean | WLED firmware support                        |
-| `standalone`      | boolean | Operates without computer                    |
-| `pixel_types`     | array   | Supported protocols                          |
+| Category            | Schema                                                              | Example                                                      |
+| ------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Controllers         | [controller.json](database/_schema/controller.json)                 | [\_example.yaml](database/controllers/_example.yaml)         |
+| Pixels              | [pixel.json](database/_schema/pixel.json)                           | [\_example.yaml](database/pixels/_example.yaml)              |
+| Pixel ICs           | [pixel-ic.json](database/_schema/pixel-ic.json)                     | [\_example.yaml](database/pixel-ics/_example.yaml)           |
+| Pattern Drivers     | [pattern-driver.json](database/_schema/pattern-driver.json)         | [\_example.yaml](database/pattern-drivers/_example.yaml)     |
+| Connectors          | [connector.json](database/_schema/connector.json)                   | [\_example.yaml](database/connectors/_example.yaml)          |
+| Microboards         | [microboard.json](database/_schema/microboard.json)                 | [\_example.yaml](database/microboards/_example.yaml)         |
+| Level Converters    | [level-converter.json](database/_schema/level-converter.json)       | [\_example.yaml](database/level-converters/_example.yaml)    |
+| Adapters            | [adapter.json](database/_schema/adapter.json)                       | [\_example.yaml](database/adapters/_example.yaml)            |
+| Drive Libraries     | [drive-library.json](database/_schema/drive-library.json)           | [\_example.yaml](database/drive-libraries/_example.yaml)     |
+| Pixel Decoders      | [pixel-decoder.json](database/_schema/pixel-decoder.json)           | [\_example.yaml](database/pixel-decoders/_example.yaml)      |
+| Diffusive Materials | [diffusive-material.json](database/_schema/diffusive-material.json) | [\_example.yaml](database/diffusive-materials/_example.yaml) |
+| Commercial Systems  | [commercial-system.json](database/_schema/commercial-system.json)   | [\_example.yaml](database/commercial-systems/_example.yaml)  |
 
-### Pixels
-
-| Field          | Type    | Description                         |
-| -------------- | ------- | ----------------------------------- |
-| `led_voltage`  | string  | LED operating voltage (`5V`, `12V`) |
-| `vcc_voltage`  | string  | Power supply voltage                |
-| `color_order`  | string  | `RGB`, `GRB`, `RGBW`, etc.          |
-| `clocked`      | boolean | Uses clock signal (SPI)             |
-| `data_bitrate` | string  | Data rate (`800kHz`, `1MHz`)        |
-| `package_size` | string  | LED package (`5050`, `2020`, etc.)  |
-| `datasheet`    | string  | Datasheet URL                       |
-
-### Connectors
-
-| Field             | Type    | Description                         |
-| ----------------- | ------- | ----------------------------------- |
-| `outline`         | string  | Physical form factor                |
-| `max_current`     | string  | Current rating (`10A`, `30A`)       |
-| `max_voltage`     | string  | Voltage rating (`24V`, `48V`)       |
-| `ip_rating`       | string  | Ingress protection (`IP20`, `IP67`) |
-| `locking`         | boolean | Has locking mechanism               |
-| `conductor_count` | number  | Number of conductors                |
-
-### Microboards
-
-| Field         | Type    | Description                  |
-| ------------- | ------- | ---------------------------- |
-| `soc`         | string  | System-on-chip model         |
-| `cpu`         | string  | Processor type               |
-| `clock_speed` | string  | CPU frequency (`240MHz`)     |
-| `flash`       | string  | Flash memory (`4MB`, `16MB`) |
-| `ram`         | string  | RAM size (`320KB`, `8MB`)    |
-| `wifi`        | boolean | Has WiFi                     |
-| `ethernet`    | boolean | Has Ethernet                 |
-| `bluetooth`   | boolean | Has Bluetooth                |
-
-### Drive Libraries
-
-| Field       | Type   | Description         |
-| ----------- | ------ | ------------------- |
-| `platforms` | array  | Supported platforms |
-| `license`   | string | Software license    |
-| `features`  | array  | Key features        |
+Changing a schema means migrating the entries with it; see
+[database/\_schema/README.md](database/_schema/README.md).
 
 ---
 
@@ -375,35 +379,24 @@ All styles are in `app/app.css` using vanilla CSS with CSS custom properties.
 
 ### Adding a New Column
 
-1. **Add the field to the TypeScript type** in `app/lib/types.ts`:
+Every field in a category's schema is already a column: the field catalog
+(`app/lib/fields.ts`) reads the schema, and the table's column picker offers
+every field. To make one a default column, or to give it custom rendering,
+sorting or filtering, add it to the category's list in `app/lib/columns.tsx`:
 
-   ```typescript
-   export interface ControllerEntry extends BaseEntry {
-     // ... existing fields
-     new_field?: string;
-   }
-   ```
+```typescript
+export const controllerColumns: Column[] = [
+  // ... existing columns
+  {
+    key: 'outputs.count', // dotted path into the entry
+    label: 'Outputs',
+    filterConfig: { type: 'numeric' },
+  },
+];
+```
 
-2. **Add the column configuration** in `app/lib/columns.tsx`:
-
-   ```typescript
-   export const controllerColumns: ColumnConfig[] = [
-     // ... existing columns
-     {
-       key: 'new_field',
-       label: 'New Field',
-       sortable: true,
-     },
-   ];
-   ```
-
-3. **Add to search keys** if searchable:
-   ```typescript
-   export const searchKeys: Record<string, string[]> = {
-     controllers: ['name', 'manufacturer', 'notes', 'new_field'],
-     // ...
-   };
-   ```
+Enumerated values show through `valueLabels` (raw value to label), which the
+filters and copied text use too, so they match the cells.
 
 ### Adding a New Component
 
@@ -559,8 +552,8 @@ The database uses JSON Schema for validation. Schemas are located in `database/_
 
 Before submitting:
 
-- Ensure `id` matches the filename (without `.yaml`)
-- Verify required fields are present (`id`, `name`)
+- Run `bun run validate`: it checks every entry and every `_example.yaml`
+  against its schema, and that each `sources` key names a field the entry has
 - Check that URLs are valid and accessible
 - Confirm the entry appears correctly on the site
 

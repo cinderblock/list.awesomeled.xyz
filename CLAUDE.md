@@ -12,16 +12,22 @@ This project uses **Bun** (not npm/node). Use `bun` commands:
 
 ## Database Schema
 
-YAML data files use these key fields for attribution:
+YAML data files use these key fields for attribution (shared definitions in
+`database/_schema/common.json`):
 
-- `creator` - Original designer/developer (primary field)
-- `manufacturers` - Array of manufacturers that produce the item
-- `vendors` - Array of vendors that sell/distribute the item
-- `developer` - Deprecated alias for `creator` (only in drive-library/pattern-driver schemas)
+- `creator` - Who designed it (a name, or `{name, url, page}`)
+- `manufacturers` - Who builds it, when that differs from the creator
+- `vendors` - Who sells it (names, or `{name, url, page, warranty}`)
+
+How to write values (units, ranges, lists, `_notes`) is in CONTRIBUTING.md
+("Values"); how to change a schema and migrate the entries is in
+`database/_schema/README.md`.
 
 ## ESLint YAML Key Order
 
-Database YAML files enforce key ordering: `name`, `creator`, `developer`, then alphabetical.
+Database YAML files enforce key ordering: `name`, `status`, `release_year`,
+`creator`, `manufacturers`, `vendors`, `notes`, `inputs`, `outputs`, `power`,
+then alphabetical.
 
 ## Batch commits and "Updated" timestamps
 

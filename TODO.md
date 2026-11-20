@@ -2,7 +2,10 @@
 
 ## In Progress
 
-- [ ] Complete database review and possible refactor
+- [ ] Complete database review and possible refactor — every category's
+      schema reviewed and typed, ~230 facts re-checked at makers' docs
+      ([plans/database-review.md](plans/database-review.md)); open: the
+      owner questions listed there
 
 ## Done
 
@@ -17,7 +20,10 @@
       Platforms table columns now use the icon `Badge` system (Art-Net,
       Wi-Fi, WLED, Linux, …) instead of plain outline pills
 
-## Pending
-
-- [ ] Standardize IC packages
-- [ ] Standardize Async / clocked
+- [x] Standardize IC packages — `physical.packages`, named the way
+      distributors list them (`SOP-8`, `SOT-23-5`; LEDs `5050`, `5mm`), checked
+      by `common.json` `ic_package` / `led_package` (0bb3346)
+- [x] Standardize Async / clocked — hardware outputs say
+      `outputs.clocked`: `false`, `selectable` or `always` (`common.json`
+      `clocked_support`), shown as Single-wire / Both / Clocked; pixels and
+      pixel ICs say `data.clocked: true / false`

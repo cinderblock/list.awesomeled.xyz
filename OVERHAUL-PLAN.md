@@ -45,10 +45,10 @@ whole database validates with `bun run validate`.
    frequency/current/power/voltage grammars ("800kHz", "22mA", "~5mA",
    "3.7-5.5V" ranges; bare numbers = SI base unit), applied to pixels,
    pixel-ics, connectors, controllers, and microboards; `app/lib/quantity.ts`
-   parses them so those columns sort/filter by normalized value. Remaining:
-   decide whether derived fields (`pixel_rate_max` = bitrate ÷ bits) should be
-   computed at render time instead of stored; extend grammar to stragglers as
-   they surface.
+   parses them so those columns sort/filter by normalized value. Derived
+   fields are computed, not stored (`pixel_rate_max` at load time, a1cd65f);
+   the database review ([plans/database-review.md](plans/database-review.md))
+   typed every category's remaining strings.
 3. ~~**Goal 3 — cross-links**~~: done 2026-11-18, see
    [plans/cross-links.md](plans/cross-links.md).
 4. **Stretch 2 — wizard** onto the existing `system-overview` diagram; compute
