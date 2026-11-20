@@ -46,7 +46,7 @@ electrical:
     max: 5V
   channel_current: 17mA
   quiescent_current: 0.1mA
-  wattage: 85mW
+  wattage: 300mW
 other_links:
   - https://www.advateklighting.com/pixel-protocols/hd108
   - https://www.hd108-led.com/product-category/hd108-led-chip/
@@ -105,3 +105,7 @@ sources:
     url: https://web.archive.org/web/20220216182230/https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
     retrieved: '2026-11-18'
     notes: "Rose Lighting HD108 specification V1.1.0 (Nov 22, 2020), 'Operating Characteristic' p.6. Diagram: 128 bits of zero start frame; LED frame 64 bits = 1 | 5 bits R | 5 bits G | 5 bits B (brightness) | RED 16 | GREEN 16 | BLUE 16."
+  electrical.wattage:
+    url: https://voron.ua/files/pdf/led/NS108_5050.pdf
+    retrieved: '2026-11-18'
+    notes: 5.5x5.0x1.6mm Top SMD Type 0.3Watt Power

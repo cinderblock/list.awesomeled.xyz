@@ -28,7 +28,7 @@ electrical:
     max: 5.3V
   channel_current: 22mA
   quiescent_current: 1mA
-  wattage: 110mW
+  wattage: 200mW
   channel_current_notes: Datasheet claims 22-26mA; every other spec matches SK9822, so 19-22mA is most likely
 images:
   - file: apa107.webp
@@ -58,3 +58,7 @@ sources:
     url: http://newstar-ledstrip.com/productshow816.html
     retrieved: '2026-11-18'
     notes: APA107 RGB Pixel LED Chip 5050 listed in Newstar's Pixel LED Chip catalog (inquiry, no price)
+  electrical.wattage:
+    url: http://www.newstar-ledstrip.com/product/20180820112602493.pdf
+    retrieved: '2026-11-18'
+    notes: 5.5x5.0x1.6mm Top SMD Type 0.2Watt Power

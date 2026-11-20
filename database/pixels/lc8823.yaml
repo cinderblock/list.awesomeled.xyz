@@ -16,7 +16,6 @@ electrical:
   led_voltage: 3-7.5V
   supply_voltage: 5V
   channel_current: 17mA
-  wattage: 85mW
 images:
   - file: lc8823.webp
     source: https://addressable-led.com/Products/Fast-LED-Chip-LC8823.html

@@ -30,7 +30,7 @@ electrical:
     max: 5.6V
   channel_current: 18mA
   quiescent_current: 3.6mA
-  wattage: 91.8mW
+  wattage: 300mW
 physical:
   packages:
     - '5050'
@@ -53,3 +53,7 @@ sources:
     url: https://web.archive.org/web/20250818161935/http://newstar-ledstrip.com/product/20191018160652775.pdf
     retrieved: 2026-11-18
     notes: 'Datasheet: "each set of data are 1bit start code +15 Bit (32) brightness adjustment (red, green, blue three ports each 5bits, corresponding to S4 ~ S0); 48bits gray data (red, green, blue 16bits)"'
+  electrical.wattage:
+    url: http://newstar-ledstrip.com/product/20191018160652775.pdf
+    retrieved: '2026-11-18'
+    notes: 5.5x5.0x1.6mm Top SMD Type 0.3Watt Power

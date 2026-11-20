@@ -32,7 +32,6 @@ electrical:
   channel_current: 18.5mA
   channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA. 3535 package has lower current
   quiescent_current: 0.7mA
-  wattage: 92.5mW
 images:
   - file: ws2812.webp
     source: https://www.adafruit.com/product/1655

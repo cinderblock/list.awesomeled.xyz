@@ -24,7 +24,7 @@ electrical:
     max: 12.5V
   channel_current: 13mA
   quiescent_current: 2.5mA
-  wattage: 65mW
+  wattage: 156mW
 images:
   - file: lc8808b.webp
     source: https://addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
@@ -57,3 +57,7 @@ sources:
     url: https://www.addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
     retrieved: '2026-11-18'
     notes: SHENZHEN LED Color Co., Ltd.
+  electrical.wattage:
+    url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
+    retrieved: '2026-11-18'
+    notes: It is RGB LED series structure. Power supply voltage is 12V, and the LED constant current is 18mA.

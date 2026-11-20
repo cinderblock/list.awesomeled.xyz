@@ -2,7 +2,7 @@ name: UCS2903
 creator: Lianxinke Microelectronics
 color:
   channel_bits: 8
-  pwm_frequency: 1.6kHz
+  pwm_frequency: 1.5kHz
 data:
   clocked: false
   channels: 3
@@ -30,3 +30,7 @@ sources:
     url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
     retrieved: '2026-11-18'
     notes: 'datasheet imprint: 联芯科（深圳）微电子 (Lianxinke Microelectronics, www.szucs.cn)'
+  color.pwm_frequency:
+    url: https://www.superlightingled.com/PDF/SPEC/UCS2903-Datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: frequency of 1.5 KHz/s

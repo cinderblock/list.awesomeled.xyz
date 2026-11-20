@@ -2,13 +2,15 @@ name: WS2816
 status: active
 release_year: 2021
 creator: WorldSemi
-notes: 16-bit per channel color depth with per-channel brightness control
+notes: 16-bit per channel color depth; the WS2816A adds a 5-bit current gain per channel
 color:
   order: GRB
   channel_bits: 16
   brightness_control:
     bits: 5
+    method: current
     scope: per_channel
+    notes: 'WS2816A only: 5-bit current gain on each RGB channel. WS2816B and WS2816C have none (16-bit grayscale with 4-bit gamma correction).'
   pwm_frequency: 10kHz
 data:
   type: WS2816
@@ -74,15 +76,19 @@ sources:
     url: https://www.advateklighting.com/pixel-protocols/ws2816b
     retrieved: '2026-11-18'
     notes: "'All three variants offer 16 bits of color resolution…'; A has 4-bit per-color current control"
+  color.brightness_control:
+    url: https://datasheet.lcsc.com/datasheet/pdf/6bd8afedb2468ec953fc8ec232561b98.pdf
+    retrieved: '2026-11-18'
+    notes: RGB通道各具有5bit电流增益功能
 technical_notes:
   - 48-bit pixel data for 16-bit per channel color depth
-  - Independent 5-bit brightness control for each R, G, B channel
+  - 'WS2816A only: independent 5-bit current gain for each R, G, B channel'
   - Backup data line for fault tolerance
   - WS2816B (20mA) and WS2816C (10mA) current variants available
 variants:
   - name: WS2816A
     suffix: A
-    differences: 4-bit per-colour current control instead of gamma correction
+    differences: 5-bit current gain on each RGB channel (keeps the 4-bit gamma correction)
   - name: WS2816B
     suffix: B
     differences: 20mA channel current

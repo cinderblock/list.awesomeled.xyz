@@ -33,7 +33,7 @@ electrical:
   channel_current: 22mA
   channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control PWM, not current
   quiescent_current: 1mA
-  wattage: 110mW
+  wattage: 200mW
 images:
   - file: apa102c.webp
     source: https://commons.wikimedia.org/wiki/File:14863-SMD_LED_-_RGB_APA102C-5050_Pack_of_10_-02.jpg
@@ -70,6 +70,10 @@ sources:
     url: https://web.archive.org/web/20170808205413/http://neon-world.com:80/en/product_detail.php?cid=59&id=115
     retrieved: '2026-11-18'
     notes: APA Electronic product page (Wayback 2017-08-08). Cosmetic alias; normalizes to the existing name.
+  electrical.wattage:
+    url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+    retrieved: '2026-11-18'
+    notes: Power consumption … 0.2W (MAX:1W)
 technical_notes:
   - Improved thermal design over APA102
   - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/

@@ -42,7 +42,6 @@ electrical:
     max: 5V
   channel_current: 20mA
   quiescent_current: 0.1mA
-  wattage: 100mW
 other_links:
   - https://www.advateklighting.com/pixel-protocols/hd107s
   - http://newstar-ledstrip.com/productshow818.html

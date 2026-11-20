@@ -16,7 +16,6 @@ electrical:
   led_voltage: 3-7.5V
   supply_voltage: 5V
   channel_current: 18mA
-  wattage: 90mW
 physical:
   packages:
     - '2020'

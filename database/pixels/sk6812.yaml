@@ -33,7 +33,7 @@ electrical:
     max: 5V
   channel_current: 20mA
   quiescent_current: 1mA
-  wattage: 104mW
+  wattage: 200mW
   channel_current_notes: Datasheet states max 49mA, but the graph for the 5050 and 2040 packages shows R=19mA, G,B=22mA (W, WW not specified); likely lower in the 3537 mini
 images:
   - file: sk6812.webp
@@ -85,5 +85,9 @@ sources:
     url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
     retrieved: 2026-11-18
     notes: 'Electrical parameters: VIH 3.4V min, VIL 1.6V max, at VDD=5.0V; R/G/B port VDS,MAX 26V'
+  electrical.wattage:
+    url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+    retrieved: '2026-11-18'
+    notes: 5.5x5.0x1.6mm Top SMD Type 0.2Watt Power
 technical_notes:
   - PWM measured at 1.1kHz (more than twice the WS2812's 430Hz); the datasheet says 1.2kHz

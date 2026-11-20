@@ -24,7 +24,6 @@ electrical:
     max: 5V
   channel_current: 18.5mA
   quiescent_current: 2.1mA
-  wattage: 92.5mW
   supply_voltage_notes: Can use an external resistor to supply 5V Vdd from a higher system voltage
 other_links:
   - http://www.world-semi.com/Certifications/details-121-4.html

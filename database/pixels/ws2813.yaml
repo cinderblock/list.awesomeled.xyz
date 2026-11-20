@@ -32,7 +32,6 @@ electrical:
   channel_current: 18mA
   channel_current_notes: Also has a 5mA version available
   quiescent_current: 0.7mA
-  wattage: 90mW
 images:
   - file: ws2813.webp
     source: https://www.world-semi.com/products-rgbic-led.html

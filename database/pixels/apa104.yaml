@@ -34,7 +34,7 @@ electrical:
   channel_current: 20mA
   channel_current_notes: Datasheet states max 49mA current, but graph for 5050 package shows R=19mA, G,B=22mA
   quiescent_current: 1mA
-  wattage: 100mW
+  wattage: 250mW
 other_links:
   - https://www.advateklighting.com/pixel-protocols/apa104
   - http://neon-world.com/en/product_detail.php?cid=60&id=171
@@ -60,6 +60,10 @@ sources:
     url: https://web.archive.org/web/20260520135812/https://neon-world.com/en/product_detail.php?cid=60&id=171
     retrieved: '2026-11-18'
     notes: APA Electronic site navigation and product 'APA-104-3535 12mA'. Cosmetic alias.
+  electrical.wattage:
+    url: https://neon-world.com/uploads/soft/20170622/1498136682.pdf
+    retrieved: '2026-11-18'
+    notes: 5.5x5.0x1.6mm Top SMD Type 0.25 Watt Power
 technical_notes:
   - WS2812 protocol compatible clone from APA Electronics
   - Available in very small 1212 package size

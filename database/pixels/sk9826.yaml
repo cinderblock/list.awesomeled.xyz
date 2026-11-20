@@ -27,7 +27,7 @@ electrical:
   supply_voltage: 5V
   channel_current: 18mA
   quiescent_current: 3.6mA
-  wattage: 90mW
+  wattage: 300mW
 physical:
   packages:
     - '5050'
@@ -42,3 +42,7 @@ sources:
     url: https://web.archive.org/web/20220216171300/http://newstar-ledstrip.com/product/20190927165451294.pdf
     retrieved: 2026-11-18
     notes: 'Datasheet: 1 start bit + 15 bits of current gain (5 per color, S4~S0) + 48 bits of gray data (16 per color), 65536 levels'
+  electrical.wattage:
+    url: http://newstar-ledstrip.com/product/20190927165451294.pdf
+    retrieved: '2026-11-18'
+    notes: 5.5x5.0x1.6mm Top SMD Type 0.3Watt Power

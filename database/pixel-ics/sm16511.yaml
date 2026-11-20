@@ -6,16 +6,23 @@ color:
   pwm_frequency_notes: Configurable to 800Hz
 data:
   clocked: false
-  channels: 4
+  channels: 3
   type: DMX512P
 other_links:
   - https://www.advateklighting.com/pixel-protocols/dmx512
 physical:
   packages:
-    - SOP-10
-    - SOP-16
+    - SOP-8
 sources:
   data.type:
     url: https://www.advateklighting.com/pixel-protocols/sm16511
     retrieved: '2026-11-18'
     notes: Advatek Lighting pixel-protocol page
+  data.channels:
+    url: https://www.chinaasic.com/chipDetails/detail_141.html
+    retrieved: '2026-11-18'
+    notes: SM16511BK是并联应用单线三通道LED驱动控制芯片，兼容并拓展DMX512(1990)数据协议
+  physical.packages:
+    url: https://www.chinaasic.com/chipDetails/detail_141.html
+    retrieved: '2026-11-18'
+    notes: 封装形式：SOP8

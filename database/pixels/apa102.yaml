@@ -36,7 +36,7 @@ electrical:
   channel_current: 22mA
   channel_current_notes: 19-22mA in 5050 package, 10mA for 2020 package; extra 5 bits control PWM, not current
   quiescent_current: 1mA
-  wattage: 110mW
+  wattage: 200mW
 images:
   - file: apa102.webp
     source: https://www.adafruit.com/product/2343
@@ -80,6 +80,10 @@ sources:
     - url: https://learn.adafruit.com/adafruit-sparkle-motion/dotstar-apa102-leds
       retrieved: '2026-11-18'
       notes: "'4-wire RGB LEDs commonly known as APA102-compatible (DotStar, in Adafruit jargon)'"
+  electrical.wattage:
+    url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+    retrieved: '2026-11-18'
+    notes: Power consumption … 0.2W (MAX:1W)
 technical_notes:
   - Clock signal degrades with each pixel - see https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/
   - Extra 5-bit brightness control is PWM-based, not current control

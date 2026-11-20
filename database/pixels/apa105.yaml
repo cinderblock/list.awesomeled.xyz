@@ -22,7 +22,6 @@ electrical:
     max: 5.5V
   channel_current: 20mA
   quiescent_current: 1mA
-  wattage: 100mW
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
   channel_current_notes: Datasheet states max 49mA, but the graph for the 5050 package shows R=19mA, G,B=22mA
 other_links:
