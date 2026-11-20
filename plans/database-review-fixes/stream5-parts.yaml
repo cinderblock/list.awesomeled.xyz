@@ -1,0 +1,1291 @@
+# Fix list: ISSUES.md "Suspected data errors seen while sourcing images & datasheets (stream 5)"
+# bullets Pixel ICs, Pixels, Microboards, Connectors, Commercial systems / diffusive materials,
+# Pattern drivers; then "Pixels' `electrical.wattage` is one channel's power" (one record per row).
+#
+# `current` = the working tree of ws/database-review at HEAD 33e12d3 plus the other thread's
+# uncommitted edits, re-checked by script 2026-11-18 9:10 PM PST (05:10Z, Nov 19); every `current`
+# matched the files then. The tree was changing while this was written: many items were fixed by
+# commits after the stream-5 report (cfcb85b pixel-ics makers, 8b013e0 connectors, 0135b51 / 5995e54 /
+# 33e12d3 and uncommitted commercial-systems edits) and are `already-fixed`, with this list's evidence.
+# Records marked "Extra:" in notes were not in the ISSUES bullet but turned up in the same source.
+# Downloads: C:\Users\camer\AppData\Local\Temp\claude\5b90926eb7793db3\2ef4421f-06d1-4d97-a3ba-366b3899d5d9\scratchpad\fixes\dl\stream5-parts\
+
+# ───────────────────────── Pixel ICs ─────────────────────────
+
+- entry: pixel-ics/p9813
+  field: creator
+  current: DMS Microelectronics
+  value: DMS Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
+  quote: 'DMS MICROELECTRONICS LTD.,'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. Every page header of the datasheet reads "DMS MICROELECTRONICS LTD.," (legal name as printed); WorldSemi isn't mentioned.
+
+- entry: pixel-ics/p9813
+  field: data.bitrate
+  current: 20MHz
+  value: 15MHz
+  status: apply
+  owner: stream2
+  source: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
+  quote: 'Serial inuput data the maximum clock frequency 15MHZ'
+  retrieved: '2026-11-18'
+  notes: Extra (seen while confirming the maker). Features list of the maker's datasheet (typos are the source's). Clocked part, so the clock rate is the bit rate.
+
+- entry: pixel-ics/ucs1903
+  field: creator
+  current: Lianxinke Microelectronics
+  value: Lianxinke Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: http://szucs.cn/page136
+  quote: '深圳联芯科微电子有限公司'
+  retrieved: '2026-11-18'
+  notes: >-
+    Fixed in cfcb85b (was Normand). The maker's own site (http only; https fails TLS) heads every
+    page with 深圳联芯科微电子有限公司 (Shenzhen Lianxinke Microelectronics Co., Ltd.); its footer
+    reads "版权所有:苏州联芯科微电子有限公司（广东分公司)" (Suzhou Lianxinke Microelectronics Co.,
+    Ltd., Guangdong branch). "UCS" is the part prefix and the domain (szucs.cn); the site gives no
+    English company name. The current value is the right one. Same evidence for the seven UCS
+    records below.
+
+- entry: pixel-ics/ucs1904
+  field: creator
+  current: Lianxinke Microelectronics
+  value: Lianxinke Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: http://szucs.cn/page136
+  quote: '深圳联芯科微电子有限公司'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. See ucs1903. The maker's table lists UCS1904S.
+
+- entry: pixel-ics/ucs2903
+  field: creator
+  current: Lianxinke Microelectronics
+  value: Lianxinke Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: http://szucs.cn/page136
+  quote: '深圳联芯科微电子有限公司'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. See ucs1903.
+
+- entry: pixel-ics/ucs2904
+  field: creator
+  current: Lianxinke Microelectronics
+  value: Lianxinke Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: http://szucs.cn/page136
+  quote: '深圳联芯科微电子有限公司'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. See ucs1903. Maker's table row "UCS2904B 4 1.8 恒流 ±5% 17 17 30 800K 256 工业级 SOP8" agrees with the entry's 4 channels, 1.8 kHz, SOP-8.
+
+- entry: pixel-ics/ucs512b
+  field: creator
+  current: Lianxinke Microelectronics
+  value: Lianxinke Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: http://szucs.cn/page136
+  quote: '深圳联芯科微电子有限公司'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. See ucs1903.
+
+- entry: pixel-ics/ucs8903
+  field: creator
+  current: Lianxinke Microelectronics
+  value: Lianxinke Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: http://szucs.cn/page136
+  quote: '深圳联芯科微电子有限公司'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. See ucs1903.
+
+- entry: pixel-ics/ucs8904
+  field: creator
+  current: Lianxinke Microelectronics
+  value: Lianxinke Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: http://szucs.cn/page136
+  quote: '深圳联芯科微电子有限公司'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. See ucs1903.
+
+- entry: pixel-ics/ucs9812
+  field: creator
+  current: Lianxinke Microelectronics
+  value: Lianxinke Microelectronics
+  status: already-fixed
+  owner: stream2
+  source: http://szucs.cn/page136
+  quote: '深圳联芯科微电子有限公司'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. See ucs1903.
+
+- entry: pixel-ics/gs8202
+  field: creator
+  current: Shenzhen Greesit Technology
+  value: Genesis Systech
+  status: unverifiable
+  owner: stream2
+  source: https://www.enttec.com/pixel-protocols/GS8108
+  quote: 'The GS8108 is a DMX512 LED driver IC from Genesis-Systech (Shenzhen Junlue Technology).'
+  retrieved: '2026-11-18'
+  notes: >-
+    No GS8202 datasheet, maker page or protocol page exists anywhere (ENTTEC's /pixel-protocols/GS8202
+    is 404; Advatek has none; searches find nothing). "Greesit" returns no company at all. The GS82xx
+    family (GS8206, GS8208) is Genesis Systech's, which is the only basis for the suggested value:
+    family inference, not proof. Genesis's legal name per ENTTEC: Shenzhen Junlue Technology. Consider
+    whether the entry should exist (the sheet row had only bits and PWM; its other_links points at
+    Advatek's GS8208 page).
+
+- entry: pixel-ics/gs8206
+  field: creator
+  current: Genesis Systech
+  value: Genesis Systech
+  status: already-fixed
+  owner: stream2
+  source: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf
+  quote: 'June 12,2016 version0.2 … Genesis Systech'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. Page footer; the disclaimer says "Genesis Technology". ENTTEC gives the company as "Genesis-Systech (Shenzhen Junlue Technology)".
+
+- entry: pixel-ics/gs8208
+  field: creator
+  current: Genesis Systech
+  value: Genesis Systech
+  status: already-fixed
+  owner: stream2
+  source: https://www.enttec.com/pixel-protocols/GS8208
+  quote: 'Manufacturer: Genesis-Systech'
+  retrieved: '2026-11-18'
+  notes: Fixed in cfcb85b. The LEDYi copy of the GS8208 datasheet's disclaimer says "Genesis Technology will not take any responsibilities".
+
+- entry: pixel-ics/sm16511
+  field: data.channels
+  current: 4
+  value: 3
+  status: apply
+  owner: stream2
+  source: https://www.chinaasic.com/chipDetails/detail_141.html
+  quote: 'SM16511BK是并联应用单线三通道LED驱动控制芯片，兼容并拓展DMX512(1990)数据协议'
+  retrieved: '2026-11-18'
+  notes: >-
+    Sunmoon's own page ("single-wire three-channel LED driver for parallel use, compatible with and
+    extending DMX512(1990)"); SM16511BK is the only SM16511 part the maker lists. The 4 channels came
+    from third parties: Advatek lists it under "RGBW", ENTTEC marks RGB and RGBW and "SOP10/16". Advatek
+    uses the same "can come in a SOP8/SOP10/SOP14 package, depending on which functions" boilerplate on
+    other chips (e.g. QED3001), so its package claims look templated. If an older 4-channel SM16511
+    existed, no maker document survives.
+
+- entry: pixel-ics/sm16511
+  field: physical.packages
+  current: [SOP-10, SOP-16]
+  value: [SOP-8]
+  status: apply
+  owner: stream2
+  source: https://www.chinaasic.com/chipDetails/detail_141.html
+  quote: '封装形式：SOP8'
+  retrieved: '2026-11-18'
+  notes: Same page ("package, SOP8"). It also gives 5~24V supply, 17 mA default current, 256 grey levels, 250-750 kbps, 4096-channel addressing; no PWM frequency, so the entry's 3.3 kHz / 800 Hz stays as is (ENTTEC lists 800/3300 Hz).
+
+- entry: pixel-ics/ucs2904
+  field: other_links
+  current: ['https://www.advateklighting.com/pixel-protocols/ucs2904']
+  value: ['https://www.advateklighting.com/pixel-protocols/ucs2904']
+  status: already-fixed
+  owner: stream4
+  retrieved: '2026-11-18'
+  notes: The SM16704 overview link was removed in cfcb85b.
+
+- entry: pixel-ics/ws2814
+  field: price
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: >-
+    The price tiers are LCSC C5446694, a WS2814F (FSOP-8), not the SOP-12 WS2814 the entry describes.
+    The entry now says so: price_source.notes "WS2814F (FSOP-8) variant; the SOP-12 WS2814 (C965562)
+    is no longer listed", and technical_notes lists the A/C/F variants. Keep or drop the price is
+    stream 6's call; nothing is mislabeled any more.
+
+- entry: pixel-ics/qed3001
+  field: color.channel_bits
+  current: 12
+  value: 12
+  status: reject
+  owner: stream2
+  source: https://www.advateklighting.com/pixel-protocols/qed3001
+  quote: '12 Bits'
+  retrieved: '2026-11-18'
+  notes: >-
+    Not a copy-paste error: all three "duplicated" values (12 bits, 1000 Hz, SOP8/10/14) are what
+    Advatek's QED3001 page says, and Advatek's TLS3001 page says the same three. The two pages differ
+    only in output pixel voltage (QED3001 "5 - 32V", TLS3001 "5 - 17V"). No QED3001 datasheet or maker
+    page exists online, so Advatek is the only source; QED3001 is probably a TLS3001-compatible part.
+
+- entry: pixel-ics/qed3001
+  field: color.pwm_frequency
+  current: 1kHz
+  value: 1kHz
+  status: reject
+  owner: stream2
+  source: https://www.advateklighting.com/pixel-protocols/qed3001
+  quote: '1000Hz'
+  retrieved: '2026-11-18'
+  notes: See the record above.
+
+- entry: pixel-ics/qed3001
+  field: physical.packages
+  current: [SOP-8, SOP-10, SOP-14]
+  value: [SOP-8, SOP-10, SOP-14]
+  status: reject
+  owner: stream2
+  source: https://www.advateklighting.com/pixel-protocols/qed3001
+  quote: 'The control circuit can come in a SOP8/SOP10/SOP14 package, depending on which functions are being used.'
+  retrieved: '2026-11-18'
+  notes: See above. (tls3001 lists SSOP-10 where qed3001 lists SOP-10; Advatek says "SOP8/10/14" for both.)
+
+- entry: pixel-ics/ucs2903
+  field: color.pwm_frequency
+  current: 1.6kHz
+  value: 1.5kHz
+  status: apply
+  owner: stream2
+  source: https://www.superlightingled.com/PDF/SPEC/UCS2903-Datasheet.pdf
+  quote: 'frequency of 1.5 KHz/s'
+  retrieved: '2026-11-18'
+  notes: >-
+    Extra (from plans/assets-research/pixel-ics.md, not the ISSUES bullet). The entry's own datasheet
+    (UCS2903 ver2.2) says 1.5 kHz port scanning frequency. The maker's current table lists UCS2903B at
+    1.8 kHz ("UCS2903B 3 1.8 恒流", http://szucs.cn/page136); if the entry should describe the B
+    revision, use 1.8kHz instead. 1.6 kHz matches neither.
+
+# ───────────────────────── Pixels ─────────────────────────
+
+- entry: pixels/apa102
+  field: images.0.source
+  current: https://www.adafruit.com/product/2343
+  status: other-owner
+  owner: stream5
+  source: https://www.adafruit.com/product/2343
+  quote: 'DotStar Addressable 5050 RGB LED w/ Integrated Driver - 10 Pack - SK9822'
+  retrieved: '2026-11-18'
+  notes: >-
+    The image's source product is now Adafruit's SK9822 10-pack ("the SK9822 version of DotStars have
+    a 1.2 KHz PWM rate"), so the photo may show SK9822 parts. Replace the image; Adafruit 3341
+    (DotStar Micro LEDs, APA102-2020, already the entry's status source) is a candidate.
+
+- entry: pixels/apa102
+  field: datasheet.third_party_testing
+  current: http://neon-world.com/en/product_detail.php?cid=59&id=167
+  value: https://cpldcpu.com/2014/08/27/apa102/
+  status: other-owner
+  owner: stream5
+  source: http://neon-world.com/en/product_detail.php?cid=59&id=167
+  quote: 'APA-109-RGBW'
+  retrieved: '2026-11-18'
+  notes: >-
+    The current link is APA Electronic's own APA-109-RGBW product page, not a test. cpldcpu's "APA102
+    aka "Superled"" is a hands-on measurement of the APA102 (scope traces of the PWM: about 19.2 kHz
+    for the RGB channels and about 580 Hz for the global brightness). Aside: the entry's notes say the
+    5-bit brightness PWM is 400 Hz; cpldcpu measured ~580 Hz.
+
+- entry: pixels/ns108e
+  field: dead_links
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: The dead_links item that marked the working Newstar PDF dead is gone; the entry has no dead_links now.
+
+- entry: pixels/sk9826
+  field: dead_links
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: As ns108e; no dead_links left. The PDF (newstar-ledstrip.com/product/20190927165451294.pdf) downloaded fine today.
+
+- entry: pixels/sk9822-a
+  field: creator
+  current: Opsco Optoelectronics
+  value: Opsco Optoelectronics
+  status: already-fixed
+  owner: stream2
+  source: https://atta.szlcsc.com/upload/public/pdf/source/20230330/463F33392EE7B2048654EFB000650AAD.pdf
+  quote: 'DONGGUAN OPSCO OPTOELECTRONICS CO., LTD'
+  retrieved: '2026-11-18'
+  notes: >-
+    The reported error (Newstar) is fixed. "Probably Normand" is not settled: Normand's datasheet (the
+    entry's datasheet.url) carries "Shenzhen Normand Electronic Co.,Ltd" and "making Normand's customers
+    and users", while OPSCO's (LCSC) carries "DONGGUAN OPSCO OPTOELECTRONICS CO., LTD". Both are the same
+    document, "SPC / SK9822-A", Rev. 01 dated 2019-12-26 (OPSCO's adds A/0, 2021-03-23), and the Rose
+    Lighting copy of Rev. 01 says "OPSCO's customers". LCSC and JLCPCB sell it as OPSCO. Keep Opsco;
+    Normand looks like a rebadging partner. Normand's sheet also calls the part "0.25Watt Power".
+
+- entry: pixels/ws2816
+  field: color.brightness_control
+  current: { bits: 5, scope: per_channel }
+  value:
+    {
+      bits: 5,
+      method: current,
+      scope: per_channel,
+      notes: 'WS2816A only: 5-bit current gain on each RGB channel. WS2816B and WS2816C have none (16-bit grayscale with 4-bit gamma correction).',
+    }
+  status: apply
+  owner: stream2
+  source: https://datasheet.lcsc.com/datasheet/pdf/6bd8afedb2468ec953fc8ec232561b98.pdf
+  quote: 'RGB通道各具有5bit电流增益功能'
+  retrieved: '2026-11-18'
+  notes: >-
+    The report is half right. WorldSemi's WS2816A-2121-V1-B datasheet (via LCSC C42417609) says "RGB
+    channels each have a 5-bit current-gain function", on top of "每个通道高达16bit灰度数据，以及内部4bit
+    gamma校验". The WS2816B datasheets (the entry's datasheet.url and its 2020 source) have no such
+    control: "each channel with 16bit gray scale,4bit gamma correction inside ,can achieve 20bit display
+    effect". So the 5 bits belong to the A variant only, and they scale current (method: current).
+    Field path is the new grammar (5584f26); before it, this was brightness_bits / brightness_method /
+    brightness_method_notes. The entry's notes ("per-channel brightness control") are true for A only.
+
+- entry: pixels/ws2816
+  field: technical_notes.1
+  current: Independent 5-bit brightness control for each R, G, B channel
+  value: 'WS2816A only: independent 5-bit current gain for each R, G, B channel'
+  status: apply
+  owner: stream2
+  source: https://datasheet.lcsc.com/datasheet/pdf/6bd8afedb2468ec953fc8ec232561b98.pdf
+  quote: 'RGB通道各具有5bit电流增益功能'
+  retrieved: '2026-11-18'
+  notes: See color.brightness_control above.
+
+- entry: pixels/ws2816
+  field: variants.0.differences
+  current: 4-bit per-colour current control instead of gamma correction
+  value: 5-bit current gain on each RGB channel (keeps the 4-bit gamma correction)
+  status: apply
+  owner: stream2
+  source: https://datasheet.lcsc.com/datasheet/pdf/6bd8afedb2468ec953fc8ec232561b98.pdf
+  quote: '每个通道高达16bit灰度数据，以及内部4bit gamma校验'
+  retrieved: '2026-11-18'
+  notes: Extra. The WS2816A datasheet has both the 4-bit gamma and the 5-bit current gain ("RGB通道各具有5bit电流增益功能"); the "4-bit ... instead of gamma" wording came from Advatek, not WorldSemi.
+
+- entry: pixels/pl9823
+  field: creator
+  current: BaiCheng
+  value: BaiCheng
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: Was "/". The entry's comment cites the BaiCheng-branded datasheet (Diamex reprint).
+
+- entry: pixels/lc2823-2020
+  field: name
+  current: LC8823-2020
+  value: LC8823-2020
+  status: already-fixed
+  owner: stream2
+  source: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+  quote: 'LC8823-2020'
+  retrieved: '2026-11-18'
+  notes: >-
+    Renamed by the other thread while this list was being written (was LC2823-2020). Confirmed: the
+    entry's own datasheet.url is LED Color's "LC8823-2020" sheet (2.0 x 2.0 mm, "The maximum frequency
+    of 27KHZ", data + clock), and every spec in the entry (8+5 bits, 27 kHz, 3-7.5 V LED supply, 18 mA,
+    APA102-type) matches LC8823. Still open, structural: the slug is lc2823-2020, and the entry is the
+    2020 package of pixels/lc8823 (which lists only '5050'); merging it in (add '2020' to lc8823's
+    packages) may beat keeping two entries.
+
+- entry: pixels/lc2823-2020
+  field: creator
+  current: Shenzhen LED Color
+  value: Shenzhen LED Color
+  status: already-fixed
+  owner: stream2
+  source: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+  quote: 'Shenzhen LED Color Opto Electronic Co.,ltd'
+  retrieved: '2026-11-18'
+  notes: >-
+    Added by the other thread while this list was being written (was absent). Legal name as printed:
+    Shenzhen LED Color Opto Electronic Co.,ltd (深圳市色彩光电有限公司 on its LC8808B sheet). lc8808b
+    ("Color") and lc8823 (no creator) should use the same string.
+
+- entry: pixels/sm1616
+  field: (entry)
+  status: already-fixed
+  owner: stream2
+  source: https://www.chinaasic.com/chipDetails/detail_112.html
+  quote: 'SM1616是一种8段× 16位LED显示驱动控制专用芯片'
+  retrieved: '2026-11-18'
+  notes: >-
+    The file was deleted by the other thread while this list was being written. Confirmed: no SM1616
+    pixel exists. The only SM1616 is Sunmoon's 8-segment x 16-digit LED display (7-segment) driver,
+    I2C, QSOP28. The entry had been name-only since the first import.
+
+# ───────────────────────── Microboards ─────────────────────────
+
+- entry: microboards/esp-01
+  field: connectivity.bluetooth
+  current: false
+  value: false
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: Was '4.1'. The entry cites Espressif's ESP8266EX datasheet.
+
+- entry: microboards/nodemcu-v2
+  field: connectivity.bluetooth
+  current: false
+  value: false
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: Was '4.1'.
+
+- entry: microboards/t-eth-lite
+  field: compute.cpu
+  current: Xtensa LX7
+  value: Xtensa LX7
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+
+- entry: microboards/t-eth-lite
+  field: connectivity.bluetooth
+  current: 5.0 LE
+  value: 5.0 LE
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+
+- entry: microboards/t-eth-lite
+  field: io.max_outputs
+  current: 4
+  value: 4
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: The comment now reads "ESP32-S3 4 RMT TX channels" (was classic-ESP32 RMT).
+
+- entry: microboards/t-eth-lite
+  field: compute.flash
+  current: 16MB
+  value: 16MB
+  status: already-fixed
+  owner: stream2
+  source: https://raw.githubusercontent.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series/master/README.md
+  quote: '| [T-ETH-Lite-ESP32S3][5]               | ESP32-S3-WROOM-1                      | 16MB  | 8MB(OPI)  | W5500    | (Option) | ✅      |'
+  retrieved: '2026-11-18'
+  notes: Was "microSD".
+
+- entry: microboards/t-eth-lite
+  field: io.storage
+  current: microSD
+  value: microSD
+  status: already-fixed
+  owner: stream2
+  source: https://raw.githubusercontent.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series/master/README.md
+  quote: '| Product(PinMap)                       | SOC                                   | Flash | PSRAM     | Ethernet | POE      | SDCard |'
+  retrieved: '2026-11-18'
+  notes: >-
+    Added by the other thread while this list was being written (was absent). The README's product
+    table (header quoted; the T-ETH-Lite-ESP32S3 row, quoted in the
+    compute.flash record, has ✅ under SDCard) shows the TF slot that the old "flash: microSD" was
+    trying to say. TF = microSD. Aside: the same README says the board has "no onboard downloader"
+    (needs a USB2TTL), so it has no USB port to record.
+
+- entry: microboards/t-eth-lite
+  field: name
+  current: T-ETH-Lite
+  value: T-ETH-Lite
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: Was lowercase.
+
+- entry: microboards/orange-pi-lts
+  field: connectivity.wifi
+  current: [2.4GHz]
+  value: [2.4GHz]
+  status: already-fixed
+  owner: stream2
+  source: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+  quote: 'Onboard WiFi XR819, IEEE 802.11 b/g/n'
+  retrieved: '2026-11-18'
+
+- entry: microboards/orange-pi-pc-plus
+  field: connectivity.wifi
+  current: [2.4GHz]
+  value: [2.4GHz]
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: The entry cites CNX Software ("802.11 b/g/n").
+
+- entry: microboards/orange-pi-pc-plus
+  field: compute.flash
+  current: 8GB
+  value: 8GB
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: flash_notes "eMMC"; io.storage microSD stays (it also has a TF slot). The entry cites the maker page ("8GB eMMC Flash").
+
+- entry: microboards/ttgo-esp32-poe
+  field: connectivity.usb
+  current: Power + UART (CP2104)
+  value: false
+  status: apply
+  owner: stream2
+  source: https://raw.githubusercontent.com/Xinyuan-LilyGO/LilyGO-T-ETH-Series/master/README.md
+  quote: 'no onboard downloader(**T-ETH-Lite-ESP32/T-ETH-Lite-ESP32S3/T-Internet-POE**)'
+  retrieved: '2026-11-18'
+  notes: >-
+    LilyGO's README goes on: "Additional USB2TTL is required to connect the board with USB2TTL". The
+    USB-serial chip lives on LilyGO's optional downloader board (sold as a separate SKU, H439 in the
+    entry's price notes; reviews say CP2104, LilyGO's listing says CH340C). The board itself has no
+    USB port; connectivity.serial (absent) could be true instead.
+
+- entry: microboards/orange-pi-lts
+  field: name
+  current: Orange Pi Zero LTS
+  value: Orange Pi Zero LTS
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: >-
+    Fixed. The slug is still "orange-pi-lts"; renaming the file is structural and the site has no slug
+    redirects (app/routes/entry.tsx), so it would break existing URLs. aliases repeats the name and can
+    go.
+
+- entry: microboards/orange-pi-lts
+  field: compute.soc
+  current: Allwinner H3
+  value: Allwinner H3
+  status: already-fixed
+  owner: stream2
+  source: http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-LTS.html
+  quote: 'Orange Pi Zero LTS uses the AllWinner H3 SoC'
+  retrieved: '2026-11-18'
+  notes: Changed by the other thread while this list was being written (was Allwinner H2+). Confirmed by the maker's spec table, "CPU H3 Quad-core Cortex-A7". H2+ was the original (non-LTS) Orange Pi Zero.
+
+- entry: microboards/esp-32s
+  field: creator
+  current: { name: Ai-Thinker, page: 'https://www.espressif.com/en/products/socs/esp32' }
+  value: { name: Ai-Thinker, page: 'https://www.espressif.com/en/products/socs/esp32' }
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: >-
+    Changed by the other thread while this list was being written (was NodeMCU). Consistent with what
+    could be seen here: search snippets of Ai-Thinker's docs say NodeMCU-32S is Ai-Thinker's own board
+    built on its ESP-32S module, but docs.ai-thinker.com is JS-only and its PDFs return HTML or a bot
+    wall, so there was nothing quotable. Still open: creator.page points at Espressif's SoC page, not
+    Ai-Thinker's, and the module-vs-dev-board ambiguity (usb "Power + UART") remains.
+
+# ───────────────────────── Connectors ─────────────────────────
+
+- entry: connectors/ph
+  field: notes
+  current: Internal connector in some controllers. 2.0 mm pitch, so it doesn't fit boards drilled for 2.54 mm (1/10").
+  status: already-fixed
+  owner: stream2
+  source: https://www.jst.com/wp-content/uploads/2025/06/ePH.pdf
+  quote: '2.0 mm pitch/Wire-to-Board connectors/Crimp style and Mating style'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0 (the XH description "2.5mm" and LiPo-balance claim are gone).
+
+- entry: connectors/sh
+  field: mechanical.rows
+  current: 1
+  value: 1
+  status: already-fixed
+  owner: stream2
+  source: https://www.jst.com/wp-content/uploads/2025/06/eSH.pdf
+  quote: '1.0 mm pitch/Wire-to-Board connectors/Crimp style and Mating style'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0. The housing table is single-row only.
+
+- entry: connectors/sh
+  field: mechanical.max_pins
+  current: 20
+  value: 20
+  status: already-fixed
+  owner: stream2
+  source: https://www.jst.com/wp-content/uploads/2025/06/eSH.pdf
+  quote: 'SHR-20V-S-B'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0. Housings run SHR-02V-S-B to SHR-16V-S-B, plus 20 circuits.
+
+- entry: connectors/df62w
+  field: termination.smallest_gauge
+  current: 26
+  value: 30
+  status: apply
+  owner: stream2
+  source: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+  quote: '2830: 28 to 30 AWG'
+  retrieved: '2026-11-18'
+  notes: >-
+    8b013e0 un-swapped the limits to 26/20 from the Nov 2023 catalog copy (TME), which lists only the
+    2022 and 2226 contacts. Hirose's current catalog (edition Jul. 2026, footer "Nov.1.2026") adds
+    28-30 AWG contacts DF62W-2830SCFA (socket) and DF62W-EP2830PCFA (plug), and its rated-current
+    table has 28 AWG and 30 AWG columns (1A/pin). The hirose.com URL (the entry's datasheet.url)
+    served the PDF to a browser user agent.
+
+- entry: connectors/df62w
+  field: termination.largest_gauge
+  current: 20
+  value: 20
+  status: already-fixed
+  owner: stream2
+  source: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+  quote: '2022: 20 to 22 AWG'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0 (was 26).
+
+- entry: connectors/df62w
+  field: ratings.max_current
+  current: 3.5A
+  value: 5A
+  status: apply
+  owner: stream2
+  source: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+  quote: '5A/pin'
+  retrieved: '2026-11-18'
+  notes: >-
+    Extra (same catalog, "Product Specifications" table). Per-pin rating by positions and wire: 2 pos
+    20 AWG 5A/pin; 3-4 pos 4A/pin; 6-9 pos 3.5A/pin at 20 AWG; down to 1A/pin at 28-30 AWG. 3.5A is
+    the 6-9 position figure. Suggested ratings.max_current_notes: "2 pos 5A, 3-4 pos 4A, 6-9 pos 3.5A
+    (20 AWG); 1A at 28-30 AWG".
+
+- entry: connectors/df62w
+  field: ratings.max_voltage
+  current: 30V
+  value: 250V
+  status: apply
+  owner: stream2
+  source: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+  quote: 'Rated Voltage 250V AC/DC'
+  retrieved: '2026-11-18'
+  notes: Extra (same table; UL/C-UL rated voltage also "250V AC/DC", file E52653).
+
+- entry: connectors/teeplug
+  field: termination.largest_gauge
+  current: 12
+  value: 12
+  status: already-fixed
+  owner: stream2
+  source: https://www.hylec-apl.com/datasheet/4965/THB_387_A4A-Datasheet.pdf
+  quote: 'TeePlug 4 pole Screw terminal 7mm to 12mm cable diameter, 4 mm max conductor size IP68 17.5A 450V 1 cable entry'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0 (was 16). 4 mm² is between 12 AWG (3.3 mm²) and 11 AWG (4.2 mm²).
+
+- entry: connectors/teeplug
+  field: termination.smallest_gauge
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://www.hylec-apl.com/datasheet/4965/THB_387_A4A-Datasheet.pdf
+  quote: 'Max Conductor Size (Sq mm)'
+  retrieved: '2026-11-18'
+  notes: Removed in 8b013e0 (was 6). Hylec gives no minimum conductor size.
+
+- entry: connectors/xt60-90
+  field: creator
+  current: Amass
+  value: Amass
+  status: already-fixed
+  owner: stream2
+  source: https://www.china-amass.net/about-us/
+  quote: '2009 The first self-developed high current connector XT60 came out'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0. Legal name on the same page "Changzhou Amass Electronics Co., Ltd. was founded in 2002."
+
+- entry: connectors/xt60-90
+  field: ratings.max_current
+  current: 45A
+  value: 45A
+  status: already-fixed
+  owner: stream2
+  source: https://www.china-amass.net/uploads/24.XT90H-F-SPEC-2025V0.pdf
+  quote: 'Current rating 45A (10AWG85K)'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0 (was 90A), with max_current_notes for XT60/XT30. XT60-F spec (uploads/57.XT60-F-SPEC-2025V0.pdf) "Current rating 35A (12AWG85K)".
+
+- entry: connectors/xt60-90
+  field: ratings.max_voltage
+  current: 150V
+  value: 150V
+  status: already-fixed
+  owner: stream2
+  source: https://www.china-amass.net/uploads/24.XT90H-F-SPEC-2025V0.pdf
+  quote: 'Rated voltage 150V DC'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0 (was 42V), with max_voltage_notes. XT60-F is "80V DC".
+
+- entry: connectors/mt30-60
+  field: creator
+  current: Amass
+  value: Amass
+  status: already-fixed
+  owner: stream2
+  source: https://www.china-amass.net/about-us/
+  quote: 'Changzhou Amass Electronics Co., Ltd. was founded in 2002.'
+  retrieved: '2026-11-18'
+
+- entry: connectors/mt30-60
+  field: ratings.max_current
+  current: 35A
+  value: 35A
+  status: already-fixed
+  owner: stream2
+  source: https://www.china-amass.net/uploads/130.MT60-F-SPEC-2025V0.pdf
+  quote: 'Current rating 35A (12AWG85K)'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0 (was 60A). MT30-M spec (uploads/105.MT30-M-SPEC-2025V0.pdf) "Current rating 20A (16AWG85K)". Aside, not changed here; termination gauges are 20-16 AWG although MT60 is rated at 12 AWG.
+
+- entry: connectors/mt30-60
+  field: ratings.max_voltage
+  current: 80V
+  value: 80V
+  status: already-fixed
+  owner: stream2
+  source: https://www.china-amass.net/uploads/130.MT60-F-SPEC-2025V0.pdf
+  quote: '80V DC'
+  retrieved: '2026-11-18'
+  notes: Fixed in 8b013e0 (was 60V). MT30-M is also 80V DC.
+
+- entry: connectors/mtsb-combicon
+  field: name
+  current: MSTB COMBICON
+  value: MSTB COMBICON
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: Fixed. The slug "mtsb-combicon" keeps the typo; a rename is structural and breaks URLs (no slug redirects). "MTSB CombiCon" stays as an alias, which is fine for search.
+
+- entry: connectors/mini-bucaneer
+  field: name
+  current: Mini Buccaneer
+  value: Mini Buccaneer
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: Fixed (the entry cites Bulgin's "Mini Series Buccaneer"). Slug and image file (mini-bucaneer.webp) keep the typo; structural, as above.
+
+# ─────────────── Commercial systems / diffusive materials ───────────────
+
+- entry: commercial-systems/active-rgb
+  field: specs.color_type
+  current: RGBW
+  value: RGBW
+  status: already-fixed
+  owner: stream2
+  source: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+  quote: 'a DMX-controllable RGBW solution for use with our X12 Large Harness Festoon System'
+  retrieved: '2026-11-18'
+  notes: Changed by the other thread (uncommitted at writing) while this list was being written (was RGB). Confirmed; the module is "incorporating 3 RGBW SMD LEDs" ("Lumisphere RGBW unit (3 chip)").
+
+- entry: commercial-systems/active-rgb
+  field: name
+  current: Active RGBW
+  value: Active RGBW
+  status: already-fixed
+  owner: stream2
+  source: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+  quote: 'Large Harness Active RGBW Festoon Systems'
+  retrieved: '2026-11-18'
+  notes: Changed by the other thread (uncommitted at writing; was Active RGB). Matches the maker's product title. The slug stays active-rgb (structural).
+
+- entry: commercial-systems/active-rgb
+  field: specs.pixels_per_run
+  current: 127
+  value: 127
+  status: already-fixed
+  owner: stream2
+  source: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+  quote: 'Each encoder can drive up to 127 RGBW LED units'
+  retrieved: '2026-11-18'
+  notes: Extra (data-freshness commercial.md (d), which also cites a brochure saying 100). Changed by the other thread (uncommitted at writing; was 170). The page adds that encoders can be linked for larger installations, so 127 is per encoder (one run).
+
+- entry: commercial-systems/smartpxl
+  field: creator
+  current: { name: ENTTEC, url: 'https://www.enttec.com' }
+  value: { name: ENTTEC, url: 'https://www.enttec.com' }
+  status: already-fixed
+  owner: stream2
+  source: https://www.enttec.com/product/led-pixel-dot-lights/hi-res-smart-pxl40-metal-rgb-led-pixel-dot-strings/
+  quote: 'ENTTEC’s high-resolution, individually addressable SMART PXL40 LED pixel dots'
+  retrieved: '2026-11-18'
+  notes: Changed by the other thread (uncommitted at writing; was "SmartPXL"). Confirmed. The page footer shows "ENTTEC Americas LLC" (the US sales company), not the maker's legal name (ENTTEC Pty Ltd, Australia, isn't on this page). ENTTEC writes the line "SMART PXL"; the entry name "SmartPXL" could follow.
+
+- entry: commercial-systems/vinci
+  field: creator
+  current: { name: Lucenti, url: 'https://www.lucenti.lighting/' }
+  value: { name: Lucenti, url: 'https://www.lucenti.lighting/' }
+  status: already-fixed
+  owner: stream2
+  source: https://www.lucenti.lighting/collection/vinci
+  quote: '© 2026 Lucenti. All rights reserved.'
+  retrieved: '2026-11-18'
+  notes: Was the URL https://www.lucenti.lighting/products. No legal form (B.V. etc.) is shown.
+
+- entry: diffusive-materials/silicone-sealant
+  field: (entry)
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: The mislabeled row (Plastazote foam data under "Silicone Sealant") was merged into ld45-plaztazote in fb3f9b7; the file is gone.
+
+- entry: diffusive-materials/lumieo-2
+  field: status
+  current: discontinued
+  value: discontinued
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: The notes say "No longer listed by ALP (2026-11)".
+
+- entry: diffusive-materials/lumieo-2
+  field: dead_links
+  value:
+    - url: https://alpadvantage.com/products/lumieo-ii/
+      archive: https://web.archive.org/web/20210120184855/https://alpadvantage.com/products/lumieo-ii/
+      checked: '2026-11-18'
+      notes: Redirects to ALP's generic Specialty Sheet & Film list
+  status: other-owner
+  owner: stream6
+  source: https://alpadvantage.com/products/lumieo-ii/
+  quote: '301 -> https://alpadvantage.com/product-type/specialty-sheet-film/'
+  retrieved: '2026-11-18'
+  notes: links.product now 301-redirects to a generic category page with no Lumieo product (HTTP response, not page text). The Wayback CDX's only 200 capture is 2021-01-20.
+
+- entry: diffusive-materials/rosco-diffusion
+  field: links.product
+  current: https://emea.rosco.com/en/products/catalog/filters-diffusions
+  value: https://emea.rosco.com/en/product/cinegel
+  status: other-owner
+  owner: stream6
+  source: https://emea.rosco.com/en/product/cinegel
+  quote: 'Wide Range of Diffusion Filters Cinegel offers over 30 different materials that alter the size, shape and intensity of the beam'
+  retrieved: '2026-11-18'
+  notes: >-
+    The current link 301-redirects to https://emea.rosco.com/en/mycolor-app. The Cinegel page (same
+    region; the entry's image already comes from ca.rosco.com's Cinegel page) is Rosco's live diffusion
+    range ("3000 – Diffusion Filters"). Alternatively keep the old URL with a dead_links archive:
+    https://web.archive.org/web/20220523181941/https://emea.rosco.com/en/products/catalog/filters-diffusions
+
+- entry: diffusive-materials/plexiglas-led-edge-lit-was-endlightent
+  field: links.product
+  current: https://www.polyvantis-shop.com/ie/products/plexiglas-led/
+  value: https://www.polyvantis-shop.com/ie/products/plexiglas-led/
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: Was the plexiglas-shop.com link that redirects to polyvantis-shop.com.
+
+- entry: diffusive-materials/ld45-plaztazote
+  field: name
+  current: Plastazote LD45
+  value: Plastazote LD45
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: Spelling fixed in the name. The slug and image file (ld45-plaztazote) keep "Plaztazote"; renaming is structural and breaks URLs (no slug redirects).
+
+- entry: diffusive-materials/polyethelene
+  field: name
+  current: Polyethylene
+  value: Polyethylene
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: The name is spelled right; only the slug/file name "polyethelene" is misspelled. Structural, same caveat as above.
+
+# ───────────────────────── Pattern drivers ─────────────────────────
+
+- entry: pattern-drivers/geopix-2-0-full
+  field: links.url
+  current: https://github.com/EnviralDesign/GeoPix
+  value: https://github.com/EnviralDesign/GeoPix
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: Was https://www.geopix.io/ (domain taken over). The entry's status source notes "geopix.io no longer resolves".
+
+- entry: pattern-drivers/jinx
+  field: creator
+  current: Sven Karschewski
+  value: Sven Karschewski
+  status: already-fixed
+  owner: stream2
+  source: https://live-leds.de/impressum/
+  quote: 'Sven Karschewski'
+  retrieved: '2026-11-18'
+  notes: Was Solderlab.de (Glediator's maker). The imprint of live-leds.de (Jinx!'s site) names him; "Live-LEDs.de" would also do if a brand is preferred over a person.
+
+- entry: pattern-drivers/jinx
+  field: links.url
+  current: https://live-leds.de/
+  value: https://live-leds.de/
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: Was a third-party Glediator download page.
+
+- entry: pattern-drivers/jinx
+  field: integrations
+  value: null
+  status: already-fixed
+  owner: stream2
+  source: https://live-leds.de/impressum/
+  quote: 'Sven Karschewski'
+  retrieved: '2026-11-18'
+  notes: Removed in 33e12d3 while this list was being written (was "Should be solderlab.de (which is down)", a stale editorial note in a field meant for "Controllers this software targets", and wrong).
+
+- entry: pattern-drivers/arthet-led-mapper
+  field: name
+  current: artnet_led_mapper
+  value: artnet_led_mapper
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: The slug (arthet-led-mapper) and image file keep the typo; structural (no slug redirects).
+
+- entry: pattern-drivers/arthet-led-mapper
+  field: links.url
+  current: https://github.com/cyberboy666/artnet_led_mapper
+  value: https://github.com/cyberboy666/artnet_led_mapper
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+
+- entry: pattern-drivers/protopixel-create
+  field: status
+  current: active
+  value: active
+  status: reject
+  owner: stream6
+  source: https://protopixel.zendesk.com/hc/en-us/articles/31199693048977-Content
+  quote: 'These instructions only work for the Mapping Tool (formerly known as Create) 3.0 or higher versions.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Not discontinued: renamed. protopixel.io/product/mapping-tool (the entry's links.url) offers
+    "Download Mapping Tool". The help centre returns 403 to WebFetch but serves a browser user agent.
+    The rename itself (name "ProtoPixel Create" -> Mapping Tool) is in data-freshness software.md (d).
+
+- entry: pattern-drivers/mapio-pro
+  field: creator
+  current: Visution
+  value: Visution
+  status: already-fixed
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: Was "Vistitution".
+
+- entry: pattern-drivers/elm
+  field: status
+  current: active
+  value: active
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: Was unknown; the entry cites ENTTEC's ELM 2026 product page.
+
+- entry: pattern-drivers/wled
+  field: links.url
+  current: https://github.com/wled/WLED
+  value: https://github.com/wled/WLED
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: Was github.com/Aircoookie/WLED (redirects).
+
+- entry: pattern-drivers/chataigne-wled-mod
+  field: links.url
+  current: https://github.com/zak-45/WLED-Chataigne-Module
+  value: https://github.com/zak-45/WLED-Chataigne-Module
+  status: already-fixed
+  owner: stream6
+  retrieved: '2026-11-18'
+  notes: Was the author's profile, github.com/zak-45.
+
+# ─────────── Pixels' electrical.wattage (ISSUES "one channel's power, not the pixel's") ───────────
+# What each datasheet says about power. `apply` = the datasheet states a whole-pixel figure (value is
+# that figure, valid if wattage keeps the schema's "Power per pixel" meaning). `reject` = the stored
+# value already is the pixel's power. `unverifiable` = no power figure in any reachable datasheet.
+# "Full white" figures in notes are arithmetic, not datasheet text.
+
+- entry: pixels/apa102
+  field: electrical.wattage
+  current: 110mW
+  value: 200mW
+  status: apply
+  owner: stream2
+  source: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+  quote: 'Power consumption … 0.2W (MAX:1W)'
+  retrieved: '2026-11-18'
+  notes: Image-only iPixel LED / Shiji Lighting "APA102C" sheet, page 1 PRODUCT SPECIFICATIONS table (column header and cell). Stored 110 mW = one channel (22 mA x 5 V); full white 3 x 22 mA x 5 V = 330 mW.
+
+- entry: pixels/apa102c
+  field: electrical.wattage
+  current: 110mW
+  value: 200mW
+  status: apply
+  owner: stream2
+  source: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+  quote: 'Power consumption … 0.2W (MAX:1W)'
+  retrieved: '2026-11-18'
+  notes: Same sheet as apa102 (it is titled APA102C).
+
+- entry: pixels/apa104
+  field: electrical.wattage
+  current: 100mW
+  value: 250mW
+  status: apply
+  owner: stream2
+  source: https://neon-world.com/uploads/soft/20170622/1498136682.pdf
+  quote: '5.5x5.0x1.6mm Top SMD Type 0.25 Watt Power'
+  retrieved: '2026-11-18'
+  notes: Read from the entry's Wayback source copy (neon-world.com timed out). Stored = 20 mA x 5 V; full white 300 mW.
+
+- entry: pixels/apa105
+  field: electrical.wattage
+  current: 100mW
+  status: unverifiable
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: No APA105 datasheet exists (stream 5 removed the strip page). Stored = 20 mA x 5 V (one channel); full white 300 mW.
+
+- entry: pixels/apa107
+  field: electrical.wattage
+  current: 110mW
+  value: 200mW
+  status: apply
+  owner: stream2
+  source: http://www.newstar-ledstrip.com/product/20180820112602493.pdf
+  quote: '5.5x5.0x1.6mm Top SMD Type 0.2Watt Power'
+  retrieved: '2026-11-18'
+  notes: Newstar APA107 spec; its parameter table repeats "0.2W". Stored = 22 mA x 5 V.
+
+- entry: pixels/cs8812
+  field: electrical.wattage
+  current: 210mW
+  value: 210mW
+  status: reject
+  owner: stream2
+  source: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
+  quote: 'It is RGB LED series structure. Power supply voltage is 12V, and the LED constant current is 18mA. Different to the parallel architecture of 5V power supply and 54mA drive current'
+  retrieved: '2026-11-18'
+  notes: >-
+    Already a whole-pixel figure: the 12 V part strings R, G and B in series, so one current feeds all
+    three (17.5 mA default x 12 V = 210 mW). The sheet's own power numbers are the IC's limits: Pd 150
+    mW max (electrical characteristics) and Pd 400 mW (absolute maximum), the same template as GS8208
+    and LC8808B.
+
+- entry: pixels/gs8208
+  field: electrical.wattage
+  current: 120mW
+  value: 120mW
+  status: reject
+  owner: stream2
+  source: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+  quote: 'Power dissipation … Pd … 150 … mW'
+  retrieved: '2026-11-18'
+  notes: >-
+    12 V series part ("3 channel constant current series connected LED driver"), so the stored 120 mW
+    (the entry's measured 10 mA x 12 V) is a whole-pixel figure. Datasheet: Pd 150 mW max in the
+    electrical table, IOUT typical 15 mA at VDH=12V (that would be 180 mW), Pd 400 mW absolute max.
+
+- entry: pixels/hd107s
+  field: electrical.wattage
+  current: 85mW
+  status: unverifiable
+  owner: stream2
+  source: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+  quote: 'The maximum current of LED Imax --- --- 20 mA'
+  retrieved: '2026-11-18'
+  notes: Rose Lighting's sheet gives currents only (20 mA max per LED), no power. Stored = 17 mA x 5 V; full white 255 mW (300 mW at 20 mA).
+
+- entry: pixels/hd108
+  field: electrical.wattage
+  current: 85mW
+  status: unverifiable
+  owner: stream2
+  source: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+  quote: 'R/G/B output current IOUT 17 mA'
+  retrieved: '2026-11-18'
+  notes: No power figure (Imax 17 typ / 20 max mA). Stored = 17 mA x 5 V; full white 255 mW.
+
+- entry: pixels/lc2823-2020
+  field: electrical.wattage
+  current: 90mW
+  status: unverifiable
+  owner: stream2
+  source: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+  quote: 'Power dissipation; PD <350 mW'
+  retrieved: '2026-11-18'
+  notes: The only figure is a maximum rating. Stored = 18 mA x 5 V; full white 270 mW, under the 350 mW ceiling. (The entry is really LC8823-2020, see its name record.)
+
+- entry: pixels/lc8808b
+  field: electrical.wattage
+  current: 65mW
+  value: 156mW
+  status: apply
+  owner: stream2
+  source: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
+  quote: 'It is RGB LED series structure. Power supply voltage is 12V, and the LED constant current is 18mA.'
+  retrieved: '2026-11-18'
+  notes: >-
+    Stored 65 mW used 5 V for a 12 V series part. The sheet's electrical table gives "Output current
+    IOUT VDH=12V 11 13 mA" (min, typ) and Pd 150 mW max; 13 mA x 12 V = 156 mW is the whole-pixel
+    figure (arithmetic on datasheet values). With the 17.5 mA default from the features list it would
+    be 210 mW. The sheet's model number is LC8808B.
+
+- entry: pixels/lc8823
+  field: electrical.wattage
+  current: 85mW
+  status: unverifiable
+  owner: stream2
+  source: http://addressable-led.com/UploadFile/upi/file/20190724/LC8823-LED.pdf
+  retrieved: '2026-11-18'
+  notes: The LC8823 (5050) sheet states no power figure. Stored = 17 mA x 5 V; full white 255 mW.
+
+- entry: pixels/ns107s
+  field: electrical.wattage
+  current: 100mW
+  status: unverifiable
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: The datasheet (a Wayback copy is the entry's url) was unreachable this session (Wayback HTTP 429). Newstar's sibling sheets (NS108, NS108E, SK9826) all say "0.3Watt Power"; NS107S likely does too. Stored = 20 mA x 5 V.
+
+- entry: pixels/ns108
+  field: electrical.wattage
+  current: 102mW
+  value: 300mW
+  status: apply
+  owner: stream2
+  source: https://voron.ua/files/pdf/led/NS108_5050.pdf
+  quote: '5.5x5.0x1.6mm Top SMD Type 0.3Watt Power'
+  retrieved: '2026-11-18'
+  notes: Newstar NS108 spec. Its ratings table also lists "Power dissipation PD 550 mW". Stored = 20 mA x 5.1 V; full white 306 mW.
+
+- entry: pixels/ns108e
+  field: electrical.wattage
+  current: 91.8mW
+  value: 300mW
+  status: apply
+  owner: stream2
+  source: http://newstar-ledstrip.com/product/20191018160652775.pdf
+  quote: '5.5x5.0x1.6mm Top SMD Type 0.3Watt Power'
+  retrieved: '2026-11-18'
+  notes: Same template as NS108 (PD 550 mW rating). Stored = 18 mA x 5.1 V.
+
+- entry: pixels/ns8808
+  field: electrical.wattage
+  current: 45mW
+  status: unverifiable
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: No datasheet (removed by stream 5). Stored = 9 mA x 5 V although led_voltage is 12V; if it is series-wired like the other 12 V parts, the pixel's power is 9 mA x 12 V = 108 mW.
+
+- entry: pixels/sk6805
+  field: electrical.wattage
+  current: 100mW
+  value: 100mW
+  status: reject
+  owner: stream2
+  source: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
+  quote: '2.4X2.7X1.1mm Top SMD Type 0.1Watt Power'
+  retrieved: '2026-11-18'
+  notes: The stored value is the datasheet's own whole-pixel figure. ISSUES flagged it because channel_current is "~5mA"; it's that field that's approximate, not this one.
+
+- entry: pixels/sk6812
+  field: electrical.wattage
+  current: 104mW
+  value: 200mW
+  status: apply
+  owner: stream2
+  source: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+  quote: '5.5x5.0x1.6mm Top SMD Type 0.2Watt Power'
+  retrieved: '2026-11-18'
+  notes: From the entry's datasheet.sources copy; the primary url (OPSCO rev B via LCSC) gives no power figure. Stored = 20 mA x 5.2 V.
+
+- entry: pixels/sk9822
+  field: electrical.wattage
+  current: 100mW
+  value: 200mW
+  status: apply
+  owner: stream2
+  source: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf
+  quote: '5.5x5.0x1.6mm Top SMD Type 0.2Watt Power'
+  retrieved: '2026-11-18'
+  notes: Stored = 20 mA x 5 V.
+
+- entry: pixels/sk9826
+  field: electrical.wattage
+  current: 90mW
+  value: 300mW
+  status: apply
+  owner: stream2
+  source: http://newstar-ledstrip.com/product/20190927165451294.pdf
+  quote: '5.5x5.0x1.6mm Top SMD Type 0.3Watt Power'
+  retrieved: '2026-11-18'
+  notes: Newstar SK9826 spec. Stored = 18 mA x 5 V.
+
+- entry: pixels/ws2812
+  field: electrical.wattage
+  current: 92.5mW
+  status: unverifiable
+  owner: stream2
+  source: https://cdn-shop.adafruit.com/datasheets/WS2812.pdf
+  quote: 'LED characteristic parameter    Luminous intensity(mcd)            Current(mA) Voltage(V)'
+  retrieved: '2026-11-18'
+  notes: The sheet lists per-colour LED current (20 mA) and forward voltage only, no power. Stored = 18.5 mA x 5 V; full white 277.5 mW.
+
+- entry: pixels/ws2813
+  field: electrical.wattage
+  current: 90mW
+  status: unverifiable
+  owner: stream2
+  source: https://www.world-semi.com/downloads/datasheets/en/ws2813b-v6-1.0.pdf
+  retrieved: '2026-11-18'
+  notes: Neither WS2813B-V6 (V1.1, image-only; ratings and electrical tables read from the rendered pages) nor the 2016 WS2813 sheet (Normand copy) gives a power figure. Stored = 18 mA x 5 V; full white 270 mW.
+
+- entry: pixels/ws2815
+  field: electrical.wattage
+  current: 120mW
+  value: 120mW
+  status: reject
+  owner: stream2
+  source: https://www.world-semi.com/downloads/datasheets/en/ws2815b-v1-v1.pdf
+  quote: 'Power Consumption              P                                                    0.1~0.18    W'
+  retrieved: '2026-11-18'
+  notes: WS2815B-V1's absolute-maximum table. 12 V series part, so 10 mA x 12 V = 120 mW is the whole pixel and sits inside 0.1-0.18 W.
+
+- entry: pixels/ws2816
+  field: electrical.wattage
+  current: 100mW
+  value: 100mW
+  status: reject
+  owner: stream2
+  source: https://datasheet.lcsc.com/datasheet/pdf/33bcf57fa38933354736aabd35a09e83.pdf
+  quote: '消耗功率 PD —— 100 —— mW Ta=25℃'
+  retrieved: '2026-11-18'
+  notes: >-
+    The stored value equals the WS2816B (5050) datasheet's typical power consumption. Caveats: its
+    WS2816B-2020 English sheet gives "Power consumption PD" 250 mW max, and 3 x 20 mA x 5 V = 300 mW
+    at full white, so WorldSemi's 100 mW is probably the driver's own dissipation, not the LEDs'.
+
+- entry: pixels/ws2851
+  field: electrical.wattage
+  current: 92.5mW
+  status: unverifiable
+  owner: stream2
+  retrieved: '2026-11-18'
+  notes: No datasheet (WorldSemi only ever offered a ZIP; removed by stream 5). Stored = 18.5 mA x 5 V although led_voltage is 12V.

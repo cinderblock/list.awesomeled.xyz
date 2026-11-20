@@ -8,7 +8,7 @@ vendors:
 inputs:
   physical:
     IR: true
-  standalone: true # built-in patterns selectable via onboard buttons/display
+  standalone: true # built-in patterns, chosen with the IR remote
 outputs:
   count: 1
   connector: Screw

@@ -33,6 +33,7 @@ outputs:
     - LC8808B
 power:
   voltage:
+    min: 5
     max: 24
 datasheet:
   url: https://www.boutique-electroconcept.com/media/Productattachments//d/m/dmx_to_ws2812.pdf # user manual (French); has a spec section
@@ -70,3 +71,7 @@ sources:
     url: https://www.boutique-electroconcept.com/carte-dmx-en-signal-pour-ledstrip-digital-ws2812-et-compatible-a-souder.html
     retrieved: '2026-11-18'
     notes: only input is DMX 512; no Bluetooth or audio
+  power.voltage.min:
+    url: https://www.boutique-electroconcept.com/carte-dmx-en-signal-pour-ledstrip-digital-ws2812-et-compatible-a-souder.html
+    retrieved: '2026-11-18'
+    notes: 'Alimentation : DE +5Volts A +24 Volts'

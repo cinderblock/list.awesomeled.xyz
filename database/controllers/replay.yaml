@@ -31,6 +31,7 @@ outputs:
     - TM1809
 power:
   voltage:
+    min: 5
     max: 24
 data:
   storage:
@@ -63,3 +64,7 @@ sources:
     url: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
     retrieved: '2026-11-18'
     notes: outputting pixel data to four JST outputs
+  power.voltage.min:
+    url: https://smartshow.lighting/wp-content/uploads/2023/10/REPLAY.pdf
+    retrieved: '2026-11-18'
+    notes: 'Power Input : 5-24V external power applied across PWR & GND connections of the rear connector'

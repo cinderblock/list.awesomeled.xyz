@@ -16,7 +16,7 @@ outputs:
   connector:
     ref: mtsb-combicon
   pixels:
-    max_per_output: 1024 # single-wire; one data + clock channel drives up to 2048
+    max_per_output: 256 # single-wire, per channel; one data + clock channel drives up to 2048
     max_total: 2048
   clocked: selectable
   protocols:
@@ -102,9 +102,9 @@ sources:
       retrieved: '2026-11-18'
       notes: up to 8 channels for single-wire LEDs, 1 channel for dual-wire (DATA on CH4, CLOCK on CH8)
   outputs.pixels.max_per_output:
-    url: https://www.led-genial.de/mediafiles//Sonstiges/ENG_LED_Player_M.pdf
+    url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-M_Anleitung.pdf
     retrieved: '2026-11-18'
-    notes: '"The maximum number of connected LEDs per channel is 1024"; dual-wire: up to 2048 on the single channel'
+    notes: '"Maximale Kapazität: 256 LEDs pro Kanal, gesamt 2048 LEDs" and "Die maximale Anzahl der angeschlossenen LEDs pro Kanal sollte 256 nicht überschreiten" (12/21 manual; its V1.5 firmware history repeats the 256 limit). Its settings section: with WS2811/12 LEDs only 256 per channel work, although the tool shows a 1024 maximum (the older English manual''s figure).'
   outputs.pixels.max_total:
     url: https://www.led-genial.de/mediafiles/Sonstiges/LED-Player-M_Anleitung.pdf
     retrieved: '2026-11-18'

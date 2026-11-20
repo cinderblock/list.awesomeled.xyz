@@ -1,6 +1,6 @@
 name: ESP32 ThingPlus DMX to LED
 status: active
-creator: Sparkfun
+creator: SparkFun
 notes: Isolated DMX , Artnet compatible
 inputs:
   protocols:
@@ -67,3 +67,7 @@ sources:
   parent:
     url: https://www.sparkfun.com/products/15110
     retrieved: '2026-11-18'
+  creator:
+    url: https://www.sparkfun.com/sparkfun-esp32-thing-plus-dmx-to-led-shield.html
+    retrieved: '2026-11-18'
+    notes: SparkFun ESP32 Thing Plus DMX to LED Shield

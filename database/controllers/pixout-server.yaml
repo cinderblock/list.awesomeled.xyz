@@ -19,6 +19,7 @@ outputs:
     DMX512: 4 # D-100 model only
 power:
   voltage:
+    min: 12
     max: 12
 data:
   storage:
@@ -95,6 +96,10 @@ sources:
     retrieved: '2026-11-18'
     notes: Indoor controller with four native DMX512 outputs and RTC
   power.voltage.max:
+    url: https://pixout.lighting/products/recorder/
+    retrieved: '2026-11-18'
+    notes: 12V DC across all models (110–240V AC adapter included)
+  power.voltage.min:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'
     notes: 12V DC across all models (110–240V AC adapter included)
