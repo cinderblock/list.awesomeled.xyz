@@ -115,7 +115,7 @@ export const IGNORED_COMMITS = new Set([
   'c0c03c3fbf8bd2cec12c9a13a72edbecf0d64f18', // Falcon/K8 family cross-links (3)
   'bd300fda7dd59fd0eb082fa6d3919bcbd76f68b8', // outputs.connector string -> ref migration (81)
   '481e6aad540b7ef19170a6aa5f58d5479ee7fd13', // online_pricing -> pricing.examples restructure (6)
-  '2c7bf1195c2740fa2b7a76aa73e1d13a51702572', // prose-only facts -> structured fields (46)
+  '2c7bf116f257fdb787dadcc2ce956769d1c0850e', // prose-only facts -> structured fields (46)
   '937d73473061d5c8503d68da7d67fe1abd3b4979', // SPI -> clocked/single-wire wording normalization (15)
   'd26e73ca66c720ed6dc7efafcb09f5788b00f173', // sheet-parity: restore hyperlinks the sheet import dropped (117)
   'b1c26ecaec5aad615383c97334f20d5cd511dc40', // sheet-parity: restore sheet cell notes the import dropped (59)
