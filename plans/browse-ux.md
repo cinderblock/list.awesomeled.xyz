@@ -85,7 +85,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**All twelve steps are live** (9–11 as `d1d23db4..ee64cc82`, 12 as `d92d1adb..d2bde2f1`). A follow-up batch (entry labels, merged filter spellings, the header fix CI asked for) is the last push; see the progress log.
+**All twelve steps are live and CI is green** (9–11 as `d1d23db4..ee64cc82`, 12 as `d92d1adb..d2bde2f1`, the follow-up batch as `e9f01bd2..1367f26e`). Nothing is in progress; what is left is the two open questions below.
 
 ## Findings / gotchas
 
@@ -98,8 +98,7 @@ Each step ships on its own (rebase, checks, push).
 - `parseOneFilter` guesses the filter type from the text: a select value of `yes`, `100-200` or `2024-01-01..` would be read as boolean, numeric or date.
 - Maps with open-ended keys (`inputs.physical.*`, `outputs.auxiliary.*`) must be one "keys" field, not dozens of sparse columns. Maps with fixed keys (pattern-driver `outputs.protocols.*`) are real columns (the sheet has one per protocol and a saved "E1.31 Output" filter view).
 - `*_notes` siblings exist in the data (`ratings.max_current_notes`, `color.pwm_frequency_notes`…): the sheet's cell notes, migrated.
-- `e2e/basic.test.ts` "navigation to entry page works" clicks `td:first-child a`, which is the external product link, not the entry link; it passes by accident.
-- `CONTRIBUTING.md` documents the old flat schema (`id`, `manufacturer`, `npm`). Data-freshness has it open; coordinate before rewriting.
+- `CONTRIBUTING.md` documented the old flat schema (`id`, `manufacturer`, `npm`) when this work began. The database review has since rewritten it; this stream's part is the pointers to `/contribute` and the issue forms.
 - Other streams' uncommitted work touches `entry.tsx` (cross-links: relation graph, `FormatContext`; data-freshness: price provenance), `columns.tsx` (part price column) and `playwright.config.ts` (`E2E_PORT`, twice).
 - **Sort latency.** A sort click took ~190 ms on the live site (and 1–2.6 s on a dev server): every URL write was a router navigation, which re-renders the route in a transition, and each row carried several Radix tooltip providers. Now ~30 ms in production: URL writes update a local copy first (`useTableParams`), rows are memoized and keyed by id, and there is one tooltip provider.
 - **Table state leaked across categories.** `DataTable` kept one instance across `:category` navigations, so hidden columns from one category were saved under the next and saved filters were never restored after the first tab. Fixed by keying the table on the category id.
@@ -172,6 +171,8 @@ Each step ships on its own (rebase, checks, push).
 - [x] 2026-11-20 5:26 AM PST (13:26Z): step 12 pushed (`d92d1adb..d2bde2f1`) after a full e2e (156 of 156) and the production tests (21 of 21). Live on Cloudflare Pages: no Google Fonts request, Inter preloaded from the site, skip link first. **CI failed on it** (GitHub Pages backup not deployed): two phone-width tests, Linux only; see the finding below and the follow-up batch.
 - [x] Follow-up batch: entry-page field labels worded like the tables ("GPIO voltage", "SoC"; the last open item of step 9); filter values that are spellings of one name count and match as one ("Jinx" / "Jinx!" / "JINX!", 30 groups); the shared Playwright config no longer opens a browser window when a local run fails; the header fits a phone in any font, and the fallback font is matched to Inter.
 
+- [x] 2026-11-20 5:49 AM PST (13:49Z): follow-up batch pushed (`e9f01bd2..1367f26e`): fast checks, 401 unit tests, build and 21 production tests passed first; CI green (run 44747678065); checked live (entry labels, fallback font, header rule). The designer stream fixed its audit finding the same hour and added `/designer` to the axe pages.
+
 ## Open questions for the user
 
 1. **Default density.** Dense mode ships as a toggle and the current roomy rows stay the default. Recommendation: make dense the default on desktop (it is what a sheet user expects); say the word and it is a one-line change.
@@ -182,7 +183,7 @@ Each step ships on its own (rebase, checks, push).
 - Don't run the `visual` Playwright project or anything headed.
 - Don't send input to the editable Google Sheet; use the API or `/htmlview`.
 - Don't rewrite `entry.tsx` or `columns.tsx` wholesale while other streams have them open.
-- Don't change `playwright.config.ts`; pass a scratch config for a private port instead.
+- Don't change `playwright.config.ts` for this thread's convenience; pass a scratch config for a private port instead. (Its reporter was changed once, for everyone: `open: 'never'`, so a failed local run stops opening a browser window.)
 - Don't start a production build while another heavy run of this thread is going (compute budget).
 - Don't create or edit files under `app/`, `scripts/` or `e2e/` while an e2e run is in progress (see findings): draft in the scratchpad and copy in afterwards.
 - Don't make the first request to a freshly started dev server a page, and never from a test run: ask for `/app/app.css` first, then warm it by hand and check for a 200 (see findings).
