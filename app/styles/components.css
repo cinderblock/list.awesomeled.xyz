@@ -335,6 +335,11 @@ a.entry-updated:hover {
   font-size: 0.875rem;
   text-transform: capitalize;
 }
+/* Field labels arrive worded (lib/fields.ts humanizeKey: "GPIO voltage",
+   "SoC"); capitalizing every word would undo that */
+.detail-key--label {
+  text-transform: none;
+}
 .detail-value {
   font-size: 0.875rem;
   min-width: 0;

@@ -39,6 +39,7 @@ import { pageMeta } from '~/lib/meta';
 import { entrySeo } from '~/lib/seo.server';
 import { LinkRecord, UrlText } from '~/components/entry/LinkRecord';
 import { asLinkRecord } from '~/lib/url-label';
+import { humanizeKey } from '~/lib/fields';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -330,7 +331,15 @@ const SKIP_KEYS = new Set([
 ]);
 
 function humanize(key: string): string {
-  return SECTION_LABELS[key] ?? key.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+  return SECTION_LABELS[key] ?? fieldLabel(key);
+}
+
+// A field's key as a label, worded like the tables, filters and compare page
+// word it: "gpio_voltage" -> "GPIO voltage", "soc" -> "SoC", not "Gpio
+// Voltage" and "Soc". Keys that are already names (the "Wi-Fi" and "2.4GHz"
+// of an open-ended map) are left as written.
+function fieldLabel(key: string): string {
+  return /^[a-z0-9_]+$/.test(key) ? humanizeKey(key) : key;
 }
 
 function isGroup(v: unknown): v is Record<string, unknown> {
@@ -768,7 +777,7 @@ function KeyValueGrid({
     <dl className="detail-grid">
       {entries.map(([key, value]) => (
         <div key={key} className="detail-row">
-          <dt className="detail-key">{key.replace(/_/g, ' ')}</dt>
+          <dt className="detail-key detail-key--label">{fieldLabel(key)}</dt>
           <dd className="detail-value">
             {key === 'price' && priceSource !== undefined ? (
               <PriceDetail value={value} source={priceSource} status={status} />
@@ -1000,7 +1009,7 @@ function formatValue(
       <dl className="detail-subgrid">
         {keys.map((k) => (
           <div key={k} className="detail-row">
-            <dt className="detail-key">{k.replace(/_/g, ' ')}</dt>
+            <dt className="detail-key detail-key--label">{fieldLabel(k)}</dt>
             <dd>
               {formatValue(k, obj[k], ctx, `${path}.${k}`)}
               <FieldSources sources={ctx.sources[`${path}.${k}`]} />
