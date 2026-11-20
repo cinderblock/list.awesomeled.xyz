@@ -8,7 +8,7 @@ hardware: Orange Pi
 language: C++
 license: MIT
 links:
-  repo: https://www.orangepi-dmx.org/
+  url: https://www.orangepi-dmx.org/
 platforms:
   - Orange Pi
 protocols:

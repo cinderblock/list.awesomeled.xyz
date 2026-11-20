@@ -74,11 +74,19 @@
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
+        "url": {
+          "description": "The project's website, when it has one apart from its repository",
+          "type": ["string", "null"],
+          "format": "uri"
+        },
         "repo": {
-          "type": ["string", "null"]
+          "description": "Source repository (GitHub, GitLab, ...)",
+          "type": ["string", "null"],
+          "format": "uri"
         },
         "youtube": {
-          "type": ["string", "null"]
+          "type": ["string", "null"],
+          "format": "uri"
         }
       }
     },

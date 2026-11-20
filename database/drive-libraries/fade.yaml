@@ -7,7 +7,7 @@ features: Programming language based WS2812 and PWM LED ESP 32 with Windows base
 hardware: ESP32
 language: C++
 links:
-  repo: http://www.riderx.info/fade-an-esp32-animation-system/
+  url: http://www.riderx.info/fade-an-esp32-animation-system/
   youtube: https://www.youtube.com/watch?v=-CXQz1x2k9o
 platforms:
   - ESP32

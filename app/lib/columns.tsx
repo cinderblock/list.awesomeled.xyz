@@ -168,8 +168,9 @@ const patternDriverLinks: LinkConfig[] = [
   { key: 'links.url', label: 'Project page', icon: <ExternalLink size={16} /> },
 ];
 
-// Drive libraries (repo + YouTube)
+// Drive libraries (website, repo, YouTube)
 const libraryLinks: LinkConfig[] = [
+  { key: 'links.url', label: 'Website', icon: <ExternalLink size={16} /> },
   { key: 'links.repo', label: 'Repository', icon: <ExternalLink size={16} /> },
   { key: 'links.youtube', label: 'YouTube', icon: <Youtube size={16} /> },
 ];

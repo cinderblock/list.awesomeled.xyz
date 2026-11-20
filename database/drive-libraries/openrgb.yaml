@@ -6,7 +6,7 @@ hardware: PC RGB hardware
 language: C++
 license: GPL-2.0-or-later
 links:
-  repo: https://openrgb.org/index.html
+  url: https://openrgb.org/index.html
 platforms:
   - Windows
   - Linux

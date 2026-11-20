@@ -8,7 +8,7 @@ instructional_resources:
 language: JavaScript
 license: AGPL-3.0
 links:
-  repo: https://xod.io/
+  url: https://xod.io/
 platforms:
   - Arduino
   - ESP8266

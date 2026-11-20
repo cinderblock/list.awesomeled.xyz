@@ -11,6 +11,7 @@ instructional_resources:
 language: C++ # one, or a list (common.json programming_language)
 license: MIT # SPDX id
 links:
+  url: https://example.com/led-library # its website, when it has one apart from the repo
   repo: https://github.com/example/led-library
   youtube: https://www.youtube.com/watch?v=example
 platforms:

@@ -7,7 +7,7 @@ aliases:
 features: Wireshark captured artnet stream convert to TPM2 (Jinx native) file
 language: Visual Basic
 links:
-  repo: http://www.tlhome.de/ATCE.htm
+  url: http://www.tlhome.de/ATCE.htm
 platforms:
   - Windows
 protocols:

@@ -528,7 +528,7 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Developer', text, ['creator']),
     col('Hardware', text, ['hardware', 'platforms']),
     col('Features', text, ['features', 'supported_ics', 'protocols']),
-    col('URL', url, ['links.repo']),
+    col('URL', url, ['links.repo', 'links.url']),
     col('YouTube', url, ['links.youtube']),
     col('Instructional Resources', url, ['instructional_resources']),
     col('Instructional Resources (2)', url, ['instructional_resources']),

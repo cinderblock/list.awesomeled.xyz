@@ -11,7 +11,7 @@ dead_links:
 features: ArtNet to Twinkly consumer lights via Wi-Fi, allows control of Twinkly via professional lighting controls
 hardware: Twinkly
 links:
-  repo: http://artnet2twinkly.com/
+  url: http://artnet2twinkly.com/
   youtube: https://youtube.com/channel/UCbd2w11mMNXC9Qekdho1bYw
 platforms:
   - Windows

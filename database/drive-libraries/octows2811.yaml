@@ -5,7 +5,7 @@ hardware: Teensy
 language: C++
 license: MIT
 links:
-  repo: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
+  url: https://www.pjrc.com/teensy/td_libs_OctoWS2811.html
 platforms:
   - Teensy
 related:

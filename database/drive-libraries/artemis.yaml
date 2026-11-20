@@ -6,7 +6,7 @@ hardware: PC / Video source
 language: C#
 license: PolyForm-Noncommercial-1.0.0
 links:
-  repo: https://artemis-rgb.com/
+  url: https://artemis-rgb.com/
 platforms:
   - Windows
   - Linux

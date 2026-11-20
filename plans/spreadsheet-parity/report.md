@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/20/2026, 3:16 AM PST (2026-11-20 11:16Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/20/2026, 3:21 AM PST (2026-11-20 11:21Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -1645,7 +1645,7 @@ Database folder: `database/drive-libraries/`.
 | B   | Developer                   | `creator`                                | text        |      |
 | C   | Hardware                    | `hardware`, `platforms`                  | text        |      |
 | D   | Features                    | `features`, `supported_ics`, `protocols` | text        |      |
-| E   | URL                         | `links.repo`                             | url         |      |
+| E   | URL                         | `links.repo`, `links.url`                | url         |      |
 | F   | YouTube                     | `links.youtube`                          | url         |      |
 | G   | Instructional Resources     | `instructional_resources`                | url         |      |
 | H   | Instructional Resources (2) | `instructional_resources`                | url         |      |
