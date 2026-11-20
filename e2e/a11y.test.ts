@@ -31,6 +31,25 @@ const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-prac
  * which is much quicker than re-checking a 136-row table behind it.
  */
 async function violations(page: Page, within?: string): Promise<string[]> {
+  // Anything still fading in is measured half transparent, and its text then
+  // reads as low contrast. Let entrance animations and transitions finish:
+  // they may start a frame or two after the page says it is ready.
+  await page.evaluate(async () => {
+    const frame = () => new Promise((resolve) => requestAnimationFrame(() => resolve(null)));
+    for (let round = 0; round < 20; round++) {
+      await frame();
+      await frame();
+      const running = document
+        .getAnimations()
+        .filter(
+          (animation) =>
+            animation.playState === 'running' &&
+            animation.effect?.getComputedTiming().endTime !== Infinity
+        );
+      if (running.length === 0) return;
+      await Promise.all(running.map((animation) => animation.finished.catch(() => undefined)));
+    }
+  });
   let builder = new AxeBuilder({ page }).withTags(TAGS);
   if (within) builder = builder.include(within);
   const results = await builder.analyze();
