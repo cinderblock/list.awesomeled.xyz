@@ -16,6 +16,8 @@ datasheet:
 electrical:
   max_voltage: 5.5V
   output_current: 6mA
+  input_high_voltage: 2V
+  input_high_voltage_notes: 'VCC = 4.5 V to 5.5 V'
 io:
   channels: 4
   buffered: true
@@ -46,6 +48,14 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
     retrieved: '2026-11-18'
     notes: "'±6-mA output drive at 5 V'"
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
+    retrieved: '2026-11-20'
+    notes: 'TI datasheet SCLS069G, 5.2 Recommended Operating Conditions: VIH min 2 V, VIL max 0.8 V, VCC = 4.5 V to 5.5 V'
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
+    retrieved: '2026-11-20'
+    notes: "TI datasheet SCLS069G: title 'Quadruple Bus Buffer Gates With 3-State Outputs'; Features: 'High-current 3-state outputs drive bus lines or buffer memory address registers', '±6-mA output drive at 5 V'"
   io.channels:
     url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
     retrieved: '2026-11-18'

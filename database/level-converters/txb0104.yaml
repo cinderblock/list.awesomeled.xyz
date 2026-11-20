@@ -18,9 +18,12 @@ datasheet:
   url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
 electrical:
   max_voltage: 5.5V
+  input_high_voltage: 2.145V
+  input_high_voltage_notes: 'Dual supply: 0.65 × VCCA on the A side, so 2.145 V with VCCA at 3.3 V'
 io:
   channels: 4
   direction: auto
+  buffered: false
 links:
   product: https://www.ti.com/product/TXB0104
 sources:
@@ -36,6 +39,14 @@ sources:
     url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
     retrieved: '2026-11-18'
     notes: "'1.2V to 3.6V on A port and 1.65V to 5.5V on B port (VCCA ≤ VCCB)'"
+  electrical.input_high_voltage:
+    url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
+    retrieved: '2026-11-20'
+    notes: 'TI datasheet SCES650K, 5.3 Recommended Operating Conditions: VIH data inputs min VCCI × 0.65, where VCCI is the supply voltage associated with the input port (VCCA = 1.2 V to 3.6 V)'
+  io.buffered:
+    url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
+    retrieved: '2026-11-20'
+    notes: "TI datasheet SCES650K, 7.3.1: 'In a DC state, the output drivers of the device maintain a high or low, but are designed to be weak, so the output drivers can be overdriven by an external driver'; 7.3.3: 'TI recommends careful PCB layout practices with short PCB trace lengths'; 7.3.5: 'The device is designed to drive capacitive loads of up to 70 pF. The output drivers of the TXB0104 device have low dc drive strength'; 8.2.2: 'the serial resistor 4 kΩ in the I/O line'. VOH is specified at IOH = -20 μA. TI's overview calls it 'a buffered architecture with edge-rate accelerators (one-shots)'; this field records whether the outputs can drive a line, and these can't"
   io.channels:
     url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
     retrieved: '2026-11-18'
