@@ -277,6 +277,27 @@ test.describe('Columns', () => {
     await expect.poll(async () => (await columnLabels(page)).indexOf('Price')).toBe(index - 1);
   });
 
+  test('a column menu stays on screen in a short window', async ({ page }) => {
+    // Creator has dozens of values: its menu is taller than the room under the
+    // table header on a small laptop. It used to flip upward, off the top.
+    await page.setViewportSize({ width: 1280, height: 620 });
+    await gotoReady(page, '/controllers');
+    await headerCell(page, 'creator')
+      .getByRole('button', { name: /Creator column/ })
+      .click();
+    const menu = page.locator('.column-header-popover');
+    await expect(page.getByRole('button', { name: 'Hide the Creator column' })).toBeInViewport({
+      ratio: 1,
+    });
+    const box = (await menu.boundingBox())!;
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.y + box.height).toBeLessThanOrEqual(620);
+    // What does not fit is reached by scrolling inside the menu
+    const empty = menu.getByRole('button', { name: /^No value/ });
+    await empty.scrollIntoViewIfNeeded();
+    await expect(empty).toBeInViewport({ ratio: 1 });
+  });
+
   test('state from one category does not leak into another', async ({ page }) => {
     await gotoReady(page, '/controllers?f=wled_compatible:yes&cols=name,price');
     await expect.poll(() => columnLabels(page)).toEqual(['Name', 'Price']);

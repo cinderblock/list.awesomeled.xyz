@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as Popover from '@radix-ui/react-popover';
 import {
   ArrowDown,
@@ -15,6 +15,11 @@ import type { BaseEntry } from '~/lib/types';
 import { isFilterActive, type FilterValue, type SortDirection } from '~/lib/table-state';
 import { FilterEditor } from './ColumnFilter';
 import type { TableColumn } from './table-columns';
+
+// Space kept between the menu and the bottom of the window (the gap under the
+// trigger, the arrow, a margin), and the least height worth opening downward
+const MENU_CLEARANCE = 24;
+const MENU_MIN_HEIGHT = 220;
 
 export interface ColumnSortState {
   dir: SortDirection;
@@ -64,7 +69,21 @@ export function ColumnHeader({
   canMoveLeft,
   canMoveRight,
 }: ColumnHeaderProps) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpenState] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  // How tall the menu may be. A column with many values makes a menu taller
+  // than the room under the table header on a laptop screen; left alone it
+  // flips upward and runs off the top of the window. Measured when it opens
+  // (it closes on scroll, so the number stays true while it is open), the menu
+  // opens downward and scrolls inside instead.
+  const [room, setRoom] = useState<number | undefined>(undefined);
+  const setOpen = (next: boolean) => {
+    if (next && triggerRef.current) {
+      const below = window.innerHeight - triggerRef.current.getBoundingClientRect().bottom;
+      setRoom(Math.max(MENU_MIN_HEIGHT, Math.floor(below - MENU_CLEARANCE)));
+    }
+    setOpenState(next);
+  };
   const sortable = column.sortable !== false && column.key !== 'links';
   const filterable = column.filterKind != null || column.key !== 'links';
   const filtered = isFilterActive(filterValue);
@@ -74,7 +93,7 @@ export function ColumnHeader({
   // Close on scroll so the menu cannot detach from the sticky header
   useEffect(() => {
     if (!open) return;
-    const close = () => setOpen(false);
+    const close = () => setOpenState(false);
     window.addEventListener('scroll', close, { passive: true });
     return () => window.removeEventListener('scroll', close);
   }, [open]);
@@ -112,6 +131,7 @@ export function ColumnHeader({
       <Popover.Root open={open} onOpenChange={setOpen}>
         <Popover.Trigger asChild>
           <button
+            ref={triggerRef}
             type="button"
             className={`column-header-menu${filtered ? ' column-header-menu--filtered' : ''}`}
             aria-label={`${label} column: filter and options${filtered ? ' (filter active)' : ''}`}
@@ -126,132 +146,134 @@ export function ColumnHeader({
             align="start"
             collisionPadding={8}
           >
-            <div className="column-header-popover-header">
-              <span className="column-header-popover-title">{label}</span>
-              <div className="column-header-popover-actions">
-                {onMove && (
-                  <>
+            <div className="column-header-popover-body" style={{ maxHeight: room }}>
+              <div className="column-header-popover-header">
+                <span className="column-header-popover-title">{label}</span>
+                <div className="column-header-popover-actions">
+                  {onMove && (
+                    <>
+                      <button
+                        type="button"
+                        className="column-header-hide-btn"
+                        aria-label={`Move ${label} left`}
+                        disabled={!canMoveLeft}
+                        onClick={() => onMove(-1)}
+                      >
+                        <ArrowLeft size={14} />
+                      </button>
+                      <button
+                        type="button"
+                        className="column-header-hide-btn"
+                        aria-label={`Move ${label} right`}
+                        disabled={!canMoveRight}
+                        onClick={() => onMove(1)}
+                      >
+                        <ArrowRight size={14} />
+                      </button>
+                    </>
+                  )}
+                  {onHide && (
                     <button
                       type="button"
                       className="column-header-hide-btn"
-                      aria-label={`Move ${label} left`}
-                      disabled={!canMoveLeft}
-                      onClick={() => onMove(-1)}
+                      aria-label={`Hide the ${label} column`}
+                      onClick={() => {
+                        onHide();
+                        setOpen(false);
+                      }}
                     >
-                      <ArrowLeft size={14} />
-                    </button>
-                    <button
-                      type="button"
-                      className="column-header-hide-btn"
-                      aria-label={`Move ${label} right`}
-                      disabled={!canMoveRight}
-                      onClick={() => onMove(1)}
-                    >
-                      <ArrowRight size={14} />
-                    </button>
-                  </>
-                )}
-                {onHide && (
-                  <button
-                    type="button"
-                    className="column-header-hide-btn"
-                    aria-label={`Hide the ${label} column`}
-                    onClick={() => {
-                      onHide();
-                      setOpen(false);
-                    }}
-                  >
-                    <EyeOff size={14} />
-                    Hide
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {column.description && (
-              <p className="column-header-description">{column.description}</p>
-            )}
-
-            {sortable && (
-              <div className="column-header-sort-section">
-                <div className="column-header-section-label">
-                  Sort
-                  {sortState && sortState.count > 1 ? ` (level ${sortState.index})` : ''}
-                </div>
-                <div className="column-header-sort-buttons">
-                  <button
-                    type="button"
-                    className={`column-header-sort-btn${sortDir === 'asc' ? ' column-header-sort-btn--active' : ''}`}
-                    aria-pressed={sortDir === 'asc'}
-                    onClick={() => onSortChange('asc')}
-                  >
-                    <ArrowUp size={14} />
-                    Ascending
-                  </button>
-                  <button
-                    type="button"
-                    className={`column-header-sort-btn${sortDir === 'desc' ? ' column-header-sort-btn--active' : ''}`}
-                    aria-pressed={sortDir === 'desc'}
-                    onClick={() => onSortChange('desc')}
-                  >
-                    <ArrowDown size={14} />
-                    Descending
-                  </button>
-                  {sortDir && (
-                    <button
-                      type="button"
-                      className="column-header-sort-btn column-header-sort-btn--clear"
-                      onClick={() => onSortChange(null)}
-                    >
-                      <X size={14} />
-                      Clear
+                      <EyeOff size={14} />
+                      Hide
                     </button>
                   )}
                 </div>
-                {hasOtherSort && !sortDir && (
+              </div>
+
+              {column.description && (
+                <p className="column-header-description">{column.description}</p>
+              )}
+
+              {sortable && (
+                <div className="column-header-sort-section">
+                  <div className="column-header-section-label">
+                    Sort
+                    {sortState && sortState.count > 1 ? ` (level ${sortState.index})` : ''}
+                  </div>
                   <div className="column-header-sort-buttons">
                     <button
                       type="button"
-                      className="column-header-sort-btn"
-                      onClick={() => onSortChange(column.defaultSortDir ?? 'asc', true)}
+                      className={`column-header-sort-btn${sortDir === 'asc' ? ' column-header-sort-btn--active' : ''}`}
+                      aria-pressed={sortDir === 'asc'}
+                      onClick={() => onSortChange('asc')}
                     >
-                      <ArrowUpDown size={14} />
-                      Add as tie-break
+                      <ArrowUp size={14} />
+                      Ascending
                     </button>
-                  </div>
-                )}
-                <p className="column-header-tip">
-                  Tip: click a header to sort, shift-click to break ties with it.
-                </p>
-              </div>
-            )}
-
-            {filterable && (
-              <div className="column-header-filter-section">
-                <div className="column-header-section-header">
-                  <span className="column-header-section-label">Filter</span>
-                  {filtered && (
                     <button
                       type="button"
-                      className="filter-clear-btn"
-                      onClick={() => onFilterChange(undefined)}
+                      className={`column-header-sort-btn${sortDir === 'desc' ? ' column-header-sort-btn--active' : ''}`}
+                      aria-pressed={sortDir === 'desc'}
+                      onClick={() => onSortChange('desc')}
                     >
-                      <X size={14} />
-                      Clear
+                      <ArrowDown size={14} />
+                      Descending
                     </button>
+                    {sortDir && (
+                      <button
+                        type="button"
+                        className="column-header-sort-btn column-header-sort-btn--clear"
+                        onClick={() => onSortChange(null)}
+                      >
+                        <X size={14} />
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                  {hasOtherSort && !sortDir && (
+                    <div className="column-header-sort-buttons">
+                      <button
+                        type="button"
+                        className="column-header-sort-btn"
+                        onClick={() => onSortChange(column.defaultSortDir ?? 'asc', true)}
+                      >
+                        <ArrowUpDown size={14} />
+                        Add as tie-break
+                      </button>
+                    </div>
+                  )}
+                  <p className="column-header-tip">
+                    Tip: click a header to sort, shift-click to break ties with it.
+                  </p>
+                </div>
+              )}
+
+              {filterable && (
+                <div className="column-header-filter-section">
+                  <div className="column-header-section-header">
+                    <span className="column-header-section-label">Filter</span>
+                    {filtered && (
+                      <button
+                        type="button"
+                        className="filter-clear-btn"
+                        onClick={() => onFilterChange(undefined)}
+                      >
+                        <X size={14} />
+                        Clear
+                      </button>
+                    )}
+                  </div>
+                  {open && (
+                    <FilterEditor
+                      column={column}
+                      allRows={allRows}
+                      rows={facetRows()}
+                      value={filterValue}
+                      onChange={onFilterChange}
+                    />
                   )}
                 </div>
-                {open && (
-                  <FilterEditor
-                    column={column}
-                    allRows={allRows}
-                    rows={facetRows()}
-                    value={filterValue}
-                    onChange={onFilterChange}
-                  />
-                )}
-              </div>
-            )}
+              )}
+            </div>
 
             <Popover.Arrow className="filter-arrow" />
           </Popover.Content>

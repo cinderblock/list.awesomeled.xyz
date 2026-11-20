@@ -262,6 +262,23 @@ html[data-table-layout='cards'] .data-table-sort-menu {
   color: var(--popover-foreground);
 }
 
+/* Scrolls inside when the menu is taller than the room under the header
+   (max-height is set from the trigger's position when the menu opens). The
+   arrow sits outside this box, so the scrolling does not clip it. */
+.column-header-popover-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: inherit;
+}
+
+.column-header-popover-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: var(--popover);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
 /* ==========================================================================
    Filter editor additions
    ========================================================================== */
