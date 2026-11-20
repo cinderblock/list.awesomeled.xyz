@@ -12,7 +12,11 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  // `open: 'never'`: by default a failed local run opens the HTML report in a
+  // browser window, on top of whatever the person at the machine is doing.
+  // The report is still written (playwright-report/); `bunx playwright
+  // show-report` opens it on purpose. `list` prints each test as it finishes.
+  reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: BASE_URL,
     trace: 'on-first-retry',
