@@ -137,8 +137,8 @@ the Pi inside.
 Stream 2: DMX Core 100's pixel outputs are gone too (899dc868); the PixOut
 entry carries its maker's name ("Pixout ArtNet DMX Recorder"), the D-100's
 four DMX outputs and its 12 V supply (899dc868, b4389253). Where both belong
-is Cameron's call, tied to the parked pattern-driver kinds: open question 1
-in [plans/database-review.md](plans/database-review.md).
+is Cameron's call, tied to the parked pattern-driver kinds: open questions
+1-2 in [plans/database-review.md](plans/database-review.md).
 
 ## Pixels' `electrical.wattage` is one channel's power, not the pixel's (stream 2)
 

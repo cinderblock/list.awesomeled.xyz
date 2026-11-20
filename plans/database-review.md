@@ -100,7 +100,7 @@ Research findings with sources: [database-review-research.md](database-review-re
 14. ✅ Docs: CONTRIBUTING.md schema reference and value conventions, `database/_schema/README.md`, CLAUDE.md, OVERHAUL-PLAN.md, TODO.md.
 15. ✅ Shipped `0507cb7..d1d23db` and `ee64cc8..c6b3a69`; drive libraries' website field (`links.url`) and their repositories; the last research batch (`plans/database-review-fixes/issues-final.yaml`); the mistyped ignored hash fixed with a guard test; ISSUES.md: my sections closed with hashes, hand-offs to streams 3-6, pattern-driver pricing recommendation for stream 6.
 16. ✅ Cleanup: temp apply script, ship worktree, backup branches, safety stashes, port marker.
-17. Waiting on Cameron: open question 1 (where DMX Core 100 and the Pixout recorder belong). Nothing else is open in this stream.
+17. Waiting on Cameron: open questions 1 (pattern-driver `kind` vs a category split) and 2 (where DMX Core 100 and the Pixout recorder belong). Nothing else is open in this stream.
 
 ## Progress log
 
@@ -125,11 +125,12 @@ Research findings with sources: [database-review-research.md](database-review-re
 - [x] Last research batch applied (`5abe386`).
 - [x] ISSUES.md closures and hand-offs.
 - [x] Cleanup.
-- [ ] Open question 1 (Cameron).
+- [ ] Open questions 1 and 2 (Cameron).
 
 ## Open questions for the user
 
-1. `controllers/dmx-core` (a network show controller) and `controllers/pixout-server` (an Art-Net recorder/player) drive no pixels (stream 4's finding, confirmed by the inputs audit). Recommendation: treat them as "players", the same bucket as the parked pattern-driver `kind` question (sequencer / live-VJ / player / ...): if pattern drivers get a `kind` field, move both there as hardware players; until then keep them in controllers with the false pixel outputs removed. Your call, since it's tied to the parked decision.
+1. **Pattern-driver subcategories** (parked in ROADMAP): a filterable `kind` field or a real category split? Recommendation: a `kind` field, one-or-a-list from a closed vocabulary (`sequencer`, `live`, `player`, `music-reactive`, `on-controller`), shown as a badge and a facet. The 57 entries share one schema (I/O directions, protocols, platforms, pricing), and many programs are several kinds at once (LedFx: live and music-reactive; WLED: on-controller and music-reactive), so a split would duplicate the schema and force one bucket per program. Classifying the entries is a research pass once you pick.
+2. `controllers/dmx-core` (a network show controller) and `controllers/pixout-server` (the Pixout ArtNet DMX Recorder) drive no pixels (stream 4's finding, confirmed by the inputs audit; their pixel outputs are now gone). Recommendation: they are hardware `player`s: if pattern drivers get `kind`, move both there; until then they stay in controllers without pixel outputs. Depends on question 1.
 
 ## Things not to do
 
