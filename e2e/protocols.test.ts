@@ -91,6 +91,47 @@ test.describe('Pixel protocols page', () => {
     await expect(status(backup)).toHaveText(/^All pixels work/);
   });
 
+  test('SK9822s run an update behind until the reset frame is added', async ({ page }) => {
+    await gotoReady(page, '/protocols');
+    const chain = figure(page, /clocked pixels in a chain/);
+    await chain.getByRole('button', { name: 'SK9822' }).click();
+    await expect(chain.getByRole('button', { name: 'SK9822' })).toHaveAttribute(
+      'aria-pressed',
+      'true'
+    );
+    await expect(status(chain)).toHaveText(/one update behind/);
+    await chain.getByRole('checkbox', { name: 'Reset frame' }).check();
+    await expect(status(chain)).toHaveText(/with a reset frame/);
+  });
+
+  test('leaving datasheets out of the timing comparison', async ({ page }) => {
+    await gotoReady(page, '/protocols');
+    const chart = page.locator('figure.proto-windows');
+    const summary = status(chart);
+    await expect(summary).toHaveText(/a 1 they all accept is none/);
+    // Leave out the sheets with the shortest and the longest 1s, and the
+    // others agree on one
+    for (const name of [/WS2816B, WS2816C/, 'INK1003', 'TX1818']) {
+      await chart.getByRole('button', { name }).click();
+    }
+    await expect(summary).toHaveText(/a 1 they all accept is \d+–\d+ ns/);
+    await expect(chart.getByRole('button', { name: 'INK1003' })).toHaveAttribute(
+      'aria-pressed',
+      'false'
+    );
+  });
+
+  test('every footnote points at an entry in the sources list', async ({ page }) => {
+    await gotoReady(page, '/protocols');
+    const targets = await page
+      .locator('.proto-cite a')
+      .evaluateAll((links) => [...new Set(links.map((a) => a.getAttribute('href')))]);
+    expect(targets.length).toBeGreaterThan(10);
+    // Source ids contain dots ("e1.11-2024"), so match the id attribute, not a #selector
+    for (const href of targets)
+      await expect(page.locator(`[id="${href!.slice(1)}"]`)).toHaveCount(1);
+  });
+
   test('no console errors, and nothing scrolls sideways on a phone', async ({ page }) => {
     const errors: string[] = [];
     page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));

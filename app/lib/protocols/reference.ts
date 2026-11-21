@@ -51,6 +51,122 @@ export const SOURCES = {
     retrieved: '2026-11-20',
     revision: 'none printed (the early datasheet, with the SET speed pin)',
   },
+  'ws2812-adafruit': {
+    title: 'WS2812 Intelligent control LED integrated light source (the 6-pin WS2812)',
+    publisher: 'WorldSemi (copy hosted by Adafruit)',
+    url: 'https://cdn-shop.adafruit.com/datasheets/WS2812.pdf',
+    retrieved: '2026-11-20',
+    revision: 'none printed (2012)',
+  },
+  'ws2812b-2017': {
+    title: 'WORLDSEMI CO., LIMITED WS2812B Specifications',
+    publisher: 'WorldSemi (copy hosted by Triopak)',
+    url: 'https://www.triopak.fi/files/product/Worldsemi/WS2812B.pdf',
+    retrieved: '2026-11-20',
+    revision: 'Mar-2017',
+  },
+  'ws2815b-v1': {
+    title: 'WS2815B-V1 Intelligent control LED integrated light source',
+    publisher: 'WorldSemi',
+    url: 'https://www.world-semi.com/downloads/datasheets/en/ws2815b-v1-v1.pdf',
+    retrieved: '2026-11-20',
+    revision: 'V2.2 (2023)',
+  },
+  'ws2816b-lcsc': {
+    title: 'WS2816B / WS2816C datasheet',
+    publisher: 'WorldSemi (copy hosted by LCSC)',
+    url: 'https://www.lcsc.com/datasheet/C4154877.pdf',
+    retrieved: '2026-11-20',
+    revision: 'V1.0 (2020-12-06)',
+  },
+  'tm1804-v2.3': {
+    title: 'TM1804 (3 通道 LED 恒流驱动专用电路)',
+    publisher: 'Titan Micro Electronics',
+    url: 'https://www.titanmec.com/upload/twdz_cn/20250602/20250602112122574.pdf',
+    retrieved: '2026-11-20',
+    revision: 'V2.3 (2025)',
+  },
+  'tm1903-v1.3': {
+    title: 'TM1903 (3 通道LED 恒流驱动专用电路)',
+    publisher: 'Titan Micro Electronics',
+    url: 'https://www.titanmec.com/upload/twdz_cn/20231124/20231124144051767.pdf',
+    retrieved: '2026-11-20',
+    revision: 'V1.3',
+  },
+  'sm16703p-v1.3': {
+    title: 'SM16703P Specification Sheet',
+    publisher: 'Sunmoon / ChinaASIC (copy hosted by Suntech Lite)',
+    url: 'https://suntechlite.com/wp-content/uploads/2024/08/SM16703P-Specification-Sheet.pdf',
+    retrieved: '2026-11-20',
+    revision: 'IBZGZIV1.3',
+  },
+  'gs8208-v0.7': {
+    title: 'GS8208 3-Channel LED Constant Current Driver Chip in Series',
+    publisher: 'Genesis (copy hosted by LED-Stübchen)',
+    url: 'https://www.led-stuebchen.de/download/GS8208V0.7-EN.pdf',
+    retrieved: '2026-11-20',
+    revision: 'Version 0.7',
+  },
+  'tx1818-lcsc': {
+    title: 'TX1818BJJ-F01 5050 内置IC 幻彩 智能外控LED 光源 产品规格书',
+    publisher: 'TCWIN (copy hosted by LCSC)',
+    url: 'https://datasheet.lcsc.com/datasheet/pdf/b153efab9bc27ebcdabd89857c3357d8.pdf',
+    retrieved: '2026-11-20',
+    revision: 'A2 (2023-03-27)',
+  },
+  'ink1003-greeled': {
+    title: 'Data Sheet Of INK1003 IC Driver',
+    publisher: 'Greeled (copy hosted by espec.ws)',
+    url: 'https://monitor.espec.ws/download.php?id=205360',
+    retrieved: '2026-11-20',
+  },
+  'lb1908-ledyi': {
+    title: 'LB1908 DC12V Power supply 3 channels LED driver',
+    publisher: 'copy hosted by LEDYi',
+    url: 'https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf',
+    retrieved: '2026-11-20',
+  },
+  'ucs1904-cn': {
+    title: 'UCS1904 (Chinese datasheet)',
+    publisher: 'UCS (copy hosted by datasheet4u)',
+    url: 'https://datasheet4u.com/pdf/1350120/UCS1904.pdf',
+    retrieved: '2026-11-20',
+  },
+  'cpldcpu-ws2812': {
+    title: 'Light_WS2812 library V2.0 – Part I: Understanding the WS2812',
+    publisher: 'Tim (cpldcpu), measurements with a logic analyzer',
+    url: 'https://cpldcpu.github.io/2014/01/14/light_ws2812-library-v2-0-part-i-understanding-the-ws2812/',
+    retrieved: '2026-11-20',
+    revision: '2014-01-14',
+  },
+  'josh-neopixels': {
+    title: 'NeoPixels Revealed: How to (not need to) generate precisely timed signals',
+    publisher: 'Josh Levine, measurements',
+    url: 'https://wp.josh.com/2014/05/13/ws2812-neopixels-are-not-so-finicky-once-you-get-to-know-them/',
+    retrieved: '2026-11-20',
+    revision: '2014-05-13, updated 2020-11-02',
+  },
+  fastled: {
+    title: 'FastLED led_timing.h (WS2812 timing)',
+    publisher: 'FastLED',
+    url: 'https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L109-L134',
+    retrieved: '2026-11-20',
+    revision: 'commit 5e831b8',
+  },
+  neopixelbus: {
+    title: 'NeoPixelBus NeoEsp32RmtMethod.h (WS2812x speed)',
+    publisher: 'Makuna / NeoPixelBus',
+    url: 'https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp32RmtMethod.h#L89-L296',
+    retrieved: '2026-11-20',
+    revision: 'commit fd670ee',
+  },
+  fpp: {
+    title: 'FPP DPIPixels.cpp (WS281x bit cell)',
+    publisher: 'Falcon Player (FPP)',
+    url: 'https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/src/non-gpl/DPIPixels/DPIPixels.cpp#L61-L84',
+    retrieved: '2026-11-20',
+    revision: 'commit 123b8ca',
+  },
   'apa102c-adafruit': {
     title: 'APA102C',
     publisher: 'Shiji Lighting / iPixel LED (copy hosted by Adafruit)',
@@ -419,6 +535,282 @@ export const NETWORK_FACTS = {
   },
 } satisfies Record<string, Citation>;
 
+/**
+ * How long a 0's and a 1's high pulse may be, per document. Datasheets give
+ * windows; the UCS rule and the measurement give the point where a chip
+ * decides; libraries give what they send.
+ */
+export interface HighTimeRow {
+  id: string;
+  label: string;
+  kind: 'datasheet' | 'decision' | 'library';
+  /** Open-ended windows leave `min` or `max` out */
+  t0h: { min?: number; max?: number };
+  t1h: { min?: number; max?: number };
+  cite: Citation;
+}
+
+export const HIGH_TIME_ROWS: HighTimeRow[] = [
+  {
+    id: 'ws2812',
+    label: 'WS2812 (6-pin, 2012)',
+    kind: 'datasheet',
+    t0h: pm(350, 150),
+    t1h: pm(700, 150),
+    cite: {
+      source: 'ws2812-adafruit',
+      where: 'p. 4',
+      quote:
+        'T0H 0 code ,high voltage time 0.35us ±150ns · T1H 1 code ,high voltage time 0.7us ±150ns',
+    },
+  },
+  {
+    id: 'ws2812b-2013',
+    label: 'WS2812B (early sheet)',
+    kind: 'datasheet',
+    t0h: WS2812B_EARLY.t0h,
+    t1h: WS2812B_EARLY.t1h,
+    cite: WS2812B_EARLY.cite,
+  },
+  {
+    id: 'ws2812b-2017',
+    label: 'WS2812B (Mar 2017)',
+    kind: 'datasheet',
+    t0h: { min: 220, max: 380 },
+    t1h: { min: 750, max: 1600 },
+    cite: {
+      source: 'ws2812b-2017',
+      where: 'p. 4, Data Transfer Time',
+      quote:
+        'T0H 0 code, high voltage time 220ns~380ns · T1H 1 code, high voltage time 750ns~1.6µs',
+    },
+  },
+  {
+    id: 'ws2811-current',
+    label: 'WS2811, WS2812B V5+, WS2813B (2018 on)',
+    kind: 'datasheet',
+    t0h: WS2811_V15.t0h,
+    t1h: WS2811_V15.t1h,
+    cite: WS2811_V15.cite,
+  },
+  {
+    id: 'ws2815b',
+    label: 'WS2815B (2023 on)',
+    kind: 'datasheet',
+    t0h: { min: 220, max: 380 },
+    t1h: { min: 580, max: 840 },
+    cite: {
+      source: 'ws2815b-v1',
+      where: 'p. 3, Data Transfer Time',
+      quote:
+        'T0H 0 code, high voltage time 220ns~380ns · T1H 1 code, high voltage time 580ns~840ns',
+    },
+  },
+  {
+    id: 'ws2816b',
+    label: 'WS2816B, WS2816C (16-bit)',
+    kind: 'datasheet',
+    t0h: { min: 200, max: 320 },
+    t1h: { min: 520, max: 800 },
+    cite: {
+      source: 'ws2816b-lcsc',
+      where: 'p. 4, Data Transfer Time',
+      quote:
+        'T0H 0 code, high voltage time 200ns~320ns · T1H 1 code, high voltage time 520ns~800ns',
+    },
+  },
+  {
+    id: 'tm1804',
+    label: 'TM1804 (V2.3)',
+    kind: 'datasheet',
+    t0h: { min: 300, max: 390 },
+    t1h: { min: 650, max: 1000 },
+    cite: {
+      source: 'tm1804-v2.3',
+      where: 'p. 4, 高速模式时间 (high-speed mode)',
+      quote: 'T0H 输入0 码，高电平时间 300 360 390 ns · T1H 输入1 码，高电平时间 650 720 1000 ns',
+    },
+  },
+  {
+    id: 'tm1903',
+    label: 'TM1903 (V1.3)',
+    kind: 'datasheet',
+    t0h: { max: 410 },
+    t1h: { min: 650 },
+    cite: {
+      source: 'tm1903-v1.3',
+      where: 'p. 4, 时序特性 (timing)',
+      quote:
+        '输入0 码，高电平时间 T0H … 360 410 ns · 输入1 码，高电平时间 T1H 650 720 ns (no minimum printed for T0H, no maximum for T1H)',
+    },
+  },
+  {
+    id: 'sm16703',
+    label: 'SM16703P (V1.3)',
+    kind: 'datasheet',
+    t0h: { min: 200, max: 400 },
+    t1h: { min: 800, max: 1000 },
+    cite: {
+      source: 'sm16703p-v1.3',
+      where: 'p. 6',
+      quote: 'T0H 0, HIGH level time 200 300 400 ns · T1H 1, HIGH level time 800 900 1000 ns',
+    },
+  },
+  {
+    id: 'gs8208',
+    label: 'GS8208 (1:3 duty, nominal only)',
+    kind: 'datasheet',
+    t0h: { min: 312.5, max: 312.5 },
+    t1h: { min: 937.5, max: 937.5 },
+    cite: {
+      source: 'gs8208-v0.7',
+      where: 'p. 11',
+      quote:
+        'The single code employs a duty cycle of 1:3, with a standard transmission speed of 800 kHz · 0 code 1/4T 3/4T; 1 code 3/4T 1/4T; T=1/800kHz',
+    },
+  },
+  {
+    id: 'tx1818',
+    label: 'TX1818',
+    kind: 'datasheet',
+    t0h: pm(300, 50),
+    t1h: pm(900, 50),
+    cite: {
+      source: 'tx1818-lcsc',
+      where: 'p. 7, 数据传输时间 (data transfer time)',
+      quote: 'T0H 0码，高电平时间 0.3µs ±0.05us · T1H 1码，高电平时间 0.9µs ±0.05us',
+    },
+  },
+  {
+    id: 'ink1003',
+    label: 'INK1003',
+    kind: 'datasheet',
+    t0h: pm(250, 75),
+    t1h: pm(1000, 75),
+    cite: {
+      source: 'ink1003-greeled',
+      where: 'p. 6',
+      quote:
+        'T0H 0 code of high level time 0.25μs ±75ns · T1H 1 code of high level time 1.0μs ±75ns',
+    },
+  },
+  {
+    id: 'lb1908',
+    label: 'LB1908',
+    kind: 'datasheet',
+    t0h: { min: 250, max: 350 },
+    t1h: { min: 700, max: 900 },
+    cite: {
+      source: 'lb1908-ledyi',
+      where: 'p. 3, Time sequence characteristics',
+      quote:
+        'Input 0 ode, high level time T0H … 250 300 350 ns · Input 1 ode, high level time T1H 700 800 900 ns',
+    },
+  },
+  {
+    id: 'ucs1904',
+    label: 'UCS1904 (maker’s decision rule)',
+    kind: 'decision',
+    t0h: { max: 550 },
+    t1h: { min: 690 },
+    cite: {
+      source: 'ucs1904-cn',
+      where: 'p. 6, note 1',
+      quote:
+        'IC 主要根据高电平时间判断"0"码和"1"码 … 高电平时间<0.55us,IC 判断为"0"码,高电平时间>0.69uS,判断为“1”码 (the IC tells 0 from 1 by the high time: under 0.55 µs is a 0, over 0.69 µs a 1)',
+    },
+  },
+  {
+    id: 'cpldcpu',
+    label: 'WS2812B, measured (2014)',
+    kind: 'decision',
+    t0h: { max: 563 },
+    t1h: { min: 625 },
+    cite: {
+      source: 'cpldcpu-ws2812',
+      where: 'results',
+      quote: 'The threshold between “0” and “1” is somewhere between 563 and 625 ns.',
+    },
+  },
+  {
+    id: 'fastled',
+    label: 'FastLED sends (WS2812B)',
+    kind: 'library',
+    t0h: { min: 250, max: 250 },
+    t1h: { min: 875, max: 875 },
+    cite: {
+      source: 'fastled',
+      where: 'led_timing.h',
+      quote:
+        'WS2812 RGB controller @ 800 kHz … Four-phase: TH0=250ns, TH1=875ns, TL0=1000ns, TL1=375ns',
+    },
+  },
+  {
+    id: 'neopixelbus',
+    label: 'NeoPixelBus sends (WS2812x, ESP32)',
+    kind: 'library',
+    t0h: { min: 400, max: 400 },
+    t1h: { min: 800, max: 800 },
+    cite: {
+      source: 'neopixelbus',
+      where: 'NeoEsp32RmtSpeedWs2812x',
+      quote:
+        'RmtBit0 = Item32Val(400, 850); RmtBit1 = Item32Val(800, 450); RmtDurationReset = FromNs(300000); // 300us',
+    },
+  },
+  {
+    id: 'fpp',
+    label: 'FPP sends (WS281x, Pi DPI)',
+    kind: 'library',
+    t0h: { min: 312, max: 312 },
+    t1h: { min: 729, max: 729 },
+    cite: {
+      source: 'fpp',
+      where: 'DPIPixels.cpp',
+      quote:
+        "12 gives T0H 312ns / T1H 729ns, which is what FPP's PRU string drivers have shipped for years (320/750)",
+    },
+  },
+];
+
+export const MEASURED_FACTS = {
+  onlyHighTime: {
+    source: 'josh-neopixels',
+    where: 'simplified timing constraints',
+    quote:
+      'The only tight timing parameter for NeoPixel signaling is the maximum width of a 0-bit pulse',
+  },
+  latchShort: {
+    source: 'josh-neopixels',
+    where: 'TLL',
+    quote: 'Leave the signal low for just 6us and the LED will latch.',
+  },
+  newChips: {
+    source: 'josh-neopixels',
+    where: 'update 11/2/2020',
+    quote:
+      'There are some new WS2812B and WS2813 chips that require a minimum 250,000ns latch time.',
+  },
+  sampling: {
+    source: 'cpldcpu-ws2812',
+    where: 'analysis',
+    quote:
+      'The input is latched again after cycle 2. The voltage of the input pin at this point determines whether a ‘1’ or a ‘0’ is read.',
+  },
+  ucsGap: {
+    source: 'ucs1904-cn',
+    where: 'p. 6, note 2',
+    quote:
+      '低电平复位时间最小为8µs，最高为24us … 所以一帧数据传输过程中不要中断超过8µs (a low of more than 8 µs may be taken as a reset, so never pause more than 8 µs inside a frame)',
+  },
+  resetMeasured: {
+    source: 'cpldcpu-ws2812',
+    where: 'results',
+    quote:
+      'minimum reset length was 8.95 us, way below the specifications. The suggested reset time of 50 us is therefore more than sufficient to reset the LEDs. On the other hand, it means that no more than 9 us of idle time may occur during data transfer',
+  },
+} satisfies Record<string, Citation>;
+
 /** Every citation on the page, for the tests and the sources list */
 export const ALL_CITATIONS: Citation[] = [
   WS2812B_EARLY.cite,
@@ -430,4 +822,6 @@ export const ALL_CITATIONS: Citation[] = [
   ...Object.values(DMX_FACTS),
   ...Object.values(DMX_PIXEL_FACTS),
   ...Object.values(NETWORK_FACTS),
+  ...HIGH_TIME_ROWS.map((r) => r.cite),
+  ...Object.values(MEASURED_FACTS),
 ];

@@ -7,11 +7,11 @@ import { SingleWireBits } from '~/components/protocols/SingleWireBits';
 import { SingleWireChain } from '~/components/protocols/SingleWireChain';
 import { Cite, SourcesList } from '~/components/protocols/Sources';
 import { TimingHiccup } from '~/components/protocols/TimingHiccup';
+import { TimingWindows } from '~/components/protocols/TimingWindows';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
 import { RainbowText } from '~/components/ui/RainbowText';
 import { pageMeta } from '~/lib/meta';
 import { DMX512, WS2811_V15, WS2812B_EARLY, WS2813B_V6 } from '~/lib/protocols/reference';
-import { commonTiming } from '~/lib/protocols/timing';
 import type { Route } from './+types/protocols';
 
 export function meta(_args: Route.MetaArgs) {
@@ -39,10 +39,7 @@ const TYPICAL_BIT = {
   period: 1250,
 };
 
-const us = (ns: number) => `${Math.round(ns / 10) / 100} µs`;
-
 export default function Protocols() {
-  const common = commonTiming([WS2812B_EARLY, WS2811_V15, WS2813B_V6]);
   return (
     <div className="protocols-page">
       <div className="container page-section">
@@ -140,15 +137,42 @@ export default function Protocols() {
           <h3>One signal, many datasheets</h3>
           <div className="proto-prose">
             <p>
-              Datasheets don&rsquo;t agree to the nanosecond. The early WS2812B sheet allows a
-              0&rsquo;s high time of {WS2812B_EARLY.t0h.min}–{WS2812B_EARLY.t0h.max} ns; the current
-              WS2811 and WS2813B sheets allow {WS2811_V15.t0h.min}–{WS2811_V15.t0h.max} ns.
-              <Cite source={['ws2812b-adafruit', 'ws2811-v15', 'ws2813b-v6']} /> What matters is
-              whether one transmitter setting fits every table at once. For these three it does: a 0
-              high for {common.t0h?.min}–{common.t0h?.max} ns, a 1 high for {common.t1h?.min}–
-              {common.t1h?.max} ns, and a reset of at least {us(common.resetMin)}. Taken literally,
-              the printed low times leave a 1 only {common.t1l?.min}–{common.t1l?.max} ns of low
-              time, which says more about how the tables were written than about the chips.
+              Datasheets don&rsquo;t agree to the nanosecond, not even one maker&rsquo;s. The early
+              WS2812B sheet lets a 0&rsquo;s high pulse run to {WS2812B_EARLY.t0h.max} ns; the
+              current WS2811 and WS2813B sheets stop it at {WS2811_V15.t0h.max} ns.
+              <Cite source={['ws2812b-adafruit', 'ws2811-v15', 'ws2813b-v6']} /> Put the windows of
+              a dozen parts side by side and, taken literally, no single 1 fits them all:
+            </p>
+          </div>
+          <TimingWindows />
+          <div className="proto-prose">
+            <p>
+              Chips don&rsquo;t check windows, though. They time the high pulse and decide at one
+              point. UCS prints its rule: a high under 0.55 µs is a 0, over 0.69 µs a 1, and the low
+              part only ends the bit.
+              <Cite source="ucs1904-cn" /> A WS2812B measured in 2014 read anything up to 563 ns as
+              a 0 and anything from 625 ns as a 1; it samples the line at a fixed point after the
+              rising edge, counted on its own internal clock.
+              <Cite source="cpldcpu-ws2812" /> Josh Levine, after testing many pixels: &ldquo;The
+              only tight timing parameter for NeoPixel signaling is the maximum width of a 0-bit
+              pulse.&rdquo;
+              <Cite source="josh-neopixels" /> That is why libraries drive all of these with one
+              setting (FastLED sends a 0 as 250 ns and a 1 as 875 ns, NeoPixelBus 400 and 800, FPP
+              312 and 729
+              <Cite source={['fastled', 'neopixelbus', 'fpp']} />
+              ), and it is the honest way to define this protocol: by where the chip decides, not by
+              the windows a datasheet prints.
+            </p>
+            <p>
+              The low part of a bit matters in one way only: held too long, it ends the frame. A
+              2014 WS2812B latched after about 9 µs of low, so &ldquo;no more than 9 us of idle time
+              may occur during data transfer&rdquo;
+              <Cite source="cpldcpu-ws2812" />; UCS tells controllers never to pause more than 8 µs
+              inside a frame.
+              <Cite source="ucs1904-cn" /> Newer WorldSemi parts wait over 280 µs before latching,
+              which is what makes them tolerant of an interrupted sender, and is also why a
+              controller that sends them the old 50 µs reset makes them flicker.
+              <Cite source={['ws2813b-v6', 'josh-neopixels']} />
             </p>
           </div>
         </section>
