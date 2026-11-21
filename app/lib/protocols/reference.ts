@@ -79,6 +79,26 @@ export const SOURCES = {
     retrieved: '2026-11-20',
     revision: 'V1.0 (2020-12-06)',
   },
+  'sk6812-opsco': {
+    title: 'SK6812 specification (B/1)',
+    publisher: 'Opsco (copy hosted by LCSC)',
+    url: 'https://datasheet.lcsc.com/datasheet/pdf/9f469126feffa69bd23486dc2acd2d83.pdf',
+    retrieved: '2026-11-20',
+    revision: 'B/1 (2025-08-11)',
+  },
+  'apa106-sparkfun': {
+    title: 'APA-106 Shift register programmable RGB Lamp',
+    publisher: 'copy hosted by SparkFun (COM-12877)',
+    url: 'https://cdn.sparkfun.com/datasheets/Components/LED/COM-12877.pdf',
+    retrieved: '2026-11-20',
+  },
+  'cpldcpu-pd9823': {
+    title: 'Timing of WS2812 clones – PD9823',
+    publisher: 'Tim (cpldcpu), measurements',
+    url: 'https://web.archive.org/web/20150928223018/https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-clones-pd9823/',
+    retrieved: '2026-11-20',
+    revision: '2014-06-16',
+  },
   'tm1804-v2.3': {
     title: 'TM1804 (3 通道 LED 恒流驱动专用电路)',
     publisher: 'Titan Micro Electronics',
@@ -620,6 +640,19 @@ export const HIGH_TIME_ROWS: HighTimeRow[] = [
     },
   },
   {
+    id: 'sk6812',
+    label: 'SK6812 (Opsco, 2025)',
+    kind: 'datasheet',
+    t0h: { min: 250, max: 400 },
+    t1h: { min: 650, max: 1000 },
+    cite: {
+      source: 'sk6812-opsco',
+      where: 'p. 7, Suggested data transmission time',
+      quote:
+        'T0H 0 code, high-level time 0.25 0.32 0.40 µs · T1H 1 code, high-level time 0.65 0.70 1.00 µs · Reset code, low-level time >200 µs',
+    },
+  },
+  {
     id: 'tm1804',
     label: 'TM1804 (V2.3)',
     kind: 'datasheet',
@@ -705,6 +738,19 @@ export const HIGH_TIME_ROWS: HighTimeRow[] = [
       where: 'p. 3, Time sequence characteristics',
       quote:
         'Input 0 ode, high level time T0H … 250 300 350 ns · Input 1 ode, high level time T1H 700 800 900 ns',
+    },
+  },
+  {
+    id: 'apa106',
+    label: 'APA106 (the long 1)',
+    kind: 'datasheet',
+    t0h: pm(350, 150),
+    t1h: pm(1360, 150),
+    cite: {
+      source: 'apa106-sparkfun',
+      where: 'Timing waveform table',
+      quote:
+        'T0H 0 code, high level time 0.35µs ±150ns · T1H 1 code, high level time 1.36µs ±150ns · T0L 0 code, low level time 1.36µs ±150ns · T1L 1 code, low level time 0.35µs ±150ns · RES RESET code 50us',
     },
   },
   {
@@ -802,6 +848,18 @@ export const MEASURED_FACTS = {
     where: 'p. 6, note 2',
     quote:
       '低电平复位时间最小为8µs，最高为24us … 所以一帧数据传输过程中不要中断超过8µs (a low of more than 8 µs may be taken as a reset, so never pause more than 8 µs inside a frame)',
+  },
+  pd9823: {
+    source: 'cpldcpu-pd9823',
+    where: 'conclusion',
+    quote:
+      'The internal state machine of the PD9823 seems to be identical to that of the WS2812. … In conclusion: Any software library that is able to drive the WS2812(B) is also able to drive the PD9823.',
+  },
+  apa106Library: {
+    source: 'neopixelbus',
+    where: 'NeoEsp32RmtSpeedApa106',
+    quote:
+      'RmtBit0 = Item32Val(350, 1350); RmtBit1 = Item32Val(1350, 350); RmtDurationReset = FromNs(50000); // 50us',
   },
   resetMeasured: {
     source: 'cpldcpu-ws2812',

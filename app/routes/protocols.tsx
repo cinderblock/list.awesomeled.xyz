@@ -164,6 +164,17 @@ export default function Protocols() {
               the windows a datasheet prints.
             </p>
             <p>
+              Some datasheets do print a different signal. The APA106&rsquo;s asks for a 1 to stay
+              high for 1.36 µs, in a bit of about 1.7 µs
+              <Cite source="apa106-sparkfun" />, and NeoPixelBus sends it exactly that.
+              <Cite source="neopixelbus" /> On paper that is not a WS2812B. Measured clones tell
+              another story: BaiCheng&rsquo;s PD9823 controller turned out to decide exactly like a
+              WS2812, and the verdict was &ldquo;Any software library that is able to drive the
+              WS2812(B) is also able to drive the PD9823.&rdquo;
+              <Cite source="cpldcpu-pd9823" /> A datasheet window records what its maker tested; on
+              its own it doesn&rsquo;t prove a part is something else.
+            </p>
+            <p>
               The low part of a bit matters in one way only: held too long, it ends the frame. A
               2014 WS2812B latched after about 9 µs of low, so &ldquo;no more than 9 us of idle time
               may occur during data transfer&rdquo;

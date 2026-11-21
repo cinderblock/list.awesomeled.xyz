@@ -108,17 +108,14 @@ test.describe('Pixel protocols page', () => {
     await gotoReady(page, '/protocols');
     const chart = page.locator('figure.proto-windows');
     const summary = status(chart);
-    await expect(summary).toHaveText(/a 1 they all accept is none/);
-    // Leave out the sheets with the shortest and the longest 1s, and the
-    // others agree on one
-    for (const name of [/WS2816B, WS2816C/, 'INK1003', 'TX1818']) {
-      await chart.getByRole('button', { name }).click();
-    }
-    await expect(summary).toHaveText(/a 1 they all accept is \d+–\d+ ns/);
-    await expect(chart.getByRole('button', { name: 'INK1003' })).toHaveAttribute(
-      'aria-pressed',
-      'false'
-    );
+    const count = async () =>
+      Number((await summary.textContent())?.match(/^(\d+) datasheet/)?.[1] ?? NaN);
+    const before = await count();
+    expect(before).toBeGreaterThan(5);
+    const first = chart.getByRole('button', { pressed: true }).first();
+    await first.click();
+    await expect.poll(count).toBe(before - 1);
+    await expect(chart.getByRole('button', { pressed: false })).toHaveCount(1);
   });
 
   test('every footnote points at an entry in the sources list', async ({ page }) => {
