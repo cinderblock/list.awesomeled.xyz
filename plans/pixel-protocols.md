@@ -80,13 +80,102 @@ values: `WS2811/12` 44, `APA102` 10, `UCS1903` 7, `4chWS2811/12` 7,
 trailing-space `WS2811 ` / `WS2812 ` values mentioned in the brief are gone
 already.
 
+## Data-model proposal (DRAFT: mapping pending research; not approved)
+
+### Two layers
+
+1. **Signal**: how bits are put on the wire. Four kinds cover every part in
+   the database: single-wire pulse-width, clock + data, asynchronous serial
+   with a break (DMX512), plain asynchronous serial (UART). The explainer's
+   sections follow these.
+2. **Protocol**: everything a transmitter must get right for a part to work:
+   signal, bit timing, bits per channel, channels per frame, extra frame
+   content (headers, brightness, command words, start / end frames) and the
+   latch rule. Parts with the same protocol are interchangeable on the wire;
+   that is the equivalence the "Same protocol" rows, the "compatible with X"
+   filters and the designer need.
+
+Within one protocol, parts may still differ in ways a controller setting
+covers or that don't touch the wire: **channel order** (GRB vs RGB: every
+controller has the setting), **backup data line** (wiring, per part),
+**reset time** (the protocol records the longest any member needs; a
+transmitter that waits that long drives them all), supply voltage, current.
+
+### Where protocols live (options)
+
+- **A. A 13th database category** (`database/protocols/`, table + entry
+  pages through the generic routes). Rejected: protocols aren't products,
+  and the category nav, home grid, exports, search and OG images all assume
+  products.
+- **B. A typed enum in the schema + definitions in TypeScript.** Simple, but
+  the facts and their sources would live in code, outside the database and
+  its YAML downloads.
+- **C. (recommended) Reference data in the database, not a category:**
+  `database/protocols/<id>.yaml` validated by `database/_schema/protocol.json`
+  (name, aliases, signal, timing with min/max per parameter, frame layout,
+  latch, notes, `sources` in the usual convention). Pages: `/protocols` (the
+  explainer, with the protocol list) and `/protocols/<id>` (definition,
+  sourced timing table, member parts, hardware that drives them). Entries
+  reference a protocol by id; `validate.ts` checks the reference.
+
+### How entries reference a protocol
+
+- `data.protocol: ws2811` (one id, or a list for parts with a mode pin or a
+  compatibility mode), replacing the free-text `data.type`.
+- `data.clocked` and `data.pixel_size_bits` become checks: `validate.ts`
+  fails an entry whose values contradict its protocol. `data.backup_line`
+  stays per part.
+- Consumers move with it: `relations.ts` (families from `data.protocol`),
+  its tests, `cross-link-stats.ts`, the designer (`catalog.ts` family,
+  `compat.ts` `familyTokens` no longer needed), `fields.ts` label, CSV/JSON
+  exports, CONTRIBUTING.md.
+
+### Mapping of every current `data.type` value
+
+Pending the research batches (A1–E). Each row will give the value, its
+entries, the proposed protocol id and the evidence.
+
 ## Findings / gotchas
 
-- (none yet)
+- **Datasheet revisions disagree on single-wire timing, and the intersection
+  can be razor thin.** Read here (2026-11-20, independent of the batches):
+  the early WS2812B sheet (Adafruit's copy, no revision printed) gives T0H
+  0.4 µs ±150 ns, T1H 0.8 µs ±150 ns, T0L 0.85 µs ±150 ns, T1L 0.45 µs
+  ±150 ns, reset "Above 50µs", TH+TL 1.25 µs ±600 ns. WorldSemi's WS2813B-V6
+  (V1.1) gives T0H 220–380 ns, T1H 580 ns–1 µs, T0L and T1L 580 ns–1 µs,
+  reset >280 µs. Taken literally, a 1's low time must be 580–600 ns to meet
+  both. Expect the batches to show the same pattern: the high times are what
+  matter (measurements, batch E), the printed low-time windows are not.
+- WS2813B-V6 says why the reset grew: "RESET time>280µs, it won't cause wrong
+  reset while interruption, supports the lower frequency and inexpensive
+  MCU." Its backup line: "Under normal circumstances, the IC extracts signals
+  from the DIN. When one IC among them is damaged, the latter IC extracts the
+  signal from the BIN without affecting the signal transmission of the
+  subsequent ics." The V6 package has DI, BI, DO and **BO** pins (typical
+  application circuit, p. 6), and the first IC's BIN must go to GND. What BO
+  carries (a passive copy of DI, or a driven one) decides what a fully dead
+  chip does: open question for batch A1.
+- The APA102C sheet (Shiji / iPixel, Adafruit's copy) is an image PDF: no
+  text layer, quotes are transcribed. Frame: 32 zero bits, LED frames of
+  111 + 5-bit global + B, G, R (MSB first), 32 one bits; the DIN/CKI diagram
+  marks the rising edges.
+- WorldSemi's WS2812B sheet's own diagram ("Data transmission method", p. 4)
+  draws exactly the chain behaviour the animation shows: D2 carries the
+  second and third 24 bits, D3 only the third, each in the same time slot as
+  on D1 (the line is idle while the earlier frames go by upstream).
+- Tooling: `python -I` ignores PYTHONIOENCODING; datasheets with fullwidth
+  punctuation need `sys.stdout.reconfigure(encoding='utf-8')` to print.
+- ESLint's `react-hooks/refs` rule flags any `.ref` property read in render,
+  even a callback ref returned by a hook; the timeline's callback is
+  `observe`.
 
 ## Progress log
 
 - [x] 2026-11-20 5:33 PM PST (01:33Z): survey done, plan written.
+- [x] 2026-11-20 5:45 PM PST (01:45Z): ten research batches delegated (above).
+- [x] 2026-11-20 6:00 PM PST (02:00Z): page scaffold committed locally (`98c0f8ea`, not pushed): `/protocols` route, single-wire bits + chain (vertical on phones), clocked bits, stalled-sender comparison, backup line, DMX512 packet; header/footer/palette/sitemap links; 7 e2e tests and unit tests for the models. Values on the page are still placeholders.
+- [x] 2026-11-20 6:25 PM PST (02:25Z): WS2812B (early), WS2813B-V6 and APA102C read independently; `app/lib/protocols/reference.ts` holds their sourced values and quotes; unit tests check every citation and the common-timing arithmetic.
+- [ ] Batches report back; review, spot-check, commit evidence; finish the page text from sourced values; proposal + mapping for Cameron.
 
 ## Open questions for the user
 
