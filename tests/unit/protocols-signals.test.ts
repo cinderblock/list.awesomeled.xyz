@@ -1,6 +1,11 @@
 import { describe, expect, test } from 'bun:test';
 import { backupChain } from '../../app/lib/protocols/backup';
 import {
+  clockedCycleSeconds,
+  clockedPhaseAt,
+  type ClockedGeometry,
+} from '../../app/lib/protocols/clockedChain';
+import {
   apa102LedFrame,
   byteBitsLsbFirst,
   byteBitsMsbFirst,
@@ -136,5 +141,41 @@ describe('backup data line', () => {
   test('without skipping, a bridged pixel takes the dead pixel’s frame and the rest shift', () => {
     const chain = backupChain(5, new Set([3]), false);
     expect(chain.map((p) => p.frame)).toEqual([1, 2, null, 3, 4]);
+  });
+});
+
+describe('clocked chain model', () => {
+  const geo: ClockedGeometry = {
+    pixels: 3,
+    spacing: 100,
+    frameLength: 50,
+    endLength: 25,
+    wireEnd: 400,
+    speed: 100,
+    holdSeconds: 1,
+  };
+  const apa = { sk9822: false, resetFrame: false };
+
+  test('an LED frame carries its colour up to its pixel and zeros after it', () => {
+    // 3 s in: frame 1 (offset 50) has its front at 250, well past pixel 1 at 100
+    const phase = clockedPhaseAt(geo, apa, 3);
+    const frame1 = phase.segments.filter((s) => s.kind === 'led' && s.target === 1);
+    expect(frame1.every((s) => s.zeros)).toBe(true);
+    const frame3 = phase.segments.filter((s) => s.kind === 'led' && s.target === 3);
+    expect(frame3.length).toBeGreaterThan(0);
+    for (const s of frame3) expect(s.zeros ? s.from >= 300 : s.to <= 300).toBe(true);
+  });
+
+  test('APA102s show a frame as soon as it is in; SK9822s wait for a start frame', () => {
+    const cycle = clockedCycleSeconds(geo, apa);
+    const late = cycle + cycle - 1.01; // the end of the second update
+    expect(clockedPhaseAt(geo, apa, late).showing).toEqual([1, 1, 1]);
+    // Without a reset frame an SK9822 string still shows the first update
+    expect(clockedPhaseAt(geo, { sk9822: true, resetFrame: false }, late).showing).toEqual([
+      0, 0, 0,
+    ]);
+    const withReset = { sk9822: true, resetFrame: true };
+    const lateReset = clockedCycleSeconds(geo, withReset) * 2 - 1.01;
+    expect(clockedPhaseAt(geo, withReset, lateReset).showing).toEqual([1, 1, 1]);
   });
 });

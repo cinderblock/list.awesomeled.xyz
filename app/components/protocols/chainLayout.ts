@@ -33,8 +33,14 @@ export interface ChainLayout {
   ): { x: number; y: number; width: number; height: number };
 }
 
-export function chainLayout(geo: ChainGeometry, narrow: boolean, extraBelow = 0): ChainLayout {
-  const wireEnd = pixelX(geo, geo.pixels);
+export function chainLayout(
+  geo: Pick<ChainGeometry, 'pixels' | 'spacing'>,
+  narrow: boolean,
+  extraBelow = 0,
+  /** Where the wire stops; by default at the last pixel */
+  wireEndAt?: number
+): ChainLayout {
+  const wireEnd = wireEndAt ?? pixelX(geo, geo.pixels);
   if (!narrow) {
     const x0 = 96;
     const wireY = 70;

@@ -37,11 +37,59 @@ export const SOURCES = {
     retrieved: '2026-11-20',
     revision: 'V1.1',
   },
+  'ws2811-v15': {
+    title: 'WS2811 Signal line 256 Gray level 3 channel Constant current LED driver IC',
+    publisher: 'WorldSemi',
+    url: 'https://www.world-semi.com/web/userfiles/productfile/WS2811_V1.5_EN.pdf',
+    retrieved: '2026-11-20',
+    revision: 'file named V1.5; its pages print V1.4',
+  },
+  'ws2811-adafruit': {
+    title: 'WS2811 Signal line 256 Gray level 3 channel Constant current LED drive IC',
+    publisher: 'WorldSemi (copy hosted by Adafruit)',
+    url: 'https://cdn-shop.adafruit.com/datasheets/WS2811.pdf',
+    retrieved: '2026-11-20',
+    revision: 'none printed (the early datasheet, with the SET speed pin)',
+  },
   'apa102c-adafruit': {
     title: 'APA102C',
     publisher: 'Shiji Lighting / iPixel LED (copy hosted by Adafruit)',
     url: 'https://cdn-shop.adafruit.com/datasheets/APA102.pdf',
     retrieved: '2026-11-20',
+  },
+  'cpldcpu-apa102': {
+    title: 'Understanding the APA102 “Superled”',
+    publisher: 'Tim (cpldcpu), measurements with a logic analyzer',
+    url: 'https://cpldcpu.com/2014/11/30/understanding-the-apa102-superled/',
+    retrieved: '2026-11-20',
+    revision: '2014-11-30',
+  },
+  'cpldcpu-sk9822': {
+    title: 'SK9822 – a clone of the APA102?',
+    publisher: 'Tim (cpldcpu), measurements',
+    url: 'https://cpldcpu.com/2016/12/13/sk9822-a-clone-of-the-apa102/',
+    retrieved: '2026-11-20',
+    revision: '2016-12-13',
+  },
+  'sk9826-opsco': {
+    title: 'SK9826 (SPC/SK9826) specification',
+    publisher: 'Dongguan Opsco Optoelectronics (copy hosted by Eckstein)',
+    url: 'https://ecksteinimg.de/Datasheet/LED/LED0032/SK9826_REV04_EN.pdf',
+    retrieved: '2026-11-20',
+    revision: 'REV04',
+  },
+  'ns108-newstar': {
+    title: 'NS108 specification',
+    publisher: 'Newstar LED (copy hosted by voron.ua)',
+    url: 'https://voron.ua/files/pdf/led/NS108_5050.pdf',
+    retrieved: '2026-11-20',
+  },
+  'hd108-rose': {
+    title: 'HD108 5050 LED Specification',
+    publisher: 'Rose Lighting',
+    url: 'https://web.archive.org/web/20220216182230/https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf',
+    retrieved: '2026-11-20',
+    revision: 'V1.1.0',
   },
   'e1.11-2024': {
     title:
@@ -51,6 +99,34 @@ export const SOURCES = {
     url: 'https://web.archive.org/web/20260225154802/https://tsp.esta.org/tsp/documents/docs/ANSI%20E1.11%20-%202024.pdf',
     retrieved: '2026-11-20',
     revision: 'CP/2023-1011r2a',
+  },
+  'enttec-universe': {
+    title: 'How Many Pixels Per DMX Universe? 170 RGB, 128 RGBW',
+    publisher: 'ENTTEC Support',
+    url: 'https://support.enttec.com/pixel/pixel-general-knowledge/how-many-pixels-per-dmx-universe',
+    retrieved: '2026-11-20',
+    revision: 'updated Jul 19, 2026',
+  },
+  'ws2821-acdc': {
+    title: 'WS2821 Parallel-Single wire-Three channels',
+    publisher: 'WorldSemi (copy hosted by ACDC Shop)',
+    url: 'https://www.acdcshop.gr/content/WS2821.pdf',
+    retrieved: '2026-11-20',
+  },
+  'e1.31-2018': {
+    title:
+      'ANSI E1.31 – 2018 Entertainment Technology Lightweight streaming protocol for transport of DMX512 using ACN',
+    publisher: 'ESTA',
+    url: 'https://web.archive.org/web/20220407060206/https://tsp.esta.org/tsp/documents/docs/ANSI_E1-31-2018.pdf',
+    retrieved: '2026-11-20',
+    revision: 'CP/2014-1009r6a',
+  },
+  artnet4: {
+    title: 'Art-Net 4, Specification for the Art-Net 4 Ethernet Communication Protocol',
+    publisher: 'Artistic Licence',
+    url: 'https://artisticlicence.com/WebSiteMaster/User%20Guides/art-net.pdf',
+    retrieved: '2026-11-20',
+    revision: 'Release V1.4, document revision 1.4dp (23/10/2025)',
   },
 } satisfies Record<string, ProtocolSource>;
 
@@ -101,6 +177,22 @@ export const WS2812B_EARLY: SingleWireTiming = {
   },
 };
 
+/** WorldSemi's current WS2811 sheet: the same windows as the WS2813B-V6 */
+export const WS2811_V15: SingleWireTiming = {
+  part: 'WS2811',
+  t0h: { min: 220, max: 380 },
+  t1h: { min: 580, max: 1000 },
+  t0l: { min: 580, max: 1000 },
+  t1l: { min: 580, max: 1000 },
+  resetMin: 280_000,
+  cite: {
+    source: 'ws2811-v15',
+    where: 'p. 3, Data Transfer Time',
+    quote:
+      'T0H 0 code, high voltage time 220ns~380ns · T1H 1 code, high voltage time 580ns~1us · T0L 0 code, low voltage time 580ns~1us · T1L 1 code, low voltage time 580ns~1us · RES Frame unit, low voltage time >280µs',
+  },
+};
+
 /** WorldSemi's current WS2813B: tighter 0 pulse, longer low times, 280 µs reset */
 export const WS2813B_V6: SingleWireTiming = {
   part: 'WS2813B-V6',
@@ -134,6 +226,22 @@ export const SINGLE_WIRE_FACTS = {
     source: 'ws2813b-v6',
     where: 'p. 5, Composition of 24bit data',
     quote: 'Data transmit in order of GRB, high bit data is first.',
+  },
+  orderRgb: {
+    source: 'ws2811-v15',
+    where: 'p. 4, Composition of 24bit data',
+    quote: 'Data transmit in order of RGB, high bit data at first.',
+  },
+  speedPin: {
+    source: 'ws2811-adafruit',
+    where: 'p. 2, PIN function',
+    quote: 'SET Set work mode of IC as low speed model(connect VDD) or high speed model(vacant)',
+  },
+  lowSpeed: {
+    source: 'ws2811-adafruit',
+    where: 'p. 3, Low Speed mode time',
+    quote:
+      'T0H 0 code,high voltage time 0.5 µs ±150ns · T1H 1 code,high voltage time 1.2 µs ±150ns · T0L 0 code,low voltage time 2.0 µs ±150ns · T1L 1 code,low voltage time 1.3 µs ±150ns · Note: It is one half of the time when high speed mode(reset time unchanged)',
   },
   longReset: {
     source: 'ws2813b-v6',
@@ -175,6 +283,53 @@ export const CLOCKED_FACTS = {
     source: 'apa102c-adafruit',
     where: 'p. 4',
     quote: 'Global bit：5-bit（32 level）brightness setting',
+  },
+  forwarding: {
+    source: 'cpldcpu-apa102',
+    where: 'protocol analysis',
+    quote:
+      'Once a device detects a start frame (more than 31 zero bits), it will interpret the next “1” bit as start of its own LED frame. 32 bits are clocked into the PWM registers, while zeroes are pushed to the output. After the entire LED frame as been read, any subsequent data is simply forwarded until another start frame is detected.',
+  },
+  halfClock: {
+    source: 'cpldcpu-apa102',
+    where: 'protocol analysis',
+    quote:
+      'Since the data for each subsequent LED is delayed by half a clock cycle, but the clock is not, additional clock cycles have to be fed to the string even after all data has been sent. This is the sole reason for the existence of the “End frame”',
+  },
+  immediate: {
+    source: 'cpldcpu-apa102',
+    where: 'protocol analysis',
+    quote: 'The LED output color is updated immediately after the first valid LED frame.',
+  },
+  sk9822Latch: {
+    source: 'cpldcpu-sk9822',
+    where: 'protocol section',
+    quote:
+      'The SK9822 updates the PWM registers in the first cycle after the next start frame (0x00000000), while the APA102 updates the PWM register immediately after receiving the data.',
+  },
+  unified: {
+    source: 'cpldcpu-sk9822',
+    where: 'unified protocol',
+    quote:
+      'A SK9822 reset frame of 32 zero bits (<0x00> <0x00> <0x00> <0x00> ). An end frame consisting of at least (n/2) bits of 0, where n is the number of LEDs in the string.',
+  },
+  sixteenBit: {
+    source: 'sk9826-opsco',
+    where: 'p. 7, data communication protocol',
+    quote:
+      '(A) first into at least 128bits "0" as the starting frame, … DCLK rising edge sampling data: (B) Each set of gray scale data is composed of 1bit start code + 15bits current gain adjustment value (red and green blue three ports each 5bits) + 48bits gray data (red, green and blue lights 16bits) … (D) After the completion of the gray data transmission, additional pulse corresponding to the number of chips need to add additional DCLK (that is, 512 chips in cascade, need to send additional 512 DCLK), DIN remains high, the new data that comes into effect',
+  },
+  ns108: {
+    source: 'ns108-newstar',
+    where: 'p. 7, data communication protocol',
+    quote:
+      '(A) first into at least 128bits "0" as the starting frame, and then moved into the data frame, the starting frame and the data frame are high first move in, DCLK rising edge sampling data: (B) Each set of gray scale data is composed of 1bit start code + 15bits current gain adjustment value',
+  },
+  hd108: {
+    source: 'hd108-rose',
+    where: 'p. 6',
+    quote:
+      'Each update of data format consists of a start frame of 128 zeroes, 64 bits for every LED frame and but the end frame is not required. A minimum of 128 zeroes are required to initiate a new data update',
   },
 } satisfies Record<string, Citation>;
 
@@ -222,12 +377,57 @@ export const DMX_FACTS = {
   },
 } satisfies Record<string, Citation>;
 
+/** DMX512-addressed pixel ICs: a parallel bus, not a chain */
+export const DMX_PIXEL_FACTS = {
+  parallel: {
+    source: 'ws2821-acdc',
+    where: 'p. 1, Product overview',
+    quote:
+      'WS2821 is a LED driven IC,which adopts the parallel single wire control signal,owns the independent programmable address and large range programmable constant current,three channels output.',
+  },
+  addressLine: {
+    source: 'ws2821-acdc',
+    where: 'p. 1',
+    quote:
+      'WS2821 has the independent write code signal line,the address can be written in series at one time.',
+  },
+  perUniverse: {
+    source: 'enttec-universe',
+    where: 'answer',
+    quote:
+      'One DMX universe fits 170 RGB pixels (using 510 of its 512 channels) or 128 RGBW pixels (using all 512 channels exactly).',
+  },
+} satisfies Record<string, Citation>;
+
+export const NETWORK_FACTS = {
+  sacn: {
+    source: 'e1.31-2018',
+    where: 'p. 1 (PDF 13), clause 1.1 Scope',
+    quote:
+      'This standard describes a mechanism to transfer DMX512-A [DMX] packets over an IP network using a subset of the ACN protocol suite.',
+  },
+  sacnUniverses: {
+    source: 'e1.31-2018',
+    where: 'p. 17 (PDF 29), clause 6.2.7',
+    quote: 'Universe values shall be limited to the range 1 to 63999.',
+  },
+  artnet: {
+    source: 'artnet4',
+    where: 'p. 6 (PDF 17)',
+    quote:
+      'Its purpose is to allow transfer of large amounts of DMX512 data over a wide area using standard networking technology.',
+  },
+} satisfies Record<string, Citation>;
+
 /** Every citation on the page, for the tests and the sources list */
 export const ALL_CITATIONS: Citation[] = [
   WS2812B_EARLY.cite,
+  WS2811_V15.cite,
   WS2813B_V6.cite,
   ...Object.values(SINGLE_WIRE_FACTS),
   ...Object.values(BACKUP_FACTS),
   ...Object.values(CLOCKED_FACTS),
   ...Object.values(DMX_FACTS),
+  ...Object.values(DMX_PIXEL_FACTS),
+  ...Object.values(NETWORK_FACTS),
 ];

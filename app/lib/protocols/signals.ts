@@ -188,7 +188,7 @@ export interface ChainPhase {
 }
 
 /** Position of pixel `k` (1-based) along the wire */
-export function pixelX(geo: ChainGeometry, k: number): number {
+export function pixelX(geo: Pick<ChainGeometry, 'spacing'>, k: number): number {
   return k * geo.spacing;
 }
 

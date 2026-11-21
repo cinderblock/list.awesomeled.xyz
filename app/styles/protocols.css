@@ -670,3 +670,76 @@
   stroke: var(--pr-bus);
   stroke-width: 2;
 }
+
+.proto-note--now {
+  fill: var(--pr-accent);
+  font-weight: 700;
+}
+
+/* Sources: each document, with the words the page takes from it behind a tap */
+.proto-quotes {
+  margin-top: var(--space-1);
+}
+
+.proto-quotes summary {
+  cursor: pointer;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+}
+
+.proto-quotes ul {
+  margin-top: var(--space-2);
+  padding-left: var(--space-5);
+  list-style: disc;
+}
+
+.proto-quotes li + li {
+  margin-top: var(--space-1);
+}
+
+.proto-quote-where {
+  color: var(--muted-foreground);
+}
+
+.proto-quote {
+  font-style: italic;
+}
+
+/* Clocked chain */
+.proto-clock-line {
+  stroke-dasharray: 6 6;
+  stroke-width: 1.5;
+}
+
+.proto-frame--end {
+  fill: var(--pr-surface);
+  stroke-dasharray: 3 2;
+}
+
+/* Two or three mutually exclusive choices */
+.proto-segmented {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.proto-segmented button {
+  min-height: 2rem;
+  padding: 0.25rem 0.75rem;
+  border: none;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.proto-segmented button + button {
+  border-left: 1px solid var(--border);
+}
+
+.proto-segmented button[aria-pressed='true'] {
+  background: var(--pr-accent);
+  color: var(--background);
+  font-weight: 600;
+}
