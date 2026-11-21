@@ -1,0 +1,1552 @@
+batch: b4-other-single-wire
+researched: '2026-11-20'
+notes:
+  - 'Summary, overlap arithmetic, disagreements and database corrections: b4-other-single-wire.md (read it first).'
+  - 'Page numbers are PDF pages (1-based). In these sheets they match the printed page numbers unless a quote says otherwise.'
+  - 'Values marked derived are arithmetic on printed values, not printed themselves.'
+  - 'sourcing (per part) says plainly whose words each value rests on: the chip maker, an LED packager, a controller maker (Advatek, ENTTEC, Falcon), or an implementation (library / firmware source).'
+  - 'ENTTEC''s protocol pages are prose generated from a spec row (e.g. "per the row"); some of their prose is wrong for parts in this batch (Pixie, TLS3001). Only their spec-table rows are quoted.'
+
+reference_documents: # WorldSemi sheets used only for the overlap arithmetic in b4-other-single-wire.md
+  - id: ws2812b-worldsemi-2013
+    url: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+    title: WS2812B Intelligent control LED integrated light source
+    revision: null
+    date: null
+    language: en
+    notes: 'WorldSemi sheet hosted by Adafruit; PDF metadata created 2013-05-30.'
+    page: 3
+    quote: 'Data transfer time( TH+TL=1.25µs±600ns) | T0H 0 code ,high voltage time 0.4us ±150ns | T1H 1 code ,high voltage time 0.8us ±150ns | T0L 0 code , low voltage time 0.85us ±150ns | T1L 1 code ,low voltage time 0.45us ±150ns | RES low voltage time Above 50µs'
+    windows_ns:
+      {
+        T0H: [250, 550],
+        T1H: [650, 950],
+        T0L: [700, 1000],
+        T1L: [300, 600],
+        period: [650, 1850],
+        reset_min: 50000,
+      }
+    order: 'p5: "Note: Follow the order of GRB to sent data and the high bit sent at first."'
+  - id: ws2812b-worldsemi-v5
+    url: https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8880/WS2812B.pdf
+    title: WS2812B Intelligent control LED integrated light source
+    revision: 'V5 ("WS2812B Ver. No.: V5")'
+    date: null
+    language: en
+    notes: 'WorldSemi sheet hosted by DigiKey; PDF metadata created 2019-06-04.'
+    page: 3
+    quote: 'Data Transfer Time | T0H 0 code, high voltage time 220ns~380ns | T1H 1 code, high voltage time 580ns~1µs | T0L 0 code, low voltage time 580ns~1µs | T1L 1 code, low voltage time 580ns~1µs | RES Frame unit, low voltage time >280µs'
+    windows_ns:
+      { T0H: [220, 380], T1H: [580, 1000], T0L: [580, 1000], T1L: [580, 1000], reset_min: 280000 }
+    order: 'p4: "Note: Data transmit in order of GRB, high bit data at first."'
+  - id: ws2811-worldsemi-v2.1.1
+    url: https://xonstorage.z8.web.core.windows.net/pdf/worldsemi_ws2811f_apr22_xonlink.pdf
+    title: WS2811 Signal line 256 Gray level 3 channel Constant current LED driver IC
+    revision: V2.1.1
+    date: null
+    language: en
+    notes: 'WorldSemi sheet (www.world-semi.com in every header) hosted by distributor XON. Same windows as the WS2812B V5 above and as the WS2811 V1.5 used by batch b1.'
+    page: 3
+    quote: 'Data Transfer Time | T0H 0 code, high voltage time 220ns~380ns | T1H 1 code, high voltage time 580ns~1us | T0L 0 code, low voltage time 580ns~1us | T1L 1 code, low voltage time 580ns~1us | RES Frame unit, low voltage time >280µs'
+    windows_ns:
+      { T0H: [220, 380], T1H: [580, 1000], T0L: [580, 1000], T1L: [580, 1000], reset_min: 280000 }
+    order: 'p4: "Note: Data transmit in order of RGB, high bit data at first."'
+  - id: ws2811-worldsemi-old
+    url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
+    title: WS2811 (older WorldSemi sheet with a SET pin)
+    revision: null
+    date: null
+    language: en
+    notes: 'PDF metadata created 2011-12-31. Prints only the low-speed (400 kHz) table; high speed is "one half of the time" with no tolerance stated, so it is not used for overlap arithmetic.'
+    page: 3
+    quote: 'Low Speed mode time | T0H 0 code,high voltage time 0.5 µs ±150ns | T1H 1 code,high voltage time 1.2 µs ±150ns | T0L 0 code,low voltage time 2.0 µs ±150ns | T1L 1 code,low voltage time 1.3 µs ±150ns | RES low voltage time Above 50µs | Note: It is one half of the time when high speed mode(reset time unchanged)'
+    windows_ns:
+      {
+        low_speed:
+          {
+            T0H: [350, 650],
+            T1H: [1050, 1350],
+            T0L: [1850, 2150],
+            T1L: [1150, 1450],
+            reset_min: 50000,
+          },
+      }
+
+parts:
+  # ------------------------------------------------------------------ NS8808
+  - part: NS8808
+    entry: pixel-ics/ns8808
+    maker: Newstar LED Co.
+    sourcing: 'Maker (Newstar) product page only: a feature list, no timing table, no datasheet. Newstar''s download page lists no NS8808 document. The page''s description reuses a sentence naming "GE8808B"; a Greeled GE8808 sheet exists (read only through SlideShare''s text extraction) but nothing here is filled from it.'
+    documents:
+      - id: newstar-ns8808-page
+        url: http://newstar-ledstrip.com/productshow855.html
+        title: NS8808 HD8808 DC12V Pixel LED Chip replace WS2815
+        revision: null
+        date: null
+        language: en
+        notes: 'Live page, retrieved 2026-11-20 (footer "Copyright © 2009-2023 NEWSTAR LED CO.,LIMITED").'
+      - id: newstar-ns8808-wayback
+        url: https://web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html
+        title: NS8808 DC12V Pixel LED Chip replace WS2815
+        revision: null
+        date: '2024-11-02 (capture)'
+        language: en
+        notes: 'Same feature list and description as the live page; the 2024 capture names only NS8808 (no "HD8808").'
+      - id: newstar-downloads
+        url: http://newstar-ledstrip.com/download.asp
+        title: Newstar Download (page 1 of 2, 38 records)
+        revision: null
+        date: null
+        language: en
+        notes: 'Lists datasheets dated 2017-08-22 to 2022-07-05 (WS2815 RGB Chip, TC1903 IC Pixel Chip, HD107S, SK6812 …); no NS8808 or HD8808 entry. Page 2 (/download_2.html) returned errors to every fetch.'
+      - id: ge8808-greeled-slideshare
+        url: https://www.slideshare.net/slideshow/ge8808-led-datasheet/122749842
+        title: GE8808 LED SERIES SPECIFICIFATION (Greeled)
+        revision: '01 (Initial Document)'
+        date: '2018 (day garbled in the extraction: "2018-0 -09")'
+        language: en
+        notes: 'Related, not this part: read through SlideShare''s OCR text by a fetch helper, so spelling is as extracted. Kept because Newstar''s NS8808 description names "GE8808B" and repeats this sheet''s feature wording. No NS8808 value below comes from it.'
+    line_coding: single-wire
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: null
+        reset: null
+        doc: newstar-ns8808-page
+        page: null
+        quote: '3·Use e-RZ code, serial data frequency 800kHz'
+        other_quotes:
+          - {
+              quote: 'the GE8808B use the e-RZ (extended return to zero code)as the signal transmission mode,which can control the output current channel by channel and cascade infinitely',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      extra: '"12bits build-in GAMMA correction of PWM display" (internal; the wire carries 8 bits per channel)'
+      start: null
+      end: null
+      latch: null
+      doc: newstar-ns8808-page
+      page: null
+      quote: '4·8bits data transfer, 12bits build-in GAMMA correction of PWM display | The NS8808 is a 3-channel constant current LED drive with resumable data transfers and internal display patterns. There are three open-drain constant current outputs'
+    forwarding: null
+    backup_line:
+      pins: null
+      behaviour: 'Two data inputs ("two-signal data input as redundant control"); pin names, selection rule and drop/skip behaviour are not given.'
+      doc: newstar-ns8808-page
+      page: null
+      quote: "DC12V Dual-signal wires version, signal break-point continuous transmission. Any pixel's failure won't affect signal transfer and total emitting effect. | 6·With resumable data transfer function, single chip damage does not infect data transmission | it provides two-signal data input as redundant control, which ensures the transmission of the signal if any single chip damages."
+    compatibility_claims:
+      - {
+          claim: 'NS8808 HD8808 DC12V Pixel LED Chip replace WS2815',
+          doc: newstar-ns8808-page,
+          page: null,
+        }
+      - {
+          claim: 'NS8808/HD8808 DC12V Pixel LED Chip, it is same protocol with ws2815, the only one pixel LEDs can replace ws2815 directly at this moment, and it is more stable than ws2815 after long time tested.',
+          doc: newstar-ns8808-page,
+          page: null,
+        }
+    disagreements:
+      - 'Newstar''s NS8808 description says "the GE8808B use the e-RZ (extended return to zero code)as the signal transmission mode" — a different part number inside the NS8808 text.'
+      - 'The Greeled GE8808 sheet (SlideShare extraction) repeats Newstar''s wording ("Use e-RZ code, serial data frequency 800kHz") and adds what Newstar does not print: "Single code with 1:3 duty cycle and a standard 800kHz transmission speed", waveform labels "T=1/800kHz", "3/4T1/4T", "<10us", "Intervals between code >300us Reset", "RZ data frequency 400k 800k 1M Hz", and for the backup input "SDI2 will discard the 1-24bits data and use 25-48bits data as the display data". Whether NS8808 is a GE8808 is not established by any document read.'
+      - 'Maker claim "same protocol with ws2815" vs "e-RZ (extended return to zero code)": the page never shows a waveform, so the claim cannot be checked against WS2815 timing from Newstar''s own material.'
+    open:
+      - 'No NS8808 timing (T0H/T1H/T0L/T1L, reset), channel order, or backup-input behaviour found from Newstar.'
+      - 'Whether NS8808 = GE8808 (Greeled) relabelled: only the shared wording suggests it.'
+
+  # ------------------------------------------------------------------ HD8808
+  - part: HD8808
+    entry: pixels/hd8808
+    maker: Newstar LED Co. (LED with the NS8808 IC inside)
+    sourcing: 'Same Newstar product page as NS8808 ("5050 NS8808 RGB LED Chip", "IC Type:NS8808"). No separate HD8808 document.'
+    documents:
+      - id: newstar-ns8808-page
+        url: http://newstar-ledstrip.com/productshow855.html
+        title: NS8808 HD8808 DC12V Pixel LED Chip replace WS2815
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: null
+        reset: null
+        doc: newstar-ns8808-page
+        page: null
+        quote: 'IC Type:NS8808 | Led Type: 5050 SMD LED | 3·Use e-RZ code, serial data frequency 800kHz'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: newstar-ns8808-page
+      page: null
+      quote: 'Emitting Color :Digital RGB | Gray Level:256 | 4·8bits data transfer, 12bits build-in GAMMA correction of PWM display'
+    forwarding: null
+    backup_line:
+      pins: null
+      behaviour: 'See NS8808: "Dual-signal wires version, signal break-point continuous transmission"; pins and rule not given.'
+      doc: newstar-ns8808-page
+      page: null
+      quote: "DC12V Dual-signal wires version, signal break-point continuous transmission. Any pixel's failure won't affect signal transfer and total emitting effect."
+    compatibility_claims:
+      - {
+          claim: 'NS8808/HD8808 DC12V Pixel LED Chip, it is same protocol with ws2815, the only one pixel LEDs can replace ws2815 directly at this moment',
+          doc: newstar-ns8808-page,
+          page: null,
+        }
+    disagreements:
+      - 'The 2024-11-02 Wayback capture of the same URL titles the product "NS8808 DC12V Pixel LED Chip replace WS2815" with no "HD8808"; the live page adds HD8808.'
+    open:
+      - 'Everything protocol-level (timing, order, backup pins) is unknown; see NS8808.'
+      - "The database's color.order RGB, gpio 3.5–5 V and quiescent 2 mA are not on Newstar's page (see the .md, Database corrections)."
+
+  # ------------------------------------------------------------------ TX1818
+  - part: TX1818
+    entry: pixels/tx1818
+    maker: TCWIN (深圳市天成照明有限公司, Shenzhen Tiancheng Lighting)
+    sourcing: 'Maker datasheets (TCWIN, via LCSC). Advatek / ENTTEC pages quoted only as controller-maker claims.'
+    documents:
+      - id: tx1818bjj-a2
+        url: https://datasheet.lcsc.com/datasheet/pdf/b153efab9bc27ebcdabd89857c3357d8.pdf
+        title: TX1818BJJ-F01 5050 内置IC 幻彩 智能外控LED 光源 — 产品规格书 SPECIFICATIONS
+        revision: A2
+        date: '2023-03-27'
+        language: zh
+        notes: '5050, 6 pins with FDIN. Cover: "日期：20230327 版本号：A2".'
+      - id: tx1818hlj-a2
+        url: https://datasheet.lcsc.com/datasheet/pdf/ccf6c4ce438971261bcd22da2dbd0270.pdf
+        title: TX1818HLJ-F01 (3535) 产品规格书
+        revision: A2
+        date: '2023-03-27'
+        language: zh
+        notes: '3535 version, no FDIN. Same timing values; reset row printed differently (see disagreements).'
+      - id: adv-tx1818
+        url: https://www.advateklighting.com/pixel-protocols/tx1818
+        title: 'LED Pixel Protocol TX1818 (Advatek)'
+        revision: null
+        date: null
+        language: en
+      - id: enttec-tx1818
+        url: https://www.enttec.com/pixel-protocols/TX1818
+        title: 'TX1818 Pixel Protocol (ENTTEC)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: { ns: 300, tol_ns: 50, min_ns: null, max_ns: null, printed: '0.3µs ±0.05us' }
+        T0L: { ns: 900, tol_ns: 50, min_ns: null, max_ns: null, printed: '0.9µs ±0.05us' }
+        T1H: { ns: 900, tol_ns: 50, min_ns: null, max_ns: null, printed: '0.9µs ±0.05us' }
+        T1L: { ns: 300, tol_ns: 50, min_ns: null, max_ns: null, printed: '0.3µs ±0.05us' }
+        period: null
+        reset:
+          {
+            min_ns: 80000,
+            typ_ns: null,
+            max_ns: null,
+            level: low,
+            printed: 'Trst Reset码，低电平时间 ≥80µs',
+          }
+        derived: 'Both codes total 1200 ns ±100 ns (0.3 + 0.9 µs); not printed as a period.'
+        doc: tx1818bjj-a2
+        page: 7
+        quote: '11.数据传输时间 | 名称 描述 典型值 容许误差 | T0H 0码，高电平时间 0.3µs ±0.05us | T1H 1码，高电平时间 0.9µs ±0.05us | T0L 0码，低电平时间 0.9µs ±0.05us | T1L 1码，低电平时间 0.3µs ±0.05us | Trst Reset码，低电平时间 ≥80µs --'
+        translation: '11. Data transfer time | name, description, typical, tolerance | T0H 0-code high time 0.3 µs ±0.05 µs | T1H 1-code high time 0.9 µs ±0.05 µs | T0L 0-code low time 0.9 µs ±0.05 µs | T1L 1-code low time 0.3 µs ±0.05 µs | Trst reset-code low time ≥80 µs'
+        other_quotes:
+          - {
+              page: 3,
+              quote: '数据传输频率可达800Kbps。',
+              translation: 'Data transfer rate up to 800 Kbps.',
+            }
+          - {
+              page: 6,
+              quote: '开关特性 | 数据传输速度 FDIN -- 800 -- KHZ | 传输延迟时间 TPLZ -- -- 200 ns DIN→DO',
+              translation: 'Switching characteristics: data transfer speed (symbol printed as "FDIN") 800 kHz typ; propagation delay TPLZ 200 ns max, DIN→DO',
+            }
+          - {
+              page: 6,
+              quote: '信号输入翻转阀值 VIH 4 -- -- V VDD=12V | VIL -- -- 1 V',
+              translation: 'Input threshold VIH ≥4 V, VIL ≤1 V at VDD 12 V',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥80 µs ("复位码 ≥80us", p8)'
+      doc: tx1818bjj-a2
+      page: 8
+      quote: '14. 24bit 数据结构 R7 R6 R5 R4 R3 R2 R1 R0 G7 … G0 B7 … B0 | 注：高位先发，按照RGB 的顺序发送数据'
+      translation: '24-bit data structure R7…R0 G7…G0 B7…B0. Note: high bit first, data sent in R, G, B order.'
+    forwarding:
+      text: "The first 24 bits after reset go to the first pixel's latch; the rest is re-shaped and forwarded from DO, 24 bits fewer per pixel. Propagation delay 200 ns max."
+      doc: tx1818bjj-a2
+      page: 3
+      quote: '数据协议采用单极性归零码的通讯方式，像素点在上电复位以后，DIN 端接受从控制器传输过来的数据，首先送过来的24bit 数据被第一个像素点提取后，送到像素点内部的数据锁存器，剩余的数据经过内部整形处理电路整形放大后通过DO 端口开始转发输出给下一个级联的像素点，每经过一个像素点的传输，信号减少24bit。'
+      translation: 'The protocol uses unipolar return-to-zero code. After power-on reset the DIN pin receives data from the controller; the first 24 bits are taken by the first pixel into its latch; the remaining data is re-shaped and amplified and forwarded from DO to the next pixel; each pixel reduces the signal by 24 bits.'
+    backup_line:
+      pins: 'DIN (pin 2), FDIN (pin 3) on TX1818BJJ-F01 (5050); the 3535 TX1818HLJ-F01 has no FDIN'
+      behaviour: 'FDIN is named only "backup data input". No text says how the chip chooses an input or whether FDIN drops 24 bits. The application circuit (p8) draws the controller''s DAT (through 330R) to chip 1 DIN and the same line on to chip 2 FDIN; chip 1 DO to chip 2 DIN; chip 1 FDIN unconnected; and so on down the chain (each FDIN on the previous chip''s DIN net).'
+      doc: tx1818bjj-a2
+      page: 5
+      quote: '3 FDIN 备用数据输入 备用显示信号输入'
+      translation: 'Pin 3 FDIN: backup data input; backup display-signal input.'
+    compatibility_claims: []
+    disagreements:
+      - 'Reset row differs between the two A2 sheets: 5050 p7 "Trst Reset码，低电平时间 ≥80µs --" vs 3535 p7 "Trst Reset码，低电平时间 80µS >0us" (80 µs in the typical column, ">0us" in the tolerance column). Both read as at least 80 µs.'
+      - 'The switching table names the data-rate symbol "FDIN" (p6), the same name as the backup-input pin.'
+      - 'Controller makers: Advatek "Data Transfer Rate 800kbps", "Redundant Data Line [check]", "PWM Rate 8000Hz", "This pixel protocol was designed by TCWIN Lighting in China"; ENTTEC "Redundant Data Line Yes", "PWM Rate 8000Hz". They agree with TCWIN on rate and PWM; neither gives timing.'
+    open:
+      - "How TX1818 picks between DIN and FDIN, and whether FDIN skips the first 24 bits (like LB1908's FDIN) or not: not written in the A2 sheets."
+
+  # ------------------------------------------------------------------ INK1003
+  - part: INK1003
+    entry: pixel-ics/ink1003
+    maker: 'Greeled Electronic Ltd (www.gree-leds.com) on the datasheet; the designer is not named'
+    sourcing: 'Datasheet headed "Greeled Electronic Ltd" (forum-attachment copy). Advatek / ENTTEC / Falcon quoted as controller makers.'
+    documents:
+      - id: ink1003-greeled
+        url: https://monitor.espec.ws/download.php?id=205360
+        title: Data Sheet Of INK1003 IC Driver — INK1003 IC (256-Gray Level)
+        revision: null
+        date: null
+        language: en
+        notes: 'Redirects to http://monitor.espec.ws/files/lnk1003_datasheet_299.pdf. 8 pages, no revision or date printed.'
+      - id: adv-ink1003
+        url: https://www.advateklighting.com/pixel-protocols/ink1003
+        title: 'LED Pixel Protocol INK1003 (Advatek)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Pixel Types (Falcon)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: { ns: 250, tol_ns: 75, min_ns: null, max_ns: null, printed: '0.25μs ±75ns' }
+        T0L: { ns: 1000, tol_ns: 75, min_ns: null, max_ns: null, printed: '1.0μs ±75ns' }
+        T1H: { ns: 1000, tol_ns: 75, min_ns: null, max_ns: null, printed: '1.0μs ±75ns' }
+        T1L: { ns: 250, tol_ns: 75, min_ns: null, max_ns: null, printed: '0.2 5μs ±75ns' }
+        period: null
+        reset:
+          {
+            min_ns: 24000,
+            typ_ns: null,
+            max_ns: null,
+            level: low,
+            printed: 'RESET signal( more than 24uS low signal) (p5 text); "≥24μs" on the p5 protocol figure',
+          }
+        derived: 'Both codes total 1250 ns ±150 ns (800 kHz); the period is not printed.'
+        doc: ink1003-greeled
+        page: 6
+        quote: '2) THE DATA SIGNAL LEVEL TIME | NAME DISCRIPTION TYPICAL PERMISSIBLE ERROR | T0H 0 code of high level time 0.25μs ±75ns | T1H 1 code of high level time 1.0μs ±75ns | T0L 0 code of low level time 1.0μs ±75ns | T1L 1 code of low level time 0.2 5μs ±75ns'
+        other_quotes:
+          - { page: 1, quote: 'Data frequency range wide: 400~800KHz' }
+          - { page: 1, quote: 'When 800KHz, it can achieve 1024Pixels cascade connection.' }
+          - { page: 2, quote: 'Input Clock Frequency FCLK 800 KHz (Absolute Maximum Ratings)' }
+          - {
+              page: 8,
+              quote: '20 meters can be realized at the 800 KHz clock frequency in laboratory. A series connected 50ohm resistor is needed to guarantee impedance matching and avoid signal reflection.',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low more than 24 µs ("≥24μs" on the figure)'
+      doc: ink1003-greeled
+      page: 5
+      quote: '24 BIT DATA FORMATE R7 R6 R5 R4 R3 R2 R1 R0 G7 … G0 B7 … B0 | NOTE: MSB is sent first, LSB is sent last. In order to send data ROUT, GOUT, BOUT. | During data transfer, the first bit is the MSB of the ROUT channel, the last one transferred into the data shift register is the LSB of the BOUT channel.'
+    forwarding:
+      text: 'After 24 bits the chip forwards the rest from SDO (held low before forwarding) and ignores further data until a reset.'
+      doc: ink1003-greeled
+      page: 5
+      quote: 'INK1003 uses the one-line communication mode, with return to zero code gray scale data transport. When the SDI node receives total 24 bit data, SDO node begins to send data to the next chip (set low before sending) . After that the IC no longer receives data, 3 PWM output named ROUT、GOUT、BOUT outputs signal with different duty according to the data received. The period of output signal is 3.2mS.The chip receives data again until RESET signal is sent to SDI node of the IC. … After the RESET signal( more than 24uS low signal) , 24 bit PWM data received newly will output to ROUT、GOUT、BOUT.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'p1 "Data frequency range wide: 400~800KHz" but the only timing table (p6) is for a 1.25 µs bit (800 kHz); no 400 kHz timing or speed-select pin is given (pin 7 is POL, output polarity).'
+      - 'p5 refresh example "1024X0.4X2=0.8192ms" does not match 24 bits × 1.25 µs per chip (1024 chips ≈ 30.7 ms).'
+      - 'p5 figure labels the reset "RERESET CODE ≥24μs" (typo).'
+      - 'Controller makers: Advatek lists "PWM Rate 400Hz", "Data Transfer Rate 800kbps", "Redundant Data Line [cross]"; Falcon lists INK1003 among its "WS2811" type alternatives. The datasheet''s 3.2 ms PWM period is 312.5 Hz.'
+    open: []
+
+  # ------------------------------------------------------------------ INK1002
+  - part: INK1002
+    entry: pixels/ink1002
+    maker: 'Greeled Electronic Ltd (order code GEINK1002RGB)'
+    sourcing: "Greeled LED datasheet (forum-attachment copy). It prints no timing table; it says the LED contains the INK1003 IC. Timing for this LED is therefore INK1003's sheet, by the LED datasheet's own statement."
+    documents:
+      - id: ink1002-greeled
+        url: https://embdev.net/attachment/199047/INK1002_RGB_LED__GEINK1002RGB_.pdf
+        title: Data Sheet Of INK1002 RGB LED (GEINK1002RGB)
+        revision: null
+        date: null
+        language: en
+        notes: '3 pages; PDF metadata title "E:\greeled 2013\Specification\INK\INK1002 Digital RGB LED.doc", created 2013-11-21.'
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Pixel Types (Falcon)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: null
+        reset: null
+        doc: ink1002-greeled
+        page: 1
+        quote: 'Data frequency range wide: 800KHz | INK1003 and RGB LED chips are packaged in a single 5050 LED package to form a independent pixel'
+        other_quotes:
+          - { page: 2, quote: 'Data Rate FCLK 800 KHz (Absolute Maximum Ratings)' }
+          - {
+              page: 3,
+              quote: 'Fig2, INK1002 Block Diagram: U1 INK1003 — pin 8 VCC, 7 POL, 6 DI, 5 DO; outputs 1 R, 2 G, 3 B to LED-5050-RGB',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: null
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: ink1002-greeled
+      page: 1
+      quote: 'High gray level, 256 gray levels, the lamp can display more than 16777216 colors. | when the first 24-bit data package is received by the first chip, the later received data will be reconstructed by the chip and transferred from DO PIN'
+    forwarding:
+      text: 'First 24-bit package kept; later data reconstructed and sent from DO after about 150 ns.'
+      doc: ink1002-greeled
+      page: 1
+      quote: 'The communication protocol of INK1002 is "AUTO-ZERO" code. Once the chip is reset, DI PIN is ready to receive gray level data transferred by the controller, when the first 24-bit data package is received by the first chip, the later received data will be reconstructed by the chip and transferred from DO PIN after about 150nS delay to the next chip. With this method, the cascading LED lamps are unlimited, only limited by the data transferring rate.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'p1 "Built-in signal reconstruct circuit ensures up to 2048 lamps cascading with no distortion" vs the same page "the cascading LED lamps are unlimited, only limited by the data transferring rate"; INK1003''s own sheet says "When 800KHz, it can achieve 1024Pixels cascade connection."'
+      - 'Pin naming: Fig1 labels pins 4/5 "DO"/"DI", the pin table "SDO"/"SDI".'
+    open:
+      - "No timing table or channel order in the INK1002 sheet itself; use INK1003's (same IC per the block diagram)."
+
+  # ------------------------------------------------------------------ LB1908
+  - part: LB1908
+    entry: pixel-ics/lb1908
+    maker: 'Not named. The ESD paragraph says "Titan Micro Electronics suggests …".'
+    sourcing: 'Datasheet (LEDYi copy; SuntechLite copy is text-identical). No maker on the sheet. Advatek / ENTTEC / Falcon quoted as controller makers.'
+    documents:
+      - id: lb1908-ledyi
+        url: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf
+        title: LB1908 DC12V Power supply 3 channels LED driver
+        revision: null
+        date: null
+        language: en
+        notes: '6 pages. https://suntechlite.com/wp-content/uploads/2023/11/LB1908-specification-sheet-download.pdf has the same text (whitespace-insensitive diff empty); both PDFs created 2021-07-22.'
+      - id: adv-lb1908
+        url: https://www.advateklighting.com/pixel-protocols/lb1908
+        title: 'LED Pixel Protocol LB1908 (Advatek)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Pixel Types (Falcon)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H:
+          {
+            ns: 300,
+            tol_ns: null,
+            min_ns: 250,
+            max_ns: 350,
+            printed: '250 / 300 / 350 ns (min / typ / max)',
+          }
+        T0L: null
+        T1H: { ns: 800, tol_ns: null, min_ns: 700, max_ns: 900, printed: '700 / 800 / 900 ns' }
+        T1L: null
+        period:
+          {
+            ns: 1200,
+            min_ns: 1100,
+            max_ns: 1300,
+            printed: 'T0/T1 0 code or 1 code cycle 1.1 / 1.2 / 1.3 μs',
+          }
+        reset:
+          {
+            min_ns: 200000,
+            typ_ns: null,
+            max_ns: null,
+            level: low,
+            printed: 'Treset Reset code, low level time 200 (min) μs',
+          }
+        output:
+          {
+            T0H: 300,
+            T1H: 800,
+            printed: 'T0H’ Output 0 ode, high level time 300 ns; T1H’ Output 1 ode, high level time 800 ns (typ)',
+          }
+        derived: 'T0L = cycle − T0H ∈ [1100−350, 1300−250] = [750, 1050] ns; T1L = cycle − T1H ∈ [1100−900, 1300−700] = [200, 600] ns. Low times are not printed.'
+        doc: lb1908-ledyi
+        page: 3
+        quote: 'Time sequence characteristics | Input 0 ode, high level time T0H VDD=5.0V GND=0V 250 300 350 ns | Input 1 ode, high level time T1H 700 800 900 ns | Output 0 ode, high level time T0H’ 300 ns | Output 1 ode, high level time T1H’ 800 ns | 0 code or 1 code cycle T0/T1 1.1 1.2 1.3 μs | Reset code, low level time Treset 200 μs | (1) When 0 code or 1 code cycle is within the range of 1.2μs (frequency 800KHz) , the chip can normally work, but the low level time of 0 code and 1 code must accord with the corresponding values in the above table; (2) When reset is not required, the low level time between bytes should not exceed 80μs, or else the chip may be rest to receive data again, which cannot achieve correct data transmission.'
+        other_quotes:
+          - { page: 1, quote: 'Using return to 0 code, serial data transmission rate 800KHz.' }
+          - {
+              page: 3,
+              quote: 'PWM refresh rate Fin 800 KHz | OUT PWM refresh rate Fout OUTR，OUTG，OUTB 8K Hz | Propagation delay time Tplz DIN →DO FDIN →DO 155 (typ) 500 (max) ns',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low >200 µs; gaps between bytes must stay ≤80 µs'
+      doc: lb1908-ledyi
+      page: 4
+      quote: '2. Structure of a complete frame of data D1 D2 D3 D4 … Dn Reset … Each display data packet contains 24 data bits. Reset means reset signal, valid at low level. | 3. Data format of Dn R7 R6 … R0 G7 … G0 B7 … B0 | Each data packet contains 8×3 data bits, with higher bits sent first.'
+    forwarding:
+      text: 'After its 24 bits the chip forwards the stream from DIN or FDIN out of DO (DO low before forwarding). Propagation delay 155 ns typ, 500 ns max (DIN→DO, FDIN→DO).'
+      doc: lb1908-ledyi
+      page: 3
+      quote: 'When the 24-bit data are received, DO ports will start to forward the data continuously sent from DIN or FDIN port, which provides display data for the next cascaded chip. Prior to forwarding data, DO ports are always at low level.'
+    backup_line:
+      pins: 'DIN (pin 5), FDIN (pin 7)'
+      behaviour: 'FDIN is wired to the previous chip''s input line (S1 to chip 2 FDIN, etc., p4 figure). Data arriving on FDIN has its first 24 bits dropped, so a controller driving FDIN directly must prepend a dummy 24-bit packet. First chip: controller to DIN, FDIN grounded; FDIN may float when break-point resume is not used. How the chip chooses between DIN and FDIN is only described as "switch between input interfaces in normal mode".'
+      doc: lb1908-ledyi
+      page: 4
+      quote: 'Special reminder: the IC PINS DIN and FDIN as two input of data is not the same, and exactly 24 bits of data, when FDIN received data, automatically lose the Dx that packet to achieve that data (display effect) will not shift, which is the first point to connect the controller using THE DIN port instead of the FDIN port. … Data structure of Di and Fi2 ports of the controller: D1D2D3D4……Dn; Data structure of Fi port of the controller: DxD1D2D3……Dn; and the Dx is any 24bit data.'
+      other_quotes:
+        - {
+            page: 1,
+            quote: 'Single-wire dual-channel serial cascading interface: switch between input interfaces in normal mode, DIN pin inputs data in DIN working mode, FDIN pin inputs data in FDIN working mode, D0 forwards cascaded data, and the signal does not depend on a certain one. The chip is abnormal and affects the normal operation of other chips.',
+          }
+        - {
+            page: 5,
+            quote: 'The first point controller only needs to be connected to the DIN port, and the FDIN port is grounded; in addition, if the breakpoint resume function is not required, all FDINs can be left floating.',
+          }
+    compatibility_claims: []
+    disagreements:
+      - 'p3 note (1) calls a 1.2 μs cycle "frequency 800KHz" (1/1.2 μs = 833 kHz); the table''s typ cycle is 1.2 μs, not 1.25 μs.'
+      - 'p3 note (1) says the low times "must accord with the corresponding values in the above table", but the table prints no low times.'
+      - 'p3 labels the 800 KHz data rate "PWM refresh rate Fin".'
+      - 'p3 "After power-on reset and reception of a mode setting command, the chip begins to receive display data" — no mode-setting command is defined anywhere in the sheet.'
+      - 'p1 "The chip is abnormal and affects the normal operation of other chips" reads as a translation error for "does not affect".'
+      - 'Features p1 "Fixed constant current output of 14mA" vs electrical table p2 Iout 9 / 10 / 11 mA at Vout 3 V (already in the database discrepancies).'
+      - 'Controller makers: Advatek "Data Transfer Rate 800kbps", "Redundant Data Line [check]", "PWM Rate 8000Hz"; Falcon lists LB1908 among its "WS2811" type alternatives.'
+    open:
+      - 'Maker unknown; the sheet''s "Titan Micro Electronics" ESD sentence and the undefined "mode setting command" suggest text reused from a Titan Micro sheet, not checked here.'
+
+  # ------------------------------------------------------------------ FW1906
+  - part: FW1906
+    entry: pixel-ics/fw1906
+    maker: 'Not named on the sheet'
+    sourcing: 'Datasheet V1.0 (LEDYi copy; Superlighting copy text-identical), an English translation with errors. Advatek / ENTTEC quoted as controller makers.'
+    documents:
+      - id: fw1906-v1.0
+        url: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf
+        title: Six-channel LED constant current driver FW1906
+        revision: V1.0
+        date: null
+        language: en
+        notes: '8 pages. https://www.superlightingled.com/PDF/FW1906.pdf has the same text (diff empty).'
+      - id: adv-fw1906
+        url: https://www.advateklighting.com/pixel-protocols/fw1906
+        title: 'LED Pixel Protocol FW1906 (Advatek)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: { ns: 360, tol_ns: null, min_ns: 320, max_ns: 400, printed: '320 / 360 / 400 ns' }
+        T0L: null
+        T1H: { ns: 720, tol_ns: null, min_ns: 640, max_ns: 800, printed: '640 / 720 / 800 ns' }
+        T1L: null
+        period:
+          {
+            ns: 1250,
+            min_ns: null,
+            max_ns: null,
+            printed: 'T 0 code or 1 code cycle time -- 1250 -- ns',
+          }
+        reset:
+          {
+            min_ns: 200000,
+            typ_ns: 500000,
+            max_ns: null,
+            level: low,
+            printed: 'T reset Reset code, low level time 200 (min) 500 (typ) μs',
+          }
+        output: { T0H: 360, T1H: 720, printed: 'T0H’ 360 ns; T1H’ 720 ns (typ)' }
+        derived: 'At the typ 1250 ns period: T0L ∈ [1250−400, 1250−320] = [850, 930] ns; T1L ∈ [1250−800, 1250−640] = [450, 610] ns. The period has no tolerance, so these are only indicative.'
+        doc: fw1906-v1.0
+        page: 5
+        quote: "Communication rate | T0H Input 0 code, high level time 320 360 400 ns | T1H Input 1 code, high level time 640 720 800 ns | T0H' Output 0 code, high level time VDD=5V -- 360 -- ns | T1H' Output 1 code, high level time GND=0V -- 720 -- ns | T 0 code or 1 code cycle time -- 1250 -- ns | T reset Reset code, low level time 200 500 μs | Note: The typical cycle time for sending a 1 or 0 code is 1250ns (frequency 800KHz)."
+        other_quotes:
+          - { page: 1, quote: 'Data transmission rate can reach 800Kbps' }
+          - { page: 3, quote: 'Fosc DIN clock rate DIN 400-900 KHz (Limit parameters)' }
+          - {
+              page: 4,
+              quote: 'Fosc DIN clock rate VDD=5.0V - 800 - KHz | tPLZ Transmission delay time DIN → DOUT 300 ns',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 6
+      wire_order: 'R7…R0 G7…G0 B7…B0 (group 1), then the same 24 bits for group 2'
+      pixel_bits: 48
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥200 µs (typ 500 µs); low between bytes must stay below the reset time'
+      doc: fw1906-v1.0
+      page: 5
+      quote: 'R7 … R0 BIT23-BIT16 Set OUTR1/2/3/4 output PWM duty cycle | G7 … G0 BIT15-BIT8 Set OUTG1/2/3/4 output PWM duty cycle | B7 … B0 BIT7-BIT0 Set OUTB1/2/3/4 output PWM duty cycle | The above is the data format for setting the first group of RGB PWM. To set a FW1906, two groups of data packets with the same format are required. | When sending 24×2bit data, the high bit is sent first and the data is sent in the order of RGB. Split into three 8-bit data to send. Note that the low level time between bytes should not exceed the RESET signal time, otherwise the chip will reset.'
+      other_quotes:
+        - {
+            page: 6,
+            quote: 'A set of RGB is usually one pixel (or one segment). One FW1906 chip can control two groups of RGB.',
+          }
+    forwarding:
+      text: 'After 24×2 bits the chip forwards the rest from DO (DO low before forwarding); a WS2811-type controller sees each FW1906 as two 24-bit pixels.'
+      doc: fw1906-v1.0
+      page: 4
+      quote: 'This chip uses a single-line communication method and uses the return-to-zero code method to send signals. After the chip is powered on and reset, it receives the signal sent from the DIN terminal. After receiving 24×2 bits of data, the DO port starts forwarding the data sent by the DIN port, providing input data for the next cascade chip. Before forwarding data, the DO port is always at a low level.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'Bits per chip: text p4–p6 "24×2 bits", "the first 48 bits", "48-bit data received by each chip" vs Figure 6 (p5) labels "The first 72 bits", "The second 72 bits", "The third 72 bits".'
+      - 'p5 table "Set OUTR1/2/3/4 output PWM duty cycle" and p6 "control the output of four groups of RGB ports" for a chip with two RGB groups (R1 G1 B1 R2 G2 B2).'
+      - 'p6 refresh calculation "The maximum transmission rate of one BIT is 1200ns (frequency 800KHz)" vs Table 6 period 1250 ns.'
+      - 'Limit table p3 "Fosc DIN clock rate 400-900 KHz" vs switching table p4 "800 KHz" typ and Table 6 (800 kHz only).'
+      - 'Controller makers: Advatek "FW1906 can connect to two RGB LEDs", "Data Transfer Rate 800kbps", "Physical Package SOP10", "Input Voltage 5V", "Output Pixel Voltage 5 - 24V"; the sheet''s package is SSOP10 and VDD is 10–27 V (typ 24 V).'
+    open:
+      - 'Which group (R1 G1 B1 or R2 G2 B2) takes the first 24 bits is implied ("the first group of RGB PWM") but not stated per pin.'
+      - 'Maker unknown.'
+
+  # ------------------------------------------------------------------ P9412
+  - part: P9412
+    entry: pixels/p9412
+    maker: 'IC: Power MOS Microelectronics (formerly DMS) per Advatek; WEERSOM says "台湾P9412" (Taiwan P9412 IC). LED: WEERSOM (深圳市威尔晟光电有限公司).'
+    sourcing: 'Controller makers only for anything protocol-level (Advatek, ENTTEC). The LED packager (WEERSOM) gives package, pin count and use, no protocol. No IC datasheet found.'
+    documents:
+      - id: adv-p9412
+        url: https://www.advateklighting.com/pixel-protocols/p9412
+        title: 'LED Pixel Protocol P9412 (Advatek)'
+        revision: null
+        date: null
+        language: en
+      - id: enttec-p9412
+        url: https://www.enttec.com/pixel-protocols/P9412
+        title: 'P9412 Pixel Protocol (ENTTEC)'
+        revision: null
+        date: null
+        language: en
+      - id: weersom-p9412-news
+        url: http://www.will-led.com/content/?82.html
+        title: 新品发布，P9412内置IC（5050RGBW）灯珠
+        revision: null
+        date: '2016-11-09'
+        language: zh
+      - id: weersom-p9412-product
+        url: http://www.will-led.com/content/?83.html
+        title: 新品推荐8个脚5050RGBW内置IC幻彩灯珠P9412
+        revision: null
+        date: null
+        language: zh
+    line_coding: single-wire
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800kbps (controller-maker figure)
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: null
+        reset: null
+        doc: adv-p9412
+        page: null
+        quote: 'Clock Type Data-Only | Color Resolution 8 Bits | Color Types RGBW | Input Voltage 5V | Output Pixel Voltage 5 - 24V | PWM Rate 1200Hz | Data Transfer Rate 800kbps | Redundant Data Line [cross]'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: null
+      pixel_bits: null
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: adv-p9412
+      page: null
+      quote: 'Color Resolution 8 Bits | Color Types RGBW (Advatek); ENTTEC: "RGB No | RGBW Yes"'
+    forwarding: null
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: '配对控制器便捷：兼容市场多款LED控制器，RGBW幻彩控制器 (easy controller pairing: compatible with many LED controllers on the market, RGBW addressable controllers) — WEERSOM, LED packager',
+          doc: weersom-p9412-news,
+          page: null,
+        }
+    disagreements: []
+    open:
+      - 'No timing, channel order, or frame from any document by the IC or LED maker.'
+      - 'WEERSOM: "12V实现 1拖2", "24V实现 1拖5" (one P9412 LED drives 2 / 5 IC-less RGBW LEDs) and "灯珠IC ：台湾P9412" — electrical, not protocol.'
+
+  # ------------------------------------------------------------------ P943
+  - part: P943
+    entry: pixels/p943
+    maker: 'IC: Power MOS Microelectronics (formerly DMS) per Advatek. LED: WEERSOM (深圳市威尔晟光电有限公司), which says it uses an "imported P943 IC" and calls the 6-pin LED its patented break-point-resume LED.'
+    sourcing: 'LED packager (WEERSOM) spec sheets, published as images on its product pages (uploaded 2016-07-16): pinout, a timing table, a data-transmission figure and the 24-bit order. Controller makers (Advatek, ENTTEC) give 800 kbps and 1600 Hz. No IC-maker datasheet found.'
+    documents:
+      - id: weersom-p943-6pin
+        url: http://www.will-led.com/content/?70.html
+        title: 原厂封装P943（内置IC）LED幻彩灯珠六个脚的断点续传灯珠
+        revision: null
+        date: '2016-07-16 (image upload path)'
+        language: zh
+        notes: 'Spec sheet as images: pin function http://www.will-led.com/upLoad/image/20160716/14686505298790098.png; input code http://www.will-led.com/upLoad/image/20160716/14686506111111203.png; timing table http://www.will-led.com/upLoad/image/20160716/14686506249897108.png; data transfer + 24-bit structure http://www.will-led.com/upLoad/image/20160716/14686506484508863.png; application http://www.will-led.com/upLoad/image/20160716/14686507392340162.png and http://www.will-led.com/upLoad/image/20160716/14686507595627271.png'
+      - id: weersom-p943-8pin
+        url: http://www.will-led.com/content/?38.html
+        title: 新款幻彩灯珠P943八脚 5050RGB内置IC灯珠可以拖普通灯珠跑马
+        revision: null
+        date: '2016-07-16 (image upload path)'
+        language: zh
+        notes: 'Same timing table, sheet "page 5/11": http://www.will-led.com/upLoad/image/20160716/14686512285831342.png; pin function http://www.will-led.com/upLoad/image/20160716/14686511247679655.png; notes http://www.will-led.com/upLoad/image/20160716/14686513058360395.png'
+      - id: weersom-p943-6pin-2016-11
+        url: http://www.will-led.com/content/?84.html
+        title: 6个脚5050RGB内置IC灯珠智能断点续传灯珠P943
+        revision: null
+        date: '2016-11-28 (image upload path)'
+        language: zh/en
+        notes: 'A later 10-page "WILLIGHTING P943" LED sheet (optical, packaging, reliability). Pin drawing DI2 [1], DI1 [2], DO2 [3], VDD [4], VCC [5], GND [6]. No protocol section.'
+      - id: adv-p943
+        url: https://www.advateklighting.com/pixel-protocols/p943
+        title: 'LED Pixel Protocol P943 (Advatek)'
+        revision: null
+        date: null
+        language: en
+      - id: enttec-p943
+        url: https://www.enttec.com/pixel-protocols/P943
+        title: 'P943 Pixel Protocol (ENTTEC)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: '高速模式 (high-speed mode), WEERSOM sheet'
+        select: null
+        T0H: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        T0L: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36us ±150ns' }
+        T1H: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36us ±150ns' }
+        T1L: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        period: null
+        reset:
+          { min_ns: null, typ_ns: 50000, max_ns: null, level: low, printed: 'RES RESET码 50us' }
+        wait: { ns: 12000, tol_ns: 150, printed: 'WT 等待处理时间 12us ±150ns' }
+        derived: 'Both codes total 1710 ns ±300 ns (≈585 kbps), not the 800 kbps the controller makers list.'
+        doc: weersom-p943-6pin
+        page: null
+        quote: '2.高速模式时间 | 名称 描述 典型值 容许误差 | T0H 0码，高电平时间 0.35us ±150ns | T1H 1码，高电平时间 1.36us ±150ns | T0L 0码，低电平时间 1.36us ±150ns | T1L 1码，低电平时间 0.35us ±150ns | WT 等待处理时间 12us ±150ns | RES RESET码 50us'
+        translation: '2. High-speed mode timing | name, description, typical, tolerance | T0H 0-code high 0.35 µs ±150 ns | T1H 1-code high 1.36 µs ±150 ns | T0L 0-code low 1.36 µs ±150 ns | T1L 1-code low 0.35 µs ±150 ns | WT wait/processing time 12 µs ±150 ns | RES reset code 50 µs'
+        other_quotes:
+          - {
+              doc: adv-p943,
+              quote: 'Clock Type Data-Only | Color Resolution 8 Bits | Color Types RGB | Input Voltage 5V | Output Pixel Voltage 5 - 17V | PWM Rate 1600Hz | Data Transfer Rate 800kbps | Redundant Data Line [check]',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: 'The data-transmission figure puts a "WT" slot between consecutive 24-bit pixel packets (WT = 等待处理时间, 12 µs in the table). Whether the controller must insert it is not said.'
+      start: null
+      end: null
+      latch: 'RESET code 50 µs'
+      doc: weersom-p943-6pin
+      page: null
+      quote: '3.数据传输方法 [figure: DO: 第一位24BIT | WT | 第二位24BIT | WT | 第三位24BIT | WT | 第四位24BIT | RESET CODE …; DI: 第二位24BIT | WT | 第三位24BIT | WT | 第四位24BIT | RESET CODE] | 4.24bit 的数据结构 R7 … R0 G7 … G0 B7 … B0 | 注：高位先发，按照RGB 的顺序发送数据'
+      translation: '3. Data transmission method [figure: row DO: 1st 24 bits, WT, 2nd 24 bits, WT, 3rd 24 bits, WT, 4th 24 bits, RESET CODE; row DI: 2nd 24 bits, WT, 3rd, WT, 4th, RESET CODE]. 4. 24-bit data structure R7…B0. Note: high bit first, sent in R, G, B order.'
+    forwarding: null
+    backup_line:
+      pins: '6-pin LED: DI2 (pin 1, 二号数据输入 data input 2), DI1 (pin 2, 一号数据输入 data input 1), DO2 (pin 3, 二号数据输出 data output 2). 8-pin LED: OUT (1), DI1 (2), DI2 (3). The 943 IC in the application circuit has DI1, DI2, DO1, DO2.'
+      behaviour: "The controller connects to the first chip's DI1. The figure shows a second stream (DI) that starts with the 2nd pixel's 24 bits; the note says a controller may send only D0 and the chip treats the D1 input as abnormal without affecting later transmission. No selection rule is printed; the application wiring of DI2/DO2 could not be traced unambiguously."
+      doc: weersom-p943-6pin
+      page: null
+      quote: '注：其中 DO 与 D1 为 MCU 端发送的数据，客户可以只发 D0 信号，D1 口芯片会认为信号异常，这并不异响往后信号传输。 | 单片机控制信号连接第一个芯片的DI1端口。'
+      translation: "Note: DO and D1 are the data sent from the MCU; the customer may send only the D0 signal; the chip will treat the D1 port signal as abnormal, which does not affect (异响, typo for 影响) later signal transmission. | The MCU control signal connects to the first chip's DI1 port."
+      other_quotes:
+        - {
+            doc: weersom-p943-6pin,
+            quote: '六个脚P943幻彩灯珠是威尔晟光电有限公司的一款带有断点续传功能的专利灯珠。坏灯不受型号传输影响',
+            translation: 'The six-pin P943 LED is a patented LED of WEERSOM with break-point resume; a dead LED does not affect signal transmission.',
+          }
+        - {
+            doc: weersom-p943-6pin,
+            quote: '建议近距离传输时，在D01和D02口各串接电阻后再输出至下级，以防止信号反射',
+            translation: 'For short runs, put a series resistor on each of DO1 and DO2 before the next stage, to prevent reflections.',
+          }
+    compatibility_claims: []
+    disagreements:
+      - 'Rate: WEERSOM''s table gives a 1.71 µs bit (0.35 + 1.36 µs, ≈585 kbps) vs Advatek "Data Transfer Rate 800kbps" (ENTTEC lists no rate).'
+      - 'Figure row labels "DO"/"DI" vs the note''s "DO 与 D1 … D0 信号 … D1 口" (D0/D1).'
+      - 'The 6-pin LED pin table names its output "DO2" while the IC drawing has both DO1 and DO2; the 8-pin LED names it "OUT".'
+    open:
+      - 'Meaning of WT (12 µs "wait/processing time" between pixel packets): a required gap, an allowed gap, or the chip''s own delay — not stated.'
+      - 'Backup-input rule (which input wins, whether DI2 drops 24 bits): not stated.'
+      - 'No IC-maker (Power MOS / DMS) document found; WEERSOM is a packager.'
+
+  # ------------------------------------------------------------------ P9883
+  - part: P9883
+    entry: pixel-ics/p9883
+    maker: 'Power MOS Microelectronics (formerly DMS Microelectronics), per Advatek'
+    sourcing: 'Controller makers only (Advatek, ENTTEC, Falcon). No maker or packager document found.'
+    documents:
+      - id: adv-p9883
+        url: https://www.advateklighting.com/pixel-protocols/p9883
+        title: 'LED Pixel Protocol P9883 (Advatek)'
+        revision: null
+        date: null
+        language: en
+      - id: enttec-p9883
+        url: https://www.enttec.com/pixel-protocols/P9883
+        title: 'P9883 Pixel Protocol (ENTTEC)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Pixel Types (Falcon)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800kbps (controller-maker figure)
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: null
+        reset: null
+        doc: adv-p9883
+        page: null
+        quote: 'Clock Type Data-Only | Color Resolution 8 Bits | Physical Package ESOP8 | Color Types RGB | Input Voltage 5V | Output Pixel Voltage 5-17V | PWM Rate 1600Hz | Data Transfer Rate 800kbps | Redundant Data Line [check]'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: adv-p9883
+      page: null
+      quote: 'Color Resolution 8 Bits | Color Types RGB'
+    forwarding: null
+    backup_line:
+      pins: null
+      behaviour: 'Advatek: "It offers a backup data line for redundancy in case of a chip failure." No pins or rule.'
+      doc: adv-p9883
+      page: null
+      quote: 'This pixel protocol was designed by Power MOS Microelectronics (formerly DMS Microelectronics) in China. It offers a backup data line for redundancy in case of a chip failure. The control circuit comes in a ESOP8 package'
+    compatibility_claims:
+      - {
+          claim: 'Falcon (controller maker) lists P9883 among the alternatives of its "WS2811" pixel type (3 channels, 8 bits).',
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+    disagreements: []
+    open:
+      - 'No timing, order or frame from any maker document.'
+      - 'A reseller (myneopixel.com) reportedly calls the protocol "the same with UCS1903"; the page returned 403 here, so unverified.'
+
+  # ------------------------------------------------------------------ TC2811
+  - part: TC2811
+    entry: pixel-ics/tc2811
+    maker: 'Probably Fuman (富满微电子集团股份有限公司, Shenzhen Fuman Electronics), which lists a TC2811H; distributors list TC2811N / TC2811Z under Fuman. Not confirmed to be the database''s "TC2811".'
+    sourcing: 'Fuman''s product table (one row, no datasheet; "please apply to us" for the manual) and a distributor listing. The datasheet aggregators that hold a 5-page TC2811Z PDF (datasheetbank.com, alldatasheet.com) returned 403 / Cloudflare challenge to every fetch, including a fetch helper.'
+    documents:
+      - id: fuman-led-table
+        url: https://www.superchip.cn/front/productLeftOther?id=45&pid=5
+        title: 富满 LED照明系列 product table
+        revision: null
+        date: null
+        language: zh
+      - id: fuman-tc2811h
+        url: https://www.superchip.cn/front/product_detail?id=45&&pid=5&&name=TC2811H.
+        title: TC2811H.（单线传输三通道LED驱动控制专用芯片）
+        revision: null
+        date: null
+        language: zh
+        notes: 'Page body is only "TC2811H. 注：如果需要产品的详细手册或其他资料，请向我们申请。" (Note: for the detailed manual or other material, please apply to us.)'
+      - id: ccx-tc2811n
+        url: http://www.ccx-tech.com/Product/13524.html
+        title: TC2811N — 诚创信 (distributor) 产品中心 › 富满 › LED驱动 › LED照明
+        revision: null
+        date: null
+        language: zh
+    line_coding: single-wire
+    idle: null
+    bit_order: null
+    rates:
+      - name: null
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: null
+        reset: null
+        doc: fuman-led-table
+        page: null
+        quote: '型号 封装形式 端口耐压 LED驱动电流 数据传输方式 通道数 供电电压(V) 应用 | TC2811H. SOP-8 24V 12mA 单线归零码 RGB 5-24V 点光源，灯带'
+        translation: 'Model, package, port withstand voltage, LED drive current, data transmission method, channels, supply (V), application | TC2811H. SOP-8, 24 V, 12 mA, single-wire return-to-zero code, RGB, 5–24 V, point lights / strips'
+    clock: null
+    frame:
+      bits_per_channel: null
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: ccx-tc2811n
+      page: null
+      quote: '型号 TC2811N | 内容 单线传输三通道LED驱动控制专用芯片 | 应用范围 用于幻彩灯条 | 封装形式 SOP-8/Dice'
+      translation: 'Model TC2811N | single-wire three-channel LED driver control chip | for addressable strips | package SOP-8 / Dice'
+    forwarding: null
+    backup_line: null
+    compatibility_claims: []
+    disagreements: []
+    open:
+      - 'No TC2811 datasheet read. A search-engine snippet of the blocked datasheetbank page quoted "unipolar transmission … return-to-zero code communication protocol" and "data transmission rate 800Kbps" for TC2811Z; not read first-hand, so not used.'
+      - 'The database note "WS2811 Clone" has no document behind it.'
+
+  # ------------------------------------------------------------------ QED3001
+  - part: QED3001
+    entry: pixel-ics/qed3001
+    maker: 'QED Micro (深圳市质能达微电子科技有限公司, Shenzhen QED Microelectronics)'
+    sourcing: "Maker existence and product only (archived 2019 qedmicro.com product list). Protocol-level statements are controller makers' (Advatek, Falcon). The maker's QED3001 pages are gone (site rebuilt; old news/product pages 404, not archived)."
+    documents:
+      - id: qed-products-2019
+        url: https://web.archive.org/web/20190818093910/http://www.qedmicro.com:80/product.html
+        title: 产品商城-深圳市质能达微电子科技有限公司
+        revision: null
+        date: '2019-08-18 (capture)'
+        language: zh
+        notes: 'Lists "QED3001点控ic，USB圣诞灯串" and (on product_420367, captured 2019-08-18) "QED3001点控ic，COB灯珠封装，1颗ic同步带9个RGB，点光源明星产品". The linked teamview pages were not archived.'
+      - id: adv-qed3001
+        url: https://www.advateklighting.com/pixel-protocols/qed3001
+        title: 'LED Pixel Protocol QED3001 (Advatek)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Pixel Types (Falcon)'
+        revision: null
+        date: null
+        language: en
+    line_coding: null
+    idle: null
+    bit_order: null
+    rates:
+      - name: '500–1000 kbps (controller-maker figure)'
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: null
+        reset: null
+        doc: adv-qed3001
+        page: null
+        quote: 'Clock Type Data-Only | Color Resolution 12 Bits | Physical Package SOP8/10/14 | Color Types RGB | Input Voltage 5V | Output Pixel Voltage 5 - 32V | PWM Rate 1000Hz | Data Transfer Rate 500 - 1000kbps | Redundant Data Line [check] (SOP14)'
+    clock: null
+    frame:
+      bits_per_channel: 12
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: adv-qed3001
+      page: null
+      quote: 'Color Resolution 12 Bits | Color Types RGB'
+    forwarding: null
+    backup_line:
+      pins: null
+      behaviour: 'Advatek: redundant data line on the SOP14 package only.'
+      doc: adv-qed3001
+      page: null
+      quote: 'Redundant Data Line [check] (SOP14) | Option for redundant data line reduces chance of entire strip failure'
+    compatibility_claims:
+      - {
+          claim: 'Falcon (controller maker) lists QED3001 among the alternatives of its "TLS3001" pixel type, with CY3005, TLS3001 and TLS3002 (3 channels, 12 bits).',
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+    disagreements:
+      - 'Advatek''s QED3001 and TLS3001 pages give the same protocol fields (Data-Only, 12 Bits, SOP8/10/14, RGB, 5V input, 1000Hz, 500 - 1000kbps, redundant line on SOP14) and differ only in Output Pixel Voltage (QED3001 "5 - 32V", TLS3001 "5 - 17V") and PixLite Mk1/Mk2 support (TLS3001 yes, QED3001 no). Both carry the same "Operational Behavior" text ("On start-up, only the first QED3001 pixel in a chain will illuminate for a second, while the pixels initialize themselves").'
+    open:
+      - "Coding, frame and timing from the maker: not found. Falcon's grouping with TLS3001 is the only statement that it is Manchester / TLS3001 framing, and it is a controller maker's."
+
+  # ------------------------------------------------------------------ MBI6120
+  - part: MBI6120
+    entry: pixel-ics/mbi6120
+    maker: Macroblock, Inc.
+    sourcing: 'Maker datasheet (preliminary V1.00) via the authorised distributor Neumüller.'
+    documents:
+      - id: mbi6120-v1.00
+        url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
+        title: MBI6120 Preliminary Datasheet — Single-wire 3-Channel Constant Current Sink Driver for Small LED Clusters
+        revision: V1.00
+        date: 'June 2012'
+        language: en
+        notes: '21 pages, "©Macroblock, Inc. 2012", footer "June 2012, V1.00". The "MBI6120 Application Note" it cites for the gap symbol was not found.'
+    line_coding: other
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 'auto-detected, bit width 1–10 µs (100 kHz–1 MHz)'
+        select: 'Measured by the chip from the 12 consecutive 1s that start every packet ("the 12 bits of 1''s must be programmed with the same baud rate as the gray scale data", p12)'
+        T0H:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 80,
+            max_ns: null,
+            printed: 'Logic 0 = high for TW, then low to the end of Tbit; TW 0.08 us (min) to 0.25xTbit (max)',
+          }
+        T0L: null
+        T1H: null
+        T1L:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 80,
+            max_ns: null,
+            printed: 'Logic 1 = high, then low for TW at the end of Tbit; TW 0.08 us to 0.25xTbit',
+          }
+        period:
+          {
+            ns: null,
+            min_ns: 1000,
+            max_ns: 10000,
+            printed: 'Logic 0/1 bit width SDI↑-SDI↑( logic 0/1) Tbit 1 (min) 10 (max) us',
+          }
+        reset:
+          {
+            min_ns: 750000,
+            typ_ns: null,
+            max_ns: null,
+            level: low,
+            printed: 'Before sending package, SDI must be pulled-low for longer than 750µs.',
+          }
+        gap:
+          {
+            printed: 'Symbol gap width SDI↑-SDI↑(gap) Tgap = 2xTbit; drawn as high, then low for TW at the end',
+          }
+        derived: 'Logic 0 low time = Tbit − TW and logic 1 high time = Tbit − TW (not printed). TW max is 0.25×Tbit, so at Tbit = 1 µs the short pulse is 80–250 ns.'
+        doc: mbi6120-v1.00
+        page: 10
+        quote: 'Control Interface: Single-wire Interface | MBI6120 adopts the single-wire interface and samples the data (SDI) between two rising edges of SDI, typical of RZ code protocols. The following waveforms illustrate the definitions logic 0, 1, and a symbol "gap". | Logic 0/1 bit width SDI↑-SDI↑( logic 0/1) Tbit 1 10 us | Minimum pulsewidth SDI TW 0.08 0.25xTbit us | Symbol gap width SDI↑-SDI↑(gap) Tgap Tgap = 2xTbit us'
+        other_quotes:
+          - {
+              page: 8,
+              quote: 'SDO Period SDO rising to rising period tWSDO 480 (min) ns | Internal Oscillator FOSC 50 63 75 MHz',
+            }
+          - {
+              page: 7,
+              quote: 'SDI Input Voltage VSDI 3.0 - 5.5 V | SDI Input Threshold "H" level VIH 2.2 V min, "L" level VIL 0.8 V max | Pull-down Resistor RIN_SDI 45 65 85 KΩ',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 12
+      channels: 3
+      wire_order: 'Packet: header, then IC N data first … IC1 data last; each IC: OUTA[11:0], OUTB[11:0], OUTC[11:0] (MSB first), then a gap'
+      pixel_bits: 38
+      extra: 'Header (36 logic bits + gap): H1 = 12 × 1 (data-rate detection), CLK 4 bits ([23:22] reserved, [21:20] GCLK 5.2 MHz / 2.6 / 1.3 / 650 kHz), CMD 8 bits (0x00 gray scale data, 0x55 software reset, others ignored), NUM 12 bits ([11:10] reserved, [9:0] number of cascaded ICs 1–1023).'
+      start: 'SDI low > 750 µs, then the header'
+      end: 'none; data is addressed by the NUM count "without a latch command"'
+      latch: 'No latch command; the next packet is preceded by > 750 µs low.'
+      doc: mbi6120-v1.00
+      page: 11
+      quote: "The data packet of MBI6120 is composed of two parts: 1. Header: The header defines the cascaded IC numbers and also contains a command to decide the data type. 2. Data: This is the gray scale data for each IC. | Header[35:24] H1: 12-bit strings of '1' as the preamble of the data packet | Header[23:20] CLK: 4-bit GCLK selector | Header[19:12] CMD: 8-bit command | Header[11:0] NUM: 12-bit number of cascaded devices | gap: a symbol defined in the previous page | As for the sequence of the SDI gray scale data, the data of the last IC will be sent first from the controller."
+      other_quotes:
+        - {
+            page: 13,
+            quote: 'The data for each IC contains: 12-bit OUTA gray scale data, 12-bit OUTB gray scale data, 12-bit OUTC gray scale data, a gap symbol [figure: each 12 bit width, MSB first; gap 2 bit width]',
+          }
+        - {
+            page: 10,
+            quote: 'MBI6120 provides a single-wire transmission interface to address the data without a latch command. … Before sending package, SDI must be pulled-low for longer than 750µs.',
+          }
+        - {
+            page: 12,
+            quote: "The maximum allowable cascaded IC's for MBI6120 is 1023, and therefore it takes 10 bits of corresponding registers Header[9:0] (NUM) for properly addressing the input gray scale data to the IC's.",
+          }
+    forwarding:
+      text: 'Data regenerated on SDO ("serial data signal regeneration"); the sheet does not describe how each IC picks its 38-bit block beyond the reversed order and the NUM count.'
+      doc: mbi6120-v1.00
+      page: 1
+      quote: 'MBI6120 features a one-wire transmission interface to make cluster-to-cluster connection much easier by eliminating the global clock signal. To improve the transmission quality, MBI6120 provides a unique protocol (patent pending) and serial data signal regeneration. MBI6120 is also featured by auto-synchronization.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'Cascade length: p11 figure "Total N pieces of IC in cascade, N=1~1024" vs p12 "The maximum allowable cascaded IC''s for MBI6120 is 1023" (10-bit NUM, 10''b0000000001~10''b1111111111).'
+      - 'p11 calls Header[11:0] "NUM: 12-bit number of cascaded devices" while the table on the same page marks [11:10] reserved and uses [9:0].'
+    open:
+      - 'How an IC picks its block (count down NUM? keep the last block?) and the forwarding delay: not in the sheet; the application note was not found.'
+      - 'Only a preliminary V1.00 sheet was found; no later revision.'
+
+  # ------------------------------------------------------------------ LPD1886
+  - part: LPD1886
+    entry: pixel-ics/lpd1886
+    maker: 'Insomnia Lighting (www.insomnialighting.com) on every page; the designer is not otherwise named'
+    sourcing: 'Datasheet (DMX4ALL-hosted copy of the Insomnia Lighting sheet). FastLED quoted as an implementation.'
+    documents:
+      - id: lpd1886-insomnia
+        url: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf
+        title: Insomnia Lighting LPD1886 IC Datasheet
+        revision: null
+        date: null
+        language: en
+        notes: '6 pages; PDF metadata created 2013-04-24 (Kingsoft WPS). The application circuit is labelled "LPD1883/1886".'
+      - id: fastled-379b60b
+        url: https://github.com/FastLED/FastLED/blob/379b60be9bd5a54143c4e9f249eefc02aa1df694/src/fl/chipsets/led_timing.h
+        title: 'FastLED src/fl/chipsets/led_timing.h and src/chipsets.h at 379b60be (2026-11-20)'
+        revision: 379b60be9bd5a54143c4e9f249eefc02aa1df694
+        date: '2026-11-20'
+        language: en
+        notes: 'Library source, not a maker document.'
+    line_coding: single-wire
+    idle: low
+    bit_order: null
+    rates:
+      - name: '1.25 MHz recommended (0.1–1.6 MHz)'
+        select: null
+        T0H:
+          {
+            ns: 200,
+            tol_ns: null,
+            min_ns: 150,
+            max_ns: 280,
+            printed: '150 (MIN) 280 (MAX) 200 (recommended) ns',
+          }
+        T0L: { ns: 600, tol_ns: null, min_ns: 500, max_ns: 10000, printed: '500 / 10000 / 600 ns' }
+        T1H: { ns: 600, tol_ns: null, min_ns: 450, max_ns: 9000, printed: '450 / 9000 / 600 ns' }
+        T1L: { ns: 200, tol_ns: null, min_ns: 150, max_ns: 10000, printed: '150 / 10000 / 200 ns' }
+        period:
+          {
+            ns: 800,
+            min_ns: 800,
+            max_ns: null,
+            printed: 'T0H+T0L, T1H+T1L should be more than 800ns',
+          }
+        reset:
+          {
+            min_ns: 24000,
+            typ_ns: null,
+            max_ns: null,
+            level: low,
+            printed: 'Treset reset code, low level time 24000 (MIN) ns',
+          }
+        latch:
+          {
+            min_ns: 10000,
+            printed: 'each frame data will be locked and saved automatically 10us later after sending out',
+          }
+        doc: lpd1886-insomnia
+        page: 5
+        quote: 'Description MIN, ns MAX, ns recommended value, ns Note | T0H high level time of 0 code 150 280 200 | T0L low level time of 0 code 500 10000 600 | T1H high level time of 1 code 450 9000 600 | T1L low level time of 1 code 150 10000 200 | Treset reset code, low level time 24000 | Note: T0H+T0L, T1H+T1L should be more than 800ns'
+        other_quotes:
+          - {
+              page: 3,
+              quote: 'dat/clk frequency FCLK 1.25 MHz (Recommended Working Parameters) | DATA tempo TDAT 0.1～1.6 MHz | time of convey delay TCAS representative value: 100 ns (ON/OFF Parameters)',
+            }
+          - {
+              page: 1,
+              quote: '3. Single line transmission mode, the speed of DATA is changeable, the MAX is 16MHz.',
+            }
+          - {
+              doc: fastled-379b60b,
+              quote: '/// LPD1886 RGB controller @ 1250 kHz /// Four-phase: TH0=200ns, TH1=600ns, TL0=600ns, TL1=200ns | struct TIMING_LPD1886_1250KHZ { … T1 = 200, T2 = 400, …',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 12
+      channels: 3
+      wire_order: 'Per channel R, G, B; within a channel bits 3,2,1,0 then 11,10,…,4 (figure "36bits data sequence of each chip")'
+      pixel_bits: 36
+      extra: 'GM pin selects 256 levels (floating) or 4096 levels (tied low). The frame for 256-level mode is not described.'
+      start: 'low > 24 µs (reset code) marks the start of a frame'
+      end: null
+      latch: 'automatic, 10 µs of low after the last bit; all chips update together'
+      doc: lpd1886-insomnia
+      page: 4
+      quote: '[figure "36bits data sequence of each chip": R1.3 R1.2 R1.1 R1.0 R1.11 R1.10 R1.9 R1.8 R1.7 R1.6 R1.5 R1.4 / G1.3 … G1.4 / B1.3 … B1.4] | After all the datas are transmitted, input the low levels into the chip, more than 10us. It will touch off the intergrated automatically locking and saving mechanism. … To identify each frame''s beginning status, you need to supply more than 24us low level to the chip, as reset code.'
+      other_quotes:
+        - {
+            page: 3,
+            quote: 'each chip has 3channels output data(1team RGB data). Each channel needs 12levels grandscale, totally 36levels. Each level grandscale data adopts 4bits+8bits format, the high level is in front and the low level behind. When the input data achieves 36levels, it will be retransmitted to the next level circuit via SDO pin.',
+          }
+        - {
+            page: 2,
+            quote: 'GM: 256levels when it hangs in the air; 4096levels when it connects with low electrical levels.',
+          }
+    forwarding:
+      text: 'After 36 bits the chip retransmits the rest from SDO, decoded and regenerated; convey delay 100 ns representative.'
+      doc: lpd1886-insomnia
+      page: 3
+      quote: 'When the input data achieves 36levels, it will be retransmitted to the next level circuit via SDO pin. The retransmitted data are all decoded and regenerated'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'Max data rate: p1 "the MAX is 16MHz" vs p3 "DATA tempo 0.1～1.6 MHz" and p3 "1.6M data can achieve 1778pixels'' control".'
+      - 'Bit order within a channel: p3 "4bits+8bits format, the high level is in front and the low level behind" vs the p4 figure, which sends bits 3..0 before 11..4 (low nibble first).'
+      - 'OUT2 / OUT3 colour: p2 "OUT2, OUT3 … advice to connect with blue and green color light" (order ambiguous); the data figure labels the rows R1, G1, B1.'
+      - 'Implementation: FastLED (379b60be) defines LPD1886Controller1250Khz and LPD1886Controller1250Khz_8bit identically (same timing, no extra bits), i.e. 24 bits per pixel for both — it does not send the 36-bit 4096-level frame.'
+    open:
+      - 'Frame length in 256-level (GM floating) mode: not stated (24 bits is not printed anywhere).'
+
+  # ------------------------------------------------------------------ TLS3001
+  - part: TLS3001
+    entry: pixel-ics/tls3001
+    maker: 'Teralane Semiconductor Inc. (天利半导体有限公司)'
+    sourcing: "Maker datasheets: Chinese V2.0 (has the protocol) and English V2.2 (protocol section missing), both community copies. Implementations: ESPixelStick (whose header comment translates V2.0's protocol), mikbeng/esp32_TLS3001_spi, TimGremalm/TLS3001_LED_ESP32. Advatek / Falcon quoted as controller makers."
+    documents:
+      - id: tls3001-v2.0-cn
+        url: https://raw.githubusercontent.com/TimGremalm/TLS3001_LED_ESP32/de664475644a003fdabe154c10d4f84a5c1fe32a/datasheets/TLS3001_datasheet_V2.0_chinese.pdf
+        title: TLS3001 3 通道LED 恒流驱动芯片（V2.0）
+        revision: V2.0
+        date: null
+        language: zh
+        notes: '16 pages; PDF created 2010-01-22. The same V2.0 text ships in ESPixelStick SupportingDocs/TLS3001_Chinese.pdf.'
+      - id: tls3001-v2.2-en
+        url: https://raw.githubusercontent.com/TimGremalm/TLS3001_LED_ESP32/de664475644a003fdabe154c10d4f84a5c1fe32a/datasheets/TLS3001_datasheet_V2.2_english_missingprotocol.pdf
+        title: TLS3001 3-channel Constant Current LED Driver V2.2
+        revision: V2.2
+        date: null
+        language: en
+        notes: '14 pages; PDF created 2010-11-25 ("Microsoft Word - TLS3001_V2 e.doc"). https://raw.githubusercontent.com/mikbeng/esp32_TLS3001_spi/a48a1f1cead26e8c781c3d06e8260d8d532c0e10/docs/TLS3001%20Datasheet.pdf is a different file with the same text.'
+      - id: espixelstick-7f0d0e9
+        url: https://github.com/forkineye/ESPixelStick/blob/7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4/include/output/OutputTLS3001.hpp
+        title: 'ESPixelStick OutputTLS3001.hpp / src/output/OutputTLS3001Rmt.cpp / include/output/OutputTLS3001Rmt.hpp at 7f0d0e9 (2026-11-11)'
+        revision: 7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4
+        date: '2026-11-11'
+        language: en
+      - id: mikbeng-a48a1f1
+        url: https://github.com/mikbeng/esp32_TLS3001_spi/blob/a48a1f1cead26e8c781c3d06e8260d8d532c0e10/main/TLS3001.h
+        title: 'mikbeng/esp32_TLS3001_spi main/TLS3001.h'
+        revision: a48a1f1cead26e8c781c3d06e8260d8d532c0e10
+        date: null
+        language: en
+      - id: timgremalm-de66447
+        url: https://github.com/TimGremalm/TLS3001_LED_ESP32/blob/de664475644a003fdabe154c10d4f84a5c1fe32a/README.md
+        title: 'TimGremalm/TLS3001_LED_ESP32 README.md and main/tls3001_example.c'
+        revision: de664475644a003fdabe154c10d4f84a5c1fe32a
+        date: null
+        language: en
+      - id: adv-tls3001
+        url: https://www.advateklighting.com/pixel-protocols/tls3001
+        title: 'LED Pixel Protocol TLS3001 (Advatek)'
+        revision: null
+        date: null
+        language: en
+    line_coding: manchester
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: '100 kHz–2 MHz, detected from the sync frame'
+        select: 'The chip measures the baud rate from a sync frame sent after power-up and after each reset frame.'
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period:
+          {
+            ns: null,
+            min_ns: 500,
+            max_ns: 10000,
+            printed: '较宽的数据传送速率范围：100KHz～2MHz (V2.0 p2); 数据时钟频率 FDCLK 0.1～2 MHz (V2.0 p3)',
+          }
+        reset: null
+        coding: 'Manchester: a high-to-low transition is "1", low-to-high is "0" (V2.0 p6 a). ESPixelStick: RmtOneBit = {half bit high, half bit low}, RmtZeroBit = {half low, half high}.'
+        doc: tls3001-v2.0-cn
+        page: 6
+        quote: '数据通讯协议 送给SDI 脚的输入信号必须遵循下列定义： a. 有效输入数据必须为曼彻斯特编码，信号从高到低跳变表示"1"，从低到高跳变表示"0" … f. 数据先发送MSB(最高位) g. SDI 输入脚在空闲状态时，必须保持低电平 h. 同一帧数据发送过程中，必须连续发送，中间不能有中断，发送频率也不能改变。'
+        translation: 'Data protocol. The input to SDI must follow: a. valid data must be Manchester-coded; a high-to-low transition means "1", low-to-high means "0" … f. MSB first. g. SDI must be held low when idle. h. Within one frame data must be sent continuously, without interruption, and the frequency must not change.'
+        other_quotes:
+          - {
+              page: 16,
+              quote: '输入数据的时钟频率须在100KHz～2MHz之间，为了信号能够传输更多的节点，建议数据的发送频率在1M以内 | SDI信号输入引脚的电压最大不能超过3.5V | SDO输出信号高电平为3.3V',
+              translation: 'Input data clock must be 100 kHz–2 MHz; to reach more nodes, send below 1 MHz | SDI input must not exceed 3.5 V | SDO high level is 3.3 V',
+            }
+          - {
+              doc: tls3001-v2.2-en,
+              page: 2,
+              quote: 'Manchester communication interface | 8 bit color depth PWM control | 100KHz~1MHz clock frequency',
+            }
+          - {
+              doc: espixelstick-7f0d0e9,
+              quote: '#define TLS3001_PIXEL_DATA_RATE 1000000.0 // bits /sec | const rmt_item32_t RmtOneBit = {TLS3001_PIXEL_RMT_TICKS_BIT / 2, 1, TLS3001_PIXEL_RMT_TICKS_BIT / 2, 0}; const rmt_item32_t RmtZeroBit = {TLS3001_PIXEL_RMT_TICKS_BIT / 2, 0, TLS3001_PIXEL_RMT_TICKS_BIT / 2, 1};',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 12
+      channels: 3
+      wire_order: 'Data frame header, then chip 1 (the first to receive) … chip n; per chip 0 + OUT1[11:0] + 0 + OUT2[11:0] + 0 + OUT3[11:0]'
+      pixel_bits: 39
+      extra: 'Every frame starts with 15 ones and a 4-bit code. Sync 15''b1…1 + 4''b0001 + 11''b0, then wait > (chips ÷ baud in MHz) × 30 µs. Reset 15''b1…1 + 4''b0100, then wait 1 ms and resend sync. Data 15''b1…1 + 4''b0010 + 39 bits per chip. A reset + sync is to be repeated "after several frames" (p6 c; p8 suggests about every 3 s) to clear accumulated error.'
+      start: 'data header 15 × 1 + 0010'
+      end: null
+      latch: 'Not stated in V2.0. Implementations differ: TimGremalm appends another 19-bit start-of-data header after the pixel data "For applying the data"; ESPixelStick sends nothing after the data and starts the next frame with a header.'
+      doc: tls3001-v2.0-cn
+      page: 6
+      quote: 'b. 在芯片上电后必须先发一次同步帧，以便芯片检测通讯的波特率。同步帧的格式为：15’b111111111111111+4’b0001+11’b00000000000，在发送同步帧后必须延时一段时间再发送数据帧，这样做是为了每个芯片都能准确检测到通讯的波特率，延时时间（us）大于：连接芯片数÷通讯波率(MHz)×30 c. 在发送若干帧数据后，重新发送一次复位帧，等待1ms 之后，再发送一次同步帧，以便芯片消除积累误差，复位帧格式为：15’b111111111111111+4’b0100 d. 数据帧格式为：15’b111111111111111+4’b0010（数据头）+ 第一个芯片39bit 数据 + 第二个芯片39bit 数据 + …… + 第n 个芯片39bit 数据 e. 第一个芯片为最先接收数据的芯片，芯片的数据格式为：1’ b0(标识位) + 12’ bxxxxxxxxxxxx（输出端口1 数据） + 1’ b0(标识位) + 12’ bxxxxxxxxxxxx（输出端口2 数据） + 1’ b0(标识位) + 12’ bxxxxxxxxxxxx（输出端口3 数据），x 为1 或则0'
+      translation: 'b. After power-up a sync frame must be sent first so the chip can detect the baud rate: 15 ones + 0001 + 11 zeros. After it, wait before sending data frames so every chip detects the rate: delay (µs) > number of chips ÷ baud rate (MHz) × 30. c. After a number of data frames, send a reset frame, wait 1 ms, then send a sync frame again to clear accumulated error; reset frame = 15 ones + 0100. d. Data frame = 15 ones + 0010 (header) + 39 bits for chip 1 + 39 bits for chip 2 + … + chip n. e. Chip 1 is the chip that receives data first; per chip: 0 (flag) + 12 bits port 1 + 0 (flag) + 12 bits port 2 + 0 (flag) + 12 bits port 3.'
+      other_quotes:
+        - {
+            page: 7,
+            quote: '基本时序 [figure: SDI 15个1 → 0:1:0:0, 1ms, 15个1 → 0:0:0:1, 11个0 "同步帧+复位帧"; SDI 15个1 → 0:0:1:0, 第一点39bit数据, 第二点39bit数据, 第三点39bit数据 … 第N点39bit数据 "数据帧"]',
+          }
+        - {
+            doc: timgremalm-de66447,
+            quote: '7. Start of data (19 bits, 15 x 0b1, 2 x 0b0, 1 x 0b1 & 1 x 0b0). For applying the data. 8. 0.125ms delay between end of last data and start or reset',
+          }
+    forwarding:
+      text: 'Not described beyond "the first chip is the chip that receives data first" and its own 39-bit slot; the V2.2 English sheet only says SDO goes "to the receiver-end SDI of next driver IC".'
+      doc: tls3001-v2.0-cn
+      page: 6
+      quote: 'e. 第一个芯片为最先接收数据的芯片'
+      translation: 'e. The first chip is the chip that receives data first.'
+    backup_line:
+      pins: 'SOP14 only: SDI1 (3), SDO2 (4), SDI2 (9), SDO1 (10)'
+      behaviour: 'Two complete data paths running in opposite directions (path 1: SDI1 at node 1 → node N → SDO1; path 2: SDI2 at node N → node 1 → SDO2). When both carry valid data the chip uses channel 1; while idle it checks the paths and switches to the other path when it detects a break. Channel 2 must carry the pixel data in reverse order.'
+      doc: tls3001-v2.0-cn
+      page: 7
+      quote: '双通道通讯功能 TLS3001 具备双数据通路通讯功能。当两个通道同时接收到有效数据信息时，芯片会默认选择通道1 数据为有效数据；TLS3001 会在数据通路空闲时，定时检测数据通路状况，一旦检测到数据通路有断路情况，将自动将数据通路切换到另一条数据通路，这样大大提高了系统的可靠性。 [figure: 数据通路1 SDI1 → 节点1 … 节点N → SDO1; 数据通路2 SDI2 → 节点N … 节点1 → SDO2; 通道1数据格式 数据头 数据A 数据B 数据C … 数据Z; 通道2数据格式 数据头 数据Z 数据Y 数据X … 数据A]'
+      translation: 'Dual-channel communication: TLS3001 has two data paths. When both channels receive valid data, the chip uses channel 1; while the path is idle it periodically checks it, and when it detects a break it switches automatically to the other path. [Figure: path 1 from SDI1 through node 1 … node N to SDO1; path 2 from SDI2 through node N … node 1 to SDO2; channel 1 sends header, A, B, C … Z; channel 2 sends header, Z, Y, X … A.]'
+      other_quotes:
+        - {
+            page: 16,
+            quote: '双通道模式下当双通道信号都为有效时，芯片会自动默认通道1 信号为显示信息。第二通道发送的数据顺序应该按像素信息与第一通道的首尾倒置 | SOP14 封装单通道使用模式下，不使用的通道输入端应该接上拉或悬空',
+            translation: "In dual-channel mode, when both signals are valid the chip uses channel 1. Channel 2's pixel order must be the reverse of channel 1's. | With SOP14 in single-channel mode, pull up or float the unused input.",
+          }
+    compatibility_claims: []
+    disagreements:
+      - 'Grey scale: V2.0 p2 "12位PWM灰阶控制" and 12-bit fields in the frame vs V2.2 English p2 "8 bit color depth PWM control" (and its description "Pulse Width Modulation (PWM) control with 8-bit color depth").'
+      - 'Rate: V2.0 p2 / p3 "100KHz～2MHz" vs V2.2 p2 "100KHz~1MHz clock frequency"; V2.2''s own application notice p14 says "100Khz~2MHz".'
+      - 'Sync-frame zeros: datasheet "11’b00000000000" (mikbeng SYNCH_CMD 0x3FFF8800, 30 bits: 15 ones, 0001, 11 zeros) vs ESPixelStick fsm_RMT_state_SendSync "NumberOfZeroBitsToSend = 15".'
+      - 'Speed in implementations: ESPixelStick 1 Mbit/s fixed, resets every 40 frames by default (TLS3001_DEFAULT_FRAMES_BETWEEN_RESETS 40), minimum frame 25 ms; TimGremalm README "The speed of the protocol can be between 100kHz and 1MHz" and an example at 166.7 kHz.'
+      - 'Controller makers: Advatek "Color Resolution 12 Bits", "Data Transfer Rate 500 - 1000kbps", "Redundant Data Line [check] (SOP14)"; ENTTEC''s prose calls it "self-clocking" and "pulse-width encoding" (it is Manchester).'
+    open:
+      - 'No maker-hosted copy of either sheet; both are community copies.'
+      - 'How data is latched (end of frame) is not in the datasheet.'
+
+  # ------------------------------------------------------------------ Adafruit Pixie
+  - part: Adafruit Pixie
+    entry: pixels/adafruit-pixie
+    maker: Adafruit Industries (designed by Ytai Ben-Tsvi)
+    sourcing: "Maker guide (Adafruit learn guide PDF), Adafruit's Arduino library, and the Pixie firmware source in the designer's repository. Advatek / ENTTEC quoted as controller makers."
+    documents:
+      - id: pixie-guide
+        url: https://cdn-learn.adafruit.com/downloads/pdf/pixie-3-watt-smart-chainable-led-pixels.pdf
+        title: Pixie - the 3W Chainable LED Pixel (Adafruit learn guide)
+        revision: null
+        date: null
+        language: en
+        notes: '27 pages; page numbers below are the printed "Page N of 27".'
+      - id: adafruit-pixie-lib
+        url: https://github.com/adafruit/Adafruit_Pixie/blob/dd358f643cb62fd8b1eeee2afd43e6ce6d71f81d/Adafruit_Pixie.cpp
+        title: 'Adafruit_Pixie.cpp / Adafruit_Pixie.h at dd358f6 (2023-10-17)'
+        revision: dd358f643cb62fd8b1eeee2afd43e6ce6d71f81d
+        date: '2023-10-17'
+        language: en
+      - id: pixie-firmware
+        url: https://github.com/ytai/pixie/blob/be774335eced9cdcadfacd4f5b3e55482fe568e4/software/main.c
+        title: 'ytai/pixie software/main.c and software/read.asm at be77433 (2016-04-04)'
+        revision: be774335eced9cdcadfacd4f5b3e55482fe568e4
+        date: '2016-04-04'
+        language: en
+      - id: adv-pixie
+        url: https://www.advateklighting.com/pixel-protocols/adafruit-pixie
+        title: 'LED Pixel Protocol Adafruit Pixie (Advatek)'
+        revision: null
+        date: null
+        language: en
+      - id: enttec-pixie
+        url: https://www.enttec.com/pixel-protocols/Adafruit-Pixie
+        title: 'Adafruit Pixie Pixel Protocol (ENTTEC)'
+        revision: null
+        date: null
+        language: en
+    line_coding: uart
+    idle: high
+    bit_order: lsb-first
+    rates:
+      - name: 115200 baud 8N1
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: { ns: null, printed: '115,200 baud 8N1 (one bit ≈ 8.68 µs, derived)' }
+        reset:
+          {
+            min_ns: 1000000,
+            typ_ns: null,
+            max_ns: null,
+            level: high,
+            printed: '<at least 1ms of silence> (guide p10); firmware LATCH_TIME 30 counts × 32 µs = 960 µs',
+          }
+        doc: pixie-guide
+        page: 5
+        quote: "You'll also need thick wires to power each Pixie and a microcontroller that can send 115,200 baud 8N1 data to the Pixie"
+        other_quotes:
+          - {
+              page: 4,
+              quote: "You send it the color you want to appear at standard 115200 baud (1 byte per color). You can send a longer string of pixel data and it will 'forward' along the messages so you can chain them like a shift register.",
+            }
+          - {
+              page: 7,
+              quote: 'You also have an in and out pin. Each are 5V logic in and out, and receive/transmit data at 115200 baud.',
+            }
+          - {
+              doc: pixie-firmware,
+              quote: 'read.asm: ; Was this a falling edge (start bit)? Otherwise, ignore it. … ; Our first sample takes place 1.5 serial bits from the edge, or 13[us] … ; Repeat 8 times: sample, then wait until a period of 1 serial bit time | main.c: // All outputs but Dout are low. LATA = DOUT_PIN_MASK; // Weak pull-up on Din. WPUA = DIN_PIN_MASK; … r |= ((*p++ >> 5) & 1) << i;',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: "R G B bytes, first Pixie's three bytes first"
+      pixel_bits: 24
+      extra: 'Each byte is a UART character: start bit, 8 data bits LSB first, stop bit (30 bit-times per pixel).'
+      start: null
+      end: null
+      latch: 'line idle (no edges) for ≥1 ms (firmware: 30 × 32 µs = 960 µs) — each Pixie then applies its three bytes'
+      doc: pixie-guide
+      page: 10
+      quote: 'The resulting serial protocol is very simple: the controllers sends a byte-string containing a color value for each LED in the chain as follows: <R1>, <G1>, <B1>, <R2>, <G2>, <B2>, <R3>, <G3>, <B3>, ..., <Rn>, <Gn>, <Bn>, <at least 1ms of silence> Each of <Xi> is a byte representing the brightness of a single color of a single Pixie, where 0 is off, 255 is fully on … <R1>, <G1>, <B1> will determine the color of the Pixie that is the first in the chain, counting from the controller end.'
+      other_quotes:
+        - {
+            doc: adafruit-pixie-lib,
+            quote: 'while (!canShow()) ; // Wait for 1ms elapsed since prior call | stream->write(pixels, n3); | endTime = micros(); // Save EOD time for latch on next call | inline bool canShow() { return (micros() - endTime) > 1000L; } | p[0] = r; p[1] = g; p[2] = b;',
+          }
+        - {
+            doc: pixie-firmware,
+            quote: '// How long of a silence on the line is considered a latch event. // Units are 32[us] per count. #define LATCH_TIME 30',
+          }
+    forwarding:
+      text: 'Consumes the first 3 bytes, then echoes every further edge from Din to Dout (firmware "echo mode": the input bit is shifted to the output pin on each edge interrupt), under 1 µs latency, until 1 ms of silence; then latches.'
+      doc: pixie-guide
+      page: 10
+      quote: 'Each Pixie listens on it Din pin for serial data. It will consume the first 3 bytes it sees and store them. It will then echo any subsequent bytes to its Dout pin (with less than a microsecond latency). It will keep doing so until it detects a 1ms-long silence on Din. Then, it will immediately apply (latch) the color values it got and go back to listening for a new color.'
+      other_quotes:
+        - {
+            doc: pixie-firmware,
+            quote: "decfsz _bit_count, f ; Decrement bit count. If zero, we're in echo mode. … ; echo mode handling. lsrf PORTA, f ; Shift the input bit to the output position.",
+          }
+    backup_line: null
+    timeout:
+      text: 'No refresh for about 2 s → watchdog reset → LED off. Adafruit asks for data at least every second.'
+      doc: pixie-guide
+      page: 12
+      quote: "It will reset the PIC if it doesn't hear from our firmware that everything is fine for about 2 seconds. In turn, our firmware will only pet the watchdog every time it gets a valid color and successfully latches it. So unless we hear from our controller at least every 2 seconds (and in practice, better leave a little margin), the Pixie resets, causing the LED to turn off until told otherwise."
+      other_quotes:
+        - {
+            page: 4,
+            quote: "You do have to send it data every 1 second at a minimum (as a protection against the bright and hot LEDs staying 'stuck on', they will eventually timeout if no updates are received)",
+          }
+    compatibility_claims:
+      - {
+          claim: "Originally, we have designed the Pixie to support the same serial protocol as the WS28x family (aka NeoPixel). It worked. However, this compatibility, which was originally considered a feature has been eventually deemed a drawback … Our solution: stick to the good ol' 115k.2 asynchronous serial.",
+          doc: pixie-guide,
+          page: 9,
+        }
+    disagreements:
+      - 'Latch silence: guide "1ms-long silence" / library "> 1000L" µs vs firmware LATCH_TIME 30 × 32 µs = 960 µs.'
+      - 'PWM: guide p9 "The PWM peripheral runs at about 500Hz" vs firmware comment "32MHz / 2^16 = 488Hz".'
+      - 'Controller makers: Advatek "uses a variant of the standard DMX512 protocol as a single serial line", "Color Types RGB/RGBW", "Output Pixel Voltage 5 - 24V", "Data Transfer Rate 115.2kbps supported"; ENTTEC "single-wire, self-clocking … latches 8-bit colour", "RGBW Yes", "5 - 24V". Adafruit''s guide describes plain 115200-baud async serial with no break or start code, RGB only, and a 5 V module.'
+    open: []

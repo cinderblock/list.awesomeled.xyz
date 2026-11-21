@@ -1,0 +1,1903 @@
+batch: a1-worldsemi
+researched: '2026-11-20'
+# Summary, intersection arithmetic, disagreements and database corrections: a1-worldsemi.md (same folder).
+# Conventions used below:
+# - Every value is copied from the document named in `doc`, page `page`. Ranges are printed as "min~max";
+#   they are stored as min_ns/max_ns. Values printed as typ ± tol are stored as ns + tol_ns.
+# - `also_in` lists other documents that print the identical table (checked line by line).
+# - Page numbers are the PDF page index (1-based), which matches the printed "n / N" on every sheet here.
+# - "derived" marks a value computed from a rule printed in the same document (WS2811 high-speed only).
+# - WorldSemi's current sheets on world-semi.com are image-only PDFs; they were read from page renders.
+parts:
+  # ───────────────────────────────────────────── WS2811 ─────────────────────────────────────────────
+  - part: WS2811
+    entry: pixel-ics/ws2811
+    maker: WorldSemi
+    documents:
+      - id: ws2811-2011
+        url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
+        title: WS2811 Signal line 256 Gray level 3 channal Constant current LED drive IC
+        revision: null
+        date: null # not printed; PDF metadata creationDate 2011-12-31
+        language: en
+        note: 'Identical text at https://www.superlightingled.com/PDF/WS2811.pdf (same 2011-12-31 creation date, Superlighting metadata).'
+      - id: ws2811-v1.5-en
+        url: https://www.world-semi.com/web/userfiles/productfile/WS2811_V1.5_EN.pdf
+        title: WS2811 Signal line 256 Gray level 3 channel Constant current LED driver IC
+        revision: V1.5 (revision log); page footers say V1.4
+        date: '2019-09-20 per this log (the Chinese logs date V1.5 2018-09-20)'
+        language: en
+      - id: ws2811-v2.2-cn
+        url: https://www.lcsc.com/datasheet/C114581.pdf
+        title: WS2811 单线256级灰度三通道恒流LED驱动IC
+        revision: V2.2
+        date: '2024-08-06'
+        language: zh
+        note: 'LCSC wrapper; PDF at https://datasheet.lcsc.com/datasheet/pdf/6d22d3665addacf1ad7c32678eb754ae.pdf?productCode=C114581'
+      - id: ws2811-v1.52-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2811-2.5.pdf
+        title: WS2811 Single wire, 256 grayscale, 3 Channels Constant Current LED Drive IC
+        revision: V1.52 (page footers and log); world-semi.com's datasheet index calls this file version 2.5
+        date: '2026-07-28'
+        language: en
+      - id: ws2811-v2.5-cn
+        url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2811-2.5.pdf
+        title: WS2811 单线256级灰度三通道恒流LED驱动IC
+        revision: V2.5
+        date: '2026-07-28'
+        language: zh
+      - id: advatek-ws2811
+        url: https://www.advateklighting.com/pixel-protocols/ws2811
+        title: 'Advatek: LED Pixel Protocol WS2811 (controller maker page)'
+        revision: null
+        date: null
+        language: en
+      - id: advatek-ws2811-v1-4
+        url: https://www.advateklighting.com/pixel-protocols/ws2811-v1-4
+        title: 'Advatek: LED Pixel Protocol WS2811 V1.4 (controller maker page)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - { doc: ws2811-2011, page: 1, quote: 'IC use single NZR communication mode.' }
+      - {
+          doc: ws2811-v2.2-cn,
+          page: 1,
+          quote: '芯片采用单线归零码的通讯方式 (the chip uses single-wire return-to-zero code communication)',
+        }
+      - { doc: ws2811-v1.52-en, page: 1, quote: 'IC use single single wire RZ protocol.' }
+    idle: low
+    idle_quote: { doc: ws2811-v1.5-en, page: 3, quote: 'RES Frame unit, low voltage time >280µs' }
+    bit_order: msb-first
+    rates:
+      - name: 400kHz low speed (2011 sheet)
+        select: 'SET pin (pin 7) connected to VDD'
+        select_quote:
+          {
+            doc: ws2811-2011,
+            page: 2,
+            quote: '7 SET Set work mode of IC as low speed model(connect VDD) or high speed model(vacant)',
+          }
+        T0H: { ns: 500, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.5 µs ±150ns' }
+        T0L: { ns: 2000, tol_ns: 150, min_ns: null, max_ns: null, printed: '2.0 µs ±150ns' }
+        T1H: { ns: 1200, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.2 µs ±150ns' }
+        T1L: { ns: 1300, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.3 µs ±150ns' }
+        period: null
+        reset: { min_ns: 50000, printed: 'Above 50µs' }
+        doc: ws2811-2011
+        page: 3
+        quote: 'Low Speed mode time / T0H 0 code,high voltage time 0.5 µs ±150ns / T1H 1 code,high voltage time 1.2 µs ±150ns / T0L 0 code,low voltage time 2.0 µs ±150ns / T1L 1 code,low voltage time 1.3 µs ±150ns / RES low voltage time Above 50µs / Note: It is one half of the time when high speed mode(reset time unchanged)'
+        other: 'Switching table, same page: Operation frequency Fosc1 400 KHz, Fosc2 800 KHz; Data transmission rate FMAX min 400 Kbps (Duty ratio50%). Features p1: "Send data at speeds of up to 400 Kbps and 800 Kbps two patterns."'
+      - name: 800kHz high speed (2011 sheet)
+        select: 'SET pin (pin 7) left unconnected ("vacant")'
+        select_quote:
+          {
+            doc: ws2811-2011,
+            page: 2,
+            quote: '7 SET Set work mode of IC as low speed model(connect VDD) or high speed model(vacant)',
+          }
+        T0H:
+          {
+            ns: 250,
+            tol_ns: null,
+            min_ns: null,
+            max_ns: null,
+            printed: 'derived: 0.5 µs ÷ 2; no high-speed table or tolerance is printed',
+          }
+        T0L: { ns: 1000, tol_ns: null, min_ns: null, max_ns: null, printed: 'derived: 2.0 µs ÷ 2' }
+        T1H: { ns: 600, tol_ns: null, min_ns: null, max_ns: null, printed: 'derived: 1.2 µs ÷ 2' }
+        T1L: { ns: 650, tol_ns: null, min_ns: null, max_ns: null, printed: 'derived: 1.3 µs ÷ 2' }
+        period: null
+        reset: { min_ns: 50000, printed: 'Above 50µs ("reset time unchanged")' }
+        doc: ws2811-2011
+        page: 3
+        quote: 'Note: It is one half of the time when high speed mode(reset time unchanged)'
+        other: 'The sheet does not say whether the ±150ns tolerance is also halved. Values here are the low-speed table divided by two, nothing else.'
+      - name: 800kHz (V1.4 / V1.5, 2018-2019; same table in V2.2, 2024)
+        select: null # pin 7 is NC
+        select_quote: { doc: ws2811-v1.5-en, page: 2, quote: 'PIN function ... 7 NC NC' }
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        period: null
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2811-v1.5-en
+        also_in: [ws2811-v2.2-cn]
+        page: 3
+        quote: 'Data Transfer Time / T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~1us / T0L 0 code, low voltage time 580ns~1us / T1L 1 code, low voltage time 580ns~1us / RES Frame unit, low voltage time >280µs'
+        other: 'Same page: Oscillation frequency Fosc 800 KHz; Data transmission rate FMAX min 600 Kbps (Duty ratio 50%). V2.2 (zh, p3) prints the same five rows: "T0H 0码，高电平时间 220ns~380ns ... RES 帧单位，低电平时间 280µs以上".'
+      - name: 800kHz (English V1.52, 2026)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 540, max_ns: 1000, printed: '540ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'TDATA Data Cycle ≥1.25us',
+          }
+        reset: { min_ns: 280000, printed: '>280 µs' }
+        doc: ws2811-v1.52-en
+        page: 4
+        quote: 'Data Transmission Time / T0H 0 code, high level duration 220ns~380ns / T1H 1 code, high level duration 540ns~1µs / T0L 0 code, low-level duration 580ns~1µs / T1L 1 code, low-level duration 580ns~1µs / RES Frame unit, low-level duration >280 µs / TDATA Data Cycle ≥1.25us'
+        other: 'Revision log p9: "V1.51 M T1H timing modification 2025-11-01". Its own data-transmission figure on p4 labels the first RESET ">350µs" and the second ">280µs".'
+      - name: 800kHz (Chinese V2.5, 2026)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        period:
+          { ns: null, tol_ns: null, min_ns: 1250, max_ns: null, printed: 'TDATA 数据周期 ≥1.25us' }
+        reset: { min_ns: 350000, printed: '350µs以上' }
+        doc: ws2811-v2.5-cn
+        page: 3
+        quote: '数据传输时间 / T0H 0码，高电平时间 220ns~380ns / T1H 1码，高电平时间 580ns~1us / T0L 0码，低电平时间 580ns~1us / T1L 1码，低电平时间 580ns~1us / RES 帧单位，低电平时间 350µs以上 (350 µs or more) / TDATA 数据周期 ≥1.25us'
+        other: 'p1: "当接收到350µs以上低电平RESET码后" (after a low RESET code of 350 µs or more). p4 figure: both RESET labels ">350 µs". Log p10: "V2.3 M 修改高电平输入和RES复位时间 20260114" (changed high-level input and RES reset time); "V2.4 M 更正数据传输方法的RESET描述 20260121" (corrected the RESET description of the data transmission method).'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R G B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low for >50 µs (2011), >280 µs (V1.4-V2.2 and English V1.52), ≥350 µs (Chinese V2.5)'
+      doc: ws2811-v1.5-en
+      page: 4
+      quote: 'Composition of 24bit Data / R7 R6 R5 R4 R3 R2 R1 R0 G7 G6 G5 G4 G3 G2 G1 G0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Data transmit in order of RGB, high bit data at first.'
+      also: 'Every revision read prints RGB: 2011 p4 "Note: Follow the order of RGB to sent data and the high bit sent at first."; V2.2 p4 / V2.5 p4 "注：高位先发，按照RGB 的顺序发送数据。"; V1.52 p5 "Note: Data transmit in order of RGB, high bit data at first."'
+    forwarding:
+      text: 'Each IC keeps the first 24 bits and re-shapes and forwards the rest on DO; the signal is 24 bits shorter after every chip. Printed DIN→DOUT transmission delay tPLZ max 300 ns (CL=15pF, RL=10KΩ).'
+      doc: ws2811-2011
+      page: 1
+      quote: 'After the chip power-on reset, the DIN port receivedata from controller, the first IC collect initial 24bit data then sent to the internal data latch, theother data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade IC through the DO port. After transmission for each chip,the signal to reduce 24bit.'
+      delay:
+        {
+          max_ns: 300,
+          doc: ws2811-2011,
+          page: 3,
+          quote: 'Transmission delay time tPLZ CL=15pF,DIN→DOUT,RL=10KΩ 300 ns',
+        }
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'WS2811 V1.4 is the newly revised version of WS2811 , featuring a higher PWM rate and different data timing.',
+          doc: advatek-ws2811-v1-4,
+          page: null,
+          by: controller maker (Advatek),
+        }
+      - {
+          claim: 'Advatek WS2811 page lists PWM Rate 400Hz, Data Transfer Rate 800kbps; WS2811 V1.4 page lists PWM Rate 2000Hz, 800kbps.',
+          doc: advatek-ws2811,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'English V1.52 (2026-07-28, p4) prints T1H 540ns~1µs and RES >280 µs; Chinese V2.5 of the same date (p3) prints T1H 580ns~1us and RES 350µs以上. The English log lists "V1.51 T1H timing modification 2025-11-01"; the Chinese log lists V2.3 "修改高电平输入和RES复位时间" (2026-01-14). The two current sheets disagree on T1H min and on the reset time.'
+      - 'English V1.52 p4: the timing table says RES >280 µs while the data-transmission figure on the same page labels the first RESET ">350µs" (second ">280µs").'
+      - 'Revision dates: English V1.5 log (p8) "V1.5 ... 20190920", "V1.3 ... 20182207" (not a valid date); Chinese V2.2 / V2.5 logs give V1.3 2018-2-7 and V1.5 2018-9-20, and V1.0 20170524 vs English V1.0 20170523, V1.1 20171014 vs 20171009.'
+      - 'V1.5 English p1 "Output port compression 20V." vs its own p2 Absolute Maximum "R/G/B Channel Output Port Withstand Voltage Vout 12 V". (Chinese V2.5 p1 describes "40V高压可编程定电流输出驱动器", 40 V.) Electrical, not wire-level.'
+      - 'V1.5 English p3 lists input-level conditions "DIN, SET" although pin 7 is NC (leftover from the SET-pin sheet).'
+      - 'Terminology: the 2011 and V1.5 English sheets say "single NZR communication mode"; V1.52 English says "single wire RZ protocol"; Chinese sheets say 单线归零码 (return-to-zero). Same waveform drawings in all.'
+    open:
+      - 'Tables between 2011 and V1.4 (e.g. WorldSemi V1.0-V1.3, 2017-2018) not found; the V1.4 log entry says T1L changed on 2018-09-10 but the earlier T1L value is unknown.'
+      - 'FastLED maintainer (https://github.com/FastLED/FastLED/issues/523) recalls an "original" translated Chinese datasheet with low-speed 800 ns high / 1700 ns low for a 0 and 1600 / 900 for a 1. Not verified: no such document found.'
+      - 'The 2011 sheet gives no tolerance for the halved high-speed values.'
+
+  - part: WS2811 V1.4
+    entry: pixel-ics/ws2811-v1-4
+    maker: WorldSemi
+    documents:
+      - id: ws2811-v1.5-en
+        url: https://www.world-semi.com/web/userfiles/productfile/WS2811_V1.5_EN.pdf
+        title: WS2811 Signal line 256 Gray level 3 channel Constant current LED driver IC
+        revision: V1.5 (revision log); page footers say V1.4
+        date: '2019-09-20 per this log'
+        language: en
+      - id: ws2811-v2.2-cn
+        url: https://www.lcsc.com/datasheet/C114581.pdf
+        title: WS2811 单线256级灰度三通道恒流LED驱动IC
+        revision: V2.2
+        date: '2024-08-06'
+        language: zh
+      - id: advatek-ws2811-v1-4
+        url: https://www.advateklighting.com/pixel-protocols/ws2811-v1-4
+        title: 'Advatek: LED Pixel Protocol WS2811 V1.4'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V1.4 / V1.5)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        period: null
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2811-v1.5-en
+        also_in: [ws2811-v2.2-cn]
+        page: 3
+        quote: 'T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~1us / T0L 0 code, low voltage time 580ns~1us / T1L 1 code, low voltage time 580ns~1us / RES Frame unit, low voltage time >280µs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R G B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low for >280 µs'
+      doc: ws2811-v1.5-en
+      page: 4
+      quote: 'Note: Data transmit in order of RGB, high bit data at first.'
+    forwarding:
+      {
+        text: 'Same as WS2811 (24 bits kept, rest re-shaped onto DO).',
+        doc: ws2811-v1.5-en,
+        page: 1,
+        quote: 'the first IC collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade IC through the DO port.',
+      }
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'WS2811 V1.4 is the newly revised version of WS2811 , featuring a higher PWM rate and different data timing.',
+          doc: advatek-ws2811-v1-4,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - '"V1.4" is a datasheet revision, not a part marking: log entry "V1.4 M Logical Input Voltage, T1L timing 20180910" (ws2811-v1.5-en p8). The V1.5 sheet still prints V1.4 in every page footer.'
+    open:
+      - 'See the WS2811 entry: the pre-V1.4 (2017-2018) T1L value is not documented in anything found.'
+
+  # ───────────────────────────────────────────── WS2812 / WS2812B ─────────────────────────────────────────────
+  - part: WS2812 (original 6-pin)
+    entry: pixels/ws2812
+    maker: WorldSemi
+    documents:
+      - id: ws2812-2012
+        url: https://cdn-shop.adafruit.com/datasheets/WS2812.pdf
+        title: WS2812 Intelligent control LED integrated light source
+        revision: null
+        date: null # not printed; PDF metadata creationDate 2012-11-01
+        language: en
+      - id: advatek-ws2812
+        url: https://www.advateklighting.com/pixel-protocols/ws2812
+        title: 'Advatek: LED Pixel Protocol WS2812'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - {
+          doc: ws2812-2012,
+          page: 1,
+          quote: 'The data transfer protocol use single NZR communication mode.',
+        }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        T0L: { ns: 800, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.8us ±150ns' }
+        T1H: { ns: 700, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.7us ±150ns' }
+        T1L: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6us ±150ns' }
+        period: { ns: 1250, tol_ns: 600, min_ns: null, max_ns: null, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { min_ns: 50000, printed: 'Above 50µs' }
+        doc: ws2812-2012
+        page: 4
+        quote: 'Data transfer time( TH+TL=1.25µs±600ns) / T0H 0 code ,high voltage time 0.35us ±150ns / T1H 1 code ,high voltage time 0.7us ±150ns / T0L 0 code , low voltage time 0.8us ±150ns / T1L 1 code ,low voltage time 0.6us ±150ns / RES low voltage time Above 50µs'
+        other: 'p1: "Send data at speeds of 800Kbps." p3: Operation frequency Fosc2 800 KHz; Data transmission rate FMAX min 400 Kbps.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low for ≥50 µs'
+      doc: ws2812-2012
+      page: 5
+      quote: 'G7 G6 G5 G4 G3 G2 G1 G0 R7 R6 R5 R4 R3 R2 R1 R0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Follow the order of GRB to sent data and the high bit sent at first.'
+    forwarding:
+      text: 'First pixel keeps 24 bits, re-shapes the rest onto DO; tPLZ max 300 ns.'
+      doc: ws2812-2012
+      page: 1
+      quote: 'the first pixel collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade pixel through the DO port. After transmission for each pixelthe signal to reduce 24bit.'
+    backup_line: null
+    pins:
+      {
+        doc: ws2812-2012,
+        page: 2,
+        quote: '1 DOUT Control data signal output / 2 DIN Control data signal input / 3 VCC Power supply control circuit / 4 NC / 5 VDD Power supply LED / 6 VSS Ground',
+      }
+    compatibility_claims:
+      - {
+          claim: 'WS2812 ... being the first in the series to offer an integrated LED design.',
+          doc: advatek-ws2812,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'p1 still carries WS2811 text: "When the refresh rate is 30fps, low speed model cascade number are not less than 512 points, high speed mode not less than1024 points." The part has one speed (800Kbps) and no SET pin; p3 lists input conditions "DIN，SET".'
+    open: []
+
+  - part: WS2812B
+    entry: pixels/ws2812
+    maker: WorldSemi
+    documents:
+      - id: ws2812b-2013
+        url: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+        title: WS2812B Intelligent control LED integrated light source
+        revision: null
+        date: null # not printed; PDF metadata creationDate 2013-05-30
+        language: en
+        note: 'Byte-identical copy: https://www.cl.cam.ac.uk/teaching/1516/ECAD+Arch/files/pcb/WS2812B.pdf'
+      - id: ws2812b-2013-superlighting
+        url: https://www.superlightingled.com/PDF/WS2812B%20Datasheet.pdf
+        title: WS2812B Intelligent control LED integrated light source (Superlighting-branded copy)
+        revision: null
+        date: null # PDF metadata creationDate 2013-10-31; no WorldSemi imprint, footer superlightingled.com
+        language: en
+      - id: ws2812b-v1.0-2016
+        url: https://cdn.shopify.com/s/files/1/0174/1800/files/WS2812B-LED-datasheet.pdf
+        title: WORLDSEMI CO.,LIMITED WS2812B Datasheet and Specifications
+        revision: V1.0
+        date: 'Jan,2016 (cover)'
+        language: en
+      - id: ws2812b-2017-03
+        url: https://www.triopak.fi/files/product/Worldsemi/WS2812B.pdf
+        title: WORLDSEMI CO., LIMITED WS2812B Specifications
+        revision: null
+        date: 'Mar-2017 (cover)'
+        language: en
+      - id: ws2812b-v5
+        url: https://www.lcsc.com/datasheet/C2761795.pdf
+        title: 'WS2812B Ver. No.: V5 Intelligent control LED integrated light source'
+        revision: 'V5 (log: "V1.0 N New WS2812B - V5 20190219"; "V5.0 M Power reverse protection circuit, Cautions; No need external capacitor 20190323")'
+        date: '2019-02-19 / 2019-03-23'
+        language: en
+        note: 'Same text in LCSC C114586 (WS2812B-B/W) and https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8880/WS2812B.pdf'
+      - id: ws2812b-v5w
+        url: https://learn.watterott.com/kb/ws281x/WS2812B-v5.pdf
+        title: WS2812B-V5/W Intelligent control LED integrated light source
+        revision: 'V6.1 (log; "V6.0 ... part number is changed to WS2812B-V5/W" 2021/12/2)'
+        date: '2022/9/8'
+        language: en
+      - id: ws2812b-v6-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2812b-v6-1.0.pdf
+        title: WS2812B-V6 Intelligent control LED Integrated light source
+        revision: V1.5 (footer and log; site index says 1.0)
+        date: '2026-07-28 (V1.0 New 2025-09-29)'
+        language: en
+      - id: ws2812b-v6-cn
+        url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2812b-v6-1.0.pdf
+        title: WS2812B-V6 智能外控集成LED光源
+        revision: null
+        date: null
+        language: zh
+      - id: ws2812b-v7-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2812b-v7-1.0.pdf
+        title: WS2812B-V7 Intelligent control LED integrated light source
+        revision: 'footer V1.3; log ends at V1.2'
+        date: '2026-07-24 (log V1.2); V1.0 2025-09-29; V1.1 "Driver IC upgrade, Current change to 16mA" 2026-04-20'
+        language: en
+      - id: ws2812b-v7-cn
+        url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2812b-v7-1.0.pdf
+        title: WS2812B-V7 智能外控集成LED光源
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ws2812b
+        url: https://www.advateklighting.com/pixel-protocols/ws2812b
+        title: 'Advatek: LED Pixel Protocol WS2812B'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - {
+          doc: ws2812b-2013,
+          page: 1,
+          quote: 'The data transfer protocol use single NZR communication mode.',
+        }
+      - {
+          doc: ws2812b-v6-en,
+          page: 1,
+          quote: 'The data transfer protocol use Single-wire RZ protocol.',
+        }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (2013 sheet)
+        select: null
+        T0H: { ns: 400, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.4us ±150ns' }
+        T0L: { ns: 850, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.85us ±150ns' }
+        T1H: { ns: 800, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.8us ±150ns' }
+        T1L: { ns: 450, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.45us ±150ns' }
+        period: { ns: 1250, tol_ns: 600, min_ns: null, max_ns: null, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { min_ns: 50000, printed: 'Above 50µs' }
+        doc: ws2812b-2013
+        page: 3
+        quote: 'Data transfer time( TH+TL=1.25µs±600ns) / T0H 0 code ,high voltage time 0.4us ±150ns / T1H 1 code ,high voltage time 0.8us ±150ns / T0L 0 code , low voltage time 0.85us ±150ns / T1L 1 code ,low voltage time 0.45us ±150ns / RES low voltage time Above 50µs'
+      - name: 800kHz (Superlighting-branded copy, 2013)
+        select: null
+        T0H: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        T0L: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9us ±150ns' }
+        T1H: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9us ±150ns' }
+        T1L: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        period: { ns: 1250, tol_ns: 150, min_ns: null, max_ns: null, printed: 'TH+TL=1.25µs±150ns' }
+        reset: { min_ns: 50000, printed: 'Above 50µs' }
+        doc: ws2812b-2013-superlighting
+        page: 4
+        quote: 'Data transfer time( TH+TL=1.25µs±150ns) / T0H 0 code ,high voltage time 0.35us ±150ns / T1H 1 code ,high voltage time 0.9us ±150ns / T0L 0 code , low voltage time 0.9us ±150ns / T1L 1 code ,low voltage time 0.35us ±150ns / RES low voltage time Above 50µs'
+        other: 'No maker imprint; cannot be tied to a WorldSemi revision. Kept because the table is widely copied.'
+      - name: 800kHz (V1.0, Jan 2016)
+        select: null
+        T0H: { ns: 400, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.4us ±150ns' }
+        T0L: { ns: 850, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.85us ±150ns' }
+        T1H: { ns: 850, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.85us ±150ns' }
+        T1L: { ns: 400, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.4us ±150ns' }
+        period: { ns: 1250, tol_ns: 600, min_ns: null, max_ns: null, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { min_ns: 50000, printed: 'Above 50µs' }
+        doc: ws2812b-v1.0-2016
+        page: 5
+        quote: 'Data transfer time( TH+TL=1.25µs±600ns) / T0H 0 code ,high voltage time 0.4us ±150ns / T1H 1 code ,high voltage time 0.85us ±150ns / T0L 0 code , low voltage time 0.85us ±150ns / T1L 1 code ,low voltage time 0.4us ±150ns / RES low voltage time Above 50µs'
+      - name: 800kHz (Mar-2017)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 750, max_ns: 1600, printed: '750ns~1.6µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 750, max_ns: 1600, printed: '750ns~1.6µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 220, max_ns: 420, printed: '220ns~420ns' }
+        period: { ns: 1250, tol_ns: 600, min_ns: null, max_ns: null, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { min_ns: 300000, printed: '>300µs' }
+        doc: ws2812b-2017-03
+        page: 4
+        quote: 'Data Transfer Time (TH+TL=1.25µs±600ns) / T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 750ns~1.6µs / T0L 0 code, low voltage time 750ns~1.6µs / T1L 1 code, low voltage time 220ns~420ns / RES low voltage time >300µs'
+        other: 'Its own data-transmission figure (p5) still says "reset code >=50us".'
+      - name: 800kHz (V5, 2019; unchanged through V5/W 2022, V6 and V7 2025-2026)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'V6/V7 only: TDATA T0H+T0L、T1H+T1L ≥1.25us',
+          }
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2812b-v5
+        also_in: [ws2812b-v5w, ws2812b-v6-en, ws2812b-v6-cn, ws2812b-v7-en, ws2812b-v7-cn]
+        page: 3
+        quote: 'Data Transfer Time / T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~1µs / T0L 0 code, low voltage time 580ns~1µs / T1L 1 code, low voltage time 580ns~1µs / RES Frame unit, low voltage time >280µs'
+        other: 'V5 p1: "RESET time>280μs , it won''t cause wrong reset while interruption, it supports the lower frequency and inexpensive MCU." V6 English p4 adds "TDATA T0H+T0L、T1H+T1L ≥1.25us"; V6/V7 Chinese p4 "RES 帧单位，低电平时间 280µs 以上"; V6 Chinese "数据周期：T0H+T0L、T1H+T1L≥1.25µs".'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low for >50 µs (2013, 2016), >300 µs (Mar-2017 table), >280 µs (V5 and later)'
+      doc: ws2812b-v5
+      page: 4
+      quote: 'Composition of 24bit Data / G7 G6 G5 G4 G3 G2 G1 G0 R7 R6 R5 R4 R3 R2 R1 R0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Data transmit in order of GRB, high bit data at first.'
+      also: 'GRB in every revision read: 2013 p5, 2016 p7, Mar-2017 p5, V6/V7 p5 ("Note: Data transmit in order of GRB, high bit data at first.").'
+    forwarding:
+      text: 'First pixel keeps 24 bits and forwards the re-shaped remainder on DO; tPLZ max 300 ns.'
+      doc: ws2812b-v5
+      page: 1
+      quote: 'the first pixel collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade pixel through the DO port. After transmission for each pixel, the signal to reduce 24bit.'
+      delay:
+        {
+          max_ns: 300,
+          doc: ws2812b-v5,
+          page: 3,
+          quote: 'Transmission delay time tPLZ —— —— 300 ns CL=15pF, DIN→DOUT,RL=10KΩ',
+        }
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'While very similar to its previous version, WS2812 , WS2812B offers reverse polarity protection on its power input, and also uses a 4-legged 5050 package, rather than 6.',
+          doc: advatek-ws2812b,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'Four different T0H/T1H/T0L/T1L tables carry the WS2812B name: 2013 (0.4/0.8/0.85/0.45 µs ±150 ns), Jan-2016 V1.0 (0.4/0.85/0.85/0.4 µs ±150 ns), Mar-2017 (220-380 / 750-1600 / 750-1600 / 220-420 ns), V5-V7 (220-380 / 580-1000 / 580-1000 / 580-1000 ns). Reset: 50 µs, 50 µs, 300 µs, 280 µs.'
+      - 'The T1L windows of Mar-2017 (220-420 ns) and V5+ (580-1000 ns) do not overlap; neither do Jan-2016 V1.0 (250-550 ns) and V5+.'
+      - 'Mar-2017 sheet: table RES >300µs (p4) but figure "reset code >=50us" (p5).'
+      - 'V5 p2 lists input conditions "DIN，SET" for a 4-pin part with no SET pin.'
+      - 'WS2812B-V7 English: page footers say V1.3, revision log ends at V1.2 (2026-07-24).'
+      - 'V5 log (p8) mixes two products: "V1.0 N New WS2812B - V5 20190219" above "V1.0 N New 20170523".'
+    open:
+      - 'WorldSemi WS2812B revisions V1.1 (2017-10-09) and V1.2 (2018-02-07, "Maximum Ratings, Data Transfer Time") named in the V5 log were not found; the table between Mar-2017 and V5 is undocumented here.'
+      - 'The Superlighting copy (0.35/0.9/0.9/0.35 µs, TH+TL ±150 ns) cannot be tied to a WorldSemi revision.'
+
+  # ───────────────────────────────────────────── WS2813 ─────────────────────────────────────────────
+  - part: WS2813
+    entry: pixels/ws2813
+    maker: WorldSemi
+    documents:
+      - id: ws2813-2016
+        url: https://www.normandled.com/upload/201605/WS2813%20LED%20Datasheet.pdf
+        title: WS2813 Intelligent control integrated LED light source, Dual-signal wires version (Normand-branded)
+        revision: null
+        date: 'April-2016 (cover)'
+        language: en
+        note: 'PDF author "worldsime". Same text with a NEW STAR LED header: https://web.archive.org/web/20220216172054id_/http://newstar-ledstrip.com/product/20171208112004735.pdf (modified 2017-12-07).'
+      - id: ws2813b-b-2025
+        url: https://www.lcsc.com/datasheet/C114592.pdf
+        title: WS2813B-B 智能外控集成LED光源
+        revision: V1.0
+        date: '2025-07-29'
+        language: zh
+      - id: ws2813b-v6-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2813b-v6-1.0.pdf
+        title: WS2813B-V6 Intelligent control LED integrated light source
+        revision: V1.1
+        date: '2026-07-30 (V1.0 "New(Upgrade from WS2813B-V5/W)" 2026-05-27)'
+        language: en
+      - id: ws2813b-v6-cn
+        url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2813b-v6-1.0.pdf
+        title: WS2813B-V6 (Chinese)
+        revision: null
+        date: null
+        language: zh
+        note: 'Read p1 and p6 only (features; same 280µs / dual-signal wording).'
+      - id: ws2813a-v7-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2813a-v7-1.1.pdf
+        title: WS2813A-V7 Intelligent control LED integrated light source
+        revision: V1.0 (footer and log; site index says 1.1)
+        date: '2026-08-27'
+        language: en
+      - id: advatek-ws2813
+        url: https://www.advateklighting.com/pixel-protocols/ws2813
+        title: 'Advatek: LED Pixel Protocol WS2813'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - {
+          doc: ws2813-2016,
+          page: 2,
+          quote: 'The data transfer protocol use single NZR communication mode.',
+        }
+      - {
+          doc: ws2813b-v6-en,
+          page: 1,
+          quote: 'The data transfer protocol use Single-wire RZ protocol.',
+        }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (2016)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 300, max_ns: 450, printed: '300ns~450ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 300, max_ns: 100000, printed: '300ns~100us' }
+        T1H: { ns: null, tol_ns: null, min_ns: 750, max_ns: 1000, printed: '750ns~1000ns' }
+        T1L: { ns: null, tol_ns: null, min_ns: 300, max_ns: 100000, printed: '300ns~100us' }
+        period: { ns: 1250, tol_ns: 300, min_ns: null, max_ns: null, printed: 'TH+TL=1.25µs±300ns' }
+        reset: { min_ns: 300000, printed: '300µs or more' }
+        doc: ws2813-2016
+        page: 5
+        quote: 'Data Transfer Time (TH+TL=1.25µs±300ns) / T0H 0-code, High-level time 300ns~450ns / T1H 1-code, High-level time 750ns~1000ns / T0L 0-code, Low-level time 300ns~100us / T1L 1-code, Low-level time 300ns~100us / RES Frame unit, Low-level time 300µs or more'
+        other: 'p2: "Data transmitting at speeds of up to 800Kbps." and "250us or more of reset time, it won''t cause wrong reset while interruption". p6 figure: "REREST CODE >250us". The ±300 ns period window (950-1550 ns) and the 100 µs low-time maxima are printed together.'
+      - name: 800kHz (WS2813B-B 2025, WS2813B-V6 and WS2813A-V7 2026)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'TDATA T0H+T0L、T1H+T1L ≥1.25µs',
+          }
+        reset: { min_ns: 280000, printed: '> 280µs' }
+        doc: ws2813b-v6-en
+        also_in: [ws2813b-b-2025, ws2813a-v7-en]
+        page: 4
+        quote: 'Data Transfer Time / T0H 0-code, High-level time 220ns~380ns / T1H 1-code, High-level time 580ns~1µs / T0L 0-code, Low-level time 580ns~1µs / T1L 1-code, Low-level time 580ns~1µs / RES Frame unit, Low-level time > 280µs / TDATA T0H+T0L、T1H+T1L ≥1.25µs'
+        other: 'WS2813B-B p3: "T0H 0 码， 高电平时间 220ns~380ns ... RES 帧单位，低电平时间 280µs 以上 / 数据周期：T0H+TOL≥1.25µs ； T1H+T1L≥1.25µs". WS2813B-V6 p4: FMAX min 600 Kbps.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥300 µs (2016 table; 250 µs in its text and figure), >280 µs (2025-2026)'
+      doc: ws2813b-v6-en
+      page: 5
+      quote: 'Composition of 24bit data / G7 G6 G5 G4 G3 G2 G1 G0 R7 R6 R5 R4 R3 R2 R1 R0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Data transmit in order of GRB, high bit data is first.'
+      also: '2016 p6: table drawn "R7 ... R0 G7 ... G0 B7 ... B0" but "Note: Data transmit in order of GRB, high bit data is first."; WS2813B-B p4 "注：高位先发，按照GRB 的顺序发送数据。"'
+    forwarding:
+      text: 'Same as WS2812B: first pixel keeps 24 bits, re-shaped remainder on DO; tPLZ max 300 ns.'
+      doc: ws2813-2016
+      page: 2
+      quote: 'the first pixel collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade pixel through the DO port. After transmission for each pixel, the signal to reduce 24bit.'
+    backup_line:
+      pins: 'DIN (pin 4) + BIN (pin 6); WS2813B-V6 adds BO (pin 1, "Bypass signal output"); 2016 / WS2813B-B / WS2813A-V7 have pin 1 NC'
+      behaviour: 'Each pixel normally takes DIN. BIN of pixel n is fed from the input of pixel n-1 (WS2813A-V7 circuit) or from pixel n-1''s BO pin (WS2813B-V6 circuit). The 2016 text says the chip drops ("phagocytosis of") the first 24 bits arriving on BIN and compares the rest with DIN; if DIN carries nothing it switches to BIN, and (2016) stays on BIN until power-off. Reading of that quote with the drawn wiring: the 24 dropped bits are pixel n-1''s, so pixel n keeps its own colour and only the dead pixel goes dark (the sheets do not say this in so many words). First pixel''s BIN must not float (tie to GND).'
+      doc: ws2813-2016
+      page: 2
+      quote: "The BIN receives the data signal, and then compare the data with the DIN side after phagocytosis of 24bit data, if DIN do NOT receive the signal, then switching to BIN for receiving the input signal, which ensure that any the IC's damage does not affect the signal cascade transmission and make the BIN in state of receiving signal until restart after power-off."
+      also:
+        - {
+            doc: ws2813b-v6-en,
+            page: 6,
+            quote: "1.DIN is the main input signal and BIN is the bypass input signal. Under normal circumstances, the IC extracts signals from the DIN. When one IC among them is damaged, the latter IC extracts the signal from the BIN without affecting the signal transmission of the subsequent ics. 2. For the finished product application, the BIN pin of the first IC can't be left floating. It is recommended to connect it to GND.",
+          }
+        - {
+            doc: ws2813b-v6-en,
+            page: 3,
+            quote: '1 BO Bypass signal output ... 6 BIN Bypass signal input',
+          }
+        - {
+            doc: ws2813b-v6-en,
+            page: 6,
+            quote: 'Typical application circuit: DI→LED1 DI, BI→LED1 BI, LED1 DO→LED2 DI, LED1 BO→LED2 BI ... LEDn DO→DO, LEDn BO→BO (drawn, not text)',
+          }
+        - {
+            doc: ws2813a-v7-en,
+            page: 6,
+            quote: 'Typical application circuit (drawn): pin 1 NC; DI → first DI and second BI; each DO → next DI and the BI after it; same Remark 1/2 text as WS2813B-V6.',
+          }
+        - {
+            doc: ws2813b-b-2025,
+            page: 2,
+            quote: '6 BIN 辅数据输入 辅助数据信号输入脚 (auxiliary data input)',
+          }
+    compatibility_claims:
+      - {
+          claim: 'WS2813 ... the first in the series to offer both a redundant data line and a much higher PWM rate ... There are multiple variants of WS2813, including A, B, C and D. These variants offer different brightness levels',
+          doc: advatek-ws2813,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - '2016 sheet: reset "250us or more" (p2 text) and ">250us" (p6 figure) vs "300µs or more" (p5 table).'
+      - '2016 sheet: 24-bit table drawn R G B (p6) vs note "order of GRB" (p6). All later WS2813B sheets draw and state GRB.'
+      - "WS2813B-V6 (pin 1 = BO, bypass output) and WS2813A-V7 (pin 1 = NC, BIN wired to previous pixel's DI) are two backup wirings under one family name. The V6 sheet does not say whether BO is an internal copy of DIN or a regenerated output."
+      - 'The 2016 timing (T0H 300-450 ns, T1H 750-1000 ns) and the 2025+ timing (T0H 220-380, T1H 580-1000) overlap only for T0H 300-380 and T1H 750-1000 ns.'
+    open:
+      - 'WorldSemi WS2813 tables from 2017-2024 (WS2813B-V5/W era) were not found; WS2813B-V6 says it is an "Upgrade from WS2813B-V5/W".'
+      - 'What BO outputs on WS2813B-V6 (copy of DIN, or regenerated data) is not stated.'
+
+  # ───────────────────────────────────────────── WS2815 ─────────────────────────────────────────────
+  - part: WS2815 / WS2815B-V1
+    entry: pixels/ws2815
+    maker: WorldSemi
+    documents:
+      - id: ws2815-2017
+        url: https://www.normandled.com/upload/201808/WS2815%20LED%20Datasheet.pdf
+        title: WS2815 Intelligent control LED integrated light source (Normand-branded)
+        revision: null
+        date: null # PDF metadata 2017-10-14; author "worldsime"
+        language: en
+        note: 'Same text with NEW STAR header: https://web.archive.org/web/20210226215913id_/http://www.newstar-ledstrip.com/product/20180125101420006.pdf (PDF 2017-06-15).'
+      - id: ws2815b-2018
+        url: https://akizukidenshi.com/goodsaffix/ws2815b.pdf
+        title: WS2815B Intelligent control LED integrated light source
+        revision: null
+        date: null # PDF metadata 2018-11-30, author "worldsime"
+        language: en
+      - id: ws2815b-v1-v2.2-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2815b-v1-v1.pdf
+        title: WS2815B-V1 Intelligent control LED integrated light source
+        revision: V2.2 (log)
+        date: '2023-03-15 (this log; the Chinese log dates V2.2 2022-12-21)'
+        language: en
+        note: 'Text-identical to the LCSC copy https://www.lcsc.com/datasheet/C5446699.pdf'
+      - id: ws2815b-v1-v2.4-cn
+        url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2815b-v1-v2.4.pdf
+        title: WS2815B-V1 智能外控集成LED光源
+        revision: V2.4
+        date: '2025-08-18'
+        language: zh
+      - id: advatek-ws2815
+        url: https://www.advateklighting.com/pixel-protocols/ws2815
+        title: 'Advatek: LED Pixel Protocol WS2815'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - {
+          doc: ws2815-2017,
+          page: 1,
+          quote: 'The data transfer protocol use single NZR communication mode.',
+        }
+      - {
+          doc: ws2815b-v1-v2.4-cn,
+          page: 1,
+          quote: '数据协议采用单线归零码的通讯方式 (single-wire return-to-zero code)',
+        }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (WS2815 2017, WS2815B 2018)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1600, printed: '580ns~1.6µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1600, printed: '580ns~1.6µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 220, max_ns: 420, printed: '220ns~420ns' }
+        period: null
+        reset: { min_ns: 280000, printed: '> 280µs' }
+        doc: ws2815-2017
+        also_in: [ws2815b-2018]
+        page: 3
+        quote: 'Data Transfer Time / T0H 0-code, High-level time 220ns~380ns / T1H 1-code, High-level time 580ns~1.6µs / T0L 0-code, Low-level time 580ns~1.6µs / T1L 1-code, Low-level time 220ns~420ns / RES Frame unit, Low-level time > 280µs'
+        other: 'p1: "Data transmitting at speeds of up to 800Kbps." and "RESET time>280μs".'
+      - name: 800kHz (WS2815B-V1 V2.2 2023 and V2.4 2025)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 900, max_ns: 5000, printed: '900ns~5000ns' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 840, printed: '580ns~840ns' }
+        T1L: { ns: null, tol_ns: null, min_ns: 600, max_ns: 5000, printed: '600ns~5000ns' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'TDATA Data cycling time ≥1.25µs',
+          }
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2815b-v1-v2.2-en
+        also_in: [ws2815b-v1-v2.4-cn]
+        page: 3
+        quote: 'Data Transfer Time / T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~840ns / T0L 0 code, low voltage time 900ns~5000ns / T1L 1 code, low voltage time 600ns~5000ns / RES Frame unit, low voltage time >280µs / TDATA Data cycling time ≥1.25µs'
+        other: 'Log p8: "V2.2 M Timing sequence modified 20230315" (Chinese p8: "V2.2 M 调整时序要求 20221221"). p1: "Send data at speeds of 800Kbps."'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low for >280 µs'
+      doc: ws2815b-v1-v2.2-en
+      page: 4
+      quote: 'Composition of 24bit Data / G7 G6 G5 G4 G3 G2 G1 G0 R7 R6 R5 R4 R3 R2 R1 R0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Data transmit in order of GRB, high bit data at first.'
+      also: '2017 p4: "Note: Data transmit in order of GRB, high bit data is first." Chinese V2.4 p4: "注：高位先发，按照GRB 的顺序发送数据。"'
+    forwarding:
+      text: 'First pixel keeps 24 bits, forwards the re-shaped remainder on DO; tPLZ max 300 ns.'
+      doc: ws2815-2017
+      page: 1
+      quote: 'the first pixel collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade pixel through the DO port.'
+    backup_line:
+      pins: 'DIN (pin 4) + BIN (pin 6) on WS2815 2017; DIN1 (pin 4) + DIN2 (pin 6) on WS2815B-V1'
+      behaviour: "Same as WS2813: DIN is main; if DIN carries nothing, take BIN (2017: and stay on BIN until power-off). Application circuits wire BIN of pixel n to DIN of pixel n-1 and tie the first pixel's BIN to GND."
+      doc: ws2815-2017
+      page: 1
+      quote: "The BIN receives the data signal, and then compare the data with the DIN side after phagocytosis of 24bit data, if DIN do NOT receive the signal, then switching to BIN for receiving the input signal, which ensure that any the IC's damage does not affect the signal cascade transmission and make the BIN in state of receiving signal until restart after power-off."
+      also:
+        - {
+            doc: ws2815-2017,
+            page: 4,
+            quote: 'Typical application circuit (drawn): L1 BI tied to GND; DI → L1 DI and L2 BI; L1 DO → L2 DI and the next BI.',
+          }
+        - {
+            doc: ws2815b-v1-v2.4-cn,
+            page: 4,
+            quote: "1. DIN1 是主输入信号，DIN2 是辅助输入信号。正常情况下，LED 从DIN1 提取信号；当中间某一颗LED 损坏时，后一颗LED 从DIN2 提取信号，不影响后面LED 的信号传输。2. 成品应用时，第一颗LED 的DIN2 引脚不可悬空，建议接GND。 (DIN1 is the main input, DIN2 the auxiliary input. Normally the LED takes DIN1; when an LED in the middle is damaged, the next LED takes DIN2, without affecting transmission to later LEDs. The first LED's DIN2 must not float; tie it to GND.)",
+          }
+        - {
+            doc: ws2815b-v1-v2.2-en,
+            page: 1,
+            quote: 'Realize two-way signal transmission, in the case of damage to a single pixel, it does not affect the display of the overall color.',
+          }
+    twelve_volt:
+      text: '12 V supply straight to the package; logic powered internally. 2017: pin 1 VCC "IC POWER SUPPLY, Suspended or connected with a filter capacitor to GROUND", pin 2 VDD "LED POWER SUPPLY, connect to +12V", VDD +9.5~+13.5 V. WS2815B-V1: pin 1 NC, pin 2 VDD "+12V"; input high level VIH min 2.7 V (English V2.2) / 3.0 V (Chinese V2.4), max 5.7 V.'
+      doc: ws2815-2017
+      page: 2
+      quote: '1 VCC VCC IC POWER SUPPLY, Suspended or connected with a filter capacitor to GROUND / 2 VDD VDD LED POWER SUPPLY, connect to "+12V" ... Power supply voltage VDD +9.5~+13.5 V'
+    compatibility_claims:
+      - {
+          claim: 'It uses 12V as its main power input for each chip, VDD, which is then dropped down to 5V inside each pixel for its logic requirements.',
+          doc: advatek-ws2815,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'Timing changed twice: 2017-2018 (T1H/T0L 580ns~1.6µs, T1L 220~420 ns) → V1.1 2019-05-07 "Brightness, Timing" (table not found) → V2.2 (T1H 580~840, T0L 900~5000, T1L 600~5000 ns).'
+      - 'V2.2 date: English log 2023-03-15, Chinese log 2022-12-21.'
+      - 'English V2.2 p1: feature list "scan frequency is of 2KHz" vs description "Refresh Frequency updates to 4KHz". Chinese V2.4 says 4KHz.'
+      - 'VIH min 2.7 V (English V2.2, p3) vs 3.0 V (Chinese V2.4, p3; log "修改高电平").'
+      - 'Chinese V2.4 p4 24-bit table prints "G1 R0" where G0 belongs (typo); the note says GRB.'
+    open:
+      - 'The WS2815B-V1 table in force 2019-05-07 to 2022/2023 (V1.1-V2.1) was not found.'
+
+  # ───────────────────────────────────────────── WS2818 family ─────────────────────────────────────────────
+  - part: WS2818
+    entry: pixel-ics/ws2818
+    maker: WorldSemi
+    documents:
+      - id: ws2818-sl
+        url: https://www.superlightingled.com/PDF/WS2818.pdf
+        title: WS2818 Single-line 256 Gray-level 3-channal Constant Current LED Driver IC (Superlighting-hosted, footer superlightingled.com)
+        revision: null
+        date: null # PDF creationDate 2016-05-31
+        language: en
+      - id: advatek-ws2818
+        url: https://www.advateklighting.com/pixel-protocols/ws2818
+        title: 'Advatek: LED Pixel Protocol WS2818'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - {
+          doc: ws2818-sl,
+          page: 1,
+          quote: 'WS2818 adopts Single-line Return-to-Zero communication protocol.',
+        }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (table titled "Low Speed Mode Time")
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 480, printed: '220ns~480ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 750, max_ns: 2000, printed: '750ns~2us' }
+        T1H: { ns: null, tol_ns: null, min_ns: 750, max_ns: 2000, printed: '750ns~2us' }
+        T1L: { ns: null, tol_ns: null, min_ns: 220, max_ns: 480, printed: '220ns~480ns' }
+        period: null
+        reset: { min_ns: 300000, printed: '300µs or more' }
+        doc: ws2818-sl
+        page: 3
+        quote: 'Low Speed Mode Time / T0H 0-code, High-level time 220ns~480ns / T1H 1-code, High-level time 750ns~2us / T0L 0-code, Low-level time 750ns~2us / T1L 1-code, Low-level time 220ns~480ns / RES Frame unit, Low-level time 300µs or more'
+        other: 'p1: "Send data at speeds of 800Kbps."; p3: Data Transmission Rate FMAX min 400 Kbps. The heading says "Low Speed Mode" but no speed pin or second table exists.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B (per the note; the bit table is drawn R G B)'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥300 µs'
+      doc: ws2818-sl
+      page: 4
+      quote: 'Composition of 24bit data / R7 R6 R5 R4 R3 R2 R1 R0 G7 G6 G5 G4 G3 G2 G1 G0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Data transmit in order of GRB, high bit data is first.'
+    forwarding:
+      {
+        text: 'First chip keeps 24 bits; data shrinks by 24 bits per chip.',
+        doc: ws2818-sl,
+        page: 1,
+        quote: 'the first chip collects initial 24bit data then sent to the internal data latch ... The data reduced 24bit after transmitted through every pixel.',
+      }
+    backup_line:
+      pins: 'DIN (pin 5) + BIN (pin 7, "Backup Data Input")'
+      behaviour: "The controller may drive either input of the first chip; later chips detect which line carries the first chip's output. When the first chip is fed on BIN, the controller sends 24 more bits than on DIN so both paths address the same number of pixels."
+      doc: ws2818-sl
+      page: 1
+      quote: 'it adopts dual signal transmission, these signals are able to work together without interaction. The user can select the first chip DIN/BIN as the control signal input pin, and the follow-up cascade chips will automatically identify the output signal released by the first chip which not to affect the whole display effect. ... When BIN works as control signal receiving interface, its control data is 24bit more than the DIN interface, so as to ensure that the two ways to control the number of pixels is the same'
+    compatibility_claims:
+      - {
+          claim: 'WS2818 ... the first in the series to support an output voltage of up to 24V',
+          doc: advatek-ws2818,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'p4: bit table drawn R7..R0 G7..G0 B7..B0 but the note says GRB (already in the database discrepancies).'
+      - 'Timing table titled "Low Speed Mode Time" on a single-speed (800Kbps) part.'
+    open:
+      - "No WorldSemi-hosted WS2818 sheet found; this copy carries Superlighting's footer and no revision log."
+
+  - part: WS2818A
+    entry: pixel-ics/ws2818a
+    maker: WorldSemi
+    documents:
+      - id: ws2818a-v1.0
+        url: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf
+        title: WS2818A Single-line 256 Gray-level 3-channel Constant Current LED Driver IC
+        revision: V1.0
+        date: '2017-05-23'
+        language: en
+      - id: advatek-ws2818a
+        url: https://www.advateklighting.com/pixel-protocols/ws2818a
+        title: 'Advatek: LED Pixel Protocol WS2818A'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - {
+          doc: ws2818a-v1.0,
+          page: 1,
+          quote: 'WS2818A adopts Single-line Return-to-Zero communication protocol.',
+        }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1600, printed: '580ns~1.6µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1600, printed: '580ns~1.6µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 220, max_ns: 420, printed: '220ns~420ns' }
+        period: null
+        reset: { min_ns: 280000, printed: '> 280µs' }
+        doc: ws2818a-v1.0
+        page: 3
+        quote: 'Sequence Time / T0H 0-code, High-level time 220ns~380ns / T1H 1-code, High-level time 580ns~1.6µs / T0L 0-code, Low-level time 580ns~1.6µs / T1L 1-code, Low-level time 220ns~420ns / RES Frame unit, Low-level time > 280µs'
+        other: 'p1: "Send data at speeds of 800Kbps."; p3: Data Transmission Rate FMAX min 400 Kbps.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R G B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low >280 µs'
+      doc: ws2818a-v1.0
+      page: 4
+      quote: 'Composition of 24bit data / R7 R6 R5 R4 R3 R2 R1 R0 G7 G6 G5 G4 G3 G2 G1 G0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Data transmit in order of RGB, high bit data is first.'
+    forwarding:
+      {
+        text: 'First chip keeps 24 bits; data shrinks by 24 bits per chip.',
+        doc: ws2818a-v1.0,
+        page: 1,
+        quote: 'the first chip collects initial 24bit data then sent to the internal data latch ... The data reduced 24bit after transmitted through every pixel.',
+      }
+    backup_line:
+      pins: 'DIN (pin 5) + BIN (pin 7)'
+      behaviour: "Same wording as WS2818 (either input of the first chip; BIN path carries 24 extra bits). Application circuit: first chip's BI tied to GND; DI node also feeds the second chip's BI through R4; each DO feeds the next DI (through R3/R2) and the BI after it."
+      doc: ws2818a-v1.0
+      page: 1
+      quote: 'The user can select the first chip DIN/BIN as the control signal input pin, and the follow-up cascade chips will automatically identify the output signal released by the first chip which not to affect the whole display effect. ... When BIN works as control signal receiving interface, its control data is 24bit more than the DIN interface, so as to ensure that the two ways to control the number of pixels is the same'
+      also:
+        - {
+            doc: ws2818a-v1.0,
+            page: 4,
+            quote: 'Typical Application Circuit (drawn): U1 BI (pin 7) to GND; DI → R2 → U1 DI; U1 DI node → R4 → U2 BI.',
+          }
+    compatibility_claims:
+      - {
+          claim: 'WS2818A offers the same functionality as WS2818 , but with slightly different timing, and built only for 5V applications.',
+          doc: advatek-ws2818a,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'WS2818 (GRB note) and WS2818A (RGB note and table) disagree on channel order.'
+    open: []
+
+  - part: WS2818B
+    entry: pixel-ics/ws2818b
+    maker: WorldSemi
+    documents:
+      - id: ws2818b-v1.5-en
+        url: https://www.world-semi.com/web/userfiles/productfile/WS2818B_V1.5_EN.pdf
+        title: WS2818B Signal line 256 Gray level 3 channel Constant current LED driver IC
+        revision: V1.5
+        date: '2022-10-27'
+        language: en
+      - id: ws2818b-cn-v2.0
+        url: https://www.lcsc.com/datasheet/C114582.pdf
+        title: WS2818B 单线256级灰度三通道恒流LED驱动IC
+        revision: 'footers V1.5; log ends "V2.0 M 优化内部芯片 20230923"'
+        date: '2023-09-23'
+        language: zh
+        note: 'Byte-identical to https://atta.szlcsc.com/upload/public/pdf/source/20241202/4A771CD25CA8D056BF075AD1E8527C36.pdf'
+      - id: ws2818b-v2.3-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2818b-2.3.pdf
+        title: WS2818B Single wire, 256 grayscale, 3 Channels Constant Current LED Drive IC
+        revision: V2.3
+        date: '2026-07-14'
+        language: en
+      - id: ws2818b-v2.3-cn
+        url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2818b-2.3.pdf
+        title: WS2818B 单线256级灰度三通道恒流LED驱动IC
+        revision: V2.3
+        date: null
+        language: zh
+    line_coding: single-wire
+    line_coding_quotes:
+      - { doc: ws2818b-v1.5-en, page: 1, quote: 'IC use single NZR communication mode.' }
+      - { doc: ws2818b-v2.3-en, page: 1, quote: 'IC use single single wire RZ protocol.' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V1.5 2022 → V2.3 2026)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'Chinese V2.3 only: TDATA 数据周期 ≥1.25µs (English V2.3 prints "TDATA" with no value)',
+          }
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2818b-v1.5-en
+        also_in: [ws2818b-cn-v2.0, ws2818b-v2.3-en, ws2818b-v2.3-cn]
+        page: 3
+        quote: 'Data Transfer Time / T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~1us / T0L 0 code, low voltage time 580ns~1us / T1L 1 code, low voltage time 580ns~1us / RES Frame unit, low voltage time >280µs'
+        other: 'V1.5 p3: Data transmission rate FMAX min 600 Kbps. Log (V1.5 p7): "V1.2 M Logic input voltage range, T1L time, Modify the description text ... 20180207" — the T1L before 2018-02-07 is not documented here.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R G B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low >280 µs'
+      doc: ws2818b-v1.5-en
+      page: 4
+      quote: 'Composition of 24bit Data / R7 R6 R5 R4 R3 R2 R1 R0 G7 G6 G5 G4 G3 G2 G1 G0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Data transmit in order of RGB, high bit data at first.'
+    forwarding:
+      {
+        text: 'First IC keeps 24 bits, re-shaped remainder on DO; tPLZ max 300 ns.',
+        doc: ws2818b-v1.5-en,
+        page: 1,
+        quote: 'After the chip power-on reset, the DIN1 port receive data from controller, the first IC collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade IC through the DO port.',
+      }
+    backup_line:
+      pins: 'DIN1 (pin 5) + DIN2 (pin 7)'
+      behaviour: 'Breakpoint resume ("断点续传"): one dead chip does not stop the rest. V2.3 application circuits: BI rail → first chip DIN2; DI → first chip DIN1 and second chip DIN2; each DO → next DIN1 and the DIN2 after it. No text describing the switching rule in the English V1.5.'
+      doc: ws2818b-cn-v2.0
+      page: 1
+      quote: '断点续传，在单个芯片损坏的情况下，不影响整体显示效果。 (Breakpoint resume: if a single chip is damaged, the overall display is not affected.)'
+      also:
+        - {
+            doc: ws2818b-v2.3-en,
+            page: 1,
+            quote: 'Single-wire Self-Bypass function,Even if a single chip is damaged, it does not affect the overall display effect.',
+          }
+        - {
+            doc: ws2818b-v1.5-en,
+            page: 2,
+            quote: '5 DIN1 Data 1 input Display data 1 input ... 7 DIN2 Data 2 input Display data 2 input',
+          }
+    compatibility_claims: []
+    disagreements:
+      - 'English V2.3 p4 timing table: "TDATA | Data cycle | TDATA" (the value cell repeats the symbol); Chinese V2.3 p3 gives "≥1.25µs".'
+      - 'Chinese LCSC copy: page footers V1.5 but its log goes to V2.0 (2023-09-23).'
+      - 'English V1.5 p1 still lists "SOP8, CPC8 and FSOP8 package types" although its own log V1.5 says "Remove the CPC8 package" (Chinese log; English V2.3 log p9 same). Not wire-level.'
+    open:
+      - 'WS2818B V1.0-V1.1 (2017) table not found; the V1.2 (2018-02-07) entry changed T1L.'
+
+  # ───────────────────────────────────────────── WS2808 ─────────────────────────────────────────────
+  - part: WS2808
+    entry: pixel-ics/ws2808
+    maker: WorldSemi
+    documents:
+      - id: ws2808-v1.0-cn
+        url: https://www.lcsc.com/datasheet/C22371539.pdf
+        title: WS2808 单线256级灰度三通道恒流LED驱动IC
+        revision: V1.0
+        date: '2022-10-28'
+        language: zh
+      - id: ws2808-v1.1-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2808-v1.1.pdf
+        title: WS2808 Signal line 256 Gray level 3 channel Constant current LED driver IC
+        revision: V1.1
+        date: '2022-12-21'
+        language: en
+      - id: ws2808f-v1.2-szlcsc
+        url: https://atta.szlcsc.com/upload/public/pdf/source/20251204/DA4CE1D18ACFD372B14BFCC64B6F5187.pdf
+        title: WS2808F 单线256级灰度三通道恒流LED驱动IC
+        revision: 'V1.2 (log: "V1.2 M 修改应用电路 20251202")'
+        date: '2025-12-02'
+        language: zh
+      - id: ws2808-v1.2-cn
+        url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2808-1.2.pdf
+        title: WS2808 单线256级灰度三通道恒流LED驱动IC
+        revision: 'V1.2 (log: "V1.2 M 更新logo；增加应用电路 20260716")'
+        date: '2026-07-16'
+        language: zh
+      - id: advatek-ws2808
+        url: https://www.advateklighting.com/pixel-protocols/ws2808
+        title: 'Advatek: LED Pixel Protocol WS2808'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - { doc: ws2808-v1.1-en, page: 1, quote: 'IC use single NZR communication mode.' }
+      - { doc: ws2808-v1.0-cn, page: 1, quote: '芯片采用单线归零码的通讯方式' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V1.0 2022-10-28; also the szlcsc "WS2808F V1.2" of 2025-12-02)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        period:
+          { ns: null, tol_ns: null, min_ns: 1250, max_ns: null, printed: 'T0H+T0L、T1H+T1L≥1.25µs' }
+        reset: { min_ns: 280000, printed: '280µs以上' }
+        doc: ws2808-v1.0-cn
+        also_in: [ws2808f-v1.2-szlcsc]
+        page: 3
+        quote: 'T0H 0码，高电平时间 220ns~380ns / T1H 1码，高电平时间 580ns~1us / T0L 0码，低电平时间 580ns~1us / T1L 1码，低电平时间 580ns~1us / RES 帧单位，低电平时间 280µs以上 / T0H+T0L、T1H+T1L≥1.25µs'
+      - name: 800kHz (English V1.1 2022-12-21; world-semi.com Chinese V1.2 2026-07-16)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 900, max_ns: 5000, printed: '900ns~5000ns' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 840, printed: '580ns~840ns' }
+        T1L: { ns: null, tol_ns: null, min_ns: 600, max_ns: 5000, printed: '600ns~5000ns' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'TDATA Data cycling time ≥1.25µs',
+          }
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2808-v1.1-en
+        also_in: [ws2808-v1.2-cn]
+        page: 3
+        quote: 'Data Transfer Time / T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~840ns / T0L 0 code, low voltage time 900ns~5000ns / T1L 1 code, low voltage time 600ns~5000ns / RES Frame unit, low voltage time >280µs / TDATA Data cycling time ≥1.25µs'
+        other: 'Log p6: "V1.1 M Optimization of Timing Description 20221221". p1: "Send data at speed of 800Kbps."; p3: FMAX min 600 Kbps.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low >280 µs'
+      doc: ws2808-v1.1-en
+      page: 4
+      quote: 'Composition of 24bit Data / G7 G6 G5 G4 G3 G2 G1 R0 R7 R6 R5 R4 R3 R2 R1 R0 B7 B6 B5 B4 B3 B2 B1 B0 / Note: Data transmit in order of GRB, high bit data sent at first.'
+      also: 'V1.0 Chinese p4: "注：高位先发，按照GRB 的顺序发送数据。" (the "G1 R0" slot in the English table is a typo for G0; world-semi Chinese V1.2 p4 has the same typo).'
+    forwarding:
+      {
+        text: 'First IC keeps 24 bits; re-shaped remainder on DO; tPLZ max 300 ns.',
+        doc: ws2808-v1.1-en,
+        page: 1,
+        quote: 'After the chip power-on reset, the DIN1 port receive data from controller, the first IC collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade IC through the DO port.',
+      }
+    backup_line:
+      pins: 'DIN1 (pin 5, main) + DIN2 (pin 7, backup)'
+      behaviour: "DI main, BI auxiliary; normally DI; if a middle LED is damaged the next LED takes BI. First LED's BI must not float; tie to GND."
+      doc: ws2808-v1.2-cn
+      page: 4
+      quote: "1. DI 是主输入信号，BI 是辅助输入信号。正常情况下，LED 从DI 提取信号；当中间某一颗LED 损坏时，后一颗LED 从BI 提取信号，不影响后面LED 的信号传输。2. 成品应用时，第一颗LED 的BI 引脚不可悬空，建议接GND。 (DI is the main input, BI the auxiliary input. Normally the LED takes DI; when an LED in the middle fails, the next LED takes BI, without affecting later LEDs. The first LED's BI must not float; tie it to GND.)"
+      also:
+        - {
+            doc: ws2808-v1.1-en,
+            page: 1,
+            quote: 'With the funtion of the dual signal input, even if one IC is damaged, the rest of ICs can work normally.',
+          }
+        - {
+            doc: ws2808-v1.1-en,
+            page: 2,
+            quote: '5 DIN1 Data-1 input Control data signal input ... 7 DIN2 Data-2 input backup data signal input',
+          }
+        - {
+            doc: ws2808-v1.0-cn,
+            page: 1,
+            quote: '具备断点续传功能，即使一颗IC损坏其余IC也能正常工作。 (breakpoint resume: the other ICs keep working if one is damaged)',
+          }
+    compatibility_claims:
+      - {
+          claim: 'Advatek WS2808 page: "The control circuit and LEDs are integrated in a 5050 SMD package" (WorldSemi sells WS2808 as an SOP8/FSOP8 driver IC).',
+          doc: advatek-ws2808,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'Two documents both labelled V1.2 print different timing: the szlcsc "WS2808F" V1.2 (2025-12-02) keeps the V1.0 table (T1H/T0L/T1L 580ns~1us), while the world-semi.com V1.2 (2026-07-16) prints T1H 580~840, T0L 900~5000, T1L 600~5000 ns like English V1.1. The two logs also differ (V1.2 "修改应用电路" by 何文镔 vs "更新logo；增加应用电路" by 陈永昭).'
+      - 'English V1.1 p1 calls the part "WS28108" once (typo).'
+    open: []
+
+  # ───────────────────────────────────────────── WS2851 ─────────────────────────────────────────────
+  - part: WS2851
+    entry: pixels/ws2851
+    maker: WorldSemi
+    documents:
+      - id: ws2851-page
+        url: https://web.archive.org/web/20200920151054/http://www.world-semi.com/Certifications/details-121-4.html
+        title: 'WorldSemi product page "WS2851 LED" (Wayback capture 2020-09-20)'
+        revision: null
+        date: null
+        language: en
+      - id: advatek-ws2851
+        url: https://www.advateklighting.com/pixel-protocols/ws2851
+        title: 'Advatek: LED Pixel Protocol WS2851'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - {
+          doc: ws2851-page,
+          page: null,
+          quote: 'With WS2811 IC and RGB chip integrated in a 5050 component, the WS2811 IC not only controls the integrated RGB5050, but also controls the external RGB5050 LEDs.',
+        }
+      - {
+          doc: advatek-ws2851,
+          page: null,
+          quote: 'Clock Type Data-Only ... Color Resolution 8 Bits ... Color Types RGB ... Data Transfer Rate 800kbps',
+        }
+    idle: null
+    bit_order: null
+    rates: null
+    clock: null
+    frame: null
+    forwarding: null
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'With WS2811 IC and RGB chip integrated in a 5050 component, the WS2811 IC not only controls the integrated RGB5050, but also controls the external RGB5050 LEDs.',
+          doc: ws2851-page,
+          page: null,
+          by: maker,
+        }
+      - {
+          claim: 'Advatek: PWM Rate 400Hz; Redundant Data Line: not offered ("No redundancy in data").',
+          doc: advatek-ws2851,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements: []
+    open:
+      - 'No WS2851 datasheet found. The product page''s "Download PDF document" link (/DownLoadFile/121) has no Wayback capture; LCSC/LEDYi/Superlighting have none.'
+      - "Which WS2811 revision is inside (2011 SET-pin, or V1.4+) is not stated, so timing, reset and channel order are unknown. Advatek's 400 Hz PWM suggests the pre-2018 WS2811, but that is inference."
+
+  # ───────────────────────────────────────────── WS2805 ─────────────────────────────────────────────
+  - part: WS2805
+    entry: pixel-ics/ws2805
+    maker: WorldSemi
+    documents:
+      - id: ws2805-v0.3
+        url: https://www.superlightingled.com/PDF/WS2805-IC-Specification.pdf
+        title: WS2805 (Superlighting machine translation of the WorldSemi V0.3 sheet)
+        revision: V0.3
+        date: '2023-03-24'
+        language: en
+      - id: ws2805-v1.3-en
+        url: https://www.world-semi.com/web/userfiles/productfile/WS2805_V1.3_EN.pdf
+        title: WS2805 Single line 256 Gray level 5-channel Constant current LED driver IC
+        revision: 'V1.3 (log prints "V.3")'
+        date: '2024-09-04'
+        language: en
+        note: 'Byte-identical to the LCSC copy https://www.lcsc.com/datasheet/C5446697.pdf'
+      - id: ws2805-v1.6-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2805-1.6.pdf
+        title: WS2805 Single wire, 256 grayscale, 5 Channels Constant Current LED Drive IC
+        revision: V1.6
+        date: '2026-07-14'
+        language: en
+      - id: advatek-ws2805
+        url: https://www.advateklighting.com/pixel-protocols/ws2805
+        title: 'Advatek: LED Pixel Protocol WS2805'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - { doc: ws2805-v1.3-en, page: 1, quote: 'IC use single NZR communication mode.' }
+      - { doc: ws2805-v1.6-en, page: 1, quote: 'IC use single single wire RZ protocol.' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V0.3 2023 → V1.6 2026)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'TDATA Data cycle (TH+TL) ≥1.25µs',
+          }
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2805-v1.3-en
+        also_in: [ws2805-v0.3, ws2805-v1.6-en]
+        page: 3
+        quote: 'Data Transfer Time / T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~1µs / T0L 0 code, low voltage time 580ns~1µs / T1L 1 code, low voltage time 580ns~1µs / RES Frame unit, low voltage time >280µs / TDATA Data cycle (TH+TL) ≥1.25µs'
+        other: 'p1: "Send data at speed of 800Kbps."; p3: FMAX min 600 Kbps. V1.6 p4 prints the same table ("Data Transmission Time ... >280µs ... Data Cycle(TH+TL) ≥1.25us").'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 5
+      wire_order: 'R G B W1 W2'
+      pixel_bits: 40
+      extra: null
+      start: null
+      end: null
+      latch: 'low >280 µs'
+      doc: ws2805-v1.6-en
+      page: 5
+      quote: '40 bit Data Structure / R7 ... R0 G7 ... G0 ...Continued... B7 ... B0 W17 ... W10 ...Continued... W27 ... W20 / Note: Data transmit in order of RGBW1W2 , high bit data at first.'
+      also: 'V1.3 p4: "Composition of 40bit Data ... Note: Data transmit in order of RGBW1W2, high bit data at first." (prints "R2 R2" for R2 R1).'
+    forwarding:
+      {
+        text: 'First IC keeps 40 bits; the data shrinks by 40 bits per chip.',
+        doc: ws2805-v1.3-en,
+        page: 1,
+        quote: 'After the chip power-on reset, the DIN1 port receive data from controller, the first IC collect initial 40bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade IC through the DO port. After transmission for each chip, the signal to reduce 40bit.',
+      }
+    backup_line:
+      pins: 'DIN (pin 9) + BIN (pin 8); V0.3 called them DIN1 (pin 9) / DIN2 (pin 8)'
+      behaviour: "Same WorldSemi rule as WS2813B-V6: DIN main, BIN bypass; the IC after a damaged IC takes BIN; first IC's BIN to GND."
+      doc: ws2805-v1.6-en
+      page: 6
+      quote: "1.DIN is the main input signal and BIN is the backup input signal. Under normal circumstances, the IC extracts signals from the DIN. When one IC among them is damaged, the latter IC extracts the signal from the BIN without affecting the signal transmission of the subsequent ics. 2. For the finished product application, the BIN pin of the first IC can't be left floating. It is recommended to connect it to GND."
+      also:
+        - {
+            doc: ws2805-v1.3-en,
+            page: 2,
+            quote: '8 BIN Backup data input Backup data input / 9 DIN Data Input Display data input',
+          }
+        - {
+            doc: ws2805-v1.6-en,
+            page: 1,
+            quote: "Single-wire Self-By pass function.One additional signal line is added to realize double signal transmission. Any single pixel failure won't affect the overall display effect.",
+          }
+    compatibility_claims:
+      - {
+          claim: 'It is similar to other other pixels in the WS family but adds the ability to map color control across 5 channels.',
+          doc: advatek-ws2805,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'Descriptions say "the DIN1 port receive data" (V1.3 p1, V1.6 p1) while the pin tables since V1.3 name the pin DIN.'
+      - 'V0.3 log: "V0.2 M Parameters updated, renamed WS2805 20230322" (the earlier name is not given).'
+    open: []
+
+  # ───────────────────────────────────────────── WS2814 ─────────────────────────────────────────────
+  - part: WS2814 (SOP12, dual input)
+    entry: pixel-ics/ws2814
+    maker: WorldSemi
+    documents:
+      - id: ws2814-v1.4
+        url: https://media.ledyi.com/ws2814-datasheet_2b10ca91206f21ee684c6d907b6ef50d26bc74be422a289c596752b36ad6c1cc.pdf
+        title: WS2814 Single line 256 Gray level 4-channel Dual-Input Constant current LED driver IC
+        revision: V1.4
+        date: '2022-07-26'
+        language: en
+        note: 'Same text in https://www.superlightingled.com/PDF/SPEC/WS2814-RGBW-Datasheet.pdf'
+      - id: advatek-ws2814
+        url: https://www.advateklighting.com/pixel-protocols/ws2814
+        title: 'Advatek: LED Pixel Protocol WS2814'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - { doc: ws2814-v1.4, page: 1, quote: 'IC use single NZR communication mode.' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'Data Cycle T0H+T0L, T1H+T1L≥1.25µs',
+          }
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2814-v1.4
+        page: 3
+        quote: 'Data Transfer Time / T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~1µs / T0L 0 code, low voltage time 580ns~1µs / T1L 1 code, low voltage time 580ns~1µs / RES Frame unit, low voltage time >280µs / Data Cycle T0H+T0L, T1H+T1L≥1.25µs'
+        other: 'p1: "Send data at speed of 800Kbps."; p3: FMAX min 600 Kbps.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'R G B W'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'low >280 µs'
+      doc: ws2814-v1.4
+      page: 4
+      quote: 'Composition of 32bit Data / R7 ... R0 G7 ... G0 B7 ... B0 W7 ... W0 / Note: Data transmit in order of RGBW, high bit data at first.'
+    forwarding:
+      {
+        text: 'First IC keeps 32 bits; data shrinks by 32 bits per chip.',
+        doc: ws2814-v1.4,
+        page: 1,
+        quote: 'the first IC collect initial 32bit data then sent to the internal data latch ... After transmission for each chip, the signal to reduce 32bit.',
+      }
+    backup_line:
+      pins: 'DIN1 (pin 1) + DIN2 (pin 6, "Auxiliary data input")'
+      behaviour: 'Not described in text beyond the pin names and the "Dual-Input" title; no switching rule printed in V1.4.'
+      doc: ws2814-v1.4
+      page: 2
+      quote: '1 DIN1 Data1 Input Display data 1 input ... 6 DIN2 Auxiliary data input Display data 2 input'
+    compatibility_claims:
+      - {
+          claim: 'WS2814 ... the first in the series to offer an RGBW design ... SOP12 package ... Redundant Data Line',
+          doc: advatek-ws2814,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'WS2814 (SOP12) sends R G B W; WS2814A / WS2814B / WS2814F send W R G B (see next part). Same family name, different wire order.'
+    open:
+      - 'The DIN1/DIN2 switching rule for the SOP12 part is not printed.'
+
+  - part: WS2814A / WS2814B / WS2814F
+    entry: pixel-ics/ws2814
+    maker: WorldSemi
+    documents:
+      - id: ws2814f-v1.1-cn
+        url: https://www.lcsc.com/datasheet/C5446694.pdf
+        title: WS2814F 单线256级灰度四通道恒流LED驱动IC
+        revision: V1.1
+        date: '2023-03-28'
+        language: zh
+      - id: ws2814a-v2.1-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2814a-2.1.pdf
+        title: WS2814A Single wire, 256 grayscale, 4 Channels Constant Current LED Drive IC
+        revision: V2.1
+        date: null
+        language: en
+      - id: ws2814b-v1.3-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2814b-1.3.pdf
+        title: WS2814B Single wire, 256 grayscale, 4 Channels Constant Current LED Drive IC
+        revision: V1.3
+        date: '2026-07-14 (V1.0 2023-07-18)'
+        language: en
+      - id: ws2814f-v2.1-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2814f-2.1.pdf
+        title: WS2814F Single wire, 256 grayscale, 4 Channels Constant Current LED Drive IC
+        revision: V2.1
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - { doc: ws2814f-v1.1-cn, page: 1, quote: '数据协议采用单线归零码的通讯方式' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (WS2814F V1.1 2023; WS2814B V1.3 and WS2814F V2.1, 2026)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        period:
+          { ns: null, tol_ns: null, min_ns: 1250, max_ns: null, printed: 'TDATA 数据周期 ≥1.25us' }
+        reset: { min_ns: 280000, printed: '280µs以上' }
+        doc: ws2814f-v1.1-cn
+        also_in: [ws2814b-v1.3-en, ws2814f-v2.1-en]
+        page: 3
+        quote: 'T0H 0码，高电平时间 220ns~380ns / T1H 1码，高电平时间 580ns~1µs / T0L 0码，低电平时间 580ns~1µs / T1L 1码，低电平时间 580ns~1µs / RES 帧单位，低电平时间 280µs以上 / TDATA 数据周期 ≥1.25us'
+        other: 'WS2814B V1.3 p4 and WS2814F V2.1 p3 print the same rows in English with RES ">280 µs" and TDATA "≥1.25us".'
+      - name: 800kHz (WS2814A V2.1)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'TDATA Data Cycle ≥1.25us',
+          }
+        reset: { min_ns: 350000, printed: '>350 µs' }
+        doc: ws2814a-v2.1-en
+        page: 3
+        quote: 'Data Transmission Time / T0H 0 code, high level duration 220ns~380ns / T1H 1 code, high level duration 580ns~1us / T0L 0 code, low-level duration 580ns~1us / T1L 1 code, low-level duration 580ns~1us / RES Frame unit, low-level duration >350 µs / TDATA Data Cycle ≥1.25us'
+        other: 'Its own p4 figure labels RESET ">280µs".'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'W R G B'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'low >280 µs (WS2814B/F), >350 µs (WS2814A V2.1 table)'
+      doc: ws2814f-v1.1-cn
+      page: 4
+      quote: '32bit数据结构 / W7 ... W0 R7 ... R0 G7 ... G0 B7 ... B0 / 注：高位先发，按照WRGB 的顺序发送数据。 (MSB first, data sent in WRGB order)'
+      also: 'WS2814A V2.1 p4, WS2814B V1.3 p5, WS2814F V2.1 p4: "32bit Data Structure W7 ... W0 R7 ... R0 G7 ... G0 B7 ... B0 / Note: Data transmit in order of WRGB, high bit data at first."'
+    forwarding:
+      {
+        text: 'First IC keeps 32 bits; data shrinks by 32 bits per chip.',
+        doc: ws2814f-v1.1-cn,
+        page: 1,
+        quote: '首先送过来的32bit 数据被第一个芯片提取后 ... 每经过一个像素点的传输，信号减少32bit。',
+      }
+    backup_line:
+      pins: 'WS2814B only: DIN (pin 8) + BIN (pin 9). WS2814A and WS2814F: single DIN.'
+      behaviour: "WS2814B: DIN main, BIN backup; the IC after a damaged IC takes BIN; first IC's BIN to GND."
+      doc: ws2814b-v1.3-en
+      page: 6
+      quote: "1.DIN is the main input signal and BIN is the backup input signal. Under normal circumstances, the IC extracts signals from the DIN. When one IC among them is damaged, the latter IC extracts the signal from the BIN without affecting the signal transmission of the subsequent ics. 2. For the finished product application, the BIN pin of the first IC can't be left floating. It is recommended to connect it to GND."
+    compatibility_claims: []
+    disagreements:
+      - 'WS2814A V2.1: RES >350 µs in the table (p3) vs ">280µs" in the figure (p4); WS2814B V1.3 and WS2814F V2.1 say >280 µs.'
+      - 'WS2814F V2.1 p2 pin table: pin 7 VDD described as "Backup signal input / Backup signal input" (wrong row text; WS2814F has no backup input).'
+    open:
+      - 'WS2814A revision dates not read (log page not opened).'
+
+  # ───────────────────────────────────────────── WS2815B-RGBW ─────────────────────────────────────────────
+  - part: WS2815B-RGBW
+    entry: pixels/ws2815-rgbw
+    maker: WorldSemi
+    documents:
+      - id: ws2815b-rgbw-v0.1-cn
+        url: https://www.lcsc.com/datasheet/C19188610.pdf
+        title: WS2815B-RGBW 智能外控集成LED光源
+        revision: V0.1
+        date: '2023-03-21'
+        language: zh
+        note: 'PDF at https://datasheet.lcsc.com/datasheet/pdf/49a37bdac5d2d8ee03c993e3239b63f2.pdf?productCode=C19188610'
+      - id: ws2815b-rgbw-v1-v1.3-en
+        url: https://www.world-semi.com/downloads/datasheets/en/ws2815b-rgbw-v1-1.0.pdf
+        title: WS2815B-RGBW-V1 Intelligent control LED integrated light source
+        revision: 'V1.3 (log: "Change P/N to WS2815B-RGBW-V1")'
+        date: '2026-08-28 (V1.0 2026-03-31)'
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - { doc: ws2815b-rgbw-v0.1-cn, page: 1, quote: '数据协议采用单线归零码的通讯方式' }
+      - { doc: ws2815b-rgbw-v1-v1.3-en, page: 1, quote: 'IC use single wire RZ protocol.' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V0.1 2023 and V1.3 2026)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 900, max_ns: 5000, printed: '900ns~5000ns' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 840, printed: '580ns~840ns' }
+        T1L: { ns: null, tol_ns: null, min_ns: 600, max_ns: 5000, printed: '600ns~5000ns' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'TDATA 数据周期(TH+TL) ≥1.25us',
+          }
+        reset: { min_ns: 280000, printed: '280µs 以上' }
+        doc: ws2815b-rgbw-v0.1-cn
+        also_in: [ws2815b-rgbw-v1-v1.3-en]
+        page: 3
+        quote: 'T0H 0 码，高电平时间 220ns~380ns / T1H 1 码，高电平时间 580ns~840ns / T0L 0 码，低电平时间 900ns~5000ns / T1L 1 码，低电平时间 600ns~5000ns / RES 帧单位，低电平时间 280µs 以上 / TDATA 数据周期(TH+TL) ≥1.25us'
+        other: 'V1.3 English p4 prints the same rows ("RES Frame unit, Low-level time > 280µs / TDATA Data cycle(TH+TL) ≥1.25µs"). p1: "数据发送速度可达800Kbps".'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'G R B W'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'low >280 µs'
+      doc: ws2815b-rgbw-v0.1-cn
+      page: 4
+      quote: '32bit 数据结构 / G7 ... G0 R7 ... R0 B7 ... B0 W7 ... W0 / 注：高位先发，按照GRBW 的顺序发送数据。'
+      also: 'V1.3 English p5: "Composition of 32bit data ... Note: Data transmit in order of GRBW, high bit data is first." (its W bits are labelled W1..W8 instead of W7..W0).'
+    forwarding:
+      {
+        text: 'First pixel keeps 32 bits; data shrinks by 32 bits per pixel.',
+        doc: ws2815b-rgbw-v0.1-cn,
+        page: 1,
+        quote: '首先送过来的32bit数据被第一个像素点提取后 ... 每经过一个像素点的传输，信号减少32bit。',
+      }
+    backup_line:
+      pins: 'V0.1: DIN1 (pin 4), DIN2 (pin 6), DOUT1 (pin 3), DOUT2 (pin 1). V1.3: DIN (pin 3), BIN (pin 2), DO (pin 6), pin 5 NC.'
+      behaviour: 'V1.3 application circuit: BI rail → first BI; DI → first DI and the second pixel''s BI; label "To next BIN". V0.1 gives a second output pin (DOUT2) but no wiring text.'
+      doc: ws2815b-rgbw-v1-v1.3-en
+      page: 1
+      quote: "Single-wire Self-By pass function.One additional signal line is added to realize double signal transmission signal break-point continuous transmission. Any single pixel failure won't affect the overall display effect."
+      also:
+        - {
+            doc: ws2815b-rgbw-v0.1-cn,
+            page: 2,
+            quote: '1 DOUT2 数据2 输出 控制数据信号2 输出脚 / 3 DOUT1 数据1 输出 / 4 DIN1 数据1 输入 / 6 DIN2 数据2 输入',
+          }
+        - {
+            doc: ws2815b-rgbw-v1-v1.3-en,
+            page: 3,
+            quote: '1 GND ... 2 BIN BIN Backup Control data signal input / 3 DIN DIN Control data signal input / 4 VDD VDD LED POWER SUPPLY, connect to "+5V" / 5 NC NC Non connected / 6 DO DO Control data signal output',
+          }
+    compatibility_claims: []
+    disagreements:
+      - 'Pinout changed between V0.1 (6 pins incl. DOUT2 second output) and V1.3 (BIN input, no second output).'
+      - 'V1.3 p3: VDD "connect to +5V" on a 12 V part (Absolute max VDD +9.5~+13.5 V on the same page; p1 "The 12V power supply").'
+      - 'V1.3 p5: W bits labelled W1..W8 in the 32-bit table.'
+    open: []
+
+  # ───────────────────────────────────────────── WS2816 ─────────────────────────────────────────────
+  - part: WS2816B / WS2816C
+    entry: pixels/ws2816
+    maker: WorldSemi
+    documents:
+      - id: ws2816b-2020-v1.0-en
+        url: https://www.lcsc.com/datasheet/C4154877.pdf
+        title: WS2816B-2020 16Bit 3 Channel Constant current digital LED breakpoint continuous transmission LED light source
+        revision: V1.0
+        date: '2020-12-06'
+        language: en
+      - id: ws2816b-v1.0-cn
+        url: https://www.lcsc.com/datasheet/C22371534.pdf
+        title: WS2816B 16Bit 3通道恒流数字LED光源 (5050)
+        revision: V1.0
+        date: '2022-04-26'
+        language: zh
+      - id: ws2816c-2121-v1.1-en
+        url: https://www.lcsc.com/datasheet/C965561.pdf
+        title: WS2816C-2121
+        revision: V1.1
+        date: '2020-05-19 (V1.0 2020-01-06)'
+        language: en
+        note: 'Chinese edition with the same log: https://static.chipdip.ru/lib/507/DOC042507830.pdf'
+      - id: advatek-ws2816bc
+        url: https://www.advateklighting.com/pixel-protocols/ws2816b
+        title: 'Advatek: LED Pixel Protocol WS2816B/C'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - {
+          doc: ws2816b-2020-v1.0-en,
+          page: 1,
+          quote: 'The data transfer protocol use single NZR communication mode.',
+        }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: single rate (no bit rate printed)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 200, max_ns: 320, printed: '200ns~320ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: 1200, printed: '800ns~1.2µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 520, max_ns: 800, printed: '520ns~800ns' }
+        T1L: { ns: null, tol_ns: null, min_ns: 480, max_ns: 1000, printed: '480ns-1µs' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: 'Data Cycle：T0H+TOL≥1.25µs ；T1H+T1L≥1.25µs',
+          }
+        reset: { min_ns: 280000, printed: '＞280µs' }
+        doc: ws2816b-2020-v1.0-en
+        also_in: [ws2816b-v1.0-cn, ws2816c-2121-v1.1-en]
+        page: 4
+        quote: 'Data Transfer Time / T0H 0 code, high voltage time 200ns~320ns / T1H 1 code, high voltage time 520ns~800ns / T0L 0 code, low voltage time 800ns~1.2µs / T1L 1 code, low voltage time 480ns-1µs / RES Frame unit, low voltage time ＞280µs / Data Cycle：T0H+TOL≥1.25µs ；T1H+T1L≥1.25µs'
+    clock: null
+    frame:
+      bits_per_channel: 16
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 48
+      extra: 'None on the wire. The chip applies a built-in 4-bit gamma correction ("16bit gray scale,4bit gamma correction inside ,can achieve 20bit display effect").'
+      start: null
+      end: null
+      latch: 'low >280 µs'
+      doc: ws2816b-2020-v1.0-en
+      page: 5
+      quote: 'Composition of 48bit Data / G15 ... G0 …接下… …接上… R15 ... R0 …接下… …接上… B15 ... B0 / Note: Data transmit in order of GRB, high bit data at first.'
+    forwarding:
+      {
+        text: 'First pixel keeps 48 bits; data shrinks by 48 bits per pixel.',
+        doc: ws2816b-2020-v1.0-en,
+        page: 1,
+        quote: 'the first pixel collect initial 48bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade pixel through the DO port. After transmission for each pixel, the signal to reduce 48bit.',
+      }
+    backup_line:
+      pins: 'BI (secondary data in) + DI; outputs DO and BO (secondary data out). Pin numbers differ by package: 2020: 1 BI, 2 DI, 3 VDD, 4 DO, 5 BO, 6 GND; 5050: 1 BO, 2 VCC, 3 DO, 4 DI, 5 GND, 6 BI.'
+      behaviour: '"Dual input and output signals, automatic switching". Circuit: DO(n) → DI(n+1), BO(n) → BI(n+1); first LED''s BI to GND. The switching rule is not printed.'
+      doc: ws2816b-2020-v1.0-en
+      page: 1
+      quote: 'Dual input and output signals, automatic switching to ensure reliability;'
+      also:
+        - {
+            doc: ws2816b-2020-v1.0-en,
+            page: 5,
+            quote: 'Signal wiring diagram: The first LED BI is connected to GND',
+          }
+        - {
+            doc: ws2816b-v1.0-cn,
+            page: 1,
+            quote: '双路输入输出信号，自动切换，确保可靠性； (dual input/output signals, automatic switching)',
+          }
+    compatibility_claims:
+      - {
+          claim: 'All three variants offer 16 bits of color resolution, 10kHz PWM rate , and a backup data line. ... WS2816A offers 4 bits per color of individual current control',
+          doc: advatek-ws2816bc,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'Timing differs from WS2812B: WS2816B/C T0H 200~320, T1H 520~800, T0L 800~1200, T1L 480~1000 ns vs WS2812B-V5 220~380 / 580~1000 / 580~1000 / 580~1000 ns. Overlap: T0H 220~320, T1H 580~800, T0L 800~1000, T1L 580~1000 ns.'
+    open:
+      - 'No bit rate (Kbps) is printed in the WS2816B/C sheets read.'
+      - 'world-semi.com no longer lists WS2816; its site script names the WS2916A/WS2916B product images "ws2816-family/ws2816a-package-family.webp". The WS2916A/B sheets (V1.0, 2026-08-22) do not mention WS2816, so a rename is not documented.'
+
+  - part: WS2816A
+    entry: pixels/ws2816
+    maker: WorldSemi
+    documents:
+      - id: ws2816a-2121-v1-b
+        url: https://datasheet.lcsc.com/datasheet/pdf/6bd8afedb2468ec953fc8ec232561b98.pdf
+        title: WS2816A-2121-V1-B 16Bit 3通道恒流数字LED断点续传LED光源
+        revision: V1.0
+        date: '2023-04-22'
+        language: zh
+      - id: ws2816a-2121-v2-b
+        url: https://www.lcsc.com/datasheet/C42417610.pdf
+        title: WS2816A-2121-V2-B 16Bit 3通道恒流数字LED光源
+        revision: V1.1
+        date: '2025-10-12 (V1.0 2024-09-02)'
+        language: zh
+      - id: advatek-ws2816bc
+        url: https://www.advateklighting.com/pixel-protocols/ws2816b
+        title: 'Advatek: LED Pixel Protocol WS2816B/C (covers A vs B vs C)'
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_quotes:
+      - { doc: ws2816a-2121-v1-b, page: 1, quote: '数据协议采用单线归零码的通讯方式' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: WS2816A-2121-V1-B (2023)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 200, max_ns: 320, printed: '200ns~320ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: 1200, printed: '800ns~1.2µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 520, max_ns: 800, printed: '520ns~800ns' }
+        T1L: { ns: null, tol_ns: null, min_ns: 480, max_ns: 1000, printed: '480ns-1µs' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: '数据周期：T0H+TOL≥1.25µs ；T1H+T1L≥1.25µs',
+          }
+        reset: { min_ns: 280000, printed: '280µs 以上' }
+        doc: ws2816a-2121-v1-b
+        page: 4
+        quote: 'T0H 0 码，高电平时间 200ns~320ns / T1H 1 码，高电平时间 520ns~800ns / T0L 0 码，低电平时间 800ns~1.2µs / T1L 1 码，低电平时间 480ns-1µs / RES 帧单位，低电平时间 280µs 以上 / 数据周期：T0H+TOL≥1.25µs ；T1H+T1L≥1.25µs'
+      - name: WS2816A-2121-V2-B (2024-2025)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        period:
+          {
+            ns: null,
+            tol_ns: null,
+            min_ns: 1250,
+            max_ns: null,
+            printed: '数据周期：T0H+TOL≥1.25µs ；T1H+T1L≥1.25µs',
+          }
+        reset: { min_ns: 280000, printed: '280µs 以上' }
+        doc: ws2816a-2121-v2-b
+        page: 4
+        quote: 'T0H 0 码，高电平时间 220ns~380ns / T1H 1 码，高电平时间 580ns~1µs / T0L 0 码，低电平时间 580ns~1µs / T1L 1 码，低电平时间 580ns~1µs / RES 帧单位，低电平时间 280µs 以上 / 数据周期：T0H+TOL≥1.25µs ；T1H+T1L≥1.25µs'
+    clock: null
+    frame:
+      bits_per_channel: 16
+      channels: 3
+      wire_order: 'header, then per pixel G R B'
+      pixel_bits: 48
+      extra: 'One current-gain word at the start of every frame, ahead of the first pixel''s 48 bits, and re-sent by every chip ahead of the remaining data (D2 starts with the gain word too). V1-B: 15 bits IG4..IG0 IR4..IR0 IB4..IB0 (5 bits per channel, MSB first, G R B). V2-B: 16 bits, the same 15 plus a final 校验码 (check bit) that "may be sent as 0 or 1". Gain is per channel but shared by the whole chain (one word per frame), not per pixel. Gain table (V1-B p6): code 0 → 0.38 mA ... 1F → 12.00 mA.'
+      start: '15-bit (V1-B) or 16-bit (V2-B) current-gain word'
+      end: null
+      latch: 'low >280 µs'
+      doc: ws2816a-2121-v1-b
+      page: 5
+      quote: '数据传输方法 (figure): D1 = 电流增益 15bit | 第1个48bit | 第2个48bit | 第n个48bit, RESET>280us; D2 = 电流增益 15bit | 第2个48bit | 第n个48bit / 15bit 电流增益数据结构，高位先发，按照GRB 顺序发送。 IG4 IG3 IG2 IG1 IG0 IR4 IR3 IR2 IR1 IR0 IB4 IB3 IB2 IB1 IB0 / 48bit RGB 灰度数据结构，高位先发，按照GRB 顺序发送。'
+      also: 'V2-B p5: "16bit 电流增益数据结构，高位先发，按照GRB 顺序发送。 IG4 ... IB0 校验码 / 注：校验码发0或1均可" (the check bit may be 0 or 1); figure D1 = "电流增益 16bit | 第1个48bit ..."'
+    forwarding:
+      {
+        text: 'Each chip keeps the first 48-bit grey word after the gain word and forwards the gain word plus the remaining data.',
+        doc: ws2816a-2121-v1-b,
+        page: 5,
+        quote: 'D2: 电流增益 15bit | 第2个48bit | 第n个48bit (figure); 注：其中D1 为MCU 端发送的数据，D2、Dn 为级联电路自动整形转发的数据。',
+      }
+    backup_line:
+      pins: 'V1-B: 1 BI, 2 DI, 3 VDD, 4 DO, 5 BO, 6 GND. V2-B (from its circuit): 1 DO, 2 BO, 3 VDD, 4 BI, 5 DI, 6 GND.'
+      behaviour: '"Dual input and output signals, automatic switching"; first LED''s BI to GND; BO(n) → BI(n+1).'
+      doc: ws2816a-2121-v1-b
+      page: 1
+      quote: '双路输入输出信号，自动切换，确保可靠性；RGB 通道各具有5bit 电流增益功能。 (dual input/output signals with automatic switching; each RGB channel has a 5-bit current gain)'
+      also:
+        - {
+            doc: ws2816a-2121-v1-b,
+            page: 7,
+            quote: "信号接线示意图：第一颗LED BI 接GND (wiring: first LED's BI to GND)",
+          }
+    compatibility_claims:
+      - {
+          claim: 'WS2816A offers 4 bits per color of individual current control',
+          doc: advatek-ws2816bc,
+          page: null,
+          by: controller maker (Advatek),
+        }
+    disagreements:
+      - 'Advatek says 4 bits per colour; both WorldSemi sheets print 5 gain bits per channel (IG4..IG0 etc.; V2-B "32 级电流增益", 32 levels).'
+      - 'V1-B and V2-B differ on the wire: header 15 vs 16 bits, and timing (V1-B = WS2816B/C table; V2-B = WS2812B-V5 table).'
+    open:
+      - 'A 5050 WS2816A sheet was not found; only the 2121 V1-B / V2-B variants.'

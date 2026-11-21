@@ -1,0 +1,1884 @@
+# Workstream 8 (pixel protocols), research batch c2-clocked: clocked (clock + data) pixel ICs.
+# Brief: plans/pixel-protocols/BRIEF.md. Summary: plans/pixel-protocols/c2-clocked.md (read that first).
+#
+# Conventions used in this file
+# - "page" is the PDF page number (1-based) of the document named in "doc", not the printed page
+#   number, unless a value says "printed page".
+# - All quotes are verbatim, typos included. Chinese quotes carry an English translation next to them.
+# - Clocked parts have no pulse-width bit timing, so "rates" is [] for every part here. Clock limits are
+#   under "clock". Extra keys beyond the brief's schema: clock.recommended_max_hz, clock.min_hz,
+#   clock.min_high_ns, clock.min_low_ns, clock.setup_ns, clock.hold_ns, clock.propagation,
+#   frame.chip_bits, frame.alternatives, pwm_clock (does the controller have to keep clocking?),
+#   idle_note.
+# - Documents whose kind is "library" or "controller" are third-party: quoted as what that party
+#   implements or claims, never as the chip's specification.
+batch: c2-clocked
+researched: '2026-11-20'
+parts:
+  # ------------------------------------------------------------------------------------------------
+  - part: WS2801
+    entry: pixel-ics/ws2801
+    maker: WorldSemi
+    documents:
+      - id: ws2801s-v2.0
+        url: https://www.world-semi.com/web/userfiles/productfile/WS2801S_V2.0_EN.pdf
+        title: 'WS2801S 3-Channel Constant Current LED Driver With Programmable PWM Outputs'
+        revision: 'V2.0 (from the file name; no revision is printed in the document)'
+        date: null
+        language: en
+      - id: ws2801-prelim-v0.3
+        url: https://cdn-shop.adafruit.com/datasheets/WS2801.pdf
+        title: 'Preliminary WS2801 3-Channel Constant Current LED Driver With Programmable PWM Outputs'
+        revision: WS-Preliminary-V0.3
+        date: Nov. 2008
+        language: en
+      - id: advatek-ws2801
+        kind: controller
+        url: https://www.advateklighting.com/pixel-protocols/ws2801
+        title: 'Advatek: LED Pixel Protocol WS2801'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types (table data in the page script, "pixelTypes")'
+        revision: null
+        date: null
+        language: en
+      - id: fastled-ws2801
+        kind: library
+        url: https://github.com/FastLED/FastLED/blob/master/src/fl/chipsets/ws2801.h
+        title: 'FastLED src/fl/chipsets/ws2801.h (master)'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: low
+    idle_note: 'Clock rests low between frames: "CLK pin keeps low more than 500uS" (ws2801s-v2.0 p14); Fig 10 draws CKI and DAI "Low" before and after the frame (p15).'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 25000000
+      recommended_max_hz: null
+      min_hz: null
+      min_high_ns: null
+      min_low_ns: null
+      setup_ns: null
+      hold_ns: null
+      sample_edge: rising
+      shift_edge: null
+      regenerated: 'buffered relay, not described as regenerated'
+      propagation: 'CKI-to-CKO 8 ns (L to H) and 8.6 ns at VCC=5V; 9.0 ns and 13 ns at VCC=3.3V (both typical)'
+      printed: 'Maximum input clock frequency 25MHz.'
+      doc: ws2801s-v2.0
+      page: 1
+      quote: >-
+        p1: "Maximum input clock frequency 25MHz." p2 (Absolute Maximum Ratings): "Input Clock Frequency FCLK 25 MHz".
+        p1: "The serial data is read into the shift registers at the rise edge of the external clock. The data and clock
+        output buffers are designed for cascading another chip." p4: "Propagation Delay CKI-to-CKO TpLH ... 8 ... ns",
+        "TpHL ... 8.6 ... ns" (VCC=5V); "TpLH ... 9.0", "TpHL ... 13" (VCC=3.3V). No set-up, hold or minimum pulse
+        width is printed in either revision.
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      chip_bits: 24
+      extra: null
+      start: 'none in the data; the frame starts after the clock has been low >500 µs (Fig 10: "Prepair for data transport > 500us")'
+      end: null
+      latch: 'clock (CKI) held low for more than 500 µs'
+      doc: ws2801s-v2.0
+      page: 14
+      quote: >-
+        p14: "CLK pin keeps low more than 500uS will make the WS2801 internal status register reset, and at this moment,
+        the gray scale data in the data shift registers will be latched. Now WS2801 is ready for gray scale data
+        transport. When the WS2801 receives total 24 clock rising edges, the WS2801 enters relay mode, which relays the
+        input signal got from CKI and SDI with very low distortion (100pS typical) and very low delay time ( 8ns
+        typical)." "The gray scale data frame is comprised of 3 gray data words, each data word is composed of 8 gray
+        scale data bits, total 24 bits." "During data transfer, the first bit is the data frame signal, then is the MSB
+        of the ROUT channel, the last one transferred into the data shift register is the LSB of the BOUT channel."
+        p15 (Fig 10, "The Gray Scale Data Formate of WS2801"): R[7] (MSB) … R[0] G[7] … G[0] B[7] … B[0] (LSB); notes
+        "1, when the data transport is completed, the gray scale data will be latched" and "2, When is gray scale data
+        is latched, the gray scale data will be taken effect at the start of the next PWM cycle".
+    pwm_clock:
+      source: internal oscillator
+      keep_clocking: false
+      doc: ws2801s-v2.0
+      page: 1
+      quote: '"Build in PWM dimming scheme for each output channel, supports free-run, especially suitable for low cost controller application." "PWM free-run capability(refresh rate(2.5KHz)."'
+    forwarding:
+      text: 'Takes the first 24 bits, then relays CKI and SDI to CKO and SDO (8 ns typical delay), so the first 24 bits go to the chip nearest the controller.'
+      doc: ws2801s-v2.0
+      page: 14
+      quote: '"When the WS2801 receives total 24 clock rising edges, the WS2801 enters relay mode, which relays the input signal got from CKI and SDI with very low distortion (100pS typical) and very low delay time ( 8ns typical)."'
+    backup_line: null
+    compatibility_claims:
+      - claim: '"constant voltage driving mode, which is compatible with ZQL9712" (an output-stage claim, not a data-line claim)'
+        doc: ws2801s-v2.0
+        page: 11
+      - claim: 'Falcon pixel type "WS2801": 3 channels, 8 bits, 4 wires; alternatives "WS2801", "WS2803" (controller grouping)'
+        doc: falcon-pixeltypes
+        page: null
+      - claim: 'FastLED: "No frame overhead (latch is timing-based, not data-based)"; the controller waits between frames ("CMinWait<1000>  mWaitDelay;"). Library practice, not a maker claim.'
+        doc: fastled-ws2801
+        page: null
+    disagreements:
+      - 'Text vs figure on the first bit: p14 says "the first bit is the data frame signal, then is the MSB of the ROUT channel", which reads as if a framing bit precedes R7; Fig 10 (p15) numbers the clocks 0 to 23 with R[7] on clock 0, and p14 itself says the chip relays after "total 24 clock rising edges". The figure and the 24-edge count agree: no extra bit (ws2801s-v2.0 p14 vs p15; same wording in ws2801-prelim-v0.3 p11 vs p12).'
+      - 'POL polarity pin, V0.3 vs V2.0: V0.3 p5 "When this pin is pull to GND, the driver output will be reversed; when floating or pulled high, the output polarity will not be reversed." V2.0 p6 "When POL is pulled to VCC, the driver output will be reversed; when floating or pulled high, the output polarity will not be reversed." (V2.0 contradicts itself.) Likewise V0.3 p9 "when POL is pull to GND" vs V2.0 p12 "when POL is pull to VCC". Not a data-line issue.'
+      - 'Output voltage, V0.3 vs V2.0: V0.3 p2 "Output Voltage VOUT -0.4 to 7V", "Output Pin Voltage VXOUT -0.3 to 7V" and electrical characteristics "VOUT ... 7.0 V"; V2.0 p2 "-0.4 to 6V", "-0.3 to 6V" and p3 "Output Voltage VOUT IOUT=1uA -0.3 -- 5.5 V".'
+      - 'ESD: V0.3 p2 "ESD susceptibility 4000 V"; V2.0 p2 "2000 V".'
+      - 'Packages: V0.3 p1 "available in both SOP-14 and DIP-14 packages"; V2.0 p1 "available in SOP-14 packages".'
+      - 'Cross-reference typo: V0.3 p11 says "can be seen in Fig 11" but the figure on p12 is captioned "Fig 10". Both revisions write "WS2081" for WS2801 (p1).'
+    open:
+      - 'No set-up/hold times, minimum clock high/low widths or minimum clock frequency are printed in either revision.'
+      - 'What happens if the clock pauses for less than 500 µs mid-frame is not stated.'
+  # ------------------------------------------------------------------------------------------------
+  - part: WS2803
+    entry: pixel-ics/ws2803
+    maker: WorldSemi
+    documents:
+      - id: ws2803-page-2012
+        url: https://web.archive.org/web/20121117004251/http://www.world-semi.com:80/en/Driver/Lighting%5FLED%5Fdriver%5Fchip/WS2803/
+        title: 'WorldSemi product page "WS2803 The two-lane 18-channel programmable constant-current LED driver IC with PWM" (Wayback capture 2012-11-17)'
+        revision: null
+        date: null
+        language: en
+      - id: ws2803-page-2013
+        url: https://web.archive.org/web/20131004073311/http://www.world-semi.com:80/en/Driver/Lighting/WS2803/
+        title: 'Same WorldSemi product page, second URL (Wayback capture 2013-10-04); text identical to the 2012 capture'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+      - id: fastled-ws2801
+        kind: library
+        url: https://github.com/FastLED/FastLED/blob/master/src/fl/chipsets/ws2801.h
+        title: 'FastLED src/fl/chipsets/ws2801.h (master), WS2803Controller'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: null
+    rates: []
+    clock:
+      max_hz: 25000000
+      recommended_max_hz: null
+      min_hz: null
+      min_high_ns: null
+      min_low_ns: null
+      setup_ns: null
+      hold_ns: null
+      sample_edge: rising
+      shift_edge: null
+      regenerated: 'buffered ("Data and clock output buffer is designed for cascading")'
+      propagation: null
+      printed: 'maximum input data clock frequencies up to 25MHz.'
+      doc: ws2803-page-2012
+      page: null
+      quote: >-
+        "● maximum input data clock frequencies up to 25MHz." "The input serial data shift register, the rising edge of
+        clock signal CKI into the chip when data entry is complete, the chip automatically according to the input
+        grayscale data to output the PWM constant current. Data and clock output buffer is designed for cascading other
+        WS2803 chip."
+    frame:
+      bits_per_channel: 8
+      channels: 18
+      wire_order: null
+      pixel_bits: null
+      chip_bits: 144
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: ws2803-page-2012
+      page: null
+      quote: >-
+        "● 8-bit PWM grayscale control, single-channel independent display 256 grayscale." "WS2803 has 18 output
+        channels, each channel can output up to 30mA constant current. The chip contains 144 internal serial shift
+        register, data latches, the bandgap voltage reference, internal oscillator and high-voltage programmable
+        constant current output driver stage." The page does not say how the end of the data ("when data entry is
+        complete") is detected.
+    pwm_clock:
+      source: internal oscillator
+      keep_clocking: false
+      doc: ws2803-page-2012
+      page: null
+      quote: '"● have a free run ability, grayscale data written after the chip according to grayscale." "● Data and automatically adjust the output, without having to do the other controls." "● the 2.5KHz grayscale data refresh frequency."'
+    forwarding:
+      text: 'Buffered clock and data outputs for cascading; how a chip takes its 144 bits is not described.'
+      doc: ws2803-page-2012
+      page: null
+      quote: '"Data and clock output buffer is designed for cascading other WS2803 chip."'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon lists "WS2803" as an alternative of its "WS2801" pixel type (3 channels, 8 bits, 4 wires). Controller grouping, not a maker claim.'
+        doc: falcon-pixeltypes
+        page: null
+      - claim: '"class WS2803Controller : public WS2801Controller<DATA_PIN, CLOCK_PIN, RGB_ORDER, SPI_SPEED> {};" with default "SPI_SPEED = DATA_RATE_MHZ(25)" (WS2801Controller defaults to "DATA_RATE_MHZ(1)"). Library practice, not a maker claim.'
+        doc: fastled-ws2801
+        page: null
+    disagreements: []
+    open:
+      - 'No WS2803 datasheet could be read. The product page links "WS2803 Specification book" at /uploads/soft/120502/1-120502110159.rar; the Wayback CDX index holds only a 2024 404 for http://www.world-semi.com/uploads/soft/120502/1-120502110159.rar. Scribd copies (scribd.com/document/566882869/WS2803, scribd.com/doc/144340505/WS2803; search snippets call it "Preliminary WS2803 ... V0.1", May 2008) return a client-challenge page to scripted fetches; alldatasheet (403) and datasheetspdf.com (DNS failure) were unreachable.'
+      - 'Latch method, bit order and channel order are not documented in anything read. The WS2801 latch (clock low >500 µs) must NOT be assumed for the WS2803; the WS2801 grouping rests on Falcon and FastLED only.'
+  # ------------------------------------------------------------------------------------------------
+  - part: LPD6803
+    entry: pixel-ics/lpd6803
+    maker: 'not named in the datasheet (database says Greeled Electronic; Advatek says "designed by Qiancai Electronics in China")'
+    documents:
+      - id: lpd6803-en
+        url: https://cdn-shop.adafruit.com/datasheets/LPD6803.pdf
+        title: 'LPD6803 datasheet (English translation, Adafruit-hosted)'
+        revision: null
+        date: null
+        language: en
+      - id: advatek-lpd6803
+        kind: controller
+        url: https://www.advateklighting.com/pixel-protocols/lpd6803
+        title: 'Advatek: LED Pixel Protocol LPD6803'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    idle_note: 'Not stated. The C51 example (p9) starts with "SCLK=0;" and pulses "SCLK=1;SCLK=0;", i.e. the clock rests low in that example.'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 25000000
+      recommended_max_hz: 15000000
+      min_hz: null
+      min_high_ns: 30
+      min_low_ns: 30
+      setup_ns: 10
+      hold_ns: 5
+      sample_edge: rising
+      shift_edge: null
+      regenerated: true
+      propagation: 'TPD and TCO < 12 ns (CL=30pF, RL=1K)'
+      printed: 'Data Clock Frequency FCLK 25(compatible with grey level at 10) MHZ'
+      doc: lpd6803-en
+      page: 3
+      quote: >-
+        p1: "Adopt self-add token-ring technology dual shift line, shift clock can reah 24MHz." "Data clock signal is
+        drived strongly to next chip to enhance level after built-in phase-lock circuit." p3 (Limited parameter):
+        "Data Clock Frequency FCLK 25(compatible with grey level at 10) MHZ". p4 (Suggested working parameter): "Data
+        clock frequency FCLK 0-15 MHZ", "Clock high-level voltage width TCLKH >30 ns", "Clock low-level voltage width
+        TCLKL >30 ns", "Data build time TSETUP >10 ns", "Data keep time THOLD >5 ns"; timing: "Maxim delay time of
+        concatenation output TPD ... <12 ns", "TCO <12". p2: "DCLK0 Serial clock output, after inside pll and strongly
+        drive".
+    frame:
+      bits_per_channel: 5
+      channels: 3
+      wire_order: '1, R4…R0, G4…G0, B4…B0 (colour order from the C51 example; the frame text only says "1bit as start "1" plus 3 groups 5bits grey level")'
+      pixel_bits: 16
+      chip_bits: 16
+      extra: 'one start bit "1" per pixel'
+      start: '32 bits of 0'
+      end: 'one extra DCLK pulse per pixel, DIN = 0'
+      latch: 'new data takes effect after the extra pulses ("new data start valid")'
+      doc: lpd6803-en
+      page: 3
+      quote: >-
+        p3 (Basic timing sequence; figure: "32bit start frame data", "Point1 16bit grey data", "Point2 16bit grey
+        data"): "A. First shift in 32bit "0" as start frame, then shift in all data frame, start frame and data frame
+        both are shift by high-bit, every data is input on DCLK rising edge. B. The first data frame is corresponding
+        LED light nearest from shift-in polar, its format includes 1bit as start "1" plus 3 groups 5bits grey level. C.
+        Turn shift in all data, add append pulse of corresponding point, new data start valid." p9: "Notice: after all
+        data are input in chip on the up-edge of DCLK, it may need send more DCLK pulse (DIN=0), on principle, how many
+        group point in the transfer link, how many related pulse need to be sent out, it is important to which later
+        chip built-in PLL re-gernate circuit can work in gear." p9-10 (C51 example): "// first output 32 "0" start
+        frame", "{ SD0=1;SCLK=1;SCLK=0; //first output one "1" as start bit //output 5 bits red data Mask=0x10;", "//
+        output 5 bits green data", "//output 5bits blue data", "// after output all nDots data, need add nDots pulse
+        SD0=0; For (i=0;i<nDots;i++){SCLK=1;SCLK=0;}".
+    pwm_clock:
+      source: 'selectable: DCLK (CMODE=0) or internal 1.2 MHz oscillator (CMODE=1 or floating, the default via pull-up)'
+      keep_clocking: 'only with CMODE=0'
+      doc: lpd6803-en
+      page: 8
+      quote: >-
+        p2: "CMODE choose inside grey clock GCLK, CMODE=0, GCLK=DCLK, CMODE=1, GCLK= inside oscillator output, built-in
+        pull-up". p8: "Via set CMODE, LPD6803 grey level counter can adapt DCLK as clock( CMODE=0), Also can adapt
+        built-in 1.2M(error ±15%)osscilator output of as clock(CMODE=1 Or dangle), prior one is normally used in those
+        based on CPLD/FPGA high cost control system, later one is often used in low cost MCU control system." p8-9: "In
+        CMODE=1 mode, MCU write display data into chip via SPI or two GPIO interface line, then each chip will
+        automatically produce drive output with related duty cycle according to input grey level value, after data
+        transfered, MCU can deal with other task, during this time, each LPD6803 will continue keeping original duty
+        cycle drive output(FREE-RUN mode), till MCU send out next updated data."
+    forwarding:
+      text: 'The first 16-bit word goes to the chip nearest the controller; clock and data are regenerated (PLL) and driven to the next chip.'
+      doc: lpd6803-en
+      page: 3
+      quote: '"The first data frame is corresponding LED light nearest from shift-in polar" (p3); "DOUT Serial data output, after inside strongly drive", "DCLK0 Serial clock output, after inside pll and strongly drive" (p2)'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon pixel type "LPD6803": 3 channels, 5 bits, 4 wires; alternatives "D705", "LPD1101", "LPD6803", "UCS6909", "UCS6912S" (controller grouping)'
+        doc: falcon-pixeltypes
+        page: null
+      - claim: '"Inside constant voltage driver (compatible with ZQL9712) mode" (output stage, p4)'
+        doc: lpd6803-en
+        page: 4
+    disagreements:
+      - 'Maximum clock: p1 "shift clock can reah 24MHz"; p3 limit table "FCLK 25(compatible with grey level at 10) MHZ"; p4 suggested "FCLK 0-15 MHZ".'
+      - 'Supply: p1 "voltage range is 3-8v"; p2 "VCC LDO power, range is 4.5v---8v"; p3 "Supply voltage VDD 3-8 V"; p4 suggested "VDD 5-7.5 V".'
+      - 'p2 OMODE row says "OMODE=1, output is in-constant current/voltage drive mode,CMODE=0, output is out drive mode" (CMODE written for OMODE).'
+    open:
+      - 'The outputs are named OUT1, OUT2, OUT3 (p2); no page maps the three 5-bit groups to OUT1/2/3. Only the C51 example calls them red, green, blue (dr, dg, db).'
+      - 'Grey level: GMODE=0 maps 5-bit data to a 256-step gamma 1.8 table, GMODE=1 to linear 32 steps (p2, p9-11). Output only; the wire is the same.'
+  # ------------------------------------------------------------------------------------------------
+  - part: D705
+    entry: pixel-ics/d705
+    maker: DMS Microelectronics
+    documents:
+      - id: d705-a2
+        url: https://web.archive.org/web/20120312160731id_/http://www.leds.ru/pdf/D705_en.pdf
+        title: 'D705 full-color LED driver (DMS MICROELECTRONICS LTD.), English'
+        revision: 'RAV: D705-A2'
+        date: 26th August 2009
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: null
+    bit_order_note: 'MSB-first is printed only for the start frame: "the high bit of start frame is sent first, then the low bit" (p3).'
+    rates: []
+    clock:
+      max_hz: 20000000
+      recommended_max_hz: 15000000
+      min_hz: null
+      min_high_ns: 30
+      min_low_ns: 30
+      setup_ns: 10
+      hold_ns: 5
+      sample_edge: rising
+      shift_edge: null
+      regenerated: true
+      propagation: 'TPD and TCO < 12 ns (CL=30pF, RL=1K)'
+      printed: 'Maximum serial input data clock frequency is 20MHZ'
+      doc: d705-a2
+      page: 1
+      quote: >-
+        p1: "It adopts 2-wire transmission scheme (data and clock), and built-in clock regeneration to enhance the
+        transmission distance." "Maximum serial input data clock frequency is 20MHZ;" "Lock-renewable sources of data
+        signals, data latch and regeneration ,up to 1000 spot light source with 1MHZ data transmission speed;" p3
+        (absolution parameters): "Data clock frequency FCLK 20 MHZ". p4 (Recommend that the working parameters): "Data
+        clock frequency FCLK 0-15 MHZ", "high level width of Clock TCLKH >30 ns", "low level width of Clock TCLKL >30
+        ns", "data set-up time TSETUP >10 ns", "Data hold time THOLD >5 ns"; "maximum Cascading output signal delay time
+        TPD <12 ... TCO ... <12 ns".
+    frame:
+      bits_per_channel: 5
+      channels: 3
+      wire_order: '1, then 5-bit R, G, B ("one start bit of ''1'' and three sets gray scale data of 5 bits for RGB"); outputs "Red: OUT1 Green: OUT2 Blue: OUT3"'
+      pixel_bits: 16
+      chip_bits: 16
+      extra: 'one start bit "1" per chip'
+      start: '32 bits of 0'
+      end: '"the corresponding pulse" after the data (count not stated beyond "corresponding")'
+      latch: 'new data takes effect after those pulses'
+      doc: d705-a2
+      page: 3
+      quote: >-
+        p3 (figure: "32bits for start frame data", "1st gray scale data 16 bits", "2nd gray scale data 16 bits"): "①
+        The first 32 bits of "0" is the start frame data, followed by data frame. at the rising edge of cin,the high
+        bit of start frame is sent first, then the low bit. ②The D705 next to the controller receives the first data
+        frame, the frame contains one start bit of '1' and three sets gray scale data of 5 bits for RGB. ③After the
+        data read into the D705s,the controller sents the corresponding pulse to D705s.then the new data go into
+        effect." p1: "Pins map: Red: OUT1 Green: OUT2 Blue: OUT3".
+    pwm_clock:
+      source: internal 1.2 MHz ring oscillator
+      keep_clocking: false
+      doc: d705-a2
+      page: 1
+      quote: '"Built-in ring oscillator (1.2MHz) to support the uninterrupted FREE-RUN modulation output, to maintain a static screen function;" Also p1: "In application, the grade-color of D705G will be up to 256 when the serial input clock frequency is not less than 1MHZ."'
+    forwarding:
+      text: 'The first 16-bit frame goes to the chip next to the controller; clock and data are regenerated and pushed out by push-pull drivers.'
+      doc: d705-a2
+      page: 3
+      quote: '"The D705 next to the controller receives the first data frame" (p3); "13 Cout Serial clock output. 14 Dout Serial data output." (p2); "D705 adopts internal push-pull drive circuit" (p7)'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon lists "D705" as an alternative of its "LPD6803" pixel type (controller grouping). The D705 datasheet itself never mentions the LPD6803.'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'Supply: p1 "input voltage 4.5V ~ 7.5V"; p2 "VCC Supply voltage ,4.5-7 .5 V"; p3 absolute "VDD 4.5 ～9 V"; p4 recommended "VDD 4.5-7.5 V".'
+      - 'The recommended-parameter and timing tables (p4) repeat the LPD6803 tables value for value (FCLK 0-15 MHz, TCLKH/TCLKL >30 ns, TSETUP >10 ns, THOLD >5 ns, TR <500, TF <400, TPD/TCO <12 ns, TONMIN 200 ns). Not a contradiction; it points to a common design or copied text.'
+    open:
+      - 'Bit order inside each 5-bit group is not printed (only the start frame is said to be MSB first).'
+      - 'The number of trailing pulses is "the corresponding pulse"; that it is one per chip is the LPD6803 wording, not this document.'
+      - 'D705G: "the grade-color of D705G will be up to 256 when the serial input clock frequency is not less than 1MHZ" implies the D705G gamma depends on the data clock rate; how is not explained.'
+  # ------------------------------------------------------------------------------------------------
+  - part: UCS6909
+    entry: pixel-ics/ucs6909
+    maker: 'not named in the datasheet'
+    documents:
+      - id: ucs6909-zh
+        url: https://datasheet4u.com/pdf/905173/UCS6909.pdf
+        title: 'UCS6909 说明书 (40V/25mA 护栏管级联驱动电路) [UCS6909 manual, 40 V / 25 mA guardrail-tube cascade driver]'
+        revision: null
+        date: null
+        language: zh
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 15000000
+      recommended_max_hz: 10000000
+      min_hz: null
+      min_high_ns: 50
+      min_low_ns: 50
+      setup_ns: 10
+      hold_ns: 5
+      sample_edge: rising
+      shift_edge: null
+      regenerated: true
+      propagation: null
+      printed: '最大工作频率15MHz。'
+      translation: 'Maximum operating frequency 15 MHz.'
+      doc: ucs6909-zh
+      page: 1
+      quote: >-
+        p1: "数据和时钟信号经内部再生电路后，以较强的驱动提供给下一级电路，提高了级联级数" [data and clock signals pass
+        through internal regeneration circuits and are given to the next stage with stronger drive, increasing the
+        number of cascade stages]; "最大工作频率15MHz。" p2 极限参数 [absolute limits]: "数据时钟频率 Fclk <15 MHz"; 建议工作参数
+        [recommended]: "数据时钟频率 Fclk <10 MHz", "时钟高电平 Tclkh >50 ns", "时钟低电平 Tclkl >50 ns", "数据建立时间 Tsetup >10
+        ns", "数据保持时间 Thold >5 ns".
+    frame:
+      bits_per_channel: 5
+      channels: 9
+      wire_order: 'per point: bit15 = 1, bit14~bit10 R, bit9~bit5 G, bit4~bit0 B; first point = R1/G1/B1, then point 2, point 3'
+      pixel_bits: 16
+      chip_bits: 48
+      extra: 'one start bit "1" per point (3 points per chip)'
+      start: '32 bits of 0'
+      end: 'N extra clock pulses, N = number of points'
+      latch: 'new data fully takes effect after the extra pulses'
+      doc: ucs6909-zh
+      page: 2
+      quote: >-
+        p2 基本应用时序 (figure: "32BIT起始帧数据", "第1点的16BIT灰度数据", "第2点的16BIT灰度数据"): "1. 首先输入32BIT 的"0"作为起始帧，再输入各点数据，数据均是高位先输入，数据在时钟上升沿输入。
+        2. 最先输入的数据是对应输入端最近的点（R1，G1，B1），数据格式包括1bit 起始位"1"和3 组5bit 的灰度值。 bit15 1（起始位必须是1）
+        bit14~bit10 LED_R1 的灰度值 Bit9~bit5 LED_G1 的灰度值 Bit4~bit0 LED_B1 的灰度值 3. 依次输入各点数据后，需要继续输入对应点数的附加脉冲（N
+        个时钟脉冲），新数据才能完全生效。"
+      translation: >-
+        "1. First input 32 bits of "0" as the start frame, then each point's data; all data are input high bit first,
+        on the rising edge of the clock. 2. The first data input is for the point nearest the input (R1, G1, B1); the
+        format is a 1-bit start bit "1" and three 5-bit gray values. bit15: 1 (the start bit must be 1); bit14~bit10:
+        gray value of LED_R1; bit9~bit5: LED_G1; bit4~bit0: LED_B1. 3. After inputting each point's data in turn, you
+        must keep inputting additional pulses for the corresponding number of points (N clock pulses) before the new
+        data fully take effect."
+    pwm_clock:
+      source: null
+      keep_clocking: null
+      doc: ucs6909-zh
+      page: 1
+      quote: '"直接输入灰度数据，经内部逻辑调制成带反伽码校正的256 级输出。" [gray data are input directly and modulated by internal logic into a 256-level output with inverse-gamma correction] No oscillator or free-run is mentioned.'
+    forwarding:
+      text: 'The first data go to the point nearest the input; clock and data are regenerated for the next chip.'
+      doc: ucs6909-zh
+      page: 2
+      quote: '"最先输入的数据是对应输入端最近的点（R1，G1，B1）" [the first data input is for the point nearest the input] (p2); pins "6 CKO 时钟输出", "7 DO 串行数据输出" (p1)'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon lists "UCS6909" as an alternative of its "LPD6803" pixel type (controller grouping). The datasheet names no other part.'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'The 5-bit to 1/256 duty table (p3) is not the LPD6803 table: UCS6909 1→1, 2→2, 3→4, 4→6, 16→77, 30→240; LPD6803 (lpd6803-en p10-11) 1→1, 2→3, 3→5, 4→8, 16→85, 30→254. Output curve only; the wire format is the same.'
+    open:
+      - 'Maker not named; whether the PWM free-runs from an internal oscillator is not stated.'
+  # ------------------------------------------------------------------------------------------------
+  - part: LPD8806
+    entry: pixel-ics/lpd8806
+    maker: 'Greeled Electronic Ltd (datasheet watermark); Advatek says "designed by Qiancai Electronics in China"'
+    documents:
+      - id: lpd8803-8806-greeled
+        url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+        title: 'LPD-8803/8806 Datasheet (Greeled Electronic Ltd watermark); identical text at https://signliteled.com/wp-content/uploads/2024/08/LPD8806-Datasheet.pdf'
+        revision: null
+        date: null
+        language: en
+      - id: adafruit-lpd8806-lib
+        kind: library
+        url: https://github.com/adafruit/LPD8806/blob/master/LPD8806.cpp
+        title: 'Adafruit LPD8806 Arduino library, LPD8806.cpp header comment and updateLength()/setPixelColor() (Limor Fried)'
+        revision: null
+        date: null
+        language: en
+      - id: advatek-lpd8806
+        kind: controller
+        url: https://www.advateklighting.com/pixel-protocols/lpd8806
+        title: 'Advatek: LED Pixel Protocol LPD8806'
+        revision: null
+        date: null
+        language: en
+      - id: enttec-lpd8806
+        kind: controller
+        url: https://www.enttec.com/pixel-protocols/LPD8806
+        title: 'ENTTEC: LPD8806 Pixel Protocol'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: null
+    bit_order_note: 'Not in the datasheet. The Adafruit library sends MSB first ("for (bit = 0x80; bit; bit >>= 1)" in its software-SPI path).'
+    rates: []
+    clock:
+      max_hz: 20000000
+      recommended_max_hz: 2000000
+      min_hz: null
+      min_high_ns: 40
+      min_low_ns: 40
+      setup_ns: 10
+      hold_ns: 5
+      sample_edge: null
+      shift_edge: null
+      regenerated: true
+      propagation: 'TPD and TCO < 12 ns (CL=30pF, RL=1K)'
+      printed: '3. Two-wire control mode, the shift clock up to 20MHz.'
+      doc: lpd8803-8806-greeled
+      page: 1
+      quote: >-
+        p1 Features: "3. Two-wire control mode, the shift clock up to 20MHz. 4. Unique data clock regeneration mechanism,
+        super signal drive capability, support cascading length over 2000 pixels." p2 Absolute parameter: "clk/dat
+        frequcy FCLK 20 MHz"; Recommand parameter: "dat/clk frequency FCLK 0~2 MHz", "High-level width TCLKH >40 ns",
+        "low-level width TCLKL >40 ns", "data setup time TSETUP >10 ns", "data hold time THOLD >5 ns". p3: "max delay
+        time for cascade output signal TPD ... <12 ... TCO <12 ns". p2: "SCLK0: Serial clock output, strong internal
+        drive and renewable output". The datasheet does not say which clock edge samples data.
+    frame:
+      bits_per_channel: 7
+      channels: 6
+      wire_order: 'G, R, B per LED as Adafruit''s strips are wired (library: "Strip color order is GRB, not the more common RGB"); the datasheet names only OUT1-OUT6'
+      pixel_bits: 24
+      chip_bits: 48
+      extra: 'every colour byte has its top bit set (library), so values are 7-bit'
+      start: null
+      end: 'zero bytes, (LEDs + 31) / 32 of them (library)'
+      latch: 'per byte as data arrive; zero bytes reset the pass-through (library)'
+      doc: adafruit-lpd8806-lib
+      page: null
+      quote: >-
+        Library (not maker): "The LPD8806 is not a FIFO shift register. The first data out controls the LED *closest*
+        to the processor ... Each LED driver 'fills up' with data and then passes through all subsequent bytes until a
+        latch condition takes place." "All color data bytes have the high bit (128) set, with the remaining seven bits
+        containing a brightness value (0-127). A byte with the high bit clear has special meaning (explained later)."
+        "each individual byte (even the separate G, R, B components of each LED) is latched AS IT ARRIVES... or more
+        accurately, as the first bit of the subsequent byte arrives and is passed through." "To reset the pass-through
+        behavior and begin sending new data to the start of the strip, a number of zero bytes must be issued" "zero
+        bytes can only travel 32 LEDs down the line before needing backup; the next 32 LEDs require an extra zero byte,
+        and so forth." Code: "dataBytes = n * 3; latchBytes = (n + 31) / 32;" "*p++ = g | 0x80; // Strip color order is
+        GRB," "*p++ = r | 0x80; // not the more common RGB," "*p++ = b | 0x80;". Datasheet (p2) only: "PMOD: Control
+        single-pixel output, PMOD=1 or Null, 6-channel output independent; PMOD=0,OUT1 and OUT2, OUT3 and OUT4, OUT5 and
+        OUT6 are sync output, occupies only three sets of data on the data link".
+    pwm_clock:
+      source: internal 1.2 MHz oscillator
+      keep_clocking: false
+      doc: lpd8803-8806-greeled
+      page: 1
+      quote: '"5. Built-in 1.2M oscillation circuit, support FREE-RUN mode, easy to programable design (refresh rate greater than 4000Hz). 6. Built-in 256 independent PWM grayscale control circuit for each channel, 1024 grayscale effect can be achieved by programming."'
+    forwarding:
+      text: 'Datasheet: regenerated clock and data out. Library: the first bytes go to the nearest LED, each chip fills up then passes the rest through.'
+      doc: adafruit-lpd8806-lib
+      page: null
+      quote: '"The first data out controls the LED *closest* to the processor (unlike a typical shift register, where the first data out winds up at the *furthest* LED)." Datasheet p2: "SD0: Serial data output ,the strong internal drive output", "SCLK0: Serial clock output, strong internal drive and renewable output".'
+    backup_line: null
+    compatibility_claims:
+      - claim: '"LPD8803/LPD8806 as a new generation of driver chips" and "LPD8803 support three-way output (pin downward compatible with LPD6803)" (pin compatibility, not protocol)'
+        doc: lpd8803-8806-greeled
+        page: 1
+      - claim: 'Advatek: "Very similar to its previous version, LPD6803, LPD8806 provides 7 bits of data"; table "Color Resolution 7 Bits", "PWM Rate 4000Hz"'
+        doc: advatek-lpd8806
+        page: null
+      - claim: 'Falcon pixel type "LPD8806": 3 channels, 7 bits, 4 wires; alternatives "LPD8803", "LPD8806", "LPD8809", "UCS8812"'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'Colour depth: datasheet p1 "Built-in 256 independent PWM grayscale control circuit for each channel"; Adafruit library and Advatek: 7 data bits; ENTTEC (enttec-lpd8806): "Color Resolution 8 Bits" and "Each channel carries 8-bit resolution for 24-bit RGB colour".'
+      - 'Clock: p1 "the shift clock up to 20MHz" and absolute FCLK 20 MHz vs recommended "dat/clk frequency FCLK 0~2 MHz" (p2).'
+      - 'Supply: p2 pin list "VCC: Power supply voltage is 3.3-5.5V"; absolute "supply voltage VCC 2.7~5.5 V"; recommended "VDD 4.5~5.5 V".'
+    open:
+      - 'The maker frame format (bits per channel on the wire, header bit, channel order, latch) is not in the English datasheet; every frame value here is from the Adafruit library (reverse-engineered behaviour, "Tested. Confirmed. Fact."). No Chinese original was found.'
+      - 'Which clock edge samples data is not printed.'
+  # ------------------------------------------------------------------------------------------------
+  - part: LPD8803
+    entry: pixel-ics/lpd8803
+    maker: 'Greeled Electronic Ltd (datasheet watermark); Advatek says "designed by Qiancai Electronics in China"'
+    documents:
+      - id: lpd8803-8806-greeled
+        url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+        title: 'LPD-8803/8806 Datasheet (Greeled Electronic Ltd watermark)'
+        revision: null
+        date: null
+        language: en
+      - id: advatek-lpd8803
+        kind: controller
+        url: https://www.advateklighting.com/pixel-protocols/lpd8803
+        title: 'Advatek: LED Pixel Protocol LPD8803'
+        revision: null
+        date: null
+        language: en
+      - id: enttec-lpd8803
+        kind: controller
+        url: https://www.enttec.com/pixel-protocols/LPD8803
+        title: 'ENTTEC: LPD8803 Pixel Protocol'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: null
+    rates: []
+    clock:
+      max_hz: 20000000
+      recommended_max_hz: 2000000
+      min_hz: null
+      min_high_ns: 40
+      min_low_ns: 40
+      setup_ns: 10
+      hold_ns: 5
+      sample_edge: null
+      shift_edge: null
+      regenerated: true
+      propagation: 'TPD and TCO < 12 ns'
+      printed: '3. Two-wire control mode, the shift clock up to 20MHz.'
+      doc: lpd8803-8806-greeled
+      page: 1
+      quote: 'Shared LPD8803/LPD8806 datasheet; same clock text and tables as the LPD8806 entry (p1-p3).'
+    frame:
+      bits_per_channel: null
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      chip_bits: null
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: lpd8803-8806-greeled
+      page: 1
+      quote: '"LPD8803 and LPD8806 output 3chanhel and 6 channel respectively" (p1). No frame layout is printed for either chip. Controller makers treat LPD8803 as LPD8806: Falcon lists "LPD8803" under type "LPD8806"; Advatek: "LPD8803 provides 7 bits of data" (advatek-lpd8803).'
+    pwm_clock:
+      source: internal 1.2 MHz oscillator
+      keep_clocking: false
+      doc: lpd8803-8806-greeled
+      page: 1
+      quote: '"5. Built-in 1.2M oscillation circuit, support FREE-RUN mode, easy to programable design (refresh rate greater than 4000Hz)."'
+    forwarding:
+      text: 'Regenerated clock and data out (shared datasheet). No forwarding rule printed.'
+      doc: lpd8803-8806-greeled
+      page: 2
+      quote: '"SD0: Serial data output ,the strong internal drive output" "SCLK0: Serial clock output, strong internal drive and renewable output"'
+    backup_line: null
+    compatibility_claims:
+      - claim: '"LPD8803 support three-way output (pin downward compatible with LPD6803)" (pin compatibility only)'
+        doc: lpd8803-8806-greeled
+        page: 1
+      - claim: 'Advatek: "Very similar to its previous version, LPD6803, LPD8803 provides 7 bits of data"'
+        doc: advatek-lpd8803
+        page: null
+      - claim: 'Falcon: "LPD8803" is an alternative of type "LPD8806" (3 ch, 7 bits, 4 wires)'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'ENTTEC (enttec-lpd8803): "Color Resolution 8 Bits" and "8 bits per channel gives full 24-bit RGB"; Advatek (advatek-lpd8803): "Color Resolution 7 Bits"; datasheet: "256 independent PWM grayscale control circuit for each channel".'
+    open:
+      - 'Nothing read documents the LPD8803 frame. The LPD8806 frame (Adafruit library) is not copied here: never filled from a sibling. The only maker link is the shared datasheet and PMOD=0 on the LPD8806 ("occupies only three sets of data on the data link").'
+  # ------------------------------------------------------------------------------------------------
+  - part: P9813
+    entry: pixel-ics/p9813
+    maker: DMS Microelectronics
+    documents:
+      - id: p9813-dms
+        url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
+        title: 'P9813 (DMS MICROELECTRONICS LTD.), English (PDF title "p9813-en.doc")'
+        revision: null
+        date: null
+        language: en
+      - id: fastled-p9813
+        kind: library
+        url: https://github.com/FastLED/FastLED/blob/master/src/fl/chipsets/p9813.h
+        title: 'FastLED src/fl/chipsets/p9813.h (master)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 20000000
+      recommended_max_hz: 15000000
+      min_hz: null
+      min_high_ns: 30
+      min_low_ns: 30
+      setup_ns: 10
+      hold_ns: 5
+      sample_edge: rising
+      shift_edge: 'controller changes data after the falling edge'
+      regenerated: true
+      propagation: null
+      printed: 'Serial inuput data the maximum clock frequency 15MHZ'
+      doc: p9813-dms
+      page: 3
+      quote: >-
+        p3: "1. The ic will latch a bit of data when the rising edge of the clock coming, And the data should changed
+        after the falling edge of the clock;" p1 Features: "Serial inuput data the maximum clock frequency 15MHZ;" "PLL
+        data signal regeneration,1MHZ data transfer speeds of up to 1024 Cascade Point Light;" p3 absolution
+        parameters: "Data clock frequency FCLK 20 MHZ"; Recommend: "Data clock frequency FCLK 0-15 MHZ", "high level
+        width of Clock TCLKH >30 ns", "low level width of Clock TCLKL >30 ns", "data set-up time TSETUP >10 ns", "Data
+        hold time THOLD >5 ns". p2 pin 11: "CLKSEL=1,output clock back,CLKSEL=0,output clck forward".
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: '1 1 (flag), ~B7 ~B6 ~G7 ~G6 ~R7 ~R6 (check), B7…B0, G7…G0, R7…R0'
+      pixel_bits: 32
+      chip_bits: 32
+      extra: 'two flag bits "1" and six check bits (inverted top two bits of B, G, R); checked only when JEN=0'
+      start: '32-bit start frame ("32bit起始帧"); its bit values are not printed'
+      end: null
+      latch: null
+      doc: p9813-dms
+      page: 2
+      quote: >-
+        p2 figure "P9813 communication protocol": DIN "32bit起始帧 | 标志位 | B7' | B6' | G7' | G6' | R7' | R6' | B7B6··B1B0 |
+        G7G6··G1G0 | R7R6··R1R0 | 标志位 | B7' ..." ["32-bit start frame | flag bits | ..."], captions "32bit gray data
+        for the first pixel", "32bit gray data for the 2nd pixel". p3: "2. The flag bits is two "1"; 3. The verify dta
+        B7'is equal to ~B7,and B6'1S ~B6,B7 and B6 are the gray data of blue 4. the serial data is MSB first ,and the
+        sortorder is blue ,green, red". p2 pin 3: "JEN=1,timing no parity,JEN=0,timing verification,drive
+        mode,built-in pull-up".
+    pwm_clock:
+      source: internal 1.2 MHz ring oscillator
+      keep_clocking: false
+      doc: p9813-dms
+      page: 1
+      quote: '"Built-in ring oscillator(1.2MHZ) to suport ongoing FREE-RUN modulation output,maintaining the screen still function;"'
+    forwarding:
+      text: 'The figure gives the first 32-bit word to "the first pixel"; clock is regenerated (CLKSEL selects the output clock phase).'
+      doc: p9813-dms
+      page: 2
+      quote: '"32bit gray data for the first pixel" / "32bit gray data for the 2nd pixel" (p2 figure); "built-in clock regeneration to enhance the transmission distance" (p1)'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'FastLED writes 32 zero bits before and after the pixels ("void writeBoundary() FL_NO_EXCEPT { mSPI.writeWord(0); mSPI.writeWord(0); }" called before and after the pixel loop; "// - Start boundary: 4 bytes (0x00000000)", "// - End boundary: 4 bytes (0x00000000)") and builds the first byte as "0xC0 | ((~b & 0xC0) >> 2) | ((~g & 0xC0) >> 4) | ((~r & 0xC0) >> 6)", then b, g, r. Library practice; the trailing 32 zero bits are not in the datasheet.'
+        doc: fastled-p9813
+        page: null
+      - claim: 'Falcon lists "P9813 (Not supported)" with 3 channels and "b: 6" bits per channel (controller table; 6 matches the six check bits, not the 8-bit gray data)'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'Maximum clock: p1 "the maximum clock frequency 15MHZ"; p3 absolute "FCLK 20 MHZ"; recommended "0-15 MHZ".'
+      - 'Check bits: the p3 text defines only the blue pair ("B7 and B6 are the gray data of blue"); the p2 figure also carries G7'', G6'', R7'', R6''.'
+      - 'LED voltage: p1 "LED drive port voltage 17V,can be connected in series 6 LED"; p3 absolute "LED light voltage VLED 3-12 V".'
+      - 'Supply: p1 "IC input voltage 5V-6.5V", p2 "VCC Supply voltage,5-6.5V"; p3 absolute "VDD 4.5 ～9 V", recommended "VDD 4.5-7.5 V".'
+      - 'p1 pin-map caption names a different part: "P9813-SOP14 package P9816-SSOP16 package".'
+    open:
+      - "Value of the 32-bit start frame, any end frame and when new data take effect are not printed. FastLED's zero end boundary is library practice only."
+      - 'JEN has a pull-up, so by default ("JEN=1,timing no parity") the check bits are not verified; whether they must still be sent correctly is not said (the frame always carries them).'
+  # ------------------------------------------------------------------------------------------------
+  - part: SM16716
+    entry: pixel-ics/sm16716
+    maker: 'Shenzhen Sunmoon Microelectronics (package drawing marked "SM MICRO"; no maker name in the text)'
+    documents:
+      - id: sm16716-v1.1
+        url: https://media.ledyi.com/sm16716-datasheet_113cde8d9eb3ebef7dfbc0c43a943cb61b0f9cddca8580d353ae2dbc3ef95377.pdf
+        title: 'SM16716 Decorative Lighting Driver (LEDYi-hosted copy)'
+        revision: OTWB2011V1.1
+        date: null
+        language: en
+      - id: sm16726-v1.0
+        url: https://datasheet4u.com/pdf/796033/SM16726.pdf
+        title: 'SM16726 装饰照明驱动IC (Shenzhen Sunmoon Microelectronics), cited here for its SM16716 claim'
+        revision: IGQZ-IZV1.0
+        date: null
+        language: zh
+      - id: fastled-sm16716
+        kind: library
+        url: https://github.com/FastLED/FastLED/blob/master/src/fl/chipsets/sm16716.h
+        title: 'FastLED src/fl/chipsets/sm16716.h (master)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      recommended_max_hz: null
+      min_hz: null
+      min_high_ns: 30
+      min_low_ns: 30
+      setup_ns: 10
+      hold_ns: 5
+      sample_edge: rising
+      shift_edge: null
+      regenerated: true
+      propagation: 'TPD 12 ns (CL=30pF, RL=1K)'
+      printed: 'Double line self-reshaping data transmission, maximum clock: 30Mhz'
+      doc: sm16716-v1.1
+      page: 4
+      quote: >-
+        p1: "Double line self-reshaping data transmission, maximum clock: 30Mhz". p4 Timing Sequence: "Data clock
+        frequency fCLK — 30 MHz", "Clock high-level width TCLKH 30 — — ns", "Clock low-level width TCLKL 30 — — ns",
+        "Clock setup time TSETUP 10 — — ns", "Dara hold time THOLD 5 — — ns", "Delay time of cascade output signal TPD
+        12 ns CL=30pF,RL=1K". p2: "DCLKO Clock input 12 Serial clock input, regenerate through the interior PLL".
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: '1, then three 8-bit groups; which group drives OUT1, OUT2, OUT3 is not printed'
+      pixel_bits: 25
+      chip_bits: 25
+      extra: 'one start bit "1" per chip'
+      start: '50 bits of 0'
+      end: 'one extra DCLK pulse per chip, data low'
+      latch: 'data take effect after the extra pulses'
+      doc: sm16716-v1.1
+      page: 5
+      quote: >-
+        p5 Function Description (figure: "50BIT data of initial frame", "First 25BIT grey data", "Second 25BIT grey
+        data"): "1. Shift in 50Bits "0" to be the initial frame at first, and then shift in every data frame. The
+        initial frame and the data frame are shifted in MSB first. Every data bit is shifted in at the rising edge of
+        DCLK. 2. The first data frame corresponds to the closest LED light, the format includes the initial bit of 1Bit
+        "1" and three sets of 8Bits gray data; 3. When all the data of the chip are transferred, transfer extra DCLK
+        pulse counts which correspond to the number of the chip, and the above data starts to take into effect. The
+        data signal of the extra DCLK pulse counts transferred is low –level. (The data signal issues "0", and the clock
+        signal issues based on the above format); 4. Every set of the gray data is composed with the 1Bit"1"+24Bit gray
+        data."
+    pwm_clock:
+      source: 'internal oscillator ("Interior PWM clock frequency fOSC 1.03 MHz")'
+      keep_clocking: false
+      doc: sm16716-v1.1
+      page: 3
+      quote: '"Interior PWM clock frequency fOSC 1.03 MHz VDD = 5.0V"'
+    forwarding:
+      text: 'The first 25-bit frame goes to the closest chip; clock regenerated through a PLL, push-pull outputs.'
+      doc: sm16716-v1.1
+      page: 5
+      quote: '"The first data frame corresponds to the closest LED light" "The transport protocol adopts the double-line transport protocol that self-adjusts the signal, it can eliminate the race hazard between the clock signal and the data signal. In addition, the DOUT and DCLKO design the push-pull driving circuit."'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'SM16726 datasheet: "SET = 1（默认态），与SM16716 相同的双线数据协议。" [SET = 1 (default): the same two-wire data protocol as SM16716] and "封装兼容SM16716" [package compatible with SM16716]'
+        doc: sm16726-v1.0
+        page: 5
+      - claim: 'Falcon pixel type "SM16716": 3 channels, 8 bits, 4 wires; alternatives "SM16716", "SM16726"'
+        doc: falcon-pixeltypes
+        page: null
+      - claim: 'FastLED sends the pixels with a leading 1 bit per pixel ("FLAG_START_BIT ... an extra 1 bit is sent at the start of each triplet of bytes") and then 50 zero bits ("Write out 50 zeros to the spi line (6 blocks of 8 followed by two single bit writes)") after the pixels, which doubles as the next frame''s start. Library practice.'
+        doc: fastled-sm16716
+        page: null
+    disagreements:
+      - 'p2 pin table calls the clock output "DCLKO Clock input ... Serial clock input, regenerate through the interior PLL".'
+      - 'Supply: p1 "Built-in LDO circuit, VDD range: 3.3-6.0V"; p2 "VDD ... 5V± 10%"; p3 absolute "VDD -0.5——+6.0 V" but electrical characteristics "VDD voltage VDD 3.3 5.0 7.0 V" (maximum above the absolute maximum).'
+      - 'p6 gamma chart is labelled "Original 32bits Data" (an x axis of 0-32) on an 8-bit part.'
+    open:
+      - 'Mapping of the three 8-bit groups to OUT1/OUT2/OUT3 (and so R, G, B) is not printed. The SM16726 order (b23-b16 OUTR, b15-b8 OUTG, b7-b0 OUTB) is not copied here.'
+  # ------------------------------------------------------------------------------------------------
+  - part: SM16726
+    entry: pixel-ics/sm16726
+    maker: Shenzhen Sunmoon Microelectronics
+    documents:
+      - id: sm16726-v1.0
+        url: https://datasheet4u.com/pdf/796033/SM16726.pdf
+        title: 'SM16726 装饰照明驱动IC [decorative lighting driver IC] (深圳市明微电子股份有限公司 SHENZHEN SUNMOON MICROELECTRONICS CO.,LTD on every page; distributor footer www.hotbrandtech.com)'
+        revision: 'IGQZ-IZV1.0 (as printed in the page header)'
+        date: null
+        language: zh
+      - id: sunmoon-sm16726-page
+        url: https://www.chinaasic.com/chipDetails/detail_118.html
+        title: 'Sunmoon product page SM16726 (its "说明书下载" [datasheet download] link points to an empty path "../websiteManage/product/")'
+        revision: null
+        date: null
+        language: zh
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      recommended_max_hz: null
+      min_hz: null
+      min_high_ns: null
+      min_low_ns: null
+      setup_ns: null
+      hold_ns: null
+      sample_edge: rising
+      shift_edge: null
+      regenerated: true
+      propagation: 'TPLH / TPHL 4 ns typical (VDD = 5.0V, CL = 30pF)'
+      printed: '双线自整形数据传输，速率达30MHz'
+      translation: 'Two-wire self-reshaping data transmission, rate up to 30 MHz'
+      doc: sm16726-v1.0
+      page: 1
+      quote: >-
+        p1: "双线自整形数据传输，速率达30MHz" [two-wire self-reshaping data transmission, rate up to 30 MHz]; "级联1024 点时，刷新率可达30Hz"
+        [with 1024 points cascaded the refresh rate reaches 30 Hz]. p2: "DCLKO 时钟输出 ... 串行时钟输出，经内部锁相再生和强驱动输出" [serial clock
+        output, regenerated by the internal phase lock and strongly driven]. p4 timing table lists only input rise/fall
+        (500 ns / 400 ns max), TPLH/TPHL 4 ns, minimum PWM on time 250 ns and output current rise/fall; no clock widths,
+        set-up or hold are printed.
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'b24 = 1, b23–b16 OUTR, b15–b8 OUTG, b7–b0 OUTB (SET = 1)'
+      pixel_bits: 25
+      chip_bits: 25
+      extra: 'one start bit "1" per chip (SET = 1); SET = 0: two bits, 11 = gray data, 10 = status register'
+      start: 'at least 50 bits of 0 (SET = 1); at least 52 bits of 0 (SET = 0)'
+      end: 'one extra DCLK pulse per chip ("级联512个芯片，需要额外发送512个DCLK")'
+      latch: 'new data take effect after the extra pulses'
+      alternatives:
+        - name: 'SET = 0 (SET pin tied to GND; SOP16 only, the ESOP8 has no SET pin)'
+          frame: '≥52 zero bits; per chip 2''b1X + 24 bits: 2''b11 → 24-bit gray (OUTR, OUTG, OUTB); 2''b10 → status register: bit23~21 GC_OUTR, bit20~18 GC_OUTG, bit17~15 GC_OUTB (white balance), bit14~13 GC_OUT (overall gain), bit12~0 check bits "1001 1111 1111 1"; then one extra DCLK per chip'
+          doc: sm16726-v1.0
+          page: 6
+      doc: sm16726-v1.0
+      page: 5
+      quote: >-
+        p5 基本时序: "SET = 1（默认态），与SM16716 相同的双线数据协议。" "1. 先移入至少50bits '0'作为起始帧，再移入各数据帧，起始帧和数据帧均是高位先移入，DCLK上升沿存储数据；
+        2. 每组灰度数据均由1bit起始码+24bits灰度数据组成； 3. 第1个数据帧是对应距离移入端最近LED驱动芯片；
+        4. 灰度数据传输完成后，需要增发对应芯片数的附加脉冲（即级联512个芯片，需要额外发送512个DCLK），新数据即开始生效；" figure "每颗芯片的灰度数据如下图所示：":
+        "b24 | b23 … b16 OUTR | b15 … b8 OUTG | b7 … b0 OUTB" with "1" under b24. p6: "SET = 0（SET 短接至GND )，OUT 端口输出电流可调节。"
+        "1. 先移入至少52bits '0'作为起始帧 ..." "2. 每组灰度数据均由2'b 1X+24bits数据组成： 如果是2'b 11，则后续的24bits数据为灰度数据；
+        如果是2'b 10，则后续的24bits 数据为状态寄存器数据；"
+      translation: >-
+        p5 basic timing: "SET = 1 (default): the same two-wire data protocol as SM16716." "1. First shift in at least 50
+        bits '0' as the start frame, then each data frame; start frame and data frames are shifted in high bit first,
+        data stored on the DCLK rising edge; 2. each gray data set is a 1-bit start code + 24 bits of gray data; 3. the
+        first data frame is for the LED driver chip nearest the input; 4. after the gray data, send additional pulses
+        equal to the number of chips (i.e. 512 cascaded chips need 512 extra DCLK), then the new data take effect." p6:
+        "SET = 0 (SET shorted to GND): OUT port current adjustable." "1. First shift in at least 52 bits '0' as the
+        start frame ..." "2. each data set is 2'b1X + 24 bits: if 2'b11 the following 24 bits are gray data; if 2'b10
+        the following 24 bits are status-register data;"
+    pwm_clock:
+      source: null
+      keep_clocking: null
+      doc: sm16726-v1.0
+      page: 1
+      quote: 'No oscillator, PWM frequency or free-run statement in the datasheet. Features: "灰度等级为256 级" [256 gray levels].'
+    forwarding:
+      text: 'The first frame goes to the chip nearest the input; clock regenerated by a phase lock.'
+      doc: sm16726-v1.0
+      page: 5
+      quote: '"第1个数据帧是对应距离移入端最近LED驱动芯片" [the first data frame is for the driver chip nearest the input]; p2 "DOUT ... 串行数据输出，经内部强驱动输出", "DCLKO ... 经内部锁相再生和强驱动输出"'
+    backup_line: null
+    compatibility_claims:
+      - claim: '"SET = 1（默认态），与SM16716 相同的双线数据协议。" [SET = 1 (default): the same two-wire data protocol as SM16716]'
+        doc: sm16726-v1.0
+        page: 5
+      - claim: '"封装兼容SM16716" [package compatible with SM16716]'
+        doc: sm16726-v1.0
+        page: 1
+      - claim: 'SET pin: "SET = 1 时，传统双线数据传输协议； SET = 0 时，带电流增益调节的双线数据传输协议" [SET = 1: traditional two-wire protocol; SET = 0: two-wire protocol with current-gain adjustment]; default 1'
+        doc: sm16726-v1.0
+        page: 2
+      - claim: 'Falcon lists "SM16726" under pixel type "SM16716"'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'Package: datasheet p1 "封装形式：SOP16，ESOP8"; Sunmoon product page "封装形式：SOP14，ESOP8".'
+      - 'Output current: datasheet p3 absolute "R/G/B 输出电流 IOUT 10~33 mA", defaults "OUTR=18.4mA，OUTR/G=17.5mA" (p1) and gain steps to 30.6 mA (p7); the database''s 18-60 mA comes from the 2023 selection guide row for SM16726P.'
+      - 'p1 feature "SET 脚悬空时，OUTR=18.4mA，OUTR/G=17.5mA" writes OUTR/G where p3 and p7 say OUTG/B = 17.5 mA.'
+    open:
+      - 'No clock widths, set-up or hold times are printed.'
+      - 'The ESOP8 version has no SET pin (p2 "SET ... 管脚编号（ESOP8） -"); that it always runs the SET = 1 protocol is inferred from "默认为1" [defaults to 1], not stated.'
+  # ------------------------------------------------------------------------------------------------
+  - part: MY9221
+    entry: pixel-ics/my9221
+    maker: MY-Semi
+    documents:
+      - id: my9221-v1.0
+        url: https://files.seeedstudio.com/wiki/Grove-LED_Bar/res/MY9221_DS_1.0.pdf
+        title: 'MY9221 12-Channel LED Driver With Grayscale Adaptive Pulse Density Modulation Control (MY-Semi Inc.)'
+        revision: Ver. 1.0
+        date: Nov. 2011
+        language: en
+      - id: my9221-v3.0-brief
+        url: http://www.my-semi.com/file/MY9221_BF_3.0.pdf
+        title: 'MY9221 brief (one page)'
+        revision: Ver. 3.0
+        date: Jul. 2013
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    idle_note: 'For the latch the clock may rest at either level: "keeping DCKI at a fixed level (no matter "high" or "low") for more than 220us" (p16).'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 10000000
+      recommended_max_hz: null
+      min_hz: 70000
+      min_high_ns: 50
+      min_low_ns: 50
+      setup_ns: 10
+      hold_ns: 10
+      sample_edge: both
+      shift_edge: both
+      regenerated: 'duty recovery on DCKO and GCKO; DO re-timed during the latch cycle'
+      propagation: 'DCKI-to-DO 29 / 39 ns typ (L→H / H→L), DCKI-to-DCKO 6.3 ns typ (VDD = 5 V)'
+      printed: 'F(DCKI) 0.07 – 10 MHz; "20Mbps(max.) ~ 140 Kbps(min.) data rate"'
+      doc: my9221-v1.0
+      page: 7
+      quote: >-
+        p1: "MY9221 features a 10MHz EMI reduction data clock input." "✦ 20Mbps(max.) ~ 140 Kbps(min.) data rate for EMI
+        reduction data transfer". p3: "DCKI Clock input terminal for serial data transfer. Data is sampled at both
+        rising edge and falling edge of DCKI." p13: "The MY9221 transmits data from the DI pin on both rising and
+        falling edge of the data clock (DCKI)." "The serial data will be shifted out from the DO pin on the
+        synchronization of the rising and falling edge of DCKI." p7 (VDD = 5.0V): "Pulse Duration DCKI tw(DCK) 50 ...
+        7200", "Setup Time DI tsu(D) 10", "Hold Time DI th(D) 10", "DCKI Freq. F(DCKI) 0.07 ... 10 MHz", "DCKI-to-DO tpLH1
+        29 39", "DCKI-to-DCKO tpLH2 6.3 19", "DCKI-to-DO tpHL1 39 59". p4: "Input Data Clock Frequency FDCK 0.07 ~ 10
+        MHz".
+    frame:
+      bits_per_channel: 16
+      channels: 12
+      wire_order: 'CMD[15:0], then A3, B3, C3, A2, B2, C2, … C0 (16 bits each, MSB first); OUTA/B/C, not named R/G/B on the wire'
+      pixel_bits: 48
+      chip_bits: 208
+      extra: '16-bit command word per chip: CMD[15:11] "Please filled with all 0", [10] hspd, [9:8] bs (00 8-bit, 01 12-bit, 10 14-bit, 11 16-bit), [7:5] gck oscillator divider, [4] sep (MY-PWM / APDM), [3] osc (internal / GCKI), [2] pol, [1] cntset, [0] onest. In 8/12/14-bit modes the words stay 16 bits, upper bits filled with 0.'
+      start: null
+      end: null
+      latch: 'internal latch: DCKI held at a fixed level (high or low) > 220 µs, then 4 DI pulses (high > 70 ns, low > 230 ns); data load at the 2nd falling edge of DI; then Tstop > 200 ns + N × 10 ns before DCKI moves'
+      doc: my9221-v1.0
+      page: 13
+      quote: >-
+        p13: "After whole given serial data are shifted into 208-bit shift register, then the data can be loaded into
+        the latch register by internal-latch function." "Data Format 16-bit command data and 12x16-bit PWM data. (
+        Total: 208-bit )" figure: "MSB D[207]" Temp Temp Temp Temp Temp hspd bs[1] bs[0] gck[2] gck[1] gck[0] sep osc pol
+        cntset onest "D[192]"; "D[191]" A3[15] … A3[0] "D[176]"; "D[175]" B3[15] … B3[0]; "D[159]" C3[15] … C3[0];
+        "D[143]" A2[15] … A2[0]; … "D[15]" C0[15] … C0[0] "LSB D[0]". p14: "8-bit grayscale mode Fill the eight most
+        significant bits with "0", Fill the eight least significant bits with 8-bit grayscale data." p16: "The steps to
+        trigger internal-latch function are shown below: 1. After whole given serial data are shifted into shift
+        register, keeping DCKI at a fixed level (no matter "high" or "low") for more than 220us. (Tstart > 220us) 2.
+        Send 4 DI pulses (twH(DI)>70ns, twL(DI)> 230ns, Tstop*) 3. Data is loaded into the latch register at 2nd falling
+        edge of DI pulse" "*Tstop (min.) for cascade application must > "200ns + N*10ns" (N is the cascade number of
+        drivers)".
+    pwm_clock:
+      source: 'internal oscillator (8.6 MHz typ) or external GCKI (SSOP/TSSOP only), chosen by CMD[3]'
+      keep_clocking: false
+      doc: my9221-v1.0
+      page: 14
+      quote: '"CMD[3] osc Grayscale clock source select 0 : internal oscillator (8.6MHz) (internal GCK source) 1 : external clock from GCKI pin (external GCK source)"; p1 "Grayscale clock source selection (SSOP & TSSOP only): internal or external"'
+    forwarding:
+      text: 'Plain 208-bit shift register: DO shifts out what was shifted in, so the first 208 bits sent end up in the chip farthest from the controller (implied by the shift-register description; not stated in words). During the latch cycle DI pulses are re-timed onto DO.'
+      doc: my9221-v1.0
+      page: 13
+      quote: '"The serial data will be shifted out from the DO pin on the synchronization of the rising and falling edge of DCKI." p16: "MY9221 provides DO signal retiming function which is fixed at Tw_re = 90ns@VDD=5V under internal-latch control cycle to prevent variation of the duty ratio caused by long cascading"'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon: "MY9221 (Not supported)", 3 channels, 16 bits, 4 wires, alternatives "MY9231?" (with the question mark)'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'V1.0 vs V3.0 brief (both p1): "operates over a 3V ~ 5.5V input voltage range" / "rated to 1 7 V" (V1.0) vs "operates over a 3.3V ~ 5V input voltage range (±10%)" / "rated to 2 4 V" (V3.0).'
+      - 'Command table p14 prints "101 : original freq64" (missing "/").'
+      - 'DCKI level time: each DCKI level must stay under 7.2 µs during data (tw(DCK) max 7200 ns; figure "<7.2us"), and the latch needs a fixed level > 220 µs; behaviour between 7.2 µs and 220 µs is not described.'
+    open:
+      - 'The datasheet does not say in words which chip receives the first 208 bits.'
+  # ------------------------------------------------------------------------------------------------
+  - part: MY9231
+    entry: pixel-ics/my9231
+    maker: MY-Semi
+    documents:
+      - id: my9231-v0.91-brief
+        url: http://www.my-semi.com/file/MY9231_BF_0.91.pdf
+        title: 'MY9231 3-Channel LED Driver With Grayscale Adaptive Pulse Density Modulation Control (one-page brief)'
+        revision: Ver. 0.91
+        date: Mar. 2011
+        language: en
+      - id: my92xx-lib
+        kind: library
+        url: https://github.com/xoseperez/my92xx
+        title: 'my92xx Arduino library (src/my92xx.cpp, src/my92xx.h), "Based on the C driver by MaiKe Labs"'
+        revision: null
+        date: null
+        language: en
+      - id: esphome-my9231
+        kind: library
+        url: https://github.com/esphome/esphome/blob/dev/esphome/components/my9231/my9231.cpp
+        title: 'ESPHome my9231 output component (dev branch)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    bit_order_note: 'From the libraries (ESPHome write_word_: "for (uint8_t i = bits; i > 0; i--) { this->pin_di_->digital_write(value & (1 << (i - 1)));"); not in the brief.'
+    rates: []
+    clock:
+      max_hz: 10000000
+      recommended_max_hz: null
+      min_hz: null
+      min_high_ns: null
+      min_low_ns: null
+      setup_ns: null
+      hold_ns: null
+      sample_edge: 'both (libraries toggle DCKI once per bit)'
+      shift_edge: null
+      regenerated: 'clock duty recovery and pulse re-timing (brief)'
+      propagation: null
+      printed: 'MY9231 features a 10MHz EMI reduction data clock input; 20Mbps(max.) ~ 220Kbps(min.) data rate'
+      doc: my9231-v0.91-brief
+      page: 1
+      quote: >-
+        "MY9231 features a 10MHz EMI reduction data clock input. MY9231 also offers a 2-wire serial interface to send
+        the grayscale data, control command including 16/14/12/8-bit grayscale selection, output polarity selection for
+        high power LED driving grayscale clock frequency division selection, output Tr/Tf timing selection, current
+        output waveform selection, and to realize the internal-latch function." "Moreover MY9231 utilizes clock duty
+        recovery technique and pulse re-timing to help long distance and multiple cascading applications." "✦
+        20Mbps(max.) ~ 220Kbps(min.) data rate for EMI reduction data transfer". Library (ESPHome) write_word_: "this->pin_dcki_->digital_write(!this->pin_dcki_->digital_read());"
+        once per bit.
+    frame:
+      bits_per_channel: 'selectable 8 / 12 / 14 / 16 (libraries send words of the selected width)'
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      chip_bits: null
+      extra: '8-bit command per chip, sent in a separate command phase (libraries): bit6 one-shot, bit5 reaction (fast/slow), bits4:3 width (00=16, 01=14, 10=12, 11=8), bits2:1 oscillator divide (1/4/16/64), bit0 APDM/PWM'
+      start: null
+      end: null
+      latch: 'libraries: after the data, wait ≥12 µs, then 8 DI pulses ("After 8 falling edges, the duty data are stored")'
+      doc: esphome-my9231
+      page: null
+      quote: >-
+        Libraries, not maker. ESPHome my9231.cpp loop(): "for (auto pwm_amount : this->pwm_amounts_) {
+        this->write_word_(pwm_amount, this->bit_depth_); } // Send 8 DI pulses. After 8 falling edges, the duty data are
+        stored. this->send_di_pulses_(8);" init_chips_(): "// Send 12 DI pulse. After 6 falling edges, the duty data
+        are stored // and after 12 rising edges the command mode is activated. this->send_di_pulses_(12);
+        delayMicroseconds(12); for (uint8_t i = 0; i < this->num_chips_; i++) { this->write_word_(command, 8); } // Send
+        16 DI pulse. After 14 falling edges, the command data are // stored and after 16 falling edges the duty mode is
+        activated. this->send_di_pulses_(16);" Command constants: "MY9231_CMD_ONE_SHOT_ENFORCE = 0x1 << 6",
+        "MY9231_CMD_REACTION_SLOW = 0x1 << 5", "MY9231_CMD_BIT_WIDTH_16 = 0x0 << 3" … "MY9231_CMD_BIT_WIDTH_8 = 0x3 <<
+        3", "MY9231_CMD_FREQUENCY_DIVIDE_64 = 0x3 << 1", "MY9231_CMD_SCATTER_PWM = 0x1 << 0". my92xx.cpp _send(): "//
+        TStop > 12us. os_delay_us(12);" … "// TStart > 12us. Ready for send DI pulse. os_delay_us(12); // Send 8 DI
+        pulse. After 8 pulse falling edge, store old data. _di_pulse(8);" constructor: "// Clear all duty register
+        _dcki_pulse(32 * _chips);".
+    pwm_clock:
+      source: 'internal oscillator or external (brief: "Grayscale clock source selection: internal or external")'
+      keep_clocking: false
+      doc: my9231-v0.91-brief
+      page: 1
+      quote: '"✦ Built-in internal grayscale clock supports refresh rate >2000Hz@16-bit grayscale, >512kHz@8-bit grayscale" "✦ Grayscale clock source selection: internal or external"'
+    forwarding:
+      text: null
+      doc: my9231-v0.91-brief
+      page: 1
+      quote: 'The brief shows only the cascade drawing (Controller DI/DCK → MY9231 1 DI/DCKI … DO/DCKO → MY9231 n). ESPHome reverses the channel order before sending ("uint16_t index = this->pwm_amounts_.size() - channel - 1;"), consistent with a shift register, but no document says so.'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon lists "MY9231?" (with a question mark) as an alternative of "MY9221 (Not supported)"'
+        doc: falcon-pixeltypes
+        page: null
+      - claim: 'my92xx drives MY9291 and MY9231 with the same code; only the channel count differs ("if (_model == MY92XX_MODEL_MY9291) { _channels = 4 * _chips; } else if (_model == MY92XX_MODEL_MY9231) { _channels = 3 * _chips; }")'
+        doc: my92xx-lib
+        page: null
+    disagreements:
+      - 'Falcon''s "MY9231?" grouping with the MY9221 is contradicted by the libraries: the MY9221 datasheet uses a 16-bit command inside a 208-bit frame and a 4-DI-pulse latch after >220 µs; the libraries use an 8-bit command in a separate phase and an 8-DI-pulse latch after ≥12 µs.'
+    open:
+      - 'No full MY9231 datasheet was found (searches, alldatasheet, datasheet4u: its "MY9291" file 1328926 is the MY9221 V1.0 datasheet). Command, data-width, latch and command-phase details here come only from two libraries derived from the MaiKe Labs C driver (not independent); set-up/hold, minimum DCKI widths, the latch timing limits and the chip order are unverified.'
+  # ------------------------------------------------------------------------------------------------
+  - part: MY9291
+    entry: pixel-ics/my9291
+    maker: MY-Semi
+    documents:
+      - id: my9291-v0.91-brief
+        url: http://www.my-semi.com/file/MY9291_BF_0.91.pdf
+        title: 'MY9291 4 or 3-Channel LED Driver With Grayscale Adaptive Pulse Density Modulation Control (one-page brief)'
+        revision: Ver. 0.91
+        date: Mar. 2010
+        language: en
+      - id: my92xx-lib
+        kind: library
+        url: https://github.com/xoseperez/my92xx
+        title: 'my92xx Arduino library (src/my92xx.cpp, src/my92xx.h)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    bit_order_note: 'From my92xx _write() ("unsigned int mask = (0x01 << (bit_length - 1));"); not in the brief.'
+    rates: []
+    clock:
+      max_hz: 10000000
+      recommended_max_hz: null
+      min_hz: null
+      min_high_ns: null
+      min_low_ns: null
+      setup_ns: null
+      hold_ns: null
+      sample_edge: 'both (my92xx writes one bit on each DCKI edge)'
+      shift_edge: null
+      regenerated: 'clock duty recovery and pulse re-timing (brief)'
+      propagation: null
+      printed: 'MY9291 features a 10MHz EMI reduction data clock input; 20Mbps(max.) ~ 220Kbps(min.) data rate'
+      doc: my9291-v0.91-brief
+      page: 1
+      quote: '"MY9291 features a 10MHz EMI reduction data clock input." "✦ 20Mbps(max.) ~ 220Kbps(min.) data rate for EMI reduction data transfer" "Moreover MY9291 utilizes clock duty recovery technique and pulse re-timing to help long distance and multiple cascading applications."'
+    frame:
+      bits_per_channel: 'selectable 8 / 12 / 14 / 16 (library)'
+      channels: '4, or 3 (selectable)'
+      wire_order: null
+      pixel_bits: null
+      chip_bits: null
+      extra: 'my92xx: 8-bit command per chip in a separate command phase (same code as MY9231)'
+      start: null
+      end: null
+      latch: 'my92xx: ≥12 µs gap, then 8 DI pulses'
+      doc: my9291-v0.91-brief
+      page: 1
+      quote: >-
+        Brief: "The MY9291, 4 or 3-channel (R/G/B/W or R/G/B/Amber or R/G/B x 1) constant current APDM (Adaptive Pulse
+        Density Modulation) LED driver" "The device provides 4 or 3(selectable) open-drain constant current sinking
+        outputs" "control command including 16/14/12/8-bit grayscale selection ... and to realize the internal-latch
+        function." Library my92xx.cpp: "if (_model == MY92XX_MODEL_MY9291) { _channels = 4 * _chips; }" and the same
+        _send()/_set_cmd() as for MY9231 (see that entry).
+    pwm_clock:
+      source: 'internal or external grayscale clock (brief)'
+      keep_clocking: false
+      doc: my9291-v0.91-brief
+      page: 1
+      quote: '"✦ Built-in internal grayscale clock supports refresh rate >2000Hz@16-bit grayscale, >512kHz@8-bit grayscale" "✦ Grayscale clock source selection: internal or external"'
+    forwarding:
+      text: null
+      doc: my9291-v0.91-brief
+      page: 1
+      quote: 'Cascade drawing only (Controller DI/DCK → MY9291 1 … MY9291 n).'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon: "MY9291 (Not supported)", 4 channels, 16 bits, 4 wires, no alternatives'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements: []
+    open:
+      - 'No full MY9291 datasheet found. How the 3-channel option is selected and what it does to the frame is not documented.'
+  # ------------------------------------------------------------------------------------------------
+  - part: MBI6020
+    entry: pixel-ics/mbi6020
+    maker: Macroblock
+    documents:
+      - id: mbi6020-v2.00
+        url: https://www.neumueller.com/datenblatt/macroblock/MBI6020%20Preliminary%20Datasheet%20V2.00-EN.pdf
+        title: 'MBI6020 PWM-Embedded 3-Channel Constant Current LED Sink Driver for Small RGB Cluster, Preliminary Datasheet (Neumüller copy)'
+        revision: V2.00
+        date: March 2012
+        language: en
+      - id: mbi6020-v1.01
+        url: https://www.neumueller.com/datenblatt/macroblock/MBI6020%20Datenblatt%20-%20Datasheet.pdf
+        title: 'MBI6020 datasheet (Neumüller copy)'
+        revision: V1.01
+        date: May 2010
+        language: en
+      - id: mbi6020-va.00
+        url: https://www.mblock.com.tw/upload/Datasheet/RGB/MBI6020/MBI6020%20Datasheet%20VA%2000_EN.pdf
+        title: 'MBI6020 Datasheet (two-page public summary, Macroblock)'
+        revision: VA.00
+        date: August 2015
+        language: en
+      - id: falcon-pixeltypes
+        kind: controller
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: 'Falcon (pixelcontroller.com): Pixel Types'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: low
+    idle_note: 'Between packets both lines rest low: "both CKI and SDI should be tied-low and stop for more than 172 CKI cycles" (mbi6020-v2.00 p14).'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 10000000
+      recommended_max_hz: null
+      min_hz: 200000
+      min_high_ns: 15
+      min_low_ns: null
+      setup_ns: 7.5
+      hold_ns: 7.5
+      sample_edge: falling
+      shift_edge: null
+      regenerated: 'phase-inverted output clock (CKO is CKI inverted)'
+      propagation: 'CKI↑–CKO↓ 25 / 30 / 35 ns (min/typ/max, VDD = 5 V); SDO↑↓–CKO↑ 7 / 10 / 14 ns'
+      printed: 'Frequency CKI* FCKI 0.2 - 10 MHz'
+      doc: mbi6020-v2.00
+      page: 10
+      quote: >-
+        p13: "By SPI-like interface, MBI6020 samples the data (SDI) at the falling edge of the clock (CKI)." "By
+        phase-inversed output clock, the clock phase will be inversed from CKI to CKO to eliminate the accumulation of
+        the pulse width deviation." p10 (VDD=5.0V): "Setup Time SDI–CKI↓ tSU 7.5 - - ns", "Hold Time CKI↓–SDI tHD 7.5 -
+        - ns", "Propagation Delay Time ("H" to "L") CKI↑–CKO↓ tPHL1 25 30 35 ns", "Pulse Width CKI* tw(I) 15 - - ns",
+        "Frequency CKI* FCKI 0.2 - 10 MHz", "*The maximum frequency may be limited by different application conditions.
+        Please refer to the application note for details."
+    frame:
+      bits_per_channel: '16 or 10 (selected per packet by the header)'
+      channels: 3
+      wire_order: 'packet: prefix, preamble, then per IC (last IC first) C, B, A words (OUTC first)'
+      pixel_bits: '48 (16-bit) or 30 (10-bit)'
+      chip_bits: '48 or 30, plus one 48-bit or 30-bit preamble per packet'
+      extra: >-
+        Preamble, 16-bit modes (48 bits): H[5:0], A[9:0] = 0, H[5:0] again, L[9:0] = N−1, P[3:0] parity, X1[1:0], L[9:0]
+        again. 10-bit modes (30 bits): H[5:0], P[3:0], A[9:0] = 0, L[9:0]. Headers: 6'b111111 16-bit gray scale,
+        6'b101011 10-bit gray scale, 6'b110011 8-bit dot correction, 6'b100111 6-bit dot correction, 6'b100011 16-bit
+        configuration, 6'b110111 10-bit configuration.
+      start: 'prefix: CKI and SDI both low and stopped for more than 172 CKI cycles'
+      end: null
+      latch: 'no latch command; data are taken when the packet is "correctly recognized" (auto-sync: at the end of the running PWM cycle; manual-sync: immediately)'
+      doc: mbi6020-v2.00
+      page: 22
+      quote: >-
+        p14: "MBI6020's data packet contains three parts: 1. Prefix: The prefix is a symbol of "Silent-to-Reset", i.e. a
+        time period for MBI6020 to distinguish two data packets. During the prefix, both CKI and SDI should be tied-low
+        and stop for more than 172 CKI cycles. 2. Preamble: The preamble defines the cascaded IC numbers and also
+        contains a command to decide the data type. 3. Data: This is the data for each IC." p15: "Once MBI6020 receives
+        the SDI=1 (1'b1), MBI6020 will start to check if the data is a valid header or not." p22: "For 16-bit gray scale
+        data, each word is 16 bits. Each MBI6020 needs 3 words (3x16=48 bits) for the gray scale data of OUTC , OUTB
+        and OUTA . Prior to the gray scale data, there is a 48-bit preamble." "47:42 H[5:0] 111111 The header of 16-bit
+        gray scale data" "41:32 A[9:0] 0000000000 Address. Always send 10'b 0000000000" "31:26 H[5:0] 111111 Double
+        check the header" "25:16 L[9:0] N -1. N=Number of IC in series" "15:12 P[3:0]" "11:10 X1[1:0] XX Don't care.
+        Recommend to fill in 00." "9:0 L[9:0] N-1. N=Number of IC in series Double check the number of IC in series"
+        "47:32 CN[15:0] ... OUTC" "31:16 BN[15:0] ... OUTB" "15:0 AN[15:0] ... OUTA" "The gray scale data of the last IC
+        is sent first, followed by the previous ICs, and the first IC's gray scale data is sent in the end of the
+        packet." p13: "MBI6020 provides SPI-like interface (CKI, SDI), a two-wire only transmission interface, to
+        address the data, so that MBI6020 receives the data directly without latching data."
+    pwm_clock:
+      source: 'embedded oscillator (FOSC 18–22 MHz), GCLK = FOSC / 1…128'
+      keep_clocking: false
+      doc: mbi6020-v2.00
+      page: 21
+      quote: '"MBI6020 continuously repeats the PWM cycle and turns on the output ports according to the image data until the next image data is correctly recognized." p10: "Internal Oscillator FOSC 18.0 20.0 22.0" (MHz). p2: "The gray scale clock, GCLK, is generated by the embedded oscillator."'
+    forwarding:
+      text: "Data of the last IC are sent first and the first IC's data last; each IC learns the chain length from L[9:0] = N−1 in the preamble."
+      doc: mbi6020-v2.00
+      page: 22
+      quote: '"The gray scale data of the last IC is sent first, followed by the previous ICs, and the first IC''s gray scale data is sent in the end of the packet."'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon: "MBI6020 (Not supported)", 10 bits'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'CKI time-out: V2.00 p15 "MBI6020 CKI signal cannot be stopped for more than 95 CKI cycles during the data transmission ... If the CKI is stopped for more than 95 CKI cycles, MBI6020 will ignore the present input data"; V1.01 p25 makes it configurable: "CF2[2] Time-out 1 (default) Enable 0 Disable", "1:0 CKI time-out period selection 11(default) 95~172 cycles 10 47~86 cycles 01 23~44 cycles 00 11~22 cycles"; V2.00 p17-18 reserves CF2: "Bit 2 Reserved 1 (Default) Must fill in 1", "1:0 Reserved 11 (Default) Must fill in 11". The V1.01 window (95~172) explains both numbers in V2.00.'
+      - 'GCLK source: V1.01 p13 "The gray scale clock of PWM generator, GCLK, can be used as the embedded oscillator or the external clock source"; V2.00 p13 "is generated by the embedded oscillator" (the V2.00 pin drawing on p3 still shows an "E-GCLK" pin).'
+      - 'V2.00 set-up/hold labels swap between tables: p10 "Setup Time SDI–CKI↓", "Hold Time CKI↓–SDI"; p11 "Setup Time CKI↓–SDI", "Hold Time SDI–CKI↓".'
+    open:
+      - 'Bit order is from the bit tables (bit 47 first, header at 47:42) and the packet figures; no sentence says "MSB first".'
+  # ------------------------------------------------------------------------------------------------
+  - part: MBI6023
+    entry: pixel-ics/mbi6023
+    maker: Macroblock
+    documents:
+      - id: mbi6023-vb.01
+        url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf
+        title: 'MBI6023 PWM-Embedded 3x4-Channel Constant-Current Sink Driver for LED Strips (Neumüller copy)'
+        revision: VB.01
+        date: November 2016
+        language: en
+      - id: mbi6023-v1.00
+        url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datenblatt%20-%20Datasheet.pdf
+        title: 'MBI6023 Preliminary datasheet (Neumüller copy)'
+        revision: V1.00
+        date: October 2011
+        language: en
+    line_coding: clocked
+    idle: low
+    idle_note: 'Prefix: "both CKI and SDI should be tied-low and stop for more than 172 CKI cycles" (vb.01 p15).'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 10000000
+      recommended_max_hz: null
+      min_hz: 200000
+      min_high_ns: 15
+      min_low_ns: null
+      setup_ns: 7.5
+      hold_ns: 7.5
+      sample_edge: falling
+      shift_edge: null
+      regenerated: 'phase-inverted output clock'
+      propagation: 'CKI↑–CKO↓ 49 ns typ, CKI↓–SDO 44 ns typ (VDD = 5 V); 75 / 67 ns at 3.3 V'
+      printed: 'Frequency CKI* FCKI 0.2 - 10 MHz'
+      doc: mbi6023-vb.01
+      page: 10
+      quote: >-
+        p14: "MBI6023 provides SPI-like interface (CKI, SDI), a two-wire transmission interface, to address the data, so
+        that MBI6023 receives the data directly without a latch command." "MBI6023 samples the data (SDI) at the falling
+        edge of the clock (CKI)." p10 (VDD=5.0V): "Setup Time SDI–CKI↓ tSU 7.5", "Hold Time CKI↓–SDI tHD 7.5",
+        "CKI↑–CKO↓ tPHL1 - 49 -", "CKI↓–SDO↑↓ tPHL2 - 44 -", "Pulse Width CKI* tw(I) 15", "Frequency CKI* FCKI 0.2 - 10
+        MHz", "Internal Oscillator FOSC 24 26 28". p11 (VDD=3.3V): "tw(I) 20", "tPHL1 - 75 -", "tPHL2 - 67 -".
+    frame:
+      bits_per_channel: '16 or 10 (by command)'
+      channels: 12
+      wire_order: 'per IC: C3, B3, A3, C2, B2, A2, C1, B1, A1, C0, B0, A0 (OUTC3 first); last IC first'
+      pixel_bits: '48 (16-bit) or 30 (10-bit) per RGB group'
+      chip_bits: '192 (16-bit) or 120 (10-bit), plus one 48-bit or 30-bit header per packet'
+      extra: "header as MBI6020: 48-bit (H, A=0, H, L=N−1, P, X1, L) or 30-bit (H, P, A=0, L); commands only 6'b111111 (16-bit gray) and 6'b101011 (10-bit gray); with POL tied to GND only 6'b101011 is accepted"
+      start: 'prefix: CKI and SDI low and stopped for more than 172 CKI cycles'
+      end: null
+      latch: 'none ("without a latch command")'
+      doc: mbi6023-vb.01
+      page: 17
+      quote: >-
+        p15: "MBI6023 provides two kinds of commands and input data types shown as the table below: Command H[5:0] Data
+        Type 6'b11 1111 16-bit gray scale data 6'b10 1011 10-bit gray scale data". "When enable function of polarity
+        reversion, by connecting pin POL to GND, MBI6023 would only accept 10-bit grayscale command". p17: "Each
+        MBI6023 needs 12 words (12x16=192 bits) for the gray scale data of each output channel of one MBI6023. Prior to
+        the gray scale data, there is a 48-bit header." "191:0 C3N[15:0]~A0N[15:0] ... 16-bit x 12 channels gray scale
+        data of the Nth MBI6023. The data of OUTC3N is sent first." "The gray scale data of the last IC is sent first,
+        followed by the previous ICs, and the first IC's gray scale data is sent in the end of the packet." Figure: "C3N
+        B3N A3N … C0N B0N A0N … C01 B01 A01", "Total N drivers, data length: N x 3 x 4 x 16 bits", "Each driver has 3 x
+        4 x16 bits". p18: 30-bit header "29:24 H[5:0] 101011", "23:20 P[3:0]", "19:10 A[9:0]", "9:0 L[9:0] N-1"; "Each
+        MBI6023 needs 12 words (12x10=120 bits)". "Connecting pin "POL" to GND ... will set frequency of internal
+        oscillator to 1.5Mhz and PWM counter to 10-bit mode."
+    pwm_clock:
+      source: embedded oscillator
+      keep_clocking: false
+      doc: mbi6023-vb.01
+      page: 14
+      quote: '"The gray scale clock of PWM generator, GCLK, is generated by the embedded oscillator."'
+    forwarding:
+      text: "Last IC's data first; chain length from L[9:0] = N−1."
+      doc: mbi6023-vb.01
+      page: 17
+      quote: '"The gray scale data of the last IC is sent first, followed by the previous ICs, and the first IC''s gray scale data is sent in the end of the packet."'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'CKI time-out, V1.00 vs VB.01 (both p15): V1.00 "If the CKI is tied-low for more than 95 CKI cycles, MBI6023 may identify the wires as disconnection."; VB.01 "If the CKI is tied-low for more than 2 CKI cycles, MBI6023 may identify the wires as disconnection." (checked on the rendered page; it really says 2). Both keep "the prefix in the beginning of a data packet must be more than 172 CKI cycles". MBI6020 V1.01 gives the default time-out window as "95~172 cycles", so "2" looks like an error, but it is what VB.01 prints.'
+    open: []
+  # ------------------------------------------------------------------------------------------------
+  - part: MBI6024
+    entry: pixel-ics/mbi6024
+    maker: Macroblock
+    documents:
+      - id: mbi6024-v2.00
+        url: https://www.neumueller.com/datenblatt/macroblock/MBI6024%20Datenblatt%20-%20Datasheet.pdf
+        title: 'MBI6024 PWM-Embedded 3x4-Channel Constant-Current Sink Driver for LED Strips, preliminary (Neumüller copy)'
+        revision: V2.00
+        date: October 2011
+        language: en
+      - id: mbi6024-vb.00
+        url: https://www.mblock.com.tw/upload/Datasheet/RGB/MBI6024/MBI6024%20Datasheet%20VB.00_EN.pdf
+        title: 'MBI6024 Datasheet (two-page public summary, Macroblock)'
+        revision: VB.00
+        date: June 2016
+        language: en
+      - id: mbi6023-vb.01
+        url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf
+        title: 'MBI6023 datasheet VB.01 (for the comparison)'
+        revision: VB.01
+        date: November 2016
+        language: en
+    line_coding: clocked
+    idle: low
+    idle_note: 'Prefix: "both CKI and SDI should be tied-low and stop for more than 172 CKI cycles" (v2.00 p15).'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 10000000
+      recommended_max_hz: null
+      min_hz: 200000
+      min_high_ns: 15
+      min_low_ns: null
+      setup_ns: 7.5
+      hold_ns: 7.5
+      sample_edge: falling
+      shift_edge: null
+      regenerated: 'phase-inverted output clock'
+      propagation: 'CKI↑–CKO↓ 40 ns typ, CKI↓–SDO↑↓ 30 ns typ (VDD = 5 V); CKI↑–CKO↓ 50 ns typ (3.3 V)'
+      printed: 'Frequency CKI FCKI 0.2 - 10 MHz'
+      doc: mbi6024-v2.00
+      page: 10
+      quote: >-
+        p14: "MBI6024 provides SPI-like interface (CKI, SDI), a two-wire transmission interface, to address the data, so
+        that MBI6024 receives the data directly without a latch command." "MBI6024 samples the data (SDI) at the
+        falling edge of the clock (CKI)." "By phase-inversed output clock, the clock phase will be inversed from CKI to
+        CKO". p10 (VDD=5.0V): "Setup Time SDI–CKI↓ tSU ... 7.5 - - ns", "Hold Time CKI↓–SDI tHD 7.5 - - ns",
+        "CKI↑–CKO↓ tPHL1 - 40 ns", "CKI↓–SDO↑↓ tPHL2 - 30 ns", "tw(I) 15 - - ns", "FCKI 0.2 - 10 MHz". p11 (VDD=3.3V):
+        "CKI↑–CKO↓ tPHL1 - 50 - ns", "tw(I) 20 - - ns", "FCKI 0.2 - 10 MHz".
+    frame:
+      bits_per_channel: '16 or 10 (by command)'
+      channels: 12
+      wire_order: 'per IC: C3, B3, A3 … C0, B0, A0 (OUTC3 first); last IC first'
+      pixel_bits: '48 (16-bit) or 30 (10-bit) per RGB group'
+      chip_bits: '192 (16-bit) or 120 (10-bit) gray; configuration packets carry 48 or 30 bits per IC'
+      extra: "same 48-/30-bit headers as MBI6020/MBI6023; six commands: 6'b111111 16-bit gray, 6'b101011 10-bit gray, 6'b110011 8-bit dot correction, 6'b100111 6-bit dot correction, 6'b100011 16-bit configuration, 6'b110111 10-bit configuration"
+      start: 'prefix: CKI and SDI low and stopped for more than 172 CKI cycles'
+      end: null
+      latch: 'none ("without a latch command")'
+      doc: mbi6024-v2.00
+      page: 23
+      quote: >-
+        p14: "The sequence of operation should follow the steps below: Step 1. Set the configuration register Step 2.
+        Send the dot correction data Step 3. Send the gray scale data" p16: "MBI6024 provides six kinds of commands and
+        input data types shown as the table below: Command H[5:0] Data Type 6'b11 1111 16-bit gray scale data 6'b10 1011
+        10-bit gray scale data 6'b11 0011 8-bit dot correction data 6'b10 0111 6-bit dot correction data 6'b10 0011
+        16-bit configuration data 6'b11 0111 10-bit configuration data". p23: "Each MBI6024 needs 12 words (12x16=192
+        bits) for the gray scale data of each output channel of one MBI6024. Prior to the gray scale data, there is a
+        48-bit header." "47:42 H[5:0] 111111", "41:32 A[9:0] 0000000000", "31:26 H[5:0] 111111 Double check the
+        command.", "25:16 L[9:0] N -1", "15:12 P[3:0]", "11:10 X1[1:0]", "9:0 L[9:0] N-1", "191:0 C3N[15:0]~A0N[15:0]
+        ... The data of OUTC3N is sent first." "The gray scale data of the last IC is sent first". p19: "Each MBI6024
+        needs 3 words (3x16=48 bits) for the configuration data."
+    pwm_clock:
+      source: 'embedded oscillator (24 MHz typ), GCLK = /1, /2 (default), /4 or /8'
+      keep_clocking: false
+      doc: mbi6024-v2.00
+      page: 18
+      quote: '"MBI6024 provides four kinds of internal GCLK frequency, which is the internal oscillator frequency divided by 1, 2, 4, and 8, for different applications according to the bits of CF1[9:8]. The internal oscillator frequency is 24MHz (typ.)"'
+    forwarding:
+      text: "Last IC's data first; chain length from L[9:0] = N−1."
+      doc: mbi6024-v2.00
+      page: 23
+      quote: '"The gray scale data of the last IC is sent first, followed by the previous ICs, and the first IC''s gray scale data is sent in the end of the packet."'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'MBI6023 VB.01 (p15, p17-18) prints the same two gray-scale commands, the same 48-bit/30-bit header layouts and the same 12-words-per-IC order; MBI6024 adds the dot-correction and configuration commands. Neither datasheet calls the other compatible.'
+        doc: mbi6023-vb.01
+        page: 15
+    disagreements: []
+    open:
+      - 'Time-out: V2.00 p16 "If the CKI is tied-low for more than 95 CKI cycles, MBI6024 may identify the wires as disconnection"; no newer full MBI6024 datasheet was read to see whether it changed like MBI6023 VB.01 did.'
+  # ------------------------------------------------------------------------------------------------
+  - part: DM412
+    entry: pixel-ics/dm412
+    maker: Silicon Touch Technology (SITI)
+    documents:
+      - id: dm412-a.003
+        url: https://datasheet4u.com/pdf/664190/DM412.pdf
+        title: 'DM412 3-CHANNEL CONSTANT CURRENT LED DRIVERS WITH LED OPEN DETECTION (SILICON TOUCH TECHNOLOGY INC., file SP-DM412-A.003.doc)'
+        revision: A.003
+        date: 2007/08/27
+        language: en
+    line_coding: clocked
+    idle: null
+    idle_note: 'Auto-strobe needs CKI held high ("Keeping CKI in high level and sending into eight DAI pulses", p13); the manual strobe input STI rests high ("''H'' means data is latched", p4).'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 20000000
+      recommended_max_hz: '20 MHz single chip or cascaded with SDO = H; 10 MHz cascaded with SDO = L'
+      min_hz: 0
+      min_high_ns: 20
+      min_low_ns: 20
+      setup_ns: 15
+      hold_ns: 15
+      sample_edge: rising
+      shift_edge: 'selectable: DAO changes on the CKO falling edge (SDO = H, recommended for cascades) or rising edge (SDO = L)'
+      regenerated: 'buffered clock, data and strobe outputs'
+      propagation: 'CKI-to-CKO 11.5 ns (L→H) / 7.2 ns (H→L); CKO-to-DAO 8.4 ns (SDO = L) / 4.0 ns (SDO = H)'
+      printed: 'Maximum serial-in clock frequency: 20 MHz'
+      doc: dm412-a.003
+      page: 6
+      quote: >-
+        p2: "z Maximum serial-in clock frequency: 20 MHz" "z Built-in buffers for cascading clock, data, and strobe to
+        next driver" "z Selectable auto/manual strobe (Patent pending)". p4: "CKI Synchronous clock input terminal for
+        serial data transfer. Data is sampled at the rising edge of CKI." "SDO*1 Serial data output trigger mode
+        selection: 'H' means data is shifted out on synchronization to falling edge of CKO, 'L' means data is shifted
+        out on synchronization to rising edge of CKO." "*1 It is recommended that SDO should be set to high level in
+        cascading system applications." p6: "Input Clock Frequency FCKI Single Chip Operation 20M; Cascade Operation
+        (SDO='H', CL=13pF) 20M; Cascade Operation (SDO='L', CL=13pF) DC ⎯ 10M Hz", "STI Pulse Width tw STI 20", "CKI Pulse
+        Width tw CLK 20", "Set-up Time for DAI tsetup(D) 15", "Hold Time for DAI thold(D) 15", "Set-up Time for STI
+        tsetup(L) 15 ns", "Set-up Time for Internal Strobe tsetup(istb) 1 us". p8: "CKI-to-CKO ⎯ 11.5", "CKO-to-DAO (SDO =
+        'L') tpLH ⎯ 8.4", "CKI-to-CKO ⎯ 7.2", "CKO-to-DAO (SDO = 'H') tpHL ⎯ 4.0".
+    frame:
+      bits_per_channel: 16
+      channels: 3
+      wire_order: 'R15…R0 G15…G0 B15…B0'
+      pixel_bits: 48
+      chip_bits: 48
+      extra: 'none on input; on read-back the LSB of each word carries the LED-open flag (E[R], E[G], E[B]; 1 = normal)'
+      start: null
+      end: null
+      latch: 'manual: STI strobe pin (H = latched, L = transparent), passed on as STO; auto (SDO = H only): CKI held high and eight DAI pulses'
+      doc: dm412-a.003
+      page: 13
+      quote: >-
+        p10 Input Data Format: "shift in first" R[15] … R[0] (MSB … LSB), then G[15] … G[0], then B[15] … B[0]. p4: "STI
+        Input terminal of data strobe: 'H' means data is latched, 'L' means data on shift register goes through latch
+        (level latch)." "STO Strobe output terminal." p13 timing notes: "*1 Keeping CKI in high level and sending into
+        eight DAI pulses successively will trigger internal strobe automatically." "*2 Error message of LED open
+        detection will be sent out from DAO." "*5 Internal strobe signal. Auto latch function is only for SDO = 'H'."
+        Figure: "1 cell" = clocks 1…48; after the 48th clock either STI pulses low, or "CKI kept high" while DAI carries
+        8 pulses ("8th*1") and ISTB (internal) pulses.
+    pwm_clock:
+      source: 'internal oscillator (~17.5 MHz), free-running'
+      keep_clocking: false
+      doc: dm412-a.003
+      page: 2
+      quote: '"z PWM free-running capability (refresh rate (~ 267 Hz) with internal oscillator (~ 17.5 MHz))"'
+    forwarding:
+      text: 'Plain 48-bit shift register per chip ("1 cell"): DAO shifts out the previous contents, so the first 48 bits sent end in the farthest chip (from the timing figure; not stated in words).'
+      doc: dm412-a.003
+      page: 13
+      quote: 'Timing figure: DAO*3 / DAO*4 show RA[15] … BA[0] leaving while RB[15] … BB[0] enter on DAI ("1 cell" = 48 clocks). p2: "Data, clock, and latch buffer outputs are designed for cascading another chip."'
+    backup_line: null
+    compatibility_claims: []
+    disagreements: []
+    open:
+      - 'How long STI must stay low and whether the auto strobe needs a CKI-high time before the DAI pulses beyond "tsetup(istb) 1 us" is only in the figure.'
+  # ------------------------------------------------------------------------------------------------
+  - part: LD1510
+    entry: pixel-ics/ld1510
+    maker: LDT Inc.
+    documents:
+      - id: ld1510-v3.0
+        url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
+        title: 'LD1510 3Channel Output LED Driver with 12 bit PWM Controller (LDT Inc.); served from www.qdatasheet.com'
+        revision: Ver. 3.0
+        date: Feb. 2009 (data sheet dated 2009.02.17)
+        language: en
+    line_coding: clocked
+    idle: low
+    idle_note: 'The strobe is sent while CLKI is low; DO carries data when CLKI is high and repeats the strobe when CLKI is low ("DO Serial data output when CLKI is ''H'', strobe transmit when CLKI is ''L''.", p4).'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 10000000
+      recommended_max_hz: null
+      min_hz: 500000
+      min_high_ns: 40
+      min_low_ns: 40
+      setup_ns: 18
+      hold_ns: 30
+      sample_edge: rising
+      shift_edge: null
+      regenerated: 'CLKO re-generated: fixed width tW 45 ns typ, delay tCKD 13 ns typ, cycle tCY 100–2000 ns'
+      propagation: 'CLKI-DO tPLH / tPHL 13 ns typ, 20 ns max'
+      printed: 'Maximum CLKI Frequency fCKMAX (*1) 0.5 8 10 MHz (*1: Cascade Operation)'
+      doc: ld1510-v3.0
+      page: 9
+      quote: >-
+        p4: "Maximum serial input frequency : 10MHz". p9 AC CHARACTERISTICS: "Maximum CLKI Frequency fCKMAX (*1) 0.5 8 10
+        MHz", "Pulse Width CLKI tWH0 / tWL0 40", "tWH1 40", "Data Setup Time tsetup 18", "Data Hold Time thold 30", "DI
+        Width twsh 100 + 1 x N (*2)", "twsl 100 + 1 x N (*2)", "twss 10,000 (*3)", "Clock Delay CLKO tCKD 13", "Clock
+        Width CLKO tW 45", "Clock Cycle CLKO tCY 100 2000"; "*1 : Cascade Operation *2 : N= Number of Chips in Serial *3 :
+        N= 2000ea". p3 revision history: "'Maximum serial input frequency : 20MHz ' Is revised to 'Maximum serial input
+        frequency : 10MHz )'". The sampling edge is drawn, not written: p10 "CLKI, DI, DO (Data Transmit)" puts tsetup and
+        thold around the CLKI rising edge.
+    frame:
+      bits_per_channel: '8 (MOD = L) or 12 (MOD = H)'
+      channels: 3
+      wire_order: 'R, G, B, MSB first (8-bit: R7…R0 G7…G0 B7…B0)'
+      pixel_bits: '24 (MOD = L) or 36 (MOD = H)'
+      chip_bits: '24 or 36'
+      extra: null
+      start: null
+      end: null
+      latch: 'strobe: at least 10 µs after the last clock, with CLKI low, DI toggles 5 times (each high and low ≥ 100 ns + 1 ns × chips)'
+      doc: ld1510-v3.0
+      page: 15
+      quote: >-
+        p4: "MOD 4 Input data transfer mode selection. L : 8bit luminance data transfer. H : 12bit luminance data
+        transfer". p15 (8bit Mode): "When 2 chips are connected in series, strobe signal shall be applied after 48ea of
+        clock input. When more than 2 chips are connected in series, strobe signal shall be applied after N x 24ea of
+        clock input. ('N' is the number of chip.) **Note) Apply the strobe signal after minimum 10us from the last clock
+        (e.g. 48th clock in 2 chips)". p16 (12bit Mode): "strobe signal shall be applied after N x 36ea of clock input."
+        p3 revision history: "Strobe Transmit 'DI : 2 times toggle when CLKI=L' is revised to 'DI : 5 times toggle when
+        CLKI=L'". p10 "CLKI, DI (Strobe Transmit)": CLKI low, Twss, then five DI pulses (twsh / twsl).
+    pwm_clock:
+      source: 'built-in RC oscillator (internal PWM clock up to 12 MHz)'
+      keep_clocking: false
+      doc: ld1510-v3.0
+      page: 4
+      quote: '"• Built in internal RC oscillator" (p4); "Internal PWM Clock Frequency fPWMCK 12 MHz" (p6)'
+    forwarding:
+      text: "Shift register: after 24 (or 36) clocks the earlier bits leave on DO, so the first chip's worth of data sent ends in the farthest chip (from the figures); the strobe is repeated on DO while CLKI is low."
+      doc: ld1510-v3.0
+      page: 15
+      quote: 'p15 figure, clocks 25-48: DI carries "R17 … R10 G17 … G10 B17 … B10" while DO carries "R07 … R00 G07 … G00 B07 …", then DI and DO both show the five strobe pulses and the internal ST pulse.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'Clock maximum lowered between revisions: p3 "''Maximum serial input frequency : 20MHz '' Is revised to ''Maximum serial input frequency : 10MHz )''" and "''CLKI Frequency 20MHZ '' Is revised to ''CLKI Frequency 10MHZ ''" (V3.0, 2009.2.17).'
+      - 'Strobe changed between revisions: V2.0 (2009.1.12) "''DI : 2 times toggle when CLKI=L'' is revised to ''DI : 5 times toggle when CLKI=L''".'
+      - 'Figure label typos: the 8-bit figure (p15) labels clock 1 "R00" where the pattern (G07 at clock 9, B07 at 17, R17 at 25) needs R07; the 12-bit figure (p16) labels the first bit of each 12-bit word "R012"/"G012"/"B012" (bit 12) although each colour has 12 clocks (bits 11…0).'
+    open:
+      - '"twss 10,000 (*3)" with "*3 : N= 2000ea" reads as the 10 µs minimum for a 2000-chip chain; whether shorter chains may use less is not stated (p15-16 say "minimum 10us").'
+  # ------------------------------------------------------------------------------------------------
+  - part: ICND2110
+    entry: pixel-ics/icnd2110
+    maker: Chipone Technology (Beijing) Co., Ltd.
+    documents:
+      - id: icnd2110-v1.1
+        url: https://downloads.olympianled.com/PDF/Driver%20ICs/ICND2110-datasheet-EN-2018-V1.1-including-PG.pdf
+        title: 'ICND2110 12-Channel PWM Constant Current LED Sink Driver (Chipone; hosted by Olympian LED, a NovaStar distributor)'
+        revision: V1.1
+        date: Aug 2018
+        language: en
+      - id: advatek-icnd2110
+        kind: controller
+        url: https://www.advateklighting.com/pixel-protocols/icnd2110
+        title: 'Advatek: LED Pixel Protocol ICND2110'
+        revision: null
+        date: null
+        language: en
+      - id: enttec-icnd2110
+        kind: controller
+        url: https://www.enttec.com/pixel-protocols/ICND2110
+        title: 'ENTTEC: ICND2110 Pixel Protocol'
+        revision: null
+        date: null
+        language: en
+    line_coding: clocked
+    idle: null
+    idle_note: 'The clock never stops ("CLK needs to be sent continuously, without interruption"); SDI rests low between frames ("SDI pulls down until the next frame begins").'
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      recommended_max_hz: null
+      min_hz: null
+      min_high_ns: null
+      min_low_ns: null
+      setup_ns: null
+      hold_ns: null
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      propagation: null
+      printed: 'Data transfer frequency:fMAX=30MHz(Max)'
+      doc: icnd2110-v1.1
+      page: 7
+      quote: >-
+        p2: "Data transfer frequency:fMAX=30MHz(Max)". p4: "Clock Frequency FCLK 30 MHz". p3: "CLKI Clock input terminal
+        for data shift on rising edge", "CLKO Clock output to the following IC", "SDO Serial-data or command output to
+        the following IC". p7: "Using dual line transmission mode, the CLK signal is transmitted at a fixed frequency and
+        needs to be sent continuously, without interruption. The SDI signal is transmitted for the data and instruction,
+        and is collected and written when the CLK signal is on the rising edge."
+    frame:
+      bits_per_channel: 16
+      channels: 12
+      wire_order: 'per chip: OUT5…OUT0 (96 bits), blank, OUT11…OUT6 (96 bits), blank; OUT0_R1 OUT1_G1 OUT2_B1 OUT3_R2 … OUT11_B4, so the first word is OUT5 = B2'
+      pixel_bits: 48
+      chip_bits: '192 data + 2 × 16 blank'
+      extra: "16-bit register once per frame (bits 15:5 reserved, 4 PWM-wider, 3 UP ghosting reduction, 2:0 test, default 3'h7); 16-bit blanks of 0 between all elements"
+      start: '128 bits of 1'
+      end: '145 bits of 1, then SDI low until the next frame'
+      latch: 'end marker (145 ones)'
+      doc: icnd2110-v1.1
+      page: 8
+      quote: >-
+        p7 table: "Start Frame start 128bit date=1" "End Frame end 145bit date=1" "Blank Blank signal 16bit
+        data=0,Blank should be send between Start,Reg,Data of each chip,End" "Reg Reg input 16bit Register" "Data Date
+        input 96bit data,Corresponding to OUT5~OUT0 and OUT11~OUT6 output channel 16bit data, first send OUT5 or OUT11,
+        high bit in front, low bit in the rear". p8: "1. Send Start at the begin of each frame; 2. Send Blank; 3. Send
+        Reg, input 16bit register; 4. Send Blank; 5. Send Date of chip1- OUT5~OUT0; 6. Send Blank; 7. Send Date of
+        chip1- OUT11~OUT6; 8. Send Blank; 9. Repeat step 5~8, in turn, write chip 1, chip 2, until chip N; 10. Send End,
+        frame data transmission end; 11. SDI pulls down until the next frame begins. Note: 1. Data 0 is sent when no
+        data or instruction is sent; 2. CLK needs to be sent continuously, without interruption." p3 pins: "OUT0_R1",
+        "OUT1_G1", "OUT2_B1", "OUT3_R2", "OUT4_G2", "OUT5_B2", "OUT6_R3", "OUT7_G3", "OUT8_B3", "OUT9_R4", "OUT10_G4",
+        "OUT11_B4".
+    pwm_clock:
+      source: null
+      keep_clocking: true
+      doc: icnd2110-v1.1
+      page: 8
+      quote: '"2. CLK needs to be sent continuously, without interruption." (p8); p7 "the CLK signal is transmitted at a fixed frequency and needs to be sent continuously, without interruption." The datasheet does not say whether CLK is the PWM clock.'
+    forwarding:
+      text: "The first chip's data are sent first (chip 0 / chip 1 is the one next to the controller in the application drawing)."
+      doc: icnd2110-v1.1
+      page: 7
+      quote: '"Each chip drives 4 sets of RGB, a total of 4 RGB-LED lights. The data is transferred and configured by dual line serial concatenation. The data of chip0 is sent first, and the data of chip N is sent at last."'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Advatek: "ICND2110 allows connection of three RGB LEDs per chip. It is a 16-bit protocol"; "PWM Rate 3840Hz"'
+        doc: advatek-icnd2110
+        page: null
+      - claim: 'ENTTEC: "a clocked (two-wire) RGB pixel driver with 16-bit per-channel greyscale and a 5 to 10V supply"; "Redundant Data Line No"'
+        doc: enttec-icnd2110
+        page: null
+    disagreements:
+      - 'Chips per RGB: datasheet p7 "Each chip drives 4 sets of RGB" and 12 outputs (p3); Advatek "allows connection of three RGB LEDs per chip".'
+      - 'Supply: datasheet p2 "Power supply voltage: VDD =3.3～5V", p5 "VDD 3.3 5 5.5 V", p4 absolute "VDD 0~5.5 V", "Output voltage VOUT 10V"; ENTTEC calls 5-10 V the chip''s "supply"; Advatek "Input Voltage 5V", "Output Pixel Voltage 5 - 10V".'
+      - 'Chip numbering: p7 drawing and text use "CHIP 0" … "chip N"; p8 steps use "chip1" … "chip N".'
+      - 'The p8 waveform draws one "96b data" block per chip, while steps 5-8 send two 96-bit blocks (OUT5~OUT0, OUT11~OUT6) per chip.'
+    open:
+      - 'Whether the continuous CLK also clocks the PWM is not stated; no oscillator is mentioned. Minimum clock rate, set-up/hold and propagation are not printed.'
+      - 'How the chip tells Start (128 ones) and End (145 ones) apart from data is not explained (each 96-bit block is at most 96 ones and blanks are zeros).'
+
+# ==================================================================================================
+# SUMMARY: see plans/pixel-protocols/c2-clocked.md (same content, Markdown).
+# ==================================================================================================

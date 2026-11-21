@@ -1,0 +1,1506 @@
+# Batch a2-sk-apa: Opsco/Normand SK68xx, APA Electronic / Newstar APA10x, BaiCheng PL9823.
+# Research notes for workstream 8 (pixel protocols). Summary: a2-sk-apa.md (read it first).
+# Conventions: one `rates` item per datasheet revision (they differ); `ns` holds the printed
+# typical ("Actual value"/"Standard value"), min_ns/max_ns the printed range, tol_ns a printed ±.
+# Extra keys used beyond the brief's template: other_entries (same part, second DB entry),
+# frame_variants (revisions that print a different frame), baseline (reference part).
+batch: a2-sk-apa
+researched: '2026-11-20'
+parts:
+  # ---------------------------------------------------------------- baseline (not in batch)
+  - part: WS2812B
+    entry: pixels/ws2812
+    baseline: true # the comparison reference for this batch; read both sheets
+    maker: WorldSemi
+    documents:
+      - id: ws2812b-old
+        url: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+        title: WS2812B Intelligent control LED integrated light source
+        revision: null # none printed
+        date: null
+        language: en
+      - id: ws2812b-v5
+        url: https://www.lcsc.com/datasheet/C2761795.pdf # resolves to datasheet.lcsc.com/datasheet/pdf/bc8264a6d62c958a89e25ec8cc82b690.pdf
+        title: WS2812B Ver. No.:V5 Intelligent control LED integrated light source
+        revision: V5 (history row 'V5.0 … 20190323'; first row 'New WS2812B - V5 20190219')
+        date: '2019-03-23'
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps (undated sheet)
+        select: null
+        T0H: { ns: 400, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.4us ±150ns' }
+        T0L: { ns: 850, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.85us ±150ns' }
+        T1H: { ns: 800, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.8us ±150ns' }
+        T1L: { ns: 450, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.45us ±150ns' }
+        period: { ns: 1250, tol_ns: 600, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { min_ns: 50000, printed: 'Above 50µs' }
+        doc: ws2812b-old
+        page: 3
+        quote: 'Data transfer time( TH+TL=1.25µs±600ns) | T0H 0 code ,high voltage time 0.4us ±150ns | T1H 1 code ,high voltage time 0.8us ±150ns | T0L 0 code , low voltage time 0.85us ±150ns | T1L 1 code ,low voltage time 0.45us ±150ns | RES low voltage time Above 50µs'
+      - name: 800kbps (V5)
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        period: null
+        reset: { min_ns: 280000, printed: '>280µs' }
+        doc: ws2812b-v5
+        page: 3
+        quote: 'Data Transfer Time | T0H 0 code, high voltage time 220ns~380ns | T1H 1 code, high voltage time 580ns~1µs | T0L 0 code, low voltage time 580ns~1µs | T1L 1 code, low voltage time 580ns~1µs | RES Frame unit, low voltage time >280µs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low >50µs (old sheet) / >280µs (V5)'
+      doc: ws2812b-old
+      page: 5
+      quote: 'Composition of 24bit data: G7 G6 G5 G4 G3 G2 G1 G0 R7 … B0 | Note: Follow the order of GRB to sent data and the high bit sent at first.'
+    forwarding:
+      text: first pixel keeps the first 24 bits, reshapes and forwards the rest on DO
+      doc: ws2812b-old
+      page: 1
+      quote: 'the first pixel collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade pixel through the DO port. After transmission for each pixel，the signal to reduce 24bit.'
+      delay: 'tPLZ max 300 ns (CL=15pF, DIN→DOUT,RL=10KΩ), old sheet p3 and V5 p3'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'The two WorldSemi sheets do not print the same windows: old sheet T0H 0.4us ±150ns, T1H 0.8us ±150ns, T1L 0.45us ±150ns, RES above 50µs; V5 T0H 220ns~380ns, T1H 580ns~1µs, T1L 580ns~1µs, RES >280µs. Their T1L windows meet only at 580–600 ns.'
+    open: []
+
+  # ---------------------------------------------------------------- SK6812
+  - part: SK6812
+    entry: pixels/sk6812
+    other_entries: [pixel-ics/sk6812-5050]
+    maker: Opsco (Dongguan OPSCO Optoelectronics); Shenzhen Normand Electronic and LED Color publish rebadged copies
+    documents:
+      - id: sk6812-ledcolor-r01
+        url: https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
+        title: LED COLOR SK6812 Technical Data Sheet (www.szledcolor.com)
+        revision: '01'
+        date: null
+        language: en
+      - id: sk6812-opsco-r02
+        url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+        title: SK6812 SPECIFICATION (DONGGUANG OPSCO OPTOELECTRONICS CO., LTD)
+        revision: '02'
+        date: '2015-07-08'
+        language: en
+      - id: sk6812-normand-r06
+        url: https://www.normandled.com/upload/201805/SK6812%205050%20Datasheet.pdf # byte-identical to upload/201603/SK6812 LED  Datasheet.pdf; both linked from normandled.com/Product/view/id/795.html
+        title: Shenzhen Normand Electronic SK6812 5.4x5.0x1.6 mm 0.2W Intelligent external control surface mount SMD LED
+        revision: '06' # history: 04 2018-01-22 'Modified timetable', 05 2018-04-30 'Modified timetable range', 06 2019-01-02 'Revision of Specification Format'
+        date: '2019-01-02'
+        language: en
+      - id: sk6812-opsco-a0
+        url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SK6812-datasheet.pdf
+        title: Specification OSK-SPC-SK6812-012 (Opsco approval block)
+        revision: A/0
+        date: '2022-07-13'
+        language: en
+      - id: sk6812-opsco-b1
+        url: https://datasheet.lcsc.com/datasheet/pdf/9f469126feffa69bd23486dc2acd2d83.pdf # the YAML's datasheet.url (LCSC C5378720)
+        title: 东莞市欧思科光电科技有限公司 SK6812-012 产品规格书 / Product specification
+        revision: B/1
+        date: '2025-08-11'
+        language: zh+en
+      - id: cpldcpu-sk6812
+        url: https://cpldcpu.com/2016/03/09/the-sk6812-another-intelligent-rgb-led/ # results table image: https://cpldcpu.com/wp-content/uploads/2015/11/table.png
+        title: "Tim's Blog: The SK6812 – another intelligent RGB LED (third-party measurement)"
+        revision: null
+        date: '2016-03-09'
+        language: en
+      - id: advatek-sk6812
+        url: https://www.advateklighting.com/pixel-protocols/sk6812
+        title: Advatek LED Pixel Protocol SK6812 (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon (pixelcontroller.com) Pixel Types (controller maker)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — LED Color rev 01 / Opsco rev 02 (2015)
+        select: null
+        T0H: { ns: 300, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.3µs ±0.15µs' }
+        T0L: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9µs ±0.15µs' }
+        T1H: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        T1L: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        period: { ns: 1250, tol_ns: 600, printed: 'TH+TL=1.25µs±600ns' }
+        reset:
+          { ns: 80000, min_ns: null, printed: '80µs (LED Color rev 01 diagram: reset code >=50us)' }
+        doc: sk6812-opsco-r02
+        page: 5
+        quote: '10. The data transmission time (TH+TL=1.25µs±600ns): T0H 0 code, high level time 0.3µs ±0.15µs | T0L 0 code, low level time 0.9µs ±0.15µs | T1H 1 code, high level time 0.6µs ±0.15µs | T1L 1 code, low level time 0.6µs ±0.15µs | Trst Reset code，low level time 80µs'
+        also: "sk6812-ledcolor-r01 p5 prints the same four rows and Trst 80µs; its p6 transmission diagram says 'reset code >=50us'. Opsco rev 02 p4: 'The speed of data transmission fDIN --- 800 --- KHZ The duty ratio of 67% (data 1)'"
+      - name: 800kbps — Normand rev 06 (2019)
+        select: null
+        T0H: { ns: 320, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.2 / 0.32 / 0.4 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.8 / -- / -- µs' }
+        T1H: { ns: 640, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '0.58 / 0.64 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.2 / -- / -- µs' }
+        period:
+          {
+            min_ns: 1200,
+            printed: 'T Code period 1.20 -- -- µs (section heading still says TH+TL=1.25µs±600ns)',
+          }
+        reset: { min_ns: 80000, printed: '>80 µs' }
+        doc: sk6812-normand-r06
+        page: 6
+        quote: '12. The data transmission time (TH+TL=1.25µs±600ns): Name Min. Standard value Max. Unit | T Code period 1.20 -- -- µs | T0H 0 code, high level time 0.2 0.32 0.4 µs | T0L 0 code, low level time 0.8 -- -- µs | T1H 1 code, high level time 0.58 0.64 1.0 µs | T1L 1 code, low level time 0.2 -- -- µs | Trst Reset code，low level time >80 -- -- µs'
+        also: 'p7: ''2. When writing programs, the minimum symbol period is 1.2μs. 3. The high time of "0" code and "1" code should be in accordance with the stipulated range in the above table. The low time requirement of "0" code and "1" code is less than 20μs.'''
+      - name: 800kbps — Opsco A/0 (2022)
+        select: null
+        T0H: { ns: 300, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.2 / 0.3 / 0.4 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.8 / -- / -- µs' }
+        T1H: { ns: 670, tol_ns: null, min_ns: 600, max_ns: 1000, printed: '0.6 / 0.67 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.2 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Code period 1.20 -- -- µs' }
+        reset: { min_ns: 80000, printed: '>80 µs' }
+        doc: sk6812-opsco-a0
+        page: 8
+        quote: '12. The data transmission time (TH+TL=1.25µs±600ns): T Code period 1.20 -- -- µs | T0H 0 code, high level time 0.2 0.3 0.4 µs | T0L 0 code, low level time 0.8 -- -- µs | T1H 1 code, high level time 0.6 0.67 1.0 µs | T1L 1 code, low level time 0.2 -- -- µs | Trst Reset code，low level time >80 -- -- µs'
+      - name: 800kbps — Opsco B/1 (2025)
+        select: null
+        T0H: { ns: 320, tol_ns: null, min_ns: 250, max_ns: 400, printed: '0.25 / 0.32 / 0.40 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.80 / -- / -- µs' }
+        T1H: { ns: 700, tol_ns: null, min_ns: 650, max_ns: 1000, printed: '0.65 / 0.70 / 1.00 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.20 / -- / -- µs' }
+        period: { min_ns: 1200, printed: '码元周期 Symbol period T 1.20 -- -- µs' }
+        reset: { min_ns: 200000, printed: '>200 µs' }
+        doc: sk6812-opsco-b1
+        page: 7
+        quote: '10. 控制器建议数据传输时间 Suggested data transmission ttme: Min. / 实际值 Actual value / Max. | T Symbol period 1.20 -- -- µs | T0H 0 code, high-level time 0.25 0.32 0.40 µs | T0L 0 code, low-level time 0.80 -- -- µs | T1H 1 code, high-level time 0.65 0.70 1.00 µs | T1L 1 code, low-level time 0.20 -- -- µs | Reset Reset code, low-level time >200 -- -- µs'
+        also: 'p7: ''When writing a program, the minimum required code period is 1.2 µ s.'' and ''the low-level time of "0" and "1" codes should be less than 20 µ s.'' p6: ''数据传输速率 FDIN --- 800 --- Kbps Transfer rate'''
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low: 80µs (2015) / >80µs (2019, 2022) / >200µs (2025)'
+      doc: sk6812-opsco-b1
+      page: 8
+      quote: '13. 24bit数据结构 24 bit data structure: G7 G6 G5 G4 G3 G2 G1 G0 R7 R6 R5 R4 R3 R2 R1 R0 B7 B6 B5 B4 B3 B2 B1 B0 | 注Note：高位先发，按照GRB的顺序发送数据 High bit first send, send data in GRB order (G7 → G6 →.... B0)'
+      also: 'Every SK6812 revision read draws the same G…R…B 24-bit structure (rev 02 p6, LED Color rev 01 p6, Normand rev 06 p7, A/0 p9).'
+    forwarding:
+      text: each pixel keeps the first 24 bits, reshapes and forwards the rest on DOUT
+      doc: sk6812-opsco-r02
+      page: 2
+      quote: 'The 24-bit data is transmitted from the controller to DIN of the first element, and if it is accepted it is extracted pixel to pixel. After an internal data latch, the remaining data is passed through the internal amplification circuit and sent out on the DO port to the remaining pixels. The pixel is reset after the end of DIN.'
+      delay: "rev 02 p4: 'DOUT transmission delay TPLH --- --- 500 ns DIN→DOUT / TPHL --- --- 500 ns'; A/0 p7: 'TPLH --- 67 --- ns … TPHL --- 82 --- ns … The load capacitance of dout port to ground is 30pf,Signal transmission delay from DIN to dout'"
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'This pixel protocol was designed by OPSCO in China.',
+          by: Advatek (controller maker),
+          doc: advatek-sk6812,
+          page: null,
+        }
+      - {
+          claim: 'Falcon pixel type "WS2811" alternatives include ''SK6812 (RGB)''',
+          by: Falcon (controller maker),
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+      - {
+          claim: "The SK6812 is a direct clone of the WS2812B … I don't expect any issues with the timing of existing WS2812 libraries",
+          by: cpldcpu (third-party measurement),
+          doc: cpldcpu-sk6812,
+          page: null,
+        }
+    disagreements:
+      - "Reset: LED Color rev 01 table says 'Trst Reset code，low level time 80µs' (p5) but its own transmission diagram says 'reset code >=50us' (p6). Later sheets: >80µs (Normand rev 06, Opsco A/0), >200µs (Opsco B/1)."
+      - 'High-time windows move between revisions: T0H 0.3µs ±0.15µs (2015) → 0.2–0.4µs (2019, 2022) → 0.25–0.40µs (2025); T1H 0.6µs ±0.15µs = 0.45–0.75µs (2015) → 0.58–1.0µs (2019) → 0.6–1.0µs (2022) → 0.65–1.00µs (2025). The 2015 T1H upper limit (0.75µs) sits inside every later window.'
+      - "Normand rev 06 and Opsco A/0 keep the heading 'TH+TL=1.25µs±600ns' (i.e. 0.65–1.85µs) above a table whose code period is '1.20 -- --' µs minimum, and a note 'the minimum symbol period is 1.2μs'."
+      - "Overviews call it 'unipolar NRZ communication mode' (rev 02 p2, Normand rev 06 p3) while the notes under the table say 'The protocol uses a unipolar zeroing code. Each symbol must have a low level' (Normand rev 06 p7, B/1 p7)."
+      - "B/1 revision record (p13) lists '2021-11-15 A/0 First issue'; the A/0 sheet itself (LEDYi copy) is dated 2022/07/13 with '2022-07-13 A0 Initial Document'."
+    open:
+      - "B/0 (2024-03-02) Opsco revision not found; B/1 says it 'Upgrade[d] IC electrical parameters', so the 80→200µs reset change happened at B/0 or B/1."
+      - "No sampling point or maximum period printed in any revision beyond 'low-level time … less than 20 µs'."
+
+  # ---------------------------------------------------------------- SK6805
+  - part: SK6805
+    entry: pixels/sk6805
+    other_entries: [pixel-ics/sk6805]
+    maker: Opsco
+    documents:
+      - id: sk6805-2427-r01
+        url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf # the YAMLs' datasheet.url
+        title: SK6805-2427 SPECIFICATION (正式规格书), OPSCO application notes
+        revision: '01'
+        date: '2016-08-08'
+        language: en
+      - id: sk6805micro-b1
+        url: https://datasheet.lcsc.com/datasheet/pdf/bf9849aaef1781bcfc259c4203184a6b.pdf?productCode=C2909056
+        title: 东莞市欧思科光电科技有限公司 SK6805MICRO-J-000 产品规格书
+        revision: B/1
+        date: '2025-08-26'
+        language: zh+en
+      - id: sk6805ec15-a1
+        url: https://datasheet.lcsc.com/datasheet/pdf/0f4b58ac8908ccf8037b2d7ca0ec1e91.pdf?productCode=C2890035
+        title: 广东欧思科科技股份有限公司 SK6805-EC15-001 产品规格书
+        revision: A/1
+        date: '2025-08-07'
+        language: zh+en
+      - id: advatek-sk6805
+        url: https://www.advateklighting.com/pixel-protocols/sk6805
+        title: Advatek LED Pixel Protocol SK6805 (controller maker)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — SK6805-2427 rev 01 (2016)
+        select: null
+        T0H: { ns: 300, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.3µs ±0.15µs' }
+        T0L: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9µs ±0.15µs' }
+        T1H: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        T1L: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        period: { ns: 1250, tol_ns: 600, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { ns: 80000, min_ns: null, printed: '80µs' }
+        doc: sk6805-2427-r01
+        page: 5
+        quote: '10. The data transmission time (TH+TL=1.25µs±600ns): T0H 0 code, high level time 0.3µs ±0.15µs | T0L 0 code, low level time 0.9µs ±0.15µs | T1H 1 code, high level time 0.6µs ±0.15µs | T1L 1 code, low level time 0.6µs ±0.15µs | Trst Reset code，low level time 80µs'
+      - name: 800kbps — SK6805MICRO-J-000 B/1 (2025)
+        select: null
+        T0H: { ns: 320, tol_ns: null, min_ns: 250, max_ns: 400, printed: '0.25 / 0.32 / 0.40 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.80 / -- / -- µs' }
+        T1H: { ns: 670, tol_ns: null, min_ns: 630, max_ns: 1000, printed: '0.63 / 0.67 / 1.00 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.20 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Symbol period 1.20 -- -- µs' }
+        reset: { min_ns: 200000, printed: '>200 µs' }
+        doc: sk6805micro-b1
+        page: 7
+        quote: '10. 控制器建议数据传输时间 Suggested data transmission ttme: T Symbol period 1.20 -- -- µs | T0H 0 code, high-level time 0.25 0.32 0.40 µs | T0L 0 code, low-level time 0.80 -- -- µs | T1H 1 code, high-level time 0.63 0.67 1.00 µs | T1L 1 code, low-level time 0.20 -- -- µs | Reset Reset code, low-level time >200 -- -- µs'
+        also: "p7: 'When writing a program, the minimum required code period is 1.2 µ s.' / low-level time 'should be less than 20 µ s'"
+      - name: 800kbps — SK6805-EC15-001 A/1 (2025)
+        select: null
+        T0H: { ns: 300, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.20 / 0.30 / 0.40 us' }
+        T0L: { ns: 900, tol_ns: null, min_ns: 700, max_ns: null, printed: '0.70 / 0.90 / -- us' }
+        T1H: { ns: 900, tol_ns: null, min_ns: 700, max_ns: null, printed: '0.70 / 0.90 / -- us' }
+        T1L: { ns: 300, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.20 / 0.30 / -- us' }
+        period:
+          {
+            ns: 1200,
+            min_ns: 900,
+            max_ns: 20000,
+            printed: 'T 码元周期 Symbol period 0.90 1.20 20 us',
+          }
+        reset: { min_ns: 200000, printed: '200 us (Min. column)' }
+        doc: sk6805ec15-a1
+        page: 7
+        quote: '10. 控制器建议数据传输时间 Suggested data transmission time: T Symbol period 0.90 1.20 20 us | T0H 0 code, high-level time 0.20 0.30 0.40 us | T0L 0 code, low-level time 0.70 0.90 -- us | T1H 1 code, high-level time 0.70 0.90 -- us | T1L 1 code, low-level time 0.20 0.30 -- us | Reset Reset code, low-level time 200 -- -- us'
+        also: "p7 Note 2: '上述为第一颗芯片 DI 输入的数据通信协议时间要求 … 重点注意0码高电平不得高于 0.4us，1码高电平不得低于 0.7us' / 'The above is the time requirement for the data communication protocol of the first chip DI input … the 0-bit high level must not exceed 0.4us and the 1-bit high level must not be lower than 0.7us.'"
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low 80µs (2016) / >200µs (MICRO-J B/1) / 200µs min (EC15 A/1)'
+      doc: sk6805micro-b1
+      page: 8
+      quote: '注Note：高位先发，按照GRB的顺序发送数据(G7 → G6 →……..B0) High bit first send, send data in GRB order (G7 → G6 →.... B0)'
+      also: "2016 rev 01 p6: 'The data structure of 24bit: G7 … B0 Note: high starting, in order to send data (G7 - G6 - ...... ..B0)'; EC15 A/1 p9 draws the same G…R…B structure."
+    forwarding:
+      text: same 24-bit extract-and-forward text as SK6812
+      doc: sk6805-2427-r01
+      page: 2
+      quote: 'The 24-bit data is transmitted from the controller to DIN of the first element, and if it is accepted it is extracted pixel to pixel. After an internal data latch, the remaining data is passed through the internal amplification circuit and sent out on the DO port to the remaining pixels.'
+      delay: '2016 rev 01 p4: TPLH and TPHL max 500 ns DIN→DOUT'
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'Very similar to SK6812 , SK6805 all the same features, but with a lower output current, and the option for different physical packages.',
+          by: Advatek (controller maker),
+          doc: advatek-sk6805,
+          page: null,
+        }
+    disagreements:
+      - 'SK6805-EC15 A/1 (2025-08-07) and SK6805MICRO-J B/1 (2025-08-26) were issued three weeks apart with different tables: EC15 allows a 0.90µs symbol period and gives T1H 0.70µs min with no max; MICRO-J gives T1H 0.63–1.00µs and 1.20µs minimum period.'
+      - 'Reset 80µs (2016) vs >200µs / 200µs (2025).'
+    open: []
+
+  # ---------------------------------------------------------------- SK6812RGBW
+  - part: SK6812RGBW (SKC6812RGBW)
+    entry: pixels/sk6812-rgbw
+    maker: Opsco; Normand and LEDYi publish rebadged copies
+    documents:
+      - id: sk6812rgbw-r01
+        url: https://cdn-shop.adafruit.com/product-files/2757/p2757_SK6812RGBW_REV01.pdf # the YAML's datasheet.url
+        title: SK6812RGBW SPECIFICATION (DONGGUANG OPSCO OPTOELECTRONICS CO., LTD)
+        revision: '01'
+        date: '2015-07-31'
+        language: en
+      - id: sk6812rgbx-normand-r07
+        url: https://www.normandled.com/upload/201805/SK6812RGBX-XX%20Datasheet.pdf # byte-identical to upload/201603/SK6812 RGBW LED Datasheet.pdf; linked from normandled.com/Product/view/id/799.html
+        title: Shenzhen Normand Electronic SK6812RGBX-XX (cover sheet SK6812RGBW-BW)
+        revision: '07' # history: 06 2018-11-20 'Modified timetable range', 07 2019-01-15 'Revision of Specification Format'
+        date: '2019-01-15'
+        language: en
+      - id: skc6812rgbw-b1
+        url: https://datasheet.lcsc.com/datasheet/pdf/f73fcb028ddf7140b2dbd34804e8ce40.pdf?productCode=C5348912
+        title: 东莞市欧思科光电科技有限公司 SKC6812RGBW-XX-X-00X 产品规格书
+        revision: B/1 # record: 01 2015-07-30 … 03 2018-05-20 '修正时序表 Revise the timing table' … A/0 2021-04-10, B/0 2024-03-25, B/1 2025-07-31
+        date: '2025-07-31'
+        language: zh+en
+      - id: sk6812rgbx-ledyi-r03
+        url: https://www.ledyilighting.com/wp-content/uploads/2022/02/SK6812-RGBW-LED-specification.pdf
+        title: LEDYi Lighting (HK) SK6812RGBX-XX SPECIFICATION (reseller rebadge)
+        revision: '03' # 'SK6812RGBW 03 Initial Document Andy Zhu 2018-07-09'
+        date: '2018-07-09'
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — rev 01 (2015; repeated by LEDYi rev 03 2018)
+        select: null
+        T0H: { ns: 300, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.3µs ±0.15µs' }
+        T0L: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9µs ±0.15µs' }
+        T1H: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        T1L: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        period: { ns: 1250, tol_ns: 600, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { ns: 80000, min_ns: null, printed: '80µs' }
+        doc: sk6812rgbw-r01
+        page: 5
+        quote: '10. The data transmission time (TH+TL=1.25µs±600ns): T0H 0 code, high level time 0.3µs ±0.15µs | T0L 0 code, low level time 0.9µs ±0.15µs | T1H 1 code, high level time 0.6µs ±0.15µs | T1L 1 code, low level time 0.6µs ±0.15µs | Trst Reset code，low level time 80µs'
+      - name: 800kbps — Normand rev 07 (2019)
+        select: null
+        T0H: { ns: 350, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.2 / 0.35 / 0.4 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.8 / -- / -- µs' }
+        T1H: { ns: 640, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '0.58 / 0.64 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.2 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Code period 1.20 -- -- µs' }
+        reset: { min_ns: 80000, printed: '>80 µs' }
+        doc: sk6812rgbx-normand-r07
+        page: 7
+        quote: '12. The data transmission time : T Code period 1.20 -- -- µs | T0H 0 code, high level time 0.2 0.35 0.4 µs | T0L 0 code, low level time 0.8 -- -- µs | T1H 1 code, high level time 0.58 0.64 1.0 µs | T1L 1 code, low level time 0.2 -- -- µs | Trst Reset code，low level time >80 -- -- µs'
+      - name: 800kbps — SKC6812RGBW B/1 (2025)
+        select: null
+        T0H: { ns: 320, tol_ns: null, min_ns: 250, max_ns: 400, printed: '0.25 / 0.32 / 0.40 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.80 / -- / -- µs' }
+        T1H: { ns: 750, tol_ns: null, min_ns: 650, max_ns: 1000, printed: '0.65 / 0.75 / 1.00 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.20 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Symbol period 1.20 -- -- µs' }
+        reset: { min_ns: 200000, printed: '>200 µs' }
+        doc: skc6812rgbw-b1
+        page: 9
+        quote: '10. 控制器建议数据传输时间 Suggested data transmission ttme: T Symbol period 1.20 -- -- µs | T0H 0.25 0.32 0.40 µs | T0L 0.80 -- -- µs | T1H 0.65 0.75 1.00 µs | T1L 0.20 -- -- µs | Reset Reset code, low-level time >200 -- -- µs'
+        also: "p9 notes: minimum code period 1.2 µs; low-level time less than 20 µs; transmission diagram 'Reset code >200us'"
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'G R B W'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low 80µs (2015) / >80µs (2019) / >200µs (2025)'
+      doc: skc6812rgbw-b1
+      page: 10
+      quote: '13.32bit数据结构 32 bit data structure: G7 … G0 R7 … R0 B7 … B0 W7 … W0 | 注Note：高位先发，按照GRBW/Y/A的顺序发送数据(G7 → G6 →……..W0) High bit first send, send data in GRBW/Y/A order (G7 → G6 →.... W0)'
+    frame_variants:
+      - wire_order: 'R G B W'
+        doc: sk6812rgbw-r01
+        page: 6
+        quote: '13. The data structure of 32bit: R7 R6 R5 R4 R3 R2 R1 R0 G7 … G0 B7 … B0 W7 … W0 | Note: high starting, in order to send data (R7 - R6 - ...... ..W0)'
+        note: 'Also printed by the LEDYi rebadge (sk6812rgbx-ledyi-r03 p6, dated 2018-07-09).'
+      - wire_order: 'G R B W'
+        doc: sk6812rgbx-normand-r07
+        page: 9
+        quote: '15. The data structure of 32bit: G7 … G0 R7 … R0 B7 … B0 W7 … W0 | Note: high starting, in order to send data (G7 - G6 - ...... ..W0)'
+    forwarding:
+      text: as SK6812 but 32 bits per pixel
+      doc: sk6812rgbw-r01
+      page: 2
+      quote: 'The 32-bit data is transmitted from the controller to DIN of the first element, and if it is accepted it is extracted pixel to pixel. After an internal data latch, the remaining data is passed through the internal amplification circuit and sent out on the DO port to the remaining pixels.'
+      delay: 'rev 01 p4: TPLH/TPHL max 500 ns DIN→DOUT'
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'Falcon pixel type "APA109" (4 channels) alternatives: APA109, SK6812 (RGBW), SK6818, SM16704, SM16804, UCS2904, WS2814',
+          by: Falcon (controller maker),
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+    disagreements:
+      - "Channel order: rev 01 (2015-07-31) sends R G B W ('R7 - R6 - ...... ..W0'); Normand rev 07 (2019) and SKC6812RGBW B/1 (2025) send G R B W. The LEDYi rebadge dated 2018-07-09 still prints R G B W."
+      - 'Reset 80µs (2015) → >80µs (2019) → >200µs (2025).'
+      - "SKC B/1 revision record says rev 01 was '2015-07-30 首次发行 first issue'; the Adafruit-hosted rev 01 is dated 2015-07-31."
+    open:
+      - "Which revision (02 of 2015-08-20 'Modify model parameters' or 03 of 2018-05-20 'Revise the timing table') changed RGBW to GRBW was not established; revisions 02–06 not found."
+
+  # ---------------------------------------------------------------- SK6812WWA
+  - part: SK6812WWA (SKC6812WWA)
+    entry: pixels/sk6812-wwa
+    maker: Opsco; Normand publishes a copy
+    documents:
+      - id: sk6812wwa-r01
+        url: https://cdn-shop.adafruit.com/product-files/6509/P6509+SK6812WWA+LED+datasheet.pdf # the YAML's datasheet.url
+        title: SK6812WWA SPECIFICATION (DONGGUANG OPSCO OPTOELECTRONICS)
+        revision: '01'
+        date: '2015-07-08'
+        language: en
+      - id: sk6812wwa-r03
+        url: https://ge.voron.ua/files/pdf/Addressed_LEDs/SK6812_WWA/SK6812WWA%20LED%20Datasheet.pdf # Normand's own copy (different file, same rev 03 tables): https://www.normandled.com/upload/201603/SK6812%20WWA%20LED%20Datasheet.pdf
+        title: SK6812WWA-XX (Normand format)
+        revision: '03' # history: 01 2015-06-18, 02 2018-06-12 'Corrected timing chart', 03 2019-01-21
+        date: '2019-01-21'
+        language: en
+      - id: skc6812wwa-a0
+        url: https://datasheet.lcsc.com/datasheet/pdf/da311bc40b0f49c953cd4fed47b27c8e.pdf?productCode=C7423112
+        title: 东莞市欧思科光电科技有限公司 SKC6812WWA-000 规格书
+        revision: A/0
+        date: '2021-09-09'
+        language: zh
+      - id: adafruit-6509
+        url: https://www.adafruit.com/product/6509
+        title: Adafruit NeoPixel Stick - 8 x 5050 WWA (vendor page)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — rev 01 (2015)
+        select: null
+        T0H: { ns: 300, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.3µs ±0.15µs' }
+        T0L: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9µs ±0.15µs' }
+        T1H: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        T1L: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        period: { ns: 1250, tol_ns: 600, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { ns: 80000, min_ns: null, printed: '80µs' }
+        doc: sk6812wwa-r01
+        page: 5
+        quote: '10. The data transmission time (TH+TL=1.25µs±600ns): T0H 0.3µs ±0.15µs | T0L 0.9µs ±0.15µs | T1H 0.6µs ±0.15µs | T1L 0.6µs ±0.15µs | Trst Reset code，low level time 80µs'
+      - name: 800kbps — rev 03 (2019)
+        select: null
+        T0H: { ns: 320, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.2 / 0.32 / 0.4 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.8 / -- / -- µs' }
+        T1H: { ns: 640, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '0.58 / 0.64 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.2 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Code period 1.20 -- -- µs' }
+        reset: { min_ns: 80000, printed: '>80 µs' }
+        doc: sk6812wwa-r03
+        page: 6
+        quote: 'T Code period 1.20 -- -- µs | T0H 0 code, high level time 0.2 0.32 0.4 µs | T0L 0.8 -- -- µs | T1H 1 code, high level time 0.58 0.64 1.0 µs | T1L 0.2 -- -- µs | Trst Reset code，low level time >80 -- -- µs'
+      - name: 800kbps — SKC6812WWA-000 A/0 (2021)
+        select: null
+        T0H: { ns: 300, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.20 / 0.30 / 0.40 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.80 / -- / -- µs' }
+        T1H: { ns: 750, tol_ns: null, min_ns: 650, max_ns: 1000, printed: '0.65 / 0.75 / 1.00 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.20 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T 码元周期 1.20 -- -- µs' }
+        reset: { min_ns: 200000, printed: '＞200 µs' }
+        doc: skc6812wwa-a0
+        page: 7
+        quote: '12. 数据传输时间: T 码元周期 1.20 -- -- µs | T0H 0码，高电平时间 0.20 0.30 0.40 µs | T0L 0码，低电平时间 0.80 -- -- µs | T1H 1码，高电平时间 0.65 0.75 1.00 µs | T1L 1码，低电平时间 0.20 -- -- µs | Reset Reset码，低电平时间 ＞200 -- -- µs (码元周期 = symbol period; 高/低电平时间 = high/low-level time)'
+        also: 'p7 switching table: DOUT传输延迟 (DOUT transmission delay) TPLH 100 ns typ, TPHL 100 ns typ, DOUT load 30pf'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'W A W (2021 SKC6812WWA-000; which W is cool and which is warm is not stated)'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low 80µs (2015) / >80µs (2019) / >200µs (2021)'
+      doc: skc6812wwa-a0
+      page: 9
+      quote: '15. 24bit数据结构: W7 W6 W5 W4 W3 W2 W1 W0 A7 A6 A5 A4 A3 A2 A1 A0 W7 W6 W5 W4 W3 W2 W1 W0 | 注：高位先发，按照WAW的顺序发送数据(W7 → W6 →……..W0) (Note: high bit first, data sent in WAW order)'
+      also: "p5 naming: 'W: BW 蓝白色 5800-8000K / W: WS 暖白色 2800-3150K / A: Amber 琥珀色 1500-1800K' (blue/cool white, warm white, amber). Both W bytes are drawn in the same grey."
+    frame_variants:
+      - wire_order: 'G R B (RGB bit names kept; no die mapping given)'
+        doc: sk6812wwa-r01
+        page: 6
+        quote: '13. The data structure of 24bit: G7 … G0 R7 … R0 B7 … B0 | Note: high starting, in order to send data (G7 - G6 - ...... ..B0)'
+        note: "rev 01 p3 naming: '-WWA: White Color / W: BW Blue White 6000-7000K / W: WS Warm Sunlight 2700-3000K / A: A Amber 1800-2000K'. Rev 03 p8 repeats the G…R…B frame; p4 naming 'W: BW 6000-7000K / W: WS 2700-3200K / A: Amber 1800-2000K'."
+    forwarding:
+      text: same 24-bit extract-and-forward text as SK6812
+      doc: sk6812wwa-r01
+      page: 2
+      quote: 'from the controller to DIN of the first element, and if it is accepted it is extracted pixel to pixel. After an internal data latch, the remaining data is passed through the internal amplification circuit and sent out on the DO port to the remaining pixels.'
+      delay: 'SKC A/0: TPLH/TPHL 100 ns typ (30 pF)'
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'You can use any NeoPixel library with RGB support - instead of RGB you get WWA output so like what would be Red is instead Cool White.',
+          by: Adafruit (vendor),
+          doc: adafruit-6509,
+          page: null,
+        }
+    disagreements:
+      - "Which byte drives which die: rev 01 and rev 03 keep G/R/B names and never map them to BW/WS/Amber. SKC6812WWA-000 A/0 names the middle byte Amber (W A W). Adafruit says 'what would be Red is instead Cool White'; with a GRB library the red byte is the middle byte, so Adafruit's mapping conflicts with SKC A/0's middle byte = Amber (Adafruit's stick ships with the rev 01 datasheet, so the two may describe different parts)."
+      - "Adafruit 6509 page also says '8-bit PWM per channel (8 x 4 channels = 32-bit color overall)', but every WWA sheet gives 24-bit frames."
+      - 'Reset 80µs (2015) → >80µs (2019) → >200µs (2021).'
+    open:
+      - 'Which of the two W bytes is cool (BW) and which is warm (WS) on SKC6812WWA; no maker document says.'
+
+  # ---------------------------------------------------------------- SK6813
+  - part: SK6813
+    entry: pixels/sk6813
+    maker: Opsco; Normand publishes a copy
+    documents:
+      - id: sk6813-r01
+        url: https://www.normandled.com/upload/201807/SK6813%20LED%20Datasheet.pdf # the YAML's datasheet.url; same content as https://www.superlightingled.com/PDF/SPEC/SK6813-Datasheet.pdf
+        title: Shenzhen Normand Electronic SK6813 SPECIFICATION
+        revision: '01'
+        date: '2018-04-28'
+        language: en
+      - id: sk6813e-a0
+        url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SK6813-datasheet.pdf
+        title: Specification OSK-SPC-SK6813E-A-003 (Opsco approval block) — 'Provision specifications'
+        revision: A/0
+        date: '2022-03-07'
+        language: en
+      - id: advatek-sk6813
+        url: https://www.advateklighting.com/pixel-protocols/sk6813
+        title: Advatek LED Pixel Protocol SK6813 (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — rev 01 (2018)
+        select: null
+        T0H: { ns: 240, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.2 / 0.24 / 0.4 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.8 / -- / -- µs' }
+        T1H: { ns: 740, tol_ns: null, min_ns: 620, max_ns: 1000, printed: '0.62 / 0.74 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.2 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Code period 1.20 -- -- µs' }
+        reset: { min_ns: 80000, printed: '>80 µs (method diagram: reset code >=80us)' }
+        doc: sk6813-r01
+        page: 6
+        quote: '12. The data transmission time : T Code period 1.20 -- -- µs | T0H 0 code, high level time 0.2 0.24 0.4 µs | T0L 0 code, low level time 0.8 -- -- µs | T1H 1 code, high level time 0.62 0.74 1.0 µs | T1L 1 code, low level time 0.2 -- -- µs | Trst Reset code，low level time >80 -- -- µs'
+        also: "p6 notes: minimum symbol period 1.2μs; low time 'less than 20μs'. p5: fDIN 800 KHZ typ; TPLH/TPHL max 500 ns"
+      - name: 800kbps (max 1100) — SK6813E-A-003 A/0 (2022)
+        select: null
+        T0H: { ns: 300, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.2 / 0.3 / 0.4 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 600, max_ns: null, printed: '0.6 / -- / -- µs' }
+        T1H: { ns: 650, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '0.58 / 0.65 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.2 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Code period 1.20 -- -- µs' }
+        reset: { min_ns: 80000, printed: '≥80 µs' }
+        doc: sk6813e-a0
+        page: 7
+        quote: '12. The data transmission time (TH+TL=1.25µs±600ns): T Code period 1.20 -- -- µs | T0H 0.2 0.3 0.4 µs | T0L 0.6 -- -- µs | T1H 0.58 0.65 1.0 µs | T1L 0.2 -- -- µs | Reset Reset code，low level time ≥80 -- -- µs'
+        also: "p7 switching: 'The speed of data transmission fDIN --- 800 1100 KHZ The duty ratio of 67% (data 1)'"
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low >80µs (2018) / ≥80µs (2022)'
+      doc: sk6813-r01
+      page: 8
+      quote: '15. The data structure of 24bit: G7 … G0 R7 … R0 B7 … B0 | Note: high starting, in order to send data (G7 - G6 - ...... ..B0)'
+      also: 'A/0 2022 p8 draws the same G…R…B structure.'
+    forwarding:
+      text: chip N's DO feeds chip N+1's DIN and chip N+2's BIN
+      doc: sk6813-r01
+      page: 2
+      quote: 'The data is transmitted using the dual signal input-signal output transmission method. The built-in signal regeneration circuit makes the cascaded signal drive capability enhanced. The data output by the controller is transmitted to the DIN of the first lamp bead and the second lamp bead respectively. BIN, the DOUT data of the first lamp beads are transmitted to the DIN of the second lamp beads and the BIN of the third lamp beads, respectively;'
+      delay: 'rev 01 p5: TPLH/TPHL max 500 ns DIN→DOUT'
+    backup_line:
+      pins: "DIN (pin 4), BIN (pin 6) in rev 01; 'DIN 1' (pin 4), 'DIN 2' (pin 6) in A/0"
+      behaviour: "Wiring only: BIN of pixel N receives the same signal as DIN of pixel N-1 (the controller output also goes to pixel 2's BIN). Neither revision says how the chip chooses between DIN and BIN or what a pixel does when its DIN goes quiet."
+      doc: sk6813-r01
+      page: 3
+      quote: "Pin 6 BIN Backup Data Input Backup control signal input data (p3); p6 connection mode figure: D1 → chip 1 DIN and chip 2 BIN; chip 1 DO (D2) → chip 2 DIN and chip 3 BIN. A/0 2022 p5: '6 DIN 2 Thermal data processing Thermal data signal processing'"
+    compatibility_claims:
+      - {
+          claim: "SK6813 comes in two variants - 5V or 12V. The 12V variant (also called SK6813HV for 'high voltage') is very similar to World Semi's WS2815",
+          by: Advatek (controller maker),
+          doc: advatek-sk6813,
+          page: null,
+        }
+      - {
+          claim: 'Redundant Data Line: yes (check icon)',
+          by: Advatek (controller maker),
+          doc: advatek-sk6813,
+          page: null,
+        }
+      - {
+          claim: 'Falcon pixel type "WS2811" alternatives include SK6813',
+          by: Falcon (controller maker),
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+    disagreements:
+      - "Pin 6 is 'BIN Backup Data Input' in rev 01 (2018) and 'DIN 2 Thermal data processing / Thermal data signal processing' in A/0 (2022); the A/0 overview describes only a single DIN→DO chain."
+      - 'T0L minimum 0.8µs (2018) vs 0.6µs (2022); T1H minimum 0.62µs (2018) vs 0.58µs (2022).'
+    open:
+      - 'Backup-line selection logic and fault behaviour: not described in either sheet.'
+      - 'No Opsco sheet between 2022 A/0 and today found (the 2025-style Opsco template with >200µs reset was not found for the 5 V SK6813).'
+
+  # ---------------------------------------------------------------- SK6813 HV
+  - part: SK6813HV-09-6P (12V SK6813)
+    entry: pixels/sk6813-hv
+    maker: Opsco; Normand publishes a copy
+    documents:
+      - id: sk6813hv-r01
+        url: https://www.normandled.com/upload/201907/12V%20SK6813%20LED%20Datasheet.pdf # the YAML's datasheet.url
+        title: Shenzhen Normand Electronic SK6813HV-09-6P/12V SK6813
+        revision: '01'
+        date: '2019-02-16'
+        language: en
+      - id: sk6813hv-a2
+        url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SK6813HV-datasheet.pdf
+        title: Specification OSK-SPC-SK6813HV-09-6P-000 (Opsco approval block)
+        revision: A/2 # history: 01 2019-02-16; 02 2019-12-13; A/0 2021-03-20 'Modify product specifications…'; A/1 2022-04-20 'Modify pin definition'; A/2 2023-05-09
+        date: '2023-05-09'
+        language: en
+      - id: sk6813hv-b1
+        url: https://datasheet.lcsc.com/datasheet/pdf/2ec98643b95bd0bcf782d1edeaf14a82.pdf?productCode=C5378733
+        title: 东莞市欧思科光电科技有限公司 SK6813HV-09-6P-001 产品规格书
+        revision: B/1 # cover says 版本号 Version No. B/0; page headers and record say B/1 (2025-07-25)
+        date: '2025-07-25'
+        language: zh+en
+      - id: advatek-sk6813
+        url: https://www.advateklighting.com/pixel-protocols/sk6813
+        title: Advatek LED Pixel Protocol SK6813 (controller maker)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — rev 01 (2019) and A/2 (2023), identical tables
+        select: null
+        T0H: { ns: 250, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.2 / 0.25 / 0.4 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.8 / -- / -- µs' }
+        T1H: { ns: 750, tol_ns: null, min_ns: 650, max_ns: 1000, printed: '0.65 / 0.75 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.2 / -- / -- µs' }
+        period:
+          { min_ns: 1200, printed: 'T Code period 1.20 -- -- µs (heading TH+TL=1.25µs±600ns)' }
+        reset: { min_ns: 80000, printed: '>80 µs (A/2: ≧80)' }
+        doc: sk6813hv-r01
+        page: 7
+        quote: '12. The data transmission time (TH+TL=1.25µs±600ns): T Code period 1.20 -- -- µs | T0H 0 code, high level time 0.2 0.25 0.4 µs | T0L 0.8 -- -- µs | T1H 1 code, high level time 0.65 0.75 1.0 µs | T1L 0.2 -- -- µs | Trst Reset code，low level time >80 -- -- µs'
+        also: "A/2 p7 prints the same rows with 'Trst … ≧80'. rev 01 p6 inputs at 12 V: 'VIH 4.0 --- --- V', 'VIL --- --- 1.0 V'"
+      - name: 800kbps — B/1 (2025)
+        select: null
+        T0H: { ns: 300, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.20 / 0.30 / 0.40 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.80 / -- / -- µs' }
+        T1H: { ns: 750, tol_ns: null, min_ns: 650, max_ns: 1000, printed: '0.65 / 0.75 / 1.00 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.20 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Symbol period 1.20 -- -- µs' }
+        reset: { min_ns: 200000, printed: '>200 µs' }
+        doc: sk6813hv-b1
+        page: 7
+        quote: '10. 建议数据传输时间 Suggested data transmission time: T Symbol period 1.20 -- -- µs | T0H 0.20 0.30 0.40 µs | T0L 0.80 -- -- µs | T1H 0.65 0.75 1.00 µs | T1L 0.20 -- -- µs | Reset Reset code, low-level time >200 -- -- µs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R G B (2023 A/2 and 2025 B/1)'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low >80µs (2019) / ≧80µs (2023) / >200µs (2025)'
+      doc: sk6813hv-b1
+      page: 8
+      quote: '13. 24bit数据结构 24 bit data structure: R7 … R0 G7 … G0 B7 … B0 | 注Note：高位先发，按照RGB的顺序发送数据(R7 →R6 →……..B0) High bit first send, send data in RGB order (R7 → R6 →.... B0)'
+      also: "A/2 2023 p8: 'R7 … B0 Note: high starting, in order to send data (R7 - R6 - ...... ..B0)'"
+    frame_variants:
+      - wire_order: 'G R B'
+        doc: sk6813hv-r01
+        page: 8
+        quote: '15. The data structure of 24bit: G7 … G0 R7 … R0 B7 … B0 | Note: high starting, in order to send data (G7 - G6 - ...... ..B0)'
+    forwarding:
+      text: same 24-bit extract-and-forward text as SK6812
+      doc: sk6813hv-r01
+      page: 3
+      quote: 'The 24-bit data is transmitted from the controller to DIN of the first element, and if it is accepted it is extracted pixel to pixel. After an internal data latch, the remaining data is passed through the internal amplification circuit and sent out on the DO port to the remaining pixels.'
+      delay: 'rev 01 p6: TPLH/TPHL max 500 ns DIN→DOUT'
+    backup_line:
+      pins: 'DIN1 (pin 2, main), DIN2 (pin 3, standby)'
+      behaviour: "Wiring only: DIN2 of pixel N is tied to the DIN1 net of pixel N-1 (pixel 1's DIN2 to the controller line). Selection logic and fault behaviour are not described."
+      doc: sk6813hv-r01
+      page: 4
+      quote: "2 DIN 1 Data Input Main control signal input data | 3 DIN 2 Data Input Standby control signal input data (p4); p7 connection mode: D1 → DIN1 of chip 1 and DIN2 of chip 2, D2 (chip 1 DOUT) → DIN1 of chip 2 and DIN2 of chip 3; p8 application circuit wires the same. B/1 2025 p4: '3 DIN2 备用信号 Standby signal'; A/2 2023 p5: '3 DIN 2 Thermal data processing Thermal data signal processing'"
+    compatibility_claims:
+      - {
+          claim: "The 12V variant (also called SK6813HV for 'high voltage') is very similar to World Semi's WS2815",
+          by: Advatek (controller maker),
+          doc: advatek-sk6813,
+          page: null,
+        }
+    disagreements:
+      - "Channel order: rev 01 (2019) G R B; A/2 (2023) and B/1 (2025) R G B, with 'send data in RGB order (R7 → R6 →.... B0)'. A controller set for one would swap red and green on the other, if both sheets are right."
+      - "DIN2 called 'Standby control signal input data' (2019), 'Thermal data processing' (2023), '备用信号 Standby signal' (2025)."
+      - "B/1 cover '版本号 Version No.: B/0' vs page headers 'Rev. No.: B/1'."
+      - 'B/1 p8 connection-method figure shows only DIN→DO; its p9 application circuit wires DIN2.'
+    open:
+      - "Which revision (A/0 2021-03-20 'Modify product specifications' or A/1 2022-04-20 'Modify pin definition') switched GRB → RGB; A/0 and A/1 not found."
+
+  # ---------------------------------------------------------------- SK6822
+  - part: SK6822
+    entry: pixels/sk6822
+    maker: unknown — the two SK6822 sheets found carry LED Color and Newstar branding; APA Electronic's APA-104-22C sheet has the same text; Advatek/ENTTEC attribute SK6822 to Opsco
+    documents:
+      - id: sk6822-ledcolor-r01
+        url: http://addressable-led.com/UploadFile/upi/file/20170621/SK6822-LED-Chip.pdf # the YAML's datasheet.url
+        title: LED COLOR SK6822 Technical Data Sheet
+        revision: '01'
+        date: '2015-11-18'
+        language: en
+      - id: sk6822-newstar-r01
+        url: https://web.archive.org/web/20210226221632id_/http://newstar-ledstrip.com/product/20180411113844377.pdf
+        title: NEW STAR LED SK6822 SPECIFICATION
+        revision: '01'
+        date: '2015-10-10'
+        language: en
+      - id: apa104-22c
+        url: https://neon-world.com/uploads/soft/20170615/1497509981.pdf # linked from https://neon-world.com/en/product_detail.php?cid=59&id=164
+        title: APA ELECTRONIC APA-104-22C SPECIFICATION
+        revision: null
+        date: null
+        language: en
+      - id: advatek-sk6822
+        url: https://www.advateklighting.com/pixel-protocols/sk6822
+        title: Advatek LED Pixel Protocol SK6822 (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: enttec-sk6822
+        url: https://www.enttec.com/pixel-protocols/SK6822
+        title: ENTTEC SK6822 Pixel Protocol (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 'stated 800 Kbps; table period 1.7µs'
+        select: null
+        T0H: { ns: 350, tol_ns: null, min_ns: null, max_ns: null, printed: '0.35µs ±0.150ns' }
+        T0L: { ns: 1360, tol_ns: null, min_ns: null, max_ns: null, printed: '1.36µs ±0.150ns' }
+        T1H: { ns: 1360, tol_ns: null, min_ns: null, max_ns: null, printed: '1.36µs ±0.150ns' }
+        T1L: { ns: 350, tol_ns: null, min_ns: null, max_ns: null, printed: '0.35µs ±0.150ns' }
+        period: { ns: 1700, tol_ns: 600, printed: 'TH+TL=1.7µs±600ns' }
+        reset: { ns: 50000, min_ns: null, printed: '50µs' }
+        wait: { ns: 12000, printed: 'WT Wait for the processing time 12µs ±0.150ns' }
+        doc: sk6822-ledcolor-r01
+        page: 5
+        quote: '9. The data transmission time (TH+TL=1.7µs±600ns): T0H 0 code, high level time 0.35µs ±0.150ns | T0L 0 code, low level time 1.36µs ±0.150ns | T1H 1 code, high level time 1.36µs ±0.150ns | T1L 1 code, low level time 0.35µs ±0.150ns | WT Wait for the processing time 12µs ±0.150ns | Trst Reset code，low level time 50µs'
+        also: "p2: 'Using a typical data transmission frequency of 800 Kbps'. Same table in sk6822-newstar-r01 p5 and apa104-22c p4 (where T1L is mislabelled '1 code, high level time')."
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R G B'
+      pixel_bits: 24
+      extra: "A 'WT' (12µs) gap is drawn between every 24-bit group on both data rows of the transmission diagram"
+      start: null
+      end: null
+      latch: 'reset low 50µs'
+      doc: sk6822-ledcolor-r01
+      page: 5
+      quote: "12. The data structure of 24bit: R7 … R0 G7 … G0 B7 … B0 | Note: high starting, in order to send data (R7 - R6 - ...... ..B0). 11. The method of data transmission (figure): DO row '第一位24BIT, WT, 第二位24BIT, WT, 第三位24BIT, WT, 第四位24BIT, RESET CODE'; DI row '第二位24BIT, WT, 第三位24BIT, WT, 第四位24BIT, RESET CODE' (第一位24BIT = first 24 bits)"
+    forwarding:
+      text: overview repeats the SK6812 single-chain text; the pin table and application circuit show a dual-line scheme
+      doc: sk6822-ledcolor-r01
+      page: 2
+      quote: 'The 24-bit data is transmitted from the controller to DIN of the first element, and if it is accepted it is extracted pixel to pixel. After an internal data latch, the remaining data is passed through the internal amplification circuit and sent out on the DO port to the remaining pixels.'
+      delay: null
+    backup_line:
+      pins: "DIN1 (pin 2), 'DIN2 AND DOUT1' (pin 3, shared input/output), DOUT2 (pin 1)"
+      behaviour: 'Application circuit (p6): controller lines DI1 and DI2; U1 DI1 ← DI1; U1 DI2/DOUT1 pin on the DI2 line, which is also U2 DI1; U1 DOUT2 → U2 DI2/DOUT1 pin, which is also U3 DI1. So each node between pixels is a shared DIN2/DOUT1 pin driven by two chips. Selection logic is only hinted at by the note.'
+      doc: sk6822-ledcolor-r01
+      page: 3
+      quote: "1 DOUT2 Data2 Output control signal output data | 2 DIN1 Data Input control signal input data | 3 DIN2 AND DOUT1 Data2 Input And Dout1 output control signal input data and output data | 4 VDD | 5 VCC | 6 GND. p5 note: 'where D0 and D1 for the MCU side of the data, the default D0 port signal, D1 chip will think that the signal is abnormal, which does not affect the signal transmission.'"
+    compatibility_claims:
+      - {
+          claim: 'It offers all the same features as its RGBW version, SK6818 , but is dedicated to RGB and also offers a backup data line for redundancy in case of a chip failure.',
+          by: Advatek (controller maker),
+          doc: advatek-sk6822,
+          page: null,
+        }
+      - {
+          claim: 'Manufacturer: Opsco Optoelectronic (Normand) … Redundant Data Line Yes',
+          by: ENTTEC (controller maker),
+          doc: enttec-sk6822,
+          page: null,
+        }
+      - {
+          claim: 'Falcon pixel type "WS2811" alternatives include SK6822',
+          by: Falcon (controller maker),
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+    disagreements:
+      - "Bit rate: overview says 'typical data transmission frequency of 800 Kbps' but the table gives TH+TL=1.7µs (0.35+1.36 = 1.71µs per bit, about 585 kbit/s) plus a 12µs WT per pixel."
+      - "Tolerances printed '±0.150ns' (0.15 ns) on every row, including WT; probably a unit slip for ±0.150µs, not resolved."
+      - "p4 electrical table lists clock parameters for a part with no clock pin: 'The clock high level width TCLKH >30 ns', 'The clock low level width TCLKL >30 ns', 'Data set up time TSETUP >10 ns'."
+      - "Transmission-diagram rows are labelled 'DO' and 'DI' while the note calls them 'D0 and D1'."
+      - "Advatek pairs SK6822 with SK6818 ('its RGBW version'), but the only SK6818 sheet found uses the SK6812-style table (0.2–0.4 / 0.7–1.0µs, >200µs) with no backup line."
+    open:
+      - 'No Opsco or Normand SK6822 sheet found; maker unconfirmed.'
+      - 'Whether WT (12µs between pixels) is required from the controller or describes internal processing.'
+      - 'How the chip decides between DIN1 and DIN2 and what happens when one pixel dies.'
+
+  # ---------------------------------------------------------------- SK6851
+  - part: SK6851 (SK6851N-RG)
+    entry: pixels/sk6851
+    maker: Opsco
+    documents:
+      - id: sk6851-b0
+        url: https://datasheet.lcsc.com/datasheet/pdf/80b71069049ae9c8aaafeb0811733cd2.pdf # the YAML's datasheet.url (LCSC C5440839)
+        title: 东莞市欧思科光电科技有限公司 SK6851N-RG-002 产品规格书
+        revision: B/0
+        date: '2024-03-18'
+        language: zh+en
+      - id: advatek-sk6851
+        url: https://www.advateklighting.com/pixel-protocols/sk6851
+        title: Advatek LED Pixel Protocol SK6851 (controller maker)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — B/0 (2024)
+        select: null
+        T0H: { ns: 300, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.20 / 0.30 / 0.40 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.80 / -- / -- µs' }
+        T1H: { ns: 900, tol_ns: null, min_ns: 650, max_ns: 1000, printed: '0.65 / 0.90 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.20 / -- / -- µs' }
+        period: { min_ns: 1200, printed: 'T Symbol period 1.20 -- -- µs' }
+        reset: { min_ns: 200000, printed: '>200 µs' }
+        doc: sk6851-b0
+        page: 7
+        quote: '10. 建议数据传输时间 Suggested data transmission time: T Symbol period 1.20 -- -- µs | T0H 0 code, high-level time 0.20 0.30 0.40 µs | T0L 0.80 -- -- µs | T1H 1 code, high-level time 0.65 0.90 1.0 µs | T1L 0.20 -- -- µs | Reset Reset code, low-level time >200 -- -- µs'
+        also: "p7: 'When writing a program, the minimum required code period is 1.2 µ s.' / low-level time 'should be less than 20 µ s'. p6: 'FDIN --- 800 --- Kbps … Duty cycle 67% (Data 1)'"
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low >200µs'
+      doc: sk6851-b0
+      page: 8
+      quote: '13. 24bit数据结构 24 bit data structure: G7 … G0 R7 … R0 B7 … B0 | 注Note：高位先发，按照RGB的顺序发送数据(G7 → G6 →……..B0) High bit first send, send data inRGB order (G7 → G6 →.... B0)'
+    forwarding:
+      text: standard DIN→DO cascade (p8 connection figure); DIN is AC-coupled in the series-string application
+      doc: sk6851-b0
+      page: 9
+      quote: '1.In the above application diagram, C1 is 10nF, used for coupling DIN signals; 2. D1 is an SS14 Schottky diode used for DIN and VDD isolation; … 5. R2 is the lead chip DIN port protection resistor, with a recommended value of 220 Ω. 6. Applicable working voltage for product circuit: 24V, 120V, 24V series connected light source 6PCS, 120V series connected light source 30PCS.'
+      delay: null
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'This pixel protocol was designed by OPSCO in China.',
+          by: Advatek (controller maker),
+          doc: advatek-sk6851,
+          page: null,
+        }
+    disagreements:
+      - "The p8 input-code figure draws each bit starting LOW: 0 code = T0L (short) then T0H (long); 1 code = T1L (long) then T1H (short). That is the inverse of the table (T0H 0.20–0.40µs is the short part) and of every other Opsco sheet's figure."
+      - "Frame note says 'send data in RGB order' but draws and spells out G7 → … → B0 (GRB)."
+      - "p6 input thresholds at VDD=4.2V read 'VIH 6.3 V min', 'VIL 5.1 V max' (above VDD); consistent with the AC-coupled, diode-isolated input of p9 but not explained."
+    open:
+      - 'Whether the inverted figure means the chip expects an inverted signal at DIN in the coupled series string; the table and text do not say.'
+
+  # ---------------------------------------------------------------- SK6818
+  - part: SK6818
+    entry: pixels/sk6818
+    other_entries: [pixel-ics/sk6818]
+    maker: Opsco (per Advatek/ENTTEC); the only maker-side sheet found is Normand's
+    documents:
+      - id: sk6818-normand-prov
+        url: https://www.normandled.com/upload/202609/SK6818-T52491H4RGBWP6-VC-XW-E-A%20LED%20Datasheet.pdf # pixel-ics/sk6818 datasheet.url
+        title: Shenzhen Normand Electronic Product Specification SK6818-T52491H4RGBWP6-VC-XW-E-A-000 (24 V, 6-pin, 5249 RGBW)
+        revision: 临时规格 (provisional specification)
+        date: '2026-09-02'
+        language: zh+en
+      - id: conrad-sk6818-strip
+        url: https://asset.conrad.com/media10/add/160267/c1/-/en/001575814DS01/datasheet-1575814-thomsen-strip-5m-300-rgbw-ip68-led-pasik-entrieda-a-a-e-zastrcky-zasuvka-5-v-5-m-rgbw.pdf # pixels/sk6818 datasheet.url
+        title: 'SK6818 SK6812 RGBW pixel LED strip 60LEDs/m (strip sheet, 21.06.2017)'
+        revision: null
+        date: '2017-06-21'
+        language: en
+      - id: advatek-sk6818
+        url: https://www.advateklighting.com/pixel-protocols/sk6818
+        title: Advatek LED Pixel Protocol SK6818 (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: enttec-sk6818
+        url: https://www.enttec.com/pixel-protocols/SK6818
+        title: ENTTEC SK6818 Pixel Protocol (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — Normand provisional spec (2026), 24 V part
+        select: null
+        T0H: { ns: 300, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.20 / 0.30 / 0.40 µs' }
+        T0L: { ns: 900, tol_ns: null, min_ns: 700, max_ns: null, printed: '0.70 / 0.90 / -- µs' }
+        T1H: { ns: 900, tol_ns: null, min_ns: 700, max_ns: 1000, printed: '0.70 / 0.90 / 1.00 µs' }
+        T1L: { ns: 300, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.20 / 0.30 / -- µs' }
+        period: { ns: 1200, min_ns: 900, max_ns: 20000, printed: 'T Symbol period 0.9 1.20 20 µs' }
+        reset: { min_ns: 200000, printed: '>200 µs' }
+        doc: sk6818-normand-prov
+        page: 8
+        quote: '10. 控制器建议数据传输时间 Controller suggested data transmission time: T Symbol period 0.9 1.20 20 µs | T0H 0.20 0.30 0.40 µs | T0L 0.70 0.90 -- µs | T1H 0.70 0.90 1.00 µs | T1L 0.20 0.30 -- µs | Reset Reset code, low-level time >200 -- -- µs'
+        also: "p8 note 2: 'When writing a program, the minimum required code period is 1.2 µ s.'; p7: 'FDIN --- 800 --- Kbps'; VDD 21–25.5 V"
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'G R B W'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low >200µs'
+      doc: sk6818-normand-prov
+      page: 9
+      quote: '13.32bit数据结构 32 bit data structure: G7 … G0 R7 … R0 B7 … B0 W7 … W0 | 注Note：高位先发，按照GRBW的顺序发送数据(G7 → G6 →……..W0) High bit first send, send data in GRBW order (G7 → G6 →.... W0)'
+    forwarding:
+      text: standard DIN→DO cascade, 32-bit groups
+      doc: sk6818-normand-prov
+      page: 8
+      quote: 'Among them, D1 is the data sent by the MCU end, and D2, D3, and D4 are the data automatically shaped and forwarded by the cascaded circuit.'
+      delay: null
+    backup_line: null # pins: 1 GND, 2 DIN, 3 VDD, 4 VDD, 5 DOUT, 6 GND (p5)
+    compatibility_claims:
+      - {
+          claim: 'It offers all the same features as its RGB version, SK6822 , but is dedicated to RGBW.',
+          by: Advatek (controller maker),
+          doc: advatek-sk6818,
+          page: null,
+        }
+      - {
+          claim: 'A single-wire, self-clocking RGBW pixel with an integrated driver IC in a 5050 package, running 8-bit-per-channel colour at 5V … Redundant Data Line No',
+          by: ENTTEC (controller maker),
+          doc: enttec-sk6818,
+          page: null,
+        }
+      - {
+          claim: 'Falcon pixel type "APA109" (4 channels) alternatives include SK6818',
+          by: Falcon (controller maker),
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+      - {
+          claim: 'IC Type sk6818/sk6812 (strip sheet)',
+          by: Thomsen/Conrad strip sheet,
+          doc: conrad-sk6818-strip,
+          page: 1,
+        }
+    disagreements:
+      - "Table minimum symbol period 0.9µs vs note 2 'minimum required code period is 1.2 µ s' on the same page."
+      - 'Advatek calls SK6818 the RGBW version of SK6822 (which has 0.35/1.36µs timing and a backup line per its own sheets); the Normand SK6818 sheet has the SK6812-style table and no backup pin.'
+    open:
+      - "No 5 V SK6818 maker sheet found; the Normand sheet is a provisional spec for a 24 V 5249-package variant. The 5 V part's timing and channel order are unverified."
+
+  # ---------------------------------------------------------------- APA104
+  - part: APA104 (APA-104-4RGB)
+    entry: pixels/apa104
+    maker: APA Electronic (金建電子 / neon-world.com); Newstar hosts a different sheet
+    documents:
+      - id: apa104-4rgb
+        url: https://neon-world.com/uploads/soft/20170622/1498136682.pdf # the YAML's datasheet.url; linked from https://neon-world.com/en/product_detail.php?cid=59&id=165
+        title: APA ELECTRONIC CO., LTD. APA-104-4RGB SPECIFICATION
+        revision: null
+        date: null
+        language: en
+      - id: apa104-newstar
+        url: https://web.archive.org/web/20210411015822id_/http://www.newstar-ledstrip.com/product/20141229104216693.pdf # the YAML's data.type source
+        title: NEWSTAR LED CO., LIMITED APA104 LED CHIP
+        revision: null
+        date: null
+        language: en
+      - id: apa104-4-12v
+        url: https://neon-world.com/uploads/soft/20220719/1658243995.pdf # linked from product_detail.php?cid=59&id=301
+        title: APA ELECTRONIC APA-104-4-12V specification
+        revision: A/0
+        date: '2021-03-20'
+        language: en
+      - id: apa104-22c
+        url: https://neon-world.com/uploads/soft/20170615/1497509981.pdf
+        title: APA ELECTRONIC APA-104-22C SPECIFICATION (6-pin, dual signal)
+        revision: null
+        date: null
+        language: en
+      - id: advatek-apa104
+        url: https://www.advateklighting.com/pixel-protocols/apa104
+        title: Advatek LED Pixel Protocol APA104 (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — APA-104-4RGB (APA Electronic)
+        select: null
+        T0H: { ns: 300, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.3µs ±0.15µs' }
+        T0L: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9µs ±0.15µs' }
+        T1H: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        T1L: { ns: 600, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.6µs ±0.15µs' }
+        period: { ns: 1250, tol_ns: 600, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { ns: 80000, min_ns: null, printed: '80µs (method diagram: reset code >=80us)' }
+        doc: apa104-4rgb
+        page: 5
+        quote: '10. The data transmission time (TH+TL=1.25µs±600ns): T0H 0 code, high level time 0.3µs ±0.15µs | T1H 1 code, high level time 0.6µs ±0.15µs | T0L 0 code, low level time 0.9µs ±0.15µs | T1L 1 code, low level time 0.6µs ±0.15µs | Trst Reset code，low level time 80µs'
+        also: "p4: 'The speed of data transmission fDIN --- 800 --- KHZ The duty ratio of 67% (data 1)'; TPLH/TPHL max 500 ns"
+      - name: 800Kbps — Newstar 'APA104 LED CHIP' sheet
+        select: null
+        T0H: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        T0L: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36us ±150ns' }
+        T1H: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36us ±150ns' }
+        T1L: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        period: { ns: 1250, tol_ns: 600, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { min_ns: 24000, printed: 'Above 24µs (method diagram: >=50us)' }
+        doc: apa104-newstar
+        page: 4
+        quote: 'Data transfer time( TH+TL=1.25µs±600ns) | T0H 0 code ,high voltage time 0.35us ±150ns | T1H 1 code ,high voltage time 1.36us ±150ns | T0L 0 code , low voltage time 1.36us ±150ns | T1L 1 code ,low voltage time 0.35us ±150ns | RES low voltage time Above 24µs'
+        also: "p1: 'Send data at speeds of 800Kbps.'; p3: 'Operation frequency Fosc2 800 KHz'; p5 diagram 'reset code >=50us'"
+      - name: 800kbps — APA-104-4-12V A/0 (2021), 12 V variant
+        select: null
+        T0H: { ns: 250, tol_ns: null, min_ns: 200, max_ns: 400, printed: '0.2 / 0.25 / 0.4 µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 800, max_ns: null, printed: '0.8 / -- / -- µs' }
+        T1H: { ns: 750, tol_ns: null, min_ns: 650, max_ns: 1000, printed: '0.65 / 0.75 / 1.0 µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 200, max_ns: null, printed: '0.2 / -- / -- µs' }
+        period: null
+        reset: { min_ns: 80000, printed: '≧80 µs' }
+        doc: apa104-4-12v
+        page: 7
+        quote: 'T0H 0 code, high level time 0.2 0.25 0.4 µs | T0L 0 code, low level time 0.8 -- -- µs | T1H 1 code, high level time 0.65 0.75 1.0 µs | T1L 1 code, low level time 0.2 -- -- µs | Trst Reset code，low level time ≧80 -- -- µs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G R B (APA-104-4RGB)'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low 80µs / >=80us (APA-104-4RGB)'
+      doc: apa104-4rgb
+      page: 6
+      quote: '13. The data structure of 24bit: G7 … G0 R7 … R0 B7 … B0 | Note: high starting, in order to send data (G7 - G6 - ...... ..B0)'
+      also: 'APA-104-4-12V A/0 p8: same G…R…B 24-bit structure.'
+    frame_variants:
+      - wire_order: 'R G B'
+        doc: apa104-newstar
+        page: 5
+        quote: 'Composition of 24bit data: R7 … R0 G7 … G0 B7 … B0 | Note: Follow the order of RGB to sent data and the high bit sent at first.'
+    forwarding:
+      text: standard extract-24-bits-and-forward
+      doc: apa104-newstar
+      page: 1
+      quote: 'the first pixel collect initial 24bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade pixel through the DO port. After transmission for each pixel，the signal to reduce 24bit.'
+      delay: 'APA-104-4RGB p4: TPLH/TPHL max 500 ns; Newstar p3: tPLZ max 300 ns'
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'This pixel protocol was designed by APA Electronic Co. in Taiwan. Also known as “Superled”',
+          by: Advatek (controller maker),
+          doc: advatek-apa104,
+          page: null,
+        }
+      - {
+          claim: 'Falcon pixel type "WS2811" alternatives include APA104',
+          by: Falcon (controller maker),
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+    disagreements:
+      - "The two APA104 sheets describe different signals: APA Electronic's APA-104-4RGB prints 0.3/0.6µs ±0.15µs, Trst 80µs, G R B; the Newstar-hosted 'APA104 LED CHIP' prints 0.35/1.36µs ±150ns, RES above 24µs, R G B."
+      - "The Newstar sheet is the undated WorldSemi WS2812B sheet's text almost word for word (same Features, General description, ratings, switching table), with the name changed to APA104 and the timing, reset and order rows changed."
+      - "Newstar sheet heading 'TH+TL=1.25µs±600ns' but its rows sum to 1.71µs; RES 'Above 24µs' in the table vs '>=50us' in its own diagram."
+      - "APA-104-4RGB overview (p1) says 'The 32-bit data is transmitted from the controller to DIN' while its section 13 (p6) is 'The data structure of 24bit' and draws 24 bits."
+      - 'APA-104-22C (6-pin, same model family name) prints the SK6822 table (0.35/1.36µs, WT 12µs, 50µs, R G B) — see SK6822.'
+    open:
+      - 'No revision or date printed on either APA104 sheet.'
+
+  # ---------------------------------------------------------------- APA105
+  - part: APA105
+    entry: pixels/apa105
+    maker: unconfirmed (Advatek and ENTTEC attribute it to APA Electronic; Newstar sells APA105 strips)
+    documents:
+      - id: newstar-apa105-strip
+        url: https://web.archive.org/web/20181124015322/http://newstar-ledstrip.com:80/productshow819.html # the YAML's other_links page
+        title: 'Newstar: 144LEDs 10mm PCB APA105 Pixel LED Strip Lights (vendor page)'
+        revision: null
+        date: '2018-11-24' # capture date
+        language: en
+      - id: advatek-apa105
+        url: https://www.advateklighting.com/pixel-protocols/apa105
+        title: Advatek LED Pixel Protocol APA105 (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: enttec-apa105
+        url: https://www.enttec.com/pixel-protocols/APA105
+        title: ENTTEC APA105 Pixel Protocol (controller maker)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire # per Advatek ('Clock Type Data-Only') and ENTTEC ('single-wire, self-clocking'); no maker sheet
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800kbps (controller makers' statement only)
+        select: null
+        T0H: null
+        T0L: null
+        T1H: null
+        T1L: null
+        period: null
+        reset: null
+        doc: advatek-apa105
+        page: null
+        quote: 'Clock Type Data-Only | Color Resolution 8 Bits | Color Types RGB | Data Transfer Rate 800kbps | Redundant Data Line (cross icon)'
+    clock: null
+    frame:
+      bits_per_channel: 8 # Advatek
+      channels: 3 # Advatek 'Color Types RGB'
+      wire_order: null
+      pixel_bits: 24 # ENTTEC: 'Each pixel latches 8 bits per channel (24-bit colour)'
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: enttec-apa105
+      page: null
+      quote: 'Each pixel latches 8 bits per channel (24-bit colour) and passes the remaining data down the chain.'
+    forwarding: null
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'APA105 Pixel Digital LED Strip Lights adopted built-in IC and Capacitance … APA105/SK6812 30/60/72/144leds is available',
+          by: Newstar (vendor),
+          doc: newstar-apa105-strip,
+          page: null,
+        }
+      - {
+          claim: 'It is electrically similar to the WS2812 family but rated across a wide 5V to 24V supply.',
+          by: ENTTEC (controller maker),
+          doc: enttec-apa105,
+          page: null,
+        }
+      - {
+          claim: 'This pixel protocol was designed by APA Electronic Co. in Taiwan.',
+          by: Advatek (controller maker),
+          doc: advatek-apa105,
+          page: null,
+        }
+    disagreements:
+      - "DB creator is Newstar LED Co.; Advatek says APA Electronic designed it and ENTTEC says 'commonly attributed to APA Electronic (Shiji Optoelectronics)'. APA Electronic's current 5050/3535/2020 catalogue (neon-world.com product.php?cid=59, 60, 61) lists APA-104 and APA-109 parts but no APA-105."
+    open:
+      - 'No APA105 datasheet found (searched neon-world.com catalogue, Newstar product pages via Wayback, web search). Timing, reset and channel order unverified.'
+
+  # ---------------------------------------------------------------- APA106
+  - part: APA106 (APA-106-F5 / APA-106-F8)
+    entry: pixels/apa106
+    maker: unconfirmed (no maker named on either sheet)
+    documents:
+      - id: apa106-kyohritsu
+        url: https://kyohritsu.com/eclib/PDF/L/LEDX226-APA-Z.pdf # the YAML's data.type source
+        title: APA106 F5 F8 (Kyohritsu-hosted)
+        revision: null
+        date: '2022-11-08' # 'Prepard date:2022.11.08'
+        language: zh+en
+      - id: apa106-sparkfun
+        url: https://cdn.sparkfun.com/datasheets/Components/LED/COM-12877.pdf # the YAML's datasheet.url
+        title: 'Shift register programmable RGB Lamp (APA-106-F8 / APA-106-F5)'
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: high speed mode (the only table printed; 800 Kbps stated)
+        select: null # sheet mentions a low-speed mode but gives no timing and no selection method
+        T0H: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35µs ±150ns' }
+        T0L: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36µs ±150ns' }
+        T1H: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36µs ±150ns' }
+        T1L: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35µs ±150ns' }
+        period: null
+        reset: { ns: 50000, min_ns: null, printed: '50us (Kyohritsu diagram: RERESET CODE ≥24µs)' }
+        doc: apa106-kyohritsu
+        page: 5
+        quote: '2、High speed mode time 高速模式时间: 名称 描述 典型值 容许误差 (name, description, typical, allowed error) | T0H 0码，高电平时间 0.35µs ±150ns | T1H 1码，高电平时间 1.36µs ±150ns | T0L 0码，低电平时间 1.36µs ±150ns | T1L 1码，低电平时间 0.35µs ±150ns | RES RESET码 50us'
+        also: "SparkFun sheet: 'T0H 0 code, high level time 0.35µs ±150ns | T1H 1 code, high level time 1.36µs ±150ns | T0L 0 code, low level time 1.36µs ±150ns | T1L 1 code, low level time 0.35µs ±150ns | RES RESET code 50us'; 'Internal frequency up to 800K Hz'. Kyohritsu p2: '◆Data sending rate of up to 800 KBPS'"
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R G B'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'RES 50us (table) / ≥24µs (diagram)'
+      doc: apa106-kyohritsu
+      page: 6
+      quote: '5、24 bit data structure: R7 … R0 G7 … G0 B7 … B0 | Note: high, according to the order of the RGB sending data 注：高位先发，按照RGB 的顺序发送数据 (high bit first, RGB order)'
+    forwarding:
+      text: first pixel keeps 24 bits and forwards the rest
+      doc: apa106-kyohritsu
+      page: 1
+      quote: '首先送过来的24bit 数据被第一个像素点提取后，送到像素点内部的数据锁存器，剩余的数据经过内部整形处理电路整形放大后通过DO 端口开始转发输出给下一个级联的像素点，每经过一个像素点的传输，信号减少24bit。 (The first 24 bits are taken by the first pixel into its latch; the rest is reshaped and forwarded from DO; the signal loses 24 bits per pixel.)'
+      delay: null
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'Falcon pixel type "WS2811" alternatives include APA106',
+          by: Falcon (controller maker),
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+    disagreements:
+      - "Kyohritsu sheet: RES 50us in the table (p5) vs 'RERESET CODE ≥24µs' in the transmission diagram (p6)."
+      - "Kyohritsu p2 mentions modes: '当刷新速率30帧/秒时，低速模式级联数不小于512点，高速模式不小于1024点' (at 30 fps, low-speed mode ≥512 pixels, high-speed mode ≥1024) but prints only the high-speed table and no way to choose."
+      - "SparkFun sheet: 'Single wire signal transmission(clock and Data)' and no channel order."
+    open:
+      - "Maker unconfirmed (neither sheet names one; APA Electronic's current catalogue has no APA-106)."
+      - 'Low-speed mode timing and selection.'
+
+  # ---------------------------------------------------------------- APA109
+  - part: APA109 (APA109RGBW-XX / APA-109-RGBW)
+    entry: pixels/apa109
+    maker: APA Electronic (金建電子)
+    documents:
+      - id: apa109rgbw-r02
+        url: https://neon-world.com/uploads/soft/20180416/1523869790.pdf # the YAML's datasheet.url; byte-identical to uploads/soft/20180416/1523867358.pdf (APA-109B-RGBW page id=169)
+        title: APA ELECTRONIC APA109RGBW-XX SPECIFICATION
+        revision: '02'
+        date: '2018-04-11'
+        language: en
+      - id: apa109-xx
+        url: https://neon-world.com/uploads/soft/20170603/1496462414.pdf # APA-109-XX page id=168
+        title: APA ELECTRONIC APA-109-XX SPECIFICATION (24-bit sibling)
+        revision: null
+        date: null
+        language: en
+      - id: advatek-apa109
+        url: https://www.advateklighting.com/pixel-protocols/apa109
+        title: Advatek LED Pixel Protocol APA109 (controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps — APA109RGBW-XX rev 02 (2018)
+        select: null
+        T0H: { ns: 300, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.3µs ±0.15µs' }
+        T0L: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9µs ±0.15µs' }
+        T1H: { ns: 900, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.9µs ±0.15µs' }
+        T1L: { ns: 300, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.3µs ±0.15µs' }
+        period: { ns: 1250, tol_ns: 600, printed: 'TH+TL=1.25µs±600ns' }
+        reset: { ns: 80000, min_ns: null, printed: '80µs (method diagram: reset code >=80us)' }
+        doc: apa109rgbw-r02
+        page: 6
+        quote: '12. The data transmission time (TH+TL=1.25µs±600ns): T0H 0 code, high level time 0.3µs ±0.15µs | T0L 0 code, low level time 0.9µs ±0.15µs | T1H 1 code, high level time 0.9µs ±0.15µs | T1L 1 code, low level time 0.3µs ±0.15µs | Trst Reset code，low level time 80µs'
+        also: "p5: 'fDIN --- 800 --- KHZ The duty ratio of 67% (data 1)', TPLH/TPHL max 500 ns, 'FPWM --- 1.2 --- KHZ'"
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'G R B W'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'reset low 80µs / >=80us'
+      doc: apa109rgbw-r02
+      page: 7
+      quote: '15. The data structure of 32bit: G7 … G0 R7 … R0 B7 … B0 W7 … W0 | Note: high starting, in order to send data (G7 - G6 - ...... ..W0)'
+    frame_variants:
+      - wire_order: 'G R B (APA-109-XX, 24-bit)'
+        doc: apa109-xx
+        page: 5
+        quote: '13. The data structure of 24bit: Note: high starting, in order to send data (G7 - G6 - ...... ..B0)'
+        note: 'APA-109-XX p5 timing: T0H 0.3µs ±0.15µs, T0L 0.9µs ±0.15µs, T1H 0.6µs ±0.15µs, T1L 0.6µs ±0.15µs, Trst 80µs.'
+    forwarding:
+      text: as APA104 but 32-bit groups
+      doc: apa109rgbw-r02
+      page: 2
+      quote: 'The 32-bit data is transmitted from the controller to DIN of the first element, and if it is accepted it is extracted pixel to pixel. After an internal data latch, the remaining data is passed through the internal amplification circuit and sent out on the DO port to the remaining pixels.'
+      delay: 'p5: TPLH/TPHL max 500 ns'
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'APA109 is the RGBW version of APA104',
+          by: Advatek (controller maker),
+          doc: advatek-apa109,
+          page: null,
+        }
+      - {
+          claim: 'Falcon pixel type "APA109" (4 channels) alternatives: APA109, SK6812 (RGBW), SK6818, SM16704, SM16804, UCS2904, WS2814',
+          by: Falcon (controller maker),
+          doc: falcon-pixeltypes,
+          page: null,
+        }
+    disagreements:
+      - 'APA109RGBW rev 02 gives T1H 0.9µs ±0.15µs and T1L 0.3µs ±0.15µs; the 24-bit APA-109-XX and APA-104-4RGB give T1H 0.6µs / T1L 0.6µs.'
+      - "Its T1L window (0.15–0.45µs) does not meet WS2812B V5's T1L '580ns~1µs'."
+    open: []
+
+  # ---------------------------------------------------------------- PL9823
+  - part: PL9823 (PD9823 controller)
+    entry: pixels/pl9823
+    maker: BaiCheng (logo on the sheet); Diamex GmbH (distributor) added the bottom block
+    documents:
+      - id: pl9823-baicheng
+        url: https://www.led-genial.de/mediafiles//Sonstiges/PL9823.pdf # byte-identical to the YAML's Wayback copy of content.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf
+        title: BaiCheng PL9823 Shift register programmable RGB Lamp (with Diamex GmbH insert)
+        revision: null
+        date: null
+        language: en+de
+      - id: cpldcpu-pd9823
+        url: https://cpldcpu.com/2014/06/16/timing-of-ws2812-clones-pd9823/ # results table image: https://cpldcpu.com/wp-content/uploads/2014/06/timing_with_thumbs.png
+        title: "Tim's Blog: Timing of WS2812 clones – PD9823/PL9823 (third-party measurement)"
+        revision: null
+        date: '2014-06-16'
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first # Diamex insert
+    rates:
+      - name: 800KHz ('Internal frequency up to 800KHz')
+        select: null
+        T0H: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        T0L: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36us ±150ns' }
+        T1H: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36us ±150ns' }
+        T1L: { ns: 350, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.35us ±150ns' }
+        period: null
+        reset: { ns: 50000, min_ns: null, printed: '50us' }
+        doc: pl9823-baicheng
+        page: 1
+        quote: 'Timing waveform | Name Description Typically Allowable error | T0H 0 code,high level time 0.35us ±150ns | T1H 1 code,high level time 1.36us ±150ns | T0L 0 code,low level time 1.36us ±150ns | T1L 1 code,low level time 0.35us ±150ns | RES RESET code 50us'
+        measured: 'cpldcpu (third party, PD9823 5/8mm): T_HI_IN "0" 62.5 ns - 600 ns; T_HI_IN "1" ≥ 625 ns; T_PERIOD_IN ≥ 1000 ns; T_DELAY_IN_OUT ~190 ns; T_HI_OUT "0" ~380 ns; T_HI_OUT "1" ~760 ns; T_RESET > 14 µs (WS2812B in the same table: 62.5–563 ns, ≥625 ns, ≥1063 ns, > 9 µs)'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R G B (Diamex insert)'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'RES 50us'
+      doc: pl9823-baicheng
+      page: 1
+      quote: 'Composition of 24bit data: R7 … R0 G7 … G0 B7 … B0 | Note: Follow the order of RGB to sent data and the high bit sent at first. (Diamex block)'
+    forwarding: null # not described on the sheet
+    backup_line: null
+    compatibility_claims:
+      - {
+          claim: 'Die LEDs sind Signal-kompatibel zu WS2812. Bei der Programmierung ist zu beachten, dass ROT und GRÜN im Vergleich mit den WS2812 vertauscht sind. (The LEDs are signal-compatible with WS2812; red and green are swapped compared with WS2812.)',
+          by: Diamex GmbH (distributor insert),
+          doc: pl9823-baicheng,
+          page: 1,
+        }
+      - {
+          claim: 'In conclusion: Any software library that is able to drive the WS2812(B) is also able to drive the PD9823. No need to change anything.',
+          by: cpldcpu (third-party measurement),
+          doc: cpldcpu-pd9823,
+          page: null,
+        }
+      - {
+          claim: 'The internal state machine of the PD9823 seems to be identical to that of the WS2812.',
+          by: cpldcpu (third-party measurement),
+          doc: cpldcpu-pd9823,
+          page: null,
+        }
+    disagreements:
+      - "The printed table (T1H 1.36us ±150ns, T0L 1.36us ±150ns) does not overlap WS2812B's windows, yet Diamex calls it 'Signal-kompatibel zu WS2812' and cpldcpu measured WS2812B-like decoding (a high pulse ≥625 ns reads as 1, 62.5–600 ns as 0)."
+      - "The RGB frame and order note appear only in the Diamex block; the note's wording ('Follow the order of RGB to sent data and the high bit sent at first.') is the WS2812B sheet's sentence with GRB changed to RGB, as in the Newstar APA104 sheet."
+    open:
+      - 'No BaiCheng revision/date; no forwarding description on the sheet.'

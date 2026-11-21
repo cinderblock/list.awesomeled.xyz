@@ -1,0 +1,1458 @@
+# Workstream 8 (pixel protocols), research batch b3-sm-gs.
+# Summary for the parent: b3-sm-gs.md (same folder).
+# Conventions used here:
+# - Chinese quotes are followed by an English translation in [brackets].
+# - Sunmoon documents are identified by the code printed in their page header
+#   (e.g. IBZGZIV1.3). Page numbers are the PDF's printed page numbers.
+# - Where a datasheet prints a bit time as a fraction of the period (GS82xx
+#   "1/4T"), ns is computed at the printed T=1/800kHz and `printed` says so.
+# - `notes` on documents and `extra` fields are additions to the brief's schema.
+batch: b3-sm-gs
+researched: '2026-11-20'
+
+# WorldSemi windows used for the overlap arithmetic in b3-sm-gs.md.
+references:
+  - part: WS2812B
+    entry: pixels/ws2812
+    maker: WorldSemi
+    documents:
+      - id: ws2812b-2013
+        url: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+        title: WS2812B Intelligent control LED integrated light source
+        revision: null
+        date: null
+        language: en
+        notes: no version printed; PDF metadata created 2013-05-30 (Adafruit copy). This is the table the brief quotes.
+      - id: ws2812b-v5
+        url: https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8880/WS2812B.pdf
+        title: WS2812B Intelligent control LED integrated light source
+        revision: V5
+        date: '20190323'
+        language: en
+        notes: date is the V5.0 row of the revision table (p8); Digi-Key copy
+    rates:
+      - name: 800kbps (2013 copy)
+        T0H: { ns: 400, tol_ns: 150, min_ns: 250, max_ns: 550, printed: '0.4us ±150ns' }
+        T1H: { ns: 800, tol_ns: 150, min_ns: 650, max_ns: 950, printed: '0.8us ±150ns' }
+        T0L: { ns: 850, tol_ns: 150, min_ns: 700, max_ns: 1000, printed: '0.85us ±150ns' }
+        T1L: { ns: 450, tol_ns: 150, min_ns: 300, max_ns: 600, printed: '0.45us ±150ns' }
+        period: { ns: 1250, tol_ns: 600, printed: 'Data transfer time( TH+TL=1.25µs±600ns)' }
+        reset: { min_ns: 50000, printed: 'RES low voltage time Above 50µs' }
+        doc: ws2812b-2013
+        page: 3
+        quote: 'Data transfer time( TH+TL=1.25µs±600ns) / T0H 0 code ,high voltage time 0.4us ±150ns / T1H 1 code ,high voltage time 0.8us ±150ns / T0L 0 code , low voltage time 0.85us ±150ns / T1L 1 code ,low voltage time 0.45us ±150ns / RES low voltage time Above 50µs'
+      - name: 800kbps (V5)
+        T0H: { ns: null, tol_ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T1H: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1µs' }
+        reset: { min_ns: 280000, printed: 'RES Frame unit, low voltage time >280µs' }
+        doc: ws2812b-v5
+        page: 3
+        quote: 'T0H 0 code, high voltage time 220ns~380ns / T1H 1 code, high voltage time 580ns~1µs / T0L 0 code, low voltage time 580ns~1µs / T1L 1 code, low voltage time 580ns~1µs / RES Frame unit, low voltage time >280µs'
+    frame:
+      {
+        wire_order: 'G7…G0 R7…R0 B7…B0',
+        doc: ws2812b-v5,
+        page: 4,
+        quote: 'Note: Data transmit in order of GRB, high bit data at first.',
+      }
+  - part: WS2811
+    entry: null
+    maker: WorldSemi
+    documents:
+      - id: ws2811-old
+        url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
+        title: WS2811 Signal line 256 Gray level 3 channal Constant current LED drive IC
+        revision: null
+        date: null
+        language: en
+        notes: no version printed (Adafruit copy)
+      - id: ws2811-v2.2
+        url: https://datasheet.lcsc.com/datasheet/pdf/6d22d3665addacf1ad7c32678eb754ae.pdf?productCode=C114581
+        title: WS2811 单线256级灰度三通道恒流LED驱动IC
+        revision: V2.2
+        date: '20240806'
+        language: zh
+        notes: LCSC C114581 copy (https://lcsc.com/datasheet/lcsc_datasheet_2412041609_Worldsemi-WS2811_C114581.pdf redirects to it); date is the V2.2 row of the revision table (p8); pin 7 is NC, no speed-select pin
+    rates:
+      - name: low speed (old copy)
+        select: 'SET pin: "Set work mode of IC as low speed model(connect VDD) or high speed model(vacant)"'
+        T0H: { ns: 500, tol_ns: 150, printed: '0.5 µs ±150ns' }
+        T1H: { ns: 1200, tol_ns: 150, printed: '1.2 µs ±150ns' }
+        T0L: { ns: 2000, tol_ns: 150, printed: '2.0 µs ±150ns' }
+        T1L: { ns: 1300, tol_ns: 150, printed: '1.3 µs ±150ns' }
+        reset: { min_ns: 50000, printed: 'RES low voltage time Above 50µs' }
+        doc: ws2811-old
+        page: 3
+        quote: 'Low Speed mode time / T0H 0 code,high voltage time 0.5 µs ±150ns / T1H 1 code,high voltage time 1.2 µs ±150ns / T0L 0 code,low voltage time 2.0 µs ±150ns / T1L 1 code,low voltage time 1.3 µs ±150ns / RES low voltage time Above 50µs / Note: It is one half of the time when high speed mode(reset time unchanged)'
+        notes: high speed is printed only as "one half of the time" (0.25/0.6/1.0/0.65 µs); whether the ±150 ns tolerance also halves is not stated
+      - name: 800kbps (V2.2)
+        T0H: { ns: null, min_ns: 220, max_ns: 380, printed: '220ns~380ns' }
+        T1H: { ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T0L: { ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        T1L: { ns: null, min_ns: 580, max_ns: 1000, printed: '580ns~1us' }
+        reset:
+          {
+            min_ns: 280000,
+            printed: 'RES 帧单位，低电平时间 280µs以上 [frame unit, low time, 280 µs or more]',
+          }
+        doc: ws2811-v2.2
+        page: 3
+        quote: 'T0H 0码，高电平时间 220ns~380ns / T1H 1码，高电平时间 580ns~1us / T0L 0码，低电平时间 580ns~1us / T1L 1码，低电平时间 580ns~1us / RES 帧单位，低电平时间 280µs以上 / 数据传输率 FMAX 600(min) Kbps 占空比50% [data rate FMAX min 600 kbps, 50% duty]'
+    frame:
+      {
+        wire_order: 'R7…R0 G7…G0 B7…B0',
+        doc: ws2811-v2.2,
+        page: 4,
+        quote: '注：高位先发，按照RGB 的顺序发送数据。[Note: high bit first, data sent in RGB order.]',
+      }
+
+parts:
+  # ---------------------------------------------------------------- Sunmoon
+  - part: SM16703P
+    entry: pixel-ics/sm16703
+    maker: Sunmoon (Shenzhen Sunmoon Microelectronics, 明微电子)
+    documents:
+      - id: sm16703p-ibzgziv1.3
+        url: https://suntechlite.com/wp-content/uploads/2024/08/SM16703P-Specification-Sheet.pdf
+        title: SM16703P Decorative Lighting Driver
+        revision: IBZGZIV1.3
+        date: null
+        language: en
+        notes: full datasheet with Sunmoon header; PDF created 2021-03-29. Identical copy with an iPixel footer at https://ipixelled.oss-cn-shenzhen.aliyuncs.com/Specification/IC/SM16703P-datasheet.pdf
+      - id: sm16703p-iav1.1
+        url: https://datasheet.lcsc.com/datasheet/pdf/4191829953e546fca4785fc83422a431.pdf?productCode=C155753
+        title: SM16703P 装饰照明驱动IC
+        revision: IBOB IAV1.1
+        date: null
+        language: zh
+        notes: older full datasheet (PDF created 2014-06-04); reached via https://www.lcsc.com/datasheet/C155753.pdf. Same file on the distributor site https://www.linkage.cn/uploads/allimg/20231204/2-2312041F150446.pdf
+      - id: sm16703p-brief-ibobisv1.3
+        url: https://www.chinaasic.com/websiteManage/product/20230523095347341.pdf
+        title: SM16703P Decorative Lighting Driver (1-page brief)
+        revision: IBOBISV1.3
+        date: null
+        language: en
+      - id: sunmoon-guide-2023q1
+        url: https://www.chinaasic.com/images/technology/%E6%98%8E%E5%BE%AE%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%972023%20Q1-V1.1.pdf
+        title: 明微电子产品选型指南 2023 Q1 (SM product selection guide)
+        revision: V1.1
+        date: 2023 Q1
+        language: zh
+      - id: advatek-sm16703
+        url: https://www.advateklighting.com/pixel-protocols/sm16703
+        title: LED Pixel Protocol SM16703 (Advatek, controller maker)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon / pixelcontroller.com, controller maker)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps (IBZGZIV1.3)
+        select: null
+        T0H:
+          {
+            ns: 300,
+            tol_ns: null,
+            min_ns: 200,
+            max_ns: 400,
+            printed: '200 300 400 ns (min typ max)',
+          }
+        T0L:
+          {
+            ns: 900,
+            tol_ns: null,
+            min_ns: 800,
+            max_ns: null,
+            printed: '800 900 - ns; Note 10: low time less than 20us',
+          }
+        T1H: { ns: 900, tol_ns: null, min_ns: 800, max_ns: 1000, printed: '800 900 1000 ns' }
+        T1L:
+          {
+            ns: 300,
+            tol_ns: null,
+            min_ns: 200,
+            max_ns: null,
+            printed: '200 300 - ns; Note 10: low time less than 20us',
+          }
+        period: { min_ns: 1200, printed: 'T Code element cycle 1200 - - ns' }
+        reset: { min_ns: 200000, printed: 'Trst Reset code, LOW level time 200 - - us' }
+        doc: sm16703p-ibzgziv1.3
+        page: 6
+        quote: 'T Code element cycle 1200 - - ns / T0H 0, HIGH level time 200 300 400 ns / T0L 0, LOW level time 800 900 - ns / T1H 1, HIGH level time 800 900 1000 ns / T1L 1, LOW level time 200 300 - ns / Trst Reset code, LOW level time 200 - - us / Note 9: When writing a program, the minimum symbol period requirement is 1.2us; Note 10: 0 code, 1 code high time should be in accordance with the scope specified in the above table, 0 code, 1 code low time requirement is less than 20us;'
+      - name: 800kbps (IAV1.1, 2014)
+        select: null
+        T0H: { ns: 300, tol_ns: 50, min_ns: null, max_ns: null, printed: '- 0.3 - ±0.05 us' }
+        T1H: { ns: 900, tol_ns: 50, printed: '- 0.9 - ±0.05 us' }
+        T0L: { ns: 900, tol_ns: 50, printed: '- 0.9 - ±0.05 us' }
+        T1L: { ns: 300, tol_ns: 50, printed: '- 0.3 - ±0.05 us' }
+        reset:
+          {
+            ns: 80000,
+            min_ns: null,
+            printed: 'Trst Reset 码，低电平时间 - 80 - - us (typical column only)',
+          }
+        doc: sm16703p-iav1.1
+        page: 4
+        quote: '名称 描述 最小值 典型值 最大值 容许误差 单位 [name, description, min, typ, max, tolerance, unit] / T0H 0 码，高电平时间 - 0.3 - ±0.05 us / T1H 1 码，高电平时间 - 0.9 - ±0.05 us / T0L 0 码，低电平时间 - 0.9 - ±0.05 us / T1L 1 码，低电平时间 - 0.3 - ±0.05 us / Trst Reset 码，低电平时间 - 80 - - us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0 (outputs OUTR, OUTG, OUTB)'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥200 µs (IBZGZIV1.3); 80 µs typical (IAV1.1)'
+      doc: sm16703p-ibzgziv1.3
+      page: 6
+      quote: 'Trst+ first chip 24bits data + second chip 24bits data +... + Nth chip 24bits data + Trst / 24bit grayscale data structure: RGB data transmission in high-order: R7 R6 R5 R4 R3 R2 R1 R0 G7 G6 G5 G4 G3 G2 G1 G0 B7 B6 B5 B4 B3 B2 B1 B0 bit23…bit0 (IAV1.1 p4: 高位先发，按照RGB 的顺序发送数据。[high bit first, sent in RGB order])'
+    forwarding:
+      text: Each chip takes the first 24 bits and reshapes and forwards the rest from DOUT. DIN→DOUT delay tPLH 85 ns / tPHL 70 ns typical (IBZGZIV1.3); tPLZ max 500 ns (IAV1.1 p3).
+      doc: sm16703p-ibzgziv1.3
+      page: 5
+      quote: 'tPLH signal transmission delay ... DOUT port to ground load capacitance 30pF, Signal transmission delay from DIN to DOUT - 85 - ns / tPHL - 70 - ns; p1: Cascaded data shaping output to prevent data attenuation'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon lists SM16703 among the alternatives of its "WS2811" type (3 channels, 8 bits, 3 wires).'
+        doc: falcon-pixeltypes
+        page: null
+      - claim: 'Sunmoon labels the protocol "SID" (单线归零码（SID）串联驱动 [single-wire RZ (SID) series drivers]): "SM16703P SID 3 256 30V 17mA 无 1KHz" [protocol SID, 3 ch, 256 levels, current gain: none].'
+        doc: sunmoon-guide-2023q1
+        page: 16
+    disagreements:
+      - 'IAV1.1 (2014) prints typ ±0.05 µs (T0H 0.3, T1H 0.9, T0L 0.9, T1L 0.3) and Trst 80 µs typical; IBZGZIV1.3 prints min/typ/max (T0H 200–400 ns, T1H 800–1000 ns, T0L ≥800 ns, T1L ≥200 ns, T ≥1200 ns) and Trst ≥200 µs.'
+      - 'IAV1.1 p3 gives the data-rate test condition "占空比67%(数据1)" [duty 67% for a 1], while its own table gives T1H 0.9 / (0.9+0.3) = 75%.'
+    open:
+      - 'IAV1.1 prints the 80 µs reset only as a typical value; no minimum.'
+
+  - part: SM16704PB
+    entry: pixel-ics/sm16704
+    maker: Sunmoon
+    documents:
+      - id: sm16704pb-ibibziv1.3-en
+        url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SM16704PB-datasheet.pdf
+        title: SM16704PB Decorative Lighting Driver IC
+        revision: IBIBZIV1.3
+        date: null
+        language: en
+        notes: LEDYi copy (redirects to media.ledyi.com/sm16704pb-datasheet_fb13e04b….pdf); PDF created 2021-03-31
+      - id: sm16704pb-ibibziv1.3-zh
+        url: https://www.linkage.cn/uploads/allimg/20231204/2-2312041G044324.pdf
+        title: SM16704PB 景观装饰驱动IC
+        revision: IBIBZIV1.3
+        date: null
+        language: zh
+        notes: copy on a Sunmoon distributor's site (linkage.cn, listed as "SM16704PB明微电子RGBW四路驱动芯片规格书")
+      - id: sm16704-greeled-copy
+        url: https://www.superlightingled.com/PDF/sm16704-datasheet-en.pdf
+        title: SM16704 - Signal line 256 Gray level 4 channel Constant current LED driver IC
+        revision: null
+        date: null
+        language: en
+        notes: older re-typeset datasheet watermarked "GREELED ELECTRONIC LTD"; not on Sunmoon letterhead
+      - id: sm16704pb-brief-en
+        url: https://www.chinaasic.com/websiteManage/product/20230523101647341.pdf
+        title: SM16704PB Decorative Lighting Driver IC (1-page brief)
+        revision: IBIBZIV1.3
+        date: null
+        language: en
+      - id: advatek-sm16704
+        url: https://www.advateklighting.com/pixel-protocols/sm16704
+        title: LED Pixel Protocol SM16704 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps (IBIBZIV1.3)
+        select: null
+        T0H: { ns: 300, min_ns: 200, max_ns: 400, printed: '200 300 400 ns' }
+        T0L:
+          { ns: 900, min_ns: 800, max_ns: null, printed: '800 900 - ns; low time less than 20us' }
+        T1H: { ns: 900, min_ns: 800, max_ns: 1000, printed: '800 900 1000 ns' }
+        T1L:
+          { ns: 300, min_ns: 200, max_ns: null, printed: '200 300 - ns; low time less than 20us' }
+        period: { min_ns: 1200, printed: 'T Code element period 1200 - - ns' }
+        reset: { min_ns: 200000, printed: 'Trst Reset, LOW level 200 - - us' }
+        doc: sm16704pb-ibibziv1.3-en
+        page: 5
+        quote: 'T Code element period 1200 - - ns / T0H 0, HIGH level 200 300 400 ns / T0L 0, LOW level 800 900 - ns / T1H 1, HIGH level 800 900 1000 ns / T1L 1, LOW level 200 300 - ns / Trst Reset, LOW level 200 - - us / Note 9: when writing the program, the minimum code period is 1.2us; Note 10：The high level time of 0 and 1 code should be in accordance with the specified scope of the above table, and the low level time of 0 yards and 1 yard is less than 20us;'
+      - name: 800kbps (older Greeled-watermarked copy)
+        select: null
+        T0H: { ns: 300, tol_ns: 50, printed: '0.3 ±0.05 us' }
+        T0L: { ns: 900, tol_ns: 50, printed: '0.9 ±0.05 us' }
+        T1H: { ns: 900, tol_ns: 50, printed: '0.9 ±0.05 us' }
+        T1L: { ns: 300, tol_ns: 50, printed: '0.3 ±0.05 us' }
+        period: { min_ns: 1200, tol_ns: 50, printed: 'T 1.2 (Min) ±0.05 us' }
+        reset: { min_ns: 200000, printed: 'Trst Frame unit, low voltage time 200 (Min) us' }
+        doc: sm16704-greeled-copy
+        page: 5
+        quote: 'Data Transfer Time: T 1.2(min) ±0.05 us / T0H 0 code, high voltage time 0.3 ±0.05 us / T0L 0 code, low voltage time 0.9 ±0.05 us / T1H 1 code, high voltage time 0.9 ±0.05 us / T1L 1 code, low voltage time 0.3 ±0.05 us / Trst Frame unit, low voltage time 200(min) us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'R7…R0 G7…G0 B7…B0 W7…W0'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥200 µs'
+      doc: sm16704pb-ibibziv1.3-zh
+      page: 5
+      quote: 'Trst+第一颗芯片32bits 数据+第二颗芯片32bits 数据+……+第N 颗芯片32bits 数据+Trst / 32bits 灰度数据结构：高位在前，按照RGB 的顺序发送 [32-bit grey data: high bit first, sent in RGB order] R7 R6 R5 R4 R3 R2 R1 R0 G7 …… G0 B7 …… B0 W7 …… W0 bit31…bit0 (Greeled copy p5: "Composition of 32bit Data R7…R0 G7……G0 B7……B0 W7……W0 / Note: Data transmit in order of RGB, high bit data at first.")'
+    forwarding:
+      text: First chip keeps the first 32 bits and forwards the rest; DIN→DOUT tPLH 85 ns / tPHL 70 ns typical.
+      doc: sm16704pb-ibibziv1.3-en
+      page: 4
+      quote: 'tPLH Signal transmission delay ... DIN to DOUT signal transmission delay - 85 - ns / tPHL - 70 - ns; Greeled copy p1: "the first IC collect initial 32bit data then sent to the internal data latch, the other data which reshaping by the internal signal reshaping amplification circuit sent to the next cascade IC through the DO port."'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Advatek: "SM16704 is equipped with all the same features as its previous version, SM16703, but is dedicated to RGBW."'
+        doc: advatek-sm16704
+        page: null
+      - claim: 'Falcon lists SM16704 under its "APA109" type ("These expect 4 channels of input data per pixel.").'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'English IBIBZIV1.3 p5 titles the structure "32bits gray scale data structure: High levels first, sent by the order of RGB" but draws only 24 cells (R7…B0) under "Bit31……bit0"; the Chinese edition of the same revision (p5) draws W7……W0 as well. Both say "RGB order" for a 4-channel frame.'
+    open: []
+
+  - part: SM16711
+    entry: pixel-ics/sm16711
+    maker: Sunmoon
+    documents:
+      - id: sm16711-igtt-izv1.2
+        url: https://datasheet4u.com/pdf/905204/SM16711.pdf
+        title: SM16711 装饰照明驱动IC
+        revision: IGTT-IZV1.2
+        date: null
+        language: zh
+        notes: datasheet4u copy (PDF 2015-02-28); no timing table or frame layout in this copy; not in Sunmoon's 2023 Q1 selection guide
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: null
+    rates:
+      - name: high speed (default)
+        select: 'SET pin 7 floating (default); 接VDD 时为低速模式 [tied to VDD = low speed]'
+        T0H: { ns: null, printed: null }
+        T0L: { ns: null, printed: null }
+        T1H: { ns: null, printed: null }
+        T1L: { ns: null, printed: null }
+        period:
+          {
+            ns: null,
+            printed: 'fDIN 高速 - 833 - KHZ, test conditions 占空比33%(数据0) 占空比67%(数据1) [duty 33% for a 0, 67% for a 1]',
+          }
+        reset: { min_ns: null, printed: 'Reset码 Treset (shape only, no value)' }
+        doc: sm16711-igtt-izv1.2
+        page: 3
+        quote: '数据传输速率 fDIN 低速 占空比33%(数据0) 占空比67%(数据1) - 417 - KHZ / 高速 - 833 - [data rate fDIN low speed 417 kHz, high speed 833 kHz typical]; p2: SET 速度设置 7 悬空时（默认）为高速模式；接VDD 时为低速模式 [SET speed select pin 7: floating (default) = high speed; tied to VDD = low speed]; p1: 数据发送速度400Kbps（低速）或800Kbps（高速）可选，内置默认高速模式'
+        notes: 'From the printed duty conditions alone: 833 kHz → T ≈ 1.2 µs, 33% ≈ 0.4 µs high for a 0, 67% ≈ 0.8 µs high for a 1 (computed, not printed as times).'
+      - name: low speed
+        select: 'SET pin 7 tied to VDD'
+        T0H: { ns: null, printed: null }
+        T0L: { ns: null, printed: null }
+        T1H: { ns: null, printed: null }
+        T1L: { ns: null, printed: null }
+        period: { ns: null, printed: 'fDIN 低速 - 417 - KHZ' }
+        reset: { min_ns: null, printed: null }
+        doc: sm16711-igtt-izv1.2
+        page: 3
+        quote: '数据传输速率 fDIN 低速 ... - 417 - KHZ'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      extra: 'Output current and polarity are set by data: an instruction register (bit 23 = P, output polarity) and R/G/B white-balance gain bits (R gain "Bit14-16") exist; their position in the stream is not given in this copy.'
+      start: null
+      end: null
+      latch: null
+      doc: sm16711-igtt-izv1.2
+      page: 4
+      quote: 'p4: 该芯片协议采用的是单极性归零码，每一个码元都必须有低电平。本协议的每个码元起始为高电平，高电平时间宽度决定"0"码或者"1"码。"0"码和"1"码的周期一样，可以认为高低电平是一种互补的关系 [unipolar RZ; every code element starts high and must contain a low; the high width decides 0/1; 0 and 1 have the same period, high and low are complementary]; p1: 芯片输出电流由输入数据设定 [output current is set by the input data]; 指令数据寄存器控制输出极性选择 [an instruction data register selects output polarity]; p2: R 端口驱动电流 IOUT_R VDS_R=1V,R 白平衡增益Bit14-16=101 [R drive current at R white-balance gain bits 14–16 = 101]; p6: 设置指令寄存器数据bit23 值 P = 1 [set instruction register data bit23 P = 1 (to invert the outputs)]'
+    forwarding:
+      text: Reshapes and forwards data after taking its own; DIN→DOUT tPLZ max 500 ns.
+      doc: sm16711-igtt-izv1.2
+      page: 3
+      quote: 'DOUT 传输延迟 tPLZ DIN→DOUT - - 500 ns; p1: 数据整形：接受完本单元数据自动将后续数据整形输出 [after receiving its own data, reshapes and outputs the following data]'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon lists SM16711 among the alternatives of its "WS2811" type.'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements: []
+    open:
+      - 'T0H/T0L/T1H/T1L values, reset time, bit order and the frame layout (where the instruction/white-balance bits sit) are not in the only copy found. No other SM16711 datasheet found (searched Sunmoon site, linkage.cn list, web).'
+
+  - part: SM16712P
+    entry: pixel-ics/sm16712
+    maker: Sunmoon
+    documents:
+      - id: sm16712p-iboqziv1.4-zh
+        url: https://www.linkage.cn/uploads/allimg/20231204/2-2312041H051311.pdf
+        title: SM16712P 装饰照明驱动IC
+        revision: IBOQZIV1.4
+        date: null
+        language: zh
+        notes: full datasheet on a Sunmoon distributor's site; PDF created 2021-03-31
+      - id: sm16712p-brief-en
+        url: https://www.chinaasic.com/websiteManage/product/20230523105111341.pdf
+        title: SM16712P Decorative lighting driver IC (1-page brief)
+        revision: IBOQZIV1.4
+        date: null
+        language: en
+      - id: advatek-sm16712
+        url: https://www.advateklighting.com/pixel-protocols/sm16712
+        title: LED Pixel Protocol SM16712 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps
+        select: null
+        T0H: { ns: 300, min_ns: 200, max_ns: 400, printed: '200 300 400 ns' }
+        T0L: { ns: 900, min_ns: 800, max_ns: null, printed: '800 900 - ns; low time <20us' }
+        T1H: { ns: 900, min_ns: 800, max_ns: 1000, printed: '800 900 1000 ns' }
+        T1L: { ns: 300, min_ns: 200, max_ns: null, printed: '200 300 - ns; low time <20us' }
+        period: { min_ns: 1200, printed: 'T 码元周期 1200 - - ns' }
+        reset: { min_ns: 200000, printed: 'Trst Reset 码，低电平时间 200 - - us' }
+        doc: sm16712p-iboqziv1.4-zh
+        page: 5
+        quote: 'T 码元周期 1200 - - ns / T0H 0 码，高电平时间 200 300 400 ns / T0L 0 码，低电平时间 800 900 - ns / T1H 1 码，高电平时间 800 900 1000 ns / T1L 1 码，低电平时间 200 300 - ns / Trst Reset 码，低电平时间 200 - - us / 注9：写程序时，码元周期最低要求为1.2us；注10：0 码、1 码的高电平时间需按照上表的规定范围，0 码、1 码的低电平时间要求小于20us； [Note 9: minimum code period 1.2 µs; Note 10: high times must stay within the table; low times must be under 20 µs]'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 12
+      wire_order: 'R1 G1 B1 R2 G2 B2 R3 G3 B3 R4 G4 B4 (each MSB first)'
+      pixel_bits: 96
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥200 µs'
+      doc: sm16712p-iboqziv1.4-zh
+      page: 5
+      quote: 'Trst+第一颗芯片96bits 数据+第二颗芯片96bits 数据+……+第N 颗芯片96bits 数据+Trst / 96bits 灰度数据结构：高位在前，按照R/G/B1~R/G/B4 的顺序发送 [96-bit grey data: high bit first, sent in the order R/G/B1 … R/G/B4] R17…R10 G17…G10 B17…B10 (Bit95) … R47…R40 G47…G40 B47…B40 (bit0)'
+    forwarding:
+      text: Chip 1 takes the first 96 bits; chip 2 sees groups 2…N (diagram for 3 chips). DIN→DOUT tPLH 92 ns / tPHL 100 ns typical.
+      doc: sm16712p-iboqziv1.4-zh
+      page: 4
+      quote: 'tPLH 信号传输延迟 DOUT 端口对地负载电容30pF，DIN 至DOUT 的信号传输延时 - 92 - ns / tPHL - 100 - ns'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Advatek: "SM16712 is equipped with all the same features as its previous version, SM16703, but supports 4 RGB pixels off the one chip."'
+        doc: advatek-sm16712
+        page: null
+      - claim: 'Falcon lists SM16712 among the alternatives of its "WS2811" type.'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements: []
+    open: []
+
+  - part: SM16714P / SM16714PHT
+    entry: pixel-ics/sm16714
+    maker: Sunmoon
+    documents:
+      - id: sm16714p-ibgsibv1.1-zh
+        url: https://www.linkage.cn/uploads/allimg/20231204/2-2312041G139305.pdf
+        title: SM16714P RGBW恒流驱动IC V1.1 / SM16714P 景观装饰驱动IC
+        revision: IBGSIBV1.1
+        date: null
+        language: zh
+        notes: full datasheet (PDF created 2018-02-02, modified 2021-09-04) on a Sunmoon distributor's site
+      - id: sm16714pht-ibgszzv1.0-zh
+        url: https://www.linkage.cn/uploads/allimg/20231204/2-2312041G211552.pdf
+        title: SM16714PHT 景观装饰驱动IC
+        revision: IBGSZZV1.0
+        date: null
+        language: zh
+        notes: full datasheet (PDF created 2022-01-13)
+      - id: sm16714pht-brief-en
+        url: https://www.chinaasic.com/websiteManage/product/202504021552422564.pdf
+        title: SM16714PHT Decorative Lighting Driver IC (1-page brief)
+        revision: IBGSZZV1.0
+        date: null
+        language: en
+      - id: sm16714th-brief-en
+        url: https://www.chinaasic.com/websiteManage/product/202504021623312564.pdf
+        title: SM16714TH RZ Code 4-CH Constant Current Driver Chip (1-page brief)
+        revision: IBGSZAV1.0
+        date: null
+        language: en
+      - id: advatek-sm16714
+        url: https://www.advateklighting.com/pixel-protocols/sm16714
+        title: LED Pixel Protocol SM16714 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: sunmoon-guide-2023q1
+        url: https://www.chinaasic.com/images/technology/%E6%98%8E%E5%BE%AE%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%972023%20Q1-V1.1.pdf
+        title: 明微电子产品选型指南 2023 Q1
+        revision: V1.1
+        date: 2023 Q1
+        language: zh
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps (SM16714P IBGSIBV1.1)
+        select: null
+        T0H: { ns: 300, tol_ns: 50, printed: '- 0.3 - ±0.05 us' }
+        T0L: { ns: 900, tol_ns: 50, printed: '- 0.9 - ±0.05 us' }
+        T1H: { ns: 600, tol_ns: 50, printed: '- 0.6 - ±0.05 us' }
+        T1L: { ns: 600, tol_ns: 50, printed: '- 0.6 - ±0.05 us' }
+        period:
+          {
+            ns: 1200,
+            tol_ns: 50,
+            min_ns: 1200,
+            printed: 'T 码元周期 1.2 - - ±0.05 us (value in the min column)',
+          }
+        reset: { min_ns: 200000, printed: 'Trst Reset 码，低电平时间 200 - - - us' }
+        doc: sm16714p-ibgsibv1.1-zh
+        page: 5
+        quote: '符号 参数 最小值 典型值 最大值 容许误差 单位 / T 码元周期 1.2 - - ±0.05 us / T0H 0 码，高电平时间 - 0.3 - ±0.05 us / T0L 0 码，低电平时间 - 0.9 - ±0.05 us / T1H 1 码，高电平时间 - 0.6 - ±0.05 us / T1L 1 码，低电平时间 - 0.6 - ±0.05 us / Trst Reset 码，低电平时间 200 - - - us'
+      - name: 800kbps (SM16714PHT IBGSZZV1.0)
+        select: null
+        T0H: { ns: 300, min_ns: 200, max_ns: 400, printed: '200 300 400 ns' }
+        T0L: { ns: 900, min_ns: 800, max_ns: null, printed: '800 900 - ns; low time <20us' }
+        T1H: { ns: 900, min_ns: 700, max_ns: 1000, printed: '700 900 1000 ns' }
+        T1L: { ns: 300, min_ns: 200, max_ns: null, printed: '200 300 - ns; low time <20us' }
+        period: { min_ns: 1200, max_ns: 20000, printed: 'T 码元周期 1200 - 20000 ns' }
+        reset: { min_ns: 200000, printed: 'Trst Reset 码，低电平时间 200 - - us' }
+        doc: sm16714pht-ibgszzv1.0-zh
+        page: 5
+        quote: 'T 码元周期 1200 - 20000 ns / T0H 0 码，高电平时间 200 300 400 ns / T0L 0 码，低电平时间 800 900 - ns / T1H 1 码，高电平时间 700 900 1000 ns / T1L 1 码，低电平时间 200 300 - ns / Trst Reset 码，低电平时间 200 - - us / 注9：写程序时，码元周期最低要求为1.2us；注10：……0 码、1 码的低电平时间要求小于20us；'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'R7…R0 G7…G0 B7…B0 W7…W0'
+      pixel_bits: 32
+      extra: "20-bit current-gain word after the last chip's data: W, B, G, R, 5 bits each (S4…S0, S4 first); 32 levels, 2.5–39.7 mA per the table (00000 = 2.5 mA, 11111 = 39.7 mA). Same in both revisions (p5–p6)."
+      start: null
+      end: '20-bit current-gain word, then Trst'
+      latch: 'low ≥200 µs'
+      doc: sm16714p-ibgsibv1.1-zh
+      page: 5
+      quote: 'Trst+第一颗芯片32bits 数据+第二颗芯片32bits 数据+......+第N 颗芯片32bits 数据+20bits 电流增益+Trst [… + 20-bit current gain + Trst] / 32bit 灰度数据结构：高位在前，按照RGBW 的顺序发送 [high bit first, RGBW order]; p6: 电流增益数据共20bits，红绿蓝白灯电流增益调节位各5bits，分别对应5bits（S4~S0），系统发送顺序是先发白灯5bits，然后是蓝灯的5bits，再发绿灯5bits，最后发红灯5bits，先发高位S4，最后发低位S0。[gain data is 20 bits, 5 bits each for R, G, B, W; sent white first, then blue, then green, then red; S4 first]'
+    forwarding:
+      text: The diagram (3 chips) shows every chip's input ending with the 20-bit gain word, so the gain word passes down the whole chain. DIN→DOUT tPLH 75 ns / tPHL 64 ns typical (both revisions).
+      doc: sm16714p-ibgsibv1.1-zh
+      page: 4
+      quote: 'tPLH 信号传输延迟 DOUT 端口对地负载电容30pF，DIN 至DOUT 的信号传输延时 - 75 - ns / tPHL - 64 - ns; p5 各芯片输入数据流: 芯片3 … 第三组32bits数据 20bits电流增益 Trst [chip 3 input: third 32-bit set, 20-bit current gain, Trst]'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Sunmoon lists SM16714P and SM16714PHT as protocol "SID", 4 ch, current gain "32级" [32 levels].'
+        doc: sunmoon-guide-2023q1
+        page: 16
+      - claim: 'Advatek: "SM16714, also known as SM16714P, is very similar to, SM16712, but is dedicated to RGBW"; "Current Control Per Color: 5 Bits".'
+        doc: advatek-sm16714
+        page: null
+    disagreements:
+      - 'SM16714P IBGSIBV1.1 prints T1H 0.6 µs ±0.05 (550–650 ns) and T1L 0.6 µs ±0.05; SM16714PHT IBGSZZV1.0 prints T1H 700–1000 ns (typ 900) and T1L ≥200 ns. The two T1H windows do not overlap.'
+      - 'Port withstand voltage: SM16714P "OUT R/G/B/W 端口耐压15V" (p1) vs SM16714PHT/TH briefs "26V".'
+      - 'Current range: briefs say 2.5~40mA; the datasheets'' gain table tops out at 39.7 mA; the 2023 guide says "2.5～38mA".'
+    open:
+      - 'What a chip does if the 20-bit gain word is missing (a plain 32-bit-per-pixel stream) is not documented.'
+
+  - part: SM16803PB
+    entry: pixel-ics/sm16803
+    maker: Sunmoon
+    documents:
+      - id: sm16803pb-ibszzov1.0-zh
+        url: https://www.linkage.cn/uploads/allimg/20231204/2-2312041H124924.pdf
+        title: SM16803PB 景观装饰驱动IC
+        revision: IBSZZOV1.0
+        date: null
+        language: zh
+        notes: full datasheet (PDF created 2020-08-11) on a Sunmoon distributor's site
+      - id: sm16803pb-brief-en
+        url: https://www.chinaasic.com/websiteManage/product/20230523111339341.pdf
+        title: SM16803PB Landscape Decoration Driver (1-page brief)
+        revision: IBSZZIV1.1
+        date: null
+        language: en
+      - id: sm16803ph-brief-zh
+        url: https://www.chinaasic.com/websiteManage/product/202503271124042564.pdf
+        title: SM16803PH 景观装饰驱动IC (1-page brief)
+        revision: IBSZZAV1.0
+        date: null
+        language: zh
+      - id: advatek-sm16803
+        url: https://www.advateklighting.com/pixel-protocols/sm16803
+        title: LED Pixel Protocol SM16803 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: neopixelbus-sm168x3
+        url: https://github.com/Makuna/NeoPixelBus/blob/master/src/internal/features/NeoSm168x3Features.h
+        title: NeoPixelBus NeoSm168x3Features.h (driver library, secondary)
+        revision: master
+        date: null
+        language: en
+      - id: sunmoon-guide-2023q1
+        url: https://www.chinaasic.com/images/technology/%E6%98%8E%E5%BE%AE%E7%94%B5%E5%AD%90%E4%BA%A7%E5%93%81%E9%80%89%E5%9E%8B%E6%8C%87%E5%8D%972023%20Q1-V1.1.pdf
+        title: 明微电子产品选型指南 2023 Q1
+        revision: V1.1
+        date: 2023 Q1
+        language: zh
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps
+        select: null
+        T0H: { ns: 300, tol_ns: 50, printed: '- 0.3 - ± 0.05 us' }
+        T0L: { ns: 900, tol_ns: 50, printed: '- 0.9 - ± 0.05 us' }
+        T1H: { ns: 900, tol_ns: 50, printed: '- 0.9 - ± 0.05 us' }
+        T1L: { ns: 300, tol_ns: 50, printed: '- 0.3 - ± 0.05 us' }
+        reset: { min_ns: 200000, printed: 'Trst Reset 码，低电平时间 200 - - - us' }
+        doc: sm16803pb-ibszzov1.0-zh
+        page: 6
+        quote: '符号 参数 最小值 典型值 最大值 容许误差 单位 / T0H 0 码，高电平时间 - 0.3 - ± 0.05 us / T0L 0 码，低电平时间 - 0.9 - ± 0.05 us / T1H 1 码，高电平时间 - 0.9 - ± 0.05 us / T1L 1 码，低电平时间 - 0.3 - ± 0.05 us / Trst Reset 码，低电平时间 200 - - - us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: '16-bit current-gain word after the last chip''s data: 4 reserved bits, then R, G, B, 4 bits each (S3…S0, S3 first); "保留位数据不影响电流增益调节" [reserved bits do not affect the gain]; 0000 = 1.8 mA … 1111 = 19 mA with REXT open.'
+      start: null
+      end: '16-bit current-gain word, then Trst'
+      latch: 'low ≥200 µs'
+      doc: sm16803pb-ibszzov1.0-zh
+      page: 6
+      quote: 'Trst+第一颗芯片24bits 数据+第二颗芯片24bits 数据+……+第N 颗芯片24bits 数据+16bits 电流增益+Trst / 24bits 灰度数据结构：高位在前，按照RGB 的顺序发送; p7: 电流增益数据共16bits，包含保留位4bits 和红绿蓝灯电流增益调节位各4bits，分别对应4bits（S3~S0），系统发送顺序是先发保留位4bits，然后是红灯的4bits，再发绿灯4bits，最后发蓝灯4bits，先发高位S3，最后发低位S0。[gain data is 16 bits: 4 reserved bits and 4 bits each for R, G, B; reserved first, then R, G, B; S3 first] 注：保留位数据不影响电流增益调节。'
+    forwarding:
+      text: Every chip's input stream ends with the 16-bit gain word (diagram), so the gain word passes down the chain; DIN→DOUT 73 ns typical. DIN and DOUT are both labelled input/output.
+      doc: sm16803pb-ibszzov1.0-zh
+      page: 5
+      quote: 'tPLH 信号传输延迟 DOUT 端口对地负载电容30pF，DIN 至DOUT 的信号传输延时 - 73 - ns / tPHL - 73 - ns; p6 各芯片输入数据流: 芯片3 Trst 第三组24bits数据 16bits电流增益 Trst; p2: 5 DOUT 级联信号输出端/信号输入端 [cascade output / signal input]; 6 DIN 信号输入端/级联信号输出端 [signal input / cascade output]; p4: VIH … DIN 或DOUT 输入高电平 [DIN or DOUT input high]'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Sunmoon lists SM16803PB as protocol "SID", 3 ch, 65536 levels, current gain "16级".'
+        doc: sunmoon-guide-2023q1
+        page: 16
+      - claim: 'Advatek: "SM16803 receives 8-bit data, but upscales this to a gamma-corrected 16-bit curve"; "Current Control Per Color: 4 Bits".'
+        doc: advatek-sm16803
+        page: null
+      - claim: 'NeoPixelBus (library) writes a 2-byte settings word "0RGB 4 bits each" at the end of the stream for SM16803PB.'
+        doc: neopixelbus-sm168x3
+        page: null
+    disagreements: []
+    open:
+      - 'Behaviour without the gain word, and how the bidirectional DIN/DOUT pins pick a direction, are not described.'
+
+  - part: SM16804PB / SM16804EB
+    entry: pixel-ics/sm16804
+    maker: Sunmoon
+    documents:
+      - id: sm16804pb-ibszzov1.0-zh
+        url: https://www.linkage.cn/uploads/allimg/20231204/2-2312041H15NV.pdf
+        title: SM16804PB 景观装饰驱动IC
+        revision: IBSZZOV1.0
+        date: null
+        language: zh
+        notes: full datasheet (PDF created 2020-08-11), distributor copy
+      - id: sm16804pb-ibszziv1.1-en
+        url: http://www.jad-leds.com/web/userfiles/download/SM16804PB-Datasheet.pdf
+        title: SM16804EB Landscape Decoration Driver (header) / SM16804PB (content)
+        revision: IBSZZIV1.1
+        date: null
+        language: en
+        notes: English full datasheet with JIAANDA watermark (PDF created 2022-12-16)
+      - id: sm16804eb-ibszzov1.0-zh
+        url: https://www.linkage.cn/uploads/allimg/20231204/2-2312041H433948.pdf
+        title: SM16804EB 景观装饰驱动IC
+        revision: IBSZZOV1.0
+        date: null
+        language: zh
+      - id: sm16804pb-brief-en
+        url: https://www.chinaasic.com/websiteManage/product/20230523111738341.pdf
+        title: SM16804PB (1-page brief; header reads "SM16804EB Landscape Decoration Driver IBSZZIV1.1")
+        revision: IBSZZIV1.1
+        date: null
+        language: en
+      - id: sm16804eb-brief-en
+        url: https://www.chinaasic.com/websiteManage/product/20230523114051341.pdf
+        title: SM16804EB Landscape Decoration Driver (1-page brief)
+        revision: IBSZZIV1.1
+        date: null
+        language: en
+      - id: advatek-sm16804
+        url: https://www.advateklighting.com/pixel-protocols/sm16804
+        title: LED Pixel Protocol SM16804 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon)
+        revision: null
+        date: null
+        language: en
+      - id: neopixelbus-sm168x4
+        url: https://github.com/Makuna/NeoPixelBus/blob/master/src/internal/features/NeoSm168x4Features.h
+        title: NeoPixelBus NeoSm168x4Features.h (driver library, secondary)
+        revision: master
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps
+        select: null
+        T0H: { ns: 300, tol_ns: 50, printed: '- 0.3 - ± 0.05 us' }
+        T0L: { ns: 900, tol_ns: 50, printed: '- 0.9 - ± 0.05 us' }
+        T1H: { ns: 900, tol_ns: 50, printed: '- 0.9 - ± 0.05 us' }
+        T1L: { ns: 300, tol_ns: 50, printed: '- 0.3 - ± 0.05 us' }
+        reset: { min_ns: 200000, printed: 'Trst Reset 码，低电平时间 200 - - - us' }
+        doc: sm16804pb-ibszzov1.0-zh
+        page: 6
+        quote: 'T0H 0 码，高电平时间 - 0.3 - ± 0.05 us / T0L 0 码，低电平时间 - 0.9 - ± 0.05 us / T1H 1 码，高电平时间 - 0.9 - ± 0.05 us / T1L 1 码，低电平时间 - 0.3 - ± 0.05 us / Trst Reset 码，低电平时间 200 - - - us (same table in SM16804EB IBSZZOV1.0 p6 and English IBSZZIV1.1 p6: "T0H 0，HIGH level - 0.3 - ±0.05 us … Trst Reset，LOW level 200 - - - us")'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'R7…R0 G7…G0 B7…B0 W7…W0'
+      pixel_bits: 32
+      extra: "16-bit current-gain word after the last chip's data: R, G, B, W, 4 bits each (S3…S0, S3 first), no reserved bits (Chinese IBSZZOV1.0, PB and EB); 0000 = 1.8 mA … 1111 = 19 mA."
+      start: null
+      end: '16-bit current-gain word, then Trst'
+      latch: 'low ≥200 µs'
+      doc: sm16804pb-ibszzov1.0-zh
+      page: 6
+      quote: 'Trst+第一颗芯片32bits 数据+第二颗芯片32bits 数据+……+第N 颗芯片32bits 数据+16bits 电流增益+Trst / 32bits 灰度数据结构：高位在前，按照RGBW 的顺序发送; p7: 电流增益数据共16bits，红绿蓝白灯电流增益调节位各4bits，分别对应4bits（S3~S0），系统发送顺序是先发红灯4bits，然后是绿灯的4bits，再发蓝灯4bits，最后发白灯4bits，先发高位S3，最后发低位S0。[gain data is 16 bits, 4 bits each for R, G, B, W; R first, then G, B, W; S3 first]'
+    forwarding:
+      text: Every chip's input ends with the 16-bit gain word (diagram); DIN→DOUT 73 ns typical; DIN and DOUT are both labelled input/output on PB and EB.
+      doc: sm16804pb-ibszziv1.1-en
+      page: 2
+      quote: '5 DOUT Cascade signal output port/signal input port / 7 DIN Signal input port/cascade signal output port; p5: tPLH Signal transmission delay … DIN to DOUT signal: transmission delay - 73 - ns / tPHL - 73 - ns; p6 Input Data Stream of every chip: Chip3 Trst 3rd Set of 32bits Data 16bits Current Gain Trst'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Advatek: "SM16804 is equipped with all the same features as its previous version, SM16803, but is dedicated to RGBW."'
+        doc: advatek-sm16804
+        page: null
+      - claim: 'Falcon lists SM16804 under its plain 4-channel "APA109" type ("These expect 4 channels of input data per pixel.") — no gain word mentioned.'
+        doc: falcon-pixeltypes
+        page: null
+      - claim: 'NeoPixelBus writes a 2-byte settings word "RGBW 4 bits each" at the end of the stream for SM16804EB/SM16824E.'
+        doc: neopixelbus-sm168x4
+        page: null
+    disagreements:
+      - 'English IBSZZIV1.1 p7: "Total current gain data: 16bits, with 4 reserved bits and 4 bits RGBW current gain adjustment for each color … send 4 bits of reserved first, then 4 bits of R, 4 bits of G, 4 bits of B,4 bits of W" — 4+16 = 20 bits, contradicting its own "16bits" and its R/G/B/W-only table. The Chinese IBSZZOV1.0 (PB and EB) says 16 bits = R, G, B, W with no reserved bits. The reserved-bits sentence matches the 3-channel SM16803PB text.'
+      - 'The English SM16804PB datasheet and Sunmoon''s own SM16804PB brief carry the header "SM16804EB Landscape Decoration Driver IBSZZIV1.1".'
+    open:
+      - "Behaviour without the gain word (as Falcon's plain 4-channel setting would send) is not documented; how the bidirectional DIN/DOUT choose a direction is not described."
+
+  - part: SM16824E
+    entry: pixel-ics/sm16824e
+    maker: Sunmoon
+    documents:
+      - id: sm16824e-ibzozov1.2-zh
+        url: https://www.linkage.cn/uploads/allimg/20231204/2-2312041HP44W.pdf
+        title: SM16824E 景观装饰驱动IC
+        revision: IBZOZOV1.2
+        date: null
+        language: zh
+        notes: full datasheet (PDF created 2020-05-11), distributor copy
+      - id: sm16824e-brief-en
+        url: https://www.chinaasic.com/websiteManage/product/20230523140052341.pdf
+        title: SM16824E Landscape Decoration Driver (1-page brief)
+        revision: IBZOZZV1.4
+        date: null
+        language: en
+      - id: advatek-sm16824
+        url: https://www.advateklighting.com/pixel-protocols/sm16824
+        title: LED Pixel Protocol SM16824 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: neopixelbus-sm168x4
+        url: https://github.com/Makuna/NeoPixelBus/blob/master/src/internal/features/NeoSm168x4Features.h
+        title: NeoPixelBus NeoSm168x4Features.h (driver library, secondary)
+        revision: master
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps
+        select: null
+        T0H: { ns: 300, tol_ns: 50, printed: '- 0.3 - ± 0.05 us' }
+        T0L: { ns: 900, tol_ns: 50, printed: '- 0.9 - ± 0.05 us' }
+        T1H: { ns: 900, tol_ns: 50, printed: '- 0.9 - ± 0.05 us' }
+        T1L: { ns: 300, tol_ns: 50, printed: '- 0.3 - ± 0.05 us' }
+        reset: { min_ns: 200000, printed: 'Trst Reset 码，低电平时间 200 - - - us' }
+        doc: sm16824e-ibzozov1.2-zh
+        page: 6
+        quote: '名称 描述 最小值 典型值 最大值 容许误差 单位 / T0H 0 码，高电平时间 - 0.3 - ± 0.05 us / T0L 0 码，低电平时间 - 0.9 - ± 0.05 us / T1H 1 码，高电平时间 - 0.9 - ± 0.05 us / T1L 1 码，低电平时间 - 0.3 - ± 0.05 us / Trst Reset 码，低电平时间 200 - - - us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'R7…R0 G7…G0 B7…B0 W7…W0'
+      pixel_bits: 32
+      extra: "16-bit current-gain word after the last chip's data: R, G, B, W, 4 bits each, S3 first (no reserved bits); levels 1–16 (0000 = level 1); output current = 1100/REXT × (208 + G×32) for G 1–15, 1100/REXT × 720 at G 16."
+      start: null
+      end: '16-bit current-gain word, then Trst'
+      latch: 'low ≥200 µs'
+      doc: sm16824e-ibzozov1.2-zh
+      page: 6
+      quote: 'Trst+第一颗芯片32bits 数据+第二颗芯片32bits 数据+……+第N 颗芯片32bits 数据+16bits 电流增益+Trst / 32bits 灰度数据结构：高位在前，按照RGBW 的顺序发送; p7: 电流增益数据共16bits，红绿蓝白灯电流增益调节位各4bits，分别对应4bits（S3~S0），系统发送顺序是先发红灯4bits，然后是绿灯的4bits，再发蓝灯4bits，最后发白灯4bits，先发高位S3，最后发低位S0。'
+    forwarding:
+      text: Every chip's input ends with the 16-bit gain word (diagram); DIN→DOUT 73 ns typical. Unlike SM16803PB/SM16804PB, DIN and DOUT are one-way.
+      doc: sm16824e-ibzozov1.2-zh
+      page: 5
+      quote: 'tPLH 信号传输延迟 … DIN 至DOUT 的信号传输延时 - 73 - ns / tPHL - 73 - ns; p2: 2 DIN 信号输入端 [signal input]; 4 DOUT 级联信号输出端 [cascade signal output]'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Brief: "SM16824E and SM17500P can be used in parallel-serial combination schemes." (SM17500P is Sunmoon''s DMX512 transcoder.)'
+        doc: sm16824e-brief-en
+        page: 1
+      - claim: 'Advatek: "SM16824, designed by Sunmoon Microelectronics in China, is dedicated to RGBW"; "Current Control Per Color: 4 Bits".'
+        doc: advatek-sm16824
+        page: null
+    disagreements:
+      - 'Package: feature list says "封装形式：SOP8" (p1) while the order table (p2) and pin diagram say ESOP8; the English brief also says "Package: SOP8" over an ESOP8 diagram.'
+    open:
+      - 'Behaviour without the gain word is not documented.'
+
+  # ---------------------------------------------------------------- Genesis GS82xx and rebrands
+  - part: GS8202
+    entry: pixel-ics/gs8202
+    maker: null
+    documents:
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon)
+        revision: null
+        date: null
+        language: en
+    line_coding: null
+    idle: null
+    bit_order: null
+    rates: []
+    clock: null
+    frame: null
+    forwarding: null
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Falcon lists GS8202 among the alternatives of its "WS2811" type.'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements: []
+    open:
+      - 'No GS8202 datasheet or maker page found (English and Chinese web searches; Advatek has no gs8202 page, 404). Maker, timing, frame and any backup line are unverified.'
+
+  - part: GS8206
+    entry: pixel-ics/gs8206
+    maker: Genesis Systech
+    documents:
+      - id: gs8206-v0.2
+        url: https://media.ledyi.com/gs8206-datasheet_5483119271b646243fa0f79c2eefc9b872194634f0b78c3d92ea852fc432c34e.pdf
+        title: GS8206 3 channel constant current LED driver
+        revision: version0.2
+        date: June 12,2016
+        language: en
+        notes: LEDYi copy. Same V0.2 with Genesis contact line ("bo@genesis-systech.com") at https://www.ledlightinghut.com/files/GS8206.pdf
+      - id: advatek-gs8206
+        url: https://www.advateklighting.com/pixel-protocols/gs8206
+        title: LED Pixel Protocol GS8206 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz standard (max 1MHz)
+        select: null
+        T0H: { ns: 312.5, tol_ns: null, printed: '0 code 1/4T high (computed at T=1/800kHz)' }
+        T0L: { ns: 937.5, tol_ns: null, printed: '0 code 3/4T low (computed)' }
+        T1H: { ns: 937.5, tol_ns: null, printed: '1 code 3/4T high (computed)' }
+        T1L: { ns: 312.5, tol_ns: null, printed: '1 code 1/4T low (computed)' }
+        period:
+          {
+            ns: 1250,
+            min_ns: 1000,
+            max_ns: null,
+            printed: 'T=1/800kHz; "The maximum frequency can reach 1MHz"; RZ data frequency typical 800k Hz (p4)',
+          }
+        reset: { min_ns: 300000, printed: 'Reset >300us' }
+        doc: gs8206-v0.2
+        page: 6
+        quote: 'Single code with 1:3 duty cycle and a standard 800kHz transmission speed. The maximum frequency can reach 1MHz. GS8206 re-code the data before transmission. Data delay is less than 0.7us from chip to chip, meets the dynamic image needs. / figure: 0 code 1/4T 3/4T; 1 code 3/4T 1/4T; T=1/800kHz; Intervals between code <10us; Reset >300us'
+        notes: no tolerances are printed; "Intervals between code <10us" is the only limit on a stretched low time
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'Ch00b7…Ch00b0 Ch01b7…Ch01b0 Ch02b7…Ch02b0 (which Ch drives OUTR/OUTG/OUTB is not stated; the block diagram labels OUT1/2/3 Driver (R)/(G)/(B))'
+      pixel_bits: 24
+      extra: null
+      start: 'Reset (drawn before the data)'
+      end: null
+      latch: 'low >300 µs'
+      doc: gs8206-v0.2
+      page: 6
+      quote: 'GS8206 adopts the extended return to zero code (e-RZ) data transmission mode, 8bits data for single channel, each IC supports 3 channel for display. The transmission data is filtered internally to support the data anti-jitter function. / figure: Reset; Ch00b7 Ch00b6 Ch00b5 ---- Ch00b2 Ch00b1 Ch00b0; Ch01b7 … Ch01b0; Ch02b7 … Ch02b0; … Ch(N+2)b0; Reset'
+    forwarding:
+      text: Re-codes data before forwarding; chip-to-chip delay under 0.7 µs.
+      doc: gs8206-v0.2
+      page: 6
+      quote: 'GS8206 re-code the data before transmission. Data delay is less than 0.7us from chip to chip'
+    backup_line:
+      pins: 'SDI (input), SDI2 (redundant input), SDO (output). SOP8 "GS8206": 5 SDO, 6 SDI, 7 SDI2; "GS8206B": 4 SDO, 5 SDI, 6 GND, 7 SDI2 (p2)'
+      behaviour: "SDI2 is wired to the previous chip's SDI (application drawing p5: chip 1 input also feeds chip 2's SDI2, and so on; chip 1's SDI2 unconnected with an external controller). SDI is the default after power-on; the chip switches to the other line when the data is abnormal. SDI uses received bits 1–24; SDI2 discards bits 1–24 and uses bits 25–48, so a pixel still gets its own data when the pixel before it has failed. Under a test controller a pixel with a faulty channel shows white. Internal pattern mode: first chip's SDI/SDI2 tied to GND."
+      doc: gs8206-v0.2
+      page: 7
+      quote: "Dual channel redundant control can be used to effectively avoid the failure of any single device damage … The SDI signal is used as the default transmission channel while the system is power on. The transmission channel priority is switched between SDI and SDI2 when the transmission data is abnormal. The device will choose the clear transmission channel after data detection. … When the external control data is transmitted, SDI uses the 1-24bits received data as the display data, meanwhile, SDI2 will discard the 1-24bits data and use 25-48bits data as the display data. … While any channel appears Weld, short, open or other abnormal communication, the chip will display in white … Under the internal display mode, the first chip's SDI/SDI2 needs to be connected to GND."
+    compatibility_claims:
+      - claim: '"The extension type is compatible with the traditional RZ code. So it is suitable for most of the RZ code controller in the market."'
+        doc: gs8206-v0.2
+        page: 6
+      - claim: 'Falcon lists GS8206 among the alternatives of its "WS2811" type.'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'Advatek lists "Current Control Global: 2 Bits" ("Use the 2-bit global current control to lower the brightness") and "Data Transfer Rate 400 - 1000kbps"; the V0.2 datasheet shows no current-control bits in the frame and prints only typical 800 kHz (max 1 MHz in text).'
+      - 'Built-in behaviour: "GS8206 gets into RGB test mode right after power on. If the device does not receive the external display data for a long time, the chip will go into the built-in display patterns mode." (p7)'
+    open:
+      - 'Acceptance window (tolerance) of the 1:3 code is not printed; mapping of Ch00/Ch01/Ch02 to OUTR/OUTG/OUTB is not stated.'
+
+  - part: GS8208
+    entry: pixel-ics/gs8208
+    maker: Genesis Systech
+    documents:
+      - id: gs8208-v0.1-normand
+        url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+        title: GS8208 3 channel series connected LED driver
+        revision: Version：V0.1
+        date: null
+        language: en
+        notes: Normand (distributor) copy, PDF created 2017-09-15
+      - id: gs8208-v0.1-artleds
+        url: https://www.artleds.com/images/Specs/gs8208-datasheet.pdf
+        title: GS8208 3 channel series connected LED driver
+        revision: version0.1
+        date: July 14，2017
+        language: en
+        notes: Genesis-letterhead copy (PDF title "BS0815", created 2018-05-18 16:58:56 +08)
+      - id: gs8208-ledyi
+        url: https://media.ledyi.com/gs8208-datasheet_d7eeffbc8fc4c3a885c88babe6e51968677716f49f625b7b4043cf2162e8affa.pdf
+        title: GS8208 3 channel series connected LED driver
+        revision: null
+        date: null
+        language: en
+        notes: LEDYi copy, no version printed; same content as V0.1
+      - id: gs8208-v0.7
+        url: https://www.led-stuebchen.de/download/GS8208V0.7-EN.pdf
+        title: GS8208 3-Channel LED Constant Current Driver Chip in Series
+        revision: Version 0.7
+        date: null
+        language: en
+        notes: Genesis-letterhead copy (PDF created 2024-11-22) hosted by led-stuebchen.de
+      - id: advatek-gs8208
+        url: https://www.advateklighting.com/pixel-protocols/gs8208
+        title: LED Pixel Protocol GS8208 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: '800kHz standard (V0.1: 400k–1M)'
+        select: null
+        T0H: { ns: 312.5, printed: '0 code 1/4T high (computed at T=1/800kHz)' }
+        T0L: { ns: 937.5, printed: '0 code 3/4T low (computed)' }
+        T1H: { ns: 937.5, printed: '1 code 3/4T high (computed)' }
+        T1L: { ns: 312.5, printed: '1 code 1/4T low (computed)' }
+        period:
+          {
+            ns: 1250,
+            min_ns: 1000,
+            max_ns: 2500,
+            printed: 'RZ data frequency 400k 800k 1M Hz (min typ max, p4); periods computed',
+          }
+        reset: { min_ns: 300000, printed: 'Reset >300us' }
+        doc: gs8208-v0.1-normand
+        page: 6
+        quote: 'Single code with 1:3 duty cycle and a standard 800kHz transmission speed. The maximum frequency can reach 1MHz. GS8208 re-code the data before transmission. Data delay is less than 0.7us from chip to chip, meets the dynamic image needs. / figure: 0 code 1/4T 3/4T; 1 code 3/4T 1/4T; T=1/800kHz; Intervals between code <10us; Reset >300us; p4: RZ data frequency 400k 800k 1M Hz'
+      - name: '800kHz standard (V0.7: 400k–1.2M)'
+        select: null
+        T0H: { ns: 312.5, printed: '1/4T (computed at T=1/800kHz)' }
+        T0L: { ns: 937.5, printed: '3/4T (computed)' }
+        T1H: { ns: 937.5, printed: '3/4T (computed)' }
+        T1L: { ns: 312.5, printed: '1/4T (computed)' }
+        period:
+          {
+            ns: 1250,
+            min_ns: 833,
+            max_ns: 2500,
+            printed: 'Regulation of data frequency FDATA 400 800 1200 kHz (p7); periods computed',
+          }
+        reset: { min_ns: 300000, printed: 'Reset >300us' }
+        doc: gs8208-v0.7
+        page: 11
+        quote: 'The single code employs a duty cycle of 1:3, with a standard transmission speed of 800 kHz, and capable of reaching up to 1.2 MHz. Data shaping is performed at each level of forwarding, with inter-chip data latency maintained at less than 0.7 microseconds … / figure: 0 code 1/4T 3/4T; 1 code 3/4T 1/4T; T=1/800kHz; <10us Inter code spacing; >300us Reset; p7: Regulation of data frequency FDATA 400 800 1200 kHz'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'Ch00b7…Ch00b0 Ch01b7…Ch01b0 Ch02b7…Ch02b0 (Ch-to-output mapping not stated)'
+      pixel_bits: 24
+      extra: null
+      start: 'Reset (drawn before the data)'
+      end: null
+      latch: 'low >300 µs'
+      doc: gs8208-v0.1-normand
+      page: 6
+      quote: 'GS8208 adopts the extended return to zero code (e-RZ) data transmission mode, 8bits data for single channel, each IC supports 3 channel for display. The transmission data is filtered internally to support the data anti-jitter function. The extension type is compatible with the traditional RZ code. (V0.7 p11: "The expanded zero-code is compatible with standard zero-code, making it suitable for the majority of zero-code control systems available in the market.")'
+    forwarding:
+      text: Re-codes data before forwarding; chip-to-chip delay under 0.7 µs.
+      doc: gs8208-v0.1-normand
+      page: 6
+      quote: 'GS8208 re-code the data before transmission. Data delay is less than 0.7us from chip to chip'
+    backup_line:
+      pins: 'SDI, SDI2 ("Redundant series data input"), SDO; SOP8: 4 SDO, 5 SDI, 6 GND, 7 SDI2 (V0.1 p2)'
+      behaviour: 'Same text as GS8206: SDI default; switches on abnormal data; SDI uses bits 1–24, SDI2 discards bits 1–24 and uses 25–48. V0.7 p9 drawing wires each chip''s SDI2 to the previous chip''s SDI. V0.7 adds: reversed data cable turns that pixel''s PWM off; with no input "in the external control state" the chip turns its PWM off instead of entering the internal patterns.'
+      doc: gs8208-v0.7
+      page: 12
+      quote: 'The system defaults to using SDI signals for display and transmission pathways upon power-up, with the capability to switch between SDI and SDI2 based on channel priority conditions. In the event of data transmission anomalies, the chip assesses interference within the channel and initiates a switch in the data transmission channel accordingly. When transmitting external control data, SDI utilizes the received 1-24 bits of data as the display data, whereas SDI2 discards the 1-24 bits of data and employs the 25-48 bits of data as the display data. (p13: When the data cable is reversed, the PWM display at the current point is turned off … When the chip detects no input data in the external control state, GS8208 will turn off the PWM display and not enter the internal control state)'
+    compatibility_claims:
+      - claim: '"The extension type is compatible with the traditional RZ code. So it is suitable for most of the RZ code controller in the market."'
+        doc: gs8208-v0.1-normand
+        page: 6
+      - claim: 'Falcon lists GS8208 among the alternatives of its "WS2811" type.'
+        doc: falcon-pixeltypes
+        page: null
+    disagreements:
+      - 'Max data rate: V0.1 "can reach 1MHz" / 400k–1M; V0.7 "up to 1.2 MHz" / FDATA 400–1200 kHz.'
+      - 'Supply: V0.1 "The range of input power is from +9V to +15V, and voltage-endurance of LED port is +12V"; V0.7 "input voltage range of 8V to 36V, with a maximum port voltage tolerance of 50V".'
+      - 'No-input behaviour: V0.1 "In the absence of signal input, GS8208 displays the built-in display patterns"; V0.7 lists GS8208 (built-in animations), GS8208B and GS8208B_10 (without), and says no input "in the external control state" turns the PWM off.'
+      - 'Output stagger order: V0.1 "OUT1, OUT2, OUT3 will work in accordance with the 80ns interval sequence"; V0.7 "OUTB, OUTG, and OUTR will output current in sequence at 80ns intervals".'
+      - 'Advatek lists "Current Control Global: 2 Bits" and 400–1000 kbps; neither Genesis revision shows current-control bits in the frame.'
+    open:
+      - 'Acceptance window of the 1:3 code not printed; Ch00/Ch01/Ch02 to OUTR/OUTG/OUTB mapping not stated.'
+
+  - part: GS8208 (LED5050)
+    entry: pixels/gs8208
+    maker: Genesis Systech
+    documents:
+      - id: gs8208-v0.1-normand
+        url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+        title: GS8208 3 channel series connected LED driver (file name "GS8208 LED Datasheet")
+        revision: Version：V0.1
+        date: null
+        language: en
+      - id: gs8208-v0.7
+        url: https://www.led-stuebchen.de/download/GS8208V0.7-EN.pdf
+        title: GS8208 3-Channel LED Constant Current Driver Chip in Series
+        revision: Version 0.7
+        date: null
+        language: en
+      - id: advatek-gs8208
+        url: https://www.advateklighting.com/pixel-protocols/gs8208
+        title: LED Pixel Protocol GS8208 (Advatek)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz standard (same IC datasheets as pixel-ics/gs8208)
+        select: null
+        T0H: { ns: 312.5, printed: '1/4T (computed at T=1/800kHz)' }
+        T0L: { ns: 937.5, printed: '3/4T (computed)' }
+        T1H: { ns: 937.5, printed: '3/4T (computed)' }
+        T1L: { ns: 312.5, printed: '1/4T (computed)' }
+        period:
+          {
+            ns: 1250,
+            min_ns: 833,
+            max_ns: 2500,
+            printed: 'V0.1: 400k 800k 1M Hz; V0.7: FDATA 400 800 1200 kHz',
+          }
+        reset: { min_ns: 300000, printed: 'Reset >300us' }
+        doc: gs8208-v0.7
+        page: 11
+        quote: 'The single code employs a duty cycle of 1:3, with a standard transmission speed of 800 kHz, and capable of reaching up to 1.2 MHz. / figure: 0 code 1/4T 3/4T; 1 code 3/4T 1/4T; T=1/800kHz; <10us Inter code spacing; >300us Reset'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'Ch00, Ch01, Ch02 (each b7 first); colour mapping inside the LED not stated'
+      pixel_bits: 24
+      extra: null
+      start: 'Reset'
+      end: null
+      latch: 'low >300 µs'
+      doc: gs8208-v0.7
+      page: 11
+      quote: 'The GS8208 utilizes an expanded zero-code data transmission methodology, facilitating a single-channel 8-bit data interface, with each integrated circuit (IC) supporting three-channel display capabilities.'
+    forwarding:
+      text: Same IC as pixel-ics/gs8208; chip-to-chip delay under 0.7 µs.
+      doc: gs8208-v0.7
+      page: 11
+      quote: 'Data shaping is performed at each level of forwarding, with inter-chip data latency maintained at less than 0.7 microseconds'
+    backup_line:
+      pins: 'LED5050 pins: 1 VDH, 2 NA, 3 SDO, 4 GND, 5 SDI, 6 SDI2'
+      behaviour: 'As pixel-ics/gs8208 (SDI2 = input of the previous pixel; SDI2 skips the first 24 bits).'
+      doc: gs8208-v0.7
+      page: 3
+      quote: 'Foot Position Description … SDO 3 (LED5050) Signal output terminal; SDI 5 Signal input terminal; GND 4; SDI2 6 Spare signal input terminal; VDH 1; NA 2 Empty feet (V0.1 p2 "Pin Configuration with LED": 1 VDH, 2 NA, 3 SDO, 4 GND, 5 SDI, 6 SDI2)'
+    compatibility_claims: []
+    disagreements:
+      - 'V0.7 p2 offers the LED5050 package only for GS8208B_10 ("Without built-in animation effects，Small current 10mA"); V0.1 shows a "Pin Configuration with LED" for GS8208 without a variant name.'
+    open:
+      - 'Which colour die is driven by which data channel inside the LED is not stated in either revision.'
+
+  - part: CS8812
+    entry: pixels/cs8812
+    maker: Witop (document is a renamed GS8208 V0.1 datasheet)
+    documents:
+      - id: cs8812-v0.1
+        url: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
+        title: CS8812 3 channel series connected LED driver
+        revision: Version：V0.1
+        date: null
+        language: en
+        notes: footer "Quote, delivery time and order, please email to info@witop-tech.com"; PDF title "CS8812 3Channel series connected LED Driver", created 2018-03-08. The text layer of page 1 under the visible "The CS8812 is a 3-channel …" reads "The GS8208 is a 3-channel constant current LED drive …".
+      - id: witop-cs8812b
+        url: https://www.witop-tech.com/product-item/dc12v-addressable-high-brightness-smd5050-led-chip-cs8812b/
+        title: DC12V Built-In IC LED Chip – CS8812B (Witop product page)
+        revision: null
+        date: null
+        language: en
+      - id: advatek-cs8812
+        url: https://www.advateklighting.com/pixel-protocols/cs8812
+        title: LED Pixel Protocol CS8812 (Advatek)
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Pixel Types (Falcon)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz standard (400k–1M)
+        select: null
+        T0H: { ns: 312.5, printed: '0 code 1/4T (computed at T=1/800kHz)' }
+        T0L: { ns: 937.5, printed: '3/4T (computed)' }
+        T1H: { ns: 937.5, printed: '3/4T (computed)' }
+        T1L: { ns: 312.5, printed: '1/4T (computed)' }
+        period:
+          {
+            ns: 1250,
+            min_ns: 1000,
+            max_ns: 2500,
+            printed: 'RZ data frequency 400k 800k 1M Hz (p4); periods computed',
+          }
+        reset: { min_ns: 300000, printed: 'Reset >300us' }
+        doc: cs8812-v0.1
+        page: 6
+        quote: 'Single code with 1:3 duty cycle and a standard 800kHz transmission speed. The maximum frequency can reach 1MHz. CS8812 re-code the data before transmission. Data delay is less than 0.7us from chip to chip … / figure: 0 code 1/4T 3/4T; 1 code 3/4T 1/4T; T=1/800kHz; Intervals between code <10us; Reset >300us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'Ch00, Ch01, Ch02 (each b7 first); colour mapping not stated'
+      pixel_bits: 24
+      extra: null
+      start: 'Reset'
+      end: null
+      latch: 'low >300 µs'
+      doc: cs8812-v0.1
+      page: 6
+      quote: 'CS8812 adopts the extended return to zero code (e-RZ) data transmission mode, 8bits data for single channel, each IC supports 3 channel for display. The transmission data is filtered internally to support the data anti-jitter function. The extension type is compatible with the traditional RZ code.'
+    forwarding:
+      text: Re-codes data before forwarding; under 0.7 µs chip to chip.
+      doc: cs8812-v0.1
+      page: 6
+      quote: 'CS8812 re-code the data before transmission. Data delay is less than 0.7us from chip to chip'
+    backup_line:
+      pins: 'SDI, SDI2, SDO (5050 LED with SDI2)'
+      behaviour: 'Same text as GS8208 V0.1: SDI default; switch on abnormal data; SDI2 discards bits 1–24 and uses 25–48.'
+      doc: cs8812-v0.1
+      page: 7
+      quote: 'The SDI signal is used as the default transmission channel while the system is power on. The transmission channel priority is switched between SDI and SDI2 when the transmission data is abnormal. … SDI uses the 1-24bits received data as the display data, meanwhile, SDI2 will discard the 1-24bits data and use 25-48bits data as the display data.'
+    compatibility_claims:
+      - claim: 'Witop: "CS8812 led chip can replace WS2815 led chip,1IC&1LED"; "CS8812 led chip have two version:version A is have itself original programme but version B not."'
+        doc: witop-cs8812b
+        page: null
+      - claim: 'Falcon lists CS8812 among the alternatives of its "WS2811" type.'
+        doc: falcon-pixeltypes
+        page: null
+      - claim: 'Advatek: "This pixel protocol was designed by Witop Technology Co. Ltd in China."'
+        doc: advatek-cs8812
+        page: null
+    disagreements:
+      - 'The datasheet is the GS8208 V0.1 text with the part name replaced; page 1''s hidden text layer still says "GS8208". Advatek''s CS8812 LED table (Red 450 mcd 615–630 nm, Green 1300 mcd 520–535 nm, Blue 280 mcd 460–475 nm) equals the LED table in GS8208 V0.7 p8.'
+    open:
+      - 'LED colour order not stated.'
+
+  # ---------------------------------------------------------------- Greeled and LED Color
+  - part: GE8812 (GE8812B LED series)
+    entry: pixels/ge8812
+    maker: Greeled Electronic
+    documents:
+      - id: ge8812b-spec
+        url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf
+        title: GE8812B LED SERIES SPECIFICIFATION
+        revision: null
+        date: null
+        language: en
+        notes: Document No. SPC/23012; PDF created 2018-07-10
+      - id: greeled-ge8812-page
+        url: https://www.gree-leds.com/ic-built-in-led/ge8812-chip-built-in-led.html
+        title: APA-GE IC Built-in led (Greeled product page)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: { ns: 300, tol_ns: 50, printed: '0.3µs ±0.05µs' }
+        T0L: { ns: 900, tol_ns: 50, printed: '0.9µs ±0.05µs' }
+        T1H: { ns: 900, tol_ns: 50, printed: '0.9µs ±0.05µs' }
+        T1L: { ns: 300, tol_ns: 50, printed: '0.3µs ±0.05µs' }
+        period: { ns: 1250, tol_ns: 500, printed: 'TH+TL=1.25µs±500ns' }
+        reset: { min_ns: 200000, printed: 'Trst Reset code，Low level time ≥200µs' }
+        doc: ge8812b-spec
+        page: 5
+        quote: '11. The data transmission time TH+TL=1.25µs±500ns / T0H 0 code, high level time 0.3µs ±0.05µs / T0L 0 code, low level time 0.9µs ±0.05µs / T1H 1 code, high level time 0.9µs ±0.05µs / T1L 1 code, low level time 0.3µs ±0.05µs / Trst Reset code，Low level time ≥200µs; 10: The speed of data transmission FDIN 800 KHZ, The duty ratio of 75% (data 1)'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'G7…G0 R7…R0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥200 µs'
+      doc: ge8812b-spec
+      page: 6
+      quote: '14. The 24bit data Structure G7 G6 G5 G4 G3 G2 G1 G0 R7 R6 R5 R4 R3 R2 R1 R0 B7 B6 B5 B4 B3 B2 B1 B0'
+    forwarding:
+      text: First pixel takes 24 bits, reshapes and forwards the rest; DIN→DOUT TPLH 20 ns typ (500 max), TPHL 24 ns typ (500 max).
+      doc: ge8812b-spec
+      page: 2
+      quote: 'When the frist 24-bit data is extracted by the first pixel and sent to Data latch which inside the pixel ,The remaining data is processed by the internal shaping circuit … then the output is forwarded to the next cascaded pixel through the DO port. The Data transmission through each pixel, the signal will reduce 24bit (p5: DOUT transmission delay TPLH 20 / 500 ns, TPHL 24 / 500 ns, DIN→DOUT)'
+    backup_line: null
+    compatibility_claims:
+      - claim: '"Remark: GE8812 IC Protocol is compatible with SK6812"'
+        doc: greeled-ge8812-page
+        page: null
+    disagreements:
+      - 'p2 calls it "unipolar NRZ communication mode" while the timing is return-to-zero and the product page says "The data encoding adopt RZ code".'
+    open: []
+
+  - part: GE1603R
+    entry: pixel-ics/ge1603
+    maker: Greeled Electronic
+    documents:
+      - id: ge1603r-mini-ic
+        url: https://www.greeled.net/uploadfile/03/20803/attach/ge1603r-mini-ic-datasheet.pdf
+        title: GE1603R Mini IC (Greeled datasheet)
+        revision: null
+        date: null
+        language: en
+        notes: site now redirects to a parking page; read from the Wayback Machine, http://web.archive.org/web/20230923234801id_/https://www.greeled.net/uploadfile/03/20803/attach/ge1603r-mini-ic-datasheet.pdf (listed on the archived downloads page as "GE1603R Mini IC Greeled"); PDF created 2023-06-01
+      - id: ge1603r-strip-24v
+        url: https://www.greeled.net/uploadfile/03/20803/attach/ge1603r-20pixel-24v-datasheet.pdf
+        title: Digital Strip-20Pixels/m (8mm Dual data Digital RGB 24v)
+        revision: null
+        date: null
+        language: en
+        notes: Wayback copy http://web.archive.org/web/20230923234801id_/https://www.greeled.net/uploadfile/03/20803/attach/ge1603r-20pixel-24v-datasheet.pdf
+      - id: greeled-ge1603r-page
+        url: https://www.gree-leds.com/web/index.php?topclassid=16&classid=130&id=286&lanstr=en&wap=1
+        title: 8mm 24V GE1603R Dual data digital RGB tape (Greeled product page)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps
+        select: null
+        T0H: { ns: null, min_ns: 200, max_ns: 350, printed: '0.20 - 0.35 μs' }
+        T0L: { ns: null, min_ns: 600, max_ns: 1500, printed: '0.6 - 1.5 μs' }
+        T1H: { ns: null, min_ns: 550, max_ns: 1000, printed: '0.55 - 1.0 μs' }
+        T1L: { ns: null, min_ns: 300, max_ns: 1500, printed: '0.3 - 1.5 μs' }
+        period: { min_ns: 1200, printed: 'T Code Period 1.20 - - μs' }
+        reset: { min_ns: 350000, printed: 'Trst Reset,low level time 350 - - μs' }
+        doc: ge1603r-mini-ic
+        page: 6
+        quote: 'T Code Period 1.20 - - μs / T0H 0 code,High level time 0.20 - 0.35 μs / T0L 0 code,low level time 0.6 - 1.5 μs / T1H 1 code,high level time 0.55 - 1.0 μs / T1L 1 code,low level time 0.3 - 1.5 μs / Trst Reset,low level time 350 - - μs / 1. The protocol uses a unipolar zeroing code. Each symbol must have a low level. Each symbol in this protocol starts with a high level. The high time width determines the "0" or "1" code. 2. When writing programs, the minimum symbol period is 1.2μs. 3. … The low time requirement of "0" code and "1" code is less than 20μs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥350 µs'
+      doc: ge1603r-mini-ic
+      page: 5
+      quote: '(3) Color bit sending sequence R7 R6 R5 R4 R3 R2 R1 R0 G7 … G0 B7 … B0 / Note: The high bit is sent first, and the data is sent in the order of RGB(R7 → R0 →……B0)'
+    forwarding:
+      text: Generic cascade drawing (D1 first/second/third 24 bit; D2 second/third …); DIN→DOUT Tflz max 200 ns.
+      doc: ge1603r-mini-ic
+      page: 4
+      quote: 'Transmission delay Tflz - - 200 ns DIN--DOUT; Data Rating Fd - 800 - Kbps'
+    backup_line:
+      pins: 'IC: 5 DOUT "Forwarding redundant data flow output", 6 DIN "Data flow signal input", 7 "NC" in the pin drawing but "Redundant Data" in the pin table. Strip pads: DI, BI in; DO, BO out (strip drawing).'
+      behaviour: 'Not described: neither document says how the redundant input is wired or how the chip chooses between the inputs.'
+      doc: ge1603r-mini-ic
+      page: 3
+      quote: '5 DOUT Forwarding redundant data flow output / 6 DIN Data flow signal input / 7 NC Redundant Data; p2: it have redundant data to prevent signal interrupt (Break point signal transmission continuously)'
+    compatibility_claims:
+      - claim: 'Strip datasheet "GE1603R Protocol spec" box: "Compatible with SK6812 Protocol".'
+        doc: ge1603r-strip-24v
+        page: 1
+      - claim: 'IC datasheet: "Single data signal SPI Protocol"; "The data encoding adopt RZ code"; "It can support standard high speed data rate 800kbps".'
+        doc: ge1603r-mini-ic
+        page: 2
+    disagreements:
+      - 'IC datasheet: minimum code period 1.20 µs; strip datasheet: "Timing(TH+TL≥1.25μs)" (same T0H/T1H/T0L/T1L and ">350μs" reset).'
+      - 'Pin 7 is drawn "NC" but described as "Redundant Data".'
+      - 'Electrical table refers to inputs "Din,SET" although the pinout has no SET pin; the protocol is called "SPI" though it is single-wire RZ.'
+    open:
+      - 'How BI/pin 7 is fed and how the chip switches inputs is not documented.'
+
+  - part: LC8808B
+    entry: pixels/lc8808b
+    maker: Shenzhen LED Color Opto Electronic (document is a renamed GS8208 V0.1 datasheet)
+    documents:
+      - id: lc8808b-spec
+        url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
+        title: LC8808B LED SERIES SPECIFICIFATION
+        revision: null
+        date: null
+        language: en
+        notes: 'Document No. SPC/ LC88…; PDF title "BS0815", created 2018-05-18 16:58:56 +08 — the same title and timestamp as the Genesis GS8208 V0.1 copy on artleds.com. Page 2''s text layer under "The LC8808B is a 3-channel …" reads "The GS8208 …".'
+      - id: ledcolor-lc8808-page
+        url: https://www.addressable-led.com/Products/DC12V-Pixel-LED-LC8808.html
+        title: DC12V Individual Pixel LED LC8808 (Led Color product page)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz standard (400k–1M)
+        select: null
+        T0H: { ns: 312.5, printed: '0 code 1/4T (computed at T=1/800kHz)' }
+        T0L: { ns: 937.5, printed: '3/4T (computed)' }
+        T1H: { ns: 937.5, printed: '3/4T (computed)' }
+        T1L: { ns: 312.5, printed: '1/4T (computed)' }
+        period:
+          {
+            ns: 1250,
+            min_ns: 1000,
+            max_ns: 2500,
+            printed: 'RZ data frequency 400k 800k 1M Hz (p6); periods computed',
+          }
+        reset: { min_ns: 300000, printed: 'Reset >300us' }
+        doc: lc8808b-spec
+        page: 8
+        quote: '14.Data Format LC8808B adopts the extended return to zero code (e-RZ) data transmission mode, 8bits data for single channel, each IC supports 3 channel for display. … Single code with 1:3 duty cycle and a standard 800kHz transmission speed. The maximum frequency can reach 1MHz. LC8808B re-code the data before transmission. Data delay is less than 0.7us from chip to chip … / figure: 0 code 1/4T 3/4T; 1 code 3/4T 1/4T; T=1/800kHz; Intervals between code <10us; Reset >300us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'Ch00, Ch01, Ch02 (each b7 first); colour mapping not stated'
+      pixel_bits: 24
+      extra: null
+      start: 'Reset'
+      end: null
+      latch: 'low >300 µs'
+      doc: lc8808b-spec
+      page: 8
+      quote: 'figure: Reset; Ch00b7 … Ch00b0; Ch01b7 … Ch01b0; Ch02b7 … Ch02b0; … ; Reset'
+    forwarding:
+      text: Re-codes data before forwarding; under 0.7 µs chip to chip.
+      doc: lc8808b-spec
+      page: 8
+      quote: 'LC8808B re-code the data before transmission. Data delay is less than 0.7us from chip to chip'
+    backup_line:
+      pins: 'LED pads: 1 VDH, 2 NA, 3 SDO, 4 GND, 5 SDI, 6 SDI2'
+      behaviour: 'Same text as GS8208 V0.1: SDI default; switch on abnormal data; SDI2 discards bits 1–24 and uses 25–48.'
+      doc: lc8808b-spec
+      page: 9
+      quote: 'The SDI signal is used as the default transmission channel while the system is power on. The transmission channel priority is switched between SDI and SDI2 when the transmission data is abnormal. The device will choose the clear transmission channel after data detection. When the external control data is transmitted, SDI uses the 1-24bits received data as the display data, meanwhile, SDI2 will discard the 1-24bits data and use 25-48bits data as the display data. (p3: Solder Pad 1.VDH 6.SDI2 2.NA 5.SDI 3.SDO 4.GND)'
+    compatibility_claims:
+      - claim: 'Led Color product page: "Controlling protocol:LC8808,UCS1903"; "Feature: DC12V Pixel LED, Dual-Signal, Program controllable".'
+        doc: ledcolor-lc8808-page
+        page: null
+    disagreements:
+      - 'The specification is the GS8208 V0.1 text with the name replaced (hidden "GS8208" text on p2; same Word source as the artleds.com GS8208 copy). Page footers count "/ 18" pages; the PDF has 16.'
+    open:
+      - 'LED colour order not stated.'

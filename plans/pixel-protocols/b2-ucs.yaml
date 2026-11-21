@@ -1,0 +1,2051 @@
+# Workstream 8 (pixel protocols), research batch b2-ucs: UCS / Lianxinke parts.
+# Summary for the parent: b2-ucs.md (same folder). Read that first.
+#
+# Conventions in this file (on top of BRIEF.md):
+# - Quotes are verbatim; runs of spaces in table rows are collapsed to " | ".
+#   Chinese quotes carry an English translation in `translation`.
+# - `table: chip output` = the maker's "芯片内部再生信号标准" / "code time of IC forward"
+#   (what the chip regenerates on DOUT); `table: controller send` = "控制器建议值" /
+#   "code time of controller send" (what the maker tells the transmitter to send).
+# - The UCS tables write minimums as "》24us" (》 = "at least"); those go in min_ns.
+# - `controller_claims` = Advatek / ENTTEC / Falcon pages (what a controller maker says),
+#   `third_party_claims` = libraries and forum captures. Neither is the chip maker's spec.
+# - Web pages have no page numbers: page is null and the quote is the table row.
+batch: b2-ucs
+researched: '2026-11-20'
+parts:
+  # ---------------------------------------------------------------------------
+  - part: UCS1903
+    entry: pixel-ics/ucs1903
+    maker: UCS / Lianxinke Microelectronics (深圳联芯科微电子, www.szucs.cn)
+    documents:
+      - id: ucs1903-cn
+        url: https://d1.amobbs.com/bbs_upload782111/files_40/ourdev_643603HLLVCD.pdf
+        title: 三通道LED驱动控制电路UCS1903
+        revision: null
+        date: null # PDF metadata only: Word file "UCS1903.doc", created 2011-05-25
+        language: zh
+        notes: Forum (amobbs/ourdev) upload of the Chinese datasheet; no maker imprint in the text. Oldest UCS1903 text found.
+      - id: ucs1903-v1.0-en
+        url: https://www.superlightingled.com/PDF/UCS1903%20datasheet.pdf
+        title: UCS1903 3-Channel LED Driver / Controller
+        revision: V. 1.0
+        date: null
+        language: en
+        notes: Superlighting LED re-typeset English translation of the Chinese datasheet (figure labels still read 芯片 1/2/3). Same tables as ucs1903-cn.
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table, cascade single-wire driver ICs, 256 levels)
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs1903
+        url: https://www.advateklighting.com/pixel-protocols/ucs1903
+        title: Advatek pixel protocol page, UCS1903
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs1903
+        url: https://www.enttec.com/pixel-protocols/UCS1903
+        title: ENTTEC pixel protocol page, UCS1903
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table (data inline in the page script)
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      doc: ucs1903-cn
+      page: 3
+      quote: '芯片采用单线通讯方式，采用归零码的方式发送信号。'
+      translation: The chip communicates over a single wire and sends the signal as return-to-zero codes.
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 400kbps (低速模式, low-speed mode)
+        select: 'SET pin 7 tied to VDD. "7 SET 模式设定 接VDD：低速模式；悬空：高速模式" (SET mode setting: to VDD = low-speed mode, floating = high-speed mode), ucs1903-cn p2; V1.0 English p2 "Connected to VDD: Low speed mode; Floating: High speed mode"'
+        T0H: { ns: 500, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.5µs ±150ns' }
+        T1H: { ns: 2000, tol_ns: 150, min_ns: null, max_ns: null, printed: '2.0µs ±150ns' }
+        T0L: { ns: 2000, tol_ns: 150, min_ns: null, max_ns: null, printed: '2.0µs ±150ns' }
+        T1L: { ns: 500, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.5µs ±150ns' }
+        period: null # not printed; the four values give 2.5 µs for both codes (400 kbps)
+        reset: { min_ns: 24000, printed: '当接受到24µs以上低电平RESET 码后' }
+        doc: ucs1903-cn
+        page: 3
+        quote: '2）低速模式时间 | 名称 | 描 述 | 典型值 | 容许误差 | T0H | 0 码，高电平时间 | 0.5µs | ±150ns | T1H | 1 码，高电平时间 | 2.0µs | ±150ns | T0L | 0 码，低电平时间 | 2.0µs | ±150ns | T1L | 1 码，低电平时间 | 0.5µs | ±150ns'
+        translation: '2) Low-speed mode times: name, description, typical, allowed error.'
+        also:
+          - doc: ucs1903-v1.0-en
+            page: 4
+            quote: '2 Low-speed mode time | T0H | code 0, high level time | 0.5µs | ±150ns | T1H | code 1, high level time | 2.0µs | ±150ns | T0L | code 0, low level time | 2.0µs | ±150ns | T1L | code 1, low level time | 0.5µs | ±150ns'
+          - doc: ucs1903-cn
+            page: 2
+            quote: '数据传输率 | FMAX | 400 | - | - | Kbps | 占空比50% ; 振荡频率 | FOSC1 | - | 400 | - | kHz ; FOSC2 | - | 800 | - | kHz'
+            translation: Data transfer rate FMAX min 400 kbps at 50% duty; oscillator FOSC1 400 kHz, FOSC2 800 kHz.
+      - name: 800kbps (高速模式, high-speed mode)
+        select: SET pin 7 floating (悬空：高速模式)
+        T0H:
+          {
+            ns: 250,
+            tol_ns: null,
+            min_ns: null,
+            max_ns: null,
+            printed: 'half of 0.5µs (note below)',
+          }
+        T1H:
+          {
+            ns: 1000,
+            tol_ns: null,
+            min_ns: null,
+            max_ns: null,
+            printed: 'half of 2.0µs (note below)',
+          }
+        T0L:
+          {
+            ns: 1000,
+            tol_ns: null,
+            min_ns: null,
+            max_ns: null,
+            printed: 'half of 2.0µs (note below)',
+          }
+        T1L:
+          {
+            ns: 250,
+            tol_ns: null,
+            min_ns: null,
+            max_ns: null,
+            printed: 'half of 0.5µs (note below)',
+          }
+        period: null
+        reset: { min_ns: 24000, printed: 'Reset 码时间不变 (reset time unchanged): 24µs以上' }
+        derived: true # the high-speed values are not tabulated; the note halves the low-speed table. Whether the ±150ns tolerance also halves is not said.
+        doc: ucs1903-cn
+        page: 3
+        quote: '注：当为高速模式时，以上时间仅需一半(Reset 码时间不变)。'
+        translation: 'Note: in high-speed mode the times above are only half (the Reset code time does not change).'
+        also:
+          - doc: ucs1903-v1.0-en
+            page: 4
+            quote: 'Note: In the high-speed mode, only half of the above time is needed (the time for code RESET is not changed).'
+          - doc: ucs1903-v1.0-en
+            page: 1
+            quote: 'Data transfer rates of up to 400kbps or 800kbps.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: low for more than 24 µs (RESET code); outputs keep their old values until then
+      doc: ucs1903-cn
+      page: 4
+      quote: '5）24bit 的数据结构 | R7 R6 R5 R4 R3 R2 R1 R0 G7 G6 G5 G4 G3 G2 G1 G0 B7 B6 B5 B4 B3 B2 B1 B0 | 注：高位先发，按照RGB 的顺序发送数据'
+      translation: '24-bit data structure ... Note: MSB first, data sent in RGB order.'
+      latch_source:
+        doc: ucs1903-v1.0-en
+        page: 3
+        quote: 'Before the RESET signal is received, the output at the OUTR, OUTG and OUTB pins will remain unchanged. When a low level RESET code longer than 24µs is received, the UCS1903 will output the 24-bit PWM data just received to the OUTR, OUTG and OUTB pins.'
+    forwarding:
+      text: Takes the first 24 bits, holds DO low until then, then reshapes and forwards everything after them from DO. Data delay 0.4 µs per chip; propagation delay tPLZ max 300 ns.
+      doc: ucs1903-cn
+      page: 3
+      quote: '接受够24bit 后，DO 端口开始转发数据，供下一个芯片提供输入数据。在转发之前，DO 口一直拉低。此时芯片将不接受新的数据 … 芯片采用自动整形转发技术 … （芯片的数据延迟时间为0.4µs）'
+      translation: "After receiving 24 bits, the DO port starts forwarding data as the next chip's input. Before forwarding, DO stays low; the chip then accepts no new data ... automatic reshape-and-forward ... (the chip's data delay is 0.4µs)."
+      delay:
+        {
+          doc: ucs1903-cn,
+          page: 2,
+          quote: '传输延迟时间 | tPLZ | - | - | 300 | ns | CL ＝15pF，DIN → DOUT，RL ＝10kΩ',
+        }
+    backup_line: null
+    compatibility_claims: []
+    maker_table: null # the maker's current table (szucs-256) lists UCS1903B and UCS1903H, not UCS1903; see UCS1903N below
+    controller_claims:
+      - {
+          source: advatek-ucs1903,
+          claim: 'Data Transfer Rate | 400 - 800kbps ; PWM Rate | 400Hz ; Output Pixel Voltage | 5 - 12V',
+        }
+      - {
+          source: enttec-ucs1903,
+          claim: 'Faster, more stable timing than the earliest WS2811-class parts ... | PWM Rate | 400Hz | Redundant Data Line | No',
+        }
+      - {
+          source: falcon-pixeltypes,
+          claim: 'Type WS2811, alternatives include UCS1903 (with UCS1904, UCS1909, UCS1912, UCS2903, UCS2909, UCS2912, UCS9812); type "WS2811 Slow": "Same as WS2811 but @ 400KHz"',
+        }
+    disagreements:
+      - 'Supply voltage: ucs1903-cn p6 "UCS 1903 可以配置成6～24V 电压供电" (6-24 V; 24 V needs an external NPN transistor) vs ucs1903-v1.0-en p7 "The power supply voltage for the UCS1903 may be selected from 6V to 12V".'
+      - 'Timing vs WorldSemi WS2811 (2011 datasheet, low-speed table 0.5/1.2/2.0/1.3 µs): the 0-code is the same, the 1-code is not (UCS1903 T1H 2.0 µs / T1L 0.5 µs). See b2-ucs.md for the arithmetic.'
+    open:
+      - The high-speed tolerance is never printed (the note halves "the time" only).
+      - 'Mouser hosts a "UCS1903 IC manul" (https://www.mouser.com/datasheet/2/813/UCS1903_IC-manul-1290933.pdf); it returned a bot-block page, and the Wayback Machine has no copy. Not read.'
+      - No datasheet for the maker's current UCS1903B or UCS1903H (szucs-256 rows below under UCS1903N).
+
+  # ---------------------------------------------------------------------------
+  - part: UCS1903N
+    entry: null # sold as "UCS1903"; pixel-ics/ucs1903 documents the original part above. The DB cites this document's ledco.sk copy as its creator source.
+    maker: UCS / Lianxinke Microelectronics (imprint 联芯科（深圳）微电子, www.szucs.cn)
+    documents:
+      - id: ucs1903n-ver2.2-en
+        url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/UCS1903_English.pdf
+        title: 3-channel LED display driver UCS1903N
+        revision: ver2.2
+        date: null # PDF metadata: "UCS1903 English 5-28.doc", created 2014-06-02
+        language: en
+        notes: Maker imprint on every page (联芯科微电子 ver2.2 www.szucs.cn). Constant-current 17 mA part, pin 7 NC.
+      - id: ucs1903n-ledyi
+        url: https://media.ledyi.com/ucs1903-datasheet_e295350c1b811edf7b93139bc94c6d0e5197514383dd0d6d1fed059897b8d607.pdf
+        title: UCS1903 datasheet (LEDYi re-typeset; body text says UCS1903N)
+        revision: null
+        date: null
+        language: en
+        notes: Redirect target of https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS1903-datasheet.pdf. Omits the functional description and both timing tables.
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs1903n-ver2.2-en,
+        page: 1,
+        quote: '1. single line data tronsmission（return to zero code）',
+      }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps (chip output, "code time of IC forward")
+        table: chip output
+        select: null # single speed; pin 7 is NC
+        T0H: { ns: 400, tol_ns: 40, min_ns: null, max_ns: null, printed: '0.4µs ±40ns' }
+        T1H: { ns: 800, tol_ns: 80, min_ns: null, max_ns: null, printed: '0.8µs ±80ns' }
+        T0L: { ns: 800, tol_ns: 80, min_ns: null, max_ns: null, printed: '0.8µs ±80ns' }
+        T1L: { ns: 400, tol_ns: 40, min_ns: null, max_ns: null, printed: '0.4µs ±40ns' }
+        period: null
+        reset: { min_ns: 24000, printed: '>24us' }
+        doc: ucs1903n-ver2.2-en
+        page: 5
+        quote: '2 code time of IC forward | T0H | 0 code，up level time | 0.4µs | ±40ns | T1H | 1 code，up level time | 0.8µs | ±80ns | T0L | 0 code，Low level time | 0.8µs | ±80ns | T1L | 1 code，low level time | 0.4µs | ±40ns | Reset | Reset code，Low level time | >24us'
+      - name: 800kbps (controller send, "code time of controller send")
+        table: controller send
+        select: null
+        T0H: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4µs' }
+        T1H: { ns: 800, tol_ns: null, min_ns: null, max_ns: null, printed: '0.8µs' }
+        T0L: { ns: 900, tol_ns: null, min_ns: null, max_ns: null, printed: '0.9µs' }
+        T1L: { ns: 500, tol_ns: null, min_ns: null, max_ns: null, printed: '0.5µs' }
+        period: null # 1.3 µs for both codes from the table; not printed as such
+        reset: { min_ns: 24000, printed: '>24us' }
+        doc: ucs1903n-ver2.2-en
+        page: 5
+        quote: '3. code time of controller send | T0H | 0 code，up level time | 0.4µs | T1H | 1 code，up level time | 0.8µs | T0L | 0 code，Low level time | 0.9µs | T1L | 1 code，low level time | 0.5µs | Reset | Reset code，Low level time | >24us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: low for more than 24 µs
+      doc: ucs1903n-ver2.2-en
+      page: 6
+      quote: '6. 24-bit data format | R7 R6 R5 R4 R3 R2 R1 R0 G7 G6 G5 G4 G3 G2 G1 G0 B7 B6 B5 B4 B3 B2 B1 B0 | Note: The data is sent in the sequence of RGB, and the MSB is sent first.'
+    forwarding:
+      text: Takes 24 bits, then forwards the rest from DOUT; DOUT low before forwarding.
+      doc: ucs1903n-ver2.2-en
+      page: 4
+      quote: 'When all the 24 bits of data have been received, IC no longer receive data，the DOUT port starts to forward the data to the next chip as its input data. The DOUT pin is held LOW before the data forwarding,.'
+    backup_line: null
+    compatibility_claims: []
+    maker_table:
+      doc: szucs-256
+      quote: 'UCS1903B | 3 | 1.5 | 恒流 | ±5% | 17 | 17 | 18 | 800K | 256 | 普通 | SOP8 ; UCS1903H | 3 | 3.5 | 恒流 | ±5% | 17 | 17 | 28 | 800K | 256 | 准工业级 | SOP8'
+      translation: 'Columns: model | channels | port refresh (kHz) | constant current/voltage | chip-to-chip accuracy | default current (mA) | max current (mA) | withstand voltage (V) | data rate | gray levels | grade | package. 恒流 = constant current.'
+    controller_claims: []
+    disagreements:
+      - 'Same name, different wire timing: the original UCS1903 sends a 1 as 1.0 µs high + 0.25 µs low at 800 kbps (and has a 400 kbps mode); UCS1903N ver2.2 regenerates a 1 as 0.8 µs high + 0.4 µs low and has no speed pin (pin 7 NC, FMAX 800 kbps, p4).'
+      - 'ucs1903n-ledyi (the copy most search results return) drops the functional description and both timing tables of ver2.2.'
+    open:
+      - Whether the UCS1903N is the maker's current UCS1903B (szucs-256 lists 17 mA and 1.5 kHz like the N, but 18 V withstand where the N datasheet says >24 V / 28 V).
+      - The UCS1903N datasheet prints no decision threshold (compare UCS1904 below).
+
+  # ---------------------------------------------------------------------------
+  - part: UCS1904
+    entry: pixel-ics/ucs1904
+    maker: UCS / Lianxinke Microelectronics
+    documents:
+      - id: ucs1904-cn
+        url: https://datasheet4u.com/pdf/1350120/UCS1904.pdf
+        title: 3通道LED恒压驱动电路 UCS1904
+        revision: null
+        date: null
+        language: zh
+        notes: Distributor-branded copy (header 通络科技电子 www.icdemi.com) of the maker's Chinese datasheet; no revision table. datasheet4u lists it under "ETC".
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs1904
+        url: https://www.advateklighting.com/pixel-protocols/ucs1904
+        title: Advatek pixel protocol page, UCS1904
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs1904
+        url: https://www.enttec.com/pixel-protocols/UCS1904
+        title: ENTTEC pixel protocol page, UCS1904
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs1904-cn,
+        page: 4,
+        quote: '芯片采用单线通讯方式，采用归零码的方式发送信号。',
+        translation: 'Single-wire communication, return-to-zero codes.',
+      }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: high-speed conventional mode (高速常规模式), chip output
+        table: chip output
+        select: 'automatic, no pin (pin 7 NC): "UCS1904 内置控制可自动兼容以上2 种控制器发送模式" (the built-in control automatically accepts both controller send modes above), p6'
+        T0H: { ns: 400, tol_ns: 40, min_ns: null, max_ns: null, printed: '0.4µs ±40ns' }
+        T1H: { ns: 800, tol_ns: 80, min_ns: null, max_ns: null, printed: '0.8µs ±80ns' }
+        T0L: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85µs' }
+        T1L: { ns: 450, tol_ns: null, min_ns: null, max_ns: null, printed: '0.45µs' }
+        period: null
+        reset: { min_ns: 24000, printed: '》24us' }
+        decode:
+          zero_if_high_below_ns: 550
+          one_if_high_above_ns: 690
+          ignored_leading_high_ns: 30
+          low: the low level only ends the bit; the bit value comes from the high time
+          doc: ucs1904-cn
+          page: 6
+          quote: '注：1. IC 主要根据高电平时间判断"0"码和"1"码,IC 收到高电平的前30ns 不计（特为防干扰设计）。高电平时间<0.55us,IC 判断为"0"码,高电平时间>0.69uS,判断为“1”码.”0”码和“1”码的低电平代表此码结束，准备接收下一数据码。'
+          translation: 'Note 1: the IC tells "0" from "1" mainly by the high time, ignoring the first 30 ns of a high level (anti-interference). High time <0.55 µs is a "0", >0.69 µs is a "1". The low level of a "0" or "1" ends the code; the IC then waits for the next bit.'
+        reset_rule:
+          max_gap_in_frame_ns: 8000
+          doc: ucs1904-cn
+          page: 6
+          quote: '2.低电平复位时间最小为8µs，最高为24us,IC 在收到大于8us 小于24us 的低电平信号时都可能认为是RESET 码，所以一帧数据传输过程中不要中断超过8µs，否则可能会被IC 认为是reset 码。但在8µs 之内，控制器可以进行其他操作。同时控制器发reset 码时不要低于24us，以保证所有IC 都能确认为reset 码'
+          translation: "2. The low-level reset time is at least 8 µs and at most 24 µs: a low longer than 8 µs and shorter than 24 µs may be taken as RESET, so never pause more than 8 µs inside a frame (within 8 µs the controller may do other work). The controller's reset must be at least 24 µs so every IC sees it."
+        period_rule:
+          doc: ucs1904-cn
+          page: 6
+          quote: '3.控制器输出码形周期务必要大于1.25us，控制器码形请参照下表发送，可保证有较大的传输数据变形空间'
+          translation: "3. The controller's bit period must be greater than 1.25 µs; send per the table below to leave a large margin for waveform distortion."
+        doc: ucs1904-cn
+        page: 6
+        quote: '5）芯片内部再生信号标准（高速常规模式） | T0H | 0 码，高电平时间 | 0.4µs | ±40ns | T1H | 1 码，高电平时间 | 0.8µs | ±80ns | T0L | 0 码，低电平时间 | 0.85µs | T1L | 1 码，低电平时间 | 0.45µs | Treset | Reset 码，低电平时间 | 》24us'
+        translation: '5) Chip internal regenerated-signal standard (high-speed conventional mode).'
+      - name: high-speed conventional mode, controller send (控制器建议值（高速常规模式）)
+        table: controller send
+        select: automatic
+        T0H: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4us' }
+        T1H: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85us' }
+        T0L: { ns: null, tol_ns: null, min_ns: 850, max_ns: null, printed: '》0.85µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 400, max_ns: null, printed: '》0.4us' }
+        period: { ns: null, min_ns: 1250, printed: '“0”码或“1”码周期 》1.25us' }
+        reset: { min_ns: 24000, printed: '》24us' }
+        doc: ucs1904-cn
+        page: 7
+        quote: '7）控制器建议值（高速常规模式） | T0H | 0 码，高电平时间 | 0.4us | T1H | 1 码，高电平时间 | 0.85us | T0L | 0 码，低电平时间 | 》0.85µs | T1L | 1 码，低电平时间 | 》0.4us | T | “0”码或“1”码周期 | 》1.25us | Treset | Reset 码，低电平时间 | 》24us'
+        translation: '7) Controller recommended values (high-speed conventional mode).'
+      - name: low-speed enhanced mode (低速增强模式), chip output
+        table: chip output
+        select: automatic (same paragraph as above)
+        T0H: { ns: 400, tol_ns: 40, min_ns: null, max_ns: null, printed: '0.4µs ±40ns' }
+        T1H: { ns: 800, tol_ns: 80, min_ns: null, max_ns: null, printed: '0.8µs ±80ns' }
+        T0L: { ns: 2100, tol_ns: null, min_ns: null, max_ns: null, printed: '2.1µs' }
+        T1L: { ns: 1700, tol_ns: null, min_ns: null, max_ns: null, printed: '1.7µs' }
+        period: null
+        reset: { min_ns: 24000, printed: '》24us' }
+        doc: ucs1904-cn
+        page: 6
+        quote: '6）芯片内部再生信号标准：（低速增强模式） | T0H | 0 码，高电平时间 | 0.4µs | ±40ns | T1H | 1 码，高电平时间 | 0.8µs | ±80ns | T0L | 0 码，低电平时间 | 2.1µs | T1L | 1 码，低电平时间 | 1.7µs | Treset | Reset 码，低电平时间 | 》24us'
+        translation: '6) Chip internal regenerated-signal standard (low-speed enhanced mode). Same high times as the fast mode; only the lows stretch.'
+        mode_text:
+          doc: ucs1904-cn
+          page: 6
+          quote: 'UCS1904 内置控制可自动兼容以上2 种控制器发送模式，IC 内置充电管理模块，在低速增强模式下具有更强的驱动能力。常规使用时控制器选择发送高速模式即可，高速模式可带1024 点/30 帧。当工程上出现抖动或时好时坏等现象，又不便对产品或布线进行排查时，可在控制器上选用2903 低速增强模式并重新生成效果文件，产品上无需任何更改。使用低速模式只可带512 点/30 帧或1024 点/15 帧。'
+          translation: 'The UCS1904''s built-in control automatically accepts both controller send modes; a built-in charge-management block gives stronger drive in the low-speed enhanced mode. Normally choose the high-speed mode (1024 points at 30 frames). If an installation flickers or is intermittent and the product or wiring cannot easily be checked, select the "2903 low-speed enhanced mode" on the controller and regenerate the effect file; nothing on the product changes. The low-speed mode carries only 512 points at 30 frames or 1024 at 15.'
+      - name: low-speed enhanced mode, controller send (控制器建议值：（低速增强模式）)
+        table: controller send
+        select: automatic
+        T0H: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4us' }
+        T1H: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85us' }
+        T0L: { ns: null, tol_ns: null, min_ns: 2100, max_ns: null, printed: '》2.1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 1650, max_ns: null, printed: '》1.65us' }
+        period: { ns: null, min_ns: 2500, printed: '“0”码或“1”码周期 》2.5us' }
+        reset: { min_ns: 24000, printed: '》24us' }
+        doc: ucs1904-cn
+        page: 7
+        quote: '8）控制器建议值：（低速增强模式） | T0H | 0.4us | T1H | 0.85us | T0L | 》2.1µs | T1L | 》1.65us | T | “0”码或“1”码周期 | 》2.5us | Treset | 》24us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low for at least 24 µs; lows of 8-24 µs may already be taken as reset'
+      doc: ucs1904-cn
+      page: 5
+      quote: '3） 24bit 数据结构 | R7 R6 R5 R4 R3 R2 R1 R0 G7 G6 G5 G4 G3 G2 G1 G0 B7 B6 B5 B4 B3 B2 B1 B0 | 注：高位先发，按照RGB 的顺序发送数据'
+    forwarding:
+      text: Takes 24 bits, DO held low until then, then forwards the rest; Tflz max 300 ns.
+      doc: ucs1904-cn
+      page: 4
+      quote: '接受够24bit 后，DO 端口开始转发数据，供下一个芯片提供输入数据。在转发之前，DO 口一直拉低。此时芯片将不接受新的数据 … 传输延迟时间 | Tflz | - | - | 300 | ns | Cl＝15pF，DIN → DOUT，Rl ＝10kΩ'
+      translation: After 24 bits, DO starts forwarding to the next chip; DO is low before that and the chip accepts no new data. Transfer delay max 300 ns.
+    backup_line: null
+    compatibility_claims:
+      - claim: '可在控制器上选用2903 低速增强模式 (select the "2903 low-speed enhanced mode" on the controller), i.e. the maker names the slow mode after the UCS2903'
+        doc: ucs1904-cn
+        page: 6
+    maker_table:
+      doc: szucs-256
+      quote: 'UCS1904S | 3 | 1.8 | 恒压 | 无 | 无 | 60 | 30 | 800K | 256 | 工业级 | SOP8'
+      translation: 'UCS1904S: 3 channels, 1.8 kHz, constant voltage, current max 60 mA, 30 V, 800K, 256 levels, industrial, SOP8.'
+    controller_claims:
+      - {
+          source: advatek-ucs1904,
+          claim: 'UCS1904 is an improved design of its previous version, UCS1903, operating up to 24V instead of 12V ... | Data Transfer Rate | 400 - 800kbps | PWM Rate | 1500Hz',
+        }
+      - {
+          source: enttec-ucs1904,
+          claim: 'self-clocking like the WS2812 but with steadier timing | PWM Rate | 1500Hz | Redundant Data Line | No',
+        }
+      - { source: falcon-pixeltypes, claim: 'UCS1904 listed as an alternative of type WS2811' }
+    disagreements:
+      - 'Port scan: datasheet p1 "端口扫描频率1.5KHz/s" vs the maker table''s UCS1904S row 1.8 kHz (different suffix; no UCS1904S datasheet found).'
+    open:
+      - No revision or date in this copy.
+
+  # ---------------------------------------------------------------------------
+  - part: UCS1909
+    entry: pixel-ics/ucs1909
+    maker: not named in the document (distributor copy); same part family as UCS1909B below
+    documents:
+      - id: ucs1909-cn
+        url: https://datasheet4u.com/pdf/905175/UCS1909.pdf
+        title: 9 路LED 驱动电路-UCS1909
+        revision: null
+        date: null # PDF created 2015-02-28 by datasheet4u; content same template as the 2011 UCS1912 below
+        language: zh
+        notes: 'Distributor copy (header "联系：13480836474"); the DB''s current datasheet link.'
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs1909-cn,
+        page: 2,
+        quote: '电路采用单线通讯方式级联，数据用归零码发送。',
+        translation: 'The circuits cascade over a single wire; data is sent in return-to-zero code.',
+      }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps (高速模式, high-speed mode)
+        select: 'SET pin 2 floating: "2 SET I 接VDD：400Kbps 悬空：800Kbps" (p1)'
+        T0H: { ns: 250, tol_ns: 150, min_ns: null, max_ns: null, printed: '250ns 150ns' }
+        T0L: { ns: 1000, tol_ns: 150, min_ns: null, max_ns: null, printed: '1000ns 150ns' }
+        T1H: { ns: 1000, tol_ns: 150, min_ns: null, max_ns: null, printed: '1000ns 150ns' }
+        T1L: { ns: 250, tol_ns: 150, min_ns: null, max_ns: null, printed: '250ns 150ns' }
+        period: null
+        reset:
+          {
+            min_ns: null,
+            ns: 24000,
+            tol_ns: 1000,
+            printed: 'Treset Reset 码，低电平 时间 24000ns 1000ns',
+          }
+        doc: ucs1909-cn
+        page: 2
+        quote: '数据码型说明：高速模式（800kbps） | 描述 | 典型时间 | 允许误差 | T0H | 0 码高 电平时间 | 250ns | 150ns || (p3) T0L | 0 码低电平时间 | 1000ns | 150ns | T1H | 1 码高电平时间 | 1000ns | 150ns | T1L | 1 码低电平时间 | 250ns | 150ns | Treset | Reset 码，低电平 时间 | 24000ns | 1000ns'
+        translation: 'Data code description, high-speed mode (800 kbps): description, typical time, allowed error.'
+      - name: 400kbps (低速模式, low-speed mode)
+        select: 'SET pin 2 tied to VDD (接VDD：400Kbps)'
+        T0H: { ns: 500, tol_ns: null, min_ns: null, max_ns: null, printed: 'doubled 250ns' }
+        T0L: { ns: 2000, tol_ns: null, min_ns: null, max_ns: null, printed: 'doubled 1000ns' }
+        T1H: { ns: 2000, tol_ns: null, min_ns: null, max_ns: null, printed: 'doubled 1000ns' }
+        T1L: { ns: 500, tol_ns: null, min_ns: null, max_ns: null, printed: 'doubled 250ns' }
+        period: null
+        reset: { min_ns: null, printed: 'not restated (see open)' }
+        derived: true
+        doc: ucs1909-cn
+        page: 3
+        quote: '如果是低速模式（400kbps）， 上述时间增加一倍。'
+        translation: 'In low-speed mode (400 kbps) the times above are doubled.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 9
+      wire_order: 'R1 G1 B1, R2 G2 B2, R3 G3 B3 (8 bits each, MSB first)'
+      pixel_bits: 72 # per chip: three 24-bit RGB groups
+      extra: null
+      start: 'a reset before the first frame: "为保证第一帧输入的数据有效，在输入第一帧数据前先输入一个reset 信号" (p3)'
+      end: null
+      latch: reset low (24000 ns ±1000 ns as printed); all ICs latch together
+      doc: ucs1909-cn
+      page: 2
+      quote: '一个电路有9 路LED 输出端，即3 组RGB。每路输出需要8 位二进制数设置灰度，一组RGB 需要24 位二进制数，数据高位先输入 … 一个电路需要共72 位数据来设置各个RGB 的灰度，数据输入顺序R1G1B1，R2G2B2，R3G3B3。'
+      translation: 'One circuit has 9 LED outputs, i.e. 3 RGB groups. Each output needs 8 bits; one RGB group needs 24 bits, MSB first ... one circuit needs 72 bits in all, input order R1G1B1, R2G2B2, R3G3B3.'
+    forwarding:
+      text: After 72 bits the chip decodes, re-encodes and forwards the rest from DOUT.
+      doc: ucs1909-cn
+      page: 2
+      quote: '当输入的数据满72 位后，电路开始转发数据，即将输入的数据经内部译码，编码处理后从DOUT 端输出进入下一级电路，从而实现多电路级联工作。'
+      translation: 'Once 72 bits are in, the circuit starts forwarding: input data is decoded and re-encoded internally and sent from DOUT to the next circuit.'
+    backup_line: null
+    compatibility_claims: []
+    controller_claims:
+      - { source: falcon-pixeltypes, claim: 'UCS1909 listed as an alternative of type WS2811' }
+    disagreements:
+      - "SET pin: this document uses SET for 400/800 kbps; the maker's UCS1909B ver2.2 uses SET for 6 vs 9 channels and is 800K only (see UCS1909B). The DB entry's bitrate_notes describe this older document while its aliases and notes describe the UCS1909B(S)."
+      - 'Treset is printed as a typical value with a tolerance (24000 ns ±1000 ns), not as a minimum; the UCS1903 and the 2012 maker datasheets print ">24µs" / "》24us".'
+    open:
+      - 'Whether the 400 kbps note ("上述时间增加一倍", the times above are doubled) also doubles Treset; the UCS1903 note explicitly keeps reset unchanged, this one does not say.'
+
+  # ---------------------------------------------------------------------------
+  - part: UCS1909B
+    entry: pixel-ics/ucs1909 # DB alias UCS1909BS
+    maker: UCS / Lianxinke Microelectronics (imprint 联芯科微电子 ver2.2 www.szucs.cn)
+    documents:
+      - id: ucs1909b-ver2.2-cn
+        url: https://datasheet4u.com/pdf/905176/UCS1909B.pdf
+        title: 9 通道LED 单线级联驱动电路 UCS1909B
+        revision: VER2.2
+        date: '2012-04-17'
+        language: zh
+        notes: 'Revision table p8: VER2.1 2011-12-25 内容增加 (content added); VER2.2 2012-04-17 版面调整 (layout adjusted).'
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs1909b-ver2.2-cn,
+        page: 3,
+        quote: '芯片采用单线通讯方式，采用归零码的方式发送信号。',
+      }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800K mode, chip output (800K 模式时间(芯片内部再生信号标准))
+        table: chip output
+        select: null # single speed; SET picks the channel count
+        T0H: { ns: 400, tol_ns: 40, min_ns: null, max_ns: null, printed: '0.4µs ±40ns' }
+        T1H: { ns: 800, tol_ns: 80, min_ns: null, max_ns: null, printed: '0.8µs ±80ns' }
+        T0L: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85µs' }
+        T1L: { ns: 450, tol_ns: null, min_ns: null, max_ns: null, printed: '0.45µs' }
+        period: null
+        reset: { min_ns: 24000, printed: '》24us' }
+        decode:
+          zero_if_high_below_ns: 550
+          one_if_high_above_ns: 690
+          ignored_leading_high_ns: 30
+          doc: ucs1909b-ver2.2-cn
+          page: 5
+          quote: '注：1. IC 主要根据高电平时间判断"0"码和"1"码,IC 收到高电平的前30ns 不计（特为防干扰设计）。高电平时间<0.55us,IC 判断为"0"码,高电平时间>0.69uS,判断为“1”码.”0”码和“1”码的低电平代表此码结束，准备接收下一数据码。'
+        reset_rule:
+          max_gap_in_frame_ns: 8000
+          doc: ucs1909b-ver2.2-cn
+          page: 5
+          quote: '2.低电平复位时间最小为8µs，最高为24us,IC 在收到大于8us 小于24us 的低电平信号时都可能认为是RESET 码，所以一帧数据传输过程中不要中断超过8µs … 同时控制器发reset 码时不要低于24us'
+        doc: ucs1909b-ver2.2-cn
+        page: 5
+        quote: '5）下表800K 模式时间(芯片内部再生信号标准)： | T0H | 0 码，高电平时间 | 0.4µs | ±40ns | T1H | 1 码，高电平时间 | 0.8µs | ±80ns | T0L | 0 码，低电平时间 | 0.85µs | T1L | 1 码，低电平时间 | 0.45µs | Treset | Reset 码，低电平时间 | 》24us'
+      - name: 800K, controller send (6）控制器建议值)
+        table: controller send
+        select: null
+        T0H: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4µs' }
+        T1H: { ns: 900, tol_ns: null, min_ns: null, max_ns: null, printed: '0.9µs' }
+        T0L: { ns: null, tol_ns: null, min_ns: 850, max_ns: null, printed: '》0.85µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 350, max_ns: null, printed: '》0.35µs' }
+        period: { ns: null, min_ns: 1250, printed: '》1.25µs' }
+        reset: { min_ns: 24000, printed: '》24µs' }
+        doc: ucs1909b-ver2.2-cn
+        page: 5
+        quote: '6）控制器建议值 | T0H | 0 码，高电平时间 | 0.4µs | T1H | 1 码，高电平时间 | 0.9µs | T0L | 0 码，低电平时间 | 》0.85µs | T1L | 1 码，低电平时间 | 》0.35µs | T | “0”码或“1”码周期 | 》1.25µs | Treset | Reset 码，低电平时间 | 》24µs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: '9 (SET floating) or 6 (SET to VDD)'
+      wire_order: 'first 24 bits R1 G1 B1 as R7…R0 G7…G0 B7…B0; groups 2 and 3 follow (not drawn)'
+      pixel_bits: 72 # 9-channel mode, per chip
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥24 µs (outputs update); lows of 8-24 µs may be taken as reset'
+      doc: ucs1909b-ver2.2-cn
+      page: 4
+      quote: '3） 72bit 数据结构（以下是前24 位数据 R1,G1，B1） | R7 R6 R5 R4 R3 R2 R1 R0 G7 … B0 | 注：高位先发，按照RGB 的顺序发送数据'
+      translation: '72-bit data structure (shown: the first 24 bits, R1, G1, B1). MSB first, RGB order.'
+      set_pin:
+        {
+          doc: ucs1909b-ver2.2-cn,
+          page: 2,
+          quote: '2 | SET | 接VDD：6 通道 悬空：9 通道',
+          translation: 'SET: to VDD = 6 channels, floating = 9 channels',
+        }
+    forwarding:
+      text: Takes 72 bits, DO low until then, then forwards; outputs update on a ≥24 µs low.
+      doc: ucs1909b-ver2.2-cn
+      page: 3
+      quote: '接受够72bit 后，DO 端口开始转发数据，供下一个芯片提供输入数据。在转发之前，DO 口一直拉低。此时芯片将不接受新的数据 … 当接受到24µs 以上低电平RESET 码后，芯片将刚才接收到的72bit PWM 数据脉宽输出到OUTR、OUTG、OUTB 引脚上。'
+    backup_line: null
+    compatibility_claims: []
+    maker_table:
+      doc: szucs-256
+      quote: 'UCS1909BS | 6/9 | 1.8 | 恒压 | 无 | 无 | 50 | 30 | 800K | 256 | 准工业级 | SOP14'
+    controller_claims: []
+    disagreements:
+      - 'Port scan: datasheet p1 "扫描频率1.5kHz/s" vs maker table UCS1909BS 1.8 kHz.'
+      - 'Controller T1H: 0.9 µs here vs 0.85 µs in the UCS1904 and UCS1912B tables; T1L ≥0.35 µs here vs ≥0.4 µs.'
+    open:
+      - Frame length in 6-channel mode (SET to VDD) is not printed; 48 bits is the obvious guess but unconfirmed.
+
+  # ---------------------------------------------------------------------------
+  - part: UCS1912
+    entry: pixel-ics/ucs1912
+    maker: not named in the document (distributor copy, header www.icdemi.com)
+    documents:
+      - id: ucs1912-cn-2011
+        url: https://datasheet4u.com/pdf/753097/UCS1912.pdf
+        title: 12 路LED 驱动电路-UCS1912
+        revision: null
+        date: null # PDF metadata 2011-04-16
+        language: zh
+        notes: Same template as the UCS1909 distributor document.
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      { doc: ucs1912-cn-2011, page: 2, quote: '电路采用单线通讯方式级联，数据用归零码发送。' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kbps
+        select: null # single speed; no SET pin in the pin table (VDD, DOUT, R/G/B x12, GND, DIN)
+        T0H: { ns: 250, tol_ns: 150, min_ns: null, max_ns: null, printed: '250ns 150ns' }
+        T0L: { ns: 1000, tol_ns: 150, min_ns: null, max_ns: null, printed: '1000ns 150ns' }
+        T1H: { ns: 1000, tol_ns: 150, min_ns: null, max_ns: null, printed: '1000ns 150ns' }
+        T1L: { ns: 250, tol_ns: 150, min_ns: null, max_ns: null, printed: '250ns 150ns' }
+        period: null
+        reset: { min_ns: null, ns: 24000, tol_ns: 1000, printed: '24000ns 1000ns' }
+        doc: ucs1912-cn-2011
+        page: 2
+        quote: '描述 | 典型时间 | 允许误差 | T0H | 0 码高 电平时间 | 250ns | 150ns || (p3) T0L | 0 码低电平时间 | 1000ns | 150ns | T1H | 1 码高电平时间 | 1000ns | 150ns | T1L | 1 码低电平时间 | 250ns | 150ns | Treset | Reset 码，低电平 时间 | 24000ns | 1000ns'
+        also:
+          - {
+              doc: ucs1912-cn-2011,
+              page: 1,
+              quote: '数据发送速度800Kbps,实现画面30 帧/秒可级联1024 点，15 帧可达2048 点',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 12
+      wire_order: 'R1 G1 B1, R2 G2 B2, R3 G3 B3, R4 G4 B4 (8 bits each, MSB first)'
+      pixel_bits: 96 # per chip: four 24-bit RGB groups
+      extra: null
+      start: 'a reset before the first frame (p3)'
+      end: null
+      latch: reset low (24000 ns ±1000 ns as printed)
+      doc: ucs1912-cn-2011
+      page: 2
+      quote: '一个电路有12 路LED 输出端，即4 组RGB … 一组RGB 需要24 位二进制数，数据高位先输入 … 一个电路需要共96 位数据来设置各个RGB 的灰度，数据输入顺序R1G1B1，R2G2B2，R3G3B3，R4G4B4。'
+    forwarding:
+      text: After 96 bits the chip decodes, re-encodes and forwards the rest.
+      doc: ucs1912-cn-2011
+      page: 2
+      quote: '当输入的数据满96 位后，电路开始转发数据，即将输入的数据经内部译码，编码处理后从DOUT 端输出进入下一级电路'
+    backup_line: null
+    compatibility_claims: []
+    controller_claims:
+      - { source: falcon-pixeltypes, claim: 'UCS1912 listed as an alternative of type WS2811' }
+    disagreements: []
+    open: []
+
+  # ---------------------------------------------------------------------------
+  - part: UCS1912B
+    entry: pixel-ics/ucs1912 # DB aliases UCS1912B, UCS1912BS
+    maker: UCS / Lianxinke Microelectronics (imprint 联芯科（深圳）微电子 www.szucs.cn)
+    documents:
+      - id: ucs1912b-ver2.3-cn
+        url: https://datasheet4u.com/pdf/753096/UCS1912B.pdf
+        title: 12 通道LED 单线级联驱动电路 UCS1912B
+        revision: VER2.3
+        date: '2012-09-11'
+        language: zh
+        notes: 'Revision table p11: VER2.2 2012-3-25 内容增加; VER2.3 2012-9-11 版面调整. Word file "UCS1912B(D).doc".'
+      - id: szucs-ucs1912b-note
+        url: http://szucs.cn/page165?article_id=19
+        title: UCS1912B在十六段护栏管上的应用 (maker application note)
+        revision: null
+        date: null
+        language: zh
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs1912b-ver2.3-cn,
+        page: 4,
+        quote: '芯片采用单线通讯方式，采用归零码的方式发送信号。',
+      }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800K mode, chip output (800K 模式时间(芯片内部再生信号标准))
+        table: chip output
+        select: null
+        T0H: { ns: 400, tol_ns: 40, min_ns: null, max_ns: null, printed: '0.4µs ±40ns' }
+        T1H: { ns: 800, tol_ns: 80, min_ns: null, max_ns: null, printed: '0.8µs ±80ns' }
+        T0L: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85µs' }
+        T1L: { ns: 450, tol_ns: null, min_ns: null, max_ns: null, printed: '0.45µs' }
+        period: null
+        reset: { min_ns: 24000, printed: '》24us' }
+        decode:
+          zero_if_high_below_ns: 550
+          one_if_high_above_ns: 690
+          ignored_leading_high_ns: 30
+          doc: ucs1912b-ver2.3-cn
+          page: 6
+          quote: '高电平时间<0.55us,IC 判断为"0"码,高电平时间>0.69uS,判断为“1”码'
+        reset_rule:
+          max_gap_in_frame_ns: 8000
+          doc: ucs1912b-ver2.3-cn
+          page: 6
+          quote: '一帧数据传输过程中不要中断超过8µs，否则可能会被IC 认为是reset 码'
+        doc: ucs1912b-ver2.3-cn
+        page: 6
+        quote: '5）下表800K 模式时间(芯片内部再生信号标准) | T0H | 0 码，高电平时间 | 0.4µs | ±40ns | T1H | 1 码，高电平时间 | 0.8µs | ±80ns | T0L | 0 码，低电平时间 | 0.85µs | T1L | 1 码，低电平时间 | 0.45µs | Treset | Reset 码，低电平时间 | 》24us'
+      - name: 800K, controller send (6）控制器建议值)
+        table: controller send
+        select: null
+        T0H: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4us' }
+        T1H: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85us' }
+        T0L: { ns: null, tol_ns: null, min_ns: 850, max_ns: null, printed: '》0.85µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 400, max_ns: null, printed: '》0.4us' }
+        period: { ns: null, min_ns: 1250, printed: '》1.25 (no unit printed)' }
+        reset: { min_ns: 24000, printed: '》24us' }
+        doc: ucs1912b-ver2.3-cn
+        page: 7
+        quote: '6）控制器建议值 | T0H | 0.4us | T1H | 0.85us | T0L | 》0.85µs | T1L | 》0.4us | T | “0”码或“1”码周期 | 》1.25 | Treset | 》24us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 12
+      wire_order: 'first 24 bits R1 G1 B1 as R7…R0 G7…G0 B7…B0; groups 2-4 follow (not drawn)'
+      pixel_bits: 96 # per chip
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥24 µs'
+      doc: ucs1912b-ver2.3-cn
+      page: 5
+      quote: '3） 96bit 数据结构（以下是前24 位数据 R1,G1，B1） | R7 R6 R5 R4 R3 R2 R1 R0 G7 … B0 | 注：高位先发，按照RGB 的顺序发送数据'
+    forwarding:
+      text: Takes 96 bits, then forwards; Tflz max 300 ns.
+      doc: ucs1912b-ver2.3-cn
+      page: 4
+      quote: '接受够96bit 后，DO 端口开始转发数据，供下一个芯片提供输入数据。在转发之前，DO 口一直拉低。此时芯片将不接受新的数据'
+    backup_line: null
+    compatibility_claims: []
+    maker_table:
+      doc: szucs-256
+      quote: 'UCS1912BS | 12 | 1.8 | 恒压 | 无 | 无 | 50 | 30 | 800K | 256 | 准工业级 | SOP16'
+    maker_note:
+      doc: szucs-ucs1912b-note
+      quote: '数据传输频率 800K/秒，可实现画面刷新速率 30 帧 / 秒时，不小于 1024 点 ; 输出端口 PWM 控制能够实现 256 级灰度调节，端口扫描频率 1.8KHz / s'
+    controller_claims: []
+    disagreements:
+      - 'Port scan: datasheet p1 "端口扫描频率1.5KHz/s" vs maker application note and table 1.8 kHz.'
+      - 'Controller table period "》1.25" has no unit (p7); the chip-output note on p6 says 1.25us.'
+    open: []
+
+  # ---------------------------------------------------------------------------
+  - part: UCS2903
+    entry: pixel-ics/ucs2903
+    maker: UCS / Lianxinke Microelectronics
+    documents:
+      - id: ucs2903-ver2.2-en
+        url: https://www.superlightingled.com/PDF/SPEC/UCS2903-Datasheet.pdf
+        title: 3-channel LED display driver UCS2903
+        revision: ver2.2
+        date: null
+        language: en
+        notes: 'Revision table p9: VER1.0 2010-3-25 The first issue; VER2.0 2011-9-11 Layout Adjustment.'
+      - id: ucs2903-ver2.2-en-2017
+        url: https://www.led-stuebchen.de/download/UCS2903_English_2017-8-22.pdf
+        title: 3-channel LED display driver UCS2903 (copy with the maker footer 联芯科微电子 ver2.2 www.szucs.cn)
+        revision: ver2.2
+        date: null
+        language: en
+        notes: Same text as ucs2903-ver2.2-en; also no timing section.
+      - id: ucs2903-ledyi
+        url: https://media.ledyi.com/ucs2903-datasheet_6fd9dd0ef3578c081b6964d918dc663f64bda3b083e3045ff262d7d44bd76fef.pdf
+        title: UCS2903 datasheet (LEDYi copy)
+        revision: null
+        date: null
+        language: en
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: szucs-dmx-256
+        url: http://szucs.cn/page148
+        title: DMX512 差分并联 IC -256 级 / DMX512 差分并联转发 IC -256 级 (maker product tables)
+        revision: null
+        date: null
+        language: zh
+      - id: ucs1904-cn
+        url: https://datasheet4u.com/pdf/1350120/UCS1904.pdf
+        title: 3通道LED恒压驱动电路 UCS1904
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs2903
+        url: https://www.advateklighting.com/pixel-protocols/ucs2903
+        title: Advatek pixel protocol page, UCS2903
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs2903
+        url: https://www.enttec.com/pixel-protocols/UCS2903
+        title: ENTTEC pixel protocol page, UCS2903
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs2903-ver2.2-en,
+        page: 1,
+        quote: '1. single line data tronsmission（return to zero code）',
+      }
+    idle: null # not stated; the ver2.2 English datasheet has no functional description
+    bit_order: null # not printed
+    rates:
+      - name: 800 kbps
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: ucs2903-ver2.2-en
+        page: 4
+        quote: 'Data transfer rate | FMAX | 800 | - | - | kbps | 50% duty cycle'
+        also:
+          - {
+              doc: ucs2903-ver2.2-en,
+              page: 1,
+              quote: '4. Data transfer rate of 800 k/s, Images of not less than 1024 points can be realized when the refresh rate of 30 frames per second',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: null
+      pixel_bits: null # 1024 points at 30 fps at 800 kbps allows at most 26 bits per point; 24 is implied, not printed
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: ucs2903-ver2.2-en
+      page: 1
+      quote: '5. RGB output port PWM control can be achieved 256 grey level adjustment, port scanning frequency of 1.5 KHz/s'
+    forwarding:
+      text: Only the features list; no functional description.
+      doc: ucs2903-ver2.2-en
+      page: 1
+      quote: '2. shaping transmit specific technology, Cascade number of lamps and lanterns is not restricted'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'DMX512 forwarding ICs UCS512C0 and UCS512EO, column 转发支持型号 (supported forwarding models): "单线256级灰度：19系列，29系列" (single-wire 256 levels: 19 series, 29 series)'
+        doc: szucs-dmx-256
+        page: null
+      - claim: 'UCS1904 datasheet: "可在控制器上选用2903 低速增强模式" (select the 2903 low-speed enhanced mode on the controller)'
+        doc: ucs1904-cn
+        page: 6
+    maker_table:
+      doc: szucs-256
+      quote: 'UCS2903B | 3 | 1.8 | 恒流 | ±5% | 17 | 60 | 30 | 800K | 256 | 工业级 | SOP8'
+    controller_claims:
+      - {
+          source: advatek-ucs2903,
+          claim: 'UCS2903 is an improved design of its previous version, UCS1904, offering a constant current design | Data Transfer Rate | 800kbps | PWM Rate | 1600Hz',
+        }
+      - {
+          source: enttec-ucs2903,
+          claim: 'A single-wire, self-clocking 24-bit RGB pixel IC | PWM Rate | 1600Hz | Redundant Data Line | No',
+        }
+      - { source: falcon-pixeltypes, claim: 'UCS2903 listed as an alternative of type WS2811' }
+    disagreements:
+      - 'SET pin: p2 says pin 7 SET takes a resistor to ground to set the current ("suspend in midair to 17 mA"), but p8 keeps the UCS1903 sentence "When the SET pin is connected to high level, it should be connected to VDD".'
+      - 'Port scan: ver2.2 says 1.5 KHz/s; maker table (UCS2903B) 1.8 kHz; Advatek and ENTTEC 1600 Hz.'
+    open:
+      - "No UCS2903 document read prints bit timing, reset time, data format or channel order: the maker's English ver2.2 skips from switching characteristics to the current table (three copies checked). No Chinese UCS2903 or UCS2903B datasheet found."
+
+  # ---------------------------------------------------------------------------
+  - part: UCS2904B
+    entry: pixel-ics/ucs2904
+    maker: UCS / Lianxinke Microelectronics
+    documents:
+      - id: ucs2904b-greeled-en
+        url: https://www.gree-leds.com/web/userfiles/download/UCS2904BGreeledEnglish.pdf
+        title: UCS2904B 4 Channel Constant current IC (Greeled English translation, scanned images)
+        revision: null
+        date: null # PDF 2023-04-07
+        language: en
+        notes: Image-only PDF (read by rendering pages). Translation of a newer maker datasheet than ver2.x; the only UCS2904B copy with timing tables.
+      - id: ucs2904b-ver2-en
+        url: https://www.ledyilighting.com/wp-content/uploads/2022/02/UCS2904-Specification_English.pdf
+        title: 4-channel LED constant current driver UCS2904B
+        revision: null # revision table p8: VER1.0 2010-2-20, VER2.0 2011-9-11
+        date: null
+        language: en
+        notes: No timing section. Same text as https://datasheet4u.com/pdf/1513132/UCS2904B.pdf (footer 联芯科微电子 ver2.x).
+      - id: ucs2904b-sll
+        url: https://www.superlightingled.com/PDF/UCS2904-Datasheet.pdf
+        title: UCS2904B Product overview (Superlighting LED, 2021)
+        revision: null
+        date: null
+        language: en
+        notes: Tables are images; no timing.
+      - id: ucs2904b-greeled-2021
+        url: https://www.gree-leds.com/web/userfiles/download/UCS2904EnDatasheet.pdf
+        title: UCS2904B Datasheet (Greeled, 2021)
+        revision: null
+        date: null
+        language: en
+        notes: No timing.
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs2904
+        url: https://www.advateklighting.com/pixel-protocols/ucs2904
+        title: Advatek pixel protocol page, UCS2904
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs2904
+        url: https://www.enttec.com/pixel-protocols/UCS2904
+        title: ENTTEC pixel protocol page, UCS2904
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs2904b-greeled-en,
+        page: 4,
+        quote: 'The chip adopts single line communication mode, and sends signals by returning to zero code.',
+      }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: high-speed conventional mode, chip output ("Chip internal regeneration signal standard")
+        table: chip output
+        select: 'automatic: "UCS2904B has a built-in charging management module, which can automatically adapt to the "low-speed enhancement mode" of the following controllers" (p7)'
+        T0H: { ns: 400, tol_ns: 40, min_ns: null, max_ns: null, printed: '0.4µs ±40ns' }
+        T1H: { ns: 800, tol_ns: 80, min_ns: null, max_ns: null, printed: '0.8µs ±80ns' }
+        T0L: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85µs' }
+        T1L: { ns: 450, tol_ns: null, min_ns: null, max_ns: null, printed: '0.45µs' }
+        period: null
+        reset: { min_ns: 24000, printed: '>24us' }
+        reset_rule:
+          max_gap_in_frame_ns: 8000
+          doc: ucs2904b-greeled-en
+          page: 6
+          quote: 'The minimum IC low-level reset time is 8 µ s, and the maximum is 24us. When receiving low-level signals greater than 8us but less than 24us, the IC may consider them as RESET codes. Therefore, do not interrupt more than 8 µ s during the transmission of a frame of data, or the IC may consider them as reset codes.However, within 8 µ s, the controller can perform other operations.At the same time, the reset code sent by the controller should not be lower than 24us to ensure that all ICs can be confirmed as reset codes'
+        doc: ucs2904b-greeled-en
+        page: 6
+        quote: '5) Chip internal regeneration signal standard (high-speed conventional mode) | T0H | 0 code, high level time | 0.4µs | ±40ns | T1H | 1 code, high level time | 0.8µs | ±80ns | T0L | 0 code, low level time | 0.85µs | T1L | 1 code, low level time | 0.45µs | Treset | Reset code, low level time | >24us'
+      - name: high speed normal mode, controller send ("Recommended value of controller")
+        table: controller send
+        select: automatic
+        T0H: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4us' }
+        T1H: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85us' }
+        T0L: { ns: null, tol_ns: null, min_ns: 900, max_ns: null, printed: '>0.9µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 450, max_ns: null, printed: '>0.45us' }
+        period: { ns: null, min_ns: 1300, printed: '"0" code or "1" code cycle >1.3us' }
+        reset: { min_ns: 24000, printed: '>24us' }
+        doc: ucs2904b-greeled-en
+        page: 6
+        quote: '6) Recommended value of controller (high speed normal mode) | T0H | 0 code, high level time | 0.4us | T1H | 1 code, high level time | 0.85us | T0L | 0 code, low level time | >0.9µs | T1L | 1 code, low level time | >0.45us | T | "0" code or "1" code cycle | >1.3us | Treset | Reset code, low level time | >24us'
+      - name: low-speed enhancement mode, controller send
+        table: controller send
+        select: automatic
+        T0H: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4us' }
+        T1H: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85us' }
+        T0L: { ns: null, tol_ns: null, min_ns: 2100, max_ns: null, printed: '>2.1µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 1650, max_ns: null, printed: '>1.65us' }
+        period: { ns: null, min_ns: 2500, printed: '>2.5us' }
+        reset: { min_ns: 24000, printed: '>24us' }
+        doc: ucs2904b-greeled-en
+        page: 7
+        quote: '7) Recommended value of controller: (low-speed enhancement mode) | T0H | 0.4us | T1H | 0.85us | T0L | >2.1µs | T1L | >1.65us | T | "0" code or "1" code cycle | >2.5us | Treset | >24us'
+        mode_text:
+          doc: ucs2904b-greeled-en
+          page: 7
+          quote: 'In case of jitter or sometimes good or bad phenomena in the project, and it is inconvenient to check the product or wiring, 2903 low-speed enhancement can be selected on the controller ... Low speed mode can only be used with 512 points/30 frames or 1024 points/15 frames.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'R7…R0 G7…G0 B7…B0 W7…W0'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'low above 24 µs; lows of 8-24 µs may be taken as reset'
+      doc: ucs2904b-greeled-en
+      page: 5
+      quote: '3) 32bit data structure | R7 … R0 | G7 … G0 | B7 … B0 | W7 … W0 | Note: High bit first, send data in the order of RGBW'
+    forwarding:
+      text: Takes 32 bits, DO low until then, then forwards.
+      doc: ucs2904b-greeled-en
+      page: 4
+      quote: 'After receiving enough 32bit, the DO port starts to transmit data for the next chip to provide input data.Before forwarding, the DO port is always pulled down.At this time, the chip will not accept new data.'
+    backup_line: null
+    compatibility_claims:
+      - claim: '"2903 low-speed enhancement can be selected on the controller" (the slow mode is named after the UCS2903)'
+        doc: ucs2904b-greeled-en
+        page: 7
+    maker_table:
+      doc: szucs-256
+      quote: 'UCS2904B | 4 | 1.8 | 恒流 | ±5% | 17 | 17 | 30 | 800K | 256 | 工业级 | SOP8'
+    controller_claims:
+      - {
+          source: advatek-ucs2904,
+          url: 'https://www.advateklighting.com/pixel-protocols/ucs2904',
+          claim: 'UCS2904 offers all the same features as its RGB version, UCS2903, but is dedicated to RGBW | Data Transfer Rate | 800kbps | PWM Rate | 1800Hz',
+        }
+      - {
+          source: enttec-ucs2904,
+          url: 'https://www.enttec.com/pixel-protocols/UCS2904',
+          claim: 'WS2812-style self-clocking timing and 32-bit color | Redundant Data Line | No',
+        }
+    disagreements:
+      - 'Function description p4 says "outputs the 24 bit PWM data pulse width just received to OUTR, OUTG, OUTB and OUTW pins" while the same paragraph and p5 say 32 bits.'
+      - 'Controller table (p6): T0L >0.9 µs, T1L >0.45 µs, period >1.3 µs; the UCS1904 and UCS1912B tables say ≥0.85, ≥0.4 and ≥1.25 µs.'
+      - 'Power-on self test: ucs2904b-sll p1 "IC self-inspection then LED light connection on the pin B port. Lighting Blue color." vs ucs2904b-greeled-2021 p1 "power on self test (white color)".'
+      - 'p4 "The signal cycle is OAbout 6 ms" (garbled; the features give a 1.8 kHz port scan).'
+    open:
+      - No decision threshold (0.55/0.69 µs) is printed in this translation; the UCS1904 family datasheets print one.
+
+  # ---------------------------------------------------------------------------
+  - part: UCS2909
+    entry: pixel-ics/ucs2909
+    maker: UCS / Lianxinke Microelectronics
+    documents:
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: szucs-256,
+        page: null,
+        quote: '级联单线驱动 IC -256 级',
+        translation: 'cascade single-wire driver ICs, 256 levels (table heading)',
+      }
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800K
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: szucs-256
+        page: null
+        quote: 'UCS2909S | 6/9 | 1.8 | 恒流 | ±5% | 17 | 17 | 30 | 800K | 256 | 工业级 | SOP14'
+    clock: null
+    frame:
+      bits_per_channel: 8 # 256 levels
+      channels: 6/9
+      wire_order: null
+      pixel_bits: null
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: szucs-256
+      page: null
+      quote: 'UCS2909S | 6/9 | … | 800K | 256 | …'
+    forwarding: null
+    backup_line: null
+    compatibility_claims: []
+    controller_claims:
+      - { source: falcon-pixeltypes, claim: 'UCS2909 listed as an alternative of type WS2811' }
+    disagreements: []
+    open:
+      - 'No datasheet found (searched datasheet4u, LEDYi, Superlighting, Greeled, maker site); Advatek and ENTTEC have no UCS2909 page (404).'
+
+  # ---------------------------------------------------------------------------
+  - part: UCS2912
+    entry: pixel-ics/ucs2912
+    maker: UCS / Lianxinke Microelectronics
+    documents:
+      - id: szucs-256
+        url: http://szucs.cn/page136
+        title: 级联单线驱动 IC -256 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs2912
+        url: https://www.advateklighting.com/pixel-protocols/ucs2912
+        title: Advatek pixel protocol page, UCS2912
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs2912
+        url: https://www.enttec.com/pixel-protocols/UCS2912
+        title: ENTTEC pixel protocol page, UCS2912
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source: { doc: szucs-256, page: null, quote: '级联单线驱动 IC -256 级' }
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800K
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: szucs-256
+        page: null
+        quote: 'UCS2912S | 12 | 1.8 | 恒流 | ±5% | 17 | 17 | 30 | 800K | 256 | 工业级 | SOP16'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 12
+      wire_order: null
+      pixel_bits: null
+      extra: null
+      start: null
+      end: null
+      latch: null
+      doc: szucs-256
+      page: null
+      quote: 'UCS2912S | 12 | … | 800K | 256 | …'
+    forwarding: null
+    backup_line: null
+    compatibility_claims: []
+    controller_claims:
+      - {
+          source: advatek-ucs2912,
+          claim: 'Clock Type | Data-Only | Color Resolution | 8 Bits | Physical Package | SOP16 | PWM Rate | 1600Hz | Data Transfer Rate | 800kbps ; "No redundancy in data"',
+        }
+      - {
+          source: enttec-ucs2912,
+          claim: 'A WS2812-family single-wire RGB pixel driver in a SOP16 package | PWM Rate | 1600Hz | Redundant Data Line | No',
+        }
+      - { source: falcon-pixeltypes, claim: 'UCS2912 listed as an alternative of type WS2811' }
+    disagreements:
+      - 'PWM: maker table 1.8 kHz vs Advatek and ENTTEC 1600 Hz.'
+    open:
+      - No datasheet found.
+
+  # ---------------------------------------------------------------------------
+  - part: UCS2603
+    entry: pixel-ics/ucs2603
+    maker: UCS / Lianxinke Microelectronics (per Advatek and ENTTEC; not in the maker's current tables)
+    documents:
+      - id: advatek-ucs2603
+        url: https://www.advateklighting.com/pixel-protocols/ucs2603
+        title: Advatek pixel protocol page, UCS2603
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs2603
+        url: https://www.enttec.com/pixel-protocols/UCS2603
+        title: ENTTEC pixel protocol page, UCS2603
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire # controller makers' "Clock Type: Data-Only"; no maker document
+    line_coding_source: { doc: advatek-ucs2603, page: null, quote: 'Clock Type | Data-Only' }
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800kbps
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: advatek-ucs2603
+        page: null
+        quote: 'Data Transfer Rate | 800kbps'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: null
+      pixel_bits: null
+      extra: '4-bit current control per colour (Advatek); where it sits in the frame is not published'
+      start: null
+      end: null
+      latch: null
+      doc: advatek-ucs2603
+      page: null
+      quote: 'Color Resolution | 8 Bits | Current Control | Per Color: 4 Bits | Color Types | RGB ; "Use the 4-bit current control per color to lower the brightness without sacrificing resolution"'
+    forwarding: null
+    backup_line:
+      pins: null
+      behaviour: 'redundant data line (no pin names or switching rule published)'
+      doc: advatek-ucs2603
+      page: null
+      quote: 'Redundant data line reduces chance of entire strip failure'
+      also: { doc: enttec-ucs2603, quote: 'Redundant Data Line | Yes' }
+    compatibility_claims: []
+    controller_claims:
+      - {
+          source: advatek-ucs2603,
+          claim: 'PWM Rate | 8000Hz | Output Pixel Voltage | 5 - 28V | Physical Package | SOP8',
+        }
+      - {
+          source: enttec-ucs2603,
+          claim: 'Manufacturer: Shenzhen UCS ; A single-wire, individually addressable 8-bit RGB pixel driver in an SOP8 package, with a redundant data line for run continuity. | PWM Rate | 8000Hz',
+        }
+    disagreements: []
+    open:
+      - 'No maker datasheet anywhere searched (LEDYi, datasheet4u, Greeled, maker site, general search). Frame, timing, current-bit layout and backup-line behaviour unknown.'
+      - Not in the maker's current product tables (szucs.cn pages 136, 140, 144, 148, 151, 159).
+
+  # ---------------------------------------------------------------------------
+  - part: UCS5603
+    entry: pixel-ics/ucs5603
+    maker: UCS / Lianxinke Microelectronics
+    documents:
+      - id: ucs5603-ver1.1-en
+        url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf
+        title: 3-Channel 4096 gray scale bad point resume LED driver IC UCS5603
+        revision: VER1.1
+        date: '2017-04-05'
+        language: en
+        notes: 'Revision table p14: VER1.0 2016-6-25 Original Issue; VER1.1 2017-4-5 Content correction. LEDYi copy (maker hosts no PDFs).'
+      - id: szucs-4096
+        url: http://szucs.cn/page144
+        title: 坏点续传驱动 IC -4096 级 (maker product table; model cells empty)
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs5603
+        url: https://www.advateklighting.com/pixel-protocols/ucs5603
+        title: Advatek pixel protocol page, UCS5603
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs5603
+        url: https://www.enttec.com/pixel-protocols/UCS5603
+        title: ENTTEC pixel protocol page, UCS5603
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire # inferred: data pins only (DIN, FDIN, DOUT at 800K), no clock pin; Advatek "Clock Type: Data-Only"
+    line_coding_source:
+      {
+        doc: ucs5603-ver1.1-en,
+        page: 3,
+        quote: '4 | DOUT | Display Data Cascade Output (800K) ; 5 | DIN | Display Data Input (800K) ; 7 | FDIN | Auxiliary Display Data Input (800K)',
+      }
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800K
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: ucs5603-ver1.1-en
+        page: 2
+        quote: 'UCS5603 data transmission frequency: 800K / s. When the screen refresh rate requirement is 30 frames / sec, it can cascade 740 points; when the screen refresh rate requirement is 60 frames / sec, it can cascade 370 points.'
+        also:
+          - {
+              doc: ucs5603-ver1.1-en,
+              page: 4,
+              quote: 'Oscillation frequency | FOSC1 | - | 800 | - | KHz | Vdd =5V ; FOSC2 | - | 20 | - | MHz ; Data transfer rate | Fd | 800 | - | - | Kbps | Duty cycle 50%',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 12 # "4096 gray levels"
+      channels: 3
+      wire_order: null
+      pixel_bits: null # 800000 / 30 / 740 = 36.0 and 800000 / 60 / 370 = 36.0 bits per point (3 x 12); derived, not printed
+      extra: 'per-channel current, 16 levels, "set independently through the software"; the command format is not published'
+      start: null
+      end: null
+      latch: null
+      doc: ucs5603-ver1.1-en
+      page: 1
+      quote: 'The RGB output port can reach 4096 gray levels, and the port refresh rate is 2K ; The current of each RGB channel can be set independently through the software, divided into 16 levels'
+    forwarding:
+      text: Skipping a dead chip, the next chip identifies which input the data came from and corrects it, so the image does not shift.
+      doc: ucs5603-ver1.1-en
+      page: 4
+      quote: '1. UCS5603 adopts the bad point resume function of dual-channel input. In case of a bad point, the signal can skip the point and continue to download, and the next level IC will automatically identify the signal source and correct data accordingly, so the screen will not be dislocated.'
+    backup_line:
+      pins: 'DIN (pin 5) and FDIN (pin 7, "Auxiliary Display Data Input (800K)")'
+      behaviour: 'Both inputs are decoded at once ("dual decoding engine"); the chip switches to the healthy one in real time. Wiring: chip N+1''s FDIN is fed from chip N''s input line on the cable side of chip N''s RDI resistor, so it carries the stream chip N received. The controller''s FDO may feed chip 1''s FDIN; without it chip 1 has no backup.'
+      doc: ucs5603-ver1.1-en
+      page: 10
+      quote: 'Note 1: In the application, the connection between the controller FDO and UCS5603 can be disconnected, at this time, the first point does not have the complete breakpoint resume function. … Note 3: Note that the connection shall be between the other end (the DIN pin end that connects with RDI resistor) and the FDIN of the next IC, rather than directly connecting the DIN pin with the FDIN of the next IC'
+      also:
+        - {
+            doc: ucs5603-ver1.1-en,
+            page: 1,
+            quote: 'a patented dual decoding engine is adopted to simultaneously monitor two channels, and switch in real-time to the normal channel whenever there is a signal problem',
+          }
+        - {
+            doc: ucs5603-ver1.1-en,
+            page: 6,
+            quote: 'If the test controller only has DO port, and it has no FDO port, the DO port cannot be connected to the DIN and FDIN of the first light, otherwise, the first light will not give normal light instructions in the test mode.',
+          }
+    compatibility_claims: []
+    maker_table:
+      doc: szucs-4096
+      quote: '(model cell empty) | 3 | 2 | 恒流 | ± 3% | 18 | 24 | 16 | 3 | 800K | 4096 | 工业级 | SOP8 ; (model cell empty) | 3 | 2 | 恒流 | ± 3% | 36 | 48 | 16 | 3 | 800K | 4096 | 工业级 | SOP8'
+      translation: 'Bad-point-resume driver ICs, 4096 levels: two unnamed 3-channel rows (18/24 mA and 36/48 mA, 16 current levels, 800K) matching the datasheet''s UCS5603A and UCS5603B; the withstand-voltage cell reads "3".'
+    controller_claims:
+      - {
+          source: advatek-ucs5603,
+          claim: 'UCS5603 is very similar to UCS8903 but is built on an 12-bit color data design ... there is also a redundant data line | Data Transfer Rate | 800kbps | PWM Rate | 1000Hz',
+        }
+      - { source: enttec-ucs5603, claim: 'Redundant Data Line | Yes | PWM Rate | 1000Hz' }
+      - {
+          source: falcon-pixeltypes,
+          claim: 'type SJ1221 (3 channels, 12 bits), alternative UCS5603',
+        }
+    disagreements:
+      - 'PWM: datasheet "port refresh rate is 2K" and maker table 2 kHz vs Advatek and ENTTEC 1000 Hz.'
+    open:
+      - Bit timing, reset/latch, channel order, the current-setting frame and what the controller's FDO stream must carry are not in the datasheet. No Chinese UCS5603 datasheet found.
+
+  # ---------------------------------------------------------------------------
+  - part: UCS7604
+    entry: pixel-ics/ucs7604
+    maker: UCS / Lianxinke Microelectronics (imprint "UCS (Shenzhen) Microelectronics Co., Ltd. ... www.szucs.cn")
+    documents:
+      - id: ucs7604-ver1.1-en
+        url: https://www.led-stuebchen.de/download/UCS7604.pdf
+        title: 'Intelligent defective pixel resumable data transfer series: 4-channel 65536-level grayscale LED Driver IC UCS7604'
+        revision: VER1.1
+        date: '2023-06-02'
+        language: en
+        notes: 'Revision table p11: VER1.0 September 15, 2022 First Edition; VER1.1 June 2, 2023 Revision of contents. Better translation than VER1.0; draws the SOP10 pinout.'
+      - id: ucs7604-ver1.0-en
+        url: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf
+        title: UCS 76 04 Is the intelligent bad point continuous transmission series 4 channel ... (LEDYi copy)
+        revision: VER 1.0
+        date: '2022-09-15' # printed "2022-915"
+        language: en
+        notes: Same document as https://sunliteleds.com/wp-content/uploads/2023/11/UCS7604_IC_Specification_EN.pdf (which keeps the maker footer).
+      - id: advatek-ucs7604
+        url: https://www.advateklighting.com/pixel-protocols/ucs7604
+        title: Advatek pixel protocol page, UCS7604
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs7604
+        url: https://www.enttec.com/pixel-protocols/UCS7604
+        title: ENTTEC pixel protocol page, UCS7604
+        revision: null
+        date: null
+        language: en
+      - id: fastled-ucs7604
+        url: https://github.com/FastLED/FastLED/blob/master/src/fl/chipsets/encoders/ucs7604.h
+        title: FastLED UCS7604 encoder (third party)
+        revision: null
+        date: null
+        language: en
+      - id: teensy-ucs7604
+        url: https://github.com/clinder/Arduino-Teensy-UCS7604/blob/main/UCS7604/UCS7604.ino
+        title: Teensy 4.1 UCS7604 driver sketch (third party, pushed 2026-02-20)
+        revision: null
+        date: null
+        language: en
+      - id: fastled-issue-2088
+        url: https://github.com/FastLED/FastLED/issues/2088
+        title: UCS7604 impl (FastLED issue, logic-analyser captures)
+        revision: null
+        date: '2025-09-22'
+        language: en
+      - id: neopixelbus-841
+        url: https://github.com/Makuna/NeoPixelBus/discussions/841
+        title: UCS7604 and inconsistent applySettings data output (NeoPixelBus discussion)
+        revision: null
+        date: '2024-09-14'
+        language: en
+    line_coding: single-wire # inferred: data pins DIN/FDIN/DO, no clock pin; Advatek "Clock Type: Data-Only"
+    line_coding_source:
+      {
+        doc: ucs7604-ver1.1-en,
+        page: 2,
+        quote: '6 | FDIN | Auxiliary display data input ; 8 | DIN | Display data input ; 10 | DO | Display data cascade output',
+      }
+    idle: null
+    bit_order: null
+    rates:
+      - name: 800K
+        select: 'selectable; how (configuration data) is not described in the maker datasheet'
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: ucs7604-ver1.1-en
+        page: 4
+        quote: 'Data transmission frequency | Fd1 | 800 | KHz ; Fd2 | 1600 | KHz ; Transmission delay time | Tdl | - | 100 | - | ns | Cl＝15pF，Din →Dout'
+      - name: 1.6M
+        select: 'selectable; see 800K'
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: ucs7604-ver1.1-en
+        page: 1
+        quote: 'Data transmission frequency: 800K/S and 1.6M/S (optional)'
+    clock: null
+    frame:
+      bits_per_channel: '8 (expanded on chip to 16 with gamma 2.2), 12, 14 or 16, selectable'
+      channels: '4 outputs (R, G, B, W); field mode 1-4 sets how many values a chip takes'
+      wire_order: null
+      pixel_bits: null # the maker's capacity table implies 3 x (data bits) per tri-colour point: 800000/30/1111 = 24.0, /740 = 36.0, /634 = 42.1, /555 = 48.0
+      extra: 'configuration (speed, data bits, field mode, per-channel current) exists but its frame is not described by the maker; see third_party_claims'
+      start: null
+      end: null
+      latch: null
+      doc: ucs7604-ver1.1-en
+      page: 6
+      quote: 'Field Mode | 1 | Receive data from channel 1, which is corresponding to RGBW, and the rest of data is forwarded | 2 | Receive data from channel 2, which is corresponding to RG & BW, and the rest of data is forwarded | 3 | Receive data from channel 3, which is corresponding to R, G & B, and the rest of data is forwarded, W is closed | 4 | Receive data from channel 4, which is corresponding to R, G, B & W, and the rest of data is forwarded'
+      also:
+        - {
+            doc: ucs7604-ver1.1-en,
+            page: 7,
+            quote: 'Data bits | Grayscale | 8 | 65536-level (internal gamma 2.2 is calibrated to 16-bit) | 12 | 4096-level | 14 | 16384-level | 16 | 65536-level',
+          }
+        - {
+            doc: ucs7604-ver1.1-en,
+            page: 7,
+            quote: 'Theoretical max. number of points ... the tri-coloured lights in the table below are taken as examples | 800K(30HZ) | 800K(60HZ) | 1.6M(30HZ) | 1.6M(60HZ) | 8 | 1111 | 555 | 2222 | 1111 | 12 | 740 | 370 | 1480 | 740 | 14 | 634 | 317 | 1268 | 634 | 16 | 555 | 277 | 1110 | 555',
+          }
+        - {
+            doc: ucs7604-ver1.1-en,
+            page: 7,
+            quote: 'UCS7604 can set the RGBW output constant current value, 0-60mA, through the external REXT pin to the GND resistor RREXT | Current equation: IO = 256/RREXT',
+          }
+    forwarding:
+      text: Each chip takes as many values as its field mode says and forwards the rest; Tdl typ 100 ns.
+      doc: ucs7604-ver1.1-en
+      page: 6
+      quote: 'Receive data from channel 4, which is corresponding to R, G, B & W, and the rest of data is forwarded'
+    backup_line:
+      pins: 'DIN (pin 8) and FDIN (pin 6, "Auxiliary display data input")'
+      behaviour: "Same scheme as UCS5603: both inputs decoded in parallel, real-time switch; chip N+1's FDIN is fed from chip N's input line on the cable side of chip N's RDI; controller FDO to chip 1's FDIN optional."
+      doc: ucs7604-ver1.1-en
+      page: 4
+      quote: '1. UCS7604 adopts defective pixel resumable data transfer function for dual channel input. When there is a fault point, the signal can skip the fault point and continue the transmission. In the case of a faulty point being skipped and the transmission is continued, the next level of IC will automatically recognize the source of the signal and correct the data accordingly, so the screen will not be misaligned.'
+      also:
+        - {
+            doc: ucs7604-ver1.1-en,
+            page: 9,
+            quote: 'Note 1: In the application, the connection from the controller FDO to the UCS7604 can be left unconnected. At this point, the first point does not have full breakpoint resumable data transfer function. … Note 3: It shall be noted that the wire should be connected from (the end of the RDI resistor connected to the previous RDO resistor) to the FDIN resistor RFDI of the next IC rather than from (the end of the RDI resistor connected to the DIN pin) to the FDIN resistor RFDI of the next IC',
+          }
+        - {
+            doc: ucs7604-ver1.1-en,
+            page: 6,
+            quote: 'If the test controller has only has DO port but does not have FDO port, the DO port of controller can only be connected to the DIN of the first light. Do not connect the DO port to both DIN and FDIN of the first light, otherwise it is equivalent to artificially short-circuiting DIN and FDIN, and the first light will be "black".',
+          }
+    compatibility_claims: []
+    controller_claims:
+      - {
+          source: advatek-ucs7604,
+          claim: 'selection between RGB/RGBW is made available through digital configuration ... | Color Resolution | 16 Bits | Current Control | Per Color: 4 Bits | Data Transfer Rate | 800 or 1600 kbps | PWM Rate | 16,000Hz | Physical Package | SOP10',
+        }
+      - {
+          source: enttec-ucs7604,
+          claim: '16-bit per-channel colour depth, RGB or RGBW output, and a redundant data path | Redundant Data Line | Yes',
+        }
+    third_party_claims: # NOT from the maker; recorded because the maker datasheets omit the frame
+      - source: teensy-ucs7604
+        claim: 'Bit timing "from the datasheet": 800k T0H 0.40 / T0L 0.85 / T1H 0.80 / T1L 0.45 µs; 1.6M T0H 0.20 / T0L 0.45 / T1H 0.40 / T1L 0.25 µs. Reset "spec says ≥250 µs". Configuration ("work code"): 8-byte verification code FF FF FF FF FF FF 00 03, then a low "W-code" gap ("spec says 10–50 µs"), then S byte ([7]=B1, [4]=speed, [3]=B0, [1:0]=field ZD), four current bytes C0-C3 (R, G, B, W, low nibble = n/16 of the REXT current), C4 = C5 = 0x00. Pixel data 16-bit RGBW MSB-first in its example.'
+        quote: 'const uint8_t  VERIFY_CODE[8]              = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x00, 0x03 }; … /* S byte per spec: [7]=B1, [6:5]=00, [4]=S (speed), [3]=B0, [2]=0, [1:0]=ZD */ … /* Reset (latch) duration in microseconds (spec says ≥250 µs) */ … /* W-code low delay in microseconds (spec says 10–50 µs) */'
+      - source: fastled-ucs7604
+        claim: '15-byte preamble: 6 x 0xFF, 0x00 0x03, mode byte (0x03 = 8-bit 800 kHz, 0x8B = 16-bit 800 kHz, 0x9B = 16-bit 1600 kHz), four 4-bit currents (wire order RGBW), 2 reserved 0x00; FastLED sends it without the gap.'
+        quote: '/// @note KNOWN LIMITATION: The UCS7604 protocol spec requires a ~20us "W-code low" /// delay between the 8-byte verification code and the 7-byte configuration block.'
+      - source: fastled-issue-2088
+        claim: 'Capture of a commercial controller: two preamble chunks of 8 and 7 bytes, separated from each other and from the colour data by ~260 µs.'
+        quote: 'There is a two-chunk preamble that sets things like max current per channel, speed of data section (800k vs. 1.6M), etc. First chunk is 8 bytes, second is 7, they are separated from each other and the main color data by ~260uS.'
+      - source: neopixelbus-841
+        claim: 'Captures of two controllers: header FFFF_FFFF_FFFF_0003 followed by an 8-16 µs space; maintainer: "The only spec on found really doesn''t describe the header in detail".'
+        quote: 'Both controllers have a 8-16us space after the header, that MAY not be needed.'
+    disagreements:
+      - 'VER1.0 (LEDYi) heads the pin section "SOP 8" and draws no pins, while its pin table has 10 pins and the package page is SOP 10; VER1.1 p2 draws the SOP10 pinout (DO 10, VDD 9, DIN 8, REXT 7, FDIN 6).'
+      - 'Third-party gap timings disagree: ~20 µs (FastLED) / "10–50 µs" (Teensy sketch, citing a spec) / 8-16 µs (NeoPixelBus captures) / ~260 µs (FastLED issue capture). None of these documents is the maker''s.'
+    open:
+      - 'No maker document read gives the bit timing, reset, configuration frame or channel order. The Teensy sketch quotes a "spec" with these values, so a fuller maker document probably exists; not found (no Chinese UCS7604 datasheet online).'
+
+  # ---------------------------------------------------------------------------
+  - part: UCS7804
+    entry: pixel-ics/ucs7804
+    maker: UCS / Lianxinke Microelectronics (per Advatek and ENTTEC)
+    documents:
+      - id: advatek-ucs7804
+        url: https://www.advateklighting.com/pixel-protocols/ucs7804
+        title: Advatek pixel protocol page, UCS7804
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs7804
+        url: https://www.enttec.com/pixel-protocols/UCS7804
+        title: ENTTEC pixel protocol page, UCS7804
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire # controller makers only
+    line_coding_source: { doc: advatek-ucs7804, page: null, quote: 'Clock Type | Data-Only' }
+    idle: null
+    bit_order: null
+    rates:
+      - name: 660kbps
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: advatek-ucs7804
+        page: null
+        quote: 'Data Transfer Rate | 660kbps'
+    clock: null
+    frame:
+      bits_per_channel: 8 # Advatek: 8-bit data, gamma-expanded on chip to 16 bits
+      channels: 'RGB or RGBW, chosen by "digital configuration"'
+      wire_order: null
+      pixel_bits: null
+      extra: '6-bit current per colour and RGB/RGBW selection (Advatek); the configuration frame is not published'
+      start: null
+      end: null
+      latch: null
+      doc: advatek-ucs7804
+      page: null
+      quote: 'UCS7804 allows connection of either one RGB or one RGBW LED per chip, and selection between RGB/RGBW is made available through digital configuration. It receives 8-bit data, but upscales this to a gamma-corrected 16-bit curve ... Use the 6-bit current control per color'
+    forwarding: null
+    backup_line: null # ENTTEC "Redundant Data Line | No"
+    compatibility_claims: []
+    controller_claims:
+      - {
+          source: advatek-ucs7804,
+          claim: 'Built-in Gamma Correction | Enhanced to 16 Bits (+8 Bits) | Current Control | Per Color: 6 Bits | PWM Rate | 16,000Hz | Physical Package | SOP8',
+        }
+      - {
+          source: enttec-ucs7804,
+          claim: 'Manufacturer: Shenzhen Ucs | Redundant Data Line | No | PWM Rate | 16,000Hz',
+        }
+    disagreements: []
+    open:
+      - No maker datasheet found anywhere searched; not in the maker's current product tables. Everything here is a controller maker's statement.
+
+  # ---------------------------------------------------------------------------
+  - part: UCS8903
+    entry: pixel-ics/ucs8903
+    maker: UCS / Lianxinke Microelectronics (imprint 联芯科（深圳）微电子 www.szucs.cn)
+    documents:
+      - id: ucs8903-ver1.1-cn
+        url: https://datasheet4u.com/pdf/838056/UCS8903.pdf
+        title: 3 通道高阶灰度LED 驱动控制电路 UCS8903
+        revision: VER1.1
+        date: '2012-10-25'
+        language: zh
+        notes: 'Revision table p14: VER1.0 2012-6-25 第一版 (first edition); VER1.1 2012-10-25 内容修改 (content revised). Maker logo and footer on every page.'
+      - id: ucs8903-en
+        url: https://media.ledyi.com/ucs8903-datasheet_06b0ecc6a47dd8e088d100a5976cef7e24ad8a3fee463edb061bb535cc57b56e.pdf
+        title: high gray scale display 3-channel LED constant current driver UCS8903 (LEDYi copy)
+        revision: null # revision table p8: VER1.0 2010-2-20, VER2.0 2011-9-11
+        date: null
+        language: en
+        notes: Redirect target of https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS8903-datasheet.pdf. No timing section.
+      - id: szucs-65536
+        url: http://szucs.cn/page140
+        title: 级联单线驱动 IC -65536 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: szucs-dmx-65536
+        url: http://szucs.cn/page151
+        title: DMX512 差分并联 IC -65536 级 / 转发 IC (maker product tables)
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs8903
+        url: https://www.advateklighting.com/pixel-protocols/ucs8903
+        title: Advatek pixel protocol page, UCS8903
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs8903
+        url: https://www.enttec.com/pixel-protocols/UCS8903
+        title: ENTTEC pixel protocol page, UCS8903
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      { doc: ucs8903-ver1.1-cn, page: 4, quote: '芯片采用单线通讯方式，采用归零码的方式发送信号。' }
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800K, chip output (芯片内部再生信号标准)
+        table: chip output
+        select: null
+        T0H: { ns: 400, tol_ns: 40, min_ns: null, max_ns: null, printed: '0.4µs ±40ns' }
+        T1H: { ns: 800, tol_ns: 80, min_ns: null, max_ns: null, printed: '0.8µs ±80ns' }
+        T0L: { ns: 800, tol_ns: null, min_ns: null, max_ns: null, printed: '0.8µs' }
+        T1L: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4µs' }
+        period: null
+        reset: { min_ns: 1000000, printed: 'RESET 码 》1ms' }
+        decode:
+          zero_if_high_below_ns: 550
+          one_if_high_above_ns: 680
+          ignored_leading_high_ns: 30
+          doc: ucs8903-ver1.1-cn
+          page: 6
+          quote: '注：1. IC 主要根据高电平时间判断"0"码和"1"码,IC 收到高电平的前30ns 不计（特为抗干扰设计）。高电平时间<0.55us,IC 判断为"0"码,高电平时间>0.68uS,判断为“1”码.'
+        reset_rule:
+          max_gap_in_frame_ns: 100000
+          doc: ucs8903-ver1.1-cn
+          page: 6
+          quote: '2.低电平复位时间最小为0.1ms，最高为1ms,IC 在收到大于0.1ms 小于1ms 的低电平信号时都有可能认为是RESET 码，所以一帧数据传输过程中不要中断超过0.1ms，否则可能会被IC 认为是reset 码。但在0.1ms 低电平时间之内，控制器可以进行其他操作。同时控制器发reset 码时不要低于1ms，以保证所有IC 都能确认为reset 码'
+          translation: "2. The low-level reset time is at least 0.1 ms and at most 1 ms: a low between 0.1 ms and 1 ms may be taken as RESET, so never pause more than 0.1 ms inside a frame. The controller's reset must be at least 1 ms."
+        doc: ucs8903-ver1.1-cn
+        page: 6
+        quote: '芯片内部再生信号标准 | T0H | 0 码，高电平时间 | 0.4µs | ±40ns | T1H | 1 码，高电平时间 | 0.8µs | ±80ns | T0L | 0 码，低电平时间 | 0.8µs | T1L | 1 码，低电平时间 | 0.4µs | Treset | RESET 码 | 》1ms'
+      - name: 800K, controller send (控制器发码建议值)
+        table: controller send
+        select: null
+        T0H: { ns: 400, tol_ns: null, min_ns: null, max_ns: null, printed: '0.4us' }
+        T1H: { ns: 850, tol_ns: null, min_ns: null, max_ns: null, printed: '0.85s (sic)' }
+        T0L: { ns: null, tol_ns: null, min_ns: 850, max_ns: null, printed: '》0.85µs' }
+        T1L: { ns: null, tol_ns: null, min_ns: 400, max_ns: null, printed: '》0.4us' }
+        period: { ns: null, min_ns: 1250, printed: '》1.25us' }
+        reset: { min_ns: 1000000, printed: '》1ms' }
+        doc: ucs8903-ver1.1-cn
+        page: 6
+        quote: '控制器发码建议值 | T0H | 0 码，高电平时间 | 0.4us | T1H | 1 码，高电平时间 | 0.85s | T0L | 0 码，低电平时间 | 》0.85µs | T1L | 1 码，低电平时间 | 》0.4us | T | “0”码或“1”码周期 | 》1.25us | Treset | Reset 码，低电平时间 | 》1ms'
+    clock: null
+    frame:
+      bits_per_channel: 16
+      channels: 3
+      wire_order: 'R15…R0 G15…G0 B15…B0'
+      pixel_bits: 48
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥1 ms (table); 0.1-1 ms may or may not latch; byte gaps must stay below the reset time'
+      doc: ucs8903-ver1.1-cn
+      page: 5
+      quote: '3） 48bit 数据结构 | R15 … R0 | G15 … G0 | B15 … B0 | 注：左边高位先发，按照RGB 的顺序发送数据'
+      translation: '48-bit data structure. Note: leftmost (high) bit first, RGB order.'
+      byte_gaps:
+        doc: ucs8903-ver1.1-cn
+        page: 6
+        quote: '48bit数据发送时高位先发，按照RGB的顺序发送数据。48位可拆分成6个8位数据来发送，注意字节与字节之间的低电平时间不要超过RESET信号时间，否则芯片会复位，复位后又重新接收数据，则无法实现数据传输。'
+        translation: 'Send the 48 bits MSB first in RGB order. They may be split into six 8-bit bytes, but the low time between bytes must not exceed the RESET time, or the chip resets and starts receiving again, and the transfer fails.'
+    forwarding:
+      text: Takes 48 bits, DO low until then, then forwards; Tflz max 300 ns.
+      doc: ucs8903-ver1.1-cn
+      page: 4
+      quote: '接受够48bit 后，DO 端口开始转发数据，供下一个芯片提供输入数据。在转发之前，DO 口一直拉低。此时芯片将不接受新的数据'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'DMX512 forwarding IC UCS512EH, 转发支持型号 (supported forwarding models): "单线65536级灰度：UCS9812S,UCS8903B,UCS8904B,UCS8904BL"'
+        doc: szucs-dmx-65536
+        page: null
+    maker_table:
+      doc: szucs-65536
+      quote: 'UCS8903B | 3 | 4 | 恒流 | ± 3% | 18 | 60 | 1 | 30 | 800K | 65536 | 工业级 | SOP8'
+      translation: 'UCS8903B: 3 ch, 4 kHz port refresh, constant current ±3%, 18 mA default, 60 mA max, 1 current level per channel, 30 V, 800K, 65536 levels.'
+    controller_claims:
+      - {
+          source: advatek-ucs8903,
+          url: 'https://www.advateklighting.com/pixel-protocols/ucs8903',
+          claim: 'UCS8903 is very similar to UCS2903 but is built on a 16-bit color data design | Data Transfer Rate | 800kbps | PWM Rate | 1000Hz',
+        }
+      - {
+          source: enttec-ucs8903,
+          url: 'https://www.enttec.com/pixel-protocols/UCS8903',
+          claim: '16-bit per-channel PWM colour depth over a self-clocking WS2812-style data line | Redundant Data Line | No',
+        }
+      - {
+          source: falcon-pixeltypes,
+          url: 'https://pixelcontroller.com/store/PixelTypes.html',
+          claim: 'own types "UCS8903" (takes 3 x 8-bit input, expands to 16) and "UCS8903 (16)"; not a WS2811 alternative',
+        }
+    disagreements:
+      - 'Reset, three values in one datasheet: table p6 "》1ms"; functional description p4 "当接受到1.5ms 以上低电平RESET 码后" (after a low RESET of more than 1.5 ms); data-transmission figure p5 labels the reset gap "≥24µs" (figure reused from the 24-bit parts).'
+      - 'Controller T1H printed "0.85s" (unit typo for 0.85 µs).'
+      - 'English copy (ucs8903-en): no timing section; pin 7 "NC" and "preset 17 mA/channel"; Chinese VER1.1: pin 7 "SET 悬空时RGB 输出端口为18mA，接VDD 为32mA" (floating 18 mA, to VDD 32 mA) and "预置18mA/通道".'
+      - 'English copy: "Images of not less than 512 points ... 30 frames per second"; Chinese: "30 帧（550 点），60 帧（270 点）".'
+      - 'Revision history: English VER1.0 2010-2-20 / VER2.0 2011-9-11 vs Chinese VER1.0 2012-6-25 / VER1.1 2012-10-25.'
+    open: []
+
+  # ---------------------------------------------------------------------------
+  - part: UCS8904 (UCS8904A / UCS8904B)
+    entry: pixel-ics/ucs8904
+    maker: UCS / Lianxinke Microelectronics
+    documents:
+      - id: ucs8904a-en
+        url: https://media.ledyi.com/ucs8904-datasheet_e73207d68ad5f39962d1c11e13dfe72a26f77df7b58a07abfc5ee963910941c7.pdf
+        title: high gray scale display 4-channel LED constant current driver UCS8904A (LEDYi copy)
+        revision: null # revision table: VER1.0 2010-2-20, VER2.0 2011-9-11
+        date: null
+        language: en
+      - id: ucs8904b-en
+        url: https://media.ledyi.com/ucs8904b-datasheet_dbf76048a2ea95153b1887b7e3dab392f87445ad47ff9560bcd01cb8d66a062f.pdf
+        title: high gray scale display 4-channel LED constant current driver UCS8904B (LEDYi copy)
+        revision: ver2.2
+        date: null
+        language: en
+        notes: Redirect target of https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS8904B-datasheet.pdf. Same text as UCS8904A except port scan 4 KHz.
+      - id: ucs8904b-cn
+        url: https://datasheet4u.com/pdf/1513136/UCS8904B.pdf
+        title: 4 通道高阶灰度LED 驱动控制电路 UCS8904B
+        revision: VER1.1
+        date: null # revision table p10: VER1.0 2018-3-25 第一版; VER1.1 2012-8-14 内容修改 (dates out of order as printed)
+        language: zh
+        notes: Edited with 迅捷PDF编辑器 (watermark text); jumps from switching characteristics to the current curve, so no functional description or timing.
+      - id: szucs-65536
+        url: http://szucs.cn/page140
+        title: 级联单线驱动 IC -65536 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: szucs-dmx-65536
+        url: http://szucs.cn/page151
+        title: DMX512 差分并联转发 IC -65536 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs8904
+        url: https://www.advateklighting.com/pixel-protocols/ucs8904
+        title: Advatek pixel protocol page, UCS8904
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+      - id: neopixelbus-841
+        url: https://github.com/Makuna/NeoPixelBus/discussions/841
+        title: UCS7604 and inconsistent applySettings data output (NeoPixelBus discussion; mentions how WLED drives UCS8904)
+        revision: null
+        date: '2024-09-14'
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs8904b-en,
+        page: 1,
+        quote: '1. single line data tronsmission（return to zero code）',
+      }
+    idle: null # no functional description in any copy read
+    bit_order: msb-first
+    rates:
+      - name: 800 kbps
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: ucs8904b-en
+        page: 4
+        quote: 'Data transfer rate | FMAX | 800 | - | - | kbps | 50 % duty cycle' # read from the rendered page; the text layer splits "80 0"
+        also:
+          - {
+              doc: ucs8904b-cn,
+              page: 1,
+              quote: '数据传输速率800K/S，可实现画面刷新帧频60 帧（200 点），30 帧（400 点）',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 16
+      channels: 4
+      wire_order: 'R15…R0 G15…G0 B15…B0 W15…W0'
+      pixel_bits: 64
+      extra: null
+      start: null
+      end: null
+      latch: null # not printed in any copy read
+      doc: ucs8904b-en
+      page: 4
+      quote: '64-bit data format | R15 … R0 | G15 … G0 | B15 … B0 | W15 … W0 | Note: The data is sent in the sequence of RGBW, and the MSB is sent first.'
+      also:
+        - {
+            doc: ucs8904a-en,
+            page: 4,
+            quote: '64-bit data format … Note: The data is sent in the sequence of RGBW, and the MSB is sent first.',
+          }
+    forwarding: null
+    backup_line: null
+    compatibility_claims:
+      - claim: 'UCS512EH forwards "单线65536级灰度：UCS9812S,UCS8903B,UCS8904B,UCS8904BL"'
+        doc: szucs-dmx-65536
+        page: null
+    maker_table:
+      doc: szucs-65536
+      quote: 'UCS8904B | 4 | 4 | 恒流 | ± 3% | 18 | 18 | 1 | 30 | 800K | 65536 | 工业级 | SOP8 ; UCS8904BL | 4 | 4 | 恒流 | ± 3% | 18 | 60 | 1 | 30 | 800K | 65536 | 工业级 | SOP8'
+    controller_claims:
+      - {
+          source: advatek-ucs8904,
+          url: 'https://www.advateklighting.com/pixel-protocols/ucs8904',
+          claim: 'UCS8904 offers all the same features as its RGB version, UCS8903, but is dedicated to RGBW | PWM Rate | UCS8904A: 1kHz UCS8904B: 4kHz | Data Transfer Rate | 800kbps',
+        }
+      - {
+          source: falcon-pixeltypes,
+          url: 'https://pixelcontroller.com/store/PixelTypes.html',
+          claim: 'own types "UCS8904" (4 x 8-bit input expanded to 16) and "UCS8904 (16)"',
+        }
+      - {
+          source: neopixelbus-841,
+          url: 'https://github.com/Makuna/NeoPixelBus/discussions/841',
+          claim: '"WLED drives the "16b" RGBW UCS8904, with 8b color values shifted up to MSB" (WLED/NeoPixelBus send it with the WS2812 RMT method)',
+        }
+    disagreements:
+      - 'Preset current: English "17 mA/channel"; Chinese UCS8904B "预置18mA/通道"; maker table 18 mA.'
+      - 'Output withstand: English ">24 V"; Chinese UCS8904B features "输出端口耐压28V", limit table 30 V.'
+      - 'Chinese revision table dates out of order: VER1.0 2018-3-25, VER1.1 2012-8-14.'
+    open:
+      - 'Bit timing and reset not printed in any of the three UCS8904 copies read. The sibling UCS8903 needs a ≥1 ms reset; whether the UCS8904 does is not in these documents.'
+
+  # ---------------------------------------------------------------------------
+  - part: UCS9812
+    entry: pixel-ics/ucs9812
+    maker: UCS / Lianxinke Microelectronics
+    documents:
+      - id: ucs9812-ver1.0-en
+        url: https://media.ledyi.com/ucs9812-datasheet_3d133995e06893238670090b158d1da99ba5b2bbc1f6b4038b9a9c85ed2b753b.pdf
+        title: high gray scale display 12-channel LED display driver UCS9812 (LEDYi copy)
+        revision: VER1.0
+        date: '2012-02-15'
+        language: en
+      - id: szucs-65536
+        url: http://szucs.cn/page140
+        title: 级联单线驱动 IC -65536 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: szucs-dmx-65536
+        url: http://szucs.cn/page151
+        title: DMX512 差分并联转发 IC -65536 级 (maker product table)
+        revision: null
+        date: null
+        language: zh
+      - id: advatek-ucs9812
+        url: https://www.advateklighting.com/pixel-protocols/ucs9812
+        title: Advatek pixel protocol page, UCS9812
+        revision: null
+        date: null
+        language: en
+      - id: enttec-ucs9812
+        url: https://www.enttec.com/pixel-protocols/UCS9812
+        title: ENTTEC pixel protocol page, UCS9812
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types table
+        revision: null
+        date: null
+        language: en
+    line_coding: single-wire
+    line_coding_source:
+      {
+        doc: ucs9812-ver1.0-en,
+        page: 1,
+        quote: '1. single line data tronsmission（return to zero code）',
+      }
+    idle: null
+    bit_order: msb-first
+    rates:
+      - name: 1100 kbps
+        select: null
+        T0H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1H: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T0L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        T1L: { ns: null, tol_ns: null, min_ns: null, max_ns: null, printed: null }
+        period: null
+        reset: null
+        doc: ucs9812-ver1.0-en
+        page: 4
+        quote: 'Data transfer rate | FMAX | 1100 | - | - | kbps | 50% duty cycle'
+        also:
+          - {
+              doc: ucs9812-ver1.0-en,
+              page: 1,
+              quote: '4. Data transfer rate of 1100k/s, Images of not less than 600 points can be realized when the refresh rate of 30 frames per second, and not less than 300 points can be realized when the refresh rate of 60 frames per second',
+            }
+          - {
+              doc: szucs-65536,
+              page: null,
+              quote: 'UCS9812 | 12 | 5 | 恒流 | ± 3% | 无 | 20.4 | 16 | 30 | 1100K | 65536 | 工业级 | SOP16',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 20 # 16 gray + 4 current
+      channels: 12
+      wire_order: 'R1 G1 B1 first (each BIT19…BIT0 = 16-bit gray BIT19-4, then 4-bit current BIT3-0), then groups 2-4'
+      pixel_bits: 240 # per chip
+      extra: '4-bit constant-current code in every channel: 2.4 mA (0000) to 20.4 mA (1111), 1.2 mA per step'
+      start: null
+      end: null
+      latch: null
+      doc: ucs9812-ver1.0-en
+      page: 4
+      quote: '240-bit data format（Below is the first 60 bits data R1, G1, B1）| R19 … R0 | G19 … G0 | B19 … B0 | Note: The data is sent in the sequence of RGB, and the MSB is sent first. | UCS9812 The following is per channel 20 data structure | BIT19-BIT4 Gray level data, 16 bit, correspondence 65536 grey level | BIT3-BIT0 Constant current value data，4 bit'
+      also:
+        - {
+            doc: ucs9812-ver1.0-en,
+            page: 1,
+            quote: '6. Each channel contains 16 bit gray-scale data and 4 bit current data .Output port current can be set from 2.4mA to 20.4mA by change the 4 bit data',
+          }
+    forwarding: null # not described
+    backup_line: null
+    compatibility_claims:
+      - claim: 'UCS512EH forwards "单线65536级灰度：UCS9812S,UCS8903B,UCS8904B,UCS8904BL"'
+        doc: szucs-dmx-65536
+        page: null
+    maker_table:
+      doc: szucs-65536
+      quote: 'UCS9812 | 12 | 5 | 恒流 | ± 3% | 无 | 20.4 | 16 | 30 | 1100K | 65536 | 工业级 | SOP16'
+      translation: '12 ch, 5 kHz port refresh, constant current ±3%, no default current, 20.4 mA max, 16 current levels per channel, 30 V, 1100K, 65536 levels, SOP16.'
+    controller_claims:
+      - {
+          source: advatek-ucs9812,
+          url: 'https://www.advateklighting.com/pixel-protocols/ucs9812',
+          claim: 'Current Control | Per Color: 4 Bits (overview text: "Use the 4-bit global current control") | Data Transfer Rate | 1100kbps | PWM Rate | 1024Hz',
+        }
+      - {
+          source: enttec-ucs9812,
+          url: 'https://www.enttec.com/pixel-protocols/UCS9812',
+          claim: 'single-wire, self-clocking RGB pixel IC offering 16-bit per-channel colour depth | PWM Rate | 1024Hz',
+        }
+      - {
+          source: falcon-pixeltypes,
+          url: 'https://pixelcontroller.com/store/PixelTypes.html',
+          claim: 'UCS9812 listed as an alternative of type WS2811 (3 channels x 8 bits)',
+        }
+    disagreements:
+      - 'Falcon files UCS9812 under its WS2811 type; the datasheet frame is 20 bits per channel (240 per chip) at 1100 kbps.'
+      - 'PWM: datasheet "port scanning frequency of 5 KHz/s" and maker table 5 kHz vs Advatek and ENTTEC 1024 Hz.'
+      - 'Current: feature 8 "adopt the preset 17 mA/channel constant current mode" vs feature 6 and p4 (2.4-20.4 mA set by 4 data bits); p4 "Numerical range from 2.4mA To 2.4mA" (typo; the table ends at 20.4 mA).'
+      - 'Advatek''s own page says both "Per Color: 4 Bits" and "4-bit global current control".'
+    open:
+      - Bit timing and reset not printed.

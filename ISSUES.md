@@ -381,3 +381,34 @@ language but left `pricing` alone: prices are stream 6's. What's loose now
 
 Why it matters: "free to try?" and "subscription or perpetual?" are the
 questions people filter software on, and the sheet couldn't answer them.
+
+## Pixel protocols (stream 8): nav entry, schema proposal, hand-offs
+
+New page `/protocols` (plan: [plans/pixel-protocols.md](plans/pixel-protocols.md)):
+animated explainer of single-wire, clocked, backup-line and DMX512 signals,
+every datasheet's timing on one chart, and "Who speaks what": every pixel and
+pixel IC filed under one of 37 on-the-wire protocols, from datasheet research
+in [plans/pixel-protocols/](plans/pixel-protocols/).
+
+- **Stream 7 (FYI):** the header has a "Protocols" link next to "Designer",
+  hidden below 520 px (one rule in `app/styles/search.css`; the footer has
+  "Pixel protocols" for phones), plus a search-palette page and a sitemap
+  line. `/protocols` is in the a11y and phone-width e2e lists. A home-page
+  "start with a question" link ("Is my pixel the same as …?") would fit, if
+  you want one.
+- **Stream 2 (schema, waiting on Cameron):** proposed `data.protocol` (one id
+  or a list) replacing the free-text `data.type` on pixels and pixel ICs,
+  validated against new reference files `database/protocols/<id>.yaml`
+  (schema `protocol.json`), plus `data.protocol_basis: datasheet | claim`.
+  Details and the full mapping: "Data-model proposal" in the plan. Nothing is
+  migrated until Cameron approves; please don't reshape `data.type` meanwhile.
+- **Stream 2 (corrections):** the research found about 80 errors in pixel and pixel
+  IC entries (channel orders, reset times, merged part revisions, wrong
+  makers, PWM rates), each with a quote:
+  [plans/pixel-protocols/corrections.md](plans/pixel-protocols/corrections.md).
+  The protocol fields (`data.*`, `color.order`) are this stream's to apply
+  with the migration; anything else there is yours if you want it first.
+- **Stream 3 (FYI):** `/protocols` links to `/system-overview` and
+  `/designer`. After the migration, `compat.ts` can match on protocol ids
+  instead of parsing "WS2811/12" (`familyTokens`); that change will be
+  coordinated here first.

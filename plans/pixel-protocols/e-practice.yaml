@@ -1,0 +1,2474 @@
+# Workstream 8 (pixel protocols), research batch e-practice: what real
+# transmitters send for each named "pixel type", which names they treat as the
+# same thing, and what measurements say about real tolerances.
+# Summary for the parent: e-practice.md (same folder).
+#
+# Conventions
+# - Times are nanoseconds unless the key ends in _us (microseconds).
+# - T0H / T1H = high time of a 0 / 1 bit; period = whole bit cell. For an
+#   inverted (idle-high) protocol, T0H / T1H are the widths of the ACTIVE
+#   (low) pulse.
+# - Code is quoted from a pinned commit; every permalink is a GitHub blob URL
+#   at that commit with #L line anchors. Quotes are verbatim (a subset of the
+#   lines in the anchored range).
+# - derived: true means I computed the ns value from quoted constants (cycle
+#   counts, clock dividers, PIO/I2S cadence); the formula is in `derivation`.
+#   Every other number is printed in the source.
+# - Where FastLED gives T1/T2/T3 (its three-phase model), T0H = T1,
+#   T1H = T1 + T2, period = T1 + T2 + T3 (the model is quoted under
+#   libraries.fastled.model).
+batch: e-practice
+researched: '2026-11-20'
+
+# ---------------------------------------------------------------------------
+# 1. Libraries and controller firmware: what each sends per chip name
+# ---------------------------------------------------------------------------
+libraries:
+  # -------------------------------------------------------------------------
+  fastled:
+    name: FastLED
+    repo: https://github.com/FastLED/FastLED
+    version: 3.10.10 (tag; GitHub release published 2026-11-20)
+    commit: 5e831b8203bc9237394f7f5b01b1a2ca40740e81
+    commit_date: '2026-11-20' # 2026-11-20T03:12:24Z
+    model:
+      text: >-
+        One template (ClocklessControllerImpl) for every single-wire chip, fed a
+        per-chip T1/T2/T3 in ns. The latch gap depends on the platform: the
+        classic single-pin controllers wait WAIT_TIME (template default 280 µs;
+        a chip changes it only through the WAIT_TIME argument), while the
+        ESP32 channel drivers take the per-chip RESET field (makeTimingConfig
+        -> reset_us) and the Teensy 3.x / SAM block controllers set
+        WAIT_TIME = TIMING::RESET. So a chip whose struct says RESET = 0 or 80
+        gets 280 µs on one platform and its struct value on another. How the
+        ESP32 drivers treat RESET = 0 was not traced. FLIP (inverted line)
+        exists but per the comment on TM1829 is honoured only by the nRF52
+        backend.
+      permalink:
+        - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L7-L11
+        - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/chipsets.h#L385-L393
+        - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/clockless_controller_impl.h#L28-L29
+        - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/chipset_timing_config.h#L62-L71
+        - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/platforms/arm/k20/clockless_block_arm_k20.h#L55
+      quote: |-
+        ///   At T=0        : the line is raised hi to start a bit
+        ///   At T=T1       : the line is dropped low to transmit a zero bit (start of low time)
+        ///   At T=T1+T2    : the line is dropped low to transmit a one bit (start of low time)
+        ///   At T=T1+T2+T3 : the cycle is concluded (next bit can be sent)
+        ---
+        //  duration = max(T0H + T0L, T1H + T1L)  # Maximum cycle time
+        //  T1 = T0H                               # High time for '0' bit
+        //  T2 = T1H - T0H                         # Additional time for '1' bit
+        //  T3 = duration - T1H                    # Tail time after '1' bit
+        ---
+        template <int DATA_PIN, typename TIMING, EOrder RGB_ORDER = RGB, int XTRA0 = 0, bool FLIP = false, int WAIT_TIME = 280>
+        using ClocklessControllerImpl = ClocklessController<DATA_PIN, TIMING, RGB_ORDER, XTRA0, FLIP, WAIT_TIME>;
+        ---
+                CHIPSET::RESET,   // reset_us
+        ---
+        		WAIT_TIME = TIMING::RESET
+      notes: >-
+        reset_us below is the struct RESET field (what the ESP32 channel
+        drivers and Teensy/SAM block controllers send); the classic
+        controllers wait WAIT_TIME instead (280 unless the chip passes its
+        own). Platform exceptions in the WAIT_TIME defaults: nrf51 uses 75, a
+        few LPC channel drivers and one SAM variant use 0 (grep of
+        `WAIT_TIME = ` in src/platforms at this commit).
+    settings:
+      - names: [WS2812, WS2812B, WS2852, NEOPIXEL]
+        timing: TIMING_WS2812_800KHZ (via WS2812Controller800Khz)
+        T0H: 250
+        T1H: 875
+        period: 1250
+        reset_us: 280 # struct RESET and the default WAIT_TIME agree
+        idle: low
+        special: Overridable at compile time with FASTLED_WS2812_T1/T2/T3.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L109-L134
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L337-L339
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L443-L451
+        quote: |-
+          #define FASTLED_WS2812_T1 250
+          #define FASTLED_WS2812_T2 625
+          #define FASTLED_WS2812_T3 375
+          /// WS2812 RGB controller @ 800 kHz (most common, overclockable)
+          /// Four-phase: TH0=250ns, TH1=875ns, TL0=1000ns, TL1=375ns
+                  RESET = 280
+          ---
+          template<fl::u8 DATA_PIN> class NEOPIXEL : public WS2812Controller800Khz<DATA_PIN, GRB> {};
+          class WS2852 : public WS2812Controller800Khz<DATA_PIN, RGB_ORDER> {};
+          class WS2812B : public WS2812Controller800Khz<DATA_PIN, RGB_ORDER> {};
+      - names: [OSTW2020C1E]
+        timing: TIMING_WS2812_800KHZ with WAIT_TIME 300
+        T0H: 250
+        T1H: 875
+        period: 1250
+        reset_us: 300
+        idle: low
+        special: Same pulses as WS2812; only the inter-frame wait differs.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/chipsets.h#L509-L518
+        quote: |-
+          /// OptoSupply OSTW2020C1E controller @ 800 kHz.
+          /// @details Uses the WS2812 pulse timing verified against the manufacturer's
+          /// VER A.0 datasheet, with a 300us inter-frame wait to satisfy its >280us
+          /// reset requirement.
+                                                   RGB_ORDER, 0, false, 300> {};
+      - names: [WS2812BV5, WS2812BMiniV3]
+        timing: TIMING_WS2812B_MINI_V3 (TIMING_WS2812B_V5 is an alias)
+        T0H: 225
+        T1H: 580
+        period: 1225
+        reset_us: 280
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L139-L172
+        quote: |-
+          #define FASTLED_WS2812B_V5_T1 225
+          #define FASTLED_WS2812B_V5_T2 355
+          #define FASTLED_WS2812B_V5_T3 645
+          /// WS2812B-Mini-V3 / WS2812B-V5 RGB controller @ 800 kHz
+          /// Four-phase: TH0=225ns, TH1=580ns, TL0=1000ns, TL1=645ns
+          /// These newer variants share identical timing specifications with tighter tolerances
+                  RESET = 280   // WS2812B-V5 reset/latch time per datasheet
+          using TIMING_WS2812B_V5 = TIMING_WS2812B_MINI_V3;
+      - names: [WS2811, APA104]
+        timing: TIMING_WS2811_800KHZ_LEGACY (via WS2811Controller800Khz)
+        T0H: 250
+        T1H: 600
+        period: 1250
+        reset_us: 280
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L513-L526
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L519-L522
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L545-L548
+        quote: |-
+          /// WS2811 @ 800kHz (fast mode, half the timing of 400kHz mode)
+          /// @see WS2811 800kHz: T0H=250ns, T0L=1000ns, T1H=600ns, T1L=650ns (half of 400kHz spec)
+          /// @note WS2811 supports both 400kHz and 800kHz modes (configurable via pins 7&8)
+          /// @note Reset time increased to 280us for reliability (datasheet minimum is 50us)
+                  T1 = 250,   // T0H: 250ns (half of 500ns @ 400kHz)
+                  T2 = 350,   // T1H - T0H: 350ns (T1H=600ns, half of 1200ns @ 400kHz)
+                  T3 = 650,   // T1L: 650ns (half of 1300ns @ 400kHz)
+          ---
+          class WS2811 : public WS2811Controller800Khz<DATA_PIN, RGB_ORDER> {};
+          class APA104 : public WS2811Controller800Khz<DATA_PIN, RGB_ORDER> {};
+      - names: [WS2811_400]
+        timing: TIMING_WS2811_400KHZ
+        T0H: 500
+        T1H: 1200
+        period: 2500
+        reset_us: 280
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L427-L440
+        quote: |-
+          /// WS2811 @ 400kHz (standard mode, datasheet specification)
+          /// @see WS2811 400kHz: T0H=500ns, T0L=2000ns, T1H=1200ns, T1L=1300ns (datasheet spec)
+                  T1 = 500,   // T0H: 500ns (datasheet: 500ns ±150ns)
+                  T2 = 700,   // T1H - T0H: 700ns (T1H=1200ns per datasheet)
+                  T3 = 1300,  // T1L: 1300ns (datasheet: 1300ns ±150ns)
+                  RESET = 280 // Reset time: 280µs (>50µs per datasheet)
+      - names: [WS2813]
+        timing: TIMING_WS2813
+        T0H: 320
+        T1H: 640
+        period: 1280
+        reset_us: 300 # struct RESET; WS2813Controller passes no WAIT_TIME, so classic controllers wait the 280 default
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L185-L194
+        quote: |-
+          /// WS2813 RGB controller (same timing as WS2812)
+          /// Four-phase: TH0=320ns, TH1=640ns, TL0=960ns, TL1=640ns
+                  T1 = 320,
+                  T2 = 320,
+                  T3 = 640,
+                  RESET = 300
+      - names: [WS2814]
+        timing: TIMING_WS2814 (fixed RGBW, WAIT_TIME = RESET)
+        T0H: 320
+        T1H: 640
+        period: 1280
+        reset_us: 300
+        idle: low
+        special: 32-bit RGBW pixels, white fourth.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L196-L207
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/chipsets.h#L483-L490
+        quote: |-
+          /// WS2814 RGBW controller @ 800 kHz
+          /// Four-phase: TH0=320ns, TH1=640ns, TL0=960ns, TL1=640ns
+          /// @note The 1280ns bit period and 300us reset satisfy the WS2814 V1.4
+          ///       datasheet requirements.
+      - names: [WS2818]
+        timing: TIMING_WS2818 (WAIT_TIME = RESET)
+        T0H: 300
+        T1H: 600
+        period: 1200
+        reset_us: 300
+        idle: low
+        special: Drives the primary input only; the backup input is wired by the strip.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L209-L221
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L537-L543
+        quote: |-
+          /// WS2818 RGB controller @ approximately 833 kHz
+          /// Four-phase: TH0=300ns, TH1=600ns, TL0=900ns, TL1=600ns
+          /// @note The 1200ns bit period and 300us reset satisfy the WS2818B
+          ///       datasheet pulse envelope and >280us reset requirement.
+      - names: [WS2815]
+        timing: TIMING_WS2815
+        T0H: 250
+        T1H: 1340
+        period: 1890
+        reset_us: 0 # struct RESET 0; classic controllers wait the 280 default
+        idle: low
+        special: Labelled "@ 400 kHz" although 1890 ns is about 529 kHz.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L442-L452
+        quote: |-
+          /// WS2815 RGB controller @ 400 kHz
+          /// Four-phase: TH0=250ns, TH1=1340ns, TL0=1640ns, TL1=550ns
+          /// @note Can be overclocked to 800kHz
+                  T1 = 250,
+                  T2 = 1090,
+                  T3 = 550,
+      - names: [WS2816]
+        timing: WS2812 controller emitting two 24-bit words per 48-bit pixel
+        T0H: 250
+        T1H: 875
+        period: 1250
+        reset_us: 280
+        idle: low
+        special: 16-bit channels sent as twice as many 24-bit WS2812 pixels.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/chipsets.h#L635-L637
+        quote: |-
+          // WS2816 - is an emulated controller that emits 48 bit pixels by forwarding
+          // them to a platform specific WS2812 controller.  The WS2812 controller
+          // has to output twice as many 24 bit pixels.
+      - names: [SK6812, SK6812WWA, LC8816E]
+        timing: TIMING_SK6812 / TIMING_LC8816E (identical values)
+        T0H: 300
+        T1H: 900
+        period: 1200
+        reset_us: 80 # struct RESET; classic SK6812Controller waits the 280 default, LC8816E passes RESET (80) as WAIT_TIME
+        idle: low
+        special: LC8816E is fixed 32-bit GRBW.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L223-L245
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L492-L502
+        quote: |-
+          /// SK6812 RGBW controller @ 800 kHz
+          /// Four-phase: TH0=300ns, TH1=900ns, TL0=900ns, TL1=300ns
+                  T1 = 300,
+                  T2 = 600,
+                  T3 = 300,
+                  RESET = 80
+          /// LC8816E RGBW controller @ 800 kHz
+          /// Four-phase: TH0=300ns, TH1=900ns, TL0=900ns, TL1=300ns
+          ---
+          /// @details SK6812 WWA (Warm-White / White / Amber) strips use the same 800 kHz
+          /// timing and wire protocol as regular SK6812 RGB strips.
+      - names: [SM16703, SM16824E, GS1903]
+        timing: TIMING_SM16703 / TIMING_SM16824E / TIMING_GS1903 (same T1/T2/T3)
+        T0H: 300
+        T1H: 900
+        period: 1200
+        reset_us: { SM16703: 0, SM16824E: 200, GS1903: 280 } # struct RESET values
+        idle: low
+        special: >-
+          GS1903 was "Previously an alias for WS2812Controller800Khz"; split out
+          because of field failures (see field_reports.fastled_gs1903).
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L379-L421
+        quote: |-
+          /// SM16703 RGB controller @ 800 kHz
+          /// Four-phase: TH0=300ns, TH1=900ns, TL0=900ns, TL1=300ns
+          /// GS1903 RGB controller @ 800 kHz (12 V)
+          /// Four-phase: TH0=300ns, TH1=900ns, TL0=900ns, TL1=300ns, TRST>40µs
+                  RESET = 280
+          /// SM16824E RGBW controller @ 800 kHz
+          /// Four-phase: TH0=300ns, TH1=900ns, TL0=900ns, TL1=300ns, TRST=200µs
+          /// Datasheet typicals are identical to the SM16703 / WS2811-800kHz RZ family,
+          /// so this timing also lets SM16824E and SM16703 chips share a single data line.
+                  RESET = 200
+      - names: [SK6822, APA106]
+        timing: TIMING_SK6822 (APA106 is a SK6822Controller)
+        T0H: 375
+        T1H: 1375
+        period: 1750
+        reset_us: 0 # struct RESET 0; classic controllers wait the 280 default
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L247-L256
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L509-L512
+        quote: |-
+          /// SK6822 RGB controller @ 800 kHz
+          /// Four-phase: TH0=375ns, TH1=1375ns, TL0=1375ns, TL1=375ns
+                  T1 = 375,
+                  T2 = 1000,
+                  T3 = 375,
+          ---
+          class APA106 : public SK6822Controller<DATA_PIN, RGB_ORDER> {};
+      - names: [PL9823]
+        timing: TIMING_PL9823
+        T0H: 350
+        T1H: 1360
+        period: 1710
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L368-L377
+        quote: |-
+          /// PL9823 RGB controller @ 800 kHz
+          /// Four-phase: TH0=350ns, TH1=1360ns, TL0=1360ns, TL1=350ns
+      - names: [GE8822]
+        timing: TIMING_GE8822_800KHZ
+        T0H: 350
+        T1H: 1010
+        period: 1360
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L98-L107
+        quote: |-
+          /// GE8822 RGB controller @ 800 kHz
+          /// Four-phase: TH0=350ns, TH1=1010ns, TL0=1010ns, TL1=350ns
+      - names: [UCS1903]
+        timing: TIMING_UCS1903_400KHZ
+        T0H: 500
+        T1H: 2000
+        period: 2500
+        reset_us: 0
+        idle: low
+        special: FastLED's plain "UCS1903" is the 400 kHz timing; UCS1903B is 800 kHz.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L454-L463
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L394-L402
+        quote: |-
+          /// UCS1903 controller @ 400 kHz
+          /// Four-phase: TH0=500ns, TH1=2000ns, TL0=2000ns, TL1=500ns
+          ---
+          class UCS1903 : public UCS1903Controller400Khz<DATA_PIN, RGB_ORDER> {};
+          class UCS1903B : public UCS1903BController800Khz<DATA_PIN, RGB_ORDER> {};
+      - names: [UCS1903B]
+        timing: TIMING_UCS1903B_800KHZ
+        T0H: 400
+        T1H: 850
+        period: 1300
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L258-L267
+        quote: |-
+          /// UCS1903B controller @ 800 kHz
+          /// Four-phase: TH0=400ns, TH1=850ns, TL0=900ns, TL1=450ns
+      - names: [UCS1904]
+        timing: TIMING_UCS1904_800KHZ
+        T0H: 400
+        T1H: 800
+        period: 1250
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L269-L278
+        quote: |-
+          /// UCS1904 controller @ 800 kHz
+          /// Four-phase: TH0=400ns, TH1=800ns, TL0=850ns, TL1=450ns
+      - names: [UCS2903]
+        timing: TIMING_UCS2903
+        T0H: 250
+        T1H: 1000
+        period: 1250
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L280-L289
+        quote: |-
+          /// UCS2903 controller @ 800 kHz
+          /// Four-phase: TH0=250ns, TH1=1000ns, TL0=1000ns, TL1=250ns
+      - names: [UCS1912]
+        timing: TIMING_UCS1912
+        T0H: 250
+        T1H: 1250
+        period: 1600
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L498-L507
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/chipsets.h#L618-L622
+        quote: |-
+          /// UCS1912 controller @ 800 kHz
+          /// Four-phase: TH0=250ns, TH1=1250ns, TL0=1350ns, TL1=350ns
+          ---
+          /// @note Never been tested, this is according to the datasheet
+      - names: [UCS7604, UCS7604HD]
+        timing: TIMING_UCS7604_8BIT_800KHZ / TIMING_UCS7604_800KHZ (+ UCS7604HD_1600 at TIMING_UCS7604_1600KHZ)
+        T0H: 400
+        T1H: 800
+        period: 1250
+        reset_us: 280
+        idle: low
+        special: >-
+          Preamble/mode encoder (ClocklessEncoder UCS7604). 1600 kHz variant:
+          T0H 200, T1H 400, period 625 ("Exactly half the 800kHz timings").
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L569-L606
+        quote: |-
+          /// UCS7604 RGBW controller @ 800 kHz (16-bit color depth)
+          /// Four-phase: TH0=400ns, TH1=800ns, TL0=850ns, TL1=450ns
+          /// @note Special protocol with preamble support
+          /// UCS7604 RGBW controller @ 1600 kHz (16-bit color depth, high-speed)
+          /// Four-phase: TH0=200ns, TH1=400ns, TL0=425ns, TL1=225ns
+          /// @note Exactly half the 800kHz timings
+      - names: [TM1809, TM1804, TM1812]
+        timing: TIMING_TM1809_800KHZ (TM1804 and TM1812 are TM1809Controller800Khz)
+        T0H: 350
+        T1H: 700
+        period: 1150
+        reset_us: 0
+        idle: low # FLIP is false for these classes
+        special: >-
+          TM1812 RGBCCT strips (two 5-channel pixels per 12-channel IC) use a
+          separate Channels-API timing TIMING_TM1812_RGBWW_800KHZ: T1=400, T2=450,
+          T3=400, RESET=24 (T0H 400, T1H 850, period 1250).
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L291-L333
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L364-L387
+        quote: |-
+          /// TM1809 RGB controller @ 800 kHz
+          /// Four-phase: TH0=350ns, TH1=700ns, TL0=800ns, TL1=450ns
+          ---
+          class TM1812 : public TM1809Controller800Khz<DATA_PIN, RGB_ORDER> {};
+          class TM1804 : public TM1809Controller800Khz<DATA_PIN, RGB_ORDER> {};
+      - names: [TM1803]
+        timing: TIMING_TM1803_400KHZ
+        T0H: 700
+        T1H: 1800
+        period: 2500
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L476-L485
+        quote: |-
+          /// TM1803 controller @ 400 kHz
+          /// Four-phase: TH0=700ns, TH1=1800ns, TL0=1800ns, TL1=700ns
+      - names: [TM1829, TX1813N1]
+        timing: TIMING_TM1829_800KHZ (+ TM1829Controller1600Khz at TIMING_TM1829_1600KHZ)
+        T0H: 340
+        T1H: 680
+        period: 1230
+        reset_us: 500
+        idle: high # FLIP = true, but honoured only by the nRF52 backend
+        special: >-
+          Inverted line requested (FLIP=true) but only the nRF52 backend
+          implements FLIP, so on other platforms FastLED sends it non-inverted.
+          1600 kHz variant: T0H 100, T1H 400, period 600, reset 500.
+          TX1813N1 is mapped to TM1829 "per reporter field-testing".
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L335-L355
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/chipsets.h#L558-L571
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L356-L362
+        quote: |-
+          /// TM1829 RGB controller @ 800 kHz
+          /// Four-phase: TH0=340ns, TH1=680ns, TL0=890ns, TL1=550ns
+          ---
+          /// @note The TM1829 drives an *inverted* line (LOW-then-HIGH per bit, idling HIGH),
+          ///       hence FLIP=true, and needs a 500us latch gap, hence WAIT_TIME=500.
+          ///       FLIP is currently only honored by the nRF52 backend; see
+          ///       https://github.com/FastLED/FastLED/issues/8
+          ---
+          /// @details Protocol-compatible with TM1829 per reporter field-testing on
+          /// 2.2 mm × 2.2 mm 2020-package parts. Uses the TM1829 800 kHz timing.
+      - names: [TM1908]
+        timing: TIMING_TM1908 (WAIT_TIME = RESET)
+        T0H: 240
+        T1H: 480
+        period: 830
+        reset_us: 80
+        idle: low
+        special: Normal-mode and maximum-current command words before every RGB frame.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L302-L316
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L377-L382
+        quote: |-
+          /// Titan Micro Electronics TM1908 V1.2 typical values are T0H=240ns,
+          /// T1H=480ns, bit period=830ns, and reset low >=80us.
+          ---
+          /// @details Emits the normal-mode and maximum-current commands required by
+          /// the Titan Micro Electronics TM1908 V1.2 protocol before every RGB frame.
+      - names: [TM1814 (timing struct only; no public chipset class)]
+        timing: TIMING_TM1814
+        T0H: 360
+        T1H: 960
+        period: 1300
+        reset_us: 300
+        idle: low # no FLIP used with it
+        special: Used only in m0clockless template instantiations; FastLED.h has no TM1814 class.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L554-L563
+        quote: |-
+          /// TM1814 RGBW controller @ 800 kHz
+          /// Four-phase: TH0=360ns, TH1=960ns, TL0=940ns, TL1=340ns
+                  RESET = 300
+      - names: [LPD1886, LPD1886_8BIT]
+        timing: TIMING_LPD1886_1250KHZ
+        T0H: 200
+        T1H: 600
+        period: 800
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L357-L366
+        quote: |-
+          /// LPD1886 RGB controller @ 1250 kHz
+          /// Four-phase: TH0=200ns, TH1=600ns, TL0=600ns, TL1=200ns
+      - names: [GW6205, GW6205_400]
+        timing: TIMING_GW6205_800KHZ / TIMING_GW6205_400KHZ
+        T0H: { GW6205: 400, GW6205_400: 800 }
+        T1H: { GW6205: 800, GW6205_400: 1600 }
+        period: { GW6205: 1200, GW6205_400: 2400 }
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L487-L496
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L528-L537
+        quote: |-
+          /// GW6205 controller @ 400 kHz
+          /// Four-phase: TH0=800ns, TH1=1600ns, TL0=1600ns, TL1=800ns
+          /// GW6205 controller @ 800 kHz (fast variant)
+          /// Four-phase: TH0=400ns, TH1=800ns, TL0=800ns, TL1=400ns
+      - names: [DP1903 (DP1903Controller800Khz / DP1903Controller400Khz; no FastLED.h alias)]
+        timing: TIMING_DP1903_800KHZ / TIMING_DP1903_400KHZ
+        T0H: { 800kHz: 400, 400kHz: 800 }
+        T1H: { 800kHz: 1400, 400kHz: 2400 }
+        period: { 800kHz: 1800, 400kHz: 3200 }
+        reset_us: 0
+        idle: low
+        special: null
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L465-L474
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L539-L548
+        quote: |-
+          /// DP1903 controller @ 400 kHz
+          /// Four-phase: TH0=800ns, TH1=2400ns, TL0=2400ns, TL1=800ns
+          /// DP1903 controller @ 800 kHz
+          /// Four-phase: TH0=400ns, TH1=1400ns, TL0=1400ns, TL1=400ns
+    internal_disagreements:
+      - what: chipsets.h doc comments disagree with the led_timing.h values they reference.
+        detail: >-
+          UCS7604 comment says "(250, 625, 375 ns)" (struct: 400, 400, 450);
+          WS2812B-Mini-V3 / V5 comments say "220ns, 360ns, 580ns" (struct: 225,
+          355, 645); WS2811_400 comment says "(800, 800, 900 ns = 2500ns cycle"
+          (struct: 500, 700, 1300). The structs are what is compiled.
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/chipsets.h#L444-L455
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/chipsets.h#L520-L536
+        quote: |-
+          /// @see fl::TIMING_UCS7604_800KHZ in fl::chipsets::led_timing.h (250, 625, 375 ns)
+          /// @note Timing: 220ns, 360ns, 580ns (tighter timing specifications)
+          /// @see fl::TIMING_WS2811_400KHZ in fl/chipsets/led_timing.h (800, 800, 900 ns = 2500ns cycle = 400kHz)
+      - what: WS2815 is labelled 400 kHz but its cell is 1890 ns.
+        detail: 250 + 1090 + 550 = 1890 ns (≈529 kHz); the same comment says "Can be overclocked to 800kHz".
+        permalink:
+          - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L442-L452
+        quote: |-
+          /// WS2815 RGB controller @ 400 kHz
+          /// Four-phase: TH0=250ns, TH1=1340ns, TL0=1640ns, TL1=550ns
+
+  # -------------------------------------------------------------------------
+  neopixelbus:
+    name: NeoPixelBus (Makuna)
+    repo: https://github.com/Makuna/NeoPixelBus
+    version: 2.8.4 (tag; release published 2025-05-02)
+    commit: fd670ee534064ddf5765e4db63c213ba05bbe880
+    commit_date: '2025-04-29'
+    note_on_wled_pin: >-
+      WLED v16.0.1 pins NeoPixelBus to commit 1d7ff38f14d04a976f9c6e365c83a232bcba04fc
+      (master, 2026-02-15, 2 commits ahead of 2.8.4). I diffed the ESP32 RMT
+      speed constants and NeoBits.h between the two: identical.
+    model:
+      text: >-
+        Each chip-name "method" is an output driver bound to a speed class.
+        The speed class fixes the waveform (ns high/low per bit on ESP32 RMT
+        and ESP bit-bang; bit rate + a 3-step or 4-step cadence on I2S, DMA,
+        UART and RP2040 PIO) and the reset time. Several chip names are
+        typedefs of the same speed class. "Inverted" speed bases idle high.
+      wiki:
+        url: https://github.com/Makuna/NeoPixelBus/wiki/Neo-Methods/97bea1dda774b1df6a425c670207093055228368
+        revision: 97bea1dda774b1df6a425c670207093055228368 (wiki commit, 2026-02-16)
+        quote: |-
+          * Neo**Ws2812x**Method - (WS2812a, WS2812b, WS2812c, etc) The most compatible and if yours isn't listed below a good first selection.
+          * Neo**Ws2812**Method - (WS2812) An older model pre WS2812b.
+          * Neo**Ws2813**Method - (WS2813)
+          * Neo**Ws2811**Method - (WS2811) Standalone chip.  Also used with a SevenSegmentFeature when several drive a 7-segment LED.
+          * Neo**Ws2816**Method - (WS2816) 16-bit color elements, make sure to use NeoGrbWs2816Feature.
+          * Neo**Sk6812**Method - (SK6812) A RGBW variant, make sure to use a RGBW color feature.
+          * Neo**Lc8812**Method - (LC8812)
+          * Neo**Apa106**Method - (APA106)
+          * Neo**Tx1812**Method - (TX1812)
+          * Neo**Tm1814**Method - (TM1814) A RGBW variant, used with NeoWrgbTm1814Feature.
+          * Neo**Tm1914**Method - (TM1914) used with NeoRgbTm1914Feature.
+          * Neo**Tm1829**Method - (TM1829)
+          * Neo**400Kbps**Method - old slower speed standard that started this all.
+          ---
+          By default NeoPixelBus on ESP32 uses a 3-step I2S cadence with a 33/66% duty cycle, which saves around 25% on memory consumption compared with the 4-step cadence. However, this default may not work reliably with LEDs that have tighter timing requirements, such as the WS2816B.
+    name_groups:
+      text: >-
+        Same typedef on every platform: NeoWs2811Method, NeoWs2813Method,
+        NeoWs2816Method -> the Ws2812x speed; NeoLc8812Method -> Sk6812;
+        NeoWs2814Method -> Ws2805; NeoWs2812Method -> 800Kbps (the 50 µs
+        reset); NeoTm1914 inverted methods -> Tm1814 on bit-bang and ESP8266
+        DMA. NeoWs2811Method does NOT use the separate Ws2811 speed class.
+      permalink:
+        - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp32RmtMethod.h#L987-L1004
+        - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoArmMethod.h#L926-L937
+      quote: |-
+        typedef NeoEsp32Rmt1Ws2812xMethod NeoWs2813Method;
+        typedef NeoEsp32Rmt1Ws2812xMethod NeoWs2812xMethod;
+        typedef NeoEsp32Rmt1800KbpsMethod NeoWs2812Method;
+        typedef NeoEsp32Rmt1Ws2812xMethod NeoWs2811Method;
+        typedef NeoEsp32Rmt1Ws2812xMethod NeoWs2816Method;
+        typedef NeoEsp32Rmt1Ws2805Method NeoWs2805Method;
+        typedef NeoEsp32Rmt1Ws2814Method NeoWs2814Method;
+        typedef NeoEsp32Rmt1Sk6812Method NeoSk6812Method;
+        typedef NeoEsp32Rmt1Tm1814Method NeoTm1814Method;
+        typedef NeoEsp32Rmt1Tm1829Method NeoTm1829Method;
+        typedef NeoEsp32Rmt1Tm1914Method NeoTm1914Method;
+        typedef NeoEsp32Rmt1Sk6812Method NeoLc8812Method;
+        typedef NeoEsp32Rmt1Apa106Method NeoApa106Method;
+        typedef NeoEsp32Rmt1Tx1812Method NeoTx1812Method;
+        typedef NeoEsp32Rmt1Gs1903Method NeoGs1903Method;
+        ---
+        typedef NeoArmWs2812xMethod NeoWs2813Method;
+        typedef NeoArmWs2812xMethod NeoWs2812xMethod;
+        typedef NeoArmWs2812xMethod NeoWs2811Method;
+        typedef NeoArmWs2812xMethod NeoWs2816Method;
+        typedef NeoArmWs2805Method NeoWs2805Method;
+        typedef NeoArmWs2805Method NeoWs2814Method;
+        typedef NeoArmSk6812Method NeoSk6812Method;
+        typedef NeoArmSk6812Method NeoLc8812Method;
+        typedef NeoArm800KbpsMethod NeoWs2812Method;
+        typedef NeoArmApa106Method NeoApa106Method;
+      notes: >-
+        The RMT block quoted is the default on ESP32-S2/S3/C3 (or with
+        NEOPIXEL_ESP32_RMT_DEFAULT); on the original ESP32 the default
+        NeoWs2812xMethod is I2S with the same NeoBits speed class (see
+        esp32_i2s_and_esp8266_dma below). WLED does not use these defaults;
+        it names the RMT/I2S methods explicitly.
+    settings_esp32_rmt:
+      text: ESP32 RMT speed classes (explicit ns high, ns low per bit; reset appended as low).
+      permalink:
+        - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp32RmtMethod.h#L89-L296
+      quote: |-
+        inline constexpr static uint32_t Item32Val(uint16_t nsHigh, uint16_t nsLow)
+        const static rmt_idle_level_t IdleLevel = RMT_IDLE_LEVEL_LOW;
+        class NeoEsp32RmtInvertedSpeedBase : public NeoEsp32RmtSpeed
+        const static rmt_idle_level_t IdleLevel = RMT_IDLE_LEVEL_HIGH;
+        class NeoEsp32RmtSpeedWs2811 : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(300, 950);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(900, 350);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(300000); // 300us
+        class NeoEsp32RmtSpeedWs2812x : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(400, 850);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(800, 450);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(300000); // 300us
+        class NeoEsp32RmtSpeedWs2805 : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(300, 790);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(790, 300);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(300000); // spec is 280, intentionally longer for compatiblity use
+        class NeoEsp32RmtSpeedSk6812 : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(400, 850);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(800, 450);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(80000); // 80us
+        // normal is inverted signal
+        class NeoEsp32RmtSpeedTm1814 : public NeoEsp32RmtInvertedSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(360, 890);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(720, 530);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(200000); // 200us
+        // normal is inverted signal
+        class NeoEsp32RmtSpeedTm1829 : public NeoEsp32RmtInvertedSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(300, 900);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(800, 400);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(200000); // 200us
+        // normal is inverted signal
+        class NeoEsp32RmtSpeedTm1914 : public NeoEsp32RmtInvertedSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(360, 890);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(720, 530);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(200000); // 200us
+        class NeoEsp32RmtSpeed800Kbps : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(400, 850);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(800, 450);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(50000); // 50us
+        class NeoEsp32RmtSpeed400Kbps : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(800, 1700);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(1600, 900);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(50000); // 50us
+        class NeoEsp32RmtSpeedApa106 : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(350, 1350);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(1350, 350);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(50000); // 50us
+        class NeoEsp32RmtSpeedTx1812 : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(300, 600);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(600, 300);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(80000); // 80us
+        class NeoEsp32RmtSpeedGs1903 : public NeoEsp32RmtSpeedBase
+        const static DRAM_ATTR uint32_t RmtBit0 = Item32Val(300, 900);
+        const static DRAM_ATTR uint32_t RmtBit1 = Item32Val(900, 300);
+        const static DRAM_ATTR uint16_t RmtDurationReset = FromNs(40000); // 40us
+      table: # T0H, T1H, period = T0H + T0L (= T1H + T1L), reset_us, idle
+        - {
+            speed: Ws2812x,
+            names: [Ws2812x, Ws2813, Ws2811, Ws2816],
+            T0H: 400,
+            T1H: 800,
+            period: 1250,
+            reset_us: 300,
+            idle: low,
+          }
+        - {
+            speed: 800Kbps,
+            names: [Ws2812, 800Kbps],
+            T0H: 400,
+            T1H: 800,
+            period: 1250,
+            reset_us: 50,
+            idle: low,
+          }
+        - {
+            speed: Sk6812,
+            names: [Sk6812, Lc8812],
+            T0H: 400,
+            T1H: 800,
+            period: 1250,
+            reset_us: 80,
+            idle: low,
+          }
+        - {
+            speed: Ws2811,
+            names: ['explicit NeoEsp32Rmt*Ws2811Method only'],
+            T0H: 300,
+            T1H: 900,
+            period: 1250,
+            reset_us: 300,
+            idle: low,
+          }
+        - {
+            speed: Ws2805,
+            names: [Ws2805, Ws2814],
+            T0H: 300,
+            T1H: 790,
+            period: 1090,
+            reset_us: 300,
+            idle: low,
+          }
+        - {
+            speed: Gs1903,
+            names: [Gs1903],
+            T0H: 300,
+            T1H: 900,
+            period: 1200,
+            reset_us: 40,
+            idle: low,
+          }
+        - {
+            speed: Tx1812,
+            names: [Tx1812],
+            T0H: 300,
+            T1H: 600,
+            period: 900,
+            reset_us: 80,
+            idle: low,
+          }
+        - {
+            speed: Apa106,
+            names: [Apa106],
+            T0H: 350,
+            T1H: 1350,
+            period: 1700,
+            reset_us: 50,
+            idle: low,
+          }
+        - {
+            speed: 400Kbps,
+            names: [400Kbps],
+            T0H: 800,
+            T1H: 1600,
+            period: 2500,
+            reset_us: 50,
+            idle: low,
+          }
+        - {
+            speed: Tm1814,
+            names: [Tm1814],
+            T0H: 360,
+            T1H: 720,
+            period: 1250,
+            reset_us: 200,
+            idle: high,
+          }
+        - {
+            speed: Tm1914,
+            names: [Tm1914],
+            T0H: 360,
+            T1H: 720,
+            period: 1250,
+            reset_us: 200,
+            idle: high,
+          }
+        - {
+            speed: Tm1829,
+            names: [Tm1829],
+            T0H: 300,
+            T1H: 800,
+            period: 1200,
+            reset_us: 200,
+            idle: high,
+          }
+    settings_esp_bitbang:
+      text: ESP8266/ESP32 bit-bang speed classes (cycle counts from ns comments).
+      permalink:
+        - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEspBitBangMethod.h#L65-L175
+      quote: |-
+        class NeoEspBitBangSpeedWs2811
+            const static uint32_t T0H = (F_CPU / 3333333 - CYCLES_LOOPTEST); // 0.3us
+            const static uint32_t T1H = (F_CPU / 1052632 - CYCLES_LOOPTEST); // 0.95us
+            const static uint32_t Period = (F_CPU / 800000 - CYCLES_LOOPTEST); // 1.25us per bit
+            static const uint32_t ResetTimeUs = 300;
+        class NeoEspBitBangSpeedWs2812x
+            const static uint32_t T0H = (F_CPU / 2500000 - CYCLES_LOOPTEST); // 0.4us
+            const static uint32_t T1H = (F_CPU / 1250000 - CYCLES_LOOPTEST); // 0.8us
+            const static uint32_t Period = (F_CPU / 800000 - CYCLES_LOOPTEST); // 1.25us per bit
+            static const uint32_t ResetTimeUs = 300;
+        class NeoEspBitBangSpeedWs2805
+            const static uint32_t T0H = (F_CPU / 3333333 - CYCLES_LOOPTEST); // 0.3us
+            const static uint32_t T1H = (F_CPU / 1265823 - CYCLES_LOOPTEST); // 0.795
+            const static uint32_t Period = (F_CPU / 917431 - CYCLES_LOOPTEST); // 1.09us
+            static const uint32_t ResetTimeUs = 300; // spec is 280, intentionally longer for compatiblity use
+        class NeoEspBitBangSpeedSk6812
+            static const uint32_t ResetTimeUs = 80;
+        // Tm1814 normal is inverted signal
+        class NeoEspBitBangSpeedTm1814
+            const static uint32_t T0H = (F_CPU / 2916666 - CYCLES_LOOPTEST); // 0.35us
+            const static uint32_t T1H = (F_CPU / 1666666 - CYCLES_LOOPTEST); // 0.75us
+            static const uint32_t ResetTimeUs = 200;
+        // Tm1829 normal is inverted signal
+        class NeoEspBitBangSpeedTm1829
+            const static uint32_t T0H = (F_CPU / 3333333 - CYCLES_LOOPTEST); // 0.3us
+            const static uint32_t T1H = (F_CPU / 1250000 - CYCLES_LOOPTEST); // 0.8us
+            static const uint32_t ResetTimeUs = 200;
+        class NeoEspBitBangSpeed800Kbps
+            static const uint32_t ResetTimeUs = 50;
+        class NeoEspBitBangSpeed400Kbps
+            const static uint32_t T0H = (F_CPU / 2000000 - CYCLES_LOOPTEST);
+            const static uint32_t T1H = (F_CPU / 833333 - CYCLES_LOOPTEST);
+            const static uint32_t Period = (F_CPU / 400000 - CYCLES_LOOPTEST);
+        class NeoEspBitBangSpeedApa106
+            const static uint32_t T0H = (F_CPU / 2857143 - CYCLES_LOOPTEST); // 0.35us
+            const static uint32_t T1H = (F_CPU / 740741 - CYCLES_LOOPTEST); // 1.35
+            const static uint32_t Period = (F_CPU / 606061 - CYCLES_LOOPTEST); // 1.65us
+        class NeoEspBitBangSpeedIntertek
+            const static uint32_t ResetTimeUs = 12470;
+            const static uint32_t TLatch = (F_CPU / 22222 - CYCLES_LOOPTEST); // 45us??? couldn't find datasheet
+      notes: >-
+        Bit-bang differs from RMT within the same library for some speeds:
+        TM1814 0.35/0.75 µs vs RMT 360/720 ns; APA106 period 1.65 µs vs RMT
+        1700 ns vs NeoBits BitSendTimeNs 1710; WS2805 T1H 0.795 µs vs RMT 790.
+    settings_cadence_drivers:
+      text: >-
+        ESP32 I2S, ESP8266 DMA (I2S), ESP8266 UART, RP2040 PIO send each data
+        bit as 3 or 4 sub-bits at a fixed bit rate, so T0H/T1H are fixed
+        fractions of the bit cell. Default for ESP32 I2S and ESP8266 DMA is the
+        3-step cadence (unless NPB_CONF_4STEP_CADENCE).
+      esp32_i2s_and_esp8266_dma:
+        derived: true
+        derivation: '3-step: 0 = "100" (1/3 high), 1 = "110" (2/3 high) of BitSendTimeNs'
+        T0H: 417
+        T1H: 833
+        period: 1250 # Ws2812x, Sk6812, Tm1814, Tm1914, Tm1829, 800Kbps all have BitSendTimeNs 1250
+        reset_us:
+          {
+            Ws2812x: 300,
+            Ws2805: 300,
+            Sk6812: 80,
+            Tm1814: 200,
+            Tm1914: 200,
+            Tm1829: 200,
+            800Kbps: 50,
+            400Kbps: 50,
+            Apa106: 50,
+          }
+        other_periods: { Ws2805: 1125, 400Kbps: 2500, Apa106: 1710 } # NeoBits BitSendTimeNs
+        permalink:
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoBits.h#L38-L99
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp32I2sMethod.h#L104-L113
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp32I2sMethod.h#L338-L344
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp8266DmaMethod.h#L36-L41
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp8266DmaMethod.h#L305-L313
+        quote: |-
+          class NeoBitsSpeedWs2812x : public NeoBitsSpeedBase
+              const static uint16_t BitSendTimeNs = 1250;
+              const static uint16_t ResetTimeUs = 300;
+          class NeoBitsSpeedWs2805 : public NeoBitsSpeedBase
+              const static uint16_t BitSendTimeNs = 1125;
+              const static uint16_t ResetTimeUs = 300; // spec is 280, intentionally longer for compatiblity use
+          class NeoBitsSpeedSk6812 : public NeoBitsSpeedBase
+              const static uint16_t ResetTimeUs = 80;
+          class NeoBitsSpeedTm1814 : public NeoBitsSpeedBase
+              const static uint16_t ResetTimeUs = 200;
+          class NeoBitsSpeed800Kbps : public NeoBitsSpeedBase
+              const static uint16_t BitSendTimeNs = 1250;
+              const static uint16_t ResetTimeUs = 50;
+          class NeoBitsSpeed400Kbps : public NeoBitsSpeedBase
+              const static uint16_t BitSendTimeNs = 2500;
+          class NeoBitsSpeedApa106 : public NeoBitsSpeedBase
+              const static uint16_t BitSendTimeNs = 1710;
+          ---
+              const static size_t DmaBitsPerPixelBit = 3; // 3 step cadence, matches encoding
+                  const uint16_t OneBit =  0b00000110;
+                  const uint16_t ZeroBit = 0b00000100;
+          #if defined(NPB_CONF_4STEP_CADENCE)
+          typedef NeoEsp32I2sCadence4Step NeoEsp32I2sCadence;
+          #else
+          typedef NeoEsp32I2sCadence3Step NeoEsp32I2sCadence;
+          ---
+              static const uint16_t OneBit3Step = 0b00000110;
+              static const uint16_t ZeroBit3Step = 0b00000100;
+          using NeoEsp8266I2sCadence = NeoEsp8266Dma3StepEncode<T_PATTERN>;
+      esp8266_uart:
+        derived: true
+        derivation: '4 UART bit-times per data bit, inverted TX: 0 = "1 000" (1/4 high), 1 = "1 110" (3/4 high) at UartBaud'
+        T0H: 312.5
+        T1H: 937.5
+        period: 1250 # UartBaud 3200000 / 4; Ws2805 3669724 baud -> 1090; 400Kbps 1600000 -> 2500; Apa106 2339181 -> 1710
+        reset_us:
+          {
+            Ws2812x: 300,
+            Ws2805: 300,
+            Sk6812: 80,
+            Tm1814: 200,
+            Tm1829: 200,
+            800Kbps: 50,
+            400Kbps: 50,
+            Apa106: 50,
+          }
+        permalink:
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp8266UartMethod.h#L294-L359
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoEsp8266UartMethod.cpp#L46-L50
+        quote: |2-
+              static const uint32_t UartBaud = 3200000; // 800mhz, 4 serial bytes per NeoByte
+              static const uint32_t ResetTimeUs = 300; // us between data send bursts to reset for next update
+              static const uint32_t UartBaud = 3669724; // pulse cycle of 1.09us, 917431bps * 4 serial bytes per NeoByte
+              static const uint32_t UartBaud = 1600000; // 400mhz, 4 serial bytes per NeoByte
+              static const uint32_t UartBaud = 2339181; // APA106 pulse cycle of 1.71us, 4 serial bytes per NeoByte
+          ---
+                  0b110111, // On wire: 1 000 100 0 [Neopixel reads 00]
+                  0b000111, // On wire: 1 000 111 0 [Neopixel reads 01]
+                  0b110100, // On wire: 1 110 100 0 [Neopixel reads 10]
+                  0b000100, // On wire: 1 110 111 0 [NeoPixel reads 11]
+      rp2040_pio:
+        derived: true
+        derivation: '3-step: T0H = period/3, T1H = 2*period/3; 4-step: T0H = period/4, T1H = 3*period/4; period = 1/BitRateHz'
+        table:
+          - { speed: Ws2812x, cadence: 3, T0H: 417, T1H: 833, period: 1250, reset_us: 300 }
+          - { speed: Sk6812, cadence: 3, T0H: 417, T1H: 833, period: 1250, reset_us: 80 }
+          - {
+              speed: Tm1814 (inverted),
+              cadence: 3,
+              T0H: 417,
+              T1H: 833,
+              period: 1250,
+              reset_us: 200,
+            }
+          - {
+              speed: Tm1914 (inverted),
+              cadence: 3,
+              T0H: 417,
+              T1H: 833,
+              period: 1250,
+              reset_us: 200,
+            }
+          - { speed: 400Kbps, cadence: 3, T0H: 833, T1H: 1667, period: 2500, reset_us: 50 }
+          - { speed: Tx1812, cadence: 3, T0H: 300, T1H: 600, period: 900, reset_us: 80 }
+          - { speed: Ws2811, cadence: 4, T0H: 312.5, T1H: 937.5, period: 1250, reset_us: 300 }
+          - { speed: 800Kbps, cadence: 4, T0H: 312.5, T1H: 937.5, period: 1250, reset_us: 50 }
+          - { speed: Ws2805, cadence: 4, T0H: 272.5, T1H: 817.5, period: 1090, reset_us: 300 }
+          - {
+              speed: Tm1829 (inverted),
+              cadence: 4,
+              T0H: 300,
+              T1H: 900,
+              period: 1200,
+              reset_us: 200,
+            }
+          - { speed: Apa106, cadence: 4, T0H: 425, T1H: 1275, period: 1700, reset_us: 50 }
+          - { speed: Gs1903, cadence: 4, T0H: 300, T1H: 900, period: 1200, reset_us: 40 }
+        permalink:
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/Rp2040/NeoRp2040PioSpeed.h#L33-L117
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/Rp2040/NeoRp2040PioMonoProgram.h#L36-L38
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/Rp2040/NeoRp2040PioMonoProgram.h#L96-L98
+        quote: |-
+          class NeoRp2040PioSpeedWs2811 : public NeoRp2040PioMonoProgram<NeoRp2040PioCadenceMono4Step>
+              static constexpr float BitRateHz = 800000.0f; // 300+950
+          class NeoRp2040PioSpeedWs2812x : public NeoRp2040PioMonoProgram<NeoRp2040PioCadenceMono3Step>
+              static constexpr float BitRateHz = 800000.0f; // 400+850
+          class NeoRp2040PioSpeedWs2805 : public NeoRp2040PioMonoProgram<NeoRp2040PioCadenceMono4Step>
+              static constexpr float BitRateHz = 917431.19f; // 300+790
+          class NeoRp2040PioSpeedTm1829 : public NeoRp2040PioMonoProgram<NeoRp2040PioCadenceMono4Step>
+              static constexpr float BitRateHz = 833333.33f; // 300+900
+          class NeoRp2040PioSpeed800Kbps : public NeoRp2040PioMonoProgram<NeoRp2040PioCadenceMono4Step>
+          class NeoRp2040PioSpeedApa106 : public NeoRp2040PioMonoProgram<NeoRp2040PioCadenceMono4Step>
+              static constexpr float BitRateHz = 588235.29f; // 350+1350
+          class NeoRp2040PioSpeedTx1812 : public NeoRp2040PioMonoProgram<NeoRp2040PioCadenceMono3Step>
+              static constexpr float BitRateHz = 1111111.11f; // 300+600
+          class NeoRp2040PioSpeedGs1903 : public NeoRp2040PioMonoProgram<NeoRp2040PioCadenceMono4Step>
+              static constexpr float BitRateHz = 833333.33f; // 300+900
+          ---
+          // 3 step program
+          // the pulse width is divided by 3, using 33% for each stage
+          // where 0 = 33% and 1 = 66%
+          // 4 step program
+          // the pulse width is divided by 4, using 25% for each stage
+          // where 0 = 25% and 1 = 75%
+      arm_generic:
+        text: >-
+          Generic ARM ("Other", e.g. SAM) cycle props: 800 kHz family 0.40/0.80/1.25 µs,
+          400 kHz 0.50/1.20/2.50 µs. NeoArmApa106Method is the 400Kbps method on ARM
+          (unlike the 1.7 µs APA106 class on ESP32).
+        permalink:
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoArmMethod.h#L780-L833
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/methods/NeoArmMethod.h#L914-L923
+        quote: |2-
+              static const uint32_t CyclesT0h = static_cast<uint32_t>((0.40 * ARM_OTHER_SCALE + 0.5) - (5 * ARM_OTHER_INST));
+              static const uint32_t CyclesT1h = static_cast<uint32_t>((0.80 * ARM_OTHER_SCALE + 0.5) - (5 * ARM_OTHER_INST));
+              static const uint32_t Cycles = static_cast<uint32_t>((1.25 * ARM_OTHER_SCALE + 0.5) - (5 * ARM_OTHER_INST));
+          ---
+              static const uint32_t CyclesT0h = static_cast<uint32_t>((0.50 * ARM_OTHER_SCALE + 0.5) - (5 * ARM_OTHER_INST));
+              static const uint32_t CyclesT1h = static_cast<uint32_t>((1.20 * ARM_OTHER_SCALE + 0.5) - (5 * ARM_OTHER_INST));
+              static const uint32_t Cycles = static_cast<uint32_t>((2.50 * ARM_OTHER_SCALE + 0.5) - (5 * ARM_OTHER_INST));
+          ---
+          typedef NeoArm400KbpsMethod NeoArmApa106Method;
+          typedef NeoArmWs2805Method NeoArmWs2814Method;
+          typedef NeoArmTm1814InvertedMethod NeoArmTm1914InvertedMethod;
+    frame_extras:
+      - chip: TM1814
+        what: >-
+          8 settings bytes in front of the pixel data: C1 = four per-channel
+          current codes ((mA*10 - 65)/5 style: LimitCurrent(value) - MinCurrent)/5,
+          range 65..380 in tenths of mA), then C2 = the bitwise complement of C1.
+        permalink:
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/features/NeoTm1814Features.h#L37-L82
+        quote: |-
+          const static uint16_t MinCurrent = 65;
+          const static uint16_t MaxCurrent = 380;
+          static const size_t SettingsSize = 8;
+              // settings are at the front of the data stream
+              // C1
+              *pSet++ = (SettingsObject::LimitCurrent(settings[V_IC_1]) - SettingsObject::MinCurrent) / EncodeDivisor;
+              // C2
+              for (uint8_t elem = 0; elem < 4; elem++)
+                  *pSet++ = ~(*pC1++);
+      - chip: TM1914
+        what: >-
+          6 settings bytes in front of the pixel data: C1 = 0xFF 0xFF + mode
+          (0xFF DIN/FDIN auto-switch, 0xF5 DIN only, 0xFA FDIN only), C2 = its
+          complement. Default mode DIN only.
+        permalink:
+          - https://github.com/Makuna/NeoPixelBus/blob/fd670ee534064ddf5765e4db63c213ba05bbe880/src/internal/features/NeoTm1914Features.h#L29-L97
+        quote: |-
+          NeoTm1914_Mode_DinFdinAutoSwitch,  // Switches between DIN and FDIN on any signal pause > 300ms
+          NeoTm1914_Mode_DinOnly, // DIN input pin used exclusively
+          NeoTm1914_Mode_FdinOnly  // FDIN input pin used exclusively
+          static const size_t SettingsSize = 6;
+              // C1 - the mode
+              *pSet++ = 0xff;
+              *pSet++ = 0xff;
+                  mode = 0xfa;
+                  mode = 0xf5;
+              // C2 - ones compliment of the above
+
+  # -------------------------------------------------------------------------
+  adafruit_neopixel:
+    name: Adafruit_NeoPixel
+    repo: https://github.com/adafruit/Adafruit_NeoPixel
+    version: 1.15.5 (tag; release published 2026-05-12)
+    commit: d514fc3beae85dd4c2b19781b93faa47bd6e996f
+    commit_date: '2026-05-12'
+    model:
+      text: >-
+        Two speeds only, chosen by a flag: NEO_KHZ800 (default) and NEO_KHZ400
+        ("v1 NeoPixels" / WS2811 400 kHz). No per-chip names. The latch is a
+        300 µs hold-off between show() calls (canShow). Pulse widths are set
+        per platform, so "800 kHz" means different T0H/T1H on different MCUs.
+      permalink:
+        - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_NeoPixel.h#L123-L134
+        - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_NeoPixel.h#L239-L272
+      quote: |-
+        // Add NEO_KHZ400 to the color order value to indicate a 400 KHz device.
+        // All but the earliest v1 NeoPixels expect an 800 KHz data stream, this is
+        // the default if unspecified.
+        #define NEO_KHZ800 0x0000 ///< 800 KHz data transmission
+        #define NEO_KHZ400 0x0100 ///< 400 KHz data transmission
+        ---
+                 require a short quiet time (about 300 microseconds) after the
+                 last bit is received before the data 'latches' and new data can
+                 start being received.
+            return (now - endTime) >= 300L;
+    settings:
+      - platform: AVR 16 MHz (hand-tuned assembly)
+        derived: true
+        derivation: '20 clocks/bit at 16 MHz = 62.5 ns/clock; stores at T=0,5,13 -> T0H 5 clk, T1H 13 clk. 400 kHz: 40 clocks, stores at T=0,8,20.'
+        khz800: { T0H: 312.5, T1H: 812.5, period: 1250 }
+        khz400: { T0H: 500, T1H: 1250, period: 2500 }
+        reset_us: 300
+        permalink:
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_NeoPixel.cpp#L476-L488
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_NeoPixel.cpp#L1687-L1698
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_NeoPixel.cpp#L1756-L1761
+        quote: |-
+          // for both the WS2811 (400 KHz) and WS2812 (800 KHz) drivers. The
+          // datastream timing for the LED drivers allows a little wiggle room each
+          // way (listed in the datasheets)
+          ---
+          // WS2811 and WS2812 have different hi/lo duty cycles; this is
+          // similar but NOT an exact copy of the prior 400-on-8 code.
+          // 20 inst. clocks per bit: HHHHHxxxxxxxxLLLLLLL
+          // ST instructions:         ^   ^        ^       (T=0,5,13)
+          ---
+          // 40 inst. clocks per bit: HHHHHHHHxxxxxxxxxxxxLLLLLLLLLLLLLLLLLLLL
+          // ST instructions:         ^       ^           ^         (T=0,8,20)
+      - platform: Teensy 3.x (KINETISK) and Teensy 4.x (IMXRT1052/1062)
+        derived: true
+        derivation: 'F_CPU/4000000 = 250 ns; F_CPU/1250000 = 800 ns; F_CPU/800000 = 1250 ns; 400 kHz: /2000000 = 500, /833333 = 1200, /400000 = 2500'
+        khz800: { T0H: 250, T1H: 800, period: 1250 }
+        khz400: { T0H: 500, T1H: 1200, period: 2500 }
+        reset_us: 300
+        permalink:
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_NeoPixel.cpp#L1856-L1863
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_NeoPixel.cpp#L1920-L1926
+        quote: |-
+          #define CYCLES_800_T0H (F_CPU / 4000000)
+          #define CYCLES_800_T1H (F_CPU / 1250000)
+          #define CYCLES_800 (F_CPU / 800000)
+          #define CYCLES_400_T0H (F_CPU / 2000000)
+          #define CYCLES_400_T1H (F_CPU / 833333)
+          #define CYCLES_400 (F_CPU / 400000)
+      - platform: nRF52 (PWM + EasyDMA, 16 MHz PWM clock)
+        derived: true
+        derivation: 'counts × 62.5 ns (the comments print the results)'
+        khz800: { T0H: 375, T1H: 812.5, period: 1250 }
+        khz400: { T0H: 500, T1H: 1187.5, period: 2500 }
+        reset_us: 300
+        special: >-
+          Comments name the targets: "WS2812 (rev A) timing is 0.35 and 0.7us"
+          (left commented out at 312.5/750 ns) vs "WS2812B (rev B) timing is 0.4
+          and 0.8 us" (used). Cycle-counter fallback: ~0.36/~0.76/~1.25 µs and
+          ~0.50/~1.26/~2.50 µs.
+        permalink:
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_NeoPixel.cpp#L2136-L2182
+        quote: |-
+          // WS2812 (rev A) timing is 0.35 and 0.7us
+          //#define MAGIC_T0H 5UL | (0x8000) // 0.3125us
+          //#define MAGIC_T1H 12UL | (0x8000) // 0.75us
+          // WS2812B (rev B) timing is 0.4 and 0.8 us
+          #define MAGIC_T0H 6UL | (0x8000) // 0.375us
+          #define MAGIC_T1H 13UL | (0x8000) // 0.8125us
+          // WS2811 (400 khz) timing is 0.5 and 1.2
+          #define MAGIC_T0H_400KHz 8UL | (0x8000) // 0.5us
+          #define MAGIC_T1H_400KHz 19UL | (0x8000) // 1.1875us
+          #define CTOPVAL 20UL // 1.25us
+          #define CTOPVAL_400KHz 40UL // 2.5us
+          #define CYCLES_800_T0H 18 // ~0.36 uS
+          #define CYCLES_800_T1H 41 // ~0.76 uS
+          #define CYCLES_800 71 // ~1.25 uS
+          #define CYCLES_400_T0H 26 // ~0.50 uS
+          #define CYCLES_400_T1H 70 // ~1.26 uS
+          #define CYCLES_400 156 // ~2.50 uS
+      - platform: ESP8266 (cycle counter)
+        khz800: { T0H: 400, T1H: 800, period: 1250 }
+        khz400: { T0H: 500, T1H: 1200, period: 2500 }
+        reset_us: 300
+        permalink:
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/esp8266.c#L27-L32
+        quote: |-
+          #define CYCLES_800_T0H  (F_CPU / 2500001) // 0.4us
+          #define CYCLES_800_T1H  (F_CPU / 1250001) // 0.8us
+          #define CYCLES_800      (F_CPU /  800001) // 1.25us per bit
+          #define CYCLES_400_T0H  (F_CPU / 2000000) // 0.5uS
+          #define CYCLES_400_T1H  (F_CPU /  833333) // 1.2us
+          #define CYCLES_400      (F_CPU /  400000) // 2.5us per bit
+      - platform: ESP32 (RMT)
+        khz800: { T0H: 400, T1H: 800, period: 1250 }
+        khz400: { T0H: 500, T1H: 1200, period: 2500 }
+        reset_us: 300
+        permalink:
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/esp.c#L131-L139
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/esp.c#L249-L259
+        quote: |-
+          #define WS2812_T0H_NS (400)
+          #define WS2812_T0L_NS (850)
+          #define WS2812_T1H_NS (800)
+          #define WS2812_T1L_NS (450)
+          #define WS2811_T0H_NS (500)
+          #define WS2811_T0L_NS (2000)
+          #define WS2811_T1H_NS (1200)
+          #define WS2811_T1L_NS (1300)
+          ---
+              if (is800KHz) {
+                t0h_ticks = (uint32_t)(ratio * WS2812_T0H_NS);
+              } else {
+                t0h_ticks = (uint32_t)(ratio * WS2811_T0H_NS);
+      - platform: RP2040 (PIO, Pico SDK ws2812 program)
+        derived: true
+        derivation: 'T1=2, T2=5, T3=3 PIO cycles; 10 cycles per bit at freq; T0H = T1, T1H = T1+T2'
+        khz800: { T0H: 250, T1H: 875, period: 1250 }
+        khz400: { T0H: 500, T1H: 1750, period: 2500 }
+        reset_us: 300
+        permalink:
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/rp2040_pio.h#L19-L30
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/rp2040_pio.h#L56-L58
+          - https://github.com/adafruit/Adafruit_NeoPixel/blob/d514fc3beae85dd4c2b19781b93faa47bd6e996f/Adafruit_Neopixel_RP2.cpp#L20-L25
+        quote: |-
+          #define ws2812_T1 2
+          #define ws2812_T2 5
+          #define ws2812_T3 3
+              0x6221, //  0: out    x, 1            side 0 [2]
+              0x1123, //  1: jmp    !x, 3           side 1 [1]
+              0x1400, //  2: jmp    0               side 1 [4]
+              0xa442, //  3: nop                    side 0 [4]
+          ---
+            int cycles_per_bit = ws2812_T1 + ws2812_T2 + ws2812_T3;
+            float div = clock_get_hz(clk_sys) / (freq * cycles_per_bit);
+          ---
+              ws2812_program_init(pio, pio_sm, pio_program_offset, pin, 800000, 8);
+              ws2812_program_init(pio, pio_sm, pio_program_offset, pin, 400000, 8);
+
+  # -------------------------------------------------------------------------
+  wled:
+    name: WLED
+    repo: https://github.com/wled/WLED
+    version: v16.0.1 (tag; release published 2026-07-07)
+    commit: 29b389df1c1aaec6ff53aea742d17063b985906c
+    commit_date: '2026-06-30'
+    model:
+      text: >-
+        WLED's "LED type" picks a NeoPixelBus method + colour feature. Timing is
+        therefore NeoPixelBus's (see libraries.neopixelbus): ESP32 uses RMT
+        (WLED's own high-priority RMT driver, which reuses NeoPixelBus's RMT
+        speed classes) or I2S; ESP8266 uses UART0/UART1/DMA/bit-bang by pin.
+        NeoPixelBus is pinned to commit 1d7ff38f.
+      permalink:
+        - https://github.com/wled/WLED/blob/29b389df1c1aaec6ff53aea742d17063b985906c/platformio.ini#L167
+        - https://github.com/wled/WLED/blob/29b389df1c1aaec6ff53aea742d17063b985906c/wled00/bus_wrapper.h#L247-L253
+        - https://github.com/wled/WLED/blob/29b389df1c1aaec6ff53aea742d17063b985906c/lib/NeoESP32RmtHI/include/NeoEsp32RmtHIMethod.h#L184-L197
+      quote: |2-
+            https://github.com/Makuna/NeoPixelBus.git#1d7ff38f14d04a976f9c6e365c83a232bcba04fc
+        ---
+        #if !defined(WLED_USE_SHARED_RMT) && !defined(__riscv)
+        #include <NeoEsp32RmtHIMethod.h>
+        #define NeoEsp32RmtMethod(x) NeoEsp32RmtHIN ## x ## Method
+        #else
+        #define NeoEsp32RmtMethod(x) NeoEsp32RmtN ## x ## Method
+        ---
+        typedef NeoEsp32RmtHIMethodBase<NeoEsp32RmtSpeedWs2812x, NeoEsp32RmtChannelN> NeoEsp32RmtHINWs2812xMethod;
+        typedef NeoEsp32RmtHIMethodBase<NeoEsp32RmtSpeedSk6812, NeoEsp32RmtChannelN> NeoEsp32RmtHINSk6812Method;
+    led_types:
+      permalink:
+        - https://github.com/wled/WLED/blob/29b389df1c1aaec6ff53aea742d17063b985906c/wled00/const.h#L316-L337
+        - https://github.com/wled/WLED/blob/29b389df1c1aaec6ff53aea742d17063b985906c/wled00/bus_manager.cpp#L352-L372
+        - https://github.com/wled/WLED/blob/29b389df1c1aaec6ff53aea742d17063b985906c/wled00/bus_wrapper.h#L144-L201
+        - https://github.com/wled/WLED/blob/29b389df1c1aaec6ff53aea742d17063b985906c/wled00/bus_wrapper.h#L255-L302
+        - https://github.com/wled/WLED/blob/29b389df1c1aaec6ff53aea742d17063b985906c/wled00/bus_wrapper.h#L1314-L1386
+      quote: |-
+        #define TYPE_WS2812_1CH_X3       19            //white-only chips (3 channels per IC)
+        #define TYPE_WS2812_WWA          21            //amber + warm + cold white
+        #define TYPE_WS2812_RGB          22
+        #define TYPE_GS8608              23            //same driver as WS2812, but will require signal 2x per second (else displays test pattern)
+        #define TYPE_WS2811_400KHZ       24            //half-speed WS2812 protocol, used by very old WS2811 units
+        #define TYPE_TM1829              25
+        #define TYPE_UCS8903             26
+        #define TYPE_APA106              27
+        #define TYPE_FW1906              28            //RGB + CW + WW + unused channel (6 channels per IC)
+        #define TYPE_UCS8904             29            //first RGBW digital type (hardcoded in busmanager.cpp)
+        #define TYPE_SK6812_RGBW         30
+        #define TYPE_TM1814              31
+        #define TYPE_WS2805              32            //RGB + WW + CW
+        #define TYPE_TM1914              33            //RGB
+        #define TYPE_SM16825             34            //RGB + WW + CW
+        ---
+            {TYPE_WS2812_RGB,    "D",  PSTR("WS281x RGB")},
+            {TYPE_WS2811_400KHZ, "D",  PSTR("400kHz RGB")},
+            {TYPE_TM1829,        "D",  PSTR("TM1829 RGB")},
+            {TYPE_UCS8903,       "D",  PSTR("UCS8903 RGB")},
+            {TYPE_APA106,        "D",  PSTR("APA106/PL9823 RGB")},
+            {TYPE_TM1914,        "D",  PSTR("TM1914 RGB")},
+            {TYPE_SK6812_RGBW,   "D",  PSTR("SK6812/WS2814 RGBW")},
+            {TYPE_UCS8904,       "D",  PSTR("UCS8904 RGBW")},
+            {TYPE_TM1814,        "D",  PSTR("TM1814 RGBW")},
+            {TYPE_FW1906,        "D",  PSTR("FW1906/WS2811 RGBCCT")},
+            {TYPE_WS2805,        "D",  PSTR("WS2805 RGBCCT")},
+            {TYPE_SM16825,       "D",  PSTR("SM16825 RGBCCT")},
+            {TYPE_WS2812_1CH_X3, "D",  PSTR("WS2811 White")},
+            {TYPE_WS2812_WWA,    "D",  PSTR("WS281x WWA")}, // amber ignored
+        ---
+        #define B_32_RN_NEO_3 NeoPixelBus<NeoGrbFeature, NeoEsp32RmtMethod(Ws2812x)> // ESP32, S2, S3, C3
+        #define B_32_RN_NEO_4 NeoPixelBus<NeoGrbwFeature, NeoEsp32RmtMethod(Sk6812)>
+        #define B_32_RN_400_3 NeoPixelBus<NeoGrbFeature, NeoEsp32RmtMethod(400Kbps)>
+        #define B_32_RN_TM1_4 NeoPixelBus<NeoWrgbTm1814Feature, NeoEsp32RmtMethod(Tm1814)>
+        #define B_32_RN_TM2_3 NeoPixelBus<NeoBrgFeature, NeoEsp32RmtMethod(Tm1829)>
+        #define B_32_RN_UCS_3 NeoPixelBus<NeoRgbUcs8903Feature, NeoEsp32RmtMethod(Ws2812x)>
+        #define B_32_I2_UCS_3 NeoPixelBus<NeoRgbUcs8903Feature, X1800KbpsMethod>
+        #define B_32_RN_UCS_4 NeoPixelBus<NeoRgbwUcs8904Feature, NeoEsp32RmtMethod(Ws2812x)>
+        #define B_32_RN_APA106_3 NeoPixelBus<NeoGrbFeature, NeoEsp32RmtMethod(Apa106)>
+        #define B_32_RN_FW6_5 NeoPixelBus<NeoGrbcwxFeature, NeoEsp32RmtMethod(Ws2812x)>
+        #define B_32_I2_FW6_5 NeoPixelBus<NeoGrbcwxFeature, X1800KbpsMethod>
+        #define B_32_RN_2805_5 NeoPixelBus<NeoGrbwwFeature, NeoEsp32RmtMethod(Ws2805)>
+        #define B_32_RN_TM1914_3 NeoPixelBus<NeoGrbTm1914Feature, NeoEsp32RmtMethod(Tm1914)>
+        #define B_32_RN_SM16825_5 NeoPixelBus<NeoRgbcwSm16825eFeature, NeoEsp32RmtMethod(Ws2812x)>
+        ---
+        #define B_8266_U0_NEO_3 NeoPixelBus<NeoGrbFeature, NeoEsp8266Uart0Ws2813Method> //3 chan, esp8266, gpio1
+        #define B_8266_DM_NEO_3 NeoPixelBus<NeoGrbFeature, NeoEsp8266Dma800KbpsMethod>  //3 chan, esp8266, gpio3
+        #define B_8266_DM_NEO_4 NeoPixelBus<NeoGrbwFeature, NeoEsp8266Dma800KbpsMethod>    //4 chan, esp8266, gpio3
+        ---
+                case TYPE_WS2812_1CH_X3:
+                case TYPE_WS2812_RGB:
+                case TYPE_WS2812_WWA:
+                  t = I_32_RN_NEO_3 + offset; break;
+                case TYPE_SK6812_RGBW:
+                  t = I_32_RN_NEO_4 + offset; break;
+      mapping: # WLED UI name -> NeoPixelBus speed on ESP32 RMT (the default driver); ESP8266 in esp8266
+        - {
+            wled: 'WS281x RGB / WS2811 White / WS281x WWA (and GS8608, type 23)',
+            esp32_rmt: Ws2812x,
+            T0H: 400,
+            T1H: 800,
+            period: 1250,
+            reset_us: 300,
+            idle: low,
+            esp8266: 'UART Ws2813 (=Ws2812x speed, 300 µs) or DMA 800Kbps (50 µs)',
+          }
+        - {
+            wled: SK6812/WS2814 RGBW,
+            esp32_rmt: Sk6812,
+            T0H: 400,
+            T1H: 800,
+            period: 1250,
+            reset_us: 80,
+            idle: low,
+            esp8266: 'UART Ws2813 (300 µs) or DMA 800Kbps (50 µs)',
+          }
+        - {
+            wled: 400kHz RGB,
+            esp32_rmt: 400Kbps,
+            T0H: 800,
+            T1H: 1600,
+            period: 2500,
+            reset_us: 50,
+            idle: low,
+          }
+        - {
+            wled: TM1829 RGB,
+            esp32_rmt: Tm1829,
+            T0H: 300,
+            T1H: 800,
+            period: 1200,
+            reset_us: 200,
+            idle: high,
+          }
+        - {
+            wled: UCS8903 RGB / UCS8904 RGBW,
+            esp32_rmt: Ws2812x,
+            T0H: 400,
+            T1H: 800,
+            period: 1250,
+            reset_us: 300,
+            idle: low,
+            frame: 16-bit channels (NeoRgbUcs8903Feature / NeoRgbwUcs8904Feature),
+            esp32_i2s: '800Kbps (50 µs)',
+          }
+        - {
+            wled: APA106/PL9823 RGB,
+            esp32_rmt: Apa106,
+            T0H: 350,
+            T1H: 1350,
+            period: 1700,
+            reset_us: 50,
+            idle: low,
+          }
+        - {
+            wled: TM1914 RGB,
+            esp32_rmt: Tm1914,
+            T0H: 360,
+            T1H: 720,
+            period: 1250,
+            reset_us: 200,
+            idle: high,
+            frame: 6-byte mode preamble,
+          }
+        - {
+            wled: TM1814 RGBW,
+            esp32_rmt: Tm1814,
+            T0H: 360,
+            T1H: 720,
+            period: 1250,
+            reset_us: 200,
+            idle: high,
+            frame: 8-byte current preamble,
+          }
+        - {
+            wled: FW1906/WS2811 RGBCCT,
+            esp32_rmt: Ws2812x,
+            T0H: 400,
+            T1H: 800,
+            period: 1250,
+            reset_us: 300,
+            idle: low,
+            frame: 6 bytes per IC (GRB + CW + WW + unused),
+            esp32_i2s: '800Kbps (50 µs)',
+          }
+        - {
+            wled: WS2805 RGBCCT,
+            esp32_rmt: Ws2805,
+            T0H: 300,
+            T1H: 790,
+            period: 1090,
+            reset_us: 300,
+            idle: low,
+          }
+        - {
+            wled: SM16825 RGBCCT,
+            esp32_rmt: Ws2812x,
+            T0H: 400,
+            T1H: 800,
+            period: 1250,
+            reset_us: 300,
+            idle: low,
+            frame: 16-bit RGBCW + gain settings (NeoRgbcwSm16825eFeature),
+          }
+
+  # -------------------------------------------------------------------------
+  espixelstick:
+    name: ESPixelStick
+    repo: https://github.com/forkineye/ESPixelStick
+    version: main (latest GitHub release is v3.2 from 2020; main is what is developed)
+    commit: 7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4
+    commit_date: '2026-11-11'
+    model:
+      text: >-
+        One output driver per protocol name: WS2811 (the single WS281x-family
+        type), GS8208, UCS1903, UCS8903, TM1814, plus GECE, TLS3001, WS2801,
+        APA102. Each has its own ns constants.
+    settings:
+      - names: [WS2811]
+        esp32: { T0H: 300, T0L: 900, T1H: 700, T1L: 600 } # bit cells 1200 (0) and 1300 (1)
+        esp8266: { T0H: 312, T1H: 975, period: 1250 }
+        reset_us: 350
+        idle: low
+        special: ESP32 values "have been adjusted to work with seed pixels"; the 0 and 1 cells differ in length (1200 vs 1300 ns).
+        permalink:
+          - https://github.com/forkineye/ESPixelStick/blob/7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4/include/output/OutputWS2811.hpp#L49-L71
+        quote: |-
+          #define WS2811_PIXEL_DATA_RATE              800000.0 // 800Khz
+          #ifdef ARDUINO_ARCH_ESP32
+              // values have been adjusted to work with seed pixels.
+          //    #define WS2811_PIXEL_NS_BIT_0_HIGH      312.0 // = 312 on logic analyzer 220ns - 380ns per datasheet
+          //    #define WS2811_PIXEL_NS_BIT_0_LOW       945.0 // = 937 on logic analyzer 580ns - 1.6us per datasheet
+          //    #define WS2811_PIXEL_NS_BIT_1_HIGH      975.0 // = 937 on logic analyzer 580ns - 1.6us per datasheet
+          //    #define WS2811_PIXEL_NS_BIT_1_LOW       300.0 // = 312 on logic analyzer 220ns - 380ns per datasheet
+              #define WS2811_PIXEL_NS_BIT_0_HIGH      300.0 // 220ns - 380ns per datasheet
+              #define WS2811_PIXEL_NS_BIT_0_LOW       900.0
+              #define WS2811_PIXEL_NS_BIT_1_HIGH      700.0
+              #define WS2811_PIXEL_NS_BIT_1_LOW       600.0
+          #else
+              #define WS2811_PIXEL_NS_BIT_0_HIGH      312.0 // 220ns - 380ns per datasheet
+              #define WS2811_PIXEL_NS_BIT_0_LOW       (WS2811_PIXEL_NS_BIT_TOTAL - WS2811_PIXEL_NS_BIT_0_HIGH)
+              #define WS2811_PIXEL_NS_BIT_1_HIGH      975.0 // 580ns - 1.6us per datasheet
+              #define WS2811_PIXEL_NS_BIT_1_LOW       (WS2811_PIXEL_NS_BIT_TOTAL - WS2811_PIXEL_NS_BIT_1_HIGH)
+          #endif // ARDUINO_ARCH_ESP32
+          #define WS2811_PIXEL_IDLE_TIME_US           350.0 // 350us per datasheet
+      - names: [GS8208]
+        derived: true
+        derivation: '1 MHz data rate; T0H = 0.25 × 1000 ns, T1H = 0.75 × 1000 ns'
+        T0H: 250
+        T1H: 750
+        period: 1000
+        reset_us: 300
+        idle: low
+        special: The comment says T1H is "600ns +/- 150ns per datasheet" while the code sends 750 ns.
+        permalink:
+          - https://github.com/forkineye/ESPixelStick/blob/7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4/include/output/OutputGS8208.hpp#L50-L62
+        quote: |-
+          #define GS8208_PIXEL_DATA_RATE              1000000.0
+          #define GS8208_PIXEL_NS_BIT_0_HIGH          (0.25 *  GS8208_PIXEL_NS_BIT_TOTAL) // 250ns +/- 150ns per datasheet
+          #define GS8208_PIXEL_NS_BIT_1_HIGH          (0.75 * GS8208_PIXEL_NS_BIT_TOTAL) // 600ns +/- 150ns per datasheet
+          #define GS8208_PIXEL_IDLE_TIME_NS           300000.0 // 300us per datasheet
+      - names: [UCS1903]
+        T0H: 250
+        T1H: 1000
+        period: 1250
+        reset_us: 25
+        idle: low
+        special: 800 kHz with a 25 µs idle (FastLED's and FPP's "UCS1903" are 400 kHz).
+        permalink:
+          - https://github.com/forkineye/ESPixelStick/blob/7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4/include/output/OutputUCS1903.hpp#L48-L60
+        quote: |-
+          #define UCS1903_PIXEL_DATA_RATE              800000.0
+          #define UCS1903_PIXEL_NS_BIT_0_HIGH          250.0 // 250ns +/- 150ns per datasheet
+          #define UCS1903_PIXEL_NS_BIT_1_HIGH          1000.0 // 1000ns +/- 150ns per datasheet
+          #define UCS1903_PIXEL_IDLE_TIME_NS           25000.0 // 24us per datasheet
+      - names: [UCS8903]
+        T0H: 400
+        T1H: 800
+        period: 1200
+        reset_us: 30
+        idle: low
+        special: 16-bit channels.
+        permalink:
+          - https://github.com/forkineye/ESPixelStick/blob/7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4/include/output/OutputUCS8903.hpp#L50-L63
+        quote: |-
+          #define UCS8903_PIXEL_NS_BIT_TOTAL           (UCS8903_PIXEL_NS_BIT_0_HIGH + UCS8903_PIXEL_NS_BIT_0_LOW)
+          #define UCS8903_PIXEL_NS_BIT_0_HIGH          400.0 // 400ns +/- 40ns per datasheet
+          #define UCS8903_PIXEL_NS_BIT_0_LOW           800.0 // 800ns -0 per data sheet
+          #define UCS8903_PIXEL_NS_BIT_1_HIGH          800.0 // 800ns +/- 150ns per datasheet
+          #define UCS8903_PIXEL_NS_BIT_1_LOW           400.0 // 400ns -0 per data sheet
+          #define UCS8903_PIXEL_IDLE_TIME_NS           30000.0 // >24us per datasheet
+          #define UCS8903_INTENSITY_DATA_WIDTH         16
+      - names: [TM1814]
+        T0H: 375 # width of the active (low) pulse for a 0
+        T1H: 800 # width of the active (low) pulse for a 1
+        period: 1250
+        reset_us: 500
+        idle: high
+        special: Data inverted (SetInvertData(true)); a current-limit preamble is prepended to every frame.
+        permalink:
+          - https://github.com/forkineye/ESPixelStick/blob/7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4/include/output/OutputTM1814.hpp#L47-L57
+          - https://github.com/forkineye/ESPixelStick/blob/7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4/src/output/OutputTM1814.cpp#L98-L105
+        quote: |-
+          #define TM1814_PIXEL_DATA_RATE              800000.0
+          #define TM1814_PIXEL_NS_BIT_0_LOW           375.0 // 360ns +/- 50ns per datasheet
+          #define TM1814_PIXEL_NS_BIT_0_HIGH          (TM1814_PIXEL_NS_BIT_TOTAL - TM1814_PIXEL_NS_BIT_0_LOW)
+          #define TM1814_PIXEL_NS_BIT_1_LOW           800.0 // 720ns -70ns / +280ns per datasheet
+          #define TM1814_PIXEL_NS_IDLE                500000.0 // 500us per datasheet
+          ---
+              uint8_t PreambleValue = map (CurrentLimit, 1, 100, 0, 63);
+              memset ((void*)(&PreambleData.normal[0]), ~PreambleValue, sizeof (PreambleData.normal));
+              memset ((void*)(&PreambleData.inverted[0]),  PreambleValue, sizeof (PreambleData.inverted));
+              SetFramePrependInformation ( (uint8_t*)&PreambleData, sizeof (PreambleData));
+              SetInvertData (true);
+
+  # -------------------------------------------------------------------------
+  fpp:
+    name: Falcon Player (FPP)
+    repo: https://github.com/FalconChristmas/fpp
+    version: 10.4 (tag; release published 2026-11-09)
+    commit: 123b8ca089b98a54f7f5c0b7ee7b72ed18217f21
+    commit_date: '2026-11-09'
+    model:
+      text: >-
+        The string drivers (BeagleBone PRU, Pi DPI) run ONE bit cell per
+        controller, chosen from a few timing groups; every protocol name in a
+        group gets the same cell. Inversion and preambles are per port.
+      permalink:
+        - https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/www/co-pixelStrings.php#L949-L1018
+      quote: |-
+        // Bit timing groups.  T0, T1 and the end of the bit cell are single latch
+        // instants shared by every port on the PRU, so a controller can only run
+        // one bit cell at a time - which is exactly why this is picked once for the
+        // controller and then filters what each port may be set to.
+        // Each group is one exact bit cell, so every protocol in a group really is
+        // interchangeable.  The timings mirror PixelString::protocolTiming(), which
+        // is authoritative
+            { id: 'ws281x', label: 'WS281x (800kHz)', t0: 320, t1: 750, period: 1120 },
+            { id: 'ucs1903', label: 'UCS1903 (400kHz)', t0: 500, t1: 2000, period: 2500 },
+            { id: 'tm1803', label: 'TM1803 (400kHz)', t0: 750, t1: 1875, period: 2625 },
+            { id: 'gw6205', label: 'GW6205 (400kHz)', t0: 750, t1: 1625, period: 2375 },
+            { id: 'tm1804', label: 'TM1804', t0: 500, t1: 1000, period: 1500 },
+            { id: 'sk6822', label: 'SK6822', t0: 375, t1: 1375, period: 1750 },
+            { id: 'ucs1912', label: 'UCS1912', t0: 250, t1: 1250, period: 1625 },
+            { id: 'ge8822', label: 'GE8822', t0: 375, t1: 1000, period: 1375 }
+        // Parts that are electrically a WS2811 at 800kHz: same bit cell, same
+        // 1.25us period, so FPP drives them all with one timing and the choice is
+        // a label rather than a behaviour.  Grouped as xLights groups them.
+        // tm1914 is still absent: it is inverted like the rest of the TM18xx family
+        // and wants a mode select preamble, so it needs real support rather than a
+        // place in a list.
+        var PIXEL_PROTOCOLS_WS281X = [
+            'ws2811', 'ws2812', 'ws2812b', 'ws2813', 'ws2815', 'ws2818',
+            'sk6812', 'sk6813', 'sm16703', 'gs8206', 'gs8208',
+            'tm1809', 'tm1812', 'ucs1904', 'ucs2903', 'apa104', 'apa106',
+            // the RGBW members of the same family - colour order picks the
+            // channel count, so these behave identically too
+            'apa109', 'sk6812rgbw', 'sk6818', 'sm16704', 'ucs2904', 'ws2814'
+        ].join(',');
+            'tm1814': { bytesPerChannel: 1, preamble: 8 },
+            'tm1814a': { bytesPerChannel: 1, preamble: 8 },
+            'ucs8903': { bytesPerChannel: 2, preamble: 0 },
+            'ucs8904': { bytesPerChannel: 2, preamble: 0 },
+            'ucs7604': { bytesPerChannel: 2, preamble: 0 },
+        // Which protocols each timing group offers.  The ws281x group also carries
+        // the parts that differ in polarity or bit width rather than timing -
+        // tm1814 (inverted) and ucs8903/8904 (16 bit) - because those really are
+        // per port and can sit alongside plain ws2811 on one controller.
+            'ucs1903': 'ucs1903,ws2811slow',
+            'sk6822': 'sk6822,pl9823',
+    settings:
+      - names:
+          [
+            ws2811,
+            ws2812,
+            ws2812b,
+            ws2813,
+            ws2815,
+            ws2818,
+            sk6812,
+            sk6813,
+            sm16703,
+            gs8206,
+            gs8208,
+            tm1809,
+            tm1812,
+            ucs1904,
+            ucs2903,
+            apa104,
+            apa106,
+            apa109,
+            sk6812rgbw,
+            sk6818,
+            sm16704,
+            ucs2904,
+            ws2814,
+          ]
+        T0H: 320
+        T1H: 750
+        period: 1120
+        reset_us: null # not in these files
+        idle: low
+        special: tm1814/tm1814a ride the same cell inverted with an 8-byte current preamble; ucs8903/ucs8904 the same cell at 16 bits.
+        permalink:
+          - https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/src/channeloutput/PixelString.cpp#L494-L529
+        quote: |-
+          // Per protocol bit cell.  Anything not listed is the 800kHz ws281x family,
+          // which is the overwhelming majority and what the timing has always been.
+          //
+          // The listed ones are genuinely different parts, not aliases: driving them
+          // with the ws281x cell does not merely shift an edge, it puts the pulse
+          // outside the window the part decodes.  That is why they were kept out of the
+          // protocol dropdown until the firmware could take its timing at runtime.
+              // the ws281x family - see the alias list in co-pixelStrings.php
+              static const Timing ws281x{ 320, 750, 1120 };
+              // 400kHz parts: a 2.5us cell, twice the ws281x period
+              if (protocol == "ucs1903" || protocol == "ws2811slow" || protocol == "ws2811 slow") {
+                  return { 500, 2000, 2500 };
+              if (protocol == "tm1803") {
+                  return { 750, 1875, 2625 };
+              if (protocol == "gw6205") {
+                  return { 750, 1625, 2375 };
+              // longer cell parts, between the two
+              if (protocol == "tm1804" || protocol == "tm1809slow") {
+                  return { 500, 1000, 1500 };
+              if (protocol == "sk6822" || protocol == "pl9823") {
+                  return { 375, 1375, 1750 };
+              if (protocol == "ucs1912") {
+                  return { 250, 1250, 1625 };
+              if (protocol == "ge8822") {
+                  return { 375, 1000, 1375 };
+      - names: [ucs1903, ws2811slow, 'ws2811 slow']
+        T0H: 500
+        T1H: 2000
+        period: 2500
+      - names: [tm1803]
+        T0H: 750
+        T1H: 1875
+        period: 2625
+      - names: [gw6205]
+        T0H: 750
+        T1H: 1625
+        period: 2375
+      - names: [tm1804, tm1809slow]
+        T0H: 500
+        T1H: 1000
+        period: 1500
+      - names: [sk6822, pl9823]
+        T0H: 375
+        T1H: 1375
+        period: 1750
+      - names: [ucs1912]
+        T0H: 250
+        T1H: 1250
+        period: 1625
+      - names: [ge8822]
+        T0H: 375
+        T1H: 1000
+        period: 1375
+    inversion_and_preamble:
+      permalink:
+        - https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/src/channeloutput/PixelString.cpp#L431-L461
+        - https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/src/channeloutput/PixelString.cpp#L544-L546
+        - https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/src/channeloutput/PixelString.cpp#L570-L575
+      quote: |2-
+                // per channel drive current; the part powers up at its 6.5mA floor, so
+                // without this a TM1814 string just looks dim
+                float mA = config.isMember("tm1814MilliAmps") ? config["tm1814MilliAmps"].asFloat() : 38.0f;
+            // Cape declared inversion corrects a wiring defect; protocol inversion is
+            // the pixel type asking for it.  Both flip the same line, so they compose
+            // by xor and cancel when a TM18xx string lands on a backwards-wired port.
+        ---
+            return protocol == "tm1814" || protocol == "tm1814a";
+        ---
+        bool PixelString::isInvertedProtocol(const std::string& protocol) {
+            // Only the protocols FPP can actually drive today.  The TM18xx bit cell
+            // is close enough to ws2811 that the shared timing covers it; what makes
+            // them different is the idle level.
+            return protocol == "tm1814" || protocol == "tm1814a";
+    dpi_output:
+      text: >-
+        Raspberry Pi DPI string output: a 1.25 µs cell of 48 framebuffer
+        pixels at 38.4 MHz (26 ns each); 12 px high before the data section
+        gives T0H 312 ns / T1H 729 ns. The old even-thirds layout (417 ns T0H)
+        is kept only for the 4-latch-bank layout.
+      T0H: 312
+      T1H: 729
+      period: 1250
+      permalink:
+        - https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/src/non-gpl/DPIPixels/DPIPixels.cpp#L61-L84
+        - https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/src/non-gpl/DPIPixels/DPIPixels.cpp#L110-L111
+      quote: |-
+        // FB pixels the non-latched WS bit stays high before its data section, i.e.
+        // the 0-bit high time in 26ns steps.  The bit cell is 48 px: this many high,
+        // then 16 px of data (high for a 1) written by PrepData(), then low.  12 gives
+        // T0H 312ns / T1H 729ns, which is what FPP's PRU string drivers have shipped
+        // for years (320/750) and sits inside every datasheet window: WS2811 wants a
+        // 0-bit high of 100-400ns, SK6812/WS2815 150-450, WS2812B 250-550.  The old
+        // even thirds gave 417ns, outside the WS2811 window, and the first pixel on a
+        // string of older WS2811 parts (the only one that sees the Pi's raw edge,
+        // every later pixel gets a regenerated one) would randomly read 0 bits as 1.
+        ---
+         * The width is 1920 and the pixel clock 38.4MHz, which makes each WS bit 48 FB
+         * pixels (1.25us).
+
+  # -------------------------------------------------------------------------
+  xlights:
+    name: xLights
+    repo: https://github.com/xLightsSequencer/xLights
+    version: 2026.20 (tag; release published 2026-11-12)
+    commit: c86999e87f252a2ba7ad520580b134d36e434653
+    commit_date: '2026-11-12'
+    carries_timings: false
+    model:
+      text: >-
+        An equivalence table used to map a model's pixel type to whatever name
+        a controller lists ("exact match always wins over the group"). No
+        timings. FPP's ws281x alias list says it is "Grouped as xLights groups
+        them".
+      permalink:
+        - https://github.com/xLightsSequencer/xLights/blob/c86999e87f252a2ba7ad520580b134d36e434653/src-core/models/Pixels.cpp#L15-L29
+        - https://github.com/xLightsSequencer/xLights/blob/c86999e87f252a2ba7ad520580b134d36e434653/src-core/models/Pixels.cpp#L99-L136
+        - https://github.com/xLightsSequencer/xLights/blob/c86999e87f252a2ba7ad520580b134d36e434653/src-core/models/Pixels.cpp#L156-L161
+      quote: |-
+        // * The following table may not be accurate but it is my best understanding of protocol         *
+        // * compatibility. This does not mean that controllers wont show them as separate or even that  *
+        // * some controllers having timing that means that things which could be equivalent with the    *
+        // * righting timing choice are not in reality. This makes things messy but I do think having    *
+        // * this documented somewhere is essential.                                                     *
+        // | WS2811         | RGB, 8 bit, 3 wire     | APA104, APA106, CS8812, GE8822, GS8202, GS8206,   |                                        |
+        // |                |                        | GS8208, INK1002, INK1003, LPD1882,                |                                        |
+        // |                |                        | LX1203, P9883, PL9823, SK6812, SK6813, SK6822,    |                                        |
+        // |                |                        | SM16703, SM16711, SM16712, TM1803, TM1804,        |                                        |
+        // |                |                        | TM1809, TM1812, TM1914, UCS1903, UCS1904,         |                                        |
+        // |                |                        | UCS1909, UCS1912, UCS2903, UCS2909, UCS2912,      |                                        |
+        // |                |                        | UCS9812, WS2811, WS2812, WS2813, WS2815, WS2818   |                                        |
+        // GE8822 and PL9823 join the WS2811 group on the same basis as the SK6822 and TM1803 already
+        // in it: a controller that can set its bit cell drives them as distinct parts, and one that
+        // cannot is no worse off treating them as a WS2811 than it was before they were listed.
+        // A controller that really does distinguish them lists them separately in its capabilities,
+        // and an exact match always wins over the group.
+            { "ws2811", // preferred & default
+              "apa104", "apa106", "cs8812", "ge8822", "gs8202", "gs8206", "gs8208", "ink1002", "ink1003", "lb1908", "lpd1882",
+              "lx1203", "p9883", "pl9823", "sk6812", "sk6813", "sk6822", "sm16703", "sm16711", "sm16712", "tm1803", "tm1804", "tm1809",
+              "tm1812", "tm1914", "ucs1903", "ucs1904", "ucs1909", "ucs1912", "ucs2903", "ucs2909", "ucs2912", "ucs9812",
+              "ws2812", "ws2812b", "ws2813", "ws2815", "ws2818",
+              // artificial
+              "tm18xx", "ws281x", "ws2811v1.4", "ws2811 slow", "gs820x", "gs8206/8"
+            },
+            { "apa109", "sk6812rgbw", "sk6818", "sm16704", "sm16804", "ucs2904", "ws2814" },
+            { "tm1814", "tm1814a" },
+            { "tm1829" },
+            { "ucs9812" }, // I have not researched these
+      notes: >-
+        "ucs9812" appears both in the ws2811 group and as its own group (line
+        161, "I have not researched these"); "ws2811 slow" is in the ws2811
+        group although FPP and Falcon treat it as a 400 kHz cell.
+
+  # -------------------------------------------------------------------------
+  rpi_ws281x:
+    name: rpi_ws281x (jgarff), the Raspberry Pi PWM/PCM/SPI driver
+    repo: https://github.com/jgarff/rpi_ws281x
+    version: master (latest tag v1.0.0)
+    commit: 22f2e35012704845d82e06d2fa2e10fbc810ecaa
+    commit_date: '2026-05-03'
+    model:
+      text: >-
+        One waveform for every strip type (WS2811/WS2812/SK6812/SK6812W differ
+        only in colour layout): 3 symbols per data bit at 3 × freq
+        (freq default 800000), 0 = "100", 1 = "110" (from the convert table:
+        0x00 encodes as 0x92 0x49 0x24 = 100 100 100 …), then 55 µs of low in the
+        buffer, and the next render is held off 300 µs.
+      derived: true
+      T0H: 417
+      T1H: 833
+      period: 1250
+      reset_us: 55 # in the DMA buffer; plus LED_RESET_WAIT_TIME 300 before the next render
+      idle: low # invert flag per channel exists for an inverting level shifter
+      permalink:
+        - https://github.com/jgarff/rpi_ws281x/blob/22f2e35012704845d82e06d2fa2e10fbc810ecaa/ws2811.h#L44-L66
+        - https://github.com/jgarff/rpi_ws281x/blob/22f2e35012704845d82e06d2fa2e10fbc810ecaa/ws2811.c#L61-L68
+        - https://github.com/jgarff/rpi_ws281x/blob/22f2e35012704845d82e06d2fa2e10fbc810ecaa/ws2811.c#L354
+        - https://github.com/jgarff/rpi_ws281x/blob/22f2e35012704845d82e06d2fa2e10fbc810ecaa/ws2811.c#L1132-L1137
+        - https://github.com/jgarff/rpi_ws281x/blob/22f2e35012704845d82e06d2fa2e10fbc810ecaa/ws2811.c#L1287-L1289
+      quote: |-
+        #define WS2811_TARGET_FREQ                       800000   // Can go as low as 400000
+        #define WS2812_STRIP                             WS2811_STRIP_GRB
+        #define SK6812_STRIP                             WS2811_STRIP_GRB
+        #define SK6812W_STRIP                            SK6812_STRIP_GRBW
+        ---
+        /* 4 colors (R, G, B + W), 8 bits per byte, 3 symbols per bit + 55uS low for reset signal */
+        #define LED_RESET_uS                             55
+        /* Minimum time to wait for reset to occur in microseconds. */
+        #define LED_RESET_WAIT_TIME                      300
+        ---
+            cm_clk->div = CM_CLK_DIV_PASSWD | CM_CLK_DIV_DIVI(osc_freq / (3 * freq));
+        ---
+        	static uint8_t convert_table[3][256] =
+        			0x92, 0x92, 0x92, 0x92, 0x92, 0x92, 0x92, 0x92, 0x92,
+        ---
+            // LED_RESET_WAIT_TIME is added to allow enough time for the reset to occur.
+            ws2811->render_wait_time = protocol_time + LED_RESET_WAIT_TIME;
+
+  # -------------------------------------------------------------------------
+  esp_idf_led_strip:
+    name: Espressif led_strip component (ESP-IDF)
+    repo: https://github.com/espressif/idf-extra-components/tree/master/led_strip
+    version: 3.1.1 (led_strip/idf_component.yml at this commit)
+    commit: f5333b7ffb6439dd73c4d56b5fed9c6d8f9756e1
+    commit_date: '2026-11-20'
+    settings:
+      - names: [LED_MODEL_WS2812]
+        T0H: 300
+        T0L: 900
+        T1H: 900
+        T1L: 600 # 0 cell 1200 ns, 1 cell 1500 ns
+        reset_us: 280
+      - names: [LED_MODEL_SK6812]
+        T0H: 300
+        T0L: 900
+        T1H: 700
+        T1L: 600 # 0 cell 1200, 1 cell 1300
+        reset_us: 280
+      - names: [LED_MODEL_WS2811]
+        T0H: 500
+        T0L: 2000
+        T1H: 1200
+        T1L: 1300 # 2500 / 2500
+        reset_us: 50
+      - names: [LED_MODEL_WS2816]
+        T0H: 300
+        T0L: 950
+        T1H: 750
+        T1L: 500 # 1250 / 1250
+        reset_us: 280
+      - names: [SPI backend (WS2812 and WS2816 only)]
+        derived: true
+        derivation: '2.5 MHz SPI, 3 SPI bits per data bit: 100 / 110'
+        T0H: 400
+        T1H: 800
+        period: 1200
+    permalink:
+      - https://github.com/espressif/idf-extra-components/blob/f5333b7ffb6439dd73c4d56b5fed9c6d8f9756e1/led_strip/src/led_strip_rmt_dev.c#L203-L250
+      - https://github.com/espressif/idf-extra-components/blob/f5333b7ffb6439dd73c4d56b5fed9c6d8f9756e1/led_strip/src/led_strip_spi_dev.c#L20
+      - https://github.com/espressif/idf-extra-components/blob/f5333b7ffb6439dd73c4d56b5fed9c6d8f9756e1/led_strip/src/led_strip_spi_dev.c#L60-L62
+    quote: |2-
+        case LED_MODEL_WS2812:
+            *timings = (led_strip_timings_t) {
+                .t0h_ns = 300,
+                .t1h_ns = 900,
+                .t0l_ns = 900,
+                .t1l_ns = 600,
+                .reset_us = 280,
+        case LED_MODEL_SK6812:
+                .t0h_ns = 300,
+                .t1h_ns = 700,
+                .t0l_ns = 900,
+                .t1l_ns = 600,
+                .reset_us = 280,
+        case LED_MODEL_WS2811:
+                .t0h_ns = 500,
+                .t1h_ns = 1200,
+                .t0l_ns = 2000,
+                .t1l_ns = 1300,
+                .reset_us = 50,
+        case LED_MODEL_WS2816:
+                .t0h_ns = 300,
+                .t1h_ns = 750,
+                .t0l_ns = 950,
+                .t1l_ns = 500,
+                .reset_us = 280,
+      ---
+      #define LED_STRIP_SPI_DEFAULT_RESOLUTION (2.5 * 1000 * 1000) // 2.5MHz resolution
+          // Each color of 1 bit is represented by 3 bits of SPI, low_level:100 ,high_level:110
+
+# ---------------------------------------------------------------------------
+# 2. Controller makers: which names they list as one protocol
+# ---------------------------------------------------------------------------
+controllers:
+  falcon:
+    name: Falcon (pixelcontroller.com) "Pixel Types"
+    url: https://pixelcontroller.com/store/PixelTypes.html
+    retrieved: '2026-11-20' # page carries no date
+    carries_timings: false
+    intro_quote: >-
+      While there are lots of different chips in pixels there are actually very
+      few distinct protocols. This is our best understanding of those the
+      controller is compatible with. If you have a different chip please feel
+      free to contact us and we would be happy to investigate the feasibility of
+      adding support.
+    quote_format: >-
+      The table is built by JavaScript from a `pixelTypes` object in the page
+      source; the group quotes below copy that object's keys and values
+      verbatim with line breaks collapsed and some keys left out.
+    groups: # n = type, a = "Alternatives", c = channels, b = bits per channel, w = wires
+      - n: WS2811
+        quote: |-
+          n: 'WS2811', c: 3, b: 8, w: 3,
+          a: ['APA104', 'APA106', 'APA107', 'CS8812', 'GS8202', 'GS8206', 'GS8208', 'INK1002', 'INK1003', 'LB1908', 'LPD1882', 'LX1203', 'P9883', 'SK6812 (RGB)', 'SK6813', 'SK6822', 'SM16703', 'SM16711', 'SM16712', 'TM1803', 'TM1804', 'TM1809', 'TM1812', 'TM1914', 'UCS1903', 'UCS1904', 'UCS1909', 'UCS1912', 'UCS2903', 'UCS2909', 'UCS2912', 'UCS9812', 'WS2811', 'WS2812', 'WS2813', 'WS2815', 'WS2818']
+      - n: WS2811 Slow
+        quote: "n: 'WS2811 Slow', a: ['Same as WS2811 but @ 400KHz']"
+      - n: APA109
+        quote: "n: 'APA109', c: 4, b: 8, w: 3, t: 'These expect 4 channels of input data per pixel.', a: ['APA109', 'SK6812 (RGBW)', 'SK6818', 'SM16704', 'SM16804', 'UCS2904', 'WS2814']"
+      - n: WS2805
+        quote: "n: 'WS2805', c: 5, b: 8, w: 3, t: 'These expect 5 channels of input data per pixel.', a: ['WS2805']"
+      - n: TM1814
+        quote: "n: 'TM1814', c: 4, b: 8, w: 3, t: 'These expect 4 channels of input data per pixel.', a: ['TM1814']"
+      - n: TM1829
+        quote: "n: 'TM1829', c: 3, b: 5, w: 3, a: ['TM1829']"
+      - n: UCS8903 / UCS8903 (16) / UCS8904 / UCS8904 (16)
+        quote: "n: 'UCS8903', c: 3, b: 16, w: 3, t: 'This takes 3 x 8 bit values in the input data and expands it to 16 bit values.'"
+      - n: SM16825 / SM16825 (16)
+        quote: "n: 'SM16825', c: 5, b: 16, w: 3, t: 'This takes 5 x 8 bit values in the input data and expands it to 16 bit values.'"
+      - n: DMX512P / DMX512P-4
+        quote: "n: 'DMX512P', a: ['DMX512', 'UCS512', 'WS2822'] / n: 'DMX512P-4', a: ['UCS512C4']"
+      - n: TLS3001
+        quote: "n: 'TLS3001', c: 3, b: 12, w: 3, a: ['CY3005', 'TLS3001', 'TLS3002', 'QED3001']"
+      - n: SJ1221
+        quote: "n: 'SJ1221', c: 3, b: 12, w: 3, a: ['UCS5603']"
+      - n: clocked (APA102, HD108, LPD6803, LPD8806, WS2801, SM16716)
+        quote: "n: 'APA102', a: ['APA101', 'APA102', 'APA102C', 'HD107S', 'SK9822'] / n: 'HD108', b: 16 / n: 'LPD6803', a: ['D705', 'LPD1101', 'LPD6803', 'UCS6909', 'UCS6912S'] / n: 'LPD8806', a: ['LPD8803', 'LPD8806', 'LPD8809', 'UCS8812'] / n: 'WS2801', a: ['WS2801', 'WS2803'] / n: 'SM16716', a: ['SM16716', 'SM16726']"
+      - n: listed as not supported
+        quote: "'GW6205 (Not supported)', 'MBI6020 (Not supported)', 'MY9221 (Not supported)' a: ['MY9231?'], 'MY9291 (Not supported)', 'P9813 (Not supported)', 'TLS3008 (Not supported)'"
+    notes: >-
+      The WS2811 alternatives list is the same as xLights' ws2811 group except
+      that Falcon adds APA107 and omits GE8822 and PL9823 (which xLights added
+      with a comment). Falcon gives no timing, so it does not say which cell its
+      firmware sends for each alternative.
+
+  advatek:
+    name: Advatek "Pixel Protocols" glossary (PixLite controllers)
+    url: https://www.advateklighting.com/pixel-protocols
+    retrieved: '2026-11-20'
+    carries_timings: false
+    model: >-
+      One page per IC, 97 pages; each IC is its own selectable "Pixel IC type".
+      Pages give clock type, colour resolution, PWM rate, voltage and "Data
+      Transfer Rate"; none gives T0H/T1H or says two ICs are interchangeable.
+      The only cross-IC statements are below.
+    statements:
+      - url: https://www.advateklighting.com/pixel-protocols/ws2811
+        quote: 'Note: Depending on the manufacturer your pixels are sourced from, your pixels may be WS2811 V1.4 or WS2811 . Contact us if you need assistance in determining this.'
+      - url: https://www.advateklighting.com/pixel-protocols/ws2811-v1-4
+        quote: WS2811 V1.4 is the newly revised version of WS2811 , featuring a higher PWM rate and different data timing.
+      - url: https://www.advateklighting.com/pixel-protocols/tm1804
+        quote: TM1804 is equipped with all the same features as its previous version, TM1803 , but uses a different data timing method to achieve a wider tolerance for inaccuracies, decreasing the chance of a bit error.
+      - url: https://www.advateklighting.com/pixel-protocols/tm1803
+        quote: Narrow tolerance for timing errors, making it less reliable than TM1804
+      - url: https://www.advateklighting.com/pixel-protocols/tm1829
+        quote: TM1829 is an improved design of its previous versions, TM1803 and TM1804 , using improved optics to achieve a higher PWM rate and a different data timing method to achieve faster data transfer rates.
+      - url: https://www.advateklighting.com/pixel-protocols/ws2815b
+        quote: WS2815B offers all the same features as WS2815 , but with slightly different timing, and at a constant current of 12mA, instead of 15mA.
+      - url: https://www.advateklighting.com/pixel-protocols/ws2818a
+        quote: WS2818A offers the same functionality as WS2818 , but with slightly different timing, and built only for 5V applications.
+      - url: https://www.advateklighting.com/pixel-protocols/ws2818b
+        quote: WS2818B offers the same functionality as WS2818 , but with slightly different timing, and built only for 12V applications.
+      - url: https://www.advateklighting.com/pixel-protocols/ink1003
+        quote: It can also be integrated into a 5050 package with built-in LEDs in its INK1002B variant, but with the same protocol.
+      - url: https://www.advateklighting.com/pixel-protocols/sk6813
+        quote: The 12V variant (also called SK6813HV for 'high voltage') is very similar to World Semi's WS2815 .
+      - url: https://www.advateklighting.com/pixel-protocols/ws2812b
+        quote: While very similar to its previous version, WS2812 , WS2812B offers reverse polarity protection on its power input, and also uses a 4-legged 5050 package, rather than 6.
+    data_transfer_rates: # "Data Transfer Rate" row, verbatim, single-wire ICs; page = /pixel-protocols/<slug>
+      '800kbps':
+        [
+          apa104,
+          apa105,
+          apa109,
+          cs8812,
+          enttec-spxl,
+          fw1906,
+          hc1816,
+          ink1003,
+          lb1908,
+          p9412,
+          p943,
+          p9883,
+          sk6805,
+          sk6808,
+          sk6812,
+          sk6813,
+          sk6818,
+          sk6822,
+          sk6851,
+          sm15055,
+          sm16703,
+          sm16704,
+          sm16705,
+          sm16712,
+          sm16714,
+          sm16803,
+          sm16804,
+          sm16824,
+          sm8606,
+          tm1829,
+          tm1903,
+          tm1934,
+          tx1818,
+          ucs2603,
+          ucs2903,
+          ucs2904,
+          ucs2912,
+          ucs5603,
+          ucs8903,
+          ucs8904,
+          ws2805,
+          ws2808,
+          ws2811,
+          ws2811-v1-4,
+          ws2812,
+          ws2812b,
+          ws2813,
+          ws2814,
+          ws2815,
+          ws2815b,
+          ws2816a,
+          ws2816bc,
+          ws2818,
+          ws2818a,
+          ws2818b,
+          ws2851,
+        ]
+      '400 - 800kbps': [tm1803, tm1804, tm1809, tm1824, tm1914, ucs1903, ucs1904]
+      '500 - 800kbps': [tm1814]
+      '400 - 1000kbps': [gs8206, gs8208]
+      '200 - 1200kbps': [gs8303, gs8304]
+      '500 - 1000kbps': [qed3001, tls3001]
+      '1000 - 1300kbps': [brightek-vf1212vgbchn1]
+      '1100kbps': [ucs9812]
+      '660kbps': [ucs7804]
+      '800 or 1600 kbps': [ucs7604, ucs8603]
+      '115.2kbps supported': [adafruit-pixie]
+
+  enttec:
+    name: ENTTEC "Pixel Protocols"
+    url: https://www.enttec.com/pixel-protocols/
+    retrieved: '2026-11-20'
+    carries_timings: false
+    model: >-
+      A support matrix (protocol × controller: OCTO, DIN PIXIE, PIXELATOR MINI
+      (MK2), PLINK INJECTOR, IP PLINK INJECTOR, eDMX Storm, DIN Ethergate) and
+      one page per IC (102 slugs, e.g. /pixel-protocols/WS2811 and
+      /pixel-protocols/WS2811-V1.4, listed separately). The per-IC pages read
+      (WS2811, WS2811-V1.4, WS2812B, TM1814) give specs and "Compatible ENTTEC
+      controllers", no timing and no IC-to-IC equivalences. Unlisted ICs are
+      handled by "custom protocol creation".
+    statements:
+      - url: https://www.enttec.com/pixel-protocols/
+        quote: 'Can ENTTEC pixel controllers auto-detect pixel protocols? No — users must configure the correct protocol during setup, but our software makes it easy to select.'
+      - url: https://www.enttec.com/pixel-protocols/
+        quote: Easily create a custom protocol on your ENTTEC pixel controller for any fixture—anytime (criteria apply), no firmware update needed.
+      - url: https://www.enttec.com/pixel-protocols/buying-real-pixel-chips
+        quote: Manufacturing rejects and lower-grade parts are routinely re-marked, sometimes laser-etched, with a premium chip's name. A strip sold as a well-known protocol may not contain that part at all, so two reels with identical labels can behave very differently.
+      - url: https://www.enttec.com/pixel-protocols/buying-real-pixel-chips
+        quote: One production run performs flawlessly; the next brings dead pixels, colour shift, timing drift, or early failures, with nothing changed on the datasheet.
+    open: >-
+      ENTTEC's "Custom Protocol Creation Guide" (linked from the page) was not
+      found as a URL in the page source and was not read, so the parameters an
+      ENTTEC custom protocol exposes are unknown here.
+
+# ---------------------------------------------------------------------------
+# 3. Measurements of real parts
+# ---------------------------------------------------------------------------
+measurements:
+  cpldcpu_2014_ws2812:
+    title: 'Light_WS2812 library V2.0 - Part I: Understanding the WS2812 (Tim, "cpldcpu")'
+    url: https://cpldcpu.github.io/2014/01/14/light_ws2812-library-v2-0-part-i-understanding-the-ws2812/
+    table_image: https://cpldcpu.github.io/2014/01/14/light_ws2812-library-v2-0-part-i-understanding-the-ws2812/ws2812_timing_table.png
+    date: '2014-01-14'
+    parts: WS2812 (6-pin, "WS2812(S)") and WS2812B (4-pin), the two revisions on the market in January 2014
+    method: ATtiny85 as generator, Din and Dout on a Saleae logic analyser (24 MHz); input high time and period swept from 62.5 ns to 4 µs in 62.5 ns steps; the reshaped Dout shows how each bit was read.
+    results: # read from the table image (verbatim cells)
+      WS2812B:
+        {
+          T_HI_IN_0: '62.5 ns - 563 ns',
+          T_HI_IN_1: '≥ 625 ns',
+          T_PERIOD_IN: '≥ 1063 ns',
+          T_DELAY_IN_OUT: '~ 208 ns',
+          T_HI_OUT_0: '~ 416 ns',
+          T_HI_OUT_1: '~ 832 ns',
+          T_RESET: '> 9 µs',
+        }
+      WS2812:
+        {
+          T_HI_IN_0: '62.5 ns - 500 ns',
+          T_HI_IN_1: '≥ 563 ns',
+          T_PERIOD_IN: '≥ 875 ns',
+          T_DELAY_IN_OUT: '~ 166 ns',
+          T_HI_OUT_0: '~ 333 ns',
+          T_HI_OUT_1: '~ 666 ns',
+          T_RESET: '> 10.8 µs',
+        }
+      cycles:
+        {
+          T_HI_IN_0: '<3',
+          T_HI_IN_1: '>3',
+          T_PERIOD_IN: '>5',
+          T_DELAY_IN_OUT: '1',
+          T_HI_OUT_0: '2',
+          T_HI_OUT_1: '4',
+        }
+    quote: |-
+      One of the first observations was that the delay between the leading edge of the input pulse and the leading edge of the output pulse, T_delay_in_out , was constant regardless of the timing of the input pulse.
+      Even the shortest input pulse (62.5 ns) is identified as "0", while even the longest input pulse (1250-62.5=1187.5 ns) is identified as a "1". The threshold between "0" and "1" is somewhere between 563 and 625 ns.
+      The shortest pulse period time where all input pulses appeared on the data output was 1063 ns. Below that the input pulses were partially or fully rejected. Above this threshold all input pulses were interpreted correctly and the period of the output signal reflected the period of the input signal up to 9 us when the reset condition was met.
+      For the WS2812 under test here, the minimum reset length was 8.95 us, way below the specifications. The suggested reset time of 50 us is therefore more than sufficient to reset the LEDs. On the other hand, it means that no more than 9 us of idle time may occur during data transfer, or a reset may mistakenly be issued.
+      It is possible that there are significant differences between production batches of both types, therefore these number can only serve as a rough indication. All timings seem to be a bit shorter on the WS2812.
+      An interesting observation is that the timing values for both LEDs are multiples of a smaller number, ~208 ns for the WS2812B and ~166 ns of the WS2812. It appears that the internal controller circuit is actually a clocked design - possibly realized by a small state machine.
+      The internal WS2812 state machine only needs to sample the input twice per bit: First, it waits for a rising edge of the input. This will initiate the sequence above. The input is latched again after cycle 2. The voltage of the input pin at this point determines whether a '1' or a '0' is read.
+      A "0" can be encoded with a pulse as short as 62.5 ns, but should not be longer than ~500 ns (maximum on WS2812).
+      A "1" can be encoded with pulses almost as long as the total cycle time, but it should not be shorter than ~625 ns (minimum on WS2812B).
+    sampling_point: >-
+      A fixed delay after the rising edge, counted by an internal clock: the
+      table puts the 0/1 boundary at 3 internal cycles (WS2812B: between 563
+      and 625 ns, cycle ~208 ns; WS2812: between 500 and 563 ns, cycle ~166 ns).
+      The prose says the input "is latched again after cycle 2".
+    caveats:
+      - One or a few samples of each type, from early 2014; batch-to-batch differences not measured ("can only serve as a rough indication").
+      - The prose reset figure (8.95 µs, "the WS2812 under test") matches the table's WS2812B column (> 9 µs), not its WS2812 column (> 10.8 µs).
+      - Pre-dates the 2016/2017 WS2812B revision (reset >280 µs).
+
+  cpldcpu_2016_sk6812:
+    title: The SK6812 - another intelligent RGB LED
+    url: https://cpldcpu.github.io/2016/03/09/the-sk6812-another-intelligent-rgb-led/
+    table_image: https://cpldcpu.github.io/2016/03/09/the-sk6812-another-intelligent-rgb-led/table.png
+    date: '2016-03-09'
+    parts: WS2812(S), WS2812B, WS2812D (8 mm), PD9823 (5/8 mm), SK6812 — same method as 2014
+    results: # verbatim cells; parentheses and tbd as printed
+      WS2812S:
+        {
+          T_HI_IN_0: '62.5 ns - 500 ns',
+          T_HI_IN_1: '≥ 563 ns',
+          T_PERIOD_IN: '≥ 875 ns',
+          T_DELAY_IN_OUT: '~ 166 ns',
+          T_HI_OUT_0: '~ 333 ns',
+          T_HI_OUT_1: '~ 666 ns',
+          T_RESET: '> 10.8 µs',
+          PWM_clk: tbd,
+        }
+      WS2812B:
+        {
+          T_HI_IN_0: '62.5 ns - 563 ns',
+          T_HI_IN_1: '≥ 625 ns',
+          T_PERIOD_IN: '≥ 1063 ns',
+          T_DELAY_IN_OUT: '~ 208 ns',
+          T_HI_OUT_0: '~ 416 ns',
+          T_HI_OUT_1: '~ 832 ns',
+          T_RESET: '> 9 µs',
+          PWM_clk: '~ 430 Hz',
+        }
+      WS2812D_8mm:
+        {
+          T_HI_IN_0: '62.5 ns - 600 ns',
+          T_HI_IN_1: '≥ 625 ns',
+          T_PERIOD_IN: '≥ 1063 ns',
+          T_DELAY_IN_OUT: '~ 208 ns',
+          T_HI_OUT_0: '~ 408 ns',
+          T_HI_OUT_1: '~ 812 ns',
+          T_RESET: tbd,
+          PWM_clk: tbd,
+        }
+      PD9823:
+        {
+          T_HI_IN_0: '62.5 ns - 600 ns',
+          T_HI_IN_1: '≥ 625 ns',
+          T_PERIOD_IN: '≥ 1000 ns',
+          T_DELAY_IN_OUT: '~ 190 ns',
+          T_HI_OUT_0: '~ 380 ns',
+          T_HI_OUT_1: '~ 760 ns',
+          T_RESET: '> 14 µs',
+          PWM_clk: tbd,
+        }
+      SK6812:
+        {
+          T_HI_IN_0: tbd,
+          T_HI_IN_1: '(≥ 440 ns)',
+          T_PERIOD_IN: '(≥ 725 ns)',
+          T_DELAY_IN_OUT: tbd,
+          T_HI_OUT_0: '~ 290 ns',
+          T_HI_OUT_1: '(580 ns)',
+          T_RESET: tbd,
+          PWM_clk: '~ 1.1 kHz',
+        }
+    quote: |-
+      The SK6812 is a direct clone of the WS2812B, while the SK6812mini comes in a smaller package with a 3.5x3.5mm^2 footprint.
+      The timing of the SK6812 is slightly faster than that of the WS2812 ("High" timing is 440 ns vs. 625 ns). However, I don't expect any issues with the timing of existing WS2812 libraries, such as the light_ws2812 library .
+      Apart from the standard version, the SK6812 also comes in a RGBW version with 4 channels. This adds a white channel to the normal RGB version, which can be used for better color reproduction. This version needs 4 data values per LED. Other than that it seems to be functionally identical to the normal 3 channel controller.
+      As with many components from mainland china, it seems very difficult to identify the actual manufacturer of these devices, as vendors tend to rebrand data sheets.
+    caveats:
+      - SK6812 values are partly tbd or in parentheses (as printed); the 0/1 threshold of ~440 ns is lower than the WS2812 family's 500–625 ns.
+
+  cpldcpu_2014_pd9823:
+    title: Timing of WS2812 clones – PD9823
+    url: https://web.archive.org/web/20150928223018/https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-clones-pd9823/
+    original_url: https://cpldcpu.wordpress.com/2014/06/16/timing-of-ws2812-clones-pd9823/ # 404 on the blog's new home cpldcpu.github.io
+    date: '2014-06-16'
+    parts: PD9823 (controller maker given as "BaiCheng")
+    quote: |-
+      The internal state machine of the PD9823 seems to be identical to that of the WS2812. The base timing of the PD9823 is 190 ns, which falls exactly between the WS2812S with 166 ns and the WS2812B with 208 ns. One notable difference is a slightly longer minimum reset pulse length. However, this should not be an issue when adhering to the recommended reset timing of 50 µs.
+      In conclusion: Any software library that is able to drive the WS2812(B) is also able to drive the PD9823. No need to change anything.
+    note: >-
+      Spelled PD9823 throughout; a pingback on the same page calls a part
+      "PL9823-F5". Whether PD9823 = PL9823 is not established here. FastLED
+      sends PL9823 a 1710 ns cell (350/1360) and FPP a 1750 ns cell; cpldcpu
+      measured PD9823 as WS2812-compatible (period ≥ 1000 ns, 0/1 at 600/625).
+
+  cpldcpu_2014_ws2812d:
+    title: New member of the WS2812 family (8 mm through-hole WS2812D)
+    url: https://web.archive.org/web/20151018235236/https://cpldcpu.wordpress.com/2014/02/18/new-member-of-the-ws2812-family/
+    date: '2014-02-18'
+    quote: A summary of the timing values compared with the earlier WS2812 LEDS is shown above. As you can see, the timing is virtually identical to the WS2812B timing. This means that the light_ws2812 library is able to support these devices without any modifications.
+
+  josh_levine_2014:
+    title: 'NeoPixels Revealed: How to (not need to) generate precisely timed signals'
+    url: https://wp.josh.com/2014/05/13/ws2812-neopixels-are-not-so-finicky-once-you-get-to-know-them/
+    date: '2014-05-13' # updates 6/12/2014, 11/11/2018, 11/2/2020
+    parts: >-
+      "NeoPixels and WS2812's" (2014 parts; WS2812/WS2812B, revision not
+      stated; "lots and lots of NeoPixels and WS2812's").
+    results:
+      T0H: { min: 200, typical: 350, max: 500 } # "the single tight maximum of 500ns"
+      T1H: { min: 550, typical: 700, max_in_a_string: 5500 }
+      TLD_data_low: { min: 450, typical: 600, max: 5000 }
+      TLL_latch_low: { min: 6000 }
+    quote: |-
+      Simplified timing constraints for driving a NeoPixel
+      T0H | 0 code ,high voltage time | 200 | 350 | 500 | ns
+      T1H | 1 code ,high voltage time | 550 | 700 | ns
+      TLD | data, low voltage time | 450 | 600 | 5,000 | ns
+      TLL | latch, low voltage time | 6,000 | ns
+      The only tight timing parameter for NeoPixel signaling is the maximum width of a 0-bit pulse
+      There is no bound for the maximum width of a 1-bit that a Neopixel will accept.
+      It turns out empirically that the maximum TLD width is about 5-6us despite what the datasheet says. Really. Leave the signal low for just 6us and the LED will latch.
+      A: I've tried lots and lots of NeoPixels and WS2812's and I can not find one that needs more than 6us of low signal to latch. If you find one that needs longer, please let me know!
+      UPDATE 11/2/2020: There are some new WS2812B and WS2813 chips that require a minimum 250,000ns latch time. If you are seeing lots of flashing, you might have some of these new chips so try increasing the latch low time.
+    caveats:
+      - The table rows are HTML tables in the post; cells are joined here with " | " (Symbol | Parameter | Min | Typical | Max | Units, empty cells dropped).
+      - The min/typical/max table columns are Josh's reading of the WS2812 datasheet plus his measurements; only the 5–6 µs latch and the unbounded single-pixel T1H are stated as measured.
+      - The 2020 update's 250 µs figure is given without a measurement or a source document (it links Adafruit's 2017 PSA, which says 300 µs).
+
+  josh_levine_2014_reshaping:
+    title: 'NeoPixels Revealed: Eavesdroping on signal reshaping between pixels'
+    url: https://wp.josh.com/2014/05/15/going-nsa-on-pixel-conversations/
+    date: '2014-05-15'
+    quote: |-
+      Here an out-of-spec 186ns 0-bit runt gets stretched into lovely in-spec 386ns 0-bit.
+      Here an out-of-spec 560ns 0-bit whale gets compressed down into lovely in-spec 376ns 0-bit.
+      So, it seems that this NeoPixel's idea of a perfect 0-bit is about 380ns, and it will reshape any out of spec 0-bit to meet that ideal.
+      …and a long 872ns 1-bit getting squeezed down to a 768ns 1-bit. Looks like this pixel's dream 1-bit is about 770ns long.
+      Like people, each NeoPixel has its own concept of what "ideal" means, and it can change over time.
+      Here, a 7,000ns 1-bit is reshaped to a 720ns 1-bit followed by 6,280ns gap. The long 1-bit is thereby converted into a normal 1-bit followed by a reset.
+
+  josh_levine_2014_breathe:
+    title: 'NeoPixels Revealed: Why you should give your bits room to breathe'
+    url: https://wp.josh.com/2014/05/16/why-you-should-give-your-neopixel-bits-room-to-breathe/
+    date: '2014-05-16'
+    quote: |-
+      Unfortunately, the "ideal" bit size varies from pixel and even changes over time for a single pixel depending on temperature and voltage
+      The bottom blue trace shows a perfectly valid 560ns wide 1-bit (spec says 700ns ±150ns = 550ns min) coming in, but the purple trace shows it going out the other side now reshaped to  a 376ns wide 0-bit.
+
+  worldsemi_change_notice_via_particle:
+    title: Heads up – WS2812B NeoPixels are about to change! (Particle blog, quoting WorldSemi's upgrade notice)
+    url: https://www.particle.io/blog/heads-up-ws2812b-neopixels-are-about-to-change/
+    date: '2017-05-12' # datePublished in the page
+    parts: WS2812B, "upgraded" parts with the same part number
+    quote: |-
+      The original manufacturer, WorldSemi, released a low visibility change notice last December that is just starting to hit new runs of their WS2812B NeoPixels.
+      4. "Old & New chips are exactly the same as in Timing, Data transmission and Data structure. However, the Reset Time increased from >50us to >280us. It won't cause wrong reset while interruption, and what's more, it supports the lower frequency and inexpensive MCU. When the "Reset Time<280us", don't mixed up and kindly please make necessary amends."
+      Our test firmware included a reset delay of only 10us, well below the new 280us minimum. As a result, we had to update our test firmware as well as Internet Button and NeoPixel firmware libraries to accommodate the new minimum reset delay.
+    note: Field evidence that a 10 µs reset (which worked on the old parts) failed on new parts; the actual threshold of the new parts was not measured.
+
+  adafruit_psa_2017:
+    title: 'PSA: The WS2812B RGB LED has been revised, will require code tweak!'
+    url: https://blog.adafruit.com/2017/05/03/psa-the-ws2812b-rgb-led-has-been-revised-will-require-code-tweak/
+    read_via: https://web.archive.org/web/20250322030505/https://blog.adafruit.com/2017/05/03/psa-the-ws2812b-rgb-led-has-been-revised-will-require-code-tweak/ # direct fetch returned 403
+    date: '2017-05-03'
+    quote: |-
+      The WorldSemi WS2812B RGB LED has been revised with new silicon (date codes from 2017), and an unannounced change that is breaking current code has happened: the reset time has gone from 50 microseconds to 300 microseconds according to the datasheet.
+      So in order to get these to work the new minimum reset time is 300 microseconds, check your code!
+
+  verbeure_2019:
+    title: WS2812B Reset Old & New
+    url: https://tomverbeure.github.io/2019/10/13/WS2812B_Reset_Old_and_New.html
+    date: '2019-10-13'
+    quote: |-
+      The old one requires an idle time ("reset") of 50us or more. On the new one, that has been increased to 280us. That makes them
+      backwards incompatible…
+      You can distinguish old and new by the pattern inside the LED eye:
+    note: A datasheet comparison plus an anecdote (an old-reset driver failed on a new board); no threshold measurement.
+
+  hackaday_io_183586:
+    title: WS2812B Protocol Testing w/ Attiny13a (project "WS2812 Controller")
+    url: https://hackaday.io/project/183586/log/202583
+    date: null # page shows dates 01/20/2022 – 01/28/2022; which is this log's is not clear
+    parts: WS2812B, revision not stated
+    quote: Testing the reset command, it looks like the IC follows its spec closely. It won't reset below a 50us hold time. In this capture the signal was held low for approximately 50us but the LED did not update (cursors were likely a bit offset here). Increasing the delay to 55us and the IC worked as expected.
+    note: One part, hobbyist log; contrasts with cpldcpu's 2014 WS2812B (> 9 µs) and Josh's 6 µs.
+
+field_reports_in_code: # observations embedded in transmitter source, quoted from the pinned commits above
+  fastled_gs1903:
+    permalink:
+      - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/fl/chipsets/led_timing.h#L390-L398
+    quote: |-
+      /// @note Same bit timing as the SM16703, but the GS1903 datasheet specifies a
+      ///       ±50ns tolerance -- a third of the WS2812's ±150ns. That is why this
+      ///       has its own entry rather than reusing WS2812 timing: at TH0=250ns /
+      ///       TH1=875ns the WS2812 numbers sit outside the GS1903's window, which
+      ///       produced the intermittent "sometimes works, sometimes doesn't"
+      ///       behavior reported in issue #739.
+  fpp_dpi_417ns:
+    permalink:
+      - https://github.com/FalconChristmas/fpp/blob/123b8ca089b98a54f7f5c0b7ee7b72ed18217f21/src/non-gpl/DPIPixels/DPIPixels.cpp#L66-L69
+    quote: |-
+      // 0-bit high of 100-400ns, SK6812/WS2815 150-450, WS2812B 250-550.  The old
+      // even thirds gave 417ns, outside the WS2811 window, and the first pixel on a
+      // string of older WS2811 parts (the only one that sees the Pi's raw edge,
+      // every later pixel gets a regenerated one) would randomly read 0 bits as 1.
+  neopixelbus_3step_ws2816b:
+    url: https://github.com/Makuna/NeoPixelBus/wiki/Neo-Methods/97bea1dda774b1df6a425c670207093055228368
+    quote: However, this default may not work reliably with LEDs that have tighter timing requirements, such as the WS2816B.
+  espixelstick_seed_pixels:
+    permalink:
+      - https://github.com/forkineye/ESPixelStick/blob/7f0d0e9be1743fec63c75ee29550ccc1b17f7eb4/include/output/OutputWS2811.hpp#L51-L60
+    quote: '    // values have been adjusted to work with seed pixels.'
+  fastled_tx1813n1:
+    permalink:
+      - https://github.com/FastLED/FastLED/blob/5e831b8203bc9237394f7f5b01b1a2ca40740e81/src/FastLED.h#L356-L362
+    quote: |-
+      /// @details Protocol-compatible with TM1829 per reporter field-testing on
+      /// 2.2 mm × 2.2 mm 2020-package parts. Uses the TM1829 800 kHz timing.
+
+# ---------------------------------------------------------------------------
+# 4. Disagreements between sources (each side quoted above)
+# ---------------------------------------------------------------------------
+disagreements:
+  - topic: TM18xx polarity
+    detail: >-
+      NeoPixelBus sends TM1814, TM1829 and TM1914 inverted (idle high);
+      ESPixelStick inverts TM1814; FPP inverts only tm1814/tm1814a, while its
+      own comment says tm1914 "is inverted like the rest of the TM18xx family"
+      and its ws281x (non-inverted) list contains tm1809 and tm1812. FastLED
+      sends TM1809/TM1804/TM1812/TM1803 non-inverted and asks for FLIP only on
+      TM1829 (honoured on nRF52 only). xLights and Falcon list TM1803, TM1804,
+      TM1809, TM1812 and TM1914 as WS2811 alternatives. The chip datasheets
+      (batch b1-titan) have to settle which TM18xx parts idle high.
+  - topic: UCS1903 speed
+    detail: >-
+      FastLED "UCS1903" = 400 kHz (500/2000/2500) and "UCS1903B" = 800 kHz
+      (400/850/1300); FPP ucs1903 = 400 kHz (500/2000/2500); ESPixelStick
+      UCS1903 = 800 kHz (250/1000/1250) with a 25 µs idle; Advatek "400 -
+      800kbps"; xLights/Falcon put UCS1903 in the WS2811 (800 kHz) group.
+  - topic: APA106 / PL9823 / SK6822 cell
+    detail: >-
+      FastLED APA106 = SK6822 timing (375/1375, 1750 ns) and PL9823 (350/1360,
+      1710 ns); NeoPixelBus/WLED "APA106/PL9823" = 350/1350, 1700 ns (ESP32
+      RMT) but the 400 kbps method on ARM; FPP puts sk6822 and pl9823 on a 1750
+      ns cell but apa106 in the ws281x group (320/750, 1120 ns); FastLED APA104
+      = WS2811 800 kHz (250/600). xLights/Falcon list APA104, APA106, PL9823 and
+      SK6822 as WS2811 alternatives.
+  - topic: WS2814 and WS2805
+    detail: >-
+      NeoPixelBus maps NeoWs2814Method to the WS2805 class (300/790, 1090 ns,
+      300 µs); FastLED WS2814 = 320/640, 1280 ns, 300 µs; WLED's
+      "SK6812/WS2814 RGBW" type sends the SK6812 class (400/800, 1250 ns, 80
+      µs); FPP puts ws2814 in the ws281x group (320/750, 1120 ns). NeoPixelBus's
+      own WS2805 period is 1090 ns on RMT/RP2040/UART but BitSendTimeNs = 1125
+      in NeoBits (I2S/DMA).
+  - topic: WS2815
+    detail: >-
+      FastLED WS2815 = 250/1340 with a 1890 ns cell labelled "@ 400 kHz";
+      everyone else that names it (FPP ws281x group, xLights/Falcon WS2811
+      group) uses the 800 kHz family cell; Advatek lists 800kbps.
+  - topic: GS8208 / GS1903
+    detail: >-
+      ESPixelStick sends GS8208 at 1 MHz (250/750); FPP lists gs8206/gs8208 in
+      the ws281x group (1120 ns); Advatek "400 - 1000kbps". FastLED GS1903 =
+      300/900, 1200 ns, after WS2812 timing failed in the field; NeoPixelBus
+      GS1903 = 300/900, 1200 ns, 40 µs reset.
+  - topic: WS2811 "800 kHz" waveform
+    detail: >-
+      FastLED WS2811 = 250/600 (1250); NeoPixelBus NeoWs2811Method = the
+      Ws2812x class (400/800, 300 µs) although a separate Ws2811 class
+      (300/900) exists; ESPixelStick WS2811 = 300/700 with 1200/1300 ns cells
+      (ESP32) or 312/975 (ESP8266); ESP-IDF LED_MODEL_WS2811 is the 400 kHz
+      cell (500/1200, 2500 ns, 50 µs). Advatek and ENTTEC list WS2811 and WS2811
+      V1.4 as separate types ("different data timing").
+  - topic: FPP's ws281x period
+    detail: >-
+      FPP's comment calls the family "same bit cell, same 1.25us period" but the
+      authoritative timing is { 320, 750, 1120 } (a 1120 ns cell); the DPI
+      driver uses a 1.25 µs cell (312/729).
+  - topic: New WS2812B reset value
+    detail: >-
+      WorldSemi's notice (via Particle) says >280 µs; Adafruit's PSA says 300
+      µs "according to the datasheet"; Josh Levine's 2020 update says 250,000
+      ns. Libraries send 280 (FastLED, ESP-IDF), 300 (NeoPixelBus Ws2812x,
+      Adafruit, rpi_ws281x wait), 350 (ESPixelStick), but 50 µs from
+      NeoPixelBus's 800Kbps/"Ws2812" class (which WLED uses on the ESP8266 DMA
+      pin and the ESP32 I2S UCS890x/FW1906 paths) and from ESP-IDF's WS2811.
+  - topic: Equal bit cells
+    detail: >-
+      ESP-IDF WS2812 sends a 1200 ns 0-cell and a 1500 ns 1-cell; ESP-IDF
+      SK6812 and ESPixelStick's ESP32 WS2811 send 1200/1300 ns. Every other
+      transmitter here uses one cell length for both bit values.
+
+database_corrections: [] # this batch read no database entries
+
+open:
+  - ENTTEC's Custom Protocol Creation Guide (what timing parameters a custom ENTTEC protocol exposes) — not located.
+  - No measurement found of the 2016/2017+ WS2812B ("V5") or WS2813/WS2815/SK6812 reset threshold or 0/1 sampling point; the >280 µs figure is the maker's notice, not a measurement. The only post-2017 data point is one hobbyist WS2812B needing ~55 µs (revision unknown).
+  - SK6812 threshold (≥ 440 ns, period ≥ 725 ns) is printed in parentheses / tbd in cpldcpu's table; no second measurement found.
+  - Falcon's firmware cell for each "WS2811 alternative" is not published; whether Falcon sends TM1803 / UCS1903 / SK6822 on the WS2811 cell is unknown.
+  - Advatek publishes no timing; whether PixLite sends distinct cells per IC type is not stated on the pages read.
+  - cpldcpu's 2020 "Power analysis: Probing WS2812 RGB LEDs" post (internal oscillator) returned 404 at cpldcpu.github.io and was not read.
