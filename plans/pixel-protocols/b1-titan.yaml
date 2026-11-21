@@ -1,0 +1,1252 @@
+batch: b1-titan
+researched: '2026-11-20'
+notes:
+  - 'Summary, overlap arithmetic, disagreements and database corrections: b1-titan.md (read it first).'
+  - 'Page numbers are PDF pages (1-based); in these sheets they match the printed page numbers.'
+  - "Titan's own files (www.titanmec.com/upload/twdz_cn/...) are linked from its product lists through /index/article/download.html?file=<base64 of the upload URL>; they were fetched with a titanmec.com Referer header."
+  - 'Inverted parts (TM1814, TM1829, TM1913, TM1914): the sheets time the LOW pulse that starts each bit (T0l/T1l) and reset on a HIGH level. Those rates carry pulse_level: low and put the printed T0l/T1l rows under T0L/T1L; T0H/T1H stay null.'
+  - 'Values marked derived are arithmetic on printed values, not printed themselves.'
+
+reference_documents: # WorldSemi sheets used only for the overlap arithmetic in b1-titan.md
+  - id: ws2812b-worldsemi-2013
+    url: https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
+    title: WS2812B Intelligent control LED integrated light source
+    revision: null
+    date: null
+    language: en
+    notes: 'WorldSemi sheet hosted by Adafruit; PDF metadata created 2013-05-30. Newer WorldSemi WS2812B revisions were not read here (world-semi.com serves datasheets through a script).'
+    page: 3
+    quote: 'Data transfer time( TH+TL=1.25µs±600ns) | T0H 0 code ,high voltage time 0.4us ±150ns | T1H 1 code ,high voltage time 0.8us ±150ns | T0L 0 code , low voltage time 0.85us ±150ns | T1L 1 code ,low voltage time 0.45us ±150ns | RES low voltage time Above 50µs'
+    windows_ns:
+      {
+        T0H: [250, 550],
+        T1H: [650, 950],
+        T0L: [700, 1000],
+        T1L: [300, 600],
+        period: [650, 1850],
+        reset_min: 50000,
+      }
+    order: 'p5: "Note: Follow the order of GRB to sent data and the high bit sent at first."'
+  - id: ws2811-worldsemi-v1.5
+    url: https://www.world-semi.com/web/userfiles/productfile/WS2811_V1.5_EN.pdf
+    title: WS2811 Signal line 256 Gray level 3 channel Constant current LED driver IC
+    revision: V1.5 (pages labelled V1.4; revision table to V1.5, 20190920)
+    date: '2019-09-20'
+    language: en
+    page: 3
+    quote: 'T0H 0 code, high voltage time 220ns~380ns | T1H 1 code, high voltage time 580ns~1us | T0L 0 code, low voltage time 580ns~1us | T1L 1 code, low voltage time 580ns~1us | RES Frame unit, low voltage time >280µs'
+    windows_ns:
+      { T0H: [220, 380], T1H: [580, 1000], T0L: [580, 1000], T1L: [580, 1000], reset_min: 280000 }
+    order: 'p4: "Note: Data transmit in order of RGB, high bit data at first."'
+  - id: ws2811-worldsemi-old
+    url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
+    title: WS2811 (older WorldSemi sheet with a SET pin)
+    revision: null
+    date: null
+    language: en
+    page: 3
+    quote: 'Low Speed mode time | T0H 0 code,high voltage time 0.5 µs ±150ns | T1H 1 code,high voltage time 1.2 µs ±150ns | T0L 0 code,low voltage time 2.0 µs ±150ns | T1L 1 code,low voltage time 1.3 µs ±150ns | RES low voltage time Above 50µs | Note: It is one half of the time when high speed mode(reset time unchanged)'
+    windows_ns:
+      {
+        low_speed:
+          {
+            T0H: [350, 650],
+            T1H: [1050, 1350],
+            T0L: [1850, 2150],
+            T1L: [1150, 1450],
+            reset_min: 50000,
+          },
+      }
+    select: 'p2: "SET Set work mode of IC as low speed model(connect VDD) or high speed model(vacant)"'
+  - id: fastled-chipsets-h
+    url: https://raw.githubusercontent.com/FastLED/FastLED/master/src/chipsets.h
+    title: FastLED src/chipsets.h (library, not a maker document)
+    retrieved: '2026-11-20'
+    quote: '/// TM1829 controller @ 800 kHz - references centralized timing from fl::TIMING_TM1829_800KHZ /// @see fl::TIMING_TM1829_800KHZ in chipsets::led_timing.h (340, 340, 550 ns) /// @note The TM1829 drives an *inverted* line (LOW-then-HIGH per bit, idling HIGH), ///       hence FLIP=true, and needs a 500us latch gap, hence WAIT_TIME=500. ///       FLIP is currently only honored by the nRF52 backend; see ///       https://github.com/FastLED/FastLED/issues/8'
+
+parts:
+  # ------------------------------------------------------------------ TM1803
+  - part: TM1803
+    entry: pixel-ics/tm1803
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1803-v1.5
+        url: https://www.titanmec.com/upload/twdz_cn/20221202/20221202110627637.pdf
+        title: 三通道LED 驱动控制专用电路 TM1803
+        revision: V1.5
+        date: null
+        language: zh
+        notes: "Titan's current download. Byte-identical to https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1803_V1.5.pdf (after its UTF-8 BOM); text-identical to LCSC C5159541 https://datasheet.lcsc.com/datasheet/pdf/0a98745b6f7daab54bad80a979aef1f6.pdf. PDF metadata created 2013-08-30."
+      - id: tm1803-en-old
+        url: https://media.ledyi.com/tm1803-datasheet_1b245d169446ce40cd2040738412bfc19511917f20c4d9c8a77c679cfab57aad.pdf
+        title: 'TM1803 (untitled English sheet: "Summarize / Feature / PIN Configuration")'
+        revision: null
+        date: null
+        language: en
+        notes: "The database's datasheet.url. No Titan branding and no revision printed; PDF metadata created 2011-01-19. Describes a SET pin and two speeds that V1.5 does not have."
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 400kHz
+        select: 'none: V1.5 has no speed pin ("NC 7 - 空脚", p2)'
+        T0H:
+          {
+            ns: 700,
+            tol_ns: null,
+            min_ns: 500,
+            max_ns: 900,
+            printed: '500 / 700 / 900 ns (min / typ / max)',
+          }
+        T0L: null
+        T1H:
+          { ns: 1800, tol_ns: null, min_ns: 1600, max_ns: 2000, printed: '1600 / 1800 / 2000 ns' }
+        T1L: null
+        period: { ns: 2500, printed: '2.5 μs (typ only)' }
+        reset:
+          {
+            min_ns: 8000,
+            typ_ns: 24000,
+            max_ns: null,
+            level: low,
+            printed: 'Treset Reset码，低电平时间 8 (min) 24 (typ) μs',
+          }
+        output: { T0H: 700, T1H: 1300, printed: 'T0h’ 输出0码 700 ns; T1h’ 输出1码 1300 ns (typ)' }
+        derived: 'T0L ≈ 2500 − 700 = 1800 ns, T1L ≈ 2500 − 1800 = 700 ns at the typ period (lows are not printed).'
+        doc: tm1803-v1.5
+        page: 4
+        quote: '2、低速模式时间 | T0h 输入0码，高电平时间 VDD=5.0V GND=0V 500 700 900 ns | T1h 输入1码，高电平时间 1600 1800 2000 ns | T0h’ 输出0码，高电平时间 700 ns | T1h’ 输出1码，高电平时间 1300 ns | T 0码或1码的周期时间 2.5 μs | Treset Reset码，低电平时间 8 24 μs | 注意：发送1 码或0 码的周期时间为2.5μs（频率400KHz）。'
+        translation: '2. Low-speed mode timing: T0h input 0-code high time 500/700/900 ns; T1h input 1-code high time 1600/1800/2000 ns; T0h’ output 0-code high time 700 ns; T1h’ output 1-code high time 1300 ns; T 0/1-code period 2.5 μs; Treset reset-code low time 8 (min) 24 (typ) μs. Note: the period of a 1 or 0 code is 2.5 μs (400 kHz).'
+        other_quotes:
+          - {
+              page: 1,
+              quote: '数据发送速度为400Kbps',
+              translation: 'Data sending speed is 400 Kbps',
+            }
+          - {
+              page: 3,
+              quote: '开关频率 Fc 400 KHz (typ); 传输延迟 Td DIN → DOUT 300 ns (max)',
+              translation: 'Switching frequency 400 kHz; propagation delay DIN→DOUT 300 ns max',
+            }
+      - name: 'low-speed (older English sheet)'
+        select: 'SET pin 7 to VDD ("1)SET toVDD：Low-speed mode 2)SET flaoting: High-speed mode", p2)'
+        T0H: { ns: 680, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.68us ±150ns' }
+        T0L: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36us ±150ns' }
+        T1H: { ns: 1360, tol_ns: 150, min_ns: null, max_ns: null, printed: '1.36us ±150ns' }
+        T1L: { ns: 680, tol_ns: 150, min_ns: null, max_ns: null, printed: '0.68us ±150ns' }
+        period: null
+        reset:
+          { min_ns: null, typ_ns: 24000, level: low, printed: 'Treset 24us - Resetcode，low time' }
+        doc: tm1803-en-old
+        page: 4
+        quote: 'Low-speed mode time | T0H 0 code, high time 0.68us ±150ns | T1H 1 code, high time 1.36us ±150ns | T0L 0 code, low time 1.36us ±150ns | T1L 1 code, low time 0.68us ±150ns | Treset Resetcode，low time 24us - | Note: When on high-speed mode, half the above time only.'
+      - name: 'high-speed (older English sheet)'
+        select: 'SET pin 7 floating'
+        T0H:
+          {
+            ns: 340,
+            tol_ns: null,
+            printed: 'half of 0.68us (derived from the note; tolerance not stated)',
+          }
+        T0L: { ns: 680, tol_ns: null, printed: 'half of 1.36us (derived)' }
+        T1H: { ns: 680, tol_ns: null, printed: 'half of 1.36us (derived)' }
+        T1L: { ns: 340, tol_ns: null, printed: 'half of 0.68us (derived)' }
+        period: null
+        reset: null
+        doc: tm1803-en-old
+        page: 4
+        quote: 'Note: When on high-speed mode, half the above time only.'
+        other_quotes:
+          - { page: 1, quote: 'Data transmission speed can be 400Kbps and 800Kbps two modes' }
+          - { page: 3, quote: 'Data rate Fmax 400 (min) Kbps 50% duty cycle' }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥8 μs (typ 24 μs) per V1.5'
+      doc: tm1803-v1.5
+      page: 4
+      quote: '1、24bit的数据结构 R7…R0 (BIT23-BIT16 设定OUTR输出PWM占空比) G7…G0 (BIT15-BIT8 OUTG) B7…B0 (BIT7-BIT0 OUTB) | 高位先发，按照RGB的顺序发送数据。'
+      translation: '24-bit data structure R7…R0 sets OUTR duty, G7…G0 OUTG, B7…B0 OUTB. High bit first, sent in R, G, B order.'
+    forwarding:
+      text: 'Takes the first 24 bits after reset, then re-shapes and forwards everything else; DO is held low until it starts forwarding. Propagation delay Td DIN→DOUT 300 ns max (p3).'
+      doc: tm1803-v1.5
+      page: 4
+      quote: '芯片在上电复位以后，接受DIN端送来的数据，接收完24bit后，DO端口开始转发DIN端继续发来的数据，为下个级联芯片提供输入数据。在转发数据之前，DO口一直为低电平。如果DIN输入RESET复位信号，芯片将在复位成功后根据接收到的24bit数据输出相对应PWM占空比波形'
+      translation: 'After power-on reset the chip accepts data from DIN; after receiving 24 bits, DO starts forwarding the data DIN keeps receiving, as input for the next cascaded chip. Before forwarding, DO stays low. When DIN receives a RESET, the chip outputs PWM duty cycles according to the 24 bits it received.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'Speeds: V1.5 p1 "数据发送速度为400Kbps" (400 Kbps only) and p2 pin 7 "NC … 空脚" vs the older English sheet p1 "Data transmission speed can be 400Kbps and 800Kbps two modes" with p2 pin 7 "SET Mode setting 1)SET toVDD：Low-speed mode 2)SET flaoting: High-speed mode".'
+      - 'Timing: the two sheets'' 1-code windows do not overlap. V1.5 p4 T1h 1600–2000 ns vs English p4 T1H "1.36us ±150ns" (1210–1510 ns). V1.5 T0h 500–900 ns vs English T0H "0.68us ±150ns" (530–830 ns). Reset: V1.5 min 8 / typ 24 μs vs English "24us" typ only.'
+      - 'PWM cycle inside V1.5: features p1 "PWM控制端能够实现256级调节，扫描频率不低于400Hz" (scan frequency ≥400 Hz) vs electrical table p3 "驱动端口PWM 周期 TPWM … 3 3.5 4 ms" (250–333 Hz). The English sheet p4 says "the cycle of signal is 4ms".'
+      - 'Packages inside V1.5: features p1 "封装形式：SOP8、DIP8" but p10 is "封装示意图（MSOP8）" (an MSOP8 outline, page without the V1.5 footer).'
+    open:
+      - 'No newer revision than V1.5 found (Titan, Lumikit and LCSC all carry V1.5).'
+      - 'Which silicon the undated English sheet (SET pin, two speeds) describes is unknown; it has no Titan branding.'
+
+  # ------------------------------------------------------------------ TM1804
+  - part: TM1804
+    entry: pixel-ics/tm1804
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1804-v2.3
+        url: https://www.titanmec.com/upload/twdz_cn/20250602/20250602112122574.pdf
+        title: 三通道LED 驱动控制专用电路 TM1804
+        revision: V2.3
+        date: null
+        language: zh
+        notes: "Titan's current download (upload path dated 2025-06-02; PDF metadata 2025-04-11). Adds SOT23-8."
+      - id: tm1804-v1.9
+        url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1804_V1.9.pdf
+        title: 三通道LED 驱动控制专用电路 TM1804
+        revision: V1.9
+        date: null
+        language: zh
+        notes: "The database's datasheet.url. Byte-identical to LCSC C20622206 https://datasheet.lcsc.com/datasheet/pdf/d076f3f9e38930226d4b36b0fbfe7794.pdf. PDF metadata 2022-01-04."
+      - id: tm1804-en-2014
+        url: https://media.ledyi.com/tm1804-datasheet_58c656eae88e684e5fc0bb39b47ea8668c1825a43072c464a3a19284676787f4.pdf
+        title: Three channels LED driving control dedicated circuit TM1804
+        revision: null
+        date: null
+        language: en
+        notes: 'No revision printed; PDF made from "TM1804英文规格书.doc", metadata 2014-05-09.'
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V2.3)
+        select: 'SET pin floating ("SET 7 7 - 接VDD：低速模式；悬空：高速模式", p2: to VDD = low-speed, floating = high-speed)'
+        T0H: { ns: 360, min_ns: 300, max_ns: 390, printed: '300 / 360 / 390 ns' }
+        T0L: null
+        T1H: { ns: 720, min_ns: 650, max_ns: 1000, printed: '650 / 720 / 1000 ns' }
+        T1L: null
+        period:
+          {
+            ns: 1250,
+            printed: '1.25 us (typ); note (1): 1.25–2.5 μs works if the high times fit the table',
+          }
+        reset: { min_ns: 40000, level: low, printed: 'Treset Reset码，低电平时间 40 (min) us' }
+        output: { T0H: 360, T1H: 720 }
+        inter_byte_low_max_ns: 5000
+        doc: tm1804-v2.3
+        page: 4
+        quote: '3. 高速模式时间 | T0H 输入0 码，高电平时间 VDD=5.0V GND=0V 300 360 390 ns | T1H 输入1 码，高电平时间 650 720 1000 ns | T0H’ 输出0 码，高电平时间 -- 360 -- ns | T1H’ 输出1 码，高电平时间 -- 720 -- ns | T 0 码或1 码的周期时间 -- 1.25 -- us | Treset Reset码，低电平时间 40 -- -- us | （1）0 码或1 码周期在1.25μs（频率800KHz）至2.5μs（频率400KHz）范围内，芯片均可正常工作，但是0 码和1 码高电平时间必须符合上表中相应数值范围；（2）不需复位时，字节之间的低电平时间不要超过5μs，否则芯片可能复位，复位后又重新接收数据，无法实现数据正确传送。'
+        translation: '3. High-speed mode timing: T0H 300/360/390 ns; T1H 650/720/1000 ns; output T0H’ 360, T1H’ 720 ns; period 1.25 us; Treset low ≥40 us. (1) The chip works with 0/1-code periods from 1.25 μs (800 kHz) to 2.5 μs (400 kHz), but the high times must fit the table. (2) When no reset is wanted, the low time between bytes must not exceed 5 μs, or the chip may reset and start receiving again.'
+      - name: 400kHz (V2.3)
+        select: 'SET pin to VDD'
+        T0H: { ns: 720, min_ns: 600, max_ns: 780, printed: '600 / 720 / 780 ns' }
+        T0L: null
+        T1H: { ns: 1440, min_ns: 1300, max_ns: 2000, printed: '1300 / 1440 / 2000 ns' }
+        T1L: null
+        period: { ns: 2500, printed: '2.5 us (typ)' }
+        reset: { min_ns: 40000, level: low, printed: '40 us (min)' }
+        output: { T0H: 720, T1H: 1440 }
+        doc: tm1804-v2.3
+        page: 4
+        quote: '2. 低速模式时间 | T0H 输入0 码，高电平时间 600 720 780 ns | T1H 输入1 码，高电平时间 1300 1440 2000 ns | T0H’ 输出0 码 -- 720 -- ns | T1H’ 输出1 码 -- 1440 -- ns | T 0 码或1 码的周期时间 -- 2.5 -- us | Treset Reset码，低电平时间 40 -- -- us'
+      - name: 800kHz (V1.9)
+        select: 'SET pin floating (p2, same wording as V2.3)'
+        T0H: { ns: 400, min_ns: 350, max_ns: 450, printed: '350 / 400 / 450 ns' }
+        T0L: null
+        T1H: { ns: 850, min_ns: 700, max_ns: 1000, printed: '700 / 850 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 us (typ)' }
+        reset: { min_ns: 40000, level: low, printed: '40 us (min)' }
+        output: { T0H: 320, T1H: 700 }
+        doc: tm1804-v1.9
+        page: 4
+        quote: '3、高速模式时间 | T0H 输入0 码，高电平时间 350 400 450 ns | T1H 输入1 码，高电平时间 700 850 1000 ns | T0H’ 输出0 码 -- 320 -- ns | T1H’ 输出1 码 -- 700 -- ns | T 0 码或1 码的周期时间 -- 1.25 -- us | Treset Reset码，低电平时间 40 -- -- us | 注意：发送1 码或0 码的周期时间为1.25us（频率800KHz）。'
+      - name: 400kHz (V1.9)
+        select: 'SET pin to VDD'
+        T0H: { ns: 700, min_ns: 500, max_ns: 900, printed: '500 / 700 / 900 ns' }
+        T0L: null
+        T1H: { ns: 1800, min_ns: 1600, max_ns: 2000, printed: '1600 / 1800 / 2000 ns' }
+        T1L: null
+        period: { ns: 2500, printed: '2.5 us (typ)' }
+        reset: { min_ns: 40000, level: low, printed: '40 us (min)' }
+        output: { T0H: 700, T1H: 1300 }
+        doc: tm1804-v1.9
+        page: 4
+        quote: '2、低速模式时间 | T0H 500 700 900 ns | T1H 1600 1800 2000 ns | T0H’ -- 700 -- ns | T1H’ -- 1300 -- ns | T -- 2.5 -- us | Treset 40 -- -- us | 注意：发送1 码或0 码的周期时间为2.5us（频率400KHz）。'
+      - name: 'both speeds (English, 2014)'
+        select: 'p2: "SET Mode set Connect VDD:low-speed mode;vacant;high-speed mode"'
+        T0H: { printed: 'high-speed 350 / 400 / 450 ns; low-speed 500 / 700 / 900 ns' }
+        T1H: { printed: 'high-speed 700 / 850 / 1000 ns; low-speed 1600 / 1800 / 2000 ns' }
+        T0L: null
+        T1L: null
+        period: { printed: 'high-speed 1.25 uS; low-speed 2.5 uS' }
+        reset:
+          {
+            min_ns: 10000,
+            typ_ns: 24000,
+            level: low,
+            printed: 'Treset Reset code, ,low level time 10 (min) 24 (typ) uS (both modes)',
+          }
+        doc: tm1804-en-2014
+        page: 5
+        quote: 'High-speed mode time: T0H 0 Code,high level time 350 400 450 ns | T1H 1 code, high level time 700 850 1000 ns | T0H’ O code, high level time 320 ns | T1H’ 1 code, high level time 700 ns | T 0 code or 1 code cycle time 1.25 uS | Treset Reset code, ,low level time 10 24 uS | Note:The cycle time of send 1 mode or 2 mode is 2.5uS (Frequency：800KHz)'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥40 μs (V1.9, V2.3); the 2014 English sheet says ≥10 μs'
+      doc: tm1804-v2.3
+      page: 4
+      quote: '1. 24bit 的数据结构 R7…R0 G7…G0 B7…B0 | 高位先发，按照RGB的顺序发送数据。'
+      translation: 'High bit first, sent in R, G, B order.'
+    forwarding:
+      text: 'Same as TM1803: first 24 bits kept, the rest re-shaped and forwarded; DO low until forwarding. Td DIN→DOUT 300 ns (V2.3 p3).'
+      doc: tm1804-v2.3
+      page: 4
+      quote: '芯片在上电复位以后，接受DIN端送来的数据，接收完24bit后，DO端口开始转发DIN端继续发来的数据，为下个级联芯片提供输入数据。在转发数据之前，DO口一直为低电平。'
+      translation: 'After power-on reset the chip takes data from DIN; after 24 bits, DO forwards the data DIN keeps receiving. Before forwarding, DO stays low.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'V2.3 (2025) narrowed and shifted the windows of V1.9 (2022): high-speed T0H 300–390 vs 350–450 ns, T1H 650–1000 vs 700–1000 ns, output T0H’/T1H’ 360/720 vs 320/700 ns; low-speed T0H 600–780 vs 500–900 ns, T1H 1300–2000 vs 1600–2000 ns. V2.3 adds note (1) (period 1.25–2.5 μs OK) and note (2) (inter-byte low ≤5 μs). Treset ≥40 μs in both.'
+      - 'Reset: English 2014 sheet p4 "After accepting low level RESET code which more than 10Us" and p5 Treset 10 (min) 24 (typ) uS vs V1.9/V2.3 Treset ≥40 us.'
+      - 'English 2014 sheet internal errors: p4 switching table "High-speed mode Fc2 400 KHz" (V1.9/V2.3 p3: 高速模式 Fc2 800 KHz); p5 high-speed note "The cycle time of send 1 mode or 2 mode is 2.5uS (Frequency：800KHz)" contradicts its own table row "T … 1.25 uS".'
+    open: []
+
+  # ------------------------------------------------------------------ TM1809
+  - part: TM1809
+    entry: pixel-ics/tm1809
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1809-v1.8
+        url: https://www.titanmec.com/upload/twdz_cn/20240805/20240805180754595.pdf
+        title: 9 通道LED 驱动控制专用电路 TM1809
+        revision: V1.8
+        date: null
+        language: zh
+        notes: "Titan's current download (upload path 2024-08-05; PDF metadata 2024-08-01)."
+      - id: tm1809-v1.6
+        url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1809_V1.6.pdf
+        title: 9 通道LED 驱动控制专用电路 TM1809
+        revision: V1.6
+        date: null
+        language: zh
+        notes: 'Byte-identical to LCSC C20622180 https://datasheet.lcsc.com/datasheet/pdf/8ce4fbfff01b3f4d106db46e937e97fc.pdf. PDF metadata 2022-01-04.'
+      - id: tm1809-en-rev01
+        url: https://media.ledyi.com/tm1809-datasheet_f3014d562e6c15bbfb9fbe63d2e00fab9ebc2d95b20ad5aab5e3d946628b1d2d.pdf
+        title: 9-channel LED driver control IC TM1809
+        revision: 'Rev.：01'
+        date: null
+        language: en
+        notes: "The database's datasheet.url. PDF metadata 2011-02-14."
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V1.8)
+        select: 'SET pin 2 floating ("SET 2 - 接VDD：低速模式；悬空：高速模式", p3)'
+        T0H: { ns: 360, min_ns: 300, max_ns: 390, printed: '300 / 360 / 390 ns' }
+        T0L: null
+        T1H: { ns: 720, min_ns: 650, max_ns: 1000, printed: '650 / 720 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 us (typ)' }
+        reset: { min_ns: 200000, level: low, printed: 'Treset Reset码，低电平时间 200 -- -- us' }
+        output: { T0H: 360, T1H: 720 }
+        inter_byte_low_max_ns: 5000
+        doc: tm1809-v1.8
+        page: 6
+        quote: '3、高速模式时间 | T0H 输入0 码，高电平时间 300 360 390 ns | T1H 输入1 码，高电平时间 650 720 1000 ns | T0H’ -- 360 -- ns | T1H’ -- 720 -- ns | T -- 1.25 -- us | Treset Reset码，低电平时间 200 -- -- us | 注意：高速模式下发送1 码或0 码的周期时间为1.25us（频率800KHz）。高低速模式的Treset 复位时间是一样的。字节之间的低电平时间不要超过5us，否则芯片会复位，复位后又重新接收数据，则无法实现数据传送。'
+        translation: 'High-speed: T0H 300/360/390, T1H 650/720/1000 ns, period 1.25 us, Treset ≥200 us. Note: high- and low-speed modes have the same Treset. The low time between bytes must not exceed 5 us or the chip resets.'
+      - name: 400kHz (V1.8)
+        select: 'SET pin 2 to VDD'
+        T0H: { ns: 720, min_ns: 600, max_ns: 780, printed: '600 / 720 / 780 ns' }
+        T0L: null
+        T1H: { ns: 1440, min_ns: 1300, max_ns: 2000, printed: '1300 / 1440 / 2000 ns' }
+        T1L: null
+        period: { ns: 2500, printed: '2.5 us (typ)' }
+        reset: { min_ns: 200000, level: low, printed: '200 us (min)' }
+        output: { T0H: 720, T1H: 1440 }
+        doc: tm1809-v1.8
+        page: 6
+        quote: '2、低速模式时间 | T0H 600 720 780 ns | T1H 1300 1440 2000 ns | T0H’ -- 720 -- ns | T1H’ -- 1440 -- ns | T -- 2.5 -- us | Treset 200 -- -- us | 注意：低速模式下发送1 码或0 码的周期时间为2.5us（频率400KHz）。'
+      - name: 800kHz (V1.6)
+        select: 'SET pin 2 floating (p3)'
+        T0H: { ns: 400, min_ns: 350, max_ns: 450, printed: '350 / 400 / 450 ns' }
+        T0L: null
+        T1H: { ns: 850, min_ns: 700, max_ns: 1000, printed: '700 / 850 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 us (typ)' }
+        reset: { min_ns: 200000, level: low, printed: '200 us (min)' }
+        output: { T0H: 320, T1H: 700 }
+        inter_byte_low_max_ns: 200000
+        doc: tm1809-v1.6
+        page: 6
+        quote: '3、高速模式时间 | T0H 350 400 450 ns | T1H 700 850 1000 ns | T0H’ -- 320 -- ns | T1H’ -- 700 -- ns | T -- 1.25 -- us | Treset 200 -- -- us | 注意：…高低速模式的Treset 复位时间是一样的。字节之间的低电平时间不要超过200us，否则芯片会复位'
+      - name: 400kHz (V1.6)
+        select: 'SET pin 2 to VDD'
+        T0H: { ns: 700, min_ns: 500, max_ns: 900, printed: '500 / 700 / 900 ns' }
+        T0L: null
+        T1H: { ns: 1800, min_ns: 1600, max_ns: 2000, printed: '1600 / 1800 / 2000 ns' }
+        T1L: null
+        period: { ns: 2500, printed: '2.5 us (typ)' }
+        reset: { min_ns: 200000, level: low, printed: '200 us (min)' }
+        output: { T0H: 700, T1H: 1300 }
+        doc: tm1809-v1.6
+        page: 6
+        quote: '2、低速模式时间 | T0H 500 700 900 ns | T1H 1600 1800 2000 ns | T0H’ -- 700 -- ns | T1H’ -- 1300 -- ns | T -- 2.5 -- us | Treset 200 -- -- us'
+      - name: 'high-speed (English Rev 01, 2011)'
+        select: 'p2: "SET Set mode Connect to VDD：low-speed mode； Floating：high-speed mode"'
+        T0H: { ns: 320, min_ns: 250, max_ns: 390, printed: '250 / 320 / 390 ns' }
+        T0L: { ns: 600, min_ns: 530, max_ns: 670, printed: '530 / 600 / 670 ns' }
+        T1H: { ns: 600, min_ns: 530, max_ns: 670, printed: '530 / 600 / 670 ns' }
+        T1L: { ns: 320, min_ns: 250, max_ns: 390, printed: '250 / 320 / 390 ns' }
+        period: null
+        reset: { typ_ns: 24000, level: low, printed: 'Treset Reset，low-level time - 24 ＞24 us' }
+        doc: tm1809-en-rev01
+        page: 5
+        quote: 'High-speed mode time | T0H 0，high-level time 250 320 390 ns | T1H 1，high-level time 530 600 670 ns | T0L 0，low-level time 530 600 670 ns | T1L 1，low-level time 250 320 390 ns | Treset Reset，low-level time - 24 ＞24 us'
+      - name: 'low-speed (English Rev 01, 2011)'
+        select: 'SET pin to VDD'
+        T0H: { ns: 600, min_ns: 450, max_ns: 750, printed: '450 / 600 / 750 ns' }
+        T0L: { ns: 1200, min_ns: 1050, max_ns: 1350, printed: '1050 / 1200 / 1350 ns' }
+        T1H: { ns: 1200, min_ns: 1050, max_ns: 1350, printed: '1050 / 1200 / 1350 ns' }
+        T1L: { ns: 600, min_ns: 450, max_ns: 750, printed: '450 / 600 / 750 ns' }
+        period: null
+        reset: { typ_ns: 24000, level: low, printed: '- 24 ＞24 us' }
+        doc: tm1809-en-rev01
+        page: 4
+        quote: 'Low-speed mode time | T0H 0，high-level time 450 600 750 ns | T1H 1，high-level time 1050 1200 1350 ns | T0L 0，low-level time 1050 1200 1350 ns | T1L 1，low-level time 450 600 750 ns | Treset Reset，low-level time - 24 ＞24 us'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 9
+      wire_order: '1R 1G 1B 2R 2G 2B 3R 3G 3B, each byte bit 7 first (three 24-bit R G B groups per chip)'
+      pixel_bits: 72
+      extra: null
+      start: null
+      end: null
+      latch: "low ≥200 μs (V1.6, V1.8 tables); the same sheets' text says >15 μs (see disagreements)"
+      doc: tm1809-v1.8
+      page: 5
+      quote: '1、72bit的数据结构 R7…R0 G7…G0 B7…B0 (BIT71-BIT48 设定1OUTR/1OUTG/1OUTB) … (BIT47-BIT24 2OUT…) … (BIT23-BIT0 3OUT…) | 高位先发，按照RGB的顺序发送数据。'
+      translation: '72-bit data structure: bits 71–48 set 1OUTR/1OUTG/1OUTB, 47–24 the second group, 23–0 the third. High bit first, R, G, B order.'
+    forwarding:
+      text: 'Keeps the first 72 bits (three RGB groups) after reset, then forwards the rest; DOUT held low before forwarding.'
+      doc: tm1809-v1.8
+      page: 5
+      quote: '芯片在上电复位以后，接收DIN端打来的数据，接收够3 组24bit后，DO端口开始转发数据，为下一个芯片提供输入数据。在转发之前，DOUT口一直拉低。'
+      translation: 'After power-on reset the chip receives data from DIN; once it has 3 groups of 24 bits, DO starts forwarding data for the next chip. Before forwarding, DOUT is held low.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'Reset inside V1.6 and V1.8: table p6 Treset ≥200 us vs forwarding text p7 "此时如果控制器发送一个大于15us的RESET低电平信号，所有芯片就会复位" (if the controller sends a RESET low signal longer than 15 us, all chips reset).'
+      - 'Inter-byte low limit: V1.6 p6 "字节之间的低电平时间不要超过200us" vs V1.8 p6 "…不要超过5us".'
+      - 'V1.8 (2024) vs V1.6 (2022) windows: high-speed T0H 300–390 vs 350–450, T1H 650–1000 vs 700–1000; low-speed T0H 600–780 vs 500–900, T1H 1300–2000 vs 1600–2000; outputs 360/720 vs 320/700 (high) and 720/1440 vs 700/1300 (low).'
+      - 'English Rev 01 (2011) timing is disjoint from the Chinese sheets: high-speed T1H 530–670 ns (V1.6/V1.8: ≥700 / ≥650 ns; V1.8 overlaps only at 650–670), T0H 250–390; low-speed T1H 1050–1350 vs 1600–2000 / 1300–2000; reset typ 24 us vs ≥200 us. Its high-speed typ period is 320 + 600 = 920 ns, not 1.25 us.'
+      - 'PWM cycle: English Rev 01 p4 "the cycle of signal is 4ms" vs V1.6/V1.8 p5 "该信号周期为1.3ms" and TPWM p4 "1 1.3 1.5 ms". Features (all) "扫描频率不低于400Hz" / "scan frequency not less than 400hz".'
+    open: []
+
+  # ------------------------------------------------------------------ TM1812
+  - part: TM1812
+    entry: pixel-ics/tm1812
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1812-v1.8
+        url: https://www.titanmec.com/upload/twdz_cn/20240805/20240805180906305.pdf
+        title: 12 通道LED 驱动控制专用电路 TM1812
+        revision: V1.8
+        date: null
+        language: zh
+        notes: "Titan's current download (upload path 2024-08-05; PDF metadata 2024-08-01)."
+      - id: tm1812-v1.6
+        url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1812_V1.6.pdf
+        title: 12 通道LED 驱动控制专用电路 TM1812
+        revision: V1.6
+        date: null
+        language: zh
+        notes: 'Byte-identical to LCSC C20622179 https://datasheet.lcsc.com/datasheet/pdf/6957e495ab6dc4e009ef5a3a9225ce9f.pdf. PDF metadata 2022-04-02.'
+      - id: tm1812-en-v1.4
+        url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf
+        title: 12-Channel Special Circuit for LED Driver Control TM1812
+        revision: V1.4
+        date: null
+        language: en
+        notes: "The database's datasheet.url."
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V1.8)
+        select: 'none (800 kHz only: "数据发送速度为800Kbps", p1; no SET pin in the p3 pin table)'
+        T0H: { ns: 360, min_ns: 300, max_ns: 390, printed: '300 / 360 / 390 ns' }
+        T0L: null
+        T1H: { ns: 720, min_ns: 650, max_ns: 1000, printed: '650 / 720 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 us (typ)' }
+        reset: { min_ns: 200000, level: low, printed: 'Treset Reset码，低电平时间 200 -- -- us' }
+        output: { T0H: 360, T1H: 720 }
+        inter_byte_low_max_ns: 5000
+        doc: tm1812-v1.8
+        page: 5
+        quote: '2、高速模式时间 | T0H 输入0 码，高电平时间 300 360 390 ns | T1H 输入1 码，高电平时间 650 720 1000 ns | T0H’ -- 360 -- ns | T1H’ -- 720 -- ns | T -- 1.25 -- us | Treset Reset码，低电平时间 200 -- -- us | 注意：高速模式下发送1 码或0 码的周期时间为1.25us（频率800KHz）。字节之间的低电平时间不要超过5us，否则芯片会复位，复位后又重新接收数据，则无法实现数据传送。'
+        translation: 'T0H 300/360/390, T1H 650/720/1000 ns, 1.25 us period, Treset ≥200 us. The low time between bytes must not exceed 5 us or the chip resets.'
+      - name: 800kHz (V1.6)
+        select: none
+        T0H: { ns: 400, min_ns: 350, max_ns: 450, printed: '350 / 400 / 450 ns' }
+        T0L: null
+        T1H: { ns: 850, min_ns: 700, max_ns: 1000, printed: '700 / 850 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 us (typ)' }
+        reset: { min_ns: 200000, level: low, printed: '200 -- -- us' }
+        output: { T0H: 320, T1H: 700 }
+        inter_byte_low_max_ns: 5000
+        doc: tm1812-v1.6
+        page: 5
+        quote: '2、高速模式时间 | T0H 350 400 450 ns | T1H 700 850 1000 ns | T0H’ -- 320 -- ns | T1H’ -- 700 -- ns | T -- 1.25 -- us | Treset 200 -- -- us | …字节之间的低电平时间不要超过5us，否则芯片会复位'
+      - name: 800kHz (English V1.4)
+        select: none
+        T0H: { ns: 400, min_ns: 350, max_ns: 450, printed: '350 / 400 / 450 ns' }
+        T0L: null
+        T1H: { ns: 850, min_ns: 700, max_ns: 1000, printed: '700 / 850 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 us (typ)' }
+        reset:
+          {
+            min_ns: 8000,
+            typ_ns: 24000,
+            level: low,
+            printed: 'Treset Code Reset, low electric level time 8 (min) 24 (typ) us',
+          }
+        output: { T0H: 320, T1H: 700 }
+        inter_byte_low_max_ns: 8000
+        doc: tm1812-en-v1.4
+        page: 6
+        quote: 'High speed mode time | T0H Input 0 code, high electric level time 350 400 450 ns | T1H Input 1 code, high electric level time 700 850 1000 ns | T0H’ -- 320 -- ns | T1H’ -- 700 -- ns | T Cycle time of 0 code or 1 code -- 1.25 -- us | Treset Code Reset, low electric level time 8 24 us | Note: in high speed mode, the cycle time for sending code 1 or 0 is 1.25us (frequency @ 800KHz). The low electric level time between bytes shall not exceed 8us, otherwise the chip will be reset'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 12
+      wire_order: '1R 1G 1B 2R 2G 2B 3R 3G 3B 4R 4G 4B, each byte bit 7 first (four 24-bit R G B groups per chip)'
+      pixel_bits: 96
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥200 μs (V1.6, V1.8); ≥8 μs in English V1.4'
+      doc: tm1812-v1.8
+      page: 5
+      quote: '1、96bit的数据结构 BIT95-BIT72 设定1OUTR/1OUTG/1OUTB … BIT23-BIT0 设定4OUTR/4OUTG/4OUTB | 高位先发，按照RGB的顺序发送数据。'
+    forwarding:
+      text: 'Keeps the first 96 bits after reset (4 RGB groups), then forwards the rest; DOUT held low before forwarding.'
+      doc: tm1812-v1.8
+      page: 5
+      quote: '芯片在上电复位以后，接收DIN端打来的数据，接收够4 组24bit后，DO端口开始转发数据，为下一个芯片提供输入数据。在转发之前，DOUT口一直拉低。'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'Reset: English V1.4 p6 Treset 8 (min) 24 (typ) us and inter-byte low ≤8 us vs V1.6/V1.8 p5 Treset ≥200 us and inter-byte low ≤5 us.'
+      - 'V1.8 vs V1.6 windows: T0H 300–390 vs 350–450, T1H 650–1000 vs 700–1000, outputs 360/720 vs 320/700.'
+      - 'V1.8 p6 forwarding text ends "所有芯片就会复位并把各自接收到的24bit数据解码" (each chip decodes the 24 bits it received) although the same page says each chip keeps 96 bits.'
+    open: []
+
+  # ------------------------------------------------------------------ TM1903
+  - part: TM1903
+    entry: pixel-ics/tm1903
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1903-v1.3
+        url: https://www.titanmec.com/upload/twdz_cn/20231124/20231124144051767.pdf
+        title: 3 通道LED 恒流驱动专用电路 TM1903
+        revision: V1.3
+        date: null
+        language: zh
+        notes: "Titan's current download (upload path 2023-11-24; PDF metadata 2023-09-26). Text-identical to LCSC C5352786 https://datasheet.lcsc.com/datasheet/pdf/179deb9c690eea27fc1738f19b0be997.pdf."
+      - id: tm1903-v1.0
+        url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1903_V1.0.pdf
+        title: 3 通道LED 恒流驱动专用电路 TM1903
+        revision: V1.0
+        date: null
+        language: zh
+      - id: tm1903-en-v1.2
+        url: https://media.ledyi.com/tm1903-datasheet_102d51ddfa211a8055eed209fab8fb5a4145d05f6a27dbc5880a3b8e7a2a3417.pdf
+        title: Dedicated Circuit for 3-channel LED Constant Current Drive TM1903
+        revision: V1.2
+        date: null
+        language: en
+        notes: "The database's datasheet.url."
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V1.3; V1.0 identical)
+        select: null
+        T0H: { ns: 360, min_ns: null, max_ns: 410, printed: '— / 360 / 410 ns (no min printed)' }
+        T0L: null
+        T1H: { ns: 720, min_ns: 650, max_ns: null, printed: '650 / 720 / — ns (no max printed)' }
+        T1L: null
+        period:
+          {
+            ns: 1250,
+            printed: '1.25 μs (typ); note (1): 1.25–2.5 μs works if the high times fit the table',
+          }
+        reset:
+          {
+            min_ns: 200000,
+            max_ns: 20000000,
+            level: low,
+            printed: 'Treset Reset码，低电平时间 200 (min) 20000 (max) μs',
+          }
+        output: { T0H: 360, T1H: 720 }
+        inter_byte_low_max_ns: 50000
+        doc: tm1903-v1.3
+        page: 4
+        quote: '十一、时序特性 | 输入0 码，高电平时间 T0H VDD=5.0V GND=0V [min blank] 360 410 ns | 输入1 码，高电平时间 T1H 650 720 [max blank] ns | 输出0 码，高电平时间 T0H’ 360 ns | 输出1 码，高电平时间 T1H’ 720 ns | 0 码或1 码周期 T0/T1 1.25 μs | Reset码，低电平时间 Treset 200 [typ blank] 20000 μs | （1）0 码或1 码周期在1.25μs（频率800KHz）至2.5μs（频率400KHz）范围内，芯片均可正常工作，但是0 码和1 码高电平时间必须符合上表中相应数值范围；（2）不需复位时，字节之间的低电平时间不要超过50μs，否则芯片可能复位，复位后又重新接收数据，无法实现数据正确传送。'
+        translation: 'T0H typ 360, max 410 ns; T1H min 650, typ 720 ns; outputs 360 / 720 ns; period 1.25 μs; reset low 200 μs min, 20000 μs max. (1) Periods from 1.25 μs (800 kHz) to 2.5 μs (400 kHz) work if the high times fit. (2) When no reset is wanted, the low time between bytes must not exceed 50 μs.'
+        other_quotes:
+          - { page: 1, quote: '数据传输速率800KHz', translation: 'Data rate 800 kHz' }
+          - {
+              page: 4,
+              quote: '传输延迟时间 Tplz DIN →DO 155 ns (typ)',
+              translation: 'Propagation delay 155 ns typ',
+            }
+      - name: 800kHz (English V1.2)
+        select: null
+        T0H: { ns: 360, min_ns: 310, max_ns: 410, printed: '310 / 360 / 410 ns' }
+        T0L: null
+        T1H: { ns: 720, min_ns: 650, max_ns: 1000, printed: '650 / 720 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 μs' }
+        reset: { min_ns: 200000, max_ns: 20000000, level: low, printed: 'Treset 200 20000 μs' }
+        output: { T0H: 350, T1H: 700 }
+        inter_byte_low_max_ns: 50000
+        doc: tm1903-en-v1.2
+        page: 4
+        quote: 'Input 0 code,high level time T0H VDD=5.0V GND=0V 310 360 410 ns | Input 1 code,high level time T1H 650 720 1000 ns | Output 0 code,high level time T0H’ 350 ns | Output 1 code,high level time THl’ 700 ns | 0 code or 1 code cycle T0/T1 1.25 μs | Reset code, low level time Treset 200 20000 μs | (2) When reset is not required, the low level time between bytes should not exceed 50μs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: "low >200 μs (and the table's max 20000 μs)"
+      doc: tm1903-v1.3
+      page: 5
+      quote: '1、一帧完整数据结构 D1 D2 D3 D4 ... Dn Reset … 每个显示数据包包含24bit数据位。Reset表示复位信号，低电平有效。 | 2、Dn 的数据格式 R7 R6 R5 R4 R3 R2 R1 R0 G7 … G0 B7 … B0 每个显示数据包包含8×3bit数据位，高位先发。'
+      translation: 'A frame is D1 … Dn then Reset; each packet is 24 bits; Reset is active low. Dn is R7…R0 G7…G0 B7…B0, 8×3 bits, high bit first.'
+    forwarding:
+      text: 'Keeps the first 24 bits, forwards the rest; DO low before forwarding. Reset: low for more than 200 μs (p6). Tplz 155 ns typ (p4).'
+      doc: tm1903-v1.3
+      page: 6
+      quote: '此时如果控制器发送一个Reset信号，所有芯片将会复位并把各自接收到的24bit数据解码后控制OUT端口输出，完成一个数据刷新周期，芯片又回到接收准备状态。Reset低电平有效，保持低电平时间大于200μs，芯片复位;'
+      translation: 'When the controller sends a Reset, all chips reset and drive their outputs from the 24 bits each received. Reset is active low; held low for more than 200 μs, the chip resets.'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'English V1.2 has features the Chinese V1.0 and V1.3 do not: block diagram p1 "Internal control module", feature p1 "Data transmission rate in external control mode: 800KHz", switching table p4 "Time for switching from external control to internal control Tos DIN has no impulse input 600 ms". No internal-control behaviour is described anywhere in V1.0/V1.3.'
+      - 'English V1.2 p6: "To make the chip reset, the low level time should be maintained at more than 200μs. Please be noted that the low level time should not be more than 20000μs, or else the chip might be close output." V1.0/V1.3 give Treset max 20000 μs with no explanation.'
+      - 'Windows: English V1.2 prints T0H min 310 and T1H max 1000 ns and outputs 350/700 ns; V1.0/V1.3 print no T0H min, no T1H max, outputs 360/720 ns.'
+      - 'V1.0 p1 feature "单线单通道串行级联接口：由DIN脚输入数据，D0 转发级联的数据，信号不因某颗芯片异常而影响其他芯片正常工作" (claims one faulty chip does not stop the others, on a part with one data input); V1.3 drops the last clause.'
+    open:
+      - 'Whether TM1903 really blanks its outputs after >20 ms of continuous low (English V1.2 wording) is not stated in the Chinese sheets.'
+
+  # ------------------------------------------------------------------ TM1934
+  - part: TM1934
+    entry: pixel-ics/tm1934
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1934-v1.4
+        url: https://www.titanmec.com/upload/twdz_cn/20231124/20231124144200915.pdf
+        title: 3 通道LED 恒流驱动专用电路 TM1934
+        revision: V1.4
+        date: null
+        language: zh
+        notes: "Titan's current download (upload path 2023-11-24; PDF metadata 2023-09-26)."
+      - id: tm1934-en-v1.0
+        url: https://media.ledyi.com/tm1934-datasheet_d2e29278d772af174e8a9b25dba5c712669a8c86abf6f7c94af1c2e27edf8ff5.pdf
+        title: Dedicated Circuit for 3-channel LED Constant Current Drive TM1934
+        revision: V1.0
+        date: null
+        language: en
+        notes: "The database's datasheet.url. No Titan branding on the pages (re-typeset; PDF metadata Adobe Illustrator 2025)."
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V1.4)
+        select: null
+        T0H: { ns: 360, min_ns: null, max_ns: 410, printed: '— / 360 / 410 ns' }
+        T0L: null
+        T1H: { ns: 720, min_ns: 650, max_ns: null, printed: '650 / 720 / — ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 μs; note (1): 1.25–2.5 μs works if the high times fit' }
+        reset:
+          {
+            min_ns: 200000,
+            max_ns: 20000000,
+            level: low,
+            printed: 'Treset Reset码，低电平时间 200 (min) 20000 (max) μs',
+          }
+        output: { T0H: 360, T1H: 720 }
+        inter_byte_low_max_ns: 50000
+        doc: tm1934-v1.4
+        page: 4
+        quote: '十一、时序特性 | 输入0 码，高电平时间 T0H 360 410 ns | 输入1 码，高电平时间 T1H 650 720 ns | 输出0 码，高电平时间 T0H’ 360 ns | 输出1 码，高电平时间 T1H’ 720 ns | 0 码或1 码周期 T0/T1 1.25 μs | Reset码，低电平时间 Treset 200 20000 μs | （1）0 码或1 码周期在1.25μs（频率800KHz）至2.5μs（频率400KHz）范围内，芯片均可正常工作，但是0 码和1 码高电平时间必须符合上表中相应数值范围；（2）不需复位时，字节之间的低电平时间不要超过50μs'
+        notes: 'Same rows as TM1903 V1.3; columns checked on the rendered page (T0H typ/max, T1H min/typ, Treset min/max).'
+      - name: 800kHz (English V1.0)
+        select: null
+        T0H: { ns: 360, min_ns: 310, max_ns: 410, printed: '310 / 360 / 410 ns' }
+        T0L: null
+        T1H: { ns: 720, min_ns: 650, max_ns: 1000, printed: '650 / 720 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 μs' }
+        reset: { min_ns: 200000, level: low, printed: 'Treset 200 μs (min only)' }
+        output: { T0H: 350, T1H: 700 }
+        inter_byte_low_max_ns: 50000
+        doc: tm1934-en-v1.0
+        page: 4
+        quote: 'Input 0 ode, high level time T0H 310 360 410 ns | Input 1 ode, high level time T1H 650 720 1000 ns | Output 0 ode, high level time T0H’ 350 ns | Output 1 ode, high level time T1H’ 700 ns | 0 code or 1 code cycle T0/T1 1.25 μs | Reset code, low level time Treset 200 μs | (1) … the low level time of 0 code and 1 code must accord with the corresponding values in the above table; (2) When reset is not required, the low level time between bytes should not exceed 50μs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'low >200 μs (table max 20000 μs)'
+      doc: tm1934-v1.4
+      page: 5
+      quote: '1、一帧完整数据结构 D1 D2 D3 D4 ... Dn Reset … 每个显示数据包包含24bit数据位。Reset表示复位信号，低电平有效。 | 2、Dn 的数据格式 R7 … R0 G7 … G0 B7 … B0 每个显示数据包包含8×3bit数据位，高位先发。'
+    forwarding:
+      text: 'Keeps the first 24 bits from DIN or FDIN, forwards the rest on DO; DO low before forwarding. Reset low >200 μs (p6). Tplz DIN→DO / FDIN→DO 155 ns.'
+      doc: tm1934-v1.4
+      page: 5
+      quote: '芯片上电复位后，开始接收显示数据，接收完24bit后，DO端口开始转发DIN或FDIN端继续发来的数据，为下颗级联芯片提供显示数据。在转发数据之前，DO端口一直为低电平。'
+      translation: 'After power-on reset the chip receives display data; after 24 bits, DO forwards the data that keeps arriving on DIN or FDIN. Before forwarding, DO stays low.'
+    backup_line:
+      pins: 'DIN (pin 5, 数据输入 data input), FDIN (pin 7, 备用数据输入 backup data input), DO (pin 4)'
+      behaviour: 'Wiring (V1.4 fig. 5, p5): controller Di → chip 1 DIN; controller Fi → chip 1 FDIN; the Di line also feeds chip 2 FDIN; chip k DO → chip k+1 DIN and chip k+2 FDIN. Controller Di carries D1…Dn; Fi carries Dx D1…Dn (Dx any 24 bits), i.e. each FDIN sees the stream meant for the chip before it. The sheets do not say how the chip picks DIN or FDIN (no switching rule, no timeout, no mode command is defined); they only name normal / DIN / FDIN modes.'
+      doc: tm1934-v1.4
+      page: 5
+      quote: '其中S1 为控制器Di端口发送的数据，S2、S3、S4 为级联TM1934 转发的数据。控制器Di端口数据结构：D1D2D3D4……Dn；控制器Fi端口数据结构：DxD1D2D3D4……Dn；其中Dx为任意24bit数据位。 | (p1) 单线双通道串行级联接口：正常模式下输入接口相互切换，DIN工作模式下由DIN脚输入数据，FDIN工作模式下由FDIN脚输入数据，D0 转发级联的数据，信号不因某颗芯片异常而影响其他芯片正常工作'
+      translation: "S1 is sent by the controller's Di port; S2–S4 are forwarded by cascaded TM1934. Controller Di data: D1D2D3D4…Dn; controller Fi data: DxD1D2D3D4…Dn, where Dx is any 24 bits. (p1) Single-wire dual-channel cascade interface: in normal mode the inputs switch between each other; in DIN mode data enters on DIN, in FDIN mode on FDIN; DO forwards; one abnormal chip does not stop the others."
+    compatibility_claims: []
+    disagreements:
+      - 'English V1.0 describes a mode command that neither sheet defines: p1 "The chip data interface can configure DI or FDI pin input through the command", p5 "After power-on reset and reception of a mode setting command, the chip begins to receive display data", p7 "(omitting C1, C2 and Reset signal time)", p7 "Functions of different operating modes" (normal mode in use; DI / FDI modes for aging and installation tests). Its frame (p5) is only D1…Dn + Reset. V1.4 drops "through the command" and the C1/C2 wording but still names the three modes.'
+      - 'English V1.0 p8 "The SET pin connected to GND of TM1934 applies to constant current drive" — TM1934 has no SET pin (V1.4 p2 pin table: DIN, FDIN, DO, GND, OUTR/G/B, VDD).'
+      - 'English V1.0 p4 note (1) "the low level time of 0 code and 1 code must accord" vs V1.4 p4 "0 码和1 码高电平时间必须符合" (high time).'
+      - 'Windows: English V1.0 prints T0H 310–410, T1H 650–1000, outputs 350/700 ns, Treset ≥200 μs (no max); V1.4 prints T0H ≤410 (typ 360), T1H ≥650 (typ 720), outputs 360/720 ns, Treset 200–20000 μs.'
+      - 'Current and packages: V1.4 p1 "固定恒流输出14mA" and "封装形式：SOP8" vs English V1.0 p1 "15mA fixed constant current output" and "Packaging mode: SOP8 and SOT23-8".'
+    open:
+      - 'How a TM1934 chooses between DIN and FDIN in normal mode (timeout? activity detect?) and whether it discards the first 24-bit packet on FDIN: not printed in either sheet. The Fi = Dx D1…Dn structure implies FDIN skips one packet, but that is an inference.'
+      - 'How DIN-only / FDIN-only test modes are entered: not printed.'
+
+  # ------------------------------------------------------------------ TM1814
+  - part: TM1814
+    entry: pixel-ics/tm1814
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1814-v1.1
+        url: https://www.titanmec.com/upload/twdz_cn/20221202/20221202142445845.pdf
+        title: 4通道LED恒流驱动专用电路 TM1814
+        revision: V1.1
+        date: null
+        language: zh
+        notes: "Titan's current download (PDF metadata 2021-11-04). Byte-identical to https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1814_V1.1.pdf and to LCSC C20622183 TM1814(TA2105B) https://datasheet.lcsc.com/datasheet/pdf/a3fcd841f0e1345b421f67cf8d437bd9.pdf."
+      - id: tm1814-v1.0
+        url: https://datasheet.lcsc.com/datasheet/pdf/5269fb470c5b479e9ed9d3118f9f14fe.pdf
+        title: 4通道LED 恒流驱动专用电路 TM1814
+        revision: V1.0
+        date: null
+        language: zh
+        notes: 'LCSC C62614 (the original TM1814). PDF metadata 2014-11-13.'
+      - id: tm1814-en-v1.0
+        url: https://www.superlightingled.com/PDF/TM1814-TitanMicro.pdf
+        title: Four Channels LED Constant Current Driving Private Circuit TM1814
+        revision: V1.0
+        date: null
+        language: en
+        notes: "The database's datasheet.url. Same text as https://media.ledyi.com/tm1814-datasheet_a8ad5099affe04e7811eee2d501bcf080e4ec31da314d2e45d6239c601585b72.pdf. Translation of the Chinese V1.0."
+      - id: tm1814b-v1.2
+        url: https://www.titanmec.com/upload/twdz_cn/20221202/20221202142859832.pdf
+        title: 4通道LED恒流驱动专用电路 TM1814B
+        revision: V1.2
+        date: null
+        language: zh
+        notes: 'Sibling part, read for comparison only (no database entry). PDF metadata 2021-12-06.'
+    line_coding: single-wire
+    idle: high
+    bit_order: msb-first
+    rates:
+      - name: 800kHz (V1.1)
+        select: null
+        pulse_level: low
+        T0H: null
+        T0L:
+          {
+            ns: 360,
+            min_ns: null,
+            max_ns: 410,
+            printed: 'T0l 输入0码，低电平时间 — / 360 / 410 ns',
+          }
+        T1H: null
+        T1L:
+          {
+            ns: 720,
+            min_ns: 650,
+            max_ns: null,
+            printed: 'T1l 输入1码，低电平时间 650 / 720 / — ns',
+          }
+        period: { ns: 1250, printed: '1.25 μs; note (1): 1.25–2.5 μs works if the low times fit' }
+        reset:
+          {
+            min_ns: 200000,
+            max_ns: 20000000,
+            level: high,
+            printed: 'Treset Reset码，高电平时间 200 (min) 20000 (max) μs',
+          }
+        output: { T0L: 360, T1L: 720 }
+        inter_byte_high_max_ns: 50000
+        doc: tm1814-v1.1
+        page: 4
+        quote: '十一、时序特性 | 输入0码，低电平时间 T0l VDD=5.0V GND=0V 360 410 ns | 输入1码，低电平时间 T1l 650 720 ns | 输出0码，低电平时间 T0l’ 360 ns | 输出1码，低电平时间 T1l’ 720 ns | 0码或1码周期 T0/T1 1.25 μs | Reset码，高电平时间 Treset 200 20000 μs | （1）0 码或1 码周期在1.25μs（频率800KHz）至2.5μs（频率400KHz）范围内，芯片均可正常工作，但是0 码和1 码低电平时间必须符合上表中相应数值范围；（2）不需要复位时，字节之间的高电平时间不要超过50μs，否则芯片可能复位'
+        translation: 'Input 0-code LOW time typ 360, max 410 ns; input 1-code LOW time min 650, typ 720 ns; outputs 360/720 ns; period 1.25 μs; reset is a HIGH level of 200–20000 μs. (1) 1.25–2.5 μs periods work if the low times fit. (2) When no reset is wanted, the HIGH time between bytes must not exceed 50 μs.'
+        other_quotes:
+          - {
+              page: 4,
+              quote: '外控切换至内控时间 Tos DIN 无脉冲输入 450 500 550 ms',
+              translation: 'Switch from external to internal control after DIN has had no pulses for 450/500/550 ms',
+            }
+          - {
+              page: 1,
+              quote: '外控模式数据传输速率800KHz | 内控模式数据传输速率500KHz | 内控模式芯片发送数据1918点',
+              translation: 'External-control data rate 800 kHz; internal-control data rate 500 kHz; in internal-control mode the chip sends data for 1918 points',
+            }
+      - name: 800kHz (V1.0 and English V1.0)
+        select: null
+        pulse_level: low
+        T0H: null
+        T0L: { ns: 360, min_ns: 310, max_ns: 410, printed: 'T0l 310 / 360 / 410 ns' }
+        T1H: null
+        T1L: { ns: 720, min_ns: 650, max_ns: 1000, printed: 'T1l 650 / 720 / 1000 ns' }
+        period: { ns: 1250, printed: '1.25 μs; note (1) "0 码或1 码周期在1.25μs 范围内"' }
+        reset:
+          {
+            min_ns: 200000,
+            max_ns: 20000000,
+            level: high,
+            printed: 'Treset Reset码，高电平时间 200 20000 μs',
+          }
+        output: { T0L: 350, T1L: 700 }
+        inter_byte_high_max_ns: 126000
+        doc: tm1814-v1.0
+        page: 4
+        quote: '输入0码，低电平时间 T0l 310 360 410 ns | 输入1码，低电平时间 T1l 650 720 1000 ns | 输出0码 T0l’ 350 ns | 输出1码 T1l’ 700 ns | 0码或1码周期 T0/T1 1.25 μs | Reset码，高电平时间 Treset 200 20000 μs | （2）不需复位时，字节之间的高电平时间不要超过126μs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'C1 (32 bits), C2 (32 bits), then per chip W7…W0 R7…R0 G7…G0 B7…B0'
+      pixel_bits: 32
+      extra: 'C1 = constant-current command, 32 bits W R G B, MSB first; bits 7 and 6 of each byte fixed 0; bits [5:0] of each byte set that channel''s current, all 0 = 6.5 mA, all 1 = 38 mA, 64 steps. C2 = C1 with every bit inverted ("否则芯片将不能对数据进行正确解码", or the chip cannot decode the data). Every chip receives and forwards C1 and C2; on Reset each chip checks C1 against C2 and, if valid, applies the currents and its PWM packet.'
+      start: 'C1 C2 at the start of every frame (both refresh cycles drawn with C1 C2, p5–6)'
+      end: null
+      latch: 'HIGH for 200–20000 μs'
+      doc: tm1814-v1.1
+      page: 5
+      quote: '1、一帧完整数据结构 C1 C2 D1 D2 D3 D4 ... Dn Reset | C1、C2为恒流值设置命令，每个芯片都会接收并转发C1、C2。D1、D2、D3、D4、……、Dn为各芯片的PWM设置命令。Reset表示复位信号，高电平有效。 | 2、C1的数据格式 W7 … W0 R7 … R0 G7 … G0 B7 … B0 C1命令包含8×4bit数据位，高位先发，W7、W6、R7、R6、G7、G6、B7、B6固定设为0。W[5:0]:用于设置OUTW输出恒流值。全0码为6.5mA，全1码为38mA，64级可调。(R, G, B likewise) | 3、C2的数据格式 … C2命令是C1命令的对应bit按位取反，否则芯片将不能对数据进行正确解码。 | 4、Dn的数据格式 W7 … W0 R7 … R0 G7 … G0 B7 … B0 每组PWM设置命令包含8×4bit数据位，高位先发。'
+      translation: "Frame: C1 C2 D1 … Dn Reset. C1 and C2 are constant-current commands; every chip receives and forwards them. D1…Dn are each chip's PWM commands. Reset is active HIGH. C1: 8×4 bits, high bit first, W7 W6 R7 R6 G7 G6 B7 B6 fixed 0; W[5:0] sets OUTW current, all-0 = 6.5 mA, all-1 = 38 mA, 64 steps (R, G, B likewise). C2 is C1 with every bit inverted, or the chip cannot decode. Dn: W R G B, 8×4 bits, high bit first."
+    forwarding:
+      text: 'Forwards with a fixed 32-bit lag: C1 goes out while C2 comes in, C2 goes out while D1 comes in, then D2…Dn pass through. Each chip keeps the first 32-bit PWM packet after C1 C2. DO is held HIGH before forwarding. Tplz 155 ns typ (V1.1), 178 ns (V1.0).'
+      doc: tm1814-v1.1
+      page: 6
+      quote: '数据传输与转发流程：芯片1在接收C1的数据时无转发，当开始接收C2时，就会将C1的数据转发出去，在芯片1接收完C2之后，芯片1也将C1转发完成了；此后控制器再将D1发送给芯片1，芯片1则开始将C2转出去。…芯片1转发的数据与控制器发送给它的数据，始终是有32bit的差值。当控制器发送一个复位信号时，芯片1就会校验C1与C2，如果合法则将恒流值设置到端口，并将D1转化为实际的PWM控制。在后面级联的芯片2、芯片3…芯片n中，…都会将C1和C2之后的第一组PWM控制的数据(8×4bit)截留下来，并且将其他的PWM控制数据转发出去。'
+      translation: 'Chip 1 forwards nothing while receiving C1; when C2 starts arriving it forwards C1, finishing as C2 ends; while D1 arrives it forwards C2; it then forwards D2, D3, … The forwarded data always lags the input by 32 bits. On reset chip 1 checks C1 against C2; if valid it applies the currents and turns D1 into PWM. Chips 2…n do the same, each keeping the first 32-bit PWM packet after C1 and C2 and forwarding the rest.'
+    backup_line: null
+    other_behaviour:
+      - 'Internal control (内控) fallback: after ~500 ms without input (Tos 450/500/550 ms) the chip cycles fixed WRGB patterns and sends its own data downstream at 500 kHz for 1918 points (V1.1) / 2048 points (V1.0, English V1.0), so following chips run in sync. (V1.1 p4, p7–8; "当芯片电源正常，且检测到DIN没有信号输入，或本来信号正常，之后突然丢失500ms左右后，芯片进入内控模式")'
+      - 'Idle level: p5 "本芯片采用单线通讯方式，采用归一码的方式发送信号。…在转发数据之前，DO口一直为高电平。" (single-wire, "return-to-one" code; DO stays HIGH before forwarding). Timing diagram p4: DIN idles high, each bit starts with a low pulse T0l/T1l.'
+    compatibility_claims: []
+    disagreements:
+      - 'V1.1 (2021) vs V1.0 (2014): T0l min 310 → not printed; T1l max 1000 → not printed; outputs 350/700 → 360/720 ns; Tplz 178 → 155 ns; inter-byte HIGH limit 126 μs → 50 μs; period note "在1.25μs 范围内" → "1.25μs（800KHz）至2.5μs（400KHz）"; internal-mode output 2048 → 1918 points.'
+      - 'V1.0 p5 typo: "W[7:0]:用于设置OUTR输出的PWM占空比" (W sets OUTR); V1.1 corrects to OUTW. V1.0 p8 current-expansion text says "WRGB三个OUT端口" (three ports) where V1.1 says four.'
+    open:
+      - 'What a chip does when C2 is not the inverse of C1 is only described as "cannot decode correctly"; whether a frame without C1 C2 is accepted is not stated.'
+
+  # ------------------------------------------------------------------ TM1824
+  - part: TM1824
+    entry: pixel-ics/tm1824
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1824-v1.2
+        url: https://www.titanmec.com/upload/twdz_cn/20260417/20260417104126197.pdf
+        title: 4 通道LED 恒流驱动专用电路 TM1824
+        revision: V1.2
+        date: null
+        language: zh
+        notes: "Titan's current download; the upload path is dated 2026-04-17 (PDF metadata 2023-08-12). Text-identical to LCSC C19192204 https://datasheet.lcsc.com/datasheet/pdf/79f55d5adf81dcd2255a2f21219065a3.pdf."
+      - id: tm1824-v1.1
+        url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1824_V1.1.pdf
+        title: 4 通道LED 恒流驱动专用电路 TM1824
+        revision: V1.1
+        date: null
+        language: zh
+        notes: "The database's datasheet.url. Same content as V1.2 (layout differences only)."
+    line_coding: single-wire
+    idle: low
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        T0H: { ns: 360, min_ns: 310, max_ns: 410, printed: '310 / 360 / 410 ns' }
+        T0L: null
+        T1H: { ns: 720, min_ns: 650, max_ns: 1000, printed: '650 / 720 / 1000 ns' }
+        T1L: null
+        period: { ns: 1250, printed: '1.25 μs; note (1): 1.25–2.5 μs works if the high times fit' }
+        reset: { min_ns: 200000, level: low, printed: 'Treset Reset码，低电平时间 200 (min) μs' }
+        output: { T0H: 360, T1H: 720 }
+        inter_byte_limit_ns: 50000
+        doc: tm1824-v1.2
+        page: 4
+        quote: '十一、时序特性 | 输入0码，高电平时间 T0h VDD=5.0V GND=0V 310 360 410 ns | 输入1码，高电平时间 T1h 650 720 1000 ns | 输出0码，高电平时间 T0h’ 360 ns | 输出1码，高电平时间 T1h’ 720 ns | 0码或1码周期 T0/T1 1.25 μs | Reset码，低电平时间 Treset 200 μs | （1）0 码或1 码周期在1.25μs（频率800KHz）至2.5μs（频率400KHz）范围内，芯片均可正常工作，但是0 码和1 码高电平时间必须符合上表中相应数值范围；（2）不需要复位时，字节之间的高电平时间不要超过50μs，否则芯片可能复位'
+        translation: 'T0h 310/360/410 ns; T1h 650/720/1000 ns; outputs 360/720 ns; period 1.25 μs; reset low ≥200 μs. (1) 1.25–2.5 μs periods work if the high times fit. (2) When no reset is wanted, the HIGH time [sic] between bytes must not exceed 50 μs.'
+        other_quotes:
+          - {
+              page: 1,
+              quote: '采用单极性归零码数据协议 | 上电亮灯状态：灭灯 | 数据传输速率800KHz',
+              translation: 'Uses a unipolar return-to-zero data protocol; LEDs off at power-up; data rate 800 kHz',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 4
+      wire_order: 'R7…R0 G7…G0 B7…B0 W7…W0'
+      pixel_bits: 32
+      extra: null
+      start: null
+      end: null
+      latch: 'low ≥200 μs'
+      doc: tm1824-v1.2
+      page: 5
+      quote: '1、一帧完整数据结构 D1 D2 D3 D4 ... Dn Reset | D1、D2、D3、D4、……、Dn为各芯片的PWM设置命令。Reset表示复位信号，低电平有效。 | 2、Dn的数据格式 R7 … R0 G7 … G0 B7 … B0 W7 … W0 每组PWM设置命令包含8×4bit数据位，高位先发。'
+      translation: "Frame: D1 … Dn Reset; each Dn is one chip's PWM command; Reset is active low. Dn: R G B W, 8×4 bits, high bit first."
+    forwarding:
+      text: 'Each chip keeps the first 32 bits and forwards the rest with a 32-bit lag; DO low before forwarding. Tplz 155 ns typ.'
+      doc: tm1824-v1.2
+      page: 6
+      quote: '数据传输与转发流程：控制器发送数据D1，D2，D3…Dn，芯片1接收D1并转发D2，D3…Dn给芯片2，芯片2接收D2并转发D3…Dn，最后一级级联芯片芯片n接收Dn且无数据可转发。芯片1转发的数据与控制器发送给它的数据，始终是有32bit的差值。'
+      translation: "The controller sends D1…Dn; chip 1 takes D1 and forwards D2…Dn to chip 2, and so on; the last chip takes Dn. Chip 1's output always lags its input by 32 bits."
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'V1.2 p4 note (2) says the HIGH time between bytes must not exceed 50 μs ("字节之间的高电平时间不要超过50μs"), but the part idles low (p4: "在转发数据之前，DO口一直为低电平") and resets on a LOW level; the wording matches the inverted TM1814 sheet. The low-level inter-byte limit is therefore not stated correctly.'
+    open:
+      - 'Inter-byte low-time limit (the note is mis-worded; see disagreements).'
+
+  # ------------------------------------------------------------------ TM1829
+  - part: TM1829
+    entry: pixel-ics/tm1829
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1829-v1.5-en
+        url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1829_V1.5_EN.pdf
+        title: Three-channel LED Constant-current Drive TM1829
+        revision: V1.5
+        date: null
+        language: en
+        notes: "Titan-branded English sheet (PDF metadata 2017-04-25). Text-identical to LCSC C5174518 https://datasheet.lcsc.com/datasheet/pdf/8aa67c4ab22ab7c661890e6e97d95523.pdf and (minus headers) to the database's LEDYi copy https://media.ledyi.com/tm1829-datasheet_ca2ab7a03d12522a298c2629fca3707f0d867407a3e374072246eff71b992370.pdf. TM1829 is not listed on titanmec.com."
+      - id: tm1829b-v1.0
+        url: https://datasheet.lcsc.com/datasheet/pdf/b3457266985477c4a79c75dd89d81ec9.pdf
+        title: 3通道LED恒流驱动专用电路 TM1829B
+        revision: V1.0
+        date: null
+        language: zh
+        notes: 'LCSC C52109855 TM1829B-SOP8-TA2105B, the part the database prices TM1829 from. PDF metadata 2024-12-02. A different protocol from TM1829; see disagreements.'
+    line_coding: single-wire
+    idle: high
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: 'p5 switching table: "fosc High -speed mode DIN dangling or connect GND 800 KHz" (no speed pin exists; pin 7 is NC)'
+        pulse_level: low
+        T0H: null
+        T0L:
+          {
+            ns: 300,
+            min_ns: 150,
+            max_ns: 450,
+            printed: 'T0L Input 0 code，low level time 150 / 300 / 450 ns',
+          }
+        T1H: null
+        T1L:
+          {
+            ns: 800,
+            min_ns: 600,
+            max_ns: 1000,
+            printed: 'T1L Input 1 code，low level time 600 / 800 / 1000 ns',
+          }
+        period: { min_ns: 1200, printed: 'T 0 code or 1 code cycle time 1200 (min) -- (max) ns' }
+        reset:
+          {
+            min_ns: 140000,
+            typ_ns: 500000,
+            level: high,
+            printed: 'Treset Reset code，high level time 140 (min) 500 (typ) us',
+          }
+        output: { T0L: 340, T1L: 680 }
+        doc: tm1829-v1.5-en
+        page: 7
+        quote: 'T0L Input 0 code，low level time VDD=5V GND=0V 150 300 450 ns | T1L Input 1 code，low level time 600 800 1000 ns | T0L’ Output 0 code，low level time -- 340 -- ns | T1L’ Output 1code，low level time -- 680 -- ns | T 0 code or 1 code cycle time 1200 -- ns | Treset Reset code，high level time 140 500 us'
+        other_quotes:
+          - { page: 1, quote: 'Data transmission rate can reach 800Kbps.' }
+          - { page: 5, quote: 'tPLZ Transmission delay time DIN → DOUT 200 ns (max)' }
+          - {
+              page: 7,
+              quote: 'Be noted that the high level time between bytes can not exceed the RESET signal time, otherwise chip will be reset to receive data again, then data transmission can not be realized.',
+            }
+      - name: 800kHz (TM1829B V1.0, for comparison)
+        select: null
+        pulse_level: low
+        T0H: null
+        T0L: { ns: 360, min_ns: null, max_ns: 410, printed: 'T0l — / 360 / 410 ns' }
+        T1H: null
+        T1L: { ns: 720, min_ns: 650, max_ns: null, printed: 'T1l 650 / 720 / — ns' }
+        period: { ns: 1250, printed: '1.25 μs' }
+        reset: { min_ns: 200000, level: high, printed: 'Treset Reset码，高电平时间 200 μs (min)' }
+        output: { T0L: 360, T1L: 720 }
+        inter_byte_high_max_ns: 50000
+        doc: tm1829b-v1.0
+        page: 4
+        quote: '输入0码，低电平时间 T0l 360 410 ns | 输入1码，低电平时间 T1l 650 720 ns | 输出0码 T0l’ 360 ns | 输出1码 T1l’ 720 ns | 0码或1码周期 T0/T1 1.25 μs | Reset码，高电平时间 Treset 200 μs | （2）不需要复位时，字节之间的高电平时间不要超过50μs'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0 (PWM packet; R must not be 0xFF)'
+      pixel_bits: 24
+      extra: "Any 24-bit packet whose top byte [23:16] is 0xFF is a constant-current packet instead of PWM: [15:11] R current, [10:6] G current, [5:1] B current (I = 10 + value mA, 10–41 mA, 32 steps), [0] T test-mode bit (1 = test mode, 0 = normal, OUT outputs PWM). Consequently a PWM packet's R byte cannot be 0xFF (max 0xFE)."
+      start: null
+      end: null
+      latch: 'HIGH for ≥140 μs (typ 500 μs)'
+      doc: tm1829-v1.5-en
+      page: 5
+      quote: 'Constant-current mode command： After chip is power-on and reset，data input by DIN is complete data packet after each continuous 24bit. Firstly send high byte，if high 8 bits [bit23~bit16] are 1 in full，and then the data packet is constant-current set data. … RI [bit15~bit11]:Set R channel constant-current value，Ir=10+RI[4:0]mA, namely minimum 10+0=10mA,maxium 10+31=41mA | GI [bit10~bit6] … BI [bit5~bit1] … T: Test mode bit. 1：When it is in this position，test mode 0：When this bit is reset，normal working mode，OUT outputs PWM | (p7) PWM mode command： If high 8 bits are not 1 in full in 24bit data packet, the data packet is PWM setting data. … R7…R0 BIT23-BIT16 Set OUTR output PWM duty ration，can not be 1 fully | G7…G0 BIT15-BIT8 | B7…B0 BIT7-BITO … The high bits are sent firstly when 24bit data is sent. It is sent according to the sequence of RGB'
+    forwarding:
+      text: 'Keeps the first 24 bits after reset (PWM or current packet), forwards the rest; DO held HIGH before forwarding. tPLZ 200 ns max.'
+      doc: tm1829-v1.5-en
+      page: 5
+      quote: 'After the chip is power-on and reset, it receives the data sent by DIN terminal. After finishing receiving 24bit, DO port begins to retransmit the data sent by DIN terminal continuously to provide the input data for the next cascaded chip. Before retransmitting data, DO port is always high level. If DIN inputs RESET signal, chip will output corresponding PWM duty ration wave form according to the received 24bit data after resetting successfully'
+    backup_line: null
+    other_behaviour:
+      - 'Usage (p10): "5.2 Chip is power-on and reset. Initialize and set constant-current value firstly and the test mode bit T is 0（allow PWM to output）." and "it is suggested that the constant-current register should be refreshed regularly or the PWM register is refreshed once when the constant-current register is refreshed". The power-on default current is not printed.'
+      - 'FastLED (library, not Titan) treats TM1829 as inverted with a 500 μs latch: see reference_documents fastled-chipsets-h ("FLIP is currently only honored by the nRF52 backend").'
+    compatibility_claims:
+      - {
+          claim: 'Transmission distance between any two points is not less than 30 meters.',
+          doc: tm1829-v1.5-en,
+          page: 1,
+        }
+    disagreements:
+      - 'TM1829B V1.0 (2024) is not TM1829 V1.5 on the wire: TM1829B uses the TM1814 frame "C1 C2 D1 … Dn Reset" (p5) with 32-bit packets whose W byte is unused ("W[7:0]为无效数据位，固定设置为0"), C2 = inverse of C1, currents 6.5–38 mA in 64 steps ("恒流电流能够实现64级调节（6.5mA—38mA）", p1), T0l ≤410 / T1l ≥650 ns, reset HIGH ≥200 μs, PWM 900/1000/1100 Hz. TM1829 V1.5 uses 24-bit packets, an 0xFF-header current packet (10–41 mA, 32 steps), T0L 150–450 / T1L 600–1000 ns, reset HIGH ≥140 μs, PWM 6.5/7/7.5 kHz. Both are inverted.'
+      - 'Refresh-rate arithmetic p8: "The highest transmission rate of BIT is 1200ns（frequency800KHZ）… Transmission time is 24×0.6uS=28.8uS" — 1200 ns is 833 kHz (800 kHz is 1250 ns), and 24 × 0.6 μs = 14.4 μs; 28.8 μs is 24 × 1.2 μs, which the p9 table uses.'
+      - 'Bit labels p5: the diagram names the current bits "R14 R13 R12 R11 R10" while the text uses RI[4:0] (likewise G1x/GI, B1x/BI).'
+      - 'p5 switching table condition "DIN dangling or connect GND" for the 800 kHz mode; TM1829 has no mode pin (pin 7 NC, p2), so the condition reads as a leftover.'
+    open:
+      - 'Power-on default constant current and whether PWM output is enabled before any current packet: not printed.'
+      - 'No Chinese TM1829 sheet or revision newer than V1.5 found; titanmec.com does not list TM1829.'
+
+  # ------------------------------------------------------------------ TM1913
+  - part: TM1913
+    entry: pixel-ics/tm1913
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1913-v1.3
+        url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1913_V1.3.pdf
+        title: 3通道LED恒流驱动专用电路 TM1913
+        revision: V1.3
+        date: null
+        language: zh
+        notes: "The database's datasheet.url (UTF-8 BOM before %PDF). PDF metadata 2021-03-10. Not listed on titanmec.com; no English edition found."
+    line_coding: single-wire
+    idle: high
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        pulse_level: low
+        T0H: null
+        T0L:
+          {
+            ns: 360,
+            min_ns: 310,
+            max_ns: 410,
+            printed: 'T0l 输入0码，低电平时间 310 / 360 / 410 ns',
+          }
+        T1H: null
+        T1L:
+          {
+            ns: 720,
+            min_ns: 650,
+            max_ns: 1000,
+            printed: 'T1l 输入1码，低电平时间 650 / 720 / 1000 ns',
+          }
+        period: { ns: 1250, printed: '1.25 μs; note (1): 1.25–2.5 μs works if the low times fit' }
+        reset:
+          {
+            min_ns: 200000,
+            max_ns: 20000000,
+            level: high,
+            printed: 'Treset Reset码，高电平时间 200 (min) 20000 (max) μs',
+          }
+        output: { T0L: 350, T1L: 700 }
+        inter_byte_high_max_ns: 50000
+        doc: tm1913-v1.3
+        page: 4
+        quote: '时序特性 | 输入0码，低电平时间 T0l VDD=5.0V GND=0V 310 360 410 ns | 输入1码，低电平时间 T1l 650 720 1000 ns | 输出0码，低电平时间 T0l’ 350 ns | 输出1码，低电平时间 T1l’ 700 ns | 0码或1码周期 T0/T1 1.25 μs | Reset码，高电平时间 Treset 200 20000 μs | （1）0 码或1 码周期在1.25μs（频率800KHz）至2.5μs（频率400KHz）范围内，芯片均可正常工作，但是0 码和1 码低电平时间必须符合上表中相应数值范围；（2）不需复位时，字节之间的高电平时间不要超过50μs'
+        translation: 'Input 0-code LOW time 310/360/410 ns; 1-code LOW time 650/720/1000 ns; outputs 350/700 ns; period 1.25 μs; reset HIGH 200–20000 μs; inter-byte HIGH ≤50 μs.'
+        other_quotes:
+          - {
+              page: 4,
+              quote: '外控切换至内控时间 Tos DIN 无脉冲输入 600 (min) ms',
+              translation: 'External→internal control after DIN has no pulses for at least 600 ms',
+            }
+          - {
+              page: 1,
+              quote: '外控模式数据传输速率800KHz | 内控模式数据传输速率500KHz | 内控模式芯片发送数据2048点',
+            }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: null
+      start: null
+      end: null
+      latch: 'HIGH for >200 μs, but not more than 20000 μs (p6)'
+      doc: tm1913-v1.3
+      page: 5
+      quote: '1、一帧完整数据结构 D1 D2 D3 D4 … Dn Reset … 每个数据包包含24bit数据位。Reset表示复位信号，高电平有效。 | 2、Dn的数据格式 R7 … R0 G7 … G0 B7 … B0 每个数据包包含8×3bit数据位，高位先发。'
+      translation: 'Frame D1 … Dn Reset; 24-bit packets; Reset is active HIGH. Dn: R G B, 8×3 bits, high bit first.'
+    forwarding:
+      text: 'Keeps the first 24 bits, forwards the rest; DO HIGH before forwarding. Tplz 155 ns typ.'
+      doc: tm1913-v1.3
+      page: 5
+      quote: '本芯片为单线通讯，采用归一码的方式发送信号。芯片上电复位后，接收DIN端发来的数据，接收完24bit后，DO端口开始转发DIN端继续发来的数据，为下颗级联芯片提供输入数据。在转发数据之前，DO端口一直为高电平。'
+      translation: 'Single-wire, "return-to-one" code. After power-on reset the chip receives data on DIN; after 24 bits, DO forwards the data that keeps arriving. Before forwarding, DO stays HIGH.'
+    backup_line: null
+    other_behaviour:
+      - 'Internal control fallback (p7): "当芯片电源正常，且检测到DIN没有信号输入，或本来信号正常，之后突然丢失300ms左右后，芯片进入内控模式，进行如下循环闪烁" (with power normal and no DIN input, or after the signal suddenly disappears for about 300 ms, the chip enters internal-control mode and cycles a 7-state R/G/B pattern), and "芯片进入内控模式后，发送数据2048点" (it then sends data for 2048 points downstream).'
+      - 'Reset ceiling (p6): "Reset高电平有效，保持高电平时间大于200μs，芯片复位，但需注意高电平时间不应大于20000μs，否则芯片有可能切换至内控模式。" (Reset is active high; >200 μs resets the chip, but the high time should not exceed 20000 μs or the chip may switch to internal-control mode.)'
+    compatibility_claims: []
+    disagreements:
+      - 'Time to internal control, three values in one sheet: Tos ≥600 ms (p4 table), "突然丢失300ms左右后" about 300 ms (p7), and a reset HIGH longer than 20000 μs "有可能切换至内控模式" may switch (p6).'
+    open:
+      - 'Whether the idle HIGH between frames (which is the reset level) counts toward the 20 ms / 300 ms / 600 ms limits in normal operation, i.e. how often a controller must refresh to keep TM1913 out of internal control.'
+
+  # ------------------------------------------------------------------ TM1914
+  - part: TM1914
+    entry: pixel-ics/tm1914
+    maker: Titan Micro Electronics
+    documents:
+      - id: tm1914-v1.2
+        url: https://datasheet.lcsc.com/datasheet/pdf/ea7bbfcf76742136e43e79c7fa0e3a3b.pdf
+        title: 3 通道LED 恒流驱动专用电路 TM1914
+        revision: V1.2
+        date: null
+        language: zh
+        notes: 'LCSC C5174535. PDF metadata 2015-10-23. Not listed on titanmec.com.'
+      - id: tm1914-v1.0
+        url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1914-TitanMicro.pdf
+        title: 3 通道LED 恒流驱动专用电路 TM1914
+        revision: V1.0
+        date: null
+        language: zh
+        notes: 'Same protocol text as V1.2; V1.0 lists MSOP10 only, V1.2 adds SSOP10 and ESOP8.'
+      - id: tm1914-en-v1.2
+        url: https://www.superlightingled.com/PDF/SPEC/TM1914-Datasheet.pdf
+        title: Dedicated Circuit for 3-channel LED Constant Current Drive TM1914
+        revision: V1.2
+        date: null
+        language: en
+        notes: "The database's datasheet.url; same text as the LEDYi copy https://media.ledyi.com/tm1914-datasheet_f53245ad945ae995c5711ffc5932c07ab88babf15d0e6f1a5859cfa9bc8c20e2.pdf. Matches the Chinese V1.2."
+      - id: tm1914a-v1.3
+        url: https://datasheet.lcsc.com/datasheet/pdf/0c61609de407a25217befc6cdfa5e456.pdf
+        title: 3 通道LED 恒流驱动专用电路 TM1914A
+        revision: V1.3
+        date: null
+        language: zh
+        notes: 'LCSC C5174521 (SOP8, single DO). PDF metadata 2021-03-12. Same timing and mode commands as TM1914.'
+    line_coding: single-wire
+    idle: high
+    bit_order: msb-first
+    rates:
+      - name: 800kHz
+        select: null
+        pulse_level: low
+        T0H: null
+        T0L:
+          {
+            ns: 360,
+            min_ns: 310,
+            max_ns: 410,
+            printed: 'T0l 输入0码，低电平时间 310 / 360 / 410 ns',
+          }
+        T1H: null
+        T1L:
+          {
+            ns: 720,
+            min_ns: 650,
+            max_ns: 1000,
+            printed: 'T1l 输入1码，低电平时间 650 / 720 / 1000 ns',
+          }
+        period: { ns: 1250, printed: '1.25 μs; note (1): 1.25–2.5 μs works if the low times fit' }
+        reset: { min_ns: 200000, level: high, printed: 'Treset Reset码，高电平时间 200 μs (min)' }
+        output: { T0L: 350, T1L: 700 }
+        inter_byte_high_max_ns: 50000
+        doc: tm1914-v1.2
+        page: 4
+        quote: '时序特性 | 输入0码，低电平时间 T0l VDD=5.0V GND=0V 310 360 410 ns | 输入1码，低电平时间 T1l 650 720 1000 ns | 输出0码，低电平时间 T0l’ 350 ns | 输出1码，低电平时间 T1l’ 700 ns | 0码或1码周期 T0/T1 1.25 μs | Reset码，高电平时间 Treset 200 μs | （2）不需复位时，字节之间的高电平时间不要超过50μs'
+        other_quotes:
+          - { page: 4, quote: '传输延迟时间 Tplz DIN → DO1、DO2 / FDIN → DO1、DO2 155 ns' }
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: 'C1 (24 bits), C2 (24 bits), then per chip R7…R0 G7…G0 B7…B0'
+      pixel_bits: 24
+      extra: 'Mode-setting command, 48 bits = C1 (24-bit command code) + C2 (24-bit inverse check). Three commands: 0xFFFFFF_000000 normal mode (inputs switch DIN↔FDIN after 300 ms without data); 0xFFFFFA_000005 DIN-only mode (FDIN ignored); 0xFFFFF5_00000A FDIN-only mode (DIN ignored). Every chip checks C1/C2, forwards them, then takes its own 24-bit packet.'
+      start: 'C1 C2 at the start of every frame (both refresh cycles drawn with C1 C2, p5–6)'
+      end: null
+      latch: 'HIGH for >200 μs'
+      doc: tm1914-v1.2
+      page: 5
+      quote: '1、模式设置 本芯片为单线双通道通讯，采用归一码的方式发送信号。芯片接收显示数据前需要配置正确的工作模式，选择接收显示数据的方式。模式设置命令共48bit，其中前24bit为命令码，后24bit为检验反码，芯片复位开始接收数据，模式设置命令共有如下3种：（1）0xFFFFFF_000000命令：芯片配置为正常工作模式。在此模式下，首次默认DIN接收显示数据，芯片检测到该端口有信号输入则一直保持该端口接收，如果超过300ms未接收到数据，则切换到FDIN接收显示数据，芯片检测到该端口有信号输入则一直保持该端口接收，如果超过300ms未接收到数据，则再次切换到DIN接收显示数据。DIN和FDIN依此循环切换，接收显示数据。（2）0xFFFFFA_000005命令：芯片配置为DIN工作模式。在此模式下，芯片只接收DIN端输入的显示数据，FDIN端数据无效。（3）0xFFFFF5_00000A命令：芯片配置为FDIN工作模式。在此模式下，芯片只接收FDIN端输入的显示数据，DIN端数据无效。 | 3、一帧完整数据结构 C1 C2 D1 D2 D3 D4 … Dn Reset | C1、C2为模式设置命令，各包含24bit数据位，每个芯片都会接收并转发C1、C2 … Reset表示复位信号，高电平有效。'
+      translation: '1. Mode setting: single-wire dual-channel, "return-to-one" code. Before display data the chip must be configured with the right operating mode. The mode command is 48 bits: the first 24 bits are the command code, the last 24 bits its inverse as a check; the chip starts receiving after reset. (1) 0xFFFFFF_000000: normal mode. DIN receives first by default; while that port has signal the chip stays on it; after more than 300 ms without data it switches to FDIN, stays while FDIN has signal, and after 300 ms without data switches back to DIN, cycling. (2) 0xFFFFFA_000005: DIN mode, only DIN data is accepted, FDIN ignored. (3) 0xFFFFF5_00000A: FDIN mode, only FDIN, DIN ignored. 3. Frame: C1 C2 D1 … Dn Reset; C1 and C2 are the mode command, 24 bits each, received and forwarded by every chip; Reset is active HIGH.'
+    forwarding:
+      text: 'Each chip checks C1/C2, forwards them if valid, keeps its own 24-bit packet, forwards the rest on DO1 and DO2 (TM1914A: DO). DO1/DO2 are HIGH before forwarding.'
+      doc: tm1914-v1.2
+      page: 6
+      quote: '芯片级联和数据传输并转发过程如下：控制器发送数据S1，芯片1接收C1和C2进行校验，如果命令正确，则转发C1和C2，同时吸收D1，如果此时没有Reset复位信号，芯片1将一直转发控制器继续发来的数据；芯片2也接收C1和C2进行校验，如果命令正确，则转发C1和C2，同时吸收D2 … 直到控制器发送Reset复位信号 … Reset高电平有效，保持高电平时间大于200μs，芯片复位。'
+      translation: 'The controller sends S1; chip 1 receives and checks C1 and C2; if correct it forwards C1 and C2 and keeps D1, and keeps forwarding until a Reset. Chip 2 does the same and keeps D2, and so on. Reset is active HIGH; held high for more than 200 μs, the chip resets.'
+    backup_line:
+      pins: 'DIN (数据输入), FDIN (备用数据输入, backup data input), DO1 and DO2 (数据输出1/2) on MSOP10/SSOP10/ESOP8; TM1914A (SOP8) has one DO. SET (MSOP10/SSOP10 pin 9): "测试脚，正常应用必需接GND" (test pin, must be grounded in normal use).'
+      behaviour: 'Normal mode: start on DIN; stay on whichever input has signal; after >300 ms without data, switch to the other input; repeat. DIN-only and FDIN-only modes (set by the C1/C2 command) are for aging and installation tests (p7: "产品在老化及安装过程中，可将芯片分别设置为DIN工作模式和FDIN工作模式"). Wiring (TM1914 fig. 6, p6): controller Di → chip 1 DIN; Fi → chip 1 FDIN; Fi2 → chip 2 FDIN; chip k DO1 → chip k+1 DIN; chip k DO2 → chip k+2 FDIN. Data: Di and Fi2 carry C1 C2 D1…Dn; Fi carries C1 C2 Dx D1…Dn (Dx any 24 bits), so each FDIN sees the stream meant for the chip before it. TM1914A (fig. 5, p6): chip k DO → chip k+1 DIN and chip k+2 FDIN, and "注：如果控制器只有一个信号端口，把第一个点的FDIN悬空，DIN连接到控制器，其他点按上图连接。" (if the controller has one port, leave the first chip''s FDIN floating).'
+      doc: tm1914-v1.2
+      page: 6
+      quote: '其中S1为控制器Di端口发送的数据，S2、S3、S4为级联TM1914转发的数据。控制器Di和Fi2端口数据结构：C1C2D1D2D3D4……Dn；控制器Fi端口数据结构：C1C2DxD1D2D3……Dn；其中，Dx为任意24bit数据位。'
+      translation: "S1 is sent by the controller's Di port; S2–S4 are forwarded by cascaded TM1914. Controller Di and Fi2 data: C1C2D1D2D3D4…Dn; controller Fi data: C1C2DxD1D2D3…Dn, where Dx is any 24 bits."
+    compatibility_claims: []
+    disagreements: []
+    open:
+      - 'That a chip running from FDIN discards the first 24-bit packet after C1 C2 is implied by the Fi = C1 C2 Dx D1… structure but not stated.'
+      - 'Behaviour on a C1/C2 mismatch (no mode command, or C2 not the inverse of C1) is not described beyond "如果命令正确，则转发C1和C2".'

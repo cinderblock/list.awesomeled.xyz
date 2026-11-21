@@ -34,6 +34,7 @@ export default tseslint.config(
       'test-results/',
       // Research evidence: verbatim quotes from makers' pages, not site content
       'plans/database-review-fixes/',
+      'plans/pixel-protocols/',
     ],
   },
   // YAML style rules
