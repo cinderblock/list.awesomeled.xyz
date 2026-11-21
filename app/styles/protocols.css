@@ -932,3 +932,126 @@
   min-height: 24px;
   vertical-align: middle;
 }
+
+/* Who speaks what: one card per protocol */
+.proto-family-group {
+  margin-top: var(--space-6);
+}
+
+.proto-family-group > h3 {
+  margin-top: 0;
+}
+
+.proto-family-list {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .proto-family-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.proto-family {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--pr-surface);
+  scroll-margin-top: 110px;
+}
+
+.proto-family h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.proto-family-count {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--pr-muted);
+  white-space: nowrap;
+}
+
+.proto-family-wire {
+  font-size: 0.875rem;
+  margin-bottom: var(--space-2);
+}
+
+.proto-members {
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.proto-members a,
+.proto-more a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.proto-evidence {
+  color: var(--pr-muted);
+  font-size: 0.8125em;
+}
+
+.proto-more,
+.proto-differences {
+  margin-top: var(--space-1);
+  font-size: 0.875rem;
+}
+
+.proto-more summary,
+.proto-differences summary {
+  cursor: pointer;
+  color: var(--muted-foreground);
+  min-height: 1.5rem;
+}
+
+.proto-differences ul {
+  margin-top: var(--space-1);
+  padding-left: var(--space-5);
+  list-style: disc;
+}
+
+/* Same on the wire? */
+.proto-checker {
+  margin: var(--space-4) 0 var(--space-6);
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--pr-accent-bg);
+}
+
+.proto-checker-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.proto-checker-field {
+  display: grid;
+  gap: var(--space-1);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  flex: 1 1 14rem;
+}
+
+.proto-checker-field select {
+  min-height: 2.25rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  color: var(--foreground);
+  font: inherit;
+  font-weight: 400;
+  font-size: 0.9375rem;
+}
+
+.proto-checker-verdict {
+  margin-top: var(--space-3);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}

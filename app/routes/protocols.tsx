@@ -1,6 +1,7 @@
 import { Link } from 'react-router';
 import { BackupLine } from '~/components/protocols/BackupLine';
 import { ClockedBits } from '~/components/protocols/ClockedBits';
+import { ProtocolTable, SameChecker } from '~/components/protocols/ProtocolTable';
 import { ClockedChain } from '~/components/protocols/ClockedChain';
 import { DmxPacket } from '~/components/protocols/DmxPacket';
 import { SingleWireBits } from '~/components/protocols/SingleWireBits';
@@ -29,6 +30,7 @@ const SECTIONS = [
   { id: 'backup', label: 'Backup data line' },
   { id: 'dmx512', label: 'DMX512' },
   { id: 'sacn', label: 'sACN and Art-Net' },
+  { id: 'who', label: 'Who speaks what' },
   { id: 'sources', label: 'Sources' },
 ];
 
@@ -335,6 +337,26 @@ export default function Protocols() {
               speaks your pixels&rsquo; protocol.
             </p>
           </div>
+        </section>
+
+        <section id="who" className="proto-section" aria-labelledby="who-title">
+          <span className="proto-kicker">Same thing, different names</span>
+          <h2 id="who-title">Who speaks what</h2>
+          <div className="proto-prose">
+            <p>
+              Every pixel and pixel IC in this database, filed by what it receives on the wire.
+              Parts in one protocol take the same frames; a controller that drives one drives the
+              rest, once its channel order and reset time are set for them. Where a datasheet is
+              missing, the part is marked. The evidence for every part (the datasheet, the page and
+              the words) is in the{' '}
+              <a href="https://github.com/cinderblock/list.awesomeled.xyz/tree/master/plans/pixel-protocols">
+                research notes
+              </a>
+              .
+            </p>
+          </div>
+          <SameChecker />
+          <ProtocolTable />
         </section>
 
         <section id="sources" className="proto-section" aria-labelledby="sources-title">
