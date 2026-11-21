@@ -372,9 +372,10 @@ Cameron's side, in this order (the sheet is his; this stream never edits it):
    at OVH on 2020-10-22 and announced the name in the README's comment thread
    four days later. It is renewed to 2027-10-22 and uses OVH DNS
    (`dns17.ovh.net`) with OVH's HTTP redirect: `http://` → 301 to the sheet,
-   `https://` fails. Cameron asks the owner to point it at
-   `https://list.awesomeled.xyz/` (or to hand it over); there is nothing to
-   change on our side. Until then it lands on the frozen sheet's banner.
+   `https://` fails. Cameron already raised it with the owner on Facebook
+   about a year before the site existed. A follow-up asks the owner to point
+   it at `https://list.awesomeled.xyz/` (or to hand it over). There is
+   nothing to change on our side. Until then it lands on the frozen sheet's banner.
    (`awesomeledlist.xyz` is Cameron's, in the ops repo, and already
    redirects to the site.)
 5. Then this stream (or any) adds one line to the About page's History: the
@@ -389,7 +390,10 @@ Cameron's side, in this order (the sheet is his; this stream never edits it):
    site unless someone re-runs the tool.
 2. ~~**awesomeledlist.com**: should it 301 to the site?~~ Cameron
    (2026-11-20): yes, but it isn't his. It's now the owner's call
-   (checklist step 4). A draft note to the owner went to Cameron in chat.
+   (checklist step 4). Cameron had already asked the owner on Facebook,
+   before the site existed. A follow-up naming the new domain went to him in
+   chat. Questions about the sheet's history moved to a separate exploration
+   thread (2026-11-20).
 3. **Credit contributors by name on the About page?** Cameron (2026-11-20):
    that seems reasonable; he asked who. The candidates from the comments went
    to him in chat (with no names in this public plan). Waiting on which
