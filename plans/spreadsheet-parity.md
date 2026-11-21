@@ -334,6 +334,19 @@ this public plan until he picks.
       identified from the comments and RDAP. Credit candidates compiled from
       the comments. Two more named editors had appeared since 2026-11-18. No
       new comments, and the last edit predates the morning re-check.
+- [x] 2026-11-20 11:25 PM PST (2026-11-21 07:25Z): Cameron asked for a
+      better change timeline than Google's. I built a private artifact (not in
+      this repo, since it names editors): all 1,878 version-history sessions
+      from 2019-11-07 to 2026-11-18, diffed cell by cell. It ignores formula
+      and currency-rate drift, matches columns by header and content, and
+      flags sorts, large deletions and restores. Google's history feed
+      (`/revisions/tiles`) and per-revision exports
+      (`/export?format=xlsx&revision=N`) answer without sign-in only while the
+      link grants edit, so regenerate it just before the freeze. The scripts
+      are in the session scratchpad (`timeline/`). It surfaced one fact for
+      parity: the last content edit (2026-11-18 7:30 AM PST) typed Millumin
+      over the sheet's Pixelblaze row in Pattern Drivers. Both are in the
+      database.
 - [ ] **(current, waiting on Cameron)** The retire checklist below, then the
       final re-run once the sheet is frozen.
 
