@@ -140,10 +140,8 @@ export function TimingWindows() {
             }.${nominal.length ? ` ${nominal.map((r) => r.label.replace(/\s*\(.*\)$/, '')).join(', ')} print${nominal.length === 1 ? 's' : ''} only nominal values, so ${nominal.length === 1 ? 'it is' : 'they are'} left out.` : ''}`}
       </p>
       <figcaption className="proto-caption">
-        High-pulse windows from each datasheet, in nanoseconds. Read literally, they don&rsquo;t
-        agree on a single 1. The documents that say how a chip actually decides (the maker&rsquo;s
-        own rule for the UCS1904, and measurements of the WS2812B) both put the line between about
-        0.55 and 0.69 µs, and every library&rsquo;s 0 sits well below it and every 1 well above.
+        High-pulse windows in nanoseconds. Printed windows disagree, yet real chip decision points
+        (0.55–0.69 µs) and every major library agree.
       </figcaption>
     </figure>
   );

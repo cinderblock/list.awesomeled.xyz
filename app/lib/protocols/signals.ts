@@ -145,6 +145,21 @@ export function refreshRate(
   return { frameNs, fps: 1e9 / frameNs };
 }
 
+/**
+ * Update time and frame rate for an APA102 / SK9822 clocked string:
+ * 32-bit start frame, 32 bits per pixel, optional 32-bit SK9822 reset frame,
+ * and at least n/2 end clocks. No quiet reset gap is needed between updates.
+ */
+export function apa102RefreshRate(
+  pixels: number,
+  clockHz: number,
+  withResetFrame = true
+): { totalBits: number; frameNs: number; fps: number } {
+  const totalBits = 32 + pixels * 32 + (withResetFrame ? 32 : 0) + Math.ceil(pixels / 2);
+  const frameNs = (totalBits / clockHz) * 1e9;
+  return { totalBits, frameNs, fps: clockHz / totalBits };
+}
+
 // ---------------------------------------------------------------------------
 // A chain of pixels, as the animations draw it: frames travel along the wire
 // at a steady speed, each pixel keeps the first frame that reaches it and lets

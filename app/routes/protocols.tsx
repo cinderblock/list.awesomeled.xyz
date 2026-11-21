@@ -1,12 +1,13 @@
 import { Link } from 'react-router';
 import { BackupLine } from '~/components/protocols/BackupLine';
 import { ClockedBits } from '~/components/protocols/ClockedBits';
-import { ProtocolTable, SameChecker } from '~/components/protocols/ProtocolTable';
 import { ClockedChain } from '~/components/protocols/ClockedChain';
 import { DmxPacket } from '~/components/protocols/DmxPacket';
+import { ProtocolTable, SameChecker } from '~/components/protocols/ProtocolTable';
 import { SingleWireBits } from '~/components/protocols/SingleWireBits';
 import { SingleWireChain } from '~/components/protocols/SingleWireChain';
 import { Cite, SourcesList } from '~/components/protocols/Sources';
+import { SpeedCompare } from '~/components/protocols/SpeedCompare';
 import { TimingHiccup } from '~/components/protocols/TimingHiccup';
 import { TimingWindows } from '~/components/protocols/TimingWindows';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
@@ -51,9 +52,8 @@ export default function Protocols() {
             <RainbowText>Pixel protocols</RainbowText>
           </h1>
           <p className="proto-lead">
-            Addressable LEDs are sold under hundreds of part numbers, but the wire only carries a
-            handful of signals. This page shows what those signals do, bit by bit, so you can tell
-            when two parts with different names are the same thing, and when they really are not.
+            Hundreds of pixel part numbers share a handful of wire signals. Here is what each signal
+            actually does&mdash;and which parts are identical on the wire.
           </p>
           <nav aria-label="On this page">
             <ul className="proto-toc">
@@ -66,16 +66,65 @@ export default function Protocols() {
           </nav>
         </header>
 
+        <div className="proto-table-wrap">
+          <table className="proto-table">
+            <thead>
+              <tr>
+                <th scope="col">Signal</th>
+                <th scope="col">Wires</th>
+                <th scope="col">Bit rate</th>
+                <th scope="col">1,000 RGB px (1 line)</th>
+                <th scope="col">Addressing</th>
+                <th scope="col">Stall-tolerant?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <a href="#single-wire">Single wire</a>
+                </th>
+                <td>1 data (+ optional backup)</td>
+                <td>800 kbit/s typical (some dual-speed: 400k, 1.6M)</td>
+                <td className="num">~33 fps (30.3 ms)</td>
+                <td>Chain: keep first, pass rest</td>
+                <td>No</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <a href="#clocked">Clock + data</a>
+                </th>
+                <td>2 (clock + data)</td>
+                <td>Variable: 4&ndash;16 MHz typical (rated 15&ndash;40 MHz)</td>
+                <td className="num">~246 fps at 8 MHz (4.1 ms)</td>
+                <td>Chain: eat frame, emit zeros</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <a href="#dmx512">DMX512</a>
+                </th>
+                <td>RS-485 pair (D+, D&minus;)</td>
+                <td>Fixed 250 kbit/s</td>
+                <td className="num">170 px/universe (44 fps)</td>
+                <td>Shared bus: stored address</td>
+                <td>No</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <section id="single-wire" className="proto-section" aria-labelledby="single-wire-title">
           <span className="proto-kicker">One data wire</span>
           <h2 id="single-wire-title">Single wire: timed pulses</h2>
           <div className="proto-prose">
             <p>
-              Most pixels have one data input and no clock, so the timing has to be in the signal
-              itself. Every bit starts with the line going high; how long it stays high says which
-              bit it is. In the WS2812B&rsquo;s datasheet a 0 is high for 0.4 µs and a 1 for 0.8 µs,
-              each ±150 ns, and a whole bit takes 1.25 µs: 800,000 bits a second.
-              <Cite source="ws2812b-adafruit" /> The low part of the bit fills the rest.
+              With no clock wire, bit timing lives inside every pulse: the line goes high, and a
+              short pulse is a 0 (~0.4 µs) while a long pulse is a 1 (~0.8 µs), at 1.25 µs per bit
+              (800 kbit/s).
+              <Cite source="ws2812b-adafruit" /> Each RGB pixel takes 24 bits MSB first; channel
+              order (GRB on WS2812B vs RGB on WS2811) is a controller setting, not a different
+              protocol.
+              <Cite source={['ws2813b-v6', 'ws2811-v15']} />
             </p>
           </div>
           <SingleWireBits
@@ -88,154 +137,167 @@ export default function Protocols() {
               t1hMin: WS2812B_EARLY.t1h.min,
             }}
           />
-          <div className="proto-prose">
-            <p>
-              Each pixel takes 24 bits: one byte per colour, most significant bit first. Which byte
-              drives which colour is the part&rsquo;s business: the WS2812B wants green, red, blue
-              <Cite source="ws2813b-v6" />, the WS2811 driver chip red, green, blue.
-              <Cite source="ws2811-v15" /> That difference is a setting on every controller, not a
-              different protocol.
-            </p>
-          </div>
 
-          <h3>Down the chain</h3>
+          <h3>Down the chain &amp; reset latch</h3>
           <div className="proto-prose">
             <p>
-              Pixels are wired in a chain, each one&rsquo;s data output to the next one&rsquo;s
-              input. The controller never addresses a pixel: it sends one frame per pixel, in order,
-              and the chain sorts them out. In WorldSemi&rsquo;s words, the first pixel collects the
-              first 24 bits and the rest, reshaped, goes on to the next pixel, so &ldquo;after
-              transmission for each pixel, the signal [is reduced by] 24bit.&rdquo;
-              <Cite source="ws2812b-adafruit" /> Because every pixel rebuilds the signal it passes
-              on, the thousandth pixel gets as clean a signal as the first.
+              Pixels have no addresses. Pixel 1 keeps the first 24 bits, then reshapes and forwards
+              the rest to Pixel 2, so the thousandth pixel still sees a clean signal.
+              <Cite source="ws2812b-adafruit" /> Holding the line low ends the update and latches
+              every pixel at once: older sheets ask for 50 µs, newer WorldSemi sheets for &gt;280 µs
+              so brief controller interrupts don&rsquo;t cut a frame short.
+              <Cite source={['ws2812b-adafruit', 'ws2813b-v6']} /> Waiting the longest reset time
+              drives both.
             </p>
           </div>
           <SingleWireChain
             bitsPerPixel={24}
             bitNs={TYPICAL_BIT.period}
             resetUs={WS2813B_V6.resetMin / 1000}
-            resetPart="WS2813B and current WS2811"
+            resetPart="WS2813B / current WS2811"
           />
           <div className="proto-prose">
             <p>
-              The end of an update is just silence: the line stays low long enough that no bit could
-              be in progress. The early WS2812B sheet asks for 50 µs.
-              <Cite source="ws2812b-adafruit" /> WorldSemi&rsquo;s current sheets ask for more than
-              280 µs, and say why: so that &ldquo;it won&rsquo;t cause wrong reset while
-              interruption, supports the lower frequency and inexpensive MCU.&rdquo;
-              <Cite source="ws2813b-v6" /> A controller that pauses mid-frame (an interrupt, a busy
-              processor) for longer than the reset time ends the update early, and the pixels after
-              that point show a partial frame. A transmitter that waits the longest reset any of its
-              pixels needs drives all of them.
-            </p>
-            <p>
-              Speed is a frame property too. WorldSemi&rsquo;s early WS2811 has a SET pin that
-              halves the speed to 400,000 bits a second, with every time doubled;
-              <Cite source="ws2811-adafruit" /> a pixel wired for 400 kHz does not read an 800 kHz
-              signal, whatever its part number.
+              <strong>Speed modes:</strong> Most single-wire pixels run at 800 kbit/s, though some
+              support two speeds: early WS2811 and TM1804 use a <code>SET</code> pin to halve the
+              rate to 400 kbit/s
+              <Cite source={['ws2811-adafruit', 'tm1804-v2.3']} />, UCS1904/2904B auto-detect 400 or
+              800 kbit/s
+              <Cite source="ucs1904-cn" />, and newer chips like the UCS7604 add an optional{' '}
+              <strong>1.6 Mbit/s</strong> mode.
+              <Cite source="ucs7604-ver1.1" />
             </p>
           </div>
 
           <h3>One signal, many datasheets</h3>
           <div className="proto-prose">
             <p>
-              Datasheets don&rsquo;t agree to the nanosecond, not even one maker&rsquo;s. The early
-              WS2812B sheet lets a 0&rsquo;s high pulse run to {WS2812B_EARLY.t0h.max} ns; the
-              current WS2811 and WS2813B sheets stop it at {WS2811_V15.t0h.max} ns.
-              <Cite source={['ws2812b-adafruit', 'ws2811-v15', 'ws2813b-v6']} /> Put the windows of
-              a dozen parts side by side and, taken literally, no single 1 fits them all:
+              Datasheet windows disagree&mdash;even WorldSemi&rsquo;s own revisions stop a 0 at{' '}
+              {WS2812B_EARLY.t0h.max} ns in one sheet and {WS2811_V15.t0h.max} ns in another, and no
+              single 1-pulse fits every table below.
+              <Cite source={['ws2812b-adafruit', 'ws2811-v15', 'ws2813b-v6']} /> Real chips
+              don&rsquo;t check windows; they sample the high pulse at one threshold (~550&ndash;690
+              ns), which is why FastLED, NeoPixelBus, and FPP drive all of them with one timing.
+              <Cite
+                source={[
+                  'ucs1904-cn',
+                  'cpldcpu-ws2812',
+                  'josh-neopixels',
+                  'fastled',
+                  'neopixelbus',
+                  'fpp',
+                ]}
+              />
             </p>
           </div>
           <TimingWindows />
-          <div className="proto-prose">
-            <p>
-              Chips don&rsquo;t check windows, though. They time the high pulse and decide at one
-              point. UCS prints its rule: a high under 0.55 µs is a 0, over 0.69 µs a 1, and the low
-              part only ends the bit.
-              <Cite source="ucs1904-cn" /> A WS2812B measured in 2014 read anything up to 563 ns as
-              a 0 and anything from 625 ns as a 1; it samples the line at a fixed point after the
-              rising edge, counted on its own internal clock.
-              <Cite source="cpldcpu-ws2812" /> Josh Levine, after testing many pixels: &ldquo;The
-              only tight timing parameter for NeoPixel signaling is the maximum width of a 0-bit
-              pulse.&rdquo;
-              <Cite source="josh-neopixels" /> That is why libraries drive all of these with one
-              setting (FastLED sends a 0 as 250 ns and a 1 as 875 ns, NeoPixelBus 400 and 800, FPP
-              312 and 729
-              <Cite source={['fastled', 'neopixelbus', 'fpp']} />
-              ), and it is the honest way to define this protocol: by where the chip decides, not by
-              the windows a datasheet prints.
-            </p>
-            <p>
-              Some datasheets do print a different signal. The APA106&rsquo;s asks for a 1 to stay
-              high for 1.36 µs, in a bit of about 1.7 µs
-              <Cite source="apa106-sparkfun" />, and NeoPixelBus sends it exactly that.
-              <Cite source="neopixelbus" /> On paper that is not a WS2812B. Measured clones tell
-              another story: BaiCheng&rsquo;s PD9823 controller turned out to decide exactly like a
-              WS2812, and the verdict was &ldquo;Any software library that is able to drive the
-              WS2812(B) is also able to drive the PD9823.&rdquo;
-              <Cite source="cpldcpu-pd9823" /> A datasheet window records what its maker tested; on
-              its own it doesn&rsquo;t prove a part is something else.
-            </p>
-            <p>
-              The low part of a bit matters in one way only: held too long, it ends the frame. A
-              2014 WS2812B latched after about 9 µs of low, so &ldquo;no more than 9 us of idle time
-              may occur during data transfer&rdquo;
-              <Cite source="cpldcpu-ws2812" />; UCS tells controllers never to pause more than 8 µs
-              inside a frame.
-              <Cite source="ucs1904-cn" /> Newer WorldSemi parts wait over 280 µs before latching,
-              which is what makes them tolerant of an interrupted sender, and is also why a
-              controller that sends them the old 50 µs reset makes them flicker.
-              <Cite source={['ws2813b-v6', 'josh-neopixels']} />
-            </p>
-          </div>
+          <details className="proto-dig">
+            <summary>Dig deeper: APA106&rsquo;s long 1, clones, and mid-frame pauses</summary>
+            <div className="proto-prose">
+              <p>
+                <strong>APA106 vs clones:</strong> The APA106 datasheet prints a 1.36 µs 1-pulse in
+                a ~1.7 µs bit
+                <Cite source="apa106-sparkfun" />, and NeoPixelBus sends exactly that.
+                <Cite source="neopixelbus" /> Yet Tim (cpldcpu) measured BaiCheng&rsquo;s PD9823
+                clone and found its state machine decides identically to a WS2812B.
+                <Cite source="cpldcpu-pd9823" /> A printed window only proves what the maker tested.
+              </p>
+              <p>
+                <strong>Low time &amp; pauses:</strong> The low phase only ends the bit&mdash;until
+                it lasts long enough to latch. A 2014 WS2812B latched after ~9 µs of low
+                <Cite source="cpldcpu-ws2812" /> and UCS warns never to pause over 8 µs mid-frame
+                <Cite source="ucs1904-cn" />. Newer WorldSemi parts wait &gt;280 µs, which tolerates
+                longer pauses but flickers if a controller only sends the old 50 µs reset.
+                <Cite source={['ws2813b-v6', 'josh-neopixels']} />
+              </p>
+            </div>
+          </details>
         </section>
 
         <section id="clocked" className="proto-section" aria-labelledby="clocked-title">
-          <span className="proto-kicker">Two wires</span>
+          <span className="proto-kicker">Two wires (SPI-style)</span>
           <h2 id="clocked-title">Clock and data (APA102-style)</h2>
           <div className="proto-prose">
             <p>
-              Clocked pixels add a second wire. The controller drives a clock line, and the pixel
-              reads the data line at each rising clock edge. A bit is no longer a pulse length: it
-              is whatever the data line holds when the clock rises.
+              Adding a clock wire drops pulse-width timing completely: each pixel samples{' '}
+              <code>DATA</code> on every rising <code>CLK</code> edge.
+              <Cite source="apa102c-adafruit" />
             </p>
           </div>
           <ClockedBits order="BGR" part="APA102" />
+
+          <h3>How each pixel knows its frame (and APA102 vs SK9822)</h3>
           <div className="proto-prose">
             <p>
-              The APA102 frames everything in 32-bit words: a start frame of 32 zero bits, then one
-              LED frame per pixel (three 1 bits, a 5-bit global brightness, then blue, green and red
-              bytes, most significant bit first), then an end frame.
-              <Cite source="apa102c-adafruit" /> Like a single-wire pixel, each one keeps one frame
-              and passes the rest on. Tim of cpldcpu measured how: a pixel that has seen a start
-              frame takes the next LED frame for itself, &ldquo;while zeroes are pushed to the
-              output&rdquo;, then forwards everything after it.
-              <Cite source="cpldcpu-apa102" /> Those zeros are a new start frame for the next pixel.
+              APA102-style strips still have no pixel addresses. Every chip runs a tiny 3-step loop
+              on rising clock edges:
+              <Cite source={['apa102c-adafruit', 'cpldcpu-apa102']} />
+            </p>
+            <ol className="proto-steps">
+              <li>
+                <strong>Arm on 32 zeros:</strong> Seeing a 32-bit Start Frame (all <code>0</code>s)
+                arms the pixel to wait for the next <code>1</code> bit.
+              </li>
+              <li>
+                <strong>Eat 32 bits, output 32 zeros:</strong> On that first <code>1</code> (the{' '}
+                <code>111</code> header + 5-bit brightness + B, G, R), the pixel clocks 32 bits into
+                itself while driving <code>0</code> onto <code>DOUT</code>&mdash;creating a fresh
+                Start Frame for the next pixel.
+              </li>
+              <li>
+                <strong>Pass-through + end clocks:</strong> Everything after its 32 bits forwards
+                straight down the chain, delayed half a clock per pixel, so the controller appends
+                at least <code>n/2</code> extra clock edges to flush the last pixel (32 bits only
+                cover 64 pixels).
+              </li>
+            </ol>
+            <p>
+              <strong>Immediate vs latched updates:</strong> Genuine APA102s update each LED the
+              moment its 32 bits arrive (a slight cascade down long strips). SK9822s look identical
+              on paper but double-buffer, updating only after the <em>next</em> 32-zero start
+              frame&mdash;so a standard APA102 end frame leaves them one update behind.
+              <Cite source="cpldcpu-sk9822" /> One stream drives both cleanly: Start Frame, LED
+              frames, a 32-zero reset frame, then at least <code>n/2</code> zero end clocks.
+              <Cite source="cpldcpu-sk9822" />
             </p>
           </div>
           <ClockedChain />
+
+          <h3>Way faster than single wire</h3>
           <div className="proto-prose">
             <p>
-              The datasheet draws the end frame as 32 one bits. It is really just clock edges: each
-              pixel passes the data on half a clock late, but not the clock, so the controller has
-              to keep clocking after the last frame, at least one edge for every two pixels.
-              <Cite source="cpldcpu-apa102" /> Thirty-two bits cover 64 pixels; a longer string
-              needs more.
+              With no fixed 800 kbit/s bit cell and no 280 µs quiet reset, clocked strips run as
+              fast as the chips and wiring allow&mdash;commonly <strong>4&ndash;16 MHz</strong> in
+              real rigs, delivering 5&ndash;15&times; the frame rate of WS2812B for high-FPS POV,
+              camera-friendly runs, or longer strings per port.
             </p>
+          </div>
+          <SpeedCompare />
+          <div className="proto-prose">
             <p>
-              The SK9822 is sold as an APA102 replacement and reads the same bits, but it shows a
-              new colour only after the <em>next</em> start frame; the APA102 shows each frame as
-              soon as it arrives.
-              <Cite source="cpldcpu-sk9822" /> Sent the APA102 datasheet&rsquo;s stream, a string of
-              SK9822s runs one update behind. One stream drives both: start frame, LED frames, a
-              &ldquo;reset frame&rdquo; of 32 zeros, then at least one zero bit for every two
-              pixels.
-              <Cite source="cpldcpu-sk9822" />
+              <strong>The real-world ceiling:</strong> Datasheets advertise 30&ndash;40 MHz
+              <Cite source={['apa102c-2018', 'sk9822-opsco']} />, even while their own{' '}
+              <code>TCLKH/TCLKL &gt; 30 ns</code> specs cap at 16.7 MHz and APA recommends &le;5 MHz
+              for typical runs.
+              <Cite source="apa102c-2018" /> On long strips, cascading clock distortion hits first:{' '}
+              <a
+                href="https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Paul Stoffregen&rsquo;s (PJRC) oscilloscope tests
+              </a>{' '}
+              showed each APA102 slightly shrinks the clock-low pulse it passes on, leaving only ~3
+              ns of margin after 144 LEDs at 24 MHz.
+              <Cite source="pjrc-24mhz" />
             </p>
+          </div>
+
+          <h3>Stall-tolerant, too</h3>
+          <div className="proto-prose">
             <p>
-              Because the receiver only looks at the data when the clock rises, the sender can take
-              as long as it likes between edges. That is why a clocked string survives a controller
-              that stalls, and why the clock can run at any speed up to the part&rsquo;s maximum.
+              Because the receiver only checks data on rising clock edges, a slow or interrupted
+              controller can pause mid-byte without corrupting anything.
             </p>
           </div>
           <TimingHiccup
@@ -244,16 +306,14 @@ export default function Protocols() {
             t0hMax={WS2812B_EARLY.t0h.max}
             part="early WS2812B"
           />
+
           <div className="proto-prose">
             <h3>Same wires, different protocol</h3>
             <p>
-              Two wires don&rsquo;t make a part an APA102. The 16-bit SK9826 starts with at least
-              128 zero bits, sends 64 bits per pixel (a start bit, three 5-bit current gains and
-              three 16-bit values), and needs one extra clock per chip at the end.
-              <Cite source="sk9826-opsco" /> An APA102 controller doesn&rsquo;t drive it, and
-              neither does it drive the parts that print the same 64-bit frame, such as the NS108
-              and HD108.
-              <Cite source={['ns108-newstar', 'hd108-rose']} />
+              Two wires don&rsquo;t guarantee APA102 compatibility. 16-bit parts like the SK9826,
+              NS108, and HD108 need a &ge;128-zero start frame, 64 bits per pixel (1 start bit,
+              three 5-bit current gains, three 16-bit colours), and extra end clocks.
+              <Cite source={['sk9826-opsco', 'ns108-newstar', 'hd108-rose']} />
             </p>
           </div>
         </section>
@@ -263,27 +323,17 @@ export default function Protocols() {
           <h2 id="backup-title">Backup data line</h2>
           <div className="proto-prose">
             <p>
-              In a single-wire chain every pixel relays the signal, so one dead pixel blacks out
-              everything after it. Parts with a backup input, such as the WS2813, add a second data
-              wire that reaches back one pixel. In WorldSemi&rsquo;s words: &ldquo;Under normal
-              circumstances, the IC extracts signals from the DIN. When one IC among them is
-              damaged, the latter IC extracts the signal from the BIN without affecting the signal
-              transmission of the subsequent ics.&rdquo;
+              In a plain single-wire chain, one dead pixel blacks out everything downstream. Parts
+              with a backup input (WS2813, WS2815, GS8208) wire each pixel&rsquo;s <code>BI</code>{' '}
+              pin one pixel further back: if its neighbour dies, it switches to <code>BI</code> and
+              skips the dead pixel&rsquo;s 24 bits.
+              <Cite source="ws2813b-v6" /> Two dead pixels in a row still break the chain. On the
+              wire nothing changes&mdash;send the same WS2812B stream and tie pixel 1&rsquo;s{' '}
+              <code>BI</code> to ground.
               <Cite source="ws2813b-v6" />
             </p>
           </div>
           <BackupLine part="WS2813" skipOnBackup />
-          <div className="proto-prose">
-            <p>
-              The backup reaches back exactly one pixel, so it bridges one dead pixel at a time:
-              WorldSemi promises that &ldquo;any single pixel failure won&rsquo;t affect the overall
-              display effect.&rdquo;
-              <Cite source="ws2813b-v6" /> Two dead pixels in a row still cut the chain. On the wire
-              nothing changes: the controller sends the same frames as for a WS2812B, and the first
-              pixel&rsquo;s backup input is tied to ground.
-              <Cite source="ws2813b-v6" />
-            </p>
-          </div>
         </section>
 
         <section id="dmx512" className="proto-section" aria-labelledby="dmx512-title">
@@ -291,32 +341,22 @@ export default function Protocols() {
           <h2 id="dmx512-title">DMX512</h2>
           <div className="proto-prose">
             <p>
-              DMX512 (ANSI E1.11) is how lighting consoles talk to fixtures. It is plain
-              asynchronous serial on a differential pair: {DMX512.bitRateKbps.typ},000 bits a
-              second, so {DMX512.bitUs} µs a bit, one byte per slot. A packet starts with a BREAK
-              (the line held low for at least {DMX512.breakTxMinUs} µs), a MARK AFTER BREAK (high
-              for at least {DMX512.mabTxMinUs} µs), and a start code, followed by up to{' '}
-              {DMX512.slots} slots.
-              <Cite source="e1.11-2024" />
+              DMX512 (ANSI E1.11) is {DMX512.bitRateKbps.typ} kbit/s asynchronous serial over RS-485
+              ({DMX512.bitUs} µs/bit): a BREAK (&ge;{DMX512.breakTxMinUs} µs low), MARK AFTER BREAK
+              (&ge;{DMX512.mabTxMinUs} µs high), a start code, and up to {DMX512.slots} byte slots.
+              <Cite source="e1.11-2024" /> A full packet takes {DMX512.updateMs513} ms (max{' '}
+              {DMX512.refreshMax} fps), holding 170 RGB or 128 RGBW pixels per universe.
+              <Cite source={['e1.11-2024', 'enttec-universe']} />
             </p>
           </div>
           <DmxPacket part="WS2821" />
           <div className="proto-prose">
-            <p>
-              The standard puts a full {DMX512.slots}-slot packet at {DMX512.updateMs513} ms, so a
-              universe updates at most {DMX512.refreshMax} times a second.
-              <Cite source="e1.11-2024" /> Lighting people count in slots (channels): an RGB pixel
-              takes three, so one universe holds 170 RGB pixels, or 128 RGBW.
-              <Cite source="enttec-universe" />
-            </p>
             <h3>DMX pixels</h3>
             <p>
-              Some pixel chips read DMX512 directly. They don&rsquo;t pass data down a chain: they
-              all sit on the same data line, each with its own start address stored in the chip, and
-              each takes its slots as they go by. A dead pixel doesn&rsquo;t affect the others. The
-              WS2821, for example, &ldquo;adopts the parallel single wire control signal, owns the
-              independent programmable address&rdquo;, and its addresses are written once over a
-              separate address line, chained chip to chip.
+              DMX pixel ICs sit in parallel on one bus rather than relaying down a chain. Each chip
+              holds a stored start address (written once over a separate address line on parts like
+              the WS2821) and grabs its own slots as they pass, so a dead pixel never takes out the
+              rest.
               <Cite source="ws2821-acdc" />
             </p>
           </div>
@@ -327,14 +367,13 @@ export default function Protocols() {
           <h2 id="sacn-title">sACN and Art-Net</h2>
           <div className="proto-prose">
             <p>
-              sACN (ANSI E1.31) carries DMX512 packets over an IP network, so one cable can carry
-              thousands of universes, numbered 1 to 63999.
-              <Cite source="e1.31-2018" /> Art-Net does the same job.
-              <Cite source="artnet4" /> Neither reaches a pixel: an Ethernet pixel controller
-              receives the universes and turns each pixel&rsquo;s slots into the pixel protocol on
-              its outputs. The <Link to="/system-overview">system overview</Link> shows where each
-              part sits, and the <Link to="/designer">designer</Link> checks that a controller
-              speaks your pixels&rsquo; protocol.
+              sACN (ANSI E1.31, universes 1&ndash;63999)
+              <Cite source="e1.31-2018" /> and Art-Net
+              <Cite source="artnet4" /> transport DMX512 universes over IP networks. Neither reaches
+              a pixel directly: an Ethernet pixel controller receives those universes and outputs
+              single-wire or clocked pixel signals. See the{' '}
+              <Link to="/system-overview">system overview</Link> for how the pieces fit together, or
+              check controller compatibility in the <Link to="/designer">designer</Link>.
             </p>
           </div>
         </section>
@@ -344,11 +383,9 @@ export default function Protocols() {
           <h2 id="who-title">Who speaks what</h2>
           <div className="proto-prose">
             <p>
-              Every pixel and pixel IC in this database, filed by what it receives on the wire.
-              Parts in one protocol take the same frames; a controller that drives one drives the
-              rest, once its channel order and reset time are set for them. Where a datasheet is
-              missing, the part is marked. The evidence for every part (the datasheet, the page and
-              the words) is in the{' '}
+              Every pixel and pixel IC in this database, grouped by wire signal. Parts in one
+              protocol are interchangeable once channel order and reset time are set; every
+              datasheet quote lives in the{' '}
               <a href="https://github.com/cinderblock/list.awesomeled.xyz/tree/master/plans/pixel-protocols">
                 research notes
               </a>
@@ -363,9 +400,8 @@ export default function Protocols() {
           <h2 id="sources-title">Sources</h2>
           <div className="proto-prose">
             <p>
-              Every number on this page comes from one of these documents. Datasheets are linked
-              where their makers publish them; otherwise to the copy we read. Each entry lists the
-              exact words this page relies on.
+              Every number on this page comes from these documents, with verbatim quotes behind each
+              tap.
             </p>
             <SourcesList />
           </div>

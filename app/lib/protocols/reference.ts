@@ -152,6 +152,13 @@ export const SOURCES = {
     url: 'https://datasheet4u.com/pdf/1350120/UCS1904.pdf',
     retrieved: '2026-11-20',
   },
+  'ucs7604-ver1.1': {
+    title: 'UCS7604 4-channel 65536-level grayscale LED Driver IC',
+    publisher: 'UCS / Lianxinke (copy hosted by LED-Stübchen)',
+    url: 'https://www.led-stuebchen.de/download/UCS7604.pdf',
+    retrieved: '2026-11-20',
+    revision: 'VER1.1 (2023-06-02)',
+  },
   'cpldcpu-ws2812': {
     title: 'Light_WS2812 library V2.0 – Part I: Understanding the WS2812',
     publisher: 'Tim (cpldcpu), measurements with a logic analyzer',
@@ -193,6 +200,20 @@ export const SOURCES = {
     url: 'https://cdn-shop.adafruit.com/datasheets/APA102.pdf',
     retrieved: '2026-11-20',
   },
+  'apa102c-2018': {
+    title: 'SUPER LED APA-102C-NEW-260',
+    publisher: 'APA Electronic Co., Ltd. (copy hosted by Electronic Assembly)',
+    url: 'https://www.lcd-module.de/eng/pdf/zubehoer/APA102C.pdf',
+    retrieved: '2026-11-20',
+    revision: 'REV.01 (2018-10-11)',
+  },
+  'sk9822-opsco': {
+    title: 'SK9822 Specification (SPC/SK9822)',
+    publisher: 'Dongguan Opsco Optoelectronics (copy hosted by Pololu)',
+    url: 'https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf',
+    retrieved: '2026-11-20',
+    revision: 'Rev 01 (2016-03-18)',
+  },
   'cpldcpu-apa102': {
     title: 'Understanding the APA102 “Superled”',
     publisher: 'Tim (cpldcpu), measurements with a logic analyzer',
@@ -206,6 +227,13 @@ export const SOURCES = {
     url: 'https://cpldcpu.com/2016/12/13/sk9822-a-clone-of-the-apa102/',
     retrieved: '2026-11-20',
     revision: '2016-12-13',
+  },
+  'pjrc-24mhz': {
+    title: 'Why APA102 LEDs Have Trouble At 24 MHz',
+    publisher: 'Paul Stoffregen (PJRC), oscilloscope measurements',
+    url: 'https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/',
+    retrieved: '2026-11-20',
+    revision: '2017-12-06',
   },
   'sk9826-opsco': {
     title: 'SK9826 (SPC/SK9826) specification',
@@ -385,6 +413,17 @@ export const SINGLE_WIRE_FACTS = {
     quote:
       'RESET time>280µs, it won’t cause wrong reset while interruption, supports the lower frequency and inexpensive MCU.',
   },
+  autoDualSpeed: {
+    source: 'ucs1904-cn',
+    where: 'p. 6',
+    quote:
+      'UCS1904 内置控制可自动兼容以上2 种控制器发送模式 (automatically accepts both 800 kHz conventional and 400 kHz low-speed enhanced modes)',
+  },
+  fastSingleWire: {
+    source: 'ucs7604-ver1.1',
+    where: 'p. 1, Features',
+    quote: 'Data transmission frequency: 800K/S and 1.6M/S (optional)',
+  },
 } satisfies Record<string, Citation>;
 
 export const BACKUP_FACTS = {
@@ -466,6 +505,24 @@ export const CLOCKED_FACTS = {
     where: 'p. 6',
     quote:
       'Each update of data format consists of a start frame of 128 zeroes, 64 bits for every LED frame and but the end frame is not required. A minimum of 128 zeroes are required to initiate a new data update',
+  },
+  apa102cClock: {
+    source: 'apa102c-2018',
+    where: 'p. 6, Limit & recommended parameters',
+    quote:
+      'Limit parameter: Data clock frequency FCLK 30 MHZ · Recommended working parameters: Data clock frequency FCLK 0-5 MHZ · Clock high width TCLKH >30 ns · Clock low width TCLKL >30 ns',
+  },
+  sk9822Clock: {
+    source: 'sk9822-opsco',
+    where: 'p. 2 & p. 4',
+    quote:
+      'The maximum frequency of 30MHZ serial data input · Clock high/low level width TCLKH, TCLKL >30 ns',
+  },
+  pjrcClockShrink: {
+    source: 'pjrc-24mhz',
+    where: 'oscilloscope measurement, 144-LED APA102 strip',
+    quote:
+      'each APA102 lengthens the clock high time and shortens the clock low time slightly. … After 144 LEDs, the clock low time on this strip has shrunk from 20.83 ns to approximately 18 ns. With the data output delayed 15 ns after the falling edge, this leaves only 3 ns before the next APA102 LED captures the data on the rising edge of the clock.',
   },
 } satisfies Record<string, Citation>;
 

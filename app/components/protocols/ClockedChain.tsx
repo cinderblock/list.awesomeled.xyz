@@ -99,10 +99,8 @@ export function ClockedChain() {
       }
       caption={
         <>
-          Four clocked pixels. The controller sends a start frame, one LED frame per pixel, and end
-          clocks; the clock (the dashed line) runs through every pixel. Grey blocks are zero bits.
-          Switch the pixels to SK9822s to see them fall one update behind, then add the reset frame
-          that fixes it for both kinds.
+          Grey blocks are zero bits: each pixel replaces its frame with 32 zeros to arm the next
+          one. Switch to SK9822 to see the one-frame lag, then add the reset frame.
         </>
       }
     >

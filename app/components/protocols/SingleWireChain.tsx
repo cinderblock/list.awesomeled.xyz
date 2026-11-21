@@ -116,12 +116,8 @@ export function SingleWireChain({
       onStep={step}
       caption={
         <>
-          Five pixels on one data line, slowed down: in real time this whole update takes about{' '}
-          {Math.round(realUs)} µs. Each frame is {bitsPerPixel} bits, {frameUs} µs on the wire. A
-          pixel keeps the first frame it receives and passes everything after it on, so the stream
-          is one frame shorter after every pixel. The new colour waits in each pixel (the bar under
-          its number) until the line has been low for the reset time ({resetUs} µs for the{' '}
-          {resetPart}); then all of them change together.
+          Slowed down ({Math.round(realUs)} µs real time: {frameUs} µs/pixel + {resetUs} µs reset
+          for {resetPart}). Bars show buffered colours waiting for the reset latch.
         </>
       }
     >

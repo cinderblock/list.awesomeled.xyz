@@ -111,15 +111,12 @@ export function SingleWireBits({
       }
       caption={
         <>
-          One pixel&rsquo;s colour on a single-wire line: {bytes.length} bytes, most significant bit
-          first, in the {order} order the {orderPart} expects. Every bit starts with the line going
-          high; a short high pulse is a 0 and a long one is a 1.
+          Pick a colour or step bit by bit ({order} order, {orderPart}).
           {windows && (
             <>
               {' '}
-              The {windows.part} datasheet asks for a 0&rsquo;s pulse to end by {windows.t0hMax} ns
-              and a 1&rsquo;s to last at least {windows.t1hMin} ns: the two shaded bands on the bit
-              being read.
+              Shaded bands mark the {windows.part} 0-max ({windows.t0hMax} ns) and 1-min (
+              {windows.t1hMin} ns) pulse limits.
             </>
           )}
         </>

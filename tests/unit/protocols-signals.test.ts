@@ -7,6 +7,7 @@ import {
 } from '../../app/lib/protocols/clockedChain';
 import {
   apa102LedFrame,
+  apa102RefreshRate,
   byteBitsLsbFirst,
   byteBitsMsbFirst,
   chainCycleSeconds,
@@ -67,6 +68,15 @@ describe('single-wire waveform', () => {
     const { frameNs, fps } = refreshRate(1000, 24, 1250, 280_000);
     expect(frameNs).toBe(30_280_000);
     expect(fps).toBeCloseTo(33.03, 2);
+  });
+
+  test('clocked refresh rate: start, 32 bits/pixel, optional reset frame, and n/2 end clocks', () => {
+    // 1000 pixels at 8 MHz with 32-bit SK9822 reset frame: 32 + 32000 + 32 + 500 = 32564 bits
+    const unified = apa102RefreshRate(1000, 8_000_000, true);
+    expect(unified.totalBits).toBe(32_564);
+    expect(unified.fps).toBeCloseTo(245.67, 2);
+    // Without reset frame: 32 + 32000 + 500 = 32532 bits
+    expect(apa102RefreshRate(1000, 8_000_000, false).totalBits).toBe(32_532);
   });
 });
 

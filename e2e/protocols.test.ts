@@ -104,6 +104,20 @@ test.describe('Pixel protocols page', () => {
     await expect(status(chain)).toHaveText(/with a reset frame/);
   });
 
+  test('speed comparison updates frame rates and links PJRC 24 MHz research', async ({ page }) => {
+    await gotoReady(page, '/protocols');
+    const speed = page.locator('figure.proto-speed');
+    await expect(status(speed)).toHaveText(/1,000 RGB pixels.*8 MHz clocked/);
+    await speed.getByRole('button', { name: '16 MHz' }).click();
+    await expect(status(speed)).toHaveText(/16 MHz clocked hits 491 fps/);
+    await speed.getByRole('button', { name: '24 MHz' }).click();
+    await expect(status(speed)).toHaveText(/144 APA102s/);
+    await expect(page.getByRole('link', { name: /Paul Stoffregen.*PJRC/i })).toHaveAttribute(
+      'href',
+      'https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/'
+    );
+  });
+
   test('leaving datasheets out of the timing comparison', async ({ page }) => {
     await gotoReady(page, '/protocols');
     const chart = page.locator('figure.proto-windows');

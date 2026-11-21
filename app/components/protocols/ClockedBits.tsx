@@ -113,10 +113,8 @@ export function ClockedBits({ order, part }: { order: string; part: string }) {
       }
       caption={
         <>
-          One LED frame of the {part} protocol: three 1 bits that start the frame, a 5-bit
-          brightness, then one byte per colour in {order.split('').join(', ')} order. The pixel
-          reads the data line at each rising edge of the clock (the dots); between edges, the lines
-          can take as long as the sender likes.
+          One 32-bit {part} frame: <code>111</code> marker, 5-bit brightness, then {order}. Dots
+          mark rising-edge samples; toggle <em>Irregular clock</em> to test a jittery sender.
         </>
       }
     >

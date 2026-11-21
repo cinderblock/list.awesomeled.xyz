@@ -106,10 +106,8 @@ export function DmxPacket({ part }: { part: string }) {
       onStep={step}
       caption={
         <>
-          One DMX512 packet, not to scale. Each slot is one byte of {DMX512.bitUs} µs bits: a start
-          bit (low), eight data bits with the least significant first, and two stop bits (high):{' '}
-          {slotUs} µs a slot. The four {part} pixels below share one data line; each was given a
-          start address and takes three slots from there.
+          Not to scale. Each slot is 11 bits ({slotUs} µs, LSB first); the four {part} pixels share
+          one bus and grab their assigned slots.
         </>
       }
     >

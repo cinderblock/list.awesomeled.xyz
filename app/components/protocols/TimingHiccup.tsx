@@ -153,11 +153,8 @@ export function TimingHiccup({
           : `Both lines read ${sent}; the whole byte takes ${Math.round(totalNs)} ns.`}
       </p>
       <figcaption className="proto-caption">
-        The same byte, {sent} ({BITS.join('')}), sent on each kind of line. A single wire has no
-        clock, so a sender that pauses for a moment (an interrupt, a busy processor) changes the
-        pulse lengths, and the pixel reads something else: here a 0 grows past the {t0hMax} ns the{' '}
-        {part} datasheet allows a 0. On a clocked line the receiver only looks at the data when the
-        clock rises, so a pause just makes that bit take longer.
+        Byte {sent} ({BITS.join('')}) with a {stallNs} ns pause mid-bit: stretches a 0 past the{' '}
+        {part} {t0hMax} ns limit on single wire; harmless on a clocked line.
       </figcaption>
     </figure>
   );

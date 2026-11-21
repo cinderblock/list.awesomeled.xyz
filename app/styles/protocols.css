@@ -1055,3 +1055,177 @@
   font-size: 0.9375rem;
   line-height: 1.6;
 }
+
+/* Numbered protocol steps */
+.proto-steps {
+  padding-left: var(--space-5);
+}
+
+.proto-steps li + li {
+  margin-top: var(--space-2);
+}
+
+/* Collapsible deep-dive drawers */
+.proto-dig {
+  margin: var(--space-4) 0 var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--pr-surface);
+  max-width: 46rem;
+}
+
+.proto-dig summary {
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.proto-dig[open] summary {
+  margin-bottom: var(--space-3);
+}
+
+.proto-dig .proto-prose > :last-child {
+  margin-bottom: 0;
+}
+
+/* Interactive speed comparison */
+.proto-speed-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-6);
+  align-items: flex-end;
+  margin-bottom: var(--space-4);
+}
+
+.proto-speed-field {
+  display: grid;
+  gap: var(--space-2);
+  flex: 1 1 16rem;
+}
+
+.proto-speed-label {
+  font-size: 0.875rem;
+  color: var(--foreground);
+}
+
+.proto-speed-slider-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.proto-range {
+  flex: 1 1 9rem;
+  min-width: 7rem;
+  accent-color: var(--pr-accent);
+  cursor: pointer;
+}
+
+.proto-speed-presets {
+  display: inline-flex;
+  gap: var(--space-1);
+}
+
+.proto-preset {
+  min-height: 1.875rem;
+  padding: 0.125rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.proto-preset[aria-pressed='true'] {
+  background: var(--pr-accent);
+  border-color: var(--pr-accent);
+  color: var(--background);
+  font-weight: 600;
+}
+
+.proto-speed-bars {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.proto-speed-row {
+  display: grid;
+  grid-template-columns: 12.5rem minmax(0, 1fr) 6.5rem;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.proto-speed-meta {
+  display: grid;
+  line-height: 1.25;
+}
+
+.proto-speed-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.proto-speed-row--hi .proto-speed-name {
+  color: var(--pr-accent);
+}
+
+.proto-speed-sub {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.proto-speed-track {
+  height: 1.125rem;
+  border-radius: var(--radius-sm);
+  background: var(--pr-grid);
+  overflow: hidden;
+}
+
+.proto-speed-fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  background: var(--pr-muted);
+  transition: width 160ms ease-out;
+}
+
+.proto-speed-row--hi .proto-speed-fill {
+  background: var(--pr-accent);
+}
+
+.proto-speed-val {
+  display: grid;
+  justify-items: end;
+  line-height: 1.2;
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.proto-speed-val span {
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+@media (max-width: 640px) {
+  .proto-speed-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-1) var(--space-2);
+  }
+
+  .proto-speed-track {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proto-speed-fill {
+    transition: none;
+  }
+}

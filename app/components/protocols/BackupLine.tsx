@@ -143,8 +143,8 @@ export function BackupLine({ part, skipOnBackup }: { part: string; skipOnBackup:
         {status}
       </p>
       <figcaption className="proto-caption">
-        Six {part}-style pixels. Each has a main data input (DI) and a backup input (BI) wired to
-        the line one pixel further back. Tap a pixel, or use the buttons, to break it or repair it.
+        Tap a pixel (or button) to break it. Each {part}&rsquo;s backup input (BI) taps one pixel
+        back—break two neighbours to cut the chain.
       </figcaption>
     </figure>
   );
