@@ -1,0 +1,1347 @@
+# Workstream 8 (pixel protocols), research batch d-dmx: DMX512 itself, a short
+# sACN / Art-Net note, the universe arithmetic, and the DMX-addressed pixel ICs.
+# Summary for the parent: d-dmx.md (same folder). Every value below carries a
+# verbatim quote; "printed" strings copy the document's own text and units.
+# Page references: "PDF n" is the page index in the file; "printed n" is the
+# number in the page footer, where there is one.
+batch: d-dmx
+researched: '2026-11-20'
+
+# ---------------------------------------------------------------------------
+# 1. DMX512 (ANSI E1.11, USITT DMX512-A)
+# ---------------------------------------------------------------------------
+dmx512_standard:
+  documents:
+    - id: e111-2024
+      url: https://web.archive.org/web/20260225154802/https://tsp.esta.org/tsp/documents/docs/ANSI%20E1.11%20-%202024.pdf
+      original_url: https://tsp.esta.org/tsp/documents/docs/ANSI%20E1.11%20-%202024.pdf
+      title: ANSI E1.11 - 2024 Entertainment Technology--USITT DMX512-A Asynchronous Serial Digital Data Transmission Standard for Controlling Lighting Equipment and Accessories
+      revision: CP/2023-1011r2a
+      date: '2024-04-25' # 'Approved by the ANSI Board of Standards Review on 25 April 2024'
+      language: en
+      notes: >-
+        Current edition. ESTA's free download (tsp.esta.org/tsp/documents/published_docs.php, standardid 693)
+        asks for an email sign-in, which was not submitted; this is the Wayback Machine capture of the PDF
+        ESTA serves. ESTA's list says the current control number is 'CP/2024-1011r2a'; the PDF itself
+        prints 'CP/2023-1011r2a' on every page.
+    - id: e111-2008r2018
+      url: https://web.archive.org/web/20181123143754/http://tsp.esta.org/tsp/documents/docs/ANSI-ESTA_E1-11_2008R2018.pdf
+      title: ANSI E1.11 - 2008 (R2018) Entertainment Technology--USITT DMX512-A
+      revision: CP/2007-1013r3.1
+      date: '2018-05-31' # reaffirmation; 'It is a reaffirmation of the 2008 edition of the Standard.'
+      language: en
+    - id: e111-2004
+      url: https://web.archive.org/web/20190524191226/https://tsp.esta.org/tsp/documents/docs/E1-11.pdf
+      title: ANSI E1.11 - 2004 Entertainment Technology - USITT DMX512-A
+      revision: CP/1998-1031r8.0
+      date: '2004-11-08'
+      language: en
+      notes: Every page carries a 'SUPERSEDED' watermark.
+    - id: rp-dmx512
+      url: https://web.archive.org/web/20240407165055/https://tsp.esta.org/tsp/documents/docs/DMX512-A_Guide_(8x10)_ESTA.PDF
+      title: Recommended Practice for DMX512, A guide for users and installers, 2nd Edition, Incorporating USITT DMX512-A and Remote Device Management - RDM (Adam Bennette)
+      revision: 2nd Edition (PLASA 2008, reprinted 2012), ISBN 978-0-9557035-2-2
+      date: '2008'
+      language: en
+      notes: Hosted by ESTA on tsp.esta.org. Used only for the 1990 values and the worked packet arithmetic; it is a guide, not the standard.
+    - id: e127-1
+      url: https://tsp.esta.org/tsp/documents/docs/E1.27-1%20-%202006%20(R202x).pdf
+      title: E1.27-1 - 2006 (R202x) Entertainment Technology--Standard for Portable Control Cables for Use with ANSI E1.11 (DMX512-A) and USITT DMX512/1990 Products
+      revision: CP/2003-1028r6 ('DRAFT FOR REAFFIRMATION REVIEW')
+      date: null # copyright 2021
+      language: en
+      notes: >-
+        Reaffirmation-review draft. ESTA's published list describes the result, ANSI E1.27-1 - 2006 (R2021),
+        as 'a reaffirmation of the prior version. No substantive changes have been made.' Body-page headers
+        still say '(R2016)'.
+    - id: bsr-e111-1999-draft
+      url: https://web.archive.org/web/20241105154501/https://www.mikrocontroller.net/attachment/4868/DMX_512.PDF
+      title: BSR E1.11, Entertainment Technology - USITT DMX512 ... Revision 1.1a (CP98/1031r1.1a, 1999)
+      revision: 1.1a
+      date: '1999-11-23'
+      language: en
+      notes: Read, NOT used. It is a 1999 ESTA working draft marked as not for publication, not the USITT DMX512/1990 text.
+  overview:
+    text: Asynchronous UART bytes on a balanced EIA-485 pair; packets of up to 513 slots, slot 0 being the START Code.
+    doc: e111-2024
+    page: PDF 15 (printed 1), clause 1.2
+    quote: 'This standard uses a simple asynchronous eight-bit serial protocol consisting of an untyped byte stream produced by standard UARTs. The physical media, not addressed in this document, is normally, but not exclusively, a two-pair cable, with each pair serving as a data link. The media is driven using ANSI/TIA/EIA-485-A-1998 (hereafter referred to as EIA-485-A in this document) balanced data transmission techniques. Physical connection at devices is via 5-pin XLR connectors or by "hard-wiring" to terminals. Restricted use of connectors other than 5-pin XLR is allowed if certain conditions apply (see clause 7). Data on the primary data link is sent in packets of up to 513 slots. The first slot is a START Code, which defines the information in the subsequent slots in the packet.'
+  line_coding: dmx512
+  idle: high
+  idle_quote:
+    doc: e111-2024
+    page: PDF 17 (printed 3) clause 3.16; PDF 18 (printed 4) clause 3.24
+    quote: '3.16 Idle: the time between slots that the DMX512 line is high and not sending any information (also known as the ‘Mark’ condition). ... 3.24 Mark: a line condition where Signal True is high with respect to Signal Complement. A Mark represents a binary 1.'
+  bit_order: lsb-first
+  bit_rate:
+    min_kbps: 245
+    typ_kbps: 250
+    max_kbps: 255
+    bit_time: { min_ns: 3920, typ_ns: 4000, max_ns: 4080, printed: 'Bit Time 3.92 4 4.08 µs' }
+    printed: 'Bit Rate 245 250 255 kbit / s'
+    doc: e111-2024
+    page: PDF 30 (printed 16), Table 6 and Table 7 (same rows in both)
+    quote: 'Table 6 - Timing Diagram Values - output of transmitting UART ... - Bit Rate 245 250 255 kbit / s; - Bit Time 3.92 4 4.08 µs'
+    note: Unchanged in E1.11-2004 (PDF 31, printed 20) and E1.11-2008 (R2018) (PDF 32, printed 18).
+  slot_format:
+    start_bits: 1
+    data_bits: 8
+    stop_bits: 2
+    parity: none
+    slot_time:
+      {
+        typ_ns: 44000,
+        printed: 'derived: 11 bits x 4 µs (the standard prints no slot-time row; Figure 5 item 3 is "Slot Time")',
+      }
+    doc: e111-2024
+    page: PDF 26 (printed 12), clause 8.2 Table 5; PDF 19 (printed 5) clauses 3.39, 3.41
+    quote: 'The data transmission format for each data value transmitted are as shown in table 5. Note that no parity is transmitted. Table 5 - Data Slot Format: Bit Position 1 - Start Bit, Low or SPACE; 2 through 9 - Slot Value Data Bits, Least Significant Bit to Most Significant Bit; 10, 11 - Stop Bits, High or MARK'
+    quote_2: '3.39 Start Bit: ... The start bit is always low, i.e., Space. ... 3.41 Stop Bit: the additional bit(s) attached to a byte to indicate the end of the byte - DMX512 has 2 stop bits. The stop bit is always high, i.e., Mark.'
+    receiver_framing:
+      doc: e111-2024
+      page: PDF 30 (printed 16), clause 9.1
+      quote: 'A receiver shall check the first stop bit and should check the second stop bit of all received slots to determine if they have the correct value. If a missing stop bit is detected, the receiver shall discard the improperly framed slot data and all following slots in the packet.'
+  timing_tables:
+    # Rows copied from the 2024 tables (rendered page read visually; the text layer is scrambled).
+    # Columns: Designation | Description | Min | Typical | Max | Unit. "/" separates the two
+    # units the table prints in one cell (µs for Min, s for Max).
+    transmitter_table_6:
+      doc: e111-2024
+      page: PDF 30 (printed 16)
+      title: 'Table 6 - Timing Diagram Values - output of transmitting UART'
+      rows:
+        - '- | Bit Rate | 245 | 250 | 255 | kbit / s'
+        - '- | Bit Time | 3.92 | 4 | 4.08 | µs'
+        - '- | Minimum Update Time for 513 slots | – | 22.7 | – | ms'
+        - '- | Maximum Refresh Rate for 513 slots | – | 44 | – | updates / s'
+        - '1 | “SPACE” for BREAK | 92 | 176 | – | µs'
+        - '2 | “MARK” After BREAK (MAB) | 12 | – | < 1.00 | µs / s'
+        - '9 | “MARK” Time between slots | 0 | – | < 1.00 | s'
+        - '10 | “MARK” Before BREAK (MBB) | 0 | – | < 1.00 | s'
+        - '11 | BREAK to BREAK Time | 1204 | – | 1.00 | µs / s'
+        - '13 | DMX512 Packet | 1204 | – | 1.00 | µs / s'
+    receiver_table_7:
+      doc: e111-2024
+      page: PDF 30 (printed 16)
+      title: 'Table 7 - Timing Diagram Values for Receivers'
+      rows:
+        - '- | Bit Rate | 245 | 250 | 255 | kbit / s'
+        - '- | Bit Time | 3.92 | 4 | 4.08 | µs'
+        - '- | Minimum Update Time for 513 slots | – | 22.7 | – | ms'
+        - '- | Maximum Refresh Rate for 513 slots | – | 44 | – | updates / s'
+        - '1 | “SPACE” for BREAK | 88 | – | –< 1.00 | µs / s'
+        - '2 | “MARK” After BREAK (MAB) | 8 | – | < 1.00 | µs / s'
+        - '9 | “MARK” Time between slots | 0 | – | < 1.00 | s'
+        - '10 | “MARK” Before BREAK (MBB) | 0 | – | < 1.00 | s'
+        - '11 | BREAK to BREAK Time | 1196 | – | 1.25 | µs / s'
+        - '13 | DMX512 Packet | 1196 | – | 1.25 | µs / s'
+    table_notes:
+      doc: e111-2024
+      page: PDF 30 (printed 16)
+      quote: 'Note 1: Given the range of timing parameters shown in tables 6 and 7, a transmitter may produce a signal with a refresh rate in the range of 1 Hz to approximately 830 Hz. A receiver must be capable of accepting a signal with a refresh rate of 0.8 Hz to approximately 836 Hz. Note 2: Receivers may accept BREAK timings less than the minimum value defined in Table 7 unless specifically disallowed elsewhere in the standard.'
+    edition_differences:
+      - what: Receiver BREAK row (Table 7, designation 1)
+        e111_2004: '88 | 176 | - | µs (PDF 31, printed 20)'
+        e111_2008r2018: '88 | 176 | – | µs (PDF 32, printed 18)'
+        e111_2024: '88 | – | –< 1.00 | µs / s (PDF 30, printed 16)'
+      - what: Note 2 (receivers may accept shorter BREAKs) exists only in 2024; 2008 has the single refresh-rate note, 2004 has no note under the tables.
+      - what: The 2004 tables label designation 2 '“MARK” After BREAK (MB)'; 2008 and 2024 say '(MAB)'. All other Table 6/7 values are identical across 2004, 2008 (R2018) and 2024.
+  break:
+    transmit:
+      { min_ns: 92000, typ_ns: 176000, max_ns: null, printed: '“SPACE” for BREAK 92 176 – µs' }
+    receive:
+      {
+        min_ns: 88000,
+        max_ns: 1000000000,
+        printed: '“SPACE” for BREAK 88 – –< 1.00 µs / s (2024); 88 176 – µs (2008)',
+      }
+    doc: e111-2024
+    page: PDF 26-27 (printed 12-13), clause 8.3; Tables 6/7 on PDF 30
+    quote: 'The BREAK indicates the start of a new packet. The BREAK generated by a transmitter is defined as a mark-to-space transition followed by a low of at least the minimum duration shown in table 6 (Timing Diagram, Designation #1) followed by a low to high transition. Table 7 (Timing Diagram, Designation 1) defines the minimum duration break a receiver is required to recognize as the start of a new packet.'
+    dmx512_1990:
+      transmit_min_ns: 88000
+      doc: rp-dmx512
+      page: PDF 77 (printed 76); PDF 80 (printed 79)
+      quote: '(transmitted maximum length packet table) Break 1 (note 1) 92µs ... Note 1: Previously was 88µs'
+      quote_2: 'If a DMX512(1990) transmitter is sending a Break of exactly 88µs, due to tolerances the receiver may decide that it is longer or shorter than 88µs. ... Therefore transmitters must always be set to produce a Break of at least 92µs. ... A DMX512 compliant receiving device should be able to detect a Break of 88µs or greater.'
+      note: The DMX512/1990 document itself was not found; this value is the ESTA-hosted PLASA guide's statement.
+  mab:
+    transmit:
+      { min_ns: 12000, max_ns: 1000000000, printed: '“MARK” After BREAK (MAB) 12 – < 1.00 µs / s' }
+    receive:
+      { min_ns: 8000, max_ns: 1000000000, printed: '“MARK” After BREAK (MAB) 8 – < 1.00 µs / s' }
+    doc: e111-2024
+    page: PDF 27 (printed 13), clause 8.4; Tables 6/7 on PDF 30
+    quote: 'The MARK separating the BREAK and the START Code (Timing Diagram, Designation #2) is defined as the MARK AFTER BREAK. DMX512 transmitters produce a MARK AFTER BREAK that complies with the minimum and maximum values for designator 2 in table 6. Compliant receivers correctly respond to data streams with a MARK AFTER BREAK at least as long as the minimum shown in table 7.'
+    history:
+      doc: e111-2024
+      page: PDF 27 (printed 13), note under clause 8.4 (same note in e111-2004 PDF 27, printed 16, and e111-2008r2018 PDF 28, printed 14)
+      quote: 'Note: The 1986 version of this Standard specified a 4 microsecond MARK AFTER BREAK. The 1990 version of the standard changed that value to 8 microseconds, but added an option for receivers capable of recognizing the 4 microsecond MARK AFTER BREAK to be identified as having that capability. Some transmitters may still be in use that generate the shorter 4 microsecond MARK AFTER BREAK, and they may not work with equipment built to this Standard.'
+      quote_2: '(rp-dmx512, PDF 81, printed 80) The DMX512 (1990) spec. changed m.a.b. time to 8µs minimum which largely cleared up this problem. Now the DMX512 A specification requires a m.a.b. time of at least 12µs. The extra time is provided so that any small delays that might occur through splitter or repeater amplifiers cannot reduce the time to less than the 8µs minimum.'
+  history_summary:
+    - '1986: MAB 4 µs (E1.11 note under 8.4)'
+    - '1990: MAB 8 µs; transmitted BREAK 88 µs (rp-dmx512: "Previously was 88µs")'
+    - '2004, 2008, 2024 (DMX512-A): transmit BREAK ≥ 92 µs (typ 176), MAB ≥ 12 µs; receivers must still accept BREAK ≥ 88 µs and MAB ≥ 8 µs'
+    - 'rp-dmx512 PDF 78 (printed 77): "Timings for receivers are unchanged from the previous version of the Standard, to ensure compatibility with older equipment."'
+  start_code:
+    null_start_code: '0x00'
+    doc: e111-2024
+    page: PDF 27 (printed 13), clauses 8.5-8.5.3; PDF 18 (printed 4) clause 3.28
+    quote: 'The START Code is the first slot (slot 0) following a MARK AFTER BREAK. The START Code identifies the function of subsequent data in that packet. ... A NULL START Code identifies subsequent data slots as a block of un-typed sequential 8-bit information. Packets identified by a NULL START Code are the default packets sent on DMX512 networks. ... Each NULL START Code packet contains no formal data or addressing structure. The device using data from the packet must know the position of that data within the packet.'
+    quote_null: '3.28 NULL START Code: a START Code with a value of zero (00h).'
+    quote_dimmer: '8.5.2 Dimmer class data: Dimmer level data should be sent in NULL START Code packets. Valid dimmer levels shall be 0 to 255 decimal (00 to FF hexadecimal) representing dimmer control input.'
+    alternate_start_codes:
+      quote: 'In order to provide for future expansion and flexibility, DMX512 makes provision for 255 additional non NULL START Codes (1 through 255 decimal, 01 through FF hexadecimal), henceforth referred to as Alternate START Codes. Where it is required to send proprietary information over a DMX512 data link, a packet starting with a registered Alternate START Code shall be used.'
+      quote_interleave: '8.5.3.1 ... A DMX512 transmitter interleaving NULL START Code packets with Alternate START Code packets shall send a NULL START Code packet at least once per second.'
+      quote_receivers: '8.5.4 (PDF 28, printed 14) All receiving devices other than in-line processing devices shall process the START Code and differentiate between those packets with NULL START Codes and those with Alternate START Codes. Devices shall not ignore START Codes by assuming that all packets received are NULL START Code packets.'
+      reserved: # Annex D Table D1, PDF 44 (printed 30)
+        - '17h (23) ASCII Text Packet'
+        - '55h (85) Test Packet'
+        - '90h (144) UTF-8 Text Packet'
+        - '91h (145) 91h followed by a 2-byte Manufacturer ID field ... Manufacturer/Organization specific use'
+        - 'CCh (204) E1.20 (RDM) START Code'
+        - 'CFh (207) System Information Packet'
+        - 'F0h-F7h (240-247) prototyping/experimental use ... Not permitted in shipping product'
+        - '92h-A9h, ABh-CBh, CDh-CEh: possible future revisions of this Standard, use not currently permitted'
+  slots:
+    max_data_slots: 512
+    max_slots_incl_start_code: 513
+    min_data_slots: 0
+    doc: e111-2024
+    page: PDF 26 (printed 12) clause 8.1; PDF 28 (printed 14) clauses 8.6, 8.7; PDF 18 (printed 4) clause 3.36
+    quote: 'DMX512 slots shall be transmitted sequentially in asynchronous serial format, beginning with slot 0 and ending with the last implemented slot, up to slot 512 (a maximum total of 513 slots). Prior to the first data slot being transmitted, a Reset Sequence shall be transmitted - a BREAK, followed by a MARK AFTER BREAK, and a START Code.'
+    quote_2: '8.6 ... Each data link shall support up to 512 data slots. Multiple links shall be used where larger numbers of slots are required. 8.7 ... There is no required minimum number of data slots on the data link. DMX512 data packets with fewer than 512 slots may be transmitted, subject to the minimum timing requirements of this Standard - see clause 8.10 and figure 5.'
+    quote_3: '3.36 Slot: a sequentially numbered framed byte in a DMX512 packet. A single Universe contains a maximum of 513 Slots, starting at slot 0. Slot 0 is the START Code. Slots 1 through 512 are data slots.'
+    quote_universe: '3.45 Universe: a DMX512 data link originating from a single DMX512 source. Control of up to 512 DMX512 data slots comprises a single universe.'
+  marks:
+    between_slots:
+      { min_ns: 0, max_ns: 1000000000, printed: '“MARK” Time between slots 0 – < 1.00 s' }
+    before_break:
+      { min_ns: 0, max_ns: 1000000000, printed: '“MARK” Before BREAK (MBB) 0 – < 1.00 s' }
+    doc: e111-2024
+    page: PDF 28 (printed 14), clauses 8.8, 8.9
+    quote: 'The time between any two slots of a data packet (Timing Diagram, Designation #9) may vary between minimum and maximum values shown for designator #9 of table 6. The line shall remain in a marking state during any such idle period. ... The time between the second stop bit of the last data slot of one data packet and the falling edge of the beginning of the BREAK for the next data packet (Timing Diagram, Designation #10) may vary between minimum and maximum values shown for designator #10 of table 6. The line shall remain in a marking state throughout any such period. Transmitters, therefore, shall not produce multiple BREAKs between data packets.'
+  break_to_break:
+    transmit:
+      { min_ns: 1204000, max_ns: 1000000000, printed: 'BREAK to BREAK Time 1204 – 1.00 µs / s' }
+    receive:
+      { min_ns: 1196000, max_ns: 1250000000, printed: 'BREAK to BREAK Time 1196 – 1.25 µs / s' }
+    doc: e111-2024
+    page: PDF 28 (printed 14), clause 8.10; Tables 6/7 on PDF 30
+    quote: 'Transmitters produce packets so that the period between the falling edge at the start of any one BREAK and the falling edge at the start of the next BREAK are not be less than the minimum value in table 6 designator #13. This period is also not more than the maximum value in table 6 designator #13.'
+    note: Clause 8.10 points at designator #13 ("DMX512 Packet") while Table 6 and Figure 5 call designator 11 "BREAK to BREAK Time"; both rows hold the same numbers (1204 µs / 1.00 s), so nothing changes. Same wording in 2004 and 2008.
+  refresh_arithmetic:
+    # Derived by this batch from the Table 6/7 values; the standard's own figures are quoted.
+    full_packet_transmit_min:
+      formula: 'BREAK + MAB + 513 slots x (11 bits x 4 µs), MBB and inter-slot marks 0'
+      values: '92 µs + 12 µs + 513 x 44 µs = 92 + 12 + 22 572 = 22 676 µs'
+      max_refresh_hz: 44.10 # 1 / 22.676 ms
+    full_packet_receiver_min: { values: '88 + 8 + 22 572 = 22 668 µs', max_refresh_hz: 44.12 }
+    typical_break: { values: '176 + 12 + 22 572 = 22 760 µs', refresh_hz: 43.94 }
+    bit_rate_extremes:
+      at_255_kbps: '92 + 12 + 513 x 11 x 3.9216 µs = 22 233 µs -> 44.98 Hz'
+      at_245_kbps: '92 + 12 + 513 x 11 x 4.0816 µs = 23 137 µs -> 43.22 Hz'
+    rgb_universe_510_slots: '92 + 12 + 511 x 44 = 22 588 µs -> 44.27 Hz (start code + 510 data slots = 170 RGB pixels)'
+    shortest_packet: '1204 µs minimum break-to-break -> 830.6 Hz (transmitter); 1196 µs -> 836.1 Hz (receiver). 92 + 12 + 25 x 44 = 1204 µs, i.e. start code + 24 slots back to back.'
+    standard_says:
+      doc: e111-2024
+      page: PDF 30 (printed 16), Table 6
+      quote: '- Minimum Update Time for 513 slots – 22.7 – ms; - Maximum Refresh Rate for 513 slots – 44 – updates / s'
+    guide_says:
+      doc: rp-dmx512
+      page: PDF 77 (printed 76)
+      quote: 'Transmitted maximum length packet: Break 1 92µs 92µs; Mark-after-Break 1 12µs 12µs; Start-code 1 44µs 44µs; Data bytes 512 44µs 22,528µs; TOTAL 22,676µs ... This yields a refresh rate of 44.1Hz. ... The fastest rate from a typical 24 channel console would be obtained with packets 1204µs long, giving 830Hz.'
+  electrical:
+    standard: EIA-485-A (ANSI/TIA/EIA-485-A-1998)
+    signalling: differential (balanced) pair, Data+ / Data-
+    doc: e111-2024
+    page: PDF 19 (printed 5) clauses 4.1, 4.3, 4.4; PDF 17 (printed 3) clause 3.2
+    quote: 'The electrical specifications of this Standard are those of EIA-485-A, except where specifically stated in this document. ... A data link shall consist of a single active differential line driver, a terminated transmission line and one or more differential line receivers meeting the requirements of EIA-485-A and all additional requirements of this Standard. ... A DMX512 port carries four signals and a common reference, designated data 1-, data 1+, data 2-, data 2+, and data link common.'
+    quote_balanced: '3.2 Balanced Transmission Line: a data communications line where two wires are present, the signal and its opposite (complement), the actual signal being the difference between the voltages on the two wires. Balanced lines have excellent noise and interference rejection properties.'
+    termination:
+      value: 120 ohm +5%/-10% between Data+ and Data-, at the far end (both ends if the transmitter is not at one end)
+      doc: e111-2024
+      page: PDF 20 (printed 6), clause 4.9
+      quote: 'DMX512 data links shall be terminated to eliminate ringing and signal reflection, which can cause mis-operation of an otherwise properly designed system. ... The terminator shall be a 120 ohm +5%/-10% impedance placed between Data+ and Data-. In the preferred topology where the transmitter is connected to one end of the data link, the far end of the data link shall be terminated. In the case where the transmitter cannot be connected at one end of the data link, then both ends of the data link shall be terminated.'
+    unit_loads:
+      value: 32 unit loads per data link; each receiving port 1 unit load or less
+      doc: e111-2024
+      page: PDF 24 (printed 10), clause 5.10
+      quote: 'As per EIA-485-A, the total load permitted on a DMX512 data link is 32 unit loads. Transmitters designed for this Standard shall be capable of driving 32 unit loads on a DMX512 data link. Each receiving port on a DMX512 device shall have a unit load of 1 or less as per EIA-485.'
+      guide_quote: '(rp-dmx512 PDF 28, printed 27) A line can have up to 32 unit loads (less if the receivers do not comply with the EIA-485 spec. - see page 35) hung off it anywhere down its length. A typical EIA-485 receiver represents approximately one unit load.'
+    connector:
+      value: 5-pin XLR; pin 1 Data Link Common, 2 Data 1-, 3 Data 1+, 4 Data 2-, 5 Data 2+; sockets (female) on transmitters, plugs (male) on receivers
+      doc: e111-2024
+      page: PDF 25 (printed 11), clauses 7.1, 7.1.1, Table 3
+      quote: 'Socket connectors shall be used on controllers and other transmitting devices (primary data link) and plug connectors shall be used on receiving devices. ... Equipment in this category shall use 5-pin XLR connectors with the physical pinout of the 5-pin XLR in accordance with Table 3. Table 3- Signal designations summary: 1 Data Link Common; 2 Data 1-; 3 Data 1+; 4 Data 2-; 5 Data 2+'
+      rj45_note: 'Clause 7.3 (PDF 25-26, printed 11-12) allows IEC 60603-7 8-position (RJ45) connectors only for fixed installations not normally accessible; Table 4: pin 1 data 1+, pin 2 data 1-, pins 7/8 Data Link Common.'
+    cable:
+      scope_quote: '(e111-2024 PDF 15, printed 1, clause 1.1) Cable requirements and premises wiring are not within the scope of this Standard.'
+      doc: e127-1
+      page: PDF 8 (printed 1) clause 1.2; PDF 10 (printed 3) clauses 4.1-4.3; PDF 11 (printed 4) clause 4.4
+      quote: 'The means of transport of DMX512-A digital data from one compliant device to another is normally a two-pair cable, with each pair serving as a data link. ... Portable cable shall be shielded to protect the data links from interference (RFI and EMI). The physical connection of portable cables at any device is via a 5-pin XLR connector.'
+      quote_impedance: '4.4 Impedance: Portable DMX512 cables shall have a characteristic impedance in the range 100 to 120 ohms. Due to the characteristic impedance of 120 ohms in EIA-485 systems, 120 ohms is preferred.'
+      quote_length: '4.2 Maximum and minimum cable lengths: Maximum and minimum run lengths are specifically omitted from this standard.'
+      quote_audio: '4.1 ... Cables intended for use with audio systems (such as microphone cables), while having the convenience of flexibility, availability and relative low cost, may not be suitable for use with DMX512 because of their high capacitance and incorrect characteristic impedance'
+      guide_length_quote: "(rp-dmx512 PDF 28, printed 27) The EIA-485 link as used by DMX512-A is capable of operation on lines of up to 1km (3281') in length. This is the absolute maximum. It is recommended to keep the line length below about 300m (1000'), beyond which signal amplifiers (repeaters) should be considered."
+  disagreements:
+    - 'ESTA''s published-documents list gives the 2024 control number as "CP/2024-1011r2a"; the PDF prints "CP/2023-1011r2a".'
+    - 'Clause 8.10 cites designator #13 for break-to-break spacing; Table 6 / Figure 5 name designator 11 "BREAK to BREAK Time" (#13 is "DMX512 Packet"). Same numbers, so harmless.'
+  open:
+    - The USITT DMX512/1990 document itself was not found online; the 1990 BREAK (88 µs) comes from the PLASA guide hosted by ESTA, the 1990/1986 MAB values from E1.11's own note.
+    - ESTA's official 2024 download sits behind an email sign-in; the archived copy read here is the same file name ESTA serves (not compared byte for byte with a fresh download).
+
+# ---------------------------------------------------------------------------
+# 2. sACN (ANSI E1.31) and Art-Net: one or two sentences' worth
+# ---------------------------------------------------------------------------
+sacn:
+  documents:
+    - id: e131-2018
+      url: https://web.archive.org/web/20220407060206/https://tsp.esta.org/tsp/documents/docs/ANSI_E1-31-2018.pdf
+      title: ANSI E1.31 -- 2018 Entertainment Technology Lightweight streaming protocol for transport of DMX512 using ACN
+      revision: CP/2014-1009r6a
+      date: '2018-11-07'
+      language: en
+    - id: e131-draft-2025
+      url: https://web.archive.org/web/20250514112044/https://tsp.esta.org/tsp/documents/docs/BSR%20E1.31-202x_2014-1009r7c.pdf
+      title: BSR E1.31 -- 202x (DRAFT) Lightweight streaming protocol for transport of DMX512 using ACN
+      revision: CP/2014-1009r7c
+      date: null
+      language: en
+      notes: Public-review draft of the edition ESTA now lists as 'ANSI E1.31 - 2025' (that published PDF is behind the same email sign-in; not read). Checked only that the universe range is unchanged.
+  carries_dmx:
+    doc: e131-2018
+    page: PDF 13 (printed 1), clauses 1.1, 1.2
+    quote: 'This standard describes a mechanism to transfer DMX512-A [DMX] packets over an IP network using a subset of the ACN protocol suite. ... This standard can be used to transfer DMX512-A [DMX] packets of all START Codes via an ANSI E1.17 [ACN] supported network. ... For the use of this standard, the ACN wrapper is carried in UDP [UDP] packets.'
+  universe:
+    doc: e131-2018
+    page: PDF 17 (printed 5), clauses 3.2, 3.4
+    quote: '3.2 Universe: A set of up to 512 data slots identified by universe number. ... 3.4 Slot: A slot is a sequentially numbered octet in a DMX512-A [DMX] packet. A single Universe contains a maximum of 513 Slots, starting at slot 0. Slot 0 is the DMX512-A [DMX] START Code. Slots 1 through 512 are data slots.'
+  universe_range:
+    min: 1
+    max: 63999
+    doc: e131-2018
+    page: PDF 29 (printed 17), clause 6.2.7
+    quote: 'The Universe is a 16-bit field that defines the universe number of the data carried in the packet. Universe values shall be limited to the range 1 to 63999. Universe value 0 and those between 64000 and 65535 are reserved for future use.'
+    draft_2025_check: '(e131-draft-2025 PDF 23) "... shall be limited to the range 1 to 63999. Universe value 0 and those between 64000 and 65535 are reserved for ..." (unchanged)'
+artnet:
+  documents:
+    - id: artnet4
+      url: https://artisticlicence.com/WebSiteMaster/User%20Guides/art-net.pdf
+      title: Art-Net 4, Specification for the Art-Net 4 Ethernet Communication Protocol
+      revision: Art-Net 4 Protocol Release V1.4, Document Revision 1.4dp
+      date: '2025-10-23' # printed '23/10/2025'
+      language: en
+  same_job:
+    doc: artnet4
+    page: PDF 17 (printed - 6 -)
+    quote: 'Art-Net is an Ethernet protocol based on the TCP/IP protocol suite. Its purpose is to allow transfer of large amounts of DMX512 data over a wide area using standard networking technology. Art-Net was invented by Wayne Howell, the founder of Artistic Licence.'
+  universe:
+    doc: artnet4
+    page: PDF 21 (printed - 10 -); PDF 20 (printed - 9 -)
+    quote: 'Universe: A single DMX512 frame of 512 channels is referred to as a Universe. ... The Port-Address valid range is 1 - 32,767. The value of zero is deprecated to enhance sACN compatibility.'
+  transport_quote: '(PDF 21) Port: Actual data transmission on Art-Net uses the UDP protocol ... Art-Net uses only one port of 0x1936.'
+  licence_quote: '(PDF 3) Art-Net™ is a trade mark of Artistic Licence. ... Any third parties are welcome to use this communication protocol without royalty.'
+
+# ---------------------------------------------------------------------------
+# 3. Universe arithmetic as controller makers state it
+# ---------------------------------------------------------------------------
+universe_arithmetic:
+  rgb_pixels_per_universe: 170 # 510 of 512 slots
+  rgbw_pixels_per_universe: 128 # 512 of 512 slots
+  arithmetic: '512 / 3 = 170.67 -> 170 whole RGB pixels (slots 1-510, 511-512 unused); 512 / 4 = 128 RGBW pixels'
+  statements:
+    - maker: ENTTEC
+      url: https://support.enttec.com/pixel/pixel-general-knowledge/how-many-pixels-per-dmx-universe
+      title: How Many Pixels Per DMX Universe? 170 RGB, 128 RGBW - ENTTEC Support
+      date: '2026-07-19' # page says 'Updated Jul 19, 2026'
+      retrieved: '2026-11-20'
+      quote: 'One DMX universe fits 170 RGB pixels (using 510 of its 512 channels) or 128 RGBW pixels (using all 512 channels exactly). The reason: a universe carries 512 control channels, each pixel consumes one channel per colour emitter, and almost all controllers and software refuse to split a pixel across a universe boundary, so the count rounds down to a whole pixel.'
+      quote_2: 'RGB pixel: 3 channels. 512 ÷ 3 = 170.67, so 170 whole pixels, occupying channels 1 to 510. RGBW pixel: 4 channels. 512 ÷ 4 = 128 exactly, occupying channels 1 to 512 with nothing spare.'
+    - maker: Advatek
+      url: https://www.advateklighting.com/blog/guides/using-dmx-pixels-with-pixlite-r-mk3
+      title: Using DMX Pixels with PixLite® Mk3 - Advatek
+      date: null
+      retrieved: '2026-11-20'
+      quote: 'Traditional DMX512 limits each universe to 512 channels. Which translates to 170 RGB or 128 RGBW pixels per universe.'
+  falcon: No 170/128 statement found on Falcon's pixel-types page (pixelcontroller.com/store/PixelTypes.html); not searched further.
+
+# ---------------------------------------------------------------------------
+# 4. DMX-addressed pixel ICs
+# ---------------------------------------------------------------------------
+# Extra keys used for these parts (not in the brief's template):
+#   input: single-ended (one logic-level data pin) | differential (A/B pair, built-in "485" receiver)
+#   topology: how the chips sit on the data line
+#   addressing: where the address lives, how it is written, slots taken
+parts:
+  - part: UCS512B3
+    entry: pixel-ics/ucs512b
+    maker: Lianxinke Microelectronics (联芯科, Shenzhen; www.szucs.cn)
+    documents:
+      - id: ucs512b3-ledyi
+        url: https://media.ledyi.com/ucs512b-datasheet_d3027bf8ccef6f06edc736bf690f6939f39e2a8707101b5e40ef2d278d3b9787.pdf
+        title: The DMX 512 3 channel constant current drives the IC UCS512B3 (PDF metadata title 'UCS512B datasheet', author LEDYi)
+        revision: 'VER 1.2 (last row of the version table: VER 1.0 201312-25 first edition; VER1. 1 20151-28 content correction; VER 1.2 2020-411 parameter correction); page footers print "ver" / "2.2"'
+        date: '2020-04-11'
+        language: en (machine-translated from Chinese; the Chinese original was not found)
+      - id: ucs512b3-ledyi-2
+        url: https://media.ledyi.com/ucs512b3-datasheet_8c7b137827d5ad9fe6e7dcca8d318bd9acb6f06bc4fb98c674334cbd3ce2bc92.pdf
+        title: same document (PDF metadata 'UCS512B3 datasheet'); text identical except the maker's address block on PDF 2 is missing
+        revision: same
+        date: null
+        language: en
+      - id: enttec-ucs512b
+        url: https://www.enttec.com/pixel-protocols/UCS512B
+        title: UCS512B Pixel Protocol (ENTTEC, controller maker)
+        revision: null
+        date: null
+        language: en
+    line_coding: dmx512
+    input: single-ended
+    input_quote:
+      {
+        doc: ucs512b3-ledyi,
+        page: PDF 3,
+        quote: 'Footposition instructions: 6 DA I DMX 512, the data entry; 7 P I Address write code line input, built-in pull-up; 1 P O Address write code line output',
+      }
+    idle: high # timing diagram (PDF 6) shows line A high before item 1 and between packets
+    bit_order: null # field drawn 'S D0 D1 D2 D3 D4 D5 D6 D7 T'; which end D0 is, is not stated in words
+    rates:
+      - name: adaptive 200-800 kbps (table) / 250-750 kbps (features)
+        select: 'automatic: "without any speed setting"'
+        table:
+          doc: ucs512b3-ledyi
+          page: PDF 6
+          columns: 'grade | description | least value | representative value | crest value | unit'
+          rows:
+            - ' | bit rate | 200 | 250 | 800 | K bps'
+            - ' | bit time | 5 | 4 | 1.25 | us'
+            - 'S | start bit | 5 | 4 | 1.25 | us'
+            - 'D 0~D 7 | Eight bits of data | 40 | 32 | 10 | us'
+            - 'T | The 2-bit stop bits | 4 | 8 | 2.5 | us'
+            - '1 | Labeling before reduction | 0 | | 1000000 | us'
+            - '2 | reset signal | 88 | | | us'
+            - '3 | The markers were marked after reduction | 8 | | 1000000 | us'
+            - '4 | Field (note 1) | 55 | 44 | 27.5 | us'
+            - '5 | Occupy between fields | 0 | | 1000000 | us'
+            - '6 | The length of the data packet | | | 1000000 | us'
+            - '7 | Reset the signal interval | | | 1000000 | us'
+          note_1: 'Note 1:11 fields, including 0 start, 8, bit data, and 2 bit stop. Where the 0 start level is low level and the stop level is high level. If the data in the data bit is 0, the corresponding time period is a low level. If the data in the data bit is 1, the corresponding time period is a high level.0 Start, stop and data bits must be the same time'
+          reading: 'Machine translation of the DMX names: 1 = mark before break, 2 = BREAK ("reset signal"), 3 = MAB, 4 = slot ("field"), 5 = mark between slots, 6 = packet length, 7 = break-to-break.'
+        break: { min_ns: 88000, max_ns: null, printed: 'reset signal 88 us' }
+        mab: { min_ns: 8000, max_ns: 1000000000, printed: '8 ... 1000000 us' }
+        reset: null
+        doc: ucs512b3-ledyi
+        page: 6
+        quote: 'The UCS 512B 3 data reception is compatible with the standard DMX 512 (1990) protocol and the expanded DMX 512 protocol, with a data transmission rate of 250kbps to 750K for adaptive decoding.'
+        quote_features: '(PDF 1) Exclusive adaptive decoding technology, the DMX 512 signal with the signal transmission rate of 250K ~750kbps can be fully adaptive decoded'
+        quote_switching: '(PDF 5) data-signalling rate F 750 Kbps'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: R G B (three consecutive slots from the stored address)
+      pixel_bits: 33 # 3 slots x 11 bit-times on the wire (24 data bits)
+      start: 'start code slot must be 0x00'
+      latch: 'BREAK ("reset signal") starts the next packet'
+      doc: ucs512b3-ledyi
+      page: PDF 7
+      quote: '1. When the reset signal appears on the DAI line, the IC enters the receiving preparation state. Address counter clear 0 2. The first field in the packet is the starting field, whose 8-bit data must be "0000_0000", which is not used as the display data. The valid field for display starts from the second field, and the second field of the 512 packet is the first data field. ... 3. The I C determines the corresponding field in the intercept 512 packet according to the address in its E 2. If the chip address is 0000_0000_0000, the interception starts from the second field 2 (the data field 1) of the packet, and the address 0000_0000_0001 is intercepted from the third field 3 (the data field 2). IC intercept 3 field data from each packet.'
+    topology:
+      text: All chips on one data line in parallel; a failed chip does not affect the others.
+      doc: ucs512b3-ledyi
+      page: PDF 1
+      quote: 'Control mode: single line in parallel, the maximum support of 4096 channels ... suitable for the required and connected LED lighting system, the exception of a certain chip does not affect the normal work of other chips, maintenance is simple and convenient.'
+    addressing:
+      stored_in: EEPROM ("built-in E 2PROM")
+      written_by: 'a separate address write line daisy-chained PI -> PO chip to chip, written in one pass from a writer; the data line (DAI) is held high by the writer meanwhile'
+      slots_per_chip: 3
+      address_range: '12-bit address (0000_0000_0000 = data slot 1); "addressing can reach 4096 channels"'
+      doc: ucs512b3-ledyi
+      page: PDF 1, PDF 8
+      quote: 'UCS 512B 3 has built-in E 2PROM, no external connection, and supports online writing code, can be through the address writing code line cascade point and point spacing within 50 meters of any many UCS 512B 3 chips once online writing code. ... Separate address series write code line, can automatically write code at one time, support the first installation before writing code mode ... Enhanced online cascade code writing code mode, support 100 meters (point spacing) * 1024 (UCS 512 cascade points) one-time online writing code'
+      quote_write: '(PDF 8) When entering the address code writing function, both the PI (write address port) and the DAI port will remain at a high level before the screen data is sent. ... The writer has A / D + terminal except the address terminal (PO). The DAI line shall be connected to the writer A / D + terminal. The A terminal of the writer shall maintain a high level when writing the code, and the IC shall write the code normally under the DAI high level mount state'
+      address_write_format: null # not documented
+    forwarding:
+      text: 'No data forwarding: every chip listens to the same DAI line. Only the address line is chained (PI in, PO out).'
+      doc: ucs512b3-ledyi
+      page: PDF 11
+      quote: 'Application Figure 1: General Application'
+      reading: "Schematic (zoomed): controller (控制器) PO -> R_PI -> #1 PI; #1 PO -> R_PO -> R_PI -> #2 PI; controller DAI runs on a common line that reaches each chip's DAI through its own RD resistor; controller GND to the GND rail."
+    backup_line: null
+    standard_dmx_250k: true # 250 k is inside every range the document prints
+    practical_notes:
+      - doc: ucs512b3-ledyi
+        page: PDF 11
+        quote: 'When no routing amplifier is applied, it is recommended to use 250K standard speed, but not to expand to 500K. At 250K standard speed, to reach nearly 25 frames, and the number of single port connection points of the controller should not exceed 220 points.'
+      - doc: ucs512b3-ledyi
+        page: PDF 13
+        quote: 'In routing amplifier applications, 485 differential transmission between controller and amplifier transfers the differential signal to a single line signal, and the distance between the amplifier and lamps should be as short as possible.'
+    compatibility_claims:
+      - {
+          claim: 'Compatible with and extend the DMX 512 (1990) signal protocol;',
+          doc: ucs512b3-ledyi,
+          page: 1,
+        }
+    disagreements:
+      - 'Bit-rate range printed four ways: features "250K ~750kbps" (PDF 1); protocol text "250kbps to 750K" (PDF 6); receiving/sending notes "200K-750K" (PDF 7, PDF 8); table "200 / 250 / 800 K bps" (PDF 6); switching table "data-signalling rate F 750 Kbps" (PDF 5).'
+      - 'Table rows do not agree with the bit-time row: "The 2-bit stop bits" least value 4 us, but 2 x 5 us = 10 us at the table''s own 200 k bit time; "Field" crest value 27.5 us = 11 x 2.5 us (a 400 k bit), not 11 x 1.25 us = 13.75 us at the 800 k bit time printed in the same column.'
+      - 'Address-write reach: "point spacing within 50 meters" (PDF 1 description) vs "100 meters (point spacing) * 1024" (PDF 1 features).'
+      - 'ENTTEC''s UCS512B page says "a single cable break or failed IC halts everything downstream"; the datasheet says "the exception of a certain chip does not affect the normal work of other chips" (parallel bus).'
+    open:
+      - Chinese original of the UCS512B3 datasheet not found (szucs.cn hosts no PDFs); the LEDYi English text is a rough machine translation.
+      - Address-write packet format (what the writer sends on PI) is not documented.
+      - No document for a plain "UCS512B" (non-B3); the DB entry's datasheet is the UCS512B3 document.
+
+  - part: UCS512A1 (also UCS512SS, same pin order, SSOP16L)
+    entry: null
+    maker: Lianxinke Microelectronics
+    documents:
+      - id: ucs512a1-ledyi
+        url: https://media.ledyi.com/ucs512a1-datasheet_66d984543b31533fab5cbf679fc21ff6f8efd68c4d337ff5f4f16a4ff870bb37.pdf
+        title: DMX512 decoding and driving IC UCS512A1 (Chinese + English, maker's bilingual layout)
+        revision: ver1.5
+        date: null
+        language: zh+en
+    line_coding: dmx512
+    input: differential
+    input_quote:
+      {
+        doc: ucs512a1-ledyi,
+        page: PDF 1,
+        quote: '控制方式：差分信号并联Control mode: Differential signal parallel ... 内置485模块具有差分信号分辨率高，差分输入阻抗大的优点，可大大加强带载能力 The built-in 485 module has the advantages of high differential signal resolution and high differential input impedance, which can greatly enhance the load carrying capacity.',
+      }
+    idle: high # 'the chip is AB differential input, The following figure is the timing of the A waveform，B and A on the contrary' (PDF 5); A idles high in the figure
+    bit_order: null
+    rates:
+      - name: adaptive 200-500 kbps
+        select: 'automatic: 无需进行任何速度设置 / "without any speed settings"'
+        table:
+          doc: ucs512a1-ledyi
+          page: PDF 6
+          columns: '符号 Symbol | 描述 describe | 最小值 minimum | 典型值 Typical | 最大值 Maximum | 单位 Unit'
+          rows:
+            - ' | 比特率 bit rate | 200 | 250 | 500 | Kbps'
+            - ' | 位时间 Bit time | 5 | 4 | 2 | us'
+            - 'S | 起始位 Starting position | 5 | 4 | 2 | us'
+            - 'D0~D7 | 数据位 Data bits | 5 | 4 | 2 | us'
+            - 'T | 2位停止位 2 stop bits | 10 | 8 | 4 | us'
+            - '1 | 复位前标记 Mark before reset | 0 | | 1000000 | us'
+            - '2 | 复位信号 Reset signal | 88 | | 1000000 | us'
+            - '3 | 复位后标记 Mark after reset | 8 | | 1000000 | us'
+            - '4 | 字段（note1）field | 55 | 44 | 22 | us'
+            - '5 | 字段之间的占 Between fields | 0 | | 1000000 | us'
+            - '6 | 数据包的长度 packet length | 1024 | | 1000000 | us'
+            - '7 | 复位信号间隔 Reset signal interval | 4096 | | 1000000 | us'
+        break:
+          { min_ns: 88000, max_ns: 1000000000, printed: '复位信号 Reset signal 88 ... 1000000 us' }
+        mab:
+          {
+            min_ns: 8000,
+            max_ns: 1000000000,
+            printed: '复位后标记 Mark after reset 8 ... 1000000 us',
+          }
+        break_to_break:
+          {
+            min_ns: 4096000,
+            max_ns: 1000000000,
+            printed: '复位信号间隔 Reset signal interval 4096 ... 1000000 us',
+          }
+        doc: ucs512a1-ledyi
+        page: PDF 5, PDF 8
+        quote: 'UCS512A1 data receive compatible standard DMX512 (1990) protocol and extend DMX512 protocol，Data transfer rate 250kbps to 500K adaptive decoding'
+        quote_frame_rate: '(PDF 8) 4. IC 接收数据时，2 个复位信号间隔不能小于4mS。也就是说，即使并行联结负载极少的情况下，帧频也不能大于250HZ / data is received, the two reset signal intervals not less than 4mS. That is to say, the frame rate is not greater than 250HZ [Chinese adds: "even when very few loads are connected in parallel"]'
+        quote_switching: '(PDF 5) Data transmission rate F ... 500 Kbps'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: '1, 2, 3 or 4 slots, set by pins PT1/PT0'
+      wire_order: '3-field R,G,B; 4-field R,G,B,W; 2-field RG,BW; 1-field RGBW'
+      start: 'start code slot must be 0x00'
+      latch: BREAK
+      doc: ucs512a1-ledyi
+      page: PDF 7
+      quote: '数据包中的第1 字段是起始字段，其8 位数据必须是“0000_0000”，该字段不作为显示数据用。 / The first field in the data package is the initial field, and the 8 bit data must be "0000_0000"，The field is not used as a display data ... 芯片自身使用多少字段，由PT1 和PT0 设置。 / How many fields are used by the chip itself, by the PT1 and PT0 settings. [PT1 PT0] 0 0: 3 field mode ... R，G，B; 0 1: 4 field mode ... R, G, B, W; 1 0: 2 field mode ... BW, RG; 1 1: 1 field mode ... R，G，B，W'
+    topology:
+      text: Differential A/B bus, all chips in parallel; plus a DO output that re-sends up to 192 further slots as single-wire return-to-zero code to Lianxinke's 19/29-series pixel ICs (a daisy chain hanging off each UCS512A1).
+      doc: ucs512a1-ledyi
+      page: PDF 1, PDF 7, PDF 13
+      quote: "UCS512A1是512差分信号并联协议LED驱动芯片，可选择1/2/3/4通道高精度恒流输出，并带解码转发功能，可以将DMX512信号转换成单线归零码信号从DO口输出，直接控制我公司19及29系列IC，可转发192个通道数据。 / UCS512A1 is a 512 differential signal parallel protocol LED driver chip ，can select the 1/2/3/4 channel high precision constant current output。With decode and forward function, DMX512 signal can be converted into a single line return to zero code signal，192 channel data can be forwarded，output from the DO port to direct control of my company's 19 and 29 series IC"
+      quote_2: '(PDF 7) 当芯片截取完自身需要的字段后，还要继续截取并转发192 个字段。 / When the chip after the interception of their own needs of the field, but also continue to intercept and forward 192 fields'
+    addressing:
+      stored_in: E2PROM (double backup)
+      written_by: 'address write line PI -> PO chained chip to chip; the controller holds A high / B low on the data pair while writing'
+      slots_per_chip: 1-4 (PT1/PT0) plus up to 192 forwarded from DO
+      address_range: '0000_0000_0000 = first data slot; "寻址可达4096通道 / Addressing up to 4096 channels"'
+      doc: ucs512a1-ledyi
+      page: PDF 1, PDF 7, PDF 8
+      quote: "写码前，应将控制器的A，B，PO，GND 4 个口用铜线牢固连接到灯具上并仔细检查。注意，写码时AB 线也须接在控制器的A，B 口上，控制器的A，B 口在写码时保持A 高B 低的电平，IC 须在A 高B 低的状态下方能正常写码。 / Before writing the code, should be the controller of the B, A, PO, GND 4 mouth with copper wire firmly connected to the lamp ... the controller's A, B port in the write code to keep the A high B low level, IC must be in the state of A high B low can write code."
+      address_write_format: null
+    bus_loading:
+      doc: ucs512a1-ledyi
+      page: PDF 11
+      quote: '当控制器发送速率为250K 时，可在不加中继器和终端匹配电阻的情况下连接300 米的AB 总线，线上最多可挂1024 个负载（N=1024） / When the controller sends a rate of 250K，The 300 meter AB bus can be connected in the case of no repeater and terminal matching resistance, and can hang up to 1024 loads on the AB bus (N=1024)'
+      electrical: '(PDF 4) Differential input impedance Rin 280 K (A,B port to ground); Differential input threshold voltage Vth -0.2 ... 0.2 V (0<Vcm<12V)'
+    forwarding:
+      {
+        text: "DO re-sends up to 192 slots after the chip's own as single-wire RZ code for UCS2903B/2904B/2909B/2912B etc.",
+        doc: ucs512a1-ledyi,
+        page: PDF 13,
+        quote: 'In Figure DO port connect 64 point it is the UCS512A1 forwarding control 29 series IC，it can control up to 64 RGB points (192 channels)。The 64 point is the serial bus architecture (regression 0 code Protocol).',
+      }
+    backup_line: null
+    standard_dmx_250k: true
+    compatibility_claims:
+      - {
+          claim: '兼容并扩展DMX512(1990)信号协议；Compatible and extended DMX512 (1990) signal protocol',
+          doc: ucs512a1-ledyi,
+          page: 1,
+        }
+    disagreements:
+      - 'Rate: description and features "200K-500K"; protocol text (PDF 5) "250kbps to 500K".'
+      - 'Minimum break-to-break 4096 us / "not less than 4mS" (max 250 Hz) is far above DMX512''s 1204 us transmitter minimum: a short, fast standard packet can violate the chip''s limit.'
+    open: []
+
+  - part: UCS512C1 series (UCS512C1, UCS512C1L, UCS512C2, UCS512C2L, UCS512CBL)
+    entry: null
+    maker: Lianxinke Microelectronics
+    documents:
+      - id: ucs512c1-ledyi
+        url: https://media.ledyi.com/ucs512c1-datasheet_bf0cbe649f4744a7ff8d8961e28de2f69082162e22b48b4249e1d4db630fcc88.pdf
+        title: DMX512 Decoding and Drive IC UCS512C1 Series
+        revision: ver 1.5 (version table, PDF 13, rows "Version 2022-5-25 Issue of the first version", "VER1.0 2022-8-27", "VER1.5 Contents correction"; dates and rows look shifted)
+        date: null
+        language: en
+      - id: ucs512c1-signlite
+        url: https://signliteled.com/wp-content/uploads/2024/08/UCS512C-Datasheet.pdf
+        title: same document with the maker imprint 'Shenzhen Lianxinke Micro-Electronic Co., Ltd.'
+        revision: ver 1.5
+        date: null
+        language: en
+    line_coding: dmx512
+    input: 'differential (C1, C1L, C2, C2L: pins AI/BI); single-ended (CBL: pin DAI)'
+    input_quote:
+      {
+        doc: ucs512c1-ledyi,
+        page: PDF 1,
+        quote: 'Control mode: UCS512C1/C1L/C2/C2L are differential parallel connection, and UCS512CBL is single bus parallel connection',
+      }
+    idle: high
+    bit_order: null
+    rates:
+      - name: adaptive 200-750 kbps (text) / 200-500 (table)
+        select: 'automatic: "without any speed setting"'
+        table:
+          doc: ucs512c1-ledyi
+          page: PDF 6
+          rows:
+            - 'Bit rate 200 250 500 Kbps'
+            - 'Bit time 5 4 2 us'
+            - 'S Start bit 5 4 2 us'
+            - 'D0~D7 Data bit 5 4 2 us'
+            - 'T 2-digit stop bit 10 8 4 us'
+            - '1 Mark before reset 0 1000000 us'
+            - '2 Reset signal 88 1000000 us'
+            - '3 Mark after mark 8 1000000 us'
+            - '4 Field (note 1) 55 44 22 us'
+            - '5 Idle time between fields 0 1000000 us'
+            - '6 Length of data packet 1024 1000000 us'
+            - '7 Reset signal interval 4096 1000000 us'
+        break: { min_ns: 88000, max_ns: 1000000000, printed: 'Reset signal 88 1000000 us' }
+        mab: { min_ns: 8000, max_ns: 1000000000, printed: 'Mark after mark 8 1000000 us' }
+        break_to_break:
+          { min_ns: 4096000, max_ns: 1000000000, printed: 'Reset signal interval 4096 1000000 us' }
+        doc: ucs512c1-ledyi
+        page: PDF 5-6
+        quote: 'UCS512C1 series data reception is compatible with the standard DMX512 (1990) protocol and extended DMX512 protocol. It self-adapts to the decoding with the data transmission rate of 200kbps to 750K. ... The chip is inputted by AB differentially, the timing waveform of A is drawn in the figure, and B is opposite to A.'
+        quote_limit: '(PDF 6) It shall be noted that, the higher the sending rate, the shorter the bus length must be, so it is recommended that the sending frequency should not exceed 500K.'
+        quote_switching: '(PDF 5) Data transfer rate F 200 750 Kbps'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: '1, 2, 3 or 4 slots ("Field selection", a parameter written into E2)'
+      wire_order: '4-field R,G,B,W; 3-field R,G,B (W closed); 2-field RG,BW; 1-field RGBW'
+      grayscale_note: 'C1/C1L/CBL: "gray scale level 65536, gamma correction 2.2"; C2/C2L: "gray scale level 256" (PDF 1). The slots themselves carry 8 data bits (PDF 6 table and Note1); how 8-bit slots become 65536 levels is not stated.'
+      start: 'start code slot must be 0x00'
+      latch: BREAK
+      doc: ucs512c1-ledyi
+      page: PDF 6-7
+      quote: 'The first field in the data packet is the start field, and its 8-bit data must be "0000_0000". This field is not used as the display data. ... If the chip address is 0000_0000_0000, it will intercept from the first valid field of the data packet; if the chip address is 0000_0000_0001, it will intercept from the second valid field of the data packet. The number of fields used by the chip is set by the control system.'
+    topology:
+      {
+        text: Parallel on one bus (AB pair or single DAI line).,
+        doc: ucs512c1-ledyi,
+        page: PDF 1,
+        quote: 'suitable for LED lighting systems that need to be connected in parallel. The abnormality of one chip does not affect the normal operation of other chips',
+      }
+    addressing:
+      stored_in: E2PROM
+      written_by: 'coding control line PI -> PO; "cascaded coding" (different address per IC) or "parallel coding" (one address for every IC on the bus)'
+      slots_per_chip: 1-4 (parameter)
+      address_range: 'Supports 4096 channels addressing'
+      doc: ucs512c1-ledyi
+      page: PDF 6
+      quote: 'Cascaded coding: For the conventional coding method, different addresses can be written into each IC, but ensure that the coding line is normal. Parallel coding: All ICs on a bus are written to the same address, and the coding line fault does not affect the address writing.'
+      pins: '(PDF 2-3) PO "Coding control line output"; PI "Coding control line input, built-in pull-up"; AI "Differential signal, positive"; BI "Differential signal, negative"; CBL: DAI "DMX512 data input"'
+      address_write_format: null
+    channel_count_vs_rate:
+      doc: ucs512c1-ledyi
+      page: PDF 11
+      title: Application of DMX512 and Expansion Protocol on Lamps (columns Component | Transmission frequency | Number of channles on the bus | Frame frequency)
+      rows:
+        - 'Standard protocol | 250K | 512 | 44'
+        - 'Channel expansion | 250K | 1024 | 22'
+        - 'Channel expansion | 250K | 1536 | 15'
+        - 'Transmission frequency and channel expansion | 500K | 1024 | 44'
+        - 'Transmission frequency and channel expansion | 500K | 1536 | 30'
+        - 'Transmission frequency and channel expansion | 500K | 2048 | 22'
+    bus_notes:
+      {
+        doc: ucs512c1-ledyi,
+        page: PDF 9,
+        quote: 'If the transmission distance of the 485 bus is long, it is recommended to connect a 120 ohm terminal matching resistor on the AB line at the end of the 485 communication during construction',
+      }
+    forwarding: { text: none, doc: ucs512c1-ledyi, page: null, quote: null }
+    backup_line: null
+    standard_dmx_250k: true
+    compatibility_claims:
+      - {
+          claim: 'Compatible with and expands DMX512(1990) signal protocol;',
+          doc: ucs512c1-ledyi,
+          page: 1,
+        }
+    disagreements:
+      - 'Timing table tops out at 500 Kbps; the description, features and switching table say 200-750 kbps.'
+    open:
+      - Advatek also lists 'UCS512C1L', 'UCS512C2', 'UCS512C2L' as differential and 'UCS512CBL' as single-wire, matching the datasheet; Falcon's 'DMX512P-4' alternative 'UCS512C4' has no datasheet found.
+
+  - part: UCS512C3
+    entry: null
+    maker: Lianxinke Microelectronics
+    documents:
+      - id: ucs512c3-ledyi
+        url: https://media.ledyi.com/ucs512c3-datasheet_237ba9040bbbf832f68aa2ecca3ecafaaef5ffcabb2d5977584e687312eb6242.pdf
+        title: DMX512 8位高灰度差分驱动IC UCS512C3 (DMX512 8-bit high grayscale differential drive IC)
+        revision: ver 1.5
+        date: null
+        language: en (Chinese headings)
+    line_coding: dmx512
+    input: differential
+    input_quote:
+      {
+        doc: ucs512c3-ledyi,
+        page: PDF 1,
+        quote: 'control mode：Difference in parallel，Maximum support of 4096 channels ... Built-in 485 module，Differential signal has high resolution，Large differential input impedance，Greatly enhanced load',
+      }
+    idle: high
+    bit_order: null
+    rates:
+      - name: adaptive 200-750 kbps (features) / 250-750 (protocol text) / 200-500 (table)
+        select: automatic
+        table:
+          doc: ucs512c3-ledyi
+          page: PDF 5
+          rows:
+            - 'K bits per second 200 250 500 Kbps'
+            - 'Bit data time 5 4 2 us'
+            - 'S Start bit 5 4 2 us'
+            - 'D0~D7 Bit data time 5 4 2 us'
+            - 'T 2 stop bit 10 8 4 us'
+            - '1 Pre-reset mark 0 1000000 us'
+            - '2 Reset signal 88 1000000 us'
+            - '3 Post-reset mark 8 1000000 us'
+            - '4 Field（note1） 55 44 22 us'
+            - '5 Spacing between field 0 1000000 us'
+            - '6 Packet length 1024 1000000 us'
+            - '7 Reset interval 4096 1000000 us'
+        break: { min_ns: 88000, max_ns: 1000000000, printed: 'Reset signal 88 1000000 us' }
+        mab: { min_ns: 8000, max_ns: 1000000000, printed: 'Post-reset mark 8 1000000 us' }
+        break_to_break:
+          { min_ns: 4096000, max_ns: 1000000000, printed: 'Reset interval 4096 1000000 us' }
+        doc: ucs512c3-ledyi
+        page: PDF 5
+        quote: 'UCS512C3 data conform to the standard dmx512(1990) protocol and extend DMX512 protocol，can received 250kbps to750K data。The energy protocol waveform is as follows：UCS512CN is 是 AB differential signal，picture is the timing waveform of A，B is the opposite of A。'
+        quote_switching: '(PDF 5) Data transfer rate F 500 Kbps'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: '1/2/3/4 ("Can choose 1/2/3/4 channel"); how the count is selected is not stated'
+      start: 'start code slot must be 0x00'
+      latch: BREAK
+      doc: ucs512c3-ledyi
+      page: PDF 6
+      quote: '1. When reset signal appears on AB line，IC goes into reception readiness。Address counter clear 0 2. First bite of the data package is 0 start bite，its 8-bit data must be“0000_0000”，the bits cannot be data display or other。From second bits is data display，second bits of 512 data package is first effective bits。IC can receive data transmission frequency from 200k to 750k 。... 3. IC according to the address in E2 acquire corresponding data of 512 data packet。For example chip address is 0000_0000_0000, so IC acquire first valid data from data packet ，address is 0000_0000_0001,IC acquire second valid data from data packet。'
+    topology:
+      {
+        text: Parallel on the AB pair.,
+        doc: ucs512c3-ledyi,
+        page: PDF 1,
+        quote: 'UCS512C3 is LED Drive chip Of Differential parallel protocol，256 gray level，Can choose 1/2/3/4 channel High precision constant flow output。',
+      }
+    addressing:
+      stored_in: E2PROM
+      written_by: over the AB data pair ("AB line writing mode"); PI/PO pins still exist
+      slots_per_chip: 1-4
+      address_range: '"Address data Can be up to 4096 channel"'
+      doc: ucs512c3-ledyi
+      page: PDF 1, PDF 10
+      quote: 'Use AB line to write code，The maximum write distance is limited only by AB line ... Independent parameter writing function，can write parameters separately without having to rewrite the code'
+      quote_2: '(PDF 10) Note ：1. AB line writing mode is adopted，when writing code，write code editor/controller with first PI of IC not connect'
+      address_write_format: null
+    bus_loading:
+      {
+        doc: ucs512c3-ledyi,
+        page: PDF 8,
+        quote: 'When the controller send the frequency is 250k，connect AB BUS up to 300 meters in no repeater and terminal matching resistance，up to 1024 loads can be hung in the line（N=1024）',
+      }
+    channel_count_vs_rate:
+      doc: ucs512c3-ledyi
+      page: PDF 14
+      title: DMX512 and extend the agreement on the use of lamps (columns Send frequency | Number of bus channels | Frame frequency)
+      rows:
+        - 'Standard protocol | 250K | 512 | 44'
+        - 'Channel development | 250K | 1024 | 22'
+        - 'Channel development | 250K | 1536 | 15'
+        - 'Send frequency and channel expansion | 500K | 1024 | 44'
+        - 'Send frequency and channel expansion | 500K | 1536 | 30'
+        - 'Send frequency and channel expansion | 500K | 2048 | 22'
+    forwarding: { text: none, doc: ucs512c3-ledyi, page: null, quote: null }
+    backup_line: null
+    standard_dmx_250k: true
+    compatibility_claims:
+      - {
+          claim: 'cover and extension DMX512(1990) Signaling protocol',
+          doc: ucs512c3-ledyi,
+          page: 1,
+        }
+    disagreements:
+      - 'Rate: features "200k-750k" (PDF 1); protocol text "250kbps to750K" (PDF 5); reception description "from 200k to 750k" (PDF 6); timing table max 500 Kbps and switching table "Data transfer rate ... 500 Kbps" (PDF 5).'
+      - 'The protocol paragraph calls the part "UCS512CN" (PDF 5, PDF 7) inside the UCS512C3 datasheet.'
+    open:
+      - How the 1/2/3/4-slot mode is chosen (pin or written parameter) is not stated.
+
+  - part: UCS512H series (UCS512H4, UCS512H4L, UCS512H5L, UCS512H0L, UCS512HL)
+    entry: null
+    maker: Lianxinke Microelectronics
+    documents:
+      - id: ucs512h-ledyi
+        url: https://media.ledyi.com/ucs512h-datasheet_a512905841b00a8bcd820354724fecaf6ec33297ceade9a501d3ef15e591b5fe.pdf
+        title: 'DMX512 Intelligent Automatic Coding Series: 4-channel High Brightness and High Brush Grayscale Smoothing UCS512H Series'
+        revision: Ver 1.5 (VER1.0 2021-1-15 ... VER1.5 2022-6-13)
+        date: '2022-06-13'
+        language: en
+      - id: ucs512h-superlighting
+        url: https://www.superlightingled.com/PDF/SPEC/DMX-512-IC-UCS512H-Series-Datasheet.pdf
+        title: same document (Superlighting copy)
+        revision: same
+        date: null
+        language: en
+    line_coding: dmx512
+    input: 'differential (H4, H4L, H5L, H0L: A/B); single bus (HL: AI "Bus signal terminal")'
+    input_quote:
+      {
+        doc: ucs512h-ledyi,
+        page: PDF 1,
+        quote: 'UCS512H4/UCS512H4L/UCS512H5L/UCS512H0L features differential transmission, 65536 grayscale levels, and gamma 2.2 correction ... UCS512HL uses single bus transmission, 65536 grayscale levels, and gamma 2.2 correction',
+      }
+    idle: high
+    bit_order: null
+    rates:
+      - name: adaptive 200-750 kbps (text) / 200-500 (table)
+        select: automatic
+        table:
+          doc: ucs512h-ledyi
+          page: PDF 6
+          rows:
+            - 'Bit rate 200 250 500 Kbps'
+            - 'Bit time 5 4 2 us'
+            - 'S Start bit 5 4 2 us'
+            - 'D0~D7 Data bits 5 4 2 us'
+            - 'T 2 stop bits 10 8 4 us'
+            - '1 Mark before reset 0 1000000 us'
+            - '2 Reset signal 88 1000000 us'
+            - '3 Mark after reset 8 1000000 us'
+            - '4 Field (note1) 55 44 22 us'
+            - '5 Space between fields 0 1000000 us'
+            - '6 Length of packet 1024 1000000 us'
+            - '7 Reset signal interval 4096 1000000 us'
+        break: { min_ns: 88000, max_ns: 1000000000, printed: 'Reset signal 88 1000000 us' }
+        mab: { min_ns: 8000, max_ns: 1000000000, printed: 'Mark after reset 8 1000000 us' }
+        break_to_break:
+          { min_ns: 4096000, max_ns: 1000000000, printed: 'Reset signal interval 4096 1000000 us' }
+        doc: ucs512h-ledyi
+        page: PDF 6
+        quote: 'UCS512H series data reception is compatible with standard DMX512 (1990) protocol and extended DMX512 protocol, data transmission rate is 200kbps to 750K adaptive decoding. ... the chip uses AB differential input, the timing waveform of A is drawn in the figure, and B is opposite to A.'
+        quote_switching: '(PDF 5) Data transfer rate F 200 750 Kbps'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: '1-4 slots ("Field mode"), a written parameter; H0L uses a 0-field mode (address source only)'
+      wire_order: '1-field RGBW; 2-field RG, BW; 3-field R, G, B (W off); 4-field R, G, B, W'
+      doc: ucs512h-ledyi
+      page: PDF 9
+      quote: '1-field mode Receive data of 1 channel (field), corresponding to RGBW; 2-field mode Receive data of 2 channels (fields), corresponding to RG, BW; 3-field mode Receive data of 3 channels (fields), corresponding to R, G, B; W off; 4-field mode Receive data of 4 channels (fields), corresponding to R, G, B, W. Note: The selection of different field modes in the above table affects the interval of automatic coding address and must be set correctly'
+    topology:
+      {
+        text: Parallel on one bus.,
+        doc: ucs512h-ledyi,
+        page: PDF 1,
+        quote: 'UCS512H series uses DMX512 differential parallel protocol LED driver chip, and supports 1/2/3/4-field high-precision constant current output and 65536 grayscale levels.',
+      }
+    addressing:
+      stored_in: E2 ("Built-in million times high-quality E2")
+      written_by: 'automatic coding along the PI/PO address line (each IC passes the next address to the following lamp after power-on), or cascade / parallel code writing'
+      slots_per_chip: 1-4
+      address_range: 'supports up to 4096 channels'
+      doc: ucs512h-ledyi
+      page: PDF 7-8
+      quote: 'Automatic coding: When the automatic coding is turned on, the controller does not need to send a coding command. After power-on, the IC will automatically send the coding data to the following lamps. ... If the first lamp obtains the correct address, the following lamps can get the addresses through automatic coding in turn.'
+      quote_2: "1. Cascade code writing: Conventional coding method, write different addresses to each IC, but ensure that the coding line is normal 2. Parallel code writing: All ICs on a bus are written to the same address, and the address writing isn't affected even if the coding line is faulty."
+      pins: '(PDF 3-4) PO "Address coding line output"; PI "Address coding line input, built-in pull-up"; A "Differential signal, positive, built-in pull-up"; B "Differential signal, negative, built-in pull-down"; HL: AI "Bus signal terminal"'
+      address_write_format: null
+    forwarding:
+      {
+        text: none (data); the address line is chained,
+        doc: ucs512h-ledyi,
+        page: null,
+        quote: null,
+      }
+    backup_line: null
+    standard_dmx_250k: true
+    compatibility_claims:
+      - {
+          claim: 'Compatible and extended DMX512 (1990) signal protocol;',
+          doc: ucs512h-ledyi,
+          page: 1,
+        }
+      - { claim: 'Compatible with UCS512G series and UCS512K series', doc: ucs512h-ledyi, page: 2 }
+    disagreements:
+      - 'Timing table max 500 Kbps; text and switching table 200-750 kbps.'
+    open: []
+
+  - part: WS2821 (WS2821A SOP8, WS2821B SOP-14)
+    entry: pixel-ics/ws2821
+    maker: WorldSemi
+    documents:
+      - id: ws2821-ws
+        url: https://www.acdcshop.gr/content/WS2821.pdf
+        title: WS2821 Parallel-Single wire-Three channels 256 Gray level Constant current LED driven IC
+        revision: null
+        date: null
+        language: en
+        notes: WorldSemi document (http://www.world-semi.com on every page), retailer copy; not on world-semi.com today.
+      - id: advatek-dmx512
+        url: https://www.advateklighting.com/pixel-protocols/dmx512
+        title: LED Pixel Protocol DMX512 - Advatek (controller maker)
+        revision: null
+        date: null
+        language: en
+    line_coding: dmx512
+    input: single-ended
+    input_quote:
+      {
+        doc: ws2821-ws,
+        page: PDF 2,
+        quote: '8 DAI ... Gray control data signal input port; 3 ADRO Address output Cascade address output port; 11 ADRI Address input Cascade address input port',
+      }
+    idle: high # MTBP drawn high
+    bit_order: null
+    rates:
+      - name: '250K table; 250-750 kbps accepted'
+        select: null
+        table:
+          doc: ws2821-ws
+          page: PDF 4
+          heading: 'Data Communication Protocol :(250K,frequency raising will leads time being changed)'
+          columns: 'description | Min | Typ | Max | unit'
+          rows:
+            - 'MTBP | 88 | NS | 1000000 | us'
+            - 'BREAK | 88 | 88 | 1000000 | us'
+            - 'MAB | 4 | 8 | 12 | us'
+            - 'Framce width | | 44 | | us'
+            - 'Sart Bit/Data Bit | | 4 | | us'
+            - 'Stop Bit | | 8 | | us'
+            - 'MTBF | 0 | NS | 1000000 | us'
+          note: 'Note:NS means Not specified and designer definable'
+        break:
+          { min_ns: 88000, typ_ns: 88000, max_ns: 1000000000, printed: 'BREAK 88 88 1000000 us' }
+        mab: { min_ns: 4000, typ_ns: 8000, max_ns: 12000, printed: 'MAB 4 8 12 us' }
+        doc: ws2821-ws
+        page: PDF 1
+        quote: 'Data transmission speed is 250Kbps~750Kbps.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: R G B (three outputs; slot mapping to them not spelled out)
+      start: 'channel 0 drawn as DATA=0'
+      latch: BREAK
+      doc: ws2821-ws
+      page: PDF 4
+      quote: 'Each data packet consists of several data frames, each frame of data including 1 low start bit, 8 data bits, 2 stop bit high level. ... Packet first frames, lamps and lanterns corresponding to the first channel, second frames corresponding to the second channel lamp, and so on, 512nd frames corresponding to the 512nd channel lamp, lamp channel address can be set on the lamp.'
+    topology:
+      {
+        text: 'Data line (DAI) in parallel to every chip; address line chained ADRI -> ADRO.',
+        doc: ws2821-ws,
+        page: 'PDF 1, PDF 5',
+        quote: "Signal adopts the single line parallel connection type,any pixels' failure won't effect other pixel's display effect. ... Storage space is built-in,support 1024 pixel's parallel connection.",
+      }
+    addressing:
+      stored_in: '"built-in address storage circuit" (the word EEPROM is not used)'
+      written_by: 'separate write-code line, chained ADRI -> ADRO, written in one pass'
+      slots_per_chip: 3 (three channels; not stated as slots)
+      address_range: null
+      doc: ws2821-ws
+      page: PDF 1
+      quote: 'WS2821 is a LED driven IC,which adopts the parallel single wire control signal,owns the independent programmable address and large range programmable constant current,three channels output. ... WS2821 has the independent write code signal line,the address can be written in series at one time.'
+      address_write_format: null # not in this datasheet (WS2822S documents one)
+    forwarding:
+      {
+        text: 'No data forwarding; schematic "Schematic diagram of multi pixel parallel control" shows "Gray control signal" to every DAI and "Address signal" ADRI -> Pixel1 -> ADRO -> ADRI -> Pixel2 ...',
+        doc: ws2821-ws,
+        page: PDF 5,
+        quote: 'Schematic diagram of multi pixel parallel control',
+      }
+    backup_line: null
+    standard_dmx_250k: true
+    compatibility_claims:
+      - {
+          claim: 'Signal can compatible and expand the DMX512(1990) protocol signal.',
+          doc: ws2821-ws,
+          page: 1,
+        }
+    controller_makers:
+      - { doc: advatek-dmx512, quote: 'WS2821 | RGB | 250 - 750 kbps' }
+    disagreements:
+      - 'MAB printed "4 8 12 us" (min typ max). DMX512-A transmitters must send MAB >= 12 us with no upper limit below 1 s (E1.11 Table 6), so a compliant transmitter can exceed the WS2821''s printed maximum; whether 12 us is a real receive limit is not stated.'
+      - 'MAB minimum 4 us is the 1986 value; E1.11 receivers need only accept >= 8 us.'
+    open:
+      - Address-write packet format not in the WS2821 datasheet (do not assume the WS2822S format).
+      - No dated or Chinese WorldSemi revision found.
+
+  - part: WS2822S
+    entry: pixels/ws2822s
+    maker: WorldSemi
+    documents:
+      - id: ws2822s-ws
+        url: https://www.hestore.hu/prod_getfile.php?id=10686
+        title: WS2822S Signal wire in parallel connection intelligent control LED Integrated light source
+        revision: null
+        date: null
+        language: en
+        notes: WorldSemi document (world-semi.com footer) behind a HESTORE cover page; PDF page n = printed page n-1.
+      - id: advatek-dmx512
+        url: https://www.advateklighting.com/pixel-protocols/dmx512
+        title: LED Pixel Protocol DMX512 - Advatek
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+    line_coding: dmx512
+    input: single-ended
+    input_quote:
+      {
+        doc: ws2822s-ws,
+        page: PDF 3 (printed 2),
+        quote: '1 DAI Data Input Gray control data signal input port; 2 ADRI Address Input Cascade address inputs port; 5 ADRO Address Output Cascade address output port',
+      }
+    idle: high
+    bit_order: lsb-first # gray data; the address-write format is MSB first (below)
+    bit_order_quote:
+      { doc: ws2822s-ws, page: PDF 6 (printed 5), quote: 'Information data of 8 bits is low first' }
+    rates:
+      - name: '250K table; 250-750 kbps accepted (200-750 in the protocol text)'
+        select: null
+        table:
+          doc: ws2822s-ws
+          page: PDF 5 (printed 4)
+          heading: 'Gray control Data Communication Protocol : (250K,frequency raising will leads time being changed)'
+          rows:
+            - 'MTBP | 88 | NS | 1000000 | us'
+            - 'BREAK | 88 | 88 | 1000000 | us'
+            - 'MAB | 4 | 8 | 12 | us'
+            - 'Frame width | | 44 | | us'
+            - 'Start Bit/Data Bit | | 4 | | us'
+            - 'Stop Bit | | 8 | | us'
+            - 'MTBF | 0 | NS | 1000000 | us'
+        break:
+          { min_ns: 88000, typ_ns: 88000, max_ns: 1000000000, printed: 'BREAK 88 88 1000000 us' }
+        mab: { min_ns: 4000, typ_ns: 8000, max_ns: 12000, printed: 'MAB 4 8 12 us' }
+        doc: ws2822s-ws
+        page: PDF 2 (printed 1), PDF 6 (printed 5)
+        quote: 'Signal can compatible and expand the DMX512(1990) protocol signal.Data transmission speed can be 250Kbps~750Kbps.'
+        quote_2: 'This protocol is extended on the basis of the DMX512 protocol, the data rate range is 200KHZ to 750KHZ, the data frame contained in each package can be 3072 frames.'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: R G B (3 consecutive channels from the written address, per the address example)
+      pixel_bits: 33
+      start: 'start code frame: 9 low bits then 2 high stop bits ("CHANNEL0")'
+      latch: BREAK
+      max_channels_per_packet: 3072
+      doc: ws2822s-ws
+      page: PDF 6 (printed 5)
+      quote: "Break is interrupt,corresponding to a packet program reset stage after one package is over,width is no less than two frames (22bit) time. ... Start code frame is the same with data frame later arrival, is composed of 11 bits, in addition to the two high level at the end position, the other 9 bits are all low level, usually known as the zeroth frame or zeroth channel (CHANNEL0), can be understood as an absence channel. ... In each data package,first frames corresponding to the first channel's lamp,second frames corresponding to the second channel's lamp, and so on,3072nd frames corresponding to the 3072nd channel's lamp"
+    topology:
+      {
+        text: 'DAI in parallel to every pixel; address line chained ADRI -> ADRO.',
+        doc: ws2822s-ws,
+        page: PDF 2 (printed 1),
+        quote: "Signal adopts the single line parallel connection type,any pixels failure won't effect other pixel's display effect. ... EEPROM integrated in and maximum support 1024pixels in parallel connection.",
+      }
+    addressing:
+      stored_in: EEPROM
+      written_by: 'address packet on the ADRI/ADRO chain: >5 ms low, then a 250 kHz DMX-like packet, MSB first; each pixel keeps the first three frames after the start code and re-sends the rest from ADRO'
+      slots_per_chip: 3
+      address_range: 'table rows up to ">1536"; 3072 channels per packet in the gray protocol'
+      doc: ws2822s-ws
+      page: PDF 7 (printed 6), PDF 8 (printed 7)
+      quote: 'Write address code data format: Use a similar gray control data protocol, frequency is 250kHz. Channel data package maximum has 3072 frames, when sending data usually high bit comes first. Each time you can send a data package for one time. Data package must be high level before and after sending the data package, before sending the data ,must have a above 5ms low level.'
+      write_timing_rows:
+        - 'MTBP | 88 | NS | NS | us'
+        - 'BREAK | 5000 | NS | 1000000 | us'
+        - 'MAB | 8 | 12 | 88 | us'
+        - 'Frame width | | 44 | | us'
+        - 'Start Bit/Data Bit | | 4 | | us'
+        - 'Stop Bit | | 8 | | us'
+        - 'MTBF | 0 | NS | 1000000 | us'
+      address_frames:
+        printed: 'Channel NO. | To set up the address values | Frame width channel0 | channel(1+m) | channel(2+m) | channel(3+m): 0~255 | Channel value | 00h | 00h~FFh | F0h | D2h; 256~512 ... E1h; 513~768 ... D2h; 769~1024 ... C3h; 1025~1280 ... B4h; 1281~1536 ... A5h; >1536 ... 96h (channel(3+m) is D2h in every row). Note:m is a multiple of 3'
+        reading: 'Three frames per pixel: address low byte, a range byte (F0h, E1h, D2h, C3h, B4h, A5h, 96h), then D2h. Read from the waveform below: first frame for the first pixel is 4 = 0b00000100 sent MSB first (24 us low = start + five 0s, 4 us high, 8 us low, 8 us stop).'
+      waveform:
+        doc: ws2822s-ws
+        page: PDF 8 (printed 7)
+        quote: 'Following graph is a waveform of addressing first pixel to be 4, 5, 6 and the second pixels to be 7, 8, 9 :'
+        reading: "ADRI: 5ms low, 88 high, start code (36 low, 8 high), then 04h F0h D2h, then 07h F0h D2h. ADRO of the first pixel: 5ms low, 88 high, start code, line held high during the first pixel's three frames, then 07h F0h D2h. Durations labelled in us on the drawing."
+    forwarding:
+      {
+        text: 'Gray data: none (parallel). Address packet: the pixel strips its three frames and passes the rest on ADRO (waveform above).',
+        doc: ws2822s-ws,
+        page: PDF 8 (printed 7),
+        quote: 'Schematic diagram of Many pixel in parallel control',
+      }
+    backup_line: null
+    standard_dmx_250k: true
+    compatibility_claims:
+      - {
+          claim: 'Signal can compatible and expand the DMX512(1990) protocol signal.',
+          doc: ws2822s-ws,
+          page: 1,
+        }
+    controller_makers:
+      - { doc: advatek-dmx512, quote: 'WS2822 | RGB | 250 - 750 kbps' }
+      - {
+          doc: falcon-pixeltypes,
+          quote: "n: 'DMX512P', c: 3, b: 8, w: 2, ... t: 'These pixels expect true DMX protocol. They can be run from the DMX port or from the receiver port using custom wiring. ...', a: ['DMX512', 'UCS512', 'WS2822']",
+        }
+    disagreements:
+      - 'Rate: "250Kbps~750Kbps" (features, general description) vs "200KHZ to 750KHZ" (protocol text, PDF 6).'
+      - 'Bit order: gray data "low first" (PDF 6) but the address-write format "usually high bit comes first" (PDF 7), and the PDF 8 waveform agrees with MSB first.'
+      - 'Address table ranges are uneven: "0~255", "256~512", "513~768", ... (257 values in the second row, 256 in the others).'
+      - 'MAB "4 8 12 us" (same issue as WS2821) for gray data; address packet MAB "8 12 88 us".'
+    open: []
+
+  - part: SM16511 (maker's product name SM16511BK)
+    entry: pixel-ics/sm16511
+    maker: Shenzhen Sunmoon Microelectronics (明微电子, chinaasic.com)
+    documents:
+      - id: sm16511bk-sunmoon
+        url: https://www.chinaasic.com/chipDetails/detail_141.html
+        title: SM16511BK-景观装饰照明驱动芯片 (maker product page)
+        revision: null
+        date: null
+        language: zh
+        notes: The page's datasheet link ("说明书下载") has an empty target; no datasheet PDF was found anywhere.
+      - id: enttec-sm16511
+        url: https://www.enttec.com/pixel-protocols/SM16511
+        title: SM16511 Pixel Protocol (ENTTEC)
+        revision: null
+        date: null
+        language: en
+      - id: advatek-dmx512
+        url: https://www.advateklighting.com/pixel-protocols/dmx512
+        title: LED Pixel Protocol DMX512 - Advatek (advatek.netlify.app/pixel-protocols/sm16511 now serves this same page)
+        revision: null
+        date: null
+        language: en
+    line_coding: dmx512
+    input: single-ended
+    input_quote:
+      {
+        doc: sm16511bk-sunmoon,
+        page: null,
+        quote: '信号传输方式：单线并联 (signal transmission mode: single-wire parallel)',
+      }
+    idle: null
+    bit_order: null
+    rates:
+      - name: 250-750 kbps
+        select: null
+        doc: sm16511bk-sunmoon
+        page: null
+        quote: '信号传输速率：250kbps~750kbps (signal transmission rate: 250 kbps to 750 kbps)'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      doc: sm16511bk-sunmoon
+      page: null
+      quote: 'SM16511BK是并联应用单线三通道LED驱动控制芯片，兼容并拓展DMX512(1990)数据协议。 (SM16511BK is a single-wire, three-channel LED driver/control chip for parallel use, compatible with and extending the DMX512(1990) data protocol.) ... 灰度等级：256 级 (gray levels: 256)'
+    topology:
+      {
+        text: Single-wire parallel.,
+        doc: sm16511bk-sunmoon,
+        page: null,
+        quote: '信号传输方式：单线并联',
+      }
+    addressing:
+      stored_in: EEPROM
+      written_by: over the data bus; no address wire needed from the controller to the first lamp
+      slots_per_chip: null # three channels; slot use not documented
+      address_range: '最大支持 4096 通道寻址 (addressing up to 4096 channels)'
+      doc: sm16511bk-sunmoon
+      page: null
+      quote: '芯片内置EEPROM存放芯片地址，采用数据总线写址方式，可在线退出写地址状态，无需重新上电。 (The chip stores its address in built-in EEPROM, is addressed over the data bus, and can leave address-writing mode online without a power cycle.) ... 数据总线写地址，控制器至第一灯点只需接数据总线和地线，无需接地址线 (address written over the data bus: from the controller to the first lamp only the data bus and ground are needed, no address line)'
+      address_write_format: null
+    forwarding: { text: none (parallel), doc: sm16511bk-sunmoon, page: null, quote: null }
+    backup_line: null
+    standard_dmx_250k: true
+    compatibility_claims:
+      - {
+          claim: '兼容并拓展 DMX512(1990)数据协议 (compatible with and extends the DMX512(1990) data protocol)',
+          doc: sm16511bk-sunmoon,
+          page: null,
+        }
+    controller_makers:
+      - { doc: advatek-dmx512, quote: 'SM16511 | RGBW | 250 - 750 kbps' }
+      - {
+          doc: enttec-sm16511,
+          quote: 'A single-wire, self-clocking addressable LED driver with 8-bit-per-channel colour, a wide 5 to 24V supply range, and selectable 800/3300Hz PWM. ... Physical Package SOP10/16 ... RGB Yes RGBW Yes',
+        }
+    disagreements:
+      - 'Channels: maker "单线三通道" (three channels); Advatek lists SM16511 as RGBW.'
+      - 'Package: maker "封装形式：SOP8"; ENTTEC "SOP10/16".'
+      - 'Topology: maker "单线并联" (single-wire parallel, EEPROM address); ENTTEC says each pixel "latches its slice of the serial data stream and forwards the remainder down the chain" and "one failed pixel interrupts every pixel downstream".'
+    open:
+      - No SM16511 / SM16511BK datasheet found (maker page link empty; LCSC/LEDYi had none); timing table, slot count, address-write format and PWM frequency are unverified.
+      - Whether there are SM16511 variants other than BK.
+
+  - part: DMX512 (generic "DMX512P" / "DMX512-P" pixel type)
+    entry: pixel-ics/dmx512
+    maker: null
+    documents:
+      - id: advatek-dmx512
+        url: https://www.advateklighting.com/pixel-protocols/dmx512
+        title: LED Pixel Protocol DMX512 - Advatek
+        revision: null
+        date: null
+        language: en
+        retrieved: '2026-11-20'
+      - id: advatek-dmx512-2023
+        url: https://web.archive.org/web/20230921223751/https://www.advateklights.com/knowledge-base/dmx512
+        title: Pixel Protocol Overview - DMX512 (Advatek knowledge base, 2023 capture)
+        revision: null
+        date: '2023-09-21'
+        language: en
+      - id: advatek-dmx512-2024
+        url: https://web.archive.org/web/20240301110004/https://www.advateklighting.com/pixel-protocols/dmx512
+        title: LED Pixel Protocol DMX512 - Advatek (2024 capture)
+        revision: null
+        date: '2024-03-01'
+        language: en
+      - id: advatek-dmx512-d
+        url: https://www.advateklighting.com/pixel-protocols/dmx512-d
+        title: LED Pixel Protocol DMX512-D - Advatek
+        revision: null
+        date: null
+        language: en
+      - id: advatek-dmx-guide
+        url: https://www.advateklighting.com/blog/guides/using-dmx-pixels-with-pixlite-r-mk3
+        title: Using DMX Pixels with PixLite® Mk3 - Advatek
+        revision: null
+        date: null
+        language: en
+      - id: falcon-pixeltypes
+        url: https://pixelcontroller.com/store/PixelTypes.html
+        title: Falcon Pixel Types
+        revision: null
+        date: null
+        language: en
+      - id: enttec-dmx512
+        url: https://www.enttec.com/pixel-protocols/DMX512
+        title: DMX512 Pixel Protocol (ENTTEC)
+        revision: null
+        date: null
+        language: en
+    line_coding: dmx512
+    input: single-ended (Advatek's "DMX512"); the differential variant is Advatek's "DMX512-D"
+    input_quote:
+      {
+        doc: advatek-dmx512,
+        page: null,
+        quote: 'This pixel protocol is adopted by many pixel manufacturers, and uses the standard DMX512 protocol as a single serial line to drive pixel chips. Note: This protocol refers to a non-differential, single wire, DMX512 pixel chip. There are DMX512 protocols that use two data lines for differential transmission, which are also supported - see the protocol DMX512-D for more information.',
+      }
+    idle: null
+    bit_order: null
+    rates:
+      - name: 'DMX512P 250-750 kbps (Advatek now); 250-650 kbps (Advatek 2023)'
+        select: controller setting
+        doc: advatek-dmx512
+        page: null
+        quote: 'DMX512P | RGB | 250 - 750 kbps'
+        quote_2023: '(advatek-dmx512-2023) This pixel protocol, also known as DMX512P, was designed by Tianli New Technology Co. in China. It uses a non-differential DMX512 protocol to drive pixel chips. The control circuit comes in a SOP8 package ... Data Transfer Rate 250 – 650 kbps'
+    clock: null
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      doc: falcon-pixeltypes
+      page: null
+      quote: "n: 'DMX512P', c: 3, b: 8, w: 2, m32: 743, m48: 510, t: 'These pixels expect true DMX protocol. They can be run from the DMX port or from the receiver port using custom wiring. Contact support@pixelcontroller.com for details.', a: ['DMX512', 'UCS512', 'WS2822'] (columns: Type, Alternatives, Channels, Bits per channel, Wires, Max pixels when 32 ports or less, Max pixels when > 32 ports, Supported On Remotes, Notes)"
+      falcon_4ch: "n: 'DMX512P-4', c: 4, b: 8, w: 2, m32: 557, m48: 382, ... a: ['UCS512C4']"
+    topology:
+      {
+        text: 'Pixels hold a DMX address; controller streams; pixels pick their slots.',
+        doc: advatek-dmx-guide,
+        page: null,
+        quote: "The output behaves like a broadcast stream: each pixel listens and consumes only the channels it's been told to listen to.",
+      }
+    addressing:
+      stored_in: in the pixel
+      written_by: 'factory or an external addressing tool; the controller does not address'
+      doc: advatek-dmx512
+      page: null
+      quote: 'Unlike standard pixel protocols which are effectively self-addressing, DMX512 pixel protocols often require each pixel to be given an address, similar to a traditional DMX fixture. This is usually pre-set at the factory in the pixels themselves, by using an addressing tool, external to PixLite.'
+    beyond_512:
+      doc: advatek-dmx-guide
+      page: null
+      quote: 'DMX512 pixels are not limited to receiving 512 channels per "universe" (A data packet or 512 channels). PixLite® supports up to 6 universes of data for DMX512 (3072 channels), and 3 universes of data for DMX512-D (1536 channels) on its pixel outputs. ... All universes are sent sequentially on the same physical output stream (packed one after another allowing for higher channel counts than 512 per "universe").'
+    rate_guidance:
+      {
+        doc: advatek-dmx-guide,
+        page: null,
+        quote: 'Start at 250 kbps transmission speed (the "safe default" that aligns with traditional DMX expectations), then increase only if the IC datasheet explicitly supports higher rates.',
+      }
+    advatek_chip_lists:
+      single_wire_dmx512: 'CS512 RGB 250-500; DMX512P RGB 250-750; DMX512PF RGB 250-800; SM16511 RGBW 250-750; TM512AB RGBW 200-1000; TM512AB3 RGB 200-1000; TM512AB4 RGBW 200-1000; UCS512B3 RGB 250-750; UCS512CBL RGBW 200-750; WS2821 RGB 250-750; WS2822 RGB 250-750 (kbps)'
+      differential_dmx512_d: 'SM16512 RGBW 250-750; SM17500P RGBW 250-750; TM512 RGBW 200-500; TM512AC RGBW 200-1000; TM512AC4 RGBW 200-1000; TM512ACE RGB 200-1000; TM512AD RGBW 200-1000; TM512ADH RGBW 200-1000; TM512AL1 RGBW 200-500; UCS512A RGBW 200-500; UCS512C1 RGBW 200-750; UCS512C1L RGBW 200-750; UCS512C2 RGBW 200-750; UCS512C2L RGBW 200-750; UCS512C3 RGBW 200-750; UCS512C4 RGBW 200-750; UCS512H RGBW 250-750 (kbps)'
+      controller_speed: '(both pages) PixLite Mk3 ... supports a wide speed range of 100 - 2500 kbps'
+    forwarding: null
+    backup_line: null
+    standard_dmx_250k: true
+    compatibility_claims: []
+    disagreements:
+      - 'Advatek''s DMX512P rate changed: 2023 page "250 – 650 kbps", current page "250 - 750 kbps".'
+      - 'ENTTEC''s DMX512 page says each node holds "an address and passing frames down the chain" and that "a broken node or severed line stops every pixel downstream"; every DMX pixel datasheet read here (UCS512, WS2821, WS2822S, SM16511BK) describes a parallel bus where one failed chip does not affect the others.'
+      - 'Advatek''s guide says the AUX port should "adhere to the DMX512-A standard of 300m maximum per bus"; E1.11 puts cabling out of scope (clause 1.1) and E1.27-1 4.2 says "Maximum and minimum run lengths are specifically omitted from this standard". 300 m is the PLASA guide''s recommendation (rp-dmx512 PDF 28).'
+      - 'ENTTEC DMX512-D page: "Standard DMX512 runs at a fixed 250 kbit/s"; E1.11 Table 6 allows 245-255 kbit/s.'
+    open:
+      - No datasheet for a chip actually named "DMX512" / "DMX512P"; Advatek's 2023 attribution to "Tianli New Technology Co." is unverified.
+      - Falcon's "Wires" column is 2 for DMX512P (3 for WS2811, 4 for APA102); what the 2 counts is not explained.
+
+# Extended summary (with the timing-diagram numbers, the database corrections and the open list) is in d-dmx.md.
