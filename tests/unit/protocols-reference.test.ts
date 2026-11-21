@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import {
   ALL_CITATIONS,
+  DMX512,
   SOURCES,
   WS2812B_EARLY,
   WS2813B_V6,
@@ -34,6 +35,23 @@ describe('protocol sources', () => {
       // A 0's pulse must be shorter than a 1's, or the bits can't be told apart
       expect(part.t0h.max).toBeLessThan(part.t1h.min);
     }
+  });
+});
+
+describe('DMX512 arithmetic', () => {
+  test('a full packet takes the 22.7 ms the standard prints, so about 44 updates a second', () => {
+    const slotUs = DMX512.bitsPerSlot * DMX512.bitUs;
+    expect(slotUs).toBe(44);
+    // BREAK + MARK AFTER BREAK + start code + 512 slots, all at their minimum
+    const packetUs = DMX512.breakTxMinUs + DMX512.mabTxMinUs + (DMX512.slots + 1) * slotUs;
+    expect(packetUs).toBe(22_676);
+    expect(Math.round(packetUs / 100) / 10).toBe(DMX512.updateMs513);
+    expect(Math.floor(1e6 / packetUs)).toBe(DMX512.refreshMax);
+  });
+
+  test('170 RGB pixels or 128 RGBW pixels fit in 512 slots', () => {
+    expect(Math.floor(DMX512.slots / 3)).toBe(170);
+    expect(Math.floor(DMX512.slots / 4)).toBe(128);
   });
 });
 

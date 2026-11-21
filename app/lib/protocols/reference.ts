@@ -43,6 +43,15 @@ export const SOURCES = {
     url: 'https://cdn-shop.adafruit.com/datasheets/APA102.pdf',
     retrieved: '2026-11-20',
   },
+  'e1.11-2024': {
+    title:
+      'ANSI E1.11 – 2024 Entertainment Technology—USITT DMX512-A Asynchronous Serial Digital Data Transmission Standard for Controlling Lighting Equipment and Accessories',
+    publisher: 'ESTA',
+    // ESTA's own download asks for a sign-in; this is the PDF it serves
+    url: 'https://web.archive.org/web/20260225154802/https://tsp.esta.org/tsp/documents/docs/ANSI%20E1.11%20-%202024.pdf',
+    retrieved: '2026-11-20',
+    revision: 'CP/2023-1011r2a',
+  },
 } satisfies Record<string, ProtocolSource>;
 
 export type SourceId = keyof typeof SOURCES;
@@ -169,6 +178,50 @@ export const CLOCKED_FACTS = {
   },
 } satisfies Record<string, Citation>;
 
+/** DMX512 as ANSI E1.11 defines it (times in µs) */
+export const DMX512 = {
+  bitUs: 4,
+  bitRateKbps: { min: 245, typ: 250, max: 255 },
+  /** Shortest BREAK a transmitter may send, and the typical one */
+  breakTxMinUs: 92,
+  breakTxTypUs: 176,
+  /** Shortest BREAK a receiver must recognize */
+  breakRxMinUs: 88,
+  mabTxMinUs: 12,
+  mabRxMinUs: 8,
+  slots: 512,
+  /** Start bit, 8 data bits, 2 stop bits */
+  bitsPerSlot: 11,
+  updateMs513: 22.7,
+  refreshMax: 44,
+} as const;
+
+export const DMX_FACTS = {
+  format: {
+    source: 'e1.11-2024',
+    where: 'p. 12 (PDF 26), clause 8.1',
+    quote:
+      'DMX512 slots shall be transmitted sequentially in asynchronous serial format, beginning with slot 0 and ending with the last implemented slot, up to slot 512 (a maximum total of 513 slots). Prior to the first data slot being transmitted, a Reset Sequence shall be transmitted – a BREAK, followed by a MARK AFTER BREAK, and a START Code.',
+  },
+  slot: {
+    source: 'e1.11-2024',
+    where: 'p. 12 (PDF 26), Table 5 - Data Slot Format',
+    quote:
+      '1 Start Bit, Low or SPACE · 2 through 9 Slot Value Data Bits, Least Significant Bit to Most Significant Bit · 10, 11 Stop Bits, High or MARK',
+  },
+  transmitter: {
+    source: 'e1.11-2024',
+    where: 'p. 16 (PDF 30), Table 6 - Timing Diagram Values - output of transmitting UART',
+    quote:
+      'Bit Rate 245 250 255 kbit / s · Bit Time 3.92 4 4.08 µs · Minimum Update Time for 513 slots – 22.7 – ms · Maximum Refresh Rate for 513 slots – 44 – updates / s · “SPACE” for BREAK 92 176 – µs · “MARK” After BREAK (MAB) 12 – < 1.00 µs / s',
+  },
+  receiver: {
+    source: 'e1.11-2024',
+    where: 'p. 16 (PDF 30), Table 7 - Timing Diagram Values for Receivers',
+    quote: '“SPACE” for BREAK 88 – –< 1.00 µs / s · “MARK” After BREAK (MAB) 8 – < 1.00 µs / s',
+  },
+} satisfies Record<string, Citation>;
+
 /** Every citation on the page, for the tests and the sources list */
 export const ALL_CITATIONS: Citation[] = [
   WS2812B_EARLY.cite,
@@ -176,4 +229,5 @@ export const ALL_CITATIONS: Citation[] = [
   ...Object.values(SINGLE_WIRE_FACTS),
   ...Object.values(BACKUP_FACTS),
   ...Object.values(CLOCKED_FACTS),
+  ...Object.values(DMX_FACTS),
 ];
