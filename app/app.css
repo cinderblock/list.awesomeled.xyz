@@ -52,5 +52,8 @@
 /* System Designer: the /designer wizard */
 @import './styles/designer.css';
 
+/* Pixel protocols: the /protocols explainer and its animations */
+@import './styles/protocols.css';
+
 /* Print: Print media styles */
 @import './styles/print.css';

@@ -21,6 +21,7 @@ const PAGES = [
   '/contribute',
   '/about',
   '/system-overview',
+  '/protocols',
   '/designer',
 ];
 

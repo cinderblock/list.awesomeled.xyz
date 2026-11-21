@@ -445,6 +445,7 @@ export function getAllRoutes(): string[] {
     '/about',
     '/contribute',
     '/system-overview',
+    '/protocols',
     '/designer',
     '/search',
     '/compare',

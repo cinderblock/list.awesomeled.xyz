@@ -14,6 +14,7 @@ export async function loader() {
     { path: '/' },
     { path: '/designer' },
     { path: '/system-overview' },
+    { path: '/protocols' },
     { path: '/about' },
     { path: '/contribute' },
   ];

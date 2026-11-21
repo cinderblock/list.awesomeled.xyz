@@ -1,0 +1,672 @@
+/* ==========================================================================
+   Pixel protocols explainer (/protocols)
+
+   Prose in a reading column, figures a little wider. Every drawing is SVG
+   coloured from the tokens below, so light and dark themes are one switch.
+   ========================================================================== */
+
+.protocols-page {
+  --pr-trace: oklch(0.32 0 0);
+  --pr-muted: oklch(0.5 0 0);
+  --pr-grid: oklch(0.9 0 0);
+  --pr-surface: oklch(0.985 0 0);
+  --pr-r: oklch(0.55 0.2 27);
+  --pr-g: oklch(0.5 0.15 150);
+  --pr-b: oklch(0.5 0.19 262);
+  --pr-w: oklch(0.5 0.02 80);
+  --pr-clock: oklch(0.5 0.16 310);
+  --pr-accent: oklch(0.52 0.19 262);
+  --pr-accent-bg: oklch(0.96 0.03 262);
+  --pr-ok: oklch(0.48 0.13 150);
+  --pr-ok-bg: oklch(0.96 0.04 150);
+  --pr-bad: oklch(0.5 0.18 27);
+  --pr-bad-bg: oklch(0.96 0.03 27);
+  --pr-window0: oklch(0.62 0.13 250 / 0.16);
+  --pr-window1: oklch(0.7 0.14 70 / 0.2);
+  --pr-box: oklch(0.96 0 0);
+  --pr-box-stroke: oklch(0.7 0 0);
+  --pr-pixel: oklch(0.99 0 0);
+  --pr-pixel-stroke: oklch(0.62 0 0);
+  --pr-led-off: oklch(0.88 0 0);
+  --pr-frame-stroke: oklch(0.25 0 0 / 0.55);
+  --pr-dead: oklch(0.55 0.2 27);
+  --pr-bus: oklch(0.55 0.12 60);
+
+  flex: 1 0 auto;
+  background-color: var(--background);
+}
+
+.dark .protocols-page {
+  --pr-trace: oklch(0.88 0 0);
+  --pr-muted: oklch(0.72 0 0);
+  --pr-grid: oklch(0.32 0 0);
+  --pr-surface: oklch(0.19 0 0);
+  --pr-r: oklch(0.72 0.17 27);
+  --pr-g: oklch(0.76 0.15 150);
+  --pr-b: oklch(0.72 0.14 262);
+  --pr-w: oklch(0.8 0.03 80);
+  --pr-clock: oklch(0.75 0.13 310);
+  --pr-accent: oklch(0.74 0.14 262);
+  --pr-accent-bg: oklch(0.27 0.06 262);
+  --pr-ok: oklch(0.8 0.14 150);
+  --pr-ok-bg: oklch(0.26 0.05 150);
+  --pr-bad: oklch(0.8 0.12 25);
+  --pr-bad-bg: oklch(0.27 0.06 27);
+  --pr-window0: oklch(0.65 0.13 250 / 0.22);
+  --pr-window1: oklch(0.75 0.14 70 / 0.2);
+  --pr-box: oklch(0.24 0 0);
+  --pr-box-stroke: oklch(0.45 0 0);
+  --pr-pixel: oklch(0.22 0 0);
+  --pr-pixel-stroke: oklch(0.55 0 0);
+  --pr-led-off: oklch(0.32 0 0);
+  --pr-frame-stroke: oklch(1 0 0 / 0.5);
+  --pr-dead: oklch(0.72 0.17 27);
+  --pr-bus: oklch(0.78 0.12 70);
+}
+
+.protocols-page .container {
+  max-width: 64rem;
+}
+
+/* Reading column: prose sits narrower than the figures */
+.proto-prose {
+  max-width: 46rem;
+  line-height: 1.7;
+}
+
+.proto-prose p,
+.proto-prose ul,
+.proto-prose ol {
+  margin-bottom: var(--space-4);
+}
+
+.proto-prose ul,
+.proto-prose ol {
+  padding-left: var(--space-6);
+}
+
+.proto-prose li + li {
+  margin-top: var(--space-1);
+}
+
+.proto-prose a,
+.proto-caption a,
+.proto-table a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.proto-prose a:hover,
+.proto-caption a:hover,
+.proto-table a:hover {
+  text-decoration: none;
+}
+
+.proto-lead {
+  font-size: 1.125rem;
+}
+
+.proto-section {
+  margin-top: var(--space-12);
+  scroll-margin-top: 110px;
+}
+
+.proto-section > h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.proto-section h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+
+.proto-kicker {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pr-muted);
+  margin-bottom: var(--space-1);
+}
+
+/* In-page contents */
+.proto-prose .proto-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.proto-prose .proto-toc li + li {
+  margin-top: 0;
+}
+
+.proto-toc a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+.proto-toc a:hover {
+  background: var(--accent);
+}
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+.proto-figure {
+  margin: var(--space-6) 0 var(--space-8);
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--pr-surface);
+}
+
+.proto-stage {
+  overflow: hidden;
+}
+
+.proto-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-sans);
+}
+
+.proto-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.proto-control {
+  min-height: 2rem;
+}
+
+.proto-status {
+  margin-top: var(--space-2);
+  min-height: 1.5em;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.proto-caption {
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+  max-width: 52rem;
+}
+
+/* Colour swatches (the bits figure) */
+.proto-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.proto-swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.proto-swatch[aria-pressed='true'] {
+  border-color: var(--pr-accent);
+  box-shadow: 0 0 0 1px var(--pr-accent);
+  font-weight: 600;
+}
+
+.proto-swatch-chip {
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 50%;
+  border: 1px solid var(--pr-frame-stroke);
+}
+
+/* Shared SVG pieces */
+.proto-trace {
+  fill: none;
+  stroke: var(--pr-trace);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.proto-trace--r {
+  stroke: var(--pr-r);
+}
+
+.proto-trace--g {
+  stroke: var(--pr-g);
+}
+
+.proto-trace--b {
+  stroke: var(--pr-b);
+}
+
+.proto-trace--w {
+  stroke: var(--pr-w);
+}
+
+.proto-trace--clock {
+  stroke: var(--pr-clock);
+}
+
+.proto-trace--muted {
+  stroke: var(--pr-muted);
+}
+
+.proto-chan {
+  font-size: 13px;
+  font-weight: 700;
+  fill: var(--pr-trace);
+  color: var(--pr-trace);
+}
+
+.proto-chan--r {
+  fill: var(--pr-r);
+  color: var(--pr-r);
+}
+
+.proto-chan--g {
+  fill: var(--pr-g);
+  color: var(--pr-g);
+}
+
+.proto-chan--b {
+  fill: var(--pr-b);
+  color: var(--pr-b);
+}
+
+.proto-chan--w {
+  fill: var(--pr-w);
+  color: var(--pr-w);
+}
+
+.proto-hex {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  fill: var(--pr-muted);
+}
+
+.proto-bit {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  fill: var(--pr-muted);
+}
+
+.proto-bit--done {
+  fill: var(--pr-trace);
+  font-weight: 700;
+}
+
+.proto-bit--now {
+  fill: var(--pr-accent);
+  font-weight: 700;
+}
+
+.proto-bit--wrong {
+  fill: var(--pr-bad);
+  font-weight: 700;
+}
+
+.proto-cursor {
+  stroke: var(--pr-accent);
+  stroke-width: 2;
+}
+
+.proto-sample {
+  fill: var(--pr-surface);
+  stroke: var(--pr-clock);
+  stroke-width: 1.5;
+}
+
+.proto-sample--done {
+  fill: var(--pr-clock);
+}
+
+.proto-stall {
+  fill: var(--pr-bad-bg);
+  stroke: var(--pr-bad);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.proto-note--tiny {
+  font-size: 10px;
+}
+
+/* A checkbox that changes what a figure shows */
+.proto-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--background);
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.proto-toggle input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--pr-accent);
+}
+
+.proto-window-0 {
+  fill: var(--pr-window0);
+}
+
+.proto-window-1 {
+  fill: var(--pr-window1);
+}
+
+.proto-note {
+  font-size: 12px;
+  fill: var(--pr-muted);
+}
+
+.proto-dim {
+  stroke: var(--pr-muted);
+  stroke-width: 1;
+}
+
+.proto-dim-label {
+  font-size: 11px;
+  fill: var(--pr-trace);
+}
+
+.proto-box {
+  fill: var(--pr-box);
+  stroke: var(--pr-box-stroke);
+  stroke-width: 1.5;
+}
+
+.proto-box-label {
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--pr-trace);
+}
+
+.proto-box-sub {
+  font-size: 11px;
+  fill: var(--pr-muted);
+}
+
+.proto-wire {
+  stroke: var(--pr-muted);
+  stroke-width: 2;
+}
+
+.proto-wire--clock {
+  stroke: var(--pr-clock);
+}
+
+.proto-frame {
+  stroke: var(--pr-frame-stroke);
+  stroke-width: 1;
+}
+
+.proto-frame--control {
+  fill: var(--pr-grid);
+}
+
+.proto-frame-label {
+  font-size: 11px;
+  font-weight: 700;
+  fill: oklch(0.15 0 0);
+}
+
+.proto-frame-label--plain {
+  fill: var(--pr-trace);
+}
+
+.proto-pixel {
+  fill: var(--pr-pixel);
+  stroke: var(--pr-pixel-stroke);
+  stroke-width: 1.5;
+}
+
+.proto-pixel--dead {
+  stroke: var(--pr-dead);
+  stroke-dasharray: 4 3;
+}
+
+.proto-pixel-label {
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--pr-trace);
+}
+
+.proto-led {
+  fill: var(--pr-led-off);
+  stroke: var(--pr-frame-stroke);
+  stroke-width: 1;
+  transition: fill 120ms linear;
+}
+
+.proto-led-glow {
+  opacity: 0.55;
+}
+
+.proto-store-track,
+.proto-reset-track {
+  fill: var(--pr-grid);
+}
+
+.proto-reset-fill {
+  fill: var(--pr-accent);
+}
+
+/* The bits figure: drawing plus the "pixel holds" register */
+.proto-bits {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (min-width: 720px) {
+  .proto-bits {
+    grid-template-columns: minmax(0, 1fr) 13rem;
+  }
+}
+
+.proto-bits-svg {
+  max-width: 34rem;
+}
+
+.proto-register {
+  display: grid;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+.proto-register-label {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--pr-muted);
+}
+
+.proto-register-row {
+  display: grid;
+  grid-template-columns: 1.25rem auto 2.5rem;
+  gap: var(--space-2);
+  align-items: baseline;
+}
+
+.proto-register-bits span {
+  color: var(--pr-muted);
+}
+
+.proto-register-bits span.is-in {
+  color: var(--foreground);
+  font-weight: 700;
+}
+
+.proto-register-value {
+  text-align: right;
+}
+
+.proto-register-swatch {
+  height: 1.75rem;
+  margin-top: var(--space-1);
+  border: 1px dashed var(--pr-box-stroke);
+  border-radius: var(--radius-md);
+}
+
+/* Tables */
+.proto-table-wrap {
+  overflow-x: auto;
+  margin: var(--space-4) 0 var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.proto-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.proto-table th,
+.proto-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+.proto-table thead th {
+  background: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.proto-table tbody tr:last-child td,
+.proto-table tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.proto-table .num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Call-outs */
+.proto-callout {
+  margin: var(--space-6) 0;
+  padding: var(--space-4);
+  border-left: 4px solid var(--pr-accent);
+  border-radius: var(--radius-md);
+  background: var(--pr-accent-bg);
+  max-width: 46rem;
+}
+
+.proto-callout > :last-child {
+  margin-bottom: 0;
+}
+
+.proto-callout-title {
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+/* Sources list */
+.proto-sources {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  padding-left: var(--space-6);
+}
+
+.proto-sources li + li {
+  margin-top: var(--space-2);
+}
+
+.proto-cite {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 0.1em;
+}
+
+.proto-cite a {
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .proto-led {
+    transition: none;
+  }
+}
+
+/* Backup data line */
+.proto-wire--active {
+  stroke: var(--pr-accent);
+  stroke-width: 3;
+}
+
+.proto-backup {
+  fill: none;
+  stroke: var(--pr-muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+
+.proto-backup--active {
+  stroke: var(--pr-accent);
+  stroke-width: 3;
+}
+
+.proto-node {
+  fill: var(--pr-muted);
+}
+
+.proto-pin {
+  font-size: 9px;
+  fill: var(--pr-muted);
+}
+
+.proto-note--bad {
+  fill: var(--pr-bad);
+  font-weight: 600;
+}
+
+.proto-pixel-button {
+  cursor: pointer;
+}
+
+/* DMX512 */
+.proto-bus {
+  stroke: var(--pr-bus);
+  stroke-width: 2;
+}

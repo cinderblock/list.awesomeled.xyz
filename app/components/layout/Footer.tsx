@@ -22,6 +22,9 @@ export function Footer() {
           <Link to="/system-overview" className="site-footer-link">
             System overview
           </Link>
+          <Link to="/protocols" className="site-footer-link">
+            Pixel protocols
+          </Link>
           <Link to="/search" className="site-footer-link">
             Search
           </Link>

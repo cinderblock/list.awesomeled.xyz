@@ -49,6 +49,9 @@ export function Header() {
             <Link to="/designer" className="btn btn--ghost site-nav-link">
               Designer
             </Link>
+            <Link to="/protocols" className="btn btn--ghost site-nav-link">
+              Protocols
+            </Link>
             <Link to="/about" className="btn btn--ghost site-nav-link">
               About
             </Link>

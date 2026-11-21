@@ -140,6 +140,13 @@
   }
 }
 
+/* Phones: Protocols is in the footer (the header has room for two words) */
+@media (max-width: 520px) {
+  .site-nav a[href='/protocols'] {
+    display: none;
+  }
+}
+
 /* The smallest phones: About moves to the footer */
 @media (max-width: 340px) {
   .site-nav a[href='/about'] {

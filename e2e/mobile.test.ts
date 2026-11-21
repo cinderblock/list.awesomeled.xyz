@@ -12,6 +12,7 @@ const PAGES = [
   '/compare?e=controllers/falcon-f16v4,controllers/falcon-f16v5',
   '/search?q=falcon',
   '/about',
+  '/protocols',
 ];
 
 test.describe('Phone widths', () => {

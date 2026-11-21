@@ -23,6 +23,11 @@ const PAGES = [
     hint: 'How the parts of an LED system connect',
     path: '/system-overview',
   },
+  {
+    label: 'Pixel protocols',
+    hint: 'What pixels receive on the wire, and which names are the same signal',
+    path: '/protocols',
+  },
   { label: 'About', hint: 'History, downloads, license', path: '/about' },
 ];
 
