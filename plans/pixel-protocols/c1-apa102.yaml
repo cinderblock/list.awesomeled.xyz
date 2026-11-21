@@ -1,0 +1,1660 @@
+# Workstream 8 (pixel protocols), research batch c1-apa102: the APA102-style clocked parts
+# and the 16-bit NS108 / HD108 / NS108E / SK9826 family. The summary is the sibling file
+# c1-apa102.md (read it first).
+batch: c1-apa102
+researched: '2026-11-20'
+conventions:
+  page: PDF page number, 1-based. Where the printed page number differs it is said.
+  quotes: >-
+    Verbatim, keeping the makers' spelling, grammar and spacing quirks. Several sheets are
+    images with no text layer; those pages were rendered and read by eye, and their quotes are
+    marked "(transcribed from image)". Chinese labels are quoted as printed with an English
+    translation in square brackets. " / " separates lines or cells of one figure or table.
+  clocked_parts: >-
+    Every part in this batch is clocked (data + clock), so rates is empty and the timing is
+    under clock. idle is null throughout: no document states the idle level of the clock or
+    data line, and the drawings disagree (the APA/Shiji/Opsco bit diagrams draw CKI high
+    before the first bit; APA Electronic's protocol drawing starts CIN low).
+  bit_map: >-
+    frame.bit_map is the drawn frame written out bit by bit (b31 = first bit on the wire);
+    it adds nothing that is not in the cited drawing.
+
+independent_sources:
+  - id: cpldcpu-apa102
+    url: https://cpldcpu.com/2014/11/30/understanding-the-apa102-superled/
+    title: Understanding the APA102 "Superled"
+    author: Tim (cpldcpu), Tim's Blog
+    date: '2014-11-30'
+    source_type: independent analysis (logic analyser on APA102 LEDs driven by an ATtiny85)
+  - id: cpldcpu-sk9822
+    url: https://cpldcpu.com/2016/12/13/sk9822-a-clone-of-the-apa102/
+    title: SK9822 – a clone of the APA102?
+    author: Tim (cpldcpu), Tim's Blog
+    date: '2016-12-13'
+    source_type: independent analysis (logic analyser and photodiode on SK9822 LEDs)
+  - id: pjrc-24mhz
+    url: https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/
+    title: Why APA102 LEDs Have Trouble At 24 MHz
+    author: Paul Stoffregen (PJRC)
+    date: '2017-12-06'
+    source_type: independent analysis (oscilloscope at the end of a 144-LED APA102 strip)
+  - id: fastled-hd108
+    url: https://fastled.io/docs/d8/d61/hd108_8h_source.html
+    also: https://fastled.io/docs/d7/dd3/encoders_2hd108_8h_source.html
+    title: FastLED 3.10.10, src/fl/chipsets/hd108.h and src/fl/chipsets/encoders/hd108.h
+    date: null
+    source_type: open-source driver (what a widely used library sends; not a measurement)
+  - id: fastled-issue-1045
+    url: https://github.com/FastLED/FastLED/issues/1045
+    title: 'New Chip Type: NS108 / HD108'
+    date: '2020-06-28'
+    source_type: community discussion (users bringing up HD108 / SK9826 strips)
+  - id: braydenm-hd108
+    url: https://github.com/braydenm/ledstrip/blob/main/HD108/rgb_helloworld_16bit/rgb_helloworld_16bit.ino
+    title: rgb_helloworld_16bit.ino (braydenm/ledstrip, linked from FastLED issue 1045)
+    date: '2020-11'
+    source_type: community example sketch for HD108 strips
+  - id: advatek-pages
+    url: https://www.advateklighting.com/pixel-protocols/apa102
+    also:
+      [
+        https://www.advateklighting.com/pixel-protocols/sk9822,
+        https://www.advateklighting.com/pixel-protocols/hd107s,
+        https://www.advateklighting.com/pixel-protocols/hd108,
+        https://www.advateklighting.com/pixel-protocols/ns108e,
+      ]
+    title: Advatek "LED Pixel Protocol" pages (APA102/APA102C, SK9822, HD107S, HD108, NS108E)
+    source_type: controller maker (what Advatek treats as one protocol; no frame details)
+  - id: enttec-pages
+    url: https://www.enttec.com/pixel-protocols/APA102
+    also: [https://www.enttec.com/pixel-protocols/HD108]
+    title: ENTTEC "Pixel Protocol" pages (APA102, HD108)
+    source_type: controller maker (marketing specs; no frame details)
+
+parts:
+  # ------------------------------------------------------------------ APA102
+  - part: APA102
+    entry: pixels/apa102
+    maker: >-
+      APA Electronic Co. (Taiwan) designed it. The datasheet the entry links is Shiji Lighting /
+      iPixel LED's (Shenzhen) image-only sheet, headed "APA102C" on pages 1-4 and "APA102" on page 5.
+    documents:
+      - id: shiji-apa102c
+        url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+        title: APA102C, RGB Full Color LED control IC (iPixel LED / Shiji Lighting)
+        revision: null
+        date: null
+        language: en (headings also zh)
+        source_type: LED packager's datasheet (the entry's datasheet.url)
+        notes: 5 pages, images only (PDF metadata created 2014-10-17). Quotes transcribed from the rendered pages.
+      - id: normand-apa102-2020
+        url: https://cdn-shop.adafruit.com/product-files/3341/APA102-2020-8A+LED+Datasheet.pdf
+        title: APA 102-2020-256-8A
+        revision: null
+        date: null
+        language: en
+        source_type: datasheet on Shenzhen Normand Electronic letterhead, hosted by Adafruit for its APA102-2020 "DotStar Micro" (product 3341)
+        notes: >-
+          13 pages; every footer reads "Shenzhen Normand Electronic Co.,Ltd www.normandled.com". PDF
+          created 2019-03-22, modified 2020-03-09, author "Robert.lo（羅俊仁）". Covers the 2020 package in the entry.
+      - id: superlighting-apa102-2020
+        url: https://www.superlightingled.com/PDF/APA102-2020-LED-Chip.pdf
+        title: APA-102-2020 Series, Top Mount IC+RGB Chip LED (Preliminary)
+        revision: null
+        date: null
+        language: en, zh
+        source_type: reseller copy (Superlighting LED) of an APA-style sheet
+        notes: 15 image pages (PDF made 2017-05-08 with convert-jpg-to-pdf). Same frame drawing and FOSC 800-1200 KHz as shiji-apa102c.
+      - id: signlite-apa102
+        url: https://signliteled.com/wp-content/uploads/2024/08/APA102-Datasheet.pdf
+        title: APA102 Specification
+        revision: null
+        date: null
+        language: en
+        source_type: unbranded reseller retype of the Shiji text
+        notes: Same wording and values as shiji-apa102c (FOSC 800-1200 KHz, same frame); adds nothing and is not cited below.
+      - {
+          id: cpldcpu-apa102,
+          url: 'https://cpldcpu.com/2014/11/30/understanding-the-apa102-superled/',
+          source_type: independent,
+        }
+      - {
+          id: cpldcpu-sk9822,
+          url: 'https://cpldcpu.com/2016/12/13/sk9822-a-clone-of-the-apa102/',
+          source_type: independent,
+        }
+      - {
+          id: pjrc-24mhz,
+          url: 'https://www.pjrc.com/why-apa102-leds-have-trouble-at-24-mhz/',
+          source_type: independent,
+        }
+      - {
+          id: advatek-pages,
+          url: 'https://www.advateklighting.com/pixel-protocols/apa102',
+          source_type: controller maker,
+        }
+      - {
+          id: enttec-pages,
+          url: 'https://www.enttec.com/pixel-protocols/APA102',
+          source_type: controller maker,
+        }
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: null
+      max_hz_by_document:
+        - doc: shiji-apa102c
+          max_hz: null
+          notes: no clock rating printed; only FOSC (the internal oscillator), 800-1200 KHz (p. 3)
+        - doc: normand-apa102-2020
+          max_hz: 15000000
+          page: 2
+          quote: 'Maximum Rating / Rate of data signal / FCLK / 15 / MHZ'
+          notes: 'p. 3 Electrical Characteristics: "Rate of data signal / FCLK / 5 / - / MHZ" (5 in the Typ. column, Max. "-")'
+        - doc: superlighting-apa102-2020
+          max_hz: 15000000
+          page: 8
+          quote: 'Maximum serial input data clock frequency 15MHZ (lighting applications, please control the clock frequency below 2MHz);'
+      min_hz: null
+      sample_edge: rising
+      shift_edge: >-
+        Not printed by any maker. Measured: SDO changes on the rising edge of the incoming clock and the
+        LED drives CKO as the incoming clock inverted, so the next LED samples it half a clock later
+        (cpldcpu-apa102); at the end of a strip the data changes on the falling edge of the clock seen
+        there, about 15 ns after it at 24 MHz (pjrc-24mhz).
+      regenerated: >-
+        The clock out is the incoming clock inverted, with no internal clock source (cpldcpu-apa102);
+        each LED slightly lengthens the high time and shortens the low time it passes on (pjrc-24mhz).
+      data_delayed_half_clock: true
+      clock_delayed: false
+      printed: rising-edge arrows on CKI under DIN bits 7..0
+      doc: shiji-apa102c
+      page: 4
+      quote: '(transcribed from image) "PWM input and output signals Relations" / MSB … LSB / DIN 7 6 5 4 3 2 1 0 / CKI drawn with an up-arrow on each rising edge'
+      timing:
+        - doc: normand-apa102-2020
+          page: 3
+          quote: 'The clock high level widch / TCLKH / 30 / - / - / ns // The clock low level widch / TCLKL / 30 / - / - / ns // Data set up time / TSETUP / 10 / - / - / ns // Data hold time / THOLD / 5 / - / - / ns (30, 30, 10, 5 in the Min. column)'
+        - doc: superlighting-apa102-2020
+          page: 8
+          quote: 'Cascade output signal maximum delay time / TPD / CL=30pF,RL=1K / <12 / ns / TCO / <12'
+      independent:
+        - doc: cpldcpu-apa102
+          quote: >-
+            By definition, the data line is valid only during the rise edge of the clock signal. … To
+            work around this issue, the APA102 delays the data on the output by half a cycle. As shown in
+            the figure above, this is accomplished by inverting the incoming clock signal at the output.
+            The data output is forwarded during the rising edge of the incoming clock, but only becomes
+            valid for the next device at the rising edge of the outgoing clock.
+        - doc: cpldcpu-apa102
+          quote: >-
+            I have no recommendation for a maximum or minimum SPI clock speed. There is no specification
+            for this in the datasheet. So far, it seems that the LED is able to handle any clock setting
+            that is thrown at it. I had no issues with 4 MHz and others have successfully tested 10 MHz and above.
+        - doc: pjrc-24mhz
+          quote: >-
+            The main thing to observe here is the APA102 output changes its data line (blue) at the
+            falling edge of the clock (red). … At 24 MHz, the delay is much more significant. In this
+            case I measured approximately 15 ns delay from clock to the data changing. … But it appears
+            each APA102 lengthens the clock high time and shortens the clock low time slightly. … After
+            144 LEDs, the clock low time on this strip has shrunk from 20.83 ns to approximately 18 ns.
+            With the data output delayed 15 ns after the falling edge, this leaves only 3 ns before the
+            next APA102 LED captures the data on the rising edge of the clock.
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: 3 header bits "111", then a 5-bit "Global" brightness field, MSB first
+      start: 32 bits of 0
+      end: 32 bits of 1 as printed (captioned "LED Frame 32 Bits" by mistake)
+      latch: >-
+        Nothing printed. Measured: no latch; each LED shows its data right after its own LED frame
+        (cpldcpu-apa102).
+      bit_map: 'b31-b29 = 1 1 1; b28-b24 = Global (MSB first); b23-b16 = BLUE 7..0; b15-b8 = GREEN 7..0; b7-b0 = RED 7..0'
+      doc: shiji-apa102c
+      page: 3
+      quote: >-
+        (transcribed from image) "(1).cascading data structure / Tabdem N-LED / SDI | 0*32 | LED1 | LED2 |
+        LED3 | LED4 | ---- | LEDN | 1*32 / Start Frame | LED Frame | Date Field | End Frame / Start Frame 32
+        Bits / 00000000 00000000 00000000 00000000 (8Bits each) / LED Frame 32 Bits / MSB LSB MSB LSB / 111 |
+        Global | BLUE | GREEN | RED / 3Bits 5Bits 8Bits 8Bits 8Bits / LED Frame 32 Bits / 11111111 11111111
+        11111111 11111111 (8Bits each)"
+      other:
+        - doc: normand-apa102-2020
+          page: 5
+          quote: '(transcribed from image) same drawing: SDI 0*32 | LED1 … LEDN | 1*32; LED Frame 32 Bits 111 | Global | BLUE | GREEN | RED (3Bits 5Bits 8Bits 8Bits 8Bits); the end frame again captioned "LED Frame 32 Bits" over 11111111 x4'
+        - doc: cpldcpu-apa102
+          quote: >-
+            It turns out that a minimum of 32 zeroes are required to initiate an update. Increasing the
+            number of zeroes does not have any impact. The LED frame is identified by the first one bit
+            following the start frame. … the most significant bit of the LED frame has to be "1", since it
+            is used to identify the start of the frame. It appears that the next two bits serve no function
+            and can have arbitrary values. To stay compliant with the data sheet, it makes sense to set them
+            to "1", though.
+        - doc: cpldcpu-apa102
+          what: why the end frame needs n/2 clock edges
+          quote: >-
+            Since the data for each subsequent LED is delayed by half a clock cycle, but the clock is not,
+            additional clock cycles have to be fed to the string even after all data has been sent. This is
+            the sole reason for the existence of the "End frame" … the only function of the "End frame" is to
+            supply more clock pulses to the string until the data has permeated to the last LED. The number of
+            clock pulses required is exactly half the total number of LEDs in the string. The recommended end
+            frame length of 32 is only sufficient for strings up to 64 LEDs. … It should not matter, whether
+            the end frame consists of ones or zeroes. Just don't mix them. Furthermore, omitting the end frame
+            will not mean that data from the update is discarded. Instead it will be loaded in to the PWM
+            registers at the start of the next update.
+        - doc: cpldcpu-apa102
+          what: summary protocol
+          quote: >-
+            A start frame of 32 zero bits (<0x00> <0x00> <0x00> <0x00>) / A 32 bit LED frame for each LED in
+            the string (<0xE0+brightness> <blue> <green> <red>) / An end frame consisting of at least (n/2)
+            bits of 1, where n is the number of LEDs in the string. Unlike the WS2812 protocol, no waiting
+            period is required before the next update.
+        - doc: cpldcpu-apa102
+          what: when the colour changes
+          quote: >-
+            The LED output color is updated immediately after the first valid LED frame. This is quite
+            interesting, since it means that almost arbitrary update rates of the APA102 are possible.
+            However, this may lead to a "staggered" update for longer strings, where the first LEDs in a
+            string are updated earlier than the later ones.
+    forwarding:
+      text: >-
+        The maker sheet only says the clock is passed on ("two-output WAY"). Measured: after a start frame
+        each LED keeps the first LED frame, sends zeroes downstream while it reads it, then forwards the rest,
+        data delayed half a clock.
+      doc: cpldcpu-apa102
+      page: null
+      quote: >-
+        Once a device detects a start frame (more than 31 zero bits), it will interpret the next "1" bit as
+        start of its own LED frame. 32 bits are clocked into the PWM registers, while zeroes are pushed to the
+        output. After the entire LED frame as been read, any subsequent data is simply forwarded until another
+        start frame is detected.
+      maker_quote: '(shiji-apa102c p. 1, transcribed from image) "APA102 with two-output WAY ,the CLK signal by synchronization，so that the crystal cascadePiece of output movements synchronized."'
+    brightness:
+      printed: 'the 5-bit Global field sets the "Driving Current" of R, G and B together'
+      measured: 'a low-frequency PWM (~440 Hz) laid over the ~19 kHz PWM, not a current change (cpldcpu-sk9822)'
+      doc: shiji-apa102c
+      page: 4
+      quote: '(transcribed from image) "Global bit：5-bit（32 level）brightness setting，while controlling R, G, B three-color constant current output value，if set the Global bit for the 10000（16/31）is the output current is half again the original PWM settings." / DATA MSB↔LSB | Driving Current / 00000 0/31 … 11111 31/31(max)'
+      independent_quote: '(cpldcpu-sk9822, summary table) "Global brightness control / PWM at ~440 Hz / Programmable current source" (APA102 column, SK9822 column); text: "the APA102, which superimposed a lower frequency PWM pattern if the global brightness was not set to its maximum"'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'APA102C uses the same protocol, but provides a larger metallic area for better heat dissipation.'
+        doc: advatek-pages
+        page: null
+        by: controller maker (Advatek)
+    disagreements:
+      - >-
+        Brightness method: the sheet says the Global bits set the output current ("Driving Current",
+        p. 4; the Normand 2020 sheet p. 5: "simultaneous control of OUTR\OUTG\OUTB three port current"),
+        while cpldcpu measured a ~440 Hz PWM on the APA102 (cpldcpu-sk9822). Advatek also says "5-bit
+        global current control".
+      - >-
+        End frame: drawn as 32 ones (captioned "LED Frame 32 Bits" in shiji-apa102c p. 3 and
+        normand-apa102-2020 p. 5), but cpldcpu measured that it is only extra clocks, n/2 of them, so 32
+        bits only cover 64 LEDs, and ones or zeroes both work.
+      - >-
+        Overhead arithmetic (shiji-apa102c p. 4): "minus the Start Frame bit divided by the number 40 … the
+        pixel number（512000-40）/32=15998" subtracts 40 bits, while the same sheet draws a 32-bit start
+        frame and a 32-bit end frame.
+      - >-
+        Maximum clock: none in the entry's datasheet; 15 MHz in both 2020-package sheets
+        (normand-apa102-2020 p. 2, superlighting-apa102-2020 p. 8); 30 MHz in APA Electronic's APA102C
+        sheet (see APA102C). The entry says bitrate 30MHz for both packages.
+      - >-
+        PWM rate: Advatek and ENTTEC list "PWM Rate 1920Hz"; normand-apa102-2020 p. 3 prints "The
+        frequency of PWM FPWM 20 KHz"; cpldcpu measured 19.2 kHz (cpldcpu-sk9822: "~19 kHz"). Not a wire
+        matter.
+      - >-
+        Self-test pin (bare IC, shiji-apa102c p. 4): "(4).VEN：Self-detection / Data Field to the middle of
+        3bit were B, G, R in the MSB of the opposite phase， otherwise regarded as invalid data. VEN close to
+        empty when the self-detection：when VEN VSS then activated self-detection." With self-detection on,
+        the three header bits would have to be the inverse of the B, G, R MSBs, not "111". The LED package
+        has no VEN pin, and cpldcpu found the two bits after the leading 1 are ignored, so the option is
+        evidently off in packaged LEDs; recorded because it explains the otherwise unused header bits.
+      - >-
+        Clock polarity option (bare IC, shiji-apa102c p. 4): "(5).CSEL to empty when the CKO and CKI RP
+        :CSEL connected with VSS when the CKO compared with CKI." (pin 6 CSEL, p. 2: "Invert the clock
+        signal cascade"). The garbled sentence appears to say CKO is in phase with CKI when CSEL is open and
+        inverted when tied to VSS; cpldcpu measured an inverted CKO on packaged LEDs.
+      - >-
+        Who makes the "APA102-2020": Adafruit's datasheet for it carries Shenzhen Normand's letterhead
+        (normand-apa102-2020). cpldcpu wrote (comment 983 on cpldcpu-sk9822, 2016-12-18): "The APA102-2C and
+        APA102-22C that APA is selling actually seem to be the SK9822 and SK6822." Whether a given
+        "APA102-2020" behaves like an APA102 or an SK9822 (see SK9822 latch) is not settled by any document.
+    open:
+      - No maker document gives the shift edge, the half-clock data delay or the n/2 end-frame rule; they rest on cpldcpu's and PJRC's measurements.
+      - 'No document states a minimum clock rate or any timeout (cpldcpu: "I have no recommendation for a maximum or minimum SPI clock speed").'
+      - No maker document gives a maximum clock for the 5050 APA102 other than APA Electronic's APA102C sheet (30 MHz).
+
+  # ------------------------------------------------------------------ APA102C
+  - part: APA102C
+    entry: pixels/apa102c
+    maker: APA Electronic Co., Ltd. (neon-world.com)
+    documents:
+      - id: apa-apa102c-2018
+        url: https://www.lcd-module.de/eng/pdf/zubehoer/APA102C.pdf
+        title: SUPER LED APA-102C-NEW-260 (APA Electronic co. LTD.), with "Three-way constant current 256-level lantern driver chip"
+        revision: REV.01
+        date: '2018-10-11'
+        language: en (labels also zh)
+        source_type: maker datasheet, hosted by distributor Electronic Assembly (lcd-module.de)
+        notes: >-
+          12 pages. p. 1 dated "2018/10/11"; p. 12 change history "11 OCT 18 / REV.01 / 1st released copy
+          mfg p/n : APA-102C-NEW-260". Pages 1-3 repeat the Shiji/iPixel text with APA branding (FOSC changed
+          to 5.1 MHz); pages 4-6 are a separate IC description with a protocol drawing and timing tables.
+      - id: shiji-apa102c
+        url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+        title: APA102C, RGB Full Color LED control IC (iPixel LED / Shiji Lighting)
+        revision: null
+        date: null
+        language: en
+        source_type: LED packager's datasheet (also the entry's datasheet.url); see APA102 above
+      - {
+          id: cpldcpu-apa102,
+          url: 'https://cpldcpu.com/2014/11/30/understanding-the-apa102-superled/',
+          source_type: independent,
+        }
+      - {
+          id: advatek-pages,
+          url: 'https://www.advateklighting.com/pixel-protocols/apa102',
+          source_type: controller maker,
+        }
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      min_hz: 0 # the recommended range is printed as "0-5" MHZ; no minimum or timeout is stated
+      recommended_hz: '0-5 MHz'
+      sample_edge: rising
+      shift_edge: null
+      regenerated: 'yes, as printed: "built-in regeneration", "Data signal phase-locked regeneration"'
+      printed: 'Limit parameter: Data clock frequency FCLK 30 MHZ; Recommended working parameters: Data clock frequency FCLK 0-5 MHZ'
+      doc: apa-apa102c-2018
+      page: 6
+      quote: >-
+        Limit parameter： / Data clock frequency / FCLK / 30 / MHZ … Recommended working parameters： / Data
+        clock frequency / FCLK / 0-5 / MHZ / Clock high width / TCLKH / >30 / ns / Clock low width / TCLKL / >30 /
+        ns / Time when data was created / TSETUP / >10 / ns / Data retention time / THOLD / >5 / ns
+      timing:
+        - doc: apa-apa102c-2018
+          page: 6
+          quote: 'Cascaded output signal maximum delay time / TPD / CL=30pF,RL=1K / <15 / ns // Cascaded output signal maximum delay time / TCO / CL=30pF,RL=1K / <15 / ns // Input signal maximum rise and fall times / TR / VCC=5V / <500 / ns // … / TF / VCC=5V / <400 / ns'
+        - doc: apa-apa102c-2018
+          page: 4
+          quote: 'Maximum serial input data clock PWM :20KHz,frequency 30MHZ (lighting application When the clock frequency is controlled below 2MHz)'
+        - doc: apa-apa102c-2018
+          page: 4
+          quote: 'The three-wire transmission scheme (DATA, CLOCK and GND) is used for built-in regeneration to increase the transmission distance. … Built-in ring vibration (5.1MHZ) supports … Data signal phase-locked regeneration, cascaded at 1MHZ data transmission speed Point source can reach 1000;'
+        - doc: apa-apa102c-2018
+          page: 5
+          what: sampling edge
+          quote: '1. The first 32 bits of "0" are the start frame, which is entered at the rising edge of Cin, and the timing DIN is preceded by CIN;'
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: '"flag" of three 1 bits, then D4..D0 brightness (D4 first)'
+      start: 32 bits of 0
+      end: 32 bits of 1 as drawn on p. 2 ("1*32"); the p. 5 protocol text does not mention an end frame
+      latch: 'not explained; p. 4 says "Adopt special global clock latching mode to make the picture more consistent;"'
+      bit_map: 'b31-b29 = 1 1 1 ("flag"); b28-b24 = D4 D3 D2 D1 D0; b23-b16 = B7..B0; b15-b8 = G7..G0; b7-b0 = R7..R0'
+      doc: apa-apa102c-2018
+      page: 5
+      quote: >-
+        (drawing) CIN / DIN: 32bit起始帧 [32-bit start frame] | 标志位 [flag bits] | D4 | D3 | D2 | D1 | D0 |
+        B7B6··B1B0 | G7G6··G1G0 | R7R6··R1R0 | 标志位 [flag bits] | B7' … / 第一点32bit灰度数据 [first pixel's 32-bit
+        grey data] / 第二点数据 [second pixel's data]. (text) "1. The first 32 bits of "0" are the start frame,
+        which is entered at the rising edge of Cin, and the timing DIN is preceded by CIN; 2. T flag is three
+        "1" 3. D D3, D2, D1 and D0 are 32-level brightness adjustment, D4 is the highest position; 4. G y level
+        data should be high first, and it is blue green and red."
+      other:
+        - doc: apa-apa102c-2018
+          page: 2
+          quote: '(transcribed from image) the Shiji drawing: SDI 0*32 | LED1 … LEDN | 1*32; Start Frame 32 Bits 00000000 x4; LED Frame 32 Bits 111 | Global | BLUE | GREEN | RED (3Bits 5Bits 8Bits 8Bits 8Bits); "LED Frame 32 Bits" 11111111 x4'
+    forwarding:
+      text: Not described beyond regeneration of data and clock.
+      doc: apa-apa102c-2018
+      page: 4
+      quote: 'The three-wire transmission scheme (DATA, CLOCK and GND) is used for built-in regeneration to increase the transmission distance.'
+    brightness:
+      printed: current ("constant current output value", "Driving Current"), as in the Shiji text
+      doc: apa-apa102c-2018
+      page: 3
+      quote: '(transcribed from image) "Global bit：5-bit（32 level）brightness setting，while controlling R, G, B three-color constant current output value，if set the Global bit for the 10000（16/31）is the output current is half again the original PWM settings."'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'APA102C uses the same protocol, but provides a larger metallic area for better heat dissipation.'
+        doc: advatek-pages
+        page: null
+        by: controller maker (Advatek)
+    disagreements:
+      - >-
+        Oscillator: this sheet's table gives FOSC typ "5.1" MHz (p. 2) and p. 4 says "Built-in ring
+        vibration (5.1MHZ)", where the Shiji sheet and Newstar's APA107 sheet give FOSC 800-1200 KHz in the
+        same table.
+      - >-
+        Clock limits in one document: absolute limit 30 MHz, recommended 0-5 MHz (p. 6), "lighting
+        application When the clock frequency is controlled below 2MHz" (p. 4), "cascaded at 1MHZ data
+        transmission speed Point source can reach 1000" (p. 4). TCLKH > 30 ns plus TCLKL > 30 ns means a
+        period over 60 ns, i.e. under 16.7 MHz, which does not reach 30 MHz.
+      - >-
+        "Adopt special global clock latching mode to make the picture more consistent;" (p. 4) suggests a
+        common latch, but the frame text has no latch step and cpldcpu measured APA102s updating each LED
+        right after its own frame. Whether this 2018 "APA-102C-NEW" part latches differently is unknown.
+      - >-
+        Rose Lighting's HD107S sheet (see HD107S) calls "APA102C (packaged in china ) (fake APA102)" and lists
+        APA102C at "20Mbps" in its comparison chart; APA Electronic's own APA102C sheet gives 30 MHz.
+    open:
+      - No measurement of the APA-102C-NEW-260's latch behaviour or clock limit found.
+
+  # ------------------------------------------------------------------ APA107
+  - part: APA107
+    entry: pixels/apa107
+    maker: Newstar LED Co., Limited
+    documents:
+      - id: newstar-apa107
+        url: https://web.archive.org/web/20220216185116id_/http://www.newstar-ledstrip.com/product/20180820112602493.pdf
+        original_url: http://www.newstar-ledstrip.com/product/20180820112602493.pdf
+        title: APA107 SPECIFICATION, The upgrade LED of APA102/APA102C (Document No. SPC/ APA107)
+        revision: '01'
+        date: null
+        language: en
+        source_type: maker datasheet (Wayback capture 2022-02-16)
+        notes: 9 pages; sample reel label "NST2018030302-11 2018-03-03" (p. 7). The text is the Shiji/APA APA102 text with "APA107" substituted; PDF title still "APA102 is a type ic …".
+      - id: newstar-apa107-page
+        url: http://newstar-ledstrip.com/productshow816.html
+        title: APA107 RGB Pixel LED Chip 5050 (Newstar product page)
+        source_type: maker web page, fetched 2026-11-20
+      - id: rose-hd107s
+        url: https://web.archive.org/web/20220216171018id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+        title: HD107S SPECIFICATION V1.0.1 (Rose Lighting), for its claims about APA107
+        source_type: reseller of the successor part (not APA107's maker)
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: null
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: 'no clock rating; only "FOSC Oscillator Frequency 800 1200 KHz"'
+      doc: newstar-apa107
+      page: 6
+      quote: '(drawing) "PWM input and output signals Relations" / DIN 7 6 5 4 3 2 1 0 (MSB … LSB) / CKI with an up-arrow on each rising edge'
+      timing:
+        - doc: newstar-apa107
+          page: 5
+          quote: 'FOSC / Oscillator Frequency / 800 / 1200 / KHz'
+        - doc: rose-hd107s
+          page: 7
+          quote: 'APA107 RGB pixel led chip with PWM refresh rate 9kHz and PWM frequency is 30MHZ.'
+          notes: Rose's claim (it uses "PWM frequency" for the clock); its p. 8 chart lists APA107 "30Mbps" and "9kHz".
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: 3 header bits "111", then a 5-bit Global brightness field
+      start: 32 bits of 0
+      end: 32 bits of 1 as printed (captioned "LED Frame 32 Bits")
+      latch: not stated
+      bit_map: 'b31-b29 = 1 1 1; b28-b24 = Global; b23-b16 = BLUE; b15-b8 = GREEN; b7-b0 = RED'
+      doc: newstar-apa107
+      page: 5
+      quote: '(cascading data structure drawing, identical to the Shiji sheet) "Tabdem N-LED" / SDI 0*32 | LED1 | LED2 | LED3 | LED4 | ---- | LEDN | 1*32 / Start Frame 32 Bits 00000000 x4 / LED Frame 32 Bits MSB LSB MSB LSB 111 | Global | BLUE | GREEN | RED (3Bits 5Bits 8Bits 8Bits 8Bits) / LED Frame 32 Bits 11111111 x4'
+    forwarding:
+      text: 'Not described beyond "2 signal output way, one is clock ,another is data".'
+      doc: newstar-apa107
+      page: 2
+      quote: 'APA with 2 signal output way , one is clock ,another is data, the clock and data is synchronizated ,so that the crystal cascade piece of output movement is sychronizated .'
+    brightness:
+      printed: current, in the copied APA text
+      doc: newstar-apa107
+      page: 6
+      quote: 'Global bit:5 bit (32 level) brightness setting,while controlling R,G,B three-color constant current output value,if set the global bit for the 10000( 16/31 ) is the output current is half again the original PWM settings'
+    backup_line: null
+    compatibility_claims:
+      - claim: The upgrade LED of APA102/APA102C
+        doc: newstar-apa107
+        page: 1
+      - claim: The APA107 upgrade type NS107S is coming, the PWM can be 26-28kHz, faster and cheaper than APA102.
+        doc: newstar-apa107-page
+        page: null
+    disagreements:
+      - >-
+        The entry's bitrate (30MHz) is not in Newstar's sheet, which prints no clock rating at all. The only
+        30 MHz figure found is Rose Lighting's (a reseller of the successor), and Rose calls it "PWM frequency".
+      - >-
+        PWM: the sheet gives only FOSC 800-1200 KHz; Rose claims "9kHz" (HD107S sheet p. 3 and p. 7);
+        the entry's 9kHz now has that (non-maker) source.
+    open:
+      - Maximum clock and latch behaviour of the APA107 are not documented by Newstar and no measurement was found.
+
+  # ------------------------------------------------------------------ SK9822
+  - part: SK9822
+    entry: pixels/sk9822
+    maker: Dongguan Opsco Optoelectronics Co., Ltd
+    documents:
+      - id: opsco-sk9822-r01
+        url: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf
+        title: SK9822 SPECIFICATION, Integrated light source intelligent control (Double line transmission) of chip-on-top SMD type LED (Document No. SPC/ SK9822)
+        revision: '01'
+        date: '2016-03-18'
+        language: en
+        source_type: maker datasheet, hosted by Pololu (the entry's datasheet.url)
+      - id: ledyi-sk9822
+        url: https://www.ledyilighting.com/wp-content/uploads/2022/02/SK9822-RGB-LED-specification.pdf
+        title: SK9822-RGB-LED specification (LEDYi Lighting)
+        revision: '02'
+        date: '2018-07-09'
+        language: en
+        source_type: reseller re-issue ("Modify Records / SK9822 RGB / 02 / Initial Document / Andy Zhu / 2018-07-09", p. 12)
+        notes: Same text, tables and figures as opsco-sk9822-r01 (30MHZ, FPWM 1.2 KHZ). Same layout and revision record as LED Color's LC8823 sheet (see LC8823).
+      - {
+          id: cpldcpu-sk9822,
+          url: 'https://cpldcpu.com/2016/12/13/sk9822-a-clone-of-the-apa102/',
+          source_type: independent,
+        }
+      - {
+          id: cpldcpu-apa102,
+          url: 'https://cpldcpu.com/2014/11/30/understanding-the-apa102-superled/',
+          source_type: independent,
+        }
+      - {
+          id: advatek-pages,
+          url: 'https://www.advateklighting.com/pixel-protocols/sk9822',
+          source_type: controller maker,
+        }
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: The maximum frequency of 30MHZ serial data input
+      doc: opsco-sk9822-r01
+      page: 2
+      quote: '●The maximum frequency of 30MHZ serial data input'
+      timing:
+        - doc: opsco-sk9822-r01
+          page: 4
+          quote: 'The clock high level width / TCLKH / --- / --- / >30 / ns // The clock low level width / TCLKL / --- / --- / >30 / ns // Data set up time / TSETUP / --- / --- / >10 / ns // The frequency of PWM / FPWM / --- / 1.2 / --- / KHZ (">30" and ">10" printed in the Max column)'
+        - doc: opsco-sk9822-r01
+          page: 5
+          what: sampling edge
+          quote: '(drawing) "(3) PWM input / output signal relationship:" / SDI 7 6 5 4 3 2 1 0 (MSB … LSB) / CKI with an up-arrow on each rising edge'
+      independent:
+        - doc: cpldcpu-sk9822
+          quote: 'As shown above, the data format itself seems to be identical, and data forwarding from one LED to the next seems to work in the same way as with the APA102.'
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: 3 header bits "111", then a 5-bit Global brightness field
+      start: 32 bits of 0
+      end: 32 bits of 1 as printed
+      latch: >-
+        Not in the datasheet. Measured: the SK9822 shows a frame only at the first clock after the next
+        32-zero start frame, so an extra 32-bit zero "reset frame" is needed after the data (cpldcpu-sk9822).
+      bit_map: 'b31-b29 = 1 1 1; b28-b24 = Global; b23-b16 = BLUE; b15-b8 = GREEN; b7-b0 = RED'
+      doc: opsco-sk9822-r01
+      page: 4
+      quote: '(drawing) "(1) Series data structure" / SDI 0*32 | LED1 | LED2 | LED3 | LED4 | ---- | LED N | 1*32 (Start Frame, LED Frame, Data Field, End Frame) / Start Frame 32 Bits 0000 0000 x4 / LED Frame 32 Bits 111 | Global | BLUE | GREEN | RED (3 Bits, 5 Bits, 8 Bits x3) / End Frame 32 Bits 1111 1111 x4'
+      other:
+        - doc: opsco-sk9822-r01
+          page: 6
+          what: frame overhead
+          quote: '(5) Refresh Rate： / Frame rate (=1/ (64+ (32* points)) *CKI (cycle) unit: frames per second ) / Such as: 1024 points, CKI frequency is 1MHZ, is =30 frames per second frame rate.'
+        - doc: cpldcpu-sk9822
+          what: latch
+          quote: >-
+            However, every colour combination written to the SK9822, only was shown during the next update
+            cycle. Some more probing isolated the issue: The SK9822 updates the PWM registers in the first cycle
+            after the next start frame (0x00000000), while the APA102 updates the PWM register immediately after
+            receiving the data. Since the next start frame is sent at the beginning of the next update, this
+            means that the color update is delayed.
+        - doc: cpldcpu-sk9822
+          what: a stream both parts accept
+          quote: >-
+            The only way to get the SK9822 to work properly is to send an additional "reset frame" of 32 zero
+            bits at the end of the bitstream to trigger the PWM register update. … A protocol that is compatible
+            to both the SK9822 and the APA102 consists of the following: A start frame of 32 zero bits (<0x00>
+            <0x00> <0x00> <0x00> ) / A 32 bit LED frame for each LED in the string (<0xE0+brightness> <blue>
+            <green> <red>) / A SK9822 reset frame of 32 zero bits (<0x00> <0x00> <0x00> <0x00> ). / An end frame
+            consisting of at least (n/2) bits of 0, where n is the number of LEDs in the string.
+        - doc: cpldcpu-sk9822
+          what: summary table
+          quote: 'APA102 | SK9822 / Update: Staggered | Simultaneous / Update trigger: RGB data transmission | Reset frame (0x00000000) / PWM Frequency: ~19 kHz | ~4.7 kHz / Global brightness control: PWM at ~440 Hz | Programmable current source / Chip size: ~1 mm² | ~0.65 mm²'
+    forwarding:
+      text: Same as APA102 as far as measured.
+      doc: cpldcpu-sk9822
+      page: null
+      quote: 'data forwarding from one LED to the next seems to work in the same way as with the APA102.'
+    brightness:
+      printed: current ("simultaneous control of OUTR\OUTG\OUTB three port current")
+      measured: current (cpldcpu-sk9822)
+      doc: opsco-sk9822-r01
+      page: 5
+      quote: '(4) 5-Bit (level 32) brightness adjustment (simultaneous control of OUTR\OUTG\OUTB three port current):'
+      independent_quote: '(cpldcpu-sk9822) "It appears that the SK9822 uses a controlled current source to set the global brightness. … The global brightness setting does indeed control the driver current setting."'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - >-
+        The datasheet gives the same frame as the APA102 and says nothing about when data is shown;
+        cpldcpu measured that it is shown only after the next start frame (a different latch rule from
+        the APA102, with an identical bit format).
+      - 'PWM: FPWM 1.2 KHZ (p. 4) vs 4.7 kHz measured (cpldcpu-sk9822); Advatek lists "PWM Rate 4600Hz".'
+      - >-
+        Clock: 30 MHz (p. 2) vs TCLKH > 30 ns and TCLKL > 30 ns (p. 4), which allow at most 16.7 MHz at
+        50 % duty. Rose Lighting (reseller) lists "SK9822 … PWM frequency 2MHZ" and "2Mbps" (HD107S sheet
+        pp. 7-8).
+      - 'A commenter on cpldcpu-sk9822 (Sasha, 2019-09-09, comment 10400): "it looks like sending a zero frame does not cut through the shift register chain delay" — i.e. the reset frame itself must be clocked through the string.'
+    open:
+      - No newer Opsco revision of the SK9822 sheet was found (normandled.com has none in search results).
+
+  # ------------------------------------------------------------------ SK9822-A
+  - part: SK9822-A
+    entry: pixels/sk9822-a
+    maker: Opsco (the sheet is also issued on Shenzhen Normand Electronic letterhead)
+    documents:
+      - id: normand-sk9822a
+        url: https://www.normandled.com/upload/202005/SK9822-A%20LED%20Datasheet.pdf
+        title: SK9822-A, 5.4x5.0x1.6mm Top SMD Type 0.25Watt Power Double line transmission tegrated light source Intelligent control LED (Document No. SPC / SK9822-A)
+        revision: '01'
+        date: '2019-12-26'
+        language: en (one zh cell)
+        source_type: maker datasheet (Normand letterhead; the entry's datasheet.url)
+        notes: 'Change history p. 1: "2019-12-26 / 01 / 首次发行 [first release] / KEVIN ZHU".'
+      - id: rose-sk9822a
+        url: https://web.archive.org/web/20240527134816id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2020/05/SK9822-A-REV.01-EN-5050-RGB-27K-HZ-PWM-30M-bps-speed.pdf
+        title: same document, OPSCO wording ("making OPSCO's customers and users …")
+        revision: '01'
+        date: '2019-12-26'
+        language: en
+        source_type: maker datasheet hosted by Rose Lighting (Wayback); text identical to normand-sk9822a except the company name
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: The maximum frequency of 30MHZ serial data input
+      doc: normand-sk9822a
+      page: 3
+      quote: '●The maximum frequency of 30MHZ serial data input'
+      timing:
+        - doc: normand-sk9822a
+          page: 5
+          quote: 'The clock high level width / TCLKH / --- / 17 / --- / ns // The clock low level width / TCLKL / --- / 17 / --- / ns // Data set up time / TSETUP / --- / --- / 10 / ns // The frequency of PWM / FPWM / --- / 27 / --- / KHZ'
+        - doc: normand-sk9822a
+          page: 7
+          what: sampling edge
+          quote: '(drawing) "(3) PWM input / output signal relationship:" / SDI 7 … 0 (MSB … LSB) / CKI with an up-arrow on each rising edge'
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: G R B
+      pixel_bits: 32
+      extra: 3 header bits "111", then 5 bits 亮度调整 [brightness adjustment]
+      start: 32 bits of 0
+      end: 32 bits of 1 as printed
+      latch: not stated
+      bit_map: 'b31-b29 = 1 1 1; b28-b24 = brightness; b23-b16 = Green; b15-b8 = Red; b7-b0 = Blue'
+      doc: normand-sk9822a
+      page: 6
+      quote: >-
+        (drawing) "11. Feature Descriptions: (1) Series data structure" / SDI 0*32 | LED1 | LED2 | LED3 | LED4 |
+        ---- | LED N | 1*32 (labels 起始帧 [start frame], 数据帧 [data frame], 数据区域 [data field], 结束帧 [end
+        frame]) / 开始帧32 Bits [start frame 32 bits] 0000 0000 x4 / 数据帧32 Bits [data frame 32 bits] 111 |
+        亮度调整 [brightness adjustment] | Green | Red | Blue / 结束帧32 Bits [end frame 32 bits] 1111 1111 x4.
+        (text) "Product structure: GRB order output light, optimize the product blending effect (adjusted IC
+        default RGB order wafer position)"
+      other:
+        - doc: rose-sk9822a
+          page: 6
+          quote: same drawing and sentence (Green | Red | Blue)
+        - doc: normand-sk9822a
+          page: 7
+          what: frame overhead
+          quote: 'Frame rate (=1/ (64+ (32* points)) *CKI (cycle) unit: frames per second ) / Such as: 1024 points, CKI frequency is 1MHZ, is =30 frames per second frame rate.'
+    forwarding:
+      text: Not described beyond "Data and synchronization of the CLK signal".
+      doc: normand-sk9822a
+      page: 3
+      quote: 'use the double output, Data and synchronization of the CLK signal, connected in series each wafer output action synchronization.'
+    brightness:
+      printed: current
+      doc: normand-sk9822a
+      page: 7
+      quote: '(4) 5-Bit (level 32) brightness adjustment (simultaneous control of OUTR\OUTG\OUTB three port current):'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - >-
+        Channel order: the SK9822-A frame is drawn Green | Red | Blue, while the SK9822 (same maker, same
+        frame otherwise) is BLUE | GREEN | RED. Same frame shape; a transmitter needs a different colour order.
+      - 'TCLKH/TCLKL typ 17 ns (p. 5) fit its 30 MHz rating, unlike the SK9822 sheet''s > 30 ns; the set-up time "10" sits in the Max column although a set-up time is a minimum.'
+    open:
+      - No measurement of the SK9822-A's latch rule (SK9822-like or APA102-like) was found.
+
+  # ------------------------------------------------------------------ HD107S
+  - part: HD107S
+    entry: pixels/hd107s
+    maker: Rose Lighting's sheet; the IC is Newstar's NS107S (see NS107S)
+    documents:
+      - id: rose-hd107s
+        url: https://web.archive.org/web/20220216171018id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+        original_url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+        title: HD107S SPECIFICATION, The upgrade LED of APA102 RGB, Model HD107S 5050-RGB, 40MHz Clock Drive Frequency
+        revision: V1.0.1
+        date: '2019-03-18'
+        language: en
+        source_type: LED maker/vendor datasheet (Rose Lighting), Wayback capture; the entry's datasheet.url
+        notes: 'Version table p. 2: "V1.0 January 3, 2019 Create the document" / "V1.0.1 March 18, 2019 Insert the block diagram; Add the part of "The difference of all kinds of digital LED"".'
+      - id: newstar-ns107s
+        url: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+        title: NS107S SPECIFICATION, The upgrade LED of RGB APA107 (see NS107S)
+        revision: '01'
+        date: null
+        language: en
+        source_type: IC maker datasheet
+      - {
+          id: advatek-pages,
+          url: 'https://www.advateklighting.com/pixel-protocols/hd107s',
+          source_type: controller maker,
+        }
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 40000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: 'as printed: "signal reshaping amplification drive circuit"'
+      printed: 'MAX Transfer Speed Fts_max 40 MHz; "an arbitrary clock rate under 40MHz"'
+      doc: rose-hd107s
+      page: 6
+      quote: >-
+        HD107S is a full color digital control LED, and it uses a standard two wire SPI protocol, one clock
+        line and one data line. Each LED has two inputs and two outputs which can be daisy chained, so it has a
+        great advantage of being supported by standard micro-controller periphery and it is insensitive to
+        timing variations, and the data can be transferred reliably at an arbitrary clock rate under 40MHz.
+        … NOTE: The maximum clock rate is mainly limited by the parasitics of the wiring, so take care of the
+        layout of components and wiring.
+      timing:
+        - doc: rose-hd107s
+          page: 5
+          quote: 'The clock high level width / TCLKH / --- / --- / >30 / ns // The clock low level width / TCLKL / --- / --- / >30 / ns // Data set up time / Tsetup / --- / --- / >10 / ns // The frequency of PWM / Fpwm / --- / + 26 / --- / KHz // … MAX Transfer Speed / Fts_max / --- / 40 / --- / MHz'
+        - doc: rose-hd107s
+          page: 3
+          quote: 'It can operates at a oscillator frequency of 40MHz thus allowing a super fast data transmission rate and fastest PWM refresh rate over 26kHz … Oscillator frequency / clock drive frequency / CKI: 40MHz … Also date transmission speed: 40Mbps'
+        - doc: rose-hd107s
+          page: 7
+          what: sampling edge
+          quote: 'The data line is valid only during the rise edge of the clock signal. / (drawing) DIN 7 … 0 (MSB … LSB) / CKI with an up-arrow on each rising edge'
+        - doc: rose-hd107s
+          page: 3
+          what: regeneration
+          quote: 'HD107S internally include intelligent digital port data latch, signal reshaping amplification drive circuit and a programmable constant current driver for RGB leds'
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: 3 header bits "111", then a 5-bit Global brightness field
+      start: 32 bits of 0 ("A minimum of 32 zeroes … increasing the number of zeroes does not affect")
+      end: 32 bits of 1 as printed
+      latch: 'as printed (copied from cpldcpu''s APA102 finding): "The LED output color is updated immediately after the first valid LED frame"'
+      bit_map: 'b31-b29 = 1 1 1; b28-b24 = Global; b23-b16 = BLUE; b15-b8 = GREEN; b7-b0 = RED'
+      doc: rose-hd107s
+      page: 6
+      quote: >-
+        (drawing) SDI Signal: 32 bits of zero | LED1 | LED2 | LED3 | ……. | LEDn | 32 bits of one / Start Frame -
+        32 Bits 0000 0000 x4 / LED Frame - 32 Bits 111 | Global | BLUE | GREEN | RED (3 bits, 5 bits, 8 bits x3)
+        / End Frame - 32 Bits 1111 1111 x4. (text) "Each update of data format consists of a start frame of 32
+        zeroes, 32 bits for every LED frame and an end frame of 32 ones.A minimum of 32 zeroes are required for
+        it to initiate a new data update, and increasing the number of zeroes does not affect. The LED frame
+        consists of global bit and RGB bit, and it is identified by the first one bit following the start
+        frame.The LED output color is updated immediately after the first valid LED frame, and the most
+        significant bit of the LED frame has to be "1", as it is used to identify the start of the frame. And
+        the next two bits serve no function but recommend to set them to "1"."
+      other:
+        - doc: rose-hd107s
+          page: 7
+          what: channel order check
+          quote: 'RGB bit: 8 bit (256 level) gray scale setting, while controlling R,G,B color depth, and it generates 16777216 colors, if set the RGB bit for the "00000000 00000000 11111111" is the output of full RED.'
+        - doc: rose-hd107s
+          page: 7
+          what: frame overhead
+          quote: 'Frame rate = 1 / [ ( 64 + (32 x points) ) x T-CKI ] ; … Number of LED points = (F-CKI / Frame rate - 64 ) / 32;'
+    forwarding:
+      text: as printed (wording copied from cpldcpu's APA102 analysis)
+      doc: rose-hd107s
+      page: 7
+      quote: >-
+        The HD107S receives a valid SPI signal and outputs a valid SPI signal to the next devices. Once a device
+        detects a start frame (more than 31 zero bits), it will interpret the next "1" bit as start of its LED
+        frame. 32 bits are clocked into the shift registers, while zeroes are pushed to the output. After the
+        entire LED frame has been read, any subsequent data is simply forwarded until another start frame is
+        detected. The data line is valid only during the rise edge of the clock signal.
+    brightness:
+      printed: current, in the copied APA text
+      doc: rose-hd107s
+      page: 6
+      quote: 'Global bit: 5 bit (32 level) brightness setting, while controlling R,G,B three-color constant current output value, if set the global bit for the 10000( 16/31 ) is the output current is half again the original PWM settings.'
+    backup_line: null
+    compatibility_claims:
+      - claim: The upgrade LED of APA102 RGB
+        doc: rose-hd107s
+        page: 1
+      - claim: Also, HD107S is a more advanced version of digital RGB LED of APA102, so it is fully compatible with APA102.
+        doc: rose-hd107s
+        page: 3
+      - claim: HD107S is very similar to the APA range and boasts everything APA102C brings, with a higher PWM rate and brighter LEDs.
+        doc: advatek-pages
+        page: null
+        by: controller maker (Advatek)
+    disagreements:
+      - 'Maximum clock: 40 MHz (Rose HD107S V1.0.1, pp. 1, 3, 5, 6) vs 30 MHz in Newstar''s NS107S sheet for the same IC ("Oscillator Frequency: 30MHz" p. 1, "MAX Transfer Speed … 30 MHZ" p. 5) and ">30MHz" on Newstar''s NS107S page.'
+      - 'TCLKH > 30 ns and TCLKL > 30 ns (p. 5) allow at most 16.7 MHz at 50 % duty, not 40 MHz.'
+      - >-
+        Pages 6-7 reproduce cpldcpu's APA102 findings nearly word for word (start-frame minimum, "updated
+        immediately", "next two bits serve no function", forwarding text), so they are not independent
+        evidence of how the HD107S behaves.
+      - >-
+        Rose's "difference" list and chart (pp. 7-8) contradict the other makers' sheets: "APA102 original …
+        PWM frequency is 20MHZ", "SK9822 … PWM frequency 2MHZ" (Opsco: 30MHZ), "APA107 … 30MHZ" (Newstar:
+        none printed); the sheet uses "PWM frequency" for the clock rate.
+      - 'p. 3: "256 Gray scale (8bits), (16bits optional ,which will be on marker in September 2019)" — the 16-bit part became the HD108 with a different frame.'
+    open:
+      - No measurement of the HD107S's latch rule or clock limit was found; the sheet's behaviour text is copied.
+
+  # ------------------------------------------------------------------ GE8822
+  - part: GE8822
+    entry: pixels/ge8822
+    maker: Greeled
+    documents:
+      - id: greeled-ge8822
+        url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf
+        title: GE8822 LED SERIES SPECIFICIFATION, Integrated light source intelligent control SMD LED (Double line transmission)
+        revision: null
+        date: null
+        language: en
+        source_type: maker datasheet (the entry's datasheet.url); PDF created 2018-07-20
+        notes: Text, tables and figures are Opsco's SK9822 Rev 01 sheet with the name changed (30MHZ, TCLKH/TCLKL > 30 ns, TSETUP > 10 ns, FPWM 1.2 KHZ, same frame drawing).
+      - id: greeled-ge8822-page
+        url: https://www.gree-leds.com/ic-built-in-led/ge8822-chip-built-in-led.html
+        title: GE8822 Chip Built-in LED (Greeled product page)
+        source_type: maker web page, fetched 2026-11-20
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: The maximum frequency of 30MHZ serial data input
+      doc: greeled-ge8822
+      page: 2
+      quote: '●The maximum frequency of 30MHZ serial data input'
+      timing:
+        - doc: greeled-ge8822
+          page: 4
+          quote: 'The clock high level width / TCLKH / --- / --- / >30 / ns // The clock low level width / TCLKL / --- / --- / >30 / ns // Data set up time / TSETUP / --- / --- / >10 / ns // The frequency of PWM / FPWM / --- / 1.2 / --- / KHZ'
+        - doc: greeled-ge8822
+          page: 5
+          what: sampling edge
+          quote: '(drawing) "(3) PWM input / output signal relationship:" / SDI 7 … 0 (MSB … LSB) / CKI with an up-arrow on each rising edge'
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: 3 header bits "111", then a 5-bit Global brightness field
+      start: 32 bits of 0
+      end: 32 bits of 1 as printed
+      latch: not stated
+      bit_map: 'b31-b29 = 1 1 1; b28-b24 = Global; b23-b16 = BLUE; b15-b8 = GREEN; b7-b0 = RED'
+      doc: greeled-ge8822
+      page: 5
+      quote: '(drawing, the Opsco SK9822 figure) SDI 0*32 | LED1 | LED2 | LED3 | LED4 | ---- | LED N | 1*32 / Start Frame 32 Bits 0000 0000 x4 / LED Frame 32 Bits 111 | Global | BLUE | GREEN | RED (3 Bits, 5 Bits, 8 Bits x3) / End Frame 32 Bits 1111 1111 x4'
+      other:
+        - doc: greeled-ge8822
+          page: 6
+          what: frame overhead
+          quote: 'Frame rate (=1/ (64+ (32* points)) *CKI (cycle) unit: frames per second ) / Such as: 1024 points, CKI frequency is 1MHZ, is =30 frames per second frame rate.'
+    forwarding:
+      text: Not described beyond "Data and synchronization of the CLK signal".
+      doc: greeled-ge8822
+      page: 2
+      quote: 'use the double output, Data and synchronization of the CLK signal, connected in series each wafer output action synchronization.'
+    brightness:
+      printed: current
+      doc: greeled-ge8822
+      page: 6
+      quote: '(4) 5-Bit (level 32) brightness adjustment (simultaneous control of OUTR\OUTG\OUTB three port current):'
+    backup_line: null
+    compatibility_claims:
+      - claim: 'Remark: GE8822 IC Protocol is compatible with SK9822 /APA102'
+        doc: greeled-ge8822-page
+        page: null
+    disagreements:
+      - 'The product page says "The refresh frequeceny is faster than SK9822." while the datasheet''s PWM (1.2 KHZ) is the same figure as Opsco''s SK9822 sheet.'
+      - 'TCLKH/TCLKL > 30 ns vs the 30 MHz rating, as in the SK9822 sheet.'
+    open:
+      - Whether the GE8822 latches like the APA102 (immediately) or like the SK9822 (next start frame) is not documented; Greeled's claim of SK9822 and APA102 compatibility does not say.
+
+  # ------------------------------------------------------------------ LC8823
+  - part: LC8823
+    entry: pixels/lc8823
+    maker: Shenzhen LED Color Opto Electronic Co., Ltd
+    documents:
+      - id: ledcolor-lc8823
+        url: http://addressable-led.com/UploadFile/upi/file/20190724/LC8823-LED.pdf
+        title: LC8823 LED SERIES, Integrated light source intelligent control (Double line transmission) of chip-on-top SMD type LED (Document No. SPC/LC8823LED)
+        revision: '02'
+        date: '2018-07-09'
+        language: en
+        source_type: maker datasheet (the entry's datasheet.url)
+        notes: '"Modify Records / LC8823 RGB / 02 / Initial Document / Andy Zhu / 2018-07-09" (p. 12): the same record, layout and PDF creation time (2016-04-22 15:19:58, doPDF 7.3) as LEDYi''s "SK9822 RGB" sheet; the text is Opsco''s SK9822 text with two values changed (see disagreements).'
+      - id: ledcolor-lc8823-page
+        url: https://www.addressable-led.com/Products/Fast-LED-Chip-LC8823.html
+        title: LC8823 Fast LED Chip (LED Color product page)
+        source_type: maker web page, fetched 2026-11-20
+      - {
+          id: ledyi-sk9822,
+          url: 'https://www.ledyilighting.com/wp-content/uploads/2022/02/SK9822-RGB-LED-specification.pdf',
+          source_type: reseller (comparison),
+        }
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: null
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: 'no MHz rating; the description line reads "The maximum frequency of 27KHZ serial data input"'
+      doc: ledcolor-lc8823
+      page: 2
+      quote: The maximum frequency of 27KHZ serial data input
+      timing:
+        - doc: ledcolor-lc8823
+          page: 4
+          quote: 'The biggest LED output current / Imax / 17 (Typical) / mA // The clock high level width / TCLKH / --- / --- / >30 / ns // The clock low level width / TCLKL / --- / --- / >30 / ns // Data set up time / TSETUP / --- / --- / >10 / ns // The frequency of PWM / FPWM / --- / 2.7 / --- / KHZ'
+        - doc: ledcolor-lc8823
+          page: 5
+          what: sampling edge
+          quote: '(drawing) "(3) PWM input / output signal relationship:" / SDI 7 … 0 (MSB … LSB) / CKI with an up-arrow on each rising edge'
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: 3 header bits "111", then a 5-bit Global brightness field
+      start: 32 bits of 0
+      end: 32 bits of 1 as printed
+      latch: not stated
+      bit_map: 'b31-b29 = 1 1 1; b28-b24 = Global; b23-b16 = BLUE; b15-b8 = GREEN; b7-b0 = RED'
+      doc: ledcolor-lc8823
+      page: 4
+      quote: '(drawing, the Opsco SK9822 figure) "9. Feature Descriptions: (1) Series data structure" / SDI 0*32 | LED1 | LED2 | LED3 | LED4 | ---- | LED N | 1*32 / Start Frame 32 Bits 0000 0000 x4 / LED Frame 32 Bits 111 | Global | BLUE | GREEN | RED (3 Bits, 5 Bits, 8 Bits x3) / End Frame 32 Bits 1111 1111 x4'
+      other:
+        - doc: ledcolor-lc8823
+          page: 6
+          what: frame overhead
+          quote: 'Frame rate (=1/ (64+ (32* points)) *CKI (cycle) unit: frames per second ) / Such as: 1024 points, CKI frequency is 1MHZ, is =30 frames per second frame rate.'
+    forwarding:
+      text: Not described beyond "Data and synchronization of the CLK signal".
+      doc: ledcolor-lc8823
+      page: 2
+      quote: 'use the double output, Data and synchronization of the CLK signal, connected in series each wafer output action synchronization.'
+    brightness:
+      printed: current
+      doc: ledcolor-lc8823
+      page: 5
+      quote: '(4) 5-Bit (level 32) brightness adjustment (simultaneous control of OUTR\OUTG\OUTB three port current):'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - >-
+        "The maximum frequency of 27KHZ serial data input" (p. 2) replaces Opsco's "30MHZ" in the same line;
+        27 kHz is a PWM figure, not a clock rate, and no MHz rating appears anywhere in the sheet.
+      - >-
+        PWM: the table says FPWM "2.7" KHZ (p. 4); the product page says "Feature:27KHz PWM Frequency" and
+        "the PWM frequency can be as high as 27kHz". The entry (27kHz) follows the page.
+    open:
+      - Maximum clock of the LC8823 is not documented.
+      - Latch rule not documented or measured.
+
+  # ------------------------------------------------------------------ LC8823-2020
+  - part: LC8823-2020
+    entry: pixels/lc2823-2020
+    maker: Shenzhen LED Color Opto Electronic Co., Ltd
+    documents:
+      - id: ledcolor-lc8823-2020
+        url: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+        title: LC8823-2020 (Outline 2.0*2.0*0.75mm)
+        revision: null
+        date: null
+        language: en
+        source_type: maker datasheet (the entry's datasheet.url)
+        notes: '13 pages; PDF created 2018-10-18, modified 2019-10-30, author "Robert.lo（羅俊仁）" — the same author and table-of-contents layout as the Normand-lettered "APA 102-2020-256-8A" sheet (see APA102).'
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 20000000
+      min_hz: 0 # printed in the Min. column; no timeout is stated
+      typical_hz: 15000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: 'Maximum Rating: Rate of data signal FCLK 20 MHZ; Electrical Characteristics: Rate of data signal FCLK Min. 0, Typ. 15 MHZ'
+      doc: ledcolor-lc8823-2020
+      page: 2
+      quote: 'Rate of data signal / FCLK / 20 / MHZ'
+      timing:
+        - doc: ledcolor-lc8823-2020
+          page: 3
+          quote: 'Rate of data signal / FCLK / 0 / 15 / - / MHZ // The clock high level widch / TCLKH / 30 / - / - / ns // The clock low level widch / TCLKL / 30 / - / - / ns // Data set up time / TSETUP / 10 / - / - / ns // Data hold time / THOLD / 5 / - / - / ns'
+        - doc: ledcolor-lc8823-2020
+          page: 5
+          quote: 'Signal delay time / Tpd / CL=30pF,RL=1KΩ / - / - / 12 / ns // Tco / - / - / 12 / ns'
+        - doc: ledcolor-lc8823-2020
+          page: 1
+          quote: 'The maximum frequency of 27KHZ serial data input'
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: 'a "Marker position" field ("It is marked as "1""; its width is not printed), then D4..D0 brightness, D4 first'
+      start: 32 bits of 0
+      end: 32 bits of 1 as drawn
+      latch: not stated
+      bit_map: 'marker (width not printed; 3 bits if the 32-bit total holds) = 1; then D4 D3 D2 D1 D0; B7..B0; G7..G0; R7..R0'
+      doc: ledcolor-lc8823-2020
+      page: 5
+      quote: >-
+        (drawing) CIN / DIN: 32 bit start frame | Marker position | D4 | D3 | D2 | D1 | D0 | B7B6..B1B0 |
+        G7G6..G1G0 | R7R6..R1R0 | Marker positio[n] | D4 / First 32 bit grayscale data / Second point data /
+        SDI: 32bits "0" | LED 1 | LED 2 | LED 3 | LED 4 | --------- | LED N | 32bits "1" (start frame, led frame,
+        End frame, Data). (text) "1. The first 32 bit "0" is the starting frame, and the CIN is on the rise
+        time, and the timing DIN is preceded by CIN 2. It is marked as "1" 3. D4 D3 D2 D1 and D0 are 32 level
+        brightness adjustment, D4 is the highest 4. The gray level data to high, the sequence is B/G/R"
+    forwarding:
+      text: not described
+      doc: ledcolor-lc8823-2020
+      page: 1
+      quote: 'Serial data transmission signal by（DATA CLK）two line'
+    brightness:
+      printed: 32-level brightness adjustment (method not stated)
+      doc: ledcolor-lc8823-2020
+      page: 5
+      quote: 'D4 D3 D2 D1 and D0 are 32 level brightness adjustment, D4 is the highest'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - 'Clock: "The maximum frequency of 27KHZ serial data input" (cover, p. 1) vs "Rate of data signal FCLK 20 MHZ" (p. 2) vs typ 15 MHz (p. 3).'
+      - 'TCLKH ≥ 30 ns plus TCLKL ≥ 30 ns (p. 3) means a period of at least 60 ns (16.7 MHz), below the 20 MHz rating.'
+      - 'No PWM frequency is printed; the entry''s 27kHz has no support in this sheet (the cover''s "27KHZ" is labelled serial data input).'
+      - "The protocol section is an English rendering of APA Electronic's APA102C protocol drawing and text (same figure, Chinese labels translated), not of the Opsco text used by the 5050 LC8823 sheet."
+    open:
+      - Latch rule not documented or measured.
+
+  # ------------------------------------------------------------------ NS107S
+  - part: NS107S
+    entry: pixel-ics/ns107s
+    maker: Newstar LED Co., Limited
+    documents:
+      - id: newstar-ns107s
+        url: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+        original_url: http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+        title: NS107S SPECIFICATION, The upgrade LED of RGB APA107 (Document No. SPC/ NS107S)
+        revision: '01'
+        date: null
+        language: en
+        source_type: maker datasheet (Wayback capture 2022-02-16; the entry's datasheet.url)
+        notes: 9 pages. Pages 2-4 and 6 are the APA107 sheet's text; page 5 has Opsco's SK9822 tables and frame drawing with "+26" KHZ and a "MAX Transfer Speed" row added.
+      - id: newstar-ns107s-page
+        url: https://web.archive.org/web/20241203115137id_/http://newstar-ledstrip.com/productshow818.html
+        title: NS107S RGB Pixel LED Chip 5050 (Newstar product page, Wayback 2024-12-03)
+        source_type: maker web page (the live page returned HTTP 500 on 2026-11-20)
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: 'cover: "Oscillator Frequency: 30MHz"; table: "MAX Transfer Speed OF --- 30 --- MHZ"'
+      doc: newstar-ns107s
+      page: 5
+      quote: 'The clock high level width / TCLKH / --- / --- / >30 / ns // The clock low level width / TCLKL / --- / --- / >30 / ns // Data set up time / TSETUP / --- / --- / >10 / ns // The frequency of PWM / FPWM / --- / +26 / --- / KHZ // … MAX Transfer Speed / OF / --- / 30 / --- / MHZ'
+      timing:
+        - doc: newstar-ns107s
+          page: 1
+          quote: 'PWM refresh rate: +26kHz / Oscillator Frequency: 30MHz'
+        - doc: newstar-ns107s-page
+          quote: 'NS107S is the upgrade type of APA107, PWM refresh rate >26kHz, Oscillator Frequency is >30MHz.'
+        - doc: newstar-ns107s
+          page: 6
+          what: sampling edge
+          quote: '(drawing) "PWM input and output signals Relations" / DIN 7 … 0 (MSB … LSB) / CKI with an up-arrow on each rising edge'
+    frame:
+      bits_per_channel: 8
+      channels: 3
+      wire_order: B G R
+      pixel_bits: 32
+      extra: 3 header bits "111", then a 5-bit Global brightness field
+      start: 32 bits of 0
+      end: 32 bits of 1 as printed
+      latch: not stated
+      bit_map: 'b31-b29 = 1 1 1; b28-b24 = Global; b23-b16 = BLUE; b15-b8 = GREEN; b7-b0 = RED'
+      doc: newstar-ns107s
+      page: 5
+      quote: '(drawing, the Opsco SK9822 figure) "9. Feature Descriptions: (1) Series data structure" / SDI 0*32 | LED1 | LED2 | LED3 | LED4 | ---- | LED N | 1*32 / Start Frame 32 Bits 0000 0000 x4 / LED Frame 32 Bits 111 | Global | BLUE | GREEN | RED / End Frame 32 Bits 1111 1111 x4'
+    forwarding:
+      text: 'Not described beyond "2 signal output way, one is clock ,another is data".'
+      doc: newstar-ns107s
+      page: 2
+      quote: 'with 2 signal output way , one is clock ,another is data, the clock and data is synchronizated ,so that the crystal cascade piece of output movement is sychronizated .'
+    brightness:
+      printed: current, in the copied APA text
+      doc: newstar-ns107s
+      page: 6
+      quote: 'Global bit:5 bit (32 level) brightness setting,while controlling R,G,B three-color constant current output value,if set the global bit for the 10000( 16/31 ) is the output current is half again the original PWM settings'
+    backup_line: null
+    compatibility_claims:
+      - claim: The upgrade LED of RGB APA107
+        doc: newstar-ns107s
+        page: 1
+      - claim: NS107S RGB LED chip is same with APA107 with a type ic for the three-color RGB Diming control strip and string
+        doc: newstar-ns107s-page
+        page: null
+    disagreements:
+      - "30 MHz here vs 40 MHz in Rose Lighting's HD107S sheet (the LED built on this IC)."
+      - 'TCLKH/TCLKL > 30 ns vs the 30 MHz rating.'
+    open:
+      - Latch rule not documented or measured.
+
+  # ------------------------------------------------------------------ HD108
+  - part: HD108
+    entry: pixels/hd108
+    maker: Rose Lighting's sheet; the IC is Newstar's NS108 (see NS108)
+    documents:
+      - id: rose-hd108-v110
+        url: https://web.archive.org/web/20220216182230id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+        original_url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+        title: HD108 RGB Pixel led chip SPECIFICATION, The newest LED of HD108 LED with 16 bits (R/G/B all 65536 gray scale), Over 20MHz Clock Drive Frequency
+        revision: V1.1.0
+        date: '2020-11-22'
+        language: en
+        source_type: LED vendor datasheet (Rose Lighting; the entry's datasheet.url), Wayback capture
+      - id: rose-hd108-v101
+        url: https://web.archive.org/web/20210114153136id_/https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/11/HD108-led.pdf
+        title: HD108 SPECIFICATION, The upgrade LED of HD108 LED but with 16 bits(65536 gray scale), 40MHz Clock Drive Frequency
+        revision: V1.0.1 (version table lists V1.0 2019-01-03 and V1.0.1 2019-03-18; PDF created 2019-11-17)
+        date: '2019-03-18'
+        language: en
+        source_type: earlier Rose Lighting sheet (linked in FastLED issue 1045 as "worse/wrong in a bunch of places")
+      - {
+          id: newstar-ns108-voron,
+          url: 'https://voron.ua/files/pdf/led/NS108_5050.pdf',
+          source_type: 'IC maker datasheet (see NS108)',
+        }
+      - {
+          id: fastled-hd108,
+          url: 'https://fastled.io/docs/d8/d61/hd108_8h_source.html',
+          source_type: open-source driver,
+        }
+      - {
+          id: fastled-issue-1045,
+          url: 'https://github.com/FastLED/FastLED/issues/1045',
+          source_type: community,
+        }
+      - {
+          id: braydenm-hd108,
+          url: 'https://github.com/braydenm/ledstrip/blob/main/HD108/rgb_helloworld_16bit/rgb_helloworld_16bit.ino',
+          source_type: community,
+        }
+      - {
+          id: advatek-pages,
+          url: 'https://www.advateklighting.com/pixel-protocols/hd108',
+          source_type: controller maker,
+        }
+      - {
+          id: enttec-pages,
+          url: 'https://www.enttec.com/pixel-protocols/HD108',
+          source_type: controller maker,
+        }
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 40000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: 'as printed: "signal reshaping amplification drive circuit"'
+      printed: 'cover "Over 20MHz Clock Drive Frequency"; "Maximum Clock drive frequency / CKI: 40MHz in laboratory condition"'
+      doc: rose-hd108-v110
+      page: 3
+      quote: 'It can operates at a clock frequency of over 20MHz thus allowing a super fast data transmission rate. … Maximum Clock drive frequency / CKI: 40MHz in laboratory condition'
+      timing:
+        - doc: rose-hd108-v110
+          page: 6
+          quote: 'it is insensitive to timing variations, and the data can be transferred reliably at an arbitrary clock rate over 20MHz. … NOTE: The maximum clock rate is mainly limited by the parasitics of the wiring, so take care of the layout of components and wiring.'
+        - doc: rose-hd108-v110
+          page: 5
+          quote: 'High level voltage / VIH / 3.4 / - / 5.3 / V // Low level voltage / VIL / -0.3 / - / 1.6 / V // The frequency of PWM / Fpwm / --- / 27 / --- / KHz (no clock widths, set-up or hold times in this version)'
+        - doc: rose-hd108-v110
+          page: 7
+          what: sampling edge
+          quote: 'The data line is valid only during the rise edge of the clock signal. / (drawing) DIN 7 … 0 (MSB … LSB) / CKI with an up-arrow on each rising edge'
+        - doc: fastled-hd108
+          what: SPI mode used by FastLED
+          quote: '// HD108/NS108 16-bit SPI chipset // - SPI mode: MODE3 recommended (CPOL=1, CPHA=1)'
+    frame:
+      bits_per_channel: 16
+      channels: 3
+      wire_order: R G B
+      pixel_bits: 64
+      extra: 'start bit "1", then 15 brightness bits: 5 for R, 5 for G, 5 for B (per-colour current gain)'
+      start: at least 128 bits of 0
+      end: '"the end frame is not required"'
+      latch: not stated
+      bit_map: 'b63 = 1; b62-b58 = R gain; b57-b53 = G gain; b52-b48 = B gain; b47-b32 = RED 15..0; b31-b16 = GREEN 15..0; b15-b0 = BLUE 15..0'
+      doc: rose-hd108-v110
+      page: 6
+      quote: >-
+        (drawing) SDI Signal: 128 bits of zero | LED1 | LED2 | LED3 | ……. | LEDn (Start Frame, LED Frame, Data
+        Field) / LED Frame - 64 Bits: 1 | 5bits for R/G/B | RED | GREEN | BLUE (1 bit, 15 bits (Brightness), 16
+        bits, 16 bits, 16 bits (Gray Scale)) / LED Frame_Brightness - 16 Bits: 1 | RED | GREEN | BLUE (1 bits, 5
+        bits, 5 bits, 5 bits). (text) "Each update of data format consists of a start frame of 128 zeroes, 64
+        bits for every LED frame and but the end frame is not required. A minimum of 128 zeroes are required to
+        initiate a new data update, and increasing the number of zeroes does not affect. The LED frame consists
+        of brightness bits and RGB gray scale bits, and it is identified by the first one bit following the
+        start frame. Brightness bits: 5 bits (32 level) for R/G/B brightness setting, while controlling R,G,B
+        three-color constant current output value separately and in turn correspondingly."
+      other:
+        - doc: rose-hd108-v110
+          page: 7
+          what: frame overhead
+          quote: 'Frame rate = 1 / [ ( 128 + (64 x points) ) x T-CKI ] ; … Number of LED points = (F-CKI / Frame rate - 128) / 64;'
+        - doc: newstar-ns108-voron
+          page: 7
+          what: the IC maker's frame (differs in channel order and end frame; see NS108)
+          quote: '(drawing) b63 = 1 | b62 … b48 电流增益调节 [current gain adjustment] | b47 … b32 OUTG | b31 … b16 OUTR | b15 … b0 OUTB; (D) "After the completion of the gray data transmission, additional pulse corresponding to the number of chips need to add additional DCLK (that is, 512 chips in cascade, need to send additional 512 DCLK), DIN remains high, the new data that comes into effect;"'
+        - doc: fastled-hd108
+          what: what FastLED sends
+          quote: >-
+            // Protocol: // - Start frame: 64 bits (8 bytes) of zeros // - Per LED: 2 header bytes + 6 color
+            bytes (RGB @ 16-bit each) // - End frame: (num_leds / 2) + 4 bytes of 0xFF for latching … // Note:
+            Some sources mention 128 bits (16 bytes), but 64 bits works reliably … // f0: [1][RRRRR][GG] - marker
+            bit, 5-bit R gain, 2 MSBs of G gain // f1: [GGG][BBBBB] - 3 LSBs of G gain, 5-bit B gain … template
+            <int DATA_PIN, fl::u8 CLOCK_PIN, EOrder RGB_ORDER = GRB, fl::u32 SPI_SPEED = DATA_RATE_MHZ(25)>
+        - doc: braydenm-hd108
+          what: community sketch that sends R, G, B
+          quote: >-
+            // Start frame - 128bit of 0 / for (int i = 0; i < 8; i++) {SPI.transfer16(0);} … global = (up << 15)|
+            (redb << 10) | (greenb << 5) | blueb; … SPI.transfer16(red[i]); SPI.transfer16(green[i]);
+            SPI.transfer16(blue[i]); … // End Frame- write "1"s equal to at least how many pixels are in the
+            string. / for (int i = 0; i < NUMPIXELS/16 +1; i++) {SPI.transfer16(0xFFFF);}
+        - doc: fastled-issue-1045
+          what: first community summary of the Newstar sheet (ccoenen, 2020-06-28)
+          quote: 'overall: 128bits `0` are the start frame / 64 bits per LED: 1 bit `1` / 15 bits gain adjustment (5 bit per channel, table in the datasheet) / 16 bits green / 16 bits red / 16 bits blue / overall: 1bit `1` per led to end the frame (i.e.: 300 leds connected? send 300 bits)'
+    forwarding:
+      text: as printed (the HD107S wording, adapted to 64 bits)
+      doc: rose-hd108-v110
+      page: 7
+      quote: >-
+        The HD108 receives a valid SPI signal and outputs a valid SPI signal to the next devices. Once a device
+        detects a start frame, it will interpret the next"1"bit as start of its LED frame. 64 bits are clocked
+        into the shift registers, while zeroes are pushed to the output. After the entire LED frame has been
+        read, any subsequent data is simply forwarded until another start frame is detected. The data line is
+        valid only during the rise edge of the clock signal.
+    brightness:
+      printed: per-colour 5-bit current setting
+      doc: rose-hd108-v110
+      page: 6
+      quote: 'DATA MSB←→LSB | Percentage of Driving Current / 00000 1/32 / 00001 2/32 / 000 3/32 / ….. / 11110 32/32 / 11111 32/32(max)'
+    backup_line: null
+    compatibility_claims:
+      - claim: Also, HD108 has a bigger improvement to the digital RGB LED of APA102 and APA107 which support 65536 (16bits) grade color depth in R/G/B.
+        doc: rose-hd108-v110
+        page: 3
+      - claim: Also, HD108 is a more advanced version of digital RGB LED of APA102, so it is fully compatible with APA102.
+        doc: rose-hd108-v101
+        page: 3
+        notes: earlier sheet only; dropped in V1.1.0
+      - claim: Building upon the expansive feature set of HD107S, HD108 boasts an even more impressive design, featuring 16 bit operation and a higher PWM rate.
+        doc: advatek-pages
+        page: null
+        by: controller maker (Advatek)
+      - claim: 'HD108 is a clocked, individually addressable RGB pixel that carries data and a separate clock on two wires, placing it in the APA102/SK9822 family rather than the single-wire WS2812 group.'
+        doc: enttec-pages
+        page: null
+        by: controller maker (ENTTEC)
+    disagreements:
+      - >-
+        Colour order of the 16-bit fields: Rose V1.1.0 draws RED | GREEN | BLUE (p. 6); Newstar's NS108 sheet
+        and Opsco's identical SK9826 sheet draw OUTG | OUTR | OUTB and say "GRB order to light". FastLED's
+        HD108 driver defaults to GRB; braydenm's sketch sends red, green, blue. No measurement settles it,
+        and it may differ by LED maker.
+      - >-
+        End of frame: Rose V1.1.0 "the end frame is not required" (p. 6); Newstar/Opsco "need to send
+        additional 512 DCLK" for 512 chips "DIN remains high, the new data that comes into effect" (NS108
+        p. 7); FastLED sends (n/2)+4 bytes of 0xFF; braydenm sends at least n one-bits.
+      - 'Start frame: all sheets say at least 128 zero bits; FastLED sends 64 and says "64 bits works reliably".'
+      - 'Clock: Rose V1.1.0 cover "Over 20MHz" and "an arbitrary clock rate over 20MHz" vs "40MHz in laboratory condition"; Rose V1.0.1 "40MHz Clock Drive Frequency"; Newstar NS108 40MHZ.'
+      - >-
+        Rose V1.0.1 (2019) is internally inconsistent: it claims "fully compatible with APA102", prints the
+        HD107S 32-bit text ("a start frame of 32 zeroes, 32 bits for every LED frame and an end frame of 32
+        ones", p. 6), lists "256 Gray scale (8bits), (16bits optional …)" (p. 3), and its p. 6 drawing is the
+        HD107S frame with "16bits"/"16" painted over the 8-bit labels.
+      - 'Brightness table (Rose V1.1.0 p. 6): both 11110 and 11111 map to 32/32, and the third row reads "000 3/32".'
+    open:
+      - Which 16-bit colour order real HD108 LEDs use (and whether it differs between Newstar-made and other HD108s).
+      - Whether any end clocks are needed, and how many; whether 64 zero bits are always enough to start.
+      - "No document describes an APA102 32-bit compatibility mode except Rose's superseded V1.0.1 sheet, whose frame text is copied from the HD107S; untested."
+
+  # ------------------------------------------------------------------ NS108
+  - part: NS108
+    entry: pixel-ics/ns108
+    maker: Newstar LED Co., Limited
+    documents:
+      - id: newstar-ns108-voron
+        url: https://voron.ua/files/pdf/led/NS108_5050.pdf
+        title: NS108-5050-16bit, 5.5x5.0x1.6mm Top SMD Type 0.3Watt Power Double line transmission And High grade grey level tegrated light source Intelligent control LED (Document No. SPC / NS108)
+        revision: '04 (header); change history lists only "2019-12-01 / 01 / Initial Document / KEVIN ZHU"'
+        date: '2019-12-01'
+        language: en (one figure has zh labels)
+        source_type: maker datasheet, distributor copy (Voron, UA); 18 pages, PDF created 2019-04-10
+      - id: newstar-ns108-2022
+        url: https://web.archive.org/web/20230131080044id_/http://newstar-ledstrip.com/product/20220705164520116.pdf
+        title: 'NS108 SPECIFICATION, The upgrade LED of RGB NS107S, PWM refresh rate: 27kHz, Oscillator Frequency: 40MHz (cover also reads "Document No.: SPC/ NS107S … Model No.: NS107S")'
+        revision: '01 (cover); 04 (page headers)'
+        date: null
+        language: en
+        source_type: maker datasheet (Newstar upload 2022-07-05, Wayback 2023-01-31; the entry's datasheet.url)
+        notes: The archived file is truncated at exactly 1 MiB; 17 pages were recoverable (printed footers run "1 / 16" from PDF p. 2).
+      - id: newstar-ns108-page
+        url: https://web.archive.org/web/20250213151642id_/http://newstar-ledstrip.com/productshow847.html
+        title: NS108 16bit RGB Pixel LED Chip 5050 (Newstar product page, Wayback 2025-02-13)
+        source_type: maker web page
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 40000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: 'as printed (2022 file p. 3): "via the internal lock regeneration and strong drive output"'
+      printed: 'The maximum serial data input frequency 40MHZ'
+      doc: newstar-ns108-voron
+      page: 3
+      quote: '●The maximum serial data input frequency 40MHZ, refresh rate of up to 27KHz, cascade up to 1024 points.'
+      timing:
+        - doc: newstar-ns108-voron
+          page: 6
+          quote: 'The signal input flip threshold / VIH / 3.0 / --- / --- / V / VDD=5.0V // VIL / --- / --- / 1.6 / V // … The speed of data transmission / fDIN / --- / 40 / --- / MHZ / 50% duty cycle gain adjustment 10001 // DCLKO conversion time / Tr1 / --- / 6.8 / --- / ns / DCLKO port load capacitance 30pF // Tf1 / --- / 5.5 / --- / ns // DOUT conversion time / Tr2 / --- / 60 / --- / ns / 50% duty cycle gain adjustment 10001 // Tf2 / --- / 50 / --- / ns'
+        - doc: newstar-ns108-2022
+          page: 5
+          quote: 'The speed of data transmission / fDIN / --- / 27.15 / --- / KHZ / 50% duty cycle gain adjustment 10001'
+        - doc: newstar-ns108-voron
+          page: 7
+          what: sampling edge
+          quote: '(A) first into at least 128bits "0" as the starting frame, and then moved into the data frame, the starting frame and the data frame are high first move in, DCLK rising edge sampling data:'
+        - doc: newstar-ns108-2022
+          page: 3
+          what: pins
+          quote: 'CKO / CLK Output / Clock signal output terminal connected in series, via the internal lock regeneration and strong drive output // SDO / Data Input / Series data output and internal strong drive output'
+    frame:
+      bits_per_channel: 16
+      channels: 3
+      wire_order: G R B
+      pixel_bits: 64
+      extra: '1 start bit "1", then 15 current-gain bits (5 per colour; text says red, green, blue in that order, S4 first)'
+      start: at least 128 bits of 0
+      end: one extra DCLK per chip with DIN held high
+      latch: '"the new data that comes into effect" after the extra DCLKs'
+      bit_map: 'b63 = 1; b62-b48 = current gain (b62-b58 R, b57-b53 G, b52-b48 B per the text; the table header says G, R, B); b47-b32 = OUTG 15..0; b31-b16 = OUTR 15..0; b15-b0 = OUTB 15..0'
+      doc: newstar-ns108-voron
+      page: 7
+      quote: >-
+        12. Data communication protocol: (1) 16bits grayscale data format input : (drawing) DCLK / DIN: 至少128bits的起始帧数据
+        [at least 128 bits of start-frame data] | 1'b1+15bits+48bits（第一颗芯片）[first chip] | 1'b1+15bits+48bits（第二颗芯片）[second
+        chip] | …… / OUTG/R/B. (A) first into at least 128bits "0" as the starting frame, and then moved into the data
+        frame, the starting frame and the data frame are high first move in, DCLK rising edge sampling data: (B) Each
+        set of gray scale data is composed of 1bit start code + 15bits current gain adjustment value (red and green
+        blue three ports each 5bits) + 48bits gray data (red, green and blue lights 16bits) (C) the first data frame is
+        the corresponding distance from the end of the nearest LED driver chip; (D) After the completion of the gray
+        data transmission, additional pulse corresponding to the number of chips need to add additional DCLK (that is,
+        512 chips in cascade, need to send additional 512 DCLK), DIN remains high, the new data that comes into effect;
+        (2) Each chip gradation data format : (drawing) DIN b63 (↑ 1) | b62 b61 … b50 b49 b48 电流增益调节 [current gain
+        adjustment] | b47 b46 b45 … b34 b33 b32 OUTG | b31 b30 b29 … b18 b17 b16 OUTR | b15 b14 b13 … b2 b1 b0 OUTB. (3)
+        Product output structure: GRB order to light, optimize the product color mixing effect (adjust the IC default
+        RGB sequential chip position); (4) Current gain adjustment parameters: Current gain function Data transmission
+        format: Red and blue lights a total of 15bits current gain adjustment bit, respectively, corresponding to 5bits
+        (S4 ~ S0), the system is the first order to send red light 5bits, and then the green light 5bits, the last blue
+        light 5bits, starting high S4, S0.
+      other:
+        - doc: newstar-ns108-voron
+          page: 8
+          what: gain table
+          quote: 'Specific current setting table ： / Current gain parameter transmission format / Green（G) | Red（R) | Blue（B) / S4 , S3 , S2 , S1 , S0 (x3) / Current regulation level | Current gain adjustment bit | Corresponding current value（mA) / 1 | 0 0 0 0 0 | 1.68 / 2 | 0 0 0 0 1 | 2.24 / … / 31 | 1 1 1 1 0 | 18.48 / 32 | 1 1 1 1 1 | 19.04'
+        - doc: newstar-ns108-voron
+          page: 3
+          quote: '●RGB three-color output control, 64Bit (65536 level) color settings; each set of data are 1bit start code +15 Bit (32) brightness adjustment (red, green, blue three ports each 5bits, corresponding to S4 ~ S0) ; 48bits gray data (red, green, blue 16bits) composition.'
+        - doc: newstar-ns108-2022
+          page: 6
+          quote: same protocol page, figures and text as newstar-ns108-voron p. 7
+    forwarding:
+      text: 'Each chip takes the first data frame after the start frame ("the first data frame is the corresponding distance from the end of the nearest LED driver chip"); nothing more is said.'
+      doc: newstar-ns108-voron
+      page: 7
+      quote: '(C) the first data frame is the corresponding distance from the end of the nearest LED driver chip;'
+    brightness:
+      printed: 'per-colour current gain, 32 steps from 1.68 mA to 19.04 mA (never zero) with REXT open'
+      doc: newstar-ns108-voron
+      page: 8
+      quote: '1 | 0 0 0 0 0 | 1.68 … 32 | 1 1 1 1 1 | 19.04 (mA)'
+    backup_line: null
+    compatibility_claims:
+      - claim: The upgrade LED of RGB NS107S
+        doc: newstar-ns108-2022
+        page: 1
+      - claim: NS108 LED is the upgrade type of NS107S, 16bit RGB Pixel LED Chip 5050
+        doc: newstar-ns108-page
+        page: null
+    disagreements:
+      - 'Gain order: the text says red, then green, then blue (p. 7); the table header right below it reads Green（G) Red（R) Blue（B) (p. 8).'
+      - '"The speed of data transmission fDIN" is 40 MHZ in the distributor copy (p. 6) but "27.15 KHZ" in Newstar''s 2022 upload (p. 5); the latter looks like a PWM figure under the wrong label. Both say "maximum serial data input frequency 40MHZ" in the overview.'
+      - 'Newstar''s 2022 upload''s cover reads "Document No.: SPC/ NS107S … Model No.: NS107S" and "Rev. No.: 01", while its page headers read "SPC / NS108 Rev. No.: 04".'
+      - 'Both NS108 files still title the optical table "SK9826" (p. 5 / p. 4): the sheet is the SK9826 sheet with values changed.'
+      - 'Overview: "The Two-wire synchronous control, built-in bi-directional transmission function." (p. 3) — nothing else in the sheet explains a bi-directional function.'
+      - "Rose Lighting's HD108 sheet (the LED on this IC) draws R, G, B order and says no end frame is needed (see HD108)."
+    open:
+      - Measured colour order, end-clock requirement and start-frame minimum.
+      - Whether the DCLK output is inverted or delayed relative to DCLK in (not stated; the extra-clock rule suggests a per-chip delay but no document says how much).
+
+  # ------------------------------------------------------------------ NS108E
+  - part: NS108E
+    entry: pixels/ns108e
+    maker: Newstar LED Co., Limited
+    documents:
+      - id: newstar-ns108e
+        url: https://web.archive.org/web/20250818161935id_/http://newstar-ledstrip.com/product/20191018160652775.pdf
+        original_url: http://newstar-ledstrip.com/product/20191018160652775.pdf
+        title: NS108E-5050, 5.5x5.0x1.6mm Top SMD Type 0.3Watt Power Double line transmission And High grade grey level tegrated light source Intelligent control LED (Document No. SPC / NS108E)
+        revision: '04'
+        date: '2019-01-12'
+        language: en (one figure has zh labels)
+        source_type: maker datasheet (the entry's datasheet.url), Wayback capture
+        notes: 'Change history p. 1: "2016-12-01 01 Initial Document / 2017-02-13 02 Label pin description / 2018-06-02 03 Correct Reliability standard / 2019-01-12 04 Revision of Specification Format", all "KEVIN ZHU" — the SK9826 history. Pages 2-18 are word for word the SK9826 sheet except the part name, and the optical table (p. 5) is still titled "SK9826".'
+      - {
+          id: advatek-pages,
+          url: 'https://www.advateklighting.com/pixel-protocols/ns108e',
+          source_type: controller maker,
+        }
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: The maximum serial data input frequency 30MHZ
+      doc: newstar-ns108e
+      page: 3
+      quote: '●The maximum serial data input frequency 30MHZ, refresh rate of up to 4KHz, cascade up to 1024 points.'
+      timing:
+        - doc: newstar-ns108e
+          page: 6
+          quote: 'The frequency of PWM / FPWM / --- / 4.0 / --- / KHZ // Static power consumption / IDD / --- / 3.6 / --- / mA // … The speed of data transmission / fDIN / --- / 4.15 / --- / KHZ / 50% duty cycle gain adjustment 10001'
+        - doc: newstar-ns108e
+          page: 7
+          what: sampling edge
+          quote: '(A) first into at least 128bits "0" as the starting frame, … DCLK rising edge sampling data:'
+    frame:
+      bits_per_channel: 16
+      channels: 3
+      wire_order: G R B
+      pixel_bits: 64
+      extra: 1 start bit "1", then 15 current-gain bits (5 per colour)
+      start: at least 128 bits of 0
+      end: one extra DCLK per chip with DIN held high
+      latch: '"the new data that comes into effect" after the extra DCLKs'
+      bit_map: same as NS108
+      doc: newstar-ns108e
+      page: 7
+      quote: '"12. Data communication protocol" — identical text and figures to the NS108 sheet p. 7 (128-bit start frame, 1''b1+15bits+48bits per chip, b63 = 1 | b62-b48 current gain | b47-b32 OUTG | b31-b16 OUTR | b15-b0 OUTB, "GRB order to light", extra DCLK per chip with DIN high)'
+    forwarding:
+      text: as NS108
+      doc: newstar-ns108e
+      page: 7
+      quote: '(C) the first data frame is the corresponding distance from the end of the nearest LED driver chip;'
+    brightness:
+      printed: per-colour current gain (same table as NS108, 1.68-19.04 mA)
+      doc: newstar-ns108e
+      page: 8
+      quote: 'Current gain parameter transmission format / Green（G) | Red（R) | Blue（B) / … 1 | 0 0 0 0 0 | 1.68 … 32 | 1 1 1 1 1 | 19.04'
+    backup_line: null
+    compatibility_claims:
+      - claim: Very similar to HD108, NS108E offers all the same features, but at a slightly lower PWM rate.
+        doc: advatek-pages
+        page: null
+        by: controller maker (Advatek)
+    disagreements:
+      - '"The speed of data transmission fDIN … 4.15 KHZ" (p. 6) vs "maximum serial data input frequency 30MHZ" (p. 3).'
+      - 'Same gain-order conflict as NS108 (text R, G, B; table header G, R, B).'
+    open:
+      - Measured colour order and end-clock requirement.
+
+  # ------------------------------------------------------------------ SK9826
+  - part: SK9826
+    entry: pixels/sk9826
+    maker: Dongguan Opsco Optoelectronics Co., Ltd (Newstar publishes the same sheet under its own letterhead)
+    documents:
+      - id: opsco-sk9826-r04
+        url: https://ecksteinimg.de/Datasheet/LED/LED0032/SK9826_REV04_EN.pdf
+        title: SK9826, 5.5x5.0x1.6mm Top SMD Type 0.3Watt Power Double line transmission And High grade grey level tegrated light source Intelligent control LED (Document No. SPC / SK9826)
+        revision: '04'
+        date: '2019-01-12'
+        language: en (one figure has zh labels)
+        source_type: maker datasheet ("DONGGUAN OPSCO OPTOELECTRONICS CO., LTD" letterhead), distributor copy (Eckstein); found via FastLED issue 1045
+      - id: newstar-sk9826
+        url: https://web.archive.org/web/20220216171300id_/http://newstar-ledstrip.com/product/20190927165451294.pdf
+        original_url: http://newstar-ledstrip.com/product/20190927165451294.pdf
+        title: same document on Newstar letterhead (the entry's datasheet.url)
+        revision: '04'
+        date: '2019-01-12'
+        language: en
+        source_type: Newstar re-issue; Wayback captures 2020-09-25 and 2022-02-16 are byte-identical
+        notes: 'Differs from opsco-sk9826-r04 only in the company name ("OPSCO" → "Newstar") and the sample reel label date ("2017-09-12" → "2018-09-12").'
+      - {
+          id: fastled-issue-1045,
+          url: 'https://github.com/FastLED/FastLED/issues/1045',
+          source_type: community,
+        }
+    line_coding: clocked
+    idle: null
+    bit_order: msb-first
+    rates: []
+    clock:
+      max_hz: 30000000
+      sample_edge: rising
+      shift_edge: null
+      regenerated: null
+      printed: The maximum serial data input frequency 30MHZ
+      doc: opsco-sk9826-r04
+      page: 3
+      quote: '●The maximum serial data input frequency 30MHZ, refresh rate of up to 4KHz, cascade up to 1024 points.'
+      timing:
+        - doc: opsco-sk9826-r04
+          page: 6
+          quote: 'The frequency of PWM / FPWM / --- / 4.0 / --- / KHZ // … The speed of data transmission / fDIN / --- / 4.15 / --- / KHZ / 50% duty cycle gain adjustment 10001 // DCLKO conversion time / Tr1 / 6.8 ns / Tf1 / 5.5 ns // DOUT conversion time / Tr2 / 60 ns / Tf2 / 50 ns'
+        - doc: opsco-sk9826-r04
+          page: 7
+          what: sampling edge
+          quote: '(A) first into at least 128bits "0" as the starting frame, … DCLK rising edge sampling data:'
+    frame:
+      bits_per_channel: 16
+      channels: 3
+      wire_order: G R B
+      pixel_bits: 64
+      extra: 1 start bit "1", then 15 current-gain bits (5 per colour)
+      start: at least 128 bits of 0
+      end: one extra DCLK per chip with DIN held high
+      latch: '"the new data that comes into effect" after the extra DCLKs'
+      bit_map: same as NS108
+      doc: opsco-sk9826-r04
+      page: 7
+      quote: '"12. Data communication protocol" — identical text and figures to the NS108 sheet p. 7 (see NS108 for the full quote)'
+    forwarding:
+      text: as NS108
+      doc: opsco-sk9826-r04
+      page: 7
+      quote: '(C) the first data frame is the corresponding distance from the end of the nearest LED driver chip;'
+    brightness:
+      printed: per-colour current gain (same table as NS108)
+      doc: opsco-sk9826-r04
+      page: 8
+      quote: 'Current gain parameter transmission format / Green（G) | Red（R) | Blue（B) / … 1 | 0 0 0 0 0 | 1.68 … 32 | 1 1 1 1 1 | 19.04'
+    backup_line: null
+    compatibility_claims: []
+    disagreements:
+      - '"The speed of data transmission fDIN … 4.15 KHZ" (p. 6) vs "maximum serial data input frequency 30MHZ" (p. 3).'
+      - 'A FastLED user (megazhuk, 2022-09-19, issue 1045) could not get SK9826 strips to latch and wrote that the SK9826 datasheet is "identical letter-by-letter to NS108E-5050" (confirmed by diff here).'
+    open:
+      - No measurement of a working SK9826 stream was found.
+
+# Summary, frames bit by bit, disagreements, database corrections and open items: c1-apa102.md
