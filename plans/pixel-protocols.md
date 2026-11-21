@@ -51,8 +51,9 @@ Two deliverables:
 3. [x] Explainer page `/protocols`: single-wire bits and chain, clocked bits and chain (APA102 vs SK9822 latch), stalled-sender comparison, backup line, DMX512 packet and DMX pixels, sACN / Art-Net, the timing-windows chart, "Who speaks what" and the same-on-the-wire checker, sources with quotes.
 4. [x] Nav entry, search palette, sitemap, e2e + a11y coverage; ISSUES.md notes for streams 2, 3, 7.
 5. [x] Data-model proposal (above) and the mapping of every `data.type` value.
-6. [ ] **(current)** Full checks, rebase, push the explainer; show Cameron the proposal.
-7. [ ] After approval: schema change (with stream 2), migrate entries, update `relations.ts`, its tests, `cross-link-stats.ts`, designer `familyTokens` (with stream 3), `/protocols/<id>` pages, entry-page links; apply [corrections](pixel-protocols/corrections.md).
+6. [x] Full checks, rebase, push the explainer (`9d521093`).
+7. [ ] **(current)** Cameron decides the open questions on the proposal.
+8. [ ] After approval: schema change (with stream 2), migrate entries, update `relations.ts`, its tests, `cross-link-stats.ts`, designer `familyTokens` (with stream 3), `/protocols/<id>` pages, entry-page links; apply [corrections](pixel-protocols/corrections.md).
 
 ### Research agents (delegated 2026-11-20 5:45 PM PST, 01:45Z)
 
@@ -302,9 +303,10 @@ a maker's or controller maker's statement; "(no doc)": no document found.
 - [x] 2026-11-20 5:45 PM PST (01:45Z): ten research batches delegated (above).
 - [x] 2026-11-20 6:00 PM PST (02:00Z): page scaffold committed locally (`98c0f8ea`, not pushed): `/protocols` route, single-wire bits + chain (vertical on phones), clocked bits, stalled-sender comparison, backup line, DMX512 packet; header/footer/palette/sitemap links; 7 e2e tests and unit tests for the models. Values on the page are still placeholders.
 - [x] 2026-11-20 6:25 PM PST (02:25Z): WS2812B (early), WS2813B-V6 and APA102C read independently; `app/lib/protocols/reference.ts` holds their sourced values and quotes; unit tests check every citation and the common-timing arithmetic.
-- [x] 2026-11-20 7:00–9:30 PM PST (03:00–05:30Z): batches B1, D, C1 reviewed and committed as they landed; the rest read and spot-checked. Page text rewritten from sourced values (`reference.ts`: every number has a source, place and quote; the Sources list shows the quotes behind a tap). New: clocked chain (APA102 vs SK9822 latch), timing-windows chart, "Who speaks what" (`families.ts`: 127 parts in 37 protocols, unit-tested against the database), same-on-the-wire checker. 10 e2e tests, axe clean in both themes.
+- [x] 2026-11-20 6:25–7:00 PM PST (02:25–03:00Z): batches B1, D, C1 reviewed and committed as they landed; the rest read and spot-checked. Page text rewritten from sourced values (`reference.ts`: every number has a source, place and quote; the Sources list shows the quotes behind a tap). New: clocked chain (APA102 vs SK9822 latch), timing-windows chart, "Who speaks what" (`families.ts`: 127 parts in 37 protocols, unit-tested against the database), same-on-the-wire checker. 10 e2e tests, axe clean in both themes.
 - [x] Proposal and mapping written (above); corrections collected in `plans/pixel-protocols/corrections.md`; ISSUES.md entry for streams 2, 3, 7.
-- [ ] Full checks, rebase, push; Cameron's decisions on the proposal.
+- [x] 2026-11-20 7:11 PM PST (03:11Z): pushed `8c28a2f7..9d521093` after validate (609 entries), typecheck, lint, format, 428 unit tests, the full e2e suite (168 of 178 under load; the 10 were 2 real fixes, now committed, and 8 load timeouts that passed re-run alone: 72 of 72), a production build and the 22 static-build tests. Live on Cloudflare at 7:13 PM PST (03:13Z), checked headless (no console errors, no sideways scroll on a phone); CI run 44859771905 green.
+- [ ] Cameron's decisions on the proposal (open questions below); then the migration (step 7).
 
 ## Open questions for the user
 
