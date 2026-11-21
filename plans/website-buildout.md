@@ -34,11 +34,13 @@ Each thread keeps its own `plans/<workstream>.md` and owns the files listed. Tou
 5. **Images & datasheets** — `plans/assets.md`. Images with structured attribution (Goal 4); datasheet mirror prep (R2 blocked on Cameron).
 6. **Prices, availability & link health** — `plans/data-freshness.md`. ROADMAP data backlog: price gaps, commercial-system price ranges, discontinued audits, link-rot issue #2.
 7. **Browse/compare UX** — `plans/browse-ux.md`. Table/category/entry/home UX beyond the spreadsheet: global search, faceted filters, column picker, side-by-side compare, shareable URL state, mobile, performance, SEO/OG, accessibility.
+8. **Pixel protocols explainer** — `plans/pixel-protocols.md`. Canonical on-the-wire protocol families (parts that are the same on the wire are one family, whatever their names), an animated explainer (single wire, clocked SPI, backup data line, DMX512, a mention of sACN), and every pixel IC and pixel's `data.type` tied to a family.
 
 ## Progress log
 
 - [x] 2026-11-18: project cloned and registered in T3; workstream threads launched (links below).
 - [x] 2026-11-18: CI test job pinned to `ubuntu-24.04` (`44a6f99`); `ubuntu-latest` = 26.04 broke Playwright 1.58 browser install, so every deploy was failing.
+- [x] 2026-11-20: workstream 8 (pixel protocols explainer) launched at Cameron's request, from the cross-links thread.
 
 ## Threads
 
@@ -49,3 +51,4 @@ Each thread keeps its own `plans/<workstream>.md` and owns the files listed. Tou
 - 5 Assets (Opus 5.5, xhigh): [LED list: images & datasheets](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/mcp:launch:fe95c4c51139162eb2c41b0116cd80b9a0d5ebe0290e9d0a6aaa786367297bca)
 - 6 Freshness (Opus 5.5, xhigh): [LED list: prices, availability & link health](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/mcp:launch:4138403f9634731146bb9a7e5e865752dc7a4436640e77594eb200abd2c717c8)
 - 7 Browse UX (Fable 5.2, max): [LED list: browse & compare UX](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/mcp:launch:47d8a3b454a0797a131038c191a6e40c82f4aa5f198e691a62119e5dfa285a62)
+- 8 Protocols (Opus 5.5, max): [LED list: pixel protocols explainer](t3-thread://v2/ab3781d7-a1dd-4bbb-b3e9-6331e19b7569/mcp:launch:d485c0cd58330de3a412743588f97ffc79af6a267936773fc9ef949f9c85fb67)
