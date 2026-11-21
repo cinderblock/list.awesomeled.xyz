@@ -89,7 +89,8 @@ export function ProtocolTable() {
         const protocols = PROTOCOLS.filter((p) => p.signal === kind);
         if (protocols.length === 0) return null;
         return (
-          <section key={kind} className="proto-family-group" aria-label={SIGNAL_LABELS[kind]}>
+          // A plain group, not a landmark: "DMX512" would clash with the page's DMX512 section
+          <div key={kind} className="proto-family-group">
             <h3>{SIGNAL_LABELS[kind]}</h3>
             <div className="proto-family-list">
               {protocols.map((p) => (
@@ -105,7 +106,7 @@ export function ProtocolTable() {
                 </article>
               ))}
             </div>
-          </section>
+          </div>
         );
       })}
       <p className="proto-caption">

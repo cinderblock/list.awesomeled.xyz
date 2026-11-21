@@ -48,7 +48,7 @@ test.describe('Search everything', () => {
     await gotoReady(page, '/');
     await page.keyboard.press('Control+k');
     const dialog = palette(page);
-    await expect(dialog.getByRole('option')).toHaveCount(12 + 3);
+    await expect(dialog.getByRole('option')).toHaveCount(12 + 4);
     await dialog.getByRole('option', { name: /^Pixel ICs/ }).click();
     await expect(page).toHaveURL(/\/pixel-ics$/);
   });

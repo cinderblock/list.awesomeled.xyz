@@ -11,6 +11,7 @@ const PAGES = [
   '/',
   '/about',
   '/system-overview',
+  '/protocols',
   '/controllers',
   '/controllers/falcon-f16v5',
   '/pixels/ws2812',
