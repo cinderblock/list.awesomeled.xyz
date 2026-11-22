@@ -1,0 +1,89 @@
+name: DMX Core 100
+status: active
+creator:
+  name: DMX Pro Sales
+  page: https://dmxcore.com/
+notes: 'Standalone wall-mounted show controller with a 4.3" or 7" touchscreen: records a console''s output as cues, builds its own scenes, effects and timelines, and plays them on a schedule or trigger. Up to 800 universes at 40 Hz (600 at 60 Hz) with the Full licence; the Basic licence sends 8.'
+inputs:
+  audio: Input # music triggers from a mic or line input
+  other:
+    - OSC
+    - HTTP
+    - TCP
+    - UDP
+    - MQTT
+    - Q-SYS
+    - Symetrix
+    - contact closures
+  other_notes: Triggers start cues and recordings. Contact closures need the optional ADIO board (four opto-isolated inputs); MQTT needs its integration; MIDI binds only on a control surface.
+outputs:
+  protocols:
+    artnet: Both
+    sacn: Both
+    dmx: Both
+    kinet: Output
+  dmx_notes: Optional 2-port isolated DMX512 board; each port is an input or an output
+  other:
+    - TPM2.net
+capabilities:
+  live: true
+  designer: true
+kind:
+  - player
+  - sequencer
+links:
+  url: https://dmxcore.com/dmx-core-100
+platforms:
+  notes: Its own hardware, powered over PoE or 8-28 V DC (max 8 W), with eMMC and microSD storage
+pricing:
+  price: 999
+  source:
+    notes: DMX Core 100 4.3-inch Light Controller (includes the Full licence); the 4.3-inch External Remote Control (Q-SYS/Symetrix) variant is $799, the 7-inch $1,099
+    part: DMXCORE-100-LIGHT
+    retrieved: '2026-11-18'
+    url: https://dmxprosales.com/products/dmx-core-100-wall-controller
+    vendor: DMX Pro Sales
+sources:
+  status:
+    url: https://dmxprosales.com/products/dmx-core-100-wall-controller
+    retrieved: '2026-11-18'
+    notes: 'DMX Core 100 4.3in Light Controller $999, available'
+  notes:
+    - url: https://docs.dmxcore.com/dmx-core-100/main/specifications/
+      retrieved: '2026-11-18'
+      notes: Up to 800 universes at 40 Hz, or 600 universes at 60 Hz
+    - url: https://docs.dmxcore.com/dmx-core-100/
+      retrieved: '2026-11-22'
+      notes: '"build scenes, effects, and sequences without any external lighting software"'
+  name:
+    url: https://dmxcore.com/dmx-core-100
+    retrieved: '2026-11-18'
+    notes: DMX Core 100 is available as dedicated touchscreen hardware that runs standalone, powered over PoE.
+  kind:
+    - url: https://dmxcore.com/dmx-core-100
+      retrieved: '2026-11-22'
+      notes: '"Capture DMX data from external lighting consoles or software", replayed standalone; scheduling: "Set it up once, let it run"'
+    - url: https://docs.dmxcore.com/dmx-core-100/
+      retrieved: '2026-11-22'
+      notes: Fixture setup, presets, effects and timelines built on the unit
+  inputs.other:
+    url: https://docs.dmxcore.com/dmx-core-100/scheduling-automation/input-triggers/
+    retrieved: '2026-11-22'
+    notes: 'Triggers: OSC, UDP, TCP, HTTP, MQTT (integration), Art-Net/sACN/DMX thresholds, ADIO digital inputs, Q-SYS/Symetrix controls, music. "MIDI notes are not Input Triggers"'
+  outputs.protocols:
+    - url: https://docs.dmxcore.com/dmx-core-100/playback/recording/
+      retrieved: '2026-11-22'
+      notes: Recording sources are Art-Net, sACN (E1.31) and DMX-512
+    - url: https://docs.dmxcore.com/dmx-core-100/lighting/stream-routing/
+      retrieved: '2026-11-22'
+      notes: '"sACN in, Art-Net, KiNet, TPM2.net or DMX-512 out"'
+  outputs.dmx_notes:
+    url: https://docs.dmxcore.com/dmx-core-100/getting-started/connectors/
+    retrieved: '2026-11-22'
+    notes: '"Two isolated DMX-512 ports ... Each can be an input or an output."'
+  platforms.notes:
+    url: https://docs.dmxcore.com/dmx-core-100/main/specifications/
+    retrieved: '2026-11-22'
+    notes: '"8–28 VDC via the rear power connector", PoE on the RJ45 (class not specified), "Max 8 W"'
+technical_notes:
+  - Sends up to 800 Art-Net / sACN / KiNET universes at 40 Hz (600 at 60 Hz); Basic licence 8

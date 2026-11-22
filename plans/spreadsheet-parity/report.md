@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/20/2026, 4:34 AM PST (2026-11-20 12:34Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/22/2026, 2:57 PM PST (2026-11-22 22:57Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -8,7 +8,7 @@ Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the 
 
 | Tab                                                   | Rows | Unmatched rows | YAML-only | Open cells | Open links | Open notes | Highlights |
 | ----------------------------------------------------- | ---: | -------------: | --------: | ---------: | ---------: | ---------: | ---------: |
-| [Pattern Drivers](#pattern-drivers)                   |   44 |              0 |        13 |    0 / 642 |     0 / 86 |     0 / 16 |          1 |
+| [Pattern Drivers](#pattern-drivers)                   |   44 |              0 |        15 |    0 / 642 |     0 / 86 |     0 / 16 |          1 |
 | [Controllers](#controllers)                           |  133 |              0 |         6 |   0 / 2053 |    0 / 231 |     0 / 17 |          0 |
 | [Pixels](#pixels)                                     |   35 |              0 |        11 |    0 / 669 |     0 / 79 |     0 / 47 |        110 |
 | [Pixel ICs](#pixel-ics)                               |   41 |              0 |        43 |    0 / 451 |     0 / 63 |     0 / 15 |         77 |
@@ -68,6 +68,7 @@ Database folder: `database/pattern-drivers/`.
 
 ### YAML entries with no sheet row
 
+- `pattern-drivers/dmx-core` "DMX Core 100"
 - `pattern-drivers/freestyler` "FreeStyler": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/grandma` "grandMA": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/hls` "HLS": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
@@ -77,6 +78,7 @@ Database folder: `database/pattern-drivers/`.
 - `pattern-drivers/lss-remote` "LSS Remote": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/pharos-designer` "Pharos Designer": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/pixelblaze` "Pixelblaze": in the 2026-01-21 import
+- `pattern-drivers/pixout-server` "Pixout ArtNet DMX Recorder"
 - `pattern-drivers/poet-creator` "Poet Creator": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/vvvv` "vvvv": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/watchout` "WATCHOUT": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
@@ -104,7 +106,7 @@ Database folder: `database/pattern-drivers/`.
 - [J10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=J10) `chromatik` DMX "Possible": Typed by stream 2 (e215cd7): no direct DMX; it sends Art-Net or sACN to a node (dmx_notes)
 - [Q10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Q10) `chromatik` Programmatic "Possible": Typed by stream 2 (e215cd7): "Possible" became programmatic: true
 - [V11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V11) `dylos` Notes "Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Ar…": (cited) YAML cites a source for notes
-- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.728": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.6518281": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y12) `elm` URL "https://www.enttec.co.uk/product/controls-gb/addressable-le…": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
 - [D15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D15) `fastled-fx-engine` Platform "ESP/AVR/NRF/RP/Browser": Same platforms in structured form (web + hardware list)
 - [G15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=G15) `fastled-fx-engine` Visualizer "Browser wasm Preview": Same: a browser (WebAssembly) preview
@@ -130,7 +132,7 @@ Database folder: `database/pattern-drivers/`.
 - [W30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W30) `lx-studio-chromatik` Demo/Free "Open source. Comercial applications require license": Typo fixed in YAML
 - [X30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=X30) `lx-studio-chromatik` Status "Active": (cited) YAML cites a source for status
 - [B31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B31) `madmapper` Developer "Smode Tech": (cited) YAML cites a source for creator
-- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.864285": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.857105": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W32) `madrix-5` Demo/Free "Demo no data out": Same in structured form: demo.available + limitations
 - [B34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B34) `mapio-pro` Developer "Vistitution": (cited) YAML cites a source for creator
 - [S34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S34) `mapio-pro` Other Inputs "Native support for PixelPusher devices": PixelPusher support is an output, which the entry lists; the sheet wrote it in Other Inputs
@@ -223,10 +225,10 @@ Database folder: `database/controllers/`.
 - [A47](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A47) "AN6USP10" → `controllers/an6usp10` (url, score 0.75)
 - [A64](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A64) "PixelDIN" → `controllers/pixeldin` (alias, score 0.73)
 - [A81](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A81) "Falcon F4V3" → `controllers/falcon-f16v3` (alias, score 0.6)
-- [A94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A94) "PixOut Server" → `controllers/pixout-server` (alias, score 0.46)
+- [A94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A94) "PixOut Server" → `pattern-drivers/pixout-server` (alias, score 0.62)
 - [A108](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A108) "M8 Port Pixel" → `controllers/pixel-octo` (alias, score 0.73)
 - [A112](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A112) "PixNet 4+" → `controllers/pixnet-4` (alias, score 0.72)
-- [A120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A120) "DMX Core" → `controllers/dmx-core` (alias, score 0.73)
+- [A120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A120) "DMX Core" → `pattern-drivers/dmx-core` (alias, score 0.82)
 - [A132](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A132) "LEDEddy" → `controllers/led-player-s` (alias, score 0.67)
 - [A134](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=A134) "F-Test" → `pixel-decoders/f-test` (url, score 1)
 
@@ -239,7 +241,7 @@ Database folder: `database/controllers/`.
 - `controllers/sp608e` "SP608E": added 2026-07-02 in e1795d4 (data: split the SP801E/SP608E chimera into two researched entries)
 - `controllers/wb48` "WB48": added 2026-07-01 in 67d17d0 (data: add Wally's Lights WB48 controller)
 
-<details><summary>Acknowledged differences (355)</summary>
+<details><summary>Acknowledged differences (358)</summary>
 
 - [H2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H2) `sp102e` Standalone "Presets": "Presets" = plays built-in patterns on its own; YAML inputs.standalone: true
 - [U2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U2) `sp102e` Status "Active": (cited) YAML cites a source for status
@@ -434,6 +436,8 @@ Database folder: `database/controllers/`.
 - [C94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=C94) `pixout-server` Max Pixels "8192": PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong
 - [D94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D94) `pixout-server` Price "300": (cited) re-priced at the source (retrieved 2026-11-18)
 - [E94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=E94) `pixout-server` Max outputs "8": PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong
+- [G94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=G94) `pixout-server` Storage "Yes": Moved to pattern drivers as a player (Cameron, database review open question 2), which have no storage field; platforms.notes records its SD card storage
+- [H94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H94) `pixout-server` Standalone "Yes": Moved to pattern drivers as a player (Cameron, database review open question 2), which have no standalone field; its notes say it "replays them standalone"
 - [I94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I94) `pixout-server` Pixel Types "Both": PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong
 - [J94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=J94) `pixout-server` Max Voltage "24": PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong
 - [L94](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=L94) `pixout-server` Buffered "Yes": PixOut has no pixel outputs (maker FAQ and product page); the sheet's output columns were wrong
@@ -497,6 +501,7 @@ Database folder: `database/controllers/`.
 - [M119](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=M119) `pixelator-mini-px1-8d` Output Connectors "RJ-46": Typo: RJ45 PLink ports
 - [C120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=C120) `dmx-core` Max Pixels "6800": DMX Core 100 is a DMX/Art-Net node that drives no pixels; its pixel outputs were removed (database review, plans/database-review-fixes/ctrl-afp.yaml)
 - [D120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D120) `dmx-core` Price "799": (cited) re-priced at the source (retrieved 2026-11-18)
+- [H120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H120) `dmx-core` Standalone "Yes?": Moved to pattern drivers as a player (Cameron, database review open question 2), which have no standalone field; its notes say "Standalone wall-mounted show controller"
 - [I120](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=I120) `dmx-core` Pixel Types "Both": DMX Core 100 is a DMX/Art-Net node that drives no pixels; its pixel outputs were removed (database review, plans/database-review-fixes/ctrl-afp.yaml)
 - [K121](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K121) `led-ethernet-controller-powered` Max Current "20": Unverified either way: the maker's spec PDF didn't load; YAML keeps the sheet note's 10 A per output
 - [U121](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=U121) `led-ethernet-controller-powered` Status "Active": (cited) YAML cites a source for status
@@ -509,7 +514,7 @@ Database folder: `database/controllers/`.
 - [D126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D126) `qolorpix` Price "1500": (cited) re-priced at the source (retrieved 2026-11-18)
 - [K126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K126) `qolorpix` Max Current "120": (cited) YAML cites a source for power.current.max
 - [V126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V126) `qolorpix` Product URL "http://www.citytheatrical.com/Products/qolorpix-tape-contro…": Old URL; it redirects to the page YAML links
-- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1845.0432": (cited) re-priced at the source (retrieved 2022-06-29)
+- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1843.511057": (cited) re-priced at the source (retrieved 2022-06-29)
 - [G127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=G127) `pixelator` Storage "Yes": The manual describes no show storage; its DMX Generator holds static looks only
 - [H127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H127) `pixelator` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone (Pixelator datasheet)
 - [V128](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V128) `emp-16-uni-control` Product URL "https://www.empdesigns.co.uk/portfolio-item/16-universe-led…": Old URL; it redirects to the page YAML links

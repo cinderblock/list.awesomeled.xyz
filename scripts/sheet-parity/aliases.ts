@@ -33,10 +33,12 @@ export const ALIASES: Record<string, Record<string, string>> = {
       'controllers/pixel-octo',
     // Renamed to what their makers call them (database review)
     'Mini 8 Port Controller': 'controllers/mini-8-port-controller',
-    'PixOut Server': 'controllers/pixout-server',
     'PixNet 4+': 'controllers/pixnet-4',
-    'DMX Core': 'controllers/dmx-core',
     PixelDIN: 'controllers/pixeldin',
+    // Show players that drive no pixels, moved to pattern drivers (kind:
+    // player) on Cameron's call (plans/database-review.md, open question 2)
+    'PixOut Server': 'pattern-drivers/pixout-server',
+    'DMX Core': 'pattern-drivers/dmx-core',
   },
   Pixels: {
     // Newstar's IC part numbers. Newstar lists each LED as "NS107S HD107S",

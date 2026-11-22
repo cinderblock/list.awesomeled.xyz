@@ -1787,6 +1787,15 @@
 'Controllers | DMX Core | Pixel Types':
   - value: 'Both'
     reason: 'DMX Core 100 is a DMX/Art-Net node that drives no pixels; its pixel outputs were removed (database review, plans/database-review-fixes/ctrl-afp.yaml)'
+'Controllers | DMX Core | Standalone':
+  - value: 'Yes?'
+    reason: 'Moved to pattern drivers as a player (Cameron, database review open question 2), which have no standalone field; its notes say "Standalone wall-mounted show controller"'
+'Controllers | PixOut Server | Standalone':
+  - value: 'Yes'
+    reason: 'Moved to pattern drivers as a player (Cameron, database review open question 2), which have no standalone field; its notes say it "replays them standalone"'
+'Controllers | PixOut Server | Storage':
+  - value: 'Yes'
+    reason: 'Moved to pattern drivers as a player (Cameron, database review open question 2), which have no storage field; platforms.notes records its SD card storage'
 'Controllers | APD-2-500-12v-ART | Max Current':
   - value: '5'
     reason: 'No source gives a current, and 5 A fits neither the mains input nor the 12 V side of its 150 W supply; removed (database review, plans/database-review-fixes/ctrl-afp.yaml)'

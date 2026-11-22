@@ -6,68 +6,52 @@ creator:
   page: https://pixout.lighting/products/recorder/
 notes: 'Raspberry Pi based Art-Net recorder/player: records universes from a console or media server and replays them standalone, as Art-Net over the network; up to 64 universes by license key; iOS/Android app.'
 inputs:
-  physical:
-    Ethernet: true
-    Wi-Fi: true # setup and remote control (web panels, iOS/Android app)
-    GPIO: true # triggers
-  protocols:
-    - Art-Net
-  standalone: true # plays recorded cues from SD without external input
-  requires_host: Raspberry Pi # runs on Raspberry Pi 3B/3B+/4 or CM4
+  other:
+    - GPIO
+  other_notes: GPIO triggers; set up and controlled over Wi-Fi from web panels and an iOS/Android app. Records Art-Net from any source; the maker names grandMA 2/3, MADRIX, MadMapper, ENTTEC LED Mapper, ChamSys MagicQ, Resolume Arena and ArKaos.
 outputs:
-  auxiliary:
-    DMX512: 4 # D-100 model only
-power:
-  voltage:
-    min: 12
-    max: 12
-data:
-  storage:
-    - type: SD
-features:
-  - ArtNet DMX cue recording and playback
-  - Web control panels and iOS/Android remote app
-price:
-  - name: S-100 Outdoor (IP67), 1 universe
-    price:
-      amount: 344
-      currency: EUR
-  - name: S-100 Outdoor (IP67), 16 universes
-    price:
-      amount: 664
-      currency: EUR
-  - name: S-100 Outdoor (IP67), 64 universes
-    price:
-      amount: 1197
-      currency: EUR
-  - name: Software-only licence for your own Raspberry Pi (from)
-    price:
-      amount: 104
-      currency: EUR
-price_source:
-  notes: MSRP in EUR, ex VAT and shipping. The indoor I-100 is €304 / €624 / €1,157 for 1 / 16 / 64 universes; the D-100 (4 DMX outputs) starts at €389.
-  retrieved: '2026-11-18'
+  protocols:
+    artnet: Both
+    dmx: Output
+  dmx_notes: Four DMX512 outputs on the indoor D-100 model
+capabilities:
+  live: true
+  designer: false
+kind: player
+links:
   url: https://pixout.lighting/products/recorder/
-  vendor: Pixout
-software:
-  works_with:
-    - Android
-    - iOS
-    - GrandMA 2/3
-    - MADRIX
-    - Mad Mapper
-    - Enttec LED Mapper
-    - Chamsys MagicQ
-    - Resolume Arena
-    - ArKaos
+platforms:
+  hardware:
+    - Raspberry Pi
+  notes: Sold as boxes (S-100 outdoor IP67, I-100 indoor, D-100 with DMX outputs; 12 V DC, adapter included) or as a licence for your own Raspberry Pi 3B, 3B+, 4 or CM4; SD card storage
+pricing:
+  price: €344
+  source:
+    notes: MSRP in EUR, ex VAT and shipping. The indoor I-100 is €304 / €624 / €1,157 for 1 / 16 / 64 universes; the D-100 (4 DMX outputs) starts at €389.
+    retrieved: '2026-11-18'
+    url: https://pixout.lighting/products/recorder/
+    vendor: Pixout
+  tiers:
+    - tier: S-100 Outdoor (IP67), 1 universe
+      price: €344
+      features: Recorder box with 1 universe
+    - tier: S-100 Outdoor (IP67), 16 universes
+      price: €664
+      features: Recorder box with 16 universes
+    - tier: S-100 Outdoor (IP67), 64 universes
+      price: €1,197
+      features: Recorder box with 64 universes
+    - tier: Software-only licence
+      price: from €104
+      features: For your own Raspberry Pi
 sources:
-  inputs.physical:
+  platforms.notes:
     - url: https://web.archive.org/web/20200110195105/http://pixout.lighting/product-pixout/pixout-controller-specification/
       retrieved: '2026-11-18'
       notes: Pixout Controller feature table (2019-era, contact sales@pixoutserver.com) marks Wireless and Ethernet available, Bluetooth on request
     - url: https://pixout.lighting/products/recorder/
       retrieved: '2026-11-18'
-      notes: Current ArtNet Recorder lists "RJ45 wired networking" and "Wi-Fi for setup & remote control"
+      notes: Current ArtNet Recorder lists "RJ45 wired networking" and "Wi-Fi for setup & remote control"; 12V DC across all models (110–240V AC adapter included)
   notes:
     url: https://pixout.lighting/products/recorder/
     retrieved: 2026-11-18
@@ -83,7 +67,7 @@ sources:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'
     notes: 'sold as the Pixout ArtNet DMX Recorder, MSRP from €304'
-  software.works_with:
+  inputs.other_notes:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'
     notes: "Pixout ArtNet Recorder page: 'Compatibility: Works with your favourite tools' list and the FAQ 'Can Pixout accept ArtNet data from my controller (GrandMA3 /…"
@@ -91,17 +75,13 @@ sources:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'
     notes: Pixout ArtNet DMX Recorder - Pixout Lighting
-  outputs.auxiliary.DMX512:
+  outputs.dmx_notes:
     url: https://pixout.lighting/products/recorder/
     retrieved: '2026-11-18'
     notes: Indoor controller with four native DMX512 outputs and RTC
-  power.voltage.max:
+  kind:
     url: https://pixout.lighting/products/recorder/
-    retrieved: '2026-11-18'
-    notes: 12V DC across all models (110–240V AC adapter included)
-  power.voltage.min:
-    url: https://pixout.lighting/products/recorder/
-    retrieved: '2026-11-18'
-    notes: 12V DC across all models (110–240V AC adapter included)
+    retrieved: '2026-11-22'
+    notes: '"Record ArtNet" from a desk or media server; "Disconnect the desk and the show keeps running, 44 FPS, 24/7, with no PC on site"; daily/weekly scheduler'
 technical_notes:
   - 'No pixel outputs of its own: it drives pixels through Art-Net pixel controllers. Direct SPI output to WS2812B strips was "not available yet" in 2019 and is not offered now; the D-100 model adds four DMX512 outputs'
