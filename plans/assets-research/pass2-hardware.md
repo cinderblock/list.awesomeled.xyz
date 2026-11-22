@@ -45,3 +45,11 @@ it itself.
 - **pcb-screw-terminal-block:** upstream had already replaced the LCSC datasheet link
   with the same DEGSON drawing; only the image was ported.
 - Commons credits checked against each file's Artist field.
+
+## Remaining gaps (checked 2026-11-22)
+
+Of the 43 hardware entries still without an image, 42 are pass-1 skips with reasons
+in this folder (adapters.md, connectors.md, controllers-a/b/c.md, microboards.md,
+converters-decoders.md). The one entry added since, `level-converters/max3485`, is
+skipped: analog.com does not answer automated clients (connection timeout), and
+Analog Devices product pages show package drawings, not photos.

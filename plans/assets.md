@@ -69,11 +69,11 @@ so the entry page shows them (see Plan step 4).
     - [x] Repo side: storage budget (`MIRROR_BUDGET_MB`, default 1024), per-run storage report (log, job summary, PR body), no re-upload of stored keys, `--check` total; entry pages link the mirror (2eab8e6).
     - [x] Ops change staged, uncommitted: worktree `C:/Users/camer/.t3/worktrees/ops/awesomeled-datasheets-r2` (branch `awesomeled-datasheets-r2`, no upstream). It adds R2 custom-domain support to the IaC and declares bucket `awesomeled-datasheets` + `assets.awesomeled.xyz`. Read-only dry run: exactly 2 creates; tests 405 pass. Plan: `plans/awesomeled-datasheets-r2.md` there.
     - [ ] Cameron's yes on that exact change → commit + push ops (CI applies) → R2 token → repo secrets/variable → Actions PR permission → first run.
-12. [ ] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
+12. [x] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
     - [x] pixel ICs + pixels (f4c3620): 3 images, 1 datasheet added, 2 LCSC viewer URLs replaced by direct PDFs; 47 image skips and 12 parts with no published datasheet, reasons in `plans/assets-research/pass2-pixels-ics.md`.
     - [x] pattern drivers: 12 official screenshots (Pharos swapped at review for the help's Layout view); light-show-pro (500 px only), watchout (callouts/marketing render) and xschedule (none exists) skipped. `plans/assets-research/pass2-pattern-drivers.md`.
     - [x] boards / converters / connectors / controllers: agent interrupted before its report; 19 images + 1 datasheet ported and reviewed 2026-11-22. The Pi 3 Model B's pass-1 photo turned out to be a 3B+ and was replaced. `plans/assets-research/pass2-hardware.md`.
-    - [ ] Remaining hardware image gaps (43: adapters 12, connectors 7, controllers 17, level-converters 1, microboards 5, pixel-decoders 1): the interrupted agent left no skip reasons. Check each against the pass-1 reports; research the ones they don't cover.
+    - [x] Remaining hardware image gaps (43: adapters 12, connectors 7, controllers 17, level-converters 1, microboards 5, pixel-decoders 1): 42 are pass-1 skips with recorded reasons; max3485 (added since) skipped, analog.com refuses bots and shows no photos.
 
 ## Working method (two worktrees)
 
@@ -129,6 +129,30 @@ the shared block to them).
 - **Images: 18 → 333**, every one attributed (was 11 of 18). Hardware entries: 303 / 414 (73%); pattern drivers 30 / 40 (official app screenshots); drive libraries none by decision (code libraries; a logo isn't a product image).
 - **Datasheets: 38 → 202**, every one a verified direct PDF (18 of the original 38 weren't). Part categories (pixels, pixel ICs, level converters, connectors, microboards, pixel decoders): 148 / 180 (82%). Controllers 53 / 132 and adapters 1 / 40: most makers publish web pages, Google Docs or nothing.
 - Remaining gaps are deliberate skips with reasons (marketplace-only photos, maker sites that block bots, pixel ICs without real chip photos, standards without an originator's datasheet, unarchived discontinued products): `bun run coverage:assets --missing` and `plans/assets-research/`.
+
+### After pass 2 (2026-11-22, `origin/master` 477aa795 + the hardware batch)
+
+Other streams kept adding entries (483 → 579 counted here), mostly pixel ICs and
+pattern drivers.
+
+| Category            | Entries |     Image | Attributed | Open license |     Datasheet | Mirrored |
+| ------------------- | ------: | --------: | ---------: | -----------: | ------------: | -------: |
+| adapters            |      38 |  26 (68%) |         26 |            1 |        1 (3%) |        0 |
+| commercial-systems  |      18 | 18 (100%) |         18 |            0 |             — |        — |
+| connectors          |      48 |  41 (85%) |         41 |           11 |      38 (79%) |        0 |
+| controllers         |     136 | 119 (88%) |        119 |            1 |      56 (41%) |        0 |
+| diffusive-materials |      44 |  28 (64%) |         28 |           13 |             — |        — |
+| drive-libraries     |      40 |    0 (0%) |          0 |            0 |             — |        — |
+| level-converters    |      13 |  12 (92%) |         12 |            0 |      12 (92%) |        0 |
+| microboards         |      45 |  40 (89%) |         40 |           18 |      43 (96%) |        0 |
+| pattern-drivers     |      56 |  42 (75%) |         42 |            1 |             — |        — |
+| pixel-decoders      |      14 |  13 (93%) |         13 |            1 |       2 (14%) |        0 |
+| pixel-ics           |      84 |    4 (5%) |          4 |            0 |      67 (80%) |        0 |
+| pixels              |      43 |  22 (51%) |         22 |            2 |      38 (88%) |        0 |
+| **Total**           |     579 | 365 (63%) |        365 |           48 | 257/421 (61%) |        0 |
+
+- **Images: 18 → 365** across both passes, all attributed. Excluding drive libraries (no images by decision) and pixel ICs (rarely a real chip photo): 361 / 455 (79%).
+- **Datasheets: 38 → 257.** "Mirrored" stays 0 until the R2 bucket exists (step 11).
 
 ## Findings / gotchas
 
