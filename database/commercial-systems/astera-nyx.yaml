@@ -22,7 +22,7 @@ pricing:
         retrieved: '2026-11-18'
         url: https://www.filmandvideolighting.com/astera-nyx-bulb-led-10w-rgba-mint-practical-lamp-fp5.html
         vendor: Film and Video Lighting (BarnDoor)
-  price_range: $$$$$$
+  tier: pro-kit
 sources:
   status:
     url: https://www.filmandvideolighting.com/astera-nyx-bulb-led-10w-rgba-mint-practical-lamp-fp5.html
@@ -32,6 +32,10 @@ sources:
     url: https://astera-led.com/products/nyx-bulb/specs
     retrieved: '2026-11-18'
     notes: Colors | RGBMintAmber
+  pricing.tier:
+    url: https://astera-led.com/products/nyx-bulb/
+    retrieved: '2026-11-22'
+    notes: 'Screws into any E26/E27/B22 socket or runs from DC/PowerStation battery; controlled from the AsteraApp over Bluetooth or by wireless DMX ("All Astera lights contain a wireless DMX module by LumenRadio ... CRMX and W-DMX"). Film/event gear sold through dealers at a list price ("Find an Astera Dealer"; $128 list, $115.20 at Film and Video Lighting).'
 specs:
   color_type: RGBMA
   dedicated_psu: true

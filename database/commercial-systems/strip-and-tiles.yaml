@@ -12,7 +12,7 @@ images:
 links:
   product: https://schnick.schnack.systems/en/products/
 pricing:
-  price_range: $$$$$$
+  tier: full-experience
 sources:
   status:
     url: https://schnick.schnack.systems/en/product/led-streifen-c25-500-cut-mk4/
@@ -22,6 +22,10 @@ sources:
     url: https://schnick.schnack.systems/en/products/
     retrieved: '2026-11-18'
     notes: © 2005—2026 Schnick-Schnack-Systems
+  pricing.tier:
+    url: https://schnick.schnack.systems/en/product/led-streifen-c25-500-cut-mk4/
+    retrieved: '2026-11-22'
+    notes: 'Proprietary Schnick-Schnack-Systems DPB protocol ("bidirectional ... system-wide synchronization") with ColorConfigTool; system accepts DMX, Art-Net, sACN, DVI/HDMI and KNX. Sold through a "Dealer Network"; "PRICES" are behind a dealer login ("REQUEST LOGIN CREDENTIALS FOR THE STORE").'
 specs:
   pixels_per_run: 3072
   color_type: RGBW

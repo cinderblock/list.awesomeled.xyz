@@ -11,7 +11,7 @@ images:
 links:
   product: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
 pricing:
-  price_range: $$$$$
+  tier: full-experience
 sources:
   status:
     url: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
@@ -29,6 +29,10 @@ sources:
     url: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
     retrieved: '2026-11-18'
     notes: Each encoder can drive up to 127 RGBW LED units
+  pricing.tier:
+    url: https://lumisphere.co.uk/product/large-harness-active-rgbw-festoon-systems/
+    retrieved: '2026-11-22'
+    notes: 'Proprietary "data-over-voltage" RGBW festoon; "The system requires a Lumisphere Encoder to provide the interface between the controller and the festoon system" (DMX input). No price shown: "Request Data Sheets" and "For further information and programming configurations, please contact us".'
 specs:
   pixels_per_run: 127
   color_type: RGBW

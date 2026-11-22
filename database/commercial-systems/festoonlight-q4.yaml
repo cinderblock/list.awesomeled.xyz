@@ -33,12 +33,16 @@ pricing:
         retrieved: '2026-11-18'
         url: https://www.highlite.com/en/41757-festoon-q4-string-ip65.html
         vendor: Highlite (Showtec)
-  price_range: $$$
+  tier: pro-kit
 sources:
   status:
     url: https://www.highlite.com/en/41750-festoonlight-q4-controller.html
     retrieved: '2026-11-18'
     notes: 'controller and IP65 string listed as current on Highlite (original string 41751 discontinued)'
+  pricing.tier:
+    url: https://www.sonovente.com/en-gb/showtec-festoonlight-q4-controller-cable-10-m-p112825.html
+    retrieved: '2026-11-22'
+    notes: 'Controller sold alone with "10 m control cable included"; strings (20 pixels) and booster bought separately; "DMX and Art-Net compatible ... from built-in programmes to manual settings", drives 3 strings (6 with booster). Dealer list price (EUR 495.83 ex VAT here; Highlite R.R.P. EUR 585).'
 specs:
   pixels_per_run: 120
   color_type: RGB

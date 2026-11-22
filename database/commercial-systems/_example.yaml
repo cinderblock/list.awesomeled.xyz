@@ -18,7 +18,7 @@ images:
 links:
   product: https://example.com/pro-system
 pricing:
-  price_range: $$$$$ # common.json price_range, $ to $$$$$$
+  tier: full-experience # parts | plug-and-play | pro-kit | full-experience
   examples: # published price points; pixels drives the per-pixel comparison
     - item: 50-dot string
       pixels: 50
@@ -45,7 +45,7 @@ status: active
 creator: Example Home
 notes: App-controlled addressable string lights.
 pricing:
-  price_range: $$
+  tier: plug-and-play
 specs:
   color_type: RGB
   dimming_bits: 8

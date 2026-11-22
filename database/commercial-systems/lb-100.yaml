@@ -17,12 +17,16 @@ pricing:
       price:
         amount: 125
         currency: EUR
-  price_range: $$$$$
+  tier: pro-kit
 sources:
   status:
     url: https://www.sgmlighting.com/products/discontinued/pixel-lights
     retrieved: '2026-11-18'
     notes: 'LB·100 LED Balls listed under SGM Discontinued Products / Pixel lights'
+  pricing.tier:
+    url: https://www.sgmlighting.com/products/lb%C2%B7100
+    retrieved: '2026-11-22'
+    notes: '"In order to configure and control up to six strings of linked balls, a SGM TLD-612A or ILD driver is needed"; "An entire system can be controlled via DMX-512A, a dedicated video server, or an ordinary PC with ArtNet", configured with SGM''s ArtNet Configurator. Touring/rental fixture sold through SGM dealers ("Add to quote list"); no design service offered. Discontinued.'
 specs:
   pixels_per_run: 56
   color_type: RGB

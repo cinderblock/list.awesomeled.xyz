@@ -11,7 +11,7 @@ images:
 links:
   product: https://www.enttec.com/products/led-pixel-dot-lights/
 pricing:
-  price_range: $$$$
+  tier: full-experience
 related:
   - type: compatible
     ref: pixel-ics/ucs8903
@@ -38,6 +38,10 @@ sources:
     url: https://www.enttec.com/products/led-pixel-dot-lights/
     retrieved: '2026-11-18'
     notes: Smart PXL 40 Dots
+  pricing.tier:
+    url: https://www.enttec.com/product/led-pixel-dot-lights/hi-res-smart-pxl40p-rgb-led-pixel-dot-strings/
+    retrieved: '2026-11-22'
+    notes: 'Made-to-order dot strings ("Because your projects are built to custom specifications, so are our Smart PXL 40 dots"); no public price. ENTTEC''s Pixel Designer: "We work out the strings, controllers, power and cabling, then a sales engineer quotes it", plus "Contact an Expert". Protocol is ENTTEC SPXL-16 (UCS8903B/8904B-compatible), so the ecosystem is not fully closed.'
 specs:
   pixels_per_run: 1360
   dimming_bits:

@@ -30,7 +30,7 @@ pricing:
         retrieved: '2026-11-18'
         url: https://soundpro.com/products/chauvet-dj-festoon2rgbext
         vendor: SoundPro
-  price_range: $$$
+  tier: pro-kit
 sources:
   status:
     url: https://soundpro.com/products/chauvet-dj-festoon2rgb
@@ -44,6 +44,10 @@ sources:
     url: https://www.chauvetdj.com/products/festoon-2-rgb/
     retrieved: '2026-11-18'
     notes: CHAUVET DJ
+  pricing.tier:
+    url: https://www.chauvetdj.com/products/festoon-2-rgb/
+    retrieved: '2026-11-22'
+    notes: 'What''s Included: "Controller, 20 RGB bulbs, Extension cable (5 m), Power cord"; DMX (3, 9, Pixel or Pixel+ channels, 3-pin XLR) plus "built-in automated programs" and standalone mode with optional IRC-6 remote. Sold through Chauvet DJ dealers at MAP $649.99.'
 specs:
   pixels_per_run: 60
   color_type: RGB

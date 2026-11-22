@@ -23,6 +23,7 @@ pricing:
         retrieved: '2026-11-18'
         url: https://smartshow.lighting/product/pixel-panels/
         vendor: SmartShow
+  tier: parts
 related:
   - type: variant
     ref: commercial-systems/rgb-pixel-panel
@@ -47,6 +48,10 @@ sources:
     url: https://smartshow.lighting/product/pixel-panels/
     retrieved: '2026-11-18'
     notes: 'RGBW panel in stock (44), regular £30'
+  pricing.tier:
+    url: https://smartshow.lighting/product/pixel-panels/
+    retrieved: '2026-11-22'
+    notes: 'Bare 13x13 SK6812 RGBW PCB, panel and installation guide only; needs a 5 V PSU and a pixel controller ("some pixel controllers (including the SmartShow Pro-ONE and NetDMX-POE) ... take in 3-channel RGB data and output ... RGBW"). Open add-to-cart pricing (£30 regular).'
 specs:
   pixels_per_run: 169
   dimming_bits: 8

@@ -24,6 +24,7 @@ pricing:
         retrieved: '2026-11-18'
         url: https://smartshow.lighting/product/pixel-panels/
         vendor: SmartShow
+  tier: parts
 related:
   - type: uses
     ref: pixels/ws2812
@@ -36,6 +37,10 @@ sources:
     url: https://smartshow.lighting/product/pixel-panels/
     retrieved: '2026-11-18'
     notes: 'RGB panel in stock (51), regular £20'
+  pricing.tier:
+    url: https://smartshow.lighting/product/pixel-panels/
+    retrieved: '2026-11-22'
+    notes: 'Bare 13x13 WS2812B PCB; "Parts Supplied: RGB-PIXEL-PANEL ... Installation Guide" only. Buyer supplies a 5 V PSU ("Typical Power Supply Rating: 5V @ 10A") and any pixel controller fed by Art-Net or sACN (169 x 3 = 507 channels per universe). Open add-to-cart pricing (£20 regular).'
 specs:
   pixels_per_run: 169
   dimming_bits: 8

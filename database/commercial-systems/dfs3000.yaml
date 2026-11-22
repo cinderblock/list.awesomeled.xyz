@@ -12,7 +12,7 @@ images:
 links:
   product: https://glassonelectronics.co.uk/dfs3000/
 pricing:
-  price_range: $$$$$$
+  tier: full-experience
 sources:
   status:
     url: https://glassonelectronics.co.uk/dfs3000/
@@ -22,6 +22,10 @@ sources:
     url: https://glassonelectronics.co.uk/dfs3000/
     retrieved: '2026-11-18'
     notes: All versions are available in RGB. Hi and SH are also available in RGBW.
+  pricing.tier:
+    url: https://glassonelectronics.co.uk/dfs3000/
+    retrieved: '2026-11-22'
+    notes: 'E27 lamps on Glasson''s "combined power and data system": "up to a full DMX universe ... powered from a single VP or IP series driver" over two wires; each lamp is assigned its DMX number before fitting. No price published; page ends "Discuss Your Next Lighting Project Today" with a phone number.'
 specs:
   pixels_per_run: 170
   dimming_bits: 13

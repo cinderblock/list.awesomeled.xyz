@@ -41,7 +41,7 @@ pricing:
         retrieved: '2026-11-18'
         url: https://www.lightwalls.co.uk/products/matrix-5x5-rgbw-16bit
         vendor: Light Walls
-  price_range: $$$$$
+  tier: pro-kit
 sources:
   status:
     url: https://www.lightwalls.co.uk/products/matrix-5x5-rgbw-16bit
@@ -67,6 +67,10 @@ sources:
     url: https://www.lightwalls.co.uk/
     retrieved: '2026-11-18'
     notes: Benefit from 16-bit dimming, incredibly high CRI, and wide saturation.
+  pricing.tier:
+    url: https://www.lightwalls.co.uk/
+    retrieved: '2026-11-22'
+    notes: 'RGBW light engines (Matrix, Linear, Down Light) and "System Kits" sold from a Shopify store with public prices (Matrix 5x5 £286.67); "Powerful integration tools and expert project support are available" and "Contact us to discuss integrating Light Walls into your projects as supply-only or as a complete solution." Control protocol not confirmed (store pages rate-limited).'
 specs:
   dimming_bits: 16
   color_type: RGBW

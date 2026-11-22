@@ -82,8 +82,9 @@
       "type": ["object", "null"],
       "additionalProperties": false,
       "properties": {
-        "price_range": {
-          "$ref": "common.json#/definitions/price_range"
+        "tier": {
+          "enum": ["parts", "plug-and-play", "pro-kit", "full-experience"],
+          "description": "Experience tier: what the buyer gets and how it is sold, not the price. parts: pixels for any generic controller (bring your own controller, power and software). plug-and-play: a complete kit that works out of the box. pro-kit: pro fixtures run by the maker's controller over DMX, Art-Net or sACN, bought at a list price. full-experience: a closed system from a pro lighting brand, sold through dealers with design support, often by quote. Cite the evidence in `sources[\"pricing.tier\"]`."
         },
         "examples": {
           "type": "array",

@@ -21,7 +21,7 @@ pricing:
         retrieved: '2026-11-18'
         url: https://almoproav.com/p/90357060HU
         vendor: Almo Pro A/V (Exertis Almo)
-  price_range: $$$$$$
+  tier: full-experience
 sources:
   status:
     url: https://www.martin.com/en-US/products/vc-dot-1
@@ -31,6 +31,10 @@ sources:
     url: https://edisonreport.com/2026/10/19/harman-professional-solutions-announces-pablo-ruiz-campo-as-martin-professional-sales-leader-for-north-america/
     retrieved: '2026-11-18'
     notes: Martin Professional is part of HARMAN Professional Solutions, a Strategic Business Unit of HARMAN International
+  pricing.tier:
+    url: https://www.martin.com/en-US/products/vc-dot-1
+    retrieved: '2026-11-22'
+    notes: 'Part of Martin''s LED video ecosystem: "controllable via the award-winning P3 System Controller family and/or DMX512", powered via "VC-Feeder and P3 PowerPort", for "customized LED video solutions". Sold through Martin distributors/dealers (Almo MSRP $2304, feeder sold separately); discontinued.'
 specs:
   pixels_per_run: 100
   color_type: RGB

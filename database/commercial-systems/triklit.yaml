@@ -39,7 +39,7 @@ pricing:
         retrieved: '2026-11-18'
         url: https://www.wiedamark.com/product/minleonrgbminitrikliksplusline/
         vendor: Wiedamark (WDM Lighting)
-  price_range: $$$$
+  tier: pro-kit
 sources:
   status:
     url: https://www.wiedamark.com/product/25minleonrgbtrikliks/
@@ -53,6 +53,10 @@ sources:
     url: https://www.wiedamark.com/wp-content/uploads/archive/triklit42.pdf
     retrieved: '2026-11-18'
     notes: 'Minleon spec sheet (as of April 2018): "16-bit, 65,536 dimming levels*", footnote "* 8-bit via DDP."'
+  pricing.tier:
+    url: https://www.wiedamark.com/product/25minleonrgbtrikliks/
+    retrieved: '2026-11-22'
+    notes: 'Dealer lists strings at $38–$190 but "Power Supply and controller purchased separately"; Minleon''s spec sheet names its own "Control Systems NDB+ (ArtNet, E1.31), WEC+, MC+" and Minleon power T''s. Dealer is "quoting orders individually while we restock".'
 specs:
   dimming_bits: 16
   dimming_notes: 8-bit via DDP

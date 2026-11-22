@@ -567,7 +567,14 @@ export const COLUMNS: Record<string, ColumnSpec[]> = {
     col('Dedicated PSU/control', bool, ['specs.dedicated_psu']),
     col('RGB/W', text, ['specs.color_type']),
     col('Online Pricing', text, ['pricing.examples']),
-    col('Price Range', exact, ['pricing.price_range']),
+    col(
+      'Price Range',
+      {
+        type: 'dropped',
+        why: 'Undefined $ scale that contradicted the sourced prices; replaced by pricing.tier (what the buyer gets) and the computed From / Per Pixel prices (Cameron, 2026-11-22)',
+      },
+      []
+    ),
     col('Core Tech', text, ['core_tech']),
     col('Since', num, ['release_year']),
     col('Target Market', text, ['target_market']),

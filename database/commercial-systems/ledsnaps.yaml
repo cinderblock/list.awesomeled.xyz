@@ -11,12 +11,16 @@ images:
 links:
   product: https://ledsnaps.com/products/pace-system
 pricing:
-  price_range: $$$$$
+  tier: full-experience
 sources:
   status:
     url: https://ledsnaps.com/products/pace-system
     retrieved: '2026-11-18'
     notes: "PACE dynamic system on the maker's current product pages, sold by quote"
+  pricing.tier:
+    url: https://ledsnaps.com/products/pace-system
+    retrieved: '2026-11-22'
+    notes: 'Closed gym system: "pre-configured drivers, LED bars, connectors, and mounting kits", Wi-Fi Driver Pro, own control-panel app and "bespoke connectors and cables". No price; "Have questions or need a quote? ... explore custom lighting options tailored to your gym."'
 specs:
   pixels_per_run: 1200
   color_type: RGB

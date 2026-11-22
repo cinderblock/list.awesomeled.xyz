@@ -12,12 +12,16 @@ images:
 links:
   product: https://tmb.com/ims/
 pricing:
-  price_range: $$$$$$
+  tier: full-experience
 sources:
   status:
     url: https://tmb.com/ims/
     retrieved: '2026-11-18'
     notes: "current IMS product page on TMB's site (cut sheets, manuals), no price published"
+  pricing.tier:
+    url: https://tmb.com/ims/
+    retrieved: '2026-11-22'
+    notes: 'Proprietary "2-wire system – Power and data share the same two wires", Edison-base bulbs driven by TMB''s own Universe Drives and Hand Held Programmer, "Individually DMX controlled". No price published; TMB sells via dealers and promotes installations (Hersheypark case study) with 24/7 tech support.'
 specs:
   pixels_per_run: 128
   color_type: RGBW

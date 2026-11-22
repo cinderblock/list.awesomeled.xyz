@@ -24,12 +24,16 @@ pricing:
         retrieved: '2026-11-18'
         url: https://twinkly.com/products/strings-multicolor
         vendor: Twinkly (US store)
-  price_range: $$
+  tier: plug-and-play
 sources:
   status:
     url: https://twinkly.com/products/strings-multicolor
     retrieved: '2026-11-18'
     notes: '250-LED Strings Multicolor (US) available, $119.99'
+  pricing.tier:
+    url: https://web.archive.org/web/20261030214115/https://twinkly.com/products/strings-multicolor
+    retrieved: '2026-11-22'
+    notes: 'Consumer smart string with controller and power supply (IP44 ratings listed for both) and plug supplied; "Instantly configurable via Bluetooth and Wi-Fi, use the Twinkly App to map lights" (with a phone camera), Alexa/Google Home. Sold online at list price ($229.99 for 750 LEDs, "In stock, ready to ship").'
 specs:
   pixels_per_run: 600
   color_type: RGB

@@ -38,12 +38,16 @@ pricing:
         amount: 120
         currency: EUR
       notes: The original spreadsheet's "RGB €120 per lamp" (undated, no source)
-  price_range: $$$$$
+  tier: pro-kit
 sources:
   status:
     url: https://www.lucenti.lighting/collection/vinci
     retrieved: '2026-11-18'
     notes: "Vinci lamps listed for sale on Lucenti's store (Pearl v2 95 EUR), out of stock at retrieval"
+  pricing.tier:
+    url: https://www.lucenti.lighting/collection/vinci
+    retrieved: '2026-11-22'
+    notes: 'Lamps use "Lucenti''s proprietary Data-over-Power technology" over existing socket wiring; "the Vinci controller and socket wiring are supplied separately"; controller does "DMX control / stand alone" with the Vinci app. Online store with list prices (Pearl v2 EUR 95), plus "Discuss your project".'
 specs:
   pixels_per_run: 128
   color_type: RGBW
