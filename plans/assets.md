@@ -72,7 +72,8 @@ so the entry page shows them (see Plan step 4).
 12. [ ] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
     - [x] pixel ICs + pixels (f4c3620): 3 images, 1 datasheet added, 2 LCSC viewer URLs replaced by direct PDFs; 47 image skips and 12 parts with no published datasheet, reasons in `plans/assets-research/pass2-pixels-ics.md`.
     - [x] pattern drivers: 12 official screenshots (Pharos swapped at review for the help's Layout view); light-show-pro (500 px only), watchout (callouts/marketing render) and xschedule (none exists) skipped. `plans/assets-research/pass2-pattern-drivers.md`.
-    - [ ] boards / converters / connectors / controllers: agent running (T3 delegated task, own checkout).
+    - [x] boards / converters / connectors / controllers: agent interrupted before its report; 19 images + 1 datasheet ported and reviewed 2026-11-22. The Pi 3 Model B's pass-1 photo turned out to be a 3B+ and was replaced. `plans/assets-research/pass2-hardware.md`.
+    - [ ] Remaining hardware image gaps (43: adapters 12, connectors 7, controllers 17, level-converters 1, microboards 5, pixel-decoders 1): the interrupted agent left no skip reasons. Check each against the pass-1 reports; research the ones they don't cover.
 
 ## Working method (two worktrees)
 
