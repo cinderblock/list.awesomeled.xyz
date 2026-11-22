@@ -7,7 +7,16 @@ import type { BaseEntry } from './types';
 import { Badge, getBadgeForValue, packageBadge, TextPill } from '~/components/ui/FeatureBadges';
 import { RelativeDate } from '~/components/ui/RelativeDate';
 import { Tooltip } from '~/components/ui/Tooltip';
-import { parsePrice, toUSD, priceUSD, perPixelUSD, formatPriceText, RATES_AS_OF } from './currency';
+import {
+  parsePrice,
+  toUSD,
+  priceUSD,
+  perPixelUSD,
+  fromUSD,
+  formatPriceText,
+  RATES_AS_OF,
+} from './currency';
+import { TIER_LABELS, TIER_TIP, tierRank, type Tier } from './tiers';
 import { getPriceSource } from './price-source';
 import { PriceStaleMark } from '~/components/data/PriceSource';
 import { quantitySortValue } from './quantity';
@@ -1044,10 +1053,35 @@ export const commercialSystemColumns: Column[] = [
     filterConfig: { type: 'select' },
   },
   {
-    key: 'pricing.price_range',
-    label: 'Price Range',
-    sortValue: priceRangeSort,
+    key: 'pricing.tier',
+    label: 'Tier',
+    render: (v) =>
+      tierRank(v) == null ? (
+        <span className="data-table-null">-</span>
+      ) : (
+        <span>{TIER_LABELS[v as Tier]}</span>
+      ),
+    sortValue: tierRank,
     filterConfig: { type: 'select' },
+    valueLabels: TIER_LABELS,
+    headerTip: TIER_TIP,
+  },
+  {
+    key: 'pricing.examples',
+    label: 'From',
+    filterable: false,
+    render: (v) => {
+      const from = fromUSD({ examples: v });
+      if (from == null) return <span className="data-table-null">Quote only</span>;
+      return (
+        <span className="tabular-nums">
+          ${from.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+        </span>
+      );
+    },
+    sortValue: (v) => fromUSD({ examples: v }),
+    className: 'data-table-cell--right',
+    headerTip: `The cheapest published price point (a kit, string or lamp), in USD (rates as of ${RATES_AS_OF}). Quote only: no public price.`,
   },
   {
     key: 'pricing',

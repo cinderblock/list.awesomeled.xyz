@@ -386,6 +386,18 @@ test.describe('Data loading', () => {
     await expect(page.getByRole('cell', { name: /^\$\d/ }).first()).toBeVisible();
   });
 
+  test('commercial systems show an experience tier and a From price', async ({ page }) => {
+    await page.goto('/commercial-systems');
+    await expect(page.getByRole('columnheader', { name: /Tier/ })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: /From/ })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'Plug and play' }).first()).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'Quote only' }).first()).toBeVisible();
+
+    // The entry page shows the tier's label, not its slug
+    await page.goto('/commercial-systems/twinkly');
+    await expect(page.locator('.detail-value', { hasText: 'Plug and play' }).first()).toBeVisible();
+  });
+
   test('footer is displayed', async ({ page }) => {
     await page.goto('/');
 

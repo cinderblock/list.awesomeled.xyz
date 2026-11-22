@@ -143,6 +143,20 @@ export function formatPriceText(p: ParsedPrice, forceCents = false): string {
 }
 
 /**
+ * Cheapest published price point (a kit, string or lamp), in USD, across a
+ * commercial system's `pricing.examples`: the least it costs to buy in. Null
+ * when nothing has a parseable price (quote-only systems).
+ */
+export function fromUSD(pricing: unknown): number | null {
+  const examples = (pricing as { examples?: unknown } | null | undefined)?.examples;
+  if (!Array.isArray(examples)) return null;
+  const prices = examples
+    .map((ex) => priceUSD((ex as { price?: unknown } | null)?.price))
+    .filter((n): n is number => n != null && n > 0);
+  return prices.length ? Math.min(...prices) : null;
+}
+
+/**
  * Cheapest published price per pixel, in USD, across a commercial system's
  * `pricing.examples` that say how many pixels they buy. Null when no example
  * has both a parseable price and a pixel count (quote-only systems).

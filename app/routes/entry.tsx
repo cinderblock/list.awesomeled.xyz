@@ -40,6 +40,7 @@ import { entrySeo } from '~/lib/seo.server';
 import { LinkRecord, UrlText } from '~/components/entry/LinkRecord';
 import { asLinkRecord } from '~/lib/url-label';
 import { humanizeKey } from '~/lib/fields';
+import { TIER_LABELS, tierRank, type Tier } from '~/lib/tiers';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -1037,6 +1038,9 @@ function formatValue(
   if (value instanceof Date) return <LocalDate date={value} />;
 
   const strValue = String(value);
+  // Enum values with a display label (commercial tier "pro-kit" → "Pro kit")
+  const shown =
+    path === 'pricing.tier' && tierRank(value) != null ? TIER_LABELS[value as Tier] : strValue;
 
   if (strValue.startsWith('http')) {
     return (
@@ -1056,12 +1060,12 @@ function formatValue(
     return (
       <Link
         className="entry-value-link"
-        to={`${categoryPath}?f=${key}:${escapeFilterValue(strValue)}`}
+        to={`${categoryPath}?f=${key}:${escapeFilterValue(shown)}`}
       >
-        {strValue}
+        {shown}
       </Link>
     );
   }
 
-  return strValue;
+  return shown;
 }
