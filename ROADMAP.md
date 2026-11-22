@@ -49,9 +49,6 @@ history. This is what's next.
   AliExpress listings), quote-only commercial systems (Lumisphere, Glasson,
   TMB, LEDSnaps, ENTTEC SMART PXL, Schnick-Schnack). `node
 scripts/check-links.ts --prices` lists undated/stale prices
-- Commercial-systems `$` scale: undefined in the sheet and doesn't track
-  price per pixel — owner call (see `plans/data-freshness.md`); the Per
-  Pixel column gives the objective comparison meanwhile
 - Remaining images (2026-11-18 pass covered 73% of hardware entries; every
   skip has a reason in `plans/assets-research/`): molex.com /
   phoenixcontact.com block bots (XH, PicoBlade, Mini-Fit Jr, KK, MSTB),
@@ -75,8 +72,6 @@ scripts/check-links.ts --prices` lists undated/stale prices
 
 ## Decisions parked (owner: Cameron)
 
-- Commercial systems' `$`…`$$$$$$` rating: replace with computed "From" and
-  "Per Pixel" prices (`plans/data-freshness.md`, open question 1)
 - R2 bucket + public domain + account-owned token → switches on the
   datasheet mirror (pipeline, tests and docs are ready:
   `docs/datasheet-mirroring.md` "One-time setup"; plan: `plans/assets.md`)

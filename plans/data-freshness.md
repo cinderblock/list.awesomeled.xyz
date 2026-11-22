@@ -11,11 +11,11 @@ then make freshness durable: the site should show how old a price is, and
 the tooling should keep finding rot and staleness without someone remembering
 to look.
 
-## Status (2026-11-20, 2:40 AM PST / 10:40Z)
+## Status (2026-11-22, PST)
 
 Everything below is on `master` except where marked. One owner decision is
-open: the commercial "experience tier" that replaces the `$` rating
-(proposal below). The monthly workflow is running again; the NS/HD names
+open: how datasheet and measured values are recorded and shown (proposal
+below). The commercial `$` rating is replaced by experience tiers. The monthly workflow is running again; the NS/HD names
 are split into IC and LED entries.
 
 |                                                 | Start of day                  | Now                                       |
@@ -77,6 +77,12 @@ are split into IC and LED entries.
   NS aliases. Each HD pixel declares `uses: pixel-ics/ns…`; the reverse
   link is derived. Controller protocol lists that say "NS107S" now resolve
   to the IC entry.
+- **Commercial `$` → experience tiers** (Cameron, 2026-11-22: "sounds
+  good"): `pricing.tier` = parts | plug-and-play | pro-kit |
+  full-experience, by what the buyer gets and how it is sold, each cited
+  in `sources["pricing.tier"]`. Prices are computed columns: From
+  (cheapest price point, "Quote only" without one) and Per Pixel. No
+  voting.
 
 ## What shipped
 
@@ -122,6 +128,16 @@ are split into IC and LED entries.
     current 17.5 mA and 200 mW from Newstar's page (the sheet's 9 mA /
     45 mW had no source). Not split: NS108E, since Newstar's catalog gives
     it no HD name.
+11. **Experience tiers** replace the `$` rating on commercial systems:
+    schema `pricing.tier`, a Tier column (sorts parts → full experience,
+    definitions in the header tip) and a From column; entry pages show
+    the label. All 18 systems researched 2026-11-22: 2 parts, 1 plug and
+    play, 7 pro kit, 8 full experience. Changed from first guesses: Astera
+    Nyx, LB-100 and LightWalls are pro kits (list prices, standard DMX /
+    Art-Net); SMART PXL is full experience (made to order, quoted by a
+    sales engineer). Thin evidence: LightWalls (protocol unconfirmed),
+    FestoonLight Q4 (dealer page only). Sheet parity drops the Price
+    Range column.
 
 ## Findings / gotchas
 
@@ -195,32 +211,37 @@ are split into IC and LED entries.
 - [x] Monthly workflow: restarted by the 4:15 PM push; inactivity warning
       added (`1d8b88b`).
 - [x] NS/HD pairs merged (`ec19baf`), then split into IC + LED entries.
-- [ ] Commercial experience tier: waiting on Cameron (below).
+- [x] Commercial experience tiers shipped.
+- [ ] Datasheet vs measured values: waiting on Cameron (below).
 
 ## Open questions for the user
 
-1. **Commercial experience tier** (replaces the sheet's undefined `$`
-   rating). Cameron, 2026-11-20: "more like a restaurant system, or a star
-   system. some are fast food... some are a little more plug and play.
-   others are full experience". Voting dropped. Proposal, four tiers by
-   what the buyer gets, not by price (prices stay as computed **From** and
-   **Per Pixel** columns beside it):
-   - **Parts** (fast food): bare pixel products; bring your own
-     controller, power and software. RGB-Pixel-Panel, RGBW-Pixel-Panel.
-   - **Plug and play**: a complete kit that works out of the box with an
-     app or built-in controller. Twinkly.
-   - **Pro kit**: commercial-grade fixtures plus a dedicated controller on
-     standard protocols (DMX, Art-Net, sACN), bought online or from a
-     dealer and set up by an installer. Triklit, Festoon 2 RGB,
-     FestoonLight Q4, Vinci, SmartPXL.
-   - **Full experience**: a closed ecosystem from a pro lighting brand,
-     sold through dealers or integrators with system design, often quote
-     only. Flex, VC-Dot 1, LB-100, Astera Nyx, Strip and Tiles, DFS3000,
-     Intelligent Marquee, Active RGB, Ledsnaps, LightWalls.
-     The assignments are first guesses from the entries' notes; each gets a
-     sourced check (how it's sold and set up) when implemented. Schema: a
-     `pricing.tier` enum in place of `price_range` (needs stream 2's OK).
-     Recommendation: yes.
+1. **Datasheet vs measured values** (Cameron, 2026-11-22, on HD8808's
+   17.5 mA: "we should have consistent visual presentation for datasheet
+   spec vs user measured. both are valuable"). Today a measurement lives
+   only in free text, and in two cases it replaced the datasheet value in
+   the field: `gs8208` channel current (field 10 mA measured; datasheet
+   15 mA in a note), `sk6812` PWM (field 1.1 kHz measured; datasheet
+   1.2 kHz in a note). `ws2812` notes "measured 19-22 mA" against the
+   datasheet's 49 mA; `apa107` cites an SK9822 measurement. Proposal:
+   - **Data:** the field holds the maker's spec, cited in `sources` as
+     now. A new `measurements` map, keyed by field path like `sources`,
+     holds a list of `{value, conditions, by, date, url}`: what was
+     measured, under what conditions ("3 LEDs in series at 12 V"), who
+     measured it, when, and a link to the write-up, scope capture or
+     video. Units and validation are the same as the field's.
+   - **Entry page:** every value with a measurement shows two lines, each
+     with a tag: `Datasheet 15 mA` and `Measured 10 mA · 3 LEDs at 12 V ·
+who, date · link`. One tag style for every field, everywhere.
+   - **Tables and compare:** show the datasheet value, with a small
+     "measured" mark in the cell (like the price clock mark) when a
+     measurement exists; tapping it shows the measured value.
+   - **Migration:** move the 4 cases above into `measurements` and put
+     the datasheet values back in the fields.
+   - **Contributing:** CONTRIBUTING.md gets a short "add a measurement"
+     example, so people can submit theirs.
+     Schema change (stream 2's area) plus entry-page and table UI.
+     Recommendation: yes, built in this stream.
 
 ## Things not to do
 
