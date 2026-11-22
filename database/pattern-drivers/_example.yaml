@@ -34,6 +34,9 @@ capabilities:
   visualizer_notes: shows fixture models
   programmatic: Output # user code drives outputs; Input, Both, or true when the direction is unknown
 integrations: WLED, Falcon Player
+kind: # what it is for, one or a list: sequencer, live, player, music-reactive, on-controller
+  - live
+  - sequencer
 language: JavaScript # one, or a list (common.json programming_language)
 links:
   url: https://example.com/led-studio
@@ -75,6 +78,7 @@ capabilities:
   live: true
   designer: false
   visualizer: false
+kind: on-controller
 language:
   - C++
   - JavaScript

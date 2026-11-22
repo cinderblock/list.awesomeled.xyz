@@ -47,15 +47,19 @@ function escapeFilterValue(val: string): string {
   return val.replace(/([|:,~!-])/g, '\\$1');
 }
 
+/** Filterable field keys, each with the display labels its table column shows its values under. */
+type FilterableFields = Map<string, Record<string, string> | undefined>;
+
 // Get filterable fields for a category (fields with select or boolean filterConfig)
-function getFilterableFields(categoryId: string): Set<string> {
+function getFilterableFields(categoryId: string): FilterableFields {
   const columns = getColumnsForCategory(categoryId);
-  const filterable = new Set<string>();
+  const filterable: FilterableFields = new Map();
   for (const col of columns) {
     if (col.filterConfig?.type === 'select' || col.filterConfig?.type === 'boolean') {
       // Both the full dotted key and its leaf are useful for matching
-      filterable.add(col.key);
-      filterable.add(col.key.split('.').pop()!);
+      const leaf = col.key.split('.').pop()!;
+      filterable.set(col.key, col.valueLabels);
+      if (!filterable.get(leaf)) filterable.set(leaf, col.valueLabels);
     }
   }
   return filterable;
@@ -756,7 +760,7 @@ function KeyValueGrid({
 }: {
   entries: [string, unknown][];
   categoryPath: string;
-  filterableFields: Set<string>;
+  filterableFields: FilterableFields;
   connectorNames?: Record<string, string>;
   /** Provenance for a top-level `price` row (undefined = not a price grid) */
   priceSource?: ReturnType<typeof getPriceSource>;
@@ -894,7 +898,7 @@ function CreatorLine({
 
 interface FormatContext {
   categoryPath: string;
-  filterableFields: Set<string>;
+  filterableFields: FilterableFields;
   connectorNames: Record<string, string>;
   nameLinks: InlineNameLinks;
   sources: Record<string, FieldSource | FieldSource[]>;
@@ -949,19 +953,24 @@ function formatValue(
     const arrBadges = ValueBadges({ value, categoryPath, fieldKey: key });
     if (arrBadges) return arrBadges;
     if (filterableFields.has(key)) {
+      // The table's display labels, so the link text and its filter match the cells
+      const labels = filterableFields.get(key);
       return (
         <span>
-          {value.map((item, idx) => (
-            <span key={idx}>
-              {idx > 0 && ', '}
-              <Link
-                className="entry-value-link"
-                to={`${categoryPath}?f=${key}:${escapeFilterValue(String(item))}`}
-              >
-                {String(item)}
-              </Link>
-            </span>
-          ))}
+          {value.map((item, idx) => {
+            const shown = labels?.[String(item)] ?? String(item);
+            return (
+              <span key={idx}>
+                {idx > 0 && ', '}
+                <Link
+                  className="entry-value-link"
+                  to={`${categoryPath}?f=${key}:${escapeFilterValue(shown)}`}
+                >
+                  {shown}
+                </Link>
+              </span>
+            );
+          })}
         </span>
       );
     }
@@ -1057,6 +1066,7 @@ function formatValue(
   }
 
   if (filterableFields.has(key)) {
+    const shown = filterableFields.get(key)?.[strValue] ?? strValue;
     return (
       <Link
         className="entry-value-link"

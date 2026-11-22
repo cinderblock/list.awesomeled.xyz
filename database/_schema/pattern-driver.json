@@ -10,6 +10,9 @@
       "enum": ["Input", "Output", "Both", false],
       "description": "Input: the software receives it. Output: it sends it. Both. false: not supported (checked). Leave the field out when unknown."
     },
+    "kind": {
+      "enum": ["sequencer", "live", "player", "music-reactive", "on-controller"]
+    },
     "other_io": {
       "type": "array",
       "uniqueItems": true,
@@ -47,6 +50,18 @@
     },
     "notes": {
       "type": ["string", "null"]
+    },
+    "kind": {
+      "oneOf": [
+        { "$ref": "#/definitions/kind" },
+        {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/kind" }
+        }
+      ],
+      "description": "What it is for, one or a list: sequencer (shows programmed ahead on a timeline or cue list), live (performed or generated in real time: VJ, media servers, consoles, creative coding), player (plays back shows made elsewhere, standalone or on a schedule), music-reactive (built mainly to turn audio into light), on-controller (runs on the pixel controller itself)"
     },
     "language": {
       "$ref": "common.json#/definitions/programming_languages",

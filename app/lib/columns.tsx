@@ -692,6 +692,15 @@ export const pixelICColumns: Column[] = [
   partPriceColumn,
 ];
 
+// pattern-driver.json kind enum -> display label
+const PATTERN_DRIVER_KIND_LABELS: Record<string, string> = {
+  sequencer: 'Sequencer',
+  live: 'Live / VJ',
+  player: 'Player',
+  'music-reactive': 'Music-reactive',
+  'on-controller': 'On-controller',
+};
+
 export const patternDriverColumns: Column[] = [
   {
     key: 'links',
@@ -702,6 +711,16 @@ export const patternDriverColumns: Column[] = [
   },
   { key: 'name', label: 'Name' },
   { key: 'creator', label: 'Creator', render: renderCreator },
+  {
+    key: 'kind',
+    label: 'Kind',
+    // One kind, or a list
+    render: (v) => (v == null ? null : renderBadgeArray([v].flat(), PATTERN_DRIVER_KIND_LABELS)),
+    filterConfig: { type: 'select' },
+    valueLabels: PATTERN_DRIVER_KIND_LABELS,
+    headerTip:
+      'What it is for: programming shows ahead (sequencer), performing live, playing back shows, reacting to music, or running on the controller itself',
+  },
   {
     key: 'pricing.price',
     label: 'Price',
