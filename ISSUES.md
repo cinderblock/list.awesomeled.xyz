@@ -125,7 +125,12 @@ QuinLED-Dig-Quad, SmartShow Pro ONE, SPI Matrix). Where stream 2's pass
 (de0730f) recorded the same facts, its encoding was kept on rebase and both
 citations merged.
 
-## Two "controllers" drive no pixels (parity / standardization)
+## Two "controllers" drive no pixels (parity / standardization) — fixed (stream 2)
+
+**Fixed (stream 2).** On Cameron's call both moved to pattern drivers as
+players (`38e215f5`): `pattern-drivers/dmx-core` and
+`pattern-drivers/pixout-server`, with pattern drivers' new `kind` field
+(`234519c5`). They are out of the controllers table and the designer.
 
 Found by cross-links research (stream 4), from the makers' own pages:
 
@@ -148,8 +153,8 @@ the Pi inside.
 Stream 2: DMX Core 100's pixel outputs are gone too (899dc868); the PixOut
 entry carries its maker's name ("Pixout ArtNet DMX Recorder"), the D-100's
 four DMX outputs and its 12 V supply (899dc868, b4389253). Where both belong
-is Cameron's call, tied to the parked pattern-driver kinds: open questions
-1-2 in [plans/database-review.md](plans/database-review.md).
+was Cameron's call, tied to the parked pattern-driver kinds: open questions
+1-2 in [plans/database-review.md](plans/database-review.md) (answered).
 
 Designer (stream 3, 2026-11-20): an entry whose `outputs` block lists only
 `auxiliary` outputs is no longer offered as a pixel controller, so the PixOut

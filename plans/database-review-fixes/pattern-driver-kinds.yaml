@@ -1,0 +1,370 @@
+# Pattern-driver kinds (database review, 2026-11-22): what each entry is for,
+# from its maker's pages. `doubt` marks a judgment call or a weak source;
+# the entries carry kind + sources.kind. dmx-core was kept as player + sequencer
+# (docs.dmxcore.com: "build scenes, effects, and sequences"; Timelines).
+
+allpixmatrix:
+  kind: [live]
+  url: https://github.com/NLED/allpixmatrix
+  retrieved: '2026-11-22'
+  notes: '"A Processing based video creation and mixing application for low resolution LED screens and matrices"; output streamed to serial/Art-Net'
+
+arkaos:
+  kind: [live]
+  url: https://web.archive.org/web/20250906170847/https://arkaos.com/
+  retrieved: '2026-11-22'
+  notes: '"Video for lighting people": media servers (Arkaos Pro, VS servers); legacy MediaMaster and GrandVJ VJ software'
+
+arthet-led-mapper:
+  kind: [live]
+  url: https://github.com/cyberboy666/artnet_led_mapper
+  retrieved: '2026-11-22'
+  notes: 'Pixel mapper: takes live video from webcams, capture cards or NDI and outputs it as Art-Net to an LED map'
+
+bekonix:
+  kind: [sequencer]
+  url: https://apps.apple.com/np/app/bekonix-mobile/id1513072328
+  retrieved: '2026-11-22'
+  notes: '"Bekonix Designer (Mac): Design interactive LED animations on a graphic timeline"; projects uploaded to the hardware over Bluetooth'
+  doubt: 'bekonix.com now only shows an IoT platform; evidence is the app listing. Projects run on Bekonix OS firmware, so on-controller is arguable'
+
+bento:
+  kind: [sequencer]
+  url: https://github.com/benkuper/BenTo
+  retrieved: '2026-11-22'
+  notes: '"Official BenTo Light Props Show Authoring Tool"; docs: timeline with block and audio layers, baked to props SD cards'
+
+blux:
+  kind: [live]
+  url: http://benjamin.kuperberg.fr/blux
+  retrieved: '2026-11-22'
+  notes: '"designed to fit modern, interactive and playful ways to control lights and stage props" ... "spatialization, live interaction"'
+  doubt: 'Page is thin (empty features list); timeline features, if any, are not shown'
+
+chataigne-wled-mod:
+  kind: [live]
+  url: https://github.com/zak-45/WLED-Chataigne-Module
+  retrieved: '2026-11-22'
+  notes: '"Manage your WLED devices from Chataigne" over the WLED HTTP/JSON API, UDP and WebSocket'
+  doubt: "A Chataigne plug-in, not a pattern engine: WLED makes the patterns; it inherits Chataigne's live and timeline uses"
+
+chataigne:
+  kind: [live, sequencer]
+  url: http://benjamin.kuperberg.fr/chataigne/en
+  retrieved: '2026-11-22'
+  notes: '"designed to fit both linear shows and realtime/interactive project needs"; docs: State Machine for real time, Time Machine timelines'
+  doubt: 'A show-control hub ("Conductor") that drives other software and devices; it does not generate LED patterns itself'
+
+chromatik:
+  kind: [live]
+  url: https://chromatik.co/
+  retrieved: '2026-11-22'
+  notes: '"unified environment for 3D lighting composition and performance"; DJ/VJ-style mixer, crossfader, generative modulation'
+
+dylos:
+  kind: [live]
+  url: https://www.obsidiancontrol.com/pages/dylos
+  retrieved: '2026-11-22'
+  notes: '"media-server-style processor built directly into the ONYX 2D Plan workspace"; live previews, "Instant access ... flexible playback"'
+
+elm:
+  kind: [live]
+  url: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
+  retrieved: '2026-11-22'
+  notes: '"pixel mapping software that turns any LED install into one show you control"; layers of video, shaders, camera feeds adjusted live'
+
+faith-chapel:
+  kind: [live]
+  url: https://resources.faithchapel.cc/blogs/pixel_mapping_software
+  retrieved: '2026-11-22'
+  notes: 'Pixel mapping software from a church production team; entry lists NDI, SDI and MIDI inputs (live video to pixels)'
+  doubt: "Page body loads by script and is empty to fetch and in the Wayback copy; kind inferred from the entry's inputs, not the maker's text"
+
+falconplayer:
+  kind: [player]
+  url: https://github.com/FalconChristmas/fpp
+  retrieved: '2026-11-22'
+  notes: '"lightweight, optimized, feature-rich sequence player" for Raspberry Pi and BeagleBone'
+
+fastled-fx-engine:
+  kind: [on-controller]
+  url: https://github.com/FastLED/FastLED
+  retrieved: '2026-11-22'
+  notes: '"The Universal LED Library for Embedded and Arduino"; src/fx is an "FX library with 1D/2D effects, video playback, composition utilities"'
+
+filament:
+  kind: [live, sequencer]
+  url: https://filament.click/
+  retrieved: '2026-11-22'
+  notes: '"professional LED player and VJ mixer in one app"; Arrangement view to "build a pre-recorded show on a timeline, DAW-style"'
+
+freestyler:
+  kind: [live]
+  url: https://www.freestylerdmx.be/begin.htm
+  retrieved: '2026-11-22'
+  notes: '"free lighting control software used by many leading dj''s, venues and lighting designers" (DMX console software)'
+
+geopix-2-0-full:
+  kind: [live]
+  url: https://github.com/EnviralDesign/GeoPix
+  retrieved: '2026-11-22'
+  notes: '"free and open source real-time lighting control and previz software"; maps real-time video and generative content; Perform tab'
+
+geopix0-9:
+  kind: [live]
+  url: https://www.enviral-design.com/
+  retrieved: '2026-11-22'
+  notes: '"real-time lighting control and previz software"; FireLine #3 visuals "programmed, and performed using an earlier version of GeoPix"'
+
+glediator:
+  kind: [live]
+  url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+  retrieved: '2026-11-22'
+  notes: '"Graphical LED Installation AnimaTOR ... software to control led matrix and led stripe installations", streaming live over serial/Art-Net'
+
+grandma:
+  kind: [live]
+  url: https://www.malighting.com/grandMA3-software
+  retrieved: '2026-11-22'
+  notes: 'Lighting-console software, "the soul of the MA system"; "playback options ... allow for maximum usability of all sequences"'
+
+hls:
+  kind: [sequencer]
+  url: https://web.archive.org/web/2019/http://joehinkle.com/HLS/HLS%20Release%20Notes.txt
+  retrieved: '2026-11-22'
+  notes: 'Release notes: effects added to "the sequence", Vixen/LOR sequence conversion, SHOW playlists; separate HLS Player plays shows'
+  doubt: "The archived site is only a file listing; evidence is the maker's release notes"
+
+jinx:
+  kind: [live]
+  url: https://live-leds.de/?p=20
+  retrieved: '2026-11-22'
+  notes: '"22 effect generators"; "touchscreen friendly show mode for playing scenes and chases"; remote control via DMX, Art-Net, sACN'
+
+led-lab:
+  kind: [live]
+  url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+  retrieved: '2026-11-22'
+  notes: '"quickest, easiest, most powerful way to drive your LED display"; Scenes played in order or shuffled; usable as a VJ tool'
+
+led-strip-studio-software:
+  kind: [sequencer]
+  url: https://www.ledstripstudio.com/products/lss4/
+  retrieved: '2026-11-22'
+  notes: '"Build and sequence your full timeline, scene by scene"; "Import audio and sync effects precisely to the music"; export for standalone'
+  doubt: 'Also offers live control (touch scene selection, video grabbers, MIDI/OSC); live could be a second kind'
+
+lededit:
+  kind: [sequencer]
+  url: https://learnitstepbystep.blogspot.com/2018/07/download-led-edit-2014-2016-2017-2018.html
+  retrieved: '2026-11-22'
+  notes: '"used to program Pixel LED controllers"; "create customized LED display animations" (for T-1000S/T-600K SD-card controllers)'
+  doubt: 'Only source is a third-party download blog; the maker is not identified and no maker page was found'
+
+ledfx:
+  kind: [music-reactive]
+  url: https://github.com/LedFx/LedFx
+  retrieved: '2026-11-22'
+  notes: '"network based LED effect engine designed to deliver advanced real-time audio effects to a wide variety of devices"'
+
+leds-master:
+  kind: [live]
+  url: https://antoine.doussaud.org/leds_master
+  retrieved: '2026-11-22'
+  notes: '"load shaders, musics, microphone, videos and custom scripts to create live animation" for big RGB LED matrices'
+
+light-o-rama:
+  kind: [sequencer]
+  url: https://store.lightorama.com/pages/download-software
+  retrieved: '2026-11-22'
+  notes: 'Software is the "ShowTime Sequencing Suite" (S6); the suite also bundles Show Player and Cue List Player'
+
+light-show-pro:
+  kind: [sequencer, live]
+  url: https://web.archive.org/web/20090820040327/http://www.lightshowpro.com/
+  retrieved: '2026-11-22'
+  notes: '"The Industry''s Best, Professional Light Show Sequencer and Live Performance Software"; time line scrubbing, Live LightShow feature'
+
+lightdesigner:
+  kind: [sequencer]
+  url: https://apps.microsoft.com/detail/9nwk9dkv7dfl?hl=en-US
+  retrieved: '2026-11-22'
+  notes: 'Desktop app to design interactive LED animations on a graphic timeline, then load them onto RocketLife LightBox/LightBoard hardware.'
+  doubt: 'Maker site is dead (410) and Wayback was unreachable from here; description comes from the Microsoft Store listing as seen in search results.'
+
+lightfactory:
+  kind: [live]
+  url: https://www.lightfactory.net/Introducing_LightFactory__Lighting_Without_Limits_.html?mPath=2_8
+  retrieved: '2026-11-22'
+  notes: '"a leading software based lighting control system" with "Full tracking console" and "Unlimited cue lists"; a PC lighting console.'
+
+lightjams:
+  kind: [live, music-reactive]
+  url: https://www.lightjams.com/
+  retrieved: '2026-11-22'
+  notes: '"Interactive DMX lighting software that reacts to music, MIDI, video, and more"; "Music-Driven Lighting" section with real-time audio analysis.'
+  doubt: 'Music leads the headline and has its own section, but the page treats it as one live input among MIDI, OSC, video and time; music-reactive is borderline.'
+
+lightmobile:
+  kind: [player]
+  url: https://apps.microsoft.com/detail/9nwk9dkv7dfl?hl=en-US
+  retrieved: '2026-11-22'
+  notes: 'Phone app to select programs on Light hardware, monitor sensor input, and schedule programs to play on special days; shows are made in LightDesigner.'
+  doubt: 'Maker site is dead; description comes from the Microsoft Store listing as seen in search results, not a fetched maker page.'
+
+lss-remote:
+  kind: [player]
+  url: https://www.ledstripstudio.com/products/lss_remote/
+  retrieved: '2026-11-22'
+  notes: '"Play a wide variety of animations directly from the SD card", build playlists that "loop them endlessly"; also pick colors and switch scenes.'
+  doubt: 'Also a live remote (colour picker, scene switching), but it has no editor and its main job is playing SD-card animations; live could be added.'
+
+lumiastream:
+  kind: [live]
+  url: https://lumiastream.com/pricing
+  retrieved: '2026-11-22'
+  notes: '"All In ONE Streaming Tool": lights react to chat commands, alerts and gifted subs in real time; Fuze modes "Sync lights to audio or video".'
+  doubt: 'None fits well: it is a livestream-interaction tool where viewers and alerts drive lights, not an operator; live is the closest. Audio sync is one feature.'
+
+lx-studio-chromatik:
+  kind: [live]
+  url: https://github.com/heronarts/LXStudio
+  retrieved: '2026-11-22'
+  notes: '"a digital lighting workstation" and "a rich environment for lighting composition and performance" with generative patterns and modulation.'
+
+madmapper:
+  kind: [live]
+  url: https://madmapper.com/madmapper/software
+  retrieved: '2026-11-22'
+  notes: '"The Most Advanced Application for Video and LED Mapping"; controls LED arrays or many DMX fixtures in real time, with a cueing system.'
+
+madrix-5:
+  kind: [live]
+  url: https://www.madrix.com/products/software
+  retrieved: '2026-11-22'
+  notes: '"the ultimate control tool for your LED lighting", "a tool for generative visuals and effects"; 2D/3D pixel mapping, 55+ effects.'
+  doubt: 'Also has Cue Lists ("automated playlists") and time-code Timelines, so sequencer could be a second kind; the page leads with live mapping and effects.'
+
+magicq:
+  kind: [live]
+  url: https://chamsyslighting.com/software/magicq-software-licensing/
+  retrieved: '2026-11-22'
+  notes: 'Lighting console software: "powerful lighting control, full lighting visualisation, pixel mapping, and HD media playback".'
+
+mapio-pro:
+  kind: [live]
+  url: https://visution.com/
+  retrieved: '2026-11-22'
+  notes: 'Projection-mapping/VJ software; PRO can "output your dynamic, interactive and other content on the addressable RGB LED strips"; decks and mixers.'
+  doubt: 'PRO also stresses "autonomous and permanent installations" with playlist decks, so player could be a second kind.'
+
+millumin:
+  kind: [live, sequencer]
+  url: https://www.millumin.com/v5/index.php
+  retrieved: '2026-11-22'
+  notes: '"Complete solution to create Audiovisual Shows" for theatre, dance and mapping; Sequencer + Timeline to "Program cues and animations".'
+
+pharos-designer:
+  kind: [sequencer]
+  url: https://www.pharoscontrols.com/designer/
+  retrieved: '2026-11-22'
+  notes: 'Builds "pre-programmed lighting displays" from timelines and scenes that run on Pharos controllers; "no PC needs to be left on site".'
+
+pixelblaze:
+  kind: [on-controller]
+  url: https://electromage.com/pixelblaze
+  retrieved: '2026-11-22'
+  notes: 'Wi-Fi LED controller whose firmware runs patterns/playlists itself; "LEDs update live as-you-code". Sound reactivity is an optional sensor board.'
+
+poet-creator:
+  kind: [live]
+  url: https://poet.software/poet-creator-software/
+  retrieved: '2026-11-22'
+  notes: '"a suite of customizable visual content engines" whose parameters respond to live tracking, sensor and data inputs; smart scheduling for installs.'
+
+protopixel-create:
+  kind: [live]
+  url: https://www.protopixel.io/product/mapping-tool
+  retrieved: '2026-11-22'
+  notes: '"Design dynamic moods": "Create moods using color, video, scripts, NDI, Syphon, shaders"; parametric content library, Art-Net/SPI gates.'
+  doubt: 'No timeline and no operator focus: it designs looping generative "moods" that Protopixel Brains run and recall; live (generative engine) is the closest fit.'
+
+qlc:
+  kind: [live, sequencer]
+  url: https://www.qlcplus.org/discover/features
+  retrieved: '2026-11-22'
+  notes: '"The Virtual Console ... allows you to control your light shows during live events"; Show Manager sets up "a time driven show" on a multitrack view.'
+
+resolume:
+  kind: [live]
+  url: https://resolume.com/software
+  retrieved: '2026-11-22'
+  notes: 'Avenue is VJ software for "live visuals"; Arena is a "Resolume Arena Media Server" with projection mapping and lighting-desk control.'
+
+smartshow-lms:
+  kind: [live]
+  url: https://smartshowlms.leejamesapps.co.uk/
+  retrieved: '2026-11-22'
+  notes: '"A modern LED matrix server" built "with working shows in mind": 70+ effects, scenes, chases, and a touch Show Mode; audio reactive is one feature.'
+
+smode:
+  kind: [live]
+  url: https://www.smode.io/en/product/live-media-server
+  retrieved: '2026-11-22'
+  notes: '"Redefining Real-Time Compositing and Media Serving": 2D/3D real-time compositing engine and media server for live productions.'
+
+touchdesigner:
+  kind: [live]
+  url: https://derivative.ca/
+  retrieved: '2026-11-22'
+  notes: 'Real-time visual development platform for installations, live multimedia shows, media servers and projection mapping; "the hub that brings these all together".'
+
+vixen-lights:
+  kind: [sequencer]
+  url: https://www.vixenlights.com/
+  retrieved: '2026-11-22'
+  notes: '"create amazing synchronized light shows" and "synchronize your lights to music" with readily available lights and hardware.'
+
+vvvv:
+  kind: [live]
+  url: https://vvvv.org/
+  retrieved: '2026-11-22'
+  notes: '"visual live-programming environment"; large-scale interactive spaces, custom media servers, realtime output from sensors to graphics and lighting.'
+
+watchout:
+  kind: [sequencer, player]
+  url: https://www.dataton.com/watchout
+  retrieved: '2026-11-22'
+  notes: '"Multi-display production and playback": content is placed on a timeline in the Producer, then media servers play the show in sync.'
+  doubt: 'It is also a live-event media server (live is the vocab home for media servers), but its model is a pre-built timeline played back, not live performance.'
+
+wled:
+  kind: [on-controller]
+  url: https://github.com/wled/WLED
+  retrieved: '2026-11-22'
+  notes: '"A fast and feature-rich firmware for ESP32 microcontrollers to control addressable LEDs"; AudioReactive effects are one built-in feature.'
+
+xlights:
+  kind: [sequencer]
+  url: https://www.xlights.org
+  retrieved: '2026-11-22'
+  notes: '"enables you to design, create and play amazing lighting displays"; effects assigned across a sequence, timed to music with beat tracking.'
+
+xschedule:
+  kind: [player]
+  url: https://github.com/xLightsSequencer/xSchedule
+  retrieved: '2026-11-22'
+  notes: '"xSchedule is a show scheduler and player for lighting control": plays FSEQ sequences in playlists scheduled by time of day and weekday.'
+
+dmx-core:
+  kind: [player]
+  url: https://dmxcore.com/dmx-core-100
+  retrieved: '2026-11-22'
+  notes: '"Capture DMX data from external lighting consoles or software", replay as cues/timelines standalone; scheduling: "Set it up once, let it run".'
+  doubt: 'Also offers live presets on its touchscreen and built-in generated effects (Fire, Chaser) run on the box, so live or on-controller are minor secondary fits.'
+
+pixout-server:
+  kind: [player]
+  url: https://pixout.lighting/products/recorder/
+  retrieved: '2026-11-22'
+  notes: '"Record ArtNet" from a desk or media server; "Disconnect the desk and the show keeps running, 44 FPS, 24/7, with no PC on site"; daily/weekly scheduler.'

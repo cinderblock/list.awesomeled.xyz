@@ -75,10 +75,6 @@ scripts/check-links.ts --prices` lists undated/stale prices
 - R2 bucket + public domain + account-owned token → switches on the
   datasheet mirror (pipeline, tests and docs are ready:
   `docs/datasheet-mirroring.md` "One-time setup"; plan: `plans/assets.md`)
-- Pattern-driver subcategories: filterable `kind` field (sequencer / live-VJ /
-  player / music-reactive / on-controller) vs. real category split.
-  Recommendation (`kind`, one or a list) and the two "controllers" that are
-  really players: `plans/database-review.md`, open questions 1-2
 - Connector line art (outline/locking icons) — needs art direction
 - Real-device tilt test (Android: immediate; iOS: tap the rainbow logo);
   tilt sensitivity is one constant in RainbowContext.tsx

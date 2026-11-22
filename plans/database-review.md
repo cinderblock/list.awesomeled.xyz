@@ -35,7 +35,7 @@ Research findings with sources: [database-review-research.md](database-review-re
 
 - `pixel_rate_max` is derived at load time (`deriveFields` in `app/lib/data.ts`), never stored (commit `a1cd65f`, before this stream).
 - Structural/migration commits are separate from per-entry data commits; non-review batch commits go into `IGNORED_COMMITS`.
-- Pattern-driver subcategories are Cameron's parked decision: recommendation only.
+- Pattern drivers get a `kind` field, not a category split (Cameron, 2026-11-22): one value or a list from `sequencer` / `live` / `player` / `music-reactive` / `on-controller`, shown as the Kind column ("Live / VJ" etc.) with a filter. `music-reactive` means built for it, not "has an audio-reactive effect". DMX Core 100 and the Pixout recorder moved to pattern drivers as players (same day).
 - **Field ownership (stream 4, cross-links, per ISSUES.md)**: controllers' `outputs.protocols`, `software.firmware`/`works_with`, `inputs.requires_host`, `outputs.driver.IC`, free-text `outputs.connector`; drive libraries' `supported_ics`; `related*`, `aliases`, `sources`; pixels'/pixel ICs' `data.type`; adapters' host boards (`parent`) and connectors. I don't batch-edit those. Spelling variants there are handled by `app/lib/relations.ts` name matching.
 - Package naming: IC packages LCSC-style with pin count (`SOP-8`, `QFN-16`); LED packages as footprint codes (`5050`) or through-hole size (`5mm`). Keep the datasheet's family (SOP vs SOIC).
 - Clocked vocabulary: pixels/pixel ICs `data.clocked: boolean`; boards' `outputs.clocked`: `false` (single-wire) / `selectable` / `always` (common.json `clocked_support`). Prose term for non-clocked: "single-wire" ("async" accepted in comments).
@@ -57,6 +57,8 @@ Research findings with sources: [database-review-research.md](database-review-re
 - The sheet itself has shifted rows (Adapters "Pi Hat", Pixel Decoders "PixFog", Diffusive "Silicone Sealant"): values landed in the wrong columns. Treat those rows' data as suspect.
 - Adapters' sheet "Outputs" column (Single/Both/Clocked/DMX) is a normalized copy of "Pixel Types", not single-ended vs differential.
 - Diffusive sheet header says "Sample thickness (inches)", but PEX/PP pipe "3.2" values are mm.
+- Pattern-driver kinds: judgment calls the research flagged, kept as classified: MADRIX 5 `live` (it has cue lists and timelines too), Mapio Pro `live` (playlist decks), LED Strip Studio `sequencer` (strong live control too), WATCHOUT `sequencer` + `player` (also a media server), Lightjams `live` + `music-reactive` (music leads its page), Lumia Stream and ProtoPixel Create `live` (nearest fit). LightDesigner / LightMobile (dead maker site, Microsoft Store listing), LEDEdit (third-party page only) and Faith Chapel (script-only page; inferred from its inputs) have weak sources. Records: `plans/database-review-fixes/pattern-driver-kinds.yaml`.
+- `git mv` stages the old content at the new path: a later `git add` of other paths plus `git commit` takes the rename along. Commit a move with its rewritten content in one commit.
 - `git add` with a path that no longer exists (after `git mv`) aborts the whole add: the F-Test commit first went out with the rename only. Fixed with a fixup + autosquash before push. Stage moved files by their new path only.
 - Research agents' `curl` can drop files into the worktree; tell them to use the scratchpad.
 - A plain `yaml` re-stringify can't round-trip the database (files mix folded and long prose lines); the block-splice in `lib.ts` does (verified: no-op over all entries is byte-identical).
@@ -100,7 +102,8 @@ Research findings with sources: [database-review-research.md](database-review-re
 14. ✅ Docs: CONTRIBUTING.md schema reference and value conventions, `database/_schema/README.md`, CLAUDE.md, OVERHAUL-PLAN.md, TODO.md.
 15. ✅ Shipped `0507cb7..d1d23db` and `ee64cc8..c6b3a69`; drive libraries' website field (`links.url`) and their repositories; the last research batch (`plans/database-review-fixes/issues-final.yaml`); the mistyped ignored hash fixed with a guard test; ISSUES.md: my sections closed with hashes, hand-offs to streams 3-6, pattern-driver pricing recommendation for stream 6.
 16. ✅ Cleanup: temp apply script, ship worktree, backup branches, safety stashes, port marker.
-17. Waiting on Cameron: open questions 1 (pattern-driver `kind` vs a category split) and 2 (where DMX Core 100 and the Pixout recorder belong). Nothing else is open in this stream.
+17. ✅ Cameron answered both open questions (2026-11-22): `kind` field (`234519c5`), every pattern driver classified from its maker's pages (`1ce2d8c6`), DMX Core 100 and the Pixout recorder moved to pattern drivers (`38e215f5`); parity still at zero open cells.
+18. **(current)** Ship; nothing else is open in this stream.
 
 ## Progress log
 
@@ -125,19 +128,21 @@ Research findings with sources: [database-review-research.md](database-review-re
 - [x] Last research batch applied (`5abe386`).
 - [x] ISSUES.md closures and hand-offs.
 - [x] Cleanup.
-- [ ] Open questions 1 and 2 (Cameron).
+- [x] Open questions 1 and 2 answered and implemented (`234519c5`, `38e215f5`, `1ce2d8c6`).
+- [ ] Shipped.
 
 ## Open questions for the user
 
-1. **Pattern-driver subcategories** (parked in ROADMAP): a filterable `kind` field or a real category split? Recommendation: a `kind` field, one-or-a-list from a closed vocabulary (`sequencer`, `live`, `player`, `music-reactive`, `on-controller`), shown as a badge and a facet. The 57 entries share one schema (I/O directions, protocols, platforms, pricing), and many programs are several kinds at once (LedFx: live and music-reactive; WLED: on-controller and music-reactive), so a split would duplicate the schema and force one bucket per program. Classifying the entries is a research pass once you pick.
-2. `controllers/dmx-core` (a network show controller) and `controllers/pixout-server` (the Pixout ArtNet DMX Recorder) drive no pixels (stream 4's finding, confirmed by the inputs audit; their pixel outputs are now gone). Recommendation: they are hardware `player`s: if pattern drivers get `kind`, move both there; until then they stay in controllers without pixel outputs. Depends on question 1.
+None open. Answered:
+
+1. ✅ (Cameron: ok, 2026-11-22) **Pattern-driver subcategories** (parked in ROADMAP): a filterable `kind` field or a real category split? Recommendation: a `kind` field, one-or-a-list from a closed vocabulary (`sequencer`, `live`, `player`, `music-reactive`, `on-controller`), shown as a badge and a facet. The 56 entries share one schema (I/O directions, protocols, platforms, pricing), and many programs are several kinds at once (LedFx: live and music-reactive; WLED: on-controller and music-reactive), so a split would duplicate the schema and force one bucket per program. Classifying the entries is a research pass once you pick.
+2. ✅ (Cameron: ok, 2026-11-22) `controllers/dmx-core` (a network show controller) and `controllers/pixout-server` (the Pixout ArtNet DMX Recorder) drive no pixels (stream 4's finding, confirmed by the inputs audit; their pixel outputs are now gone). Recommendation: they are hardware `player`s: if pattern drivers get `kind`, move both there; until then they stay in controllers without pixel outputs. Depends on question 1.
 
 ## Things not to do
 
 - Don't store derived fields (`pixel_rate_max`, `foss`).
 - Don't rewrite YAML with a plain `parse`/`stringify` round-trip: use `scripts/migrations/lib.ts`.
 - Don't batch-edit stream 4's link fields (see Decisions).
-- Don't decide pattern-driver subcategories.
 - Don't append to the end of `IGNORED_COMMITS` (conflict magnet); use my block.
 
 ## Removed or moved entries (for the parity audit)
@@ -160,5 +165,7 @@ Research findings with sources: [database-review-research.md](database-review-re
 | `adapters/pro-serial-led-driver`             | Adapters: "Pro Serial LED Driver"                                   | `controllers/electromage-pro-8x-driver`           |
 | `pixels/sm1616`                              | Pixels: "SM1616" (no such part; links the SM16716 datasheet)        | `pixel-ics/sm16716`                               |
 | `microboards/raspberry-pi-3b`                | none (cross-links' duplicate of the Pi 3 Model B)                   | `microboards/raspberry-pi-3-model-b`              |
+| `controllers/dmx-core` (moved)               | Controllers: "DMX Core"                                             | `pattern-drivers/dmx-core`                        |
+| `controllers/pixout-server` (moved)          | Controllers: "PixOut Server"                                        | `pattern-drivers/pixout-server`                   |
 
 `adapters/espartstick` stays: it is the earlier 2019 shield (no SD card), a different product.
