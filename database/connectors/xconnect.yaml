@@ -11,6 +11,10 @@ aliases:
   - EasyPlug3
 common_applications:
   - Pixel strings, pigtails and extension cables (power, ground and data)
+images:
+  - file: xconnect.webp
+    source: https://www.holidaycoro.com/3-Conductor-Waterproof-Pigtail-EasyPlug3-xConnect-p/723.htm
+    credit: HolidayCoro
 links:
   product: https://holidaycoro.com/3-Conductor-Waterproof-Extension-Pigtail-10ft-p/727.htm
 mechanical:

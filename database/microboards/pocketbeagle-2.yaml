@@ -26,6 +26,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://docs.beagleboard.org/pocketbeagle-2.pdf
+images:
+  - file: pocketbeagle-2.webp
+    source: https://github.com/beagleboard/docs.beagleboard.io/blob/main/boards/pocketbeagle-2/images/product/pocketbeagle-2-front.jpg
+    credit: BeagleBoard.org Foundation
+    license: CC BY-SA 4.0
 io:
   storage: microSD
   bms: 1S

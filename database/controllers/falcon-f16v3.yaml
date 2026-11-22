@@ -51,6 +51,10 @@ features:
   - Two pixel-power banks that can run different voltages
   - Pixel-voltage monitoring and three temperature sensors
   - Pluggable resistor banks
+images:
+  - file: falcon-f16v3.webp
+    source: https://pixelcontroller.com/store/discontinued-products/48-f16v3.html
+    credit: PixelController, LLC
 other_links:
   - https://docs.google.com/document/d/1S67ZVLgQRYsdqPhgfPkQucnFXvu1FmQAME9qnK5RixU/
   - https://docs.google.com/spreadsheets/d/1LTQzdvSYMrRGI62KTGdh5EmUhVB9uZZMQ4iwWtK7yYk/edit?usp=sharing

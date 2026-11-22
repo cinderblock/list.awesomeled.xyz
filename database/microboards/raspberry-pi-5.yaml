@@ -36,6 +36,11 @@ connectivity:
   poe: add-on # PoE+ HAT
 datasheet:
   url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+images:
+  - file: raspberry-pi-5.webp
+    source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_5.jpg
+    credit: SimonWaldherr
+    license: CC BY 4.0
 io:
   storage: microSD
   imu: false

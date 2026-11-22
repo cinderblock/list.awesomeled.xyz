@@ -29,6 +29,11 @@ connectivity:
   bluetooth: '4.1'
   usb: 2.0 x4
   serial: true
+images:
+  - file: raspberry-pi-3-model-b.webp
+    source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_3_(24651527564).png
+    credit: Gareth Halfacree
+    license: CC BY 2.0
 io:
   max_outputs: 1
   storage: microSD

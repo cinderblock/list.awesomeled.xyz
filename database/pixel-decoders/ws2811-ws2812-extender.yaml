@@ -18,6 +18,10 @@ outputs:
     - pwm
   connector: Solder pads or 3.96mm headers
 diy_or_ots: OTS
+images:
+  - file: ws2811-ws2812-extender.webp
+    source: https://www.tindie.com/products/ericgu/ws2811-ws2812-extender/
+    credit: EagleDecorations
 links:
   product: https://www.tindie.com/products/ericgu/ws2811-ws2812-extender/
 price: 14

@@ -26,6 +26,10 @@ connectivity:
   serial: true
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+images:
+  - file: wemos-d1-mini-pro.webp
+    source: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html
+    credit: WEMOS
 io:
   max_outputs: 3 # WLED on ESP8266: GPIO1 + GPIO2 hardware-driven, GPIO3 for low LED counts
   bms: 1S

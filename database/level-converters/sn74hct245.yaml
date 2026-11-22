@@ -22,6 +22,10 @@ electrical:
   output_current: 6mA
   input_high_voltage: 2V
   input_high_voltage_notes: 'VCC = 4.5 V to 5.5 V'
+images:
+  - file: sn74hct245.webp
+    source: https://www.ti.com/product/SN74HCT245
+    credit: Texas Instruments
 io:
   channels: 8
   buffered: true

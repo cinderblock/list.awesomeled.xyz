@@ -29,6 +29,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-product-brief.pdf
+images:
+  - file: raspberry-pi-zero-2-w.webp
+    source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_Zero_2_W_--_2024_--_0008.jpg
+    credit: 'Anil Öztas'
+    license: CC BY 4.0
 io:
   storage: microSD
   bms: false

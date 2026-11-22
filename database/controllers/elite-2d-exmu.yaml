@@ -50,6 +50,10 @@ features:
   - 20 A pluggable mini blade fuse (spare 5 A fuse included)
   - Reverse-polarity and ESD protection
   - Toggle switch selects the data-line resistor for signal calibration
+images:
+  - file: elite-2d-exmu.webp
+    source: https://www.gledopto.com/GL-C-616WL.html
+    credit: GLEDOPTO
 price:
   amount: 34.99
   currency: EUR

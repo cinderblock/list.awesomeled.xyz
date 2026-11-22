@@ -27,6 +27,20 @@ connectivity:
   ethernet: 100BASE-TX
   usb: OTG x1, 2.0 x1
   poe: true # passive PoE, off by default (enabled with solder jumpers)
+datasheet:
+  url: https://linux-sunxi.org/images/4/4b/Allwinner_H3_Datasheet_V1.2.pdf
+  sources:
+    - url: https://wiki.friendlyelec.com/wiki/images/4/4b/Allwinner_H3_Datasheet_V1.2.pdf
+      host: community
+      notes: FriendlyELEC wiki copy of the same V1.2 file
+    - url: https://web.archive.org/web/20260502221834id_/https://linux-sunxi.org/images/4/4b/Allwinner_H3_Datasheet_V1.2.pdf
+      host: community
+      notes: Wayback Machine capture of the linux-sunxi copy
+images:
+  - file: orange-pi-zero.webp
+    source: https://commons.wikimedia.org/wiki/File:NanoPi_NEO_vs_Orange_Pi_Zero.jpg
+    credit: Kaspars Dambis
+    license: CC BY 2.0
 io:
   storage: microSD
 related:

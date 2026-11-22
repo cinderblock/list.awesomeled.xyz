@@ -60,6 +60,10 @@ features:
   - Identify button checks the wiring without a network input
   - Temperature and network-traffic monitoring in the web interface
   - Fx generator with a 100-slot preset library (14 factory effects)
+images:
+  - file: pixel-octo.webp
+    source: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+    credit: ENTTEC
 other_links:
   - https://support.enttec.com/legacy-product/legacy-products/pixel-octo-71520-legacy-product
   - https://dol2kh495zr52.cloudfront.net/pdf/manuals/Pixel_Octo_UM+(Feb+2019).pdf

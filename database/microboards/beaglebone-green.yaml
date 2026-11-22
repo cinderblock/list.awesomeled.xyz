@@ -32,6 +32,10 @@ connectivity:
   serial: true
 datasheet:
   url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+images:
+  - file: beaglebone-green.webp
+    source: https://www.seeedstudio.com/Seeed-Studio-BeagleBone-Green.html
+    credit: Seeed Studio
 io:
   storage: microSD
   imu: false

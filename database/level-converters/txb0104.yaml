@@ -20,6 +20,10 @@ electrical:
   max_voltage: 5.5V
   input_high_voltage: 2.145V
   input_high_voltage_notes: 'Dual supply: 0.65 × VCCA on the A side, so 2.145 V with VCCA at 3.3 V'
+images:
+  - file: txb0104.webp
+    source: https://www.ti.com/product/TXB0104
+    credit: Texas Instruments
 io:
   channels: 4
   direction: auto
