@@ -17,6 +17,7 @@ images:
   - file: ledfx.webp
     source: https://github.com/LedFx/LedFx-Frontend-v2
     credit: LedFx project
+kind: music-reactive
 language: Python
 license: GPL-3.0
 links:
@@ -42,3 +43,7 @@ sources:
     url: https://github.com/LedFx/LedFx/releases
     retrieved: '2026-11-18'
     notes: 'release v2.2.1 published 2026-10-04'
+  kind:
+    url: https://github.com/LedFx/LedFx
+    retrieved: '2026-11-22'
+    notes: '"network based LED effect engine designed to deliver advanced real-time audio effects to a wide variety of devices"'

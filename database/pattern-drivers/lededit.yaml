@@ -3,6 +3,7 @@ status: unknown
 outputs:
   other_notes: T-1000 and K-1000 players
 integrations: K1000 LED player editing program
+kind: sequencer
 links:
   url: https://learnitstepbystep.blogspot.com/2018/07/download-led-edit-2014-2016-2017-2018.html
 platforms:
@@ -10,3 +11,8 @@ platforms:
     - Windows
 pricing:
   price: Free
+sources:
+  kind:
+    url: https://learnitstepbystep.blogspot.com/2018/07/download-led-edit-2014-2016-2017-2018.html
+    retrieved: '2026-11-22'
+    notes: '"used to program Pixel LED controllers"; "create customized LED display animations" (for T-1000S/T-600K SD-card controllers)'

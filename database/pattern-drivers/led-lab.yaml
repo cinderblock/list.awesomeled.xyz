@@ -44,6 +44,7 @@ images:
     source: https://apps.apple.com/us/app/l-e-d-lab/id832042156
     credit: Christopher Schardt (L.E.D. Lab)
 integrations: PixelPusher, RGB-123, FadeCandy/FCServer
+kind: live
 links:
   url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
 other_links:
@@ -113,3 +114,7 @@ sources:
     url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
     retrieved: '2026-11-18'
     notes: Compatibility section
+  kind:
+    url: https://apps.apple.com/us/app/l-e-d-lab/id832042156
+    retrieved: '2026-11-22'
+    notes: '"quickest, easiest, most powerful way to drive your LED display"; Scenes played in order or shuffled; usable as a VJ tool'

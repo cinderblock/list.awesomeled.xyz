@@ -13,6 +13,7 @@ outputs:
 capabilities:
   live: true
 integrations: LED Media server from console
+kind: live
 links:
   url: https://resources.faithchapel.cc/blogs/pixel_mapping_software?fbclid=IwAR0I3imz0gy7R6-_x8hWD8CO6qJEM2o2P_KXTdmkpRUYbOaWYssicnD2IIE
 platforms:
@@ -20,3 +21,8 @@ platforms:
     - Windows
 pricing:
   price: Free
+sources:
+  kind:
+    url: https://resources.faithchapel.cc/blogs/pixel_mapping_software
+    retrieved: '2026-11-22'
+    notes: Pixel mapping software from a church production team; entry lists NDI, SDI and MIDI inputs (live video to pixels)

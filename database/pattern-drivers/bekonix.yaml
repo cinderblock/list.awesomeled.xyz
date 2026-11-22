@@ -16,6 +16,7 @@ images:
   - file: bekonix.webp
     source: https://www.bekonix.com/downloads-platform
     credit: Bekonix
+kind: sequencer
 links:
   url: https://www.bekonix.com/
 platforms:
@@ -35,3 +36,7 @@ sources:
     url: https://apps.apple.com/us/app/id1513072328
     retrieved: '2026-11-18'
     notes: Bekonix, Inc.
+  kind:
+    url: https://apps.apple.com/np/app/bekonix-mobile/id1513072328
+    retrieved: '2026-11-22'
+    notes: '"Bekonix Designer (Mac): Design interactive LED animations on a graphic timeline"; projects uploaded to the hardware over Bluetooth'

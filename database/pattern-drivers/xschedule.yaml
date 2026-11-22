@@ -25,6 +25,7 @@ capabilities:
   live: true
   designer: false
 integrations: Falcon Player (FPP master / remote), Remote Falcon
+kind: player
 license: GPL-3.0
 links:
   url: https://github.com/xLightsSequencer/xSchedule
@@ -80,3 +81,7 @@ sources:
     url: https://github.com/xLightsSequencer/xSchedule/releases
     retrieved: '2026-11-18'
     notes: Release 2026.05 ships xSchedule_2026_05.exe and xSchedule-2026.05-x86_64.AppImage; 2026.06 a Windows installer only
+  kind:
+    url: https://github.com/xLightsSequencer/xSchedule
+    retrieved: '2026-11-22'
+    notes: '"xSchedule is a show scheduler and player for lighting control": plays FSEQ sequences in playlists scheduled by time of day and weekday.'

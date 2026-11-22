@@ -28,6 +28,7 @@ images:
     source: https://web.archive.org/web/20221127020453/https://www.protopixel.io/design
     credit: ProtoPixel
 integrations: Python (scriptable)
+kind: live
 links:
   url: https://www.protopixel.io/product/mapping-tool
 platforms:
@@ -57,3 +58,7 @@ sources:
     url: https://protopixel.zendesk.com/hc/en-us/articles/31080284550673-Install-the-Protopixel-Mapping-Tool-on-a-Windows-device
     retrieved: '2026-11-18'
     notes: Install the Protopixel Mapping Tool on a Windows device
+  kind:
+    url: https://www.protopixel.io/product/mapping-tool
+    retrieved: '2026-11-22'
+    notes: '"Design dynamic moods": "Create moods using color, video, scripts, NDI, Syphon, shaders"; parametric content library, Art-Net/SPI gates.'

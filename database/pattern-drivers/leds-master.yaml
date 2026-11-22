@@ -12,6 +12,7 @@ images:
   - file: leds-master.webp
     source: https://github.com/spectrenoir06/LED_master
     credit: Antoine Doussaud (LEDs Master)
+kind: live
 links:
   url: https://antoine.doussaud.org/leds_master
   mirror: https://github.com/spectrenoir06/LED_master
@@ -35,3 +36,7 @@ sources:
     url: https://github.com/spectrenoir06/LED_master
     retrieved: '2026-11-20'
     notes: '- [x] Raspberry Pi'
+  kind:
+    url: https://antoine.doussaud.org/leds_master
+    retrieved: '2026-11-22'
+    notes: '"load shaders, musics, microphone, videos and custom scripts to create live animation" for big RGB LED matrices'

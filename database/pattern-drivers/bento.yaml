@@ -23,6 +23,7 @@ images:
   - file: bento.webp
     source: https://github.com/benkuper/BenTo
     credit: Benjamin Kuperberg (BenTo project)
+kind: sequencer
 language: JavaScript
 license: GPL-3.0
 links:
@@ -41,3 +42,7 @@ sources:
     url: https://github.com/benkuper/BenTo/releases
     retrieved: '2026-11-18'
     notes: 'release 2.1.0b1 published 2025-11-17; last push 2026-01-15'
+  kind:
+    url: https://github.com/benkuper/BenTo
+    retrieved: '2026-11-22'
+    notes: '"Official BenTo Light Props Show Authoring Tool"; docs: timeline with block and audio layers, baked to props SD cards'

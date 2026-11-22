@@ -50,6 +50,7 @@ images:
     source: https://docs.derivative.ca/Intro_to_TouchDesigner
     credit: Derivative
 integrations: Tons
+kind: live
 language:
   - Python
   - GLSL
@@ -90,6 +91,10 @@ sources:
     url: https://derivative.ca/shop
     retrieved: '2026-11-18'
     notes: 'Commercial and Pro licenses on sale'
+  kind:
+    url: https://derivative.ca/
+    retrieved: '2026-11-22'
+    notes: Real-time visual development platform for installations, live multimedia shows, media servers and projection mapping; "the hub that brings these all together".
 technical_notes:
   - Node-based visual programming environment
   - Powerful 3D capabilities for spatial mapping

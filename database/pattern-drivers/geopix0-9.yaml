@@ -6,6 +6,7 @@ capabilities:
   live: true
   designer: true
   visualizer: 3D
+kind: live
 links:
   url: https://www.enviral-design.com/
 platforms:
@@ -28,3 +29,7 @@ sources:
     url: https://www.enviral-design.com/
     retrieved: '2026-11-18'
     notes: "creator's site no longer offers 0.9 (it sold v0.9.07 free/paid in the 2020 capture web.archive.org/web/20201030041622/https://www.enviral-design.com/)"
+  kind:
+    url: https://www.enviral-design.com/
+    retrieved: '2026-11-22'
+    notes: '"real-time lighting control and previz software"; FireLine #3 visuals "programmed, and performed using an earlier version of GeoPix"'

@@ -22,6 +22,7 @@ images:
   - file: hls.webp
     source: https://web.archive.org/web/20250601205221/http://joehinkle.com/HLS/HLS%20Getting%20Started%20Manual.pdf
     credit: Joe Hinkle (HLS)
+kind: sequencer
 links:
   url: http://joehinkle.com/HLS/
 platforms:
@@ -51,3 +52,7 @@ sources:
     url: https://web.archive.org/web/2019/http://joehinkle.com:80/HLS/Read%20Me%20about%20HLS%20Download.txt
     retrieved: '2026-11-18'
     notes: "Joe Hinkle's readme: the download is a self-extracting .exe ('a concern about Windows 7 security and Admin rights'); the HLS user manual (UMaRG-13F) installs HLS.exe and also has Linux and OSX installation sections"
+  kind:
+    url: https://web.archive.org/web/2019/http://joehinkle.com/HLS/HLS%20Release%20Notes.txt
+    retrieved: '2026-11-22'
+    notes: 'Release notes: effects added to "the sequence", Vixen/LOR sequence conversion, SHOW playlists; separate HLS Player plays shows'

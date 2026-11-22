@@ -43,6 +43,9 @@ images:
   - file: chataigne.webp
     source: https://github.com/benkuper/Chataigne
     credit: Benjamin Kuperberg (Chataigne project)
+kind:
+  - live
+  - sequencer
 language: JavaScript
 license: GPL-3.0
 links:
@@ -63,3 +66,7 @@ sources:
     url: http://benjamin.kuperberg.fr/chataigne/en
     retrieved: '2026-11-18'
     notes: 'stable 1.10.4 downloads for Windows/macOS/Linux; GitHub last commit 2026-11-17'
+  kind:
+    url: http://benjamin.kuperberg.fr/chataigne/en
+    retrieved: '2026-11-22'
+    notes: '"designed to fit both linear shows and realtime/interactive project needs"; docs: State Machine for real time, Time Machine timelines'

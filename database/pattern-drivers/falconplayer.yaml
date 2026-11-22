@@ -34,6 +34,7 @@ images:
     source: https://falconchristmas.github.io/FPP_Manual(9.x).pdf
     credit: Falcon Player (FPP) project
 integrations: OSC, MIDI, Home Assistant, RemoteFalcon, plugins
+kind: player
 links:
   url: https://github.com/FalconChristmas/fpp
 platforms:
@@ -153,3 +154,7 @@ sources:
     url: https://github.com/FalconChristmas/fpp/blob/master/README.md
     retrieved: '2026-11-18'
     notes: "'FPP - Falcon Player'"
+  kind:
+    url: https://github.com/FalconChristmas/fpp
+    retrieved: '2026-11-22'
+    notes: '"lightweight, optimized, feature-rich sequence player" for Raspberry Pi and BeagleBone'

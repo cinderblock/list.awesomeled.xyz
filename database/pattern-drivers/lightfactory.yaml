@@ -29,6 +29,7 @@ images:
   - file: lightfactory.webp
     source: https://www.lightfactory.net/LightFactory-221-Features.html
     credit: Dream Solutions Ltd (LightFactory)
+kind: live
 links:
   url: https://www.lightfactory.net/
 platforms:
@@ -64,6 +65,10 @@ sources:
     url: https://www.lightfactory.net/Downloads.html?mPath=3_17
     retrieved: '2026-11-18'
     notes: "'Operating systems: Windows 7, 8, 10, and 11. Also supported on Paralles Desktop under OSX.'"
+  kind:
+    url: https://www.lightfactory.net/Introducing_LightFactory__Lighting_Without_Limits_.html?mPath=2_8
+    retrieved: '2026-11-22'
+    notes: '"a leading software based lighting control system" with "Full tracking console" and "Unlimited cue lists"; a PC lighting console.'
 technical_notes:
   - The free download is the full version; without a registration code DMX output stops after 30 minutes, off-line programming is unlimited
   - Supports the Capture and WYSIWYG visualisers

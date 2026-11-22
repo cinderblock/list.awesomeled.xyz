@@ -34,6 +34,7 @@ images:
   - file: resolume.webp
     source: https://resolume.com/software
     credit: Resolume
+kind: live
 links:
   url: https://resolume.com/software
 platforms:
@@ -68,6 +69,10 @@ sources:
     url: https://resolume.com/software
     retrieved: '2026-11-18'
     notes: The two editions the entry's price tiers describe.
+  kind:
+    url: https://resolume.com/software
+    retrieved: '2026-11-22'
+    notes: Avenue is VJ software for "live visuals"; Arena is a "Resolume Arena Media Server" with projection mapping and lighting-desk control.
 technical_notes:
   - Primary use is VJ software with LED control as additional feature
   - Arena version includes advanced mapping for LED installations

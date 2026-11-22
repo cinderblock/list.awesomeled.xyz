@@ -51,6 +51,7 @@ images:
     source: https://smartshowlms.leejamesapps.co.uk/
     credit: Lee James Apps
 integrations: WLED, xLights and Falcon controllers; HDMI LED sender cards such as Colorlight
+kind: live
 language: GLSL
 links:
   url: https://smartshowlms.leejamesapps.co.uk/
@@ -135,6 +136,10 @@ sources:
   technical_notes:
     url: https://smartshowlms.leejamesapps.co.uk/
     retrieved: '2026-11-18'
+  kind:
+    url: https://smartshowlms.leejamesapps.co.uk/
+    retrieved: '2026-11-22'
+    notes: '"A modern LED matrix server" built "with working shows in mind": 70+ effects, scenes, chases, and a touch Show Mode; audio reactive is one feature.'
 technical_notes:
   - Each Patch Editor row has its own protocol, target IP and universe, so one rig can mix protocols
     (Art-Net to a node, HDMI to an LED wall, Glediator to an Arduino strip)

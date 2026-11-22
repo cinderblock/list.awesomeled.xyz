@@ -20,6 +20,7 @@ images:
   - file: mapio-pro.webp
     source: https://visution.com/
     credit: Visution
+kind: live
 links:
   url: https://visution.com/
 platforms:
@@ -57,3 +58,7 @@ sources:
     url: https://visution.com/
     retrieved: '2026-11-18'
     notes: MacOS X 10.8.x – 10.12.x (MAPIO up to 2.2.9 version)
+  kind:
+    url: https://visution.com/
+    retrieved: '2026-11-22'
+    notes: Projection-mapping/VJ software; PRO can "output your dynamic, interactive and other content on the addressable RGB LED strips"; decks and mixers.

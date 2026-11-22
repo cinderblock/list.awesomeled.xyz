@@ -18,6 +18,7 @@ images:
   - file: vixen-lights.webp
     source: https://github.com/VixenLights/Vixen
     credit: Vixen Lights project
+kind: sequencer
 links:
   url: https://www.vixenlights.com/download/
 platforms:
@@ -34,3 +35,7 @@ sources:
     url: https://github.com/VixenLights/Vixen
     retrieved: '2026-11-18'
     notes: Readme; the program itself is called 'Vixen' ('Vixen is a full featured sequencer for producing animated light shows').
+  kind:
+    url: https://www.vixenlights.com/
+    retrieved: '2026-11-22'
+    notes: '"create amazing synchronized light shows" and "synchronize your lights to music" with readily available lights and hardware.'

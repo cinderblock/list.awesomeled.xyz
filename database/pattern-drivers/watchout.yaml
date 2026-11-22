@@ -19,6 +19,9 @@ outputs:
 capabilities:
   live: true
   designer: true
+kind:
+  - sequencer
+  - player
 links:
   url: https://www.dataton.com/watchout
 platforms:
@@ -52,3 +55,7 @@ sources:
     url: https://docs.dataton.com/watchout-7-new/watchout/getting-started/system-requirements.html
     retrieved: '2026-11-18'
     notes: "'WATCHOUT 7 requires a Windows-based computer with modern hardware'"
+  kind:
+    url: https://www.dataton.com/watchout
+    retrieved: '2026-11-22'
+    notes: '"Multi-display production and playback": content is placed on a timeline in the Producer, then media servers play the show in sync.'

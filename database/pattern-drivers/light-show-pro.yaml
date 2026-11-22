@@ -23,6 +23,9 @@ dead_links:
     archive: https://web.archive.org/web/20231014135954/http://www.lightshowpro.com/
     checked: '2026-11-18'
     notes: Domain does not resolve; the June 2024 captures show only a web-host default page, the last real capture (Oct 2023) is the 'Light Show Pro' forum
+kind:
+  - sequencer
+  - live
 links:
   url: http://www.lightshowpro.com/
 platforms:
@@ -59,3 +62,7 @@ sources:
     url: https://web.archive.org/web/20250603212302/https://www.doityourselfchristmas.com/wiki/index.php?title=LightShow_Pro_(LSP)
     retrieved: '2026-11-18'
     notes: "'for use on Microsoft Windows systems' (community wiki; the maker's site is gone)"
+  kind:
+    url: https://web.archive.org/web/20090820040327/http://www.lightshowpro.com/
+    retrieved: '2026-11-22'
+    notes: '"The Industry''s Best, Professional Light Show Sequencer and Live Performance Software"; time line scrubbing, Live LightShow feature'

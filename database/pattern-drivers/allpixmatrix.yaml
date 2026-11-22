@@ -18,6 +18,7 @@ images:
   - file: allpixmatrix.webp
     source: https://www.nledshop.com/nledallpixmatrix/
     credit: Northern Lights Electronic Design (NLED)
+kind: live
 links:
   url: https://github.com/NLED/allpixmatrix
 platforms:
@@ -38,3 +39,7 @@ sources:
     url: https://www.nledshop.com/nledallpixmatrix/
     retrieved: '2026-11-18'
     notes: Page headline 'NLED AllPixMatrix'; the GitHub repo's homepage field points here
+  kind:
+    url: https://github.com/NLED/allpixmatrix
+    retrieved: '2026-11-22'
+    notes: '"A Processing based video creation and mixing application for low resolution LED screens and matrices"; output streamed to serial/Art-Net'

@@ -19,6 +19,7 @@ dead_links:
     checked: '2026-11-18'
     notes: HTTPS connection reset, HTTP returns 410 Gone; domain parked
 integrations: LightBox&LightBoard Mini
+kind: player
 links:
   url: https://www.rocketlife.com/technology/
 platforms:
@@ -39,3 +40,7 @@ sources:
     url: http://www.rocketlife.com/technology/
     retrieved: '2026-11-18'
     notes: 'HTTP 410 Gone; rocketlife.com is parked, no vendor site or support'
+  kind:
+    url: https://apps.microsoft.com/detail/9nwk9dkv7dfl?hl=en-US
+    retrieved: '2026-11-22'
+    notes: Phone app to select programs on Light hardware, monitor sensor input, and schedule programs to play on special days; shows are made in LightDesigner.

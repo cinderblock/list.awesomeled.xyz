@@ -41,6 +41,7 @@ images:
   - file: madrix-5.webp
     source: https://help.madrix.com/m5/html/madrix/hidd_user_interface_link.html
     credit: MADRIX / inoage GmbH
+kind: live
 links:
   url: https://www.madrix.com/products/software
 platforms:
@@ -78,6 +79,10 @@ sources:
     - url: https://help.madrix.com/m5/html/madrix/hidd_5x_update.html
       retrieved: '2026-11-18'
       notes: "MADRIX 5 manual, 'Update From MADRIX 2 Or 3 To MADRIX 5': MADRIX 3 is the earlier version, licences update to MADRIX 5, and 'MADRIX 5 can automatically load MADRIX 3 Setup files.'"
+  kind:
+    url: https://www.madrix.com/products/software
+    retrieved: '2026-11-22'
+    notes: '"the ultimate control tool for your LED lighting", "a tool for generative visuals and effects"; 2D/3D pixel mapping, 55+ effects.'
 technical_notes:
   - Industry standard for professional LED installations
   - GPIO requires separate Madrix Orion hardware

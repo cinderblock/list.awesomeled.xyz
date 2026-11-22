@@ -32,6 +32,7 @@ images:
   - file: smode.webp
     source: https://www.smode.io/en/products/smode-compose-in-real-time-creative-software
     credit: Smode Tech
+kind: live
 links:
   url: https://www.smode.io/en/
 platforms:
@@ -51,3 +52,7 @@ sources:
     url: https://www.smode.io/en/legals
     retrieved: '2026-11-18'
     notes: SAS Smode Tech
+  kind:
+    url: https://www.smode.io/en/product/live-media-server
+    retrieved: '2026-11-22'
+    notes: '"Redefining Real-Time Compositing and Media Serving": 2D/3D real-time compositing engine and media server for live productions.'

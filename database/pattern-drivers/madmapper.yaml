@@ -25,6 +25,7 @@ images:
   - file: madmapper.webp
     source: https://madmapper.com/
     credit: MadMapper
+kind: live
 links:
   url: https://madmapper.com/
 platforms:
@@ -47,3 +48,7 @@ sources:
     url: https://madmapper.com/aboutus
     retrieved: '2026-11-18'
     notes: "'Created and developed by 1024 architecture and GarageCube since 2010'"
+  kind:
+    url: https://madmapper.com/madmapper/software
+    retrieved: '2026-11-22'
+    notes: '"The Most Advanced Application for Video and LED Mapping"; controls LED arrays or many DMX fixtures in real time, with a cueing system.'

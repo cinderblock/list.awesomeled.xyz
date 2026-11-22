@@ -31,6 +31,7 @@ images:
   - file: vvvv.webp
     source: https://vvvv.org/
     credit: 'vvvv (Dießl & Gregor GbR)'
+kind: live
 links:
   url: https://vvvv.org/
 platforms:
@@ -66,3 +67,7 @@ sources:
     url: https://vvvv.org/
     retrieved: '2026-11-18'
     notes: "Downloads for Windows and 'Windows Arm'; 'vvvv does not have a native version for macOS!' - use the Windows Arm build in Parallels on Apple silicon"
+  kind:
+    url: https://vvvv.org/
+    retrieved: '2026-11-22'
+    notes: '"visual live-programming environment"; large-scale interactive spaces, custom media servers, realtime output from sensors to graphics and lighting.'

@@ -29,6 +29,7 @@ images:
     source: https://kno.wled.ge/basics/web-ui/
     credit: WLED project
 integrations: Home Assistant, WLED App.
+kind: on-controller
 language: C++
 license: EUPL-1.2
 links:
@@ -79,3 +80,7 @@ sources:
     url: https://github.com/wled/WLED/releases
     retrieved: '2026-11-18'
     notes: 'release v16.0.1 published 2026-07-07; repository moved from Aircoookie/WLED to wled/WLED'
+  kind:
+    url: https://github.com/wled/WLED
+    retrieved: '2026-11-22'
+    notes: '"A fast and feature-rich firmware for ESP32 microcontrollers to control addressable LEDs"; AudioReactive effects are one built-in feature.'

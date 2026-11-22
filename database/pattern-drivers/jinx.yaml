@@ -48,6 +48,7 @@ images:
   - file: jinx.webp
     source: https://live-leds.de/
     credit: 'Live-LEDs.de (Jinx!)'
+kind: live
 links:
   url: https://live-leds.de/
 platforms:
@@ -94,6 +95,10 @@ sources:
       notes: User manual V2.4
     - url: https://live-leds.de/important-invalid-certificates-for-jinx-v2-2-and-v2-3/
       retrieved: '2026-11-18'
+  kind:
+    url: https://live-leds.de/?p=20
+    retrieved: '2026-11-22'
+    notes: '"22 effect generators"; "touchscreen friendly show mode for playing scenes and chases"; remote control via DMX, Art-Net, sACN'
 technical_notes:
   - Always renders at 25 fps; serial outputs need a baud rate fast enough for the frame size
   - Art-Net 3 addressing (Net, Subnet, Universe) with ArtPoll node discovery

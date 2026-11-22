@@ -19,6 +19,7 @@ images:
   - file: grandma.webp
     source: https://www.malighting.com/special/grandma3-software/
     credit: MA Lighting
+kind: live
 links:
   url: https://www.malighting.com/grandMA3-software
 platforms:
@@ -58,3 +59,7 @@ sources:
     url: https://www.malighting.com/grandMA3-software
     retrieved: '2026-11-18'
     notes: "'available as onPC software for Windows and Mac'; page title 'The free-of-cost grandMA3 software'"
+  kind:
+    url: https://www.malighting.com/grandMA3-software
+    retrieved: '2026-11-22'
+    notes: Lighting-console software, "the soul of the MA system"; "playback options ... allow for maximum usability of all sequences"

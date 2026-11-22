@@ -43,6 +43,9 @@ capabilities:
 integrations: Built-in support for WLED (including Gledopto and QuinLED boards) and Advatek PixLite
   Mk3; any Art-Net or sACN receiver. A free standalone player replays exported DMX shows on a
   Raspberry Pi
+kind:
+  - live
+  - sequencer
 language: WGSL
 links:
   url: https://filament.click/
@@ -127,6 +130,10 @@ sources:
       retrieved: '2026-11-18'
     - url: https://filament.click/
       retrieved: '2026-11-18'
+  kind:
+    url: https://filament.click/
+    retrieved: '2026-11-22'
+    notes: '"professional LED player and VJ mixer in one app"; Arrangement view to "build a pre-recorded show on a timeline, DAW-style"'
 technical_notes:
   - Renderer written in Rust; a hardware GPU is required (software-only adapters don't count)
   - Custom effects and animations are WGSL shaders whose @param annotations become sliders

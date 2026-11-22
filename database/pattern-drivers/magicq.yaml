@@ -16,6 +16,7 @@ images:
   - file: magicq.webp
     source: https://chamsyslighting.com/product/magicq-software/
     credit: ChamSys
+kind: live
 links:
   url: https://chamsyslighting.com/
 platforms:
@@ -44,3 +45,7 @@ sources:
     - url: https://mmrmagazine.com/chamsys-magicq-software-now-supports-import-of-gdtf-personality-files
       retrieved: '2026-11-18'
       notes: "Trade press (MMR, 2019-12-02), not ChamSys: headline 'ChamSys MagicQ Software Now Supports Import of GDTF Personality Files'; ChamSys's own About Us page writes 'ChamSys MaqicQ MQ500 Stadium Console' (typo)"
+  kind:
+    url: https://chamsyslighting.com/software/magicq-software-licensing/
+    retrieved: '2026-11-22'
+    notes: 'Lighting console software: "powerful lighting control, full lighting visualisation, pixel mapping, and HD media playback".'

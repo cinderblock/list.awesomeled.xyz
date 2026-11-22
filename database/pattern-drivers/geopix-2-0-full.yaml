@@ -19,6 +19,7 @@ capabilities:
   live: true
   designer: true
   visualizer: 3D
+kind: live
 links:
   url: https://github.com/EnviralDesign/GeoPix
 platforms:
@@ -47,5 +48,9 @@ sources:
     url: https://github.com/EnviralDesign/GeoPix
     retrieved: '2026-11-18'
     notes: 'not archived; last commit 2026-02-27 shipped build v2.0.15534; geopix.io no longer resolves'
+  kind:
+    url: https://github.com/EnviralDesign/GeoPix
+    retrieved: '2026-11-22'
+    notes: '"free and open source real-time lighting control and previz software"; maps real-time video and generative content; Perform tab'
 technical_notes:
   - Paid tiers at $200, $500 and $2200

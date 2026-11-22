@@ -25,6 +25,7 @@ images:
   - file: light-o-rama.webp
     source: https://www.lightorama.com/help/sequencer.htm
     credit: Light-O-Rama
+kind: sequencer
 links:
   url: https://store.lightorama.com/pages/download-software
 platforms:
@@ -68,3 +69,7 @@ sources:
     url: https://store.lightorama.com/pages/download-software
     retrieved: '2026-11-18'
     notes: "'Windows 10* / 11 64-bit Operating System'; 'Versions 6.0.0 and later only support Windows 10 and above.'"
+  kind:
+    url: https://store.lightorama.com/pages/download-software
+    retrieved: '2026-11-22'
+    notes: Software is the "ShowTime Sequencing Suite" (S6); the suite also bundles Show Player and Cue List Player

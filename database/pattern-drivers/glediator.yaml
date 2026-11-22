@@ -45,6 +45,7 @@ images:
     credit: SolderLab
 integrations: Solderlab true-color matrix driver boards and Universal Interface Board; Arduino (Uno,
   Leonardo, Micro, Mini, Mega) with Solderlab's WS2801 and WS2811/WS2812 sketches
+kind: live
 language: Java
 links:
   url: http://www.solderlab.de/index.php/software/glediator
@@ -134,6 +135,10 @@ sources:
     url: https://web.archive.org/web/20141208112112/http://www.solderlab.de:80/index.php/faq
     retrieved: '2026-11-18'
     notes: "'All programs under Software Projects (e.g. Glediator) are not Open Source but free of use.'"
+  kind:
+    url: https://web.archive.org/web/20190722223811/http://www.solderlab.de/index.php/software/glediator
+    retrieved: '2026-11-22'
+    notes: '"Graphical LED Installation AnimaTOR ... software to control led matrix and led stripe installations", streaming live over serial/Art-Net'
 technical_notes:
   - No limit on matrix size; serial at 1,000,000 baud carries frames of about 1,000 pixels at 24 fps,
     and Ethernet output supplies much bigger matrices

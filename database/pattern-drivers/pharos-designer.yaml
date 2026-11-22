@@ -28,6 +28,7 @@ images:
   - file: pharos-designer.webp
     source: https://dl.pharoscontrols.com/software_help/designer2/content/help/quick%20start/user%20interface.htm
     credit: Pharos Architectural Controls
+kind: sequencer
 links:
   url: https://www.pharoscontrols.com/designer/
 platforms:
@@ -67,3 +68,7 @@ sources:
     url: https://www.pharoscontrols.com/designer/
     retrieved: '2026-11-18'
     notes: "'Free to download' for Windows and macOS"
+  kind:
+    url: https://www.pharoscontrols.com/designer/
+    retrieved: '2026-11-22'
+    notes: Builds "pre-programmed lighting displays" from timelines and scenes that run on Pharos controllers; "no PC needs to be left on site".

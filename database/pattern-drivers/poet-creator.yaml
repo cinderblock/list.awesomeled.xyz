@@ -36,6 +36,7 @@ images:
   - file: poet-creator.webp
     source: https://poet.software/poet-creator-software/
     credit: Skandal Technologies (POET)
+kind: live
 links:
   url: https://poet.software/
 platforms:
@@ -77,3 +78,7 @@ sources:
     url: https://poet.software/download/
     retrieved: '2026-11-18'
     notes: "Minimum requirements: 'OS Windows 10/11 64-bit'"
+  kind:
+    url: https://poet.software/poet-creator-software/
+    retrieved: '2026-11-22'
+    notes: '"a suite of customizable visual content engines" whose parameters respond to live tracking, sensor and data inputs; smart scheduling for installs.'

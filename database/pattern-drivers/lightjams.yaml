@@ -20,6 +20,9 @@ capabilities:
   live: true
   designer: true
   programmatic: Both
+kind:
+  - live
+  - music-reactive
 links:
   url: https://www.lightjams.com/
 platforms:
@@ -39,3 +42,7 @@ sources:
     url: https://www.lightjams.com/portal/buy-lightjams.php
     retrieved: '2026-11-18'
     notes: 'licenses on sale ($125-$450 permanent); version history shows a build dated 2026-08-06'
+  kind:
+    url: https://www.lightjams.com/
+    retrieved: '2026-11-22'
+    notes: '"Interactive DMX lighting software that reacts to music, MIDI, video, and more"; "Music-Driven Lighting" section with real-time audio analysis.'

@@ -17,6 +17,9 @@ outputs:
   serial: false
 capabilities:
   live: true
+kind:
+  - live
+  - sequencer
 links:
   url: https://www.millumin.com//
 platforms:
@@ -36,3 +39,7 @@ sources:
     url: https://www.millumin.com/v5/index.php
     retrieved: '2026-11-18'
     notes: 'Millumin V5 rentals, permanent licenses and upgrades on sale; 30-day trial download'
+  kind:
+    url: https://www.millumin.com/v5/index.php
+    retrieved: '2026-11-22'
+    notes: '"Complete solution to create Audiovisual Shows" for theatre, dance and mapping; Sequencer + Timeline to "Program cues and animations".'

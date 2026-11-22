@@ -10,6 +10,7 @@ images:
     source: https://www.ledstripstudio.com/products/lss_remote/
     credit: LED Strip Studio
 integrations: Reactivo 2, SPI Matrix, LEC3 (LED Ethernet Controller 3)
+kind: player
 links:
   url: https://www.ledstripstudio.com/products/lss_remote/
 other_links:
@@ -41,3 +42,7 @@ sources:
     url: https://www.ledstripstudio.com/products/lss_remote/
     retrieved: '2026-11-18'
     notes: App Store, Google Play and a direct APK download (LSS-Remote-2.0.5.apk); App Store requirements iOS/iPadOS 16, macOS 13 on Apple M1 or later
+  kind:
+    url: https://www.ledstripstudio.com/products/lss_remote/
+    retrieved: '2026-11-22'
+    notes: '"Play a wide variety of animations directly from the SD card", build playlists that "loop them endlessly"; also pick colors and switch scenes.'

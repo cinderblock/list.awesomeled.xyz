@@ -22,6 +22,7 @@ capabilities:
   designer: true
   visualizer: true
   programmatic: Both
+kind: live
 language: JavaScript
 links:
   url: http://benjamin.kuperberg.fr/blux
@@ -43,3 +44,7 @@ sources:
     url: https://github.com/benkuper/Blux
     retrieved: '2026-11-18'
     notes: The readme says it works on Windows x64, macOS, Linux x64 and Raspberry Pi
+  kind:
+    url: http://benjamin.kuperberg.fr/blux
+    retrieved: '2026-11-22'
+    notes: '"designed to fit modern, interactive and playful ways to control lights and stage props" ... "spatialization, live interaction"'

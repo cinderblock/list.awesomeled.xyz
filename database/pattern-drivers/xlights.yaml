@@ -24,6 +24,7 @@ images:
   - file: xlights.webp
     source: https://apps.apple.com/us/app/xlights/id1137297689
     credit: xLights project (Kulp Lights LLC)
+kind: sequencer
 license: GPL-3.0
 links:
   url: https://www.xlights.org
@@ -43,3 +44,7 @@ sources:
     url: https://manual.xlights.org/xlights/chapters/untitled/history
     retrieved: '2026-11-18'
     notes: Former product name, e.g. figure captions 'xLights/Nutcracker 4.0 GUI'; Nutcracker (Sean Meighan's web sequencer) was merged into xLights in 2013 ('made Nutcracker a part of xLights').
+  kind:
+    url: https://www.xlights.org
+    retrieved: '2026-11-22'
+    notes: '"enables you to design, create and play amazing lighting displays"; effects assigned across a sequence, timed to music with beat tracking.'

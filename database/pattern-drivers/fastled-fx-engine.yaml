@@ -12,6 +12,7 @@ images:
   - file: fastled-fx-engine.webp
     source: https://github.com/FastLED/cli
     credit: FastLED project
+kind: on-controller
 license: MIT
 links:
   url: https://github.com/FastLED/FastLED
@@ -41,3 +42,7 @@ sources:
     url: https://github.com/FastLED/FastLED/blob/master/src/fl/fx/fx_engine.h
     retrieved: '2026-11-18'
     notes: "Class name used in FastLED's docs and examples (examples/Fx/FxEngine/FxEngine.ino: 'Demonstrates FxEngine for switching between effects')."
+  kind:
+    url: https://github.com/FastLED/FastLED
+    retrieved: '2026-11-22'
+    notes: '"The Universal LED Library for Embedded and Arduino"; src/fx is an "FX library with 1D/2D effects, video playback, composition utilities"'

@@ -16,6 +16,7 @@ dead_links:
     archive: https://web.archive.org/web/20250906170847/https://arkaos.com/
     checked: '2026-11-18'
     notes: Redirected to chamsyslighting.com/media-control/ after the ChamSys acquisition (Nov 2025 to Feb 2026); Cloudflare 522 since June 2026
+kind: live
 links:
   url: https://www.arkaos.com/
 platforms:
@@ -46,3 +47,7 @@ sources:
     - url: https://es.chauvetprofessional.com/wp-content/uploads//2015/05/ArKaos-MediaMaster-Express_Cutsheet.pdf
       retrieved: '2026-11-18'
       notes: "Chauvet Professional cutsheet (ArKaos distributor, maker of the EPIX products): title 'ArKaos Media Master Express'"
+  kind:
+    url: https://web.archive.org/web/20250906170847/https://arkaos.com/
+    retrieved: '2026-11-22'
+    notes: '"Video for lighting people": media servers (Arkaos Pro, VS servers); legacy MediaMaster and GrandVJ VJ software'

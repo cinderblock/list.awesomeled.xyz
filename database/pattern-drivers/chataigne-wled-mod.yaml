@@ -11,6 +11,7 @@ images:
   - file: chataigne-wled-mod.webp
     source: https://github.com/zak-45/WLED-Chataigne-Module
     credit: zak-45 (WLED Chataigne Module)
+kind: live
 license: GPL-3.0
 links:
   url: https://github.com/zak-45/WLED-Chataigne-Module
@@ -47,3 +48,7 @@ sources:
     url: https://github.com/zak-45/WLED-Chataigne-Module
     retrieved: '2026-11-18'
     notes: Readme title; repository name is WLED-Chataigne-Module.
+  kind:
+    url: https://github.com/zak-45/WLED-Chataigne-Module
+    retrieved: '2026-11-22'
+    notes: '"Manage your WLED devices from Chataigne" over the WLED HTTP/JSON API, UDP and WebSocket'

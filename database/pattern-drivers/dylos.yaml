@@ -27,6 +27,7 @@ images:
     source: https://obsidiancontrol.com/dylos
     credit: Obsidian Control Systems
 integrations: Obsidian Onyx
+kind: live
 links:
   url: https://www.obsidiancontrol.com/pages/dylos
 platforms:
@@ -50,3 +51,7 @@ sources:
     url: https://www.obsidiancontrol.com/pages/dylos
     retrieved: '2026-11-18'
     notes: 2 DYLOS Zones in "Free" Mode
+  kind:
+    url: https://www.obsidiancontrol.com/pages/dylos
+    retrieved: '2026-11-22'
+    notes: '"media-server-style processor built directly into the ONYX 2D Plan workspace"; live previews, "Instant access ... flexible playback"'

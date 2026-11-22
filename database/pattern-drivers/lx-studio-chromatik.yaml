@@ -27,6 +27,7 @@ images:
   - file: lx-studio-chromatik.webp
     source: https://lx.studio/
     credit: Heron Arts LLC (LX Studio)
+kind: live
 language: Java
 links:
   url: https://lx.studio/
@@ -60,3 +61,7 @@ sources:
     url: https://github.com/heronarts/LXStudio
     retrieved: '2026-11-18'
     notes: LX Studio uses the Processing framework.
+  kind:
+    url: https://github.com/heronarts/LXStudio
+    retrieved: '2026-11-22'
+    notes: '"a digital lighting workstation" and "a rich environment for lighting composition and performance" with generative patterns and modulation.'

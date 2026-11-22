@@ -19,6 +19,7 @@ images:
     source: https://www.freestylersupport.com/wiki/external_control:touchscreen:touchscreen_ui2
     credit: FreeStyler DMX support wiki
     license: Public domain
+kind: live
 links:
   url: https://www.freestylerdmx.be/
 platforms:
@@ -51,3 +52,7 @@ sources:
     url: https://www.freestylerdmx.be/download.htm
     retrieved: '2026-11-18'
     notes: "'Designed for windows XP, 7, 8, 8.1 and 10'"
+  kind:
+    url: https://www.freestylerdmx.be/begin.htm
+    retrieved: '2026-11-22'
+    notes: '"free lighting control software used by many leading dj''s, venues and lighting designers" (DMX console software)'

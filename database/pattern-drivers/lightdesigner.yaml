@@ -18,6 +18,7 @@ dead_links:
     checked: '2026-11-18'
     notes: HTTPS connection reset, HTTP returns 410 Gone; domain parked
 integrations: LightBox&LightBoard Mini
+kind: sequencer
 links:
   url: https://www.rocketlife.com/technology/
 platforms:
@@ -31,3 +32,7 @@ sources:
     url: http://www.rocketlife.com/technology/
     retrieved: '2026-11-18'
     notes: 'HTTP 410 Gone; rocketlife.com is parked. The old free Windows build is still listed in the Microsoft Store (9NWK9DKV7DFL) without a vendor site or support'
+  kind:
+    url: https://apps.microsoft.com/detail/9nwk9dkv7dfl?hl=en-US
+    retrieved: '2026-11-22'
+    notes: Desktop app to design interactive LED animations on a graphic timeline, then load them onto RocketLife LightBox/LightBoard hardware.

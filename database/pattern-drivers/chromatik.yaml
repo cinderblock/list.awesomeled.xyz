@@ -29,6 +29,7 @@ images:
   - file: chromatik.webp
     source: https://chromatik.co/
     credit: Heron Arts LLC (Chromatik)
+kind: live
 links:
   url: https://chromatik.co/
 platforms:
@@ -61,3 +62,7 @@ sources:
     url: https://chromatik.co/download/
     retrieved: '2026-11-18'
     notes: builds for Linux (aarch64, x64), macOS, Windows
+  kind:
+    url: https://chromatik.co/
+    retrieved: '2026-11-22'
+    notes: '"unified environment for 3D lighting composition and performance"; DJ/VJ-style mixer, crossfader, generative modulation'

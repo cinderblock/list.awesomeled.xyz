@@ -38,6 +38,9 @@ images:
     source: https://www.qlcplus.org/
     credit: QLC+ Development Team
 integrations: 'Supported MIDI/DMX Hardware List: https://www.qlcplus.org/discover/compatibility'
+kind:
+  - live
+  - sequencer
 language: C++
 license: Apache-2.0
 links:
@@ -88,3 +91,7 @@ sources:
     url: https://www.qlcplus.org/
     retrieved: '2026-11-18'
     notes: QLC+ by Massimo Callegari
+  kind:
+    url: https://www.qlcplus.org/discover/features
+    retrieved: '2026-11-22'
+    notes: '"The Virtual Console ... allows you to control your light shows during live events"; Show Manager sets up "a time driven show" on a multitrack view.'

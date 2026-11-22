@@ -29,6 +29,7 @@ images:
     source: https://www.enttec.co.uk/product/dmx-lighting-control-software/pixel-mapping-software/
     credit: ENTTEC
 integrations: Triggering via HTTP/OSC/Art-net/sACN/DMX
+kind: live
 links:
   url: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
 other_links:
@@ -77,3 +78,7 @@ sources:
     url: https://www.enttec.com/story/introducing-elm-2026/
     retrieved: '2026-11-18'
     notes: ENTTEC's ELM 2026 announcement; ELM is the short form.
+  kind:
+    url: https://www.enttec.com/product/dmx-lighting-control-software/pixel-mapping-software/
+    retrieved: '2026-11-22'
+    notes: '"pixel mapping software that turns any LED install into one show you control"; layers of video, shaders, camera feeds adjusted live'

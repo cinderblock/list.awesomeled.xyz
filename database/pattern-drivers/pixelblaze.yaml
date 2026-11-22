@@ -20,6 +20,7 @@ images:
     source: https://electromage.com/pixelblaze
     credit: ElectroMage
 integrations: Home Assistant, Hubitat, Pixelblaze
+kind: on-controller
 language: JavaScript # a subset
 links:
   url: https://electromage.com/pixelblaze/
@@ -50,3 +51,7 @@ sources:
     url: https://shop.electromage.com/products/pixelblaze-v3-standard-wifi-led-controller
     retrieved: '2026-11-18'
     notes: 'Pixelblaze V3 Standard listed at $39.00 in the ElectroMage shop'
+  kind:
+    url: https://electromage.com/pixelblaze
+    retrieved: '2026-11-22'
+    notes: Wi-Fi LED controller whose firmware runs patterns/playlists itself; "LEDs update live as-you-code". Sound reactivity is an optional sensor board.
