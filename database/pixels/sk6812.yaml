@@ -6,8 +6,7 @@ notes: WS2812 copy. The 4-channel RGBW version is a separate part (SK6812RGBW).
 color:
   order: GRB
   channel_bits: 8
-  pwm_frequency: 1.1kHz
-  pwm_frequency_notes: Measured; the datasheet (rev 02) says 1.2kHz
+  pwm_frequency: 1.2kHz
 data:
   type: WS2811/12
   clocked: false
@@ -21,8 +20,6 @@ datasheet:
     - url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
       host: distributor
       notes: rev 02 (older)
-  discrepancies:
-    - Datasheet PWM frequency (1.2kHz) is a little above the measured 1.1kHz
 electrical:
   led_voltage: 5V
   led_voltage_notes: Datasheet claims "26V Vds, Max" but LEDs are built-in and share power with 5V VDD
@@ -39,6 +36,13 @@ images:
   - file: sk6812.webp
     source: https://www.normandled.com/Product/view/id/795.html
     credit: Shenzhen Normand Electronic
+measurements:
+  color.pwm_frequency:
+    - value: 1.1kHz
+      by: cpldcpu
+      date: '2016-03-09'
+      url: https://cpldcpu.github.io/2016/03/09/the-sk6812-another-intelligent-rgb-led
+      notes: '"the PWM frequency of the SK6812 is more than twice as high as that of the WS2812 (1.1 kHz vs. 430 Hz)"'
 other_links:
   - https://www.advateklighting.com/pixel-protocols/sk6812
 physical:
@@ -75,12 +79,9 @@ sources:
     retrieved: '2026-11-18'
     notes: "The YAML's datasheet: Opsco SK6812-012 specification Rev."
   color.pwm_frequency:
-    - url: https://cpldcpu.github.io/2016/03/09/the-sk6812-another-intelligent-rgb-led
-      retrieved: 2026-11-18
-      notes: '"the PWM frequency of the SK6812 is more than twice as high as that of the WS2812 (1.1 kHz vs. 430 Hz)"'
-    - url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
-      retrieved: 2026-11-18
-      notes: 'Electrical parameters: FPWM 1.2 KHZ typical'
+    url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
+    retrieved: 2026-11-18
+    notes: 'Electrical parameters: FPWM 1.2 KHZ typical'
   electrical.gpio:
     url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
     retrieved: 2026-11-18
@@ -89,5 +90,3 @@ sources:
     url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
     retrieved: '2026-11-18'
     notes: 5.5x5.0x1.6mm Top SMD Type 0.2Watt Power
-technical_notes:
-  - PWM measured at 1.1kHz (more than twice the WS2812's 430Hz); the datasheet says 1.2kHz

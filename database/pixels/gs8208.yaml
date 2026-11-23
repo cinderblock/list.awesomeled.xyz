@@ -18,7 +18,7 @@ data:
 datasheet:
   url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
   discrepancies:
-    - Datasheet claims 15mA but measured value is ~10mA
+    - "The feature list (page 1) says 'Default 17.5mA constant current output'; the electrical table (page 4) gives 15mA typical"
 electrical:
   led_voltage: 12V
   led_voltage_notes: Datasheet 10.8-13.2V
@@ -26,14 +26,19 @@ electrical:
   gpio:
     min: 3.5V
     max: 5V
-  channel_current: 10mA
-  channel_current_notes: Measured current across 3 LEDs at 12V. Datasheet claims 15mA
+  channel_current: 15mA
   quiescent_current: 2.5mA
   wattage: 120mW
 images:
   - file: gs8208.webp
     source: https://www.normandled.com/Product/view/id/827.html
     credit: Shenzhen Normand Electronic
+measurements:
+  electrical.channel_current:
+    - value: 10mA
+      conditions: 3 LEDs in series at 12V
+      url: https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=N10
+      notes: A comment on the original spreadsheet's cell; who measured it, and when, isn't recorded
 other_links:
   - https://www.advateklighting.com/pixel-protocols/gs8208
 physical:
@@ -53,6 +58,10 @@ sources:
     url: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf
     retrieved: '2026-11-18'
     notes: Genesis Systech
+  electrical.channel_current:
+    url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+    retrieved: '2026-11-22'
+    notes: "Electrical Characteristics, page 4: Output current IOUT at VDH=12V, 11mA min, 15mA typical. Page 1's feature list says 'Default 17.5mA constant current output, the minimum is 11mA'"
 technical_notes:
   - Built-in 8-bit to 12-bit gamma correction for smoother fades
   - Uses MPWM (multiplexed PWM) for effective 8kHz refresh rate
