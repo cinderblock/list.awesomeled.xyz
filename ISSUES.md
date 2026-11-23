@@ -128,9 +128,9 @@ citations merged.
 ## Two "controllers" drive no pixels (parity / standardization) — fixed (stream 2)
 
 **Fixed (stream 2).** On Cameron's call both moved to pattern drivers as
-players (`38e215f5`): `pattern-drivers/dmx-core` and
+players (`b97322c5`): `pattern-drivers/dmx-core` and
 `pattern-drivers/pixout-server`, with pattern drivers' new `kind` field
-(`234519c5`). They are out of the controllers table and the designer.
+(`1de71b94`). They are out of the controllers table and the designer.
 
 Found by cross-links research (stream 4), from the makers' own pages:
 

@@ -102,8 +102,8 @@ Research findings with sources: [database-review-research.md](database-review-re
 14. ✅ Docs: CONTRIBUTING.md schema reference and value conventions, `database/_schema/README.md`, CLAUDE.md, OVERHAUL-PLAN.md, TODO.md.
 15. ✅ Shipped `0507cb7..d1d23db` and `ee64cc8..c6b3a69`; drive libraries' website field (`links.url`) and their repositories; the last research batch (`plans/database-review-fixes/issues-final.yaml`); the mistyped ignored hash fixed with a guard test; ISSUES.md: my sections closed with hashes, hand-offs to streams 3-6, pattern-driver pricing recommendation for stream 6.
 16. ✅ Cleanup: temp apply script, ship worktree, backup branches, safety stashes, port marker.
-17. ✅ Cameron answered both open questions (2026-11-22): `kind` field (`234519c5`), every pattern driver classified from its maker's pages (`1ce2d8c6`), DMX Core 100 and the Pixout recorder moved to pattern drivers (`38e215f5`); parity still at zero open cells.
-18. **(current)** Ship; nothing else is open in this stream.
+17. ✅ Cameron answered both open questions (2026-11-22): `kind` field (`1de71b94`), every pattern driver classified from its maker's pages (`1d8cad0e`), DMX Core 100 and the Pixout recorder moved to pattern drivers (`b97322c5`); parity still at zero open cells.
+18. ✅ Shipped `0c68a3c..6d57a02` (2026-11-22, all checks, 180 e2e) plus a follow-up merging the entry page's link labels with commercial tiers' (`05345ce3` landed alongside). Nothing is open in this stream.
 
 ## Progress log
 
@@ -128,8 +128,8 @@ Research findings with sources: [database-review-research.md](database-review-re
 - [x] Last research batch applied (`5abe386`).
 - [x] ISSUES.md closures and hand-offs.
 - [x] Cleanup.
-- [x] Open questions 1 and 2 answered and implemented (`234519c5`, `38e215f5`, `1ce2d8c6`).
-- [ ] Shipped.
+- [x] Open questions 1 and 2 answered and implemented (`1de71b94`, `b97322c5`, `1d8cad0e`).
+- [x] Shipped (`0c68a3c..6d57a02`) and the follow-up.
 
 ## Open questions for the user
 
