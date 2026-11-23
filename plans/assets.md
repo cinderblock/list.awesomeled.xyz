@@ -74,6 +74,7 @@ so the entry page shows them (see Plan step 4).
     - [x] Actions may create PRs: Cameron's yes 2026-11-22; set via `gh api` (default workflow permissions stay read)
     - [x] First run (workflow_dispatch, 8:17–8:29 PM PST, 04:17–04:29Z Nov 23): 255 PDFs, 432.3 MB of the 1 GB budget (42%); bot PR https://github.com/cinderblock/list.awesomeled.xyz/pull/3 (commit carries `Not-A-Review:`). Spot-checked 4 mirror URLs: 200 application/pdf.
     - [x] 2 failures: pixeldin (yarilo.pro times out from runners → byte-identical Wayback copy added as `datasheet.sources`); ns8808 (datasheet.url is an HTML page, stream 2's b4dc7499 → ISSUES.md)
+    - [x] Second run (push of b364d575, 9:18 PM PST, 05:18Z Nov 23) mirrored pixeldin via the plain URL this time and updated PR #3 (256 files). Storage 263 PDFs, 434.0 MB; 7 objects (1.0 MB) unreferenced: likely PDFs whose bytes changed between the two runs (content-addressed keys). Watch whether that recurs on later runs before adding any cleanup.
     - [ ] Cameron reviews and merges PR #3 ← current
     - [x] docs/datasheet-mirroring.md setup rewritten for the ops-managed bucket and domain
 12. [x] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
