@@ -45,6 +45,10 @@ power:
     max: 8
 datasheet:
   url: https://yarilo.pro/service/manuals/Yarilo_PixelDIN_datasheet_en.pdf
+  sources:
+    - url: https://web.archive.org/web/20240518143603id_/https://yarilo.pro/service/manuals/Yarilo_PixelDIN_datasheet_en.pdf
+      host: community
+      notes: Wayback Machine capture, byte-identical to the live file (checked 2026-11-22); yarilo.pro times out from GitHub Actions runners
 images:
   - file: pixeldin.webp
     source: https://web.archive.org/web/20241105183413/https://yarilo.pro/en/controllers/pixel-controllers/yarilo-pixeldin
