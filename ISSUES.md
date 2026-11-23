@@ -247,6 +247,14 @@ What belongs to other streams is under "Hand-offs from the database review".
 drawing (5abe3867); `pixel-ics/tm1804` and `pixels/tx1818` already had direct
 PDFs from stream 5 (f4c36200).
 
+**New:** `pixel-ics/ns8808`'s `datasheet.url` is an archived HTML product page
+(`web.archive.org/web/20241102023333/http://newstar-ledstrip.com/productshow855.html`,
+set in b4dc7499). The first datasheet mirror run (2026-11-22, PR #3) failed it:
+"not a PDF (starts with "<!DOC")". No Newstar PDF is archived (Wayback CDX for
+`newstar-ledstrip.com/*` lists none for the NS8808). The page is already in
+`other_links`; the `discrepancies` note lives under `datasheet`, so removing the
+block needs a home for it.
+
 ## Connector and diffuser spec corrections (stream 2 or 6)
 
 **Processed (stream 2).** Every item verified at the maker's datasheet or

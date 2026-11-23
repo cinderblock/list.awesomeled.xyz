@@ -105,47 +105,45 @@ answers repeat downloads, so few reach R2 as Class B operations.
 
 ## One-time setup (Cloudflare + GitHub — owner only)
 
-Until these exist the workflow no-ops cleanly (no red CI). Free in practice: R2's
-free tier (10 GB-month, 1M writes, 10M reads, zero egress) dwarfs ~150 PDFs of
-~1 MB, and Actions minutes are free on this public repo.
+Done 2026-11-22. Without the secrets the workflow no-ops cleanly (no red CI).
+Free in practice: R2's free tier (10 GB-month, 1M writes, 10M reads, zero egress)
+dwarfs a few hundred PDFs, and Actions minutes are free on this public repo.
 
-Proposed names: bucket `awesomeled-datasheets`, public domain
-`assets.awesomeled.xyz`.
-
-1. **Bucket.** Declared in the ops IaC (`cinderblock/ops`,
-   `cloudflare/config/projects/awesomeled.yaml`):
+1. **Bucket and public domain.** Declared in the ops IaC (`cinderblock/ops`,
+   `cloudflare/config/projects/awesomeled.yaml`), which ops CI applies:
 
    ```yaml
-   # Datasheet mirror for list.awesomeled.xyz (scripts/mirror-datasheets.ts writes it from CI)
    - r2: awesomeled-datasheets
+
+   - domain: assets.awesomeled.xyz
+     r2: awesomeled-datasheets
    ```
 
-2. **Public access.** Connect `assets.awesomeled.xyz` as the bucket's custom
-   domain (R2 → bucket → Settings → Custom Domains). The ops IaC has no R2
-   custom-domain support yet, and its DNS sync manages the `awesomeled.xyz`
-   zone, so a dashboard-made domain record needs to be declared there as
-   externally managed (or the IaC taught R2 domains) before the next sync, or
-   the sync may try to remove it. The `r2.dev` URL works for testing but is
-   rate-limited and not meant for production.
-3. **Credentials.** An **account-owned** R2 API token
+   The domain entry attaches `assets.awesomeled.xyz` as the bucket's R2 custom
+   domain; ops treats the CNAME Cloudflare makes for it as Cloudflare's own. The
+   bucket's `r2.dev` URL stays off. Don't add or remove the domain in the
+   dashboard: change it in ops.
+
+2. **Credentials.** An **account-owned** R2 API token
    ([R2 → Manage API tokens](https://dash.cloudflare.com/?to=/:account/r2/api-tokens)
    → _Create Account API token_): permission _Object Read & Write_, scoped to
-   the one bucket. It yields an Access Key ID and Secret Access Key.
-4. **Repository secrets** ([Settings → Secrets and variables → Actions](https://github.com/cinderblock/list.awesomeled.xyz/settings/secrets/actions)):
+   the one bucket. It yields an Access Key ID and Secret Access Key. The token
+   in use is named `awesomeled-list-datasheet-mirror`.
+3. **Repository secrets** ([Settings → Secrets and variables → Actions](https://github.com/cinderblock/list.awesomeled.xyz/settings/secrets/actions)):
 
    | Secret                 | Value                   |
    | ---------------------- | ----------------------- |
    | `R2_ACCOUNT_ID`        | Cloudflare account ID   |
-   | `R2_ACCESS_KEY_ID`     | from step 3             |
-   | `R2_SECRET_ACCESS_KEY` | from step 3             |
+   | `R2_ACCESS_KEY_ID`     | from step 2             |
+   | `R2_SECRET_ACCESS_KEY` | from step 2             |
    | `R2_BUCKET`            | `awesomeled-datasheets` |
 
    and the **variable** `R2_PUBLIC_BASE_URL` = `https://assets.awesomeled.xyz`.
 
-5. **Bot PRs.** [Settings → Actions → General](https://github.com/cinderblock/list.awesomeled.xyz/settings/actions)
+4. **Bot PRs.** [Settings → Actions → General](https://github.com/cinderblock/list.awesomeled.xyz/settings/actions)
    → _Workflow permissions_ → enable _Allow GitHub Actions to create and approve
    pull requests_.
-6. **First run.** Actions → _Mirror datasheets to R2_ → _Run workflow_
+5. **First run.** Actions → _Mirror datasheets to R2_ → _Run workflow_
    (`workflow_dispatch`), then review and rebase-merge the bot PR.
 
 ## Images (for contrast)

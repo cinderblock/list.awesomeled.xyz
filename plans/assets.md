@@ -68,7 +68,14 @@ so the entry page shows them (see Plan step 4).
 11. [ ] R2 setup — Cameron, one step at a time (see Open questions). ← current (blocked on Cameron)
     - [x] Repo side: storage budget (`MIRROR_BUDGET_MB`, default 1024), per-run storage report (log, job summary, PR body), no re-upload of stored keys, `--check` total; entry pages link the mirror (2eab8e6).
     - [x] Ops change staged, uncommitted: worktree `C:/Users/camer/.t3/worktrees/ops/awesomeled-datasheets-r2` (branch `awesomeled-datasheets-r2`, no upstream). It adds R2 custom-domain support to the IaC and declares bucket `awesomeled-datasheets` + `assets.awesomeled.xyz`. Read-only dry run: exactly 2 creates; tests 405 pass. Plan: `plans/awesomeled-datasheets-r2.md` there.
-    - [ ] Cameron's yes on that exact change → commit + push ops (CI applies) → R2 token → repo secrets/variable → Actions PR permission → first run.
+    - [x] Cameron's yes (2026-11-22 "go for it") → ops `34faf883` pushed; CI applied 6:51 PM PST (02:51Z Nov 23): bucket `awesomeled-datasheets` (wnam) + custom domain `assets.awesomeled.xyz`; `sync-verify` green; a missing key returns 404 from R2.
+    - [x] Cameron: account-owned R2 token `awesomeled-list-datasheet-mirror` (Object Read & Write, that bucket only); keys verified 2026-11-22 (write, read, delete a probe object)
+    - [x] Repo secrets R2_ACCOUNT_ID / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY / R2_BUCKET + variable R2_PUBLIC_BASE_URL set 7:51 PM PST (03:51Z Nov 23)
+    - [x] Actions may create PRs: Cameron's yes 2026-11-22; set via `gh api` (default workflow permissions stay read)
+    - [x] First run (workflow_dispatch, 8:17–8:29 PM PST, 04:17–04:29Z Nov 23): 255 PDFs, 432.3 MB of the 1 GB budget (42%); bot PR https://github.com/cinderblock/list.awesomeled.xyz/pull/3 (commit carries `Not-A-Review:`). Spot-checked 4 mirror URLs: 200 application/pdf.
+    - [x] 2 failures: pixeldin (yarilo.pro times out from runners → byte-identical Wayback copy added as `datasheet.sources`); ns8808 (datasheet.url is an HTML page, stream 2's b4dc7499 → ISSUES.md)
+    - [ ] Cameron reviews and merges PR #3 ← current
+    - [x] docs/datasheet-mirroring.md setup rewritten for the ops-managed bucket and domain
 12. [x] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
     - [x] pixel ICs + pixels (f4c3620): 3 images, 1 datasheet added, 2 LCSC viewer URLs replaced by direct PDFs; 47 image skips and 12 parts with no published datasheet, reasons in `plans/assets-research/pass2-pixels-ics.md`.
     - [x] pattern drivers: 12 official screenshots (Pharos swapped at review for the help's Layout view); light-show-pro (500 px only), watchout (callouts/marketing render) and xschedule (none exists) skipped. `plans/assets-research/pass2-pattern-drivers.md`.
@@ -152,7 +159,7 @@ pattern drivers.
 | **Total**           |     579 | 365 (63%) |        365 |           48 | 257/421 (61%) |        0 |
 
 - **Images: 18 → 365** across both passes, all attributed. Excluding drive libraries (no images by decision) and pixel ICs (rarely a real chip photo): 361 / 455 (79%).
-- **Datasheets: 38 → 257.** "Mirrored" stays 0 until the R2 bucket exists (step 11).
+- **Datasheets: 38 → 257.** "Mirrored": 0 on master until PR #3 merges; the first run mirrored 255 of the 257 (pixeldin follows on the next run).
 
 ## Findings / gotchas
 
