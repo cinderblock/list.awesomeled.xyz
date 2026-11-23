@@ -1,17 +1,9 @@
-import { useCallback, useEffect, useSyncExternalStore } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useHydrated } from '~/hooks/useHydrated';
+import { useNarrowScreen } from '~/hooks/useNarrowScreen';
 import { TABLE_VIEW_PREF, usePref } from '~/lib/prefs';
 
 export type TableLayout = 'table' | 'cards';
-
-// Below this width a table shows two columns at best; a card per entry reads better
-const NARROW = '(max-width: 640px)';
-
-function subscribeNarrow(listener: () => void): () => void {
-  const query = window.matchMedia(NARROW);
-  query.addEventListener('change', listener);
-  return () => query.removeEventListener('change', listener);
-}
 
 /**
  * How category tables are laid out: a real table, or one card per entry.
@@ -24,11 +16,8 @@ function subscribeNarrow(listener: () => void): () => void {
  */
 export function useTableLayout(): [TableLayout, () => void] {
   const [pref, setPref] = usePref<TableLayout>(TABLE_VIEW_PREF);
-  const narrow = useSyncExternalStore(
-    subscribeNarrow,
-    () => window.matchMedia(NARROW).matches,
-    () => false
-  );
+  // At phone width a table shows two columns at best; a card per entry reads better
+  const narrow = useNarrowScreen();
   const automatic: TableLayout = narrow ? 'cards' : 'table';
   const layout: TableLayout = pref === 'cards' || pref === 'table' ? pref : automatic;
 

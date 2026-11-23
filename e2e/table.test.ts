@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import {
   columnLabels,
   columnTexts,
@@ -310,23 +310,40 @@ test.describe('Columns', () => {
 });
 
 test.describe('Density', () => {
-  test('dense rows fit more on screen and stay on after a reload', async ({ page }) => {
-    await gotoReady(page, '/controllers');
-    const rowHeight = () =>
-      page
-        .locator('.data-table-container tbody tr[data-row-id]')
-        .first()
-        .evaluate((row) => row.getBoundingClientRect().height);
-    const roomy = await rowHeight();
+  const rowHeight = (page: Page) =>
+    page
+      .locator('.data-table-container tbody tr[data-row-id]')
+      .first()
+      .evaluate((row) => row.getBoundingClientRect().height);
 
-    await page.getByRole('button', { name: 'Switch to dense rows' }).click();
-    await expect(page.locator('html')).toHaveAttribute('data-density', 'compact');
-    const dense = await rowHeight();
-    expect(dense).toBeLessThan(roomy * 0.75);
-
-    // Applied before first paint on the next load (no flash of roomy rows)
+  test('rows are dense by default, roomy on request, and the choice sticks', async ({ page }) => {
+    // Set before first paint, as a spreadsheet would show it
     await page.goto('/controllers', { waitUntil: 'commit' });
     await expect(page.locator('html')).toHaveAttribute('data-density', 'compact');
+    await gotoReady(page, '/controllers');
+    const dense = await rowHeight(page);
+
+    await page.getByRole('button', { name: 'Switch to roomy rows' }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-density', 'comfortable');
+    expect(dense).toBeLessThan((await rowHeight(page)) * 0.75);
+
+    // Applied before first paint on the next load (no flash of dense rows)
+    await page.goto('/controllers', { waitUntil: 'commit' });
+    await expect(page.locator('html')).toHaveAttribute('data-density', 'comfortable');
+
+    // Going back to dense goes back to the default rather than saving it
+    await gotoReady(page, '/controllers');
+    await page.getByRole('button', { name: 'Switch to dense rows' }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-density', 'compact');
+    expect(await page.evaluate(() => localStorage.getItem('awesomeledlist_density'))).toBeNull();
+  });
+
+  test('a table on a phone starts with roomy rows, for tapping', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 800 });
+    await gotoReady(page, '/controllers');
+    await page.getByRole('button', { name: 'Show as a table' }).click();
+    await expect(page.locator('html')).toHaveAttribute('data-density', 'comfortable');
+    await expect(page.getByRole('button', { name: 'Switch to dense rows' })).toBeVisible();
   });
 });
 

@@ -17,7 +17,7 @@ import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges
 import { getPath, type FieldMeta } from '~/lib/fields';
 import { COMPARE_MAX, entryRef, toggleCompare, useCompareItems } from '~/lib/compare';
 import { firstImageFile, imageUrl } from '~/lib/images';
-import { DENSITY_PREF, getPref, setPref, usePref } from '~/lib/prefs';
+import { getPref, setPref, usePref } from '~/lib/prefs';
 import { newIssueUrl } from '~/lib/site';
 import {
   applyFilters,
@@ -57,6 +57,7 @@ import { describeFilter, FilterDrawer } from './FilterDrawer';
 import { buildTableColumns, defaultColumnKeys, type TableColumn } from './table-columns';
 import { FIXED_HEADER_HEIGHT, useStickyHeader } from './useStickyHeader';
 import { useTableParams } from './useTableParams';
+import { useDensity } from '~/hooks/useDensity';
 import { useTableLayout } from '~/hooks/useTableLayout';
 
 // Re-exported for existing imports; these live in lib/table-state now
@@ -344,12 +345,7 @@ export function DataTable({ data, fields, category }: DataTableProps) {
   };
 
   // ---- Density -------------------------------------------------------------
-  const [densityPref, setDensityPref] = usePref<Density>(DENSITY_PREF);
-  const density: Density = densityPref === 'compact' ? 'compact' : 'comfortable';
-  useEffect(() => {
-    // Also set before first paint by the inline script in root.tsx
-    document.documentElement.dataset.density = density;
-  }, [density]);
+  const [density, toggleDensity] = useDensity();
 
   // ---- Picking rows to compare ---------------------------------------------
   const compareItems = useCompareItems();
@@ -669,7 +665,7 @@ export function DataTable({ data, fields, category }: DataTableProps) {
                   ? 'Dense rows are on. Switch to roomy rows'
                   : 'Roomy rows are on. Switch to dense rows'
               }
-              onClick={() => setDensityPref(density === 'compact' ? 'comfortable' : 'compact')}
+              onClick={toggleDensity}
             >
               {density === 'compact' ? <Rows4 size={16} /> : <Rows3 size={16} />}
               <span className="btn-label">{density === 'compact' ? 'Dense' : 'Roomy'}</span>

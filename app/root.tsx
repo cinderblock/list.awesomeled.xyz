@@ -39,13 +39,17 @@ const themeScript = `
   function pref(key) {
     try { return JSON.parse(localStorage.getItem(key)); } catch (e) { return null; }
   }
-  root.dataset.density = pref('awesomeledlist_density') === 'compact' ? 'compact' : 'comfortable';
+  // Same query as hooks/useNarrowScreen.ts
+  var narrow = window.matchMedia('(max-width: 640px)').matches;
+  // Dense rows unless chosen otherwise; roomy for a table on a phone (hooks/useDensity.ts)
+  var density = pref('awesomeledlist_density');
+  root.dataset.density =
+    density === 'compact' || density === 'comfortable' ? density : narrow ? 'comfortable' : 'compact';
   // A URL with a query string shows different content than the prerendered
   // HTML (filtered tables, a comparison, search results). Mark the page so
   // CSS can hold that content back until React applies the URL.
   if (location.search.length > 1) root.dataset.urlState = 'pending';
   var view = pref('awesomeledlist_table_view');
-  var narrow = window.matchMedia('(max-width: 640px)').matches;
   root.dataset.tableLayout = view === 'cards' || (view !== 'table' && narrow) ? 'cards' : 'table';
 })();
 `;
