@@ -13,9 +13,10 @@ to look.
 
 ## Status (2026-11-22, PST)
 
-Everything below is on `master` except where marked. One owner decision is
-open: how datasheet and measured values are recorded and shown (proposal
-below). The commercial `$` rating is replaced by experience tiers. The monthly workflow is running again; the NS/HD names
+Everything below is on `master` except where marked. No owner decisions
+are open. Datasheet and measured values are now recorded apart and shown
+the same way everywhere; the commercial `$` rating is replaced by
+experience tiers; the monthly workflow is running again; the NS/HD names
 are split into IC and LED entries.
 
 |                                                 | Start of day                  | Now                                       |
@@ -83,6 +84,13 @@ are split into IC and LED entries.
   in `sources["pricing.tier"]`. Prices are computed columns: From
   (cheapest price point, "Quote only" without one) and Per Pixel. No
   voting.
+- **Datasheet vs measured** (Cameron, 2026-11-22: "we should have
+  consistent visual presentation for datasheet spec vs user measured.
+  both are valuable", then "sounds good. do it" to the proposal): a field
+  holds the maker's spec, cited in `sources`; `measurements[path]` holds a
+  list of `{value, conditions, by, date, url, notes}`. Entry pages show
+  tagged Datasheet / Measured lines; table and compare cells keep the
+  datasheet value and add a gauge mark that opens the same lines.
 
 ## What shipped
 
@@ -138,8 +146,32 @@ are split into IC and LED entries.
     sales engineer). Thin evidence: LightWalls (protocol unconfirmed),
     FestoonLight Q4 (dealer page only). Sheet parity drops the Price
     Range column.
+12. **Datasheet vs measured values**: `measurements` in
+    `common.json`, on every category; `validate` checks each key names a
+    field and each value fits the field's schema (the entry, with the
+    measured value swapped in, must validate). One component
+    (`app/components/data/Measured.tsx`) draws both tags on entry pages,
+    table cells and the compare page. Migrated, with the datasheets
+    re-read: GS8208 current (datasheet 15 mA typical, measured 10 mA
+    across 3 LEDs at 12 V, from a comment on the sheet's cell, measurer
+    unknown); SK6812 PWM (datasheet 1.2 kHz, cpldcpu measured 1.1 kHz);
+    SK9822 PWM (datasheet 1.2 kHz, cpldcpu measured 4.7 kHz with a
+    photodiode). CONTRIBUTING.md has an "add a measurement" example.
 
 ## Findings / gotchas
+
+- **Two of the four "measured" cases weren't measurements.** WS2812's
+  "measured 19-22 mA" and the "datasheet claims 49 mA" behind it: the
+  Adafruit WS2812 datasheet gives 18.5 mA typical (IOL, ROUT) and 20 mA per
+  color in its LED table, and no 49 mA in its text (its two images
+  weren't read). No measurement was found,
+  so nothing moved; the 49 mA text in `ws2812` / `apa104` notes is
+  unverified. APA107's note cites the SK9822 measurement, which is now
+  structured on `sk9822`.
+- **GS8208's datasheet disagrees with itself**: page 1 says "Default
+  17.5mA constant current output"; the electrical table (page 4) gives
+  15 mA typical at VDH=12V. The field takes the table's 15 mA; the
+  discrepancy is recorded under `datasheet.discrepancies`.
 
 - **The monthly link check stopped running, then restarted itself.**
   `gh workflow list --all` showed `disabled_inactivity` at 3:34 PM PST
@@ -212,36 +244,11 @@ are split into IC and LED entries.
       added (`1d8b88b`).
 - [x] NS/HD pairs merged (`ec19baf`), then split into IC + LED entries.
 - [x] Commercial experience tiers shipped.
-- [ ] Datasheet vs measured values: waiting on Cameron (below).
+- [x] Datasheet vs measured values shipped.
 
 ## Open questions for the user
 
-1. **Datasheet vs measured values** (Cameron, 2026-11-22, on HD8808's
-   17.5 mA: "we should have consistent visual presentation for datasheet
-   spec vs user measured. both are valuable"). Today a measurement lives
-   only in free text, and in two cases it replaced the datasheet value in
-   the field: `gs8208` channel current (field 10 mA measured; datasheet
-   15 mA in a note), `sk6812` PWM (field 1.1 kHz measured; datasheet
-   1.2 kHz in a note). `ws2812` notes "measured 19-22 mA" against the
-   datasheet's 49 mA; `apa107` cites an SK9822 measurement. Proposal:
-   - **Data:** the field holds the maker's spec, cited in `sources` as
-     now. A new `measurements` map, keyed by field path like `sources`,
-     holds a list of `{value, conditions, by, date, url}`: what was
-     measured, under what conditions ("3 LEDs in series at 12 V"), who
-     measured it, when, and a link to the write-up, scope capture or
-     video. Units and validation are the same as the field's.
-   - **Entry page:** every value with a measurement shows two lines, each
-     with a tag: `Datasheet 15 mA` and `Measured 10 mA · 3 LEDs at 12 V ·
-who, date · link`. One tag style for every field, everywhere.
-   - **Tables and compare:** show the datasheet value, with a small
-     "measured" mark in the cell (like the price clock mark) when a
-     measurement exists; tapping it shows the measured value.
-   - **Migration:** move the 4 cases above into `measurements` and put
-     the datasheet values back in the fields.
-   - **Contributing:** CONTRIBUTING.md gets a short "add a measurement"
-     example, so people can submit theirs.
-     Schema change (stream 2's area) plus entry-page and table UI.
-     Recommendation: yes, built in this stream.
+None.
 
 ## Things not to do
 

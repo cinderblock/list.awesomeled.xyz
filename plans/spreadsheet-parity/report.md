@@ -1,6 +1,6 @@
 # Spreadsheet parity report
 
-Generated 11/22/2026, 2:57 PM PST (2026-11-22 22:57Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
+Generated 11/22/2026, 6:22 PM PST (2026-11-23 02:22Z) from the live sheet by `bun run sheet-parity`. Do not edit by hand; see [../spreadsheet-parity.md](../spreadsheet-parity.md) for the audit plan and decisions.
 
 Statuses: **missing** = the sheet has a value the YAML lacks; **differs** = the mapped YAML field holds something else; **rounded** = YAML holds a rounded display copy of the sheet number; **comment** = only in a YAML comment (not on the site); **ack** = reviewed and deliberately not migrated (reason given). Cells that match, or whose content lives in another field, are not listed.
 
@@ -68,7 +68,7 @@ Database folder: `database/pattern-drivers/`.
 
 ### YAML entries with no sheet row
 
-- `pattern-drivers/dmx-core` "DMX Core 100"
+- `pattern-drivers/dmx-core` "DMX Core 100": added 2026-11-22 in b97322c (data: DMX Core 100 and the Pixout recorder are players, not controllers)
 - `pattern-drivers/freestyler` "FreeStyler": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/grandma` "grandMA": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/hls` "HLS": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
@@ -78,7 +78,7 @@ Database folder: `database/pattern-drivers/`.
 - `pattern-drivers/lss-remote` "LSS Remote": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/pharos-designer` "Pharos Designer": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/pixelblaze` "Pixelblaze": in the 2026-01-21 import
-- `pattern-drivers/pixout-server` "Pixout ArtNet DMX Recorder"
+- `pattern-drivers/pixout-server` "Pixout ArtNet DMX Recorder": added 2026-01-24 in b867ec1 (Remove redundant id field from database entries, infer from filename)
 - `pattern-drivers/poet-creator` "Poet Creator": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/vvvv` "vvvv": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
 - `pattern-drivers/watchout` "WATCHOUT": added 2026-11-18 in 992f7b5 (data(pattern-drivers, drive-libraries): 21 programs hardware makers name)
@@ -106,7 +106,7 @@ Database folder: `database/pattern-drivers/`.
 - [J10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=J10) `chromatik` DMX "Possible": Typed by stream 2 (e215cd7): no direct DMX; it sends Art-Net or sACN to a node (dmx_notes)
 - [Q10](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Q10) `chromatik` Programmatic "Possible": Typed by stream 2 (e215cd7): "Possible" became programmatic: true
 - [V11](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=V11) `dylos` Notes "Free for 2 DMX universes and 4 Dylos RGB Pixel zones via Ar…": (cited) YAML cites a source for notes
-- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.6518281": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C12) `elm` Price "91.9377186": (cited) re-priced at the source (retrieved 2026-11-18)
 - [Y12](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=Y12) `elm` URL "https://www.enttec.co.uk/product/controls-gb/addressable-le…": ENTTEC's UK store moved the page; YAML links the product's enttec.com page
 - [D15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=D15) `fastled-fx-engine` Platform "ESP/AVR/NRF/RP/Browser": Same platforms in structured form (web + hardware list)
 - [G15](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=G15) `fastled-fx-engine` Visualizer "Browser wasm Preview": Same: a browser (WebAssembly) preview
@@ -132,7 +132,7 @@ Database folder: `database/pattern-drivers/`.
 - [W30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W30) `lx-studio-chromatik` Demo/Free "Open source. Comercial applications require license": Typo fixed in YAML
 - [X30](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=X30) `lx-studio-chromatik` Status "Active": (cited) YAML cites a source for status
 - [B31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B31) `madmapper` Developer "Smode Tech": (cited) YAML cites a source for creator
-- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.857105": (cited) re-priced at the source (retrieved 2026-11-18)
+- [C31](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=C31) `madmapper` Price "393.616575": (cited) re-priced at the source (retrieved 2026-11-18)
 - [W32](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=W32) `madrix-5` Demo/Free "Demo no data out": Same in structured form: demo.available + limitations
 - [B34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=B34) `mapio-pro` Developer "Vistitution": (cited) YAML cites a source for creator
 - [S34](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=961824890&range=S34) `mapio-pro` Other Inputs "Native support for PixelPusher devices": PixelPusher support is an output, which the entry lists; the sheet wrote it in Other Inputs
@@ -514,7 +514,7 @@ Database folder: `database/controllers/`.
 - [D126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D126) `qolorpix` Price "1500": (cited) re-priced at the source (retrieved 2026-11-18)
 - [K126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=K126) `qolorpix` Max Current "120": (cited) YAML cites a source for power.current.max
 - [V126](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V126) `qolorpix` Product URL "http://www.citytheatrical.com/Products/qolorpix-tape-contro…": Old URL; it redirects to the page YAML links
-- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1843.511057": (cited) re-priced at the source (retrieved 2022-06-29)
+- [D127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=D127) `pixelator` Price "1849.26154": (cited) re-priced at the source (retrieved 2022-06-29)
 - [G127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=G127) `pixelator` Storage "Yes": The manual describes no show storage; its DMX Generator holds static looks only
 - [H127](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=H127) `pixelator` Standalone "Yes": Stream 2's inputs audit (plans/database-review-inputs-audit.md): not standalone (Pixelator datasheet)
 - [V128](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=0&range=V128) `emp-16-uni-control` Product URL "https://www.empdesigns.co.uk/portfolio-item/16-universe-led…": Old URL; it redirects to the page YAML links
@@ -786,7 +786,7 @@ Database folder: `database/pixels/`.
 
 </details>
 
-<details><summary>Acknowledged differences (87)</summary>
+<details><summary>Acknowledged differences (88)</summary>
 
 - [M2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M2) `apa102` Wattage "110": (cited) YAML cites a source for electrical.wattage
 - [T2](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=T2) `apa102` Max pixel per string "~250 - CLK sensitive": Same: max_per_string 250 with the clock-degradation explanation
@@ -844,6 +844,7 @@ Database folder: `database/pixels/`.
 - [S24](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=S24) `sk6813-hv` Backup Data Line "No": (cited) YAML cites a source for data.backup_line
 - [M25](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M25) `sk6818` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
 - [M26](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M26) `sk6822` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
+- [F27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=F27) `sk9822` PWM Frequency "4600": (cited) YAML cites a source for color.pwm_frequency
 - [M27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M27) `sk9822` Wattage "100": (cited) YAML cites a source for electrical.wattage
 - [W27](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=W27) `sk9822` 3rd Party Testing "https://cpldcpu.wordpress.com/2016/12/13/sk9822-a-clone-of-…": Old URL; it redirects to the page YAML links
 - [M28](https://docs.google.com/spreadsheets/d/10pHG7_VIVltyqJK1Y0T5g3Iq6YJV2MnhMp3UcAVB-GA/edit#gid=755169190&range=M28) `sk9822-a` Wattage "0": Formula artifact: Wattage = VCC x current computed 0 from empty inputs
@@ -1797,20 +1798,20 @@ Database folder: `database/commercial-systems/`.
 
 <details><summary>Column mapping</summary>
 
-| Col | Sheet header          | YAML field(s)                               | Compared as | Note |
-| --- | --------------------- | ------------------------------------------- | ----------- | ---- |
-| A   | (name)                | `name`                                      | text        |      |
-| B   | Manufacturer          | `creator`, `manufacturers`                  | text        |      |
-| C   | Pixels Per Run        | `specs.pixels_per_run`                      | number      |      |
-| D   | Dimming Resolution    | `specs.dimming_bits`, `specs.dimming_notes` | custom      |      |
-| E   | Dedicated PSU/control | `specs.dedicated_psu`                       | bool        |      |
-| F   | RGB/W                 | `specs.color_type`                          | text        |      |
-| G   | Online Pricing        | `pricing.examples`                          | text        |      |
-| H   | Price Range           | `pricing.price_range`                       | exact       |      |
-| I   | Core Tech             | `core_tech`                                 | text        |      |
-| J   | Since                 | `release_year`                              | number      |      |
-| K   | Target Market         | `target_market`                             | text        |      |
-| L   | NOTES                 | `notes`                                     | text        |      |
+| Col | Sheet header          | YAML field(s)                               | Compared as                                                                                                              | Note |
+| --- | --------------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---- |
+| A   | (name)                | `name`                                      | text                                                                                                                     |      |
+| B   | Manufacturer          | `creator`, `manufacturers`                  | text                                                                                                                     |      |
+| C   | Pixels Per Run        | `specs.pixels_per_run`                      | number                                                                                                                   |      |
+| D   | Dimming Resolution    | `specs.dimming_bits`, `specs.dimming_notes` | custom                                                                                                                   |      |
+| E   | Dedicated PSU/control | `specs.dedicated_psu`                       | bool                                                                                                                     |      |
+| F   | RGB/W                 | `specs.color_type`                          | text                                                                                                                     |      |
+| G   | Online Pricing        | `pricing.examples`                          | text                                                                                                                     |      |
+| H   | Price Range           | —                                           | dropped: Undefined $ scale that contradicted the sourced prices; replaced by pricing.tier (what the buyer gets) and the… |      |
+| I   | Core Tech             | `core_tech`                                 | text                                                                                                                     |      |
+| J   | Since                 | `release_year`                              | number                                                                                                                   |      |
+| K   | Target Market         | `target_market`                             | text                                                                                                                     |      |
+| L   | NOTES                 | `notes`                                     | text                                                                                                                     |      |
 
 </details>
 
