@@ -1066,13 +1066,14 @@ function formatValue(
   }
 
   if (filterableFields.has(key)) {
-    const shown = filterableFields.get(key)?.[strValue] ?? strValue;
+    // The table column's display label, so the link's filter matches its cells
+    const label = filterableFields.get(key)?.[strValue] ?? shown;
     return (
       <Link
         className="entry-value-link"
-        to={`${categoryPath}?f=${key}:${escapeFilterValue(shown)}`}
+        to={`${categoryPath}?f=${key}:${escapeFilterValue(label)}`}
       >
-        {shown}
+        {label}
       </Link>
     );
   }
