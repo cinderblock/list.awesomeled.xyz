@@ -87,7 +87,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**All twelve steps are live and CI is green** (9–11 as `d1d23db4..ee64cc82`, 12 as `d92d1adb..d2bde2f1`, the follow-up batch as `e9f01bd2..1367f26e`). Both open questions were answered on 2026-11-22 (dense by default, issue labels); that change is the last item in the progress log.
+**All twelve steps are live and CI is green** (9–11 as `d1d23db4..ee64cc82`, 12 as `d92d1adb..d2bde2f1`, the follow-up batch as `e9f01bd2..1367f26e`). Both open questions were answered and shipped on 2026-11-22 (`ba656b77`). Nothing is in progress or open.
 
 ## Findings / gotchas
 
@@ -175,7 +175,7 @@ Each step ships on its own (rebase, checks, push).
 
 - [x] 2026-11-20 5:49 AM PST (13:49Z): follow-up batch pushed (`e9f01bd2..1367f26e`): fast checks, 401 unit tests, build and 21 production tests passed first; CI green (run 44747678065); checked live (entry labels, fallback font, header rule). The designer stream fixed its audit finding the same hour and added `/designer` to the axe pages.
 
-- [ ] Owner's answers: dense rows by default (`app/hooks/useDensity.ts`, inline script in `root.tsx`, e2e updated); `data` and `new-entry` labels created and applied by the correction and new-entry forms.
+- [x] 2026-11-22 5:20 PM PST (2026-11-23 01:20Z): owner's answers pushed (`6892c3d9..ba656b77`): dense rows by default (`app/hooks/useDensity.ts`, inline script in `root.tsx`, e2e updated); `data` and `new-entry` labels created and applied by the correction and new-entry forms. Full e2e 172/180 under a fully loaded machine, the 8 timeouts passed re-run alone (78/78); 436 unit tests, build, 22 production tests; CI green (run 45092602091); checked live (dense at 1280 px, roomy for a phone table).
 
 ## Open questions for the user
 
