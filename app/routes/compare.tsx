@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight, ClipboardCopy, Link2, Plus, Trash2, X } from 'lu
 import { Fragment, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router';
 import { FieldValue } from '~/components/data/FieldValue';
+import { WithMeasuredMark } from '~/components/data/Measured';
 import { buildTableColumns, type TableColumn } from '~/components/data/table-columns';
 import { useTableParams } from '~/components/data/useTableParams';
 import { Breadcrumb } from '~/components/ui/Breadcrumb';
@@ -454,11 +455,22 @@ function CompareCell({ slot, columnKey }: { slot: Slot; columnKey: string }) {
     return <span className="data-table-null">-</span>;
   }
   const value = getPath(slot.entry, columnKey);
-  // Catalog columns render compactly for table cells; here there is room for
-  // the whole value (full lists, unclipped prose)
-  if (column.field && !column.isDefault) {
-    return <FieldValue field={column.field} value={value} item={slot.entry} />;
-  }
-  if (column.render) return <>{column.render(value, slot.entry)}</>;
-  return <span>{column.text(slot.entry)}</span>;
+  return (
+    <WithMeasuredMark
+      item={slot.entry}
+      columnKey={columnKey}
+      field={column.field}
+      label={column.label}
+    >
+      {/* Catalog columns render compactly for table cells; here there is room
+          for the whole value (full lists, unclipped prose) */}
+      {column.field && !column.isDefault ? (
+        <FieldValue field={column.field} value={value} item={slot.entry} />
+      ) : column.render ? (
+        column.render(value, slot.entry)
+      ) : (
+        <span>{column.text(slot.entry)}</span>
+      )}
+    </WithMeasuredMark>
+  );
 }

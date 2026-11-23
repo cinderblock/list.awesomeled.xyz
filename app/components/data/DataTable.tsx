@@ -15,6 +15,7 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { Badge, getBadgeForValue, TextPill } from '~/components/ui/FeatureBadges';
 import { getPath, type FieldMeta } from '~/lib/fields';
+import { WithMeasuredMark } from '~/components/data/Measured';
 import { COMPARE_MAX, entryRef, toggleCompare, useCompareItems } from '~/lib/compare';
 import { firstImageFile, imageUrl } from '~/lib/images';
 import { getPref, setPref, usePref } from '~/lib/prefs';
@@ -978,16 +979,23 @@ function TableCell({
       data-empty={empty ? '' : undefined}
       data-filterable={clickable ? '' : undefined}
     >
-      {column.render ? (
-        column.render(value, item)
-      ) : isName ? (
-        <Link to={`${categoryPath}/${item.id}`} className="data-table-entry-link">
-          {thumbCategory && <NameThumb category={thumbCategory} entry={item} />}
-          {String(value ?? '')}
-        </Link>
-      ) : (
-        <CellValue value={value} />
-      )}
+      <WithMeasuredMark
+        item={item}
+        columnKey={column.key}
+        field={column.field}
+        label={column.label}
+      >
+        {column.render ? (
+          column.render(value, item)
+        ) : isName ? (
+          <Link to={`${categoryPath}/${item.id}`} className="data-table-entry-link">
+            {thumbCategory && <NameThumb category={thumbCategory} entry={item} />}
+            {String(value ?? '')}
+          </Link>
+        ) : (
+          <CellValue value={value} />
+        )}
+      </WithMeasuredMark>
     </td>
   );
 }

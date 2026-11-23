@@ -130,6 +130,9 @@
     "related": {
       "$ref": "common.json#/definitions/related"
     },
+    "measurements": {
+      "$ref": "common.json#/definitions/measurements"
+    },
     "sources": {
       "$ref": "common.json#/definitions/sources"
     },

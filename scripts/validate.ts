@@ -63,6 +63,53 @@ function checkSources(data: Record<string, unknown>): string[] {
 }
 
 /**
+ * `measurements` (common.json#/definitions/measurements): each key must name
+ * a field the entry has (the datasheet value the measurement sits beside), and
+ * each measured value must fit that field's schema: the entry, with the field
+ * swapped for the measured value, must still validate.
+ */
+function checkMeasurements(
+  data: Record<string, unknown>,
+  validate: (d: unknown) => boolean,
+  errorsOf: () => { instancePath: string; message?: string }[]
+): string[] {
+  const measurements = data?.measurements;
+  if (!measurements || typeof measurements !== 'object') return [];
+  const problems: string[] = [];
+  for (const [path, list] of Object.entries(measurements)) {
+    const keys = path.split('.');
+    const value = keys.reduce<unknown>(
+      (v, k) => (v && typeof v === 'object' ? (v as Record<string, unknown>)[k] : undefined),
+      data
+    );
+    if (value == null) {
+      problems.push(`measurements "${path}": the entry has no such field`);
+      continue;
+    }
+    if (!Array.isArray(list)) continue; // the schema reports it
+    list.forEach((m, i) => {
+      if (!m || typeof m !== 'object' || !('value' in m)) return; // the schema reports it
+      const copy = structuredClone(data);
+      delete copy.measurements;
+      const parent = keys
+        .slice(0, -1)
+        .reduce((v, k) => (v as Record<string, unknown>)[k], copy as unknown) as Record<
+        string,
+        unknown
+      >;
+      parent[keys[keys.length - 1]!] = (m as { value: unknown }).value;
+      if (!validate(copy)) {
+        const why = errorsOf()
+          .map((e) => `${e.instancePath || '/'} ${e.message ?? ''}`.trim())
+          .join('; ');
+        problems.push(`measurements "${path}"[${i}]: the value doesn't fit the field (${why})`);
+      }
+    });
+  }
+  return problems;
+}
+
+/**
  * Every `currency` used in a price must have a rate in app/lib/currency.ts:
  * without one the price can't be converted, so it sorts with the blanks and
  * filters drop it (an INR price did exactly that and broke the table e2e).
@@ -230,6 +277,11 @@ async function main() {
           (p) => `${p.field} "${p.ref}": ${p.problem}`
         ),
         ...checkSources(data as Record<string, unknown>),
+        ...checkMeasurements(
+          data as Record<string, unknown>,
+          validate,
+          () => validate.errors ?? []
+        ),
         ...checkCurrencies(data),
         ...(await checkImages(folder, data as Record<string, unknown>, referencedImages)),
       ];

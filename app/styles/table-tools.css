@@ -766,6 +766,17 @@ html[data-table-layout='cards'] .data-table-sort-menu {
   font-size: 0.6875rem;
 }
 
+/* The gauge mark after a cell whose value has measurements (Measured.tsx) */
+.more-info--measured {
+  padding: 0.15rem;
+  border-color: transparent;
+  background-color: transparent;
+  color: oklch(0.45 0.1 200);
+}
+.dark .more-info--measured {
+  color: oklch(0.8 0.09 200);
+}
+
 .more-info--note {
   padding: 0.15rem;
   border-color: transparent;

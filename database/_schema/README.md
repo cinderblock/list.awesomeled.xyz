@@ -29,8 +29,9 @@ How to write values (units, ranges, lists, `_notes`, directions) is in
 ## Validation
 
 `bun run validate` (`scripts/validate.ts`) checks every entry and every
-`_example.yaml` against its schema, and that each `sources` key names a field
-the entry has. Unresolved link names are reported as warnings.
+`_example.yaml` against its schema, that each `sources` and `measurements`
+key names a field the entry has, and that each measured value fits its
+field's schema. Unresolved link names are reported as warnings.
 
 ## Changing a schema
 

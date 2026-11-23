@@ -153,6 +153,7 @@ categories.
 | `other_links`           | Further pages: guides, protocol notes, forum threads                        |
 | `technical_notes`       | Longer facts, one per item                                                  |
 | `sources`               | Where facts were verified; see [Sources](#sources)                          |
+| `measurements`          | Values measured on real parts; see [Measurements](#measurements)            |
 | `dead_links`            | Links that stopped working, with an archive copy when there is one          |
 
 ### Who made it: creator, manufacturers, vendors
@@ -268,6 +269,32 @@ sources:
 
 Entry pages show the source under the field. `bun run validate` checks that
 every key names a field the entry has.
+
+### Measurements
+
+A field holds the maker's spec, from the datasheet. When you have measured a
+real part and got something else, add it under `measurements`, keyed by the
+field's dotted path like `sources`, and leave the field as the datasheet
+says. Both are worth having: the datasheet is what the maker promises, the
+measurement is what a part did on a bench.
+
+```yaml
+measurements:
+  electrical.channel_current:
+    - value: 10mA # written exactly like the field
+      conditions: 3 LEDs in series at 12V # how: supply, load, sample, instrument
+      by: your name or handle
+      date: '2026-11-22'
+      url: https://example.com/write-up # write-up, scope capture or video
+      notes: Five parts from one reel # optional
+```
+
+Only `value` is required, but a measurement nobody can check is worth
+little: give the conditions and a link whenever you can. Entry pages show
+the pair, tagged Datasheet and Measured; tables and the compare page keep
+the datasheet value and add a gauge mark that opens the measurements.
+`bun run validate` checks that every key names a field the entry has and
+that each value fits that field (a current is a current).
 
 ### Category fields
 
@@ -566,7 +593,8 @@ The database uses JSON Schema for validation. Schemas are located in `database/_
 Before submitting:
 
 - Run `bun run validate`: it checks every entry and every `_example.yaml`
-  against its schema, and that each `sources` key names a field the entry has
+  against its schema, and that each `sources` and `measurements` key names a
+  field the entry has
 - Check that URLs are valid and accessible
 - Confirm the entry appears correctly on the site
 

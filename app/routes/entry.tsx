@@ -41,6 +41,8 @@ import { LinkRecord, UrlText } from '~/components/entry/LinkRecord';
 import { asLinkRecord } from '~/lib/url-label';
 import { humanizeKey } from '~/lib/fields';
 import { TIER_LABELS, tierRank, type Tier } from '~/lib/tiers';
+import { DatasheetLine, MeasurementLine } from '~/components/data/Measured';
+import type { Measurement } from '~/lib/types';
 
 // Escape special chars for filter URL values (matches DataTable format)
 function escapeFilterValue(val: string): string {
@@ -332,6 +334,7 @@ const SKIP_KEYS = new Set([
   'other_links', // shown with the other external links
   'price_source', // shown as the "as of" line under the price
   'sources', // shown under each field it documents
+  'measurements', // shown beside the field each one measures
   'linked', // derived compatibility summary, shown in Works with
 ]);
 
@@ -367,6 +370,10 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
   const fieldSources = (
     entry.sources && typeof entry.sources === 'object' ? entry.sources : {}
   ) as Record<string, FieldSource | FieldSource[]>;
+  // Measured values beside the datasheet's (common.json#/definitions/measurements)
+  const fieldMeasurements = (
+    entry.measurements && typeof entry.measurements === 'object' ? entry.measurements : {}
+  ) as Record<string, Measurement[]>;
   const filterableFields = getFilterableFields(category.id);
   const images = entryImages(entry);
   const [activeImage, setActiveImage] = useState(0);
@@ -654,6 +661,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               priceSource={getPriceSource(entry)}
               nameLinks={nameLinks}
               sources={fieldSources}
+              measurements={fieldMeasurements}
               status={status}
             />
           </Section>
@@ -668,6 +676,7 @@ export default function EntryPage({ loaderData }: Route.ComponentProps) {
               connectorNames={connectorNames}
               nameLinks={nameLinks}
               sources={fieldSources}
+              measurements={fieldMeasurements}
               pathPrefix={key}
             />
           </Section>
@@ -755,6 +764,7 @@ function KeyValueGrid({
   priceSource,
   nameLinks = {},
   sources = {},
+  measurements = {},
   pathPrefix,
   status,
 }: {
@@ -767,6 +777,8 @@ function KeyValueGrid({
   nameLinks?: InlineNameLinks;
   /** The entry's `sources` map (field path → provenance) */
   sources?: Record<string, FieldSource | FieldSource[]>;
+  /** The entry's `measurements` map (field path → measured values) */
+  measurements?: Record<string, Measurement[]>;
   /** Dotted path of the group these entries sit in ("outputs"), for nameLinks/sources lookup */
   pathPrefix?: string;
   status?: string | null;
@@ -777,6 +789,7 @@ function KeyValueGrid({
     connectorNames,
     nameLinks,
     sources,
+    measurements,
   };
   return (
     <dl className="detail-grid">
@@ -785,11 +798,18 @@ function KeyValueGrid({
           <dt className="detail-key detail-key--label">{fieldLabel(key)}</dt>
           <dd className="detail-value">
             {key === 'price' && priceSource !== undefined ? (
-              <PriceDetail value={value} source={priceSource} status={status} />
+              <>
+                <PriceDetail value={value} source={priceSource} status={status} />
+                <FieldSources sources={sources[key]} />
+              </>
             ) : (
-              formatValue(key, value, ctx, pathPrefix ? `${pathPrefix}.${key}` : key)
+              <FieldDetail
+                fieldKey={key}
+                value={value}
+                ctx={ctx}
+                path={pathPrefix ? `${pathPrefix}.${key}` : key}
+              />
             )}
-            <FieldSources sources={sources[pathPrefix ? `${pathPrefix}.${key}` : key]} />
           </dd>
         </div>
       ))}
@@ -902,6 +922,55 @@ interface FormatContext {
   connectorNames: Record<string, string>;
   nameLinks: InlineNameLinks;
   sources: Record<string, FieldSource | FieldSource[]>;
+  measurements: Record<string, Measurement[]>;
+}
+
+/**
+ * One field's value and its provenance: the sources it was read from, and
+ * when it has measurements, the datasheet/measured pair (app/components/data/
+ * Measured.tsx): "Datasheet <value>", its sources, then a "Measured" line for
+ * each measurement.
+ */
+function FieldDetail({
+  fieldKey,
+  value,
+  ctx,
+  path,
+}: {
+  fieldKey: string;
+  value: unknown;
+  ctx: FormatContext;
+  path: string;
+}) {
+  const measured = ctx.measurements[path] ?? [];
+  const shown = formatValue(fieldKey, value, ctx, path);
+  const sources = <FieldSources sources={ctx.sources[path]} />;
+  if (measured.length === 0) {
+    return (
+      <>
+        {shown}
+        {sources}
+      </>
+    );
+  }
+  // Measured values are shown as written: no filter links, no nested tags
+  const plain: FormatContext = {
+    ...ctx,
+    filterableFields: new Map(),
+    nameLinks: {},
+    measurements: {},
+  };
+  return (
+    <div className="spec-lines">
+      <DatasheetLine>{shown}</DatasheetLine>
+      {sources}
+      {measured.map((m, i) => (
+        <MeasurementLine key={i} m={m}>
+          {formatValue(fieldKey, m.value, plain, path)}
+        </MeasurementLine>
+      ))}
+    </div>
+  );
 }
 
 function formatValue(
@@ -1021,8 +1090,7 @@ function formatValue(
           <div key={k} className="detail-row">
             <dt className="detail-key detail-key--label">{fieldLabel(k)}</dt>
             <dd>
-              {formatValue(k, obj[k], ctx, `${path}.${k}`)}
-              <FieldSources sources={ctx.sources[`${path}.${k}`]} />
+              <FieldDetail fieldKey={k} value={obj[k]} ctx={ctx} path={`${path}.${k}`} />
             </dd>
           </div>
         ))}

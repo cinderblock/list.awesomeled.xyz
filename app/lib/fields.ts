@@ -310,6 +310,7 @@ const SKIPPED_PATHS = [
   /^variants$/,
   /^price_source$/,
   /^sources$/, // per-field provenance, shown under each field on entry pages
+  /^measurements$/, // measured values, shown beside the field they measure
   /^datasheet\.mirror(\.|$)/,
   /^datasheet\.sources$/,
   /(^|\.)source$/,

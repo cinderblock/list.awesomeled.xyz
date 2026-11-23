@@ -143,6 +143,26 @@ export interface SourceRecord {
   notes?: string;
 }
 
+// One value measured on real parts (common.json#/definitions/measurement)
+export interface Measurement {
+  /** Written like the field it measures ("10mA") */
+  value: unknown;
+  conditions?: string;
+  by?: string;
+  /** YYYY-MM-DD, YYYY-MM or YYYY */
+  date?: string;
+  url?: string;
+  notes?: string;
+}
+
+/** An entry's measurements of one field (`measurements[path]`), or [] */
+export function measurementsOf(entry: unknown, path: string): Measurement[] {
+  const all = (entry as { measurements?: unknown } | null | undefined)?.measurements;
+  if (!all || typeof all !== 'object') return [];
+  const list = (all as Record<string, unknown>)[path];
+  return Array.isArray(list) ? (list as Measurement[]) : [];
+}
+
 // An entry of any category: its YAML fields, typed by the category schema
 // (database/_schema) and read through the field catalog (app/lib/fields.ts)
 export interface BaseEntry {

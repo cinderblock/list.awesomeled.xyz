@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { gotoReady } from './helpers';
 
 test.describe('Basic functionality', () => {
   test('home page loads with category cards', async ({ page }) => {
@@ -396,6 +397,28 @@ test.describe('Data loading', () => {
     // The entry page shows the tier's label, not its slug
     await page.goto('/commercial-systems/twinkly');
     await expect(page.locator('.detail-value', { hasText: 'Plug and play' }).first()).toBeVisible();
+  });
+
+  test('a measured value shows beside the datasheet value, tagged', async ({ page }) => {
+    // SK9822 PWM: datasheet 1.2kHz, measured 4.7kHz (cpldcpu)
+    await page.goto('/pixels/sk9822');
+    const pwm = page.locator('.detail-row', {
+      has: page.getByText('PWM frequency', { exact: true }),
+    });
+    await expect(pwm.locator('.spec-tag--datasheet')).toHaveText('Datasheet');
+    await expect(pwm.locator('.spec-line', { hasText: 'Datasheet' })).toContainText('1.2kHz');
+    const measured = pwm.locator('.spec-line', { hasText: 'Measured' });
+    await expect(measured).toContainText('4.7kHz');
+    await expect(measured).toContainText('cpldcpu, 2016-12-13');
+    await expect(measured.getByRole('link')).toHaveAttribute('href', /cpldcpu\.com/);
+
+    // The table keeps the datasheet value; the gauge mark opens the pair
+    await gotoReady(page, '/pixels?cols=name,color.pwm_frequency');
+    const row = page.getByRole('row', { name: /SK9822/ }).first();
+    await row.getByRole('button', { name: /Measured PWM/ }).click();
+    const popover = page.locator('.more-info-popover');
+    await expect(popover.locator('.spec-line', { hasText: 'Datasheet' })).toContainText('1.2');
+    await expect(popover.locator('.spec-line', { hasText: 'Measured' })).toContainText('4.7');
   });
 
   test('footer is displayed', async ({ page }) => {
