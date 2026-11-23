@@ -28,6 +28,8 @@ unfurl nicely, a contribution path that cannot vandalize the data).
 - One field catalog, many views: table columns, facets, compare rows, exports and the search index all derive from the JSON schemas plus the data, so schema improvements from workstream 2 show up without UI work.
 - The curated columns in `app/lib/columns.tsx` stay as the default view; every other field becomes an optional column.
 - URL state stays backward compatible (`q`, `sort`, `f`, legacy `dir`); new state is additive (`cols`).
+- Rows are dense by default (Cameron, 2026-11-22); a table on a phone starts roomy. Roomy is a remembered choice; picking what the screen would pick anyway clears it.
+- Issue forms label themselves: corrections `data`, additions `new-entry`, site problems `bug` (labels created 2026-11-22 with Cameron's yes).
 - Density, card/table view and compare selection are per-device preferences (localStorage), not URL state; filters, sort, search and columns are shareable URL state.
 - The card layout is the same `<table>` restyled by CSS (`html[data-table-layout='cards']`), not a second component: search, filters, columns, compare, keyboard and URL state cannot drift apart between the two. Cards are automatic below 640 px and a remembered choice anywhere.
 - Compare lives at `/compare?e=<category>/<id>,…` (2–4 entries, same `ref` format the database uses), so it works on static hosting.
@@ -85,7 +87,7 @@ Each step ships on its own (rebase, checks, push).
 11. **Contribution funnel** — issue forms, edit/add links, `/contribute` page with a generated field reference, refreshed CONTRIBUTING.md.
 12. **Accessibility + performance pass** — axe in e2e, badge contrast, focus, self-hosted font, bundle check.
 
-**All twelve steps are live and CI is green** (9–11 as `d1d23db4..ee64cc82`, 12 as `d92d1adb..d2bde2f1`, the follow-up batch as `e9f01bd2..1367f26e`). Nothing is in progress; what is left is the two open questions below.
+**All twelve steps are live and CI is green** (9–11 as `d1d23db4..ee64cc82`, 12 as `d92d1adb..d2bde2f1`, the follow-up batch as `e9f01bd2..1367f26e`). Both open questions were answered on 2026-11-22 (dense by default, issue labels); that change is the last item in the progress log.
 
 ## Findings / gotchas
 
@@ -173,10 +175,11 @@ Each step ships on its own (rebase, checks, push).
 
 - [x] 2026-11-20 5:49 AM PST (13:49Z): follow-up batch pushed (`e9f01bd2..1367f26e`): fast checks, 401 unit tests, build and 21 production tests passed first; CI green (run 44747678065); checked live (entry labels, fallback font, header rule). The designer stream fixed its audit finding the same hour and added `/designer` to the axe pages.
 
+- [ ] Owner's answers: dense rows by default (`app/hooks/useDensity.ts`, inline script in `root.tsx`, e2e updated); `data` and `new-entry` labels created and applied by the correction and new-entry forms.
+
 ## Open questions for the user
 
-1. **Default density.** Dense mode ships as a toggle and the current roomy rows stay the default. Recommendation: make dense the default on desktop (it is what a sheet user expects); say the word and it is a one-line change.
-2. **Issue labels.** The issue forms (step 11) can only apply labels that exist. The repository has GitHub's defaults plus `link-rot`; the site-bug form uses `bug`. Recommendation: add `data` and `new-entry` labels so corrections and additions sort themselves. Creating labels is a repository setting, so it waits for a yes.
+None. (Default density and issue labels were answered 2026-11-22; see decisions.)
 
 ## Things not to do
 

@@ -1,6 +1,8 @@
 name: Something on the list is wrong
 description: A spec, price, link, status, or name that doesn't match the real product.
 title: 'Correction: '
+labels:
+  - data
 body:
   # "markdown" is the issue-form block type, not prose
   # eslint-disable-next-line custom/terminology

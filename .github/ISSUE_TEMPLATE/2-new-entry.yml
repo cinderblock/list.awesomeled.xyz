@@ -1,6 +1,8 @@
 name: Something is missing from the list
 description: A controller, pixel, chip, board, connector, library, or system that should be on it.
 title: 'Add: '
+labels:
+  - new-entry
 body:
   # "markdown" is the issue-form block type, not prose
   # eslint-disable-next-line custom/terminology
