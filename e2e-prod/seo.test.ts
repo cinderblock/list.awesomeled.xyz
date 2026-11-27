@@ -4,7 +4,7 @@ import { test, expect } from '@playwright/test';
 // the page's scripts. So these check the prerendered files themselves, with
 // plain requests and no browser.
 
-const ORIGIN = 'https://list.awesomeled.xyz';
+const ORIGIN = 'https://awesomeled.xyz';
 
 /** The content of one <meta> tag in raw HTML, whatever order its attributes are in. */
 function metaContent(html: string, attribute: 'name' | 'property', value: string): string | null {

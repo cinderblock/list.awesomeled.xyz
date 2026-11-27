@@ -399,7 +399,7 @@ export function bomSummary(bom: Bom): string {
 
 export interface BomExportOptions {
   title: string;
-  /** Site origin for part links, e.g. https://list.awesomeled.xyz */
+  /** Site origin for part links, e.g. https://awesomeled.xyz */
   origin: string;
   /** Link back to the design */
   url: string;

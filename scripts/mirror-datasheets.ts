@@ -63,7 +63,7 @@ const KEY_PREFIX = 'datasheets';
 const MAX_BYTES = 50 * 1024 * 1024; // refuse anything over 50 MB
 const DEFAULT_BUDGET_MB = 1024;
 const MB = 1024 * 1024;
-const USER_AGENT = 'awesomeledlist-datasheet-mirror/1.0 (+https://list.awesomeled.xyz)';
+const USER_AGENT = 'awesomeledlist-datasheet-mirror/1.0 (+https://awesomeled.xyz)';
 
 export interface Candidate {
   file: string;

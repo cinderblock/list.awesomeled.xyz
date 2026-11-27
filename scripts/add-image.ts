@@ -40,7 +40,7 @@ const UA =
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
 // Wikimedia's User-Agent policy rejects browser-imitating clients (HTTP 429/403)
 // and asks scripts to identify themselves.
-const BOT_UA = 'awesomeledlist-add-image/1.0 (+https://list.awesomeled.xyz)';
+const BOT_UA = 'awesomeledlist-add-image/1.0 (+https://awesomeled.xyz)';
 const uaFor = (url: string) =>
   /(^|\.)(wikimedia|wikipedia)\.org$/.test(new URL(url).hostname) ? BOT_UA : UA;
 

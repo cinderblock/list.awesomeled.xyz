@@ -28,7 +28,7 @@ test.describe('Contributing', () => {
     expect(report.origin + report.pathname).toBe(`${REPO}/issues/new`);
     expect(report.searchParams.get('template')).toBe('1-correction.yml');
     expect(report.searchParams.get('entry')).toBe(
-      'https://list.awesomeled.xyz/controllers/falcon-f16v4'
+      'https://awesomeled.xyz/controllers/falcon-f16v4'
     );
     expect(report.searchParams.get('title')).toBe('Correction: Falcon F16V4');
   });
@@ -40,7 +40,7 @@ test.describe('Contributing', () => {
     await page.getByRole('button', { name: 'Copy link' }).click();
     await expect(page.getByText('Link copied')).toBeVisible();
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-      'https://list.awesomeled.xyz/controllers/falcon-f16v4'
+      'https://awesomeled.xyz/controllers/falcon-f16v4'
     );
   });
 

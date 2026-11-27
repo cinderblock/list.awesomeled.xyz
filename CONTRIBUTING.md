@@ -2,7 +2,7 @@
 
 Thank you for your interest in contributing! This guide covers how to add new entries to the database, modify the UI, and add images.
 
-**Not here to write code?** <https://list.awesomeled.xyz/contribute> has the short version: forms to report a wrong value or a missing product, an edit link on every entry page, and a field reference for every category.
+**Not here to write code?** <https://awesomeled.xyz/contribute> has the short version: forms to report a wrong value or a missing product, an edit link on every entry page, and a field reference for every category.
 
 ## Table of Contents
 
@@ -314,7 +314,7 @@ that each value fits that field (a current is a current).
 | Commercial Systems  | [commercial-system.json](database/_schema/commercial-system.json)   | [\_example.yaml](database/commercial-systems/_example.yaml)  |
 
 The same fields are listed for reading at
-<https://list.awesomeled.xyz/contribute>: each category's fields, what they
+<https://awesomeled.xyz/contribute>: each category's fields, what they
 hold, how many entries fill them in and the values in use. That page is
 generated from the schemas and the data, so it cannot drift from what the
 validator accepts. Its **Start a new entry** button opens GitHub's editor in

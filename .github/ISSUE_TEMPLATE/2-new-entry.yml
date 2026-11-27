@@ -23,7 +23,7 @@ body:
     id: category
     attributes:
       label: Category
-      description: Pick the closest one. What each means is on https://list.awesomeled.xyz/about
+      description: Pick the closest one. What each means is on https://awesomeled.xyz/about
       options:
         - Controllers
         - Pixels

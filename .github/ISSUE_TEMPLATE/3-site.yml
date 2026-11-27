@@ -15,7 +15,7 @@ body:
     attributes:
       label: Page
       description: The full address, including everything after the "?". It records your search, sort, filters, and columns.
-      placeholder: https://list.awesomeled.xyz/controllers?f=wled_compatible:yes
+      placeholder: https://awesomeled.xyz/controllers?f=wled_compatible:yes
   - type: input
     id: device
     attributes:

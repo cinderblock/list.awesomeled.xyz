@@ -8,7 +8,7 @@
 
 export const SITE_NAME = 'Awesome LED List';
 /** Canonical production origin (no trailing slash). Previews keep pointing here. */
-export const SITE_ORIGIN = 'https://list.awesomeled.xyz';
+export const SITE_ORIGIN = 'https://awesomeled.xyz';
 export const SITE_DESCRIPTION =
   'A reviewed, searchable database of addressable LEDs, pixel controllers, and the parts that connect them.';
 

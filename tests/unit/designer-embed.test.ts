@@ -31,7 +31,7 @@ describe('embed JSON', () => {
   test('carries the canonical query string', () => {
     const embed = buildEmbed(design);
     expect(embed.version).toBe(2);
-    expect(embed.generator).toBe('list.awesomeled.xyz/designer');
+    expect(embed.generator).toBe('awesomeled.xyz/designer');
     expect(embed.title).toBe('Café & “bar” <1>');
     expect(embedToQuery(JSON.stringify(embed))).toBe(embed.query);
     expect(parseDesign(new URLSearchParams(embed.query))).toEqual(design);

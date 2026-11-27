@@ -15,8 +15,8 @@ body:
     id: entry
     attributes:
       label: Entry
-      description: The entry's page on list.awesomeled.xyz, or the product's name.
-      placeholder: https://list.awesomeled.xyz/controllers/falcon-f16v4
+      description: The entry's page on awesomeled.xyz, or the product's name.
+      placeholder: https://awesomeled.xyz/controllers/falcon-f16v4
     validations:
       required: true
   - type: textarea

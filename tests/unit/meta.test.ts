@@ -25,22 +25,22 @@ describe('pageMeta', () => {
     expect(find(tags, 'rel', 'canonical')).toEqual({
       tagName: 'link',
       rel: 'canonical',
-      href: 'https://list.awesomeled.xyz/controllers/falcon-f16v4',
+      href: 'https://awesomeled.xyz/controllers/falcon-f16v4',
     });
     expect(find(tags, 'property', 'og:url')?.content).toBe(
-      'https://list.awesomeled.xyz/controllers/falcon-f16v4'
+      'https://awesomeled.xyz/controllers/falcon-f16v4'
     );
   });
 
   test('the preview image is absolute, with its size and a large-card hint', () => {
     expect(find(tags, 'property', 'og:image')?.content).toBe(
-      'https://list.awesomeled.xyz/og/controllers/falcon-f16v4.jpg'
+      'https://awesomeled.xyz/og/controllers/falcon-f16v4.jpg'
     );
     expect(find(tags, 'property', 'og:image:width')?.content).toBe('1200');
     expect(find(tags, 'property', 'og:image:height')?.content).toBe('630');
     expect(find(tags, 'name', 'twitter:card')?.content).toBe('summary_large_image');
     expect(find(tags, 'name', 'twitter:image')?.content).toBe(
-      'https://list.awesomeled.xyz/og/controllers/falcon-f16v4.jpg'
+      'https://awesomeled.xyz/og/controllers/falcon-f16v4.jpg'
     );
   });
 
@@ -62,9 +62,7 @@ describe('pageMeta', () => {
 
   test('a page without an image of its own gets the site card', () => {
     const plain = pageMeta({ title: 'About', description: 'x', path: '/about' }) as Tag[];
-    expect(find(plain, 'property', 'og:image')?.content).toBe(
-      'https://list.awesomeled.xyz/og/site.jpg'
-    );
+    expect(find(plain, 'property', 'og:image')?.content).toBe('https://awesomeled.xyz/og/site.jpg');
   });
 
   test('a page may word its whole title', () => {
@@ -102,13 +100,13 @@ describe('structured data', () => {
         '@type': 'ListItem',
         position: 1,
         name: 'Awesome LED List',
-        item: 'https://list.awesomeled.xyz/',
+        item: 'https://awesomeled.xyz/',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Controllers',
-        item: 'https://list.awesomeled.xyz/controllers',
+        item: 'https://awesomeled.xyz/controllers',
       },
     ]);
   });
@@ -116,7 +114,7 @@ describe('structured data', () => {
   test('the site offers its search page as a search action', () => {
     const site = siteJsonLd() as { potentialAction: { target: { urlTemplate: string } } };
     expect(site.potentialAction.target.urlTemplate).toBe(
-      'https://list.awesomeled.xyz/search?q={search_term_string}'
+      'https://awesomeled.xyz/search?q={search_term_string}'
     );
   });
 });

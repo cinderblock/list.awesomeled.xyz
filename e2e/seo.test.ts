@@ -1,7 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { gotoReady } from './helpers';
 
-const ORIGIN = 'https://list.awesomeled.xyz';
+const ORIGIN = 'https://awesomeled.xyz';
 
 const meta = (page: Page, selector: string) =>
   page.locator(`head ${selector}`).first().getAttribute('content');
@@ -106,7 +106,7 @@ test.describe('What a shared link and a search engine see', () => {
     }
     // Entries carry the day they were last reviewed
     expect(xml).toMatch(
-      /<loc>https:\/\/list\.awesomeled\.xyz\/controllers\/falcon-f16v4<\/loc><lastmod>\d{4}-\d\d-\d\d<\/lastmod>/
+      /<loc>https:\/\/awesomeled\.xyz\/controllers\/falcon-f16v4<\/loc><lastmod>\d{4}-\d\d-\d\d<\/lastmod>/
     );
     // Not content: search results, comparisons, downloads
     expect(xml).not.toContain('/search');

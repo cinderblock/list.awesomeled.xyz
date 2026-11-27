@@ -19,7 +19,7 @@ A comprehensive database of addressable LEDs, controllers, and related products 
 
 ## Using the Site
 
-<https://list.awesomeled.xyz> grew out of a shared spreadsheet, and is meant to be faster than one at everything a spreadsheet gets used for:
+<https://awesomeled.xyz> grew out of a shared spreadsheet, and is meant to be faster than one at everything a spreadsheet gets used for:
 
 - **Search everything**: the box on the home page, or `Ctrl`/`⌘`+`K` on any page, searches part numbers, makers, aliases, and protocols in every category at once.
 - **Sort and filter**: click a column header to sort, again to reverse, `Shift`+click to add a tie-break level. **Filters** lists every structured field with a count beside each value, and clicking a value pill in the table filters by it.
@@ -28,11 +28,11 @@ A comprehensive database of addressable LEDs, controllers, and related products 
 - **Share and export**: search, sort, filters, and columns live in the URL, so the address bar always links to exactly what you see. **Share & export** copies the table as TSV or Markdown and downloads CSV, JSON, or YAML.
 - **Keyboard**: `/` jumps to the table's search, `j` / `k` move between rows, `Enter` opens one, and `x` picks it for comparison. The first `Tab` stop on every page skips to its content.
 - **Link to an entry**: every entry has its own page, with a **Copy link** button, and a link pasted into a chat or a forum unfurls as a card with the product's picture and key facts.
-- **Fix it**: every entry page ends with **Suggest an edit** and **Report a problem**, and <https://list.awesomeled.xyz/contribute> lists what each category records, with a button that starts a new entry.
+- **Fix it**: every entry page ends with **Suggest an edit** and **Report a problem**, and <https://awesomeled.xyz/contribute> lists what each category records, with a button that starts a new entry.
 
 ## System Designer
 
-[list.awesomeled.xyz/designer](https://list.awesomeled.xyz/designer) builds a
+[awesomeled.xyz/designer](https://awesomeled.xyz/designer) builds a
 system out of the database, the way a parts picker does for a PC:
 
 - Pick **pixels** (or a bare driver IC), how many strings and how long, a
@@ -63,7 +63,7 @@ written up in [plans/designer.md](plans/designer.md).
 
 We hope you find these lists useful.
 If there is something that should be added, please do so!
-The quickest ways are on the site: <https://list.awesomeled.xyz/contribute>.
+The quickest ways are on the site: <https://awesomeled.xyz/contribute>.
 
 All product data is stored in YAML files in the `database/` directory.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or updating entries.
