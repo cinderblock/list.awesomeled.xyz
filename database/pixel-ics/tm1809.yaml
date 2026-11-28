@@ -9,8 +9,11 @@ data:
   channels: 9
   type: WS2811/12
 datasheet:
-  url: https://media.ledyi.com/tm1809-datasheet_f3014d562e6c15bbfb9fbe63d2e00fab9ebc2d95b20ad5aab5e3d946628b1d2d.pdf # Titan Micro TM1809 (English); LEDYi copy, titanmec.com download link is broken
+  url: https://web.archive.org/web/20221004071520id_/http://titanmec.com/index.php/en/project/download/id/670.html # Titan Micro TM1809 V1.6 (Chinese); Wayback copy of titanmec.com's old download. Titan's current V1.8 is served only with a titanmec.com Referer and isn't archived
   sources:
+    - url: https://media.ledyi.com/tm1809-datasheet_f3014d562e6c15bbfb9fbe63d2e00fab9ebc2d95b20ad5aab5e3d946628b1d2d.pdf
+      host: community
+      notes: LEDYi copy of an older undated English edition (Titan Micro; 24 V outputs, where V1.6 gives 30 V)
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1809-datasheet.pdf
       host: community
       notes: Same LEDYi copy, older upload path

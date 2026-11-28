@@ -9,8 +9,11 @@ data:
   channels: 3
   type: TM1914
 datasheet:
-  url: https://www.superlightingled.com/PDF/SPEC/TM1914-Datasheet.pdf # Titan Micro TM1914 V1.2 (English); Superlighting LED copy, not on titanmec.com
+  url: https://web.archive.org/web/20200224201024id_/http://www.titanmec.com:80/index.php/project/download/id/678.html # Titan Micro TM1914 V1.2 (Chinese); Wayback copy of titanmec.com's old download. TM1914 is gone from Titan's current site
   sources:
+    - url: https://www.superlightingled.com/PDF/SPEC/TM1914-Datasheet.pdf
+      host: community
+      notes: Superlighting LED copy of the English V1.2
     - url: https://media.ledyi.com/tm1914-datasheet_f53245ad945ae995c5711ffc5932c07ab88babf15d0e6f1a5859cfa9bc8c20e2.pdf
       host: community
       notes: LEDYi copy, same V1.2 English

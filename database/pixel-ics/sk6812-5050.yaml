@@ -11,7 +11,11 @@ data:
   pixel_size_bits: 24
   type: WS2811/12
 datasheet:
-  url: https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
+  url: https://www.normandled.com/upload/201805/SK6812%205050%20Datasheet.pdf # Shenzhen Normand SK6812 (5050), rev 06 (2019-01-02)
+  sources:
+    - url: https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
+      host: distributor
+      notes: SK6812 rev 01, Adafruit copy
 electrical:
   supply_voltage: 5V
   quiescent_current: 1mA

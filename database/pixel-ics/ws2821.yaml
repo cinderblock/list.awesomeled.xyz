@@ -17,7 +17,14 @@ data:
   max_per_string: 1024
   max_per_string_notes: Up to 1024 chips in parallel on one data line
 datasheet:
-  url: https://www.acdcshop.gr/content/WS2821.pdf # WorldSemi WS2821 (English, undated, world-semi.com footer); acdcshop.gr copy, not on world-semi.com
+  url: https://web.archive.org/web/20160309153400id_/http://www.world-semi.com:80/uploads/soft/140612/1-140612111R7.pdf # WorldSemi WS2821 (English, undated, uploaded 2014-06-12); Wayback copy of WorldSemi's own file from its old download area
+  sources:
+    - url: https://web.archive.org/web/20140801084401id_/http://www.world-semi.com:80/uploads/soft/140305/1-140305102109.pdf
+      host: manufacturer
+      notes: Earlier WorldSemi upload of the same English datasheet (2014-03-05), Wayback copy; quiescent current 1.5/3.0 mA where the later file says 3/4.5 mA, and no WS2821A (SOP8) application circuit
+    - url: https://www.acdcshop.gr/content/WS2821.pdf
+      host: distributor
+      notes: acdcshop.gr copy of the earlier (2014-03) English revision
 electrical:
   output_voltage: 24V
   supply_voltage: 5V

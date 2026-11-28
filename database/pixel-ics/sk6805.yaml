@@ -12,7 +12,11 @@ data:
   pixel_size_bits: 24
   type: WS2811/12
 datasheet:
-  url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
+  url: https://www.normandled.com/upload/201906/SK6805MICRO(SK6805-2427)%20LED%20Datasheet.pdf # Shenzhen Normand SK6805MICRO/SK6805-2427, rev 03 (2018-06-11)
+  sources:
+    - url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
+      host: distributor
+      notes: SK6805-2427 rev 01 (2016-08-08), Adafruit copy
 electrical:
   supply_voltage: 5V
   max_current: 5mA

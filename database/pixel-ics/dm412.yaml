@@ -14,8 +14,14 @@ data:
   pixel_size_bits: 48
   backup_line: false
 datasheet:
-  url: https://datasheet4u.com/pdf/664190/DM412.pdf # SITI DM412 version A.003 (2007-08-27), English; datasheet4u mirror, no maker-hosted PDF found
+  url: https://web.archive.org/web/20250504080907id_/http://www.siti.com.tw/product/spec/LED/SP-DM412-A.004.pdf # SITI DM412 version A.004 (2015-01-26), English; Wayback copy of Silicon Touch's own file (siti.com.tw doesn't answer)
   sources:
+    - url: https://web.archive.org/web/20250602135647id_/http://www.siti.com.tw/product/spec/LED/SP-DM412-A.003.pdf
+      host: manufacturer
+      notes: Silicon Touch's version A.003 (2007-08-27), Wayback copy; same figures, A.004 adds the DIE option and pad layout
+    - url: https://datasheet4u.com/pdf/664190/DM412.pdf
+      host: community
+      notes: datasheet4u copy of version A.003 (2007-08-27)
     - url: https://www.alldatasheet.com/datasheet-pdf/pdf/307120/SITI/DM412.html
       host: community
       notes: alldatasheet.com copy (SITI, 35 pages)

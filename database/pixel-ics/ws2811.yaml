@@ -17,7 +17,11 @@ data:
   pixel_size_bits: 24
   backup_line: false
 datasheet:
-  url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
+  url: https://www.world-semi.com/downloads/datasheets/en/ws2811-2.5.pdf # Worldsemi's current English sheet (pages labelled V1.52, 2026-07-28)
+  sources:
+    - url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
+      host: distributor
+      notes: Original pre-2017 WorldSemi WS2811 English sheet (400Hz PWM, 12V outputs, SOP8/DIP8), Adafruit copy
 electrical:
   output_voltage: 12V
   output_voltage_notes: Vds max - can drive LEDs at various voltages up to 12V via constant current

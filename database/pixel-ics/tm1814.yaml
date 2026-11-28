@@ -9,8 +9,11 @@ data:
   channels: 4
   type: TM1814
 datasheet:
-  url: https://www.superlightingled.com/PDF/TM1814-TitanMicro.pdf # Titan Micro TM1814 V1.0 (English); Superlighting LED copy, titanmec.com download link is broken
+  url: https://web.archive.org/web/20221004065449id_/http://titanmec.com/index.php/en/project/download/id/665.html # Titan Micro TM1814 V1.1 (Chinese); Wayback copy of titanmec.com's old download, byte-identical (apart from a leading BOM) to the file Titan's current product page serves only with a titanmec.com Referer
   sources:
+    - url: https://www.superlightingled.com/PDF/TM1814-TitanMicro.pdf
+      host: community
+      notes: Superlighting LED copy of the English V1.0
     - url: https://media.ledyi.com/tm1814-datasheet_a8ad5099affe04e7811eee2d501bcf080e4ec31da314d2e45d6239c601585b72.pdf
       host: community
       notes: LEDYi copy, same V1.0 English

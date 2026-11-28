@@ -12,8 +12,14 @@ data:
   bitrate: 800kHz
   pixel_size_bits: 24
 datasheet:
-  url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf # Titan Micro TM1812 V1.4 (English); LEDYi copy, not on titanmec.com
+  url: https://web.archive.org/web/20221004071646id_/http://titanmec.com/index.php/en/project/download/id/672.html # Titan Micro TM1812 V1.6 (Chinese); Wayback copy of titanmec.com's old download. Titan's current V1.8 is served only with a titanmec.com Referer and isn't archived
   sources:
+    - url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf
+      host: community
+      notes: LEDYi copy of the English V1.4
+    - url: https://web.archive.org/web/20150805133644id_/http://www.titanmec.com:80/index.php/en/product/download/id/231.html
+      host: manufacturer
+      notes: Wayback copy of Titan's Chinese V1.4 (the revision the English LEDYi copy translates)
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1812-datasheet.pdf
       host: community
       notes: Same LEDYi copy, older upload path

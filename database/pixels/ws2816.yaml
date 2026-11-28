@@ -19,8 +19,11 @@ data:
   pixel_size_bits: 48
   backup_line: true
 datasheet:
-  url: https://datasheet.lcsc.com/datasheet/pdf/33bcf57fa38933354736aabd35a09e83.pdf # WorldSemi WS2816B (5050) datasheet, Chinese, via LCSC C22371534
+  url: https://datasheet.lcsc.com/datasheet/pdf/33bcf57fa38933354736aabd35a09e83.pdf # WorldSemi WS2816B (5050) V1.0 (2022-04-26), Chinese, via LCSC C22371534; world-semi.com has no WS2816B 5050 sheet
   sources:
+    - url: https://www.world-semi.com/web/userfiles/productfile/WS2816B_2020_EN_V1.0.pdf
+      host: manufacturer
+      notes: WorldSemi's own WS2816B-2020 English datasheet V1.0 (2020-12-06, 2020 package); byte-identical to the LCSC copy below
     - url: https://datasheet.lcsc.com/datasheet/pdf/d13b7b1c4e768be6f2e6240e4c475b91.pdf
       host: distributor
       notes: WS2816B-2020 English datasheet (2020 package), LCSC C4154877

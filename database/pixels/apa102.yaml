@@ -24,7 +24,14 @@ data:
   max_per_string: 250
   max_per_string_notes: Clock pulse gets shorter by a few ns every pixel. After ~250 pixels, the clock signal can no longer be reliably retrieved.
 datasheet:
-  url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+  url: https://neon-world.com/uploads/soft/20200310/1583823021.pdf # APA Electronic's APA-102-256 (5050) sheet dated 2018-07-20, from its product page
+  sources:
+    - url: https://web.archive.org/web/20250420225135id_/https://neon-world.com/uploads/soft/20200310/1583823021.pdf
+      host: manufacturer
+      notes: Wayback Machine copy, byte-identical (neon-world.com is slow and sometimes times out)
+    - url: https://cdn-shop.adafruit.com/datasheets/APA102.pdf
+      host: distributor
+      notes: iPixel LED (Shiji Lighting) sheet titled APA102C, Adafruit copy
   third_party_testing: http://neon-world.com/en/product_detail.php?cid=59&id=167
 electrical:
   led_voltage: 5V

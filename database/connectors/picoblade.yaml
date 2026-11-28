@@ -2,7 +2,11 @@ name: PicoBlade
 creator: Molex
 notes: Molex massive US connector maker
 datasheet:
-  url: https://docs.rs-online.com/ae9d/A700000008774358.pdf
+  url: https://web.archive.org/web/20220121021859id_/http://www.molex.com/pdm_docs/ps/510211024-PS-000.pdf # Molex product spec 510211024-PS rev B (2021-06-09); Wayback copy because molex.com times out for automated clients
+  sources:
+    - url: https://docs.rs-online.com/ae9d/A700000008774358.pdf
+      host: distributor
+      notes: Same 510211024-PS rev B, byte-identical, RS copy
 links:
   product: https://www.molex.com/en-us/products/connectors/wire-to-board-connectors/picoblade-connectors
 mechanical:

@@ -15,7 +15,11 @@ data:
   pixel_size_bits: 32
   backup_line: false
 datasheet:
-  url: https://cdn-shop.adafruit.com/product-files/2757/p2757_SK6812RGBW_REV01.pdf
+  url: https://www.normandled.com/upload/201805/SK6812RGBX-XX%20Datasheet.pdf # Shenzhen Normand SK6812RGBX-XX (RGBW family), rev 07 (2019-01-21)
+  sources:
+    - url: https://cdn-shop.adafruit.com/product-files/2757/p2757_SK6812RGBW_REV01.pdf
+      host: distributor
+      notes: Opsco SK6812RGBW rev 01 (2015-07-31), Adafruit copy
 electrical:
   led_voltage: 5V
   supply_voltage: 5V

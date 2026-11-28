@@ -18,7 +18,11 @@ data:
   pixel_size_bits: 24
   backup_line: false
 datasheet:
-  url: https://cdn-shop.adafruit.com/datasheets/WS2812.pdf
+  url: https://www.world-semi.com/web/userfiles/productfile/WS2812S_V1.4_EN.pdf # Worldsemi WS2812S V1.4, the later name of the original 6-pin WS2812
+  sources:
+    - url: https://cdn-shop.adafruit.com/datasheets/WS2812.pdf
+      host: distributor
+      notes: Original WorldSemi WS2812 (6-pin 5050) sheet, 400Hz PWM, Adafruit copy
   discrepancies:
     - Datasheet claims max 49mA but actual is ~18-22mA per channel
     - Vds max of 26V is misleading - LEDs are integrated at 5V

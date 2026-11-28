@@ -14,8 +14,14 @@ data:
   pixel_size_bits: 24
   backup_line: true
 datasheet:
-  url: https://www.lcsc.com/datasheet/C22371539.pdf # WorldSemi WS2808 V1.0 (Chinese, 2022-10-28); LCSC copy, not on world-semi.com
+  url: https://www.world-semi.com/downloads/datasheets/en/ws2808-v1.1.pdf # WorldSemi WS2808 V1.1 (English, 2022-12-21), from world-semi.com's WS2808 product page
   sources:
+    - url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2808-1.2.pdf
+      host: manufacturer
+      notes: "WorldSemi's Chinese V1.2 (2026-07-16, new logo and added application circuit; scanned, no text layer). Lists SOP8 and SOT23-8 packages, where V1.0/V1.1 say SOP8 and FSOP8"
+    - url: https://www.lcsc.com/datasheet/C22371539.pdf
+      host: distributor
+      notes: LCSC copy of the Chinese V1.0 (2022-10-28)
     - url: https://atta.szlcsc.com/upload/public/pdf/source/20251204/DA4CE1D18ACFD372B14BFCC64B6F5187.pdf
       host: distributor
       notes: LCSC China (szlcsc) copy of V1.2 (2025-12-02), titled WS2808F; same specifications, revised application circuit

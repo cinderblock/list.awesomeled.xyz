@@ -9,8 +9,11 @@ data:
   channels: 3
   type: TM1829
 datasheet:
-  url: https://media.ledyi.com/tm1829-datasheet_ca2ab7a03d12522a298c2629fca3707f0d867407a3e374072246eff71b992370.pdf # Titan Micro TM1829 V1.5 (English); LEDYi copy, not on titanmec.com
+  url: https://web.archive.org/web/20221129143749id_/http://titanmec.com/index.php/en/project/download/id/664.html # Titan Micro TM1829 V1.5 (English, TM1829_V1.5_EN.pdf); Wayback copy of titanmec.com's old English download. TM1829 is gone from Titan's current site
   sources:
+    - url: https://media.ledyi.com/tm1829-datasheet_ca2ab7a03d12522a298c2629fca3707f0d867407a3e374072246eff71b992370.pdf
+      host: community
+      notes: LEDYi copy of the same English V1.5, with Titan's page footers removed
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/TM1829-datasheet.pdf
       host: community
       notes: Same LEDYi copy, older upload path
