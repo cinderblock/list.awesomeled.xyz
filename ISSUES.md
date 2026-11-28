@@ -240,6 +240,22 @@ What belongs to other streams is under "Hand-offs from the database review".
   understate its last version (an `HLS_Install_26A.zip` was published);
   lightfactory's site refuses non-browser downloads, so a link checker may
   call it dead; Pharos now announces Designer 3 (the entry describes 2).
+- **Maker-first datasheet pass, 2026-11-27** (pass 3: values from the makers'
+  own sheets that differ from the entries; spec fields not edited):
+  - [pass3-vendor-cdn.md](plans/assets-research/pass3-vendor-cdn.md): ws2811
+    (Worldsemi: 20 V outputs, 4 kHz PWM vs 12 V / 2 kHz), ws2812 (`pin_count: 4`,
+    but the part has 6 pins; 16.5 mA vs 18.5 mA), apa102/apa102c (APA: 18 mA per
+    channel vs 22 mA, 20 kHz PWM), sk9822 (~4.6 kHz PWM vs 1.2 kHz, uncertain),
+    apa102's `third_party_testing` is APA's APA-109-RGBW product page, and the
+    LPD entries' `creator: Greeled Electronic` looks doubtful.
+  - [pass3-aggregators-distributors.md](plans/assets-research/pass3-aggregators-distributors.md):
+    ws2808 (newest Chinese V1.2 lists SOP8 + SOT23-8, entry says FSOP8; its
+    `technical_notes` misname the szlcsc WS2808F file as "V1.2"), ld1510 has no
+    `status` though the maker lists it in mass production.
+  - [pass3-ledyi-superlighting.md](plans/assets-research/pass3-ledyi-superlighting.md):
+    tm1809 (Titan V1.6: 30 V outputs vs 24 V), tm1803 (sheet also lists DIP8),
+    tm1934 (14 mA vs 15 mA), lb1908 is probably a relabelled Titan part and
+    cs8812 a Genesis part (their sheets carry those makers' disclaimers).
 
 ## Datasheet URLs that serve HTML instead of a PDF (stream 2)
 

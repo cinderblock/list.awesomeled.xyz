@@ -82,6 +82,14 @@ so the entry page shows them (see Plan step 4).
     - [x] pattern drivers: 12 official screenshots (Pharos swapped at review for the help's Layout view); light-show-pro (500 px only), watchout (callouts/marketing render) and xschedule (none exists) skipped. `plans/assets-research/pass2-pattern-drivers.md`.
     - [x] boards / converters / connectors / controllers: agent interrupted before its report; 19 images + 1 datasheet ported and reviewed 2026-11-22. The Pi 3 Model B's pass-1 photo turned out to be a 3B+ and was replaced. `plans/assets-research/pass2-hardware.md`.
     - [x] Remaining hardware image gaps (43: adapters 12, connectors 7, controllers 17, level-converters 1, microboards 5, pixel-decoders 1): 42 are pass-1 skips with recorded reasons; max3485 (added since) skipped, analog.com refuses bots and shows no photos.
+13. [x] Maker-first datasheet pass (Cameron's yes, 2026-11-27).
+    - [x] Result: 22 entries switched to the maker's own copy (SK parts → Normand; ws2811/ws2812/ws2808/ws2821 → Worldsemi; apa102/apa102c → APA; dm412 → Silicon Touch; 7 Titan TM parts → Wayback copies of titanmec.com's old downloads; picoblade → Molex via Wayback; ebyte-nrf-52840 → Ebyte's module manual), old links kept as `sources`. ws2816 gained the maker's file as a source. ~40 unchanged with reasons (maker publishes nothing, files behind sign-up forms, email-only, or only other variants). All 23 changed entries pass `--check`.
+    - [x] ebyte-nrf-52840: the old link was Nordic's chip spec, a different document, so it went to `other_links`, not `sources` (a mirror fallback must be the same document).
+    - [x] Suspected spec errors from the makers' sheets → ISSUES.md for stream 2.
+    - [ ] Open: six Titan parts now link a Chinese maker sheet as primary (Titan published no English edition); the English LEDYi/Superlighting copy is the first source. See Open questions.
+    - Audit (2026-11-27): of 257 `datasheet.url`s, ~65 point at a vendor, distributor, aggregator or forum copy rather than the maker. The Adafruit-hosted chip sheets were inherited and marked "unchanged (ok)" in pass 1 without a maker check; LEDYi/Superlighting copies were chosen because the maker doesn't host them (pass-1 notes); 5 are datasheet aggregators (datasheet4u, datasheetbank).
+    - Rule: if the maker publishes the same document (or a newer revision of the same part/variant), its URL becomes `url` and the old link moves to `sources` with its `host`; otherwise keep the link and log why. Wayback captures of the maker's own file count as the maker.
+    - Three agents (effort `high`): chip sheets on vendor CDNs + connectors/boards; aggregators + distributors + forums; LEDYi/Superlighting. Logs: `plans/assets-research/pass3-*.md`.
 
 ## Working method (two worktrees)
 
@@ -198,11 +206,9 @@ pattern drivers.
 
 ## Open questions for the user
 
-1. **R2 mirror setup**: approved in principle. Waiting on Cameron's yes to the exact ops change staged in `C:/Users/camer/.t3/worktrees/ops/awesomeled-datasheets-r2` (see step 11). The change carries three choices of its own:
-   - R2 custom domains that config doesn't declare are _held_ (flagged, never deleted). Recommended.
-   - Minimum TLS stays at R2's default of 1.0, matching every zone today.
-   - The bucket is declared both standalone and on the domain entry.
+1. ~~R2 mirror setup~~: answered 2026-11-22 ("go for it", as staged); see step 11.
 2. **Borderline image calls** worth a glance (details in `plans/assets-research/`): neopixelbooster recorded as CC BY-NC-SA 4.0 (README) though its LICENCE file says CC BY-SA 4.0; LED-strip sellers (LEDYi, Superlighting) as `community` datasheet hosts for Titan/UCS ICs whose makers publish none; a few retailer photos for generic diffusers (Screwfix, eplastics).
+3. **Titan sheets in Chinese as the primary link** (step 13): tm1803, tm1809, tm1812, tm1814, tm1914 and tm1934 now link Titan's own Chinese sheet (Wayback); the English LEDYi/Superlighting copy is the first `sources` entry. Recommendation: keep maker-first, since the maker copies are newer and the English copies are older editions with differing values (tm1809: 24 V vs 30 V). The alternative is English primary with the Titan sheet as a source.
 
 ## Things not to do
 
