@@ -10,6 +10,11 @@ data:
   type: WS2811/12
 datasheet:
   url: https://media.ledyi.com/gs8206-datasheet_5483119271b646243fa0f79c2eefc9b872194634f0b78c3d92ea852fc432c34e.pdf # Genesis Systech V0.2 (2016); LEDYi copy, no maker-hosted PDF found
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/gs8206-54831192.pdf
+    sha256: 5483119271b646243fa0f79c2eefc9b872194634f0b78c3d92ea852fc432c34e
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/gs8206-datasheet_5483119271b646243fa0f79c2eefc9b872194634f0b78c3d92ea852fc432c34e.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8206-datasheet.pdf
       host: community

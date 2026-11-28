@@ -22,6 +22,11 @@ data:
   backup_line: false
 datasheet:
   url: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ns107s-1ecc5666.pdf
+    sha256: 1ecc566613b957910e01c0910f89f710d990423353c25cfd43a4c5d54c55bac7
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
   sources:
     - url: https://web.archive.org/web/20220216171258id_/http://www.newstar-ledstrip.com/product/20190710114547839.pdf
       host: manufacturer

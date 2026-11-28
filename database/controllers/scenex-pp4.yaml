@@ -46,6 +46,11 @@ power:
   output_voltage: 5
 datasheet:
   url: https://www.germanlightproducts.com/wp-content/uploads/2016/01/PP4-Controller-Operating-Manual_08_2015.pdf # user manual; has a Specifications section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/scenex-pp4-a17414ee.pdf
+    sha256: a17414eef4da605a4dbfe20b06cbb7dc6e4c23984687afd094a00e46fccf5505
+    retrieved: '2026-11-28'
+    source: https://www.germanlightproducts.com/wp-content/uploads/2016/01/PP4-Controller-Operating-Manual_08_2015.pdf
 dead_links:
   - url: https://www.germanlightproducts.com/product-category/scenex-lighting/
     archive: https://web.archive.org/web/20251010040221/https://www.germanlightproducts.com/product-category/scenex-lighting/

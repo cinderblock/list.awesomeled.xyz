@@ -11,6 +11,11 @@ data:
   type: 5chWS2811/12
 datasheet:
   url: https://www.world-semi.com/web/userfiles/productfile/WS2805_V1.3_EN.pdf # Worldsemi V1.3
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ws2805-faac8690.pdf
+    sha256: faac86908e11dfe39e3eedd69cdad406ce6096d2456a4e8638383472707e5d25
+    retrieved: '2026-11-28'
+    source: https://www.world-semi.com/web/userfiles/productfile/WS2805_V1.3_EN.pdf
   sources:
     - url: https://www.superlightingled.com/PDF/WS2805-IC-Specification.pdf
       host: community

@@ -10,6 +10,11 @@ data:
   type: 4chWS2811/12
 datasheet:
   url: https://asset.conrad.com/media10/add/160267/c1/-/en/001575814DS01/datasheet-1575814-thomsen-strip-5m-300-rgbw-ip68-led-pasik-entrieda-a-a-e-zastrcky-zasuvka-5-v-5-m-rgbw.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk6818-54f0df91.pdf
+    sha256: 54f0df9186b226a37c17e59b9de0d54afda8e11b9b3c4ee724df4bb8738676bc
+    retrieved: '2026-11-28'
+    source: https://asset.conrad.com/media10/add/160267/c1/-/en/001575814DS01/datasheet-1575814-thomsen-strip-5m-300-rgbw-ip68-led-pasik-entrieda-a-a-e-zastrcky-zasuvka-5-v-5-m-rgbw.pdf
 electrical:
   led_voltage: 5V
   supply_voltage: 5V

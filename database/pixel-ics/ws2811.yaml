@@ -18,6 +18,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.world-semi.com/downloads/datasheets/en/ws2811-2.5.pdf # Worldsemi's current English sheet (pages labelled V1.52, 2026-07-28)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ws2811-e3b474f2.pdf
+    sha256: e3b474f23d0ac7bd66ce58cc5e569e2e32f5d684bcbf5d997a9a7fabc09b2bfc
+    retrieved: '2026-11-28'
+    source: https://www.world-semi.com/downloads/datasheets/en/ws2811-2.5.pdf
   sources:
     - url: https://cdn-shop.adafruit.com/datasheets/WS2811.pdf
       host: distributor

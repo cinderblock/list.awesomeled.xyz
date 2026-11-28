@@ -6,6 +6,11 @@ aliases:
   - powerCON TRUE1 TOP
 datasheet:
   url: https://www.neutrik.com/en/product/nac3fxxa-w-s.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/powercon-6b70da93.pdf
+    sha256: 6b70da93ab6a10111576b73f874bdf9960aa6247cff26b3382bd9340733e8480
+    retrieved: '2026-11-28'
+    source: https://www.neutrik.com/en/product/nac3fxxa-w-s.pdf
 images:
   - file: powercon.webp
     source: https://commons.wikimedia.org/wiki/File:Neutrik_PowerCON_type_B.jpg

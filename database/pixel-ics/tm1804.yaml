@@ -13,6 +13,12 @@ data:
   backup_line: false
 datasheet:
   url: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1804_V1.9.pdf # Titan Micro TM1804 V1.9 (Chinese); Lumikit copy, identical to LCSC's file apart from a leading BOM. Titan's own V2.3 download only works with a titanmec.com Referer
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tm1804-7ed0e6fb.pdf
+    sha256: 7ed0e6fb8e61a950c106421f24054aa5475f823c9f9bf441a3521d3cb8c9cba3
+    retrieved: '2026-11-28'
+    source: https://www.lumikit.com.br/firmware/hslc-tm/datasheets/TM1804_V1.9.pdf
+    fetched_from: https://datasheet.lcsc.com/datasheet/pdf/d076f3f9e38930226d4b36b0fbfe7794.pdf
   sources:
     - url: https://datasheet.lcsc.com/datasheet/pdf/d076f3f9e38930226d4b36b0fbfe7794.pdf
       host: distributor

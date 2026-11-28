@@ -11,6 +11,11 @@ data:
   type: 4chUCS8903
 datasheet:
   url: https://media.ledyi.com/ucs8904-datasheet_e73207d68ad5f39962d1c11e13dfe72a26f77df7b58a07abfc5ee963910941c7.pdf # Document covers UCS8904A; LEDYi copy, maker (szucs.cn) hosts no PDFs
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs8904-e73207d6.pdf
+    sha256: e73207d68ad5f39962d1c11e13dfe72a26f77df7b58a07abfc5ee963910941c7
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/ucs8904-datasheet_e73207d68ad5f39962d1c11e13dfe72a26f77df7b58a07abfc5ee963910941c7.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS8904-datasheet.pdf
       host: community

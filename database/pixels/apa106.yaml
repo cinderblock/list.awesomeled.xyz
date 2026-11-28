@@ -10,6 +10,11 @@ data:
   type: WS2811/12
 datasheet:
   url: https://cdn.sparkfun.com/datasheets/Components/LED/COM-12877.pdf # iPixel APA-106-F5/F8 sheet, via SparkFun
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/apa106-e425ba7c.pdf
+    sha256: e425ba7c6e8da0054d6a3c4bbaa3de3fa768479e6e64726b7076a3c57b965ecc
+    retrieved: '2026-11-28'
+    source: https://cdn.sparkfun.com/datasheets/Components/LED/COM-12877.pdf
 electrical:
   led_voltage: 5V
 images:

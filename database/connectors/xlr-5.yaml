@@ -7,6 +7,11 @@ common_applications:
   - DMX512 lighting control (USITT-standard connector)
 datasheet:
   url: https://www.neutrik.com/en/product/nc5mxx.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/xlr-5-c6468221.pdf
+    sha256: c6468221f0c556af25a53f38f48b0324a213fa92003dd1f8225000f738ddf8c7
+    retrieved: '2026-11-28'
+    source: https://www.neutrik.com/en/product/nc5mxx.pdf
 images:
   - file: xlr-5.webp
     source: https://www.neutrik.com/en/product/nc5mxx

@@ -18,6 +18,11 @@ data:
   max_per_string: 1024
 datasheet:
   url: https://www.world-semi.com/web/userfiles/productfile/WS2801S_V2.0_EN.pdf # Worldsemi WS2801S V2.0
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ws2801-9fd34332.pdf
+    sha256: 9fd34332654e2bab9e95974d03f05e975c8747547fea6e281d511e57c3a47750
+    retrieved: '2026-11-28'
+    source: https://www.world-semi.com/web/userfiles/productfile/WS2801S_V2.0_EN.pdf
   sources:
     - url: https://cdn-shop.adafruit.com/datasheets/WS2801.pdf
       host: distributor

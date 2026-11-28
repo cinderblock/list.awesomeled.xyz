@@ -33,6 +33,11 @@ case:
   waterproof: IP20
 datasheet:
   url: https://assets.centryngroup.com/dl/files/FLE768__DL__001.pdf # spec sheet, linked from Elation's product page
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/flex-pixel-driver-413b523c.pdf
+    sha256: 413b523ca9fa542189667813ad3cf439db988798bf89fb8e783ceba26da056be
+    retrieved: '2026-11-28'
+    source: https://assets.centryngroup.com/dl/files/FLE768__DL__001.pdf
 images:
   - file: flex-pixel-driver.webp
     source: https://www.elationlighting.com/products/flex-pixel-driver-1

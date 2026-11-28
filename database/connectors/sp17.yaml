@@ -3,6 +3,11 @@ creator: Weipu
 notes: Also available is SP21 and SP29 , clones in SP16 and SP28
 datasheet:
   url: https://www.weipuconnector.com/wp-content/uploads/2023/11/SP17-Series-WEIPU-Connector-1.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/sp17-83fee759.pdf
+    sha256: 83fee7593712084daea19d1aeecae3e1d9f2127b9bf77c9658020675b1d5b6e8
+    retrieved: '2026-11-28'
+    source: https://www.weipuconnector.com/wp-content/uploads/2023/11/SP17-Series-WEIPU-Connector-1.pdf
 images:
   - file: sp17.webp
     source: https://www.weipuconnector.com/products/sp17/

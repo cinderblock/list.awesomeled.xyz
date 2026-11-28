@@ -3,6 +3,12 @@ creator: Molex
 notes: Available with 2 wire into single crimp.
 datasheet:
   url: https://www.molex.com/pdm_docs/ps/PS-5556-001.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/mini-fit-jr-7e6d7833.pdf
+    sha256: 7e6d7833b4564c80ff7da39ebd316c0717914ab9af1cb5df5b4cf4f984dac8d2
+    retrieved: '2026-11-28'
+    source: https://www.molex.com/pdm_docs/ps/PS-5556-001.pdf
+    fetched_from: https://static.chipdip.ru/lib/054/DOC034054920.pdf
   sources:
     - url: https://static.chipdip.ru/lib/054/DOC034054920.pdf
       host: distributor

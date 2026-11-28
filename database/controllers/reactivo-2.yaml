@@ -68,6 +68,11 @@ data:
     - type: microSD
 datasheet:
   url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/reactivo-2_datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/reactivo-2-5cfcffdc.pdf
+    sha256: 5cfcffdc19b178043afb30549b4a5dfae47e1a3c7da1bda03e16053581ef3ace
+    retrieved: '2026-11-28'
+    source: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/reactivo-2_datasheet.pdf
   sources:
     - url: https://shop.ledco.sk/sub/shop.ledco.sk/images/related_files/reactivo-2_datasheet.pdf
       host: distributor

@@ -45,6 +45,11 @@ core:
   family: ESP32
 datasheet:
   url: https://www.gledopto.com/618wl-manual-en.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/elite-4d-exmu-79f4b946.pdf
+    sha256: 79f4b946b9948d72096ed6ff784876326f70f9a1152bdcc0d249818585ea8e85
+    retrieved: '2026-11-28'
+    source: https://www.gledopto.com/618wl-manual-en.pdf
 features:
   - Built-in PDM microphone for WLED AudioReactive effects
   - Relay (GPIO18) cuts power to the strips when the lights are switched off

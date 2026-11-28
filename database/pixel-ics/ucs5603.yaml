@@ -17,6 +17,11 @@ data:
   backup_line: true
 datasheet:
   url: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf # UCS5603 VER1.1 2017-04-05 (English); LEDYi copy, maker (szucs.cn) hosts no PDFs
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs5603-10a5b0d3.pdf
+    sha256: 10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/ucs5603-datasheet_10a5b0d33bbbd52dad636818f8d527eeaf666755cb5d483bc36ff1f6ea804c5f.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS5603-datasheet.pdf
       host: community

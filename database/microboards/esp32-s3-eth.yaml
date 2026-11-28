@@ -19,6 +19,11 @@ connectivity:
   poe: add-on # PoE module
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/esp32-s3-eth-2d5a7cb7.pdf
+    sha256: 2d5a7cb7fd559d8d972bd88db32669c0196d23f22d7afaafb0f63d099b589a3f
+    retrieved: '2026-11-28'
+    source: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf
 images:
   - file: esp32-s3-eth.webp
     source: https://www.waveshare.com/esp32-s3-eth.htm

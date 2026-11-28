@@ -15,6 +15,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.chinaasic.com/websiteManage/product/20230523111738341.pdf # Sunmoon SM16804PB product brief, English IBSZZIV1.1 (1 page)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sm16804-cb5384e4.pdf
+    sha256: cb5384e4f132be87939c9502f23c99f02a63263ebfa7939c12dfe3b66e35b0f6
+    retrieved: '2026-11-28'
+    source: https://www.chinaasic.com/websiteManage/product/20230523111738341.pdf
   sources:
     - url: http://www.jad-leds.com/web/userfiles/download/SM16804PB-Datasheet.pdf
       host: community

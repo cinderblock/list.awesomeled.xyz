@@ -18,6 +18,11 @@ data:
   backup_line: false
 datasheet:
   url: http://newstar-ledstrip.com/product/20190927165451294.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk9826-82d786de.pdf
+    sha256: 82d786de1c4474544e11cc2e5bf808ecda65157c24460a598cbefacbea36796e
+    retrieved: '2026-11-28'
+    source: http://newstar-ledstrip.com/product/20190927165451294.pdf
   sources:
     - url: https://web.archive.org/web/20220216171300id_/http://newstar-ledstrip.com/product/20190927165451294.pdf
       host: manufacturer

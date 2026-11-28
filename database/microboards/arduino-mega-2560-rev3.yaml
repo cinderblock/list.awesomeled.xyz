@@ -23,6 +23,11 @@ connectivity:
   usb: Power + UART
 datasheet:
   url: https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/arduino-mega-2560-rev3-3d284a09.pdf
+    sha256: 3d284a09c2b0028545d18ac610f7ed455380b88f775a0d9d6bcc210f92882b0f
+    retrieved: '2026-11-28'
+    source: https://docs.arduino.cc/resources/datasheets/A000067-datasheet.pdf
 images:
   - file: arduino-mega-2560-rev3.webp
     source: https://github.com/arduino/docs-content/blob/main/content/hardware/mega/boards/mega-2560/datasheet/assets/ArduinoFeatureImage.png

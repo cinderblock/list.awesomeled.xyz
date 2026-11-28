@@ -18,6 +18,12 @@ aliases:
   - MAX3485EPA+
 datasheet:
   url: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483-MAX3491.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/max3485-e648fd27.pdf
+    sha256: e648fd27831d1ba1f5b587708a97b34742783f1b464e410dc895e4393b8054b0
+    retrieved: '2026-11-28'
+    source: https://www.analog.com/media/en/technical-documentation/data-sheets/MAX3483-MAX3491.pdf
+    fetched_from: https://web.archive.org/web/20251203154522/https://www.analog.com/media/en/technical-documentation/data-sheets/max3483-max3491.pdf
   sources:
     - url: https://web.archive.org/web/20251203154522/https://www.analog.com/media/en/technical-documentation/data-sheets/max3483-max3491.pdf
       host: manufacturer

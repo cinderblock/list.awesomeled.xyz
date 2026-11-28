@@ -14,6 +14,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf # Greeled 'GE8812B LED series specification' (English, document SPC/23012); covers GE8812, GE8812B, GE8812-B and GE8812B-B
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/ge8812-ce315bf0.pdf
+    sha256: ce315bf053f1e691db6b8cc983083aecb9f2d43fcf4b08ff65f9e745f5e5f0ef
+    retrieved: '2026-11-28'
+    source: https://www.gree-leds.com/web/userfiles/download/GE8812BLEDDatasheetEN.pdf
 electrical:
   supply_voltage: 5V
   supply_voltage_notes: VDD 5.0V typical (absolute maximum range 3.5-5.5V)

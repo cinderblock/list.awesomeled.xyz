@@ -69,6 +69,11 @@ data:
     - type: flash
 datasheet:
   url: https://www.nledshop.com/downloads/datasheets/nled-pixel-controller-electron.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/nled-pixel-controller-electron-fd16bf03.pdf
+    sha256: fd16bf03c68255086c311b67847a1badc987dc6f8b3c23ac30439f57e69d1d35
+    retrieved: '2026-11-28'
+    source: https://www.nledshop.com/downloads/datasheets/nled-pixel-controller-electron.pdf
   sources:
     - url: https://www.nledshop.com/downloads/datasheets/nled-pixel-controller-electron-v1c.pdf
       host: manufacturer

@@ -23,6 +23,11 @@ data:
   max_per_string_notes: Clock pulse gets shorter by a few ns every pixel. After ~250 pixels, the clock signal can no longer be reliably retrieved.
 datasheet:
   url: https://neon-world.com/uploads/soft/20220718/1658169041.pdf # APA Electronic's APA-102C-NEW sheet dated 2018-10-11, from its product page
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/apa102c-874665b0.pdf
+    sha256: 874665b02c5c8cb20b8c34c1ce48b79e1e4eaef03772a3711510280a0b5e54b5
+    retrieved: '2026-11-28'
+    source: https://neon-world.com/uploads/soft/20220718/1658169041.pdf
   sources:
     - url: https://web.archive.org/web/20250802173750id_/https://neon-world.com/uploads/soft/20220718/1658169041.pdf
       host: manufacturer

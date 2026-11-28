@@ -3,6 +3,11 @@ creator: Molex
 notes: Molex massive US connector maker
 datasheet:
   url: https://web.archive.org/web/20220121021859id_/http://www.molex.com/pdm_docs/ps/510211024-PS-000.pdf # Molex product spec 510211024-PS rev B (2021-06-09); Wayback copy because molex.com times out for automated clients
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/picoblade-8bf91b13.pdf
+    sha256: 8bf91b13cb2df632b1719a76b098d3638dff9998f43fe20991bcffdaa877a467
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20220121021859id_/http://www.molex.com/pdm_docs/ps/510211024-PS-000.pdf
   sources:
     - url: https://docs.rs-online.com/ae9d/A700000008774358.pdf
       host: distributor

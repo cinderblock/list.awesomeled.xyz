@@ -120,6 +120,11 @@ power:
     max: 24
 datasheet:
   url: https://www.digidot.eu/shop/digidot-c4-live-125/document/273 # "C4 Live Specification Sheet" (PDF download)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/digidot-c4-live-12-af6a62e1.pdf
+    sha256: af6a62e13acd874f4e504a702dc0ba40ffe61720d0a1c3c8f9228feece6c65e4
+    retrieved: '2026-11-28'
+    source: https://www.digidot.eu/shop/digidot-c4-live-125/document/273
   sources:
     - url: https://s3-eu-west-1.amazonaws.com/cdn.production.aws.eu-w1.pimberly.com/public/asset/raw/65afde541ba1ead29ea83c67/7ecdf835/681dda0c13c6927b9400005b/DATA%20SHEET%20-%20C4%20LIVE.pdf
       host: distributor

@@ -14,6 +14,11 @@ data:
   backup_line: true
 datasheet:
   url: https://web.archive.org/web/20200224201035id_/http://www.titanmec.com:80/index.php/project/download/id/680.html # Titan Micro TM1934 V1.0 (Chinese); Wayback copy of titanmec.com's old download. Titan's current V1.4 is served only with a titanmec.com Referer and isn't archived
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tm1934-4bf203f4.pdf
+    sha256: 4bf203f45cc566cff8089673aee46cefda66efd33ad5e8b289bbcf545a0645a4
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20200224201035id_/http://www.titanmec.com:80/index.php/project/download/id/680.html
   discrepancies:
     - "Features and the refresh-rate note still mention TM1914-style mode-setting commands (normal, DI and FDI modes; 'omitting C1, C2'), but the frame and controller data structures show only D1...Dn plus Reset and there is no mode-setting section"
   sources:

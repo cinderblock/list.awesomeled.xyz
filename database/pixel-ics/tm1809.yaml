@@ -10,6 +10,11 @@ data:
   type: WS2811/12
 datasheet:
   url: https://web.archive.org/web/20221004071520id_/http://titanmec.com/index.php/en/project/download/id/670.html # Titan Micro TM1809 V1.6 (Chinese); Wayback copy of titanmec.com's old download. Titan's current V1.8 is served only with a titanmec.com Referer and isn't archived
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tm1809-fb1172be.pdf
+    sha256: fb1172becfd5767374825b9dc529dea7caa0cb3cc16cfe991192e536015f52ce
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20221004071520id_/http://titanmec.com/index.php/en/project/download/id/670.html
   sources:
     - url: https://media.ledyi.com/tm1809-datasheet_f3014d562e6c15bbfb9fbe63d2e00fab9ebc2d95b20ad5aab5e3d946628b1d2d.pdf
       host: community

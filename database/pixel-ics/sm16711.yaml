@@ -13,6 +13,11 @@ data:
   backup_line: false
 datasheet:
   url: https://datasheet4u.com/pdf/905204/SM16711.pdf # Sunmoon SM16711 V1.2 (Chinese); datasheet4u mirror, not on chinaasic.com
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sm16711-5aefcd8c.pdf
+    sha256: 5aefcd8c385070d04276404aaf2f8691e7c04913d2d2fe23318e789a38a08138
+    retrieved: '2026-11-28'
+    source: https://datasheet4u.com/pdf/905204/SM16711.pdf
   sources:
     - url: https://datasheetspdf.com/pdf/905204/Sunmoon/SM16711/1
       host: community

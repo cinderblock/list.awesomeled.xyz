@@ -34,6 +34,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/raspberry-pi-4-model-b-8febd042.pdf
+    sha256: 8febd042d004c7a2897a60fe6e1b2c007a941c3c4119f4fb791dc0afb669a860
+    retrieved: '2026-11-28'
+    source: https://datasheets.raspberrypi.com/rpi4/raspberry-pi-4-datasheet.pdf
 images:
   - file: raspberry-pi-4-model-b.webp
     source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_4_Model_B_-_Side.jpg

@@ -15,6 +15,11 @@ data:
   backup_line: true
 datasheet:
   url: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf # WorldSemi WS2818A V1.0 (2017-05-23, English, world-semi.com footer); LEDYi copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ws2818a-b8295b1f.pdf
+    sha256: b8295b1f6deba06f3d575fd9ed499c4fea51a80b622df1e3ac6f3c83ac7da2b1
+    retrieved: '2026-11-28'
+    source: https://www.ledyilighting.com/wp-content/uploads/2022/02/WS2818A-specification.pdf
 dead_links:
   - url: http://www.world-semi.com/technology/details-105-4.html
     archive: https://web.archive.org/web/20171214195803/http://www.world-semi.com:80/technology/details-105-4.html

@@ -27,6 +27,11 @@ connectivity:
   usb: false
 datasheet:
   url: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/attiny85-0e3fa6a7.pdf
+    sha256: 0e3fa6a7d608de9b4403cf9fc12867a529cc891ab6a83f9be9ed0db595480837
+    retrieved: '2026-11-28'
+    source: https://ww1.microchip.com/downloads/en/devicedoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf
 io:
   max_outputs: 6
   bms: false

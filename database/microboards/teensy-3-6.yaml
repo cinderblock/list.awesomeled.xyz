@@ -21,6 +21,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://www.pjrc.com/teensy/K66P144M180SF5V2.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/teensy-3-6-1d595809.pdf
+    sha256: 1d5958095a29ad12f959bc022b10ccfb55164711822aa623300cfd229103ee24
+    retrieved: '2026-11-28'
+    source: https://www.pjrc.com/teensy/K66P144M180SF5V2.pdf
 images:
   - file: teensy-3-6.webp
     source: https://www.pjrc.com/store/teensy36.html

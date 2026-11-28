@@ -16,6 +16,11 @@ data:
   backup_line: false
 datasheet:
   url: https://web.archive.org/web/20120312160731id_/http://www.leds.ru/pdf/D705_en.pdf # DMS Microelectronics D705, English RAV D705-A2 (2009-08-26); Wayback copy, the original leds.ru file now 404s and no maker-hosted PDF was found
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/d705-d678cc60.pdf
+    sha256: d678cc60c1e9003d8b6a1f159fde69190b389d84aa84e4d3b80ad2bcb1f59776
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20120312160731id_/http://www.leds.ru/pdf/D705_en.pdf
 electrical:
   output_voltage: 12V
   output_voltage_notes: 'LED drive port voltage; LED supply 3-12 V (enough for 3 LEDs in series)'

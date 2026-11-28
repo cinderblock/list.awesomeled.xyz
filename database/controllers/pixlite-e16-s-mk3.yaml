@@ -136,6 +136,11 @@ data:
     - type: microSD
 datasheet:
   url: https://cdn.sanity.io/files/3y31615s/production/208cedb77b6c1121d59d90b93e39a41753613e7a.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixlite-e16-s-mk3-c8eec0fd.pdf
+    sha256: c8eec0fd808dbe72a2a3ce76fd90b994aa48f98289b12b7f72dc2dff0d534bb4
+    retrieved: '2026-11-28'
+    source: https://cdn.sanity.io/files/3y31615s/production/208cedb77b6c1121d59d90b93e39a41753613e7a.pdf
 images:
   - file: pixlite-e16-s-mk3.webp
     source: https://www.advateklighting.com/products/e16-s-mk3

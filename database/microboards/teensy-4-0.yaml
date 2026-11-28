@@ -22,6 +22,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://www.pjrc.com/teensy/IMXRT1060CEC_rev4.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/teensy-4-0-d65fcf01.pdf
+    sha256: d65fcf01020ccde2181a716ba6eeb5b9dc66b368b0c3066c1734f9d8e060e388
+    retrieved: '2026-11-28'
+    source: https://www.pjrc.com/teensy/IMXRT1060CEC_rev4.pdf
 images:
   - file: teensy-4-0.webp
     source: https://www.pjrc.com/store/teensy40.html

@@ -37,6 +37,11 @@ data:
     - type: microSD
 datasheet:
   url: https://web.archive.org/web/20200929124958id_/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/1ch_wifi_spec_sheet_v101.pdf?mtime=20200811193443&focal=none # spec sheet; the live bucket now returns 403
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/protopixel-1-channel-wifi-1444c3c5.pdf
+    sha256: 1444c3c5041456cd8ae2503a3f193949a146269662089d75c2abd00d5abeb648
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20200929124958id_/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/1ch_wifi_spec_sheet_v101.pdf?mtime=20200811193443&focal=none
 dead_links:
   - url: https://www.protopixel.io/pricing
     archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing

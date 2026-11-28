@@ -4,6 +4,11 @@ aliases:
   - 9159-000
 datasheet:
   url: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/9159-d8bd9ed7.pdf
+    sha256: d8bd9ed7a447446ea673e6454bc879a0b10e88d9e7728a49465aea84b881ff7d
+    retrieved: '2026-11-28'
+    source: https://datasheets.kyocera-avx.com/StandardCardEdge_00-9159.pdf
 images:
   - file: '9159.webp'
     source: https://www.kyocera-avx.com/products/connectors/board-to-board/standard-card-edge-00-9159/

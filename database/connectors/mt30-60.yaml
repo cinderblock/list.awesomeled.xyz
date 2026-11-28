@@ -6,6 +6,11 @@ aliases:
   - MT60
 datasheet:
   url: https://www.china-amass.net/uploads/130.MT60-F-SPEC-2025V0.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/mt30-60-fd28fc7a.pdf
+    sha256: fd28fc7aabbdf6cdf1f6949eb291f04f7b297f2a8f6fb3ecdbf4ea6d9e202097
+    retrieved: '2026-11-28'
+    source: https://www.china-amass.net/uploads/130.MT60-F-SPEC-2025V0.pdf
 images:
   - file: mt30-60.webp
     source: https://www.china-amass.net/mt60-f-product/

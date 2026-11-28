@@ -4,6 +4,11 @@ notes: Switchcraft/Conxall , long established USA connector maker, available
   with straight and right angle PCB mounting
 datasheet:
   url: https://www.switchcraft.com/assets/1/27/switchcraft_en3_npb.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/en3-d9eee1d4.pdf
+    sha256: d9eee1d462e160249b516a4377d1e46739910d499cfc838ad75421dd2eb514bb
+    retrieved: '2026-11-28'
+    source: https://www.switchcraft.com/assets/1/27/switchcraft_en3_npb.pdf
   sources:
     - url: https://web.archive.org/web/20220728231921/https://www.switchcraft.com/assets/1/27/switchcraft_en3_npb.pdf
       host: manufacturer

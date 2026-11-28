@@ -141,6 +141,11 @@ outputs:
     - WS2805
 datasheet:
   url: https://deskontroller.com/download/deskontroller-lite-V3-datasheet.pdf # covers the whole LITE V3 family (32U-192U)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/deskontroller-lite-v3-32-72d0c1f1.pdf
+    sha256: 72d0c1f12ead64f6055ed092bca7364f1dce4d3a9682e2437f07b9a409725174
+    retrieved: '2026-11-28'
+    source: https://deskontroller.com/download/deskontroller-lite-V3-datasheet.pdf
 features:
   - Web-based (browser) configuration UI
   - Supports over 100 pixel IC families (RGB and RGBW)

@@ -14,6 +14,11 @@ data:
   backup_line: true
 datasheet:
   url: https://www.superlightingled.com/PDF/WS2818.pdf # WorldSemi WS2818 (English, undated, no maker imprint); Superlighting LED copy, never on world-semi.com
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ws2818-8eb6eeb1.pdf
+    sha256: 8eb6eeb16dfcc7ed159c651180cdd6149c9cf407fb83341e609f18d3ac974324
+    retrieved: '2026-11-28'
+    source: https://www.superlightingled.com/PDF/WS2818.pdf
   sources:
     - url: https://signliteled.com/wp-content/uploads/2024/08/WS2818-Datasheet.pdf
       host: community

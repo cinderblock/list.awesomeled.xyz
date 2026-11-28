@@ -18,6 +18,11 @@ data:
   max_per_string_notes: Up to 1024 chips in parallel on one data line
 datasheet:
   url: https://web.archive.org/web/20160309153400id_/http://www.world-semi.com:80/uploads/soft/140612/1-140612111R7.pdf # WorldSemi WS2821 (English, undated, uploaded 2014-06-12); Wayback copy of WorldSemi's own file from its old download area
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ws2821-92ec3c82.pdf
+    sha256: 92ec3c8227c9969fc8a4e907f7386181040f57cc889e41ac5623b8fab36bf825
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20160309153400id_/http://www.world-semi.com:80/uploads/soft/140612/1-140612111R7.pdf
   sources:
     - url: https://web.archive.org/web/20140801084401id_/http://www.world-semi.com:80/uploads/soft/140305/1-140305102109.pdf
       host: manufacturer

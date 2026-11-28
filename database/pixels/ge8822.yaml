@@ -18,6 +18,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf # Greeled 'GE8822 LED series specification' (English, 14 pages, undated)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/ge8822-2d69a371.pdf
+    sha256: 2d69a3714f646b221c64ea31aa3d5f959138d85f717781dc96241af7c1d95213
+    retrieved: '2026-11-28'
+    source: https://www.gree-leds.com/web/userfiles/download/GE8822LEDdatasheetEN.pdf
 electrical:
   supply_voltage: 5V
   supply_voltage_notes: VDD 5.0V typical, 5.3V max (absolute maximum 5.5V)

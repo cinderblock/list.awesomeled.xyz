@@ -60,6 +60,11 @@ power:
     max: 5
 datasheet:
   url: https://www.dmx4all.de/download/manuals_english/artnet_twinpixx_16_english.pdf # user manual; has a technical data section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/twinpixx16-ea7093c4.pdf
+    sha256: ea7093c448a9cb570fded49aa64135c7c13a1f979ea2fd944980958d841b5735
+    retrieved: '2026-11-28'
+    source: https://www.dmx4all.de/download/manuals_english/artnet_twinpixx_16_english.pdf
 dead_links:
   - url: https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html
     archive: https://web.archive.org/web/20210120183833/https://shop.dmx4all.de/en/dmx4all-products/magiarled-solutions/magiarled-controller/artnet-twinpixx-16.html

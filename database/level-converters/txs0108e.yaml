@@ -9,6 +9,11 @@ aliases:
   - TXS0108ERKSR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/txs0108e-55d31ed7.pdf
+    sha256: 55d31ed7b22e7a188c96b52a4320bf85f81ce03f408dff9378e1432d7722a53d
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/txs0108e.pdf
 electrical:
   supply_voltage: 1.4-5.5V
   supply_voltage_notes: A port 1.4-3.6 V, B port 1.65-5.5 V (VCCA ≤ VCCB)

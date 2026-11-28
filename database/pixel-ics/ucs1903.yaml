@@ -9,6 +9,11 @@ data:
   type: UCS1903
 datasheet:
   url: https://www.superlightingled.com/PDF/UCS1903%20datasheet.pdf # Original UCS1903 (6-12 V, 400 Hz); Superlighting LED copy, maker (szucs.cn) hosts no PDFs
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs1903-13af73ce.pdf
+    sha256: 13af73ced46500760f142e6be23c34d4d4f11bcacb9a128a203f5d0df46615e2
+    retrieved: '2026-11-28'
+    source: https://www.superlightingled.com/PDF/UCS1903%20datasheet.pdf
 other_links:
   - https://www.advateklighting.com/pixel-protocols/ucs1903
 physical:

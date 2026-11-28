@@ -15,6 +15,11 @@ data:
   backup_line: true
 datasheet:
   url: https://www.world-semi.com/downloads/datasheets/en/ws2808-v1.1.pdf # WorldSemi WS2808 V1.1 (English, 2022-12-21), from world-semi.com's WS2808 product page
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ws2808-c45cee36.pdf
+    sha256: c45cee366a24d048739164f9be4d21954baa5b0657454976134b1ef03d74c973
+    retrieved: '2026-11-28'
+    source: https://www.world-semi.com/downloads/datasheets/en/ws2808-v1.1.pdf
   sources:
     - url: https://www.world-semi.com/downloads/datasheets/zh-CN/ws2808-1.2.pdf
       host: manufacturer

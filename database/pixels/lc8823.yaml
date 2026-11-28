@@ -12,6 +12,11 @@ data:
   backup_line: false
 datasheet:
   url: http://addressable-led.com/UploadFile/upi/file/20190724/LC8823-LED.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/lc8823-d9d9cc24.pdf
+    sha256: d9d9cc24c323341c0778b79778d6cef2cb30138bf6225acdaa57200052c35388
+    retrieved: '2026-11-28'
+    source: http://addressable-led.com/UploadFile/upi/file/20190724/LC8823-LED.pdf
 electrical:
   led_voltage: 3-7.5V
   supply_voltage: 5V

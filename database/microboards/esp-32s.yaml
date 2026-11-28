@@ -18,6 +18,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/esp-32s-a7917e6b.pdf
+    sha256: a7917e6b47528c9dcab06837a49d452e582751335797db879f1cf2d17cd29adf
+    retrieved: '2026-11-28'
+    source: https://www.espressif.com/sites/default/files/documentation/esp32_datasheet_en.pdf
 io:
   bms: false
   imu: false

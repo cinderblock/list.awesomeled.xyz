@@ -13,6 +13,11 @@ data:
   pixel_size_bits: 24
 datasheet:
   url: https://web.archive.org/web/20221004071646id_/http://titanmec.com/index.php/en/project/download/id/672.html # Titan Micro TM1812 V1.6 (Chinese); Wayback copy of titanmec.com's old download. Titan's current V1.8 is served only with a titanmec.com Referer and isn't archived
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tm1812-71b64803.pdf
+    sha256: 71b6480390f4f96c0cf4ccdd313949f96f95c80d1b953dd1cf23040233e7150d
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20221004071646id_/http://titanmec.com/index.php/en/project/download/id/672.html
   sources:
     - url: https://media.ledyi.com/tm1812-datasheet_6ef0c9a77a3a4c46a743ccc71fea5742267b75eb1a8bb3ddd20854bc6f5df778.pdf
       host: community

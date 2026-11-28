@@ -10,6 +10,11 @@ data:
   type: MY9231
 datasheet:
   url: http://www.my-semi.com/file/MY9291_BF_0.91.pdf # MY-Semi v0.91 (http only; https cert mismatch)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/my9291-72c49206.pdf
+    sha256: 72c49206f4589dee5153f7f15903d6c2c90812722d7621fff6a69dfa7c6b7d18
+    retrieved: '2026-11-28'
+    source: http://www.my-semi.com/file/MY9291_BF_0.91.pdf
   sources:
     - url: http://www.my-semi.com.tw/file/MY9291_BF_0.91.pdf
       host: manufacturer

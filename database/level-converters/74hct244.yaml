@@ -11,6 +11,11 @@ aliases:
   - SN74HCT244DGSR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/74hct244-b56f8978.pdf
+    sha256: b56f89788b6de9b76361cd55fba37afbaf69ae06e12ef09be5054f019c0eca30
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/sn74hct244.pdf
 electrical:
   supply_voltage: 4.5-5.5V
   output_current: 6mA

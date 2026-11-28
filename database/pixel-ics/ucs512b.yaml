@@ -9,6 +9,11 @@ data:
   type: DMX512P
 datasheet:
   url: https://media.ledyi.com/ucs512b-datasheet_d3027bf8ccef6f06edc736bf690f6939f39e2a8707101b5e40ef2d278d3b9787.pdf # Document covers UCS512B3 (3-channel UCS512B); LEDYi copy, maker (szucs.cn) hosts no PDFs
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs512b-d3027bf8.pdf
+    sha256: d3027bf8ccef6f06edc736bf690f6939f39e2a8707101b5e40ef2d278d3b9787
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/ucs512b-datasheet_d3027bf8ccef6f06edc736bf690f6939f39e2a8707101b5e40ef2d278d3b9787.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS512B-datasheet.pdf
       host: community

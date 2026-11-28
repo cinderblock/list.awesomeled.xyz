@@ -33,6 +33,11 @@ power:
     max: 25
 datasheet:
   url: https://www.nledshop.com/downloads/datasheets/nled-pixel-controller-mini-v4a.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/nled-pixel-controller-mini-7eaed28e.pdf
+    sha256: 7eaed28edfd007741c39b22a08f0a8485c4d0b4b95da461a360c8b3136224110
+    retrieved: '2026-11-28'
+    source: https://www.nledshop.com/downloads/datasheets/nled-pixel-controller-mini-v4a.pdf
 images:
   - file: nled-pixel-controller-mini.webp
     source: https://store.nledshop.com/index.php/nled-pixel-controller-mini-ws2801-ws2811-ws2812-lpd8806-more.html

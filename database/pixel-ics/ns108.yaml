@@ -22,6 +22,11 @@ data:
   max_per_string: 1024
 datasheet:
   url: https://web.archive.org/web/20230131080044id_/http://newstar-ledstrip.com/product/20220705164520116.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ns108-a9b5d598.pdf
+    sha256: a9b5d598df4047efad09cb6c27368582cf9afcf7a3ee0c5483040b9705581449
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20230131080044id_/http://newstar-ledstrip.com/product/20220705164520116.pdf
   sources:
     - url: https://web.archive.org/web/20230131080044id_/http://newstar-ledstrip.com/product/20220705164520116.pdf
       host: manufacturer

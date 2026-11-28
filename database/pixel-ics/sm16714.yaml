@@ -15,6 +15,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.chinaasic.com/websiteManage/product/202504021552422564.pdf # Sunmoon SM16714PHT product brief, English V1.0 (1 page; full datasheet not public)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sm16714-c594d780.pdf
+    sha256: c594d780f4763c2bc0a7ab7649d7b2eff1cc90621ca778126ae19b83bbd601ec
+    retrieved: '2026-11-28'
+    source: https://www.chinaasic.com/websiteManage/product/202504021552422564.pdf
   sources:
     - url: https://www.chinaasic.com/websiteManage/product/202504021552382564.pdf
       host: manufacturer

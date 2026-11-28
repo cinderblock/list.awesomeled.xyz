@@ -135,6 +135,11 @@ data:
     - type: microSD
 datasheet:
   url: https://cdn.sanity.io/files/3y31615s/production/97662dddc82a6b09df556a62f5f60b76147418ef.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixlite-t8-s-mk3-f3dc6b09.pdf
+    sha256: f3dc6b0901dc859db0dd5821f830ab77c773401a728a4e9c3488a282fceb3607
+    retrieved: '2026-11-28'
+    source: https://cdn.sanity.io/files/3y31615s/production/97662dddc82a6b09df556a62f5f60b76147418ef.pdf
 images:
   - file: pixlite-t8-s-mk3.webp
     source: https://www.advateklighting.com/products/t8-s-mk3

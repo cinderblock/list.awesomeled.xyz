@@ -13,6 +13,11 @@ data:
   backup_line: false
 datasheet:
   url: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf # FW1906 V1.0 (English, maker not named); LEDYi copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/fw1906-27ce7c78.pdf
+    sha256: 27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/fw1906-datasheet_27ce7c7880939b48c53864d2e905f58f4e542c30fe1b1cf62393ea8fa6cafe22.pdf
   discrepancies:
     - The package section is titled SSOP10, but the drawing gives both MSOP10 and SSOP10 dimensions
     - Recommended VDD is 10-27 V (typ. 24 V), yet the application notes still call for a VDD series resistor (1.2K at 12 V, 3K at 24 V)

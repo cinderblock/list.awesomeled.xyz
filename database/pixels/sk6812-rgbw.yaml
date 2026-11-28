@@ -16,6 +16,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.normandled.com/upload/201805/SK6812RGBX-XX%20Datasheet.pdf # Shenzhen Normand SK6812RGBX-XX (RGBW family), rev 07 (2019-01-21)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk6812-rgbw-8ab34d73.pdf
+    sha256: 8ab34d73cb28a223a0dabff7e16abbb02e8eb36cf718d48a4f2d697f08e14e34
+    retrieved: '2026-11-28'
+    source: https://www.normandled.com/upload/201805/SK6812RGBX-XX%20Datasheet.pdf
   sources:
     - url: https://cdn-shop.adafruit.com/product-files/2757/p2757_SK6812RGBW_REV01.pdf
       host: distributor

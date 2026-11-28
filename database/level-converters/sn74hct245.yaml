@@ -17,6 +17,11 @@ aliases:
   - SN74HCT245DGSR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/sn74hct245-7b48b14b.pdf
+    sha256: 7b48b14b34db864ed921932c20bd7dd69b53f7c7eeaf9147a5860a75948e1a41
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/sn74hct245.pdf
 electrical:
   max_voltage: 5.5V
   output_current: 6mA

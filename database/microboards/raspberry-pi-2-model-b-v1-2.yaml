@@ -24,6 +24,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/bcm2836/bcm2836-peripherals.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/raspberry-pi-2-model-b-v1-2-8eae4db4.pdf
+    sha256: 8eae4db439d768de5b069900c1e5040607cb54704d063b39802dac185ffafad2
+    retrieved: '2026-11-28'
+    source: https://datasheets.raspberrypi.com/bcm2836/bcm2836-peripherals.pdf
 images:
   - file: raspberry-pi-2-model-b-v1-2.webp
     source: https://www.adafruit.com/product/2358

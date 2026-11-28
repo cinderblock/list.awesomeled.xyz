@@ -10,6 +10,11 @@ data:
   type: MY9221
 datasheet:
   url: http://www.my-semi.com/file/MY9221_BF_3.0.pdf # MY-Semi v3.0 (http only; https cert mismatch)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/my9221-c2be9c96.pdf
+    sha256: c2be9c9606d963f49b7e5e1cdfdf2e476b4945076b47f23d3dff94cbf3d7ab4f
+    retrieved: '2026-11-28'
+    source: http://www.my-semi.com/file/MY9221_BF_3.0.pdf
   sources:
     - url: https://files.seeedstudio.com/wiki/Grove-LED_Bar/res/MY9221_DS_1.0.pdf
       host: distributor

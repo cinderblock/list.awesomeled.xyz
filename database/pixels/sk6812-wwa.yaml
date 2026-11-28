@@ -25,6 +25,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.normandled.com/upload/202004/SK6812WWA%20LED%20Datasheet.pdf # Shenzhen Normand SK6812WWA, rev 03 (2019-01-21)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk6812-wwa-59ee1344.pdf
+    sha256: 59ee13447e927c4a11150ac20b10ae18fdb352aafc23637626d3f6e678e9dc60
+    retrieved: '2026-11-28'
+    source: https://www.normandled.com/upload/202004/SK6812WWA%20LED%20Datasheet.pdf
   sources:
     - url: https://cdn-shop.adafruit.com/product-files/6509/P6509+SK6812WWA+LED+datasheet.pdf
       host: distributor

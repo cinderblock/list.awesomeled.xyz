@@ -10,6 +10,11 @@ data:
   type: TM1829
 datasheet:
   url: https://web.archive.org/web/20221129143749id_/http://titanmec.com/index.php/en/project/download/id/664.html # Titan Micro TM1829 V1.5 (English, TM1829_V1.5_EN.pdf); Wayback copy of titanmec.com's old English download. TM1829 is gone from Titan's current site
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tm1829-02f7cffa.pdf
+    sha256: 02f7cffaf7eddb6571c59ab7d10c3343a5bd2ec4f9cb91f9a17e0f5204122f3f
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20221129143749id_/http://titanmec.com/index.php/en/project/download/id/664.html
   sources:
     - url: https://media.ledyi.com/tm1829-datasheet_ca2ab7a03d12522a298c2629fca3707f0d867407a3e374072246eff71b992370.pdf
       host: community

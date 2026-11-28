@@ -28,6 +28,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/raspberry-pi-1-model-a-5e446658.pdf
+    sha256: 5e446658d154c4447381ef62c1a3ce4102715e437fe488e2b93e798b60c4004e
+    retrieved: '2026-11-28'
+    source: https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf
 images:
   - file: raspberry-pi-1-model-a.webp
     source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_A%2B.jpg

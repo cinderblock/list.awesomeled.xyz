@@ -12,6 +12,11 @@ data:
   type: WS2811/12
 datasheet:
   url: https://www.normandled.com/upload/201805/SK6812%205050%20Datasheet.pdf # Shenzhen Normand SK6812 (5050), rev 06 (2019-01-02)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sk6812-5050-046dfcc2.pdf
+    sha256: 046dfcc274d90f758c436684df46648c58e8729e7475af479c327e5f122d9116
+    retrieved: '2026-11-28'
+    source: https://www.normandled.com/upload/201805/SK6812%205050%20Datasheet.pdf
   sources:
     - url: https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
       host: distributor

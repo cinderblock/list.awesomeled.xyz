@@ -12,6 +12,11 @@ data:
   type: WS2811/12
 datasheet:
   url: https://www.chinaasic.com/websiteManage/product/20230523095347341.pdf # Sunmoon SM16703P, English V1.3
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sm16703-a5131258.pdf
+    sha256: a5131258bba9da1200e2c6c4c6822ecd69055562c862cf2e1f8f8e01a3e0ae69
+    retrieved: '2026-11-28'
+    source: https://www.chinaasic.com/websiteManage/product/20230523095347341.pdf
   sources:
     - url: https://www.chinaasic.com/websiteManage/product/20201228150516065.pdf
       host: manufacturer

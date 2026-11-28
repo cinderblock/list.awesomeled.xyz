@@ -45,6 +45,11 @@ outputs:
     - SPXL
 datasheet:
   url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixelator-ab64ba9a.pdf
+    sha256: ab64ba9ad77f3fc991ceb28cb0e44f84bcc6fa6c9cdf4ba272a48312d9c256c6
+    retrieved: '2026-11-28'
+    source: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_DATASHEET.pdf
   sources:
     - url: https://cdn.enttec.com/pdf/assets/70060/70060_PIXELATOR_REV_C_USER_MANUAL.pdf
       host: manufacturer

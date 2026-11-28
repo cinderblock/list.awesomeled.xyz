@@ -22,6 +22,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/trinket-m0-cd6d39e3.pdf
+    sha256: cd6d39e3e5c2f2116cf99224a102f707444e0395f6faa7ddec75093bd249e394
+    retrieved: '2026-11-28'
+    source: https://ww1.microchip.com/downloads/aemDocuments/documents/MCU32/ProductDocuments/DataSheets/SAM-D21-DA1-Family-Data-Sheet-DS40001882.pdf
 images:
   - file: trinket-m0.webp
     source: https://www.adafruit.com/product/3500

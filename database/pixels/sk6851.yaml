@@ -16,6 +16,11 @@ data:
   backup_line: false
 datasheet:
   url: https://datasheet.lcsc.com/datasheet/pdf/80b71069049ae9c8aaafeb0811733cd2.pdf # OPSCO SK6851N-RG-002 specification Rev B/0 (2024-03-18, Chinese/English), via LCSC C5440839
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk6851-0569babb.pdf
+    sha256: 0569babb1935f26e06560886bd5d7995dd0448565686350210079ecd80f6e213
+    retrieved: '2026-11-28'
+    source: https://datasheet.lcsc.com/datasheet/pdf/80b71069049ae9c8aaafeb0811733cd2.pdf
 electrical:
   supply_voltage: 4.2V
   supply_voltage_notes: Chip clamping voltage 3.8-4.2V; the LEDs sit in series strings fed through a current-limiting resistor (30mA per string), 6 on 24V or 30 on rectified 120V AC

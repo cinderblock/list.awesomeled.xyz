@@ -19,6 +19,11 @@ connectivity:
   usb: Power + UART
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/nodemcu-v2-3a038e2f.pdf
+    sha256: 3a038e2fd3040ad06d95d41b16afc8292090339e9f8e728ce46a83db439cecf1
+    retrieved: '2026-11-28'
+    source: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
 images:
   - file: nodemcu-v2.webp
     source: https://commons.wikimedia.org/wiki/File:NodeMCU_DEVKIT_1.0.jpg

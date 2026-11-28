@@ -75,6 +75,11 @@ data:
     - type: microSD
 datasheet:
   url: https://www.ledstripstudio.com/download/tech-specs/SPI_LED_Controller_tech_specs.pdf # tech specs sheet
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/spi-led-controller-06da1685.pdf
+    sha256: 06da1685d1e54f358f85f7c332438b0c3b1b162a55b5839ae3d3265399edc2d0
+    retrieved: '2026-11-28'
+    source: https://www.ledstripstudio.com/download/tech-specs/SPI_LED_Controller_tech_specs.pdf
   sources:
     - url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI_LED_Controller_tech_specs.pdf
       host: manufacturer

@@ -29,6 +29,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-product-brief.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/raspberry-pi-zero-2-w-503f3488.pdf
+    sha256: 503f348880c00c543e99383ca8759a0b60c1b511cc3c27f216720866159a2bff
+    retrieved: '2026-11-28'
+    source: https://datasheets.raspberrypi.com/rpizero2/raspberry-pi-zero-2-w-product-brief.pdf
 images:
   - file: raspberry-pi-zero-2-w.webp
     source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_Zero_2_W_--_2024_--_0008.jpg

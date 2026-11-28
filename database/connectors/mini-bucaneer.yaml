@@ -3,6 +3,11 @@ creator: Bulgin
 notes: Bulgin, long established UK connector maker, available with crimp or screw terminals. locking collar can be fragile with rough handling
 datasheet:
   url: https://www.bulgin.com/products/pub/media/import/attachments/Mini_power.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/mini-bucaneer-1c85d56b.pdf
+    sha256: 1c85d56b238567ede0d88ab439d20b07cc46e652129ba27af168150f07416e6a
+    retrieved: '2026-11-28'
+    source: https://www.bulgin.com/products/pub/media/import/attachments/Mini_power.pdf
 images:
   - file: mini-bucaneer.webp
     source: https://www.bulgin.com/us/products/mini-series-flex-cable-connector-body-6mm-8mm-cable-black-gland.html

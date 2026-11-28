@@ -74,6 +74,11 @@ power:
     max: 24
 datasheet:
   url: https://cdn.sanity.io/files/3y31615s/production/b5aa5a891c6f9aa1e4aeb76c233354ae96385dd6.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixlite-16-long-range-mk2-c39ebe98.pdf
+    sha256: c39ebe98bd560c39913a53ac9fd5efb378077e5b45700f28def30467be8314d6
+    retrieved: '2026-11-28'
+    source: https://cdn.sanity.io/files/3y31615s/production/b5aa5a891c6f9aa1e4aeb76c233354ae96385dd6.pdf
 images:
   - file: pixlite-16-long-range-mk2.webp
     source: https://www.advateklighting.com/products/shop/pixlite-16-long-range-mk2

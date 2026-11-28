@@ -133,6 +133,11 @@ outputs:
     - WS2851
 datasheet:
   url: https://web.archive.org/web/20240617044053id_/https://www.deskontrol.net/descargas/manuales/deskontroller-lite-datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/deskontrol-lite-16-3fd908fa.pdf
+    sha256: 3fd908fa36f5afb4fd434856dedbf4cc332939c878f202a517f7683a9c40430c
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20240617044053id_/https://www.deskontrol.net/descargas/manuales/deskontroller-lite-datasheet.pdf
   sources:
     - url: https://web.archive.org/web/20210416131156id_/https://www.deskontrol.net/descargas/manuales/deskontroller-lite-datasheet.pdf
       host: manufacturer

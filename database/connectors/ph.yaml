@@ -6,6 +6,11 @@ aliases:
   - STEMMA
 datasheet:
   url: https://www.jst.com/wp-content/uploads/2025/06/ePH.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/ph-5878e549.pdf
+    sha256: 5878e549f54c42a0d544d26fa75a666ad6f0f9486aaf4b4f44f1279cead9e524
+    retrieved: '2026-11-28'
+    source: https://www.jst.com/wp-content/uploads/2025/06/ePH.pdf
   sources:
     - url: https://www.jst-mfg.com/product/pdf/eng/ePH.pdf
       host: manufacturer

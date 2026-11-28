@@ -19,6 +19,11 @@ data:
   max_per_string: 2010
 datasheet:
   url: http://www.my-semi.com/file/MY9231_BF_0.91.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/my9231-1c325137.pdf
+    sha256: 1c3251370f6191d36216a2eb6508d6beceeced44f3e0f7e8365e64e7e7461f36
+    retrieved: '2026-11-28'
+    source: http://www.my-semi.com/file/MY9231_BF_0.91.pdf
 electrical:
   output_voltage: 17V
   supply_voltage: 5V

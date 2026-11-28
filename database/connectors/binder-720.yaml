@@ -2,6 +2,11 @@ name: Binder 720
 creator: Binder
 datasheet:
   url: https://www.binder-connector.com/en/products/series-snap-in-ip67-1.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/binder-720-3aa4b29e.pdf
+    sha256: 3aa4b29e4a32e7c9a5a4bbd5d6f3e296f52c474041c22055802a1ba487129f30
+    retrieved: '2026-11-28'
+    source: https://www.binder-connector.com/en/products/series-snap-in-ip67-1.pdf
 images:
   - file: binder-720.webp
     source: https://www.binder-connector.com/en/products/miniature-circular-connectors/snap-in-ip67-1

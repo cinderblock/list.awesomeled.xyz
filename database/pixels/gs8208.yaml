@@ -17,6 +17,11 @@ data:
   backup_line: true
 datasheet:
   url: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/gs8208-5bbe85a5.pdf
+    sha256: 5bbe85a5a4c67c89e37be35fdd867074c6372f67d830a3c88103d98f79f5a53a
+    retrieved: '2026-11-28'
+    source: http://www.normandled.com/upload/201805/GS8208%20LED%20Datasheet.pdf
   discrepancies:
     - "The feature list (page 1) says 'Default 17.5mA constant current output'; the electrical table (page 4) gives 15mA typical"
 electrical:

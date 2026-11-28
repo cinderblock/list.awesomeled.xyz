@@ -42,6 +42,11 @@ data:
     - type: microSD # firmware updates via micro-SD card
 datasheet:
   url: https://www.citytheatrical.com/docs/default-source/cut-sheets/5850-qolorpix-tape-controller.pdf # cut sheet (spec sheet)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/qolorpix-cea4921a.pdf
+    sha256: cea4921abbe92e6c1b5b23f0a71499223fe29bc950c44d2870522db51254d677
+    retrieved: '2026-11-28'
+    source: https://www.citytheatrical.com/docs/default-source/cut-sheets/5850-qolorpix-tape-controller.pdf
 features:
   - Integrated power supply (no external PSU)
   - Multiverse wireless DMX receiver

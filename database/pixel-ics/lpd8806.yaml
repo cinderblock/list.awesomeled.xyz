@@ -16,6 +16,11 @@ data:
   max_per_string: 2000
 datasheet:
   url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/lpd8806-a58d9cff.pdf
+    sha256: a58d9cff1405bdf6d248883cd717147700d7912cc9a233bf154d4b8c60e4e7c3
+    retrieved: '2026-11-28'
+    source: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
   third_party_testing: https://web.archive.org/web/20180725021448/https://www.texonix.com/LPD8806.html
 electrical:
   output_voltage: 12V

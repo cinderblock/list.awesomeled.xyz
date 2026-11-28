@@ -72,6 +72,11 @@ power:
     max: 64
 datasheet:
   url: https://cdn.sanity.io/files/3y31615s/production/3e65b12987f43b2b7cd69792a2617efa4433cc42.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixlite-16-mk2-eco-d2153b42.pdf
+    sha256: d2153b4213168a613181140a1ddc923cca14783be940c906c5ae4e4ed92231ad
+    retrieved: '2026-11-28'
+    source: https://cdn.sanity.io/files/3y31615s/production/3e65b12987f43b2b7cd69792a2617efa4433cc42.pdf
 price: 189.95
 related:
   - type: variant

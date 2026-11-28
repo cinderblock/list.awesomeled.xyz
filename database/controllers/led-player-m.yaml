@@ -40,6 +40,11 @@ data:
       max_size: 32 # SD/SDHC; SDXC cards are not readable
 datasheet:
   url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-M_Anleitung.pdf # user manual (German); has a Technische Daten section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/led-player-m-181cdaff.pdf
+    sha256: 181cdaffb18d39d8c8f7d723fe88563cbfd8ed9be42ef6ee154f9dcfe25210aa
+    retrieved: '2026-11-28'
+    source: https://www.diamex-shop.de/mediafiles/LG/LED-Player-M_Anleitung.pdf
   sources:
     - url: https://media.elv.com/file/121060_led_player_um.pdf
       host: distributor

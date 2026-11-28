@@ -19,6 +19,11 @@ connectivity:
   usb: Power + UART
 datasheet:
   url: https://www.raytac.com/download/index.php?index_id=43
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/nrf-52840-feather-61fec8c0.pdf
+    sha256: 61fec8c0c9f8c33175be2237a8ebba73c6cfc0a3572fe3835fd341079c103d03
+    retrieved: '2026-11-28'
+    source: https://www.raytac.com/download/index.php?index_id=43
   sources:
     - url: https://cdn-learn.adafruit.com/assets/assets/000/068/544/original/Raytac_MDBT50Q.pdf
       host: distributor

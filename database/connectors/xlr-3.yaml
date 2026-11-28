@@ -9,6 +9,11 @@ common_applications:
   - Audio / microphone cabling
 datasheet:
   url: https://www.neutrik.com/en/product/nc3mxx.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/xlr-3-a62ee4db.pdf
+    sha256: a62ee4db2712accf4616fe8a39b39bbd53eb1505216ef4c8e397d64bf6205ea2
+    retrieved: '2026-11-28'
+    source: https://www.neutrik.com/en/product/nc3mxx.pdf
 images:
   - file: xlr-3.webp
     source: https://commons.wikimedia.org/wiki/File:XLR_connectors,_male_and_female.jpg

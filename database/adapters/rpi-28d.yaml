@@ -10,6 +10,11 @@ power:
     max: 12
 datasheet:
   url: https://www.hansonelectronics.com.au/wp-content/uploads/2018/01/rPi-28D-user-manual-1.1.pdf # user manual (rev 1.1); feature/spec list on page 1
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/adapters/rpi-28d-0972e7f5.pdf
+    sha256: 0972e7f5eefac3e435545fb56259ea9b032eaf6372e9c13e032d4b5e9651a2e9
+    retrieved: '2026-11-28'
+    source: https://www.hansonelectronics.com.au/wp-content/uploads/2018/01/rPi-28D-user-manual-1.1.pdf
 diy_or_ots: OTS
 images:
   - file: rpi-28d.webp

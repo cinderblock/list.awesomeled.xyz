@@ -5,6 +5,11 @@ aliases:
   - Soca
 datasheet:
   url: https://www.amphenol-socapex.com/sites/default/files/media/document/2023-07/dedicated%20solution%20for%20entertainment_datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/socapex-6cac5119.pdf
+    sha256: 6cac5119f2c2913590ba206cd42e518ba9ade51cf9d49be8e5d8581fb13521ea
+    retrieved: '2026-11-28'
+    source: https://www.amphenol-socapex.com/sites/default/files/media/document/2023-07/dedicated%20solution%20for%20entertainment_datasheet.pdf
 images:
   - file: socapex.webp
     source: https://commons.wikimedia.org/wiki/File:Socapex_19pin.jpg

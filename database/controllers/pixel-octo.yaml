@@ -51,6 +51,11 @@ case:
   waterproof: IP20
 datasheet:
   url: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixel-octo-55c126a9.pdf
+    sha256: 55c126a9ca0e6e66cd6f566e4ed24fd776b9f9ece3d44fc146141ac6ad3203ce
+    retrieved: '2026-11-28'
+    source: https://dol2kh495zr52.cloudfront.net/pdf/datasheets/Pixel+Octo_DS+(Feb+2019).pdf
 dead_links:
   - url: https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/
     archive: https://web.archive.org/web/20190723230438/https://www.enttec.com/product/din/led-pixel-control-din-rail/din-rail-led-pixel-controller/

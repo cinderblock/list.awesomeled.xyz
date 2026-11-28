@@ -15,6 +15,11 @@ data:
   max_per_string: 1023
 datasheet:
   url: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf # Macroblock MBI6120 preliminary datasheet V1.00 (June 2012); Neumüller (authorized distributor) copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/mbi6120-739a5f5c.pdf
+    sha256: 739a5f5c0239e35173d349b699cc8a53055964624f0950552d3f8111342e900f
+    retrieved: '2026-11-28'
+    source: https://www.neumueller.com/datenblatt/macroblock/MBI6120%20Datenblatt%20-%20Datasheet.pdf
 electrical:
   output_voltage: 17V
   supply_voltage: 5-12V

@@ -7,6 +7,11 @@ aliases:
   - COMPACT Splicing Connectors
 datasheet:
   url: https://www.wago.com/lv/download/public/InfoMedia_60598269/WAGO-221-Series---The-Way-to-Connect-EN-60598269.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/wago-221-0cf2c7b9.pdf
+    sha256: 0cf2c7b9ac7fbe22cb4c6054402fc7b304d4ea3402d78298baaf7d7cf1d21f95
+    retrieved: '2026-11-28'
+    source: https://www.wago.com/lv/download/public/InfoMedia_60598269/WAGO-221-Series---The-Way-to-Connect-EN-60598269.pdf
 images:
   - file: wago-221.webp
     source: https://www.wago.com/global/electrical-interconnections/compact-splicing-connector/p/221-413

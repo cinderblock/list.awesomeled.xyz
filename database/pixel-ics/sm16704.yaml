@@ -16,6 +16,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.chinaasic.com/websiteManage/product/20230523101647341.pdf # Sunmoon SM16704PB product brief, English V1.3 (1 page)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sm16704-39225d98.pdf
+    sha256: 39225d98bcda132d769a773a2afd65140723a861d25b78bf38ca1c34c5216c80
+    retrieved: '2026-11-28'
+    source: https://www.chinaasic.com/websiteManage/product/20230523101647341.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SM16704PB-datasheet.pdf
       host: community

@@ -11,6 +11,11 @@ aliases:
   - MKDS 1,5
 datasheet:
   url: https://www.degson.com/index.php?a=downloadFile&id=5089057&name=%27ZmlsZTQ=%27 # Degson's DG301-5.0 drawing (rev 03, 2025); LCSC's datasheet link answers with an HTML viewer
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/pcb-screw-terminal-block-db763fea.pdf
+    sha256: db763fea36ed45fb228d453635983aae38366b11540cd27a864757751f5497dd
+    retrieved: '2026-11-28'
+    source: https://www.degson.com/index.php?a=downloadFile&id=5089057&name=%27ZmlsZTQ=%27
 images:
   - file: pcb-screw-terminal-block.webp
     source: https://www.degson.com/content/details_552_879415.html?lang=en

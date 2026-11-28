@@ -26,6 +26,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/hd108-28a938b7.pdf
+    sha256: 28a938b7badad5c077dce08e29c4df907cb661d8abe61ba4e187c29aef297edd
+    retrieved: '2026-11-28'
+    source: https://www.rose-lighting.com/wp-content/uploads/sites/53/2021/03/HD108-5050-LED-Specificaion-V1.1.0-Rose-Lighting.pdf
   discrepancies:
     - Newstar's NS108 spec (Rev. 04) gives VDD 5.1 V (max 5.5 V), input high from 3.0 V, and 18 mA per output with REXT floating (up to 60 mA with an external resistor). Rose Lighting's HD108 spec (V1.1.0) gives input high 3.4-5.3 V and 17 mA typical.
   sources:
