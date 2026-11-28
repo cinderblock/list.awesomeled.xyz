@@ -75,7 +75,8 @@ so the entry page shows them (see Plan step 4).
     - [x] First run (workflow_dispatch, 8:17–8:29 PM PST, 04:17–04:29Z Nov 23): 255 PDFs, 432.3 MB of the 1 GB budget (42%); bot PR https://github.com/cinderblock/list.awesomeled.xyz/pull/3 (commit carries `Not-A-Review:`). Spot-checked 4 mirror URLs: 200 application/pdf.
     - [x] 2 failures: pixeldin (yarilo.pro times out from runners → byte-identical Wayback copy added as `datasheet.sources`); ns8808 (datasheet.url is an HTML page, stream 2's b4dc7499 → ISSUES.md)
     - [x] Second run (push of b364d575, 9:18 PM PST, 05:18Z Nov 23) mirrored pixeldin via the plain URL this time and updated PR #3 (256 files). Storage 263 PDFs, 434.0 MB; 7 objects (1.0 MB) unreferenced: likely PDFs whose bytes changed between the two runs (content-addressed keys). Watch whether that recurs on later runs before adding any cleanup.
-    - [ ] Cameron reviews and merges PR #3 ← current
+    - [x] PR #3 rebase-merged 2026-11-27 ~5:55 PM PST (01:55Z Nov 28) as 1006d242 (trailer kept), on Cameron's go-ahead after review: 245 mirror blocks, additions only, each `source` = the entry's `url`, hash in the key; validate 609/609 at its head. Post-merge CI, deploy and mirror run green; production entry pages link `assets.awesomeled.xyz` copies. Follow-up bot PR https://github.com/cinderblock/list.awesomeled.xyz/pull/4 (1 more).
+    - [ ] 11 entries not mirrored: their hosts (sandevices.com, dmxking.com/.tv, lumikit.com.br, smartshow.lighting) now answer GitHub runners with HTTP 415, though runs 1–2 fetched them and they still download fine from here; teeplug (hylec-apl.com) timed out. See Findings. Watch the next run; if it persists, add Wayback `id_` copies as `sources` (as for pixeldin). ← current
     - [x] docs/datasheet-mirroring.md setup rewritten for the ops-managed bucket and domain
 12. [x] Second sourcing pass for entries added by other streams after step 5 (~85 without images, 18 without datasheets; 40 of the image gaps are pixel ICs, usually skipped for want of a real chip photo).
     - [x] pixel ICs + pixels (f4c3620): 3 images, 1 datasheet added, 2 LCSC viewer URLs replaced by direct PDFs; 47 image skips and 12 parts with no published datasheet, reasons in `plans/assets-research/pass2-pixels-ics.md`.
@@ -168,7 +169,7 @@ pattern drivers.
 | **Total**           |     579 | 365 (63%) |        365 |           48 | 257/421 (61%) |        0 |
 
 - **Images: 18 → 365** across both passes, all attributed. Excluding drive libraries (no images by decision) and pixel ICs (rarely a real chip photo): 361 / 455 (79%).
-- **Datasheets: 38 → 257.** "Mirrored": 0 on master until PR #3 merges; the first run mirrored 255 of the 257 (pixeldin follows on the next run).
+- **Datasheets: 38 → 257.** "Mirrored": 245 of 257 on master since PR #3 (2026-11-27); 1 more in PR #4, ns8808 is an HTML page (stream 2), and 11 are blocked from runners (step 11).
 
 ## Findings / gotchas
 
@@ -192,6 +193,9 @@ pattern drivers.
 - **Dev server hung at startup** (2026-11-20 ~3 AM PST): every request returned 500 with `transport invoke timed out after 60000ms … fetchModule /app/app.css`, so e2e failed on Playwright's 60 s `webServer` wait. One failed fetch is cached, so waiting longer doesn't help. The cause was a stale Vite dependency-optimizer cache in `node_modules/.vite`, probably left behind by a start that died while the machine was pegged (Defender and other threads at 100% CPU). A start that logs "Re-optimizing dependencies because vite config has changed" rebuilds it; deleting `node_modules/.vite` should do the same. Clean `origin/master` sharing the same `node_modules` reproduced the rebuild and then served 200 in 32 s.
 - A stale incremental `bun install` left a nested `ajv` under `ajv-formats` and broke `tsc` locally; a clean install fixed it.
 
+- **Bot PR regenerates from master each run** (peter-evans/create-pull-request): an entry mirrored by an earlier run drops out of the open bot PR if a later run fails to download it, although its object is still in R2. PR #3 went from 256 to 245 files this way (2026-11-27 run: `HTTP 415` from runners). Merging bot PRs promptly avoids it; a fuller fix would record the source URL as object metadata and reuse a stored object when the download fails.
+- **Unreferenced objects:** 49 (41.7 MB) after PR #3: the 11 dropped entries' copies plus old copies of the 22 datasheets switched to maker hosts in step 13. Harmless at this size; clean up only if it grows.
+
 ## Progress log
 
 - [x] 2026-11-18: read plans, surveyed code, baseline coverage.
@@ -208,7 +212,7 @@ pattern drivers.
 
 1. ~~R2 mirror setup~~: answered 2026-11-22 ("go for it", as staged); see step 11.
 2. **Borderline image calls** worth a glance (details in `plans/assets-research/`): neopixelbooster recorded as CC BY-NC-SA 4.0 (README) though its LICENCE file says CC BY-SA 4.0; LED-strip sellers (LEDYi, Superlighting) as `community` datasheet hosts for Titan/UCS ICs whose makers publish none; a few retailer photos for generic diffusers (Screwfix, eplastics).
-3. **Titan sheets in Chinese as the primary link** (step 13): tm1803, tm1809, tm1812, tm1814, tm1914 and tm1934 now link Titan's own Chinese sheet (Wayback); the English LEDYi/Superlighting copy is the first `sources` entry. Recommendation: keep maker-first, since the maker copies are newer and the English copies are older editions with differing values (tm1809: 24 V vs 30 V). The alternative is English primary with the Titan sheet as a source.
+3. **Keep both editions, with version metadata** (Cameron, 2026-11-27: "can we keep both? having translations (and the modern version) are both valuable. we could even mark things like version number"). Proposal, awaiting a yes: `version`, `language`, `date` on `datasheet`; a new `datasheet.editions[]` (`{url, version, language, date, host, notes}`) for other revisions and translations, listed under the datasheet link on entry pages; `sources` stays "the same file on another host" (the mirror's fallback), so the Titan English copies, ws2811's original Adafruit sheet and similar move from `sources` to `editions`. Editions not mirrored at first. Primary stays the maker's newest.
 
 ## Things not to do
 
