@@ -3,6 +3,11 @@ creator: Hylec
 notes: 4.0mm2 conductor acceptance. Screw Terminal! No soldering or crimping Also appear under Techno brand
 datasheet:
   url: https://www.hylec-apl.com/datasheet/4965/THB_387_A4A-Datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/teeplug-ec4bd951.pdf
+    sha256: ec4bd951dd90f89562f0364437980cded064bce7a7b8ebf3e1e0f62a9c60a2b7
+    retrieved: '2026-11-28'
+    source: https://www.hylec-apl.com/datasheet/4965/THB_387_A4A-Datasheet.pdf
 images:
   - file: teeplug.webp
     source: https://www.hylec-apl.com/Weatherproof-Waterproof-Connectors-Range/TeePlug-and-Sockets/THB_387_A4A.html
