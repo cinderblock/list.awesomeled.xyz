@@ -21,6 +21,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://www.pjrc.com/teensy/K64P144M120SF5.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/teensy-3-5-30638e6d.pdf
+    sha256: 30638e6d7127ff8e6e393e2b8108bb6a48972d23614b4aefcbbfe22f4f659c6f
+    retrieved: '2026-11-28'
+    source: https://www.pjrc.com/teensy/K64P144M120SF5.pdf
 images:
   - file: teensy-3-5.webp
     source: https://www.pjrc.com/store/teensy35.html

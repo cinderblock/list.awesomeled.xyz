@@ -129,6 +129,11 @@ data:
       max_size: 8
 datasheet:
   url: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270 # "C4 Extended Specification Sheet" (PDF download)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/digidot-c4-extended-8-7ff0a51f.pdf
+    sha256: 7ff0a51f756b2e78cad82ef78b575e5b3bd7ac0ba454d5d28c0532cbb89098f4
+    retrieved: '2026-11-28'
+    source: https://www.digidot.eu/shop/digidot-c4-extended-127/document/270
 features:
   - Converts Art-Net/DMX to 50+ pixel protocols (single-wire and clocked)
   - Art-Net and DMX recording, playback, and triggering

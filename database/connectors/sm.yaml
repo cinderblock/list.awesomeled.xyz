@@ -5,6 +5,11 @@ aliases:
   - JST SM
 datasheet:
   url: https://www.jst.com/wp-content/uploads/2025/06/eSM.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/sm-05bb0ede.pdf
+    sha256: 05bb0ede946ab6255692e007706c9ac87eece07e2ade4f6dd687723b4a7a3301
+    retrieved: '2026-11-28'
+    source: https://www.jst.com/wp-content/uploads/2025/06/eSM.pdf
   sources:
     - url: https://www.jst-mfg.com/product/pdf/eng/eSM.pdf
       host: manufacturer

@@ -16,6 +16,11 @@ data:
   backup_line: true
 datasheet:
   url: https://datasheet.lcsc.com/datasheet/pdf/b153efab9bc27ebcdabd89857c3357d8.pdf # TCWIN TX1818BJJ-F01 (5050) specification A2 (2023-03-27), Chinese; LCSC's direct file, TCWIN's own site hosts no datasheets
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/tx1818-49550ef1.pdf
+    sha256: 49550ef151dd56a885eb3d167a6747cd4bc8e299d766a3b6a46970114e58c2b8
+    retrieved: '2026-11-28'
+    source: https://datasheet.lcsc.com/datasheet/pdf/b153efab9bc27ebcdabd89857c3357d8.pdf
   sources:
     - url: https://www.lcsc.com/datasheet/C784552.pdf
       host: distributor

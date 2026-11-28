@@ -5,6 +5,11 @@ aliases:
   - Han 16 E
 datasheet:
   url: https://b2b.harting.com/files/download/PRD/PDF_DS/PDF_DS_09330162601_EN.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/harting-han-lectriflex-4796974f.pdf
+    sha256: 4796974fa82d8e772e8e9596c20994aa12a6753378e88109b89965e6255a1ee8
+    retrieved: '2026-11-28'
+    source: https://b2b.harting.com/files/download/PRD/PDF_DS/PDF_DS_09330162601_EN.pdf
 images:
   - file: harting-han-lectriflex.webp
     source: https://www.harting.com/en-US/p/Han-E-16-Pos-M-Insert-Screw-09330162601

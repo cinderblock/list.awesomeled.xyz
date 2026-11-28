@@ -16,6 +16,11 @@ aliases:
   - TXB0104DYYR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txb0104.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/txb0104-9a852f7b.pdf
+    sha256: 9a852f7bcc4104df0676d7ee3e4918429c3db2cbd79a5338aca0a1d34471e400
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/txb0104.pdf
 electrical:
   max_voltage: 5.5V
   input_high_voltage: 2.145V

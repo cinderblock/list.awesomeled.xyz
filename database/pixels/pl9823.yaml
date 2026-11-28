@@ -18,6 +18,11 @@ data:
   backup_line: false
 datasheet:
   url: https://web.archive.org/web/20220130150056id_/https://content.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf # BaiCheng PL9823 sheet (Diamex reprint); instructables.com returns 403 to non-browsers
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/pl9823-436bc9c1.pdf
+    sha256: 436bc9c1a0afe8a89779bd83c02bddaa236371f893b592d96ca82fecbcdfcff3
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20220130150056id_/https://content.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf
   third_party_testing: https://cpldcpu.com/2014/06/16/timing-of-ws2812-clones-pd9823/
 dead_links:
   - url: https://content.instructables.com/ORIG/FW0/YN1X/IHDUL683/FW0YN1XIHDUL683.pdf

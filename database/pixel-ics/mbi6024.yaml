@@ -20,6 +20,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.mblock.com.tw/upload/Datasheet/RGB/MBI6024/MBI6024%20Datasheet%20VB.00_EN.pdf # Macroblock MBI6024 datasheet VB.00 (June 2016), 2-page public summary
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/mbi6024-f8c63cac.pdf
+    sha256: f8c63cac43f5c5e3ccdf76bf6916ac9a1c38956fef7f471bb867cfcb17de2211
+    retrieved: '2026-11-28'
+    source: https://www.mblock.com.tw/upload/Datasheet/RGB/MBI6024/MBI6024%20Datasheet%20VB.00_EN.pdf
   sources:
     - url: https://www.neumueller.com/datenblatt/macroblock/MBI6024%20Datenblatt%20-%20Datasheet.pdf
       host: distributor

@@ -18,6 +18,11 @@ data:
   backup_line: true
 datasheet:
   url: https://www.world-semi.com/downloads/datasheets/en/ws2815b-v1-v1.pdf # current WS2815B-V1 (VIH now 2.7V)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/ws2815-5abda667.pdf
+    sha256: 5abda6670b053011fa6d2043c3c6d681077268be35590c603b0e9d28413dde6c
+    retrieved: '2026-11-28'
+    source: https://www.world-semi.com/downloads/datasheets/en/ws2815b-v1-v1.pdf
   sources:
     - url: https://www.normandled.com/upload/201808/WS2815%20LED%20Datasheet.pdf
       host: distributor

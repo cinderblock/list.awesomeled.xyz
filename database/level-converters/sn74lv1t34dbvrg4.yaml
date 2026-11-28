@@ -8,6 +8,11 @@ aliases:
   - SN74LV1T34DCKRG4
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/sn74lv1t34dbvrg4-04b2e1f1.pdf
+    sha256: 04b2e1f1ef7a388ae91499ca7b97122d7f7801a05f1d962d90cbba362c1d0d52
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/sn74lv1t34.pdf
 electrical:
   supply_voltage: 1.65-5.5V
   output_current: 8mA

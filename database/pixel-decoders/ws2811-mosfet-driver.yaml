@@ -12,6 +12,11 @@ outputs:
     - pwm
 datasheet:
   url: https://www.nledshop.com/downloads/datasheets/nled-ws2811fet-datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-decoders/ws2811-mosfet-driver-49ae145c.pdf
+    sha256: 49ae145c9938c80db663b0653796bd859fbe4e75dc684e65c64a1a6f2a4e168c
+    retrieved: '2026-11-28'
+    source: https://www.nledshop.com/downloads/datasheets/nled-ws2811fet-datasheet.pdf
 images:
   - file: ws2811-mosfet-driver.webp
     source: https://store.nledshop.com/index.php/nled-ws2811-mosfet-driver-module.html

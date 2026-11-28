@@ -20,6 +20,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://www.pjrc.com/teensy/at90usb1286.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/teensy-plus-plus-2-0-87ceb859.pdf
+    sha256: 87ceb8597e3b06ef7faa916492bef58650dfc977cb42ab90b959d76f0d3e22d4
+    retrieved: '2026-11-28'
+    source: https://www.pjrc.com/teensy/at90usb1286.pdf
   sources:
     - url: https://ww1.microchip.com/downloads/en/DeviceDoc/doc7593.pdf
       host: manufacturer

@@ -20,6 +20,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/arduino-micro-8e8c81dd.pdf
+    sha256: 8e8c81dd4119062397bc08d677e7033d7abb4292628414c4e6e0a234cc53203a
+    retrieved: '2026-11-28'
+    source: https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf
 images:
   - file: arduino-micro.webp
     source: https://commons.wikimedia.org/wiki/File:Arduino_Micro.jpg

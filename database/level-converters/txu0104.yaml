@@ -8,6 +8,11 @@ aliases:
   - TXU0104DTRR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/txu0104.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/txu0104-f331ba62.pdf
+    sha256: f331ba62c302c5921ffdc98082083438ef1c9b6821fdedb5f9be41f23af81545
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/txu0104.pdf
 electrical:
   supply_voltage: 1.1-5.5V
   supply_voltage_notes: Each port on its own supply

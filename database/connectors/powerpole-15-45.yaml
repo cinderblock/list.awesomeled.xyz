@@ -6,6 +6,11 @@ aliases:
   - Powerpole 15-45
 datasheet:
   url: https://p1.aprimocdn.net/idealindustries/5d665ad6-38c3-4088-98b6-b3f0007370ef/ap-web_product-assets_default_data-sheets_DS-PP1545_Original%20file.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/powerpole-15-45-ac39c286.pdf
+    sha256: ac39c286d44528efab30061b96df6e64e6eeafb6e154af7a03397d518f45a04f
+    retrieved: '2026-11-28'
+    source: https://p1.aprimocdn.net/idealindustries/5d665ad6-38c3-4088-98b6-b3f0007370ef/ap-web_product-assets_default_data-sheets_DS-PP1545_Original%20file.pdf
 images:
   - file: powerpole-15-45.webp
     source: https://www.andersonpower.com/product/powerpole-connector-housing-red/

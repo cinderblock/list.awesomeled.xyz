@@ -26,6 +26,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://docs.beagleboard.org/pocketbeagle-2.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/pocketbeagle-2-afee5285.pdf
+    sha256: afee528575e59a2222008a5085945e082fbacc3a7f306d554cc7f0a951aba15d
+    retrieved: '2026-11-28'
+    source: https://docs.beagleboard.org/pocketbeagle-2.pdf
 images:
   - file: pocketbeagle-2.webp
     source: https://github.com/beagleboard/docs.beagleboard.io/blob/main/boards/pocketbeagle-2/images/product/pocketbeagle-2-front.jpg

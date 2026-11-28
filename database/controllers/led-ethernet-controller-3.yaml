@@ -76,6 +76,11 @@ data:
       max_size: 32 # FAT32
 datasheet:
   url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/LEC_3_tech_specs.pdf # tech specs sheet
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/led-ethernet-controller-3-eaa17fb2.pdf
+    sha256: eaa17fb2a004673d235c0df7fdf0f84ff80066dde0a7036a595511bfefb460a5
+    retrieved: '2026-11-28'
+    source: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/LEC_3_tech_specs.pdf
   sources:
     - url: https://www.ledstripstudio.com/download/tech-specs/LEC_3_tech_specs.pdf
       host: manufacturer

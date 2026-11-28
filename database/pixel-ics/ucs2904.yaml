@@ -15,6 +15,11 @@ data:
   type: 4chUCS1903
 datasheet:
   url: https://www.superlightingled.com/PDF/UCS2904-Datasheet.pdf # Covers UCS2904B; Superlighting LED copy, maker (szucs.cn) hosts no PDFs
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs2904-67d004e1.pdf
+    sha256: 67d004e1132c54d3854dc6044a9362d46a96404317c4f4219138d17ab8587a3c
+    retrieved: '2026-11-28'
+    source: https://www.superlightingled.com/PDF/UCS2904-Datasheet.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2022/02/UCS2904-Specification_English.pdf
       host: community

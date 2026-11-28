@@ -14,6 +14,11 @@ data:
   backup_line: false
 datasheet:
   url: https://media.ledyi.com/tm1903-datasheet_102d51ddfa211a8055eed209fab8fb5a4145d05f6a27dbc5880a3b8e7a2a3417.pdf # Titan Micro TM1903 V1.2 (English); LEDYi copy, not on titanmec.com
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tm1903-102d51dd.pdf
+    sha256: 102d51ddfa211a8055eed209fab8fb5a4145d05f6a27dbc5880a3b8e7a2a3417
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/tm1903-datasheet_102d51ddfa211a8055eed209fab8fb5a4145d05f6a27dbc5880a3b8e7a2a3417.pdf
   discrepancies:
     - The V1.2 English 'current expansion' section says each OUT port sinks 18 mA (54 mA with all three shorted), but Features and the electrical table give a fixed 14 mA
   sources:

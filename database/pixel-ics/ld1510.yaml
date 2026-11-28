@@ -16,6 +16,11 @@ data:
   backup_line: false
 datasheet:
   url: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf # LDT LD1510 datasheet Ver 3.0 (2009-02-17); DatasheetBank copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ld1510-c178c81a.pdf
+    sha256: c178c81a41aea2df719ba68940e6f763263cd3b14e81165fe9ee1be942c792d8
+    retrieved: '2026-11-28'
+    source: https://datasheetbank.com/pdf-view/LD1510-LDT.pdf
 electrical:
   output_voltage: 17V
   output_voltage_notes: Maximum sinking output voltage (absolute maximum 20V)

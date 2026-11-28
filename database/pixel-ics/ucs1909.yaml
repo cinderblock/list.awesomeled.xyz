@@ -18,6 +18,11 @@ data:
   backup_line: false
 datasheet:
   url: https://datasheet4u.com/pdf/905175/UCS1909.pdf # '9 路 LED 驱动电路-UCS1909' (Chinese, distributor copy, maker not named); datasheet4u mirror
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs1909-76f99151.pdf
+    sha256: 76f99151f8a99bdd1b1b403c5274f86a8a3a20988be6878fd002048692525644
+    retrieved: '2026-11-28'
+    source: https://datasheet4u.com/pdf/905175/UCS1909.pdf
 electrical:
   output_voltage: 40V
   output_voltage_notes: Older UCS1909 datasheet; the maker's table lists 30 V for the UCS1909BS

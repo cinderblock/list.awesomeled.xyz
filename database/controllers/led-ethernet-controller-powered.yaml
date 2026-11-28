@@ -43,6 +43,11 @@ data:
       max_size: 32
 datasheet:
   url: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf # tech specs sheet
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/led-ethernet-controller-powered-56f3c230.pdf
+    sha256: 56f3c230071b03f7ad253e5225257d1457a80e86d6a2b9872a170fd96cbdaf2c
+    retrieved: '2026-11-28'
+    source: https://www.ledstripstudio.com/download/tech-specs/POWERED_LEC_tech_specs.pdf
 dead_links:
   - url: https://ledstripstudio.com/shop/product/led-ethernet-controller-powered/
     archive: https://web.archive.org/web/20231202085638/https://www.ledstripstudio.com/shop/product/led-ethernet-controller-powered/

@@ -31,6 +31,11 @@ outputs:
     - WS2815
 datasheet:
   url: https://web.archive.org/web/20200929142224id_/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/LED_controller_spec_sheet.pdf?mtime=20200509143456&focal=none # spec sheet; the live bucket now returns 403
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/protopixel-8-channel-controller-a85aa255.pdf
+    sha256: a85aa255ff582500021120326afcfa7650f92a99468999d9b32a57401ed8feb0
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20200929142224id_/https://protopixel.fra1.digitaloceanspaces.com/production-website/documents/products/spec-sheets/LED_controller_spec_sheet.pdf?mtime=20200509143456&focal=none
 dead_links:
   - url: https://www.protopixel.io/pricing
     archive: https://web.archive.org/web/20210218144636/https://www.protopixel.io/pricing

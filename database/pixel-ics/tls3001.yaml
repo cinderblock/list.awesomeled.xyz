@@ -9,6 +9,11 @@ data:
   type: TLS3001
 datasheet:
   url: https://raw.githubusercontent.com/TimGremalm/TLS3001_LED_ESP32/de664475644a003fdabe154c10d4f84a5c1fe32a/datasheets/TLS3001_datasheet_V2.2_english_missingprotocol.pdf # Teralane V2.2 English, community copy (TLS3001_LED_ESP32 repo); no maker-hosted PDF found
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tls3001-53c5b069.pdf
+    sha256: 53c5b069e73b619595beffc4e8a982a41e78958064bb895a315ab5db1c2902b5
+    retrieved: '2026-11-28'
+    source: https://raw.githubusercontent.com/TimGremalm/TLS3001_LED_ESP32/de664475644a003fdabe154c10d4f84a5c1fe32a/datasheets/TLS3001_datasheet_V2.2_english_missingprotocol.pdf
   sources:
     - url: https://raw.githubusercontent.com/mikbeng/esp32_TLS3001_spi/a48a1f1cead26e8c781c3d06e8260d8d532c0e10/docs/TLS3001%20Datasheet.pdf
       host: community

@@ -7,6 +7,11 @@ aliases:
   - TC4427EPA
 datasheet:
   url: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/tc4427-4704cae2.pdf
+    sha256: 4704cae2316fdff9549ee9efda6d52345e06a858909761720c4503c9fe7a0eff
+    retrieved: '2026-11-28'
+    source: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/20001422G.pdf
 electrical:
   supply_voltage: 4.5-18V
   output_current: 1.5A

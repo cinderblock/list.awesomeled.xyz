@@ -18,6 +18,11 @@ data:
   pixel_size_notes: The datasheet PDF says 32 bits
 datasheet:
   url: https://neon-world.com/uploads/soft/20170622/1498136682.pdf # APA-104-4RGB (5050, 4-pin) spec, from APA's product page
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/apa104-0ecefa40.pdf
+    sha256: 0ecefa40ca9d590506411fb2f9c1a5bee118f727e1ba3346295c9998b9d21167
+    retrieved: '2026-11-28'
+    source: https://neon-world.com/uploads/soft/20170622/1498136682.pdf
   sources:
     - url: https://web.archive.org/web/20231206170247id_/http://neon-world.com/uploads/soft/20170622/1498136682.pdf
       host: manufacturer

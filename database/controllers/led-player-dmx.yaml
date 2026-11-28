@@ -35,6 +35,11 @@ data:
       max_size: 32 # FAT32
 datasheet:
   url: https://www.diamex-shop.de/mediafiles/LG/LED-Player-DMX.pdf # user manual v1.4 (German); has a Technische Daten section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/led-player-dmx-e46ec465.pdf
+    sha256: e46ec465aa1f5ded9915f91afb1874c03e7890417a962320e9bbf79a52a0568f
+    retrieved: '2026-11-28'
+    source: https://www.diamex-shop.de/mediafiles/LG/LED-Player-DMX.pdf
 images:
   - file: led-player-dmx.webp
     source: https://www.diamex-shop.de/LED-Player-DMX-TPM2-Dateien-von-DMX-gesteuert-abspielen

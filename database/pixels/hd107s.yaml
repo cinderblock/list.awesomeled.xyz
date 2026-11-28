@@ -25,6 +25,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/hd107s-12c76b64.pdf
+    sha256: 12c76b64b6dc9dde87bb36db3d0e5f1b45a270dd15db9b740021dec65601f0de
+    retrieved: '2026-11-28'
+    source: https://www.rose-lighting.com/wp-content/uploads/sites/53/2019/10/0000155-1.pdf
   discrepancies:
     - Newstar's NS107S spec gives a 30 MHz oscillator frequency; Rose Lighting's HD107S spec (V1.0.1) gives 40 MHz. Otherwise the two specs are the same text.
   sources:

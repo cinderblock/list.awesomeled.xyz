@@ -10,6 +10,11 @@ data:
   type: TM1814
 datasheet:
   url: https://web.archive.org/web/20221004065449id_/http://titanmec.com/index.php/en/project/download/id/665.html # Titan Micro TM1814 V1.1 (Chinese); Wayback copy of titanmec.com's old download, byte-identical (apart from a leading BOM) to the file Titan's current product page serves only with a titanmec.com Referer
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tm1814-df5d30b1.pdf
+    sha256: df5d30b13bfe09edb20d006b6e85579c0f8556039b22210736787f91c339e5d3
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20221004065449id_/http://titanmec.com/index.php/en/project/download/id/665.html
   sources:
     - url: https://www.superlightingled.com/PDF/TM1814-TitanMicro.pdf
       host: community

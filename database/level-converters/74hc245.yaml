@@ -12,6 +12,11 @@ aliases:
   - MC74HC245A
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hc245.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/74hc245-6f4f3d56.pdf
+    sha256: 6f4f3d56774daf593fb28abc7fe9c745d8cd0ac0438434601fafeb07068ab8c2
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/sn74hc245.pdf
 electrical:
   supply_voltage: 2-6V
   output_current: 6mA

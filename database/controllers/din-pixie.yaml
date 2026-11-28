@@ -136,6 +136,11 @@ data:
         - 4,000 frames (about 100 s)
 datasheet:
   url: https://cdn.enttec.com/pdf/assets/73539/73539_DIN_PIXIE_DATASHEET.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/din-pixie-8467919c.pdf
+    sha256: 8467919ccb38d0082509f4d52cc509cf61d321ffb51504167a3c16112c8cd141
+    retrieved: '2026-11-28'
+    source: https://cdn.enttec.com/pdf/assets/73539/73539_DIN_PIXIE_DATASHEET.pdf
   sources:
     - url: https://cdn.enttec.com.cn/pdf/assets/73539/73539_DIN_PIXIE_DATASHEET.pdf
       host: manufacturer

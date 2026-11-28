@@ -28,6 +28,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-a-plus-product-brief.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/raspberry-pi-3-model-a-d253dced.pdf
+    sha256: d253dcedae53f055ac2f08240ee7d8240f6d9001fd391c6437eefe6c56c18904
+    retrieved: '2026-11-28'
+    source: https://datasheets.raspberrypi.com/rpi3/raspberry-pi-3-a-plus-product-brief.pdf
 images:
   - file: raspberry-pi-3-model-a.webp
     source: https://www.raspberrypi.com/products/raspberry-pi-3-model-a-plus/

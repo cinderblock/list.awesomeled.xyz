@@ -26,6 +26,11 @@ case:
   waterproof: IP20
 datasheet:
   url: https://www.chauvetprofessional.com/wp-content/uploads/pdf/en/EPIXFLEXDRIVE.pdf # spec sheet
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/epix-flex-drive-f6356457.pdf
+    sha256: f6356457e66406d4dc73704856fdcac58b6768d0cbc9be41c8502618fad20fe0
+    retrieved: '2026-11-28'
+    source: https://www.chauvetprofessional.com/wp-content/uploads/pdf/en/EPIXFLEXDRIVE.pdf
 images:
   - file: epix-flex-drive.webp
     source: https://chauvetprofessional.com/product/epix-flex-drive/

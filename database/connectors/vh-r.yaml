@@ -5,6 +5,11 @@ aliases:
   - VH
 datasheet:
   url: https://www.jst.com/wp-content/uploads/2025/06/eVH.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/vh-r-28b1d788.pdf
+    sha256: 28b1d7884cfbd74914cf8e026a6d048d422fe45fa12b0a65148fde914497bfa9
+    retrieved: '2026-11-28'
+    source: https://www.jst.com/wp-content/uploads/2025/06/eVH.pdf
   sources:
     - url: https://www.jst-mfg.com/product/pdf/eng/eVH.pdf
       host: manufacturer

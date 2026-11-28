@@ -14,6 +14,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.normandled.com/upload/202005/SK9822-A%20LED%20Datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk9822-a-a054b0ef.pdf
+    sha256: a054b0efadf84ee82580a8e96509ccb8c46903294d24c3bda46a76337f5ffabd
+    retrieved: '2026-11-28'
+    source: https://www.normandled.com/upload/202005/SK9822-A%20LED%20Datasheet.pdf
 dead_links:
   - url: http://www.newstar-ledstrip.com/productshow851.html
     archive: https://web.archive.org/web/20220327215325/http://newstar-ledstrip.com/productshow851.html

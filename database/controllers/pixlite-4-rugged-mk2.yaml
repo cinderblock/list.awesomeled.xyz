@@ -74,6 +74,11 @@ case:
   waterproof: IP65
 datasheet:
   url: https://cdn.sanity.io/files/3y31615s/production/487c91bb8db95d317405bec8907856ca06591aa4.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixlite-4-rugged-mk2-4366941f.pdf
+    sha256: 4366941f2b220f91332456986fd98e87a4b2caf987afe1b36c73cf637a97565b
+    retrieved: '2026-11-28'
+    source: https://cdn.sanity.io/files/3y31615s/production/487c91bb8db95d317405bec8907856ca06591aa4.pdf
 images:
   - file: pixlite-4-rugged-mk2.webp
     source: https://www.advateklighting.com/products/shop/pixlite-4-rugged-mk2

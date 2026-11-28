@@ -4,6 +4,11 @@ notes: Automotive and Marine connector series , compatible/knock offs common,
   specific crimp tool required
 datasheet:
   url: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-151009&DocType=SS&DocLang=EN
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/deutsch-dt-f7f9a0ac.pdf
+    sha256: f7f9a0ac7b5c3efe35e3c284ee20d2c2506fdc7b55a1b2b319cb29d712561cb5
+    retrieved: '2026-11-28'
+    source: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-151009&DocType=SS&DocLang=EN
 images:
   - file: deutsch-dt.webp
     source: https://www.te.com/en/product-DT06-2S.html

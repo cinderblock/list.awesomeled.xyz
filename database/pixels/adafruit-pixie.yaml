@@ -16,6 +16,11 @@ data:
   backup_line: false
 datasheet:
   url: https://cdn-learn.adafruit.com/downloads/pdf/pixie-3-watt-smart-chainable-led-pixels.pdf # Adafruit's learn guide as PDF; the product page says 'Datasheets, schematic, and Fritzing available in the product tutorial' and Adafruit publishes no separate datasheet
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/adafruit-pixie-20176577.pdf
+    sha256: 20176577e1993ddd1ca955fd09a01fe2fa477188464a564849635bfa0359071a
+    retrieved: '2026-11-28'
+    source: https://cdn-learn.adafruit.com/downloads/pdf/pixie-3-watt-smart-chainable-led-pixels.pdf
 electrical:
   supply_voltage: 5V
   gpio:

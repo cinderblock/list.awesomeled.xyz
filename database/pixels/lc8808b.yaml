@@ -16,6 +16,11 @@ data:
   type: WS2811/12
 datasheet:
   url: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/lc8808b-db6436cc.pdf
+    sha256: db6436ccd37f19f0735766f7bb3ad77a68b158999eb4f49b68176f9706f97a2a
+    retrieved: '2026-11-28'
+    source: http://addressable-led.com/UploadFile/upi/file/20190318/LC8808-LED.pdf
 electrical:
   led_voltage: 12V
   supply_voltage: 5V

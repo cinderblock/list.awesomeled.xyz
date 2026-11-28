@@ -16,6 +16,11 @@ data:
   max_per_string_notes: TCL estimates up to 8000 pixels at 30 FPS
 datasheet:
   url: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf # DMS Microelectronics datasheet via Seeed Studio (Grove Chainable RGB LED)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/p9813-8cf387f9.pdf
+    sha256: 8cf387f9c2e895dd94429fbf836bfb487628e707e6d311497aa304e573c305b9
+    retrieved: '2026-11-28'
+    source: https://files.seeedstudio.com/wiki/Grove-Chainable_RGB_LED/res/P9813_datasheet.pdf
   sources:
     - url: https://www.electrokit.com/upload/product/41011/41011147/P9813_datasheet.pdf
       host: distributor

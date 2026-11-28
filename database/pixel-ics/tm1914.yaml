@@ -10,6 +10,11 @@ data:
   type: TM1914
 datasheet:
   url: https://web.archive.org/web/20200224201024id_/http://www.titanmec.com:80/index.php/project/download/id/678.html # Titan Micro TM1914 V1.2 (Chinese); Wayback copy of titanmec.com's old download. TM1914 is gone from Titan's current site
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/tm1914-733c8b3e.pdf
+    sha256: 733c8b3e8a97b18174d3d0b6fa6fb9c7cd9aed8ec3a2f2c88021a5d79b1caf8e
+    retrieved: '2026-11-28'
+    source: https://web.archive.org/web/20200224201024id_/http://www.titanmec.com:80/index.php/project/download/id/678.html
   sources:
     - url: https://www.superlightingled.com/PDF/SPEC/TM1914-Datasheet.pdf
       host: community

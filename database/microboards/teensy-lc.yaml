@@ -21,6 +21,11 @@ connectivity:
   wifi: false
 datasheet:
   url: https://www.pjrc.com/teensy/KL26P64M48SF5.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/teensy-lc-770ef3e3.pdf
+    sha256: 770ef3e3c9b8b9d4eb1f44899f515fbfe328f4f5de0b8af0e3bc231566bc900f
+    retrieved: '2026-11-28'
+    source: https://www.pjrc.com/teensy/KL26P64M48SF5.pdf
 images:
   - file: teensy-lc.webp
     source: https://www.pjrc.com/store/teensylc.html

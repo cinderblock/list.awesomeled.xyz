@@ -12,6 +12,11 @@ data:
   backup_line: false
 datasheet:
   url: https://datasheet4u.com/pdf/905173/UCS6909.pdf # 'UCS6909 说明书', 40V/25mA guardrail cascade driver (Chinese, maker not named); datasheet4u mirror
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs6909-7159d66a.pdf
+    sha256: 7159d66ad740e60878eb5d39dc180e13f4c2276352a87a3149643f7786432593
+    retrieved: '2026-11-28'
+    source: https://datasheet4u.com/pdf/905173/UCS6909.pdf
 electrical:
   output_voltage: 40V
   supply_voltage: 4.5-5.5V

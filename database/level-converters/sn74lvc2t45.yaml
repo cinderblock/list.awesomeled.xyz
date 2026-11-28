@@ -7,6 +7,11 @@ aliases:
   - SN74LVC2T45YZPR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/sn74lvc2t45-f0dc4a7a.pdf
+    sha256: f0dc4a7a46a5b2020117e8bec614aec33f4f15784a82ab73dc3fa5f91d5c86bc
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/sn74lvc2t45.pdf
 electrical:
   supply_voltage: 1.65-5.5V
   supply_voltage_notes: Each port (VCCA, VCCB) on its own supply

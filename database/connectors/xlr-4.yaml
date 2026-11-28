@@ -10,6 +10,11 @@ common_applications:
   - LED tape power and data (City Theatrical QolorPIX / QolorFLEX)
 datasheet:
   url: https://www.neutrik.com/en/product/nc4mxx.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/xlr-4-0d15850a.pdf
+    sha256: 0d15850a9e1336164519e98c2227f1f169aee589f369d59919ad3547485c4861
+    retrieved: '2026-11-28'
+    source: https://www.neutrik.com/en/product/nc4mxx.pdf
 images:
   - file: xlr-4.webp
     source: https://www.neutrik.com/en/product/nc4mxx

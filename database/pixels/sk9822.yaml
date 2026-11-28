@@ -20,6 +20,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.normandled.com/upload/201909/SK9822%20LED%20Datasheet.pdf # Shenzhen Normand SK9822 sheet, rev 07 (2019-01-16)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk9822-eb852181.pdf
+    sha256: eb852181adb856bf38a36c68231bc0813512136583af6316b0286a54f530227f
+    retrieved: '2026-11-28'
+    source: https://www.normandled.com/upload/201909/SK9822%20LED%20Datasheet.pdf
   sources:
     - url: https://www.pololu.com/file/0J1234/sk9822_datasheet.pdf
       host: distributor

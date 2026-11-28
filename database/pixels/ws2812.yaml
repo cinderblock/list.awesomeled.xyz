@@ -19,6 +19,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.world-semi.com/web/userfiles/productfile/WS2812S_V1.4_EN.pdf # Worldsemi WS2812S V1.4, the later name of the original 6-pin WS2812
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/ws2812-4922e64f.pdf
+    sha256: 4922e64f210d00937407592822ac0fd60091fbc1a6e4cd2909e22a07f48f681b
+    retrieved: '2026-11-28'
+    source: https://www.world-semi.com/web/userfiles/productfile/WS2812S_V1.4_EN.pdf
   sources:
     - url: https://cdn-shop.adafruit.com/datasheets/WS2812.pdf
       host: distributor

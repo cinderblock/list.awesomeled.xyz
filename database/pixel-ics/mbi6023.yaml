@@ -21,6 +21,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf # Macroblock MBI6023 datasheet VB.01 (November 2016); Neumüller (authorized distributor) copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/mbi6023-cc6afde4.pdf
+    sha256: cc6afde4eff8a90d3607431005710d88ba33804712f0564626a154c6cf2e9996
+    retrieved: '2026-11-28'
+    source: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datasheet%20VB.01-EN.pdf
   sources:
     - url: https://www.neumueller.com/datenblatt/macroblock/MBI6023%20Datenblatt%20-%20Datasheet.pdf
       host: distributor

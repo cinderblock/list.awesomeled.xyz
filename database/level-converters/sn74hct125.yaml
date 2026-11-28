@@ -13,6 +13,11 @@ aliases:
   - SN74HCT125DR
 datasheet:
   url: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/level-converters/sn74hct125-7f063638.pdf
+    sha256: 7f06363847317c8aa5892435313656e6f592ab0f6d0d7bfd4234e46996c5fe42
+    retrieved: '2026-11-28'
+    source: https://www.ti.com/lit/ds/symlink/sn74hct125.pdf
 electrical:
   max_voltage: 5.5V
   output_current: 6mA

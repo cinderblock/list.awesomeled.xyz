@@ -106,6 +106,11 @@ case:
   waterproof: IP20
 datasheet:
   url: https://www.madrix.com/download/mhm/documentation/NEBULA/Datasheet_MADRIX_NEBULA.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/madrix-nebula-881f9516.pdf
+    sha256: 881f9516d6ac78782b10f530b92eb0a3ce001ac331cb6c779a2a02e14b0abdda
+    retrieved: '2026-11-28'
+    source: https://www.madrix.com/download/mhm/documentation/NEBULA/Datasheet_MADRIX_NEBULA.pdf
 features:
   - TTL pixel-data output (12x 512 channels across two ports)
   - Powers LEDs directly through screw terminals (6A max per port)

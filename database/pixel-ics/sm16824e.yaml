@@ -17,6 +17,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.chinaasic.com/websiteManage/product/20230523140052341.pdf # Sunmoon SM16824E product brief, English IBZOZZV1.4 (1 page; full datasheet not public)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sm16824e-66d5d322.pdf
+    sha256: 66d5d322ff22b400a4c168fe252855302523c60ed04a0e66a7a5f93c4fec6129
+    retrieved: '2026-11-28'
+    source: https://www.chinaasic.com/websiteManage/product/20230523140052341.pdf
   sources:
     - url: https://www.chinaasic.com/websiteManage/product/20201228163204065.pdf
       host: manufacturer

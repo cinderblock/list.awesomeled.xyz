@@ -36,6 +36,11 @@ power:
     max: 0.6 # controller only; LEDs need separate supplies
 datasheet:
   url: https://pixblasters.com/wp-content/uploads/2024/12/Pixblasters_MS1_ds_v2.0.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixblasters-ms1-945163a3.pdf
+    sha256: 945163a30d9fcad2cbd15230d0bc4f1f531491a1230c4c249bc114d9027db32f
+    retrieved: '2026-11-28'
+    source: https://pixblasters.com/wp-content/uploads/2024/12/Pixblasters_MS1_ds_v2.0.pdf
 images:
   - file: pixblasters-ms1.webp
     source: https://pixblasters.com/products/ms1-controller/

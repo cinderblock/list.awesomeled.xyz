@@ -7,6 +7,11 @@ aliases:
   - XT90
 datasheet:
   url: https://www.china-amass.net/uploads/57.XT60-F-SPEC-2025V0.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/xt60-90-a07378b5.pdf
+    sha256: a07378b59f20038e631cd9e46b6463c24370404fcfe2f39cb0a4baaa339f2932
+    retrieved: '2026-11-28'
+    source: https://www.china-amass.net/uploads/57.XT60-F-SPEC-2025V0.pdf
 images:
   - file: xt60-90.webp
     source: https://www.china-amass.net/xt60-f-product/

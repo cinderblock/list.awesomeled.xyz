@@ -14,6 +14,11 @@ data:
   backup_line: false
 datasheet:
   url: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf # LPD8803/LPD8806 combined datasheet (Greeled Electronic watermark), Adafruit-hosted
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/lpd8803-a58d9cff.pdf
+    sha256: a58d9cff1405bdf6d248883cd717147700d7912cc9a233bf154d4b8c60e4e7c3
+    retrieved: '2026-11-28'
+    source: https://cdn-shop.adafruit.com/datasheets/lpd8806+english.pdf
 electrical:
   output_voltage: 12V
   supply_voltage: 5V

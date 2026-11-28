@@ -9,6 +9,11 @@ data:
   type: SM16716
 datasheet:
   url: https://media.ledyi.com/sm16716-datasheet_113cde8d9eb3ebef7dfbc0c43a943cb61b0f9cddca8580d353ae2dbc3ef95377.pdf # Sunmoon SM16716 V1.1; LEDYi copy, not on the Sunmoon site (chinaasic.com)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sm16716-113cde8d.pdf
+    sha256: 113cde8d9eb3ebef7dfbc0c43a943cb61b0f9cddca8580d353ae2dbc3ef95377
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/sm16716-datasheet_113cde8d9eb3ebef7dfbc0c43a943cb61b0f9cddca8580d353ae2dbc3ef95377.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/SM16716-datasheet.pdf
       host: community

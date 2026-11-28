@@ -13,6 +13,11 @@ data:
   backup_line: true
 datasheet:
   url: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf # UCS7604 VER1.0 2022-09-15 (English); LEDYi copy, maker (szucs.cn) hosts no PDFs
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs7604-b23fb751.pdf
+    sha256: b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/ucs7604-datasheet_b23fb751045748a84575e3f972697b0280c0f06e4f1c223817c079dfe4eac3ae.pdf
   discrepancies:
     - The pin section is headed SOP 8, but the pin table lists 10 pins and the package drawing is SOP 10
   sources:

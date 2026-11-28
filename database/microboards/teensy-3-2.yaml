@@ -21,6 +21,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://www.pjrc.com/teensy/K20P64M72SF1.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/teensy-3-2-8338849b.pdf
+    sha256: 8338849b8214b00b9ee8b6dd04f2a769ed1dbba6745ee75a924ce2f108de2ad1
+    retrieved: '2026-11-28'
+    source: https://www.pjrc.com/teensy/K20P64M72SF1.pdf
 images:
   - file: teensy-3-2.webp
     source: https://www.pjrc.com/store/teensy32.html

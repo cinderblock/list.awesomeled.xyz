@@ -28,6 +28,11 @@ data:
     - type: microSD # "Micro SD player" per Electroconcept product page
 datasheet:
   url: https://www.boutique-electroconcept.com/media/Productattachments//m/i/micro_player_sd.pdf # user manual (French); has a spec section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/digiled-strip-dmx-wav-sd-micro-player-7e87e8dc.pdf
+    sha256: 7e87e8dc8cf4f5f91eb320b4a109f609aa32548bc8ca6c0e08dbda5a2fbc21dc
+    retrieved: '2026-11-28'
+    source: https://www.boutique-electroconcept.com/media/Productattachments//m/i/micro_player_sd.pdf
 images:
   - file: digiled-strip-dmx-wav-sd-micro-player.webp
     source: https://www.boutique-electroconcept.com/micro-sd-player-digiled-strip-ou-dmx-512.html

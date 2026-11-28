@@ -5,6 +5,11 @@ aliases:
   - RST CLASSIC
 datasheet:
   url: https://cdn.wieland-electric.com/_Resources/Persistent/8/9/e/c/89ecb341640e627142f162a08a3882acae93d730/0690.1_CAT_RST_Gesamt_screen_EN.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/wieland-rst-85f76a6f.pdf
+    sha256: 85f76a6f37fa7aba661e16cfa2d7a0aa7d5744d3d212160677cb636dad92db9f
+    retrieved: '2026-11-28'
+    source: https://cdn.wieland-electric.com/_Resources/Persistent/8/9/e/c/89ecb341640e627142f162a08a3882acae93d730/0690.1_CAT_RST_Gesamt_screen_EN.pdf
 images:
   - file: wieland-rst.webp
     source: https://www.wieland-electric.com/en/products/electrical-installation/connection-systems-high-protection-class/rst-classic/

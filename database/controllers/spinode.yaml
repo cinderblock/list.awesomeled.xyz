@@ -64,6 +64,11 @@ case:
   waterproof: IP20
 datasheet:
   url: https://api.visualproductions.nl/api/download/67f4e47389a6e093b3b34507 # "SpiNode Datasheet" rev 4 from the product page's Downloads list
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/spinode-e4634f79.pdf
+    sha256: e4634f7945e526da931118b5a6b5580d34ef6e0c4d907f694ffce65144c068df
+    retrieved: '2026-11-28'
+    source: https://api.visualproductions.nl/api/download/67f4e47389a6e093b3b34507
   sources:
     - url: https://goknight.com/content/documentation/datasheet_spinode_rev4%20(1).pdf
       host: distributor

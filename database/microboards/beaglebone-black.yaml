@@ -25,6 +25,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://docs.beagleboard.org/beaglebone-black.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/beaglebone-black-2a850ae7.pdf
+    sha256: 2a850ae7a96b370a6274a5011b480beae480669354fef5db62f4b7937f12b947
+    retrieved: '2026-11-28'
+    source: https://docs.beagleboard.org/beaglebone-black.pdf
   sources:
     - url: https://raw.githubusercontent.com/beagleboard/beaglebone-black/master/docs/OLD_BBB_SRM.pdf
       host: manufacturer

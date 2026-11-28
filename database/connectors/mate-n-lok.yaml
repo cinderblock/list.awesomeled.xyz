@@ -7,6 +7,11 @@ aliases:
   - Mini-Universal MATE-N-LOK
 datasheet:
   url: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-1031&DocType=SS&DocLang=EN
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/mate-n-lok-494e13a2.pdf
+    sha256: 494e13a2c7875518c3df8cc9d4cfc8deced4ec3df39b046eca02a654ba1a5d5a
+    retrieved: '2026-11-28'
+    source: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-1031&DocType=SS&DocLang=EN
 images:
   - file: mate-n-lok.webp
     source: https://www.te.com/en/product-350779-1.html

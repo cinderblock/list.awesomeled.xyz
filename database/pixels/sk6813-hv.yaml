@@ -10,6 +10,11 @@ data:
   type: WS2811/12
 datasheet:
   url: https://www.normandled.com/upload/201907/12V%20SK6813%20LED%20Datasheet.pdf # SK6813HV-09-6P
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk6813-hv-e60b9fbe.pdf
+    sha256: e60b9fbe67910d599ffb17968c66d69757b354c04130a1b0ade760ac02efb632
+    retrieved: '2026-11-28'
+    source: https://www.normandled.com/upload/201907/12V%20SK6813%20LED%20Datasheet.pdf
 electrical:
   led_voltage: 12V
 images:

@@ -14,6 +14,11 @@ data:
   backup_line: false
 datasheet:
   url: https://embdev.net/attachment/199047/INK1002_RGB_LED__GEINK1002RGB_.pdf # Greeled 'INK1002 RGB LED (GEINK1002RGB)' (English, 2013); embdev.net forum attachment
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/ink1002-eba164ec.pdf
+    sha256: eba164ec99d9f485ece89ef0b1de0955e1e74aacac64eb1f865e4be9004841cc
+    retrieved: '2026-11-28'
+    source: https://embdev.net/attachment/199047/INK1002_RGB_LED__GEINK1002RGB_.pdf
 electrical:
   led_voltage: 3.5-7.5V
   led_voltage_notes: Separate LED supply (VLED); absolute maximum 7.5 V

@@ -26,6 +26,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/wemos-d1-mini-pro-3a038e2f.pdf
+    sha256: 3a038e2fd3040ad06d95d41b16afc8292090339e9f8e728ce46a83db439cecf1
+    retrieved: '2026-11-28'
+    source: https://www.espressif.com/sites/default/files/documentation/0a-esp8266ex_datasheet_en.pdf
 images:
   - file: wemos-d1-mini-pro.webp
     source: https://www.wemos.cc/en/latest/d1/d1_mini_pro.html

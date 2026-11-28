@@ -4,6 +4,11 @@ aliases:
   - JST XH
 datasheet:
   url: https://www.jst.com/wp-content/uploads/2025/06/eXH.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/xh-1128a1bd.pdf
+    sha256: 1128a1bdb747cf3da211ed85e11c542f2d310652d8188a69b2dc0e8c40115ef8
+    retrieved: '2026-11-28'
+    source: https://www.jst.com/wp-content/uploads/2025/06/eXH.pdf
   sources:
     - url: https://www.jst-mfg.com/product/pdf/eng/eXH.pdf
       host: manufacturer

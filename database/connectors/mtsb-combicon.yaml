@@ -10,6 +10,12 @@ aliases:
   - MSTB 2,5
 datasheet:
   url: https://www.phoenixcontact.com/us/products/1757035/PDF
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/mtsb-combicon-6c5a8807.pdf
+    sha256: 6c5a8807d3f97a02ba14d4017c9ccd12b52d85e7d14329c0e8435f7faa7e40d2
+    retrieved: '2026-11-28'
+    source: https://www.phoenixcontact.com/us/products/1757035/PDF
+    fetched_from: https://static.chipdip.ru/lib/776/DOC031776428.pdf
   sources:
     - url: https://static.chipdip.ru/lib/776/DOC031776428.pdf
       host: distributor

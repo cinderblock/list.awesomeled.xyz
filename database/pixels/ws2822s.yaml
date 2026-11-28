@@ -18,6 +18,11 @@ data:
   max_per_string_notes: Up to 1024 pixels in parallel on one data line; a packet carries up to 3072 channels
 datasheet:
   url: https://www.hestore.hu/prod_getfile.php?id=10686 # WorldSemi WS2822S (English, undated, world-semi.com footer); HESTORE (distributor) copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/ws2822s-f3ddcd34.pdf
+    sha256: f3ddcd34c57784d1b25b5fd88f69fcd96ae69e1fe82d08f1f3fa83fb0c8e86f2
+    retrieved: '2026-11-28'
+    source: https://www.hestore.hu/prod_getfile.php?id=10686
 electrical:
   led_voltage: 3.6-5.5V
   led_voltage_notes: Separate LED supply pin (VDD)

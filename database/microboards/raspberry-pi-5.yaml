@@ -36,6 +36,11 @@ connectivity:
   poe: add-on # PoE+ HAT
 datasheet:
   url: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/raspberry-pi-5-f1ca5254.pdf
+    sha256: f1ca525452e6fa4e9592a6705e41fb811bf12709d0605fd7cc2099c1b25534f3
+    retrieved: '2026-11-28'
+    source: https://datasheets.raspberrypi.com/rpi5/raspberry-pi-5-product-brief.pdf
 images:
   - file: raspberry-pi-5.webp
     source: https://commons.wikimedia.org/wiki/File:Raspberry_Pi_5.jpg

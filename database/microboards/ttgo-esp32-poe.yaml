@@ -23,6 +23,11 @@ connectivity:
   poe: true
 datasheet:
   url: https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/ttgo-esp32-poe-4c7a345d.pdf
+    sha256: 4c7a345d1c1bfec34c38665639e39a7f43b79a35a12f6adcc2c7c0f83850f8b8
+    retrieved: '2026-11-28'
+    source: https://www.espressif.com/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_en.pdf
 images:
   - file: ttgo-esp32-poe.webp
     source: https://web.archive.org/web/20241212081659/https://lilygo.cc/products/t-internet-poe

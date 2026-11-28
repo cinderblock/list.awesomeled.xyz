@@ -10,6 +10,11 @@ data:
   type: WS2811/12
 datasheet:
   url: https://media.ledyi.com/gs8208-datasheet_d7eeffbc8fc4c3a885c88babe6e51968677716f49f625b7b4043cf2162e8affa.pdf # Genesis Technology GS8208; LEDYi copy, no maker-hosted PDF found
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/gs8208-d7eeffbc.pdf
+    sha256: d7eeffbc8fc4c3a885c88babe6e51968677716f49f625b7b4043cf2162e8affa
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/gs8208-datasheet_d7eeffbc8fc4c3a885c88babe6e51968677716f49f625b7b4043cf2162e8affa.pdf
   third_party_testing: https://www.advateklighting.com/pixel-protocols/gs8208
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/GS8208-datasheet.pdf

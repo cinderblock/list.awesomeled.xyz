@@ -9,6 +9,11 @@ data:
   type: UCS1903
 datasheet:
   url: https://www.superlightingled.com/PDF/SPEC/UCS2903-Datasheet.pdf # UCS ver2.2; Superlighting LED copy, maker (szucs.cn) hosts no PDFs
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs2903-3d6a0bd3.pdf
+    sha256: 3d6a0bd399073a996f8e1f5089bc3abc4838bb9e271deffbfb019af8c12777bc
+    retrieved: '2026-11-28'
+    source: https://www.superlightingled.com/PDF/SPEC/UCS2903-Datasheet.pdf
   sources:
     - url: https://media.ledyi.com/ucs2903-datasheet_6fd9dd0ef3578c081b6964d918dc663f64bda3b083e3045ff262d7d44bd76fef.pdf
       host: community

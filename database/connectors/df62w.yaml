@@ -5,6 +5,12 @@ aliases:
   - SignalBee
 datasheet:
   url: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/df62w-28df2b70.pdf
+    sha256: 28df2b708265f951a2c854764e8c44d2b4b3737a8ad45560dd9d8e3f7dbadd24
+    retrieved: '2026-11-28'
+    source: https://www.hirose.com/en/product/series/DF62W/documents?path=%2Fapi%2Fv1%2Fseries%2FDF62W%2Fdocuments%2Fproduct_series_catalog%2Fcontent%3Flang%3DEN
+    fetched_from: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
   sources:
     - url: https://www.tme.com/Document/c2111c3d14588770d14b2160bbeb0df9/DF62W.pdf
       host: distributor

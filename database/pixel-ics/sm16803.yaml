@@ -14,6 +14,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.chinaasic.com/websiteManage/product/20230523111339341.pdf # Sunmoon SM16803PB product brief, English IBSZZIV1.1 (1 page; full datasheet not public)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sm16803-e36081e3.pdf
+    sha256: e36081e3792ab2f74de7ded39842bdcf657064b7ce012e4fe13e7d5d61420da4
+    retrieved: '2026-11-28'
+    source: https://www.chinaasic.com/websiteManage/product/20230523111339341.pdf
   sources:
     - url: https://www.chinaasic.com/websiteManage/product/20201228162956065.pdf
       host: manufacturer

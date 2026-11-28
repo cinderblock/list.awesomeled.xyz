@@ -12,6 +12,11 @@ data:
   backup_line: true
 datasheet:
   url: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf # LB1908 'DC12V Power supply 3 channels LED driver' (English, undated, no maker named); LEDYi copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/lb1908-1309db21.pdf
+    sha256: 1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/lb1908-datasheet_1309db21e23b3ebdc074abd8b810492aa543b85520f7cd25739da821d0d92aca.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/LB1908-datasheet.pdf
       host: community

@@ -13,6 +13,11 @@ data:
   type: WS2811/12
 datasheet:
   url: https://www.normandled.com/upload/201906/SK6805MICRO(SK6805-2427)%20LED%20Datasheet.pdf # Shenzhen Normand SK6805MICRO/SK6805-2427, rev 03 (2018-06-11)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/sk6805-93ea396a.pdf
+    sha256: 93ea396a249c0f48722b65d55feb7689a9af1845864f82eab176ed78a159f73f
+    retrieved: '2026-11-28'
+    source: https://www.normandled.com/upload/201906/SK6805MICRO(SK6805-2427)%20LED%20Datasheet.pdf
   sources:
     - url: https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
       host: distributor

@@ -11,6 +11,11 @@ data:
   type: WS2811/12
 datasheet:
   url: http://addressable-led.com/UploadFile/upi/file/20170621/SK6822-LED-Chip.pdf # LED Color SK6822 spec rev 01 (2015)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk6822-b0a8eda0.pdf
+    sha256: b0a8eda08fb51a78c05635db7fc59ea9822e93a76f8591dfc6d6fe244cf6d819
+    retrieved: '2026-11-28'
+    source: http://addressable-led.com/UploadFile/upi/file/20170621/SK6822-LED-Chip.pdf
   sources:
     - url: https://web.archive.org/web/20210226221632id_/http://newstar-ledstrip.com/product/20180411113844377.pdf
       host: distributor

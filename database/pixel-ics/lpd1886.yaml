@@ -15,6 +15,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf # Insomnia Lighting LPD1886 IC Datasheet (English); DMX4ALL copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/lpd1886-9596ff31.pdf
+    sha256: 9596ff31f84a40121f02aea73e7283cf8d70714ad693786f848e072682cf281c
+    retrieved: '2026-11-28'
+    source: https://www.dmx4all.de/download/manuals_english/datasheet_lpd1886_english.pdf
 electrical:
   output_voltage: 12V
   output_voltage_notes: LED supply (VLED) 5-12 V in constant-current mode

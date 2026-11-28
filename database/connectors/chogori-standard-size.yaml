@@ -4,6 +4,11 @@ notes: Push Lock IP 68 used on Rosco Lite Panels and some other LED products,
   Mini Standard and Large sizes
 datasheet:
   url: https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/7137/2150_2100411101.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/chogori-standard-size-d42daa16.pdf
+    sha256: d42daa168595013bb51bedf81365032beec9539d3cb19c1d1aad20f9f64efe78
+    retrieved: '2026-11-28'
+    source: https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/7137/2150_2100411101.pdf
 links:
   product: http://suomi.chogori.pro/produkciya.html
   digikey: https://www.digikey.co.uk/en/products/filter/circular-connectors/circular-connector-assemblies/436?s=N4IgjCBcoBw1oDGUBmBDANgZwKYBoQB7KAbRACZyBOABhogF0CAHAFyhAGVWAnASwB2AcxABfAgFp40EMkjps%2BIqQpgArDRANxICQBYEs1JlwFikMmoDsVgMzktop0A

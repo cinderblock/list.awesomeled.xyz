@@ -10,6 +10,11 @@ data:
   type: 4chWS2811/12
 datasheet:
   url: https://www.superlightingled.com/PDF/SPEC/WS2814-RGBW-Datasheet.pdf # Worldsemi WS2814 (SOP12, dual input) V1.4; Superlighting LED copy, not on world-semi.com
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ws2814-57fd4ca2.pdf
+    sha256: 57fd4ca2e76b0f3b8712eef739a55550a0e2d62388f913d66c27b9f034e0f2b4
+    retrieved: '2026-11-28'
+    source: https://www.superlightingled.com/PDF/SPEC/WS2814-RGBW-Datasheet.pdf
   sources:
     - url: https://media.ledyi.com/ws2814-datasheet_2b10ca91206f21ee684c6d907b6ef50d26bc74be422a289c596752b36ad6c1cc.pdf
       host: community

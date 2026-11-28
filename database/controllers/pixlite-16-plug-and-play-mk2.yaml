@@ -79,6 +79,11 @@ case:
   mounting: wall
 datasheet:
   url: https://cdn.sanity.io/files/3y31615s/production/50fe327df6dea73913628917e9e890411452b23b.pdf # user manual (Advatek publishes no Mk2 datasheet); has a Specifications section
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/pixlite-16-plug-and-play-mk2-a6ddc585.pdf
+    sha256: a6ddc585baa870529c6895d592faacfaf2a224a2a071f5fc2d7b540e7086c5b1
+    retrieved: '2026-11-28'
+    source: https://cdn.sanity.io/files/3y31615s/production/50fe327df6dea73913628917e9e890411452b23b.pdf
 features:
   - 'Built-in supply: 300 W at 5 V / 320.4 W at 12 V total, 18.75 W / 20 W per output'
   - Rainproof, UV-resistant polycarbonate enclosure; conformal-coated board; fan cooled

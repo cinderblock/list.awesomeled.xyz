@@ -16,6 +16,11 @@ data:
   max_per_string: null
 datasheet:
   url: https://datasheet.lcsc.com/datasheet/pdf/9f469126feffa69bd23486dc2acd2d83.pdf # newer OPSCO revision (SK6812-012 rev B/1) via LCSC C5378720
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/sk6812-b6cff3ef.pdf
+    sha256: b6cff3ef127c82600982e88fd6defecb0a4e8eade076a6dc76997707072f2c56
+    retrieved: '2026-11-28'
+    source: https://datasheet.lcsc.com/datasheet/pdf/9f469126feffa69bd23486dc2acd2d83.pdf
   sources:
     - url: https://www.pololu.com/file/0J1233/sk6812_datasheet.pdf
       host: distributor

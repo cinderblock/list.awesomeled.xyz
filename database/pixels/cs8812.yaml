@@ -16,6 +16,11 @@ data:
   backup_line: true
 datasheet:
   url: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/cs8812-e75cf4a3.pdf
+    sha256: e75cf4a38fdad214f89450f95f99a412530811b13827bf50c9e585bbde3e65a6
+    retrieved: '2026-11-28'
+    source: https://www.superlightingled.com/PDF/CS8812-LED-Chip-Datasheet.pdf
 electrical:
   led_voltage: 12V
   supply_voltage: 12V

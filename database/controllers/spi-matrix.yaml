@@ -73,6 +73,11 @@ data:
       max_size: 32
 datasheet:
   url: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI-MATRIX_tech.specs_.pdf # tech specs sheet
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/spi-matrix-78c7047d.pdf
+    sha256: 78c7047d26d72d59de36bf24dfd5f13b326ffac08ca4895f453ff7a89c8c5119
+    retrieved: '2026-11-28'
+    source: https://www.ledstripstudio.com/shop/wp-content/uploads/2026/09/SPI-MATRIX_tech.specs_.pdf
   sources:
     - url: https://www.ledstripstudio.com/download/tech-specs/SPI_MATRIX_tech.specs.pdf
       host: manufacturer

@@ -5,6 +5,11 @@ aliases:
   - Tiny XLR
 datasheet:
   url: https://www.rean-connectors.com/en/product/rt4fc-b-1.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/rean-rt4-ea56e0dd.pdf
+    sha256: ea56e0dd8730e8079d2f040bcb77f1dabf1884b61f08e0c23ff3c7ffa0ccd0c7
+    retrieved: '2026-11-28'
+    source: https://www.rean-connectors.com/en/product/rt4fc-b-1.pdf
 images:
   - file: rean-rt4.webp
     source: https://commons.wikimedia.org/wiki/File:Neutrik_REAN_tiny_XLR.jpg

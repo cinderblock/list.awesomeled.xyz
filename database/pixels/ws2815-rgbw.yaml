@@ -12,6 +12,11 @@ data:
   type: 4chWS2811/12
 datasheet:
   url: https://www.world-semi.com/downloads/datasheets/en/ws2815b-rgbw-v1-1.0.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/ws2815-rgbw-af832c77.pdf
+    sha256: af832c770c3fe8fa3a7bf7b614a7d43d615ad40917e9efaa89e13dde40f2a83e
+    retrieved: '2026-11-28'
+    source: https://www.world-semi.com/downloads/datasheets/en/ws2815b-rgbw-v1-1.0.pdf
   sources:
     - url: https://datasheet.lcsc.com/datasheet/pdf/49a37bdac5d2d8ee03c993e3239b63f2.pdf
       host: distributor

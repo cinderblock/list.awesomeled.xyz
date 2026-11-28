@@ -20,6 +20,11 @@ data:
   backup_line: false
 datasheet:
   url: http://www.newstar-ledstrip.com/product/20180820112602493.pdf # linked from the product page, productshow816.html
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/apa107-15b53e2e.pdf
+    sha256: 15b53e2e974cd56068ba534bd6f082935e1c278b6ee785ca3f83a6c26de7bad0
+    retrieved: '2026-11-28'
+    source: http://www.newstar-ledstrip.com/product/20180820112602493.pdf
 electrical:
   led_voltage: 5V
   supply_voltage: 5V

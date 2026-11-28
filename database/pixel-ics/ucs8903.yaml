@@ -14,6 +14,11 @@ data:
   backup_line: false
 datasheet:
   url: https://media.ledyi.com/ucs8903-datasheet_06b0ecc6a47dd8e088d100a5976cef7e24ad8a3fee463edb061bb535cc57b56e.pdf # LEDYi copy, maker (szucs.cn) hosts no PDFs
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ucs8903-06b0ecc6.pdf
+    sha256: 06b0ecc6a47dd8e088d100a5976cef7e24ad8a3fee463edb061bb535cc57b56e
+    retrieved: '2026-11-28'
+    source: https://media.ledyi.com/ucs8903-datasheet_06b0ecc6a47dd8e088d100a5976cef7e24ad8a3fee463edb061bb535cc57b56e.pdf
   sources:
     - url: https://www.ledyilighting.com/wp-content/uploads/2025/02/UCS8903-datasheet.pdf
       host: community

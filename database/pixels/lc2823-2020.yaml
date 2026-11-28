@@ -12,6 +12,11 @@ data:
   backup_line: false
 datasheet:
   url: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/lc2823-2020-2fef84a7.pdf
+    sha256: 2fef84a7cefd18b21e131a2961cfa0f04e6f5b5b0d27eeee2e17041fee5832c6
+    retrieved: '2026-11-28'
+    source: https://www.szledcolor.com/Public/editor/attached/file/20191030/LC8823%202020.pdf
 electrical:
   led_voltage: 3-7.5V
   supply_voltage: 5V

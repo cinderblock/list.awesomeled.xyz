@@ -11,6 +11,12 @@ common_applications:
   - Amusement / arcade machine wiring
 datasheet:
   url: https://www.molex.com/pdm_docs/ps/PS-10-07.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/molex-kk-aka-kf2510-db105fd1.pdf
+    sha256: db105fd16b7ecd38f0274831d9427dd86b77f7a94957f9e760bb3fe316ae7904
+    retrieved: '2026-11-28'
+    source: https://www.molex.com/pdm_docs/ps/PS-10-07.pdf
+    fetched_from: https://static.chipdip.ru/lib/825/DOC027825561.pdf
   sources:
     - url: https://static.chipdip.ru/lib/825/DOC027825561.pdf
       host: distributor

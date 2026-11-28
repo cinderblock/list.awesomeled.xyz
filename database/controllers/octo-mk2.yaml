@@ -124,6 +124,11 @@ power:
     max: 60
 datasheet:
   url: https://cdn.enttec.com/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/controllers/octo-mk2-69a7dc27.pdf
+    sha256: 69a7dc27f08ecc5da8b488c8c68a3de05b4ae2b663d10f699bc2d612487734dd
+    retrieved: '2026-11-28'
+    source: https://cdn.enttec.com/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
   sources:
     - url: https://cdn.enttec.com.cn/pdf/assets/71521/71521_OCTO_DATASHEET.pdf
       host: manufacturer

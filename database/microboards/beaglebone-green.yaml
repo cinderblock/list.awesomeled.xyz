@@ -32,6 +32,11 @@ connectivity:
   serial: true
 datasheet:
   url: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/beaglebone-green-3bbdd352.pdf
+    sha256: 3bbdd352f908baf8dba64d2399926cdd48c1fd7da8d6f16849d8121250ecc07d
+    retrieved: '2026-11-28'
+    source: https://files.seeedstudio.com/wiki/BeagleBone_Green/resources/BBG_SRM_V1a_20151009.pdf
 images:
   - file: beaglebone-green.webp
     source: https://www.seeedstudio.com/Seeed-Studio-BeagleBone-Green.html

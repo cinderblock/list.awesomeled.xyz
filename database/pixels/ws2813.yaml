@@ -16,6 +16,11 @@ data:
   backup_line: true
 datasheet:
   url: https://www.world-semi.com/downloads/datasheets/en/ws2813b-v6-1.0.pdf # current WS2813B-V6 (5050)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixels/ws2813-2ecb64a0.pdf
+    sha256: 2ecb64a08fb5c876b8cb5be0ab035b44ad18d060519249d3bab1c1c91765bd41
+    retrieved: '2026-11-28'
+    source: https://www.world-semi.com/downloads/datasheets/en/ws2813b-v6-1.0.pdf
   sources:
     - url: https://www.normandled.com/upload/201605/WS2813%20LED%20Datasheet.pdf
       host: distributor

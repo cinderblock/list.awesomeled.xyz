@@ -5,6 +5,11 @@ aliases:
   - AMP SUPERSEAL 1.5
 datasheet:
   url: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-20090&DocType=SS&DocLang=EN
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/connectors/superseal-2ea8b341.pdf
+    sha256: 2ea8b341a44773d50b86dc4eb84799ff832a0943dbc925c32377e64a8abc402b
+    retrieved: '2026-11-28'
+    source: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=srchrtrv&DocNm=108-20090&DocType=SS&DocLang=EN
 images:
   - file: superseal.webp
     source: https://www.te.com/en/product-282080-1.html

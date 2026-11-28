@@ -12,6 +12,11 @@ connectivity:
   bluetooth: BLE
 datasheet:
   url: https://www.cdebyte.com/pdf-down.aspx?id=3866 # Ebyte E73-2G4M08S1C user manual v2.4 (module datasheet)
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/microboards/ebyte-nrf-52840-ed55bc86.pdf
+    sha256: ed55bc86e548bbd11ca36e048dcf4388afc51dee502ff1ee60cd366fff066554
+    retrieved: '2026-11-28'
+    source: https://www.cdebyte.com/pdf-down.aspx?id=3866
 other_links:
   - https://cdn-learn.adafruit.com/assets/assets/000/092/427/original/nRF52840_PS_v1.1.pdf # Nordic nRF52840 SoC product specification v1.1 (the chip on the module), Adafruit copy
 price: 6.54

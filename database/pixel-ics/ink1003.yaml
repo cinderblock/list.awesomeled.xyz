@@ -15,6 +15,11 @@ data:
   backup_line: false
 datasheet:
   url: https://monitor.espec.ws/download.php?id=205360 # Greeled Electronic 'Data Sheet Of INK1003 IC Driver' (English); forum attachment copy
+  mirror:
+    url: https://assets.awesomeled.xyz/datasheets/pixel-ics/ink1003-22f094f3.pdf
+    sha256: 22f094f3bef2d41d80a03b847f939b280dc72753b392dd7a5ac564a9e1692c82
+    retrieved: '2026-11-28'
+    source: https://monitor.espec.ws/download.php?id=205360
 electrical:
   output_voltage: 10V
   output_voltage_notes: Driver pin voltage -0.3 to 10V with the output off (absolute maximum); written for 5-12V LED strips
